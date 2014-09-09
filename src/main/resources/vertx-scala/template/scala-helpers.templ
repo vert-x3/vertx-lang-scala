@@ -1,0 +1,15 @@
+@code{
+  def toScalaType(type) {
+    return 'Nothing';
+  }
+
+  def returnTypeOf(method) {
+    if (method.fluent) {
+      return toScalaType(type);
+    } else if (method.returnType instanceof io.vertx.codegen.TypeInfo$Void) {
+      return 'Unit';
+    } else {
+      return toScalaType(method.returnType);
+    }
+  }
+}
