@@ -18,11 +18,11 @@
  * under the License.\n
  */\n\n
 
-package @{ifacePackageName.replace("io.vertx.", "io.vertx.scala.")};\n
+package @{ifacePackageName.replace("io.vertx.", "io.vertx.scala.")}\n
 \n
 
 @comment{"# Generate the imports"}
-@foreach{importedType:importedTypes}
+@foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
 import @{importedType.toString().replace("io.vertx.", "io.vertx.scala.")}\n
@@ -36,14 +36,52 @@ import @{importedType}\n
 \n
 
 @comment{"# Generate the Class or Interface/Trait"}
+@code{
+  def getVarianceType(t) {
+    return t;
+  }
+
+  def getClassNameWithTypeInfo(c, typeName) {
+    var genericType = helper.getGenericType(c);
+    if (genericType != null) {
+      return typeName + '[' + getVarianceType(genericType) + ']';
+    } else {
+      return typeName;
+    }
+  }
+
+  def getClassName(c) {
+    var typeName = helper.getSimpleName(helper.getNonGenericType(c));
+    return getClassNameWithTypeInfo(c, typeName);
+  }
+
+  def toScalaGeneric(c) {
+    var typeName = helper.getNonGenericType(c);
+    return getClassNameWithTypeInfo(c, typeName);
+  }
+}
+
+@declare{'writeDelegateType'}
+	@if{typeParams.size() > 0}
+		@{type.raw.name}[@foreach{typeParam: typeParams}@if{typeParam.covariant}+@else{typeParam.contravariant}-@end{}@end{', '}]
+	@else{}
+		@{type.raw.name}
+	@end{}
+@end{}
+
 @if{concrete}
-class @{helper.getSimpleName(ifaceFQCN)}(private val delegate: @{ifaceFQCN})
+class @{getClassName(ifaceFQCN)}(private val delegate: @includeNamed{'writeDelegateType'})
 @else{}
-trait @{helper.getSimpleName(ifaceFQCN)}
+trait @{getClassName(ifaceFQCN)}
 @end{}
 
 @comment{"## Inheritance"}
 @comment{"TODO"}
+@if{abstractSuperTypes.size() > 0}
+	 extends @foreach{abstractSuperType : abstractSuperTypes}@{abstractSuperType.simpleName}@end{' with '}
+@else{}
+	 extends Delegating
+@end{}
 
  {\n
 \n

@@ -1,5 +1,7 @@
 {
   "name": "Scala",
-  "nameTemplate": "scala/@{type.name.replace('io.vertx', 'io.vertx.scala').replace('.', '/')}.scala",
-  "templateFileName": "vertx-scala/template/scala.templ"
+  "class": {
+    "fileName": "fqn.replace('io.vertx', 'io.vertx.scala').replace('.', '/') + '.scala'",
+    "templateFileName": "vertx-scala/template/class.templ"
+  }
 }
