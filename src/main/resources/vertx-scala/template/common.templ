@@ -10,7 +10,7 @@
 
 @declare{'writeTypeParamsWithVariance'}
 	@if{typeParams.size() > 0}
-		[@foreach{t: typeParams}@if{t.covariant}+@else{t.contravariant}-@end{}@{t.name}@end{', '}]
+		[@foreach{t: typeParams}@if{t.isSiteCovariant()}+@else{t.isSiteContravariant()}-@end{}@{t.name}@end{', '}]
 	@end{}
 @end{}
 
