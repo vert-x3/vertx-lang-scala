@@ -1,0 +1,33 @@
+@code{
+  def toScalaType(type) {
+    if (type.name == 'void') {
+      return 'Unit';
+    } else {
+      return type.name;
+    }
+  }
+}
+
+@declare{'writeTypeParamsWithVariance'}
+	@if{typeParams.size() > 0}
+		[@foreach{t: typeParams}@if{t.covariant}+@else{t.contravariant}-@end{}@{t.name}@end{', '}]
+	@end{}
+@end{}
+
+@declare{'writeTypeParamsWithoutVariance'}
+	@if{typeParams.size() > 0}
+		[@foreach{t: typeParams}@{t.name}@end{', '}]
+	@end{}
+@end{}
+
+@declare{'writeType'}
+	@{helper.getSimpleName(type.raw.name)}@includeNamed{'writeTypeParamsWithVariance'}
+@end{}
+
+@declare{'writeDelegateType'}
+	@{type.raw.name}@includeNamed{'writeTypeParamsWithoutVariance'}
+@end{}
+
+@declare{'writeReturnType'}
+	@{toScalaType(type)}
+@end{}
