@@ -1,6 +1,7 @@
 @comment{"# Template for Scala code generation"}
 
 @comment{"# Defines a few helper functions"}
+@includeNamed{'common.templ'}
 
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
@@ -25,7 +26,7 @@ package @{ifacePackageName.replace("io.vertx.", "io.vertx.scala.")}\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{importedType.toString().replace("io.vertx.", "io.vertx.scala.")}\n
+import @{importedType.toString().replace("io.vertx.", "io.vertx.scala.").replace("*", "_")}\n
 		@end{}
 	@else{}
 		@if{!importedType.packageName.equals("java.lang")}
@@ -61,26 +62,15 @@ import @{importedType}\n
   }
 }
 
-@declare{'writeDelegateType'}
-	@if{typeParams.size() > 0}
-		@{type.raw.name}[@foreach{typeParam: typeParams}@if{typeParam.covariant}+@else{typeParam.contravariant}-@end{}@end{', '}]
-	@else{}
-		@{type.raw.name}
-	@end{}
-@end{}
-
 @if{concrete}
-class @{getClassName(ifaceFQCN)}(private val delegate: @includeNamed{'writeDelegateType'})
+	class @includeNamed{'writeType'}(private val delegate: @includeNamed{'writeDelegateType'})
 @else{}
-trait @{getClassName(ifaceFQCN)}
+	trait @includeNamed{'writeType'}
 @end{}
 
 @comment{"## Inheritance"}
-@comment{"TODO"}
 @if{abstractSuperTypes.size() > 0}
 	 extends @foreach{abstractSuperType : abstractSuperTypes}@{abstractSuperType.simpleName}@end{' with '}
-@else{}
-	 extends Delegating
 @end{}
 
  {\n
@@ -88,6 +78,50 @@ trait @{getClassName(ifaceFQCN)}
 
 @comment{"# Generate the methods"}
 @comment{"TODO"}
+@declare{'writeMethodParams'}
+	@foreach{param : params}
+		@{param.name}
+	@end{', '}
+@end{}
+
+@declare{'writeMethodParams'}
+	@foreach{param : params}
+		@{param.name}: @{param.type}
+	@end{', '}
+@end{}
+
+@code{
+  hasStatic = false;
+  for (method : methods) {
+    if (method.staticMethod) {
+      hasStatic = true;
+    }
+  }
+}
+
+@foreach{method : methods}
+	@if{!method.staticMethod && !method.cacheReturn}
+		  def @{method.name}(): @includeNamed{'writeReturnType';type=method.returnType} = {\n
+		  }\n\n
+	@end{}
+	@if{!method.staticMethod && method.cacheReturn}
+		  def @{method.name}(): @includeNamed{'writeReturnType';type=method.returnType} = {\n
+		    delegate.${method.name}(@includeNamed{'writeMethodParams';params=method.params})
+		  }\n\n
+	@end{}
+@end{}
 
 }\n
+@if{hasStatic}
+	\n
+	object @{type.raw.simpleName} {\n
+	\n
+	@foreach{method : methods}
+		@if{method.staticMethod}
+			  def @{method.name}(): @{method.returnType} = {\n
+			  }\n\n
+		@end{}
+	@end{}
+	}\n
+@end{}
 \n

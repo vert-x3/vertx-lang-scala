@@ -218,7 +218,7 @@
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/test/</outputDirectory>
+                <outputDirectory>${project.basedir}/src/test/scala</outputDirectory>
               </optionMap>
               <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
             </configuration>

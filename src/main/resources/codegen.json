@@ -1,7 +1,10 @@
 {
-  "name": "Scala",
-  "class": {
-    "fileName": "fqn.replace('io.vertx', 'io.vertx.scala').replace('.', '/') + '.scala'",
-    "templateFileName": "vertx-scala/template/class.templ"
-  }
+  "name" : "Scala",
+  "generators" : [
+    {
+      "kind" : "class",
+      "fileName" : "fqn.replace('io.vertx', 'io.vertx.scala').replace('.', '/') + '.scala'",
+      "templateFileName" : "vertx-scala/template/class.templ"
+    }
+  ]
 }
