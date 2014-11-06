@@ -70,23 +70,16 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{abstractSuperTypes.size() > 0}
-	 extends @foreach{abstractSuperType : abstractSuperTypes}@{abstractSuperType.simpleName}@end{' with '}
+	 extends @foreach{abstractSuperType : abstractSuperTypes}@{abstractSuperType.name.replace('<', '[').replace('>',']')}@end{' with '}
 @end{}
 
  {\n
 \n
 
 @comment{"# Generate the methods"}
-@comment{"TODO"}
 @declare{'writeMethodParams'}
 	@foreach{param : params}
-		@{param.name}
-	@end{', '}
-@end{}
-
-@declare{'writeMethodParams'}
-	@foreach{param : params}
-		@{param.name}: @{param.type}
+		@{param.name}: @{toScalaType(param.type)}
 	@end{', '}
 @end{}
 
@@ -99,14 +92,41 @@ import @{importedType}\n
   }
 }
 
+@code{
+  def methodInvocation(target, method) {
+    var invocation = target + '.' + method.name;
+    invocation += '(';
+    var first = true;
+    for (param : method.params) {
+      if (first) {
+        first = false;
+      } else {
+        invocation += ', ';
+      }
+      invocation += param.name
+    }
+    invocation += ')\n';
+    invocation;
+  }
+}
+
 @foreach{method : methods}
-	@if{!method.staticMethod && !method.cacheReturn}
-		  def @{method.name}(): @includeNamed{'writeReturnType';type=method.returnType} = {\n
+	@if{!concrete}
+		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType}\n\n
+	@end{}
+	@if{concrete && !method.staticMethod && !method.cacheReturn && method.typeParams.isEmpty()}
+		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+		    @{methodInvocation('delegate', method);}
 		  }\n\n
 	@end{}
-	@if{!method.staticMethod && method.cacheReturn}
-		  def @{method.name}(): @includeNamed{'writeReturnType';type=method.returnType} = {\n
+	@if{concrete && !method.staticMethod && method.cacheReturn && method.typeParams.isEmpty()}
+		  def @{method.name}(): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
 		    delegate.${method.name}(@includeNamed{'writeMethodParams';params=method.params})
+		  }\n\n
+	@end{}
+	@if{concrete && !method.staticMethod && !method.cacheReturn && !method.typeParams.isEmpty()}
+		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+		    @{methodInvocation('delegate', method);}
 		  }\n\n
 	@end{}
 @end{}
@@ -117,8 +137,14 @@ import @{importedType}\n
 	object @{type.raw.simpleName} {\n
 	\n
 	@foreach{method : methods}
-		@if{method.staticMethod}
-			  def @{method.name}(): @{method.returnType} = {\n
+		@if{method.staticMethod && method.typeParams.isEmpty()}
+			  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+			    @{methodInvocation(type.raw.name, method);}
+			  }\n\n
+		@end{}
+		@if{method.staticMethod && !method.typeParams.isEmpty()}
+			  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+			    @{methodInvocation(type.raw.name, method);}
 			  }\n\n
 		@end{}
 	@end{}

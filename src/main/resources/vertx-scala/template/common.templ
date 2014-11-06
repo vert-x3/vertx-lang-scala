@@ -2,15 +2,35 @@
   def toScalaType(type) {
     if (type.name == 'void') {
       return 'Unit';
+    } else if (type.kind == CLASS_STRING) {
+      return 'String';
+    } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE) {
+      if (type.name == 'byte' || type.name == 'java.lang.Byte') {
+        return 'Byte';
+      } else if (type.name == 'short' || type.name == 'java.lang.Short') {
+        return 'Short';
+      } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
+        return 'Int';
+      } else if (type.name == 'long' || type.name == 'java.lang.Long') {
+        return 'Long';
+      } else if (type.name == 'float' || type.name == 'java.lang.Float') {
+        return 'Float';
+      } else if (type.name == 'double' || type.name == 'java.lang.Double') {
+        return 'Double';
+      } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
+        return 'Boolean';
+      } else if (type.name == 'char' || type.name == 'java.lang.Character') {
+        return 'Char';
+      }
     } else {
-      return type.name;
+      return type.name.replace('<', '[').replace('>', ']');
     }
   }
 }
 
 @declare{'writeTypeParamsWithVariance'}
 	@if{typeParams.size() > 0}
-		[@foreach{t: typeParams}@if{t.isSiteCovariant()}+@else{t.isSiteContravariant()}-@end{}@{t.name}@end{', '}]
+		[@foreach{t: typeParams}@{t.name}@end{', '}]
 	@end{}
 @end{}
 
@@ -29,5 +49,11 @@
 @end{}
 
 @declare{'writeReturnType'}
-	@{toScalaType(type)}
+	@{toScalaType(returnType)}
+@end{}
+
+@declare{'writeTypeParams'}
+	@foreach{typeParam : typeParams}
+		[@{typeParam.name}]
+	@end{}
 @end{}
