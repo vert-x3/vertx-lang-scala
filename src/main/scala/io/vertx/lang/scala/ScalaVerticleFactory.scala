@@ -1,8 +1,7 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.{Vertx, Verticle}
+import io.vertx.core.{DeploymentOptions, Vertx, Verticle}
 import io.vertx.core.spi.VerticleFactory
-import io.vertx.scala.core.ScalaVerticle
 
 /**
  * @author <a href="http://www.campudus.com/">Joern Bernhardt</a>
@@ -32,4 +31,10 @@ class ScalaVerticleFactory extends VerticleFactory {
     val instance = clazz.newInstance().asInstanceOf[ScalaVerticle]
     instance.asJava
   }
+
+  override def order(): Int = ???
+
+  override def requiresResolve(): Boolean = ???
+
+  override def resolve(identifier: String, deploymentOptions: DeploymentOptions, classLoader: ClassLoader): String = ???
 }
