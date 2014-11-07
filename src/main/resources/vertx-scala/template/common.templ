@@ -51,9 +51,3 @@
 @declare{'writeReturnType'}
 	@{toScalaType(returnType)}
 @end{}
-
-@declare{'writeTypeParams'}
-	@foreach{typeParam : typeParams}
-		[@{typeParam.name}]
-	@end{}
-@end{}

@@ -276,6 +276,20 @@
           </additionalClasspathElements>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.6.1</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>src/main/scala/io/vertx/scala/core</directory>
+            </fileset>
+            <fileset>
+              <directory>src/test/scala/io/vertx/scala/codegen</directory>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
