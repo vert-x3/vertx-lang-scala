@@ -79,7 +79,12 @@ import @{importedType}\n
 @comment{"# Generate the methods"}
 @declare{'writeMethodParams'}
 	@foreach{param : params}
-		@{param.name}: @{toScalaType(param.type)}
+		@if{param.name.equals("type")}
+			`@{param.name}`: @{toScalaType(param.type)}
+		@end{}
+		@if{!param.name.equals("type")}
+			@{param.name}: @{toScalaType(param.type)}
+		@end{}
 	@end{', '}
 @end{}
 
@@ -103,7 +108,14 @@ import @{importedType}\n
       } else {
         invocation += ', ';
       }
-      invocation += param.name
+
+      if (param.name.equals("type")) {
+        invocation += '`';
+        invocation += param.name;
+        invocation += '`'
+      } else {
+        invocation += param.name;
+      }
     }
     invocation += ')\n';
     invocation;
@@ -120,8 +132,8 @@ import @{importedType}\n
 		  }\n\n
 	@end{}
 	@if{concrete && !method.staticMethod && method.cacheReturn && method.typeParams.isEmpty()}
-		  def @{method.name}(): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    delegate.${method.name}(@includeNamed{'writeMethodParams';params=method.params})
+		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+		    @{methodInvocation('delegate', method);}
 		  }\n\n
 	@end{}
 	@if{concrete && !method.staticMethod && !method.cacheReturn && !method.typeParams.isEmpty()}
