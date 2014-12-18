@@ -2,6 +2,11 @@
 
 @comment{"# Defines a few helper functions"}
 @includeNamed{'common.templ'}
+@includeNamed{'scala-helpers.templ'}
+
+@comment{
+	TODO: Avoid massively long class names, take advantage of imports
+}
 
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
@@ -63,14 +68,14 @@ import @{importedType}\n
 }
 
 @if{concrete}
-	class @includeNamed{'writeType'}(private val delegate: @includeNamed{'writeDelegateType'})
+	class @includeNamed{'writeType'}(val asJava: @includeNamed{'writeDelegateType'})
 @else{}
 	trait @includeNamed{'writeType'}
 @end{}
 
 @comment{"## Inheritance"}
 @if{abstractSuperTypes.size() > 0}
-	 extends @foreach{abstractSuperType : abstractSuperTypes}@{abstractSuperType.name.replace('<', '[').replace('>',']')}@end{' with '}
+	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
 @end{}
 
  {\n
@@ -88,78 +93,27 @@ import @{importedType}\n
 	@end{', '}
 @end{}
 
-@code{
-  hasStatic = false;
-  for (method : methods) {
-    if (method.staticMethod) {
-      hasStatic = true;
-    }
-  }
-}
-
-@code{
-  def methodInvocation(target, method) {
-    var invocation = target + '.' + method.name;
-    invocation += '(';
-    var first = true;
-    for (param : method.params) {
-      if (first) {
-        first = false;
-      } else {
-        invocation += ', ';
-      }
-
-      if (param.name.equals("type")) {
-        invocation += '`';
-        invocation += param.name;
-        invocation += '`'
-      } else {
-        invocation += param.name;
-      }
-    }
-    invocation += ')\n';
-    invocation;
-  }
-}
-
-@foreach{method : methods}
+@foreach{method : instanceMethods}
 	@if{!concrete}
-		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType}\n\n
-	@end{}
-	@if{concrete && !method.staticMethod && !method.cacheReturn && method.typeParams.isEmpty()}
-		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    @{methodInvocation('delegate', method);}
-		  }\n\n
-	@end{}
-	@if{concrete && !method.staticMethod && method.cacheReturn && method.typeParams.isEmpty()}
-		  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    @{methodInvocation('delegate', method);}
-		  }\n\n
-	@end{}
-	@if{concrete && !method.staticMethod && !method.cacheReturn && !method.typeParams.isEmpty()}
-		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    @{methodInvocation('delegate', method);}
+		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType}\n\n
+	@else{}
+		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+		    @{methodInvocation('asJava', method);}
 		  }\n\n
 	@end{}
 @end{}
-
 }\n
-@if{hasStatic}
-	\n
+
+@if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	@foreach{method : methods}
-		@if{method.staticMethod && method.typeParams.isEmpty()}
-			  def @{method.name}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-			    @{methodInvocation(type.raw.name, method);}
-			  }\n\n
-		@end{}
-		@if{method.staticMethod && !method.typeParams.isEmpty()}
-			  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}(@includeNamed{'writeMethodParams';params=method.params}): @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-			    @{methodInvocation(type.raw.name, method);}
-			  }\n\n
-		@end{}
+	  def apply@includeNamed{'writeTypeParamsWithVariance'}(asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+	    new @{toScalaType(type);}(asJava)\n
+	\n
+	@foreach{method : staticMethods}
+		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
+		    @{methodInvocation(type.raw.name, method);}
+		  }\n\n
 	@end{}
 	}\n
 @end{}
-\n
