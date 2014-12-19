@@ -80,30 +80,14 @@ import @{importedType}\n
 
  {\n
 \n
-
-@comment{"# Generate the methods"}
-@declare{'writeMethodParams'}
-	@foreach{param : params}
-		@if{param.name.equals("type")}
-			`@{param.name}`: @{toScalaType(param.type)}
-		@end{}
-		@if{!param.name.equals("type")}
-			@{param.name}: @{toScalaType(param.type)}
-		@end{}
-	@end{', '}
+@if{concrete}
+	@includeNamed{'classbody.templ'; indentation=''}
+@else{}
+	@includeNamed{'traitbody.templ'}
 @end{}
-
-@foreach{method : instanceMethods}
-	@if{!concrete}
-		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType}\n\n
-	@else{}
-		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    @{methodInvocation('asJava', method);}
-		  }\n\n
-	@end{}
-@end{}
+\n\n
 }\n
-
+\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
@@ -112,8 +96,17 @@ import @{importedType}\n
 	\n
 	@foreach{method : staticMethods}
 		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		    @{methodInvocation(type.raw.name, method);}
+		    @{methodInvocation(type.raw.name, method, '    ');}
 		  }\n\n
 	@end{}
+	}\n
+@else{}
+	object @{type.raw.simpleName} {\n\n
+		  def apply@includeNamed{'writeTypeParamsWithVariance'}(asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+		    new @includeNamed{'writeImplType'}(asJava)\n
+		\n
+		  private class @includeNamed{'writeImplType'}(val asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} { \n
+			@includeNamed{'classbody.templ'; indentation='  '}\n
+		  }\n\n
 	}\n
 @end{}

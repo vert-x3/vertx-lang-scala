@@ -1,3 +1,14 @@
+@declare{'writeMethodParams'}
+	@foreach{param : params}
+		@if{param.name.equals("type")}
+			`@{param.name}`: @{toScalaType(param.type)}
+		@end{}
+		@if{!param.name.equals("type")}
+			@{param.name}: @{toScalaType(param.type)}
+		@end{}
+	@end{', '}
+@end{}
+
 @declare{'writeTypeParamsWithVariance'}
 	@if{typeParams.size() > 0}
 		[@foreach{t: typeParams}@{t.name}@end{', '}]
@@ -12,6 +23,10 @@
 
 @declare{'writeType'}
 	@{helper.getSimpleName(type.raw.name)}@includeNamed{'writeTypeParamsWithVariance'}
+@end{}
+
+@declare{'writeImplType'}
+	@{helper.getSimpleName(type.raw.name)}Impl@includeNamed{'writeTypeParamsWithVariance'}
 @end{}
 
 @declare{'writeDelegateType'}
