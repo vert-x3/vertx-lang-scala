@@ -22,17 +22,43 @@
       } else if (type.name == 'char' || type.name == 'java.lang.Character') {
         return 'Char';
       }
-    } else if (type.name == 'io.vertx.core.eventbus.DeliveryOptions') {
+    } else if (type.kind == CLASS_OPTIONS || type.kind == CLASS_ENUM) {
       return type.name;
-    } else if (type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT) {
+    } else if (isHandlerAsyncResult(type) || isHandlerFuture(type)) {
       return type.name.replace('<', '[').replace('>', ']');
+    } else if (type.name.contains("io.vertx.core.json.JsonObject")){
+      return type.name.replace('<', '[').replace('>', ']')
+          .replace('java.lang.', '');
     } else {
-      return type.name.replace("io.vertx.", "io.vertx.scala.").replace('<', '[').replace('>', ']');
+      return type.name.replace("io.vertx.", "io.vertx.scala.")
+          .replace('<', '[').replace('>', ']')
+          .replace('java.lang.', '');
     }
+  }
+
+  def isHandlerFuture(type) {
+    type.kind == CLASS_HANDLER && type.name.contains("io.vertx.core.Future");
+  }
+
+  def isHandlerAsyncResult(type) {
+    type.kind == CLASS_HANDLER && type.args[0].kind == CLASS_ASYNC_RESULT;
   }
 
   def toJavaType(type) {
     type.name.replace('<', '[').replace('>', ']');
+  }
+
+  def getGenericType(name) {
+    var start = name.indexOf("<");
+    if (start >= 0) {
+       var end = name.indexOf(">");
+       return '[' + name.substring(start + 1, end) + ']';
+    }
+    return '';
+  }
+
+  def toScalaApply(name) {
+    helper.getNonGenericType(name) + '.apply' + getGenericType(name);
   }
 
   def isFuture(method) {
@@ -55,16 +81,35 @@
     param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
   }
 
-  def isHandler(param) {
-    param.type.kind == CLASS_HANDLER && param.type.args[0].kind != CLASS_ASYNC_RESULT;
+  def isParamHandler(param) {
+    return (param.type.kind == CLASS_HANDLER && param.type.args[0].kind != CLASS_ASYNC_RESULT) &&
+      !param.type.name.contains("io.vertx.core.Future");
   }
 
-  def needsHandlerConversion(param) {
-    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_API;
+  def isMethodHandler(method) {
+    for (param : method.params) {
+      if (isParamHandler(param)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  def isParamHandlerConvert(param) {
+    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_API && !param.type.name.contains("io.vertx.core.Future");
+  }
+
+  def importHandlerImplicits(method) {
+    for (param : method.params) {
+      if (isParamHandler(param)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   def includeParam(param) {
-    !isHandler(param);
+    !isParamHandler(param);
   }
 
   def returnTypeOf(method) {
@@ -106,7 +151,7 @@
 
   def multiMethodParams(method) {
     params = methodParams(method);
-    if (method.kind == METHOD_HANDLER) {
+    if (isMethodHandler(method)) {
       if (params.isEmpty()) {
         params = '';
       } else {
@@ -119,19 +164,20 @@
     }
   }
 
-  def methodInvocation(target, method) {
+  def methodInvocation(target, method, indentation) {
     var invocation = '';
     var first = true;
     var fluent = method.isFluent();
     var wrap = false;
 
-    if (method.kind == METHOD_HANDLER) {
+    if (importHandlerImplicits(method)) {
       invocation += 'import io.vertx.lang.scala.HandlerOps._\n    ';
+      invocation += indentation
     }
 
     if (!fluent and method.returnType.kind == CLASS_API) {
       wrap = true;
-      invocation += method.returnType.getSimpleName() + '.apply(';
+      invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
     }
 
     invocation += target + '.' + method.name + '(';
@@ -142,8 +188,8 @@
         invocation += ', ';
       }
 
-      if (needsHandlerConversion(param)) {
-        invocation += 'funcToMappedHandler(' + param.type.args[0].getSimpleName() + '.apply)(';
+      if (isParamHandlerConvert(param)) {
+        invocation += 'funcToMappedHandler(' + toScalaApply(param.type.args[0].getSimpleName()) + ')(';
       }
 
       if (param.name.equals("type")) {
@@ -156,7 +202,7 @@
 
       if (param.type.kind == CLASS_API) {
         invocation += '.asJava';
-      } else if (needsHandlerConversion(param)) {
+      } else if (isParamHandlerConvert(param)) {
         invocation += ')';
       }
     }
