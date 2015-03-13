@@ -21,4 +21,5 @@ test-tmp
 *.class
 src/gen
 src/main/scala/io/vertx/scala/core/**/*.scala
+src/main/scala/asciidoc
 src/test/scala/io/vertx/scala/codegen/**/*.scala

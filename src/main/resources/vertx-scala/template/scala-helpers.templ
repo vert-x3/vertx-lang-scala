@@ -22,7 +22,7 @@
       } else if (type.name == 'char' || type.name == 'java.lang.Character') {
         return 'Char';
       }
-    } else if (type.kind == CLASS_OPTIONS || type.kind == CLASS_ENUM) {
+    } else if (type.kind == CLASS_DATA_OBJECT || type.kind == CLASS_ENUM) {
       return type.name;
     } else if (isHandlerAsyncResult(type) || isHandlerFuture(type)) {
       return type.name.replace('<', '[').replace('>', ']');
