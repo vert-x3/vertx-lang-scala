@@ -176,7 +176,7 @@ The `link:scaladocs/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` allows you 
 
 [source,scala]
 ----
-todo
+Code not translatable
 ----
 
 === resolveTXT
@@ -254,7 +254,7 @@ The SrvRecord allows you to access all informations contained in the SRV record 
 
 [source,scala]
 ----
-todo
+Code not translatable
 ----
 
 Please refer to the API docs for the exact details.

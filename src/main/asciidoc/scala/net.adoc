@@ -647,7 +647,7 @@ To enable SSL on a NetClient the function setSSL(true) is called.
 
 ==== Client trust configuration
 
-If the `link:scaladocs/io/vertx/scala/core/net/ClientOptionsBase.html#setTrustAll(boolean)[trustALl]` is set to true on the client, then the client will
+If the `trustALl` is set to true on the client, then the client will
 trust all server certificates. The connection will still be encrypted but this mode is vulnerable to 'man in the middle' attacks. I.e. you can't
 be sure who you are connecting to. Use this with caution. Default value is false.
 
@@ -662,7 +662,7 @@ val client = vertx.createNetClient(options)
 
 ----
 
-If `link:scaladocs/io/vertx/scala/core/net/ClientOptionsBase.html#setTrustAll(boolean)[trustAll]` is not set then a client trust store must be
+If `trustAll` is not set then a client trust store must be
 configured and should contain the certificates of the servers that the client trusts.
 
 Likewise server configuration, the client trust can be configured in several ways:
