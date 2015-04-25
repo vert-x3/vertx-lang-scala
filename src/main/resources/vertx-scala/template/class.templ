@@ -68,7 +68,7 @@ import @{importedType}\n
 }
 
 @if{concrete}
-	class @includeNamed{'writeType'}(val asJava: @includeNamed{'writeDelegateType'})
+	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
 @else{}
 	trait @includeNamed{'writeType'}
 @end{}
@@ -91,8 +91,8 @@ import @{importedType}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
-	    new @{toScalaType(type);}(asJava)\n
+	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
 		  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
@@ -102,10 +102,10 @@ import @{importedType}\n
 	}\n
 @else{}
 	object @{type.raw.simpleName} {\n\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
-		    new @includeNamed{'writeImplType'}(asJava)\n
+		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+		    new @includeNamed{'writeImplType'}(_asJava)\n
 		\n
-		  private class @includeNamed{'writeImplType'}(val asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} { \n
+		  private class @includeNamed{'writeImplType'}(val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} { \n
 			@includeNamed{'classbody.templ'; indentation='  '}\n
 		  }\n\n
 	}\n
