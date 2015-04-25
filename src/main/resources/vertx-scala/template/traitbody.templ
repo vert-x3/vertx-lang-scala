@@ -1,6 +1,6 @@
-@comment{"# Trait body
-override type J <: @{toJavaType(type)}\n
-"}
+@comment{"# Generic asJava method"}
+  def asJava: java.lang.Object\n\n
+
 @comment{"# Trait methods"}
 @foreach{method : instanceMethods}
 	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType}

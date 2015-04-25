@@ -1,9 +1,9 @@
-@comment{"# Class body
-@{indentation}  override type J = @{toJavaType(type)}\n
-"}
+@comment{"# Generic asJava method"}
+@{indentation}  def asJava: java.lang.Object = _asJava\n\n
+
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
 	@{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-	@{indentation}    @{methodInvocation('asJava', method, indentation);}
+	@{indentation}    @{methodInvocation('_asJava', method, indentation);}
 	@{indentation}  }
 @end{'\n\n'}

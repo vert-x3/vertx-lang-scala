@@ -201,7 +201,9 @@
       }
 
       if (param.type.kind == CLASS_API) {
-        invocation += '.asJava';
+        invocation += '.asJava.asInstanceOf[';
+        invocation += toJavaType(param.type);
+        invocation += ']';
       } else if (isParamHandlerConvert(param)) {
         invocation += ')';
       }
