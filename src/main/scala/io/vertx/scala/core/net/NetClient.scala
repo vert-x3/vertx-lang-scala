@@ -20,15 +20,36 @@ import io.vertx.scala.core.metrics.Measured
 import scala.util.Try
 import io.vertx.core.Handler
 
+/**
+  * A TCP client.
+  * 
+  * Multiple connections to different servers can be made using the same instance.
+  * 
+  * This client supports a configurable number of connection attempts and a configurable
+  * delay between attempts.
+  */
 class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
     extends io.vertx.scala.core.metrics.Measured {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
   def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
+  /**
+    * Open a connection to a server at the specific `port` and `host`.
+    * 
+    * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
+    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+    * @param port the port
+    * @param host the host
+    * @return a reference to this, so the API can be used fluently
+    */
   def connect(port: Int, host: String)(connectHandler: Try[io.vertx.scala.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
@@ -36,6 +57,12 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     this
   }
 
+  /**
+    * Close the client.
+    * 
+    * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
+    * complete until some time after the method has returned.
+    */
   def close(): Unit = {
     _asJava.close()
   }

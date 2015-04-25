@@ -20,31 +20,64 @@ import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler
 import io.vertx.scala.core.net.SocketAddress
 
+/**
+  * Represents a client-side WebSocket.
+  */
 class WebSocket(private val _asJava: io.vertx.core.http.WebSocket) 
     extends io.vertx.scala.core.http.WebSocketBase {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+    * handler is given by this method.
+    * 
+    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    * @return the binary handler id
+    */
   def binaryHandlerID(): String = {
     _asJava.binaryHandlerID()
   }
 
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+    * handler is given by `textHandlerID`.
+    * 
+    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    */
   def textHandlerID(): String = {
     _asJava.textHandlerID()
   }
 
+  /**
+    * Close the WebSocket.
+    */
   def close(): Unit = {
     _asJava.close()
   }
 
+  /**
+    * @return the remote address for this socket
+    */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.remoteAddress())
   }
 
+  /**
+    * @return the local address for this socket
+    */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
   }

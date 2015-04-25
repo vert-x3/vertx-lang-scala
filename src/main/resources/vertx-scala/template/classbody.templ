@@ -3,6 +3,7 @@
 
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
+@if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }

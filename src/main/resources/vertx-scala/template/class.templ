@@ -3,6 +3,7 @@
 @comment{"# Defines a few helper functions"}
 @includeNamed{'common.templ'}
 @includeNamed{'scala-helpers.templ'}
+@includeNamed{'scala-doc.templ'}
 
 @comment{
 	TODO: Avoid massively long class names, take advantage of imports
@@ -70,6 +71,11 @@ import @{importedType}\n
   }
 }
 
+@if{doc != null}
+/**\n
+@{renderDoc("  *", doc, renderDocLink)}
+  */\n
+@end{}
 @if{concrete}
 	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
 @else{}

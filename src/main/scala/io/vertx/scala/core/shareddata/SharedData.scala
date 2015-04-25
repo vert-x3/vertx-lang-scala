@@ -19,34 +19,75 @@ package io.vertx.scala.core.shareddata;
 import scala.util.Try
 import io.vertx.core.Handler
 
+/**
+  * Shared data allows you to share data safely between different parts of your application in a safe way.
+  * 
+  * Shared data provides:
+  * <ul>
+  *   <li>Cluster wide maps which can be accessed from any node of the cluster</li>
+  *   <li>Cluster wide locks which can be used to give exclusive access to resources across the cluster</li>
+  *   <li>Cluster wide counters used to maintain counts consistently across the cluster</li>
+  *   <li>Local maps for sharing data safely in the same Vert.x instance</li>
+  * </ul>
+  * 
+  * Please see the documentation for more information.
+  */
 class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Get the cluster wide map with the specified name. The map is accessible to all nodes in the cluster and data
+    * put into the map from any node is visible to to any other node.
+    * @param name the name of the map
+    * @param resultHandler the map will be returned asynchronously in this handler
+    */
   def getClusterWideMap[K, V](name: String)(resultHandler: Try[io.vertx.scala.core.shareddata.AsyncMap[K, V]] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.getClusterWideMap(name, funcToMappedAsyncResultHandler(AsyncMap.apply[K,V])(resultHandler))
   }
 
+  /**
+    * Get a cluster wide lock with the specified name. The lock will be passed to the handler when it is available.
+    * @param name the name of the lock
+    * @param resultHandler the handler
+    */
   def getLock(name: String)(resultHandler: Try[io.vertx.scala.core.shareddata.Lock] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.getLock(name, funcToMappedAsyncResultHandler(Lock.apply)(resultHandler))
   }
 
+  /**
+    * Like [[io.vertx.scala.core.shareddata.SharedData#getLock]] but specifying a timeout. If the lock is not obtained within the timeout
+    * a failure will be sent to the handler
+    * @param name the name of the lock
+    * @param timeout the timeout in ms
+    * @param resultHandler the handler
+    */
   def getLockWithTimeout(name: String, timeout: Long)(resultHandler: Try[io.vertx.scala.core.shareddata.Lock] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.getLockWithTimeout(name, timeout, funcToMappedAsyncResultHandler(Lock.apply)(resultHandler))
   }
 
+  /**
+    * Get a cluster wide counter. The counter will be passed to the handler.
+    * @param name the name of the counter.
+    * @param resultHandler the handler
+    */
   def getCounter(name: String)(resultHandler: Try[io.vertx.scala.core.shareddata.Counter] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.getCounter(name, funcToMappedAsyncResultHandler(Counter.apply)(resultHandler))
   }
 
+  /**
+    * Return a `LocalMap` with the specific `name`.
+    * @param name the name of the map
+    * @return the msp
+    */
   def getLocalMap[K, V](name: String): io.vertx.scala.core.shareddata.LocalMap[K, V] = {
     LocalMap.apply[K,V](_asJava.getLocalMap(name))
   }

@@ -20,6 +20,17 @@ import io.vertx.scala.core.streams.ReadStream
 import scala.util.Try
 import io.vertx.core.Handler
 
+/**
+  * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
+  * be read from.
+  * 
+  * The [[io.vertx.scala.core.eventbus.EventBus#consumer]] or [[io.vertx.scala.core.eventbus.EventBus#localConsumer]]
+  * creates a new consumer, the returned consumer is not yet registered against the event bus. Registration
+  * is effective after the [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] method is invoked.
+  *
+  * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
+  * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
+  */
 class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.eventbus.Message[T]] {
 
@@ -56,36 +67,66 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     this
   }
 
+  /**
+    * @return a read stream for the body of the message stream.
+    */
   def bodyStream(): io.vertx.scala.core.streams.ReadStream[T] = {
     ReadStream.apply[T](_asJava.bodyStream())
   }
 
+  /**
+    * @return true if the current consumer is registered
+    */
   def isRegistered(): Boolean = {
     _asJava.isRegistered()
   }
 
+  /**
+    * @return The address the handler was registered with.
+    */
   def address(): String = {
     _asJava.address()
   }
 
+  /**
+    * Set the number of messages this registration will buffer when this stream is paused. The default
+    * value is <code>0</code>. When a new value is set, buffered messages may be discarded to reach
+    * the new value.
+    * @param maxBufferedMessages the maximum number of messages that can be buffered
+    * @return this registration
+    */
   def setMaxBufferedMessages(maxBufferedMessages: Int): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.setMaxBufferedMessages(maxBufferedMessages))
   }
 
+  /**
+    * @return the maximum number of messages that can be buffered when this stream is paused
+    */
   def getMaxBufferedMessages(): Int = {
     _asJava.getMaxBufferedMessages()
   }
 
+  /**
+    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
+    * @param completionHandler the completion handler
+    */
   def completionHandler(completionHandler: Try[Unit] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.completionHandler(funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(completionHandler))
   }
 
+  /**
+    * Unregisters the handler which created this registration
+    */
   def unregister(): Unit = {
     _asJava.unregister()
   }
 
+  /**
+    * Unregisters the handler which created this registration
+    * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
+    */
   def unregister(completionHandler: Try[Unit] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._

@@ -20,11 +20,19 @@ import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
 
+/**
+  * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
+  * The stream  is called when the write fails.
+  */
 class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWritestream) 
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }

@@ -19,28 +19,56 @@ package io.vertx.scala.core;
 import scala.util.Try
 import io.vertx.core.Handler
 
+/**
+  * Represents the result of an action that may, or may not, have occurred yet.
+  * 
+  */
 class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Has the future completed?
+    * 
+    * It's completed if it's either succeeded or failed.
+    * @return true if completed, false if not
+    */
   def isComplete(): Boolean = {
     _asJava.isComplete()
   }
 
+  /**
+    * Set a handler for the result.
+    * 
+    * If the future has already been completed it will be called immediately. Otherwise it will be called when the
+    * future is completed.
+    * @param handler the Handler that will be called with the result
+    */
   def setHandler(handler: Try[T] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.setHandler(funcToAsyncResultHandler(handler))
   }
 
+  /**
+    * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
+    * @param result the result
+    */
   def complete(result: T): Unit = {
     _asJava.complete(result)
   }
 
+  /**
+    * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
+    */
   def complete(): Unit = {
     _asJava.complete()
   }
 
+  /**
+    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
+    * @param failureMessage the failure message
+    */
   def fail(failureMessage: String): Unit = {
     _asJava.fail(failureMessage)
   }

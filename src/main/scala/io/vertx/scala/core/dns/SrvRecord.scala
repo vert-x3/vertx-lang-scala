@@ -17,34 +17,58 @@
 package io.vertx.scala.core.dns;
 
 
+/**
+  * Represent a Service-Record (SRV) which was resolved for a domain.
+  */
 class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Returns the priority for this service record.
+    */
   def priority(): Int = {
     _asJava.priority()
   }
 
+  /**
+    * Returns the weight of this service record.
+    */
   def weight(): Int = {
     _asJava.weight()
   }
 
+  /**
+    * Returns the port the service is running on.
+    */
   def port(): Int = {
     _asJava.port()
   }
 
+  /**
+    * Returns the name for the server being queried.
+    */
   def name(): String = {
     _asJava.name()
   }
 
+  /**
+    * Returns the protocol for the service being queried (i.e. "_tcp").
+    */
   def protocol(): String = {
     _asJava.protocol()
   }
 
+  /**
+    * Returns the service's name (i.e. "_http").
+    */
   def service(): String = {
     _asJava.service()
   }
 
+  /**
+    * Returns the name of the host for the service.
+    */
   def target(): String = {
     _asJava.target()
   }

@@ -18,30 +18,59 @@ package io.vertx.scala.core.http;
 
 import io.vertx.scala.core.buffer.Buffer
 
+/**
+  * A WebSocket frame that represents either text or binary data.
+  * 
+  * A WebSocket message is composed of one or more WebSocket frames.
+  * 
+  * If there is a just a single frame in the message then a single text or binary frame should be created with final = true.
+  * 
+  * If there are more than one frames in the message, then the first frame should be a text or binary frame with
+  * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
+  */
 class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * @return true if it's a text frame
+    */
   def isText(): Boolean = {
     _asJava.isText()
   }
 
+  /**
+    * @return true if it's a binary frame
+    */
   def isBinary(): Boolean = {
     _asJava.isBinary()
   }
 
+  /**
+    * @return true if it's a continuation frame
+    */
   def isContinuation(): Boolean = {
     _asJava.isContinuation()
   }
 
+  /**
+    * @return the content of this frame as a UTF-8 string and returns the
+    * converted string. Only use this for text frames.
+    */
   def textData(): String = {
     _asJava.textData()
   }
 
+  /**
+    * @return the data of the frame
+    */
   def binaryData(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.binaryData())
   }
 
+  /**
+    * @return true if this is the final frame.
+    */
   def isFinal(): Boolean = {
     _asJava.isFinal()
   }

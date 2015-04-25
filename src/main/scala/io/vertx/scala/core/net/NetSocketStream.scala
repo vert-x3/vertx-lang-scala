@@ -19,6 +19,10 @@ package io.vertx.scala.core.net;
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
+/**
+  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
+  * socket connections to a [[io.vertx.scala.core.net.NetServer]].
+  */
 class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.net.NetSocket] {
 
