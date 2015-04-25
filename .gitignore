@@ -20,6 +20,8 @@ test-results
 test-tmp
 *.class
 src/gen
-src/main/scala/io/vertx/scala/core/**/*.scala
-src/main/scala/asciidoc
-src/test/scala/io/vertx/scala/codegen/**/*.scala
+src/test/java/io/vertx/codegen/**
+src/test/java/com/acme/**
+src/test/scala/io/vertx/scala/codegen/**
+src/test/scala/com/acme/**
+src/test/asciidoc

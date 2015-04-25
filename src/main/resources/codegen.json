@@ -3,7 +3,7 @@
   "generators" : [
     {
       "kind" : "class",
-      "fileName" : "fqn.replace('io.vertx', 'io.vertx.scala').replace('.', '/') + '.scala'",
+      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
       "templateFileName" : "vertx-scala/template/class.templ"
     }
   ]
