@@ -158,27 +158,13 @@
               <id>default-clean</id>
               <configuration>
                 <filesets>
-                  <fileset>
-                    <directory>src/main/scala/io/vertx/scala/core</directory>
-                  </fileset>
-                  <fileset>
-                    <directory>src/test/java/io/vertx/codegen</directory>
-                  </fileset>
-                  <fileset>
-										<directory>src/test/java/com/acme</directory>
-                  </fileset>
-                  <fileset>
-										<directory>src/test/scala/io/vertx/scala/codegen</directory>
-                  </fileset>
-                  <fileset>
-										<directory>src/test/scala/com/acme</directory>
-                  </fileset>
-                  <fileset>
-										<directory>src/test/asciidoc</directory>
-                  </fileset>
-                  <fileset>
-                    <directory>${asciidoc.dir}</directory>
-                  </fileset>
+                  <fileset><directory>src/main/scala/io/vertx/scala/core</directory></fileset>
+                  <fileset><directory>src/test/java/io/vertx/codegen</directory></fileset>
+                  <fileset><directory>src/test/java/com/acme</directory></fileset>
+                  <fileset><directory>src/test/scala/io/vertx/scala/codegen</directory></fileset>
+                  <fileset><directory>src/test/scala/com/acme</directory></fileset>
+                  <fileset><directory>src/test/asciidoc</directory></fileset>
+                  <fileset><directory>${asciidoc.dir}</directory></fileset>
                 </filesets>
               </configuration>
             </execution>
@@ -286,8 +272,7 @@
               </systemProperties>
               <processors>
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
-<!--                <processor>io.vertx.docgen.DocGenProcessor</processor>
--->
+                <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
               <optionMap>
                 <generators>scala</generators>
@@ -298,7 +283,7 @@
             </configuration>
           </execution>
           <!-- We have to run the annotation processor again to process doc overrides -->
-<!--          <execution>
+          <execution>
             <id>docgen-docoverrides</id>
             <goals>
               <goal>process</goal>
@@ -318,7 +303,6 @@
               <sourceDirectory>src/main/docoverride</sourceDirectory>
             </configuration>
           </execution>
--->
         </executions>
         <dependencies>
           <dependency>
@@ -328,7 +312,7 @@
           </dependency>
         </dependencies>
       </plugin>
-<!--      <plugin>
+      <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
         <version>1.5.2</version>
@@ -349,7 +333,6 @@
           </execution>
         </executions>
       </plugin>
--->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -368,7 +351,7 @@
           </execution>
         </executions>
       </plugin>
-<!--      <plugin>
+      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
@@ -386,7 +369,6 @@
           </execution>
         </executions>
       </plugin>
--->
     </plugins>
   </build>
 
