@@ -5,29 +5,33 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>7</version>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-parent</artifactId>
+    <version>5</version>
   </parent>
 
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-scala</artifactId>
+  <artifactId>vertx-lang-scala</artifactId>
   <version>3.0.0-SNAPSHOT</version>
 
-  <name>Vert.x Scala Lang</name>
+  <name>Vert.x Scala Language Support</name>
 
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-    <license>
-      <name>Eclipse Public License - v 1.0</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+  <properties>
+    <stack.version>3.0.0-SNAPSHOT</stack.version>
+    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
+    <scala.version>2.11.6</scala.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-dependencies</artifactId>
+        <version>${stack.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
 
@@ -35,18 +39,11 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>docgen</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
-      <version>2.11.2</version>
+      <version>${scala.version}</version>
     </dependency>
 
 
@@ -55,25 +52,32 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-compiler</artifactId>
       <scope>provided</scope>
-      <version>2.11.2</version>
+      <version>${scala.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
       <scope>provided</scope>
-      <version>3.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>codegen</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <artifactId>vertx-docgen</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-codetrans</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-codegen</artifactId>
       <scope>provided</scope>
       <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
       <scope>provided</scope>
       <classifier>sources</classifier>
     </dependency>
@@ -99,9 +103,14 @@
     <!-- Test dependencies -->
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-codegen</artifactId>
+      <classifier>tck-sources</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
       <type>test-jar</type>
-      <version>3.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -118,94 +127,143 @@
       <plugins>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
+          <executions>
+            <execution>
+              <id>default-testCompile</id>
+              <configuration>
+                <annotationProcessors>
+                  <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
+                </annotationProcessors>
+                <compilerArgs>
+                  <arg>-AoutputDirectory=${project.basedir}/src/test</arg>
+                </compilerArgs>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <additionalClasspathElements>
+              <additionalClasspathElement>${project.build.testSourceDirectory}</additionalClasspathElement>
+              <additionalClasspathElement>${project.basedir}/src/main/resources</additionalClasspathElement>
+            </additionalClasspathElements>
           </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>default-clean</id>
+              <configuration>
+                <filesets>
+                  <fileset>
+                    <directory>src/main/scala/io/vertx/scala/core</directory>
+                  </fileset>
+                  <fileset>
+                    <directory>src/test/java/io/vertx/codegen</directory>
+                  </fileset>
+                  <fileset>
+										<directory>src/test/java/com/acme</directory>
+                  </fileset>
+                  <fileset>
+										<directory>src/test/scala/io/vertx/scala/codegen</directory>
+                  </fileset>
+                  <fileset>
+										<directory>src/test/scala/com/acme</directory>
+                  </fileset>
+                  <fileset>
+										<directory>src/test/asciidoc</directory>
+                  </fileset>
+                  <fileset>
+                    <directory>${asciidoc.dir}</directory>
+                  </fileset>
+                </filesets>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
-        <groupId>org.scala-tools</groupId>
-        <artifactId>maven-scala-plugin</artifactId>
-        <version>2.15.2</version>
-          <executions>
-            <execution>
-              <id>compile</id>
-              <phase>compile</phase>
-              <goals>
-                <goal>compile</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>test-compile</id>
-              <phase>test-compile</phase>
-              <goals>
-                <goal>testCompile</goal>
-              </goals>
-            </execution>
-          </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.1.6</version>
+        <configuration>
+          <args>
+            <arg>-target:jvm-1.8</arg>
+            <arg>-feature</arg>
+            <arg>-deprecation</arg>
+            <arg>-explaintypes</arg>
+            <arg>-unchecked</arg>
+            <arg>-Xlint</arg>
+          </args>
+          <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala/scaladoc</reportOutputDirectory>
+          
+        </configuration>
         <executions>
           <execution>
-            <id>add-groovy-source</id>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>scala-doc</id>
             <phase>prepare-package</phase>
             <goals>
-              <goal>add-source</goal>
+              <goal>doc</goal>
             </goals>
             <configuration>
-              <sources>
-                <source>${basedir}/src/main/scala</source>
-              </sources>
+              <args>
+                <arg>-doc-external-doc:${settings.localRepository}/org/scala-lang/scala-library/${scala.version}/scala-library-${scala.version}.jar#http://www.scala-lang.org/api/${scala.version}/</arg>
+              </args>
             </configuration>
           </execution>
+
         </executions>
       </plugin>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
         <executions>
           <!-- Unpack vertx-core source code to target/sources/vertx-core -->
           <execution>
             <id>unpack-vertx-core</id>
             <phase>generate-sources</phase>
             <goals>
-              <goal>unpack</goal>
+              <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>io.vertx</groupId>
-                  <artifactId>vertx-core</artifactId>
-                  <version>3.0.0-SNAPSHOT</version>
-                  <classifier>sources</classifier>
-                </artifactItem>
-              </artifactItems>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>vertx-core</includeArtifactIds>
+              <includeTypes>jar</includeTypes>
+              <includeClassifiers>sources</includeClassifiers>
               <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
             </configuration>
           </execution>
-          <!-- Unpack codegen source code to target/sources/codegen -->
+          <!-- Unpack codegen source code to src/test/java -->
           <execution>
             <id>unpack-codegen</id>
             <phase>generate-test-sources</phase>
             <goals>
-              <goal>unpack</goal>
+              <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>io.vertx</groupId>
-                  <artifactId>codegen</artifactId>
-                  <version>1.0-SNAPSHOT</version>
-                  <classifier>sources</classifier>
-                </artifactItem>
-              </artifactItems>
-              <outputDirectory>${project.build.directory}/sources/codegen</outputDirectory>
+              <includeGroupIds>io.vertx</includeGroupIds>
+              <includeArtifactIds>vertx-codegen</includeArtifactIds>
+              <includeTypes>jar</includeTypes>
+              <includeClassifiers>tck-sources</includeClassifiers>
+              <outputDirectory>${basedir}/src/test/java</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -223,33 +281,44 @@
             </goals>
             <phase>generate-sources</phase>
             <configuration>
+              <systemProperties>
+                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+              </systemProperties>
               <processors>
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
+<!--                <processor>io.vertx.docgen.DocGenProcessor</processor>
+-->
               </processors>
               <optionMap>
                 <generators>scala</generators>
-                <outputDirectory>${project.basedir}/src/main/scala</outputDirectory>
+                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <docgen.output>${asciidoc.dir}/scala</docgen.output>
               </optionMap>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
-          <!-- Run the annotation processor on codegen and generate the codegen API -->
-          <execution>
-            <id>generate-codegen</id>
+          <!-- We have to run the annotation processor again to process doc overrides -->
+<!--          <execution>
+            <id>docgen-docoverrides</id>
             <goals>
               <goal>process</goal>
             </goals>
-            <phase>generate-test-sources</phase>
+            <phase>generate-sources</phase>
             <configuration>
+              <systemProperties>
+                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+              </systemProperties>
               <processors>
-                <processor>io.vertx.codegen.CodeGenProcessor</processor>
+                <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/test/scala</outputDirectory>
+                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <docgen.output>${asciidoc.dir}/scala</docgen.output>
               </optionMap>
-              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
+              <sourceDirectory>src/main/docoverride</sourceDirectory>
             </configuration>
           </execution>
+-->
         </executions>
         <dependencies>
           <dependency>
@@ -259,43 +328,65 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
+<!--      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>1.5.2</version>
         <executions>
           <execution>
-            <phase>package</phase>
             <goals>
-              <goal>jar-no-fork</goal>
+              <goal>process-asciidoc</goal>
             </goals>
+            <phase>package</phase>
+            <configuration>
+              <sourceDirectory>${asciidoc.dir}</sourceDirectory>
+              <outputDirectory>${project.build.directory}/docs/vertx-core</outputDirectory>
+              <backend>html</backend>
+              <doctype>book</doctype>
+              <preserveDirectories>true</preserveDirectories>
+              <relativeBaseDir>true</relativeBaseDir>
+            </configuration>
           </execution>
         </executions>
       </plugin>
+-->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.17</version>
-        <configuration>
-          <additionalClasspathElements>
-            <additionalClasspathElement>${project.build.testSourceDirectory}</additionalClasspathElement>
-            <additionalClasspathElement>${project.basedir}/src/main/resources</additionalClasspathElement>
-          </additionalClasspathElements>
-        </configuration>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-scala-source</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${basedir}/src/main/scala</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>2.6.1</version>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>src/main/scala/io/vertx/scala/core</directory>
-            </fileset>
-            <fileset>
-              <directory>src/test/scala/io/vertx/scala/codegen</directory>
-            </fileset>
-          </filesets>
-        </configuration>
+<!--      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>assemble-docs</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <attach>true</attach>
+              <descriptors>
+                <descriptor>src/main/assembly/docs.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
+-->
     </plugins>
   </build>
 
