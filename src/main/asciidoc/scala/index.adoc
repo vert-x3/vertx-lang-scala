@@ -383,12 +383,12 @@ NOTE: Deploying Verticle *instances* is Java only.
 
 [source,java]
 ----
-todo
+Code not translatable
 ----
 
 You can also deploy verticles by specifying the verticle *name*.
 
-The verticle name is used to look up the specific `link:scaladocs/io/vertx/scala/core/spi/VerticleFactory.html[VerticleFactory]` that will be used to
+The verticle name is used to look up the specific `VerticleFactory` that will be used to
 instantiate the actual verticle instance(s).
 
 Different verticle factories are available for instantiating verticles in different languages and for various other
@@ -542,7 +542,7 @@ Here's an example of using an isolation group to isolate a verticle deployment.
 
 [source,scala]
 ----
-todo
+Code not translatable
 ----
 
 Isolation groups are identified by a name, and the name can be used between different deployments if you want them
@@ -699,7 +699,7 @@ Notes on thread safety of Vert.x objects
 By default Vert.x does not record any metrics. Instead it provides an SPI for others to implement which can be added
 to the classpath. The metrics SPI is an advanced feature which allows implementers to capture events from Vert.x in
 order to gather metrics. For more information on this, please consult the
-`link:scaladocs/io/vertx/scala/core/spi/metrics/VertxMetrics.html[API Documentation]`.
+`API Documentation`.
 
 == Clustering
 

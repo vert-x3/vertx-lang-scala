@@ -88,7 +88,7 @@ _lingua franca_ for Vert.x.
 However you are not forced to use JSON if you don't want to.
 
 The event bus is very flexible and also supports sending arbitrary objects over the event bus.
-You do this by defining a `link:scaladocs/io/vertx/scala/core/eventbus/MessageCodec.html[codec]` for the objects you want to send.
+You do this by defining a `codec` for the objects you want to send.
 
 === The Event Bus API
 
@@ -211,7 +211,7 @@ Messages sent over the event bus can also contain headers. This can be specified
 
 [source,scala]
 ----
-todo
+Code not translatable
 ----
 
 ==== The Message object
@@ -307,7 +307,7 @@ Vertx.clusteredVertx(options,  res =>
 
 ----
 
-You should also make sure you have a `link:scaladocs/io/vertx/scala/core/spi/cluster/ClusterManager.html[ClusterManager]` implementation on your classpath,
+You should also make sure you have a `ClusterManager` implementation on your classpath,
 for example the default .
 
 ==== Clustering on the command line

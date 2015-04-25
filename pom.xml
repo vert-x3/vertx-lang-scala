@@ -258,21 +258,22 @@
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
         <version>2.2.4</version>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+          </systemProperties>
+        </configuration>
         <executions>
           <!-- Run the annotation processor on vertx-core and generate the Scala API -->
           <execution>
-            <id>generate-vertx-core</id>
+            <id>generate-api</id>
             <goals>
               <goal>process</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
-              <systemProperties>
-                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
-              </systemProperties>
               <processors>
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
-                <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
               <optionMap>
                 <generators>scala</generators>
@@ -282,17 +283,14 @@
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
-          <!-- We have to run the annotation processor again to process doc overrides -->
+          <!-- We have to run the annotation processor again to process docs -->
           <execution>
-            <id>docgen-docoverrides</id>
+            <id>docgen-docs</id>
             <goals>
               <goal>process</goal>
             </goals>
-            <phase>generate-sources</phase>
+            <phase>prepare-package</phase>
             <configuration>
-              <systemProperties>
-                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
-              </systemProperties>
               <processors>
                 <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
@@ -300,7 +298,25 @@
                 <outputDirectory>${project.basedir}/src/main</outputDirectory>
                 <docgen.output>${asciidoc.dir}/scala</docgen.output>
               </optionMap>
-              <sourceDirectory>src/main/docoverride</sourceDirectory>
+              <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
+            </configuration>
+          </execution>
+          <!-- We have to run the annotation processor again to process docoverride -->
+          <execution>
+            <id>docgen-docoverride</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <processors>
+                <processor>io.vertx.docgen.DocGenProcessor</processor>
+              </processors>
+              <optionMap>
+                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <docgen.output>${asciidoc.dir}/scala</docgen.output>
+              </optionMap>
+              <sourceDirectory>${project.basedir}/src/main/docoverride</sourceDirectory>
             </configuration>
           </execution>
         </executions>
@@ -321,7 +337,7 @@
             <goals>
               <goal>process-asciidoc</goal>
             </goals>
-            <phase>package</phase>
+            <phase>prepare-package</phase>
             <configuration>
               <sourceDirectory>${asciidoc.dir}</sourceDirectory>
               <outputDirectory>${project.build.directory}/docs/vertx-core</outputDirectory>
