@@ -18,11 +18,19 @@ package io.vertx.scala.core.streams;
 
 import io.vertx.core.Handler
 
+/**
+  * Base interface for a stream.
+  */
 trait StreamBase {
 
   def asJava: java.lang.Object
 
-def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase
+  /**
+  * Set an exception handler.
+  * @param handler the handler
+  * @return a reference to this, so the API can be used fluently
+  */
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase
 
 }
 
@@ -34,6 +42,11 @@ object StreamBase {
   private class StreamBaseImpl(private val _asJava: io.vertx.core.streams.StreamBase) extends StreamBase { 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Set an exception handler.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._

@@ -22,12 +22,24 @@ import io.vertx.scala.core.streams.ReadStream
 import scala.util.Try
 import io.vertx.core.Handler
 
+/**
+  * Represents a file on the file-system which can be read from, or written to asynchronously.
+  * 
+  * This class also implements [[io.vertx.scala.core.streams.ReadStream]] and
+  * [[io.vertx.scala.core.streams.WriteStream]]. This allows the data to be pumped to and from
+  * other streams, e.g. an [[io.vertx.scala.core.http.HttpClientRequest]] instance,
+  * using the [[io.vertx.scala.core.streams.Pump]] class
+  */
 class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
@@ -80,16 +92,39 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
+  /**
+    * Close the file. The actual close happens asynchronously.
+    */
   def close(): Unit = {
     _asJava.close()
   }
 
+  /**
+    * Close the file. The actual close happens asynchronously.
+    * The handler will be called when the close is complete, or an error occurs.
+    * @param handler the handler
+    */
   def close(handler: Try[Unit] => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
     _asJava.close(funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler))
   }
 
+  /**
+    * Write a [[io.vertx.scala.core.buffer.Buffer]] to the file at position `position` in the file, asynchronously.
+    * 
+    * If `position` lies outside of the current size
+    * of the file, the file will be enlarged to encompass it.
+    * 
+    * When multiple writes are invoked on the same file
+    * there are no guarantees as to order in which those writes actually occur
+    * 
+    * The handler will be called when the write is complete, or if an error occurs.
+    * @param buffer the buffer to write
+    * @param position the position in the file to write it at
+    * @param handler the handler to call when the write is complete
+    * @return a reference to this, so the API can be used fluently
+    */
   def write(buffer: io.vertx.scala.core.buffer.Buffer, position: Long)(handler: Try[Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
@@ -97,6 +132,22 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
+  /**
+    * Reads `length` bytes of data from the file at position `position` in the file, asynchronously.
+    * 
+    * The read data will be written into the specified `Buffer buffer` at position `offset`.
+    * 
+    * If data is read past the end of the file then zero bytes will be read.
+    * When multiple reads are invoked on the same file there are no guarantees as to order in which those reads actually occur.
+    * 
+    * The handler will be called when the close is complete, or if an error occurs.
+    * @param buffer the buffer to read into
+    * @param offset the offset into the buffer where the data will be read
+    * @param position the position in the file where to start reading
+    * @param length the number of bytes to read
+    * @param handler the handler to call when the write is complete
+    * @return a reference to this, so the API can be used fluently
+    */
   def read(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int)(handler: Try[io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
@@ -104,11 +155,22 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
+  /**
+    * Flush any writes made to this file to underlying persistent storage.
+    * 
+    * If the file was opened with `flush` set to `true` then calling this method will have no effect.
+    * 
+    * The actual flush will happen asynchronously.
+    * @return a reference to this, so the API can be used fluently
+    */
   def flush(): io.vertx.scala.core.file.AsyncFile = {
     _asJava.flush()
     this
   }
 
+  /**
+    * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
+    */
   def flush(handler: Try[Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
@@ -116,11 +178,21 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
+  /**
+    * Sets the position from which data will be read from when using the file as a [[io.vertx.scala.core.streams.ReadStream]].
+    * @param readPos the position in the file
+    * @return a reference to this, so the API can be used fluently
+    */
   def setReadPos(readPos: Long): io.vertx.scala.core.file.AsyncFile = {
     _asJava.setReadPos(readPos)
     this
   }
 
+  /**
+    * Sets the position from which data will be written when using the file as a [[io.vertx.scala.core.streams.WriteStream]].
+    * @param writePos the position in the file
+    * @return a reference to this, so the API can be used fluently
+    */
   def setWritePos(writePos: Long): io.vertx.scala.core.file.AsyncFile = {
     _asJava.setWritePos(writePos)
     this

@@ -20,11 +20,19 @@ import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
 
+/**
+  * Represents a stream of message that can be written to.
+  * 
+  */
 class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
     extends io.vertx.scala.core.streams.WriteStream[T] {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
@@ -53,11 +61,19 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     this
   }
 
+  /**
+    * Update the delivery options of this producer.
+    * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    * @return this producer object
+    */
   def deliveryOptions(options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
     _asJava.deliveryOptions(options)
     this
   }
 
+  /**
+    * @return The address to which the producer produces messages.
+    */
   def address(): String = {
     _asJava.address()
   }

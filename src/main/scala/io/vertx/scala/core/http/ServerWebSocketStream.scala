@@ -19,6 +19,10 @@ package io.vertx.scala.core.http;
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
+/**
+  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
+  * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
+  */
 class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSocketStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.ServerWebSocket] {
 

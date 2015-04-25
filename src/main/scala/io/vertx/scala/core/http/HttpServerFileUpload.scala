@@ -20,6 +20,9 @@ import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
+/**
+  * Represents an file upload from an HTML FORM.
+  */
 class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
@@ -56,35 +59,62 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
     this
   }
 
+  /**
+    * Stream the content of this upload to the given file on storage.
+    * @param filename the name of the file
+    */
   def streamToFileSystem(filename: String): io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.streamToFileSystem(filename)
     this
   }
 
+  /**
+    * @return the filename which was used when upload the file.
+    */
   def filename(): String = {
     _asJava.filename()
   }
 
+  /**
+    * @return the name of the attribute
+    */
   def name(): String = {
     _asJava.name()
   }
 
+  /**
+    * @return  the content type for the upload
+    */
   def contentType(): String = {
     _asJava.contentType()
   }
 
+  /**
+    * @return the contentTransferEncoding for the upload
+    */
   def contentTransferEncoding(): String = {
     _asJava.contentTransferEncoding()
   }
 
+  /**
+    * @return the charset for the upload
+    */
   def charset(): String = {
     _asJava.charset()
   }
 
+  /**
+    * The size of the upload may not be available until it is all read.
+    * Check [[io.vertx.scala.core.http.HttpServerFileUpload#isSizeAvailable]] to determine this
+    * @return the size of the upload (in bytes)
+    */
   def size(): Long = {
     _asJava.size()
   }
 
+  /**
+    * @return true if the size of the upload can be retrieved via [[io.vertx.scala.core.http.HttpServerFileUpload#size]].
+    */
   def isSizeAvailable(): Boolean = {
     _asJava.isSizeAvailable()
   }

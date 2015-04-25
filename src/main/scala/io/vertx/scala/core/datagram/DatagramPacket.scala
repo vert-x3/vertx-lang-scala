@@ -19,14 +19,26 @@ package io.vertx.scala.core.datagram;
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.net.SocketAddress
 
+/**
+  * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
+  */
 class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
+    * this [[io.vertx.scala.core.datagram.DatagramPacket]].
+    * @return the address of the sender
+    */
   def sender(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.sender())
   }
 
+  /**
+    * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
+    * @return the data
+    */
   def data(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.data())
   }

@@ -17,18 +17,30 @@
 package io.vertx.scala.core.file;
 
 
+/**
+  * Represents properties of the file system.
+  */
 class FileSystemProps(private val _asJava: io.vertx.core.file.FileSystemProps) {
 
   def asJava: java.lang.Object = _asJava
 
+  /**
+    * @return The total space on the file system, in bytes
+    */
   def totalSpace(): Long = {
     _asJava.totalSpace()
   }
 
+  /**
+    * @return The total un-allocated space on the file system, in bytes
+    */
   def unallocatedSpace(): Long = {
     _asJava.unallocatedSpace()
   }
 
+  /**
+    * @return The total usable space on the file system, in bytes
+    */
   def usableSpace(): Long = {
     _asJava.usableSpace()
   }

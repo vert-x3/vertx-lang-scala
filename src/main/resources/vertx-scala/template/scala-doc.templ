@@ -1,0 +1,180 @@
+@code{
+
+  def methodDoc(method, indentation) {
+    var doc = '';
+
+    var commentedIndentation = indentation;
+    commentedIndentation += "  *";
+      
+    if (method.doc != null) {
+      doc += indentation;
+      doc += "/**\n";
+      doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
+      for (param : method.params) {
+        if (param.description != null) {
+          doc += commentedIndentation;
+          doc += " @param " + param.name + " ";
+          doc += convertLink(param.description);
+          if (param.type.kind == CLASS_DATA_OBJECT) {
+            doc += "see " + renderDataObjectHtmlLink(param.type);
+          }
+          doc += "\n";
+        }
+      }
+      if (!method.returnType.name.equals("void")) {
+        if (method.returnDescription != null) {
+          doc += commentedIndentation;
+          doc += " @return ";
+          doc += convertLink(method.returnDescription);
+          if (method.returnType.kind == CLASS_DATA_OBJECT) {
+            doc += "see " + renderDataObjectHtmlLink(method.returnType);
+          }
+          doc += "\n";
+        }
+      }
+      doc += commentedIndentation;
+      doc += "/\n";
+    }
+    doc;
+  }
+
+  def renderDataObjectHtmlLink(dataObjectType) {
+    var link = new StringBuilder();
+    for (name : CASE_QUALIFIED.parse(type.raw.getPackageName())) {
+      link.append("../");
+    }
+    
+    link.append("../../../cheatsheet/").append(dataObjectType.simpleName).append(".html");
+    return "<a href=\"" + link + "\">" + dataObjectType.simpleName + "</a>";;
+  }
+
+  def convertLink(doc) {
+    var linkText = "{@link";
+    var transformedDoc = '';
+    
+    var start = 0;
+    var index = doc.indexOf(linkText);
+    while (index >= 0) {
+       var end = doc.indexOf("}", index);
+       transformedDoc += doc.substring(start, index) + toScalaDocType(doc.substring(index + 1 + linkText.length(), end));
+       start = end + 1;
+       index = doc.indexOf(linkText, start);
+    }
+    
+    transformedDoc += doc.substring(start, doc.length());
+    return transformedDoc;
+  }
+
+  def toScalaDocType(type) {
+   if (type == 'void' || type == 'java.lang.Void') {
+      return '[[Unit]]';
+    } else if (type == 'Object' || type == 'java.lang.Object') {
+      return '[[AnyRef]]';
+    } else if (type == 'Throwable' || type == 'java.lang.Throwable') {
+      return '[[Throwable]]';
+    } else if (type == 'String' || type == 'java.lang.String') {
+      return '[[String]]';
+    } else if (type == 'byte' || type == 'java.lang.Byte') {
+        return '[[Byte]]';
+    } else if (type == 'short' || type == 'java.lang.Short') {
+      return '[[Short]]';
+    } else if (type == 'int' || type == 'java.lang.Integer') {
+      return '[[Int]]';
+    } else if (type == 'long' || type == 'java.lang.Long') {
+      return '[[Long]]';
+    } else if (type == 'float' || type == 'java.lang.Float') {
+      return '[[Float]]';
+    } else if (type == 'double' || type == 'java.lang.Double') {
+      return '[[Double]]';
+    } else if (type == 'boolean' || type == 'java.lang.Boolean') {
+      return '[[Boolean]]';
+    } else if (type == 'char' || type == 'java.lang.Character') {
+      return '[[Char]]';
+    } else if (type == 'List' || type == 'java.util.List') {
+      return '[[scala.collection.immutable.List]]';
+    } else if (type == 'Set' || type == 'java.util.Set') {
+      return '[[scala.collection.immutable.Set]]';
+    } else if (type == 'Map' || type == 'java.util.Map') {
+      return '[[scala.collection.immutable.Map]]';
+    } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
+      return 'function';
+    } else if (type == 'AsyncResult' || type == 'io.vertx.core.AsyncResult') {
+      return '[[scala.util.Try]]';
+    } else if (type.contains('io.vertx')) {
+      return '[[' + 
+          type.replace("io.vertx.", "io.vertx.scala.")
+          .replace('<', '[').replace('>', ']')
+          .replace('java.lang.', '') +
+          ']]';
+    } else {
+      return "[[" + type + "]]";
+    }
+  }
+
+  def renderDocLink(link) {
+    var rawType = link.targetType.raw;
+    if (rawType.module != null) {
+      var label = link.label.trim();
+      if (rawType.kind == CLASS_DATA_OBJECT) {
+        if (label.length() == 0) {
+          label = rawType.simpleName;
+        }
+        return renderDataObjectHtmlLink(rawType);
+      } else if (type.kind == CLASS_API &&
+                 type.name != 'io.vertx.core.Handler') {
+        var elt = link.targetElement;
+        var eltKind = elt.getKind().name();
+        var ret = "[[" + rawType.translateName("scala");
+        if (eltKind == "METHOD") {
+          ret += "#" + elt.getSimpleName().toString();
+        }
+        if (label.length() > 0) {
+          ret += " " + label;
+        }
+        ret += "]]";
+        return ret;
+      } else {
+        return toScalaDocType(rawType.name);
+      }
+    }
+    return null;
+  }
+  
+  def renderDoc(margin, doc, renderDocLink) {
+    var need = true;
+    var output = new StringBuilder();
+    for (token : doc.tokens) {
+      if (need) {
+        output.append(margin);
+        need = false;
+      }
+      if (token.lineBreak) {
+        output.append("\n");
+        need = true;
+      } else {
+        if (token.text) {
+          output.append(token.value);
+        } else {
+          var tag = token.tag;
+          if (tag instanceof io.vertx.codegen.doc.Tag$Link) {
+            var outputLink = renderDocLink(tag);
+            if (outputLink == null || outputLink.trim().empty) {
+              outputLink = tag.label;
+            }
+            if (outputLink == null || outputLink.trim().empty) {
+              outputLink = tag.targetElement.simpleName;
+            }
+            output.append(outputLink);
+          } else if (tag.name == "code") {
+            output.append("`").append(tag.value.trim()).append("`");
+          }
+        }
+      }
+    }
+    if (!need) {
+      output.append("\n");
+    }
+    return output.toString().replace("<p>", "");
+  }
+  
+}
