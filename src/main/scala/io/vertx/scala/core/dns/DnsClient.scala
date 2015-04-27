@@ -16,7 +16,6 @@
 
 package io.vertx.scala.core.dns;
 
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -31,158 +30,153 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to lookup the A (ipv4) or AAAA (ipv6) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved address if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved address if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
     */
-  def lookup(name: String)(handler: Try[String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookup(name: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.lookup(name, funcToAsyncResultHandler[java.lang.String](handler))
-    this
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.lookup(name, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
     * Try to lookup the A (ipv4) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[java.net.Inet4Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[java.net.Inet4Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
     */
-  def lookup4(name: String)(handler: Try[String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookup4(name: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.lookup4(name, funcToAsyncResultHandler[java.lang.String](handler))
-    this
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.lookup4(name, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
     * Try to lookup the AAAA (ipv6) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[java.net.Inet6Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[java.net.Inet6Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
     */
-  def lookup6(name: String)(handler: Try[String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookup6(name: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.lookup6(name, funcToAsyncResultHandler[java.lang.String](handler))
-    this
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.lookup6(name, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
     * Try to resolve all A (ipv4) records for the given name.
     * @param name the name to resolve
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet4Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet4Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     */
-  def resolveA(name: String)(handler: Try[List[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveA(name: String): scala.concurrent.Future[List[String]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveA(name, funcToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[String]]()
+    _asJava.resolveA(name, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve all AAAA (ipv6) records for the given name.
     * @param name the name to resolve
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet6Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet6Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     */
-  def resolveAAAA(name: String)(handler: Try[List[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveAAAA(name: String): scala.concurrent.Future[List[String]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveAAAA(name, funcToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[String]]()
+    _asJava.resolveAAAA(name, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve the CNAME record for the given name.
     * @param name the name to resolve the CNAME for
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
     */
-  def resolveCNAME(name: String)(handler: Try[List[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveCNAME(name: String): scala.concurrent.Future[List[String]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveCNAME(name, funcToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[String]]()
+    _asJava.resolveCNAME(name, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve the MX records for the given name.
     * @param name the name for which the MX records should be resolved
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveMX(name: String)(handler: Try[List[io.vertx.scala.core.dns.MxRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveMX(name: String): scala.concurrent.Future[List[io.vertx.scala.core.dns.MxRecord]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveMX(name, funcToMappedAsyncResultHandler[java.util.List[io.vertx.core.dns.MxRecord], List[io.vertx.scala.core.dns.MxRecord]](x => x.asScala.map(MxRecord.apply).toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[io.vertx.scala.core.dns.MxRecord]]()
+    _asJava.resolveMX(name, promiseToMappedAsyncResultHandler[java.util.List[io.vertx.core.dns.MxRecord], List[io.vertx.scala.core.dns.MxRecord]](x => x.asScala.map(MxRecord.apply).toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve the TXT records for the given name.
     * @param name the name for which the TXT records should be resolved
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveTXT(name: String)(handler: Try[List[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveTXT(name: String): scala.concurrent.Future[List[String]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveTXT(name, funcToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[String]]()
+    _asJava.resolveTXT(name, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve the PTR record for the given name.
     * @param name the name to resolve the PTR for
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
     */
-  def resolvePTR(name: String)(handler: Try[String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolvePTR(name: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.resolvePTR(name, funcToAsyncResultHandler[java.lang.String](handler))
-    this
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.resolvePTR(name, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
     * Try to resolve the NS records for the given name.
     * @param name the name for which the NS records should be resolved
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveNS(name: String)(handler: Try[List[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveNS(name: String): scala.concurrent.Future[List[String]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveNS(name, funcToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[String]]()
+    _asJava.resolveNS(name, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
+    promise.future
   }
 
   /**
     * Try to resolve the SRV records for the given name.
     * @param name the name for which the SRV records should be resolved
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveSRV(name: String)(handler: Try[List[io.vertx.scala.core.dns.SrvRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveSRV(name: String): scala.concurrent.Future[List[io.vertx.scala.core.dns.SrvRecord]] = {
     import io.vertx.lang.scala.HandlerOps._
     import scala.collection.JavaConverters._
-    _asJava.resolveSRV(name, funcToMappedAsyncResultHandler[java.util.List[io.vertx.core.dns.SrvRecord], List[io.vertx.scala.core.dns.SrvRecord]](x => x.asScala.map(SrvRecord.apply).toList)(handler))
-    this
+    val promise = scala.concurrent.Promise[List[io.vertx.scala.core.dns.SrvRecord]]()
+    _asJava.resolveSRV(name, promiseToMappedAsyncResultHandler[java.util.List[io.vertx.core.dns.SrvRecord], List[io.vertx.scala.core.dns.SrvRecord]](x => x.asScala.map(SrvRecord.apply).toList)(promise))
+    promise.future
   }
 
   /**
     * Try to do a reverse lookup of an IP address. This is basically the same as doing trying to resolve a PTR record
     * but allows you to just pass in the IP address and not a valid ptr query string.
     * @param ipaddress the IP address to resolve the PTR for
-    * @param handler the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
-    * @return a reference to this, so the API can be used fluently.
+    * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
     */
-  def reverseLookup(ipaddress: String)(handler: Try[String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def reverseLookup(ipaddress: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.reverseLookup(ipaddress, funcToAsyncResultHandler[java.lang.String](handler))
-    this
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.reverseLookup(ipaddress, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
 }

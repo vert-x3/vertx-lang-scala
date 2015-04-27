@@ -34,9 +34,8 @@ package @{type.raw.translatePackageName("scala")};\n
 		@if{!ifacePackageName.equals(importedType.packageName)}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
-	@else{importedType.kind == CLASS_ASYNC_RESULT}
-import scala.util.Try\n	
-	@else{!importedType.packageName.equals("java.lang") && 
+	@else{importedType.kind != CLASS_ASYNC_RESULT &&
+	      !importedType.packageName.equals("java.lang") &&
         importedType.kind != CLASS_LIST &&
         importedType.kind != CLASS_SET &&
         importedType.kind != CLASS_MAP}
@@ -95,7 +94,6 @@ import @{importedType}\n
 @else{}
 	@includeNamed{'traitbody.templ'}
 @end{}
-\n\n
 }\n
 \n
 @if{concrete}
@@ -104,10 +102,12 @@ import @{importedType}\n
 	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	@foreach{method : staticMethods}
-  \n
-    def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @includeNamed{'writeReturnType';returnType=method.returnType} = {\n
-		  @{methodInvocation(type.raw.name, method, '    ');}
-    }\n
+	@if{includeMethod(method, staticMethods)}
+	\n
+	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+			@{methodInvocation(type.raw.name, method, '    ');}
+	  }\n
+	@end{}
 	@end{}
 	}\n
 @else{}
@@ -115,8 +115,8 @@ import @{importedType}\n
 		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
 		    new @includeNamed{'writeImplType'}(_asJava)\n
 		\n
-		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} { \n
-			@includeNamed{'classbody.templ'; indentation=''}\n
+		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n
+			@includeNamed{'classbody.templ'; indentation='  '}
 		  }\n\n
 	}\n
 @end{}

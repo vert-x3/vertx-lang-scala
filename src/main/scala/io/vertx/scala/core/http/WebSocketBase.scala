@@ -128,155 +128,151 @@ object WebSocketBase {
   def apply(_asJava: io.vertx.core.http.WebSocketBase): io.vertx.scala.core.http.WebSocketBase =
     new WebSocketBaseImpl(_asJava)
 
-  private class WebSocketBaseImpl(private val _asJava: io.vertx.core.http.WebSocketBase) extends WebSocketBase { 
-  def asJava: java.lang.Object = _asJava
+  private class WebSocketBaseImpl(private val _asJava: io.vertx.core.http.WebSocketBase) extends WebSocketBase {
 
-  /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
-    * @return true if write queue is full
-    */
-  def writeQueueFull(): Boolean = {
-    _asJava.writeQueueFull()
-  }
+    def asJava: java.lang.Object = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-    this
-  }
+    /**
+      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
+      * @return true if write queue is full
+      */
+    def writeQueueFull(): Boolean = {
+      _asJava.writeQueueFull()
+    }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
-    this
-  }
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+      this
+    }
 
-  def pause(): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.pause()
-    this
-  }
+    def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+      this
+    }
 
-  def resume(): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.resume()
-    this
-  }
+    def pause(): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.pause()
+      this
+    }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
-    this
-  }
+    def resume(): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.resume()
+      this
+    }
 
-  def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
-    this
-  }
+    def endHandler(endHandler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+      this
+    }
 
-  def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.setWriteQueueMaxSize(maxSize)
-    this
-  }
+    def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+      this
+    }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
-    this
-  }
+    def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.setWriteQueueMaxSize(maxSize)
+      this
+    }
 
-  /**
-    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-    * handler is given by this method.
-    * 
-    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-    * allows you to write data to other WebSockets which are owned by different event loops.
-    * @return the binary handler id
-    */
-  def binaryHandlerID(): String = {
-    _asJava.binaryHandlerID()
-  }
+    def drainHandler(handler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+      this
+    }
 
-  /**
-    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-    * handler is given by `textHandlerID`.
-    * 
-    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-    * allows you to write data to other WebSockets which are owned by different event loops.
-    */
-  def textHandlerID(): String = {
-    _asJava.textHandlerID()
-  }
+    /**
+      * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+      * handler is given by this method.
+      * 
+      * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+      * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+      * allows you to write data to other WebSockets which are owned by different event loops.
+      * @return the binary handler id
+      */
+    def binaryHandlerID(): String = {
+      _asJava.binaryHandlerID()
+    }
 
-  /**
-    * Write a WebSocket frame to the connection
-    * @param frame the frame to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeFrame(frame: io.vertx.scala.core.http.WebSocketFrame): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.writeFrame(frame.asJava.asInstanceOf[io.vertx.core.http.WebSocketFrame])
-    this
-  }
+    /**
+      * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+      * handler is given by `textHandlerID`.
+      * 
+      * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+      * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+      * allows you to write data to other WebSockets which are owned by different event loops.
+      */
+    def textHandlerID(): String = {
+      _asJava.textHandlerID()
+    }
 
-  /**
-    * Writes a (potentially large) piece of data to the connection. This data might be written as multiple frames
-    * if it exceeds the maximum WebSocket frame size.
-    * @param data the data to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
-    _asJava.writeMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
-    this
-  }
+    /**
+      * Write a WebSocket frame to the connection
+      * @param frame the frame to write
+      * @return a reference to this, so the API can be used fluently
+      */
+    def writeFrame(frame: io.vertx.scala.core.http.WebSocketFrame): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.writeFrame(frame.asJava.asInstanceOf[io.vertx.core.http.WebSocketFrame])
+      this
+    }
 
-  /**
-    * Set a close handler. This will be called when the WebSocket is closed.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def closeHandler(handler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
-    this
-  }
+    /**
+      * Writes a (potentially large) piece of data to the connection. This data might be written as multiple frames
+      * if it exceeds the maximum WebSocket frame size.
+      * @param data the data to write
+      * @return a reference to this, so the API can be used fluently
+      */
+    def writeMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.writeMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+      this
+    }
 
-  /**
-    * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocketBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
-    this
-  }
+    /**
+      * Set a close handler. This will be called when the WebSocket is closed.
+      * @param handler the handler
+      * @return a reference to this, so the API can be used fluently
+      */
+    def closeHandler(handler: => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+      this
+    }
 
-  /**
-    * Close the WebSocket.
-    */
-  def close(): Unit = {
-    _asJava.close()
-  }
+    /**
+      * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
+      * @param handler the handler
+      * @return a reference to this, so the API can be used fluently
+      */
+    def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocketBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
+      this
+    }
 
-  /**
-    * @return the remote address for this socket
-    */
-  def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.remoteAddress())
-  }
+    /**
+      * Close the WebSocket.
+      */
+    def close(): Unit = {
+      _asJava.close()
+    }
 
-  /**
-    * @return the local address for this socket
-    */
-  def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.localAddress())
-  }
+    /**
+      * @return the remote address for this socket
+      */
+    def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
+      SocketAddress.apply(_asJava.remoteAddress())
+    }
+
+    /**
+      * @return the local address for this socket
+      */
+    def localAddress(): io.vertx.scala.core.net.SocketAddress = {
+      SocketAddress.apply(_asJava.localAddress())
+    }
+
   }
 
 }

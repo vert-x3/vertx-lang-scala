@@ -1,9 +1,7 @@
 package io.vertx.lang.scala
 
 import scala.language.implicitConversions
-import scala.util.Try
-import scala.util.Success
-import scala.util.Failure
+import scala.concurrent.Promise
 import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 import io.vertx.core.AsyncResult
@@ -20,20 +18,20 @@ object HandlerOps {
       override def handle(event: J): Unit = f(mapper(event))
     }
 
-  def funcToAsyncResultHandler[J](f: Try[J] => Unit): Handler[AsyncResult[J]] =
-      funcToMappedHandler[AsyncResult[J], Try[J]](asyncResult =>
+  def promiseToAsyncResultHandler[J](p: Promise[J]): Handler[AsyncResult[J]] =
+    funcToHandler[AsyncResult[J]](asyncResult =>
       if (asyncResult.succeeded()) {
-        Success(asyncResult.result())
+        p.success(asyncResult.result())
       } else {
-        Failure(asyncResult.cause())
-      })(f)
+        p.failure(asyncResult.cause())
+      })
 
-  def funcToMappedAsyncResultHandler[J, S](mapper: J => S)(f: Try[S] => Unit): Handler[AsyncResult[J]] =
-    funcToMappedHandler[AsyncResult[J], Try[S]](asyncResult =>
+  def promiseToMappedAsyncResultHandler[J, S](mapper: J => S)(p: Promise[S]): Handler[AsyncResult[J]] =
+    funcToHandler[AsyncResult[J]](asyncResult =>
         if (asyncResult.succeeded()) {
-          Success(mapper(asyncResult.result()))
+          p.success(mapper(asyncResult.result()))
         } else {
-          Failure(asyncResult.cause())
-        })(f)
+          p.failure(asyncResult.cause())
+        })
 
 }

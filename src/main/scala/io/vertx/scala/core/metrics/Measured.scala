@@ -37,16 +37,18 @@ object Measured {
   def apply(_asJava: io.vertx.core.metrics.Measured): io.vertx.scala.core.metrics.Measured =
     new MeasuredImpl(_asJava)
 
-  private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured { 
-  def asJava: java.lang.Object = _asJava
+  private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured {
 
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
-  }
+    def asJava: java.lang.Object = _asJava
+
+    /**
+      * Whether the metrics are enabled for this measured object
+      * @return true if the metrics are enabled
+      */
+    def isMetricsEnabled(): Boolean = {
+      _asJava.isMetricsEnabled()
+    }
+
   }
 
 }

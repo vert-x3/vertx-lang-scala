@@ -46,8 +46,6 @@
     } else if (type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY){
       return toJavaType(type)
-    } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'Try[' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_API) {
       var retVal = helper.getNonGenericType(type.translateName("scala"));
       if (type instanceof io.vertx.codegen.TypeInfo$Parameterized) {
@@ -72,10 +70,6 @@
 
   def isHandlerFuture(type) {
     type.kind == CLASS_HANDLER && type.name.contains("io.vertx.core.Future");
-  }
-
-  def isHandlerAsyncResult(type) {
-    type.kind == CLASS_HANDLER && type.args[0].kind == CLASS_ASYNC_RESULT;
   }
 
   def toJavaType(type) {
@@ -108,7 +102,8 @@
   }
 
   def isParamHandler(param) {
-    return param.type.kind == CLASS_HANDLER && !param.type.name.contains("io.vertx.core.Future");
+    return (param.type.kind == CLASS_HANDLER && param.type.args[0].kind != CLASS_ASYNC_RESULT) &&
+      !param.type.name.contains("io.vertx.core.Future");
   }
 
   def isMethodHandler(method) {
@@ -126,32 +121,27 @@
         return true;
       }
     }
-    return false;
+    return method.kind == METHOD_FUTURE;;
   }
 
 
   def importJavaConversions(method) {
     for (param : method.params) {
-      if (isParamHandler(param) ||
-          param.type.kind == CLASS_LIST ||
-          param.type.kind == CLASS_SET ||
-          param.type.kind == CLASS_MAP) {
+      if ((param.type.kind == CLASS_HANDLER &&
+           param.type.args[0].kind.collection) ||
+          (isAsyncResult(param) &&
+           param.type.args[0].args[0].kind.collection) ||
+          param.type.kind.collection) {
         return true;
       }
     }
   
-    return method.returnType.kind == CLASS_LIST ||
-           method.returnType.kind == CLASS_SET ||
-           method.returnType.kind == CLASS_MAP;
-  }
-
-  def includeParam(param) {
-    !isParamHandler(param);
+    return method.returnType.kind.collection;
   }
 
   def returnTypeOf(method) {
     if (isFuture(method)) {
-      'Future[' + futureType(method) + ']';
+      'scala.concurrent.Future[' + futureType(method) + ']';
     } else if (method.fluent) {
       toScalaType(type);
     } else if (method.returnType instanceof io.vertx.codegen.TypeInfo$Void) {
@@ -165,7 +155,8 @@
     var paramList = '';
     var first = true;
     for (param : method.params) {
-      if (includeParam(param)) {
+      if (!isParamHandler(param) &&
+          !isAsyncResult(param)) {
         if (first) {
           first = false;
         } else {
@@ -199,6 +190,16 @@
     } else {
        '(' + params + ')';
     }
+  }
+
+  def handlerLambda(method) {
+    var params = '';
+    for (param : method.params) {
+      if (isParamHandler(param)) {
+        params += '(' + param.name + ': ' + toScalaType(param.type) + ')';
+      }
+    }
+    params;
   }
 
   def methodInvocationHandlerCollection(type, method) {
@@ -269,6 +270,11 @@
       invocation += indentation;
     }
 
+    if (isFuture(method)) {
+      invocation += 'val promise = scala.concurrent.Promise[' + futureType(method) + ']()\n';
+      invocation += indentation;
+    }
+
     if (!fluent and method.returnType.kind == CLASS_API) {
       wrap = true;
       invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
@@ -285,7 +291,7 @@
       if (param.type.kind == CLASS_HANDLER) {
         var handlerType = param.type.args[0]; 
         if (handlerType.kind == CLASS_ASYNC_RESULT) {
-          invocation += methodInvocationHandler(handlerType.args[0], 'funcToMappedAsyncResultHandler', 'funcToAsyncResultHandler', false);
+          invocation += methodInvocationHandler(handlerType.args[0], 'promiseToMappedAsyncResultHandler', 'promiseToAsyncResultHandler', false);
         } else {
           invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true);
         } 
@@ -295,6 +301,8 @@
         invocation += '`';
         invocation += param.name;
         invocation += '`'
+      } else if (isAsyncResult(param)) {
+        invocation += 'promise';
       } else {
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
@@ -359,46 +367,38 @@
     }
 
     invocation += '\n';
-    if (method.isFluent()) {
+    if (isFuture(method)) {
+      invocation += indentation;
+      invocation += 'promise.future\n';
+    } else if (method.isFluent()) {
       invocation += indentation;
       invocation += 'this\n';
     }
     invocation;
   }
 
-  def methodInvocationFuture(target, method) {
-    var invocation = 'future[' + futureType(method) + ']';
-    invocation += '(p => ' + target + '.' + method.name + '(';
-    var first = true;
-    for (param : method.params) {
-      if (first) {
-        first = false;
-      } else {
-        invocation += ', ';
-      }
 
-      if (isAsyncResult(param)) {
-        invocation += 'p'
-      } else {
-        if (param.name.equals("type")) {
-          invocation += '`' + param.name + '`';
-        } else {
-          invocation += param.name;
+  /* We change some methods to return a future instead of taking a async result handler as input
+     This results in conflicting methods that only differ in return parameter.
+     This method filters out the non async result version */
+  def includeMethod(method, instanceMethods) {
+    if (!isFuture(method)) {
+      for (m : instanceMethods) {
+        if (method != m &&
+            method.name == m.name  &&
+            isFuture(m) &&
+            method.params.size() == m.params.size() - 1) {
+          var i = 0;
+          while (i < method.params.size()) {
+            if (method.params.get(i) != m.params.get(i)) {
+              return true;
+            }
+            i = i + 1;
+          }
+          return false;
         }
       }
     }
-    invocation += '))\n';
-    invocation;
+    return true;
   }
-
-  def handlerLambda(method) {
-    var params = '';
-    for (param : method.params) {
-      if (isParamHandler(param)) {
-        params += '(' + param.name + ': ' + toScalaType(param.type) + ')';
-      }
-    }
-    params;
-  }
-  
 }

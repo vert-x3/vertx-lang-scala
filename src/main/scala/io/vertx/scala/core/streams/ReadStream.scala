@@ -67,60 +67,59 @@ object ReadStream {
   def apply[T](_asJava: io.vertx.core.streams.ReadStream[T]): io.vertx.scala.core.streams.ReadStream[T] =
     new ReadStreamImpl[T](_asJava)
 
-  private class ReadStreamImpl[T](private val _asJava: io.vertx.core.streams.ReadStream[T]) extends ReadStream[T] { 
-  def asJava: java.lang.Object = _asJava
+  private class ReadStreamImpl[T](private val _asJava: io.vertx.core.streams.ReadStream[T]) extends ReadStream[T] {
 
-  /**
-    * Set an exception handler on the read stream.
-    * @param handler the exception handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-    this
-  }
+    def asJava: java.lang.Object = _asJava
 
-  /**
-    * Set a data handler. As data is read, the handler will be called with the data.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def handler(handler: T => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.handler(funcToHandler(handler))
-    this
-  }
+    /**
+      * Set an exception handler on the read stream.
+      * @param handler the exception handler
+      * @return a reference to this, so the API can be used fluently
+      */
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+      this
+    }
 
-  /**
-    * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
-    * @return a reference to this, so the API can be used fluently
-    */
-  def pause(): io.vertx.scala.core.streams.ReadStream[T] = {
-    _asJava.pause()
-    this
-  }
+    /**
+      * Set a data handler. As data is read, the handler will be called with the data.
+      * @return a reference to this, so the API can be used fluently
+      */
+    def handler(handler: T => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.handler(funcToHandler(handler))
+      this
+    }
 
-  /**
-    * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def resume(): io.vertx.scala.core.streams.ReadStream[T] = {
-    _asJava.resume()
-    this
-  }
+    /**
+      * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
+      * @return a reference to this, so the API can be used fluently
+      */
+    def pause(): io.vertx.scala.core.streams.ReadStream[T] = {
+      _asJava.pause()
+      this
+    }
 
-  /**
-    * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
-    this
-  }
+    /**
+      * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
+      * @return a reference to this, so the API can be used fluently
+      */
+    def resume(): io.vertx.scala.core.streams.ReadStream[T] = {
+      _asJava.resume()
+      this
+    }
+
+    /**
+      * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
+      * @return a reference to this, so the API can be used fluently
+      */
+    def endHandler(endHandler: => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+      this
+    }
+
   }
 
 }

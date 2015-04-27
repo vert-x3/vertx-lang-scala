@@ -30,14 +30,12 @@ class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSoc
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.ServerWebSocketStream = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.ServerWebSocketStream = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.handler(funcToMappedHandler(ServerWebSocket.apply)(handler))
     this
   }
@@ -54,7 +52,6 @@ class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSoc
 
   def endHandler(endHandler: => Unit): io.vertx.scala.core.http.ServerWebSocketStream = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
   }

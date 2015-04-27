@@ -30,21 +30,18 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
   def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
   }

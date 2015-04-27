@@ -66,7 +66,6 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -86,14 +85,12 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
 
   def drainHandler(handler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
     this
   }
@@ -110,7 +107,6 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
 
   def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
   }
@@ -193,7 +189,6 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     */
   def continueHandler(handler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }

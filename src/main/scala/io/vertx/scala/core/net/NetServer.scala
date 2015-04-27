@@ -17,7 +17,6 @@
 package io.vertx.scala.core.net;
 
 import io.vertx.scala.core.metrics.Measured
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -54,107 +53,54 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     */
   def connectHandler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetServer = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler)))
   }
 
   /**
-    * Start listening on the port and host as configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
-    * creating the server.
-    * 
-    * The server may not be listening until some time after the call to listen has returned.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def listen(): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen()
-    this
-  }
-
-  /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
-    * @param listenHandler handler that will be notified when listening or failed
-    * @return a reference to this, so the API can be used fluently
+    * @return handler that will be notified when listening or failed
     */
-  def listen(listenHandler: Try[io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+  def listen(): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.listen(funcToMappedAsyncResultHandler(NetServer.apply)(listenHandler))
-    this
-  }
-
-  /**
-    * Start listening on the specified port and host, ignoring post and host configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
-    * creating the server.
-    * 
-    * Port `0` can be specified meaning "choose an random port".
-    * 
-    * Host `0.0.0.0` can be specified meaning "listen on all available interfaces".
-    * 
-    * The server may not be listening until some time after the call to listen has returned.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def listen(port: Int, host: String): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen(port, host)
-    this
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
+    _asJava.listen(promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
+    promise.future
   }
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @param host the host to listen on
-    * @param listenHandler handler that will be notified when listening or failed
-    * @return a reference to this, so the API can be used fluently
+    * @return handler that will be notified when listening or failed
     */
-  def listen(port: Int, host: String)(listenHandler: Try[io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+  def listen(port: Int, host: String): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.listen(port, host, funcToMappedAsyncResultHandler(NetServer.apply)(listenHandler))
-    this
-  }
-
-  /**
-    * Start listening on the specified port and host "0.0.0.0", ignoring post and host configured in the
-    * <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when creating the server.
-    * 
-    * Port `0` can be specified meaning "choose an random port".
-    * 
-    * The server may not be listening until some time after the call to listen has returned.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def listen(port: Int): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen(port)
-    this
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
+    _asJava.listen(port, host, promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
+    promise.future
   }
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
-    * @param listenHandler handler that will be notified when listening or failed
-    * @return a reference to this, so the API can be used fluently
+    * @return handler that will be notified when listening or failed
     */
-  def listen(port: Int)(listenHandler: Try[io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+  def listen(port: Int): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.listen(port, funcToMappedAsyncResultHandler(NetServer.apply)(listenHandler))
-    this
-  }
-
-  /**
-    * Close the server. This will close any currently open connections. The close may not complete until after this
-    * method has returned.
-    */
-  def close(): Unit = {
-    _asJava.close()
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
+    _asJava.listen(port, promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
+    promise.future
   }
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
-    * @param completionHandler the handler
+    * @return the handler
     */
-  def close(completionHandler: Try[Unit] => Unit): Unit = {
+  def close(): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.close(funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(completionHandler))
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.close(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
   }
 
   /**
