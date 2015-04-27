@@ -18,7 +18,6 @@ package io.vertx.scala.core.eventbus;
 
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.MultiMap
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -67,36 +66,16 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
   }
 
   /**
-    * Reply to this message.
-    * 
-    * If the message was sent specifying a reply handler, that handler will be
-    * called when it has received a reply. If the message wasn't sent specifying a receipt handler
-    * this method does nothing.
-    * @param message the message to reply with.
-    */
-  def reply(message: AnyRef): Unit = {
-    _asJava.reply(message)
-  }
-
-  /**
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
-    * @param replyHandler the reply handler for the reply.
+    * @return the reply handler for the reply.
     */
-  def reply[R](message: AnyRef)(replyHandler: Try[io.vertx.scala.core.eventbus.Message[R]] => Unit): Unit = {
+  def reply[R](message: AnyRef): scala.concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.reply(message, funcToMappedAsyncResultHandler(Message.apply[R])(replyHandler))
-  }
-
-  /**
-    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
-    * @param message the reply message
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    */
-  def reply(message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
-    _asJava.reply(message, options)
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.eventbus.Message[R]]()
+    _asJava.reply(message, promiseToMappedAsyncResultHandler(Message.apply[R])(promise))
+    promise.future
   }
 
   /**
@@ -104,12 +83,13 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * to receive the reply to the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @param replyHandler the reply handler for the reply.
+    * @return the reply handler for the reply.
     */
-  def reply[R](message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions)(replyHandler: Try[io.vertx.scala.core.eventbus.Message[R]] => Unit): Unit = {
+  def reply[R](message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.reply(message, options, funcToMappedAsyncResultHandler(Message.apply[R])(replyHandler))
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.eventbus.Message[R]]()
+    _asJava.reply(message, options, promiseToMappedAsyncResultHandler(Message.apply[R])(promise))
+    promise.future
   }
 
   /**

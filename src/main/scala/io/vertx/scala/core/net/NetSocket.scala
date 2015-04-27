@@ -19,7 +19,6 @@ package io.vertx.scala.core.net;
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.scala.core.streams.ReadStream
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -49,14 +48,12 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -73,7 +70,6 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
 
   def endHandler(endHandler: => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
   }
@@ -90,7 +86,6 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
 
   def drainHandler(handler: => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
@@ -130,28 +125,16 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   /**
-    * Tell the operating system to stream a file as specified by `filename` directly from disk to the outgoing connection,
-    * bypassing userspace altogether (where supported by the underlying operating system. This is a very efficient way to stream files.
-    * @param filename file name of the file to send
-    * @return a reference to this, so the API can be used fluently
-    */
-  def sendFile(filename: String): io.vertx.scala.core.net.NetSocket = {
-    _asJava.sendFile(filename)
-    this
-  }
-
-  /**
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
-    * @param resultHandler handler
-    * @return a reference to this, so the API can be used fluently
+    * @return handler
     */
-  def sendFile(filename: String)(resultHandler: Try[Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+  def sendFile(filename: String): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.sendFile(filename, funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(resultHandler))
-    this
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
   }
 
   /**
@@ -182,7 +165,6 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     */
   def closeHandler(handler: => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
@@ -194,7 +176,6 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     */
   def upgradeToSsl(handler: => Unit): io.vertx.scala.core.net.NetSocket = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }

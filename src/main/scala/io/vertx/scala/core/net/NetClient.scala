@@ -17,7 +17,6 @@
 package io.vertx.scala.core.net;
 
 import io.vertx.scala.core.metrics.Measured
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -48,13 +47,12 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
-    * @return a reference to this, so the API can be used fluently
     */
-  def connect(port: Int, host: String)(connectHandler: Try[io.vertx.scala.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
+  def connect(port: Int, host: String): scala.concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.connect(port, host, funcToMappedAsyncResultHandler(NetSocket.apply)(connectHandler))
-    this
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetSocket]()
+    _asJava.connect(port, host, promiseToMappedAsyncResultHandler(NetSocket.apply)(promise))
+    promise.future
   }
 
   /**

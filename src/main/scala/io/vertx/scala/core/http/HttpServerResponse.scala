@@ -19,7 +19,6 @@ package io.vertx.scala.core.http;
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.scala.core.MultiMap
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -57,7 +56,6 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -74,7 +72,6 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
 
   def drainHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
@@ -183,7 +180,6 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def closeHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
@@ -246,31 +242,16 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Ask the OS to stream a file as specified by `filename` directly
-    * from disk to the outgoing connection, bypassing userspace altogether
-    * (where supported by the underlying operating system.
-    * This is a very efficient way to serve files.
-    * The actual serve is asynchronous and may not complete until some time after this method has returned.
-    * @param filename path to the file to serve
-    * @return a reference to this, so the API can be used fluently
-    */
-  def sendFile(filename: String): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.sendFile(filename)
-    this
-  }
-
-  /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
-    * @param resultHandler handler that will be called on completion
-    * @return a reference to this, so the API can be used fluently
+    * @return handler that will be called on completion
     */
-  def sendFile(filename: String)(resultHandler: Try[Unit] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.sendFile(filename, funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(resultHandler))
-    this
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
   }
 
   /**
@@ -302,7 +283,6 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def headersEndHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }
@@ -316,7 +296,6 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def bodyEndHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
   }

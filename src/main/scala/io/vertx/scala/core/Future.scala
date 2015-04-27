@@ -16,7 +16,6 @@
 
 package io.vertx.scala.core;
 
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -42,12 +41,13 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * 
     * If the future has already been completed it will be called immediately. Otherwise it will be called when the
     * future is completed.
-    * @param handler the Handler that will be called with the result
+    * @return the Handler that will be called with the result
     */
-  def setHandler(handler: Try[T] => Unit): Unit = {
+  def setHandler(): scala.concurrent.Future[T] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.setHandler(funcToAsyncResultHandler(handler))
+    val promise = scala.concurrent.Promise[T]()
+    _asJava.setHandler(promiseToAsyncResultHandler(promise))
+    promise.future
   }
 
   /**
@@ -79,20 +79,20 @@ object Future {
 
   def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
     new io.vertx.scala.core.Future[T](_asJava)
-  
-    def future[T](): io.vertx.scala.core.Future[T] = {
-      Future.apply[T](io.vertx.core.Future.future())
-    }
-  
-    def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
-      Future.apply[T](io.vertx.core.Future.succeededFuture())
-    }
-  
-    def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
-      Future.apply[T](io.vertx.core.Future.succeededFuture(result))
-    }
-  
-    def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
-      Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
-    }
+
+  def future[T](): io.vertx.scala.core.Future[T] = {
+    Future.apply[T](io.vertx.core.Future.future())
+  }
+
+  def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
+    Future.apply[T](io.vertx.core.Future.succeededFuture())
+  }
+
+  def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
+    Future.apply[T](io.vertx.core.Future.succeededFuture(result))
+  }
+
+  def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
+    Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
+  }
 }

@@ -82,12 +82,12 @@ object Pump {
 
   def apply(_asJava: io.vertx.core.streams.Pump): io.vertx.scala.core.streams.Pump =
     new io.vertx.scala.core.streams.Pump(_asJava)
-  
-    def pump[T](rs: io.vertx.scala.core.streams.ReadStream[T], ws: io.vertx.scala.core.streams.WriteStream[T]): io.vertx.scala.core.streams.Pump = {
-      Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]]))
-    }
-  
-    def pump[T](rs: io.vertx.scala.core.streams.ReadStream[T], ws: io.vertx.scala.core.streams.WriteStream[T], writeQueueMaxSize: Int): io.vertx.scala.core.streams.Pump = {
-      Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]], writeQueueMaxSize))
-    }
+
+  def pump[T](rs: io.vertx.scala.core.streams.ReadStream[T], ws: io.vertx.scala.core.streams.WriteStream[T]): io.vertx.scala.core.streams.Pump = {
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]]))
+  }
+
+  def pump[T](rs: io.vertx.scala.core.streams.ReadStream[T], ws: io.vertx.scala.core.streams.WriteStream[T], writeQueueMaxSize: Int): io.vertx.scala.core.streams.Pump = {
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]], writeQueueMaxSize))
+  }
 }

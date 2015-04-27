@@ -61,7 +61,6 @@ class Context(private val _asJava: io.vertx.core.Context) {
     */
   def runOnContext(action: => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>action))
   }
 

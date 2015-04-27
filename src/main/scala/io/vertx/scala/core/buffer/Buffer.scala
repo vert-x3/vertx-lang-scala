@@ -326,20 +326,20 @@ object Buffer {
 
   def apply(_asJava: io.vertx.core.buffer.Buffer): io.vertx.scala.core.buffer.Buffer =
     new io.vertx.scala.core.buffer.Buffer(_asJava)
-  
-    def buffer(): io.vertx.scala.core.buffer.Buffer = {
-      Buffer.apply(io.vertx.core.buffer.Buffer.buffer())
-    }
-  
-    def buffer(initialSizeHint: Int): io.vertx.scala.core.buffer.Buffer = {
-      Buffer.apply(io.vertx.core.buffer.Buffer.buffer(initialSizeHint))
-    }
-  
-    def buffer(string: String): io.vertx.scala.core.buffer.Buffer = {
-      Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string))
-    }
-  
-    def buffer(string: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
-      Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string, enc))
-    }
+
+  def buffer(): io.vertx.scala.core.buffer.Buffer = {
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer())
+  }
+
+  def buffer(initialSizeHint: Int): io.vertx.scala.core.buffer.Buffer = {
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(initialSizeHint))
+  }
+
+  def buffer(string: String): io.vertx.scala.core.buffer.Buffer = {
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string))
+  }
+
+  def buffer(string: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string, enc))
+  }
 }

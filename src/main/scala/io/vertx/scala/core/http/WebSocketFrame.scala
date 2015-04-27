@@ -81,16 +81,16 @@ object WebSocketFrame {
 
   def apply(_asJava: io.vertx.core.http.WebSocketFrame): io.vertx.scala.core.http.WebSocketFrame =
     new io.vertx.scala.core.http.WebSocketFrame(_asJava)
-  
-    def binaryFrame(data: io.vertx.scala.core.buffer.Buffer, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
-      WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.binaryFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], isFinal))
-    }
-  
-    def textFrame(str: String, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
-      WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.textFrame(str, isFinal))
-    }
-  
-    def continuationFrame(data: io.vertx.scala.core.buffer.Buffer, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
-      WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.continuationFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], isFinal))
-    }
+
+  def binaryFrame(data: io.vertx.scala.core.buffer.Buffer, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
+    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.binaryFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], isFinal))
+  }
+
+  def textFrame(str: String, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
+    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.textFrame(str, isFinal))
+  }
+
+  def continuationFrame(data: io.vertx.scala.core.buffer.Buffer, isFinal: Boolean): io.vertx.scala.core.http.WebSocketFrame = {
+    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.continuationFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], isFinal))
+  }
 }

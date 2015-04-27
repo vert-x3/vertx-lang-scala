@@ -20,7 +20,6 @@ import io.vertx.scala.core.datagram.DatagramSocket
 import io.vertx.scala.core.http.HttpServer
 import io.vertx.scala.core.shareddata.SharedData
 import io.vertx.scala.core.eventbus.EventBus
-import scala.util.Try
 import io.vertx.core.http.HttpClientOptions
 import io.vertx.core.datagram.DatagramSocketOptions
 import io.vertx.scala.core.net.NetClient
@@ -208,7 +207,6 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def setTimer(delay: Long)(handler: Long => Unit): Long = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -231,7 +229,6 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def setPeriodic(delay: Long)(handler: Long => Unit): Long = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -261,41 +258,18 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     */
   def runOnContext(action: => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
     _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>action))
   }
 
   /**
-    * Stop the the Vertx instance and release any resources held by it.
-    * 
-    * The instance cannot be used after it has been closed.
-    * 
-    * The actual close is asynchronous and may not complete until after the call has returned.
-    */
-  def close(): Unit = {
-    _asJava.close()
-  }
-
-  /**
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
-    * @param completionHandler The handler will be notified when the close is complete.
+    * @return The handler will be notified when the close is complete.
     */
-  def close(completionHandler: Try[Unit] => Unit): Unit = {
+  def close(): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.close(funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(completionHandler))
-  }
-
-  /**
-    * Deploy a verticle instance given a name.
-    * 
-    * Given the name, Vert.x selects a  instance to use to instantiate the verticle.
-    * 
-    * For the rules on how factories are selected please consult the user manual.
-    * @param name the name.
-    */
-  def deployVerticle(name: String): Unit = {
-    _asJava.deployVerticle(name)
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.close(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
   }
 
   /**
@@ -306,12 +280,13 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * 
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
-    * @param completionHandler a handler which will be notified when the deployment is complete
+    * @return a handler which will be notified when the deployment is complete
     */
-  def deployVerticle(name: String)(completionHandler: Try[String] => Unit): Unit = {
+  def deployVerticle(name: String): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.deployVerticle(name, funcToAsyncResultHandler[java.lang.String](completionHandler))
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.deployVerticle(name, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
@@ -319,43 +294,25 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
+    * @return a handler which will be notified when the deployment is complete
     */
-  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions): Unit = {
-    _asJava.deployVerticle(name, options)
-  }
-
-  /**
-    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
-    * deployment.
-    * @param name the name
-    * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
-    * @param completionHandler a handler which will be notified when the deployment is complete
-    */
-  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions)(completionHandler: Try[String] => Unit): Unit = {
+  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions): scala.concurrent.Future[String] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.deployVerticle(name, options, funcToAsyncResultHandler[java.lang.String](completionHandler))
-  }
-
-  /**
-    * Undeploy a verticle deployment.
-    * 
-    * The actual undeployment happens asynchronously and may not complete until after the method has returned.
-    * @param deploymentID the deployment ID
-    */
-  def undeploy(deploymentID: String): Unit = {
-    _asJava.undeploy(deploymentID)
+    val promise = scala.concurrent.Promise[String]()
+    _asJava.deployVerticle(name, options, promiseToAsyncResultHandler[java.lang.String](promise))
+    promise.future
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx #undeploy(String)]] but the completionHandler will be notified when the undeployment is complete.
     * @param deploymentID the deployment ID
-    * @param completionHandler a handler which will be notified when the undeployment is complete
+    * @return a handler which will be notified when the undeployment is complete
     */
-  def undeploy(deploymentID: String)(completionHandler: Try[Unit] => Unit): Unit = {
+  def undeploy(deploymentID: String): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.undeploy(deploymentID, funcToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(completionHandler))
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.undeploy(deploymentID, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
   }
 
   /**
@@ -387,12 +344,13 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
     * method if it failed.
     * @param blockingCodeHandler handler representing the blocking code to run
-    * @param resultHandler handler that will be called when the blocking code is complete
+    * @return handler that will be called when the blocking code is complete
     */
-  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit)(resultHandler: Try[T] => Unit): Unit = {
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): scala.concurrent.Future[T] = {
     import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToAsyncResultHandler(resultHandler))
+    val promise = scala.concurrent.Promise[T]()
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseToAsyncResultHandler(promise))
+    promise.future
   }
 
 }
@@ -401,22 +359,23 @@ object Vertx {
 
   def apply(_asJava: io.vertx.core.Vertx): io.vertx.scala.core.Vertx =
     new io.vertx.scala.core.Vertx(_asJava)
-  
-    def vertx(): io.vertx.scala.core.Vertx = {
-      Vertx.apply(io.vertx.core.Vertx.vertx())
-    }
-  
-    def vertx(options: io.vertx.core.VertxOptions): io.vertx.scala.core.Vertx = {
-      Vertx.apply(io.vertx.core.Vertx.vertx(options))
-    }
-  
-    def clusteredVertx(options: io.vertx.core.VertxOptions)(resultHandler: Try[io.vertx.scala.core.Vertx] => Unit): Unit = {
-      import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    io.vertx.core.Vertx.clusteredVertx(options, funcToMappedAsyncResultHandler(Vertx.apply)(resultHandler))
-    }
-  
-    def currentContext(): io.vertx.scala.core.Context = {
-      Context.apply(io.vertx.core.Vertx.currentContext())
-    }
+
+  def vertx(): io.vertx.scala.core.Vertx = {
+    Vertx.apply(io.vertx.core.Vertx.vertx())
+  }
+
+  def vertx(options: io.vertx.core.VertxOptions): io.vertx.scala.core.Vertx = {
+    Vertx.apply(io.vertx.core.Vertx.vertx(options))
+  }
+
+  def clusteredVertx(options: io.vertx.core.VertxOptions): scala.concurrent.Future[io.vertx.scala.core.Vertx] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.Vertx]()
+    io.vertx.core.Vertx.clusteredVertx(options, promiseToMappedAsyncResultHandler(Vertx.apply)(promise))
+    promise.future
+  }
+
+  def currentContext(): io.vertx.scala.core.Context = {
+    Context.apply(io.vertx.core.Vertx.currentContext())
+  }
 }

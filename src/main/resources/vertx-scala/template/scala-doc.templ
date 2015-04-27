@@ -7,27 +7,37 @@
     commentedIndentation += "  *";
       
     if (method.doc != null) {
+      var returnType = method.returnType;
+      var returnDescription = method.returnDescription;
+
       doc += indentation;
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
       for (param : method.params) {
-        if (param.description != null) {
-          doc += commentedIndentation;
-          doc += " @param " + param.name + " ";
-          doc += convertLink(param.description);
-          if (param.type.kind == CLASS_DATA_OBJECT) {
-            doc += "see " + renderDataObjectHtmlLink(param.type);
+        if (!isAsyncResult(param)) {
+          if (param.description != null) {
+            doc += commentedIndentation;
+            doc += " @param " + param.name + " ";
+            doc += convertLink(param.description);
+            if (param.type.kind == CLASS_DATA_OBJECT) {
+              doc += "see " + renderDataObjectHtmlLink(param.type);
+            }
+            doc += "\n";
           }
-          doc += "\n";
-        }
+         } else {
+           /* TODO: Consider writing a common description for metods returning a future,
+                    instead of simply copying the comment from the original AsyncHandler */
+           returnType = param.type;
+           returnDescription = param.description;
+         }
       }
-      if (!method.returnType.name.equals("void")) {
-        if (method.returnDescription != null) {
+      if (!returnType.name.equals("void")) {
+        if (returnDescription != null) {
           doc += commentedIndentation;
           doc += " @return ";
-          doc += convertLink(method.returnDescription);
-          if (method.returnType.kind == CLASS_DATA_OBJECT) {
-            doc += "see " + renderDataObjectHtmlLink(method.returnType);
+          doc += convertLink(returnDescription);
+          if (returnType.kind == CLASS_DATA_OBJECT) {
+            doc += "see " + renderDataObjectHtmlLink(returnType);
           }
           doc += "\n";
         }

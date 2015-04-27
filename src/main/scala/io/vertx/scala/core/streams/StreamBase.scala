@@ -39,20 +39,21 @@ object StreamBase {
   def apply(_asJava: io.vertx.core.streams.StreamBase): io.vertx.scala.core.streams.StreamBase =
     new StreamBaseImpl(_asJava)
 
-  private class StreamBaseImpl(private val _asJava: io.vertx.core.streams.StreamBase) extends StreamBase { 
-  def asJava: java.lang.Object = _asJava
+  private class StreamBaseImpl(private val _asJava: io.vertx.core.streams.StreamBase) extends StreamBase {
 
-  /**
-    * Set an exception handler.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase = {
-    import io.vertx.lang.scala.HandlerOps._
-    import scala.collection.JavaConverters._
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-    this
-  }
+    def asJava: java.lang.Object = _asJava
+
+    /**
+      * Set an exception handler.
+      * @param handler the handler
+      * @return a reference to this, so the API can be used fluently
+      */
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase = {
+      import io.vertx.lang.scala.HandlerOps._
+      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+      this
+    }
+
   }
 
 }
