@@ -283,7 +283,8 @@
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
-          <!-- We have to run the annotation processor again to process docs -->
+<!-- Remove doc generation for now, since it depends on an "experiemental" vertx-codetrans
+          <!- We have to run the annotation processor again to process docs ->
           <execution>
             <id>docgen-docs</id>
             <goals>
@@ -301,7 +302,7 @@
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
-          <!-- We have to run the annotation processor again to process docoverride -->
+          <!- We have to run the annotation processor again to process docoverride ->
           <execution>
             <id>docgen-docoverride</id>
             <goals>
@@ -319,6 +320,7 @@
               <sourceDirectory>${project.basedir}/src/main/docoverride</sourceDirectory>
             </configuration>
           </execution>
+-->
         </executions>
         <dependencies>
           <dependency>
