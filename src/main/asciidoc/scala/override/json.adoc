@@ -1,3 +1,0 @@
-== JSON
-
-Todo json for Scala.

@@ -1,3 +1,0 @@
-=== Writing Verticles
-
-Todo verticles for Scala.
