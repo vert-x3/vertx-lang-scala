@@ -3,7 +3,7 @@ package io.vertx.lang.scala;
 import io.vertx.codegen.ClassKind;
 import io.vertx.codegen.TypeInfo;
 import io.vertx.codetrans.CodeTranslator;
-import io.vertx.codetrans.ScalaLang;
+//TODO import io.vertx.codetrans.ScalaLang;
 import io.vertx.docgen.Coordinate;
 import io.vertx.docgen.DocGenerator;
 
@@ -41,13 +41,15 @@ public class ScalaDocGenerator implements DocGenerator {
 
   @Override
   public String renderSource(ExecutableElement elt, String source) {
+    /* TODO
     ScalaLang lang = new ScalaLang();
     try {
       return translator.translate(elt, lang);
     } catch (Exception e) {
       System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName() + " : " + e.getMessage());
       return "Code not translatable";
-    }
+    }*/
+    return "Codetrans not implemented";
   }
 
   @Override

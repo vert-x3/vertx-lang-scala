@@ -139,6 +139,13 @@ class Context(private val _asJava: io.vertx.core.Context) {
     _asJava.remove(key)
   }
 
+  /**
+    * @return The Vertx instance that created the context
+    */
+  def owner(): io.vertx.scala.core.Vertx = {
+    Vertx.apply(_asJava.owner())
+  }
+
 }
 
 object Context {

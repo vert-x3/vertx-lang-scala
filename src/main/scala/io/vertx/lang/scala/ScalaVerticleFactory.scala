@@ -1,6 +1,7 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.{DeploymentOptions, Vertx, Verticle}
+import io.vertx.core.Future;
 import io.vertx.core.spi.VerticleFactory
 
 /**
@@ -36,5 +37,5 @@ class ScalaVerticleFactory extends VerticleFactory {
 
   override def requiresResolve(): Boolean = ???
 
-  override def resolve(identifier: String, deploymentOptions: DeploymentOptions, classLoader: ClassLoader): String = ???
+  override def resolve(identifier: String, deploymentOptions: DeploymentOptions, classLoader: ClassLoader, resolution: Future[String]): Unit = ???
 }
