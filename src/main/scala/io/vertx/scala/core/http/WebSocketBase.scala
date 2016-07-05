@@ -35,6 +35,11 @@ trait WebSocketBase
   def asJava: java.lang.Object
 
   /**
+  * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+  */
+  def end(t: io.vertx.scala.core.buffer.Buffer): Unit
+
+  /**
   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
   * @return true if write queue is full
   */
@@ -85,12 +90,26 @@ trait WebSocketBase
   def writeFrame(frame: io.vertx.scala.core.http.WebSocketFrame): io.vertx.scala.core.http.WebSocketBase
 
   /**
-  * Writes a (potentially large) piece of data to the connection. This data might be written as multiple frames
+  * Write a final WebSocket text frame to the connection
+  * @param text The text to write
+  * @return a reference to this, so the API can be used fluently
+  */
+  def writeFinalTextFrame(text: String): io.vertx.scala.core.http.WebSocketBase
+
+  /**
+  * Write a final WebSocket binary frame to the connection
+  * @param data The data to write
+  * @return a reference to this, so the API can be used fluently
+  */
+  def writeFinalBinaryFrame(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase
+
+  /**
+  * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
   * if it exceeds the maximum WebSocket frame size.
   * @param data the data to write
   * @return a reference to this, so the API can be used fluently
   */
-  def writeMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase
+  def writeBinaryMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase
 
   /**
   * Set a close handler. This will be called when the WebSocket is closed.
@@ -105,6 +124,11 @@ trait WebSocketBase
   * @return a reference to this, so the API can be used fluently
   */
   def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocketBase
+
+  /**
+  * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+  */
+  def end(): Unit
 
   /**
   * Close the WebSocket.
@@ -131,6 +155,13 @@ object WebSocketBase {
   private class WebSocketBaseImpl(private val _asJava: io.vertx.core.http.WebSocketBase) extends WebSocketBase {
 
     def asJava: java.lang.Object = _asJava
+
+    /**
+      * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+      */
+    def end(t: io.vertx.scala.core.buffer.Buffer): Unit = {
+      _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    }
 
     /**
       * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
@@ -220,13 +251,33 @@ object WebSocketBase {
     }
 
     /**
-      * Writes a (potentially large) piece of data to the connection. This data might be written as multiple frames
+      * Write a final WebSocket text frame to the connection
+      * @param text The text to write
+      * @return a reference to this, so the API can be used fluently
+      */
+    def writeFinalTextFrame(text: String): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.writeFinalTextFrame(text)
+      this
+    }
+
+    /**
+      * Write a final WebSocket binary frame to the connection
+      * @param data The data to write
+      * @return a reference to this, so the API can be used fluently
+      */
+    def writeFinalBinaryFrame(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+      this
+    }
+
+    /**
+      * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
       * if it exceeds the maximum WebSocket frame size.
       * @param data the data to write
       * @return a reference to this, so the API can be used fluently
       */
-    def writeMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
-      _asJava.writeMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    def writeBinaryMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase = {
+      _asJava.writeBinaryMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
       this
     }
 
@@ -250,6 +301,13 @@ object WebSocketBase {
       import io.vertx.lang.scala.HandlerOps._
       _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
       this
+    }
+
+    /**
+      * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+      */
+    def end(): Unit = {
+      _asJava.end()
     }
 
     /**

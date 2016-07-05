@@ -343,14 +343,71 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
     * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
     * method if it failed.
+    * 
+    * In the `blockingCodeHandler` the current context remains the original context and therefore any task
+    * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
     * @param blockingCodeHandler handler representing the blocking code to run
+    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return handler that will be called when the blocking code is complete
+    */
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): scala.concurrent.Future[T] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[T]()
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseToAsyncResultHandler(promise))
+    promise.future
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.Vertx#executeBlocking]] called with ordered = true.
     */
   def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): scala.concurrent.Future[T] = {
     import io.vertx.lang.scala.HandlerOps._
     val promise = scala.concurrent.Promise[T]()
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseToAsyncResultHandler(promise))
     promise.future
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
+    */
+  def createSharedWorkerExecutor(name: String): io.vertx.scala.core.WorkerExecutor = {
+    WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
+    */
+  def createSharedWorkerExecutor(name: String, poolSize: Int): io.vertx.scala.core.WorkerExecutor = {
+    WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize))
+  }
+
+  /**
+    * Create a named worker executor, the executor should be closed when it's not needed anymore to release
+    * resources.<p/>
+    *
+    * This method can be called mutiple times with the same `name`. Executors with the same name will share
+    * the same worker pool. The worker pool size and max execute time are set when the worker pool is created and
+    * won't change after.
+    *
+    * The worker pool is released when all the [[io.vertx.scala.core.WorkerExecutor]] sharing the same name are closed.
+    * @param name the name of the worker executor
+    * @param poolSize the size of the pool
+    * @param maxExecuteTime the value of max worker execute time, in ms
+    * @return the named worker executor
+    */
+  def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): io.vertx.scala.core.WorkerExecutor = {
+    WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize, maxExecuteTime))
+  }
+
+  /**
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
+    * @param handler the exception handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Vertx = {
+    import io.vertx.lang.scala.HandlerOps._
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    this
   }
 
 }

@@ -99,7 +99,7 @@ import @{importedType}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
@@ -112,7 +112,7 @@ import @{importedType}\n
 	}\n
 @else{}
 	object @{type.raw.simpleName} {\n\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);} =\n
 		    new @includeNamed{'writeImplType'}(_asJava)\n
 		\n
 		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n

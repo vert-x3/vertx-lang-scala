@@ -50,7 +50,7 @@ class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream)
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.net.NetSocketStream = {
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.net.NetSocketStream = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this

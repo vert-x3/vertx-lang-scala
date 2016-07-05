@@ -16,7 +16,9 @@
 
 package io.vertx.scala.core.buffer;
 
+import io.vertx.core.json.JsonArray
 import io.vertx.core.shareddata.impl.ClusterSerializable
+import io.vertx.core.json.JsonObject
 
 /**
   * Most data is shuffled around inside Vert.x using buffers.
@@ -31,10 +33,31 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   def asJava: java.lang.Object = _asJava
 
   /**
+    * Returns a `String` representation of the Buffer with the `UTF-8`encoding
+    */
+  def toString(): String = {
+    _asJava.toString()
+  }
+
+  /**
     * Returns a `String` representation of the Buffer with the encoding specified by `enc`
     */
   def toString(enc: String): String = {
     _asJava.toString(enc)
+  }
+
+  /**
+    * Returns a Json object representation of the Buffer
+    */
+  def toJsonObject(): io.vertx.core.json.JsonObject = {
+    _asJava.toJsonObject()
+  }
+
+  /**
+    * Returns a Json array representation of the Buffer
+    */
+  def toJsonArray(): io.vertx.core.json.JsonArray = {
+    _asJava.toJsonArray()
   }
 
   /**
@@ -45,6 +68,13 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Returns the unsigned `byte` at position `pos` in the Buffer, as a `short`.
+    */
+  def getUnsignedByte(pos: Int): Short = {
+    _asJava.getUnsignedByte(pos)
+  }
+
+  /**
     * Returns the `int` at position `pos` in the Buffer.
     */
   def getInt(pos: Int): Int = {
@@ -52,10 +82,38 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Gets a 32-bit integer at the specified absolute `index` in this buffer with Little Endian Byte Order.
+    */
+  def getIntLE(pos: Int): Int = {
+    _asJava.getIntLE(pos)
+  }
+
+  /**
+    * Returns the unsigned `int` at position `pos` in the Buffer, as a `long`.
+    */
+  def getUnsignedInt(pos: Int): Long = {
+    _asJava.getUnsignedInt(pos)
+  }
+
+  /**
+    * Returns the unsigned `int` at position `pos` in the Buffer, as a `long` in Little Endian Byte Order.
+    */
+  def getUnsignedIntLE(pos: Int): Long = {
+    _asJava.getUnsignedIntLE(pos)
+  }
+
+  /**
     * Returns the `long` at position `pos` in the Buffer.
     */
   def getLong(pos: Int): Long = {
     _asJava.getLong(pos)
+  }
+
+  /**
+    * Gets a 64-bit long integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
+    */
+  def getLongLE(pos: Int): Long = {
+    _asJava.getLongLE(pos)
   }
 
   /**
@@ -77,6 +135,55 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     */
   def getShort(pos: Int): Short = {
     _asJava.getShort(pos)
+  }
+
+  /**
+    * Gets a 16-bit short integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
+    */
+  def getShortLE(pos: Int): Short = {
+    _asJava.getShortLE(pos)
+  }
+
+  /**
+    * Returns the unsigned `short` at position `pos` in the Buffer, as an `int`.
+    */
+  def getUnsignedShort(pos: Int): Int = {
+    _asJava.getUnsignedShort(pos)
+  }
+
+  /**
+    * Gets an unsigned 16-bit short integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
+    */
+  def getUnsignedShortLE(pos: Int): Int = {
+    _asJava.getUnsignedShortLE(pos)
+  }
+
+  /**
+    * Gets a 24-bit medium integer at the specified absolute `index` in this buffer.
+    */
+  def getMedium(pos: Int): Int = {
+    _asJava.getMedium(pos)
+  }
+
+  /**
+    * Gets a 24-bit medium integer at the specified absolute `index` in this buffer in the Little Endian Byte Order.
+    */
+  def getMediumLE(pos: Int): Int = {
+    _asJava.getMediumLE(pos)
+  }
+
+  /**
+    * Gets an unsigned 24-bit medium integer at the specified absolute `index` in this buffer.
+    */
+  def getUnsignedMedium(pos: Int): Int = {
+    _asJava.getUnsignedMedium(pos)
+  }
+
+  /**
+    * Gets an unsigned 24-bit medium integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
+    */
+  def getUnsignedMediumLE(pos: Int): Int = {
+    _asJava.getUnsignedMediumLE(pos)
   }
 
   /**
@@ -133,11 +240,65 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Appends the specified unsigned `byte` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendUnsignedByte(b: Short): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendUnsignedByte(b)
+    this
+  }
+
+  /**
     * Appends the specified `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendInt(i: Int): io.vertx.scala.core.buffer.Buffer = {
     _asJava.appendInt(i)
+    this
+  }
+
+  /**
+    * Appends the specified `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendIntLE(i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendIntLE(i)
+    this
+  }
+
+  /**
+    * Appends the specified unsigned `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendUnsignedInt(i: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendUnsignedInt(i)
+    this
+  }
+
+  /**
+    * Appends the specified unsigned `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendUnsignedIntLE(i: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendUnsignedIntLE(i)
+    this
+  }
+
+  /**
+    * Appends the specified 24bit `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendMedium(i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendMedium(i)
+    this
+  }
+
+  /**
+    * Appends the specified 24bit `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendMediumLE(i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendMediumLE(i)
     this
   }
 
@@ -151,11 +312,47 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Appends the specified `long` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendLongLE(l: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendLongLE(l)
+    this
+  }
+
+  /**
     * Appends the specified `short` to the end of the Buffer.The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendShort(s: Short): io.vertx.scala.core.buffer.Buffer = {
     _asJava.appendShort(s)
+    this
+  }
+
+  /**
+    * Appends the specified `short` to the end of the Buffer in the Little Endian Byte Order.The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendShortLE(s: Short): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendShortLE(s)
+    this
+  }
+
+  /**
+    * Appends the specified unsigned `short` to the end of the Buffer.The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendUnsignedShort(s: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendUnsignedShort(s)
+    this
+  }
+
+  /**
+    * Appends the specified unsigned `short` to the end of the Buffer in the Little Endian Byte Order.The buffer will expand as necessary to accommodate any bytes written.
+    * Returns a reference to `this` so multiple operations can be appended together.
+    */
+  def appendUnsignedShortLE(s: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.appendUnsignedShortLE(s)
     this
   }
 
@@ -207,6 +404,15 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Sets the unsigned `byte` at position `pos` in the Buffer to the value `b`.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setUnsignedByte(pos: Int, b: Short): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setUnsignedByte(pos, b)
+    this
+  }
+
+  /**
     * Sets the `int` at position `pos` in the Buffer to the value `i`.
     * The buffer will expand as necessary to accommodate any value written.
     */
@@ -216,11 +422,65 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   }
 
   /**
+    * Sets the `int` at position `pos` in the Buffer to the value `i` in the Little Endian Byte Order.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setIntLE(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setIntLE(pos, i)
+    this
+  }
+
+  /**
+    * Sets the unsigned `int` at position `pos` in the Buffer to the value `i`.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setUnsignedInt(pos: Int, i: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setUnsignedInt(pos, i)
+    this
+  }
+
+  /**
+    * Sets the unsigned `int` at position `pos` in the Buffer to the value `i` in the Little Endian Byte Order.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setUnsignedIntLE(pos: Int, i: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setUnsignedIntLE(pos, i)
+    this
+  }
+
+  /**
+    * Sets the 24bit `int` at position `pos` in the Buffer to the value `i`.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setMedium(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setMedium(pos, i)
+    this
+  }
+
+  /**
+    * Sets the 24bit `int` at position `pos` in the Buffer to the value `i`. in the Little Endian Byte Order
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setMediumLE(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setMediumLE(pos, i)
+    this
+  }
+
+  /**
     * Sets the `long` at position `pos` in the Buffer to the value `l`.
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setLong(pos: Int, l: Long): io.vertx.scala.core.buffer.Buffer = {
     _asJava.setLong(pos, l)
+    this
+  }
+
+  /**
+    * Sets the `long` at position `pos` in the Buffer to the value `l` in the Little Endian Byte Order.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setLongLE(pos: Int, l: Long): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setLongLE(pos, l)
     this
   }
 
@@ -248,6 +508,33 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     */
   def setShort(pos: Int, s: Short): io.vertx.scala.core.buffer.Buffer = {
     _asJava.setShort(pos, s)
+    this
+  }
+
+  /**
+    * Sets the `short` at position `pos` in the Buffer to the value `s` in the Little Endian Byte Order.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setShortLE(pos: Int, s: Short): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setShortLE(pos, s)
+    this
+  }
+
+  /**
+    * Sets the unsigned `short` at position `pos` in the Buffer to the value `s`.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setUnsignedShort(pos: Int, s: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setUnsignedShort(pos, s)
+    this
+  }
+
+  /**
+    * Sets the unsigned `short` at position `pos` in the Buffer to the value `s` in the Little Endian Byte Order.
+    * The buffer will expand as necessary to accommodate any value written.
+    */
+  def setUnsignedShortLE(pos: Int, s: Int): io.vertx.scala.core.buffer.Buffer = {
+    _asJava.setUnsignedShortLE(pos, s)
     this
   }
 

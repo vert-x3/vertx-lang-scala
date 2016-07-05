@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http;
 
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
@@ -62,6 +63,13 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     import io.vertx.lang.scala.HandlerOps._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
+  }
+
+  /**
+    * @return the version of the response
+    */
+  def version(): io.vertx.core.http.HttpVersion = {
+    _asJava.version()
   }
 
   /**
@@ -128,6 +136,17 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   def bodyHandler(bodyHandler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
+    this
+  }
+
+  /**
+    * Set an custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
+    * frame. HTTP/2 permits extension of the protocol.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def customFrameHandler(handler: io.vertx.scala.core.http.HttpFrame => Unit): io.vertx.scala.core.http.HttpClientResponse = {
+    import io.vertx.lang.scala.HandlerOps._
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }
 

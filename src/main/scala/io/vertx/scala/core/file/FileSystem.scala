@@ -187,8 +187,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Change the ownership on the file represented by `path` to `user` and {code group}, asynchronously.
     * @param path the path to the file
-    * @param user the user name
-    * @param group the user group
+    * @param user the user name, {@code null} will not change the user name
+    * @param group the user group, {@code null} will not change the user group name
     * @return the handler that will be called on completion
     */
   def chown(path: String, user: String, group: String): scala.concurrent.Future[Unit] = {
@@ -199,7 +199,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem#chown]]
+    * Blocking version of 
     *
     */
   def chownBlocking(path: String, user: String, group: String): io.vertx.scala.core.file.FileSystem = {

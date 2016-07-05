@@ -43,7 +43,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
-    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
+    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
     * @return the request stream
     */
   def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
@@ -57,12 +57,23 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def requestHandler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServer = {
     import io.vertx.lang.scala.HandlerOps._
-    HttpServer.apply(_asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler)))
+    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
+    this
+  }
+
+  /**
+    * Set a connection handler for the server.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpServer = {
+    import io.vertx.lang.scala.HandlerOps._
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    this
   }
 
   /**
     * Return the websocket stream for the server. If a websocket connect handshake is successful a
-    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
+    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
     * @return the websocket stream
     */
   def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
@@ -76,7 +87,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def websocketHandler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.HttpServer = {
     import io.vertx.lang.scala.HandlerOps._
-    HttpServer.apply(_asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler)))
+    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
+    this
   }
 
   /**
@@ -125,6 +137,15 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     val promise = scala.concurrent.Promise[Unit]()
     _asJava.close(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
     promise.future
+  }
+
+  /**
+    * The actual port the server is listening on. This is useful if you bound the server specifying 0 as port number
+    * signifying an ephemeral port
+    * @return the actual port the server is listening on.
+    */
+  def actualPort(): Int = {
+    _asJava.actualPort()
   }
 
 }

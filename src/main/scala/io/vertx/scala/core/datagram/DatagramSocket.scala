@@ -50,7 +50,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
 
   /**
     * Write the given [[io.vertx.scala.core.buffer.Buffer]] to the [[io.vertx.scala.core.net.SocketAddress]].
-    * The [[io.vertx.core.Handler]] will be notified once the write completes.
+    * The [[io.vertx.scala.core.Handler]] will be notified once the write completes.
     * @param packet the [[io.vertx.scala.core.buffer.Buffer]] to write
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
@@ -75,7 +75,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   }
 
   /**
-    * Write the given  to the [[io.vertx.scala.core.net.SocketAddress]] using UTF8 encoding.
+    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using UTF8 encoding.
     * The  will be notified once the write completes.
     * @param str the [[String]] to write
     * @param port the host port of the remote peer
@@ -90,7 +90,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   }
 
   /**
-    * Write the given  to the [[io.vertx.scala.core.net.SocketAddress]] using the given encoding.
+    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using the given encoding.
     * The  will be notified once the write completes.
     * @param str the [[String]] to write
     * @param enc the charset used for encoding

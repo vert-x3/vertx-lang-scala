@@ -30,11 +30,31 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   def asJava: java.lang.Object = _asJava
 
   /**
+    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+    */
+  def end(t: T): Unit = {
+    _asJava.end(t)
+  }
+
+  /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
+  }
+
+  /**
+    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
+    * @param message the message to send
+    * @return reference to this for fluency
+    */
+  def send(message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message))
+  }
+
+  def send[R](message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message, promiseToMappedAsyncResultHandler(Message.apply[R])(promise)))
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
@@ -53,7 +73,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     this
   }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
@@ -76,10 +96,24 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     _asJava.address()
   }
 
+  /**
+    * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
+    */
+  def end(): Unit = {
+    _asJava.end()
+  }
+
+  /**
+    * Closes the producer, this method should be called when the message producer is not used anymore.
+    */
+  def close(): Unit = {
+    _asJava.close()
+  }
+
 }
 
 object MessageProducer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): io.vertx.scala.core.eventbus.MessageProducer[T] =
-    new io.vertx.scala.core.eventbus.MessageProducer[T](_asJava)
+    new io.vertx.scala.core.eventbus.MessageProducer(_asJava)
 }

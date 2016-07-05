@@ -8,6 +8,9 @@ import io.vertx.core.AsyncResult
 
 object HandlerOps {
 
+  def handlerToFunc[J](handler: Handler[J]): J => Unit =
+    (pa:J) => handler.handle(pa)
+
   def funcToHandler[J](f: J => Unit): Handler[J] =
       new Handler[J]() {
     override def handle(event: J): Unit = f(event)
