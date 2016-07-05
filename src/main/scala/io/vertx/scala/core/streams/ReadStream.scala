@@ -27,7 +27,7 @@ import io.vertx.core.Handler
 trait ReadStream[T] 
     extends io.vertx.scala.core.streams.StreamBase {
 
-  def asJava: java.lang.Object
+  def asJava: io.vertx.core.streams.ReadStream[T]
 
   /**
   * Set an exception handler on the read stream.
@@ -58,13 +58,13 @@ trait ReadStream[T]
   * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
   * @return a reference to this, so the API can be used fluently
   */
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.streams.ReadStream[T]
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.streams.ReadStream[T]
 
 }
 
 object ReadStream {
 
-  def apply[T](_asJava: io.vertx.core.streams.ReadStream[T]): io.vertx.scala.core.streams.ReadStream[T] =
+  def apply[T](_asJava: io.vertx.core.streams.ReadStream[T]): io.vertx.scala.core.streams.ReadStream =
     new ReadStreamImpl[T](_asJava)
 
   private class ReadStreamImpl[T](private val _asJava: io.vertx.core.streams.ReadStream[T]) extends ReadStream[T] {
@@ -114,7 +114,7 @@ object ReadStream {
       * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
       * @return a reference to this, so the API can be used fluently
       */
-    def endHandler(endHandler: => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
+    def endHandler(endHandler: () => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
       import io.vertx.lang.scala.HandlerOps._
       _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
       this

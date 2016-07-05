@@ -20,9 +20,9 @@ import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
 
 /**
-  * The execution context of a [[io.vertx.core.Handler]] execution.
+  * The execution context of a [[io.vertx.scala.core.Handler]] execution.
   * 
-  * When Vert.x provides an event to a handler or calls the start or stop methods of a [[io.vertx.core.Verticle]],
+  * When Vert.x provides an event to a handler or calls the start or stop methods of a [[io.vertx.scala.core.Verticle]],
   * the execution is associated with a `Context`.
   * 
   * Usually a context is an *event-loop context* and is tied to a specific event loop thread. So executions for that
@@ -59,9 +59,43 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * Run the specified action asynchronously on the same context, some time after the current execution has completed.
     * @param action the action to run
     */
-  def runOnContext(action: => Unit): Unit = {
+  def runOnContext(action: () => Unit): Unit = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>action))
+  }
+
+  /**
+    * Safely execute some blocking code.
+    * 
+    * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+    * 
+    * When the code is complete the handler `resultHandler` will be called with the result on the original context
+    * (e.g. on the original event loop of the caller).
+    * 
+    * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
+    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+    * method if it failed.
+    * @param blockingCodeHandler handler representing the blocking code to run
+    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+    * @return handler that will be called when the blocking code is complete
+    */
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): scala.concurrent.Future[T] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[T]()
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseToAsyncResultHandler(promise))
+    promise.future
+  }
+
+  /**
+    * Invoke [[io.vertx.scala.core.Context#executeBlocking]] with order = true.
+    * @param blockingCodeHandler handler representing the blocking code to run
+    * @return handler that will be called when the blocking code is complete
+    */
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): scala.concurrent.Future[T] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[T]()
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseToAsyncResultHandler(promise))
+    promise.future
   }
 
   /**
@@ -90,24 +124,35 @@ class Context(private val _asJava: io.vertx.core.Context) {
   }
 
   /**
-    * @return true if this is an event loop context, false otherwise
+    * Is the current context an event loop context?
+    * 
+    * NOTE! when running blocking code using [[io.vertx.scala.core.Vertx#executeBlocking]] from a
+    * standard (not worker) verticle, the context will still an event loop context and this 
+    * will return true.
+    * @return true if false otherwise
     */
   def isEventLoopContext(): Boolean = {
     _asJava.isEventLoopContext()
   }
 
   /**
-    * @return true if this is an worker context, false otherwise
+    * Is the current context a worker context?
+    * 
+    * NOTE! when running blocking code using [[io.vertx.scala.core.Vertx#executeBlocking]] from a
+    * standard (not worker) verticle, the context will still an event loop context and this 
+    * will return false.
+    * @return true if the current context is a worker context, false otherwise
     */
-  def isWorker(): Boolean = {
-    _asJava.isWorker()
+  def isWorkerContext(): Boolean = {
+    _asJava.isWorkerContext()
   }
 
   /**
-    * @return true if this is a multi-threaded worker context, false otherwise
+    * Is the current context a multi-threaded worker context?
+    * @return true if the current context is a multi-threaded worker context, false otherwise
     */
-  def isMultiThreaded(): Boolean = {
-    _asJava.isMultiThreaded()
+  def isMultiThreadedWorkerContext(): Boolean = {
+    _asJava.isMultiThreadedWorkerContext()
   }
 
   /**
@@ -146,10 +191,43 @@ class Context(private val _asJava: io.vertx.core.Context) {
     Vertx.apply(_asJava.owner())
   }
 
+  /**
+    * @return  the number of instances of the verticle that were deployed in the deployment (if any) related
+    * to this context
+    */
+  def getInstanceCount(): Int = {
+    _asJava.getInstanceCount()
+  }
+
+  /**
+    * Set an exception handler called when the context runs an action throwing an uncaught throwable.<p/>
+    *
+    * When this handler is called, [[io.vertx.scala.core.Vertx#currentContext]] will return this context.
+    * @param handler the exception handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Context = {
+    import io.vertx.lang.scala.HandlerOps._
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    this
+  }
+
 }
 
 object Context {
 
   def apply(_asJava: io.vertx.core.Context): io.vertx.scala.core.Context =
     new io.vertx.scala.core.Context(_asJava)
+
+  def isOnWorkerThread(): Boolean = {
+    io.vertx.core.Context.isOnWorkerThread()
+  }
+
+  def isOnEventLoopThread(): Boolean = {
+    io.vertx.core.Context.isOnEventLoopThread()
+  }
+
+  def isOnVertxThread(): Boolean = {
+    io.vertx.core.Context.isOnVertxThread()
+  }
 }

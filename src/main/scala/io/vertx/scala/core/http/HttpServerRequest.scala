@@ -84,6 +84,27 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   /**
+    * @return the HTTP method as sent by the client
+    */
+  def rawMethod(): String = {
+    _asJava.rawMethod()
+  }
+
+  /**
+    * @return true if this [[io.vertx.scala.core.net.NetSocket]] is encrypted via SSL/TLS
+    */
+  def isSSL(): Boolean = {
+    _asJava.isSSL()
+  }
+
+  /**
+    * @return the scheme of the request
+    */
+  def scheme(): String = {
+    _asJava.scheme()
+  }
+
+  /**
     * @return the URI of the request. This is usually a relative URI
     */
   def uri(): String = {
@@ -102,6 +123,13 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     */
   def query(): String = {
     _asJava.query()
+  }
+
+  /**
+    * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
+    */
+  def host(): String = {
+    _asJava.host()
   }
 
   /**
@@ -260,6 +288,24 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     */
   def isEnded(): Boolean = {
     _asJava.isEnded()
+  }
+
+  /**
+    * Set a custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
+    * frame. HTTP/2 permits extension of the protocol.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def customFrameHandler(handler: io.vertx.scala.core.http.HttpFrame => Unit): io.vertx.scala.core.http.HttpServerRequest = {
+    import io.vertx.lang.scala.HandlerOps._
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
+    this
+  }
+
+  /**
+    * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
+    */
+  def connection(): io.vertx.scala.core.http.HttpConnection = {
+    HttpConnection.apply(_asJava.connection())
   }
 
 }

@@ -47,6 +47,18 @@ trait WriteStream[T]
   def write(data: T): io.vertx.scala.core.streams.WriteStream[T]
 
   /**
+  * Ends the stream.
+  * 
+  * Once the stream has ended, it cannot be used any more.
+  */
+  def end(): Unit
+
+  /**
+  * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+  */
+  def end(t: T): Unit
+
+  /**
   * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
   * if there is more than `maxSize` bytes in the write queue. This is used as an indicator by classes such as
   * `Pump` to provide flow control.
@@ -101,6 +113,22 @@ object WriteStream {
     def write(data: T): io.vertx.scala.core.streams.WriteStream[T] = {
       _asJava.write(data)
       this
+    }
+
+    /**
+      * Ends the stream.
+      * 
+      * Once the stream has ended, it cannot be used any more.
+      */
+    def end(): Unit = {
+      _asJava.end()
+    }
+
+    /**
+      * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+      */
+    def end(t: T): Unit = {
+      _asJava.end(t)
     }
 
     /**

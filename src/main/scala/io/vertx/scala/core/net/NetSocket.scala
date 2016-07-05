@@ -39,6 +39,13 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   def asJava: java.lang.Object = _asJava
 
   /**
+    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
+    */
+  def end(t: io.vertx.scala.core.buffer.Buffer): Unit = {
+    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  }
+
+  /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
@@ -104,7 +111,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   /**
-    * Write a  to the connection, encoded in UTF-8.
+    * Write a String to the connection, encoded in UTF-8.
     * @param str the string to write
     * @return a reference to this, so the API can be used fluently
     */
@@ -114,7 +121,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   /**
-    * Write a  to the connection, encoded using the encoding `enc`.
+    * Write a String to the connection, encoded using the encoding `enc`.
     * @param str the string to write
     * @param enc the encoding to use
     * @return a reference to this, so the API can be used fluently
@@ -138,6 +145,35 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   /**
+    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * a failure has occurred
+    * @param filename file name of the file to send
+    * @param offset offset
+    * @return handler
+    */
+  def sendFile(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, offset, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
+  }
+
+  /**
+    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * a failure has occurred
+    * @param filename file name of the file to send
+    * @param offset offset
+    * @param length length
+    * @return handler
+    */
+  def sendFile(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, offset, length, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
+  }
+
+  /**
     * @return the remote address for this socket
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
@@ -149,6 +185,13 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
+  }
+
+  /**
+    * Calls [[io.vertx.scala.core.net.NetSocket#close]]
+    */
+  def end(): Unit = {
+    _asJava.end()
   }
 
   /**

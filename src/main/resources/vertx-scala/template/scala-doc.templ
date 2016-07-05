@@ -63,15 +63,15 @@
     var transformedDoc = '';
     
     var start = 0;
-    var index = doc.indexOf(linkText);
+    var index = doc.value.indexOf(linkText);
     while (index >= 0) {
-       var end = doc.indexOf("}", index);
-       transformedDoc += doc.substring(start, index) + toScalaDocType(doc.substring(index + 1 + linkText.length(), end));
+       var end = doc.value.indexOf("}", index);
+       transformedDoc += doc.value.substring(start, index) + toScalaDocType(doc.value.substring(index + 1 + linkText.length(), end));
        start = end + 1;
-       index = doc.indexOf(linkText, start);
+       index = doc.value.indexOf(linkText, start);
     }
     
-    transformedDoc += doc.substring(start, doc.length());
+    transformedDoc += doc.value.substring(start, doc.value.length());
     return transformedDoc;
   }
 

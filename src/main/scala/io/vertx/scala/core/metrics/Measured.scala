@@ -22,7 +22,7 @@ package io.vertx.scala.core.metrics;
   */
 trait Measured {
 
-  def asJava: java.lang.Object
+  def asJava: io.vertx.core.metrics.Measured
 
   /**
   * Whether the metrics are enabled for this measured object

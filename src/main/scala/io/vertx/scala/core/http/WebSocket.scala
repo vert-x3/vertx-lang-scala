@@ -29,6 +29,13 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   def asJava: java.lang.Object = _asJava
 
   /**
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+    */
+  def end(t: io.vertx.scala.core.buffer.Buffer): Unit = {
+    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  }
+
+  /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
@@ -59,6 +66,13 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     */
   def textHandlerID(): String = {
     _asJava.textHandlerID()
+  }
+
+  /**
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+    */
+  def end(): Unit = {
+    _asJava.end()
   }
 
   /**
@@ -104,7 +118,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.WebSocket = {
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocket = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
     this
@@ -120,7 +134,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     this
   }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.http.WebSocket = {
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocket = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this
@@ -131,12 +145,22 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     this
   }
 
-  def writeMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocket = {
-    _asJava.writeMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def writeFinalTextFrame(text: String): io.vertx.scala.core.http.WebSocket = {
+    _asJava.writeFinalTextFrame(text)
     this
   }
 
-  def closeHandler(handler: => Unit): io.vertx.scala.core.http.WebSocket = {
+  def writeFinalBinaryFrame(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocket = {
+    _asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    this
+  }
+
+  def writeBinaryMessage(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocket = {
+    _asJava.writeBinaryMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    this
+  }
+
+  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocket = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
     this

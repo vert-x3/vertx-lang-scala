@@ -109,5 +109,5 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
 object Message {
 
   def apply[T](_asJava: io.vertx.core.eventbus.Message[T]): io.vertx.scala.core.eventbus.Message[T] =
-    new io.vertx.scala.core.eventbus.Message[T](_asJava)
+    new io.vertx.scala.core.eventbus.Message(_asJava)
 }

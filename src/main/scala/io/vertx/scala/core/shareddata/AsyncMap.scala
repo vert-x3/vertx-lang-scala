@@ -56,13 +56,13 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * failure will be passed to the handler
     * @param k the key
     * @param v the value
-    * @param timeout the timoeout, in ms
+    * @param ttl The time to live (in ms) for the entry
     * @return the handler
     */
-  def put(k: K, v: V, timeout: Long): scala.concurrent.Future[Unit] = {
+  def put(k: K, v: V, ttl: Long): scala.concurrent.Future[Unit] = {
     import io.vertx.lang.scala.HandlerOps._
     val promise = scala.concurrent.Promise[Unit]()
-    _asJava.put(k, v, timeout, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    _asJava.put(k, v, ttl, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
     promise.future
   }
 
@@ -85,13 +85,13 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * failure will be passed to the handler
     * @param k the key
     * @param v the value
-    * @param timeout the timeout, in ms
+    * @param ttl The time to live (in ms) for the entry
     * @return the handler
     */
-  def putIfAbsent(k: K, v: V, timeout: Long): scala.concurrent.Future[V] = {
+  def putIfAbsent(k: K, v: V, ttl: Long): scala.concurrent.Future[V] = {
     import io.vertx.lang.scala.HandlerOps._
     val promise = scala.concurrent.Promise[V]()
-    _asJava.putIfAbsent(k, v, timeout, promiseToAsyncResultHandler(promise))
+    _asJava.putIfAbsent(k, v, ttl, promiseToAsyncResultHandler(promise))
     promise.future
   }
 
@@ -173,6 +173,6 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
 
 object AsyncMap {
 
-  def apply[K, V](_asJava: io.vertx.core.shareddata.AsyncMap[K,V]): io.vertx.scala.core.shareddata.AsyncMap[K, V] =
-    new io.vertx.scala.core.shareddata.AsyncMap[K, V](_asJava)
+  def apply[K, V](_asJava: io.vertx.core.shareddata.AsyncMap[K, V]): io.vertx.scala.core.shareddata.AsyncMap[K, V] =
+    new io.vertx.scala.core.shareddata.AsyncMap(_asJava)
 }

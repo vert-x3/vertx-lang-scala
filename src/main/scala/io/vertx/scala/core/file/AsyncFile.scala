@@ -36,6 +36,13 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   def asJava: java.lang.Object = _asJava
 
   /**
+    * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.
+    */
+  def end(t: io.vertx.scala.core.buffer.Buffer): Unit = {
+    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  }
+
+  /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
@@ -85,6 +92,13 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
+  }
+
+  /**
+    * Close the file, see [[io.vertx.scala.core.file.AsyncFile#close]].
+    */
+  def end(): Unit = {
+    _asJava.end()
   }
 
   /**
@@ -169,6 +183,17 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def setWritePos(writePos: Long): io.vertx.scala.core.file.AsyncFile = {
     _asJava.setWritePos(writePos)
+    this
+  }
+
+  /**
+    * Sets the buffer size that will be used to read the data from the file. Changing this value will impact how much
+    * the data will be read at a time from the file system.
+    * @param readBufferSize the buffer size
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setReadBufferSize(readBufferSize: Int): io.vertx.scala.core.file.AsyncFile = {
+    _asJava.setReadBufferSize(readBufferSize)
     this
   }
 

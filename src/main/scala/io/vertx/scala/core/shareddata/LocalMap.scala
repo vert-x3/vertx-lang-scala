@@ -132,6 +132,6 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
 
 object LocalMap {
 
-  def apply[K, V](_asJava: io.vertx.core.shareddata.LocalMap[K,V]): io.vertx.scala.core.shareddata.LocalMap[K, V] =
-    new io.vertx.scala.core.shareddata.LocalMap[K, V](_asJava)
+  def apply[K, V](_asJava: io.vertx.core.shareddata.LocalMap[K, V]): io.vertx.scala.core.shareddata.LocalMap[K, V] =
+    new io.vertx.scala.core.shareddata.LocalMap(_asJava)
 }

@@ -189,14 +189,23 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
   }
 
   /**
-    * Close the event bus and release any resources held
-    * @return may be {@code null}
+    * Add an interceptor that will be called whenever a message is sent from Vert.x
+    * @param interceptor the interceptor
+    * @return a reference to this, so the API can be used fluently
     */
-  def close(): scala.concurrent.Future[Unit] = {
+  def addInterceptor[T](interceptor: io.vertx.scala.core.eventbus.SendContext[T] => Unit): io.vertx.scala.core.eventbus.EventBus = {
     import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.close(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+    EventBus.apply(_asJava.addInterceptor(funcToMappedHandler(SendContext.apply)(interceptor)))
+  }
+
+  /**
+    * Remove an interceptor
+    * @param interceptor the interceptor
+    * @return a reference to this, so the API can be used fluently
+    */
+  def removeInterceptor(interceptor: io.vertx.scala.core.eventbus.SendContext => Unit): io.vertx.scala.core.eventbus.EventBus = {
+    import io.vertx.lang.scala.HandlerOps._
+    EventBus.apply(_asJava.removeInterceptor(funcToMappedHandler(SendContext.apply)(interceptor)))
   }
 
 }

@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.http.HttpMethod
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
 
@@ -185,7 +186,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Write a  to the response body, encoded using the encoding `enc`.
+    * Write a String to the response body, encoded using the encoding `enc`.
     * @param chunk the string to write
     * @param enc the encoding to use
     * @return a reference to this, so the API can be used fluently
@@ -196,12 +197,22 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Write a  to the response body, encoded in UTF-8.
+    * Write a String to the response body, encoded in UTF-8.
     * @param chunk the string to write
     * @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.write(chunk)
+    this
+  }
+
+  /**
+    * Used to write an interim 100 Continue response to signify that the client should send the rest of the request.
+    * Must only be used if the request contains an "Expect:100-Continue" header
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writeContinue(): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.writeContinue()
     this
   }
 
@@ -255,6 +266,35 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
+    * written to the wire.
+    * @param filename path to the file to serve
+    * @param offset the offset to serve from
+    * @return handler that will be called on completion
+    */
+  def sendFile(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, offset, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been
+    * completely written to the wire.
+    * @param filename path to the file to serve
+    * @param offset the offset to serve from
+    * @param length the length to serve to
+    * @return handler that will be called on completion
+    */
+  def sendFile(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[Unit]()
+    _asJava.sendFile(filename, offset, length, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
+    promise.future
+  }
+
+  /**
     * Close the underlying TCP connection corresponding to the request.
     */
   def close(): Unit = {
@@ -266,6 +306,13 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def ended(): Boolean = {
     _asJava.ended()
+  }
+
+  /**
+    * @return has the underlying TCP connection corresponding to the request already been closed?
+    */
+  def closed(): Boolean = {
+    _asJava.closed()
   }
 
   /**
@@ -297,6 +344,91 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   def bodyEndHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     import io.vertx.lang.scala.HandlerOps._
     _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+    this
+  }
+
+  /**
+    * @return the total number of bytes written for the body of the response.
+    */
+  def bytesWritten(): Long = {
+    _asJava.bytesWritten()
+  }
+
+  /**
+    * @return the id of the stream of this response,  for HTTP/1.x
+    */
+  def streamId(): Int = {
+    _asJava.streamId()
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
+    */
+  def push(method: io.vertx.core.http.HttpMethod, path: String): scala.concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.http.HttpServerResponse]()
+    _asJava.push(method, path, promiseToMappedAsyncResultHandler(HttpServerResponse.apply)(promise))
+    promise.future
+  }
+
+  /**
+    * Push a response to the client.<p/>
+    *
+    * The `handler` will be notified with a <i>success</i> when the push can be sent and with
+    * a <i>failure</i> when the client has disabled push or reset the push before it has been sent.<p/>
+    *
+    * The `handler` may be queued if the client has reduced the maximum number of streams the server can push
+    * concurrently.<p/>
+    *
+    * Push can be sent only for peer initiated streams and if the response is not ended.
+    * @param method the method of the promised request
+    * @param host the host of the promised request
+    * @param path the path of the promised request
+    * @param headers the headers of the promised request
+    * @return the handler notified when the response can be written
+    */
+  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap): scala.concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
+    import io.vertx.lang.scala.HandlerOps._
+    val promise = scala.concurrent.Promise[io.vertx.scala.core.http.HttpServerResponse]()
+    _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseToMappedAsyncResultHandler(HttpServerResponse.apply)(promise))
+    promise.future
+  }
+
+  /**
+    * Reset this HTTP/2 stream with the error code `0`.
+    */
+  def reset(): Unit = {
+    _asJava.reset()
+  }
+
+  /**
+    * Reset this HTTP/2 stream with the error `code`.
+    * @param code the error code
+    */
+  def reset(code: Long): Unit = {
+    _asJava.reset(code)
+  }
+
+  /**
+    * Write an HTTP/2 frame to the response, allowing to extend the HTTP/2 protocol.
+    *
+    * The frame is sent immediatly and is not subject to flow control.
+    * @param type the 8-bit frame type
+    * @param flags the 8-bit frame flags
+    * @param payload the frame payload
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writeCustomFrame(`type`: Int, flags: Int, payload: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    this
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+    * @param frame the frame to write
+    */
+  def writeCustomFrame(frame: io.vertx.scala.core.http.HttpFrame): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[io.vertx.core.http.HttpFrame])
     this
   }
 
