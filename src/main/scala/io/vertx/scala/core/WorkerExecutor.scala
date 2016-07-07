@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -28,13 +29,13 @@ import io.vertx.core.Handler
 class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor) 
     extends io.vertx.scala.core.metrics.Measured {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.WorkerExecutor = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled(): Boolean = {
+  def isMetricsEnabled: Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -56,27 +57,21 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return handler that will be called when the blocking code is complete
     */
-  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): scala.concurrent.Future[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[T]()
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseToAsyncResultHandler(promise))
-    promise.future
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToHandler(resultHandler))
   }
 
   /**
     * Like [[io.vertx.scala.core.WorkerExecutor#executeBlocking]] called with ordered = true.
     */
-  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): scala.concurrent.Future[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[T]()
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseToAsyncResultHandler(promise))
-    promise.future
+  def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToHandler(resultHandler))
   }
 
   /**
     * Close the executor.
     */
-  def close(): Unit = {
+  def close: Unit = {
     _asJava.close()
   }
 

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 
 /**
@@ -30,26 +31,26 @@ import io.vertx.scala.core.buffer.Buffer
   */
 class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.WebSocketFrame = _asJava
 
   /**
     * @return true if it's a text frame
     */
-  def isText(): Boolean = {
+  def isText: Boolean = {
     _asJava.isText()
   }
 
   /**
     * @return true if it's a binary frame
     */
-  def isBinary(): Boolean = {
+  def isBinary: Boolean = {
     _asJava.isBinary()
   }
 
   /**
     * @return true if it's a continuation frame
     */
-  def isContinuation(): Boolean = {
+  def isContinuation: Boolean = {
     _asJava.isContinuation()
   }
 
@@ -57,21 +58,21 @@ class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
     * @return the content of this frame as a UTF-8 string and returns the
     * converted string. Only use this for text frames.
     */
-  def textData(): String = {
+  def textData: String = {
     _asJava.textData()
   }
 
   /**
     * @return the data of the frame
     */
-  def binaryData(): io.vertx.scala.core.buffer.Buffer = {
+  def binaryData: io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.binaryData())
   }
 
   /**
     * @return true if this is the final frame.
     */
-  def isFinal(): Boolean = {
+  def isFinal: Boolean = {
     _asJava.isFinal()
   }
 

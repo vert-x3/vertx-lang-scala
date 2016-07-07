@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -33,54 +34,51 @@ import io.vertx.core.Handler
 class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.eventbus.Message[T]] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def pause: io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def resume: io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
   /**
     * @return a read stream for the body of the message stream.
     */
-  def bodyStream(): io.vertx.scala.core.streams.ReadStream[T] = {
+  def bodyStream: io.vertx.scala.core.streams.ReadStream[T] = {
     ReadStream.apply[T](_asJava.bodyStream())
   }
 
   /**
     * @return true if the current consumer is registered
     */
-  def isRegistered(): Boolean = {
+  def isRegistered: Boolean = {
     _asJava.isRegistered()
   }
 
   /**
     * @return The address the handler was registered with.
     */
-  def address(): String = {
+  def address: String = {
     _asJava.address()
   }
 
@@ -98,7 +96,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   /**
     * @return the maximum number of messages that can be buffered when this stream is paused
     */
-  def getMaxBufferedMessages(): Int = {
+  def getMaxBufferedMessages: Int = {
     _asJava.getMaxBufferedMessages()
   }
 
@@ -106,22 +104,16 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
     * @return the completion handler
     */
-  def completionHandler(): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.completionHandler(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def completionHandler(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
+    _asJava.completionHandler(funcToHandler(completionHandler))
   }
 
   /**
     * Unregisters the handler which created this registration
     * @return the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
-  def unregister(): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.unregister(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def unregister(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
+    _asJava.unregister(funcToHandler(completionHandler))
   }
 
 }
@@ -129,5 +121,5 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 object MessageConsumer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): io.vertx.scala.core.eventbus.MessageConsumer[T] =
-    new io.vertx.scala.core.eventbus.MessageConsumer[T](_asJava)
+    new io.vertx.scala.core.eventbus.MessageConsumer(_asJava)
 }

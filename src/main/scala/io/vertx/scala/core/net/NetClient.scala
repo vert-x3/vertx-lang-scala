@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -30,13 +31,13 @@ import io.vertx.core.Handler
 class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
     extends io.vertx.scala.core.metrics.Measured {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.NetClient = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled(): Boolean = {
+  def isMetricsEnabled: Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -48,11 +49,9 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * @param port the port
     * @param host the host
     */
-  def connect(port: Int, host: String): scala.concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetSocket]()
-    _asJava.connect(port, host, promiseToMappedAsyncResultHandler(NetSocket.apply)(promise))
-    promise.future
+  def connect(port: Int, host: String, connectHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
+    _asJava.connect(port, host, funcToHandler(connectHandler))
+    this
   }
 
   /**
@@ -61,7 +60,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
     * complete until some time after the method has returned.
     */
-  def close(): Unit = {
+  def close: Unit = {
     _asJava.close()
   }
 

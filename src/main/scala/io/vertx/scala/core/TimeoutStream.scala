@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -30,33 +31,30 @@ import io.vertx.core.Handler
 class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream) 
     extends io.vertx.scala.core.streams.ReadStream[Long] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.TimeoutStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.TimeoutStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: Long => Unit): io.vertx.scala.core.TimeoutStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.TimeoutStream = {
+  def pause: io.vertx.scala.core.TimeoutStream = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.TimeoutStream = {
+  def resume: io.vertx.scala.core.TimeoutStream = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.TimeoutStream = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.TimeoutStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -64,7 +62,7 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
     * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
     * argument.
     */
-  def cancel(): Unit = {
+  def cancel: Unit = {
     _asJava.cancel()
   }
 

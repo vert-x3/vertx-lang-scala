@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.streams;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.Handler
 
 /**
@@ -51,7 +52,7 @@ trait WriteStream[T]
   * 
   * Once the stream has ended, it cannot be used any more.
   */
-  def end(): Unit
+  def end: Unit
 
   /**
   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
@@ -71,7 +72,7 @@ trait WriteStream[T]
   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
   * @return true if write queue is full
   */
-  def writeQueueFull(): Boolean
+  def writeQueueFull: Boolean
 
   /**
   * Set a drain handler on the stream. If the write queue is full, then the handler will be called when the write
@@ -79,7 +80,7 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: => Unit): io.vertx.scala.core.streams.WriteStream[T]
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
 }
 
@@ -90,7 +91,7 @@ object WriteStream {
 
   private class WriteStreamImpl[T](private val _asJava: io.vertx.core.streams.WriteStream[T]) extends WriteStream[T] {
 
-    def asJava: java.lang.Object = _asJava
+    def asJava: io.vertx.core.streams.WriteStream[T] = _asJava
 
     /**
       * Set an exception handler on the write stream.
@@ -98,7 +99,6 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      import io.vertx.lang.scala.HandlerOps._
       _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
@@ -120,7 +120,7 @@ object WriteStream {
       * 
       * Once the stream has ended, it cannot be used any more.
       */
-    def end(): Unit = {
+    def end: Unit = {
       _asJava.end()
     }
 
@@ -147,7 +147,7 @@ object WriteStream {
       * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
       * @return true if write queue is full
       */
-    def writeQueueFull(): Boolean = {
+    def writeQueueFull: Boolean = {
       _asJava.writeQueueFull()
     }
 
@@ -157,9 +157,8 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      import io.vertx.lang.scala.HandlerOps._
-      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }
 

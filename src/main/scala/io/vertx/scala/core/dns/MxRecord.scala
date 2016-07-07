@@ -16,25 +16,26 @@
 
 package io.vertx.scala.core.dns;
 
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
   */
 class MxRecord(private val _asJava: io.vertx.core.dns.MxRecord) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.dns.MxRecord = _asJava
 
   /**
     * The priority of the MX record.
     */
-  def priority(): Int = {
+  def priority: Int = {
     _asJava.priority()
   }
 
   /**
     * The name of the MX record
     */
-  def name(): String = {
+  def name: String = {
     _asJava.name()
   }
 

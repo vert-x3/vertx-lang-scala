@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.datagram;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.net.SocketAddress
 
@@ -24,14 +25,14 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.datagram.DatagramPacket = _asJava
 
   /**
     * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
     * this [[io.vertx.scala.core.datagram.DatagramPacket]].
     * @return the address of the sender
     */
-  def sender(): io.vertx.scala.core.net.SocketAddress = {
+  def sender: io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.sender())
   }
 
@@ -39,7 +40,7 @@ class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket)
     * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
     * @return the data
     */
-  def data(): io.vertx.scala.core.buffer.Buffer = {
+  def data: io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.data())
   }
 

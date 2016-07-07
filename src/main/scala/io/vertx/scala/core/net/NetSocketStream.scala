@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -26,33 +27,30 @@ import io.vertx.core.Handler
 class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.net.NetSocket] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.NetSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(NetSocket.apply)(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.net.NetSocketStream = {
+  def pause: io.vertx.scala.core.net.NetSocketStream = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.net.NetSocketStream = {
+  def resume: io.vertx.scala.core.net.NetSocketStream = {
     _asJava.resume()
     this
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 

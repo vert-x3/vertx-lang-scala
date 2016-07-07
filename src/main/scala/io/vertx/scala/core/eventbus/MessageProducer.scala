@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
@@ -27,7 +28,7 @@ import io.vertx.core.Handler
 class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
     extends io.vertx.scala.core.streams.WriteStream[T] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.eventbus.MessageProducer[T] = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
@@ -40,7 +41,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull(): Boolean = {
+  def writeQueueFull: Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -53,12 +54,11 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     MessageProducer.apply[T](_asJava.send(message))
   }
 
-  def send[R](message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message, promiseToMappedAsyncResultHandler(Message.apply[R])(promise)))
+  def send[R](message: T, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message, funcToHandler(replyHandler)))
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -74,8 +74,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -92,21 +91,21 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   /**
     * @return The address to which the producer produces messages.
     */
-  def address(): String = {
+  def address: String = {
     _asJava.address()
   }
 
   /**
     * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
     */
-  def end(): Unit = {
+  def end: Unit = {
     _asJava.end()
   }
 
   /**
     * Closes the producer, this method should be called when the message producer is not used anymore.
     */
-  def close(): Unit = {
+  def close: Unit = {
     _asJava.close()
   }
 

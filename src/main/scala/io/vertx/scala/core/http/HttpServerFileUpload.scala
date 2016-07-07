@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
@@ -26,32 +27,29 @@ import io.vertx.core.Handler
 class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
-  def pause(): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def pause: io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def resume: io.vertx.scala.core.http.HttpServerFileUpload = {
     _asJava.resume()
     this
   }
@@ -68,35 +66,35 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
   /**
     * @return the filename which was used when upload the file.
     */
-  def filename(): String = {
+  def filename: String = {
     _asJava.filename()
   }
 
   /**
     * @return the name of the attribute
     */
-  def name(): String = {
+  def name: String = {
     _asJava.name()
   }
 
   /**
     * @return  the content type for the upload
     */
-  def contentType(): String = {
+  def contentType: String = {
     _asJava.contentType()
   }
 
   /**
     * @return the contentTransferEncoding for the upload
     */
-  def contentTransferEncoding(): String = {
+  def contentTransferEncoding: String = {
     _asJava.contentTransferEncoding()
   }
 
   /**
     * @return the charset for the upload
     */
-  def charset(): String = {
+  def charset: String = {
     _asJava.charset()
   }
 
@@ -105,14 +103,14 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
     * Check [[io.vertx.scala.core.http.HttpServerFileUpload#isSizeAvailable]] to determine this
     * @return the size of the upload (in bytes)
     */
-  def size(): Long = {
+  def size: Long = {
     _asJava.size()
   }
 
   /**
     * @return true if the size of the upload can be retrieved via [[io.vertx.scala.core.http.HttpServerFileUpload#size]].
     */
-  def isSizeAvailable(): Boolean = {
+  def isSizeAvailable: Boolean = {
     _asJava.isSizeAvailable()
   }
 
