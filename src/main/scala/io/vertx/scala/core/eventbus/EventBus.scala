@@ -45,6 +45,19 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
   }
 
   /**
+    * Sends a message.
+    * 
+    * The message will be delivered to at most one of the handlers registered to the address.
+    * @param address the address to send it to
+    * @param message the message, may be {@code null}
+    * @return a reference to this, so the API can be used fluently
+    */
+  def send(address: String, message: AnyRef): io.vertx.scala.core.eventbus.EventBus = {
+    _asJava.send(address, message)
+    this
+  }
+
+  /**
     * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
     * subsequently replies to the message.
     * @param address the address to send it to
@@ -53,6 +66,18 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     */
   def send[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
     _asJava.send(address, message, funcToHandler(replyHandler))
+    this
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying `options` that can be used to configure the delivery.
+    * @param address the address to send it to
+    * @param message the message, may be {@code null}
+    * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    * @return a reference to this, so the API can be used fluently
+    */
+  def send(address: String, message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.EventBus = {
+    _asJava.send(address, message, options)
     this
   }
 

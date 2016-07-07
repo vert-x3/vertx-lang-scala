@@ -90,6 +90,32 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
   }
 
   /**
+    * Tell the server to start listening. The server will listen on the port and host specified in the
+    * <a href="../../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a> that was used when creating the server.
+    * 
+    * The listen happens asynchronously and the server may not be listening until some time after the call has returned.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen: io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen()
+    this
+  }
+
+  /**
+    * Tell the server to start listening. The server will listen on the port and host specified here,
+    * ignoring any value set in the <a href="../../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a> that was used when creating the server.
+    * 
+    * The listen happens asynchronously and the server may not be listening until some time after the call has returned.
+    * @param port the port to listen on
+    * @param host the host to listen on
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(port: Int, host: String): io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen(port, host)
+    this
+  }
+
+  /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually
     * listening (or has failed).
     * @param port the port to listen on
@@ -98,6 +124,17 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen(port, host, funcToHandler(listenHandler))
+    this
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServer#listen]] but the server will listen on host "0.0.0.0" and port specified here ignoring
+    * any value in the <a href="../../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a> that was used when creating the server.
+    * @param port the port to listen on
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(port: Int): io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen(port)
     this
   }
 
@@ -118,6 +155,15 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
   def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen(funcToHandler(listenHandler))
     this
+  }
+
+  /**
+    * Close the server. Any open HTTP connections will be closed.
+    * 
+    * The close happens asynchronously and the server may not be closed until some time after the call has returned.
+    */
+  def close: Unit = {
+    _asJava.close()
   }
 
   /**

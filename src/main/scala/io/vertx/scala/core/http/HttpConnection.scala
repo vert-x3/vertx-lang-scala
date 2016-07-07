@@ -169,6 +169,18 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   }
 
   /**
+    * Send to the remote endpoint an update of the server settings.
+    * <p/>
+    * This is not implemented for HTTP/1.x.
+    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
+    * @return a reference to this, so the API can be used fluently
+    */
+  def updateSettings(settings: io.vertx.core.http.Http2Settings): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.updateSettings(settings)
+    this
+  }
+
+  /**
     * Send to the remote endpoint an update of this endpoint settings
     * <p/>
     * The `completionHandler` will be notified when the remote endpoint has acknowledged the settings.

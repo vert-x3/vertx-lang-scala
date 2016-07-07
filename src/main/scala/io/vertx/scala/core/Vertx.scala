@@ -260,11 +260,34 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
   }
 
   /**
+    * Stop the the Vertx instance and release any resources held by it.
+    * 
+    * The instance cannot be used after it has been closed.
+    * 
+    * The actual close is asynchronous and may not complete until after the call has returned.
+    */
+  def close: Unit = {
+    _asJava.close()
+  }
+
+  /**
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
     * @return The handler will be notified when the close is complete.
     */
   def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.close(funcToHandler(completionHandler))
+  }
+
+  /**
+    * Deploy a verticle instance given a name.
+    * 
+    * Given the name, Vert.x selects a  instance to use to instantiate the verticle.
+    * 
+    * For the rules on how factories are selected please consult the user manual.
+    * @param name the name.
+    */
+  def deployVerticle(name: String): Unit = {
+    _asJava.deployVerticle(name)
   }
 
   /**
@@ -286,10 +309,30 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
+    */
+  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions): Unit = {
+    _asJava.deployVerticle(name, options)
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * deployment.
+    * @param name the name
+    * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     * @return a handler which will be notified when the deployment is complete
     */
   def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions, completionHandler: io.vertx.core.AsyncResult[java.lang.String] => Unit): Unit = {
     _asJava.deployVerticle(name, options, funcToHandler(completionHandler))
+  }
+
+  /**
+    * Undeploy a verticle deployment.
+    * 
+    * The actual undeployment happens asynchronously and may not complete until after the method has returned.
+    * @param deploymentID the deployment ID
+    */
+  def undeploy(deploymentID: String): Unit = {
+    _asJava.undeploy(deploymentID)
   }
 
   /**

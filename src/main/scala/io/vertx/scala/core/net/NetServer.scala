@@ -57,11 +57,39 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
   }
 
   /**
+    * Start listening on the port and host as configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
+    * creating the server.
+    * 
+    * The server may not be listening until some time after the call to listen has returned.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen: io.vertx.scala.core.net.NetServer = {
+    _asJava.listen()
+    this
+  }
+
+  /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return handler that will be notified when listening or failed
     */
   def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
     _asJava.listen(funcToHandler(listenHandler))
+    this
+  }
+
+  /**
+    * Start listening on the specified port and host, ignoring post and host configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
+    * creating the server.
+    * 
+    * Port `0` can be specified meaning "choose an random port".
+    * 
+    * Host `0.0.0.0` can be specified meaning "listen on all available interfaces".
+    * 
+    * The server may not be listening until some time after the call to listen has returned.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(port: Int, host: String): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port, host)
     this
   }
 
@@ -77,6 +105,20 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
   }
 
   /**
+    * Start listening on the specified port and host "0.0.0.0", ignoring post and host configured in the
+    * <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when creating the server.
+    * 
+    * Port `0` can be specified meaning "choose an random port".
+    * 
+    * The server may not be listening until some time after the call to listen has returned.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(port: Int): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port)
+    this
+  }
+
+  /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @return handler that will be notified when listening or failed
@@ -84,6 +126,14 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
   def listen(port: Int, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
     _asJava.listen(port, funcToHandler(listenHandler))
     this
+  }
+
+  /**
+    * Close the server. This will close any currently open connections. The close may not complete until after this
+    * method has returned.
+    */
+  def close: Unit = {
+    _asJava.close()
   }
 
   /**

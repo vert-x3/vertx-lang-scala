@@ -110,6 +110,13 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   }
 
   /**
+    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]]. The close itself is asynchronous.
+    */
+  def close: Unit = {
+    _asJava.close()
+  }
+
+  /**
     * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
     * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.
     * @return the socket address
