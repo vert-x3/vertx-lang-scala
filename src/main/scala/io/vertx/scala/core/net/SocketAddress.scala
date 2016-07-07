@@ -16,19 +16,20 @@
 
 package io.vertx.scala.core.net;
 
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * The address of a socket
   */
 class SocketAddress(private val _asJava: io.vertx.core.net.SocketAddress) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.SocketAddress = _asJava
 
-  def host(): String = {
+  def host: String = {
     _asJava.host()
   }
 
-  def port(): Int = {
+  def port: Int = {
     _asJava.port()
   }
 

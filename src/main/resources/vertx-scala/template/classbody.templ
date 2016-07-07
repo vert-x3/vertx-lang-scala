@@ -1,12 +1,27 @@
 @comment{"# Generic asJava method"}
-@{indentation}  def asJava: java.lang.Object = _asJava\n\n
+@{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
 
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
+@comment{"sadly there is a method named type in HttpFrame, which is a keyword in scala"}
+@if{method.name == 'type'}
+@{indentation}  def `type`: Int = {\n
+@{indentation}    _asJava.`type`()\n
+@{indentation}  }\n\n
+@end{}
+@if{method.name != 'type'}
+@if{method.name == 'toString' && method.params.size == 0}
+@comment{"TODO: UUUUGGLLLYY"}
+@{indentation}  override def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{methodInvocation('_asJava', method, indentation + '    ');}
+@{indentation}  }\n\n
+@else{}
 @{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
+@end{}
+@end{}
 @end{}
 @end{}

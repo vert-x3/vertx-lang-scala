@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 
 /**
@@ -23,26 +24,26 @@ import io.vertx.scala.core.buffer.Buffer
   */
 class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpFrame = _asJava
 
   /**
     * @return the 8-bit type of the frame
     */
-  def `type`(): Int = {
+  def `type`: Int = {
     _asJava.`type`()
   }
 
   /**
     * @return the 8-bit flags specific to the frame
     */
-  def flags(): Int = {
+  def flags: Int = {
     _asJava.flags()
   }
 
   /**
     * @return the frame payload
     */
-  def payload(): io.vertx.scala.core.buffer.Buffer = {
+  def payload: io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.payload())
   }
 

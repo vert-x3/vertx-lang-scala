@@ -16,19 +16,20 @@
 
 package io.vertx.scala.core.metrics;
 
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
   */
 trait Measured {
 
-  def asJava: io.vertx.core.metrics.Measured
+  def asJava: java.lang.Object
 
   /**
   * Whether the metrics are enabled for this measured object
   * @return true if the metrics are enabled
   */
-  def isMetricsEnabled(): Boolean
+  def isMetricsEnabled: Boolean
 
 }
 
@@ -39,13 +40,13 @@ object Measured {
 
   private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured {
 
-    def asJava: java.lang.Object = _asJava
+    def asJava: io.vertx.core.metrics.Measured = _asJava
 
     /**
       * Whether the metrics are enabled for this measured object
       * @return true if the metrics are enabled
       */
-    def isMetricsEnabled(): Boolean = {
+    def isMetricsEnabled: Boolean = {
       _asJava.isMetricsEnabled()
     }
 

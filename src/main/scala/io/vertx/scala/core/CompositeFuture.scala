@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.Handler
 
 /**
@@ -24,13 +25,11 @@ import io.vertx.core.Handler
   */
 class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.CompositeFuture = _asJava
 
-  def setHandler(): scala.concurrent.Future[io.vertx.scala.core.CompositeFuture] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.CompositeFuture]()
-    _asJava.setHandler(promiseToMappedAsyncResultHandler(CompositeFuture.apply)(promise))
-    promise.future
+  def setHandler(handler: io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture] => Unit): io.vertx.scala.core.CompositeFuture = {
+    _asJava.setHandler(funcToHandler(handler))
+    this
   }
 
   /**
@@ -76,7 +75,7 @@ class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
   /**
     * @return the number of wrapped future
     */
-  def size(): Int = {
+  def size: Int = {
     _asJava.size()
   }
 

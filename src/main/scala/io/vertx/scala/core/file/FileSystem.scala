@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.file.OpenOptions
 import io.vertx.core.Handler
@@ -36,7 +37,7 @@ import io.vertx.core.Handler
   */
 class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.file.FileSystem = _asJava
 
   /**
     * Copy a file from the path `from` to path `to`, asynchronously.
@@ -46,11 +47,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param to the path to copy to
     * @return the handler that will be called on completion
     */
-  def copy(from: String, to: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.copy(from, to, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def copy(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.copy(from, to, funcToHandler(handler))
+    this
   }
 
   /**
@@ -72,11 +71,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param to the path to copy to
     * @return the handler that will be called on completion
     */
-  def copyRecursive(from: String, to: String, recursive: Boolean): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.copyRecursive(from, to, recursive, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def copyRecursive(from: String, to: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.copyRecursive(from, to, recursive, funcToHandler(handler))
+    this
   }
 
   /**
@@ -95,11 +92,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param to the path to copy to
     * @return the handler that will be called on completion
     */
-  def move(from: String, to: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.move(from, to, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def move(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.move(from, to, funcToHandler(handler))
+    this
   }
 
   /**
@@ -118,11 +113,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param len the length to truncate it to
     * @return the handler that will be called on completion
     */
-  def truncate(path: String, len: Long): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.truncate(path, len, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def truncate(path: String, len: Long, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.truncate(path, len, funcToHandler(handler))
+    this
   }
 
   /**
@@ -142,11 +135,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param perms the permissions string
     * @return the handler that will be called on completion
     */
-  def chmod(path: String, perms: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.chmod(path, perms, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def chmod(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chmod(path, perms, funcToHandler(handler))
+    this
   }
 
   /**
@@ -169,11 +160,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param dirPerms the directory permissions
     * @return the handler that will be called on completion
     */
-  def chmodRecursive(path: String, perms: String, dirPerms: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.chmodRecursive(path, perms, dirPerms, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def chmodRecursive(path: String, perms: String, dirPerms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chmodRecursive(path, perms, dirPerms, funcToHandler(handler))
+    this
   }
 
   /**
@@ -191,11 +180,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param group the user group, {@code null} will not change the user group name
     * @return the handler that will be called on completion
     */
-  def chown(path: String, user: String, group: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.chown(path, user, group, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def chown(path: String, user: String, group: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chown(path, user, group, funcToHandler(handler))
+    this
   }
 
   /**
@@ -214,11 +201,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path the path to the file
     * @return the handler that will be called on completion
     */
-  def props(path: String): scala.concurrent.Future[io.vertx.scala.core.file.FileProps] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.file.FileProps]()
-    _asJava.props(path, promiseToMappedAsyncResultHandler(FileProps.apply)(promise))
-    promise.future
+  def props(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.props(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -235,11 +220,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path the path to the file
     * @return the handler that will be called on completion
     */
-  def lprops(path: String): scala.concurrent.Future[io.vertx.scala.core.file.FileProps] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.file.FileProps]()
-    _asJava.lprops(path, promiseToMappedAsyncResultHandler(FileProps.apply)(promise))
-    promise.future
+  def lprops(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.lprops(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -255,11 +238,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param existing the link destination
     * @return the handler that will be called on completion
     */
-  def link(link: String, existing: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.link(link, existing, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def link(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.link(link, existing, funcToHandler(handler))
+    this
   }
 
   /**
@@ -276,11 +257,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param existing the link destination
     * @return the handler that will be called on completion
     */
-  def symlink(link: String, existing: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.symlink(link, existing, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def symlink(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.symlink(link, existing, funcToHandler(handler))
+    this
   }
 
   /**
@@ -296,11 +275,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param link the link
     * @return the handler that will be called on completion
     */
-  def unlink(link: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.unlink(link, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def unlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.unlink(link, funcToHandler(handler))
+    this
   }
 
   /**
@@ -316,11 +293,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param link the link
     * @return the handler that will be called on completion
     */
-  def readSymlink(link: String): scala.concurrent.Future[String] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[String]()
-    _asJava.readSymlink(link, promiseToAsyncResultHandler[java.lang.String](promise))
-    promise.future
+  def readSymlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.String] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readSymlink(link, funcToHandler(handler))
+    this
   }
 
   /**
@@ -335,11 +310,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def delete(path: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.delete(path, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def delete(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.delete(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -359,11 +332,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param recursive delete recursively?
     * @return the handler that will be called on completion
     */
-  def deleteRecursive(path: String, recursive: Boolean): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.deleteRecursive(path, recursive, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def deleteRecursive(path: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.deleteRecursive(path, recursive, funcToHandler(handler))
+    this
   }
 
   /**
@@ -381,11 +352,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def mkdir(path: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.mkdir(path, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def mkdir(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdir(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -409,11 +378,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param perms the permissions string
     * @return the handler that will be called on completion
     */
-  def mkdir(path: String, perms: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.mkdir(path, perms, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def mkdir(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdir(path, perms, funcToHandler(handler))
+    this
   }
 
   /**
@@ -431,11 +398,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def mkdirs(path: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.mkdirs(path, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def mkdirs(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdirs(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -459,11 +424,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param perms the permissions string
     * @return the handler that will be called on completion
     */
-  def mkdirs(path: String, perms: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.mkdirs(path, perms, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def mkdirs(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdirs(path, perms, funcToHandler(handler))
+    this
   }
 
   /**
@@ -481,12 +444,10 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def readDir(path: String): scala.concurrent.Future[List[String]] = {
-    import io.vertx.lang.scala.HandlerOps._
+  def readDir(path: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
     import scala.collection.JavaConverters._
-    val promise = scala.concurrent.Promise[List[String]]()
-    _asJava.readDir(path, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
-    promise.future
+    _asJava.readDir(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -508,12 +469,10 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param filter the filter expression
     * @return the handler that will be called on completion
     */
-  def readDir(path: String, filter: String): scala.concurrent.Future[List[String]] = {
-    import io.vertx.lang.scala.HandlerOps._
+  def readDir(path: String, filter: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
     import scala.collection.JavaConverters._
-    val promise = scala.concurrent.Promise[List[String]]()
-    _asJava.readDir(path, filter, promiseToMappedAsyncResultHandler[java.util.List[java.lang.String], List[String]](x => x.asScala.toList)(promise))
-    promise.future
+    _asJava.readDir(path, filter, funcToHandler(handler))
+    this
   }
 
   /**
@@ -531,11 +490,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def readFile(path: String): scala.concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.buffer.Buffer]()
-    _asJava.readFile(path, promiseToMappedAsyncResultHandler(Buffer.apply)(promise))
-    promise.future
+  def readFile(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readFile(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -551,11 +508,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def writeFile(path: String, data: io.vertx.scala.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def writeFile(path: String, data: io.vertx.scala.core.buffer.Buffer, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToHandler(handler))
+    this
   }
 
   /**
@@ -573,11 +528,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
     */
-  def open(path: String, options: io.vertx.core.file.OpenOptions): scala.concurrent.Future[io.vertx.scala.core.file.AsyncFile] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.file.AsyncFile]()
-    _asJava.open(path, options, promiseToMappedAsyncResultHandler(AsyncFile.apply)(promise))
-    promise.future
+  def open(path: String, options: io.vertx.core.file.OpenOptions, handler: io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.open(path, options, funcToHandler(handler))
+    this
   }
 
   /**
@@ -592,11 +545,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def createFile(path: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.createFile(path, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def createFile(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.createFile(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -613,11 +564,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param perms the permissions string
     * @return the handler that will be called on completion
     */
-  def createFile(path: String, perms: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.createFile(path, perms, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def createFile(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.createFile(path, perms, funcToHandler(handler))
+    this
   }
 
   /**
@@ -633,11 +582,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @return the handler that will be called on completion
     */
-  def exists(path: String): scala.concurrent.Future[Boolean] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Boolean]()
-    _asJava.exists(path, promiseToMappedAsyncResultHandler[java.lang.Boolean, Boolean](x => x)(promise))
-    promise.future
+  def exists(path: String, handler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.exists(path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -652,11 +599,9 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to anywhere on the filesystem
     * @return the handler that will be called on completion
     */
-  def fsProps(path: String): scala.concurrent.Future[io.vertx.scala.core.file.FileSystemProps] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.file.FileSystemProps]()
-    _asJava.fsProps(path, promiseToMappedAsyncResultHandler(FileSystemProps.apply)(promise))
-    promise.future
+  def fsProps(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileSystemProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.fsProps(path, funcToHandler(handler))
+    this
   }
 
   /**

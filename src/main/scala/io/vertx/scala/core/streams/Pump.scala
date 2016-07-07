@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.streams;
 
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
@@ -39,7 +40,7 @@ package io.vertx.scala.core.streams;
   */
 class Pump(private val _asJava: io.vertx.core.streams.Pump) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.streams.Pump = _asJava
 
   /**
     * Set the write queue max size to `maxSize`
@@ -55,7 +56,7 @@ class Pump(private val _asJava: io.vertx.core.streams.Pump) {
     * Start the Pump. The Pump can be started and stopped multiple times.
     * @return a reference to this, so the API can be used fluently
     */
-  def start(): io.vertx.scala.core.streams.Pump = {
+  def start: io.vertx.scala.core.streams.Pump = {
     _asJava.start()
     this
   }
@@ -64,7 +65,7 @@ class Pump(private val _asJava: io.vertx.core.streams.Pump) {
     * Stop the Pump. The Pump can be started and stopped multiple times.
     * @return a reference to this, so the API can be used fluently
     */
-  def stop(): io.vertx.scala.core.streams.Pump = {
+  def stop: io.vertx.scala.core.streams.Pump = {
     _asJava.stop()
     this
   }
@@ -72,7 +73,7 @@ class Pump(private val _asJava: io.vertx.core.streams.Pump) {
   /**
     * Return the total number of items pumped by this pump.
     */
-  def numberPumped(): Int = {
+  def numberPumped: Int = {
     _asJava.numberPumped()
   }
 

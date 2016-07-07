@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.HttpMethod
@@ -45,18 +46,17 @@ import io.vertx.core.Handler
 class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerResponse) 
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpServerResponse = _asJava
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull(): Boolean = {
+  def writeQueueFull: Boolean = {
     _asJava.writeQueueFull()
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -71,16 +71,15 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     this
   }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
   /**
     * @return the HTTP status code of the response. The default is `200` representing `OK`.
     */
-  def getStatusCode(): Int = {
+  def getStatusCode: Int = {
     _asJava.getStatusCode()
   }
 
@@ -98,7 +97,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return the HTTP status message of the response. If this is not specified a default value will be used depending on what
     * [[io.vertx.scala.core.http.HttpServerResponse#setStatusCode]] has been set to.
     */
-  def getStatusMessage(): String = {
+  def getStatusMessage: String = {
     _asJava.getStatusMessage()
   }
 
@@ -133,14 +132,14 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return is the response chunked?
     */
-  def isChunked(): Boolean = {
+  def isChunked: Boolean = {
     _asJava.isChunked()
   }
 
   /**
     * @return The HTTP headers
     */
-  def headers(): io.vertx.scala.core.MultiMap = {
+  def headers: io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -158,7 +157,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return The HTTP trailers
     */
-  def trailers(): io.vertx.scala.core.MultiMap = {
+  def trailers: io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.trailers())
   }
 
@@ -179,9 +178,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -211,7 +209,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Must only be used if the request contains an "Expect:100-Continue" header
     * @return a reference to this, so the API can be used fluently
     */
-  def writeContinue(): io.vertx.scala.core.http.HttpServerResponse = {
+  def writeContinue: io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.writeContinue()
     this
   }
@@ -248,7 +246,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * 
     * Once the response has ended, it cannot be used any more.
     */
-  def end(): Unit = {
+  def end: Unit = {
     _asJava.end()
   }
 
@@ -258,11 +256,9 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param filename path to the file to serve
     * @return handler that will be called on completion
     */
-  def sendFile(filename: String): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.sendFile(filename, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename, funcToHandler(resultHandler))
+    this
   }
 
   /**
@@ -272,11 +268,9 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param offset the offset to serve from
     * @return handler that will be called on completion
     */
-  def sendFile(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.sendFile(filename, offset, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename, offset, funcToHandler(resultHandler))
+    this
   }
 
   /**
@@ -287,38 +281,36 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param length the length to serve to
     * @return handler that will be called on completion
     */
-  def sendFile(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.sendFile(filename, offset, length, promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename, offset, length, funcToHandler(resultHandler))
+    this
   }
 
   /**
     * Close the underlying TCP connection corresponding to the request.
     */
-  def close(): Unit = {
+  def close: Unit = {
     _asJava.close()
   }
 
   /**
     * @return has the response already ended?
     */
-  def ended(): Boolean = {
+  def ended: Boolean = {
     _asJava.ended()
   }
 
   /**
     * @return has the underlying TCP connection corresponding to the request already been closed?
     */
-  def closed(): Boolean = {
+  def closed: Boolean = {
     _asJava.closed()
   }
 
   /**
     * @return have the headers for the response already been written?
     */
-  def headWritten(): Boolean = {
+  def headWritten: Boolean = {
     _asJava.headWritten()
   }
 
@@ -328,9 +320,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headersEndHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def headersEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -341,34 +332,45 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def bodyEndHandler(handler: => Unit): io.vertx.scala.core.http.HttpServerResponse = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def bodyEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
   /**
     * @return the total number of bytes written for the body of the response.
     */
-  def bytesWritten(): Long = {
+  def bytesWritten: Long = {
     _asJava.bytesWritten()
   }
 
   /**
     * @return the id of the stream of this response,  for HTTP/1.x
     */
-  def streamId(): Int = {
+  def streamId: Int = {
     _asJava.streamId()
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
+    */
+  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    HttpServerResponse.apply(_asJava.push(method, host, path, funcToHandler(handler)))
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
     */
-  def push(method: io.vertx.core.http.HttpMethod, path: String): scala.concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.http.HttpServerResponse]()
-    _asJava.push(method, path, promiseToMappedAsyncResultHandler(HttpServerResponse.apply)(promise))
-    promise.future
+  def push(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap, handler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToHandler(handler)))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
+    */
+  def push(method: io.vertx.core.http.HttpMethod, path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.push(method, path, funcToHandler(handler))
+    this
   }
 
   /**
@@ -387,17 +389,15 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param headers the headers of the promised request
     * @return the handler notified when the response can be written
     */
-  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap): scala.concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.http.HttpServerResponse]()
-    _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseToMappedAsyncResultHandler(HttpServerResponse.apply)(promise))
-    promise.future
+  def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap, handler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToHandler(handler))
+    this
   }
 
   /**
     * Reset this HTTP/2 stream with the error code `0`.
     */
-  def reset(): Unit = {
+  def reset: Unit = {
     _asJava.reset()
   }
 

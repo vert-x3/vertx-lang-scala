@@ -30,7 +30,10 @@
     } else if (type.kind == CLASS_DATA_OBJECT || type.kind == CLASS_ENUM) {
       return type.name;
     } else if (type.kind == CLASS_LIST){
-      return 'List[' + toScalaType(type.args[0]) + ']';
+        if(type.args[0].params.size == 1)
+          return 'List[' + toScalaType(type.args[0]) + '[_]]';
+        else
+          return 'List[' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_SET){
       return 'Set[' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_MAP){
@@ -140,9 +143,7 @@
   }
 
   def returnTypeOf(method) {
-    if (isFuture(method)) {
-      'scala.concurrent.Future[' + futureType(method) + ']';
-    } else if (method.fluent) {
+    if (method.fluent) {
       toScalaType(method.returnType);
     } else if (method.returnType instanceof io.vertx.codegen.type.VoidTypeInfo) {
       'Unit';
@@ -155,14 +156,11 @@
     var paramList = '';
     var first = true;
     for (param : method.params) {
-      if (!isParamHandler(param) &&
-          !isAsyncResult(param)) {
         if (first) {
           first = false;
         } else {
           paramList += ', ';
         }
-
         if (param.name.equals("type")) {
           paramList += '`';
           paramList += param.name;
@@ -172,34 +170,17 @@
         }
         paramList += ': ';
         paramList += toScalaType(param.type);
-      }
     }
     paramList;
   }
 
   def multiMethodParams(method) {
     params = methodParams(method);
-    if (isMethodHandler(method)) {
-      if (params.isEmpty()) {
-        params = '';
-      } else {
-        params = '(' + params + ')';
-      }
-      params += handlerLambda(method);
-      params;
+    if (params.isEmpty()) {
+      params = '';
     } else {
-       '(' + params + ')';
+      params = '(' + params + ')';
     }
-  }
-
-  def handlerLambda(method) {
-    var params = '';
-    for (param : method.params) {
-      if (isParamHandler(param)) {
-        params += '(' + param.name + ': ' + toScalaType(param.type) + ')';
-      }
-    }
-    params;
   }
 
   def methodInvocationHandlerCollection(type, method) {
@@ -228,17 +209,17 @@
     return invocation;
   }
 
-  def methodInvocationHandler(type, mappedFunc, func, convertUnit) {
+  def methodInvocationHandler(type, mappedFunc, func, convertUnit, param) {
     var invocation = '';
 
     if (type.kind == CLASS_API) {
-      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')(';
+      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+param.name;
     } else if (type.kind == CLASS_LIST ||
                type.kind == CLASS_SET) {
       invocation += methodInvocationHandlerCollection(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x)(';
+      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x)('+param.name;
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
@@ -246,10 +227,16 @@
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
       invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])(';
       if (convertUnit) {
-        invocation += '_ =>';
+        invocation += '_ => ';
+      }
+      if(param.type.args[0].kind == CLASS_VOID) {
+         invocation += param.name + '()';
+      }
+      else {
+         invocation += param.name + '(_)';
       }
     } else {
-      invocation += func + '(';
+      invocation += func + '(' + param.name;
     }
 
     return invocation;
@@ -261,23 +248,13 @@
     var fluent = method.isFluent();
     var wrap = false;
 
-    if (importHandlerImplicits(method)) {
-      invocation += 'import io.vertx.lang.scala.HandlerOps._\n';
-      invocation += indentation
-    }
     if (importJavaConversions(method)) {
       invocation += 'import scala.collection.JavaConverters._\n';
       invocation += indentation;
     }
 
-    if (isFuture(method)) {
-      invocation += 'val promise = scala.concurrent.Promise[' + futureType(method) + ']()\n';
-      invocation += indentation;
-    }
-
     /** TODO: UGLYYY } **/
     if (method.returnType.kind == CLASS_HANDLER) {
-      invocation += 'import io.vertx.lang.scala.HandlerOps._\n';
       invocation += indentation;
       invocation += 'handlerToFunc[' + toScalaType(method.returnType.args[0])+'](';
     }
@@ -295,26 +272,16 @@
         invocation += ', ';
       }
 
-      if (param.type.kind == CLASS_HANDLER) {
-        var handlerType = param.type.args[0];
-        if (handlerType.kind == CLASS_ASYNC_RESULT) {
-          invocation += methodInvocationHandler(handlerType.args[0], 'promiseToMappedAsyncResultHandler', 'promiseToAsyncResultHandler', false);
-        } else {
-          invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true);
-        }
-      }
-
       if (param.name.equals("type")) {
         invocation += '`';
         invocation += param.name;
         invocation += '`'
-      } else if (isAsyncResult(param)) {
-        invocation += 'promise';
       } else {
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
           if (param.type.args[0].kind == CLASS_API) {
-            invocation += param.name + '.map(x => x.asJava.asInstanceOf[' + toJavaType(param.type.args[0]) + ']).asJava';
+          /* TODO: if a parameterized type WITHOUT a parameter is encountered we have to add at lease [_] => kinda hacky what I do here*/
+            invocation += param.name + '.map(x => x.asJava.asInstanceOf[' + toJavaType(param.type.args[0]) + '[_]]).asJava';
           } else {
             invocation += param.name + '.map(x => x:' + param.type.args[0].name + ').asJava';
           }
@@ -330,7 +297,12 @@
           } else {
             invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava';
           }
-        } else {
+        } else if (param.type.kind == CLASS_HANDLER) {
+            var handlerType = param.type.args[0];
+            invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
+            invocation += ')';
+        }
+        else {
           invocation += param.name;
         }
       }
@@ -339,8 +311,6 @@
         invocation += '.asJava.asInstanceOf[';
         invocation += toJavaType(param.type);
         invocation += ']';
-      } else if (param.type.kind == CLASS_HANDLER) {
-        invocation += ')';
       }
     }
     if (wrap) {
@@ -376,10 +346,7 @@
     }
 
     invocation += '\n';
-    if (isFuture(method)) {
-      invocation += indentation;
-      invocation += 'promise.future\n';
-    } else if (method.isFluent()) {
+    if (method.isFluent()) {
       invocation += indentation;
       invocation += 'this\n';
     }
@@ -391,21 +358,26 @@
      This results in conflicting methods that only differ in return parameter.
      This method filters out the non async result version */
   def includeMethod(method, instanceMethods) {
-    if (!isFuture(method)) {
-      for (m : instanceMethods) {
-        if (method != m &&
-            method.name == m.name  &&
-            isFuture(m) &&
-            method.params.size() == m.params.size() - 1) {
-          var i = 0;
-          while (i < method.params.size()) {
-            if (method.params.get(i) != m.params.get(i)) {
-              return true;
-            }
-            i = i + 1;
+    if(method.name == 'addInterceptor') {
+        return false
+    }
+    if(method.name == 'removeInterceptor') {
+        return false
+    }
+    for (m : instanceMethods) {
+      if (method != m &&
+        method.name == m.name  &&
+        isFuture(m) &&
+        method.params.size() == m.params.size() - 1) {
+        var i = 0;
+        var ret = false;
+        while (i < method.params.size()) {
+          if (method.params.get(i) != m.params.get(i)) {
+            ret = true;
           }
-          return false;
+          i = i + 1;
         }
+        return ret;
       }
     }
     return true;

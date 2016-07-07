@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core;
 
+import io.vertx.lang.scala.HandlerOps._
 import java.util.Map.Entry
 
 /**
@@ -26,7 +27,7 @@ import java.util.Map.Entry
   */
 class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.MultiMap = _asJava
 
   /**
     * Returns the value of with the specified name.  If there are
@@ -60,7 +61,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
   /**
     * Return true if empty
     */
-  def isEmpty(): Boolean = {
+  def isEmpty: Boolean = {
     _asJava.isEmpty()
   }
 
@@ -68,7 +69,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * Gets a immutable Set of all names
     * @return A [[scala.collection.immutable.Set]] of all names
     */
-  def names(): Set[String] = {
+  def names: Set[String] = {
     import scala.collection.JavaConverters._
     _asJava.names().asScala.map(x => x:String).toSet
   }
@@ -129,7 +130,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * Removes all
     * @return a reference to this, so the API can be used fluently
     */
-  def clear(): io.vertx.scala.core.MultiMap = {
+  def clear: io.vertx.scala.core.MultiMap = {
     _asJava.clear()
     this
   }
@@ -137,7 +138,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
   /**
     * Return the number of keys.
     */
-  def size(): Int = {
+  def size: Int = {
     _asJava.size()
   }
 
@@ -148,7 +149,7 @@ object MultiMap {
   def apply(_asJava: io.vertx.core.MultiMap): io.vertx.scala.core.MultiMap =
     new io.vertx.scala.core.MultiMap(_asJava)
 
-  def caseInsensitiveMultiMap(): io.vertx.scala.core.MultiMap = {
+  def caseInsensitiveMultiMap: io.vertx.scala.core.MultiMap = {
     MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
   }
 }

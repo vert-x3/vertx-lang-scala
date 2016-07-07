@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -25,13 +26,13 @@ import io.vertx.core.Handler
 class NetServer(private val _asJava: io.vertx.core.net.NetServer) 
     extends io.vertx.scala.core.metrics.Measured {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.NetServer = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled(): Boolean = {
+  def isMetricsEnabled: Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -41,7 +42,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * connect stream .
     * @return the connect stream
     */
-  def connectStream(): io.vertx.scala.core.net.NetSocketStream = {
+  def connectStream: io.vertx.scala.core.net.NetSocketStream = {
     NetSocketStream.apply(_asJava.connectStream())
   }
 
@@ -52,7 +53,6 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectHandler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetServer = {
-    import io.vertx.lang.scala.HandlerOps._
     NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler)))
   }
 
@@ -60,11 +60,9 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return handler that will be notified when listening or failed
     */
-  def listen(): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
-    _asJava.listen(promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
-    promise.future
+  def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(funcToHandler(listenHandler))
+    this
   }
 
   /**
@@ -73,11 +71,9 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param host the host to listen on
     * @return handler that will be notified when listening or failed
     */
-  def listen(port: Int, host: String): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
-    _asJava.listen(port, host, promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
-    promise.future
+  def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port, host, funcToHandler(listenHandler))
+    this
   }
 
   /**
@@ -85,22 +81,17 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param port the port to listen on
     * @return handler that will be notified when listening or failed
     */
-  def listen(port: Int): scala.concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetServer]()
-    _asJava.listen(port, promiseToMappedAsyncResultHandler(NetServer.apply)(promise))
-    promise.future
+  def listen(port: Int, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port, funcToHandler(listenHandler))
+    this
   }
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
     * @return the handler
     */
-  def close(): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.close(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
+    _asJava.close(funcToHandler(completionHandler))
   }
 
   /**
@@ -108,7 +99,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * signifying an ephemeral port
     * @return the actual port the server is listening on.
     */
-  def actualPort(): Int = {
+  def actualPort: Int = {
     _asJava.actualPort()
   }
 

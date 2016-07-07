@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus;
 
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   *
@@ -23,26 +24,26 @@ package io.vertx.scala.core.eventbus;
   */
 class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T]) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.eventbus.SendContext[T] = _asJava
 
   /**
     * @return  The message being sent
     */
-  def message(): io.vertx.scala.core.eventbus.Message[T] = {
+  def message: io.vertx.scala.core.eventbus.Message[T] = {
     Message.apply[T](_asJava.message())
   }
 
   /**
     * Call the next interceptor
     */
-  def next(): Unit = {
+  def next: Unit = {
     _asJava.next()
   }
 
   /**
     * @return true if the message is being sent (point to point) or False if the message is being published
     */
-  def send(): Boolean = {
+  def send: Boolean = {
     _asJava.send()
   }
 
@@ -50,6 +51,6 @@ class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T])
 
 object SendContext {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.SendContext): io.vertx.scala.core.eventbus.SendContext =
+  def apply[T](_asJava: io.vertx.core.eventbus.SendContext[T]): io.vertx.scala.core.eventbus.SendContext[T] =
     new io.vertx.scala.core.eventbus.SendContext(_asJava)
 }

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core;
 
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.Handler
 import java.util.function.Function
 
@@ -25,7 +26,7 @@ import java.util.function.Function
   */
 class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.Future[T] = _asJava
 
   /**
     * Has the future completed?
@@ -33,7 +34,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * It's completed if it's either succeeded or failed.
     * @return true if completed, false if not
     */
-  def isComplete(): Boolean = {
+  def isComplete: Boolean = {
     _asJava.isComplete()
   }
 
@@ -44,11 +45,9 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * future is completed.
     * @return the Handler that will be called with the result
     */
-  def setHandler(): scala.concurrent.Future[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[T]()
-    _asJava.setHandler(promiseToAsyncResultHandler(promise))
-    promise.future
+  def setHandler(handler: io.vertx.core.AsyncResult[T] => Unit): io.vertx.scala.core.Future[T] = {
+    _asJava.setHandler(funcToHandler(handler))
+    this
   }
 
   /**
@@ -62,7 +61,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
     */
-  def complete(): Unit = {
+  def complete: Unit = {
     _asJava.complete()
   }
 
@@ -86,7 +85,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * The result of the operation. This will be null if the operation failed.
     * @return the result or null if the operation failed.
     */
-  def result(): T = {
+  def result: T = {
     _asJava.result()
   }
 
@@ -94,7 +93,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * A Throwable describing failure. This will be null if the operation succeeded.
     * @return the cause or null if the operation succeeded.
     */
-  def cause(): Throwable = {
+  def cause: Throwable = {
     _asJava.cause()
   }
 
@@ -102,7 +101,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * Did it succeed?
     * @return true if it succeded or false otherwise
     */
-  def succeeded(): Boolean = {
+  def succeeded: Boolean = {
     _asJava.succeeded()
   }
 
@@ -110,7 +109,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * Did it fail?
     * @return true if it failed or false otherwise
     */
-  def failed(): Boolean = {
+  def failed: Boolean = {
     _asJava.failed()
   }
 
@@ -128,8 +127,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param composed the composed future
     * @return the composed future, used for chaining
     */
-  def compose[U](composed: io.vertx.scala.core.Future[U])(handler: T => Unit): io.vertx.scala.core.Future[U] = {
-    import io.vertx.lang.scala.HandlerOps._
+  def compose[U](handler: T => Unit, composed: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
     Future.apply[U](_asJava.compose(funcToHandler(handler), composed.asJava.asInstanceOf[io.vertx.core.Future[U]]))
   }
 
@@ -183,9 +181,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * @return an handler completing this future
     */
-  def completer(): io.vertx.core.AsyncResult[T] => Unit = {
-    import io.vertx.lang.scala.HandlerOps._
-    handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
+  def completer: io.vertx.core.AsyncResult[T] => Unit = {
+        handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
   }
 
 }
@@ -195,11 +192,11 @@ object Future {
   def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
     new io.vertx.scala.core.Future(_asJava)
 
-  def future[T](): io.vertx.scala.core.Future[T] = {
+  def future[T]: io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.future())
   }
 
-  def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
+  def succeededFuture[T]: io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
 
