@@ -272,6 +272,7 @@
         invocation += ', ';
       }
 
+      /* TODO: type is a keyword in scala */
       if (param.name.equals("type")) {
         invocation += '`';
         invocation += param.name;
@@ -308,9 +309,7 @@
       }
 
       if (param.type.kind == CLASS_API) {
-        invocation += '.asJava.asInstanceOf[';
-        invocation += toJavaType(param.type);
-        invocation += ']';
+        invocation += '.asJava.asInstanceOf[' + toJavaType(param.type) +']'
       }
     }
     if (wrap) {
@@ -353,32 +352,12 @@
     invocation;
   }
 
-
-  /* We change some methods to return a future instead of taking a async result handler as input
-     This results in conflicting methods that only differ in return parameter.
-     This method filters out the non async result version */
   def includeMethod(method, instanceMethods) {
     if(method.name == 'addInterceptor') {
         return false
     }
     if(method.name == 'removeInterceptor') {
         return false
-    }
-    for (m : instanceMethods) {
-      if (method != m &&
-        method.name == m.name  &&
-        isFuture(m) &&
-        method.params.size() == m.params.size() - 1) {
-        var i = 0;
-        var ret = false;
-        while (i < method.params.size()) {
-          if (method.params.get(i) != m.params.get(i)) {
-            ret = true;
-          }
-          i = i + 1;
-        }
-        return ret;
-      }
     }
     return true;
   }

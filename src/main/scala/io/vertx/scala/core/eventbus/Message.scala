@@ -67,6 +67,18 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
   }
 
   /**
+    * Reply to this message.
+    * 
+    * If the message was sent specifying a reply handler, that handler will be
+    * called when it has received a reply. If the message wasn't sent specifying a receipt handler
+    * this method does nothing.
+    * @param message the message to reply with.
+    */
+  def reply(message: AnyRef): Unit = {
+    _asJava.reply(message)
+  }
+
+  /**
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
@@ -74,6 +86,15 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     */
   def reply[R](message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
     _asJava.reply(message, funcToHandler(replyHandler))
+  }
+
+  /**
+    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
+    * @param message the reply message
+    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    */
+  def reply(message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
+    _asJava.reply(message, options)
   }
 
   /**

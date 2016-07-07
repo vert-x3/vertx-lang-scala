@@ -110,6 +110,13 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Unregisters the handler which created this registration
+    */
+  def unregister: Unit = {
+    _asJava.unregister()
+  }
+
+  /**
+    * Unregisters the handler which created this registration
     * @return the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
   def unregister(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {

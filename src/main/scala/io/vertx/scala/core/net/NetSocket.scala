@@ -129,6 +129,42 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   /**
+    * Tell the operating system to stream a file as specified by `filename` directly from disk to the outgoing connection,
+    * bypassing userspace altogether (where supported by the underlying operating system. This is a very efficient way to stream files.
+    * @param filename file name of the file to send
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename)
+    this
+  }
+
+  /**
+    * Tell the operating system to stream a file as specified by `filename` directly from disk to the outgoing connection,
+    * bypassing userspace altogether (where supported by the underlying operating system. This is a very efficient way to stream files.
+    * @param filename file name of the file to send
+    * @param offset offset
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String, offset: Long): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename, offset)
+    this
+  }
+
+  /**
+    * Tell the operating system to stream a file as specified by `filename` directly from disk to the outgoing connection,
+    * bypassing userspace altogether (where supported by the underlying operating system. This is a very efficient way to stream files.
+    * @param filename file name of the file to send
+    * @param offset offset
+    * @param length length
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String, offset: Long, length: Long): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename, offset, length)
+    this
+  }
+
+  /**
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send

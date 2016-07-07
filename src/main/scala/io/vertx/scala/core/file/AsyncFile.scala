@@ -100,6 +100,13 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
 
   /**
     * Close the file. The actual close happens asynchronously.
+    */
+  def close: Unit = {
+    _asJava.close()
+  }
+
+  /**
+    * Close the file. The actual close happens asynchronously.
     * The handler will be called when the close is complete, or an error occurs.
     * @return the handler
     */
@@ -143,6 +150,19 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def read(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
     _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, funcToHandler(handler))
+    this
+  }
+
+  /**
+    * Flush any writes made to this file to underlying persistent storage.
+    * 
+    * If the file was opened with `flush` set to `true` then calling this method will have no effect.
+    * 
+    * The actual flush will happen asynchronously.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def flush: io.vertx.scala.core.file.AsyncFile = {
+    _asJava.flush()
     this
   }
 

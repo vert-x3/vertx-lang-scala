@@ -251,6 +251,44 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset @code{0} which means starting from the beginning of the file.
+    * @param filename path to the file to serve
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename)
+    this
+  }
+
+  /**
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length @code{Long.MAX_VALUE} which means until the end of the
+    * file.
+    * @param filename path to the file to serve
+    * @param offset offset to start serving from
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String, offset: Long): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename, offset)
+    this
+  }
+
+  /**
+    * Ask the OS to stream a file as specified by `filename` directly
+    * from disk to the outgoing connection, bypassing userspace altogether
+    * (where supported by the underlying operating system.
+    * This is a very efficient way to serve files.
+    * The actual serve is asynchronous and may not complete until some time after this method has returned.
+    * @param filename path to the file to serve
+    * @param offset offset to start serving from
+    * @param length length to serve to
+    * @return a reference to this, so the API can be used fluently
+    */
+  def sendFile(filename: String, offset: Long, length: Long): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.sendFile(filename, offset, length)
+    this
+  }
+
+  /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
