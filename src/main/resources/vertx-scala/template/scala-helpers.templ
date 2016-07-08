@@ -161,15 +161,13 @@
         } else {
           paramList += ', ';
         }
+        /* TODO: type is a scala keyword*/
         if (param.name.equals("type")) {
-          paramList += '`';
-          paramList += param.name;
-          paramList += '`'
+          paramList += '`' + param.name + '`';
         } else {
           paramList += param.name;
         }
-        paramList += ': ';
-        paramList += toScalaType(param.type);
+        paramList += ': '+toScalaType(param.type);
     }
     paramList;
   }
