@@ -59,7 +59,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 

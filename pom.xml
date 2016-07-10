@@ -16,9 +16,11 @@
     <name>Vert.x Scala Language Support</name>
 
     <properties>
-        <stack.version>3.3.0</stack.version>
+        <stack.version>3.3.1</stack.version>
         <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
         <scala.version>2.11.8</scala.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -45,7 +47,6 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-
 
         <!-- Not needed at runtime -->
         <dependency>
@@ -97,6 +98,12 @@
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
+            <artifactId>vertx-codegen</artifactId>
+            <classifier>tck</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
@@ -118,27 +125,16 @@
             <artifactId>scalactic_2.11</artifactId>
             <version>2.2.6</version>
         </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-unit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>default-testCompile</id>
-                            <configuration>
-                                <annotationProcessors>
-                                    <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-                                </annotationProcessors>
-                                <compilerArgs>
-                                    <arg>-AoutputDirectory=${project.basedir}/src/test</arg>
-                                </compilerArgs>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -159,7 +155,13 @@
                             <configuration>
                                 <filesets>
                                     <fileset>
-                                        <directory>src/main/groovy/io/vertx/groovy/core</directory>
+                                        <directory>src/main/scala/io/vertx/scala/core</directory>
+                                    </fileset>
+                                    <fileset>
+                                        <directory>src/test/scala/com</directory>
+                                    </fileset>
+                                    <fileset>
+                                        <directory>src/test/scala/io/vertx/scala</directory>
                                     </fileset>
                                     <fileset>
                                         <directory>${asciidoc.dir}</directory>
@@ -192,7 +194,7 @@
                             <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
                         </configuration>
                     </execution>
-                    <!-- Unpack codegen source code to src/test/java -->
+                    <!-- Unpack tck source code to src/test/java -->
                     <execution>
                         <id>unpack-codegen</id>
                         <phase>generate-test-sources</phase>
@@ -204,7 +206,7 @@
                             <includeArtifactIds>vertx-codegen</includeArtifactIds>
                             <includeTypes>jar</includeTypes>
                             <includeClassifiers>tck-sources</includeClassifiers>
-                            <outputDirectory>${basedir}/src/test/java</outputDirectory>
+                            <outputDirectory>${project.build.directory}/sources/codegen</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -219,7 +221,7 @@
                     </systemProperties>
                 </configuration>
                 <executions>
-                    <!-- Run the annotation processor on vertx-core and generate the Groovy API -->
+                    <!-- Run the annotation processor on vertx-core and generate the Scala API -->
                     <execution>
                         <id>generate-api</id>
                         <goals>
@@ -229,13 +231,30 @@
                         <configuration>
                             <processors>
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
+                                <processor>io.vertx.docgen.DocGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <generators>scala</generators>
                                 <outputDirectory>${project.basedir}/src/main</outputDirectory>
-                                <docgen.output>${asciidoc.dir}/scala</docgen.output>
+                                <docgen.output>${asciidoc.dir}/ceylon</docgen.output>
                             </optionMap>
                             <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
+                        </configuration>
+                    </execution>
+                    <!-- Run the annotation processor on codegen and generate the Scala codegen -->
+                    <execution>
+                        <id>generate-codegen</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <phase>generate-test-sources</phase>
+                        <configuration>
+                            <processors>
+                                <processor>io.vertx.codegen.CodeGenProcessor</processor>
+                            </processors>
+                            <optionMap>
+                                <outputDirectory>${project.basedir}/src/test</outputDirectory>
+                            </optionMap>
+                            <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
                         </configuration>
                     </execution>
                     <!-- We have to run the annotation processor again to process docs -->
@@ -294,6 +313,7 @@
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>3.2.2</version>
                 <configuration>
+                    <sendJavaToScalac>false</sendJavaToScalac>
                     <args>
                         <arg>-target:jvm-1.8</arg>
                         <arg>-feature</arg>

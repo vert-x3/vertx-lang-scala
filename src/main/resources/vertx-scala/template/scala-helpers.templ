@@ -30,14 +30,26 @@
     } else if (type.kind == CLASS_DATA_OBJECT || type.kind == CLASS_ENUM) {
       return type.name;
     } else if (type.kind == CLASS_LIST){
-        if(type.args[0].params.size == 1)
-          return 'List[' + toScalaType(type.args[0]) + '[_]]';
-        else
+        if(type.args.isEmpty)
+          return 'List';
+        else if(type.args[0].params.isEmpty())
           return 'List[' + toScalaType(type.args[0]) + ']';
+        else
+          return 'List[' + toScalaType(type.args[0]) + '[_]]';
     } else if (type.kind == CLASS_SET){
-      return 'Set[' + toScalaType(type.args[0]) + ']';
+        if(type.args.isEmpty)
+          return 'Set';
+        else if(type.args[0].params.isEmpty())
+          return 'Set[' + toScalaType(type.args[0]) + ']';
+        else
+          return 'Set[' + toScalaType(type.args[0]) + '[_]]';
     } else if (type.kind == CLASS_MAP){
-      return 'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
+        if(type.args.isEmpty)
+          'Map';
+        else if(type.args[0].params.isEmpty())
+          'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
+        else
+          'Map[' + toScalaType(type.args[0]) + '[_], ' + toScalaType(type.args[1]) + '[_]]';
     } else if (type.kind == CLASS_HANDLER) {
       var type = toScalaType(type.args[0]);
 
@@ -90,6 +102,10 @@
 
   def toScalaApply(name) {
     helper.getNonGenericType(name) + '.apply' + getGenericType(name);
+  }
+
+  def toScalaApplyWithParam(name, paramName) {
+    helper.getNonGenericType(name) + '.apply' + getGenericType(name) + '(' + paramName + ')';
   }
 
   def isFuture(method) {
@@ -182,26 +198,65 @@
   }
 
   def methodInvocationHandlerCollection(type, method) {
-    var invocation = '';
-    var listType = type.args[0];
+    var invocation = method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala';
 
-    if (listType.kind == CLASS_API) {
-      invocation += method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala.map(' + toScalaApply(listType.getSimpleName()) + ')';
-    } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
-               listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
-      invocation += method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala.map(x => x:' + toScalaType(listType) + ')';
-    } else if (listType.kind == CLASS_STRING ||
-               listType.kind == CLASS_JSON_OBJECT ||
-               listType.kind == CLASS_JSON_ARRAY) {
-      invocation += method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala';
-    } else {
-      invocation += 'TODO';
+    if(type.kind == CLASS_MAP) {
+        var mapType = type.args[0];
+        invocation += '.map((a) => (';
+        if (mapType.kind == CLASS_API ||
+            mapType.kind == CLASS_DATA_OBJECT ||
+            mapType.kind == CLASS_ENUM) {
+          invocation += toScalaApplyWithParam(mapType.getSimpleName(), 'a._1');
+        } else if (mapType.kind == CLASS_PRIMITIVE ||
+                   mapType.kind == CLASS_BOXED_PRIMITIVE ||
+                   mapType.name == 'Throwable' ||
+                   mapType.name == 'java.lang.Throwable') {
+          invocation += 'a._1:' + toScalaType(mapType);
+        } else if (mapType.kind == CLASS_STRING ||
+                   mapType.kind == CLASS_JSON_OBJECT ||
+                   mapType.kind == CLASS_JSON_ARRAY) {
+          invocation += 'a._1';
+        }
+        invocation += ',';
+        mapType = type.args[1];
+        if (mapType.kind == CLASS_API ||
+            mapType.kind == CLASS_DATA_OBJECT ||
+            mapType.kind == CLASS_ENUM) {
+          invocation += toScalaApplyWithParam(mapType.getSimpleName(), 'a._2');
+        } else if (mapType.kind == CLASS_PRIMITIVE ||
+                   mapType.kind == CLASS_BOXED_PRIMITIVE ||
+                   mapType.name == 'Throwable' ||
+                   mapType.name == 'java.lang.Throwable') {
+          invocation += 'a._2:' + toScalaType(mapType);
+        } else if (mapType.kind == CLASS_STRING ||
+                   mapType.kind == CLASS_JSON_OBJECT ||
+                   mapType.kind == CLASS_JSON_ARRAY) {
+          invocation += 'a._2';
+        }
+        invocation += '))'
+    }
+    else {
+      var listType = type.args[0];
+      if (listType.kind == CLASS_API ||
+          listType.kind == CLASS_DATA_OBJECT ||
+          listType.kind == CLASS_ENUM) {
+        invocation += '.map(' + toScalaApply(listType.getSimpleName()) + ')';
+      } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
+                 listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
+        invocation += '.map(x => x:' + toScalaType(listType) + ')';
+      } else if (listType.kind == CLASS_STRING ||
+                 listType.kind == CLASS_JSON_OBJECT ||
+                 listType.kind == CLASS_JSON_ARRAY) {
+        /* no special action required*/
+      }
     }
 
     if (type.kind == CLASS_LIST) {
-      invocation += '.toList)(';
+      invocation += '.toList)('+param.name;
+    } else if (type.kind == CLASS_SET) {
+      invocation += '.toSet)('+param.name;
     } else {
-      invocation += '.toSet)(';
+      invocation += '.toMap)('+param.name;
     }
 
     return invocation;
@@ -213,7 +268,8 @@
     if (type.kind == CLASS_API) {
       invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+param.name;
     } else if (type.kind == CLASS_LIST ||
-               type.kind == CLASS_SET) {
+               type.kind == CLASS_SET ||
+               type.kind == CLASS_MAP) {
       invocation += methodInvocationHandlerCollection(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
@@ -221,9 +277,9 @@
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += func + '[' + toJavaType(type) + '](';
+      invocation += func + '[' + toJavaType(type) + '](' + param.name;
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
-      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])(';
+      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])('+ param.name;
       if (convertUnit) {
         invocation += '_ => ';
       }
@@ -279,8 +335,7 @@
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
           if (param.type.args[0].kind == CLASS_API) {
-          /* TODO: if a parameterized type WITHOUT a parameter is encountered we have to add at lease [_] => kinda hacky what I do here*/
-            invocation += param.name + '.map(x => x.asJava.asInstanceOf[' + toJavaType(param.type.args[0]) + '[_]]).asJava';
+            invocation += param.name + '.map(x => x.asJava).asJava';
           } else {
             invocation += param.name + '.map(x => x:' + param.type.args[0].name + ').asJava';
           }

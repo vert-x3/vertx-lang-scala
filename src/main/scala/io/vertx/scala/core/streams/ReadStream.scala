@@ -114,7 +114,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def endHandler(endHandler: () => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+      _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
       this
     }
 

@@ -85,7 +85,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 
@@ -105,7 +105,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 
@@ -234,7 +234,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return a reference to this, so the API can be used fluently
     */
   def continueHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 

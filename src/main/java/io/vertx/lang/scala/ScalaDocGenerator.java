@@ -1,5 +1,6 @@
 package io.vertx.lang.scala;
 
+import io.vertx.codegen.annotations.Nullable;
 import io.vertx.codegen.type.*;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.groovy.GroovyLang;
@@ -23,7 +24,7 @@ public class ScalaDocGenerator implements DocGenerator {
     private ProcessingEnvironment env;
 
     @Override
-    public void init(ProcessingEnvironment processingEnv) {
+    public void init(@Nullable ProcessingEnvironment processingEnv) {
         factory = new TypeMirrorFactory(processingEnv.getElementUtils(), processingEnv.getTypeUtils());
         translator = new CodeTranslator(processingEnv);
         env = processingEnv;

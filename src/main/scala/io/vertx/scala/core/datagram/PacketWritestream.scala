@@ -70,7 +70,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.datagram.PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 

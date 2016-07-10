@@ -113,7 +113,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def shutdownHandler(handler: () => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 
@@ -148,7 +148,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 

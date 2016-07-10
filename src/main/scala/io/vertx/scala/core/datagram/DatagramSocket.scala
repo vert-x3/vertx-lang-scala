@@ -220,7 +220,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 

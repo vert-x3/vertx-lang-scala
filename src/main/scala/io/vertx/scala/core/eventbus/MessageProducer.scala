@@ -74,7 +74,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 

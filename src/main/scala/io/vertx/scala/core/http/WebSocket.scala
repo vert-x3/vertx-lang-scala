@@ -118,7 +118,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 
@@ -133,7 +133,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 
@@ -158,7 +158,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def closeHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 
