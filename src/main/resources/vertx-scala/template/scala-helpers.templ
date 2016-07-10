@@ -197,57 +197,45 @@
     }
   }
 
+  def createGenericFromTypeWithParamName(type, paramName) {
+    var invocation = '';
+    if (type.kind == CLASS_API ||
+        type.kind == CLASS_DATA_OBJECT ||
+        type.kind == CLASS_ENUM) {
+      invocation += toScalaApplyWithParam(type.getSimpleName(), paramName);
+    } else if (type.kind == CLASS_PRIMITIVE ||
+               type.kind == CLASS_BOXED_PRIMITIVE ||
+               type.name == 'Throwable' ||
+               type.name == 'java.lang.Throwable') {
+      invocation += paramName + ':' + toScalaType(type);
+    } else if (type.kind == CLASS_STRING ||
+               type.kind == CLASS_JSON_OBJECT ||
+               type.kind == CLASS_JSON_ARRAY) {
+      invocation += paramName;
+    }
+    return invocation;
+  }
+
   def methodInvocationHandlerCollection(type, method) {
-    var invocation = method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala';
+    var invocation = '';
+    var mapIt = method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala';
 
     if(type.kind == CLASS_MAP) {
-        var mapType = type.args[0];
-        invocation += '.map((a) => (';
-        if (mapType.kind == CLASS_API ||
-            mapType.kind == CLASS_DATA_OBJECT ||
-            mapType.kind == CLASS_ENUM) {
-          invocation += toScalaApplyWithParam(mapType.getSimpleName(), 'a._1');
-        } else if (mapType.kind == CLASS_PRIMITIVE ||
-                   mapType.kind == CLASS_BOXED_PRIMITIVE ||
-                   mapType.name == 'Throwable' ||
-                   mapType.name == 'java.lang.Throwable') {
-          invocation += 'a._1:' + toScalaType(mapType);
-        } else if (mapType.kind == CLASS_STRING ||
-                   mapType.kind == CLASS_JSON_OBJECT ||
-                   mapType.kind == CLASS_JSON_ARRAY) {
-          invocation += 'a._1';
-        }
-        invocation += ',';
-        mapType = type.args[1];
-        if (mapType.kind == CLASS_API ||
-            mapType.kind == CLASS_DATA_OBJECT ||
-            mapType.kind == CLASS_ENUM) {
-          invocation += toScalaApplyWithParam(mapType.getSimpleName(), 'a._2');
-        } else if (mapType.kind == CLASS_PRIMITIVE ||
-                   mapType.kind == CLASS_BOXED_PRIMITIVE ||
-                   mapType.name == 'Throwable' ||
-                   mapType.name == 'java.lang.Throwable') {
-          invocation += 'a._2:' + toScalaType(mapType);
-        } else if (mapType.kind == CLASS_STRING ||
-                   mapType.kind == CLASS_JSON_OBJECT ||
-                   mapType.kind == CLASS_JSON_ARRAY) {
-          invocation += 'a._2';
-        }
-        invocation += '))'
+        invocation += mapIt + '.map((a) => (' + createGenericFromTypeWithParamName(type.args[0], 'a._1') + ',' + createGenericFromTypeWithParamName(type.args[1], 'a._2') + '))'
     }
     else {
       var listType = type.args[0];
       if (listType.kind == CLASS_API ||
           listType.kind == CLASS_DATA_OBJECT ||
           listType.kind == CLASS_ENUM) {
-        invocation += '.map(' + toScalaApply(listType.getSimpleName()) + ')';
+        invocation += mapIt + '.map(' + toScalaApply(listType.getSimpleName()) + ')';
       } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
                  listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
-        invocation += '.map(x => x:' + toScalaType(listType) + ')';
+        invocation += mapIt + '.map(x => x:' + toScalaType(listType) + ')';
       } else if (listType.kind == CLASS_STRING ||
                  listType.kind == CLASS_JSON_OBJECT ||
                  listType.kind == CLASS_JSON_ARRAY) {
-        /* no special action required*/
+        invocation += mapIt
       }
     }
 
