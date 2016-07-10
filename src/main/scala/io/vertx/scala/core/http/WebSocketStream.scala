@@ -55,7 +55,7 @@ class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 

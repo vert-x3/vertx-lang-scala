@@ -67,7 +67,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def endHandler(endHandler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
     this
   }
 
@@ -82,7 +82,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def drainHandler(handler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
     this
   }
 

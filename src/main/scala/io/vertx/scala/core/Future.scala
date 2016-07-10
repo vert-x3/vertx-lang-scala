@@ -116,26 +116,27 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * Compose this future with a provided `next` future.
     *
-    * When this future succeeds, the `handler` will be called with the completed value, this handler
-    * should complete the next future.
+    * When this (the one on which `compose` is called) future succeeds, the `handler` will be called with
+    * the completed value, this handler should complete the next future.
     *
     * If the `handler` throws an exception, the returned future will be failed with this exception.
     *
     * When this future fails, the failure will be propagated to the `next` future and the `handler`
     * will not be called.
     * @param handler the handler
-    * @param composed the composed future
-    * @return the composed future, used for chaining
+    * @param next the next future
+    * @return the next future, used for chaining
     */
-  def compose[U](handler: T => Unit, composed: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(funcToHandler(handler), composed.asJava.asInstanceOf[io.vertx.core.Future[U]]))
+  def compose[U](handler: T => Unit, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
+    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
   }
 
   /**
     * Compose this future with a `mapper` function.
     *
-    * When this future succeeds, the `mapper` will be called with the completed value and this mapper
-    * returns a future. This returned future completion will trigger the future returned by this method call.
+    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
+    * the completed value and this mapper returns another future object. This returned future completion will complete
+    * the future returned by this method call.
     *
     * If the `mapper` throws an exception, the returned future will be failed with this exception.
     *

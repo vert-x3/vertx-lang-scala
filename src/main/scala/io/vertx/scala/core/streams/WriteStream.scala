@@ -158,7 +158,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
       this
     }
 

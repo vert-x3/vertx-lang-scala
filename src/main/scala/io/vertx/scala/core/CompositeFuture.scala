@@ -108,7 +108,7 @@ object CompositeFuture {
 
   def all(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
     import scala.collection.JavaConverters._
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[io.vertx.core.Future[_]]).asJava))
+    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(futures.map(x => x.asJava).asJava))
   }
 
   def any[T1, T2](f1: io.vertx.scala.core.Future[T1], f2: io.vertx.scala.core.Future[T2]): io.vertx.scala.core.CompositeFuture = {
@@ -133,6 +133,6 @@ object CompositeFuture {
 
   def any(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
     import scala.collection.JavaConverters._
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[io.vertx.core.Future[_]]).asJava))
+    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(futures.map(x => x.asJava).asJava))
   }
 }

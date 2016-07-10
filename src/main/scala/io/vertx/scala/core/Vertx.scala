@@ -256,7 +256,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param action - a handler representing the action to execute
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(action_ => action()))
   }
 
   /**

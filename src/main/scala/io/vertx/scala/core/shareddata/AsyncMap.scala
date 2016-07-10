@@ -47,8 +47,8 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
   }
 
   /**
-    * Like [[io.vertx.scala.core.shareddata.AsyncMap#put]] but specifying a timeout. If the value cannot be put within the timeout a
-    * failure will be passed to the handler
+    * Like [[io.vertx.scala.core.shareddata.AsyncMap#put]] but specifying a time to live for the entry. Entry will expire and get evicted after the
+    * ttl.
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry
@@ -70,8 +70,8 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
   }
 
   /**
-    * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsent]] but specifying a timeout. If the value cannot be put within the timeout a
-    * failure will be passed to the handler
+    * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsent]] but specifying a time to live for the entry. Entry will expire and get evicted
+    * after the ttl.
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry

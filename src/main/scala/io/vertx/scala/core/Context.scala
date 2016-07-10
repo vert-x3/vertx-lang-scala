@@ -61,7 +61,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param action the action to run
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(action_ => action()))
   }
 
   /**
