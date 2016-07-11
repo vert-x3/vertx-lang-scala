@@ -13,7 +13,7 @@
 @end{}
 @if{method.name != 'type'}
 @if{method.name == 'toString' && method.params.size == 0}
-@comment{"TODO: UUUUGGLLLYY"}
+@comment{"TODO: we need a generic way to identify overridden base methods like hashCode, to String, ..."}
 @{indentation}  override def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
