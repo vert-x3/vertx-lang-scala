@@ -24,7 +24,7 @@ import com.acme.scala.pkg.sub.SubInterface
 import io.vertx.codegen.testmodel._
 import io.vertx.core.AsyncResult
 import io.vertx.core.VertxException
-import io.vertx.core.json.JsonObject
+import io.vertx.core.json.{JsonArray, JsonObject}
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
 import io.vertx.scala.codegen.testmodel.ConcreteHandlerUserTypeExtension
@@ -564,323 +564,238 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerGenericUserType" should "work" in {
-    obj.methodWithHandlerGenericUserType("string_value", (res) => {
-      assert(res.isInstanceOf[GenericRefedInterface])
+    obj.methodWithHandlerGenericUserType[String]("string_value", (res) => {
       assert("string_value" == res.getValue())
     })
   }
 
-//  @Test
-//  public void testMethodWithHandlerAsyncResultGenericUserType() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultGenericUserType("string_value_2", {
-//      checker.assertAsyncResult("string_value_2", it, { r -> ((GenericRefedInterface)r).value });
-//    });
-//    assertEquals(1, checker.count);
-//  }
-//
-//  @Test
-//  public void testMethodWithGenericParam() {
-//    obj.methodWithGenericParam("String", "foo")
-//    obj.methodWithGenericParam("Ref", new RefedInterface1Impl().setString("bar"))
-//    obj.methodWithGenericParam("JsonObject", [foo:"hello","bar":123])
-//    obj.methodWithGenericParam("JsonArray", ["foo", "bar", "wib"])
-//  }
-//
-//  @Test
-//  public void testMethodWithGenericHandler() {
-//    def count = 0;
-//    obj.methodWithGenericHandler("String", {
-//      assertEquals("foo", it)
-//      count++
-//    })
-//    assertEquals(1, count);
-//    count = 0;
-//    obj.methodWithGenericHandler("Ref", {
-//      io.vertx.codegen.testmodel.RefedInterface1 ref = (io.vertx.codegen.testmodel.RefedInterface1) it;
-//      assertEquals("bar", ref.string)
-//      count++
-//    })
-//    assertEquals(1, count);
-//    count = 0;
-//    obj.methodWithGenericHandler("JsonObject", {
-//      assertEquals([foo:"hello","bar":123], it)
-//      count++
-//    })
-//    assertEquals(1, count);
-//    count = 0;
-//    obj.methodWithGenericHandler("JsonArray", {
-//      assertEquals(["foo", "bar", "wib"], it)
-//      count++
-//    })
-//    count = 0;
-//    obj.methodWithGenericHandler("JsonObjectComplex", {
-//      assertEquals([outer: [foo: "hello"], bar: ["this", "that"]], it)
-//      count++
-//    })
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithGenericHandlerAsyncResult() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithGenericHandlerAsyncResult("String", {
-//      checker.assertAsyncResult("foo", it)
-//    })
-//    assertEquals(1, checker.count);
-//    checker = new AsyncResultChecker();
-//    obj.methodWithGenericHandlerAsyncResult("Ref", {
-//      AsyncResult<io.vertx.codegen.testmodel.RefedInterface1> asyncRef = (AsyncResult<io.vertx.codegen.testmodel.RefedInterface1>) it;
-//      checker.assertAsyncResult("bar", asyncRef, { it.string })
-//    })
-//    assertEquals(1, checker.count);
-//    checker = new AsyncResultChecker();
-//    obj.methodWithGenericHandlerAsyncResult("JsonObject", {
-//      checker.assertAsyncResult([foo:"hello","bar":123], it)
-//    })
-//    assertEquals(1, checker.count);
-//    checker = new AsyncResultChecker();
-//    obj.methodWithGenericHandlerAsyncResult("JsonObjectComplex", {
-//      checker.assertAsyncResult([outer: [foo: "hello"], bar: ["this", "that"]], it)
-//    })
-//    assertEquals(1, checker.count);
-//    checker = new AsyncResultChecker();
-//    obj.methodWithGenericHandlerAsyncResult("JsonArray", {
-//      checker.assertAsyncResult(["foo", "bar", "wib"], it)
-//    })
-//    assertEquals(1, checker.count);
-//  }
-//
-//  @Test
-//  public void testMethodListParams() {
-//    RefedInterface1 refed1 = new RefedInterface1(new RefedInterface1Impl())
-//    refed1.setString("foo")
-//    RefedInterface1 refed2 = new RefedInterface1(new RefedInterface1Impl())
-//    refed2.setString("bar")
-//    obj.methodWithListParams((List<String>)["foo", "bar"], (List<Byte>)[(byte)2, (byte)3], (List<Short>)[(short)12, (short)13],
-//      (List<Integer>)[1234, 1345], (List<Long>)[123l, 456l], (List<Map<String, Object>>)[[foo:"bar"], [eek: "wibble"]],
-//      (List<List<Object>>)[["foo"], ["blah"]], (List<RefedInterface1>)[refed1, refed2],
-//      (List<TestDataObject>)[[foo:"String 1",bar:1,wibble:1.1], [foo:"String 2",bar: 2,wibble: 2.2]], (List<TestEnum>)[TestEnum.JULIEN,TestEnum.TIM])
-//  }
-//
-//  @Test
-//  public void testMethodSetParams() {
-//    RefedInterface1 refed1 = new RefedInterface1(new RefedInterface1Impl())
-//    refed1.setString("foo")
-//    RefedInterface1 refed2 = new RefedInterface1(new RefedInterface1Impl())
-//    refed2.setString("bar")
-//    obj.methodWithSetParams((Set<String>)["foo", "bar"], (Set<Byte>)[(byte)2, (byte)3], (Set<Short>)[(short)12, (short)13],
-//      (Set<Integer>)[1234, 1345], (Set<Long>)[123l, 456l], (Set<Map<String, Object>>)[[foo:"bar"], [eek: "wibble"]],
-//      (Set<List<Object>>)[["foo"], ["blah"]], (Set<RefedInterface1>)[refed1, refed2],
-//      (Set<TestDataObject>)[[foo:"String 1",bar:1,wibble:1.1], [foo:"String 2",bar: 2,wibble: 2.2]], (Set<TestEnum>)[TestEnum.TIM,TestEnum.JULIEN])
-//  }
-//
-//  @Test
-//  public void testMethodMapParams() {
-//    RefedInterface1 refed1 = new RefedInterface1(new RefedInterface1Impl())
-//    refed1.setString("foo")
-//    RefedInterface1 refed2 = new RefedInterface1(new RefedInterface1Impl())
-//    refed2.setString("bar")
-//    obj.methodWithMapParams(
-//        (Map<String, String>)[foo: "bar", eek: "wibble"],
-//        (Map<String, Byte>)[foo: (byte)2, eek: (byte)3],
-//        (Map<String, Short>)[foo: (short)12, eek: (short)13],
-//        (Map<String, Integer>)[foo: 1234, eek: 1345],
-//        (Map<String, Long>)[foo: 123l, eek: 456l],
-//        (Map<String, Map<String, Object>>)[foo: [foo:"bar"], eek: [eek: "wibble"]],
-//        (Map<String, List<Object>>)[foo: ["foo"], eek: ["blah"]],
-//        (Map<String, RefedInterface1>)[foo: refed1, eek: refed2]
-//    )
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerListEnum() {
-//    def count = 0
-//    obj.methodWithHandlerListEnum({
-//      assertEquals([TestEnum.TIM, TestEnum.JULIEN], it);
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerSetEnum() {
-//    def count = 0
-//    obj.methodWithHandlerSetEnum({
-//      assertEquals([TestEnum.TIM, TestEnum.JULIEN] as Set, it);
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultListEnum() {
-//    def count = 0
-//    obj.methodWithHandlerAsyncResultListEnum({
-//      assertEquals([TestEnum.TIM, TestEnum.JULIEN], it.result());
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultSetEnum() {
-//    def count = 0
-//    obj.methodWithHandlerAsyncResultSetEnum({
-//      assertEquals([TestEnum.TIM, TestEnum.JULIEN] as Set, it.result());
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
+  "testMethodWithHandlerAsyncResultGenericUserType" should "work" in {
+    obj.methodWithHandlerAsyncResultGenericUserType[String]("string_value_2", (res) => {
+      assert(res.result().getValue() == "string_value_2")
+    })
+  }
+
+  "testMethodWithGenericParam" should "work" in {
+    obj.methodWithGenericParam("String", "foo")
+    obj.methodWithGenericParam("Ref", new RefedInterface1Impl().setString("bar"))
+    obj.methodWithGenericParam("JsonObject", Json.obj(("foo", "hello"), ("bar", 123)))
+    obj.methodWithGenericParam("JsonArray", arr("foo", "bar", "wib"))
+  }
+
+  "testMethodWithGenericHandler" should "work" in {
+    obj.methodWithGenericHandler[String]("String", (res) => assert(res == "foo"))
+    obj.methodWithGenericHandler[io.vertx.codegen.testmodel.RefedInterface1]("Ref", (res) => assert(res.getString == "bar"))
+    obj.methodWithGenericHandler[JsonObject]("JsonObject", (res) => assert(res == Json.obj(("foo", "hello"), ("bar", 123))))
+    obj.methodWithGenericHandler[JsonArray]("JsonArray", (res) => assert(res == arr("foo", "bar", "wib")))
+    obj.methodWithGenericHandler[JsonObject]("JsonObjectComplex", (res) => assert(res == Json.obj(("outer", Json.obj(("foo", "hello"))), ("bar", arr("this", "that")))))
+  }
+  "testMethodWithGenericHandlerAsyncResult" should "work" in {
+    obj.methodWithGenericHandlerAsyncResult[String]("String", (res) => assert(res.result() == "foo"))
+    obj.methodWithGenericHandlerAsyncResult[io.vertx.codegen.testmodel.RefedInterface1]("Ref", (res) => assert(res.result().getString == "bar"))
+    obj.methodWithGenericHandlerAsyncResult[JsonObject]("JsonObject", (res) => assert(res.result() == Json.obj(("foo", "hello"), ("bar", 123))))
+    obj.methodWithGenericHandlerAsyncResult[JsonArray]("JsonArray", (res) => assert(res.result() == arr("foo", "bar", "wib")))
+    obj.methodWithGenericHandlerAsyncResult[JsonObject]("JsonObjectComplex", (res) => assert(res.result() == Json.obj(("outer", Json.obj(("foo", "hello"))), ("bar", arr("this", "that")))))
+  }
+
+  "testMethodListParams" should "work" in {
+    val refed1 = new RefedInterface1(new RefedInterface1Impl())
+    refed1.setString("foo")
+    val refed2 = new RefedInterface1(new RefedInterface1Impl())
+    refed2.setString("bar")
+
+    obj.methodWithListParams(
+      List("foo", "bar"),
+      List(2.toByte, 3.toByte),
+      List(12.toShort, 13.toShort),
+      List(1234, 1345),
+      List(123l, 456l),
+      List(Json.obj(("foo", "bar")), Json.obj(("eek", "wibble"))),
+      List(arr("foo"), arr("blah")),
+      List(refed1, refed2),
+      List(new TestDataObject().setBar(1).setWibble(1.1).setFoo("String 1"), new TestDataObject().setBar(2).setWibble(2.2).setFoo("String 2")),
+      List(TestEnum.JULIEN,TestEnum.TIM))
+  }
+
+  "testMethodSetParams" should "work" in {
+    val refed1 = new RefedInterface1(new RefedInterface1Impl())
+    refed1.setString("foo")
+    val refed2 = new RefedInterface1(new RefedInterface1Impl())
+    refed2.setString("bar")
+
+    obj.methodWithSetParams(
+      Set("foo", "bar"),
+      Set(2.toByte, 3.toByte),
+      Set(12.toShort, 13.toShort),
+      Set(1234, 1345),
+      Set(123l, 456l),
+      Set(Json.obj(("foo", "bar")), Json.obj(("eek", "wibble"))),
+      Set(arr("foo"), arr("blah")),
+      Set(refed1, refed2),
+      Set(new TestDataObject().setBar(1).setWibble(1.1).setFoo("String 1"), new TestDataObject().setBar(2).setWibble(2.2).setFoo("String 2")),
+      Set(TestEnum.JULIEN,TestEnum.TIM))
+  }
+
+  "testMethodMapParams" should "work" in {
+    val refed1 = new RefedInterface1(new RefedInterface1Impl())
+    refed1.setString("foo")
+    val refed2 = new RefedInterface1(new RefedInterface1Impl())
+    refed2.setString("bar")
+    obj.methodWithMapParams(
+        Map("foo" -> "bar", "eek" -> "wibble"),
+        Map("foo" -> 2.toByte, "eek" -> 3.toByte),
+        Map("foo" -> 12.toShort, "eek" -> 13.toShort),
+        Map("foo" -> 1234, "eek" -> 1345),
+        Map("foo" -> 123l, "eek" -> 456l),
+        Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
+        Map("foo"-> arr("foo"), "eek" -> arr("blah")),
+        Map("foo" -> refed1, "eek" -> refed2)
+    )
+  }
+
+  "testMethodWithHandlerListEnum" should "work" in {
+    obj.methodWithHandlerListEnum(it => assert(it == List(TestEnum.TIM, TestEnum.JULIEN)))
+  }
+
+  "testMethodWithHandlerSetEnum" should "work" in {
+    obj.methodWithHandlerSetEnum(it => assert(it == Set(TestEnum.TIM, TestEnum.JULIEN)))
+  }
+
+  "testMethodWithHandlerAsyncResultListEnum" should "work" in {
+    import collection.JavaConverters._
+    obj.methodWithHandlerAsyncResultListEnum(it => assert(it.result() == List(TestEnum.TIM, TestEnum.JULIEN).asJava))
+  }
+
+  "testMethodWithHandlerAsyncResultSetEnum" should "work" in {
+    import collection.JavaConverters._
+    obj.methodWithHandlerAsyncResultSetEnum(it => assert(it.result() == Set(TestEnum.TIM, TestEnum.JULIEN).asJava))
+  }
 //
 //  // Returns
 //
 //  // FIXME - currently missing tests for returns of all List<T>, Set<T>, Map<T> types
 //
-//  @Test
-//  public void testBasicReturns() {
-//    assertEquals(123, obj.methodWithByteReturn())
-//    assertEquals(12345, obj.methodWithShortReturn())
-//    assertEquals(12345464, obj.methodWithIntReturn())
-//    assertEquals(65675123, obj.methodWithLongReturn())
-//    assertEquals(1.23f, obj.methodWithFloatReturn(), 0)
-//    assertEquals(3.34535, obj.methodWithDoubleReturn(), 0)
-//    assertEquals(true, obj.methodWithBooleanReturn())
-//    assertEquals('Y' as char, obj.methodWithCharReturn())
-//    assertEquals("orangutan", obj.methodWithStringReturn())
-//  }
-//
-//  @Test
-//  public void testVertxGenReturn() {
-//    RefedInterface1 r = obj.methodWithVertxGenReturn();
-//    assertEquals("chaffinch", r.string)
-//  }
-//
-//  @Test
-//  public void testVertxGenNullReturn() {
-//    RefedInterface1 r = obj.methodWithVertxGenNullReturn();
-//    assertEquals(null, r)
-//  }
-//
-//  @Test
-//  public void testVertxAbstractGenReturn() {
-//    RefedInterface2 r = obj.methodWithAbstractVertxGenReturn();
-//    assertEquals("abstractchaffinch", r.string)
-//  }
-//
-//  @Test
-//  public void testDataObjectReturn() {
-//    Map<String, Object> r = obj.methodWithDataObjectReturn();
-//    assertEquals("foo", r.foo)
-//    assertEquals(123, r.bar)
-//  }
-//
-//  @Test
-//  public void testDataObjectNullReturn() {
-//    Map<String, Object> r = obj.methodWithDataObjectNullReturn();
-//    assertEquals(null, r)
-//  }
-//
-//  @Test
-//  public void testListStringReturn() {
-//    assertEquals(["foo", "bar", "wibble"], obj.methodWithListStringReturn())
-//  }
-//
-//  @Test
-//  public void testListLongReturn() {
-//    assertEquals([123l, 456l], obj.methodWithListLongReturn())
-//  }
-//
-//  @Test
-//  public void testListJsonObjectReturn() {
-//    List<Map<String, Object>> list = obj.methodWithListJsonObjectReturn();
-//    assertEquals(2, list.size());
-//    Map<String, Object> json1 = list.get(0);
-//    assertEquals("bar", json1.get("foo"));
-//    Map<String, Object> json2 = list.get(1);
-//    assertEquals("eek", json2.get("blah"));
-//  }
-//
-//  @Test
-//  public void testListComplexJsonObjectReturn() {
-//    List<Map<String, Object>> list = obj.methodWithListComplexJsonObjectReturn();
-//    assertEquals(1, list.size());
-//    Map<String, Object> json1 = list.get(0);
-//    assertEquals([outer: [socks: "tartan"], list: ["yellow", "blue"]], json1);
-//  }
-//
-//  @Test
-//  public void testListJsonArrayReturn() {
-//    List<List<Object>> list = obj.methodWithListJsonArrayReturn();
-//    assertEquals(2, list.size());
-//    List<Object> json1 = list.get(0);
-//    assertEquals("foo", json1.get(0));
-//    List<Object> json2 = list.get(1);
-//    assertEquals("blah", json2.get(0));
-//  }
-//
-//  @Test
-//  public void testListComplexJsonArrayReturn() {
-//    List<List<Object>> list = obj.methodWithListComplexJsonArrayReturn();
-//    assertEquals(2, list.size());
-//    List<Object> json1 = list.get(0);
-//    assertEquals([[foo: "hello"]], json1);
-//    List<Object> json2 = list.get(1);
-//    assertEquals([[bar: "bye"]], json2);
-//  }
-//
-//  @Test
-//  public void testListVertxGenReturn() {
-//    List<io.vertx.groovy.codegen.testmodel.RefedInterface1> list = obj.methodWithListVertxGenReturn();
-//    assertEquals(2, list.size());
-//    RefedInterface1 refed1 = list.get(0);
-//    assertTrue(refed1 instanceof io.vertx.groovy.codegen.testmodel.RefedInterface1);
-//    RefedInterface1 refed2 = list.get(1);
-//    assertEquals("foo", refed1.getString());
-//    assertEquals("bar", refed2.getString());
-//  }
-//
-//  @Test
-//  public void testListDataObjectReturn() {
-//    List<Map<String, Object>> list = obj.methodWithListDataObjectReturn();
-//    assertTrue(list[0] instanceof Map);
-//    assertEquals("String 1", list[0].foo);
-//    assertEquals(1, list[0].bar);
-//    assertEquals(1.1, list[0].wibble, 0);
-//    assertTrue(list[1] instanceof Map);
-//    assertEquals("String 2", list[1].foo);
-//    assertEquals(2, list[1].bar);
-//    assertEquals(2.2, list[1].wibble, 0);
-//  }
-//
-//  @Test
-//  public void testSetStringReturn() {
-//    assertEquals(["foo", "bar", "wibble"] as Set, obj.methodWithSetStringReturn())
-//  }
-//
-//  @Test
-//  public void testSetLongReturn() {
-//    assertEquals([123l, 456l] as Set, obj.methodWithSetLongReturn())
-//  }
-//
-//  @Test
-//  public void testSetJsonObjectReturn() {
-//    Set<Map<String, Object>> set = obj.methodWithSetJsonObjectReturn();
-//    assertEquals(2, set.size());
-//    Map<String, Object> json1 = new HashMap<>();
-//    json1.put("foo", "bar");
-//    assertTrue(set.contains(json1));
-//    Map<String, Object> json2 = new HashMap<>();
-//    json2.put("blah", "eek");
-//    assertTrue(set.contains(json2));
-//  }
-//
-//  @Test
-//  public void testSetComplexJsonObjectReturn() {
-//    Set<Map<String, Object>> set = obj.methodWithSetComplexJsonObjectReturn();
-//    assertEquals(1, set.size());
-//    assertTrue(set.contains([outer: [socks: "tartan"], list: ["yellow", "blue"]]));
-//  }
+
+  "testBasicReturns" should "work" in {
+    assert(123 == obj.methodWithByteReturn())
+    assert(12345 == obj.methodWithShortReturn())
+    assert(12345464 == obj.methodWithIntReturn())
+    assert(65675123 == obj.methodWithLongReturn())
+    assert(1.23f == obj.methodWithFloatReturn())
+    assert(3.34535 == obj.methodWithDoubleReturn())
+    assert(true == obj.methodWithBooleanReturn())
+    assert('Y' == obj.methodWithCharReturn())
+    assert("orangutan" == obj.methodWithStringReturn())
+  }
+
+  "testVertxGenReturn" should "work" in {
+    val r = obj.methodWithVertxGenReturn()
+    assert("chaffinch" == r.getString())
+  }
+
+  "testVertxGenNullReturn" should "work" in {
+    //FIXME that's not right, I think the method should directly return null
+    val r = obj.methodWithVertxGenNullReturn()
+    assert(null == r.asJava)
+  }
+
+  "testVertxAbstractGenReturn" should "work" in {
+    val r = obj.methodWithAbstractVertxGenReturn()
+    assert("abstractchaffinch" == r.getString())
+  }
+
+  "testDataObjectReturn" should "work" in {
+    val r = obj.methodWithDataObjectReturn()
+    assert("foo" == r.getFoo())
+    assert(123 == r.getBar)
+  }
+
+  "testDataObjectNullReturn" should "work" in {
+    val r = obj.methodWithDataObjectNullReturn()
+    assert(null == r)
+  }
+
+  "testListStringReturn" should "work" in {
+    assert(List("foo", "bar", "wibble") == obj.methodWithListStringReturn())
+  }
+
+  "testListLongReturn" should "work" in {
+    assert(List(123l, 456l) == obj.methodWithListLongReturn())
+  }
+
+  "testListJsonObjectReturn" should "work" in {
+    val list = obj.methodWithListJsonObjectReturn()
+    assert(2 == list.size)
+    assert("bar" == list(0).getString("foo"))
+    assert("eek" == list(1).getString("blah"))
+  }
+
+  "testListComplexJsonObjectReturn" should "work" in {
+    val list = obj.methodWithListComplexJsonObjectReturn()
+    assert(1 == list.size)
+    val json1 = list(0)
+    assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == json1)
+  }
+
+  "testListJsonArrayReturn" should "work" in {
+    var list = obj.methodWithListJsonArrayReturn()
+    assert(2 == list.size)
+    val json1 = list(0)
+    assert("foo" == json1.getString(0))
+    val json2 = list(1)
+    assert("blah" == json2.getString(0))
+  }
+
+  "testListComplexJsonArrayReturn" should "work" in {
+    val list = obj.methodWithListComplexJsonArrayReturn()
+    assert(2 == list.size)
+    val json1 = list(0)
+    assert(arr(Json.obj(("foo", "hello"))) == json1)
+    val json2 = list(1)
+    assert(arr(Json.obj(("bar", "bye"))) == json2)
+  }
+
+  "testListVertxGenReturn" should "work" in {
+    val list = obj.methodWithListVertxGenReturn()
+    assert(2 == list.size)
+    val refed1 = list(0)
+    val refed2 = list(1)
+    assert("foo" == refed1.getString())
+    assert("bar"== refed2.getString())
+  }
+
+  "testListDataObjectReturn" should "work" in {
+    val list = obj.methodWithListDataObjectReturn();
+    assert("String 1" == list(0).getFoo())
+    assert(1 == list(0).getBar())
+    assert(1.1 == list(0).getWibble())
+    assert("String 2" == list(1).getFoo())
+    assert(2 == list(1).getBar())
+    assert(2.2 == list(1).getWibble())
+  }
+
+  "testSetStringReturn" should "work" in {
+    assert(Set("foo", "bar", "wibble") == obj.methodWithSetStringReturn())
+  }
+
+  "testSetLongReturn" should "work" in {
+    assert(Set(123l, 456l) == obj.methodWithSetLongReturn())
+  }
+
+  "testSetJsonObjectReturn" should "work" in {
+    val set = obj.methodWithSetJsonObjectReturn()
+    assert(2 == set.size)
+    val json1 = Json.obj(("foo", "bar"))
+    assert(set.contains(json1))
+    val json2 = Json.obj(("blah", "eek"))
+    assert(set.contains(json2))
+  }
+
+
+  "testSetComplexJsonObjectReturn" should "work" in {
+    val set = obj.methodWithSetComplexJsonObjectReturn()
+    assert(1 == set.size)
+    assert(set.contains(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))))
+  }
 //
 //  @Test
 //  public void testSetJsonArrayReturn() {
