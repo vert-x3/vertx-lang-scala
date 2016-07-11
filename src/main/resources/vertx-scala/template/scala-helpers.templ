@@ -60,7 +60,7 @@
       }
     } else if (type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY){
-      return toJavaType(type)
+      return changeJavaGenericNotationToScalaNotation(type)
     } else if (type.kind == CLASS_API) {
       var retVal = helper.getNonGenericType(type.translateName("scala"));
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
@@ -79,16 +79,12 @@
       return retVal;
     }
     else {
-      return type.name.replace('<', '[').replace('>', ']');
+      return changeJavaGenericNotationToScalaNotation(type);
     }
   }
 
-  def isHandlerFuture(type) {
-    type.kind == CLASS_HANDLER && type.name.contains("io.vertx.core.Future");
-  }
-
   /* TODO: very misleading name*/
-  def toJavaType(type) {
+  def changeJavaGenericNotationToScalaNotation(type) {
     type.name.replace('<', '[').replace('>', ']');
   }
 
@@ -105,45 +101,13 @@
     helper.getNonGenericType(name) + '.apply' + getGenericType(name);
   }
 
-  def toScalaApplyWithParam(name, paramName) {
-    helper.getNonGenericType(name) + '.apply' + getGenericType(name) + '(' + paramName + ')';
-  }
-
-  def isFuture(method) {
-    method.kind == METHOD_FUTURE;
-  }
-
-  def futureType(method) {
-    toScalaType(method.params.get(method.params.size() - 1).type.args[0].args[0]);
+  def toScalaApplyWithParam(name, param) {
+    helper.getNonGenericType(name) + '.apply' + getGenericType(name) + '(' + param + ')';
   }
 
   def isAsyncResult(param) {
     param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
   }
-
-  def isParamHandler(param) {
-    return (param.type.kind == CLASS_HANDLER && param.type.args[0].kind != CLASS_ASYNC_RESULT) &&
-      !param.type.name.contains("io.vertx.core.Future");
-  }
-
-  def isMethodHandler(method) {
-    for (param : method.params) {
-      if (isParamHandler(param)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  def importHandlerImplicits(method) {
-    for (param : method.params) {
-      if (isParamHandler(param)) {
-        return true;
-      }
-    }
-    return method.kind == METHOD_FUTURE;;
-  }
-
 
   def importJavaConversions(method) {
     for (param : method.params) {
@@ -219,7 +183,7 @@
 
   def methodInvocationHandlerCollection(type, method) {
     var invocation = '';
-    var mapIt = method + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asScala';
+    var mapIt = method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x.asScala';
 
     if(type.kind == CLASS_MAP) {
         invocation += mapIt + '.map((a) => (' + createGenericFromTypeWithParamName(type.args[0], 'a._1') + ',' + createGenericFromTypeWithParamName(type.args[1], 'a._2') + '))'
@@ -264,13 +228,13 @@
       invocation += methodInvocationHandlerCollection(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x)('+param.name;
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x)('+param.name;
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += func + '[' + toJavaType(type) + '](' + param.name;
+      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + param.name;
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
-      invocation += mappedFunc + '[' + toJavaType(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])('+ param.name;
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])('+ param.name;
       if (convertUnit) {
         invocation += '_ => ';
       }
@@ -307,7 +271,7 @@
           ret.kind == CLASS_DATA_OBJECT ||
           ret.kind == CLASS_ENUM) {
           /* TODO: x.asScala doesn't work for everything*/
-        invocation += 'handlerToMappedFunction[' + toJavaType(ret) + ', ' + scalaType +'](x => x.asJava)(';
+        invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
       } else if (ret.kind == CLASS_PRIMITIVE ||
                  ret.kind == CLASS_BOXED_PRIMITIVE ||
                  ret.name == 'Throwable' ||
@@ -352,11 +316,11 @@
           if (param.type.args[0].kind == CLASS_API &&
               param.type.args[1].kind == CLASS_API)
           {
-            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + toJavaType(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + toJavaType(param.type.args[1]) + '])).asJava';
+            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
           } else if (param.type.args[0].kind == CLASS_API) {
-            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + toJavaType(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava';
+            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava';
           } else if (param.type.args[1].kind == CLASS_API) {
-            invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + toJavaType(param.type.args[1]) + '])).asJava';
+            invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
           } else {
             invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava';
           }
@@ -371,7 +335,7 @@
       }
 
       if (param.type.kind == CLASS_API) {
-        invocation += '.asJava.asInstanceOf[' + toJavaType(param.type) +']'
+        invocation += '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']'
       }
     }
     if (wrap) {
