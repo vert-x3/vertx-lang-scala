@@ -226,15 +226,15 @@
     else {
       var listType = type.args[0];
       if (listType.kind == CLASS_API ||
-          listType.kind == CLASS_DATA_OBJECT ||
-          listType.kind == CLASS_ENUM) {
+          listType.kind == CLASS_DATA_OBJECT) {
         invocation += mapIt + '.map(' + toScalaApply(listType.getSimpleName()) + ')';
       } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
                  listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
         invocation += mapIt + '.map(x => x:' + toScalaType(listType) + ')';
       } else if (listType.kind == CLASS_STRING ||
                  listType.kind == CLASS_JSON_OBJECT ||
-                 listType.kind == CLASS_JSON_ARRAY) {
+                 listType.kind == CLASS_JSON_ARRAY ||
+                 listType.kind == CLASS_ENUM) {
         invocation += mapIt
       }
     }
