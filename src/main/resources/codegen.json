@@ -5,6 +5,11 @@
       "kind" : "class",
       "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
       "templateFileName" : "vertx-scala/template/class.templ"
+    },
+    {
+      "kind": "dataObject",
+      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
+      "templateFileName": "vertx-scala/template/class.templ"
     }
   ]
 }
