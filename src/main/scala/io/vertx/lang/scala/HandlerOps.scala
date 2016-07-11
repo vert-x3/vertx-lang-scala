@@ -5,6 +5,11 @@ import io.vertx.core.{AsyncResult, Handler}
 import scala.concurrent.Promise
 import scala.language.implicitConversions
 
+/**
+  * Conversions between handlers and functions
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  */
 object HandlerOps {
 
   /**
