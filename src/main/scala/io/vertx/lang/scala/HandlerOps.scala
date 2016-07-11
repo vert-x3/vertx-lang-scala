@@ -44,4 +44,17 @@ object HandlerOps {
       override def handle(event: J): Unit = f(mapper(event))
     }
 
+  /**
+    * Create a Scala-Function from the given Vert.x-Handler. It also maps the Functions type to
+    * one the Handler understands.
+    *
+    * @param mapper a function to map the functions event-type to that of the given Handler
+    * @param h the Handler  to be used by the Function
+    * @tparam J type the Handler consumes
+    * @tparam S type the Function consumes
+    * @return the resulting Function
+    */
+  def handlerToMappedFunction[J, S](mapper: S => J)(h: Handler[J]): S => Unit =
+    (event:S) => h.handle(mapper(event))
+
 }
