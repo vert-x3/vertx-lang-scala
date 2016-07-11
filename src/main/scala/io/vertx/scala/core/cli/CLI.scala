@@ -63,7 +63,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI name.
     */
-  def getName: String = {
+  def getName(): String = {
     _asJava.getName()
   }
 
@@ -80,7 +80,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI description.
     */
-  def getDescription: String = {
+  def getDescription(): String = {
     _asJava.getDescription()
   }
 
@@ -92,7 +92,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI summary.
     */
-  def getSummary: String = {
+  def getSummary(): String = {
     _asJava.getSummary()
   }
 
@@ -110,7 +110,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
     * @return {@code true} if the current [[CLI]] is hidden, [[false]] otherwise
     */
-  def isHidden: Boolean = {
+  def isHidden(): Boolean = {
     _asJava.isHidden()
   }
 
@@ -129,7 +129,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * Gets the list of options.
     * @return the list of options, empty if none.
     */
-  def getOptions: List[io.vertx.core.cli.Option] = {
+  def getOptions(): List[io.vertx.core.cli.Option] = {
     import scala.collection.JavaConverters._
     _asJava.getOptions().asScala.map(x => x:io.vertx.core.cli.Option).toList
   }
@@ -171,7 +171,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * Gets the list of defined arguments.
     * @return the list of argument, empty if none.
     */
-  def getArguments: List[io.vertx.core.cli.Argument] = {
+  def getArguments(): List[io.vertx.core.cli.Argument] = {
     import scala.collection.JavaConverters._
     _asJava.getArguments().asScala.map(x => x:io.vertx.core.cli.Argument).toList
   }

@@ -40,7 +40,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -53,7 +53,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     * allows you to write data to other WebSockets which are owned by different event loops.
     * @return the binary handler id
     */
-  def binaryHandlerID: String = {
+  def binaryHandlerID(): String = {
     _asJava.binaryHandlerID()
   }
 
@@ -65,35 +65,35 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
     * allows you to write data to other WebSockets which are owned by different event loops.
     */
-  def textHandlerID: String = {
+  def textHandlerID(): String = {
     _asJava.textHandlerID()
   }
 
   /**
     * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
   /**
     * Close the WebSocket.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
   /**
     * @return the remote address for this socket
     */
-  def remoteAddress: io.vertx.scala.core.net.SocketAddress = {
+  def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.remoteAddress())
   }
 
   /**
     * @return the local address for this socket
     */
-  def localAddress: io.vertx.scala.core.net.SocketAddress = {
+  def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
   }
 
@@ -107,12 +107,12 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     this
   }
 
-  def pause: io.vertx.scala.core.http.WebSocket = {
+  def pause(): io.vertx.scala.core.http.WebSocket = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.http.WebSocket = {
+  def resume(): io.vertx.scala.core.http.WebSocket = {
     _asJava.resume()
     this
   }

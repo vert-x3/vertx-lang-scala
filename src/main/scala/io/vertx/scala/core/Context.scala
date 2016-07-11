@@ -96,7 +96,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * If the context is associated with a Verticle deployment, this returns the deployment ID of that deployment.
     * @return the deployment ID of the deployment or null if not a Verticle deployment
     */
-  def deploymentID: String = {
+  def deploymentID(): String = {
     _asJava.deploymentID()
   }
 
@@ -105,14 +105,14 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * the verticle was deployed.
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
-  def config: io.vertx.core.json.JsonObject = {
+  def config(): io.vertx.core.json.JsonObject = {
     _asJava.config()
   }
 
   /**
     * The process args
     */
-  def processArgs: List[String] = {
+  def processArgs(): List[String] = {
     import scala.collection.JavaConverters._
     _asJava.processArgs().asScala.map(x => x:String).toList
   }
@@ -125,7 +125,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * will return true.
     * @return true if false otherwise
     */
-  def isEventLoopContext: Boolean = {
+  def isEventLoopContext(): Boolean = {
     _asJava.isEventLoopContext()
   }
 
@@ -137,7 +137,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * will return false.
     * @return true if the current context is a worker context, false otherwise
     */
-  def isWorkerContext: Boolean = {
+  def isWorkerContext(): Boolean = {
     _asJava.isWorkerContext()
   }
 
@@ -145,7 +145,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * Is the current context a multi-threaded worker context?
     * @return true if the current context is a multi-threaded worker context, false otherwise
     */
-  def isMultiThreadedWorkerContext: Boolean = {
+  def isMultiThreadedWorkerContext(): Boolean = {
     _asJava.isMultiThreadedWorkerContext()
   }
 
@@ -181,7 +181,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
   /**
     * @return The Vertx instance that created the context
     */
-  def owner: io.vertx.scala.core.Vertx = {
+  def owner(): io.vertx.scala.core.Vertx = {
     Vertx.apply(_asJava.owner())
   }
 
@@ -189,7 +189,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @return  the number of instances of the verticle that were deployed in the deployment (if any) related
     * to this context
     */
-  def getInstanceCount: Int = {
+  def getInstanceCount(): Int = {
     _asJava.getInstanceCount()
   }
 
@@ -212,15 +212,15 @@ object Context {
   def apply(_asJava: io.vertx.core.Context): io.vertx.scala.core.Context =
     new io.vertx.scala.core.Context(_asJava)
 
-  def isOnWorkerThread: Boolean = {
+  def isOnWorkerThread(): Boolean = {
     io.vertx.core.Context.isOnWorkerThread()
   }
 
-  def isOnEventLoopThread: Boolean = {
+  def isOnEventLoopThread(): Boolean = {
     io.vertx.core.Context.isOnEventLoopThread()
   }
 
-  def isOnVertxThread: Boolean = {
+  def isOnVertxThread(): Boolean = {
     io.vertx.core.Context.isOnVertxThread()
   }
 }

@@ -37,7 +37,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -60,7 +60,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
     * complete until some time after the method has returned.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 

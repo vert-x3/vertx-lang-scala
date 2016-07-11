@@ -38,7 +38,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
   /**
     * The address the message was sent to
     */
-  def address: String = {
+  def address(): String = {
     _asJava.address()
   }
 
@@ -46,7 +46,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * Multi-map of message headers. Can be empty
     * @return the headers
     */
-  def headers: io.vertx.scala.core.MultiMap = {
+  def headers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -54,7 +54,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * The body of the message. Can be null.
     * @return the body, or null.
     */
-  def body: T = {
+  def body(): T = {
     _asJava.body()
   }
 
@@ -62,7 +62,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * The reply address. Can be null.
     * @return the reply address, or null, if message was sent without a reply handler.
     */
-  def replyAddress: String = {
+  def replyAddress(): String = {
     _asJava.replyAddress()
   }
 

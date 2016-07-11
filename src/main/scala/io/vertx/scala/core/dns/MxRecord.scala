@@ -28,14 +28,14 @@ class MxRecord(private val _asJava: io.vertx.core.dns.MxRecord) {
   /**
     * The priority of the MX record.
     */
-  def priority: Int = {
+  def priority(): Int = {
     _asJava.priority()
   }
 
   /**
     * The name of the MX record
     */
-  def name: String = {
+  def name(): String = {
     _asJava.name()
   }
 

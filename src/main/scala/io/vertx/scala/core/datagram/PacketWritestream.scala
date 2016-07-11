@@ -35,7 +35,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     * 
     * Once the stream has ended, it cannot be used any more.
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
@@ -50,7 +50,7 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 

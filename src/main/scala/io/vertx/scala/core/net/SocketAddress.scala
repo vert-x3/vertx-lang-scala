@@ -25,11 +25,11 @@ class SocketAddress(private val _asJava: io.vertx.core.net.SocketAddress) {
 
   def asJava: io.vertx.core.net.SocketAddress = _asJava
 
-  def host: String = {
+  def host(): String = {
     _asJava.host()
   }
 
-  def port: Int = {
+  def port(): Int = {
     _asJava.port()
   }
 

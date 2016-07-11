@@ -46,12 +46,12 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     this
   }
 
-  def pause: io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def pause(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def resume(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     _asJava.resume()
     this
   }
@@ -64,21 +64,21 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   /**
     * @return a read stream for the body of the message stream.
     */
-  def bodyStream: io.vertx.scala.core.streams.ReadStream[T] = {
+  def bodyStream(): io.vertx.scala.core.streams.ReadStream[T] = {
     ReadStream.apply[T](_asJava.bodyStream())
   }
 
   /**
     * @return true if the current consumer is registered
     */
-  def isRegistered: Boolean = {
+  def isRegistered(): Boolean = {
     _asJava.isRegistered()
   }
 
   /**
     * @return The address the handler was registered with.
     */
-  def address: String = {
+  def address(): String = {
     _asJava.address()
   }
 
@@ -96,7 +96,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   /**
     * @return the maximum number of messages that can be buffered when this stream is paused
     */
-  def getMaxBufferedMessages: Int = {
+  def getMaxBufferedMessages(): Int = {
     _asJava.getMaxBufferedMessages()
   }
 
@@ -111,7 +111,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   /**
     * Unregisters the handler which created this registration
     */
-  def unregister: Unit = {
+  def unregister(): Unit = {
     _asJava.unregister()
   }
 

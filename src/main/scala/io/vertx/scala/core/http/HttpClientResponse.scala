@@ -38,7 +38,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
 
   def asJava: io.vertx.core.http.HttpClientResponse = _asJava
 
-  def resume: io.vertx.scala.core.http.HttpClientResponse = {
+  def resume(): io.vertx.scala.core.http.HttpClientResponse = {
     _asJava.resume()
     this
   }
@@ -53,7 +53,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     this
   }
 
-  def pause: io.vertx.scala.core.http.HttpClientResponse = {
+  def pause(): io.vertx.scala.core.http.HttpClientResponse = {
     _asJava.pause()
     this
   }
@@ -66,28 +66,28 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   /**
     * @return the version of the response
     */
-  def version: io.vertx.core.http.HttpVersion = {
+  def version(): io.vertx.core.http.HttpVersion = {
     _asJava.version()
   }
 
   /**
     * @return the status code of the response
     */
-  def statusCode: Int = {
+  def statusCode(): Int = {
     _asJava.statusCode()
   }
 
   /**
     * @return the status message of the response
     */
-  def statusMessage: String = {
+  def statusMessage(): String = {
     _asJava.statusMessage()
   }
 
   /**
     * @return the headers
     */
-  def headers: io.vertx.scala.core.MultiMap = {
+  def headers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -112,14 +112,14 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   /**
     * @return the trailers
     */
-  def trailers: io.vertx.scala.core.MultiMap = {
+  def trailers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.trailers())
   }
 
   /**
     * @return the Set-Cookie headers (including trailers)
     */
-  def cookies: List[String] = {
+  def cookies(): List[String] = {
     import scala.collection.JavaConverters._
     _asJava.cookies().asScala.map(x => x:String).toList
   }
@@ -155,7 +155,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * remote peer and it responded with a status code of 200.
     * @return the net socket
     */
-  def netSocket: io.vertx.scala.core.net.NetSocket = {
+  def netSocket(): io.vertx.scala.core.net.NetSocket = {
     NetSocket.apply(_asJava.netSocket())
   }
 

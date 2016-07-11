@@ -40,7 +40,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 

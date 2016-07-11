@@ -47,7 +47,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -56,12 +56,12 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
-  def pause: io.vertx.scala.core.file.AsyncFile = {
+  def pause(): io.vertx.scala.core.file.AsyncFile = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.file.AsyncFile = {
+  def resume(): io.vertx.scala.core.file.AsyncFile = {
     _asJava.resume()
     this
   }
@@ -94,14 +94,14 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   /**
     * Close the file, see [[io.vertx.scala.core.file.AsyncFile#close]].
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
   /**
     * Close the file. The actual close happens asynchronously.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
@@ -161,7 +161,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * The actual flush will happen asynchronously.
     * @return a reference to this, so the API can be used fluently
     */
-  def flush: io.vertx.scala.core.file.AsyncFile = {
+  def flush(): io.vertx.scala.core.file.AsyncFile = {
     _asJava.flush()
     this
   }

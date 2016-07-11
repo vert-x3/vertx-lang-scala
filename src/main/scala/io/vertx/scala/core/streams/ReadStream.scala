@@ -47,13 +47,13 @@ trait ReadStream[T]
   * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
   * @return a reference to this, so the API can be used fluently
   */
-  def pause: io.vertx.scala.core.streams.ReadStream[T]
+  def pause(): io.vertx.scala.core.streams.ReadStream[T]
 
   /**
   * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
   * @return a reference to this, so the API can be used fluently
   */
-  def resume: io.vertx.scala.core.streams.ReadStream[T]
+  def resume(): io.vertx.scala.core.streams.ReadStream[T]
 
   /**
   * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
@@ -95,7 +95,7 @@ object ReadStream {
       * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
       * @return a reference to this, so the API can be used fluently
       */
-    def pause: io.vertx.scala.core.streams.ReadStream[T] = {
+    def pause(): io.vertx.scala.core.streams.ReadStream[T] = {
       _asJava.pause()
       this
     }
@@ -104,7 +104,7 @@ object ReadStream {
       * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
       * @return a reference to this, so the API can be used fluently
       */
-    def resume: io.vertx.scala.core.streams.ReadStream[T] = {
+    def resume(): io.vertx.scala.core.streams.ReadStream[T] = {
       _asJava.resume()
       this
     }

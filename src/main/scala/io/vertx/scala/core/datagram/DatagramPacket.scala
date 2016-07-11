@@ -32,7 +32,7 @@ class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket)
     * this [[io.vertx.scala.core.datagram.DatagramPacket]].
     * @return the address of the sender
     */
-  def sender: io.vertx.scala.core.net.SocketAddress = {
+  def sender(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.sender())
   }
 
@@ -40,7 +40,7 @@ class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket)
     * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
     * @return the data
     */
-  def data: io.vertx.scala.core.buffer.Buffer = {
+  def data(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.data())
   }
 

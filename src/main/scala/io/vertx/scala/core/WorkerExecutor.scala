@@ -35,7 +35,7 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -71,7 +71,7 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
   /**
     * Close the executor.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 

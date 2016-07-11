@@ -36,14 +36,14 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
   /**
     * @return the 8-bit flags specific to the frame
     */
-  def flags: Int = {
+  def flags(): Int = {
     _asJava.flags()
   }
 
   /**
     * @return the frame payload
     */
-  def payload: io.vertx.scala.core.buffer.Buffer = {
+  def payload(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.payload())
   }
 
