@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.spi.VerticleFactory
 
 /**
+ * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
  * @author <a href="http://www.campudus.com/">Joern Bernhardt</a>
  */
 class ScalaVerticleFactory extends VerticleFactory {
@@ -32,10 +33,4 @@ class ScalaVerticleFactory extends VerticleFactory {
     val instance = clazz.newInstance().asInstanceOf[ScalaVerticle]
     instance.asJava
   }
-
-  override def order(): Int = ???
-
-  override def requiresResolve(): Boolean = ???
-
-  override def resolve(identifier: String, deploymentOptions: DeploymentOptions, classLoader: ClassLoader, resolution: Future[String]): Unit = ???
 }
