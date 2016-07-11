@@ -36,7 +36,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   /**
     * Returns a `String` representation of the Buffer with the `UTF-8`encoding
     */
-  override def toString: String = {
+  override def toString(): String = {
     _asJava.toString()
   }
 
@@ -50,14 +50,14 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   /**
     * Returns a Json object representation of the Buffer
     */
-  def toJsonObject: io.vertx.core.json.JsonObject = {
+  def toJsonObject(): io.vertx.core.json.JsonObject = {
     _asJava.toJsonObject()
   }
 
   /**
     * Returns a Json array representation of the Buffer
     */
-  def toJsonArray: io.vertx.core.json.JsonArray = {
+  def toJsonArray(): io.vertx.core.json.JsonArray = {
     _asJava.toJsonArray()
   }
 
@@ -579,14 +579,14 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Returns the length of the buffer, measured in bytes.
     * All positions are indexed from zero.
     */
-  def length: Int = {
+  def length(): Int = {
     _asJava.length()
   }
 
   /**
     * Returns a copy of the entire Buffer.
     */
-  def copy: io.vertx.scala.core.buffer.Buffer = {
+  def copy(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.copy())
   }
 
@@ -595,7 +595,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * of the returned buffer or this buffer affects each other's content
     * while they maintain separate indexes and marks.
     */
-  def slice: io.vertx.scala.core.buffer.Buffer = {
+  def slice(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(_asJava.slice())
   }
 
@@ -615,7 +615,7 @@ object Buffer {
   def apply(_asJava: io.vertx.core.buffer.Buffer): io.vertx.scala.core.buffer.Buffer =
     new io.vertx.scala.core.buffer.Buffer(_asJava)
 
-  def buffer: io.vertx.scala.core.buffer.Buffer = {
+  def buffer(): io.vertx.scala.core.buffer.Buffer = {
     Buffer.apply(io.vertx.core.buffer.Buffer.buffer())
   }
 

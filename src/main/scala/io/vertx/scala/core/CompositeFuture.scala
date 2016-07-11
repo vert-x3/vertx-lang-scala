@@ -75,7 +75,7 @@ class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
   /**
     * @return the number of wrapped future
     */
-  def size: Int = {
+  def size(): Int = {
     _asJava.size()
   }
 

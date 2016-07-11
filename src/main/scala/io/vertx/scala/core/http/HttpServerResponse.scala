@@ -52,7 +52,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -79,7 +79,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return the HTTP status code of the response. The default is `200` representing `OK`.
     */
-  def getStatusCode: Int = {
+  def getStatusCode(): Int = {
     _asJava.getStatusCode()
   }
 
@@ -97,7 +97,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return the HTTP status message of the response. If this is not specified a default value will be used depending on what
     * [[io.vertx.scala.core.http.HttpServerResponse#setStatusCode]] has been set to.
     */
-  def getStatusMessage: String = {
+  def getStatusMessage(): String = {
     _asJava.getStatusMessage()
   }
 
@@ -132,14 +132,14 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return is the response chunked?
     */
-  def isChunked: Boolean = {
+  def isChunked(): Boolean = {
     _asJava.isChunked()
   }
 
   /**
     * @return The HTTP headers
     */
-  def headers: io.vertx.scala.core.MultiMap = {
+  def headers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -157,7 +157,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return The HTTP trailers
     */
-  def trailers: io.vertx.scala.core.MultiMap = {
+  def trailers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.trailers())
   }
 
@@ -209,7 +209,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Must only be used if the request contains an "Expect:100-Continue" header
     * @return a reference to this, so the API can be used fluently
     */
-  def writeContinue: io.vertx.scala.core.http.HttpServerResponse = {
+  def writeContinue(): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.writeContinue()
     this
   }
@@ -246,7 +246,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * 
     * Once the response has ended, it cannot be used any more.
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
@@ -327,28 +327,28 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * Close the underlying TCP connection corresponding to the request.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
   /**
     * @return has the response already ended?
     */
-  def ended: Boolean = {
+  def ended(): Boolean = {
     _asJava.ended()
   }
 
   /**
     * @return has the underlying TCP connection corresponding to the request already been closed?
     */
-  def closed: Boolean = {
+  def closed(): Boolean = {
     _asJava.closed()
   }
 
   /**
     * @return have the headers for the response already been written?
     */
-  def headWritten: Boolean = {
+  def headWritten(): Boolean = {
     _asJava.headWritten()
   }
 
@@ -378,14 +378,14 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return the total number of bytes written for the body of the response.
     */
-  def bytesWritten: Long = {
+  def bytesWritten(): Long = {
     _asJava.bytesWritten()
   }
 
   /**
     * @return the id of the stream of this response,  for HTTP/1.x
     */
-  def streamId: Int = {
+  def streamId(): Int = {
     _asJava.streamId()
   }
 
@@ -435,7 +435,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * Reset this HTTP/2 stream with the error code `0`.
     */
-  def reset: Unit = {
+  def reset(): Unit = {
     _asJava.reset()
   }
 

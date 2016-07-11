@@ -34,7 +34,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * It's completed if it's either succeeded or failed.
     * @return true if completed, false if not
     */
-  def isComplete: Boolean = {
+  def isComplete(): Boolean = {
     _asJava.isComplete()
   }
 
@@ -61,7 +61,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
     */
-  def complete: Unit = {
+  def complete(): Unit = {
     _asJava.complete()
   }
 
@@ -85,7 +85,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * The result of the operation. This will be null if the operation failed.
     * @return the result or null if the operation failed.
     */
-  def result: T = {
+  def result(): T = {
     _asJava.result()
   }
 
@@ -93,7 +93,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * A Throwable describing failure. This will be null if the operation succeeded.
     * @return the cause or null if the operation succeeded.
     */
-  def cause: Throwable = {
+  def cause(): Throwable = {
     _asJava.cause()
   }
 
@@ -101,7 +101,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * Did it succeed?
     * @return true if it succeded or false otherwise
     */
-  def succeeded: Boolean = {
+  def succeeded(): Boolean = {
     _asJava.succeeded()
   }
 
@@ -109,7 +109,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * Did it fail?
     * @return true if it failed or false otherwise
     */
-  def failed: Boolean = {
+  def failed(): Boolean = {
     _asJava.failed()
   }
 
@@ -182,7 +182,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * @return an handler completing this future
     */
-  def completer: io.vertx.core.AsyncResult[T] => Unit = {
+  def completer(): io.vertx.core.AsyncResult[T] => Unit = {
         handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
   }
 
@@ -193,11 +193,11 @@ object Future {
   def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
     new io.vertx.scala.core.Future(_asJava)
 
-  def future[T]: io.vertx.scala.core.Future[T] = {
+  def future[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.future())
   }
 
-  def succeededFuture[T]: io.vertx.scala.core.Future[T] = {
+  def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
 

@@ -43,12 +43,12 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
     this
   }
 
-  def pause: io.vertx.scala.core.TimeoutStream = {
+  def pause(): io.vertx.scala.core.TimeoutStream = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.TimeoutStream = {
+  def resume(): io.vertx.scala.core.TimeoutStream = {
     _asJava.resume()
     this
   }
@@ -62,7 +62,7 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
     * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
     * argument.
     */
-  def cancel: Unit = {
+  def cancel(): Unit = {
     _asJava.cancel()
   }
 

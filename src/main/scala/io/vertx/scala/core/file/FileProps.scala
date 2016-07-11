@@ -29,56 +29,56 @@ class FileProps(private val _asJava: io.vertx.core.file.FileProps) {
   /**
     * The date the file was created
     */
-  def creationTime: Long = {
+  def creationTime(): Long = {
     _asJava.creationTime()
   }
 
   /**
     * The date the file was last accessed
     */
-  def lastAccessTime: Long = {
+  def lastAccessTime(): Long = {
     _asJava.lastAccessTime()
   }
 
   /**
     * The date the file was last modified
     */
-  def lastModifiedTime: Long = {
+  def lastModifiedTime(): Long = {
     _asJava.lastModifiedTime()
   }
 
   /**
     * Is the file a directory?
     */
-  def isDirectory: Boolean = {
+  def isDirectory(): Boolean = {
     _asJava.isDirectory()
   }
 
   /**
     * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
     */
-  def isOther: Boolean = {
+  def isOther(): Boolean = {
     _asJava.isOther()
   }
 
   /**
     * Is the file a regular file?
     */
-  def isRegularFile: Boolean = {
+  def isRegularFile(): Boolean = {
     _asJava.isRegularFile()
   }
 
   /**
     * Is the file a symbolic link?
     */
-  def isSymbolicLink: Boolean = {
+  def isSymbolicLink(): Boolean = {
     _asJava.isSymbolicLink()
   }
 
   /**
     * The size of the file, in bytes
     */
-  def size: Long = {
+  def size(): Long = {
     _asJava.size()
   }
 

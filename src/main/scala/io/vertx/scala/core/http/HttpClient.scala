@@ -58,7 +58,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -1285,7 +1285,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * Close the client. Closing will close down any pooled connections.
     * Clients should always be closed after use.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 

@@ -39,12 +39,12 @@ class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream)
     this
   }
 
-  def pause: io.vertx.scala.core.net.NetSocketStream = {
+  def pause(): io.vertx.scala.core.net.NetSocketStream = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.net.NetSocketStream = {
+  def resume(): io.vertx.scala.core.net.NetSocketStream = {
     _asJava.resume()
     this
   }

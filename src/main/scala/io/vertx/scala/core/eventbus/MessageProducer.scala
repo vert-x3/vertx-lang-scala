@@ -41,7 +41,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -91,21 +91,21 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   /**
     * @return The address to which the producer produces messages.
     */
-  def address: String = {
+  def address(): String = {
     _asJava.address()
   }
 
   /**
     * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
   /**
     * Closes the producer, this method should be called when the message producer is not used anymore.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 

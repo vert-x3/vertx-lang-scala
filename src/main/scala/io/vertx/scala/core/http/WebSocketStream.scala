@@ -44,12 +44,12 @@ class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream)
     this
   }
 
-  def pause: io.vertx.scala.core.http.WebSocketStream = {
+  def pause(): io.vertx.scala.core.http.WebSocketStream = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.http.WebSocketStream = {
+  def resume(): io.vertx.scala.core.http.WebSocketStream = {
     _asJava.resume()
     this
   }

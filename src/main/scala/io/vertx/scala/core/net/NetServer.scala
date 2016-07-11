@@ -32,7 +32,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -42,7 +42,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * connect stream .
     * @return the connect stream
     */
-  def connectStream: io.vertx.scala.core.net.NetSocketStream = {
+  def connectStream(): io.vertx.scala.core.net.NetSocketStream = {
     NetSocketStream.apply(_asJava.connectStream())
   }
 
@@ -63,7 +63,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen: io.vertx.scala.core.net.NetServer = {
+  def listen(): io.vertx.scala.core.net.NetServer = {
     _asJava.listen()
     this
   }
@@ -132,7 +132,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Close the server. This will close any currently open connections. The close may not complete until after this
     * method has returned.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
@@ -149,7 +149,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * signifying an ephemeral port
     * @return the actual port the server is listening on.
     */
-  def actualPort: Int = {
+  def actualPort(): Int = {
     _asJava.actualPort()
   }
 

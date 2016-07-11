@@ -39,7 +39,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   /**
     * @return the current connection window size or `-1` for HTTP/1.x
     */
-  def getWindowSize: Int = {
+  def getWindowSize(): Int = {
     _asJava.getWindowSize()
   }
 
@@ -124,7 +124,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * This is not implemented for HTTP/1.x.
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdown: io.vertx.scala.core.http.HttpConnection = {
+  def shutdown(): io.vertx.scala.core.http.HttpConnection = {
     _asJava.shutdown()
     this
   }
@@ -157,14 +157,14 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * <p/>
     * An HTTP/2 connection will send a  frame before.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
   /**
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
     */
-  def settings: io.vertx.core.http.Http2Settings = {
+  def settings(): io.vertx.core.http.Http2Settings = {
     _asJava.settings()
   }
 
@@ -197,7 +197,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   /**
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
     */
-  def remoteSettings: io.vertx.core.http.Http2Settings = {
+  def remoteSettings(): io.vertx.core.http.Http2Settings = {
     _asJava.remoteSettings()
   }
 

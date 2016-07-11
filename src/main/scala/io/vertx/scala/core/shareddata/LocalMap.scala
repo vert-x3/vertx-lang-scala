@@ -62,7 +62,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
   /**
     * Clear all entries in the map
     */
-  def clear: Unit = {
+  def clear(): Unit = {
     _asJava.clear()
   }
 
@@ -70,14 +70,14 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * Get the size of the map
     * @return the number of entries in the map
     */
-  def size: Int = {
+  def size(): Int = {
     _asJava.size()
   }
 
   /**
     * @return true if there are zero entries in the map
     */
-  def isEmpty: Boolean = {
+  def isEmpty(): Boolean = {
     _asJava.isEmpty()
   }
 
@@ -125,7 +125,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
   /**
     * Close and release the map
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 

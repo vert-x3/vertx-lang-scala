@@ -52,7 +52,7 @@ trait WriteStream[T]
   * 
   * Once the stream has ended, it cannot be used any more.
   */
-  def end: Unit
+  def end(): Unit
 
   /**
   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
@@ -72,7 +72,7 @@ trait WriteStream[T]
   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
   * @return true if write queue is full
   */
-  def writeQueueFull: Boolean
+  def writeQueueFull(): Boolean
 
   /**
   * Set a drain handler on the stream. If the write queue is full, then the handler will be called when the write
@@ -120,7 +120,7 @@ object WriteStream {
       * 
       * Once the stream has ended, it cannot be used any more.
       */
-    def end: Unit = {
+    def end(): Unit = {
       _asJava.end()
     }
 
@@ -147,7 +147,7 @@ object WriteStream {
       * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
       * @return true if write queue is full
       */
-    def writeQueueFull: Boolean = {
+    def writeQueueFull(): Boolean = {
       _asJava.writeQueueFull()
     }
 

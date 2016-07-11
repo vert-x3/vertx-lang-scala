@@ -39,12 +39,12 @@ class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServer
     this
   }
 
-  def pause: io.vertx.scala.core.http.HttpServerRequestStream = {
+  def pause(): io.vertx.scala.core.http.HttpServerRequestStream = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.http.HttpServerRequestStream = {
+  def resume(): io.vertx.scala.core.http.HttpServerRequestStream = {
     _asJava.resume()
     this
   }

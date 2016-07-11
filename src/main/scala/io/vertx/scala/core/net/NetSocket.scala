@@ -50,7 +50,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -64,12 +64,12 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     this
   }
 
-  def pause: io.vertx.scala.core.net.NetSocket = {
+  def pause(): io.vertx.scala.core.net.NetSocket = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.net.NetSocket = {
+  def resume(): io.vertx.scala.core.net.NetSocket = {
     _asJava.resume()
     this
   }
@@ -103,7 +103,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * allows you to write data to other connections which are owned by different event loops.
     * @return the write handler ID
     */
-  def writeHandlerID: String = {
+  def writeHandlerID(): String = {
     _asJava.writeHandlerID()
   }
 
@@ -203,28 +203,28 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   /**
     * @return the remote address for this socket
     */
-  def remoteAddress: io.vertx.scala.core.net.SocketAddress = {
+  def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.remoteAddress())
   }
 
   /**
     * @return the local address for this socket
     */
-  def localAddress: io.vertx.scala.core.net.SocketAddress = {
+  def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
   }
 
   /**
     * Calls [[io.vertx.scala.core.net.NetSocket#close]]
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
   /**
     * Close the NetSocket
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
@@ -251,7 +251,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   /**
     * @return true if this [[io.vertx.scala.core.net.NetSocket]] is encrypted via SSL/TLS.
     */
-  def isSsl: Boolean = {
+  def isSsl(): Boolean = {
     _asJava.isSsl()
   }
 

@@ -32,14 +32,14 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * @return the model of this command line object.
     */
-  def cli: io.vertx.scala.core.cli.CLI = {
+  def cli(): io.vertx.scala.core.cli.CLI = {
     CLI.apply(_asJava.cli())
   }
 
   /**
     * @return the ordered list of arguments. Arguments are command line arguments not matching an option.
     */
-  def allArguments: List[String] = {
+  def allArguments(): List[String] = {
     import scala.collection.JavaConverters._
     _asJava.allArguments().asScala.map(x => x:String).toList
   }
@@ -171,7 +171,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * satisfied. This method is used when the parser validation is disabled.
     * @return {@code true} if the current [[CommandLine]] object is valid. [[false]] otherwise.
     */
-  def isValid: Boolean = {
+  def isValid(): Boolean = {
     _asJava.isValid()
   }
 
@@ -179,7 +179,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * Checks whether or not the user has passed a "help" option and is asking for help.
     * @return {@code true} if the user command line has enabled a "Help" option, [[false]] otherwise.
     */
-  def isAskingForHelp: Boolean = {
+  def isAskingForHelp(): Boolean = {
     _asJava.isAskingForHelp()
   }
 

@@ -62,7 +62,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  def writeQueueFull: Boolean = {
+  def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
@@ -94,12 +94,12 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def pause: io.vertx.scala.core.http.HttpClientRequest = {
+  def pause(): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.http.HttpClientRequest = {
+  def resume(): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.resume()
     this
   }
@@ -122,21 +122,21 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * @return Is the request chunked?
     */
-  def isChunked: Boolean = {
+  def isChunked(): Boolean = {
     _asJava.isChunked()
   }
 
   /**
     * The HTTP method for the request.
     */
-  def method: io.vertx.core.http.HttpMethod = {
+  def method(): io.vertx.core.http.HttpMethod = {
     _asJava.method()
   }
 
   /**
     * @return the raw value of the method this request sends
     */
-  def getRawMethod: String = {
+  def getRawMethod(): String = {
     _asJava.getRawMethod()
   }
 
@@ -153,21 +153,21 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * @return The URI of the request.
     */
-  def uri: String = {
+  def uri(): String = {
     _asJava.uri()
   }
 
   /**
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
-  def path: String = {
+  def path(): String = {
     _asJava.path()
   }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
-  def query: String = {
+  def query(): String = {
     _asJava.query()
   }
 
@@ -184,14 +184,14 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
     */
-  def getHost: String = {
+  def getHost(): String = {
     _asJava.getHost()
   }
 
   /**
     * @return The HTTP headers
     */
-  def headers: io.vertx.scala.core.MultiMap = {
+  def headers(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -246,7 +246,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * more information.
     * @return a reference to this, so the API can be used fluently
     */
-  def sendHead: io.vertx.scala.core.http.HttpClientRequest = {
+  def sendHead(): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.sendHead()
     this
   }
@@ -288,7 +288,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * 
     * Once the request has ended, it cannot be used any more,
     */
-  def end: Unit = {
+  def end(): Unit = {
     _asJava.end()
   }
 
@@ -335,7 +335,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * Reset this stream with the error code `0`.
     */
-  def reset: Unit = {
+  def reset(): Unit = {
     _asJava.reset()
   }
 
@@ -350,7 +350,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
     */
-  def connection: io.vertx.scala.core.http.HttpConnection = {
+  def connection(): io.vertx.scala.core.http.HttpConnection = {
     HttpConnection.apply(_asJava.connection())
   }
 
@@ -385,7 +385,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return the id of the stream of this response,  when it is not yet determined, i.e
     *         the request has not been yet sent or it is not supported HTTP/1.x
     */
-  def streamId: Int = {
+  def streamId(): Int = {
     _asJava.streamId()
   }
 

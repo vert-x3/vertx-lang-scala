@@ -45,7 +45,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -112,7 +112,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   /**
     * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]]. The close itself is asynchronous.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
@@ -121,7 +121,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.
     * @return the socket address
     */
-  def localAddress: io.vertx.scala.core.net.SocketAddress = {
+  def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
   }
 
@@ -209,12 +209,12 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     this
   }
 
-  def pause: io.vertx.scala.core.datagram.DatagramSocket = {
+  def pause(): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.pause()
     this
   }
 
-  def resume: io.vertx.scala.core.datagram.DatagramSocket = {
+  def resume(): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.resume()
     this
   }

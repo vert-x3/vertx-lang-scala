@@ -38,7 +38,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled: Boolean = {
+  def isMetricsEnabled(): Boolean = {
     _asJava.isMetricsEnabled()
   }
 
@@ -47,7 +47,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
     * @return the request stream
     */
-  def requestStream: io.vertx.scala.core.http.HttpServerRequestStream = {
+  def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
     HttpServerRequestStream.apply(_asJava.requestStream())
   }
 
@@ -75,7 +75,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
     * @return the websocket stream
     */
-  def websocketStream: io.vertx.scala.core.http.ServerWebSocketStream = {
+  def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
     ServerWebSocketStream.apply(_asJava.websocketStream())
   }
 
@@ -96,7 +96,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * The listen happens asynchronously and the server may not be listening until some time after the call has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen: io.vertx.scala.core.http.HttpServer = {
+  def listen(): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen()
     this
   }
@@ -162,7 +162,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * 
     * The close happens asynchronously and the server may not be closed until some time after the call has returned.
     */
-  def close: Unit = {
+  def close(): Unit = {
     _asJava.close()
   }
 
@@ -179,7 +179,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * signifying an ephemeral port
     * @return the actual port the server is listening on.
     */
-  def actualPort: Int = {
+  def actualPort(): Int = {
     _asJava.actualPort()
   }
 
