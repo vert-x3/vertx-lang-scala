@@ -87,6 +87,7 @@
     type.kind == CLASS_HANDLER && type.name.contains("io.vertx.core.Future");
   }
 
+  /* TODO: very misleading name*/
   def toJavaType(type) {
     type.name.replace('<', '[').replace('>', ']');
   }
@@ -225,9 +226,11 @@
     }
     else {
       var listType = type.args[0];
-      if (listType.kind == CLASS_API ||
-          listType.kind == CLASS_DATA_OBJECT) {
+      if (listType.kind == CLASS_API) {
         invocation += mapIt + '.map(' + toScalaApply(listType.getSimpleName()) + ')';
+      } else if(listType.kind == CLASS_DATA_OBJECT) {
+        /* TODO: DataObjects should also be generated*/
+        invocation += mapIt + '.map(x => new ' + listType.getSimpleName() + '(x))';
       } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
                  listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
         invocation += mapIt + '.map(x => x:' + toScalaType(listType) + ')';
