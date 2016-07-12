@@ -17,6 +17,7 @@
 package io.vertx.scala.core.shareddata;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.

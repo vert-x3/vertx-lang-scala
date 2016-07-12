@@ -52,12 +52,22 @@
           'Map[' + toScalaType(type.args[0]) + '[_], ' + toScalaType(type.args[1]) + '[_]]';
     } else if (type.kind == CLASS_HANDLER) {
       var type = toScalaType(type.args[0]);
-
       if (type.equals("Unit")) {
         return "() => Unit";
       } else {
         return type + " => Unit";
       }
+    } else if (type.kind == CLASS_FUNCTION) {
+      var type1 = changeJavaGenericNotationToScalaNotation(type.args[0]);
+      var type2 = changeJavaGenericNotationToScalaNotation(type.args[1]);
+
+      var ret = "";
+      if (type1.equals("Unit")) {
+        ret = "() => "+type2;
+      } else {
+        ret = type1 + " => " + type2;
+      }
+      return ret
     } else if (type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY){
       return changeJavaGenericNotationToScalaNotation(type)
@@ -328,6 +338,9 @@
             var handlerType = param.type.args[0];
             invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
             invocation += ')';
+        }
+        else if (param.type.kind == CLASS_FUNCTION) {
+            invocation += 'asJavaFunction(' + param.name + ')'
         }
         else {
           invocation += param.name;

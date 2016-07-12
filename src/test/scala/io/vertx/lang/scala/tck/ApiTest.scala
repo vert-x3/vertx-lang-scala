@@ -44,7 +44,7 @@ import scala.collection.mutable.ArrayBuffer
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
-class HandlerOpsTest extends FlatSpec with Matchers {
+class ApiTest extends FlatSpec with Matchers {
 
   val obj = TestInterface(new TestInterfaceImpl())
 

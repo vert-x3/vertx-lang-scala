@@ -26,6 +26,7 @@ package @{type.raw.translatePackageName("scala")};\n
 
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
+import scala.compat.java8.FunctionConverters._\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}

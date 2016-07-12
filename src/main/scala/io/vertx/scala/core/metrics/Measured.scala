@@ -17,6 +17,7 @@
 package io.vertx.scala.core.metrics;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 
 /**
   * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>

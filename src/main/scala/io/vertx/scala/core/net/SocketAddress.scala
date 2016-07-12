@@ -17,6 +17,7 @@
 package io.vertx.scala.core.net;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 
 /**
   * The address of a socket

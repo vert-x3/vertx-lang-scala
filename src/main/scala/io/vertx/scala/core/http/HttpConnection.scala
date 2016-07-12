@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.GoAway
 import io.vertx.core.http.Http2Settings
