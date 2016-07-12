@@ -9,9 +9,10 @@ After these two work we have enough material to continue improving the API befor
 
 The following things should then be tackled next (the order is a mrere suggestion):
 
-1. Handle DataObjects
-2. Introduce Promises for handling of AsyncResult
-3. Introduce Option for handling of @Nullable
-4. Generate Docs (docs are already being generated but results aren't conforming to ScalaDoc)
+1. Implement cached methods
+2. Handle DataObjects
+3. Introduce Promises for handling of AsyncResult
+4. Introduce Option for handling of @Nullable
+5. Generate Docs (docs are already being generated but results aren't conforming to ScalaDoc)
 
 There are TODO-markers in the MVEL-templates to highlight the starting points for them.

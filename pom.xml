@@ -47,7 +47,11 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-java8-compat_2.11</artifactId>
+            <version>0.8.0-RC3</version>
+        </dependency>
         <!-- Not needed at runtime -->
         <dependency>
             <groupId>org.scala-lang</groupId>
