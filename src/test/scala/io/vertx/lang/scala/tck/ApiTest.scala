@@ -38,6 +38,8 @@ import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
@@ -47,11 +49,11 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   val obj = TestInterface(new TestInterfaceImpl())
 
   "testMethodWithBasicParams" should "work" in {
-    obj.methodWithBasicParams( 123,  12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar");
+    obj.methodWithBasicParams( 123,  12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
   }
 
   "testMethodWithBasicBoxedParams" should "work" in {
-    obj.methodWithBasicBoxedParams(123, 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X');
+    obj.methodWithBasicBoxedParams(123, 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X')
   }
 
   "testMethodWithHandlerBasicTypes" should "work" in {
@@ -62,7 +64,7 @@ class HandlerOpsTest extends FlatSpec with Matchers {
       l => assert(1265615234l == l),
       f => assert(12.345f == f),
       d => assert(12.34566d == d),
-      b => assert(true == b),
+      b => assert(b),
       c => assert('X' == c),
       s => assert("quux!" == s)
     )
@@ -103,8 +105,8 @@ class HandlerOpsTest extends FlatSpec with Matchers {
     obj.methodWithObjectParam("string", "wibble")
 //    obj.methodWithObjectParam("true", true)
 //    obj.methodWithObjectParam("false", false)
-//    obj.methodWithObjectParam("long", 123)
-//    obj.methodWithObjectParam("double", 123.456)
+//    obj.methodWithObjectParam("long", 123.toLong)
+//    obj.methodWithObjectParam("double", 123.456.toDouble)
     obj.methodWithObjectParam("JsonObject", Json.obj(("foo","hello"), ("bar", 123)))
     val hello = "hello"
     obj.methodWithObjectParam("JsonObject", Json.obj(("foo",hello), ("bar", 123)))
@@ -264,29 +266,29 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListAndSet" should "work" in {
-    import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListString(it => assert(List("foo", "bar", "wibble") == it.result()))
-    obj.methodWithHandlerAsyncResultListInteger(it => assert(List(5, 12, 100) == it.result()))
-    obj.methodWithHandlerAsyncResultSetString(it => assert(Set("foo", "bar", "wibble") == it.result()))
-    obj.methodWithHandlerAsyncResultSetInteger(it => assert(Set(5, 12, 100) == it.result()))
+    import collection.JavaConverters._
+    obj.methodWithHandlerAsyncResultListString(it => assert(List("foo", "bar", "wibble").asJava == it.result()))
+    obj.methodWithHandlerAsyncResultListInteger(it => assert(List(5, 12, 100).asJava == it.result()))
+    obj.methodWithHandlerAsyncResultSetString(it => assert(Set("foo", "bar", "wibble").asJava == it.result()))
+    obj.methodWithHandlerAsyncResultSetInteger(it => assert(Set(5, 12, 100).asJava == it.result()))
   }
 
   "testMethodWithHandlerListVertxGen" should "work" in {
-    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()).mkString(",") == "foo,bar"))
+    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()) == List("foo","bar")))
   }
 
   "testMethodWithHandlerListAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()).mkString(",") == "abstractfoo,abstractbar"))
+    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == List("abstractfoo","abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListVertxGen(it => assert(it.result().map(_.getString()).mkString(",") == "foo,bar"))
+    obj.methodWithHandlerAsyncResultListVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("foo","bar")))
   }
 
   "testMethodWithHandlerAsyncResultListAbstractVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListAbstractVertxGen(it => assert(it.result().map(_.getString()).mkString(",") == "abstractfoo,abstractbar"))
+    obj.methodWithHandlerAsyncResultListAbstractVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("abstractfoo","abstractbar")))
   }
 
   "testMethodWithHandlerSetVertxGen" should "work" in {
@@ -294,18 +296,18 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerSetAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()).mkString(",") == "abstractfoo,abstractbar"))
+    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == Set("abstractfoo","abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetVertxGen(it => assert(it.result().map(_.getString()).mkString(",") == "bar,foo"))
+    obj.methodWithHandlerAsyncResultSetVertxGen(it => assert(it.result().map(_.getString()) == Set("bar","foo")))
 
   }
 
   "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetAbstractVertxGen(it => assert(it.result().map(_.getString()).mkString(",") == "abstractbar,abstractfoo"))
+    obj.methodWithHandlerAsyncResultSetAbstractVertxGen(it => assert(it.result().map(_.getString()) == Set("abstractbar","abstractfoo")))
   }
 
   "testMethodWithHandlerListJsonObject" should "work" in {
@@ -438,17 +440,14 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerSetJsonArray" should "work" in {
-    import collection.JavaConverters._
     obj.methodWithHandlerSetJsonArray(it => assert(it == Set(arr("green","blue"), arr("yellow","purple"))))
   }
 
   "testMethodWithHandlerSetNullJsonArray" should "work" in {
-    import collection.JavaConverters._
     obj.methodWithHandlerSetNullJsonArray(it => assert(it == Set(null)))
   }
 
   "testMethodWithHandlerSetComplexJsonArray" should "work" in {
-    import collection.JavaConverters._
     obj.methodWithHandlerSetComplexJsonArray(it => assert(it == Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
   }
 
@@ -517,26 +516,26 @@ class HandlerOpsTest extends FlatSpec with Matchers {
 //
 
   "testMethodWithHandlerUserTypes" should "work" in {
-    obj.methodWithHandlerUserTypes(it => assert(it.getString() == "echidnas"))
+    obj.methodWithHandlerUserTypes(it => assert(it.getString == "echidnas"))
   }
 
   "testMethodWithHandlerAsyncResultUserTypes" should "work" in {
-    obj.methodWithHandlerAsyncResultUserTypes(it => assert(it.result().getString() == "cheetahs"))
+    obj.methodWithHandlerAsyncResultUserTypes(it => assert(it.result.getString == "cheetahs"))
   }
 
   "testMethodWithConcreteHandlerUserTypesSubtype" should "work" in {
-    obj.methodWithConcreteHandlerUserTypeSubtype(Factory.createConcreteHandlerUserType(it => assert(it.getString() == "echidnas")))
+    obj.methodWithConcreteHandlerUserTypeSubtype(Factory.createConcreteHandlerUserType(it => assert(it.getString == "echidnas")))
   }
 
   "testMethodWithAbstractHandlerUserTypesSubtype" should "work" in {
-    obj.methodWithAbstractHandlerUserTypeSubtype(Factory.createAbstractHandlerUserType(it => assert(it.getString() == "echidnas")))
+    obj.methodWithAbstractHandlerUserTypeSubtype(Factory.createAbstractHandlerUserType(it => assert(it.getString == "echidnas")))
   }
 
   "testMethodWithConcreteHandlerUserTypesSubtypeExtension" should "work" in {
     obj.methodWithConcreteHandlerUserTypeSubtypeExtension(
       new ConcreteHandlerUserTypeExtension(new io.vertx.codegen.testmodel.ConcreteHandlerUserTypeExtension() {
         override def handle(event: io.vertx.codegen.testmodel.RefedInterface1): Unit = {
-          assert("echidnas" == event.getString())
+          assert("echidnas" == event.getString)
         }
       }))
   }
@@ -571,7 +570,7 @@ class HandlerOpsTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultGenericUserType" should "work" in {
     obj.methodWithHandlerAsyncResultGenericUserType[String]("string_value_2", (res) => {
-      assert(res.result().getValue() == "string_value_2")
+      assert(res.result.getValue == "string_value_2")
     })
   }
 
@@ -682,7 +681,7 @@ class HandlerOpsTest extends FlatSpec with Matchers {
     assert(65675123 == obj.methodWithLongReturn())
     assert(1.23f == obj.methodWithFloatReturn())
     assert(3.34535 == obj.methodWithDoubleReturn())
-    assert(true == obj.methodWithBooleanReturn())
+    assert(obj.methodWithBooleanReturn())
     assert('Y' == obj.methodWithCharReturn())
     assert("orangutan" == obj.methodWithStringReturn())
   }
@@ -705,7 +704,7 @@ class HandlerOpsTest extends FlatSpec with Matchers {
 
   "testDataObjectReturn" should "work" in {
     val r = obj.methodWithDataObjectReturn()
-    assert("foo" == r.getFoo())
+    assert("foo" == r.getFoo)
     assert(123 == r.getBar)
   }
 
@@ -725,21 +724,21 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   "testListJsonObjectReturn" should "work" in {
     val list = obj.methodWithListJsonObjectReturn()
     assert(2 == list.size)
-    assert("bar" == list(0).getString("foo"))
+    assert("bar" == list.head.getString("foo"))
     assert("eek" == list(1).getString("blah"))
   }
 
   "testListComplexJsonObjectReturn" should "work" in {
     val list = obj.methodWithListComplexJsonObjectReturn()
     assert(1 == list.size)
-    val json1 = list(0)
+    val json1 = list.head
     assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == json1)
   }
 
   "testListJsonArrayReturn" should "work" in {
     var list = obj.methodWithListJsonArrayReturn()
     assert(2 == list.size)
-    val json1 = list(0)
+    val json1 = list.head
     assert("foo" == json1.getString(0))
     val json2 = list(1)
     assert("blah" == json2.getString(0))
@@ -748,7 +747,7 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   "testListComplexJsonArrayReturn" should "work" in {
     val list = obj.methodWithListComplexJsonArrayReturn()
     assert(2 == list.size)
-    val json1 = list(0)
+    val json1 = list.head
     assert(arr(Json.obj(("foo", "hello"))) == json1)
     val json2 = list(1)
     assert(arr(Json.obj(("bar", "bye"))) == json2)
@@ -757,20 +756,20 @@ class HandlerOpsTest extends FlatSpec with Matchers {
   "testListVertxGenReturn" should "work" in {
     val list = obj.methodWithListVertxGenReturn()
     assert(2 == list.size)
-    val refed1 = list(0)
+    val refed1 = list.head
     val refed2 = list(1)
     assert("foo" == refed1.getString())
     assert("bar"== refed2.getString())
   }
 
   "testListDataObjectReturn" should "work" in {
-    val list = obj.methodWithListDataObjectReturn();
-    assert("String 1" == list(0).getFoo())
-    assert(1 == list(0).getBar())
-    assert(1.1 == list(0).getWibble())
-    assert("String 2" == list(1).getFoo())
-    assert(2 == list(1).getBar())
-    assert(2.2 == list(1).getWibble())
+    val list = obj.methodWithListDataObjectReturn()
+    assert("String 1" == list.head.getFoo)
+    assert(1 == list.head.getBar)
+    assert(1.1 == list.head.getWibble)
+    assert("String 2" == list(1).getFoo)
+    assert(2 == list(1).getBar)
+    assert(2.2 == list(1).getWibble)
   }
 
   "testSetStringReturn" should "work" in {
@@ -796,38 +795,27 @@ class HandlerOpsTest extends FlatSpec with Matchers {
     assert(1 == set.size)
     assert(set.contains(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))))
   }
-//
-//  @Test
-//  public void testSetJsonArrayReturn() {
-//    Set<List<Object>> set = obj.methodWithSetJsonArrayReturn();
-//    assertEquals(2, set.size());
-//    List<Object> json1 = new ArrayList<>();
-//    json1.add("foo");
-//    assertTrue(set.contains(json1));
-//    List<Object> json2 = new ArrayList<>();
-//    json2.add("blah");
-//    assertTrue(set.contains(json2));
-//  }
-//
-//  @Test
-//  public void testSetComplexJsonArrayReturn() {
-//    Set<List<Object>> set = obj.methodWithSetComplexJsonArrayReturn();
-//    assertEquals(2, set.size());
-//    assertTrue(set.contains([[foo: "hello"]]));
-//    assertTrue(set.contains([[bar: "bye"]]));
-//  }
-//
-//  @Test
-//  public void testSetVertxGenReturn() {
-//    Set<io.vertx.groovy.codegen.testmodel.RefedInterface1> set = obj.methodWithSetVertxGenReturn();
-//    assertEquals(2, set.size());
-//    RefedInterface1 refed1 = new RefedInterface1(new RefedInterface1Impl());
-//    refed1.setString("foo");
-//    RefedInterface1 refed2 = new RefedInterface1(new RefedInterface1Impl());
-//    refed2.setString("bar");
-//    List<RefedInterface1> list = new ArrayList<>(set);
-//    assertTrue((list.get(0).getString().equals("foo") && list.get(1).getString().equals("bar")) || (list.get(0).getString().equals("bar") && list.get(1).getString().equals("foo")))
-//  }
+
+  "testSetJsonArrayReturn" should "work" in {
+    val set = obj.methodWithSetJsonArrayReturn()
+    assert(2 == set.size)
+    assert(set.contains(Json.arr("foo")))
+    assert(set.contains(Json.arr("blah")))
+  }
+
+  "testSetComplexJsonArrayReturn" should "work" in {
+    val set = obj.methodWithSetComplexJsonArrayReturn()
+    assert(2 == set.size)
+    assert(set.contains(arr(Json.obj(("foo", "hello")))))
+    assert(set.contains(arr(Json.obj(("bar", "bye")))))
+  }
+
+  "testSetVertxGenReturn" should "work" in {
+    val set = obj.methodWithSetVertxGenReturn()
+    assert(2 == set.size)
+    assert(set.map(_.getString()).size == 2)
+  }
+
 //
 //  @Test
 //  public void testSetDataObjectReturn() {
@@ -837,262 +825,237 @@ class HandlerOpsTest extends FlatSpec with Matchers {
 //    assertTrue(set.contains([foo:"String 2",bar: 2,wibble: 2.2d]));
 //  }
 //
-//  @Test
-//  public void testMapStringReturn() {
-//    Map<String, String> map = obj.methodWithMapStringReturn({});
-//    assertEquals("bar", map.get("foo"));
-//  }
-//
-//  @Test
-//  public void testMapLongReturn() {
-//    Map<String, Long> map = obj.methodWithMapLongReturn({});
-//    assertEquals(123l, map.get("foo"));
-//  }
-//
-//  @Test
-//  public void testMapJsonObjectReturn() {
-//    Map<String, Map<String, Object>> map = obj.methodWithMapJsonObjectReturn({});
-//    Map<String, Object> m = map.get("foo");
-//    assertEquals("eek", m.get("wibble"));
-//  }
-//
-//  @Test
-//  public void testMapComplexJsonObjectReturn() {
-//    Map<String, Map<String, Object>> map = obj.methodWithMapComplexJsonObjectReturn({});
-//    Map<String, Object> m = map.get("foo");
-//    assertEquals([outer: [socks: "tartan"], list: ["yellow", "blue"]], m);
-//  }
-//
-//  @Test
-//  public void testMapJsonArrayReturn() {
-//    Map<String, List<Object>> map = obj.methodWithMapJsonArrayReturn({});
-//    List<Object> m = map.get("foo");
-//    assertEquals("wibble", m.get(0));
-//  }
-//
-//  @Test
-//  public void testMapComplexJsonArrayReturn() {
-//    Map<String, List<Object>> map = obj.methodWithMapComplexJsonArrayReturn({});
-//    List<Object> m = map.get("foo");
-//    assertEquals([[foo: "hello"], [bar: "bye"]], m);
-//  }
-//
-//  @Test
-//  public void testOverloadedMethods() {
-//    RefedInterface1 refed = new RefedInterface1(new RefedInterface1Impl())
-//    refed.setString("dog")
-//    assertEquals("meth1", obj.overloadedMethod("cat", refed))
-//    def called = false
-//    assertEquals("meth2", obj.overloadedMethod("cat", refed, 12345) { assertEquals("giraffe", it); called = true })
-//    assertTrue(called)
-//    called = false
-//    assertEquals("meth3", obj.overloadedMethod("cat", { assertEquals("giraffe", it); called = true }))
-//    assertTrue(called)
-//    called = false
-//    assertEquals("meth4", obj.overloadedMethod("cat", refed, { assertEquals("giraffe", it); called = true }))
-//    assertTrue(called)
-//  }
-//
-//  @Test
-//  public void testSuperInterfaces() {
-//    obj.superMethodWithBasicParams((byte) 123, (short) 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X' as char, 'foobar')
-//    obj.otherSuperMethodWithBasicParams((byte) 123, (short) 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X' as char, 'foobar');
-//  }
-//
-//  @Test
-//  public void testMethodWithGenericReturn() {
-//    def ret = obj.methodWithGenericReturn("JsonObject");
-//    assertTrue("Was expecting " + ret + " to implement Map", ret instanceof Map);
-//    assertEquals([foo:"hello",bar:123], ret);
-//    ret = obj.methodWithGenericReturn("JsonArray");
-//    assertTrue("Was expecting " + ret + " to implement List", ret instanceof List);
-//    assertEquals(["foo","bar","wib"], ret);
-//  }
-//
-//  @Test
-//  public void testFluentMethod() {
-//    def ret = obj.fluentMethod("bar");
-//    assertSame(obj, ret)
-//  }
-//
-//  @Test
-//  public void testStaticFactoryMethod() {
-//    def ret = TestInterface.staticFactoryMethod("bar");
-//    assertEquals("bar", ret.string);
-//  }
-//
-//  @Test
-//  public void testMethodWithCachedReturn() {
-//    def ret1 = obj.methodWithCachedReturn("bar");
-//    assertEquals("bar", ret1.string);
-//    def ret2 = obj.methodWithCachedReturn("bar");
-//    assertSame(ret1, ret2);
-//    def ret3 = obj.methodWithCachedReturn("bar");
-//    assertSame(ret1, ret3);
-//  }
-//
-//  @Test
-//  public void testMethodWithCachedListReturn() {
-//    def ret1 = obj.methodWithCachedListReturn();
-//    assertEquals(2, ret1.size());
-//    assertEquals("foo", ret1[0].string);
-//    assertEquals("bar", ret1[1].string);
-//    def ret2 = obj.methodWithCachedListReturn();
-//    assertSame(ret1, ret2);
-//    def ret3 = obj.methodWithCachedListReturn();
-//    assertSame(ret1, ret3);
-//  }
-//
-//  @Test
-//  public void testJsonReturns() {
-//    def ret = obj.methodWithJsonObjectReturn();
-//    assertEquals([cheese:"stilton"], ret);
-//    ret = obj.methodWithJsonArrayReturn();
-//    assertEquals(["socks", "shoes"], ret);
-//  }
-//
-//  @Test
-//  public void testNullJsonReturns() {
-//    def ret = obj.methodWithNullJsonObjectReturn();
-//    assertEquals(null, ret);
-//    ret = obj.methodWithNullJsonArrayReturn();
-//    assertEquals(null, ret);
-//  }
-//
-//  @Test
-//  public void testComplexJsonReturns() {
-//    def ret = obj.methodWithComplexJsonObjectReturn();
-//    assertEquals([outer: [socks: "tartan"], list: ["yellow", "blue"]], ret);
-//    ret = obj.methodWithComplexJsonArrayReturn();
-//    assertEquals([[foo: "hello"], [bar: "bye"]], ret);
-//  }
-//
-//  @Test
-//  public void testJsonParams() {
-//    obj.methodWithJsonParams([cat:"lion",cheese:"cheddar"], ["house","spider"]);
-//  }
-//
-//  @Test
-//  public void testNullJsonParams() {
-//    obj.methodWithNullJsonParams(null, null);
-//  }
-//
-//  @Test
-//  public void testJsonHandlerParams() {
-//    def count = 0;
-//    obj.methodWithHandlerJson({
-//      assertEquals([cheese:"stilton"], it)
-//      count++;
-//    }, {
-//      assertEquals(["socks","shoes"], it)
-//      count++;
-//    });
-//    assertEquals(2, count);
-//  }
-//
-//  @Test
-//  public void testNullJsonHandlerParams() {
-//    def count = 0;
-//    obj.methodWithHandlerNullJson({
-//      assertEquals(null, it)
-//      count++;
-//    }, {
-//      assertEquals(null, it)
-//      count++;
-//    });
-//    assertEquals(2, count);
-//  }
-//
-//
-//  @Test
-//  public void testComplexJsonHandlerParams() {
-//    def count = 0;
-//    obj.methodWithHandlerComplexJson({
-//      assertEquals([outer: [socks: "tartan"], list: ["yellow", "blue"]], it)
-//      count++;
-//    }, {
-//      assertEquals([[[foo: "hello"]], [[bar: "bye"]]], it)
-//      count++;
-//    });
-//    assertEquals(2, count);
-//  }
-//
-//  @Test
-//  public void testJsonHandlerAsyncResultParams() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultJsonObject({
-//      checker.assertAsyncResult([cheese:"stilton"], it)
-//    });
-//    obj.methodWithHandlerAsyncResultJsonArray({
-//      checker.assertAsyncResult(["socks","shoes"], it)
-//    });
-//    assertEquals(2, checker.count);
-//  }
-//
-//  @Test
-//  public void testNullJsonHandlerAsyncResultParams() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultNullJsonObject({
-//      checker.assertAsyncResult(null, it)
-//    });
-//    obj.methodWithHandlerAsyncResultNullJsonArray({
-//      checker.assertAsyncResult(null, it)
-//    });
-//    assertEquals(2, checker.count);
-//  }
-//
-//  @Test
-//  public void testComplexJsonHandlerAsyncResultParams() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultComplexJsonObject({
-//      checker.assertAsyncResult([outer: [socks: "tartan"], list: ["yellow", "blue"]], it)
-//    });
-//    obj.methodWithHandlerAsyncResultComplexJsonArray({
-//      checker.assertAsyncResult([[foo: "hello"], [bar: "bye"]], it)
-//    });
-//    assertEquals(2, checker.count);
-//  }
-//
-//  @Test
-//  public void testMethodWithListEnumReturn() {
-//    assertEquals([TestEnum.JULIEN,TestEnum.TIM], obj.methodWithListEnumReturn());
-//  }
-//
-//  @Test
-//  public void testMethodWithSetEnumReturn() {
-//    assertEquals([TestEnum.JULIEN,TestEnum.TIM] as Set, obj.methodWithSetEnumReturn());
-//  }
-//
-//  @Test
-//  public void testMethodWithEnumParam() {
-//    def ret = obj.methodWithEnumParam("cabbages", TestEnum.JULIEN);
-//    assertEquals("cabbagesJULIEN", ret);
-//  }
-//
-//  @Test
-//  public void testMethodWithThrowableParam() {
-//    def ret = obj.methodWithThrowableParam(new Exception("the_exception"));
-//    assertEquals("the_exception", ret);
-//  }
-//
-//  @Test
-//  public void testMethodWithEnumReturn() {
-//    TestEnum ret = obj.methodWithEnumReturn("JULIEN");
-//    assertEquals(TestEnum.JULIEN, ret);
-//  }
-//
-//  @Test
-//  public void testMethodWithThrowableReturn() {
-//    Throwable ret = obj.methodWithThrowableReturn("bogies");
-//    assertEquals("bogies", ret.getMessage());
-//  }
-//
-//  @Test
-//  public void testCustomModule() {
-//    MyInterface my = MyInterface.create();
-//    TestInterface testInterface = my.method();
-//    testInterface.methodWithBasicParams((byte) 123, (short) 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X' as char, "foobar");
-//    SubInterface sub = my.sub();
-//    assertEquals("olleh", sub.reverse("hello"))
-//  }
+
+  "testMapStringReturn" should "work" in {
+    val map = obj.methodWithMapStringReturn(a => {})
+    assert("bar" == map("foo"))
+  }
+
+  "testMapLongReturn" should "work" in {
+    val map = obj.methodWithMapLongReturn(a => {})
+    assert(123l == map("foo"))
+  }
+
+  "testMapJsonObjectReturn" should "work" in {
+    val map = obj.methodWithMapJsonObjectReturn(a => {})
+    val m = map("foo")
+    assert("eek" == m.getString("wibble"))
+  }
+
+  "testMapComplexJsonObjectReturn" should "work" in {
+    val map = obj.methodWithMapComplexJsonObjectReturn(a => {})
+    val m = map("foo")
+    assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == m)
+  }
+
+  "testMapJsonArrayReturn" should "work" in {
+    val map = obj.methodWithMapJsonArrayReturn(a => {})
+    val m = map("foo")
+    assert("wibble" == m.getString(0))
+  }
+
+  "testMapComplexJsonArrayReturn" should "work" in {
+    val  map = obj.methodWithMapComplexJsonArrayReturn(a => {})
+    val m = map("foo")
+    assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == m)
+  }
+
+  "testOverloadedMethods" should "work" in {
+    val refed = new RefedInterface1(new RefedInterface1Impl())
+    refed.setString("dog")
+    assert("meth1" == obj.overloadedMethod("cat", refed))
+    var counter = 0
+    assert("meth2" == obj.overloadedMethod("cat", refed, 12345, it => {assert("giraffe" == it); counter += 1}))
+    assert(counter == 1)
+    assert("meth3" == obj.overloadedMethod("cat", it => {assert("giraffe" == it); counter += 1}))
+    assert(counter == 2)
+    assert("meth4" == obj.overloadedMethod("cat", refed, it => {assert("giraffe" == it); counter += 1}))
+    assert(counter == 3)
+  }
+
+  "testSuperInterfaces" should "work" in {
+    obj.methodWithBasicParams(123.toByte, 12345.toShort, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
+    obj.otherSuperMethodWithBasicParams(123.toByte, 12345.toShort, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
+  }
+
+  "testMethodWithGenericReturn" should "work" in {
+    val ret = obj.methodWithGenericReturn[JsonObject]("JsonObject")
+    assert(Json.obj(("foo","hello"),("bar",123)) == ret)
+    val ret2 = obj.methodWithGenericReturn[JsonArray]("JsonArray")
+    assert(arr("foo","bar","wib") == ret2)
+  }
+
+  "testFluentMethod" should "work" in {
+    assert(obj.eq(obj.fluentMethod("bar")))
+  }
+
+  "testStaticFactoryMethod" should "work" in {
+    assert("bar" == TestInterface.staticFactoryMethod("bar").getString())
+  }
+
+  //FIXME implement caching
+  "testMethodWithCachedReturn" should "work" ignore {
+    val ret1 = obj.methodWithCachedReturn("bar")
+    assert("bar" == ret1.getString())
+    val ret2 = obj.methodWithCachedReturn("bar")
+    assert(ret1.eq(ret2))
+    val ret3 = obj.methodWithCachedReturn("bar")
+    assert(ret1.eq(ret3))
+  }
+
+  //FIXME implement caching
+  "testMethodWithCachedListReturn" should "work" ignore {
+    val ret1 = obj.methodWithCachedListReturn()
+    assert(2 == ret1.size)
+    assert("foo" == ret1.head.getString)
+    assert("bar" == ret1.head.getString)
+    val ret2 = obj.methodWithCachedListReturn()
+    assert(ret1.eq(ret2))
+    val ret3 = obj.methodWithCachedListReturn()
+    assert(ret1.eq(ret3))
+  }
+
+  "testJsonReturns" should "work" in {
+    val ret = obj.methodWithJsonObjectReturn()
+    assert(Json.obj(("cheese","stilton")) == ret)
+    val ret2 = obj.methodWithJsonArrayReturn()
+    assert(arr("socks", "shoes") == ret2)
+  }
+
+  "testNullJsonReturns" should "work" in {
+    val ret = obj.methodWithNullJsonObjectReturn()
+    assert(null == ret)
+    val ret2 = obj.methodWithNullJsonObjectReturn()
+    assert(null == ret)
+  }
+
+  "testComplexJsonReturns" should "work" in {
+    val ret = obj.methodWithComplexJsonObjectReturn()
+    assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == ret)
+    val ret2 = obj.methodWithComplexJsonArrayReturn()
+    assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == ret2)
+  }
+
+  "testJsonParams" should "work" in {
+    obj.methodWithJsonParams(Json.obj(("cat", "lion"),("cheese", "cheddar")), arr("house","spider"))
+  }
+
+  "testNullJsonParams" should "work" in {
+    obj.methodWithNullJsonParams(null, null)
+  }
+
+  "testJsonHandlerParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerJson(it => {
+      assert(Json.obj(("cheese","stilton")) ==  it)
+      count += 1
+    }, it => {
+      assert(arr("socks","shoes") == it)
+      count += 1
+    })
+    assert(2 == count)
+  }
+
+  "testNullJsonHandlerParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerNullJson(it => {
+      assert(null ==  it)
+      count += 1
+    }, it => {
+      assert(null == it)
+      count += 1
+    })
+    assert(2 == count)
+  }
+
+  "testComplexJsonHandlerParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerComplexJson(it => {
+      assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == it)
+      count += 1
+    }, it => {
+      assert(arr(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye")))) == it)
+      count += 1
+    })
+    assert(2 == count)
+  }
+
+  "testJsonHandlerAsyncResultParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerAsyncResultJsonObject(it => {
+      assert(Json.obj(("cheese", "stilton")) == it.result())
+      count += 1
+    })
+    assert(count == 1)
+    obj.methodWithHandlerAsyncResultJsonArray(it => {
+      assert(arr("socks", "shoes") == it.result())
+      count += 1
+    })
+
+    assert(count == 2)
+  }
+
+  "testNullJsonHandlerAsyncResultParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerAsyncResultNullJsonObject(it => {
+      assert(null == it.result())
+      count += 1
+    })
+    assert(count == 1)
+    obj.methodWithHandlerAsyncResultNullJsonArray(it => {
+      assert(null == it.result())
+      count += 1
+    })
+
+    assert(count == 2)
+  }
+
+  "testComplexJsonHandlerAsyncResultParams" should "work" in {
+    var count = 0
+    obj.methodWithHandlerAsyncResultComplexJsonObject(it => {
+      assert(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))) == it.result())
+      count += 1
+    })
+    obj.methodWithHandlerAsyncResultComplexJsonArray(it => {
+      assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == it.result())
+      count += 1
+    })
+    assert(2 == count)
+  }
+
+  "testMethodWithListEnumReturn" should "work" in {
+    assert(List(TestEnum.JULIEN,TestEnum.TIM) == obj.methodWithListEnumReturn())
+  }
+
+  "testMethodWithSetEnumReturn" should "work" in {
+    assert(Set(TestEnum.JULIEN,TestEnum.TIM) == obj.methodWithSetEnumReturn())
+  }
+
+  "testMethodWithEnumParam" should "work" in {
+    val ret = obj.methodWithEnumParam("cabbages", TestEnum.JULIEN)
+    assert("cabbagesJULIEN" == ret)
+  }
+
+  "testMethodWithThrowableParam" should "work" in {
+    val ret = obj.methodWithThrowableParam(new Exception("the_exception"))
+    assert("the_exception" == ret)
+  }
+
+  "testMethodWithEnumReturn" should "work" in {
+    val ret = obj.methodWithEnumReturn("JULIEN")
+    assert(TestEnum.JULIEN == ret)
+  }
+
+  "testMethodWithThrowableReturn" should "work" in {
+    val ret = obj.methodWithThrowableReturn("bogies")
+    assert("bogies" == ret.getMessage)
+  }
+
+  "testCustomModule" should "work" in {
+    val my = MyInterface.create()
+    val testInterface = my.method()
+    testInterface.methodWithBasicParams(123.toByte, 12345.toShort, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
+    val sub = my.sub()
+    assert("olleh" == sub.reverse("hello"))
+  }
 }
