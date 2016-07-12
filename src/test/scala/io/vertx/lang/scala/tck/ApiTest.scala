@@ -103,10 +103,10 @@ class ApiTest extends FlatSpec with Matchers {
   "testObjectParam" should "work" in {
     obj.methodWithObjectParam("null", null)
     obj.methodWithObjectParam("string", "wibble")
-//    obj.methodWithObjectParam("true", true)
-//    obj.methodWithObjectParam("false", false)
-//    obj.methodWithObjectParam("long", 123.toLong)
-//    obj.methodWithObjectParam("double", 123.456.toDouble)
+    obj.methodWithObjectParam("true", true.asInstanceOf[Object])
+    obj.methodWithObjectParam("false", false.asInstanceOf[Object])
+    obj.methodWithObjectParam("long", 123.toLong.asInstanceOf[Object])
+    obj.methodWithObjectParam("double", 123.456.asInstanceOf[Object])
     obj.methodWithObjectParam("JsonObject", Json.obj(("foo","hello"), ("bar", 123)))
     val hello = "hello"
     obj.methodWithObjectParam("JsonObject", Json.obj(("foo",hello), ("bar", 123)))

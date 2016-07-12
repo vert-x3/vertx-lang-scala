@@ -48,17 +48,16 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
     }))
   }
 
-  //FIXME type problems due to AnyRef
-//  "testObjectParam" should "work" in {
-//    assert("ok" == obj.methodWithObjectParam(123, it => {
-//      assert(123 == it)
-//      "ok"
-//    }))
-//    assert("ok" == obj.methodWithObjectParam("the-string-arg", it => {
-//      assert("the-string-arg" == it)
-//      "ok"
-//    }))
-//  }
+  "testObjectParam" should "work" in {
+    assert("ok" == obj.methodWithObjectParam(123.asInstanceOf[Object], it => {
+      assert(123 == it)
+      "ok"
+    }))
+    assert("ok" == obj.methodWithObjectParam("the-string-arg", it => {
+      assert("the-string-arg" == it)
+      "ok"
+    }))
+  }
 
   "testDataObjectParam" should "work" in {
     assert("ok" == obj.methodWithDataObjectParam(it => {
@@ -189,7 +188,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
     assert("ok" == obj.methodWithMapReturn(it => {Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
   }
 
-  "testGenericReturn" should "work" in {
+  "testGenericReturn" should "work" ignore {
     //FIXME test should be split up for different types
         assert("ok" == obj.methodWithGenericReturn[String]( it => "the-string" ))
 //            it match{
