@@ -17,6 +17,7 @@
 package io.vertx.scala.core.eventbus;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler

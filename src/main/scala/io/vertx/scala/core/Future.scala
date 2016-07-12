@@ -17,6 +17,7 @@
 package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.Handler
 import java.util.function.Function
 
@@ -145,8 +146,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param mapper the mapper function
     * @return the composed future
     */
-  def compose[U](mapper: java.util.function.Function[T,io.vertx.core.Future[U]]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(mapper))
+  def compose[U](mapper: T => io.vertx.core.Future[U]): io.vertx.scala.core.Future[U] = {
+    Future.apply[U](_asJava.compose(asJavaFunction(mapper)))
   }
 
   /**
@@ -162,8 +163,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param mapper the mapper function
     * @return the mapped future
     */
-  def map[U](mapper: java.util.function.Function[T,U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.map(mapper))
+  def map[U](mapper: T => U): io.vertx.scala.core.Future[U] = {
+    Future.apply[U](_asJava.map(asJavaFunction(mapper)))
   }
 
   /**

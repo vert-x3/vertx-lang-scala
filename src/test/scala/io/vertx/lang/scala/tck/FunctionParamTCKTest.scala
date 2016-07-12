@@ -1,11 +1,12 @@
 package io.vertx.lang.scala.tck
 
-import io.vertx.codegen.testmodel.FunctionParamTCKImpl
-import io.vertx.scala.codegen.testmodel.FunctionParamTCK
+import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, TestDataObject, TestEnum}
+import io.vertx.lang.scala.json.Json
+import io.vertx.lang.scala.json.Json.arr
+import io.vertx.scala.codegen.testmodel.{FunctionParamTCK, RefedInterface1}
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
-import scala.compat.java8.FunctionConverters._
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
@@ -13,220 +14,200 @@ import scala.compat.java8.FunctionConverters._
 @RunWith(classOf[JUnitRunner])
 class FunctionParamTCKTest extends FlatSpec with Matchers {
   val obj = FunctionParamTCK(new FunctionParamTCKImpl())
-  //FIXME apply this strategy internally
   "testBasicParam" should "work" in {
     val ret = obj.methodWithBasicParam(
-      asJavaFunction(it => { assert(100.toByte == it); "ok0" }),
-      asJavaFunction(it => { assert(1000.toShort == it); "ok1" }),
-      asJavaFunction(it => { assert(100000 == it); "ok2" }),
-      asJavaFunction(it => { assert(10000000000L == it); "ok3" }),
-      asJavaFunction(it => { assert(3.5.toFloat == it); "ok4" }),
-      asJavaFunction(it => { assert(0.01 == it); "ok5" }),
-      asJavaFunction(it => { assert(true == it); "ok6" }),
-      asJavaFunction(it => { assert('F' == it); "ok7" }),
-      asJavaFunction(it => { assert("wibble" == it); "ok8" }))
+      it => { assert(100.toByte == it); "ok0" },
+      it => { assert(1000.toShort == it); "ok1" },
+      it => { assert(100000 == it); "ok2" },
+      it => { assert(10000000000L == it); "ok3" },
+      it => { assert(3.5.toFloat == it); "ok4" },
+      it => { assert(0.01 == it); "ok5" },
+      it => { assert(true == it); "ok6" },
+      it => { assert('F' == it); "ok7" },
+      it => { assert("wibble" == it); "ok8" })
     assert(List("ok0","ok1","ok2","ok3","ok4","ok5","ok6","ok7","ok8") == ret)
   }
 
-//  @Test
-//  public void testJsonParam() {
-//    def ret = obj.methodWithJsonParam(
-//      { assertEquals([one:1,two:2,three:3], it); return "ok0" },
-//      { assertEquals(["one","two","three"], it); return "ok1" })
-//    assertEquals(["ok0","ok1"], ret);
+  "testJsonParam" should "work" in {
+    val ret = obj.methodWithJsonParam(
+      it => { assert(Json.obj(("one",1),("two",2),("three",3)) == it); "ok0" },
+      it => { assert(arr("one","two","three") == it); "ok1" })
+    assert(List("ok0","ok1") == ret)
+  }
+
+  "testVoidParam" should "work" in {
+    assert("ok" == obj.methodWithVoidParam(it => { assert(null == it); "ok" }))
+  }
+
+  "testUserTypeParam" should "work" in {
+    val refed = new RefedInterface1(new RefedInterface1Impl())
+    assert("ok" == obj.methodWithUserTypeParam(refed, it => {
+      it.setString("foobarjuu")
+      assert("foobarjuu" == it.getString())
+      "ok"
+    }))
+  }
+
+  //FIXME type problems due to AnyRef
+//  "testObjectParam" should "work" in {
+//    assert("ok" == obj.methodWithObjectParam(123, it => {
+//      assert(123 == it)
+//      "ok"
+//    }))
+//    assert("ok" == obj.methodWithObjectParam("the-string-arg", it => {
+//      assert("the-string-arg" == it)
+//      "ok"
+//    }))
 //  }
-//
-//  @Test
-//  public void testVoidParam() {
-//    assertEquals("ok", obj.methodWithVoidParam { assertEquals(null, it); return "ok" })
-//  }
-//
-//  @Test
-//  public void testUserTypeParam() {
-//    RefedInterface1 refed = new RefedInterface1(new RefedInterface1Impl());
-//    assertEquals("ok", obj.methodWithUserTypeParam(refed) {
-//      it.setString("foobarjuu")
-//      assertEquals("foobarjuu", it.getString())
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testObjectParam() {
-//    assertEquals("ok", obj.methodWithObjectParam(123) {
-//      assertEquals(123, it)
-//      return "ok"
-//    })
-//    assertEquals("ok", obj.methodWithObjectParam("the-string-arg") {
-//      assertEquals("the-string-arg", it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testDataObjectParam() {
-//    assertEquals("ok", obj.methodWithDataObjectParam() {
-//      assertEquals("foo_value", it.foo)
-//      assertEquals(3, it.bar)
-//      assertEquals(0.01, it.wibble, 0)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testEnumParam() {
-//    assertEquals("ok", obj.methodWithEnumParam() {
-//      assertEquals(TestEnum.TIM, it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testListParam() {
-//    assertEquals("ok", obj.methodWithListParam() {
-//      assertEquals(["one", "two", "three"], it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testSetParam() {
-//    assertEquals("ok", obj.methodWithSetParam() {
-//      assertEquals(["one", "two", "three"] as Set, it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testMapParam() {
-//    assertEquals("ok", obj.methodWithMapParam() {
-//      assertEquals([one:"one", two:"two", three:"three"], it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testGenericParam() {
-//    assertEquals("ok", obj.methodWithGenericParam(123) {
-//      assertEquals(123, it)
-//      return "ok"
-//    })
-//    assertEquals("ok", obj.methodWithGenericParam("the-string-arg") {
-//      assertEquals("the-string-arg", it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testGenericUserTypeParam() {
-//    assertEquals("ok", obj.methodWithGenericUserTypeParam(123) {
-//      assertEquals(123, it.getValue())
-//      return "ok"
-//    })
-//    assertEquals("ok", obj.methodWithGenericUserTypeParam("the-string-arg") {
-//      assertEquals("the-string-arg", it.getValue())
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testNullableListParam() {
-//    assertEquals("ok", obj.methodWithNullableListParam() {
-//      assertEquals(null, it)
-//      return "ok"
-//    })
-//  }
-//
-//  @Test
-//  public void testBasicReturn() {
-//    assertEquals("ok", obj.methodWithBasicReturn(
-//      { (byte)10 },
-//      { (short)1000 },
-//      { (int)100000 },
-//      { (long)10000000000 },
-//      { (float)0.01 },
-//      { (double)0.00001 },
-//      { true },
-//      { 'C' as Character },
-//      { "the-return" }
-//    ))
-//  }
-//
-//  @Test
-//  public void testJsonReturn() {
-//    assertEquals("ok", obj.methodWithJsonReturn(
-//      { [foo:"foo_value",bar:10,wibble:0.1] },
-//      { ["one","two","three"] }
-//    ))
-//  }
-//
-//  @Test
-//  public void testObjectReturn() {
-//    assertEquals("ok", obj.methodWithObjectReturn(
-//      {
-//        switch (it) {
-//          case 0: return "the-string"
-//          case 1: return 123
-//          case 2: return true
-//          case 3: return [foo:"foo_value"]
-//          case 4: return ["foo","bar"]
-//          default: throw new Exception()
-//        }
-//      }
-//    ))
-//  }
-//
-//  @Test
-//  public void testDataObjectReturn() {
-//    assertEquals("ok", obj.methodWithDataObjectReturn({[foo:"wasabi",bar:6,wibble:0.01]}))
-//  }
-//
-//  @Test
-//  public void testEnumReturn() {
-//    assertEquals("ok", obj.methodWithEnumReturn({TestEnum.NICK}))
-//  }
-//
-//  @Test
-//  public void testListReturn() {
-//    assertEquals("ok", obj.methodWithListReturn({["one", "two", "three"]}))
-//  }
-//
-//  @Test
-//  public void testSetReturn() {
-//    assertEquals("ok", obj.methodWithSetReturn({["one", "two", "three"] as Set}))
-//  }
-//
-//  @Test
-//  public void testMapReturn() {
-//    assertEquals("ok", obj.methodWithMapReturn({[one:"one", two:"two", three:"three"]}))
-//  }
-//
-//  @Test
-//  public void testGenericReturn() {
-//    // Does not pass -> CCE in Groovy -> investigate
-//    /*
-//        assertEquals("ok", obj.methodWithGenericReturn(
-//            {
-//              switch (it) {
-//                case 0: return "the-string"
-//                case 1: return 123
-//                case 2: return true
-//                case 3: return [foo:"foo_value"]
-//                case 4: return ["foo","bar"]
-//                default: throw new Exception()
-//              }
+
+  "testDataObjectParam" should "work" in {
+    assert("ok" == obj.methodWithDataObjectParam(it => {
+      assert("foo_value" == it.getFoo)
+      assert(3 == it.getBar)
+      assert(0.01 == it.getWibble)
+      "ok"
+    }))
+  }
+
+  "testEnumParam" should "work" in {
+    assert("ok" == obj.methodWithEnumParam(it => {
+      assert(TestEnum.TIM == it)
+      "ok"
+    }))
+  }
+
+  "testListParam" should "work" in {
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithListParam(it => {
+      assert(List("one", "two", "three").asJava == it)
+      "ok"
+    }))
+  }
+
+  "testSetParam" should "work" in {
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithSetParam(it => {
+      assert(Set("one", "two", "three").asJava == it)
+      "ok"
+    }))
+  }
+
+  "testMapParam" should "work" in {
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithMapParam(it => {
+      assert(Map("one" ->"one", "two" -> "two", "three" -> "three").asJava == it)
+      "ok"
+    }))
+  }
+
+  "testGenericParam" should "work" in {
+    assert("ok" == obj.methodWithGenericParam[Int](123, it => {
+      assert(123 == it)
+      "ok"
+    }))
+    assert("ok" == obj.methodWithGenericParam[String]("the-string-arg", it => {
+      assert("the-string-arg" == it)
+      "ok"
+    }))
+  }
+
+  "testGenericUserTypeParam" should "work" in {
+    assert("ok" == obj.methodWithGenericUserTypeParam[Int](123, it => {
+      assert(123 == it.getValue())
+      "ok"
+    }))
+    assert("ok" == obj.methodWithGenericUserTypeParam[String]("the-string-arg", it => {
+      assert("the-string-arg" == it.getValue())
+      "ok"
+    }))
+  }
+
+  "testNullableListParam" should "work" in {
+    assert("ok" == obj.methodWithNullableListParam(it => {
+      assert(null == it)
+      "ok"
+    }))
+  }
+
+  "testBasicReturn" should "work" in {
+    assert("ok" == obj.methodWithBasicReturn(
+      it => { 10.toByte },
+      it => { 1000.toShort },
+      it => { 100000 },
+      it => { 10000000000l },
+      it => { 0.01f },
+      it => { 0.00001 },
+      it => { true },
+      it => { 'C' },
+      it => { "the-return" }
+    ))
+  }
+
+  "testJsonReturn" should "work" in {
+    assert("ok" == obj.methodWithJsonReturn(
+      it => { Json.obj(("foo","foo_value"),("bar",10),("wibble",0.1)) },
+      it => { arr("one","two","three") }
+    ))
+  }
+
+  "testObjectReturn" should "work" in {
+    assert("ok" == obj.methodWithObjectReturn(
+      it => it.asInstanceOf[Int] match {
+          case 0 => "the-string".asInstanceOf[Object]
+          case 1 => 123.asInstanceOf[Object]
+          case 2 => true.asInstanceOf[Object]
+          case 3 => Json.obj(("foo","foo_value")).asInstanceOf[Object]
+          case 4 => arr("foo","bar").asInstanceOf[Object]
+          case _ => throw new Exception()
+        }
+    ))
+  }
+
+  "testDataObjectReturn" should "work" in {
+    assert("ok" == obj.methodWithDataObjectReturn(it => {new TestDataObject().setFoo("wasabi").setBar(6).setWibble(0.01)}))
+  }
+
+  "testEnumReturn" should "work" in {
+    assert("ok" == obj.methodWithEnumReturn(it => {TestEnum.NICK}))
+  }
+
+  "testListReturn" should "work" in {
+    //FIXME doesn't feel right, need to descend deepoer
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithListReturn(it => {List("one", "two", "three").asJava}))
+  }
+
+  "testSetReturn" should "work" in {
+    //FIXME doesn't feel right, need to descend deepoer
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithSetReturn(it => {Set("one", "two", "three").asJava}))
+  }
+
+  "testMapReturn" should "work" in {
+    //FIXME doesn't feel right, need to descend deepoer
+    import collection.JavaConverters._
+    assert("ok" == obj.methodWithMapReturn(it => {Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
+  }
+
+  "testGenericReturn" should "work" in {
+    //FIXME test should be split up for different types
+        assert("ok" == obj.methodWithGenericReturn[String]( it => "the-string" ))
+//            it match{
+//              case 0: "the-string"
+//              case 1: 123
+//              case 2: true
+//              case 3: return [foo:"foo_value"]
+//              case 4: return ["foo","bar"]
+//              case _: throw new Exception()
 //            }
 //        ))
-//    */
-//  }
+  }
 //
-//  @Test
-//  public void testGenericUserTypeReturn() {
-//    assertEquals("ok", obj.methodWithGenericUserTypeReturn({ it }))
-//  }
-//
-//  @Test
-//  public void testNullableListReturn() {
-//    assertEquals("ok", obj.methodWithNullableListReturn({ null }))
-//  }
+  "testGenericUserTypeReturn" should "work" in {
+    assert("ok" == obj.methodWithGenericUserTypeReturn[Int](it => { it }))
+  }
+
+  "testNullableListReturn" should "work" in {
+    assert("ok" == obj.methodWithNullableListReturn(it => { null }))
+  }
 }

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.buffer;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.core.shareddata.impl.ClusterSerializable
 import io.vertx.core.json.JsonObject

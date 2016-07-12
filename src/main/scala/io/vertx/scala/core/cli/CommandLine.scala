@@ -17,6 +17,7 @@
 package io.vertx.scala.core.cli;
 
 import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.cli.Option
 import io.vertx.core.cli.Argument
 
