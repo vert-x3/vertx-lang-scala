@@ -1,5 +1,19 @@
 @code{
 
+  def isKeyword(possibleKeyword) {
+    if(possibleKeyword.equals("type")) {
+      return true;
+    }
+    return false;
+  }
+
+  def escapeIfKeyword(possibleKeyword) {
+    if(isKeyword(possibleKeyword)) {
+      return '`' + possibleKeyword + '`';
+    }
+    return possibleKeyword;
+  }
+
   def toScalaType(type) {
     if (type.name == 'void' || type.name == 'java.lang.Void') {
       return 'Unit';
@@ -151,13 +165,7 @@
         } else {
           paramList += ', ';
         }
-        /* TODO: type is a scala keyword*/
-        if (param.name.equals("type")) {
-          paramList += '`' + param.name + '`';
-        } else {
-          paramList += param.name;
-        }
-        paramList += ': '+toScalaType(param.type);
+        paramList += escapeIfKeyword(param.name) + ': '+toScalaType(param.type);
     }
     paramList;
   }
@@ -303,10 +311,8 @@
       }
 
       /* TODO: type is a keyword in scala */
-      if (param.name.equals("type")) {
-        invocation += '`';
-        invocation += param.name;
-        invocation += '`'
+      if (isKeyword(param.name)) {
+        invocation += escapeIfKeyword(param.name);
       } else {
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
