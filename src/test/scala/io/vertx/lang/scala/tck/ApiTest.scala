@@ -113,88 +113,60 @@ class ApiTest extends FlatSpec with Matchers {
     val foo = "foo"
     obj.methodWithObjectParam("JsonArray", arr(foo, "bar", "wib"))
   }
-//
-//  @Test
-//  public void testDataObjectParam() {
-//    def dataObject = [
-//      foo: "hello",
-//      bar: 123,
-//      wibble: 1.23
-//    ];
-//    obj.methodWithDataObjectParam(dataObject);
-//    def hell = "hell"
-//    dataObject = [
-//        foo: "${hell}o",
-//        bar: 123,
-//        wibble: 1.23
-//    ];
-//    obj.methodWithDataObjectParam(dataObject);
-//  }
-//
-//  @Test
-//  public void testListOfDataObjectsParam() {
-//    def list = [
-//            [foo: "hello",
-//            bar: 123,
-//            wibble: 1.23],
-//            [foo: "world",
-//             bar: 123,
-//             wibble: 1.23]
-//    ];
-//    obj.methodWithListOfDataObjectsParam(list);
-//  }
-//
-//  @Test
-//  public void testSetOfDataObjectsParam() {
-//    def set = new LinkedHashSet()
-//    set << [foo: "hello",
-//             bar: 123,
-//             wibble: 1.23]
-//    set << [foo: "world",
-//             bar: 123,
-//             wibble: 1.23]
-//    obj.methodWithSetOfDataObjectsParam(set);
-//  }
-//
-//  @Test
-//  public void testNullDataObjectParam() {
-//    obj.methodWithNullDataObjectParam(null);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerDataObject() {
-//    def dataObject = new TestDataObject()
-//    dataObject.foo = "foo"
-//    dataObject.bar = 123
-//    def count = 0
-//    obj.methodWithHandlerDataObject({
-//      assertEquals(dataObject.foo, it.foo)
-//      assertEquals(dataObject.bar, it.bar)
-//      //assertNull(it.wibble)
-//      count++
-//    })
-//    assertEquals(1, count)
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultDataObject() {
-//    def dataObject = new TestDataObject()
-//    dataObject.foo = "foo"
-//    dataObject.bar = 123
-//    def checker = new AsyncResultChecker()
-//    obj.methodWithHandlerAsyncResultDataObject(false, { result ->
-//      assertTrue(result.succeeded())
-//      assertFalse(result.failed())
-//      def res = result.result()
-//      assertEquals(dataObject.foo, res.foo)
-//      assertEquals(dataObject.bar, res.bar)
-//      assertNull(result.cause())
-//      checker.count++
-//    })
-//    obj.methodWithHandlerAsyncResultDataObject(true, { checker.assertAsyncFailure("foobar!", it) })
-//    assertEquals(2, checker.count);
-//  }
-//
+
+  "testDataObjectParam" should "work" in {
+    obj.methodWithDataObjectParam(new TestDataObject().setBar(123).setFoo("hello").setWibble(1.23))
+  }
+
+  "testListOfDataObjectsParam" should "work" in {
+    obj.methodWithListOfDataObjectsParam(List(new TestDataObject().setBar(123).setFoo("hello").setWibble(1.23), new TestDataObject().setBar(123).setFoo("world").setWibble(1.23)))
+  }
+
+  "testSetOfDataObjectsParam" should "work" in {
+    obj.methodWithSetOfDataObjectsParam(Set(new TestDataObject().setBar(123).setFoo("hello").setWibble(1.23), new TestDataObject().setBar(123).setFoo("world").setWibble(1.23)))
+  }
+
+  "testNullDataObjectParam" should "work" in {
+    obj.methodWithNullDataObjectParam(null)
+  }
+
+  "testMethodWithHandlerDataObject" should "work" in {
+    val dataObject = new TestDataObject()
+    dataObject.setFoo("foo")
+    dataObject.setBar(123)
+    var called = false
+    obj.methodWithHandlerDataObject(it =>{
+      assert(dataObject.getFoo == it.getFoo)
+      assert(dataObject.getBar == it.getBar)
+      called = true
+    })
+    assert(called)
+  }
+
+  "testMethodWithHandlerAsyncResultDataObject" should "work" in {
+    val dataObject = new TestDataObject()
+    dataObject.setFoo("foo")
+    dataObject.setBar(123)
+    var called = false
+    obj.methodWithHandlerAsyncResultDataObject(false, result => {
+      assert(result.succeeded())
+      assert(!result.failed())
+      val res = result.result()
+      assert(dataObject.getFoo == res.getFoo)
+      assert(dataObject.getBar == res.getBar)
+      assert(null == result.cause())
+      called = true
+    })
+    assert(called)
+    called = false
+    obj.methodWithHandlerAsyncResultDataObject(true, result => {
+      assert(result.failed())
+      assert("foobar!" == result.cause().getMessage)
+      called = true
+    })
+    assert(called)
+  }
+
   "testMethodWithHandlerStringReturn" should "work" in {
     val handler = obj.methodWithHandlerStringReturn("the-result")
     handler("the-result")
@@ -376,53 +348,58 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerListComplexJsonArray(it => assert(it == List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
   }
 
-//  @Test
-//  public void testMethodWithHandlerListDataObject() {
-//    def count = 0
-//    obj.methodWithHandlerListDataObject({
-//      assertTrue(it[0] instanceof Map);
-//      assertEquals("String 1", it[0].foo);
-//      assertEquals(1, it[0].bar);
-//      assertEquals(1.1, it[0].wibble, 0);
-//      assertTrue(it[1] instanceof Map);
-//      assertEquals("String 2", it[1].foo);
-//      assertEquals(2, it[1].bar);
-//      assertEquals(2.2, it[1].wibble, 0);
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerNullListDataObject() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerListNullDataObject({
-//      checker.assertResult([null], it)
-//    });
-//    assertEquals(1, checker.count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerSetDataObject() {
-//    def count = 0
-//    obj.methodWithHandlerSetDataObject({
-//      assertEquals(2, it.size());
-//      assertTrue(it.contains([foo:"String 1",bar: 1,wibble: 1.1d]));
-//      assertTrue(it.contains([foo:"String 2",bar: 2,wibble: 2.2d]));
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerNullSetDataObject() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerSetNullDataObject({
-//      checker.assertResult([null] as Set, it)
-//    });
-//    assertEquals(1, checker.count);
-//  }
-//
+  "testMethodWithHandlerListDataObject" should "work" in {
+    var called = false
+    obj.methodWithHandlerListDataObject(it => {
+      assert("String 1" == it.head.getFoo)
+      assert(1 == it.head.getBar)
+      assert(1.1 == it.head.getWibble)
+      assert("String 2" == it(1).getFoo)
+      assert(2 == it(1).getBar)
+      assert(2.2 == it(1).getWibble)
+      called = true
+    })
+    assert(called)
+  }
+
+  //FIXME broken because of a unneded call to TestData-constructor with null as parameter
+  "testMethodWithHandlerNullListDataObject" should "work" in {
+    var called = false
+    obj.methodWithHandlerListNullDataObject(it => {
+      assert(null == it)
+    })
+    assert(called)
+  }
+
+
+  "testMethodWithHandlerSetDataObject" should "work" in {
+    var checkVar = 0
+    obj.methodWithHandlerSetDataObject(it => {
+      it.forall( td => {
+        if("String 1" == td.getFoo){
+          assert(1 == td.getBar)
+          assert(1.1 == td.getWibble)
+          checkVar += 1
+        }
+        else if("String 2" == td.getFoo){
+          assert(2 == td.getBar)
+          assert(2.2 == td.getWibble)
+          checkVar -= 1
+        }
+        true
+      })
+    })
+    assert(checkVar == 0)
+  }
+
+  //FIXME broken because of a unneded call to TestData-constructor with null as parameter
+  "testMethodWithHandlerNullSetDataObject" should "work" in {
+    var called = false
+    obj.methodWithHandlerSetNullDataObject(it => {
+      assert(null == it)
+    })
+    assert(called)
+  }
 
   "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
     import collection.JavaConverters._
@@ -466,54 +443,67 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerAsyncResultSetComplexJsonArray(it => assert(it.result() == Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye")))).asJava))
   }
 
-//  @Test
-//  public void testMethodWithHandlerAsyncResultListDataObject() {
-//    def count = 0
-//    obj.methodWithHandlerAsyncResultListDataObject({
-//      List<TestDataObject> result = it.result();
-//      assertTrue(result[0] instanceof Map);
-//      assertEquals("String 1", result[0].foo);
-//      assertEquals(1, result[0].bar);
-//      assertEquals(1.1, result[0].wibble, 0);
-//      assertTrue(result[1] instanceof Map);
-//      assertEquals("String 2", result[1].foo);
-//      assertEquals(2, result[1].bar);
-//      assertEquals(2.2, result[1].wibble, 0);
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultNullListDataObject() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultListNullDataObject({
-//      checker.assertAsyncResult([null], it)
-//    });
-//    assertEquals(1, checker.count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultSetDataObject() {
-//    def count = 0
-//    obj.methodWithHandlerAsyncResultSetDataObject({
-//      assertEquals(2, it.result().size());
-//      assertTrue(it.result().contains([foo:"String 1",bar: 1,wibble: 1.1d]));
-//      assertTrue(it.result().contains([foo:"String 2",bar: 2,wibble: 2.2d]));
-//      count++;
-//    });
-//    assertEquals(1, count);
-//  }
-//
-//  @Test
-//  public void testMethodWithHandlerAsyncResultNullSetDataObject() {
-//    def checker = new AsyncResultChecker();
-//    obj.methodWithHandlerAsyncResultSetNullDataObject({
-//      checker.assertAsyncResult([null] as Set, it)
-//    });
-//    assertEquals(1, checker.count);
-//  }
-//
+  //FIXME receiving a util.List inside a Scala-function is consistent
+  "testMethodWithHandlerAsyncResultListDataObject" should "work" in {
+    var called = false
+    obj.methodWithHandlerAsyncResultListDataObject(it => {
+      val result = it.result()
+      assert("String 1" == it.result().get(0).getFoo)
+      assert(1 == it.result().get(0).getBar)
+      assert(1.1 == it.result().get(0).getWibble)
+
+      assert("String 2" == it.result().get(1).getFoo)
+      assert(2 == it.result().get(1).getBar)
+      assert(2.2 == it.result().get(1).getWibble)
+      called = true
+    })
+    assert(called)
+  }
+
+  //FIXME receiving a util.List inside a Scala-function is consistent
+  "testMethodWithHandlerAsyncResultNullListDataObject" should "work" in {
+    import collection.JavaConverters._
+    var called = false
+    obj.methodWithHandlerAsyncResultListNullDataObject(it => {
+      assert(List(null).asJava == it.result())
+      called = true
+    })
+    assert(called)
+  }
+
+  "testMethodWithHandlerAsyncResultSetDataObject" should "work" in {
+    import collection.JavaConversions._
+    var checkVar = 0
+    obj.methodWithHandlerAsyncResultSetDataObject(it => {
+      val coll = it.result()
+      coll.forall( td => {
+        if("String 1" == td.getFoo){
+          assert(1 == td.getBar)
+          assert(1.1 == td.getWibble)
+          checkVar += 1
+        }
+        else if("String 2" == td.getFoo){
+          assert(2 == td.getBar)
+          assert(2.2 == td.getWibble)
+          checkVar -= 1
+        }
+        true
+      })
+    })
+    assert(checkVar == 0)
+  }
+
+
+  "testMethodWithHandlerAsyncResultNullSetDataObject" should "work" in {
+    import collection.JavaConverters._
+    var called = false
+    obj.methodWithHandlerAsyncResultSetNullDataObject(it => {
+      assert(Set(null).asJava == it.result())
+      called = true
+    })
+    assert(called)
+  }
+
 
   "testMethodWithHandlerUserTypes" should "work" in {
     obj.methodWithHandlerUserTypes(it => assert(it.getString == "echidnas"))
@@ -816,15 +806,30 @@ class ApiTest extends FlatSpec with Matchers {
     assert(set.map(_.getString()).size == 2)
   }
 
-//
-//  @Test
-//  public void testSetDataObjectReturn() {
-//    Set<Map<String, Object>> set = obj.methodWithSetDataObjectReturn();
-//    assertEquals(2, set.size());
-//    assertTrue(set.contains([foo:"String 1",bar: 1,wibble: 1.1d]));
-//    assertTrue(set.contains([foo:"String 2",bar: 2,wibble: 2.2d]));
-//  }
-//
+  "testSetDataObjectReturn" should "work" in {
+    import collection.JavaConversions._
+    var checkVar = 0
+    val coll = obj.methodWithSetDataObjectReturn()
+    val allok = coll.forall( td => {
+      if("String 1" == td.getFoo){
+        assert(1 == td.getBar)
+        assert(1.1 == td.getWibble)
+        checkVar += 1
+        true
+      }
+      else if("String 2" == td.getFoo){
+        assert(2 == td.getBar)
+        assert(2.2 == td.getWibble)
+        checkVar -= 1
+        true
+      }
+      else
+        false
+    })
+
+    assert(allok)
+    assert(checkVar == 0)
+  }
 
   "testMapStringReturn" should "work" in {
     val map = obj.methodWithMapStringReturn(a => {})
