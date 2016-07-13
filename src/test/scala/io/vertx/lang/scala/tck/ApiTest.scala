@@ -362,11 +362,11 @@ class ApiTest extends FlatSpec with Matchers {
     assert(called)
   }
 
-  //FIXME broken because of a unneded call to TestData-constructor with null as parameter
   "testMethodWithHandlerNullListDataObject" should "work" in {
     var called = false
     obj.methodWithHandlerListNullDataObject(it => {
-      assert(null == it)
+      assert(List(null) == it)
+      called = true
     })
     assert(called)
   }
@@ -392,11 +392,11 @@ class ApiTest extends FlatSpec with Matchers {
     assert(checkVar == 0)
   }
 
-  //FIXME broken because of a unneded call to TestData-constructor with null as parameter
   "testMethodWithHandlerNullSetDataObject" should "work" in {
     var called = false
     obj.methodWithHandlerSetNullDataObject(it => {
-      assert(null == it)
+      assert(Set(null) == it)
+      called = true
     })
     assert(called)
   }
@@ -658,11 +658,6 @@ class ApiTest extends FlatSpec with Matchers {
     import collection.JavaConverters._
     obj.methodWithHandlerAsyncResultSetEnum(it => assert(it.result() == Set(TestEnum.TIM, TestEnum.JULIEN).asJava))
   }
-//
-//  // Returns
-//
-//  // FIXME - currently missing tests for returns of all List<T>, Set<T>, Map<T> types
-//
 
   "testBasicReturns" should "work" in {
     assert(123 == obj.methodWithByteReturn())
