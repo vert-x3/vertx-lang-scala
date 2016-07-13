@@ -18,6 +18,7 @@ package io.vertx.scala.core.streams;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -79,7 +80,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
@@ -88,7 +89,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def handler(handler: T => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.handler(funcToHandler(handler))
+        _asJava.handler(funcToHandler(handler))
       this
     }
 
@@ -97,7 +98,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def pause(): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.pause()
+        _asJava.pause()
       this
     }
 
@@ -106,7 +107,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def resume(): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.resume()
+        _asJava.resume()
       this
     }
 
@@ -115,7 +116,7 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def endHandler(endHandler: () => Unit): io.vertx.scala.core.streams.ReadStream[T] = {
-      _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
       this
     }
 

@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
@@ -92,14 +93,20 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the remote address for this socket
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.remoteAddress())
+    if(cached_0 == null) {
+      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+    }
+    cached_0
   }
 
   /**
     * @return the local address for this socket
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.localAddress())
+    if(cached_1 == null) {
+      cached_1=    SocketAddress.apply(_asJava.localAddress())
+    }
+    cached_1
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.ServerWebSocket = {
@@ -194,7 +201,10 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the headers in the WebSocket handshake
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.headers())
+    if(cached_2 == null) {
+      cached_2=    MultiMap.apply(_asJava.headers())
+    }
+    cached_2
   }
 
   /**
@@ -210,6 +220,9 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     _asJava.reject()
   }
 
+  private var cached_0: io.vertx.scala.core.net.SocketAddress = _
+  private var cached_1: io.vertx.scala.core.net.SocketAddress = _
+  private var cached_2: io.vertx.scala.core.MultiMap = _
 }
 
 object ServerWebSocket {

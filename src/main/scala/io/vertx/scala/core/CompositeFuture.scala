@@ -18,6 +18,7 @@ package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -108,7 +109,6 @@ object CompositeFuture {
   }
 
   def all(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
-    import scala.collection.JavaConverters._
     CompositeFuture.apply(io.vertx.core.CompositeFuture.all(futures.map(x => x.asJava).asJava))
   }
 
@@ -133,7 +133,6 @@ object CompositeFuture {
   }
 
   def any(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
-    import scala.collection.JavaConverters._
     CompositeFuture.apply(io.vertx.core.CompositeFuture.any(futures.map(x => x.asJava).asJava))
   }
 }

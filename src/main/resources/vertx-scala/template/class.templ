@@ -27,6 +27,7 @@ package @{type.raw.translatePackageName("scala")};\n
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
+import scala.collection.JavaConverters._\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
@@ -41,6 +42,9 @@ import @{importedType}\n
 	@end{}
 @end{}
 \n
+
+@comment{'the current index of the cache'}
+@code{cacheDecls=new java.util.ArrayList()}
 
 @comment{"# Generate the Class or Interface/Trait"}
 @code{
@@ -107,6 +111,7 @@ import @{importedType}\n
 	  }\n
 	@end{}
 	@end{}
+
 	}\n
 @else{}
 	object @{type.raw.simpleName} {\n\n

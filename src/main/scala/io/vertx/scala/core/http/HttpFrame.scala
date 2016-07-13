@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 
 /**
@@ -38,16 +39,24 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
     * @return the 8-bit flags specific to the frame
     */
   def flags(): Int = {
-    _asJava.flags()
+    if(cached_0 == null) {
+      cached_0=    _asJava.flags()
+    }
+    cached_0
   }
 
   /**
     * @return the frame payload
     */
   def payload(): io.vertx.scala.core.buffer.Buffer = {
-    Buffer.apply(_asJava.payload())
+    if(cached_1 == null) {
+      cached_1=    Buffer.apply(_asJava.payload())
+    }
+    cached_1
   }
 
+  private var cached_0: Int = _
+  private var cached_1: io.vertx.scala.core.buffer.Buffer = _
 }
 
 object HttpFrame {

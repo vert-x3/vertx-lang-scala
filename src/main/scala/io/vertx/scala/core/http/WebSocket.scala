@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler
 import io.vertx.scala.core.net.SocketAddress
@@ -88,14 +89,20 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     * @return the remote address for this socket
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.remoteAddress())
+    if(cached_0 == null) {
+      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+    }
+    cached_0
   }
 
   /**
     * @return the local address for this socket
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    SocketAddress.apply(_asJava.localAddress())
+    if(cached_1 == null) {
+      cached_1=    SocketAddress.apply(_asJava.localAddress())
+    }
+    cached_1
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocket = {
@@ -168,6 +175,8 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     this
   }
 
+  private var cached_0: io.vertx.scala.core.net.SocketAddress = _
+  private var cached_1: io.vertx.scala.core.net.SocketAddress = _
 }
 
 object WebSocket {

@@ -18,6 +18,7 @@ package io.vertx.scala.core.dns;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -65,7 +66,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet4Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     */
   def resolveA(name: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveA(name, funcToHandler(handler))
     this
   }
@@ -76,7 +76,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet6Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     */
   def resolveAAAA(name: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveAAAA(name, funcToHandler(handler))
     this
   }
@@ -87,7 +86,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
     */
   def resolveCNAME(name: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveCNAME(name, funcToHandler(handler))
     this
   }
@@ -98,7 +96,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveMX(name: String, handler: io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.MxRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveMX(name, funcToHandler(handler))
     this
   }
@@ -109,7 +106,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveTXT(name: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveTXT(name, funcToHandler(handler))
     this
   }
@@ -130,7 +126,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveNS(name: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveNS(name, funcToHandler(handler))
     this
   }
@@ -141,7 +136,6 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the function to notify with the [[scala.util.Try]]. The handler will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveSRV(name: String, handler: io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.SrvRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    import scala.collection.JavaConverters._
     _asJava.resolveSRV(name, funcToHandler(handler))
     this
   }

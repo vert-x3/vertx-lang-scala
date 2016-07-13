@@ -18,6 +18,7 @@ package io.vertx.scala.core.file;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.file.OpenOptions
 import io.vertx.core.Handler
@@ -446,7 +447,6 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return the handler that will be called on completion
     */
   def readDir(path: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
-    import scala.collection.JavaConverters._
     _asJava.readDir(path, funcToHandler(handler))
     this
   }
@@ -455,7 +455,6 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#readDir]]
     */
   def readDirBlocking(path: String): List[String] = {
-    import scala.collection.JavaConverters._
     _asJava.readDirBlocking(path).asScala.map(x => x:String).toList
   }
 
@@ -471,7 +470,6 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return the handler that will be called on completion
     */
   def readDir(path: String, filter: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
-    import scala.collection.JavaConverters._
     _asJava.readDir(path, filter, funcToHandler(handler))
     this
   }
@@ -480,7 +478,6 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#readDir]]
     */
   def readDirBlocking(path: String, filter: String): List[String] = {
-    import scala.collection.JavaConverters._
     _asJava.readDirBlocking(path, filter).asScala.map(x => x:String).toList
   }
 

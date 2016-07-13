@@ -18,6 +18,7 @@ package io.vertx.scala.core.streams;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -100,7 +101,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
@@ -112,7 +113,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def write(data: T): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.write(data)
+        _asJava.write(data)
       this
     }
 
@@ -122,14 +123,14 @@ object WriteStream {
       * Once the stream has ended, it cannot be used any more.
       */
     def end(): Unit = {
-      _asJava.end()
+        _asJava.end()
     }
 
     /**
       * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
       */
     def end(t: T): Unit = {
-      _asJava.end(t)
+        _asJava.end(t)
     }
 
     /**
@@ -140,7 +141,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.setWriteQueueMaxSize(maxSize)
+        _asJava.setWriteQueueMaxSize(maxSize)
       this
     }
 
@@ -149,7 +150,7 @@ object WriteStream {
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {
-      _asJava.writeQueueFull()
+        _asJava.writeQueueFull()
     }
 
     /**
@@ -159,7 +160,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
       this
     }
 

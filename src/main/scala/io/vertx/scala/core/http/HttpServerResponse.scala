@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.HttpMethod
@@ -141,7 +142,10 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return The HTTP headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.headers())
+    if(cached_0 == null) {
+      cached_0=    MultiMap.apply(_asJava.headers())
+    }
+    cached_0
   }
 
   /**
@@ -159,7 +163,10 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return The HTTP trailers
     */
   def trailers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.trailers())
+    if(cached_1 == null) {
+      cached_1=    MultiMap.apply(_asJava.trailers())
+    }
+    cached_1
   }
 
   /**
@@ -471,6 +478,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     this
   }
 
+  private var cached_0: io.vertx.scala.core.MultiMap = _
+  private var cached_1: io.vertx.scala.core.MultiMap = _
 }
 
 object HttpServerResponse {

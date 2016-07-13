@@ -18,6 +18,7 @@ package io.vertx.scala.core.dns;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.

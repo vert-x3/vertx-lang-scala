@@ -265,11 +265,6 @@
     var fluent = method.isFluent();
     var wrap = false;
 
-    if (importJavaConversions(method)) {
-      invocation += 'import scala.collection.JavaConverters._\n';
-      invocation += indentation;
-    }
-
     /** TODO: UGLYYY } **/
     if (method.returnType.kind == CLASS_HANDLER) {
       var ret = method.returnType.args[0];

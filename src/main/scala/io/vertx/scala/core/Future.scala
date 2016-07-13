@@ -18,6 +18,7 @@ package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 import java.util.function.Function
 
@@ -184,9 +185,13 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return an handler completing this future
     */
   def completer(): io.vertx.core.AsyncResult[T] => Unit = {
-        handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
+    if(cached_0 == null) {
+      cached_0=        handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
+    }
+    cached_0
   }
 
+  private var cached_0: io.vertx.core.AsyncResult[T] => Unit = _
 }
 
 object Future {

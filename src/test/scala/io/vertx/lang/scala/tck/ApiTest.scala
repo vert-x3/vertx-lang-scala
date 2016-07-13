@@ -16,27 +16,17 @@
 
 package io.vertx.lang.scala.tck
 
-import io.vertx.core.Future
-import java.util.stream.Collectors
-
 import com.acme.scala.pkg.MyInterface
-import com.acme.scala.pkg.sub.SubInterface
 import io.vertx.codegen.testmodel._
-import io.vertx.core.AsyncResult
-import io.vertx.core.VertxException
 import io.vertx.core.json.{JsonArray, JsonObject}
+import io.vertx.core.{Future, VertxException}
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
-import io.vertx.scala.codegen.testmodel.ConcreteHandlerUserTypeExtension
-import io.vertx.scala.codegen.testmodel.GenericRefedInterface
-import io.vertx.scala.codegen.testmodel.RefedInterface1
-import io.vertx.scala.codegen.testmodel.RefedInterface2
-import io.vertx.scala.codegen.testmodel.TestInterface
-import io.vertx.scala.codegen.testmodel.Factory
+import io.vertx.scala.codegen.testmodel.{ConcreteHandlerUserTypeExtension, Factory, RefedInterface1, TestInterface}
 import org.junit.ComparisonFailure
 import org.junit.runner.RunWith
-import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -49,7 +39,7 @@ class ApiTest extends FlatSpec with Matchers {
   val obj = TestInterface(new TestInterfaceImpl())
 
   "testMethodWithBasicParams" should "work" in {
-    obj.methodWithBasicParams( 123,  12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
+    obj.methodWithBasicParams(123, 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X', "foobar")
   }
 
   "testMethodWithBasicBoxedParams" should "work" in {
@@ -71,7 +61,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultBasicTypes" should "work" in {
-    obj.methodWithHandlerAsyncResultByte(false ,b => assert(123 == b.result()))
+    obj.methodWithHandlerAsyncResultByte(false, b => assert(123 == b.result()))
     obj.methodWithHandlerAsyncResultShort(false, s => assert(12345 == s.result()))
     obj.methodWithHandlerAsyncResultInteger(false, i => assert(1234567 == i.result()))
     obj.methodWithHandlerAsyncResultLong(false, l => assert(1265615234l == l.result()))
@@ -107,9 +97,9 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithObjectParam("false", false.asInstanceOf[Object])
     obj.methodWithObjectParam("long", 123.toLong.asInstanceOf[Object])
     obj.methodWithObjectParam("double", 123.456.asInstanceOf[Object])
-    obj.methodWithObjectParam("JsonObject", Json.obj(("foo","hello"), ("bar", 123)))
+    obj.methodWithObjectParam("JsonObject", Json.obj(("foo", "hello"), ("bar", 123)))
     val hello = "hello"
-    obj.methodWithObjectParam("JsonObject", Json.obj(("foo",hello), ("bar", 123)))
+    obj.methodWithObjectParam("JsonObject", Json.obj(("foo", hello), ("bar", 123)))
     val foo = "foo"
     obj.methodWithObjectParam("JsonArray", arr(foo, "bar", "wib"))
   }
@@ -135,7 +125,7 @@ class ApiTest extends FlatSpec with Matchers {
     dataObject.setFoo("foo")
     dataObject.setBar(123)
     var called = false
-    obj.methodWithHandlerDataObject(it =>{
+    obj.methodWithHandlerDataObject(it => {
       assert(dataObject.getFoo == it.getFoo)
       assert(dataObject.getBar == it.getBar)
       called = true
@@ -182,7 +172,7 @@ class ApiTest extends FlatSpec with Matchers {
       stringResult = res)
     stringHandler("the-result")
     assert("the-result" == stringResult)
-    var objResult:TestInterface = null
+    var objResult: TestInterface = null
     def objHandler = obj.methodWithHandlerGenericReturn[TestInterface](res =>
       objResult = res)
     objHandler(obj)
@@ -209,10 +199,10 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultGenericReturn" should "work" in {
-    var resultString:String = null
-    var resultObj:TestInterface = null
-    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturn[String](ar =>  resultString = ar.result())
-    def objHandler = obj.methodWithHandlerAsyncResultGenericReturn[TestInterface](ar =>  resultObj = ar.result())
+    var resultString: String = null
+    var resultObj: TestInterface = null
+    def stringHandler = obj.methodWithHandlerAsyncResultGenericReturn[String](ar => resultString = ar.result())
+    def objHandler = obj.methodWithHandlerAsyncResultGenericReturn[TestInterface](ar => resultObj = ar.result())
 
     stringHandler(Future.succeededFuture("the-result"))
     assert("the-result" == resultString)
@@ -246,44 +236,44 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerListVertxGen" should "work" in {
-    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()) == List("foo","bar")))
+    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()) == List("foo", "bar")))
   }
 
   "testMethodWithHandlerListAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == List("abstractfoo","abstractbar")))
+    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == List("abstractfoo", "abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("foo","bar")))
+    obj.methodWithHandlerAsyncResultListVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("foo", "bar")))
   }
 
   "testMethodWithHandlerAsyncResultListAbstractVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListAbstractVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("abstractfoo","abstractbar")))
+    obj.methodWithHandlerAsyncResultListAbstractVertxGen(it => assert(it.result().map(_.getString()) == ArrayBuffer("abstractfoo", "abstractbar")))
   }
 
   "testMethodWithHandlerSetVertxGen" should "work" in {
-    obj.methodWithHandlerSetVertxGen(it => assert(it.map(_.getString()) == Set("bar","foo")))
+    obj.methodWithHandlerSetVertxGen(it => assert(it.map(_.getString()) == Set("bar", "foo")))
   }
 
   "testMethodWithHandlerSetAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == Set("abstractfoo","abstractbar")))
+    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == Set("abstractfoo", "abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetVertxGen(it => assert(it.result().map(_.getString()) == Set("bar","foo")))
+    obj.methodWithHandlerAsyncResultSetVertxGen(it => assert(it.result().map(_.getString()) == Set("bar", "foo")))
 
   }
 
   "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetAbstractVertxGen(it => assert(it.result().map(_.getString()) == Set("abstractbar","abstractfoo")))
+    obj.methodWithHandlerAsyncResultSetAbstractVertxGen(it => assert(it.result().map(_.getString()) == Set("abstractbar", "abstractfoo")))
   }
 
   "testMethodWithHandlerListJsonObject" should "work" in {
-    obj.methodWithHandlerListJsonObject(it => assert(it == List(Json.obj(("cheese","stilton")),Json.obj(("socks","tartan")))))
+    obj.methodWithHandlerListJsonObject(it => assert(it == List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
   }
 
   "testMethodWithHandlerListNullJsonObject" should "work" in {
@@ -291,12 +281,12 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerListComplexJsonObject" should "work" in {
-    obj.methodWithHandlerListComplexJsonObject(it => assert(it == List(Json.obj(("outer",Json.obj(("socks","tartan"))), ("list", arr("yellow","blue"))))))
+    obj.methodWithHandlerListComplexJsonObject(it => assert(it == List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
   "testMethodWithHandlerAsyncResultListJsonObject" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListJsonObject(it => assert(List(Json.obj(("cheese","stilton")), Json.obj(("socks","tartan"))).sameElements(it.result())))
+    obj.methodWithHandlerAsyncResultListJsonObject(it => assert(List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it.result())))
   }
 
   "testMethodWithHandlerAsyncResultListNullJsonObject" should "work" in {
@@ -306,11 +296,11 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultListComplexJsonObject" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultListComplexJsonObject(it => assert(List(Json.obj(("outer",Json.obj(("socks","tartan"))), ("list", arr("yellow","blue")))).sameElements(it.result())))
+    obj.methodWithHandlerAsyncResultListComplexJsonObject(it => assert(List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it.result())))
   }
 
   "testMethodWithHandlerSetJsonObject" should "work" in {
-    obj.methodWithHandlerSetJsonObject(it => assert(it == Set(Json.obj(("cheese","stilton")),Json.obj(("socks","tartan")))))
+    obj.methodWithHandlerSetJsonObject(it => assert(it == Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
   }
 
   "testMethodWithHandlerSetNullJsonObject" should "work" in {
@@ -318,12 +308,12 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerSetComplexJsonObject" should "work" in {
-    obj.methodWithHandlerSetComplexJsonObject(it => assert(it == Set(Json.obj(("outer",Json.obj(("socks","tartan"))), ("list", arr("yellow","blue"))))))
+    obj.methodWithHandlerSetComplexJsonObject(it => assert(it == Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
   "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetJsonObject(it => assert(Set(Json.obj(("cheese","stilton")), Json.obj(("socks","tartan"))).sameElements(it.result())))
+    obj.methodWithHandlerAsyncResultSetJsonObject(it => assert(Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it.result())))
   }
 
   "testMethodWithHandlerAsyncResultSetNullJsonObject" should "work" in {
@@ -333,11 +323,11 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {
     import scala.collection.JavaConversions._
-    obj.methodWithHandlerAsyncResultSetComplexJsonObject(it => assert(Set(Json.obj(("outer",Json.obj(("socks","tartan"))), ("list", arr("yellow","blue")))).sameElements(it.result())))
+    obj.methodWithHandlerAsyncResultSetComplexJsonObject(it => assert(Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it.result())))
   }
 
   "testMethodWithHandlerListJsonArray" should "work" in {
-    obj.methodWithHandlerListJsonArray(it => assert(it == List(arr("green","blue"), arr("yellow","purple"))))
+    obj.methodWithHandlerListJsonArray(it => assert(it == List(arr("green", "blue"), arr("yellow", "purple"))))
   }
 
   "testMethodWithHandlerListNullJsonArray" should "work" in {
@@ -375,13 +365,13 @@ class ApiTest extends FlatSpec with Matchers {
   "testMethodWithHandlerSetDataObject" should "work" in {
     var checkVar = 0
     obj.methodWithHandlerSetDataObject(it => {
-      it.forall( td => {
-        if("String 1" == td.getFoo){
+      it.forall(td => {
+        if ("String 1" == td.getFoo) {
           assert(1 == td.getBar)
           assert(1.1 == td.getWibble)
           checkVar += 1
         }
-        else if("String 2" == td.getFoo){
+        else if ("String 2" == td.getFoo) {
           assert(2 == td.getBar)
           assert(2.2 == td.getWibble)
           checkVar -= 1
@@ -403,7 +393,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
     import collection.JavaConverters._
-    obj.methodWithHandlerAsyncResultListJsonArray(it => assert(it.result() == List(arr("green","blue"), arr("yellow","purple")).asJava))
+    obj.methodWithHandlerAsyncResultListJsonArray(it => assert(it.result() == List(arr("green", "blue"), arr("yellow", "purple")).asJava))
   }
 
   "testMethodWithHandlerAsyncResultListNullJsonArray" should "work" in {
@@ -417,7 +407,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerSetJsonArray" should "work" in {
-    obj.methodWithHandlerSetJsonArray(it => assert(it == Set(arr("green","blue"), arr("yellow","purple"))))
+    obj.methodWithHandlerSetJsonArray(it => assert(it == Set(arr("green", "blue"), arr("yellow", "purple"))))
   }
 
   "testMethodWithHandlerSetNullJsonArray" should "work" in {
@@ -430,7 +420,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultSetJsonArray" should "work" in {
     import collection.JavaConverters._
-    obj.methodWithHandlerAsyncResultSetJsonArray(it => assert(it.result() == Set(arr("green","blue"), arr("yellow","purple")).asJava))
+    obj.methodWithHandlerAsyncResultSetJsonArray(it => assert(it.result() == Set(arr("green", "blue"), arr("yellow", "purple")).asJava))
   }
 
   "testMethodWithHandlerAsyncResultNullSetJsonArray" should "work" in {
@@ -476,13 +466,13 @@ class ApiTest extends FlatSpec with Matchers {
     var checkVar = 0
     obj.methodWithHandlerAsyncResultSetDataObject(it => {
       val coll = it.result()
-      coll.forall( td => {
-        if("String 1" == td.getFoo){
+      coll.forall(td => {
+        if ("String 1" == td.getFoo) {
           assert(1 == td.getBar)
           assert(1.1 == td.getWibble)
           checkVar += 1
         }
-        else if("String 2" == td.getFoo){
+        else if ("String 2" == td.getFoo) {
           assert(2 == td.getBar)
           assert(2.2 == td.getWibble)
           checkVar -= 1
@@ -602,7 +592,7 @@ class ApiTest extends FlatSpec with Matchers {
       List(arr("foo"), arr("blah")),
       List(refed1, refed2),
       List(new TestDataObject().setBar(1).setWibble(1.1).setFoo("String 1"), new TestDataObject().setBar(2).setWibble(2.2).setFoo("String 2")),
-      List(TestEnum.JULIEN,TestEnum.TIM))
+      List(TestEnum.JULIEN, TestEnum.TIM))
   }
 
   "testMethodSetParams" should "work" in {
@@ -621,7 +611,7 @@ class ApiTest extends FlatSpec with Matchers {
       Set(arr("foo"), arr("blah")),
       Set(refed1, refed2),
       Set(new TestDataObject().setBar(1).setWibble(1.1).setFoo("String 1"), new TestDataObject().setBar(2).setWibble(2.2).setFoo("String 2")),
-      Set(TestEnum.JULIEN,TestEnum.TIM))
+      Set(TestEnum.JULIEN, TestEnum.TIM))
   }
 
   "testMethodMapParams" should "work" in {
@@ -630,14 +620,14 @@ class ApiTest extends FlatSpec with Matchers {
     val refed2 = new RefedInterface1(new RefedInterface1Impl())
     refed2.setString("bar")
     obj.methodWithMapParams(
-        Map("foo" -> "bar", "eek" -> "wibble"),
-        Map("foo" -> 2.toByte, "eek" -> 3.toByte),
-        Map("foo" -> 12.toShort, "eek" -> 13.toShort),
-        Map("foo" -> 1234, "eek" -> 1345),
-        Map("foo" -> 123l, "eek" -> 456l),
-        Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
-        Map("foo"-> arr("foo"), "eek" -> arr("blah")),
-        Map("foo" -> refed1, "eek" -> refed2)
+      Map("foo" -> "bar", "eek" -> "wibble"),
+      Map("foo" -> 2.toByte, "eek" -> 3.toByte),
+      Map("foo" -> 12.toShort, "eek" -> 13.toShort),
+      Map("foo" -> 1234, "eek" -> 1345),
+      Map("foo" -> 123l, "eek" -> 456l),
+      Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
+      Map("foo" -> arr("foo"), "eek" -> arr("blah")),
+      Map("foo" -> refed1, "eek" -> refed2)
     )
   }
 
@@ -744,7 +734,7 @@ class ApiTest extends FlatSpec with Matchers {
     val refed1 = list.head
     val refed2 = list(1)
     assert("foo" == refed1.getString())
-    assert("bar"== refed2.getString())
+    assert("bar" == refed2.getString())
   }
 
   "testListDataObjectReturn" should "work" in {
@@ -802,17 +792,16 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testSetDataObjectReturn" should "work" in {
-    import collection.JavaConversions._
     var checkVar = 0
     val coll = obj.methodWithSetDataObjectReturn()
-    val allok = coll.forall( td => {
-      if("String 1" == td.getFoo){
+    val allok = coll.forall(td => {
+      if ("String 1" == td.getFoo) {
         assert(1 == td.getBar)
         assert(1.1 == td.getWibble)
         checkVar += 1
         true
       }
-      else if("String 2" == td.getFoo){
+      else if ("String 2" == td.getFoo) {
         assert(2 == td.getBar)
         assert(2.2 == td.getWibble)
         checkVar -= 1
@@ -855,7 +844,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMapComplexJsonArrayReturn" should "work" in {
-    val  map = obj.methodWithMapComplexJsonArrayReturn(a => {})
+    val map = obj.methodWithMapComplexJsonArrayReturn(a => {})
     val m = map("foo")
     assert(arr(Json.obj(("foo", "hello")), Json.obj(("bar", "bye"))) == m)
   }
@@ -865,11 +854,17 @@ class ApiTest extends FlatSpec with Matchers {
     refed.setString("dog")
     assert("meth1" == obj.overloadedMethod("cat", refed))
     var counter = 0
-    assert("meth2" == obj.overloadedMethod("cat", refed, 12345, it => {assert("giraffe" == it); counter += 1}))
+    assert("meth2" == obj.overloadedMethod("cat", refed, 12345, it => {
+      assert("giraffe" == it); counter += 1
+    }))
     assert(counter == 1)
-    assert("meth3" == obj.overloadedMethod("cat", it => {assert("giraffe" == it); counter += 1}))
+    assert("meth3" == obj.overloadedMethod("cat", it => {
+      assert("giraffe" == it); counter += 1
+    }))
     assert(counter == 2)
-    assert("meth4" == obj.overloadedMethod("cat", refed, it => {assert("giraffe" == it); counter += 1}))
+    assert("meth4" == obj.overloadedMethod("cat", refed, it => {
+      assert("giraffe" == it); counter += 1
+    }))
     assert(counter == 3)
   }
 
@@ -880,9 +875,9 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithGenericReturn" should "work" in {
     val ret = obj.methodWithGenericReturn[JsonObject]("JsonObject")
-    assert(Json.obj(("foo","hello"),("bar",123)) == ret)
+    assert(Json.obj(("foo", "hello"), ("bar", 123)) == ret)
     val ret2 = obj.methodWithGenericReturn[JsonArray]("JsonArray")
-    assert(arr("foo","bar","wib") == ret2)
+    assert(arr("foo", "bar", "wib") == ret2)
   }
 
   "testFluentMethod" should "work" in {
@@ -892,9 +887,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testStaticFactoryMethod" should "work" in {
     assert("bar" == TestInterface.staticFactoryMethod("bar").getString())
   }
-
-  //FIXME implement caching
-  "testMethodWithCachedReturn" should "work" ignore {
+  "testMethodWithCachedReturn" should "work" in {
     val ret1 = obj.methodWithCachedReturn("bar")
     assert("bar" == ret1.getString())
     val ret2 = obj.methodWithCachedReturn("bar")
@@ -903,12 +896,11 @@ class ApiTest extends FlatSpec with Matchers {
     assert(ret1.eq(ret3))
   }
 
-  //FIXME implement caching
-  "testMethodWithCachedListReturn" should "work" ignore {
+  "testMethodWithCachedListReturn" should "work" in {
     val ret1 = obj.methodWithCachedListReturn()
     assert(2 == ret1.size)
     assert("foo" == ret1.head.getString)
-    assert("bar" == ret1.head.getString)
+    assert("bar" == ret1(1).getString)
     val ret2 = obj.methodWithCachedListReturn()
     assert(ret1.eq(ret2))
     val ret3 = obj.methodWithCachedListReturn()
@@ -917,7 +909,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testJsonReturns" should "work" in {
     val ret = obj.methodWithJsonObjectReturn()
-    assert(Json.obj(("cheese","stilton")) == ret)
+    assert(Json.obj(("cheese", "stilton")) == ret)
     val ret2 = obj.methodWithJsonArrayReturn()
     assert(arr("socks", "shoes") == ret2)
   }
@@ -937,7 +929,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testJsonParams" should "work" in {
-    obj.methodWithJsonParams(Json.obj(("cat", "lion"),("cheese", "cheddar")), arr("house","spider"))
+    obj.methodWithJsonParams(Json.obj(("cat", "lion"), ("cheese", "cheddar")), arr("house", "spider"))
   }
 
   "testNullJsonParams" should "work" in {
@@ -947,10 +939,10 @@ class ApiTest extends FlatSpec with Matchers {
   "testJsonHandlerParams" should "work" in {
     var count = 0
     obj.methodWithHandlerJson(it => {
-      assert(Json.obj(("cheese","stilton")) ==  it)
+      assert(Json.obj(("cheese", "stilton")) == it)
       count += 1
     }, it => {
-      assert(arr("socks","shoes") == it)
+      assert(arr("socks", "shoes") == it)
       count += 1
     })
     assert(2 == count)
@@ -959,7 +951,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testNullJsonHandlerParams" should "work" in {
     var count = 0
     obj.methodWithHandlerNullJson(it => {
-      assert(null ==  it)
+      assert(null == it)
       count += 1
     }, it => {
       assert(null == it)
@@ -1024,11 +1016,11 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithListEnumReturn" should "work" in {
-    assert(List(TestEnum.JULIEN,TestEnum.TIM) == obj.methodWithListEnumReturn())
+    assert(List(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithListEnumReturn())
   }
 
   "testMethodWithSetEnumReturn" should "work" in {
-    assert(Set(TestEnum.JULIEN,TestEnum.TIM) == obj.methodWithSetEnumReturn())
+    assert(Set(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithSetEnumReturn())
   }
 
   "testMethodWithEnumParam" should "work" in {
