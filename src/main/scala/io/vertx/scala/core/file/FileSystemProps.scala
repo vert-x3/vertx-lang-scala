@@ -18,6 +18,7 @@ package io.vertx.scala.core.file;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Represents properties of the file system.

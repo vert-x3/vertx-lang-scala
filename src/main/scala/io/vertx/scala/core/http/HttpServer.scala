@@ -18,6 +18,7 @@ package io.vertx.scala.core.http;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -49,7 +50,10 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the request stream
     */
   def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
-    HttpServerRequestStream.apply(_asJava.requestStream())
+    if(cached_0 == null) {
+      cached_0=    HttpServerRequestStream.apply(_asJava.requestStream())
+    }
+    cached_0
   }
 
   /**
@@ -77,7 +81,10 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the websocket stream
     */
   def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
-    ServerWebSocketStream.apply(_asJava.websocketStream())
+    if(cached_1 == null) {
+      cached_1=    ServerWebSocketStream.apply(_asJava.websocketStream())
+    }
+    cached_1
   }
 
   /**
@@ -184,6 +191,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     _asJava.actualPort()
   }
 
+  private var cached_0: io.vertx.scala.core.http.HttpServerRequestStream = _
+  private var cached_1: io.vertx.scala.core.http.ServerWebSocketStream = _
 }
 
 object HttpServer {

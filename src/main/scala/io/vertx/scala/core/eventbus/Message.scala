@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
@@ -56,7 +57,10 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the body, or null.
     */
   def body(): T = {
-    _asJava.body()
+    if(cached_0 == null) {
+      cached_0=    _asJava.body()
+    }
+    cached_0
   }
 
   /**
@@ -121,6 +125,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     _asJava.fail(failureCode, message)
   }
 
+  private var cached_0: T = _
 }
 
 object Message {

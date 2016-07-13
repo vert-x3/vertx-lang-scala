@@ -18,6 +18,7 @@ package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
 
@@ -114,7 +115,6 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * The process args
     */
   def processArgs(): List[String] = {
-    import scala.collection.JavaConverters._
     _asJava.processArgs().asScala.map(x => x:String).toList
   }
 

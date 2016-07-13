@@ -18,6 +18,7 @@ package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import java.util.Map.Entry
 
 /**
@@ -46,7 +47,6 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return A immutable [[scala.collection.immutable.List]] of values which will be empty if no values are found
     */
   def getAll(name: String): List[String] = {
-    import scala.collection.JavaConverters._
     _asJava.getAll(name).asScala.map(x => x:String).toList
   }
 
@@ -71,7 +71,6 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return A [[scala.collection.immutable.Set]] of all names
     */
   def names(): Set[String] = {
-    import scala.collection.JavaConverters._
     _asJava.names().asScala.map(x => x:String).toSet
   }
 

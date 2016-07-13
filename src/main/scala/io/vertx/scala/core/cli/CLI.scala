@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.cli.Option
 import io.vertx.core.cli.Argument
 
@@ -46,7 +47,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: List[String]): io.vertx.scala.core.cli.CommandLine = {
-    import scala.collection.JavaConverters._
     CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
   }
 
@@ -57,7 +57,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: List[String], validate: Boolean): io.vertx.scala.core.cli.CommandLine = {
-    import scala.collection.JavaConverters._
     CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
   }
 
@@ -131,7 +130,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of options, empty if none.
     */
   def getOptions(): List[io.vertx.core.cli.Option] = {
-    import scala.collection.JavaConverters._
     _asJava.getOptions().asScala.map(x => x:io.vertx.core.cli.Option).toList
   }
 
@@ -152,7 +150,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    import scala.collection.JavaConverters._
     _asJava.addOptions(options.map(x => x:io.vertx.core.cli.Option).asJava)
     this
   }
@@ -163,7 +160,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    import scala.collection.JavaConverters._
     _asJava.setOptions(options.map(x => x:io.vertx.core.cli.Option).asJava)
     this
   }
@@ -173,7 +169,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of argument, empty if none.
     */
   def getArguments(): List[io.vertx.core.cli.Argument] = {
-    import scala.collection.JavaConverters._
     _asJava.getArguments().asScala.map(x => x:io.vertx.core.cli.Argument).toList
   }
 
@@ -194,7 +189,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    import scala.collection.JavaConverters._
     _asJava.addArguments(args.map(x => x:io.vertx.core.cli.Argument).asJava)
     this
   }
@@ -205,7 +199,6 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    import scala.collection.JavaConverters._
     _asJava.setArguments(args.map(x => x:io.vertx.core.cli.Argument).asJava)
     this
   }

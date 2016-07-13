@@ -18,6 +18,7 @@ package io.vertx.scala.core.metrics;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
@@ -48,7 +49,7 @@ object Measured {
       * @return true if the metrics are enabled
       */
     def isMetricsEnabled(): Boolean = {
-      _asJava.isMetricsEnabled()
+        _asJava.isMetricsEnabled()
     }
 
   }

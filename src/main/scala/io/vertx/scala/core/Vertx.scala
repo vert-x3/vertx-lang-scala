@@ -18,6 +18,7 @@ package io.vertx.scala.core;
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.datagram.DatagramSocket
 import io.vertx.scala.core.http.HttpServer
 import io.vertx.scala.core.shareddata.SharedData
@@ -171,7 +172,10 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the filesystem object
     */
   def fileSystem(): io.vertx.scala.core.file.FileSystem = {
-    FileSystem.apply(_asJava.fileSystem())
+    if(cached_0 == null) {
+      cached_0=    FileSystem.apply(_asJava.fileSystem())
+    }
+    cached_0
   }
 
   /**
@@ -179,7 +183,10 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the event bus object
     */
   def eventBus(): io.vertx.scala.core.eventbus.EventBus = {
-    EventBus.apply(_asJava.eventBus())
+    if(cached_1 == null) {
+      cached_1=    EventBus.apply(_asJava.eventBus())
+    }
+    cached_1
   }
 
   /**
@@ -197,7 +204,10 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the shared data object
     */
   def sharedData(): io.vertx.scala.core.shareddata.SharedData = {
-    SharedData.apply(_asJava.sharedData())
+    if(cached_2 == null) {
+      cached_2=    SharedData.apply(_asJava.sharedData())
+    }
+    cached_2
   }
 
   /**
@@ -350,7 +360,6 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return Set of deployment IDs
     */
   def deploymentIDs(): Set[String] = {
-    import scala.collection.JavaConverters._
     _asJava.deploymentIDs().asScala.map(x => x:String).toSet
   }
 
@@ -433,6 +442,9 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     this
   }
 
+  private var cached_0: io.vertx.scala.core.file.FileSystem = _
+  private var cached_1: io.vertx.scala.core.eventbus.EventBus = _
+  private var cached_2: io.vertx.scala.core.shareddata.SharedData = _
 }
 
 object Vertx {
