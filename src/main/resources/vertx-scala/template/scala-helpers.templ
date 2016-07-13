@@ -93,7 +93,6 @@
     }
   }
 
-  /* TODO: very misleading name*/
   def changeJavaGenericNotationToScalaNotation(type) {
     type.name.replace('<', '[').replace('>', ']');
   }
@@ -203,8 +202,7 @@
       if (listType.kind == CLASS_API) {
         invocation += mapIt + '.map(' + toScalaApply(listType.getSimpleName()) + ')';
       } else if(listType.kind == CLASS_DATA_OBJECT) {
-        /* TODO: DataObjects should also be generated*/
-        invocation += mapIt + '.map(x => new ' + listType.getSimpleName() + '(x))';
+        invocation += mapIt;
       } else if (listType.kind == CLASS_PRIMITIVE || listType.kind == CLASS_BOXED_PRIMITIVE ||
                  listType.name == 'Throwable' || listType.name == 'java.lang.Throwable') {
         invocation += mapIt + '.map(x => x:' + toScalaType(listType) + ')';
