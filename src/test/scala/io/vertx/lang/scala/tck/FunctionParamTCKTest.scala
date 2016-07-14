@@ -171,25 +171,21 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testListReturn" should "work" in {
-    //FIXME doesn't feel right, need to descend deepoer
     import collection.JavaConverters._
     assert("ok" == obj.methodWithListReturn(it => {List("one", "two", "three").asJava}))
   }
 
   "testSetReturn" should "work" in {
-    //FIXME doesn't feel right, need to descend deepoer
     import collection.JavaConverters._
     assert("ok" == obj.methodWithSetReturn(it => {Set("one", "two", "three").asJava}))
   }
 
   "testMapReturn" should "work" in {
-    //FIXME doesn't feel right, need to descend deepoer
     import collection.JavaConverters._
     assert("ok" == obj.methodWithMapReturn(it => {Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
   }
 
   "testGenericReturn" should "work" ignore {
-    //FIXME test should be split up for different types
         assert("ok" == obj.methodWithGenericReturn[String]( it => "the-string" ))
 //            it match{
 //              case 0: "the-string"
