@@ -1,8 +1,5 @@
 package io.vertx.lang.scala.pump
 
-/**
-  * Created by jochen on 13.07.16.
-  */
 import java.util.ArrayList
 
 import io.vertx.scala.core.streams.{Pump, ReadStream, WriteStream}
