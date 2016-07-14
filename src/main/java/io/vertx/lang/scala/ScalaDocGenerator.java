@@ -37,13 +37,7 @@ public class ScalaDocGenerator implements DocGenerator {
 
     @Override
     public String renderSource(ExecutableElement elt, String source) {
-        GroovyLang lang = new GroovyLang();
-        try {
-            return translator.translate(elt, lang);
-        } catch (Exception e) {
-            System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName() + " : " + e.getMessage());
-            return "Code not translatable";
-        }
+        return "todo";
     }
 
     @Override
