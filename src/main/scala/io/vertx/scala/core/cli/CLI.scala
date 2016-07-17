@@ -80,9 +80,9 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI description.
     */
-  def getDescription(): String = {
-    _asJava.getDescription()
-  }
+  def getDescription(): Option[String] = {
+Option(    _asJava.getDescription()
+)  }
 
   def setDescription(desc: String): io.vertx.scala.core.cli.CLI = {
     _asJava.setDescription(desc)
@@ -92,9 +92,9 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI summary.
     */
-  def getSummary(): String = {
-    _asJava.getSummary()
-  }
+  def getSummary(): Option[String] = {
+Option(    _asJava.getSummary()
+)  }
 
   /**
     * Sets the summary of the CLI.
@@ -208,27 +208,27 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param name the name, must not be {@code null}
     * @return the [[Option]], {@code null} if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
-  def getOption(name: String): io.vertx.core.cli.Option = {
-    _asJava.getOption(name)
-  }
+  def getOption(name: String): Option[io.vertx.core.cli.Option] = {
+Option(    _asJava.getOption(name)
+)  }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
     * @param name the name of the argument, must not be {@code null}
     * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(name: String): io.vertx.core.cli.Argument = {
-    _asJava.getArgument(name)
-  }
+  def getArgument(name: String): Option[io.vertx.core.cli.Argument] = {
+Option(    _asJava.getArgument(name)
+)  }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
     * @param index the index, must be positive or zero.
     * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(index: Int): io.vertx.core.cli.Argument = {
-    _asJava.getArgument(index)
-  }
+  def getArgument(index: Int): Option[io.vertx.core.cli.Argument] = {
+Option(    _asJava.getArgument(index)
+)  }
 
   /**
     * Removes an option identified by its name. This method does nothing if the option cannot be found.
@@ -256,7 +256,6 @@ object CLI {
 
   def apply(_asJava: io.vertx.core.cli.CLI): io.vertx.scala.core.cli.CLI =
     new io.vertx.scala.core.cli.CLI(_asJava)
-
   def create(name: String): io.vertx.scala.core.cli.CLI = {
     CLI.apply(io.vertx.core.cli.CLI.create(name))
   }

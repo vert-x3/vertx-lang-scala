@@ -44,13 +44,13 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
 
   def asJava: io.vertx.core.http.HttpServerRequest = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+  def handler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler.get))
     this
   }
 
@@ -64,8 +64,8 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
     this
   }
 
@@ -100,9 +100,9 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   /**
     * @return the scheme of the request
     */
-  def scheme(): String = {
-    _asJava.scheme()
-  }
+  def scheme(): Option[String] = {
+Option(    _asJava.scheme()
+)  }
 
   /**
     * @return the URI of the request. This is usually a relative URI
@@ -114,23 +114,23 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   /**
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
-  def path(): String = {
-    _asJava.path()
-  }
+  def path(): Option[String] = {
+Option(    _asJava.path()
+)  }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
-  def query(): String = {
-    _asJava.query()
-  }
+  def query(): Option[String] = {
+Option(    _asJava.query()
+)  }
 
   /**
     * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
     */
-  def host(): String = {
-    _asJava.host()
-  }
+  def host(): Option[String] = {
+Option(    _asJava.host()
+)  }
 
   /**
     * @return the response. Each instance of this class has an [[io.vertx.scala.core.http.HttpServerResponse]] instance attached to it. This is used
@@ -158,9 +158,9 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String): String = {
-    _asJava.getHeader(headerName)
-  }
+  def getHeader(headerName: String): Option[String] = {
+Option(    _asJava.getHeader(headerName)
+)  }
 
   /**
     * @return the query parameters in the request
@@ -177,9 +177,9 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @param paramName the param name
     * @return the param value
     */
-  def getParam(paramName: String): String = {
-    _asJava.getParam(paramName)
-  }
+  def getParam(paramName: String): Option[String] = {
+Option(    _asJava.getParam(paramName)
+)  }
 
   /**
     * @return the remote (client side) address of the request
@@ -215,8 +215,8 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
+  def bodyHandler(bodyHandler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler.get))
     this
   }
 
@@ -260,8 +260,8 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * with the file upload.
     * @return a reference to this, so the API can be used fluently
     */
-  def uploadHandler(uploadHandler: io.vertx.scala.core.http.HttpServerFileUpload => Unit): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
+  def uploadHandler(uploadHandler: Option[io.vertx.scala.core.http.HttpServerFileUpload => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler.get))
     this
   }
 
@@ -286,9 +286,9 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @param attributeName the attribute name
     * @return the attribute value
     */
-  def getFormAttribute(attributeName: String): String = {
-    _asJava.getFormAttribute(attributeName)
-  }
+  def getFormAttribute(attributeName: String): Option[String] = {
+Option(    _asJava.getFormAttribute(attributeName)
+)  }
 
   /**
     * Upgrade the connection to a WebSocket connection.

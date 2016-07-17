@@ -35,6 +35,17 @@ object HandlerOps {
     }
 
   /**
+    * Create a Vert.x-Void-Handler from the given parameterless Scala-Function
+    *
+    * @param f Scala-Function used by the resulting Vert.x-Handler
+    * @return a Vert.x-Handler that uses the given function to do its job
+    */
+  def parameterlessFuncToVoidHandler(f: () => Unit): Handler[Void] =
+    new Handler[Void]() {
+      override def handle(event: Void): Unit = f()
+    }
+
+  /**
     * Create a Vert.x-Handler from the given Scala-Function. It also maps the Handlers type to
     * one the function understands.
     *
@@ -44,10 +55,15 @@ object HandlerOps {
     * @tparam S type the Function consumes
     * @return the resulting Handler
     */
-  def funcToMappedHandler[J, S](mapper: J => S)(f: S => Unit): Handler[J] =
-    new Handler[J]() {
-      override def handle(event: J): Unit = f(mapper(event))
-    }
+  def funcToMappedHandler[J, S](mapper: J => S)(f: S => Unit): Handler[J] = {
+    //TODO: handlers can be set to null, there must be a better way so I avoid returning null here
+    if(f != null)
+      new Handler[J]() {
+        override def handle(event: J): Unit = f(mapper(event))
+      }
+    else
+     null
+  }
 
   /**
     * Create a Scala-Function from the given Vert.x-Handler. It also maps the Functions type to

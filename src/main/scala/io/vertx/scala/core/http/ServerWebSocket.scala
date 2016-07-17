@@ -109,13 +109,13 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     cached_1
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+  def handler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler.get))
     this
   }
 
@@ -129,8 +129,8 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
     this
   }
 
@@ -144,8 +144,8 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 
@@ -169,13 +169,13 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     this
   }
 
-  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def closeHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 
-  def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.ServerWebSocket = {
-    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
+  def frameHandler(handler: Option[io.vertx.scala.core.http.WebSocketFrame => Unit]): io.vertx.scala.core.http.ServerWebSocket = {
+    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler.get))
     this
   }
 
@@ -193,9 +193,9 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
   /**
     * @return the WebSocket handshake query string.
     */
-  def query(): String = {
-    _asJava.query()
-  }
+  def query(): Option[String] = {
+Option(    _asJava.query()
+)  }
 
   /**
     * @return the headers in the WebSocket handshake

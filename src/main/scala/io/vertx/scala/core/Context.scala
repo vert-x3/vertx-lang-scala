@@ -63,7 +63,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param action the action to run
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(action_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
   }
 
   /**
@@ -107,9 +107,9 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * the verticle was deployed.
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
-  def config(): io.vertx.core.json.JsonObject = {
-    _asJava.config()
-  }
+  def config(): Option[io.vertx.core.json.JsonObject] = {
+Option(    _asJava.config()
+)  }
 
   /**
     * The process args
@@ -167,7 +167,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param value the data
     */
   def put(key: String, value: AnyRef): Unit = {
-    _asJava.put(key, value)
+    _asJava.put(key, value.get)
   }
 
   /**
@@ -201,8 +201,8 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Context = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.Context = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
@@ -212,15 +212,12 @@ object Context {
 
   def apply(_asJava: io.vertx.core.Context): io.vertx.scala.core.Context =
     new io.vertx.scala.core.Context(_asJava)
-
   def isOnWorkerThread(): Boolean = {
     io.vertx.core.Context.isOnWorkerThread()
   }
-
   def isOnEventLoopThread(): Boolean = {
     io.vertx.core.Context.isOnEventLoopThread()
   }
-
   def isOnVertxThread(): Boolean = {
     io.vertx.core.Context.isOnVertxThread()
   }

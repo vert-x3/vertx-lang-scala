@@ -37,9 +37,9 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @param name The name of the header to search
     * @return The first header value or {@code null} if there is no such entry
     */
-  def get(name: String): String = {
-    _asJava.get(name)
-  }
+  def get(name: String): Option[String] = {
+Option(    _asJava.get(name)
+)  }
 
   /**
     * Returns the values with the specified name
@@ -148,7 +148,6 @@ object MultiMap {
 
   def apply(_asJava: io.vertx.core.MultiMap): io.vertx.scala.core.MultiMap =
     new io.vertx.scala.core.MultiMap(_asJava)
-
   def caseInsensitiveMultiMap(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
   }

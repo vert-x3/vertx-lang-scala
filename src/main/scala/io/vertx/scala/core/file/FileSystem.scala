@@ -182,8 +182,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param group the user group, {@code null} will not change the user group name
     * @return the handler that will be called on completion
     */
-  def chown(path: String, user: String, group: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chown(path, user, group, funcToHandler(handler))
+  def chown(path: String, user: Option[String], group: Option[String], handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chown(path, user.get, group.get, funcToHandler(handler))
     this
   }
 
@@ -191,8 +191,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Blocking version of 
     *
     */
-  def chownBlocking(path: String, user: String, group: String): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chownBlocking(path, user, group)
+  def chownBlocking(path: String, user: Option[String], group: Option[String]): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chownBlocking(path, user.get, group.get)
     this
   }
 

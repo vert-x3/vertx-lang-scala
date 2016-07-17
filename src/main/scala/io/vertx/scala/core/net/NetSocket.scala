@@ -56,13 +56,13 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.net.NetSocket = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+  def handler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.net.NetSocket = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler.get))
     this
   }
 
@@ -76,8 +76,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.net.NetSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
     this
   }
 
@@ -91,8 +91,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.net.NetSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 
@@ -241,8 +241,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def closeHandler(handler: Option[() => Unit]): io.vertx.scala.core.net.NetSocket = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 
@@ -252,7 +252,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def upgradeToSsl(handler: () => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 

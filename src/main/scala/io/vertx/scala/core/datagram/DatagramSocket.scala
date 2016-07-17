@@ -149,8 +149,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param source the address of the source for which we will listen for multicast packets
     * @return then handler to notify once the operation completes
     */
-  def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.listenMulticastGroup(multicastAddress, networkInterface, source, funcToHandler(handler))
+  def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.listenMulticastGroup(multicastAddress, networkInterface, source.get, funcToHandler(handler))
     this
   }
 
@@ -173,8 +173,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param source the address of the source for which we will listen for multicast packets
     * @return the handler to notify once the operation completes
     */
-  def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, source, funcToHandler(handler))
+  def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, source.get, funcToHandler(handler))
     this
   }
 
@@ -224,18 +224,18 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.datagram.DatagramPacket => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler))
+  def handler(handler: Option[io.vertx.scala.core.datagram.DatagramPacket => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler.get))
     this
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 

@@ -45,13 +45,13 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     this
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.HttpClientResponse = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+  def handler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpClientResponse = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler.get))
     this
   }
 
@@ -60,8 +60,8 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(endHandler_ => endHandler()))
+  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.http.HttpClientResponse = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
     this
   }
 
@@ -101,18 +101,18 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String): String = {
-    _asJava.getHeader(headerName)
-  }
+  def getHeader(headerName: String): Option[String] = {
+Option(    _asJava.getHeader(headerName)
+)  }
 
   /**
     * Return the first trailer value with the specified name
     * @param trailerName the trailer name
     * @return the trailer value
     */
-  def getTrailer(trailerName: String): String = {
-    _asJava.getTrailer(trailerName)
-  }
+  def getTrailer(trailerName: String): Option[String] = {
+Option(    _asJava.getTrailer(trailerName)
+)  }
 
   /**
     * @return the trailers

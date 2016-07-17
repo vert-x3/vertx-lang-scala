@@ -72,9 +72,9 @@ class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
   /**
     * Returns the name of the host for the service.
     */
-  def target(): String = {
-    _asJava.target()
-  }
+  def target(): Option[String] = {
+Option(    _asJava.target()
+)  }
 
 }
 

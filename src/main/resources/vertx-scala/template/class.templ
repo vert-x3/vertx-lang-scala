@@ -105,9 +105,8 @@ import @{importedType}\n
 	    new @{toScalaType(type);}(_asJava)\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
-	\n
 	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
-			@{methodInvocation(type.raw.name, method, '    ');}
+			@if{method.returnType.isNullable}Option(@end{}@{methodInvocation(type.raw.name, method, '    ');}@if{method.returnType.isNullable})@end{}
 	  }\n
 	@end{}
 	@end{}
