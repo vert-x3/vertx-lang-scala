@@ -36,7 +36,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
     */
   def end(t: T): Unit = {
-    _asJava.end(t)
+    _asJava.end(t.get)
   }
 
   /**
@@ -53,20 +53,20 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @return reference to this for fluency
     */
   def send(message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message))
+    MessageProducer.apply[T](_asJava.send(message.get))
   }
 
   def send[R](message: T, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message, funcToHandler(replyHandler)))
+    MessageProducer.apply[T](_asJava.send(message.get, funcToHandler(replyHandler)))
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
   def write(data: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.write(data)
+    _asJava.write(data.get)
     this
   }
 
@@ -75,8 +75,8 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 

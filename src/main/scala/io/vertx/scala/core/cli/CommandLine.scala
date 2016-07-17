@@ -124,9 +124,9 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the value, {@code null} if none.
     */
-  def getRawValueForOption(option: io.vertx.core.cli.Option): String = {
-    _asJava.getRawValueForOption(option)
-  }
+  def getRawValueForOption(option: io.vertx.core.cli.Option): Option[String] = {
+Option(    _asJava.getRawValueForOption(option)
+)  }
 
   /**
     * Checks whether or not the given option accept more values.
@@ -142,9 +142,9 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the value, {@code null} if none.
     */
-  def getRawValueForArgument(arg: io.vertx.core.cli.Argument): String = {
-    _asJava.getRawValueForArgument(arg)
-  }
+  def getRawValueForArgument(arg: io.vertx.core.cli.Argument): Option[String] = {
+Option(    _asJava.getRawValueForArgument(arg)
+)  }
 
   /**
     * Checks whether or not the given argument has been assigned in the command line.
@@ -187,7 +187,6 @@ object CommandLine {
 
   def apply(_asJava: io.vertx.core.cli.CommandLine): io.vertx.scala.core.cli.CommandLine =
     new io.vertx.scala.core.cli.CommandLine(_asJava)
-
   def create(cli: io.vertx.scala.core.cli.CLI): io.vertx.scala.core.cli.CommandLine = {
     CommandLine.apply(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
   }

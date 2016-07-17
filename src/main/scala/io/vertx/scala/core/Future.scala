@@ -57,7 +57,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param result the result
     */
   def complete(result: T): Unit = {
-    _asJava.complete(result)
+    _asJava.complete(result.get)
   }
 
   /**
@@ -178,7 +178,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the mapped future
     */
   def map[V](value: V): io.vertx.scala.core.Future[V] = {
-    Future.apply[V](_asJava.map(value))
+    Future.apply[V](_asJava.map(value.get))
   }
 
   /**
@@ -198,19 +198,15 @@ object Future {
 
   def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
     new io.vertx.scala.core.Future(_asJava)
-
   def future[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.future())
   }
-
   def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
-
   def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture(result))
+    Future.apply[T](io.vertx.core.Future.succeededFuture(result.get))
   }
-
   def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
   }

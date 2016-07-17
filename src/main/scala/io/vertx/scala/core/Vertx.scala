@@ -267,7 +267,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param action - a handler representing the action to execute
     */
   def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(action_ => action()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
   }
 
   /**
@@ -437,8 +437,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Vertx = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.Vertx = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
     this
   }
 
@@ -451,20 +451,16 @@ object Vertx {
 
   def apply(_asJava: io.vertx.core.Vertx): io.vertx.scala.core.Vertx =
     new io.vertx.scala.core.Vertx(_asJava)
-
   def vertx(): io.vertx.scala.core.Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx())
   }
-
   def vertx(options: io.vertx.core.VertxOptions): io.vertx.scala.core.Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx(options))
   }
-
   def clusteredVertx(options: io.vertx.core.VertxOptions, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.Vertx] => Unit): Unit = {
     io.vertx.core.Vertx.clusteredVertx(options, funcToHandler(resultHandler))
   }
-
-  def currentContext(): io.vertx.scala.core.Context = {
-    Context.apply(io.vertx.core.Vertx.currentContext())
-  }
+  def currentContext(): Option[io.vertx.scala.core.Context] = {
+Option(    Context.apply(io.vertx.core.Vertx.currentContext())
+)  }
 }

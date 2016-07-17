@@ -39,7 +39,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the value, or null if none
     */
   def get(key: K): V = {
-    _asJava.get(key)
+    _asJava.get(key.get)
   }
 
   /**
@@ -49,7 +49,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return return the old value, or null if none
     */
   def put(key: K, value: V): V = {
-    _asJava.put(key, value)
+    _asJava.put(key.get, value.get)
   }
 
   /**
@@ -58,7 +58,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value
     */
   def remove(key: K): V = {
-    _asJava.remove(key)
+    _asJava.remove(key.get)
   }
 
   /**
@@ -90,7 +90,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value or null, if none
     */
   def putIfAbsent(key: K, value: V): V = {
-    _asJava.putIfAbsent(key, value)
+    _asJava.putIfAbsent(key.get, value.get)
   }
 
   /**
@@ -100,7 +100,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return true if removed
     */
   def removeIfPresent(key: K, value: V): Boolean = {
-    _asJava.removeIfPresent(key, value)
+    _asJava.removeIfPresent(key.get, value.get)
   }
 
   /**
@@ -111,7 +111,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return true if removed
     */
   def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    _asJava.replaceIfPresent(key, oldValue, newValue)
+    _asJava.replaceIfPresent(key.get, oldValue.get, newValue.get)
   }
 
   /**
@@ -121,7 +121,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value
     */
   def replace(key: K, value: V): V = {
-    _asJava.replace(key, value)
+    _asJava.replace(key.get, value.get)
   }
 
   /**

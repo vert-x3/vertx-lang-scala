@@ -67,9 +67,9 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * The reply address. Can be null.
     * @return the reply address, or null, if message was sent without a reply handler.
     */
-  def replyAddress(): String = {
-    _asJava.replyAddress()
-  }
+  def replyAddress(): Option[String] = {
+Option(    _asJava.replyAddress()
+)  }
 
   /**
     * Reply to this message.
@@ -80,7 +80,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @param message the message to reply with.
     */
   def reply(message: AnyRef): Unit = {
-    _asJava.reply(message)
+    _asJava.reply(message.get)
   }
 
   /**
@@ -90,7 +90,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply handler for the reply.
     */
   def reply[R](message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-    _asJava.reply(message, funcToHandler(replyHandler))
+    _asJava.reply(message.get, funcToHandler(replyHandler))
   }
 
   /**
@@ -99,7 +99,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply(message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
-    _asJava.reply(message, options)
+    _asJava.reply(message.get, options)
   }
 
   /**
@@ -110,7 +110,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply handler for the reply.
     */
   def reply[R](message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-    _asJava.reply(message, options, funcToHandler(replyHandler))
+    _asJava.reply(message.get, options, funcToHandler(replyHandler))
   }
 
   /**

@@ -38,7 +38,7 @@ trait WriteStream[T]
   * @param handler the exception handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T]
+  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.streams.WriteStream[T]
 
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
@@ -82,7 +82,7 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
+  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.streams.WriteStream[T]
 
 }
 
@@ -100,8 +100,8 @@ object WriteStream {
       * @param handler the exception handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.streams.WriteStream[T] = {
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
       this
     }
 
@@ -113,7 +113,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def write(data: T): io.vertx.scala.core.streams.WriteStream[T] = {
-        _asJava.write(data)
+        _asJava.write(data.get)
       this
     }
 
@@ -130,7 +130,7 @@ object WriteStream {
       * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
       */
     def end(t: T): Unit = {
-        _asJava.end(t)
+        _asJava.end(t.get)
     }
 
     /**
@@ -159,8 +159,8 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+    def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.streams.WriteStream[T] = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
       this
     }
 

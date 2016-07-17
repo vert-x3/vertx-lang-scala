@@ -102,8 +102,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: io.vertx.core.http.GoAway => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.goAwayHandler(funcToHandler(handler))
+  def goAwayHandler(handler: Option[io.vertx.core.http.GoAway => Unit]): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.goAwayHandler(funcToHandler(handler.get))
     this
   }
 
@@ -114,8 +114,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdownHandler(handler: () => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+  def shutdownHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
     this
   }
 
@@ -150,7 +150,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(handler_ => handler()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -234,8 +234,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler to be called when a {@literal PING} is received
     * @return a reference to this, so the API can be used fluently
     */
-  def pingHandler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler))
+  def pingHandler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler.get))
     this
   }
 

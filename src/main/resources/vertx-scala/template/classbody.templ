@@ -18,7 +18,9 @@
 @if{method.name == 'toString' && method.params.size == 0}
 @comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
 @{indentation}  override def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{method.returnType.isNullable}Option(@end{}
 @{methodInvocation('_asJava', method, indentation + '    ');}
+@if{method.returnType.isNullable})@end{}
 @{indentation}  }\n\n
 @else{}
 @{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
@@ -26,7 +28,9 @@
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
+@if{method.returnType.isNullable}Option(@end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@if{method.returnType.isNullable})@end{}
 @if{method.cacheReturn}
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n
