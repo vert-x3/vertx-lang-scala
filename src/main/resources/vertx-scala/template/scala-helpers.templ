@@ -34,20 +34,12 @@
     }
   }
 
-  def handleOptionForCollection(param) {
+  def handleOptionForCollection(param, applyToValue) {
     if(param.type.isNullable) {
-      if(param.type.kind == CLASS_LIST) {
-        return param.name + '.getOrElse(List())'
-      }
-      else if(param.type.kind == CLASS_SET) {
-        return param.name + '.getOrElse(Set())'
-      }
-      else if(param.type.kind == CLASS_MAP) {
-        return param.name + '.getOrElse(Map())'
-      }
+      return 'if('+param.name+'.isDefined) '+param.name+'.get'+applyToValue+' else null'
     }
     else {
-      return param.name;
+      return param.name+applyToValue;
     }
   }
 
@@ -326,9 +318,86 @@
     return invocation;
   }
 
+  def handleMethodParams(params) {
+    var first = true;
+    var invocation = '';
+    for (param : params) {
+      if (first) {
+        first = false;
+      } else {
+        invocation += ', ';
+      }
+      if (isKeyword(param.name)) {
+        invocation += escapeIfKeyword(param.name);
+      } else {
+        if (param.type.kind == CLASS_LIST ||
+            param.type.kind == CLASS_SET) {
+          if (param.type.args[0].kind == CLASS_API) {
+            invocation += handleOptionForCollection(param, '.map(x => x.asJava).asJava');
+          } else {
+            invocation += handleOptionForCollection(param, '.map(x => x:' + param.type.args[0].name + ').asJava');
+          }
+        } else if (param.type.kind == CLASS_MAP) {
+          if (param.type.args[0].kind == CLASS_API &&
+              param.type.args[1].kind == CLASS_API)
+          {
+            invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
+          } else if (param.type.args[0].kind == CLASS_API) {
+            invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
+          } else if (param.type.args[1].kind == CLASS_API) {
+            invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
+          } else {
+            invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava');
+          }
+        } else if (param.type.kind == CLASS_HANDLER) {
+            var handlerType = param.type.args[0];
+            invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
+            invocation += ')';
+        }
+        else if (param.type.kind == CLASS_FUNCTION) {
+            invocation += 'asJavaFunction(' + param.name + ')'
+        }
+        else {
+          invocation += handleOption(param);
+        }
+      }
+    }
+    return invocation;
+  }
+
+
+  def handleMethodReturn(method) {
+    var invocation = '';
+    if (method.returnType.kind == CLASS_LIST) {
+      if (method.returnType.args[0].kind == CLASS_API) {
+        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toList';
+      } else {
+        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toList';
+      }
+    } else if (method.returnType.kind == CLASS_SET) {
+      if (method.returnType.args[0].kind == CLASS_API) {
+        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
+      } else {
+        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
+      }
+    } else if (method.returnType.kind == CLASS_MAP) {
+      if (method.returnType.args[1].kind == CLASS_API) {
+        invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
+      } else if (method.returnType.args[1].kind == CLASS_STRING ||
+            method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
+            method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
+        invocation += '.asScala.toMap';
+      } else {
+        invocation += '.asScala.map     (kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
+      }
+    } else if (method.returnType.kind == CLASS_HANDLER) {
+      invocation += ')'
+    }
+    return invocation;
+  }
+
   def methodInvocation(target, method, indentation) {
     var invocation = indentation;
-    var first = true;
     var fluent = method.isFluent();
     var wrap = false;
 
@@ -361,81 +430,16 @@
       invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
     }
 
-    invocation += target + '.' + method.name + '(';
-    for (param : method.params) {
-      if (first) {
-        first = false;
-      } else {
-        invocation += ', ';
-      }
-      if (isKeyword(param.name)) {
-        invocation += escapeIfKeyword(param.name);
-      } else {
-        if (param.type.kind == CLASS_LIST ||
-            param.type.kind == CLASS_SET) {
-          if (param.type.args[0].kind == CLASS_API) {
-            invocation += handleOptionForCollection(param) + '.map(x => x.asJava).asJava';
-          } else {
-            invocation += handleOptionForCollection(param) + '.map(x => x:' + param.type.args[0].name + ').asJava';
-          }
-        } else if (param.type.kind == CLASS_MAP) {
-          if (param.type.args[0].kind == CLASS_API &&
-              param.type.args[1].kind == CLASS_API)
-          {
-            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
-          } else if (param.type.args[0].kind == CLASS_API) {
-            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava';
-          } else if (param.type.args[1].kind == CLASS_API) {
-            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
-          } else {
-            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava';
-          }
-        } else if (param.type.kind == CLASS_HANDLER) {
-            var handlerType = param.type.args[0];
-            invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
-            invocation += ')';
-        }
-        else if (param.type.kind == CLASS_FUNCTION) {
-            invocation += 'asJavaFunction(' + param.name + ')'
-        }
-        else {
-          invocation += handleOption(param);
-        }
-      }
-    }
+    invocation += target + '.' + method.name + '(' + handleMethodParams(method.params);
+
     if (wrap) {
       invocation += '))';
     } else {
       invocation += ')';
     }
 
-    if (method.returnType.kind == CLASS_LIST) {
-      if (method.returnType.args[0].kind == CLASS_API) {
-        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toList';
-      } else {
-        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toList';
-      }
-    } else if (method.returnType.kind == CLASS_SET) {
-      if (method.returnType.args[0].kind == CLASS_API) {
-        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
-      } else {
-        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
-      }
-    } else if (method.returnType.kind == CLASS_MAP) {
-      if (method.returnType.args[1].kind == CLASS_API) {
-        invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
-      } else if (method.returnType.args[1].kind == CLASS_STRING ||
-                 method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
-                 method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
-        invocation += '.asScala.toMap';
-      } else {
-        invocation += '.asScala.map     (kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
-      }
-    } else if (method.returnType.kind == CLASS_HANDLER) {
-      invocation += ')'
-    }
+    invocation += handleMethodReturn(method) + '\n';
 
-    invocation += '\n';
     if (method.isFluent()) {
       invocation += indentation;
       invocation += 'this\n';
