@@ -1114,6 +1114,8 @@ class ApiTest extends FlatSpec with Matchers {
     assert("olleh" == sub.reverse("hello"))
   }
 
+  //NullableTCK
+
   val nullableTCK = testmodel.NullableTCK(new NullableTCKImpl)
 
   "testNullableByte" should "work" in {
@@ -1300,11 +1302,11 @@ class ApiTest extends FlatSpec with Matchers {
     val testApi = RefedInterface1(new RefedInterface1Impl().setString("lovely_dae"))
     nullableTCK.methodWithNullableApiParam(true, None)
     nullableTCK.methodWithNullableApiParam(false, Option(testApi))
-    nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi == b))
+    nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi.asJava == b.asJava))
     //TODO: Missing @Nullable
     //    nullableTCK.methodWithNullableApiHandler(false, b => println(b))
     val w = new Waiter()
-    nullableTCK.methodWithNullableApiHandlerAsyncResult(true, b => {w{assert(testApi == b.result())}; w.dismiss()})
+    nullableTCK.methodWithNullableApiHandlerAsyncResult(true, b => {w{assert(testApi.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
     //TODO: Missing @Nullable
@@ -1314,59 +1316,60 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableApiReturn(false)
   }
 
-//
-//  shared test void testNullableByte() => testNullable(67.byte, nullableTCK.methodWithNullableByteParam, nullableTCK.methodWithNullableByteHandler, nullableTCK.methodWithNullableByteHandlerAsyncResult, nullableTCK.methodWithNullableByteReturn);
-//  shared test void testNullableShort() => testNullable(1024, nullableTCK.methodWithNullableShortParam, nullableTCK.methodWithNullableShortHandler, nullableTCK.methodWithNullableShortHandlerAsyncResult, nullableTCK.methodWithNullableShortReturn);
-//  shared test void testNullableInteger() => testNullable(1234567, nullableTCK.methodWithNullableIntegerParam, nullableTCK.methodWithNullableIntegerHandler, nullableTCK.methodWithNullableIntegerHandlerAsyncResult, nullableTCK.methodWithNullableIntegerReturn);
-//  shared test void testNullableLong() => testNullable(9876543210, nullableTCK.methodWithNullableLongParam, nullableTCK.methodWithNullableLongHandler, nullableTCK.methodWithNullableLongHandlerAsyncResult, nullableTCK.methodWithNullableLongReturn);
-//  shared test void testNullableFloat() => testNullable(3.14, nullableTCK.methodWithNullableFloatParam, nullableTCK.methodWithNullableFloatHandler, nullableTCK.methodWithNullableFloatHandlerAsyncResult, nullableTCK.methodWithNullableFloatReturn, assertFloatEquals);
-//  shared test void testNullableDouble() => testNullable(3.1415926, nullableTCK.methodWithNullableDoubleParam, nullableTCK.methodWithNullableDoubleHandler, nullableTCK.methodWithNullableDoubleHandlerAsyncResult, nullableTCK.methodWithNullableDoubleReturn);
-//  shared test void testNullableBoolean() => testNullable(true, nullableTCK.methodWithNullableBooleanParam, nullableTCK.methodWithNullableBooleanHandler, nullableTCK.methodWithNullableBooleanHandlerAsyncResult, nullableTCK.methodWithNullableBooleanReturn);
-//  shared test void testNullableString() => testNullable("the_string_value", nullableTCK.methodWithNullableStringParam, nullableTCK.methodWithNullableStringHandler, nullableTCK.methodWithNullableStringHandlerAsyncResult, nullableTCK.methodWithNullableStringReturn);
-//  shared test void testNullableChar() => testNullable('f', nullableTCK.methodWithNullableCharParam, nullableTCK.methodWithNullableCharHandler, nullableTCK.methodWithNullableCharHandlerAsyncResult, nullableTCK.methodWithNullableCharReturn);
-//  shared test void testNullableJsonObject() => testNullable(JsonObject { "foo"->"wibble", "bar"->3 }, nullableTCK.methodWithNullableJsonObjectParam, nullableTCK.methodWithNullableJsonObjectHandler, nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult, nullableTCK.methodWithNullableJsonObjectReturn);
-//  shared test void testNullableJsonArray() => testNullable(JsonArray { "one","two","three" }, nullableTCK.methodWithNullableJsonArrayParam, nullableTCK.methodWithNullableJsonArrayHandler, nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult, nullableTCK.methodWithNullableJsonArrayReturn);
-//  shared test void testNullableApi() => testNullable(RefedInterface1(RefedInterface1Impl().setString("lovely_dae")), nullableTCK.methodWithNullableApiParam, nullableTCK.methodWithNullableApiHandler, nullableTCK.methodWithNullableApiHandlerAsyncResult, nullableTCK.methodWithNullableApiReturn, assertRefedInterface1Equals);
-//  shared test void testNullableDataObject() => testNullable(TestDataObject { foo="foo_value"; bar=12345; wibble=3.5; }, nullableTCK.methodWithNullableDataObjectParam, nullableTCK.methodWithNullableDataObjectHandler, nullableTCK.methodWithNullableDataObjectHandlerAsyncResult, nullableTCK.methodWithNullableDataObjectReturn, assertTestDataObjectEquals);
-//  shared test void testNullableEnum() => testNullable("TIM", nullableTCK.methodWithNullableEnumParam, nullableTCK.methodWithNullableEnumHandler, nullableTCK.methodWithNullableEnumHandlerAsyncResult, nullableTCK.methodWithNullableEnumReturn);
-//  shared test void testNullableGenEnum() => testNullable(mike, nullableTCK.methodWithNullableGenEnumParam, nullableTCK.methodWithNullableGenEnumHandler, nullableTCK.methodWithNullableGenEnumHandlerAsyncResult, nullableTCK.methodWithNullableGenEnumReturn);
-//
-//  shared void testNullable<T>(
-//    T expected,
-//    Anything(Boolean,T?) nullableParamFunction,
-//    Anything(Boolean,Anything(T?)) nullableHandlerFunction,
-//    Anything(Boolean,Anything(T?|Throwable)) nullableHandlerAsyncResultFunction,
-//    T?(Boolean) nullableReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    nullableParamFunction(true, null);
-//    nullableParamFunction(false, expected);
-//    variable Integer count = 0;
-//    void a(T? val) {
-//      assertNull(val);
-//      count++;
-//    }
-//    nullableHandlerFunction(false, a);
-//    void b(T? val) {
-//      check(expected, val);
-//      count++;
-//    }
-//    nullableHandlerFunction(true, b);
-//    void c(T?|Throwable val) {
-//      assertNull(val);
-//      count++;
-//    }
-//    nullableHandlerAsyncResultFunction(false, c);
-//    void d(T?|Throwable val) {
-//      check(expected, val);
-//      count++;
-//    }
-//    nullableHandlerAsyncResultFunction(true, d);
-//    assertNull(nullableReturnFunction(false));
-//    check(expected, nullableReturnFunction(true));
-//    assertEquals(4, count);
-//  }
-//
+  "testNullableDataObject" should "work" in {
+    val testDataObject = new TestDataObject(Json.obj(("foo","foo_value"), ("bar",12345), ("wibble", 3.5)))
+    nullableTCK.methodWithNullableDataObjectParam(true, None)
+    nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
+    nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.toJson == b.toJson))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableDataObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(true, b => {w{assert(testDataObject.toJson == b.result().toJson)}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableDataObjectReturn(true)
+    nullableTCK.methodWithNullableDataObjectReturn(false)
+  }
+
+  "testNullableEnum" should "work" in {
+    val testEnum = TestEnum.TIM
+    nullableTCK.methodWithNullableEnumParam(true, None)
+    nullableTCK.methodWithNullableEnumParam(false, Option(testEnum))
+    nullableTCK.methodWithNullableEnumHandler(true, b => assert(testEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableEnumHandlerAsyncResult(true, b => {w{assert(testEnum == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableEnumReturn(true)
+    nullableTCK.methodWithNullableEnumReturn(false)
+  }
+
+  "testNullableGenEnum" should "work" in {
+    val testGenEnum = TestGenEnum.MIKE
+    nullableTCK.methodWithNullableGenEnumParam(true, None)
+    nullableTCK.methodWithNullableGenEnumParam(false, Option(testGenEnum))
+    nullableTCK.methodWithNullableGenEnumHandler(true, b => assert(testGenEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableGenEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(true, b => {w{assert(testGenEnum == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableGenEnumReturn(true)
+    nullableTCK.methodWithNullableGenEnumReturn(false)
+  }
+
 //  shared void testNullableTypeVariable() {
 //    nullableTCK.methodWithNullableTypeVariableParam(false, "whatever");
 //    nullableTCK.methodWithNullableTypeVariableParam(true, null);

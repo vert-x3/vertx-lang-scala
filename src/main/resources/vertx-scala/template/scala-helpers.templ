@@ -14,12 +14,23 @@
     return possibleKeyword;
   }
 
-  def handleOptionForPrimitves(param) {
+  def handleOption(param) {
+
     if(param.type.isNullable) {
-      return '(if('+param.name+'.isDefined) '+param.name+'.get else null)';
+      if (param.type.kind == CLASS_API) {
+        return '(if('+param.name+'.isDefined) '+param.name+'.get.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +'] else null)'
+      }
+      else {
+        return '(if('+param.name+'.isDefined) '+param.name+'.get else null)';
+      }
     }
     else {
-      return param.name;
+      if (param.type.kind == CLASS_API) {
+        return param.name + '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']'
+      }
+      else {
+        return param.name;
+      }
     }
   }
 
@@ -285,31 +296,31 @@
     var invocation = '';
 
     if (type.kind == CLASS_API) {
-      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+ handleOptionForPrimitves(param);
+      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+ handleOption(param);
     } else if (type.kind == CLASS_LIST ||
                type.kind == CLASS_SET ||
                type.kind == CLASS_MAP) {
       invocation += methodInvocationHandlerCollection(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x)('+handleOptionForPrimitves(param);
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x)('+handleOption(param);
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + handleOptionForPrimitves(param);
+      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + handleOption(param);
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
       invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x.asInstanceOf[Unit])(';
       if (convertUnit) {
         invocation += '_ => ';
       }
       if(param.type.args[0].kind == CLASS_VOID) {
-         invocation += handleOptionForPrimitves(param) + '()';
+         invocation += handleOption(param) + '()';
       }
       else {
-         invocation +=  handleOptionForPrimitves(param) + '(_)';
+         invocation +=  handleOption(param) + '(_)';
       }
     } else {
-      invocation += func + '(' + handleOptionForPrimitves(param);
+      invocation += func + '(' + handleOption(param);
     }
 
     return invocation;
@@ -388,12 +399,8 @@
             invocation += 'asJavaFunction(' + param.name + ')'
         }
         else {
-          invocation += handleOptionForPrimitves(param);
+          invocation += handleOption(param);
         }
-      }
-
-      if (param.type.kind == CLASS_API) {
-        invocation += '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']'
       }
     }
     if (wrap) {
