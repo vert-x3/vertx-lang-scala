@@ -109,8 +109,8 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
   def config(): scala.Option[io.vertx.core.json.JsonObject] = {
-scala.Option(    _asJava.config()
-)  }
+scala.Option(    _asJava.config())
+  }
 
   /**
     * The process args
