@@ -19,6 +19,7 @@ package io.vertx.scala.core.http;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.MultiMap
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
@@ -68,8 +69,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -86,13 +87,13 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 
-  def handler(handler: Option[io.vertx.scala.core.http.HttpClientResponse => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler.get))
+  def handler(handler: scala.Option[io.vertx.scala.core.http.HttpClientResponse => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -106,8 +107,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
+  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
     this
   }
 
@@ -238,8 +239,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
     * @return a reference to this, so the API can be used fluently
     */
-  def continueHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def continueHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 
@@ -367,8 +368,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: Option[io.vertx.scala.core.http.HttpConnection => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler.get))
+  def connectionHandler(handler: scala.Option[io.vertx.scala.core.http.HttpConnection => Unit]): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)((if(handler.isDefined) handler.get else null)))
     this
   }
 

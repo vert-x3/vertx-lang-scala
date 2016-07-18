@@ -19,6 +19,7 @@ package io.vertx.scala.core.net;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -54,8 +55,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * connect handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectHandler(handler: Option[io.vertx.scala.core.net.NetSocket => Unit]): io.vertx.scala.core.net.NetServer = {
-    NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler.get)))
+  def connectHandler(handler: scala.Option[io.vertx.scala.core.net.NetSocket => Unit]): io.vertx.scala.core.net.NetServer = {
+    NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)((if(handler.isDefined) handler.get else null))))
   }
 
   /**

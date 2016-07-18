@@ -19,6 +19,7 @@ package io.vertx.scala.core;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import java.util.Map.Entry
 
 /**
@@ -37,9 +38,9 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @param name The name of the header to search
     * @return The first header value or {@code null} if there is no such entry
     */
-  def get(name: String): Option[String] = {
-Option(    _asJava.get(name)
-)  }
+  def get(name: String): scala.Option[String] = {
+Try(scala.Option(    _asJava.get(name)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Returns the values with the specified name

@@ -19,6 +19,7 @@ package io.vertx.scala.core;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
 
@@ -107,9 +108,9 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * the verticle was deployed.
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
-  def config(): Option[io.vertx.core.json.JsonObject] = {
-Option(    _asJava.config()
-)  }
+  def config(): scala.Option[io.vertx.core.json.JsonObject] = {
+Try(scala.Option(    _asJava.config()
+.asInstanceOf[io.vertx.core.json.JsonObject])).getOrElse(None)  }
 
   /**
     * The process args
@@ -167,7 +168,7 @@ Option(    _asJava.config()
     * @param value the data
     */
   def put(key: String, value: AnyRef): Unit = {
-    _asJava.put(key, value.get)
+    _asJava.put(key, value)
   }
 
   /**
@@ -201,8 +202,8 @@ Option(    _asJava.config()
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.Context = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.Context = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 

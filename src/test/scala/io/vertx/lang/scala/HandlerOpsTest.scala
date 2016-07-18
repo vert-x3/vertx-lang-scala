@@ -1,7 +1,7 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.Handler
-import io.vertx.lang.scala.HandlerOps.{funcToHandler, funcToMappedHandler, handlerToFunc, handlerToMappedFunction}
+import io.vertx.lang.scala.HandlerOps._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
@@ -46,4 +46,13 @@ class HandlerOpsTest extends FlatSpec with Matchers {
     function("1")
     assert(changeMe == 1)
   }
+
+  "A null-byte-value" should "be converted to None" in {
+    assert(None == num2OptNum[Byte](new NullBomb().nullByte()))
+  }
+
+  "A byte-value of 23" should "be converted to Some(23)" in {
+    assert(Some(23) == num2OptNum[Byte](new NullBomb().byte23()))
+  }
+
 }

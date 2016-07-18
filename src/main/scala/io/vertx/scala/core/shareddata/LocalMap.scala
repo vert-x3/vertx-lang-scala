@@ -19,6 +19,7 @@ package io.vertx.scala.core.shareddata;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
@@ -39,7 +40,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the value, or null if none
     */
   def get(key: K): V = {
-    _asJava.get(key.get)
+    _asJava.get(key)
   }
 
   /**
@@ -49,7 +50,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return return the old value, or null if none
     */
   def put(key: K, value: V): V = {
-    _asJava.put(key.get, value.get)
+    _asJava.put(key, value)
   }
 
   /**
@@ -58,7 +59,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value
     */
   def remove(key: K): V = {
-    _asJava.remove(key.get)
+    _asJava.remove(key)
   }
 
   /**
@@ -90,7 +91,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value or null, if none
     */
   def putIfAbsent(key: K, value: V): V = {
-    _asJava.putIfAbsent(key.get, value.get)
+    _asJava.putIfAbsent(key, value)
   }
 
   /**
@@ -100,7 +101,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return true if removed
     */
   def removeIfPresent(key: K, value: V): Boolean = {
-    _asJava.removeIfPresent(key.get, value.get)
+    _asJava.removeIfPresent(key, value)
   }
 
   /**
@@ -111,7 +112,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return true if removed
     */
   def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    _asJava.replaceIfPresent(key.get, oldValue.get, newValue.get)
+    _asJava.replaceIfPresent(key, oldValue, newValue)
   }
 
   /**
@@ -121,7 +122,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
     * @return the old value
     */
   def replace(key: K, value: V): V = {
-    _asJava.replace(key.get, value.get)
+    _asJava.replace(key, value)
   }
 
   /**

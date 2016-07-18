@@ -19,6 +19,7 @@ package io.vertx.scala.core.file;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.file.OpenOptions
 import io.vertx.core.Handler
@@ -182,8 +183,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param group the user group, {@code null} will not change the user group name
     * @return the handler that will be called on completion
     */
-  def chown(path: String, user: Option[String], group: Option[String], handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chown(path, user.get, group.get, funcToHandler(handler))
+  def chown(path: String, user: scala.Option[String], group: scala.Option[String], handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), funcToHandler(handler))
     this
   }
 
@@ -191,8 +192,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Blocking version of 
     *
     */
-  def chownBlocking(path: String, user: Option[String], group: Option[String]): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chownBlocking(path, user.get, group.get)
+  def chownBlocking(path: String, user: scala.Option[String], group: scala.Option[String]): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chownBlocking(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null))
     this
   }
 

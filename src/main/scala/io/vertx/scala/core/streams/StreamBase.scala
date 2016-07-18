@@ -19,6 +19,7 @@ package io.vertx.scala.core.streams;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -33,7 +34,7 @@ trait StreamBase {
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.streams.StreamBase
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.streams.StreamBase
 
 }
 
@@ -51,8 +52,8 @@ object StreamBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.streams.StreamBase = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.streams.StreamBase = {
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
       this
     }
 

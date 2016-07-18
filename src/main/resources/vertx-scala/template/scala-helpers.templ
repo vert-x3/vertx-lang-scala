@@ -14,15 +14,127 @@
     return possibleKeyword;
   }
 
-  /* Used to extract value from Scala-Option*/
-  def appendGetIfIsNullable(param) {
-    if(param.isNullable) {
-        return param.name + '.get';
+  def handleOptionForPrimitves(param) {
+    if(param.type.isNullable) {
+      return '(if('+param.name+'.isDefined) '+param.name+'.get else null)';
     }
     else {
       return param.name;
     }
   }
+
+  def handleOptionForCollection(param) {
+    if(param.type.isNullable) {
+      if(param.type.kind == CLASS_LIST) {
+        return param.name + '.getOrElse(List())'
+      }
+      else if(param.type.kind == CLASS_SET) {
+        return param.name + '.getOrElse(Set())'
+      }
+      else if(param.type.kind == CLASS_MAP) {
+        return param.name + '.getOrElse(Map())'
+      }
+    }
+    else {
+      return param.name;
+    }
+  }
+
+  def toScalaTypeNotNullable(type) {
+      var nullable = type.isNullable;
+      var ret = '';
+      if (type.name == 'void' || type.name == 'java.lang.Void') {
+        ret = 'Unit';
+      } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
+        ret = 'AnyRef';
+      } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
+        ret = 'Throwable';
+      } else if (type.kind == CLASS_STRING) {
+        ret = 'String';
+      } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE) {
+        if (type.name == 'byte' || type.name == 'java.lang.Byte') {
+          ret = 'Byte';
+        } else if (type.name == 'short' || type.name == 'java.lang.Short') {
+          ret = 'Short';
+        } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
+          ret = 'Int';
+        } else if (type.name == 'long' || type.name == 'java.lang.Long') {
+          ret = 'Long';
+        } else if (type.name == 'float' || type.name == 'java.lang.Float') {
+          ret = 'Float';
+        } else if (type.name == 'double' || type.name == 'java.lang.Double') {
+          ret = 'Double';
+        } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
+          ret = 'Boolean';
+        } else if (type.name == 'char' || type.name == 'java.lang.Character') {
+          ret = 'Char';
+        }
+      } else if (type.kind == CLASS_DATA_OBJECT || type.kind == CLASS_ENUM) {
+        ret = type.name;
+      } else if (type.kind == CLASS_LIST){
+          if(type.args.isEmpty)
+            ret = 'List';
+          else if(type.args[0].params.isEmpty())
+            ret = 'List[' + toScalaType(type.args[0]) + ']';
+          else
+            ret = 'List[' + toScalaType(type.args[0]) + '[_]]';
+      } else if (type.kind == CLASS_SET){
+          if(type.args.isEmpty)
+            ret = 'Set';
+          else if(type.args[0].params.isEmpty())
+            ret = 'Set[' + toScalaType(type.args[0]) + ']';
+          else
+            ret = 'Set[' + toScalaType(type.args[0]) + '[_]]';
+      } else if (type.kind == CLASS_MAP){
+          if(type.args.isEmpty)
+            ret = 'Map';
+          else if(type.args[0].params.isEmpty())
+            ret = 'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
+          else
+            ret ='Map[' + toScalaType(type.args[0]) + '[_], ' + toScalaType(type.args[1]) + '[_]]';
+      } else if (type.kind == CLASS_HANDLER) {
+        var type = toScalaType(type.args[0]);
+        if (type.equals("Unit")) {
+          ret = "() => Unit";
+        } else {
+          ret = type + " => Unit";
+        }
+      } else if (type.kind == CLASS_FUNCTION) {
+        var type1 = changeJavaGenericNotationToScalaNotation(type.args[0]);
+        var type2 = changeJavaGenericNotationToScalaNotation(type.args[1]);
+
+        var ret = "";
+        if (type1.equals("Unit")) {
+          ret = "() => "+type2;
+        } else {
+          ret = type1 + " => " + type2;
+        }
+        ret = ret
+      } else if (type.kind == CLASS_JSON_OBJECT ||
+                 type.kind == CLASS_JSON_ARRAY){
+        ret = changeJavaGenericNotationToScalaNotation(type)
+      } else if (type.kind == CLASS_API) {
+        var retVal = helper.getNonGenericType(type.translateName("scala"));
+        if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
+          retVal += '[';
+          var first = true;
+          for (arg : type.args) {
+            if (first) {
+              first = false;
+            } else {
+              retVal += ', ';
+            }
+            retVal += toScalaType(arg);
+          }
+          retVal += ']';
+        }
+        ret = retVal;
+      }
+      else {
+        ret = changeJavaGenericNotationToScalaNotation(type);
+      }
+      return ret;
+    }
 
   def toScalaType(type) {
     var nullable = type.isNullable;
@@ -118,7 +230,7 @@
       ret = changeJavaGenericNotationToScalaNotation(type);
     }
     if(nullable) {
-      return 'Option['+ret+']';
+      return 'scala.Option['+ret+']';
     }
     else {
       return ret;
@@ -171,6 +283,16 @@
       'Unit';
     } else {
       toScalaType(method.returnType);
+    }
+  }
+
+  def returnTypeOfNotNullable(method) {
+    if (method.fluent) {
+      toScalaTypeNotNullable(method.returnType);
+    } else if (method.returnType instanceof io.vertx.codegen.type.VoidTypeInfo) {
+      'Unit';
+    } else {
+      toScalaTypeNotNullable(method.returnType);
     }
   }
 
@@ -255,31 +377,31 @@
     var invocation = '';
 
     if (type.kind == CLASS_API) {
-      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+ appendGetIfIsNullable(param);
+      invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+ handleOptionForPrimitves(param);
     } else if (type.kind == CLASS_LIST ||
                type.kind == CLASS_SET ||
                type.kind == CLASS_MAP) {
       invocation += methodInvocationHandlerCollection(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x)('+appendGetIfIsNullable(param);
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x)('+handleOptionForPrimitves(param);
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + appendGetIfIsNullable(param);
+      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + handleOptionForPrimitves(param);
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
       invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](x => x.asInstanceOf[Unit])(';
       if (convertUnit) {
         invocation += '_ => ';
       }
       if(param.type.args[0].kind == CLASS_VOID) {
-         invocation += appendGetIfIsNullable(param) + '()';
+         invocation += handleOptionForPrimitves(param) + '()';
       }
       else {
-         invocation +=  appendGetIfIsNullable(param) + '(_)';
+         invocation +=  handleOptionForPrimitves(param) + '(_)';
       }
     } else {
-      invocation += func + '(' + appendGetIfIsNullable(param);
+      invocation += func + '(' + handleOptionForPrimitves(param);
     }
 
     return invocation;
@@ -333,21 +455,21 @@
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
           if (param.type.args[0].kind == CLASS_API) {
-            invocation += param.name + '.map(x => x.asJava).asJava';
+            invocation += handleOptionForCollection(param) + '.map(x => x.asJava).asJava';
           } else {
-            invocation += param.name + '.map(x => x:' + param.type.args[0].name + ').asJava';
+            invocation += handleOptionForCollection(param) + '.map(x => x:' + param.type.args[0].name + ').asJava';
           }
         } else if (param.type.kind == CLASS_MAP) {
           if (param.type.args[0].kind == CLASS_API &&
               param.type.args[1].kind == CLASS_API)
           {
-            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
+            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
           } else if (param.type.args[0].kind == CLASS_API) {
-            invocation += param.name + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava';
+            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava';
           } else if (param.type.args[1].kind == CLASS_API) {
-            invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
+            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava';
           } else {
-            invocation += param.name + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava';
+            invocation += handleOptionForCollection(param) + '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava';
           }
         } else if (param.type.kind == CLASS_HANDLER) {
             var handlerType = param.type.args[0];
@@ -358,7 +480,7 @@
             invocation += 'asJavaFunction(' + param.name + ')'
         }
         else {
-          invocation += appendGetIfIsNullable(param);
+          invocation += handleOptionForPrimitves(param);
         }
       }
 

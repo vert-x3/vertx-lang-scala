@@ -19,6 +19,7 @@ package io.vertx.scala.core.http;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.MultiMap
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
@@ -44,13 +45,13 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
 
   def asJava: io.vertx.core.http.HttpServerRequest = _asJava
 
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 
-  def handler(handler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler.get))
+  def handler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -64,8 +65,8 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     this
   }
 
-  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
+  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
     this
   }
 
@@ -100,9 +101,9 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   /**
     * @return the scheme of the request
     */
-  def scheme(): Option[String] = {
-Option(    _asJava.scheme()
-)  }
+  def scheme(): scala.Option[String] = {
+Try(scala.Option(    _asJava.scheme()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the URI of the request. This is usually a relative URI
@@ -114,23 +115,23 @@ Option(    _asJava.scheme()
   /**
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
-  def path(): Option[String] = {
-Option(    _asJava.path()
-)  }
+  def path(): scala.Option[String] = {
+Try(scala.Option(    _asJava.path()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
-  def query(): Option[String] = {
-Option(    _asJava.query()
-)  }
+  def query(): scala.Option[String] = {
+Try(scala.Option(    _asJava.query()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
     */
-  def host(): Option[String] = {
-Option(    _asJava.host()
-)  }
+  def host(): scala.Option[String] = {
+Try(scala.Option(    _asJava.host()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the response. Each instance of this class has an [[io.vertx.scala.core.http.HttpServerResponse]] instance attached to it. This is used
@@ -158,9 +159,9 @@ Option(    _asJava.host()
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String): Option[String] = {
-Option(    _asJava.getHeader(headerName)
-)  }
+  def getHeader(headerName: String): scala.Option[String] = {
+Try(scala.Option(    _asJava.getHeader(headerName)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the query parameters in the request
@@ -177,9 +178,9 @@ Option(    _asJava.getHeader(headerName)
     * @param paramName the param name
     * @return the param value
     */
-  def getParam(paramName: String): Option[String] = {
-Option(    _asJava.getParam(paramName)
-)  }
+  def getParam(paramName: String): scala.Option[String] = {
+Try(scala.Option(    _asJava.getParam(paramName)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * @return the remote (client side) address of the request
@@ -215,8 +216,8 @@ Option(    _asJava.getParam(paramName)
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler.get))
+  def bodyHandler(bodyHandler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)((if(bodyHandler.isDefined) bodyHandler.get else null)))
     this
   }
 
@@ -260,8 +261,8 @@ Option(    _asJava.getParam(paramName)
     * with the file upload.
     * @return a reference to this, so the API can be used fluently
     */
-  def uploadHandler(uploadHandler: Option[io.vertx.scala.core.http.HttpServerFileUpload => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
-    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler.get))
+  def uploadHandler(uploadHandler: scala.Option[io.vertx.scala.core.http.HttpServerFileUpload => Unit]): io.vertx.scala.core.http.HttpServerRequest = {
+    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)((if(uploadHandler.isDefined) uploadHandler.get else null)))
     this
   }
 
@@ -286,9 +287,9 @@ Option(    _asJava.getParam(paramName)
     * @param attributeName the attribute name
     * @return the attribute value
     */
-  def getFormAttribute(attributeName: String): Option[String] = {
-Option(    _asJava.getFormAttribute(attributeName)
-)  }
+  def getFormAttribute(attributeName: String): scala.Option[String] = {
+Try(scala.Option(    _asJava.getFormAttribute(attributeName)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Upgrade the connection to a WebSocket connection.

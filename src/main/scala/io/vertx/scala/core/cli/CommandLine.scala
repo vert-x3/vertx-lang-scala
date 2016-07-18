@@ -19,6 +19,7 @@ package io.vertx.scala.core.cli;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.cli.Option
 import io.vertx.core.cli.Argument
 
@@ -124,9 +125,9 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the value, {@code null} if none.
     */
-  def getRawValueForOption(option: io.vertx.core.cli.Option): Option[String] = {
-Option(    _asJava.getRawValueForOption(option)
-)  }
+  def getRawValueForOption(option: io.vertx.core.cli.Option): scala.Option[String] = {
+Try(scala.Option(    _asJava.getRawValueForOption(option)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Checks whether or not the given option accept more values.
@@ -142,9 +143,9 @@ Option(    _asJava.getRawValueForOption(option)
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the value, {@code null} if none.
     */
-  def getRawValueForArgument(arg: io.vertx.core.cli.Argument): Option[String] = {
-Option(    _asJava.getRawValueForArgument(arg)
-)  }
+  def getRawValueForArgument(arg: io.vertx.core.cli.Argument): scala.Option[String] = {
+Try(scala.Option(    _asJava.getRawValueForArgument(arg)
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Checks whether or not the given argument has been assigned in the command line.

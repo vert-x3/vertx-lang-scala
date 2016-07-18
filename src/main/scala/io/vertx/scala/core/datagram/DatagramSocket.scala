@@ -19,6 +19,7 @@ package io.vertx.scala.core.datagram;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.scala.core.streams.ReadStream
@@ -149,8 +150,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param source the address of the source for which we will listen for multicast packets
     * @return then handler to notify once the operation completes
     */
-  def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.listenMulticastGroup(multicastAddress, networkInterface, source.get, funcToHandler(handler))
+  def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToHandler(handler))
     this
   }
 
@@ -173,8 +174,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param source the address of the source for which we will listen for multicast packets
     * @return the handler to notify once the operation completes
     */
-  def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, source.get, funcToHandler(handler))
+  def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToHandler(handler))
     this
   }
 
@@ -224,18 +225,18 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     this
   }
 
-  def endHandler(endHandler: Option[() => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.get()))
+  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
     this
   }
 
-  def handler(handler: Option[io.vertx.scala.core.datagram.DatagramPacket => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler.get))
+  def handler(handler: scala.Option[io.vertx.scala.core.datagram.DatagramPacket => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.handler(funcToMappedHandler(DatagramPacket.apply)((if(handler.isDefined) handler.get else null)))
     this
   }
 
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.datagram.DatagramSocket = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 

@@ -19,6 +19,7 @@ package io.vertx.scala.core.dns;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
@@ -72,9 +73,9 @@ class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
   /**
     * Returns the name of the host for the service.
     */
-  def target(): Option[String] = {
-Option(    _asJava.target()
-)  }
+  def target(): scala.Option[String] = {
+Try(scala.Option(    _asJava.target()
+.asInstanceOf[String])).getOrElse(None)  }
 
 }
 

@@ -19,6 +19,7 @@ package io.vertx.scala.core;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.datagram.DatagramSocket
 import io.vertx.scala.core.http.HttpServer
 import io.vertx.scala.core.shareddata.SharedData
@@ -437,8 +438,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.Vertx = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.Vertx = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -460,7 +461,7 @@ object Vertx {
   def clusteredVertx(options: io.vertx.core.VertxOptions, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.Vertx] => Unit): Unit = {
     io.vertx.core.Vertx.clusteredVertx(options, funcToHandler(resultHandler))
   }
-  def currentContext(): Option[io.vertx.scala.core.Context] = {
+  def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
 Option(    Context.apply(io.vertx.core.Vertx.currentContext())
 )  }
 }

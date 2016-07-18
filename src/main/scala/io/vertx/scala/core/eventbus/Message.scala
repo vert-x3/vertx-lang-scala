@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
@@ -67,9 +68,9 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * The reply address. Can be null.
     * @return the reply address, or null, if message was sent without a reply handler.
     */
-  def replyAddress(): Option[String] = {
-Option(    _asJava.replyAddress()
-)  }
+  def replyAddress(): scala.Option[String] = {
+Try(scala.Option(    _asJava.replyAddress()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Reply to this message.
@@ -80,7 +81,7 @@ Option(    _asJava.replyAddress()
     * @param message the message to reply with.
     */
   def reply(message: AnyRef): Unit = {
-    _asJava.reply(message.get)
+    _asJava.reply(message)
   }
 
   /**
@@ -90,7 +91,7 @@ Option(    _asJava.replyAddress()
     * @return the reply handler for the reply.
     */
   def reply[R](message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-    _asJava.reply(message.get, funcToHandler(replyHandler))
+    _asJava.reply(message, funcToHandler(replyHandler))
   }
 
   /**
@@ -99,7 +100,7 @@ Option(    _asJava.replyAddress()
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply(message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
-    _asJava.reply(message.get, options)
+    _asJava.reply(message, options)
   }
 
   /**
@@ -110,7 +111,7 @@ Option(    _asJava.replyAddress()
     * @return the reply handler for the reply.
     */
   def reply[R](message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-    _asJava.reply(message.get, options, funcToHandler(replyHandler))
+    _asJava.reply(message, options, funcToHandler(replyHandler))
   }
 
   /**
