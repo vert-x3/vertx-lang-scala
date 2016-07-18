@@ -1370,40 +1370,51 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableGenEnumReturn(false)
   }
 
-//  shared void testNullableTypeVariable() {
-//    nullableTCK.methodWithNullableTypeVariableParam(false, "whatever");
-//    nullableTCK.methodWithNullableTypeVariableParam(true, null);
-//    variable Integer count = 0;
-//    void a(String? val) {
-//      assertEquals("wibble", val);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableTypeVariableHandler<String>(true, "wibble", a);
-//    void b(String? val) {
-//      assertNull(val);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableTypeVariableHandler<String>(true, null, b);
-//    void c(String?|Throwable val) {
-//      assertEquals("sausages", val);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult<String>(true, "sausages", c);
-//    void d(String?|Throwable val) {
-//      assertNull(val);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult<String>(true, null, d);
-//    assertEquals("fizz1", nullableTCK.methodWithNullableTypeVariableReturn<String>(true, "fizz1"));
-//    assertNull(nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"));
-//    assertEquals(4, count);
-//  }
-//
-//  shared void testNullableObjectParam() {
-//    nullableTCK.methodWithNullableObjectParam(true, null);
-//    nullableTCK.methodWithNullableObjectParam(false, "object_param");
-//  }
-//
+  "testNullableTypeVariable" should "work" in {
+    nullableTCK.methodWithNullableTypeVariableParam(false, "whatever")
+    nullableTCK.methodWithNullableTypeVariableParam(true, null)
+    val w1 = new Waiter()
+    nullableTCK.methodWithNullableTypeVariableHandler[String](true, "wibble", a => {w1{assert(a == "wibble")}; w1.dismiss()})
+    w1.await()
+    val w2 = new Waiter()
+    nullableTCK.methodWithNullableTypeVariableHandler[String](true, null, b => {w1{assert(b == "sausages")}; w2.dismiss()})
+    w2.await()
+    val w3 = new Waiter()
+    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult[String](true, "sausages", c => {w3{assert(c.result() == "sausages")};w3.dismiss()})
+    w3.await()
+    val w4 = new Waiter()
+    nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult[String](true, null, d => {w4{assert(d.result() == null)};w4.dismiss()})
+    assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1"))
+    //TODO: Missing @Nullable
+    assert(null == nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"))
+    w4.await()
+  }
+
+  "testNullableObjectParam" should "work" in {
+    nullableTCK.methodWithNullableObjectParam(true, null)
+    nullableTCK.methodWithNullableObjectParam(false, "object_param")
+  }
+
+
+  "testNullableListByte" should "work" in {
+    import collection.JavaConverters._
+    val testListByte = List(12.toByte,24.toByte,(-12).toByte)
+    nullableTCK.methodWithNullableListByteParam(true, None)
+    nullableTCK.methodWithNullableListByteParam(false, Option(testListByte))
+    nullableTCK.methodWithNullableListByteHandler(true, b => assert(testListByte == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListByteHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListByteHandlerAsyncResult(true, b => {w{assert(testListByte.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListByteReturn(true)
+    nullableTCK.methodWithNullableListByteReturn(false)
+  }
+
 //  shared test void testNullableListByte() => testNullableList(ArrayList { 12.byte,24.byte,(-12).byte }, nullableTCK.methodWithNullableListByteParam, nullableTCK.methodWithNullableListByteHandler, nullableTCK.methodWithNullableListByteHandlerAsyncResult, nullableTCK.methodWithNullableListByteReturn);
 //  shared test void testNullableListShort() => testNullableList(ArrayList { 520,1040,-520 }, nullableTCK.methodWithNullableListShortParam, nullableTCK.methodWithNullableListShortHandler, nullableTCK.methodWithNullableListShortHandlerAsyncResult, nullableTCK.methodWithNullableListShortReturn);
 //  shared test void testNullableListInteger() => testNullableList(ArrayList { 12345,54321,-12345 }, nullableTCK.methodWithNullableListIntegerParam, nullableTCK.methodWithNullableListIntegerHandler, nullableTCK.methodWithNullableListIntegerHandlerAsyncResult, nullableTCK.methodWithNullableListIntegerReturn);
