@@ -462,6 +462,6 @@ object Vertx {
     io.vertx.core.Vertx.clusteredVertx(options, funcToHandler(resultHandler))
   }
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
-Option(    Context.apply(io.vertx.core.Vertx.currentContext())
-)  }
+scala.Option(    Context.apply(io.vertx.core.Vertx.currentContext()))
+  }
 }

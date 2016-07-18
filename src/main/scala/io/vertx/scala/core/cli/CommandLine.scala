@@ -126,8 +126,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @return the value, {@code null} if none.
     */
   def getRawValueForOption(option: io.vertx.core.cli.Option): scala.Option[String] = {
-scala.Option(    _asJava.getRawValueForOption(option)
-)  }
+scala.Option(    _asJava.getRawValueForOption(option))
+  }
 
   /**
     * Checks whether or not the given option accept more values.
@@ -144,8 +144,8 @@ scala.Option(    _asJava.getRawValueForOption(option)
     * @return the value, {@code null} if none.
     */
   def getRawValueForArgument(arg: io.vertx.core.cli.Argument): scala.Option[String] = {
-scala.Option(    _asJava.getRawValueForArgument(arg)
-)  }
+scala.Option(    _asJava.getRawValueForArgument(arg))
+  }
 
   /**
     * Checks whether or not the given argument has been assigned in the command line.

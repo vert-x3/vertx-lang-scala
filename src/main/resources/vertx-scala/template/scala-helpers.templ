@@ -388,7 +388,7 @@
             method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
         invocation += '.asScala.toMap';
       } else {
-        invocation += '.asScala.map     (kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
+        invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
       }
     } else if (method.returnType.kind == CLASS_HANDLER) {
       invocation += ')'
@@ -438,7 +438,25 @@
       invocation += ')';
     }
 
-    invocation += handleMethodReturn(method) + '\n';
+    var conversion = handleMethodReturn(method);
+
+    if(method.returnType.isNullable){
+      if(conversion != '') {
+        invocation = 'scala.Option('+invocation+') match { case Some(x) => Some(x' + conversion + '); case None => None};\n'
+      }
+      else {
+        if(method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
+          invocation = 'nullsafeConvToOption('+invocation+');\n'
+        }
+        else {
+          invocation = 'scala.Option('+invocation+')\n'
+        }
+      }
+    }
+    else {
+      invocation += conversion + '\n';
+    }
+
 
     if (method.isFluent()) {
       invocation += indentation;
