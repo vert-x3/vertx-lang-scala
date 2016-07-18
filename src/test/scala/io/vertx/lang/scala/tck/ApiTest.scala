@@ -18,6 +18,7 @@ package io.vertx.lang.scala.tck
 
 import com.acme.scala.pkg.MyInterface
 import io.vertx.codegen.testmodel._
+import io.vertx.core.http.HttpServerOptions
 import io.vertx.core.json.{JsonArray, JsonObject}
 import io.vertx.core.{Future, VertxException}
 import io.vertx.lang.scala.json.Json
@@ -2458,137 +2459,34 @@ class ApiTest extends FlatSpec with Matchers {
     w.await()
     assert(testMapJsonArray == nullableTCK.methodWithMapNullableJsonArrayReturn())
   }
-//
-//  "testMapNullableApi" should "work" in {
-//    import collection.JavaConverters._
-//    val iface1 = new RefedInterface1Impl().setString("first")
-//    val iface2 = new RefedInterface1Impl().setString("third")
-//    val testMapApi:Map[RefedInterface1] = Map(RefedInterface1(iface1), null, RefedInterface1(iface2))
+
+  "testMapNullableApi" should "work" in {
+    import collection.JavaConverters._
+    val iface1 = new RefedInterface1Impl().setString("first")
+    val iface2 = new RefedInterface1Impl().setString("third")
+    val testMapApi:Map[String, RefedInterface1] = Map("1" -> RefedInterface1(iface1), "2" -> null, "3" -> RefedInterface1(iface2))
+    //TODO: fix
 //    nullableTCK.methodWithMapNullableApiParam(testMapApi)
-//    nullableTCK.methodWithMapNullableApiHandler(b => assert(testMapApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
-//    //TODO: Missing @Nullable
-//    //        nullableTCK.methodWithMapNullableApiHandler(false, b => println(b))
-//    val w = new Waiter()
-//    nullableTCK.methodWithMapNullableApiHandlerAsyncResult(b => {w{assert(testMapApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
-//    w.await()
-//    assert(testMapApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithMapNullableApiReturn().map(x => if( x!= null) x.asJava else null))
-//  }
+  }
 
+  "testNullableHandler" should "work" in {
+    //TODO: fix
+//    nullableTCK.methodWithNullableHandler(true, None)
+//    val w1 = new Waiter()
+//    nullableTCK.methodWithNullableHandler(false, Some(a => {w1{assert("the_string_value" == a)};w1.dismiss()}))
+//    w1.await()
+//    nullableTCK.methodWithNullableHandlerAsyncResult(true, None)
+    val w2 = new Waiter()
+    nullableTCK.methodWithNullableHandlerAsyncResult(false, Some(a => {w2{assert("the_string_value" == a.result())};w2.dismiss()}))
+    w2.await()
+  }
 
-  //  shared test void testMapNullableString() => testMapNullable(ArrayList { "first",null,"third" }, nullableTCK.methodWithMapNullableStringParam, nullableTCK.methodWithMapNullableStringHandler, nullableTCK.methodWithMapNullableStringHandlerAsyncResult, nullableTCK.methodWithMapNullableStringReturn);
-//  shared test void testMapNullableJsonObject() => testMapNullable(ArrayList { JsonObject { "foo"->"bar" }, null, JsonObject { "juu"->3 } }, nullableTCK.methodWithMapNullableJsonObjectParam, nullableTCK.methodWithMapNullableJsonObjectHandler, nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResult, nullableTCK.methodWithMapNullableJsonObjectReturn);
-//  shared test void testMapNullableJsonArray() => testMapNullable(ArrayList { JsonArray { "foo","bar" }, null, JsonArray { "juu" } }, nullableTCK.methodWithMapNullableJsonArrayParam, nullableTCK.methodWithMapNullableJsonArrayHandler, nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResult, nullableTCK.methodWithMapNullableJsonArrayReturn);
-//  shared test void testMapNullableApi() => testMapNullableIn(ArrayList { RefedInterface1(RefedInterface1Impl().setString("first")), null, RefedInterface1(RefedInterface1Impl().setString("third")) }, nullableTCK.methodWithMapNullableApiParam, assertRefedInterface1Equals);
-//
-//  shared void testMapNullable<T>(
-//    List<T> expected,
-//    Anything(Map<String, T?>) mapNullableParamFunction,
-//    Anything(Anything(Map<String, T?>)) mapNullableHandlerFunction,
-//    Anything(Anything(Map<String, T?>|Throwable)) mapNullableHandlerAsyncResultFunction,
-//    Map<String, T?>() mapNullableReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    testMapNullableIn(expected, mapNullableParamFunction, check);
-//    testMapNullableOut(expected, mapNullableHandlerFunction, mapNullableHandlerAsyncResultFunction, mapNullableReturnFunction, check);
-//  }
-//
-//  shared void testMapNullableIn<T>(
-//    List<T> expected,
-//    Anything(Map<String, T?>) mapNullableParamFunction,
-//    Anything(Anything,Anything) check
-//    ) {
-//    HashMap<String, T> map = HashMap<String, T>();
-//    for (index->item in expected.indexed) {
-//      map.put("``(index + 1)``", item);
-//    }
-//    mapNullableParamFunction(map);
-//  }
-//
-//  shared void testMapNullableOut<T>(
-//    List<T> expected,
-//    Anything(Anything(Map<String, T?>)) mapNullableHandlerFunction,
-//    Anything(Anything(Map<String, T?>|Throwable)) mapNullableHandlerAsyncResultFunction,
-//    Map<String, T?>() mapNullableReturnFunction,
-//    Anything(Anything,Anything) check
-//    ) {
-//    void checkMap(Anything actual) {
-//      assert(is Map<String, T?> actual);
-//      assertEquals(expected.size, actual.size);
-//      for (index->item in expected.indexed) {
-//        if (exists item) {
-//          check(item, actual["``(index + 1)``"]);
-//        } else {
-//          assertNull(actual["``(index + 1)``"]);
-//        }
-//      }
-//    }
-//    variable Integer count = 0;
-//    void a(Map<String, T?> set) {
-//      checkMap(set);
-//      count++;
-//    }
-//    mapNullableHandlerFunction(a);
-//    void b(Map<String, T?>|Throwable set) {
-//      checkMap(set);
-//      count++;
-//    }
-//    mapNullableHandlerAsyncResultFunction(b);
-//    checkMap(mapNullableReturnFunction());
-//    assertEquals(2, count);
-//  }
-//
-//  shared test void testNullableHandler() {
-//    variable Integer count = 0;
-//    nullableTCK.methodWithNullableHandler(true, null);
-//    void a(String s) {
-//      assertEquals("the_string_value", s);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableHandler(false, a);
-//    nullableTCK.methodWithNullableHandlerAsyncResult(true, null);
-//    void b(String|Throwable s) {
-//      assertEquals("the_string_value", s);
-//      count++;
-//    }
-//    nullableTCK.methodWithNullableHandlerAsyncResult(false, b);
-//    assertEquals(2, count);
-//  }
-//
-//  "Test that HttpServerOptions properly serialize to and deserialize from json"
-//  shared test void testHttpServerOptionsJson() {
-//    value options = HttpServerOptions {
-//      compressionSupported = true;
-//      ssl = true;
-//      sendBufferSize = 65000;
-//    };
-//    value json = options.toJson();
-//    value actualOptions = httpServerOptions.fromJson(json);
-//    assertEquals(actualOptions.compressionSupported, options.compressionSupported);
-//    assertEquals(actualOptions.ssl, options.ssl);
-//    assertEquals(actualOptions.sendBufferSize, options.sendBufferSize);
-//  }
-//
-//  void assertTestDataObjectEquals(Anything actual, Anything expected) {
-//    assert(is TestDataObject actual);
-//    assert(is TestDataObject expected);
-//    assertEquals(actual.foo, expected.foo);
-//    assertEquals(actual.bar, expected.bar);
-//    assertEquals(actual.wibble, expected.wibble);
-//  }
-//
-//  void assertRefedInterface1Equals(Anything actual, Anything expected) {
-//    assert(is RefedInterface1 actual);
-//    assert(is RefedInterface1 expected);
-//    assertEquals(actual.getString(), expected.getString());
-//  }
-//
-//  void assertFloatEquals(Anything actual, Anything expected) {
-//    assert(is Float actual);
-//    assert(is Float expected);
-//    variable value diff = expected - actual;
-//    if (diff < 0.float) {
-//      diff -= diff;
-//    }
-//    assertTrue(diff < 0.0001);
-//  }
+  "testHttpServerOptionsJson" should "work" in {
+    val json = Json.obj(("compressionSupported", true), ("ssl",true), ("sendBufferSize", 65000))
+    val options = new HttpServerOptions().setCompressionSupported(true).setSsl(true).setSendBufferSize(65000)
+    val actualOptions =  new HttpServerOptions(json)
+    assert(actualOptions.isCompressionSupported == options.isCompressionSupported)
+    assert(actualOptions.isSsl == options.isSsl)
+    assert(actualOptions.getSendBufferSize == options.getSendBufferSize)
+  }
 }
