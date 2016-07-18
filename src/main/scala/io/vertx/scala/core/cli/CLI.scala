@@ -48,7 +48,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: List[String]): io.vertx.scala.core.cli.CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
+    CommandLine.apply(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava))
   }
 
   /**
@@ -58,7 +58,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: List[String], validate: Boolean): io.vertx.scala.core.cli.CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
+    CommandLine.apply(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava, validate))
   }
 
   /**
@@ -151,7 +151,7 @@ scala.Option(    _asJava.getSummary())
     * @return the current [[CLI]] instance
     */
   def addOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOptions(options.map(x => x:io.vertx.core.cli.Option).asJava)
+    _asJava.addOptions(options.map(x => if(x == null) null else x:io.vertx.core.cli.Option).asJava)
     this
   }
 
@@ -161,7 +161,7 @@ scala.Option(    _asJava.getSummary())
     * @return the current [[CLI]] instance
     */
   def setOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setOptions(options.map(x => x:io.vertx.core.cli.Option).asJava)
+    _asJava.setOptions(options.map(x => if(x == null) null else x:io.vertx.core.cli.Option).asJava)
     this
   }
 
@@ -190,7 +190,7 @@ scala.Option(    _asJava.getSummary())
     * @return the current [[CLI]] instance
     */
   def addArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArguments(args.map(x => x:io.vertx.core.cli.Argument).asJava)
+    _asJava.addArguments(args.map(x => if(x == null) null else x:io.vertx.core.cli.Argument).asJava)
     this
   }
 
@@ -200,7 +200,7 @@ scala.Option(    _asJava.getSummary())
     * @return the current [[CLI]] instance
     */
   def setArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setArguments(args.map(x => x:io.vertx.core.cli.Argument).asJava)
+    _asJava.setArguments(args.map(x => if(x == null) null else x:io.vertx.core.cli.Argument).asJava)
     this
   }
 

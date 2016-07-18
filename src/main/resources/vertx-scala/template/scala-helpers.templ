@@ -333,9 +333,9 @@
         if (param.type.kind == CLASS_LIST ||
             param.type.kind == CLASS_SET) {
           if (param.type.args[0].kind == CLASS_API) {
-            invocation += handleOptionForCollection(param, '.map(x => x.asJava).asJava');
+            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
           } else {
-            invocation += handleOptionForCollection(param, '.map(x => x:' + param.type.args[0].name + ').asJava');
+            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
           }
         } else if (param.type.kind == CLASS_MAP) {
           if (param.type.args[0].kind == CLASS_API &&

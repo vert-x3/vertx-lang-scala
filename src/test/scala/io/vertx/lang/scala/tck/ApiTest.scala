@@ -1396,6 +1396,12 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
 
+
+
+
+
+
+
   "testNullableListByte" should "work" in {
     import collection.JavaConverters._
     val testListByte = List(12.toByte,24.toByte,(-12).toByte)
@@ -1415,211 +1421,810 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListByteReturn(false)
   }
 
-//  shared test void testNullableListByte() => testNullableList(ArrayList { 12.byte,24.byte,(-12).byte }, nullableTCK.methodWithNullableListByteParam, nullableTCK.methodWithNullableListByteHandler, nullableTCK.methodWithNullableListByteHandlerAsyncResult, nullableTCK.methodWithNullableListByteReturn);
-//  shared test void testNullableListShort() => testNullableList(ArrayList { 520,1040,-520 }, nullableTCK.methodWithNullableListShortParam, nullableTCK.methodWithNullableListShortHandler, nullableTCK.methodWithNullableListShortHandlerAsyncResult, nullableTCK.methodWithNullableListShortReturn);
-//  shared test void testNullableListInteger() => testNullableList(ArrayList { 12345,54321,-12345 }, nullableTCK.methodWithNullableListIntegerParam, nullableTCK.methodWithNullableListIntegerHandler, nullableTCK.methodWithNullableListIntegerHandlerAsyncResult, nullableTCK.methodWithNullableListIntegerReturn);
-//  shared test void testNullableListLong() => testNullableList(ArrayList { 123456789,987654321,-123456789 }, nullableTCK.methodWithNullableListLongParam, nullableTCK.methodWithNullableListLongHandler, nullableTCK.methodWithNullableListLongHandlerAsyncResult, nullableTCK.methodWithNullableListLongReturn);
-//  shared test void testNullableListFloat() => testNullableList(ArrayList { 1.1,2.2,3.3 }, nullableTCK.methodWithNullableListFloatParam, nullableTCK.methodWithNullableListFloatHandler, nullableTCK.methodWithNullableListFloatHandlerAsyncResult, nullableTCK.methodWithNullableListFloatReturn, assertFloatEquals);
-//  shared test void testNullableListDouble() => testNullableList(ArrayList { 1.11,2.22,3.33 }, nullableTCK.methodWithNullableListDoubleParam, nullableTCK.methodWithNullableListDoubleHandler, nullableTCK.methodWithNullableListDoubleHandlerAsyncResult, nullableTCK.methodWithNullableListDoubleReturn, assertFloatEquals);
-//  shared test void testNullableListBoolean() => testNullableList(ArrayList { true,false,true }, nullableTCK.methodWithNullableListBooleanParam, nullableTCK.methodWithNullableListBooleanHandler, nullableTCK.methodWithNullableListBooleanHandlerAsyncResult, nullableTCK.methodWithNullableListBooleanReturn);
-//  shared test void testNullableListString() => testNullableList(ArrayList { "first","second","third" }, nullableTCK.methodWithNullableListStringParam, nullableTCK.methodWithNullableListStringHandler, nullableTCK.methodWithNullableListStringHandlerAsyncResult, nullableTCK.methodWithNullableListStringReturn);
-//  shared test void testNullableListChar() => testNullableList(ArrayList { 'x','y','z' }, nullableTCK.methodWithNullableListCharParam, nullableTCK.methodWithNullableListCharHandler, nullableTCK.methodWithNullableListCharHandlerAsyncResult, nullableTCK.methodWithNullableListCharReturn);
-//  shared test void testNullableListJsonObject() => testNullableList(ArrayList { JsonObject { "foo"->"bar" }, JsonObject { "juu"->3 } }, nullableTCK.methodWithNullableListJsonObjectParam, nullableTCK.methodWithNullableListJsonObjectHandler, nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResult, nullableTCK.methodWithNullableListJsonObjectReturn);
-//  shared test void testNullableListJsonArray() => testNullableList(ArrayList { JsonArray { "foo","bar" }, JsonArray { "juu" } }, nullableTCK.methodWithNullableListJsonArrayParam, nullableTCK.methodWithNullableListJsonArrayHandler, nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResult, nullableTCK.methodWithNullableListJsonArrayReturn);
-//  shared test void testNullableListApi() => testNullableList(ArrayList { RefedInterface1(RefedInterface1Impl().setString("refed_is_here")) }, nullableTCK.methodWithNullableListApiParam, nullableTCK.methodWithNullableListApiHandler, nullableTCK.methodWithNullableListApiHandlerAsyncResult, nullableTCK.methodWithNullableListApiReturn, assertRefedInterface1Equals);
-//  shared test void testNullableListDataObject() => testNullableList(ArrayList { TestDataObject { foo="foo_value"; bar=12345; wibble=5.6; } }, nullableTCK.methodWithNullableListDataObjectParam, nullableTCK.methodWithNullableListDataObjectHandler, nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult, nullableTCK.methodWithNullableListDataObjectReturn, assertTestDataObjectEquals);
-//  shared test void testNullableListEnum() => testNullableList(ArrayList { "TIM", "JULIEN" }, nullableTCK.methodWithNullableListEnumParam, nullableTCK.methodWithNullableListEnumHandler, nullableTCK.methodWithNullableListEnumHandlerAsyncResult, nullableTCK.methodWithNullableListEnumReturn);
-//  shared test void testNullableListGenEnum() => testNullableList(ArrayList { bob, leland }, nullableTCK.methodWithNullableListGenEnumParam, nullableTCK.methodWithNullableListGenEnumHandler, nullableTCK.methodWithNullableListGenEnumHandlerAsyncResult, nullableTCK.methodWithNullableListGenEnumReturn);
-//
-//  shared void testNullableList<T>(
-//    List<T> expected,
-//    Anything(Boolean,List<T>?) nullableListParamFunction,
-//    Anything(Boolean,Anything(List<T>?)) nullableListHandlerFunction,
-//    Anything(Boolean,Anything(List<T>?|Throwable)) nullableListHandlerAsyncResultFunction,
-//    List<T>?(Boolean) nullableListReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    void checkList(Anything actual) {
-//      assert(is List<T> actual);
-//      assertEquals(expected.size, actual.size);
-//      for (index->item in expected.indexed) {
-//        check(item, actual[index]);
-//      }
-//    }
-//    nullableListParamFunction(false, expected);
-//    nullableListParamFunction(true, null);
-//    variable Integer count = 0;
-//    void a(List<T>? list) {
-//      assertNull(list);
-//      count++;
-//    }
-//    nullableListHandlerFunction(false, a);
-//    void b(List<T>? list) {
-//      checkList(list);
-//      count++;
-//    }
-//    nullableListHandlerFunction(true, b);
-//    void c(List<T>?|Throwable list) {
-//      assertNull(list);
-//      count++;
-//    }
-//    nullableListHandlerAsyncResultFunction(false, c);
-//    void d(List<T>?|Throwable list) {
-//      checkList(list);
-//      count++;
-//    }
-//    nullableListHandlerAsyncResultFunction(true, d);
-//    assertNull(nullableListReturnFunction(false));
-//    checkList(nullableListReturnFunction(true));
-//    assertEquals(4, count);
-//  }
-//
-//  shared test void testNullableSetByte() => testNullableSet(HashSet { 12.byte,24.byte,(-12).byte }, nullableTCK.methodWithNullableSetByteParam, nullableTCK.methodWithNullableSetByteHandler, nullableTCK.methodWithNullableSetByteHandlerAsyncResult, nullableTCK.methodWithNullableSetByteReturn);
-//  shared test void testNullableSetShort() => testNullableSet(HashSet { 520,1040,-520 }, nullableTCK.methodWithNullableSetShortParam, nullableTCK.methodWithNullableSetShortHandler, nullableTCK.methodWithNullableSetShortHandlerAsyncResult, nullableTCK.methodWithNullableSetShortReturn);
-//  shared test void testNullableSetInteger() => testNullableSet(HashSet { 12345,54321,-12345 }, nullableTCK.methodWithNullableSetIntegerParam, nullableTCK.methodWithNullableSetIntegerHandler, nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult, nullableTCK.methodWithNullableSetIntegerReturn);
-//  shared test void testNullableSetLong() => testNullableSet(HashSet { 123456789,987654321,-123456789 }, nullableTCK.methodWithNullableSetLongParam, nullableTCK.methodWithNullableSetLongHandler, nullableTCK.methodWithNullableSetLongHandlerAsyncResult, nullableTCK.methodWithNullableSetLongReturn);
-//  shared test void testNullableSetFloat() => testNullableSet(HashSet { 1.1,2.2,3.3 }, nullableTCK.methodWithNullableSetFloatParam, nullableTCK.methodWithNullableSetFloatHandler, nullableTCK.methodWithNullableSetFloatHandlerAsyncResult, nullableTCK.methodWithNullableSetFloatReturn, assertFloatEquals);
-//  shared test void testNullableSetDouble() => testNullableSet(HashSet { 1.11,2.22,3.33 }, nullableTCK.methodWithNullableSetDoubleParam, nullableTCK.methodWithNullableSetDoubleHandler, nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult, nullableTCK.methodWithNullableSetDoubleReturn, assertFloatEquals);
-//  shared test void testNullableSetBoolean() => testNullableSet(HashSet { true,false }, nullableTCK.methodWithNullableSetBooleanParam, nullableTCK.methodWithNullableSetBooleanHandler, nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult, nullableTCK.methodWithNullableSetBooleanReturn);
-//  shared test void testNullableSetString() => testNullableSet(HashSet { "first","second","third" }, nullableTCK.methodWithNullableSetStringParam, nullableTCK.methodWithNullableSetStringHandler, nullableTCK.methodWithNullableSetStringHandlerAsyncResult, nullableTCK.methodWithNullableSetStringReturn);
-//  shared test void testNullableSetChar() => testNullableSet(HashSet { 'x','y','z' }, nullableTCK.methodWithNullableSetCharParam, nullableTCK.methodWithNullableSetCharHandler, nullableTCK.methodWithNullableSetCharHandlerAsyncResult, nullableTCK.methodWithNullableSetCharReturn);
-//  shared test void testNullableSetJsonObject() => testNullableSet(HashSet { JsonObject { "foo"->"bar" }, JsonObject { "juu"->3 } }, nullableTCK.methodWithNullableSetJsonObjectParam, nullableTCK.methodWithNullableSetJsonObjectHandler, nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult, nullableTCK.methodWithNullableSetJsonObjectReturn);
-//  shared test void testNullableSetJsonArray() => testNullableSet(HashSet { JsonArray { "foo","bar" }, JsonArray { "juu" } }, nullableTCK.methodWithNullableSetJsonArrayParam, nullableTCK.methodWithNullableSetJsonArrayHandler, nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult, nullableTCK.methodWithNullableSetJsonArrayReturn);
-//  shared test void testNullableSetApi() => testNullableSet(HashSet { RefedInterface1(RefedInterface1Impl().setString("refed_is_here")) }, nullableTCK.methodWithNullableSetApiParam, nullableTCK.methodWithNullableSetApiHandler, nullableTCK.methodWithNullableSetApiHandlerAsyncResult, nullableTCK.methodWithNullableSetApiReturn, assertRefedInterface1Equals);
-//  shared test void testNullableSetDataObject() => testNullableSet(HashSet { TestDataObject { foo="foo_value"; bar=12345; wibble=5.6; } }, nullableTCK.methodWithNullableSetDataObjectParam, nullableTCK.methodWithNullableSetDataObjectHandler, nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult, nullableTCK.methodWithNullableSetDataObjectReturn, assertTestDataObjectEquals);
-//  shared test void testNullableSetEnum() => testNullableSet(HashSet { "TIM", "JULIEN" }, nullableTCK.methodWithNullableSetEnumParam, nullableTCK.methodWithNullableSetEnumHandler, nullableTCK.methodWithNullableSetEnumHandlerAsyncResult, nullableTCK.methodWithNullableSetEnumReturn);
-//  shared test void testNullableSetGenEnum() => testNullableSet(HashSet { bob, leland }, nullableTCK.methodWithNullableSetGenEnumParam, nullableTCK.methodWithNullableSetGenEnumHandler, nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult, nullableTCK.methodWithNullableSetGenEnumReturn);
-//
-//  shared void testNullableSet<T>(
-//    Set<T> expected,
-//    Anything(Boolean,Set<T>?) nullableSetParamFunction,
-//    Anything(Boolean,Anything(Set<T>?)) nullableSetHandlerFunction,
-//    Anything(Boolean,Anything(Set<T>?|Throwable)) nullableSetHandlerAsyncResultFunction,
-//    Set<T>?(Boolean) nullableSetReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    void checkSet(Anything actual) {
-//      assert(is Set<T> actual);
-//      assertEquals(expected.size, actual.size);
-//      variable Integer count = 0;
-//      for (expectedItem in expected) {
-//        for (actualItem in actual) {
-//          try {
-//            check(expectedItem, actualItem);
-//            count++;
-//            break;
-//          } catch (Throwable ignore) {
-//          }
-//        }
-//      }
-//      assertEquals(expected.size, count);
-//    }
-//    nullableSetParamFunction(false, expected);
-//    nullableSetParamFunction(true, null);
-//    variable Integer count = 0;
-//    void a(Set<T>? set) {
-//      assertNull(set);
-//      count++;
-//    }
-//    nullableSetHandlerFunction(false, a);
-//    void b(Set<T>? set) {
-//      checkSet(set);
-//      count++;
-//    }
-//    nullableSetHandlerFunction(true, b);
-//    void c(Set<T>?|Throwable set) {
-//      assertNull(set);
-//      count++;
-//    }
-//    nullableSetHandlerAsyncResultFunction(false, c);
-//    void d(Set<T>?|Throwable set) {
-//      checkSet(set);
-//      count++;
-//    }
-//    nullableSetHandlerAsyncResultFunction(true, d);
-//    assertNull(nullableSetReturnFunction(false));
-//    checkSet(nullableSetReturnFunction(true));
-//    assertEquals(4, count);
-//  }
-//
-//  shared test void testNullableMapByte() => testNullableMap(ArrayList { 1.byte,2.byte,3.byte }, nullableTCK.methodWithNullableMapByteParam, nullableTCK.methodWithNullableMapByteHandler, nullableTCK.methodWithNullableMapByteHandlerAsyncResult, nullableTCK.methodWithNullableMapByteReturn);
-//  shared test void testNullableMapShort() => testNullableMap(ArrayList { 1,2,3 }, nullableTCK.methodWithNullableMapShortParam, nullableTCK.methodWithNullableMapShortHandler, nullableTCK.methodWithNullableMapShortHandlerAsyncResult, nullableTCK.methodWithNullableMapShortReturn);
-//  shared test void testNullableMapInteger() => testNullableMap(ArrayList { 1,2,3 }, nullableTCK.methodWithNullableMapIntegerParam, nullableTCK.methodWithNullableMapIntegerHandler, nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult, nullableTCK.methodWithNullableMapIntegerReturn);
-//  shared test void testNullableMapLong() => testNullableMap(ArrayList { 1,2,3 }, nullableTCK.methodWithNullableMapLongParam, nullableTCK.methodWithNullableMapLongHandler, nullableTCK.methodWithNullableMapLongHandlerAsyncResult, nullableTCK.methodWithNullableMapLongReturn);
-//  shared test void testNullableMapFloat() => testNullableMap(ArrayList { 1.1,2.2,3.3 }, nullableTCK.methodWithNullableMapFloatParam, nullableTCK.methodWithNullableMapFloatHandler, nullableTCK.methodWithNullableMapFloatHandlerAsyncResult, nullableTCK.methodWithNullableMapFloatReturn, assertFloatEquals);
-//  shared test void testNullableMapDouble() => testNullableMap(ArrayList { 1.11,2.22,3.33 }, nullableTCK.methodWithNullableMapDoubleParam, nullableTCK.methodWithNullableMapDoubleHandler, nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult, nullableTCK.methodWithNullableMapDoubleReturn, assertFloatEquals);
-//  shared test void testNullableMapBoolean() => testNullableMap(ArrayList { true, false, true }, nullableTCK.methodWithNullableMapBooleanParam, nullableTCK.methodWithNullableMapBooleanHandler, nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult, nullableTCK.methodWithNullableMapBooleanReturn);
-//  shared test void testNullableMapString() => testNullableMap(ArrayList { "first","second","third" }, nullableTCK.methodWithNullableMapStringParam, nullableTCK.methodWithNullableMapStringHandler, nullableTCK.methodWithNullableMapStringHandlerAsyncResult, nullableTCK.methodWithNullableMapStringReturn);
-//  shared test void testNullableMapChar() => testNullableMap(ArrayList { 'x','y','z' }, nullableTCK.methodWithNullableMapCharParam, nullableTCK.methodWithNullableMapCharHandler, nullableTCK.methodWithNullableMapCharHandlerAsyncResult, nullableTCK.methodWithNullableMapCharReturn);
-//  shared test void testNullableMapJsonObject() => testNullableMap(ArrayList { JsonObject { "foo"->"bar" }, JsonObject { "juu"->3 } }, nullableTCK.methodWithNullableMapJsonObjectParam, nullableTCK.methodWithNullableMapJsonObjectHandler, nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult, nullableTCK.methodWithNullableMapJsonObjectReturn);
-//  shared test void testNullableMapJsonArray() => testNullableMap(ArrayList { JsonArray { "foo","bar" }, JsonArray { "juu" } }, nullableTCK.methodWithNullableMapJsonArrayParam, nullableTCK.methodWithNullableMapJsonArrayHandler, nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult, nullableTCK.methodWithNullableMapJsonArrayReturn);
-//  shared test void testNullableMapApi() => testNullableMapIn(ArrayList { RefedInterface1(RefedInterface1Impl().setString("refed_is_here")) }, nullableTCK.methodWithNullableMapApiParam, assertRefedInterface1Equals);
-//
-//  shared void testNullableMap<T>(
-//    List<T> expected,
-//    Anything(Boolean,Map<String, T>?) nullableMapParamFunction,
-//    Anything(Boolean,Anything(Map<String, T>?)) nullableMapHandlerFunction,
-//    Anything(Boolean,Anything(Map<String, T>?|Throwable)) nullableMapHandlerAsyncResultFunction,
-//    Map<String, T>?(Boolean) nullableMapReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    testNullableMapIn(expected, nullableMapParamFunction, check);
-//    testNullableMapOut(expected, nullableMapHandlerFunction, nullableMapHandlerAsyncResultFunction, nullableMapReturnFunction, check);
-//  }
-//
-//  shared void testNullableMapIn<T>(
-//    List<T> expected,
-//    Anything(Boolean,Map<String, T>?) nullableMapParamFunction,
-//    Anything(Anything,Anything) check
-//    ) {
-//    HashMap<String, T> map = HashMap<String, T>();
-//    for (index->item in expected.indexed) {
-//      map.put("``(index + 1)``", item);
-//    }
-//    nullableMapParamFunction(false, map);
-//    nullableMapParamFunction(true, null);
-//  }
-//
-//  shared void testNullableMapOut<T>(
-//    List<T> expected,
-//    Anything(Boolean,Anything(Map<String, T>?)) nullableMapHandlerFunction,
-//    Anything(Boolean,Anything(Map<String, T>?|Throwable)) nullableMapHandlerAsyncResultFunction,
-//    Map<String, T>?(Boolean) nullableMapReturnFunction,
-//    Anything(Anything,Anything) check
-//    ) {
-//    void checkMap(Anything actual) {
-//      assert(is Map<String, T> actual);
-//      assertEquals(expected.size, actual.size);
-//      for (index->item in expected.indexed) {
-//        check(item, actual["``(index + 1)``"]);
-//      }
-//    }
-//    variable Integer count = 0;
-//    void a(Map<String, T>? set) {
-//      assertNull(set);
-//      count++;
-//    }
-//    nullableMapHandlerFunction(false, a);
-//    void b(Map<String, T>? set) {
-//      checkMap(set);
-//      count++;
-//    }
-//    nullableMapHandlerFunction(true, b);
-//    void c(Map<String, T>?|Throwable set) {
-//      assertNull(set);
-//      count++;
-//    }
-//    nullableMapHandlerAsyncResultFunction(false, c);
-//    void d(Map<String, T>?|Throwable set) {
-//      checkMap(set);
-//      count++;
-//    }
-//    nullableMapHandlerAsyncResultFunction(true, d);
-//    assertNull(nullableMapReturnFunction(false));
-//    checkMap(nullableMapReturnFunction(true));
-//    assertEquals(4, count);
-//  }
-//
+  "testNullableListShort" should "work" in {
+    import collection.JavaConverters._
+    val testListShort = List(520.toShort,1040.toShort,(-520).toShort)
+    nullableTCK.methodWithNullableListShortParam(true, None)
+    nullableTCK.methodWithNullableListShortParam(false, Option(testListShort))
+    nullableTCK.methodWithNullableListShortHandler(true, b => assert(testListShort == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListShortHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListShortHandlerAsyncResult(true, b => {w{assert(testListShort.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListShortReturn(true)
+    nullableTCK.methodWithNullableListShortReturn(false)
+  }
+
+  "testNullableListInteger" should "work" in {
+    import collection.JavaConverters._
+    val testListInteger = List(12345,54321,-12345)
+    nullableTCK.methodWithNullableListIntegerParam(true, None)
+    nullableTCK.methodWithNullableListIntegerParam(false, Option(testListInteger))
+    nullableTCK.methodWithNullableListIntegerHandler(true, b => assert(testListInteger == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListIntegerHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListIntegerHandlerAsyncResult(true, b => {w{assert(testListInteger.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListIntegerReturn(true)
+    nullableTCK.methodWithNullableListIntegerReturn(false)
+  }
+
+  "testNullableListLong" should "work" in {
+    import collection.JavaConverters._
+    val testListLong = List(123456789l,987654321l,-123456789l)
+    nullableTCK.methodWithNullableListLongParam(true, None)
+    nullableTCK.methodWithNullableListLongParam(false, Option(testListLong))
+    nullableTCK.methodWithNullableListLongHandler(true, b => assert(testListLong == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListLongHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListLongHandlerAsyncResult(true, b => {w{assert(testListLong.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListLongReturn(true)
+    nullableTCK.methodWithNullableListLongReturn(false)
+  }
+
+  "testNullableListFloat" should "work" in {
+    import collection.JavaConverters._
+    val testListFloat = List(1.1f,2.2f,3.3f)
+    nullableTCK.methodWithNullableListFloatParam(true, None)
+    nullableTCK.methodWithNullableListFloatParam(false, Option(testListFloat))
+    nullableTCK.methodWithNullableListFloatHandler(true, b => assert(testListFloat == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListFloatHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListFloatHandlerAsyncResult(true, b => {w{assert(testListFloat.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListFloatReturn(true)
+    nullableTCK.methodWithNullableListFloatReturn(false)
+  }
+
+  "testNullableListDouble" should "work" in {
+    import collection.JavaConverters._
+    val testListDouble = List(1.11,2.22,3.33)
+    nullableTCK.methodWithNullableListDoubleParam(true, None)
+    nullableTCK.methodWithNullableListDoubleParam(false, Option(testListDouble))
+    nullableTCK.methodWithNullableListDoubleHandler(true, b => assert(testListDouble == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListDoubleHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListDoubleHandlerAsyncResult(true, b => {w{assert(testListDouble.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListDoubleReturn(true)
+    nullableTCK.methodWithNullableListDoubleReturn(false)
+  }
+
+  "testNullableListBoolean" should "work" in {
+    import collection.JavaConverters._
+    val testListBoolean = List( true,false,true)
+    nullableTCK.methodWithNullableListBooleanParam(true, None)
+    nullableTCK.methodWithNullableListBooleanParam(false, Option(testListBoolean))
+    nullableTCK.methodWithNullableListBooleanHandler(true, b => assert(testListBoolean == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListBooleanHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListBooleanHandlerAsyncResult(true, b => {w{assert(testListBoolean.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListBooleanReturn(true)
+    nullableTCK.methodWithNullableListBooleanReturn(false)
+  }
+
+  "testNullableListString" should "work" in {
+    import collection.JavaConverters._
+    val testListString = List("first","second","third")
+    nullableTCK.methodWithNullableListStringParam(true, None)
+    nullableTCK.methodWithNullableListStringParam(false, Option(testListString))
+    nullableTCK.methodWithNullableListStringHandler(true, b => assert(testListString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListStringHandlerAsyncResult(true, b => {w{assert(testListString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListStringReturn(true)
+    nullableTCK.methodWithNullableListStringReturn(false)
+  }
+
+  "testNullableListChar" should "work" in {
+    import collection.JavaConverters._
+    val testListChar = List('x','y','z')
+    nullableTCK.methodWithNullableListCharParam(true, None)
+    nullableTCK.methodWithNullableListCharParam(false, Option(testListChar))
+    nullableTCK.methodWithNullableListCharHandler(true, b => assert(testListChar == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListCharHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListCharHandlerAsyncResult(true, b => {w{assert(testListChar.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListCharReturn(true)
+    nullableTCK.methodWithNullableListCharReturn(false)
+  }
+
+  "testNullableListJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonObject = List(Json.obj(("foo","bar")), Json.obj(("juu",3)))
+    nullableTCK.methodWithNullableListJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableListJsonObjectParam(false, Option(testListJsonObject))
+    nullableTCK.methodWithNullableListJsonObjectHandler(true, b => assert(testListJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResult(true, b => {w{assert(testListJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListJsonObjectReturn(true)
+    nullableTCK.methodWithNullableListJsonObjectReturn(false)
+  }
+
+  "testNullableListJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonArray = List(Json.arr("foo","bar"), Json.arr("juu"))
+    nullableTCK.methodWithNullableListJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableListJsonArrayParam(false, Option(testListJsonArray))
+    nullableTCK.methodWithNullableListJsonArrayHandler(true, b => assert(testListJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResult(true, b => {w{assert(testListJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListJsonArrayReturn(true)
+    nullableTCK.methodWithNullableListJsonArrayReturn(false)
+  }
+
+  "testNullableListApi" should "work" in {
+    import collection.JavaConverters._
+    val iface = new RefedInterface1Impl().setString("refed_is_here")
+    val testListApi = List(RefedInterface1(iface))
+    nullableTCK.methodWithNullableListApiParam(true, None)
+    nullableTCK.methodWithNullableListApiParam(false, Option(testListApi))
+    nullableTCK.methodWithNullableListApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListApiHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListApiHandlerAsyncResult(true, b => {w{assert(b.result().asScala.forall(a => a == iface))}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListApiReturn(true)
+    nullableTCK.methodWithNullableListApiReturn(false)
+  }
+
+  "testNullableListDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json = Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))
+    val testListDataObject = List(new TestDataObject(json))
+    nullableTCK.methodWithNullableListDataObjectParam(true, None)
+    nullableTCK.methodWithNullableListDataObjectParam(false, Option(testListDataObject))
+    nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.forall(a => a.toJson == json)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListDataObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(true, b => {w{assert(testListDataObject.forall(a => a.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListDataObjectReturn(true)
+    nullableTCK.methodWithNullableListDataObjectReturn(false)
+  }
+
+  "testNullableListEnum" should "work" in {
+    import collection.JavaConverters._
+    val testListEnum = List(TestEnum.TIM, TestEnum.JULIEN)
+    nullableTCK.methodWithNullableListEnumParam(true, None)
+    nullableTCK.methodWithNullableListEnumParam(false, Option(testListEnum))
+    nullableTCK.methodWithNullableListEnumHandler(true, b => assert(testListEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListEnumHandlerAsyncResult(true, b => {w{assert(testListEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListEnumReturn(true)
+    nullableTCK.methodWithNullableListEnumReturn(false)
+  }
+
+  "testNullableListGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testListGenEnum = List(TestGenEnum.BOB, TestGenEnum.LELAND)
+    nullableTCK.methodWithNullableListGenEnumParam(true, None)
+    nullableTCK.methodWithNullableListGenEnumParam(false, Option(testListGenEnum))
+    nullableTCK.methodWithNullableListGenEnumHandler(true, b => assert(testListGenEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableListGenEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableListGenEnumHandlerAsyncResult(true, b => {w{assert(testListGenEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableListGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableListGenEnumReturn(true)
+    nullableTCK.methodWithNullableListGenEnumReturn(false)
+  }
+
+
+
+
+
+
+
+
+
+
+
+  "testNullableSetByte" should "work" in {
+    import collection.JavaConverters._
+    val testSetByte = Set(12.toByte,24.toByte,(-12).toByte)
+    nullableTCK.methodWithNullableSetByteParam(true, None)
+    nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
+    nullableTCK.methodWithNullableSetByteHandler(true, b => assert(testSetByte == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetByteHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetByteHandlerAsyncResult(true, b => {w{assert(testSetByte.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetByteReturn(true)
+    nullableTCK.methodWithNullableSetByteReturn(false)
+  }
+
+  "testNullableSetShort" should "work" in {
+    import collection.JavaConverters._
+    val testSetShort = Set(520.toShort,1040.toShort,(-520).toShort)
+    nullableTCK.methodWithNullableSetShortParam(true, None)
+    nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
+    nullableTCK.methodWithNullableSetShortHandler(true, b => assert(testSetShort == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetShortHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetShortHandlerAsyncResult(true, b => {w{assert(testSetShort.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetShortReturn(true)
+    nullableTCK.methodWithNullableSetShortReturn(false)
+  }
+
+  "testNullableSetInteger" should "work" in {
+    import collection.JavaConverters._
+    val testSetInteger = Set(12345,54321,-12345)
+    nullableTCK.methodWithNullableSetIntegerParam(true, None)
+    nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
+    nullableTCK.methodWithNullableSetIntegerHandler(true, b => assert(testSetInteger == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetIntegerHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(true, b => {w{assert(testSetInteger.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetIntegerReturn(true)
+    nullableTCK.methodWithNullableSetIntegerReturn(false)
+  }
+
+  "testNullableSetLong" should "work" in {
+    import collection.JavaConverters._
+    val testSetLong = Set(123456789l,987654321l,-123456789l)
+    nullableTCK.methodWithNullableSetLongParam(true, None)
+    nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
+    nullableTCK.methodWithNullableSetLongHandler(true, b => assert(testSetLong == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetLongHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetLongHandlerAsyncResult(true, b => {w{assert(testSetLong.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetLongReturn(true)
+    nullableTCK.methodWithNullableSetLongReturn(false)
+  }
+
+  "testNullableSetFloat" should "work" in {
+    import collection.JavaConverters._
+    val testSetFloat = Set(1.1f,2.2f,3.3f)
+    nullableTCK.methodWithNullableSetFloatParam(true, None)
+    nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
+    nullableTCK.methodWithNullableSetFloatHandler(true, b => assert(testSetFloat == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetFloatHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(true, b => {w{assert(testSetFloat.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetFloatReturn(true)
+    nullableTCK.methodWithNullableSetFloatReturn(false)
+  }
+
+  "testNullableSetDouble" should "work" in {
+    import collection.JavaConverters._
+    val testSetDouble = Set(1.11,2.22,3.33)
+    nullableTCK.methodWithNullableSetDoubleParam(true, None)
+    nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
+    nullableTCK.methodWithNullableSetDoubleHandler(true, b => assert(testSetDouble == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetDoubleHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(true, b => {w{assert(testSetDouble.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetDoubleReturn(true)
+    nullableTCK.methodWithNullableSetDoubleReturn(false)
+  }
+
+  "testNullableSetBoolean" should "work" in {
+    import collection.JavaConverters._
+    val testSetBoolean = Set( true,false,true)
+    nullableTCK.methodWithNullableSetBooleanParam(true, None)
+    nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
+    nullableTCK.methodWithNullableSetBooleanHandler(true, b => assert(testSetBoolean == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetBooleanHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(true, b => {w{assert(testSetBoolean.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetBooleanReturn(true)
+    nullableTCK.methodWithNullableSetBooleanReturn(false)
+  }
+
+  "testNullableSetString" should "work" in {
+    import collection.JavaConverters._
+    val testSetString = Set("first","second","third")
+    nullableTCK.methodWithNullableSetStringParam(true, None)
+    nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
+    nullableTCK.methodWithNullableSetStringHandler(true, b => assert(testSetString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetStringHandlerAsyncResult(true, b => {w{assert(testSetString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetStringReturn(true)
+    nullableTCK.methodWithNullableSetStringReturn(false)
+  }
+
+  "testNullableSetChar" should "work" in {
+    import collection.JavaConverters._
+    val testSetChar = Set('x','y','z')
+    nullableTCK.methodWithNullableSetCharParam(true, None)
+    nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
+    nullableTCK.methodWithNullableSetCharHandler(true, b => assert(testSetChar == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetCharHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetCharHandlerAsyncResult(true, b => {w{assert(testSetChar.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetCharReturn(true)
+    nullableTCK.methodWithNullableSetCharReturn(false)
+  }
+
+  "testNullableSetJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonObject = Set(Json.obj(("foo","bar")), Json.obj(("juu",3)))
+    nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(true, b => assert(testSetJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(true, b => {w{assert(testSetJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetJsonObjectReturn(true)
+    nullableTCK.methodWithNullableSetJsonObjectReturn(false)
+  }
+
+  "testNullableSetJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonArray = Set(Json.arr("foo","bar"), Json.arr("juu"))
+    nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(true, b => assert(testSetJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(true, b => {w{assert(testSetJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetJsonArrayReturn(true)
+    nullableTCK.methodWithNullableSetJsonArrayReturn(false)
+  }
+
+  "testNullableSetApi" should "work" in {
+    import collection.JavaConverters._
+    val iface = new RefedInterface1Impl().setString("refed_is_here")
+    val testSetApi = Set(RefedInterface1(iface))
+    nullableTCK.methodWithNullableSetApiParam(true, None)
+    nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
+    nullableTCK.methodWithNullableSetApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetApiHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetApiHandlerAsyncResult(true, b => {w{assert(b.result().asScala.forall(a => a == iface))}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetApiReturn(true)
+    nullableTCK.methodWithNullableSetApiReturn(false)
+  }
+
+  "testNullableSetDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json = Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))
+    val testSetDataObject = Set(new TestDataObject(json))
+    nullableTCK.methodWithNullableSetDataObjectParam(true, None)
+    nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
+    nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.toJson == json)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetDataObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(true, b => {w{assert(testSetDataObject.forall(a => a.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetDataObjectReturn(true)
+    nullableTCK.methodWithNullableSetDataObjectReturn(false)
+  }
+
+  "testNullableSetEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetEnum = Set(TestEnum.TIM, TestEnum.JULIEN)
+    nullableTCK.methodWithNullableSetEnumParam(true, None)
+    nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
+    nullableTCK.methodWithNullableSetEnumHandler(true, b => assert(testSetEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(true, b => {w{assert(testSetEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetEnumReturn(true)
+    nullableTCK.methodWithNullableSetEnumReturn(false)
+  }
+
+  "testNullableSetGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetGenEnum = Set(TestGenEnum.BOB, TestGenEnum.LELAND)
+    nullableTCK.methodWithNullableSetGenEnumParam(true, None)
+    nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
+    nullableTCK.methodWithNullableSetGenEnumHandler(true, b => assert(testSetGenEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableSetGenEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(true, b => {w{assert(testSetGenEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableSetGenEnumReturn(true)
+    nullableTCK.methodWithNullableSetGenEnumReturn(false)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "testNullableMapByte" should "work" in {
+    import collection.JavaConverters._
+    val testMapByte = Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
+    nullableTCK.methodWithNullableMapByteParam(true, None)
+    nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
+    nullableTCK.methodWithNullableMapByteHandler(true, b => assert(testMapByte == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapByteHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapByteHandlerAsyncResult(true, b => {w{assert(testMapByte.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapByteReturn(true)
+    nullableTCK.methodWithNullableMapByteReturn(false)
+  }
+
+  "testNullableMapShort" should "work" in {
+    import collection.JavaConverters._
+    val testMapShort = Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
+    nullableTCK.methodWithNullableMapShortParam(true, None)
+    nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
+    nullableTCK.methodWithNullableMapShortHandler(true, b => assert(testMapShort == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapShortHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapShortHandlerAsyncResult(true, b => {w{assert(testMapShort.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapShortReturn(true)
+    nullableTCK.methodWithNullableMapShortReturn(false)
+  }
+
+  "testNullableMapInteger" should "work" in {
+    import collection.JavaConverters._
+    val testMapInteger = Map("1" -> 1,"2" -> 2, "3" -> 3)
+    nullableTCK.methodWithNullableMapIntegerParam(true, None)
+    nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
+    nullableTCK.methodWithNullableMapIntegerHandler(true, b => assert(testMapInteger == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapIntegerHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(true, b => {w{assert(testMapInteger.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapIntegerReturn(true)
+    nullableTCK.methodWithNullableMapIntegerReturn(false)
+  }
+
+  "testNullableMapLong" should "work" in {
+    import collection.JavaConverters._
+    val testMapLong = Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
+    nullableTCK.methodWithNullableMapLongParam(true, None)
+    nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
+    nullableTCK.methodWithNullableMapLongHandler(true, b => assert(testMapLong == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapLongHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapLongHandlerAsyncResult(true, b => {w{assert(testMapLong.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapLongReturn(true)
+    nullableTCK.methodWithNullableMapLongReturn(false)
+  }
+
+  "testNullableMapFloat" should "work" in {
+    import collection.JavaConverters._
+    val testMapFloat = Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
+    nullableTCK.methodWithNullableMapFloatParam(true, None)
+    nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
+    nullableTCK.methodWithNullableMapFloatHandler(true, b => assert(testMapFloat == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapFloatHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(true, b => {w{assert(testMapFloat.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapFloatReturn(true)
+    nullableTCK.methodWithNullableMapFloatReturn(false)
+  }
+
+  "testNullableMapDouble" should "work" in {
+    import collection.JavaConverters._
+    val testMapDouble = Map("1" -> 1.11, "2" -> 2.22, "3" ->3.33)
+    nullableTCK.methodWithNullableMapDoubleParam(true, None)
+    nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
+    nullableTCK.methodWithNullableMapDoubleHandler(true, b => assert(testMapDouble == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapDoubleHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(true, b => {w{assert(testMapDouble.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapDoubleReturn(true)
+    nullableTCK.methodWithNullableMapDoubleReturn(false)
+  }
+
+  "testNullableMapBoolean" should "work" in {
+    import collection.JavaConverters._
+    val testMapBoolean = Map( "1" -> true, "2" -> false, "3" -> true)
+    nullableTCK.methodWithNullableMapBooleanParam(true, None)
+    nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
+    nullableTCK.methodWithNullableMapBooleanHandler(true, b => assert(testMapBoolean == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapBooleanHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(true, b => {w{assert(testMapBoolean.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapBooleanReturn(true)
+    nullableTCK.methodWithNullableMapBooleanReturn(false)
+  }
+
+  "testNullableMapString" should "work" in {
+    import collection.JavaConverters._
+    val testMapString = Map("1" -> "first", "2" -> "second", "3" -> "third")
+    nullableTCK.methodWithNullableMapStringParam(true, None)
+    nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
+    nullableTCK.methodWithNullableMapStringHandler(true, b => assert(testMapString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapStringHandlerAsyncResult(true, b => {w{assert(testMapString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapStringReturn(true)
+    nullableTCK.methodWithNullableMapStringReturn(false)
+  }
+
+  "testNullableMapChar" should "work" in {
+    import collection.JavaConverters._
+    val testMapChar = Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
+    nullableTCK.methodWithNullableMapCharParam(true, None)
+    nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
+    nullableTCK.methodWithNullableMapCharHandler(true, b => assert(testMapChar == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapCharHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapCharHandlerAsyncResult(true, b => {w{assert(testMapChar.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapCharReturn(true)
+    nullableTCK.methodWithNullableMapCharReturn(false)
+  }
+
+  "testNullableMapJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonObject = Map("1" -> Json.obj(("foo","bar")), "2" -> Json.obj(("juu",3)))
+    nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(true, b => assert(testMapJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(true, b => {w{assert(testMapJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapJsonObjectReturn(true)
+    nullableTCK.methodWithNullableMapJsonObjectReturn(false)
+  }
+
+  "testNullableMapJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonArray = Map("1" -> Json.arr("foo","bar"), "2" -> Json.arr("juu"))
+    nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
+    nullableTCK.methodWithNullableMapJsonArrayHandler(true, b => assert(testMapJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(true, b => {w{assert(testMapJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableMapJsonArrayReturn(true)
+    nullableTCK.methodWithNullableMapJsonArrayReturn(false)
+  }
+
+  "testNullableMapApi" should "work" in {
+    import collection.JavaConverters._
+    val iface = new RefedInterface1Impl().setString("refed_is_here")
+    val testMapApi = Map("1" -> RefedInterface1(iface))
+    nullableTCK.methodWithNullableMapApiParam(true, None)
+    nullableTCK.methodWithNullableMapApiParam(false, Option(testMapApi))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableMapApiHandler(false, b => println(b))
+  }
+
+
+
+
+
+
+
+//TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
 //  shared test void testListNullableByte() => testListNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithListNullableByteParam, nullableTCK.methodWithListNullableByteHandler, nullableTCK.methodWithListNullableByteHandlerAsyncResult, nullableTCK.methodWithListNullableByteReturn);
 //  shared test void testListNullableShort() => testListNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithListNullableShortParam, nullableTCK.methodWithListNullableShortHandler, nullableTCK.methodWithListNullableShortHandlerAsyncResult, nullableTCK.methodWithListNullableShortReturn);
 //  shared test void testListNullableInteger() => testListNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithListNullableIntegerParam, nullableTCK.methodWithListNullableIntegerHandler, nullableTCK.methodWithListNullableIntegerHandlerAsyncResult, nullableTCK.methodWithListNullableIntegerReturn);
@@ -1627,108 +2232,185 @@ class ApiTest extends FlatSpec with Matchers {
 //  shared test void testListNullableFloat() => testListNullable(ArrayList { 1.1,null,3.3 }, nullableTCK.methodWithListNullableFloatParam, nullableTCK.methodWithListNullableFloatHandler, nullableTCK.methodWithListNullableFloatHandlerAsyncResult, nullableTCK.methodWithListNullableFloatReturn, assertFloatEquals);
 //  shared test void testListNullableDouble() => testListNullable(ArrayList { 1.11,null,3.33 }, nullableTCK.methodWithListNullableDoubleParam, nullableTCK.methodWithListNullableDoubleHandler, nullableTCK.methodWithListNullableDoubleHandlerAsyncResult, nullableTCK.methodWithListNullableDoubleReturn, assertFloatEquals);
 //  shared test void testListNullableBoolean() => testListNullable(ArrayList { true,null,false }, nullableTCK.methodWithListNullableBooleanParam, nullableTCK.methodWithListNullableBooleanHandler, nullableTCK.methodWithListNullableBooleanHandlerAsyncResult, nullableTCK.methodWithListNullableBooleanReturn);
-//  shared test void testListNullableString() => testListNullable(ArrayList { "first",null,"third" }, nullableTCK.methodWithListNullableStringParam, nullableTCK.methodWithListNullableStringHandler, nullableTCK.methodWithListNullableStringHandlerAsyncResult, nullableTCK.methodWithListNullableStringReturn);
 //  shared test void testListNullableChar() => testListNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithListNullableCharParam, nullableTCK.methodWithListNullableCharHandler, nullableTCK.methodWithListNullableCharHandlerAsyncResult, nullableTCK.methodWithListNullableCharReturn);
-//  shared test void testListNullableJsonObject() => testListNullable(ArrayList { JsonObject { "foo"->"bar" }, null, JsonObject { "juu"->3 } }, nullableTCK.methodWithListNullableJsonObjectParam, nullableTCK.methodWithListNullableJsonObjectHandler, nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResult, nullableTCK.methodWithListNullableJsonObjectReturn);
-//  shared test void testListNullableJsonArray() => testListNullable(ArrayList { JsonArray { "foo","bar" }, null, JsonArray { "juu" } }, nullableTCK.methodWithListNullableJsonArrayParam, nullableTCK.methodWithListNullableJsonArrayHandler, nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResult, nullableTCK.methodWithListNullableJsonArrayReturn);
-//  shared test void testListNullableApi() => testListNullable(ArrayList { RefedInterface1(RefedInterface1Impl().setString("first")), null, RefedInterface1(RefedInterface1Impl().setString("third")) }, nullableTCK.methodWithListNullableApiParam, nullableTCK.methodWithListNullableApiHandler, nullableTCK.methodWithListNullableApiHandlerAsyncResult, nullableTCK.methodWithListNullableApiReturn, assertRefedInterface1Equals);
-//  shared test void testListNullableDataObject() => testListNullable(ArrayList { TestDataObject { foo="first"; bar=1; wibble=1.1; }, null, TestDataObject { foo="third"; bar=3; wibble=3.3; } }, nullableTCK.methodWithListNullableDataObjectParam, nullableTCK.methodWithListNullableDataObjectHandler, nullableTCK.methodWithListNullableDataObjectHandlerAsyncResult, nullableTCK.methodWithListNullableDataObjectReturn, assertTestDataObjectEquals);
-//  shared test void testListNullableGenEnum() => testListNullable(ArrayList { bob, null, leland }, nullableTCK.methodWithListNullableGenEnumParam, nullableTCK.methodWithListNullableGenEnumHandler, nullableTCK.methodWithListNullableGenEnumHandlerAsyncResult, nullableTCK.methodWithListNullableGenEnumReturn);
-//
-//  shared void testListNullable<T>(
-//    List<T?> expected,
-//    Anything(List<T?>) listNullableParamFunction,
-//    Anything(Anything(List<T?>)) listNullableHandlerFunction,
-//    Anything(Anything(List<T?>|Throwable)) listNullableHandlerAsyncResultFunction,
-//    List<T?>() listNullableReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    void checkList(List<T?> actual) {
-//      assertEquals(expected.size, actual.size);
-//      for (index->item in expected.indexed) {
-//        if (exists item) {
-//          check(item, actual[index]);
-//        } else {
-//          assertNull(actual[index]);
-//        }
-//      }
-//    }
-//    listNullableParamFunction(expected);
-//    variable Integer count = 0;
-//    void a(List<T?> list) {
-//      checkList(list);
-//      count++;
-//    }
-//    listNullableHandlerFunction(a);
-//    void b(List<T?>|Throwable list) {
-//      assert(is List<T?> list);
-//      checkList(list);
-//      count++;
-//    }
-//    listNullableHandlerAsyncResultFunction(b);
-//    checkList(listNullableReturnFunction());
-//    assertEquals(2, count);
-//  }
-//
-//  shared test void testSetNullableByte() => testSetNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithSetNullableByteParam, nullableTCK.methodWithSetNullableByteHandler, nullableTCK.methodWithSetNullableByteHandlerAsyncResult, nullableTCK.methodWithSetNullableByteReturn);
+
+
+  "testListNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testListString:List[String] = List("first",null,"third")
+    nullableTCK.methodWithListNullableStringParam(testListString)
+    nullableTCK.methodWithListNullableStringHandler(b => assert(testListString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithListNullableStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableStringHandlerAsyncResult(b => {w{assert(testListString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testListString == nullableTCK.methodWithListNullableStringReturn())
+  }
+
+  "testListNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonObject:List[JsonObject] = List(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
+    nullableTCK.methodWithListNullableJsonObjectParam(testListJsonObject)
+    nullableTCK.methodWithListNullableJsonObjectHandler(b => assert(testListJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithListNullableJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResult(b => {w{assert(testListJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testListJsonObject == nullableTCK.methodWithListNullableJsonObjectReturn())
+  }
+
+  "testListNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testListJsonArray:List[JsonArray] = List(Json.arr("foo","bar"), null, Json.arr("juu"))
+    nullableTCK.methodWithListNullableJsonArrayParam(testListJsonArray)
+    nullableTCK.methodWithListNullableJsonArrayHandler(b => assert(testListJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithListNullableJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResult(b => {w{assert(testListJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testListJsonArray == nullableTCK.methodWithListNullableJsonArrayReturn())
+  }
+
+  "testListNullableApi" should "work" in {
+    import collection.JavaConverters._
+    val iface1 = new RefedInterface1Impl().setString("first")
+    val iface2 = new RefedInterface1Impl().setString("third")
+    val testListApi:List[RefedInterface1] = List(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    nullableTCK.methodWithListNullableApiParam(testListApi)
+    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
+    //TODO: Missing @Nullable
+//        nullableTCK.methodWithListNullableApiHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableApiHandlerAsyncResult(b => {w{assert(testListApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testListApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithListNullableApiReturn().map(x => if( x!= null) x.asJava else null))
+  }
+
+  "testListNullableDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
+    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
+    val testListDataObject:List[TestDataObject] = List(new TestDataObject(json1), null, new TestDataObject(json2))
+    nullableTCK.methodWithListNullableDataObjectParam(testListDataObject)
+    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => if(x != null) x.toJson else null) == b.map(x => if(x != null) x.toJson else null)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithListNullableDataObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableDataObjectHandlerAsyncResult(b => {w{assert(testListDataObject.map(x => if(x != null) x.toJson else null) == b.result().asScala.map(x => if(x != null) x.toJson else null))}; w.dismiss()})
+    w.await()
+    assert(testListDataObject.map(x => if(x != null) x.toJson else null) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => if(x != null) x.toJson else null))
+  }
+
+  "testListNullableGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testListGenEnum:List[TestGenEnum] = List(TestGenEnum.BOB,null,TestGenEnum.LELAND)
+    nullableTCK.methodWithListNullableGenEnumParam(testListGenEnum)
+    nullableTCK.methodWithListNullableGenEnumHandler(b => assert(testListGenEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithListNullableGenEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithListNullableGenEnumHandlerAsyncResult(b => {w{assert(testListGenEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testListGenEnum == nullableTCK.methodWithListNullableGenEnumReturn())
+  }
+
+  //TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
+  //  shared test void testSetNullableByte() => testSetNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithSetNullableByteParam, nullableTCK.methodWithSetNullableByteHandler, nullableTCK.methodWithSetNullableByteHandlerAsyncResult, nullableTCK.methodWithSetNullableByteReturn);
 //  shared test void testSetNullableShort() => testSetNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithSetNullableShortParam, nullableTCK.methodWithSetNullableShortHandler, nullableTCK.methodWithSetNullableShortHandlerAsyncResult, nullableTCK.methodWithSetNullableShortReturn);
 //  shared test void testSetNullableInteger() => testSetNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithSetNullableIntegerParam, nullableTCK.methodWithSetNullableIntegerHandler, nullableTCK.methodWithSetNullableIntegerHandlerAsyncResult, nullableTCK.methodWithSetNullableIntegerReturn);
 //  shared test void testSetNullableLong() => testSetNullable(ArrayList { 123456789,null,987654321 }, nullableTCK.methodWithSetNullableLongParam, nullableTCK.methodWithSetNullableLongHandler, nullableTCK.methodWithSetNullableLongHandlerAsyncResult, nullableTCK.methodWithSetNullableLongReturn);
 //  shared test void testSetNullableFloat() => testSetNullable(ArrayList { 1.1,null,3.3 }, nullableTCK.methodWithSetNullableFloatParam, nullableTCK.methodWithSetNullableFloatHandler, nullableTCK.methodWithSetNullableFloatHandlerAsyncResult, nullableTCK.methodWithSetNullableFloatReturn, assertFloatEquals);
 //  shared test void testSetNullableDouble() => testSetNullable(ArrayList { 1.11,null,3.33 }, nullableTCK.methodWithSetNullableDoubleParam, nullableTCK.methodWithSetNullableDoubleHandler, nullableTCK.methodWithSetNullableDoubleHandlerAsyncResult, nullableTCK.methodWithSetNullableDoubleReturn, assertFloatEquals);
 //  shared test void testSetNullableBoolean() => testSetNullable(ArrayList { true,null,false }, nullableTCK.methodWithSetNullableBooleanParam, nullableTCK.methodWithSetNullableBooleanHandler, nullableTCK.methodWithSetNullableBooleanHandlerAsyncResult, nullableTCK.methodWithSetNullableBooleanReturn);
-//  shared test void testSetNullableString() => testSetNullable(ArrayList { "first",null,"third" }, nullableTCK.methodWithSetNullableStringParam, nullableTCK.methodWithSetNullableStringHandler, nullableTCK.methodWithSetNullableStringHandlerAsyncResult, nullableTCK.methodWithSetNullableStringReturn);
 //  shared test void testSetNullableChar() => testSetNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithSetNullableCharParam, nullableTCK.methodWithSetNullableCharHandler, nullableTCK.methodWithSetNullableCharHandlerAsyncResult, nullableTCK.methodWithSetNullableCharReturn);
-//  shared test void testSetNullableJsonObject() => testSetNullable(ArrayList { JsonObject { "foo"->"bar" }, null, JsonObject { "juu"->3 } }, nullableTCK.methodWithSetNullableJsonObjectParam, nullableTCK.methodWithSetNullableJsonObjectHandler, nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResult, nullableTCK.methodWithSetNullableJsonObjectReturn);
-//  shared test void testSetNullableJsonArray() => testSetNullable(ArrayList { JsonArray { "foo","bar" }, null, JsonArray { "juu" } }, nullableTCK.methodWithSetNullableJsonArrayParam, nullableTCK.methodWithSetNullableJsonArrayHandler, nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResult, nullableTCK.methodWithSetNullableJsonArrayReturn);
-//  shared test void testSetNullableApi() => testSetNullable(ArrayList { RefedInterface1(RefedInterface1Impl().setString("first")), null, RefedInterface1(RefedInterface1Impl().setString("third")) }, nullableTCK.methodWithSetNullableApiParam, nullableTCK.methodWithSetNullableApiHandler, nullableTCK.methodWithSetNullableApiHandlerAsyncResult, nullableTCK.methodWithSetNullableApiReturn, assertRefedInterface1Equals);
-//  shared test void testSetNullableDataObject() => testSetNullable(ArrayList { TestDataObject { foo="first"; bar=1; wibble=1.1; }, null, TestDataObject { foo="third"; bar=3; wibble=3.3; } }, nullableTCK.methodWithSetNullableDataObjectParam, nullableTCK.methodWithSetNullableDataObjectHandler, nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResult, nullableTCK.methodWithSetNullableDataObjectReturn, assertTestDataObjectEquals);
-//  shared test void testSetNullableGenEnum() => testSetNullable(ArrayList { bob, null, leland }, nullableTCK.methodWithSetNullableGenEnumParam, nullableTCK.methodWithSetNullableGenEnumHandler, nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResult, nullableTCK.methodWithSetNullableGenEnumReturn);
-//
-//  shared void testSetNullable<T>(
-//    List<T?> expected,
-//    Anything(Collection<T?>) setNullableParamFunction,
-//    Anything(Anything(Collection<T?>)) setNullableHandlerFunction,
-//    Anything(Anything(Collection<T?>|Throwable)) setNullableHandlerAsyncResultFunction,
-//    Collection<T?>() setNullableReturnFunction,
-//    Anything(Anything,Anything) check = assertEquals
-//    ) {
-//    void checkSet(Collection<T?> actual) {
-//      assertEquals(expected.size, actual.size);
-//      variable Integer count = 0;
-//      for (expectedItem in expected) {
-//        for (actualItem in actual) {
-//          try {
-//            if (exists expectedItem) {
-//              check(expectedItem, actualItem);
-//            } else {
-//              assertNull(actualItem);
-//            }
-//            count++;
-//            break;
-//          } catch (Throwable ignore) {
-//          }
-//        }
-//      }
-//      assertEquals(expected.size, count);
-//    }
-//    setNullableParamFunction(expected);
-//    variable Integer count = 0;
-//    void a(Collection<T?> set) {
-//      checkSet(set);
-//      count++;
-//    }
-//    setNullableHandlerFunction(a);
-//    void b(Collection<T?>|Throwable set) {
-//      assert(is Collection<T?> set);
-//      checkSet(set);
-//      count++;
-//    }
-//    setNullableHandlerAsyncResultFunction(b);
-//    checkSet(setNullableReturnFunction());
-//    assertEquals(2, count);
-//  }
-//
+
+  "testSetNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testSetString:Set[String] = Set("first",null,"third")
+    nullableTCK.methodWithSetNullableStringParam(testSetString)
+    nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithSetNullableStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithSetNullableStringHandlerAsyncResult(b => {w{assert(testSetString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testSetString == nullableTCK.methodWithSetNullableStringReturn())
+  }
+
+  "testSetNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonObject:Set[JsonObject] = Set(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
+    nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
+    nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithSetNullableJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResult(b => {w{assert(testSetJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testSetJsonObject == nullableTCK.methodWithSetNullableJsonObjectReturn())
+  }
+
+  "testSetNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testSetJsonArray:Set[JsonArray] = Set(Json.arr("foo","bar"), null, Json.arr("juu"))
+    nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
+    nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithSetNullableJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResult(b => {w{assert(testSetJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testSetJsonArray == nullableTCK.methodWithSetNullableJsonArrayReturn())
+  }
+
+  "testSetNullableApi" should "work" in {
+    import collection.JavaConverters._
+    val iface1 = new RefedInterface1Impl().setString("first")
+    val iface2 = new RefedInterface1Impl().setString("third")
+    val testSetApi:Set[RefedInterface1] = Set(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    //TODO: RefedInterface1Impl needs a nullsafe equals method!
+//    nullableTCK.methodWithSetNullableApiParam(testSetApi)
+//    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
+    //TODO: Missing @Nullable
+    //        nullableTCK.methodWithSetNullableApiHandler(false, b => println(b))
+//    val w = new Waiter()
+//    nullableTCK.methodWithSetNullableApiHandlerAsyncResult(b => {w{assert(testSetApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
+//    w.await()
+//    assert(testSetApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithSetNullableApiReturn().map(x => if( x!= null) x.asJava else null))
+  }
+
+  "testSetNullableDataObject" should "work" in {
+    import collection.JavaConverters._
+    val json1 = Json.obj(("foo","first"), ("bar",1), ("wibble",1.1))
+    val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
+    val testSetDataObject:Set[TestDataObject] = Set(new TestDataObject(json1), null, new TestDataObject(json2))
+    nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
+    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == b.map(x => if(x != null) x.toJson else null)))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithSetNullableDataObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResult(b => {w{assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == b.result().asScala.map(x => if(x != null) x.toJson else null))}; w.dismiss()})
+    w.await()
+    assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => if(x != null) x.toJson else null))
+  }
+
+  "testSetNullableGenEnum" should "work" in {
+    import collection.JavaConverters._
+    val testSetGenEnum:Set[TestGenEnum] = Set(TestGenEnum.BOB,null,TestGenEnum.LELAND)
+    nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
+    nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithSetNullableGenEnumHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResult(b => {w{assert(testSetGenEnum.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testSetGenEnum == nullableTCK.methodWithSetNullableGenEnumReturn())
+  }
+
+  //TODO there is no meaningful way to implement these in Scala as primitve nulls aren't possible
 //  shared test void testMapNullableByte() => testMapNullable(ArrayList { 12.byte,null,24.byte }, nullableTCK.methodWithMapNullableByteParam, nullableTCK.methodWithMapNullableByteHandler, nullableTCK.methodWithMapNullableByteHandlerAsyncResult, nullableTCK.methodWithMapNullableByteReturn);
 //  shared test void testMapNullableShort() => testMapNullable(ArrayList { 520,null,1040 }, nullableTCK.methodWithMapNullableShortParam, nullableTCK.methodWithMapNullableShortHandler, nullableTCK.methodWithMapNullableShortHandlerAsyncResult, nullableTCK.methodWithMapNullableShortReturn);
 //  shared test void testMapNullableInteger() => testMapNullable(ArrayList { 12345,null,54321 }, nullableTCK.methodWithMapNullableIntegerParam, nullableTCK.methodWithMapNullableIntegerHandler, nullableTCK.methodWithMapNullableIntegerHandlerAsyncResult, nullableTCK.methodWithMapNullableIntegerReturn);
@@ -1736,8 +2418,64 @@ class ApiTest extends FlatSpec with Matchers {
 //  shared test void testMapNullableFloat() => testMapNullable(ArrayList { 1.1,null,3.3 }, nullableTCK.methodWithMapNullableFloatParam, nullableTCK.methodWithMapNullableFloatHandler, nullableTCK.methodWithMapNullableFloatHandlerAsyncResult, nullableTCK.methodWithMapNullableFloatReturn, assertFloatEquals);
 //  shared test void testMapNullableDouble() => testMapNullable(ArrayList { 1.11,null,3.33 }, nullableTCK.methodWithMapNullableDoubleParam, nullableTCK.methodWithMapNullableDoubleHandler, nullableTCK.methodWithMapNullableDoubleHandlerAsyncResult, nullableTCK.methodWithMapNullableDoubleReturn, assertFloatEquals);
 //  shared test void testMapNullableBoolean() => testMapNullable(ArrayList { true, null, false }, nullableTCK.methodWithMapNullableBooleanParam, nullableTCK.methodWithMapNullableBooleanHandler, nullableTCK.methodWithMapNullableBooleanHandlerAsyncResult, nullableTCK.methodWithMapNullableBooleanReturn);
-//  shared test void testMapNullableString() => testMapNullable(ArrayList { "first",null,"third" }, nullableTCK.methodWithMapNullableStringParam, nullableTCK.methodWithMapNullableStringHandler, nullableTCK.methodWithMapNullableStringHandlerAsyncResult, nullableTCK.methodWithMapNullableStringReturn);
 //  shared test void testMapNullableChar() => testMapNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithMapNullableCharParam, nullableTCK.methodWithMapNullableCharHandler, nullableTCK.methodWithMapNullableCharHandlerAsyncResult, nullableTCK.methodWithMapNullableCharReturn);
+
+  "testMapNullableString" should "work" in {
+    import collection.JavaConverters._
+    val testMapString:Map[String, String] = Map("1" -> "first","2" -> null, "3" -> "third")
+    nullableTCK.methodWithMapNullableStringParam(testMapString)
+    nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithMapNullableStringHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithMapNullableStringHandlerAsyncResult(b => {w{assert(testMapString.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testMapString == nullableTCK.methodWithMapNullableStringReturn())
+  }
+
+  "testMapNullableJsonObject" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonObject:Map[String, JsonObject] = Map("1" -> Json.obj(("foo","bar")), "2" -> null, "3" -> Json.obj(("juu",3)))
+    nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
+    nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithMapNullableJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResult(b => {w{assert(testMapJsonObject.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testMapJsonObject == nullableTCK.methodWithMapNullableJsonObjectReturn())
+  }
+
+  "testMapNullableJsonArray" should "work" in {
+    import collection.JavaConverters._
+    val testMapJsonArray:Map[String, JsonArray] = Map("1" -> Json.arr("foo","bar"), "2" -> null, "3" -> Json.arr("juu"))
+    nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
+    nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithMapNullableJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResult(b => {w{assert(testMapJsonArray.asJava == b.result())}; w.dismiss()})
+    w.await()
+    assert(testMapJsonArray == nullableTCK.methodWithMapNullableJsonArrayReturn())
+  }
+//
+//  "testMapNullableApi" should "work" in {
+//    import collection.JavaConverters._
+//    val iface1 = new RefedInterface1Impl().setString("first")
+//    val iface2 = new RefedInterface1Impl().setString("third")
+//    val testMapApi:Map[RefedInterface1] = Map(RefedInterface1(iface1), null, RefedInterface1(iface2))
+//    nullableTCK.methodWithMapNullableApiParam(testMapApi)
+//    nullableTCK.methodWithMapNullableApiHandler(b => assert(testMapApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
+//    //TODO: Missing @Nullable
+//    //        nullableTCK.methodWithMapNullableApiHandler(false, b => println(b))
+//    val w = new Waiter()
+//    nullableTCK.methodWithMapNullableApiHandlerAsyncResult(b => {w{assert(testMapApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
+//    w.await()
+//    assert(testMapApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithMapNullableApiReturn().map(x => if( x!= null) x.asJava else null))
+//  }
+
+
+  //  shared test void testMapNullableString() => testMapNullable(ArrayList { "first",null,"third" }, nullableTCK.methodWithMapNullableStringParam, nullableTCK.methodWithMapNullableStringHandler, nullableTCK.methodWithMapNullableStringHandlerAsyncResult, nullableTCK.methodWithMapNullableStringReturn);
 //  shared test void testMapNullableJsonObject() => testMapNullable(ArrayList { JsonObject { "foo"->"bar" }, null, JsonObject { "juu"->3 } }, nullableTCK.methodWithMapNullableJsonObjectParam, nullableTCK.methodWithMapNullableJsonObjectHandler, nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResult, nullableTCK.methodWithMapNullableJsonObjectReturn);
 //  shared test void testMapNullableJsonArray() => testMapNullable(ArrayList { JsonArray { "foo","bar" }, null, JsonArray { "juu" } }, nullableTCK.methodWithMapNullableJsonArrayParam, nullableTCK.methodWithMapNullableJsonArrayHandler, nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResult, nullableTCK.methodWithMapNullableJsonArrayReturn);
 //  shared test void testMapNullableApi() => testMapNullableIn(ArrayList { RefedInterface1(RefedInterface1Impl().setString("first")), null, RefedInterface1(RefedInterface1Impl().setString("third")) }, nullableTCK.methodWithMapNullableApiParam, assertRefedInterface1Equals);
