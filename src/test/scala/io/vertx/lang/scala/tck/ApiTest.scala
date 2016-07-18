@@ -1116,28 +1116,204 @@ class ApiTest extends FlatSpec with Matchers {
 
   val nullableTCK = testmodel.NullableTCK(new NullableTCKImpl)
 
-  def num2OptNum[T <: AnyVal](b:java.lang.Number): Option[T] = {
-    if(b == null)
-      None
-    else
-      Some(b.asInstanceOf[T])
+  "testNullableByte" should "work" in {
+    val testByte = 67.toByte
+    nullableTCK.methodWithNullableByteParam(true, None)
+    nullableTCK.methodWithNullableByteParam(false, Option(testByte))
+    nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
+    //TODO: Missing @Nullable
+//    nullableTCK.methodWithNullableByteHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableByteHandlerAsyncResult(true, b => {w{assert(testByte == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableByteReturn(true)
+    nullableTCK.methodWithNullableByteReturn(false)
   }
 
-//  "testNullableByte" should "work" in {
-//    val meths = List(nullableTCK.methodWithNullableByteParam, nullableTCK.methodWithNullableByteHandler)
-//    val testByte = 67.toByte
-//    nullableTCK.methodWithNullableByteParam(true, None)
-//    nullableTCK.methodWithNullableByteParam(false, Option(testByte))
-//    nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
-//    //TODO: Missing @Nullable
-//    nullableTCK.methodWithNullableByteHandler(false, b => println(b))
-//    nullableTCK.methodWithNullableByteHandlerAsyncResult(true, b => assert(testByte == b.result()))
-//    //TODO: Missing @Nullable
-//    nullableTCK.methodWithNullableByteHandlerAsyncResult(false, b => assert(null == b.result()))
-//    nullableTCK.methodWithNullableByteReturn(true)
-//    nullableTCK.methodWithNullableByteReturn(false)
-//  }
-//  nullableTCK.
+  "testNullableShort" should "work" in {
+    val testShort = 1024.toShort
+    nullableTCK.methodWithNullableShortParam(true, None)
+    nullableTCK.methodWithNullableShortParam(false, Option(testShort))
+    nullableTCK.methodWithNullableShortHandler(true, b => assert(testShort == b))
+    //TODO: Missing @Nullable
+//    nullableTCK.methodWithNullableShortHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableShortHandlerAsyncResult(true, b => {w{assert(testShort == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableShortReturn(true)
+    nullableTCK.methodWithNullableShortReturn(false)
+  }
+
+  "testNullableInteger" should "work" in {
+    val testInteger = 1234567
+    nullableTCK.methodWithNullableIntegerParam(true, None)
+    nullableTCK.methodWithNullableIntegerParam(false, Option(testInteger))
+    nullableTCK.methodWithNullableIntegerHandler(true, b => assert(testInteger == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableIntegerHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableIntegerHandlerAsyncResult(true, b => {w{assert(testInteger == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableIntegerReturn(true)
+    nullableTCK.methodWithNullableIntegerReturn(false)
+  }
+
+  "testNullableLong" should "work" in {
+    val testLong = 9876543210l
+    nullableTCK.methodWithNullableLongParam(true, None)
+    nullableTCK.methodWithNullableLongParam(false, Option(testLong))
+    nullableTCK.methodWithNullableLongHandler(true, b => assert(testLong == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableLongHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableLongHandlerAsyncResult(true, b => {w{assert(testLong == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableLongReturn(true)
+    nullableTCK.methodWithNullableLongReturn(false)
+  }
+
+  "testNullableFloat" should "work" in {
+    val testFloat = 3.14.toFloat
+    nullableTCK.methodWithNullableFloatParam(true, None)
+    nullableTCK.methodWithNullableFloatParam(false, Option(testFloat))
+    nullableTCK.methodWithNullableFloatHandler(true, b => assert(testFloat == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableFloatHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableFloatHandlerAsyncResult(true, b => {w{assert(testFloat == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableFloatReturn(true)
+    nullableTCK.methodWithNullableFloatReturn(false)
+  }
+
+  "testNullableDouble" should "work" in {
+    val testDouble = 3.1415926
+    nullableTCK.methodWithNullableDoubleParam(true, None)
+    nullableTCK.methodWithNullableDoubleParam(false, Option(testDouble))
+    nullableTCK.methodWithNullableDoubleHandler(true, b => assert(testDouble == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableDoubleHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableDoubleHandlerAsyncResult(true, b => {w{assert(testDouble == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableDoubleReturn(true)
+    nullableTCK.methodWithNullableDoubleReturn(false)
+  }
+
+  "testNullableBoolean" should "work" in {
+    val testBoolean = true
+    nullableTCK.methodWithNullableBooleanParam(true, None)
+    nullableTCK.methodWithNullableBooleanParam(false, Option(testBoolean))
+    nullableTCK.methodWithNullableBooleanHandler(true, b => assert(testBoolean == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableBooleanHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableBooleanHandlerAsyncResult(true, b => {w{assert(testBoolean == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableBooleanReturn(true)
+    nullableTCK.methodWithNullableBooleanReturn(false)
+  }
+
+  "testNullableChar" should "work" in {
+    val testChar = 'f'
+    nullableTCK.methodWithNullableCharParam(true, None)
+    nullableTCK.methodWithNullableCharParam(false, Option(testChar))
+    nullableTCK.methodWithNullableCharHandler(true, b => assert(testChar == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableCharHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableCharHandlerAsyncResult(true, b => {w{assert(testChar == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableCharReturn(true)
+    nullableTCK.methodWithNullableCharReturn(false)
+  }
+
+  "testNullableJsonObject" should "work" in {
+    val testJsonObject = Json.obj(("foo","wibble"),("bar",3))
+    nullableTCK.methodWithNullableJsonObjectParam(true, None)
+    nullableTCK.methodWithNullableJsonObjectParam(false, Option(testJsonObject))
+    nullableTCK.methodWithNullableJsonObjectHandler(true, b => assert(testJsonObject == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableJsonObjectHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(true, b => {w{assert(testJsonObject == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableJsonObjectReturn(true)
+    nullableTCK.methodWithNullableJsonObjectReturn(false)
+  }
+
+  "testNullableJsonArray" should "work" in {
+    val testJsonArray = Json.arr("one","two","three")
+    nullableTCK.methodWithNullableJsonArrayParam(true, None)
+    nullableTCK.methodWithNullableJsonArrayParam(false, Option(testJsonArray))
+    nullableTCK.methodWithNullableJsonArrayHandler(true, b => assert(testJsonArray == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableJsonArrayHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(true, b => {w{assert(testJsonArray == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableJsonArrayReturn(true)
+    nullableTCK.methodWithNullableJsonArrayReturn(false)
+  }
+
+  "testNullableApi" should "work" in {
+    val testApi = RefedInterface1(new RefedInterface1Impl().setString("lovely_dae"))
+    nullableTCK.methodWithNullableApiParam(true, None)
+    nullableTCK.methodWithNullableApiParam(false, Option(testApi))
+    nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi == b))
+    //TODO: Missing @Nullable
+    //    nullableTCK.methodWithNullableApiHandler(false, b => println(b))
+    val w = new Waiter()
+    nullableTCK.methodWithNullableApiHandlerAsyncResult(true, b => {w{assert(testApi == b.result())}; w.dismiss()})
+    w.await()
+    val w2= new Waiter()
+    //TODO: Missing @Nullable
+    nullableTCK.methodWithNullableApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
+    w2.await()
+    nullableTCK.methodWithNullableApiReturn(true)
+    nullableTCK.methodWithNullableApiReturn(false)
+  }
+
 //
 //  shared test void testNullableByte() => testNullable(67.byte, nullableTCK.methodWithNullableByteParam, nullableTCK.methodWithNullableByteHandler, nullableTCK.methodWithNullableByteHandlerAsyncResult, nullableTCK.methodWithNullableByteReturn);
 //  shared test void testNullableShort() => testNullable(1024, nullableTCK.methodWithNullableShortParam, nullableTCK.methodWithNullableShortHandler, nullableTCK.methodWithNullableShortHandlerAsyncResult, nullableTCK.methodWithNullableShortReturn);

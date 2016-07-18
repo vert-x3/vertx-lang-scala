@@ -195,8 +195,8 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the WebSocket handshake query string.
     */
   def query(): scala.Option[String] = {
-Try(scala.Option(    _asJava.query()
-.asInstanceOf[String])).getOrElse(None)  }
+scala.Option(    _asJava.query()
+)  }
 
   /**
     * @return the headers in the WebSocket handshake

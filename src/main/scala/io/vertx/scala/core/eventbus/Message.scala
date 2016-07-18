@@ -69,8 +69,8 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-Try(scala.Option(    _asJava.replyAddress()
-.asInstanceOf[String])).getOrElse(None)  }
+scala.Option(    _asJava.replyAddress()
+)  }
 
   /**
     * Reply to this message.

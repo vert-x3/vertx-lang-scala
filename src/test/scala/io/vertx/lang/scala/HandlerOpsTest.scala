@@ -47,12 +47,12 @@ class HandlerOpsTest extends FlatSpec with Matchers {
     assert(changeMe == 1)
   }
 
-  "A null-byte-value" should "be converted to None" in {
-    assert(None == num2OptNum[Byte](new NullBomb().nullByte()))
-  }
-
-  "A byte-value of 23" should "be converted to Some(23)" in {
-    assert(Some(23) == num2OptNum[Byte](new NullBomb().byte23()))
-  }
+//  "A null-byte-value" should "be converted to None" in {
+//    assert(None == num2OptNum[Byte](new NullBomb().nullByte()))
+//  }
+//
+//  "A byte-value of 23" should "be converted to Some(23)" in {
+//    assert(Some(23) == num2OptNum[Byte](new NullBomb().byte23()))
+//  }
 
 }

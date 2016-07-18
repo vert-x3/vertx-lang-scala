@@ -74,8 +74,8 @@ class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
     * Returns the name of the host for the service.
     */
   def target(): scala.Option[String] = {
-Try(scala.Option(    _asJava.target()
-.asInstanceOf[String])).getOrElse(None)  }
+scala.Option(    _asJava.target()
+)  }
 
 }
 

@@ -28,9 +28,25 @@
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
-@if{method.returnType.isNullable}Try(scala.Option(@end{}
+
+@if{method.returnType.isNullable}
+@if{method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE}
+nullsafeConvToOption(
+@else{}
+scala.Option(
+@end{}
+@end{}
+
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
-@if{method.returnType.isNullable}.asInstanceOf[@{returnTypeOfNotNullable(method);}])).getOrElse(None)@end{}
+
+@if{method.returnType.isNullable}
+@if{method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE}
+)
+@else{}
+)
+@end{}
+@end{}
+
 @if{method.cacheReturn}
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n
