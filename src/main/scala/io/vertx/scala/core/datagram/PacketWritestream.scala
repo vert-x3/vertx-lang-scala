@@ -19,6 +19,7 @@ package io.vertx.scala.core.datagram;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
@@ -56,8 +57,8 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.datagram.PacketWritestream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.datagram.PacketWritestream = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -71,8 +72,8 @@ class PacketWritestream(private val _asJava: io.vertx.core.datagram.PacketWrites
     this
   }
 
-  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.datagram.PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.datagram.PacketWritestream = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 

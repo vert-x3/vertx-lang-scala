@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
@@ -55,7 +56,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String, message: AnyRef): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message.get)
+    _asJava.send(address, message)
     this
   }
 
@@ -67,7 +68,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return reply handler will be called when any reply from the recipient is received, may be {@code null}
     */
   def send[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message.get, funcToHandler(replyHandler))
+    _asJava.send(address, message, funcToHandler(replyHandler))
     this
   }
 
@@ -79,7 +80,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String, message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message.get, options)
+    _asJava.send(address, message, options)
     this
   }
 
@@ -92,7 +93,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return reply handler will be called when any reply from the recipient is received, may be {@code null}
     */
   def send[T](address: String, message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message.get, options, funcToHandler(replyHandler))
+    _asJava.send(address, message, options, funcToHandler(replyHandler))
     this
   }
 
@@ -104,7 +105,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String, message: AnyRef): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.publish(address, message.get)
+    _asJava.publish(address, message)
     this
   }
 
@@ -116,7 +117,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String, message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.publish(address, message.get, options)
+    _asJava.publish(address, message, options)
     this
   }
 

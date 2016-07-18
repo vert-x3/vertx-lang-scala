@@ -19,6 +19,7 @@ package io.vertx.scala.core.http;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.HttpMethod
@@ -58,8 +59,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler.get))
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
     this
   }
 
@@ -73,8 +74,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     this
   }
 
-  def drainHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 
@@ -186,8 +187,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def closeHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 
@@ -366,8 +367,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headersEndHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def headersEndHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 
@@ -378,8 +379,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def bodyEndHandler(handler: Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
-    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.get()))
+  def bodyEndHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerResponse = {
+    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
     this
   }
 

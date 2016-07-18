@@ -78,4 +78,17 @@ object HandlerOps {
   def handlerToMappedFunction[J, S](mapper: S => J)(h: Handler[J]): S => Unit =
     (event:S) => h.handle(mapper(event))
 
+  /**
+    * Null-save conversion of Java-numbers into Scala-Options. Required as implicit-conversions will break on null-values.
+    * @param number a possible null-value
+    * @tparam T target of the conversion
+    * @return Option-value representing the conversion-result
+    */
+  def num2OptNum[T <: AnyVal](number:java.lang.Number): Option[T] = {
+    if(number == null)
+      None
+    else
+      Some(number.asInstanceOf[T])
+  }
+
 }

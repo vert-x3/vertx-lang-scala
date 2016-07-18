@@ -19,6 +19,7 @@ package io.vertx.scala.core;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.Handler
 import java.util.function.Function
 
@@ -57,7 +58,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param result the result
     */
   def complete(result: T): Unit = {
-    _asJava.complete(result.get)
+    _asJava.complete(result)
   }
 
   /**
@@ -178,7 +179,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the mapped future
     */
   def map[V](value: V): io.vertx.scala.core.Future[V] = {
-    Future.apply[V](_asJava.map(value.get))
+    Future.apply[V](_asJava.map(value))
   }
 
   /**
@@ -205,7 +206,7 @@ object Future {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
   def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture(result.get))
+    Future.apply[T](io.vertx.core.Future.succeededFuture(result))
   }
   def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))

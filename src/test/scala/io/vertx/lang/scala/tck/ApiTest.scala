@@ -33,6 +33,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.duration.DurationLong
+import scala.language.postfixOps
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
@@ -121,7 +122,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullDataObjectParam" should "work" in {
-    obj.methodWithNullDataObjectParam(null)
+      obj.methodWithNullDataObjectParam(None)
   }
 
   "testMethodWithHandlerDataObject" should "work" in {
@@ -1115,17 +1116,27 @@ class ApiTest extends FlatSpec with Matchers {
 
   val nullableTCK = testmodel.NullableTCK(new NullableTCKImpl)
 
-  "testNullableByte" should "work" in {
-    val testByte = 67.toByte
-//    nullableTCK.methodWithNullableByteParam(true, null)
-    nullableTCK.methodWithNullableByteParam(false, testByte)
-    nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
-    nullableTCK.methodWithNullableByteHandler(false, b => println(b))
-    nullableTCK.methodWithNullableByteHandlerAsyncResult(true, b => println(b))
-    nullableTCK.methodWithNullableByteHandlerAsyncResult(false, b => println(b))
-    nullableTCK.methodWithNullableByteReturn(true)
-    nullableTCK.methodWithNullableByteReturn(false)
+  def num2OptNum[T <: AnyVal](b:java.lang.Number): Option[T] = {
+    if(b == null)
+      None
+    else
+      Some(b.asInstanceOf[T])
   }
+
+//  "testNullableByte" should "work" in {
+//    val meths = List(nullableTCK.methodWithNullableByteParam, nullableTCK.methodWithNullableByteHandler)
+//    val testByte = 67.toByte
+//    nullableTCK.methodWithNullableByteParam(true, None)
+//    nullableTCK.methodWithNullableByteParam(false, Option(testByte))
+//    nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
+//    //TODO: Missing @Nullable
+//    nullableTCK.methodWithNullableByteHandler(false, b => println(b))
+//    nullableTCK.methodWithNullableByteHandlerAsyncResult(true, b => assert(testByte == b.result()))
+//    //TODO: Missing @Nullable
+//    nullableTCK.methodWithNullableByteHandlerAsyncResult(false, b => assert(null == b.result()))
+//    nullableTCK.methodWithNullableByteReturn(true)
+//    nullableTCK.methodWithNullableByteReturn(false)
+//  }
 //  nullableTCK.
 //
 //  shared test void testNullableByte() => testNullable(67.byte, nullableTCK.methodWithNullableByteParam, nullableTCK.methodWithNullableByteHandler, nullableTCK.methodWithNullableByteHandlerAsyncResult, nullableTCK.methodWithNullableByteReturn);

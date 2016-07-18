@@ -19,6 +19,7 @@ package io.vertx.scala.core.cli;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.cli.Option
 import io.vertx.core.cli.Argument
 
@@ -80,9 +81,9 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
   /**
     * @return the CLI description.
     */
-  def getDescription(): Option[String] = {
-Option(    _asJava.getDescription()
-)  }
+  def getDescription(): scala.Option[String] = {
+Try(scala.Option(    _asJava.getDescription()
+.asInstanceOf[String])).getOrElse(None)  }
 
   def setDescription(desc: String): io.vertx.scala.core.cli.CLI = {
     _asJava.setDescription(desc)
@@ -92,9 +93,9 @@ Option(    _asJava.getDescription()
   /**
     * @return the CLI summary.
     */
-  def getSummary(): Option[String] = {
-Option(    _asJava.getSummary()
-)  }
+  def getSummary(): scala.Option[String] = {
+Try(scala.Option(    _asJava.getSummary()
+.asInstanceOf[String])).getOrElse(None)  }
 
   /**
     * Sets the summary of the CLI.
@@ -208,27 +209,27 @@ Option(    _asJava.getSummary()
     * @param name the name, must not be {@code null}
     * @return the [[Option]], {@code null} if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
-  def getOption(name: String): Option[io.vertx.core.cli.Option] = {
-Option(    _asJava.getOption(name)
-)  }
+  def getOption(name: String): scala.Option[io.vertx.core.cli.Option] = {
+Try(scala.Option(    _asJava.getOption(name)
+.asInstanceOf[io.vertx.core.cli.Option])).getOrElse(None)  }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
     * @param name the name of the argument, must not be {@code null}
     * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(name: String): Option[io.vertx.core.cli.Argument] = {
-Option(    _asJava.getArgument(name)
-)  }
+  def getArgument(name: String): scala.Option[io.vertx.core.cli.Argument] = {
+Try(scala.Option(    _asJava.getArgument(name)
+.asInstanceOf[io.vertx.core.cli.Argument])).getOrElse(None)  }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
     * @param index the index, must be positive or zero.
     * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(index: Int): Option[io.vertx.core.cli.Argument] = {
-Option(    _asJava.getArgument(index)
-)  }
+  def getArgument(index: Int): scala.Option[io.vertx.core.cli.Argument] = {
+Try(scala.Option(    _asJava.getArgument(index)
+.asInstanceOf[io.vertx.core.cli.Argument])).getOrElse(None)  }
 
   /**
     * Removes an option identified by its name. This method does nothing if the option cannot be found.

@@ -19,6 +19,7 @@ package io.vertx.scala.core.shareddata;
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -35,7 +36,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return - this will be called some time later with the async result.
     */
   def get(k: K, resultHandler: io.vertx.core.AsyncResult[V] => Unit): Unit = {
-    _asJava.get(k.get, funcToHandler(resultHandler))
+    _asJava.get(k, funcToHandler(resultHandler))
   }
 
   /**
@@ -45,7 +46,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return - this will be called some time later to signify the value has been put
     */
   def put(k: K, v: V, completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
-    _asJava.put(k.get, v.get, funcToHandler(completionHandler))
+    _asJava.put(k, v, funcToHandler(completionHandler))
   }
 
   /**
@@ -57,7 +58,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return the handler
     */
   def put(k: K, v: V, ttl: Long, completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
-    _asJava.put(k.get, v.get, ttl, funcToHandler(completionHandler))
+    _asJava.put(k, v, ttl, funcToHandler(completionHandler))
   }
 
   /**
@@ -68,7 +69,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return the handler
     */
   def putIfAbsent(k: K, v: V, completionHandler: io.vertx.core.AsyncResult[V] => Unit): Unit = {
-    _asJava.putIfAbsent(k.get, v.get, funcToHandler(completionHandler))
+    _asJava.putIfAbsent(k, v, funcToHandler(completionHandler))
   }
 
   /**
@@ -80,7 +81,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return the handler
     */
   def putIfAbsent(k: K, v: V, ttl: Long, completionHandler: io.vertx.core.AsyncResult[V] => Unit): Unit = {
-    _asJava.putIfAbsent(k.get, v.get, ttl, funcToHandler(completionHandler))
+    _asJava.putIfAbsent(k, v, ttl, funcToHandler(completionHandler))
   }
 
   /**
@@ -89,7 +90,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return - this will be called some time later to signify the value has been removed
     */
   def remove(k: K, resultHandler: io.vertx.core.AsyncResult[V] => Unit): Unit = {
-    _asJava.remove(k.get, funcToHandler(resultHandler))
+    _asJava.remove(k, funcToHandler(resultHandler))
   }
 
   /**
@@ -99,7 +100,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return - this will be called some time later to signify the value has been removed
     */
   def removeIfPresent(k: K, v: V, resultHandler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): Unit = {
-    _asJava.removeIfPresent(k.get, v.get, funcToHandler(resultHandler))
+    _asJava.removeIfPresent(k, v, funcToHandler(resultHandler))
   }
 
   /**
@@ -109,7 +110,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return the result handler will be passed the previous value
     */
   def replace(k: K, v: V, resultHandler: io.vertx.core.AsyncResult[V] => Unit): Unit = {
-    _asJava.replace(k.get, v.get, funcToHandler(resultHandler))
+    _asJava.replace(k, v, funcToHandler(resultHandler))
   }
 
   /**
@@ -120,7 +121,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @return the result handler
     */
   def replaceIfPresent(k: K, oldValue: V, newValue: V, resultHandler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): Unit = {
-    _asJava.replaceIfPresent(k.get, oldValue.get, newValue.get, funcToHandler(resultHandler))
+    _asJava.replaceIfPresent(k, oldValue, newValue, funcToHandler(resultHandler))
   }
 
   /**
