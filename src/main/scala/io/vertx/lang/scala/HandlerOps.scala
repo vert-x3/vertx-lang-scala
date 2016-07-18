@@ -84,11 +84,24 @@ object HandlerOps {
     * @tparam T target of the conversion
     * @return Option-value representing the conversion-result
     */
-  def num2OptNum[T <: AnyVal](number:java.lang.Number): Option[T] = {
+  def nullsafeConvToOption[T](number:java.lang.Number): Option[T] = {
     if(number == null)
       None
     else
       Some(number.asInstanceOf[T])
   }
 
+  def nullsafeConvToOption[T](number:java.lang.Boolean): Option[T] = {
+    if(number == null)
+      None
+    else
+      Some(number.asInstanceOf[T])
+  }
+
+  def nullsafeConvToOption[T](number:java.lang.Character): Option[T] = {
+    if(number == null)
+      None
+    else
+      Some(number.asInstanceOf[T])
+  }
 }

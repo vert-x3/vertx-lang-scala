@@ -39,8 +39,8 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return The first header value or {@code null} if there is no such entry
     */
   def get(name: String): scala.Option[String] = {
-Try(scala.Option(    _asJava.get(name)
-.asInstanceOf[String])).getOrElse(None)  }
+scala.Option(    _asJava.get(name)
+)  }
 
   /**
     * Returns the values with the specified name
