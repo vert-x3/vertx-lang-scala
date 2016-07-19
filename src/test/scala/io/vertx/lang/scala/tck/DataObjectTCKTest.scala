@@ -9,7 +9,7 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class DataObjectTCKTest extends FlatSpec with Matchers {
   val dataObjectTCK = DataObjectTCK(new DataObjectTCKImpl())
-
+//TODO: doesn't currently make sense as DataObjects are not being generated
 //  "testReadDataObjectWithValues" should "work" in {
 //    val dataObject = dataObjectTCK.getDataObjectWithValues();
 //    assert(true == dataObject.booleanValue);

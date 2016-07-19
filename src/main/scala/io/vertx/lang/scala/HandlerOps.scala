@@ -19,8 +19,12 @@ object HandlerOps {
     * @tparam J Event-type the Handler supports
     * @return a scala-Function that uses the given handler to do its job
     */
-  def handlerToFunc[J](handler: Handler[J]): J => Unit =
-    (pa: J) => handler.handle(pa)
+  def handlerToFunc[J](handler: Handler[J]): J => Unit = {
+    if(handler == null)
+      (pa: J) => {}
+    else
+      (pa: J) => handler.handle(pa)
+  }
 
   /**
     * Create a Vert.x-Handler from the given Scala-Function
@@ -29,10 +33,18 @@ object HandlerOps {
     * @tparam J Event-type the Function supports
     * @return a Vert.x-Handler that uses the given function to do its job
     */
-  def funcToHandler[J](f: J => Unit): Handler[J] =
-    new Handler[J]() {
-      override def handle(event: J): Unit = f(event)
-    }
+  def funcToHandler[J](f: J => Unit): Handler[J] = {
+    if(f == null)
+      new Handler[J]() {
+        override def handle(event: J): Unit = {}
+      }
+    else
+      new Handler[J]() {
+        override def handle(event: J): Unit = f(event)
+      }
+  }
+
+
 
   /**
     * Create a Vert.x-Void-Handler from the given parameterless Scala-Function
@@ -40,10 +52,17 @@ object HandlerOps {
     * @param f Scala-Function used by the resulting Vert.x-Handler
     * @return a Vert.x-Handler that uses the given function to do its job
     */
-  def parameterlessFuncToVoidHandler(f: () => Unit): Handler[Void] =
-    new Handler[Void]() {
-      override def handle(event: Void): Unit = f()
-    }
+  def parameterlessFuncToVoidHandler(f: () => Unit): Handler[Void] = {
+    if (f == null)
+      new Handler[Void]() {
+        override def handle(event: Void): Unit = {}
+      }
+    else
+      new Handler[Void]() {
+        override def handle(event: Void): Unit = f()
+     }
+  }
+
 
   /**
     * Create a Vert.x-Handler from the given Scala-Function. It also maps the Handlers type to
@@ -56,13 +75,15 @@ object HandlerOps {
     * @return the resulting Handler
     */
   def funcToMappedHandler[J, S](mapper: J => S)(f: S => Unit): Handler[J] = {
-    //TODO: handlers can be set to null, there must be a better way so I avoid returning null here
-    if(f != null)
+    if(f == null) {
+      new Handler[J]() {
+        override def handle(event: J): Unit = {}
+      }
+    }
+    else
       new Handler[J]() {
         override def handle(event: J): Unit = f(mapper(event))
       }
-    else
-     null
   }
 
   /**
@@ -76,6 +97,9 @@ object HandlerOps {
     * @return the resulting Function
     */
   def handlerToMappedFunction[J, S](mapper: S => J)(h: Handler[J]): S => Unit =
+  if(h == null)
+    (event:S) => {}
+  else
     (event:S) => h.handle(mapper(event))
 
   /**

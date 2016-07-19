@@ -186,6 +186,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testGenericReturn" should "work" ignore {
+    //TODO: fix in methodWithGenericReturn
         assert("ok" == obj.methodWithGenericReturn[String]( it => "the-string" ))
 //            it match{
 //              case 0: "the-string"
