@@ -1,5 +1,7 @@
 package io.vertx.lang.scala.tck
 
+import java.lang.Boolean
+
 import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, TestDataObject, TestEnum}
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
@@ -185,20 +187,18 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
     assert("ok" == obj.methodWithMapReturn(it => {Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
   }
 
-  "testGenericReturn" should "work" ignore {
-    //TODO: fix in methodWithGenericReturn
-        assert("ok" == obj.methodWithGenericReturn[String]( it => "the-string" ))
-//            it match{
-//              case 0: "the-string"
-//              case 1: 123
-//              case 2: true
-//              case 3: return [foo:"foo_value"]
-//              case 4: return ["foo","bar"]
-//              case _: throw new Exception()
-//            }
-//        ))
+  "testGenericReturn" should "work" in {
+    //This feels a lot like tricking the type-system
+    assert("ok" == obj.methodWithGenericReturn[Object]( it => {
+      if (it == 0) new String("the-string").asInstanceOf[Object]
+      else if (it == 1) Integer.valueOf(123)
+      else if (it == 2) Boolean.valueOf(true)
+      else if (it == 3) Json.obj(("foo", "foo_value"))
+      else Json.arr("foo", "bar")
+
+    }))
   }
-//
+
   "testGenericUserTypeReturn" should "work" in {
     assert("ok" == obj.methodWithGenericUserTypeReturn[Int](it => { it }))
   }

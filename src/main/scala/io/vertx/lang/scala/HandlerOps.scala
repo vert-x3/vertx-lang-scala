@@ -1,8 +1,8 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.{AsyncResult, Handler}
+import io.vertx.core.Handler
+import io.vertx.core.logging.LoggerFactory
 
-import scala.concurrent.Promise
 import scala.language.implicitConversions
 
 /**
@@ -11,6 +11,10 @@ import scala.language.implicitConversions
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 object HandlerOps {
+
+  //Can't include ScalaLogger here as I had to separate the builds for Java and Scala-code
+  //See the associated Scalac-Bug https://issues.scala-lang.org/browse/SI-9853
+  val log = LoggerFactory.getLogger(HandlerOps.getClass.getName)
 
   /**
     * Create a Scala-Function from the given Vert.x-Handler
@@ -35,9 +39,7 @@ object HandlerOps {
     */
   def funcToHandler[J](f: J => Unit): Handler[J] = {
     if(f == null)
-      new Handler[J]() {
-        override def handle(event: J): Unit = {}
-      }
+      null
     else
       new Handler[J]() {
         override def handle(event: J): Unit = f(event)
@@ -82,7 +84,13 @@ object HandlerOps {
     }
     else
       new Handler[J]() {
-        override def handle(event: J): Unit = f(mapper(event))
+        override def handle(event: J): Unit = {
+          //TODO: this sucks but there is no easy way around, maybe mark dangerous conversions?
+          if(null != event)
+            f(mapper(event))
+          else
+            log.error("Null value encountered in {}", "funcToMappedHandler")
+        }
       }
   }
 

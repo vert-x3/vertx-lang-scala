@@ -1840,7 +1840,6 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetApiHandlerAsyncResult(true, b => {w{assert(b.result().asScala.forall(a => a == iface))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetApiReturn(true)
@@ -2325,17 +2324,15 @@ class ApiTest extends FlatSpec with Matchers {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
     val testMapApi:Map[String, RefedInterface1] = Map("1" -> RefedInterface1(iface1), "2" -> null, "3" -> RefedInterface1(iface2))
-    //TODO: fix
-//    nullableTCK.methodWithMapNullableApiParam(testMapApi)
+    nullableTCK.methodWithMapNullableApiParam(testMapApi)
   }
 
   "testNullableHandler" should "work" in {
-    //TODO: fix
-//    nullableTCK.methodWithNullableHandler(true, None)
-//    val w1 = new Waiter()
-//    nullableTCK.methodWithNullableHandler(false, Some(a => {w1{assert("the_string_value" == a)};w1.dismiss()}))
-//    w1.await()
-//    nullableTCK.methodWithNullableHandlerAsyncResult(true, None)
+    nullableTCK.methodWithNullableHandler(true, None)
+    val w1 = new Waiter()
+    nullableTCK.methodWithNullableHandler(false, Some(a => {w1{assert("the_string_value" == a)};w1.dismiss()}))
+    w1.await()
+    nullableTCK.methodWithNullableHandlerAsyncResult(true, None)
     val w2 = new Waiter()
     nullableTCK.methodWithNullableHandlerAsyncResult(false, Some(a => {w2{assert("the_string_value" == a.result())};w2.dismiss()}))
     w2.await()
@@ -2356,6 +2353,5 @@ class ApiTest extends FlatSpec with Matchers {
 
   def refedIfaceToJavaOrNull(x: RefedInterface1):io.vertx.codegen.testmodel.RefedInterface1 = {
     if( x!= null) x.asJava else null
-
   }
 }
