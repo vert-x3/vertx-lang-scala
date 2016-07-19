@@ -8,6 +8,6 @@ import io.vertx.scala.core.eventbus.Message
   */
 class TestVerticle extends ScalaVerticle{
   override def start(startFuture: Future[Void]): Unit = {
-    vertx.eventBus.consumer[String]("hello", in => in.reply("wuhu")).completionHandler(c => startFuture.complete())
+    vertx.eventBus.consumer("hello", (in:Message[String]) => in.reply("wuhu")).completionHandler(c => startFuture.complete())
   }
 }
