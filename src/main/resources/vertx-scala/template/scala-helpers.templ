@@ -346,7 +346,7 @@
           } else if (param.type.args[0].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
           } else if (param.type.args[1].kind == CLASS_API) {
-            invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
+            invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', if (kv._2 != null) kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '] else null)).asJava');
           } else {
             invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava');
           }
