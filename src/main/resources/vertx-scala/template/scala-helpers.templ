@@ -251,7 +251,7 @@
 
   def methodInvocationHandlerCollection(type, method) {
     var invocation = '';
-    var mapIt = method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x.asScala';
+    var mapIt = method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => if (x != null) x.asScala';
 
     if(type.kind == CLASS_MAP) {
         invocation += mapIt + '.map((a) => (' + createGenericFromTypeWithParamName(type.args[0], 'a._1') + ',' + createGenericFromTypeWithParamName(type.args[1], 'a._2') + '))'
@@ -274,12 +274,13 @@
     }
 
     if (type.kind == CLASS_LIST) {
-      invocation += '.toList)('+param.name;
+      invocation += '.toList';
     } else if (type.kind == CLASS_SET) {
-      invocation += '.toSet)('+param.name;
+      invocation += '.toSet';
     } else {
-      invocation += '.toMap)('+param.name;
+      invocation += '.toMap';
     }
+    invocation += ' else null)('+param.name;
 
     return invocation;
   }

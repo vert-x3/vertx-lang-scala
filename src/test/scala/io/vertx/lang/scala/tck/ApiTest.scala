@@ -1124,13 +1124,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableByteParam(true, None)
     nullableTCK.methodWithNullableByteParam(false, Option(testByte))
     nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
-    //TODO: Missing @Nullable
-//    nullableTCK.methodWithNullableByteHandler(false, b => println(b))
+    nullableTCK.methodWithNullableByteHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableByteHandlerAsyncResult(true, b => {w{assert(testByte == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableByteReturn(true)
@@ -1142,13 +1140,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableShortParam(true, None)
     nullableTCK.methodWithNullableShortParam(false, Option(testShort))
     nullableTCK.methodWithNullableShortHandler(true, b => assert(testShort == b))
-    //TODO: Missing @Nullable
-//    nullableTCK.methodWithNullableShortHandler(false, b => println(b))
+    nullableTCK.methodWithNullableShortHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableShortHandlerAsyncResult(true, b => {w{assert(testShort == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableShortReturn(true)
@@ -1160,13 +1156,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableIntegerParam(true, None)
     nullableTCK.methodWithNullableIntegerParam(false, Option(testInteger))
     nullableTCK.methodWithNullableIntegerHandler(true, b => assert(testInteger == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableIntegerHandler(false, b => println(b))
+    nullableTCK.methodWithNullableIntegerHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableIntegerHandlerAsyncResult(true, b => {w{assert(testInteger == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableIntegerReturn(true)
@@ -1178,13 +1172,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableLongParam(true, None)
     nullableTCK.methodWithNullableLongParam(false, Option(testLong))
     nullableTCK.methodWithNullableLongHandler(true, b => assert(testLong == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableLongHandler(false, b => println(b))
+    nullableTCK.methodWithNullableLongHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableLongHandlerAsyncResult(true, b => {w{assert(testLong == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableLongReturn(true)
@@ -1196,13 +1188,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableFloatParam(true, None)
     nullableTCK.methodWithNullableFloatParam(false, Option(testFloat))
     nullableTCK.methodWithNullableFloatHandler(true, b => assert(testFloat == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableFloatHandler(false, b => println(b))
+    nullableTCK.methodWithNullableFloatHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableFloatHandlerAsyncResult(true, b => {w{assert(testFloat == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableFloatReturn(true)
@@ -1214,13 +1204,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableDoubleParam(true, None)
     nullableTCK.methodWithNullableDoubleParam(false, Option(testDouble))
     nullableTCK.methodWithNullableDoubleHandler(true, b => assert(testDouble == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableDoubleHandler(false, b => println(b))
+    nullableTCK.methodWithNullableDoubleHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableDoubleHandlerAsyncResult(true, b => {w{assert(testDouble == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableDoubleReturn(true)
@@ -1232,13 +1220,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableBooleanParam(true, None)
     nullableTCK.methodWithNullableBooleanParam(false, Option(testBoolean))
     nullableTCK.methodWithNullableBooleanHandler(true, b => assert(testBoolean == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableBooleanHandler(false, b => println(b))
+    nullableTCK.methodWithNullableBooleanHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableBooleanHandlerAsyncResult(true, b => {w{assert(testBoolean == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableBooleanReturn(true)
@@ -1250,13 +1236,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableCharParam(true, None)
     nullableTCK.methodWithNullableCharParam(false, Option(testChar))
     nullableTCK.methodWithNullableCharHandler(true, b => assert(testChar == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableCharHandler(false, b => println(b))
+    nullableTCK.methodWithNullableCharHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableCharHandlerAsyncResult(true, b => {w{assert(testChar == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableCharReturn(true)
@@ -1268,13 +1252,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableJsonObjectParam(true, None)
     nullableTCK.methodWithNullableJsonObjectParam(false, Option(testJsonObject))
     nullableTCK.methodWithNullableJsonObjectHandler(true, b => assert(testJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableJsonObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableJsonObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(true, b => {w{assert(testJsonObject == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableJsonObjectReturn(true)
@@ -1286,13 +1268,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableJsonArrayParam(true, None)
     nullableTCK.methodWithNullableJsonArrayParam(false, Option(testJsonArray))
     nullableTCK.methodWithNullableJsonArrayHandler(true, b => assert(testJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableJsonArrayHandler(false, b => println(b))
+    nullableTCK.methodWithNullableJsonArrayHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(true, b => {w{assert(testJsonArray == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableJsonArrayReturn(true)
@@ -1304,13 +1284,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableApiParam(true, None)
     nullableTCK.methodWithNullableApiParam(false, Option(testApi))
     nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi.asJava == b.asJava))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableApiHandler(false, b => println(b))
+    nullableTCK.methodWithNullableApiHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableApiHandlerAsyncResult(true, b => {w{assert(testApi.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableApiReturn(true)
@@ -1322,13 +1300,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableDataObjectParam(true, None)
     nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
     nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.toJson == b.toJson))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableDataObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(true, b => {w{assert(testDataObject.toJson == b.result().toJson)}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableDataObjectReturn(true)
@@ -1340,13 +1316,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableEnumParam(true, None)
     nullableTCK.methodWithNullableEnumParam(false, Option(testEnum))
     nullableTCK.methodWithNullableEnumHandler(true, b => assert(testEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableEnumHandlerAsyncResult(true, b => {w{assert(testEnum == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableEnumReturn(true)
@@ -1358,13 +1332,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableGenEnumParam(true, None)
     nullableTCK.methodWithNullableGenEnumParam(false, Option(testGenEnum))
     nullableTCK.methodWithNullableGenEnumHandler(true, b => assert(testGenEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableGenEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableGenEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(true, b => {w{assert(testGenEnum == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableGenEnumReturn(true)
@@ -1386,7 +1358,6 @@ class ApiTest extends FlatSpec with Matchers {
     val w4 = new Waiter()
     nullableTCK.methodWithNullableTypeVariableHandlerAsyncResult[String](true, null, d => {w4{assert(d.result() == null)};w4.dismiss()})
     assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1"))
-    //TODO: Missing @Nullable
     assert(null == nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"))
     w4.await()
   }
@@ -1409,13 +1380,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListByteParam(true, None)
     nullableTCK.methodWithNullableListByteParam(false, Option(testListByte))
     nullableTCK.methodWithNullableListByteHandler(true, b => assert(testListByte == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListByteHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListByteHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListByteHandlerAsyncResult(true, b => {w{assert(testListByte.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListByteReturn(true)
@@ -1428,13 +1397,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListShortParam(true, None)
     nullableTCK.methodWithNullableListShortParam(false, Option(testListShort))
     nullableTCK.methodWithNullableListShortHandler(true, b => assert(testListShort == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListShortHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListShortHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListShortHandlerAsyncResult(true, b => {w{assert(testListShort.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListShortReturn(true)
@@ -1447,13 +1414,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListIntegerParam(true, None)
     nullableTCK.methodWithNullableListIntegerParam(false, Option(testListInteger))
     nullableTCK.methodWithNullableListIntegerHandler(true, b => assert(testListInteger == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListIntegerHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListIntegerHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListIntegerHandlerAsyncResult(true, b => {w{assert(testListInteger.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListIntegerReturn(true)
@@ -1466,13 +1431,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListLongParam(true, None)
     nullableTCK.methodWithNullableListLongParam(false, Option(testListLong))
     nullableTCK.methodWithNullableListLongHandler(true, b => assert(testListLong == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListLongHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListLongHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListLongHandlerAsyncResult(true, b => {w{assert(testListLong.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListLongReturn(true)
@@ -1485,13 +1448,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListFloatParam(true, None)
     nullableTCK.methodWithNullableListFloatParam(false, Option(testListFloat))
     nullableTCK.methodWithNullableListFloatHandler(true, b => assert(testListFloat == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListFloatHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListFloatHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListFloatHandlerAsyncResult(true, b => {w{assert(testListFloat.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListFloatReturn(true)
@@ -1504,13 +1465,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListDoubleParam(true, None)
     nullableTCK.methodWithNullableListDoubleParam(false, Option(testListDouble))
     nullableTCK.methodWithNullableListDoubleHandler(true, b => assert(testListDouble == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListDoubleHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListDoubleHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListDoubleHandlerAsyncResult(true, b => {w{assert(testListDouble.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListDoubleReturn(true)
@@ -1523,13 +1482,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListBooleanParam(true, None)
     nullableTCK.methodWithNullableListBooleanParam(false, Option(testListBoolean))
     nullableTCK.methodWithNullableListBooleanHandler(true, b => assert(testListBoolean == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListBooleanHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListBooleanHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListBooleanHandlerAsyncResult(true, b => {w{assert(testListBoolean.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListBooleanReturn(true)
@@ -1542,13 +1499,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListStringParam(true, None)
     nullableTCK.methodWithNullableListStringParam(false, Option(testListString))
     nullableTCK.methodWithNullableListStringHandler(true, b => assert(testListString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListStringHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListStringHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListStringHandlerAsyncResult(true, b => {w{assert(testListString.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListStringReturn(true)
@@ -1561,13 +1516,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListCharParam(true, None)
     nullableTCK.methodWithNullableListCharParam(false, Option(testListChar))
     nullableTCK.methodWithNullableListCharHandler(true, b => assert(testListChar == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListCharHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListCharHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListCharHandlerAsyncResult(true, b => {w{assert(testListChar.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListCharReturn(true)
@@ -1580,13 +1533,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListJsonObjectParam(true, None)
     nullableTCK.methodWithNullableListJsonObjectParam(false, Option(testListJsonObject))
     nullableTCK.methodWithNullableListJsonObjectHandler(true, b => assert(testListJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListJsonObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListJsonObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResult(true, b => {w{assert(testListJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListJsonObjectReturn(true)
@@ -1599,13 +1550,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListJsonArrayParam(true, None)
     nullableTCK.methodWithNullableListJsonArrayParam(false, Option(testListJsonArray))
     nullableTCK.methodWithNullableListJsonArrayHandler(true, b => assert(testListJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListJsonArrayHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListJsonArrayHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResult(true, b => {w{assert(testListJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListJsonArrayReturn(true)
@@ -1619,13 +1568,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListApiParam(true, None)
     nullableTCK.methodWithNullableListApiParam(false, Option(testListApi))
     nullableTCK.methodWithNullableListApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListApiHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListApiHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListApiHandlerAsyncResult(true, b => {w{assert(b.result().asScala.forall(a => a == iface))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListApiHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListApiReturn(true)
@@ -1639,13 +1586,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListDataObjectParam(true, None)
     nullableTCK.methodWithNullableListDataObjectParam(false, Option(testListDataObject))
     nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.forall(a => a.toJson == json)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListDataObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(true, b => {w{assert(testListDataObject.forall(a => a.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListDataObjectReturn(true)
@@ -1658,13 +1603,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListEnumParam(true, None)
     nullableTCK.methodWithNullableListEnumParam(false, Option(testListEnum))
     nullableTCK.methodWithNullableListEnumHandler(true, b => assert(testListEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListEnumHandlerAsyncResult(true, b => {w{assert(testListEnum.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListEnumReturn(true)
@@ -1677,13 +1620,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableListGenEnumParam(true, None)
     nullableTCK.methodWithNullableListGenEnumParam(false, Option(testListGenEnum))
     nullableTCK.methodWithNullableListGenEnumHandler(true, b => assert(testListGenEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableListGenEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableListGenEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableListGenEnumHandlerAsyncResult(true, b => {w{assert(testListGenEnum.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableListGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableListGenEnumReturn(true)
@@ -1706,13 +1647,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetByteParam(true, None)
     nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
     nullableTCK.methodWithNullableSetByteHandler(true, b => assert(testSetByte == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetByteHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetByteHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetByteHandlerAsyncResult(true, b => {w{assert(testSetByte.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetByteReturn(true)
@@ -1725,13 +1664,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetShortParam(true, None)
     nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
     nullableTCK.methodWithNullableSetShortHandler(true, b => assert(testSetShort == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetShortHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetShortHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetShortHandlerAsyncResult(true, b => {w{assert(testSetShort.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetShortReturn(true)
@@ -1744,13 +1681,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetIntegerParam(true, None)
     nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
     nullableTCK.methodWithNullableSetIntegerHandler(true, b => assert(testSetInteger == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetIntegerHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetIntegerHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(true, b => {w{assert(testSetInteger.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetIntegerReturn(true)
@@ -1763,13 +1698,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetLongParam(true, None)
     nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
     nullableTCK.methodWithNullableSetLongHandler(true, b => assert(testSetLong == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetLongHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetLongHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetLongHandlerAsyncResult(true, b => {w{assert(testSetLong.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetLongReturn(true)
@@ -1782,13 +1715,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetFloatParam(true, None)
     nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
     nullableTCK.methodWithNullableSetFloatHandler(true, b => assert(testSetFloat == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetFloatHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetFloatHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(true, b => {w{assert(testSetFloat.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetFloatReturn(true)
@@ -1801,13 +1732,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetDoubleParam(true, None)
     nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
     nullableTCK.methodWithNullableSetDoubleHandler(true, b => assert(testSetDouble == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetDoubleHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetDoubleHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(true, b => {w{assert(testSetDouble.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetDoubleReturn(true)
@@ -1820,13 +1749,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetBooleanParam(true, None)
     nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
     nullableTCK.methodWithNullableSetBooleanHandler(true, b => assert(testSetBoolean == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetBooleanHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetBooleanHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(true, b => {w{assert(testSetBoolean.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetBooleanReturn(true)
@@ -1839,13 +1766,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetStringParam(true, None)
     nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
     nullableTCK.methodWithNullableSetStringHandler(true, b => assert(testSetString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetStringHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetStringHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetStringHandlerAsyncResult(true, b => {w{assert(testSetString.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetStringReturn(true)
@@ -1858,13 +1783,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetCharParam(true, None)
     nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
     nullableTCK.methodWithNullableSetCharHandler(true, b => assert(testSetChar == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetCharHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetCharHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetCharHandlerAsyncResult(true, b => {w{assert(testSetChar.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetCharReturn(true)
@@ -1877,13 +1800,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
     nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
     nullableTCK.methodWithNullableSetJsonObjectHandler(true, b => assert(testSetJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetJsonObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(true, b => {w{assert(testSetJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetJsonObjectReturn(true)
@@ -1896,13 +1817,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
     nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
     nullableTCK.methodWithNullableSetJsonArrayHandler(true, b => assert(testSetJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetJsonArrayHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(true, b => {w{assert(testSetJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetJsonArrayReturn(true)
@@ -1916,8 +1835,7 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetApiParam(true, None)
     nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
     nullableTCK.methodWithNullableSetApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetApiHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetApiHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetApiHandlerAsyncResult(true, b => {w{assert(b.result().asScala.forall(a => a == iface))}; w.dismiss()})
     w.await()
@@ -1936,13 +1854,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetDataObjectParam(true, None)
     nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
     nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.toJson == json)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetDataObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(true, b => {w{assert(testSetDataObject.forall(a => a.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetDataObjectReturn(true)
@@ -1955,13 +1871,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetEnumParam(true, None)
     nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
     nullableTCK.methodWithNullableSetEnumHandler(true, b => assert(testSetEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(true, b => {w{assert(testSetEnum.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetEnumReturn(true)
@@ -1974,13 +1888,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableSetGenEnumParam(true, None)
     nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
     nullableTCK.methodWithNullableSetGenEnumHandler(true, b => assert(testSetGenEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableSetGenEnumHandler(false, b => println(b))
+    nullableTCK.methodWithNullableSetGenEnumHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(true, b => {w{assert(testSetGenEnum.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableSetGenEnumReturn(true)
@@ -2006,13 +1918,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapByteParam(true, None)
     nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
     nullableTCK.methodWithNullableMapByteHandler(true, b => assert(testMapByte == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapByteHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapByteHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapByteHandlerAsyncResult(true, b => {w{assert(testMapByte.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapByteHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapByteReturn(true)
@@ -2025,13 +1935,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapShortParam(true, None)
     nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
     nullableTCK.methodWithNullableMapShortHandler(true, b => assert(testMapShort == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapShortHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapShortHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapShortHandlerAsyncResult(true, b => {w{assert(testMapShort.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapShortHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapShortReturn(true)
@@ -2044,13 +1952,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapIntegerParam(true, None)
     nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
     nullableTCK.methodWithNullableMapIntegerHandler(true, b => assert(testMapInteger == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapIntegerHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapIntegerHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(true, b => {w{assert(testMapInteger.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapIntegerHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapIntegerReturn(true)
@@ -2063,13 +1969,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapLongParam(true, None)
     nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
     nullableTCK.methodWithNullableMapLongHandler(true, b => assert(testMapLong == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapLongHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapLongHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapLongHandlerAsyncResult(true, b => {w{assert(testMapLong.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapLongHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapLongReturn(true)
@@ -2082,13 +1986,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapFloatParam(true, None)
     nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
     nullableTCK.methodWithNullableMapFloatHandler(true, b => assert(testMapFloat == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapFloatHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapFloatHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(true, b => {w{assert(testMapFloat.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapFloatHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapFloatReturn(true)
@@ -2101,13 +2003,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapDoubleParam(true, None)
     nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
     nullableTCK.methodWithNullableMapDoubleHandler(true, b => assert(testMapDouble == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapDoubleHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapDoubleHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(true, b => {w{assert(testMapDouble.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapDoubleHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapDoubleReturn(true)
@@ -2120,13 +2020,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapBooleanParam(true, None)
     nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
     nullableTCK.methodWithNullableMapBooleanHandler(true, b => assert(testMapBoolean == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapBooleanHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapBooleanHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(true, b => {w{assert(testMapBoolean.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapBooleanHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapBooleanReturn(true)
@@ -2139,13 +2037,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapStringParam(true, None)
     nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
     nullableTCK.methodWithNullableMapStringHandler(true, b => assert(testMapString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapStringHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapStringHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapStringHandlerAsyncResult(true, b => {w{assert(testMapString.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapStringHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapStringReturn(true)
@@ -2158,13 +2054,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapCharParam(true, None)
     nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
     nullableTCK.methodWithNullableMapCharHandler(true, b => assert(testMapChar == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapCharHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapCharHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapCharHandlerAsyncResult(true, b => {w{assert(testMapChar.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapCharHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapCharReturn(true)
@@ -2177,13 +2071,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
     nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
     nullableTCK.methodWithNullableMapJsonObjectHandler(true, b => assert(testMapJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapJsonObjectHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(true, b => {w{assert(testMapJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapJsonObjectReturn(true)
@@ -2196,13 +2088,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
     nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
     nullableTCK.methodWithNullableMapJsonArrayHandler(true, b => assert(testMapJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapJsonArrayHandler(false, b => println(b))
+    nullableTCK.methodWithNullableMapJsonArrayHandler(false, b => assert(null == b))
     val w = new Waiter()
     nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(true, b => {w{assert(testMapJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
     val w2= new Waiter()
-    //TODO: Missing @Nullable
     nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
     w2.await()
     nullableTCK.methodWithNullableMapJsonArrayReturn(true)
@@ -2215,8 +2105,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testMapApi = Map("1" -> RefedInterface1(iface))
     nullableTCK.methodWithNullableMapApiParam(true, None)
     nullableTCK.methodWithNullableMapApiParam(false, Option(testMapApi))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithNullableMapApiHandler(false, b => println(b))
   }
 
 
@@ -2241,8 +2129,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testListString:List[String] = List("first",null,"third")
     nullableTCK.methodWithListNullableStringParam(testListString)
     nullableTCK.methodWithListNullableStringHandler(b => assert(testListString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithListNullableStringHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithListNullableStringHandlerAsyncResult(b => {w{assert(testListString.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2254,8 +2140,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testListJsonObject:List[JsonObject] = List(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
     nullableTCK.methodWithListNullableJsonObjectParam(testListJsonObject)
     nullableTCK.methodWithListNullableJsonObjectHandler(b => assert(testListJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithListNullableJsonObjectHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResult(b => {w{assert(testListJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2267,8 +2151,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testListJsonArray:List[JsonArray] = List(Json.arr("foo","bar"), null, Json.arr("juu"))
     nullableTCK.methodWithListNullableJsonArrayParam(testListJsonArray)
     nullableTCK.methodWithListNullableJsonArrayHandler(b => assert(testListJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithListNullableJsonArrayHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResult(b => {w{assert(testListJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2281,13 +2163,11 @@ class ApiTest extends FlatSpec with Matchers {
     val iface2 = new RefedInterface1Impl().setString("third")
     val testListApi:List[RefedInterface1] = List(RefedInterface1(iface1), null, RefedInterface1(iface2))
     nullableTCK.methodWithListNullableApiParam(testListApi)
-    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
-    //TODO: Missing @Nullable
-//        nullableTCK.methodWithListNullableApiHandler(false, b => println(b))
+    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
     val w = new Waiter()
-    nullableTCK.methodWithListNullableApiHandlerAsyncResult(b => {w{assert(testListApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
+    nullableTCK.methodWithListNullableApiHandlerAsyncResult(b => {w{assert(testListApi.map(x => refedIfaceToJavaOrNull(x)).asJava == b.result())}; w.dismiss()})
     w.await()
-    assert(testListApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithListNullableApiReturn().map(x => if( x!= null) x.asJava else null))
+    assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithListNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
   }
 
   "testListNullableDataObject" should "work" in {
@@ -2296,13 +2176,11 @@ class ApiTest extends FlatSpec with Matchers {
     val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
     val testListDataObject:List[TestDataObject] = List(new TestDataObject(json1), null, new TestDataObject(json2))
     nullableTCK.methodWithListNullableDataObjectParam(testListDataObject)
-    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => if(x != null) x.toJson else null) == b.map(x => if(x != null) x.toJson else null)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithListNullableDataObjectHandler(false, b => println(b))
+    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
     val w = new Waiter()
-    nullableTCK.methodWithListNullableDataObjectHandlerAsyncResult(b => {w{assert(testListDataObject.map(x => if(x != null) x.toJson else null) == b.result().asScala.map(x => if(x != null) x.toJson else null))}; w.dismiss()})
+    nullableTCK.methodWithListNullableDataObjectHandlerAsyncResult(b => {w{assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.result().asScala.map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()})
     w.await()
-    assert(testListDataObject.map(x => if(x != null) x.toJson else null) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => if(x != null) x.toJson else null))
+    assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
   }
 
   "testListNullableGenEnum" should "work" in {
@@ -2310,8 +2188,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testListGenEnum:List[TestGenEnum] = List(TestGenEnum.BOB,null,TestGenEnum.LELAND)
     nullableTCK.methodWithListNullableGenEnumParam(testListGenEnum)
     nullableTCK.methodWithListNullableGenEnumHandler(b => assert(testListGenEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithListNullableGenEnumHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithListNullableGenEnumHandlerAsyncResult(b => {w{assert(testListGenEnum.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2333,8 +2209,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testSetString:Set[String] = Set("first",null,"third")
     nullableTCK.methodWithSetNullableStringParam(testSetString)
     nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithSetNullableStringHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithSetNullableStringHandlerAsyncResult(b => {w{assert(testSetString.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2346,8 +2220,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testSetJsonObject:Set[JsonObject] = Set(Json.obj(("foo","bar")), null, Json.obj(("juu",3)))
     nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
     nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithSetNullableJsonObjectHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResult(b => {w{assert(testSetJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2359,8 +2231,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testSetJsonArray:Set[JsonArray] = Set(Json.arr("foo","bar"), null, Json.arr("juu"))
     nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
     nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithSetNullableJsonArrayHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResult(b => {w{assert(testSetJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2374,13 +2244,11 @@ class ApiTest extends FlatSpec with Matchers {
     val testSetApi:Set[RefedInterface1] = Set(RefedInterface1(iface1), null, RefedInterface1(iface2))
     //TODO: RefedInterface1Impl needs a nullsafe equals method!
 //    nullableTCK.methodWithSetNullableApiParam(testSetApi)
-//    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => if( x!= null) x.asJava else null) == b.map(x => if( x!= null) x.asJava else null)))
-    //TODO: Missing @Nullable
-    //        nullableTCK.methodWithSetNullableApiHandler(false, b => println(b))
+//    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
 //    val w = new Waiter()
-//    nullableTCK.methodWithSetNullableApiHandlerAsyncResult(b => {w{assert(testSetApi.map(x => if( x!= null) x.asJava else null).asJava == b.result())}; w.dismiss()})
+//    nullableTCK.methodWithSetNullableApiHandlerAsyncResult(b => {w{assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)).asJava == b.result())}; w.dismiss()})
 //    w.await()
-//    assert(testSetApi.map(x => if( x!= null) x.asJava else null) == nullableTCK.methodWithSetNullableApiReturn().map(x => if( x!= null) x.asJava else null))
+//    assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithSetNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
   }
 
   "testSetNullableDataObject" should "work" in {
@@ -2389,22 +2257,20 @@ class ApiTest extends FlatSpec with Matchers {
     val json2 = Json.obj(("foo","third"), ("bar",3), ("wibble",3.3))
     val testSetDataObject:Set[TestDataObject] = Set(new TestDataObject(json1), null, new TestDataObject(json2))
     nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
-    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == b.map(x => if(x != null) x.toJson else null)))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithSetNullableDataObjectHandler(false, b => println(b))
+    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
     val w = new Waiter()
-    nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResult(b => {w{assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == b.result().asScala.map(x => if(x != null) x.toJson else null))}; w.dismiss()})
+    nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResult(b => {w{assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.result().asScala.map(x => dataObjectToJsonOrNull(x)))}; w.dismiss()})
     w.await()
-    assert(testSetDataObject.map(x => if(x != null) x.toJson else null) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => if(x != null) x.toJson else null))
+    assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
   }
+
+
 
   "testSetNullableGenEnum" should "work" in {
     import collection.JavaConverters._
     val testSetGenEnum:Set[TestGenEnum] = Set(TestGenEnum.BOB,null,TestGenEnum.LELAND)
     nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
     nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithSetNullableGenEnumHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResult(b => {w{assert(testSetGenEnum.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2426,8 +2292,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testMapString:Map[String, String] = Map("1" -> "first","2" -> null, "3" -> "third")
     nullableTCK.methodWithMapNullableStringParam(testMapString)
     nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithMapNullableStringHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithMapNullableStringHandlerAsyncResult(b => {w{assert(testMapString.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2439,8 +2303,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testMapJsonObject:Map[String, JsonObject] = Map("1" -> Json.obj(("foo","bar")), "2" -> null, "3" -> Json.obj(("juu",3)))
     nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
     nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithMapNullableJsonObjectHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResult(b => {w{assert(testMapJsonObject.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2452,8 +2314,6 @@ class ApiTest extends FlatSpec with Matchers {
     val testMapJsonArray:Map[String, JsonArray] = Map("1" -> Json.arr("foo","bar"), "2" -> null, "3" -> Json.arr("juu"))
     nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
     nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray == b))
-    //TODO: Missing @Nullable
-    //    nullableTCK.methodWithMapNullableJsonArrayHandler(false, b => println(b))
     val w = new Waiter()
     nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResult(b => {w{assert(testMapJsonArray.asJava == b.result())}; w.dismiss()})
     w.await()
@@ -2488,5 +2348,14 @@ class ApiTest extends FlatSpec with Matchers {
     assert(actualOptions.isCompressionSupported == options.isCompressionSupported)
     assert(actualOptions.isSsl == options.isSsl)
     assert(actualOptions.getSendBufferSize == options.getSendBufferSize)
+  }
+
+  def dataObjectToJsonOrNull(x: TestDataObject): JsonObject = {
+    if(x!=null) x.toJson else null
+  }
+
+  def refedIfaceToJavaOrNull(x: RefedInterface1):io.vertx.codegen.testmodel.RefedInterface1 = {
+    if( x!= null) x.asJava else null
+
   }
 }
