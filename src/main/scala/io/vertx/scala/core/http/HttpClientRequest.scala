@@ -259,7 +259,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
 
   /**
     * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
-    * the [[io.vertx.scala.core.http.HttpVersion]] if it can be determined or null otherwise.
+    * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
   def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.sendHead(funcToHandler(completionHandler))

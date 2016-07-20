@@ -52,7 +52,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * 
     * The message will be delivered to at most one of the handlers registered to the address.
     * @param address the address to send it to
-    * @param message the message, may be {@code null}
+    * @param message the message, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String, message: AnyRef): io.vertx.scala.core.eventbus.EventBus = {
@@ -64,8 +64,9 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
     * subsequently replies to the message.
     * @param address the address to send it to
-    * @param message the message, may be {@code null}
-    * @return reply handler will be called when any reply from the recipient is received, may be {@code null}
+    * @param message the message, may be `null`
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
+    * @return a reference to this, so the API can be used fluently
     */
   def send[T](address: String, message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
     _asJava.send(address, message, funcToHandler(replyHandler))
@@ -75,7 +76,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
   /**
     * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying `options` that can be used to configure the delivery.
     * @param address the address to send it to
-    * @param message the message, may be {@code null}
+    * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
@@ -88,9 +89,10 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
     * subsequently replies to the message.
     * @param address the address to send it to
-    * @param message the message, may be {@code null}
+    * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return reply handler will be called when any reply from the recipient is received, may be {@code null}
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
+    * @return a reference to this, so the API can be used fluently
     */
   def send[T](address: String, message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
     _asJava.send(address, message, options, funcToHandler(replyHandler))
@@ -101,7 +103,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * Publish a message.
     * The message will be delivered to all handlers registered to the address.
     * @param address the address to publish it to
-    * @param message the message, may be {@code null}
+    * @param message the message, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String, message: AnyRef): io.vertx.scala.core.eventbus.EventBus = {
@@ -112,7 +114,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
   /**
     * Like [[io.vertx.scala.core.eventbus.EventBus#publish]] but specifying `options` that can be used to configure the delivery.
     * @param address the address to publish it to
-    * @param message the message, may be {@code null}
+    * @param message the message, may be `null`
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */

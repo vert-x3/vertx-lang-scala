@@ -129,7 +129,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * listening (or has failed).
     * @param port the port to listen on
     * @param host the host to listen on
-    * @return the listen handler
+    * @param listenHandler the listen handler
     */
   def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen(port, host, funcToHandler(listenHandler))
@@ -150,7 +150,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @param port the port to listen on
-    * @return the listen handler
+    * @param listenHandler the listen handler
     */
   def listen(port: Int, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen(port, funcToHandler(listenHandler))
@@ -159,7 +159,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
-    * @return the listen handler
+    * @param listenHandler the listen handler
     */
   def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
     _asJava.listen(funcToHandler(listenHandler))
@@ -177,7 +177,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).
-    * @return the handler
+    * @param completionHandler the handler
     */
   def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.close(funcToHandler(completionHandler))

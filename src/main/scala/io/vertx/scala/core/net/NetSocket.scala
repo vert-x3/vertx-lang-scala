@@ -171,7 +171,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
-    * @return handler
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, funcToHandler(resultHandler))
@@ -183,7 +184,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
-    * @return handler
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, offset, funcToHandler(resultHandler))
@@ -196,7 +198,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param filename file name of the file to send
     * @param offset offset
     * @param length length
-    * @return handler
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, offset, length, funcToHandler(resultHandler))

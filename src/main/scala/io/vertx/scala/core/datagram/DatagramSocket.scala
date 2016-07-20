@@ -54,11 +54,12 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
 
   /**
     * Write the given [[io.vertx.scala.core.buffer.Buffer]] to the [[io.vertx.scala.core.net.SocketAddress]].
-    * The [[io.vertx.scala.core.Handler]] will be notified once the write completes.
+    * The scala-function will be notified once the write completes.
     * @param packet the [[io.vertx.scala.core.buffer.Buffer]] to write
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the function to notify once the write completes.
+    * @param handler the scala-function to notify once the write completes.
+    * @return a reference to this, so the API can be used fluently
     */
   def send(packet: io.vertx.scala.core.buffer.Buffer, port: Int, host: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(packet.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], port, host, funcToHandler(handler))
@@ -82,7 +83,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param str the [[String]] to write
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the function to notify once the write completes.
+    * @param handler the scala-function to notify once the write completes.
+    * @return a reference to this, so the API can be used fluently
     */
   def send(str: String, port: Int, host: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(str, port, host, funcToHandler(handler))
@@ -96,7 +98,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param enc the charset used for encoding
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the function to notify once the write completes.
+    * @param handler the scala-function to notify once the write completes.
+    * @return a reference to this, so the API can be used fluently
     */
   def send(str: String, enc: String, port: Int, host: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(str, enc, port, host, funcToHandler(handler))
@@ -106,7 +109,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
   /**
     * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]] implementation asynchronous
     * and notifies the handler once done.
-    * @return the handler to notify once complete
+    * @param handler the handler to notify once complete
     */
   def close(handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.close(funcToHandler(handler))
@@ -135,7 +138,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * Joins a multicast group and listens for packets send to it.
     * The  is notified once the operation completes.
     * @param multicastAddress the address of the multicast group to join
-    * @return then handler to notify once the operation completes
+    * @param handler then handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def listenMulticastGroup(multicastAddress: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listenMulticastGroup(multicastAddress, funcToHandler(handler))
@@ -148,7 +152,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param multicastAddress the address of the multicast group to join
     * @param networkInterface the network interface on which to listen for packets.
     * @param source the address of the source for which we will listen for multicast packets
-    * @return then handler to notify once the operation completes
+    * @param handler then handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToHandler(handler))
@@ -159,7 +164,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * Leaves a multicast group and stops listening for packets send to it.
     * The  is notified once the operation completes.
     * @param multicastAddress the address of the multicast group to leave
-    * @return then handler to notify once the operation completes
+    * @param handler then handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def unlistenMulticastGroup(multicastAddress: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.unlistenMulticastGroup(multicastAddress, funcToHandler(handler))
@@ -172,7 +178,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param multicastAddress the address of the multicast group to join
     * @param networkInterface the network interface on which to listen for packets.
     * @param source the address of the source for which we will listen for multicast packets
-    * @return the handler to notify once the operation completes
+    * @param handler the handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToHandler(handler))
@@ -184,7 +191,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * the operation completes.
     * @param multicastAddress the address for which you want to block the source address
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the handler to notify once the operation completes
+    * @param handler the handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def blockMulticastGroup(multicastAddress: String, sourceToBlock: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.blockMulticastGroup(multicastAddress, sourceToBlock, funcToHandler(handler))
@@ -197,7 +205,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param multicastAddress the address for which you want to block the source address
     * @param networkInterface the network interface on which the blocking should occur.
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the handler to notify once the operation completes
+    * @param handler the handler to notify once the operation completes
+    * @return a reference to this, so the API can be used fluently
     */
   def blockMulticastGroup(multicastAddress: String, networkInterface: String, sourceToBlock: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.blockMulticastGroup(multicastAddress, networkInterface, sourceToBlock, funcToHandler(handler))
@@ -208,7 +217,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * Start listening on the given port and host. The handler will be called when the socket is listening.
     * @param port the port to listen on
     * @param host the host to listen on
-    * @return the handler will be called when listening
+    * @param handler the handler will be called when listening
+    * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String, handler: io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listen(port, host, funcToHandler(handler))

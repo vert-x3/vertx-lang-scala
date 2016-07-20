@@ -82,7 +82,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the CLI description.
     */
   def getDescription(): scala.Option[String] = {
-scala.Option(    _asJava.getDescription())
+    scala.Option(    _asJava.getDescription())
   }
 
   def setDescription(desc: String): io.vertx.scala.core.cli.CLI = {
@@ -94,7 +94,7 @@ scala.Option(    _asJava.getDescription())
     * @return the CLI summary.
     */
   def getSummary(): scala.Option[String] = {
-scala.Option(    _asJava.getSummary())
+    scala.Option(    _asJava.getSummary())
   }
 
   /**
@@ -109,7 +109,7 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
-    * @return {@code true} if the current [[CLI]] is hidden, [[false]] otherwise
+    * @return `true` if the current [[CLI]] is hidden, [[false]] otherwise
     */
   def isHidden(): Boolean = {
     _asJava.isHidden()
@@ -136,7 +136,7 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Adds an option.
-    * @param option the option, must not be {@code null}.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
+    * @param option the option, must not be `null`.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the current [[CLI]] instance
     */
   def addOption(option: io.vertx.core.cli.Option): io.vertx.scala.core.cli.CLI = {
@@ -145,9 +145,9 @@ scala.Option(    _asJava.getSummary())
   }
 
   /**
-    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI#setOptions]]}, this method does not remove the existing options.
+    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI#setOptions]]`, this method does not remove the existing options.
     * The given list is appended to the existing list.
-    * @param options the options, must not be {@code null}
+    * @param options the options, must not be `null`
     * @return the current [[CLI]] instance
     */
   def addOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
@@ -157,7 +157,7 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Sets the list of arguments.
-    * @param options the list of options, must not be {@code null}
+    * @param options the list of options, must not be `null`
     * @return the current [[CLI]] instance
     */
   def setOptions(options: List[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
@@ -175,7 +175,7 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Adds an argument.
-    * @param arg the argument, must not be {@code null}see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    * @param arg the argument, must not be `null`see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the current [[CLI]] instance
     */
   def addArgument(arg: io.vertx.core.cli.Argument): io.vertx.scala.core.cli.CLI = {
@@ -186,7 +186,7 @@ scala.Option(    _asJava.getSummary())
   /**
     * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI#setArguments]], this method does not remove the existing arguments.
     * The given list is appended to the existing list.
-    * @param args the arguments, must not be {@code null}
+    * @param args the arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
   def addArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
@@ -196,7 +196,7 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Sets the list of arguments.
-    * @param args the list of arguments, must not be {@code null}
+    * @param args the list of arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
   def setArguments(args: List[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
@@ -206,29 +206,29 @@ scala.Option(    _asJava.getSummary())
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Option.html">Option</a> based on its name (short name, long name or argument name).
-    * @param name the name, must not be {@code null}
-    * @return the [[Option]], {@code null} if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
+    * @param name the name, must not be `null`
+    * @return the [[Option]], `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[io.vertx.core.cli.Option] = {
-scala.Option(    _asJava.getOption(name))
+    scala.Option(    _asJava.getOption(name))
   }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
-    * @param name the name of the argument, must not be {@code null}
-    * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    * @param name the name of the argument, must not be `null`
+    * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[io.vertx.core.cli.Argument] = {
-scala.Option(    _asJava.getArgument(name))
+    scala.Option(    _asJava.getArgument(name))
   }
 
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
     * @param index the index, must be positive or zero.
-    * @return the [[Argument]], {@code null} if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[io.vertx.core.cli.Argument] = {
-scala.Option(    _asJava.getArgument(index))
+    scala.Option(    _asJava.getArgument(index))
   }
 
   /**

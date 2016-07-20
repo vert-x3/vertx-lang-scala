@@ -86,7 +86,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * </ul>
     * <p/>
     * This is not implemented for HTTP/1.x.
-    * @param errorCode the {@literal GOAWAY} error code
+    * @param errorCode the {@literal GOAWAY` error code
     * @param lastStreamId the last stream id
     * @param debugData additional debug data sent to the remote endpoint
     * @return a reference to this, so the API can be used fluently
@@ -190,7 +190,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    * @return the handler notified when the settings have been acknowledged by the remote endpoint
+    * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
+    * @return a reference to this, so the API can be used fluently
     */
   def updateSettings(settings: io.vertx.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpConnection = {
     _asJava.updateSettings(settings, funcToHandler(completionHandler))
@@ -221,7 +222,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param data the 8 bytes data of the frame
-    * @return an async result handler notified with pong reply or the failure
+    * @param pongHandler an async result handler notified with pong reply or the failure
+    * @return a reference to this, so the API can be used fluently
     */
   def ping(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.http.HttpConnection = {
     _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToHandler(pongHandler))
@@ -232,7 +234,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * Set an handler notified when a  frame is received from the remote endpoint.
     * <p/>
     * This is not implemented for HTTP/1.x.
-    * @param handler the handler to be called when a {@literal PING} is received
+    * @param handler the handler to be called when a {@literal PING` is received
     * @return a reference to this, so the API can be used fluently
     */
   def pingHandler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpConnection = {

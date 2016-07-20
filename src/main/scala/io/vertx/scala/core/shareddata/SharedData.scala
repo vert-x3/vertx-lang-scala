@@ -43,7 +43,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * Get the cluster wide map with the specified name. The map is accessible to all nodes in the cluster and data
     * put into the map from any node is visible to to any other node.
     * @param name the name of the map
-    * @return the map will be returned asynchronously in this handler
+    * @param resultHandler the map will be returned asynchronously in this handler
     */
   def getClusterWideMap[K, V](name: String, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.shareddata.AsyncMap[K,V]] => Unit): Unit = {
     _asJava.getClusterWideMap(name, funcToHandler(resultHandler))
@@ -52,7 +52,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
   /**
     * Get a cluster wide lock with the specified name. The lock will be passed to the handler when it is available.
     * @param name the name of the lock
-    * @return the handler
+    * @param resultHandler the handler
     */
   def getLock(name: String, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock] => Unit): Unit = {
     _asJava.getLock(name, funcToHandler(resultHandler))
@@ -63,7 +63,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * a failure will be sent to the handler
     * @param name the name of the lock
     * @param timeout the timeout in ms
-    * @return the handler
+    * @param resultHandler the handler
     */
   def getLockWithTimeout(name: String, timeout: Long, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock] => Unit): Unit = {
     _asJava.getLockWithTimeout(name, timeout, funcToHandler(resultHandler))
@@ -72,7 +72,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
   /**
     * Get a cluster wide counter. The counter will be passed to the handler.
     * @param name the name of the counter.
-    * @return the handler
+    * @param resultHandler the handler
     */
   def getCounter(name: String, resultHandler: io.vertx.core.AsyncResult[io.vertx.core.shareddata.Counter] => Unit): Unit = {
     _asJava.getCounter(name, funcToHandler(resultHandler))

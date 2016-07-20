@@ -105,7 +105,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-    * @return the completion handler
+    * @param completionHandler the completion handler
     */
   def completionHandler(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.completionHandler(funcToHandler(completionHandler))
@@ -120,7 +120,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Unregisters the handler which created this registration
-    * @return the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
+    * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
   def unregister(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.unregister(funcToHandler(completionHandler))

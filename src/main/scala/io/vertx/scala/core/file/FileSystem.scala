@@ -48,7 +48,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The copy will fail if the destination already exists.
     * @param from the path to copy from
     * @param to the path to copy to
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def copy(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.copy(from, to, funcToHandler(handler))
@@ -72,7 +73,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The copy will fail if the destination if the destination already exists.
     * @param from the path to copy from
     * @param to the path to copy to
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def copyRecursive(from: String, to: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.copyRecursive(from, to, recursive, funcToHandler(handler))
@@ -93,7 +95,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The move will fail if the destination already exists.
     * @param from the path to copy from
     * @param to the path to copy to
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def move(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.move(from, to, funcToHandler(handler))
@@ -114,7 +117,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The operation will fail if the file does not exist or `len` is less than `zero`.
     * @param path the path to the file
     * @param len the length to truncate it to
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def truncate(path: String, len: Long, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.truncate(path, len, funcToHandler(handler))
@@ -136,7 +140,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * specified <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
     * @param path the path to the file
     * @param perms the permissions string
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def chmod(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.chmod(path, perms, funcToHandler(handler))
@@ -154,14 +159,15 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Change the permissions on the file represented by `path` to `perms`, asynchronously.
     * The permission String takes the form rwxr-x--- as
-    * specified in {<a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>}.
+    * specified in {<a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>`.
     * 
     * If the file is directory then all contents will also have their permissions changed recursively. Any directory permissions will
     * be set to `dirPerms`, whilst any normal file permissions will be set to `perms`.
     * @param path the path to the file
     * @param perms the permissions string
     * @param dirPerms the directory permissions
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def chmodRecursive(path: String, perms: String, dirPerms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.chmodRecursive(path, perms, dirPerms, funcToHandler(handler))
@@ -177,11 +183,12 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   }
 
   /**
-    * Change the ownership on the file represented by `path` to `user` and {code group}, asynchronously.
+    * Change the ownership on the file represented by `path` to `user` and {code group`, asynchronously.
     * @param path the path to the file
-    * @param user the user name, {@code null} will not change the user name
-    * @param group the user group, {@code null} will not change the user group name
-    * @return the handler that will be called on completion
+    * @param user the user name, `null` will not change the user name
+    * @param group the user group, `null` will not change the user group name
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def chown(path: String, user: scala.Option[String], group: scala.Option[String], handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), funcToHandler(handler))
@@ -202,7 +209,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * If the file is a link, the link will be followed.
     * @param path the path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def props(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.props(path, funcToHandler(handler))
@@ -221,7 +229,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * The link will not be followed.
     * @param path the path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def lprops(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.lprops(path, funcToHandler(handler))
@@ -239,7 +248,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Create a hard link on the file system from `link` to `existing`, asynchronously.
     * @param link the link
     * @param existing the link destination
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def link(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.link(link, existing, funcToHandler(handler))
@@ -258,7 +268,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Create a symbolic link on the file system from `link` to `existing`, asynchronously.
     * @param link the link
     * @param existing the link destination
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def symlink(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.symlink(link, existing, funcToHandler(handler))
@@ -276,7 +287,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Unlinks the link on the file system represented by the path `link`, asynchronously.
     * @param link the link
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def unlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.unlink(link, funcToHandler(handler))
@@ -294,7 +306,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Returns the path representing the file that the symbolic link specified by `link` points to, asynchronously.
     * @param link the link
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def readSymlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.String] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.readSymlink(link, funcToHandler(handler))
@@ -311,7 +324,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Deletes the file represented by the specified `path`, asynchronously.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def delete(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.delete(path, funcToHandler(handler))
@@ -333,7 +347,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * deleted recursively.
     * @param path path to the file
     * @param recursive delete recursively?
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def deleteRecursive(path: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.deleteRecursive(path, recursive, funcToHandler(handler))
@@ -353,7 +368,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * The operation will fail if the directory already exists.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def mkdir(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.mkdir(path, funcToHandler(handler))
@@ -379,7 +395,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The operation will fail if the directory already exists.
     * @param path path to the file
     * @param perms the permissions string
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def mkdir(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.mkdir(path, perms, funcToHandler(handler))
@@ -399,7 +416,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * The operation will fail if the directory already exists.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def mkdirs(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.mkdirs(path, funcToHandler(handler))
@@ -425,7 +443,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The operation will fail if the directory already exists.
     * @param path path to the file
     * @param perms the permissions string
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def mkdirs(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.mkdirs(path, perms, funcToHandler(handler))
@@ -445,7 +464,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * The result is an array of String representing the paths of the files inside the directory.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def readDir(path: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.readDir(path, funcToHandler(handler))
@@ -463,12 +483,13 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Read the contents of the directory specified by `path`, asynchronously.
     * 
     * The parameter `filter` is a regular expression. If `filter` is specified then only the paths that
-    * match  @{filter}will be returned.
+    * match  @{filter`will be returned.
     * 
     * The result is an array of String representing the paths of the files inside the directory.
     * @param path path to the directory
     * @param filter the filter expression
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def readDir(path: String, filter: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.readDir(path, filter, funcToHandler(handler))
@@ -487,7 +508,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * 
     * Do not user this method to read very large files or you risk running out of available RAM.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def readFile(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.readFile(path, funcToHandler(handler))
@@ -505,7 +527,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Creates the file, and writes the specified `Buffer data` to the file represented by the path `path`,
     * asynchronously.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def writeFile(path: String, data: io.vertx.scala.core.buffer.Buffer, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToHandler(handler))
@@ -526,6 +549,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * The file is opened for both reading and writing. If the file does not already exist it will be created.
     * @param path path to the file
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
+    * @return a reference to this, so the API can be used fluently
     */
   def open(path: String, options: io.vertx.core.file.OpenOptions, handler: io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.open(path, options, funcToHandler(handler))
@@ -542,7 +566,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Creates an empty file with the specified `path`, asynchronously.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def createFile(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.createFile(path, funcToHandler(handler))
@@ -561,7 +586,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Creates an empty file with the specified `path` and permissions `perms`, asynchronously.
     * @param path path to the file
     * @param perms the permissions string
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def createFile(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.createFile(path, perms, funcToHandler(handler))
@@ -579,7 +605,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Determines whether the file as specified by the path `path` exists, asynchronously.
     * @param path path to the file
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def exists(path: String, handler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.exists(path, funcToHandler(handler))
@@ -596,7 +623,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
   /**
     * Returns properties of the file-system being used by the specified `path`, asynchronously.
     * @param path path to anywhere on the filesystem
-    * @return the handler that will be called on completion
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def fsProps(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileSystemProps] => Unit): io.vertx.scala.core.file.FileSystem = {
     _asJava.fsProps(path, funcToHandler(handler))

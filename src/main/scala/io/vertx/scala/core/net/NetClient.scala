@@ -51,6 +51,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
+    * @return a reference to this, so the API can be used fluently
     */
   def connect(port: Int, host: String, connectHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
     _asJava.connect(port, host, funcToHandler(connectHandler))
