@@ -402,7 +402,6 @@
     var fluent = method.isFluent();
     var wrap = false;
 
-    /** TODO: UGLYYY } **/
     if (method.returnType.kind == CLASS_HANDLER) {
       var ret = method.returnType.args[0];
       var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
@@ -410,7 +409,6 @@
       if (ret.kind == CLASS_API ||
           ret.kind == CLASS_DATA_OBJECT ||
           ret.kind == CLASS_ENUM) {
-          /* TODO: x.asScala doesn't work for everything*/
         invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
       } else if (ret.kind == CLASS_PRIMITIVE ||
                  ret.kind == CLASS_BOXED_PRIMITIVE ||
