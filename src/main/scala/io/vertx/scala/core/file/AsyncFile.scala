@@ -111,7 +111,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   /**
     * Close the file. The actual close happens asynchronously.
     * The handler will be called when the close is complete, or an error occurs.
-    * @return the handler
+    * @param handler the handler
     */
   def close(handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.close(funcToHandler(handler))
@@ -129,7 +129,8 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * The handler will be called when the write is complete, or if an error occurs.
     * @param buffer the buffer to write
     * @param position the position in the file to write it at
-    * @return the handler to call when the write is complete
+    * @param handler the handler to call when the write is complete
+    * @return a reference to this, so the API can be used fluently
     */
   def write(buffer: io.vertx.scala.core.buffer.Buffer, position: Long, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.AsyncFile = {
     _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, funcToHandler(handler))
@@ -149,7 +150,8 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @param offset the offset into the buffer where the data will be read
     * @param position the position in the file where to start reading
     * @param length the number of bytes to read
-    * @return the handler to call when the write is complete
+    * @param handler the handler to call when the write is complete
+    * @return a reference to this, so the API can be used fluently
     */
   def read(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
     _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, funcToHandler(handler))

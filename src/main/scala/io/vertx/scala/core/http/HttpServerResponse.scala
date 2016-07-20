@@ -242,7 +242,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
 
   /**
     * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes some data to the response body before ending. If the response is not chunked and
-    * no other data has been written then the @code{Content-Length} header will be automatically set.
+    * no other data has been written then the @code{Content-Length` header will be automatically set.
     * @param chunk the buffer to write before ending the response
     */
   def end(chunk: io.vertx.scala.core.buffer.Buffer): Unit = {
@@ -260,7 +260,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset @code{0} which means starting from the beginning of the file.
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset @code{0` which means starting from the beginning of the file.
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
@@ -270,7 +270,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length @code{Long.MAX_VALUE} which means until the end of the
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length @code{Long.MAX_VALUE` which means until the end of the
     * file.
     * @param filename path to the file to serve
     * @param offset offset to start serving from
@@ -301,7 +301,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
-    * @return handler that will be called on completion
+    * @param resultHandler handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, funcToHandler(resultHandler))
@@ -313,7 +314,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * written to the wire.
     * @param filename path to the file to serve
     * @param offset the offset to serve from
-    * @return handler that will be called on completion
+    * @param resultHandler handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, offset, funcToHandler(resultHandler))
@@ -326,7 +328,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param filename path to the file to serve
     * @param offset the offset to serve from
     * @param length the length to serve to
-    * @return handler that will be called on completion
+    * @param resultHandler handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.sendFile(filename, offset, length, funcToHandler(resultHandler))
@@ -434,7 +437,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param host the host of the promised request
     * @param path the path of the promised request
     * @param headers the headers of the promised request
-    * @return the handler notified when the response can be written
+    * @param handler the handler notified when the response can be written
+    * @return a reference to this, so the API can be used fluently
     */
   def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap, handler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse] => Unit): io.vertx.scala.core.http.HttpServerResponse = {
     _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToHandler(handler))

@@ -443,14 +443,14 @@
 
     if(method.returnType.isNullable){
       if(conversion != '') {
-        invocation = 'scala.Option('+invocation+') match { case Some(x) => Some(x' + conversion + '); case None => None};\n'
+        invocation = indentation + 'scala.Option('+invocation+') match { case Some(x) => Some(x' + conversion + '); case None => None};\n'
       }
       else {
         if(method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
-          invocation = 'nullsafeConvToOption('+invocation+');\n'
+          invocation = indentation + 'nullsafeConvToOption('+invocation+');\n'
         }
         else {
-          invocation = 'scala.Option('+invocation+')\n'
+          invocation = indentation + 'scala.Option('+invocation+')\n'
         }
       }
     }

@@ -49,7 +49,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * Gets the value of an option with the matching name (can be the long name, short name or arg name).
     * @param name the name
-    * @return the value, {@code null} if not set
+    * @return the value, `null` if not set
     */
   def getOptionValue[T](name: String): T = {
     _asJava.getOptionValue(name)
@@ -58,7 +58,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * Gets the value of an argument with the matching name (arg name).
     * @param name the name
-    * @return the value, {@code null} if not set
+    * @return the value, `null` if not set
     */
   def getArgumentValue[T](name: String): T = {
     _asJava.getArgumentValue(name)
@@ -67,7 +67,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * Gets the value of an argument with the given index.
     * @param index the index
-    * @return the value, {@code null} if not set
+    * @return the value, `null` if not set
     */
   def getArgumentValue[T](index: Int): T = {
     _asJava.getArgumentValue(index)
@@ -78,7 +78,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * <p/>
     * Calling this method an a non-flag option throws an IllegalStateException.
     * @param name the option name
-    * @return {@code true} if the flag has been set in the command line, {@code false} otherwise.
+    * @return `true` if the flag has been set in the command line, `false` otherwise.
     */
   def isFlagEnabled(name: String): Boolean = {
     _asJava.isFlagEnabled(name)
@@ -87,7 +87,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * Checks whether or not the given option has been assigned in the command line.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return {@code true} if the option has received a value, [[false]] otherwise.
+    * @return `true` if the option has received a value, [[false]] otherwise.
     */
   def isOptionAssigned(option: io.vertx.core.cli.Option): Boolean = {
     _asJava.isOptionAssigned(option)
@@ -123,10 +123,10 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * Gets the raw value of the given option. Raw values are the values as given in the user command line.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return the value, {@code null} if none.
+    * @return the value, `null` if none.
     */
   def getRawValueForOption(option: io.vertx.core.cli.Option): scala.Option[String] = {
-scala.Option(    _asJava.getRawValueForOption(option))
+    scala.Option(    _asJava.getRawValueForOption(option))
   }
 
   /**
@@ -141,16 +141,16 @@ scala.Option(    _asJava.getRawValueForOption(option))
   /**
     * Gets the raw value of the given argument. Raw values are the values as given in the user command line.
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    * @return the value, {@code null} if none.
+    * @return the value, `null` if none.
     */
   def getRawValueForArgument(arg: io.vertx.core.cli.Argument): scala.Option[String] = {
-scala.Option(    _asJava.getRawValueForArgument(arg))
+    scala.Option(    _asJava.getRawValueForArgument(arg))
   }
 
   /**
     * Checks whether or not the given argument has been assigned in the command line.
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    * @return {@code true} if the argument has received a value, [[false]] otherwise.
+    * @return `true` if the argument has received a value, [[false]] otherwise.
     */
   def isArgumentAssigned(arg: io.vertx.core.cli.Argument): Boolean = {
     _asJava.isArgumentAssigned(arg)
@@ -159,7 +159,7 @@ scala.Option(    _asJava.getRawValueForArgument(arg))
   /**
     * Checks whether or not the given option has been seen in the user command line.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return {@code true} if the user command line has used the option
+    * @return `true` if the user command line has used the option
     */
   def isSeenInCommandLine(option: io.vertx.core.cli.Option): Boolean = {
     _asJava.isSeenInCommandLine(option)
@@ -168,7 +168,7 @@ scala.Option(    _asJava.getRawValueForArgument(arg))
   /**
     * Checks whether or not the command line is valid, i.e. all constraints from arguments and options have been
     * satisfied. This method is used when the parser validation is disabled.
-    * @return {@code true} if the current [[CommandLine]] object is valid. [[false]] otherwise.
+    * @return `true` if the current [[CommandLine]] object is valid. [[false]] otherwise.
     */
   def isValid(): Boolean = {
     _asJava.isValid()
@@ -176,7 +176,7 @@ scala.Option(    _asJava.getRawValueForArgument(arg))
 
   /**
     * Checks whether or not the user has passed a "help" option and is asking for help.
-    * @return {@code true} if the user command line has enabled a "Help" option, [[false]] otherwise.
+    * @return `true` if the user command line has enabled a "Help" option, [[false]] otherwise.
     */
   def isAskingForHelp(): Boolean = {
     _asJava.isAskingForHelp()

@@ -32,7 +32,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Get the current value of the counter
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def get(resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.get(funcToHandler(resultHandler))
@@ -40,7 +40,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Increment the counter atomically and return the new count
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def incrementAndGet(resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.incrementAndGet(funcToHandler(resultHandler))
@@ -48,7 +48,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Increment the counter atomically and return the value before the increment.
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def getAndIncrement(resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.getAndIncrement(funcToHandler(resultHandler))
@@ -56,7 +56,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Decrement the counter atomically and return the new count
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def decrementAndGet(resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.decrementAndGet(funcToHandler(resultHandler))
@@ -65,7 +65,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
   /**
     * Add the value to the counter atomically and return the new count
     * @param value the value to add
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def addAndGet(value: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.addAndGet(value, funcToHandler(resultHandler))
@@ -74,7 +74,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
   /**
     * Add the value to the counter atomically and return the value before the add
     * @param value the value to add
-    * @return handler which will be passed the value
+    * @param resultHandler handler which will be passed the value
     */
   def getAndAdd(value: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Long] => Unit): Unit = {
     _asJava.getAndAdd(value, funcToHandler(resultHandler))
@@ -85,7 +85,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * atomically.
     * @param expected the expected value
     * @param value the new value
-    * @return the handler will be passed true on success
+    * @param resultHandler the handler will be passed true on success
     */
   def compareAndSet(expected: Long, value: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): Unit = {
     _asJava.compareAndSet(expected, value, funcToHandler(resultHandler))

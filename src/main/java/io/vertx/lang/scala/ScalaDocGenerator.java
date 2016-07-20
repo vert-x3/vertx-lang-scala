@@ -1,6 +1,5 @@
 package io.vertx.lang.scala;
 
-import io.vertx.codegen.annotations.Nullable;
 import io.vertx.codegen.type.*;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.groovy.GroovyLang;
@@ -14,8 +13,7 @@ import javax.lang.model.type.TypeMirror;
 import java.util.List;
 
 /**
- * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
- * @author <a href="mailto:larsdtimm@gmail.com">Lars Timm</a
+ * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
  */
 public class ScalaDocGenerator implements DocGenerator {
 
@@ -24,7 +22,7 @@ public class ScalaDocGenerator implements DocGenerator {
     private ProcessingEnvironment env;
 
     @Override
-    public void init(@Nullable ProcessingEnvironment processingEnv) {
+    public void init(ProcessingEnvironment processingEnv) {
         factory = new TypeMirrorFactory(processingEnv.getElementUtils(), processingEnv.getTypeUtils());
         translator = new CodeTranslator(processingEnv);
         env = processingEnv;
@@ -37,7 +35,13 @@ public class ScalaDocGenerator implements DocGenerator {
 
     @Override
     public String renderSource(ExecutableElement elt, String source) {
-        return "todo";
+        GroovyLang lang = new GroovyLang();
+        try {
+            return translator.translate(elt, lang);
+        } catch (Exception e) {
+            System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName() + " : " + e.getMessage());
+            return "Code not translatable";
+        }
     }
 
     @Override

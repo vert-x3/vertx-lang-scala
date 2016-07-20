@@ -284,7 +284,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
 
   /**
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
-    * @return The handler will be notified when the close is complete.
+    * @param completionHandler The handler will be notified when the close is complete.
     */
   def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.close(funcToHandler(completionHandler))
@@ -310,7 +310,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * 
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
-    * @return a handler which will be notified when the deployment is complete
+    * @param completionHandler a handler which will be notified when the deployment is complete
     */
   def deployVerticle(name: String, completionHandler: io.vertx.core.AsyncResult[java.lang.String] => Unit): Unit = {
     _asJava.deployVerticle(name, funcToHandler(completionHandler))
@@ -331,7 +331,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
-    * @return a handler which will be notified when the deployment is complete
+    * @param completionHandler a handler which will be notified when the deployment is complete
     */
   def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions, completionHandler: io.vertx.core.AsyncResult[java.lang.String] => Unit): Unit = {
     _asJava.deployVerticle(name, options, funcToHandler(completionHandler))
@@ -350,7 +350,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
   /**
     * Like [[io.vertx.scala.core.Vertx #undeploy(String)]] but the completionHandler will be notified when the undeployment is complete.
     * @param deploymentID the deployment ID
-    * @return a handler which will be notified when the undeployment is complete
+    * @param completionHandler a handler which will be notified when the undeployment is complete
     */
   def undeploy(deploymentID: String, completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
     _asJava.undeploy(deploymentID, funcToHandler(completionHandler))
@@ -388,7 +388,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-    * @return handler that will be called when the blocking code is complete
+    * @param resultHandler handler that will be called when the blocking code is complete
     */
   def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToHandler(resultHandler))
@@ -462,6 +462,6 @@ object Vertx {
     io.vertx.core.Vertx.clusteredVertx(options, funcToHandler(resultHandler))
   }
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
-scala.Option(    Context.apply(io.vertx.core.Vertx.currentContext()))
+    scala.Option(    Context.apply(io.vertx.core.Vertx.currentContext()))
   }
 }

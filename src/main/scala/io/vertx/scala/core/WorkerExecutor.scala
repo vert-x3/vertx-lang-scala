@@ -58,7 +58,7 @@ class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor)
     * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-    * @return handler that will be called when the blocking code is complete
+    * @param resultHandler handler that will be called when the blocking code is complete
     */
   def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToHandler(resultHandler))

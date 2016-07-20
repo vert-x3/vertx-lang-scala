@@ -24,9 +24,9 @@ import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
 
 /**
-  * The execution context of a [[io.vertx.scala.core.Handler]] execution.
+  * The execution context of a scala-function execution.
   * 
-  * When Vert.x provides an event to a handler or calls the start or stop methods of a [[io.vertx.scala.core.Verticle]],
+  * When Vert.x provides an event to a handler or calls the start or stop methods of a [[io.vertx.lang.scala.ScalaVerticle]],
   * the execution is associated with a `Context`.
   * 
   * Usually a context is an *event-loop context* and is tied to a specific event loop thread. So executions for that
@@ -80,7 +80,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * method if it failed.
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-    * @return handler that will be called when the blocking code is complete
+    * @param resultHandler handler that will be called when the blocking code is complete
     */
   def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToHandler(resultHandler))
@@ -89,7 +89,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
   /**
     * Invoke [[io.vertx.scala.core.Context#executeBlocking]] with order = true.
     * @param blockingCodeHandler handler representing the blocking code to run
-    * @return handler that will be called when the blocking code is complete
+    * @param resultHandler handler that will be called when the blocking code is complete
     */
   def executeBlocking[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, resultHandler: io.vertx.core.AsyncResult[T] => Unit): Unit = {
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToHandler(resultHandler))
@@ -109,7 +109,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
   def config(): scala.Option[io.vertx.core.json.JsonObject] = {
-scala.Option(    _asJava.config())
+    scala.Option(    _asJava.config())
   }
 
   /**

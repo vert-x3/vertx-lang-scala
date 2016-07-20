@@ -69,7 +69,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-scala.Option(    _asJava.replyAddress())
+    scala.Option(    _asJava.replyAddress())
   }
 
   /**
@@ -88,7 +88,7 @@ scala.Option(    _asJava.replyAddress())
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
-    * @return the reply handler for the reply.
+    * @param replyHandler the reply handler for the reply.
     */
   def reply[R](message: AnyRef, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
     _asJava.reply(message, funcToHandler(replyHandler))
@@ -108,7 +108,7 @@ scala.Option(    _asJava.replyAddress())
     * to receive the reply to the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return the reply handler for the reply.
+    * @param replyHandler the reply handler for the reply.
     */
   def reply[R](message: AnyRef, options: io.vertx.core.eventbus.DeliveryOptions, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
     _asJava.reply(message, options, funcToHandler(replyHandler))
