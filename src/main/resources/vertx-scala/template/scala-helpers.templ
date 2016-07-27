@@ -139,8 +139,18 @@
       return ret;
     }
 
+
   def toOptionIfNullable(value, type) {
     if(type.isNullable) {
+      return 'scala.Option['+value+']';
+    }
+    else {
+      return value;
+    }
+  }
+
+  def toOptionIfNullableAndParam(value, type, param) {
+    if((param.type.kind != CLASS_OBJECT && param.isNullable) || type.isNullable) {
       return 'scala.Option['+value+']';
     }
     else {
@@ -216,7 +226,7 @@
         } else {
           paramList += ', ';
         }
-        paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullable(toScalaType(param.type), param.type);
+        paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
     }
     paramList;
   }
