@@ -429,7 +429,7 @@
       invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
     }
 
-    invocation += target + '.' + method.name + '(' + handleMethodParams(method.params);
+    invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params);
 
     if (wrap) {
       invocation += '))';

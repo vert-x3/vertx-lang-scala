@@ -8,32 +8,24 @@
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
-@comment{"sadly there is a method named type in HttpFrame, which is a keyword in scala"}
-@if{method.name == 'type'}
-@{indentation}  def `type`: Int = {\n
-@{indentation}    _asJava.`type`()\n
-@{indentation}  }\n\n
-@end{}
-@if{method.name != 'type'}
 @if{method.name == 'toString' && method.params.size == 0}
 @comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
-@{indentation}  override def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  override def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
-@{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
-@if{method.cacheReturn}
+@{indentation}  def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{method.cacheReturn && !method.fluent}
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
-@if{method.cacheReturn}
+@if{method.cacheReturn && !method.fluent}
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n
 @code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
 @end{}
 @{indentation}  }\n\n
-@end{}
 @end{}
 @end{}
 @end{}
