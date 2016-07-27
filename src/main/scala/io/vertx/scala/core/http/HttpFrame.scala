@@ -32,32 +32,36 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
   /**
     * @return the 8-bit type of the frame
     */
-  def `type`: Int = {
-    _asJava.`type`()
+  def `type`(): Int = {
+    if(cached_0 == null) {
+      cached_0=    _asJava.`type`()
+    }
+    cached_0
   }
 
   /**
     * @return the 8-bit flags specific to the frame
     */
   def flags(): Int = {
-    if(cached_0 == null) {
-      cached_0=    _asJava.flags()
+    if(cached_1 == null) {
+      cached_1=    _asJava.flags()
     }
-    cached_0
+    cached_1
   }
 
   /**
     * @return the frame payload
     */
   def payload(): io.vertx.scala.core.buffer.Buffer = {
-    if(cached_1 == null) {
-      cached_1=    Buffer.apply(_asJava.payload())
+    if(cached_2 == null) {
+      cached_2=    Buffer.apply(_asJava.payload())
     }
-    cached_1
+    cached_2
   }
 
   private var cached_0: Int = _
-  private var cached_1: io.vertx.scala.core.buffer.Buffer = _
+  private var cached_1: Int = _
+  private var cached_2: io.vertx.scala.core.buffer.Buffer = _
 }
 
 object HttpFrame {
