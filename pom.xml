@@ -235,7 +235,7 @@
                             </processors>
                             <optionMap>
                                 <outputDirectory>${project.basedir}/src/main</outputDirectory>
-                                <docgen.output>${asciidoc.dir}/ceylon</docgen.output>
+                                <docgen.output>${asciidoc.dir}/scala</docgen.output>
                             </optionMap>
                             <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
                         </configuration>
