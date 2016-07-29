@@ -54,8 +54,8 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     _asJava.writeQueueFull()
   }
 
-  def handler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)((if(handler.isDefined) handler.get else null)))
+  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.file.AsyncFile = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -69,8 +69,8 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
-  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -84,13 +84,13 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     this
   }
 
-  def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.file.AsyncFile = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
-  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.file.AsyncFile = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 

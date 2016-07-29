@@ -20,6 +20,9 @@
       if (param.type.kind == CLASS_API) {
         return '(if('+param.name+'.isDefined) '+param.name+'.get.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +'] else null)'
       }
+      else if(param.type.kind == CLASS_HANDLER) {
+        return param.name;
+      }
       else {
         return '(if('+param.name+'.isDefined) '+param.name+'.get else null)';
       }
@@ -141,7 +144,7 @@
 
 
   def toOptionIfNullable(value, type) {
-    if(type.isNullable) {
+    if(type.isNullable && type.kind != CLASS_HANDLER ) {
       return 'scala.Option['+value+']';
     }
     else {
@@ -150,7 +153,7 @@
   }
 
   def toOptionIfNullableAndParam(value, type, param) {
-    if((param.type.kind != CLASS_OBJECT && param.isNullable) || type.isNullable) {
+    if(param.type.kind != CLASS_HANDLER && ((param.type.kind != CLASS_OBJECT && param.isNullable) || type.isNullable)) {
       return 'scala.Option['+value+']';
     }
     else {

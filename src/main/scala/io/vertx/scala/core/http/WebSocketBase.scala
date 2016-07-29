@@ -49,21 +49,21 @@ trait WebSocketBase
   */
   def writeQueueFull(): Boolean
 
-    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.WebSocketBase
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocketBase
 
-    def handler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.WebSocketBase
+    def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.WebSocketBase
 
     def pause(): io.vertx.scala.core.http.WebSocketBase
 
     def resume(): io.vertx.scala.core.http.WebSocketBase
 
-    def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase
+    def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocketBase
 
     def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.WebSocketBase
 
     def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.http.WebSocketBase
 
-    def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocketBase
 
   /**
   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
@@ -120,14 +120,14 @@ trait WebSocketBase
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def closeHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase
+  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocketBase
 
   /**
   * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def frameHandler(handler: scala.Option[io.vertx.scala.core.http.WebSocketFrame => Unit]): io.vertx.scala.core.http.WebSocketBase
+  def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocketBase
 
   /**
   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
@@ -175,13 +175,13 @@ object WebSocketBase {
         _asJava.writeQueueFull()
     }
 
-    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
-    def handler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.handler(funcToMappedHandler(Buffer.apply)((if(handler.isDefined) handler.get else null)))
+    def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
       this
     }
 
@@ -195,8 +195,8 @@ object WebSocketBase {
       this
     }
 
-    def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
+    def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
       this
     }
 
@@ -210,8 +210,8 @@ object WebSocketBase {
       this
     }
 
-    def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }
 
@@ -286,8 +286,8 @@ object WebSocketBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def closeHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
+    def closeHandler(handler: () => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }
 
@@ -296,8 +296,8 @@ object WebSocketBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def frameHandler(handler: scala.Option[io.vertx.scala.core.http.WebSocketFrame => Unit]): io.vertx.scala.core.http.WebSocketBase = {
-        _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)((if(handler.isDefined) handler.get else null)))
+    def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocketBase = {
+        _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
       this
     }
 

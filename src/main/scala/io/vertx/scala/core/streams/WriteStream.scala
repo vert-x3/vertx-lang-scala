@@ -39,7 +39,7 @@ trait WriteStream[T]
   * @param handler the exception handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.streams.WriteStream[T]
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
@@ -83,7 +83,7 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.streams.WriteStream[T]
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
 }
 
@@ -101,8 +101,8 @@ object WriteStream {
       * @param handler the exception handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.streams.WriteStream[T] = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
@@ -160,8 +160,8 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.streams.WriteStream[T] = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }
 

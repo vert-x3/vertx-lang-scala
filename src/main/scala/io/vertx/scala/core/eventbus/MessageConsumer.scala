@@ -39,13 +39,13 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
-  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: scala.Option[io.vertx.scala.core.eventbus.Message[T] => Unit]): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])((if(handler.isDefined) handler.get else null)))
+  def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
     this
   }
 
@@ -59,8 +59,8 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     this
   }
 
-  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 

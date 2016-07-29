@@ -2328,13 +2328,13 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableHandler" should "work" in {
-    nullableTCK.methodWithNullableHandler(true, None)
+    nullableTCK.methodWithNullableHandler(true, null)
     val w1 = new Waiter()
-    nullableTCK.methodWithNullableHandler(false, Some(a => {w1{assert("the_string_value" == a)};w1.dismiss()}))
+    nullableTCK.methodWithNullableHandler(false, a => {w1{assert("the_string_value" == a)};w1.dismiss()})
     w1.await()
-    nullableTCK.methodWithNullableHandlerAsyncResult(true, None)
+    nullableTCK.methodWithNullableHandlerAsyncResult(true, null)
     val w2 = new Waiter()
-    nullableTCK.methodWithNullableHandlerAsyncResult(false, Some(a => {w2{assert("the_string_value" == a.result())};w2.dismiss()}))
+    nullableTCK.methodWithNullableHandlerAsyncResult(false, a => {w2{assert("the_string_value" == a.result())};w2.dismiss()})
     w2.await()
   }
 

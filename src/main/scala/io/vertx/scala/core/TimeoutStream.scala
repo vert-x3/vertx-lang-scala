@@ -36,13 +36,13 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
 
   def asJava: io.vertx.core.TimeoutStream = _asJava
 
-  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.TimeoutStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.TimeoutStream = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: scala.Option[Long => Unit]): io.vertx.scala.core.TimeoutStream = {
-    _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)((if(handler.isDefined) handler.get else null)))
+  def handler(handler: Long => Unit): io.vertx.scala.core.TimeoutStream = {
+    _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
     this
   }
 
@@ -56,8 +56,8 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
     this
   }
 
-  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.TimeoutStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.TimeoutStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
