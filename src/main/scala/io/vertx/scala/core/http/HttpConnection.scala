@@ -103,8 +103,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: scala.Option[io.vertx.core.http.GoAway => Unit]): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.goAwayHandler(funcToHandler((if(handler.isDefined) handler.get else null)))
+  def goAwayHandler(handler: io.vertx.core.http.GoAway => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.goAwayHandler(funcToHandler(handler))
     this
   }
 
@@ -115,8 +115,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdownHandler(handler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(handler.isDefined) handler.get else null)()))
+  def shutdownHandler(handler: () => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -237,8 +237,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler to be called when a {@literal PING` is received
     * @return a reference to this, so the API can be used fluently
     */
-  def pingHandler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)((if(handler.isDefined) handler.get else null)))
+  def pingHandler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 

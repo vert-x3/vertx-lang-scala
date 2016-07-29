@@ -32,18 +32,18 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
 
   def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
 
-  def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.scala.core.http.HttpServerFileUpload = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)((if(handler.isDefined) handler.get else null)))
+  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: scala.Option[io.vertx.scala.core.buffer.Buffer => Unit]): io.vertx.scala.core.http.HttpServerFileUpload = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)((if(handler.isDefined) handler.get else null)))
+  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def endHandler(endHandler: scala.Option[() => Unit]): io.vertx.scala.core.http.HttpServerFileUpload = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => (if(endHandler.isDefined) endHandler.get else null)()))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
