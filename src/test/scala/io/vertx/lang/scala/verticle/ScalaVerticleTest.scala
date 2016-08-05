@@ -1,9 +1,9 @@
-package io.vertx.lang.scala
+package io.vertx.lang.scala.verticle
 
 import java.util.concurrent.{CountDownLatch, TimeUnit}
 
 import io.vertx.core.AsyncResult
-import io.vertx.core.eventbus.Message
+import io.vertx.scala.core.eventbus.Message
 import io.vertx.scala.core.Vertx
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.GoAway
 import io.vertx.core.http.Http2Settings
@@ -193,8 +192,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: io.vertx.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings, funcToHandler(completionHandler))
+  def updateSettings(settings: io.vertx.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.updateSettings(settings, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
     this
   }
 
@@ -225,8 +224,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param pongHandler an async result handler notified with pong reply or the failure
     * @return a reference to this, so the API can be used fluently
     */
-  def ping(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToHandler(pongHandler))
+  def ping(data: io.vertx.scala.core.buffer.Buffer, pongHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(pongHandler))
     this
   }
 

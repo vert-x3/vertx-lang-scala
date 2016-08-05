@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.scala.core.streams.ReadStream
@@ -174,8 +173,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.sendFile(filename, funcToHandler(resultHandler))
+  def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
 
@@ -187,8 +186,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.sendFile(filename, offset, funcToHandler(resultHandler))
+  def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename, offset, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
 
@@ -201,8 +200,8 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.sendFile(filename, offset, length, funcToHandler(resultHandler))
+  def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+    _asJava.sendFile(filename, offset, length, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
 

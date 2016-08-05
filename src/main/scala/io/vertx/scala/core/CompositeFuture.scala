@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core;
+package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.core.Handler
 
 /**
@@ -30,8 +29,8 @@ class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
 
   def asJava: io.vertx.core.CompositeFuture = _asJava
 
-  def setHandler(handler: io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture] => Unit): io.vertx.scala.core.CompositeFuture = {
-    _asJava.setHandler(funcToHandler(handler))
+  def setHandler(handler: io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture] => Unit): io.vertx.scala.core.CompositeFuture = {
+    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.CompositeFuture, io.vertx.scala.core.CompositeFuture](x,(x => if (x == null) null else CompositeFuture.apply(x))))(handler))
     this
   }
 
@@ -103,7 +102,7 @@ object CompositeFuture {
   def all[T1, T2, T3, T4, T5, T6](f1: io.vertx.scala.core.Future[T1], f2: io.vertx.scala.core.Future[T2], f3: io.vertx.scala.core.Future[T3], f4: io.vertx.scala.core.Future[T4], f5: io.vertx.scala.core.Future[T5], f6: io.vertx.scala.core.Future[T6]): io.vertx.scala.core.CompositeFuture = {
     CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[io.vertx.core.Future[T1]], f2.asJava.asInstanceOf[io.vertx.core.Future[T2]], f3.asJava.asInstanceOf[io.vertx.core.Future[T3]], f4.asJava.asInstanceOf[io.vertx.core.Future[T4]], f5.asJava.asInstanceOf[io.vertx.core.Future[T5]], f6.asJava.asInstanceOf[io.vertx.core.Future[T6]]))
   }
-  def all(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
+  def all(futures: scala.collection.mutable.Buffer[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
     CompositeFuture.apply(io.vertx.core.CompositeFuture.all(futures.map(x => if(x == null) null else x.asJava).asJava))
   }
   def any[T1, T2](f1: io.vertx.scala.core.Future[T1], f2: io.vertx.scala.core.Future[T2]): io.vertx.scala.core.CompositeFuture = {
@@ -121,7 +120,7 @@ object CompositeFuture {
   def any[T1, T2, T3, T4, T5, T6](f1: io.vertx.scala.core.Future[T1], f2: io.vertx.scala.core.Future[T2], f3: io.vertx.scala.core.Future[T3], f4: io.vertx.scala.core.Future[T4], f5: io.vertx.scala.core.Future[T5], f6: io.vertx.scala.core.Future[T6]): io.vertx.scala.core.CompositeFuture = {
     CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[io.vertx.core.Future[T1]], f2.asJava.asInstanceOf[io.vertx.core.Future[T2]], f3.asJava.asInstanceOf[io.vertx.core.Future[T3]], f4.asJava.asInstanceOf[io.vertx.core.Future[T4]], f5.asJava.asInstanceOf[io.vertx.core.Future[T5]], f6.asJava.asInstanceOf[io.vertx.core.Future[T6]]))
   }
-  def any(futures: List[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
+  def any(futures: scala.collection.mutable.Buffer[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
     CompositeFuture.apply(io.vertx.core.CompositeFuture.any(futures.map(x => if(x == null) null else x.asJava).asJava))
   }
 }

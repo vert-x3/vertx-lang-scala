@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -76,8 +75,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param listenHandler handler that will be notified when listening or failed
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen(funcToHandler(listenHandler))
+  def listen(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
     this
   }
 
@@ -104,8 +103,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param listenHandler handler that will be notified when listening or failed
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen(port, host, funcToHandler(listenHandler))
+  def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
     this
   }
 
@@ -129,8 +128,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param listenHandler handler that will be notified when listening or failed
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
-    _asJava.listen(port, funcToHandler(listenHandler))
+  def listen(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): io.vertx.scala.core.net.NetServer = {
+    _asJava.listen(port, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetServer, io.vertx.scala.core.net.NetServer](x,(x => if (x == null) null else NetServer.apply(x))))(listenHandler))
     this
   }
 
@@ -146,8 +145,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
     * @param completionHandler the handler
     */
-  def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
-    _asJava.close(funcToHandler(completionHandler))
+  def close(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
   }
 
   /**

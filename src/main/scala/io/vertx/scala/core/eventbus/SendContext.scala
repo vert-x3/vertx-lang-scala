@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.eventbus;
+package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 
 /**
   *

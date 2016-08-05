@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -131,8 +130,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param host the host to listen on
     * @param listenHandler the listen handler
     */
-  def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.listen(port, host, funcToHandler(listenHandler))
+  def listen(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
     this
   }
 
@@ -152,8 +151,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param port the port to listen on
     * @param listenHandler the listen handler
     */
-  def listen(port: Int, listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.listen(port, funcToHandler(listenHandler))
+  def listen(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen(port, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
     this
   }
 
@@ -161,8 +160,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @param listenHandler the listen handler
     */
-  def listen(listenHandler: io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.listen(funcToHandler(listenHandler))
+  def listen(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): io.vertx.scala.core.http.HttpServer = {
+    _asJava.listen(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServer], io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.http.HttpServer, io.vertx.scala.core.http.HttpServer](x,(x => if (x == null) null else HttpServer.apply(x))))(listenHandler))
     this
   }
 
@@ -179,8 +178,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * Like [[io.vertx.scala.core.http.HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).
     * @param completionHandler the handler
     */
-  def close(completionHandler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): Unit = {
-    _asJava.close(funcToHandler(completionHandler))
+  def close(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
   }
 
   /**
