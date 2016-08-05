@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.cli;
+package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.core.cli.Option
 import io.vertx.core.cli.Argument
 
@@ -42,8 +41,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * @return the ordered list of arguments. Arguments are command line arguments not matching an option.
     */
-  def allArguments(): List[String] = {
-    _asJava.allArguments().asScala.map(x => x:String).toList
+  def allArguments(): scala.collection.mutable.Buffer[String] = {
+    _asJava.allArguments().asScala.map(x => x:String)
   }
 
   /**
@@ -98,8 +97,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValues(option: io.vertx.core.cli.Option): List[String] = {
-    _asJava.getRawValues(option).asScala.map(x => x:String).toList
+  def getRawValues(option: io.vertx.core.cli.Option): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValues(option).asScala.map(x => x:String)
   }
 
   /**
@@ -107,8 +106,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForOption(option: io.vertx.core.cli.Option): List[String] = {
-    _asJava.getRawValuesForOption(option).asScala.map(x => x:String).toList
+  def getRawValuesForOption(option: io.vertx.core.cli.Option): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValuesForOption(option).asScala.map(x => x:String)
   }
 
   /**
@@ -116,8 +115,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param argument the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForArgument(argument: io.vertx.core.cli.Argument): List[String] = {
-    _asJava.getRawValuesForArgument(argument).asScala.map(x => x:String).toList
+  def getRawValuesForArgument(argument: io.vertx.core.cli.Argument): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValuesForArgument(argument).asScala.map(x => x:String)
   }
 
   /**

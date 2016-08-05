@@ -21,14 +21,13 @@
  * under the License.\n
  */\n\n
 
-package @{type.raw.translatePackageName("scala")};\n
+package @{type.raw.translatePackageName("scala")}\n
 \n
 
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
-import scala.util.Try\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}

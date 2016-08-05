@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.file;
+package io.vertx.scala.core.file
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.file.OpenOptions
 import io.vertx.core.Handler
@@ -51,8 +50,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def copy(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.copy(from, to, funcToHandler(handler))
+  def copy(from: String, to: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.copy(from, to, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -76,8 +75,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def copyRecursive(from: String, to: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.copyRecursive(from, to, recursive, funcToHandler(handler))
+  def copyRecursive(from: String, to: String, recursive: Boolean, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.copyRecursive(from, to, recursive, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -98,8 +97,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def move(from: String, to: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.move(from, to, funcToHandler(handler))
+  def move(from: String, to: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.move(from, to, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -120,8 +119,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def truncate(path: String, len: Long, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.truncate(path, len, funcToHandler(handler))
+  def truncate(path: String, len: Long, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.truncate(path, len, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -143,8 +142,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def chmod(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chmod(path, perms, funcToHandler(handler))
+  def chmod(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chmod(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -169,8 +168,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def chmodRecursive(path: String, perms: String, dirPerms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chmodRecursive(path, perms, dirPerms, funcToHandler(handler))
+  def chmodRecursive(path: String, perms: String, dirPerms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chmodRecursive(path, perms, dirPerms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -190,8 +189,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def chown(path: String, user: scala.Option[String], group: scala.Option[String], handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), funcToHandler(handler))
+  def chown(path: String, user: scala.Option[String], group: scala.Option[String], handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -212,8 +211,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def props(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.props(path, funcToHandler(handler))
+  def props(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.props(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileProps, io.vertx.scala.core.file.FileProps](x,(x => if (x == null) null else FileProps.apply(x))))(handler))
     this
   }
 
@@ -232,8 +231,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def lprops(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.lprops(path, funcToHandler(handler))
+  def lprops(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.lprops(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileProps, io.vertx.scala.core.file.FileProps](x,(x => if (x == null) null else FileProps.apply(x))))(handler))
     this
   }
 
@@ -251,8 +250,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def link(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.link(link, existing, funcToHandler(handler))
+  def link(link: String, existing: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.link(link, existing, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -271,8 +270,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def symlink(link: String, existing: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.symlink(link, existing, funcToHandler(handler))
+  def symlink(link: String, existing: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.symlink(link, existing, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -290,8 +289,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def unlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.unlink(link, funcToHandler(handler))
+  def unlink(link: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.unlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -309,8 +308,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def readSymlink(link: String, handler: io.vertx.core.AsyncResult[java.lang.String] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.readSymlink(link, funcToHandler(handler))
+  def readSymlink(link: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readSymlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
     this
   }
 
@@ -327,8 +326,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def delete(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.delete(path, funcToHandler(handler))
+  def delete(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.delete(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -350,8 +349,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def deleteRecursive(path: String, recursive: Boolean, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.deleteRecursive(path, recursive, funcToHandler(handler))
+  def deleteRecursive(path: String, recursive: Boolean, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.deleteRecursive(path, recursive, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -371,8 +370,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def mkdir(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.mkdir(path, funcToHandler(handler))
+  def mkdir(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdir(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -398,8 +397,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def mkdir(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.mkdir(path, perms, funcToHandler(handler))
+  def mkdir(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdir(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -419,8 +418,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def mkdirs(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.mkdirs(path, funcToHandler(handler))
+  def mkdirs(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdirs(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -446,8 +445,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def mkdirs(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.mkdirs(path, perms, funcToHandler(handler))
+  def mkdirs(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.mkdirs(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -467,16 +466,16 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def readDir(path: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.readDir(path, funcToHandler(handler))
+  def readDir(path: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readDir(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
 
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#readDir]]
     */
-  def readDirBlocking(path: String): List[String] = {
-    _asJava.readDirBlocking(path).asScala.map(x => x:String).toList
+  def readDirBlocking(path: String): scala.collection.mutable.Buffer[String] = {
+    _asJava.readDirBlocking(path).asScala.map(x => x:String)
   }
 
   /**
@@ -491,16 +490,16 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def readDir(path: String, filter: String, handler: io.vertx.core.AsyncResult[java.util.List[java.lang.String]] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.readDir(path, filter, funcToHandler(handler))
+  def readDir(path: String, filter: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readDir(path, filter, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
 
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#readDir]]
     */
-  def readDirBlocking(path: String, filter: String): List[String] = {
-    _asJava.readDirBlocking(path, filter).asScala.map(x => x:String).toList
+  def readDirBlocking(path: String, filter: String): scala.collection.mutable.Buffer[String] = {
+    _asJava.readDirBlocking(path, filter).asScala.map(x => x:String)
   }
 
   /**
@@ -511,8 +510,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def readFile(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.readFile(path, funcToHandler(handler))
+  def readFile(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.readFile(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(handler))
     this
   }
 
@@ -530,8 +529,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def writeFile(path: String, data: io.vertx.scala.core.buffer.Buffer, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToHandler(handler))
+  def writeFile(path: String, data: io.vertx.scala.core.buffer.Buffer, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -551,8 +550,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def open(path: String, options: io.vertx.core.file.OpenOptions, handler: io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.open(path, options, funcToHandler(handler))
+  def open(path: String, options: io.vertx.core.file.OpenOptions, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.open(path, options, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile], io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.AsyncFile, io.vertx.scala.core.file.AsyncFile](x,(x => if (x == null) null else AsyncFile.apply(x))))(handler))
     this
   }
 
@@ -569,8 +568,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def createFile(path: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.createFile(path, funcToHandler(handler))
+  def createFile(path: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.createFile(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -589,8 +588,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def createFile(path: String, perms: String, handler: io.vertx.core.AsyncResult[java.lang.Void] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.createFile(path, perms, funcToHandler(handler))
+  def createFile(path: String, perms: String, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.createFile(path, perms, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
 
@@ -608,8 +607,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def exists(path: String, handler: io.vertx.core.AsyncResult[java.lang.Boolean] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.exists(path, funcToHandler(handler))
+  def exists(path: String, handler: io.vertx.core.AsyncResult [Boolean] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.exists(path, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(handler))
     this
   }
 
@@ -626,8 +625,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param handler the handler that will be called on completion
     * @return a reference to this, so the API can be used fluently
     */
-  def fsProps(path: String, handler: io.vertx.core.AsyncResult[io.vertx.core.file.FileSystemProps] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.fsProps(path, funcToHandler(handler))
+  def fsProps(path: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileSystemProps] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.fsProps(path, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.FileSystemProps], io.vertx.core.AsyncResult [io.vertx.scala.core.file.FileSystemProps]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.FileSystemProps, io.vertx.scala.core.file.FileSystemProps](x,(x => if (x == null) null else FileSystemProps.apply(x))))(handler))
     this
   }
 

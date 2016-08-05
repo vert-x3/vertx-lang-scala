@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 
 /**
   * The address of a socket

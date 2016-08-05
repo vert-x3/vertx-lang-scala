@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.streams.ReadStream
@@ -128,9 +127,9 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   /**
     * @return the Set-Cookie headers (including trailers)
     */
-  def cookies(): List[String] = {
+  def cookies(): scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
-      cached_2=    _asJava.cookies().asScala.map(x => x:String).toList
+      cached_2=    _asJava.cookies().asScala.map(x => x:String)
     }
     cached_2
   }
@@ -175,7 +174,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
 
   private var cached_0: io.vertx.scala.core.MultiMap = _
   private var cached_1: io.vertx.scala.core.MultiMap = _
-  private var cached_2: List[String] = _
+  private var cached_2: scala.collection.mutable.Buffer[String] = _
   private var cached_3: io.vertx.scala.core.net.NetSocket = _
 }
 

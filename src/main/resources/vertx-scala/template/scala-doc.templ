@@ -103,8 +103,6 @@
       return '[[scala.collection.immutable.Map]]';
     } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
       return 'scala-function';
-    } else if (type == 'AsyncResult' || type == 'io.vertx.core.AsyncResult') {
-      return '[[io.vertx.core.AsyncResult]]';
     } else if (type.contains('io.vertx')) {
       return '[[' + convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.") + ']]';
     } else {

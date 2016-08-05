@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core;
+package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import java.util.Map.Entry
 
 /**
@@ -47,8 +46,8 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @param name The name to search
     * @return A immutable [[scala.collection.immutable.List]] of values which will be empty if no values are found
     */
-  def getAll(name: String): List[String] = {
-    _asJava.getAll(name).asScala.map(x => x:String).toList
+  def getAll(name: String): scala.collection.mutable.Buffer[String] = {
+    _asJava.getAll(name).asScala.map(x => x:String)
   }
 
   /**

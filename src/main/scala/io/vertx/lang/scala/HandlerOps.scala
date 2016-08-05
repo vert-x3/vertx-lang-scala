@@ -78,9 +78,7 @@ object HandlerOps {
     */
   def funcToMappedHandler[J, S](mapper: J => S)(f: S => Unit): Handler[J] = {
     if(f == null) {
-      new Handler[J]() {
-        override def handle(event: J): Unit = {}
-      }
+      null
     }
     else
       new Handler[J]() {

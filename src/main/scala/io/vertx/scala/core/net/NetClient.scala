@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -53,8 +52,8 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * @param host the host
     * @return a reference to this, so the API can be used fluently
     */
-  def connect(port: Int, host: String, connectHandler: io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
-    _asJava.connect(port, host, funcToHandler(connectHandler))
+  def connect(port: Int, host: String, connectHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
+    _asJava.connect(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetSocket, io.vertx.scala.core.net.NetSocket](x,(x => if (x == null) null else NetSocket.apply(x))))(connectHandler))
     this
   }
 

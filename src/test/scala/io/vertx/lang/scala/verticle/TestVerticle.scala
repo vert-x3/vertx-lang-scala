@@ -1,6 +1,7 @@
-package io.vertx.lang.scala
+package io.vertx.lang.scala.verticle
 
 import io.vertx.core.Future
+import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.scala.core.eventbus.Message
 
 /**

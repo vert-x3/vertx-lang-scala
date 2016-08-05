@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core;
+package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.core.Handler
 import java.util.function.Function
 
@@ -49,8 +48,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param handler the Handler that will be called with the result
     * @return a reference to this, so it can be used fluently
     */
-  def setHandler(handler: io.vertx.core.AsyncResult[T] => Unit): io.vertx.scala.core.Future[T] = {
-    _asJava.setHandler(funcToHandler(handler))
+  def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit): io.vertx.scala.core.Future[T] = {
+    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x.asInstanceOf[T])))(handler))
     this
   }
 
@@ -186,14 +185,14 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
   /**
     * @return an handler completing this future
     */
-  def completer(): io.vertx.core.AsyncResult[T] => Unit = {
+  def completer(): io.vertx.core.AsyncResult [T] => Unit = {
     if(cached_0 == null) {
-      cached_0=        handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
+      cached_0=        handlerToFunc[io.vertx.core.AsyncResult [T]](_asJava.completer())
     }
     cached_0
   }
 
-  private var cached_0: io.vertx.core.AsyncResult[T] => Unit = _
+  private var cached_0: io.vertx.core.AsyncResult [T] => Unit = _
 }
 
 object Future {

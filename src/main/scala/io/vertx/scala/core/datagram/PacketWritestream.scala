@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.datagram;
+package io.vertx.scala.core.datagram
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler

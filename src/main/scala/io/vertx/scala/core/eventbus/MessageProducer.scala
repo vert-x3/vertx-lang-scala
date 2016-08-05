@@ -14,12 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.eventbus;
+package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import scala.util.Try
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
@@ -57,8 +56,8 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     MessageProducer.apply[T](_asJava.send(message))
   }
 
-  def send[R](message: T, replyHandler: io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message, funcToHandler(replyHandler)))
+  def send[R](message: T, replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[R], io.vertx.scala.core.eventbus.Message[R]](x,(x => if (x == null) null else Message.apply[R](x))))(replyHandler)))
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
