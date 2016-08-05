@@ -459,43 +459,41 @@
       invocation += 'v => ' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params) +').handle(io.vertx.lang.scala.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+', '+method.returnType.args[0].args[0]+'] (v, t => t.asJava)';
     }
     else {
-        if (method.returnType.kind == CLASS_HANDLER) {
-          var ret = method.returnType.args[0];
-          var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
-          invocation += indentation;
-          if (ret.kind == CLASS_API ||
-              ret.kind == CLASS_DATA_OBJECT ||
-              ret.kind == CLASS_ENUM) {
-            invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
-          } else if (ret.kind == CLASS_PRIMITIVE ||
-                     ret.kind == CLASS_BOXED_PRIMITIVE ||
-                     ret.name == 'Throwable' ||
-                     ret.name == 'java.lang.Throwable') {
-            invocation += 'handlerToFunc[' + scalaType +'](';
-          } else if (ret.kind == CLASS_STRING ||
-                     ret.kind == CLASS_JSON_OBJECT ||
-                     ret.kind == CLASS_JSON_ARRAY) {
-            invocation += 'handlerToFunc[' + scalaType +'](';
-          } else {
-            invocation += 'handlerToFunc[' + scalaType +'](';
-          }
-        }
-
-        if (!fluent and method.returnType.kind == CLASS_API) {
-          wrap = true;
-          invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
-        }
-
-        invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params);
-
-        if (wrap) {
-          invocation += '))';
+      if (method.returnType.kind == CLASS_HANDLER) {
+        var ret = method.returnType.args[0];
+        var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
+        invocation += indentation;
+        if (ret.kind == CLASS_API ||
+            ret.kind == CLASS_DATA_OBJECT ||
+            ret.kind == CLASS_ENUM) {
+          invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
+        } else if (ret.kind == CLASS_PRIMITIVE ||
+                   ret.kind == CLASS_BOXED_PRIMITIVE ||
+                   ret.name == 'Throwable' ||
+                   ret.name == 'java.lang.Throwable') {
+          invocation += 'handlerToFunc[' + scalaType +'](';
+        } else if (ret.kind == CLASS_STRING ||
+                   ret.kind == CLASS_JSON_OBJECT ||
+                   ret.kind == CLASS_JSON_ARRAY) {
+          invocation += 'handlerToFunc[' + scalaType +'](';
         } else {
-          invocation += ')';
+          invocation += 'handlerToFunc[' + scalaType +'](';
         }
+      }
+
+      if (!fluent and method.returnType.kind == CLASS_API) {
+        wrap = true;
+        invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
+      }
+
+      invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method.params);
+
+      if (wrap) {
+        invocation += '))';
+      } else {
+        invocation += ')';
+      }
     }
-
-
 
     var conversion = handleMethodReturn(method);
 
@@ -515,7 +513,6 @@
     else {
       invocation += conversion + '\n';
     }
-
 
     if (method.isFluent()) {
       invocation += indentation;
