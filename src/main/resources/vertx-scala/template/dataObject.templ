@@ -1,0 +1,124 @@
+@comment{"# Template for Scala code generation"}
+
+@comment{"# Defines a few helper functions"}
+@includeNamed{'common.templ'}
+@includeNamed{'scala-helpers.templ'}
+@includeNamed{'scala-doc.templ'}
+
+/*\n
+ * Copyright 2014 Red Hat, Inc.\n
+ *\n
+ * Red Hat licenses this file to you under the Apache License, version 2.0\n
+ * (the "License"); you may not use this file except in compliance with the\n
+ * License.  You may obtain a copy of the License at:\n
+ *\n
+ * http://www.apache.org/licenses/LICENSE-2.0\n
+ *\n
+ * Unless required by applicable law or agreed to in writing, software\n
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT\n
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the\n
+ * License for the specific language governing permissions and limitations\n
+ * under the License.\n
+ */\n\n
+
+package @{type.raw.translatePackageName("scala")}\n
+\n
+
+@comment{"# Generate the imports"}
+import io.vertx.lang.scala.HandlerOps._\n
+import scala.compat.java8.FunctionConverters._\n
+import scala.collection.JavaConverters._\n
+@foreach{importedType : importedTypes}
+	@if{importedType.kind == CLASS_API}
+		@if{!ifacePackageName.equals(importedType.packageName)}
+import @{importedType.raw.translateName("scala")}\n
+		@end{}
+	@else{importedType.kind != CLASS_ASYNC_RESULT &&
+	      !importedType.packageName.equals("java.lang") &&
+        importedType.kind != CLASS_LIST &&
+        importedType.kind != CLASS_SET &&
+        importedType.kind != CLASS_MAP}
+import @{importedType}\n
+	@end{}
+@end{}
+\n
+
+@comment{'the current index of the cache'}
+@code{cacheDecls=new java.util.ArrayList()}
+
+@comment{"# Generate the Class or Interface/Trait"}
+@code{
+  def getVarianceType(t) {
+    return t;
+  }
+
+  def getClassNameWithTypeInfo(c, typeName) {
+    var genericType = helper.getGenericType(c);
+    if (genericType != null) {
+      return typeName + '[' + getVarianceType(genericType) + ']';
+    } else {
+      return typeName;
+    }
+  }
+
+  def getClassName(c) {
+    var typeName = helper.getSimpleName(helper.getNonGenericType(c));
+    return getClassNameWithTypeInfo(c, typeName);
+  }
+
+  def toScalaGeneric(c) {
+    var typeName = helper.getNonGenericType(c);
+    return getClassNameWithTypeInfo(c, typeName);
+  }
+}
+
+@if{doc != null}
+/**\n
+@{renderDoc("  *", doc, renderDocLink)}
+  */\n
+@end{}
+@if{concrete}
+	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
+@else{}
+	trait @includeNamed{'writeType'}
+@end{}
+
+@comment{"## Inheritance"}
+@if{abstractSuperTypes.size() > 0}
+	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
+@end{}
+
+ {\n
+\n
+
+@if{concrete}
+	@includeNamed{'classbody.templ'; indentation=''}
+@else{}
+	@includeNamed{'traitbody.templ'}
+@end{}
+}\n
+\n
+@if{concrete}
+	object @{type.raw.simpleName} {\n
+	\n
+	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
+	    new @{toScalaType(type);}(_asJava)\n
+	@foreach{method : staticMethods}
+	@if{includeMethod(method, staticMethods)}
+	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+			@{methodInvocation(type.raw.name, method, '    ');}
+	  }\n
+	@end{}
+	@end{}
+
+	}\n
+@else{}
+	object @{type.raw.simpleName} {\n\n
+		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
+		    new @includeNamed{'writeImplType'}(_asJava)\n
+		\n
+		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n
+			@includeNamed{'classbody.templ'; indentation='  '}
+		  }\n\n
+	}\n
+@end{}
