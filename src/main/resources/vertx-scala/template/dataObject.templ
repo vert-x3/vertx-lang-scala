@@ -1,8 +1,6 @@
-@comment{"# Template for Scala code generation"}
+@comment{"# Template for DataObject code generation"}
 
 @comment{"# Defines a few helper functions"}
-@includeNamed{'common.templ'}
-@includeNamed{'scala-helpers.templ'}
 @includeNamed{'scala-doc.templ'}
 
 /*\n
@@ -20,105 +18,140 @@
  * License for the specific language governing permissions and limitations\n
  * under the License.\n
  */\n\n
+@code{
+def changeJavaGenericNotationToScalaNotation(type) {
+ type.name.replace('<', '[').replace('>', ']');
+}
+
+def toScalaType(type) {
+  var ret = '';
+  if (type.name == 'void' || type.name == 'java.lang.Void') {
+    ret = 'Unit';
+  } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
+    ret = 'AnyRef';
+  } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
+    ret = 'Throwable';
+  } else if (type.kind == CLASS_STRING) {
+    ret = 'String';
+  } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE) {
+    if (type.name == 'byte' || type.name == 'java.lang.Byte') {
+      ret = 'Byte';
+    } else if (type.name == 'short' || type.name == 'java.lang.Short') {
+      ret = 'Short';
+    } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
+      ret = 'Int';
+    } else if (type.name == 'long' || type.name == 'java.lang.Long') {
+      ret = 'Long';
+    } else if (type.name == 'float' || type.name == 'java.lang.Float') {
+      ret = 'Float';
+    } else if (type.name == 'double' || type.name == 'java.lang.Double') {
+      ret = 'Double';
+    } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
+      ret = 'Boolean';
+    } else if (type.name == 'char' || type.name == 'java.lang.Character') {
+      ret = 'Char';
+    }
+  } else if (type.kind == CLASS_DATA_OBJECT) {
+    ret = type.raw.translatePackageName("scala") + '.' + type.simpleName;
+  } else if (type.kind == CLASS_ENUM) {
+    ret = type.name;
+  } else if (type.kind == CLASS_JSON_OBJECT ||
+           type.kind == CLASS_JSON_ARRAY){
+    ret = changeJavaGenericNotationToScalaNotation(type)
+  } else {
+    ret = changeJavaGenericNotationToScalaNotation(type);
+  }
+  return ret;
+}
+
+  var typeName = type.raw.simpleName;
+  var jTypeName = type.raw.simpleName + 'Java';
+}
+
 
 package @{type.raw.translatePackageName("scala")}\n
 \n
 
 @comment{"# Generate the imports"}
-import io.vertx.lang.scala.HandlerOps._\n
-import scala.compat.java8.FunctionConverters._\n
-import scala.collection.JavaConverters._\n
-@foreach{importedType : importedTypes}
-	@if{importedType.kind == CLASS_API}
-		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{importedType.raw.translateName("scala")}\n
-		@end{}
-	@else{importedType.kind != CLASS_ASYNC_RESULT &&
-	      !importedType.packageName.equals("java.lang") &&
-        importedType.kind != CLASS_LIST &&
-        importedType.kind != CLASS_SET &&
-        importedType.kind != CLASS_MAP}
-import @{importedType}\n
-	@end{}
-@end{}
+import io.vertx.core.json.JsonObject\n
+import scala.collection.JavaConversions._\n
 \n
 
-@comment{'the current index of the cache'}
-@code{cacheDecls=new java.util.ArrayList()}
-
 @comment{"# Generate the Class or Interface/Trait"}
-@code{
-  def getVarianceType(t) {
-    return t;
-  }
-
-  def getClassNameWithTypeInfo(c, typeName) {
-    var genericType = helper.getGenericType(c);
-    if (genericType != null) {
-      return typeName + '[' + getVarianceType(genericType) + ']';
-    } else {
-      return typeName;
-    }
-  }
-
-  def getClassName(c) {
-    var typeName = helper.getSimpleName(helper.getNonGenericType(c));
-    return getClassNameWithTypeInfo(c, typeName);
-  }
-
-  def toScalaGeneric(c) {
-    var typeName = helper.getNonGenericType(c);
-    return getClassNameWithTypeInfo(c, typeName);
-  }
-}
 
 @if{doc != null}
 /**\n
 @{renderDoc("  *", doc, renderDocLink)}
   */\n
 @end{}
-@if{concrete}
-	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
-@else{}
-	trait @includeNamed{'writeType'}
-@end{}
-
-@comment{"## Inheritance"}
-@if{abstractSuperTypes.size() > 0}
-	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
-@end{}
-
- {\n
 \n
 
-@if{concrete}
-	@includeNamed{'classbody.templ'; indentation=''}
-@else{}
-	@includeNamed{'traitbody.templ'}
+
+class @{typeName}(val java: @{type.raw.name}) {\n
+@foreach{property:properties}
+  @if{property.adder}
+    @if{property.isMap}
+  def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n
+    java.@{property.adderMethod}(key, value)\n
+    this\n
+  }\n
+    @else{}
+    def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
+      @if{property.type.kind == CLASS_DATA_OBJECT}
+      java.@{property.adderMethod}(value.java)\n
+      @else{}
+      java.@{property.adderMethod}(value)\n
+      @end{}
+      this\n
+    }\n
+    @end{}
+  @end{}
+  @if{property.setter}
+    @if{property.isList}
+  def @{property.setterMethod}(value:scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
+      @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    java.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+      @else{property.type.kind == CLASS_DATA_OBJECT}
+    java.@{property.setterMethod}(value.map(_.java))\n
+      @else{}
+    java.@{property.setterMethod}(value)\n
+      @end{}
+    this\n
+  }\n
+    @else{property.isSet}
+  def @{property.setterMethod}(value:Set[@{toScalaType(property.type)}]) = {\n
+      @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    java.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+      @else{property.type.kind == CLASS_DATA_OBJECT}
+    java.@{property.setterMethod}(value.map(_.java))\n
+      @else{}
+    java.@{property.setterMethod}(value)\n
+      @end{}
+    this\n
+  }\n
+    @else{}
+  def @{property.setterMethod}(value:@{toScalaType(property.type)}) = {\n
+      @if{property.type.kind == CLASS_DATA_OBJECT}
+    java.@{property.setterMethod}(value.java)\n
+      @else{}
+    java.@{property.setterMethod}(value)\n
+      @end{}
+    this\n
+  }\n
+    @end{}
+  @end{}
+  @comment{TODO: some necessary filtering as PropertyInfo has no information about static methods}
+  @if{(property.setter || property.adder) && property.getterMethod != null}
+  def @{property.getterMethod} = {\n
+    java.@{property.getterMethod}()\n
+  }\n
+  @end{}
 @end{}
 }\n
-\n
-@if{concrete}
-	object @{type.raw.simpleName} {\n
-	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
-	    new @{toScalaType(type);}(_asJava)\n
-	@foreach{method : staticMethods}
-	@if{includeMethod(method, staticMethods)}
-	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
-			@{methodInvocation(type.raw.name, method, '    ');}
-	  }\n
-	@end{}
-	@end{}
 
-	}\n
-@else{}
-	object @{type.raw.simpleName} {\n\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
-		    new @includeNamed{'writeImplType'}(_asJava)\n
-		\n
-		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n
-			@includeNamed{'classbody.templ'; indentation='  '}
-		  }\n\n
-	}\n
-@end{}
+object @{type.raw.simpleName} {\n
+  type @{jTypeName} = @{type.raw.name}\n
+  def fromJson(json: JsonObject):@{typeName} = {\n
+    new @{typeName}(new @{jTypeName}(json))\n
+  }\n
+}\n
