@@ -12,7 +12,6 @@ import org.scalatest.{FlatSpec, Matchers}
 @RunWith(classOf[JUnitRunner])
 class HandlerOpsTest extends FlatSpec with Matchers {
   "A handler created by funcToHandler" should "use the provided function" in {
-    DataObjectWithOnlyJsonObjectConstructor
     var changeMe = "unchanged"
     val function = (event: String) => changeMe = event + "!"
     val handler = funcToHandler(function)

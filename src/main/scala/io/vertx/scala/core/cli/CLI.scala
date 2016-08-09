@@ -81,7 +81,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the CLI description.
     */
   def getDescription(): scala.Option[String] = {
-    scala.Option(    _asJava.getDescription())
+        scala.Option(_asJava.getDescription())
   }
 
   def setDescription(desc: String): io.vertx.scala.core.cli.CLI = {
@@ -93,7 +93,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the CLI summary.
     */
   def getSummary(): scala.Option[String] = {
-    scala.Option(    _asJava.getSummary())
+        scala.Option(_asJava.getSummary())
   }
 
   /**
@@ -129,8 +129,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * Gets the list of options.
     * @return the list of options, empty if none.
     */
-  def getOptions(): scala.collection.mutable.Buffer[io.vertx.core.cli.Option] = {
-    _asJava.getOptions().asScala.map(x => x:io.vertx.core.cli.Option)
+  def getOptions(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option] = {
+    _asJava.getOptions().asScala.map(x => Option.fromJson(x.toJson))
   }
 
   /**
@@ -138,8 +138,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param option the option, must not be `null`.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the current [[CLI]] instance
     */
-  def addOption(option: io.vertx.core.cli.Option): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOption(option)
+  def addOption(option: io.vertx.scala.core.cli.Option): io.vertx.scala.core.cli.CLI = {
+    _asJava.addOption(option.java)
     this
   }
 
@@ -149,8 +149,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param options the options, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def addOptions(options: scala.collection.mutable.Buffer[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOptions(options.map(x => if(x == null) null else x:io.vertx.core.cli.Option).asJava)
+  def addOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
+    _asJava.addOptions(options.map(x => if(x == null) null else Option.fromJson(x.toJson))
     this
   }
 
@@ -159,8 +159,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param options the list of options, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def setOptions(options: scala.collection.mutable.Buffer[io.vertx.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setOptions(options.map(x => if(x == null) null else x:io.vertx.core.cli.Option).asJava)
+  def setOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
+    _asJava.setOptions(options.map(x => if(x == null) null else Option.fromJson(x.toJson))
     this
   }
 
@@ -168,8 +168,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * Gets the list of defined arguments.
     * @return the list of argument, empty if none.
     */
-  def getArguments(): scala.collection.mutable.Buffer[io.vertx.core.cli.Argument] = {
-    _asJava.getArguments().asScala.map(x => x:io.vertx.core.cli.Argument)
+  def getArguments(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument] = {
+    _asJava.getArguments().asScala.map(x => Argument.fromJson(x.toJson))
   }
 
   /**
@@ -177,8 +177,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param arg the argument, must not be `null`see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the current [[CLI]] instance
     */
-  def addArgument(arg: io.vertx.core.cli.Argument): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArgument(arg)
+  def addArgument(arg: io.vertx.scala.core.cli.Argument): io.vertx.scala.core.cli.CLI = {
+    _asJava.addArgument(arg.java)
     this
   }
 
@@ -188,8 +188,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param args the arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def addArguments(args: scala.collection.mutable.Buffer[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArguments(args.map(x => if(x == null) null else x:io.vertx.core.cli.Argument).asJava)
+  def addArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
+    _asJava.addArguments(args.map(x => if(x == null) null else Argument.fromJson(x.toJson))
     this
   }
 
@@ -198,8 +198,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param args the list of arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def setArguments(args: scala.collection.mutable.Buffer[io.vertx.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setArguments(args.map(x => if(x == null) null else x:io.vertx.core.cli.Argument).asJava)
+  def setArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
+    _asJava.setArguments(args.map(x => if(x == null) null else Argument.fromJson(x.toJson))
     this
   }
 
@@ -208,8 +208,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param name the name, must not be `null`
     * @return the [[Option]], `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
-  def getOption(name: String): scala.Option[io.vertx.core.cli.Option] = {
-    scala.Option(    _asJava.getOption(name))
+  def getOption(name: String): scala.Option[io.vertx.scala.core.cli.Option] = {
+        scala.Option(Option.fromJson(_asJava.getOption(name).toJson))
   }
 
   /**
@@ -217,8 +217,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param name the name of the argument, must not be `null`
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(name: String): scala.Option[io.vertx.core.cli.Argument] = {
-    scala.Option(    _asJava.getArgument(name))
+  def getArgument(name: String): scala.Option[io.vertx.scala.core.cli.Argument] = {
+        scala.Option(Argument.fromJson(_asJava.getArgument(name).toJson))
   }
 
   /**
@@ -226,8 +226,8 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param index the index, must be positive or zero.
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
-  def getArgument(index: Int): scala.Option[io.vertx.core.cli.Argument] = {
-    scala.Option(    _asJava.getArgument(index))
+  def getArgument(index: Int): scala.Option[io.vertx.scala.core.cli.Argument] = {
+        scala.Option(Argument.fromJson(_asJava.getArgument(index).toJson))
   }
 
   /**

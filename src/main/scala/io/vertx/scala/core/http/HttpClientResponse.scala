@@ -102,7 +102,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the header value
     */
   def getHeader(headerName: String): scala.Option[String] = {
-    scala.Option(    _asJava.getHeader(headerName))
+        scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -111,7 +111,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the trailer value
     */
   def getTrailer(trailerName: String): scala.Option[String] = {
-    scala.Option(    _asJava.getTrailer(trailerName))
+        scala.Option(_asJava.getTrailer(trailerName))
   }
 
   /**

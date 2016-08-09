@@ -550,16 +550,16 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def open(path: String, options: io.vertx.core.file.OpenOptions, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.open(path, options, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile], io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.AsyncFile, io.vertx.scala.core.file.AsyncFile](x,(x => if (x == null) null else AsyncFile.apply(x))))(handler))
+  def open(path: String, options: io.vertx.scala.core.file.OpenOptions, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile] => Unit): io.vertx.scala.core.file.FileSystem = {
+    _asJava.open(path, options.java, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.file.AsyncFile], io.vertx.core.AsyncResult [io.vertx.scala.core.file.AsyncFile]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.file.AsyncFile, io.vertx.scala.core.file.AsyncFile](x,(x => if (x == null) null else AsyncFile.apply(x))))(handler))
     this
   }
 
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#open]]
     */
-  def openBlocking(path: String, options: io.vertx.core.file.OpenOptions): io.vertx.scala.core.file.AsyncFile = {
-    AsyncFile.apply(_asJava.openBlocking(path, options))
+  def openBlocking(path: String, options: io.vertx.scala.core.file.OpenOptions): io.vertx.scala.core.file.AsyncFile = {
+    AsyncFile.apply(_asJava.openBlocking(path, options.java))
   }
 
   /**

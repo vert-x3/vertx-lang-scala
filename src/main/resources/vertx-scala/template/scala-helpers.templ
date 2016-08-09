@@ -75,7 +75,10 @@
       } else if (type.name == 'char' || type.name == 'java.lang.Character') {
         ret = 'Char';
       }
-    } else if (type.kind == CLASS_DATA_OBJECT || type.kind == CLASS_ENUM) {
+    } else if (type.kind == CLASS_DATA_OBJECT) {
+      ret = type.translateName("scala");
+    }
+    else if (type.kind == CLASS_ENUM) {
       ret = type.name;
     } else if (type.kind == CLASS_LIST){
         if(type.args.isEmpty)
@@ -179,6 +182,7 @@
     return '';
   }
 
+  /*TODO get rid of apply*/
   def toScalaApply(name) {
     helper.getNonGenericType(name) + '.apply' + getGenericType(name);
   }
@@ -340,6 +344,8 @@
 
     if (type.kind == CLASS_API) {
       invocation += mappedFunc + '(' + toScalaApply(type.getSimpleName()) + ')('+ handleOption(param);
+    } else if(type.kind == CLASS_DATA_OBJECT) {
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](a => '+type.getSimpleName()+'.fromJson(a.toJson))('+ handleOption(param);
     } else if (type.kind == CLASS_LIST ||
                type.kind == CLASS_SET ||
                type.kind == CLASS_MAP) {
@@ -388,6 +394,8 @@
             param.type.kind == CLASS_SET) {
           if (param.type.args[0].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
+          } else if(param.type.args[0].kind == CLASS_DATA_OBJECT){
+            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else '+param.type.args[0].getSimpleName()+'.fromJson(x.toJson)');
           } else {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
           }
@@ -407,11 +415,11 @@
             var handlerType = param.type.args[0];
             invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
             invocation += ')';
-        }
-        else if (param.type.kind == CLASS_FUNCTION) {
+        } else if (param.type.kind == CLASS_FUNCTION) {
             invocation += 'asJavaFunction(' + param.name + ')'
-        }
-        else {
+        } else if (param.type.kind == CLASS_DATA_OBJECT) {
+          invocation += handleOption(param) + '.java';
+        } else {
           invocation += handleOption(param);
         }
       }
@@ -425,18 +433,24 @@
     if (method.returnType.kind == CLASS_LIST) {
       if (method.returnType.args[0].kind == CLASS_API) {
         invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ')';
+      } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
+        invocation += '.asScala.map(x => '+ method.returnType.args[0].simpleName +'.fromJson(x.toJson))';
       } else {
         invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ')';
       }
     } else if (method.returnType.kind == CLASS_SET) {
       if (method.returnType.args[0].kind == CLASS_API) {
         invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
+      } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
+        invocation += '.asScala.map(x => '+ method.returnType.args[0].simpleName +'.fromJson(x.toJson))';
       } else {
         invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
       }
     } else if (method.returnType.kind == CLASS_MAP) {
       if (method.returnType.args[1].kind == CLASS_API) {
         invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
+      } else if(method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
+        invocation += '.asScala.map(kv => (kv._1, '+ method.returnType.args[1].simpleName +'.fromJson(kv._2.toJson))).toMap';
       } else if (method.returnType.args[1].kind == CLASS_STRING ||
             method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
             method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
@@ -451,7 +465,7 @@
   }
 
   def methodInvocation(target, method, indentation) {
-    var invocation = indentation;
+    var invocation = '';
     var fluent = method.isFluent();
     var wrap = false;
 
@@ -497,6 +511,10 @@
 
     var conversion = handleMethodReturn(method);
 
+    if(method.returnType.kind == CLASS_DATA_OBJECT) {
+      invocation = method.returnType.simpleName + '.fromJson(' +invocation + '.toJson)';
+    }
+
     if(method.returnType.isNullable){
       if(conversion != '') {
         invocation = indentation + 'scala.Option('+invocation+') match { case Some(x) => Some(x' + conversion + '); case None => None};\n'
@@ -518,7 +536,7 @@
       invocation += indentation;
       invocation += 'this\n';
     }
-    invocation;
+    indentation + invocation;
   }
 
   def includeMethod(method, instanceMethods) {

@@ -87,8 +87,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a>
     * @return the server
     */
-  def createNetServer(options: io.vertx.core.net.NetServerOptions): io.vertx.scala.core.net.NetServer = {
-    NetServer.apply(_asJava.createNetServer(options))
+  def createNetServer(options: io.vertx.scala.core.net.NetServerOptions): io.vertx.scala.core.net.NetServer = {
+    NetServer.apply(_asJava.createNetServer(options.java))
   }
 
   /**
@@ -104,8 +104,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/NetClientOptions.html">NetClientOptions</a>
     * @return the client
     */
-  def createNetClient(options: io.vertx.core.net.NetClientOptions): io.vertx.scala.core.net.NetClient = {
-    NetClient.apply(_asJava.createNetClient(options))
+  def createNetClient(options: io.vertx.scala.core.net.NetClientOptions): io.vertx.scala.core.net.NetClient = {
+    NetClient.apply(_asJava.createNetClient(options.java))
   }
 
   /**
@@ -121,8 +121,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a>
     * @return the server
     */
-  def createHttpServer(options: io.vertx.core.http.HttpServerOptions): io.vertx.scala.core.http.HttpServer = {
-    HttpServer.apply(_asJava.createHttpServer(options))
+  def createHttpServer(options: io.vertx.scala.core.http.HttpServerOptions): io.vertx.scala.core.http.HttpServer = {
+    HttpServer.apply(_asJava.createHttpServer(options.java))
   }
 
   /**
@@ -138,8 +138,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     * @return the client
     */
-  def createHttpClient(options: io.vertx.core.http.HttpClientOptions): io.vertx.scala.core.http.HttpClient = {
-    HttpClient.apply(_asJava.createHttpClient(options))
+  def createHttpClient(options: io.vertx.scala.core.http.HttpClientOptions): io.vertx.scala.core.http.HttpClient = {
+    HttpClient.apply(_asJava.createHttpClient(options.java))
   }
 
   /**
@@ -155,8 +155,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/DatagramSocketOptions.html">DatagramSocketOptions</a>
     * @return the socket
     */
-  def createDatagramSocket(options: io.vertx.core.datagram.DatagramSocketOptions): io.vertx.scala.core.datagram.DatagramSocket = {
-    DatagramSocket.apply(_asJava.createDatagramSocket(options))
+  def createDatagramSocket(options: io.vertx.scala.core.datagram.DatagramSocketOptions): io.vertx.scala.core.datagram.DatagramSocket = {
+    DatagramSocket.apply(_asJava.createDatagramSocket(options.java))
   }
 
   /**
@@ -321,8 +321,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     */
-  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions): Unit = {
-    _asJava.deployVerticle(name, options)
+  def deployVerticle(name: String, options: io.vertx.scala.core.DeploymentOptions): Unit = {
+    _asJava.deployVerticle(name, options.java)
   }
 
   /**
@@ -332,8 +332,8 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     * @param completionHandler a handler which will be notified when the deployment is complete
     */
-  def deployVerticle(name: String, options: io.vertx.core.DeploymentOptions, completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
-    _asJava.deployVerticle(name, options, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(completionHandler))
+  def deployVerticle(name: String, options: io.vertx.scala.core.DeploymentOptions, completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
+    _asJava.deployVerticle(name, options.java, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(completionHandler))
   }
 
   /**
@@ -454,13 +454,13 @@ object Vertx {
   def vertx(): io.vertx.scala.core.Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx())
   }
-  def vertx(options: io.vertx.core.VertxOptions): io.vertx.scala.core.Vertx = {
-    Vertx.apply(io.vertx.core.Vertx.vertx(options))
+  def vertx(options: io.vertx.scala.core.VertxOptions): io.vertx.scala.core.Vertx = {
+    Vertx.apply(io.vertx.core.Vertx.vertx(options.java))
   }
-  def clusteredVertx(options: io.vertx.core.VertxOptions, resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit): Unit = {
-    io.vertx.core.Vertx.clusteredVertx(options, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
+  def clusteredVertx(options: io.vertx.scala.core.VertxOptions, resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit): Unit = {
+    io.vertx.core.Vertx.clusteredVertx(options.java, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
   }
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
-    scala.Option(    Context.apply(io.vertx.core.Vertx.currentContext()))
+        scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
   }
 }
