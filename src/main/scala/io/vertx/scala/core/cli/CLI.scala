@@ -150,7 +150,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOptions(options.map(x => if(x == null) null else Option.fromJson(x.toJson))
+    _asJava.addOptions(options.map(x => if(x == null) null else x.java).asJava)
     this
   }
 
@@ -160,7 +160,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setOptions(options.map(x => if(x == null) null else Option.fromJson(x.toJson))
+    _asJava.setOptions(options.map(x => if(x == null) null else x.java).asJava)
     this
   }
 
@@ -189,7 +189,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArguments(args.map(x => if(x == null) null else Argument.fromJson(x.toJson))
+    _asJava.addArguments(args.map(x => if(x == null) null else x.java).asJava)
     this
   }
 
@@ -199,7 +199,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setArguments(args.map(x => if(x == null) null else Argument.fromJson(x.toJson))
+    _asJava.setArguments(args.map(x => if(x == null) null else x.java).asJava)
     this
   }
 

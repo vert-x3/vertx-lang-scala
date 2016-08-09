@@ -332,7 +332,7 @@
   }
 
   def methodInvocationHandlerCollection(type, method) {
-    var invocation = method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => if (x != null)';
+    var invocation = method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => if (x != null) ';
     invocation += convertCollectionFromScalaToJava(type);
     invocation += ' else null)('+param.name;
 
@@ -395,11 +395,12 @@
           if (param.type.args[0].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
           } else if(param.type.args[0].kind == CLASS_DATA_OBJECT){
-            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else '+param.type.args[0].getSimpleName()+'.fromJson(x.toJson)');
+            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.java).asJava');
           } else {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
           }
         } else if (param.type.kind == CLASS_MAP) {
+        /*TODO do the same dance with x.java as above */
           if (param.type.args[0].kind == CLASS_API &&
               param.type.args[1].kind == CLASS_API)
           {
