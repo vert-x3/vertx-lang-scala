@@ -88,8 +88,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return `true` if the option has received a value, [[false]] otherwise.
     */
-  def isOptionAssigned(option: io.vertx.core.cli.Option): Boolean = {
-    _asJava.isOptionAssigned(option)
+  def isOptionAssigned(option: io.vertx.scala.core.cli.Option): Boolean = {
+    _asJava.isOptionAssigned(option.java)
   }
 
   /**
@@ -97,8 +97,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValues(option: io.vertx.core.cli.Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValues(option).asScala.map(x => x:String)
+  def getRawValues(option: io.vertx.scala.core.cli.Option): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValues(option.java).asScala.map(x => x:String)
   }
 
   /**
@@ -106,8 +106,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForOption(option: io.vertx.core.cli.Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForOption(option).asScala.map(x => x:String)
+  def getRawValuesForOption(option: io.vertx.scala.core.cli.Option): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValuesForOption(option.java).asScala.map(x => x:String)
   }
 
   /**
@@ -115,8 +115,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param argument the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForArgument(argument: io.vertx.core.cli.Argument): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForArgument(argument).asScala.map(x => x:String)
+  def getRawValuesForArgument(argument: io.vertx.scala.core.cli.Argument): scala.collection.mutable.Buffer[String] = {
+    _asJava.getRawValuesForArgument(argument.java).asScala.map(x => x:String)
   }
 
   /**
@@ -124,8 +124,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the value, `null` if none.
     */
-  def getRawValueForOption(option: io.vertx.core.cli.Option): scala.Option[String] = {
-    scala.Option(    _asJava.getRawValueForOption(option))
+  def getRawValueForOption(option: io.vertx.scala.core.cli.Option): scala.Option[String] = {
+        scala.Option(_asJava.getRawValueForOption(option.java))
   }
 
   /**
@@ -133,8 +133,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return [[true]] if the option accepts more values, [[false]] otherwise.
     */
-  def acceptMoreValues(option: io.vertx.core.cli.Option): Boolean = {
-    _asJava.acceptMoreValues(option)
+  def acceptMoreValues(option: io.vertx.scala.core.cli.Option): Boolean = {
+    _asJava.acceptMoreValues(option.java)
   }
 
   /**
@@ -142,8 +142,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the value, `null` if none.
     */
-  def getRawValueForArgument(arg: io.vertx.core.cli.Argument): scala.Option[String] = {
-    scala.Option(    _asJava.getRawValueForArgument(arg))
+  def getRawValueForArgument(arg: io.vertx.scala.core.cli.Argument): scala.Option[String] = {
+        scala.Option(_asJava.getRawValueForArgument(arg.java))
   }
 
   /**
@@ -151,8 +151,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return `true` if the argument has received a value, [[false]] otherwise.
     */
-  def isArgumentAssigned(arg: io.vertx.core.cli.Argument): Boolean = {
-    _asJava.isArgumentAssigned(arg)
+  def isArgumentAssigned(arg: io.vertx.scala.core.cli.Argument): Boolean = {
+    _asJava.isArgumentAssigned(arg.java)
   }
 
   /**
@@ -160,8 +160,8 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return `true` if the user command line has used the option
     */
-  def isSeenInCommandLine(option: io.vertx.core.cli.Option): Boolean = {
-    _asJava.isSeenInCommandLine(option)
+  def isSeenInCommandLine(option: io.vertx.scala.core.cli.Option): Boolean = {
+    _asJava.isSeenInCommandLine(option.java)
   }
 
   /**

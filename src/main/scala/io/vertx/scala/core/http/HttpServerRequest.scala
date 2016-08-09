@@ -101,7 +101,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the scheme of the request
     */
   def scheme(): scala.Option[String] = {
-    scala.Option(    _asJava.scheme())
+        scala.Option(_asJava.scheme())
   }
 
   /**
@@ -115,21 +115,21 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
   def path(): scala.Option[String] = {
-    scala.Option(    _asJava.path())
+        scala.Option(_asJava.path())
   }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
   def query(): scala.Option[String] = {
-    scala.Option(    _asJava.query())
+        scala.Option(_asJava.query())
   }
 
   /**
     * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
     */
   def host(): scala.Option[String] = {
-    scala.Option(    _asJava.host())
+        scala.Option(_asJava.host())
   }
 
   /**
@@ -159,7 +159,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the header value
     */
   def getHeader(headerName: String): scala.Option[String] = {
-    scala.Option(    _asJava.getHeader(headerName))
+        scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -178,7 +178,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the param value
     */
   def getParam(paramName: String): scala.Option[String] = {
-    scala.Option(    _asJava.getParam(paramName))
+        scala.Option(_asJava.getParam(paramName))
   }
 
   /**
@@ -287,7 +287,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the attribute value
     */
   def getFormAttribute(attributeName: String): scala.Option[String] = {
-    scala.Option(    _asJava.getFormAttribute(attributeName))
+        scala.Option(_asJava.getFormAttribute(attributeName))
   }
 
   /**

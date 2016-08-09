@@ -102,8 +102,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: io.vertx.core.http.GoAway => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.goAwayHandler(funcToHandler(handler))
+  def goAwayHandler(handler: io.vertx.scala.core.http.GoAway => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.goAwayHandler(funcToMappedHandler[io.vertx.core.http.GoAway, io.vertx.scala.core.http.GoAway](a => GoAway.fromJson(a.toJson))(handler))
     this
   }
 
@@ -166,8 +166,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   /**
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
     */
-  def settings(): io.vertx.core.http.Http2Settings = {
-    _asJava.settings()
+  def settings(): io.vertx.scala.core.http.Http2Settings = {
+    Http2Settings.fromJson(_asJava.settings().toJson)
   }
 
   /**
@@ -177,8 +177,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: io.vertx.core.http.Http2Settings): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings)
+  def updateSettings(settings: io.vertx.scala.core.http.Http2Settings): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.updateSettings(settings.java)
     this
   }
 
@@ -192,16 +192,16 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: io.vertx.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+  def updateSettings(settings: io.vertx.scala.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.updateSettings(settings.java, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
     this
   }
 
   /**
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
     */
-  def remoteSettings(): io.vertx.core.http.Http2Settings = {
-    _asJava.remoteSettings()
+  def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
+    Http2Settings.fromJson(_asJava.remoteSettings().toJson)
   }
 
   /**
@@ -211,8 +211,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler for remote endpoint settings
     * @return a reference to this, so the API can be used fluently
     */
-  def remoteSettingsHandler(handler: io.vertx.core.http.Http2Settings => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.remoteSettingsHandler(funcToHandler(handler))
+  def remoteSettingsHandler(handler: io.vertx.scala.core.http.Http2Settings => Unit): io.vertx.scala.core.http.HttpConnection = {
+    _asJava.remoteSettingsHandler(funcToMappedHandler[io.vertx.core.http.Http2Settings, io.vertx.scala.core.http.Http2Settings](a => Http2Settings.fromJson(a.toJson))(handler))
     this
   }
 

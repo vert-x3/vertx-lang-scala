@@ -85,8 +85,8 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return this producer object
     */
-  def deliveryOptions(options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.deliveryOptions(options)
+  def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    _asJava.deliveryOptions(options.java)
     this
   }
 
