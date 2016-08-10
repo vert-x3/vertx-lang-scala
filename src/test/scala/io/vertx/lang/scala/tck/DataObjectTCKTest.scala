@@ -1,6 +1,7 @@
 package io.vertx.lang.scala.tck
 
 import io.vertx.codegen.testmodel.DataObjectTCKImpl
+import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel.DataObjectTCK
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -9,30 +10,29 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class DataObjectTCKTest extends FlatSpec with Matchers {
   val dataObjectTCK = DataObjectTCK(new DataObjectTCKImpl())
-//TODO: doesn't currently make sense as DataObjects are not being generated
-//  "testReadDataObjectWithValues" should "work" in {
-//    val dataObject = dataObjectTCK.getDataObjectWithValues();
-//    assert(true == dataObject.booleanValue);
-//    assert(520 == dataObject.shortValue);
-//    assert(123456 == dataObject.intValue);
-//    assert(123456789 == dataObject.longValue);
-//    assert(1.1 == dataObject.floatValue);
-//    assert(1.11 == dataObject.doubleValue);
-//    assert(1040 == dataObject.boxedShortValue);
-//    assert(true == dataObject.boxedBooleanValue);
-//    assert(654321 == dataObject.boxedIntValue);
-//    assert(987654321 == dataObject.boxedLongValue);
-//    assert(2.2 == dataObject.boxedFloatValue);
-//    assert(2.22 == dataObject.boxedDoubleValue);
-//    assert("wibble" == dataObject.stringValue);
-//    assert(JsonObject{"foo"->"eek" =="bar"->"wibble"} == dataObject.jsonObjectValue);
-//    assert(JsonArray{"eek" =="wibble"} == dataObject.jsonArrayValue);
-//    assert("TIM" == dataObject.enumValue);
-//    assert(mike == dataObject.genEnumValue);
-//    assert("1" == dataObject.dataObjectValue?.foo);
-//    assert(1 == dataObject.dataObjectValue?.bar);
-//    assert(1.1 == dataObject.dataObjectValue?.wibble);
-//  }
+  "testReadDataObjectWithValues" should "work" in {
+    val dataObject = dataObjectTCK.getDataObjectWithValues().java.toJson
+    assert(true == dataObject.getBoolean("booleanValue"))
+    assert(520 == dataObject.getInteger("shortValue"))
+    assert(123456 == dataObject.getInteger("intValue"))
+    assert(123456789 == dataObject.getLong("longValue"))
+    assert(1.1f == dataObject.getFloat("floatValue"))
+    assert(1.11 == dataObject.getDouble("doubleValue"))
+    assert(1040 == dataObject.getInteger("boxedShortValue"))
+    assert(true == dataObject.getBoolean("boxedBooleanValue"))
+    assert(654321 == dataObject.getInteger("boxedIntValue"))
+    assert(987654321 == dataObject.getLong("boxedLongValue"))
+    assert(2.2f == dataObject.getFloat("boxedFloatValue"))
+    assert(2.22 == dataObject.getDouble("boxedDoubleValue"))
+    assert("wibble" == dataObject.getString("stringValue"))
+    assert(Json.obj().put("foo","eek").put("bar", "wibble") == dataObject.getJsonObject("jsonObjectValue"))
+    assert(Json.arr("eek","wibble") == dataObject.getJsonArray("jsonArrayValue"))
+    assert("TIM" == dataObject.getString("enumValue"))
+    assert("MIKE" == dataObject.getString("genEnumValue"))
+    assert("1" == dataObject.getJsonObject("dataObjectValue").getString("foo"))
+    assert(1 == dataObject.getJsonObject("dataObjectValue").getInteger("bar"))
+    assert(1.1f == dataObject.getJsonObject("dataObjectValue").getFloat("wibble"))
+  }
 //
 //  shared test void testWriteDataObjectWithValues() {
 //    value dataObject = DataObjectWithValues {
