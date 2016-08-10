@@ -35,7 +35,19 @@ class MetricsOptions(val java: io.vertx.core.metrics.MetricsOptions) {
   }
 object MetricsOptions {
   type MetricsOptionsJava = io.vertx.core.metrics.MetricsOptions
+  
+  def apply(t: MetricsOptionsJava) = {
+    if(t != null)
+      new MetricsOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):MetricsOptions = {
-    new MetricsOptions(new MetricsOptionsJava(json))
+    if(json != null)
+      new MetricsOptions(new MetricsOptionsJava(json))
+    else
+      null
   }
 }

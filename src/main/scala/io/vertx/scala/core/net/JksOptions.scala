@@ -66,7 +66,19 @@ class JksOptions(val java: io.vertx.core.net.JksOptions) {
   }
 object JksOptions {
   type JksOptionsJava = io.vertx.core.net.JksOptions
+  
+  def apply(t: JksOptionsJava) = {
+    if(t != null)
+      new JksOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):JksOptions = {
-    new JksOptions(new JksOptionsJava(json))
+    if(json != null)
+      new JksOptions(new JksOptionsJava(json))
+    else
+      null
   }
 }

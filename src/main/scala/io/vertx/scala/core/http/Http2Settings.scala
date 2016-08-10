@@ -72,7 +72,19 @@ class Http2Settings(val java: io.vertx.core.http.Http2Settings) {
   }
 object Http2Settings {
   type Http2SettingsJava = io.vertx.core.http.Http2Settings
+  
+  def apply(t: Http2SettingsJava) = {
+    if(t != null)
+      new Http2Settings(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):Http2Settings = {
-    new Http2Settings(new Http2SettingsJava(json))
+    if(json != null)
+      new Http2Settings(new Http2SettingsJava(json))
+    else
+      null
   }
 }

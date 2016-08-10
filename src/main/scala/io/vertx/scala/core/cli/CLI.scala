@@ -130,7 +130,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of options, empty if none.
     */
   def getOptions(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option] = {
-    _asJava.getOptions().asScala.map(x => Option.fromJson(x.toJson))
+    _asJava.getOptions().asScala.map(x => /*wuhu*/Option(x))
   }
 
   /**
@@ -169,7 +169,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of argument, empty if none.
     */
   def getArguments(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument] = {
-    _asJava.getArguments().asScala.map(x => Argument.fromJson(x.toJson))
+    _asJava.getArguments().asScala.map(x => /*wuhu*/Argument(x))
   }
 
   /**
@@ -209,7 +209,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Option]], `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[io.vertx.scala.core.cli.Option] = {
-        scala.Option(Option.fromJson(_asJava.getOption(name).toJson))
+        scala.Option(Option(_asJava.getOption(name)))
   }
 
   /**
@@ -218,7 +218,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[io.vertx.scala.core.cli.Argument] = {
-        scala.Option(Argument.fromJson(_asJava.getArgument(name).toJson))
+        scala.Option(Argument(_asJava.getArgument(name)))
   }
 
   /**
@@ -227,7 +227,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[io.vertx.scala.core.cli.Argument] = {
-        scala.Option(Argument.fromJson(_asJava.getArgument(index).toJson))
+        scala.Option(Argument(_asJava.getArgument(index)))
   }
 
   /**

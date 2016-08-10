@@ -276,7 +276,19 @@ class HttpServerOptions(val java: io.vertx.core.http.HttpServerOptions) {
   }
 object HttpServerOptions {
   type HttpServerOptionsJava = io.vertx.core.http.HttpServerOptions
+  
+  def apply(t: HttpServerOptionsJava) = {
+    if(t != null)
+      new HttpServerOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):HttpServerOptions = {
-    new HttpServerOptions(new HttpServerOptionsJava(json))
+    if(json != null)
+      new HttpServerOptions(new HttpServerOptionsJava(json))
+    else
+      null
   }
 }

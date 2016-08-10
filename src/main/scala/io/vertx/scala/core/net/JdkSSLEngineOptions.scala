@@ -27,7 +27,19 @@ class JdkSSLEngineOptions(val java: io.vertx.core.net.JdkSSLEngineOptions) {
         }
 object JdkSSLEngineOptions {
   type JdkSSLEngineOptionsJava = io.vertx.core.net.JdkSSLEngineOptions
+  
+  def apply(t: JdkSSLEngineOptionsJava) = {
+    if(t != null)
+      new JdkSSLEngineOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):JdkSSLEngineOptions = {
-    new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(json))
+    if(json != null)
+      new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(json))
+    else
+      null
   }
 }

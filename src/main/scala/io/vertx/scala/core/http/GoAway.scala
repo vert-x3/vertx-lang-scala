@@ -48,7 +48,19 @@ class GoAway(val java: io.vertx.core.http.GoAway) {
   }
 object GoAway {
   type GoAwayJava = io.vertx.core.http.GoAway
+  
+  def apply(t: GoAwayJava) = {
+    if(t != null)
+      new GoAway(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):GoAway = {
-    new GoAway(new GoAwayJava(json))
+    if(json != null)
+      new GoAway(new GoAwayJava(json))
+    else
+      null
   }
 }

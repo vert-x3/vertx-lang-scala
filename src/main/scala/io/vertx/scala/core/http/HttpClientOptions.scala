@@ -325,7 +325,19 @@ class HttpClientOptions(val java: io.vertx.core.http.HttpClientOptions) {
   }
 object HttpClientOptions {
   type HttpClientOptionsJava = io.vertx.core.http.HttpClientOptions
+  
+  def apply(t: HttpClientOptionsJava) = {
+    if(t != null)
+      new HttpClientOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):HttpClientOptions = {
-    new HttpClientOptions(new HttpClientOptionsJava(json))
+    if(json != null)
+      new HttpClientOptions(new HttpClientOptionsJava(json))
+    else
+      null
   }
 }
