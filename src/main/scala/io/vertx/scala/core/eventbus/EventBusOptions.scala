@@ -262,7 +262,19 @@ class EventBusOptions(val java: io.vertx.core.eventbus.EventBusOptions) {
   }
 object EventBusOptions {
   type EventBusOptionsJava = io.vertx.core.eventbus.EventBusOptions
+  
+  def apply(t: EventBusOptionsJava) = {
+    if(t != null)
+      new EventBusOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):EventBusOptions = {
-    new EventBusOptions(new EventBusOptionsJava(json))
+    if(json != null)
+      new EventBusOptions(new EventBusOptionsJava(json))
+    else
+      null
   }
 }

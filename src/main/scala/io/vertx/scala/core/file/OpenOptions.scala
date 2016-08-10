@@ -97,7 +97,19 @@ class OpenOptions(val java: io.vertx.core.file.OpenOptions) {
   }
 object OpenOptions {
   type OpenOptionsJava = io.vertx.core.file.OpenOptions
+  
+  def apply(t: OpenOptionsJava) = {
+    if(t != null)
+      new OpenOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):OpenOptions = {
-    new OpenOptions(new OpenOptionsJava(json))
+    if(json != null)
+      new OpenOptions(new OpenOptionsJava(json))
+    else
+      null
   }
 }

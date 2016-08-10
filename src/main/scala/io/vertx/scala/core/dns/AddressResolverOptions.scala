@@ -120,7 +120,19 @@ class AddressResolverOptions(val java: io.vertx.core.dns.AddressResolverOptions)
   }
 object AddressResolverOptions {
   type AddressResolverOptionsJava = io.vertx.core.dns.AddressResolverOptions
+  
+  def apply(t: AddressResolverOptionsJava) = {
+    if(t != null)
+      new AddressResolverOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):AddressResolverOptions = {
-    new AddressResolverOptions(new AddressResolverOptionsJava(json))
+    if(json != null)
+      new AddressResolverOptions(new AddressResolverOptionsJava(json))
+    else
+      null
   }
 }

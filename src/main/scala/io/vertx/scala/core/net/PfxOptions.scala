@@ -66,7 +66,19 @@ class PfxOptions(val java: io.vertx.core.net.PfxOptions) {
   }
 object PfxOptions {
   type PfxOptionsJava = io.vertx.core.net.PfxOptions
+  
+  def apply(t: PfxOptionsJava) = {
+    if(t != null)
+      new PfxOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):PfxOptions = {
-    new PfxOptions(new PfxOptionsJava(json))
+    if(json != null)
+      new PfxOptions(new PfxOptionsJava(json))
+    else
+      null
   }
 }

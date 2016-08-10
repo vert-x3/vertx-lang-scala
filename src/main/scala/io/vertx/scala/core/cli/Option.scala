@@ -118,7 +118,19 @@ class Option(val java: io.vertx.core.cli.Option) {
   }
 object Option {
   type OptionJava = io.vertx.core.cli.Option
+  
+  def apply(t: OptionJava) = {
+    if(t != null)
+      new Option(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):Option = {
-    new Option(new OptionJava(json))
+    if(json != null)
+      new Option(new OptionJava(json))
+    else
+      null
   }
 }

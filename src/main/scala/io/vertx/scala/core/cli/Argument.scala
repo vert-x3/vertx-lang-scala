@@ -77,7 +77,19 @@ class Argument(val java: io.vertx.core.cli.Argument) {
   }
 object Argument {
   type ArgumentJava = io.vertx.core.cli.Argument
+  
+  def apply(t: ArgumentJava) = {
+    if(t != null)
+      new Argument(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):Argument = {
-    new Argument(new ArgumentJava(json))
+    if(json != null)
+      new Argument(new ArgumentJava(json))
+    else
+      null
   }
 }

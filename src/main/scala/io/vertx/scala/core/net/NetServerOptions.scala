@@ -206,7 +206,19 @@ class NetServerOptions(val java: io.vertx.core.net.NetServerOptions) {
   }
 object NetServerOptions {
   type NetServerOptionsJava = io.vertx.core.net.NetServerOptions
+  
+  def apply(t: NetServerOptionsJava) = {
+    if(t != null)
+      new NetServerOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):NetServerOptions = {
-    new NetServerOptions(new NetServerOptionsJava(json))
+    if(json != null)
+      new NetServerOptions(new NetServerOptionsJava(json))
+    else
+      null
   }
 }

@@ -103,7 +103,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def goAwayHandler(handler: io.vertx.scala.core.http.GoAway => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.goAwayHandler(funcToMappedHandler[io.vertx.core.http.GoAway, io.vertx.scala.core.http.GoAway](a => GoAway.fromJson(a.toJson))(handler))
+    _asJava.goAwayHandler(funcToMappedHandler[io.vertx.core.http.GoAway, io.vertx.scala.core.http.GoAway](a => GoAway(a))(handler))
     this
   }
 
@@ -167,7 +167,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
     */
   def settings(): io.vertx.scala.core.http.Http2Settings = {
-    Http2Settings.fromJson(_asJava.settings().toJson)
+    Http2Settings(_asJava.settings())
   }
 
   /**
@@ -201,7 +201,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
     */
   def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
-    Http2Settings.fromJson(_asJava.remoteSettings().toJson)
+    Http2Settings(_asJava.remoteSettings())
   }
 
   /**
@@ -212,7 +212,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def remoteSettingsHandler(handler: io.vertx.scala.core.http.Http2Settings => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.remoteSettingsHandler(funcToMappedHandler[io.vertx.core.http.Http2Settings, io.vertx.scala.core.http.Http2Settings](a => Http2Settings.fromJson(a.toJson))(handler))
+    _asJava.remoteSettingsHandler(funcToMappedHandler[io.vertx.core.http.Http2Settings, io.vertx.scala.core.http.Http2Settings](a => Http2Settings(a))(handler))
     this
   }
 

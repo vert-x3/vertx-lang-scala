@@ -167,7 +167,19 @@ class VertxOptions(val java: io.vertx.core.VertxOptions) {
   }
 object VertxOptions {
   type VertxOptionsJava = io.vertx.core.VertxOptions
+  
+  def apply(t: VertxOptionsJava) = {
+    if(t != null)
+      new VertxOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):VertxOptions = {
-    new VertxOptions(new VertxOptionsJava(json))
+    if(json != null)
+      new VertxOptions(new VertxOptionsJava(json))
+    else
+      null
   }
 }

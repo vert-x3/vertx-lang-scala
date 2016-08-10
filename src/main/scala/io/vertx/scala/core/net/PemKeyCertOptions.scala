@@ -95,7 +95,19 @@ class PemKeyCertOptions(val java: io.vertx.core.net.PemKeyCertOptions) {
   }
 object PemKeyCertOptions {
   type PemKeyCertOptionsJava = io.vertx.core.net.PemKeyCertOptions
+  
+  def apply(t: PemKeyCertOptionsJava) = {
+    if(t != null)
+      new PemKeyCertOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):PemKeyCertOptions = {
-    new PemKeyCertOptions(new PemKeyCertOptionsJava(json))
+    if(json != null)
+      new PemKeyCertOptions(new PemKeyCertOptionsJava(json))
+    else
+      null
   }
 }

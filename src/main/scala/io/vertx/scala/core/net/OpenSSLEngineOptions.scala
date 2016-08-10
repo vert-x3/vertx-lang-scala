@@ -34,7 +34,19 @@ class OpenSSLEngineOptions(val java: io.vertx.core.net.OpenSSLEngineOptions) {
   }
 object OpenSSLEngineOptions {
   type OpenSSLEngineOptionsJava = io.vertx.core.net.OpenSSLEngineOptions
+  
+  def apply(t: OpenSSLEngineOptionsJava) = {
+    if(t != null)
+      new OpenSSLEngineOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):OpenSSLEngineOptions = {
-    new OpenSSLEngineOptions(new OpenSSLEngineOptionsJava(json))
+    if(json != null)
+      new OpenSSLEngineOptions(new OpenSSLEngineOptionsJava(json))
+    else
+      null
   }
 }

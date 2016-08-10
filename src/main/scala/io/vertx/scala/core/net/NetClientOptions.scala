@@ -220,7 +220,19 @@ class NetClientOptions(val java: io.vertx.core.net.NetClientOptions) {
   }
 object NetClientOptions {
   type NetClientOptionsJava = io.vertx.core.net.NetClientOptions
+  
+  def apply(t: NetClientOptionsJava) = {
+    if(t != null)
+      new NetClientOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):NetClientOptions = {
-    new NetClientOptions(new NetClientOptionsJava(json))
+    if(json != null)
+      new NetClientOptions(new NetClientOptionsJava(json))
+    else
+      null
   }
 }

@@ -62,7 +62,19 @@ class ProxyOptions(val java: io.vertx.core.net.ProxyOptions) {
   }
 object ProxyOptions {
   type ProxyOptionsJava = io.vertx.core.net.ProxyOptions
+  
+  def apply(t: ProxyOptionsJava) = {
+    if(t != null)
+      new ProxyOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):ProxyOptions = {
-    new ProxyOptions(new ProxyOptionsJava(json))
+    if(json != null)
+      new ProxyOptions(new ProxyOptionsJava(json))
+    else
+      null
   }
 }

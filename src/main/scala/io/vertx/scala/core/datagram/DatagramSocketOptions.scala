@@ -97,7 +97,19 @@ class DatagramSocketOptions(val java: io.vertx.core.datagram.DatagramSocketOptio
   }
 object DatagramSocketOptions {
   type DatagramSocketOptionsJava = io.vertx.core.datagram.DatagramSocketOptions
+  
+  def apply(t: DatagramSocketOptionsJava) = {
+    if(t != null)
+      new DatagramSocketOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):DatagramSocketOptions = {
-    new DatagramSocketOptions(new DatagramSocketOptionsJava(json))
+    if(json != null)
+      new DatagramSocketOptions(new DatagramSocketOptionsJava(json))
+    else
+      null
   }
 }

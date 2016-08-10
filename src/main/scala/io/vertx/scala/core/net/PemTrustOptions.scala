@@ -69,7 +69,19 @@ class PemTrustOptions(val java: io.vertx.core.net.PemTrustOptions) {
   }
 object PemTrustOptions {
   type PemTrustOptionsJava = io.vertx.core.net.PemTrustOptions
+  
+  def apply(t: PemTrustOptionsJava) = {
+    if(t != null)
+      new PemTrustOptions(t)
+    else
+      null
+   
+  }
+  
   def fromJson(json: JsonObject):PemTrustOptions = {
-    new PemTrustOptions(new PemTrustOptionsJava(json))
+    if(json != null)
+      new PemTrustOptions(new PemTrustOptionsJava(json))
+    else
+      null
   }
 }

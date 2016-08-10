@@ -162,7 +162,19 @@ class @{typeName}(val java: @{type.raw.name}) {\n
 
 object @{type.raw.simpleName} {\n
   type @{jTypeName} = @{type.raw.name}\n
+  \n
+  def apply(t: @{jTypeName}) = {\n
+    if(t != null)\n
+      new @{typeName}(t)\n
+    else\n
+      null\n
+   \n
+  }\n
+  \n
   def fromJson(json: JsonObject):@{typeName} = {\n
-    new @{typeName}(new @{jTypeName}(json))\n
+    if(json != null)\n
+      new @{typeName}(new @{jTypeName}(json))\n
+    else\n
+      null\n
   }\n
 }\n
