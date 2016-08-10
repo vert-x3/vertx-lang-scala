@@ -4,7 +4,7 @@
     {
       "kind": "dataObject",
       "fileName": "if(concrete) {'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'} else null",
-      "templateFileName": "vertx-scala/template/dataObject.templ"
+      "templateFileName": "vertx-scala/template/dataobject.templ"
     },
     {
       "kind" : "class",
