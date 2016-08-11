@@ -3,16 +3,19 @@ package io.vertx.lang.scala.tck
 import io.vertx.codegen.testmodel.DataObjectTCKImpl
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
+@RunWith(classOf[JUnitRunner])
 class DataObjectTCKTest extends FlatSpec with Matchers {
   val dataObjectTCK = DataObjectTCK(new DataObjectTCKImpl())
 
   "testReadDataObjectWithValues" should "work" in {
-    val dataObject = dataObjectTCK.getDataObjectWithValues().java.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithValues().asJava.toJson
     assert(true == dataObject.getBoolean("booleanValue"))
     assert(520 == dataObject.getInteger("shortValue"))
     assert(123456 == dataObject.getInteger("intValue"))
@@ -60,7 +63,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testReadDataObjectWithLists" should "work" ignore {
-    val dataObject = dataObjectTCK.getDataObjectWithLists().java.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithLists().asJava.toJson
     assert(dataObject.getJsonArray("booleanValues") != null)
     assert(Json.arr(true, false, true) === dataObject.getJsonArray("booleanValues"))
     assert(dataObject.getJsonArray("shortValues") != null)
@@ -113,7 +116,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testReadDataObjectWithMaps" should "work" ignore {
-    val dataObject = dataObjectTCK.getDataObjectWithMaps().java.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithMaps().asJava.toJson
     assert(Json.obj().put("1", true).put("2", false) == dataObject.getJsonObject("booleanValues"))
     assert(Json.obj().put("1", 520).put("2", 1040) == dataObject.getJsonObject("shortValues"))
     assert(Json.obj().put("1", 123456).put("2", 654321) == dataObject.getJsonObject("integerValues"))

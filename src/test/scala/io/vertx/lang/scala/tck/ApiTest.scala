@@ -1296,10 +1296,10 @@ class ApiTest extends FlatSpec with Matchers {
     val testDataObject = TestDataObject.fromJson(Json.obj(("foo","foo_value"), ("bar",12345), ("wibble", 3.5)))
     nullableTCK.methodWithNullableDataObjectParam(true, None)
     nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
-    nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.java.toJson == b.java.toJson))
+    nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.asJava.toJson == b.asJava.toJson))
     nullableTCK.methodWithNullableDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
-    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(true, b => {w{assert(testDataObject.java.toJson == b.result().java.toJson)}; w.dismiss()})
+    nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(true, b => {w{assert(testDataObject.asJava.toJson == b.result().asJava.toJson)}; w.dismiss()})
     w.await()
     val w2= new Waiter()
     nullableTCK.methodWithNullableDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
@@ -1582,10 +1582,10 @@ class ApiTest extends FlatSpec with Matchers {
     val testListDataObject = mutable.Buffer(TestDataObject.fromJson(json))
     nullableTCK.methodWithNullableListDataObjectParam(true, None)
     nullableTCK.methodWithNullableListDataObjectParam(false, Option(testListDataObject))
-    nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.forall(a => a.java.toJson == json)))
+    nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.forall(a => a.asJava.toJson == json)))
     nullableTCK.methodWithNullableListDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
-    nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(true, b => {w{assert(testListDataObject.forall(a => a.java.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
+    nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(true, b => {w{assert(testListDataObject.forall(a => a.asJava.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
     nullableTCK.methodWithNullableListDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
@@ -1849,10 +1849,10 @@ class ApiTest extends FlatSpec with Matchers {
     val testSetDataObject = Set(TestDataObject.fromJson(json))
     nullableTCK.methodWithNullableSetDataObjectParam(true, None)
     nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
-    nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.java.toJson == json)))
+    nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.asJava.toJson == json)))
     nullableTCK.methodWithNullableSetDataObjectHandler(false, b => assert(null == b))
     val w = new Waiter()
-    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(true, b => {w{assert(testSetDataObject.forall(a => a.java.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
+    nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(true, b => {w{assert(testSetDataObject.forall(a => a.asJava.toJson == Json.obj(("foo","foo_value"), ("bar",12345), ("wibble",5.6))))}; w.dismiss()})
     w.await()
     val w2= new Waiter()
     nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResult(false, b => {w2{assert(null == b.result())}; w2.dismiss()})
@@ -2346,7 +2346,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   def dataObjectToJsonOrNull(x: TestDataObject): JsonObject = {
-    if(x!=null) x.java.toJson else null
+    if(x!=null) x.asJava.toJson else null
   }
 
   def refedIfaceToJavaOrNull(x: RefedInterface1):io.vertx.codegen.testmodel.RefedInterface1 = {

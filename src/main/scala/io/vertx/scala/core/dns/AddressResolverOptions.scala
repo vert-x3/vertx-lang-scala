@@ -24,98 +24,98 @@ import scala.collection.JavaConversions._
   * DNS <i>A</i> and <i>AAAA</i> queries.
   */
 
-class AddressResolverOptions(val java: io.vertx.core.dns.AddressResolverOptions) {
+class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOptions) {
   def setCacheMaxTimeToLive(value:Int) = {
-    java.setCacheMaxTimeToLive(value)
+    asJava.setCacheMaxTimeToLive(value)
     this
   }
   def getCacheMaxTimeToLive = {
-    java.getCacheMaxTimeToLive()
+    asJava.getCacheMaxTimeToLive()
   }
   def setCacheMinTimeToLive(value:Int) = {
-    java.setCacheMinTimeToLive(value)
+    asJava.setCacheMinTimeToLive(value)
     this
   }
   def getCacheMinTimeToLive = {
-    java.getCacheMinTimeToLive()
+    asJava.getCacheMinTimeToLive()
   }
   def setCacheNegativeTimeToLive(value:Int) = {
-    java.setCacheNegativeTimeToLive(value)
+    asJava.setCacheNegativeTimeToLive(value)
     this
   }
   def getCacheNegativeTimeToLive = {
-    java.getCacheNegativeTimeToLive()
+    asJava.getCacheNegativeTimeToLive()
   }
   def setHostsPath(value:String) = {
-    java.setHostsPath(value)
+    asJava.setHostsPath(value)
     this
   }
   def getHostsPath = {
-    java.getHostsPath()
+    asJava.getHostsPath()
   }
   def setHostsValue(value:io.vertx.core.buffer.Buffer) = {
-    java.setHostsValue(value)
+    asJava.setHostsValue(value)
     this
   }
   def getHostsValue = {
-    java.getHostsValue()
+    asJava.getHostsValue()
   }
   def setMaxQueries(value:Int) = {
-    java.setMaxQueries(value)
+    asJava.setMaxQueries(value)
     this
   }
   def getMaxQueries = {
-    java.getMaxQueries()
+    asJava.getMaxQueries()
   }
   def setNdots(value:Int) = {
-    java.setNdots(value)
+    asJava.setNdots(value)
     this
   }
   def getNdots = {
-    java.getNdots()
+    asJava.getNdots()
   }
   def setOptResourceEnabled(value:Boolean) = {
-    java.setOptResourceEnabled(value)
+    asJava.setOptResourceEnabled(value)
     this
   }
   def isOptResourceEnabled = {
-    java.isOptResourceEnabled()
+    asJava.isOptResourceEnabled()
   }
   def setQueryTimeout(value:Long) = {
-    java.setQueryTimeout(value)
+    asJava.setQueryTimeout(value)
     this
   }
   def getQueryTimeout = {
-    java.getQueryTimeout()
+    asJava.getQueryTimeout()
   }
   def setRdFlag(value:Boolean) = {
-    java.setRdFlag(value)
+    asJava.setRdFlag(value)
     this
   }
   def getRdFlag = {
-    java.getRdFlag()
+    asJava.getRdFlag()
   }
   def addSearchDomain(value:String) = {
-    java.addSearchDomain(value)
+    asJava.addSearchDomain(value)
     this
   }
   def setSearchDomains(value:scala.collection.mutable.Buffer[String]) = {
-    java.setSearchDomains(value)
+    asJava.setSearchDomains(value)
     this
   }
   def getSearchDomains = {
-    java.getSearchDomains()
+    asJava.getSearchDomains()
   }
   def addServer(value:String) = {
-    java.addServer(value)
+    asJava.addServer(value)
     this
   }
   def setServers(value:scala.collection.mutable.Buffer[String]) = {
-    java.setServers(value)
+    asJava.setServers(value)
     this
   }
   def getServers = {
-    java.getServers()
+    asJava.getServers()
   }
 }
 

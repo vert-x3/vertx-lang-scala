@@ -86,7 +86,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @return this producer object
     */
   def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.deliveryOptions(options.java)
+    _asJava.deliveryOptions(options.asJava)
     this
   }
 

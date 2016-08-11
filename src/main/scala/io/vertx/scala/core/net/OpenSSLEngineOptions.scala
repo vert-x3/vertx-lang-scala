@@ -23,13 +23,13 @@ import scala.collection.JavaConversions._
   * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use OpenSsl.
   */
 
-class OpenSSLEngineOptions(val java: io.vertx.core.net.OpenSSLEngineOptions) {
+class OpenSSLEngineOptions(val asJava: io.vertx.core.net.OpenSSLEngineOptions) {
   def setSessionCacheEnabled(value:Boolean) = {
-    java.setSessionCacheEnabled(value)
+    asJava.setSessionCacheEnabled(value)
     this
   }
   def isSessionCacheEnabled = {
-    java.isSessionCacheEnabled()
+    asJava.isSessionCacheEnabled()
   }
 }
 

@@ -23,76 +23,76 @@ import scala.collection.JavaConversions._
   * Describes how an [[io.vertx.scala.core.file.AsyncFile]] should be opened.
   */
 
-class OpenOptions(val java: io.vertx.core.file.OpenOptions) {
+class OpenOptions(val asJava: io.vertx.core.file.OpenOptions) {
   def setCreate(value:Boolean) = {
-    java.setCreate(value)
+    asJava.setCreate(value)
     this
   }
   def isCreate = {
-    java.isCreate()
+    asJava.isCreate()
   }
   def setCreateNew(value:Boolean) = {
-    java.setCreateNew(value)
+    asJava.setCreateNew(value)
     this
   }
   def isCreateNew = {
-    java.isCreateNew()
+    asJava.isCreateNew()
   }
   def setDeleteOnClose(value:Boolean) = {
-    java.setDeleteOnClose(value)
+    asJava.setDeleteOnClose(value)
     this
   }
   def isDeleteOnClose = {
-    java.isDeleteOnClose()
+    asJava.isDeleteOnClose()
   }
   def setDsync(value:Boolean) = {
-    java.setDsync(value)
+    asJava.setDsync(value)
     this
   }
   def isDsync = {
-    java.isDsync()
+    asJava.isDsync()
   }
   def setPerms(value:String) = {
-    java.setPerms(value)
+    asJava.setPerms(value)
     this
   }
   def getPerms = {
-    java.getPerms()
+    asJava.getPerms()
   }
   def setRead(value:Boolean) = {
-    java.setRead(value)
+    asJava.setRead(value)
     this
   }
   def isRead = {
-    java.isRead()
+    asJava.isRead()
   }
   def setSparse(value:Boolean) = {
-    java.setSparse(value)
+    asJava.setSparse(value)
     this
   }
   def isSparse = {
-    java.isSparse()
+    asJava.isSparse()
   }
   def setSync(value:Boolean) = {
-    java.setSync(value)
+    asJava.setSync(value)
     this
   }
   def isSync = {
-    java.isSync()
+    asJava.isSync()
   }
   def setTruncateExisting(value:Boolean) = {
-    java.setTruncateExisting(value)
+    asJava.setTruncateExisting(value)
     this
   }
   def isTruncateExisting = {
-    java.isTruncateExisting()
+    asJava.isTruncateExisting()
   }
   def setWrite(value:Boolean) = {
-    java.setWrite(value)
+    asJava.setWrite(value)
     this
   }
   def isWrite = {
-    java.isWrite()
+    asJava.isWrite()
   }
 }
 

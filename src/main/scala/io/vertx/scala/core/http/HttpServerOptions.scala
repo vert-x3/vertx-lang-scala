@@ -23,255 +23,255 @@ import scala.collection.JavaConversions._
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
   */
 
-class HttpServerOptions(val java: io.vertx.core.http.HttpServerOptions) {
+class HttpServerOptions(val asJava: io.vertx.core.http.HttpServerOptions) {
   def setAcceptBacklog(value:Int) = {
-    java.setAcceptBacklog(value)
+    asJava.setAcceptBacklog(value)
     this
   }
   def getAcceptBacklog = {
-    java.getAcceptBacklog()
+    asJava.getAcceptBacklog()
   }
   def setAlpnVersions(value:scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    java.setAlpnVersions(value)
+    asJava.setAlpnVersions(value)
     this
   }
   def getAlpnVersions = {
-    java.getAlpnVersions()
+    asJava.getAlpnVersions()
   }
   def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
-    java.setClientAuth(value)
+    asJava.setClientAuth(value)
     this
   }
   def getClientAuth = {
-    java.getClientAuth()
+    asJava.getClientAuth()
   }
   def setClientAuthRequired(value:Boolean) = {
-    java.setClientAuthRequired(value)
+    asJava.setClientAuthRequired(value)
     this
   }
   def isClientAuthRequired = {
-    java.isClientAuthRequired()
+    asJava.isClientAuthRequired()
   }
   def setCompressionSupported(value:Boolean) = {
-    java.setCompressionSupported(value)
+    asJava.setCompressionSupported(value)
     this
   }
   def isCompressionSupported = {
-    java.isCompressionSupported()
+    asJava.isCompressionSupported()
   }
   def addCrlPath(value:String) = {
-    java.addCrlPath(value)
+    asJava.addCrlPath(value)
     this
   }
   def getCrlPaths = {
-    java.getCrlPaths()
+    asJava.getCrlPaths()
   }
   def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-    java.addCrlValue(value)
+    asJava.addCrlValue(value)
     this
   }
   def getCrlValues = {
-    java.getCrlValues()
+    asJava.getCrlValues()
   }
   def addEnabledCipherSuite(value:String) = {
-    java.addEnabledCipherSuite(value)
+    asJava.addEnabledCipherSuite(value)
     this
   }
   def getEnabledCipherSuites = {
-    java.getEnabledCipherSuites()
+    asJava.getEnabledCipherSuites()
   }
   def addEnabledSecureTransportProtocol(value:String) = {
-    java.addEnabledSecureTransportProtocol(value)
+    asJava.addEnabledSecureTransportProtocol(value)
     this
   }
   def getEnabledSecureTransportProtocols = {
-    java.getEnabledSecureTransportProtocols()
+    asJava.getEnabledSecureTransportProtocols()
   }
   def setHandle100ContinueAutomatically(value:Boolean) = {
-    java.setHandle100ContinueAutomatically(value)
+    asJava.setHandle100ContinueAutomatically(value)
     this
   }
   def isHandle100ContinueAutomatically = {
-    java.isHandle100ContinueAutomatically()
+    asJava.isHandle100ContinueAutomatically()
   }
   def setHost(value:String) = {
-    java.setHost(value)
+    asJava.setHost(value)
     this
   }
   def getHost = {
-    java.getHost()
+    asJava.getHost()
   }
   def setHttp2ConnectionWindowSize(value:Int) = {
-    java.setHttp2ConnectionWindowSize(value)
+    asJava.setHttp2ConnectionWindowSize(value)
     this
   }
   def getHttp2ConnectionWindowSize = {
-    java.getHttp2ConnectionWindowSize()
+    asJava.getHttp2ConnectionWindowSize()
   }
   def setIdleTimeout(value:Int) = {
-    java.setIdleTimeout(value)
+    asJava.setIdleTimeout(value)
     this
   }
   def getIdleTimeout = {
-    java.getIdleTimeout()
+    asJava.getIdleTimeout()
   }
   def setInitialSettings(value:io.vertx.scala.core.http.Http2Settings) = {
-    java.setInitialSettings(value.java)
+    asJava.setInitialSettings(value.asJava)
     this
   }
   def getInitialSettings = {
-    java.getInitialSettings()
+    asJava.getInitialSettings()
   }
   def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
-    java.setJdkSslEngineOptions(value.java)
+    asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
   def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-    java.setKeyStoreOptions(value.java)
+    asJava.setKeyStoreOptions(value.asJava)
     this
   }
   def setLogActivity(value:Boolean) = {
-    java.setLogActivity(value)
+    asJava.setLogActivity(value)
     this
   }
   def getLogActivity = {
-    java.getLogActivity()
+    asJava.getLogActivity()
   }
   def setMaxChunkSize(value:Int) = {
-    java.setMaxChunkSize(value)
+    asJava.setMaxChunkSize(value)
     this
   }
   def getMaxChunkSize = {
-    java.getMaxChunkSize()
+    asJava.getMaxChunkSize()
   }
   def setMaxHeaderSize(value:Int) = {
-    java.setMaxHeaderSize(value)
+    asJava.setMaxHeaderSize(value)
     this
   }
   def getMaxHeaderSize = {
-    java.getMaxHeaderSize()
+    asJava.getMaxHeaderSize()
   }
   def setMaxInitialLineLength(value:Int) = {
-    java.setMaxInitialLineLength(value)
+    asJava.setMaxInitialLineLength(value)
     this
   }
   def getMaxInitialLineLength = {
-    java.getMaxInitialLineLength()
+    asJava.getMaxInitialLineLength()
   }
   def setMaxWebsocketFrameSize(value:Int) = {
-    java.setMaxWebsocketFrameSize(value)
+    asJava.setMaxWebsocketFrameSize(value)
     this
   }
   def getMaxWebsocketFrameSize = {
-    java.getMaxWebsocketFrameSize()
+    asJava.getMaxWebsocketFrameSize()
   }
   def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
-    java.setOpenSslEngineOptions(value.java)
+    asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
   def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
-    java.setPemKeyCertOptions(value.java)
+    asJava.setPemKeyCertOptions(value.asJava)
     this
   }
   def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
-    java.setPemTrustOptions(value.java)
+    asJava.setPemTrustOptions(value.asJava)
     this
   }
   def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-    java.setPfxKeyCertOptions(value.java)
+    asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
   def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-    java.setPfxTrustOptions(value.java)
+    asJava.setPfxTrustOptions(value.asJava)
     this
   }
   def setPort(value:Int) = {
-    java.setPort(value)
+    asJava.setPort(value)
     this
   }
   def getPort = {
-    java.getPort()
+    asJava.getPort()
   }
   def setReceiveBufferSize(value:Int) = {
-    java.setReceiveBufferSize(value)
+    asJava.setReceiveBufferSize(value)
     this
   }
   def getReceiveBufferSize = {
-    java.getReceiveBufferSize()
+    asJava.getReceiveBufferSize()
   }
   def setReuseAddress(value:Boolean) = {
-    java.setReuseAddress(value)
+    asJava.setReuseAddress(value)
     this
   }
   def isReuseAddress = {
-    java.isReuseAddress()
+    asJava.isReuseAddress()
   }
   def setSendBufferSize(value:Int) = {
-    java.setSendBufferSize(value)
+    asJava.setSendBufferSize(value)
     this
   }
   def getSendBufferSize = {
-    java.getSendBufferSize()
+    asJava.getSendBufferSize()
   }
   def setSoLinger(value:Int) = {
-    java.setSoLinger(value)
+    asJava.setSoLinger(value)
     this
   }
   def getSoLinger = {
-    java.getSoLinger()
+    asJava.getSoLinger()
   }
   def setSsl(value:Boolean) = {
-    java.setSsl(value)
+    asJava.setSsl(value)
     this
   }
   def isSsl = {
-    java.isSsl()
+    asJava.isSsl()
   }
   def setTcpKeepAlive(value:Boolean) = {
-    java.setTcpKeepAlive(value)
+    asJava.setTcpKeepAlive(value)
     this
   }
   def isTcpKeepAlive = {
-    java.isTcpKeepAlive()
+    asJava.isTcpKeepAlive()
   }
   def setTcpNoDelay(value:Boolean) = {
-    java.setTcpNoDelay(value)
+    asJava.setTcpNoDelay(value)
     this
   }
   def isTcpNoDelay = {
-    java.isTcpNoDelay()
+    asJava.isTcpNoDelay()
   }
   def setTrafficClass(value:Int) = {
-    java.setTrafficClass(value)
+    asJava.setTrafficClass(value)
     this
   }
   def getTrafficClass = {
-    java.getTrafficClass()
+    asJava.getTrafficClass()
   }
   def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-    java.setTrustStoreOptions(value.java)
+    asJava.setTrustStoreOptions(value.asJava)
     this
   }
   def setUseAlpn(value:Boolean) = {
-    java.setUseAlpn(value)
+    asJava.setUseAlpn(value)
     this
   }
   def isUseAlpn = {
-    java.isUseAlpn()
+    asJava.isUseAlpn()
   }
   def setUsePooledBuffers(value:Boolean) = {
-    java.setUsePooledBuffers(value)
+    asJava.setUsePooledBuffers(value)
     this
   }
   def isUsePooledBuffers = {
-    java.isUsePooledBuffers()
+    asJava.isUsePooledBuffers()
   }
   def setWebsocketSubProtocols(value:String) = {
-    java.setWebsocketSubProtocols(value)
+    asJava.setWebsocketSubProtocols(value)
     this
   }
   def getWebsocketSubProtocols = {
-    java.getWebsocketSubProtocols()
+    asJava.getWebsocketSubProtocols()
   }
 }
 

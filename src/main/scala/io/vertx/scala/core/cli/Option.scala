@@ -26,94 +26,94 @@ import scala.collection.JavaConversions._
   * Short name is generally used with a single dash, while long name requires a double-dash.
   */
 
-class Option(val java: io.vertx.core.cli.Option) {
+class Option(val asJava: io.vertx.core.cli.Option) {
   def setArgName(value:String) = {
-    java.setArgName(value)
+    asJava.setArgName(value)
     this
   }
   def getArgName = {
-    java.getArgName()
+    asJava.getArgName()
   }
   def addChoice(value:String) = {
-    java.addChoice(value)
+    asJava.addChoice(value)
     this
   }
   def setChoices(value:Set[String]) = {
-    java.setChoices(value)
+    asJava.setChoices(value)
     this
   }
   def getChoices = {
-    java.getChoices()
+    asJava.getChoices()
   }
   def setDefaultValue(value:String) = {
-    java.setDefaultValue(value)
+    asJava.setDefaultValue(value)
     this
   }
   def getDefaultValue = {
-    java.getDefaultValue()
+    asJava.getDefaultValue()
   }
   def setDescription(value:String) = {
-    java.setDescription(value)
+    asJava.setDescription(value)
     this
   }
   def getDescription = {
-    java.getDescription()
+    asJava.getDescription()
   }
   def setFlag(value:Boolean) = {
-    java.setFlag(value)
+    asJava.setFlag(value)
     this
   }
   def isFlag = {
-    java.isFlag()
+    asJava.isFlag()
   }
   def setHelp(value:Boolean) = {
-    java.setHelp(value)
+    asJava.setHelp(value)
     this
   }
   def isHelp = {
-    java.isHelp()
+    asJava.isHelp()
   }
   def setHidden(value:Boolean) = {
-    java.setHidden(value)
+    asJava.setHidden(value)
     this
   }
   def isHidden = {
-    java.isHidden()
+    asJava.isHidden()
   }
   def setLongName(value:String) = {
-    java.setLongName(value)
+    asJava.setLongName(value)
     this
   }
   def getLongName = {
-    java.getLongName()
+    asJava.getLongName()
   }
   def setMultiValued(value:Boolean) = {
-    java.setMultiValued(value)
+    asJava.setMultiValued(value)
     this
   }
   def isMultiValued = {
-    java.isMultiValued()
+    asJava.isMultiValued()
   }
   def setRequired(value:Boolean) = {
-    java.setRequired(value)
+    asJava.setRequired(value)
     this
   }
   def isRequired = {
-    java.isRequired()
+    asJava.isRequired()
   }
   def setShortName(value:String) = {
-    java.setShortName(value)
+    asJava.setShortName(value)
     this
   }
   def getShortName = {
-    java.getShortName()
+    asJava.getShortName()
   }
   def setSingleValued(value:Boolean) = {
-    java.setSingleValued(value)
+    asJava.setSingleValued(value)
     this
   }
   def isSingleValued = {
-    java.isSingleValued()
+    asJava.isSingleValued()
   }
 }
 

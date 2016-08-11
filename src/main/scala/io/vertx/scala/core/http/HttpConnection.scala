@@ -178,7 +178,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def updateSettings(settings: io.vertx.scala.core.http.Http2Settings): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings.java)
+    _asJava.updateSettings(settings.asJava)
     this
   }
 
@@ -193,7 +193,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def updateSettings(settings: io.vertx.scala.core.http.Http2Settings, completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings.java, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    _asJava.updateSettings(settings.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
     this
   }
 
