@@ -27,6 +27,10 @@ import scala.collection.JavaConversions._
   */
 
 class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
+
+  /**
+    * Set  HTTP/2 setting.
+    */
   def setHeaderTableSize(value:Long) = {
     asJava.setHeaderTableSize(value)
     this
@@ -34,6 +38,10 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def getHeaderTableSize = {
     asJava.getHeaderTableSize()
   }
+
+  /**
+    * Set the  HTTP/2 setting
+    */
   def setInitialWindowSize(value:Int) = {
     asJava.setInitialWindowSize(value)
     this
@@ -41,6 +49,10 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def getInitialWindowSize = {
     asJava.getInitialWindowSize()
   }
+
+  /**
+    * Set the  HTTP/2 setting
+    */
   def setMaxConcurrentStreams(value:Long) = {
     asJava.setMaxConcurrentStreams(value)
     this
@@ -48,6 +60,10 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def getMaxConcurrentStreams = {
     asJava.getMaxConcurrentStreams()
   }
+
+  /**
+    * Set the  HTTP/2 setting
+    */
   def setMaxFrameSize(value:Int) = {
     asJava.setMaxFrameSize(value)
     this
@@ -55,6 +71,10 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def getMaxFrameSize = {
     asJava.getMaxFrameSize()
   }
+
+  /**
+    * Set the  HTTP/2 setting
+    */
   def setMaxHeaderListSize(value:Int) = {
     asJava.setMaxHeaderListSize(value)
     this
@@ -62,6 +82,10 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def getMaxHeaderListSize = {
     asJava.getMaxHeaderListSize()
   }
+
+  /**
+    * Set the  HTTP/2 setting
+    */
   def setPushEnabled(value:Boolean) = {
     asJava.setPushEnabled(value)
     this

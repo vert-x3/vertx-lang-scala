@@ -25,6 +25,10 @@ import scala.collection.JavaConversions._
   */
 
 class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
+
+  /**
+    * Set the JSON configuration that will be passed to the verticle(s) when it's deployed
+    */
   def setConfig(value:io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
@@ -32,6 +36,12 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getConfig = {
     asJava.getConfig()
   }
+
+  /**
+    * Set any extra classpath to be used when deploying the verticle.
+    * 
+    * Ignored if no isolation group is set.
+    */
   def setExtraClasspath(value:scala.collection.mutable.Buffer[String]) = {
     asJava.setExtraClasspath(value)
     this
@@ -39,6 +49,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getExtraClasspath = {
     asJava.getExtraClasspath()
   }
+
+  /**
+    * Set whether the verticle(s) will be deployed as HA.
+    */
   def setHa(value:Boolean) = {
     asJava.setHa(value)
     this
@@ -46,6 +60,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def isHa = {
     asJava.isHa()
   }
+
+  /**
+    * Set the number of instances that should be deployed.
+    */
   def setInstances(value:Int) = {
     asJava.setInstances(value)
     this
@@ -53,6 +71,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getInstances = {
     asJava.getInstances()
   }
+
+  /**
+    * Set the isolated class names.
+    */
   def setIsolatedClasses(value:scala.collection.mutable.Buffer[String]) = {
     asJava.setIsolatedClasses(value)
     this
@@ -60,6 +82,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getIsolatedClasses = {
     asJava.getIsolatedClasses()
   }
+
+  /**
+    * Set the isolation group that will be used when deploying the verticle(s)
+    */
   def setIsolationGroup(value:String) = {
     asJava.setIsolationGroup(value)
     this
@@ -67,6 +93,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getIsolationGroup = {
     asJava.getIsolationGroup()
   }
+
+  /**
+    * Sets the value of max worker execute time, in ns.
+    */
   def setMaxWorkerExecuteTime(value:Long) = {
     asJava.setMaxWorkerExecuteTime(value)
     this
@@ -74,6 +104,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getMaxWorkerExecuteTime = {
     asJava.getMaxWorkerExecuteTime()
   }
+
+  /**
+    * Set whether the verticle(s) should be deployed as a multi-threaded worker verticle
+    */
   def setMultiThreaded(value:Boolean) = {
     asJava.setMultiThreaded(value)
     this
@@ -81,6 +115,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def isMultiThreaded = {
     asJava.isMultiThreaded()
   }
+
+  /**
+    * Set whether the verticle(s) should be deployed as a worker verticle
+    */
   def setWorker(value:Boolean) = {
     asJava.setWorker(value)
     this
@@ -88,6 +126,11 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def isWorker = {
     asJava.isWorker()
   }
+
+  /**
+    * Set the worker pool name to use for this verticle. When no name is set, the Vert.x
+    * worker pool will be used, when a name is set, the verticle will use a named worker pool.
+    */
   def setWorkerPoolName(value:String) = {
     asJava.setWorkerPoolName(value)
     this
@@ -95,6 +138,10 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def getWorkerPoolName = {
     asJava.getWorkerPoolName()
   }
+
+  /**
+    * Set the maximum number of worker threads to be used by the Vert.x instance.
+    */
   def setWorkerPoolSize(value:Int) = {
     asJava.setWorkerPoolSize(value)
     this

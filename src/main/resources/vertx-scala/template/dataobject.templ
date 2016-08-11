@@ -89,6 +89,12 @@ import scala.collection.JavaConversions._\n
 
 class @{typeName}(val asJava: @{type.raw.name}) {\n
 @foreach{property:properties}
+@if{property.doc != null}
+\n
+  /**\n
+@{renderDoc("    *", property.doc, renderDocLink)}
+    */\n
+@end{}
 @if{property.adder}
 @if{property.isMap}
   def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n

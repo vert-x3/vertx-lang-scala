@@ -24,6 +24,10 @@ import scala.collection.JavaConversions._
   */
 
 class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
+
+  /**
+    * Set proxy host.
+    */
   def setHost(value:String) = {
     asJava.setHost(value)
     this
@@ -31,6 +35,10 @@ class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
   def getHost = {
     asJava.getHost()
   }
+
+  /**
+    * Set proxy password.
+    */
   def setPassword(value:String) = {
     asJava.setPassword(value)
     this
@@ -38,6 +46,10 @@ class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
   def getPassword = {
     asJava.getPassword()
   }
+
+  /**
+    * Set proxy port.
+    */
   def setPort(value:Int) = {
     asJava.setPort(value)
     this
@@ -45,6 +57,12 @@ class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
   def getPort = {
     asJava.getPort()
   }
+
+  /**
+    * Set proxy type.
+    *
+    * ProxyType can be HTTP, SOCKS4 and SOCKS5
+    */
   def setType(value:io.vertx.core.net.ProxyType) = {
     asJava.setType(value)
     this
@@ -52,6 +70,10 @@ class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
   def getType = {
     asJava.getType()
   }
+
+  /**
+    * Set proxy username.
+    */
   def setUsername(value:String) = {
     asJava.setUsername(value)
     this

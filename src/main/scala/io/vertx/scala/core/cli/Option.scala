@@ -27,6 +27,10 @@ import scala.collection.JavaConversions._
   */
 
 class Option(val asJava: io.vertx.core.cli.Option) {
+
+  /**
+    * Sets te arg name for this option.
+    */
   def setArgName(value:String) = {
     asJava.setArgName(value)
     this
@@ -34,6 +38,11 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getArgName = {
     asJava.getArgName()
   }
+
+  /**
+    * Sets the list of values accepted by this option. If the value set by the user does not match once of these
+    * values, a [[io.vertx.scala.core.cli.InvalidValueException]] exception is thrown.
+    */
   def addChoice(value:String) = {
     asJava.addChoice(value)
     this
@@ -45,6 +54,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getChoices = {
     asJava.getChoices()
   }
+
+  /**
+    * Sets the default value of this option
+    */
   def setDefaultValue(value:String) = {
     asJava.setDefaultValue(value)
     this
@@ -52,6 +65,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getDefaultValue = {
     asJava.getDefaultValue()
   }
+
+  /**
+    * Sets te description of this option.
+    */
   def setDescription(value:String) = {
     asJava.setDescription(value)
     this
@@ -59,6 +76,14 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getDescription = {
     asJava.getDescription()
   }
+
+  /**
+    * Configures the current <a href="../../../../../../../cheatsheet/Option.html">Option</a> to be a flag. It will be evaluated to `true` if it's found in
+    * the command line. If you need a flag that may receive a value, use, in this order:
+    * <code><pre>
+    *   option.setFlag(true).setSingleValued(true)
+    * </pre></code>
+    */
   def setFlag(value:Boolean) = {
     asJava.setFlag(value)
     this
@@ -66,6 +91,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def isFlag = {
     asJava.isFlag()
   }
+
+  /**
+    * Sets whether or not this option is a "help" option
+    */
   def setHelp(value:Boolean) = {
     asJava.setHelp(value)
     this
@@ -73,6 +102,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def isHelp = {
     asJava.isHelp()
   }
+
+  /**
+    * Sets whether or not this option should be hidden
+    */
   def setHidden(value:Boolean) = {
     asJava.setHidden(value)
     this
@@ -80,6 +113,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def isHidden = {
     asJava.isHidden()
   }
+
+  /**
+    * Sets the long name of this option.
+    */
   def setLongName(value:String) = {
     asJava.setLongName(value)
     this
@@ -87,6 +124,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getLongName = {
     asJava.getLongName()
   }
+
+  /**
+    * Sets whether or not this option can receive several values.
+    */
   def setMultiValued(value:Boolean) = {
     asJava.setMultiValued(value)
     this
@@ -94,6 +135,14 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def isMultiValued = {
     asJava.isMultiValued()
   }
+
+  /**
+    * @return the option name. It returns the long name if set, the short name otherwise. It cannot return `null` for valid option
+    */
+
+  /**
+    * Sets whether or not this option is mandatory.
+    */
   def setRequired(value:Boolean) = {
     asJava.setRequired(value)
     this
@@ -101,6 +150,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def isRequired = {
     asJava.isRequired()
   }
+
+  /**
+    * Sets the short name of this option.
+    */
   def setShortName(value:String) = {
     asJava.setShortName(value)
     this
@@ -108,6 +161,10 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   def getShortName = {
     asJava.getShortName()
   }
+
+  /**
+    * Sets whether or not this option can receive a value.
+    */
   def setSingleValued(value:Boolean) = {
     asJava.setSingleValued(value)
     this

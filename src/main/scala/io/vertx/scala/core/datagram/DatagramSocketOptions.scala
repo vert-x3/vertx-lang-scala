@@ -24,6 +24,10 @@ import scala.collection.JavaConversions._
   */
 
 class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOptions) {
+
+  /**
+    * Set if the socket can receive broadcast packets
+    */
   def setBroadcast(value:Boolean) = {
     asJava.setBroadcast(value)
     this
@@ -31,6 +35,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def isBroadcast = {
     asJava.isBroadcast()
   }
+
+  /**
+    * Set if IP v6 should be used
+    */
   def setIpV6(value:Boolean) = {
     asJava.setIpV6(value)
     this
@@ -38,6 +46,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def isIpV6 = {
     asJava.isIpV6()
   }
+
+  /**
+    * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
+    */
   def setLogActivity(value:Boolean) = {
     asJava.setLogActivity(value)
     this
@@ -45,6 +57,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def getLogActivity = {
     asJava.getLogActivity()
   }
+
+  /**
+    * Set if loopback mode is disabled
+    */
   def setLoopbackModeDisabled(value:Boolean) = {
     asJava.setLoopbackModeDisabled(value)
     this
@@ -52,6 +68,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def isLoopbackModeDisabled = {
     asJava.isLoopbackModeDisabled()
   }
+
+  /**
+    * Set the multicast network interface address
+    */
   def setMulticastNetworkInterface(value:String) = {
     asJava.setMulticastNetworkInterface(value)
     this
@@ -59,6 +79,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def getMulticastNetworkInterface = {
     asJava.getMulticastNetworkInterface()
   }
+
+  /**
+    * Set the multicast ttl value
+    */
   def setMulticastTimeToLive(value:Int) = {
     asJava.setMulticastTimeToLive(value)
     this
@@ -66,6 +90,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def getMulticastTimeToLive = {
     asJava.getMulticastTimeToLive()
   }
+
+  /**
+    * Set the TCP receive buffer size
+    */
   def setReceiveBufferSize(value:Int) = {
     asJava.setReceiveBufferSize(value)
     this
@@ -73,6 +101,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def getReceiveBufferSize = {
     asJava.getReceiveBufferSize()
   }
+
+  /**
+    * Set the value of reuse address
+    */
   def setReuseAddress(value:Boolean) = {
     asJava.setReuseAddress(value)
     this
@@ -80,6 +112,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def isReuseAddress = {
     asJava.isReuseAddress()
   }
+
+  /**
+    * Set the TCP send buffer size
+    */
   def setSendBufferSize(value:Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -87,6 +123,10 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   def getSendBufferSize = {
     asJava.getSendBufferSize()
   }
+
+  /**
+    * Set the value of traffic class
+    */
   def setTrafficClass(value:Int) = {
     asJava.setTrafficClass(value)
     this

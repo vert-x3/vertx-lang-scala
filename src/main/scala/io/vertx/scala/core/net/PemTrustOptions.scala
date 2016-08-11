@@ -52,6 +52,10 @@ import scala.collection.JavaConversions._
   */
 
 class PemTrustOptions(val asJava: io.vertx.core.net.PemTrustOptions) {
+
+  /**
+    * Add a certificate path
+    */
   def addCertPath(value:String) = {
     asJava.addCertPath(value)
     this
@@ -59,6 +63,10 @@ class PemTrustOptions(val asJava: io.vertx.core.net.PemTrustOptions) {
   def getCertPaths = {
     asJava.getCertPaths()
   }
+
+  /**
+    * Add a certificate value
+    */
   def addCertValue(value:io.vertx.core.buffer.Buffer) = {
     asJava.addCertValue(value)
     this
