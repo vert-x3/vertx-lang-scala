@@ -37,7 +37,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    _asJava.lookup(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.lookup(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
@@ -48,7 +48,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup4(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    _asJava.lookup4(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.lookup4(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
@@ -59,7 +59,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup6(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    _asJava.lookup6(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.lookup6(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
@@ -125,7 +125,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolvePTR(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    _asJava.resolvePTR(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.resolvePTR(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
@@ -159,7 +159,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return a reference to this, so the API can be used fluently.
     */
   def reverseLookup(ipaddress: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
-    _asJava.reverseLookup(ipaddress, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.reverseLookup(ipaddress, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
