@@ -49,7 +49,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return a reference to this, so it can be used fluently
     */
   def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit): io.vertx.scala.core.Future[T] = {
-    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x.asInstanceOf[T])))(handler))
+    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(handler))
     this
   }
 

@@ -35,7 +35,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler - this will be called some time later with the async result.
     */
   def get(k: K, resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.get(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x.asInstanceOf[V])))(resultHandler))
+    _asJava.get(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
   }
 
   /**
@@ -68,7 +68,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler the handler
     */
   def putIfAbsent(k: K, v: V, completionHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.putIfAbsent(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x.asInstanceOf[V])))(completionHandler))
+    _asJava.putIfAbsent(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(completionHandler))
   }
 
   /**
@@ -80,7 +80,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param completionHandler the handler
     */
   def putIfAbsent(k: K, v: V, ttl: Long, completionHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.putIfAbsent(k, v, ttl, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x.asInstanceOf[V])))(completionHandler))
+    _asJava.putIfAbsent(k, v, ttl, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(completionHandler))
   }
 
   /**
@@ -89,7 +89,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler - this will be called some time later to signify the value has been removed
     */
   def remove(k: K, resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.remove(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x.asInstanceOf[V])))(resultHandler))
+    _asJava.remove(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
   }
 
   /**
@@ -109,7 +109,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param resultHandler the result handler will be passed the previous value
     */
   def replace(k: K, v: V, resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.replace(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x.asInstanceOf[V])))(resultHandler))
+    _asJava.replace(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
   }
 
   /**

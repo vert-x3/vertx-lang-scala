@@ -309,7 +309,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return a reference to this, so the API can be used fluently
     */
   def readSymlink(link: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.file.FileSystem = {
-    _asJava.readSymlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x.asInstanceOf[String])))(handler))
+    _asJava.readSymlink(link, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
 
