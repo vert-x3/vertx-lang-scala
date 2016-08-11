@@ -326,7 +326,6 @@
                typeParam.kind == CLASS_JSON_OBJECT ||
                typeParam.kind == CLASS_JSON_ARRAY ||
                typeParam.kind == CLASS_ENUM) {
-               /* TODO Unneeded so get rid of it */
       invocation += ', '+toScalaType(typeParam)+'](x,(x => x)))('+ handleOption(param);
     } else if(typeParam.kind == CLASS_DATA_OBJECT) {
       invocation += ', '+toScalaType(typeParam)+'](x,(x => ' + typeParam.getSimpleName() + '(x))))('+ handleOption(param);
