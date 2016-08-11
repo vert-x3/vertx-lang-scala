@@ -25,6 +25,10 @@ import scala.collection.JavaConversions._
   */
 
 class Argument(val asJava: io.vertx.core.cli.Argument) {
+
+  /**
+    * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
+    */
   def setArgName(value:String) = {
     asJava.setArgName(value)
     this
@@ -32,6 +36,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def getArgName = {
     asJava.getArgName()
   }
+
+  /**
+    * Sets the default value of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
+    */
   def setDefaultValue(value:String) = {
     asJava.setDefaultValue(value)
     this
@@ -39,6 +47,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def getDefaultValue = {
     asJava.getDefaultValue()
   }
+
+  /**
+    * Sets the description of the <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
+    */
   def setDescription(value:String) = {
     asJava.setDescription(value)
     this
@@ -46,6 +58,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def getDescription = {
     asJava.getDescription()
   }
+
+  /**
+    * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is hidden.
+    */
   def setHidden(value:Boolean) = {
     asJava.setHidden(value)
     this
@@ -53,6 +69,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def isHidden = {
     asJava.isHidden()
   }
+
+  /**
+    * Sets the argument index.
+    */
   def setIndex(value:Int) = {
     asJava.setIndex(value)
     this
@@ -60,6 +80,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def getIndex = {
     asJava.getIndex()
   }
+
+  /**
+    * Sets whether or not the argument can receive several values. Only the last argument can receive several values.
+    */
   def setMultiValued(value:Boolean) = {
     asJava.setMultiValued(value)
     this
@@ -67,6 +91,10 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   def isMultiValued = {
     asJava.isMultiValued()
   }
+
+  /**
+    * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is required.
+    */
   def setRequired(value:Boolean) = {
     asJava.setRequired(value)
     this

@@ -25,6 +25,10 @@ import scala.collection.JavaConversions._
   */
 
 class MetricsOptions(val asJava: io.vertx.core.metrics.MetricsOptions) {
+
+  /**
+    * Set whether metrics will be enabled on the Vert.x instance.
+    */
   def setEnabled(value:Boolean) = {
     asJava.setEnabled(value)
     this

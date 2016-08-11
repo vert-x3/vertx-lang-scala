@@ -25,6 +25,11 @@ import scala.collection.JavaConversions._
   */
 
 class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOptions) {
+
+  /**
+    * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
+    * use this to set a maximum value to all responses TTL.
+    */
   def setCacheMaxTimeToLive(value:Int) = {
     asJava.setCacheMaxTimeToLive(value)
     this
@@ -32,6 +37,11 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getCacheMaxTimeToLive = {
     asJava.getCacheMaxTimeToLive()
   }
+
+  /**
+    * Set the cache minimum TTL value in seconds. After resolution successful IP addresses are cached with their DNS response TTL,
+    * use this to set a minimum value to all responses TTL.
+    */
   def setCacheMinTimeToLive(value:Int) = {
     asJava.setCacheMinTimeToLive(value)
     this
@@ -39,6 +49,12 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getCacheMinTimeToLive = {
     asJava.getCacheMinTimeToLive()
   }
+
+  /**
+    * Set the negative cache TTL value in seconds. After a failed hostname resolution, DNS queries won't be retried
+    * for a period of time equals to the negative TTL. This allows to reduce the response time of negative replies
+    * and reduce the amount of messages to DNS servers.
+    */
   def setCacheNegativeTimeToLive(value:Int) = {
     asJava.setCacheNegativeTimeToLive(value)
     this
@@ -46,6 +62,12 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getCacheNegativeTimeToLive = {
     asJava.getCacheNegativeTimeToLive()
   }
+
+  /**
+    * Set the path of an alternate hosts configuration file to use instead of the one provided by the os.
+    * <p/>
+    * The default value is null, so the operating system hosts config is used.
+    */
   def setHostsPath(value:String) = {
     asJava.setHostsPath(value)
     this
@@ -53,6 +75,14 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getHostsPath = {
     asJava.getHostsPath()
   }
+
+  /**
+    * Set an alternate hosts configuration file to use instead of the one provided by the os.
+    * <p/>
+    * The value should contain the hosts content literaly, for instance <i>127.0.0.1 localhost</i>
+    * <p/>
+    * The default value is null, so the operating system hosts config is used.
+    */
   def setHostsValue(value:io.vertx.core.buffer.Buffer) = {
     asJava.setHostsValue(value)
     this
@@ -60,6 +90,10 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getHostsValue = {
     asJava.getHostsValue()
   }
+
+  /**
+    * Set the maximum number of queries when an hostname is resolved.
+    */
   def setMaxQueries(value:Int) = {
     asJava.setMaxQueries(value)
     this
@@ -67,6 +101,10 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getMaxQueries = {
     asJava.getMaxQueries()
   }
+
+  /**
+    * Set the ndots value used when resolving using search domains, the default value is `1`.
+    */
   def setNdots(value:Int) = {
     asJava.setNdots(value)
     this
@@ -74,6 +112,11 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getNdots = {
     asJava.getNdots()
   }
+
+  /**
+    * Set to true to enable the automatic inclusion in DNS queries of an optional record that hints
+    * the remote DNS server about how much data the resolver can read per response.
+    */
   def setOptResourceEnabled(value:Boolean) = {
     asJava.setOptResourceEnabled(value)
     this
@@ -81,6 +124,10 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def isOptResourceEnabled = {
     asJava.isOptResourceEnabled()
   }
+
+  /**
+    * Set the query timeout in milliseconds, i.e the amount of time after a query is considered to be failed.
+    */
   def setQueryTimeout(value:Long) = {
     asJava.setQueryTimeout(value)
     this
@@ -88,6 +135,10 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getQueryTimeout = {
     asJava.getQueryTimeout()
   }
+
+  /**
+    * Set the DNS queries <i>Recursion Desired</i> flag value.
+    */
   def setRdFlag(value:Boolean) = {
     asJava.setRdFlag(value)
     this
@@ -95,6 +146,13 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getRdFlag = {
     asJava.getRdFlag()
   }
+
+  /**
+    * Set the lists of DNS search domains.
+    * <p/>
+    * When the search domain list is null, the effective search domain list will be populated using
+    * the system DNS search domains.
+    */
   def addSearchDomain(value:String) = {
     asJava.addSearchDomain(value)
     this
@@ -106,6 +164,13 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   def getSearchDomains = {
     asJava.getSearchDomains()
   }
+
+  /**
+    * Set the list of DNS server addresses, an address is the IP  of the dns server, followed by an optional
+    * colon and a port, e.g `8.8.8.8` or {code 192.168.0.1:40000}. When the list is empty, the resolver
+    * will use the list of the system DNS server addresses from the environment, if that list cannot be retrieved
+    * it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
+    */
   def addServer(value:String) = {
     asJava.addServer(value)
     this

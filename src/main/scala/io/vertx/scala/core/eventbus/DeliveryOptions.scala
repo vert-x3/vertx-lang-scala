@@ -27,6 +27,10 @@ import scala.collection.JavaConversions._
   */
 
 class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
+
+  /**
+    * Set the codec name.
+    */
   def setCodecName(value:String) = {
     asJava.setCodecName(value)
     this
@@ -34,10 +38,21 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
   def getCodecName = {
     asJava.getCodecName()
   }
+
+  /**
+    * Add a message header.
+    * 
+    * Message headers can be sent with any message and will be accessible with [[io.vertx.scala.core.eventbus.Message]]
+    * at the recipient.
+    */
   def addHeader(key: String, value:String) = {
     asJava.addHeader(key, value)
     this
   }
+
+  /**
+    * Set the send timeout.
+    */
   def setSendTimeout(value:Long) = {
     asJava.setSendTimeout(value)
     this

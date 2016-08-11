@@ -42,6 +42,10 @@ import scala.collection.JavaConversions._
   */
 
 class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
+
+  /**
+    * Set the password for the key store
+    */
   def setPassword(value:String) = {
     asJava.setPassword(value)
     this
@@ -49,6 +53,10 @@ class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
   def getPassword = {
     asJava.getPassword()
   }
+
+  /**
+    * Set the path to the key store
+    */
   def setPath(value:String) = {
     asJava.setPath(value)
     this
@@ -56,6 +64,10 @@ class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
   def getPath = {
     asJava.getPath()
   }
+
+  /**
+    * Set the key store as a buffer
+    */
   def setValue(value:io.vertx.core.buffer.Buffer) = {
     asJava.setValue(value)
     this
