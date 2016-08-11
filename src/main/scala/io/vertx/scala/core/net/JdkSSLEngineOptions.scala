@@ -23,7 +23,7 @@ import scala.collection.JavaConversions._
   * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use the JDK ssl engine implementation.
   */
 
-class JdkSSLEngineOptions(val java: io.vertx.core.net.JdkSSLEngineOptions) {
+class JdkSSLEngineOptions(val asJava: io.vertx.core.net.JdkSSLEngineOptions) {
 }
 
 object JdkSSLEngineOptions {

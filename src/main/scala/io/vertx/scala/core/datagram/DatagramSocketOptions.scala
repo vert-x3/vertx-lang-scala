@@ -23,76 +23,76 @@ import scala.collection.JavaConversions._
   * Options used to configure a datagram socket.
   */
 
-class DatagramSocketOptions(val java: io.vertx.core.datagram.DatagramSocketOptions) {
+class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOptions) {
   def setBroadcast(value:Boolean) = {
-    java.setBroadcast(value)
+    asJava.setBroadcast(value)
     this
   }
   def isBroadcast = {
-    java.isBroadcast()
+    asJava.isBroadcast()
   }
   def setIpV6(value:Boolean) = {
-    java.setIpV6(value)
+    asJava.setIpV6(value)
     this
   }
   def isIpV6 = {
-    java.isIpV6()
+    asJava.isIpV6()
   }
   def setLogActivity(value:Boolean) = {
-    java.setLogActivity(value)
+    asJava.setLogActivity(value)
     this
   }
   def getLogActivity = {
-    java.getLogActivity()
+    asJava.getLogActivity()
   }
   def setLoopbackModeDisabled(value:Boolean) = {
-    java.setLoopbackModeDisabled(value)
+    asJava.setLoopbackModeDisabled(value)
     this
   }
   def isLoopbackModeDisabled = {
-    java.isLoopbackModeDisabled()
+    asJava.isLoopbackModeDisabled()
   }
   def setMulticastNetworkInterface(value:String) = {
-    java.setMulticastNetworkInterface(value)
+    asJava.setMulticastNetworkInterface(value)
     this
   }
   def getMulticastNetworkInterface = {
-    java.getMulticastNetworkInterface()
+    asJava.getMulticastNetworkInterface()
   }
   def setMulticastTimeToLive(value:Int) = {
-    java.setMulticastTimeToLive(value)
+    asJava.setMulticastTimeToLive(value)
     this
   }
   def getMulticastTimeToLive = {
-    java.getMulticastTimeToLive()
+    asJava.getMulticastTimeToLive()
   }
   def setReceiveBufferSize(value:Int) = {
-    java.setReceiveBufferSize(value)
+    asJava.setReceiveBufferSize(value)
     this
   }
   def getReceiveBufferSize = {
-    java.getReceiveBufferSize()
+    asJava.getReceiveBufferSize()
   }
   def setReuseAddress(value:Boolean) = {
-    java.setReuseAddress(value)
+    asJava.setReuseAddress(value)
     this
   }
   def isReuseAddress = {
-    java.isReuseAddress()
+    asJava.isReuseAddress()
   }
   def setSendBufferSize(value:Int) = {
-    java.setSendBufferSize(value)
+    asJava.setSendBufferSize(value)
     this
   }
   def getSendBufferSize = {
-    java.getSendBufferSize()
+    asJava.getSendBufferSize()
   }
   def setTrafficClass(value:Int) = {
-    java.setTrafficClass(value)
+    asJava.setTrafficClass(value)
     this
   }
   def getTrafficClass = {
-    java.getTrafficClass()
+    asJava.getTrafficClass()
   }
 }
 

@@ -24,83 +24,83 @@ import scala.collection.JavaConversions._
   * 
   */
 
-class DeploymentOptions(val java: io.vertx.core.DeploymentOptions) {
+class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
   def setConfig(value:io.vertx.core.json.JsonObject) = {
-    java.setConfig(value)
+    asJava.setConfig(value)
     this
   }
   def getConfig = {
-    java.getConfig()
+    asJava.getConfig()
   }
   def setExtraClasspath(value:scala.collection.mutable.Buffer[String]) = {
-    java.setExtraClasspath(value)
+    asJava.setExtraClasspath(value)
     this
   }
   def getExtraClasspath = {
-    java.getExtraClasspath()
+    asJava.getExtraClasspath()
   }
   def setHa(value:Boolean) = {
-    java.setHa(value)
+    asJava.setHa(value)
     this
   }
   def isHa = {
-    java.isHa()
+    asJava.isHa()
   }
   def setInstances(value:Int) = {
-    java.setInstances(value)
+    asJava.setInstances(value)
     this
   }
   def getInstances = {
-    java.getInstances()
+    asJava.getInstances()
   }
   def setIsolatedClasses(value:scala.collection.mutable.Buffer[String]) = {
-    java.setIsolatedClasses(value)
+    asJava.setIsolatedClasses(value)
     this
   }
   def getIsolatedClasses = {
-    java.getIsolatedClasses()
+    asJava.getIsolatedClasses()
   }
   def setIsolationGroup(value:String) = {
-    java.setIsolationGroup(value)
+    asJava.setIsolationGroup(value)
     this
   }
   def getIsolationGroup = {
-    java.getIsolationGroup()
+    asJava.getIsolationGroup()
   }
   def setMaxWorkerExecuteTime(value:Long) = {
-    java.setMaxWorkerExecuteTime(value)
+    asJava.setMaxWorkerExecuteTime(value)
     this
   }
   def getMaxWorkerExecuteTime = {
-    java.getMaxWorkerExecuteTime()
+    asJava.getMaxWorkerExecuteTime()
   }
   def setMultiThreaded(value:Boolean) = {
-    java.setMultiThreaded(value)
+    asJava.setMultiThreaded(value)
     this
   }
   def isMultiThreaded = {
-    java.isMultiThreaded()
+    asJava.isMultiThreaded()
   }
   def setWorker(value:Boolean) = {
-    java.setWorker(value)
+    asJava.setWorker(value)
     this
   }
   def isWorker = {
-    java.isWorker()
+    asJava.isWorker()
   }
   def setWorkerPoolName(value:String) = {
-    java.setWorkerPoolName(value)
+    asJava.setWorkerPoolName(value)
     this
   }
   def getWorkerPoolName = {
-    java.getWorkerPoolName()
+    asJava.getWorkerPoolName()
   }
   def setWorkerPoolSize(value:Int) = {
-    java.setWorkerPoolSize(value)
+    asJava.setWorkerPoolSize(value)
     this
   }
   def getWorkerPoolSize = {
-    java.getWorkerPoolSize()
+    asJava.getWorkerPoolSize()
   }
 }
 

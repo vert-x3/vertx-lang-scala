@@ -26,48 +26,48 @@ import scala.collection.JavaConversions._
   * protocol extensions.
   */
 
-class Http2Settings(val java: io.vertx.core.http.Http2Settings) {
+class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   def setHeaderTableSize(value:Long) = {
-    java.setHeaderTableSize(value)
+    asJava.setHeaderTableSize(value)
     this
   }
   def getHeaderTableSize = {
-    java.getHeaderTableSize()
+    asJava.getHeaderTableSize()
   }
   def setInitialWindowSize(value:Int) = {
-    java.setInitialWindowSize(value)
+    asJava.setInitialWindowSize(value)
     this
   }
   def getInitialWindowSize = {
-    java.getInitialWindowSize()
+    asJava.getInitialWindowSize()
   }
   def setMaxConcurrentStreams(value:Long) = {
-    java.setMaxConcurrentStreams(value)
+    asJava.setMaxConcurrentStreams(value)
     this
   }
   def getMaxConcurrentStreams = {
-    java.getMaxConcurrentStreams()
+    asJava.getMaxConcurrentStreams()
   }
   def setMaxFrameSize(value:Int) = {
-    java.setMaxFrameSize(value)
+    asJava.setMaxFrameSize(value)
     this
   }
   def getMaxFrameSize = {
-    java.getMaxFrameSize()
+    asJava.getMaxFrameSize()
   }
   def setMaxHeaderListSize(value:Int) = {
-    java.setMaxHeaderListSize(value)
+    asJava.setMaxHeaderListSize(value)
     this
   }
   def getMaxHeaderListSize = {
-    java.getMaxHeaderListSize()
+    asJava.getMaxHeaderListSize()
   }
   def setPushEnabled(value:Boolean) = {
-    java.setPushEnabled(value)
+    asJava.setPushEnabled(value)
     this
   }
   def isPushEnabled = {
-    java.isPushEnabled()
+    asJava.isPushEnabled()
   }
 }
 

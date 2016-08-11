@@ -139,7 +139,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addOption(option: io.vertx.scala.core.cli.Option): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOption(option.java)
+    _asJava.addOption(option.asJava)
     this
   }
 
@@ -150,7 +150,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addOptions(options.map(x => if(x == null) null else x.java).asJava)
+    _asJava.addOptions(options.map(x => if(x == null) null else x.asJava).asJava)
     this
   }
 
@@ -160,7 +160,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setOptions(options.map(x => if(x == null) null else x.java).asJava)
+    _asJava.setOptions(options.map(x => if(x == null) null else x.asJava).asJava)
     this
   }
 
@@ -178,7 +178,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addArgument(arg: io.vertx.scala.core.cli.Argument): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArgument(arg.java)
+    _asJava.addArgument(arg.asJava)
     this
   }
 
@@ -189,7 +189,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def addArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.addArguments(args.map(x => if(x == null) null else x.java).asJava)
+    _asJava.addArguments(args.map(x => if(x == null) null else x.asJava).asJava)
     this
   }
 
@@ -199,7 +199,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the current [[CLI]] instance
     */
   def setArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
-    _asJava.setArguments(args.map(x => if(x == null) null else x.java).asJava)
+    _asJava.setArguments(args.map(x => if(x == null) null else x.asJava).asJava)
     this
   }
 

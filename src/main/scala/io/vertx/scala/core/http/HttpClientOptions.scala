@@ -23,304 +23,304 @@ import scala.collection.JavaConversions._
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
   */
 
-class HttpClientOptions(val java: io.vertx.core.http.HttpClientOptions) {
+class HttpClientOptions(val asJava: io.vertx.core.http.HttpClientOptions) {
   def setAlpnVersions(value:scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    java.setAlpnVersions(value)
+    asJava.setAlpnVersions(value)
     this
   }
   def getAlpnVersions = {
-    java.getAlpnVersions()
+    asJava.getAlpnVersions()
   }
   def setConnectTimeout(value:Int) = {
-    java.setConnectTimeout(value)
+    asJava.setConnectTimeout(value)
     this
   }
   def getConnectTimeout = {
-    java.getConnectTimeout()
+    asJava.getConnectTimeout()
   }
   def addCrlPath(value:String) = {
-    java.addCrlPath(value)
+    asJava.addCrlPath(value)
     this
   }
   def getCrlPaths = {
-    java.getCrlPaths()
+    asJava.getCrlPaths()
   }
   def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-    java.addCrlValue(value)
+    asJava.addCrlValue(value)
     this
   }
   def getCrlValues = {
-    java.getCrlValues()
+    asJava.getCrlValues()
   }
   def setDefaultHost(value:String) = {
-    java.setDefaultHost(value)
+    asJava.setDefaultHost(value)
     this
   }
   def getDefaultHost = {
-    java.getDefaultHost()
+    asJava.getDefaultHost()
   }
   def setDefaultPort(value:Int) = {
-    java.setDefaultPort(value)
+    asJava.setDefaultPort(value)
     this
   }
   def getDefaultPort = {
-    java.getDefaultPort()
+    asJava.getDefaultPort()
   }
   def addEnabledCipherSuite(value:String) = {
-    java.addEnabledCipherSuite(value)
+    asJava.addEnabledCipherSuite(value)
     this
   }
   def getEnabledCipherSuites = {
-    java.getEnabledCipherSuites()
+    asJava.getEnabledCipherSuites()
   }
   def addEnabledSecureTransportProtocol(value:String) = {
-    java.addEnabledSecureTransportProtocol(value)
+    asJava.addEnabledSecureTransportProtocol(value)
     this
   }
   def getEnabledSecureTransportProtocols = {
-    java.getEnabledSecureTransportProtocols()
+    asJava.getEnabledSecureTransportProtocols()
   }
   def setHttp2ClearTextUpgrade(value:Boolean) = {
-    java.setHttp2ClearTextUpgrade(value)
+    asJava.setHttp2ClearTextUpgrade(value)
     this
   }
   def isHttp2ClearTextUpgrade = {
-    java.isHttp2ClearTextUpgrade()
+    asJava.isHttp2ClearTextUpgrade()
   }
   def setHttp2ConnectionWindowSize(value:Int) = {
-    java.setHttp2ConnectionWindowSize(value)
+    asJava.setHttp2ConnectionWindowSize(value)
     this
   }
   def getHttp2ConnectionWindowSize = {
-    java.getHttp2ConnectionWindowSize()
+    asJava.getHttp2ConnectionWindowSize()
   }
   def setHttp2MaxPoolSize(value:Int) = {
-    java.setHttp2MaxPoolSize(value)
+    asJava.setHttp2MaxPoolSize(value)
     this
   }
   def getHttp2MaxPoolSize = {
-    java.getHttp2MaxPoolSize()
+    asJava.getHttp2MaxPoolSize()
   }
   def setHttp2MultiplexingLimit(value:Int) = {
-    java.setHttp2MultiplexingLimit(value)
+    asJava.setHttp2MultiplexingLimit(value)
     this
   }
   def getHttp2MultiplexingLimit = {
-    java.getHttp2MultiplexingLimit()
+    asJava.getHttp2MultiplexingLimit()
   }
   def setIdleTimeout(value:Int) = {
-    java.setIdleTimeout(value)
+    asJava.setIdleTimeout(value)
     this
   }
   def getIdleTimeout = {
-    java.getIdleTimeout()
+    asJava.getIdleTimeout()
   }
   def setInitialSettings(value:io.vertx.scala.core.http.Http2Settings) = {
-    java.setInitialSettings(value.java)
+    asJava.setInitialSettings(value.asJava)
     this
   }
   def getInitialSettings = {
-    java.getInitialSettings()
+    asJava.getInitialSettings()
   }
   def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
-    java.setJdkSslEngineOptions(value.java)
+    asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
   def setKeepAlive(value:Boolean) = {
-    java.setKeepAlive(value)
+    asJava.setKeepAlive(value)
     this
   }
   def isKeepAlive = {
-    java.isKeepAlive()
+    asJava.isKeepAlive()
   }
   def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-    java.setKeyStoreOptions(value.java)
+    asJava.setKeyStoreOptions(value.asJava)
     this
   }
   def setLogActivity(value:Boolean) = {
-    java.setLogActivity(value)
+    asJava.setLogActivity(value)
     this
   }
   def getLogActivity = {
-    java.getLogActivity()
+    asJava.getLogActivity()
   }
   def setMaxChunkSize(value:Int) = {
-    java.setMaxChunkSize(value)
+    asJava.setMaxChunkSize(value)
     this
   }
   def getMaxChunkSize = {
-    java.getMaxChunkSize()
+    asJava.getMaxChunkSize()
   }
   def setMaxPoolSize(value:Int) = {
-    java.setMaxPoolSize(value)
+    asJava.setMaxPoolSize(value)
     this
   }
   def getMaxPoolSize = {
-    java.getMaxPoolSize()
+    asJava.getMaxPoolSize()
   }
   def setMaxWaitQueueSize(value:Int) = {
-    java.setMaxWaitQueueSize(value)
+    asJava.setMaxWaitQueueSize(value)
     this
   }
   def getMaxWaitQueueSize = {
-    java.getMaxWaitQueueSize()
+    asJava.getMaxWaitQueueSize()
   }
   def setMaxWebsocketFrameSize(value:Int) = {
-    java.setMaxWebsocketFrameSize(value)
+    asJava.setMaxWebsocketFrameSize(value)
     this
   }
   def getMaxWebsocketFrameSize = {
-    java.getMaxWebsocketFrameSize()
+    asJava.getMaxWebsocketFrameSize()
   }
   def setMetricsName(value:String) = {
-    java.setMetricsName(value)
+    asJava.setMetricsName(value)
     this
   }
   def getMetricsName = {
-    java.getMetricsName()
+    asJava.getMetricsName()
   }
   def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
-    java.setOpenSslEngineOptions(value.java)
+    asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
   def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
-    java.setPemKeyCertOptions(value.java)
+    asJava.setPemKeyCertOptions(value.asJava)
     this
   }
   def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
-    java.setPemTrustOptions(value.java)
+    asJava.setPemTrustOptions(value.asJava)
     this
   }
   def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-    java.setPfxKeyCertOptions(value.java)
+    asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
   def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-    java.setPfxTrustOptions(value.java)
+    asJava.setPfxTrustOptions(value.asJava)
     this
   }
   def setPipelining(value:Boolean) = {
-    java.setPipelining(value)
+    asJava.setPipelining(value)
     this
   }
   def isPipelining = {
-    java.isPipelining()
+    asJava.isPipelining()
   }
   def setPipeliningLimit(value:Int) = {
-    java.setPipeliningLimit(value)
+    asJava.setPipeliningLimit(value)
     this
   }
   def getPipeliningLimit = {
-    java.getPipeliningLimit()
+    asJava.getPipeliningLimit()
   }
   def setProtocolVersion(value:io.vertx.core.http.HttpVersion) = {
-    java.setProtocolVersion(value)
+    asJava.setProtocolVersion(value)
     this
   }
   def getProtocolVersion = {
-    java.getProtocolVersion()
+    asJava.getProtocolVersion()
   }
   def setProxyOptions(value:io.vertx.scala.core.net.ProxyOptions) = {
-    java.setProxyOptions(value.java)
+    asJava.setProxyOptions(value.asJava)
     this
   }
   def getProxyOptions = {
-    java.getProxyOptions()
+    asJava.getProxyOptions()
   }
   def setReceiveBufferSize(value:Int) = {
-    java.setReceiveBufferSize(value)
+    asJava.setReceiveBufferSize(value)
     this
   }
   def getReceiveBufferSize = {
-    java.getReceiveBufferSize()
+    asJava.getReceiveBufferSize()
   }
   def setReuseAddress(value:Boolean) = {
-    java.setReuseAddress(value)
+    asJava.setReuseAddress(value)
     this
   }
   def isReuseAddress = {
-    java.isReuseAddress()
+    asJava.isReuseAddress()
   }
   def setSendBufferSize(value:Int) = {
-    java.setSendBufferSize(value)
+    asJava.setSendBufferSize(value)
     this
   }
   def getSendBufferSize = {
-    java.getSendBufferSize()
+    asJava.getSendBufferSize()
   }
   def setSoLinger(value:Int) = {
-    java.setSoLinger(value)
+    asJava.setSoLinger(value)
     this
   }
   def getSoLinger = {
-    java.getSoLinger()
+    asJava.getSoLinger()
   }
   def setSsl(value:Boolean) = {
-    java.setSsl(value)
+    asJava.setSsl(value)
     this
   }
   def isSsl = {
-    java.isSsl()
+    asJava.isSsl()
   }
   def setTcpKeepAlive(value:Boolean) = {
-    java.setTcpKeepAlive(value)
+    asJava.setTcpKeepAlive(value)
     this
   }
   def isTcpKeepAlive = {
-    java.isTcpKeepAlive()
+    asJava.isTcpKeepAlive()
   }
   def setTcpNoDelay(value:Boolean) = {
-    java.setTcpNoDelay(value)
+    asJava.setTcpNoDelay(value)
     this
   }
   def isTcpNoDelay = {
-    java.isTcpNoDelay()
+    asJava.isTcpNoDelay()
   }
   def setTrafficClass(value:Int) = {
-    java.setTrafficClass(value)
+    asJava.setTrafficClass(value)
     this
   }
   def getTrafficClass = {
-    java.getTrafficClass()
+    asJava.getTrafficClass()
   }
   def setTrustAll(value:Boolean) = {
-    java.setTrustAll(value)
+    asJava.setTrustAll(value)
     this
   }
   def isTrustAll = {
-    java.isTrustAll()
+    asJava.isTrustAll()
   }
   def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-    java.setTrustStoreOptions(value.java)
+    asJava.setTrustStoreOptions(value.asJava)
     this
   }
   def setTryUseCompression(value:Boolean) = {
-    java.setTryUseCompression(value)
+    asJava.setTryUseCompression(value)
     this
   }
   def isTryUseCompression = {
-    java.isTryUseCompression()
+    asJava.isTryUseCompression()
   }
   def setUseAlpn(value:Boolean) = {
-    java.setUseAlpn(value)
+    asJava.setUseAlpn(value)
     this
   }
   def isUseAlpn = {
-    java.isUseAlpn()
+    asJava.isUseAlpn()
   }
   def setUsePooledBuffers(value:Boolean) = {
-    java.setUsePooledBuffers(value)
+    asJava.setUsePooledBuffers(value)
     this
   }
   def isUsePooledBuffers = {
-    java.isUsePooledBuffers()
+    asJava.isUsePooledBuffers()
   }
   def setVerifyHost(value:Boolean) = {
-    java.setVerifyHost(value)
+    asJava.setVerifyHost(value)
     this
   }
   def isVerifyHost = {
-    java.isVerifyHost()
+    asJava.isVerifyHost()
   }
 }
 

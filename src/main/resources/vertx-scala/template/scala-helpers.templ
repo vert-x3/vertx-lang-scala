@@ -14,17 +14,19 @@
     return possibleKeyword;
   }
 
+
+
   def handleOption(param) {
 
     if(param.type.isNullable) {
       if (param.type.kind == CLASS_API) {
-        return '(if('+param.name+'.isDefined) '+param.name+'.get.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +'] else null)'
+        return '(if('+param.name+'.isDefined) '+param.name+'.get.asJava else null)'
       }
       else if(param.type.kind == CLASS_HANDLER) {
         return param.name;
       }
       else if(param.type.kind == CLASS_DATA_OBJECT) {
-        return '(if('+param.name+'.isDefined) '+param.name+'.get.java else null)';
+        return '(if('+param.name+'.isDefined) '+param.name+'.get.asJava else null)';
       }
       else {
         return '(if('+param.name+'.isDefined) '+param.name+'.get else null)';
@@ -35,7 +37,7 @@
         return param.name + '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']'
       }
       else if(param.type.kind == CLASS_DATA_OBJECT) {
-        return param.name + '.java';
+        return param.name + '.asJava';
       }
       else {
         return param.name;
@@ -403,12 +405,12 @@
           if (param.type.args[0].kind == CLASS_API) {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
           } else if(param.type.args[0].kind == CLASS_DATA_OBJECT){
-            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.java).asJava');
+            invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
           } else {
             invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
           }
         } else if (param.type.kind == CLASS_MAP) {
-        /*TODO do the same dance with x.java as above */
+        /*TODO do the same dance with x.asJava as above */
           if (param.type.args[0].kind == CLASS_API &&
               param.type.args[1].kind == CLASS_API)
           {
@@ -546,6 +548,9 @@
     indentation + invocation;
   }
 
+  /**
+   * Check if a given method should be included in the generated class.
+   */
   def includeMethod(method, instanceMethods) {
     if(method.name == 'addInterceptor') {
         return false;

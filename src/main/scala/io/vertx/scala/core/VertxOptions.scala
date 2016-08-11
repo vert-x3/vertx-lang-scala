@@ -23,146 +23,146 @@ import scala.collection.JavaConversions._
   * Instances of this class are used to configure [[io.vertx.scala.core.Vertx]] instances.
   */
 
-class VertxOptions(val java: io.vertx.core.VertxOptions) {
+class VertxOptions(val asJava: io.vertx.core.VertxOptions) {
   def setAddressResolverOptions(value:io.vertx.scala.core.dns.AddressResolverOptions) = {
-    java.setAddressResolverOptions(value.java)
+    asJava.setAddressResolverOptions(value.asJava)
     this
   }
   def getAddressResolverOptions = {
-    java.getAddressResolverOptions()
+    asJava.getAddressResolverOptions()
   }
   def setBlockedThreadCheckInterval(value:Long) = {
-    java.setBlockedThreadCheckInterval(value)
+    asJava.setBlockedThreadCheckInterval(value)
     this
   }
   def getBlockedThreadCheckInterval = {
-    java.getBlockedThreadCheckInterval()
+    asJava.getBlockedThreadCheckInterval()
   }
   def setClusterHost(value:String) = {
-    java.setClusterHost(value)
+    asJava.setClusterHost(value)
     this
   }
   def getClusterHost = {
-    java.getClusterHost()
+    asJava.getClusterHost()
   }
   def setClusterPingInterval(value:Long) = {
-    java.setClusterPingInterval(value)
+    asJava.setClusterPingInterval(value)
     this
   }
   def getClusterPingInterval = {
-    java.getClusterPingInterval()
+    asJava.getClusterPingInterval()
   }
   def setClusterPingReplyInterval(value:Long) = {
-    java.setClusterPingReplyInterval(value)
+    asJava.setClusterPingReplyInterval(value)
     this
   }
   def getClusterPingReplyInterval = {
-    java.getClusterPingReplyInterval()
+    asJava.getClusterPingReplyInterval()
   }
   def setClusterPort(value:Int) = {
-    java.setClusterPort(value)
+    asJava.setClusterPort(value)
     this
   }
   def getClusterPort = {
-    java.getClusterPort()
+    asJava.getClusterPort()
   }
   def setClusterPublicHost(value:String) = {
-    java.setClusterPublicHost(value)
+    asJava.setClusterPublicHost(value)
     this
   }
   def getClusterPublicHost = {
-    java.getClusterPublicHost()
+    asJava.getClusterPublicHost()
   }
   def setClusterPublicPort(value:Int) = {
-    java.setClusterPublicPort(value)
+    asJava.setClusterPublicPort(value)
     this
   }
   def getClusterPublicPort = {
-    java.getClusterPublicPort()
+    asJava.getClusterPublicPort()
   }
   def setClustered(value:Boolean) = {
-    java.setClustered(value)
+    asJava.setClustered(value)
     this
   }
   def isClustered = {
-    java.isClustered()
+    asJava.isClustered()
   }
   def setEventBusOptions(value:io.vertx.scala.core.eventbus.EventBusOptions) = {
-    java.setEventBusOptions(value.java)
+    asJava.setEventBusOptions(value.asJava)
     this
   }
   def getEventBusOptions = {
-    java.getEventBusOptions()
+    asJava.getEventBusOptions()
   }
   def setEventLoopPoolSize(value:Int) = {
-    java.setEventLoopPoolSize(value)
+    asJava.setEventLoopPoolSize(value)
     this
   }
   def getEventLoopPoolSize = {
-    java.getEventLoopPoolSize()
+    asJava.getEventLoopPoolSize()
   }
   def setHAEnabled(value:Boolean) = {
-    java.setHAEnabled(value)
+    asJava.setHAEnabled(value)
     this
   }
   def isHAEnabled = {
-    java.isHAEnabled()
+    asJava.isHAEnabled()
   }
   def setHAGroup(value:String) = {
-    java.setHAGroup(value)
+    asJava.setHAGroup(value)
     this
   }
   def getHAGroup = {
-    java.getHAGroup()
+    asJava.getHAGroup()
   }
   def setInternalBlockingPoolSize(value:Int) = {
-    java.setInternalBlockingPoolSize(value)
+    asJava.setInternalBlockingPoolSize(value)
     this
   }
   def getInternalBlockingPoolSize = {
-    java.getInternalBlockingPoolSize()
+    asJava.getInternalBlockingPoolSize()
   }
   def setMaxEventLoopExecuteTime(value:Long) = {
-    java.setMaxEventLoopExecuteTime(value)
+    asJava.setMaxEventLoopExecuteTime(value)
     this
   }
   def getMaxEventLoopExecuteTime = {
-    java.getMaxEventLoopExecuteTime()
+    asJava.getMaxEventLoopExecuteTime()
   }
   def setMaxWorkerExecuteTime(value:Long) = {
-    java.setMaxWorkerExecuteTime(value)
+    asJava.setMaxWorkerExecuteTime(value)
     this
   }
   def getMaxWorkerExecuteTime = {
-    java.getMaxWorkerExecuteTime()
+    asJava.getMaxWorkerExecuteTime()
   }
   def setMetricsOptions(value:io.vertx.scala.core.metrics.MetricsOptions) = {
-    java.setMetricsOptions(value.java)
+    asJava.setMetricsOptions(value.asJava)
     this
   }
   def getMetricsOptions = {
-    java.getMetricsOptions()
+    asJava.getMetricsOptions()
   }
   def setQuorumSize(value:Int) = {
-    java.setQuorumSize(value)
+    asJava.setQuorumSize(value)
     this
   }
   def getQuorumSize = {
-    java.getQuorumSize()
+    asJava.getQuorumSize()
   }
   def setWarningExceptionTime(value:Long) = {
-    java.setWarningExceptionTime(value)
+    asJava.setWarningExceptionTime(value)
     this
   }
   def getWarningExceptionTime = {
-    java.getWarningExceptionTime()
+    asJava.getWarningExceptionTime()
   }
   def setWorkerPoolSize(value:Int) = {
-    java.setWorkerPoolSize(value)
+    asJava.setWorkerPoolSize(value)
     this
   }
   def getWorkerPoolSize = {
-    java.getWorkerPoolSize()
+    asJava.getWorkerPoolSize()
   }
 }
 

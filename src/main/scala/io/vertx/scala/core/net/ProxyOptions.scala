@@ -23,41 +23,41 @@ import scala.collection.JavaConversions._
   * Proxy options for a net client or a net client.
   */
 
-class ProxyOptions(val java: io.vertx.core.net.ProxyOptions) {
+class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
   def setHost(value:String) = {
-    java.setHost(value)
+    asJava.setHost(value)
     this
   }
   def getHost = {
-    java.getHost()
+    asJava.getHost()
   }
   def setPassword(value:String) = {
-    java.setPassword(value)
+    asJava.setPassword(value)
     this
   }
   def getPassword = {
-    java.getPassword()
+    asJava.getPassword()
   }
   def setPort(value:Int) = {
-    java.setPort(value)
+    asJava.setPort(value)
     this
   }
   def getPort = {
-    java.getPort()
+    asJava.getPort()
   }
   def setType(value:io.vertx.core.net.ProxyType) = {
-    java.setType(value)
+    asJava.setType(value)
     this
   }
   def getType = {
-    java.getType()
+    asJava.getType()
   }
   def setUsername(value:String) = {
-    java.setUsername(value)
+    asJava.setUsername(value)
     this
   }
   def getUsername = {
-    java.getUsername()
+    asJava.getUsername()
   }
 }
 

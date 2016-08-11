@@ -63,34 +63,34 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PemKeyCertOptions(val java: io.vertx.core.net.PemKeyCertOptions) {
+class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
   def setCertPath(value:String) = {
-    java.setCertPath(value)
+    asJava.setCertPath(value)
     this
   }
   def getCertPath = {
-    java.getCertPath()
+    asJava.getCertPath()
   }
   def setCertValue(value:io.vertx.core.buffer.Buffer) = {
-    java.setCertValue(value)
+    asJava.setCertValue(value)
     this
   }
   def getCertValue = {
-    java.getCertValue()
+    asJava.getCertValue()
   }
   def setKeyPath(value:String) = {
-    java.setKeyPath(value)
+    asJava.setKeyPath(value)
     this
   }
   def getKeyPath = {
-    java.getKeyPath()
+    asJava.getKeyPath()
   }
   def setKeyValue(value:io.vertx.core.buffer.Buffer) = {
-    java.setKeyValue(value)
+    asJava.setKeyValue(value)
     this
   }
   def getKeyValue = {
-    java.getKeyValue()
+    asJava.getKeyValue()
   }
 }
 

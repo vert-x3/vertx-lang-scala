@@ -41,27 +41,27 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PfxOptions(val java: io.vertx.core.net.PfxOptions) {
+class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
   def setPassword(value:String) = {
-    java.setPassword(value)
+    asJava.setPassword(value)
     this
   }
   def getPassword = {
-    java.getPassword()
+    asJava.getPassword()
   }
   def setPath(value:String) = {
-    java.setPath(value)
+    asJava.setPath(value)
     this
   }
   def getPath = {
-    java.getPath()
+    asJava.getPath()
   }
   def setValue(value:io.vertx.core.buffer.Buffer) = {
-    java.setValue(value)
+    asJava.setValue(value)
     this
   }
   def getValue = {
-    java.getValue()
+    asJava.getValue()
   }
 }
 

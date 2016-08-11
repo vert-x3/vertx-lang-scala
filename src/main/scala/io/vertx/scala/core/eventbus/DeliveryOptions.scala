@@ -26,24 +26,24 @@ import scala.collection.JavaConversions._
   * that you wish to send with the message.
   */
 
-class DeliveryOptions(val java: io.vertx.core.eventbus.DeliveryOptions) {
+class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
   def setCodecName(value:String) = {
-    java.setCodecName(value)
+    asJava.setCodecName(value)
     this
   }
   def getCodecName = {
-    java.getCodecName()
+    asJava.getCodecName()
   }
   def addHeader(key: String, value:String) = {
-    java.addHeader(key, value)
+    asJava.addHeader(key, value)
     this
   }
   def setSendTimeout(value:Long) = {
-    java.setSendTimeout(value)
+    asJava.setSendTimeout(value)
     this
   }
   def getSendTimeout = {
-    java.getSendTimeout()
+    asJava.getSendTimeout()
   }
 }
 

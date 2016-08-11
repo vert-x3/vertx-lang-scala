@@ -24,55 +24,55 @@ import scala.collection.JavaConversions._
   * first index is 0 (because we are in the computer world).
   */
 
-class Argument(val java: io.vertx.core.cli.Argument) {
+class Argument(val asJava: io.vertx.core.cli.Argument) {
   def setArgName(value:String) = {
-    java.setArgName(value)
+    asJava.setArgName(value)
     this
   }
   def getArgName = {
-    java.getArgName()
+    asJava.getArgName()
   }
   def setDefaultValue(value:String) = {
-    java.setDefaultValue(value)
+    asJava.setDefaultValue(value)
     this
   }
   def getDefaultValue = {
-    java.getDefaultValue()
+    asJava.getDefaultValue()
   }
   def setDescription(value:String) = {
-    java.setDescription(value)
+    asJava.setDescription(value)
     this
   }
   def getDescription = {
-    java.getDescription()
+    asJava.getDescription()
   }
   def setHidden(value:Boolean) = {
-    java.setHidden(value)
+    asJava.setHidden(value)
     this
   }
   def isHidden = {
-    java.isHidden()
+    asJava.isHidden()
   }
   def setIndex(value:Int) = {
-    java.setIndex(value)
+    asJava.setIndex(value)
     this
   }
   def getIndex = {
-    java.getIndex()
+    asJava.getIndex()
   }
   def setMultiValued(value:Boolean) = {
-    java.setMultiValued(value)
+    asJava.setMultiValued(value)
     this
   }
   def isMultiValued = {
-    java.isMultiValued()
+    asJava.isMultiValued()
   }
   def setRequired(value:Boolean) = {
-    java.setRequired(value)
+    asJava.setRequired(value)
     this
   }
   def isRequired = {
-    java.isRequired()
+    asJava.isRequired()
   }
 }
 
