@@ -27,95 +27,96 @@ import scala.collection.JavaConversions._
   */
 
 class Option(val java: io.vertx.core.cli.Option) {
-          def setArgName(value:String) = {
-          java.setArgName(value)
-          this
+  def setArgName(value:String) = {
+    java.setArgName(value)
+    this
   }
-            def getArgName = {
+  def getArgName = {
     java.getArgName()
   }
-            def addChoice(value:String) = {
-            java.addChoice(value)
-            this
-    }
-              def setChoices(value:Set[String]) = {
-          java.setChoices(value)
-          this
+  def addChoice(value:String) = {
+    java.addChoice(value)
+    this
   }
-            def getChoices = {
+  def setChoices(value:Set[String]) = {
+    java.setChoices(value)
+    this
+  }
+  def getChoices = {
     java.getChoices()
   }
-            def setDefaultValue(value:String) = {
-          java.setDefaultValue(value)
-          this
+  def setDefaultValue(value:String) = {
+    java.setDefaultValue(value)
+    this
   }
-            def getDefaultValue = {
+  def getDefaultValue = {
     java.getDefaultValue()
   }
-            def setDescription(value:String) = {
-          java.setDescription(value)
-          this
+  def setDescription(value:String) = {
+    java.setDescription(value)
+    this
   }
-            def getDescription = {
+  def getDescription = {
     java.getDescription()
   }
-            def setFlag(value:Boolean) = {
-          java.setFlag(value)
-          this
+  def setFlag(value:Boolean) = {
+    java.setFlag(value)
+    this
   }
-            def isFlag = {
+  def isFlag = {
     java.isFlag()
   }
-            def setHelp(value:Boolean) = {
-          java.setHelp(value)
-          this
+  def setHelp(value:Boolean) = {
+    java.setHelp(value)
+    this
   }
-            def isHelp = {
+  def isHelp = {
     java.isHelp()
   }
-            def setHidden(value:Boolean) = {
-          java.setHidden(value)
-          this
+  def setHidden(value:Boolean) = {
+    java.setHidden(value)
+    this
   }
-            def isHidden = {
+  def isHidden = {
     java.isHidden()
   }
-            def setLongName(value:String) = {
-          java.setLongName(value)
-          this
+  def setLongName(value:String) = {
+    java.setLongName(value)
+    this
   }
-            def getLongName = {
+  def getLongName = {
     java.getLongName()
   }
-            def setMultiValued(value:Boolean) = {
-          java.setMultiValued(value)
-          this
+  def setMultiValued(value:Boolean) = {
+    java.setMultiValued(value)
+    this
   }
-            def isMultiValued = {
+  def isMultiValued = {
     java.isMultiValued()
   }
-                    def setRequired(value:Boolean) = {
-          java.setRequired(value)
-          this
+  def setRequired(value:Boolean) = {
+    java.setRequired(value)
+    this
   }
-            def isRequired = {
+  def isRequired = {
     java.isRequired()
   }
-            def setShortName(value:String) = {
-          java.setShortName(value)
-          this
+  def setShortName(value:String) = {
+    java.setShortName(value)
+    this
   }
-            def getShortName = {
+  def getShortName = {
     java.getShortName()
   }
-            def setSingleValued(value:Boolean) = {
-          java.setSingleValued(value)
-          this
+  def setSingleValued(value:Boolean) = {
+    java.setSingleValued(value)
+    this
   }
-            def isSingleValued = {
+  def isSingleValued = {
     java.isSingleValued()
   }
-  }
+}
+
 object Option {
   type OptionJava = io.vertx.core.cli.Option
   

@@ -24,14 +24,15 @@ import scala.collection.JavaConversions._
   */
 
 class OpenSSLEngineOptions(val java: io.vertx.core.net.OpenSSLEngineOptions) {
-                          def setSessionCacheEnabled(value:Boolean) = {
-          java.setSessionCacheEnabled(value)
-          this
+  def setSessionCacheEnabled(value:Boolean) = {
+    java.setSessionCacheEnabled(value)
+    this
   }
-            def isSessionCacheEnabled = {
+  def isSessionCacheEnabled = {
     java.isSessionCacheEnabled()
   }
-  }
+}
+
 object OpenSSLEngineOptions {
   type OpenSSLEngineOptionsJava = io.vertx.core.net.OpenSSLEngineOptions
   

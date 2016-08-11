@@ -24,200 +24,201 @@ import scala.collection.JavaConversions._
   */
 
 class NetClientOptions(val java: io.vertx.core.net.NetClientOptions) {
-          def setConnectTimeout(value:Int) = {
-          java.setConnectTimeout(value)
-          this
+  def setConnectTimeout(value:Int) = {
+    java.setConnectTimeout(value)
+    this
   }
-            def getConnectTimeout = {
+  def getConnectTimeout = {
     java.getConnectTimeout()
   }
-            def addCrlPath(value:String) = {
-            java.addCrlPath(value)
-            this
-    }
-              def getCrlPaths = {
+  def addCrlPath(value:String) = {
+    java.addCrlPath(value)
+    this
+  }
+  def getCrlPaths = {
     java.getCrlPaths()
   }
-            def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-            java.addCrlValue(value)
-            this
-    }
-              def getCrlValues = {
+  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
+    java.addCrlValue(value)
+    this
+  }
+  def getCrlValues = {
     java.getCrlValues()
   }
-            def addEnabledCipherSuite(value:String) = {
-            java.addEnabledCipherSuite(value)
-            this
-    }
-              def getEnabledCipherSuites = {
+  def addEnabledCipherSuite(value:String) = {
+    java.addEnabledCipherSuite(value)
+    this
+  }
+  def getEnabledCipherSuites = {
     java.getEnabledCipherSuites()
   }
-            def addEnabledSecureTransportProtocol(value:String) = {
-            java.addEnabledSecureTransportProtocol(value)
-            this
-    }
-              def getEnabledSecureTransportProtocols = {
+  def addEnabledSecureTransportProtocol(value:String) = {
+    java.addEnabledSecureTransportProtocol(value)
+    this
+  }
+  def getEnabledSecureTransportProtocols = {
     java.getEnabledSecureTransportProtocols()
   }
-            def setHostnameVerificationAlgorithm(value:String) = {
-          java.setHostnameVerificationAlgorithm(value)
-          this
+  def setHostnameVerificationAlgorithm(value:String) = {
+    java.setHostnameVerificationAlgorithm(value)
+    this
   }
-            def getHostnameVerificationAlgorithm = {
+  def getHostnameVerificationAlgorithm = {
     java.getHostnameVerificationAlgorithm()
   }
-            def setIdleTimeout(value:Int) = {
-          java.setIdleTimeout(value)
-          this
+  def setIdleTimeout(value:Int) = {
+    java.setIdleTimeout(value)
+    this
   }
-            def getIdleTimeout = {
+  def getIdleTimeout = {
     java.getIdleTimeout()
   }
-            def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
-          java.setJdkSslEngineOptions(value.java)
-          this
+  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+    java.setJdkSslEngineOptions(value.java)
+    this
   }
-                    def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-          java.setKeyStoreOptions(value.java)
-          this
+  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+    java.setKeyStoreOptions(value.java)
+    this
   }
-                    def setLogActivity(value:Boolean) = {
-          java.setLogActivity(value)
-          this
+  def setLogActivity(value:Boolean) = {
+    java.setLogActivity(value)
+    this
   }
-            def getLogActivity = {
+  def getLogActivity = {
     java.getLogActivity()
   }
-            def setMetricsName(value:String) = {
-          java.setMetricsName(value)
-          this
+  def setMetricsName(value:String) = {
+    java.setMetricsName(value)
+    this
   }
-            def getMetricsName = {
+  def getMetricsName = {
     java.getMetricsName()
   }
-            def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
-          java.setOpenSslEngineOptions(value.java)
-          this
+  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+    java.setOpenSslEngineOptions(value.java)
+    this
   }
-                    def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
-          java.setPemKeyCertOptions(value.java)
-          this
+  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+    java.setPemKeyCertOptions(value.java)
+    this
   }
-                    def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
-          java.setPemTrustOptions(value.java)
-          this
+  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+    java.setPemTrustOptions(value.java)
+    this
   }
-                    def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-          java.setPfxKeyCertOptions(value.java)
-          this
+  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+    java.setPfxKeyCertOptions(value.java)
+    this
   }
-                    def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-          java.setPfxTrustOptions(value.java)
-          this
+  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+    java.setPfxTrustOptions(value.java)
+    this
   }
-                    def setProxyOptions(value:io.vertx.scala.core.net.ProxyOptions) = {
-          java.setProxyOptions(value.java)
-          this
+  def setProxyOptions(value:io.vertx.scala.core.net.ProxyOptions) = {
+    java.setProxyOptions(value.java)
+    this
   }
-            def getProxyOptions = {
+  def getProxyOptions = {
     java.getProxyOptions()
   }
-            def setReceiveBufferSize(value:Int) = {
-          java.setReceiveBufferSize(value)
-          this
+  def setReceiveBufferSize(value:Int) = {
+    java.setReceiveBufferSize(value)
+    this
   }
-            def getReceiveBufferSize = {
+  def getReceiveBufferSize = {
     java.getReceiveBufferSize()
   }
-            def setReconnectAttempts(value:Int) = {
-          java.setReconnectAttempts(value)
-          this
+  def setReconnectAttempts(value:Int) = {
+    java.setReconnectAttempts(value)
+    this
   }
-            def getReconnectAttempts = {
+  def getReconnectAttempts = {
     java.getReconnectAttempts()
   }
-            def setReconnectInterval(value:Long) = {
-          java.setReconnectInterval(value)
-          this
+  def setReconnectInterval(value:Long) = {
+    java.setReconnectInterval(value)
+    this
   }
-            def getReconnectInterval = {
+  def getReconnectInterval = {
     java.getReconnectInterval()
   }
-            def setReuseAddress(value:Boolean) = {
-          java.setReuseAddress(value)
-          this
+  def setReuseAddress(value:Boolean) = {
+    java.setReuseAddress(value)
+    this
   }
-            def isReuseAddress = {
+  def isReuseAddress = {
     java.isReuseAddress()
   }
-            def setSendBufferSize(value:Int) = {
-          java.setSendBufferSize(value)
-          this
+  def setSendBufferSize(value:Int) = {
+    java.setSendBufferSize(value)
+    this
   }
-            def getSendBufferSize = {
+  def getSendBufferSize = {
     java.getSendBufferSize()
   }
-            def setSoLinger(value:Int) = {
-          java.setSoLinger(value)
-          this
+  def setSoLinger(value:Int) = {
+    java.setSoLinger(value)
+    this
   }
-            def getSoLinger = {
+  def getSoLinger = {
     java.getSoLinger()
   }
-            def setSsl(value:Boolean) = {
-          java.setSsl(value)
-          this
+  def setSsl(value:Boolean) = {
+    java.setSsl(value)
+    this
   }
-            def isSsl = {
+  def isSsl = {
     java.isSsl()
   }
-            def setTcpKeepAlive(value:Boolean) = {
-          java.setTcpKeepAlive(value)
-          this
+  def setTcpKeepAlive(value:Boolean) = {
+    java.setTcpKeepAlive(value)
+    this
   }
-            def isTcpKeepAlive = {
+  def isTcpKeepAlive = {
     java.isTcpKeepAlive()
   }
-            def setTcpNoDelay(value:Boolean) = {
-          java.setTcpNoDelay(value)
-          this
+  def setTcpNoDelay(value:Boolean) = {
+    java.setTcpNoDelay(value)
+    this
   }
-            def isTcpNoDelay = {
+  def isTcpNoDelay = {
     java.isTcpNoDelay()
   }
-            def setTrafficClass(value:Int) = {
-          java.setTrafficClass(value)
-          this
+  def setTrafficClass(value:Int) = {
+    java.setTrafficClass(value)
+    this
   }
-            def getTrafficClass = {
+  def getTrafficClass = {
     java.getTrafficClass()
   }
-            def setTrustAll(value:Boolean) = {
-          java.setTrustAll(value)
-          this
+  def setTrustAll(value:Boolean) = {
+    java.setTrustAll(value)
+    this
   }
-            def isTrustAll = {
+  def isTrustAll = {
     java.isTrustAll()
   }
-            def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-          java.setTrustStoreOptions(value.java)
-          this
+  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+    java.setTrustStoreOptions(value.java)
+    this
   }
-                    def setUseAlpn(value:Boolean) = {
-          java.setUseAlpn(value)
-          this
+  def setUseAlpn(value:Boolean) = {
+    java.setUseAlpn(value)
+    this
   }
-            def isUseAlpn = {
+  def isUseAlpn = {
     java.isUseAlpn()
   }
-            def setUsePooledBuffers(value:Boolean) = {
-          java.setUsePooledBuffers(value)
-          this
+  def setUsePooledBuffers(value:Boolean) = {
+    java.setUsePooledBuffers(value)
+    this
   }
-            def isUsePooledBuffers = {
+  def isUsePooledBuffers = {
     java.isUsePooledBuffers()
   }
-  }
+}
+
 object NetClientOptions {
   type NetClientOptionsJava = io.vertx.core.net.NetClientOptions
   

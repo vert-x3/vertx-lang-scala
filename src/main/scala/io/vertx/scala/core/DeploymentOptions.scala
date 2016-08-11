@@ -25,84 +25,85 @@ import scala.collection.JavaConversions._
   */
 
 class DeploymentOptions(val java: io.vertx.core.DeploymentOptions) {
-          def setConfig(value:io.vertx.core.json.JsonObject) = {
-          java.setConfig(value)
-          this
+  def setConfig(value:io.vertx.core.json.JsonObject) = {
+    java.setConfig(value)
+    this
   }
-            def getConfig = {
+  def getConfig = {
     java.getConfig()
   }
-            def setExtraClasspath(value:scala.collection.mutable.Buffer[String]) = {
-          java.setExtraClasspath(value)
-          this
+  def setExtraClasspath(value:scala.collection.mutable.Buffer[String]) = {
+    java.setExtraClasspath(value)
+    this
   }
-            def getExtraClasspath = {
+  def getExtraClasspath = {
     java.getExtraClasspath()
   }
-            def setHa(value:Boolean) = {
-          java.setHa(value)
-          this
+  def setHa(value:Boolean) = {
+    java.setHa(value)
+    this
   }
-            def isHa = {
+  def isHa = {
     java.isHa()
   }
-            def setInstances(value:Int) = {
-          java.setInstances(value)
-          this
+  def setInstances(value:Int) = {
+    java.setInstances(value)
+    this
   }
-            def getInstances = {
+  def getInstances = {
     java.getInstances()
   }
-            def setIsolatedClasses(value:scala.collection.mutable.Buffer[String]) = {
-          java.setIsolatedClasses(value)
-          this
+  def setIsolatedClasses(value:scala.collection.mutable.Buffer[String]) = {
+    java.setIsolatedClasses(value)
+    this
   }
-            def getIsolatedClasses = {
+  def getIsolatedClasses = {
     java.getIsolatedClasses()
   }
-            def setIsolationGroup(value:String) = {
-          java.setIsolationGroup(value)
-          this
+  def setIsolationGroup(value:String) = {
+    java.setIsolationGroup(value)
+    this
   }
-            def getIsolationGroup = {
+  def getIsolationGroup = {
     java.getIsolationGroup()
   }
-            def setMaxWorkerExecuteTime(value:Long) = {
-          java.setMaxWorkerExecuteTime(value)
-          this
+  def setMaxWorkerExecuteTime(value:Long) = {
+    java.setMaxWorkerExecuteTime(value)
+    this
   }
-            def getMaxWorkerExecuteTime = {
+  def getMaxWorkerExecuteTime = {
     java.getMaxWorkerExecuteTime()
   }
-            def setMultiThreaded(value:Boolean) = {
-          java.setMultiThreaded(value)
-          this
+  def setMultiThreaded(value:Boolean) = {
+    java.setMultiThreaded(value)
+    this
   }
-            def isMultiThreaded = {
+  def isMultiThreaded = {
     java.isMultiThreaded()
   }
-            def setWorker(value:Boolean) = {
-          java.setWorker(value)
-          this
+  def setWorker(value:Boolean) = {
+    java.setWorker(value)
+    this
   }
-            def isWorker = {
+  def isWorker = {
     java.isWorker()
   }
-            def setWorkerPoolName(value:String) = {
-          java.setWorkerPoolName(value)
-          this
+  def setWorkerPoolName(value:String) = {
+    java.setWorkerPoolName(value)
+    this
   }
-            def getWorkerPoolName = {
+  def getWorkerPoolName = {
     java.getWorkerPoolName()
   }
-            def setWorkerPoolSize(value:Int) = {
-          java.setWorkerPoolSize(value)
-          this
+  def setWorkerPoolSize(value:Int) = {
+    java.setWorkerPoolSize(value)
+    this
   }
-            def getWorkerPoolSize = {
+  def getWorkerPoolSize = {
     java.getWorkerPoolSize()
   }
-  }
+}
+
 object DeploymentOptions {
   type DeploymentOptionsJava = io.vertx.core.DeploymentOptions
   

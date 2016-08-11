@@ -24,7 +24,8 @@ import scala.collection.JavaConversions._
   */
 
 class JdkSSLEngineOptions(val java: io.vertx.core.net.JdkSSLEngineOptions) {
-        }
+}
+
 object JdkSSLEngineOptions {
   type JdkSSLEngineOptionsJava = io.vertx.core.net.JdkSSLEngineOptions
   

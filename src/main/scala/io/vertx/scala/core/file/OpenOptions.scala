@@ -24,77 +24,78 @@ import scala.collection.JavaConversions._
   */
 
 class OpenOptions(val java: io.vertx.core.file.OpenOptions) {
-          def setCreate(value:Boolean) = {
-          java.setCreate(value)
-          this
+  def setCreate(value:Boolean) = {
+    java.setCreate(value)
+    this
   }
-            def isCreate = {
+  def isCreate = {
     java.isCreate()
   }
-            def setCreateNew(value:Boolean) = {
-          java.setCreateNew(value)
-          this
+  def setCreateNew(value:Boolean) = {
+    java.setCreateNew(value)
+    this
   }
-            def isCreateNew = {
+  def isCreateNew = {
     java.isCreateNew()
   }
-            def setDeleteOnClose(value:Boolean) = {
-          java.setDeleteOnClose(value)
-          this
+  def setDeleteOnClose(value:Boolean) = {
+    java.setDeleteOnClose(value)
+    this
   }
-            def isDeleteOnClose = {
+  def isDeleteOnClose = {
     java.isDeleteOnClose()
   }
-            def setDsync(value:Boolean) = {
-          java.setDsync(value)
-          this
+  def setDsync(value:Boolean) = {
+    java.setDsync(value)
+    this
   }
-            def isDsync = {
+  def isDsync = {
     java.isDsync()
   }
-            def setPerms(value:String) = {
-          java.setPerms(value)
-          this
+  def setPerms(value:String) = {
+    java.setPerms(value)
+    this
   }
-            def getPerms = {
+  def getPerms = {
     java.getPerms()
   }
-            def setRead(value:Boolean) = {
-          java.setRead(value)
-          this
+  def setRead(value:Boolean) = {
+    java.setRead(value)
+    this
   }
-            def isRead = {
+  def isRead = {
     java.isRead()
   }
-            def setSparse(value:Boolean) = {
-          java.setSparse(value)
-          this
+  def setSparse(value:Boolean) = {
+    java.setSparse(value)
+    this
   }
-            def isSparse = {
+  def isSparse = {
     java.isSparse()
   }
-            def setSync(value:Boolean) = {
-          java.setSync(value)
-          this
+  def setSync(value:Boolean) = {
+    java.setSync(value)
+    this
   }
-            def isSync = {
+  def isSync = {
     java.isSync()
   }
-            def setTruncateExisting(value:Boolean) = {
-          java.setTruncateExisting(value)
-          this
+  def setTruncateExisting(value:Boolean) = {
+    java.setTruncateExisting(value)
+    this
   }
-            def isTruncateExisting = {
+  def isTruncateExisting = {
     java.isTruncateExisting()
   }
-            def setWrite(value:Boolean) = {
-          java.setWrite(value)
-          this
+  def setWrite(value:Boolean) = {
+    java.setWrite(value)
+    this
   }
-            def isWrite = {
+  def isWrite = {
     java.isWrite()
   }
-  }
+}
+
 object OpenOptions {
   type OpenOptionsJava = io.vertx.core.file.OpenOptions
   
