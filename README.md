@@ -1,16 +1,10 @@
 vertx-scala
 ===========
-Next Steps:
 
-- Build vert-web
-- Build vert-unit
+After building this project you can start using it with the following prototype:
 
-After these two work we have enough material to continue improving the API before continuing to all the other modules.
+[Vert.x Scala Lang SBT-starter](https://github.com/codepitbull/vertx-scala-sbt)
 
-The following things should then be tackled next (the order is a mere suggestion):
+If you want to play with Vert.x-web and the security modules check out and build:
 
-1. Introduce Promises for handling of AsyncResult
-2. Introduce Option for handling of @Nullable
-3. Generate Docs (docs are already being generated but results aren't conforming to ScalaDoc)
-
-There are TODO-markers in the MVEL-templates to highlight the starting points for them.
+[Vert.x Scala Lang Stack](https://github.com/codepitbull/vertx-lang-scala-stack)
