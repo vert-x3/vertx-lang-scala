@@ -24,77 +24,78 @@ import scala.collection.JavaConversions._
   */
 
 class DatagramSocketOptions(val java: io.vertx.core.datagram.DatagramSocketOptions) {
-          def setBroadcast(value:Boolean) = {
-          java.setBroadcast(value)
-          this
+  def setBroadcast(value:Boolean) = {
+    java.setBroadcast(value)
+    this
   }
-            def isBroadcast = {
+  def isBroadcast = {
     java.isBroadcast()
   }
-            def setIpV6(value:Boolean) = {
-          java.setIpV6(value)
-          this
+  def setIpV6(value:Boolean) = {
+    java.setIpV6(value)
+    this
   }
-            def isIpV6 = {
+  def isIpV6 = {
     java.isIpV6()
   }
-            def setLogActivity(value:Boolean) = {
-          java.setLogActivity(value)
-          this
+  def setLogActivity(value:Boolean) = {
+    java.setLogActivity(value)
+    this
   }
-            def getLogActivity = {
+  def getLogActivity = {
     java.getLogActivity()
   }
-            def setLoopbackModeDisabled(value:Boolean) = {
-          java.setLoopbackModeDisabled(value)
-          this
+  def setLoopbackModeDisabled(value:Boolean) = {
+    java.setLoopbackModeDisabled(value)
+    this
   }
-            def isLoopbackModeDisabled = {
+  def isLoopbackModeDisabled = {
     java.isLoopbackModeDisabled()
   }
-            def setMulticastNetworkInterface(value:String) = {
-          java.setMulticastNetworkInterface(value)
-          this
+  def setMulticastNetworkInterface(value:String) = {
+    java.setMulticastNetworkInterface(value)
+    this
   }
-            def getMulticastNetworkInterface = {
+  def getMulticastNetworkInterface = {
     java.getMulticastNetworkInterface()
   }
-            def setMulticastTimeToLive(value:Int) = {
-          java.setMulticastTimeToLive(value)
-          this
+  def setMulticastTimeToLive(value:Int) = {
+    java.setMulticastTimeToLive(value)
+    this
   }
-            def getMulticastTimeToLive = {
+  def getMulticastTimeToLive = {
     java.getMulticastTimeToLive()
   }
-            def setReceiveBufferSize(value:Int) = {
-          java.setReceiveBufferSize(value)
-          this
+  def setReceiveBufferSize(value:Int) = {
+    java.setReceiveBufferSize(value)
+    this
   }
-            def getReceiveBufferSize = {
+  def getReceiveBufferSize = {
     java.getReceiveBufferSize()
   }
-            def setReuseAddress(value:Boolean) = {
-          java.setReuseAddress(value)
-          this
+  def setReuseAddress(value:Boolean) = {
+    java.setReuseAddress(value)
+    this
   }
-            def isReuseAddress = {
+  def isReuseAddress = {
     java.isReuseAddress()
   }
-            def setSendBufferSize(value:Int) = {
-          java.setSendBufferSize(value)
-          this
+  def setSendBufferSize(value:Int) = {
+    java.setSendBufferSize(value)
+    this
   }
-            def getSendBufferSize = {
+  def getSendBufferSize = {
     java.getSendBufferSize()
   }
-            def setTrafficClass(value:Int) = {
-          java.setTrafficClass(value)
-          this
+  def setTrafficClass(value:Int) = {
+    java.setTrafficClass(value)
+    this
   }
-            def getTrafficClass = {
+  def getTrafficClass = {
     java.getTrafficClass()
   }
-  }
+}
+
 object DatagramSocketOptions {
   type DatagramSocketOptionsJava = io.vertx.core.datagram.DatagramSocketOptions
   

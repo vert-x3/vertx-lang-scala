@@ -24,42 +24,43 @@ import scala.collection.JavaConversions._
   */
 
 class ProxyOptions(val java: io.vertx.core.net.ProxyOptions) {
-          def setHost(value:String) = {
-          java.setHost(value)
-          this
+  def setHost(value:String) = {
+    java.setHost(value)
+    this
   }
-            def getHost = {
+  def getHost = {
     java.getHost()
   }
-            def setPassword(value:String) = {
-          java.setPassword(value)
-          this
+  def setPassword(value:String) = {
+    java.setPassword(value)
+    this
   }
-            def getPassword = {
+  def getPassword = {
     java.getPassword()
   }
-            def setPort(value:Int) = {
-          java.setPort(value)
-          this
+  def setPort(value:Int) = {
+    java.setPort(value)
+    this
   }
-            def getPort = {
+  def getPort = {
     java.getPort()
   }
-            def setType(value:io.vertx.core.net.ProxyType) = {
-          java.setType(value)
-          this
+  def setType(value:io.vertx.core.net.ProxyType) = {
+    java.setType(value)
+    this
   }
-            def getType = {
+  def getType = {
     java.getType()
   }
-            def setUsername(value:String) = {
-          java.setUsername(value)
-          this
+  def setUsername(value:String) = {
+    java.setUsername(value)
+    this
   }
-            def getUsername = {
+  def getUsername = {
     java.getUsername()
   }
-  }
+}
+
 object ProxyOptions {
   type ProxyOptionsJava = io.vertx.core.net.ProxyOptions
   

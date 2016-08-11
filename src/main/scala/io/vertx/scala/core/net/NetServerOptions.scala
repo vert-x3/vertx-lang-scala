@@ -24,186 +24,187 @@ import scala.collection.JavaConversions._
   */
 
 class NetServerOptions(val java: io.vertx.core.net.NetServerOptions) {
-          def setAcceptBacklog(value:Int) = {
-          java.setAcceptBacklog(value)
-          this
+  def setAcceptBacklog(value:Int) = {
+    java.setAcceptBacklog(value)
+    this
   }
-            def getAcceptBacklog = {
+  def getAcceptBacklog = {
     java.getAcceptBacklog()
   }
-            def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
-          java.setClientAuth(value)
-          this
+  def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
+    java.setClientAuth(value)
+    this
   }
-            def getClientAuth = {
+  def getClientAuth = {
     java.getClientAuth()
   }
-            def setClientAuthRequired(value:Boolean) = {
-          java.setClientAuthRequired(value)
-          this
+  def setClientAuthRequired(value:Boolean) = {
+    java.setClientAuthRequired(value)
+    this
   }
-            def isClientAuthRequired = {
+  def isClientAuthRequired = {
     java.isClientAuthRequired()
   }
-            def addCrlPath(value:String) = {
-            java.addCrlPath(value)
-            this
-    }
-              def getCrlPaths = {
+  def addCrlPath(value:String) = {
+    java.addCrlPath(value)
+    this
+  }
+  def getCrlPaths = {
     java.getCrlPaths()
   }
-            def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-            java.addCrlValue(value)
-            this
-    }
-              def getCrlValues = {
+  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
+    java.addCrlValue(value)
+    this
+  }
+  def getCrlValues = {
     java.getCrlValues()
   }
-            def addEnabledCipherSuite(value:String) = {
-            java.addEnabledCipherSuite(value)
-            this
-    }
-              def getEnabledCipherSuites = {
+  def addEnabledCipherSuite(value:String) = {
+    java.addEnabledCipherSuite(value)
+    this
+  }
+  def getEnabledCipherSuites = {
     java.getEnabledCipherSuites()
   }
-            def addEnabledSecureTransportProtocol(value:String) = {
-            java.addEnabledSecureTransportProtocol(value)
-            this
-    }
-              def getEnabledSecureTransportProtocols = {
+  def addEnabledSecureTransportProtocol(value:String) = {
+    java.addEnabledSecureTransportProtocol(value)
+    this
+  }
+  def getEnabledSecureTransportProtocols = {
     java.getEnabledSecureTransportProtocols()
   }
-            def setHost(value:String) = {
-          java.setHost(value)
-          this
+  def setHost(value:String) = {
+    java.setHost(value)
+    this
   }
-            def getHost = {
+  def getHost = {
     java.getHost()
   }
-            def setIdleTimeout(value:Int) = {
-          java.setIdleTimeout(value)
-          this
+  def setIdleTimeout(value:Int) = {
+    java.setIdleTimeout(value)
+    this
   }
-            def getIdleTimeout = {
+  def getIdleTimeout = {
     java.getIdleTimeout()
   }
-            def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
-          java.setJdkSslEngineOptions(value.java)
-          this
+  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+    java.setJdkSslEngineOptions(value.java)
+    this
   }
-                    def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-          java.setKeyStoreOptions(value.java)
-          this
+  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+    java.setKeyStoreOptions(value.java)
+    this
   }
-                    def setLogActivity(value:Boolean) = {
-          java.setLogActivity(value)
-          this
+  def setLogActivity(value:Boolean) = {
+    java.setLogActivity(value)
+    this
   }
-            def getLogActivity = {
+  def getLogActivity = {
     java.getLogActivity()
   }
-            def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
-          java.setOpenSslEngineOptions(value.java)
-          this
+  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+    java.setOpenSslEngineOptions(value.java)
+    this
   }
-                    def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
-          java.setPemKeyCertOptions(value.java)
-          this
+  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+    java.setPemKeyCertOptions(value.java)
+    this
   }
-                    def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
-          java.setPemTrustOptions(value.java)
-          this
+  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+    java.setPemTrustOptions(value.java)
+    this
   }
-                    def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-          java.setPfxKeyCertOptions(value.java)
-          this
+  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+    java.setPfxKeyCertOptions(value.java)
+    this
   }
-                    def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
-          java.setPfxTrustOptions(value.java)
-          this
+  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+    java.setPfxTrustOptions(value.java)
+    this
   }
-                    def setPort(value:Int) = {
-          java.setPort(value)
-          this
+  def setPort(value:Int) = {
+    java.setPort(value)
+    this
   }
-            def getPort = {
+  def getPort = {
     java.getPort()
   }
-            def setReceiveBufferSize(value:Int) = {
-          java.setReceiveBufferSize(value)
-          this
+  def setReceiveBufferSize(value:Int) = {
+    java.setReceiveBufferSize(value)
+    this
   }
-            def getReceiveBufferSize = {
+  def getReceiveBufferSize = {
     java.getReceiveBufferSize()
   }
-            def setReuseAddress(value:Boolean) = {
-          java.setReuseAddress(value)
-          this
+  def setReuseAddress(value:Boolean) = {
+    java.setReuseAddress(value)
+    this
   }
-            def isReuseAddress = {
+  def isReuseAddress = {
     java.isReuseAddress()
   }
-            def setSendBufferSize(value:Int) = {
-          java.setSendBufferSize(value)
-          this
+  def setSendBufferSize(value:Int) = {
+    java.setSendBufferSize(value)
+    this
   }
-            def getSendBufferSize = {
+  def getSendBufferSize = {
     java.getSendBufferSize()
   }
-            def setSoLinger(value:Int) = {
-          java.setSoLinger(value)
-          this
+  def setSoLinger(value:Int) = {
+    java.setSoLinger(value)
+    this
   }
-            def getSoLinger = {
+  def getSoLinger = {
     java.getSoLinger()
   }
-            def setSsl(value:Boolean) = {
-          java.setSsl(value)
-          this
+  def setSsl(value:Boolean) = {
+    java.setSsl(value)
+    this
   }
-            def isSsl = {
+  def isSsl = {
     java.isSsl()
   }
-            def setTcpKeepAlive(value:Boolean) = {
-          java.setTcpKeepAlive(value)
-          this
+  def setTcpKeepAlive(value:Boolean) = {
+    java.setTcpKeepAlive(value)
+    this
   }
-            def isTcpKeepAlive = {
+  def isTcpKeepAlive = {
     java.isTcpKeepAlive()
   }
-            def setTcpNoDelay(value:Boolean) = {
-          java.setTcpNoDelay(value)
-          this
+  def setTcpNoDelay(value:Boolean) = {
+    java.setTcpNoDelay(value)
+    this
   }
-            def isTcpNoDelay = {
+  def isTcpNoDelay = {
     java.isTcpNoDelay()
   }
-            def setTrafficClass(value:Int) = {
-          java.setTrafficClass(value)
-          this
+  def setTrafficClass(value:Int) = {
+    java.setTrafficClass(value)
+    this
   }
-            def getTrafficClass = {
+  def getTrafficClass = {
     java.getTrafficClass()
   }
-            def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
-          java.setTrustStoreOptions(value.java)
-          this
+  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+    java.setTrustStoreOptions(value.java)
+    this
   }
-                    def setUseAlpn(value:Boolean) = {
-          java.setUseAlpn(value)
-          this
+  def setUseAlpn(value:Boolean) = {
+    java.setUseAlpn(value)
+    this
   }
-            def isUseAlpn = {
+  def isUseAlpn = {
     java.isUseAlpn()
   }
-            def setUsePooledBuffers(value:Boolean) = {
-          java.setUsePooledBuffers(value)
-          this
+  def setUsePooledBuffers(value:Boolean) = {
+    java.setUsePooledBuffers(value)
+    this
   }
-            def isUsePooledBuffers = {
+  def isUsePooledBuffers = {
     java.isUsePooledBuffers()
   }
-  }
+}
+
 object NetServerOptions {
   type NetServerOptionsJava = io.vertx.core.net.NetServerOptions
   

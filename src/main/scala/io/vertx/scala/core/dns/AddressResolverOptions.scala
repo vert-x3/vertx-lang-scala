@@ -25,99 +25,100 @@ import scala.collection.JavaConversions._
   */
 
 class AddressResolverOptions(val java: io.vertx.core.dns.AddressResolverOptions) {
-          def setCacheMaxTimeToLive(value:Int) = {
-          java.setCacheMaxTimeToLive(value)
-          this
+  def setCacheMaxTimeToLive(value:Int) = {
+    java.setCacheMaxTimeToLive(value)
+    this
   }
-            def getCacheMaxTimeToLive = {
+  def getCacheMaxTimeToLive = {
     java.getCacheMaxTimeToLive()
   }
-            def setCacheMinTimeToLive(value:Int) = {
-          java.setCacheMinTimeToLive(value)
-          this
+  def setCacheMinTimeToLive(value:Int) = {
+    java.setCacheMinTimeToLive(value)
+    this
   }
-            def getCacheMinTimeToLive = {
+  def getCacheMinTimeToLive = {
     java.getCacheMinTimeToLive()
   }
-            def setCacheNegativeTimeToLive(value:Int) = {
-          java.setCacheNegativeTimeToLive(value)
-          this
+  def setCacheNegativeTimeToLive(value:Int) = {
+    java.setCacheNegativeTimeToLive(value)
+    this
   }
-            def getCacheNegativeTimeToLive = {
+  def getCacheNegativeTimeToLive = {
     java.getCacheNegativeTimeToLive()
   }
-            def setHostsPath(value:String) = {
-          java.setHostsPath(value)
-          this
+  def setHostsPath(value:String) = {
+    java.setHostsPath(value)
+    this
   }
-            def getHostsPath = {
+  def getHostsPath = {
     java.getHostsPath()
   }
-            def setHostsValue(value:io.vertx.core.buffer.Buffer) = {
-          java.setHostsValue(value)
-          this
+  def setHostsValue(value:io.vertx.core.buffer.Buffer) = {
+    java.setHostsValue(value)
+    this
   }
-            def getHostsValue = {
+  def getHostsValue = {
     java.getHostsValue()
   }
-            def setMaxQueries(value:Int) = {
-          java.setMaxQueries(value)
-          this
+  def setMaxQueries(value:Int) = {
+    java.setMaxQueries(value)
+    this
   }
-            def getMaxQueries = {
+  def getMaxQueries = {
     java.getMaxQueries()
   }
-            def setNdots(value:Int) = {
-          java.setNdots(value)
-          this
+  def setNdots(value:Int) = {
+    java.setNdots(value)
+    this
   }
-            def getNdots = {
+  def getNdots = {
     java.getNdots()
   }
-            def setOptResourceEnabled(value:Boolean) = {
-          java.setOptResourceEnabled(value)
-          this
+  def setOptResourceEnabled(value:Boolean) = {
+    java.setOptResourceEnabled(value)
+    this
   }
-            def isOptResourceEnabled = {
+  def isOptResourceEnabled = {
     java.isOptResourceEnabled()
   }
-            def setQueryTimeout(value:Long) = {
-          java.setQueryTimeout(value)
-          this
+  def setQueryTimeout(value:Long) = {
+    java.setQueryTimeout(value)
+    this
   }
-            def getQueryTimeout = {
+  def getQueryTimeout = {
     java.getQueryTimeout()
   }
-            def setRdFlag(value:Boolean) = {
-          java.setRdFlag(value)
-          this
+  def setRdFlag(value:Boolean) = {
+    java.setRdFlag(value)
+    this
   }
-            def getRdFlag = {
+  def getRdFlag = {
     java.getRdFlag()
   }
-            def addSearchDomain(value:String) = {
-            java.addSearchDomain(value)
-            this
-    }
-              def setSearchDomains(value:scala.collection.mutable.Buffer[String]) = {
-          java.setSearchDomains(value)
-          this
+  def addSearchDomain(value:String) = {
+    java.addSearchDomain(value)
+    this
   }
-            def getSearchDomains = {
+  def setSearchDomains(value:scala.collection.mutable.Buffer[String]) = {
+    java.setSearchDomains(value)
+    this
+  }
+  def getSearchDomains = {
     java.getSearchDomains()
   }
-            def addServer(value:String) = {
-            java.addServer(value)
-            this
-    }
-              def setServers(value:scala.collection.mutable.Buffer[String]) = {
-          java.setServers(value)
-          this
+  def addServer(value:String) = {
+    java.addServer(value)
+    this
   }
-            def getServers = {
+  def setServers(value:scala.collection.mutable.Buffer[String]) = {
+    java.setServers(value)
+    this
+  }
+  def getServers = {
     java.getServers()
   }
-  }
+}
+
 object AddressResolverOptions {
   type AddressResolverOptionsJava = io.vertx.core.dns.AddressResolverOptions
   

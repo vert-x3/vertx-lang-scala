@@ -25,14 +25,15 @@ import scala.collection.JavaConversions._
   */
 
 class MetricsOptions(val java: io.vertx.core.metrics.MetricsOptions) {
-          def setEnabled(value:Boolean) = {
-          java.setEnabled(value)
-          this
+  def setEnabled(value:Boolean) = {
+    java.setEnabled(value)
+    this
   }
-            def isEnabled = {
+  def isEnabled = {
     java.isEnabled()
   }
-  }
+}
+
 object MetricsOptions {
   type MetricsOptionsJava = io.vertx.core.metrics.MetricsOptions
   

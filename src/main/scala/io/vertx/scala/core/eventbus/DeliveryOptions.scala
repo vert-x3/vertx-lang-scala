@@ -27,25 +27,26 @@ import scala.collection.JavaConversions._
   */
 
 class DeliveryOptions(val java: io.vertx.core.eventbus.DeliveryOptions) {
-          def setCodecName(value:String) = {
-          java.setCodecName(value)
-          this
+  def setCodecName(value:String) = {
+    java.setCodecName(value)
+    this
   }
-            def getCodecName = {
+  def getCodecName = {
     java.getCodecName()
   }
-          def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value:String) = {
     java.addHeader(key, value)
     this
   }
-                      def setSendTimeout(value:Long) = {
-          java.setSendTimeout(value)
-          this
+  def setSendTimeout(value:Long) = {
+    java.setSendTimeout(value)
+    this
   }
-            def getSendTimeout = {
+  def getSendTimeout = {
     java.getSendTimeout()
   }
-  }
+}
+
 object DeliveryOptions {
   type DeliveryOptionsJava = io.vertx.core.eventbus.DeliveryOptions
   

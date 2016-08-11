@@ -52,21 +52,22 @@ import scala.collection.JavaConversions._
   */
 
 class PemTrustOptions(val java: io.vertx.core.net.PemTrustOptions) {
-          def addCertPath(value:String) = {
-            java.addCertPath(value)
-            this
-    }
-              def getCertPaths = {
+  def addCertPath(value:String) = {
+    java.addCertPath(value)
+    this
+  }
+  def getCertPaths = {
     java.getCertPaths()
   }
-            def addCertValue(value:io.vertx.core.buffer.Buffer) = {
-            java.addCertValue(value)
-            this
-    }
-              def getCertValues = {
+  def addCertValue(value:io.vertx.core.buffer.Buffer) = {
+    java.addCertValue(value)
+    this
+  }
+  def getCertValues = {
     java.getCertValues()
   }
-  }
+}
+
 object PemTrustOptions {
   type PemTrustOptionsJava = io.vertx.core.net.PemTrustOptions
   

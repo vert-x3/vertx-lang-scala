@@ -27,49 +27,50 @@ import scala.collection.JavaConversions._
   */
 
 class Http2Settings(val java: io.vertx.core.http.Http2Settings) {
-          def setHeaderTableSize(value:Long) = {
-          java.setHeaderTableSize(value)
-          this
+  def setHeaderTableSize(value:Long) = {
+    java.setHeaderTableSize(value)
+    this
   }
-            def getHeaderTableSize = {
+  def getHeaderTableSize = {
     java.getHeaderTableSize()
   }
-            def setInitialWindowSize(value:Int) = {
-          java.setInitialWindowSize(value)
-          this
+  def setInitialWindowSize(value:Int) = {
+    java.setInitialWindowSize(value)
+    this
   }
-            def getInitialWindowSize = {
+  def getInitialWindowSize = {
     java.getInitialWindowSize()
   }
-            def setMaxConcurrentStreams(value:Long) = {
-          java.setMaxConcurrentStreams(value)
-          this
+  def setMaxConcurrentStreams(value:Long) = {
+    java.setMaxConcurrentStreams(value)
+    this
   }
-            def getMaxConcurrentStreams = {
+  def getMaxConcurrentStreams = {
     java.getMaxConcurrentStreams()
   }
-            def setMaxFrameSize(value:Int) = {
-          java.setMaxFrameSize(value)
-          this
+  def setMaxFrameSize(value:Int) = {
+    java.setMaxFrameSize(value)
+    this
   }
-            def getMaxFrameSize = {
+  def getMaxFrameSize = {
     java.getMaxFrameSize()
   }
-            def setMaxHeaderListSize(value:Int) = {
-          java.setMaxHeaderListSize(value)
-          this
+  def setMaxHeaderListSize(value:Int) = {
+    java.setMaxHeaderListSize(value)
+    this
   }
-            def getMaxHeaderListSize = {
+  def getMaxHeaderListSize = {
     java.getMaxHeaderListSize()
   }
-            def setPushEnabled(value:Boolean) = {
-          java.setPushEnabled(value)
-          this
+  def setPushEnabled(value:Boolean) = {
+    java.setPushEnabled(value)
+    this
   }
-            def isPushEnabled = {
+  def isPushEnabled = {
     java.isPushEnabled()
   }
-  }
+}
+
 object Http2Settings {
   type Http2SettingsJava = io.vertx.core.http.Http2Settings
   

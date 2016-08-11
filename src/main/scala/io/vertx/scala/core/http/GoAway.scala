@@ -24,28 +24,29 @@ import scala.collection.JavaConversions._
   */
 
 class GoAway(val java: io.vertx.core.http.GoAway) {
-          def setDebugData(value:io.vertx.core.buffer.Buffer) = {
-          java.setDebugData(value)
-          this
+  def setDebugData(value:io.vertx.core.buffer.Buffer) = {
+    java.setDebugData(value)
+    this
   }
-            def getDebugData = {
+  def getDebugData = {
     java.getDebugData()
   }
-            def setErrorCode(value:Long) = {
-          java.setErrorCode(value)
-          this
+  def setErrorCode(value:Long) = {
+    java.setErrorCode(value)
+    this
   }
-            def getErrorCode = {
+  def getErrorCode = {
     java.getErrorCode()
   }
-            def setLastStreamId(value:Int) = {
-          java.setLastStreamId(value)
-          this
+  def setLastStreamId(value:Int) = {
+    java.setLastStreamId(value)
+    this
   }
-            def getLastStreamId = {
+  def getLastStreamId = {
     java.getLastStreamId()
   }
-  }
+}
+
 object GoAway {
   type GoAwayJava = io.vertx.core.http.GoAway
   

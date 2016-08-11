@@ -89,77 +89,77 @@ import scala.collection.JavaConversions._\n
 
 class @{typeName}(val java: @{type.raw.name}) {\n
 @foreach{property:properties}
-  @if{property.adder}
-    @if{property.isMap}
+@if{property.adder}
+@if{property.isMap}
   def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n
     java.@{property.adderMethod}(key, value)\n
     this\n
   }\n
-    @else{}
-    def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
-      @if{property.type.kind == CLASS_DATA_OBJECT}
-      java.@{property.adderMethod}(value.java)\n
-      @else{}
-      java.@{property.adderMethod}(value)\n
-      @end{}
-      this\n
-    }\n
-    @end{}
-  @end{}
-  @if{property.setter}
-    @if{property.isList}
+@else{}
+  def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
+@if{property.type.kind == CLASS_DATA_OBJECT}
+    java.@{property.adderMethod}(value.java)\n
+@else{}
+    java.@{property.adderMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@end{}
+@end{}
+@if{property.setter}
+@if{property.isList}
   def @{property.setterMethod}(value:scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
-      @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     java.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
-      @else{property.type.kind == CLASS_DATA_OBJECT}
+@else{property.type.kind == CLASS_DATA_OBJECT}
     java.@{property.setterMethod}(value.map(_.java))\n
-      @else{}
+@else{}
     java.@{property.setterMethod}(value)\n
-      @end{}
+@end{}
     this\n
   }\n
-    @else{property.isSet}
+@else{property.isSet}
   def @{property.setterMethod}(value:Set[@{toScalaType(property.type)}]) = {\n
-      @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     java.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
-      @else{property.type.kind == CLASS_DATA_OBJECT}
+@else{property.type.kind == CLASS_DATA_OBJECT}
     java.@{property.setterMethod}(value.map(_.java))\n
-      @else{}
+@else{}
     java.@{property.setterMethod}(value)\n
-      @end{}
+@end{}
     this\n
   }\n
-    @else{property.isMap}
+@else{property.isMap}
   def @{property.setterMethod}(value:Map[String, @{toScalaType(property.type)}]) = {\n
-      @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     java.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box))\n
-      @else{property.type.kind == CLASS_DATA_OBJECT}
+@else{property.type.kind == CLASS_DATA_OBJECT}
     java.@{property.setterMethod}(value.mapValues(_.java))\n
-      @else{}
+@else{}
     java.@{property.setterMethod}(value)\n
-      @end{}
+@end{}
     this\n
   }\n
-    @else{}
+@else{}
   def @{property.setterMethod}(value:@{toScalaType(property.type)}) = {\n
-      @if{property.type.kind == CLASS_DATA_OBJECT}
+@if{property.type.kind == CLASS_DATA_OBJECT}
     java.@{property.setterMethod}(value.java)\n
-      @else{}
+@else{}
     java.@{property.setterMethod}(value)\n
-      @end{}
+@end{}
     this\n
   }\n
-    @end{}
-  @end{}
-  @comment{TODO: some necessary filtering as PropertyInfo has no information about static methods}
-  @if{(property.setter || property.adder) && property.getterMethod != null}
+@end{}
+@end{}
+@comment{TODO: some necessary filtering as PropertyInfo has no information about static methods}
+@if{(property.setter || property.adder) && property.getterMethod != null}
   def @{property.getterMethod} = {\n
     java.@{property.getterMethod}()\n
   }\n
-  @end{}
+@end{}
 @end{}
 }\n
-
+\n
 object @{type.raw.simpleName} {\n
   type @{jTypeName} = @{type.raw.name}\n
   \n

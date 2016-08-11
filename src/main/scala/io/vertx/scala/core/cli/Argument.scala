@@ -25,56 +25,57 @@ import scala.collection.JavaConversions._
   */
 
 class Argument(val java: io.vertx.core.cli.Argument) {
-          def setArgName(value:String) = {
-          java.setArgName(value)
-          this
+  def setArgName(value:String) = {
+    java.setArgName(value)
+    this
   }
-            def getArgName = {
+  def getArgName = {
     java.getArgName()
   }
-            def setDefaultValue(value:String) = {
-          java.setDefaultValue(value)
-          this
+  def setDefaultValue(value:String) = {
+    java.setDefaultValue(value)
+    this
   }
-            def getDefaultValue = {
+  def getDefaultValue = {
     java.getDefaultValue()
   }
-            def setDescription(value:String) = {
-          java.setDescription(value)
-          this
+  def setDescription(value:String) = {
+    java.setDescription(value)
+    this
   }
-            def getDescription = {
+  def getDescription = {
     java.getDescription()
   }
-            def setHidden(value:Boolean) = {
-          java.setHidden(value)
-          this
+  def setHidden(value:Boolean) = {
+    java.setHidden(value)
+    this
   }
-            def isHidden = {
+  def isHidden = {
     java.isHidden()
   }
-            def setIndex(value:Int) = {
-          java.setIndex(value)
-          this
+  def setIndex(value:Int) = {
+    java.setIndex(value)
+    this
   }
-            def getIndex = {
+  def getIndex = {
     java.getIndex()
   }
-            def setMultiValued(value:Boolean) = {
-          java.setMultiValued(value)
-          this
+  def setMultiValued(value:Boolean) = {
+    java.setMultiValued(value)
+    this
   }
-            def isMultiValued = {
+  def isMultiValued = {
     java.isMultiValued()
   }
-            def setRequired(value:Boolean) = {
-          java.setRequired(value)
-          this
+  def setRequired(value:Boolean) = {
+    java.setRequired(value)
+    this
   }
-            def isRequired = {
+  def isRequired = {
     java.isRequired()
   }
-  }
+}
+
 object Argument {
   type ArgumentJava = io.vertx.core.cli.Argument
   
