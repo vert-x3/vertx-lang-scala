@@ -60,7 +60,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the scala-function to notify once the write completes.
     * @return a reference to this, so the API can be used fluently
     */
-  def send(packet: io.vertx.scala.core.buffer.Buffer, port: Int, host: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def sendWithHandler(packet: io.vertx.scala.core.buffer.Buffer, port: Int, host: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(packet.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -85,7 +85,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the scala-function to notify once the write completes.
     * @return a reference to this, so the API can be used fluently
     */
-  def send(str: String, port: Int, host: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def sendWithHandler(str: String, port: Int, host: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(str, port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -100,7 +100,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the scala-function to notify once the write completes.
     * @return a reference to this, so the API can be used fluently
     */
-  def send(str: String, enc: String, port: Int, host: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def sendWithHandler(str: String, enc: String, port: Int, host: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.send(str, enc, port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -140,7 +140,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler then handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def listenMulticastGroup(multicastAddress: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def listenMulticastGroupWithHandler(multicastAddress: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listenMulticastGroup(multicastAddress, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -154,7 +154,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler then handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def listenMulticastGroupWithHandler(multicastAddress: String, networkInterface: String, source: scala.Option[String])( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -166,7 +166,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler then handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def unlistenMulticastGroup(multicastAddress: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def unlistenMulticastGroupWithHandler(multicastAddress: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.unlistenMulticastGroup(multicastAddress, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -180,7 +180,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def unlistenMulticastGroupWithHandler(multicastAddress: String, networkInterface: String, source: scala.Option[String])( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -193,7 +193,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def blockMulticastGroup(multicastAddress: String, sourceToBlock: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def blockMulticastGroupWithHandler(multicastAddress: String, sourceToBlock: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.blockMulticastGroup(multicastAddress, sourceToBlock, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -207,7 +207,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the handler to notify once the operation completes
     * @return a reference to this, so the API can be used fluently
     */
-  def blockMulticastGroup(multicastAddress: String, networkInterface: String, sourceToBlock: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def blockMulticastGroupWithHandler(multicastAddress: String, networkInterface: String, sourceToBlock: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.blockMulticastGroup(multicastAddress, networkInterface, sourceToBlock, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }
@@ -219,7 +219,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @param handler the handler will be called when listening
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int, host: String, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
+  def listenWithHandler(port: Int, host: String)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket] => Unit): io.vertx.scala.core.datagram.DatagramSocket = {
     _asJava.listen(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.datagram.DatagramSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.datagram.DatagramSocket, io.vertx.scala.core.datagram.DatagramSocket](x,(x => if (x == null) null else DatagramSocket.apply(x))))(handler))
     this
   }

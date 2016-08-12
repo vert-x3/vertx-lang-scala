@@ -241,7 +241,10 @@
     for (param : method.params) {
         if (first) {
           first = false;
-        } else {
+        } else if(param.type.kind == CLASS_HANDLER) {
+          paramList += ')( ';
+        }
+        else {
           paramList += ', ';
         }
         paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);

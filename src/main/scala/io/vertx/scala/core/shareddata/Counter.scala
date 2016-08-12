@@ -66,7 +66,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the value to add
     * @param resultHandler handler which will be passed the value
     */
-  def addAndGet(value: Long, resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def addAndGetWithHandler(value: Long)( resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
     _asJava.addAndGet(value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
   }
 
@@ -75,7 +75,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the value to add
     * @param resultHandler handler which will be passed the value
     */
-  def getAndAdd(value: Long, resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
+  def getAndAddWithHandler(value: Long)( resultHandler: io.vertx.core.AsyncResult [Long] => Unit): Unit = {
     _asJava.getAndAdd(value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Long], io.vertx.core.AsyncResult [Long]](x => io.vertx.lang.scala.AsyncResult[java.lang.Long, Long](x,(x => x)))(resultHandler))
   }
 
@@ -86,7 +86,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * @param value the new value
     * @param resultHandler the handler will be passed true on success
     */
-  def compareAndSet(expected: Long, value: Long, resultHandler: io.vertx.core.AsyncResult [Boolean] => Unit): Unit = {
+  def compareAndSetWithHandler(expected: Long, value: Long)( resultHandler: io.vertx.core.AsyncResult [Boolean] => Unit): Unit = {
     _asJava.compareAndSet(expected, value, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(resultHandler))
   }
 

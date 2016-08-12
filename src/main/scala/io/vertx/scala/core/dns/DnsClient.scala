@@ -36,7 +36,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The handler will get notified with the resolved address if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookupWithHandler(name: String)( handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.lookup(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
@@ -47,7 +47,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The handler will get notified with the resolved [[java.net.Inet4Address]] if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup4(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookup4WithHandler(name: String)( handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.lookup4(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
@@ -58,7 +58,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with the resolved [[java.net.Inet6Address]] if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup6(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def lookup6WithHandler(name: String)( handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.lookup6(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
@@ -69,7 +69,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet4Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def resolveA(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveAWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveA(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
@@ -80,7 +80,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The handler will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet6Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def resolveAAAA(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveAAAAWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveAAAA(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
@@ -91,7 +91,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolveCNAME(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveCNAMEWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveCNAME(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
@@ -102,7 +102,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The handler will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolveMX(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveMXWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveMX(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.MxRecord]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[io.vertx.core.dns.MxRecord], scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]](x,x => if (x == null) null else x.asScala.map(MxRecord.apply)))(handler))
     this
   }
@@ -113,7 +113,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolveTXT(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveTXTWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveTXT(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
@@ -124,7 +124,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolvePTR(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolvePTRWithHandler(name: String)( handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolvePTR(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
@@ -135,7 +135,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolveNS(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveNSWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveNS(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x,x => if (x == null) null else x.asScala))(handler))
     this
   }
@@ -146,7 +146,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolveSRV(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def resolveSRVWithHandler(name: String)( handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.resolveSRV(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.SrvRecord]], io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]](x => io.vertx.lang.scala.AsyncResult[java.util.List[io.vertx.core.dns.SrvRecord], scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]](x,x => if (x == null) null else x.asScala.map(SrvRecord.apply)))(handler))
     this
   }
@@ -158,7 +158,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param handler the scala-function to notify with the [[AsyncResult]]. The handler will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def reverseLookup(ipaddress: String, handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
+  def reverseLookupWithHandler(ipaddress: String)( handler: io.vertx.core.AsyncResult [String] => Unit): io.vertx.scala.core.dns.DnsClient = {
     _asJava.reverseLookup(ipaddress, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(handler))
     this
   }
