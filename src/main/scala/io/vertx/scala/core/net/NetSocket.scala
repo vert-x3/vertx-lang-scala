@@ -173,7 +173,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+  def sendFileWithHandler(filename: String)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
@@ -186,7 +186,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+  def sendFileWithHandler(filename: String, offset: Long)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, offset, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }
@@ -200,7 +200,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
+  def sendFileWithHandler(filename: String, offset: Long, length: Long)( resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.net.NetSocket = {
     _asJava.sendFile(filename, offset, length, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
     this
   }

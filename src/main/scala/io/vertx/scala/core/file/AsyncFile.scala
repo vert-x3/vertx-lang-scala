@@ -131,7 +131,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @param handler the handler to call when the write is complete
     * @return a reference to this, so the API can be used fluently
     */
-  def write(buffer: io.vertx.scala.core.buffer.Buffer, position: Long, handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
+  def writeWithHandler(buffer: io.vertx.scala.core.buffer.Buffer, position: Long)( handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
     _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
     this
   }
@@ -152,7 +152,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @param handler the handler to call when the write is complete
     * @return a reference to this, so the API can be used fluently
     */
-  def read(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
+  def readWithHandler(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
     _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(handler))
     this
   }
