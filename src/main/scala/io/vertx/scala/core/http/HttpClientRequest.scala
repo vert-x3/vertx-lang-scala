@@ -414,4 +414,5 @@ object HttpClientRequest {
 
   def apply(_asJava: io.vertx.core.http.HttpClientRequest): io.vertx.scala.core.http.HttpClientRequest =
     new io.vertx.scala.core.http.HttpClientRequest(_asJava)
+
 }

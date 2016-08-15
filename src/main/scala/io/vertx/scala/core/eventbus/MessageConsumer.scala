@@ -131,4 +131,5 @@ object MessageConsumer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): io.vertx.scala.core.eventbus.MessageConsumer[T] =
     new io.vertx.scala.core.eventbus.MessageConsumer(_asJava)
+
 }

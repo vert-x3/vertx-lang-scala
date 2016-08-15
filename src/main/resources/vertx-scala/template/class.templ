@@ -112,17 +112,20 @@ def isHandler(method) {
 	\n
 	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
 	    new @{toScalaType(type);}(_asJava)\n
+	\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
 	  def @{method.name}@{isHandler(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
+	\n
 	@end{}
 	@end{}
 
 	}\n
 @else{}
-	object @{type.raw.simpleName} {\n\n
+	object @{type.raw.simpleName} {\n
+	\n
 		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
 		    new @includeNamed{'writeImplType'}(_asJava)\n
 		\n

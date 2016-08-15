@@ -256,7 +256,9 @@ object CLI {
 
   def apply(_asJava: io.vertx.core.cli.CLI): io.vertx.scala.core.cli.CLI =
     new io.vertx.scala.core.cli.CLI(_asJava)
+
   def create(name: String): io.vertx.scala.core.cli.CLI = {
     CLI.apply(io.vertx.core.cli.CLI.create(name))
   }
+
 }

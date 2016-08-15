@@ -256,4 +256,5 @@ object DatagramSocket {
 
   def apply(_asJava: io.vertx.core.datagram.DatagramSocket): io.vertx.scala.core.datagram.DatagramSocket =
     new io.vertx.scala.core.datagram.DatagramSocket(_asJava)
+
 }

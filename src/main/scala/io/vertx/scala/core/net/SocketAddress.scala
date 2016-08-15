@@ -41,4 +41,5 @@ object SocketAddress {
 
   def apply(_asJava: io.vertx.core.net.SocketAddress): io.vertx.scala.core.net.SocketAddress =
     new io.vertx.scala.core.net.SocketAddress(_asJava)
+
 }

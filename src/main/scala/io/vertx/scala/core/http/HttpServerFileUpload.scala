@@ -122,4 +122,5 @@ object HttpServerFileUpload {
 
   def apply(_asJava: io.vertx.core.http.HttpServerFileUpload): io.vertx.scala.core.http.HttpServerFileUpload =
     new io.vertx.scala.core.http.HttpServerFileUpload(_asJava)
+
 }

@@ -215,4 +215,5 @@ object AsyncFile {
 
   def apply(_asJava: io.vertx.core.file.AsyncFile): io.vertx.scala.core.file.AsyncFile =
     new io.vertx.scala.core.file.AsyncFile(_asJava)
+
 }

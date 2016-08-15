@@ -96,4 +96,5 @@ object Counter {
 
   def apply(_asJava: io.vertx.core.shareddata.Counter): io.vertx.scala.core.shareddata.Counter =
     new io.vertx.scala.core.shareddata.Counter(_asJava)
+
 }

@@ -257,4 +257,5 @@ object HttpConnection {
 
   def apply(_asJava: io.vertx.core.http.HttpConnection): io.vertx.scala.core.http.HttpConnection =
     new io.vertx.scala.core.http.HttpConnection(_asJava)
+
 }

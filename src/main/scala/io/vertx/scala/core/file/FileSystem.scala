@@ -643,4 +643,5 @@ object FileSystem {
 
   def apply(_asJava: io.vertx.core.file.FileSystem): io.vertx.scala.core.file.FileSystem =
     new io.vertx.scala.core.file.FileSystem(_asJava)
+
 }

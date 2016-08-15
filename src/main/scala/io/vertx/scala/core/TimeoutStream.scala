@@ -74,4 +74,5 @@ object TimeoutStream {
 
   def apply(_asJava: io.vertx.core.TimeoutStream): io.vertx.scala.core.TimeoutStream =
     new io.vertx.scala.core.TimeoutStream(_asJava)
+
 }

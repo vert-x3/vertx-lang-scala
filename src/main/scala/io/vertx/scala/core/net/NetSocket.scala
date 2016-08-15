@@ -274,4 +274,5 @@ object NetSocket {
 
   def apply(_asJava: io.vertx.core.net.NetSocket): io.vertx.scala.core.net.NetSocket =
     new io.vertx.scala.core.net.NetSocket(_asJava)
+
 }

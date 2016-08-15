@@ -1297,4 +1297,5 @@ object HttpClient {
 
   def apply(_asJava: io.vertx.core.http.HttpClient): io.vertx.scala.core.http.HttpClient =
     new io.vertx.scala.core.http.HttpClient(_asJava)
+
 }

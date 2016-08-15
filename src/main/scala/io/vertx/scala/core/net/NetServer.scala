@@ -164,4 +164,5 @@ object NetServer {
 
   def apply(_asJava: io.vertx.core.net.NetServer): io.vertx.scala.core.net.NetServer =
     new io.vertx.scala.core.net.NetServer(_asJava)
+
 }

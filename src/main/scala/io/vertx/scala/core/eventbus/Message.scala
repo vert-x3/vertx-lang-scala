@@ -132,4 +132,5 @@ object Message {
 
   def apply[T](_asJava: io.vertx.core.eventbus.Message[T]): io.vertx.scala.core.eventbus.Message[T] =
     new io.vertx.scala.core.eventbus.Message(_asJava)
+
 }

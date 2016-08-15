@@ -52,4 +52,5 @@ object DatagramPacket {
 
   def apply(_asJava: io.vertx.core.datagram.DatagramPacket): io.vertx.scala.core.datagram.DatagramPacket =
     new io.vertx.scala.core.datagram.DatagramPacket(_asJava)
+
 }
