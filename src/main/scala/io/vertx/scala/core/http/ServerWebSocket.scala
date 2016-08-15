@@ -229,4 +229,5 @@ object ServerWebSocket {
 
   def apply(_asJava: io.vertx.core.http.ServerWebSocket): io.vertx.scala.core.http.ServerWebSocket =
     new io.vertx.scala.core.http.ServerWebSocket(_asJava)
+
 }

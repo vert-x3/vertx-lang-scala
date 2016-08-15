@@ -73,4 +73,5 @@ object NetClient {
 
   def apply(_asJava: io.vertx.core.net.NetClient): io.vertx.scala.core.net.NetClient =
     new io.vertx.scala.core.net.NetClient(_asJava)
+
 }

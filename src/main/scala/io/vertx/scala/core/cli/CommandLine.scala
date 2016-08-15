@@ -187,7 +187,9 @@ object CommandLine {
 
   def apply(_asJava: io.vertx.core.cli.CommandLine): io.vertx.scala.core.cli.CommandLine =
     new io.vertx.scala.core.cli.CommandLine(_asJava)
+
   def create(cli: io.vertx.scala.core.cli.CLI): io.vertx.scala.core.cli.CommandLine = {
     CommandLine.apply(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
   }
+
 }

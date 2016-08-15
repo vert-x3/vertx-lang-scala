@@ -55,4 +55,5 @@ object SendContext {
 
   def apply[T](_asJava: io.vertx.core.eventbus.SendContext[T]): io.vertx.scala.core.eventbus.SendContext[T] =
     new io.vertx.scala.core.eventbus.SendContext(_asJava)
+
 }

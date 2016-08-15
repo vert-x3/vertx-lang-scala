@@ -199,16 +199,21 @@ object Future {
 
   def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
     new io.vertx.scala.core.Future(_asJava)
+
   def future[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.future())
   }
+
   def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
+
   def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture(result))
   }
+
   def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
     Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
   }
+
 }

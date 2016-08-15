@@ -212,13 +212,17 @@ object Context {
 
   def apply(_asJava: io.vertx.core.Context): io.vertx.scala.core.Context =
     new io.vertx.scala.core.Context(_asJava)
+
   def isOnWorkerThread(): Boolean = {
     io.vertx.core.Context.isOnWorkerThread()
   }
+
   def isOnEventLoopThread(): Boolean = {
     io.vertx.core.Context.isOnEventLoopThread()
   }
+
   def isOnVertxThread(): Boolean = {
     io.vertx.core.Context.isOnVertxThread()
   }
+
 }

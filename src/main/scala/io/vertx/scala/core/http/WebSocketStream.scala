@@ -67,4 +67,5 @@ object WebSocketStream {
 
   def apply(_asJava: io.vertx.core.http.WebSocketStream): io.vertx.scala.core.http.WebSocketStream =
     new io.vertx.scala.core.http.WebSocketStream(_asJava)
+
 }

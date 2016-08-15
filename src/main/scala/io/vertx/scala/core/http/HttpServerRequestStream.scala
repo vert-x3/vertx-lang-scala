@@ -62,4 +62,5 @@ object HttpServerRequestStream {
 
   def apply(_asJava: io.vertx.core.http.HttpServerRequestStream): io.vertx.scala.core.http.HttpServerRequestStream =
     new io.vertx.scala.core.http.HttpServerRequestStream(_asJava)
+
 }

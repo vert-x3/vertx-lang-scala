@@ -43,4 +43,5 @@ object Lock {
 
   def apply(_asJava: io.vertx.core.shareddata.Lock): io.vertx.scala.core.shareddata.Lock =
     new io.vertx.scala.core.shareddata.Lock(_asJava)
+
 }

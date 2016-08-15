@@ -67,4 +67,5 @@ object HttpFrame {
 
   def apply(_asJava: io.vertx.core.http.HttpFrame): io.vertx.scala.core.http.HttpFrame =
     new io.vertx.scala.core.http.HttpFrame(_asJava)
+
 }

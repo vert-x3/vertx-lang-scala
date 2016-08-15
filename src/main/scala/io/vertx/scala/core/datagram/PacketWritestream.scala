@@ -82,4 +82,5 @@ object PacketWritestream {
 
   def apply(_asJava: io.vertx.core.datagram.PacketWritestream): io.vertx.scala.core.datagram.PacketWritestream =
     new io.vertx.scala.core.datagram.PacketWritestream(_asJava)
+
 }

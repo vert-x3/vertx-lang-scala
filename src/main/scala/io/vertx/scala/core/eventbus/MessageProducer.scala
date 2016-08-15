@@ -117,4 +117,5 @@ object MessageProducer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): io.vertx.scala.core.eventbus.MessageProducer[T] =
     new io.vertx.scala.core.eventbus.MessageProducer(_asJava)
+
 }

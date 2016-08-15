@@ -218,4 +218,5 @@ object EventBus {
 
   def apply(_asJava: io.vertx.core.eventbus.EventBus): io.vertx.scala.core.eventbus.EventBus =
     new io.vertx.scala.core.eventbus.EventBus(_asJava)
+
 }

@@ -199,4 +199,5 @@ object HttpServer {
 
   def apply(_asJava: io.vertx.core.http.HttpServer): io.vertx.scala.core.http.HttpServer =
     new io.vertx.scala.core.http.HttpServer(_asJava)
+
 }

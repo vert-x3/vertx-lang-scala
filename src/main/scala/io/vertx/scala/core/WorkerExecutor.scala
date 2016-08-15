@@ -83,4 +83,5 @@ object WorkerExecutor {
 
   def apply(_asJava: io.vertx.core.WorkerExecutor): io.vertx.scala.core.WorkerExecutor =
     new io.vertx.scala.core.WorkerExecutor(_asJava)
+
 }

@@ -92,4 +92,5 @@ object SharedData {
 
   def apply(_asJava: io.vertx.core.shareddata.SharedData): io.vertx.scala.core.shareddata.SharedData =
     new io.vertx.scala.core.shareddata.SharedData(_asJava)
+
 }

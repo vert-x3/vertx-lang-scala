@@ -62,4 +62,5 @@ object NetSocketStream {
 
   def apply(_asJava: io.vertx.core.net.NetSocketStream): io.vertx.scala.core.net.NetSocketStream =
     new io.vertx.scala.core.net.NetSocketStream(_asJava)
+
 }

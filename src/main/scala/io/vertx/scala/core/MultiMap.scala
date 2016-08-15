@@ -148,7 +148,9 @@ object MultiMap {
 
   def apply(_asJava: io.vertx.core.MultiMap): io.vertx.scala.core.MultiMap =
     new io.vertx.scala.core.MultiMap(_asJava)
+
   def caseInsensitiveMultiMap(): io.vertx.scala.core.MultiMap = {
     MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
   }
+
 }

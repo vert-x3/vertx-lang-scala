@@ -451,16 +451,21 @@ object Vertx {
 
   def apply(_asJava: io.vertx.core.Vertx): io.vertx.scala.core.Vertx =
     new io.vertx.scala.core.Vertx(_asJava)
+
   def vertx(): io.vertx.scala.core.Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx())
   }
+
   def vertx(options: io.vertx.scala.core.VertxOptions): io.vertx.scala.core.Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx(options.asJava))
   }
+
   def clusteredVertxWithHandler(options: io.vertx.scala.core.VertxOptions)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit): Unit = {
     io.vertx.core.Vertx.clusteredVertx(options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
   }
+
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
         scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
   }
+
 }

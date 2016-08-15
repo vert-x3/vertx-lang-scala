@@ -169,4 +169,5 @@ object DnsClient {
 
   def apply(_asJava: io.vertx.core.dns.DnsClient): io.vertx.scala.core.dns.DnsClient =
     new io.vertx.scala.core.dns.DnsClient(_asJava)
+
 }
