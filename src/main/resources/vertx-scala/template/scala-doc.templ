@@ -2,6 +2,7 @@
 
   def methodDoc(method, indentation) {
     var doc = '';
+    var future = shouldMethodReturnAFuture(method);
 
     var commentedIndentation = indentation;
     commentedIndentation += "  *";
@@ -14,7 +15,7 @@
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
       for (param : method.params) {
-        if (param.description != null) {
+        if (param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
           doc += commentedIndentation;
           doc += " @param " + param.name + " ";
           doc += convertLink(param.description);
@@ -25,7 +26,12 @@
           doc += "\n";
         }
       }
-      if (!returnType.name.equals("void")) {
+      if(future) {
+        doc += commentedIndentation;
+        doc += " @return a future";
+        doc += "\n";
+      }
+      else if (!returnType.name.equals("void")) {
         if (returnDescription != null) {
           doc += commentedIndentation;
           doc += " @return ";

@@ -29,9 +29,10 @@ class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
 
   def asJava: io.vertx.core.CompositeFuture = _asJava
 
-  def setHandler(handler: io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture] => Unit): io.vertx.scala.core.CompositeFuture = {
-    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.CompositeFuture, io.vertx.scala.core.CompositeFuture](x,(x => if (x == null) null else CompositeFuture.apply(x))))(handler))
-    this
+  def setFuture(handler: io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture] => Unit): concurrent.Future[io.vertx.scala.core.CompositeFuture] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.CompositeFuture,io.vertx.scala.core.CompositeFuture]((x => if (x == null) null else CompositeFuture.apply(x)))
+    _asJava.setHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**

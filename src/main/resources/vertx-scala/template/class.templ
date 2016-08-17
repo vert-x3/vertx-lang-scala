@@ -90,16 +90,7 @@ import @{importedType}\n
 
  {\n
 \n
-@code{
-def isHandler(method) {
-  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
-    return 'WithHandler';
-  }
-  else {
-    return '';
-  }
-}
-}
+
 @if{concrete}
 	@includeNamed{'classbody.templ'; indentation=''}
 @else{}
@@ -114,10 +105,28 @@ def isHandler(method) {
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
+@code{
+  var future = shouldMethodReturnAFuture(method);
+  var methodName = method.name;
+  if(future) {
+    if(methodName.endsWith('Handler'))
+      methodName = methodName.substring(0, methodName.length-7);
+    methodName += 'Future';
+  }
+  methodName = escapeIfKeyword(methodName);
+}
 	@if{includeMethod(method, staticMethods)}
-	  def @{method.name}@{isHandler(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	@if{future}
+	  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
+			@{methodInvocation(type.raw.name, method, '    ');}
+		    promiseAndHandler._2.future\n
+	  }\n
+	@else{}
+	  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
+	@end{}
 	\n
 	@end{}
 	@end{}
