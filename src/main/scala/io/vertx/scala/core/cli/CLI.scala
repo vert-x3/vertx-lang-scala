@@ -130,7 +130,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of options, empty if none.
     */
   def getOptions(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option] = {
-    _asJava.getOptions().asScala.map(x => /*wuhu*/Option(x))
+    _asJava.getOptions().asScala.map(x => Option(x))
   }
 
   /**
@@ -169,7 +169,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the list of argument, empty if none.
     */
   def getArguments(): scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument] = {
-    _asJava.getArguments().asScala.map(x => /*wuhu*/Argument(x))
+    _asJava.getArguments().asScala.map(x => Argument(x))
   }
 
   /**

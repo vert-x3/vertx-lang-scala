@@ -3,18 +3,34 @@
 
 @comment{"# Generic asJava method"}
 @{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
-
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
+@code{
+  var future = shouldMethodReturnAFuture(method);
+  var methodName = method.name;
+  if(future) {
+    if(methodName.endsWith('Handler'))
+      methodName = methodName.substring(0, methodName.length-7);
+    methodName += 'Future';
+  }
+  methodName = escapeIfKeyword(methodName);
+}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
 @comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
-@{indentation}  override def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  override def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
-@{indentation}  def @{escapeIfKeyword(method.name + isHandler(method))}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{future}
+@{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
+@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@{indentation}    promiseAndHandler._2.future\n
+@{indentation}  }\n\n
+@else{}
+@{indentation}  def @{methodName}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
@@ -26,6 +42,7 @@
 @code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
 @end{}
 @{indentation}  }\n\n
+@end{}
 @end{}
 @end{}
 @end{}

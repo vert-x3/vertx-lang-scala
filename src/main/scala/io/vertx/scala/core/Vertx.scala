@@ -217,7 +217,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setTimerWithHandler(delay: Long)( handler: Long => Unit): Long = {
+  def setTimer(delay: Long, handler: Long => Unit): Long = {
     _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -238,7 +238,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setPeriodicWithHandler(delay: Long)( handler: Long => Unit): Long = {
+  def setPeriodic(delay: Long, handler: Long => Unit): Long = {
     _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -283,10 +283,11 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
 
   /**
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
-    * @param completionHandler The handler will be notified when the close is complete.
-    */
-  def close(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    * @return a future WUHUUU    */
+  def closeFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.close(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -309,10 +310,11 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * 
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
-    * @param completionHandler a handler which will be notified when the deployment is complete
-    */
-  def deployVerticleWithHandler(name: String)( completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
-    _asJava.deployVerticle(name, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+    * @return a future WUHUUU    */
+  def deployVerticleFuture(name: String): concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
+    _asJava.deployVerticle(name, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -330,10 +332,11 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
-    * @param completionHandler a handler which will be notified when the deployment is complete
-    */
-  def deployVerticleWithHandler(name: String, options: io.vertx.scala.core.DeploymentOptions)( completionHandler: io.vertx.core.AsyncResult [String] => Unit): Unit = {
-    _asJava.deployVerticle(name, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.String], io.vertx.core.AsyncResult [String]](x => io.vertx.lang.scala.AsyncResult[java.lang.String, String](x,(x => x)))(completionHandler))
+    * @return a future WUHUUU    */
+  def deployVerticleFuture(name: String, options: io.vertx.scala.core.DeploymentOptions): concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
+    _asJava.deployVerticle(name, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -349,10 +352,11 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
   /**
     * Like [[io.vertx.scala.core.Vertx #undeploy(String)]] but the completionHandler will be notified when the undeployment is complete.
     * @param deploymentID the deployment ID
-    * @param completionHandler a handler which will be notified when the undeployment is complete
-    */
-  def undeployWithHandler(deploymentID: String)( completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.undeploy(deploymentID, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+    * @return a future WUHUUU    */
+  def undeployFuture(deploymentID: String): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.undeploy(deploymentID, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -387,17 +391,20 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-    * @param resultHandler handler that will be called when the blocking code is complete
-    */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
+    * @return a future WUHUUU    */
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx#executeBlocking]] called with ordered = true.
-    */
-  def executeBlockingWithHandler[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit)( resultHandler: io.vertx.core.AsyncResult [T] => Unit): Unit = {
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(resultHandler))
+    * @return a future WUHUUU    */
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -460,8 +467,10 @@ object Vertx {
     Vertx.apply(io.vertx.core.Vertx.vertx(options.asJava))
   }
 
-  def clusteredVertxWithHandler(options: io.vertx.scala.core.VertxOptions)( resultHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx] => Unit): Unit = {
-    io.vertx.core.Vertx.clusteredVertx(options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.Vertx], io.vertx.core.AsyncResult [io.vertx.scala.core.Vertx]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.Vertx, io.vertx.scala.core.Vertx](x,(x => if (x == null) null else Vertx.apply(x))))(resultHandler))
+  def clusteredVertxFuture(options: io.vertx.scala.core.VertxOptions): concurrent.Future[io.vertx.scala.core.Vertx] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.Vertx,io.vertx.scala.core.Vertx]((x => if (x == null) null else Vertx.apply(x)))
+    io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
