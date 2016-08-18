@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -26,16 +29,14 @@ import io.vertx.core.Handler
 class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServerRequestStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpServerRequest] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpServerRequestStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
@@ -50,9 +51,8 @@ class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServer
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -62,4 +62,5 @@ object HttpServerRequestStream {
 
   def apply(_asJava: io.vertx.core.http.HttpServerRequestStream): io.vertx.scala.core.http.HttpServerRequestStream =
     new io.vertx.scala.core.http.HttpServerRequestStream(_asJava)
+
 }

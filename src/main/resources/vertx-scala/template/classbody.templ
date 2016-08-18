@@ -1,12 +1,35 @@
+@comment{'the current index of the cache'}
+@code{cacheDecls=new java.util.ArrayList()}
+
 @comment{"# Generic asJava method"}
-@{indentation}  def asJava: java.lang.Object = _asJava\n\n
+@{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
 
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
-@{indentation}  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{method.name == 'toString' && method.params.size == 0}
+@comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
+@{indentation}  override def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
+@else{}
+@{indentation}  def @{escapeIfKeyword(method.name + isHandler(method))}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{method.cacheReturn && !method.fluent}
+@{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
+@{indentation}      cached_@{cacheDecls.size()}=
 @end{}
+@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@if{method.cacheReturn && !method.fluent}
+@{indentation}    }\n
+@{indentation}    cached_@{cacheDecls.size()}\n
+@code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
+@end{}
+@{indentation}  }\n\n
+@end{}
+@end{}
+@end{}
+
+@foreach{cacheDecl:cacheDecls}
+  @{cacheDecl}\n
 @end{}

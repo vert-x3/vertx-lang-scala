@@ -14,15 +14,18 @@
  * under the License.
  */
 
-package io.vertx.scala.core.dns;
+package io.vertx.scala.core.dns
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
   */
 class MxRecord(private val _asJava: io.vertx.core.dns.MxRecord) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.dns.MxRecord = _asJava
 
   /**
     * The priority of the MX record.
@@ -44,4 +47,5 @@ object MxRecord {
 
   def apply(_asJava: io.vertx.core.dns.MxRecord): io.vertx.scala.core.dns.MxRecord =
     new io.vertx.scala.core.dns.MxRecord(_asJava)
+
 }

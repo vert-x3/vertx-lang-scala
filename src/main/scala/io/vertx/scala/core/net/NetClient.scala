@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.Handler
 
@@ -30,7 +33,7 @@ import io.vertx.core.Handler
 class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
     extends io.vertx.scala.core.metrics.Measured {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.NetClient = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -47,12 +50,11 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
+    * @return a reference to this, so the API can be used fluently
     */
-  def connect(port: Int, host: String): scala.concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[io.vertx.scala.core.net.NetSocket]()
-    _asJava.connect(port, host, promiseToMappedAsyncResultHandler(NetSocket.apply)(promise))
-    promise.future
+  def connectWithHandler(port: Int, host: String)( connectHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket] => Unit): io.vertx.scala.core.net.NetClient = {
+    _asJava.connect(port, host, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket], io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetSocket]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.net.NetSocket, io.vertx.scala.core.net.NetSocket](x,(x => if (x == null) null else NetSocket.apply(x))))(connectHandler))
+    this
   }
 
   /**
@@ -71,4 +73,5 @@ object NetClient {
 
   def apply(_asJava: io.vertx.core.net.NetClient): io.vertx.scala.core.net.NetClient =
     new io.vertx.scala.core.net.NetClient(_asJava)
+
 }

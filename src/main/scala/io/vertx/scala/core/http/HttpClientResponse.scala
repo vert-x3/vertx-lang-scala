@@ -14,9 +14,13 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
@@ -34,7 +38,7 @@ import io.vertx.scala.core.net.NetSocket
 class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientResponse) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpClientResponse = _asJava
 
   def resume(): io.vertx.scala.core.http.HttpClientResponse = {
     _asJava.resume()
@@ -42,13 +46,11 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -58,10 +60,16 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientResponse = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
+  }
+
+  /**
+    * @return the version of the response
+    */
+  def version(): io.vertx.core.http.HttpVersion = {
+    _asJava.version()
   }
 
   /**
@@ -82,7 +90,10 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.headers())
+    if(cached_0 == null) {
+      cached_0=    MultiMap.apply(_asJava.headers())
+    }
+    cached_0
   }
 
   /**
@@ -90,8 +101,8 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String): String = {
-    _asJava.getHeader(headerName)
+  def getHeader(headerName: String): scala.Option[String] = {
+        scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -99,23 +110,28 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @param trailerName the trailer name
     * @return the trailer value
     */
-  def getTrailer(trailerName: String): String = {
-    _asJava.getTrailer(trailerName)
+  def getTrailer(trailerName: String): scala.Option[String] = {
+        scala.Option(_asJava.getTrailer(trailerName))
   }
 
   /**
     * @return the trailers
     */
   def trailers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.trailers())
+    if(cached_1 == null) {
+      cached_1=    MultiMap.apply(_asJava.trailers())
+    }
+    cached_1
   }
 
   /**
     * @return the Set-Cookie headers (including trailers)
     */
-  def cookies(): List[String] = {
-    import scala.collection.JavaConverters._
-    _asJava.cookies().asScala.map(x => x:String).toList
+  def cookies(): scala.collection.mutable.Buffer[String] = {
+    if(cached_2 == null) {
+      cached_2=    _asJava.cookies().asScala.map(x => x:String)
+    }
+    cached_2
   }
 
   /**
@@ -126,8 +142,17 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @param bodyHandler This handler will be called after all the body has been received
     */
   def bodyHandler(bodyHandler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpClientResponse = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
+    this
+  }
+
+  /**
+    * Set an custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
+    * frame. HTTP/2 permits extension of the protocol.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def customFrameHandler(handler: io.vertx.scala.core.http.HttpFrame => Unit): io.vertx.scala.core.http.HttpClientResponse = {
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }
 
@@ -141,13 +166,21 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the net socket
     */
   def netSocket(): io.vertx.scala.core.net.NetSocket = {
-    NetSocket.apply(_asJava.netSocket())
+    if(cached_3 == null) {
+      cached_3=    NetSocket.apply(_asJava.netSocket())
+    }
+    cached_3
   }
 
+  private var cached_0: io.vertx.scala.core.MultiMap = _
+  private var cached_1: io.vertx.scala.core.MultiMap = _
+  private var cached_2: scala.collection.mutable.Buffer[String] = _
+  private var cached_3: io.vertx.scala.core.net.NetSocket = _
 }
 
 object HttpClientResponse {
 
   def apply(_asJava: io.vertx.core.http.HttpClientResponse): io.vertx.scala.core.http.HttpClientResponse =
     new io.vertx.scala.core.http.HttpClientResponse(_asJava)
+
 }

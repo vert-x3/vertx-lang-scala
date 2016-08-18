@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.metrics;
+package io.vertx.scala.core.metrics
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
@@ -39,14 +42,14 @@ object Measured {
 
   private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured {
 
-    def asJava: java.lang.Object = _asJava
+    def asJava: io.vertx.core.metrics.Measured = _asJava
 
     /**
       * Whether the metrics are enabled for this measured object
       * @return true if the metrics are enabled
       */
     def isMetricsEnabled(): Boolean = {
-      _asJava.isMetricsEnabled()
+        _asJava.isMetricsEnabled()
     }
 
   }

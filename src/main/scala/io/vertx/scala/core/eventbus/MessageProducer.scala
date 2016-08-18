@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.eventbus;
+package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.Handler
@@ -27,7 +30,14 @@ import io.vertx.core.Handler
 class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
     extends io.vertx.scala.core.streams.WriteStream[T] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.eventbus.MessageProducer[T] = _asJava
+
+  /**
+    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+    */
+  def end(t: T): Unit = {
+    _asJava.end(t)
+  }
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
@@ -37,8 +47,20 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     _asJava.writeQueueFull()
   }
 
+  /**
+    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
+    * @param message the message to send
+    * @return reference to this for fluency
+    */
+  def send(message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message))
+  }
+
+  def sendWithHandler[R](message: T)( replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]] => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    MessageProducer.apply[T](_asJava.send(message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[R]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[R]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[R], io.vertx.scala.core.eventbus.Message[R]](x,(x => if (x == null) null else Message.apply[R](x))))(replyHandler)))
+  }
+
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -53,9 +75,8 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     this
   }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -64,8 +85,8 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return this producer object
     */
-  def deliveryOptions(options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    _asJava.deliveryOptions(options)
+  def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+    _asJava.deliveryOptions(options.asJava)
     this
   }
 
@@ -76,10 +97,25 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     _asJava.address()
   }
 
+  /**
+    * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
+    */
+  def end(): Unit = {
+    _asJava.end()
+  }
+
+  /**
+    * Closes the producer, this method should be called when the message producer is not used anymore.
+    */
+  def close(): Unit = {
+    _asJava.close()
+  }
+
 }
 
 object MessageProducer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): io.vertx.scala.core.eventbus.MessageProducer[T] =
-    new io.vertx.scala.core.eventbus.MessageProducer[T](_asJava)
+    new io.vertx.scala.core.eventbus.MessageProducer(_asJava)
+
 }

@@ -14,15 +14,18 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * The address of a socket
   */
 class SocketAddress(private val _asJava: io.vertx.core.net.SocketAddress) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.SocketAddress = _asJava
 
   def host(): String = {
     _asJava.host()
@@ -38,4 +41,5 @@ object SocketAddress {
 
   def apply(_asJava: io.vertx.core.net.SocketAddress): io.vertx.scala.core.net.SocketAddress =
     new io.vertx.scala.core.net.SocketAddress(_asJava)
+
 }

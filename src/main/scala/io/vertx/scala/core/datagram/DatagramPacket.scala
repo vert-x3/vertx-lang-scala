@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.datagram;
+package io.vertx.scala.core.datagram
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.net.SocketAddress
 
@@ -24,7 +27,7 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.datagram.DatagramPacket = _asJava
 
   /**
     * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
@@ -49,4 +52,5 @@ object DatagramPacket {
 
   def apply(_asJava: io.vertx.core.datagram.DatagramPacket): io.vertx.scala.core.datagram.DatagramPacket =
     new io.vertx.scala.core.datagram.DatagramPacket(_asJava)
+
 }

@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.streams;
+package io.vertx.scala.core.streams
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
@@ -39,7 +42,7 @@ package io.vertx.scala.core.streams;
   */
 class Pump(private val _asJava: io.vertx.core.streams.Pump) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.streams.Pump = _asJava
 
   /**
     * Set the write queue max size to `maxSize`
@@ -90,4 +93,5 @@ object Pump {
   def pump[T](rs: io.vertx.scala.core.streams.ReadStream[T], ws: io.vertx.scala.core.streams.WriteStream[T], writeQueueMaxSize: Int): io.vertx.scala.core.streams.Pump = {
     Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]], writeQueueMaxSize))
   }
+
 }

@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.eventbus;
+package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -33,16 +36,14 @@ import io.vertx.core.Handler
 class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.eventbus.Message[T]] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
     this
   }
@@ -57,9 +58,8 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -104,24 +104,25 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-    * @return the completion handler
+    * @param completionHandler the completion handler
     */
-  def completionHandler(): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.completionHandler(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def completionHandler(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+    _asJava.completionHandler(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
   }
 
   /**
     * Unregisters the handler which created this registration
-    * @return the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
-  def unregister(): scala.concurrent.Future[Unit] = {
-    import io.vertx.lang.scala.HandlerOps._
-    val promise = scala.concurrent.Promise[Unit]()
-    _asJava.unregister(promiseToMappedAsyncResultHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(promise))
-    promise.future
+  def unregister(): Unit = {
+    _asJava.unregister()
+  }
+
+  /**
+    * Unregisters the handler which created this registration
+    * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
+    */
+  def unregister(completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
+    _asJava.unregister(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
   }
 
 }
@@ -129,5 +130,6 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 object MessageConsumer {
 
   def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): io.vertx.scala.core.eventbus.MessageConsumer[T] =
-    new io.vertx.scala.core.eventbus.MessageConsumer[T](_asJava)
+    new io.vertx.scala.core.eventbus.MessageConsumer(_asJava)
+
 }

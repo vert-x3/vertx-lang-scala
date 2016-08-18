@@ -14,13 +14,17 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http;
+package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
+import io.vertx.scala.core.MultiMap
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.HttpMethod
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
 
 /**
@@ -54,7 +58,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] 
     with io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.HttpClientResponse] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.http.HttpClientRequest = _asJava
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
@@ -65,7 +69,6 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -83,14 +86,12 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def drainHandler(handler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
   def handler(handler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
     this
   }
@@ -105,9 +106,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -136,6 +136,23 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
+    * @return the raw value of the method this request sends
+    */
+  def getRawMethod(): String = {
+    _asJava.getRawMethod()
+  }
+
+  /**
+    * Set the value the method to send when the method  is used.
+    * @param method the raw method
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setRawMethod(method: String): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.setRawMethod(method)
+    this
+  }
+
+  /**
     * @return The URI of the request.
     */
   def uri(): String = {
@@ -143,10 +160,44 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
+    * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
+    */
+  def path(): String = {
+    _asJava.path()
+  }
+
+  /**
+    * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
+    */
+  def query(): String = {
+    _asJava.query()
+  }
+
+  /**
+    * Set the request host.<p/>
+    *
+    * For HTTP2 it sets the  pseudo header otherwise it sets the  header
+    */
+  def setHost(host: String): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.setHost(host)
+    this
+  }
+
+  /**
+    * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
+    */
+  def getHost(): String = {
+    _asJava.getHost()
+  }
+
+  /**
     * @return The HTTP headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    MultiMap.apply(_asJava.headers())
+    if(cached_0 == null) {
+      cached_0=    MultiMap.apply(_asJava.headers())
+    }
+    cached_0
   }
 
   /**
@@ -161,7 +212,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * Write a  to the request body, encoded as UTF-8.
+    * Write a String to the request body, encoded as UTF-8.
     * @return @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String): io.vertx.scala.core.http.HttpClientRequest = {
@@ -170,7 +221,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * Write a  to the request body, encoded using the encoding `enc`.
+    * Write a String to the request body, encoded using the encoding `enc`.
     * @return @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String, enc: String): io.vertx.scala.core.http.HttpClientRequest = {
@@ -187,9 +238,8 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
     * @return a reference to this, so the API can be used fluently
     */
-  def continueHandler(handler: => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+  def continueHandler(handler: () => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
@@ -197,12 +247,21 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * Forces the head of the request to be written before [[io.vertx.scala.core.http.HttpClientRequest#end]] is called on the request or any data is
     * written to it.
     * 
-    * This is normally used to implement HTTP 100-continue handling, see [[io.vertx.scala.core.http.HttpClientRequest#continueHandler]] for
+    * This is normally used to implement HTTP 100-continue handling, see  for
     * more information.
     * @return a reference to this, so the API can be used fluently
     */
   def sendHead(): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.sendHead()
+    this
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
+    * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
+    */
+  def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.sendHead(funcToHandler(completionHandler))
     this
   }
 
@@ -239,11 +298,12 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * Set's the amount of time after which if a response is not received TimeoutException
-    * will be sent to the exception handler of this request.
+    * Set's the amount of time after which if the request does not return any data within the timeout period an
+    * TimeoutException will be passed to the exception handler (if provided) and
+    * the request will be closed.
     * 
-    *  Calling this method more than once
-    * has the effect of canceling any existing timeout and starting the timeout from scratch.
+    * Calling this method more than once has the effect of canceling any existing timeout and starting
+    * the timeout from scratch.
     * @param timeoutMs The quantity of time in milliseconds.
     * @return a reference to this, so the API can be used fluently
     */
@@ -252,10 +312,107 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     this
   }
 
+  /**
+    * Set a push handler for this request.<p/>
+    *
+    * The handler is called when the client receives a <i>push promise</i> from the server. The handler can be called
+    * multiple times, for each push promise.<p/>
+    *
+    * The handler is called with a <i>read-only</i> [[io.vertx.scala.core.http.HttpClientRequest]], the following methods can be called:<p/>
+    *
+    * <ul>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#method]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#uri]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#headers]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#getHost]]</li>
+    * </ul>
+    *
+    * In addition the handler should call the [[io.vertx.scala.core.http.HttpClientRequest#handler]] method to set an handler to
+    * process the response.<p/>
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def pushHandler(handler: io.vertx.scala.core.http.HttpClientRequest => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
+    this
+  }
+
+  /**
+    * Reset this stream with the error code `0`.
+    */
+  def reset(): Unit = {
+    _asJava.reset()
+  }
+
+  /**
+    * Reset this stream with the error `code`.
+    * @param code the error code
+    */
+  def reset(code: Long): Unit = {
+    _asJava.reset(code)
+  }
+
+  /**
+    * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
+    */
+  def connection(): io.vertx.scala.core.http.HttpConnection = {
+    if(cached_1 == null) {
+      cached_1=    HttpConnection.apply(_asJava.connection())
+    }
+    cached_1
+  }
+
+  /**
+    * Set a connection handler called when an HTTP connection has been established.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    this
+  }
+
+  /**
+    * Write an HTTP/2 frame to the request, allowing to extend the HTTP/2 protocol.
+    *
+    * The frame is sent immediatly and is not subject to flow control.
+    *
+    * This method must be called after the request headers have been sent and only for the protocol HTTP/2.
+    * The [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] should be used for this purpose.
+    * @param type the 8-bit frame type
+    * @param flags the 8-bit frame flags
+    * @param payload the frame payload
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writeCustomFrame(`type`: Int, flags: Int, payload: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    this
+  }
+
+  /**
+    * @return the id of the stream of this response,  when it is not yet determined, i.e
+    *         the request has not been yet sent or it is not supported HTTP/1.x
+    */
+  def streamId(): Int = {
+    _asJava.streamId()
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.HttpClientRequest#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+    * @param frame the frame to write
+    */
+  def writeCustomFrame(frame: io.vertx.scala.core.http.HttpFrame): io.vertx.scala.core.http.HttpClientRequest = {
+    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[io.vertx.core.http.HttpFrame])
+    this
+  }
+
+  private var cached_0: io.vertx.scala.core.MultiMap = _
+  private var cached_1: io.vertx.scala.core.http.HttpConnection = _
 }
 
 object HttpClientRequest {
 
   def apply(_asJava: io.vertx.core.http.HttpClientRequest): io.vertx.scala.core.http.HttpClientRequest =
     new io.vertx.scala.core.http.HttpClientRequest(_asJava)
+
 }

@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.streams;
+package io.vertx.scala.core.streams
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -41,7 +44,7 @@ object StreamBase {
 
   private class StreamBaseImpl(private val _asJava: io.vertx.core.streams.StreamBase) extends StreamBase {
 
-    def asJava: java.lang.Object = _asJava
+    def asJava: io.vertx.core.streams.StreamBase = _asJava
 
     /**
       * Set an exception handler.
@@ -49,8 +52,7 @@ object StreamBase {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.StreamBase = {
-      import io.vertx.lang.scala.HandlerOps._
-      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 

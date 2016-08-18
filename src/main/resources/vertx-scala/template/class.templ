@@ -5,10 +5,6 @@
 @includeNamed{'scala-helpers.templ'}
 @includeNamed{'scala-doc.templ'}
 
-@comment{
-	TODO: Avoid massively long class names, take advantage of imports
-}
-
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
  *\n
@@ -25,10 +21,13 @@
  * under the License.\n
  */\n\n
 
-package @{type.raw.translatePackageName("scala")};\n
+package @{type.raw.translatePackageName("scala")}\n
 \n
 
 @comment{"# Generate the imports"}
+import io.vertx.lang.scala.HandlerOps._\n
+import scala.compat.java8.FunctionConverters._\n
+import scala.collection.JavaConverters._\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
@@ -43,6 +42,9 @@ import @{importedType}\n
 	@end{}
 @end{}
 \n
+
+@comment{'the current index of the cache'}
+@code{cacheDecls=new java.util.ArrayList()}
 
 @comment{"# Generate the Class or Interface/Trait"}
 @code{
@@ -88,7 +90,16 @@ import @{importedType}\n
 
  {\n
 \n
-
+@code{
+def isHandler(method) {
+  if(method.params.size > 1 && method.params[method.params.size-1].type.kind == CLASS_HANDLER) {
+    return 'WithHandler';
+  }
+  else {
+    return '';
+  }
+}
+}
 @if{concrete}
 	@includeNamed{'classbody.templ'; indentation=''}
 @else{}
@@ -99,20 +110,23 @@ import @{importedType}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
 	    new @{toScalaType(type);}(_asJava)\n
+	\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
-	\n
-	  def @{method.name}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{method.name}@{isHandler(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
+	\n
 	@end{}
 	@end{}
+
 	}\n
 @else{}
-	object @{type.raw.simpleName} {\n\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @{toJavaType(type);}): @{toScalaType(type);} =\n
+	object @{type.raw.simpleName} {\n
+	\n
+		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
 		    new @includeNamed{'writeImplType'}(_asJava)\n
 		\n
 		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n

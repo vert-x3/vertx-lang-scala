@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.net;
+package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.Handler
 
@@ -26,16 +29,14 @@ import io.vertx.core.Handler
 class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream) 
     extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.net.NetSocket] {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.net.NetSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
   def handler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
     _asJava.handler(funcToMappedHandler(NetSocket.apply)(handler))
     this
   }
@@ -50,9 +51,8 @@ class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream)
     this
   }
 
-  def endHandler(endHandler: => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    import io.vertx.lang.scala.HandlerOps._
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>endHandler))
+  def endHandler(endHandler: () => Unit): io.vertx.scala.core.net.NetSocketStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
@@ -62,4 +62,5 @@ object NetSocketStream {
 
   def apply(_asJava: io.vertx.core.net.NetSocketStream): io.vertx.scala.core.net.NetSocketStream =
     new io.vertx.scala.core.net.NetSocketStream(_asJava)
+
 }
