@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core;
+package io.vertx.scala.core
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import java.util.Map.Entry
 
 /**
@@ -26,16 +29,16 @@ import java.util.Map.Entry
   */
 class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.MultiMap = _asJava
 
   /**
     * Returns the value of with the specified name.  If there are
     * more than one values for the specified name, the first value is returned.
     * @param name The name of the header to search
-    * @return The first header value or {@code null} if there is no such entry
+    * @return The first header value or `null` if there is no such entry
     */
-  def get(name: String): String = {
-    _asJava.get(name)
+  def get(name: String): scala.Option[String] = {
+        scala.Option(_asJava.get(name))
   }
 
   /**
@@ -43,9 +46,8 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @param name The name to search
     * @return A immutable [[scala.collection.immutable.List]] of values which will be empty if no values are found
     */
-  def getAll(name: String): List[String] = {
-    import scala.collection.JavaConverters._
-    _asJava.getAll(name).asScala.map(x => x:String).toList
+  def getAll(name: String): scala.collection.mutable.Buffer[String] = {
+    _asJava.getAll(name).asScala.map(x => x:String)
   }
 
   /**
@@ -69,7 +71,6 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return A [[scala.collection.immutable.Set]] of all names
     */
   def names(): Set[String] = {
-    import scala.collection.JavaConverters._
     _asJava.names().asScala.map(x => x:String).toSet
   }
 
@@ -147,4 +148,9 @@ object MultiMap {
 
   def apply(_asJava: io.vertx.core.MultiMap): io.vertx.scala.core.MultiMap =
     new io.vertx.scala.core.MultiMap(_asJava)
+
+  def caseInsensitiveMultiMap(): io.vertx.scala.core.MultiMap = {
+    MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
+  }
+
 }

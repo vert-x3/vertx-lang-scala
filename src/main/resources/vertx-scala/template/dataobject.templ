@@ -1,0 +1,186 @@
+@comment{"# Template for DataObject code generation"}
+
+@comment{"# Defines a few helper functions"}
+@includeNamed{'scala-doc.templ'}
+
+/*\n
+ * Copyright 2014 Red Hat, Inc.\n
+ *\n
+ * Red Hat licenses this file to you under the Apache License, version 2.0\n
+ * (the "License"); you may not use this file except in compliance with the\n
+ * License.  You may obtain a copy of the License at:\n
+ *\n
+ * http://www.apache.org/licenses/LICENSE-2.0\n
+ *\n
+ * Unless required by applicable law or agreed to in writing, software\n
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT\n
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the\n
+ * License for the specific language governing permissions and limitations\n
+ * under the License.\n
+ */\n\n
+@code{
+def changeJavaGenericNotationToScalaNotation(type) {
+ type.name.replace('<', '[').replace('>', ']');
+}
+
+def toScalaType(type) {
+  var ret = '';
+  if (type.name == 'void' || type.name == 'java.lang.Void') {
+    ret = 'Unit';
+  } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
+    ret = 'AnyRef';
+  } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
+    ret = 'Throwable';
+  } else if (type.kind == CLASS_STRING) {
+    ret = 'String';
+  } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE) {
+    if (type.name == 'byte' || type.name == 'java.lang.Byte') {
+      ret = 'Byte';
+    } else if (type.name == 'short' || type.name == 'java.lang.Short') {
+      ret = 'Short';
+    } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
+      ret = 'Int';
+    } else if (type.name == 'long' || type.name == 'java.lang.Long') {
+      ret = 'Long';
+    } else if (type.name == 'float' || type.name == 'java.lang.Float') {
+      ret = 'Float';
+    } else if (type.name == 'double' || type.name == 'java.lang.Double') {
+      ret = 'Double';
+    } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
+      ret = 'Boolean';
+    } else if (type.name == 'char' || type.name == 'java.lang.Character') {
+      ret = 'Char';
+    }
+  } else if (type.kind == CLASS_DATA_OBJECT) {
+    ret = type.raw.translatePackageName("scala") + '.' + type.simpleName;
+  } else if (type.kind == CLASS_ENUM) {
+    ret = type.name;
+  } else if (type.kind == CLASS_JSON_OBJECT ||
+           type.kind == CLASS_JSON_ARRAY){
+    ret = changeJavaGenericNotationToScalaNotation(type)
+  } else {
+    ret = changeJavaGenericNotationToScalaNotation(type);
+  }
+  return ret;
+}
+
+  var typeName = type.raw.simpleName;
+  var jTypeName = type.raw.simpleName + 'Java';
+}
+
+
+package @{type.raw.translatePackageName("scala")}\n
+\n
+
+@comment{"# Generate the imports"}
+import io.vertx.core.json.JsonObject\n
+import scala.collection.JavaConversions._\n
+\n
+
+@comment{"# Generate the Class or Interface/Trait"}
+
+@if{doc != null}
+/**\n
+@{renderDoc("  *", doc, renderDocLink)}
+  */\n
+@end{}
+\n
+
+
+class @{typeName}(val asJava: @{type.raw.name}) {\n
+@foreach{property:properties}
+@if{property.doc != null}
+\n
+  /**\n
+@{renderDoc("    *", property.doc, renderDocLink)}
+    */\n
+@end{}
+@if{property.adder}
+@if{property.isMap}
+  def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n
+    asJava.@{property.adderMethod}(key, value)\n
+    this\n
+  }\n
+@else{}
+  def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
+@if{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.adderMethod}(value.asJava)\n
+@else{}
+    asJava.@{property.adderMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@end{}
+@end{}
+@if{property.setter}
+@if{property.isList}
+  def @{property.setterMethod}(value:scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+@else{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+@else{}
+    asJava.@{property.setterMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@else{property.isSet}
+  def @{property.setterMethod}(value:Set[@{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+@else{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+@else{}
+    asJava.@{property.setterMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@else{property.isMap}
+  def @{property.setterMethod}(value:Map[String, @{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box))\n
+@else{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.mapValues(_.asJava))\n
+@else{}
+    asJava.@{property.setterMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@else{}
+  def @{property.setterMethod}(value:@{toScalaType(property.type)}) = {\n
+@if{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.asJava)\n
+@else{}
+    asJava.@{property.setterMethod}(value)\n
+@end{}
+    this\n
+  }\n
+@end{}
+@end{}
+@comment{TODO: some necessary filtering as PropertyInfo has no information about static methods}
+@if{(property.setter || property.adder) && property.getterMethod != null}
+  def @{property.getterMethod} = {\n
+    asJava.@{property.getterMethod}()\n
+  }\n
+@end{}
+@end{}
+}\n
+\n
+object @{type.raw.simpleName} {\n
+  type @{jTypeName} = @{type.raw.name}\n
+  \n
+  def apply(t: @{jTypeName}) = {\n
+    if(t != null)\n
+      new @{typeName}(t)\n
+    else\n
+      null\n
+   \n
+  }\n
+  \n
+  def fromJson(json: JsonObject):@{typeName} = {\n
+    if(json != null)\n
+      new @{typeName}(new @{jTypeName}(json))\n
+    else\n
+      null\n
+  }\n
+}\n

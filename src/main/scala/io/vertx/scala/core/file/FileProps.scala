@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.file;
+package io.vertx.scala.core.file
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Represents properties of a file on the file system.
@@ -23,7 +26,7 @@ package io.vertx.scala.core.file;
   */
 class FileProps(private val _asJava: io.vertx.core.file.FileProps) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.file.FileProps = _asJava
 
   /**
     * The date the file was created
@@ -87,4 +90,5 @@ object FileProps {
 
   def apply(_asJava: io.vertx.core.file.FileProps): io.vertx.scala.core.file.FileProps =
     new io.vertx.scala.core.file.FileProps(_asJava)
+
 }

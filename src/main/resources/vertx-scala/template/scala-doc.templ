@@ -14,22 +14,16 @@
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
       for (param : method.params) {
-        if (!isAsyncResult(param)) {
-          if (param.description != null) {
-            doc += commentedIndentation;
-            doc += " @param " + param.name + " ";
-            doc += convertLink(param.description);
-            if (param.type.kind == CLASS_DATA_OBJECT) {
-              doc += "see " + renderDataObjectHtmlLink(param.type);
-            }
-            doc += "\n";
+        if (param.description != null) {
+          doc += commentedIndentation;
+          doc += " @param " + param.name + " ";
+          doc += convertLink(param.description);
+          if (param.type.kind == CLASS_DATA_OBJECT) {
+            doc += "see " + renderDataObjectHtmlLink(param.type);
           }
-         } else {
-           /* TODO: Consider writing a common description for metods returning a future,
-                    instead of simply copying the comment from the original AsyncHandler */
-           returnType = param.type;
-           returnDescription = param.description;
-         }
+          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
+          doc += "\n";
+        }
       }
       if (!returnType.name.equals("void")) {
         if (returnDescription != null) {
@@ -39,6 +33,7 @@
           if (returnType.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(returnType);
           }
+          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
       }
@@ -63,15 +58,15 @@
     var transformedDoc = '';
     
     var start = 0;
-    var index = doc.indexOf(linkText);
+    var index = doc.value.indexOf(linkText);
     while (index >= 0) {
-       var end = doc.indexOf("}", index);
-       transformedDoc += doc.substring(start, index) + toScalaDocType(doc.substring(index + 1 + linkText.length(), end));
+       var end = doc.value.indexOf("}", index);
+       transformedDoc += doc.value.substring(start, index) + toScalaDocType(doc.value.substring(index + 1 + linkText.length(), end));
        start = end + 1;
-       index = doc.indexOf(linkText, start);
+       index = doc.value.indexOf(linkText, start);
     }
     
-    transformedDoc += doc.substring(start, doc.length());
+    transformedDoc += doc.value.substring(start, doc.value.length());
     return transformedDoc;
   }
 
@@ -107,24 +102,27 @@
     } else if (type == 'Map' || type == 'java.util.Map') {
       return '[[scala.collection.immutable.Map]]';
     } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
-      return 'function';
-    } else if (type == 'AsyncResult' || type == 'io.vertx.core.AsyncResult') {
-      return '[[scala.util.Try]]';
+      return 'scala-function';
     } else if (type.contains('io.vertx')) {
-      return '[[' + 
-          type.replace("io.vertx.", "io.vertx.scala.")
-          .replace('<', '[').replace('>', ']')
-          .replace('java.lang.', '') +
-          ']]';
+      return '[[' + convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.") + ']]';
     } else {
       return "[[" + type + "]]";
     }
+  }
+
+  def convertToScalaNotation(type) {
+    return  type
+            .replace('<', '[').replace('>', ']')
+            .replace('java.lang.', '');
   }
 
   def renderDocLink(link) {
     var rawType = link.targetType.raw;
     if (rawType.module != null) {
       var label = link.label.trim();
+      if (rawType.kind == CLASS_ENUM) {
+        return "[[" + convertToScalaNotation(rawType.name) + "]]";
+      }
       if (rawType.kind == CLASS_DATA_OBJECT) {
         if (label.length() == 0) {
           label = rawType.simpleName;
@@ -133,17 +131,26 @@
       } else if (type.kind == CLASS_API &&
                  type.name != 'io.vertx.core.Handler') {
         var elt = link.targetElement;
-        var eltKind = elt.getKind().name();
-        var ret = "[[" + rawType.translateName("scala");
-        if (eltKind == "METHOD") {
-          ret += "#" + elt.getSimpleName().toString();
+        if(elt.simpleName.toString() == 'Verticle') {
+          return "[[io.vertx.lang.scala.ScalaVerticle]]";
         }
-        if (label.length() > 0) {
-          ret += " " + label;
+        else if(elt.simpleName.toString() == 'Handler') {
+          return "scala-function";
         }
-        ret += "]]";
-        return ret;
-      } else {
+        else {
+          var eltKind = elt.getKind().name();
+          var ret = "[[" + rawType.translateName("scala");
+          if (eltKind == "METHOD") {
+            ret += "#" + elt.getSimpleName().toString();
+          }
+          if (label.length() > 0) {
+            ret += " " + label;
+          }
+          ret += "]]";
+          return ret;
+        }
+      }
+      else {
         return toScalaDocType(rawType.name);
       }
     }

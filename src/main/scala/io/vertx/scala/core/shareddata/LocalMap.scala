@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.shareddata;
+package io.vertx.scala.core.shareddata
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
@@ -28,7 +31,7 @@ package io.vertx.scala.core.shareddata;
   */
 class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V]) {
 
-  def asJava: java.lang.Object = _asJava
+  def asJava: io.vertx.core.shareddata.LocalMap[K, V] = _asJava
 
   /**
     * Get a value from the map
@@ -132,6 +135,7 @@ class LocalMap[K, V](private val _asJava: io.vertx.core.shareddata.LocalMap[K, V
 
 object LocalMap {
 
-  def apply[K, V](_asJava: io.vertx.core.shareddata.LocalMap[K,V]): io.vertx.scala.core.shareddata.LocalMap[K, V] =
-    new io.vertx.scala.core.shareddata.LocalMap[K, V](_asJava)
+  def apply[K, V](_asJava: io.vertx.core.shareddata.LocalMap[K, V]): io.vertx.scala.core.shareddata.LocalMap[K, V] =
+    new io.vertx.scala.core.shareddata.LocalMap(_asJava)
+
 }

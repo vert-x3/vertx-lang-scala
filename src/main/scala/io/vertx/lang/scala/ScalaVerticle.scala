@@ -3,9 +3,14 @@ package io.vertx.lang.scala
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
+/**
+  * Base class for verticle implementiations.
+  *
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  */
 class ScalaVerticle extends Verticle {
 
-  protected var jvertx: io.vertx.core.Vertx = null // TODO: we need an asJava() method to get the java version
+  protected var jvertx: io.vertx.core.Vertx = null
   protected var vertx: Vertx = null
   protected var ctx: Context = null
 
@@ -17,9 +22,19 @@ class ScalaVerticle extends Verticle {
 
   override def getVertx: io.vertx.core.Vertx = jvertx
 
-  override def stop(stopFuture: Future[Void]): Unit = stopFuture.complete(null)
+  def stop(): Unit = {}
 
-  override def start(startFuture: Future[Void]): Unit = startFuture.complete(null)
+  def start(): Unit = {}
+
+  override def stop(stopFuture: Future[Void]): Unit = {
+    stop()
+    stopFuture.complete()
+  }
+
+  override def start(startFuture: Future[Void]): Unit = {
+    start()
+    startFuture.complete()
+  }
 
   def asJava(): Verticle = new AbstractVerticle {
     override def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {

@@ -14,8 +14,11 @@
  * under the License.
  */
 
-package io.vertx.scala.core.streams;
+package io.vertx.scala.core.streams
 
+import io.vertx.lang.scala.HandlerOps._
+import scala.compat.java8.FunctionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -47,6 +50,18 @@ trait WriteStream[T]
   def write(data: T): io.vertx.scala.core.streams.WriteStream[T]
 
   /**
+  * Ends the stream.
+  * 
+  * Once the stream has ended, it cannot be used any more.
+  */
+  def end(): Unit
+
+  /**
+  * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+  */
+  def end(t: T): Unit
+
+  /**
   * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
   * if there is more than `maxSize` bytes in the write queue. This is used as an indicator by classes such as
   * `Pump` to provide flow control.
@@ -67,7 +82,7 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: => Unit): io.vertx.scala.core.streams.WriteStream[T]
+  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
 
 }
 
@@ -78,7 +93,7 @@ object WriteStream {
 
   private class WriteStreamImpl[T](private val _asJava: io.vertx.core.streams.WriteStream[T]) extends WriteStream[T] {
 
-    def asJava: java.lang.Object = _asJava
+    def asJava: io.vertx.core.streams.WriteStream[T] = _asJava
 
     /**
       * Set an exception handler on the write stream.
@@ -86,8 +101,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      import io.vertx.lang.scala.HandlerOps._
-      _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
@@ -99,8 +113,24 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def write(data: T): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.write(data)
+        _asJava.write(data)
       this
+    }
+
+    /**
+      * Ends the stream.
+      * 
+      * Once the stream has ended, it cannot be used any more.
+      */
+    def end(): Unit = {
+        _asJava.end()
+    }
+
+    /**
+      * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+      */
+    def end(t: T): Unit = {
+        _asJava.end(t)
     }
 
     /**
@@ -111,7 +141,7 @@ object WriteStream {
       * @return a reference to this, so the API can be used fluently
       */
     def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.streams.WriteStream[T] = {
-      _asJava.setWriteQueueMaxSize(maxSize)
+        _asJava.setWriteQueueMaxSize(maxSize)
       this
     }
 
@@ -120,7 +150,7 @@ object WriteStream {
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {
-      _asJava.writeQueueFull()
+        _asJava.writeQueueFull()
     }
 
     /**
@@ -129,9 +159,8 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
-      import io.vertx.lang.scala.HandlerOps._
-      _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ =>handler))
+    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }
 
