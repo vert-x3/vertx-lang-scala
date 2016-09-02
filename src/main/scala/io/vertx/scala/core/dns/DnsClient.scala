@@ -33,8 +33,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to lookup the A (ipv4) or AAAA (ipv6) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @return a future WUHUUU    */
-  def lookupFuture(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
+    * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with the resolved address if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
+    */
+  def lookupFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -43,8 +44,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to lookup the A (ipv4) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @return a future WUHUUU    */
-  def lookup4Future(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
+    * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with the resolved [[java.net.Inet4Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
+    */
+  def lookup4Future(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup4(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -53,8 +55,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to lookup the AAAA (ipv6) record for the given name. The first found will be used.
     * @param name the name to resolve
-    * @return a future WUHUUU    */
-  def lookup6Future(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with the resolved [[java.net.Inet6Address]] if a record was found. If non was found it will get notifed with {@code null}. If an error accours it will get failed.
+    */
+  def lookup6Future(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.lookup6(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -63,8 +66,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve all A (ipv4) records for the given name.
     * @param name the name to resolve
-    * @return a future WUHUUU    */
-  def resolveAFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet4Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
+    */
+  def resolveAFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveA(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -73,8 +77,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve all AAAA (ipv6) records for the given name.
     * @param name the name to resolve
-    * @return a future WUHUUU    */
-  def resolveAAAAFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with a [[scala.collection.immutable.List]] that contains all the resolved [[java.net.Inet6Address]]es. If none was found an empty [[scala.collection.immutable.List]] will be used. If an error accours it will get failed.
+    */
+  def resolveAAAAFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveAAAA(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -83,8 +88,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the CNAME record for the given name.
     * @param name the name to resolve the CNAME for
-    * @return a future WUHUUU    */
-  def resolveCNAMEFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
+    */
+  def resolveCNAMEFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveCNAME(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -93,8 +99,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the MX records for the given name.
     * @param name the name for which the MX records should be resolved
-    * @return a future WUHUUU    */
-  def resolveMXFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] = {
+    * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
+    */
+  def resolveMXFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord.apply)))
     _asJava.resolveMX(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -103,8 +110,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the TXT records for the given name.
     * @param name the name for which the TXT records should be resolved
-    * @return a future WUHUUU    */
-  def resolveTXTFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
+    */
+  def resolveTXTFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveTXT(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -113,8 +121,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the PTR record for the given name.
     * @param name the name to resolve the PTR for
-    * @return a future WUHUUU    */
-  def resolvePTRFuture(name: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
+    */
+  def resolvePTRFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.resolvePTR(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -123,8 +132,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the NS records for the given name.
     * @param name the name for which the NS records should be resolved
-    * @return a future WUHUUU    */
-  def resolveNSFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[String]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with a List that contains all resolved [[String]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
+    */
+  def resolveNSFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asScala))
     _asJava.resolveNS(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -133,8 +143,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
   /**
     * Try to resolve the SRV records for the given name.
     * @param name the name for which the SRV records should be resolved
-    * @return a future WUHUUU    */
-  def resolveSRVFuture(name: String, handler: io.vertx.core.AsyncResult [scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] => Unit): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
+    */
+  def resolveSRVFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord.apply)))
     _asJava.resolveSRV(name, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -144,8 +155,9 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * Try to do a reverse lookup of an IP address. This is basically the same as doing trying to resolve a PTR record
     * but allows you to just pass in the IP address and not a valid ptr query string.
     * @param ipaddress the IP address to resolve the PTR for
-    * @return a future WUHUUU    */
-  def reverseLookupFuture(ipaddress: String, handler: io.vertx.core.AsyncResult [String] => Unit): concurrent.Future[String] = {
+    * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with the resolved [[String]] if a record was found. If none was found it will get notified with {@code null}. If an error accours it will get failed.
+    */
+  def reverseLookupFuture(ipaddress: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.reverseLookup(ipaddress, promiseAndHandler._1)
     promiseAndHandler._2.future

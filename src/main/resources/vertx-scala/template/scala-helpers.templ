@@ -241,7 +241,7 @@
     var paramList = '';
     var first = true;
     for (param : method.params) {
-        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !method.isFluent && !(method.returnType.kind == CLASS_HANDLER))) {
+        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !(method.returnType.kind == CLASS_HANDLER))) {
             if (first) {
               first = false;
             } else {

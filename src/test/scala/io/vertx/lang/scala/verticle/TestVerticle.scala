@@ -14,6 +14,5 @@ class TestVerticle extends ScalaVerticle{
       .handler(a => a.reply("world"))
       .completionFuture()
       .foreach(c => startFuture.complete())
-    vertx.eventBus().sendFuture[String]("asd","",null).foreach(reply => println(reply))
   }
 }

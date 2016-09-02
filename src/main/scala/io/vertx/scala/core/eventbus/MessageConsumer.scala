@@ -104,7 +104,8 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-    * @return a future WUHUUU    */
+    * @return the completion future
+    */
   def completionFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.completionHandler(promiseAndHandler._1)
@@ -120,7 +121,8 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
   /**
     * Unregisters the handler which created this registration
-    * @return a future WUHUUU    */
+    * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
+    */
   def unregisterFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.unregister(promiseAndHandler._1)
