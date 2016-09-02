@@ -42,7 +42,7 @@ class PromiseTestVerticle extends ScalaVerticle {
 
 Next Steps
 ==========
--imrpove rendered ScalaDoc
+- improve rendered ScalaDoc
 - get rid of unneeded imports
 - get rid of unneded instanceOf-calls
 - replace references to original Java-classes with types
