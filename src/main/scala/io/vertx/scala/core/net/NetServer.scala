@@ -72,8 +72,9 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
-    * @return a future WUHUUU    */
-  def listenFuture(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
+    * @return future that will be notified when listening or failed
+    */
+  def listenFuture(): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -99,8 +100,9 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @param host the host to listen on
-    * @return a future WUHUUU    */
-  def listenFuture(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
+    * @return future that will be notified when listening or failed
+    */
+  def listenFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -123,8 +125,9 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
   /**
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
-    * @return a future WUHUUU    */
-  def listenFuture(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.net.NetServer] => Unit): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
+    * @return future that will be notified when listening or failed
+    */
+  def listenFuture(port: Int): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -140,7 +143,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
-    * @return a future WUHUUU    */
+    * @return the future
+    */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.close(promiseAndHandler._1)

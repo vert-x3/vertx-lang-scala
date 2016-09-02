@@ -14,6 +14,7 @@
       doc += indentation;
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
+      var futureDescription = '';
       for (param : method.params) {
         if (param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
           doc += commentedIndentation;
@@ -25,11 +26,19 @@
           doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
+        else {
+          futureDescription = param.description;
+        }
       }
       if(future) {
-        doc += commentedIndentation;
-        doc += " @return a future";
-        doc += "\n";
+        if(futureDescription != null) {
+          doc += commentedIndentation;
+          doc += " @return " + convertLink(futureDescription).replace(', may be {@code null}','').replace('handler', 'future');
+          doc += "\n";
+        }
+        else {
+          /*TODO: Use this to find badly documented methods without a param-tag for handler*/
+        }
       }
       else if (!returnType.name.equals("void")) {
         if (returnDescription != null) {

@@ -170,8 +170,9 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
-    * @return a future WUHUUU    */
-  def sendFileFuture(filename: String, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
+    * @return future
+    */
+  def sendFileFuture(filename: String): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -182,8 +183,9 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
-    * @return a future WUHUUU    */
-  def sendFileFuture(filename: String, offset: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
+    * @return future
+    */
+  def sendFileFuture(filename: String, offset: Long): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, offset, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -195,8 +197,9 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     * @param filename file name of the file to send
     * @param offset offset
     * @param length length
-    * @return a future WUHUUU    */
-  def sendFileFuture(filename: String, offset: Long, length: Long, resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): concurrent.Future[Unit] = {
+    * @return future
+    */
+  def sendFileFuture(filename: String, offset: Long, length: Long): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.sendFile(filename, offset, length, promiseAndHandler._1)
     promiseAndHandler._2.future

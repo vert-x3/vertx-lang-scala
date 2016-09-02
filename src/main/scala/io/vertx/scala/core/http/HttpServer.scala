@@ -128,8 +128,9 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * listening (or has failed).
     * @param port the port to listen on
     * @param host the host to listen on
-    * @return a future WUHUUU    */
-  def listenFuture(port: Int, host: String, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
+    * @return the listen future
+    */
+  def listenFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -149,8 +150,9 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @param port the port to listen on
-    * @return a future WUHUUU    */
-  def listenFuture(port: Int, listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
+    * @return the listen future
+    */
+  def listenFuture(port: Int): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -158,8 +160,9 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
-    * @return a future WUHUUU    */
-  def listenFuture(listenHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.http.HttpServer] => Unit): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
+    * @return the listen future
+    */
+  def listenFuture(): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -176,7 +179,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).
-    * @return a future WUHUUU    */
+    * @return the future
+    */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.close(promiseAndHandler._1)

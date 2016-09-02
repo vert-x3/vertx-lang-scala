@@ -87,7 +87,8 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
-    * @return a future WUHUUU    */
+    * @return the reply future for the reply.
+    */
   def replyFuture[R](message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, promiseAndHandler._1)
@@ -108,7 +109,8 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * to receive the reply to the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return a future WUHUUU    */
+    * @return the reply future for the reply.
+    */
   def replyFuture[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, options.asJava, promiseAndHandler._1)

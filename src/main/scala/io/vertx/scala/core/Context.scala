@@ -79,7 +79,8 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * method if it failed.
     * @param blockingCodeHandler handler representing the blocking code to run
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-    * @return a future WUHUUU    */
+    * @return future that will be called when the blocking code is complete
+    */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
@@ -89,7 +90,8 @@ class Context(private val _asJava: io.vertx.core.Context) {
   /**
     * Invoke [[io.vertx.scala.core.Context#executeBlocking]] with order = true.
     * @param blockingCodeHandler handler representing the blocking code to run
-    * @return a future WUHUUU    */
+    * @return future that will be called when the blocking code is complete
+    */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)

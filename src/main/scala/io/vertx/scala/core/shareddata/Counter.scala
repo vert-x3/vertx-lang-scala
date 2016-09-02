@@ -31,7 +31,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Get the current value of the counter
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def getFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.get(promiseAndHandler._1)
@@ -40,7 +41,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Increment the counter atomically and return the new count
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def incrementAndGetFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.incrementAndGet(promiseAndHandler._1)
@@ -49,7 +51,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Increment the counter atomically and return the value before the increment.
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def getAndIncrementFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.getAndIncrement(promiseAndHandler._1)
@@ -58,7 +61,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
   /**
     * Decrement the counter atomically and return the new count
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def decrementAndGetFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.decrementAndGet(promiseAndHandler._1)
@@ -68,7 +72,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
   /**
     * Add the value to the counter atomically and return the new count
     * @param value the value to add
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def addAndGetFuture(value: Long): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.addAndGet(value, promiseAndHandler._1)
@@ -78,7 +83,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
   /**
     * Add the value to the counter atomically and return the value before the add
     * @param value the value to add
-    * @return a future WUHUUU    */
+    * @return future which will be passed the value
+    */
   def getAndAddFuture(value: Long): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long,Long]((x => x))
     _asJava.getAndAdd(value, promiseAndHandler._1)
@@ -90,7 +96,8 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
     * atomically.
     * @param expected the expected value
     * @param value the new value
-    * @return a future WUHUUU    */
+    * @return the future will be passed true on success
+    */
   def compareAndSetFuture(expected: Long, value: Long): concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
     _asJava.compareAndSet(expected, value, promiseAndHandler._1)
