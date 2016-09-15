@@ -619,4 +619,14 @@
     }
     return true;
   }
+
+  def createNameForMethod(method) {
+    var methodName = method.name;
+    if(shouldMethodReturnAFuture(method)) {
+      if(methodName.endsWith('Handler'))
+        methodName = methodName.substring(0, methodName.length-7);
+      methodName += 'Future';
+    }
+    return escapeIfKeyword(methodName);
+  }
 }
