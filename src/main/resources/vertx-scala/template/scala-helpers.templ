@@ -462,29 +462,36 @@
   }
 
 
+  def handleParamConversionListSet(param) {
+    if (param.type.args[0].kind == CLASS_API) {
+      return handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
+    } else if(param.type.args[0].kind == CLASS_DATA_OBJECT){
+      return handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
+    } else {
+      return handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
+    }
+  }
+
+  def handleParamConversionMap(param) {
+    if (param.type.args[0].kind == CLASS_API &&
+      param.type.args[1].kind == CLASS_API) {
+      return handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
+    } else if (param.type.args[0].kind == CLASS_API) {
+      return handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
+    } else if (param.type.args[1].kind == CLASS_API) {
+      return handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', if (kv._2 != null) kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '] else null)).asJava');
+    } else {
+      return handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava');
+    }
+  }
+
   def handleParamConversion(param) {
     var invocation = '';
     if (param.type.kind == CLASS_LIST ||
       param.type.kind == CLASS_SET) {
-      if (param.type.args[0].kind == CLASS_API) {
-        invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
-      } else if(param.type.args[0].kind == CLASS_DATA_OBJECT){
-        invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x.asJava).asJava');
-      } else {
-        invocation += handleOptionForCollection(param, '.map(x => if(x == null) null else x:' + param.type.args[0].name + ').asJava');
-      }
+      invocation += handleParamConversionListSet(param);
     } else if (param.type.kind == CLASS_MAP) {
-    /*TODO do the same dance with x.java as above */
-      if (param.type.args[0].kind == CLASS_API &&
-        param.type.args[1].kind == CLASS_API) {
-        invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
-      } else if (param.type.args[0].kind == CLASS_API) {
-        invocation += handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
-      } else if (param.type.args[1].kind == CLASS_API) {
-        invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', if (kv._2 != null) kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '] else null)).asJava');
-      } else {
-        invocation += handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava');
-      }
+      invocation += handleParamConversionMap(param);
     } else if (param.type.kind == CLASS_HANDLER) {
       var handlerType = param.type.args[0];
       invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
@@ -497,36 +504,48 @@
     return invocation;
   }
 
+  def handleMethodReturnList(method) {
+    if (method.returnType.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ')';
+    } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x))';
+    } else {
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ')';
+    }
+  }
+
+  def handleMethodReturnSet(method) {
+    if (method.returnType.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
+    } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x)).toSet';
+    } else {
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
+    }
+  }
+
+  def handleMethodReturnMap(method) {
+    if (method.returnType.args[1].kind == CLASS_API) {
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
+    } else if(method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(kv => (kv._1, '+ method.returnType.args[1].simpleName +'(kv._2))).toMap';
+    } else if (method.returnType.args[1].kind == CLASS_STRING ||
+               method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
+               method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
+      return '.asScala.toMap';
+    } else {
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
+    }
+  }
+
   def handleMethodReturn(method) {
     var invocation = '';
     if (method.returnType.kind == CLASS_LIST) {
-      if (method.returnType.args[0].kind == CLASS_API) {
-        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ')';
-      } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-        invocation += '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x))';
-      } else {
-        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ')';
-      }
+      invocation += handleMethodReturnList(method);
     } else if (method.returnType.kind == CLASS_SET) {
-      if (method.returnType.args[0].kind == CLASS_API) {
-        invocation += '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
-      } else if(method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-        invocation += '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x)).toSet';
-      } else {
-        invocation += '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
-      }
+      invocation += handleMethodReturnSet(method);
     } else if (method.returnType.kind == CLASS_MAP) {
-      if (method.returnType.args[1].kind == CLASS_API) {
-        invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
-      } else if(method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
-        invocation += '.asScala.map(kv => (kv._1, '+ method.returnType.args[1].simpleName +'(kv._2))).toMap';
-      } else if (method.returnType.args[1].kind == CLASS_STRING ||
-            method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
-            method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
-        invocation += '.asScala.toMap';
-      } else {
-        invocation += '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
-      }
+      invocation += handleMethodReturnMap(method);
     } else if (method.returnType.kind == CLASS_HANDLER) {
       invocation += ')'
     }
