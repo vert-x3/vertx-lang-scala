@@ -53,7 +53,7 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
     */
   def payload(): io.vertx.scala.core.buffer.Buffer = {
     if(cached_2 == null) {
-      cached_2=    Buffer.apply(_asJava.payload())
+      cached_2=    Buffer()(_asJava.payload())
     }
     cached_2
   }

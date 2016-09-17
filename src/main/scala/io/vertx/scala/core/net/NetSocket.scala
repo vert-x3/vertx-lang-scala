@@ -62,7 +62,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.net.NetSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.handler(funcToMappedHandler(Buffer())(handler))
     this
   }
 
@@ -210,7 +210,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
     if(cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_0=    SocketAddress()(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -220,7 +220,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     if(cached_1 == null) {
-      cached_1=    SocketAddress.apply(_asJava.localAddress())
+      cached_1=    SocketAddress()(_asJava.localAddress())
     }
     cached_1
   }

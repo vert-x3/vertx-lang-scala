@@ -188,7 +188,6 @@
     return '';
   }
 
-  /*TODO get rid of apply*/
   def toScalaApply(name) {
     helper.getNonGenericType(name) + '.apply' + getGenericType(name);
   }

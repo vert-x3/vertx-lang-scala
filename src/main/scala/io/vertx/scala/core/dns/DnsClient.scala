@@ -102,7 +102,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the scala-function to notify with the [[io.vertx.scala.core.AsyncResult]]. The future will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveMXFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord.apply)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord())))
     _asJava.resolveMX(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -146,7 +146,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @return the scala-function to notify with the [[AsyncResult]]. The future will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
   def resolveSRVFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord.apply)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord())))
     _asJava.resolveSRV(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -131,7 +131,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the next future, used for chaining
     */
   def compose[U](handler: T => Unit, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
+    Future[U]()(_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
   }
 
   /**
@@ -149,7 +149,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the composed future
     */
   def compose[U](mapper: T => io.vertx.core.Future[U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(asJavaFunction(mapper)))
+    Future[U]()(_asJava.compose(asJavaFunction(mapper)))
   }
 
   /**
@@ -166,7 +166,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the mapped future
     */
   def map[U](mapper: T => U): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.map(asJavaFunction(mapper)))
+    Future[U]()(_asJava.map(asJavaFunction(mapper)))
   }
 
   /**
@@ -179,7 +179,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the mapped future
     */
   def map[V](value: V): io.vertx.scala.core.Future[V] = {
-    Future.apply[V](_asJava.map(value))
+    Future[V]()(_asJava.map(value))
   }
 
   /**
@@ -201,19 +201,19 @@ object Future {
     new io.vertx.scala.core.Future(_asJava)
 
   def future[T](): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.future())
+    Future[T]()(io.vertx.core.Future.future())
   }
 
   def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture())
+    Future[T]()(io.vertx.core.Future.succeededFuture())
   }
 
   def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture(result))
+    Future[T]()(io.vertx.core.Future.succeededFuture(result))
   }
 
   def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
-    Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
+    Future[T]()(io.vertx.core.Future.failedFuture(failureMessage))
   }
 
 }

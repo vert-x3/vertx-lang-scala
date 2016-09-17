@@ -37,7 +37,7 @@ class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSoc
   }
 
   def handler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.ServerWebSocketStream = {
-    _asJava.handler(funcToMappedHandler(ServerWebSocket.apply)(handler))
+    _asJava.handler(funcToMappedHandler(ServerWebSocket())(handler))
     this
   }
 

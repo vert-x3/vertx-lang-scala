@@ -92,7 +92,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   def handler(handler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
+    _asJava.handler(funcToMappedHandler(HttpClientResponse())(handler))
     this
   }
 
@@ -195,7 +195,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     */
   def headers(): io.vertx.scala.core.MultiMap = {
     if(cached_0 == null) {
-      cached_0=    MultiMap.apply(_asJava.headers())
+      cached_0=    MultiMap()(_asJava.headers())
     }
     cached_0
   }
@@ -333,7 +333,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return a reference to this, so the API can be used fluently
     */
   def pushHandler(handler: io.vertx.scala.core.http.HttpClientRequest => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
+    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest())(handler))
     this
   }
 
@@ -357,7 +357,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     */
   def connection(): io.vertx.scala.core.http.HttpConnection = {
     if(cached_1 == null) {
-      cached_1=    HttpConnection.apply(_asJava.connection())
+      cached_1=    HttpConnection()(_asJava.connection())
     }
     cached_1
   }
@@ -368,7 +368,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpClientRequest = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection())(handler))
     this
   }
 

@@ -224,7 +224,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return an async result future notified with pong reply or the failure
     */
   def pingFuture(data: io.vertx.scala.core.buffer.Buffer): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer()(x)))
     _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -237,7 +237,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def pingHandler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.pingHandler(funcToMappedHandler(Buffer())(handler))
     this
   }
 

@@ -37,7 +37,7 @@ class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream)
   }
 
   def handler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetSocketStream = {
-    _asJava.handler(funcToMappedHandler(NetSocket.apply)(handler))
+    _asJava.handler(funcToMappedHandler(NetSocket())(handler))
     this
   }
 

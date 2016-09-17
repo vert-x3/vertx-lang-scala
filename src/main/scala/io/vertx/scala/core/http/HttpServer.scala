@@ -51,7 +51,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
     if(cached_0 == null) {
-      cached_0=    HttpServerRequestStream.apply(_asJava.requestStream())
+      cached_0=    HttpServerRequestStream()(_asJava.requestStream())
     }
     cached_0
   }
@@ -62,7 +62,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def requestHandler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
+    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest())(handler))
     this
   }
 
@@ -71,7 +71,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection())(handler))
     this
   }
 
@@ -82,7 +82,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     */
   def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
     if(cached_1 == null) {
-      cached_1=    ServerWebSocketStream.apply(_asJava.websocketStream())
+      cached_1=    ServerWebSocketStream()(_asJava.websocketStream())
     }
     cached_1
   }
@@ -93,7 +93,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketHandler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.HttpServer = {
-    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
+    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket())(handler))
     this
   }
 
@@ -131,7 +131,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer()(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -153,7 +153,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer()(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -163,7 +163,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer()(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
