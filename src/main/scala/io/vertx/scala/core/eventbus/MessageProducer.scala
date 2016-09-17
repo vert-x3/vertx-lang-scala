@@ -53,12 +53,12 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @return reference to this for fluency
     */
   def send(message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message))
+    MessageProducer[T]()(_asJava.send(message))
   }
 
   def sendFuture[R](message: T): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message[R]()(x)))
+    MessageProducer[T]()(_asJava.send(message, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 

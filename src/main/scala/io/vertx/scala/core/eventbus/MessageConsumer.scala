@@ -44,7 +44,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   }
 
   def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
+    _asJava.handler(funcToMappedHandler(Message[T]())(handler))
     this
   }
 
@@ -67,7 +67,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * @return a read stream for the body of the message stream.
     */
   def bodyStream(): io.vertx.scala.core.streams.ReadStream[T] = {
-    ReadStream.apply[T](_asJava.bodyStream())
+    ReadStream[T]()(_asJava.bodyStream())
   }
 
   /**
@@ -92,7 +92,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * @return this registration
     */
   def setMaxBufferedMessages(maxBufferedMessages: Int): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer[T]()(_asJava.setMaxBufferedMessages(maxBufferedMessages))
   }
 
   /**
