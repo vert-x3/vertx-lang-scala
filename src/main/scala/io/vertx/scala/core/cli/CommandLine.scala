@@ -35,7 +35,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
     * @return the model of this command line object.
     */
   def cli(): io.vertx.scala.core.cli.CLI = {
-    CLI()(_asJava.cli())
+    CLI.apply(_asJava.cli())
   }
 
   /**
@@ -189,7 +189,7 @@ object CommandLine {
     new io.vertx.scala.core.cli.CommandLine(_asJava)
 
   def create(cli: io.vertx.scala.core.cli.CLI): io.vertx.scala.core.cli.CommandLine = {
-    CommandLine()(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
+    CommandLine.apply(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
   }
 
 }

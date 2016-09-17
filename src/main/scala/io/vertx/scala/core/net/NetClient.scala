@@ -50,9 +50,9 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
-    */
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def connectFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetSocket,io.vertx.scala.core.net.NetSocket]((x => if (x == null) null else NetSocket()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetSocket,io.vertx.scala.core.net.NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
     _asJava.connect(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -47,7 +47,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String]): io.vertx.scala.core.cli.CommandLine = {
-    CommandLine()(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava))
+    CommandLine.apply(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava))
   }
 
   /**
@@ -57,7 +57,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): io.vertx.scala.core.cli.CommandLine = {
-    CommandLine()(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava, validate))
+    CommandLine.apply(_asJava.parse(arguments.map(x => if(x == null) null else x:java.lang.String).asJava, validate))
   }
 
   /**
@@ -258,7 +258,7 @@ object CLI {
     new io.vertx.scala.core.cli.CLI(_asJava)
 
   def create(name: String): io.vertx.scala.core.cli.CLI = {
-    CLI()(io.vertx.core.cli.CLI.create(name))
+    CLI.apply(io.vertx.core.cli.CLI.create(name))
   }
 
 }

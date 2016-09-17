@@ -37,7 +37,7 @@ class HttpServerRequestStream(private val _asJava: io.vertx.core.http.HttpServer
   }
 
   def handler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServerRequestStream = {
-    _asJava.handler(funcToMappedHandler(HttpServerRequest())(handler))
+    _asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
 

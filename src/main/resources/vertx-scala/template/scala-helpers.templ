@@ -573,7 +573,6 @@
     var fluent = method.isFluent();
     var future = shouldMethodReturnAFuture(method);
     var wrap = false;
-    /*TODO I have to handle conversions with handlerToMappedFunction / methodInvocationHandlerAsyncResult*/
     if (method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT) {
       if(method.returnType.args[0].args[0].kind != CLASS_API) {
         invocation += 'handlerToFunc[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+']](' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';

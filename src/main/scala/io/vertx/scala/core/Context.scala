@@ -83,7 +83,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future[T]())(blockingCodeHandler), ordered, promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -94,7 +94,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     */
   def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future[T]())(blockingCodeHandler), promiseAndHandler._1)
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -187,7 +187,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @return The Vertx instance that created the context
     */
   def owner(): io.vertx.scala.core.Vertx = {
-    Vertx()(_asJava.owner())
+    Vertx.apply(_asJava.owner())
   }
 
   /**

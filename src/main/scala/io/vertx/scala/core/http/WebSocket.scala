@@ -90,7 +90,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
     if(cached_0 == null) {
-      cached_0=    SocketAddress()(_asJava.remoteAddress())
+      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -100,7 +100,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
     if(cached_1 == null) {
-      cached_1=    SocketAddress()(_asJava.localAddress())
+      cached_1=    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
   }
@@ -111,7 +111,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.WebSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer())(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -171,7 +171,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def frameHandler(handler: io.vertx.scala.core.http.WebSocketFrame => Unit): io.vertx.scala.core.http.WebSocket = {
-    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame())(handler))
+    _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
     this
   }
 

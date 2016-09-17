@@ -194,7 +194,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * and ending at position `end - 1`
     */
   def getBuffer(start: Int, end: Int): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(_asJava.getBuffer(start, end))
+    Buffer.apply(_asJava.getBuffer(start, end))
   }
 
   /**
@@ -589,7 +589,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Returns a copy of the entire Buffer.
     */
   def copy(): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(_asJava.copy())
+    Buffer.apply(_asJava.copy())
   }
 
   /**
@@ -598,7 +598,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * while they maintain separate indexes and marks.
     */
   def slice(): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(_asJava.slice())
+    Buffer.apply(_asJava.slice())
   }
 
   /**
@@ -607,7 +607,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * while they maintain separate indexes and marks.
     */
   def slice(start: Int, end: Int): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(_asJava.slice(start, end))
+    Buffer.apply(_asJava.slice(start, end))
   }
 
 }
@@ -618,19 +618,19 @@ object Buffer {
     new io.vertx.scala.core.buffer.Buffer(_asJava)
 
   def buffer(): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(io.vertx.core.buffer.Buffer.buffer())
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer())
   }
 
   def buffer(initialSizeHint: Int): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(io.vertx.core.buffer.Buffer.buffer(initialSizeHint))
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(initialSizeHint))
   }
 
   def buffer(string: String): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(io.vertx.core.buffer.Buffer.buffer(string))
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string))
   }
 
   def buffer(string: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
-    Buffer()(io.vertx.core.buffer.Buffer.buffer(string, enc))
+    Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string, enc))
   }
 
 }

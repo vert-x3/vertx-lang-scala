@@ -150,7 +150,7 @@ object MultiMap {
     new io.vertx.scala.core.MultiMap(_asJava)
 
   def caseInsensitiveMultiMap(): io.vertx.scala.core.MultiMap = {
-    MultiMap()(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
+    MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
   }
 
 }

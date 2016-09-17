@@ -143,7 +143,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def headers(): io.vertx.scala.core.MultiMap = {
     if(cached_0 == null) {
-      cached_0=    MultiMap()(_asJava.headers())
+      cached_0=    MultiMap.apply(_asJava.headers())
     }
     cached_0
   }
@@ -164,7 +164,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     */
   def trailers(): io.vertx.scala.core.MultiMap = {
     if(cached_1 == null) {
-      cached_1=    MultiMap()(_asJava.trailers())
+      cached_1=    MultiMap.apply(_asJava.trailers())
     }
     cached_1
   }
@@ -402,27 +402,27 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
-    */
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse()(x)))
-    HttpServerResponse()(_asJava.push(method, host, path, promiseAndHandler._1))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    HttpServerResponse.apply(_asJava.push(method, host, path, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
-    */
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse()(x)))
-    HttpServerResponse()(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
-    */
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -444,7 +444,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return the future notified when the response can be written
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -85,7 +85,7 @@ object HandlerOps {
     else
       new Handler[J]() {
         override def handle(event: J): Unit = {
-          //TODO: this sucks but there is no easy way around, maybe mark dangerous conversions?
+          //This sucks but there is no way around it as we might encounter null anywhere
           if(null != event)
             f(mapper(event))
           else
