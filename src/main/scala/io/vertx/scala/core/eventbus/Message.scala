@@ -49,7 +49,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    MultiMap()(_asJava.headers())
+    MultiMap.apply(_asJava.headers())
   }
 
   /**
@@ -90,7 +90,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply future for the reply.
     */
   def replyFuture[R](message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message[R]()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -112,7 +112,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the reply future for the reply.
     */
   def replyFuture[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message[R]()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

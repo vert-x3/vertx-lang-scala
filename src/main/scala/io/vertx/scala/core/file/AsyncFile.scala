@@ -54,7 +54,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.handler(funcToMappedHandler(Buffer())(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
@@ -154,7 +154,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @return the future to call when the write is complete
     */
   def readFuture(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer.apply(x)))
     _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -174,7 +174,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
 
   /**
     * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
-    */
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def flushFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.flush(promiseAndHandler._1)

@@ -93,6 +93,9 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.arr("BOB", "LAURA") === dataObject.getJsonArray("genEnumValues"))
   }
 
+  /**
+    * This test is ignored as it is broken due to automatic conversion. There is currently no way to make ot work.
+    */
   "testWriteDataObjectWithLists" should "work" ignore {
     import collection.JavaConversions._
 
@@ -105,7 +108,6 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("longValues", Json.arr(0l, 123456789l, 987654321l))
       .put("floatValues", Json.arr(1.1f, 2.2f, 3.3f))
       .put("doubleValues", Json.arr(1.11, 2.22, 3.33))
-      //TODO broken due to automatic conversion
       .put("jsonObjectValues", Json.arr(mapAsJavaMap(Map("foo" -> "eek")), mapAsJavaMap(Map("foo" -> "wibble"))))
       .put("jsonArrayValues", Json.arr(Json.arr("foo"), Json.arr("bar")))
       .put("stringValues", Json.arr("stringValues1", "stringValues2", "stringValues3"))

@@ -157,7 +157,7 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
   }\n
 @end{}
 @end{}
-@comment{TODO: some necessary filtering as PropertyInfo has no information about static methods}
+@comment{Some necessary filtering as PropertyInfo has no information about static methods}
 @if{(property.setter || property.adder) && property.getterMethod != null}
   def @{property.getterMethod} = {\n
     asJava.@{property.getterMethod}()\n

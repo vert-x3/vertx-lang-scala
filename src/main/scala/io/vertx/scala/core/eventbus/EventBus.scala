@@ -67,7 +67,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return reply future will be called when any reply from the recipient is received
     */
   def sendFuture[T](address: String, message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message[T]()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -93,7 +93,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return reply future will be called when any reply from the recipient is received
     */
   def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message[T]()(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -132,7 +132,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def consumer[T](address: String): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer[T]()(_asJava.consumer(address))
+    MessageConsumer.apply[T](_asJava.consumer(address))
   }
 
   /**
@@ -142,7 +142,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def consumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer[T]()(_asJava.consumer(address, funcToMappedHandler(Message[T]())(handler)))
+    MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
   /**
@@ -151,7 +151,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def localConsumer[T](address: String): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer[T]()(_asJava.localConsumer(address))
+    MessageConsumer.apply[T](_asJava.localConsumer(address))
   }
 
   /**
@@ -161,7 +161,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return the event bus message consumer
     */
   def localConsumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
-    MessageConsumer[T]()(_asJava.localConsumer(address, funcToMappedHandler(Message[T]())(handler)))
+    MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
   /**
@@ -174,7 +174,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return The sender
     */
   def sender[T](address: String): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer[T]()(_asJava.sender(address))
+    MessageProducer.apply[T](_asJava.sender(address))
   }
 
   /**
@@ -185,7 +185,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return The sender
     */
   def sender[T](address: String, options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer[T]()(_asJava.sender(address, options.asJava))
+    MessageProducer.apply[T](_asJava.sender(address, options.asJava))
   }
 
   /**
@@ -198,7 +198,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return The publisher
     */
   def publisher[T](address: String): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer[T]()(_asJava.publisher(address))
+    MessageProducer.apply[T](_asJava.publisher(address))
   }
 
   /**
@@ -209,7 +209,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return The publisher
     */
   def publisher[T](address: String, options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
-    MessageProducer[T]()(_asJava.publisher(address, options.asJava))
+    MessageProducer.apply[T](_asJava.publisher(address, options.asJava))
   }
 
 }

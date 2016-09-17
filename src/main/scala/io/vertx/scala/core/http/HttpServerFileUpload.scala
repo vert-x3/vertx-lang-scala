@@ -37,7 +37,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
   }
 
   def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
-    _asJava.handler(funcToMappedHandler(Buffer())(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
