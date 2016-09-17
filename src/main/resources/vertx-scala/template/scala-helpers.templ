@@ -329,27 +329,44 @@
     return conversion;
   }
 
+  def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.name == 'Throwable' ||
+           typeParam.name == 'java.lang.Throwable';
+  }
+
+  def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
+    var len = typeParam.name.length();
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.name == 'Throwable' ||
+           typeParam.name == 'java.lang.Throwable' ||
+           typeParam.kind == CLASS_VOID ||
+           (typeParam.kind == CLASS_OBJECT &&  len > 1) ||
+           typeParam.kind == CLASS_STRING ||
+           typeParam.kind == CLASS_JSON_OBJECT ||
+           typeParam.kind == CLASS_JSON_ARRAY ||
+           typeParam.kind == CLASS_ENUM ||
+           typeParam.kind == CLASS_DATA_OBJECT ||
+           typeParam.kind == CLASS_API ||
+           typeParam.kind == CLASS_LIST ||
+           typeParam.kind == CLASS_SET ||
+           typeParam.kind == CLASS_MAP;
+  }
+
+
   def methodInvocationHandlerAsyncResult(type, method) {
     var typeParam = type.args[0];
-    var len = typeParam.name.length();
     var invocation = '';
-    if (typeParam.kind == CLASS_PRIMITIVE ||
-        typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-        typeParam.name == 'Throwable' ||
-        typeParam.name == 'java.lang.Throwable') {
-      invocation += method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => io.vertx.lang.scala.AsyncResult['+changeJavaGenericNotationToScalaNotation(typeParam)', '+toScalaType(typeParam)+'](x,' + convertType(type.args[0])+'))('+param.name;
-    } else if (typeParam.kind == CLASS_VOID ||
-               (typeParam.kind == CLASS_OBJECT &&  len > 1) ||
-               typeParam.kind == CLASS_STRING ||
-               typeParam.kind == CLASS_JSON_OBJECT ||
-               typeParam.kind == CLASS_JSON_ARRAY ||
-               typeParam.kind == CLASS_ENUM ||
-               typeParam.kind == CLASS_DATA_OBJECT ||
-               typeParam.kind == CLASS_API ||
-               typeParam.kind == CLASS_LIST ||
-               typeParam.kind == CLASS_SET ||
-               typeParam.kind == CLASS_MAP) {
-      invocation +=  method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => io.vertx.lang.scala.AsyncResult['+changeJavaGenericNotationToScalaNotation(typeParam)', '+toScalaType(typeParam)+'](x,' + convertType(type.args[0])+')('+ handleOption(param);
+    if (doesTypeParamRequireExplicitConversionForAsyncResult(typeParam)) {
+      invocation += method + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => io.vertx.lang.scala.AsyncResult['+changeJavaGenericNotationToScalaNotation(typeParam)', '+toScalaType(typeParam)+'](x,' + convertType(type.args[0])+'))(';
+      if(doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam)) {
+        invocation += param.name;
+      }
+      else {
+        invocation += handleOption(param);
+      }
     } else if (typeParam.kind == CLASS_OBJECT) {
       invocation += 'funcToHandler[io.vertx.core.AsyncResult['+typeParam.name+']]('+param.name;
     }
