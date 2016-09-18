@@ -108,6 +108,9 @@
     if(possibleKeyword.equals("type")) {
       return true;
     }
+    if(possibleKeyword.equals("object")) {
+      return true;
+    }
     return false;
   }
 
@@ -578,8 +581,12 @@
     var future = shouldMethodReturnAFuture(method);
     var wrap = false;
     if (returnsHandlerForAsyncResult(method)) {
-      if(method.returnType.args[0].args[0].kind == CLASS_API) {
+      var kindOfAsyncResult = method.returnType.args[0].args[0].kind;
+      if(kindOfAsyncResult == CLASS_API) {
         invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if(s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
+      }
+      else if(kindOfAsyncResult == CLASS_PRIMITIVE || kindOfAsyncResult == CLASS_BOXED_PRIMITIVE) {
+        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if(s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
       }
       else {
         invocation += 'handlerToFunc[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+']](' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
