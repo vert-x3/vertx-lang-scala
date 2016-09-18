@@ -581,7 +581,8 @@
         invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if(s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
       }
     }
-    else {if (method.returnType.kind == CLASS_HANDLER) {
+    else {
+      if (method.returnType.kind == CLASS_HANDLER) {
         var ret = method.returnType.args[0];
         var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
         if (ret.kind == CLASS_API ||
