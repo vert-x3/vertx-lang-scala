@@ -209,7 +209,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Option]], `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[io.vertx.scala.core.cli.Option] = {
-        scala.Option(Option(_asJava.getOption(name)))
+        scala.Option(io.vertx.scala.core.cli.Option(_asJava.getOption(name)))
   }
 
   /**
@@ -218,7 +218,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[io.vertx.scala.core.cli.Argument] = {
-        scala.Option(Argument(_asJava.getArgument(name)))
+        scala.Option(io.vertx.scala.core.cli.Argument(_asJava.getArgument(name)))
   }
 
   /**
@@ -227,7 +227,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[io.vertx.scala.core.cli.Argument] = {
-        scala.Option(Argument(_asJava.getArgument(index)))
+        scala.Option(io.vertx.scala.core.cli.Argument(_asJava.getArgument(index)))
   }
 
   /**
