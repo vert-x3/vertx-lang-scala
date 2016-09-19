@@ -23,7 +23,7 @@
           if (param.type.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(param.type);
           }
-          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
         else {
@@ -48,7 +48,7 @@
           if (returnType.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(returnType);
           }
-          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
       }
@@ -198,7 +198,8 @@
             }
             output.append(outputLink);
           } else if (tag.name == "code") {
-            output.append("`").append(tag.value.trim()).append("`");
+            /** I have to do the replacement as the replaced code would be interpreted as a comment by scaladoc */
+            output.append("`").append(tag.value.trim().replace('/*','/\\*')).append("`");
           }
         }
       }
