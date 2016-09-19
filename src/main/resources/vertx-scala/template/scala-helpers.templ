@@ -631,7 +631,7 @@
     var conversion = handleMethodReturn(method);
 
     if(method.returnType.kind == CLASS_DATA_OBJECT) {
-      invocation = method.returnType.simpleName + '(' +invocation + ')';
+      invocation = method.returnType.translateName("scala") + '(' +invocation + ')';
     }
 
     if(method.returnType.isNullable){
