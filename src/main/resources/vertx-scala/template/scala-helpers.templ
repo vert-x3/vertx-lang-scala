@@ -391,7 +391,7 @@
                type.kind == CLASS_ENUM) {
       invocation += '(x => x)';
     } else if(type.kind == CLASS_DATA_OBJECT) {
-      invocation += '(x => ' + type.getSimpleName() + '(x))';
+      invocation += '(x => ' + type.translateName('scala') + '(x))';
     } else if (type.kind == CLASS_API) {
       invocation += '(x => if (x == null) null else ' + toScalaApply(type.getSimpleName()) + '(x))';
     } else if (type.kind == CLASS_LIST ||
