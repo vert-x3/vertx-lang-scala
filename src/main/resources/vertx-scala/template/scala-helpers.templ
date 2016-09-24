@@ -243,14 +243,14 @@
     var paramList = '';
     var first = true;
     for (param : method.params) {
-        if(!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !(method.returnType.kind == CLASS_HANDLER))) {
-            if (first) {
-              first = false;
-            } else {
-              paramList += ', ';
-            }
-            paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
+      if (!(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT && !(method.returnType.kind == CLASS_HANDLER))) {
+        if (first) {
+          first = false;
+        } else {
+          paramList += ', ';
         }
+        paramList += escapeIfKeyword(param.name) + ': ' + toOptionIfNullableAndParam(toScalaType(param.type), param.type, param);
+      }
     }
     paramList;
   }
@@ -345,7 +345,7 @@
            typeParam.name == 'Throwable' ||
            typeParam.name == 'java.lang.Throwable' ||
            typeParam.kind == CLASS_VOID ||
-           (typeParam.kind == CLASS_OBJECT &&  len > 1) ||
+           (typeParam.kind == CLASS_OBJECT && len > 1) ||
            typeParam.kind == CLASS_STRING ||
            typeParam.kind == CLASS_JSON_OBJECT ||
            typeParam.kind == CLASS_JSON_ARRAY ||
@@ -577,8 +577,8 @@
 
   def methodInvocation(target, method, indentation) {
     var invocation = '';
-    var fluent = method.isFluent();
-    var future = shouldMethodReturnAFuture(method);
+    var isFluent = method.isFluent();
+    var isFuture = shouldMethodReturnAFuture(method);
     var wrap = false;
     if (returnsHandlerForAsyncResult(method)) {
       var kindOfAsyncResult = method.returnType.args[0].args[0].kind;
@@ -614,7 +614,7 @@
         }
       }
 
-      if (!fluent and method.returnType.kind == CLASS_API) {
+      if (!isFluent and method.returnType.kind == CLASS_API) {
         wrap = true;
         invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
       }
@@ -651,7 +651,7 @@
       invocation += conversion + '\n';
     }
 
-    if (method.isFluent() && !future) {
+    if (method.isFluent() && !isFuture) {
       invocation += indentation;
       invocation += 'this\n';
     }
@@ -674,8 +674,9 @@
   def createNameForMethod(method) {
     var methodName = method.name;
     if(shouldMethodReturnAFuture(method)) {
-      if(methodName.endsWith('Handler'))
+      if(methodName.endsWith('Handler')) {
         methodName = methodName.substring(0, methodName.length-7);
+      }
       methodName += 'Future';
     }
     return escapeIfKeyword(methodName);
