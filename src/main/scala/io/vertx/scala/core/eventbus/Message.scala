@@ -57,7 +57,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @return the body, or null.
     */
   def body(): T = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    _asJava.body()
     }
     cached_0

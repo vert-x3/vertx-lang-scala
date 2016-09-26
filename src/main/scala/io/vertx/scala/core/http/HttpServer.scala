@@ -50,7 +50,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the request stream
     */
   def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    HttpServerRequestStream.apply(_asJava.requestStream())
     }
     cached_0
@@ -81,7 +81,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the websocket stream
     */
   def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    ServerWebSocketStream.apply(_asJava.websocketStream())
     }
     cached_1

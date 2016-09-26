@@ -194,7 +194,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return The HTTP headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    MultiMap.apply(_asJava.headers())
     }
     cached_0
@@ -356,7 +356,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
     */
   def connection(): io.vertx.scala.core.http.HttpConnection = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    HttpConnection.apply(_asJava.connection())
     }
     cached_1

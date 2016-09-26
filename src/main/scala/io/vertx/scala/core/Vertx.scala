@@ -172,7 +172,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the filesystem object
     */
   def fileSystem(): io.vertx.scala.core.file.FileSystem = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    FileSystem.apply(_asJava.fileSystem())
     }
     cached_0
@@ -183,7 +183,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the event bus object
     */
   def eventBus(): io.vertx.scala.core.eventbus.EventBus = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    EventBus.apply(_asJava.eventBus())
     }
     cached_1
@@ -204,7 +204,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @return the shared data object
     */
   def sharedData(): io.vertx.scala.core.shareddata.SharedData = {
-    if(cached_2 == null) {
+    if (cached_2 == null) {
       cached_2=    SharedData.apply(_asJava.sharedData())
     }
     cached_2

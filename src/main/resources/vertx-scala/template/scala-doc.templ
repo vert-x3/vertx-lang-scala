@@ -30,8 +30,8 @@
           futureDescription = param.description;
         }
       }
-      if(future) {
-        if(futureDescription != null) {
+      if (future) {
+        if (futureDescription != null) {
           doc += commentedIndentation;
           doc += " @return " + convertLink(futureDescription).replace(', may be {@code null}','').replace('handler', 'future');
           doc += "\n";
