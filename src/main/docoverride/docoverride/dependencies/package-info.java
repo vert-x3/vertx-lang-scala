@@ -15,18 +15,20 @@
  */
 
 /**
- * If you are using Maven or Gradle, add the following dependency to the _dependencies_ section of your
- * project descriptor to access the Vert.x Core API and enable the Groovy support:
+ * If you are using SBT, Maven or Gradle, add the following dependency to the _dependencies_ section of your
+ * project descriptor to access the Vert.x Core API and enable the Scala support:
+ *
+ * * SBT (in your `build.sbt` file):
+ *
+ * [source,scala,subs="+attributes"]
+ * ----
+ * libraryDependencies += "io.vertx" %% "vertx-lang-scala" % ${maven.version}
+ * ----
  *
  * * Maven (in your `pom.xml`):
  *
  * [source,xml,subs="+attributes"]
  * ----
- * <dependency>
- *  <groupId>io.vertx</groupId>
- *  <artifactId>vertx-core</artifactId>
- *  <version>${maven.version}</version>
- * </dependency>
  * <dependency>
  *   <groupId>${maven.groupId}</groupId>
  *   <artifactId>${maven.artifactId}</artifactId>
@@ -38,7 +40,6 @@
  *
  * [source,groovy,subs="+attributes"]
  * ----
- * compile "io.vertx:vertx-core:${maven.version}"
  * compile "${maven.groupId}:${maven.artifactId}:${maven.version}"
  * ----
  */

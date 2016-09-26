@@ -43,6 +43,13 @@
             <artifactId>vertx-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <scope>system</scope>
+            <version>1.8.0</version>
+            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
@@ -231,7 +238,6 @@
                         <configuration>
                             <processors>
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
-                                <processor>io.vertx.docgen.DocGenProcessor</processor>
                             </processors>
                             <optionMap>
                                 <outputDirectory>${project.basedir}/src/main</outputDirectory>
