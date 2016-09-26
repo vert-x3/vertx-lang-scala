@@ -186,7 +186,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return an handler completing this future
     */
   def completer(): io.vertx.core.AsyncResult [T] => Unit = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
     }
     cached_0

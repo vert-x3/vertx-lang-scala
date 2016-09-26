@@ -137,7 +137,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * to send the response back to the client.
     */
   def response(): io.vertx.scala.core.http.HttpServerResponse = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    HttpServerResponse.apply(_asJava.response())
     }
     cached_0
@@ -147,7 +147,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the headers in the request.
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    MultiMap.apply(_asJava.headers())
     }
     cached_1
@@ -166,7 +166,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the query parameters in the request
     */
   def params(): io.vertx.scala.core.MultiMap = {
-    if(cached_2 == null) {
+    if (cached_2 == null) {
       cached_2=    MultiMap.apply(_asJava.params())
     }
     cached_2
@@ -185,7 +185,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the remote (client side) address of the request
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
-    if(cached_3 == null) {
+    if (cached_3 == null) {
       cached_3=    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_3
@@ -195,7 +195,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the local (server side) address of the server that handles the request
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    if(cached_4 == null) {
+    if (cached_4 == null) {
       cached_4=    SocketAddress.apply(_asJava.localAddress())
     }
     cached_4
@@ -231,7 +231,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the net socket
     */
   def netSocket(): io.vertx.scala.core.net.NetSocket = {
-    if(cached_5 == null) {
+    if (cached_5 == null) {
       cached_5=    NetSocket.apply(_asJava.netSocket())
     }
     cached_5
@@ -275,7 +275,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the form attributes
     */
   def formAttributes(): io.vertx.scala.core.MultiMap = {
-    if(cached_6 == null) {
+    if (cached_6 == null) {
       cached_6=    MultiMap.apply(_asJava.formAttributes())
     }
     cached_6
@@ -323,7 +323,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
     * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
     */
   def connection(): io.vertx.scala.core.http.HttpConnection = {
-    if(cached_7 == null) {
+    if (cached_7 == null) {
       cached_7=    HttpConnection.apply(_asJava.connection())
     }
     cached_7

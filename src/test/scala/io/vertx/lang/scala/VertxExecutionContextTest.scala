@@ -25,7 +25,7 @@ class PromiseTestVerticle extends ScalaVerticle {
 
   override def start(startFuture: Future[Void]): Unit = {
     val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture()
-    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a))completionFuture()
+    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture()
     val res = for {
       a1 <- f1
       a2 <- f2

@@ -90,7 +90,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    MultiMap.apply(_asJava.headers())
     }
     cached_0
@@ -118,7 +118,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the trailers
     */
   def trailers(): io.vertx.scala.core.MultiMap = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    MultiMap.apply(_asJava.trailers())
     }
     cached_1
@@ -128,7 +128,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the Set-Cookie headers (including trailers)
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
-    if(cached_2 == null) {
+    if (cached_2 == null) {
       cached_2=    _asJava.cookies().asScala.map(x => x:String)
     }
     cached_2
@@ -166,7 +166,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
     * @return the net socket
     */
   def netSocket(): io.vertx.scala.core.net.NetSocket = {
-    if(cached_3 == null) {
+    if (cached_3 == null) {
       cached_3=    NetSocket.apply(_asJava.netSocket())
     }
     cached_3

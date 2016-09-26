@@ -190,7 +190,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def chownFuture(path: String, user: scala.Option[String], group: scala.Option[String]): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.chown(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null), promiseAndHandler._1)
+    _asJava.chown(path, (if (user.isDefined) user.get else null), (if (group.isDefined) group.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -199,7 +199,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     *
     */
   def chownBlocking(path: String, user: scala.Option[String], group: scala.Option[String]): io.vertx.scala.core.file.FileSystem = {
-    _asJava.chownBlocking(path, (if(user.isDefined) user.get else null), (if(group.isDefined) group.get else null))
+    _asJava.chownBlocking(path, (if (user.isDefined) user.get else null), (if (group.isDefined) group.get else null))
     this
   }
 

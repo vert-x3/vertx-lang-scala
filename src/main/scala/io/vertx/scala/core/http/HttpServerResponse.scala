@@ -142,7 +142,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return The HTTP headers
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    MultiMap.apply(_asJava.headers())
     }
     cached_0
@@ -163,7 +163,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @return The HTTP trailers
     */
   def trailers(): io.vertx.scala.core.MultiMap = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    MultiMap.apply(_asJava.trailers())
     }
     cached_1

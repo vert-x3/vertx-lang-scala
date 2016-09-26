@@ -21,7 +21,7 @@
 @else{}
 @{indentation}  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
-@{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
+@{indentation}    if (cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}

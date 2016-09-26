@@ -129,7 +129,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the socket address
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    SocketAddress.apply(_asJava.localAddress())
     }
     cached_0
@@ -157,7 +157,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     */
   def listenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[io.vertx.scala.core.datagram.DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,io.vertx.scala.core.datagram.DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
-    _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), promiseAndHandler._1)
+    _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -183,7 +183,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     */
   def unlistenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[io.vertx.scala.core.datagram.DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,io.vertx.scala.core.datagram.DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
-    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if(source.isDefined) source.get else null), promiseAndHandler._1)
+    _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

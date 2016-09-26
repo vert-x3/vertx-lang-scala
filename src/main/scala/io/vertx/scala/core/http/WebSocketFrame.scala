@@ -61,7 +61,7 @@ class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
     * converted string. Only use this for text frames.
     */
   def textData(): String = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    _asJava.textData()
     }
     cached_0
@@ -71,7 +71,7 @@ class WebSocketFrame(private val _asJava: io.vertx.core.http.WebSocketFrame) {
     * @return the data of the frame
     */
   def binaryData(): io.vertx.scala.core.buffer.Buffer = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    Buffer.apply(_asJava.binaryData())
     }
     cached_1
