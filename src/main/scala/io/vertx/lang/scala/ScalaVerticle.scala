@@ -4,6 +4,7 @@ import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
 import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success, Try}
 
 /**
   * Base class for verticle implementiations.
@@ -37,6 +38,10 @@ class ScalaVerticle extends Verticle {
   override def start(startFuture: Future[Void]): Unit = {
     start()
     startFuture.complete()
+    vertx.deployVerticleFuture("").onComplete{
+      case Success(deploymentId) => startFuture.complete()
+      case Failure(throwable) => startFuture.fail(throwable)
+    }
   }
 
   def asJava(): Verticle = new AbstractVerticle {

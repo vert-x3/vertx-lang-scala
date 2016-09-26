@@ -15,8 +15,6 @@
  */
 package io.vertx.lang.scala.json
 
-import scala.annotation.implicitNotFound
-
 /**
  * Helper to construct JsonObjects and JsonArrays.
  *

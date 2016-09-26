@@ -21,9 +21,7 @@
  * {@link io.vertx.core.json.JsonArray}. This is because, unlike some other languages, Java does not have first class
  * support for http://json.org/[JSON].
  *
- * When developping a vert.x application with Groovy, you can rely on these two classes, or use the
- * (http://www.groovy-lang.org/json.html)[JSON support from Groovy]. This section explains how to use the Vert.x
- * classes.
+ * There is a helper class ({@link io.vertx.lang.scala.json.Json}) to ease the creation of JsonObject/JsonArray instances.
  *
  * NOTE: Most vert.x methods taking a JSON object as argument in their Java version, take a map instead.
  *
@@ -39,29 +37,16 @@
  *
  * ==== Creating JSON objects
  *
- * Empty JSON objects can be created with the default constructor.
+ * Empty JSON objects can be created with the default constructor or using .
  *
- * You can create a JSON object from a string or g-string JSON representation as follows:
+ * You can create a JSON object as follows:
  *
- * [source,groovy]
+ * [source,scala]
  * ----
- * def object = new JsonObject("{\"foo\":\"bar\"}")
- * def object2 = new JsonObject("""
- * {
- *  "foo": "bar"
- * }
- * """)
- * ----
+ * import io.vertx.lang.scala.json.Json
  *
- * In Groovy it's also convenient to create a JSON object from a map:
- *
- * [source, groovy]
+ * def object = Json.obj(("foo","bar"))
  * ----
- * def map = [ "foo" : "bar" ]
- * def json = new JsonObject(map)
- * ----
- *
- * Nested maps are transformed to nested JSON objects.
  *
  * ==== Putting entries into a JSON object
  *
@@ -69,9 +54,11 @@
  *
  * The method invocations can be chained because of the fluent API:
  *
- * [source,java]
+ * [source,scala]
  * ----
- * def object = new JsonObject()
+ * import io.vertx.lang.scala.json.Json
+ *
+ * val object = Json.emptyObj()
  * object.put("foo", "bar").put("num", 123).put("mybool", true)
  * ----
  *
@@ -79,10 +66,10 @@
  *
  * You get values from a JSON object using the {@code getXXX} methods, for example:
  *
- * [source,java]
+ * [source,scala]
  * ----
- * dev val1 = jsonObject.getString("some-key")
- * def val2 = jsonObject.getInteger("some-other-key")
+ * val stringVal = jsonObject.getString("some-key")
+ * val intVal = jsonObject.getInteger("some-other-key")
  * ----
  *
  * ==== Encoding the JSON object to a String
@@ -101,35 +88,36 @@
  *
  * ==== Creating JSON arrays
  *
- * Empty JSON arrays can be created with the default constructor.
+ * You can create a JSON array as follows:
  *
- * You can create a JSON array from a string JSON representation or a map as follows:
- *
- * [source,groovy]
+ * [source,scala]
  * ----
- * def object = new JsonObject("""{foo:["bar", "baz"}""")
- * def object2 = new JsonObject(["foo": ["bar", "baz"]])
+ * import io.vertx.lang.scala.json.Json
+ *
+ * val jsonArray = Json.arr("bar", "baz")
  * ----
  *
  * ==== Adding entries into a JSON array
  *
  * You add entries to a JSON array using the {@link io.vertx.core.json.JsonArray#add} methods.
  *
- * [source,groovy]
+ * [source,scala]
  * ----
- * def array = new JsonArray()
- * array.add("foo").add(123).add(false)
+ * import io.vertx.lang.scala.json.Json
+ *
+ * val jsonArray = Json.emptyArray()
+ * jsonArray.add("foo").add(123).add(false)
  * ----
  *
  * ==== Getting values from a JSON array
  *
  * You get values from a JSON array using the {@code getXXX} methods, for example:
  *
- * [source,groovy]
+ * [source,scala]
  * ----
- * def val = array.getString(0)
- * def intVal = array.getInteger(1)
- * def boolVal = array.getBoolean(2)
+ * val stringVal = array.getString(0)
+ * val intVal = array.getInteger(1)
+ * val boolVal = array.getBoolean(2)
  * ----
  *
  * ==== Encoding the JSON array to a String
