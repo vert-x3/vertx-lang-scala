@@ -3,20 +3,25 @@
 
 @comment{"# Generic asJava method"}
 @{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
-
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
-@comment{"TODO: we need a generic way to identify overridden base methods like hashCode, toString, ..."}
-@{indentation}  override def @{escapeIfKeyword(method.name)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  override def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
-@{indentation}  def @{escapeIfKeyword(method.name + isHandler(method))}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@if{shouldMethodReturnAFuture(method)}
+@{indentation}  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
+@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
+@{indentation}    promiseAndHandler._2.future\n
+@{indentation}  }\n\n
+@else{}
+@{indentation}  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
-@{indentation}    if(cached_@{cacheDecls.size()} == null) {\n
+@{indentation}    if (cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=
 @end{}
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
@@ -26,6 +31,7 @@
 @code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
 @end{}
 @{indentation}  }\n\n
+@end{}
 @end{}
 @end{}
 @end{}

@@ -45,12 +45,12 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * 
     * If the future has already been completed it will be called immediately. Otherwise it will be called when the
     * future is completed.
-    * @param handler the Handler that will be called with the result
-    * @return a reference to this, so it can be used fluently
+    * @return the Handler that will be called with the result
     */
-  def setHandler(handler: io.vertx.core.AsyncResult [T] => Unit): io.vertx.scala.core.Future[T] = {
-    _asJava.setHandler(funcToMappedHandler[io.vertx.core.AsyncResult[T], io.vertx.core.AsyncResult [T]](x => io.vertx.lang.scala.AsyncResult[T, T](x,(x => x)))(handler))
-    this
+  def setFuture(): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
+    _asJava.setHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -186,8 +186,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return an handler completing this future
     */
   def completer(): io.vertx.core.AsyncResult [T] => Unit = {
-    if(cached_0 == null) {
-      cached_0=        handlerToFunc[io.vertx.core.AsyncResult [T]](_asJava.completer())
+    if (cached_0 == null) {
+      cached_0=    handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.completer())
     }
     cached_0
   }

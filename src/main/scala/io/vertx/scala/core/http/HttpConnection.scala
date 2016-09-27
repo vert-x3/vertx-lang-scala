@@ -167,7 +167,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
     */
   def settings(): io.vertx.scala.core.http.Http2Settings = {
-    Http2Settings(_asJava.settings())
+    io.vertx.scala.core.http.Http2Settings(_asJava.settings())
   }
 
   /**
@@ -189,19 +189,19 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
-    * @return a reference to this, so the API can be used fluently
+    * @return the future notified when the settings have been acknowledged by the remote endpoint
     */
-  def updateSettingsWithHandler(settings: io.vertx.scala.core.http.Http2Settings)( completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.updateSettings(settings.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
-    this
+  def updateSettingsFuture(settings: io.vertx.scala.core.http.Http2Settings): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.updateSettings(settings.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
     */
   def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
-    Http2Settings(_asJava.remoteSettings())
+    io.vertx.scala.core.http.Http2Settings(_asJava.remoteSettings())
   }
 
   /**
@@ -221,12 +221,12 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param data the 8 bytes data of the frame
-    * @param pongHandler an async result handler notified with pong reply or the failure
-    * @return a reference to this, so the API can be used fluently
+    * @return an async result future notified with pong reply or the failure
     */
-  def pingWithHandler(data: io.vertx.scala.core.buffer.Buffer)( pongHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.http.HttpConnection = {
-    _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(pongHandler))
-    this
+  def pingFuture(data: io.vertx.scala.core.buffer.Buffer): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**

@@ -93,7 +93,7 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the remote address for this socket
     */
   def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       cached_0=    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
@@ -103,7 +103,7 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the local address for this socket
     */
   def localAddress(): io.vertx.scala.core.net.SocketAddress = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       cached_1=    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
@@ -201,7 +201,7 @@ class ServerWebSocket(private val _asJava: io.vertx.core.http.ServerWebSocket)
     * @return the headers in the WebSocket handshake
     */
   def headers(): io.vertx.scala.core.MultiMap = {
-    if(cached_2 == null) {
+    if (cached_2 == null) {
       cached_2=    MultiMap.apply(_asJava.headers())
     }
     cached_2

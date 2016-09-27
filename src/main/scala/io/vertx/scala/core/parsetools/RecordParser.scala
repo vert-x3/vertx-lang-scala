@@ -108,15 +108,15 @@ object RecordParser {
   def apply(_asJava: io.vertx.core.parsetools.RecordParser): io.vertx.scala.core.parsetools.RecordParser =
     new io.vertx.scala.core.parsetools.RecordParser(_asJava)
 
-  def newDelimitedWithHandler(delim: String)( output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
+  def newDelimited(delim: String, output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim, funcToMappedHandler(Buffer.apply)(output)))
   }
 
-  def newDelimitedWithHandler(delim: io.vertx.scala.core.buffer.Buffer)( output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
+  def newDelimited(delim: io.vertx.scala.core.buffer.Buffer, output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler(Buffer.apply)(output)))
   }
 
-  def newFixedWithHandler(size: Int)( output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
+  def newFixed(size: Int, output: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.parsetools.RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newFixed(size, funcToMappedHandler(Buffer.apply)(output)))
   }
 
