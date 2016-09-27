@@ -1,8 +1,10 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.Handler
+import io.vertx.core
+import io.vertx.core.{AsyncResult, Handler}
 import io.vertx.core.logging.LoggerFactory
 
+import scala.concurrent.{Future, Promise}
 import scala.language.implicitConversions
 
 /**
@@ -83,7 +85,7 @@ object HandlerOps {
     else
       new Handler[J]() {
         override def handle(event: J): Unit = {
-          //TODO: this sucks but there is no easy way around, maybe mark dangerous conversions?
+          //This sucks but there is no way around it as we might encounter null anywhere
           if(null != event)
             f(mapper(event))
           else
@@ -121,6 +123,12 @@ object HandlerOps {
       Some(number.asInstanceOf[T])
   }
 
+  /**
+    * Null-save conversion of Java-Booleans into Scala-Options. Required as implicit-conversions will break on null-values.
+    * @param number a possible null-value
+    * @tparam T target of the conversion
+    * @return Option-value representing the conversion-result
+    */
   def nullsafeConvToOption[T](number:java.lang.Boolean): Option[T] = {
     if(number == null)
       None
@@ -128,10 +136,64 @@ object HandlerOps {
       Some(number.asInstanceOf[T])
   }
 
+  /**
+    * Null-save conversion of Java-Character into Scala-Options. Required as implicit-conversions will break on null-values.
+    * @param number a possible null-value
+    * @tparam T target of the conversion
+    * @return Option-value representing the conversion-result
+    */
   def nullsafeConvToOption[T](number:java.lang.Character): Option[T] = {
     if(number == null)
       None
     else
       Some(number.asInstanceOf[T])
+  }
+
+  /**
+    *
+    * val promiseAndHandler = handlerForAsyncResult[Void]
+    * _asJava.close(promiseAndHandler._1)
+    * promiseAndHandler._2.future
+    *
+    * @tparam T
+    * @return
+    */
+  def handlerForAsyncResult[T]() = {
+    val promise = Promise[T]()
+    val handler = new Handler[core.AsyncResult[T]] {
+      override def handle(event: core.AsyncResult[T]): Unit = {
+        if(event.failed())
+          promise.failure(event.cause())
+        else
+          promise.success(event.result())
+      }
+    }
+    (handler,promise)
+  }
+  /**
+    *
+    *
+    * @param conversion convert from Java type to Scala type
+    * @tparam J incoming Java type
+    * @tparam S outgoing Scala type
+    * @return
+    */
+  def handlerForAsyncResultWithConversion[J,S](conversion: J => S) = {
+    val promise = Promise[S]()
+    val handler = new Handler[core.AsyncResult[J]] {
+      override def handle(event: core.AsyncResult[J]): Unit = {
+        if(event.failed())
+          promise.failure(event.cause())
+        else {
+          try {
+            promise.success(conversion(event.result()))
+          }
+          catch {
+            case npe:NullPointerException => promise.failure(npe)
+          }
+        }
+      }
+    }
+    (handler,promise)
   }
 }

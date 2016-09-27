@@ -110,10 +110,12 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   /**
     * Close the file. The actual close happens asynchronously.
     * The handler will be called when the close is complete, or an error occurs.
-    * @param handler the handler
+    * @return the future
     */
-  def close(handler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.close(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
+  def closeFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.close(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -128,12 +130,12 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * The handler will be called when the write is complete, or if an error occurs.
     * @param buffer the buffer to write
     * @param position the position in the file to write it at
-    * @param handler the handler to call when the write is complete
-    * @return a reference to this, so the API can be used fluently
+    * @return the future to call when the write is complete
     */
-  def writeWithHandler(buffer: io.vertx.scala.core.buffer.Buffer, position: Long)( handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+  def writeFuture(buffer: io.vertx.scala.core.buffer.Buffer, position: Long): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -149,12 +151,12 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @param offset the offset into the buffer where the data will be read
     * @param position the position in the file where to start reading
     * @param length the number of bytes to read
-    * @param handler the handler to call when the write is complete
-    * @return a reference to this, so the API can be used fluently
+    * @return the future to call when the write is complete
     */
-  def readWithHandler(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int)( handler: io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer] => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer], io.vertx.core.AsyncResult [io.vertx.scala.core.buffer.Buffer]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.buffer.Buffer, io.vertx.scala.core.buffer.Buffer](x,(x => if (x == null) null else Buffer.apply(x))))(handler))
-    this
+  def readFuture(buffer: io.vertx.scala.core.buffer.Buffer, offset: Int, position: Long, length: Int): concurrent.Future[io.vertx.scala.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,io.vertx.scala.core.buffer.Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -172,10 +174,11 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
 
   /**
     * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
-    */
-  def flush(handler: io.vertx.core.AsyncResult [Unit] => Unit): io.vertx.scala.core.file.AsyncFile = {
-    _asJava.flush(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(handler))
-    this
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
+  def flushFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.flush(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**

@@ -32,20 +32,24 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
   /**
     * Get a value from the map, asynchronously.
     * @param k the key
-    * @param resultHandler - this will be called some time later with the async result.
+    * @return - this will be called some time later with the async result.
     */
-  def getWithHandler(k: K)( resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.get(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
+  def getFuture(k: K): concurrent.Future[V] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
+    _asJava.get(k, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Put a value in the map, asynchronously.
     * @param k the key
     * @param v the value
-    * @param completionHandler - this will be called some time later to signify the value has been put
+    * @return - this will be called some time later to signify the value has been put
     */
-  def putWithHandler(k: K, v: V)( completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.put(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+  def putFuture(k: K, v: V): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.put(k, v, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -54,10 +58,12 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry
-    * @param completionHandler the handler
+    * @return the future
     */
-  def putWithHandler(k: K, v: V, ttl: Long)( completionHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.put(k, v, ttl, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(completionHandler))
+  def putFuture(k: K, v: V, ttl: Long): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.put(k, v, ttl, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -65,10 +71,12 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * value will be returned to the handler, otherwise null.
     * @param k the key
     * @param v the value
-    * @param completionHandler the handler
+    * @return the future
     */
-  def putIfAbsentWithHandler(k: K, v: V)( completionHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.putIfAbsent(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(completionHandler))
+  def putIfAbsentFuture(k: K, v: V): concurrent.Future[V] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
+    _asJava.putIfAbsent(k, v, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -77,39 +85,47 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry
-    * @param completionHandler the handler
+    * @return the future
     */
-  def putIfAbsentWithHandler(k: K, v: V, ttl: Long)( completionHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.putIfAbsent(k, v, ttl, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(completionHandler))
+  def putIfAbsentFuture(k: K, v: V, ttl: Long): concurrent.Future[V] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
+    _asJava.putIfAbsent(k, v, ttl, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Remove a value from the map, asynchronously.
     * @param k the key
-    * @param resultHandler - this will be called some time later to signify the value has been removed
+    * @return - this will be called some time later to signify the value has been removed
     */
-  def removeWithHandler(k: K)( resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.remove(k, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
+  def removeFuture(k: K): concurrent.Future[V] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
+    _asJava.remove(k, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Remove a value from the map, only if entry already exists with same value.
     * @param k the key
     * @param v the value
-    * @param resultHandler - this will be called some time later to signify the value has been removed
+    * @return - this will be called some time later to signify the value has been removed
     */
-  def removeIfPresentWithHandler(k: K, v: V)( resultHandler: io.vertx.core.AsyncResult [Boolean] => Unit): Unit = {
-    _asJava.removeIfPresent(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(resultHandler))
+  def removeIfPresentFuture(k: K, v: V): concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
+    _asJava.removeIfPresent(k, v, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Replace the entry only if it is currently mapped to some value
     * @param k the key
     * @param v the new value
-    * @param resultHandler the result handler will be passed the previous value
+    * @return the result future will be passed the previous value
     */
-  def replaceWithHandler(k: K, v: V)( resultHandler: io.vertx.core.AsyncResult [V] => Unit): Unit = {
-    _asJava.replace(k, v, funcToMappedHandler[io.vertx.core.AsyncResult[V], io.vertx.core.AsyncResult [V]](x => io.vertx.lang.scala.AsyncResult[V, V](x,(x => x)))(resultHandler))
+  def replaceFuture(k: K, v: V): concurrent.Future[V] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
+    _asJava.replace(k, v, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -117,26 +133,32 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
     * @param k the key
     * @param oldValue the existing value
     * @param newValue the new value
-    * @param resultHandler the result handler
+    * @return the result future
     */
-  def replaceIfPresentWithHandler(k: K, oldValue: V, newValue: V)( resultHandler: io.vertx.core.AsyncResult [Boolean] => Unit): Unit = {
-    _asJava.replaceIfPresent(k, oldValue, newValue, funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult [Boolean]](x => io.vertx.lang.scala.AsyncResult[java.lang.Boolean, Boolean](x,(x => x)))(resultHandler))
+  def replaceIfPresentFuture(k: K, oldValue: V, newValue: V): concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
+    _asJava.replaceIfPresent(k, oldValue, newValue, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Clear all entries in the map
-    * @param resultHandler called on completion
+    * @return called on completion
     */
-  def clear(resultHandler: io.vertx.core.AsyncResult [Unit] => Unit): Unit = {
-    _asJava.clear(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Void], io.vertx.core.AsyncResult [Unit]](x => io.vertx.lang.scala.AsyncResult[java.lang.Void, Unit](x,(x => ())))(resultHandler))
+  def clearFuture(): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.clear(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
     * Provide the number of entries in the map
-    * @param resultHandler handler which will receive the number of entries
+    * @return future which will receive the number of entries
     */
-  def size(resultHandler: io.vertx.core.AsyncResult [Int] => Unit): Unit = {
-    _asJava.size(funcToMappedHandler[io.vertx.core.AsyncResult[java.lang.Integer], io.vertx.core.AsyncResult [Int]](x => io.vertx.lang.scala.AsyncResult[java.lang.Integer, Int](x,(x => x)))(resultHandler))
+  def sizeFuture(): concurrent.Future[Int] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer,Int]((x => x))
+    _asJava.size(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

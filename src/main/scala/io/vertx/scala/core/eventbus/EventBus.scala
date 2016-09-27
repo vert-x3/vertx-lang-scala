@@ -64,12 +64,12 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
-    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
-    * @return a reference to this, so the API can be used fluently
+    * @return reply future will be called when any reply from the recipient is received
     */
-  def sendWithHandler[T](address: String, message: AnyRef)( replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[T], io.vertx.scala.core.eventbus.Message[T]](x,(x => if (x == null) null else Message.apply[T](x))))(replyHandler))
-    this
+  def sendFuture[T](address: String, message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
+    _asJava.send(address, message, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -90,12 +90,12 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
-    * @return a reference to this, so the API can be used fluently
+    * @return reply future will be called when any reply from the recipient is received
     */
-  def sendWithHandler[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions)( replyHandler: io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]] => Unit): io.vertx.scala.core.eventbus.EventBus = {
-    _asJava.send(address, message, options.asJava, funcToMappedHandler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[T]], io.vertx.core.AsyncResult [io.vertx.scala.core.eventbus.Message[T]]](x => io.vertx.lang.scala.AsyncResult[io.vertx.core.eventbus.Message[T], io.vertx.scala.core.eventbus.Message[T]](x,(x => if (x == null) null else Message.apply[T](x))))(replyHandler))
-    this
+  def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
+    _asJava.send(address, message, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -141,7 +141,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def consumerWithHandler[T](address: String)( handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def consumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
@@ -160,7 +160,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def localConsumerWithHandler[T](address: String)( handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def localConsumer[T](address: String, handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 

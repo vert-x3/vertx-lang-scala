@@ -2,6 +2,7 @@
 
   def methodDoc(method, indentation) {
     var doc = '';
+    var future = shouldMethodReturnAFuture(method);
 
     var commentedIndentation = indentation;
     commentedIndentation += "  *";
@@ -13,19 +14,33 @@
       doc += indentation;
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
+      var futureDescription = '';
       for (param : method.params) {
-        if (param.description != null) {
+        if (param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
           doc += commentedIndentation;
           doc += " @param " + param.name + " ";
           doc += convertLink(param.description);
           if (param.type.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(param.type);
           }
-          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
+        else {
+          futureDescription = param.description;
+        }
       }
-      if (!returnType.name.equals("void")) {
+      if (future) {
+        if (futureDescription != null) {
+          doc += commentedIndentation;
+          doc += " @return " + convertLink(futureDescription).replace(', may be {@code null}','').replace('handler', 'future');
+          doc += "\n";
+        }
+        else {
+          doc += "WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER";
+        }
+      }
+      else if (!returnType.name.equals("void")) {
         if (returnDescription != null) {
           doc += commentedIndentation;
           doc += " @return ";
@@ -33,7 +48,7 @@
           if (returnType.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(returnType);
           }
-          doc = doc.replace('{@code ','`').replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('}','`');
           doc += "\n";
         }
       }
@@ -183,7 +198,8 @@
             }
             output.append(outputLink);
           } else if (tag.name == "code") {
-            output.append("`").append(tag.value.trim()).append("`");
+            /** I have to do the replacement as the replaced code would be interpreted as a comment by scaladoc */
+            output.append("`").append(tag.value.trim().replace('/*','/\\*')).append("`");
           }
         }
       }
