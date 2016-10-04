@@ -16,7 +16,7 @@
     <name>Vert.x Scala Language Support</name>
 
     <properties>
-        <stack.version>3.3.2</stack.version>
+        <stack.version>3.4.0-SNAPSHOT</stack.version>
         <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
         <scala.version>2.11.8</scala.version>
         <maven.compiler.source>1.8</maven.compiler.source>

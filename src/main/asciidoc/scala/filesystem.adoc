@@ -138,7 +138,7 @@ vertx.fileSystem().open("target/classes/hello.txt", renderDataObject-OpenOptions
     var file = renderAsyncResultValue
     var buff = Buffer.buffer("foo")
     forLoop - 
-    for (var i = 0;i < 5;i++) {
+    for ( i <- io.vertx.codetrans.CodeBuilder$1@768eb4fc to io.vertx.codetrans.CodeBuilder$1@68da8f3f) {
       file.write(buff, buff.length() * i, (ar: io.vertx.core.AsyncResult<java.lang.Void>) => {
         if (renderAsyncResultSucceeded) {
           println("Written ok!")
@@ -181,7 +181,7 @@ vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-Op
     var file = renderAsyncResultValue
     var buff = Buffer.buffer(1000)
     forLoop - 
-    for (var i = 0;i < 10;i++) {
+    for ( i <- io.vertx.codetrans.CodeBuilder$1@74191454 to io.vertx.codetrans.CodeBuilder$1@1dc5ef5a) {
       file.read(buff, i * 100, i * 100, 100, (ar: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
         if (renderAsyncResultSucceeded) {
           println("Read ok!")

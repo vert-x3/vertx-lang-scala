@@ -137,7 +137,6 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   }
 
   /**
-    * @return the option name. It returns the long name if set, the short name otherwise. It cannot return `null` for valid option
     */
 
   /**

@@ -103,7 +103,8 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   }
 
   /**
-    * Set the ndots value used when resolving using search domains, the default value is `1`.
+    * Set the ndots value used when resolving using search domains, the default value is `-1` which
+    * determines the value from the OS on Linux or uses the value `1`.
     */
   def setNdots(value:Int) = {
     asJava.setNdots(value)

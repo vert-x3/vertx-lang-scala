@@ -37,7 +37,6 @@ class GoAway(val asJava: io.vertx.core.http.GoAway) {
   }
 
   /**
-    * @return the  error code
     */
   def setErrorCode(value:Long) = {
     asJava.setErrorCode(value)

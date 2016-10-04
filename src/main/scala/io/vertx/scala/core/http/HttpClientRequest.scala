@@ -74,7 +74,6 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * @throws java.lang.IllegalStateException when no response handler is set
     */
   def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
@@ -176,7 +175,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * Set the request host.<p/>
     *
-    * For HTTP2 it sets the  pseudo header otherwise it sets the  header
+    * For HTTP/2 it sets the  pseudo header otherwise it sets the  header
     */
   def setHost(host: String): io.vertx.scala.core.http.HttpClientRequest = {
     _asJava.setHost(host)
@@ -184,7 +183,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
+    * @return the request host. For HTTP/2 it returns the {@literal :authority` pseudo header otherwise it returns the {@literal Host` header
     */
   def getHost(): String = {
     _asJava.getHost()
@@ -340,20 +339,29 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     * Reset this stream with the error code `0`.
     */
-  def reset(): Unit = {
+  def reset(): Boolean = {
     _asJava.reset()
   }
 
   /**
-    * Reset this stream with the error `code`.
+    * Reset this request:
+    * <p/>
+    * <ul>
+    *   <li>for HTTP/2, this performs send an HTTP/2 reset frame with the specified error `code`</li>
+    *   <li>for HTTP/1.x, this closes the connection after the current in-flight requests are ended</li>
+    * </ul>
+    * <p/>
+    * When the request has not yet been sent, the request will be aborted and false is returned as indicator.
+    * <p/>
     * @param code the error code
+    * @return true when reset has been performed
     */
-  def reset(code: Long): Unit = {
+  def reset(code: Long): Boolean = {
     _asJava.reset(code)
   }
 
   /**
-    * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
+    * @return the [[HttpConnection]] associated with this request
     */
   def connection(): io.vertx.scala.core.http.HttpConnection = {
     if (cached_1 == null) {
@@ -390,8 +398,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * @return the id of the stream of this response,  when it is not yet determined, i.e
-    *         the request has not been yet sent or it is not supported HTTP/1.x
+    * @return the id of the stream of this response, {@literal -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
     */
   def streamId(): Int = {
     _asJava.streamId()

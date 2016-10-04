@@ -57,17 +57,20 @@ class ScalaCodeBuilder extends CodeBuilder {
     }
   }
 
+
   override def forLoop(initializer: StatementModel, condition: ExpressionModel, update: ExpressionModel, body: StatementModel): StatementModel = {
     new StatementModel() {
       override def render(renderer: CodeWriter): Unit = {
         renderer.append("forLoop - \n")
-        renderer.append("for (")
-        initializer.render(renderer)
-        renderer.append(';')
-        condition.render(renderer)
-        renderer.append(';')
-        update.render(renderer)
-        renderer.append(") {\n")
+      }
+    }
+  }
+
+  override def sequenceForLoop(variableName: String, fromValue: ExpressionModel, toValue: ExpressionModel, body: StatementModel): StatementModel = {
+    new StatementModel() {
+      override def render(renderer: CodeWriter): Unit = {
+        renderer.append("forLoop - \n")
+        renderer.append(s"for ( ${variableName} <- ${fromValue} to ${toValue}) {\n")
         renderer.indent
         body.render(renderer)
         renderer.unindent

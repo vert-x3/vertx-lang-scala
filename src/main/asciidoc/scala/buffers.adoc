@@ -108,9 +108,7 @@ The first argument to these methods is an index in the buffer from where to get 
 import io.vertx.scala.core.buffer.Buffer
 var buff = Buffer.buffer()
 forLoop - 
-for (var i = 0;i < buff.length();4) {
-  println(s"int value at ${i} is ${buff.getInt(i)}")
-}
+
 
 ----
 
