@@ -411,6 +411,11 @@ class EventBusOptions(val asJava: io.vertx.core.eventbus.EventBusOptions) {
 object EventBusOptions {
   type EventBusOptionsJava = io.vertx.core.eventbus.EventBusOptions
   
+  def apply() = {
+    new EventBusOptions(new EventBusOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: EventBusOptionsJava) = {
     if(t != null)
       new EventBusOptions(t)

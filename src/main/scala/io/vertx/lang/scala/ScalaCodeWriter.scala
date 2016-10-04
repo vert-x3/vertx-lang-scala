@@ -167,7 +167,10 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderJsonArray(jsonArray: JsonArrayLiteralModel): Unit = append("renderJsonArray")
 
-  override def renderDataObject(model: DataObjectLiteralModel): Unit = append("renderDataObject")
+  override def renderDataObject(model: DataObjectLiteralModel): Unit = {
+    append("renderDataObject-"+model.getType.getSimpleName())
+
+  }
 
   override def renderListAdd(list: ExpressionModel, value: ExpressionModel): Unit = {
     list.render(this)

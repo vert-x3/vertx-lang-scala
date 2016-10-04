@@ -177,6 +177,11 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 object Option {
   type OptionJava = io.vertx.core.cli.Option
   
+  def apply() = {
+    new Option(new OptionJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: OptionJava) = {
     if(t != null)
       new Option(t)

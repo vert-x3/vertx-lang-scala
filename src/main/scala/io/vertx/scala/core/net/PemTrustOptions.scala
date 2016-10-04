@@ -79,6 +79,11 @@ class PemTrustOptions(val asJava: io.vertx.core.net.PemTrustOptions) {
 object PemTrustOptions {
   type PemTrustOptionsJava = io.vertx.core.net.PemTrustOptions
   
+  def apply() = {
+    new PemTrustOptions(new PemTrustOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: PemTrustOptionsJava) = {
     if(t != null)
       new PemTrustOptions(t)

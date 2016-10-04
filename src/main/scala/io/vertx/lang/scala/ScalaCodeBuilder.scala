@@ -71,7 +71,7 @@ class ScalaCodeBuilder extends CodeBuilder {
 
     for (importedType <- imports) {
       var fqn: String = importedType.getName
-      if (importedType.isInstanceOf[ApiTypeInfo]) fqn = importedType.translateName("groovy")
+      if (importedType.isInstanceOf[ApiTypeInfo]) fqn = importedType.translateName("scala")
       writer.append("import ").append(fqn).append('\n')
     }
     import scala.collection.JavaConversions._

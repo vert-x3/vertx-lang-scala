@@ -9,7 +9,7 @@ To obtain a DnsClient instance you will create a new via the Vertx instance.
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
+var client = vertx.createDnsClient(53, "10.0.0.1")
 
 ----
 
@@ -26,12 +26,12 @@ To lookup the A / AAAA record for "vertx.io" you would typically use it like:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.lookup("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.lookup("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -46,12 +46,12 @@ To lookup the A record for "vertx.io" you would typically use it like:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.lookup4("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.lookup4("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -66,12 +66,12 @@ To lookup the A record for "vertx.io" you would typically use it like:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.lookup6("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.lookup6("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -86,15 +86,13 @@ To lookup all the A records for "vertx.io" you would typically do:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveA("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveA("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -109,15 +107,13 @@ To lookup all the AAAAA records for "vertx.io" you would typically do:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveAAAA("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveAAAA("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -132,15 +128,13 @@ To lookup all the CNAME records for "vertx.io" you would typically do:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveCNAME("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveCNAME("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -155,24 +149,22 @@ To lookup all the MX records for "vertx.io" you would typically do:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveMX("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveMX("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<io.vertx.core.dns.MxRecord>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
 ----
 
-Be aware that the List will contain the `link:../../groovydoc/io/vertx/groovy/core/dns/MxRecord.html[MxRecord]` sorted by the priority of them, which
+Be aware that the List will contain the `link:../../scaladoc/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` sorted by the priority of them, which
 means MX records with smaller priority coming first in the List.
 
-The `link:../../groovydoc/io/vertx/groovy/core/dns/MxRecord.html[MxRecord]` allows you to access the priority and the name of the MX record by offer methods for it like:
+The `link:../../scaladoc/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` allows you to access the priority and the name of the MX record by offer methods for it like:
 
 [source,scala]
 ----
@@ -189,15 +181,13 @@ To resolve all the TXT records for "vertx.io" you could use something along thes
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveTXT("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveTXT("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -212,15 +202,13 @@ To resolve all the NS records for "vertx.io" you could use something along these
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveNS("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveNS("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -235,15 +223,13 @@ To lookup all the SRV records for "vertx.io" you would typically do:
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolveSRV("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    def records = ar.result()
-    records.each { record ->
-      println(record)
-    }
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolveSRV("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<io.vertx.core.dns.SrvRecord>>) => {
+  if (renderAsyncResultSucceeded) {
+    var records = renderAsyncResultValue
+    enhancedForLoop
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -252,7 +238,7 @@ client.resolveSRV("vertx.io", { ar ->
 Be aware that the List will contain the SrvRecords sorted by the priority of them, which means SrvRecords
 with smaller priority coming first in the List.
 
-The `link:../../groovydoc/io/vertx/groovy/core/dns/SrvRecord.html[SrvRecord]` allows you to access all informations contained in the SRV record itself:
+The `link:../../scaladoc/io/vertx/scala/core/dns/SrvRecord.html[SrvRecord]` allows you to access all informations contained in the SRV record itself:
 
 [source,scala]
 ----
@@ -276,13 +262,13 @@ To resolve the PTR record for the ipaddress 10.0.0.1 you would use the PTR notio
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.resolvePTR("1.0.0.10.in-addr.arpa", { ar ->
-  if (ar.succeeded()) {
-    def record = ar.result()
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.resolvePTR("1.0.0.10.in-addr.arpa", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    var record = renderAsyncResultValue
     println(record)
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 
@@ -297,13 +283,13 @@ To do a reverse lookup for the ipaddress 10.0.0.1 do something similar like this
 
 [source,scala]
 ----
-def client = vertx.createDnsClient(53, "10.0.0.1")
-client.reverseLookup("10.0.0.1", { ar ->
-  if (ar.succeeded()) {
-    def record = ar.result()
+var client = vertx.createDnsClient(53, "10.0.0.1")
+client.reverseLookup("10.0.0.1", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    var record = renderAsyncResultValue
     println(record)
   } else {
-    println("Failed to resolve entry${ar.cause()}")
+    println("Failed to resolve entry" + renderAsyncResultCause)
   }
 })
 

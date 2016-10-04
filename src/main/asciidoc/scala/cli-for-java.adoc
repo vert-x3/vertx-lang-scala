@@ -7,7 +7,7 @@ meaning that the only get String values.
 
 Instead of
 `link:../dataobjects.html#Option[Option]` and `link:../dataobjects.html#Argument[Argument]`, use `TypedOption`
-and `TypedArgument` in the `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html[CLI]` definition:
+and `TypedArgument` in the `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` definition:
 
 [source,java]
 ----
@@ -97,7 +97,7 @@ public class AnnotatedCli {
 }
 ----
 
-Once annotated, you can define the `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html[CLI]` and inject the values using:
+Once annotated, you can define the `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` and inject the values using:
 
 [source,java]
 ----

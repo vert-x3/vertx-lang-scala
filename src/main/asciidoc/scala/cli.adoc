@@ -29,30 +29,17 @@ describe options and arguments:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption([
-  longName:"directory",
-  shortName:"R",
-  description:"enables directory support",
-  flag:true
-]).addArgument([
-  index:0,
-  description:"The source",
-  argName:"source"
-]).addArgument([
-  index:0,
-  description:"The destination",
-  argName:"target"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
 
 ----
 
-As you can see, you can create a new `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html[CLI]` using
-`link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#create(java.lang.String)[CLI.create]`. The passed string is the name of the CLI. Once created you
+As you can see, you can create a new `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` using
+`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#create(java.lang.String)[CLI.create]`. The passed string is the name of the CLI. Once created you
 can set the summary and description. The summary is intended to be short (one line), while the description can
 contain more details. Each option and argument are also added on the `CLI` object using the
-`link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#addArgument(io.vertx.core.cli.Argument)[addArgument]` and
-`link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#addOption(io.vertx.core.cli.Option)[addOption]` methods.
+`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#addArgument(io.vertx.core.cli.Argument)[addArgument]` and
+`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#addOption(io.vertx.core.cli.Option)[addOption]` methods.
 
 ==== Options
 
@@ -65,22 +52,8 @@ configure the option to receive several values using `link:../dataobjects.html#O
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption([
-  longName:"flag",
-  shortName:"f",
-  flag:true,
-  description:"a flag"
-]).addOption([
-  longName:"single",
-  shortName:"s",
-  description:"a single-valued option"
-]).addOption([
-  longName:"multiple",
-  shortName:"m",
-  multiValued:true,
-  description:"a multi-valued option"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(renderDataObject-Option).addOption(renderDataObject-Option).addOption(renderDataObject-Option)
 
 ----
 
@@ -89,12 +62,8 @@ the parsing:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").addOption([
-  longName:"mandatory",
-  required:true,
-  description:"a mandatory option"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").addOption(renderDataObject-Option)
 
 ----
 
@@ -103,12 +72,8 @@ the command line:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").addOption([
-  longName:"optional",
-  defaultValue:"hello",
-  description:"an optional option with a default value"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").addOption(renderDataObject-Option)
 
 ----
 
@@ -119,17 +84,8 @@ If the option value is contrained to a fixed set, you can set the different acce
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").addOption([
-  longName:"color",
-  defaultValue:"green",
-  choices:[
-    "blue",
-    "red",
-    "green"
-  ],
-  description:"a color"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").addOption(renderDataObject-Option)
 
 ----
 
@@ -145,16 +101,8 @@ index `0`:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").addArgument([
-  index:0,
-  description:"the first argument",
-  argName:"arg1"
-]).addArgument([
-  index:1,
-  description:"the second argument",
-  argName:"arg2"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
 
 ----
 
@@ -162,14 +110,8 @@ If you don't set the argument indexes, it computes it automatically by using the
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("some-name").addArgument([
-  description:"the first argument",
-  argName:"arg1"
-]).addArgument([
-  description:"the second argument",
-  argName:"arg2"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
 
 ----
 
@@ -187,27 +129,14 @@ Arguments can also be instantiated from their JSON form.
 
 ==== Usage generation
 
-Once your `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html[CLI]` instance is configured, you can generate the _usage_ message:
+Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can generate the _usage_ message:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption([
-  longName:"directory",
-  shortName:"R",
-  description:"enables directory support",
-  flag:true
-]).addArgument([
-  index:0,
-  description:"The source",
-  argName:"source"
-]).addArgument([
-  index:0,
-  description:"The destination",
-  argName:"target"
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
 
-def builder = new java.lang.StringBuilder()
+var builder = java.lang.StringBuilder()
 cli.usage(builder)
 
 ----
@@ -227,36 +156,36 @@ If you need to tune the usage message, check the `UsageMessageFormatter` class.
 
 === Parsing Stage
 
-Once your `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html[CLI]` instance is configured, you can parse the user command line to evaluate
+Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can parse the user command line to evaluate
 each option and argument:
 
 [source,scala]
 ----
-def commandLine = cli.parse(userCommandLineArguments)
+var commandLine = cli.parse(userCommandLineArguments)
 
 ----
 
-The `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#parse(java.util.List)[parse]` method returns a `link:../../groovydoc/io/vertx/groovy/core/cli/CommandLine.html[CommandLine]`
+The `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]` method returns a `link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]`
 object containing the values. By default, it validates the user command line and checks that each mandatory options
 and arguments have been set as well as the number of values received by each option. You can disable the
-validation by passing `false` as second parameter of `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#parse(java.util.List,%20boolean)[parse]`.
+validation by passing `false` as second parameter of `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List,%20boolean)[parse]`.
 This is useful if you want to check an argument or option is present even if the parsed command line is invalid.
 
 You can check whether or not the
-`link:../../groovydoc/io/vertx/groovy/core/cli/CommandLine.html[CommandLine]` is valid using `link:../../groovydoc/io/vertx/groovy/core/cli/CommandLine.html#isValid()[isValid]`.
+`link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` is valid using `link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html#isValid()[isValid]`.
 
 === Query / Interrogation Stage
 
 Once parsed, you can retrieve the values of the options and arguments from the
-`link:../../groovydoc/io/vertx/groovy/core/cli/CommandLine.html[CommandLine]` object returned by the `link:../../groovydoc/io/vertx/groovy/core/cli/CLI.html#parse(java.util.List)[parse]`
+`link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` object returned by the `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]`
 method:
 
 [source,scala]
 ----
-def commandLine = cli.parse(userCommandLineArguments)
-def opt = commandLine.getOptionValue("my-option")
-def flag = commandLine.isFlagEnabled("my-flag")
-def arg0 = commandLine.getArgumentValue(0)
+var commandLine = cli.parse(userCommandLineArguments)
+var opt = commandLine.getOptionValue("my-option")
+var flag = commandLine.isFlagEnabled("my-flag")
+var arg0 = commandLine.getArgumentValue(0)
 
 ----
 
@@ -265,22 +194,14 @@ won't failed, but give you the opportunity to check if the user asks for help:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.cli.CLI
-def cli = CLI.create("test").addOption([
-  longName:"help",
-  shortName:"h",
-  flag:true,
-  help:true
-]).addOption([
-  longName:"mandatory",
-  required:true
-])
+import io.vertx.scala.core.cli.CLI
+var cli = CLI.create("test").addOption(renderDataObject-Option).addOption(renderDataObject-Option)
 
-def line = cli.parse(java.util.Collections.singletonList("-h"))
+var line = cli.parse(java.util.Collections.singletonList("-h"))
 
 // The parsing does not fail and let you do:
 if (!line.isValid() && line.isAskingForHelp()) {
-  def builder = new java.lang.StringBuilder()
+  var builder = java.lang.StringBuilder()
   cli.usage(builder)
   stream.print(builder.toString())
 }

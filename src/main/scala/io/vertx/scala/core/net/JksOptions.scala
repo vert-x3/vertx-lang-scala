@@ -80,6 +80,11 @@ class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
 object JksOptions {
   type JksOptionsJava = io.vertx.core.net.JksOptions
   
+  def apply() = {
+    new JksOptions(new JksOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: JksOptionsJava) = {
     if(t != null)
       new JksOptions(t)

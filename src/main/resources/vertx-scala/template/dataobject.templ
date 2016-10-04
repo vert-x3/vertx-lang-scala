@@ -169,12 +169,15 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
 object @{type.raw.simpleName} {\n
   type @{jTypeName} = @{type.raw.name}\n
   \n
+  def apply() = {\n
+    new @{typeName}(new @{jTypeName}(io.vertx.lang.scala.json.Json.emptyObj()))\n
+  }\n
+  \n
   def apply(t: @{jTypeName}) = {\n
     if(t != null)\n
       new @{typeName}(t)\n
     else\n
       null\n
-   \n
   }\n
   \n
   def fromJson(json: JsonObject):@{typeName} = {\n

@@ -98,6 +98,11 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
 object Http2Settings {
   type Http2SettingsJava = io.vertx.core.http.Http2Settings
   
+  def apply() = {
+    new Http2Settings(new Http2SettingsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: Http2SettingsJava) = {
     if(t != null)
       new Http2Settings(t)

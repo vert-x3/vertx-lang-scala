@@ -2,7 +2,6 @@ package io.vertx.lang.scala
 
 import io.vertx.codegen.`type`._
 import io.vertx.codetrans.CodeTranslator
-import io.vertx.codetrans.lang.groovy.GroovyLang
 import io.vertx.docgen.Coordinate
 import io.vertx.docgen.DocGenerator
 import javax.annotation.processing.ProcessingEnvironment
@@ -29,7 +28,7 @@ class ScalaDocGenerator extends DocGenerator {
   def getName: String = "scala"
 
   def renderSource(elt: ExecutableElement, source: String): String = {
-    val lang: GroovyLang = new GroovyLang
+    val lang: ScalaLang = new ScalaLang
     try
       translator.translate(elt, lang)
 
@@ -66,7 +65,7 @@ class ScalaDocGenerator extends DocGenerator {
     }
     if (`type`.getKind eq ClassKind.API) {
       val api: ApiTypeInfo = `type`.getRaw.asInstanceOf[ApiTypeInfo]
-      return "../../groovydoc/" + api.translateName("groovy").replace('.', '/') + ".html"
+      return "../../scaladoc/" + api.translateName("scala").replace('.', '/') + ".html"
     }
     null
   }

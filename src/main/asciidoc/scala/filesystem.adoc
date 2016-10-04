@@ -1,8 +1,8 @@
 == Using the file system with Vert.x
 
-The Vert.x `link:../../groovydoc/io/vertx/groovy/core/file/FileSystem.html[FileSystem]` object provides many operations for manipulating the file system.
+The Vert.x `link:../../scaladoc/io/vertx/scala/core/file/FileSystem.html[FileSystem]` object provides many operations for manipulating the file system.
 
-There is one file system object per Vert.x instance, and you obtain it with  `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#fileSystem()[fileSystem]`.
+There is one file system object per Vert.x instance, and you obtain it with  `link:../../scaladoc/io/vertx/scala/core/Vertx.html#fileSystem()[fileSystem]`.
 
 A blocking and a non blocking version of each operation is provided. The non blocking versions take a handler
 which is called when the operation completes or an error occurs.
@@ -11,11 +11,11 @@ Here's an example of an asynchronous copy of a file:
 
 [source,scala]
 ----
-def fs = vertx.fileSystem()
+var fs = vertx.fileSystem()
 
 // Copy file from foo.txt to bar.txt
-fs.copy("foo.txt", "bar.txt", { res ->
-  if (res.succeeded()) {
+fs.copy("foo.txt", "bar.txt", (res: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     // Copied ok!
   } else {
     // Something went wrong
@@ -32,7 +32,7 @@ Here's the copy using the blocking API:
 
 [source,scala]
 ----
-def fs = vertx.fileSystem()
+var fs = vertx.fileSystem()
 
 // Copy file from foo.txt to bar.txt synchronously
 fs.copyBlocking("foo.txt", "bar.txt")
@@ -40,51 +40,51 @@ fs.copyBlocking("foo.txt", "bar.txt")
 ----
 
 Many operations exist to copy, move, truncate, chmod and many other file operations. We won't list them all here,
-please consult the `link:../../groovydoc/io/vertx/groovy/core/file/FileSystem.html[API docs]` for the full list.
+please consult the `link:../../scaladoc/io/vertx/scala/core/file/FileSystem.html[API docs]` for the full list.
 
 Let's see a couple of examples using asynchronous methods:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-import io.vertx.groovy.core.buffer.Buffer
-def vertx = Vertx.vertx()
+import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.buffer.Buffer
+var vertx = Vertx.vertx()
 
 // Read a file
-vertx.fileSystem().readFile("target/classes/readme.txt", { result ->
-  if (result.succeeded()) {
-    println(result.result())
+vertx.fileSystem().readFile("target/classes/readme.txt", (result: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
+  if (renderAsyncResultSucceeded) {
+    println(renderAsyncResultValue)
   } else {
-    System.err.println("Oh oh ...${result.cause()}")
+    System.err.println("Oh oh ..." + renderAsyncResultCause)
   }
 })
 
 // Copy a file
-vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt", { result ->
-  if (result.succeeded()) {
+vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt", (result: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("File copied")
   } else {
-    System.err.println("Oh oh ...${result.cause()}")
+    System.err.println("Oh oh ..." + renderAsyncResultCause)
   }
 })
 
 // Write a file
-vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"), { result ->
-  if (result.succeeded()) {
+vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"), (result: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("File written")
   } else {
-    System.err.println("Oh oh ...${result.cause()}")
+    System.err.println("Oh oh ..." + renderAsyncResultCause)
   }
 })
 
 // Check existence and delete
-vertx.fileSystem().exists("target/classes/junk.txt", { result ->
-  if (result.succeeded() && result.result()) {
-    vertx.fileSystem().delete("target/classes/junk.txt", { r ->
+vertx.fileSystem().exists("target/classes/junk.txt", (result: io.vertx.core.AsyncResult<java.lang.Boolean>) => {
+  if (renderAsyncResultSucceeded && renderAsyncResultValue) {
+    vertx.fileSystem().delete("target/classes/junk.txt", (r: io.vertx.core.AsyncResult<java.lang.Void>) => {
       println("File deleted")
     })
   } else {
-    System.err.println("Oh oh ... - cannot delete the file: ${result.cause()}")
+    System.err.println("Oh oh ... - cannot delete the file: " + renderAsyncResultCause)
   }
 })
 
@@ -94,14 +94,14 @@ vertx.fileSystem().exists("target/classes/junk.txt", { result ->
 
 Vert.x provides an asynchronous file abstraction that allows you to manipulate a file on the file system.
 
-You open an `link:../../groovydoc/io/vertx/groovy/core/file/AsyncFile.html[AsyncFile]` as follows:
+You open an `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` as follows:
 
 [source,scala]
 ----
-def options = [:]
-fileSystem.open("myfile.txt", options, { res ->
-  if (res.succeeded()) {
-    def file = res.result()
+var options = renderDataObject-OpenOptions
+fileSystem.open("myfile.txt", options, (res: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
+  if (renderAsyncResultSucceeded) {
+    var file = renderAsyncResultValue
   } else {
     // Something went wrong!
   }
@@ -117,7 +117,7 @@ They also allow you to read and write directly to them.
 ==== Random access writes
 
 To use an `AsyncFile` for random access writing you use the
-`link:../../groovydoc/io/vertx/groovy/core/file/AsyncFile.html#write(io.vertx.core.buffer.Buffer,%20long,%20io.vertx.core.Handler)[write]` method.
+`link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html#write(io.vertx.core.buffer.Buffer,%20long,%20io.vertx.core.Handler)[write]` method.
 
 The parameters to the method are:
 
@@ -130,25 +130,16 @@ Here is an example of random access writes:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-import io.vertx.groovy.core.buffer.Buffer
-def vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/hello.txt", [:], { result ->
-  if (result.succeeded()) {
-    def file = result.result()
-    def buff = Buffer.buffer("foo")
-    for (def i = 0;i < 5;i++) {
-      file.write(buff, buff.length() * i, { ar ->
-        if (ar.succeeded()) {
-          println("Written ok!")
-          // etc
-        } else {
-          System.err.println("Failed to write: ${ar.cause()}")
-        }
-      })
-    }
+import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.buffer.Buffer
+var vertx = Vertx.vertx()
+vertx.fileSystem().open("target/classes/hello.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
+  if (renderAsyncResultSucceeded) {
+    var file = renderAsyncResultValue
+    var buff = Buffer.buffer("foo")
+    forLoop
   } else {
-    System.err.println("Cannot open file ${result.cause()}")
+    System.err.println("Cannot open file " + renderAsyncResultCause)
   }
 })
 
@@ -157,7 +148,7 @@ vertx.fileSystem().open("target/classes/hello.txt", [:], { result ->
 ==== Random access reads
 
 To use an `AsyncFile` for random access reads you use the
-`link:../../groovydoc/io/vertx/groovy/core/file/AsyncFile.html#read(io.vertx.core.buffer.Buffer,%20int,%20long,%20int,%20io.vertx.core.Handler)[read]`
+`link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html#read(io.vertx.core.buffer.Buffer,%20int,%20long,%20int,%20io.vertx.core.Handler)[read]`
 method.
 
 The parameters to the method are:
@@ -172,24 +163,16 @@ Here's an example of random access reads:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-import io.vertx.groovy.core.buffer.Buffer
-def vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/les_miserables.txt", [:], { result ->
-  if (result.succeeded()) {
-    def file = result.result()
-    def buff = Buffer.buffer(1000)
-    for (def i = 0;i < 10;i++) {
-      file.read(buff, i * 100, i * 100, 100, { ar ->
-        if (ar.succeeded()) {
-          println("Read ok!")
-        } else {
-          System.err.println("Failed to write: ${ar.cause()}")
-        }
-      })
-    }
+import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.buffer.Buffer
+var vertx = Vertx.vertx()
+vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
+  if (renderAsyncResultSucceeded) {
+    var file = renderAsyncResultValue
+    var buff = Buffer.buffer(1000)
+    forLoop
   } else {
-    System.err.println("Cannot open file ${result.cause()}")
+    System.err.println("Cannot open file " + renderAsyncResultCause)
   }
 })
 
@@ -213,7 +196,7 @@ close or when the JVM is shutdown with `link:../dataobjects.html#OpenOptions#set
 
 In the `OpenOptions`, you can enable/disable the automatic synchronisation of the content on every write using
 `link:../dataobjects.html#OpenOptions#setDsync(boolean)[dsync]`. In that case, you can manually flush any writes from the OS
-cache by calling the `link:../../groovydoc/io/vertx/groovy/core/file/AsyncFile.html#flush()[flush]` method.
+cache by calling the `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html#flush()[flush]` method.
 
 This method can also be called with an handler which will be called when the flush is complete.
 
@@ -225,20 +208,20 @@ copy the content to another `AsyncFile`:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-import io.vertx.groovy.core.streams.Pump
-def vertx = Vertx.vertx()
-def output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", [:])
+import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.streams.Pump
+var vertx = Vertx.vertx()
+var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", renderDataObject-OpenOptions)
 
-vertx.fileSystem().open("target/classes/les_miserables.txt", [:], { result ->
-  if (result.succeeded()) {
-    def file = result.result()
+vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
+  if (renderAsyncResultSucceeded) {
+    var file = renderAsyncResultValue
     Pump.pump(file, output).start()
-    file.endHandler({ r ->
+    file.endHandler((r: java.lang.Void) => {
       println("Copy done")
     })
   } else {
-    System.err.println("Cannot open file ${result.cause()}")
+    System.err.println("Cannot open file " + renderAsyncResultCause)
   }
 })
 
@@ -275,5 +258,5 @@ these properties should be set before loading this class or as a JVM system prop
 
 ==== Closing an AsyncFile
 
-To close an `AsyncFile` call the `link:../../groovydoc/io/vertx/groovy/core/file/AsyncFile.html#close()[close]` method. Closing is asynchronous and
+To close an `AsyncFile` call the `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html#close()[close]` method. Closing is asynchronous and
 if you want to be notified when the close has been completed you can specify a handler function as an argument.

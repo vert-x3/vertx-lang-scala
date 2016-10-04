@@ -107,6 +107,11 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
 object Argument {
   type ArgumentJava = io.vertx.core.cli.Argument
   
+  def apply() = {
+    new Argument(new ArgumentJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: ArgumentJava) = {
     if(t != null)
       new Argument(t)

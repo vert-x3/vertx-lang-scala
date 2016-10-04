@@ -33,6 +33,11 @@ class JdkSSLEngineOptions(val asJava: io.vertx.core.net.JdkSSLEngineOptions) {
 object JdkSSLEngineOptions {
   type JdkSSLEngineOptionsJava = io.vertx.core.net.JdkSSLEngineOptions
   
+  def apply() = {
+    new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: JdkSSLEngineOptionsJava) = {
     if(t != null)
       new JdkSSLEngineOptions(t)

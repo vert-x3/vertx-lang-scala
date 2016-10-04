@@ -253,6 +253,11 @@ class VertxOptions(val asJava: io.vertx.core.VertxOptions) {
 object VertxOptions {
   type VertxOptionsJava = io.vertx.core.VertxOptions
   
+  def apply() = {
+    new VertxOptions(new VertxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: VertxOptionsJava) = {
     if(t != null)
       new VertxOptions(t)
