@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 
 /**
-  * @author <a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
   */
 trait Measured {
 

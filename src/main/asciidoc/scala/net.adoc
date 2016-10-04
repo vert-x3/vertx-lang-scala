@@ -268,7 +268,7 @@ You can instantiate more instances programmatically in your code:
 // Create a few instances so we can utilise cores
 
 forLoop - 
-for (var i = 0;i < 10;i++) {
+for ( i <- io.vertx.codetrans.CodeBuilder$1@2ef289d1 to io.vertx.codetrans.CodeBuilder$1@2f80313f) {
   var server = vertx.createNetServer()
   server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
     socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
@@ -858,9 +858,6 @@ OpenSSL provides native ALPN support.
 OpenSSL requires to configure `link:../dataobjects.html#TCPSSLOptions#setOpenSslEngineOptions(io.vertx.core.net.OpenSSLEngineOptions)[openSslEngineOptions]`
 and use http://netty.io/wiki/forked-tomcat-native.html[netty-tcnative] jar on the classpath. Using tcnative may require
 OpenSSL to be installed on your OS depending on the tcnative implementation.
-
-OpenSSL restricts the key/certificate configuration to `.pem` files. However it is still possible to use any trust
-configuration.
 
 ===== Jetty-ALPN support
 

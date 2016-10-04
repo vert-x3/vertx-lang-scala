@@ -164,7 +164,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   }
 
   /**
-    * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
+    * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
   def settings(): io.vertx.scala.core.http.Http2Settings = {
     io.vertx.scala.core.http.Http2Settings(_asJava.settings())
@@ -198,7 +198,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   }
 
   /**
-    * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
+    * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
   def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
     io.vertx.scala.core.http.Http2Settings(_asJava.remoteSettings())

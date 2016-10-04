@@ -126,15 +126,14 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   /**
-    * @return the request host. For HTTP2 it returns the  pseudo header otherwise it returns the  header
+    * @return the request host. For HTTP2 it returns the {@literal :authority` pseudo header otherwise it returns the {@literal Host` header
     */
   def host(): scala.Option[String] = {
         scala.Option(_asJava.host())
   }
 
   /**
-    * @return the response. Each instance of this class has an [[io.vertx.scala.core.http.HttpServerResponse]] instance attached to it. This is used
-    * to send the response back to the client.
+    * @return the response. Each instance of this class has an [[HttpServerResponse]] instance attached to it. This is used to send the response back to the client.
     */
   def response(): io.vertx.scala.core.http.HttpServerResponse = {
     if (cached_0 == null) {
@@ -249,7 +248,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   /**
-    * @return  true if we are expecting a multi-part body for this request. See [[io.vertx.scala.core.http.HttpServerRequest#setExpectMultipart]].
+    * @return true if we are expecting a multi-part body for this request. See [[#setExpectMultipart]].
     */
   def isExpectMultipart(): Boolean = {
     _asJava.isExpectMultipart()
@@ -320,7 +319,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   /**
-    * @return the [[io.vertx.scala.core.http.HttpConnection]] associated with this request
+    * @return the [[HttpConnection]] associated with this request
     */
   def connection(): io.vertx.scala.core.http.HttpConnection = {
     if (cached_7 == null) {

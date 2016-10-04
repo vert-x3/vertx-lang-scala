@@ -26,7 +26,6 @@ import scala.collection.JavaConversions._
 class JdkSSLEngineOptions(val asJava: io.vertx.core.net.JdkSSLEngineOptions) {
 
   /**
-    * @return if alpn support is available via the JDK SSL engine
     */
 }
 

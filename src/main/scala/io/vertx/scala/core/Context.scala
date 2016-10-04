@@ -191,8 +191,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
   }
 
   /**
-    * @return  the number of instances of the verticle that were deployed in the deployment (if any) related
-    * to this context
+    * @return the number of instances of the verticle that were deployed in the deployment (if any) related to this context
     */
   def getInstanceCount(): Int = {
     _asJava.getInstanceCount()

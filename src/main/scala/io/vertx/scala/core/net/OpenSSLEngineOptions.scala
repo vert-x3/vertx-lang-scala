@@ -26,11 +26,9 @@ import scala.collection.JavaConversions._
 class OpenSSLEngineOptions(val asJava: io.vertx.core.net.OpenSSLEngineOptions) {
 
   /**
-    * @return when alpn support is available via OpenSSL engine
     */
 
   /**
-    * @return when OpenSSL is available
     */
 
   /**

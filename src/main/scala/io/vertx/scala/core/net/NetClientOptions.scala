@@ -117,6 +117,18 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   }
 
   /**
+    * Set the local interface to bind for network connections. When the local address is null,
+    * it will pick any local address, the default local address is null.
+    */
+  def setLocalAddress(value:String) = {
+    asJava.setLocalAddress(value)
+    this
+  }
+  def getLocalAddress = {
+    asJava.getLocalAddress()
+  }
+
+  /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
   def setLogActivity(value:Boolean) = {
