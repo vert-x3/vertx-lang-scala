@@ -80,6 +80,11 @@ class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
 object PfxOptions {
   type PfxOptionsJava = io.vertx.core.net.PfxOptions
   
+  def apply() = {
+    new PfxOptions(new PfxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: PfxOptionsJava) = {
     if(t != null)
       new PfxOptions(t)

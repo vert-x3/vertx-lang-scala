@@ -154,6 +154,11 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
 object DeploymentOptions {
   type DeploymentOptionsJava = io.vertx.core.DeploymentOptions
   
+  def apply() = {
+    new DeploymentOptions(new DeploymentOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: DeploymentOptionsJava) = {
     if(t != null)
       new DeploymentOptions(t)

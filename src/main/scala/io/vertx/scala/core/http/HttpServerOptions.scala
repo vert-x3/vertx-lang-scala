@@ -431,6 +431,11 @@ class HttpServerOptions(val asJava: io.vertx.core.http.HttpServerOptions) {
 object HttpServerOptions {
   type HttpServerOptionsJava = io.vertx.core.http.HttpServerOptions
   
+  def apply() = {
+    new HttpServerOptions(new HttpServerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: HttpServerOptionsJava) = {
     if(t != null)
       new HttpServerOptions(t)

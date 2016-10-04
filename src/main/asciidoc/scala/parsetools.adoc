@@ -28,9 +28,9 @@ Let's see the associated code:
 
 [source, scala]
 ----
-import io.vertx.groovy.core.parsetools.RecordParser
-import io.vertx.groovy.core.buffer.Buffer
-def parser = RecordParser.newDelimited("\n", { h ->
+import io.vertx.scala.core.parsetools.RecordParser
+import io.vertx.scala.core.buffer.Buffer
+var parser = RecordParser.newDelimited("\n", (h: io.vertx.core.buffer.Buffer) => {
   println(h.toString())
 })
 
@@ -45,11 +45,11 @@ You can also produce fixed sized chunks as follows:
 
 [source, scala]
 ----
-import io.vertx.groovy.core.parsetools.RecordParser
-RecordParser.newFixed(4, { h ->
+import io.vertx.scala.core.parsetools.RecordParser
+RecordParser.newFixed(4, (h: io.vertx.core.buffer.Buffer) => {
   println(h.toString())
 })
 
 ----
 
-For more details, check out the `link:../../groovydoc/io/vertx/groovy/core/parsetools/RecordParser.html[RecordParser]` class.
+For more details, check out the `link:../../scaladoc/io/vertx/scala/core/parsetools/RecordParser.html[RecordParser]` class.

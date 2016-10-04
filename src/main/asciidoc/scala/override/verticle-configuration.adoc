@@ -12,7 +12,7 @@ def options = [ "config" : config ];
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
 ----
 
-This configuration is then available via the `link:../../groovydoc/io/vertx/groovy/core/Context.html[Context]`, The configuration is returned as a Map
+This configuration is then available via the `link:../../scaladoc/io/vertx/scala/core/Context.html[Context]`, The configuration is returned as a Map
 object so you can retrieve data as follows:
 
 [source,scala]

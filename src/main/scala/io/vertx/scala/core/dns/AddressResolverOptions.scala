@@ -187,6 +187,11 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
 object AddressResolverOptions {
   type AddressResolverOptionsJava = io.vertx.core.dns.AddressResolverOptions
   
+  def apply() = {
+    new AddressResolverOptions(new AddressResolverOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: AddressResolverOptionsJava) = {
     if(t != null)
       new AddressResolverOptions(t)

@@ -26,16 +26,16 @@ and NetClient (see above).
 
 === Creating a DatagramSocket
 
-To use UDP you first need t create a `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]`. It does not matter here if you only want to send data or send
+To use UDP you first need t create a `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]`. It does not matter here if you only want to send data or send
 and receive.
 
 [source,scala]
 ----
-def socket = vertx.createDatagramSocket([:])
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
 
 ----
 
-The returned `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` will not be bound to a specific port. This is not a
+The returned `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` will not be bound to a specific port. This is not a
 problem if you only want to send data (like a client), but more on this in the next section.
 
 === Sending Datagram packets
@@ -49,47 +49,47 @@ Sending packets is as easy as shown here:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.buffer.Buffer
-def socket = vertx.createDatagramSocket([:])
-def buffer = Buffer.buffer("content")
+import io.vertx.scala.core.buffer.Buffer
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var buffer = Buffer.buffer("content")
 // Send a Buffer
-socket.send(buffer, 1234, "10.0.0.1", { asyncResult ->
-  println("Send succeeded? ${asyncResult.succeeded()}")
+socket.send(buffer, 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  println("Send succeeded? " + renderAsyncResultSucceeded)
 })
 // Send a String
-socket.send("A string used as content", 1234, "10.0.0.1", { asyncResult ->
-  println("Send succeeded? ${asyncResult.succeeded()}")
+socket.send("A string used as content", 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  println("Send succeeded? " + renderAsyncResultSucceeded)
 })
 
 ----
 
 === Receiving Datagram packets
 
-If you want to receive packets you need to bind the `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` by calling
+If you want to receive packets you need to bind the `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` by calling
 `listen(...)}` on it.
 
-This way you will be able to receive `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html[DatagramPacket]`s that were sent to the address and port on
-which the `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` listens.
+This way you will be able to receive `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html[DatagramPacket]`s that were sent to the address and port on
+which the `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` listens.
 
-Beside this you also want to set a `Handler` which will be called for each received `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html[DatagramPacket]`.
+Beside this you also want to set a `Handler` which will be called for each received `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html[DatagramPacket]`.
 
-The `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html[DatagramPacket]` has the following methods:
+The `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html[DatagramPacket]` has the following methods:
 
-- `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html#sender()[sender]`: The InetSocketAddress which represent the sender of the packet
-- `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html#data()[data]`: The Buffer which holds the data which was received.
+- `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html#sender()[sender]`: The InetSocketAddress which represent the sender of the packet
+- `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html#data()[data]`: The Buffer which holds the data which was received.
 
 So to listen on a specific address and port you would do something like shown here:
 
 [source,scala]
 ----
-def socket = vertx.createDatagramSocket([:])
-socket.listen(1234, "0.0.0.0", { asyncResult ->
-  if (asyncResult.succeeded()) {
-    socket.handler({ packet ->
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  if (renderAsyncResultSucceeded) {
+    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
   } else {
-    println("Listen failed${asyncResult.cause()}")
+    println("Listen failed" + renderAsyncResultCause)
   }
 })
 
@@ -117,12 +117,12 @@ This is show here:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.buffer.Buffer
-def socket = vertx.createDatagramSocket([:])
-def buffer = Buffer.buffer("content")
+import io.vertx.scala.core.buffer.Buffer
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
-socket.send(buffer, 1234, "230.0.0.1", { asyncResult ->
-  println("Send succeeded? ${asyncResult.succeeded()}")
+socket.send(buffer, 1234, "230.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  println("Send succeeded? " + renderAsyncResultSucceeded)
 })
 
 ----
@@ -131,15 +131,15 @@ All sockets that have joined the multicast group 230.0.0.1 will receive the pack
 
 ===== Receiving Multicast packets
 
-If you want to receive packets for specific Multicast group you need to bind the `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` by
+If you want to receive packets for specific Multicast group you need to bind the `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` by
 calling `listen(...)` on it and join the Multicast group.
 
 This way you will be able to receive DatagramPackets that were sent to the address and port on which the
-`link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` listens and also to those sent to the Multicast group.
+`link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` listens and also to those sent to the Multicast group.
 
 Beside this you also want to set a Handler which will be called for each received DatagramPacket.
 
-The `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramPacket.html[DatagramPacket]` has the following methods:
+The `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramPacket.html[DatagramPacket]` has the following methods:
 
 - `sender()`: The InetSocketAddress which represent the sender of the packet
 - `data()`: The Buffer which holds the data which was received.
@@ -149,19 +149,19 @@ would do something like shown here:
 
 [source,scala]
 ----
-def socket = vertx.createDatagramSocket([:])
-socket.listen(1234, "0.0.0.0", { asyncResult ->
-  if (asyncResult.succeeded()) {
-    socket.handler({ packet ->
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  if (renderAsyncResultSucceeded) {
+    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.listenMulticastGroup("230.0.0.1", { asyncResult2 ->
-      println("Listen succeeded? ${asyncResult2.succeeded()}")
+    socket.listenMulticastGroup("230.0.0.1", (asyncResult2: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+      println("Listen succeeded? " + renderAsyncResultSucceeded)
     })
   } else {
-    println("Listen failed${asyncResult.cause()}")
+    println("Listen failed" + renderAsyncResultCause)
   }
 })
 
@@ -177,29 +177,29 @@ This is shown here:
 
 [source,scala]
 ----
-def socket = vertx.createDatagramSocket([:])
-socket.listen(1234, "0.0.0.0", { asyncResult ->
-  if (asyncResult.succeeded()) {
-    socket.handler({ packet ->
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  if (renderAsyncResultSucceeded) {
+    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.listenMulticastGroup("230.0.0.1", { asyncResult2 ->
-      if (asyncResult2.succeeded()) {
+    socket.listenMulticastGroup("230.0.0.1", (asyncResult2: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+      if (renderAsyncResultSucceeded) {
         // will now receive packets for group
 
         // do some work
 
-        socket.unlistenMulticastGroup("230.0.0.1", { asyncResult3 ->
-          println("Unlisten succeeded? ${asyncResult3.succeeded()}")
+        socket.unlistenMulticastGroup("230.0.0.1", (asyncResult3: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+          println("Unlisten succeeded? " + renderAsyncResultSucceeded)
         })
       } else {
-        println("Listen failed${asyncResult2.cause()}")
+        println("Listen failed" + renderAsyncResultCause)
       }
     })
   } else {
-    println("Listen failed${asyncResult.cause()}")
+    println("Listen failed" + renderAsyncResultCause)
   }
 })
 
@@ -219,20 +219,20 @@ like shown here:
 
 [source,scala]
 ----
-def socket = vertx.createDatagramSocket([:])
+var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
 
 // Some code
 
 // This would block packets which are send from 10.0.0.2
-socket.blockMulticastGroup("230.0.0.1", "10.0.0.2", { asyncResult ->
-  println("block succeeded? ${asyncResult.succeeded()}")
+socket.blockMulticastGroup("230.0.0.1", "10.0.0.2", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
+  println("block succeeded? " + renderAsyncResultSucceeded)
 })
 
 ----
 
 ==== DatagramSocket properties
 
-When creating a `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` there are multiple properties you can set to
+When creating a `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` there are multiple properties you can set to
 change it's behaviour with the `link:../dataobjects.html#DatagramSocketOptions[DatagramSocketOptions]` object. Those are listed here:
 
 - `link:../dataobjects.html#DatagramSocketOptions#setSendBufferSize(int)[sendBufferSize]` Sets the send buffer size in bytes.
@@ -254,10 +254,10 @@ the TTL. If the TTL is decremented to 0 by a router, it will not be forwarded.
 ==== DatagramSocket Local Address
 
 You can find out the local address of the socket (i.e. the address of this side of the UDP Socket) by calling
-`link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html#localAddress()[localAddress]`. This will only return an `InetSocketAddress` if you
-bound the `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html[DatagramSocket]` with `listen(...)` before, otherwise it will return null.
+`link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html#localAddress()[localAddress]`. This will only return an `InetSocketAddress` if you
+bound the `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]` with `listen(...)` before, otherwise it will return null.
 
 ==== Closing a DatagramSocket
 
-You can close a socket by invoking the `link:../../groovydoc/io/vertx/groovy/core/datagram/DatagramSocket.html#close(io.vertx.core.Handler)[close]` method. This will close
+You can close a socket by invoking the `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html#close(io.vertx.core.Handler)[close]` method. This will close
 the socket and release all resources

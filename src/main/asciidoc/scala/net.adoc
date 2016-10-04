@@ -9,7 +9,7 @@ The simplest way to create a TCP server, using all default options is as follows
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
+var server = vertx.createNetServer()
 
 ----
 
@@ -21,16 +21,14 @@ instance when creating it:
 [source,scala]
 ----
 
-def options = [
-  port:4321
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
 === Start the Server Listening
 
-To tell the server to listen for incoming requests you use one of the `link:../../groovydoc/io/vertx/groovy/core/net/NetServer.html#listen()[listen]`
+To tell the server to listen for incoming requests you use one of the `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#listen()[listen]`
 alternatives.
 
 To tell the server to listen at the host and port as specified in the options:
@@ -38,7 +36,7 @@ To tell the server to listen at the host and port as specified in the options:
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
+var server = vertx.createNetServer()
 server.listen()
 
 ----
@@ -48,7 +46,7 @@ Or to specify the host and port in the call to listen, ignoring what is configur
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
+var server = vertx.createNetServer()
 server.listen(1234, "localhost")
 
 ----
@@ -65,9 +63,9 @@ For example:
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
-server.listen(1234, "localhost", { res ->
-  if (res.succeeded()) {
+var server = vertx.createNetServer()
+server.listen(1234, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>) => {
+  if (renderAsyncResultSucceeded) {
     println("Server is now listening!")
   } else {
     println("Failed to bind!")
@@ -80,15 +78,15 @@ server.listen(1234, "localhost", { res ->
 
 If `0` is used as the listening port, the server will find an unused random port to listen on.
 
-To find out the real port the server is listening on you can call `link:../../groovydoc/io/vertx/groovy/core/net/NetServer.html#actualPort()[actualPort]`.
+To find out the real port the server is listening on you can call `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#actualPort()[actualPort]`.
 
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
-server.listen(0, "localhost", { res ->
-  if (res.succeeded()) {
-    println("Server is now listening on actual port: ${server.actualPort()}")
+var server = vertx.createNetServer()
+server.listen(0, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>) => {
+  if (renderAsyncResultSucceeded) {
+    println("Server is now listening on actual port: " + server.actualPort())
   } else {
     println("Failed to bind!")
   }
@@ -98,38 +96,38 @@ server.listen(0, "localhost", { res ->
 
 === Getting notified of incoming connections
 
-To be notified when a connection is made you need to set a `link:../../groovydoc/io/vertx/groovy/core/net/NetServer.html#connectHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[connectHandler]`:
+To be notified when a connection is made you need to set a `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#connectHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[connectHandler]`:
 
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
-server.connectHandler({ socket ->
+var server = vertx.createNetServer()
+server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
   // Handle the connection in here
 })
 
 ----
 
-When a connection is made the handler will be called with an instance of `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]`.
+When a connection is made the handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`.
 
 This is a socket-like interface to the actual connection, and allows you to read and write data as well as do various
 other things like close the socket.
 
 === Reading data from the socket
 
-To read data from the socket you set the `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#handler(io.vertx.core.Handler)[handler]` on the
+To read data from the socket you set the `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#handler(io.vertx.core.Handler)[handler]` on the
 socket.
 
-This handler will be called with an instance of `link:../../groovydoc/io/vertx/groovy/core/buffer/Buffer.html[Buffer]` every time data is received on
+This handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[Buffer]` every time data is received on
 the socket.
 
 [source,scala]
 ----
 
-def server = vertx.createNetServer()
-server.connectHandler({ socket ->
-  socket.handler({ buffer ->
-    println("I received some bytes: ${buffer.length()}")
+var server = vertx.createNetServer()
+server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
+  socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
+    println("I received some bytes: " + buffer.length())
   })
 })
 
@@ -137,14 +135,14 @@ server.connectHandler({ socket ->
 
 === Writing data to a socket
 
-You write to a socket using one of `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#write(io.vertx.core.buffer.Buffer)[write]`.
+You write to a socket using one of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#write(io.vertx.core.buffer.Buffer)[write]`.
 
 [source,scala]
 ----
-import io.vertx.groovy.core.buffer.Buffer
+import io.vertx.scala.core.buffer.Buffer
 
 // Write a buffer
-def buffer = Buffer.buffer().appendFloat(12.34f).appendInt(123)
+var buffer = Buffer.buffer().appendFloat(12.34).appendInt(123)
 socket.write(buffer)
 
 // Write a string in UTF-8 encoding
@@ -161,13 +159,13 @@ Write operations are asynchronous and may not occur until some time after the ca
 
 === Closed handler
 
-If you want to be notified when a socket is closed, you can set a `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#closeHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[closeHandler]`
+If you want to be notified when a socket is closed, you can set a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#closeHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[closeHandler]`
 on it:
 
 [source,scala]
 ----
 
-socket.closeHandler({ v ->
+socket.closeHandler((v: java.lang.Void) => {
   println("The socket has been closed")
 })
 
@@ -175,7 +173,7 @@ socket.closeHandler({ v ->
 
 === Handling exceptions
 
-You can set an `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` to receive any
+You can set an `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` to receive any
 exceptions that happen on the socket.
 
 === Event bus write handler
@@ -186,18 +184,18 @@ it writes them to itself.
 This enables you to write data to a socket which is potentially in a completely different verticle or even in a
 different Vert.x instance by sending the buffer to the address of that handler.
 
-The address of the handler is given by `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#writeHandlerID()[writeHandlerID]`
+The address of the handler is given by `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#writeHandlerID()[writeHandlerID]`
 
 === Local and remote addresses
 
-The local address of a `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]` can be retrieved using `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#localAddress()[localAddress]`.
+The local address of a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` can be retrieved using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#localAddress()[localAddress]`.
 
-The remote address, (i.e. the address of the other end of the connection) of a `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]`
-can be retrieved using `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#remoteAddress()[remoteAddress]`.
+The remote address, (i.e. the address of the other end of the connection) of a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`
+can be retrieved using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#remoteAddress()[remoteAddress]`.
 
 === Sending files or resources from the classpath
 
-Files and classpath resources can be written to the socket directly using `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#sendFile(java.lang.String)[sendFile]`. This can be a very
+Files and classpath resources can be written to the socket directly using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#sendFile(java.lang.String)[sendFile]`. This can be a very
 efficient way to send files, as it can be handled by the OS kernel directly where supported by the operating system.
 
 Please see the chapter about <<classpath, serving files from the classpath>> for restrictions of the 
@@ -212,22 +210,22 @@ socket.sendFile("myfile.dat")
 
 === Streaming sockets
 
-Instances of `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]` are also `link:../../groovydoc/io/vertx/groovy/core/streams/ReadStream.html[ReadStream]` and
-`link:../../groovydoc/io/vertx/groovy/core/streams/WriteStream.html[WriteStream]` instances so they can be used to pump data to or from other
+Instances of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` are also `link:../../scaladoc/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` and
+`link:../../scaladoc/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` instances so they can be used to pump data to or from other
 read and write streams.
 
 See the chapter on <<streams, streams and pumps>> for more information.
 
 === Upgrading connections to SSL/TLS
 
-A non SSL/TLS connection can be upgraded to SSL/TLS using `link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html#upgradeToSsl(io.vertx.core.Handler)[upgradeToSsl]`.
+A non SSL/TLS connection can be upgraded to SSL/TLS using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#upgradeToSsl(io.vertx.core.Handler)[upgradeToSsl]`.
 
 The server or client must be configured for SSL/TLS for this to work correctly. Please see the <<ssl, chapter on SSL/TLS>>
 for more information.
 
 === Closing a TCP Server
 
-Call `link:../../groovydoc/io/vertx/groovy/core/net/NetServer.html#close()[close]` to close the server. Closing the server closes any open connections
+Call `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#close()[close]` to close the server. Closing the server closes any open connections
 and releases all server resources.
 
 The close is actually asynchronous and might not complete until some time after the call has returned.
@@ -238,8 +236,8 @@ This handler will then be called when the close has fully completed.
 [source,scala]
 ----
 
-server.close({ res ->
-  if (res.succeeded()) {
+server.close((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("Server is now closed")
   } else {
     println("close failed")
@@ -269,16 +267,7 @@ You can instantiate more instances programmatically in your code:
 
 // Create a few instances so we can utilise cores
 
-for (def i = 0;i < 10;i++) {
-  def server = vertx.createNetServer()
-  server.connectHandler({ socket ->
-    socket.handler({ buffer ->
-      // Just echo back the data
-      socket.write(buffer)
-    })
-  })
-  server.listen(1234, "localhost")
-}
+forLoop
 
 ----
 
@@ -292,9 +281,7 @@ or when programmatically deploying your verticle
 [source,scala]
 ----
 
-def options = [
-  instances:10
-]
+var options = renderDataObject-DeploymentOptions
 vertx.deployVerticle("com.mycompany.MyVerticle", options)
 
 ----
@@ -322,7 +309,7 @@ The simplest way to create a TCP client, using all default options is as follows
 [source,scala]
 ----
 
-def client = vertx.createNetClient()
+var client = vertx.createNetClient()
 
 ----
 
@@ -334,32 +321,28 @@ instance when creating it:
 [source,scala]
 ----
 
-def options = [
-  connectTimeout:10000
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
 === Making connections
 
-To make a connection to a server you use `link:../../groovydoc/io/vertx/groovy/core/net/NetClient.html#connect(int,%20java.lang.String,%20io.vertx.core.Handler)[connect]`,
+To make a connection to a server you use `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html#connect(int,%20java.lang.String,%20io.vertx.core.Handler)[connect]`,
 specifying the port and host of the server and a handler that will be called with a result containing the
-`link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]` when connection is successful or with a failure if connection failed.
+`link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` when connection is successful or with a failure if connection failed.
 
 [source,scala]
 ----
 
-def options = [
-  connectTimeout:10000
-]
-def client = vertx.createNetClient(options)
-client.connect(4321, "localhost", { res ->
-  if (res.succeeded()) {
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
+client.connect(4321, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetSocket>) => {
+  if (renderAsyncResultSucceeded) {
     println("Connected!")
-    def socket = res.result()
+    var socket = renderAsyncResultValue
   } else {
-    println("Failed to connect: ${res.cause().getMessage()}")
+    println("Failed to connect: " + renderAsyncResultCause.getMessage())
   }
 })
 
@@ -377,12 +360,9 @@ only apply to creating initial connections.
 [source,scala]
 ----
 
-def options = [
-  reconnectAttempts:10,
-  reconnectInterval:500
-]
+var options = renderDataObject-NetClientOptions
 
-def client = vertx.createNetClient(options)
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -396,11 +376,9 @@ For debugging purposes, network activity can be logged:
 [source,scala]
 ----
 
-def options = [
-  logActivity:true
-]
+var options = renderDataObject-NetServerOptions
 
-def server = vertx.createNetServer(options)
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -409,11 +387,9 @@ for the client
 [source,scala]
 ----
 
-def options = [
-  logActivity:true
-]
+var options = renderDataObject-NetClientOptions
 
-def client = vertx.createNetClient(options)
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -470,14 +446,8 @@ The password for the key store should also be provided:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  keyStoreOptions:[
-    path:"/path/to/your/server-keystore.jks",
-    password:"password-of-your-keystore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -485,16 +455,10 @@ Alternatively you can read the key store yourself as a buffer and provide that d
 
 [source,scala]
 ----
-def myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.jks")
-def jksOptions = [
-  value:myKeyStoreAsABuffer,
-  password:"password-of-your-keystore"
-]
-def options = [
-  ssl:true,
-  keyStoreOptions:jksOptions
-]
-def server = vertx.createNetServer(options)
+var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.jks")
+var jksOptions = renderDataObject-JksOptions
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -503,14 +467,8 @@ extension can also be loaded in a similar fashion than JKS key stores:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pfxKeyCertOptions:[
-    path:"/path/to/your/server-keystore.pfx",
-    password:"password-of-your-keystore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -518,16 +476,10 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.pfx")
-def pfxOptions = [
-  value:myKeyStoreAsABuffer,
-  password:"password-of-your-keystore"
-]
-def options = [
-  ssl:true,
-  pfxKeyCertOptions:pfxOptions
-]
-def server = vertx.createNetServer(options)
+var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.pfx")
+var pfxOptions = renderDataObject-PfxOptions
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -535,14 +487,8 @@ Another way of providing server private key and certificate separately using `.p
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pemKeyCertOptions:[
-    keyPath:"/path/to/your/server-key.pem",
-    certPath:"/path/to/your/server-cert.pem"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -550,17 +496,11 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-key.pem")
-def myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-cert.pem")
-def pemOptions = [
-  keyValue:myKeyAsABuffer,
-  certValue:myCertAsABuffer
-]
-def options = [
-  ssl:true,
-  pemKeyCertOptions:pemOptions
-]
-def server = vertx.createNetServer(options)
+var myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-key.pem")
+var myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-cert.pem")
+var pemOptions = renderDataObject-PemKeyCertOptions
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -580,15 +520,8 @@ The password for the trust store should also be provided:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  trustStoreOptions:[
-    path:"/path/to/your/truststore.jks",
-    password:"password-of-your-truststore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -597,16 +530,9 @@ Alternatively you can read the trust store yourself as a buffer and provide that
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  trustStoreOptions:[
-    value:myTrustStoreAsABuffer,
-    password:"password-of-your-truststore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -616,15 +542,8 @@ extension can also be loaded in a similar fashion than JKS trust stores:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  pfxTrustOptions:[
-    path:"/path/to/your/truststore.pfx",
-    password:"password-of-your-truststore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -633,16 +552,9 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  pfxTrustOptions:[
-    value:myTrustStoreAsABuffer,
-    password:"password-of-your-truststore"
-  ]
-]
-def server = vertx.createNetServer(options)
+var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -651,16 +563,8 @@ Another way of providing server certificate authority using a list `.pem` files.
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  pemTrustOptions:[
-    certPaths:[
-      "/path/to/your/server-ca.pem"
-    ]
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -669,17 +573,9 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-def myCaAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-ca.pfx")
-def options = [
-  ssl:true,
-  clientAuth:"REQUIRED",
-  pemTrustOptions:[
-    certValues:[
-      myCaAsABuffer
-    ]
-  ]
-]
-def server = vertx.createNetServer(options)
+var myCaAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-ca.pfx")
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -697,11 +593,8 @@ be sure who you are connecting to. Use this with caution. Default value is false
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  trustAll:true
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -714,11 +607,8 @@ To enable host verification, set the algorithm to use on your client (only HTTPS
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  hostnameVerificationAlgorithm:"HTTPS"
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -733,14 +623,8 @@ in the client trust store, the connection attempt will not succeed.
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  trustStoreOptions:[
-    path:"/path/to/your/truststore.jks",
-    password:"password-of-your-truststore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -748,15 +632,9 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
-def options = [
-  ssl:true,
-  trustStoreOptions:[
-    value:myTrustStoreAsABuffer,
-    password:"password-of-your-truststore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -765,14 +643,8 @@ extension can also be loaded in a similar fashion than JKS trust stores:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pfxTrustOptions:[
-    path:"/path/to/your/truststore.pfx",
-    password:"password-of-your-truststore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -780,15 +652,9 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
-def options = [
-  ssl:true,
-  pfxTrustOptions:[
-    value:myTrustStoreAsABuffer,
-    password:"password-of-your-truststore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -796,15 +662,8 @@ Another way of providing server certificate authority using a list `.pem` files.
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pemTrustOptions:[
-    certPaths:[
-      "/path/to/your/ca-cert.pem"
-    ]
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -812,16 +671,9 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/ca-cert.pem")
-def options = [
-  ssl:true,
-  pemTrustOptions:[
-    certValues:[
-      myTrustStoreAsABuffer
-    ]
-  ]
-]
-def client = vertx.createNetClient(options)
+var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/ca-cert.pem")
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -837,14 +689,8 @@ Again it's just a regular Java key store. The client keystore location is set by
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  keyStoreOptions:[
-    path:"/path/to/your/client-keystore.jks",
-    password:"password-of-your-keystore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -852,16 +698,10 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.jks")
-def jksOptions = [
-  value:myKeyStoreAsABuffer,
-  password:"password-of-your-keystore"
-]
-def options = [
-  ssl:true,
-  keyStoreOptions:jksOptions
-]
-def client = vertx.createNetClient(options)
+var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.jks")
+var jksOptions = renderDataObject-JksOptions
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -870,14 +710,8 @@ extension can also be loaded in a similar fashion than JKS key stores:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pfxKeyCertOptions:[
-    path:"/path/to/your/client-keystore.pfx",
-    password:"password-of-your-keystore"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -885,16 +719,10 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.pfx")
-def pfxOptions = [
-  value:myKeyStoreAsABuffer,
-  password:"password-of-your-keystore"
-]
-def options = [
-  ssl:true,
-  pfxKeyCertOptions:pfxOptions
-]
-def client = vertx.createNetClient(options)
+var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.pfx")
+var pfxOptions = renderDataObject-PfxOptions
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -902,14 +730,8 @@ Another way of providing server private key and certificate separately using `.p
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  pemKeyCertOptions:[
-    keyPath:"/path/to/your/client-key.pem",
-    certPath:"/path/to/your/client-cert.pem"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -917,17 +739,11 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-key.pem")
-def myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-cert.pem")
-def pemOptions = [
-  keyValue:myKeyAsABuffer,
-  certValue:myCertAsABuffer
-]
-def options = [
-  ssl:true,
-  pemKeyCertOptions:pemOptions
-]
-def client = vertx.createNetClient(options)
+var myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-key.pem")
+var myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-cert.pem")
+var pemOptions = renderDataObject-PemKeyCertOptions
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -941,14 +757,8 @@ the crl list to use:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  trustStoreOptions:trustOptions,
-  crlPaths:[
-    "/path/to/your/crl.pem"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -956,15 +766,9 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-def myCrlAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/crl.pem")
-def options = [
-  ssl:true,
-  trustStoreOptions:trustOptions,
-  crlValues:[
-    myCrlAsABuffer
-  ]
-]
-def client = vertx.createNetClient(options)
+var myCrlAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/crl.pem")
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 
@@ -975,17 +779,8 @@ configured with a suite of enabled ciphers:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  keyStoreOptions:keyStoreOptions,
-  enabledCipherSuites:[
-    "ECDHE-RSA-AES128-GCM-SHA256",
-    "ECDHE-ECDSA-AES128-GCM-SHA256",
-    "ECDHE-RSA-AES256-GCM-SHA384",
-    "CDHE-ECDSA-AES256-GCM-SHA384"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -998,15 +793,8 @@ configured by explicitly adding enabled protocols:
 
 [source,scala]
 ----
-def options = [
-  ssl:true,
-  keyStoreOptions:keyStoreOptions,
-  enabledSecureTransportProtocols:[
-    "TLSv1.1",
-    "TLSv1.2"
-  ]
-]
-def server = vertx.createNetServer(options)
+var options = renderDataObject-NetServerOptions
+var server = vertx.createNetServer(options)
 
 ----
 
@@ -1026,24 +814,13 @@ The engine options to use is
 ----
 
 // Use JDK SSL engine
-def options = [
-  ssl:true,
-  keyStoreOptions:keyStoreOptions
-]
+var options = renderDataObject-NetServerOptions
 
 // Use JDK SSL engine explicitly
-options = [
-  ssl:true,
-  keyStoreOptions:keyStoreOptions,
-  jdkSslEngineOptions:[:]
-]
+options = renderDataObject-NetServerOptions
 
 // Use OpenSSL engine
-options = [
-  ssl:true,
-  keyStoreOptions:keyStoreOptions,
-  openSslEngineOptions:[:]
-]
+options = renderDataObject-NetServerOptions
 
 ----
 
@@ -1099,7 +876,7 @@ ALPN version for the JVM running it:
 
 === Using a proxy for client connections
 
-The `link:../../groovydoc/io/vertx/groovy/core/net/NetClient.html[NetClient]` supports either a HTTP/1.x _CONNECT_, _SOCKS4a_ or _SOCKS5_ proxy.
+The `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html[NetClient]` supports either a HTTP/1.x _CONNECT_, _SOCKS4a_ or _SOCKS5_ proxy.
 
 The proxy can be configured in the `link:../dataobjects.html#NetClientOptions[NetClientOptions]` by setting a
 `link:../dataobjects.html#ProxyOptions[ProxyOptions]` object containing proxy type, hostname, port and optionally username and password.
@@ -1110,16 +887,8 @@ Here's an example:
 
 ----
 import io.vertx.core.net.ProxyType
-def options = [
-  proxyOptions:[
-    type:"SOCKS5",
-    host:"localhost",
-    port:1080,
-    username:"username",
-    password:"secret"
-  ]
-]
-def client = vertx.createNetClient(options)
+var options = renderDataObject-NetClientOptions
+var client = vertx.createNetClient(options)
 
 ----
 

@@ -41,7 +41,7 @@ Let's discuss the different concepts and features in core.
 
 NOTE: Much of this is Java specific - need someway of swapping in language specific parts
 
-You can't do much in Vert.x-land unless you can commune with a `link:../../groovydoc/io/vertx/groovy/core/Vertx.html[Vertx]` object!
+You can't do much in Vert.x-land unless you can commune with a `link:../../scaladoc/io/vertx/scala/core/Vertx.html[Vertx]` object!
 
 It's the control centre of Vert.x and is how you do pretty much everything, including creating clients and servers,
 getting a reference to the event bus, setting timers, as well as many other things.
@@ -52,8 +52,8 @@ If you're embedding Vert.x then you simply create an instance as follows:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def vertx = Vertx.vertx()
+import io.vertx.scala.core.Vertx
+var vertx = Vertx.vertx()
 
 ----
 
@@ -68,10 +68,8 @@ When creating a Vertx object you can also specify options if the defaults aren't
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def vertx = Vertx.vertx([
-  workerPoolSize:40
-])
+import io.vertx.scala.core.Vertx
+var vertx = Vertx.vertx(renderDataObject-VertxOptions)
 
 ----
 
@@ -106,7 +104,7 @@ your code like this:
 
 [source,scala]
 ----
-def response = request.response()
+var response = request.response()
 response.putHeader("Content-Type", "text/plain")
 response.write("some text")
 response.end()
@@ -131,7 +129,7 @@ would do:
 
 [source,scala]
 ----
-vertx.setPeriodic(1000, { id ->
+vertx.setPeriodic(1000, (id: java.lang.Long) => {
   // This handler will get called every second
   println("timer fired!")
 })
@@ -143,7 +141,7 @@ Or to receive an HTTP request:
 [source,scala]
 ----
 // Respond to each http request with "Hello World"
-server.requestHandler({ request ->
+server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
   // This handler will be called every time an HTTP request is received at the server
   request.response().end("hello world!")
 })
@@ -277,19 +275,18 @@ blocking APIs safely within a Vert.x application.
 As discussed before, you can't call blocking operations directly from an event loop, as that would prevent it
 from doing any other useful work. So how can you do this?
 
-It's done by calling `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` specifying both the blocking code to execute and a
+It's done by calling `link:../../scaladoc/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` specifying both the blocking code to execute and a
 result handler to be called back asynchronous when the blocking code has been executed.
 
 [source,scala]
 ----
-import groovy.transform.Field
-@Field def someAPI = new examples.CoreExamples.BlockingAPI()
-vertx.executeBlocking({ future ->
+val var someAPI = examples.CoreExamples.BlockingAPI()
+vertx.executeBlocking((future: io.vertx.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
-  def result = someAPI.blockingMethod("hello")
+  var result = someAPI.blockingMethod("hello")
   future.complete(result)
-}, { res ->
-  println("The result is: ${res.result()}")
+}, (res: io.vertx.core.AsyncResult<java.lang.Object>) => {
+  println("The result is: " + renderAsyncResultValue)
 })
 
 ----
@@ -297,7 +294,7 @@ vertx.executeBlocking({ future ->
 By default, if executeBlocking is called several times from the same context (e.g. the same verticle instance) then
 the different executeBlocking are executed _serially_ (i.e. one after another).
 
-If you don't care about ordering you can call `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]`
+If you don't care about ordering you can call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]`
 specifying `false` as the argument to `ordered`. In this case any executeBlocking may be executed in parallel
 on the worker pool.
 
@@ -311,15 +308,14 @@ Additional pools can be created for different purposes:
 
 [source,scala]
 ----
-import groovy.transform.Field
-@Field def someAPI = new examples.CoreExamples.BlockingAPI()
-def executor = vertx.createSharedWorkerExecutor("my-worker-pool")
-executor.executeBlocking({ future ->
+val var someAPI = examples.CoreExamples.BlockingAPI()
+var executor = vertx.createSharedWorkerExecutor("my-worker-pool")
+executor.executeBlocking((future: io.vertx.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
-  def result = someAPI.blockingMethod("hello")
+  var result = someAPI.blockingMethod("hello")
   future.complete(result)
-}, { res ->
-  println("The result is: ${res.result()}")
+}, (res: io.vertx.core.AsyncResult<java.lang.Object>) => {
+  println("The result is: " + renderAsyncResultValue)
 })
 
 ----
@@ -344,12 +340,12 @@ Worker executors can be configured when created:
 ----
 //
 // 10 threads max
-def poolSize = 10
+var poolSize = 10
 
 // 2 minutes
-def maxExecuteTime = 120000
+var maxExecuteTime = 120000
 
-def executor = vertx.createSharedWorkerExecutor("my-worker-pool", poolSize, maxExecuteTime)
+var executor = vertx.createSharedWorkerExecutor("my-worker-pool", poolSize, maxExecuteTime)
 
 ----
 
@@ -357,25 +353,25 @@ NOTE: the configuration is set when the worker pool is created
 
 == Async coordination
 
-Coordination of multiple asynchronous results can be achieved with Vert.x `link:../../groovydoc/io/vertx/groovy/core/Future.html[futures]`. It
+Coordination of multiple asynchronous results can be achieved with Vert.x `link:../../scaladoc/io/vertx/scala/core/Future.html[futures]`. It
 supports concurrent composition (run several async operations in parallel and join) and sequential composition
 (chain async operations).
 
-`link:../../groovydoc/io/vertx/groovy/core/CompositeFuture.html#all(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.all]` takes several futures arguments (up to 6) and returns a future that is
+`link:../../scaladoc/io/vertx/scala/core/CompositeFuture.html#all(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.all]` takes several futures arguments (up to 6) and returns a future that is
 _succeeded_ when all the futures are and _failed_ otherwise:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Future
-import io.vertx.groovy.core.CompositeFuture
-def httpServerFuture = Future.future()
+import io.vertx.scala.core.Future
+import io.vertx.scala.core.CompositeFuture
+var httpServerFuture = Future.future()
 httpServer.listen(httpServerFuture.completer())
 
-def netServerFuture = Future.future()
+var netServerFuture = Future.future()
 netServer.listen(netServerFuture.completer())
 
-CompositeFuture.all(httpServerFuture, netServerFuture).setHandler({ ar ->
-  if (ar.succeeded()) {
+CompositeFuture.all(httpServerFuture, netServerFuture).setHandler((ar: io.vertx.core.AsyncResult<io.vertx.core.CompositeFuture>) => {
+  if (renderAsyncResultSucceeded) {
     // All servers started
   } else {
     // At least one server failed
@@ -393,23 +389,23 @@ Alternatively, you can pass a list (potentially empty) of futures:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.CompositeFuture
-CompositeFuture.all([f1, f2, f3])
+import io.vertx.scala.core.CompositeFuture
+CompositeFuture.all(List(f1, f2, f3))
 
 ----
 
 While the `all` composition _waits_ until all futures are completed (or one fails), the `any` composition
-_waits_ for the first completed future. `link:../../groovydoc/io/vertx/groovy/core/CompositeFuture.html#any(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.any]` takes several futures arguments
+_waits_ for the first completed future. `link:../../scaladoc/io/vertx/scala/core/CompositeFuture.html#any(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.any]` takes several futures arguments
 (up to 6) and returns a future that is _succeeded_ if one of the futures is, and _failed_ otherwise:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Future
-import io.vertx.groovy.core.CompositeFuture
-def future1 = Future.future()
-def future2 = Future.future()
-CompositeFuture.any(future1, future2).setHandler({ ar ->
-  if (ar.succeeded()) {
+import io.vertx.scala.core.Future
+import io.vertx.scala.core.CompositeFuture
+var future1 = Future.future()
+var future2 = Future.future()
+CompositeFuture.any(future1, future2).setHandler((ar: io.vertx.core.AsyncResult<io.vertx.core.CompositeFuture>) => {
+  if (renderAsyncResultSucceeded) {
     // At least one is succeeded
   } else {
     // All failed
@@ -422,31 +418,31 @@ A list of futures can be used also:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.CompositeFuture
-CompositeFuture.any([f1, f2, f3])
+import io.vertx.scala.core.CompositeFuture
+CompositeFuture.any(List(f1, f2, f3))
 
 ----
 
-While `all` and `any` are implementing concurrent composition, `link:../../groovydoc/io/vertx/groovy/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]` can be used
+While `all` and `any` are implementing concurrent composition, `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]` can be used
 for chaining futures (so sequential composition).
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Future
-import io.vertx.groovy.core.buffer.Buffer
+import io.vertx.scala.core.Future
+import io.vertx.scala.core.buffer.Buffer
 
-def fs = vertx.fileSystem()
+var fs = vertx.fileSystem()
 
-def fut1 = Future.future()
+var fut1 = Future.future()
 
 fs.createFile("/foo", fut1.completer())
 
-fut1.compose({ v ->
+fut1.compose((v: java.lang.Void) => {
   // When the file is created (fut1), execute this:
-  def fut2 = Future.future()
+  var fut2 = Future.future()
   fs.writeFile("/foo", Buffer.buffer(), fut2.completer())
   return fut2
-}).compose({ v ->
+}).compose((v: java.lang.Void) => {
   // When the file is written (fut2), execute this:
   fs.move("/foo", "/bar", startFuture.completer())
 }, startFuture)
@@ -464,15 +460,15 @@ of the steps fails, the final future is completed with a failure.
 
 This example uses:
 
-* `link:../../groovydoc/io/vertx/groovy/core/Future.html#compose(java.util.function.Function)[compose]`: when the current future completes,
+* `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(java.util.function.Function)[compose]`: when the current future completes,
 run the given function, that returns a future. When this returned future completes, it completes the composition.
-* `link:../../groovydoc/io/vertx/groovy/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]`: when the current future
+* `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]`: when the current future
 completes, run the given handler that completes the given `future` (next).
 
 In this second case, the `Handler` should complete the `next` future to report its success or
 failure.
 
-You can use `link:../../groovydoc/io/vertx/groovy/core/Future.html#completer()[completer]` that completes a future with the operation result or
+You can use `link:../../scaladoc/io/vertx/scala/core/Future.html#completer()[completer]` that completes a future with the operation result or
 failure. It avoids having to write the _traditional_: `if success then complete the future else fail the future`.
 
 == Verticles
@@ -538,9 +534,7 @@ If you want to deploy a verticle as a worker verticle you do that with `link:../
 
 [source,scala]
 ----
-def options = [
-  worker:true
-]
+var options = renderDataObject-DeploymentOptions
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options)
 
 ----
@@ -559,7 +553,7 @@ using standard Java techniques for multi-threaded programming.
 
 === Deploying verticles programmatically
 
-You can deploy a verticle using one of the `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#deployVerticle(io.vertx.core.Verticle)[deployVerticle]` method, specifying a verticle
+You can deploy a verticle using one of the `link:../../scaladoc/io/vertx/scala/core/Vertx.html#deployVerticle(io.vertx.core.Verticle)[deployVerticle]` method, specifying a verticle
 name or you can pass in a verticle instance you have already created yourself.
 
 NOTE: Deploying Verticle *instances* is Java only.
@@ -567,7 +561,7 @@ NOTE: Deploying Verticle *instances* is Java only.
 [source,java]
 ----
 
-def myVerticle = new examples.CoreExamples.MyVerticle()
+var myVerticle = examples.CoreExamples.MyVerticle()
 vertx.deployVerticle(myVerticle)
 
 ----
@@ -622,8 +616,8 @@ and instantiate that.
 
 Most Verticle factories are loaded from the classpath and registered at Vert.x startup.
 
-You can also programmatically register and unregister verticle factories using `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#registerVerticleFactory(io.vertx.core.spi.VerticleFactory)[registerVerticleFactory]`
-and `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#unregisterVerticleFactory(io.vertx.core.spi.VerticleFactory)[unregisterVerticleFactory]` if you wish.
+You can also programmatically register and unregister verticle factories using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#registerVerticleFactory(io.vertx.core.spi.VerticleFactory)[registerVerticleFactory]`
+and `link:../../scaladoc/io/vertx/scala/core/Vertx.html#unregisterVerticleFactory(io.vertx.core.spi.VerticleFactory)[unregisterVerticleFactory]` if you wish.
 
 === Waiting for deployment to complete
 
@@ -633,9 +627,9 @@ If you want to be notified when deployment is complete you can deploy specifying
 
 [source,scala]
 ----
-vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", { res ->
-  if (res.succeeded()) {
-    println("Deployment id is: ${res.result()}")
+vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", (res: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
+    println("Deployment id is: " + renderAsyncResultValue)
   } else {
     println("Deployment failed!")
   }
@@ -649,14 +643,14 @@ This deployment ID can be used later if you want to undeploy the deployment.
 
 === Undeploying verticle deployments
 
-Deployments can be undeployed with `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#undeploy(java.lang.String)[undeploy]`.
+Deployments can be undeployed with `link:../../scaladoc/io/vertx/scala/core/Vertx.html#undeploy(java.lang.String)[undeploy]`.
 
 Un-deployment is itself asynchronous so if you want to be notified when un-deployment is complete you can deploy specifying a completion handler:
 
 [source,scala]
 ----
-vertx.undeploy(deploymentID, { res ->
-  if (res.succeeded()) {
+vertx.undeploy(deploymentID, (res: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("Undeployed ok")
   } else {
     println("Undeploy failed!")
@@ -672,9 +666,7 @@ want to deploy:
 
 [source,scala]
 ----
-def options = [
-  instances:16
-]
+var options = renderDataObject-DeploymentOptions
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options)
 
 ----
@@ -714,10 +706,8 @@ Here's an example of using an isolation group to isolate a verticle deployment.
 
 [source,scala]
 ----
-def options = [
-  isolationGroup:"mygroup"
-]
-options.isolatedClasses = ["com.mycompany.myverticle.*", "com.mycompany.somepkg.SomeClass", "org.somelibrary.*"]
+var options = renderDataObject-DeploymentOptions
+options.put(isolatedClasses, List("com.mycompany.myverticle.*", "com.mycompany.somepkg.SomeClass", "org.somelibrary.*"))
 vertx.deployVerticle("com.mycompany.myverticle.VerticleClass", options)
 
 ----
@@ -781,7 +771,7 @@ type `vertx` at the command line.
 
 Threads maintained by Vert.x instances are not daemon threads so they will prevent the JVM from exiting.
 
-If you are embedding Vert.x and you have finished with it, you can call `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#close()[close]` to close it
+If you are embedding Vert.x and you have finished with it, you can call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#close()[close]` to close it
 down.
 
 This will shut-down all internal thread pools and close other resources, and will allow the JVM to exit.
@@ -794,11 +784,11 @@ When Vert.x provides an event to a handler or calls the start or stop methods of
 on that exact same event loop thread. In the case of worker verticles and running inline blocking code a
 worker context will be associated with the execution which will use a thread from the worker thread pool.
 
-To retrieve the context, use the `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#getOrCreateContext()[getOrCreateContext]` method:
+To retrieve the context, use the `link:../../scaladoc/io/vertx/scala/core/Vertx.html#getOrCreateContext()[getOrCreateContext]` method:
 
 [source, scala]
 ----
-def context = vertx.getOrCreateContext()
+var context = vertx.getOrCreateContext()
 
 ----
 
@@ -807,8 +797,8 @@ context is created. You can test the _type_ of context you have retrieved:
 
 [source, scala]
 ----
-import io.vertx.groovy.core.Context
-def context = vertx.getOrCreateContext()
+import io.vertx.scala.core.Context
+var context = vertx.getOrCreateContext()
 if (context.isEventLoopContext()) {
   println("Context attached to Event Loop")
 } else if (context.isWorkerContext()) {
@@ -826,7 +816,7 @@ you submit a task that will be eventually run in the same context, but later:
 
 [source, scala]
 ----
-vertx.getOrCreateContext().runOnContext({ v ->
+vertx.getOrCreateContext().runOnContext((v: java.lang.Void) => {
   println("This will be executed asynchronously in the same context")
 })
 
@@ -834,19 +824,19 @@ vertx.getOrCreateContext().runOnContext({ v ->
 
 When several handlers run in the same context, they may want to share data. The context object offers methods to
 store and retrieve data shared in the context. For instance, it lets you pass data to some action run with
-`link:../../groovydoc/io/vertx/groovy/core/Context.html#runOnContext(io.vertx.core.Handler)[runOnContext]`:
+`link:../../scaladoc/io/vertx/scala/core/Context.html#runOnContext(io.vertx.core.Handler)[runOnContext]`:
 
 [source, scala]
 ----
-def context = vertx.getOrCreateContext()
+var context = vertx.getOrCreateContext()
 context.put("data", "hello")
-context.runOnContext({ v ->
-  def hello = context.get("data")
+context.runOnContext((v: java.lang.Void) => {
+  var hello = context.get("data")
 })
 
 ----
 
-The context object also let you access verticle configuration using the `link:../../groovydoc/io/vertx/groovy/core/Context.html#config()[config]`
+The context object also let you access verticle configuration using the `link:../../scaladoc/io/vertx/scala/core/Context.html#config()[config]`
 method. Check the <<Passing configuration to a verticle>> section for more details about this configuration.
 
 === Executing periodic and delayed actions
@@ -861,11 +851,11 @@ Instead you use Vert.x timers. Timers can be *one-shot* or *periodic*. We'll dis
 
 A one shot timer calls an event handler after a certain delay, expressed in milliseconds.
 
-To set a timer to fire once you use `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` method passing in the delay and a handler
+To set a timer to fire once you use `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` method passing in the delay and a handler
 
 [source,scala]
 ----
-def timerID = vertx.setTimer(1000, { id ->
+var timerID = vertx.setTimer(1000, (id: java.lang.Long) => {
   println("And one second later this is printed")
 })
 
@@ -877,7 +867,7 @@ The return value is a unique timer id which can later be used to cancel the time
 
 ==== Periodic Timers
 
-You can also set a timer to fire periodically by using `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#setPeriodic(long,%20io.vertx.core.Handler)[setPeriodic]`.
+You can also set a timer to fire periodically by using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setPeriodic(long,%20io.vertx.core.Handler)[setPeriodic]`.
 
 There will be an initial delay equal to the period.
 
@@ -888,12 +878,12 @@ The argument passed into the timer event handler is also the unique timer id:
 Keep in mind that the timer will fire on a periodic basis. If your periodic treatment takes a long amount of time to proceed,
 your timer events could run continuously or even worse : stack up.
 
-In this case, you should consider using `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` instead. Once your treatment has
+In this case, you should consider using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` instead. Once your treatment has
 finished, you can set the next timer.
 
 [source,scala]
 ----
-def timerID = vertx.setPeriodic(1000, { id ->
+var timerID = vertx.setPeriodic(1000, (id: java.lang.Long) => {
   println("And every second this is printed")
 })
 
@@ -903,7 +893,7 @@ println("First this is printed")
 
 ==== Cancelling timers
 
-To cancel a periodic timer, call `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#cancelTimer(long)[cancelTimer]` specifying the timer id. For example:
+To cancel a periodic timer, call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#cancelTimer(long)[cancelTimer]` specifying the timer id. For example:
 
 [source,scala]
 ----
@@ -918,16 +908,14 @@ when the verticle is undeployed.
 
 === Verticle worker pool
 
-Verticle use the Vert.x worker pool for executing blocking actions, i.e `link:../../groovydoc/io/vertx/groovy/core/Context.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` or
+Verticle use the Vert.x worker pool for executing blocking actions, i.e `link:../../scaladoc/io/vertx/scala/core/Context.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` or
 worker verticle.
 
 A different worker pool can be specified in deployment options:
 
 [source,scala]
 ----
-vertx.deployVerticle("the-verticle", [
-  workerPoolName:"the-specific-pool"
-])
+vertx.deployVerticle("the-verticle", renderDataObject-DeploymentOptions)
 
 ----
 
@@ -960,8 +948,8 @@ include::parsetools.adoc[]
 Most Vert.x objects are safe to access from different threads. _However_ performance is optimised when they are
 accessed from the same context they were created from.
 
-For example if you have deployed a verticle which creates a `link:../../groovydoc/io/vertx/groovy/core/net/NetServer.html[NetServer]` which provides
-`link:../../groovydoc/io/vertx/groovy/core/net/NetSocket.html[NetSocket]` instances in it's handler, then it's best to always access that socket instance
+For example if you have deployed a verticle which creates a `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]` which provides
+`link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` instances in it's handler, then it's best to always access that socket instance
 from the event loop of the verticle.
 
 If you stick to the standard Vert.x verticle deployment model and avoid sharing objects between verticles then this
@@ -1392,7 +1380,7 @@ which you then use for logging, e.g.
 
 // You would normally maintain one static instance of Logger per Java class:
 
-def logger = io.vertx.core.logging.LoggerFactory.getLogger(className)
+var logger = io.vertx.core.logging.LoggerFactory.getLogger(className)
 
 logger.info("something happened")
 logger.error("oops!", exception)
@@ -1412,19 +1400,12 @@ An host name resolves to an IP address using:
 By default it will use the list of the system DNS server addresses from the environment, if that list cannot be
 retrieved it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
 
-DNS servers can be also configured when creating a `link:../../groovydoc/io/vertx/groovy/core/Vertx.html[Vertx]` instance:
+DNS servers can be also configured when creating a `link:../../scaladoc/io/vertx/scala/core/Vertx.html[Vertx]` instance:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def vertx = Vertx.vertx([
-  addressResolverOptions:[
-    servers:[
-      "192.168.0.1",
-      "192.168.0.2:40000"
-    ]
-  ]
-])
+import io.vertx.scala.core.Vertx
+var vertx = Vertx.vertx(renderDataObject-VertxOptions)
 
 ----
 
@@ -1435,12 +1416,8 @@ The resolver can be configured to use an alternative _hosts_ file:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def vertx = Vertx.vertx([
-  addressResolverOptions:[
-    hostsPath:"/path/to/hosts"
-  ]
-])
+import io.vertx.scala.core.Vertx
+var vertx = Vertx.vertx(renderDataObject-VertxOptions)
 
 ----
 
@@ -1449,15 +1426,8 @@ list can be provided:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def vertx = Vertx.vertx([
-  addressResolverOptions:[
-    searchDomains:[
-      "foo.com",
-      "bar.com"
-    ]
-  ]
-])
+import io.vertx.scala.core.Vertx
+var vertx = Vertx.vertx(renderDataObject-VertxOptions)
 
 ----
 

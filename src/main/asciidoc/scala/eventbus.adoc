@@ -1,9 +1,9 @@
 == The Event Bus
 :toc: left
 
-The `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html[event bus]` is the *nervous system* of Vert.x.
+The `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html[event bus]` is the *nervous system* of Vert.x.
 
-There is a single event bus instance for every Vert.x instance and it is obtained using the method `link:../../groovydoc/io/vertx/groovy/core/Vertx.html#eventBus()[eventBus]`.
+There is a single event bus instance for every Vert.x instance and it is obtained using the method `link:../../scaladoc/io/vertx/scala/core/Vertx.html#eventBus()[eventBus]`.
 
 The event bus allows different parts of your application to communicate with each other irrespective of what language they are written in,
 and whether they're in the same Vert.x instance, or in a different Vert.x instance.
@@ -77,7 +77,7 @@ to retry after recovery.
 
 ==== Types of messages
 
-Out of the box Vert.x allows any primitive/simple type, String, or `link:../../groovydoc/io/vertx/groovy/core/buffer/Buffer.html[buffers]` to
+Out of the box Vert.x allows any primitive/simple type, String, or `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[buffers]` to
 be sent as messages.
 
 However it's a convention and common practice in Vert.x to send messages as http://json.org/[JSON]
@@ -100,7 +100,7 @@ You get a reference to the event bus as follows:
 
 [source,scala]
 ----
-def eb = vertx.eventBus()
+var eb = vertx.eventBus()
 
 ----
 
@@ -108,35 +108,35 @@ There is a single instance of the event bus per Vert.x instance.
 
 ==== Registering Handlers
 
-This simplest way to register a handler is using `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html#consumer(java.lang.String,%20io.vertx.core.Handler)[consumer]`.
+This simplest way to register a handler is using `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html#consumer(java.lang.String,%20io.vertx.core.Handler)[consumer]`.
 Here's an example:
 
 [source,scala]
 ----
-def eb = vertx.eventBus()
+var eb = vertx.eventBus()
 
-eb.consumer("news.uk.sport", { message ->
-  println("I have received a message: ${message.body()}")
+eb.consumer("news.uk.sport", (message: io.vertx.core.eventbus.Message<java.lang.Object>) => {
+  println("I have received a message: " + message.body())
 })
 
 ----
 
-When a message arrives for your handler, your handler will be called, passing in the `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html[message]`.
+When a message arrives for your handler, your handler will be called, passing in the `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html[message]`.
 
-The object returned from call to +consumer()+ is an instance of `link:../../groovydoc/io/vertx/groovy/core/eventbus/MessageConsumer.html[MessageConsumer]`
+The object returned from call to +consumer()+ is an instance of `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]`
 
 This object can subsequently be used to unregister the handler, or use the handler as a stream.
 
-Alternatively you can use `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html#consumer(java.lang.String,%20io.vertx.core.Handler)[consumer]` to
+Alternatively you can use `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html#consumer(java.lang.String,%20io.vertx.core.Handler)[consumer]` to
 to return a +MessageConsumer+ with no handler set, and then set the handler on that. For example:
 
 [source,scala]
 ----
-def eb = vertx.eventBus()
+var eb = vertx.eventBus()
 
-def consumer = eb.consumer("news.uk.sport")
-consumer.handler({ message ->
-  println("I have received a message: ${message.body()}")
+var consumer = eb.consumer("news.uk.sport")
+consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
+  println("I have received a message: " + message.body())
 })
 
 ----
@@ -144,13 +144,13 @@ consumer.handler({ message ->
 When registering a handler on a clustered event bus, it can take some time for the registration to reach all
 nodes of the cluster.
 
-If you want to be notified when this has completed, you can register a `link:../../groovydoc/io/vertx/groovy/core/eventbus/MessageConsumer.html#completionHandler(io.vertx.core.Handler)[completion handler]`
+If you want to be notified when this has completed, you can register a `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html#completionHandler(io.vertx.core.Handler)[completion handler]`
 on the +MessageConsumer+ object.
 
 [source,scala]
 ----
-consumer.completionHandler({ res ->
-  if (res.succeeded()) {
+consumer.completionHandler((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("The handler registration has reached all nodes")
   } else {
     println("Registration failed!")
@@ -161,15 +161,15 @@ consumer.completionHandler({ res ->
 
 ==== Un-registering Handlers
 
-To unregister a handler, call `link:../../groovydoc/io/vertx/groovy/core/eventbus/MessageConsumer.html#unregister()[unregister]`.
+To unregister a handler, call `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html#unregister()[unregister]`.
 
 If you are on a clustered event bus, un-registering can take some time to propagate across the nodes, if you want to
-be notified when this is complete use `link:../../groovydoc/io/vertx/groovy/core/eventbus/MessageConsumer.html#unregister(io.vertx.core.Handler)[unregister]`.
+be notified when this is complete use `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html#unregister(io.vertx.core.Handler)[unregister]`.
 
 [source,scala]
 ----
-consumer.unregister({ res ->
-  if (res.succeeded()) {
+consumer.unregister((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     println("The handler un-registration has reached all nodes")
   } else {
     println("Un-registration failed!")
@@ -180,7 +180,7 @@ consumer.unregister({ res ->
 
 ==== Publishing messages
 
-Publishing a message is simple. Just use `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html#publish(java.lang.String,%20java.lang.Object)[publish]` specifying the
+Publishing a message is simple. Just use `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html#publish(java.lang.String,%20java.lang.Object)[publish]` specifying the
 address to publish it to.
 
 [source,scala]
@@ -196,7 +196,7 @@ That message will then be delivered to all handlers registered against the addre
 Sending a message will result in only one handler registered at the address receiving the message.
 This is the point to point messaging pattern. The handler is chosen in a non-strict round-robin fashion.
 
-You can send a message with `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html#send(java.lang.String,%20java.lang.Object)[send]`
+You can send a message with `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html#send(java.lang.String,%20java.lang.Object)[send]`
 
 [source,scala]
 ----
@@ -212,20 +212,20 @@ Vert.x will deliver messages to any particular handler in the same order they we
 
 ==== The Message object
 
-The object you receive in a message handler is a `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html[Message]`.
+The object you receive in a message handler is a `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html[Message]`.
 
-The `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html#body()[body]` of the message corresponds to the object that was sent or published.
+The `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html#body()[body]` of the message corresponds to the object that was sent or published.
 
-The headers of the message are available with `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html#headers()[headers]`.
+The headers of the message are available with `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html#headers()[headers]`.
 
 ==== Acknowledging messages / sending replies
 
-When using `link:../../groovydoc/io/vertx/groovy/core/eventbus/EventBus.html#send(java.lang.String,%20java.lang.Object)[send]` the event bus attempts to deliver the message to a
-`link:../../groovydoc/io/vertx/groovy/core/eventbus/MessageConsumer.html[MessageConsumer]` registered with the event bus.
+When using `link:../../scaladoc/io/vertx/scala/core/eventbus/EventBus.html#send(java.lang.String,%20java.lang.Object)[send]` the event bus attempts to deliver the message to a
+`link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]` registered with the event bus.
 
 In some cases it's useful for the sender to know when the consumer has received the message and "processed" it.
 
-To acknowledge that the message has been processed the consumer can reply to the message by calling `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html#reply(java.lang.Object)[reply]`.
+To acknowledge that the message has been processed the consumer can reply to the message by calling `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html#reply(java.lang.Object)[reply]`.
 
 When this happens it causes a reply to be sent back to the sender and the reply handler is invoked with the reply.
 
@@ -235,9 +235,9 @@ The receiver:
 
 [source,scala]
 ----
-def consumer = eventBus.consumer("news.uk.sport")
-consumer.handler({ message ->
-  println("I have received a message: ${message.body()}")
+var consumer = eventBus.consumer("news.uk.sport")
+consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
+  println("I have received a message: " + message.body())
   message.reply("how interesting!")
 })
 
@@ -247,9 +247,9 @@ The sender:
 
 [source,scala]
 ----
-eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", { ar ->
-  if (ar.succeeded()) {
-    println("Received reply: ${ar.result().body()}")
+eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", (ar: io.vertx.core.AsyncResult<io.vertx.core.eventbus.Message<java.lang.Object>>) => {
+  if (renderAsyncResultSucceeded) {
+    println("Received reply: " + renderAsyncResultValue.body())
   }
 })
 
@@ -282,7 +282,7 @@ The default timeout is 30 seconds.
 Message sends can fail for other reasons, including:
 
 * There are no handlers available to send the message to
-* The recipient has explicitly failed the message using `link:../../groovydoc/io/vertx/groovy/core/eventbus/Message.html#fail(int,%20java.lang.String)[fail]`
+* The recipient has explicitly failed the message using `link:../../scaladoc/io/vertx/scala/core/eventbus/Message.html#fail(int,%20java.lang.String)[fail]`
 
 In all cases the reply handler will be called with the specific failure.
 
@@ -300,15 +300,15 @@ instance as clustered;
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def options = [:]
-Vertx.clusteredVertx(options, { res ->
-  if (res.succeeded()) {
-    def vertx = res.result()
-    def eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: ${eventBus}")
+import io.vertx.scala.core.Vertx
+var options = renderDataObject-VertxOptions
+Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
+  if (renderAsyncResultSucceeded) {
+    var vertx = renderAsyncResultValue
+    var eventBus = vertx.eventBus()
+    println("We now have a clustered event bus: " + eventBus)
   } else {
-    println("Failed: ${res.cause()}")
+    println("Failed: " + renderAsyncResultCause)
   }
 })
 
@@ -339,29 +339,16 @@ the event bus acts as a server and client, the configuration is close to
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-import io.vertx.groovy.core.Vertx
-def options = [
-  eventBusOptions:[
-    ssl:true,
-    keyStoreOptions:[
-      path:"keystore.jks",
-      password:"wibble"
-    ],
-    trustStoreOptions:[
-      path:"keystore.jks",
-      password:"wibble"
-    ],
-    clientAuth:"REQUIRED"
-  ]
-]
+import io.vertx.scala.core.Vertx
+var options = renderDataObject-VertxOptions
 
-Vertx.clusteredVertx(options, { res ->
-  if (res.succeeded()) {
-    def vertx = res.result()
-    def eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: ${eventBus}")
+Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
+  if (renderAsyncResultSucceeded) {
+    var vertx = renderAsyncResultValue
+    var eventBus = vertx.eventBus()
+    println("We now have a clustered event bus: " + eventBus)
   } else {
-    println("Failed: ${res.cause()}")
+    println("Failed: " + renderAsyncResultCause)
   }
 })
 
@@ -384,21 +371,16 @@ When used in containers, you can also configure the public host and port:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.Vertx
-def options = [
-  eventBusOptions:[
-    clusterPublicHost:"whatever",
-    clusterPublicPort:1234
-  ]
-]
+import io.vertx.scala.core.Vertx
+var options = renderDataObject-VertxOptions
 
-Vertx.clusteredVertx(options, { res ->
-  if (res.succeeded()) {
-    def vertx = res.result()
-    def eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: ${eventBus}")
+Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
+  if (renderAsyncResultSucceeded) {
+    var vertx = renderAsyncResultValue
+    var eventBus = vertx.eventBus()
+    println("We now have a clustered event bus: " + eventBus)
   } else {
-    println("Failed: ${res.cause()}")
+    println("Failed: " + renderAsyncResultCause)
   }
 })
 

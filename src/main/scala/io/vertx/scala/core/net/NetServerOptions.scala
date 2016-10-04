@@ -317,6 +317,11 @@ class NetServerOptions(val asJava: io.vertx.core.net.NetServerOptions) {
 object NetServerOptions {
   type NetServerOptionsJava = io.vertx.core.net.NetServerOptions
   
+  def apply() = {
+    new NetServerOptions(new NetServerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+   
+  }
+  
   def apply(t: NetServerOptionsJava) = {
     if(t != null)
       new NetServerOptions(t)

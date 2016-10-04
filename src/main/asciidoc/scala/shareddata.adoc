@@ -12,11 +12,11 @@ configuration. Refer to the cluster manager documentation as well as to the unde
 
 === Local shared maps
 
-`link:../../groovydoc/io/vertx/groovy/core/shareddata/LocalMap.html[Local shared maps]` allow you to share data safely between different event
+`link:../../scaladoc/io/vertx/scala/core/shareddata/LocalMap.html[Local shared maps]` allow you to share data safely between different event
 loops (e.g. different verticles) in the same Vert.x instance.
 
 Local shared maps only allow certain data types to be used as keys and values. Those types must either be immutable,
-or certain other types that can be copied like `link:../../groovydoc/io/vertx/groovy/core/buffer/Buffer.html[Buffer]`. In the latter case the key/value
+or certain other types that can be copied like `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[Buffer]`. In the latter case the key/value
 will be copied before putting it in the map.
 
 This way we can ensure there is no _shared access to mutable state_ between different threads in your Vert.x application
@@ -26,15 +26,15 @@ Here's an example of using a shared local map:
 
 [source,scala]
 ----
-import io.vertx.groovy.core.buffer.Buffer
+import io.vertx.scala.core.buffer.Buffer
 
-def sd = vertx.sharedData()
+var sd = vertx.sharedData()
 
-def map1 = sd.getLocalMap("mymap1")
+var map1 = sd.getLocalMap("mymap1")
 
 map1.put("foo", "bar")
 
-def map2 = sd.getLocalMap("mymap2")
+var map2 = sd.getLocalMap("mymap2")
 
 map2.put("eek", Buffer.buffer().appendInt(123))
 
@@ -42,11 +42,11 @@ map2.put("eek", Buffer.buffer().appendInt(123))
 
 map1 = sd.getLocalMap("mymap1")
 
-def val = map1.get("foo")
+var val = map1.get("foo")
 
 map2 = sd.getLocalMap("mymap2")
 
-def buff = map2.get("eek")
+var buff = map2.get("eek")
 
 ----
 
@@ -58,19 +58,19 @@ other node.
 This makes them really useful for things like storing session state in a farm of servers hosting a Vert.x web
 application.
 
-You get an instance of `link:../../groovydoc/io/vertx/groovy/core/shareddata/AsyncMap.html[AsyncMap]` with
-`link:../../groovydoc/io/vertx/groovy/core/shareddata/SharedData.html#getClusterWideMap(java.lang.String,%20io.vertx.core.Handler)[getClusterWideMap]`.
+You get an instance of `link:../../scaladoc/io/vertx/scala/core/shareddata/AsyncMap.html[AsyncMap]` with
+`link:../../scaladoc/io/vertx/scala/core/shareddata/SharedData.html#getClusterWideMap(java.lang.String,%20io.vertx.core.Handler)[getClusterWideMap]`.
 
 Getting the map is asynchronous and the result is returned to you in the handler that you specify. Here's an example:
 
 [source,scala]
 ----
 
-def sd = vertx.sharedData()
+var sd = vertx.sharedData()
 
-sd.getClusterWideMap("mymap", { res ->
-  if (res.succeeded()) {
-    def map = res.result()
+sd.getClusterWideMap("mymap", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.AsyncMap<java.lang.String,java.lang.String>>) => {
+  if (renderAsyncResultSucceeded) {
+    var map = renderAsyncResultValue
   } else {
     // Something went wrong!
   }
@@ -81,15 +81,15 @@ sd.getClusterWideMap("mymap", { res ->
 
 ==== Putting data in a map
 
-You put data in a map with `link:../../groovydoc/io/vertx/groovy/core/shareddata/AsyncMap.html#put(java.lang.Object,%20java.lang.Object,%20io.vertx.core.Handler)[put]`.
+You put data in a map with `link:../../scaladoc/io/vertx/scala/core/shareddata/AsyncMap.html#put(java.lang.Object,%20java.lang.Object,%20io.vertx.core.Handler)[put]`.
 
 The actual put is asynchronous and the handler is notified once it is complete:
 
 [source,scala]
 ----
 
-map.put("foo", "bar", { resPut ->
-  if (resPut.succeeded()) {
+map.put("foo", "bar", (resPut: io.vertx.core.AsyncResult<java.lang.Void>) => {
+  if (renderAsyncResultSucceeded) {
     // Successfully put the value
   } else {
     // Something went wrong!
@@ -101,17 +101,17 @@ map.put("foo", "bar", { resPut ->
 
 ==== Getting data from a map
 
-You get data from a map with `link:../../groovydoc/io/vertx/groovy/core/shareddata/AsyncMap.html#get(java.lang.Object,%20io.vertx.core.Handler)[get]`.
+You get data from a map with `link:../../scaladoc/io/vertx/scala/core/shareddata/AsyncMap.html#get(java.lang.Object,%20io.vertx.core.Handler)[get]`.
 
 The actual get is asynchronous and the handler is notified with the result some time later
 
 [source,scala]
 ----
 
-map.get("foo", { resGet ->
-  if (resGet.succeeded()) {
+map.get("foo", (resGet: io.vertx.core.AsyncResult<java.lang.String>) => {
+  if (renderAsyncResultSucceeded) {
     // Successfully got the value
-    def val = resGet.result()
+    var val = renderAsyncResultValue
   } else {
     // Something went wrong!
   }
@@ -124,36 +124,36 @@ map.get("foo", { resGet ->
 
 You can also remove entries from an asynchronous map, clear them and get the size.
 
-See the `link:../../groovydoc/io/vertx/groovy/core/shareddata/AsyncMap.html[API docs]` for more information.
+See the `link:../../scaladoc/io/vertx/scala/core/shareddata/AsyncMap.html[API docs]` for more information.
 
 === Cluster-wide locks
 
-`link:../../groovydoc/io/vertx/groovy/core/shareddata/Lock.html[Cluster wide locks]` allow you to obtain exclusive locks across the cluster -
+`link:../../scaladoc/io/vertx/scala/core/shareddata/Lock.html[Cluster wide locks]` allow you to obtain exclusive locks across the cluster -
 this is useful when you want to do something or access a resource on only one node of a cluster at any one time.
 
 Cluster wide locks have an asynchronous API unlike most lock APIs which block the calling thread until the lock
 is obtained.
 
-To obtain a lock use `link:../../groovydoc/io/vertx/groovy/core/shareddata/SharedData.html#getLock(java.lang.String,%20io.vertx.core.Handler)[getLock]`.
+To obtain a lock use `link:../../scaladoc/io/vertx/scala/core/shareddata/SharedData.html#getLock(java.lang.String,%20io.vertx.core.Handler)[getLock]`.
 
-This won't block, but when the lock is available, the handler will be called with an instance of `link:../../groovydoc/io/vertx/groovy/core/shareddata/Lock.html[Lock]`,
+This won't block, but when the lock is available, the handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/shareddata/Lock.html[Lock]`,
 signifying that you now own the lock.
 
 While you own the lock no other caller, anywhere on the cluster will be able to obtain the lock.
 
-When you've finished with the lock, you call `link:../../groovydoc/io/vertx/groovy/core/shareddata/Lock.html#release()[release]` to release it, so
+When you've finished with the lock, you call `link:../../scaladoc/io/vertx/scala/core/shareddata/Lock.html#release()[release]` to release it, so
 another caller can obtain it.
 
 [source,scala]
 ----
-sd.getLock("mylock", { res ->
-  if (res.succeeded()) {
+sd.getLock("mylock", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Lock>) => {
+  if (renderAsyncResultSucceeded) {
     // Got the lock!
-    def lock = res.result()
+    var lock = renderAsyncResultValue
 
     // 5 seconds later we release the lock so someone else can get it
 
-    vertx.setTimer(5000, { tid ->
+    vertx.setTimer(5000, (tid: java.lang.Long) => {
       lock.release()
     })
 
@@ -169,10 +169,10 @@ with a failure:
 
 [source,scala]
 ----
-sd.getLockWithTimeout("mylock", 10000, { res ->
-  if (res.succeeded()) {
+sd.getLockWithTimeout("mylock", 10000, (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Lock>) => {
+  if (renderAsyncResultSucceeded) {
     // Got the lock!
-    def lock = res.result()
+    var lock = renderAsyncResultValue
 
   } else {
     // Failed to get lock
@@ -185,15 +185,15 @@ sd.getLockWithTimeout("mylock", 10000, { res ->
 
 It's often useful to maintain an atomic counter across the different nodes of your application.
 
-You can do this with `link:../../groovydoc/io/vertx/groovy/core/shareddata/Counter.html[Counter]`.
+You can do this with `link:../../scaladoc/io/vertx/scala/core/shareddata/Counter.html[Counter]`.
 
-You obtain an instance with `link:../../groovydoc/io/vertx/groovy/core/shareddata/SharedData.html#getCounter(java.lang.String,%20io.vertx.core.Handler)[getCounter]`:
+You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/SharedData.html#getCounter(java.lang.String,%20io.vertx.core.Handler)[getCounter]`:
 
 [source,scala]
 ----
-sd.getCounter("mycounter", { res ->
-  if (res.succeeded()) {
-    def counter = res.result()
+sd.getCounter("mycounter", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Counter>) => {
+  if (renderAsyncResultSucceeded) {
+    var counter = renderAsyncResultValue
   } else {
     // Something went wrong!
   }
@@ -204,4 +204,4 @@ sd.getCounter("mycounter", { res ->
 Once you have an instance you can retrieve the current count, atomically increment it, decrement and add a value to
 it using the various methods.
 
-See the `link:../../groovydoc/io/vertx/groovy/core/shareddata/Counter.html[API docs]` for more information.
+See the `link:../../scaladoc/io/vertx/scala/core/shareddata/Counter.html[API docs]` for more information.
