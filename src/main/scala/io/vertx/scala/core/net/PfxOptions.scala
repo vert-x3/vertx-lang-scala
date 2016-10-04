@@ -82,7 +82,6 @@ object PfxOptions {
   
   def apply() = {
     new PfxOptions(new PfxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: PfxOptionsJava) = {
@@ -90,7 +89,6 @@ object PfxOptions {
       new PfxOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):PfxOptions = {

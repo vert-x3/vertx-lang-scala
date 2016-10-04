@@ -50,7 +50,6 @@ object OpenSSLEngineOptions {
   
   def apply() = {
     new OpenSSLEngineOptions(new OpenSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: OpenSSLEngineOptionsJava) = {
@@ -58,7 +57,6 @@ object OpenSSLEngineOptions {
       new OpenSSLEngineOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):OpenSSLEngineOptions = {

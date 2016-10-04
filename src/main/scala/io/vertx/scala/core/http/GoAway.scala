@@ -64,7 +64,6 @@ object GoAway {
   
   def apply() = {
     new GoAway(new GoAwayJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: GoAwayJava) = {
@@ -72,7 +71,6 @@ object GoAway {
       new GoAway(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):GoAway = {

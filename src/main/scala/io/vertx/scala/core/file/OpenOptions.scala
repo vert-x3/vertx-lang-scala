@@ -141,7 +141,6 @@ object OpenOptions {
   
   def apply() = {
     new OpenOptions(new OpenOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: OpenOptionsJava) = {
@@ -149,7 +148,6 @@ object OpenOptions {
       new OpenOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):OpenOptions = {

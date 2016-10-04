@@ -413,7 +413,6 @@ object EventBusOptions {
   
   def apply() = {
     new EventBusOptions(new EventBusOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: EventBusOptionsJava) = {
@@ -421,7 +420,6 @@ object EventBusOptions {
       new EventBusOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):EventBusOptions = {

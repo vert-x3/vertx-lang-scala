@@ -100,7 +100,6 @@ object Http2Settings {
   
   def apply() = {
     new Http2Settings(new Http2SettingsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: Http2SettingsJava) = {
@@ -108,7 +107,6 @@ object Http2Settings {
       new Http2Settings(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):Http2Settings = {

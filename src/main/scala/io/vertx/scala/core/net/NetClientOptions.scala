@@ -343,7 +343,6 @@ object NetClientOptions {
   
   def apply() = {
     new NetClientOptions(new NetClientOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: NetClientOptionsJava) = {
@@ -351,7 +350,6 @@ object NetClientOptions {
       new NetClientOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):NetClientOptions = {

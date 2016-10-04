@@ -229,10 +229,10 @@ It also has case-insensitive keys, that means you can do the following:
 var headers = request.headers()
 
 // Get the User-Agent:
-println("User agent is " + headers.get("user-agent"))
+println(s"User agent is ${headers.get("user-agent")}")
 
 // You can also do this and get the same result:
-println("User agent is " + headers.get("User-Agent"))
+println(s"User agent is ${headers.get("User-Agent")}")
 
 ----
 
@@ -293,7 +293,7 @@ this will get called every time a chunk of the request body arrives. Here's an e
 ----
 
 request.handler((buffer: io.vertx.core.buffer.Buffer) => {
-  println("I have received a chunk of the body of length " + buffer.length())
+  println(s"I have received a chunk of the body of length ${buffer.length()}")
 })
 
 ----
@@ -312,12 +312,12 @@ import io.vertx.scala.core.buffer.Buffer
 var totalBuffer = Buffer.buffer()
 
 request.handler((buffer: io.vertx.core.buffer.Buffer) => {
-  println("I have received a chunk of the body of length " + buffer.length())
+  println(s"I have received a chunk of the body of length ${buffer.length()}")
   totalBuffer.appendBuffer(buffer)
 })
 
 request.endHandler((v: java.lang.Void) => {
-  println("Full body received, length = " + totalBuffer.length())
+  println(s"Full body received, length = ${totalBuffer.length()}")
 })
 
 ----
@@ -329,7 +329,7 @@ for you. The body handler is called once when all the body has been received:
 ----
 
 request.bodyHandler((totalBuffer: io.vertx.core.buffer.Buffer) => {
-  println("Full body received, length = " + totalBuffer.length())
+  println(s"Full body received, length = ${totalBuffer.length()}")
 })
 
 ----
@@ -388,7 +388,7 @@ The object passed into the handler is a `link:../../scaladoc/io/vertx/scala/core
 server.requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
   request.setExpectMultipart(true)
   request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
-    println("Got a file upload " + upload.name())
+    println(s"Got a file upload ${upload.name()}")
   })
 })
 
@@ -402,7 +402,7 @@ exhaustion, instead, the upload data is received in chunks:
 
 request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
   upload.handler((chunk: io.vertx.core.buffer.Buffer) => {
-    println("Received a chunk of the upload of length " + chunk.length())
+    println(s"Received a chunk of the upload of length ${chunk.length()}")
   })
 })
 
@@ -418,7 +418,7 @@ If you just want to upload the file to disk somewhere you can use `link:../../sc
 ----
 
 request.uploadHandler((upload: io.vertx.core.http.HttpServerFileUpload) => {
-  upload.streamToFileSystem("myuploads_directory/" + upload.filename())
+  upload.streamToFileSystem(s"myuploads_directory/${upload.filename()}")
 })
 
 ----
@@ -439,7 +439,7 @@ this will get called every time a custom frame arrives. Here's an example:
 
 request.customFrameHandler((frame: io.vertx.core.http.HttpFrame) => {
 
-  println("Received a frame type=" + frame.type() + " payload" + frame.payload().toString())
+  println(s"Received a frame type=${frame.type()} payload${frame.payload().toString()}")
 })
 
 ----
@@ -648,7 +648,7 @@ vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerR
   } else if (!request.path().contains("..")) {
     file = request.path()
   }
-  request.response().sendFile("web/" + file)
+  request.response().sendFile(s"web/${file}")
 }).listen(8080)
 
 ----
@@ -821,7 +821,7 @@ response.push(HttpMethod.GET, "/main.js", (ar: io.vertx.core.AsyncResult<io.vert
     // Send main.js response
     pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
   } else {
-    println("Could not push client resource " + renderAsyncResultCause)
+    println(s"Could not push client resource ${renderAsyncResultCause}")
   }
 })
 
@@ -948,7 +948,7 @@ var options = renderDataObject-HttpClientOptions
 // Can also set default port if you want...
 var client = vertx.createHttpClient(options)
 client.getNow("/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 ----
@@ -962,12 +962,12 @@ var client = vertx.createHttpClient()
 
 // Specify both port and host name
 client.getNow(8080, "myserver.mycompany.com", "/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 // This time use the default port 80 but specify the host name
 client.getNow("foo.othercompany.com", "/other-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 ----
@@ -991,12 +991,12 @@ var client = vertx.createHttpClient()
 
 // Send a GET request
 client.getNow("/some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 // Send a GET request
 client.headNow("/other-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 
@@ -1014,11 +1014,11 @@ import io.vertx.core.http.HttpMethod
 var client = vertx.createHttpClient()
 
 client.request(HttpMethod.GET, "some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 }).end()
 
 client.request(HttpMethod.POST, "foo-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 }).end("some-data")
 
 ----
@@ -1041,7 +1041,7 @@ m
 var client = vertx.createHttpClient()
 
 var request = client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 // Now do stuff with the request
@@ -1055,13 +1055,13 @@ request.end()
 // Or fluently:
 
 client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 }).putHeader("content-length", "1000").putHeader("content-type", "text/plain").write(body).end()
 
 // Or event more simply:
 
 client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 }).putHeader("content-type", "text/plain").end(body)
 
 
@@ -1207,7 +1207,10 @@ no need to set the `Content-Length` of the request up-front.
 request.setChunked(true)
 
 // Write some chunks
-forLoop
+forLoop - 
+for (var i = 0;i < 10;i++) {
+  request.write(s"this-is-chunk-${i}")
+}
 
 request.end()
 
@@ -1229,10 +1232,10 @@ You can handle exceptions corresponding to a request by setting an exception han
 ----
 
 var request = client.post("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 request.exceptionHandler((e: java.lang.Throwable) => {
-  println("Received exception: " + e.getMessage())
+  println(s"Received exception: ${e.getMessage()}")
   e.printStackTrace()
 })
 
@@ -1270,7 +1273,7 @@ not provide a handler when the request is created and set it later on the reques
 
 var request = client.post("some-uri")
 request.handler((response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 ----
@@ -1364,10 +1367,10 @@ and `link:../../scaladoc/io/vertx/scala/core/http/HttpClientResponse.html#status
 
 client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
   // the status code - e.g. 200 or 404
-  println("Status code is " + response.statusCode())
+  println(s"Status code is ${response.statusCode()}")
 
   // the status message e.g. "OK" or "Not Found".
-  println("Status message is " + response.statusMessage())
+  println(s"Status message is ${response.statusMessage()}")
 })
 
 
@@ -1414,7 +1417,7 @@ a `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[Buffer]` represent
 client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
 
   response.handler((buffer: io.vertx.core.buffer.Buffer) => {
-    println("Received a part of the response body: " + buffer)
+    println(s"Received a part of the response body: ${buffer}")
   })
 })
 
@@ -1433,14 +1436,14 @@ client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
   var totalBuffer = Buffer.buffer()
 
   response.handler((buffer: io.vertx.core.buffer.Buffer) => {
-    println("Received a part of the response body: " + buffer.length())
+    println(s"Received a part of the response body: ${buffer.length()}")
 
     totalBuffer.appendBuffer(buffer)
   })
 
   response.endHandler((v: java.lang.Void) => {
     // Now all the body has been read
-    println("Total response body length is " + totalBuffer.length())
+    println(s"Total response body length is ${totalBuffer.length()}")
   })
 })
 
@@ -1456,7 +1459,7 @@ client.getNow("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
 
   response.bodyHandler((totalBuffer: io.vertx.core.buffer.Buffer) => {
     // Now all the body has been read
-    println("Total response body length is " + totalBuffer.length())
+    println(s"Total response body length is ${totalBuffer.length()}")
   })
 })
 
@@ -1500,7 +1503,7 @@ Here's an example:
 ----
 
 var request = client.put("some-uri", (response: io.vertx.core.http.HttpClientResponse) => {
-  println("Received response with status code " + response.statusCode())
+  println(s"Received response with status code ${response.statusCode()}")
 })
 
 request.putHeader("Expect", "100-Continue")
@@ -1590,7 +1593,7 @@ var request = client.get("/index.html", (response: io.vertx.core.http.HttpClient
 request.pushHandler((pushedRequest: io.vertx.core.http.HttpClientRequest) => {
 
   // A resource is pushed for this request
-  println("Server pushed " + pushedRequest.path())
+  println(s"Server pushed ${pushedRequest.path()}")
 
   // Set an handler for the response
   pushedRequest.handler((pushedResponse: io.vertx.core.http.HttpClientResponse) => {
@@ -1632,7 +1635,7 @@ frame arrives. Here's an example:
 ----
 response.customFrameHandler((frame: io.vertx.core.http.HttpFrame) => {
 
-  println("Received a frame type=" + frame.type() + " payload" + frame.payload().toString())
+  println(s"Received a frame type=${frame.type()} payload${frame.payload().toString()}")
 })
 
 ----
@@ -1844,7 +1847,10 @@ endpoint:
 ----
 import io.vertx.scala.core.buffer.Buffer
 var data = Buffer.buffer()
-forLoop
+forLoop - 
+for (var i = 0;i < 8;i++) {
+  data.appendByte(i)
+}
 connection.ping(data, (pong: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
   println("Remote side replied")
 })
@@ -1962,7 +1968,7 @@ Let's take a verticle creating a HTTP server such as:
 [source,scala]
 ----
 vertx.createHttpServer().requestHandler((request: io.vertx.core.http.HttpServerRequest) => {
-  request.response().end("Hello from server " + this)
+  request.response().end(s"Hello from server ${this}")
 }).listen(8080)
 
 ----

@@ -189,7 +189,6 @@ object AddressResolverOptions {
   
   def apply() = {
     new AddressResolverOptions(new AddressResolverOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: AddressResolverOptionsJava) = {
@@ -197,7 +196,6 @@ object AddressResolverOptions {
       new AddressResolverOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):AddressResolverOptions = {

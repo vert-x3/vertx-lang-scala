@@ -116,7 +116,7 @@ Here's an example:
 var eb = vertx.eventBus()
 
 eb.consumer("news.uk.sport", (message: io.vertx.core.eventbus.Message<java.lang.Object>) => {
-  println("I have received a message: " + message.body())
+  println(s"I have received a message: ${message.body()}")
 })
 
 ----
@@ -136,7 +136,7 @@ var eb = vertx.eventBus()
 
 var consumer = eb.consumer("news.uk.sport")
 consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
-  println("I have received a message: " + message.body())
+  println(s"I have received a message: ${message.body()}")
 })
 
 ----
@@ -237,7 +237,7 @@ The receiver:
 ----
 var consumer = eventBus.consumer("news.uk.sport")
 consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
-  println("I have received a message: " + message.body())
+  println(s"I have received a message: ${message.body()}")
   message.reply("how interesting!")
 })
 
@@ -249,7 +249,7 @@ The sender:
 ----
 eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", (ar: io.vertx.core.AsyncResult<io.vertx.core.eventbus.Message<java.lang.Object>>) => {
   if (renderAsyncResultSucceeded) {
-    println("Received reply: " + renderAsyncResultValue.body())
+    println(s"Received reply: ${renderAsyncResultValue.body()}")
   }
 })
 
@@ -306,9 +306,9 @@ Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vert
   if (renderAsyncResultSucceeded) {
     var vertx = renderAsyncResultValue
     var eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: " + eventBus)
+    println(s"We now have a clustered event bus: ${eventBus}")
   } else {
-    println("Failed: " + renderAsyncResultCause)
+    println(s"Failed: ${renderAsyncResultCause}")
   }
 })
 
@@ -346,9 +346,9 @@ Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vert
   if (renderAsyncResultSucceeded) {
     var vertx = renderAsyncResultValue
     var eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: " + eventBus)
+    println(s"We now have a clustered event bus: ${eventBus}")
   } else {
-    println("Failed: " + renderAsyncResultCause)
+    println(s"Failed: ${renderAsyncResultCause}")
   }
 })
 
@@ -378,9 +378,9 @@ Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vert
   if (renderAsyncResultSucceeded) {
     var vertx = renderAsyncResultValue
     var eventBus = vertx.eventBus()
-    println("We now have a clustered event bus: " + eventBus)
+    println(s"We now have a clustered event bus: ${eventBus}")
   } else {
-    println("Failed: " + renderAsyncResultCause)
+    println(s"Failed: ${renderAsyncResultCause}")
   }
 })
 

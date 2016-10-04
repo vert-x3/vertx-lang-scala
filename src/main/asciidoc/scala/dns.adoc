@@ -31,7 +31,7 @@ client.lookup("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => {
   if (renderAsyncResultSucceeded) {
     println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -51,7 +51,7 @@ client.lookup4("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => 
   if (renderAsyncResultSucceeded) {
     println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -71,7 +71,7 @@ client.lookup6("vertx.io", (ar: io.vertx.core.AsyncResult<java.lang.String>) => 
   if (renderAsyncResultSucceeded) {
     println(renderAsyncResultValue)
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -92,7 +92,7 @@ client.resolveA("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.l
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -113,7 +113,7 @@ client.resolveAAAA("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<jav
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -134,7 +134,7 @@ client.resolveCNAME("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<ja
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -155,7 +155,7 @@ client.resolveMX("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<io.ve
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -187,7 +187,7 @@ client.resolveTXT("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -208,7 +208,7 @@ client.resolveNS("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<java.
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -229,7 +229,7 @@ client.resolveSRV("vertx.io", (ar: io.vertx.core.AsyncResult<java.util.List<io.v
     var records = renderAsyncResultValue
     enhancedForLoop
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -268,7 +268,7 @@ client.resolvePTR("1.0.0.10.in-addr.arpa", (ar: io.vertx.core.AsyncResult<java.l
     var record = renderAsyncResultValue
     println(record)
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 
@@ -289,7 +289,7 @@ client.reverseLookup("10.0.0.1", (ar: io.vertx.core.AsyncResult<java.lang.String
     var record = renderAsyncResultValue
     println(record)
   } else {
-    println("Failed to resolve entry" + renderAsyncResultCause)
+    println(s"Failed to resolve entry${renderAsyncResultCause}")
   }
 })
 

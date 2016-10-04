@@ -88,7 +88,6 @@ object ProxyOptions {
   
   def apply() = {
     new ProxyOptions(new ProxyOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: ProxyOptionsJava) = {
@@ -96,7 +95,6 @@ object ProxyOptions {
       new ProxyOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):ProxyOptions = {

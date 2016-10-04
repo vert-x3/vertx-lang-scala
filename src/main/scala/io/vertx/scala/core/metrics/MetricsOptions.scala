@@ -43,7 +43,6 @@ object MetricsOptions {
   
   def apply() = {
     new MetricsOptions(new MetricsOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: MetricsOptionsJava) = {
@@ -51,7 +50,6 @@ object MetricsOptions {
       new MetricsOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):MetricsOptions = {

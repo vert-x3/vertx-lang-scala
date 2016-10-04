@@ -55,7 +55,7 @@ vertx.fileSystem().readFile("target/classes/readme.txt", (result: io.vertx.core.
   if (renderAsyncResultSucceeded) {
     println(renderAsyncResultValue)
   } else {
-    System.err.println("Oh oh ..." + renderAsyncResultCause)
+    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
   }
 })
 
@@ -64,7 +64,7 @@ vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt
   if (renderAsyncResultSucceeded) {
     println("File copied")
   } else {
-    System.err.println("Oh oh ..." + renderAsyncResultCause)
+    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
   }
 })
 
@@ -73,7 +73,7 @@ vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"),
   if (renderAsyncResultSucceeded) {
     println("File written")
   } else {
-    System.err.println("Oh oh ..." + renderAsyncResultCause)
+    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
   }
 })
 
@@ -84,7 +84,7 @@ vertx.fileSystem().exists("target/classes/junk.txt", (result: io.vertx.core.Asyn
       println("File deleted")
     })
   } else {
-    System.err.println("Oh oh ... - cannot delete the file: " + renderAsyncResultCause)
+    System.err.println(s"Oh oh ... - cannot delete the file: ${renderAsyncResultCause}")
   }
 })
 
@@ -137,9 +137,19 @@ vertx.fileSystem().open("target/classes/hello.txt", renderDataObject-OpenOptions
   if (renderAsyncResultSucceeded) {
     var file = renderAsyncResultValue
     var buff = Buffer.buffer("foo")
-    forLoop
+    forLoop - 
+    for (var i = 0;i < 5;i++) {
+      file.write(buff, buff.length() * i, (ar: io.vertx.core.AsyncResult<java.lang.Void>) => {
+        if (renderAsyncResultSucceeded) {
+          println("Written ok!")
+          // etc
+        } else {
+          System.err.println(s"Failed to write: ${renderAsyncResultCause}")
+        }
+      })
+    }
   } else {
-    System.err.println("Cannot open file " + renderAsyncResultCause)
+    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
   }
 })
 
@@ -170,9 +180,18 @@ vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-Op
   if (renderAsyncResultSucceeded) {
     var file = renderAsyncResultValue
     var buff = Buffer.buffer(1000)
-    forLoop
+    forLoop - 
+    for (var i = 0;i < 10;i++) {
+      file.read(buff, i * 100, i * 100, 100, (ar: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
+        if (renderAsyncResultSucceeded) {
+          println("Read ok!")
+        } else {
+          System.err.println(s"Failed to write: ${renderAsyncResultCause}")
+        }
+      })
+    }
   } else {
-    System.err.println("Cannot open file " + renderAsyncResultCause)
+    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
   }
 })
 
@@ -221,7 +240,7 @@ vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-Op
       println("Copy done")
     })
   } else {
-    System.err.println("Cannot open file " + renderAsyncResultCause)
+    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
   }
 })
 

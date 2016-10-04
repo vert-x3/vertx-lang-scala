@@ -54,11 +54,11 @@ var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
 var buffer = Buffer.buffer("content")
 // Send a Buffer
 socket.send(buffer, 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println("Send succeeded? " + renderAsyncResultSucceeded)
+  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
 })
 // Send a String
 socket.send("A string used as content", 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println("Send succeeded? " + renderAsyncResultSucceeded)
+  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
 })
 
 ----
@@ -89,7 +89,7 @@ socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.
       // Do something with the packet
     })
   } else {
-    println("Listen failed" + renderAsyncResultCause)
+    println(s"Listen failed${renderAsyncResultCause}")
   }
 })
 
@@ -122,7 +122,7 @@ var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
 var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
 socket.send(buffer, 1234, "230.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println("Send succeeded? " + renderAsyncResultSucceeded)
+  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
 })
 
 ----
@@ -158,10 +158,10 @@ socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.
 
     // join the multicast group
     socket.listenMulticastGroup("230.0.0.1", (asyncResult2: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-      println("Listen succeeded? " + renderAsyncResultSucceeded)
+      println(s"Listen succeeded? ${renderAsyncResultSucceeded}")
     })
   } else {
-    println("Listen failed" + renderAsyncResultCause)
+    println(s"Listen failed${renderAsyncResultCause}")
   }
 })
 
@@ -192,14 +192,14 @@ socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.
         // do some work
 
         socket.unlistenMulticastGroup("230.0.0.1", (asyncResult3: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-          println("Unlisten succeeded? " + renderAsyncResultSucceeded)
+          println(s"Unlisten succeeded? ${renderAsyncResultSucceeded}")
         })
       } else {
-        println("Listen failed" + renderAsyncResultCause)
+        println(s"Listen failed${renderAsyncResultCause}")
       }
     })
   } else {
-    println("Listen failed" + renderAsyncResultCause)
+    println(s"Listen failed${renderAsyncResultCause}")
   }
 })
 
@@ -225,7 +225,7 @@ var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
 
 // This would block packets which are send from 10.0.0.2
 socket.blockMulticastGroup("230.0.0.1", "10.0.0.2", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println("block succeeded? " + renderAsyncResultSucceeded)
+  println(s"block succeeded? ${renderAsyncResultSucceeded}")
 })
 
 ----

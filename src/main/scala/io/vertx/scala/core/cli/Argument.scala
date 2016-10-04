@@ -109,7 +109,6 @@ object Argument {
   
   def apply() = {
     new Argument(new ArgumentJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: ArgumentJava) = {
@@ -117,7 +116,6 @@ object Argument {
       new Argument(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):Argument = {

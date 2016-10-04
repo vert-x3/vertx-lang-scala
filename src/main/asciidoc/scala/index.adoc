@@ -286,7 +286,7 @@ vertx.executeBlocking((future: io.vertx.core.Future<java.lang.Object>) => {
   var result = someAPI.blockingMethod("hello")
   future.complete(result)
 }, (res: io.vertx.core.AsyncResult<java.lang.Object>) => {
-  println("The result is: " + renderAsyncResultValue)
+  println(s"The result is: ${renderAsyncResultValue}")
 })
 
 ----
@@ -315,7 +315,7 @@ executor.executeBlocking((future: io.vertx.core.Future<java.lang.Object>) => {
   var result = someAPI.blockingMethod("hello")
   future.complete(result)
 }, (res: io.vertx.core.AsyncResult<java.lang.Object>) => {
-  println("The result is: " + renderAsyncResultValue)
+  println(s"The result is: ${renderAsyncResultValue}")
 })
 
 ----
@@ -629,7 +629,7 @@ If you want to be notified when deployment is complete you can deploy specifying
 ----
 vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", (res: io.vertx.core.AsyncResult<java.lang.String>) => {
   if (renderAsyncResultSucceeded) {
-    println("Deployment id is: " + renderAsyncResultValue)
+    println(s"Deployment id is: ${renderAsyncResultValue}")
   } else {
     println("Deployment failed!")
   }
