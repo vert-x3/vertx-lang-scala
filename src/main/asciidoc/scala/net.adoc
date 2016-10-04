@@ -86,7 +86,7 @@ To find out the real port the server is listening on you can call `link:../../sc
 var server = vertx.createNetServer()
 server.listen(0, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>) => {
   if (renderAsyncResultSucceeded) {
-    println("Server is now listening on actual port: " + server.actualPort())
+    println(s"Server is now listening on actual port: ${server.actualPort()}")
   } else {
     println("Failed to bind!")
   }
@@ -127,7 +127,7 @@ the socket.
 var server = vertx.createNetServer()
 server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
   socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
-    println("I received some bytes: " + buffer.length())
+    println(s"I received some bytes: ${buffer.length()}")
   })
 })
 
@@ -267,7 +267,17 @@ You can instantiate more instances programmatically in your code:
 
 // Create a few instances so we can utilise cores
 
-forLoop
+forLoop - 
+for (var i = 0;i < 10;i++) {
+  var server = vertx.createNetServer()
+  server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
+    socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
+      // Just echo back the data
+      socket.write(buffer)
+    })
+  })
+  server.listen(1234, "localhost")
+}
 
 ----
 
@@ -342,7 +352,7 @@ client.connect(4321, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.
     println("Connected!")
     var socket = renderAsyncResultValue
   } else {
-    println("Failed to connect: " + renderAsyncResultCause.getMessage())
+    println(s"Failed to connect: ${renderAsyncResultCause.getMessage()}")
   }
 })
 

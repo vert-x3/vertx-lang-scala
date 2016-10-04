@@ -433,7 +433,6 @@ object HttpServerOptions {
   
   def apply() = {
     new HttpServerOptions(new HttpServerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: HttpServerOptionsJava) = {
@@ -441,7 +440,6 @@ object HttpServerOptions {
       new HttpServerOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):HttpServerOptions = {

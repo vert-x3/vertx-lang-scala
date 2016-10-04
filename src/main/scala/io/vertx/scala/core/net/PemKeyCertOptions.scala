@@ -115,7 +115,6 @@ object PemKeyCertOptions {
   
   def apply() = {
     new PemKeyCertOptions(new PemKeyCertOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: PemKeyCertOptionsJava) = {
@@ -123,7 +122,6 @@ object PemKeyCertOptions {
       new PemKeyCertOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):PemKeyCertOptions = {

@@ -156,7 +156,6 @@ object DeploymentOptions {
   
   def apply() = {
     new DeploymentOptions(new DeploymentOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: DeploymentOptionsJava) = {
@@ -164,7 +163,6 @@ object DeploymentOptions {
       new DeploymentOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):DeploymentOptions = {

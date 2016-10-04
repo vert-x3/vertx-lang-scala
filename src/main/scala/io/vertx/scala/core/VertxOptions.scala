@@ -255,7 +255,6 @@ object VertxOptions {
   
   def apply() = {
     new VertxOptions(new VertxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: VertxOptionsJava) = {
@@ -263,7 +262,6 @@ object VertxOptions {
       new VertxOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):VertxOptions = {

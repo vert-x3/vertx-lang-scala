@@ -81,7 +81,6 @@ object PemTrustOptions {
   
   def apply() = {
     new PemTrustOptions(new PemTrustOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: PemTrustOptionsJava) = {
@@ -89,7 +88,6 @@ object PemTrustOptions {
       new PemTrustOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):PemTrustOptions = {

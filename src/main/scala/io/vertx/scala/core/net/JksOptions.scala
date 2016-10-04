@@ -82,7 +82,6 @@ object JksOptions {
   
   def apply() = {
     new JksOptions(new JksOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: JksOptionsJava) = {
@@ -90,7 +89,6 @@ object JksOptions {
       new JksOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):JksOptions = {

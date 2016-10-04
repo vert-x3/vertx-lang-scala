@@ -141,7 +141,6 @@ object DatagramSocketOptions {
   
   def apply() = {
     new DatagramSocketOptions(new DatagramSocketOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: DatagramSocketOptionsJava) = {
@@ -149,7 +148,6 @@ object DatagramSocketOptions {
       new DatagramSocketOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):DatagramSocketOptions = {

@@ -67,7 +67,6 @@ object DeliveryOptions {
   
   def apply() = {
     new DeliveryOptions(new DeliveryOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: DeliveryOptionsJava) = {
@@ -75,7 +74,6 @@ object DeliveryOptions {
       new DeliveryOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):DeliveryOptions = {

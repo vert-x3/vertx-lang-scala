@@ -35,7 +35,6 @@ object JdkSSLEngineOptions {
   
   def apply() = {
     new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
-   
   }
   
   def apply(t: JdkSSLEngineOptionsJava) = {
@@ -43,7 +42,6 @@ object JdkSSLEngineOptions {
       new JdkSSLEngineOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):JdkSSLEngineOptions = {

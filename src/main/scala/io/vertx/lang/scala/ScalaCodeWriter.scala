@@ -17,6 +17,22 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
 
   override def renderNewMap(): Unit = append("Map()")
 
+  override def renderStringLiteral(parts: util.List[_]): Unit =  {
+    if(parts.exists(_.isInstanceOf[ExpressionModel]))
+      append("s\"")
+    else append("\"")
+    parts.foreach(part => {
+      if (part.isInstanceOf[ExpressionModel]) {
+        append("${")
+        part.asInstanceOf[ExpressionModel].render(this)
+        append("}")
+      } else {
+        renderChars(part.toString)
+      }
+    })
+    append("\"")
+  }
+
   override def renderNew(expression: ExpressionModel, `type`: TypeInfo, argumentModels: util.List[ExpressionModel]): Unit = {
 //    append("new ")
     expression.render(this)
