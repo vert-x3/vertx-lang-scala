@@ -30,7 +30,7 @@ Let's see the associated code:
 ----
 import io.vertx.scala.core.parsetools.RecordParser
 import io.vertx.scala.core.buffer.Buffer
-var parser = RecordParser.newDelimited("\n", (h: io.vertx.core.buffer.Buffer) => {
+var parser = RecordParser.newDelimited("\n", (h: io.vertx.scala.core.buffer.Buffer) => {
   println(h.toString())
 })
 
@@ -46,7 +46,7 @@ You can also produce fixed sized chunks as follows:
 [source, scala]
 ----
 import io.vertx.scala.core.parsetools.RecordParser
-RecordParser.newFixed(4, (h: io.vertx.core.buffer.Buffer) => {
+RecordParser.newFixed(4, (h: io.vertx.scala.core.buffer.Buffer) => {
   println(h.toString())
 })
 

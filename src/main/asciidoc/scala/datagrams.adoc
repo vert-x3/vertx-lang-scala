@@ -31,7 +31,7 @@ and receive.
 
 [source,scala]
 ----
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 
 ----
 
@@ -50,16 +50,18 @@ Sending packets is as easy as shown here:
 [source,scala]
 ----
 import io.vertx.scala.core.buffer.Buffer
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer
-socket.send(buffer, 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
-})
+socket.sendFuture(buffer, 1234, "10.0.0.1").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
 // Send a String
-socket.send("A string used as content", 1234, "10.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
-})
+socket.sendFuture("A string used as content", 1234, "10.0.0.1").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
 
 ----
 
@@ -82,16 +84,16 @@ So to listen on a specific address and port you would do something like shown he
 
 [source,scala]
 ----
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
-socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  if (renderAsyncResultSucceeded) {
-    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
+socket.listenFuture(1234, "0.0.0.0").onComplete{
+  case Success(result) => {
+    socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
-  } else {
-    println(s"Listen failed${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -118,12 +120,13 @@ This is show here:
 [source,scala]
 ----
 import io.vertx.scala.core.buffer.Buffer
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
-socket.send(buffer, 1234, "230.0.0.1", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println(s"Send succeeded? ${renderAsyncResultSucceeded}")
-})
+socket.sendFuture(buffer, 1234, "230.0.0.1").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
 
 ----
 
@@ -149,21 +152,22 @@ would do something like shown here:
 
 [source,scala]
 ----
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
-socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  if (renderAsyncResultSucceeded) {
-    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
+socket.listenFuture(1234, "0.0.0.0").onComplete{
+  case Success(result) => {
+    socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.listenMulticastGroup("230.0.0.1", (asyncResult2: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-      println(s"Listen succeeded? ${renderAsyncResultSucceeded}")
-    })
-  } else {
-    println(s"Listen failed${renderAsyncResultCause}")
+    socket.listenMulticastGroupFuture("230.0.0.1").onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -177,31 +181,32 @@ This is shown here:
 
 [source,scala]
 ----
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
-socket.listen(1234, "0.0.0.0", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  if (renderAsyncResultSucceeded) {
-    socket.handler((packet: io.vertx.core.datagram.DatagramPacket) => {
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
+socket.listenFuture(1234, "0.0.0.0").onComplete{
+  case Success(result) => {
+    socket.handler((packet: io.vertx.scala.core.datagram.DatagramPacket) => {
       // Do something with the packet
     })
 
     // join the multicast group
-    socket.listenMulticastGroup("230.0.0.1", (asyncResult2: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-      if (renderAsyncResultSucceeded) {
+    socket.listenMulticastGroupFuture("230.0.0.1").onComplete{
+      case Success(result) => {
         // will now receive packets for group
 
         // do some work
 
-        socket.unlistenMulticastGroup("230.0.0.1", (asyncResult3: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-          println(s"Unlisten succeeded? ${renderAsyncResultSucceeded}")
-        })
-      } else {
-        println(s"Listen failed${renderAsyncResultCause}")
+        socket.unlistenMulticastGroupFuture("230.0.0.1").onComplete{
+          case Success(result) => println("Success")
+          case Failure(cause) => println("Failure")
+        }
       }
-    })
-  } else {
-    println(s"Listen failed${renderAsyncResultCause}")
+      case Failure(cause) => {
+        println(s"$cause")}
+    }
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -219,14 +224,15 @@ like shown here:
 
 [source,scala]
 ----
-var socket = vertx.createDatagramSocket(renderDataObject-DatagramSocketOptions)
+var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 
 // Some code
 
 // This would block packets which are send from 10.0.0.2
-socket.blockMulticastGroup("230.0.0.1", "10.0.0.2", (asyncResult: io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>) => {
-  println(s"block succeeded? ${renderAsyncResultSucceeded}")
-})
+socket.blockMulticastGroupFuture("230.0.0.1", "10.0.0.2").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
 
 ----
 

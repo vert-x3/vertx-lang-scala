@@ -68,13 +68,13 @@ Getting the map is asynchronous and the result is returned to you in the handler
 
 var sd = vertx.sharedData()
 
-sd.getClusterWideMap("mymap", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.AsyncMap<java.lang.String,java.lang.String>>) => {
-  if (renderAsyncResultSucceeded) {
-    var map = renderAsyncResultValue
-  } else {
-    // Something went wrong!
+sd.getClusterWideMapFuture("mymap").onComplete{
+  case Success(result) => {
+    var map = result
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 
 ----
@@ -88,13 +88,13 @@ The actual put is asynchronous and the handler is notified once it is complete:
 [source,scala]
 ----
 
-map.put("foo", "bar", (resPut: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+map.putFuture("foo", "bar").onComplete{
+  case Success(result) => {
     // Successfully put the value
-  } else {
-    // Something went wrong!
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 
 ----
@@ -108,14 +108,14 @@ The actual get is asynchronous and the handler is notified with the result some 
 [source,scala]
 ----
 
-map.get("foo", (resGet: io.vertx.core.AsyncResult<java.lang.String>) => {
-  if (renderAsyncResultSucceeded) {
+map.getFuture("foo").onComplete{
+  case Success(result) => {
     // Successfully got the value
-    var val = renderAsyncResultValue
-  } else {
-    // Something went wrong!
+    var val = result
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 
 ----
@@ -146,10 +146,10 @@ another caller can obtain it.
 
 [source,scala]
 ----
-sd.getLock("mylock", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Lock>) => {
-  if (renderAsyncResultSucceeded) {
+sd.getLockFuture("mylock").onComplete{
+  case Success(result) => {
     // Got the lock!
-    var lock = renderAsyncResultValue
+    var lock = result
 
     // 5 seconds later we release the lock so someone else can get it
 
@@ -157,10 +157,10 @@ sd.getLock("mylock", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Lo
       lock.release()
     })
 
-  } else {
-    // Something went wrong
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -169,15 +169,15 @@ with a failure:
 
 [source,scala]
 ----
-sd.getLockWithTimeout("mylock", 10000, (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Lock>) => {
-  if (renderAsyncResultSucceeded) {
+sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
+  case Success(result) => {
     // Got the lock!
-    var lock = renderAsyncResultValue
+    var lock = result
 
-  } else {
-    // Failed to get lock
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -191,13 +191,13 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 
 [source,scala]
 ----
-sd.getCounter("mycounter", (res: io.vertx.core.AsyncResult<io.vertx.core.shareddata.Counter>) => {
-  if (renderAsyncResultSucceeded) {
-    var counter = renderAsyncResultValue
-  } else {
-    // Something went wrong!
+sd.getCounterFuture("mycounter").onComplete{
+  case Success(result) => {
+    var counter = result
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
