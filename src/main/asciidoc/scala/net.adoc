@@ -21,7 +21,9 @@ instance when creating it:
 [source,scala]
 ----
 
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setPort(4321)
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -64,13 +66,13 @@ For example:
 ----
 
 var server = vertx.createNetServer()
-server.listen(1234, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>) => {
-  if (renderAsyncResultSucceeded) {
+server.listenFuture(1234, "localhost").onComplete{
+  case Success(result) => {
     println("Server is now listening!")
-  } else {
-    println("Failed to bind!")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -84,13 +86,13 @@ To find out the real port the server is listening on you can call `link:../../sc
 ----
 
 var server = vertx.createNetServer()
-server.listen(0, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>) => {
-  if (renderAsyncResultSucceeded) {
+server.listenFuture(0, "localhost").onComplete{
+  case Success(result) => {
     println(s"Server is now listening on actual port: ${server.actualPort()}")
-  } else {
-    println("Failed to bind!")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -102,7 +104,7 @@ To be notified when a connection is made you need to set a `link:../../scaladoc/
 ----
 
 var server = vertx.createNetServer()
-server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
+server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
   // Handle the connection in here
 })
 
@@ -125,8 +127,8 @@ the socket.
 ----
 
 var server = vertx.createNetServer()
-server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
-  socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
+server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
+  socket.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     println(s"I received some bytes: ${buffer.length()}")
   })
 })
@@ -236,13 +238,13 @@ This handler will then be called when the close has fully completed.
 [source,scala]
 ----
 
-server.close((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+server.closeFuture().onComplete{
+  case Success(result) => {
     println("Server is now closed")
-  } else {
-    println("close failed")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -267,17 +269,17 @@ You can instantiate more instances programmatically in your code:
 
 // Create a few instances so we can utilise cores
 
-forLoop - 
-for ( i <- io.vertx.codetrans.CodeBuilder$1@2ef289d1 to io.vertx.codetrans.CodeBuilder$1@2f80313f) {
+for ( i <- 0 to 10) {
   var server = vertx.createNetServer()
-  server.connectHandler((socket: io.vertx.core.net.NetSocket) => {
-    socket.handler((buffer: io.vertx.core.buffer.Buffer) => {
+  server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
+    socket.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
       // Just echo back the data
       socket.write(buffer)
     })
   })
   server.listen(1234, "localhost")
 }
+
 
 ----
 
@@ -291,7 +293,9 @@ or when programmatically deploying your verticle
 [source,scala]
 ----
 
-var options = renderDataObject-DeploymentOptions
+var options = DeploymentOptions()
+  .setInstances(10)
+
 vertx.deployVerticle("com.mycompany.MyVerticle", options)
 
 ----
@@ -331,7 +335,9 @@ instance when creating it:
 [source,scala]
 ----
 
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setConnectTimeout(10000)
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -345,16 +351,18 @@ specifying the port and host of the server and a handler that will be called wit
 [source,scala]
 ----
 
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setConnectTimeout(10000)
+
 var client = vertx.createNetClient(options)
-client.connect(4321, "localhost", (res: io.vertx.core.AsyncResult<io.vertx.core.net.NetSocket>) => {
-  if (renderAsyncResultSucceeded) {
+client.connectFuture(4321, "localhost").onComplete{
+  case Success(result) => {
     println("Connected!")
-    var socket = renderAsyncResultValue
-  } else {
-    println(s"Failed to connect: ${renderAsyncResultCause.getMessage()}")
+    var socket = result
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -370,7 +378,10 @@ only apply to creating initial connections.
 [source,scala]
 ----
 
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setReconnectAttempts(10)
+  .setReconnectInterval(500)
+
 
 var client = vertx.createNetClient(options)
 
@@ -386,7 +397,9 @@ For debugging purposes, network activity can be logged:
 [source,scala]
 ----
 
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setLogActivity(true)
+
 
 var server = vertx.createNetServer(options)
 
@@ -397,7 +410,9 @@ for the client
 [source,scala]
 ----
 
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setLogActivity(true)
+
 
 var client = vertx.createNetClient(options)
 
@@ -456,7 +471,13 @@ The password for the key store should also be provided:
 
 [source,scala]
 ----
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(JksOptions()
+    .setPath("/path/to/your/server-keystore.jks")
+    .setPassword("password-of-your-keystore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -466,8 +487,14 @@ Alternatively you can read the key store yourself as a buffer and provide that d
 [source,scala]
 ----
 var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.jks")
-var jksOptions = renderDataObject-JksOptions
-var options = renderDataObject-NetServerOptions
+var jksOptions = JksOptions()
+  .setValue(myKeyStoreAsABuffer)
+  .setPassword("password-of-your-keystore")
+
+var options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(jksOptions)
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -477,7 +504,13 @@ extension can also be loaded in a similar fashion than JKS key stores:
 
 [source,scala]
 ----
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setPfxKeyCertOptions(PfxOptions()
+    .setPath("/path/to/your/server-keystore.pfx")
+    .setPassword("password-of-your-keystore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -487,8 +520,14 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-keystore.pfx")
-var pfxOptions = renderDataObject-PfxOptions
-var options = renderDataObject-NetServerOptions
+var pfxOptions = PfxOptions()
+  .setValue(myKeyStoreAsABuffer)
+  .setPassword("password-of-your-keystore")
+
+var options = NetServerOptions()
+  .setSsl(true)
+  .setPfxKeyCertOptions(pfxOptions)
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -497,7 +536,13 @@ Another way of providing server private key and certificate separately using `.p
 
 [source,scala]
 ----
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setPemKeyCertOptions(PemKeyCertOptions()
+    .setKeyPath("/path/to/your/server-key.pem")
+    .setCertPath("/path/to/your/server-cert.pem")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -508,8 +553,14 @@ Buffer configuration is also supported:
 ----
 var myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-key.pem")
 var myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-cert.pem")
-var pemOptions = renderDataObject-PemKeyCertOptions
-var options = renderDataObject-NetServerOptions
+var pemOptions = PemKeyCertOptions()
+  .setKeyValue(myKeyAsABuffer)
+  .setCertValue(myCertAsABuffer)
+
+var options = NetServerOptions()
+  .setSsl(true)
+  .setPemKeyCertOptions(pemOptions)
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -530,7 +581,14 @@ The password for the trust store should also be provided:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setTrustStoreOptions(JksOptions()
+    .setPath("/path/to/your/truststore.jks")
+    .setPassword("password-of-your-truststore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -541,7 +599,14 @@ Alternatively you can read the trust store yourself as a buffer and provide that
 ----
 import io.vertx.core.http.ClientAuth
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setTrustStoreOptions(JksOptions()
+    .setValue(myTrustStoreAsABuffer)
+    .setPassword("password-of-your-truststore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -552,7 +617,14 @@ extension can also be loaded in a similar fashion than JKS trust stores:
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setPfxTrustOptions(PfxOptions()
+    .setPath("/path/to/your/truststore.pfx")
+    .setPassword("password-of-your-truststore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -563,7 +635,14 @@ Buffer configuration is also supported:
 ----
 import io.vertx.core.http.ClientAuth
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setPfxTrustOptions(PfxOptions()
+    .setValue(myTrustStoreAsABuffer)
+    .setPassword("password-of-your-truststore")
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -573,7 +652,13 @@ Another way of providing server certificate authority using a list `.pem` files.
 [source,scala]
 ----
 import io.vertx.core.http.ClientAuth
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setPemTrustOptions(PemTrustOptions()
+    .setCertPaths(Set("/path/to/your/server-ca.pem"))
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -584,7 +669,13 @@ Buffer configuration is also supported:
 ----
 import io.vertx.core.http.ClientAuth
 var myCaAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-ca.pfx")
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setClientAuth("REQUIRED")
+  .setPemTrustOptions(PemTrustOptions()
+    .setCertValues(Set(myCaAsABuffer))
+  )
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -603,7 +694,10 @@ be sure who you are connecting to. Use this with caution. Default value is false
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setTrustAll(true)
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -617,7 +711,10 @@ To enable host verification, set the algorithm to use on your client (only HTTPS
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setHostnameVerificationAlgorithm("HTTPS")
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -633,7 +730,13 @@ in the client trust store, the connection attempt will not succeed.
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setTrustStoreOptions(JksOptions()
+    .setPath("/path/to/your/truststore.jks")
+    .setPassword("password-of-your-truststore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -643,7 +746,13 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setTrustStoreOptions(JksOptions()
+    .setValue(myTrustStoreAsABuffer)
+    .setPassword("password-of-your-truststore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -653,7 +762,13 @@ extension can also be loaded in a similar fashion than JKS trust stores:
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPfxTrustOptions(PfxOptions()
+    .setPath("/path/to/your/truststore.pfx")
+    .setPassword("password-of-your-truststore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -663,7 +778,13 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPfxTrustOptions(PfxOptions()
+    .setValue(myTrustStoreAsABuffer)
+    .setPassword("password-of-your-truststore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -672,7 +793,12 @@ Another way of providing server certificate authority using a list `.pem` files.
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPemTrustOptions(PemTrustOptions()
+    .setCertPaths(Set("/path/to/your/ca-cert.pem"))
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -682,7 +808,12 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/ca-cert.pem")
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPemTrustOptions(PemTrustOptions()
+    .setCertValues(Set(myTrustStoreAsABuffer))
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -699,7 +830,13 @@ Again it's just a regular Java key store. The client keystore location is set by
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(JksOptions()
+    .setPath("/path/to/your/client-keystore.jks")
+    .setPassword("password-of-your-keystore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -709,8 +846,14 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.jks")
-var jksOptions = renderDataObject-JksOptions
-var options = renderDataObject-NetClientOptions
+var jksOptions = JksOptions()
+  .setValue(myKeyStoreAsABuffer)
+  .setPassword("password-of-your-keystore")
+
+var options = NetClientOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(jksOptions)
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -720,7 +863,13 @@ extension can also be loaded in a similar fashion than JKS key stores:
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPfxKeyCertOptions(PfxOptions()
+    .setPath("/path/to/your/client-keystore.pfx")
+    .setPassword("password-of-your-keystore")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -730,8 +879,14 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myKeyStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-keystore.pfx")
-var pfxOptions = renderDataObject-PfxOptions
-var options = renderDataObject-NetClientOptions
+var pfxOptions = PfxOptions()
+  .setValue(myKeyStoreAsABuffer)
+  .setPassword("password-of-your-keystore")
+
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPfxKeyCertOptions(pfxOptions)
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -740,7 +895,13 @@ Another way of providing server private key and certificate separately using `.p
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPemKeyCertOptions(PemKeyCertOptions()
+    .setKeyPath("/path/to/your/client-key.pem")
+    .setCertPath("/path/to/your/client-cert.pem")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -751,8 +912,14 @@ Buffer configuration is also supported:
 ----
 var myKeyAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-key.pem")
 var myCertAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/client-cert.pem")
-var pemOptions = renderDataObject-PemKeyCertOptions
-var options = renderDataObject-NetClientOptions
+var pemOptions = PemKeyCertOptions()
+  .setKeyValue(myKeyAsABuffer)
+  .setCertValue(myCertAsABuffer)
+
+var options = NetClientOptions()
+  .setSsl(true)
+  .setPemKeyCertOptions(pemOptions)
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -767,7 +934,11 @@ the crl list to use:
 
 [source,scala]
 ----
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setTrustStoreOptions(trustOptions)
+  .setCrlPaths(Set("/path/to/your/crl.pem"))
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -777,7 +948,11 @@ Buffer configuration is also supported:
 [source,scala]
 ----
 var myCrlAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/crl.pem")
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setSsl(true)
+  .setTrustStoreOptions(trustOptions)
+  .setCrlValues(Set(myCrlAsABuffer))
+
 var client = vertx.createNetClient(options)
 
 ----
@@ -789,7 +964,11 @@ configured with a suite of enabled ciphers:
 
 [source,scala]
 ----
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(keyStoreOptions)
+  .setEnabledCipherSuites(Set("ECDHE-RSA-AES128-GCM-SHA256", "ECDHE-ECDSA-AES128-GCM-SHA256", "ECDHE-RSA-AES256-GCM-SHA384", "CDHE-ECDSA-AES256-GCM-SHA384"))
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -803,7 +982,11 @@ configured by explicitly adding enabled protocols:
 
 [source,scala]
 ----
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(keyStoreOptions)
+  .setEnabledSecureTransportProtocols(Set("TLSv1.1", "TLSv1.2"))
+
 var server = vertx.createNetServer(options)
 
 ----
@@ -824,13 +1007,24 @@ The engine options to use is
 ----
 
 // Use JDK SSL engine
-var options = renderDataObject-NetServerOptions
+var options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(keyStoreOptions)
+
 
 // Use JDK SSL engine explicitly
-options = renderDataObject-NetServerOptions
+options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(keyStoreOptions)
+  .setJdkSslEngineOptions(JdkSSLEngineOptions())
+
 
 // Use OpenSSL engine
-options = renderDataObject-NetServerOptions
+options = NetServerOptions()
+  .setSsl(true)
+  .setKeyStoreOptions(keyStoreOptions)
+  .setOpenSslEngineOptions(OpenSSLEngineOptions())
+
 
 ----
 
@@ -894,7 +1088,15 @@ Here's an example:
 
 ----
 import io.vertx.core.net.ProxyType
-var options = renderDataObject-NetClientOptions
+var options = NetClientOptions()
+  .setProxyOptions(ProxyOptions()
+    .setType("SOCKS5")
+    .setHost("localhost")
+    .setPort(1080)
+    .setUsername("username")
+    .setPassword("secret")
+  )
+
 var client = vertx.createNetClient(options)
 
 ----

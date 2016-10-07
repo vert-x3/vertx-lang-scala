@@ -115,7 +115,7 @@ Here's an example:
 ----
 var eb = vertx.eventBus()
 
-eb.consumer("news.uk.sport", (message: io.vertx.core.eventbus.Message<java.lang.Object>) => {
+eb.consumer("news.uk.sport", (message: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
   println(s"I have received a message: ${message.body()}")
 })
 
@@ -135,7 +135,7 @@ to return a +MessageConsumer+ with no handler set, and then set the handler on t
 var eb = vertx.eventBus()
 
 var consumer = eb.consumer("news.uk.sport")
-consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
+consumer.handler((message: io.vertx.scala.core.eventbus.Message<java.lang.String>) => {
   println(s"I have received a message: ${message.body()}")
 })
 
@@ -149,13 +149,13 @@ on the +MessageConsumer+ object.
 
 [source,scala]
 ----
-consumer.completionHandler((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+consumer.completionHandlerFuture().onComplete{
+  case Success(result) => {
     println("The handler registration has reached all nodes")
-  } else {
-    println("Registration failed!")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -168,13 +168,13 @@ be notified when this is complete use `link:../../scaladoc/io/vertx/scala/core/e
 
 [source,scala]
 ----
-consumer.unregister((res: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+consumer.unregisterFuture().onComplete{
+  case Success(result) => {
     println("The handler un-registration has reached all nodes")
-  } else {
-    println("Un-registration failed!")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -236,7 +236,7 @@ The receiver:
 [source,scala]
 ----
 var consumer = eventBus.consumer("news.uk.sport")
-consumer.handler((message: io.vertx.core.eventbus.Message<java.lang.String>) => {
+consumer.handler((message: io.vertx.scala.core.eventbus.Message<java.lang.String>) => {
   println(s"I have received a message: ${message.body()}")
   message.reply("how interesting!")
 })
@@ -247,11 +247,12 @@ The sender:
 
 [source,scala]
 ----
-eventBus.send("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass", (ar: io.vertx.core.AsyncResult<io.vertx.core.eventbus.Message<java.lang.Object>>) => {
-  if (renderAsyncResultSucceeded) {
-    println(s"Received reply: ${renderAsyncResultValue.body()}")
+eventBus.sendFuture("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass").onComplete{
+  case Success(result) => {
+    println(s"Received reply: ${result.body()}")
   }
-})
+  case Failure(cause) => println("Failure")
+}
 
 ----
 
@@ -301,16 +302,16 @@ instance as clustered;
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var options = renderDataObject-VertxOptions
-Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
-  if (renderAsyncResultSucceeded) {
-    var vertx = renderAsyncResultValue
+var options = VertxOptions()
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
-  } else {
-    println(s"Failed: ${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+)
 
 ----
 
@@ -340,17 +341,30 @@ the event bus acts as a server and client, the configuration is close to
 ----
 import io.vertx.core.http.ClientAuth
 import io.vertx.scala.core.Vertx
-var options = renderDataObject-VertxOptions
+var options = VertxOptions()
+  .setEventBusOptions(EventBusOptions()
+    .setSsl(true)
+    .setKeyStoreOptions(JksOptions()
+      .setPath("keystore.jks")
+      .setPassword("wibble")
+    )
+    .setTrustStoreOptions(JksOptions()
+      .setPath("keystore.jks")
+      .setPassword("wibble")
+    )
+    .setClientAuth("REQUIRED")
+  )
 
-Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
-  if (renderAsyncResultSucceeded) {
-    var vertx = renderAsyncResultValue
+
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
-  } else {
-    println(s"Failed: ${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+)
 
 ----
 
@@ -372,16 +386,21 @@ When used in containers, you can also configure the public host and port:
 [source,scala]
 ----
 import io.vertx.scala.core.Vertx
-var options = renderDataObject-VertxOptions
+var options = VertxOptions()
+  .setEventBusOptions(EventBusOptions()
+    .setClusterPublicHost("whatever")
+    .setClusterPublicPort(1234)
+  )
 
-Vertx.clusteredVertx(options, (res: io.vertx.core.AsyncResult<io.vertx.core.Vertx>) => {
-  if (renderAsyncResultSucceeded) {
-    var vertx = renderAsyncResultValue
+
+Vertx.clusteredVertx(options, 
+  case Success(result) => {
+    var vertx = result
     var eventBus = vertx.eventBus()
     println(s"We now have a clustered event bus: ${eventBus}")
-  } else {
-    println(s"Failed: ${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+)
 
 ----

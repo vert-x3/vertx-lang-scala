@@ -14,13 +14,13 @@ Here's an example of an asynchronous copy of a file:
 var fs = vertx.fileSystem()
 
 // Copy file from foo.txt to bar.txt
-fs.copy("foo.txt", "bar.txt", (res: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+fs.copyFuture("foo.txt", "bar.txt").onComplete{
+  case Success(result) => {
     // Copied ok!
-  } else {
-    // Something went wrong
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 The blocking versions are named `xxxBlocking` and return the results or throw exceptions directly. In many
@@ -51,42 +51,37 @@ import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
 
 // Read a file
-vertx.fileSystem().readFile("target/classes/readme.txt", (result: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
-  if (renderAsyncResultSucceeded) {
-    println(renderAsyncResultValue)
-  } else {
-    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
+vertx.fileSystem().readFileFuture("target/classes/readme.txt").onComplete{
+  case Success(result) => {
+    println(result)
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 // Copy a file
-vertx.fileSystem().copy("target/classes/readme.txt", "target/classes/readme2.txt", (result: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+vertx.fileSystem().copyFuture("target/classes/readme.txt", "target/classes/readme2.txt").onComplete{
+  case Success(result) => {
     println("File copied")
-  } else {
-    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 // Write a file
-vertx.fileSystem().writeFile("target/classes/hello.txt", Buffer.buffer("Hello"), (result: io.vertx.core.AsyncResult<java.lang.Void>) => {
-  if (renderAsyncResultSucceeded) {
+vertx.fileSystem().writeFileFuture("target/classes/hello.txt", Buffer.buffer("Hello")).onComplete{
+  case Success(result) => {
     println("File written")
-  } else {
-    System.err.println(s"Oh oh ...${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 // Check existence and delete
-vertx.fileSystem().exists("target/classes/junk.txt", (result: io.vertx.core.AsyncResult<java.lang.Boolean>) => {
-  if (renderAsyncResultSucceeded && renderAsyncResultValue) {
-    vertx.fileSystem().delete("target/classes/junk.txt", (r: io.vertx.core.AsyncResult<java.lang.Void>) => {
-      println("File deleted")
-    })
-  } else {
-    System.err.println(s"Oh oh ... - cannot delete the file: ${renderAsyncResultCause}")
-  }
-})
+vertx.fileSystem().existsFuture("target/classes/junk.txt").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
 
 ----
 
@@ -98,14 +93,14 @@ You open an `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFi
 
 [source,scala]
 ----
-var options = renderDataObject-OpenOptions
-fileSystem.open("myfile.txt", options, (res: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
-  if (renderAsyncResultSucceeded) {
-    var file = renderAsyncResultValue
-  } else {
-    // Something went wrong!
+var options = OpenOptions()
+fileSystem.openFuture("myfile.txt", options).onComplete{
+  case Success(result) => {
+    var file = result
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -133,25 +128,25 @@ Here is an example of random access writes:
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/hello.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
-  if (renderAsyncResultSucceeded) {
-    var file = renderAsyncResultValue
+vertx.fileSystem().openFuture("target/classes/hello.txt", OpenOptions()).onComplete{
+  case Success(result) => {
+    var file = result
     var buff = Buffer.buffer("foo")
-    forLoop - 
-    for ( i <- io.vertx.codetrans.CodeBuilder$1@768eb4fc to io.vertx.codetrans.CodeBuilder$1@68da8f3f) {
-      file.write(buff, buff.length() * i, (ar: io.vertx.core.AsyncResult<java.lang.Void>) => {
-        if (renderAsyncResultSucceeded) {
+    for ( i <- 0 to 5) {
+      file.writeFuture(buff, buff.length() * i).onComplete{
+        case Success(result) => {
           println("Written ok!")
           // etc
-        } else {
-          System.err.println(s"Failed to write: ${renderAsyncResultCause}")
         }
-      })
+        case Failure(cause) => {
+          println(s"$cause")}
+      }
     }
-  } else {
-    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
+
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -176,24 +171,24 @@ Here's an example of random access reads:
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
 var vertx = Vertx.vertx()
-vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
-  if (renderAsyncResultSucceeded) {
-    var file = renderAsyncResultValue
+vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()).onComplete{
+  case Success(result) => {
+    var file = result
     var buff = Buffer.buffer(1000)
-    forLoop - 
-    for ( i <- io.vertx.codetrans.CodeBuilder$1@74191454 to io.vertx.codetrans.CodeBuilder$1@1dc5ef5a) {
-      file.read(buff, i * 100, i * 100, 100, (ar: io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>) => {
-        if (renderAsyncResultSucceeded) {
+    for ( i <- 0 to 10) {
+      file.readFuture(buff, i * 100, i * 100, 100).onComplete{
+        case Success(result) => {
           println("Read ok!")
-        } else {
-          System.err.println(s"Failed to write: ${renderAsyncResultCause}")
         }
-      })
+        case Failure(cause) => {
+          println(s"$cause")}
+      }
     }
-  } else {
-    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
+
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 
@@ -230,19 +225,19 @@ copy the content to another `AsyncFile`:
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.streams.Pump
 var vertx = Vertx.vertx()
-var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", renderDataObject-OpenOptions)
+var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", OpenOptions())
 
-vertx.fileSystem().open("target/classes/les_miserables.txt", renderDataObject-OpenOptions, (result: io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>) => {
-  if (renderAsyncResultSucceeded) {
-    var file = renderAsyncResultValue
+vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()).onComplete{
+  case Success(result) => {
+    var file = result
     Pump.pump(file, output).start()
     file.endHandler((r: java.lang.Void) => {
       println("Copy done")
     })
-  } else {
-    System.err.println(s"Cannot open file ${renderAsyncResultCause}")
   }
-})
+  case Failure(cause) => {
+    println(s"$cause")}
+}
 
 ----
 

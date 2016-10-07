@@ -28,9 +28,12 @@ to the `NetSocket`:
 
 [source,scala]
 ----
-var server = vertx.createNetServer(renderDataObject-NetServerOptions)
-server.connectHandler((sock: io.vertx.core.net.NetSocket) => {
-  sock.handler((buffer: io.vertx.core.buffer.Buffer) => {
+var server = vertx.createNetServer(NetServerOptions()
+  .setPort(1234)
+  .setHost("localhost")
+)
+server.connectHandler((sock: io.vertx.scala.core.net.NetSocket) => {
+  sock.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     // Write the data straight back
     sock.write(buffer)
   })
@@ -48,9 +51,12 @@ writing to it:
 
 [source,scala]
 ----
-var server = vertx.createNetServer(renderDataObject-NetServerOptions)
-server.connectHandler((sock: io.vertx.core.net.NetSocket) => {
-  sock.handler((buffer: io.vertx.core.buffer.Buffer) => {
+var server = vertx.createNetServer(NetServerOptions()
+  .setPort(1234)
+  .setHost("localhost")
+)
+server.connectHandler((sock: io.vertx.scala.core.net.NetSocket) => {
+  sock.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     if (!sock.writeQueueFull()) {
       sock.write(buffer)
     }
@@ -65,9 +71,12 @@ really want to do is pause the `NetSocket` when the write queue is full:
 
 [source,scala]
 ----
-var server = vertx.createNetServer(renderDataObject-NetServerOptions)
-server.connectHandler((sock: io.vertx.core.net.NetSocket) => {
-  sock.handler((buffer: io.vertx.core.buffer.Buffer) => {
+var server = vertx.createNetServer(NetServerOptions()
+  .setPort(1234)
+  .setHost("localhost")
+)
+server.connectHandler((sock: io.vertx.scala.core.net.NetSocket) => {
+  sock.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     sock.write(buffer)
     if (sock.writeQueueFull()) {
       sock.pause()
@@ -82,9 +91,12 @@ it when the write queue has processed its backlog:
 
 [source,scala]
 ----
-var server = vertx.createNetServer(renderDataObject-NetServerOptions)
-server.connectHandler((sock: io.vertx.core.net.NetSocket) => {
-  sock.handler((buffer: io.vertx.core.buffer.Buffer) => {
+var server = vertx.createNetServer(NetServerOptions()
+  .setPort(1234)
+  .setHost("localhost")
+)
+server.connectHandler((sock: io.vertx.scala.core.net.NetSocket) => {
+  sock.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
     sock.write(buffer)
     if (sock.writeQueueFull()) {
       sock.pause()
@@ -108,8 +120,11 @@ You just feed it the `ReadStream` plus the `WriteStream` then start it:
 [source,scala]
 ----
 import io.vertx.scala.core.streams.Pump
-var server = vertx.createNetServer(renderDataObject-NetServerOptions)
-server.connectHandler((sock: io.vertx.core.net.NetSocket) => {
+var server = vertx.createNetServer(NetServerOptions()
+  .setPort(1234)
+  .setHost("localhost")
+)
+server.connectHandler((sock: io.vertx.scala.core.net.NetSocket) => {
   Pump.pump(sock, sock).start()
 }).listen()
 

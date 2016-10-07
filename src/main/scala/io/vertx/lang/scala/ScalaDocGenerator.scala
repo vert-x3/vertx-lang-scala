@@ -34,6 +34,7 @@ class ScalaDocGenerator extends DocGenerator {
 
     catch {
       case e: Exception => {
+        e.printStackTrace()
         System.out.println("Cannot generate " + elt.getEnclosingElement.getSimpleName + "#" + elt.getSimpleName + " : " + e.getMessage)
         "Code not translatable"
       }

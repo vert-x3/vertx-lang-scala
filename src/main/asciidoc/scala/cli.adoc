@@ -30,7 +30,20 @@ describe options and arguments:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()
+  .setLongName("directory")
+  .setShortName("R")
+  .setDescription("enables directory support")
+  .setFlag(true)
+).addArgument(Argument()
+  .setIndex(0)
+  .setDescription("The source")
+  .setArgName("source")
+).addArgument(Argument()
+  .setIndex(0)
+  .setDescription("The destination")
+  .setArgName("target")
+)
 
 ----
 
@@ -53,7 +66,21 @@ configure the option to receive several values using `link:../dataobjects.html#O
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(renderDataObject-Option).addOption(renderDataObject-Option).addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(Option()
+  .setLongName("flag")
+  .setShortName("f")
+  .setFlag(true)
+  .setDescription("a flag")
+).addOption(Option()
+  .setLongName("single")
+  .setShortName("s")
+  .setDescription("a single-valued option")
+).addOption(Option()
+  .setLongName("multiple")
+  .setShortName("m")
+  .setMultiValued(true)
+  .setDescription("a multi-valued option")
+)
 
 ----
 
@@ -63,7 +90,11 @@ the parsing:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option()
+  .setLongName("mandatory")
+  .setRequired(true)
+  .setDescription("a mandatory option")
+)
 
 ----
 
@@ -73,7 +104,11 @@ the command line:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option()
+  .setLongName("optional")
+  .setDefaultValue("hello")
+  .setDescription("an optional option with a default value")
+)
 
 ----
 
@@ -85,7 +120,12 @@ If the option value is contrained to a fixed set, you can set the different acce
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addOption(renderDataObject-Option)
+var cli = CLI.create("some-name").addOption(Option()
+  .setLongName("color")
+  .setDefaultValue("green")
+  .setChoices(Set("blue", "red", "green"))
+  .setDescription("a color")
+)
 
 ----
 
@@ -102,7 +142,15 @@ index `0`:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("some-name").addArgument(Argument()
+  .setIndex(0)
+  .setDescription("the first argument")
+  .setArgName("arg1")
+).addArgument(Argument()
+  .setIndex(1)
+  .setDescription("the second argument")
+  .setArgName("arg2")
+)
 
 ----
 
@@ -111,7 +159,13 @@ If you don't set the argument indexes, it computes it automatically by using the
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("some-name").addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("some-name").addArgument(Argument()
+  .setDescription("the first argument")
+  .setArgName("arg1")
+).addArgument(Argument()
+  .setDescription("the second argument")
+  .setArgName("arg2")
+)
 
 ----
 
@@ -134,7 +188,20 @@ Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance i
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(renderDataObject-Option).addArgument(renderDataObject-Argument).addArgument(renderDataObject-Argument)
+var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()
+  .setLongName("directory")
+  .setShortName("R")
+  .setDescription("enables directory support")
+  .setFlag(true)
+).addArgument(Argument()
+  .setIndex(0)
+  .setDescription("The source")
+  .setArgName("source")
+).addArgument(Argument()
+  .setIndex(0)
+  .setDescription("The destination")
+  .setArgName("target")
+)
 
 var builder = java.lang.StringBuilder()
 cli.usage(builder)
@@ -195,7 +262,15 @@ won't failed, but give you the opportunity to check if the user asks for help:
 [source,scala]
 ----
 import io.vertx.scala.core.cli.CLI
-var cli = CLI.create("test").addOption(renderDataObject-Option).addOption(renderDataObject-Option)
+var cli = CLI.create("test").addOption(Option()
+  .setLongName("help")
+  .setShortName("h")
+  .setFlag(true)
+  .setHelp(true)
+).addOption(Option()
+  .setLongName("mandatory")
+  .setRequired(true)
+)
 
 var line = cli.parse(java.util.Collections.singletonList("-h"))
 
