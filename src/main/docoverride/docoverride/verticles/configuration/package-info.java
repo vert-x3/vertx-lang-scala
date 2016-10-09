@@ -19,31 +19,25 @@
  *
  * Configuration in the form of Map can be passed to a verticle at deployment time:
  *
- * [source,$lang]
+ * [source,scala]
  * ----
- * def config = [
- *  name:"tim",
- *  directory:"/blah"
- * ]
- * def options = [ "config" : config ];
- * vertx.deployVerticle("com.mycompany.MyOrderProcessorVerticle", options);
+ * val config = Json.obj(("name","tim"), ("directory","/blah"))
+ * vertx.deployVerticle(classOf[DemoVerticle].getName, DeploymentOptions().setConfig(config))
  * ----
  *
  * This configuration is then available via the {@link io.vertx.core.Context}, The configuration is returned as a Map
  * object so you can retrieve data as follows:
  *
- * [source,$lang]
+ * [source,scala]
  * ----
- * println vertx.getOrCreateContext().config()["name"]
+ * println vertx.getOrCreateContext().config().getString("name")
  * ----
- *
- * NOTE: The configuration can also be a {@link io.vertx.core.json.JsonObject} object.
  *
  * === Accessing environment variables in a Verticle
  *
  * Environment variables and system properties are accessible using the Java API:
  *
- * [source,$lang]
+ * [source,scala]
  * ----
  * println System.getProperty("foo")
  * println System.getenv("HOME")
