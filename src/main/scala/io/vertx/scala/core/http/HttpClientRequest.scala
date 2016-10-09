@@ -183,7 +183,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * @return the request host. For HTTP/2 it returns the {@literal :authority` pseudo header otherwise it returns the {@literal Host` header
+    * @return the request host. For HTTP/2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
     */
   def getHost(): String = {
     _asJava.getHost()
@@ -398,7 +398,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   }
 
   /**
-    * @return the id of the stream of this response, {@literal -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
+    * @return the id of the stream of this response, ` -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
     */
   def streamId(): Int = {
     _asJava.streamId()

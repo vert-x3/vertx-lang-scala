@@ -240,7 +240,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
 
   /**
     * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes some data to the response body before ending. If the response is not chunked and
-    * no other data has been written then the @code{Content-Length` header will be automatically set.
+    * no other data has been written then the `Content-Length` header will be automatically set.
     * @param chunk the buffer to write before ending the response
     */
   def end(chunk: io.vertx.scala.core.buffer.Buffer): Unit = {
@@ -258,7 +258,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset @code{0` which means starting from the beginning of the file.
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset `0` which means starting from the beginning of the file.
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
@@ -268,7 +268,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length @code{Long.MAX_VALUE` which means until the end of the
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length `Long.MAX_VALUE` which means until the end of the
     * file.
     * @param filename path to the file to serve
     * @param offset offset to start serving from
@@ -394,7 +394,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   /**
-    * @return the id of the stream of this response, {@literal -1` for HTTP/1.x
+    * @return the id of the stream of this response, ` -1` for HTTP/1.x
     */
   def streamId(): Int = {
     _asJava.streamId()

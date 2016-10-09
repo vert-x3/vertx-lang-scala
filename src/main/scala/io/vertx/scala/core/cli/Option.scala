@@ -41,7 +41,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 
   /**
     * Sets the list of values accepted by this option. If the value set by the user does not match once of these
-    * values, a [[io.vertx.scala.core.cli.InvalidValueException]] exception is thrown.
+    * values, a [[io.vertx.core.cli.InvalidValueException]] exception is thrown.
     */
   def addChoice(value:String) = {
     asJava.addChoice(value)
