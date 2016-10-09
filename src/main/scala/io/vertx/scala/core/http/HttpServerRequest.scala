@@ -126,7 +126,7 @@ class HttpServerRequest(private val _asJava: io.vertx.core.http.HttpServerReques
   }
 
   /**
-    * @return the request host. For HTTP2 it returns the {@literal :authority` pseudo header otherwise it returns the {@literal Host` header
+    * @return the request host. For HTTP2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
     */
   def host(): scala.Option[String] = {
         scala.Option(_asJava.host())
