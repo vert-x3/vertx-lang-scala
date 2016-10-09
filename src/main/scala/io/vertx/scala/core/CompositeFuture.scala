@@ -103,8 +103,8 @@ class CompositeFuture(private val _asJava: io.vertx.core.CompositeFuture) {
     * @return an handler completing this future
     */
   def completer(): io.vertx.core.AsyncResult [io.vertx.scala.core.CompositeFuture] => Unit = {
-    if(cached_0 == null) {
-      cached_0=    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[io.vertx.scala.core.CompositeFuture]](s => if(s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
+    if (cached_0 == null) {
+      cached_0=    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[io.vertx.scala.core.CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
     }
     cached_0
   }
@@ -239,7 +239,7 @@ object CompositeFuture {
   }
 
   def join(futures: scala.collection.mutable.Buffer[io.vertx.scala.core.Future[_]]): io.vertx.scala.core.CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(futures.map(x => if(x == null) null else x.asJava).asJava))
+    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(futures.map(x => if (x == null) null else x.asJava).asJava))
   }
 
 }
