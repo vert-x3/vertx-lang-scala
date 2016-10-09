@@ -31,7 +31,7 @@ class ScalaVerticleFactory extends VerticleFactory {
     throw new NotImplementedError("not yet implemented")
 
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
-    val clazz = classLoader.loadClass(verticleName)
+    val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
     val instance = clazz.newInstance().asInstanceOf[ScalaVerticle]
     instance.asJava
   }

@@ -136,7 +136,7 @@ class ScalaCodeBuilder extends CodeBuilder {
 
 
   override def api(expr: ExpressionModel): ApiModel = {
-    new ScalaApiTypeModel(this, expr)
+    new ScalaApiModel(this, expr)
   }
 
   override def render(unit: RunnableCompilationUnit): String = {

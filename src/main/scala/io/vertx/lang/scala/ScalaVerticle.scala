@@ -3,55 +3,64 @@ package io.vertx.lang.scala
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
-import scala.concurrent.ExecutionContext
-import scala.util.{Failure, Success, Try}
+import scala.concurrent.{ExecutionContext, Promise}
+import scala.util.{Failure, Success}
 
 /**
   * Base class for verticle implementiations.
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
-class ScalaVerticle extends Verticle {
-  protected implicit var executionContext:ExecutionContext = null
-  protected var jvertx: io.vertx.core.Vertx = null
-  protected var vertx: Vertx = null
-  protected var ctx: Context = null
+class ScalaVerticle {
+  protected implicit var executionContext:ExecutionContext = _
+  protected var vertx: Vertx = _
+  protected var ctx: Context = _
 
-  override def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
-    this.jvertx = vertx
+  def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
     this.vertx = new Vertx(vertx)
     this.ctx = new Context(context)
     this.executionContext = VertxExecutionContext(this.vertx.getOrCreateContext())
   }
 
-  override def getVertx: io.vertx.core.Vertx = jvertx
-
   def stop(): Unit = {}
 
   def start(): Unit = {}
 
-  override def stop(stopFuture: Future[Void]): Unit = {
+  def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
+    println("WUWUU1")
     stop()
-    stopFuture.complete()
+    stopPromise.complete(Success())
   }
 
-  override def start(startFuture: Future[Void]): Unit = {
+  def start(startPromise: concurrent.Promise[Unit]): Unit = {
+    println("WUWUU2")
     start()
-    startFuture.complete()
-    vertx.deployVerticleFuture("").onComplete{
-      case Success(deploymentId) => startFuture.complete()
-      case Failure(throwable) => startFuture.fail(throwable)
-    }
+    startPromise.complete(Success())
   }
 
   def asJava(): Verticle = new AbstractVerticle {
+    val that = ScalaVerticle.this
     override def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
       super.init(vertx, context)
       ScalaVerticle.this.init(vertx, context)
     }
 
-    override def start(startFuture: Future[Void]) = ScalaVerticle.this.start(startFuture)
+    override def start(startFuture: Future[Void]) = {
+      val promise = Promise[Unit]()
+      promise.future.onComplete{
+        case Success(_) => startFuture.complete()
+        case Failure(throwable) => startFuture.fail(throwable)
+      }
+      that.start(promise)
+    }
 
-    override def stop(stopFuture: Future[Void]) = ScalaVerticle.this.stop(stopFuture)
+    override def stop(stopFuture: Future[Void]) = {
+      val promise = Promise[Unit]()
+      promise.future.onComplete{
+        case Success(_) => stopFuture.complete()
+        case Failure(throwable) => stopFuture.fail(throwable)
+      }
+      that.stop(promise)
+    }
   }
 }

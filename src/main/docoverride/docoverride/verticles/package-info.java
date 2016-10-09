@@ -61,10 +61,17 @@
  *
  * public class HelloWorldVerticle extends ScalaVerticle {
  *
- *    override def start(startFuture: Future[Void]): Unit = {
+ *    override def start(): Unit = {
  *      vertx.deployVerticle("another_verticle.js")
  *    }
  * }
+ * ----
+ *
+ * To deploy a Scala based verticle you have to prefix the classname with `scala:`
+ * [source, scala]
+ * ----
+ * val vertx = Vertx.vertx
+ * vertx.deployVerticle(s"scala:${classOf[HelloWorldVerticle].getName}")
  * ----
  *
  * === Asynchronous Verticle start and stop
@@ -76,33 +83,32 @@
  *
  * So how can you do this?
  *
- * The way to do it is to implement the *asynchronous* start method. This version of the method takes a Future as a parameter.When the method returns the verticle will *not* be considered deployed.
+ * The way to do it is to implement the *asynchronous* start method. This version of the method takes a Promise as a parameter.When the method returns the verticle will *not* be considered deployed.
  *
- * Some time later, after you've done everything you need to do (e.g. start other verticles), you can call complete
- * on the Future (or fail) to signal that you're done. Similarly, there is an asynchronous version of the stop method too.
+ * Some time later, after you've done everything you need to do (e.g. start other verticles), you can call success/failure
+ * on the Promise to signal that you're done. Similarly, there is an asynchronous version of the stop method too.
  * You use this if you want to do some verticle cleanup that takes some time.
  *
  * If your verticle extends {@link io.vertx.lang.scala.ScalaVerticle}, you override the
- * {@link io.vertx.lang.scala.ScalaVerticle#start(io.vertx.core.Future)} and
- * {@link io.vertx.lang.scala.ScalaVerticle#stop(io.vertx.core.Future)} methods:
+ * {@link io.vertx.lang.scala.ScalaVerticle#start(scala.concurrent.Promise)} and
+ * {@link io.vertx.lang.scala.ScalaVerticle#stop(scala.concurrent.Promise)} methods:
  *
  * [source, scala]
  * ----
- * import io.vertx.core.Future
  * import io.vertx.lang.scala.ScalaVerticle
  *
  * public class HelloWorldVerticle extends ScalaVerticle {
- *  public void start(future: Future[Void]) {
+ *  public void start(startpromise: scala.concurrent.Promise[Unit]) {
  *   println "starting"
  *   vertx.deployVerticleFuture("v.rb").onComplete{
- *    case Success(deploymentId) => startFuture.complete()
- *    case Failure(throwable) => startFuture.fail(throwable)
+ *    case Success(deploymentId) => startPromise.success()
+ *    case Failure(throwable) => startPromise.failure(throwable)
  *   }
  *  }
  *
- *  public void stop(future: Future[Void]) {
+ *  public void stop(stopPromise: scala.concurrent.Promise[Unit]) {
  *   println("stopping")
- *   future.complete()
+ *   stopPromise.success()
  *  }
  * }
  * ----
