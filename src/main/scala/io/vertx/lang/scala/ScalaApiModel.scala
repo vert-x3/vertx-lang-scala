@@ -8,7 +8,7 @@ import io.vertx.codetrans.expression.{ApiModel, ExpressionModel, MethodInvocatio
 
 import scala.collection.JavaConversions._
 
-class ScalaApiTypeModel(builder: CodeBuilder, expression: ExpressionModel) extends ApiModel(builder, expression) {
+class ScalaApiModel(builder: CodeBuilder, expression: ExpressionModel) extends ApiModel(builder, expression) {
 
   override def onMethodInvocation(receiverType: TypeInfo, method: MethodSignature, returnType: TypeInfo, argumentModels: util.List[ExpressionModel], argumentTypes: util.List[TypeInfo]): ExpressionModel = {
     if (argumentTypes.size() > 0) {

@@ -16,7 +16,7 @@ class ScalaVerticleTest extends FlatSpec with Matchers {
     val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
-    vertx.deployVerticleFuture(classOf[TestVerticle].getName).foreach(r => cl.countDown())
+    vertx.deployVerticleFuture(s"scala:${classOf[TestVerticle].getName}").foreach(r => cl.countDown())
     val delay = cl.await(100, TimeUnit.MILLISECONDS)
     assert(delay, "Deploy took longer than 100 ms")
     val cl2 = new CountDownLatch(1)

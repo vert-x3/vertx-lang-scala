@@ -69,9 +69,9 @@ class ScalaCodeWriter(builder: ScalaCodeBuilder) extends CodeWriter(builder){
     append(")")
   }
 
-  override def renderMethodReference(expression: ExpressionModel, methodName: String): Unit = {
-    expression.render(this)
-    append(methodName).append(" _")
+  override def renderMethodReference(expressionModel: ExpressionModel, methodSignature: MethodSignature): Unit = {
+    expressionModel.render(this)
+    append(methodSignature.getName).append(" _")
   }
 
   override def renderApiType(apiType: ApiTypeInfo): Unit = append(apiType.getSimpleName())
