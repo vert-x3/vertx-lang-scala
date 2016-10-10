@@ -7,9 +7,9 @@ import javax.lang.model.element.TypeElement
 import com.sun.source.tree.LambdaExpressionTree
 import com.sun.source.tree.LambdaExpressionTree.BodyKind
 import io.vertx.codegen.`type`.{ApiTypeInfo, ClassTypeInfo, EnumTypeInfo, TypeInfo}
-import io.vertx.codetrans.{BlockModel, CodeModel, CodeWriter, MethodSignature}
+import io.vertx.codetrans.{CodeModel, CodeWriter, MethodSignature}
 import io.vertx.codetrans.expression._
-import io.vertx.codetrans.statement.{ConditionalBlockModel, StatementModel}
+import io.vertx.codetrans.statement.StatementModel
 
 import collection.JavaConversions._
 
