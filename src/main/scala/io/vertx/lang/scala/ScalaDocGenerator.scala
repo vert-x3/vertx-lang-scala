@@ -9,6 +9,8 @@ import javax.lang.model.element._
 import javax.lang.model.`type`.ExecutableType
 import javax.lang.model.`type`.TypeMirror
 
+import io.vertx.codetrans.lang.scala.ScalaLang
+
 import scala.collection.JavaConversions._
 
 /**
