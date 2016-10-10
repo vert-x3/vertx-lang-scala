@@ -368,8 +368,8 @@ _succeeded_ when all the futures are and _failed_ when at least one of the futur
 
 [source,scala]
 ----
-import io.vertx.scala.core.Future
 import io.vertx.scala.core.CompositeFuture
+import io.vertx.scala.core.Future
 var httpServerFuture = Future.future()
 httpServer.listenFuture().onComplete{httpServerFuture.completer()}
 
@@ -461,8 +461,8 @@ for chaining futures (so sequential composition).
 
 [source,scala]
 ----
-import io.vertx.scala.core.Future
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.Future
 
 var fs = vertx.fileSystem()
 var startFuture = Future.future()

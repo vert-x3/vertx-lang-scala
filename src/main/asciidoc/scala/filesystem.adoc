@@ -46,8 +46,8 @@ Let's see a couple of examples using asynchronous methods:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
 
 // Read a file
@@ -125,8 +125,8 @@ Here is an example of random access writes:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
 vertx.fileSystem().openFuture("target/classes/hello.txt", OpenOptions()).onComplete{
   case Success(result) => {
@@ -168,8 +168,8 @@ Here's an example of random access reads:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
 vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()).onComplete{
   case Success(result) => {
