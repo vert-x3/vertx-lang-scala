@@ -43,13 +43,11 @@ class ScalaVerticle {
   def start(): Unit = {}
 
   def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
-    println("WUWUU1")
     stop()
     stopPromise.complete(Success())
   }
 
   def start(startPromise: concurrent.Promise[Unit]): Unit = {
-    println("WUWUU2")
     start()
     startPromise.complete(Success())
   }
