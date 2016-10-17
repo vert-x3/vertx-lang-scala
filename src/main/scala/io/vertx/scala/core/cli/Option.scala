@@ -41,7 +41,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 
   /**
     * Sets the list of values accepted by this option. If the value set by the user does not match once of these
-    * values, a [[io.vertx.scala.core.cli.InvalidValueException]] exception is thrown.
+    * values, a [[io.vertx.core.cli.InvalidValueException]] exception is thrown.
     */
   def addChoice(value:String) = {
     asJava.addChoice(value)
@@ -137,7 +137,6 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   }
 
   /**
-    * @return the option name. It returns the long name if set, the short name otherwise. It cannot return `null` for valid option
     */
 
   /**
@@ -177,12 +176,15 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 object Option {
   type OptionJava = io.vertx.core.cli.Option
   
+  def apply() = {
+    new Option(new OptionJava(io.vertx.lang.scala.json.Json.emptyObj()))
+  }
+  
   def apply(t: OptionJava) = {
     if(t != null)
       new Option(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):Option = {

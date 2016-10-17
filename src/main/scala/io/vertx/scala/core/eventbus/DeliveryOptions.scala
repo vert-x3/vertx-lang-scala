@@ -65,12 +65,15 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
 object DeliveryOptions {
   type DeliveryOptionsJava = io.vertx.core.eventbus.DeliveryOptions
   
+  def apply() = {
+    new DeliveryOptions(new DeliveryOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+  }
+  
   def apply(t: DeliveryOptionsJava) = {
     if(t != null)
       new DeliveryOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):DeliveryOptions = {

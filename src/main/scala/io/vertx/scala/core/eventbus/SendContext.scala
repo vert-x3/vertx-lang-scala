@@ -29,7 +29,7 @@ class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T])
   def asJava: io.vertx.core.eventbus.SendContext[T] = _asJava
 
   /**
-    * @return  The message being sent
+    * @return The message being sent
     */
   def message(): io.vertx.scala.core.eventbus.Message[T] = {
     Message.apply[T](_asJava.message())

@@ -103,7 +103,8 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
   }
 
   /**
-    * Set the ndots value used when resolving using search domains, the default value is `1`.
+    * Set the ndots value used when resolving using search domains, the default value is `-1` which
+    * determines the value from the OS on Linux or uses the value `1`.
     */
   def setNdots(value:Int) = {
     asJava.setNdots(value)
@@ -187,12 +188,15 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
 object AddressResolverOptions {
   type AddressResolverOptionsJava = io.vertx.core.dns.AddressResolverOptions
   
+  def apply() = {
+    new AddressResolverOptions(new AddressResolverOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+  }
+  
   def apply(t: AddressResolverOptionsJava) = {
     if(t != null)
       new AddressResolverOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):AddressResolverOptions = {

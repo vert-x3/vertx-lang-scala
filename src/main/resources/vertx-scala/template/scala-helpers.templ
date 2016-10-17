@@ -138,7 +138,16 @@
     }
     else {
       if (param.type.kind == CLASS_API) {
-        return param.name + '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']'
+        var className = param.type.toString;
+        var isInterface = true;
+        /* Ignore tck-classes as they are not visible due to scala and java being compiled by different plugins */
+        if(!className.startsWith("io.vertx.codegen.testmodel"))
+          isInterface =  Thread.currentThread().getContextClassLoader().loadClass(className.replaceAll("\\<.*?>","")).isInterface();
+        if(isInterface) {
+          return param.name + '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']';
+        } else {
+          return param.name + '.asJava';
+        }
       }
       else if (param.type.kind == CLASS_DATA_OBJECT) {
         return param.name + '.asJava';

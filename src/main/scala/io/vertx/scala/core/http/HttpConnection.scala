@@ -85,7 +85,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * </ul>
     * <p/>
     * This is not implemented for HTTP/1.x.
-    * @param errorCode the {@literal GOAWAY` error code
+    * @param errorCode the ` GOAWAY` error code
     * @param lastStreamId the last stream id
     * @param debugData additional debug data sent to the remote endpoint
     * @return a reference to this, so the API can be used fluently
@@ -164,7 +164,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   }
 
   /**
-    * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.x
+    * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
   def settings(): io.vertx.scala.core.http.Http2Settings = {
     io.vertx.scala.core.http.Http2Settings(_asJava.settings())
@@ -198,7 +198,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   }
 
   /**
-    * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.x
+    * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
   def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
     io.vertx.scala.core.http.Http2Settings(_asJava.remoteSettings())
@@ -233,7 +233,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * Set an handler notified when a  frame is received from the remote endpoint.
     * <p/>
     * This is not implemented for HTTP/1.x.
-    * @param handler the handler to be called when a {@literal PING` is received
+    * @param handler the handler to be called when a ` PING` is received
     * @return a reference to this, so the API can be used fluently
     */
   def pingHandler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpConnection = {
