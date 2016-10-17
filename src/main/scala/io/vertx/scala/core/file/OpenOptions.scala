@@ -139,12 +139,15 @@ class OpenOptions(val asJava: io.vertx.core.file.OpenOptions) {
 object OpenOptions {
   type OpenOptionsJava = io.vertx.core.file.OpenOptions
   
+  def apply() = {
+    new OpenOptions(new OpenOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+  }
+  
   def apply(t: OpenOptionsJava) = {
     if(t != null)
       new OpenOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):OpenOptions = {

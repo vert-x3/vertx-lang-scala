@@ -80,7 +80,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
   }
 
   /**
-    * @return  the content type for the upload
+    * @return the content type for the upload
     */
   def contentType(): String = {
     _asJava.contentType()
@@ -110,7 +110,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
   }
 
   /**
-    * @return true if the size of the upload can be retrieved via [[io.vertx.scala.core.http.HttpServerFileUpload#size]].
+    * @return true if the size of the upload can be retrieved via [[#size()]].
     */
   def isSizeAvailable(): Boolean = {
     _asJava.isSizeAvailable()

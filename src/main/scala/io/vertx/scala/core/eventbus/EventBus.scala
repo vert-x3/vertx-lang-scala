@@ -64,7 +64,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
-    * @return reply future will be called when any reply from the recipient is received
+    * @return reply future will be called when any reply from the recipient is received, may be `null`
     */
   def sendFuture[T](address: String, message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))
@@ -90,7 +90,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return reply future will be called when any reply from the recipient is received
+    * @return reply future will be called when any reply from the recipient is received, may be `null`
     */
   def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],io.vertx.scala.core.eventbus.Message[T]]((x => if (x == null) null else Message.apply[T](x)))

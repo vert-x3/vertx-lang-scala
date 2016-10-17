@@ -26,19 +26,21 @@ import scala.collection.JavaConversions._
 class JdkSSLEngineOptions(val asJava: io.vertx.core.net.JdkSSLEngineOptions) {
 
   /**
-    * @return if alpn support is available via the JDK SSL engine
     */
 }
 
 object JdkSSLEngineOptions {
   type JdkSSLEngineOptionsJava = io.vertx.core.net.JdkSSLEngineOptions
   
+  def apply() = {
+    new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+  }
+  
   def apply(t: JdkSSLEngineOptionsJava) = {
     if(t != null)
       new JdkSSLEngineOptions(t)
     else
       null
-   
   }
   
   def fromJson(json: JsonObject):JdkSSLEngineOptions = {

@@ -23,7 +23,7 @@
           if (param.type.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(param.type);
           }
-          doc = doc.replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
           doc += "\n";
         }
         else {
@@ -33,7 +33,7 @@
       if (future) {
         if (futureDescription != null) {
           doc += commentedIndentation;
-          doc += " @return " + convertLink(futureDescription).replace(', may be {@code null}','').replace('handler', 'future');
+          doc += " @return " + convertLink(futureDescription).replace('the scala-function to notify with the [[io.vertx.lang.scala.AsyncResult]].', 'the future representing the async operation.').replace(', may be `null`','').replace('handler', 'future').replace('{@code ','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
           doc += "\n";
         }
         else {
@@ -48,7 +48,7 @@
           if (returnType.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(returnType);
           }
-          doc = doc.replace('{@code ','`').replace('}','`');
+          doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
           doc += "\n";
         }
       }
@@ -86,7 +86,11 @@
   }
 
   def toScalaDocType(type) {
-   if (type == 'void' || type == 'java.lang.Void') {
+
+    if(type.contains('AsyncResult')) {
+      return "[[io.vertx.lang.scala.AsyncResult]]";
+    }
+    else if (type == 'void' || type == 'java.lang.Void') {
       return '[[Unit]]';
     } else if (type == 'Object' || type == 'java.lang.Object') {
       return '[[AnyRef]]';
@@ -118,7 +122,7 @@
       return '[[scala.collection.immutable.Map]]';
     } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
       return 'scala-function';
-    } else if (type.contains('io.vertx')) {
+    } else if (type.contains('io.vertx') && !type.endsWith('Exception')) {
       return '[[' + convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.") + ']]';
     } else {
       return "[[" + type + "]]";
