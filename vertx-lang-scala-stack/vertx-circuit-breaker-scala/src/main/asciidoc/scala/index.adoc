@@ -1,0 +1,223 @@
+== Vert.x Circuit Breaker
+
+Vert.x Circuit Breaker is an implementation of the Circuit Breaker _pattern_ for Vert.x.
+
+It keeps track of the
+number of failures and _open the circuit_ when a threshold is reached. Optionally, a fallback is executed.
+
+Supported failures are:
+
+* failures reported by your code in a `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]`
+* exception thrown by your code
+* uncompleted futures (timeout)
+
+Operations guarded by a circuit breaker are intended to by non-blocking and asynchronous in order to benefits from
+the Vert.x execution model.
+
+== Using the vert.x circuit breaker
+
+To use the Vert.x Circuit Breaker, add the following dependency to the _dependencies_ section of your build
+descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+----
+
+== Using the circuit breaker
+
+To use the circuit breaker you need to:
+
+1. Create a circuit breaker, with the configuration you want (timeout, number of failure before opening the circuit)
+2. Execute some code using the breaker
+
+Here is an example:
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setTimeout(2000)
+  .setFallbackOnFailure(true)
+  .setResetTimeout(10000)
+)
+
+breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+  // some code executing with the breaker
+  // the code reports failures or success on the given future.
+  // if this future is marked as failed, the breaker increased the
+  // number of failures
+}).setHandlerFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+The executed block receives a `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]` object as parameter, to denote the
+success or failure of the operation as well as the result. For example in the following example, the result is the
+output of a REST endpoint invocation:
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setTimeout(2000)
+)
+
+breaker.execute((future: io.vertx.scala.core.Future<java.lang.String>) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    if (response.statusCode() != 200) {
+      future.fail("HTTP error")
+    } else {
+      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+        future.complete(buffer.toString())
+      })
+    }
+  })
+}).setHandlerFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+The result of the operation is provided using the:
+
+* returned `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]` when calling `execute` methods
+* provided `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]` when calling the `executeAndReport` methods
+
+Optionally, you can provide a fallback executed when the circuit is open:
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setTimeout(2000)
+)
+
+breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String>) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    if (response.statusCode() != 200) {
+      future.fail("HTTP error")
+    } else {
+      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+        future.complete(buffer.toString())
+      })
+    }
+  })
+}, (v: java.lang.Throwable) => {
+  // Executed when the circuit is opened
+  return "Hello"
+}).setHandlerFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+The fallback is called whenever the circuit is open, or if the
+`link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]` is enabled. When a fallback is
+set, the result is using the output of the fallback function. The fallback function takes as parameter a
+`Throwable` object and returned an object of the expected type.
+
+The fallback can also be set on the `link:../../scaladoc/io/vertx/scala/circuitbreaker/CircuitBreaker.html[CircuitBreaker]` object directly:
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setTimeout(2000)
+).fallback((v: java.lang.Throwable) => {
+  // Executed when the circuit is opened.
+  return "hello"
+})
+
+breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    if (response.statusCode() != 200) {
+      future.fail("HTTP error")
+    } else {
+      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+        future.complete(buffer.toString())
+      })
+    }
+  })
+})
+
+----
+
+== Callbacks
+
+You can also configures callbacks invoked when the circuit is opened or closed:
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setTimeout(2000)
+).openHandler((v: java.lang.Void) => {
+  println("Circuit opened")
+}).closeHandler((v: java.lang.Void) => {
+  println("Circuit closed")
+})
+
+breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    if (response.statusCode() != 200) {
+      future.fail("HTTP error")
+    } else {
+      // Do something with the response
+      future.complete()
+    }
+  })
+})
+
+----
+
+You can also be notified when the circuit breaker decide to attempt to reset (half-open state). You can register
+such as callback with `link:../../scaladoc/io/vertx/scala/circuitbreaker/CircuitBreaker.html#halfOpenHandler(io.vertx.core.Handler)[halfOpenHandler]`.
+
+== Event bus notification
+
+Every time the circuit state changes, an event is published on the event bus. The address on which the event are
+sent is configurable with
+`link:../dataobjects.html#CircuitBreakerOptions#setNotificationAddress(java.lang.String)[notificationAddress]`. If `null` is
+passed to this method, the notifications are disabled. By default, the used address is `vertx.circuit-breaker`.
+
+Each event contains a Json Object with:
+
+* `state` : the new circuit breaker state (`OPEN`, `CLOSED`, `HALF_OPEN`)
+* `name` : the name of the circuit breaker
+* `failures` : the number of failures
+* `node` : the identifier of the node (`local` is Vert.x is not running in cluster mode)
+
+== The half-open state
+
+When the circuit is “open,” calls to the circuit breaker fail immediately, without any attempt to execute the real
+operation. After a suitable amount of time (configured from
+`link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout(long)[resetTimeout]`, the circuit breaker decides that the
+operation has a chance of succeeding, so it goes into the `half-open` state. In this state, the next call to the
+circuit breaker is allowed to execute the dangerous operation. Should the call succeed, the circuit breaker resets
+and returns to the `closed` state, ready for more routine operation. If this trial call fails, however, the circuit
+breaker returns to the `open` state until another timeout elapses.
+
+

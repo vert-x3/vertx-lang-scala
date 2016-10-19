@@ -1,0 +1,43 @@
+= Cheatsheets
+
+[[CircuitBreakerOptions]]
+== CircuitBreakerOptions
+
+++++
+ Circuit breaker configuration options. All time are given in milliseconds.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[fallbackOnFailure]]`fallbackOnFailure`|`Boolean`|
++++
+Sets whether or not the fallback is executed on failure, even when the circuit is closed.
++++
+|[[maxFailures]]`maxFailures`|`Number (int)`|
++++
+Sets the maximum number of failures before opening the circuit.
++++
+|[[notificationAddress]]`notificationAddress`|`String`|
++++
+Sets the event bus address on which the circuit breaker publish its state change.
++++
+|[[notificationPeriod]]`notificationPeriod`|`Number (long)`|
++++
+Configures the period in milliseconds where the circuit breaker send a notification on the event bus with its
+ current state.
++++
+|[[resetTimeout]]`resetTimeout`|`Number (long)`|
++++
+Sets the time in ms before it attempts to re-close the circuit (by going to the hal-open state). If the cricuit
+ is closed when the timeout is reached, nothing happens. <code>-1</code> disables this feature.
++++
+|[[timeout]]`timeout`|`Number (long)`|
++++
+Sets the timeout in milliseconds. If an action is not completed before this timeout, the action is considered as
+ a failure.
++++
+|===
+
