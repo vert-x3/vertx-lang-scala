@@ -1,8 +1,10 @@
 A small library to allow compiling classes from classpath/string.
+It will also resolve classes your script depends on and for which code 
+is available on the classpath.
 
 Execute script:
 ```scala
-import de.codepitbull.scala.onthefly.OnTheFlyCompiler
+import de.codepitbull.lang.scala.onthefly.OnTheFlyCompiler
 
 val compiler = new OnTheFlyCompiler(None)
 val script   = "println(\"you should see me\")"
@@ -12,7 +14,7 @@ compiler.eval[Unit](script)
 
 Compile class and execute a method on it:
 ```scala
-import de.codepitbull.scala.onthefly.OnTheFlyCompiler
+import de.codepitbull.lang.scala.onthefly.OnTheFlyCompiler
 
 val compiler = new OnTheFlyCompiler(None)
 val script = "import de.codepitbull.scala.onthefly.Extendthis\n" +

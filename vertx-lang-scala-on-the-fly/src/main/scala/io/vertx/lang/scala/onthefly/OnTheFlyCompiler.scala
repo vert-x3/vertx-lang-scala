@@ -1,10 +1,8 @@
-package io.vertx.scala.onthefly
+package io.vertx.lang.scala.onthefly
 
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
-
-import io.vertx.scala.onthefly.helpers.ReusableCompiler
 
 import scala.collection.mutable
 import scala.io.Source.fromInputStream

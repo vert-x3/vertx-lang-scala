@@ -1,4 +1,4 @@
-package io.vertx.scala.onthefly
+package io.vertx.lang.scala.onthefly
 
 trait Extendthis {
   def hello(): String

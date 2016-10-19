@@ -1,4 +1,4 @@
-package io.vertx.scala.onthefly
+package io.vertx.lang.scala.onthefly
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
