@@ -45,7 +45,7 @@
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala_2.11</artifactId>
+      <artifactId>vertx-lang-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
 
