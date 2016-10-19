@@ -1,8 +1,8 @@
-package io.vertx.scala.onthefly.helpers
+package io.vertx.lang.scala.onthefly
 
-import scala.reflect.internal.util.{ Position, SourceFile }
+import scala.reflect.internal.util.SourceFile
 import scala.tools.nsc.reporters.ConsoleReporter
-import scala.tools.nsc.{ Global, Settings }
+import scala.tools.nsc.{Global, Settings}
 
 /**
   * The Scala-compiler retains state between compilations. Especially the reporter is problematic as it
