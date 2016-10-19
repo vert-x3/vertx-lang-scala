@@ -1,0 +1,44 @@
+= Enums
+
+[[MetricsType]]
+== MetricsType
+
+++++
+  Metrics types for each metrics.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NET_SERVER]]`NET_SERVER`|
++++
+Type for net server metrics
++++
+|[[NET_CLIENT]]`NET_CLIENT`|
++++
+Type for net client metrics
++++
+|[[HTTP_SERVER]]`HTTP_SERVER`|
++++
+Type for http server metrics
++++
+|[[HTTP_CLIENT]]`HTTP_CLIENT`|
++++
+Type for http client metrics
++++
+|[[DATAGRAM_SOCKET]]`DATAGRAM_SOCKET`|
++++
+Type for datagram socket metrics
++++
+|[[EVENT_BUS]]`EVENT_BUS`|
++++
+Type for event bus metrics
++++
+|[[NAMED_POOLS]]`NAMED_POOLS`|
++++
+Named pools metrics
++++
+|===
+
