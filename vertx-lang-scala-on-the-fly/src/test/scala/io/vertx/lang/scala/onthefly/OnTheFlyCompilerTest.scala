@@ -16,7 +16,7 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
 
   "A method executed on a onthefly-compiled test class" should "return the expected value" in {
     val compiler = new OnTheFlyCompiler(None)
-    val script = "import io.vertx.scala.onthefly.Extendthis\n" +
+    val script = "import io.vertx.lang.scala.onthefly.Extendthis\n" +
         "class Test extends Extendthis{\n" +
         "override def hello():String = \"hello\"\n" +
         "}"
@@ -31,8 +31,8 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
 
   "A class depending on another uncompiled class" should "compile and do stuff" in {
     val compiler = new OnTheFlyCompiler(None)
-    val script = "import io.vertx.scala.onthefly.Extendthis\n" +
-        "import io.vertx.scala.onthefly.NotCompiled\n" +
+    val script = "import io.vertx.lang.scala.onthefly.Extendthis\n" +
+        "import io.vertx.lang.scala.onthefly.NotCompiled\n" +
         "class Test extends Extendthis{\n" +
         "override def hello():String = \"hello\"\n" +
         "}"
@@ -47,7 +47,7 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
 
   "Compiling a broken class" should "should throw a ClassNotFoundException" in {
     val compiler = new OnTheFlyCompiler(None)
-    val script = "import io.vertx.scala.onthefly.Extendthis\n" +
+    val script = "import io.vertx.lang.scala.onthefly.Extendthis\n" +
       "class Test extends Extendthis<AAAA>{\n" +
       "override def hello():String = \"hello\"\n" +
       "}"
@@ -58,7 +58,7 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
 
   "Compiling a class depending on a broken uncompiled class" should "should throw a ClassNotFoundException" in {
     val compiler = new OnTheFlyCompiler(None)
-    val script = "import io.vertx.scala.onthefly.Broken\n" +
+    val script = "import io.vertx.lang.scala.onthefly.Broken\n" +
       "class Test {}"
     intercept[ClassNotFoundException] {
       compiler.compileClass(script)
@@ -75,19 +75,19 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
   "A non-existent class for witch the classpath contains source-code" should "be automatically compiled and made available" in {
     val compiler = new OnTheFlyCompiler(None)
     compiler
-      .findClass("io.vertx.scala.onthefly.TestClass") shouldBe defined
+      .findClass("io.vertx.lang.scala.onthefly.TestClass") shouldBe defined
   }
 
   "TestClass" should "be compiled and evaluted" in {
     val compiler = new OnTheFlyCompiler(None)
     val script =
-      "import io.vertx.scala.onthefly.TestClass\nprintln(new TestClass())"
+      "import io.vertx.lang.scala.onthefly.TestClass\nprintln(new TestClass())"
     compiler.eval[Unit](script)
   }
 
   "A non-existent class for witch there is no source-code available on the classpath" should "result in a None-value" in {
     val compiler = new OnTheFlyCompiler(None)
     compiler
-      .findClass("io.vertx.scala.onthefly.IDontExist") shouldBe None
+      .findClass("io.vertx.lang.scala.onthefly.IDontExist") shouldBe None
   }
 }
