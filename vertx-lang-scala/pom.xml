@@ -11,7 +11,7 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>vertx-lang-scala_2.11</artifactId>
+    <artifactId>vertx-lang-scala_${scala.build.version}</artifactId>
     <inceptionYear>2016</inceptionYear>
     <organization>
         <name>vert.x</name>
