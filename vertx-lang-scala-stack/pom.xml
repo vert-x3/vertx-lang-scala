@@ -13,6 +13,24 @@
 
   <groupId>io.vertx</groupId>
   <artifactId>vertx-lang-scala-stack</artifactId>
+  <inceptionYear>2016</inceptionYear>
+  <organization>
+    <name>vert.x</name>
+    <url>http://vertx.io</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>Eclipse Public License - v 1.0</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
   <packaging>pom</packaging>
   <properties>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
@@ -152,7 +170,8 @@
           <version>3.1.0</version>
           <configuration>
             <systemProperties>
-              <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+              <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n
+              </java.util.logging.SimpleFormatter.format>
             </systemProperties>
           </configuration>
           <executions>
