@@ -2,31 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-parent</artifactId>
-        <version>5</version>
-    </parent>
-
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>vertx-lang-scala-aggregator</artifactId>
+  <parent>
     <groupId>io.vertx</groupId>
-    <version>3.4.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <inceptionYear>2016</inceptionYear>
-    <organization>
-        <name>vert.x</name>
-        <url>http://vertx.io</url>
-    </organization>
-    <properties>
-        <scala.version>2.11.8</scala.version>
-        <scala.build.version>2.11</scala.build.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    <modules>
-        <module>vertx-lang-scala</module>
-        <module>vertx-lang-scala-stack</module>
-        <module>vertx-lang-scala-on-the-fly</module>
-    </modules>
+    <artifactId>vertx-parent</artifactId>
+    <version>5</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>vertx-lang-scala-aggregator</artifactId>
+  <groupId>io.vertx</groupId>
+  <version>3.4.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <inceptionYear>2016</inceptionYear>
+  <organization>
+    <name>vert.x</name>
+    <url>http://vertx.io</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>Eclipse Public License - v 1.0</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <properties>
+    <scala.version>2.11.8</scala.version>
+    <scala.build.version>2.11</scala.build.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <modules>
+    <module>vertx-lang-scala</module>
+    <module>vertx-lang-scala-stack</module>
+    <module>vertx-lang-scala-on-the-fly</module>
+  </modules>
 </project>
