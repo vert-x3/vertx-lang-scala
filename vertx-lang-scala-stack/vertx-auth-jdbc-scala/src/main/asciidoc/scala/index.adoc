@@ -1,0 +1,121 @@
+== JDBC Auth Provider implementation
+
+We provide an implementation of `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the Vert.x `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`
+to perform authentication and authorisation against any JDBC compliant database.
+
+To use this project,
+add the following dependency to the _dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+----
+
+To create an instance you first need an instance of `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`. To learn how to create one
+of those please consult the documentation for the JDBC client.
+
+Once you've got one of those you can create a `link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html[JDBCAuth]` instance as follows:
+
+[source,java]
+----
+import io.vertx.scala.ext.jdbc.JDBCClient
+import io.vertx.scala.ext.auth.jdbc.JDBCAuth
+
+var jdbcClient = JDBCClient.createShared(vertx, jdbcClientConfig)
+
+var authProvider = JDBCAuth.create(jdbcClient)
+
+----
+
+Once you've got your instance you can authenticate and authorise with it just like any `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
+
+The out of the box config assumes certain queries for authentication and authorisation, these can easily be changed
+with the operations `link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setAuthenticationQuery(java.lang.String)[setAuthenticationQuery]`,
+`link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setPermissionsQuery(java.lang.String)[setPermissionsQuery]` and
+`link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setRolesQuery(java.lang.String)[setRolesQuery]`, if you want to use them with a different
+database schema.
+
+The default implementation assumes that the password is stored in the database as a SHA-512 hash after being
+concatenated with a salt. It also assumes the salt is stored in the table too.
+
+If you want to override this behaviour you can do so by providing an alternative hash strategy and setting it with
+`link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setHashStrategy(io.vertx.ext.auth.jdbc.JDBCHashStrategy)[setHashStrategy]`.
+
+WARNING: It is advised to always store your passwords as hashes in your database tables which have been created
+with a salt which should be stored in the row too. A strong hashing algorithm should be used. It is strongly advised
+never to store your passwords as plain text.
+
+== Authentication
+
+When authenticating using this implementation, it assumes `username` and `password` fields are present in the
+authentication info:
+
+[source,java]
+----
+
+var authInfo = todo-renderJsonObject
+
+authProvider.authenticateFuture(authInfo).onComplete{
+  case Success(result) => {
+    var user = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+----
+
+== Authorisation - Permission-Role Model
+
+Although Vert.x auth itself does not mandate any specific model of permissions (they are just opaque strings), this
+implementation assumes a familiar user/role/permission model, where a user can have zero or more roles and a role
+can have zero or more permissions.
+
+If validating if a user has a particular permission simply pass the permission into.
+`link:../../scaladoc/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]` as follows:
+
+[source,java]
+----
+
+user.isAuthorisedFuture("commit_code").onComplete{
+  case Success(result) => {
+    var hasPermission = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+
+----
+
+If validating that a user has a particular _role_ then you should prefix the argument with the role prefix.
+
+[source,java]
+----
+
+user.isAuthorisedFuture("role:manager").onComplete{
+  case Success(result) => {
+    var hasRole = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+
+----
+
+The default role prefix is `role:`. You can change this with `link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setRolePrefix(java.lang.String)[setRolePrefix]`.
+<a href="mailto:julien@julienviet.com">Julien Viet</a><a href="http://tfox.org">Tim Fox</a>
