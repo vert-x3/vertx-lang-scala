@@ -1,0 +1,164 @@
+= RabbitMQ Client for Vert.x
+
+A Vert.x client allowing applications to interact with a RabbitMQ broker (AMQP 0.9.1)
+
+**This service is experimental and the APIs are likely to change before settling down.**
+
+== Getting Started
+
+=== Maven
+
+Add the following dependency to your maven project
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+=== Gradle
+
+Add the following dependency to your gradle project
+
+[source,groovy,subs="+attributes"]
+----
+dependencies {
+  compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+}
+----
+
+=== Create a client
+
+You can create a client instance as follows using a full amqp uri:
+
+[source,scala]
+----
+import io.vertx.scala.rabbitmq.RabbitMQClient
+var config = todo-renderJsonObject
+// full amqp uri
+config.put(uri, "amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
+var client = RabbitMQClient.create(vertx, config)
+
+----
+
+Or you can also specify individual parameters manually:
+
+[source,scala]
+----
+import io.vertx.scala.rabbitmq.RabbitMQClient
+var config = todo-renderJsonObject
+// Each parameter is optional
+// The default parameter with be used if the parameter is not set
+config.put(user, "user1")
+config.put(password, "password1")
+config.put(host, "localhost")
+config.put(port, 5672)
+config.put(virtualHost, "vhost1")
+config.put(connectionTimeout, 60)
+config.put(requestedHeartbeat, 60)
+config.put(handshakeTimeout, 60)
+config.put(requestedChannelMax, 5)
+config.put(networkRecoveryInterval, 5)
+config.put(automaticRecoveryEnabled, true)
+
+var client = RabbitMQClient.create(vertx, config)
+
+----
+
+== Operations
+
+The following are some examples of the operations supported by the RabbitMQService API.
+
+Consult the javadoc/documentation for detailed information on all API methods.
+
+=== Publish
+
+Publish a message to a queue
+
+[source,scala]
+----
+var message = todo-renderJsonObject
+client.basicPublishFuture("", "my.queue", message).onComplete{
+  case Success(result) => {
+    println("Message published !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+----
+
+=== Consume
+
+Consume messages from a queue
+
+[source,scala]
+----
+// Create the event bus handler which messages will be sent to
+// Create the event bus handler which messages will be sent to
+vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
+  var json = msg.body()
+  println(s"Got message: ${json.body}")
+})
+
+// Setup the link between rabbitmq consumer and event bus address
+client.basicConsumeFuture("my.queue", "my.address").onComplete{
+  case Success(result) => {
+    println("RabbitMQ consumer created !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+----
+
+=== Get
+
+Will get a message from a queue
+
+[source,scala]
+----
+client.basicGetFuture("my.queue", true).onComplete{
+  case Success(result) => {
+    var msg = result
+    println(s"Got message: ${msg.body}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+----
+
+=== Consume messages without auto-ack
+
+[source,scala]
+----
+// Create the event bus handler which messages will be sent to
+vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
+  var json = msg.body()
+  println(s"Got message: ${json.body}")
+  // ack
+  client.basicAckFuture(json.deliveryTag, false).onComplete{
+    case Success(result) => println("Success")
+    case Failure(cause) => println("Failure")
+  }
+})
+
+// Setup the link between rabbitmq consumer and event bus address
+client.basicConsumeFuture("my.queue", "my.address", false).onComplete{
+  case Success(result) => {
+    println("RabbitMQ consumer created !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")}
+}
+
+----
+
+== Running the tests
+
+You will need to have RabbitMQ installed and running with default ports on localhost for this to work.
+<a href="mailto:nscavell@redhat.com">Nick Scavelli</a>
