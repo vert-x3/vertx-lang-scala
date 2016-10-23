@@ -42,14 +42,14 @@ class ScalaVerticle {
 
   def start(): Unit = {}
 
-  def stop(stopPromise: concurrent.Promise[Nothing]): Unit = {
+  def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
     stop()
-    stopPromise.complete(_)
+    stopPromise.success(())
   }
 
-  def start(startPromise: concurrent.Promise[Nothing]): Unit = {
+  def start(startPromise: concurrent.Promise[Unit]): Unit = {
     start()
-    startPromise.complete(_)
+    startPromise.success(())
   }
 
   def asJava(): Verticle = new AbstractVerticle {
@@ -60,7 +60,7 @@ class ScalaVerticle {
     }
 
     override def start(startFuture: Future[Void]) = {
-      val promise = Promise[Nothing]()
+      val promise = Promise[Unit]()
       promise.future.onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
@@ -69,7 +69,7 @@ class ScalaVerticle {
     }
 
     override def stop(stopFuture: Future[Void]) = {
-      val promise = Promise[Nothing]()
+      val promise = Promise[Unit]()
       promise.future.onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)
