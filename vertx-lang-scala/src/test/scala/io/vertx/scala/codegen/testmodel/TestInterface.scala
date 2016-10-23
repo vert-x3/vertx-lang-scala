@@ -251,6 +251,10 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     io.vertx.scala.codegen.testmodel.TestDataObject(_asJava.methodWithDataObjectNullReturn())
   }
 
+  def methodWithGenericUserTypeReturn[U](value: U): io.vertx.scala.codegen.testmodel.GenericRefedInterface[U] = {
+    GenericRefedInterface.apply[U](_asJava.methodWithGenericUserTypeReturn(value))
+  }
+
   def overloadedMethod(str: String, handler: String => Unit): String = {
     _asJava.overloadedMethod(str, funcToHandler[java.lang.String](handler))
   }
