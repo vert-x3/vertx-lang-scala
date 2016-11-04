@@ -19,6 +19,10 @@ package io.vertx.scala.core.shareddata
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
+import io.vertx.core.shareddata.{Lock => JLock}
+import io.vertx.core.shareddata.{LocalMap => JLocalMap}
+import io.vertx.core.shareddata.{Counter => JCounter}
 import io.vertx.core.Handler
 
 /**
@@ -44,8 +48,8 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the map
     * @return the map will be returned asynchronously in this future
     */
-  def getClusterWideMapFuture[K, V](name: String): concurrent.Future[io.vertx.scala.core.shareddata.AsyncMap[K, V]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.AsyncMap[K,V],io.vertx.scala.core.shareddata.AsyncMap[K, V]]((x => if (x == null) null else AsyncMap.apply[K,V](x)))
+  def getClusterWideMapFuture[K, V](name: String): concurrent.Future[AsyncMap[K, V]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.AsyncMap[K,V],AsyncMap[K, V]]((x => if (x == null) null else AsyncMap.apply[K,V](x)))
     _asJava.getClusterWideMap(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -55,8 +59,8 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the lock
     * @return the future
     */
-  def getLockFuture(name: String): concurrent.Future[io.vertx.scala.core.shareddata.Lock] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,io.vertx.scala.core.shareddata.Lock]((x => if (x == null) null else Lock.apply(x)))
+  def getLockFuture(name: String): concurrent.Future[Lock] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,Lock]((x => if (x == null) null else Lock.apply(x)))
     _asJava.getLock(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -68,8 +72,8 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param timeout the timeout in ms
     * @return the future
     */
-  def getLockWithTimeoutFuture(name: String, timeout: Long): concurrent.Future[io.vertx.scala.core.shareddata.Lock] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,io.vertx.scala.core.shareddata.Lock]((x => if (x == null) null else Lock.apply(x)))
+  def getLockWithTimeoutFuture(name: String, timeout: Long): concurrent.Future[Lock] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Lock,Lock]((x => if (x == null) null else Lock.apply(x)))
     _asJava.getLockWithTimeout(name, timeout, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -79,8 +83,8 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the counter.
     * @return the future
     */
-  def getCounterFuture(name: String): concurrent.Future[io.vertx.scala.core.shareddata.Counter] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Counter,io.vertx.scala.core.shareddata.Counter]((x => if (x == null) null else Counter.apply(x)))
+  def getCounterFuture(name: String): concurrent.Future[Counter] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.shareddata.Counter,Counter]((x => if (x == null) null else Counter.apply(x)))
     _asJava.getCounter(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -90,7 +94,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
     * @param name the name of the map
     * @return the msp
     */
-  def getLocalMap[K, V](name: String): io.vertx.scala.core.shareddata.LocalMap[K, V] = {
+  def getLocalMap[K, V](name: String): LocalMap[K, V] = {
     LocalMap.apply[K,V](_asJava.getLocalMap(name))
   }
 
@@ -98,7 +102,7 @@ class SharedData(private val _asJava: io.vertx.core.shareddata.SharedData) {
 
 object SharedData {
 
-  def apply(_asJava: io.vertx.core.shareddata.SharedData): io.vertx.scala.core.shareddata.SharedData =
-    new io.vertx.scala.core.shareddata.SharedData(_asJava)
+  def apply(_asJava: io.vertx.core.shareddata.SharedData): SharedData =
+    new SharedData(_asJava)
 
 }

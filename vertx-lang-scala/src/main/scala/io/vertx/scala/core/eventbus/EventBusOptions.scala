@@ -18,12 +18,13 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 
 /**
   * Options to configure the event bus.
   */
 
-class EventBusOptions(val asJava: io.vertx.core.eventbus.EventBusOptions) {
+class EventBusOptions(val asJava: JEventBusOptions) {
 
   /**
     * Set the accept back log.
@@ -409,13 +410,12 @@ class EventBusOptions(val asJava: io.vertx.core.eventbus.EventBusOptions) {
 }
 
 object EventBusOptions {
-  type EventBusOptionsJava = io.vertx.core.eventbus.EventBusOptions
   
   def apply() = {
-    new EventBusOptions(new EventBusOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new EventBusOptions(new JEventBusOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: EventBusOptionsJava) = {
+  def apply(t: JEventBusOptions) = {
     if(t != null)
       new EventBusOptions(t)
     else
@@ -424,7 +424,7 @@ object EventBusOptions {
   
   def fromJson(json: JsonObject):EventBusOptions = {
     if(json != null)
-      new EventBusOptions(new EventBusOptionsJava(json))
+      new EventBusOptions(new JEventBusOptions(json))
     else
       null
   }

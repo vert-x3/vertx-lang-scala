@@ -20,16 +20,25 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.TestDataObject
+import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.core.json.JsonObject
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
 import io.vertx.codegen.testmodel.TestGenEnum
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
+import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
+import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
 import io.vertx.core.json.JsonArray
 import io.vertx.core.Handler
+import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 
 /**
   */
 class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterface) 
-    extends io.vertx.scala.codegen.testmodel.SuperInterface2 {
+    extends SuperInterface2 {
 
   def asJava: io.vertx.codegen.testmodel.TestInterface = _asJava
 
@@ -57,8 +66,8 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     handlerToFunc[T](_asJava.methodWithHandlerGenericReturn(funcToHandler(handler)))
   }
 
-  def methodWithHandlerVertxGenReturn(expected: String): io.vertx.scala.codegen.testmodel.RefedInterface1 => Unit = {
-    handlerToMappedFunction[io.vertx.codegen.testmodel.RefedInterface1, io.vertx.scala.codegen.testmodel.RefedInterface1](x => x.asJava)(_asJava.methodWithHandlerVertxGenReturn(expected))
+  def methodWithHandlerVertxGenReturn(expected: String): RefedInterface1 => Unit = {
+    handlerToMappedFunction[io.vertx.codegen.testmodel.RefedInterface1, RefedInterface1](x => x.asJava)(_asJava.methodWithHandlerVertxGenReturn(expected))
   }
 
   def methodWithHandlerAsyncResultByteFuture(sendFailure: Boolean): concurrent.Future[Byte] = {
@@ -129,11 +138,11 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     handlerToFunc[io.vertx.core.AsyncResult[T]](_asJava.methodWithHandlerAsyncResultGenericReturn(funcToHandler[io.vertx.core.AsyncResult[T]](handler)))
   }
 
-  def methodWithHandlerAsyncResultVertxGenReturn(expected: String, fail: Boolean): io.vertx.core.AsyncResult [io.vertx.scala.codegen.testmodel.RefedInterface1] => Unit = {
-    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.codegen.testmodel.RefedInterface1], io.vertx.core.AsyncResult[io.vertx.scala.codegen.testmodel.RefedInterface1]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.methodWithHandlerAsyncResultVertxGenReturn(expected, fail))
+  def methodWithHandlerAsyncResultVertxGenReturn(expected: String, fail: Boolean): io.vertx.core.AsyncResult [RefedInterface1] => Unit = {
+    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.codegen.testmodel.RefedInterface1], io.vertx.core.AsyncResult[RefedInterface1]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.methodWithHandlerAsyncResultVertxGenReturn(expected, fail))
   }
 
-  def methodWithUserTypes(refed: io.vertx.scala.codegen.testmodel.RefedInterface1): Unit = {
+  def methodWithUserTypes(refed: RefedInterface1): Unit = {
     _asJava.methodWithUserTypes(refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
   }
 
@@ -145,25 +154,25 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.methodWithDataObjectParam(dataObject.asJava)
   }
 
-  def methodWithHandlerUserTypes(handler: io.vertx.scala.codegen.testmodel.RefedInterface1 => Unit): Unit = {
+  def methodWithHandlerUserTypes(handler: RefedInterface1 => Unit): Unit = {
     _asJava.methodWithHandlerUserTypes(funcToMappedHandler(RefedInterface1.apply)(handler))
   }
 
-  def methodWithHandlerAsyncResultUserTypesFuture(): concurrent.Future[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.RefedInterface1,io.vertx.scala.codegen.testmodel.RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
+  def methodWithHandlerAsyncResultUserTypesFuture(): concurrent.Future[RefedInterface1] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.RefedInterface1,RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
     _asJava.methodWithHandlerAsyncResultUserTypes(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithConcreteHandlerUserTypeSubtype(handler: io.vertx.scala.codegen.testmodel.ConcreteHandlerUserType): Unit = {
+  def methodWithConcreteHandlerUserTypeSubtype(handler: ConcreteHandlerUserType): Unit = {
     _asJava.methodWithConcreteHandlerUserTypeSubtype(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.ConcreteHandlerUserType])
   }
 
-  def methodWithAbstractHandlerUserTypeSubtype(handler: io.vertx.scala.codegen.testmodel.AbstractHandlerUserType): Unit = {
+  def methodWithAbstractHandlerUserTypeSubtype(handler: AbstractHandlerUserType): Unit = {
     _asJava.methodWithAbstractHandlerUserTypeSubtype(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.AbstractHandlerUserType])
   }
 
-  def methodWithConcreteHandlerUserTypeSubtypeExtension(handler: io.vertx.scala.codegen.testmodel.ConcreteHandlerUserTypeExtension): Unit = {
+  def methodWithConcreteHandlerUserTypeSubtypeExtension(handler: ConcreteHandlerUserTypeExtension): Unit = {
     _asJava.methodWithConcreteHandlerUserTypeSubtypeExtension(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.ConcreteHandlerUserTypeExtension])
   }
 
@@ -185,12 +194,12 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.methodWithHandlerDataObject(funcToMappedHandler[io.vertx.codegen.testmodel.TestDataObject, io.vertx.scala.codegen.testmodel.TestDataObject](a => TestDataObject(a))(handler))
   }
 
-  def methodWithHandlerGenericUserType[U](value: U, handler: io.vertx.scala.codegen.testmodel.GenericRefedInterface[U] => Unit): Unit = {
+  def methodWithHandlerGenericUserType[U](value: U, handler: GenericRefedInterface[U] => Unit): Unit = {
     _asJava.methodWithHandlerGenericUserType(value, funcToMappedHandler(GenericRefedInterface.apply[U])(handler))
   }
 
-  def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U): concurrent.Future[io.vertx.scala.codegen.testmodel.GenericRefedInterface[U]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.GenericRefedInterface[U],io.vertx.scala.codegen.testmodel.GenericRefedInterface[U]]((x => if (x == null) null else GenericRefedInterface.apply[U](x)))
+  def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U): concurrent.Future[GenericRefedInterface[U]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.GenericRefedInterface[U],GenericRefedInterface[U]]((x => if (x == null) null else GenericRefedInterface.apply[U](x)))
     _asJava.methodWithHandlerAsyncResultGenericUserType(value, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -231,15 +240,15 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.methodWithStringReturn()
   }
 
-  def methodWithVertxGenReturn(): io.vertx.scala.codegen.testmodel.RefedInterface1 = {
+  def methodWithVertxGenReturn(): RefedInterface1 = {
     RefedInterface1.apply(_asJava.methodWithVertxGenReturn())
   }
 
-  def methodWithVertxGenNullReturn(): io.vertx.scala.codegen.testmodel.RefedInterface1 = {
+  def methodWithVertxGenNullReturn(): RefedInterface1 = {
     RefedInterface1.apply(_asJava.methodWithVertxGenNullReturn())
   }
 
-  def methodWithAbstractVertxGenReturn(): io.vertx.scala.codegen.testmodel.RefedInterface2 = {
+  def methodWithAbstractVertxGenReturn(): RefedInterface2 = {
     RefedInterface2.apply(_asJava.methodWithAbstractVertxGenReturn())
   }
 
@@ -251,7 +260,7 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     io.vertx.scala.codegen.testmodel.TestDataObject(_asJava.methodWithDataObjectNullReturn())
   }
 
-  def methodWithGenericUserTypeReturn[U](value: U): io.vertx.scala.codegen.testmodel.GenericRefedInterface[U] = {
+  def methodWithGenericUserTypeReturn[U](value: U): GenericRefedInterface[U] = {
     GenericRefedInterface.apply[U](_asJava.methodWithGenericUserTypeReturn(value))
   }
 
@@ -259,15 +268,15 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.overloadedMethod(str, funcToHandler[java.lang.String](handler))
   }
 
-  def overloadedMethod(str: String, refed: io.vertx.scala.codegen.testmodel.RefedInterface1): String = {
+  def overloadedMethod(str: String, refed: RefedInterface1): String = {
     _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
   }
 
-  def overloadedMethod(str: String, refed: io.vertx.scala.codegen.testmodel.RefedInterface1, handler: String => Unit): String = {
+  def overloadedMethod(str: String, refed: RefedInterface1, handler: String => Unit): String = {
     _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], funcToHandler[java.lang.String](handler))
   }
 
-  def overloadedMethod(str: String, refed: io.vertx.scala.codegen.testmodel.RefedInterface1, period: Long, handler: String => Unit): String = {
+  def overloadedMethod(str: String, refed: RefedInterface1, period: Long, handler: String => Unit): String = {
     _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], period, funcToHandler[java.lang.String](handler))
   }
 
@@ -289,12 +298,12 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     promiseAndHandler._2.future
   }
 
-  def fluentMethod(str: String): io.vertx.scala.codegen.testmodel.TestInterface = {
+  def fluentMethod(str: String): TestInterface = {
     _asJava.fluentMethod(str)
     this
   }
 
-  def methodWithCachedReturn(foo: String): io.vertx.scala.codegen.testmodel.RefedInterface1 = {
+  def methodWithCachedReturn(foo: String): RefedInterface1 = {
     if (cached_0 == null) {
       cached_0=    RefedInterface1.apply(_asJava.methodWithCachedReturn(foo))
     }
@@ -308,7 +317,7 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     cached_1
   }
 
-  def methodWithCachedListReturn(): scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
+  def methodWithCachedListReturn(): scala.collection.mutable.Buffer[RefedInterface1] = {
     if (cached_2 == null) {
       cached_2=    _asJava.methodWithCachedListReturn().asScala.map(RefedInterface1.apply)
     }
@@ -419,17 +428,17 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.superMethodOverloadedBySubclass(s)
   }
 
-  private var cached_0: io.vertx.scala.codegen.testmodel.RefedInterface1 = _
+  private var cached_0: RefedInterface1 = _
   private var cached_1: Int = _
-  private var cached_2: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1] = _
+  private var cached_2: scala.collection.mutable.Buffer[RefedInterface1] = _
 }
 
 object TestInterface {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.TestInterface): io.vertx.scala.codegen.testmodel.TestInterface =
-    new io.vertx.scala.codegen.testmodel.TestInterface(_asJava)
+  def apply(_asJava: io.vertx.codegen.testmodel.TestInterface): TestInterface =
+    new TestInterface(_asJava)
 
-  def staticFactoryMethod(foo: String): io.vertx.scala.codegen.testmodel.RefedInterface1 = {
+  def staticFactoryMethod(foo: String): RefedInterface1 = {
     RefedInterface1.apply(io.vertx.codegen.testmodel.TestInterface.staticFactoryMethod(foo))
   }
 

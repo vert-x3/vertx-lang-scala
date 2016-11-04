@@ -18,12 +18,13 @@ package io.vertx.scala.core.datagram
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 
 /**
   * Options used to configure a datagram socket.
   */
 
-class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOptions) {
+class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
 
   /**
     * Set if the socket can receive broadcast packets
@@ -137,13 +138,12 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
 }
 
 object DatagramSocketOptions {
-  type DatagramSocketOptionsJava = io.vertx.core.datagram.DatagramSocketOptions
   
   def apply() = {
-    new DatagramSocketOptions(new DatagramSocketOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DatagramSocketOptions(new JDatagramSocketOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DatagramSocketOptionsJava) = {
+  def apply(t: JDatagramSocketOptions) = {
     if(t != null)
       new DatagramSocketOptions(t)
     else
@@ -152,7 +152,7 @@ object DatagramSocketOptions {
   
   def fromJson(json: JsonObject):DatagramSocketOptions = {
     if(json != null)
-      new DatagramSocketOptions(new DatagramSocketOptionsJava(json))
+      new DatagramSocketOptions(new JDatagramSocketOptions(json))
     else
       null
   }

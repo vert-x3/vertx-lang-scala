@@ -20,6 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonArray
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.shareddata.impl.ClusterSerializable
 import io.vertx.core.json.JsonObject
 
@@ -193,7 +194,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Returns a copy of a sub-sequence the Buffer as a [[io.vertx.scala.core.buffer.Buffer]] starting at position `start`
     * and ending at position `end - 1`
     */
-  def getBuffer(start: Int, end: Int): io.vertx.scala.core.buffer.Buffer = {
+  def getBuffer(start: Int, end: Int): Buffer = {
     Buffer.apply(_asJava.getBuffer(start, end))
   }
 
@@ -218,7 +219,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendBuffer(buff: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.buffer.Buffer = {
+  def appendBuffer(buff: Buffer): Buffer = {
     _asJava.appendBuffer(buff.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
     this
   }
@@ -228,7 +229,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendBuffer(buff: io.vertx.scala.core.buffer.Buffer, offset: Int, len: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendBuffer(buff: Buffer, offset: Int, len: Int): Buffer = {
     _asJava.appendBuffer(buff.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, len)
     this
   }
@@ -237,7 +238,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `byte` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendByte(b: Byte): io.vertx.scala.core.buffer.Buffer = {
+  def appendByte(b: Byte): Buffer = {
     _asJava.appendByte(b)
     this
   }
@@ -246,7 +247,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified unsigned `byte` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendUnsignedByte(b: Short): io.vertx.scala.core.buffer.Buffer = {
+  def appendUnsignedByte(b: Short): Buffer = {
     _asJava.appendUnsignedByte(b)
     this
   }
@@ -255,7 +256,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendInt(i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendInt(i: Int): Buffer = {
     _asJava.appendInt(i)
     this
   }
@@ -264,7 +265,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendIntLE(i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendIntLE(i: Int): Buffer = {
     _asJava.appendIntLE(i)
     this
   }
@@ -273,7 +274,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified unsigned `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendUnsignedInt(i: Long): io.vertx.scala.core.buffer.Buffer = {
+  def appendUnsignedInt(i: Long): Buffer = {
     _asJava.appendUnsignedInt(i)
     this
   }
@@ -282,7 +283,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified unsigned `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendUnsignedIntLE(i: Long): io.vertx.scala.core.buffer.Buffer = {
+  def appendUnsignedIntLE(i: Long): Buffer = {
     _asJava.appendUnsignedIntLE(i)
     this
   }
@@ -291,7 +292,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified 24bit `int` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendMedium(i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendMedium(i: Int): Buffer = {
     _asJava.appendMedium(i)
     this
   }
@@ -300,7 +301,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified 24bit `int` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendMediumLE(i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendMediumLE(i: Int): Buffer = {
     _asJava.appendMediumLE(i)
     this
   }
@@ -309,7 +310,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `long` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendLong(l: Long): io.vertx.scala.core.buffer.Buffer = {
+  def appendLong(l: Long): Buffer = {
     _asJava.appendLong(l)
     this
   }
@@ -318,7 +319,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `long` to the end of the Buffer in the Little Endian Byte Order. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendLongLE(l: Long): io.vertx.scala.core.buffer.Buffer = {
+  def appendLongLE(l: Long): Buffer = {
     _asJava.appendLongLE(l)
     this
   }
@@ -327,7 +328,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `short` to the end of the Buffer.The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendShort(s: Short): io.vertx.scala.core.buffer.Buffer = {
+  def appendShort(s: Short): Buffer = {
     _asJava.appendShort(s)
     this
   }
@@ -336,7 +337,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `short` to the end of the Buffer in the Little Endian Byte Order.The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendShortLE(s: Short): io.vertx.scala.core.buffer.Buffer = {
+  def appendShortLE(s: Short): Buffer = {
     _asJava.appendShortLE(s)
     this
   }
@@ -345,7 +346,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified unsigned `short` to the end of the Buffer.The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendUnsignedShort(s: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendUnsignedShort(s: Int): Buffer = {
     _asJava.appendUnsignedShort(s)
     this
   }
@@ -354,7 +355,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified unsigned `short` to the end of the Buffer in the Little Endian Byte Order.The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendUnsignedShortLE(s: Int): io.vertx.scala.core.buffer.Buffer = {
+  def appendUnsignedShortLE(s: Int): Buffer = {
     _asJava.appendUnsignedShortLE(s)
     this
   }
@@ -363,7 +364,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `float` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendFloat(f: Float): io.vertx.scala.core.buffer.Buffer = {
+  def appendFloat(f: Float): Buffer = {
     _asJava.appendFloat(f)
     this
   }
@@ -372,7 +373,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Appends the specified `double` to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendDouble(d: Double): io.vertx.scala.core.buffer.Buffer = {
+  def appendDouble(d: Double): Buffer = {
     _asJava.appendDouble(d)
     this
   }
@@ -382,7 +383,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together.
     */
-  def appendString(str: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
+  def appendString(str: String, enc: String): Buffer = {
     _asJava.appendString(str, enc)
     this
   }
@@ -392,7 +393,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * The buffer will expand as necessary to accommodate any bytes written.
     * Returns a reference to `this` so multiple operations can be appended together
     */
-  def appendString(str: String): io.vertx.scala.core.buffer.Buffer = {
+  def appendString(str: String): Buffer = {
     _asJava.appendString(str)
     this
   }
@@ -401,7 +402,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `byte` at position `pos` in the Buffer to the value `b`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setByte(pos: Int, b: Byte): io.vertx.scala.core.buffer.Buffer = {
+  def setByte(pos: Int, b: Byte): Buffer = {
     _asJava.setByte(pos, b)
     this
   }
@@ -410,7 +411,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the unsigned `byte` at position `pos` in the Buffer to the value `b`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setUnsignedByte(pos: Int, b: Short): io.vertx.scala.core.buffer.Buffer = {
+  def setUnsignedByte(pos: Int, b: Short): Buffer = {
     _asJava.setUnsignedByte(pos, b)
     this
   }
@@ -419,7 +420,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `int` at position `pos` in the Buffer to the value `i`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setInt(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setInt(pos: Int, i: Int): Buffer = {
     _asJava.setInt(pos, i)
     this
   }
@@ -428,7 +429,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `int` at position `pos` in the Buffer to the value `i` in the Little Endian Byte Order.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setIntLE(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setIntLE(pos: Int, i: Int): Buffer = {
     _asJava.setIntLE(pos, i)
     this
   }
@@ -437,7 +438,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the unsigned `int` at position `pos` in the Buffer to the value `i`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setUnsignedInt(pos: Int, i: Long): io.vertx.scala.core.buffer.Buffer = {
+  def setUnsignedInt(pos: Int, i: Long): Buffer = {
     _asJava.setUnsignedInt(pos, i)
     this
   }
@@ -446,7 +447,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the unsigned `int` at position `pos` in the Buffer to the value `i` in the Little Endian Byte Order.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setUnsignedIntLE(pos: Int, i: Long): io.vertx.scala.core.buffer.Buffer = {
+  def setUnsignedIntLE(pos: Int, i: Long): Buffer = {
     _asJava.setUnsignedIntLE(pos, i)
     this
   }
@@ -455,7 +456,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the 24bit `int` at position `pos` in the Buffer to the value `i`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setMedium(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setMedium(pos: Int, i: Int): Buffer = {
     _asJava.setMedium(pos, i)
     this
   }
@@ -464,7 +465,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the 24bit `int` at position `pos` in the Buffer to the value `i`. in the Little Endian Byte Order
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setMediumLE(pos: Int, i: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setMediumLE(pos: Int, i: Int): Buffer = {
     _asJava.setMediumLE(pos, i)
     this
   }
@@ -473,7 +474,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `long` at position `pos` in the Buffer to the value `l`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setLong(pos: Int, l: Long): io.vertx.scala.core.buffer.Buffer = {
+  def setLong(pos: Int, l: Long): Buffer = {
     _asJava.setLong(pos, l)
     this
   }
@@ -482,7 +483,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `long` at position `pos` in the Buffer to the value `l` in the Little Endian Byte Order.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setLongLE(pos: Int, l: Long): io.vertx.scala.core.buffer.Buffer = {
+  def setLongLE(pos: Int, l: Long): Buffer = {
     _asJava.setLongLE(pos, l)
     this
   }
@@ -491,7 +492,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `double` at position `pos` in the Buffer to the value `d`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setDouble(pos: Int, d: Double): io.vertx.scala.core.buffer.Buffer = {
+  def setDouble(pos: Int, d: Double): Buffer = {
     _asJava.setDouble(pos, d)
     this
   }
@@ -500,7 +501,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `float` at position `pos` in the Buffer to the value `f`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setFloat(pos: Int, f: Float): io.vertx.scala.core.buffer.Buffer = {
+  def setFloat(pos: Int, f: Float): Buffer = {
     _asJava.setFloat(pos, f)
     this
   }
@@ -509,7 +510,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `short` at position `pos` in the Buffer to the value `s`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setShort(pos: Int, s: Short): io.vertx.scala.core.buffer.Buffer = {
+  def setShort(pos: Int, s: Short): Buffer = {
     _asJava.setShort(pos, s)
     this
   }
@@ -518,7 +519,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the `short` at position `pos` in the Buffer to the value `s` in the Little Endian Byte Order.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setShortLE(pos: Int, s: Short): io.vertx.scala.core.buffer.Buffer = {
+  def setShortLE(pos: Int, s: Short): Buffer = {
     _asJava.setShortLE(pos, s)
     this
   }
@@ -527,7 +528,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the unsigned `short` at position `pos` in the Buffer to the value `s`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setUnsignedShort(pos: Int, s: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setUnsignedShort(pos: Int, s: Int): Buffer = {
     _asJava.setUnsignedShort(pos, s)
     this
   }
@@ -536,7 +537,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the unsigned `short` at position `pos` in the Buffer to the value `s` in the Little Endian Byte Order.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setUnsignedShortLE(pos: Int, s: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setUnsignedShortLE(pos: Int, s: Int): Buffer = {
     _asJava.setUnsignedShortLE(pos, s)
     this
   }
@@ -545,7 +546,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the bytes at position `pos` in the Buffer to the bytes represented by the `Buffer b`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setBuffer(pos: Int, b: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.buffer.Buffer = {
+  def setBuffer(pos: Int, b: Buffer): Buffer = {
     _asJava.setBuffer(pos, b.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
     this
   }
@@ -554,7 +555,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the bytes at position `pos` in the Buffer to the bytes represented by the `Buffer b` on the given `offset` and `len`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setBuffer(pos: Int, b: io.vertx.scala.core.buffer.Buffer, offset: Int, len: Int): io.vertx.scala.core.buffer.Buffer = {
+  def setBuffer(pos: Int, b: Buffer, offset: Int, len: Int): Buffer = {
     _asJava.setBuffer(pos, b.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, len)
     this
   }
@@ -563,7 +564,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the bytes at position `pos` in the Buffer to the value of `str` encoded in UTF-8.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setString(pos: Int, str: String): io.vertx.scala.core.buffer.Buffer = {
+  def setString(pos: Int, str: String): Buffer = {
     _asJava.setString(pos, str)
     this
   }
@@ -572,7 +573,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * Sets the bytes at position `pos` in the Buffer to the value of `str` encoded in encoding `enc`.
     * The buffer will expand as necessary to accommodate any value written.
     */
-  def setString(pos: Int, str: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
+  def setString(pos: Int, str: String, enc: String): Buffer = {
     _asJava.setString(pos, str, enc)
     this
   }
@@ -588,7 +589,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
   /**
     * Returns a copy of the entire Buffer.
     */
-  def copy(): io.vertx.scala.core.buffer.Buffer = {
+  def copy(): Buffer = {
     Buffer.apply(_asJava.copy())
   }
 
@@ -597,7 +598,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * of the returned buffer or this buffer affects each other's content
     * while they maintain separate indexes and marks.
     */
-  def slice(): io.vertx.scala.core.buffer.Buffer = {
+  def slice(): Buffer = {
     Buffer.apply(_asJava.slice())
   }
 
@@ -606,7 +607,7 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
     * of the returned buffer or this buffer affects each other's content
     * while they maintain separate indexes and marks.
     */
-  def slice(start: Int, end: Int): io.vertx.scala.core.buffer.Buffer = {
+  def slice(start: Int, end: Int): Buffer = {
     Buffer.apply(_asJava.slice(start, end))
   }
 
@@ -614,22 +615,22 @@ class Buffer(private val _asJava: io.vertx.core.buffer.Buffer) {
 
 object Buffer {
 
-  def apply(_asJava: io.vertx.core.buffer.Buffer): io.vertx.scala.core.buffer.Buffer =
-    new io.vertx.scala.core.buffer.Buffer(_asJava)
+  def apply(_asJava: io.vertx.core.buffer.Buffer): Buffer =
+    new Buffer(_asJava)
 
-  def buffer(): io.vertx.scala.core.buffer.Buffer = {
+  def buffer(): Buffer = {
     Buffer.apply(io.vertx.core.buffer.Buffer.buffer())
   }
 
-  def buffer(initialSizeHint: Int): io.vertx.scala.core.buffer.Buffer = {
+  def buffer(initialSizeHint: Int): Buffer = {
     Buffer.apply(io.vertx.core.buffer.Buffer.buffer(initialSizeHint))
   }
 
-  def buffer(string: String): io.vertx.scala.core.buffer.Buffer = {
+  def buffer(string: String): Buffer = {
     Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string))
   }
 
-  def buffer(string: String, enc: String): io.vertx.scala.core.buffer.Buffer = {
+  def buffer(string: String, enc: String): Buffer = {
     Buffer.apply(io.vertx.core.buffer.Buffer.buffer(string, enc))
   }
 

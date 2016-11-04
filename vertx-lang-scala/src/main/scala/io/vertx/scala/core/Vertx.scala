@@ -19,24 +19,49 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
 import io.vertx.scala.core.datagram.DatagramSocket
+import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.scala.core.http.HttpServer
+import io.vertx.core.http.{HttpServer => JHttpServer}
+import io.vertx.core.{Context => JContext}
+import io.vertx.core.shareddata.{SharedData => JSharedData}
 import io.vertx.scala.core.shareddata.SharedData
+import io.vertx.core.shareddata.{SharedData => JSharedData}
+import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
+import io.vertx.core.{TimeoutStream => JTimeoutStream}
+import io.vertx.core.eventbus.{EventBus => JEventBus}
 import io.vertx.scala.core.eventbus.EventBus
+import io.vertx.core.eventbus.{EventBus => JEventBus}
 import io.vertx.core.http.HttpClientOptions
 import io.vertx.core.datagram.DatagramSocketOptions
+import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.scala.core.net.NetClient
+import io.vertx.core.net.{NetClient => JNetClient}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.VertxOptions
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.net.NetClientOptions
+import io.vertx.core.dns.{DnsClient => JDnsClient}
 import io.vertx.scala.core.dns.DnsClient
+import io.vertx.core.dns.{DnsClient => JDnsClient}
 import io.vertx.core.net.NetServerOptions
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.net.NetServer
+import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.DeploymentOptions
+import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.scala.core.file.FileSystem
+import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.core.http.HttpServerOptions
 import io.vertx.core.Handler
+import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.scala.core.http.HttpClient
+import io.vertx.core.http.{HttpClient => JHttpClient}
 
 /**
   * The entry point into the Vert.x Core API.
@@ -62,7 +87,7 @@ import io.vertx.scala.core.http.HttpClient
   * Please see the user manual for more detailed usage information.
   */
 class Vertx(private val _asJava: io.vertx.core.Vertx) 
-    extends io.vertx.scala.core.metrics.Measured {
+    extends Measured {
 
   def asJava: io.vertx.core.Vertx = _asJava
 
@@ -78,7 +103,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Gets the current context, or creates one if there isn't one
     * @return The current context (created if didn't exist)
     */
-  def getOrCreateContext(): io.vertx.scala.core.Context = {
+  def getOrCreateContext(): Context = {
     Context.apply(_asJava.getOrCreateContext())
   }
 
@@ -87,7 +112,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a>
     * @return the server
     */
-  def createNetServer(options: io.vertx.scala.core.net.NetServerOptions): io.vertx.scala.core.net.NetServer = {
+  def createNetServer(options: io.vertx.scala.core.net.NetServerOptions): NetServer = {
     NetServer.apply(_asJava.createNetServer(options.asJava))
   }
 
@@ -95,7 +120,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Create a TCP/SSL server using default options
     * @return the server
     */
-  def createNetServer(): io.vertx.scala.core.net.NetServer = {
+  def createNetServer(): NetServer = {
     NetServer.apply(_asJava.createNetServer())
   }
 
@@ -104,7 +129,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/NetClientOptions.html">NetClientOptions</a>
     * @return the client
     */
-  def createNetClient(options: io.vertx.scala.core.net.NetClientOptions): io.vertx.scala.core.net.NetClient = {
+  def createNetClient(options: io.vertx.scala.core.net.NetClientOptions): NetClient = {
     NetClient.apply(_asJava.createNetClient(options.asJava))
   }
 
@@ -112,7 +137,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Create a TCP/SSL client using default options
     * @return the client
     */
-  def createNetClient(): io.vertx.scala.core.net.NetClient = {
+  def createNetClient(): NetClient = {
     NetClient.apply(_asJava.createNetClient())
   }
 
@@ -121,7 +146,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a>
     * @return the server
     */
-  def createHttpServer(options: io.vertx.scala.core.http.HttpServerOptions): io.vertx.scala.core.http.HttpServer = {
+  def createHttpServer(options: io.vertx.scala.core.http.HttpServerOptions): HttpServer = {
     HttpServer.apply(_asJava.createHttpServer(options.asJava))
   }
 
@@ -129,7 +154,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Create an HTTP/HTTPS server using default options
     * @return the server
     */
-  def createHttpServer(): io.vertx.scala.core.http.HttpServer = {
+  def createHttpServer(): HttpServer = {
     HttpServer.apply(_asJava.createHttpServer())
   }
 
@@ -138,7 +163,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     * @return the client
     */
-  def createHttpClient(options: io.vertx.scala.core.http.HttpClientOptions): io.vertx.scala.core.http.HttpClient = {
+  def createHttpClient(options: io.vertx.scala.core.http.HttpClientOptions): HttpClient = {
     HttpClient.apply(_asJava.createHttpClient(options.asJava))
   }
 
@@ -146,7 +171,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Create a HTTP/HTTPS client using default options
     * @return the client
     */
-  def createHttpClient(): io.vertx.scala.core.http.HttpClient = {
+  def createHttpClient(): HttpClient = {
     HttpClient.apply(_asJava.createHttpClient())
   }
 
@@ -155,7 +180,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param options the options to usesee <a href="../../../../../../cheatsheet/DatagramSocketOptions.html">DatagramSocketOptions</a>
     * @return the socket
     */
-  def createDatagramSocket(options: io.vertx.scala.core.datagram.DatagramSocketOptions): io.vertx.scala.core.datagram.DatagramSocket = {
+  def createDatagramSocket(options: io.vertx.scala.core.datagram.DatagramSocketOptions): DatagramSocket = {
     DatagramSocket.apply(_asJava.createDatagramSocket(options.asJava))
   }
 
@@ -163,7 +188,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Create a datagram socket using default options
     * @return the socket
     */
-  def createDatagramSocket(): io.vertx.scala.core.datagram.DatagramSocket = {
+  def createDatagramSocket(): DatagramSocket = {
     DatagramSocket.apply(_asJava.createDatagramSocket())
   }
 
@@ -171,7 +196,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Get the filesystem object. There is a single instance of FileSystem per Vertx instance.
     * @return the filesystem object
     */
-  def fileSystem(): io.vertx.scala.core.file.FileSystem = {
+  def fileSystem(): FileSystem = {
     if (cached_0 == null) {
       cached_0=    FileSystem.apply(_asJava.fileSystem())
     }
@@ -182,7 +207,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Get the event bus object. There is a single instance of EventBus per Vertx instance.
     * @return the event bus object
     */
-  def eventBus(): io.vertx.scala.core.eventbus.EventBus = {
+  def eventBus(): EventBus = {
     if (cached_1 == null) {
       cached_1=    EventBus.apply(_asJava.eventBus())
     }
@@ -195,7 +220,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param host the host
     * @return the DNS client
     */
-  def createDnsClient(port: Int, host: String): io.vertx.scala.core.dns.DnsClient = {
+  def createDnsClient(port: Int, host: String): DnsClient = {
     DnsClient.apply(_asJava.createDnsClient(port, host))
   }
 
@@ -203,7 +228,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * Get the shared data object. There is a single instance of SharedData per Vertx instance.
     * @return the shared data object
     */
-  def sharedData(): io.vertx.scala.core.shareddata.SharedData = {
+  def sharedData(): SharedData = {
     if (cached_2 == null) {
       cached_2=    SharedData.apply(_asJava.sharedData())
     }
@@ -227,7 +252,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param delay the delay in milliseconds, after which the timer will fire
     * @return the timer stream
     */
-  def timerStream(delay: Long): io.vertx.scala.core.TimeoutStream = {
+  def timerStream(delay: Long): TimeoutStream = {
     TimeoutStream.apply(_asJava.timerStream(delay))
   }
 
@@ -248,7 +273,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param delay the delay in milliseconds, after which the timer will fire
     * @return the periodic stream
     */
-  def periodicStream(delay: Long): io.vertx.scala.core.TimeoutStream = {
+  def periodicStream(delay: Long): TimeoutStream = {
     TimeoutStream.apply(_asJava.periodicStream(delay))
   }
 
@@ -397,7 +422,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -406,7 +431,7 @@ class Vertx(private val _asJava: io.vertx.core.Vertx)
   /**
     * Like [[io.vertx.scala.core.Vertx#executeBlocking]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -415,14 +440,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
     */
-  def createSharedWorkerExecutor(name: String): io.vertx.scala.core.WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name))
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
     */
-  def createSharedWorkerExecutor(name: String, poolSize: Int): io.vertx.scala.core.WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String, poolSize: Int): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize))
   }
 
@@ -440,7 +465,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param maxExecuteTime the value of max worker execute time, in ms
     * @return the named worker executor
     */
-  def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): io.vertx.scala.core.WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize, maxExecuteTime))
   }
 
@@ -449,36 +474,36 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Vertx = {
+  def exceptionHandler(handler: Throwable => Unit): Vertx = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  private var cached_0: io.vertx.scala.core.file.FileSystem = _
-  private var cached_1: io.vertx.scala.core.eventbus.EventBus = _
-  private var cached_2: io.vertx.scala.core.shareddata.SharedData = _
+  private var cached_0: FileSystem = _
+  private var cached_1: EventBus = _
+  private var cached_2: SharedData = _
 }
 
 object Vertx {
 
-  def apply(_asJava: io.vertx.core.Vertx): io.vertx.scala.core.Vertx =
-    new io.vertx.scala.core.Vertx(_asJava)
+  def apply(_asJava: io.vertx.core.Vertx): Vertx =
+    new Vertx(_asJava)
 
-  def vertx(): io.vertx.scala.core.Vertx = {
+  def vertx(): Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx())
   }
 
-  def vertx(options: io.vertx.scala.core.VertxOptions): io.vertx.scala.core.Vertx = {
+  def vertx(options: io.vertx.scala.core.VertxOptions): Vertx = {
     Vertx.apply(io.vertx.core.Vertx.vertx(options.asJava))
   }
 
-  def clusteredVertxFuture(options: io.vertx.scala.core.VertxOptions): concurrent.Future[io.vertx.scala.core.Vertx] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.Vertx,io.vertx.scala.core.Vertx]((x => if (x == null) null else Vertx.apply(x)))
+  def clusteredVertxFuture(options: io.vertx.scala.core.VertxOptions): concurrent.Future[Vertx] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.Vertx,Vertx]((x => if (x == null) null else Vertx.apply(x)))
     io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def currentContext(): scala.Option[io.vertx.scala.core.Context] = {
+  def currentContext(): scala.Option[Context] = {
         scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
   }
 

@@ -19,10 +19,18 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.core.http.HttpMethod
+import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.Handler
 
 /**
@@ -46,7 +54,7 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerResponse) 
-    extends io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
+    extends WriteStream[Buffer] {
 
   def asJava: io.vertx.core.http.HttpServerResponse = _asJava
 
@@ -58,22 +66,22 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def exceptionHandler(handler: Throwable => Unit): HttpServerResponse = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.HttpServerResponse = {
+  def write(data: Buffer): HttpServerResponse = {
     _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
     this
   }
 
-  def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.http.HttpServerResponse = {
+  def setWriteQueueMaxSize(maxSize: Int): HttpServerResponse = {
     _asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def drainHandler(handler: () => Unit): HttpServerResponse = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -90,7 +98,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * to the code will be looked-up and used.
     * @return a reference to this, so the API can be used fluently
     */
-  def setStatusCode(statusCode: Int): io.vertx.scala.core.http.HttpServerResponse = {
+  def setStatusCode(statusCode: Int): HttpServerResponse = {
     _asJava.setStatusCode(statusCode)
     this
   }
@@ -106,7 +114,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Set the status message
     * @return a reference to this, so the API can be used fluently
     */
-  def setStatusMessage(statusMessage: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def setStatusMessage(statusMessage: String): HttpServerResponse = {
     _asJava.setStatusMessage(statusMessage)
     this
   }
@@ -125,7 +133,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * An HTTP chunked response is typically used when you do not know the total size of the request body up front.
     * @return a reference to this, so the API can be used fluently
     */
-  def setChunked(chunked: Boolean): io.vertx.scala.core.http.HttpServerResponse = {
+  def setChunked(chunked: Boolean): HttpServerResponse = {
     _asJava.setChunked(chunked)
     this
   }
@@ -140,7 +148,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return The HTTP headers
     */
-  def headers(): io.vertx.scala.core.MultiMap = {
+  def headers(): MultiMap = {
     if (cached_0 == null) {
       cached_0=    MultiMap.apply(_asJava.headers())
     }
@@ -153,7 +161,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param value the header value.
     * @return a reference to this, so the API can be used fluently
     */
-  def putHeader(name: String, value: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def putHeader(name: String, value: String): HttpServerResponse = {
     _asJava.putHeader(name, value)
     this
   }
@@ -161,7 +169,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * @return The HTTP trailers
     */
-  def trailers(): io.vertx.scala.core.MultiMap = {
+  def trailers(): MultiMap = {
     if (cached_1 == null) {
       cached_1=    MultiMap.apply(_asJava.trailers())
     }
@@ -174,7 +182,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param value the trailer value
     * @return a reference to this, so the API can be used fluently
     */
-  def putTrailer(name: String, value: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def putTrailer(name: String, value: String): HttpServerResponse = {
     _asJava.putTrailer(name, value)
     this
   }
@@ -185,7 +193,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def closeHandler(handler: () => Unit): HttpServerResponse = {
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -196,7 +204,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param enc the encoding to use
     * @return a reference to this, so the API can be used fluently
     */
-  def write(chunk: String, enc: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def write(chunk: String, enc: String): HttpServerResponse = {
     _asJava.write(chunk, enc)
     this
   }
@@ -206,7 +214,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param chunk the string to write
     * @return a reference to this, so the API can be used fluently
     */
-  def write(chunk: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def write(chunk: String): HttpServerResponse = {
     _asJava.write(chunk)
     this
   }
@@ -216,7 +224,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Must only be used if the request contains an "Expect:100-Continue" header
     * @return a reference to this, so the API can be used fluently
     */
-  def writeContinue(): io.vertx.scala.core.http.HttpServerResponse = {
+  def writeContinue(): HttpServerResponse = {
     _asJava.writeContinue()
     this
   }
@@ -243,7 +251,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * no other data has been written then the `Content-Length` header will be automatically set.
     * @param chunk the buffer to write before ending the response
     */
-  def end(chunk: io.vertx.scala.core.buffer.Buffer): Unit = {
+  def end(chunk: Buffer): Unit = {
     _asJava.end(chunk.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
   }
 
@@ -262,7 +270,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String): HttpServerResponse = {
     _asJava.sendFile(filename)
     this
   }
@@ -274,7 +282,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param offset offset to start serving from
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String, offset: Long): HttpServerResponse = {
     _asJava.sendFile(filename, offset)
     this
   }
@@ -290,7 +298,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param length length to serve to
     * @return a reference to this, so the API can be used fluently
     */
-  def sendFile(filename: String, offset: Long, length: Long): io.vertx.scala.core.http.HttpServerResponse = {
+  def sendFile(filename: String, offset: Long, length: Long): HttpServerResponse = {
     _asJava.sendFile(filename, offset, length)
     this
   }
@@ -368,7 +376,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headersEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def headersEndHandler(handler: () => Unit): HttpServerResponse = {
     _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -381,7 +389,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def bodyEndHandler(handler: () => Unit): io.vertx.scala.core.http.HttpServerResponse = {
+  def bodyEndHandler(handler: () => Unit): HttpServerResponse = {
     _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -403,8 +411,8 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+  def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     HttpServerResponse.apply(_asJava.push(method, host, path, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -412,8 +420,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: io.vertx.scala.core.MultiMap): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+  def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -421,8 +429,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+  def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -443,8 +451,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param headers the headers of the promised request
     * @return the future notified when the response can be written
     */
-  def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: io.vertx.scala.core.MultiMap): concurrent.Future[io.vertx.scala.core.http.HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,io.vertx.scala.core.http.HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+  def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -473,7 +481,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param payload the frame payload
     * @return a reference to this, so the API can be used fluently
     */
-  def writeCustomFrame(`type`: Int, flags: Int, payload: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.core.http.HttpServerResponse = {
+  def writeCustomFrame(`type`: Int, flags: Int, payload: Buffer): HttpServerResponse = {
     _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
     this
   }
@@ -482,18 +490,18 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Like [[io.vertx.scala.core.http.HttpServerResponse#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
     * @param frame the frame to write
     */
-  def writeCustomFrame(frame: io.vertx.scala.core.http.HttpFrame): io.vertx.scala.core.http.HttpServerResponse = {
+  def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {
     _asJava.writeCustomFrame(frame.asJava.asInstanceOf[io.vertx.core.http.HttpFrame])
     this
   }
 
-  private var cached_0: io.vertx.scala.core.MultiMap = _
-  private var cached_1: io.vertx.scala.core.MultiMap = _
+  private var cached_0: MultiMap = _
+  private var cached_1: MultiMap = _
 }
 
 object HttpServerResponse {
 
-  def apply(_asJava: io.vertx.core.http.HttpServerResponse): io.vertx.scala.core.http.HttpServerResponse =
-    new io.vertx.scala.core.http.HttpServerResponse(_asJava)
+  def apply(_asJava: io.vertx.core.http.HttpServerResponse): HttpServerResponse =
+    new HttpServerResponse(_asJava)
 
 }

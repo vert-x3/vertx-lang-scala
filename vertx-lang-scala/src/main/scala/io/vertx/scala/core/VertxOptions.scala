@@ -18,12 +18,13 @@ package io.vertx.scala.core
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.{VertxOptions => JVertxOptions}
 
 /**
   * Instances of this class are used to configure [[io.vertx.scala.core.Vertx]] instances.
   */
 
-class VertxOptions(val asJava: io.vertx.core.VertxOptions) {
+class VertxOptions(val asJava: JVertxOptions) {
 
   /**
     * Sets the address resolver configuration to configure resolving DNS servers, cache TTL, etc...
@@ -251,13 +252,12 @@ class VertxOptions(val asJava: io.vertx.core.VertxOptions) {
 }
 
 object VertxOptions {
-  type VertxOptionsJava = io.vertx.core.VertxOptions
   
   def apply() = {
-    new VertxOptions(new VertxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new VertxOptions(new JVertxOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: VertxOptionsJava) = {
+  def apply(t: JVertxOptions) = {
     if(t != null)
       new VertxOptions(t)
     else
@@ -266,7 +266,7 @@ object VertxOptions {
   
   def fromJson(json: JsonObject):VertxOptions = {
     if(json != null)
-      new VertxOptions(new VertxOptionsJava(json))
+      new VertxOptions(new JVertxOptions(json))
     else
       null
   }

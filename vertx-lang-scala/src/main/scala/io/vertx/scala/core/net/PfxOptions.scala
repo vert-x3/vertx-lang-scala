@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
 
 /**
   * Key or trust store options configuring private key and/or certificates based on PKCS#12 files.
@@ -41,7 +42,7 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
+class PfxOptions(val asJava: JPfxOptions) {
 
   /**
     * Set the password
@@ -78,13 +79,12 @@ class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
 }
 
 object PfxOptions {
-  type PfxOptionsJava = io.vertx.core.net.PfxOptions
   
   def apply() = {
-    new PfxOptions(new PfxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PfxOptions(new JPfxOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: PfxOptionsJava) = {
+  def apply(t: JPfxOptions) = {
     if(t != null)
       new PfxOptions(t)
     else
@@ -93,7 +93,7 @@ object PfxOptions {
   
   def fromJson(json: JsonObject):PfxOptions = {
     if(json != null)
-      new PfxOptions(new PfxOptionsJava(json))
+      new PfxOptions(new JPfxOptions(json))
     else
       null
   }

@@ -18,12 +18,13 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 
 /**
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
   */
 
-class HttpClientOptions(val asJava: io.vertx.core.http.HttpClientOptions) {
+class HttpClientOptions(val asJava: JHttpClientOptions) {
 
   /**
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiation.
@@ -532,13 +533,12 @@ class HttpClientOptions(val asJava: io.vertx.core.http.HttpClientOptions) {
 }
 
 object HttpClientOptions {
-  type HttpClientOptionsJava = io.vertx.core.http.HttpClientOptions
   
   def apply() = {
-    new HttpClientOptions(new HttpClientOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new HttpClientOptions(new JHttpClientOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: HttpClientOptionsJava) = {
+  def apply(t: JHttpClientOptions) = {
     if(t != null)
       new HttpClientOptions(t)
     else
@@ -547,7 +547,7 @@ object HttpClientOptions {
   
   def fromJson(json: JsonObject):HttpClientOptions = {
     if(json != null)
-      new HttpClientOptions(new HttpClientOptionsJava(json))
+      new HttpClientOptions(new JHttpClientOptions(json))
     else
       null
   }

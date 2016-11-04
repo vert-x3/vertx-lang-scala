@@ -18,11 +18,12 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
 
 /**
   */
 
-class DataObjectWithMaps(val asJava: io.vertx.codegen.testmodel.DataObjectWithMaps) {
+class DataObjectWithMaps(val asJava: JDataObjectWithMaps) {
   def setBooleanValues(value:Map[String, Boolean]) = {
     asJava.setBooleanValues(value.mapValues(Boolean.box))
     this
@@ -74,13 +75,12 @@ class DataObjectWithMaps(val asJava: io.vertx.codegen.testmodel.DataObjectWithMa
 }
 
 object DataObjectWithMaps {
-  type DataObjectWithMapsJava = io.vertx.codegen.testmodel.DataObjectWithMaps
   
   def apply() = {
-    new DataObjectWithMaps(new DataObjectWithMapsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithMaps(new JDataObjectWithMaps(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DataObjectWithMapsJava) = {
+  def apply(t: JDataObjectWithMaps) = {
     if(t != null)
       new DataObjectWithMaps(t)
     else
@@ -89,7 +89,7 @@ object DataObjectWithMaps {
   
   def fromJson(json: JsonObject):DataObjectWithMaps = {
     if(json != null)
-      new DataObjectWithMaps(new DataObjectWithMapsJava(json))
+      new DataObjectWithMaps(new JDataObjectWithMaps(json))
     else
       null
   }

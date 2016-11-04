@@ -19,14 +19,19 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.Handler
+import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * Represents a TCP server
   */
 class NetServer(private val _asJava: io.vertx.core.net.NetServer) 
-    extends io.vertx.scala.core.metrics.Measured {
+    extends Measured {
 
   def asJava: io.vertx.core.net.NetServer = _asJava
 
@@ -44,7 +49,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * connect stream .
     * @return the connect stream
     */
-  def connectStream(): io.vertx.scala.core.net.NetSocketStream = {
+  def connectStream(): NetSocketStream = {
     NetSocketStream.apply(_asJava.connectStream())
   }
 
@@ -54,7 +59,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * connect handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectHandler(handler: io.vertx.scala.core.net.NetSocket => Unit): io.vertx.scala.core.net.NetServer = {
+  def connectHandler(handler: NetSocket => Unit): NetServer = {
     NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler)))
   }
 
@@ -65,7 +70,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(): io.vertx.scala.core.net.NetServer = {
+  def listen(): NetServer = {
     _asJava.listen()
     this
   }
@@ -74,8 +79,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return future that will be notified when listening or failed
     */
-  def listenFuture(): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
+  def listenFuture(): concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -91,7 +96,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int, host: String): io.vertx.scala.core.net.NetServer = {
+  def listen(port: Int, host: String): NetServer = {
     _asJava.listen(port, host)
     this
   }
@@ -102,8 +107,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param host the host to listen on
     * @return future that will be notified when listening or failed
     */
-  def listenFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
+  def listenFuture(port: Int, host: String): concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -117,7 +122,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int): io.vertx.scala.core.net.NetServer = {
+  def listen(port: Int): NetServer = {
     _asJava.listen(port)
     this
   }
@@ -127,8 +132,8 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @param port the port to listen on
     * @return future that will be notified when listening or failed
     */
-  def listenFuture(port: Int): concurrent.Future[io.vertx.scala.core.net.NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,io.vertx.scala.core.net.NetServer]((x => if (x == null) null else NetServer.apply(x)))
+  def listenFuture(port: Int): concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -164,7 +169,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
 
 object NetServer {
 
-  def apply(_asJava: io.vertx.core.net.NetServer): io.vertx.scala.core.net.NetServer =
-    new io.vertx.scala.core.net.NetServer(_asJava)
+  def apply(_asJava: io.vertx.core.net.NetServer): NetServer =
+    new NetServer(_asJava)
 
 }

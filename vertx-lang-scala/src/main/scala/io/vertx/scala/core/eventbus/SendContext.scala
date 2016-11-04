@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.eventbus.{Message => JMessage}
 
 /**
   *
@@ -31,7 +32,7 @@ class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T])
   /**
     * @return The message being sent
     */
-  def message(): io.vertx.scala.core.eventbus.Message[T] = {
+  def message(): Message[T] = {
     Message.apply[T](_asJava.message())
   }
 
@@ -53,7 +54,7 @@ class SendContext[T](private val _asJava: io.vertx.core.eventbus.SendContext[T])
 
 object SendContext {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.SendContext[T]): io.vertx.scala.core.eventbus.SendContext[T] =
-    new io.vertx.scala.core.eventbus.SendContext(_asJava)
+  def apply[T](_asJava: io.vertx.core.eventbus.SendContext[T]): SendContext[T] =
+    new SendContext(_asJava)
 
 }

@@ -19,7 +19,9 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * An HTTP/2 frame.
@@ -51,7 +53,7 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
   /**
     * @return the frame payload
     */
-  def payload(): io.vertx.scala.core.buffer.Buffer = {
+  def payload(): Buffer = {
     if (cached_2 == null) {
       cached_2=    Buffer.apply(_asJava.payload())
     }
@@ -60,12 +62,12 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
 
   private var cached_0: Int = _
   private var cached_1: Int = _
-  private var cached_2: io.vertx.scala.core.buffer.Buffer = _
+  private var cached_2: Buffer = _
 }
 
 object HttpFrame {
 
-  def apply(_asJava: io.vertx.core.http.HttpFrame): io.vertx.scala.core.http.HttpFrame =
-    new io.vertx.scala.core.http.HttpFrame(_asJava)
+  def apply(_asJava: io.vertx.core.http.HttpFrame): HttpFrame =
+    new HttpFrame(_asJava)
 
 }

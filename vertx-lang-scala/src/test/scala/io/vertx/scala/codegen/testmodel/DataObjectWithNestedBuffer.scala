@@ -18,11 +18,12 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
 
 /**
   */
 
-class DataObjectWithNestedBuffer(val asJava: io.vertx.codegen.testmodel.DataObjectWithNestedBuffer) {
+class DataObjectWithNestedBuffer(val asJava: JDataObjectWithNestedBuffer) {
   def setBuffer(value:io.vertx.core.buffer.Buffer) = {
     asJava.setBuffer(value)
     this
@@ -47,13 +48,12 @@ class DataObjectWithNestedBuffer(val asJava: io.vertx.codegen.testmodel.DataObje
 }
 
 object DataObjectWithNestedBuffer {
-  type DataObjectWithNestedBufferJava = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
   
   def apply() = {
-    new DataObjectWithNestedBuffer(new DataObjectWithNestedBufferJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DataObjectWithNestedBufferJava) = {
+  def apply(t: JDataObjectWithNestedBuffer) = {
     if(t != null)
       new DataObjectWithNestedBuffer(t)
     else
@@ -62,7 +62,7 @@ object DataObjectWithNestedBuffer {
   
   def fromJson(json: JsonObject):DataObjectWithNestedBuffer = {
     if(json != null)
-      new DataObjectWithNestedBuffer(new DataObjectWithNestedBufferJava(json))
+      new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))
     else
       null
   }

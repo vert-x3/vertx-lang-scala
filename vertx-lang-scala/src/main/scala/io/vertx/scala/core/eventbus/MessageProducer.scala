@@ -20,15 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.DeliveryOptions
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.Handler
+import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 
 /**
   * Represents a stream of message that can be written to.
   * 
   */
 class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
-    extends io.vertx.scala.core.streams.WriteStream[T] {
+    extends WriteStream[T] {
 
   def asJava: io.vertx.core.eventbus.MessageProducer[T] = _asJava
 
@@ -52,32 +56,32 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @param message the message to send
     * @return reference to this for fluency
     */
-  def send(message: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def send(message: T): MessageProducer[T] = {
     MessageProducer.apply[T](_asJava.send(message))
   }
 
-  def sendFuture[R](message: T): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
+  def sendFuture[R](message: T): concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def exceptionHandler(handler: Throwable => Unit): MessageProducer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def write(data: T): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def write(data: T): MessageProducer[T] = {
     _asJava.write(data)
     this
   }
 
-  def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def setWriteQueueMaxSize(maxSize: Int): MessageProducer[T] = {
     _asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def drainHandler(handler: () => Unit): MessageProducer[T] = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -87,7 +91,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return this producer object
     */
-  def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): MessageProducer[T] = {
     _asJava.deliveryOptions(options.asJava)
     this
   }
@@ -117,7 +121,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
 
 object MessageProducer {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): io.vertx.scala.core.eventbus.MessageProducer[T] =
-    new io.vertx.scala.core.eventbus.MessageProducer(_asJava)
+  def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): MessageProducer[T] =
+    new MessageProducer(_asJava)
 
 }

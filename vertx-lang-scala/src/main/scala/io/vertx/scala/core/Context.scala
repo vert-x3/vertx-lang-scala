@@ -19,8 +19,11 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
+import io.vertx.core.{Future => JFuture}
+import io.vertx.core.{Context => JContext}
 
 /**
   * The execution context of a scala-function execution.
@@ -81,7 +84,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -92,7 +95,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param blockingCodeHandler handler representing the blocking code to run
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.scala.core.Future[T] => Unit): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -186,7 +189,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
   /**
     * @return The Vertx instance that created the context
     */
-  def owner(): io.vertx.scala.core.Vertx = {
+  def owner(): Vertx = {
     Vertx.apply(_asJava.owner())
   }
 
@@ -204,7 +207,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.Context = {
+  def exceptionHandler(handler: Throwable => Unit): Context = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -213,8 +216,8 @@ class Context(private val _asJava: io.vertx.core.Context) {
 
 object Context {
 
-  def apply(_asJava: io.vertx.core.Context): io.vertx.scala.core.Context =
-    new io.vertx.scala.core.Context(_asJava)
+  def apply(_asJava: io.vertx.core.Context): Context =
+    new Context(_asJava)
 
   def isOnWorkerThread(): Boolean = {
     io.vertx.core.Context.isOnWorkerThread()

@@ -18,12 +18,13 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetServer]].
   */
 
-class NetServerOptions(val asJava: io.vertx.core.net.NetServerOptions) {
+class NetServerOptions(val asJava: JNetServerOptions) {
 
   /**
     * Set the accept back log
@@ -315,13 +316,12 @@ class NetServerOptions(val asJava: io.vertx.core.net.NetServerOptions) {
 }
 
 object NetServerOptions {
-  type NetServerOptionsJava = io.vertx.core.net.NetServerOptions
   
   def apply() = {
-    new NetServerOptions(new NetServerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new NetServerOptions(new JNetServerOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: NetServerOptionsJava) = {
+  def apply(t: JNetServerOptions) = {
     if(t != null)
       new NetServerOptions(t)
     else
@@ -330,7 +330,7 @@ object NetServerOptions {
   
   def fromJson(json: JsonObject):NetServerOptions = {
     if(json != null)
-      new NetServerOptions(new NetServerOptionsJava(json))
+      new NetServerOptions(new JNetServerOptions(json))
     else
       null
   }

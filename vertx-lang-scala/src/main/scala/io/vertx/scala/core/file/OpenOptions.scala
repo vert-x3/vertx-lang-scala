@@ -18,12 +18,13 @@ package io.vertx.scala.core.file
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.file.{OpenOptions => JOpenOptions}
 
 /**
   * Describes how an [[io.vertx.scala.core.file.AsyncFile]] should be opened.
   */
 
-class OpenOptions(val asJava: io.vertx.core.file.OpenOptions) {
+class OpenOptions(val asJava: JOpenOptions) {
 
   /**
     * Set whether the file should be created if it does not already exist.
@@ -137,13 +138,12 @@ class OpenOptions(val asJava: io.vertx.core.file.OpenOptions) {
 }
 
 object OpenOptions {
-  type OpenOptionsJava = io.vertx.core.file.OpenOptions
   
   def apply() = {
-    new OpenOptions(new OpenOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new OpenOptions(new JOpenOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: OpenOptionsJava) = {
+  def apply(t: JOpenOptions) = {
     if(t != null)
       new OpenOptions(t)
     else
@@ -152,7 +152,7 @@ object OpenOptions {
   
   def fromJson(json: JsonObject):OpenOptions = {
     if(json != null)
-      new OpenOptions(new OpenOptionsJava(json))
+      new OpenOptions(new JOpenOptions(json))
     else
       null
   }

@@ -39,7 +39,7 @@ class SocketAddress(private val _asJava: io.vertx.core.net.SocketAddress) {
 
 object SocketAddress {
 
-  def apply(_asJava: io.vertx.core.net.SocketAddress): io.vertx.scala.core.net.SocketAddress =
-    new io.vertx.scala.core.net.SocketAddress(_asJava)
+  def apply(_asJava: io.vertx.core.net.SocketAddress): SocketAddress =
+    new SocketAddress(_asJava)
 
 }

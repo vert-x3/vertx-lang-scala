@@ -52,7 +52,7 @@ class FileSystemProps(private val _asJava: io.vertx.core.file.FileSystemProps) {
 
 object FileSystemProps {
 
-  def apply(_asJava: io.vertx.core.file.FileSystemProps): io.vertx.scala.core.file.FileSystemProps =
-    new io.vertx.scala.core.file.FileSystemProps(_asJava)
+  def apply(_asJava: io.vertx.core.file.FileSystemProps): FileSystemProps =
+    new FileSystemProps(_asJava)
 
 }

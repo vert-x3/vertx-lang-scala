@@ -165,7 +165,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
 
 object AsyncMap {
 
-  def apply[K, V](_asJava: io.vertx.core.shareddata.AsyncMap[K, V]): io.vertx.scala.core.shareddata.AsyncMap[K, V] =
-    new io.vertx.scala.core.shareddata.AsyncMap(_asJava)
+  def apply[K, V](_asJava: io.vertx.core.shareddata.AsyncMap[K, V]): AsyncMap[K, V] =
+    new AsyncMap(_asJava)
 
 }

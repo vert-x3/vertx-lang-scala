@@ -18,11 +18,12 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
 
 /**
   */
 
-class DataObjectWithValues(val asJava: io.vertx.codegen.testmodel.DataObjectWithValues) {
+class DataObjectWithValues(val asJava: JDataObjectWithValues) {
   def setBooleanValue(value:Boolean) = {
     asJava.setBooleanValue(value)
     this
@@ -98,13 +99,12 @@ class DataObjectWithValues(val asJava: io.vertx.codegen.testmodel.DataObjectWith
 }
 
 object DataObjectWithValues {
-  type DataObjectWithValuesJava = io.vertx.codegen.testmodel.DataObjectWithValues
   
   def apply() = {
-    new DataObjectWithValues(new DataObjectWithValuesJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithValues(new JDataObjectWithValues(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DataObjectWithValuesJava) = {
+  def apply(t: JDataObjectWithValues) = {
     if(t != null)
       new DataObjectWithValues(t)
     else
@@ -113,7 +113,7 @@ object DataObjectWithValues {
   
   def fromJson(json: JsonObject):DataObjectWithValues = {
     if(json != null)
-      new DataObjectWithValues(new DataObjectWithValuesJava(json))
+      new DataObjectWithValues(new JDataObjectWithValues(json))
     else
       null
   }

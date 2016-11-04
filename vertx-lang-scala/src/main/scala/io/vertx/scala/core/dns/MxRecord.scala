@@ -45,7 +45,7 @@ class MxRecord(private val _asJava: io.vertx.core.dns.MxRecord) {
 
 object MxRecord {
 
-  def apply(_asJava: io.vertx.core.dns.MxRecord): io.vertx.scala.core.dns.MxRecord =
-    new io.vertx.scala.core.dns.MxRecord(_asJava)
+  def apply(_asJava: io.vertx.core.dns.MxRecord): MxRecord =
+    new MxRecord(_asJava)
 
 }

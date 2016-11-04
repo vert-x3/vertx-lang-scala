@@ -19,39 +19,44 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
 
 /**
   * Represents an file upload from an HTML FORM.
   */
 class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
-    extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] {
+    extends ReadStream[Buffer] {
 
   def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def exceptionHandler(handler: Throwable => Unit): HttpServerFileUpload = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def handler(handler: Buffer => Unit): HttpServerFileUpload = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def endHandler(endHandler: () => Unit): HttpServerFileUpload = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
-  def pause(): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def pause(): HttpServerFileUpload = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def resume(): HttpServerFileUpload = {
     _asJava.resume()
     this
   }
@@ -60,7 +65,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
     * Stream the content of this upload to the given file on storage.
     * @param filename the name of the file
     */
-  def streamToFileSystem(filename: String): io.vertx.scala.core.http.HttpServerFileUpload = {
+  def streamToFileSystem(filename: String): HttpServerFileUpload = {
     _asJava.streamToFileSystem(filename)
     this
   }
@@ -120,7 +125,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
 
 object HttpServerFileUpload {
 
-  def apply(_asJava: io.vertx.core.http.HttpServerFileUpload): io.vertx.scala.core.http.HttpServerFileUpload =
-    new io.vertx.scala.core.http.HttpServerFileUpload(_asJava)
+  def apply(_asJava: io.vertx.core.http.HttpServerFileUpload): HttpServerFileUpload =
+    new HttpServerFileUpload(_asJava)
 
 }

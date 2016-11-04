@@ -1,40 +1,35 @@
-@declare{'writeMethodParams'}
-	@foreach{param : params}
-		@if{param.name.equals("type")}
-			`@{param.name}`: @{toScalaType(param.type)}
-		@end{}
-		@if{!param.name.equals("type")}
-			@{param.name}: @{toScalaType(param.type)}
-		@end{}
-	@end{', '}
-@end{}
+@code{
+  def writeTypeParamsWithVariance(typeParams) {
+    var ret = "";
+    var first = true;
+    if(typeParams.size > 0) {
+      ret += '[';
+    }
+    for(t : typeParams) {
+      if(!first) {
+        ret += ", ";
+      }
+      else {
+        first = false;
+      }
+      ret += t.name;
+    }
+    if(typeParams.size > 0) {
+          ret += ']';
+        }
+    return ret;
+  }
 
-@declare{'writeTypeParamsWithVariance'}
-	@if{typeParams.size() > 0}
-		[@foreach{t: typeParams}@{t.name}@end{', '}]
-	@end{}
-@end{}
+  def writeType(type) {
+    return helper.getSimpleName(type.raw.name)+(writeTypeParamsWithVariance(typeParams));
+  }
 
-@declare{'writeTypeParamsWithoutVariance'}
-	@if{typeParams.size() > 0}
-		[@foreach{t: typeParams}@{t.name}@end{', '}]
-	@end{}
-@end{}
+  def writeImplType(type) {
+    return helper.getSimpleName(type.raw.name)+"Impl"+(writeTypeParamsWithVariance(typeParams));
+  }
 
-@declare{'writeType'}
-	@{helper.getSimpleName(type.raw.name)}@includeNamed{'writeTypeParamsWithVariance'}
-@end{}
+  def writeDelegateType(type) {
+    return type.raw.name+(writeTypeParamsWithVariance(typeParams));
+  }
 
-@declare{'writeImplType'}
-	@{helper.getSimpleName(type.raw.name)}Impl@includeNamed{'writeTypeParamsWithVariance'}
-@end{}
-
-@declare{'writeDelegateType'}
-	@{type.raw.name}@includeNamed{'writeTypeParamsWithoutVariance'}
-@end{}
-
-@declare{'writeTypeParams'}
-	@foreach{typeParam : typeParams}
-		[@{typeParam.name}]
-	@end{}
-@end{}
+}

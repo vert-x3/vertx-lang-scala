@@ -14,7 +14,7 @@ libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0-SNAPSHOT
 ----
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala_2.11</artifactId>
+  <artifactId>vertx-lang-scala_2.12</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 </dependency>
 ----
@@ -23,5 +23,5 @@ libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0-SNAPSHOT
 
 [source,groovy,subs="+attributes"]
 ----
-compile "io.vertx:vertx-lang-scala_2.11:3.4.0-SNAPSHOT"
+compile "io.vertx:vertx-lang-scala_2.12:3.4.0-SNAPSHOT"
 ----

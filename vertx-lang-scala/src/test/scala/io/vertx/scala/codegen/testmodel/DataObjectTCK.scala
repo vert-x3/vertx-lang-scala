@@ -69,7 +69,7 @@ class DataObjectTCK(private val _asJava: io.vertx.codegen.testmodel.DataObjectTC
 
 object DataObjectTCK {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.DataObjectTCK): io.vertx.scala.codegen.testmodel.DataObjectTCK =
-    new io.vertx.scala.codegen.testmodel.DataObjectTCK(_asJava)
+  def apply(_asJava: io.vertx.codegen.testmodel.DataObjectTCK): DataObjectTCK =
+    new DataObjectTCK(_asJava)
 
 }
