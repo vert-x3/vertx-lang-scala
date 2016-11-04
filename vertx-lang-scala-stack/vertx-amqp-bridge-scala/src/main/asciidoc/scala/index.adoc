@@ -40,6 +40,8 @@ to configure various options such as for using SSL connections.
 [source,scala]
 ----
 import io.vertx.scala.amqpbridge.AmqpBridge
+import scala.util.Failure
+import scala.util.Success
 var bridge = AmqpBridge.create(vertx)
 // Start the bridge, then use the event loop thread to process things thereafter.
 bridge.startFuture("localhost", 5672).onComplete{
@@ -59,6 +61,8 @@ messages.
 [source,scala]
 ----
 import io.vertx.scala.amqpbridge.AmqpBridge
+import scala.util.Failure
+import scala.util.Success
 var bridge = AmqpBridge.create(vertx)
 // Start the bridge, then use the event loop thread to process things thereafter.
 bridge.startFuture("localhost", 5672).onComplete{
@@ -121,11 +125,11 @@ message could look something like:
 
 [source,scala]
 ----
-var applicationProperties = todo-renderJsonObject
-applicationProperties.put(name, "value")
+var applicationProperties = new io.vertx.core.json.JsonObject()
+applicationProperties.put("name", "value")
 
-var amqpMsgPayload = todo-renderJsonObject
-amqpMsgPayload.put(application_properties, applicationProperties)
+var amqpMsgPayload = new io.vertx.core.json.JsonObject()
+amqpMsgPayload.put("application_properties", applicationProperties)
 
 producer.send(amqpMsgPayload)
 
@@ -138,9 +142,9 @@ retrieving an application-property from a received message might look like:
 [source,scala]
 ----
 // Check the application properties section was present before use, it may not be
-var appProps = amqpMsgPayload.application_properties
+var appProps = amqpMsgPayload.getValue("application_properties")
 if (appProps != null) {
-  var propValue = appProps.propertyName
+  var propValue = appProps.getValue("propertyName")
 }
 
 ----
@@ -206,6 +210,8 @@ certificate:
 [source,scala]
 ----
 import io.vertx.scala.amqpbridge.AmqpBridge
+import scala.util.Failure
+import scala.util.Success
 var bridgeOptions = AmqpBridgeOptions()
 bridgeOptions.setSsl(true)
 
@@ -230,6 +236,8 @@ also a PKCS12 based key store containing an SSL key and certificate the server c
 [source,scala]
 ----
 import io.vertx.scala.amqpbridge.AmqpBridge
+import scala.util.Failure
+import scala.util.Success
 var bridgeOptions = AmqpBridgeOptions()
 bridgeOptions.setSsl(true)
 
@@ -303,8 +311,10 @@ The following is a basic example of sending a message and providing a reply-hand
 
 [source,scala]
 ----
-var amqpMsgPayload = todo-renderJsonObject
-amqpMsgPayload.put(body, "myRequest")
+import scala.util.Failure
+import scala.util.Success
+var amqpMsgPayload = new io.vertx.core.json.JsonObject()
+amqpMsgPayload.put("body", "myRequest")
 
 producer.sendFuture(amqpMsgPayload).onComplete{
   case Success(result) => println("Success")
@@ -356,8 +366,8 @@ consumer.handler((msg: io.vertx.scala.core.eventbus.Message<io.vertx.scala.core.
   // ...do something with received message...then reply...
   var replyAddress = msg.replyAddress()
   if (replyAddress != null) {
-    var amqpReplyMessagePayload = todo-renderJsonObject
-    amqpReplyMessagePayload.put(body, "myResponse")
+    var amqpReplyMessagePayload = new io.vertx.core.json.JsonObject()
+    amqpReplyMessagePayload.put("body", "myResponse")
 
     msg.reply(amqpReplyMessagePayload)
   }

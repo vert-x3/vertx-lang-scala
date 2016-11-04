@@ -52,7 +52,7 @@ Here's an example of creating a JWT auth provider:
 ----
 import io.vertx.scala.ext.auth.jwt.JWTAuth
 
-var config = todo-renderJsonObject
+var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
 
 var provider = JWTAuth.create(vertx, config)
 
@@ -66,13 +66,13 @@ do:
 ----
 import io.vertx.scala.ext.auth.jwt.JWTAuth
 
-var config = todo-renderJsonObject
+var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
 
 var provider = JWTAuth.create(vertx, config)
 
 // on the verify endpoint once you verify the identity of the user by its username/password
 if ("paulo" == username && "super_secret" == password) {
-  var token = provider.generateToken(todo-renderJsonObject, JWTOptions())
+  var token = provider.generateToken(new io.vertx.core.json.JsonObject().put("sub", "paulo"), JWTOptions())
   // now for any request to protected resources you should pass this string in the HTTP header Authorization as:
   // Authorization: Bearer <token>
 }
@@ -133,7 +133,7 @@ case all you need to have is a public key im PEM format.
 ----
 import io.vertx.scala.ext.auth.jwt.JWTAuth
 
-var config = todo-renderJsonObject
+var config = new io.vertx.core.json.JsonObject().put("public-key", "BASE64-ENCODED-PUBLIC_KEY")
 var provider = JWTAuth.create(vertx, config)
 
 ----

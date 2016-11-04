@@ -65,6 +65,8 @@ Getting the map is asynchronous and the result is returned to you in the handler
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 var sd = vertx.sharedData()
 
@@ -73,7 +75,8 @@ sd.getClusterWideMapFuture("mymap").onComplete{
     var map = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -87,13 +90,16 @@ The actual put is asynchronous and the handler is notified once it is complete:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 map.putFuture("foo", "bar").onComplete{
   case Success(result) => {
     // Successfully put the value
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -107,6 +113,8 @@ The actual get is asynchronous and the handler is notified with the result some 
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 map.getFuture("foo").onComplete{
   case Success(result) => {
@@ -114,7 +122,8 @@ map.getFuture("foo").onComplete{
     var val = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -146,6 +155,8 @@ another caller can obtain it.
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 sd.getLockFuture("mylock").onComplete{
   case Success(result) => {
     // Got the lock!
@@ -159,7 +170,8 @@ sd.getLockFuture("mylock").onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -169,6 +181,8 @@ with a failure:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
   case Success(result) => {
     // Got the lock!
@@ -176,7 +190,8 @@ sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -191,12 +206,15 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 sd.getCounterFuture("mycounter").onComplete{
   case Success(result) => {
     var counter = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----

@@ -105,6 +105,15 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
+    * Declare an exchange with additional parameters such as dead lettering or an alternate exchnage.
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
+  def exchangeDeclareFuture(exchange: String, `type`: String, durable: Boolean, autoDelete: Boolean, config: Map[String, String]): concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
+    _asJava.exchangeDeclare(exchange, `type`, durable, autoDelete, config.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  /**
     * Delete an exchange, without regard for whether it is in use or not.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def exchangeDeleteFuture(exchange: String): concurrent.Future[Unit] = {
@@ -114,7 +123,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    *  Bind an exchange to an exchange.
+    * Bind an exchange to an exchange.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def exchangeBindFuture(destination: String, source: String, routingKey: String): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))

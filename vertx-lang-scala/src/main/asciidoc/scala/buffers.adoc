@@ -109,9 +109,9 @@ import io.vertx.scala.core.buffer.Buffer
 var buff = Buffer.buffer()
 var i = 0
 while(i < buff.length()){
-  i += 4
   println(s"int value at ${i} is ${buff.getInt(i)}")
-}
+
+  4}
 
 
 ----

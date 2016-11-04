@@ -49,6 +49,8 @@ Sending packets is as easy as shown here:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
@@ -84,6 +86,8 @@ So to listen on a specific address and port you would do something like shown he
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -92,7 +96,8 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -119,6 +124,8 @@ This is show here:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
@@ -152,6 +159,8 @@ would do something like shown here:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -166,7 +175,8 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -181,6 +191,8 @@ This is shown here:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -201,11 +213,13 @@ socket.listenFuture(1234, "0.0.0.0").onComplete{
         }
       }
       case Failure(cause) => {
-        println(s"$cause")}
+        println(s"$cause")
+      }
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -224,6 +238,8 @@ like shown here:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 
 // Some code

@@ -11,6 +11,8 @@ Here's an example of an asynchronous copy of a file:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var fs = vertx.fileSystem()
 
 // Copy file from foo.txt to bar.txt
@@ -19,7 +21,8 @@ fs.copyFuture("foo.txt", "bar.txt").onComplete{
     // Copied ok!
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -46,6 +49,8 @@ Let's see a couple of examples using asynchronous methods:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
@@ -56,7 +61,8 @@ vertx.fileSystem().readFileFuture("target/classes/readme.txt").onComplete{
     println(result)
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Copy a file
@@ -65,7 +71,8 @@ vertx.fileSystem().copyFuture("target/classes/readme.txt", "target/classes/readm
     println("File copied")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Write a file
@@ -74,7 +81,8 @@ vertx.fileSystem().writeFileFuture("target/classes/hello.txt", Buffer.buffer("He
     println("File written")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Check existence and delete
@@ -93,13 +101,16 @@ You open an `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFi
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 var options = OpenOptions()
 fileSystem.openFuture("myfile.txt", options).onComplete{
   case Success(result) => {
     var file = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -125,6 +136,8 @@ Here is an example of random access writes:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
@@ -132,20 +145,22 @@ vertx.fileSystem().openFuture("target/classes/hello.txt", OpenOptions()).onCompl
   case Success(result) => {
     var file = result
     var buff = Buffer.buffer("foo")
-    for ( i <- 0 to 5) {
+    for ( i <- 0 until 5) {
       file.writeFuture(buff, buff.length() * i).onComplete{
         case Success(result) => {
           println("Written ok!")
           // etc
         }
         case Failure(cause) => {
-          println(s"$cause")}
+          println(s"$cause")
+        }
       }
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -168,6 +183,8 @@ Here's an example of random access reads:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
@@ -175,19 +192,21 @@ vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()
   case Success(result) => {
     var file = result
     var buff = Buffer.buffer(1000)
-    for ( i <- 0 to 10) {
+    for ( i <- 0 until 10) {
       file.readFuture(buff, i * 100, i * 100, 100).onComplete{
         case Success(result) => {
           println("Read ok!")
         }
         case Failure(cause) => {
-          println(s"$cause")}
+          println(s"$cause")
+        }
       }
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -222,8 +241,10 @@ copy the content to another `AsyncFile`:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.streams.Pump
+import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
 var output = vertx.fileSystem().openBlocking("target/classes/plagiary.txt", OpenOptions())
 
@@ -236,7 +257,8 @@ vertx.fileSystem().openFuture("target/classes/les_miserables.txt", OpenOptions()
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
