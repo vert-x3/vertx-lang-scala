@@ -18,13 +18,14 @@ package io.vertx.scala.core
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 
 /**
   * Options for configuring a verticle deployment.
   * 
   */
 
-class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
+class DeploymentOptions(val asJava: JDeploymentOptions) {
 
   /**
     * Set the JSON configuration that will be passed to the verticle(s) when it's deployed
@@ -152,13 +153,12 @@ class DeploymentOptions(val asJava: io.vertx.core.DeploymentOptions) {
 }
 
 object DeploymentOptions {
-  type DeploymentOptionsJava = io.vertx.core.DeploymentOptions
   
   def apply() = {
-    new DeploymentOptions(new DeploymentOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DeploymentOptions(new JDeploymentOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DeploymentOptionsJava) = {
+  def apply(t: JDeploymentOptions) = {
     if(t != null)
       new DeploymentOptions(t)
     else
@@ -167,7 +167,7 @@ object DeploymentOptions {
   
   def fromJson(json: JsonObject):DeploymentOptions = {
     if(json != null)
-      new DeploymentOptions(new DeploymentOptionsJava(json))
+      new DeploymentOptions(new JDeploymentOptions(json))
     else
       null
   }

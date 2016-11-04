@@ -19,7 +19,11 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{WebSocket => JWebSocket}
 import io.vertx.core.Handler
 
 /**
@@ -32,31 +36,31 @@ import io.vertx.core.Handler
   * set before setting the handler.
   */
 class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream) 
-    extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.http.WebSocket] {
+    extends ReadStream[WebSocket] {
 
   def asJava: io.vertx.core.http.WebSocketStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.http.WebSocketStream = {
+  def exceptionHandler(handler: Throwable => Unit): WebSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.WebSocketStream = {
+  def handler(handler: WebSocket => Unit): WebSocketStream = {
     _asJava.handler(funcToMappedHandler(WebSocket.apply)(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.http.WebSocketStream = {
+  def pause(): WebSocketStream = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.http.WebSocketStream = {
+  def resume(): WebSocketStream = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.http.WebSocketStream = {
+  def endHandler(endHandler: () => Unit): WebSocketStream = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
@@ -65,7 +69,7 @@ class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream)
 
 object WebSocketStream {
 
-  def apply(_asJava: io.vertx.core.http.WebSocketStream): io.vertx.scala.core.http.WebSocketStream =
-    new io.vertx.scala.core.http.WebSocketStream(_asJava)
+  def apply(_asJava: io.vertx.core.http.WebSocketStream): WebSocketStream =
+    new WebSocketStream(_asJava)
 
 }

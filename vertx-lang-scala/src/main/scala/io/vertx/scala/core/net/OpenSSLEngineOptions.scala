@@ -18,12 +18,13 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 
 /**
   * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use OpenSsl.
   */
 
-class OpenSSLEngineOptions(val asJava: io.vertx.core.net.OpenSSLEngineOptions) {
+class OpenSSLEngineOptions(val asJava: JOpenSSLEngineOptions) {
 
   /**
     */
@@ -44,13 +45,12 @@ class OpenSSLEngineOptions(val asJava: io.vertx.core.net.OpenSSLEngineOptions) {
 }
 
 object OpenSSLEngineOptions {
-  type OpenSSLEngineOptionsJava = io.vertx.core.net.OpenSSLEngineOptions
   
   def apply() = {
-    new OpenSSLEngineOptions(new OpenSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new OpenSSLEngineOptions(new JOpenSSLEngineOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: OpenSSLEngineOptionsJava) = {
+  def apply(t: JOpenSSLEngineOptions) = {
     if(t != null)
       new OpenSSLEngineOptions(t)
     else
@@ -59,7 +59,7 @@ object OpenSSLEngineOptions {
   
   def fromJson(json: JsonObject):OpenSSLEngineOptions = {
     if(json != null)
-      new OpenSSLEngineOptions(new OpenSSLEngineOptionsJava(json))
+      new OpenSSLEngineOptions(new JOpenSSLEngineOptions(json))
     else
       null
   }

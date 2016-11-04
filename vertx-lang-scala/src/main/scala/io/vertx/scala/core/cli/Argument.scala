@@ -18,13 +18,14 @@ package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.cli.{Argument => JArgument}
 
 /**
   * Defines a command line argument. Unlike options, argument don't have names and are identified using an index. The
   * first index is 0 (because we are in the computer world).
   */
 
-class Argument(val asJava: io.vertx.core.cli.Argument) {
+class Argument(val asJava: JArgument) {
 
   /**
     * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
@@ -105,13 +106,12 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
 }
 
 object Argument {
-  type ArgumentJava = io.vertx.core.cli.Argument
   
   def apply() = {
-    new Argument(new ArgumentJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Argument(new JArgument(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: ArgumentJava) = {
+  def apply(t: JArgument) = {
     if(t != null)
       new Argument(t)
     else
@@ -120,7 +120,7 @@ object Argument {
   
   def fromJson(json: JsonObject):Argument = {
     if(json != null)
-      new Argument(new ArgumentJava(json))
+      new Argument(new JArgument(json))
     else
       null
   }

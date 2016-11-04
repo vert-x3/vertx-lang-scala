@@ -19,8 +19,10 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 import io.vertx.codegen.testmodel.TestDataObject
 import java.util.function.Function
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.core.json.JsonObject
@@ -43,7 +45,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithVoidParam(asJavaFunction(func))
   }
 
-  def methodWithUserTypeParam(arg: io.vertx.scala.codegen.testmodel.RefedInterface1, func: io.vertx.codegen.testmodel.RefedInterface1 => java.lang.String): String = {
+  def methodWithUserTypeParam(arg: RefedInterface1, func: io.vertx.codegen.testmodel.RefedInterface1 => java.lang.String): String = {
     _asJava.methodWithUserTypeParam(arg.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], asJavaFunction(func))
   }
 
@@ -131,7 +133,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
 
 object FunctionParamTCK {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.FunctionParamTCK): io.vertx.scala.codegen.testmodel.FunctionParamTCK =
-    new io.vertx.scala.codegen.testmodel.FunctionParamTCK(_asJava)
+  def apply(_asJava: io.vertx.codegen.testmodel.FunctionParamTCK): FunctionParamTCK =
+    new FunctionParamTCK(_asJava)
 
 }

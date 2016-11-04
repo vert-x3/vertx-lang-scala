@@ -18,25 +18,25 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 
 /**
   * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use the JDK ssl engine implementation.
   */
 
-class JdkSSLEngineOptions(val asJava: io.vertx.core.net.JdkSSLEngineOptions) {
+class JdkSSLEngineOptions(val asJava: JJdkSSLEngineOptions) {
 
   /**
     */
 }
 
 object JdkSSLEngineOptions {
-  type JdkSSLEngineOptionsJava = io.vertx.core.net.JdkSSLEngineOptions
   
   def apply() = {
-    new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new JdkSSLEngineOptions(new JJdkSSLEngineOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: JdkSSLEngineOptionsJava) = {
+  def apply(t: JJdkSSLEngineOptions) = {
     if(t != null)
       new JdkSSLEngineOptions(t)
     else
@@ -45,7 +45,7 @@ object JdkSSLEngineOptions {
   
   def fromJson(json: JsonObject):JdkSSLEngineOptions = {
     if(json != null)
-      new JdkSSLEngineOptions(new JdkSSLEngineOptionsJava(json))
+      new JdkSSLEngineOptions(new JJdkSSLEngineOptions(json))
     else
       null
   }

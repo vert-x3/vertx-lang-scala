@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 /**
   * HTTP2 settings, the settings is initialized with the default HTTP/2 values.
@@ -26,7 +27,7 @@ import scala.collection.JavaConversions._
   * protocol extensions.
   */
 
-class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
+class Http2Settings(val asJava: JHttp2Settings) {
 
   /**
     * Set  HTTP/2 setting.
@@ -96,13 +97,12 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
 }
 
 object Http2Settings {
-  type Http2SettingsJava = io.vertx.core.http.Http2Settings
   
   def apply() = {
-    new Http2Settings(new Http2SettingsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Http2Settings(new JHttp2Settings(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: Http2SettingsJava) = {
+  def apply(t: JHttp2Settings) = {
     if(t != null)
       new Http2Settings(t)
     else
@@ -111,7 +111,7 @@ object Http2Settings {
   
   def fromJson(json: JsonObject):Http2Settings = {
     if(json != null)
-      new Http2Settings(new Http2SettingsJava(json))
+      new Http2Settings(new JHttp2Settings(json))
     else
       null
   }

@@ -18,11 +18,12 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
 
 /**
   */
 
-class DataObjectWithLists(val asJava: io.vertx.codegen.testmodel.DataObjectWithLists) {
+class DataObjectWithLists(val asJava: JDataObjectWithLists) {
   def setBooleanValues(value:scala.collection.mutable.Buffer[Boolean]) = {
     asJava.setBooleanValues(value.map(Boolean.box))
     this
@@ -74,13 +75,12 @@ class DataObjectWithLists(val asJava: io.vertx.codegen.testmodel.DataObjectWithL
 }
 
 object DataObjectWithLists {
-  type DataObjectWithListsJava = io.vertx.codegen.testmodel.DataObjectWithLists
   
   def apply() = {
-    new DataObjectWithLists(new DataObjectWithListsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithLists(new JDataObjectWithLists(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DataObjectWithListsJava) = {
+  def apply(t: JDataObjectWithLists) = {
     if(t != null)
       new DataObjectWithLists(t)
     else
@@ -89,7 +89,7 @@ object DataObjectWithLists {
   
   def fromJson(json: JsonObject):DataObjectWithLists = {
     if(json != null)
-      new DataObjectWithLists(new DataObjectWithListsJava(json))
+      new DataObjectWithLists(new JDataObjectWithLists(json))
     else
       null
   }

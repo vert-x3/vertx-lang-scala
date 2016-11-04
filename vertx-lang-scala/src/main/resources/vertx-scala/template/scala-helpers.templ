@@ -1,5 +1,9 @@
 @code{
 
+  def toAliasedTypeName(type) {
+    return 'J'+type.simpleName;
+  }
+
   def toScalaType(type) {
     var nullable = type.isNullable;
     var ret = '';
@@ -82,7 +86,7 @@
       else
         ret = 'io.vertx.core.AsyncResult [' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_API) {
-      var retVal = helper.getNonGenericType(type.translateName("scala"));
+      var retVal = helper.getNonGenericType(type.simpleName);
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
         retVal += '[';
         var first = true;

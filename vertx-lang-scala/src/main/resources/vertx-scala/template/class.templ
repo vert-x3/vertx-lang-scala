@@ -31,8 +31,10 @@ import scala.collection.JavaConverters._\n
 @foreach{importedType : importedTypes}
 	@if{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
+import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.simpleName+" => "+toAliasedTypeName(importedType)+"}\n"}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
+import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.simpleName+" => "+toAliasedTypeName(importedType)+"}\n"}
 	@else{importedType.kind != CLASS_ASYNC_RESULT &&
 	      !importedType.packageName.equals("java.lang") &&
         importedType.kind != CLASS_LIST &&
@@ -78,9 +80,9 @@ import @{importedType}\n
   */\n
 @end{}
 @if{concrete}
-	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
+	class @{writeType(type);}(private val _asJava: @{writeDelegateType(type)})
 @else{}
-	trait @includeNamed{'writeType'}
+	trait @{writeType(type);}
 @end{}
 
 @comment{"## Inheritance"}
@@ -101,19 +103,19 @@ import @{importedType}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
+	  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
 	@if{shouldMethodReturnAFuture(method)}
-	  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 		    promiseAndHandler._2.future\n
 	  }\n
 	@else{}
-	  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
 	@end{}
@@ -125,10 +127,10 @@ import @{importedType}\n
 @else{}
 	object @{type.raw.simpleName} {\n
 	\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
-		    new @includeNamed{'writeImplType'}(_asJava)\n
+		  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+		    new @{writeImplType(type)}(_asJava)\n
 		\n
-		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n
+		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
 			@includeNamed{'classbody.templ'; indentation='  '}
 		  }\n\n
 	}\n

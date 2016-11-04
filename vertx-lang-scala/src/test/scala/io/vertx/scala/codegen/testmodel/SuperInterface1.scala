@@ -38,7 +38,7 @@ class SuperInterface1(private val _asJava: io.vertx.codegen.testmodel.SuperInter
 
 object SuperInterface1 {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.SuperInterface1): io.vertx.scala.codegen.testmodel.SuperInterface1 =
-    new io.vertx.scala.codegen.testmodel.SuperInterface1(_asJava)
+  def apply(_asJava: io.vertx.codegen.testmodel.SuperInterface1): SuperInterface1 =
+    new SuperInterface1(_asJava)
 
 }

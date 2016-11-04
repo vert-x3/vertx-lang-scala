@@ -34,7 +34,7 @@ class SubInterface(private val _asJava: com.acme.pkg.sub.SubInterface) {
 
 object SubInterface {
 
-  def apply(_asJava: com.acme.pkg.sub.SubInterface): com.acme.scala.pkg.sub.SubInterface =
-    new com.acme.scala.pkg.sub.SubInterface(_asJava)
+  def apply(_asJava: com.acme.pkg.sub.SubInterface): SubInterface =
+    new SubInterface(_asJava)
 
 }

@@ -108,7 +108,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
 object Counter {
 
-  def apply(_asJava: io.vertx.core.shareddata.Counter): io.vertx.scala.core.shareddata.Counter =
-    new io.vertx.scala.core.shareddata.Counter(_asJava)
+  def apply(_asJava: io.vertx.core.shareddata.Counter): Counter =
+    new Counter(_asJava)
 
 }

@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.cli.{Option => JOption}
 
 /**
   * Models command line options. Options are values passed to a command line interface using -x or --x. Supported
@@ -26,7 +27,7 @@ import scala.collection.JavaConversions._
   * Short name is generally used with a single dash, while long name requires a double-dash.
   */
 
-class Option(val asJava: io.vertx.core.cli.Option) {
+class Option(val asJava: JOption) {
 
   /**
     * Sets te arg name for this option.
@@ -174,13 +175,12 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 }
 
 object Option {
-  type OptionJava = io.vertx.core.cli.Option
   
   def apply() = {
-    new Option(new OptionJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Option(new JOption(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: OptionJava) = {
+  def apply(t: JOption) = {
     if(t != null)
       new Option(t)
     else
@@ -189,7 +189,7 @@ object Option {
   
   def fromJson(json: JsonObject):Option = {
     if(json != null)
-      new Option(new OptionJava(json))
+      new Option(new JOption(json))
     else
       null
   }

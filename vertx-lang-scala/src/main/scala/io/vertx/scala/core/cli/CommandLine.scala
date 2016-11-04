@@ -20,6 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.cli.Option
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import io.vertx.core.cli.{CLI => JCLI}
 import io.vertx.core.cli.Argument
 
 /**
@@ -34,7 +36,7 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
   /**
     * @return the model of this command line object.
     */
-  def cli(): io.vertx.scala.core.cli.CLI = {
+  def cli(): CLI = {
     CLI.apply(_asJava.cli())
   }
 
@@ -185,10 +187,10 @@ class CommandLine(private val _asJava: io.vertx.core.cli.CommandLine) {
 
 object CommandLine {
 
-  def apply(_asJava: io.vertx.core.cli.CommandLine): io.vertx.scala.core.cli.CommandLine =
-    new io.vertx.scala.core.cli.CommandLine(_asJava)
+  def apply(_asJava: io.vertx.core.cli.CommandLine): CommandLine =
+    new CommandLine(_asJava)
 
-  def create(cli: io.vertx.scala.core.cli.CLI): io.vertx.scala.core.cli.CommandLine = {
+  def create(cli: CLI): CommandLine = {
     CommandLine.apply(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
   }
 

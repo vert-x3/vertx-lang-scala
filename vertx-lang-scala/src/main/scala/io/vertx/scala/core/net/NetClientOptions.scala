@@ -18,12 +18,13 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
   */
 
-class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
+class NetClientOptions(val asJava: JNetClientOptions) {
 
   /**
     * Set the connect timeout
@@ -351,13 +352,12 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
 }
 
 object NetClientOptions {
-  type NetClientOptionsJava = io.vertx.core.net.NetClientOptions
   
   def apply() = {
-    new NetClientOptions(new NetClientOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new NetClientOptions(new JNetClientOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: NetClientOptionsJava) = {
+  def apply(t: JNetClientOptions) = {
     if(t != null)
       new NetClientOptions(t)
     else
@@ -366,7 +366,7 @@ object NetClientOptions {
   
   def fromJson(json: JsonObject):NetClientOptions = {
     if(json != null)
-      new NetClientOptions(new NetClientOptionsJava(json))
+      new NetClientOptions(new JNetClientOptions(json))
     else
       null
   }

@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 
 /**
   * Certificate Authority options configuring certificates based on
@@ -51,7 +52,7 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PemTrustOptions(val asJava: io.vertx.core.net.PemTrustOptions) {
+class PemTrustOptions(val asJava: JPemTrustOptions) {
 
   /**
     * Add a certificate path
@@ -77,13 +78,12 @@ class PemTrustOptions(val asJava: io.vertx.core.net.PemTrustOptions) {
 }
 
 object PemTrustOptions {
-  type PemTrustOptionsJava = io.vertx.core.net.PemTrustOptions
   
   def apply() = {
-    new PemTrustOptions(new PemTrustOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PemTrustOptions(new JPemTrustOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: PemTrustOptionsJava) = {
+  def apply(t: JPemTrustOptions) = {
     if(t != null)
       new PemTrustOptions(t)
     else
@@ -92,7 +92,7 @@ object PemTrustOptions {
   
   def fromJson(json: JsonObject):PemTrustOptions = {
     if(json != null)
-      new PemTrustOptions(new PemTrustOptionsJava(json))
+      new PemTrustOptions(new JPemTrustOptions(json))
     else
       null
   }

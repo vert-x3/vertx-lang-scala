@@ -88,7 +88,7 @@ class FileProps(private val _asJava: io.vertx.core.file.FileProps) {
 
 object FileProps {
 
-  def apply(_asJava: io.vertx.core.file.FileProps): io.vertx.scala.core.file.FileProps =
-    new io.vertx.scala.core.file.FileProps(_asJava)
+  def apply(_asJava: io.vertx.core.file.FileProps): FileProps =
+    new FileProps(_asJava)
 
 }

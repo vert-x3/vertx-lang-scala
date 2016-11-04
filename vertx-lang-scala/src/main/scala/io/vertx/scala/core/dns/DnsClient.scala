@@ -19,7 +19,10 @@ package io.vertx.scala.core.dns
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.dns.{DnsClient => JDnsClient}
+import io.vertx.core.dns.{MxRecord => JMxRecord}
 import io.vertx.core.Handler
+import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Provides a way to asynchronously lookup information from DNS servers.
@@ -101,8 +104,8 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param name the name for which the MX records should be resolved
     * @return the future representing the async operation. The future will get notified with a List that contains all resolved [[MxRecord]]s, sorted by their [[MxRecord#priority()]]. If non was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveMXFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord.apply)))
+  def resolveMXFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[MxRecord]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.MxRecord],scala.collection.mutable.Buffer[MxRecord]]((x => if (x == null) null else x.asScala.map(MxRecord.apply)))
     _asJava.resolveMX(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -145,8 +148,8 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
     * @param name the name for which the SRV records should be resolved
     * @return the future representing the async operation. The future will get notified with a List that contains all resolved [[SrvRecord]]s. If none was found it will get notified with an empty [[scala.collection.immutable.List]]. If an error accours it will get failed.
     */
-  def resolveSRVFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[io.vertx.scala.core.dns.SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord.apply)))
+  def resolveSRVFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[SrvRecord]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.dns.SrvRecord],scala.collection.mutable.Buffer[SrvRecord]]((x => if (x == null) null else x.asScala.map(SrvRecord.apply)))
     _asJava.resolveSRV(name, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -167,7 +170,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
 
 object DnsClient {
 
-  def apply(_asJava: io.vertx.core.dns.DnsClient): io.vertx.scala.core.dns.DnsClient =
-    new io.vertx.scala.core.dns.DnsClient(_asJava)
+  def apply(_asJava: io.vertx.core.dns.DnsClient): DnsClient =
+    new DnsClient(_asJava)
 
 }

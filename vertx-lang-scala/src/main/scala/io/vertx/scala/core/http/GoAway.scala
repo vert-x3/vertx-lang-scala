@@ -18,12 +18,13 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.http.{GoAway => JGoAway}
 
 /**
   * A  frame.
   */
 
-class GoAway(val asJava: io.vertx.core.http.GoAway) {
+class GoAway(val asJava: JGoAway) {
 
   /**
     * Set the additional debug data
@@ -59,13 +60,12 @@ class GoAway(val asJava: io.vertx.core.http.GoAway) {
 }
 
 object GoAway {
-  type GoAwayJava = io.vertx.core.http.GoAway
   
   def apply() = {
-    new GoAway(new GoAwayJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new GoAway(new JGoAway(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: GoAwayJava) = {
+  def apply(t: JGoAway) = {
     if(t != null)
       new GoAway(t)
     else
@@ -74,7 +74,7 @@ object GoAway {
   
   def fromJson(json: JsonObject):GoAway = {
     if(json != null)
-      new GoAway(new GoAwayJava(json))
+      new GoAway(new JGoAway(json))
     else
       null
   }

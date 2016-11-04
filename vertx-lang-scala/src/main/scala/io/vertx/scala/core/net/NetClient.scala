@@ -19,8 +19,12 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.core.Handler
+import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * A TCP client.
@@ -31,7 +35,7 @@ import io.vertx.core.Handler
   * delay between attempts.
   */
 class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
-    extends io.vertx.scala.core.metrics.Measured {
+    extends Measured {
 
   def asJava: io.vertx.core.net.NetClient = _asJava
 
@@ -51,8 +55,8 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * @param port the port
     * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def connectFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.net.NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetSocket,io.vertx.scala.core.net.NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
+  def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
     _asJava.connect(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -71,7 +75,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object NetClient {
 
-  def apply(_asJava: io.vertx.core.net.NetClient): io.vertx.scala.core.net.NetClient =
-    new io.vertx.scala.core.net.NetClient(_asJava)
+  def apply(_asJava: io.vertx.core.net.NetClient): NetClient =
+    new NetClient(_asJava)
 
 }

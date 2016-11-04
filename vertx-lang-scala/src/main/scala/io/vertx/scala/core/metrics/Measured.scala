@@ -30,13 +30,13 @@ trait Measured {
   * Whether the metrics are enabled for this measured object
   * @return true if the metrics are enabled
   */
-  def isMetricsEnabled(): Boolean
+def isMetricsEnabled(): Boolean
 
 }
 
 object Measured {
 
-  def apply(_asJava: io.vertx.core.metrics.Measured): io.vertx.scala.core.metrics.Measured =
+  def apply(_asJava: io.vertx.core.metrics.Measured): Measured =
     new MeasuredImpl(_asJava)
 
   private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured {

@@ -18,11 +18,12 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 
 /**
   */
 
-class TestDataObject(val asJava: io.vertx.codegen.testmodel.TestDataObject) {
+class TestDataObject(val asJava: JTestDataObject) {
   def setBar(value:Int) = {
     asJava.setBar(value)
     this
@@ -47,13 +48,12 @@ class TestDataObject(val asJava: io.vertx.codegen.testmodel.TestDataObject) {
 }
 
 object TestDataObject {
-  type TestDataObjectJava = io.vertx.codegen.testmodel.TestDataObject
   
   def apply() = {
-    new TestDataObject(new TestDataObjectJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new TestDataObject(new JTestDataObject(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: TestDataObjectJava) = {
+  def apply(t: JTestDataObject) = {
     if(t != null)
       new TestDataObject(t)
     else
@@ -62,7 +62,7 @@ object TestDataObject {
   
   def fromJson(json: JsonObject):TestDataObject = {
     if(json != null)
-      new TestDataObject(new TestDataObjectJava(json))
+      new TestDataObject(new JTestDataObject(json))
     else
       null
   }

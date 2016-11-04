@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 
 /**
   * Key store options configuring a private key and its certificate based on
@@ -63,7 +64,7 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
+class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
 
   /**
     * Set the path to the certificate
@@ -111,13 +112,12 @@ class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
 }
 
 object PemKeyCertOptions {
-  type PemKeyCertOptionsJava = io.vertx.core.net.PemKeyCertOptions
   
   def apply() = {
-    new PemKeyCertOptions(new PemKeyCertOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PemKeyCertOptions(new JPemKeyCertOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: PemKeyCertOptionsJava) = {
+  def apply(t: JPemKeyCertOptions) = {
     if(t != null)
       new PemKeyCertOptions(t)
     else
@@ -126,7 +126,7 @@ object PemKeyCertOptions {
   
   def fromJson(json: JsonObject):PemKeyCertOptions = {
     if(json != null)
-      new PemKeyCertOptions(new PemKeyCertOptionsJava(json))
+      new PemKeyCertOptions(new JPemKeyCertOptions(json))
     else
       null
   }

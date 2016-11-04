@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Key or trust store options configuring private key and/or certificates based on Java Keystore files.
@@ -41,7 +42,7 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
+class JksOptions(val asJava: JJksOptions) {
 
   /**
     * Set the password for the key store
@@ -78,13 +79,12 @@ class JksOptions(val asJava: io.vertx.core.net.JksOptions) {
 }
 
 object JksOptions {
-  type JksOptionsJava = io.vertx.core.net.JksOptions
   
   def apply() = {
-    new JksOptions(new JksOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new JksOptions(new JJksOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: JksOptionsJava) = {
+  def apply(t: JJksOptions) = {
     if(t != null)
       new JksOptions(t)
     else
@@ -93,7 +93,7 @@ object JksOptions {
   
   def fromJson(json: JsonObject):JksOptions = {
     if(json != null)
-      new JksOptions(new JksOptionsJava(json))
+      new JksOptions(new JJksOptions(json))
     else
       null
   }

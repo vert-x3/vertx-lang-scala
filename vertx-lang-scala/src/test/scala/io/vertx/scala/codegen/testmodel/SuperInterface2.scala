@@ -26,13 +26,13 @@ trait SuperInterface2 {
 
   def asJava: java.lang.Object
 
-    def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit
+  def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit
 
 }
 
 object SuperInterface2 {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.SuperInterface2): io.vertx.scala.codegen.testmodel.SuperInterface2 =
+  def apply(_asJava: io.vertx.codegen.testmodel.SuperInterface2): SuperInterface2 =
     new SuperInterface2Impl(_asJava)
 
   private class SuperInterface2Impl(private val _asJava: io.vertx.codegen.testmodel.SuperInterface2) extends SuperInterface2 {

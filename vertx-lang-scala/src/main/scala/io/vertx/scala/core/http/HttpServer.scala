@@ -19,8 +19,16 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
+import io.vertx.core.http.{HttpServer => JHttpServer}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.Handler
+import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**
   * An HTTP and WebSockets server.
@@ -32,7 +40,7 @@ import io.vertx.core.Handler
   * WebSocket is passed to the handler.
   */
 class HttpServer(private val _asJava: io.vertx.core.http.HttpServer) 
-    extends io.vertx.scala.core.metrics.Measured {
+    extends Measured {
 
   def asJava: io.vertx.core.http.HttpServer = _asJava
 
@@ -49,7 +57,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
     * @return the request stream
     */
-  def requestStream(): io.vertx.scala.core.http.HttpServerRequestStream = {
+  def requestStream(): HttpServerRequestStream = {
     if (cached_0 == null) {
       cached_0=    HttpServerRequestStream.apply(_asJava.requestStream())
     }
@@ -61,7 +69,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to this handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def requestHandler(handler: io.vertx.scala.core.http.HttpServerRequest => Unit): io.vertx.scala.core.http.HttpServer = {
+  def requestHandler(handler: HttpServerRequest => Unit): HttpServer = {
     _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
@@ -70,7 +78,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * Set a connection handler for the server.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: io.vertx.scala.core.http.HttpConnection => Unit): io.vertx.scala.core.http.HttpServer = {
+  def connectionHandler(handler: HttpConnection => Unit): HttpServer = {
     _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
     this
   }
@@ -80,7 +88,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
     * @return the websocket stream
     */
-  def websocketStream(): io.vertx.scala.core.http.ServerWebSocketStream = {
+  def websocketStream(): ServerWebSocketStream = {
     if (cached_1 == null) {
       cached_1=    ServerWebSocketStream.apply(_asJava.websocketStream())
     }
@@ -92,7 +100,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketHandler(handler: io.vertx.scala.core.http.ServerWebSocket => Unit): io.vertx.scala.core.http.HttpServer = {
+  def websocketHandler(handler: ServerWebSocket => Unit): HttpServer = {
     _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
     this
   }
@@ -104,7 +112,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * The listen happens asynchronously and the server may not be listening until some time after the call has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(): io.vertx.scala.core.http.HttpServer = {
+  def listen(): HttpServer = {
     _asJava.listen()
     this
   }
@@ -118,7 +126,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param host the host to listen on
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int, host: String): io.vertx.scala.core.http.HttpServer = {
+  def listen(port: Int, host: String): HttpServer = {
     _asJava.listen(port, host)
     this
   }
@@ -130,8 +138,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param host the host to listen on
     * @return the listen future
     */
-  def listenFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+  def listenFuture(port: Int, host: String): concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -142,7 +150,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param port the port to listen on
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int): io.vertx.scala.core.http.HttpServer = {
+  def listen(port: Int): HttpServer = {
     _asJava.listen(port)
     this
   }
@@ -152,8 +160,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @param port the port to listen on
     * @return the listen future
     */
-  def listenFuture(port: Int): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+  def listenFuture(port: Int): concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -162,8 +170,8 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @return the listen future
     */
-  def listenFuture(): concurrent.Future[io.vertx.scala.core.http.HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,io.vertx.scala.core.http.HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+  def listenFuture(): concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -196,13 +204,13 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     _asJava.actualPort()
   }
 
-  private var cached_0: io.vertx.scala.core.http.HttpServerRequestStream = _
-  private var cached_1: io.vertx.scala.core.http.ServerWebSocketStream = _
+  private var cached_0: HttpServerRequestStream = _
+  private var cached_1: ServerWebSocketStream = _
 }
 
 object HttpServer {
 
-  def apply(_asJava: io.vertx.core.http.HttpServer): io.vertx.scala.core.http.HttpServer =
-    new io.vertx.scala.core.http.HttpServer(_asJava)
+  def apply(_asJava: io.vertx.core.http.HttpServer): HttpServer =
+    new HttpServer(_asJava)
 
 }

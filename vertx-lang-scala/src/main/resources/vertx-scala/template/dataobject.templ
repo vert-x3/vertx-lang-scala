@@ -23,6 +23,10 @@ def changeJavaGenericNotationToScalaNotation(type) {
  type.name.replace('<', '[').replace('>', ']');
 }
 
+def toAliasedTypeName(type) {
+  return 'J'+type.simpleName;
+}
+
 def toScalaType(type) {
   var ret = '';
   if (type.name == 'void' || type.name == 'java.lang.Void') {
@@ -65,7 +69,7 @@ def toScalaType(type) {
 }
 
   var typeName = type.raw.simpleName;
-  var jTypeName = type.raw.simpleName + 'Java';
+  var jTypeName = toAliasedTypeName(type);
 }
 
 
@@ -75,6 +79,7 @@ package @{type.raw.translatePackageName("scala")}\n
 @comment{"# Generate the imports"}
 import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConversions._\n
+import @{type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}\n"}
 \n
 
 @comment{"# Generate the Class or Interface/Trait"}
@@ -87,7 +92,7 @@ import scala.collection.JavaConversions._\n
 \n
 
 
-class @{typeName}(val asJava: @{type.raw.name}) {\n
+class @{typeName}(val asJava: @{jTypeName}) {\n
 @foreach{property:properties}
 @if{property.doc != null}
 \n
@@ -167,7 +172,6 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
 }\n
 \n
 object @{type.raw.simpleName} {\n
-  type @{jTypeName} = @{type.raw.name}\n
   \n
   def apply() = {\n
     new @{typeName}(new @{jTypeName}(io.vertx.lang.scala.json.Json.emptyObj()))\n

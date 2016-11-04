@@ -18,12 +18,13 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 
 /**
   * Proxy options for a net client or a net client.
   */
 
-class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
+class ProxyOptions(val asJava: JProxyOptions) {
 
   /**
     * Set proxy host.
@@ -84,13 +85,12 @@ class ProxyOptions(val asJava: io.vertx.core.net.ProxyOptions) {
 }
 
 object ProxyOptions {
-  type ProxyOptionsJava = io.vertx.core.net.ProxyOptions
   
   def apply() = {
-    new ProxyOptions(new ProxyOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ProxyOptions(new JProxyOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: ProxyOptionsJava) = {
+  def apply(t: JProxyOptions) = {
     if(t != null)
       new ProxyOptions(t)
     else
@@ -99,7 +99,7 @@ object ProxyOptions {
   
   def fromJson(json: JsonObject):ProxyOptions = {
     if(json != null)
-      new ProxyOptions(new ProxyOptionsJava(json))
+      new ProxyOptions(new JProxyOptions(json))
     else
       null
   }

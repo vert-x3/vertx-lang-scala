@@ -19,11 +19,20 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
+import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.http.{WebSocket => JWebSocket}
 import io.vertx.core.http.WebsocketVersion
 import io.vertx.core.Handler
+import io.vertx.core.http.{HttpClient => JHttpClient}
 
 /**
   * An asynchronous HTTP client.
@@ -52,7 +61,7 @@ import io.vertx.core.Handler
   * The client is designed to be reused between requests.
   */
 class HttpClient(private val _asJava: io.vertx.core.http.HttpClient) 
-    extends io.vertx.scala.core.metrics.Measured {
+    extends Measured {
 
   def asJava: io.vertx.core.http.HttpClient = _asJava
 
@@ -72,7 +81,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, port, host, requestURI))
   }
 
@@ -83,7 +92,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, host, requestURI))
   }
 
@@ -97,7 +106,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -110,7 +119,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -120,7 +129,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, requestURI))
   }
 
@@ -132,7 +141,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def request(method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.request(method, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -142,7 +151,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.requestAbs(method, absoluteURI))
   }
 
@@ -154,7 +163,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.requestAbs(method, absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -165,7 +174,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def get(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(port, host, requestURI))
   }
 
@@ -175,7 +184,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def get(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(host, requestURI))
   }
 
@@ -188,7 +197,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def get(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -200,7 +209,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def get(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -209,7 +218,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def get(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(requestURI))
   }
 
@@ -220,7 +229,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def get(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def get(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.get(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -229,7 +238,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def getAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def getAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.getAbs(absoluteURI))
   }
 
@@ -240,7 +249,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def getAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def getAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.getAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -253,7 +262,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def getNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def getNow(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.getNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -266,7 +275,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def getNow(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def getNow(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.getNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -278,7 +287,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def getNow(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def getNow(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.getNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -290,7 +299,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def post(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(port, host, requestURI))
   }
 
@@ -300,7 +309,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def post(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(host, requestURI))
   }
 
@@ -313,7 +322,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def post(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -325,7 +334,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def post(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -334,7 +343,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def post(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(requestURI))
   }
 
@@ -345,7 +354,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def post(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def post(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.post(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -354,7 +363,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def postAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def postAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.postAbs(absoluteURI))
   }
 
@@ -365,7 +374,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def postAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def postAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.postAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -376,7 +385,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def head(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(port, host, requestURI))
   }
 
@@ -386,7 +395,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def head(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(host, requestURI))
   }
 
@@ -399,7 +408,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def head(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -411,7 +420,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def head(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -420,7 +429,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def head(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(requestURI))
   }
 
@@ -431,7 +440,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def head(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def head(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.head(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -440,7 +449,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def headAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def headAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.headAbs(absoluteURI))
   }
 
@@ -451,7 +460,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def headAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def headAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.headAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -464,7 +473,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def headNow(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.headNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -477,7 +486,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headNow(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def headNow(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.headNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -489,7 +498,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headNow(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def headNow(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.headNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -501,7 +510,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def options(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(port, host, requestURI))
   }
 
@@ -511,7 +520,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def options(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(host, requestURI))
   }
 
@@ -524,7 +533,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def options(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -536,7 +545,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def options(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -545,7 +554,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def options(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(requestURI))
   }
 
@@ -556,7 +565,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def options(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def options(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.options(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -565,7 +574,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def optionsAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def optionsAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.optionsAbs(absoluteURI))
   }
 
@@ -576,7 +585,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def optionsAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def optionsAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.optionsAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -589,7 +598,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def optionsNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def optionsNow(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.optionsNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -602,7 +611,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def optionsNow(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def optionsNow(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.optionsNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -614,7 +623,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-  def optionsNow(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClient = {
+  def optionsNow(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClient = {
     _asJava.optionsNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
     this
   }
@@ -626,7 +635,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def put(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(port, host, requestURI))
   }
 
@@ -636,7 +645,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def put(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(host, requestURI))
   }
 
@@ -649,7 +658,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def put(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -661,7 +670,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def put(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -670,7 +679,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def put(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(requestURI))
   }
 
@@ -681,7 +690,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def put(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def put(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.put(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -690,7 +699,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def putAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def putAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.putAbs(absoluteURI))
   }
 
@@ -701,7 +710,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def putAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def putAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.putAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -712,7 +721,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def delete(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(port, host, requestURI))
   }
 
@@ -722,7 +731,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def delete(host: String, requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(host, requestURI))
   }
 
@@ -735,7 +744,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def delete(port: Int, host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(port: Int, host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -747,7 +756,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def delete(host: String, requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(host: String, requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -756,7 +765,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return an HTTP client request object
     */
-  def delete(requestURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(requestURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(requestURI))
   }
 
@@ -767,7 +776,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def delete(requestURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def delete(requestURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.delete(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -776,7 +785,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param absoluteURI the absolute URI
     * @return an HTTP client request object
     */
-  def deleteAbs(absoluteURI: String): io.vertx.scala.core.http.HttpClientRequest = {
+  def deleteAbs(absoluteURI: String): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.deleteAbs(absoluteURI))
   }
 
@@ -787,7 +796,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param responseHandler the response handler
     * @return an HTTP client request object
     */
-  def deleteAbs(absoluteURI: String, responseHandler: io.vertx.scala.core.http.HttpClientResponse => Unit): io.vertx.scala.core.http.HttpClientRequest = {
+  def deleteAbs(absoluteURI: String, responseHandler: HttpClientResponse => Unit): HttpClientRequest = {
     HttpClientRequest.apply(_asJava.deleteAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
   }
 
@@ -799,7 +808,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -813,7 +822,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -825,7 +834,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -838,7 +847,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -852,7 +861,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -867,7 +876,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -880,7 +889,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -894,7 +903,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -910,7 +919,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -927,7 +936,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -942,7 +951,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -958,7 +967,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -975,7 +984,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -993,7 +1002,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1009,7 +1018,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -1026,7 +1035,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1037,7 +1046,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -1049,7 +1058,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1061,7 +1070,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -1074,7 +1083,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1088,7 +1097,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -1103,7 +1112,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1118,7 +1127,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
@@ -1134,7 +1143,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-  def websocket(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.scala.core.http.WebSocket => Unit, failureHandler: Throwable => Unit): io.vertx.scala.core.http.HttpClient = {
+  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
     _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
@@ -1146,7 +1155,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(port: Int, host: String, requestURI: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(port: Int, host: String, requestURI: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI))
   }
 
@@ -1156,7 +1165,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(host: String, requestURI: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(host: String, requestURI: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(host, requestURI))
   }
 
@@ -1168,7 +1177,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param headers the headers
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
   }
 
@@ -1179,7 +1188,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param headers the headers
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
   }
 
@@ -1193,7 +1202,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param version the websocket version
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
   }
 
@@ -1206,7 +1215,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param version the websocket version
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
   }
 
@@ -1221,7 +1230,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param subProtocols the subprotocols to use
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
   }
 
@@ -1235,7 +1244,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param subProtocols the subprotocols to use
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(host: String, requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
   }
 
@@ -1244,7 +1253,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param requestURI the relative URI
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(requestURI: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(requestURI: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(requestURI))
   }
 
@@ -1254,7 +1263,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param headers the headers
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(requestURI: String, headers: io.vertx.scala.core.MultiMap): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(requestURI: String, headers: MultiMap): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
   }
 
@@ -1266,7 +1275,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param version the websocket version
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
   }
 
@@ -1279,7 +1288,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @param subProtocols the subprotocols
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketStream(requestURI: String, headers: io.vertx.scala.core.MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): io.vertx.scala.core.http.WebSocketStream = {
+  def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
     WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
   }
 
@@ -1295,7 +1304,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
 
 object HttpClient {
 
-  def apply(_asJava: io.vertx.core.http.HttpClient): io.vertx.scala.core.http.HttpClient =
-    new io.vertx.scala.core.http.HttpClient(_asJava)
+  def apply(_asJava: io.vertx.core.http.HttpClient): HttpClient =
+    new HttpClient(_asJava)
 
 }

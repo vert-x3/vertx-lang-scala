@@ -20,6 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.cli.Option
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import io.vertx.core.cli.{CLI => JCLI}
 import io.vertx.core.cli.Argument
 
 /**
@@ -46,7 +48,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param arguments the arguments
     * @return the creates command line
     */
-  def parse(arguments: scala.collection.mutable.Buffer[String]): io.vertx.scala.core.cli.CommandLine = {
+  def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
     CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava))
   }
 
@@ -56,7 +58,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param validate enable / disable parsing validation
     * @return the creates command line
     */
-  def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): io.vertx.scala.core.cli.CommandLine = {
+  def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
     CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava, validate))
   }
 
@@ -72,7 +74,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param name the name
     * @return the current [[CLI]] instance
     */
-  def setName(name: String): io.vertx.scala.core.cli.CLI = {
+  def setName(name: String): CLI = {
     _asJava.setName(name)
     this
   }
@@ -84,7 +86,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
         scala.Option(_asJava.getDescription())
   }
 
-  def setDescription(desc: String): io.vertx.scala.core.cli.CLI = {
+  def setDescription(desc: String): CLI = {
     _asJava.setDescription(desc)
     this
   }
@@ -101,7 +103,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param summary the summary
     * @return the current [[CLI]] instance
     */
-  def setSummary(summary: String): io.vertx.scala.core.cli.CLI = {
+  def setSummary(summary: String): CLI = {
     _asJava.setSummary(summary)
     this
   }
@@ -120,7 +122,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param hidden enables or disables the hidden aspect of the CI
     * @return the current [[CLI]] instance
     */
-  def setHidden(hidden: Boolean): io.vertx.scala.core.cli.CLI = {
+  def setHidden(hidden: Boolean): CLI = {
     _asJava.setHidden(hidden)
     this
   }
@@ -138,7 +140,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param option the option, must not be `null`.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the current [[CLI]] instance
     */
-  def addOption(option: io.vertx.scala.core.cli.Option): io.vertx.scala.core.cli.CLI = {
+  def addOption(option: io.vertx.scala.core.cli.Option): CLI = {
     _asJava.addOption(option.asJava)
     this
   }
@@ -149,7 +151,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param options the options, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def addOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
+  def addOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): CLI = {
     _asJava.addOptions(options.map(x => if (x == null) null else x.asJava).asJava)
     this
   }
@@ -159,7 +161,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param options the list of options, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def setOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): io.vertx.scala.core.cli.CLI = {
+  def setOptions(options: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Option]): CLI = {
     _asJava.setOptions(options.map(x => if (x == null) null else x.asJava).asJava)
     this
   }
@@ -177,7 +179,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param arg the argument, must not be `null`see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the current [[CLI]] instance
     */
-  def addArgument(arg: io.vertx.scala.core.cli.Argument): io.vertx.scala.core.cli.CLI = {
+  def addArgument(arg: io.vertx.scala.core.cli.Argument): CLI = {
     _asJava.addArgument(arg.asJava)
     this
   }
@@ -188,7 +190,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param args the arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def addArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
+  def addArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): CLI = {
     _asJava.addArguments(args.map(x => if (x == null) null else x.asJava).asJava)
     this
   }
@@ -198,7 +200,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param args the list of arguments, must not be `null`
     * @return the current [[CLI]] instance
     */
-  def setArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): io.vertx.scala.core.cli.CLI = {
+  def setArguments(args: scala.collection.mutable.Buffer[io.vertx.scala.core.cli.Argument]): CLI = {
     _asJava.setArguments(args.map(x => if (x == null) null else x.asJava).asJava)
     this
   }
@@ -235,7 +237,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param name the option name
     * @return the current [[CLI]] instance
     */
-  def removeOption(name: String): io.vertx.scala.core.cli.CLI = {
+  def removeOption(name: String): CLI = {
     _asJava.removeOption(name)
     this
   }
@@ -245,7 +247,7 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
     * @param index the argument index
     * @return the current [[CLI]] instance
     */
-  def removeArgument(index: Int): io.vertx.scala.core.cli.CLI = {
+  def removeArgument(index: Int): CLI = {
     _asJava.removeArgument(index)
     this
   }
@@ -254,10 +256,10 @@ class CLI(private val _asJava: io.vertx.core.cli.CLI) {
 
 object CLI {
 
-  def apply(_asJava: io.vertx.core.cli.CLI): io.vertx.scala.core.cli.CLI =
-    new io.vertx.scala.core.cli.CLI(_asJava)
+  def apply(_asJava: io.vertx.core.cli.CLI): CLI =
+    new CLI(_asJava)
 
-  def create(name: String): io.vertx.scala.core.cli.CLI = {
+  def create(name: String): CLI = {
     CLI.apply(io.vertx.core.cli.CLI.create(name))
   }
 

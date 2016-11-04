@@ -19,7 +19,11 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 import io.vertx.core.Handler
 
 /**
@@ -34,31 +38,31 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
 class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
-    extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.eventbus.Message[T]] {
+    extends ReadStream[Message[T]] {
 
   def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def exceptionHandler(handler: Throwable => Unit): MessageConsumer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.eventbus.Message[T] => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def handler(handler: Message[T] => Unit): MessageConsumer[T] = {
     _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def pause(): MessageConsumer[T] = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def resume(): MessageConsumer[T] = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def endHandler(endHandler: () => Unit): MessageConsumer[T] = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
@@ -66,7 +70,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
   /**
     * @return a read stream for the body of the message stream.
     */
-  def bodyStream(): io.vertx.scala.core.streams.ReadStream[T] = {
+  def bodyStream(): ReadStream[T] = {
     ReadStream.apply[T](_asJava.bodyStream())
   }
 
@@ -91,7 +95,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
     * @param maxBufferedMessages the maximum number of messages that can be buffered
     * @return this registration
     */
-  def setMaxBufferedMessages(maxBufferedMessages: Int): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def setMaxBufferedMessages(maxBufferedMessages: Int): MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.setMaxBufferedMessages(maxBufferedMessages))
   }
 
@@ -133,7 +137,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
 object MessageConsumer {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): io.vertx.scala.core.eventbus.MessageConsumer[T] =
-    new io.vertx.scala.core.eventbus.MessageConsumer(_asJava)
+  def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): MessageConsumer[T] =
+    new MessageConsumer(_asJava)
 
 }

@@ -4,7 +4,7 @@
 @comment{"# Trait methods"}
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
-  @if{method.doc != null}@{methodDoc(method, '');}@end{}  
-	def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);}\n\n
+  @if{method.doc != null}@{methodDoc(method, '');}@end{}
+	def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);}\n\n
 @end{}
 @end{}

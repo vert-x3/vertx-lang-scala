@@ -38,7 +38,7 @@ class GenericRefedInterface[T](private val _asJava: io.vertx.codegen.testmodel.G
 
 object GenericRefedInterface {
 
-  def apply[T](_asJava: io.vertx.codegen.testmodel.GenericRefedInterface[T]): io.vertx.scala.codegen.testmodel.GenericRefedInterface[T] =
-    new io.vertx.scala.codegen.testmodel.GenericRefedInterface(_asJava)
+  def apply[T](_asJava: io.vertx.codegen.testmodel.GenericRefedInterface[T]): GenericRefedInterface[T] =
+    new GenericRefedInterface(_asJava)
 
 }

@@ -20,7 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.DeliveryOptions
+import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.Handler
 
 /**
@@ -48,7 +51,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * Multi-map of message headers. Can be empty
     * @return the headers
     */
-  def headers(): io.vertx.scala.core.MultiMap = {
+  def headers(): MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -89,8 +92,8 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @param message the message to reply with.
     * @return the reply future for the reply.
     */
-  def replyFuture[R](message: AnyRef): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
+  def replyFuture[R](message: AnyRef): concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -111,8 +114,8 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return the reply future for the reply.
     */
-  def replyFuture[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[io.vertx.scala.core.eventbus.Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],io.vertx.scala.core.eventbus.Message[R]]((x => if (x == null) null else Message.apply[R](x)))
+  def replyFuture[R](message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     _asJava.reply(message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -134,7 +137,7 @@ class Message[T](private val _asJava: io.vertx.core.eventbus.Message[T]) {
 
 object Message {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.Message[T]): io.vertx.scala.core.eventbus.Message[T] =
-    new io.vertx.scala.core.eventbus.Message(_asJava)
+  def apply[T](_asJava: io.vertx.core.eventbus.Message[T]): Message[T] =
+    new Message(_asJava)
 
 }

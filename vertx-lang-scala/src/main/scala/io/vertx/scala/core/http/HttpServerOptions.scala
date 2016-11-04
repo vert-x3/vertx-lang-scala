@@ -18,12 +18,13 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
 
 /**
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
   */
 
-class HttpServerOptions(val asJava: io.vertx.core.http.HttpServerOptions) {
+class HttpServerOptions(val asJava: JHttpServerOptions) {
 
   /**
     * Set the accept back log
@@ -429,13 +430,12 @@ class HttpServerOptions(val asJava: io.vertx.core.http.HttpServerOptions) {
 }
 
 object HttpServerOptions {
-  type HttpServerOptionsJava = io.vertx.core.http.HttpServerOptions
   
   def apply() = {
-    new HttpServerOptions(new HttpServerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new HttpServerOptions(new JHttpServerOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: HttpServerOptionsJava) = {
+  def apply(t: JHttpServerOptions) = {
     if(t != null)
       new HttpServerOptions(t)
     else
@@ -444,7 +444,7 @@ object HttpServerOptions {
   
   def fromJson(json: JsonObject):HttpServerOptions = {
     if(json != null)
-      new HttpServerOptions(new HttpServerOptionsJava(json))
+      new HttpServerOptions(new JHttpServerOptions(json))
     else
       null
   }

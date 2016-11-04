@@ -18,13 +18,14 @@ package io.vertx.scala.core.dns
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 
 /**
   * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
   * DNS <i>A</i> and <i>AAAA</i> queries.
   */
 
-class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOptions) {
+class AddressResolverOptions(val asJava: JAddressResolverOptions) {
 
   /**
     * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
@@ -186,13 +187,12 @@ class AddressResolverOptions(val asJava: io.vertx.core.dns.AddressResolverOption
 }
 
 object AddressResolverOptions {
-  type AddressResolverOptionsJava = io.vertx.core.dns.AddressResolverOptions
   
   def apply() = {
-    new AddressResolverOptions(new AddressResolverOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new AddressResolverOptions(new JAddressResolverOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: AddressResolverOptionsJava) = {
+  def apply(t: JAddressResolverOptions) = {
     if(t != null)
       new AddressResolverOptions(t)
     else
@@ -201,7 +201,7 @@ object AddressResolverOptions {
   
   def fromJson(json: JsonObject):AddressResolverOptions = {
     if(json != null)
-      new AddressResolverOptions(new AddressResolverOptionsJava(json))
+      new AddressResolverOptions(new JAddressResolverOptions(json))
     else
       null
   }

@@ -80,7 +80,7 @@ class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
 
 object SrvRecord {
 
-  def apply(_asJava: io.vertx.core.dns.SrvRecord): io.vertx.scala.core.dns.SrvRecord =
-    new io.vertx.scala.core.dns.SrvRecord(_asJava)
+  def apply(_asJava: io.vertx.core.dns.SrvRecord): SrvRecord =
+    new SrvRecord(_asJava)
 
 }

@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
   * Delivery options are used to configure message delivery.
@@ -26,7 +27,7 @@ import scala.collection.JavaConversions._
   * that you wish to send with the message.
   */
 
-class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
+class DeliveryOptions(val asJava: JDeliveryOptions) {
 
   /**
     * Set the codec name.
@@ -63,13 +64,12 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
 }
 
 object DeliveryOptions {
-  type DeliveryOptionsJava = io.vertx.core.eventbus.DeliveryOptions
   
   def apply() = {
-    new DeliveryOptions(new DeliveryOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DeliveryOptions(new JDeliveryOptions(io.vertx.lang.scala.json.Json.emptyObj()))
   }
   
-  def apply(t: DeliveryOptionsJava) = {
+  def apply(t: JDeliveryOptions) = {
     if(t != null)
       new DeliveryOptions(t)
     else
@@ -78,7 +78,7 @@ object DeliveryOptions {
   
   def fromJson(json: JsonObject):DeliveryOptions = {
     if(json != null)
-      new DeliveryOptions(new DeliveryOptionsJava(json))
+      new DeliveryOptions(new JDeliveryOptions(json))
     else
       null
   }

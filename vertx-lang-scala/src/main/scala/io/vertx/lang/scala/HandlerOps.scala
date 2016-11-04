@@ -17,10 +17,10 @@
 package io.vertx.lang.scala
 
 import io.vertx.core
-import io.vertx.core.{AsyncResult, Handler}
+import io.vertx.core.Handler
 import io.vertx.core.logging.LoggerFactory
 
-import scala.concurrent.{Future, Promise}
+import scala.concurrent.Promise
 import scala.language.implicitConversions
 
 /**
