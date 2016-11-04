@@ -203,7 +203,7 @@ var cli = CLI.create("copy").setSummary("A command line interface to copy files.
   .setArgName("target")
 )
 
-var builder = java.lang.StringBuilder()
+var builder = new java.lang.StringBuilder()
 cli.usage(builder)
 
 ----
@@ -276,7 +276,7 @@ var line = cli.parse(java.util.Collections.singletonList("-h"))
 
 // The parsing does not fail and let you do:
 if (!line.isValid() && line.isAskingForHelp()) {
-  var builder = java.lang.StringBuilder()
+  var builder = new java.lang.StringBuilder()
   cli.usage(builder)
   stream.print(builder.toString())
 }
