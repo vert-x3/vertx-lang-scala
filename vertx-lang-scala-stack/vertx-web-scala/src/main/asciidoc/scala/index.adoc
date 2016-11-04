@@ -157,7 +157,7 @@ router.route().handler((routingContext: io.vertx.scala.ext.web.RoutingContext) =
   response.end("Hello World from Vert.x-Web!")
 })
 
-server.requestHandler(routeraccept _).listen(8080)
+server.requestHandler(router.accept _).listen(8080)
 
 
 ----
@@ -1023,7 +1023,7 @@ var route = router.get("/localized").handler((rc: io.vertx.scala.ext.web.Routing
   // replying in the users language.
   rc.acceptableLocales().foreach(locale => {
     return
-  }
+  })
 
   // we do not know the user language so lets just inform that back:
   rc.response().end(s"Sorry we don't speak: ${rc.preferredLocale()}")
@@ -1229,8 +1229,8 @@ Here's an example of querying and adding cookies:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.Cookie
 import io.vertx.scala.ext.web.handler.CookieHandler
+import io.vertx.scala.ext.web.Cookie
 
 // This cookie handler will be called for all routes
 router.route().handler(CookieHandler.create())
@@ -1330,15 +1330,17 @@ Here are some examples of creating a `link:../../scaladoc/io/vertx/scala/ext/web
 [source,scala]
 ----
 import io.vertx.scala.ext.web.sstore.ClusteredSessionStore
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.Vertx
 
 // a clustered Vert.x
 Vertx.clusteredVertx(VertxOptions()
   .setClustered(true)
-, 
+, {
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
-)
+})
 
 
 ----
@@ -1355,10 +1357,10 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 import io.vertx.scala.ext.web.sstore.ClusteredSessionStore
-import io.vertx.scala.ext.web.handler.SessionHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
 import io.vertx.scala.ext.web.Router
+import io.vertx.scala.ext.web.handler.SessionHandler
 
 var router = Router.router(vertx)
 
@@ -1461,10 +1463,10 @@ Here's a simple example of creating a basic auth handler given an auth provider.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
-import io.vertx.scala.ext.web.handler.SessionHandler
 import io.vertx.scala.ext.web.handler.BasicAuthHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
+import io.vertx.scala.ext.web.handler.SessionHandler
+import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -1480,11 +1482,11 @@ your auth handler is before your application handlers on those paths:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 import io.vertx.scala.ext.web.handler.UserSessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
-import io.vertx.scala.ext.web.handler.SessionHandler
 import io.vertx.scala.ext.web.handler.BasicAuthHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
+import io.vertx.scala.ext.web.handler.SessionHandler
+import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -1566,12 +1568,12 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 import io.vertx.scala.ext.web.handler.UserSessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
-import io.vertx.scala.ext.web.handler.FormLoginHandler
 import io.vertx.scala.ext.web.handler.StaticHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
+import io.vertx.scala.ext.web.handler.FormLoginHandler
 import io.vertx.scala.ext.web.handler.SessionHandler
+import io.vertx.scala.ext.web.sstore.LocalSessionStore
 import io.vertx.scala.ext.web.handler.RedirectAuthHandler
 
 router.route().handler(CookieHandler.create())
@@ -1622,19 +1624,19 @@ Here's an example on how to issue tokens:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.Router
 import io.vertx.scala.ext.auth.jwt.JWTAuth
+import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
-var authConfig = todo-renderJsonObject
+var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 
 router.route("/login").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
   // this is an example, authentication should be done with another provider...
   if ("paulo" == ctx.request().getParam("username") && "secret" == ctx.request().getParam("password")) {
-    ctx.response().end(authProvider.generateToken(todo-renderJsonObject, JWTOptions()))
+    ctx.response().end(authProvider.generateToken(new io.vertx.core.json.JsonObject().put("sub", "paulo"), JWTOptions()))
   } else {
     ctx.fail(401)
   }
@@ -1647,13 +1649,13 @@ Now that your client has a token all it is required is that for *all* consequent
 
 [source,scala]
 ----
+import io.vertx.scala.ext.auth.jwt.JWTAuth
 import io.vertx.scala.ext.web.handler.JWTAuthHandler
 import io.vertx.scala.ext.web.Router
-import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 var router = Router.router(vertx)
 
-var authConfig = todo-renderJsonObject
+var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 
@@ -1673,11 +1675,11 @@ token, during the creation of the token just add data to the JsonObject paramete
 ----
 import io.vertx.scala.ext.auth.jwt.JWTAuth
 
-var authConfig = todo-renderJsonObject
+var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 
-authProvider.generateToken(todo-renderJsonObject, JWTOptions())
+authProvider.generateToken(new io.vertx.core.json.JsonObject().put("sub", "paulo").put("someKey", "some value"), JWTOptions())
 
 ----
 
@@ -1687,8 +1689,8 @@ And the same when consuming:
 ----
 
 var handler = (rc: io.vertx.scala.ext.web.RoutingContext) => {
-  var theSubject = rc.user().principal().sub
-  var someKey = rc.user().principal().someKey
+  var theSubject = rc.user().principal().getValue("sub")
+  var someKey = rc.user().principal().getValue("someKey")
 }
 
 ----
@@ -2156,7 +2158,7 @@ var sockJSHandler = SockJSHandler.create(vertx, options)
 sockJSHandler.socketHandler((sockJSSocket: io.vertx.scala.ext.web.handler.sockjs.SockJSSocket) => {
 
   // Just echo the data back
-  sockJSSocket.handler(sockJSSocketwrite _)
+  sockJSSocket.handler(sockJSSocket.write _)
 })
 
 router.route("/myapp/*").handler(sockJSHandler)
@@ -2393,12 +2395,12 @@ var inboundPermitted1 = PermittedOptions()
 // 'albums'
 var inboundPermitted2 = PermittedOptions()
   .setAddress("demo.persistor")
-  .setMatch(todo-renderJsonObject)
+  .setMatch(new io.vertx.core.json.JsonObject().put("action", "find").put("collection", "albums"))
 
 
 // Allow through any message with a field `wibble` with value `foo`.
 var inboundPermitted3 = PermittedOptions()
-  .setMatch(todo-renderJsonObject)
+  .setMatch(new io.vertx.core.json.JsonObject().put("wibble", "foo"))
 
 
 // First let's define what we're going to allow from server -> client
@@ -2461,12 +2463,12 @@ To handle the login and actually auth you can configure the normal Vert.x auth h
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
-import io.vertx.scala.ext.web.handler.SessionHandler
-import io.vertx.scala.ext.web.Router
 import io.vertx.scala.ext.web.handler.BasicAuthHandler
+import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
+import io.vertx.scala.ext.web.Router
+import io.vertx.scala.ext.web.handler.SessionHandler
+import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 var router = Router.router(vertx)
 
@@ -2558,7 +2560,7 @@ var options = BridgeOptions()
 
 sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
   if (be.type() == BridgeEventType.PUBLISH || be.type() == BridgeEventType.RECEIVE) {
-    if (be.getRawMessage().body == "armadillos") {
+    if (be.getRawMessage().getValue("body") == "armadillos") {
       // Reject it
       be.complete(false)
       return
@@ -2597,9 +2599,9 @@ var options = BridgeOptions()
 sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
   if (be.type() == BridgeEventType.PUBLISH || be.type() == BridgeEventType.SEND) {
     // Add some headers
-    var headers = todo-renderJsonObject
+    var headers = new io.vertx.core.json.JsonObject().put("header1", "val").put("header2", "val2")
     var rawMessage = be.getRawMessage()
-    rawMessage.put(headers, headers)
+    rawMessage.put("headers", headers)
     be.setRawMessage(rawMessage)
   }
   be.complete(true)
@@ -2638,8 +2640,8 @@ or the header name they have chosen during the instantiation of the `CSRFHandler
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 import io.vertx.scala.ext.web.handler.CSRFHandler
+import io.vertx.scala.ext.web.handler.CookieHandler
 
 router.route().handler(CookieHandler.create())
 router.route().handler(CSRFHandler.create("abracadabra"))
@@ -2673,8 +2675,8 @@ authCode flow. An example of using it to protect some resource and authenticate 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // create an OAuth2 provider, clientID and clientSecret should be requested to github
@@ -2720,8 +2722,8 @@ example, if you are planning to use Google Auth you implement it as:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // create an OAuth2 provider, clientID and clientSecret should be requested to Google
@@ -2766,8 +2768,8 @@ If you're looking to integrate with LinkedIn then your config should be:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // create an OAuth2 provider, clientID and clientSecret should be requested to LinkedIn
@@ -2819,11 +2821,13 @@ to specify grants. You can validate against these grants like this:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import scala.util.Failure
+import scala.util.Success
+import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
 // create an OAuth2 provider for keycloak
-var authProvider = OAuth2Auth.createKeycloak(vertx, OAuth2FlowType.AUTH_CODE, todo-renderJsonObject)
+var authProvider = OAuth2Auth.createKeycloak(vertx, OAuth2FlowType.AUTH_CODE, new io.vertx.core.json.JsonObject())
 
 // create a oauth2 handler on our domain: "http://localhost:8000"
 var oauth2 = OAuth2AuthHandler.create(authProvider, "http://localhost:8000")

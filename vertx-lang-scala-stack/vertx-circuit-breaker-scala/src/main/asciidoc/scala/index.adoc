@@ -49,6 +49,8 @@ Here is an example:
 [source,scala]
 ----
 import io.vertx.scala.circuitbreaker.CircuitBreaker
+import scala.util.Failure
+import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -75,6 +77,8 @@ output of a REST endpoint invocation:
 [source,scala]
 ----
 import io.vertx.scala.circuitbreaker.CircuitBreaker
+import scala.util.Failure
+import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -85,7 +89,7 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.String>) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
     } else {
-      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
         future.complete(buffer.toString())
       })
     }
@@ -107,6 +111,8 @@ Optionally, you can provide a fallback executed when the circuit is open:
 [source,scala]
 ----
 import io.vertx.scala.circuitbreaker.CircuitBreaker
+import scala.util.Failure
+import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -117,14 +123,14 @@ breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
     } else {
-      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
         future.complete(buffer.toString())
       })
     }
   })
 }, (v: java.lang.Throwable) => {
   // Executed when the circuit is opened
-  return "Hello"
+  "Hello"
 }).setHandlerFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
@@ -147,7 +153,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
   .setTimeout(2000)
 ).fallback((v: java.lang.Throwable) => {
   // Executed when the circuit is opened.
-  return "hello"
+  "hello"
 })
 
 breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
@@ -155,7 +161,7 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
     } else {
-      response.exceptionHandler(futurefail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
         future.complete(buffer.toString())
       })
     }

@@ -126,10 +126,12 @@ Here's an example of saving a document and getting the id back
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Document has no id
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
@@ -139,7 +141,8 @@ mongoClient.saveFuture("books", document).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -149,10 +152,12 @@ And here's an example of saving a document which already has an id.
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Document has an id already
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
 
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
@@ -161,7 +166,8 @@ mongoClient.saveFuture("books", document).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -175,10 +181,12 @@ If the document is inserted and has no id, then the id field generated will be r
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Document has an id already
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 mongoClient.insertFuture("books", document).onComplete{
   case Success(result) => {
@@ -188,7 +196,8 @@ mongoClient.insertFuture("books", document).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -198,10 +207,12 @@ If a document is inserted with an id, and a document with that id already eists,
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Document has an id already
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
 
 mongoClient.insertFuture("books", document).onComplete{
   case Success(result) => {
@@ -210,7 +221,8 @@ mongoClient.insertFuture("books", document).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -230,12 +242,14 @@ Here's an example of updating a document in the books collection:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Match any documents with title=The Hobbit
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 // Set the author field
-var update = todo-renderJsonObject
+var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
 
 mongoClient.updateFuture("books", query, update).onComplete{
   case Success(result) => {
@@ -244,7 +258,8 @@ mongoClient.updateFuture("books", query, update).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -261,12 +276,14 @@ This has the following fields:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // Match any documents with title=The Hobbit
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 // Set the author field
-var update = todo-renderJsonObject
+var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
 
 var options = UpdateOptions()
   .setMulti(true)
@@ -279,7 +296,8 @@ mongoClient.updateWithOptionsFuture("books", query, update, options).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -296,10 +314,12 @@ Here's an example of replacing a document in the books collection
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
-var replace = todo-renderJsonObject
+var replace = new io.vertx.core.json.JsonObject().put("title", "The Lord of the Rings").put("author", "J. R. R. Tolkien")
 
 mongoClient.replaceFuture("books", query, replace).onComplete{
   case Success(result) => {
@@ -308,7 +328,8 @@ mongoClient.replaceFuture("books", query, replace).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -324,23 +345,26 @@ Here's a simple example with an empty query that will match all books:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // empty query = match any
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject()
 
 mongoClient.findFuture("books", query).onComplete{
   case Success(result) => {
 
     result.foreach(json => {
 
-      println(todo-renderJsonObjectToString)
+      println(json.encode())
 
-    }
+    })
 
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -350,23 +374,26 @@ Here's another example that will match all books by Tolkien:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // will match all Tolkien books
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
 mongoClient.findFuture("books", query).onComplete{
   case Success(result) => {
 
     result.foreach(json => {
 
-      println(todo-renderJsonObjectToString)
+      println(json.encode())
 
-    }
+    })
 
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -385,9 +412,11 @@ This has the following fields:
 `skip`:: The number of documents to skip before returning the results. Defaults to `0`.
 
 ----
+import scala.util.Failure
+import scala.util.Success
 
 // will match all Tolkien books
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
 mongoClient.findBatchFuture("book", query).onComplete{
   case Success(result) => {
@@ -398,13 +427,14 @@ mongoClient.findBatchFuture("book", query).onComplete{
 
     } else {
 
-      println(s"Found doc: ${todo-renderJsonObjectToString}")
+      println(s"Found doc: ${result.encode()}")
 
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -428,8 +458,10 @@ Here's an example of removing all Tolkien books:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
 mongoClient.removeFuture("books", query).onComplete{
   case Success(result) => {
@@ -438,7 +470,8 @@ mongoClient.removeFuture("books", query).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -458,8 +491,10 @@ Here's an example that counts the number of Tolkien books. The number is passed 
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var query = todo-renderJsonObject
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
 mongoClient.countFuture("books", query).onComplete{
   case Success(result) => {
@@ -468,7 +503,8 @@ mongoClient.countFuture("books", query).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -482,6 +518,8 @@ To get a list of all collections you can use `link:../../scaladoc/io/vertx/scala
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 mongoClient.getCollectionsFuture().onComplete{
   case Success(result) => {
@@ -490,7 +528,8 @@ mongoClient.getCollectionsFuture().onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -500,6 +539,8 @@ To create a new collection you can use `link:../../scaladoc/io/vertx/scala/ext/m
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
@@ -508,7 +549,8 @@ mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -520,6 +562,8 @@ NOTE: Dropping a collection will delete all documents within it!
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
@@ -528,7 +572,8 @@ mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -549,16 +594,19 @@ of the entries in the JSON is the command name it must be specified as a paramet
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var command = todo-renderJsonObject
+var command = new io.vertx.core.json.JsonObject().put("aggregate", "collection_name").put("pipeline", new io.vertx.core.json.JsonArray())
 
 mongoClient.runCommandFuture("aggregate", command).onComplete{
   case Success(result) => {
-    var resArr = result.result
+    var resArr = result.getValue("result")
     // etc
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -572,27 +620,31 @@ Here's an example of inserting a document with a date field
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
 
 mongoService.saveFuture("publishedBooks", document).onComplete{
   case Success(result) => {
 
     var id = result
 
-    mongoService.findOneFuture("publishedBooks", todo-renderJsonObject, null).onComplete{
+    mongoService.findOneFuture("publishedBooks", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
       case Success(result) => {
 
-        println(s"To retrieve ISO-8601 date : ${result.publicationDate.$date}")
+        println(s"To retrieve ISO-8601 date : ${result.getValue("publicationDate").getValue("$date")}")
 
       }
       case Failure(cause) => {
-        println(s"$cause")}
+        println(s"$cause")
+      }
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -635,30 +687,34 @@ Here's an example of inserting a base 64 encoded string, typing it as binary a b
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 //This could be a the byte contents of a pdf file, etc converted to base 64
 var base64EncodedString = "a2FpbHVhIGlzIHRoZSAjMSBiZWFjaCBpbiB0aGUgd29ybGQ="
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("name", "Alan Turing").put("binaryStuff", new io.vertx.core.json.JsonObject().put("$binary", base64EncodedString))
 
 mongoService.saveFuture("smartPeople", document).onComplete{
   case Success(result) => {
 
     var id = result
 
-    mongoService.findOneFuture("smartPeople", todo-renderJsonObject, null).onComplete{
+    mongoService.findOneFuture("smartPeople", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
       case Success(result) => {
 
-        var reconstitutedBase64EncodedString = result.binaryStuff.$binary
+        var reconstitutedBase64EncodedString = result.getValue("binaryStuff").getValue("$binary")
         //This could now converted back to bytes from the base 64 string
       }
       case Failure(cause) => {
-        println(s"$cause")}
+        println(s"$cause")
+      }
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -667,27 +723,31 @@ Here's an example of inserting an object ID and reading it back
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var individualId = org.bson.types.ObjectId().toHexString()
+var individualId = new org.bson.types.ObjectId().toHexString()
 
-var document = todo-renderJsonObject
+var document = new io.vertx.core.json.JsonObject().put("name", "Stephen Hawking").put("individualId", new io.vertx.core.json.JsonObject().put("$oid", individualId))
 
 mongoService.saveFuture("smartPeople", document).onComplete{
   case Success(result) => {
 
     var id = result
 
-    mongoService.findOneFuture("smartPeople", todo-renderJsonObject, null).onComplete{
+    mongoService.findOneFuture("smartPeople", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
       case Success(result) => {
-        var reconstitutedIndividualId = result.individualId.$oid
+        var reconstitutedIndividualId = result.getValue("individualId").getValue("$oid")
       }
       case Failure(cause) => {
-        println(s"$cause")}
+        println(s"$cause")
+      }
     }
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 

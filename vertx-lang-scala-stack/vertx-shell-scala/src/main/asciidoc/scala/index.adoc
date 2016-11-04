@@ -52,7 +52,7 @@ You can also deploy this service inside your own verticle:
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("telnetOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 4000)))
 )
 
 ----
@@ -62,7 +62,7 @@ or
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("sshOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 5000).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/ssh.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "shiro").put("config", new io.vertx.core.json.JsonObject().put("properties_path", "file:/path/to/my/auth.properties")))))
 )
 
 ----
@@ -72,7 +72,7 @@ or
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("httpOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 8080).put("ssl", true).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/server-keystore.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "shiro").put("config", new io.vertx.core.json.JsonObject().put("properties_path", "file:/path/to/my/auth.properties")))))
 )
 
 ----
@@ -100,7 +100,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
     )
     .setAuthOptions(ShiroAuthOptions()
       .setType("PROPERTIES")
-      .setConfig(todo-renderJsonObject)
+      .setConfig(new io.vertx.core.json.JsonObject().put("properties_path", "file:/path/to/my/auth.properties"))
     )
   )
 )
@@ -202,7 +202,7 @@ The server key configuration reuses the key pair store configuration scheme prov
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("sshOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 5000).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/ssh.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "mongo").put("config", new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018")))))
 )
 
 ----
@@ -220,7 +220,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
       .setPassword("wibble")
     )
     .setAuthOptions(MongoAuthOptions()
-      .setConfig(todo-renderJsonObject)
+      .setConfig(new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018"))
     )
   )
 )
@@ -232,7 +232,7 @@ service.start()
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("sshOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 5000).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/ssh.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "jdbc").put("config", new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver")))))
 )
 
 ----
@@ -250,7 +250,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
       .setPassword("wibble")
     )
     .setAuthOptions(JDBCAuthOptions()
-      .setConfig(todo-renderJsonObject)
+      .setConfig(new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver"))
     )
   )
 )
@@ -273,7 +273,7 @@ In addition there are extra options for configuring an HTTP term:
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("httpOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 8080).put("ssl", true).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/server-keystore.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "mongo").put("config", new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018")))))
 )
 
 ----
@@ -287,7 +287,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
     .setHost("localhost")
     .setPort(8080)
     .setAuthOptions(MongoAuthOptions()
-      .setConfig(todo-renderJsonObject)
+      .setConfig(new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018"))
     )
   )
 )
@@ -299,7 +299,7 @@ service.start()
 [source,scala,subs="+attributes"]
 ----
 vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}", DeploymentOptions()
-  .setConfig(todo-renderJsonObject)
+  .setConfig(new io.vertx.core.json.JsonObject().put("httpOptions", new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 8080).put("ssl", true).put("keyPairOptions", new io.vertx.core.json.JsonObject().put("path", "src/test/resources/server-keystore.jks").put("password", "wibble")).put("authOptions", new io.vertx.core.json.JsonObject().put("provider", "jdbc").put("config", new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver")))))
 )
 
 ----
@@ -313,7 +313,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
     .setHost("localhost")
     .setPort(8080)
     .setAuthOptions(JDBCAuthOptions()
-      .setConfig(todo-renderJsonObject)
+      .setConfig(new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver"))
     )
   )
 )
@@ -403,8 +403,8 @@ method:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.command.CommandRegistry
 import io.vertx.scala.ext.shell.command.CommandBuilder
+import io.vertx.scala.ext.shell.command.CommandRegistry
 
 var builder = CommandBuilder.command("my-command")
 builder.processHandler((process: io.vertx.scala.ext.shell.command.CommandProcess) => {
@@ -444,7 +444,7 @@ command.processHandler((process: io.vertx.scala.ext.shell.command.CommandProcess
   process.args().foreach(arg => {
     // Print each argument on the console
     process.write(s"Argument ${arg}")
-  }
+  })
 
 
   process.end()
@@ -461,8 +461,8 @@ write command line argument parsing:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 import io.vertx.scala.ext.shell.command.CommandBuilder
+import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("my-command").addArgument(Argument()
   .setArgName("my-arg")
 ).addOption(Option()
@@ -488,8 +488,8 @@ when the option is activated:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 import io.vertx.scala.ext.shell.command.CommandBuilder
+import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("my-command").addArgument(Argument()
   .setArgName("my-arg")
 ).addOption(Option()
@@ -723,9 +723,9 @@ steps:
 [source,scala]
 ----
 import io.vertx.scala.ext.shell.ShellServer
-import io.vertx.scala.ext.shell.term.TermServer
-import io.vertx.scala.ext.web.Router
 import io.vertx.scala.ext.shell.command.CommandResolver
+import io.vertx.scala.ext.web.Router
+import io.vertx.scala.ext.shell.term.TermServer
 
 var server = ShellServer.create(vertx)
 
