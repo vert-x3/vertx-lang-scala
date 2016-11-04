@@ -65,8 +65,10 @@ Here's an example of authenticating a user using a simple username/password impl
 
 [source,java]
 ----
+import scala.util.Failure
+import scala.util.Success
 
-var authInfo = todo-renderJsonObject
+var authInfo = new io.vertx.core.json.JsonObject().put("username", "tim").put("password", "mypassword")
 
 authProvider.authenticateFuture(authInfo).onComplete{
   case Success(result) => {
@@ -77,7 +79,8 @@ authProvider.authenticateFuture(authInfo).onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -94,6 +97,8 @@ Here's an example of authorising a user:
 
 [source,java]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 user.isAuthorisedFuture("printers:printer1234").onComplete{
   case Success(result) => {
@@ -108,7 +113,8 @@ user.isAuthorisedFuture("printers:printer1234").onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----

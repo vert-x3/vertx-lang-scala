@@ -64,6 +64,8 @@ For example:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 var server = vertx.createNetServer()
 server.listenFuture(1234, "localhost").onComplete{
@@ -71,7 +73,8 @@ server.listenFuture(1234, "localhost").onComplete{
     println("Server is now listening!")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -84,6 +87,8 @@ To find out the real port the server is listening on you can call `link:../../sc
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 var server = vertx.createNetServer()
 server.listenFuture(0, "localhost").onComplete{
@@ -91,7 +96,8 @@ server.listenFuture(0, "localhost").onComplete{
     println(s"Server is now listening on actual port: ${server.actualPort()}")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -237,13 +243,16 @@ This handler will then be called when the close has fully completed.
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 server.closeFuture().onComplete{
   case Success(result) => {
     println("Server is now closed")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -269,7 +278,7 @@ You can instantiate more instances programmatically in your code:
 
 // Create a few instances so we can utilise cores
 
-for ( i <- 0 to 10) {
+for ( i <- 0 until 10) {
   var server = vertx.createNetServer()
   server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
     socket.handler((buffer: io.vertx.scala.core.buffer.Buffer) => {
@@ -350,6 +359,8 @@ specifying the port and host of the server and a handler that will be called wit
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 var options = NetClientOptions()
   .setConnectTimeout(10000)
@@ -361,7 +372,8 @@ client.connectFuture(4321, "localhost").onComplete{
     var socket = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----

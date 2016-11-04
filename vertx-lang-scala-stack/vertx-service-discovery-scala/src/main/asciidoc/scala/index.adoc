@@ -170,12 +170,14 @@ from the service types.
 [source,scala]
 ----
 import io.vertx.scala.servicediscovery.types.HttpEndpoint
+import scala.util.Failure
+import scala.util.Success
 // Manual record creation
 var record = Record()
   .setType("eventbus-service-proxy")
-  .setLocation(todo-renderJsonObject)
+  .setLocation(new io.vertx.core.json.JsonObject().put("endpoint", "the-service-address"))
   .setName("my-service")
-  .setMetadata(todo-renderJsonObject)
+  .setMetadata(new io.vertx.core.json.JsonObject().put("some-label", "some-value"))
 
 
 discovery.publishFuture(record).onComplete{
@@ -184,7 +186,8 @@ discovery.publishFuture(record).onComplete{
     var publishedRecord = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Record creation from a type
@@ -195,7 +198,8 @@ discovery.publishFuture(record).onComplete{
     var publishedRecord = result
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -208,13 +212,16 @@ To withdraw (un-publish) a record, use:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 discovery.unpublishFuture(todo-renderDataObjectMemberSelect).onComplete{
   case Success(result) => {
     // Ok
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -246,6 +253,8 @@ Here are some examples:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Get any record
 discovery.getRecordFuture((r: io.vertx.scala.servicediscovery.Record) => {
   true
@@ -258,7 +267,8 @@ discovery.getRecordFuture((r: io.vertx.scala.servicediscovery.Record) => {
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 discovery.getRecordFuture(null).onComplete{
@@ -270,7 +280,8 @@ discovery.getRecordFuture(null).onComplete{
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -286,10 +297,11 @@ discovery.getRecordFuture((r: io.vertx.scala.servicediscovery.Record) => {
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
-discovery.getRecordFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-service")).onComplete{
   case Success(result) => {
     if (result != null) {
       // we have a record
@@ -298,12 +310,13 @@ discovery.getRecordFuture(todo-renderJsonObject).onComplete{
     }
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Get all records matching the filter
 discovery.getRecordsFuture((r: io.vertx.scala.servicediscovery.Record) => {
-  "some-value" == todo-renderDataObjectMemberSelect.some-label
+  "some-value" == todo-renderDataObjectMemberSelect.getValue("some-label")
 }).onComplete{
   case Success(result) => {
     var results = result
@@ -311,18 +324,20 @@ discovery.getRecordsFuture((r: io.vertx.scala.servicediscovery.Record) => {
     // Else, the lookup succeeded, but no matching service
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
-discovery.getRecordsFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordsFuture(new io.vertx.core.json.JsonObject().put("some-label", "some-value")).onComplete{
   case Success(result) => {
     var results = result
     // If the list is not empty, we have matching record
     // Else, the lookup succeeded, but no matching service
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 
@@ -426,6 +441,8 @@ The next snippet illustrates hot to create a `link:../dataobjects.html#Record[Re
 [source, scala]
 ----
 import io.vertx.scala.servicediscovery.types.HttpEndpoint
+import scala.util.Failure
+import scala.util.Success
 var record1 = HttpEndpoint.createRecord("some-http-service", "localhost", 8433, "/api")
 
 discovery.publishFuture(record1).onComplete{
@@ -433,7 +450,7 @@ discovery.publishFuture(record1).onComplete{
   case Failure(cause) => println("Failure")
 }
 
-var record2 = HttpEndpoint.createRecord("some-other-name", true, "localhost", 8433, "/api", todo-renderJsonObject)
+var record2 = HttpEndpoint.createRecord("some-other-name", true, "localhost", 8433, "/api", new io.vertx.core.json.JsonObject().put("some-metadata", "some value"))
 
 
 ----
@@ -448,8 +465,10 @@ Once a HTTP endpoint is published, a consumer can retrieve it. The service objec
 
 [source, scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Get the record
-discovery.getRecordFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-http-service")).onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -464,7 +483,9 @@ method to combine lookup and service retrieval in one call:
 ----
 import io.vertx.scala.servicediscovery.types.HttpEndpoint
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-HttpEndpoint.getClient(discovery, todo-renderJsonObject, 
+import scala.util.Failure
+import scala.util.Success
+HttpEndpoint.getClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-http-service"), {
   case Success(result) => {
     var client = result
 
@@ -479,7 +500,7 @@ HttpEndpoint.getClient(discovery, todo-renderJsonObject,
     })
   }
   case Failure(cause) => println("Failure")
-)
+})
 
 ----
 
@@ -502,7 +523,9 @@ To publish an event bus service, you need to create a `link:../dataobjects.html#
 [source, scala]
 ----
 import io.vertx.scala.servicediscovery.types.EventBusService
-var record = EventBusService.createRecord("some-eventbus-service", "address", "examples.MyService", todo-renderJsonObject)
+import scala.util.Failure
+import scala.util.Success
+var record = EventBusService.createRecord("some-eventbus-service", "address", "examples.MyService", new io.vertx.core.json.JsonObject().put("some-metadata", "some value"))
 
 discovery.publishFuture(record).onComplete{
   case Success(result) => println("Success")
@@ -535,6 +558,8 @@ As for the other service types, publishing a message source is a 2-step process:
 [source, scala]
 ----
 import io.vertx.scala.servicediscovery.types.MessageSource
+import scala.util.Failure
+import scala.util.Success
 var record = MessageSource.createRecord("some-message-source-service", "some-address")
 
 discovery.publishFuture(record).onComplete{
@@ -559,8 +584,10 @@ With the first approach, the code is the following:
 
 [source, scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Get the record
-discovery.getRecordFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-message-source-service")).onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -573,7 +600,9 @@ When, using `link:../../scaladoc/io/vertx/scala/servicediscovery/types/MessageSo
 ----
 import io.vertx.scala.servicediscovery.types.MessageSource
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-MessageSource.getConsumer(discovery, todo-renderJsonObject, 
+import scala.util.Failure
+import scala.util.Success
+MessageSource.getConsumer(discovery, new io.vertx.core.json.JsonObject().put("name", "some-message-source-service"), {
   case Success(result) => {
     var consumer = result
 
@@ -589,7 +618,7 @@ MessageSource.getConsumer(discovery, todo-renderJsonObject,
 
   }
   case Failure(cause) => println("Failure")
-)
+})
 
 ----
 
@@ -608,7 +637,9 @@ As for the other service types, publishing a JDBC data source is a 2-step proces
 [source, scala]
 ----
 import io.vertx.scala.servicediscovery.types.JDBCDataSource
-var record = JDBCDataSource.createRecord("some-data-source-service", todo-renderJsonObject, todo-renderJsonObject)
+import scala.util.Failure
+import scala.util.Success
+var record = JDBCDataSource.createRecord("some-data-source-service", new io.vertx.core.json.JsonObject().put("url", "some jdbc url"), new io.vertx.core.json.JsonObject().put("some-metadata", "some-value"))
 
 discovery.publishFuture(record).onComplete{
   case Success(result) => println("Success")
@@ -630,8 +661,10 @@ the consumer:
 
 [source, scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Get the record
-discovery.getRecordFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-data-source-service")).onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -644,7 +677,9 @@ You can also use the `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.htm
 ----
 import io.vertx.scala.servicediscovery.types.JDBCDataSource
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-JDBCDataSource.getJDBCClient(discovery, todo-renderJsonObject, todo-renderJsonObject, 
+import scala.util.Failure
+import scala.util.Success
+JDBCDataSource.getJDBCClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-data-source-service"), new io.vertx.core.json.JsonObject().put("username", "clement").put("password", "*****"), {
   case Success(result) => {
     var client = result
 
@@ -655,7 +690,7 @@ JDBCDataSource.getJDBCClient(discovery, todo-renderJsonObject, todo-renderJsonOb
 
   }
   case Failure(cause) => println("Failure")
-)
+})
 
 ----
 
@@ -674,7 +709,9 @@ Publishing a Redis data source is a 2-step process:
 [source, scala]
 ----
 import io.vertx.scala.servicediscovery.types.RedisDataSource
-var record = RedisDataSource.createRecord("some-redis-data-source-service", todo-renderJsonObject, todo-renderJsonObject)
+import scala.util.Failure
+import scala.util.Success
+var record = RedisDataSource.createRecord("some-redis-data-source-service", new io.vertx.core.json.JsonObject().put("url", "localhost"), new io.vertx.core.json.JsonObject().put("some-metadata", "some-value"))
 
 discovery.publishFuture(record).onComplete{
   case Success(result) => println("Success")
@@ -694,8 +731,10 @@ the consumer:
 
 [source, scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Get the record
-discovery.getRecordFuture(todo-renderJsonObject).onComplete{
+discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-redis-data-source-service")).onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -708,7 +747,9 @@ You can also use the `link:../../scaladoc/io/vertx/scala/servicediscovery/types/
 ----
 import io.vertx.scala.servicediscovery.types.RedisDataSource
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-RedisDataSource.getRedisClient(discovery, todo-renderJsonObject, 
+import scala.util.Failure
+import scala.util.Success
+RedisDataSource.getRedisClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-redis-data-source-service"), {
   case Success(result) => {
     var client = result
 
@@ -719,7 +760,7 @@ RedisDataSource.getRedisClient(discovery, todo-renderJsonObject,
 
   }
   case Failure(cause) => println("Failure")
-)
+})
 
 ----
 

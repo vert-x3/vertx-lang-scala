@@ -43,8 +43,8 @@ The simplest way to create an STOMP server, using all default options is as foll
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx)).listen()
 
 ----
@@ -56,8 +56,8 @@ method:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx)).listen(1234, "0.0.0.0")
 
 ----
@@ -67,14 +67,17 @@ bridge. To be notified when the server is ready, use a handler as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import scala.util.Failure
+import scala.util.Success
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx)).listenFuture().onComplete{
   case Success(result) => {
     println(s"Failing to start the STOMP server : ${ar.cause().getMessage()}")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -85,8 +88,8 @@ You can also configure the host and port in `link:../dataobjects.html#StompServe
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx, StompServerOptions()
   .setPort(1234)
   .setHost("0.0.0.0")
@@ -100,12 +103,15 @@ STOMP servers are closed as follows:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 server.closeFuture().onComplete{
   case Success(result) => {
     println("The STOMP server has been closed")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -121,8 +127,8 @@ the `link:../dataobjects.html#StompServerOptions[StompServerOptions]`. Alternati
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx, netServer).handler(StompServerHandler.create(vertx)).listen()
 
 ----
@@ -145,10 +151,10 @@ The STOMP heartbeat is configured using a JSON object as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx, StompServerOptions()
-  .setHeartbeat(todo-renderJsonObject)
+  .setHeartbeat(new io.vertx.core.json.JsonObject().put("x", 1000).put("y", 1000))
 ).handler(StompServerHandler.create(vertx)).listen()
 
 ----
@@ -158,8 +164,8 @@ authentication requests:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx, StompServerOptions()
   .setSecured(true)
 ).handler(StompServerHandler.create(vertx).authProvider(provider)).listen()
@@ -186,14 +192,14 @@ can configure the server to use queues, or mix both types:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
-import io.vertx.scala.ext.stomp.Destination
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.Destination
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).destinationFactory((v: io.vertx.scala.core.Vertx, name: java.lang.String) => {
   if (name.startsWith("/queue")) {
-    return Destination.queue(vertx, name)
+    Destination.queue(vertx, name)
   } else {
-    return Destination.topic(vertx, name)
+    Destination.topic(vertx, name)
   }
 })).listen()
 
@@ -206,16 +212,16 @@ A server can decide to reject the destination creation by returning `null`:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
-import io.vertx.scala.ext.stomp.Destination
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.Destination
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).destinationFactory((v: io.vertx.scala.core.Vertx, name: java.lang.String) => {
   if (name.startsWith("/forbidden")) {
-    return null
+    null
   } else if (name.startsWith("/queue")) {
-    return Destination.queue(vertx, name)
+    Destination.queue(vertx, name)
   } else {
-    return Destination.topic(vertx, name)
+    Destination.topic(vertx, name)
   }
 })).listen()
 
@@ -245,8 +251,8 @@ method in order to let the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompSe
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).onAckHandler((acknowledgement: io.vertx.scala.ext.stomp.Acknowledgement) => {
   // Action to execute when the frames (one in `client-individual` mode, several
   // in `client` mode are acknowledged.
@@ -265,8 +271,8 @@ Here are some examples:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).closeHandler((connection: io.vertx.scala.ext.stomp.StompServerConnection) => {
   // client connection closed
 }).beginHandler((frame: io.vertx.scala.ext.stomp.ServerFrame) => {
@@ -290,6 +296,8 @@ You create a `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClient.html[Stom
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture().onComplete{
   case Success(result) => {
@@ -297,7 +305,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -308,6 +317,8 @@ configure the host and port as follows:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture(61613, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -315,7 +326,8 @@ var client = StompClient.create(vertx).connectFuture(61613, "0.0.0.0").onComplet
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -326,6 +338,8 @@ connections created with the client inherit of the error handler (but can have t
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).errorFrameHandler((frame: io.vertx.scala.ext.stomp.Frame) => {
   // Received the ERROR frame
@@ -335,7 +349,8 @@ var client = StompClient.create(vertx).errorFrameHandler((frame: io.vertx.scala.
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -344,6 +359,8 @@ You can also configure the host and port in the `link:../dataobjects.html#StompC
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx, StompClientOptions()
   .setHost("localhost")
@@ -354,7 +371,8 @@ var client = StompClient.create(vertx, StompClientOptions()
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -365,6 +383,8 @@ You can close a STOMP client:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx, StompClientOptions()
   .setHost("localhost")
@@ -375,7 +395,8 @@ var client = StompClient.create(vertx, StompClientOptions()
 
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 client.close()
@@ -387,6 +408,8 @@ use the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClientConnection.html
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx, StompClientOptions()
   .setHost("localhost")
@@ -398,7 +421,8 @@ var client = StompClient.create(vertx, StompClientOptions()
     connection.disconnect()
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -413,6 +437,8 @@ frames sent by the server. Notice that the server closes the connection with the
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx, StompClientOptions()
   .setHost("localhost")
@@ -425,7 +451,8 @@ var client = StompClient.create(vertx, StompClientOptions()
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -438,6 +465,8 @@ for instance tries to reconnect to the server:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.core.buffer.Buffer
 var client = StompClient.create(vertx).connectFuture().onComplete{
@@ -453,7 +482,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -469,6 +499,8 @@ you want to use in the
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture(netClient).onComplete{
   case Success(result) => {
@@ -478,7 +510,8 @@ var client = StompClient.create(vertx).connectFuture(netClient).onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -498,6 +531,8 @@ To subscribe to a destination, use:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture().onComplete{
   case Success(result) => {
@@ -507,7 +542,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -516,6 +552,8 @@ To unsubscribe, use:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture().onComplete{
   case Success(result) => {
@@ -529,7 +567,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     connection.unsubscribe("/queue")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -540,6 +579,8 @@ To send a message, use:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.core.buffer.Buffer
 var client = StompClient.create(vertx).connectFuture().onComplete{
@@ -552,7 +593,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     connection.send("/queue", Buffer.buffer("World"))
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -565,6 +607,8 @@ Clients can send `ACK` and `NACK` frames:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 var client = StompClient.create(vertx).connectFuture().onComplete{
   case Success(result) => {
@@ -576,7 +620,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -588,6 +633,8 @@ only when the transaction is committed.
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.core.buffer.Buffer
 var client = StompClient.create(vertx).connectFuture().onComplete{
@@ -604,7 +651,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     connection.abort("my-transaction")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -615,6 +663,8 @@ Each sent commands can have a _receipt_ handler, notified when the server has pr
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.core.buffer.Buffer
 var client = StompClient.create(vertx).connectFuture().onComplete{
@@ -626,7 +676,8 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
     })
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -642,8 +693,8 @@ addresses are event bus addresses that are transferred to STOMP.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).bridge(BridgeOptions()
   .setInboundPermitteds(Set(PermittedOptions()
     .setAddress("/toBus")
@@ -660,8 +711,8 @@ delivery where only one STOMP client or Event Bus consumer is invoked:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).bridge(BridgeOptions()
   .setInboundPermitteds(Set(PermittedOptions()
     .setAddress("/toBus")
@@ -680,12 +731,12 @@ message payload must meet. For instance, in the next examples, the payload must 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).bridge(BridgeOptions()
   .setInboundPermitteds(Set(PermittedOptions()
     .setAddress("/toBus")
-    .setMatch(todo-renderJsonObject)
+    .setMatch(new io.vertx.core.json.JsonObject().put("foo", "bar"))
   ))
   .setOutboundPermitteds(Set(PermittedOptions()
     .setAddress("/toStomp")
@@ -715,8 +766,8 @@ To achieve the first step, you would need a HTTP server, and pass the
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx, StompServerOptions()
   .setPort(-1)
   .setWebsocketBridge(true)
@@ -756,9 +807,9 @@ frames, and _illegal / unknown_ frames:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
-import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompClient
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx).receivedFrameHandler((sf: io.vertx.scala.ext.stomp.ServerFrame) => {
   println(sf.frame())
 })).listen()
@@ -778,9 +829,9 @@ You can also register a handler to be notified when a frame is going to be sent 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.stomp.StompServerHandler
-import io.vertx.scala.ext.stomp.StompClient
 import io.vertx.scala.ext.stomp.StompServer
+import io.vertx.scala.ext.stomp.StompClient
+import io.vertx.scala.ext.stomp.StompServerHandler
 var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx)).writingFrameHandler((sf: io.vertx.scala.ext.stomp.ServerFrame) => {
   println(sf.frame())
 }).listen()
