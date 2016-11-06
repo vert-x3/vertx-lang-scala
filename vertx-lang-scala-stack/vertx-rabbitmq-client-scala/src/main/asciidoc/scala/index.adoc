@@ -37,9 +37,9 @@ You can create a client instance as follows using a full amqp uri:
 [source,scala]
 ----
 import io.vertx.scala.rabbitmq.RabbitMQClient
-var config = todo-renderJsonObject
+var config = new io.vertx.core.json.JsonObject()
 // full amqp uri
-config.put(uri, "amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
+config.put("uri", "amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
 var client = RabbitMQClient.create(vertx, config)
 
 ----
@@ -49,22 +49,47 @@ Or you can also specify individual parameters manually:
 [source,scala]
 ----
 import io.vertx.scala.rabbitmq.RabbitMQClient
-var config = todo-renderJsonObject
+var config = new io.vertx.core.json.JsonObject()
 // Each parameter is optional
 // The default parameter with be used if the parameter is not set
-config.put(user, "user1")
-config.put(password, "password1")
-config.put(host, "localhost")
-config.put(port, 5672)
-config.put(virtualHost, "vhost1")
-config.put(connectionTimeout, 60)
-config.put(requestedHeartbeat, 60)
-config.put(handshakeTimeout, 60)
-config.put(requestedChannelMax, 5)
-config.put(networkRecoveryInterval, 5)
-config.put(automaticRecoveryEnabled, true)
+config.put("user", "user1")
+config.put("password", "password1")
+config.put("host", "localhost")
+config.put("port", 5672)
+config.put("virtualHost", "vhost1")
+config.put("connectionTimeout", 60)
+config.put("requestedHeartbeat", 60)
+config.put("handshakeTimeout", 60)
+config.put("requestedChannelMax", 5)
+config.put("networkRecoveryInterval", 5)
+config.put("automaticRecoveryEnabled", true)
 
 var client = RabbitMQClient.create(vertx, config)
+
+----
+
+=== Declare exchange with additional config
+
+You can pass additional config parameters to RabbitMQ's exchangeDeclare method
+
+[source, scala]
+----
+import scala.util.Failure
+import scala.util.Success
+
+var config = Map()
+
+config + ("x-dead-letter-exchange" -> "my.deadletter.exchange")
+config + ("alternate-exchange" -> "my.alternate.exchange")
+// ...
+client.exchangeDeclareFuture("my.exchange", "fanout", true, false, config).onComplete{
+  case Success(result) => {
+    println("Exchange successfully declared with config")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
 
 ----
 
@@ -80,13 +105,16 @@ Publish a message to a queue
 
 [source,scala]
 ----
-var message = todo-renderJsonObject
+import scala.util.Failure
+import scala.util.Success
+var message = new io.vertx.core.json.JsonObject().put("body", "Hello RabbitMQ, from Vert.x !")
 client.basicPublishFuture("", "my.queue", message).onComplete{
   case Success(result) => {
     println("Message published !")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -98,10 +126,12 @@ Consume messages from a queue
 [source,scala]
 ----
 // Create the event bus handler which messages will be sent to
+import scala.util.Failure
+import scala.util.Success
 // Create the event bus handler which messages will be sent to
 vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
   var json = msg.body()
-  println(s"Got message: ${json.body}")
+  println(s"Got message: ${json.getValue("body")}")
 })
 
 // Setup the link between rabbitmq consumer and event bus address
@@ -110,7 +140,8 @@ client.basicConsumeFuture("my.queue", "my.address").onComplete{
     println("RabbitMQ consumer created !")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -121,13 +152,16 @@ Will get a message from a queue
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 client.basicGetFuture("my.queue", true).onComplete{
   case Success(result) => {
     var msg = result
-    println(s"Got message: ${msg.body}")
+    println(s"Got message: ${msg.getValue("body")}")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -136,12 +170,14 @@ client.basicGetFuture("my.queue", true).onComplete{
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 // Create the event bus handler which messages will be sent to
 vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
   var json = msg.body()
-  println(s"Got message: ${json.body}")
+  println(s"Got message: ${json.getValue("body")}")
   // ack
-  client.basicAckFuture(json.deliveryTag, false).onComplete{
+  client.basicAckFuture(json.getValue("deliveryTag"), false).onComplete{
     case Success(result) => println("Success")
     case Failure(cause) => println("Failure")
   }
@@ -153,7 +189,8 @@ client.basicConsumeFuture("my.queue", "my.address", false).onComplete{
     println("RabbitMQ consumer created !")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----

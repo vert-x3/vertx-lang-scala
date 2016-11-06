@@ -112,7 +112,7 @@ var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
     .setTenant("my-namespace")
-    .setHttpHeaders(todo-renderJsonObject)
+    .setHttpHeaders(new io.vertx.core.json.JsonObject().put("Authorization", "Bearer xkjdksf9890-shjkjhkjlkjlk"))
   )
 )
 
@@ -492,8 +492,8 @@ The metrics bridge handler expects messages in the JSON format. The JSON object 
 
 [source,scala]
 ----
-val var vertx
-var message = todo-renderJsonObject
+var vertx = null.asInstanceOf[io.vertx.core.Vertx]
+var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("value", 7)
 vertx.eventBus().publish("metrics", message)
 
 ----
@@ -504,8 +504,8 @@ was processed. If the metric is a counter or if you prefer explicit configuratio
 
 [source,scala]
 ----
-val var vertx
-var message = todo-renderJsonObject
+var vertx = null.asInstanceOf[io.vertx.core.Vertx]
+var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("type", "counter").put("timestamp", 189898098098908).put("value", 7)
 vertx.eventBus().publish("metrics", message)
 
 ----

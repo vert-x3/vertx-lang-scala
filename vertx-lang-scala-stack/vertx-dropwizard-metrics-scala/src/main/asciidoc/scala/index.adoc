@@ -107,7 +107,7 @@ can be retrieved by providing the fully qualified name <fqn> `baseName` + `.` + 
 [source,scala]
 ----
 var metrics = metricsService.getMetricsSnapshot(vertx)
-metrics.vertx.eventbus.handlers
+metrics.getValue("vertx.eventbus.handlers")
 
 ----
 
@@ -117,7 +117,7 @@ or from the measured component itself using just the metric name:
 ----
 var eventBus = vertx.eventBus()
 var metrics = metricsService.getMetricsSnapshot(eventBus)
-metrics.handlers
+metrics.getValue("handlers")
 
 ----
 
@@ -130,7 +130,7 @@ Metrics names can also be listed:
 var metricsNames = metricsService.metricsNames()
 metricsNames.foreach(metricsName => {
   println(s"Known metrics name ${metricsName}")
-}
+})
 
 
 ----

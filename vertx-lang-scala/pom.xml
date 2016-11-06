@@ -66,8 +66,8 @@
     </dependency>
     <dependency>
       <groupId>org.scala-lang.modules</groupId>
-      <artifactId>scala-java8-compat_2.11</artifactId>
-      <version>0.8.0-RC3</version>
+      <artifactId>scala-java8-compat_${scala.build.version}</artifactId>
+      <version>0.8.0</version>
     </dependency>
     <!-- Not needed at runtime -->
     <dependency>
@@ -137,14 +137,14 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.11</artifactId>
-      <version>2.2.6</version>
+      <artifactId>scalatest_${scala.build.version}</artifactId>
+      <version>3.0.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalactic</groupId>
-      <artifactId>scalactic_2.11</artifactId>
-      <version>2.2.6</version>
+      <artifactId>scalactic_${scala.build.version}</artifactId>
+      <version>3.0.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

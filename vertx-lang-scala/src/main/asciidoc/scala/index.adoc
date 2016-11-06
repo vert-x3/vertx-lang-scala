@@ -282,7 +282,9 @@ result handler to be called back asynchronous when the blocking code has been ex
 
 [source,scala]
 ----
-val var someAPI = examples.CoreExamples.BlockingAPI()
+import scala.util.Failure
+import scala.util.Success
+var someAPI = new examples.CoreExamples.BlockingAPI()
 vertx.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
   var result = someAPI.blockingMethod("hello")
@@ -311,7 +313,9 @@ Additional pools can be created for different purposes:
 
 [source,scala]
 ----
-val var someAPI = examples.CoreExamples.BlockingAPI()
+import scala.util.Failure
+import scala.util.Success
+var someAPI = new examples.CoreExamples.BlockingAPI()
 var executor = vertx.createSharedWorkerExecutor("my-worker-pool")
 executor.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
@@ -369,19 +373,22 @@ _succeeded_ when all the futures are and _failed_ when at least one of the futur
 [source,scala]
 ----
 import io.vertx.scala.core.CompositeFuture
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.Future
 var httpServerFuture = Future.future()
-httpServer.listenFuture().onComplete{httpServerFuture.completer()}
+httpServer.listenFuture().onCompletehttpServerFuture.completer()
 
 var netServerFuture = Future.future()
-netServer.listenFuture().onComplete{netServerFuture.completer()}
+netServer.listenFuture().onCompletenetServerFuture.completer()
 
 CompositeFuture.all(httpServerFuture, netServerFuture).setHandlerFuture().onComplete{
   case Success(result) => {
     // All servers started
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -408,12 +415,15 @@ all the futures are failed:
 [source,scala]
 ----
 import io.vertx.scala.core.CompositeFuture
+import scala.util.Failure
+import scala.util.Success
 CompositeFuture.any(future1, future2).setHandlerFuture().onComplete{
   case Success(result) => {
     // At least one is succeeded
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -435,12 +445,15 @@ them is failed:
 [source,scala]
 ----
 import io.vertx.scala.core.CompositeFuture
+import scala.util.Failure
+import scala.util.Success
 CompositeFuture.join(future1, future2, future3).setHandlerFuture().onComplete{
   case Success(result) => {
     // All succeeded
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -461,23 +474,23 @@ for chaining futures (so sequential composition).
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.core.Future
+import io.vertx.scala.core.buffer.Buffer
 
 var fs = vertx.fileSystem()
 var startFuture = Future.future()
 
 var fut1 = Future.future()
-fs.createFileFuture("/foo").onComplete{fut1.completer()}
+fs.createFileFuture("/foo").onCompletefut1.completer()
 
 fut1.compose((v: java.lang.Void) => {
   // When the file is created (fut1), execute this:
   var fut2 = Future.future()
-  fs.writeFileFuture("/foo", Buffer.buffer()).onComplete{fut2.completer()}
-  return fut2
+  fs.writeFileFuture("/foo", Buffer.buffer()).onCompletefut2.completer()
+  fut2
 }).compose((v: java.lang.Void) => {
   // When the file is written (fut2), execute this:
-  fs.moveFuture("/foo", "/bar").onComplete{startFuture.completer()}
+  fs.moveFuture("/foo", "/bar").onCompletestartFuture.completer()
 }, startFuture)
 
 ----
@@ -596,7 +609,7 @@ NOTE: Deploying Verticle *instances* is Java only.
 [source,java]
 ----
 
-var myVerticle = examples.CoreExamples.MyVerticle()
+var myVerticle = new examples.CoreExamples.MyVerticle()
 vertx.deployVerticle(myVerticle)
 
 ----
@@ -662,12 +675,15 @@ If you want to be notified when deployment is complete you can deploy specifying
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 vertx.deployVerticleFuture("com.mycompany.MyOrderProcessorVerticle").onComplete{
   case Success(result) => {
     println(s"Deployment id is: ${result}")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -684,12 +700,15 @@ Un-deployment is itself asynchronous so if you want to be notified when un-deplo
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 vertx.undeployFuture(deploymentID).onComplete{
   case Success(result) => {
     println("Undeployed ok")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
