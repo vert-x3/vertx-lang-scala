@@ -44,12 +44,12 @@ class ScalaVerticle {
 
   def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
     stop()
-    stopPromise.complete(Success())
+    stopPromise.success(())
   }
 
   def start(startPromise: concurrent.Promise[Unit]): Unit = {
     start()
-    startPromise.complete(Success())
+    startPromise.success(())
   }
 
   def asJava(): Verticle = new AbstractVerticle {

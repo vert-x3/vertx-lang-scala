@@ -68,8 +68,8 @@ var mailClient = MailClient.createNonShared(vertx, config)
 A more elaborate example using a mailserver that requires login via TLS
 [source,scala]
 ----
-import io.vertx.ext.mail.StartTLSOptions
 import io.vertx.scala.ext.mail.MailClient
+import io.vertx.ext.mail.StartTLSOptions
 var config = MailConfig()
 config.setHostname("mail.example.com")
 config.setPort(587)
@@ -148,12 +148,15 @@ A mail is sent as follows:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 mailClient.sendMailFuture(message).onComplete{
   case Success(result) => {
     println(result)
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----

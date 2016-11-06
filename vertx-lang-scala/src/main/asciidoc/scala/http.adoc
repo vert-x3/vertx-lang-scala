@@ -128,6 +128,8 @@ For example:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 
 var server = vertx.createHttpServer()
 server.listenFuture(8080, "myhost.com").onComplete{
@@ -135,7 +137,8 @@ server.listenFuture(8080, "myhost.com").onComplete{
     println("Server is now listening!")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 ----
@@ -684,7 +687,7 @@ vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpS
   try {
     offset = java.lang.Long.parseLong(request.getParam("start"))
   } catch {
-    e:Exception => // error handling...
+    case e:Exception => // error handling...
   }
 
 
@@ -692,7 +695,7 @@ vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpS
   try {
     end = java.lang.Long.parseLong(request.getParam("end"))
   } catch {
-    e:Exception => // error handling...
+    case e:Exception => // error handling...
   }
 
 
@@ -711,7 +714,7 @@ vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpS
   try {
     offset = java.lang.Long.parseLong(request.getParam("start"))
   } catch {
-    e:Exception => // error handling...
+    case e:Exception => // error handling...
   }
 
 
@@ -807,7 +810,7 @@ The request handler are notified of stream reset events with the `link:../../sca
 ----
 
 request.response().exceptionHandler((err: java.lang.Throwable) => {
-  if (err.isInstanceOf[StreamResetException]) {
+  if (err.isInstanceOf[io.vertx.core.http.StreamResetException]) {
     var reset = err
     println(s"Stream reset ${reset.getCode()}")
   }
@@ -824,6 +827,8 @@ When a server process a request, it can push a request/response to the client:
 [source,scala]
 ----
 import io.vertx.core.http.HttpMethod
+import scala.util.Failure
+import scala.util.Success
 
 var response = request.response()
 
@@ -838,7 +843,8 @@ response.pushFuture(HttpMethod.GET, "/main.js").onComplete{
     pushedResponse.putHeader("content-type", "application/json").end("alert(\"Push response hello\")")
   }
   case Failure(cause) => {
-    println(s"$cause")}
+    println(s"$cause")
+  }
 }
 
 // Send the requested resource
@@ -1236,7 +1242,7 @@ no need to set the `Content-Length` of the request up-front.
 request.setChunked(true)
 
 // Write some chunks
-for ( i <- 0 to 10) {
+for ( i <- 0 until 10) {
   request.write(s"this-is-chunk-${i}")
 }
 
@@ -1382,7 +1388,7 @@ The request handler are notified of stream reset events with the `link:../../sca
 ----
 
 request.exceptionHandler((err: java.lang.Throwable) => {
-  if (err.isInstanceOf[StreamResetException]) {
+  if (err.isInstanceOf[io.vertx.core.http.StreamResetException]) {
     var reset = err
     println(s"Stream reset ${reset.getCode()}")
   }
@@ -1857,6 +1863,8 @@ to be notified of the acknowledgment:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 connection.updateSettingsFuture(Http2Settings()
   .setMaxConcurrentStreams(100)
 ).onComplete{
@@ -1889,9 +1897,11 @@ endpoint:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.core.buffer.Buffer
 var data = Buffer.buffer()
-for ( i <- 0 to 8) {
+for ( i <- 0 until 8) {
   data.appendByte(i)
 }
 

@@ -89,6 +89,8 @@ if one wants to get a value of a key it can be done as:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.redis.RedisClient
 var redis = RedisClient.create(vertx, RedisOptions())
 
@@ -112,12 +114,14 @@ To start a subscriber one would do:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.redis.RedisClient
 
 // register a handler for the incoming message the naming the Redis module will use is base address + '.' + redis channel
 vertx.eventBus().consumer("io.vertx.redis.channel1", (received: io.vertx.scala.core.eventbus.Message<io.vertx.scala.core.json.JsonObject>) => {
   // do whatever you need to do with your message
-  var value = received.body().value
+  var value = received.body().getValue("value")
   // the value is a JSON doc with the following properties
   // channel - The channel to which this message was sent
   // pattern - Pattern is present if you use psubscribe command and is the pattern that matched this message channel
@@ -139,6 +143,8 @@ And from another place in the code publish messages to the queue:
 
 [source,scala]
 ----
+import scala.util.Failure
+import scala.util.Success
 import io.vertx.scala.redis.RedisClient
 
 var redis = RedisClient.create(vertx, RedisOptions())
