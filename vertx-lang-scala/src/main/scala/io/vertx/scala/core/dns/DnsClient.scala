@@ -20,18 +20,18 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.dns.{DnsClient => JDnsClient}
-import io.vertx.core.dns.{MxRecord => JMxRecord}
-import io.vertx.core.Handler
-import io.vertx.core.dns.{SrvRecord => JSrvRecord}
+  import io.vertx.core.dns.{DnsClient => JDnsClient}
+    import io.vertx.core.dns.{MxRecord => JMxRecord}
+        import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Provides a way to asynchronously lookup information from DNS servers.
   * 
   * Please consult the documentation for more information on DNS clients.
   */
-class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
+class DnsClient(private val _asJava: JDnsClient) {
 
-  def asJava: io.vertx.core.dns.DnsClient = _asJava
+  def asJava: JDnsClient = _asJava
 
   /**
     * Try to lookup the A (ipv4) or AAAA (ipv6) record for the given name. The first found will be used.
@@ -170,7 +170,7 @@ class DnsClient(private val _asJava: io.vertx.core.dns.DnsClient) {
 
 object DnsClient {
 
-  def apply(_asJava: io.vertx.core.dns.DnsClient): DnsClient =
+  def apply(_asJava: JDnsClient): DnsClient =
     new DnsClient(_asJava)
 
 }

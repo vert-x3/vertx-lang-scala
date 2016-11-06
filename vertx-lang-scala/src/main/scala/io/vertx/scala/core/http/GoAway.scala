@@ -18,7 +18,11 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{GoAway => JGoAway}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * A  frame.
@@ -29,7 +33,7 @@ class GoAway(val asJava: JGoAway) {
   /**
     * Set the additional debug data
     */
-  def setDebugData(value:io.vertx.core.buffer.Buffer) = {
+  def setDebugData(value: JBuffer) = {
     asJava.setDebugData(value)
     this
   }
@@ -39,7 +43,7 @@ class GoAway(val asJava: JGoAway) {
 
   /**
     */
-  def setErrorCode(value:Long) = {
+  def setErrorCode(value: Long) = {
     asJava.setErrorCode(value)
     this
   }
@@ -50,7 +54,7 @@ class GoAway(val asJava: JGoAway) {
   /**
     * Set the last stream id.
     */
-  def setLastStreamId(value:Int) = {
+  def setLastStreamId(value: Int) = {
     asJava.setLastStreamId(value)
     this
   }
@@ -62,7 +66,7 @@ class GoAway(val asJava: JGoAway) {
 object GoAway {
   
   def apply() = {
-    new GoAway(new JGoAway(io.vertx.lang.scala.json.Json.emptyObj()))
+    new GoAway(new JGoAway(emptyObj()))
   }
   
   def apply(t: JGoAway) = {

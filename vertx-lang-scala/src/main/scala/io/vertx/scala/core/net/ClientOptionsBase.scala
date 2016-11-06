@@ -19,16 +19,16 @@ package io.vertx.scala.core.net
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
+import io.vertx.core.net.{ClientOptionsBase => JClientOptionsBase}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
-  * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
+  * Base class for Client options
   */
 
-class NetClientOptions(val asJava: JNetClientOptions) {
+class ClientOptionsBase(val asJava: JClientOptionsBase) {
 
   /**
     * Set the connect timeout
@@ -83,18 +83,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
   def getEnabledSecureTransportProtocols = {
     asJava.getEnabledSecureTransportProtocols()
-  }
-
-  /**
-    * Set the hostname verification algorithm interval
-    * To disable hostname verification, set hostnameVerificationAlgorithm to an empty String
-    */
-  def setHostnameVerificationAlgorithm(value: String) = {
-    asJava.setHostnameVerificationAlgorithm(value)
-    this
-  }
-  def getHostnameVerificationAlgorithm = {
-    asJava.getHostnameVerificationAlgorithm()
   }
 
   /**
@@ -212,28 +200,6 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
   def getReceiveBufferSize = {
     asJava.getReceiveBufferSize()
-  }
-
-  /**
-    * Set the value of reconnect attempts
-    */
-  def setReconnectAttempts(value: Int) = {
-    asJava.setReconnectAttempts(value)
-    this
-  }
-  def getReconnectAttempts = {
-    asJava.getReconnectAttempts()
-  }
-
-  /**
-    * Set the reconnect interval
-    */
-  def setReconnectInterval(value: Long) = {
-    asJava.setReconnectInterval(value)
-    this
-  }
-  def getReconnectInterval = {
-    asJava.getReconnectInterval()
   }
 
   /**
@@ -355,23 +321,3 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   }
 }
 
-object NetClientOptions {
-  
-  def apply() = {
-    new NetClientOptions(new JNetClientOptions(emptyObj()))
-  }
-  
-  def apply(t: JNetClientOptions) = {
-    if(t != null)
-      new NetClientOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):NetClientOptions = {
-    if(json != null)
-      new NetClientOptions(new JNetClientOptions(json))
-    else
-      null
-  }
-}

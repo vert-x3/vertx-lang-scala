@@ -20,7 +20,18 @@
  */\n\n
 @code{
 def changeJavaGenericNotationToScalaNotation(type) {
- type.name.replace('<', '[').replace('>', ']');
+  var ret = "";
+  if(!type.name.startsWith("java"))
+    ret = type.simpleName.replace('<', '[').replace('>', ']');
+  else
+    ret = type.name.replace('<', '[').replace('>', ']');
+  if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray") && !(type.kind==CLASS_ENUM))
+    ret = 'J' + ret;
+  return ret;
+}
+
+def typeToAliasedType(type) {
+  type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}"
 }
 
 def toAliasedTypeName(type) {
@@ -56,7 +67,7 @@ def toScalaType(type) {
       ret = 'Char';
     }
   } else if (type.kind == CLASS_DATA_OBJECT) {
-    ret = type.raw.translatePackageName("scala") + '.' + type.simpleName;
+    ret = type.simpleName;
   } else if (type.kind == CLASS_ENUM) {
     ret = type.name;
   } else if (type.kind == CLASS_JSON_OBJECT ||
@@ -79,7 +90,29 @@ package @{type.raw.translatePackageName("scala")}\n
 @comment{"# Generate the imports"}
 import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConversions._\n
-import @{type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}\n"}
+import io.vertx.lang.scala.json.Json._\n
+import @{typeToAliasedType(type)+"\n"}
+
+@foreach{importedType : importedTypes}
+	@if{importedType.kind == CLASS_API}
+import @{typeToAliasedType(importedType)+"\n"}
+import @{importedType.raw.translateName("scala")}\n
+import @{typeToAliasedType(importedType)+"\n"}
+	@else{importedType.kind == CLASS_JSON_OBJECT ||
+				importedType.kind == CLASS_JSON_ARRAY ||
+				importedType.kind == CLASS_ENUM}
+import @{importedType.raw}\n
+	@else{importedType.kind != CLASS_ASYNC_RESULT &&
+				!importedType.packageName.equals("java.lang") &&
+				importedType.kind != CLASS_HANDLER &&
+				importedType.kind != CLASS_LIST &&
+				importedType.kind != CLASS_SET &&
+				importedType.kind != CLASS_MAP}
+import @{typeToAliasedType(importedType)+"\n"}
+import @{importedType.raw.translateName("scala")}\n
+	@end{}
+@end{}
+
 \n
 
 @comment{"# Generate the Class or Interface/Trait"}
@@ -102,12 +135,12 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
 @end{}
 @if{property.adder}
 @if{property.isMap}
-  def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n
+  def @{property.adderMethod}(key: String, value: @{toScalaType(property.type)}) = {\n
     asJava.@{property.adderMethod}(key, value)\n
     this\n
   }\n
 @else{}
-  def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
+  def @{property.adderMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
     asJava.@{property.adderMethod}(value.asJava)\n
 @else{}
@@ -119,7 +152,7 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
 @end{}
 @if{property.setter}
 @if{property.isList}
-  def @{property.setterMethod}(value:scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
@@ -130,7 +163,7 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
     this\n
   }\n
 @else{property.isSet}
-  def @{property.setterMethod}(value:Set[@{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: Set[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
@@ -141,7 +174,7 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
     this\n
   }\n
 @else{property.isMap}
-  def @{property.setterMethod}(value:Map[String, @{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: Map[String, @{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box))\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
@@ -152,7 +185,7 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
     this\n
   }\n
 @else{}
-  def @{property.setterMethod}(value:@{toScalaType(property.type)}) = {\n
+  def @{property.setterMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
     asJava.@{property.setterMethod}(value.asJava)\n
 @else{}
@@ -171,10 +204,12 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
 @end{}
 }\n
 \n
+
+@if{concrete}
 object @{type.raw.simpleName} {\n
   \n
   def apply() = {\n
-    new @{typeName}(new @{jTypeName}(io.vertx.lang.scala.json.Json.emptyObj()))\n
+    new @{typeName}(new @{jTypeName}(emptyObj()))\n
   }\n
   \n
   def apply(t: @{jTypeName}) = {\n
@@ -191,3 +226,4 @@ object @{type.raw.simpleName} {\n
       null\n
   }\n
 }\n
+@end{}

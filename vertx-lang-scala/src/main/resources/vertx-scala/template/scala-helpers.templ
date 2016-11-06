@@ -34,7 +34,7 @@
         ret = 'Char';
       }
     } else if (type.kind == CLASS_DATA_OBJECT) {
-      ret = type.translateName("scala");
+      ret = type.simpleName;
     }
     else if (type.kind == CLASS_ENUM) {
       ret = type.name;
@@ -189,10 +189,15 @@
     }
   }
 
-
-
   def changeJavaGenericNotationToScalaNotation(type) {
-    type.name.replace('<', '[').replace('>', ']');
+    var ret = "";
+    if(!type.name.startsWith("java"))
+      ret = type.simpleName.replace('<', '[').replace('>', ']');
+    else
+      ret = type.name.replace('<', '[').replace('>', ']');
+    if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray") && !(type.kind==CLASS_ENUM))
+      ret = 'J' + ret;
+    return ret;
   }
 
   def getGenericType(name) {
@@ -641,7 +646,7 @@
     var conversion = handleMethodReturn(method);
 
     if (method.returnType.kind == CLASS_DATA_OBJECT) {
-      invocation = method.returnType.translateName("scala") + '(' +invocation + ')';
+      invocation = method.returnType.simpleName + '(' +invocation + ')';
     }
 
     if (method.returnType.isNullable){
@@ -691,4 +696,9 @@
     }
     return escapeIfKeyword(methodName);
   }
+
+  def typeToAliasedType(type) {
+    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}"
+  }
 }
+

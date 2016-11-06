@@ -19,6 +19,7 @@ package io.vertx.scala.core.metrics
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.metrics.{Measured => JMeasured}
 
 /**
   */
@@ -36,12 +37,12 @@ def isMetricsEnabled(): Boolean
 
 object Measured {
 
-  def apply(_asJava: io.vertx.core.metrics.Measured): Measured =
+  def apply(_asJava: JMeasured): Measured =
     new MeasuredImpl(_asJava)
 
-  private class MeasuredImpl(private val _asJava: io.vertx.core.metrics.Measured) extends Measured {
+  private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
 
-    def asJava: io.vertx.core.metrics.Measured = _asJava
+    def asJava: JMeasured = _asJava
 
     /**
       * Whether the metrics are enabled for this measured object

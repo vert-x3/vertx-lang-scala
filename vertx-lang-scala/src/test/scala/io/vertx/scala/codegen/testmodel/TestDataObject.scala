@@ -18,27 +18,28 @@ package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 
 /**
   */
 
 class TestDataObject(val asJava: JTestDataObject) {
-  def setBar(value:Int) = {
+  def setBar(value: Int) = {
     asJava.setBar(value)
     this
   }
   def getBar = {
     asJava.getBar()
   }
-  def setFoo(value:String) = {
+  def setFoo(value: String) = {
     asJava.setFoo(value)
     this
   }
   def getFoo = {
     asJava.getFoo()
   }
-  def setWibble(value:Double) = {
+  def setWibble(value: Double) = {
     asJava.setWibble(value)
     this
   }
@@ -50,7 +51,7 @@ class TestDataObject(val asJava: JTestDataObject) {
 object TestDataObject {
   
   def apply() = {
-    new TestDataObject(new JTestDataObject(io.vertx.lang.scala.json.Json.emptyObj()))
+    new TestDataObject(new JTestDataObject(emptyObj()))
   }
   
   def apply(t: JTestDataObject) = {

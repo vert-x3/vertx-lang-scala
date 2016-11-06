@@ -19,10 +19,10 @@ package io.vertx.scala.core.streams
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-
+      import io.vertx.core.streams.{StreamBase => JStreamBase}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
+  
 /**
   * Represents a stream of items that can be read from.
   * 
@@ -69,12 +69,12 @@ def endHandler(endHandler: () => Unit): ReadStream[T]
 
 object ReadStream {
 
-  def apply[T](_asJava: io.vertx.core.streams.ReadStream[T]): ReadStream[T] =
+  def apply[T](_asJava: JReadStream[T]): ReadStream[T] =
     new ReadStreamImpl[T](_asJava)
 
-  private class ReadStreamImpl[T](private val _asJava: io.vertx.core.streams.ReadStream[T]) extends ReadStream[T] {
+  private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
 
-    def asJava: io.vertx.core.streams.ReadStream[T] = _asJava
+    def asJava: JReadStream[T] = _asJava
 
     /**
       * Set an exception handler on the read stream.

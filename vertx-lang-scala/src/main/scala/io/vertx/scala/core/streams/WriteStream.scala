@@ -20,9 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{StreamBase => JStreamBase}
-import io.vertx.core.Handler
-
+      import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{StreamBase => JStreamBase}
+  
 /**
   *
   * Represents a stream of data that can be written to.
@@ -97,12 +97,12 @@ def drainHandler(handler: () => Unit): WriteStream[T]
 
 object WriteStream {
 
-  def apply[T](_asJava: io.vertx.core.streams.WriteStream[T]): WriteStream[T] =
+  def apply[T](_asJava: JWriteStream[T]): WriteStream[T] =
     new WriteStreamImpl[T](_asJava)
 
-  private class WriteStreamImpl[T](private val _asJava: io.vertx.core.streams.WriteStream[T]) extends WriteStream[T] {
+  private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
 
-    def asJava: io.vertx.core.streams.WriteStream[T] = _asJava
+    def asJava: JWriteStream[T] = _asJava
 
     /**
       * Set an exception handler on the write stream.

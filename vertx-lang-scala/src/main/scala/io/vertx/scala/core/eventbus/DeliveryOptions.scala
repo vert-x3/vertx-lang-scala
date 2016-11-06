@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
@@ -32,7 +33,7 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
   /**
     * Set the codec name.
     */
-  def setCodecName(value:String) = {
+  def setCodecName(value: String) = {
     asJava.setCodecName(value)
     this
   }
@@ -46,7 +47,7 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
     * Message headers can be sent with any message and will be accessible with [[io.vertx.scala.core.eventbus.Message]]
     * at the recipient.
     */
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
@@ -54,7 +55,7 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
   /**
     * Set the send timeout.
     */
-  def setSendTimeout(value:Long) = {
+  def setSendTimeout(value: Long) = {
     asJava.setSendTimeout(value)
     this
   }
@@ -66,7 +67,7 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
 object DeliveryOptions {
   
   def apply() = {
-    new DeliveryOptions(new JDeliveryOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DeliveryOptions(new JDeliveryOptions(emptyObj()))
   }
   
   def apply(t: JDeliveryOptions) = {

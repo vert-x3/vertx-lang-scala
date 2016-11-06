@@ -14,90 +14,21 @@
  * under the License.
  */
 
-package io.vertx.scala.core.http
+package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
+import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
-import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
-import io.vertx.scala.core.net.JksOptions
-import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
-import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
-import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
-import io.vertx.scala.core.net.NetServerOptions
 
 /**
-  * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
+  * Base class. TCP and SSL related options
   */
 
-class HttpServerOptions(val asJava: JHttpServerOptions) {
-
-  /**
-    * Set the accept back log
-    */
-  def setAcceptBacklog(value: Int) = {
-    asJava.setAcceptBacklog(value)
-    this
-  }
-  def getAcceptBacklog = {
-    asJava.getAcceptBacklog()
-  }
-
-  /**
-    * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiatiation.
-    */
-  def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    asJava.setAlpnVersions(value)
-    this
-  }
-  def getAlpnVersions = {
-    asJava.getAlpnVersions()
-  }
-
-  /**
-    * Set whether client auth is required
-    */
-  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
-    asJava.setClientAuth(value)
-    this
-  }
-  def getClientAuth = {
-    asJava.getClientAuth()
-  }
-
-  /**
-    * Set whether client auth is required
-    */
-  def setClientAuthRequired(value: Boolean) = {
-    asJava.setClientAuthRequired(value)
-    this
-  }
-  def isClientAuthRequired = {
-    asJava.isClientAuthRequired()
-  }
-
-  /**
-    * Set whether the server supports compression
-    */
-  def setCompressionSupported(value: Boolean) = {
-    asJava.setCompressionSupported(value)
-    this
-  }
-  def isCompressionSupported = {
-    asJava.isCompressionSupported()
-  }
+class TCPSSLOptions(val asJava: JTCPSSLOptions) {
 
   /**
     * Add a CRL path
@@ -119,17 +50,6 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   }
   def getCrlValues = {
     asJava.getCrlValues()
-  }
-
-  /**
-    * Set whether the server supports decompression
-    */
-  def setDecompressionSupported(value: Boolean) = {
-    asJava.setDecompressionSupported(value)
-    this
-  }
-  def isDecompressionSupported = {
-    asJava.isDecompressionSupported()
   }
 
   /**
@@ -155,43 +75,6 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   }
 
   /**
-    * Set whether 100 Continue should be handled automatically
-    */
-  def setHandle100ContinueAutomatically(value: Boolean) = {
-    asJava.setHandle100ContinueAutomatically(value)
-    this
-  }
-  def isHandle100ContinueAutomatically = {
-    asJava.isHandle100ContinueAutomatically()
-  }
-
-  /**
-    * Set the host
-    */
-  def setHost(value: String) = {
-    asJava.setHost(value)
-    this
-  }
-  def getHost = {
-    asJava.getHost()
-  }
-
-  /**
-    * Set the default HTTP/2 connection window size. It overrides the initial window
-    * size set by <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>, so the connection window size
-    * is greater than for its streams, in order the data throughput.
-    * <p/>
-    * A value of `-1` reuses the initial window size setting.
-    */
-  def setHttp2ConnectionWindowSize(value: Int) = {
-    asJava.setHttp2ConnectionWindowSize(value)
-    this
-  }
-  def getHttp2ConnectionWindowSize = {
-    asJava.getHttp2ConnectionWindowSize()
-  }
-
-  /**
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
@@ -201,17 +84,6 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   }
   def getIdleTimeout = {
     asJava.getIdleTimeout()
-  }
-
-  /**
-    * Set the HTTP/2 connection settings immediatly sent by the server when a client connects.
-    */
-  def setInitialSettings(value: Http2Settings) = {
-    asJava.setInitialSettings(value.asJava)
-    this
-  }
-  def getInitialSettings = {
-    asJava.getInitialSettings()
   }
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
@@ -235,50 +107,6 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   }
   def getLogActivity = {
     asJava.getLogActivity()
-  }
-
-  /**
-    * Set the maximum HTTP chunk size
-    */
-  def setMaxChunkSize(value: Int) = {
-    asJava.setMaxChunkSize(value)
-    this
-  }
-  def getMaxChunkSize = {
-    asJava.getMaxChunkSize()
-  }
-
-  /**
-    * Set the maximum length of all headers for HTTP/1.x .
-    */
-  def setMaxHeaderSize(value: Int) = {
-    asJava.setMaxHeaderSize(value)
-    this
-  }
-  def getMaxHeaderSize = {
-    asJava.getMaxHeaderSize()
-  }
-
-  /**
-    * Set the maximum length of the initial line for HTTP/1.x (e.g. `"GET / HTTP/1.0"`)
-    */
-  def setMaxInitialLineLength(value: Int) = {
-    asJava.setMaxInitialLineLength(value)
-    this
-  }
-  def getMaxInitialLineLength = {
-    asJava.getMaxInitialLineLength()
-  }
-
-  /**
-    * Set the maximum websocket frames size
-    */
-  def setMaxWebsocketFrameSize(value: Int) = {
-    asJava.setMaxWebsocketFrameSize(value)
-    this
-  }
-  def getMaxWebsocketFrameSize = {
-    asJava.getMaxWebsocketFrameSize()
   }
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -315,17 +143,6 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
-  }
-
-  /**
-    * Set the port
-    */
-  def setPort(value: Int) = {
-    asJava.setPort(value)
-    this
-  }
-  def getPort = {
-    asJava.getPort()
   }
 
   /**
@@ -445,36 +262,5 @@ class HttpServerOptions(val asJava: JHttpServerOptions) {
   def isUsePooledBuffers = {
     asJava.isUsePooledBuffers()
   }
-
-  /**
-    * Set the websocket subprotocols supported by the server.
-    */
-  def setWebsocketSubProtocols(value: String) = {
-    asJava.setWebsocketSubProtocols(value)
-    this
-  }
-  def getWebsocketSubProtocols = {
-    asJava.getWebsocketSubProtocols()
-  }
 }
 
-object HttpServerOptions {
-  
-  def apply() = {
-    new HttpServerOptions(new JHttpServerOptions(emptyObj()))
-  }
-  
-  def apply(t: JHttpServerOptions) = {
-    if(t != null)
-      new HttpServerOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):HttpServerOptions = {
-    if(json != null)
-      new HttpServerOptions(new JHttpServerOptions(json))
-    else
-      null
-  }
-}

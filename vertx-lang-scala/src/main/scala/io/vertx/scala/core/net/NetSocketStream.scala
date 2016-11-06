@@ -20,20 +20,20 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+      import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-import io.vertx.core.net.{NetSocket => JNetSocket}
+    import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
-class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream) 
+class NetSocketStream(private val _asJava: JNetSocketStream) 
     extends ReadStream[NetSocket] {
 
-  def asJava: io.vertx.core.net.NetSocketStream = _asJava
+  def asJava: JNetSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): NetSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -64,7 +64,7 @@ class NetSocketStream(private val _asJava: io.vertx.core.net.NetSocketStream)
 
 object NetSocketStream {
 
-  def apply(_asJava: io.vertx.core.net.NetSocketStream): NetSocketStream =
+  def apply(_asJava: JNetSocketStream): NetSocketStream =
     new NetSocketStream(_asJava)
 
 }

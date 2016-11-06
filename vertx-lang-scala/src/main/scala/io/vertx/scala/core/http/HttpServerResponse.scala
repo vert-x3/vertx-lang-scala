@@ -19,20 +19,20 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
+      import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.http.{HttpFrame => JHttpFrame}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-import io.vertx.core.http.HttpMethod
-import io.vertx.core.{MultiMap => JMultiMap}
+  import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
+  import io.vertx.core.http.HttpMethod
+  import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.Handler
-
+      
 /**
   * Represents a server-side HTTP response.
   * 
@@ -53,10 +53,10 @@ import io.vertx.core.Handler
   * It implements [[io.vertx.scala.core.streams.WriteStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerResponse) 
+class HttpServerResponse(private val _asJava: JHttpServerResponse) 
     extends WriteStream[Buffer] {
 
-  def asJava: io.vertx.core.http.HttpServerResponse = _asJava
+  def asJava: JHttpServerResponse = _asJava
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
@@ -72,7 +72,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
   }
 
   def write(data: Buffer): HttpServerResponse = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -252,7 +252,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * @param chunk the buffer to write before ending the response
     */
   def end(chunk: Buffer): Unit = {
-    _asJava.end(chunk.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -412,7 +412,7 @@ class HttpServerResponse(private val _asJava: io.vertx.core.http.HttpServerRespo
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     HttpServerResponse.apply(_asJava.push(method, host, path, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -421,8 +421,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
-    HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    HttpServerResponse.apply(_asJava.push(method, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
@@ -430,7 +430,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
     _asJava.push(method, path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -452,8 +452,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return the future notified when the response can be written
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
-    _asJava.push(method, host, path, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
+    _asJava.push(method, host, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -482,7 +482,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return a reference to this, so the API can be used fluently
     */
   def writeCustomFrame(`type`: Int, flags: Int, payload: Buffer): HttpServerResponse = {
-    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -491,7 +491,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {
-    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[io.vertx.core.http.HttpFrame])
+    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -501,7 +501,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object HttpServerResponse {
 
-  def apply(_asJava: io.vertx.core.http.HttpServerResponse): HttpServerResponse =
+  def apply(_asJava: JHttpServerResponse): HttpServerResponse =
     new HttpServerResponse(_asJava)
 
 }

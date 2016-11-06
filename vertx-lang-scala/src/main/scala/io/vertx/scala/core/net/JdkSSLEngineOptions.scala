@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 
 /**
@@ -33,7 +34,7 @@ class JdkSSLEngineOptions(val asJava: JJdkSSLEngineOptions) {
 object JdkSSLEngineOptions {
   
   def apply() = {
-    new JdkSSLEngineOptions(new JJdkSSLEngineOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new JdkSSLEngineOptions(new JJdkSSLEngineOptions(emptyObj()))
   }
   
   def apply(t: JJdkSSLEngineOptions) = {

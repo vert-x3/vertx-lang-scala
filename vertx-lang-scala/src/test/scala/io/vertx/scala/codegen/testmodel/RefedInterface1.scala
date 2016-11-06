@@ -20,12 +20,13 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+    import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class RefedInterface1(private val _asJava: io.vertx.codegen.testmodel.RefedInterface1) {
+class RefedInterface1(private val _asJava: JRefedInterface1) {
 
-  def asJava: io.vertx.codegen.testmodel.RefedInterface1 = _asJava
+  def asJava: JRefedInterface1 = _asJava
 
   def getString(): String = {
     _asJava.getString()
@@ -40,7 +41,7 @@ class RefedInterface1(private val _asJava: io.vertx.codegen.testmodel.RefedInter
 
 object RefedInterface1 {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.RefedInterface1): RefedInterface1 =
+  def apply(_asJava: JRefedInterface1): RefedInterface1 =
     new RefedInterface1(_asJava)
 
 }

@@ -19,12 +19,13 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-
+import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
+  
 /**
   */
-class SuperInterface1(private val _asJava: io.vertx.codegen.testmodel.SuperInterface1) {
+class SuperInterface1(private val _asJava: JSuperInterface1) {
 
-  def asJava: io.vertx.codegen.testmodel.SuperInterface1 = _asJava
+  def asJava: JSuperInterface1 = _asJava
 
   def superMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
     _asJava.superMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
@@ -38,7 +39,7 @@ class SuperInterface1(private val _asJava: io.vertx.codegen.testmodel.SuperInter
 
 object SuperInterface1 {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.SuperInterface1): SuperInterface1 =
+  def apply(_asJava: JSuperInterface1): SuperInterface1 =
     new SuperInterface1(_asJava)
 
 }

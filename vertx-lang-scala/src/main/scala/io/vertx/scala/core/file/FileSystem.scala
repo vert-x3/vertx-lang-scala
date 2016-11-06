@@ -19,15 +19,15 @@ package io.vertx.scala.core.file
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.file.{FileSystem => JFileSystem}
+    import io.vertx.core.file.{AsyncFile => JAsyncFile}
+    import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.file.OpenOptions
-import io.vertx.core.file.{FileSystem => JFileSystem}
-import io.vertx.core.Handler
-import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
-import io.vertx.core.file.{FileProps => JFileProps}
+  import io.vertx.core.file.{OpenOptions => JOpenOptions}
+  import io.vertx.core.file.{FileSystem => JFileSystem}
+          import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
+  import io.vertx.core.file.{FileProps => JFileProps}
 
 /**
   * Contains a broad set of operations for manipulating files on the file system.
@@ -43,9 +43,9 @@ import io.vertx.core.file.{FileProps => JFileProps}
   * 
   * Please consult the documentation for more information on file system support.
   */
-class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
+class FileSystem(private val _asJava: JFileSystem) {
 
-  def asJava: io.vertx.core.file.FileSystem = _asJava
+  def asJava: JFileSystem = _asJava
 
   /**
     * Copy a file from the path `from` to path `to`, asynchronously.
@@ -217,7 +217,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return the future that will be called on completion
     */
   def propsFuture(path: String): concurrent.Future[FileProps] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.file.FileProps,FileProps]((x => if (x == null) null else FileProps.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JFileProps,FileProps]((x => if (x == null) null else FileProps.apply(x)))
     _asJava.props(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -237,7 +237,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return the future that will be called on completion
     */
   def lpropsFuture(path: String): concurrent.Future[FileProps] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.file.FileProps,FileProps]((x => if (x == null) null else FileProps.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JFileProps,FileProps]((x => if (x == null) null else FileProps.apply(x)))
     _asJava.lprops(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -516,7 +516,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @return the future that will be called on completion
     */
   def readFileFuture(path: String): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
     _asJava.readFile(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -536,7 +536,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     */
   def writeFileFuture(path: String, data: Buffer): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.writeFile(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
+    _asJava.writeFile(path, data.asJava.asInstanceOf[JBuffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -544,7 +544,7 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#writeFile]]
     */
   def writeFileBlocking(path: String, data: Buffer): FileSystem = {
-    _asJava.writeFileBlocking(path, data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.writeFileBlocking(path, data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -555,8 +555,8 @@ class FileSystem(private val _asJava: io.vertx.core.file.FileSystem) {
     * @param path path to the file
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def openFuture(path: String, options: io.vertx.scala.core.file.OpenOptions): concurrent.Future[AsyncFile] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.file.AsyncFile,AsyncFile]((x => if (x == null) null else AsyncFile.apply(x)))
+  def openFuture(path: String, options: OpenOptions): concurrent.Future[AsyncFile] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncFile,AsyncFile]((x => if (x == null) null else AsyncFile.apply(x)))
     _asJava.open(path, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -564,7 +564,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#open]]
     */
-  def openBlocking(path: String, options: io.vertx.scala.core.file.OpenOptions): AsyncFile = {
+  def openBlocking(path: String, options: OpenOptions): AsyncFile = {
     AsyncFile.apply(_asJava.openBlocking(path, options.asJava))
   }
 
@@ -631,7 +631,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return the future that will be called on completion
     */
   def fsPropsFuture(path: String): concurrent.Future[FileSystemProps] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.file.FileSystemProps,FileSystemProps]((x => if (x == null) null else FileSystemProps.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JFileSystemProps,FileSystemProps]((x => if (x == null) null else FileSystemProps.apply(x)))
     _asJava.fsProps(path, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -647,7 +647,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object FileSystem {
 
-  def apply(_asJava: io.vertx.core.file.FileSystem): FileSystem =
+  def apply(_asJava: JFileSystem): FileSystem =
     new FileSystem(_asJava)
 
 }

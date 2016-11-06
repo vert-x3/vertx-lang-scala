@@ -19,26 +19,26 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
+      import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+  import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+  import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.http.{HttpFrame => JHttpFrame}
+  import io.vertx.core.http.HttpVersion
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.http.HttpMethod
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.http.HttpMethod
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.Handler
-
+    import io.vertx.core.http.{HttpConnection => JHttpConnection}
+  
 /**
   * Represents a client-side HTTP request.
   * 
@@ -66,11 +66,11 @@ import io.vertx.core.Handler
   * An example of using this class is as follows:
   * 
   */
-class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientRequest) 
+class HttpClientRequest(private val _asJava: JHttpClientRequest) 
     extends WriteStream[Buffer] 
     with ReadStream[HttpClientResponse] {
 
-  def asJava: io.vertx.core.http.HttpClientRequest = _asJava
+  def asJava: JHttpClientRequest = _asJava
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
@@ -88,7 +88,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
   /**
     */
   def write(data: Buffer): HttpClientRequest = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -295,7 +295,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * no other data has been written then the `Content-Length` header will be automatically set
     */
   def end(chunk: Buffer): Unit = {
-    _asJava.end(chunk.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -405,7 +405,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @return a reference to this, so the API can be used fluently
     */
   def writeCustomFrame(`type`: Int, flags: Int, payload: Buffer): HttpClientRequest = {
-    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -421,7 +421,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpClientRequest = {
-    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[io.vertx.core.http.HttpFrame])
+    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -431,7 +431,7 @@ class HttpClientRequest(private val _asJava: io.vertx.core.http.HttpClientReques
 
 object HttpClientRequest {
 
-  def apply(_asJava: io.vertx.core.http.HttpClientRequest): HttpClientRequest =
+  def apply(_asJava: JHttpClientRequest): HttpClientRequest =
     new HttpClientRequest(_asJava)
 
 }

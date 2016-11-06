@@ -19,16 +19,16 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{HttpServer => JHttpServer}
+    import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+  import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
-import io.vertx.core.http.{HttpServer => JHttpServer}
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.Handler
-import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+  import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
+  import io.vertx.core.http.{HttpServer => JHttpServer}
+  import io.vertx.core.http.{HttpConnection => JHttpConnection}
+        import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**
   * An HTTP and WebSockets server.
@@ -39,10 +39,10 @@ import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
   * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
   * WebSocket is passed to the handler.
   */
-class HttpServer(private val _asJava: io.vertx.core.http.HttpServer) 
+class HttpServer(private val _asJava: JHttpServer) 
     extends Measured {
 
-  def asJava: io.vertx.core.http.HttpServer = _asJava
+  def asJava: JHttpServer = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -139,7 +139,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int, host: String): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -161,7 +161,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -171,7 +171,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -210,7 +210,7 @@ class HttpServer(private val _asJava: io.vertx.core.http.HttpServer)
 
 object HttpServer {
 
-  def apply(_asJava: io.vertx.core.http.HttpServer): HttpServer =
+  def apply(_asJava: JHttpServer): HttpServer =
     new HttpServer(_asJava)
 
 }

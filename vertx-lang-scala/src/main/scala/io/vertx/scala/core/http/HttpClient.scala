@@ -19,20 +19,20 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{HttpClient => JHttpClient}
+    import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
+  import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.http.HttpMethod
-import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
-import io.vertx.core.{MultiMap => JMultiMap}
+  import io.vertx.core.http.HttpMethod
+  import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+  import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.http.WebsocketVersion
-import io.vertx.core.Handler
-import io.vertx.core.http.{HttpClient => JHttpClient}
+    import io.vertx.core.http.{WebSocket => JWebSocket}
+  import io.vertx.core.http.WebsocketVersion
+    import io.vertx.core.http.{HttpClient => JHttpClient}
 
 /**
   * An asynchronous HTTP client.
@@ -60,10 +60,10 @@ import io.vertx.core.http.{HttpClient => JHttpClient}
   * 
   * The client is designed to be reused between requests.
   */
-class HttpClient(private val _asJava: io.vertx.core.http.HttpClient) 
+class HttpClient(private val _asJava: JHttpClient) 
     extends Measured {
 
-  def asJava: io.vertx.core.http.HttpClient = _asJava
+  def asJava: JHttpClient = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -862,7 +862,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -877,7 +877,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -890,7 +890,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -904,7 +904,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -920,7 +920,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -937,7 +937,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -952,7 +952,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -968,7 +968,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -985,7 +985,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -1003,7 +1003,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -1019,7 +1019,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -1036,7 +1036,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -1071,7 +1071,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -1084,7 +1084,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -1098,7 +1098,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -1113,7 +1113,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -1128,7 +1128,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
     this
   }
 
@@ -1144,7 +1144,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: WebSocket => Unit, failureHandler: Throwable => Unit): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
     this
   }
 
@@ -1178,7 +1178,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
+    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap]))
   }
 
   /**
@@ -1189,7 +1189,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
+    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap]))
   }
 
   /**
@@ -1203,7 +1203,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
+    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
   }
 
   /**
@@ -1216,7 +1216,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
+    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
   }
 
   /**
@@ -1231,7 +1231,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
+    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
   }
 
   /**
@@ -1245,7 +1245,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
+    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
   }
 
   /**
@@ -1264,7 +1264,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap]))
+    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap]))
   }
 
   /**
@@ -1276,7 +1276,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version))
+    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
   }
 
   /**
@@ -1289,7 +1289,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[io.vertx.core.MultiMap], version, subProtocols))
+    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
   }
 
   /**
@@ -1304,7 +1304,7 @@ class HttpClient(private val _asJava: io.vertx.core.http.HttpClient)
 
 object HttpClient {
 
-  def apply(_asJava: io.vertx.core.http.HttpClient): HttpClient =
+  def apply(_asJava: JHttpClient): HttpClient =
     new HttpClient(_asJava)
 
 }

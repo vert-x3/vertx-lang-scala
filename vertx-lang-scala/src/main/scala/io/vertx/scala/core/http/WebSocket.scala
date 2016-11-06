@@ -19,30 +19,30 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{WebSocket => JWebSocket}
+      import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.Handler
-import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
+    import io.vertx.core.http.{WebSocket => JWebSocket}
+    import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
+  import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * Represents a client-side WebSocket.
   */
-class WebSocket(private val _asJava: io.vertx.core.http.WebSocket) 
+class WebSocket(private val _asJava: JWebSocket) 
     extends WebSocketBase {
 
-  def asJava: io.vertx.core.http.WebSocket = _asJava
+  def asJava: JWebSocket = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -138,7 +138,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def write(data: Buffer): WebSocket = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -153,7 +153,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def writeFrame(frame: WebSocketFrame): WebSocket = {
-    _asJava.writeFrame(frame.asJava.asInstanceOf[io.vertx.core.http.WebSocketFrame])
+    _asJava.writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
@@ -163,12 +163,12 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
   }
 
   def writeFinalBinaryFrame(data: Buffer): WebSocket = {
-    _asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def writeBinaryMessage(data: Buffer): WebSocket = {
-    _asJava.writeBinaryMessage(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -188,7 +188,7 @@ class WebSocket(private val _asJava: io.vertx.core.http.WebSocket)
 
 object WebSocket {
 
-  def apply(_asJava: io.vertx.core.http.WebSocket): WebSocket =
+  def apply(_asJava: JWebSocket): WebSocket =
     new WebSocket(_asJava)
 
 }

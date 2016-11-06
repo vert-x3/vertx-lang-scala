@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.cli.{Argument => JArgument}
 
 /**
@@ -30,7 +31,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setArgName(value:String) = {
+  def setArgName(value: String) = {
     asJava.setArgName(value)
     this
   }
@@ -41,7 +42,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets the default value of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setDefaultValue(value:String) = {
+  def setDefaultValue(value: String) = {
     asJava.setDefaultValue(value)
     this
   }
@@ -52,7 +53,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets the description of the <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setDescription(value:String) = {
+  def setDescription(value: String) = {
     asJava.setDescription(value)
     this
   }
@@ -63,7 +64,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is hidden.
     */
-  def setHidden(value:Boolean) = {
+  def setHidden(value: Boolean) = {
     asJava.setHidden(value)
     this
   }
@@ -74,7 +75,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets the argument index.
     */
-  def setIndex(value:Int) = {
+  def setIndex(value: Int) = {
     asJava.setIndex(value)
     this
   }
@@ -85,7 +86,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets whether or not the argument can receive several values. Only the last argument can receive several values.
     */
-  def setMultiValued(value:Boolean) = {
+  def setMultiValued(value: Boolean) = {
     asJava.setMultiValued(value)
     this
   }
@@ -96,7 +97,7 @@ class Argument(val asJava: JArgument) {
   /**
     * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is required.
     */
-  def setRequired(value:Boolean) = {
+  def setRequired(value: Boolean) = {
     asJava.setRequired(value)
     this
   }
@@ -108,7 +109,7 @@ class Argument(val asJava: JArgument) {
 object Argument {
   
   def apply() = {
-    new Argument(new JArgument(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Argument(new JArgument(emptyObj()))
   }
   
   def apply(t: JArgument) = {

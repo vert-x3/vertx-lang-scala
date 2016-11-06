@@ -20,17 +20,17 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+    import io.vertx.core.file.{AsyncFile => JAsyncFile}
+    import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-
+    
 /**
   * Represents a file on the file-system which can be read from, or written to asynchronously.
   * 
@@ -39,17 +39,17 @@ import io.vertx.core.Handler
   * other streams, e.g. an [[io.vertx.scala.core.http.HttpClientRequest]] instance,
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
-class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile) 
+class AsyncFile(private val _asJava: JAsyncFile) 
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
-  def asJava: io.vertx.core.file.AsyncFile = _asJava
+  def asJava: JAsyncFile = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -81,7 +81,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
   }
 
   def write(data: Buffer): AsyncFile = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -141,7 +141,7 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     */
   def writeFuture(buffer: Buffer, position: Long): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], position, promiseAndHandler._1)
+    _asJava.write(buffer.asJava.asInstanceOf[JBuffer], position, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -161,8 +161,8 @@ class AsyncFile(private val _asJava: io.vertx.core.file.AsyncFile)
     * @return the future to call when the write is complete
     */
   def readFuture(buffer: Buffer, offset: Int, position: Long, length: Int): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
-    _asJava.read(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], offset, position, length, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.read(buffer.asJava.asInstanceOf[JBuffer], offset, position, length, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -223,7 +223,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object AsyncFile {
 
-  def apply(_asJava: io.vertx.core.file.AsyncFile): AsyncFile =
+  def apply(_asJava: JAsyncFile): AsyncFile =
     new AsyncFile(_asJava)
 
 }

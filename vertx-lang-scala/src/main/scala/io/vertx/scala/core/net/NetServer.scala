@@ -19,21 +19,21 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.net.{NetServer => JNetServer}
+  import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+    import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.net.{NetServer => JNetServer}
-import io.vertx.core.Handler
-import io.vertx.core.net.{NetSocket => JNetSocket}
+  import io.vertx.core.net.{NetServer => JNetServer}
+        import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * Represents a TCP server
   */
-class NetServer(private val _asJava: io.vertx.core.net.NetServer) 
+class NetServer(private val _asJava: JNetServer) 
     extends Measured {
 
-  def asJava: io.vertx.core.net.NetServer = _asJava
+  def asJava: JNetServer = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -80,7 +80,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return future that will be notified when listening or failed
     */
   def listenFuture(): concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -108,7 +108,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return future that will be notified when listening or failed
     */
   def listenFuture(port: Int, host: String): concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -133,7 +133,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
     * @return future that will be notified when listening or failed
     */
   def listenFuture(port: Int): concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer,NetServer]((x => if (x == null) null else NetServer.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -169,7 +169,7 @@ class NetServer(private val _asJava: io.vertx.core.net.NetServer)
 
 object NetServer {
 
-  def apply(_asJava: io.vertx.core.net.NetServer): NetServer =
+  def apply(_asJava: JNetServer): NetServer =
     new NetServer(_asJava)
 
 }

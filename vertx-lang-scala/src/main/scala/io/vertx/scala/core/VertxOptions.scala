@@ -18,7 +18,14 @@ package io.vertx.scala.core
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.{VertxOptions => JVertxOptions}
+import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
+import io.vertx.scala.core.dns.AddressResolverOptions
+import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
+import io.vertx.scala.core.eventbus.EventBusOptions
+import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
+import io.vertx.scala.core.metrics.MetricsOptions
 
 /**
   * Instances of this class are used to configure [[io.vertx.scala.core.Vertx]] instances.
@@ -29,7 +36,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Sets the address resolver configuration to configure resolving DNS servers, cache TTL, etc...
     */
-  def setAddressResolverOptions(value:io.vertx.scala.core.dns.AddressResolverOptions) = {
+  def setAddressResolverOptions(value: AddressResolverOptions) = {
     asJava.setAddressResolverOptions(value.asJava)
     this
   }
@@ -40,7 +47,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Sets the value of blocked thread check period, in ms.
     */
-  def setBlockedThreadCheckInterval(value:Long) = {
+  def setBlockedThreadCheckInterval(value: Long) = {
     asJava.setBlockedThreadCheckInterval(value)
     this
   }
@@ -51,7 +58,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the hostname to be used for clustering.
     */
-  def setClusterHost(value:String) = {
+  def setClusterHost(value: String) = {
     asJava.setClusterHost(value)
     this
   }
@@ -62,7 +69,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the value of cluster ping interval, in ms.
     */
-  def setClusterPingInterval(value:Long) = {
+  def setClusterPingInterval(value: Long) = {
     asJava.setClusterPingInterval(value)
     this
   }
@@ -73,7 +80,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the value of cluster ping reply interval, in ms.
     */
-  def setClusterPingReplyInterval(value:Long) = {
+  def setClusterPingReplyInterval(value: Long) = {
     asJava.setClusterPingReplyInterval(value)
     this
   }
@@ -84,7 +91,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the port to be used for clustering.
     */
-  def setClusterPort(value:Int) = {
+  def setClusterPort(value: Int) = {
     asJava.setClusterPort(value)
     this
   }
@@ -99,7 +106,7 @@ class VertxOptions(val asJava: JVertxOptions) {
     * If this is the case you can specify a public hostname which is different from the hostname the server listens at.
     * The default value is null which means use the same as the cluster hostname.
     */
-  def setClusterPublicHost(value:String) = {
+  def setClusterPublicHost(value: String) = {
     asJava.setClusterPublicHost(value)
     this
   }
@@ -110,7 +117,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * See <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> for an explanation.
     */
-  def setClusterPublicPort(value:Int) = {
+  def setClusterPublicPort(value: Int) = {
     asJava.setClusterPublicPort(value)
     this
   }
@@ -121,7 +128,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set whether or not the Vert.x instance will be clustered.
     */
-  def setClustered(value:Boolean) = {
+  def setClustered(value: Boolean) = {
     asJava.setClustered(value)
     this
   }
@@ -132,7 +139,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Sets the event bus configuration to configure the host, port, ssl...
     */
-  def setEventBusOptions(value:io.vertx.scala.core.eventbus.EventBusOptions) = {
+  def setEventBusOptions(value: EventBusOptions) = {
     asJava.setEventBusOptions(value.asJava)
     this
   }
@@ -143,7 +150,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the number of event loop threads to be used by the Vert.x instance.
     */
-  def setEventLoopPoolSize(value:Int) = {
+  def setEventLoopPoolSize(value: Int) = {
     asJava.setEventLoopPoolSize(value)
     this
   }
@@ -154,7 +161,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set whether HA will be enabled on the Vert.x instance.
     */
-  def setHAEnabled(value:Boolean) = {
+  def setHAEnabled(value: Boolean) = {
     asJava.setHAEnabled(value)
     this
   }
@@ -165,7 +172,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the HA group to be used when HA is enabled.
     */
-  def setHAGroup(value:String) = {
+  def setHAGroup(value: String) = {
     asJava.setHAGroup(value)
     this
   }
@@ -176,7 +183,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the value of internal blocking pool size
     */
-  def setInternalBlockingPoolSize(value:Int) = {
+  def setInternalBlockingPoolSize(value: Int) = {
     asJava.setInternalBlockingPoolSize(value)
     this
   }
@@ -187,7 +194,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Sets the value of max event loop execute time, in ns.
     */
-  def setMaxEventLoopExecuteTime(value:Long) = {
+  def setMaxEventLoopExecuteTime(value: Long) = {
     asJava.setMaxEventLoopExecuteTime(value)
     this
   }
@@ -198,7 +205,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Sets the value of max worker execute time, in ns.
     */
-  def setMaxWorkerExecuteTime(value:Long) = {
+  def setMaxWorkerExecuteTime(value: Long) = {
     asJava.setMaxWorkerExecuteTime(value)
     this
   }
@@ -209,7 +216,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the metrics options
     */
-  def setMetricsOptions(value:io.vertx.scala.core.metrics.MetricsOptions) = {
+  def setMetricsOptions(value: MetricsOptions) = {
     asJava.setMetricsOptions(value.asJava)
     this
   }
@@ -220,7 +227,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the quorum size to be used when HA is enabled.
     */
-  def setQuorumSize(value:Int) = {
+  def setQuorumSize(value: Int) = {
     asJava.setQuorumSize(value)
     this
   }
@@ -231,7 +238,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the threshold value above this, the blocked warning contains a stack trace.
     */
-  def setWarningExceptionTime(value:Long) = {
+  def setWarningExceptionTime(value: Long) = {
     asJava.setWarningExceptionTime(value)
     this
   }
@@ -242,7 +249,7 @@ class VertxOptions(val asJava: JVertxOptions) {
   /**
     * Set the maximum number of worker threads to be used by the Vert.x instance.
     */
-  def setWorkerPoolSize(value:Int) = {
+  def setWorkerPoolSize(value: Int) = {
     asJava.setWorkerPoolSize(value)
     this
   }
@@ -254,7 +261,7 @@ class VertxOptions(val asJava: JVertxOptions) {
 object VertxOptions {
   
   def apply() = {
-    new VertxOptions(new JVertxOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new VertxOptions(new JVertxOptions(emptyObj()))
   }
   
   def apply(t: JVertxOptions) = {

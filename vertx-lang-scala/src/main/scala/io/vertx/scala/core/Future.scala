@@ -19,17 +19,18 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
 import io.vertx.core.{Future => JFuture}
+          import io.vertx.core.{Future => JFuture}
+  import java.util.function.{Function => JFunction}
 import java.util.function.Function
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T](private val _asJava: io.vertx.core.Future[T]) {
+class Future[T](private val _asJava: JFuture[T]) {
 
-  def asJava: io.vertx.core.Future[T] = _asJava
+  def asJava: JFuture[T] = _asJava
 
   /**
     * Has the future completed?
@@ -132,7 +133,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @return the next future, used for chaining
     */
   def compose[U](handler: T => Unit, next: Future[U]): Future[U] = {
-    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
+    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[JFuture[U]]))
   }
 
   /**
@@ -149,7 +150,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param mapper the mapper function
     * @return the composed future
     */
-  def compose[U](mapper: T => io.vertx.core.Future[U]): Future[U] = {
+  def compose[U](mapper: T => JFuture[U]): Future[U] = {
     Future.apply[U](_asJava.compose(asJavaFunction(mapper)))
   }
 
@@ -198,7 +199,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
 object Future {
 
-  def apply[T](_asJava: io.vertx.core.Future[T]): Future[T] =
+  def apply[T](_asJava: JFuture[T]): Future[T] =
     new Future(_asJava)
 
   def future[T](): Future[T] = {

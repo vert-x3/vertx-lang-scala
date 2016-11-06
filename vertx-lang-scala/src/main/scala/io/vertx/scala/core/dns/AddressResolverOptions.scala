@@ -18,7 +18,11 @@ package io.vertx.scala.core.dns
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
@@ -31,7 +35,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
     * use this to set a maximum value to all responses TTL.
     */
-  def setCacheMaxTimeToLive(value:Int) = {
+  def setCacheMaxTimeToLive(value: Int) = {
     asJava.setCacheMaxTimeToLive(value)
     this
   }
@@ -43,7 +47,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * Set the cache minimum TTL value in seconds. After resolution successful IP addresses are cached with their DNS response TTL,
     * use this to set a minimum value to all responses TTL.
     */
-  def setCacheMinTimeToLive(value:Int) = {
+  def setCacheMinTimeToLive(value: Int) = {
     asJava.setCacheMinTimeToLive(value)
     this
   }
@@ -56,7 +60,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * for a period of time equals to the negative TTL. This allows to reduce the response time of negative replies
     * and reduce the amount of messages to DNS servers.
     */
-  def setCacheNegativeTimeToLive(value:Int) = {
+  def setCacheNegativeTimeToLive(value: Int) = {
     asJava.setCacheNegativeTimeToLive(value)
     this
   }
@@ -69,7 +73,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * <p/>
     * The default value is null, so the operating system hosts config is used.
     */
-  def setHostsPath(value:String) = {
+  def setHostsPath(value: String) = {
     asJava.setHostsPath(value)
     this
   }
@@ -84,7 +88,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * <p/>
     * The default value is null, so the operating system hosts config is used.
     */
-  def setHostsValue(value:io.vertx.core.buffer.Buffer) = {
+  def setHostsValue(value: JBuffer) = {
     asJava.setHostsValue(value)
     this
   }
@@ -95,7 +99,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
   /**
     * Set the maximum number of queries when an hostname is resolved.
     */
-  def setMaxQueries(value:Int) = {
+  def setMaxQueries(value: Int) = {
     asJava.setMaxQueries(value)
     this
   }
@@ -107,7 +111,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * Set the ndots value used when resolving using search domains, the default value is `-1` which
     * determines the value from the OS on Linux or uses the value `1`.
     */
-  def setNdots(value:Int) = {
+  def setNdots(value: Int) = {
     asJava.setNdots(value)
     this
   }
@@ -119,7 +123,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * Set to true to enable the automatic inclusion in DNS queries of an optional record that hints
     * the remote DNS server about how much data the resolver can read per response.
     */
-  def setOptResourceEnabled(value:Boolean) = {
+  def setOptResourceEnabled(value: Boolean) = {
     asJava.setOptResourceEnabled(value)
     this
   }
@@ -130,7 +134,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
   /**
     * Set the query timeout in milliseconds, i.e the amount of time after a query is considered to be failed.
     */
-  def setQueryTimeout(value:Long) = {
+  def setQueryTimeout(value: Long) = {
     asJava.setQueryTimeout(value)
     this
   }
@@ -141,7 +145,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
   /**
     * Set the DNS queries <i>Recursion Desired</i> flag value.
     */
-  def setRdFlag(value:Boolean) = {
+  def setRdFlag(value: Boolean) = {
     asJava.setRdFlag(value)
     this
   }
@@ -155,11 +159,11 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * When the search domain list is null, the effective search domain list will be populated using
     * the system DNS search domains.
     */
-  def addSearchDomain(value:String) = {
+  def addSearchDomain(value: String) = {
     asJava.addSearchDomain(value)
     this
   }
-  def setSearchDomains(value:scala.collection.mutable.Buffer[String]) = {
+  def setSearchDomains(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setSearchDomains(value)
     this
   }
@@ -173,11 +177,11 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * will use the list of the system DNS server addresses from the environment, if that list cannot be retrieved
     * it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
     */
-  def addServer(value:String) = {
+  def addServer(value: String) = {
     asJava.addServer(value)
     this
   }
-  def setServers(value:scala.collection.mutable.Buffer[String]) = {
+  def setServers(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setServers(value)
     this
   }
@@ -189,7 +193,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
 object AddressResolverOptions {
   
   def apply() = {
-    new AddressResolverOptions(new JAddressResolverOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new AddressResolverOptions(new JAddressResolverOptions(emptyObj()))
   }
   
   def apply(t: JAddressResolverOptions) = {

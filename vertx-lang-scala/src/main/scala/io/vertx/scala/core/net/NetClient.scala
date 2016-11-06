@@ -19,12 +19,12 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.net.{NetClient => JNetClient}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.net.{NetClient => JNetClient}
-import io.vertx.core.Handler
-import io.vertx.core.net.{NetSocket => JNetSocket}
+      import io.vertx.core.net.{NetClient => JNetClient}
+    import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * A TCP client.
@@ -34,10 +34,10 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: io.vertx.core.net.NetClient) 
+class NetClient(private val _asJava: JNetClient) 
     extends Measured {
 
-  def asJava: io.vertx.core.net.NetClient = _asJava
+  def asJava: JNetClient = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -56,7 +56,7 @@ class NetClient(private val _asJava: io.vertx.core.net.NetClient)
     * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.net.NetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
     _asJava.connect(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -75,7 +75,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object NetClient {
 
-  def apply(_asJava: io.vertx.core.net.NetClient): NetClient =
+  def apply(_asJava: JNetClient): NetClient =
     new NetClient(_asJava)
 
 }

@@ -19,13 +19,13 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+      import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-import io.vertx.core.Handler
-
+  import io.vertx.core.eventbus.{Message => JMessage}
+      import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+  
 /**
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
   * be read from.
@@ -37,10 +37,10 @@ import io.vertx.core.Handler
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageConsumer[T]) 
+class MessageConsumer[T](private val _asJava: JMessageConsumer[T]) 
     extends ReadStream[Message[T]] {
 
-  def asJava: io.vertx.core.eventbus.MessageConsumer[T] = _asJava
+  def asJava: JMessageConsumer[T] = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): MessageConsumer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -137,7 +137,7 @@ class MessageConsumer[T](private val _asJava: io.vertx.core.eventbus.MessageCons
 
 object MessageConsumer {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.MessageConsumer[T]): MessageConsumer[T] =
+  def apply[T](_asJava: JMessageConsumer[T]): MessageConsumer[T] =
     new MessageConsumer(_asJava)
 
 }
