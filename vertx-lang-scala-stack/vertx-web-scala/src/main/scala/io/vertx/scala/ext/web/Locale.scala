@@ -19,10 +19,12 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.{Locale => JLocale}
+  import io.vertx.ext.web.{Locale => JLocale}
+  
+class Locale(private val _asJava: JLocale) {
 
-class Locale(private val _asJava: io.vertx.ext.web.Locale) {
-
-  def asJava: io.vertx.ext.web.Locale = _asJava
+  def asJava: JLocale = _asJava
 
   /**
     * Returns the language as reported by the HTTP client.
@@ -52,22 +54,22 @@ class Locale(private val _asJava: io.vertx.ext.web.Locale) {
 
 object Locale {
 
-  def apply(_asJava: io.vertx.ext.web.Locale): io.vertx.scala.ext.web.Locale =
-    new io.vertx.scala.ext.web.Locale(_asJava)
+  def apply(_asJava: JLocale): Locale =
+    new Locale(_asJava)
 
-  def create(): io.vertx.scala.ext.web.Locale = {
+  def create(): Locale = {
     Locale.apply(io.vertx.ext.web.Locale.create())
   }
 
-  def create(language: String): io.vertx.scala.ext.web.Locale = {
+  def create(language: String): Locale = {
     Locale.apply(io.vertx.ext.web.Locale.create(language))
   }
 
-  def create(language: String, country: String): io.vertx.scala.ext.web.Locale = {
+  def create(language: String, country: String): Locale = {
     Locale.apply(io.vertx.ext.web.Locale.create(language, country))
   }
 
-  def create(language: String, country: String, variant: String): io.vertx.scala.ext.web.Locale = {
+  def create(language: String, country: String, variant: String): Locale = {
     Locale.apply(io.vertx.ext.web.Locale.create(language, country, variant))
   }
 

@@ -17,17 +17,19 @@
 package io.vertx.scala.ext.mail
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mail.{MailResult => JMailResult}
 
 /**
   * Represent the result of the sendMail operation
   */
 
-class MailResult(val asJava: io.vertx.ext.mail.MailResult) {
+class MailResult(val asJava: JMailResult) {
 
   /**
     */
-  def setMessageID(value:String) = {
+  def setMessageID(value: String) = {
     asJava.setMessageID(value)
     this
   }
@@ -37,8 +39,8 @@ class MailResult(val asJava: io.vertx.ext.mail.MailResult) {
 
   /**
     */
-  def setRecipients(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setRecipients(value)
+  def setRecipients(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setRecipients(value.asJava)
     this
   }
   def getRecipients = {
@@ -47,13 +49,12 @@ class MailResult(val asJava: io.vertx.ext.mail.MailResult) {
 }
 
 object MailResult {
-  type MailResultJava = io.vertx.ext.mail.MailResult
   
   def apply() = {
-    new MailResult(new MailResultJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MailResult(new JMailResult(emptyObj()))
   }
   
-  def apply(t: MailResultJava) = {
+  def apply(t: JMailResult) = {
     if(t != null)
       new MailResult(t)
     else
@@ -62,7 +63,7 @@ object MailResult {
   
   def fromJson(json: JsonObject):MailResult = {
     if(json != null)
-      new MailResult(new MailResultJava(json))
+      new MailResult(new JMailResult(json))
     else
       null
   }

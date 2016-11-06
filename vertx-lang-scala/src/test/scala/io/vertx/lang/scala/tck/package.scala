@@ -1,9 +1,9 @@
 package io.vertx.lang.scala
 
-import org.scalatest.concurrent.AsyncAssertions.{Waiter, _}
+import org.scalatest.concurrent.Waiters.{Waiter, _}
 
 /**
-  * Created by jochen on 05.10.16.
+  * Easier handling of Waiters.
   */
 package object tck {
 

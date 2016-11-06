@@ -19,22 +19,25 @@ package io.vertx.scala.rabbitmq
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
+    import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
+    import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
-
+import io.vertx.core.{Vertx => JVertx}
+  import io.vertx.core.json.JsonObject
+      
 /**
   */
-class RabbitMQClient(private val _asJava: io.vertx.rabbitmq.RabbitMQClient) {
+class RabbitMQClient(private val _asJava: JRabbitMQClient) {
 
-  def asJava: io.vertx.rabbitmq.RabbitMQClient = _asJava
+  def asJava: JRabbitMQClient = _asJava
 
   /**
     * Acknowledge one or several received messages. Supply the deliveryTag from the AMQP.Basic.GetOk or AMQP.Basic.Deliver
     * method containing the received message being acknowledged.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def basicAckFuture(deliveryTag: Long, multiple: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def basicAckFuture(deliveryTag: Long, multiple: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.basicAck(deliveryTag, multiple, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -42,8 +45,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Reject one or several received messages.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def basicNackFuture(deliveryTag: Long, multiple: Boolean, requeue: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def basicNackFuture(deliveryTag: Long, multiple: Boolean, requeue: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.basicNack(deliveryTag, multiple, requeue, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -51,8 +54,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Retrieve a message from a queue using AMQP.Basic.Get
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def basicGetFuture(queue: String, autoAck: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def basicGetFuture(queue: String, autoAck: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.basicGet(queue, autoAck, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -79,7 +82,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Publish a message. Publishing to a non-existent exchange will result in a channel-level protocol exception,
     * which closes the channel. Invocations of Channel#basicPublish will eventually block if a resource-driven alarm is in effect.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def basicPublishFuture(exchange: String, routingKey: String, message: io.vertx.core.json.JsonObject): concurrent.Future[Unit] = {
+  def basicPublishFuture(exchange: String, routingKey: String, message: JsonObject): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.basicPublish(exchange, routingKey, message, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -143,8 +146,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Actively declare a server-named exclusive, autodelete, non-durable queue.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def queueDeclareAutoFuture(): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def queueDeclareAutoFuture(): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.queueDeclareAuto(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -152,8 +155,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Declare a queue
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def queueDeclareFuture(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def queueDeclareFuture(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.queueDeclare(queue, durable, exclusive, autoDelete, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -161,8 +164,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Delete a queue, without regard for whether it is in use or has messages on it
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def queueDeleteFuture(queue: String): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def queueDeleteFuture(queue: String): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.queueDelete(queue, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -170,8 +173,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Delete a queue
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def queueDeleteIfFuture(queue: String, ifUnused: Boolean, ifEmpty: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def queueDeleteIfFuture(queue: String, ifUnused: Boolean, ifEmpty: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.queueDeleteIf(queue, ifUnused, ifEmpty, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -188,8 +191,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Returns the number of messages in a queue ready to be delivered.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def messageCountFuture(queue: String): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def messageCountFuture(queue: String): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.messageCount(queue, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -232,11 +235,11 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object RabbitMQClient {
 
-  def apply(_asJava: io.vertx.rabbitmq.RabbitMQClient): io.vertx.scala.rabbitmq.RabbitMQClient =
-    new io.vertx.scala.rabbitmq.RabbitMQClient(_asJava)
+  def apply(_asJava: JRabbitMQClient): RabbitMQClient =
+    new RabbitMQClient(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx, config: io.vertx.core.json.JsonObject): io.vertx.scala.rabbitmq.RabbitMQClient = {
-    RabbitMQClient.apply(io.vertx.rabbitmq.RabbitMQClient.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], config))
+  def create(vertx: Vertx, config: JsonObject): RabbitMQClient = {
+    RabbitMQClient.apply(io.vertx.rabbitmq.RabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

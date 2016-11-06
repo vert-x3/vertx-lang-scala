@@ -19,17 +19,19 @@ package io.vertx.scala.ext.auth
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.ext.auth.{User => JUser}
+    import io.vertx.core.json.JsonObject
+        import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * Represents an authenticates User and contains operations to authorise the user.
   * 
   * Please consult the documentation for a detailed explanation.
   */
-class User(private val _asJava: io.vertx.ext.auth.User) {
+class User(private val _asJava: JUser) {
 
-  def asJava: io.vertx.ext.auth.User = _asJava
+  def asJava: JUser = _asJava
 
   /**
     * Is the user authorised to
@@ -47,7 +49,7 @@ class User(private val _asJava: io.vertx.ext.auth.User) {
     * underlying auth provider each time.  Use this method if you want to clear this cache.
     * @return the User to enable fluent use
     */
-  def clearCache(): io.vertx.scala.ext.auth.User = {
+  def clearCache(): User = {
     _asJava.clearCache()
     this
   }
@@ -62,7 +64,7 @@ class User(private val _asJava: io.vertx.ext.auth.User) {
     * </pre>
     * @return JSON representation of the Principal
     */
-  def principal(): io.vertx.core.json.JsonObject = {
+  def principal(): JsonObject = {
     _asJava.principal()
   }
 
@@ -71,15 +73,15 @@ class User(private val _asJava: io.vertx.ext.auth.User) {
     * after it has been deserialized.
     * @param authProvider the AuthProvider - this must be the same type of AuthProvider that originally created the User
     */
-  def setAuthProvider(authProvider: io.vertx.scala.ext.auth.AuthProvider): Unit = {
-    _asJava.setAuthProvider(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider])
+  def setAuthProvider(authProvider: AuthProvider): Unit = {
+    _asJava.setAuthProvider(authProvider.asJava.asInstanceOf[JAuthProvider])
   }
 
 }
 
 object User {
 
-  def apply(_asJava: io.vertx.ext.auth.User): io.vertx.scala.ext.auth.User =
-    new io.vertx.scala.ext.auth.User(_asJava)
+  def apply(_asJava: JUser): User =
+    new User(_asJava)
 
 }

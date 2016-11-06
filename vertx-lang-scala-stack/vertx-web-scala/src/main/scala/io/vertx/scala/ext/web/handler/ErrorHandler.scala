@@ -19,40 +19,43 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{ErrorHandler => JErrorHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+      import io.vertx.ext.web.handler.{ErrorHandler => JErrorHandler}
 
 /**
   * A pretty error handler for rendering error pages.
   */
-class ErrorHandler(private val _asJava: io.vertx.ext.web.handler.ErrorHandler) {
+class ErrorHandler(private val _asJava: JErrorHandler) {
 
-  def asJava: io.vertx.ext.web.handler.ErrorHandler = _asJava
+  def asJava: JErrorHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object ErrorHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.ErrorHandler): io.vertx.scala.ext.web.handler.ErrorHandler =
-    new io.vertx.scala.ext.web.handler.ErrorHandler(_asJava)
+  def apply(_asJava: JErrorHandler): ErrorHandler =
+    new ErrorHandler(_asJava)
 
-  def create(): io.vertx.scala.ext.web.handler.ErrorHandler = {
+  def create(): ErrorHandler = {
     ErrorHandler.apply(io.vertx.ext.web.handler.ErrorHandler.create())
   }
 
-  def create(errorTemplateName: String, displayExceptionDetails: Boolean): io.vertx.scala.ext.web.handler.ErrorHandler = {
+  def create(errorTemplateName: String, displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler.apply(io.vertx.ext.web.handler.ErrorHandler.create(errorTemplateName, displayExceptionDetails))
   }
 
-  def create(displayExceptionDetails: Boolean): io.vertx.scala.ext.web.handler.ErrorHandler = {
+  def create(displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler.apply(io.vertx.ext.web.handler.ErrorHandler.create(displayExceptionDetails))
   }
 
-  def create(errorTemplateName: String): io.vertx.scala.ext.web.handler.ErrorHandler = {
+  def create(errorTemplateName: String): ErrorHandler = {
     ErrorHandler.apply(io.vertx.ext.web.handler.ErrorHandler.create(errorTemplateName))
   }
 

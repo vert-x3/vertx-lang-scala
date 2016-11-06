@@ -17,7 +17,9 @@
 package io.vertx.scala.redis
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.{RedisOptions => JRedisOptions}
 
 /**
   * This object controls the connection setting to the Redis Server. There is no need to specify most of the settings
@@ -41,12 +43,12 @@ import scala.collection.JavaConversions._
   * yourself in case of connection failure the client will not be able to perform the correct authentication handshake.
   */
 
-class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
+class RedisOptions(val asJava: JRedisOptions) {
 
   /**
     * Set the eventbus address prefix for `PUB/SUB`.
     */
-  def setAddress(value:String) = {
+  def setAddress(value: String) = {
     asJava.setAddress(value)
     this
   }
@@ -57,7 +59,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the password for authentication at connection time.
     */
-  def setAuth(value:String) = {
+  def setAuth(value: String) = {
     asJava.setAuth(value)
     this
   }
@@ -68,7 +70,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the user defined character encoding, e.g.: `iso-8859-1`.
     */
-  def setBinary(value:Boolean) = {
+  def setBinary(value: Boolean) = {
     asJava.setBinary(value)
     this
   }
@@ -79,7 +81,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the user defined character encoding, e.g.: `iso-8859-1`.
     */
-  def setEncoding(value:String) = {
+  def setEncoding(value: String) = {
     asJava.setEncoding(value)
     this
   }
@@ -90,7 +92,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the host name where the Redis server is listening.
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -101,7 +103,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the tcp port where the Redis server is listening.
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -112,7 +114,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the database to select at connection time.
     */
-  def setSelect(value:Int) = {
+  def setSelect(value: Int) = {
     asJava.setSelect(value)
     this
   }
@@ -123,7 +125,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the TCP KeepAlive option
     */
-  def setTcpKeepAlive(value:Boolean) = {
+  def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
@@ -134,7 +136,7 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
   /**
     * Set the TCP NoDelay at the socket level.
     */
-  def setTcpNoDelay(value:Boolean) = {
+  def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
@@ -144,13 +146,12 @@ class RedisOptions(val asJava: io.vertx.redis.RedisOptions) {
 }
 
 object RedisOptions {
-  type RedisOptionsJava = io.vertx.redis.RedisOptions
   
   def apply() = {
-    new RedisOptions(new RedisOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new RedisOptions(new JRedisOptions(emptyObj()))
   }
   
-  def apply(t: RedisOptionsJava) = {
+  def apply(t: JRedisOptions) = {
     if(t != null)
       new RedisOptions(t)
     else
@@ -159,7 +160,7 @@ object RedisOptions {
   
   def fromJson(json: JsonObject):RedisOptions = {
     if(json != null)
-      new RedisOptions(new RedisOptionsJava(json))
+      new RedisOptions(new JRedisOptions(json))
     else
       null
   }

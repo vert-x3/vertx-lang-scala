@@ -17,49 +17,51 @@
 package io.vertx.scala.ext.web.handler.sockjs
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
 
 /**
   * Options for configuring a SockJS handler
   */
 
-class SockJSHandlerOptions(val asJava: io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions) {
-  def addDisabledTransport(value:String) = {
+class SockJSHandlerOptions(val asJava: JSockJSHandlerOptions) {
+  def addDisabledTransport(value: String) = {
     asJava.addDisabledTransport(value)
     this
   }
   def getDisabledTransports = {
     asJava.getDisabledTransports()
   }
-  def setHeartbeatInterval(value:Long) = {
+  def setHeartbeatInterval(value: Long) = {
     asJava.setHeartbeatInterval(value)
     this
   }
   def getHeartbeatInterval = {
     asJava.getHeartbeatInterval()
   }
-  def setInsertJSESSIONID(value:Boolean) = {
+  def setInsertJSESSIONID(value: Boolean) = {
     asJava.setInsertJSESSIONID(value)
     this
   }
   def isInsertJSESSIONID = {
     asJava.isInsertJSESSIONID()
   }
-  def setLibraryURL(value:String) = {
+  def setLibraryURL(value: String) = {
     asJava.setLibraryURL(value)
     this
   }
   def getLibraryURL = {
     asJava.getLibraryURL()
   }
-  def setMaxBytesStreaming(value:Int) = {
+  def setMaxBytesStreaming(value: Int) = {
     asJava.setMaxBytesStreaming(value)
     this
   }
   def getMaxBytesStreaming = {
     asJava.getMaxBytesStreaming()
   }
-  def setSessionTimeout(value:Long) = {
+  def setSessionTimeout(value: Long) = {
     asJava.setSessionTimeout(value)
     this
   }
@@ -69,13 +71,12 @@ class SockJSHandlerOptions(val asJava: io.vertx.ext.web.handler.sockjs.SockJSHan
 }
 
 object SockJSHandlerOptions {
-  type SockJSHandlerOptionsJava = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
   
   def apply() = {
-    new SockJSHandlerOptions(new SockJSHandlerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new SockJSHandlerOptions(new JSockJSHandlerOptions(emptyObj()))
   }
   
-  def apply(t: SockJSHandlerOptionsJava) = {
+  def apply(t: JSockJSHandlerOptions) = {
     if(t != null)
       new SockJSHandlerOptions(t)
     else
@@ -84,7 +85,7 @@ object SockJSHandlerOptions {
   
   def fromJson(json: JsonObject):SockJSHandlerOptions = {
     if(json != null)
-      new SockJSHandlerOptions(new SockJSHandlerOptionsJava(json))
+      new SockJSHandlerOptions(new JSockJSHandlerOptions(json))
     else
       null
   }

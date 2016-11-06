@@ -17,22 +17,23 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{LimitOptions => JLimitOptions}
 
 /**
   */
 
-class LimitOptions(val asJava: io.vertx.redis.op.LimitOptions) {
+class LimitOptions(val asJava: JLimitOptions) {
 }
 
 object LimitOptions {
-  type LimitOptionsJava = io.vertx.redis.op.LimitOptions
   
   def apply() = {
-    new LimitOptions(new LimitOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new LimitOptions(new JLimitOptions(emptyObj()))
   }
   
-  def apply(t: LimitOptionsJava) = {
+  def apply(t: JLimitOptions) = {
     if(t != null)
       new LimitOptions(t)
     else
@@ -41,7 +42,7 @@ object LimitOptions {
   
   def fromJson(json: JsonObject):LimitOptions = {
     if(json != null)
-      new LimitOptions(new LimitOptionsJava(json))
+      new LimitOptions(new JLimitOptions(json))
     else
       null
   }

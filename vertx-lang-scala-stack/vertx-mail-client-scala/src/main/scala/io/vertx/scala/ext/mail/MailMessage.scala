@@ -17,19 +17,21 @@
 package io.vertx.scala.ext.mail
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 /**
   * represent a mail message that can be sent via the MailClient
   */
 
-class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
+class MailMessage(val asJava: JMailMessage) {
 
   /**
     * set the list of attachments of this mail
     */
-  def setAttachment(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.mail.MailAttachment]) = {
-    asJava.setAttachment(value.map(_.asJava))
+  def setAttachment(value: scala.collection.mutable.Buffer[MailAttachment]) = {
+    asJava.setAttachment(value.map(_.asJava).asJava)
     this
   }
   def getAttachment = {
@@ -39,8 +41,8 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set list of bcc addresses
     */
-  def setBcc(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setBcc(value)
+  def setBcc(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setBcc(value.asJava)
     this
   }
   def getBcc = {
@@ -50,7 +52,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set bounce address of this mail
     */
-  def setBounceAddress(value:String) = {
+  def setBounceAddress(value: String) = {
     asJava.setBounceAddress(value)
     this
   }
@@ -61,8 +63,8 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set list of cc addresses
     */
-  def setCc(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setCc(value)
+  def setCc(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setCc(value.asJava)
     this
   }
   def getCc = {
@@ -72,7 +74,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set whether our own headers should be the only headers added to the message
     */
-  def setFixedHeaders(value:Boolean) = {
+  def setFixedHeaders(value: Boolean) = {
     asJava.setFixedHeaders(value)
     this
   }
@@ -83,7 +85,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set from address of this mail
     */
-  def setFrom(value:String) = {
+  def setFrom(value: String) = {
     asJava.setFrom(value)
     this
   }
@@ -94,7 +96,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * Add a message header.
     */
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
@@ -102,7 +104,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set the html text of this mail
     */
-  def setHtml(value:String) = {
+  def setHtml(value: String) = {
     asJava.setHtml(value)
     this
   }
@@ -113,8 +115,8 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set the list of inline attachments of this mail
     */
-  def setInlineAttachment(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.mail.MailAttachment]) = {
-    asJava.setInlineAttachment(value.map(_.asJava))
+  def setInlineAttachment(value: scala.collection.mutable.Buffer[MailAttachment]) = {
+    asJava.setInlineAttachment(value.map(_.asJava).asJava)
     this
   }
   def getInlineAttachment = {
@@ -124,7 +126,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set the subject of this mail
     */
-  def setSubject(value:String) = {
+  def setSubject(value: String) = {
     asJava.setSubject(value)
     this
   }
@@ -135,7 +137,7 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set the plain text of this mail
     */
-  def setText(value:String) = {
+  def setText(value: String) = {
     asJava.setText(value)
     this
   }
@@ -146,8 +148,8 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
   /**
     * set list of to addresses
     */
-  def setTo(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setTo(value)
+  def setTo(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setTo(value.asJava)
     this
   }
   def getTo = {
@@ -156,13 +158,12 @@ class MailMessage(val asJava: io.vertx.ext.mail.MailMessage) {
 }
 
 object MailMessage {
-  type MailMessageJava = io.vertx.ext.mail.MailMessage
   
   def apply() = {
-    new MailMessage(new MailMessageJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MailMessage(new JMailMessage(emptyObj()))
   }
   
-  def apply(t: MailMessageJava) = {
+  def apply(t: JMailMessage) = {
     if(t != null)
       new MailMessage(t)
     else
@@ -171,7 +172,7 @@ object MailMessage {
   
   def fromJson(json: JsonObject):MailMessage = {
     if(json != null)
-      new MailMessage(new MailMessageJava(json))
+      new MailMessage(new JMailMessage(json))
     else
       null
   }

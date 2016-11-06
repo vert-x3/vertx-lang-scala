@@ -19,37 +19,40 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{LoggerHandler => JLoggerHandler}
+  import io.vertx.ext.web.handler.{LoggerHandler => JLoggerHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
-import io.vertx.ext.web.handler.LoggerFormat
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    import io.vertx.ext.web.handler.LoggerFormat
 
 /**
   * A handler which logs request information to the Vert.x logger.
   */
-class LoggerHandler(private val _asJava: io.vertx.ext.web.handler.LoggerHandler) {
+class LoggerHandler(private val _asJava: JLoggerHandler) {
 
-  def asJava: io.vertx.ext.web.handler.LoggerHandler = _asJava
+  def asJava: JLoggerHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object LoggerHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.LoggerHandler): io.vertx.scala.ext.web.handler.LoggerHandler =
-    new io.vertx.scala.ext.web.handler.LoggerHandler(_asJava)
+  def apply(_asJava: JLoggerHandler): LoggerHandler =
+    new LoggerHandler(_asJava)
 
-  def create(): io.vertx.scala.ext.web.handler.LoggerHandler = {
+  def create(): LoggerHandler = {
     LoggerHandler.apply(io.vertx.ext.web.handler.LoggerHandler.create())
   }
 
-  def create(format: io.vertx.ext.web.handler.LoggerFormat): io.vertx.scala.ext.web.handler.LoggerHandler = {
+  def create(format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler.apply(io.vertx.ext.web.handler.LoggerHandler.create(format))
   }
 
-  def create(immediate: Boolean, format: io.vertx.ext.web.handler.LoggerFormat): io.vertx.scala.ext.web.handler.LoggerHandler = {
+  def create(immediate: Boolean, format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler.apply(io.vertx.ext.web.handler.LoggerHandler.create(immediate, format))
   }
 

@@ -19,19 +19,25 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{RedirectAuthHandler => JRedirectAuthHandler}
+  import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
+    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * An auth handler that's used to handle auth by redirecting user to a custom login page.
   */
-class RedirectAuthHandler(private val _asJava: io.vertx.ext.web.handler.RedirectAuthHandler) 
-    extends io.vertx.scala.ext.web.handler.AuthHandler {
+class RedirectAuthHandler(private val _asJava: JRedirectAuthHandler) 
+    extends AuthHandler {
 
-  def asJava: io.vertx.ext.web.handler.RedirectAuthHandler = _asJava
+  def asJava: JRedirectAuthHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -39,7 +45,7 @@ class RedirectAuthHandler(private val _asJava: io.vertx.ext.web.handler.Redirect
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthority(authority: String): io.vertx.scala.ext.web.handler.AuthHandler = {
+  def addAuthority(authority: String): AuthHandler = {
     _asJava.addAuthority(authority)
     this
   }
@@ -49,7 +55,7 @@ class RedirectAuthHandler(private val _asJava: io.vertx.ext.web.handler.Redirect
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthorities(authorities: Set[String]): io.vertx.scala.ext.web.handler.AuthHandler = {
+  def addAuthorities(authorities: Set[String]): AuthHandler = {
     _asJava.addAuthorities(authorities.map(x => if (x == null) null else x:java.lang.String).asJava)
     this
   }
@@ -58,19 +64,19 @@ class RedirectAuthHandler(private val _asJava: io.vertx.ext.web.handler.Redirect
 
 object RedirectAuthHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.RedirectAuthHandler): io.vertx.scala.ext.web.handler.RedirectAuthHandler =
-    new io.vertx.scala.ext.web.handler.RedirectAuthHandler(_asJava)
+  def apply(_asJava: JRedirectAuthHandler): RedirectAuthHandler =
+    new RedirectAuthHandler(_asJava)
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider): io.vertx.scala.ext.web.handler.AuthHandler = {
-    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider]))
+  def create(authProvider: AuthProvider): AuthHandler = {
+    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider, loginRedirectURL: String): io.vertx.scala.ext.web.handler.AuthHandler = {
-    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider], loginRedirectURL))
+  def create(authProvider: AuthProvider, loginRedirectURL: String): AuthHandler = {
+    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL))
   }
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider, loginRedirectURL: String, returnURLParam: String): io.vertx.scala.ext.web.handler.AuthHandler = {
-    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider], loginRedirectURL, returnURLParam))
+  def create(authProvider: AuthProvider, loginRedirectURL: String, returnURLParam: String): AuthHandler = {
+    AuthHandler.apply(io.vertx.ext.web.handler.RedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL, returnURLParam))
   }
 
 }

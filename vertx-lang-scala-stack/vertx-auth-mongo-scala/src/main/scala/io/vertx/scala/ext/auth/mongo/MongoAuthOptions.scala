@@ -17,18 +17,23 @@
 package io.vertx.scala.ext.auth.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.auth.mongo.{MongoAuthOptions => JMongoAuthOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring Mongo authentication.
   */
 
-class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
+class MongoAuthOptions(val asJava: JMongoAuthOptions) {
 
   /**
     * The property name to be used to set the name of the collection inside the config.
     */
-  def setCollectionName(value:String) = {
+  def setCollectionName(value: String) = {
     asJava.setCollectionName(value)
     this
   }
@@ -39,7 +44,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The mongo client configuration: see Mongo Client documentation.
     */
-  def setConfig(value:io.vertx.core.json.JsonObject) = {
+  def setConfig(value: JsonObject) = {
     asJava.setConfig(value)
     this
   }
@@ -50,7 +55,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The mongo data source name: see Mongo Client documentation.
     */
-  def setDatasourceName(value:String) = {
+  def setDatasourceName(value: String) = {
     asJava.setDatasourceName(value)
     this
   }
@@ -61,7 +66,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the password is stored inside
     */
-  def setPasswordField(value:String) = {
+  def setPasswordField(value: String) = {
     asJava.setPasswordField(value)
     this
   }
@@ -72,7 +77,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the permissions are stored inside.
     */
-  def setPermissionField(value:String) = {
+  def setPermissionField(value: String) = {
     asJava.setPermissionField(value)
     this
   }
@@ -83,7 +88,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the roles are stored inside.
     */
-  def setRoleField(value:String) = {
+  def setRoleField(value: String) = {
     asJava.setRoleField(value)
     this
   }
@@ -94,7 +99,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the SALT is stored inside.
     */
-  def setSaltField(value:String) = {
+  def setSaltField(value: String) = {
     asJava.setSaltField(value)
     this
   }
@@ -105,7 +110,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the salt style is stored inside
     */
-  def setSaltStyle(value:io.vertx.ext.auth.mongo.HashSaltStyle) = {
+  def setSaltStyle(value: io.vertx.ext.auth.mongo.HashSaltStyle) = {
     asJava.setSaltStyle(value)
     this
   }
@@ -116,7 +121,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * Use a shared Mongo client or not.
     */
-  def setShared(value:Boolean) = {
+  def setShared(value: Boolean) = {
     asJava.setShared(value)
     this
   }
@@ -127,7 +132,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the username for the credentials is stored inside.
     */
-  def setUsernameCredentialField(value:String) = {
+  def setUsernameCredentialField(value: String) = {
     asJava.setUsernameCredentialField(value)
     this
   }
@@ -138,7 +143,7 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
   /**
     * The property name to be used to set the name of the field, where the username is stored inside.
     */
-  def setUsernameField(value:String) = {
+  def setUsernameField(value: String) = {
     asJava.setUsernameField(value)
     this
   }
@@ -148,13 +153,12 @@ class MongoAuthOptions(val asJava: io.vertx.ext.auth.mongo.MongoAuthOptions) {
 }
 
 object MongoAuthOptions {
-  type MongoAuthOptionsJava = io.vertx.ext.auth.mongo.MongoAuthOptions
   
   def apply() = {
-    new MongoAuthOptions(new MongoAuthOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MongoAuthOptions(new JMongoAuthOptions(emptyObj()))
   }
   
-  def apply(t: MongoAuthOptionsJava) = {
+  def apply(t: JMongoAuthOptions) = {
     if(t != null)
       new MongoAuthOptions(t)
     else
@@ -163,7 +167,7 @@ object MongoAuthOptions {
   
   def fromJson(json: JsonObject):MongoAuthOptions = {
     if(json != null)
-      new MongoAuthOptions(new MongoAuthOptionsJava(json))
+      new MongoAuthOptions(new JMongoAuthOptions(json))
     else
       null
   }

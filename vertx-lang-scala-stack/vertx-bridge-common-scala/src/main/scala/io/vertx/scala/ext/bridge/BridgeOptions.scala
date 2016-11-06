@@ -17,23 +17,25 @@
 package io.vertx.scala.ext.bridge
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
 
 /**
   * Specify the event bus bridge options.
   */
 
-class BridgeOptions(val asJava: io.vertx.ext.bridge.BridgeOptions) {
+class BridgeOptions(val asJava: JBridgeOptions) {
 
   /**
     * Sets the list of inbound permitted options.
     */
-  def addInboundPermitted(value:io.vertx.scala.ext.bridge.PermittedOptions) = {
+  def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
-  def setInboundPermitteds(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.bridge.PermittedOptions]) = {
-    asJava.setInboundPermitteds(value.map(_.asJava))
+  def setInboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+    asJava.setInboundPermitteds(value.map(_.asJava).asJava)
     this
   }
   def getInboundPermitteds = {
@@ -43,12 +45,12 @@ class BridgeOptions(val asJava: io.vertx.ext.bridge.BridgeOptions) {
   /**
     * Sets the list of outbound permitted options.
     */
-  def addOutboundPermitted(value:io.vertx.scala.ext.bridge.PermittedOptions) = {
+  def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
-  def setOutboundPermitteds(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.bridge.PermittedOptions]) = {
-    asJava.setOutboundPermitteds(value.map(_.asJava))
+  def setOutboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+    asJava.setOutboundPermitteds(value.map(_.asJava).asJava)
     this
   }
   def getOutboundPermitteds = {
@@ -57,13 +59,12 @@ class BridgeOptions(val asJava: io.vertx.ext.bridge.BridgeOptions) {
 }
 
 object BridgeOptions {
-  type BridgeOptionsJava = io.vertx.ext.bridge.BridgeOptions
   
   def apply() = {
-    new BridgeOptions(new BridgeOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new BridgeOptions(new JBridgeOptions(emptyObj()))
   }
   
-  def apply(t: BridgeOptionsJava) = {
+  def apply(t: JBridgeOptions) = {
     if(t != null)
       new BridgeOptions(t)
     else
@@ -72,7 +73,7 @@ object BridgeOptions {
   
   def fromJson(json: JsonObject):BridgeOptions = {
     if(json != null)
-      new BridgeOptions(new BridgeOptionsJava(json))
+      new BridgeOptions(new JBridgeOptions(json))
     else
       null
   }

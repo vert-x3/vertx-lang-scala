@@ -17,34 +17,35 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{SortOptions => JSortOptions}
 
 /**
   */
 
-class SortOptions(val asJava: io.vertx.redis.op.SortOptions) {
-  def setBy(value:String) = {
+class SortOptions(val asJava: JSortOptions) {
+  def setBy(value: String) = {
     asJava.setBy(value)
     this
   }
-  def addGet(value:String) = {
+  def addGet(value: String) = {
     asJava.addGet(value)
     this
   }
-  def setStore(value:String) = {
+  def setStore(value: String) = {
     asJava.setStore(value)
     this
   }
 }
 
 object SortOptions {
-  type SortOptionsJava = io.vertx.redis.op.SortOptions
   
   def apply() = {
-    new SortOptions(new SortOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new SortOptions(new JSortOptions(emptyObj()))
   }
   
-  def apply(t: SortOptionsJava) = {
+  def apply(t: JSortOptions) = {
     if(t != null)
       new SortOptions(t)
     else
@@ -53,7 +54,7 @@ object SortOptions {
   
   def fromJson(json: JsonObject):SortOptions = {
     if(json != null)
-      new SortOptions(new SortOptionsJava(json))
+      new SortOptions(new JSortOptions(json))
     else
       null
   }

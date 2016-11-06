@@ -19,25 +19,33 @@ package io.vertx.scala.ext.auth.mongo
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.auth.mongo.{MongoAuth => JMongoAuth}
+    import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.ext.mongo.{MongoClient => JMongoClient}
 import io.vertx.scala.ext.mongo.MongoClient
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.ext.mongo.{MongoClient => JMongoClient}
+  import io.vertx.core.json.JsonObject
+      import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
+    import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+  import io.vertx.ext.auth.mongo.{MongoAuth => JMongoAuth}
 
 /**
   * An extension of AuthProvider which is using  as store
   */
-class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
+class MongoAuth(private val _asJava: JMongoAuth) {
 
-  def asJava: io.vertx.ext.auth.mongo.MongoAuth = _asJava
+  def asJava: JMongoAuth = _asJava
 
   /**
     * Set the name of the collection to be used. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
     * @param collectionName the name of the collection to be used for storing and reading user data
     * @return the current instance itself for fluent calls
     */
-  def setCollectionName(collectionName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setCollectionName(collectionName: String): MongoAuth = {
     _asJava.setCollectionName(collectionName)
     this
   }
@@ -47,7 +55,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setUsernameField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setUsernameField(fieldName: String): MongoAuth = {
     _asJava.setUsernameField(fieldName)
     this
   }
@@ -57,7 +65,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setPasswordField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setPasswordField(fieldName: String): MongoAuth = {
     _asJava.setPasswordField(fieldName)
     this
   }
@@ -68,7 +76,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setRoleField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setRoleField(fieldName: String): MongoAuth = {
     _asJava.setRoleField(fieldName)
     this
   }
@@ -79,7 +87,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setPermissionField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setPermissionField(fieldName: String): MongoAuth = {
     _asJava.setPermissionField(fieldName)
     this
   }
@@ -90,7 +98,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setUsernameCredentialField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setUsernameCredentialField(fieldName: String): MongoAuth = {
     _asJava.setUsernameCredentialField(fieldName)
     this
   }
@@ -101,7 +109,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setPasswordCredentialField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setPasswordCredentialField(fieldName: String): MongoAuth = {
     _asJava.setPasswordCredentialField(fieldName)
     this
   }
@@ -112,7 +120,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-  def setSaltField(fieldName: String): io.vertx.scala.ext.auth.mongo.MongoAuth = {
+  def setSaltField(fieldName: String): MongoAuth = {
     _asJava.setSaltField(fieldName)
     this
   }
@@ -191,8 +199,8 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * @param hashStrategy the [[HashStrategy]] to be set
     * @return the current instance itself for fluent calls
     */
-  def setHashStrategy(hashStrategy: io.vertx.scala.ext.auth.mongo.HashStrategy): io.vertx.scala.ext.auth.mongo.MongoAuth = {
-    _asJava.setHashStrategy(hashStrategy.asJava.asInstanceOf[io.vertx.ext.auth.mongo.HashStrategy])
+  def setHashStrategy(hashStrategy: HashStrategy): MongoAuth = {
+    _asJava.setHashStrategy(hashStrategy.asJava.asInstanceOf[JHashStrategy])
     this
   }
 
@@ -200,7 +208,7 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
     * The HashStrategy which is used by the current instance
     * @return the defined instance of [[HashStrategy]]
     */
-  def getHashStrategy(): io.vertx.scala.ext.auth.mongo.HashStrategy = {
+  def getHashStrategy(): HashStrategy = {
     HashStrategy.apply(_asJava.getHashStrategy())
   }
 
@@ -222,11 +230,11 @@ class MongoAuth(private val _asJava: io.vertx.ext.auth.mongo.MongoAuth) {
 
 object MongoAuth {
 
-  def apply(_asJava: io.vertx.ext.auth.mongo.MongoAuth): io.vertx.scala.ext.auth.mongo.MongoAuth =
-    new io.vertx.scala.ext.auth.mongo.MongoAuth(_asJava)
+  def apply(_asJava: JMongoAuth): MongoAuth =
+    new MongoAuth(_asJava)
 
-  def create(mongoClient: io.vertx.scala.ext.mongo.MongoClient, config: io.vertx.core.json.JsonObject): io.vertx.scala.ext.auth.mongo.MongoAuth = {
-    MongoAuth.apply(io.vertx.ext.auth.mongo.MongoAuth.create(mongoClient.asJava.asInstanceOf[io.vertx.ext.mongo.MongoClient], config))
+  def create(mongoClient: MongoClient, config: JsonObject): MongoAuth = {
+    MongoAuth.apply(io.vertx.ext.auth.mongo.MongoAuth.create(mongoClient.asJava.asInstanceOf[JMongoClient], config))
   }
 
 }

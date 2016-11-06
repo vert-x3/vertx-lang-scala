@@ -14,52 +14,17 @@
  * under the License.
  */
 
-package io.vertx.scala.redis.op
+package io.vertx.scala.ext.auth
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.redis.op.{SetOptions => JSetOptions}
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
 
 /**
+  * A common base object for authentication options.
   */
 
-class SetOptions(val asJava: JSetOptions) {
-  def setEX(value: Long) = {
-    asJava.setEX(value)
-    this
-  }
-  def setNX(value: Boolean) = {
-    asJava.setNX(value)
-    this
-  }
-  def setPX(value: Long) = {
-    asJava.setPX(value)
-    this
-  }
-  def setXX(value: Boolean) = {
-    asJava.setXX(value)
-    this
-  }
+class AuthOptions(val asJava: JAuthOptions) {
 }
 
-object SetOptions {
-  
-  def apply() = {
-    new SetOptions(new JSetOptions(emptyObj()))
-  }
-  
-  def apply(t: JSetOptions) = {
-    if(t != null)
-      new SetOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):SetOptions = {
-    if(json != null)
-      new SetOptions(new JSetOptions(json))
-    else
-      null
-  }
-}

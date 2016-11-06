@@ -17,18 +17,23 @@
 package io.vertx.scala.ext.auth.shiro
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Shiro auth configuration options, see Vert.x Auth Shiro component and/or Apache Shiro project.
   */
 
-class ShiroAuthOptions(val asJava: io.vertx.ext.auth.shiro.ShiroAuthOptions) {
+class ShiroAuthOptions(val asJava: JShiroAuthOptions) {
 
   /**
     * Set the Shiro auth config.
     */
-  def setConfig(value:io.vertx.core.json.JsonObject) = {
+  def setConfig(value: JsonObject) = {
     asJava.setConfig(value)
     this
   }
@@ -39,7 +44,7 @@ class ShiroAuthOptions(val asJava: io.vertx.ext.auth.shiro.ShiroAuthOptions) {
   /**
     * Set the Shiro auth options type.
     */
-  def setType(value:io.vertx.ext.auth.shiro.ShiroAuthRealmType) = {
+  def setType(value: io.vertx.ext.auth.shiro.ShiroAuthRealmType) = {
     asJava.setType(value)
     this
   }
@@ -49,13 +54,12 @@ class ShiroAuthOptions(val asJava: io.vertx.ext.auth.shiro.ShiroAuthOptions) {
 }
 
 object ShiroAuthOptions {
-  type ShiroAuthOptionsJava = io.vertx.ext.auth.shiro.ShiroAuthOptions
   
   def apply() = {
-    new ShiroAuthOptions(new ShiroAuthOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ShiroAuthOptions(new JShiroAuthOptions(emptyObj()))
   }
   
-  def apply(t: ShiroAuthOptionsJava) = {
+  def apply(t: JShiroAuthOptions) = {
     if(t != null)
       new ShiroAuthOptions(t)
     else
@@ -64,7 +68,7 @@ object ShiroAuthOptions {
   
   def fromJson(json: JsonObject):ShiroAuthOptions = {
     if(json != null)
-      new ShiroAuthOptions(new ShiroAuthOptionsJava(json))
+      new ShiroAuthOptions(new JShiroAuthOptions(json))
     else
       null
   }

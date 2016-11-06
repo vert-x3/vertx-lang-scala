@@ -19,16 +19,18 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.HttpMethod
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{Route => JRoute}
+  import io.vertx.ext.web.{Route => JRoute}
+  import io.vertx.core.http.HttpMethod
+    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+  
 /**
   * A route is a holder for a set of criteria which determine whether an HTTP request or failure should be routed
   * to a handler.
   */
-class Route(private val _asJava: io.vertx.ext.web.Route) {
+class Route(private val _asJava: JRoute) {
 
-  def asJava: io.vertx.ext.web.Route = _asJava
+  def asJava: JRoute = _asJava
 
   /**
     * Add an HTTP method for this route. By default a route will match all HTTP methods. If any are specified then the route
@@ -36,7 +38,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param method the HTTP method to add
     * @return a reference to this, so the API can be used fluently
     */
-  def method(method: io.vertx.core.http.HttpMethod): io.vertx.scala.ext.web.Route = {
+  def method(method: io.vertx.core.http.HttpMethod): Route = {
     _asJava.method(method)
     this
   }
@@ -47,7 +49,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param path the path prefix
     * @return a reference to this, so the API can be used fluently
     */
-  def path(path: String): io.vertx.scala.ext.web.Route = {
+  def path(path: String): Route = {
     _asJava.path(path)
     this
   }
@@ -58,7 +60,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param path the path regex
     * @return a reference to this, so the API can be used fluently
     */
-  def pathRegex(path: String): io.vertx.scala.ext.web.Route = {
+  def pathRegex(path: String): Route = {
     _asJava.pathRegex(path)
     this
   }
@@ -68,7 +70,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
-  def produces(contentType: String): io.vertx.scala.ext.web.Route = {
+  def produces(contentType: String): Route = {
     _asJava.produces(contentType)
     this
   }
@@ -78,7 +80,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
-  def consumes(contentType: String): io.vertx.scala.ext.web.Route = {
+  def consumes(contentType: String): Route = {
     _asJava.consumes(contentType)
     this
   }
@@ -88,7 +90,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param order the order
     * @return a reference to this, so the API can be used fluently
     */
-  def order(order: Int): io.vertx.scala.ext.web.Route = {
+  def order(order: Int): Route = {
     _asJava.order(order)
     this
   }
@@ -97,7 +99,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * Specify this is the last route for the router.
     * @return a reference to this, so the API can be used fluently
     */
-  def last(): io.vertx.scala.ext.web.Route = {
+  def last(): Route = {
     _asJava.last()
     this
   }
@@ -109,7 +111,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param requestHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(requestHandler: io.vertx.scala.ext.web.RoutingContext => Unit): io.vertx.scala.ext.web.Route = {
+  def handler(requestHandler: RoutingContext => Unit): Route = {
     _asJava.handler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
@@ -117,7 +119,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
   /**
     * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
-  def blockingHandler(requestHandler: io.vertx.scala.ext.web.RoutingContext => Unit): io.vertx.scala.ext.web.Route = {
+  def blockingHandler(requestHandler: RoutingContext => Unit): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
@@ -135,7 +137,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
-  def blockingHandler(requestHandler: io.vertx.scala.ext.web.RoutingContext => Unit, ordered: Boolean): io.vertx.scala.ext.web.Route = {
+  def blockingHandler(requestHandler: RoutingContext => Unit, ordered: Boolean): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler), ordered)
     this
   }
@@ -147,7 +149,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param failureHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def failureHandler(failureHandler: io.vertx.scala.ext.web.RoutingContext => Unit): io.vertx.scala.ext.web.Route = {
+  def failureHandler(failureHandler: RoutingContext => Unit): Route = {
     _asJava.failureHandler(funcToMappedHandler(RoutingContext.apply)(failureHandler))
     this
   }
@@ -156,7 +158,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * Remove this route from the router
     * @return a reference to this, so the API can be used fluently
     */
-  def remove(): io.vertx.scala.ext.web.Route = {
+  def remove(): Route = {
     _asJava.remove()
     this
   }
@@ -165,7 +167,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * Disable this route. While disabled the router will not route any requests or failures to it.
     * @return a reference to this, so the API can be used fluently
     */
-  def disable(): io.vertx.scala.ext.web.Route = {
+  def disable(): Route = {
     _asJava.disable()
     this
   }
@@ -174,7 +176,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * Enable this route.
     * @return a reference to this, so the API can be used fluently
     */
-  def enable(): io.vertx.scala.ext.web.Route = {
+  def enable(): Route = {
     _asJava.enable()
     this
   }
@@ -185,7 +187,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
     * @param useNormalisedPath use normalised path for routing?
     * @return a reference to this, so the API can be used fluently
     */
-  def useNormalisedPath(useNormalisedPath: Boolean): io.vertx.scala.ext.web.Route = {
+  def useNormalisedPath(useNormalisedPath: Boolean): Route = {
     _asJava.useNormalisedPath(useNormalisedPath)
     this
   }
@@ -201,7 +203,7 @@ class Route(private val _asJava: io.vertx.ext.web.Route) {
 
 object Route {
 
-  def apply(_asJava: io.vertx.ext.web.Route): io.vertx.scala.ext.web.Route =
-    new io.vertx.scala.ext.web.Route(_asJava)
+  def apply(_asJava: JRoute): Route =
+    new Route(_asJava)
 
 }

@@ -19,19 +19,26 @@ package io.vertx.scala.ext.auth.jwt
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
+  import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
-import io.vertx.ext.auth.jwt.JWTOptions
+import io.vertx.core.{Vertx => JVertx}
+  import io.vertx.core.json.JsonObject
+        import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+  import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
+  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class JWTAuth(private val _asJava: io.vertx.ext.auth.jwt.JWTAuth) {
+class JWTAuth(private val _asJava: JJWTAuth) {
 
-  def asJava: io.vertx.ext.auth.jwt.JWTAuth = _asJava
+  def asJava: JJWTAuth = _asJava
 
   /**
     * Generate a new JWT token.
@@ -39,7 +46,7 @@ class JWTAuth(private val _asJava: io.vertx.ext.auth.jwt.JWTAuth) {
     * @param options extra options for the generationsee <a href="../../../../../../../../cheatsheet/JWTOptions.html">JWTOptions</a>
     * @return JWT encoded token
     */
-  def generateToken(claims: io.vertx.core.json.JsonObject, options: io.vertx.scala.ext.auth.jwt.JWTOptions): String = {
+  def generateToken(claims: JsonObject, options: JWTOptions): String = {
     _asJava.generateToken(claims, options.asJava)
   }
 
@@ -47,11 +54,11 @@ class JWTAuth(private val _asJava: io.vertx.ext.auth.jwt.JWTAuth) {
 
 object JWTAuth {
 
-  def apply(_asJava: io.vertx.ext.auth.jwt.JWTAuth): io.vertx.scala.ext.auth.jwt.JWTAuth =
-    new io.vertx.scala.ext.auth.jwt.JWTAuth(_asJava)
+  def apply(_asJava: JJWTAuth): JWTAuth =
+    new JWTAuth(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx, config: io.vertx.core.json.JsonObject): io.vertx.scala.ext.auth.jwt.JWTAuth = {
-    JWTAuth.apply(io.vertx.ext.auth.jwt.JWTAuth.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], config))
+  def create(vertx: Vertx, config: JsonObject): JWTAuth = {
+    JWTAuth.apply(io.vertx.ext.auth.jwt.JWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

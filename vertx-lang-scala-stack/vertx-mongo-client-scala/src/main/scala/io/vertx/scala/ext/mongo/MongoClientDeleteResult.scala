@@ -17,13 +17,15 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
 
 /**
   * Result propagated from mongodb driver delete result.
   */
 
-class MongoClientDeleteResult(val asJava: io.vertx.ext.mongo.MongoClientDeleteResult) {
+class MongoClientDeleteResult(val asJava: JMongoClientDeleteResult) {
 
   /**
     * Get the number of removed documents
@@ -31,13 +33,12 @@ class MongoClientDeleteResult(val asJava: io.vertx.ext.mongo.MongoClientDeleteRe
 }
 
 object MongoClientDeleteResult {
-  type MongoClientDeleteResultJava = io.vertx.ext.mongo.MongoClientDeleteResult
   
   def apply() = {
-    new MongoClientDeleteResult(new MongoClientDeleteResultJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MongoClientDeleteResult(new JMongoClientDeleteResult(emptyObj()))
   }
   
-  def apply(t: MongoClientDeleteResultJava) = {
+  def apply(t: JMongoClientDeleteResult) = {
     if(t != null)
       new MongoClientDeleteResult(t)
     else
@@ -46,7 +47,7 @@ object MongoClientDeleteResult {
   
   def fromJson(json: JsonObject):MongoClientDeleteResult = {
     if(json != null)
-      new MongoClientDeleteResult(new MongoClientDeleteResultJava(json))
+      new MongoClientDeleteResult(new JMongoClientDeleteResult(json))
     else
       null
   }

@@ -19,21 +19,26 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{FormLoginHandler => JFormLoginHandler}
+  import io.vertx.ext.web.handler.{FormLoginHandler => JFormLoginHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+      import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * Handler that handles login from a form on a custom login page.
   * 
   * Used in conjunction with the [[io.vertx.scala.ext.web.handler.RedirectAuthHandler]].
   */
-class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHandler) {
+class FormLoginHandler(private val _asJava: JFormLoginHandler) {
 
-  def asJava: io.vertx.ext.web.handler.FormLoginHandler = _asJava
+  def asJava: JFormLoginHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -41,7 +46,7 @@ class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHa
     * @param usernameParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setUsernameParam(usernameParam: String): io.vertx.scala.ext.web.handler.FormLoginHandler = {
+  def setUsernameParam(usernameParam: String): FormLoginHandler = {
     _asJava.setUsernameParam(usernameParam)
     this
   }
@@ -51,7 +56,7 @@ class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHa
     * @param passwordParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setPasswordParam(passwordParam: String): io.vertx.scala.ext.web.handler.FormLoginHandler = {
+  def setPasswordParam(passwordParam: String): FormLoginHandler = {
     _asJava.setPasswordParam(passwordParam)
     this
   }
@@ -61,7 +66,7 @@ class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHa
     * @param returnURLParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setReturnURLParam(returnURLParam: String): io.vertx.scala.ext.web.handler.FormLoginHandler = {
+  def setReturnURLParam(returnURLParam: String): FormLoginHandler = {
     _asJava.setReturnURLParam(returnURLParam)
     this
   }
@@ -72,7 +77,7 @@ class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHa
     * @param directLoggedInOKURL the URL to redirect to
     * @return a reference to this for a fluent API
     */
-  def setDirectLoggedInOKURL(directLoggedInOKURL: String): io.vertx.scala.ext.web.handler.FormLoginHandler = {
+  def setDirectLoggedInOKURL(directLoggedInOKURL: String): FormLoginHandler = {
     _asJava.setDirectLoggedInOKURL(directLoggedInOKURL)
     this
   }
@@ -81,15 +86,15 @@ class FormLoginHandler(private val _asJava: io.vertx.ext.web.handler.FormLoginHa
 
 object FormLoginHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.FormLoginHandler): io.vertx.scala.ext.web.handler.FormLoginHandler =
-    new io.vertx.scala.ext.web.handler.FormLoginHandler(_asJava)
+  def apply(_asJava: JFormLoginHandler): FormLoginHandler =
+    new FormLoginHandler(_asJava)
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider): io.vertx.scala.ext.web.handler.FormLoginHandler = {
-    FormLoginHandler.apply(io.vertx.ext.web.handler.FormLoginHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider]))
+  def create(authProvider: AuthProvider): FormLoginHandler = {
+    FormLoginHandler.apply(io.vertx.ext.web.handler.FormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider, usernameParam: String, passwordParam: String, returnURLParam: String, directLoggedInOKURL: String): io.vertx.scala.ext.web.handler.FormLoginHandler = {
-    FormLoginHandler.apply(io.vertx.ext.web.handler.FormLoginHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider], usernameParam, passwordParam, returnURLParam, directLoggedInOKURL))
+  def create(authProvider: AuthProvider, usernameParam: String, passwordParam: String, returnURLParam: String, directLoggedInOKURL: String): FormLoginHandler = {
+    FormLoginHandler.apply(io.vertx.ext.web.handler.FormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], usernameParam, passwordParam, returnURLParam, directLoggedInOKURL))
   }
 
 }

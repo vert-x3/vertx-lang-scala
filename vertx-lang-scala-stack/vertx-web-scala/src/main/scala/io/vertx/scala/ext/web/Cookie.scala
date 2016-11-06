@@ -19,7 +19,9 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-
+import io.vertx.ext.web.{Cookie => JCookie}
+  import io.vertx.ext.web.{Cookie => JCookie}
+  
 /**
   * Represents an HTTP Cookie.
   * 
@@ -27,9 +29,9 @@ import scala.collection.JavaConverters._
   * 
   * (Derived from io.netty.handler.codec.http.Cookie)
   */
-class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
+class Cookie(private val _asJava: JCookie) {
 
-  def asJava: io.vertx.ext.web.Cookie = _asJava
+  def asJava: JCookie = _asJava
 
   /**
     * @return the name of this cookie
@@ -50,7 +52,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * @param value The value to set
     * @return a reference to this, so the API can be used fluently
     */
-  def setValue(value: String): io.vertx.scala.ext.web.Cookie = {
+  def setValue(value: String): Cookie = {
     _asJava.setValue(value)
     this
   }
@@ -60,7 +62,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * @param domain The domain to use
     * @return a reference to this, so the API can be used fluently
     */
-  def setDomain(domain: scala.Option[String]): io.vertx.scala.ext.web.Cookie = {
+  def setDomain(domain: scala.Option[String]): Cookie = {
     _asJava.setDomain((if (domain.isDefined) domain.get else null))
     this
   }
@@ -77,7 +79,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * @param path The path to use for this cookie
     * @return a reference to this, so the API can be used fluently
     */
-  def setPath(path: scala.Option[String]): io.vertx.scala.ext.web.Cookie = {
+  def setPath(path: scala.Option[String]): Cookie = {
     _asJava.setPath((if (path.isDefined) path.get else null))
     this
   }
@@ -98,7 +100,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * If you don't set this the cookie will be a session cookie and be removed when the browser is closed.
     * @param maxAge The maximum age of this cookie in seconds
     */
-  def setMaxAge(maxAge: Long): io.vertx.scala.ext.web.Cookie = {
+  def setMaxAge(maxAge: Long): Cookie = {
     _asJava.setMaxAge(maxAge)
     this
   }
@@ -108,7 +110,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * @param secure True if this cookie is to be secure, otherwise false
     * @return a reference to this, so the API can be used fluently
     */
-  def setSecure(secure: Boolean): io.vertx.scala.ext.web.Cookie = {
+  def setSecure(secure: Boolean): Cookie = {
     _asJava.setSecure(secure)
     this
   }
@@ -121,7 +123,7 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
     * <a href="http://www.owasp.org/index.php/HTTPOnly">here</a>.
     * @param httpOnly True if the cookie is HTTP only, otherwise false.
     */
-  def setHttpOnly(httpOnly: Boolean): io.vertx.scala.ext.web.Cookie = {
+  def setHttpOnly(httpOnly: Boolean): Cookie = {
     _asJava.setHttpOnly(httpOnly)
     this
   }
@@ -155,10 +157,10 @@ class Cookie(private val _asJava: io.vertx.ext.web.Cookie) {
 
 object Cookie {
 
-  def apply(_asJava: io.vertx.ext.web.Cookie): io.vertx.scala.ext.web.Cookie =
-    new io.vertx.scala.ext.web.Cookie(_asJava)
+  def apply(_asJava: JCookie): Cookie =
+    new Cookie(_asJava)
 
-  def cookie(name: String, value: String): io.vertx.scala.ext.web.Cookie = {
+  def cookie(name: String, value: String): Cookie = {
     Cookie.apply(io.vertx.ext.web.Cookie.cookie(name, value))
   }
 

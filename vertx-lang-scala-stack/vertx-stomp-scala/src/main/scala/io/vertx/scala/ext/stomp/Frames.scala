@@ -19,7 +19,9 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.stomp.Frame
+import io.vertx.ext.stomp.{Frames => JFrames}
+  import io.vertx.ext.stomp.{Frame => JFrame}
+      import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**
   * Utility methods to build common <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>s. It defines a non-STOMP frame (`PING`) that is used for
@@ -27,31 +29,31 @@ import io.vertx.ext.stomp.Frame
   * <p/>
   * This class is thread-safe.
   */
-class Frames(private val _asJava: io.vertx.ext.stomp.Frames) {
+class Frames(private val _asJava: JFrames) {
 
-  def asJava: io.vertx.ext.stomp.Frames = _asJava
+  def asJava: JFrames = _asJava
 
 }
 
 object Frames {
 
-  def apply(_asJava: io.vertx.ext.stomp.Frames): io.vertx.scala.ext.stomp.Frames =
-    new io.vertx.scala.ext.stomp.Frames(_asJava)
+  def apply(_asJava: JFrames): Frames =
+    new Frames(_asJava)
 
-  def createErrorFrame(message: String, headers: Map[String, String], body: String): io.vertx.scala.ext.stomp.Frame = {
-    io.vertx.scala.ext.stomp.Frame(io.vertx.ext.stomp.Frames.createErrorFrame(message, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body))
+  def createErrorFrame(message: String, headers: Map[String, String], body: String): Frame = {
+    Frame(io.vertx.ext.stomp.Frames.createErrorFrame(message, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body))
   }
 
-  def createReceiptFrame(receiptId: String, headers: Map[String, String]): io.vertx.scala.ext.stomp.Frame = {
-    io.vertx.scala.ext.stomp.Frame(io.vertx.ext.stomp.Frames.createReceiptFrame(receiptId, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava))
+  def createReceiptFrame(receiptId: String, headers: Map[String, String]): Frame = {
+    Frame(io.vertx.ext.stomp.Frames.createReceiptFrame(receiptId, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava))
   }
 
-  def handleReceipt(frame: io.vertx.scala.ext.stomp.Frame, connection: io.vertx.scala.ext.stomp.StompServerConnection): Unit = {
-    io.vertx.ext.stomp.Frames.handleReceipt(frame.asJava, connection.asJava.asInstanceOf[io.vertx.ext.stomp.StompServerConnection])
+  def handleReceipt(frame: Frame, connection: StompServerConnection): Unit = {
+    io.vertx.ext.stomp.Frames.handleReceipt(frame.asJava, connection.asJava.asInstanceOf[JStompServerConnection])
   }
 
-  def ping(): io.vertx.scala.ext.stomp.Frame = {
-    io.vertx.scala.ext.stomp.Frame(io.vertx.ext.stomp.Frames.ping())
+  def ping(): Frame = {
+    Frame(io.vertx.ext.stomp.Frames.ping())
   }
 
 }

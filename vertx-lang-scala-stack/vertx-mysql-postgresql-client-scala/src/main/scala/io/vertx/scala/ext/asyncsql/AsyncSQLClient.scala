@@ -19,15 +19,17 @@ package io.vertx.scala.ext.asyncsql
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
+    import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 import io.vertx.scala.ext.sql.SQLConnection
-import io.vertx.core.Handler
-
+import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+    
 /**
   * Represents an asynchronous SQL client
   */
-class AsyncSQLClient(private val _asJava: io.vertx.ext.asyncsql.AsyncSQLClient) {
+class AsyncSQLClient(private val _asJava: JAsyncSQLClient) {
 
-  def asJava: io.vertx.ext.asyncsql.AsyncSQLClient = _asJava
+  def asJava: JAsyncSQLClient = _asJava
 
   /**
     * Close the client and release all resources.
@@ -53,8 +55,8 @@ class AsyncSQLClient(private val _asJava: io.vertx.ext.asyncsql.AsyncSQLClient) 
     * connection when you are done, so it is returned to the pool.
     * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
     */
-  def getConnectionFuture(): concurrent.Future[io.vertx.scala.ext.sql.SQLConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.sql.SQLConnection,io.vertx.scala.ext.sql.SQLConnection]((x => if (x == null) null else SQLConnection.apply(x)))
+  def getConnectionFuture(): concurrent.Future[SQLConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection,SQLConnection]((x => if (x == null) null else SQLConnection.apply(x)))
     _asJava.getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -63,7 +65,7 @@ class AsyncSQLClient(private val _asJava: io.vertx.ext.asyncsql.AsyncSQLClient) 
 
 object AsyncSQLClient {
 
-  def apply(_asJava: io.vertx.ext.asyncsql.AsyncSQLClient): io.vertx.scala.ext.asyncsql.AsyncSQLClient =
-    new io.vertx.scala.ext.asyncsql.AsyncSQLClient(_asJava)
+  def apply(_asJava: JAsyncSQLClient): AsyncSQLClient =
+    new AsyncSQLClient(_asJava)
 
 }

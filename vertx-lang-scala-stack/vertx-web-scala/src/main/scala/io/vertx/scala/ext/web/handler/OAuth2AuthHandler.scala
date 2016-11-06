@@ -19,20 +19,29 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{OAuth2AuthHandler => JOAuth2AuthHandler}
+  import io.vertx.ext.web.{Route => JRoute}
 import io.vertx.scala.ext.web.Route
+import io.vertx.ext.web.{Route => JRoute}
+  import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
+    import io.vertx.ext.web.handler.{OAuth2AuthHandler => JOAuth2AuthHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 
 /**
   * An auth handler that provides OAuth2 Authentication support. This handler is suitable for AuthCode flows.
   */
-class OAuth2AuthHandler(private val _asJava: io.vertx.ext.web.handler.OAuth2AuthHandler) 
-    extends io.vertx.scala.ext.web.handler.AuthHandler {
+class OAuth2AuthHandler(private val _asJava: JOAuth2AuthHandler) 
+    extends AuthHandler {
 
-  def asJava: io.vertx.ext.web.handler.OAuth2AuthHandler = _asJava
+  def asJava: JOAuth2AuthHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -40,7 +49,7 @@ class OAuth2AuthHandler(private val _asJava: io.vertx.ext.web.handler.OAuth2Auth
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthority(authority: String): io.vertx.scala.ext.web.handler.AuthHandler = {
+  def addAuthority(authority: String): AuthHandler = {
     _asJava.addAuthority(authority)
     this
   }
@@ -50,7 +59,7 @@ class OAuth2AuthHandler(private val _asJava: io.vertx.ext.web.handler.OAuth2Auth
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthorities(authorities: Set[String]): io.vertx.scala.ext.web.handler.AuthHandler = {
+  def addAuthorities(authorities: Set[String]): AuthHandler = {
     _asJava.addAuthorities(authorities.map(x => if (x == null) null else x:java.lang.String).asJava)
     this
   }
@@ -70,8 +79,8 @@ class OAuth2AuthHandler(private val _asJava: io.vertx.ext.web.handler.OAuth2Auth
     * @param route a given route e.g.: `/callback`
     * @return self
     */
-  def setupCallback(route: io.vertx.scala.ext.web.Route): io.vertx.scala.ext.web.handler.OAuth2AuthHandler = {
-    _asJava.setupCallback(route.asJava.asInstanceOf[io.vertx.ext.web.Route])
+  def setupCallback(route: Route): OAuth2AuthHandler = {
+    _asJava.setupCallback(route.asJava.asInstanceOf[JRoute])
     this
   }
 
@@ -79,11 +88,11 @@ class OAuth2AuthHandler(private val _asJava: io.vertx.ext.web.handler.OAuth2Auth
 
 object OAuth2AuthHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.OAuth2AuthHandler): io.vertx.scala.ext.web.handler.OAuth2AuthHandler =
-    new io.vertx.scala.ext.web.handler.OAuth2AuthHandler(_asJava)
+  def apply(_asJava: JOAuth2AuthHandler): OAuth2AuthHandler =
+    new OAuth2AuthHandler(_asJava)
 
-  def create(authProvider: io.vertx.scala.ext.auth.oauth2.OAuth2Auth, uri: String): io.vertx.scala.ext.web.handler.OAuth2AuthHandler = {
-    OAuth2AuthHandler.apply(io.vertx.ext.web.handler.OAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.oauth2.OAuth2Auth], uri))
+  def create(authProvider: OAuth2Auth, uri: String): OAuth2AuthHandler = {
+    OAuth2AuthHandler.apply(io.vertx.ext.web.handler.OAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth], uri))
   }
 
 }

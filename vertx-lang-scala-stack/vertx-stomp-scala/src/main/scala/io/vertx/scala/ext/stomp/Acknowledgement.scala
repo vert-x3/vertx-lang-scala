@@ -19,7 +19,8 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.stomp.Frame
+import io.vertx.ext.stomp.{Acknowledgement => JAcknowledgement}
+    import io.vertx.ext.stomp.{Frame => JFrame}
 
 /**
   * Structure passed to acknowledgement handler called when a `ACK` or `NACK` frame is received. The handler
@@ -31,21 +32,21 @@ import io.vertx.ext.stomp.Frame
   * acknowledgement. Subscriptions using the `client-individual` mode receives a singleton list containing only
   * the acknowledged message.
   */
-class Acknowledgement(private val _asJava: io.vertx.ext.stomp.Acknowledgement) {
+class Acknowledgement(private val _asJava: JAcknowledgement) {
 
-  def asJava: io.vertx.ext.stomp.Acknowledgement = _asJava
+  def asJava: JAcknowledgement = _asJava
 
   /**
     * @return the subscription framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     */
-  def subscription(): io.vertx.scala.ext.stomp.Frame = {
-    io.vertx.scala.ext.stomp.Frame(_asJava.subscription())
+  def subscription(): Frame = {
+    Frame(_asJava.subscription())
   }
 
   /**
     * @return the list of frames that have been acknowledged / not-acknowledged. The content of the list depends on the type of subscription.
     */
-  def frames(): scala.collection.mutable.Buffer[io.vertx.scala.ext.stomp.Frame] = {
+  def frames(): scala.collection.mutable.Buffer[Frame] = {
     _asJava.frames().asScala.map(x => Frame(x))
   }
 
@@ -53,7 +54,7 @@ class Acknowledgement(private val _asJava: io.vertx.ext.stomp.Acknowledgement) {
 
 object Acknowledgement {
 
-  def apply(_asJava: io.vertx.ext.stomp.Acknowledgement): io.vertx.scala.ext.stomp.Acknowledgement =
-    new io.vertx.scala.ext.stomp.Acknowledgement(_asJava)
+  def apply(_asJava: JAcknowledgement): Acknowledgement =
+    new Acknowledgement(_asJava)
 
 }

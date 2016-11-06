@@ -17,20 +17,23 @@
 package io.vertx.scala.ext.web.handler.sockjs
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.web.handler.sockjs.{PermittedOptions => JPermittedOptions}
+import io.vertx.core.json.JsonObject
 
 /**
   * Specify a match to allow for inbound and outbound traffic using the
   * <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>.
   */
 
-class PermittedOptions(val asJava: io.vertx.ext.web.handler.sockjs.PermittedOptions) {
+class PermittedOptions(val asJava: JPermittedOptions) {
 
   /**
     * The exact address the message is being sent to. If you want to allow messages based on
     * an exact address you use this field.
     */
-  def setAddress(value:String) = {
+  def setAddress(value: String) = {
     asJava.setAddress(value)
     this
   }
@@ -43,7 +46,7 @@ class PermittedOptions(val asJava: io.vertx.ext.web.handler.sockjs.PermittedOpti
     * based on a regular expression you use this field. If the <a href="../../../../../../../../../cheatsheet/PermittedOptions.html">PermittedOptions</a> value is specified
     * this will be ignored.
     */
-  def setAddressRegex(value:String) = {
+  def setAddressRegex(value: String) = {
     asJava.setAddressRegex(value)
     this
   }
@@ -55,7 +58,7 @@ class PermittedOptions(val asJava: io.vertx.ext.web.handler.sockjs.PermittedOpti
     * This allows you to allow messages based on their structure. Any fields in the match must exist in the
     * message with the same values for them to be allowed. This currently only works with JSON messages.
     */
-  def setMatch(value:io.vertx.core.json.JsonObject) = {
+  def setMatch(value: JsonObject) = {
     asJava.setMatch(value)
     this
   }
@@ -66,7 +69,7 @@ class PermittedOptions(val asJava: io.vertx.ext.web.handler.sockjs.PermittedOpti
   /**
     * Declare a specific authority that user must have in order to allow messages
     */
-  def setRequiredAuthority(value:String) = {
+  def setRequiredAuthority(value: String) = {
     asJava.setRequiredAuthority(value)
     this
   }
@@ -76,13 +79,12 @@ class PermittedOptions(val asJava: io.vertx.ext.web.handler.sockjs.PermittedOpti
 }
 
 object PermittedOptions {
-  type PermittedOptionsJava = io.vertx.ext.web.handler.sockjs.PermittedOptions
   
   def apply() = {
-    new PermittedOptions(new PermittedOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PermittedOptions(new JPermittedOptions(emptyObj()))
   }
   
-  def apply(t: PermittedOptionsJava) = {
+  def apply(t: JPermittedOptions) = {
     if(t != null)
       new PermittedOptions(t)
     else
@@ -91,7 +93,7 @@ object PermittedOptions {
   
   def fromJson(json: JsonObject):PermittedOptions = {
     if(json != null)
-      new PermittedOptions(new PermittedOptionsJava(json))
+      new PermittedOptions(new JPermittedOptions(json))
     else
       null
   }

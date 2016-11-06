@@ -19,15 +19,17 @@ package io.vertx.scala.ext.web.sstore
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
+  import io.vertx.ext.web.{Session => JSession}
 import io.vertx.scala.ext.web.Session
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{Session => JSession}
+          
 /**
   * A session store is used to store sessions for an Vert.x-Web web app
   */
-class SessionStore(private val _asJava: io.vertx.ext.web.sstore.SessionStore) {
+class SessionStore(private val _asJava: JSessionStore) {
 
-  def asJava: io.vertx.ext.web.sstore.SessionStore = _asJava
+  def asJava: JSessionStore = _asJava
 
   /**
     * The retry timeout value in milli seconds used by the session handler when it retrieves a value from the store.<p/>
@@ -44,7 +46,7 @@ class SessionStore(private val _asJava: io.vertx.ext.web.sstore.SessionStore) {
     * @param timeout - the session timeout, in ms
     * @return the session
     */
-  def createSession(timeout: Long): io.vertx.scala.ext.web.Session = {
+  def createSession(timeout: Long): Session = {
     Session.apply(_asJava.createSession(timeout))
   }
 
@@ -53,8 +55,8 @@ class SessionStore(private val _asJava: io.vertx.ext.web.sstore.SessionStore) {
     * @param id the unique ID of the session
     * @return will be called with a result holding the session, or a failure
     */
-  def getFuture(id: String): concurrent.Future[io.vertx.scala.ext.web.Session] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.web.Session,io.vertx.scala.ext.web.Session]((x => if (x == null) null else Session.apply(x)))
+  def getFuture(id: String): concurrent.Future[Session] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSession,Session]((x => if (x == null) null else Session.apply(x)))
     _asJava.get(id, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -75,9 +77,9 @@ class SessionStore(private val _asJava: io.vertx.ext.web.sstore.SessionStore) {
     * @param session the session
     * @return will be called with a result true/false, or a failure
     */
-  def putFuture(session: io.vertx.scala.ext.web.Session): concurrent.Future[Boolean] = {
+  def putFuture(session: Session): concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
-    _asJava.put(session.asJava.asInstanceOf[io.vertx.ext.web.Session], promiseAndHandler._1)
+    _asJava.put(session.asJava.asInstanceOf[JSession], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -112,7 +114,7 @@ class SessionStore(private val _asJava: io.vertx.ext.web.sstore.SessionStore) {
 
 object SessionStore {
 
-  def apply(_asJava: io.vertx.ext.web.sstore.SessionStore): io.vertx.scala.ext.web.sstore.SessionStore =
-    new io.vertx.scala.ext.web.sstore.SessionStore(_asJava)
+  def apply(_asJava: JSessionStore): SessionStore =
+    new SessionStore(_asJava)
 
 }

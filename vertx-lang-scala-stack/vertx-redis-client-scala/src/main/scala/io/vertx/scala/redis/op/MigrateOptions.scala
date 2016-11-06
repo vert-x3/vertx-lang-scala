@@ -17,22 +17,23 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
 
 /**
   */
 
-class MigrateOptions(val asJava: io.vertx.redis.op.MigrateOptions) {
+class MigrateOptions(val asJava: JMigrateOptions) {
 }
 
 object MigrateOptions {
-  type MigrateOptionsJava = io.vertx.redis.op.MigrateOptions
   
   def apply() = {
-    new MigrateOptions(new MigrateOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MigrateOptions(new JMigrateOptions(emptyObj()))
   }
   
-  def apply(t: MigrateOptionsJava) = {
+  def apply(t: JMigrateOptions) = {
     if(t != null)
       new MigrateOptions(t)
     else
@@ -41,7 +42,7 @@ object MigrateOptions {
   
   def fromJson(json: JsonObject):MigrateOptions = {
     if(json != null)
-      new MigrateOptions(new MigrateOptionsJava(json))
+      new MigrateOptions(new JMigrateOptions(json))
     else
       null
   }

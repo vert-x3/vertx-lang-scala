@@ -17,13 +17,16 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
+import io.vertx.core.json.JsonObject
 
 /**
   * Options used to configure index.
   */
 
-class IndexOptions(val asJava: io.vertx.ext.mongo.IndexOptions) {
+class IndexOptions(val asJava: JIndexOptions) {
 
   /**
     * Create the index in the background
@@ -98,13 +101,12 @@ class IndexOptions(val asJava: io.vertx.ext.mongo.IndexOptions) {
 }
 
 object IndexOptions {
-  type IndexOptionsJava = io.vertx.ext.mongo.IndexOptions
   
   def apply() = {
-    new IndexOptions(new IndexOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new IndexOptions(new JIndexOptions(emptyObj()))
   }
   
-  def apply(t: IndexOptionsJava) = {
+  def apply(t: JIndexOptions) = {
     if(t != null)
       new IndexOptions(t)
     else
@@ -113,7 +115,7 @@ object IndexOptions {
   
   def fromJson(json: JsonObject):IndexOptions = {
     if(json != null)
-      new IndexOptions(new IndexOptionsJava(json))
+      new IndexOptions(new JIndexOptions(json))
     else
       null
   }

@@ -17,17 +17,19 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
 
 /**
   */
 
-class GeoRadiusOptions(val asJava: io.vertx.redis.op.GeoRadiusOptions) {
+class GeoRadiusOptions(val asJava: JGeoRadiusOptions) {
 
   /**
     * Set the radius options limit the result count.
     */
-  def setCount(value:Long) = {
+  def setCount(value: Long) = {
     asJava.setCount(value)
     this
   }
@@ -35,7 +37,7 @@ class GeoRadiusOptions(val asJava: io.vertx.redis.op.GeoRadiusOptions) {
   /**
     * Set the radius options to be coordinate based.
     */
-  def setWithCoord(value:Boolean) = {
+  def setWithCoord(value: Boolean) = {
     asJava.setWithCoord(value)
     this
   }
@@ -43,7 +45,7 @@ class GeoRadiusOptions(val asJava: io.vertx.redis.op.GeoRadiusOptions) {
   /**
     * Set the radius options to be distance based.
     */
-  def setWithDist(value:Boolean) = {
+  def setWithDist(value: Boolean) = {
     asJava.setWithDist(value)
     this
   }
@@ -51,20 +53,19 @@ class GeoRadiusOptions(val asJava: io.vertx.redis.op.GeoRadiusOptions) {
   /**
     * Set the radius options to be hash based.
     */
-  def setWithHash(value:Boolean) = {
+  def setWithHash(value: Boolean) = {
     asJava.setWithHash(value)
     this
   }
 }
 
 object GeoRadiusOptions {
-  type GeoRadiusOptionsJava = io.vertx.redis.op.GeoRadiusOptions
   
   def apply() = {
-    new GeoRadiusOptions(new GeoRadiusOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new GeoRadiusOptions(new JGeoRadiusOptions(emptyObj()))
   }
   
-  def apply(t: GeoRadiusOptionsJava) = {
+  def apply(t: JGeoRadiusOptions) = {
     if(t != null)
       new GeoRadiusOptions(t)
     else
@@ -73,7 +74,7 @@ object GeoRadiusOptions {
   
   def fromJson(json: JsonObject):GeoRadiusOptions = {
     if(json != null)
-      new GeoRadiusOptions(new GeoRadiusOptionsJava(json))
+      new GeoRadiusOptions(new JGeoRadiusOptions(json))
     else
       null
   }

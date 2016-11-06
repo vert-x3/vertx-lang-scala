@@ -19,17 +19,22 @@ package io.vertx.scala.ext.auth.oauth2
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
+    import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.ext.auth.{User => JUser}
+    import io.vertx.core.json.JsonObject
+        import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
+  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * AccessToken extension to the User interface
   */
-class AccessToken(private val _asJava: io.vertx.ext.auth.oauth2.AccessToken) {
+class AccessToken(private val _asJava: JAccessToken) {
 
-  def asJava: io.vertx.ext.auth.oauth2.AccessToken = _asJava
+  def asJava: JAccessToken = _asJava
 
   /**
     * Check if the access token is expired or not.
@@ -74,7 +79,7 @@ class AccessToken(private val _asJava: io.vertx.ext.auth.oauth2.AccessToken) {
 
 object AccessToken {
 
-  def apply(_asJava: io.vertx.ext.auth.oauth2.AccessToken): io.vertx.scala.ext.auth.oauth2.AccessToken =
-    new io.vertx.scala.ext.auth.oauth2.AccessToken(_asJava)
+  def apply(_asJava: JAccessToken): AccessToken =
+    new AccessToken(_asJava)
 
 }

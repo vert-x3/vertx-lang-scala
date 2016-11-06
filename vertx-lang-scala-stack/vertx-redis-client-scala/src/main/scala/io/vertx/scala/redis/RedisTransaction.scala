@@ -19,35 +19,47 @@ package io.vertx.scala.redis
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.redis.op.BitOperation
-import io.vertx.redis.op.ResetOptions
-import io.vertx.redis.op.ObjectCmd
-import io.vertx.redis.op.KillFilter
-import io.vertx.redis.op.GeoUnit
-import io.vertx.core.json.JsonObject
-import io.vertx.redis.op.RangeOptions
-import io.vertx.redis.op.GeoMember
-import io.vertx.redis.op.GeoRadiusOptions
-import io.vertx.redis.op.InsertOptions
-import io.vertx.redis.op.AggregateOptions
-import io.vertx.redis.op.SetOptions
-import io.vertx.redis.op.SortOptions
-import io.vertx.redis.op.MigrateOptions
-import io.vertx.redis.op.ScanOptions
-import io.vertx.redis.op.FailoverOptions
-import io.vertx.redis.op.SlotCmd
-import io.vertx.redis.op.RangeLimitOptions
-import io.vertx.redis.op.LimitOptions
-import io.vertx.core.json.JsonArray
+import io.vertx.redis.{RedisTransaction => JRedisTransaction}
+    import io.vertx.redis.op.BitOperation
+  import io.vertx.redis.op.ResetOptions
+  import io.vertx.redis.op.ObjectCmd
+  import io.vertx.redis.op.{KillFilter => JKillFilter}
+import io.vertx.scala.redis.op.KillFilter
+    import io.vertx.redis.op.GeoUnit
+  import io.vertx.core.json.JsonObject
+      import io.vertx.redis.op.RangeOptions
+  import io.vertx.redis.op.{GeoMember => JGeoMember}
+import io.vertx.scala.redis.op.GeoMember
+  import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
+import io.vertx.scala.redis.op.GeoRadiusOptions
+  import io.vertx.redis.op.InsertOptions
+  import io.vertx.redis.op.AggregateOptions
+    import io.vertx.redis.{RedisTransaction => JRedisTransaction}
+  import io.vertx.redis.op.{SetOptions => JSetOptions}
+import io.vertx.scala.redis.op.SetOptions
+  import io.vertx.redis.op.{SortOptions => JSortOptions}
+import io.vertx.scala.redis.op.SortOptions
+  import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
+import io.vertx.scala.redis.op.MigrateOptions
+  import io.vertx.redis.op.{ScanOptions => JScanOptions}
+import io.vertx.scala.redis.op.ScanOptions
+  import io.vertx.redis.op.FailoverOptions
+  import io.vertx.redis.op.SlotCmd
+  import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
+import io.vertx.scala.redis.op.RangeLimitOptions
+  import io.vertx.redis.op.{LimitOptions => JLimitOptions}
+import io.vertx.scala.redis.op.LimitOptions
+  import io.vertx.core.json.JsonArray
+    import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.Handler
-
+import io.vertx.core.buffer.{Buffer => JBuffer}
+  
 /**
   * This Interface represents a TX
   */
-class RedisTransaction(private val _asJava: io.vertx.redis.RedisTransaction) {
+class RedisTransaction(private val _asJava: JRedisTransaction) {
 
-  def asJava: io.vertx.redis.RedisTransaction = _asJava
+  def asJava: JRedisTransaction = _asJava
 
   /**
     * Close the client - when it is fully closed the handler will be called.
@@ -246,7 +258,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param filter Filter optionssee <a href="../../../../../../cheatsheet/KillFilter.html">KillFilter</a>
     * @return Handler for the result of this call.
     */
-  def clientKillFuture(filter: io.vertx.scala.redis.op.KillFilter): concurrent.Future[String] = {
+  def clientKillFuture(filter: KillFilter): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.clientKill(filter.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -732,8 +744,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   /**
     * Execute all commands issued after MULTI
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def execFuture(): concurrent.Future[io.vertx.core.json.JsonArray] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonArray,io.vertx.core.json.JsonArray]((x => x))
+  def execFuture(): concurrent.Future[JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray,JsonArray]((x => x))
     _asJava.exec(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -975,7 +987,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param values Map of field:value pairs
     * @return Handler for the result of this call.
     */
-  def hmsetFuture(key: String, values: io.vertx.core.json.JsonObject): concurrent.Future[String] = {
+  def hmsetFuture(key: String, values: JsonObject): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.hmset(key, values, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1261,7 +1273,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Migrate optionssee <a href="../../../../../../cheatsheet/MigrateOptions.html">MigrateOptions</a>
     * @return Handler for the result of this call.
     */
-  def migrateFuture(host: String, port: Int, key: String, destdb: Int, timeout: Long, options: io.vertx.scala.redis.op.MigrateOptions): concurrent.Future[String] = {
+  def migrateFuture(host: String, port: Int, key: String, destdb: Int, timeout: Long, options: MigrateOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.migrate(host, port, key, destdb, timeout, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1293,7 +1305,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param keyvals Key value pairs to set
     * @return Handler for the result of this call.
     */
-  def msetFuture(keyvals: io.vertx.core.json.JsonObject): concurrent.Future[String] = {
+  def msetFuture(keyvals: JsonObject): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.mset(keyvals, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1304,7 +1316,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param keyvals Key value pairs to set
     * @return Handler for the result of this call.
     */
-  def msetnxFuture(keyvals: io.vertx.core.json.JsonObject): concurrent.Future[String] = {
+  def msetnxFuture(keyvals: JsonObject): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.msetnx(keyvals, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1798,7 +1810,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Set optionssee <a href="../../../../../../cheatsheet/SetOptions.html">SetOptions</a>
     * @return Handler for the result of this call.
     */
-  def setWithOptionsFuture(key: String, value: String, options: io.vertx.scala.redis.op.SetOptions): concurrent.Future[String] = {
+  def setWithOptionsFuture(key: String, value: String, options: SetOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.setWithOptions(key, value, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1810,9 +1822,9 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param value New value for the key
     * @return Handler for the result of this call.
     */
-  def setBinaryFuture(key: String, value: io.vertx.scala.core.buffer.Buffer): concurrent.Future[String] = {
+  def setBinaryFuture(key: String, value: Buffer): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
-    _asJava.setBinary(key, value.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
+    _asJava.setBinary(key, value.asJava.asInstanceOf[JBuffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -1823,9 +1835,9 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Set optionssee <a href="../../../../../../cheatsheet/SetOptions.html">SetOptions</a>
     * @return Handler for the result of this call.
     */
-  def setBinaryWithOptionsFuture(key: String, value: io.vertx.scala.core.buffer.Buffer, options: io.vertx.scala.redis.op.SetOptions): concurrent.Future[String] = {
+  def setBinaryWithOptionsFuture(key: String, value: Buffer, options: SetOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
-    _asJava.setBinaryWithOptions(key, value.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], options.asJava, promiseAndHandler._1)
+    _asJava.setBinaryWithOptions(key, value.asJava.asInstanceOf[JBuffer], options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -1998,7 +2010,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Sort optionssee <a href="../../../../../../cheatsheet/SortOptions.html">SortOptions</a>
     * @return Handler for the result of this call.
     */
-  def sortFuture(key: String, options: io.vertx.scala.redis.op.SortOptions): concurrent.Future[String] = {
+  def sortFuture(key: String, options: SortOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.sort(key, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2358,7 +2370,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Limit options where limit can be specifiedsee <a href="../../../../../../cheatsheet/LimitOptions.html">LimitOptions</a>
     * @return Handler for the result of this call.
     */
-  def zrangebylexFuture(key: String, min: String, max: String, options: io.vertx.scala.redis.op.LimitOptions): concurrent.Future[String] = {
+  def zrangebylexFuture(key: String, min: String, max: String, options: LimitOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.zrangebylex(key, min, max, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2372,7 +2384,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Range and limit optionssee <a href="../../../../../../cheatsheet/RangeLimitOptions.html">RangeLimitOptions</a>
     * @return Handler for the result of this call.
     */
-  def zrangebyscoreFuture(key: String, min: String, max: String, options: io.vertx.scala.redis.op.RangeLimitOptions): concurrent.Future[String] = {
+  def zrangebyscoreFuture(key: String, min: String, max: String, options: RangeLimitOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.zrangebyscore(key, min, max, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2474,7 +2486,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Limit optionssee <a href="../../../../../../cheatsheet/LimitOptions.html">LimitOptions</a>
     * @return Handler for the result of this call.
     */
-  def zrevrangebylexFuture(key: String, max: String, min: String, options: io.vertx.scala.redis.op.LimitOptions): concurrent.Future[String] = {
+  def zrevrangebylexFuture(key: String, max: String, min: String, options: LimitOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.zrevrangebylex(key, max, min, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2488,7 +2500,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Range and limit optionssee <a href="../../../../../../cheatsheet/RangeLimitOptions.html">RangeLimitOptions</a>
     * @return Handler for the result of this call.
     */
-  def zrevrangebyscoreFuture(key: String, max: String, min: String, options: io.vertx.scala.redis.op.RangeLimitOptions): concurrent.Future[String] = {
+  def zrevrangebyscoreFuture(key: String, max: String, min: String, options: RangeLimitOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.zrevrangebyscore(key, max, min, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2550,7 +2562,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
     * @return Handler for the result of this call.
     */
-  def scanFuture(cursor: String, options: io.vertx.scala.redis.op.ScanOptions): concurrent.Future[String] = {
+  def scanFuture(cursor: String, options: ScanOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.scan(cursor, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2563,7 +2575,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
     * @return Handler for the result of this call.
     */
-  def sscanFuture(key: String, cursor: String, options: io.vertx.scala.redis.op.ScanOptions): concurrent.Future[String] = {
+  def sscanFuture(key: String, cursor: String, options: ScanOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.sscan(key, cursor, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2576,7 +2588,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
     * @return Handler for the result of this call.
     */
-  def hscanFuture(key: String, cursor: String, options: io.vertx.scala.redis.op.ScanOptions): concurrent.Future[String] = {
+  def hscanFuture(key: String, cursor: String, options: ScanOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.hscan(key, cursor, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2589,7 +2601,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
     * @return Handler for the result of this call.
     */
-  def zscanFuture(key: String, cursor: String, options: io.vertx.scala.redis.op.ScanOptions): concurrent.Future[String] = {
+  def zscanFuture(key: String, cursor: String, options: ScanOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.zscan(key, cursor, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2615,7 +2627,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param members list of &lt;lon, lat, member&gt;
     * @return Handler for the result of this call.
     */
-  def geoaddManyFuture(key: String, members: scala.collection.mutable.Buffer[io.vertx.scala.redis.op.GeoMember]): concurrent.Future[String] = {
+  def geoaddManyFuture(key: String, members: scala.collection.mutable.Buffer[GeoMember]): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.geoaddMany(key, members.map(x => if (x == null) null else x.asJava).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2727,7 +2739,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options geo radius optionssee <a href="../../../../../../cheatsheet/GeoRadiusOptions.html">GeoRadiusOptions</a>
     * @return Handler for the result of this call.
     */
-  def georadiusWithOptionsFuture(key: String, longitude: Double, latitude: Double, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: io.vertx.scala.redis.op.GeoRadiusOptions): concurrent.Future[String] = {
+  def georadiusWithOptionsFuture(key: String, longitude: Double, latitude: Double, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.georadiusWithOptions(key, longitude, latitude, radius, unit, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2760,7 +2772,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param options geo radius optionssee <a href="../../../../../../cheatsheet/GeoRadiusOptions.html">GeoRadiusOptions</a>
     * @return Handler for the result of this call.
     */
-  def georadiusbymemberWithOptionsFuture(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: io.vertx.scala.redis.op.GeoRadiusOptions): concurrent.Future[String] = {
+  def georadiusbymemberWithOptionsFuture(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
     _asJava.georadiusbymemberWithOptions(key, member, radius, unit, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2770,7 +2782,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object RedisTransaction {
 
-  def apply(_asJava: io.vertx.redis.RedisTransaction): io.vertx.scala.redis.RedisTransaction =
-    new io.vertx.scala.redis.RedisTransaction(_asJava)
+  def apply(_asJava: JRedisTransaction): RedisTransaction =
+    new RedisTransaction(_asJava)
 
 }

@@ -89,7 +89,7 @@ package @{type.raw.translatePackageName("scala")}\n
 
 @comment{"# Generate the imports"}
 import io.vertx.core.json.JsonObject\n
-import scala.collection.JavaConversions._\n
+import scala.collection.JavaConverters._\n
 import io.vertx.lang.scala.json.Json._\n
 import @{typeToAliasedType(type)+"\n"}
 
@@ -154,33 +154,33 @@ class @{typeName}(val asJava: @{jTypeName}) {\n
 @if{property.isList}
   def @{property.setterMethod}(value: scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
 @else{property.isSet}
   def @{property.setterMethod}(value: Set[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
 @else{property.isMap}
   def @{property.setterMethod}(value: Map[String, @{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box))\n
+    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.mapValues(_.asJava))\n
+    asJava.@{property.setterMethod}(value.mapValues(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n

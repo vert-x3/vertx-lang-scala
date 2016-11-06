@@ -19,7 +19,9 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-
+import io.vertx.ext.web.{Session => JSession}
+  import io.vertx.ext.web.{Session => JSession}
+    
 /**
   * Represents a browser session.
   * 
@@ -31,9 +33,9 @@ import scala.collection.JavaConverters._
   * The context must have first been routed to a [[io.vertx.scala.ext.web.handler.SessionHandler]]
   * for sessions to be available.
   */
-class Session(private val _asJava: io.vertx.ext.web.Session) {
+class Session(private val _asJava: JSession) {
 
-  def asJava: io.vertx.ext.web.Session = _asJava
+  def asJava: JSession = _asJava
 
   /**
     * @return The unique ID of the session. This is generated using a random secure UUID.
@@ -48,7 +50,7 @@ class Session(private val _asJava: io.vertx.ext.web.Session) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-  def put(key: String, obj: AnyRef): io.vertx.scala.ext.web.Session = {
+  def put(key: String, obj: AnyRef): Session = {
     _asJava.put(key, obj)
     this
   }
@@ -110,7 +112,7 @@ class Session(private val _asJava: io.vertx.ext.web.Session) {
 
 object Session {
 
-  def apply(_asJava: io.vertx.ext.web.Session): io.vertx.scala.ext.web.Session =
-    new io.vertx.scala.ext.web.Session(_asJava)
+  def apply(_asJava: JSession): Session =
+    new Session(_asJava)
 
 }
