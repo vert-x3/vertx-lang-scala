@@ -17,18 +17,23 @@
 package io.vertx.scala.ext.mail
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mail.{MailAttachment => JMailAttachment}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Represent a mail attachment that can be used in a MailMessage.
   */
 
-class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
+class MailAttachment(val asJava: JMailAttachment) {
 
   /**
     * set the Content-ID field to be used in the attachment
     */
-  def setContentId(value:String) = {
+  def setContentId(value: String) = {
     asJava.setContentId(value)
     this
   }
@@ -39,7 +44,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * set the Content-Type
     */
-  def setContentType(value:String) = {
+  def setContentType(value: String) = {
     asJava.setContentType(value)
     this
   }
@@ -50,7 +55,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * set the data
     */
-  def setData(value:io.vertx.core.buffer.Buffer) = {
+  def setData(value: JBuffer) = {
     asJava.setData(value)
     this
   }
@@ -61,7 +66,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * set the description field to be used in the attachment
     */
-  def setDescription(value:String) = {
+  def setDescription(value: String) = {
     asJava.setDescription(value)
     this
   }
@@ -72,7 +77,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * set the disposition field to be used in the attachment
     */
-  def setDisposition(value:String) = {
+  def setDisposition(value: String) = {
     asJava.setDisposition(value)
     this
   }
@@ -83,7 +88,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * Add an header to this attachment.
     */
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
@@ -91,7 +96,7 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
   /**
     * set the name
     */
-  def setName(value:String) = {
+  def setName(value: String) = {
     asJava.setName(value)
     this
   }
@@ -101,13 +106,12 @@ class MailAttachment(val asJava: io.vertx.ext.mail.MailAttachment) {
 }
 
 object MailAttachment {
-  type MailAttachmentJava = io.vertx.ext.mail.MailAttachment
   
   def apply() = {
-    new MailAttachment(new MailAttachmentJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MailAttachment(new JMailAttachment(emptyObj()))
   }
   
-  def apply(t: MailAttachmentJava) = {
+  def apply(t: JMailAttachment) = {
     if(t != null)
       new MailAttachment(t)
     else
@@ -116,7 +120,7 @@ object MailAttachment {
   
   def fromJson(json: JsonObject):MailAttachment = {
     if(json != null)
-      new MailAttachment(new MailAttachmentJava(json))
+      new MailAttachment(new JMailAttachment(json))
     else
       null
   }

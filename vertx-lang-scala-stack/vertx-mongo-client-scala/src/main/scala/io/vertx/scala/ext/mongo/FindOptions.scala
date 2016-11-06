@@ -17,18 +17,21 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mongo.{FindOptions => JFindOptions}
+import io.vertx.core.json.JsonObject
 
 /**
   * Options used to configure find operations.
   */
 
-class FindOptions(val asJava: io.vertx.ext.mongo.FindOptions) {
+class FindOptions(val asJava: JFindOptions) {
 
   /**
     * Set the fields
     */
-  def setFields(value:io.vertx.core.json.JsonObject) = {
+  def setFields(value: JsonObject) = {
     asJava.setFields(value)
     this
   }
@@ -39,7 +42,7 @@ class FindOptions(val asJava: io.vertx.ext.mongo.FindOptions) {
   /**
     * Set the limit
     */
-  def setLimit(value:Int) = {
+  def setLimit(value: Int) = {
     asJava.setLimit(value)
     this
   }
@@ -50,7 +53,7 @@ class FindOptions(val asJava: io.vertx.ext.mongo.FindOptions) {
   /**
     * Set the skip
     */
-  def setSkip(value:Int) = {
+  def setSkip(value: Int) = {
     asJava.setSkip(value)
     this
   }
@@ -61,7 +64,7 @@ class FindOptions(val asJava: io.vertx.ext.mongo.FindOptions) {
   /**
     * Set the sort document
     */
-  def setSort(value:io.vertx.core.json.JsonObject) = {
+  def setSort(value: JsonObject) = {
     asJava.setSort(value)
     this
   }
@@ -71,13 +74,12 @@ class FindOptions(val asJava: io.vertx.ext.mongo.FindOptions) {
 }
 
 object FindOptions {
-  type FindOptionsJava = io.vertx.ext.mongo.FindOptions
   
   def apply() = {
-    new FindOptions(new FindOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new FindOptions(new JFindOptions(emptyObj()))
   }
   
-  def apply(t: FindOptionsJava) = {
+  def apply(t: JFindOptions) = {
     if(t != null)
       new FindOptions(t)
     else
@@ -86,7 +88,7 @@ object FindOptions {
   
   def fromJson(json: JsonObject):FindOptions = {
     if(json != null)
-      new FindOptions(new FindOptionsJava(json))
+      new FindOptions(new JFindOptions(json))
     else
       null
   }

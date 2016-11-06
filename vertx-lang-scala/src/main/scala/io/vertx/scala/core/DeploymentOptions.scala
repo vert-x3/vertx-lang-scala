@@ -17,7 +17,7 @@
 package io.vertx.scala.core
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 import io.vertx.core.json.JsonObject
@@ -46,7 +46,7 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     * Ignored if no isolation group is set.
     */
   def setExtraClasspath(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setExtraClasspath(value)
+    asJava.setExtraClasspath(value.asJava)
     this
   }
   def getExtraClasspath = {
@@ -79,7 +79,7 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     * Set the isolated class names.
     */
   def setIsolatedClasses(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setIsolatedClasses(value)
+    asJava.setIsolatedClasses(value.asJava)
     this
   }
   def getIsolatedClasses = {

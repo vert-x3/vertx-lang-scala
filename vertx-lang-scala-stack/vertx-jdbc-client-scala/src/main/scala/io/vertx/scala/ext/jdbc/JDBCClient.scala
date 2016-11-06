@@ -19,25 +19,30 @@ package io.vertx.scala.ext.jdbc
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+  import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
+  import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 import io.vertx.scala.ext.sql.SQLConnection
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
-
+import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+  import io.vertx.core.json.JsonObject
+      
 /**
   * An asynchronous client interface for interacting with a JDBC compliant database
   */
-class JDBCClient(private val _asJava: io.vertx.ext.jdbc.JDBCClient) {
+class JDBCClient(private val _asJava: JJDBCClient) {
 
-  def asJava: io.vertx.ext.jdbc.JDBCClient = _asJava
+  def asJava: JJDBCClient = _asJava
 
   /**
     * Returns a connection that can be used to perform SQL operations on. It's important to remember
     * to close the connection when you are done, so it is returned to the pool.
     * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
     */
-  def getConnectionFuture(): concurrent.Future[io.vertx.scala.ext.sql.SQLConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.sql.SQLConnection,io.vertx.scala.ext.sql.SQLConnection]((x => if (x == null) null else SQLConnection.apply(x)))
+  def getConnectionFuture(): concurrent.Future[SQLConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection,SQLConnection]((x => if (x == null) null else SQLConnection.apply(x)))
     _asJava.getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -53,19 +58,19 @@ class JDBCClient(private val _asJava: io.vertx.ext.jdbc.JDBCClient) {
 
 object JDBCClient {
 
-  def apply(_asJava: io.vertx.ext.jdbc.JDBCClient): io.vertx.scala.ext.jdbc.JDBCClient =
-    new io.vertx.scala.ext.jdbc.JDBCClient(_asJava)
+  def apply(_asJava: JJDBCClient): JDBCClient =
+    new JDBCClient(_asJava)
 
-  def createNonShared(vertx: io.vertx.scala.core.Vertx, config: io.vertx.core.json.JsonObject): io.vertx.scala.ext.jdbc.JDBCClient = {
-    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createNonShared(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], config))
+  def createNonShared(vertx: Vertx, config: JsonObject): JDBCClient = {
+    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
-  def createShared(vertx: io.vertx.scala.core.Vertx, config: io.vertx.core.json.JsonObject, dataSourceName: String): io.vertx.scala.ext.jdbc.JDBCClient = {
-    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createShared(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], config, dataSourceName))
+  def createShared(vertx: Vertx, config: JsonObject, dataSourceName: String): JDBCClient = {
+    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName))
   }
 
-  def createShared(vertx: io.vertx.scala.core.Vertx, config: io.vertx.core.json.JsonObject): io.vertx.scala.ext.jdbc.JDBCClient = {
-    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createShared(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], config))
+  def createShared(vertx: Vertx, config: JsonObject): JDBCClient = {
+    JDBCClient.apply(io.vertx.ext.jdbc.JDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

@@ -17,14 +17,16 @@
 package io.vertx.scala.ext.mail
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mail.{MailConfig => JMailConfig}
 
 /**
   * represents the configuration of a mail service with mail server hostname,
   * port, security options, login options and login/password
   */
 
-class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
+class MailConfig(val asJava: JMailConfig) {
 
   /**
     * set if sending allows rcpt errors
@@ -32,7 +34,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * if true, the mail will be sent to the recipients that the server accepted, if any
     * 
     */
-  def setAllowRcptErrors(value:Boolean) = {
+  def setAllowRcptErrors(value: Boolean) = {
     asJava.setAllowRcptErrors(value)
     this
   }
@@ -46,7 +48,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * if the server supports them. If null or empty all supported methods may be
     * used
     */
-  def setAuthMethods(value:String) = {
+  def setAuthMethods(value: String) = {
     asJava.setAuthMethods(value)
     this
   }
@@ -66,7 +68,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * in that way, the property has to be set to false.
     * 
     */
-  def setDisableEsmtp(value:Boolean) = {
+  def setDisableEsmtp(value: Boolean) = {
     asJava.setDisableEsmtp(value)
     this
   }
@@ -77,7 +79,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * Set the hostname of the smtp server.
     */
-  def setHostname(value:String) = {
+  def setHostname(value: String) = {
     asJava.setHostname(value)
     this
   }
@@ -92,7 +94,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * if the connection pooling is disabled, the max number of sockets is enforced nevertheless
     * 
     */
-  def setKeepAlive(value:Boolean) = {
+  def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
     this
   }
@@ -106,7 +108,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * if not set, an options object will be created based on other settings (ssl
     * and trustAll)
     */
-  def setKeyStore(value:String) = {
+  def setKeyStore(value: String) = {
     asJava.setKeyStore(value)
     this
   }
@@ -117,7 +119,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * get the key store password to be used when opening SMTP connections
     */
-  def setKeyStorePassword(value:String) = {
+  def setKeyStorePassword(value: String) = {
     asJava.setKeyStorePassword(value)
     this
   }
@@ -130,7 +132,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * 
     * Either DISABLED, OPTIONAL or REQUIRED
     */
-  def setLogin(value:io.vertx.ext.mail.LoginOption) = {
+  def setLogin(value: io.vertx.ext.mail.LoginOption) = {
     asJava.setLogin(value)
     this
   }
@@ -142,7 +144,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * set the max allowed number of open connections to the mail server
     * if not set the default is 10
     */
-  def setMaxPoolSize(value:Int) = {
+  def setMaxPoolSize(value: Int) = {
     asJava.setMaxPoolSize(value)
     this
   }
@@ -153,7 +155,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * set the hostname to be used for HELO/EHLO and the Message-ID
     */
-  def setOwnHostname(value:String) = {
+  def setOwnHostname(value: String) = {
     asJava.setOwnHostname(value)
     this
   }
@@ -164,7 +166,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * Set the password for the login.
     */
-  def setPassword(value:String) = {
+  def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
@@ -175,7 +177,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * Set the port of the smtp server.
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -186,7 +188,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * Set the sslOnConnect mode for the connection.
     */
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
@@ -199,7 +201,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * 
     * Either NONE, OPTIONAL or REQUIRED
     */
-  def setStarttls(value:io.vertx.ext.mail.StartTLSOptions) = {
+  def setStarttls(value: io.vertx.ext.mail.StartTLSOptions) = {
     asJava.setStarttls(value)
     this
   }
@@ -211,7 +213,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
     * set whether to trust all certificates on ssl connect the option is also
     * applied to STARTTLS operation
     */
-  def setTrustAll(value:Boolean) = {
+  def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
@@ -222,7 +224,7 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
   /**
     * Set the username for the login.
     */
-  def setUsername(value:String) = {
+  def setUsername(value: String) = {
     asJava.setUsername(value)
     this
   }
@@ -232,13 +234,12 @@ class MailConfig(val asJava: io.vertx.ext.mail.MailConfig) {
 }
 
 object MailConfig {
-  type MailConfigJava = io.vertx.ext.mail.MailConfig
   
   def apply() = {
-    new MailConfig(new MailConfigJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MailConfig(new JMailConfig(emptyObj()))
   }
   
-  def apply(t: MailConfigJava) = {
+  def apply(t: JMailConfig) = {
     if(t != null)
       new MailConfig(t)
     else
@@ -247,7 +248,7 @@ object MailConfig {
   
   def fromJson(json: JsonObject):MailConfig = {
     if(json != null)
-      new MailConfig(new MailConfigJava(json))
+      new MailConfig(new JMailConfig(json))
     else
       null
   }

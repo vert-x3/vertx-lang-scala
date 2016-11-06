@@ -17,7 +17,13 @@
 package io.vertx.scala.ext.stomp
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.ext.stomp.Frame.Command
 
 /**
   * Represents a STOMP frame. STOMP frames are structured as follows. It starts by a `command`, followed by a
@@ -27,7 +33,7 @@ import scala.collection.JavaConversions._
   * This class is <strong>NOT</strong> thread-safe.
   */
 
-class Frame(val asJava: io.vertx.ext.stomp.Frame) {
+class Frame(val asJava: JFrame) {
 
   /**
     * Gets the value of the `ack` header.
@@ -36,7 +42,7 @@ class Frame(val asJava: io.vertx.ext.stomp.Frame) {
   /**
     * Sets the body of the frame.
     */
-  def setBody(value:io.vertx.core.buffer.Buffer) = {
+  def setBody(value: JBuffer) = {
     asJava.setBody(value)
     this
   }
@@ -51,14 +57,14 @@ class Frame(val asJava: io.vertx.ext.stomp.Frame) {
   /**
     * Sets the frame command.
     */
-  def setCommand(value:io.vertx.ext.stomp.Frame.Command) = {
+  def setCommand(value: io.vertx.ext.stomp.Frame.Command) = {
     asJava.setCommand(value)
     this
   }
   def getCommand = {
     asJava.getCommand()
   }
-  def setDestination(value:String) = {
+  def setDestination(value: String) = {
     asJava.setDestination(value)
     this
   }
@@ -69,25 +75,25 @@ class Frame(val asJava: io.vertx.ext.stomp.Frame) {
   /**
     * Sets the headers of the frames.
     */
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
-  def setHeaders(value:Map[String, String]) = {
-    asJava.setHeaders(value)
+  def setHeaders(value: Map[String, String]) = {
+    asJava.setHeaders(value.asJava)
     this
   }
   def getHeaders = {
     asJava.getHeaders()
   }
-  def setId(value:String) = {
+  def setId(value: String) = {
     asJava.setId(value)
     this
   }
   def getId = {
     asJava.getId()
   }
-  def setTransaction(value:String) = {
+  def setTransaction(value: String) = {
     asJava.setTransaction(value)
     this
   }
@@ -97,13 +103,12 @@ class Frame(val asJava: io.vertx.ext.stomp.Frame) {
 }
 
 object Frame {
-  type FrameJava = io.vertx.ext.stomp.Frame
   
   def apply() = {
-    new Frame(new FrameJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Frame(new JFrame(emptyObj()))
   }
   
-  def apply(t: FrameJava) = {
+  def apply(t: JFrame) = {
     if(t != null)
       new Frame(t)
     else
@@ -112,7 +117,7 @@ object Frame {
   
   def fromJson(json: JsonObject):Frame = {
     if(json != null)
-      new Frame(new FrameJava(json))
+      new Frame(new JFrame(json))
     else
       null
   }

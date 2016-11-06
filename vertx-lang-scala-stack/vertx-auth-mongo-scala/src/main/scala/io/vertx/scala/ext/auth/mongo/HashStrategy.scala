@@ -19,16 +19,19 @@ package io.vertx.scala.ext.auth.mongo
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.auth.mongo.HashSaltStyle
+import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
+  import io.vertx.ext.auth.mongo.HashSaltStyle
+  import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
-
+import io.vertx.ext.auth.{User => JUser}
+  
 /**
   * Determines how the hashing is computed in the implementation You can implement this to provide a different hashing
   * strategy to the default.
   */
-class HashStrategy(private val _asJava: io.vertx.ext.auth.mongo.HashStrategy) {
+class HashStrategy(private val _asJava: JHashStrategy) {
 
-  def asJava: io.vertx.ext.auth.mongo.HashStrategy = _asJava
+  def asJava: JHashStrategy = _asJava
 
   /**
     * Compute the hashed password given the unhashed password and the user
@@ -36,8 +39,8 @@ class HashStrategy(private val _asJava: io.vertx.ext.auth.mongo.HashStrategy) {
     * @param user the user to get the salt for. This paramter is needed, if the [[HashSaltStyle#COLUMN]] is declared to be used
     * @return the hashed password
     */
-  def computeHash(password: String, user: io.vertx.scala.ext.auth.User): String = {
-    _asJava.computeHash(password, user.asJava.asInstanceOf[io.vertx.ext.auth.User])
+  def computeHash(password: String, user: User): String = {
+    _asJava.computeHash(password, user.asJava.asInstanceOf[JUser])
   }
 
   /**
@@ -45,8 +48,8 @@ class HashStrategy(private val _asJava: io.vertx.ext.auth.mongo.HashStrategy) {
     * @param user the user to get the stored password for
     * @return the password, either as hashed version or as cleartext, depending on the preferences
     */
-  def getStoredPwd(user: io.vertx.scala.ext.auth.User): String = {
-    _asJava.getStoredPwd(user.asJava.asInstanceOf[io.vertx.ext.auth.User])
+  def getStoredPwd(user: User): String = {
+    _asJava.getStoredPwd(user.asJava.asInstanceOf[JUser])
   }
 
   /**
@@ -55,8 +58,8 @@ class HashStrategy(private val _asJava: io.vertx.ext.auth.mongo.HashStrategy) {
     * @param user the user to get the salt for. This paramter is needed, if the [[HashSaltStyle#COLUMN]] is declared to be used
     * @return null in case of [[HashSaltStyle#NO_SALT]] the salt of the user or a defined external salt
     */
-  def getSalt(user: io.vertx.scala.ext.auth.User): scala.Option[String] = {
-        scala.Option(_asJava.getSalt(user.asJava.asInstanceOf[io.vertx.ext.auth.User]))
+  def getSalt(user: User): scala.Option[String] = {
+        scala.Option(_asJava.getSalt(user.asJava.asInstanceOf[JUser]))
   }
 
   /**
@@ -87,7 +90,7 @@ class HashStrategy(private val _asJava: io.vertx.ext.auth.mongo.HashStrategy) {
 
 object HashStrategy {
 
-  def apply(_asJava: io.vertx.ext.auth.mongo.HashStrategy): io.vertx.scala.ext.auth.mongo.HashStrategy =
-    new io.vertx.scala.ext.auth.mongo.HashStrategy(_asJava)
+  def apply(_asJava: JHashStrategy): HashStrategy =
+    new HashStrategy(_asJava)
 
 }

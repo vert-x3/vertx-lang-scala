@@ -19,20 +19,23 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{BodyHandler => JBodyHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+      import io.vertx.ext.web.handler.{BodyHandler => JBodyHandler}
 
 /**
   * A handler which gathers the entire request body and sets it on the .
   * 
   * It also handles HTTP file uploads and can be used to limit body sizes.
   */
-class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
+class BodyHandler(private val _asJava: JBodyHandler) {
 
-  def asJava: io.vertx.ext.web.handler.BodyHandler = _asJava
+  def asJava: JBodyHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -40,7 +43,7 @@ class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
     * @param bodyLimit the max size
     * @return reference to this for fluency
     */
-  def setBodyLimit(bodyLimit: Long): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def setBodyLimit(bodyLimit: Long): BodyHandler = {
     _asJava.setBodyLimit(bodyLimit)
     this
   }
@@ -50,7 +53,7 @@ class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
     * @param uploadsDirectory the uploads directory
     * @return reference to this for fluency
     */
-  def setUploadsDirectory(uploadsDirectory: String): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def setUploadsDirectory(uploadsDirectory: String): BodyHandler = {
     _asJava.setUploadsDirectory(uploadsDirectory)
     this
   }
@@ -60,7 +63,7 @@ class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
     * @param mergeFormAttributes true if they should be merged
     * @return reference to this for fluency
     */
-  def setMergeFormAttributes(mergeFormAttributes: Boolean): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def setMergeFormAttributes(mergeFormAttributes: Boolean): BodyHandler = {
     _asJava.setMergeFormAttributes(mergeFormAttributes)
     this
   }
@@ -70,7 +73,7 @@ class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
     * @param deleteUploadedFilesOnEnd true if uploaded files should be removed after handling the request
     * @return reference to this for fluency
     */
-  def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean): BodyHandler = {
     _asJava.setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd)
     this
   }
@@ -79,14 +82,14 @@ class BodyHandler(private val _asJava: io.vertx.ext.web.handler.BodyHandler) {
 
 object BodyHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.BodyHandler): io.vertx.scala.ext.web.handler.BodyHandler =
-    new io.vertx.scala.ext.web.handler.BodyHandler(_asJava)
+  def apply(_asJava: JBodyHandler): BodyHandler =
+    new BodyHandler(_asJava)
 
-  def create(): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def create(): BodyHandler = {
     BodyHandler.apply(io.vertx.ext.web.handler.BodyHandler.create())
   }
 
-  def create(uploadDirectory: String): io.vertx.scala.ext.web.handler.BodyHandler = {
+  def create(uploadDirectory: String): BodyHandler = {
     BodyHandler.apply(io.vertx.ext.web.handler.BodyHandler.create(uploadDirectory))
   }
 

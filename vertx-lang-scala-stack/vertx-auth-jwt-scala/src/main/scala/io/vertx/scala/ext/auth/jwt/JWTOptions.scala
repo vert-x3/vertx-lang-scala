@@ -17,7 +17,10 @@
 package io.vertx.scala.ext.auth.jwt
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.core.json.JsonObject
 
 /**
   * Options related to creation of new tokens.
@@ -28,12 +31,12 @@ import scala.collection.JavaConversions._
   * Generated JWTs will include an iat claim by default unless noTimestamp is specified.
   */
 
-class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
+class JWTOptions(val asJava: JJWTOptions) {
 
   /**
     * The algorithm to use, it should be one of the alias [HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512]
     */
-  def setAlgorithm(value:String) = {
+  def setAlgorithm(value: String) = {
     asJava.setAlgorithm(value)
     this
   }
@@ -44,8 +47,8 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The target audience of this token
     */
-  def setAudience(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setAudience(value)
+  def setAudience(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setAudience(value.asJava)
     this
   }
   def getAudience = {
@@ -55,7 +58,7 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The target audience of this token
     */
-  def addAudience(value:String) = {
+  def addAudience(value: String) = {
     asJava.addAudience(value)
     this
   }
@@ -63,7 +66,7 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The expiration time for the token in minutes
     */
-  def setExpiresInMinutes(value:Long) = {
+  def setExpiresInMinutes(value: Long) = {
     asJava.setExpiresInMinutes(value)
     this
   }
@@ -74,14 +77,14 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The expiration time for the token in seconds
     */
-  def setExpiresInSeconds(value:Long) = {
+  def setExpiresInSeconds(value: Long) = {
     asJava.setExpiresInSeconds(value)
     this
   }
   def getExpiresInSeconds = {
     asJava.getExpiresInSeconds()
   }
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
@@ -89,7 +92,7 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The issuer of this token
     */
-  def setIssuer(value:String) = {
+  def setIssuer(value: String) = {
     asJava.setIssuer(value)
     this
   }
@@ -100,7 +103,7 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * Disable the generation of issued at claim
     */
-  def setNoTimestamp(value:Boolean) = {
+  def setNoTimestamp(value: Boolean) = {
     asJava.setNoTimestamp(value)
     this
   }
@@ -111,19 +114,19 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
   /**
     * The permissions of this token.
     */
-  def addPermission(value:String) = {
+  def addPermission(value: String) = {
     asJava.addPermission(value)
     this
   }
-  def setPermissions(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setPermissions(value)
+  def setPermissions(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setPermissions(value.asJava)
     this
   }
 
   /**
     * The subject of this token
     */
-  def setSubject(value:String) = {
+  def setSubject(value: String) = {
     asJava.setSubject(value)
     this
   }
@@ -133,13 +136,12 @@ class JWTOptions(val asJava: io.vertx.ext.auth.jwt.JWTOptions) {
 }
 
 object JWTOptions {
-  type JWTOptionsJava = io.vertx.ext.auth.jwt.JWTOptions
   
   def apply() = {
-    new JWTOptions(new JWTOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new JWTOptions(new JJWTOptions(emptyObj()))
   }
   
-  def apply(t: JWTOptionsJava) = {
+  def apply(t: JJWTOptions) = {
     if(t != null)
       new JWTOptions(t)
     else
@@ -148,7 +150,7 @@ object JWTOptions {
   
   def fromJson(json: JsonObject):JWTOptions = {
     if(json != null)
-      new JWTOptions(new JWTOptionsJava(json))
+      new JWTOptions(new JJWTOptions(json))
     else
       null
   }

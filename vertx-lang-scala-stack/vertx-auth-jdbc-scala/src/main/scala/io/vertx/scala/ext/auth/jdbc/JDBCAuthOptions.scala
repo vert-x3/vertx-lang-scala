@@ -17,18 +17,23 @@
 package io.vertx.scala.ext.auth.jdbc
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.auth.jdbc.{JDBCAuthOptions => JJDBCAuthOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring JDBC authentication.
   */
 
-class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
+class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
 
   /**
     * Set the authentication query to use. Use this if you want to override the default authentication query.
     */
-  def setAuthenticationQuery(value:String) = {
+  def setAuthenticationQuery(value: String) = {
     asJava.setAuthenticationQuery(value)
     this
   }
@@ -39,7 +44,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * The configuration of the JDBC client: refer to the Vert.x JDBC Client configuration.
     */
-  def setConfig(value:io.vertx.core.json.JsonObject) = {
+  def setConfig(value: JsonObject) = {
     asJava.setConfig(value)
     this
   }
@@ -50,7 +55,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * Set the data source name to use, only use in shared mode.
     */
-  def setDatasourceName(value:String) = {
+  def setDatasourceName(value: String) = {
     asJava.setDatasourceName(value)
     this
   }
@@ -61,7 +66,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * Set the permissions query to use. Use this if you want to override the default permissions query.
     */
-  def setPermissionsQuery(value:String) = {
+  def setPermissionsQuery(value: String) = {
     asJava.setPermissionsQuery(value)
     this
   }
@@ -72,7 +77,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * Set the role prefix to distinguish from permissions when checking for isPermitted requests.
     */
-  def setRolesPrefix(value:String) = {
+  def setRolesPrefix(value: String) = {
     asJava.setRolesPrefix(value)
     this
   }
@@ -83,7 +88,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * Set the roles query to use. Use this if you want to override the default roles query.
     */
-  def setRolesQuery(value:String) = {
+  def setRolesQuery(value: String) = {
     asJava.setRolesQuery(value)
     this
   }
@@ -94,7 +99,7 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
   /**
     * Set whether the JDBC client is shared or non shared.
     */
-  def setShared(value:Boolean) = {
+  def setShared(value: Boolean) = {
     asJava.setShared(value)
     this
   }
@@ -104,13 +109,12 @@ class JDBCAuthOptions(val asJava: io.vertx.ext.auth.jdbc.JDBCAuthOptions) {
 }
 
 object JDBCAuthOptions {
-  type JDBCAuthOptionsJava = io.vertx.ext.auth.jdbc.JDBCAuthOptions
   
   def apply() = {
-    new JDBCAuthOptions(new JDBCAuthOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new JDBCAuthOptions(new JJDBCAuthOptions(emptyObj()))
   }
   
-  def apply(t: JDBCAuthOptionsJava) = {
+  def apply(t: JJDBCAuthOptions) = {
     if(t != null)
       new JDBCAuthOptions(t)
     else
@@ -119,7 +123,7 @@ object JDBCAuthOptions {
   
   def fromJson(json: JsonObject):JDBCAuthOptions = {
     if(json != null)
-      new JDBCAuthOptions(new JDBCAuthOptionsJava(json))
+      new JDBCAuthOptions(new JJDBCAuthOptions(json))
     else
       null
   }

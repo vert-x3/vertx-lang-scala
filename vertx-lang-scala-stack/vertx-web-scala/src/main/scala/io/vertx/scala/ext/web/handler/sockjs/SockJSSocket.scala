@@ -19,14 +19,29 @@ package io.vertx.scala.ext.web.handler.sockjs
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+  import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+      import io.vertx.ext.web.{Session => JSession}
 import io.vertx.scala.ext.web.Session
+import io.vertx.ext.web.{Session => JSession}
+  import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
-import io.vertx.core.Handler
+import io.vertx.core.{MultiMap => JMultiMap}
+      import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   *
@@ -37,56 +52,56 @@ import io.vertx.scala.core.net.SocketAddress
   * so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class SockJSSocket(private val _asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket) 
-    extends io.vertx.scala.core.streams.ReadStream[io.vertx.scala.core.buffer.Buffer] 
-    with io.vertx.scala.core.streams.WriteStream[io.vertx.scala.core.buffer.Buffer] {
+class SockJSSocket(private val _asJava: JSockJSSocket) 
+    extends ReadStream[Buffer] 
+    with WriteStream[Buffer] {
 
-  def asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket = _asJava
+  def asJava: JSockJSSocket = _asJava
 
-  def end(t: io.vertx.scala.core.buffer.Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def end(t: Buffer): Unit = {
+    _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def exceptionHandler(handler: Throwable => Unit): SockJSSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: io.vertx.scala.core.buffer.Buffer => Unit): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def handler(handler: Buffer => Unit): SockJSSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def pause(): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def pause(): SockJSSocket = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def resume(): SockJSSocket = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def endHandler(endHandler: () => Unit): SockJSSocket = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
 
-  def write(data: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def write(data: Buffer): SockJSSocket = {
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
-  def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def setWriteQueueMaxSize(maxSize: Int): SockJSSocket = {
     _asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
-  def drainHandler(handler: () => Unit): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket = {
+  def drainHandler(handler: () => Unit): SockJSSocket = {
     _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -120,14 +135,14 @@ class SockJSSocket(private val _asJava: io.vertx.ext.web.handler.sockjs.SockJSSo
   /**
     * Return the remote address for this socket
     */
-  def remoteAddress(): io.vertx.scala.core.net.SocketAddress = {
+  def remoteAddress(): SocketAddress = {
     SocketAddress.apply(_asJava.remoteAddress())
   }
 
   /**
     * Return the local address for this socket
     */
-  def localAddress(): io.vertx.scala.core.net.SocketAddress = {
+  def localAddress(): SocketAddress = {
     SocketAddress.apply(_asJava.localAddress())
   }
 
@@ -135,7 +150,7 @@ class SockJSSocket(private val _asJava: io.vertx.ext.web.handler.sockjs.SockJSSo
     * Return the headers corresponding to the last request for this socket or the websocket handshake
     * Any cookie headers will be removed for security reasons
     */
-  def headers(): io.vertx.scala.core.MultiMap = {
+  def headers(): MultiMap = {
     MultiMap.apply(_asJava.headers())
   }
 
@@ -149,14 +164,14 @@ class SockJSSocket(private val _asJava: io.vertx.ext.web.handler.sockjs.SockJSSo
   /**
     * @return the Vert.x-Web session corresponding to this socket
     */
-  def webSession(): scala.Option[io.vertx.scala.ext.web.Session] = {
+  def webSession(): scala.Option[Session] = {
         scala.Option(Session.apply(_asJava.webSession()))
   }
 
   /**
     * @return the Vert.x-Web user corresponding to this socket
     */
-  def webUser(): scala.Option[io.vertx.scala.ext.auth.User] = {
+  def webUser(): scala.Option[User] = {
         scala.Option(User.apply(_asJava.webUser()))
   }
 
@@ -164,7 +179,7 @@ class SockJSSocket(private val _asJava: io.vertx.ext.web.handler.sockjs.SockJSSo
 
 object SockJSSocket {
 
-  def apply(_asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket): io.vertx.scala.ext.web.handler.sockjs.SockJSSocket =
-    new io.vertx.scala.ext.web.handler.sockjs.SockJSSocket(_asJava)
+  def apply(_asJava: JSockJSSocket): SockJSSocket =
+    new SockJSSocket(_asJava)
 
 }

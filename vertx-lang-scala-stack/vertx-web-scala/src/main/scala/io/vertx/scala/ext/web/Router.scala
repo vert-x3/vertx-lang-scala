@@ -19,20 +19,27 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.{Router => JRouter}
+  import io.vertx.ext.web.{Route => JRoute}
+    import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.scala.core.http.HttpServerRequest
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+    import io.vertx.core.http.HttpMethod
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
-
+import io.vertx.core.{Vertx => JVertx}
+  import io.vertx.ext.web.{Router => JRouter}
+    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+  
 /**
   * A router receives request from an [[io.vertx.scala.core.http.HttpServer]] and routes it to the first matching
   * [[io.vertx.scala.ext.web.Route]] that it contains. A router can contain many routes.
   * 
   * Routers are also used for routing failures.
   */
-class Router(private val _asJava: io.vertx.ext.web.Router) {
+class Router(private val _asJava: JRouter) {
 
-  def asJava: io.vertx.ext.web.Router = _asJava
+  def asJava: JRouter = _asJava
 
   /**
     * This method is used to provide a request to the router. Usually you take request from the
@@ -40,15 +47,15 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * router then routes it to matching routes.
     * @param request the request
     */
-  def accept(request: io.vertx.scala.core.http.HttpServerRequest): Unit = {
-    _asJava.accept(request.asJava.asInstanceOf[io.vertx.core.http.HttpServerRequest])
+  def accept(request: HttpServerRequest): Unit = {
+    _asJava.accept(request.asJava.asInstanceOf[JHttpServerRequest])
   }
 
   /**
     * Add a route with no matching criteria, i.e. it matches all requests or failures.
     * @return the route
     */
-  def route(): io.vertx.scala.ext.web.Route = {
+  def route(): Route = {
     Route.apply(_asJava.route())
   }
 
@@ -58,7 +65,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def route(method: io.vertx.core.http.HttpMethod, path: String): io.vertx.scala.ext.web.Route = {
+  def route(method: io.vertx.core.http.HttpMethod, path: String): Route = {
     Route.apply(_asJava.route(method, path))
   }
 
@@ -67,7 +74,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def route(path: String): io.vertx.scala.ext.web.Route = {
+  def route(path: String): Route = {
     Route.apply(_asJava.route(path))
   }
 
@@ -77,7 +84,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def routeWithRegex(method: io.vertx.core.http.HttpMethod, regex: String): io.vertx.scala.ext.web.Route = {
+  def routeWithRegex(method: io.vertx.core.http.HttpMethod, regex: String): Route = {
     Route.apply(_asJava.routeWithRegex(method, regex))
   }
 
@@ -86,7 +93,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def routeWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def routeWithRegex(regex: String): Route = {
     Route.apply(_asJava.routeWithRegex(regex))
   }
 
@@ -94,7 +101,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP GET request
     * @return the route
     */
-  def get(): io.vertx.scala.ext.web.Route = {
+  def get(): Route = {
     Route.apply(_asJava.get())
   }
 
@@ -103,7 +110,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def get(path: String): io.vertx.scala.ext.web.Route = {
+  def get(path: String): Route = {
     Route.apply(_asJava.get(path))
   }
 
@@ -112,7 +119,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def getWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def getWithRegex(regex: String): Route = {
     Route.apply(_asJava.getWithRegex(regex))
   }
 
@@ -120,7 +127,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP HEAD request
     * @return the route
     */
-  def head(): io.vertx.scala.ext.web.Route = {
+  def head(): Route = {
     Route.apply(_asJava.head())
   }
 
@@ -129,7 +136,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def head(path: String): io.vertx.scala.ext.web.Route = {
+  def head(path: String): Route = {
     Route.apply(_asJava.head(path))
   }
 
@@ -138,7 +145,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def headWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def headWithRegex(regex: String): Route = {
     Route.apply(_asJava.headWithRegex(regex))
   }
 
@@ -146,7 +153,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP OPTIONS request
     * @return the route
     */
-  def options(): io.vertx.scala.ext.web.Route = {
+  def options(): Route = {
     Route.apply(_asJava.options())
   }
 
@@ -155,7 +162,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def options(path: String): io.vertx.scala.ext.web.Route = {
+  def options(path: String): Route = {
     Route.apply(_asJava.options(path))
   }
 
@@ -164,7 +171,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def optionsWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def optionsWithRegex(regex: String): Route = {
     Route.apply(_asJava.optionsWithRegex(regex))
   }
 
@@ -172,7 +179,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP PUT request
     * @return the route
     */
-  def put(): io.vertx.scala.ext.web.Route = {
+  def put(): Route = {
     Route.apply(_asJava.put())
   }
 
@@ -181,7 +188,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def put(path: String): io.vertx.scala.ext.web.Route = {
+  def put(path: String): Route = {
     Route.apply(_asJava.put(path))
   }
 
@@ -190,7 +197,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def putWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def putWithRegex(regex: String): Route = {
     Route.apply(_asJava.putWithRegex(regex))
   }
 
@@ -198,7 +205,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP POST request
     * @return the route
     */
-  def post(): io.vertx.scala.ext.web.Route = {
+  def post(): Route = {
     Route.apply(_asJava.post())
   }
 
@@ -207,7 +214,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def post(path: String): io.vertx.scala.ext.web.Route = {
+  def post(path: String): Route = {
     Route.apply(_asJava.post(path))
   }
 
@@ -216,7 +223,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def postWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def postWithRegex(regex: String): Route = {
     Route.apply(_asJava.postWithRegex(regex))
   }
 
@@ -224,7 +231,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP DELETE request
     * @return the route
     */
-  def delete(): io.vertx.scala.ext.web.Route = {
+  def delete(): Route = {
     Route.apply(_asJava.delete())
   }
 
@@ -233,7 +240,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def delete(path: String): io.vertx.scala.ext.web.Route = {
+  def delete(path: String): Route = {
     Route.apply(_asJava.delete(path))
   }
 
@@ -242,7 +249,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def deleteWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def deleteWithRegex(regex: String): Route = {
     Route.apply(_asJava.deleteWithRegex(regex))
   }
 
@@ -250,7 +257,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP TRACE request
     * @return the route
     */
-  def trace(): io.vertx.scala.ext.web.Route = {
+  def trace(): Route = {
     Route.apply(_asJava.trace())
   }
 
@@ -259,7 +266,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def trace(path: String): io.vertx.scala.ext.web.Route = {
+  def trace(path: String): Route = {
     Route.apply(_asJava.trace(path))
   }
 
@@ -268,7 +275,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def traceWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def traceWithRegex(regex: String): Route = {
     Route.apply(_asJava.traceWithRegex(regex))
   }
 
@@ -276,7 +283,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP CONNECT request
     * @return the route
     */
-  def connect(): io.vertx.scala.ext.web.Route = {
+  def connect(): Route = {
     Route.apply(_asJava.connect())
   }
 
@@ -285,7 +292,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def connect(path: String): io.vertx.scala.ext.web.Route = {
+  def connect(path: String): Route = {
     Route.apply(_asJava.connect(path))
   }
 
@@ -294,7 +301,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def connectWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def connectWithRegex(regex: String): Route = {
     Route.apply(_asJava.connectWithRegex(regex))
   }
 
@@ -302,7 +309,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Add a route that matches any HTTP PATCH request
     * @return the route
     */
-  def patch(): io.vertx.scala.ext.web.Route = {
+  def patch(): Route = {
     Route.apply(_asJava.patch())
   }
 
@@ -311,7 +318,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def patch(path: String): io.vertx.scala.ext.web.Route = {
+  def patch(path: String): Route = {
     Route.apply(_asJava.patch(path))
   }
 
@@ -320,14 +327,14 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def patchWithRegex(regex: String): io.vertx.scala.ext.web.Route = {
+  def patchWithRegex(regex: String): Route = {
     Route.apply(_asJava.patchWithRegex(regex))
   }
 
   /**
     * @return a list of all the routes on this router
     */
-  def getRoutes(): scala.collection.mutable.Buffer[io.vertx.scala.ext.web.Route] = {
+  def getRoutes(): scala.collection.mutable.Buffer[Route] = {
     _asJava.getRoutes().asScala.map(Route.apply)
   }
 
@@ -335,7 +342,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Remove all the routes from this router
     * @return a reference to this, so the API can be used fluently
     */
-  def clear(): io.vertx.scala.ext.web.Router = {
+  def clear(): Router = {
     _asJava.clear()
     this
   }
@@ -346,8 +353,8 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param subRouter the router to mount as a sub router
     * @return a reference to this, so the API can be used fluently
     */
-  def mountSubRouter(mountPoint: String, subRouter: io.vertx.scala.ext.web.Router): io.vertx.scala.ext.web.Router = {
-    _asJava.mountSubRouter(mountPoint, subRouter.asJava.asInstanceOf[io.vertx.ext.web.Router])
+  def mountSubRouter(mountPoint: String, subRouter: Router): Router = {
+    _asJava.mountSubRouter(mountPoint, subRouter.asJava.asInstanceOf[JRouter])
     this
   }
 
@@ -357,7 +364,7 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * @param exceptionHandler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(exceptionHandler: Throwable => Unit): io.vertx.scala.ext.web.Router = {
+  def exceptionHandler(exceptionHandler: Throwable => Unit): Router = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(exceptionHandler))
     this
   }
@@ -366,27 +373,27 @@ class Router(private val _asJava: io.vertx.ext.web.Router) {
     * Used to route a context to the router. Used for sub-routers. You wouldn't normally call this method directly.
     * @param context the routing context
     */
-  def handleContext(context: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handleContext(context.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handleContext(context: RoutingContext): Unit = {
+    _asJava.handleContext(context.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
     * Used to route a failure to the router. Used for sub-routers. You wouldn't normally call this method directly.
     * @param context the routing context
     */
-  def handleFailure(context: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handleFailure(context.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handleFailure(context: RoutingContext): Unit = {
+    _asJava.handleFailure(context.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object Router {
 
-  def apply(_asJava: io.vertx.ext.web.Router): io.vertx.scala.ext.web.Router =
-    new io.vertx.scala.ext.web.Router(_asJava)
+  def apply(_asJava: JRouter): Router =
+    new Router(_asJava)
 
-  def router(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.web.Router = {
-    Router.apply(io.vertx.ext.web.Router.router(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def router(vertx: Vertx): Router = {
+    Router.apply(io.vertx.ext.web.Router.router(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

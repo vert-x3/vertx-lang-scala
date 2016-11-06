@@ -17,13 +17,16 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
+import io.vertx.core.json.JsonObject
 
 /**
   * Result propagated from mongodb driver update result.
   */
 
-class MongoClientUpdateResult(val asJava: io.vertx.ext.mongo.MongoClientUpdateResult) {
+class MongoClientUpdateResult(val asJava: JMongoClientUpdateResult) {
 
   /**
     * Get the number of documents that're matched
@@ -39,13 +42,12 @@ class MongoClientUpdateResult(val asJava: io.vertx.ext.mongo.MongoClientUpdateRe
 }
 
 object MongoClientUpdateResult {
-  type MongoClientUpdateResultJava = io.vertx.ext.mongo.MongoClientUpdateResult
   
   def apply() = {
-    new MongoClientUpdateResult(new MongoClientUpdateResultJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new MongoClientUpdateResult(new JMongoClientUpdateResult(emptyObj()))
   }
   
-  def apply(t: MongoClientUpdateResultJava) = {
+  def apply(t: JMongoClientUpdateResult) = {
     if(t != null)
       new MongoClientUpdateResult(t)
     else
@@ -54,7 +56,7 @@ object MongoClientUpdateResult {
   
   def fromJson(json: JsonObject):MongoClientUpdateResult = {
     if(json != null)
-      new MongoClientUpdateResult(new MongoClientUpdateResultJava(json))
+      new MongoClientUpdateResult(new JMongoClientUpdateResult(json))
     else
       null
   }

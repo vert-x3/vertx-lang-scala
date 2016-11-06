@@ -19,36 +19,42 @@ package io.vertx.scala.ext.web.sstore
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.sstore.{LocalSessionStore => JLocalSessionStore}
+  import io.vertx.ext.web.{Session => JSession}
 import io.vertx.scala.ext.web.Session
+import io.vertx.ext.web.{Session => JSession}
+  import io.vertx.ext.web.sstore.{LocalSessionStore => JLocalSessionStore}
+  import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
-
+import io.vertx.core.{Vertx => JVertx}
+          
 /**
   * A session store which is only available on a single node.
   * 
   * Can be used when sticky sessions are being used.
   */
-class LocalSessionStore(private val _asJava: io.vertx.ext.web.sstore.LocalSessionStore) {
+class LocalSessionStore(private val _asJava: JLocalSessionStore) {
 
-  def asJava: io.vertx.ext.web.sstore.LocalSessionStore = _asJava
+  def asJava: JLocalSessionStore = _asJava
 
 }
 
 object LocalSessionStore {
 
-  def apply(_asJava: io.vertx.ext.web.sstore.LocalSessionStore): io.vertx.scala.ext.web.sstore.LocalSessionStore =
-    new io.vertx.scala.ext.web.sstore.LocalSessionStore(_asJava)
+  def apply(_asJava: JLocalSessionStore): LocalSessionStore =
+    new LocalSessionStore(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.web.sstore.LocalSessionStore = {
-    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): LocalSessionStore = {
+    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, sessionMapName: String): io.vertx.scala.ext.web.sstore.LocalSessionStore = {
-    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], sessionMapName))
+  def create(vertx: Vertx, sessionMapName: String): LocalSessionStore = {
+    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, sessionMapName: String, reaperInterval: Long): io.vertx.scala.ext.web.sstore.LocalSessionStore = {
-    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], sessionMapName, reaperInterval))
+  def create(vertx: Vertx, sessionMapName: String, reaperInterval: Long): LocalSessionStore = {
+    LocalSessionStore.apply(io.vertx.ext.web.sstore.LocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName, reaperInterval))
   }
 
 }

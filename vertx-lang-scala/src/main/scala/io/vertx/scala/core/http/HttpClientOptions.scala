@@ -17,7 +17,7 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -56,7 +56,7 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     * </ul>
     */
   def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    asJava.setAlpnVersions(value)
+    asJava.setAlpnVersions(value.asJava)
     this
   }
   def getAlpnVersions = {

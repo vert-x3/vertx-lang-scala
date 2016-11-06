@@ -19,10 +19,15 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
+  import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.scala.ext.web.sstore.SessionStore
+import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
+  import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    
 /**
   * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser session.
   * 
@@ -33,12 +38,12 @@ import io.vertx.core.Handler
   * 
   * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing chain before it.
   */
-class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandler) {
+class SessionHandler(private val _asJava: JSessionHandler) {
 
-  def asJava: io.vertx.ext.web.handler.SessionHandler = _asJava
+  def asJava: JSessionHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -46,7 +51,7 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
     * @param timeout the timeout, in ms.
     * @return a reference to this, so the API can be used fluently
     */
-  def setSessionTimeout(timeout: Long): io.vertx.scala.ext.web.handler.SessionHandler = {
+  def setSessionTimeout(timeout: Long): SessionHandler = {
     _asJava.setSessionTimeout(timeout)
     this
   }
@@ -57,7 +62,7 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
     * @param nag true to nag
     * @return a reference to this, so the API can be used fluently
     */
-  def setNagHttps(nag: Boolean): io.vertx.scala.ext.web.handler.SessionHandler = {
+  def setNagHttps(nag: Boolean): SessionHandler = {
     _asJava.setNagHttps(nag)
     this
   }
@@ -68,7 +73,7 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
     * @param secure true to set the secure flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-  def setCookieSecureFlag(secure: Boolean): io.vertx.scala.ext.web.handler.SessionHandler = {
+  def setCookieSecureFlag(secure: Boolean): SessionHandler = {
     _asJava.setCookieSecureFlag(secure)
     this
   }
@@ -79,7 +84,7 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
     * @param httpOnly true to set the HttpOnly flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-  def setCookieHttpOnlyFlag(httpOnly: Boolean): io.vertx.scala.ext.web.handler.SessionHandler = {
+  def setCookieHttpOnlyFlag(httpOnly: Boolean): SessionHandler = {
     _asJava.setCookieHttpOnlyFlag(httpOnly)
     this
   }
@@ -89,7 +94,7 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
     * @param sessionCookieName the session cookie name
     * @return a reference to this, so the API can be used fluently
     */
-  def setSessionCookieName(sessionCookieName: String): io.vertx.scala.ext.web.handler.SessionHandler = {
+  def setSessionCookieName(sessionCookieName: String): SessionHandler = {
     _asJava.setSessionCookieName(sessionCookieName)
     this
   }
@@ -98,11 +103,11 @@ class SessionHandler(private val _asJava: io.vertx.ext.web.handler.SessionHandle
 
 object SessionHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.SessionHandler): io.vertx.scala.ext.web.handler.SessionHandler =
-    new io.vertx.scala.ext.web.handler.SessionHandler(_asJava)
+  def apply(_asJava: JSessionHandler): SessionHandler =
+    new SessionHandler(_asJava)
 
-  def create(sessionStore: io.vertx.scala.ext.web.sstore.SessionStore): io.vertx.scala.ext.web.handler.SessionHandler = {
-    SessionHandler.apply(io.vertx.ext.web.handler.SessionHandler.create(sessionStore.asJava.asInstanceOf[io.vertx.ext.web.sstore.SessionStore]))
+  def create(sessionStore: SessionStore): SessionHandler = {
+    SessionHandler.apply(io.vertx.ext.web.handler.SessionHandler.create(sessionStore.asJava.asInstanceOf[JSessionStore]))
   }
 
 }

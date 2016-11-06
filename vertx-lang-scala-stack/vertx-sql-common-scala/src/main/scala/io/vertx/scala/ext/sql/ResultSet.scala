@@ -17,7 +17,11 @@
 package io.vertx.scala.ext.sql
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.sql.{ResultSet => JResultSet}
+import io.vertx.core.json.JsonArray
+import io.vertx.core.json.JsonObject
 
 /**
   * Represents the results of a SQL query.
@@ -26,13 +30,13 @@ import scala.collection.JavaConversions._
   * results.
   */
 
-class ResultSet(val asJava: io.vertx.ext.sql.ResultSet) {
+class ResultSet(val asJava: JResultSet) {
 
   /**
     * Get the column names
     */
-  def setColumnNames(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setColumnNames(value)
+  def setColumnNames(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setColumnNames(value.asJava)
     this
   }
   def getColumnNames = {
@@ -50,7 +54,7 @@ class ResultSet(val asJava: io.vertx.ext.sql.ResultSet) {
   /**
     * Get the registered outputs
     */
-  def setOutput(value:io.vertx.core.json.JsonArray) = {
+  def setOutput(value: JsonArray) = {
     asJava.setOutput(value)
     this
   }
@@ -61,8 +65,8 @@ class ResultSet(val asJava: io.vertx.ext.sql.ResultSet) {
   /**
     * Get the results
     */
-  def setResults(value:scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
-    asJava.setResults(value)
+  def setResults(value: scala.collection.mutable.Buffer[JsonArray]) = {
+    asJava.setResults(value.asJava)
     this
   }
   def getResults = {
@@ -79,13 +83,12 @@ class ResultSet(val asJava: io.vertx.ext.sql.ResultSet) {
 }
 
 object ResultSet {
-  type ResultSetJava = io.vertx.ext.sql.ResultSet
   
   def apply() = {
-    new ResultSet(new ResultSetJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ResultSet(new JResultSet(emptyObj()))
   }
   
-  def apply(t: ResultSetJava) = {
+  def apply(t: JResultSet) = {
     if(t != null)
       new ResultSet(t)
     else
@@ -94,7 +97,7 @@ object ResultSet {
   
   def fromJson(json: JsonObject):ResultSet = {
     if(json != null)
-      new ResultSet(new ResultSetJava(json))
+      new ResultSet(new JResultSet(json))
     else
       null
   }

@@ -17,30 +17,31 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{ScanOptions => JScanOptions}
 
 /**
   */
 
-class ScanOptions(val asJava: io.vertx.redis.op.ScanOptions) {
-  def setCount(value:Int) = {
+class ScanOptions(val asJava: JScanOptions) {
+  def setCount(value: Int) = {
     asJava.setCount(value)
     this
   }
-  def setMatch(value:String) = {
+  def setMatch(value: String) = {
     asJava.setMatch(value)
     this
   }
 }
 
 object ScanOptions {
-  type ScanOptionsJava = io.vertx.redis.op.ScanOptions
   
   def apply() = {
-    new ScanOptions(new ScanOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ScanOptions(new JScanOptions(emptyObj()))
   }
   
-  def apply(t: ScanOptionsJava) = {
+  def apply(t: JScanOptions) = {
     if(t != null)
       new ScanOptions(t)
     else
@@ -49,7 +50,7 @@ object ScanOptions {
   
   def fromJson(json: JsonObject):ScanOptions = {
     if(json != null)
-      new ScanOptions(new ScanOptionsJava(json))
+      new ScanOptions(new JScanOptions(json))
     else
       null
   }

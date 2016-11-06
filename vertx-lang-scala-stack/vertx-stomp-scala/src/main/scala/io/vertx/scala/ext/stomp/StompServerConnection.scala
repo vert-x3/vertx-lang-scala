@@ -19,24 +19,29 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+  import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.ext.stomp.Frame
-import io.vertx.core.Handler
+import io.vertx.core.buffer.{Buffer => JBuffer}
+  import io.vertx.ext.stomp.{Frame => JFrame}
+  import io.vertx.ext.stomp.{StompServer => JStompServer}
+      import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**
   * Class representing a connection between a STOMP client a the server. It keeps a references on the client socket,
   * so let write to this socket.
   */
-class StompServerConnection(private val _asJava: io.vertx.ext.stomp.StompServerConnection) {
+class StompServerConnection(private val _asJava: JStompServerConnection) {
 
-  def asJava: io.vertx.ext.stomp.StompServerConnection = _asJava
+  def asJava: JStompServerConnection = _asJava
 
   /**
     * Writes the given frame to the socket.
     * @param frame the frame, must not be `null`.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current [[StompServerConnection]]
     */
-  def write(frame: io.vertx.scala.ext.stomp.Frame): io.vertx.scala.ext.stomp.StompServerConnection = {
+  def write(frame: Frame): StompServerConnection = {
     _asJava.write(frame.asJava)
     this
   }
@@ -46,22 +51,22 @@ class StompServerConnection(private val _asJava: io.vertx.ext.stomp.StompServerC
     * @param buffer the buffer
     * @return the current [[StompServerConnection]]
     */
-  def write(buffer: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.ext.stomp.StompServerConnection = {
-    _asJava.write(buffer.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def write(buffer: Buffer): StompServerConnection = {
+    _asJava.write(buffer.asJava.asInstanceOf[JBuffer])
     this
   }
 
   /**
     * @return the STOMP server serving this connection.
     */
-  def server(): io.vertx.scala.ext.stomp.StompServer = {
+  def server(): StompServer = {
     StompServer.apply(_asJava.server())
   }
 
   /**
     * @return the STOMP server handler dealing with this connection
     */
-  def handler(): io.vertx.scala.ext.stomp.StompServerHandler = {
+  def handler(): StompServerHandler = {
     StompServerHandler.apply(_asJava.handler())
   }
 
@@ -100,7 +105,7 @@ class StompServerConnection(private val _asJava: io.vertx.ext.stomp.StompServerC
     * @param pong pong time
     * @param pingHandler the ping handler
     */
-  def configureHeartbeat(ping: Long, pong: Long, pingHandler: io.vertx.scala.ext.stomp.StompServerConnection => Unit): Unit = {
+  def configureHeartbeat(ping: Long, pong: Long, pingHandler: StompServerConnection => Unit): Unit = {
     _asJava.configureHeartbeat(ping, pong, funcToMappedHandler(StompServerConnection.apply)(pingHandler))
   }
 
@@ -108,7 +113,7 @@ class StompServerConnection(private val _asJava: io.vertx.ext.stomp.StompServerC
 
 object StompServerConnection {
 
-  def apply(_asJava: io.vertx.ext.stomp.StompServerConnection): io.vertx.scala.ext.stomp.StompServerConnection =
-    new io.vertx.scala.ext.stomp.StompServerConnection(_asJava)
+  def apply(_asJava: JStompServerConnection): StompServerConnection =
+    new StompServerConnection(_asJava)
 
 }

@@ -17,57 +17,59 @@
 package io.vertx.scala.ext.web.handler.sockjs
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
 
 /**
   * Options for configuring the event bus bridge.
   */
 
-class BridgeOptions(val asJava: io.vertx.ext.web.handler.sockjs.BridgeOptions) {
-  def setInboundPermitted(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.web.handler.sockjs.PermittedOptions]) = {
-    asJava.setInboundPermitted(value.map(_.asJava))
+class BridgeOptions(val asJava: JBridgeOptions) {
+  def setInboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+    asJava.setInboundPermitted(value.map(_.asJava).asJava)
     this
   }
-  def addInboundPermitted(value:io.vertx.scala.ext.web.handler.sockjs.PermittedOptions) = {
+  def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
   def getInboundPermitteds = {
     asJava.getInboundPermitteds()
   }
-  def setMaxAddressLength(value:Int) = {
+  def setMaxAddressLength(value: Int) = {
     asJava.setMaxAddressLength(value)
     this
   }
   def getMaxAddressLength = {
     asJava.getMaxAddressLength()
   }
-  def setMaxHandlersPerSocket(value:Int) = {
+  def setMaxHandlersPerSocket(value: Int) = {
     asJava.setMaxHandlersPerSocket(value)
     this
   }
   def getMaxHandlersPerSocket = {
     asJava.getMaxHandlersPerSocket()
   }
-  def setOutboundPermitted(value:scala.collection.mutable.Buffer[io.vertx.scala.ext.web.handler.sockjs.PermittedOptions]) = {
-    asJava.setOutboundPermitted(value.map(_.asJava))
+  def setOutboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+    asJava.setOutboundPermitted(value.map(_.asJava).asJava)
     this
   }
-  def addOutboundPermitted(value:io.vertx.scala.ext.web.handler.sockjs.PermittedOptions) = {
+  def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
   def getOutboundPermitteds = {
     asJava.getOutboundPermitteds()
   }
-  def setPingTimeout(value:Long) = {
+  def setPingTimeout(value: Long) = {
     asJava.setPingTimeout(value)
     this
   }
   def getPingTimeout = {
     asJava.getPingTimeout()
   }
-  def setReplyTimeout(value:Long) = {
+  def setReplyTimeout(value: Long) = {
     asJava.setReplyTimeout(value)
     this
   }
@@ -77,13 +79,12 @@ class BridgeOptions(val asJava: io.vertx.ext.web.handler.sockjs.BridgeOptions) {
 }
 
 object BridgeOptions {
-  type BridgeOptionsJava = io.vertx.ext.web.handler.sockjs.BridgeOptions
   
   def apply() = {
-    new BridgeOptions(new BridgeOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new BridgeOptions(new JBridgeOptions(emptyObj()))
   }
   
-  def apply(t: BridgeOptionsJava) = {
+  def apply(t: JBridgeOptions) = {
     if(t != null)
       new BridgeOptions(t)
     else
@@ -92,7 +93,7 @@ object BridgeOptions {
   
   def fromJson(json: JsonObject):BridgeOptions = {
     if(json != null)
-      new BridgeOptions(new BridgeOptionsJava(json))
+      new BridgeOptions(new JBridgeOptions(json))
     else
       null
   }

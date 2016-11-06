@@ -17,7 +17,7 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.cli.{Option => JOption}
 
@@ -50,7 +50,7 @@ class Option(val asJava: JOption) {
     this
   }
   def setChoices(value: Set[String]) = {
-    asJava.setChoices(value)
+    asJava.setChoices(value.asJava)
     this
   }
   def getChoices = {

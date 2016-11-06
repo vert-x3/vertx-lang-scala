@@ -19,25 +19,32 @@ package io.vertx.scala.ext.auth.jdbc
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
+  import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 import io.vertx.scala.ext.jdbc.JDBCClient
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+  import io.vertx.core.json.JsonObject
+        import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
+  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
   */
-class JDBCAuth(private val _asJava: io.vertx.ext.auth.jdbc.JDBCAuth) {
+class JDBCAuth(private val _asJava: JJDBCAuth) {
 
-  def asJava: io.vertx.ext.auth.jdbc.JDBCAuth = _asJava
+  def asJava: JJDBCAuth = _asJava
 
   /**
     * Set the authentication query to use. Use this if you want to override the default authentication query.
     * @param authenticationQuery the authentication query
     * @return a reference to this for fluency
     */
-  def setAuthenticationQuery(authenticationQuery: String): io.vertx.scala.ext.auth.jdbc.JDBCAuth = {
+  def setAuthenticationQuery(authenticationQuery: String): JDBCAuth = {
     JDBCAuth.apply(_asJava.setAuthenticationQuery(authenticationQuery))
   }
 
@@ -46,7 +53,7 @@ class JDBCAuth(private val _asJava: io.vertx.ext.auth.jdbc.JDBCAuth) {
     * @param rolesQuery the roles query
     * @return a reference to this for fluency
     */
-  def setRolesQuery(rolesQuery: String): io.vertx.scala.ext.auth.jdbc.JDBCAuth = {
+  def setRolesQuery(rolesQuery: String): JDBCAuth = {
     JDBCAuth.apply(_asJava.setRolesQuery(rolesQuery))
   }
 
@@ -55,7 +62,7 @@ class JDBCAuth(private val _asJava: io.vertx.ext.auth.jdbc.JDBCAuth) {
     * @param permissionsQuery the permissions query
     * @return a reference to this for fluency
     */
-  def setPermissionsQuery(permissionsQuery: String): io.vertx.scala.ext.auth.jdbc.JDBCAuth = {
+  def setPermissionsQuery(permissionsQuery: String): JDBCAuth = {
     JDBCAuth.apply(_asJava.setPermissionsQuery(permissionsQuery))
   }
 
@@ -64,7 +71,7 @@ class JDBCAuth(private val _asJava: io.vertx.ext.auth.jdbc.JDBCAuth) {
     * @param rolePrefix a Prefix e.g.: "role:"
     * @return a reference to this for fluency
     */
-  def setRolePrefix(rolePrefix: String): io.vertx.scala.ext.auth.jdbc.JDBCAuth = {
+  def setRolePrefix(rolePrefix: String): JDBCAuth = {
     JDBCAuth.apply(_asJava.setRolePrefix(rolePrefix))
   }
 
@@ -72,11 +79,11 @@ class JDBCAuth(private val _asJava: io.vertx.ext.auth.jdbc.JDBCAuth) {
 
 object JDBCAuth {
 
-  def apply(_asJava: io.vertx.ext.auth.jdbc.JDBCAuth): io.vertx.scala.ext.auth.jdbc.JDBCAuth =
-    new io.vertx.scala.ext.auth.jdbc.JDBCAuth(_asJava)
+  def apply(_asJava: JJDBCAuth): JDBCAuth =
+    new JDBCAuth(_asJava)
 
-  def create(client: io.vertx.scala.ext.jdbc.JDBCClient): io.vertx.scala.ext.auth.jdbc.JDBCAuth = {
-    JDBCAuth.apply(io.vertx.ext.auth.jdbc.JDBCAuth.create(client.asJava.asInstanceOf[io.vertx.ext.jdbc.JDBCClient]))
+  def create(client: JDBCClient): JDBCAuth = {
+    JDBCAuth.apply(io.vertx.ext.auth.jdbc.JDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
   }
 
 }

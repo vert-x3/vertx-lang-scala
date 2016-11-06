@@ -17,7 +17,7 @@
 package io.vertx.scala.core.dns
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -164,7 +164,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     this
   }
   def setSearchDomains(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setSearchDomains(value)
+    asJava.setSearchDomains(value.asJava)
     this
   }
   def getSearchDomains = {
@@ -182,7 +182,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     this
   }
   def setServers(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setServers(value)
+    asJava.setServers(value.asJava)
     this
   }
   def getServers = {

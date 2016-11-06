@@ -19,17 +19,20 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
+  import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.ext.stomp.Frame
-import io.vertx.core.Handler
-
+import io.vertx.core.buffer.{Buffer => JBuffer}
+  import io.vertx.ext.stomp.{Frame => JFrame}
+      
 /**
   * Once a connection to the STOMP server has been made, client receives a [[io.vertx.scala.ext.stomp.StompClientConnection]], that let
   * send and receive STOMP frames.
   */
-class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientConnection) {
+class StompClientConnection(private val _asJava: JStompClientConnection) {
 
-  def asJava: io.vertx.ext.stomp.StompClientConnection = _asJava
+  def asJava: JStompClientConnection = _asJava
 
   /**
     * @return the session id.
@@ -65,8 +68,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param body the body, may be `null`
     * @return the current [[StompClientConnection]]
     */
-  def send(headers: Map[String, String], body: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def send(headers: Map[String, String], body: Buffer): StompClientConnection = {
+    _asJava.send(headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -77,8 +80,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the sent frame has been received. The handler receives the sent frame.
     * @return the current [[StompClientConnection]]
     */
-  def send(headers: Map[String, String], body: io.vertx.scala.core.buffer.Buffer, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def send(headers: Map[String, String], body: Buffer, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.send(headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[JBuffer], funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -88,8 +91,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param body the body, may be `null`
     * @return the current [[StompClientConnection]]
     */
-  def send(destination: String, body: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(destination, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def send(destination: String, body: Buffer): StompClientConnection = {
+    _asJava.send(destination, body.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -100,8 +103,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the sent frame has been received. The handler receives the sent frame.
     * @return the current [[StompClientConnection]]
     */
-  def send(destination: String, body: io.vertx.scala.core.buffer.Buffer, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(destination, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def send(destination: String, body: Buffer, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.send(destination, body.asJava.asInstanceOf[JBuffer], funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -110,7 +113,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param frame the framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current [[StompClientConnection]]
     */
-  def send(frame: io.vertx.scala.ext.stomp.Frame): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def send(frame: Frame): StompClientConnection = {
     _asJava.send(frame.asJava)
     this
   }
@@ -121,8 +124,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the sent frame has been received. The handler receives the sent frame.
     * @return the current [[StompClientConnection]]
     */
-  def send(frame: io.vertx.scala.ext.stomp.Frame, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(frame.asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def send(frame: Frame, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.send(frame.asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -133,8 +136,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param body the body, may be `null`
     * @return the current [[StompClientConnection]]
     */
-  def send(destination: String, headers: Map[String, String], body: io.vertx.scala.core.buffer.Buffer): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+  def send(destination: String, headers: Map[String, String], body: Buffer): StompClientConnection = {
+    _asJava.send(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -146,8 +149,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the sent frame has been received. The handler receives the sent frame.
     * @return the current [[StompClientConnection]]
     */
-  def send(destination: String, headers: Map[String, String], body: io.vertx.scala.core.buffer.Buffer, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.send(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def send(destination: String, headers: Map[String, String], body: Buffer, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.send(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, body.asJava.asInstanceOf[JBuffer], funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -157,8 +160,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler invoked when a message is received on the given destination. Must not be `null`.
     * @return the subscription id.
     */
-  def subscribe(destination: String, handler: io.vertx.scala.ext.stomp.Frame => Unit): String = {
-    _asJava.subscribe(destination, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def subscribe(destination: String, handler: Frame => Unit): String = {
+    _asJava.subscribe(destination, funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
   }
 
   /**
@@ -168,8 +171,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the subscription has been received. The handler receives the sent frame (`SUBSCRIBE`).
     * @return the subscription id.
     */
-  def subscribe(destination: String, handler: io.vertx.scala.ext.stomp.Frame => Unit, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): String = {
-    _asJava.subscribe(destination, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler), funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def subscribe(destination: String, handler: Frame => Unit, receiptHandler: Frame => Unit): String = {
+    _asJava.subscribe(destination, funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler), funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
   }
 
   /**
@@ -179,8 +182,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler invoked when a message is received on the given destination. Must not be `null`.
     * @return the subscription id, which can either be the destination or the id set in the headers.
     */
-  def subscribe(destination: String, headers: Map[String, String], handler: io.vertx.scala.ext.stomp.Frame => Unit): String = {
-    _asJava.subscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def subscribe(destination: String, headers: Map[String, String], handler: Frame => Unit): String = {
+    _asJava.subscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
   }
 
   /**
@@ -191,8 +194,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the subscription has been received. The handler receives the sent frame (`SUBSCRIBE`).
     * @return the subscription id, which can either be the destination or the id set in the headers.
     */
-  def subscribe(destination: String, headers: Map[String, String], handler: io.vertx.scala.ext.stomp.Frame => Unit, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): String = {
-    _asJava.subscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler), funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def subscribe(destination: String, headers: Map[String, String], handler: Frame => Unit, receiptHandler: Frame => Unit): String = {
+    _asJava.subscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler), funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
   }
 
   /**
@@ -201,7 +204,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param destination the destination
     * @return the current [[StompClientConnection]]
     */
-  def unsubscribe(destination: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def unsubscribe(destination: String): StompClientConnection = {
     _asJava.unsubscribe(destination)
     this
   }
@@ -213,8 +216,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the un-subscription has been received. The handler receives the sent frame (`UNSUBSCRIBE`).
     * @return the current [[StompClientConnection]]
     */
-  def unsubscribe(destination: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.unsubscribe(destination, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def unsubscribe(destination: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.unsubscribe(destination, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -225,7 +228,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param headers the headers
     * @return the current [[StompClientConnection]]
     */
-  def unsubscribe(destination: String, headers: Map[String, String]): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def unsubscribe(destination: String, headers: Map[String, String]): StompClientConnection = {
     _asJava.unsubscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava)
     this
   }
@@ -238,8 +241,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the un-subscription has been received. The handler receives the sent frame (`UNSUBSCRIBE`).
     * @return the current [[StompClientConnection]]
     */
-  def unsubscribe(destination: String, headers: Map[String, String], receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.unsubscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def unsubscribe(destination: String, headers: Map[String, String], receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.unsubscribe(destination, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -248,8 +251,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]]
     */
-  def errorHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.errorHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def errorHandler(handler: Frame => Unit): StompClientConnection = {
+    _asJava.errorHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -258,7 +261,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]]
     */
-  def closeHandler(handler: io.vertx.scala.ext.stomp.StompClientConnection => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def closeHandler(handler: StompClientConnection => Unit): StompClientConnection = {
     _asJava.closeHandler(funcToMappedHandler(StompClientConnection.apply)(handler))
     this
   }
@@ -270,7 +273,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]] receiving the dropped connection.
     */
-  def connectionDroppedHandler(handler: io.vertx.scala.ext.stomp.StompClientConnection => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def connectionDroppedHandler(handler: StompClientConnection => Unit): StompClientConnection = {
     _asJava.connectionDroppedHandler(funcToMappedHandler(StompClientConnection.apply)(handler))
     this
   }
@@ -281,7 +284,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]]
     */
-  def pingHandler(handler: io.vertx.scala.ext.stomp.StompClientConnection => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def pingHandler(handler: StompClientConnection => Unit): StompClientConnection = {
     _asJava.pingHandler(funcToMappedHandler(StompClientConnection.apply)(handler))
     this
   }
@@ -292,8 +295,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction begin has been processed by the server. The handler receives the sent frame (`BEGIN`).
     * @return the current [[StompClientConnection]]
     */
-  def beginTX(id: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.beginTX(id, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def beginTX(id: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.beginTX(id, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -302,7 +305,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param id the transaction id, must not be `null`
     * @return the current [[StompClientConnection]]
     */
-  def beginTX(id: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def beginTX(id: String): StompClientConnection = {
     _asJava.beginTX(id)
     this
   }
@@ -313,7 +316,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param headers additional headers to send to the server. The `transaction` header is replaced by the value passed in the @{code id` parameter
     * @return the current [[StompClientConnection]]
     */
-  def beginTX(id: String, headers: Map[String, String]): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def beginTX(id: String, headers: Map[String, String]): StompClientConnection = {
     _asJava.beginTX(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava)
     this
   }
@@ -325,8 +328,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction begin has been processed by the server. The handler receives the sent frame (`BEGIN`).
     * @return the current [[StompClientConnection]]
     */
-  def beginTX(id: String, headers: Map[String, String], receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.beginTX(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def beginTX(id: String, headers: Map[String, String], receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.beginTX(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -335,7 +338,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param id the transaction id, must not be `null`
     * @return the current [[StompClientConnection]]
     */
-  def commit(id: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def commit(id: String): StompClientConnection = {
     _asJava.commit(id)
     this
   }
@@ -346,8 +349,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction commit has been processed by the server. The handler receives the sent frame (`COMMIT`).
     * @return the current [[StompClientConnection]]
     */
-  def commit(id: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.commit(id, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def commit(id: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.commit(id, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -357,7 +360,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param headers additional headers to send to the server. The `transaction` header is replaced by the value passed in the @{code id` parameter
     * @return the current [[StompClientConnection]]
     */
-  def commit(id: String, headers: Map[String, String]): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def commit(id: String, headers: Map[String, String]): StompClientConnection = {
     _asJava.commit(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava)
     this
   }
@@ -369,8 +372,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction commit has been processed by the server. The handler receives the sent frame (`COMMIT`).
     * @return the current [[StompClientConnection]]
     */
-  def commit(id: String, headers: Map[String, String], receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.commit(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def commit(id: String, headers: Map[String, String], receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.commit(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -379,7 +382,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param id the transaction id, must not be `null`
     * @return the current [[StompClientConnection]]
     */
-  def abort(id: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def abort(id: String): StompClientConnection = {
     _asJava.abort(id)
     this
   }
@@ -390,8 +393,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction cancellation has been processed by the server. The handler receives the sent frame (`ABORT`).
     * @return the current [[StompClientConnection]]
     */
-  def abort(id: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.abort(id, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def abort(id: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.abort(id, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -401,7 +404,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param headers additional headers to send to the server. The `transaction` header is replaced by the value passed in the @{code id` parameter
     * @return the current [[StompClientConnection]]
     */
-  def abort(id: String, headers: Map[String, String]): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def abort(id: String, headers: Map[String, String]): StompClientConnection = {
     _asJava.abort(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava)
     this
   }
@@ -413,8 +416,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the transaction cancellation has been processed by the server. The handler receives the sent frame (`ABORT`).
     * @return the current [[StompClientConnection]]
     */
-  def abort(id: String, headers: Map[String, String], receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.abort(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def abort(id: String, headers: Map[String, String], receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.abort(id, headers.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -423,7 +426,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * server.
     * @return the current [[StompClientConnection]]
     */
-  def disconnect(): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def disconnect(): StompClientConnection = {
     _asJava.disconnect()
     this
   }
@@ -434,8 +437,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the disconnection has been processed by the server. The handler receives the sent frame (`DISCONNECT`).
     * @return the current [[StompClientConnection]]
     */
-  def disconnect(receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.disconnect(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def disconnect(receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.disconnect(funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -445,7 +448,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param frame the `DISCONNECT` frame.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current [[StompClientConnection]]
     */
-  def disconnect(frame: io.vertx.scala.ext.stomp.Frame): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def disconnect(frame: Frame): StompClientConnection = {
     _asJava.disconnect(frame.asJava)
     this
   }
@@ -457,8 +460,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the disconnection has been processed by the server. The handler receives the sent frame (`DISCONNECT`).
     * @return the current [[StompClientConnection]]
     */
-  def disconnect(frame: io.vertx.scala.ext.stomp.Frame, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.disconnect(frame.asJava, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def disconnect(frame: Frame, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.disconnect(frame.asJava, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -468,7 +471,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param id the message id of the message to acknowledge
     * @return the current [[StompClientConnection]]
     */
-  def ack(id: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def ack(id: String): StompClientConnection = {
     _asJava.ack(id)
     this
   }
@@ -480,8 +483,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the acknowledgment has been processed by the server. The handler receives the sent frame (`ACK`).
     * @return the current [[StompClientConnection]]
     */
-  def ack(id: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.ack(id, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def ack(id: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.ack(id, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -491,7 +494,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param id the message id of the message to acknowledge
     * @return the current [[StompClientConnection]]
     */
-  def nack(id: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def nack(id: String): StompClientConnection = {
     _asJava.nack(id)
     this
   }
@@ -503,8 +506,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the non-acknowledgment has been processed by the server. The handler receives the sent frame (`NACK`).
     * @return the current [[StompClientConnection]]
     */
-  def nack(id: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.nack(id, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def nack(id: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.nack(id, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -515,7 +518,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param txId the transaction id
     * @return the current [[StompClientConnection]]
     */
-  def ack(id: String, txId: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def ack(id: String, txId: String): StompClientConnection = {
     _asJava.ack(id, txId)
     this
   }
@@ -528,8 +531,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the acknowledgment has been processed by the server. The handler receives the sent frame (`ACK`).
     * @return the current [[StompClientConnection]]
     */
-  def ack(id: String, txId: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.ack(id, txId, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def ack(id: String, txId: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.ack(id, txId, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -540,7 +543,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param txId the transaction id
     * @return the current [[StompClientConnection]]
     */
-  def nack(id: String, txId: String): io.vertx.scala.ext.stomp.StompClientConnection = {
+  def nack(id: String, txId: String): StompClientConnection = {
     _asJava.nack(id, txId)
     this
   }
@@ -553,8 +556,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the non-acknowledgment has been processed by the server. The handler receives the sent frame (`NACK`).
     * @return the current [[StompClientConnection]]
     */
-  def nack(id: String, txId: String, receiptHandler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.nack(id, txId, funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(receiptHandler))
+  def nack(id: String, txId: String, receiptHandler: Frame => Unit): StompClientConnection = {
+    _asJava.nack(id, txId, funcToMappedHandler[JFrame, Frame](a => Frame(a))(receiptHandler))
     this
   }
 
@@ -567,8 +570,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]]
     */
-  def receivedFrameHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.receivedFrameHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def receivedFrameHandler(handler: Frame => Unit): StompClientConnection = {
+    _asJava.receivedFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -581,8 +584,8 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
     * @param handler the handler
     * @return the current [[StompClientConnection]]
     */
-  def writingFrameHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClientConnection = {
-    _asJava.writingFrameHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def writingFrameHandler(handler: Frame => Unit): StompClientConnection = {
+    _asJava.writingFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -590,7 +593,7 @@ class StompClientConnection(private val _asJava: io.vertx.ext.stomp.StompClientC
 
 object StompClientConnection {
 
-  def apply(_asJava: io.vertx.ext.stomp.StompClientConnection): io.vertx.scala.ext.stomp.StompClientConnection =
-    new io.vertx.scala.ext.stomp.StompClientConnection(_asJava)
+  def apply(_asJava: JStompClientConnection): StompClientConnection =
+    new StompClientConnection(_asJava)
 
 }

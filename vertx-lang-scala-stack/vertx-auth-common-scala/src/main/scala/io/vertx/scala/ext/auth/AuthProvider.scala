@@ -19,16 +19,17 @@ package io.vertx.scala.ext.auth
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
-
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+  import io.vertx.ext.auth.{User => JUser}
+  import io.vertx.core.json.JsonObject
+    
 /**
   *
   * User-facing interface for authenticating users.
   */
-class AuthProvider(private val _asJava: io.vertx.ext.auth.AuthProvider) {
+class AuthProvider(private val _asJava: JAuthProvider) {
 
-  def asJava: io.vertx.ext.auth.AuthProvider = _asJava
+  def asJava: JAuthProvider = _asJava
 
   /**
     * Authenticate a user.
@@ -49,8 +50,8 @@ class AuthProvider(private val _asJava: io.vertx.ext.auth.AuthProvider) {
     * @param authInfo The auth information
     * @return The result future
     */
-  def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): concurrent.Future[io.vertx.scala.ext.auth.User] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.auth.User,io.vertx.scala.ext.auth.User]((x => if (x == null) null else User.apply(x)))
+  def authenticateFuture(authInfo: JsonObject): concurrent.Future[User] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JUser,User]((x => if (x == null) null else User.apply(x)))
     _asJava.authenticate(authInfo, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -59,7 +60,7 @@ class AuthProvider(private val _asJava: io.vertx.ext.auth.AuthProvider) {
 
 object AuthProvider {
 
-  def apply(_asJava: io.vertx.ext.auth.AuthProvider): io.vertx.scala.ext.auth.AuthProvider =
-    new io.vertx.scala.ext.auth.AuthProvider(_asJava)
+  def apply(_asJava: JAuthProvider): AuthProvider =
+    new AuthProvider(_asJava)
 
 }

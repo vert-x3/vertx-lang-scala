@@ -19,18 +19,21 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
+  import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    
 /**
   * A handler for serving static resources from the file system or classpath.
   */
-class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler) {
+class StaticHandler(private val _asJava: JStaticHandler) {
 
-  def asJava: io.vertx.ext.web.handler.StaticHandler = _asJava
+  def asJava: JStaticHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -38,7 +41,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param allowRootFileSystemAccess whether root access is allowed
     * @return a reference to this, so the API can be used fluently
     */
-  def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean): StaticHandler = {
     _asJava.setAllowRootFileSystemAccess(allowRootFileSystemAccess)
     this
   }
@@ -48,7 +51,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param webRoot the web root
     * @return a reference to this, so the API can be used fluently
     */
-  def setWebRoot(webRoot: String): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setWebRoot(webRoot: String): StaticHandler = {
     _asJava.setWebRoot(webRoot)
     this
   }
@@ -58,7 +61,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param readOnly whether files are read-only
     * @return a reference to this, so the API can be used fluently
     */
-  def setFilesReadOnly(readOnly: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setFilesReadOnly(readOnly: Boolean): StaticHandler = {
     _asJava.setFilesReadOnly(readOnly)
     this
   }
@@ -68,7 +71,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param maxAgeSeconds maximum time for browser to cache, in seconds
     * @return a reference to this, so the API can be used fluently
     */
-  def setMaxAgeSeconds(maxAgeSeconds: Long): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setMaxAgeSeconds(maxAgeSeconds: Long): StaticHandler = {
     _asJava.setMaxAgeSeconds(maxAgeSeconds)
     this
   }
@@ -78,7 +81,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param enabled true if enabled
     * @return a reference to this, so the API can be used fluently
     */
-  def setCachingEnabled(enabled: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setCachingEnabled(enabled: Boolean): StaticHandler = {
     _asJava.setCachingEnabled(enabled)
     this
   }
@@ -88,7 +91,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param directoryListing true if enabled
     * @return a reference to this, so the API can be used fluently
     */
-  def setDirectoryListing(directoryListing: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setDirectoryListing(directoryListing: Boolean): StaticHandler = {
     _asJava.setDirectoryListing(directoryListing)
     this
   }
@@ -98,7 +101,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param includeHidden true if hidden files should be served
     * @return a reference to this, so the API can be used fluently
     */
-  def setIncludeHidden(includeHidden: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setIncludeHidden(includeHidden: Boolean): StaticHandler = {
     _asJava.setIncludeHidden(includeHidden)
     this
   }
@@ -108,7 +111,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param timeout the timeout, in ms
     * @return a reference to this, so the API can be used fluently
     */
-  def setCacheEntryTimeout(timeout: Long): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setCacheEntryTimeout(timeout: Long): StaticHandler = {
     _asJava.setCacheEntryTimeout(timeout)
     this
   }
@@ -118,7 +121,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param indexPage the index page
     * @return a reference to this, so the API can be used fluently
     */
-  def setIndexPage(indexPage: String): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setIndexPage(indexPage: String): StaticHandler = {
     _asJava.setIndexPage(indexPage)
     this
   }
@@ -128,7 +131,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param maxCacheSize the max cache size
     * @return a reference to this, so the API can be used fluently
     */
-  def setMaxCacheSize(maxCacheSize: Int): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setMaxCacheSize(maxCacheSize: Int): StaticHandler = {
     _asJava.setMaxCacheSize(maxCacheSize)
     this
   }
@@ -138,7 +141,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param alwaysAsyncFS true for always async FS access
     * @return a reference to this, so the API can be used fluently
     */
-  def setAlwaysAsyncFS(alwaysAsyncFS: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setAlwaysAsyncFS(alwaysAsyncFS: Boolean): StaticHandler = {
     _asJava.setAlwaysAsyncFS(alwaysAsyncFS)
     this
   }
@@ -148,7 +151,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param enableFSTuning true to enabled FS tuning
     * @return a reference to this, so the API can be used fluently
     */
-  def setEnableFSTuning(enableFSTuning: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setEnableFSTuning(enableFSTuning: Boolean): StaticHandler = {
     _asJava.setEnableFSTuning(enableFSTuning)
     this
   }
@@ -158,7 +161,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param maxAvgServeTimeNanoSeconds max serve time, in ns
     * @return a reference to this, so the API can be used fluently
     */
-  def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long): StaticHandler = {
     _asJava.setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds)
     this
   }
@@ -168,7 +171,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param directoryTemplate the directory template
     * @return a reference to this, so the API can be used fluently
     */
-  def setDirectoryTemplate(directoryTemplate: String): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setDirectoryTemplate(directoryTemplate: String): StaticHandler = {
     _asJava.setDirectoryTemplate(directoryTemplate)
     this
   }
@@ -178,7 +181,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param enableRangeSupport true to enable range support
     * @return a reference to this, so the API can be used fluently
     */
-  def setEnableRangeSupport(enableRangeSupport: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setEnableRangeSupport(enableRangeSupport: Boolean): StaticHandler = {
     _asJava.setEnableRangeSupport(enableRangeSupport)
     this
   }
@@ -188,7 +191,7 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
     * @param varyHeader true to sent vary header
     * @return a reference to this, so the API can be used fluently
     */
-  def setSendVaryHeader(varyHeader: Boolean): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def setSendVaryHeader(varyHeader: Boolean): StaticHandler = {
     _asJava.setSendVaryHeader(varyHeader)
     this
   }
@@ -197,14 +200,14 @@ class StaticHandler(private val _asJava: io.vertx.ext.web.handler.StaticHandler)
 
 object StaticHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.StaticHandler): io.vertx.scala.ext.web.handler.StaticHandler =
-    new io.vertx.scala.ext.web.handler.StaticHandler(_asJava)
+  def apply(_asJava: JStaticHandler): StaticHandler =
+    new StaticHandler(_asJava)
 
-  def create(): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def create(): StaticHandler = {
     StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create())
   }
 
-  def create(root: String): io.vertx.scala.ext.web.handler.StaticHandler = {
+  def create(root: String): StaticHandler = {
     StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create(root))
   }
 

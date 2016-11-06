@@ -19,9 +19,12 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
+  import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
+    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    
 /**
   * Base interface for auth handlers.
   * 
@@ -33,35 +36,35 @@ trait AuthHandler {
 
   def asJava: java.lang.Object
 
-    def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit
+  def handle(arg0: RoutingContext): Unit
 
   /**
   * Add a required authority for this auth handler
   * @param authority the authority
   * @return a reference to this, so the API can be used fluently
   */
-  def addAuthority(authority: String): io.vertx.scala.ext.web.handler.AuthHandler
+def addAuthority(authority: String): AuthHandler
 
   /**
   * Add a set of required authorities for this auth handler
   * @param authorities the set of authorities
   * @return a reference to this, so the API can be used fluently
   */
-  def addAuthorities(authorities: Set[String]): io.vertx.scala.ext.web.handler.AuthHandler
+def addAuthorities(authorities: Set[String]): AuthHandler
 
 }
 
 object AuthHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.AuthHandler): io.vertx.scala.ext.web.handler.AuthHandler =
+  def apply(_asJava: JAuthHandler): AuthHandler =
     new AuthHandlerImpl(_asJava)
 
-  private class AuthHandlerImpl(private val _asJava: io.vertx.ext.web.handler.AuthHandler) extends AuthHandler {
+  private class AuthHandlerImpl(private val _asJava: JAuthHandler) extends AuthHandler {
 
-    def asJava: io.vertx.ext.web.handler.AuthHandler = _asJava
+    def asJava: JAuthHandler = _asJava
 
-    def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-        _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+    def handle(arg0: RoutingContext): Unit = {
+        _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
     }
 
     /**
@@ -69,7 +72,7 @@ object AuthHandler {
       * @param authority the authority
       * @return a reference to this, so the API can be used fluently
       */
-    def addAuthority(authority: String): io.vertx.scala.ext.web.handler.AuthHandler = {
+    def addAuthority(authority: String): AuthHandler = {
         _asJava.addAuthority(authority)
       this
     }
@@ -79,7 +82,7 @@ object AuthHandler {
       * @param authorities the set of authorities
       * @return a reference to this, so the API can be used fluently
       */
-    def addAuthorities(authorities: Set[String]): io.vertx.scala.ext.web.handler.AuthHandler = {
+    def addAuthorities(authorities: Set[String]): AuthHandler = {
         _asJava.addAuthorities(authorities.map(x => if (x == null) null else x:java.lang.String).asJava)
       this
     }

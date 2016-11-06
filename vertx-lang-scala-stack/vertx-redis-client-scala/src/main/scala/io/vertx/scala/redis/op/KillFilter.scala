@@ -17,17 +17,20 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{KillFilter => JKillFilter}
+import io.vertx.redis.op.KillFilter.Type
 
 /**
   */
 
-class KillFilter(val asJava: io.vertx.redis.op.KillFilter) {
+class KillFilter(val asJava: JKillFilter) {
 
   /**
     * Set ADDR filter
     */
-  def setAddr(value:String) = {
+  def setAddr(value: String) = {
     asJava.setAddr(value)
     this
   }
@@ -35,7 +38,7 @@ class KillFilter(val asJava: io.vertx.redis.op.KillFilter) {
   /**
     * Set ID filter
     */
-  def setId(value:String) = {
+  def setId(value: String) = {
     asJava.setId(value)
     this
   }
@@ -43,7 +46,7 @@ class KillFilter(val asJava: io.vertx.redis.op.KillFilter) {
   /**
     * Set SKIPME filter
     */
-  def setSkipme(value:Boolean) = {
+  def setSkipme(value: Boolean) = {
     asJava.setSkipme(value)
     this
   }
@@ -51,20 +54,19 @@ class KillFilter(val asJava: io.vertx.redis.op.KillFilter) {
   /**
     * Set TYPE filter
     */
-  def setType(value:io.vertx.redis.op.KillFilter.Type) = {
+  def setType(value: io.vertx.redis.op.KillFilter.Type) = {
     asJava.setType(value)
     this
   }
 }
 
 object KillFilter {
-  type KillFilterJava = io.vertx.redis.op.KillFilter
   
   def apply() = {
-    new KillFilter(new KillFilterJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new KillFilter(new JKillFilter(emptyObj()))
   }
   
-  def apply(t: KillFilterJava) = {
+  def apply(t: JKillFilter) = {
     if(t != null)
       new KillFilter(t)
     else
@@ -73,7 +75,7 @@ object KillFilter {
   
   def fromJson(json: JsonObject):KillFilter = {
     if(json != null)
-      new KillFilter(new KillFilterJava(json))
+      new KillFilter(new JKillFilter(json))
     else
       null
   }

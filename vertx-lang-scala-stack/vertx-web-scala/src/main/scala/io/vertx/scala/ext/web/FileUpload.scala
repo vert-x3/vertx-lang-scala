@@ -19,14 +19,15 @@ package io.vertx.scala.ext.web
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-
+import io.vertx.ext.web.{FileUpload => JFileUpload}
+  
 /**
   * Represents a file-upload from an HTTP multipart form submission.
   * 
   */
-class FileUpload(private val _asJava: io.vertx.ext.web.FileUpload) {
+class FileUpload(private val _asJava: JFileUpload) {
 
-  def asJava: io.vertx.ext.web.FileUpload = _asJava
+  def asJava: JFileUpload = _asJava
 
   /**
     * @return the name of the upload as provided in the form submission
@@ -81,7 +82,7 @@ class FileUpload(private val _asJava: io.vertx.ext.web.FileUpload) {
 
 object FileUpload {
 
-  def apply(_asJava: io.vertx.ext.web.FileUpload): io.vertx.scala.ext.web.FileUpload =
-    new io.vertx.scala.ext.web.FileUpload(_asJava)
+  def apply(_asJava: JFileUpload): FileUpload =
+    new FileUpload(_asJava)
 
 }

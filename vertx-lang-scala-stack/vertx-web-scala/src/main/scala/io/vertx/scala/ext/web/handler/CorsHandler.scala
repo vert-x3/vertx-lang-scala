@@ -19,19 +19,22 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.HttpMethod
+import io.vertx.ext.web.handler.{CorsHandler => JCorsHandler}
+  import io.vertx.core.http.HttpMethod
+    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+      import io.vertx.ext.web.handler.{CorsHandler => JCorsHandler}
 
 /**
   * A handler which implements server side http://www.w3.org/TR/cors/[CORS] support for Vert.x-Web.
   */
-class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
+class CorsHandler(private val _asJava: JCorsHandler) {
 
-  def asJava: io.vertx.ext.web.handler.CorsHandler = _asJava
+  def asJava: JCorsHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -39,7 +42,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param method the method to add
     * @return a reference to this, so the API can be used fluently
     */
-  def allowedMethod(method: io.vertx.core.http.HttpMethod): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def allowedMethod(method: io.vertx.core.http.HttpMethod): CorsHandler = {
     _asJava.allowedMethod(method)
     this
   }
@@ -49,7 +52,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param headerName the allowed header name
     * @return a reference to this, so the API can be used fluently
     */
-  def allowedHeader(headerName: String): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def allowedHeader(headerName: String): CorsHandler = {
     _asJava.allowedHeader(headerName)
     this
   }
@@ -59,7 +62,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param headerNames the allowed header names
     * @return a reference to this, so the API can be used fluently
     */
-  def allowedHeaders(headerNames: Set[String]): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def allowedHeaders(headerNames: Set[String]): CorsHandler = {
     _asJava.allowedHeaders(headerNames.map(x => if (x == null) null else x:java.lang.String).asJava)
     this
   }
@@ -69,7 +72,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param headerName the exposed header name
     * @return a reference to this, so the API can be used fluently
     */
-  def exposedHeader(headerName: String): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def exposedHeader(headerName: String): CorsHandler = {
     _asJava.exposedHeader(headerName)
     this
   }
@@ -79,7 +82,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param headerNames the exposed header names
     * @return a reference to this, so the API can be used fluently
     */
-  def exposedHeaders(headerNames: Set[String]): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def exposedHeaders(headerNames: Set[String]): CorsHandler = {
     _asJava.exposedHeaders(headerNames.map(x => if (x == null) null else x:java.lang.String).asJava)
     this
   }
@@ -89,7 +92,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param allow true if allowed
     * @return a reference to this, so the API can be used fluently
     */
-  def allowCredentials(allow: Boolean): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def allowCredentials(allow: Boolean): CorsHandler = {
     _asJava.allowCredentials(allow)
     this
   }
@@ -99,7 +102,7 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
     * @param maxAgeSeconds max age in seconds
     * @return a reference to this, so the API can be used fluently
     */
-  def maxAgeSeconds(maxAgeSeconds: Int): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def maxAgeSeconds(maxAgeSeconds: Int): CorsHandler = {
     _asJava.maxAgeSeconds(maxAgeSeconds)
     this
   }
@@ -108,10 +111,10 @@ class CorsHandler(private val _asJava: io.vertx.ext.web.handler.CorsHandler) {
 
 object CorsHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.CorsHandler): io.vertx.scala.ext.web.handler.CorsHandler =
-    new io.vertx.scala.ext.web.handler.CorsHandler(_asJava)
+  def apply(_asJava: JCorsHandler): CorsHandler =
+    new CorsHandler(_asJava)
 
-  def create(allowedOriginPattern: String): io.vertx.scala.ext.web.handler.CorsHandler = {
+  def create(allowedOriginPattern: String): CorsHandler = {
     CorsHandler.apply(io.vertx.ext.web.handler.CorsHandler.create(allowedOriginPattern))
   }
 

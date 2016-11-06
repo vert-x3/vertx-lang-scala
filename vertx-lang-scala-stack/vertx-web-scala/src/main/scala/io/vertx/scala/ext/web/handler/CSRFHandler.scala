@@ -19,8 +19,11 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{CSRFHandler => JCSRFHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+      import io.vertx.ext.web.handler.{CSRFHandler => JCSRFHandler}
 
 /**
   * This handler adds a CSRF token to requests which mutate state. In order change the state a (XSRF-TOKEN) cookie is set
@@ -30,12 +33,12 @@ import io.vertx.core.Handler
   *
   * This Handler requires session support, thus should be added somewhere below Session and Body handlers.
   */
-class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
+class CSRFHandler(private val _asJava: JCSRFHandler) {
 
-  def asJava: io.vertx.ext.web.handler.CSRFHandler = _asJava
+  def asJava: JCSRFHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
@@ -44,7 +47,7 @@ class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
     * @param name a new name for the cookie.
     * @return fluent
     */
-  def setCookieName(name: String): io.vertx.scala.ext.web.handler.CSRFHandler = {
+  def setCookieName(name: String): CSRFHandler = {
     _asJava.setCookieName(name)
     this
   }
@@ -55,7 +58,7 @@ class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
     * @param name a new name for the header.
     * @return fluent
     */
-  def setHeaderName(name: String): io.vertx.scala.ext.web.handler.CSRFHandler = {
+  def setHeaderName(name: String): CSRFHandler = {
     _asJava.setHeaderName(name)
     this
   }
@@ -65,7 +68,7 @@ class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
     * @param nag true to nag
     * @return fluent
     */
-  def setNagHttps(nag: Boolean): io.vertx.scala.ext.web.handler.CSRFHandler = {
+  def setNagHttps(nag: Boolean): CSRFHandler = {
     _asJava.setNagHttps(nag)
     this
   }
@@ -75,7 +78,7 @@ class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
     * @param timeout token timeout
     * @return fluent
     */
-  def setTimeout(timeout: Long): io.vertx.scala.ext.web.handler.CSRFHandler = {
+  def setTimeout(timeout: Long): CSRFHandler = {
     _asJava.setTimeout(timeout)
     this
   }
@@ -84,10 +87,10 @@ class CSRFHandler(private val _asJava: io.vertx.ext.web.handler.CSRFHandler) {
 
 object CSRFHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.CSRFHandler): io.vertx.scala.ext.web.handler.CSRFHandler =
-    new io.vertx.scala.ext.web.handler.CSRFHandler(_asJava)
+  def apply(_asJava: JCSRFHandler): CSRFHandler =
+    new CSRFHandler(_asJava)
 
-  def create(secret: String): io.vertx.scala.ext.web.handler.CSRFHandler = {
+  def create(secret: String): CSRFHandler = {
     CSRFHandler.apply(io.vertx.ext.web.handler.CSRFHandler.create(secret))
   }
 

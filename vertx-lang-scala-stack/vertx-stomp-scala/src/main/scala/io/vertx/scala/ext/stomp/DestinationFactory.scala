@@ -19,14 +19,18 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.stomp.{DestinationFactory => JDestinationFactory}
+  import io.vertx.ext.stomp.{Destination => JDestination}
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-
+import io.vertx.core.{Vertx => JVertx}
+  
 /**
   * Interface implemented to customize the destination creation.
   */
-class DestinationFactory(private val _asJava: io.vertx.ext.stomp.DestinationFactory) {
+class DestinationFactory(private val _asJava: JDestinationFactory) {
 
-  def asJava: io.vertx.ext.stomp.DestinationFactory = _asJava
+  def asJava: JDestinationFactory = _asJava
 
   /**
     * Creates a destination for the given <em>address</em>.
@@ -34,15 +38,15 @@ class DestinationFactory(private val _asJava: io.vertx.ext.stomp.DestinationFact
     * @param name the destination name.
     * @return the destination, `null` to reject the creation.
     */
-  def create(vertx: io.vertx.scala.core.Vertx, name: String): io.vertx.scala.ext.stomp.Destination = {
-    Destination.apply(_asJava.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], name))
+  def create(vertx: Vertx, name: String): Destination = {
+    Destination.apply(_asJava.create(vertx.asJava.asInstanceOf[JVertx], name))
   }
 
 }
 
 object DestinationFactory {
 
-  def apply(_asJava: io.vertx.ext.stomp.DestinationFactory): io.vertx.scala.ext.stomp.DestinationFactory =
-    new io.vertx.scala.ext.stomp.DestinationFactory(_asJava)
+  def apply(_asJava: JDestinationFactory): DestinationFactory =
+    new DestinationFactory(_asJava)
 
 }

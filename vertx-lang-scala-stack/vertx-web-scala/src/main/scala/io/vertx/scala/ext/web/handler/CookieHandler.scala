@@ -19,29 +19,32 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{CookieHandler => JCookieHandler}
+  import io.vertx.ext.web.handler.{CookieHandler => JCookieHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
-
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+  
 /**
   * A handler which decodes cookies from the request, makes them available in the 
   * and writes them back in the response.
   */
-class CookieHandler(private val _asJava: io.vertx.ext.web.handler.CookieHandler) {
+class CookieHandler(private val _asJava: JCookieHandler) {
 
-  def asJava: io.vertx.ext.web.handler.CookieHandler = _asJava
+  def asJava: JCookieHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object CookieHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.CookieHandler): io.vertx.scala.ext.web.handler.CookieHandler =
-    new io.vertx.scala.ext.web.handler.CookieHandler(_asJava)
+  def apply(_asJava: JCookieHandler): CookieHandler =
+    new CookieHandler(_asJava)
 
-  def create(): io.vertx.scala.ext.web.handler.CookieHandler = {
+  def create(): CookieHandler = {
     CookieHandler.apply(io.vertx.ext.web.handler.CookieHandler.create())
   }
 

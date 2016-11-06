@@ -17,17 +17,19 @@
 package io.vertx.scala.redis.op
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.redis.op.{GeoMember => JGeoMember}
 
 /**
   */
 
-class GeoMember(val asJava: io.vertx.redis.op.GeoMember) {
+class GeoMember(val asJava: JGeoMember) {
 
   /**
     * Set Latitude as per EPSG:900913 / EPSG:3785 / OSGEO:41001
     */
-  def setLatitude(value:Double) = {
+  def setLatitude(value: Double) = {
     asJava.setLatitude(value)
     this
   }
@@ -35,7 +37,7 @@ class GeoMember(val asJava: io.vertx.redis.op.GeoMember) {
   /**
     * Set Longitude as per EPSG:900913 / EPSG:3785 / OSGEO:41001
     */
-  def setLongitude(value:Double) = {
+  def setLongitude(value: Double) = {
     asJava.setLongitude(value)
     this
   }
@@ -43,20 +45,19 @@ class GeoMember(val asJava: io.vertx.redis.op.GeoMember) {
   /**
     * Set the member name.
     */
-  def setMember(value:String) = {
+  def setMember(value: String) = {
     asJava.setMember(value)
     this
   }
 }
 
 object GeoMember {
-  type GeoMemberJava = io.vertx.redis.op.GeoMember
   
   def apply() = {
-    new GeoMember(new GeoMemberJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new GeoMember(new JGeoMember(emptyObj()))
   }
   
-  def apply(t: GeoMemberJava) = {
+  def apply(t: JGeoMember) = {
     if(t != null)
       new GeoMember(t)
     else
@@ -65,7 +66,7 @@ object GeoMember {
   
   def fromJson(json: JsonObject):GeoMember = {
     if(json != null)
-      new GeoMember(new GeoMemberJava(json))
+      new GeoMember(new JGeoMember(json))
     else
       null
   }

@@ -19,9 +19,14 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
+  import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
+  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.Handler
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+    import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 
 /**
   *
@@ -33,23 +38,23 @@ import io.vertx.scala.ext.auth.AuthProvider
   * It requires an Auth provider so, if the user is deserialized from a clustered session it knows which Auth provider
   * to associate the session with.
   */
-class UserSessionHandler(private val _asJava: io.vertx.ext.web.handler.UserSessionHandler) {
+class UserSessionHandler(private val _asJava: JUserSessionHandler) {
 
-  def asJava: io.vertx.ext.web.handler.UserSessionHandler = _asJava
+  def asJava: JUserSessionHandler = _asJava
 
-  def handle(arg0: io.vertx.scala.ext.web.RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.ext.web.RoutingContext])
+  def handle(arg0: RoutingContext): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object UserSessionHandler {
 
-  def apply(_asJava: io.vertx.ext.web.handler.UserSessionHandler): io.vertx.scala.ext.web.handler.UserSessionHandler =
-    new io.vertx.scala.ext.web.handler.UserSessionHandler(_asJava)
+  def apply(_asJava: JUserSessionHandler): UserSessionHandler =
+    new UserSessionHandler(_asJava)
 
-  def create(authProvider: io.vertx.scala.ext.auth.AuthProvider): io.vertx.scala.ext.web.handler.UserSessionHandler = {
-    UserSessionHandler.apply(io.vertx.ext.web.handler.UserSessionHandler.create(authProvider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider]))
+  def create(authProvider: AuthProvider): UserSessionHandler = {
+    UserSessionHandler.apply(io.vertx.ext.web.handler.UserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
 }

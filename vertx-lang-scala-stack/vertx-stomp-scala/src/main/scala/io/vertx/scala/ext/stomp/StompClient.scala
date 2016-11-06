@@ -19,18 +19,24 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.stomp.Frame
+import io.vertx.ext.stomp.{StompClient => JStompClient}
+  import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
+  import io.vertx.ext.stomp.{StompClient => JStompClient}
+  import io.vertx.ext.stomp.{Frame => JFrame}
+  import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.core.{Vertx => JVertx}
+        import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.scala.core.net.NetClient
-import io.vertx.ext.stomp.StompClientOptions
+import io.vertx.core.net.{NetClient => JNetClient}
+  import io.vertx.ext.stomp.{StompClientOptions => JStompClientOptions}
 
 /**
   * Defines a STOMP client.
   */
-class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
+class StompClient(private val _asJava: JStompClient) {
 
-  def asJava: io.vertx.ext.stomp.StompClient = _asJava
+  def asJava: JStompClient = _asJava
 
   /**
     * Connects to the server.
@@ -38,8 +44,8 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param host the server host
     * @return future called with the connection result
     */
-  def connectFuture(port: Int, host: String): concurrent.Future[io.vertx.scala.ext.stomp.StompClientConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.stomp.StompClientConnection,io.vertx.scala.ext.stomp.StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
+  def connectFuture(port: Int, host: String): concurrent.Future[StompClientConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection,StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
     _asJava.connect(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -49,9 +55,9 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param net the NET client to use
     * @return future called with the connection result
     */
-  def connectFuture(net: io.vertx.scala.core.net.NetClient): concurrent.Future[io.vertx.scala.ext.stomp.StompClientConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.stomp.StompClientConnection,io.vertx.scala.ext.stomp.StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
-    _asJava.connect(net.asJava.asInstanceOf[io.vertx.core.net.NetClient], promiseAndHandler._1)
+  def connectFuture(net: NetClient): concurrent.Future[StompClientConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection,StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
+    _asJava.connect(net.asJava.asInstanceOf[JNetClient], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -62,9 +68,9 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param net the NET client to use
     * @return future called with the connection result
     */
-  def connectFuture(port: Int, host: String, net: io.vertx.scala.core.net.NetClient): concurrent.Future[io.vertx.scala.ext.stomp.StompClientConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.stomp.StompClientConnection,io.vertx.scala.ext.stomp.StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
-    _asJava.connect(port, host, net.asJava.asInstanceOf[io.vertx.core.net.NetClient], promiseAndHandler._1)
+  def connectFuture(port: Int, host: String, net: NetClient): concurrent.Future[StompClientConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection,StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
+    _asJava.connect(port, host, net.asJava.asInstanceOf[JNetClient], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -72,8 +78,8 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * Connects to the server using the host and port configured in the client's options.
     * @return future called with the connection result
     */
-  def connectFuture(): concurrent.Future[io.vertx.scala.ext.stomp.StompClientConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.stomp.StompClientConnection,io.vertx.scala.ext.stomp.StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
+  def connectFuture(): concurrent.Future[StompClientConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection,StompClientConnection]((x => if (x == null) null else StompClientConnection.apply(x)))
     _asJava.connect(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -87,8 +93,8 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param handler the handler
     * @return the current [[StompClient]]
     */
-  def receivedFrameHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClient = {
-    _asJava.receivedFrameHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def receivedFrameHandler(handler: Frame => Unit): StompClient = {
+    _asJava.receivedFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -101,8 +107,8 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param handler the handler
     * @return the current [[StompClient]]
     */
-  def writingFrameHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClient = {
-    _asJava.writingFrameHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def writingFrameHandler(handler: Frame => Unit): StompClient = {
+    _asJava.writingFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -113,8 +119,8 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
     * @param handler the handler
     * @return the current [[StompClient]]
     */
-  def errorFrameHandler(handler: io.vertx.scala.ext.stomp.Frame => Unit): io.vertx.scala.ext.stomp.StompClient = {
-    _asJava.errorFrameHandler(funcToMappedHandler[io.vertx.ext.stomp.Frame, io.vertx.scala.ext.stomp.Frame](a => Frame(a))(handler))
+  def errorFrameHandler(handler: Frame => Unit): StompClient = {
+    _asJava.errorFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
 
@@ -128,14 +134,14 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
   /**
     * @return the client's options.see <a href="../../../../../../../cheatsheet/StompClientOptions.html">StompClientOptions</a>
     */
-  def options(): io.vertx.scala.ext.stomp.StompClientOptions = {
-    io.vertx.scala.ext.stomp.StompClientOptions(_asJava.options())
+  def options(): StompClientOptions = {
+    StompClientOptions(_asJava.options())
   }
 
   /**
     * @return the vert.x instance used by the client.
     */
-  def vertx(): io.vertx.scala.core.Vertx = {
+  def vertx(): Vertx = {
     Vertx.apply(_asJava.vertx())
   }
 
@@ -150,15 +156,15 @@ class StompClient(private val _asJava: io.vertx.ext.stomp.StompClient) {
 
 object StompClient {
 
-  def apply(_asJava: io.vertx.ext.stomp.StompClient): io.vertx.scala.ext.stomp.StompClient =
-    new io.vertx.scala.ext.stomp.StompClient(_asJava)
+  def apply(_asJava: JStompClient): StompClient =
+    new StompClient(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.stomp.StompClient = {
-    StompClient.apply(io.vertx.ext.stomp.StompClient.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): StompClient = {
+    StompClient.apply(io.vertx.ext.stomp.StompClient.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.stomp.StompClientOptions): io.vertx.scala.ext.stomp.StompClient = {
-    StompClient.apply(io.vertx.ext.stomp.StompClient.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: StompClientOptions): StompClient = {
+    StompClient.apply(io.vertx.ext.stomp.StompClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

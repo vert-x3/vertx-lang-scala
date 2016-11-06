@@ -17,7 +17,10 @@
 package io.vertx.scala.ext.sql
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
+import io.vertx.core.json.JsonArray
 
 /**
   * Represents the result of an update/insert/delete operation on the database.
@@ -26,12 +29,12 @@ import scala.collection.JavaConversions._
   * keys are available with <a href="../../../../../../../cheatsheet/UpdateResult.html">UpdateResult</a>.
   */
 
-class UpdateResult(val asJava: io.vertx.ext.sql.UpdateResult) {
+class UpdateResult(val asJava: JUpdateResult) {
 
   /**
     * Get any generated keys
     */
-  def setKeys(value:io.vertx.core.json.JsonArray) = {
+  def setKeys(value: JsonArray) = {
     asJava.setKeys(value)
     this
   }
@@ -42,7 +45,7 @@ class UpdateResult(val asJava: io.vertx.ext.sql.UpdateResult) {
   /**
     * Get the number of rows updated
     */
-  def setUpdated(value:Int) = {
+  def setUpdated(value: Int) = {
     asJava.setUpdated(value)
     this
   }
@@ -52,13 +55,12 @@ class UpdateResult(val asJava: io.vertx.ext.sql.UpdateResult) {
 }
 
 object UpdateResult {
-  type UpdateResultJava = io.vertx.ext.sql.UpdateResult
   
   def apply() = {
-    new UpdateResult(new UpdateResultJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new UpdateResult(new JUpdateResult(emptyObj()))
   }
   
-  def apply(t: UpdateResultJava) = {
+  def apply(t: JUpdateResult) = {
     if(t != null)
       new UpdateResult(t)
     else
@@ -67,7 +69,7 @@ object UpdateResult {
   
   def fromJson(json: JsonObject):UpdateResult = {
     if(json != null)
-      new UpdateResult(new UpdateResultJava(json))
+      new UpdateResult(new JUpdateResult(json))
     else
       null
   }

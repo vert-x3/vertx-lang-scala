@@ -17,18 +17,20 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
 
 /**
   * Options for configuring updates.
   */
 
-class UpdateOptions(val asJava: io.vertx.ext.mongo.UpdateOptions) {
+class UpdateOptions(val asJava: JUpdateOptions) {
 
   /**
     * Set whether multi is enabled
     */
-  def setMulti(value:Boolean) = {
+  def setMulti(value: Boolean) = {
     asJava.setMulti(value)
     this
   }
@@ -39,7 +41,7 @@ class UpdateOptions(val asJava: io.vertx.ext.mongo.UpdateOptions) {
   /**
     * Set whether new document property is enabled. Valid only on findOneAnd* methods.
     */
-  def setReturningNewDocument(value:Boolean) = {
+  def setReturningNewDocument(value: Boolean) = {
     asJava.setReturningNewDocument(value)
     this
   }
@@ -50,7 +52,7 @@ class UpdateOptions(val asJava: io.vertx.ext.mongo.UpdateOptions) {
   /**
     * Set whether upsert is enabled
     */
-  def setUpsert(value:Boolean) = {
+  def setUpsert(value: Boolean) = {
     asJava.setUpsert(value)
     this
   }
@@ -61,7 +63,7 @@ class UpdateOptions(val asJava: io.vertx.ext.mongo.UpdateOptions) {
   /**
     * Set the write option
     */
-  def setWriteOption(value:io.vertx.ext.mongo.WriteOption) = {
+  def setWriteOption(value: io.vertx.ext.mongo.WriteOption) = {
     asJava.setWriteOption(value)
     this
   }
@@ -71,13 +73,12 @@ class UpdateOptions(val asJava: io.vertx.ext.mongo.UpdateOptions) {
 }
 
 object UpdateOptions {
-  type UpdateOptionsJava = io.vertx.ext.mongo.UpdateOptions
   
   def apply() = {
-    new UpdateOptions(new UpdateOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new UpdateOptions(new JUpdateOptions(emptyObj()))
   }
   
-  def apply(t: UpdateOptionsJava) = {
+  def apply(t: JUpdateOptions) = {
     if(t != null)
       new UpdateOptions(t)
     else
@@ -86,7 +87,7 @@ object UpdateOptions {
   
   def fromJson(json: JsonObject):UpdateOptions = {
     if(json != null)
-      new UpdateOptions(new UpdateOptionsJava(json))
+      new UpdateOptions(new JUpdateOptions(json))
     else
       null
   }

@@ -17,7 +17,7 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
 import io.vertx.core.json.JsonArray
@@ -28,51 +28,51 @@ import io.vertx.core.json.JsonObject
 
 class DataObjectWithMaps(val asJava: JDataObjectWithMaps) {
   def setBooleanValues(value: Map[String, Boolean]) = {
-    asJava.setBooleanValues(value.mapValues(Boolean.box))
+    asJava.setBooleanValues(value.mapValues(Boolean.box).asJava)
     this
   }
   def setDataObjectValues(value: Map[String, TestDataObject]) = {
-    asJava.setDataObjectValues(value.mapValues(_.asJava))
+    asJava.setDataObjectValues(value.mapValues(_.asJava).asJava)
     this
   }
   def setDoubleValues(value: Map[String, Double]) = {
-    asJava.setDoubleValues(value.mapValues(Double.box))
+    asJava.setDoubleValues(value.mapValues(Double.box).asJava)
     this
   }
   def setEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value)
+    asJava.setEnumValues(value.asJava)
     this
   }
   def setFloatValues(value: Map[String, Float]) = {
-    asJava.setFloatValues(value.mapValues(Float.box))
+    asJava.setFloatValues(value.mapValues(Float.box).asJava)
     this
   }
   def setGenEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value)
+    asJava.setGenEnumValues(value.asJava)
     this
   }
   def setIntegerValues(value: Map[String, Int]) = {
-    asJava.setIntegerValues(value.mapValues(Int.box))
+    asJava.setIntegerValues(value.mapValues(Int.box).asJava)
     this
   }
   def setJsonArrayValues(value: Map[String, JsonArray]) = {
-    asJava.setJsonArrayValues(value)
+    asJava.setJsonArrayValues(value.asJava)
     this
   }
   def setJsonObjectValues(value: Map[String, JsonObject]) = {
-    asJava.setJsonObjectValues(value)
+    asJava.setJsonObjectValues(value.asJava)
     this
   }
   def setLongValues(value: Map[String, Long]) = {
-    asJava.setLongValues(value.mapValues(Long.box))
+    asJava.setLongValues(value.mapValues(Long.box).asJava)
     this
   }
   def setShortValues(value: Map[String, Short]) = {
-    asJava.setShortValues(value.mapValues(Short.box))
+    asJava.setShortValues(value.mapValues(Short.box).asJava)
     this
   }
   def setStringValues(value: Map[String, String]) = {
-    asJava.setStringValues(value)
+    asJava.setStringValues(value.asJava)
     this
   }
 }
