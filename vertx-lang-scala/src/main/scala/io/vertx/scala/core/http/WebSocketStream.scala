@@ -20,12 +20,12 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+      import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.Handler
-
+  import io.vertx.core.http.{WebSocket => JWebSocket}
+  
 /**
   * A stream for [[io.vertx.scala.core.http.HttpClient]] WebSocket connection.
   * 
@@ -35,10 +35,10 @@ import io.vertx.core.Handler
   * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
-class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream) 
+class WebSocketStream(private val _asJava: JWebSocketStream) 
     extends ReadStream[WebSocket] {
 
-  def asJava: io.vertx.core.http.WebSocketStream = _asJava
+  def asJava: JWebSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): WebSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -69,7 +69,7 @@ class WebSocketStream(private val _asJava: io.vertx.core.http.WebSocketStream)
 
 object WebSocketStream {
 
-  def apply(_asJava: io.vertx.core.http.WebSocketStream): WebSocketStream =
+  def apply(_asJava: JWebSocketStream): WebSocketStream =
     new WebSocketStream(_asJava)
 
 }

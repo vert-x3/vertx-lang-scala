@@ -19,18 +19,18 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.net.{NetSocket => JNetSocket}
+      import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-import io.vertx.core.net.{NetSocket => JNetSocket}
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
+        import io.vertx.core.net.{NetSocket => JNetSocket}
+  import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * Represents a socket-like interface to a TCP connection on either the
@@ -43,17 +43,17 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
   * It implements both  and  so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class NetSocket(private val _asJava: io.vertx.core.net.NetSocket) 
+class NetSocket(private val _asJava: JNetSocket) 
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
-  def asJava: io.vertx.core.net.NetSocket = _asJava
+  def asJava: JNetSocket = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -90,7 +90,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
   }
 
   def write(data: Buffer): NetSocket = {
-    _asJava.write(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -280,7 +280,7 @@ class NetSocket(private val _asJava: io.vertx.core.net.NetSocket)
 
 object NetSocket {
 
-  def apply(_asJava: io.vertx.core.net.NetSocket): NetSocket =
+  def apply(_asJava: JNetSocket): NetSocket =
     new NetSocket(_asJava)
 
 }

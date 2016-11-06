@@ -20,21 +20,21 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+      import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-
+    
 /**
   * Represents an file upload from an HTML FORM.
   */
-class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFileUpload) 
+class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload) 
     extends ReadStream[Buffer] {
 
-  def asJava: io.vertx.core.http.HttpServerFileUpload = _asJava
+  def asJava: JHttpServerFileUpload = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): HttpServerFileUpload = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -125,7 +125,7 @@ class HttpServerFileUpload(private val _asJava: io.vertx.core.http.HttpServerFil
 
 object HttpServerFileUpload {
 
-  def apply(_asJava: io.vertx.core.http.HttpServerFileUpload): HttpServerFileUpload =
+  def apply(_asJava: JHttpServerFileUpload): HttpServerFileUpload =
     new HttpServerFileUpload(_asJava)
 
 }

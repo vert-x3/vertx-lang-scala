@@ -19,14 +19,14 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
+      import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.http.GoAway
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.http.Http2Settings
-import io.vertx.core.Handler
-
+  import io.vertx.core.http.{GoAway => JGoAway}
+  import io.vertx.core.http.{HttpConnection => JHttpConnection}
+  import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+    
 /**
   * Represents an HTTP connection.
   * <p/>
@@ -37,9 +37,9 @@ import io.vertx.core.Handler
   *   <li>[[io.vertx.scala.core.http.HttpConnection#exceptionHandler]]</li>
   * </ul>
   */
-class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
+class HttpConnection(private val _asJava: JHttpConnection) {
 
-  def asJava: io.vertx.core.http.HttpConnection = _asJava
+  def asJava: JHttpConnection = _asJava
 
   /**
     * @return the current connection window size or `-1` for HTTP/1.x
@@ -94,7 +94,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def goAway(errorCode: Long, lastStreamId: Int, debugData: Buffer): HttpConnection = {
-    _asJava.goAway(errorCode, lastStreamId, debugData.asJava.asInstanceOf[io.vertx.core.buffer.Buffer])
+    _asJava.goAway(errorCode, lastStreamId, debugData.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -105,8 +105,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: io.vertx.scala.core.http.GoAway => Unit): HttpConnection = {
-    _asJava.goAwayHandler(funcToMappedHandler[io.vertx.core.http.GoAway, io.vertx.scala.core.http.GoAway](a => GoAway(a))(handler))
+  def goAwayHandler(handler: GoAway => Unit): HttpConnection = {
+    _asJava.goAwayHandler(funcToMappedHandler[JGoAway, GoAway](a => GoAway(a))(handler))
     this
   }
 
@@ -169,8 +169,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   /**
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
-  def settings(): io.vertx.scala.core.http.Http2Settings = {
-    io.vertx.scala.core.http.Http2Settings(_asJava.settings())
+  def settings(): Http2Settings = {
+    Http2Settings(_asJava.settings())
   }
 
   /**
@@ -180,7 +180,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: io.vertx.scala.core.http.Http2Settings): HttpConnection = {
+  def updateSettings(settings: Http2Settings): HttpConnection = {
     _asJava.updateSettings(settings.asJava)
     this
   }
@@ -194,7 +194,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     * @return the future notified when the settings have been acknowledged by the remote endpoint
     */
-  def updateSettingsFuture(settings: io.vertx.scala.core.http.Http2Settings): concurrent.Future[Unit] = {
+  def updateSettingsFuture(settings: Http2Settings): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
     _asJava.updateSettings(settings.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -203,8 +203,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
   /**
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
-  def remoteSettings(): io.vertx.scala.core.http.Http2Settings = {
-    io.vertx.scala.core.http.Http2Settings(_asJava.remoteSettings())
+  def remoteSettings(): Http2Settings = {
+    Http2Settings(_asJava.remoteSettings())
   }
 
   /**
@@ -214,8 +214,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @param handler the handler for remote endpoint settings
     * @return a reference to this, so the API can be used fluently
     */
-  def remoteSettingsHandler(handler: io.vertx.scala.core.http.Http2Settings => Unit): HttpConnection = {
-    _asJava.remoteSettingsHandler(funcToMappedHandler[io.vertx.core.http.Http2Settings, io.vertx.scala.core.http.Http2Settings](a => Http2Settings(a))(handler))
+  def remoteSettingsHandler(handler: Http2Settings => Unit): HttpConnection = {
+    _asJava.remoteSettingsHandler(funcToMappedHandler[JHttp2Settings, Http2Settings](a => Http2Settings(a))(handler))
     this
   }
 
@@ -227,8 +227,8 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
     * @return an async result future notified with pong reply or the failure
     */
   def pingFuture(data: Buffer): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.buffer.Buffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
-    _asJava.ping(data.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.ping(data.asJava.asInstanceOf[JBuffer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -258,7 +258,7 @@ class HttpConnection(private val _asJava: io.vertx.core.http.HttpConnection) {
 
 object HttpConnection {
 
-  def apply(_asJava: io.vertx.core.http.HttpConnection): HttpConnection =
+  def apply(_asJava: JHttpConnection): HttpConnection =
     new HttpConnection(_asJava)
 
 }

@@ -19,12 +19,13 @@ package com.acme.scala.pkg.sub
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-
+import com.acme.pkg.sub.{SubInterface => JSubInterface}
+  
 /**
   */
-class SubInterface(private val _asJava: com.acme.pkg.sub.SubInterface) {
+class SubInterface(private val _asJava: JSubInterface) {
 
-  def asJava: com.acme.pkg.sub.SubInterface = _asJava
+  def asJava: JSubInterface = _asJava
 
   def reverse(s: String): String = {
     _asJava.reverse(s)
@@ -34,7 +35,7 @@ class SubInterface(private val _asJava: com.acme.pkg.sub.SubInterface) {
 
 object SubInterface {
 
-  def apply(_asJava: com.acme.pkg.sub.SubInterface): SubInterface =
+  def apply(_asJava: JSubInterface): SubInterface =
     new SubInterface(_asJava)
 
 }

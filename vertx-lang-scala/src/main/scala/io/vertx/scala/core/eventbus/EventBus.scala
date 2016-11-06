@@ -19,16 +19,16 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.core.eventbus.{EventBus => JEventBus}
-import io.vertx.core.metrics.{Measured => JMeasured}
+  import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+  import io.vertx.core.eventbus.{EventBus => JEventBus}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.eventbus.{SendContext => JSendContext}
-import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.core.Handler
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+  import io.vertx.core.eventbus.{SendContext => JSendContext}
+  import io.vertx.core.eventbus.{Message => JMessage}
+          import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+  import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 
 /**
   * A Vert.x event-bus is a light-weight distributed messaging system which allows different parts of your application,
@@ -40,10 +40,10 @@ import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
   * 
   * Please refer to the documentation for more information on the event bus.
   */
-class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus) 
+class EventBus(private val _asJava: JEventBus) 
     extends Measured {
 
-  def asJava: io.vertx.core.eventbus.EventBus = _asJava
+  def asJava: JEventBus = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -74,7 +74,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @return reply future will be called when any reply from the recipient is received, may be `null`
     */
   def sendFuture[T](address: String, message: AnyRef): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -86,7 +86,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def send(address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): EventBus = {
+  def send(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
     _asJava.send(address, message, options.asJava)
     this
   }
@@ -99,8 +99,8 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return reply future will be called when any reply from the recipient is received, may be `null`
     */
-  def sendFuture[T](address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
+  def sendFuture[T](address: String, message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
     _asJava.send(address, message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -124,7 +124,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def publish(address: String, message: AnyRef, options: io.vertx.scala.core.eventbus.DeliveryOptions): EventBus = {
+  def publish(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
     _asJava.publish(address, message, options.asJava)
     this
   }
@@ -191,7 +191,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return The sender
     */
-  def sender[T](address: String, options: io.vertx.scala.core.eventbus.DeliveryOptions): MessageProducer[T] = {
+  def sender[T](address: String, options: DeliveryOptions): MessageProducer[T] = {
     MessageProducer.apply[T](_asJava.sender(address, options.asJava))
   }
 
@@ -215,7 +215,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return The publisher
     */
-  def publisher[T](address: String, options: io.vertx.scala.core.eventbus.DeliveryOptions): MessageProducer[T] = {
+  def publisher[T](address: String, options: DeliveryOptions): MessageProducer[T] = {
     MessageProducer.apply[T](_asJava.publisher(address, options.asJava))
   }
 
@@ -223,7 +223,7 @@ class EventBus(private val _asJava: io.vertx.core.eventbus.EventBus)
 
 object EventBus {
 
-  def apply(_asJava: io.vertx.core.eventbus.EventBus): EventBus =
+  def apply(_asJava: JEventBus): EventBus =
     new EventBus(_asJava)
 
 }

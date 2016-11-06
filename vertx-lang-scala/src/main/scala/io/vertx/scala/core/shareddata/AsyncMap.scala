@@ -19,15 +19,15 @@ package io.vertx.scala.core.shareddata
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
-
+import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
+          
 /**
   *
   * An asynchronous map.
   */
-class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V]) {
+class AsyncMap[K, V](private val _asJava: JAsyncMap[K, V]) {
 
-  def asJava: io.vertx.core.shareddata.AsyncMap[K, V] = _asJava
+  def asJava: JAsyncMap[K, V] = _asJava
 
   /**
     * Get a value from the map, asynchronously.
@@ -165,7 +165,7 @@ class AsyncMap[K, V](private val _asJava: io.vertx.core.shareddata.AsyncMap[K, V
 
 object AsyncMap {
 
-  def apply[K, V](_asJava: io.vertx.core.shareddata.AsyncMap[K, V]): AsyncMap[K, V] =
+  def apply[K, V](_asJava: JAsyncMap[K, V]): AsyncMap[K, V] =
     new AsyncMap(_asJava)
 
 }

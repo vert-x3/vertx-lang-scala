@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 
 /**
@@ -29,7 +30,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
   /**
     * Set proxy host.
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -40,7 +41,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
   /**
     * Set proxy password.
     */
-  def setPassword(value:String) = {
+  def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
@@ -51,7 +52,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
   /**
     * Set proxy port.
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -64,7 +65,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
     *
     * ProxyType can be HTTP, SOCKS4 and SOCKS5
     */
-  def setType(value:io.vertx.core.net.ProxyType) = {
+  def setType(value: io.vertx.core.net.ProxyType) = {
     asJava.setType(value)
     this
   }
@@ -75,7 +76,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
   /**
     * Set proxy username.
     */
-  def setUsername(value:String) = {
+  def setUsername(value: String) = {
     asJava.setUsername(value)
     this
   }
@@ -87,7 +88,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
 object ProxyOptions {
   
   def apply() = {
-    new ProxyOptions(new JProxyOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ProxyOptions(new JProxyOptions(emptyObj()))
   }
   
   def apply(t: JProxyOptions) = {

@@ -14,42 +14,17 @@
  * under the License.
  */
 
-package io.vertx.scala.core.datagram
+package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
-import io.vertx.scala.core.net.NetworkOptions
 
 /**
-  * Options used to configure a datagram socket.
   */
 
-class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
-
-  /**
-    * Set if the socket can receive broadcast packets
-    */
-  def setBroadcast(value: Boolean) = {
-    asJava.setBroadcast(value)
-    this
-  }
-  def isBroadcast = {
-    asJava.isBroadcast()
-  }
-
-  /**
-    * Set if IP v6 should be used
-    */
-  def setIpV6(value: Boolean) = {
-    asJava.setIpV6(value)
-    this
-  }
-  def isIpV6 = {
-    asJava.isIpV6()
-  }
+class NetworkOptions(val asJava: JNetworkOptions) {
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
@@ -60,39 +35,6 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
   }
   def getLogActivity = {
     asJava.getLogActivity()
-  }
-
-  /**
-    * Set if loopback mode is disabled
-    */
-  def setLoopbackModeDisabled(value: Boolean) = {
-    asJava.setLoopbackModeDisabled(value)
-    this
-  }
-  def isLoopbackModeDisabled = {
-    asJava.isLoopbackModeDisabled()
-  }
-
-  /**
-    * Set the multicast network interface address
-    */
-  def setMulticastNetworkInterface(value: String) = {
-    asJava.setMulticastNetworkInterface(value)
-    this
-  }
-  def getMulticastNetworkInterface = {
-    asJava.getMulticastNetworkInterface()
-  }
-
-  /**
-    * Set the multicast ttl value
-    */
-  def setMulticastTimeToLive(value: Int) = {
-    asJava.setMulticastTimeToLive(value)
-    this
-  }
-  def getMulticastTimeToLive = {
-    asJava.getMulticastTimeToLive()
   }
 
   /**
@@ -140,23 +82,3 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
   }
 }
 
-object DatagramSocketOptions {
-  
-  def apply() = {
-    new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
-  }
-  
-  def apply(t: JDatagramSocketOptions) = {
-    if(t != null)
-      new DatagramSocketOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):DatagramSocketOptions = {
-    if(json != null)
-      new DatagramSocketOptions(new JDatagramSocketOptions(json))
-    else
-      null
-  }
-}

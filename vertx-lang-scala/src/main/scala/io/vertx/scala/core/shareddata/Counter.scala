@@ -19,15 +19,15 @@ package io.vertx.scala.core.shareddata
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
-
+import io.vertx.core.shareddata.{Counter => JCounter}
+        
 /**
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
   * 
   */
-class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
+class Counter(private val _asJava: JCounter) {
 
-  def asJava: io.vertx.core.shareddata.Counter = _asJava
+  def asJava: JCounter = _asJava
 
   /**
     * Get the current value of the counter
@@ -108,7 +108,7 @@ class Counter(private val _asJava: io.vertx.core.shareddata.Counter) {
 
 object Counter {
 
-  def apply(_asJava: io.vertx.core.shareddata.Counter): Counter =
+  def apply(_asJava: JCounter): Counter =
     new Counter(_asJava)
 
 }

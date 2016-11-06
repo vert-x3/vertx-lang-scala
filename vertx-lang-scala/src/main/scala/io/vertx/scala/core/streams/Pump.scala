@@ -19,9 +19,10 @@ package io.vertx.scala.core.streams
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{Pump => JPump}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.streams.{Pump => JPump}
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
@@ -43,9 +44,9 @@ import io.vertx.core.streams.{Pump => JPump}
   * 
   * Please see the documentation for more information.
   */
-class Pump(private val _asJava: io.vertx.core.streams.Pump) {
+class Pump(private val _asJava: JPump) {
 
-  def asJava: io.vertx.core.streams.Pump = _asJava
+  def asJava: JPump = _asJava
 
   /**
     * Set the write queue max size to `maxSize`
@@ -86,15 +87,15 @@ class Pump(private val _asJava: io.vertx.core.streams.Pump) {
 
 object Pump {
 
-  def apply(_asJava: io.vertx.core.streams.Pump): Pump =
+  def apply(_asJava: JPump): Pump =
     new Pump(_asJava)
 
   def pump[T](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]]))
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]]))
   }
 
   def pump[T](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[io.vertx.core.streams.ReadStream[T]], ws.asJava.asInstanceOf[io.vertx.core.streams.WriteStream[T]], writeQueueMaxSize))
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]], writeQueueMaxSize))
   }
 
 }

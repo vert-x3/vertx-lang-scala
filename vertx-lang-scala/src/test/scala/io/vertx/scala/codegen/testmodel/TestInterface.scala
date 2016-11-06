@@ -19,28 +19,28 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.TestDataObject
-import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
-import io.vertx.codegen.testmodel.TestEnum
-import io.vertx.core.json.JsonObject
-import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
-import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
-import io.vertx.codegen.testmodel.TestGenEnum
-import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
-import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
-import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
-import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
-import io.vertx.core.json.JsonArray
-import io.vertx.core.Handler
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
+        import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+    import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
+        import io.vertx.codegen.testmodel.TestEnum
+    import io.vertx.core.json.JsonObject
+        import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
+  import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
+  import io.vertx.codegen.testmodel.TestGenEnum
+    import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+  import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+  import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
+  import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
+  import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
+  import io.vertx.core.json.JsonArray
+        import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 
 /**
   */
-class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterface) 
+class TestInterface(private val _asJava: JTestInterface) 
     extends SuperInterface2 {
 
-  def asJava: io.vertx.codegen.testmodel.TestInterface = _asJava
+  def asJava: JTestInterface = _asJava
 
   def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
     _asJava.otherSuperMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
@@ -67,7 +67,7 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
   }
 
   def methodWithHandlerVertxGenReturn(expected: String): RefedInterface1 => Unit = {
-    handlerToMappedFunction[io.vertx.codegen.testmodel.RefedInterface1, RefedInterface1](x => x.asJava)(_asJava.methodWithHandlerVertxGenReturn(expected))
+    handlerToMappedFunction[JRefedInterface1, RefedInterface1](x => x.asJava)(_asJava.methodWithHandlerVertxGenReturn(expected))
   }
 
   def methodWithHandlerAsyncResultByteFuture(sendFailure: Boolean): concurrent.Future[Byte] = {
@@ -124,8 +124,8 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultDataObjectFuture(sendFailure: Boolean): concurrent.Future[io.vertx.scala.codegen.testmodel.TestDataObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.TestDataObject,io.vertx.scala.codegen.testmodel.TestDataObject]((x => io.vertx.scala.codegen.testmodel.TestDataObject(x)))
+  def methodWithHandlerAsyncResultDataObjectFuture(sendFailure: Boolean): concurrent.Future[TestDataObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestDataObject,TestDataObject]((x => io.vertx.scala.codegen.testmodel.TestDataObject(x)))
     _asJava.methodWithHandlerAsyncResultDataObject(sendFailure, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -143,14 +143,14 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
   }
 
   def methodWithUserTypes(refed: RefedInterface1): Unit = {
-    _asJava.methodWithUserTypes(refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
+    _asJava.methodWithUserTypes(refed.asJava.asInstanceOf[JRefedInterface1])
   }
 
   def methodWithObjectParam(str: String, obj: AnyRef): Unit = {
     _asJava.methodWithObjectParam(str, obj)
   }
 
-  def methodWithDataObjectParam(dataObject: io.vertx.scala.codegen.testmodel.TestDataObject): Unit = {
+  def methodWithDataObjectParam(dataObject: TestDataObject): Unit = {
     _asJava.methodWithDataObjectParam(dataObject.asJava)
   }
 
@@ -159,21 +159,21 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
   }
 
   def methodWithHandlerAsyncResultUserTypesFuture(): concurrent.Future[RefedInterface1] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.RefedInterface1,RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRefedInterface1,RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
     _asJava.methodWithHandlerAsyncResultUserTypes(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithConcreteHandlerUserTypeSubtype(handler: ConcreteHandlerUserType): Unit = {
-    _asJava.methodWithConcreteHandlerUserTypeSubtype(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.ConcreteHandlerUserType])
+    _asJava.methodWithConcreteHandlerUserTypeSubtype(handler.asJava.asInstanceOf[JConcreteHandlerUserType])
   }
 
   def methodWithAbstractHandlerUserTypeSubtype(handler: AbstractHandlerUserType): Unit = {
-    _asJava.methodWithAbstractHandlerUserTypeSubtype(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.AbstractHandlerUserType])
+    _asJava.methodWithAbstractHandlerUserTypeSubtype(handler.asJava.asInstanceOf[JAbstractHandlerUserType])
   }
 
   def methodWithConcreteHandlerUserTypeSubtypeExtension(handler: ConcreteHandlerUserTypeExtension): Unit = {
-    _asJava.methodWithConcreteHandlerUserTypeSubtypeExtension(handler.asJava.asInstanceOf[io.vertx.codegen.testmodel.ConcreteHandlerUserTypeExtension])
+    _asJava.methodWithConcreteHandlerUserTypeSubtypeExtension(handler.asJava.asInstanceOf[JConcreteHandlerUserTypeExtension])
   }
 
   def methodWithHandlerVoid(handler: () => Unit): Unit = {
@@ -190,8 +190,8 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     _asJava.methodWithHandlerThrowable(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
   }
 
-  def methodWithHandlerDataObject(handler: io.vertx.scala.codegen.testmodel.TestDataObject => Unit): Unit = {
-    _asJava.methodWithHandlerDataObject(funcToMappedHandler[io.vertx.codegen.testmodel.TestDataObject, io.vertx.scala.codegen.testmodel.TestDataObject](a => TestDataObject(a))(handler))
+  def methodWithHandlerDataObject(handler: TestDataObject => Unit): Unit = {
+    _asJava.methodWithHandlerDataObject(funcToMappedHandler[JTestDataObject, TestDataObject](a => TestDataObject(a))(handler))
   }
 
   def methodWithHandlerGenericUserType[U](value: U, handler: GenericRefedInterface[U] => Unit): Unit = {
@@ -199,7 +199,7 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
   }
 
   def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U): concurrent.Future[GenericRefedInterface[U]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.GenericRefedInterface[U],GenericRefedInterface[U]]((x => if (x == null) null else GenericRefedInterface.apply[U](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[U],GenericRefedInterface[U]]((x => if (x == null) null else GenericRefedInterface.apply[U](x)))
     _asJava.methodWithHandlerAsyncResultGenericUserType(value, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -252,12 +252,12 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     RefedInterface2.apply(_asJava.methodWithAbstractVertxGenReturn())
   }
 
-  def methodWithDataObjectReturn(): io.vertx.scala.codegen.testmodel.TestDataObject = {
-    io.vertx.scala.codegen.testmodel.TestDataObject(_asJava.methodWithDataObjectReturn())
+  def methodWithDataObjectReturn(): TestDataObject = {
+    TestDataObject(_asJava.methodWithDataObjectReturn())
   }
 
-  def methodWithDataObjectNullReturn(): io.vertx.scala.codegen.testmodel.TestDataObject = {
-    io.vertx.scala.codegen.testmodel.TestDataObject(_asJava.methodWithDataObjectNullReturn())
+  def methodWithDataObjectNullReturn(): TestDataObject = {
+    TestDataObject(_asJava.methodWithDataObjectNullReturn())
   }
 
   def methodWithGenericUserTypeReturn[U](value: U): GenericRefedInterface[U] = {
@@ -269,15 +269,15 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
   }
 
   def overloadedMethod(str: String, refed: RefedInterface1): String = {
-    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
+    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[JRefedInterface1])
   }
 
   def overloadedMethod(str: String, refed: RefedInterface1, handler: String => Unit): String = {
-    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], funcToHandler[java.lang.String](handler))
+    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[JRefedInterface1], funcToHandler[java.lang.String](handler))
   }
 
   def overloadedMethod(str: String, refed: RefedInterface1, period: Long, handler: String => Unit): String = {
-    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], period, funcToHandler[java.lang.String](handler))
+    _asJava.overloadedMethod(str, refed.asJava.asInstanceOf[JRefedInterface1], period, funcToHandler[java.lang.String](handler))
   }
 
   def methodWithGenericReturn[U](`type`: String): U = {
@@ -324,78 +324,78 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
     cached_2
   }
 
-  def methodWithJsonObjectReturn(): io.vertx.core.json.JsonObject = {
+  def methodWithJsonObjectReturn(): JsonObject = {
     _asJava.methodWithJsonObjectReturn()
   }
 
-  def methodWithNullJsonObjectReturn(): io.vertx.core.json.JsonObject = {
+  def methodWithNullJsonObjectReturn(): JsonObject = {
     _asJava.methodWithNullJsonObjectReturn()
   }
 
-  def methodWithComplexJsonObjectReturn(): io.vertx.core.json.JsonObject = {
+  def methodWithComplexJsonObjectReturn(): JsonObject = {
     _asJava.methodWithComplexJsonObjectReturn()
   }
 
-  def methodWithJsonArrayReturn(): io.vertx.core.json.JsonArray = {
+  def methodWithJsonArrayReturn(): JsonArray = {
     _asJava.methodWithJsonArrayReturn()
   }
 
-  def methodWithNullJsonArrayReturn(): io.vertx.core.json.JsonArray = {
+  def methodWithNullJsonArrayReturn(): JsonArray = {
     _asJava.methodWithNullJsonArrayReturn()
   }
 
-  def methodWithComplexJsonArrayReturn(): io.vertx.core.json.JsonArray = {
+  def methodWithComplexJsonArrayReturn(): JsonArray = {
     _asJava.methodWithComplexJsonArrayReturn()
   }
 
-  def methodWithJsonParams(jsonObject: io.vertx.core.json.JsonObject, jsonArray: io.vertx.core.json.JsonArray): Unit = {
+  def methodWithJsonParams(jsonObject: JsonObject, jsonArray: JsonArray): Unit = {
     _asJava.methodWithJsonParams(jsonObject, jsonArray)
   }
 
-  def methodWithNullJsonParams(jsonObject: io.vertx.core.json.JsonObject, jsonArray: io.vertx.core.json.JsonArray): Unit = {
+  def methodWithNullJsonParams(jsonObject: JsonObject, jsonArray: JsonArray): Unit = {
     _asJava.methodWithNullJsonParams(jsonObject, jsonArray)
   }
 
-  def methodWithHandlerJson(jsonObjectHandler: io.vertx.core.json.JsonObject => Unit, jsonArrayHandler: io.vertx.core.json.JsonArray => Unit): Unit = {
-    _asJava.methodWithHandlerJson(funcToHandler[io.vertx.core.json.JsonObject](jsonObjectHandler), funcToHandler[io.vertx.core.json.JsonArray](jsonArrayHandler))
+  def methodWithHandlerJson(jsonObjectHandler: JsonObject => Unit, jsonArrayHandler: JsonArray => Unit): Unit = {
+    _asJava.methodWithHandlerJson(funcToHandler[JsonObject](jsonObjectHandler), funcToHandler[JsonArray](jsonArrayHandler))
   }
 
-  def methodWithHandlerComplexJson(jsonObjectHandler: io.vertx.core.json.JsonObject => Unit, jsonArrayHandler: io.vertx.core.json.JsonArray => Unit): Unit = {
-    _asJava.methodWithHandlerComplexJson(funcToHandler[io.vertx.core.json.JsonObject](jsonObjectHandler), funcToHandler[io.vertx.core.json.JsonArray](jsonArrayHandler))
+  def methodWithHandlerComplexJson(jsonObjectHandler: JsonObject => Unit, jsonArrayHandler: JsonArray => Unit): Unit = {
+    _asJava.methodWithHandlerComplexJson(funcToHandler[JsonObject](jsonObjectHandler), funcToHandler[JsonArray](jsonArrayHandler))
   }
 
-  def methodWithHandlerAsyncResultJsonObjectFuture(): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def methodWithHandlerAsyncResultJsonObjectFuture(): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.methodWithHandlerAsyncResultJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultNullJsonObjectFuture(): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def methodWithHandlerAsyncResultNullJsonObjectFuture(): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.methodWithHandlerAsyncResultNullJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultComplexJsonObjectFuture(): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def methodWithHandlerAsyncResultComplexJsonObjectFuture(): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.methodWithHandlerAsyncResultComplexJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultJsonArrayFuture(): concurrent.Future[io.vertx.core.json.JsonArray] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonArray,io.vertx.core.json.JsonArray]((x => x))
+  def methodWithHandlerAsyncResultJsonArrayFuture(): concurrent.Future[JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray,JsonArray]((x => x))
     _asJava.methodWithHandlerAsyncResultJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultNullJsonArrayFuture(): concurrent.Future[io.vertx.core.json.JsonArray] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonArray,io.vertx.core.json.JsonArray]((x => x))
+  def methodWithHandlerAsyncResultNullJsonArrayFuture(): concurrent.Future[JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray,JsonArray]((x => x))
     _asJava.methodWithHandlerAsyncResultNullJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultComplexJsonArrayFuture(): concurrent.Future[io.vertx.core.json.JsonArray] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonArray,io.vertx.core.json.JsonArray]((x => x))
+  def methodWithHandlerAsyncResultComplexJsonArrayFuture(): concurrent.Future[JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray,JsonArray]((x => x))
     _asJava.methodWithHandlerAsyncResultComplexJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -435,7 +435,7 @@ class TestInterface(private val _asJava: io.vertx.codegen.testmodel.TestInterfac
 
 object TestInterface {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.TestInterface): TestInterface =
+  def apply(_asJava: JTestInterface): TestInterface =
     new TestInterface(_asJava)
 
   def staticFactoryMethod(foo: String): RefedInterface1 = {

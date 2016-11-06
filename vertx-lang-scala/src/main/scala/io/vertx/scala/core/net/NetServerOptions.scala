@@ -18,7 +18,12 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
+import io.vertx.core.http.ClientAuth
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetServer]].
@@ -29,7 +34,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the accept back log
     */
-  def setAcceptBacklog(value:Int) = {
+  def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this
   }
@@ -40,7 +45,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether client auth is required
     */
-  def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
+  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this
   }
@@ -51,7 +56,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether client auth is required
     */
-  def setClientAuthRequired(value:Boolean) = {
+  def setClientAuthRequired(value: Boolean) = {
     asJava.setClientAuthRequired(value)
     this
   }
@@ -62,7 +67,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Add a CRL path
     */
-  def addCrlPath(value:String) = {
+  def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
@@ -73,7 +78,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
+  def addCrlValue(value: JBuffer) = {
     asJava.addCrlValue(value)
     this
   }
@@ -84,7 +89,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value:String) = {
+  def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
@@ -95,7 +100,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value:String) = {
+  def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
@@ -106,7 +111,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the host
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -118,14 +123,14 @@ class NetServerOptions(val asJava: JNetServerOptions) {
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value:Int) = {
+  def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
   def getIdleTimeout = {
     asJava.getIdleTimeout()
   }
-  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -133,7 +138,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
@@ -141,14 +146,14 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value:Boolean) = {
+  def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
   def getLogActivity = {
     asJava.getLogActivity()
   }
-  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -156,7 +161,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
@@ -164,7 +169,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+  def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
@@ -172,7 +177,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
@@ -180,7 +185,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -188,7 +193,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the port
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -199,7 +204,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value:Int) = {
+  def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
@@ -210,7 +215,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value:Boolean) = {
+  def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
@@ -221,7 +226,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value:Int) = {
+  def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
@@ -232,7 +237,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value:Int) = {
+  def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
@@ -243,7 +248,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
@@ -254,7 +259,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value:Boolean) = {
+  def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
@@ -265,7 +270,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value:Boolean) = {
+  def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
@@ -276,7 +281,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value:Int) = {
+  def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
@@ -287,7 +292,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
@@ -295,7 +300,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value:Boolean) = {
+  def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
@@ -306,7 +311,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value:Boolean) = {
+  def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
@@ -318,7 +323,7 @@ class NetServerOptions(val asJava: JNetServerOptions) {
 object NetServerOptions {
   
   def apply() = {
-    new NetServerOptions(new JNetServerOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new NetServerOptions(new JNetServerOptions(emptyObj()))
   }
   
   def apply(t: JNetServerOptions) = {

@@ -20,19 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+    import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+      import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.http.{HttpFrame => JHttpFrame}
+  import io.vertx.core.http.HttpVersion
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.{MultiMap => JMultiMap}
+  import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.core.Handler
-import io.vertx.core.net.{NetSocket => JNetSocket}
+      import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.net.{NetSocket => JNetSocket}
 
@@ -45,10 +45,10 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientResponse) 
+class HttpClientResponse(private val _asJava: JHttpClientResponse) 
     extends ReadStream[Buffer] {
 
-  def asJava: io.vertx.core.http.HttpClientResponse = _asJava
+  def asJava: JHttpClientResponse = _asJava
 
   def resume(): HttpClientResponse = {
     _asJava.resume()
@@ -190,7 +190,7 @@ class HttpClientResponse(private val _asJava: io.vertx.core.http.HttpClientRespo
 
 object HttpClientResponse {
 
-  def apply(_asJava: io.vertx.core.http.HttpClientResponse): HttpClientResponse =
+  def apply(_asJava: JHttpClientResponse): HttpClientResponse =
     new HttpClientResponse(_asJava)
 
 }

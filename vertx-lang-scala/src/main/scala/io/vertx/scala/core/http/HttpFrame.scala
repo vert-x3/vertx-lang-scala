@@ -19,16 +19,17 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * An HTTP/2 frame.
   */
-class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
+class HttpFrame(private val _asJava: JHttpFrame) {
 
-  def asJava: io.vertx.core.http.HttpFrame = _asJava
+  def asJava: JHttpFrame = _asJava
 
   /**
     * @return the 8-bit type of the frame
@@ -67,7 +68,7 @@ class HttpFrame(private val _asJava: io.vertx.core.http.HttpFrame) {
 
 object HttpFrame {
 
-  def apply(_asJava: io.vertx.core.http.HttpFrame): HttpFrame =
+  def apply(_asJava: JHttpFrame): HttpFrame =
     new HttpFrame(_asJava)
 
 }

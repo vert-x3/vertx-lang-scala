@@ -19,11 +19,11 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.Handler
-import io.vertx.core.{Future => JFuture}
+      import io.vertx.core.{Future => JFuture}
 
 /**
   * An executor for executing blocking code in Vert.x .
@@ -31,10 +31,10 @@ import io.vertx.core.{Future => JFuture}
   * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
-class WorkerExecutor(private val _asJava: io.vertx.core.WorkerExecutor) 
+class WorkerExecutor(private val _asJava: JWorkerExecutor) 
     extends Measured {
 
-  def asJava: io.vertx.core.WorkerExecutor = _asJava
+  def asJava: JWorkerExecutor = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -88,7 +88,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object WorkerExecutor {
 
-  def apply(_asJava: io.vertx.core.WorkerExecutor): WorkerExecutor =
+  def apply(_asJava: JWorkerExecutor): WorkerExecutor =
     new WorkerExecutor(_asJava)
 
 }

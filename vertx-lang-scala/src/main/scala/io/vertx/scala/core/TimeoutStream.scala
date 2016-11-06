@@ -20,11 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{TimeoutStream => JTimeoutStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.{TimeoutStream => JTimeoutStream}
+        import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-
+  
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
   * it can be once or several times depending on the nature of the timer related to this stream. The
@@ -33,10 +33,10 @@ import io.vertx.core.Handler
   * Pausing the timer inhibits the timer shots until the stream is resumed. Setting a null handler callback cancels
   * the timer.
   */
-class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream) 
+class TimeoutStream(private val _asJava: JTimeoutStream) 
     extends ReadStream[Long] {
 
-  def asJava: io.vertx.core.TimeoutStream = _asJava
+  def asJava: JTimeoutStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): TimeoutStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -75,7 +75,7 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
 
 object TimeoutStream {
 
-  def apply(_asJava: io.vertx.core.TimeoutStream): TimeoutStream =
+  def apply(_asJava: JTimeoutStream): TimeoutStream =
     new TimeoutStream(_asJava)
 
 }

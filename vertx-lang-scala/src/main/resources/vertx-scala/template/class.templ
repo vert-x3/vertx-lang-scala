@@ -21,26 +21,37 @@
  * under the License.\n
  */\n\n
 
-package @{type.raw.translatePackageName("scala")}\n
+@code{var packageName = type.raw.translatePackageName("scala");}
+package @{packageName}\n
 \n
 
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
+import @{typeToAliasedType(type)+"\n"}
 @foreach{importedType : importedTypes}
-	@if{importedType.kind == CLASS_API}
+  @if{importedType.name.contains(".impl.")}
+	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.simpleName+" => "+toAliasedTypeName(importedType)+"}\n"}
+import @{typeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
-import @{importedType.name.replace(importedType.simpleName,"")+'{'+importedType.simpleName+" => "+toAliasedTypeName(importedType)+"}\n"}
+import @{typeToAliasedType(importedType)+"\n"}
+	@else{importedType.kind == CLASS_JSON_OBJECT ||
+				importedType.kind == CLASS_JSON_ARRAY ||
+				importedType.kind == CLASS_ENUM}
+import @{importedType.raw}\n
 	@else{importedType.kind != CLASS_ASYNC_RESULT &&
-	      !importedType.packageName.equals("java.lang") &&
-        importedType.kind != CLASS_LIST &&
-        importedType.kind != CLASS_SET &&
-        importedType.kind != CLASS_MAP}
-import @{importedType}\n
+				!importedType.packageName.equals("java.lang") &&
+				importedType.kind != CLASS_HANDLER &&
+				importedType.kind != CLASS_LIST &&
+				importedType.kind != CLASS_SET &&
+				importedType.kind != CLASS_MAP}
+import @{typeToAliasedType(importedType)+"\n"}
+		@if{packageName != importedType.raw.translatePackageName("scala")}
+import @{importedType.raw.translateName("scala")}\n
+		@end{}
 	@end{}
 @end{}
 \n

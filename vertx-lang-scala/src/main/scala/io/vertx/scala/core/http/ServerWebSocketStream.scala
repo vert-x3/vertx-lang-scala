@@ -19,21 +19,21 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+      import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+    import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSocketStream) 
+class ServerWebSocketStream(private val _asJava: JServerWebSocketStream) 
     extends ReadStream[ServerWebSocket] {
 
-  def asJava: io.vertx.core.http.ServerWebSocketStream = _asJava
+  def asJava: JServerWebSocketStream = _asJava
 
   def exceptionHandler(handler: Throwable => Unit): ServerWebSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
@@ -64,7 +64,7 @@ class ServerWebSocketStream(private val _asJava: io.vertx.core.http.ServerWebSoc
 
 object ServerWebSocketStream {
 
-  def apply(_asJava: io.vertx.core.http.ServerWebSocketStream): ServerWebSocketStream =
+  def apply(_asJava: JServerWebSocketStream): ServerWebSocketStream =
     new ServerWebSocketStream(_asJava)
 
 }

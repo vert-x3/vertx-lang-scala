@@ -19,11 +19,11 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
-import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{Context => JContext}
+        import io.vertx.core.{Vertx => JVertx}
+  import io.vertx.core.json.JsonObject
+          import io.vertx.core.{Future => JFuture}
+  import io.vertx.core.{Context => JContext}
 
 /**
   * The execution context of a scala-function execution.
@@ -57,9 +57,9 @@ import io.vertx.core.{Context => JContext}
   * 
   * This class also provides [[io.vertx.scala.core.Context#runOnContext]] which allows an action to be executed asynchronously using the same context.
   */
-class Context(private val _asJava: io.vertx.core.Context) {
+class Context(private val _asJava: JContext) {
 
-  def asJava: io.vertx.core.Context = _asJava
+  def asJava: JContext = _asJava
 
   /**
     * Run the specified action asynchronously on the same context, some time after the current execution has completed.
@@ -114,7 +114,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
     * the verticle was deployed.
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
-  def config(): scala.Option[io.vertx.core.json.JsonObject] = {
+  def config(): scala.Option[JsonObject] = {
         scala.Option(_asJava.config())
   }
 
@@ -216,7 +216,7 @@ class Context(private val _asJava: io.vertx.core.Context) {
 
 object Context {
 
-  def apply(_asJava: io.vertx.core.Context): Context =
+  def apply(_asJava: JContext): Context =
     new Context(_asJava)
 
   def isOnWorkerThread(): Boolean = {

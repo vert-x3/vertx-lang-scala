@@ -19,18 +19,20 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import java.util.Map.Entry
 import io.vertx.core.{MultiMap => JMultiMap}
-
+    import java.util.Map.{Entry => JEntry}
+import java.util.Map.Entry
+  import io.vertx.core.{MultiMap => JMultiMap}
+      
 /**
   * This class represents a MultiMap of String keys to a List of String values.
   * 
   * It's useful in Vert.x to represent things in Vert.x like HTTP headers and HTTP parameters which allow
   * multiple values for keys.
   */
-class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
+class MultiMap(private val _asJava: JMultiMap) {
 
-  def asJava: io.vertx.core.MultiMap = _asJava
+  def asJava: JMultiMap = _asJava
 
   /**
     * Returns the value of with the specified name.  If there are
@@ -91,7 +93,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def addAll(map: MultiMap): MultiMap = {
-    _asJava.addAll(map.asJava.asInstanceOf[io.vertx.core.MultiMap])
+    _asJava.addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -113,7 +115,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def setAll(map: MultiMap): MultiMap = {
-    _asJava.setAll(map.asJava.asInstanceOf[io.vertx.core.MultiMap])
+    _asJava.setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -147,7 +149,7 @@ class MultiMap(private val _asJava: io.vertx.core.MultiMap) {
 
 object MultiMap {
 
-  def apply(_asJava: io.vertx.core.MultiMap): MultiMap =
+  def apply(_asJava: JMultiMap): MultiMap =
     new MultiMap(_asJava)
 
   def caseInsensitiveMultiMap(): MultiMap = {

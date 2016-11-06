@@ -29,7 +29,7 @@
   }
 
   def writeDelegateType(type) {
-    return type.raw.name+(writeTypeParamsWithVariance(typeParams));
+    return 'J'+type.raw.simpleName+(writeTypeParamsWithVariance(typeParams));
   }
 
 }

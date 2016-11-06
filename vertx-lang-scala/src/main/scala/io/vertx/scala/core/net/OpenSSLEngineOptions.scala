@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 
 /**
@@ -35,7 +36,7 @@ class OpenSSLEngineOptions(val asJava: JOpenSSLEngineOptions) {
   /**
     * Set whether session cache is enabled in open SSL session server context
     */
-  def setSessionCacheEnabled(value:Boolean) = {
+  def setSessionCacheEnabled(value: Boolean) = {
     asJava.setSessionCacheEnabled(value)
     this
   }
@@ -47,7 +48,7 @@ class OpenSSLEngineOptions(val asJava: JOpenSSLEngineOptions) {
 object OpenSSLEngineOptions {
   
   def apply() = {
-    new OpenSSLEngineOptions(new JOpenSSLEngineOptions(io.vertx.lang.scala.json.Json.emptyObj()))
+    new OpenSSLEngineOptions(new JOpenSSLEngineOptions(emptyObj()))
   }
   
   def apply(t: JOpenSSLEngineOptions) = {

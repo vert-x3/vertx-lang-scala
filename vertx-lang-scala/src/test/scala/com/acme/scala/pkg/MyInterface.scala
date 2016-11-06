@@ -20,18 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import com.acme.pkg.{MyInterface => JMyInterface}
-import com.acme.pkg.sub.{SubInterface => JSubInterface}
+  import com.acme.pkg.{MyInterface => JMyInterface}
+  import com.acme.pkg.sub.{SubInterface => JSubInterface}
 import com.acme.scala.pkg.sub.SubInterface
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
-import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
+  import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 import io.vertx.scala.codegen.testmodel.TestInterface
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 
 /**
   */
-class MyInterface(private val _asJava: com.acme.pkg.MyInterface) {
+class MyInterface(private val _asJava: JMyInterface) {
 
-  def asJava: com.acme.pkg.MyInterface = _asJava
+  def asJava: JMyInterface = _asJava
 
   def sub(): SubInterface = {
     SubInterface.apply(_asJava.sub())
@@ -45,7 +46,7 @@ class MyInterface(private val _asJava: com.acme.pkg.MyInterface) {
 
 object MyInterface {
 
-  def apply(_asJava: com.acme.pkg.MyInterface): MyInterface =
+  def apply(_asJava: JMyInterface): MyInterface =
     new MyInterface(_asJava)
 
   def create(): MyInterface = {

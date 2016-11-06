@@ -19,13 +19,14 @@ package io.vertx.scala.core.file
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 
 /**
   * Represents properties of the file system.
   */
-class FileSystemProps(private val _asJava: io.vertx.core.file.FileSystemProps) {
+class FileSystemProps(private val _asJava: JFileSystemProps) {
 
-  def asJava: io.vertx.core.file.FileSystemProps = _asJava
+  def asJava: JFileSystemProps = _asJava
 
   /**
     * @return The total space on the file system, in bytes
@@ -52,7 +53,7 @@ class FileSystemProps(private val _asJava: io.vertx.core.file.FileSystemProps) {
 
 object FileSystemProps {
 
-  def apply(_asJava: io.vertx.core.file.FileSystemProps): FileSystemProps =
+  def apply(_asJava: JFileSystemProps): FileSystemProps =
     new FileSystemProps(_asJava)
 
 }

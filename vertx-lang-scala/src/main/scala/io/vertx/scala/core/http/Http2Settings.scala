@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConversions._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 /**
@@ -32,7 +33,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set  HTTP/2 setting.
     */
-  def setHeaderTableSize(value:Long) = {
+  def setHeaderTableSize(value: Long) = {
     asJava.setHeaderTableSize(value)
     this
   }
@@ -43,7 +44,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setInitialWindowSize(value:Int) = {
+  def setInitialWindowSize(value: Int) = {
     asJava.setInitialWindowSize(value)
     this
   }
@@ -54,7 +55,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxConcurrentStreams(value:Long) = {
+  def setMaxConcurrentStreams(value: Long) = {
     asJava.setMaxConcurrentStreams(value)
     this
   }
@@ -65,7 +66,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxFrameSize(value:Int) = {
+  def setMaxFrameSize(value: Int) = {
     asJava.setMaxFrameSize(value)
     this
   }
@@ -76,7 +77,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxHeaderListSize(value:Int) = {
+  def setMaxHeaderListSize(value: Int) = {
     asJava.setMaxHeaderListSize(value)
     this
   }
@@ -87,7 +88,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setPushEnabled(value:Boolean) = {
+  def setPushEnabled(value: Boolean) = {
     asJava.setPushEnabled(value)
     this
   }
@@ -99,7 +100,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
 object Http2Settings {
   
   def apply() = {
-    new Http2Settings(new JHttp2Settings(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Http2Settings(new JHttp2Settings(emptyObj()))
   }
   
   def apply(t: JHttp2Settings) = {

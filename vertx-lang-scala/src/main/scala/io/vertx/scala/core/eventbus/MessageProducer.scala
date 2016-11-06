@@ -19,22 +19,22 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.DeliveryOptions
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+      import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+  import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.core.Handler
-import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+  import io.vertx.core.eventbus.{Message => JMessage}
+        import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 
 /**
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProducer[T]) 
+class MessageProducer[T](private val _asJava: JMessageProducer[T]) 
     extends WriteStream[T] {
 
-  def asJava: io.vertx.core.eventbus.MessageProducer[T] = _asJava
+  def asJava: JMessageProducer[T] = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
@@ -61,7 +61,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
   }
 
   def sendFuture[R](message: T): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.eventbus.Message[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
     MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
@@ -91,7 +91,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
     * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return this producer object
     */
-  def deliveryOptions(options: io.vertx.scala.core.eventbus.DeliveryOptions): MessageProducer[T] = {
+  def deliveryOptions(options: DeliveryOptions): MessageProducer[T] = {
     _asJava.deliveryOptions(options.asJava)
     this
   }
@@ -121,7 +121,7 @@ class MessageProducer[T](private val _asJava: io.vertx.core.eventbus.MessageProd
 
 object MessageProducer {
 
-  def apply[T](_asJava: io.vertx.core.eventbus.MessageProducer[T]): MessageProducer[T] =
+  def apply[T](_asJava: JMessageProducer[T]): MessageProducer[T] =
     new MessageProducer(_asJava)
 
 }

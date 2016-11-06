@@ -19,20 +19,20 @@ package io.vertx.scala.core.datagram
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+      import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
+  import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
-import io.vertx.core.metrics.{Measured => JMeasured}
+  import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
+  import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+  import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+  import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.Handler
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
+        import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
@@ -48,11 +48,11 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
   * 
   * Please consult the documentation for more information on datagram sockets.
   */
-class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket) 
+class DatagramSocket(private val _asJava: JDatagramSocket) 
     extends ReadStream[DatagramPacket] 
     with Measured {
 
-  def asJava: io.vertx.core.datagram.DatagramSocket = _asJava
+  def asJava: JDatagramSocket = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
@@ -71,8 +71,8 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the scala-function to notify once the write completes.
     */
   def sendFuture(packet: Buffer, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
-    _asJava.send(packet.asJava.asInstanceOf[io.vertx.core.buffer.Buffer], port, host, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    _asJava.send(packet.asJava.asInstanceOf[JBuffer], port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -96,7 +96,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the scala-function to notify once the write completes.
     */
   def sendFuture(str: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.send(str, port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -111,7 +111,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the scala-function to notify once the write completes.
     */
   def sendFuture(str: String, enc: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.send(str, enc, port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -153,7 +153,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return then future to notify once the operation completes
     */
   def listenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.listenMulticastGroup(multicastAddress, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -167,7 +167,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return then future to notify once the operation completes
     */
   def listenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.listenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -179,7 +179,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return then future to notify once the operation completes
     */
   def unlistenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.unlistenMulticastGroup(multicastAddress, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -193,7 +193,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the future to notify once the operation completes
     */
   def unlistenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.unlistenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -206,7 +206,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the future to notify once the operation completes
     */
   def blockMulticastGroupFuture(multicastAddress: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.blockMulticastGroup(multicastAddress, sourceToBlock, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -220,7 +220,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the future to notify once the operation completes
     */
   def blockMulticastGroupFuture(multicastAddress: String, networkInterface: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.blockMulticastGroup(multicastAddress, networkInterface, sourceToBlock, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -232,7 +232,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
     * @return the future will be called when listening
     */
   def listenFuture(port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.datagram.DatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
     _asJava.listen(port, host, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -267,7 +267,7 @@ class DatagramSocket(private val _asJava: io.vertx.core.datagram.DatagramSocket)
 
 object DatagramSocket {
 
-  def apply(_asJava: io.vertx.core.datagram.DatagramSocket): DatagramSocket =
+  def apply(_asJava: JDatagramSocket): DatagramSocket =
     new DatagramSocket(_asJava)
 
 }
