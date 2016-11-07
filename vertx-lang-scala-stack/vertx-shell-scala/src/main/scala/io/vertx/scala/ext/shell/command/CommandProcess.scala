@@ -19,31 +19,37 @@ package io.vertx.scala.ext.shell.command
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.command.{CommandProcess => JCommandProcess}
+import io.vertx.core.cli.{CommandLine => JCommandLine}
 import io.vertx.scala.core.cli.CommandLine
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
+import io.vertx.ext.shell.cli.{CliToken => JCliToken}
 import io.vertx.scala.ext.shell.cli.CliToken
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{Tty => JTty}
 import io.vertx.scala.ext.shell.term.Tty
+import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
   * The command process provides interaction with the process of the command provided by Vert.x Shell.
   */
-class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProcess) {
+class CommandProcess(private val _asJava: JCommandProcess) 
+    extends  {
 
-  def asJava: io.vertx.ext.shell.command.CommandProcess = _asJava
+  def asJava: JCommandProcess = _asJava
 
   /**
     * @return the current Vert.x instance
     */
-  def vertx(): io.vertx.scala.core.Vertx = {
+  def vertx(): Vertx = {
     Vertx.apply(_asJava.vertx())
   }
 
   /**
     * @return the unparsed arguments tokens
     */
-  def argsTokens(): scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.cli.CliToken] = {
+  def argsTokens(): scala.collection.mutable.Buffer[CliToken] = {
     _asJava.argsTokens().asScala.map(CliToken.apply)
   }
 
@@ -57,14 +63,14 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
   /**
     * @return the command line object or null
     */
-  def commandLine(): io.vertx.scala.core.cli.CommandLine = {
+  def commandLine(): CommandLine = {
     CommandLine.apply(_asJava.commandLine())
   }
 
   /**
     * @return the shell session
     */
-  def session(): io.vertx.scala.ext.shell.session.Session = {
+  def session(): Session = {
     Session.apply(_asJava.session())
   }
 
@@ -75,7 +81,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     _asJava.isForeground()
   }
 
-  def stdinHandler(handler: String => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def stdinHandler(handler: String => Unit): CommandProcess = {
     _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
     this
   }
@@ -86,7 +92,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the interrupt handler
     * @return this command
     */
-  def interruptHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def interruptHandler(handler: () => Unit): CommandProcess = {
     _asJava.interruptHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -97,7 +103,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the interrupt handler
     * @return this command
     */
-  def suspendHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def suspendHandler(handler: () => Unit): CommandProcess = {
     _asJava.suspendHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -108,7 +114,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the interrupt handler
     * @return this command
     */
-  def resumeHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def resumeHandler(handler: () => Unit): CommandProcess = {
     _asJava.resumeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -119,7 +125,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the end handler
     * @return a reference to this, so the API can be used fluently
     */
-  def endHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def endHandler(handler: () => Unit): CommandProcess = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -129,7 +135,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param data the text
     * @return a reference to this, so the API can be used fluently
     */
-  def write(data: String): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def write(data: String): CommandProcess = {
     _asJava.write(data)
     this
   }
@@ -139,7 +145,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the background handler
     * @return this command
     */
-  def backgroundHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def backgroundHandler(handler: () => Unit): CommandProcess = {
     _asJava.backgroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -149,12 +155,12 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
     * @param handler the foreground handler
     * @return this command
     */
-  def foregroundHandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def foregroundHandler(handler: () => Unit): CommandProcess = {
     _asJava.foregroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
-  def resizehandler(handler: () => Unit): io.vertx.scala.ext.shell.command.CommandProcess = {
+  def resizehandler(handler: () => Unit): CommandProcess = {
     _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -178,7 +184,7 @@ class CommandProcess(private val _asJava: io.vertx.ext.shell.command.CommandProc
 
 object CommandProcess {
 
-  def apply(_asJava: io.vertx.ext.shell.command.CommandProcess): io.vertx.scala.ext.shell.command.CommandProcess =
-    new io.vertx.scala.ext.shell.command.CommandProcess(_asJava)
+  def apply(_asJava: JCommandProcess): CommandProcess =
+    new CommandProcess(_asJava)
 
 }

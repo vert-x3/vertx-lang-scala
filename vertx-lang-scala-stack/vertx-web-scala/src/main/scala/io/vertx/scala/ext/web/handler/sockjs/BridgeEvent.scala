@@ -20,22 +20,20 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
-    import io.vertx.ext.web.handler.sockjs.BridgeEventType
-  import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
-    import io.vertx.core.json.JsonObject
-      import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
-    import io.vertx.core.{Future => JFuture}
-import io.vertx.scala.core.Future
+import io.vertx.ext.web.handler.sockjs.BridgeEventType
+import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+import io.vertx.core.json.JsonObject
 import io.vertx.core.{Future => JFuture}
-  import java.util.function.{Function => JFunction}
-import java.util.function.Function
+import io.vertx.scala.core.Future
+import java.util.function.{Function => JFunction}
 
 /**
   * Represents an event that occurs on the event bus bridge.
   * 
   * Please consult the documentation for a full explanation.
   */
-class BridgeEvent(private val _asJava: JBridgeEvent) {
+class BridgeEvent(private val _asJava: JBridgeEvent) 
+    extends  {
 
   def asJava: JBridgeEvent = _asJava
 

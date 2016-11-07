@@ -21,6 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.scala.codegen.testmodel.TestDataObject
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.core.json.JsonObject

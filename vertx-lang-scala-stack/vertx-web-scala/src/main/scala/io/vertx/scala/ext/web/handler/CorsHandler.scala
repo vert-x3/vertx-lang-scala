@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{CorsHandler => JCorsHandler}
-  import io.vertx.core.http.HttpMethod
-    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-      import io.vertx.ext.web.handler.{CorsHandler => JCorsHandler}
+import io.vertx.scala.ext.web.RoutingContext
 
 /**
   * A handler which implements server side http://www.w3.org/TR/cors/[CORS] support for Vert.x-Web.

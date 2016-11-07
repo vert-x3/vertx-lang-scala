@@ -38,6 +38,7 @@ import io.vertx.scala.core.datagram.DatagramSocketOptions
 import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.scala.core.net.NetClient
 import io.vertx.core.{VertxOptions => JVertxOptions}
+import io.vertx.scala.core.VertxOptions
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.scala.core.net.NetClientOptions
@@ -50,6 +51,7 @@ import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.net.NetServer
 import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
+import io.vertx.scala.core.DeploymentOptions
 import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.scala.core.file.FileSystem
 import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}

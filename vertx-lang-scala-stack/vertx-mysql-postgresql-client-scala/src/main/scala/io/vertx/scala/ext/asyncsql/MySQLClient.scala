@@ -20,19 +20,18 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.asyncsql.{MySQLClient => JMySQLClient}
-    import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-  import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.sql.SQLConnection
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-      
+import io.vertx.scala.core.Vertx
+import io.vertx.core.json.JsonObject
+
 /**
   * Represents an asynchronous MySQL client
   */
-class MySQLClient(private val _asJava: JMySQLClient) {
+class MySQLClient(private val _asJava: JMySQLClient) 
+    extends  {
 
   def asJava: JMySQLClient = _asJava
 

@@ -20,26 +20,24 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.core.http.HttpMethod
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.auth.User
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-    import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
-      import io.vertx.ext.auth.oauth2.OAuth2FlowType
-  import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
-  import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
-  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.core.Vertx
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.oauth2.OAuth2FlowType
+import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
+import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
+import io.vertx.scala.ext.auth.oauth2.OAuth2ClientOptions
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * Factory interface for creating OAuth2 based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class OAuth2Auth(private val _asJava: JOAuth2Auth) {
+class OAuth2Auth(private val _asJava: JOAuth2Auth) 
+    extends  {
 
   def asJava: JOAuth2Auth = _asJava
 

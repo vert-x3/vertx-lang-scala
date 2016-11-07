@@ -20,10 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{ResponseTimeHandler => JResponseTimeHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.web.handler.{ResponseTimeHandler => JResponseTimeHandler}
+import io.vertx.scala.ext.web.RoutingContext
 
 /**
   * Handler which adds a header `x-response-time` in the response of matching requests containing the time taken

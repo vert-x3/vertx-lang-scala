@@ -20,13 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
-  import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   *

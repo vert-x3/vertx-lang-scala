@@ -20,40 +20,38 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.redis.{RedisTransaction => JRedisTransaction}
-    import io.vertx.redis.op.BitOperation
-  import io.vertx.redis.op.ResetOptions
-  import io.vertx.redis.op.ObjectCmd
-  import io.vertx.redis.op.{KillFilter => JKillFilter}
+import io.vertx.redis.op.BitOperation
+import io.vertx.redis.op.ResetOptions
+import io.vertx.redis.op.ObjectCmd
+import io.vertx.redis.op.{KillFilter => JKillFilter}
 import io.vertx.scala.redis.op.KillFilter
-    import io.vertx.redis.op.GeoUnit
-  import io.vertx.core.json.JsonObject
-      import io.vertx.redis.op.RangeOptions
-  import io.vertx.redis.op.{GeoMember => JGeoMember}
+import io.vertx.redis.op.GeoUnit
+import io.vertx.core.json.JsonObject
+import io.vertx.redis.op.RangeOptions
+import io.vertx.redis.op.{GeoMember => JGeoMember}
 import io.vertx.scala.redis.op.GeoMember
-  import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
+import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
 import io.vertx.scala.redis.op.GeoRadiusOptions
-  import io.vertx.redis.op.InsertOptions
-  import io.vertx.redis.op.AggregateOptions
-    import io.vertx.redis.{RedisTransaction => JRedisTransaction}
-  import io.vertx.redis.op.{SetOptions => JSetOptions}
+import io.vertx.redis.op.InsertOptions
+import io.vertx.redis.op.AggregateOptions
+import io.vertx.redis.op.{SetOptions => JSetOptions}
 import io.vertx.scala.redis.op.SetOptions
-  import io.vertx.redis.op.{SortOptions => JSortOptions}
+import io.vertx.redis.op.{SortOptions => JSortOptions}
 import io.vertx.scala.redis.op.SortOptions
-  import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
+import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
 import io.vertx.scala.redis.op.MigrateOptions
-  import io.vertx.redis.op.{ScanOptions => JScanOptions}
+import io.vertx.redis.op.{ScanOptions => JScanOptions}
 import io.vertx.scala.redis.op.ScanOptions
-  import io.vertx.redis.op.FailoverOptions
-  import io.vertx.redis.op.SlotCmd
-  import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
+import io.vertx.redis.op.FailoverOptions
+import io.vertx.redis.op.SlotCmd
+import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
 import io.vertx.scala.redis.op.RangeLimitOptions
-  import io.vertx.redis.op.{LimitOptions => JLimitOptions}
+import io.vertx.redis.op.{LimitOptions => JLimitOptions}
 import io.vertx.scala.redis.op.LimitOptions
-  import io.vertx.core.json.JsonArray
-    import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  
+import io.vertx.scala.core.buffer.Buffer
+
 /**
   * This Interface represents a TX
   */

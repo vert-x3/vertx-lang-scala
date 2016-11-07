@@ -20,7 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{Acknowledgement => JAcknowledgement}
-    import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
 
 /**
   * Structure passed to acknowledgement handler called when a `ACK` or `NACK` frame is received. The handler

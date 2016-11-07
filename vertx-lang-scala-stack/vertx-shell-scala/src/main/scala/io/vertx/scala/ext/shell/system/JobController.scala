@@ -19,26 +19,28 @@ package io.vertx.scala.ext.shell.system
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.ext.shell.system.{JobController => JJobController}
+import io.vertx.ext.shell.system.{Job => JJob}
+import io.vertx.ext.shell.system.{Process => JProcess}
 
 /**
   * The job controller.<p/>
   */
-class JobController(private val _asJava: io.vertx.ext.shell.system.JobController) {
+class JobController(private val _asJava: JJobController) {
 
-  def asJava: io.vertx.ext.shell.system.JobController = _asJava
+  def asJava: JJobController = _asJava
 
   /**
     * @return the current foreground job
     */
-  def foregroundJob(): io.vertx.scala.ext.shell.system.Job = {
+  def foregroundJob(): Job = {
     Job.apply(_asJava.foregroundJob())
   }
 
   /**
     * @return the active jobs
     */
-  def jobs(): Set[io.vertx.scala.ext.shell.system.Job] = {
+  def jobs(): Set[Job] = {
     _asJava.jobs().asScala.map(Job.apply).toSet
   }
 
@@ -47,7 +49,7 @@ class JobController(private val _asJava: io.vertx.ext.shell.system.JobController
     * @param id the job id
     * @return the job of ` null` when not found
     */
-  def getJob(id: Int): io.vertx.scala.ext.shell.system.Job = {
+  def getJob(id: Int): Job = {
     Job.apply(_asJava.getJob(id))
   }
 
@@ -57,8 +59,8 @@ class JobController(private val _asJava: io.vertx.ext.shell.system.JobController
     * @param line the line
     * @return the created job
     */
-  def createJob(process: io.vertx.scala.ext.shell.system.Process, line: String): io.vertx.scala.ext.shell.system.Job = {
-    Job.apply(_asJava.createJob(process.asJava.asInstanceOf[io.vertx.ext.shell.system.Process], line))
+  def createJob(process: Process, line: String): Job = {
+    Job.apply(_asJava.createJob(process.asJava.asInstanceOf[JProcess], line))
   }
 
   /**
@@ -79,7 +81,7 @@ class JobController(private val _asJava: io.vertx.ext.shell.system.JobController
 
 object JobController {
 
-  def apply(_asJava: io.vertx.ext.shell.system.JobController): io.vertx.scala.ext.shell.system.JobController =
-    new io.vertx.scala.ext.shell.system.JobController(_asJava)
+  def apply(_asJava: JJobController): JobController =
+    new JobController(_asJava)
 
 }

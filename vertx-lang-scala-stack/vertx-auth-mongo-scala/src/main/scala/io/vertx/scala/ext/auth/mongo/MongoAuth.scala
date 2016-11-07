@@ -20,23 +20,20 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.mongo.{MongoAuth => JMongoAuth}
-    import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.ext.mongo.{MongoClient => JMongoClient}
-import io.vertx.scala.ext.mongo.MongoClient
+import io.vertx.scala.ext.auth.User
 import io.vertx.ext.mongo.{MongoClient => JMongoClient}
-  import io.vertx.core.json.JsonObject
-      import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
-    import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.mongo.MongoClient
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-  import io.vertx.ext.auth.mongo.{MongoAuth => JMongoAuth}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * An extension of AuthProvider which is using  as store
   */
-class MongoAuth(private val _asJava: JMongoAuth) {
+class MongoAuth(private val _asJava: JMongoAuth) 
+    extends  {
 
   def asJava: JMongoAuth = _asJava
 

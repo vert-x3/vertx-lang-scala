@@ -19,23 +19,24 @@ package io.vertx.scala.servicediscovery.spi
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.Record
-import io.vertx.core.Handler
+import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
+import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.scala.servicediscovery.Record
 
 /**
   * The publisher is used by the importer to publish or unpublish records.
   */
-class ServicePublisher(private val _asJava: io.vertx.servicediscovery.spi.ServicePublisher) {
+class ServicePublisher(private val _asJava: JServicePublisher) {
 
-  def asJava: io.vertx.servicediscovery.spi.ServicePublisher = _asJava
+  def asJava: JServicePublisher = _asJava
 
   /**
     * Publishes a record.
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     * @return future called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
     */
-  def publishFuture(record: io.vertx.scala.servicediscovery.Record): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def publishFuture(record: Record): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.publish(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -55,7 +56,7 @@ class ServicePublisher(private val _asJava: io.vertx.servicediscovery.spi.Servic
 
 object ServicePublisher {
 
-  def apply(_asJava: io.vertx.servicediscovery.spi.ServicePublisher): io.vertx.scala.servicediscovery.spi.ServicePublisher =
-    new io.vertx.scala.servicediscovery.spi.ServicePublisher(_asJava)
+  def apply(_asJava: JServicePublisher): ServicePublisher =
+    new ServicePublisher(_asJava)
 
 }

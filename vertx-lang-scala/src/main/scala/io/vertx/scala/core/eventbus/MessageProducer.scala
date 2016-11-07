@@ -21,6 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+import io.vertx.scala.core.eventbus.DeliveryOptions
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{Message => JMessage}

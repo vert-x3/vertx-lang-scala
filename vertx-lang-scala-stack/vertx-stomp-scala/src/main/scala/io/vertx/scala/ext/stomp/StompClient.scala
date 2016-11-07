@@ -20,16 +20,15 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{StompClient => JStompClient}
-  import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
-  import io.vertx.ext.stomp.{StompClient => JStompClient}
-  import io.vertx.ext.stomp.{Frame => JFrame}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
 import io.vertx.core.{Vertx => JVertx}
-        import io.vertx.core.net.{NetClient => JNetClient}
-import io.vertx.scala.core.net.NetClient
+import io.vertx.scala.core.Vertx
 import io.vertx.core.net.{NetClient => JNetClient}
-  import io.vertx.ext.stomp.{StompClientOptions => JStompClientOptions}
+import io.vertx.scala.core.net.NetClient
+import io.vertx.ext.stomp.{StompClientOptions => JStompClientOptions}
+import io.vertx.scala.ext.stomp.StompClientOptions
 
 /**
   * Defines a STOMP client.

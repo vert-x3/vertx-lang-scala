@@ -20,14 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{TemplateHandler => JTemplateHandler}
-  import io.vertx.ext.web.handler.{TemplateHandler => JTemplateHandler}
-  import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.templ.TemplateEngine
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.scala.ext.web.templ.TemplateEngine
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   *
   * A handler which renders responses using a template engine and where the template name is selected from the URI

@@ -20,13 +20,12 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
-  import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.ext.stomp.{Frame => JFrame}
-  import io.vertx.ext.stomp.{StompServer => JStompServer}
-      import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
+import io.vertx.ext.stomp.{StompServer => JStompServer}
 
 /**
   * Class representing a connection between a STOMP client a the server. It keeps a references on the client socket,

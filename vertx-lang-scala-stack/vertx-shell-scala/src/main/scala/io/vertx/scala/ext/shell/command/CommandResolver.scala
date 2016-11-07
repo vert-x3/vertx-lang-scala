@@ -19,19 +19,22 @@ package io.vertx.scala.ext.shell.command
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
+import io.vertx.ext.shell.command.{Command => JCommand}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 
 /**
   * A resolver for commands, so the shell can discover commands.
   */
-class CommandResolver(private val _asJava: io.vertx.ext.shell.command.CommandResolver) {
+class CommandResolver(private val _asJava: JCommandResolver) {
 
-  def asJava: io.vertx.ext.shell.command.CommandResolver = _asJava
+  def asJava: JCommandResolver = _asJava
 
   /**
     * @return the current commands
     */
-  def commands(): scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.command.Command] = {
+  def commands(): scala.collection.mutable.Buffer[Command] = {
     _asJava.commands().asScala.map(Command.apply)
   }
 
@@ -40,7 +43,7 @@ class CommandResolver(private val _asJava: io.vertx.ext.shell.command.CommandRes
     * @param name the command name
     * @return the commad or null
     */
-  def getCommand(name: String): io.vertx.scala.ext.shell.command.Command = {
+  def getCommand(name: String): Command = {
     Command.apply(_asJava.getCommand(name))
   }
 
@@ -48,11 +51,11 @@ class CommandResolver(private val _asJava: io.vertx.ext.shell.command.CommandRes
 
 object CommandResolver {
 
-  def apply(_asJava: io.vertx.ext.shell.command.CommandResolver): io.vertx.scala.ext.shell.command.CommandResolver =
-    new io.vertx.scala.ext.shell.command.CommandResolver(_asJava)
+  def apply(_asJava: JCommandResolver): CommandResolver =
+    new CommandResolver(_asJava)
 
-  def baseCommands(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.command.CommandResolver = {
-    CommandResolver.apply(io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def baseCommands(vertx: Vertx): CommandResolver = {
+    CommandResolver.apply(io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

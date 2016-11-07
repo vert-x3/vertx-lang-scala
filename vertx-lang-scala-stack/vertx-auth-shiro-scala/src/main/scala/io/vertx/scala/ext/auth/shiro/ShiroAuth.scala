@@ -20,24 +20,22 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.auth.User
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-        import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
-  import io.vertx.ext.auth.shiro.ShiroAuthRealmType
-  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.core.Vertx
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
+import io.vertx.scala.ext.auth.shiro.ShiroAuthOptions
+import io.vertx.ext.auth.shiro.ShiroAuthRealmType
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * Factory interface for creating Apache Shiro based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class ShiroAuth(private val _asJava: JShiroAuth) {
+class ShiroAuth(private val _asJava: JShiroAuth) 
+    extends  {
 
   def asJava: JShiroAuth = _asJava
 

@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mail.{MailAttachment => JMailAttachment}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Represent a mail attachment that can be used in a MailMessage.
@@ -55,8 +54,8 @@ class MailAttachment(val asJava: JMailAttachment) {
   /**
     * set the data
     */
-  def setData(value: JBuffer) = {
-    asJava.setData(value)
+  def setData(value: Buffer) = {
+    asJava.setData(value.asJava)
     this
   }
   def getData = {

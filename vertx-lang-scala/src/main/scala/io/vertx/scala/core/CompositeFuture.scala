@@ -22,7 +22,6 @@ import scala.collection.JavaConverters._
 import io.vertx.core.{CompositeFuture => JCompositeFuture}
 import io.vertx.core.{Future => JFuture}
 import java.util.function.{Function => JFunction}
-import java.util.function.Function
 
 /**
   * The composite future wraps a list of [[io.vertx.scala.core.Future futures]], it is useful when several futures

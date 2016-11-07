@@ -20,23 +20,21 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.auth.User
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-        import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
-  import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
-  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.core.Vertx
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.scala.ext.auth.jwt.JWTOptions
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class JWTAuth(private val _asJava: JJWTAuth) {
+class JWTAuth(private val _asJava: JJWTAuth) 
+    extends  {
 
   def asJava: JJWTAuth = _asJava
 

@@ -19,28 +19,33 @@ package io.vertx.scala.ext.shell.term
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.term.{Term => JTerm}
+import io.vertx.ext.shell.cli.{Completion => JCompletion}
 import io.vertx.scala.ext.shell.cli.Completion
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{SignalHandler => JSignalHandler}
+import io.vertx.ext.shell.term.{Tty => JTty}
+import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
   * The terminal.
   */
-class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
+class Term(private val _asJava: JTerm) 
+    extends  {
 
-  def asJava: io.vertx.ext.shell.term.Term = _asJava
+  def asJava: JTerm = _asJava
 
-  def resizehandler(handler: () => Unit): io.vertx.scala.ext.shell.term.Term = {
+  def resizehandler(handler: () => Unit): Term = {
     _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
 
-  def stdinHandler(handler: String => Unit): io.vertx.scala.ext.shell.term.Term = {
+  def stdinHandler(handler: String => Unit): Term = {
     _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
     this
   }
 
-  def write(data: String): io.vertx.scala.ext.shell.term.Term = {
+  def write(data: String): Term = {
     _asJava.write(data)
     this
   }
@@ -57,7 +62,7 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param text the text to echo
     * @return a reference to this, so the API can be used fluently
     */
-  def echo(text: String): io.vertx.scala.ext.shell.term.Term = {
+  def echo(text: String): Term = {
     _asJava.echo(text)
     this
   }
@@ -67,8 +72,8 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param session the session to set
     * @return a reference to this, so the API can be used fluently
     */
-  def setSession(session: io.vertx.scala.ext.shell.session.Session): io.vertx.scala.ext.shell.term.Term = {
-    Term.apply(_asJava.setSession(session.asJava.asInstanceOf[io.vertx.ext.shell.session.Session]))
+  def setSession(session: Session): Term = {
+    Term.apply(_asJava.setSession(session.asJava.asInstanceOf[JSession]))
   }
 
   /**
@@ -76,8 +81,8 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param handler the interrupt handler
     * @return a reference to this, so the API can be used fluently
     */
-  def interruptHandler(handler: io.vertx.scala.ext.shell.term.SignalHandler): io.vertx.scala.ext.shell.term.Term = {
-    _asJava.interruptHandler(handler.asJava.asInstanceOf[io.vertx.ext.shell.term.SignalHandler])
+  def interruptHandler(handler: SignalHandler): Term = {
+    _asJava.interruptHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
   }
 
@@ -86,8 +91,8 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param handler the suspend handler
     * @return a reference to this, so the API can be used fluently
     */
-  def suspendHandler(handler: io.vertx.scala.ext.shell.term.SignalHandler): io.vertx.scala.ext.shell.term.Term = {
-    _asJava.suspendHandler(handler.asJava.asInstanceOf[io.vertx.ext.shell.term.SignalHandler])
+  def suspendHandler(handler: SignalHandler): Term = {
+    _asJava.suspendHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
   }
 
@@ -106,7 +111,7 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param lineHandler the line handler called with the line
     * @param completionHandler the completion handler
     */
-  def readline(prompt: String, lineHandler: String => Unit, completionHandler: io.vertx.scala.ext.shell.cli.Completion => Unit): Unit = {
+  def readline(prompt: String, lineHandler: String => Unit, completionHandler: Completion => Unit): Unit = {
     _asJava.readline(prompt, funcToHandler[java.lang.String](lineHandler), funcToMappedHandler(Completion.apply)(completionHandler))
   }
 
@@ -115,7 +120,7 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): io.vertx.scala.ext.shell.term.Term = {
+  def closeHandler(handler: () => Unit): Term = {
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -131,7 +136,7 @@ class Term(private val _asJava: io.vertx.ext.shell.term.Term) {
 
 object Term {
 
-  def apply(_asJava: io.vertx.ext.shell.term.Term): io.vertx.scala.ext.shell.term.Term =
-    new io.vertx.scala.ext.shell.term.Term(_asJava)
+  def apply(_asJava: JTerm): Term =
+    new Term(_asJava)
 
 }

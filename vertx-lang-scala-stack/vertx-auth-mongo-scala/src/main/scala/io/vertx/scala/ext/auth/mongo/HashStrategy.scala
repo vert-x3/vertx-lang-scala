@@ -20,11 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
-  import io.vertx.ext.auth.mongo.HashSaltStyle
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.mongo.HashSaltStyle
 import io.vertx.ext.auth.{User => JUser}
-  
+import io.vertx.scala.ext.auth.User
+
 /**
   * Determines how the hashing is computed in the implementation You can implement this to provide a different hashing
   * strategy to the default.

@@ -20,17 +20,14 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{Router => JRouter}
-  import io.vertx.ext.web.{Route => JRoute}
-    import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.scala.core.http.HttpServerRequest
+import io.vertx.ext.web.{Route => JRoute}
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-    import io.vertx.core.http.HttpMethod
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.http.HttpServerRequest
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.ext.web.{Router => JRouter}
-    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-  
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+
 /**
   * A router receives request from an [[io.vertx.scala.core.http.HttpServer]] and routes it to the first matching
   * [[io.vertx.scala.ext.web.Route]] that it contains. A router can contain many routes.

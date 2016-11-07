@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{LoggerHandler => JLoggerHandler}
-  import io.vertx.ext.web.handler.{LoggerHandler => JLoggerHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.web.handler.LoggerFormat
+import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.ext.web.handler.LoggerFormat
 
 /**
   * A handler which logs request information to the Vert.x logger.

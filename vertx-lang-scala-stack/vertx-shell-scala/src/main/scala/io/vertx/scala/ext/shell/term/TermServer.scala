@@ -19,20 +19,27 @@ package io.vertx.scala.ext.shell.term
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.shell.term.TelnetTermOptions
-import io.vertx.ext.shell.term.HttpTermOptions
-import io.vertx.ext.shell.term.SSHTermOptions
+import io.vertx.ext.shell.term.{TermServer => JTermServer}
+import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
+import io.vertx.scala.ext.shell.term.TelnetTermOptions
+import io.vertx.ext.shell.term.{HttpTermOptions => JHttpTermOptions}
+import io.vertx.scala.ext.shell.term.HttpTermOptions
+import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
+import io.vertx.scala.ext.shell.term.SSHTermOptions
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
+import io.vertx.ext.web.{Router => JRouter}
 import io.vertx.scala.ext.web.Router
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{Term => JTerm}
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * A server for terminal based applications.
   */
-class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
+class TermServer(private val _asJava: JTermServer) {
 
-  def asJava: io.vertx.ext.shell.term.TermServer = _asJava
+  def asJava: JTermServer = _asJava
 
   /**
     * Set the term handler that will receive incoming client connections. When a remote terminal connects
@@ -41,7 +48,7 @@ class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
     * @param handler the term handler
     * @return this object
     */
-  def termHandler(handler: io.vertx.scala.ext.shell.term.Term => Unit): io.vertx.scala.ext.shell.term.TermServer = {
+  def termHandler(handler: Term => Unit): TermServer = {
     _asJava.termHandler(funcToMappedHandler(Term.apply)(handler))
     this
   }
@@ -52,8 +59,8 @@ class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
     * @param provider the auth to use
     * @return this object
     */
-  def authProvider(provider: io.vertx.scala.ext.auth.AuthProvider): io.vertx.scala.ext.shell.term.TermServer = {
-    _asJava.authProvider(provider.asJava.asInstanceOf[io.vertx.ext.auth.AuthProvider])
+  def authProvider(provider: AuthProvider): TermServer = {
+    _asJava.authProvider(provider.asJava.asInstanceOf[JAuthProvider])
     this
   }
 
@@ -61,7 +68,7 @@ class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
     * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
     * @return this object
     */
-  def listen(): io.vertx.scala.ext.shell.term.TermServer = {
+  def listen(): TermServer = {
     _asJava.listen()
     this
   }
@@ -70,8 +77,8 @@ class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
     * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
     * @return the listen future
     */
-  def listenFuture(): concurrent.Future[io.vertx.scala.ext.shell.term.TermServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.shell.term.TermServer,io.vertx.scala.ext.shell.term.TermServer]((x => if (x == null) null else TermServer.apply(x)))
+  def listenFuture(): concurrent.Future[TermServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTermServer,TermServer]((x => if (x == null) null else TermServer.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -107,39 +114,39 @@ class TermServer(private val _asJava: io.vertx.ext.shell.term.TermServer) {
 
 object TermServer {
 
-  def apply(_asJava: io.vertx.ext.shell.term.TermServer): io.vertx.scala.ext.shell.term.TermServer =
-    new io.vertx.scala.ext.shell.term.TermServer(_asJava)
+  def apply(_asJava: JTermServer): TermServer =
+    new TermServer(_asJava)
 
-  def createSSHTermServer(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createSSHTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def createSSHTermServer(vertx: Vertx): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def createSSHTermServer(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.shell.term.SSHTermOptions): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createSSHTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def createSSHTermServer(vertx: Vertx, options: SSHTermOptions): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def createTelnetTermServer(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def createTelnetTermServer(vertx: Vertx): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def createTelnetTermServer(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.shell.term.TelnetTermOptions): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def createTelnetTermServer(vertx: Vertx, options: TelnetTermOptions): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def createHttpTermServer(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def createHttpTermServer(vertx: Vertx): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def createHttpTermServer(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.shell.term.HttpTermOptions): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def createHttpTermServer(vertx: Vertx, options: HttpTermOptions): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def createHttpTermServer(vertx: io.vertx.scala.core.Vertx, router: io.vertx.scala.ext.web.Router): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], router.asJava.asInstanceOf[io.vertx.ext.web.Router]))
+  def createHttpTermServer(vertx: Vertx, router: Router): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter]))
   }
 
-  def createHttpTermServer(vertx: io.vertx.scala.core.Vertx, router: io.vertx.scala.ext.web.Router, options: io.vertx.scala.ext.shell.term.HttpTermOptions): io.vertx.scala.ext.shell.term.TermServer = {
-    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], router.asJava.asInstanceOf[io.vertx.ext.web.Router], options.asJava))
+  def createHttpTermServer(vertx: Vertx, router: Router, options: HttpTermOptions): TermServer = {
+    TermServer.apply(io.vertx.ext.shell.term.TermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter], options.asJava))
   }
 
 }

@@ -22,8 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
 import io.vertx.scala.ext.bridge.PermittedOptions
-import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
-import io.vertx.scala.ext.bridge.BridgeOptions
 
 /**
   * Specify the event bus bridge options.

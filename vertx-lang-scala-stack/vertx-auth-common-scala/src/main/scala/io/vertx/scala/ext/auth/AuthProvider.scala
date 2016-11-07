@@ -20,9 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-  import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.core.json.JsonObject
-    
+import io.vertx.ext.auth.{User => JUser}
+import io.vertx.core.json.JsonObject
+
 /**
   *
   * User-facing interface for authenticating users.

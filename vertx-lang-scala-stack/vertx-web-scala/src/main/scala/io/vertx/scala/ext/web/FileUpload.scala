@@ -20,7 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{FileUpload => JFileUpload}
-  
+
 /**
   * Represents a file-upload from an HTTP multipart form submission.
   * 

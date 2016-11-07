@@ -20,13 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-      
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   * A template engine uses a specific template and the data in a routing context to render a resource into a buffer.
   * 

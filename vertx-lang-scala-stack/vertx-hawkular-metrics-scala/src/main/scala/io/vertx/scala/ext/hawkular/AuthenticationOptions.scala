@@ -17,18 +17,20 @@
 package io.vertx.scala.ext.hawkular
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.hawkular.{AuthenticationOptions => JAuthenticationOptions}
 
 /**
   * Authentication options.
   */
 
-class AuthenticationOptions(val asJava: io.vertx.ext.hawkular.AuthenticationOptions) {
+class AuthenticationOptions(val asJava: JAuthenticationOptions) {
 
   /**
     * Set whether authentication is enabled. Defaults to `false`.
     */
-  def setEnabled(value:Boolean) = {
+  def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
@@ -39,7 +41,7 @@ class AuthenticationOptions(val asJava: io.vertx.ext.hawkular.AuthenticationOpti
   /**
     * Set the identifier used for authentication.
     */
-  def setId(value:String) = {
+  def setId(value: String) = {
     asJava.setId(value)
     this
   }
@@ -50,7 +52,7 @@ class AuthenticationOptions(val asJava: io.vertx.ext.hawkular.AuthenticationOpti
   /**
     * Set the secret used for authentication.
     */
-  def setSecret(value:String) = {
+  def setSecret(value: String) = {
     asJava.setSecret(value)
     this
   }
@@ -60,13 +62,12 @@ class AuthenticationOptions(val asJava: io.vertx.ext.hawkular.AuthenticationOpti
 }
 
 object AuthenticationOptions {
-  type AuthenticationOptionsJava = io.vertx.ext.hawkular.AuthenticationOptions
   
   def apply() = {
-    new AuthenticationOptions(new AuthenticationOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new AuthenticationOptions(new JAuthenticationOptions(emptyObj()))
   }
   
-  def apply(t: AuthenticationOptionsJava) = {
+  def apply(t: JAuthenticationOptions) = {
     if(t != null)
       new AuthenticationOptions(t)
     else
@@ -75,7 +76,7 @@ object AuthenticationOptions {
   
   def fromJson(json: JsonObject):AuthenticationOptions = {
     if(json != null)
-      new AuthenticationOptions(new AuthenticationOptionsJava(json))
+      new AuthenticationOptions(new JAuthenticationOptions(json))
     else
       null
   }

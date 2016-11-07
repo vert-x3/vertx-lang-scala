@@ -19,27 +19,31 @@ package io.vertx.scala.ext.shell.cli
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.cli.{Completion => JCompletion}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
+import io.vertx.ext.shell.cli.{CliToken => JCliToken}
+import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
   * The completion object
   */
-class Completion(private val _asJava: io.vertx.ext.shell.cli.Completion) {
+class Completion(private val _asJava: JCompletion) {
 
-  def asJava: io.vertx.ext.shell.cli.Completion = _asJava
+  def asJava: JCompletion = _asJava
 
   /**
     * @return the current Vert.x instance
     */
-  def vertx(): io.vertx.scala.core.Vertx = {
+  def vertx(): Vertx = {
     Vertx.apply(_asJava.vertx())
   }
 
   /**
     * @return the shell current session, useful for accessing data like the current path for file completion, etc...
     */
-  def session(): io.vertx.scala.ext.shell.session.Session = {
+  def session(): Session = {
     Session.apply(_asJava.session())
   }
 
@@ -53,7 +57,7 @@ class Completion(private val _asJava: io.vertx.ext.shell.cli.Completion) {
   /**
     * @return the current line being completed as preparsed tokens
     */
-  def lineTokens(): scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.cli.CliToken] = {
+  def lineTokens(): scala.collection.mutable.Buffer[CliToken] = {
     _asJava.lineTokens().asScala.map(CliToken.apply)
   }
 
@@ -78,7 +82,7 @@ class Completion(private val _asJava: io.vertx.ext.shell.cli.Completion) {
 
 object Completion {
 
-  def apply(_asJava: io.vertx.ext.shell.cli.Completion): io.vertx.scala.ext.shell.cli.Completion =
-    new io.vertx.scala.ext.shell.cli.Completion(_asJava)
+  def apply(_asJava: JCompletion): Completion =
+    new Completion(_asJava)
 
 }

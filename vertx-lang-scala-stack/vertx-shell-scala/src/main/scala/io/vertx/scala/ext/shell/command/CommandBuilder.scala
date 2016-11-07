@@ -19,24 +19,29 @@ package io.vertx.scala.ext.shell.command
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.command.{CommandBuilder => JCommandBuilder}
+import io.vertx.ext.shell.command.{Command => JCommand}
+import io.vertx.ext.shell.cli.{Completion => JCompletion}
 import io.vertx.scala.ext.shell.cli.Completion
+import io.vertx.core.cli.{CLI => JCLI}
 import io.vertx.scala.core.cli.CLI
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.ext.shell.command.{CommandProcess => JCommandProcess}
 
 /**
   * A build for Vert.x Shell command.
   */
-class CommandBuilder(private val _asJava: io.vertx.ext.shell.command.CommandBuilder) {
+class CommandBuilder(private val _asJava: JCommandBuilder) {
 
-  def asJava: io.vertx.ext.shell.command.CommandBuilder = _asJava
+  def asJava: JCommandBuilder = _asJava
 
   /**
     * Set the command process handler, the process handler is called when the command is executed.
     * @param handler the process handler
     * @return this command object
     */
-  def processHandler(handler: io.vertx.scala.ext.shell.command.CommandProcess => Unit): io.vertx.scala.ext.shell.command.CommandBuilder = {
+  def processHandler(handler: CommandProcess => Unit): CommandBuilder = {
     _asJava.processHandler(funcToMappedHandler(CommandProcess.apply)(handler))
     this
   }
@@ -47,7 +52,7 @@ class CommandBuilder(private val _asJava: io.vertx.ext.shell.command.CommandBuil
     * @param handler the completion handler
     * @return this command object
     */
-  def completionHandler(handler: io.vertx.scala.ext.shell.cli.Completion => Unit): io.vertx.scala.ext.shell.command.CommandBuilder = {
+  def completionHandler(handler: Completion => Unit): CommandBuilder = {
     _asJava.completionHandler(funcToMappedHandler(Completion.apply)(handler))
     this
   }
@@ -57,23 +62,23 @@ class CommandBuilder(private val _asJava: io.vertx.ext.shell.command.CommandBuil
     * @param vertx the vertx instance
     * @return the built command
     */
-  def build(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.command.Command = {
-    Command.apply(_asJava.build(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def build(vertx: Vertx): Command = {
+    Command.apply(_asJava.build(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }
 
 object CommandBuilder {
 
-  def apply(_asJava: io.vertx.ext.shell.command.CommandBuilder): io.vertx.scala.ext.shell.command.CommandBuilder =
-    new io.vertx.scala.ext.shell.command.CommandBuilder(_asJava)
+  def apply(_asJava: JCommandBuilder): CommandBuilder =
+    new CommandBuilder(_asJava)
 
-  def command(name: String): io.vertx.scala.ext.shell.command.CommandBuilder = {
+  def command(name: String): CommandBuilder = {
     CommandBuilder.apply(io.vertx.ext.shell.command.CommandBuilder.command(name))
   }
 
-  def command(cli: io.vertx.scala.core.cli.CLI): io.vertx.scala.ext.shell.command.CommandBuilder = {
-    CommandBuilder.apply(io.vertx.ext.shell.command.CommandBuilder.command(cli.asJava.asInstanceOf[io.vertx.core.cli.CLI]))
+  def command(cli: CLI): CommandBuilder = {
+    CommandBuilder.apply(io.vertx.ext.shell.command.CommandBuilder.command(cli.asJava.asInstanceOf[JCLI]))
   }
 
 }

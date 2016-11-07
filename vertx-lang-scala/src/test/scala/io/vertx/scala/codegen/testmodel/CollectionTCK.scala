@@ -21,6 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{CollectionTCK => JCollectionTCK}
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.scala.codegen.testmodel.TestDataObject
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
 import io.vertx.core.json.JsonArray

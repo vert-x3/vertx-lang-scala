@@ -17,20 +17,23 @@
 package io.vertx.scala.servicediscovery
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.core.json.JsonObject
 
 /**
   * Describes a `service`. The record is the only piece of information shared between consumer and provider. It should
   * contains enough metadata to let consumer find the service they want.
   */
 
-class Record(val asJava: io.vertx.servicediscovery.Record) {
+class Record(val asJava: JRecord) {
 
   /**
     * Sets the json object describing the location of the service. By convention, this json object should contain
     * the <a href="../../../../../../cheatsheet/Record.html">Record</a> entry.
     */
-  def setLocation(value:io.vertx.core.json.JsonObject) = {
+  def setLocation(value: JsonObject) = {
     asJava.setLocation(value)
     this
   }
@@ -41,7 +44,7 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
   /**
     * Gets the metadata attached to the record.
     */
-  def setMetadata(value:io.vertx.core.json.JsonObject) = {
+  def setMetadata(value: JsonObject) = {
     asJava.setMetadata(value)
     this
   }
@@ -52,7 +55,7 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
   /**
     * Sets the name of the service. It can reflect the service name of the name of the provider.
     */
-  def setName(value:String) = {
+  def setName(value: String) = {
     asJava.setName(value)
     this
   }
@@ -63,7 +66,7 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
   /**
     * Sets the registration id. This method is called when the service is published.
     */
-  def setRegistration(value:String) = {
+  def setRegistration(value: String) = {
     asJava.setRegistration(value)
     this
   }
@@ -75,7 +78,7 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
     * Sets the status of the service. When published, the status is set to. When withdrawn, the
     * status is set to .
     */
-  def setStatus(value:io.vertx.servicediscovery.Status) = {
+  def setStatus(value: io.vertx.servicediscovery.Status) = {
     asJava.setStatus(value)
     this
   }
@@ -86,7 +89,7 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
   /**
     * Sets the type of service.
     */
-  def setType(value:String) = {
+  def setType(value: String) = {
     asJava.setType(value)
     this
   }
@@ -96,13 +99,12 @@ class Record(val asJava: io.vertx.servicediscovery.Record) {
 }
 
 object Record {
-  type RecordJava = io.vertx.servicediscovery.Record
   
   def apply() = {
-    new Record(new RecordJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Record(new JRecord(emptyObj()))
   }
   
-  def apply(t: RecordJava) = {
+  def apply(t: JRecord) = {
     if(t != null)
       new Record(t)
     else
@@ -111,7 +113,7 @@ object Record {
   
   def fromJson(json: JsonObject):Record = {
     if(json != null)
-      new Record(new RecordJava(json))
+      new Record(new JRecord(json))
     else
       null
   }

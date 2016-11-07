@@ -21,6 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+import io.vertx.scala.core.eventbus.DeliveryOptions
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 

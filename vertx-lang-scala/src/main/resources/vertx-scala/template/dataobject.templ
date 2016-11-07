@@ -36,6 +36,7 @@ import @{typeToAliasedType(type)+"\n"}
 
 @foreach{importedType : importedTypes}
 	@if{superType == importedType}
+	@else{superTypes.contains(importedType)}
 	@else{importedType.kind == CLASS_API}
 import @{typeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n

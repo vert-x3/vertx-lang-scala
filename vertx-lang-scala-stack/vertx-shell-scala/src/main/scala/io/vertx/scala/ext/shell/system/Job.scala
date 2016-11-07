@@ -19,9 +19,12 @@ package io.vertx.scala.ext.shell.system
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.system.{Job => JJob}
 import io.vertx.ext.shell.system.ExecStatus
-import io.vertx.core.Handler
+import io.vertx.ext.shell.system.{Process => JProcess}
+import io.vertx.ext.shell.term.{Tty => JTty}
 import io.vertx.scala.ext.shell.term.Tty
+import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
@@ -30,9 +33,9 @@ import io.vertx.scala.ext.shell.session.Session
   * The job life cycle can be controlled with the [[io.vertx.scala.ext.shell.system.Job#run]], [[io.vertx.scala.ext.shell.system.Job#resume]] and [[io.vertx.scala.ext.shell.system.Job#suspend]] and [[io.vertx.scala.ext.shell.system.Job#interrupt]]
   * methods.
   */
-class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
+class Job(private val _asJava: JJob) {
 
-  def asJava: io.vertx.ext.shell.system.Job = _asJava
+  def asJava: JJob = _asJava
 
   /**
     * @return the job id
@@ -67,8 +70,8 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * @param tty the tty to use
     * @return this object
     */
-  def setTty(tty: io.vertx.scala.ext.shell.term.Tty): io.vertx.scala.ext.shell.system.Job = {
-    _asJava.setTty(tty.asJava.asInstanceOf[io.vertx.ext.shell.term.Tty])
+  def setTty(tty: Tty): Job = {
+    _asJava.setTty(tty.asJava.asInstanceOf[JTty])
     this
   }
 
@@ -77,8 +80,8 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * @param session the session to use
     * @return this object
     */
-  def setSession(session: io.vertx.scala.ext.shell.session.Session): io.vertx.scala.ext.shell.system.Job = {
-    _asJava.setSession(session.asJava.asInstanceOf[io.vertx.ext.shell.session.Session])
+  def setSession(session: Session): Job = {
+    _asJava.setSession(session.asJava.asInstanceOf[JSession])
     this
   }
 
@@ -87,7 +90,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * @param handler the terminate handler
     * @return this object
     */
-  def statusUpdateHandler(handler: io.vertx.ext.shell.system.ExecStatus => Unit): io.vertx.scala.ext.shell.system.Job = {
+  def statusUpdateHandler(handler: io.vertx.ext.shell.system.ExecStatus => Unit): Job = {
     _asJava.statusUpdateHandler(funcToHandler(handler))
     this
   }
@@ -96,7 +99,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * Run the job, before running the job a  must be set.
     * @return this object
     */
-  def run(): io.vertx.scala.ext.shell.system.Job = {
+  def run(): Job = {
     _asJava.run()
     this
   }
@@ -112,7 +115,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
   /**
     * Resume the job to foreground.
     */
-  def resume(): io.vertx.scala.ext.shell.system.Job = {
+  def resume(): Job = {
     Job.apply(_asJava.resume())
   }
 
@@ -120,7 +123,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * Send the job to background.
     * @return this object
     */
-  def toBackground(): io.vertx.scala.ext.shell.system.Job = {
+  def toBackground(): Job = {
     _asJava.toBackground()
     this
   }
@@ -129,7 +132,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * Send the job to foreground.
     * @return this object
     */
-  def toForeground(): io.vertx.scala.ext.shell.system.Job = {
+  def toForeground(): Job = {
     _asJava.toForeground()
     this
   }
@@ -138,7 +141,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * Resume the job.
     * @param foreground true when the job is resumed in foreground
     */
-  def resume(foreground: Boolean): io.vertx.scala.ext.shell.system.Job = {
+  def resume(foreground: Boolean): Job = {
     _asJava.resume(foreground)
     this
   }
@@ -147,7 +150,7 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
     * Resume the job.
     * @return this object
     */
-  def suspend(): io.vertx.scala.ext.shell.system.Job = {
+  def suspend(): Job = {
     _asJava.suspend()
     this
   }
@@ -162,19 +165,19 @@ class Job(private val _asJava: io.vertx.ext.shell.system.Job) {
   /**
     * @return the first process in the job
     */
-  def process(): io.vertx.scala.ext.shell.system.Process = {
+  def process(): Process = {
     if (cached_0 == null) {
       cached_0=    Process.apply(_asJava.process())
     }
     cached_0
   }
 
-  private var cached_0: io.vertx.scala.ext.shell.system.Process = _
+  private var cached_0: Process = _
 }
 
 object Job {
 
-  def apply(_asJava: io.vertx.ext.shell.system.Job): io.vertx.scala.ext.shell.system.Job =
-    new io.vertx.scala.ext.shell.system.Job(_asJava)
+  def apply(_asJava: JJob): Job =
+    new Job(_asJava)
 
 }

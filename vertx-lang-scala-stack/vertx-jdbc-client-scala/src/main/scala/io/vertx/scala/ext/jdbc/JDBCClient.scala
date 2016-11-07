@@ -20,15 +20,12 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
-  import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.scala.core.Vertx
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-  import io.vertx.core.json.JsonObject
-      
+import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.core.json.JsonObject
+
 /**
   * An asynchronous client interface for interacting with a JDBC compliant database
   */

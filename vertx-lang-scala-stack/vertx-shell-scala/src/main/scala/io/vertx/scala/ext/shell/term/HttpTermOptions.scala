@@ -17,22 +17,46 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.shell.term.{HttpTermOptions => JHttpTermOptions}
+import io.vertx.core.http.HttpVersion
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
+import io.vertx.core.http.ClientAuth
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+import io.vertx.scala.core.http.Http2Settings
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.JdkSSLEngineOptions
+import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.scala.core.net.JksOptions
+import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.scala.core.net.OpenSSLEngineOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PfxOptions
+import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
+import io.vertx.scala.ext.web.handler.sockjs.SockJSHandlerOptions
 
 /**
   * The web term configuration options.
   */
 
-class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
-  def setAcceptBacklog(value:Int) = {
+class HttpTermOptions(val asJava: JHttpTermOptions) {
+  def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this
   }
   def getAcceptBacklog = {
     asJava.getAcceptBacklog()
   }
-  def setAlpnVersions(value:scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    asJava.setAlpnVersions(value)
+  def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
+    asJava.setAlpnVersions(value.asJava)
     this
   }
   def getAlpnVersions = {
@@ -45,91 +69,98 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * Set the charset used for encoding / decoding text data from/to SockJS
     */
-  def setCharset(value:String) = {
+  def setCharset(value: String) = {
     asJava.setCharset(value)
     this
   }
   def getCharset = {
     asJava.getCharset()
   }
-  def setClientAuth(value:io.vertx.core.http.ClientAuth) = {
+  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this
   }
   def getClientAuth = {
     asJava.getClientAuth()
   }
-  def setClientAuthRequired(value:Boolean) = {
+  def setClientAuthRequired(value: Boolean) = {
     asJava.setClientAuthRequired(value)
     this
   }
   def isClientAuthRequired = {
     asJava.isClientAuthRequired()
   }
-  def setCompressionSupported(value:Boolean) = {
+  def setCompressionSupported(value: Boolean) = {
     asJava.setCompressionSupported(value)
     this
   }
   def isCompressionSupported = {
     asJava.isCompressionSupported()
   }
-  def addCrlPath(value:String) = {
+  def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
   def getCrlPaths = {
     asJava.getCrlPaths()
   }
-  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {
     asJava.getCrlValues()
   }
-  def addEnabledCipherSuite(value:String) = {
+  def setDecompressionSupported(value: Boolean) = {
+    asJava.setDecompressionSupported(value)
+    this
+  }
+  def isDecompressionSupported = {
+    asJava.isDecompressionSupported()
+  }
+  def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
   def getEnabledCipherSuites = {
     asJava.getEnabledCipherSuites()
   }
-  def addEnabledSecureTransportProtocol(value:String) = {
+  def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
   def getEnabledSecureTransportProtocols = {
     asJava.getEnabledSecureTransportProtocols()
   }
-  def setHandle100ContinueAutomatically(value:Boolean) = {
+  def setHandle100ContinueAutomatically(value: Boolean) = {
     asJava.setHandle100ContinueAutomatically(value)
     this
   }
   def isHandle100ContinueAutomatically = {
     asJava.isHandle100ContinueAutomatically()
   }
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
   def getHost = {
     asJava.getHost()
   }
-  def setHttp2ConnectionWindowSize(value:Int) = {
+  def setHttp2ConnectionWindowSize(value: Int) = {
     asJava.setHttp2ConnectionWindowSize(value)
     this
   }
   def getHttp2ConnectionWindowSize = {
     asJava.getHttp2ConnectionWindowSize()
   }
-  def setIdleTimeout(value:Int) = {
+  def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
   def getIdleTimeout = {
     asJava.getIdleTimeout()
   }
-  def setInitialSettings(value:io.vertx.scala.core.http.Http2Settings) = {
+  def setInitialSettings(value: Http2Settings) = {
     asJava.setInitialSettings(value.asJava)
     this
   }
@@ -140,98 +171,98 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * The path of the <i>inputrc</i> config.
     */
-  def setIntputrc(value:String) = {
+  def setIntputrc(value: String) = {
     asJava.setIntputrc(value)
     this
   }
   def getIntputrc = {
     asJava.getIntputrc()
   }
-  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
-  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
-  def setLogActivity(value:Boolean) = {
+  def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
   def getLogActivity = {
     asJava.getLogActivity()
   }
-  def setMaxChunkSize(value:Int) = {
+  def setMaxChunkSize(value: Int) = {
     asJava.setMaxChunkSize(value)
     this
   }
   def getMaxChunkSize = {
     asJava.getMaxChunkSize()
   }
-  def setMaxHeaderSize(value:Int) = {
+  def setMaxHeaderSize(value: Int) = {
     asJava.setMaxHeaderSize(value)
     this
   }
   def getMaxHeaderSize = {
     asJava.getMaxHeaderSize()
   }
-  def setMaxInitialLineLength(value:Int) = {
+  def setMaxInitialLineLength(value: Int) = {
     asJava.setMaxInitialLineLength(value)
     this
   }
   def getMaxInitialLineLength = {
     asJava.getMaxInitialLineLength()
   }
-  def setMaxWebsocketFrameSize(value:Int) = {
+  def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
   }
   def getMaxWebsocketFrameSize = {
     asJava.getMaxWebsocketFrameSize()
   }
-  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
-  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
-  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+  def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
-  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
-  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
   def getPort = {
     asJava.getPort()
   }
-  def setReceiveBufferSize(value:Int) = {
+  def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
   def getReceiveBufferSize = {
     asJava.getReceiveBufferSize()
   }
-  def setReuseAddress(value:Boolean) = {
+  def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
   def isReuseAddress = {
     asJava.isReuseAddress()
   }
-  def setSendBufferSize(value:Int) = {
+  def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
@@ -242,14 +273,14 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * Set `shell.html` resource to use.
     */
-  def setShellHtmlResource(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setShellHtmlResource(value)
+  def setShellHtmlResource(value: Buffer) = {
+    asJava.setShellHtmlResource(value.asJava)
     this
   }
   def getShellHtmlResource = {
     asJava.getShellHtmlResource()
   }
-  def setSoLinger(value:Int) = {
+  def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
@@ -260,7 +291,7 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * The SockJS handler options.
     */
-  def setSockJSHandlerOptions(value:io.vertx.scala.ext.web.handler.sockjs.SockJSHandlerOptions) = {
+  def setSockJSHandlerOptions(value: SockJSHandlerOptions) = {
     asJava.setSockJSHandlerOptions(value.asJava)
     this
   }
@@ -271,28 +302,28 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * Configure the SockJS path, the default value is `/term/\*`.
     */
-  def setSockJSPath(value:String) = {
+  def setSockJSPath(value: String) = {
     asJava.setSockJSPath(value)
     this
   }
   def getSockJSPath = {
     asJava.getSockJSPath()
   }
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
   def isSsl = {
     asJava.isSsl()
   }
-  def setTcpKeepAlive(value:Boolean) = {
+  def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
   def isTcpKeepAlive = {
     asJava.isTcpKeepAlive()
   }
-  def setTcpNoDelay(value:Boolean) = {
+  def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
@@ -303,32 +334,32 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * Set `term.js` resource to use.
     */
-  def setTermJsResource(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setTermJsResource(value)
+  def setTermJsResource(value: Buffer) = {
+    asJava.setTermJsResource(value.asJava)
     this
   }
   def getTermJsResource = {
     asJava.getTermJsResource()
   }
-  def setTrafficClass(value:Int) = {
+  def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
   def getTrafficClass = {
     asJava.getTrafficClass()
   }
-  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
-  def setUseAlpn(value:Boolean) = {
+  def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
   def isUseAlpn = {
     asJava.isUseAlpn()
   }
-  def setUsePooledBuffers(value:Boolean) = {
+  def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
@@ -339,14 +370,14 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
   /**
     * Set `vertxshell.js` resource to use.
     */
-  def setVertsShellJsResource(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setVertsShellJsResource(value)
+  def setVertsShellJsResource(value: Buffer) = {
+    asJava.setVertsShellJsResource(value.asJava)
     this
   }
   def getVertsShellJsResource = {
     asJava.getVertsShellJsResource()
   }
-  def setWebsocketSubProtocols(value:String) = {
+  def setWebsocketSubProtocols(value: String) = {
     asJava.setWebsocketSubProtocols(value)
     this
   }
@@ -356,13 +387,12 @@ class HttpTermOptions(val asJava: io.vertx.ext.shell.term.HttpTermOptions) {
 }
 
 object HttpTermOptions {
-  type HttpTermOptionsJava = io.vertx.ext.shell.term.HttpTermOptions
   
   def apply() = {
-    new HttpTermOptions(new HttpTermOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new HttpTermOptions(new JHttpTermOptions(emptyObj()))
   }
   
-  def apply(t: HttpTermOptionsJava) = {
+  def apply(t: JHttpTermOptions) = {
     if(t != null)
       new HttpTermOptions(t)
     else
@@ -371,7 +401,7 @@ object HttpTermOptions {
   
   def fromJson(json: JsonObject):HttpTermOptions = {
     if(json != null)
-      new HttpTermOptions(new HttpTermOptionsJava(json))
+      new HttpTermOptions(new JHttpTermOptions(json))
     else
       null
   }

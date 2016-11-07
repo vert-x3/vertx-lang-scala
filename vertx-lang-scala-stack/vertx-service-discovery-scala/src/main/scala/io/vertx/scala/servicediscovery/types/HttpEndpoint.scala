@@ -19,54 +19,57 @@ package io.vertx.scala.servicediscovery.types
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.spi.ServiceType
+import io.vertx.servicediscovery.types.{HttpEndpoint => JHttpEndpoint}
+import io.vertx.servicediscovery.spi.{ServiceType => JServiceType}
 import io.vertx.core.json.JsonObject
-import io.vertx.servicediscovery.Record
+import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.scala.servicediscovery.Record
+import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-import io.vertx.core.Handler
-import java.util.function.Function
+import java.util.function.{Function => JFunction}
+import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.scala.core.http.HttpClient
 
 /**
   *  for HTTP endpoint (REST api).
   * Consumers receive a HTTP client configured with the host and port of the endpoint.
   */
-class HttpEndpoint(private val _asJava: io.vertx.servicediscovery.types.HttpEndpoint) {
+class HttpEndpoint(private val _asJava: JHttpEndpoint) {
 
-  def asJava: io.vertx.servicediscovery.types.HttpEndpoint = _asJava
+  def asJava: JHttpEndpoint = _asJava
 
 }
 
 object HttpEndpoint {
 
-  def apply(_asJava: io.vertx.servicediscovery.types.HttpEndpoint): io.vertx.scala.servicediscovery.types.HttpEndpoint =
-    new io.vertx.scala.servicediscovery.types.HttpEndpoint(_asJava)
+  def apply(_asJava: JHttpEndpoint): HttpEndpoint =
+    new HttpEndpoint(_asJava)
 
-  def createRecord(name: String, host: String, port: Int, root: String, metadata: io.vertx.core.json.JsonObject): io.vertx.scala.servicediscovery.Record = {
-    io.vertx.scala.servicediscovery.Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root, metadata))
+  def createRecord(name: String, host: String, port: Int, root: String, metadata: JsonObject): Record = {
+    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root, metadata))
   }
 
-  def createRecord(name: String, ssl: Boolean, host: String, port: Int, root: String, metadata: io.vertx.core.json.JsonObject): io.vertx.scala.servicediscovery.Record = {
-    io.vertx.scala.servicediscovery.Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, ssl, host, port, root, metadata))
+  def createRecord(name: String, ssl: Boolean, host: String, port: Int, root: String, metadata: JsonObject): Record = {
+    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, ssl, host, port, root, metadata))
   }
 
-  def createRecord(name: String, host: String, port: Int, root: String): io.vertx.scala.servicediscovery.Record = {
-    io.vertx.scala.servicediscovery.Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root))
+  def createRecord(name: String, host: String, port: Int, root: String): Record = {
+    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root))
   }
 
-  def createRecord(name: String, host: String): io.vertx.scala.servicediscovery.Record = {
-    io.vertx.scala.servicediscovery.Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host))
+  def createRecord(name: String, host: String): Record = {
+    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host))
   }
 
-  def getClientFuture(discovery: io.vertx.scala.servicediscovery.ServiceDiscovery, filter: io.vertx.core.json.JsonObject): concurrent.Future[io.vertx.scala.core.http.HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpClient,io.vertx.scala.core.http.HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[io.vertx.servicediscovery.ServiceDiscovery], filter, promiseAndHandler._1)
+  def getClientFuture(discovery: ServiceDiscovery, filter: JsonObject): concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
+    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getClientFuture(discovery: io.vertx.scala.servicediscovery.ServiceDiscovery, filter: io.vertx.servicediscovery.Record => java.lang.Boolean): concurrent.Future[io.vertx.scala.core.http.HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.http.HttpClient,io.vertx.scala.core.http.HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[io.vertx.servicediscovery.ServiceDiscovery], asJavaFunction(filter), promiseAndHandler._1)
+  def getClientFuture(discovery: ServiceDiscovery, filter: JRecord => java.lang.Boolean): concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
+    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], asJavaFunction(filter), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

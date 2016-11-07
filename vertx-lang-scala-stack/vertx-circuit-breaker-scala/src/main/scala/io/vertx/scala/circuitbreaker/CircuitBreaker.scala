@@ -19,26 +19,29 @@ package io.vertx.scala.circuitbreaker
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.circuitbreaker.CircuitBreakerOptions
+import io.vertx.circuitbreaker.{CircuitBreaker => JCircuitBreaker}
+import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
+import io.vertx.scala.circuitbreaker.CircuitBreakerOptions
 import io.vertx.circuitbreaker.CircuitBreakerState
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.core.{Future => JFuture}
 import io.vertx.scala.core.Future
-import java.util.function.Function
+import java.util.function.{Function => JFunction}
 
 /**
   * An implementation of the circuit breaker pattern for Vert.x
   */
-class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker) {
+class CircuitBreaker(private val _asJava: JCircuitBreaker) {
 
-  def asJava: io.vertx.circuitbreaker.CircuitBreaker = _asJava
+  def asJava: JCircuitBreaker = _asJava
 
   /**
     * Closes the circuit breaker. It stops sending events on its state on the event bus.
     * This method is not related to the `close` state of the circuit breaker. To set the circuit breaker in the
     * `close` state, use [[io.vertx.scala.circuitbreaker.CircuitBreaker#reset]].
     */
-  def close(): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def close(): CircuitBreaker = {
     _asJava.close()
     this
   }
@@ -48,7 +51,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param handler the handler, must not be `null`
     * @return the current [[CircuitBreaker]]
     */
-  def openHandler(handler: () => Unit): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def openHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.openHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -58,7 +61,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param handler the handler, must not be `null`
     * @return the current [[CircuitBreaker]]
     */
-  def halfOpenHandler(handler: () => Unit): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def halfOpenHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.halfOpenHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -68,7 +71,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param handler the handler, must not be `null`
     * @return the current [[CircuitBreaker]]
     */
-  def closeHandler(handler: () => Unit): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def closeHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -90,7 +93,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return a future object completed when the operation or its fallback completes
     */
-  def executeWithFallback[T](operation: io.vertx.scala.core.Future[T] => Unit, fallback: java.lang.Throwable => T): io.vertx.scala.core.Future[T] = {
+  def executeWithFallback[T](operation: Future[T] => Unit, fallback: java.lang.Throwable => T): Future[T] = {
     Future.apply[T](_asJava.executeWithFallback(funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback)))
   }
 
@@ -99,7 +102,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param operation the operation
     * @return a future object completed when the operation or its fallback completes
     */
-  def execute[T](operation: io.vertx.scala.core.Future[T] => Unit): io.vertx.scala.core.Future[T] = {
+  def execute[T](operation: Future[T] => Unit): Future[T] = {
     Future.apply[T](_asJava.execute(funcToMappedHandler(Future.apply[T])(operation)))
   }
 
@@ -110,8 +113,8 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param operation the operation
     * @return the current [[CircuitBreaker]]
     */
-  def executeAndReport[T](resultFuture: io.vertx.scala.core.Future[T], operation: io.vertx.scala.core.Future[T] => Unit): io.vertx.scala.circuitbreaker.CircuitBreaker = {
-    _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[io.vertx.core.Future[T]], funcToMappedHandler(Future.apply[T])(operation))
+  def executeAndReport[T](resultFuture: Future[T], operation: Future[T] => Unit): CircuitBreaker = {
+    _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation))
     this
   }
 
@@ -134,8 +137,8 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current [[CircuitBreaker]]
     */
-  def executeAndReportWithFallback[T](resultFuture: io.vertx.scala.core.Future[T], operation: io.vertx.scala.core.Future[T] => Unit, fallback: java.lang.Throwable => T): io.vertx.scala.circuitbreaker.CircuitBreaker = {
-    _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[io.vertx.core.Future[T]], funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback))
+  def executeAndReportWithFallback[T](resultFuture: Future[T], operation: Future[T] => Unit, fallback: java.lang.Throwable => T): CircuitBreaker = {
+    _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback))
     this
   }
 
@@ -147,7 +150,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * @param handler the handler
     * @return the current [[CircuitBreaker]]
     */
-  def fallback[T](handler: java.lang.Throwable => T): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def fallback[T](handler: java.lang.Throwable => T): CircuitBreaker = {
     _asJava.fallback(asJavaFunction(handler))
     this
   }
@@ -156,7 +159,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * Resets the circuit breaker state (number of failure set to 0 and state set to closed).
     * @return the current [[CircuitBreaker]]
     */
-  def reset(): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def reset(): CircuitBreaker = {
     _asJava.reset()
     this
   }
@@ -165,7 +168,7 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
     * Explicitly opens the circuit.
     * @return the current [[CircuitBreaker]]
     */
-  def open(): io.vertx.scala.circuitbreaker.CircuitBreaker = {
+  def open(): CircuitBreaker = {
     _asJava.open()
     this
   }
@@ -199,15 +202,15 @@ class CircuitBreaker(private val _asJava: io.vertx.circuitbreaker.CircuitBreaker
 
 object CircuitBreaker {
 
-  def apply(_asJava: io.vertx.circuitbreaker.CircuitBreaker): io.vertx.scala.circuitbreaker.CircuitBreaker =
-    new io.vertx.scala.circuitbreaker.CircuitBreaker(_asJava)
+  def apply(_asJava: JCircuitBreaker): CircuitBreaker =
+    new CircuitBreaker(_asJava)
 
-  def create(name: String, vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.circuitbreaker.CircuitBreakerOptions): io.vertx.scala.circuitbreaker.CircuitBreaker = {
-    CircuitBreaker.apply(io.vertx.circuitbreaker.CircuitBreaker.create(name, vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(name: String, vertx: Vertx, options: CircuitBreakerOptions): CircuitBreaker = {
+    CircuitBreaker.apply(io.vertx.circuitbreaker.CircuitBreaker.create(name, vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def create(name: String, vertx: io.vertx.scala.core.Vertx): io.vertx.scala.circuitbreaker.CircuitBreaker = {
-    CircuitBreaker.apply(io.vertx.circuitbreaker.CircuitBreaker.create(name, vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(name: String, vertx: Vertx): CircuitBreaker = {
+    CircuitBreaker.apply(io.vertx.circuitbreaker.CircuitBreaker.create(name, vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

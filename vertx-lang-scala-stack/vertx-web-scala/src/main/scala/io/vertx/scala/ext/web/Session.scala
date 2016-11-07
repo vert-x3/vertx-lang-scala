@@ -20,8 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{Session => JSession}
-  import io.vertx.ext.web.{Session => JSession}
-    
+
 /**
   * Represents a browser session.
   * 

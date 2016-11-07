@@ -17,18 +17,20 @@
 package io.vertx.scala.ext.dropwizard
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.dropwizard.{Match => JMatch}
 
 /**
   * A match for a value.
   */
 
-class Match(val asJava: io.vertx.ext.dropwizard.Match) {
+class Match(val asJava: JMatch) {
 
   /**
     * Set the type of matching to apply.
     */
-  def setType(value:io.vertx.ext.dropwizard.MatchType) = {
+  def setType(value: io.vertx.ext.dropwizard.MatchType) = {
     asJava.setType(value)
     this
   }
@@ -39,7 +41,7 @@ class Match(val asJava: io.vertx.ext.dropwizard.Match) {
   /**
     * Set the matched value.
     */
-  def setValue(value:String) = {
+  def setValue(value: String) = {
     asJava.setValue(value)
     this
   }
@@ -49,13 +51,12 @@ class Match(val asJava: io.vertx.ext.dropwizard.Match) {
 }
 
 object Match {
-  type MatchJava = io.vertx.ext.dropwizard.Match
   
   def apply() = {
-    new Match(new MatchJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Match(new JMatch(emptyObj()))
   }
   
-  def apply(t: MatchJava) = {
+  def apply(t: JMatch) = {
     if(t != null)
       new Match(t)
     else
@@ -64,7 +65,7 @@ object Match {
   
   def fromJson(json: JsonObject):Match = {
     if(json != null)
-      new Match(new MatchJava(json))
+      new Match(new JMatch(json))
     else
       null
   }
