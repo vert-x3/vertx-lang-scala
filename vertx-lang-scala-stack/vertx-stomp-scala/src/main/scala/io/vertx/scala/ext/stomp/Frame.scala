@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.stomp.{Frame => JFrame}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.ext.stomp.Frame.Command
 
 /**
@@ -42,8 +41,8 @@ class Frame(val asJava: JFrame) {
   /**
     * Sets the body of the frame.
     */
-  def setBody(value: JBuffer) = {
-    asJava.setBody(value)
+  def setBody(value: Buffer) = {
+    asJava.setBody(value.asJava)
     this
   }
   def getBody = {

@@ -19,22 +19,23 @@ package io.vertx.scala.ext.shell.term
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{Pty => JPty}
+import io.vertx.ext.shell.term.{Tty => JTty}
 
 /**
   * A pseudo terminal used for controlling a [[io.vertx.scala.ext.shell.term.Tty]]. This interface acts as a pseudo
   * terminal master, [[io.vertx.scala.ext.shell.term.Pty#slave]] returns the assocated slave pseudo terminal.
   */
-class Pty(private val _asJava: io.vertx.ext.shell.term.Pty) {
+class Pty(private val _asJava: JPty) {
 
-  def asJava: io.vertx.ext.shell.term.Pty = _asJava
+  def asJava: JPty = _asJava
 
   /**
     * Set the standard out handler of the pseudo terminal.
     * @param handler the standard output
     * @return this current object
     */
-  def stdoutHandler(handler: String => Unit): io.vertx.scala.ext.shell.term.Pty = {
+  def stdoutHandler(handler: String => Unit): Pty = {
     _asJava.stdoutHandler(funcToHandler[java.lang.String](handler))
     this
   }
@@ -44,7 +45,7 @@ class Pty(private val _asJava: io.vertx.ext.shell.term.Pty) {
     * @param data the data to write
     * @return this current object
     */
-  def write(data: String): io.vertx.scala.ext.shell.term.Pty = {
+  def write(data: String): Pty = {
     _asJava.write(data)
     this
   }
@@ -53,7 +54,7 @@ class Pty(private val _asJava: io.vertx.ext.shell.term.Pty) {
     * Resize the terminal.
     * @return this current object
     */
-  def setSize(width: Int, height: Int): io.vertx.scala.ext.shell.term.Pty = {
+  def setSize(width: Int, height: Int): Pty = {
     _asJava.setSize(width, height)
     this
   }
@@ -61,7 +62,7 @@ class Pty(private val _asJava: io.vertx.ext.shell.term.Pty) {
   /**
     * @return the pseudo terminal slave
     */
-  def slave(): io.vertx.scala.ext.shell.term.Tty = {
+  def slave(): Tty = {
     Tty.apply(_asJava.slave())
   }
 
@@ -69,14 +70,14 @@ class Pty(private val _asJava: io.vertx.ext.shell.term.Pty) {
 
 object Pty {
 
-  def apply(_asJava: io.vertx.ext.shell.term.Pty): io.vertx.scala.ext.shell.term.Pty =
-    new io.vertx.scala.ext.shell.term.Pty(_asJava)
+  def apply(_asJava: JPty): Pty =
+    new Pty(_asJava)
 
-  def create(): io.vertx.scala.ext.shell.term.Pty = {
+  def create(): Pty = {
     Pty.apply(io.vertx.ext.shell.term.Pty.create())
   }
 
-  def create(terminalType: String): io.vertx.scala.ext.shell.term.Pty = {
+  def create(terminalType: String): Pty = {
     Pty.apply(io.vertx.ext.shell.term.Pty.create(terminalType))
   }
 

@@ -19,23 +19,26 @@ package io.vertx.ext.scala.eventbus.bridge.tcp
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.net.NetServerOptions
+import io.vertx.ext.eventbus.bridge.tcp.{TcpEventBusBridge => JTcpEventBusBridge}
+import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
+import io.vertx.scala.core.net.NetServerOptions
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.ext.bridge.BridgeOptions
-import io.vertx.core.Handler
+import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
+import io.vertx.scala.ext.bridge.BridgeOptions
 
 /**
   * TCP EventBus bridge for Vert.x
   */
-class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge) {
+class TcpEventBusBridge(private val _asJava: JTcpEventBusBridge) {
 
-  def asJava: io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge = _asJava
+  def asJava: JTcpEventBusBridge = _asJava
 
   /**
     * Listen on default port 7000
     * @return self
     */
-  def listen(): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
+  def listen(): TcpEventBusBridge = {
     _asJava.listen()
     this
   }
@@ -44,8 +47,8 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
     * Listen on default port 7000 with a handler to report the state of the socket listen operation.
     * @return the result future
     */
-  def listenFuture(): concurrent.Future[io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge,io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
+  def listenFuture(): concurrent.Future[TcpEventBusBridge] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge,TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
     _asJava.listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -56,7 +59,7 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
     * @param address tcp address to the bind
     * @return self
     */
-  def listen(port: Int, address: String): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
+  def listen(port: Int, address: String): TcpEventBusBridge = {
     _asJava.listen(port, address)
     this
   }
@@ -67,8 +70,8 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
     * @param address tcp address to the bind
     * @return the result future
     */
-  def listenFuture(port: Int, address: String): concurrent.Future[io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge,io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
+  def listenFuture(port: Int, address: String): concurrent.Future[TcpEventBusBridge] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge,TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
     _asJava.listen(port, address, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -78,7 +81,7 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
     * @param port tcp port
     * @return self
     */
-  def listen(port: Int): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
+  def listen(port: Int): TcpEventBusBridge = {
     _asJava.listen(port)
     this
   }
@@ -88,8 +91,8 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
     * @param port tcp port
     * @return the result future
     */
-  def listenFuture(port: Int): concurrent.Future[io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge,io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
+  def listenFuture(port: Int): concurrent.Future[TcpEventBusBridge] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge,TcpEventBusBridge]((x => if (x == null) null else TcpEventBusBridge.apply(x)))
     _asJava.listen(port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -115,19 +118,19 @@ class TcpEventBusBridge(private val _asJava: io.vertx.ext.eventbus.bridge.tcp.Tc
 
 object TcpEventBusBridge {
 
-  def apply(_asJava: io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge =
-    new io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge(_asJava)
+  def apply(_asJava: JTcpEventBusBridge): TcpEventBusBridge =
+    new TcpEventBusBridge(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
-    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): TcpEventBusBridge = {
+    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.bridge.BridgeOptions): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
-    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: BridgeOptions): TcpEventBusBridge = {
+    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.bridge.BridgeOptions, netServerOptions: io.vertx.scala.core.net.NetServerOptions): io.vertx.ext.scala.eventbus.bridge.tcp.TcpEventBusBridge = {
-    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava, netServerOptions.asJava))
+  def create(vertx: Vertx, options: BridgeOptions, netServerOptions: NetServerOptions): TcpEventBusBridge = {
+    TcpEventBusBridge.apply(io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava))
   }
 
 }

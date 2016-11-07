@@ -20,22 +20,21 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-  import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-  import io.vertx.ext.stomp.{Acknowledgement => JAcknowledgement}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.ext.stomp.{Acknowledgement => JAcknowledgement}
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.ext.stomp.{StompServer => JStompServer}
-  import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
-  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.stomp.{StompServer => JStompServer}
+import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-  import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
-    import io.vertx.ext.stomp.{Destination => JDestination}
-  import io.vertx.ext.stomp.{DestinationFactory => JDestinationFactory}
-  import io.vertx.ext.stomp.{Frame => JFrame}
-  import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
-        
+import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
+import io.vertx.scala.ext.stomp.BridgeOptions
+import io.vertx.ext.stomp.{Destination => JDestination}
+import io.vertx.ext.stomp.{DestinationFactory => JDestinationFactory}
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
+import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
+
 /**
   * STOMP server handler implements the behavior of the STOMP server when a specific event occurs. For instance, if
   * let customize the behavior when specific STOMP frames arrives or when a connection is closed. This class has been

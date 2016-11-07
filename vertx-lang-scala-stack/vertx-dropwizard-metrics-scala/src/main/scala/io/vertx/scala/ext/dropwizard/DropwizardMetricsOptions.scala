@@ -17,26 +17,28 @@
 package io.vertx.scala.ext.dropwizard
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.dropwizard.{DropwizardMetricsOptions => JDropwizardMetricsOptions}
 
 /**
   * Vert.x Dropwizard metrics configuration.
   */
 
-class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMetricsOptions) {
+class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
 
   /**
     * Set the path for a config file that contains options in JSON format, to be used to create a new options object.
     * The file will be looked for on the file system first and then on the classpath if it's not found.
     */
-  def setConfigPath(value:String) = {
+  def setConfigPath(value: String) = {
     asJava.setConfigPath(value)
     this
   }
   def getConfigPath = {
     asJava.getConfigPath()
   }
-  def setEnabled(value:Boolean) = {
+  def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
@@ -47,7 +49,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Set the JMX domain to use when JMX metrics are enabled.
     */
-  def setJmxDomain(value:String) = {
+  def setJmxDomain(value: String) = {
     asJava.setJmxDomain(value)
     this
   }
@@ -58,7 +60,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Set whether JMX will be enabled on the Vert.x instance.
     */
-  def setJmxEnabled(value:Boolean) = {
+  def setJmxEnabled(value: Boolean) = {
     asJava.setJmxEnabled(value)
     this
   }
@@ -69,7 +71,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Add a monitored event bus handler.
     */
-  def addMonitoredEventBusHandler(value:io.vertx.scala.ext.dropwizard.Match) = {
+  def addMonitoredEventBusHandler(value: Match) = {
     asJava.addMonitoredEventBusHandler(value.asJava)
     this
   }
@@ -83,7 +85,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Add an monitored http client endpoint.
     */
-  def addMonitoredHttpClientEndpoint(value:io.vertx.scala.ext.dropwizard.Match) = {
+  def addMonitoredHttpClientEndpoint(value: Match) = {
     asJava.addMonitoredHttpClientEndpoint(value.asJava)
     this
   }
@@ -91,7 +93,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Add an monitored http client uri.
     */
-  def addMonitoredHttpClientUri(value:io.vertx.scala.ext.dropwizard.Match) = {
+  def addMonitoredHttpClientUri(value: Match) = {
     asJava.addMonitoredHttpClientUri(value.asJava)
     this
   }
@@ -102,7 +104,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Add an monitored http server uri.
     */
-  def addMonitoredHttpServerUri(value:io.vertx.scala.ext.dropwizard.Match) = {
+  def addMonitoredHttpServerUri(value: Match) = {
     asJava.addMonitoredHttpServerUri(value.asJava)
     this
   }
@@ -113,7 +115,7 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
   /**
     * Set the name used for registering the metrics in the Dropwizard shared registry.
     */
-  def setRegistryName(value:String) = {
+  def setRegistryName(value: String) = {
     asJava.setRegistryName(value)
     this
   }
@@ -123,13 +125,12 @@ class DropwizardMetricsOptions(val asJava: io.vertx.ext.dropwizard.DropwizardMet
 }
 
 object DropwizardMetricsOptions {
-  type DropwizardMetricsOptionsJava = io.vertx.ext.dropwizard.DropwizardMetricsOptions
   
   def apply() = {
-    new DropwizardMetricsOptions(new DropwizardMetricsOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DropwizardMetricsOptions(new JDropwizardMetricsOptions(emptyObj()))
   }
   
-  def apply(t: DropwizardMetricsOptionsJava) = {
+  def apply(t: JDropwizardMetricsOptions) = {
     if(t != null)
       new DropwizardMetricsOptions(t)
     else
@@ -138,7 +139,7 @@ object DropwizardMetricsOptions {
   
   def fromJson(json: JsonObject):DropwizardMetricsOptions = {
     if(json != null)
-      new DropwizardMetricsOptions(new DropwizardMetricsOptionsJava(json))
+      new DropwizardMetricsOptions(new JDropwizardMetricsOptions(json))
     else
       null
   }

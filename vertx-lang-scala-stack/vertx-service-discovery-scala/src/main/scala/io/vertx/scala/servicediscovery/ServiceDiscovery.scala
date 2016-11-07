@@ -19,13 +19,19 @@ package io.vertx.scala.servicediscovery
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
+import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.servicediscovery.Record
-import java.util.function.Function
+import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.scala.servicediscovery.Record
+import java.util.function.{Function => JFunction}
+import io.vertx.servicediscovery.spi.{ServiceImporter => JServiceImporter}
 import io.vertx.scala.servicediscovery.spi.ServiceImporter
-import io.vertx.servicediscovery.ServiceDiscoveryOptions
+import io.vertx.servicediscovery.{ServiceDiscoveryOptions => JServiceDiscoveryOptions}
+import io.vertx.scala.servicediscovery.ServiceDiscoveryOptions
 import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.servicediscovery.spi.{ServiceExporter => JServiceExporter}
 import io.vertx.scala.servicediscovery.spi.ServiceExporter
 
 /**
@@ -61,16 +67,16 @@ import io.vertx.scala.servicediscovery.spi.ServiceExporter
   * Providers and consumers must create their own [[io.vertx.scala.servicediscovery.ServiceDiscovery]] instance. These instances are collaborating
   * in background (distributed structure) to keep the set of services in sync.
   */
-class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDiscovery) {
+class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
 
-  def asJava: io.vertx.servicediscovery.ServiceDiscovery = _asJava
+  def asJava: JServiceDiscovery = _asJava
 
   /**
     * Gets a service reference from the given record.
     * @param record the chosen recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
     * @return the service reference, that allows retrieving the service object. Once called the service reference is cached, and need to be released.
     */
-  def getReference(record: io.vertx.scala.servicediscovery.Record): io.vertx.scala.servicediscovery.ServiceReference = {
+  def getReference(record: Record): ServiceReference = {
     ServiceReference.apply(_asJava.getReference(record.asJava))
   }
 
@@ -80,7 +86,7 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param configuration the configuration
     * @return the service reference, that allows retrieving the service object. Once called the service reference is cached, and need to be released.
     */
-  def getReferenceWithConfiguration(record: io.vertx.scala.servicediscovery.Record, configuration: io.vertx.core.json.JsonObject): io.vertx.scala.servicediscovery.ServiceReference = {
+  def getReferenceWithConfiguration(record: Record, configuration: JsonObject): ServiceReference = {
     ServiceReference.apply(_asJava.getReferenceWithConfiguration(record.asJava, configuration))
   }
 
@@ -89,8 +95,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param reference the reference to release, must not be `null`
     * @return whether or not the reference has been released.
     */
-  def release(reference: io.vertx.scala.servicediscovery.ServiceReference): Boolean = {
-    _asJava.release(reference.asJava.asInstanceOf[io.vertx.servicediscovery.ServiceReference])
+  def release(reference: ServiceReference): Boolean = {
+    _asJava.release(reference.asJava.asInstanceOf[JServiceReference])
   }
 
   /**
@@ -100,8 +106,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param configuration the optional configuration
     * @return the current [[ServiceDiscovery]]
     */
-  def registerServiceImporter(importer: io.vertx.scala.servicediscovery.spi.ServiceImporter, configuration: io.vertx.core.json.JsonObject): io.vertx.scala.servicediscovery.ServiceDiscovery = {
-    ServiceDiscovery.apply(_asJava.registerServiceImporter(importer.asJava.asInstanceOf[io.vertx.servicediscovery.spi.ServiceImporter], configuration))
+  def registerServiceImporter(importer: ServiceImporter, configuration: JsonObject): ServiceDiscovery = {
+    ServiceDiscovery.apply(_asJava.registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration))
   }
 
   /**
@@ -111,9 +117,9 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param configuration the optional configuration
     * @return future call when the importer has finished its initialization and initial imports
     */
-  def registerServiceImporterFuture(importer: io.vertx.scala.servicediscovery.spi.ServiceImporter, configuration: io.vertx.core.json.JsonObject): concurrent.Future[Unit] = {
+  def registerServiceImporterFuture(importer: ServiceImporter, configuration: JsonObject): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    ServiceDiscovery.apply(_asJava.registerServiceImporter(importer.asJava.asInstanceOf[io.vertx.servicediscovery.spi.ServiceImporter], configuration, promiseAndHandler._1))
+    ServiceDiscovery.apply(_asJava.registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
@@ -124,8 +130,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param configuration the optional configuration
     * @return the current [[ServiceDiscovery]]
     */
-  def registerServiceExporter(exporter: io.vertx.scala.servicediscovery.spi.ServiceExporter, configuration: io.vertx.core.json.JsonObject): io.vertx.scala.servicediscovery.ServiceDiscovery = {
-    ServiceDiscovery.apply(_asJava.registerServiceExporter(exporter.asJava.asInstanceOf[io.vertx.servicediscovery.spi.ServiceExporter], configuration))
+  def registerServiceExporter(exporter: ServiceExporter, configuration: JsonObject): ServiceDiscovery = {
+    ServiceDiscovery.apply(_asJava.registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration))
   }
 
   /**
@@ -135,9 +141,9 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param configuration the optional configuration
     * @return future notified when the exporter has been correctly initialized.
     */
-  def registerServiceExporterFuture(exporter: io.vertx.scala.servicediscovery.spi.ServiceExporter, configuration: io.vertx.core.json.JsonObject): concurrent.Future[Unit] = {
+  def registerServiceExporterFuture(exporter: ServiceExporter, configuration: JsonObject): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    ServiceDiscovery.apply(_asJava.registerServiceExporter(exporter.asJava.asInstanceOf[io.vertx.servicediscovery.spi.ServiceExporter], configuration, promiseAndHandler._1))
+    ServiceDiscovery.apply(_asJava.registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration, promiseAndHandler._1))
     promiseAndHandler._2.future
   }
 
@@ -153,8 +159,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param record the recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
     * @return future called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
     */
-  def publishFuture(record: io.vertx.scala.servicediscovery.Record): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def publishFuture(record: Record): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.publish(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -191,8 +197,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param filter the filter.
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
     */
-  def getRecordFuture(filter: io.vertx.core.json.JsonObject): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def getRecordFuture(filter: JsonObject): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.getRecord(filter, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -207,8 +213,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @return the result future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
     */
-  def getRecordFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def getRecordFuture(filter: JRecord => java.lang.Boolean): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.getRecord(asJavaFunction(filter), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -225,8 +231,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
     * @return the result future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
     */
-  def getRecordFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean, includeOutOfService: Boolean): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def getRecordFuture(filter: JRecord => java.lang.Boolean, includeOutOfService: Boolean): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.getRecord(asJavaFunction(filter), includeOutOfService, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -237,8 +243,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param filter the filter - see [[#getRecord(JsonObject, Handler)]]
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
-  def getRecordsFuture(filter: io.vertx.core.json.JsonObject): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
+  def getRecordsFuture(filter: JsonObject): concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
     _asJava.getRecords(filter, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -254,8 +260,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
-  def getRecordsFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
+  def getRecordsFuture(filter: JRecord => java.lang.Boolean): concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
     _asJava.getRecords(asJavaFunction(filter), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -273,8 +279,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
-  def getRecordsFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean, includeOutOfService: Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[io.vertx.scala.servicediscovery.Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
+  def getRecordsFuture(filter: JRecord => java.lang.Boolean, includeOutOfService: Boolean): concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.servicediscovery.Record],scala.collection.mutable.Buffer[Record]]((x => if (x == null) null else x.asScala.map(x => Record(x))))
     _asJava.getRecords(asJavaFunction(filter), includeOutOfService, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -284,8 +290,8 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
     * @param record the updated recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
     * @return future called when the lookup has been completed.
     */
-  def updateFuture(record: io.vertx.scala.servicediscovery.Record): concurrent.Future[io.vertx.scala.servicediscovery.Record] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.servicediscovery.Record,io.vertx.scala.servicediscovery.Record]((x => io.vertx.scala.servicediscovery.Record(x)))
+  def updateFuture(record: Record): concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord,Record]((x => io.vertx.scala.servicediscovery.Record(x)))
     _asJava.update(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -293,34 +299,34 @@ class ServiceDiscovery(private val _asJava: io.vertx.servicediscovery.ServiceDis
   /**
     * @return the set of service references retrieved by this service discovery.
     */
-  def bindings(): Set[io.vertx.scala.servicediscovery.ServiceReference] = {
+  def bindings(): Set[ServiceReference] = {
     _asJava.bindings().asScala.map(ServiceReference.apply).toSet
   }
 
   /**
     * @return the discovery options. Modifying the returned object would not update the discovery service configuration. This object should be considered as read-only.see <a href="../../../../../../cheatsheet/ServiceDiscoveryOptions.html">ServiceDiscoveryOptions</a>
     */
-  def options(): io.vertx.scala.servicediscovery.ServiceDiscoveryOptions = {
-    io.vertx.scala.servicediscovery.ServiceDiscoveryOptions(_asJava.options())
+  def options(): ServiceDiscoveryOptions = {
+    ServiceDiscoveryOptions(_asJava.options())
   }
 
 }
 
 object ServiceDiscovery {
 
-  def apply(_asJava: io.vertx.servicediscovery.ServiceDiscovery): io.vertx.scala.servicediscovery.ServiceDiscovery =
-    new io.vertx.scala.servicediscovery.ServiceDiscovery(_asJava)
+  def apply(_asJava: JServiceDiscovery): ServiceDiscovery =
+    new ServiceDiscovery(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.servicediscovery.ServiceDiscoveryOptions): io.vertx.scala.servicediscovery.ServiceDiscovery = {
-    ServiceDiscovery.apply(io.vertx.servicediscovery.ServiceDiscovery.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: ServiceDiscoveryOptions): ServiceDiscovery = {
+    ServiceDiscovery.apply(io.vertx.servicediscovery.ServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.servicediscovery.ServiceDiscovery = {
-    ServiceDiscovery.apply(io.vertx.servicediscovery.ServiceDiscovery.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): ServiceDiscovery = {
+    ServiceDiscovery.apply(io.vertx.servicediscovery.ServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def releaseServiceObject(discovery: io.vertx.scala.servicediscovery.ServiceDiscovery, svcObject: AnyRef): Unit = {
-    io.vertx.servicediscovery.ServiceDiscovery.releaseServiceObject(discovery.asJava.asInstanceOf[io.vertx.servicediscovery.ServiceDiscovery], svcObject)
+  def releaseServiceObject(discovery: ServiceDiscovery, svcObject: AnyRef): Unit = {
+    io.vertx.servicediscovery.ServiceDiscovery.releaseServiceObject(discovery.asJava.asInstanceOf[JServiceDiscovery], svcObject)
   }
 
 }

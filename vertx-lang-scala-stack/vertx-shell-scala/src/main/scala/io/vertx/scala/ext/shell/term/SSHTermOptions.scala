@@ -17,13 +17,23 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
+import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.scala.core.net.JksOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PfxOptions
 
 /**
   * The SSH term configuration options.
   */
 
-class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
+class SSHTermOptions(val asJava: JSSHTermOptions) {
 
   /**
     */
@@ -31,7 +41,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the default charset to use when the client does not specifies one.
     */
-  def setDefaultCharset(value:String) = {
+  def setDefaultCharset(value: String) = {
     asJava.setDefaultCharset(value)
     this
   }
@@ -42,7 +52,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the host
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -53,7 +63,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * The path of the <i>inputrc</i> config.
     */
-  def setIntputrc(value:String) = {
+  def setIntputrc(value: String) = {
     asJava.setIntputrc(value)
     this
   }
@@ -64,7 +74,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the key pair options in jks format, aka Java keystore.
     */
-  def setKeyPairOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setKeyPairOptions(value: JksOptions) = {
     asJava.setKeyPairOptions(value.asJava)
     this
   }
@@ -72,7 +82,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the key pair store options in pem format.
     */
-  def setPemKeyPairOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+  def setPemKeyPairOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyPairOptions(value.asJava)
     this
   }
@@ -80,7 +90,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the key pair options in pfx format.
     */
-  def setPfxKeyPairOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxKeyPairOptions(value: PfxOptions) = {
     asJava.setPfxKeyPairOptions(value.asJava)
     this
   }
@@ -88,7 +98,7 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
   /**
     * Set the port
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -98,13 +108,12 @@ class SSHTermOptions(val asJava: io.vertx.ext.shell.term.SSHTermOptions) {
 }
 
 object SSHTermOptions {
-  type SSHTermOptionsJava = io.vertx.ext.shell.term.SSHTermOptions
   
   def apply() = {
-    new SSHTermOptions(new SSHTermOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new SSHTermOptions(new JSSHTermOptions(emptyObj()))
   }
   
-  def apply(t: SSHTermOptionsJava) = {
+  def apply(t: JSSHTermOptions) = {
     if(t != null)
       new SSHTermOptions(t)
     else
@@ -113,7 +122,7 @@ object SSHTermOptions {
   
   def fromJson(json: JsonObject):SSHTermOptions = {
     if(json != null)
-      new SSHTermOptions(new SSHTermOptionsJava(json))
+      new SSHTermOptions(new JSSHTermOptions(json))
     else
       null
   }

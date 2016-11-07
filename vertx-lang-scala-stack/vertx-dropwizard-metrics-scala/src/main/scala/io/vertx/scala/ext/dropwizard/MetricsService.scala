@@ -19,23 +19,26 @@ package io.vertx.scala.ext.dropwizard
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.dropwizard.{MetricsService => JMetricsService}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.json.JsonObject
 
 /**
   * The metrics service mainly allows to return a snapshot of measured objects.
   */
-class MetricsService(private val _asJava: io.vertx.ext.dropwizard.MetricsService) {
+class MetricsService(private val _asJava: JMetricsService) {
 
-  def asJava: io.vertx.ext.dropwizard.MetricsService = _asJava
+  def asJava: JMetricsService = _asJava
 
   /**
     * @param measured the measure object
     * @return the base name of the measured object
     */
-  def getBaseName(measured: io.vertx.scala.core.metrics.Measured): String = {
-    _asJava.getBaseName(measured.asJava.asInstanceOf[io.vertx.core.metrics.Measured])
+  def getBaseName(measured: Measured): String = {
+    _asJava.getBaseName(measured.asJava.asInstanceOf[JMeasured])
   }
 
   /**
@@ -52,8 +55,8 @@ class MetricsService(private val _asJava: io.vertx.ext.dropwizard.MetricsService
     * dropwizard backend reports to a single server.
     * @return the map of metrics where the key is the name of the metric (excluding the base name unless for the Vert.x object) and the value is the json data representing that metric
     */
-  def getMetricsSnapshot(measured: io.vertx.scala.core.metrics.Measured): io.vertx.core.json.JsonObject = {
-    _asJava.getMetricsSnapshot(measured.asJava.asInstanceOf[io.vertx.core.metrics.Measured])
+  def getMetricsSnapshot(measured: Measured): JsonObject = {
+    _asJava.getMetricsSnapshot(measured.asJava.asInstanceOf[JMeasured])
   }
 
   /**
@@ -63,7 +66,7 @@ class MetricsService(private val _asJava: io.vertx.ext.dropwizard.MetricsService
     * dropwizard backend reports to a single server.
     * @return the map of metrics where the key is the name of the metric and the value is the json data representing that metric
     */
-  def getMetricsSnapshot(baseName: String): io.vertx.core.json.JsonObject = {
+  def getMetricsSnapshot(baseName: String): JsonObject = {
     _asJava.getMetricsSnapshot(baseName)
   }
 
@@ -71,11 +74,11 @@ class MetricsService(private val _asJava: io.vertx.ext.dropwizard.MetricsService
 
 object MetricsService {
 
-  def apply(_asJava: io.vertx.ext.dropwizard.MetricsService): io.vertx.scala.ext.dropwizard.MetricsService =
-    new io.vertx.scala.ext.dropwizard.MetricsService(_asJava)
+  def apply(_asJava: JMetricsService): MetricsService =
+    new MetricsService(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.dropwizard.MetricsService = {
-    MetricsService.apply(io.vertx.ext.dropwizard.MetricsService.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): MetricsService = {
+    MetricsService.apply(io.vertx.ext.dropwizard.MetricsService.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{CookieHandler => JCookieHandler}
-  import io.vertx.ext.web.handler.{CookieHandler => JCookieHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-  
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   * A handler which decodes cookies from the request, makes them available in the 
   * and writes them back in the response.

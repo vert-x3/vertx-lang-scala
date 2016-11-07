@@ -20,17 +20,13 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{OAuth2AuthHandler => JOAuth2AuthHandler}
-  import io.vertx.ext.web.{Route => JRoute}
-import io.vertx.scala.ext.web.Route
 import io.vertx.ext.web.{Route => JRoute}
-  import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
-    import io.vertx.ext.web.handler.{OAuth2AuthHandler => JOAuth2AuthHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.scala.ext.web.Route
+import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
+import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
 
 /**
   * An auth handler that provides OAuth2 Authentication support. This handler is suitable for AuthCode flows.

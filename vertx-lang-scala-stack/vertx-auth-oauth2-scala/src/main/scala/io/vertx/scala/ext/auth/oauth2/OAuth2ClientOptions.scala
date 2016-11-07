@@ -23,7 +23,6 @@ import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
 import io.vertx.core.http.HttpVersion
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 import io.vertx.scala.core.http.Http2Settings
@@ -41,8 +40,6 @@ import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
-import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
-import io.vertx.scala.core.http.HttpClientOptions
 
 /**
   * Options describing how an OAuth2  will make connections.
@@ -98,8 +95,8 @@ class OAuth2ClientOptions(val asJava: JOAuth2ClientOptions) {
   def getCrlPaths = {
     asJava.getCrlPaths()
   }
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

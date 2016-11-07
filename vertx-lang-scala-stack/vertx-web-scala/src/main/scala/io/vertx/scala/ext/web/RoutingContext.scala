@@ -20,31 +20,25 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.web.{Route => JRoute}
-  import io.vertx.ext.web.{Cookie => JCookie}
-  import io.vertx.ext.web.{Locale => JLocale}
-    import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.scala.core.http.HttpServerRequest
+import io.vertx.ext.web.{Route => JRoute}
+import io.vertx.ext.web.{Cookie => JCookie}
+import io.vertx.ext.web.{Locale => JLocale}
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-  import io.vertx.ext.web.{Session => JSession}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.http.HttpServerRequest
+import io.vertx.ext.web.{Session => JSession}
 import io.vertx.core.{Vertx => JVertx}
-    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-  import io.vertx.ext.web.{FileUpload => JFileUpload}
-  import io.vertx.core.json.JsonArray
-    import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.web.{FileUpload => JFileUpload}
+import io.vertx.core.json.JsonArray
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.ext.auth.User
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-import io.vertx.scala.core.http.HttpServerResponse
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-  import io.vertx.core.http.HttpMethod
-      import io.vertx.core.json.JsonObject
-    
+import io.vertx.scala.core.http.HttpServerResponse
+import io.vertx.core.http.HttpMethod
+import io.vertx.core.json.JsonObject
+
 /**
   * Represents the context for the handling of a request in Vert.x-Web.
   * 

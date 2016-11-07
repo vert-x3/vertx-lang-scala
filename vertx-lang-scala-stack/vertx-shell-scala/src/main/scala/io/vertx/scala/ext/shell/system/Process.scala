@@ -19,17 +19,19 @@ package io.vertx.scala.ext.shell.system
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.system.{Process => JProcess}
 import io.vertx.ext.shell.system.ExecStatus
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{Tty => JTty}
 import io.vertx.scala.ext.shell.term.Tty
+import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
   * A process managed by the shell.
   */
-class Process(private val _asJava: io.vertx.ext.shell.system.Process) {
+class Process(private val _asJava: JProcess) {
 
-  def asJava: io.vertx.ext.shell.system.Process = _asJava
+  def asJava: JProcess = _asJava
 
   /**
     * @return the current process status
@@ -50,15 +52,15 @@ class Process(private val _asJava: io.vertx.ext.shell.system.Process) {
     * @param tty the process tty
     * @return this object
     */
-  def setTty(tty: io.vertx.scala.ext.shell.term.Tty): io.vertx.scala.ext.shell.system.Process = {
-    _asJava.setTty(tty.asJava.asInstanceOf[io.vertx.ext.shell.term.Tty])
+  def setTty(tty: Tty): Process = {
+    _asJava.setTty(tty.asJava.asInstanceOf[JTty])
     this
   }
 
   /**
     * @return the process tty
     */
-  def getTty(): io.vertx.scala.ext.shell.term.Tty = {
+  def getTty(): Tty = {
     if (cached_0 == null) {
       cached_0=    Tty.apply(_asJava.getTty())
     }
@@ -70,15 +72,15 @@ class Process(private val _asJava: io.vertx.ext.shell.system.Process) {
     * @param session the process session
     * @return this object
     */
-  def setSession(session: io.vertx.scala.ext.shell.session.Session): io.vertx.scala.ext.shell.system.Process = {
-    _asJava.setSession(session.asJava.asInstanceOf[io.vertx.ext.shell.session.Session])
+  def setSession(session: Session): Process = {
+    _asJava.setSession(session.asJava.asInstanceOf[JSession])
     this
   }
 
   /**
     * @return the process session
     */
-  def getSession(): io.vertx.scala.ext.shell.session.Session = {
+  def getSession(): Session = {
     if (cached_1 == null) {
       cached_1=    Session.apply(_asJava.getSession())
     }
@@ -90,7 +92,7 @@ class Process(private val _asJava: io.vertx.ext.shell.system.Process) {
     * @param handler the handler called when the process terminates.
     * @return this object
     */
-  def terminatedHandler(handler: Int => Unit): io.vertx.scala.ext.shell.system.Process = {
+  def terminatedHandler(handler: Int => Unit): Process = {
     _asJava.terminatedHandler(funcToMappedHandler[java.lang.Integer, Int](x => x)(handler))
     this
   }
@@ -232,13 +234,13 @@ class Process(private val _asJava: io.vertx.ext.shell.system.Process) {
     _asJava.toForeground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
   }
 
-  private var cached_0: io.vertx.scala.ext.shell.term.Tty = _
-  private var cached_1: io.vertx.scala.ext.shell.session.Session = _
+  private var cached_0: Tty = _
+  private var cached_1: Session = _
 }
 
 object Process {
 
-  def apply(_asJava: io.vertx.ext.shell.system.Process): io.vertx.scala.ext.shell.system.Process =
-    new io.vertx.scala.ext.shell.system.Process(_asJava)
+  def apply(_asJava: JProcess): Process =
+    new Process(_asJava)
 
 }

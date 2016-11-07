@@ -19,9 +19,12 @@ package io.vertx.scala.ext.shell
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.shell.ShellServiceOptions
+import io.vertx.ext.shell.{ShellService => JShellService}
+import io.vertx.ext.shell.{ShellServer => JShellServer}
+import io.vertx.ext.shell.{ShellServiceOptions => JShellServiceOptions}
+import io.vertx.scala.ext.shell.ShellServiceOptions
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
 
 /**
   * The shell service, provides a remotely accessible shell available via Telnet or SSH according to the
@@ -30,9 +33,9 @@ import io.vertx.core.Handler
   * The shell service will expose commands using [[io.vertx.scala.ext.shell.command.CommandResolver]] on the classpath and
   * the shared command registry for the Vert.x instance.
   */
-class ShellService(private val _asJava: io.vertx.ext.shell.ShellService) {
+class ShellService(private val _asJava: JShellService) {
 
-  def asJava: io.vertx.ext.shell.ShellService = _asJava
+  def asJava: JShellService = _asJava
 
   /**
     * Start the shell service, this is an asynchronous start.
@@ -54,7 +57,7 @@ class ShellService(private val _asJava: io.vertx.ext.shell.ShellService) {
   /**
     * @return the shell server
     */
-  def server(): io.vertx.scala.ext.shell.ShellServer = {
+  def server(): ShellServer = {
     ShellServer.apply(_asJava.server())
   }
 
@@ -79,15 +82,15 @@ class ShellService(private val _asJava: io.vertx.ext.shell.ShellService) {
 
 object ShellService {
 
-  def apply(_asJava: io.vertx.ext.shell.ShellService): io.vertx.scala.ext.shell.ShellService =
-    new io.vertx.scala.ext.shell.ShellService(_asJava)
+  def apply(_asJava: JShellService): ShellService =
+    new ShellService(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.ShellService = {
-    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): ShellService = {
+    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.shell.ShellServiceOptions): io.vertx.scala.ext.shell.ShellService = {
-    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: ShellServiceOptions): ShellService = {
+    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

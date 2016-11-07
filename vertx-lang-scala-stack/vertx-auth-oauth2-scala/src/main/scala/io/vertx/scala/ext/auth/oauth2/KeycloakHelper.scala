@@ -20,8 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.oauth2.{KeycloakHelper => JKeycloakHelper}
-    import io.vertx.core.json.JsonObject
-  
+import io.vertx.core.json.JsonObject
+
 /**
   * Helper class for processing Keycloak principal.
   */

@@ -14,65 +14,24 @@
  * under the License.
  */
 
-package io.vertx.scala.ext.shell.term
+package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
-import io.vertx.core.http.ClientAuth
+import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
-import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
-import io.vertx.scala.core.net.JksOptions
-import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
-import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
-import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
 
 /**
-  * Telnet terminal options configuration, extends <a href="../../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a>.
+  * Base class. TCP and SSL related options
   */
 
-class TelnetTermOptions(val asJava: JTelnetTermOptions) {
-  def setAcceptBacklog(value: Int) = {
-    asJava.setAcceptBacklog(value)
-    this
-  }
-  def getAcceptBacklog = {
-    asJava.getAcceptBacklog()
-  }
+class TCPSSLOptions(val asJava: JTCPSSLOptions) {
 
   /**
-    * Set the charset to use when binary mode is active, see <a href="../../../../../../../../cheatsheet/TelnetTermOptions.html">TelnetTermOptions</a> and <a href="../../../../../../../../cheatsheet/TelnetTermOptions.html">TelnetTermOptions</a>.
+    * Add a CRL path
     */
-  def setCharset(value: String) = {
-    asJava.setCharset(value)
-    this
-  }
-  def getCharset = {
-    asJava.getCharset()
-  }
-  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
-    asJava.setClientAuth(value)
-    this
-  }
-  def getClientAuth = {
-    asJava.getClientAuth()
-  }
-  def setClientAuthRequired(value: Boolean) = {
-    asJava.setClientAuthRequired(value)
-    this
-  }
-  def isClientAuthRequired = {
-    asJava.isClientAuthRequired()
-  }
   def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
@@ -80,6 +39,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getCrlPaths = {
     asJava.getCrlPaths()
   }
+
+  /**
+    * Add a CRL value
+    */
   def addCrlValue(value: Buffer) = {
     asJava.addCrlValue(value.asJava)
     this
@@ -87,6 +50,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getCrlValues = {
     asJava.getCrlValues()
   }
+
+  /**
+    * Add an enabled cipher suite, appended to the ordered suites.
+    */
   def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
@@ -94,6 +61,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getEnabledCipherSuites = {
     asJava.getEnabledCipherSuites()
   }
+
+  /**
+    * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
+    */
   def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
@@ -101,13 +72,11 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getEnabledSecureTransportProtocols = {
     asJava.getEnabledSecureTransportProtocols()
   }
-  def setHost(value: String) = {
-    asJava.setHost(value)
-    this
-  }
-  def getHost = {
-    asJava.getHost()
-  }
+
+  /**
+    * Set the idle timeout, in seconds. zero means don't timeout.
+    * This determines if a connection will timeout and be closed if no data is received within the timeout.
+    */
   def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
@@ -115,37 +84,22 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getIdleTimeout = {
     asJava.getIdleTimeout()
   }
-
-  /**
-    * Set the telnet connection to negociate binary data format when receiving from the client, the default value is true. This
-    * allows to send data in 8 bit format and thus charset like UTF-8.
-    */
-  def setInBinary(value: Boolean) = {
-    asJava.setInBinary(value)
-    this
-  }
-  def getInBinary = {
-    asJava.getInBinary()
-  }
-
-  /**
-    * The path of the <i>inputrc</i> config.
-    */
-  def setIntputrc(value: String) = {
-    asJava.setIntputrc(value)
-    this
-  }
-  def getIntputrc = {
-    asJava.getIntputrc()
-  }
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
+
+  /**
+    * Set the key/cert options in jks format, aka Java keystore.
+    */
   def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
+
+  /**
+    * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
+    */
   def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
@@ -159,39 +113,40 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   }
 
   /**
-    * Set the telnet connection to negociate binary data format when sending to the client, the default value is true. This
-    * allows to send data in 8 bit format and thus charset like UTF-8.
+    * Set the key/cert store options in pem format.
     */
-  def setOutBinary(value: Boolean) = {
-    asJava.setOutBinary(value)
-    this
-  }
-  def getOutBinary = {
-    asJava.getOutBinary()
-  }
   def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
+
+  /**
+    * Set the trust options in pem format
+    */
   def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
+
+  /**
+    * Set the key/cert options in pfx format.
+    */
   def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
+
+  /**
+    * Set the trust options in pfx format
+    */
   def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
-  def setPort(value: Int) = {
-    asJava.setPort(value)
-    this
-  }
-  def getPort = {
-    asJava.getPort()
-  }
+
+  /**
+    * Set the TCP receive buffer size
+    */
   def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
@@ -199,6 +154,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getReceiveBufferSize = {
     asJava.getReceiveBufferSize()
   }
+
+  /**
+    * Set the value of reuse address
+    */
   def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
@@ -206,6 +165,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def isReuseAddress = {
     asJava.isReuseAddress()
   }
+
+  /**
+    * Set the TCP send buffer size
+    */
   def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -213,6 +176,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getSendBufferSize = {
     asJava.getSendBufferSize()
   }
+
+  /**
+    * Set whether SO_linger keep alive is enabled
+    */
   def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
@@ -220,6 +187,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getSoLinger = {
     asJava.getSoLinger()
   }
+
+  /**
+    * Set whether SSL/TLS is enabled
+    */
   def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
@@ -227,6 +198,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def isSsl = {
     asJava.isSsl()
   }
+
+  /**
+    * Set whether TCP keep alive is enabled
+    */
   def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -234,6 +209,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def isTcpKeepAlive = {
     asJava.isTcpKeepAlive()
   }
+
+  /**
+    * Set whether TCP no delay is enabled
+    */
   def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
@@ -241,6 +220,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def isTcpNoDelay = {
     asJava.isTcpNoDelay()
   }
+
+  /**
+    * Set the value of traffic class
+    */
   def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
@@ -248,10 +231,18 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def getTrafficClass = {
     asJava.getTrafficClass()
   }
+
+  /**
+    * Set the trust options in jks format, aka Java trustore
+    */
   def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
+
+  /**
+    * Set the ALPN usage.
+    */
   def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
@@ -259,6 +250,10 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   def isUseAlpn = {
     asJava.isUseAlpn()
   }
+
+  /**
+    * Set whether Netty pooled buffers are enabled
+    */
   def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
@@ -268,23 +263,3 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
   }
 }
 
-object TelnetTermOptions {
-  
-  def apply() = {
-    new TelnetTermOptions(new JTelnetTermOptions(emptyObj()))
-  }
-  
-  def apply(t: JTelnetTermOptions) = {
-    if(t != null)
-      new TelnetTermOptions(t)
-    else
-      null
-  }
-  
-  def fromJson(json: JsonObject):TelnetTermOptions = {
-    if(json != null)
-      new TelnetTermOptions(new JTelnetTermOptions(json))
-    else
-      null
-  }
-}

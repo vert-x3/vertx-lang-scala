@@ -39,6 +39,9 @@ import @{importedType.raw.translateName("scala")}\n
 		@else{importedType != type}
 import @{typeToAliasedType(importedType)}\n
 		@end{}
+	@else{importedType.kind == CLASS_DATA_OBJECT}
+import @{typeToAliasedType(importedType)}\n
+import @{importedType.raw.translateName("scala")}\n
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
 				importedType.kind == CLASS_JSON_ARRAY ||
 				importedType.kind == CLASS_ENUM}
@@ -51,7 +54,7 @@ import @{importedType.raw}\n
 				importedType.kind != CLASS_MAP &&
 				importedType != type}
 import @{typeToAliasedType(importedType)}\n
-		@if{packageName != importedType.raw.translatePackageName("scala")}
+		@if{packageName != importedType.raw.translatePackageName("scala") && !packageName.startsWith("io.vertx")}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
 	@end{}

@@ -21,8 +21,6 @@ import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
-import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Shiro auth configuration options, see Vert.x Auth Shiro component and/or Apache Shiro project.

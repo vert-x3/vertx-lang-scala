@@ -23,7 +23,6 @@ import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
 import io.vertx.core.http.ClientAuth
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
@@ -37,8 +36,6 @@ import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
-import io.vertx.scala.core.net.NetServerOptions
 
 /**
   * STOMP Server options. You can also configure the Net Server used by the STOMP server from these options.
@@ -73,8 +70,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
   def getCrlPaths = {
     asJava.getCrlPaths()
   }
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

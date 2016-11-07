@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{TimeoutHandler => JTimeoutHandler}
-  import io.vertx.ext.web.handler.{TimeoutHandler => JTimeoutHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-  
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   * Handler that will timeout requests if the response has not been written after a certain time.
   * Timeout requests will be ended with an HTTP status code `503`.

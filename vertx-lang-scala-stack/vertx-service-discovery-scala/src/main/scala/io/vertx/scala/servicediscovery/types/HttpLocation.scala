@@ -17,20 +17,22 @@
 package io.vertx.scala.servicediscovery.types
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.servicediscovery.types.{HttpLocation => JHttpLocation}
 
 /**
   * Represents the location of a HTTP endpoint. This object (its json representation) will be used as "location" in a
   * service record.
   */
 
-class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
+class HttpLocation(val asJava: JHttpLocation) {
 
   /**
     * Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
     * other `setX` method.
     */
-  def setEndpoint(value:String) = {
+  def setEndpoint(value: String) = {
     asJava.setEndpoint(value)
     this
   }
@@ -41,7 +43,7 @@ class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
   /**
     * Sets the host.
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -52,7 +54,7 @@ class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
   /**
     * Sets the port
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -63,7 +65,7 @@ class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
   /**
     * Sets the path of the service (root)
     */
-  def setRoot(value:String) = {
+  def setRoot(value: String) = {
     asJava.setRoot(value)
     this
   }
@@ -74,7 +76,7 @@ class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
   /**
     * Sets whether or not the HTTP service is using `https`.
     */
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
@@ -84,13 +86,12 @@ class HttpLocation(val asJava: io.vertx.servicediscovery.types.HttpLocation) {
 }
 
 object HttpLocation {
-  type HttpLocationJava = io.vertx.servicediscovery.types.HttpLocation
   
   def apply() = {
-    new HttpLocation(new HttpLocationJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new HttpLocation(new JHttpLocation(emptyObj()))
   }
   
-  def apply(t: HttpLocationJava) = {
+  def apply(t: JHttpLocation) = {
     if(t != null)
       new HttpLocation(t)
     else
@@ -99,7 +100,7 @@ object HttpLocation {
   
   def fromJson(json: JsonObject):HttpLocation = {
     if(json != null)
-      new HttpLocation(new HttpLocationJava(json))
+      new HttpLocation(new JHttpLocation(json))
     else
       null
   }

@@ -19,23 +19,27 @@ package io.vertx.scala.ext.shell.command
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.command.{CommandRegistry => JCommandRegistry}
+import io.vertx.ext.shell.command.{Command => JCommand}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
 
 /**
   * A registry that contains the commands known by a shell.<p/>
   *
   * It is a mutable command resolver.
   */
-class CommandRegistry(private val _asJava: io.vertx.ext.shell.command.CommandRegistry) {
+class CommandRegistry(private val _asJava: JCommandRegistry) 
+    extends  {
 
-  def asJava: io.vertx.ext.shell.command.CommandRegistry = _asJava
+  def asJava: JCommandRegistry = _asJava
 
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommand]], without a completion handler.
     */
-  def registerCommand(command: io.vertx.scala.ext.shell.command.Command): io.vertx.scala.ext.shell.command.CommandRegistry = {
-    _asJava.registerCommand(command.asJava.asInstanceOf[io.vertx.ext.shell.command.Command])
+  def registerCommand(command: Command): CommandRegistry = {
+    _asJava.registerCommand(command.asJava.asInstanceOf[JCommand])
     this
   }
 
@@ -44,16 +48,16 @@ class CommandRegistry(private val _asJava: io.vertx.ext.shell.command.CommandReg
     * @param command the command to register
     * @return notified when the command is registered
     */
-  def registerCommandFuture(command: io.vertx.scala.ext.shell.command.Command): concurrent.Future[io.vertx.scala.ext.shell.command.Command] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.ext.shell.command.Command,io.vertx.scala.ext.shell.command.Command]((x => if (x == null) null else Command.apply(x)))
-    _asJava.registerCommand(command.asJava.asInstanceOf[io.vertx.ext.shell.command.Command], promiseAndHandler._1)
+  def registerCommandFuture(command: Command): concurrent.Future[Command] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand,Command]((x => if (x == null) null else Command.apply(x)))
+    _asJava.registerCommand(command.asJava.asInstanceOf[JCommand], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommands]], without a completion handler.
     */
-  def registerCommands(commands: scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.command.Command]): io.vertx.scala.ext.shell.command.CommandRegistry = {
+  def registerCommands(commands: scala.collection.mutable.Buffer[Command]): CommandRegistry = {
     _asJava.registerCommands(commands.map(x => if (x == null) null else x.asJava).asJava)
     this
   }
@@ -63,8 +67,8 @@ class CommandRegistry(private val _asJava: io.vertx.ext.shell.command.CommandReg
     * @param commands the commands to register
     * @return notified when the command is registered
     */
-  def registerCommandsFuture(commands: scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.command.Command]): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.command.Command]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.ext.shell.command.Command],scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.command.Command]]((x => if (x == null) null else x.asScala.map(Command.apply)))
+  def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]): concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.ext.shell.command.Command],scala.collection.mutable.Buffer[Command]]((x => if (x == null) null else x.asScala.map(Command.apply)))
     _asJava.registerCommands(commands.map(x => if (x == null) null else x.asJava).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -72,7 +76,7 @@ class CommandRegistry(private val _asJava: io.vertx.ext.shell.command.CommandReg
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#unregisterCommand]], without a completion handler.
     */
-  def unregisterCommand(commandName: String): io.vertx.scala.ext.shell.command.CommandRegistry = {
+  def unregisterCommand(commandName: String): CommandRegistry = {
     _asJava.unregisterCommand(commandName)
     this
   }
@@ -92,15 +96,15 @@ class CommandRegistry(private val _asJava: io.vertx.ext.shell.command.CommandReg
 
 object CommandRegistry {
 
-  def apply(_asJava: io.vertx.ext.shell.command.CommandRegistry): io.vertx.scala.ext.shell.command.CommandRegistry =
-    new io.vertx.scala.ext.shell.command.CommandRegistry(_asJava)
+  def apply(_asJava: JCommandRegistry): CommandRegistry =
+    new CommandRegistry(_asJava)
 
-  def getShared(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.command.CommandRegistry = {
-    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.getShared(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def getShared(vertx: Vertx): CommandRegistry = {
+    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.getShared(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.command.CommandRegistry = {
-    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): CommandRegistry = {
+    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

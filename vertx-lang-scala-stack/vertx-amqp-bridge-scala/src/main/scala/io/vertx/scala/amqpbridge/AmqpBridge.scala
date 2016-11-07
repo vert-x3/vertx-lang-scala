@@ -19,18 +19,22 @@ package io.vertx.scala.amqpbridge
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.amqpbridge.{AmqpBridge => JAmqpBridge}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 import io.vertx.scala.core.eventbus.MessageConsumer
+import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.scala.core.eventbus.MessageProducer
-import io.vertx.amqpbridge.AmqpBridgeOptions
+import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
+import io.vertx.scala.amqpbridge.AmqpBridgeOptions
 
 /**
   * Vert.x AMQP Bridge. Facilitates sending and receiving AMQP 1.0 messages.
   */
-class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
+class AmqpBridge(private val _asJava: JAmqpBridge) {
 
-  def asJava: io.vertx.amqpbridge.AmqpBridge = _asJava
+  def asJava: JAmqpBridge = _asJava
 
   /**
     * Starts the bridge, establishing the underlying connection.
@@ -40,8 +44,8 @@ class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
     * @param password the password
     * @return the result future
     */
-  def startFuture(hostname: String, port: Int, username: String, password: String): concurrent.Future[io.vertx.scala.amqpbridge.AmqpBridge] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.amqpbridge.AmqpBridge,io.vertx.scala.amqpbridge.AmqpBridge]((x => if (x == null) null else AmqpBridge.apply(x)))
+  def startFuture(hostname: String, port: Int, username: String, password: String): concurrent.Future[AmqpBridge] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge,AmqpBridge]((x => if (x == null) null else AmqpBridge.apply(x)))
     _asJava.start(hostname, port, username, password, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -52,8 +56,8 @@ class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
     * @param port the port to connect to
     * @return the result future
     */
-  def startFuture(hostname: String, port: Int): concurrent.Future[io.vertx.scala.amqpbridge.AmqpBridge] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.amqpbridge.AmqpBridge,io.vertx.scala.amqpbridge.AmqpBridge]((x => if (x == null) null else AmqpBridge.apply(x)))
+  def startFuture(hostname: String, port: Int): concurrent.Future[AmqpBridge] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge,AmqpBridge]((x => if (x == null) null else AmqpBridge.apply(x)))
     _asJava.start(hostname, port, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -66,7 +70,7 @@ class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
     * @param amqpAddress the address to consume from
     * @return the consumer
     */
-  def createConsumer[T](amqpAddress: String): io.vertx.scala.core.eventbus.MessageConsumer[T] = {
+  def createConsumer[T](amqpAddress: String): MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.createConsumer(amqpAddress))
   }
 
@@ -78,7 +82,7 @@ class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
     * @param amqpAddress the address to produce to
     * @return the producer
     */
-  def createProducer[T](amqpAddress: String): io.vertx.scala.core.eventbus.MessageProducer[T] = {
+  def createProducer[T](amqpAddress: String): MessageProducer[T] = {
     MessageProducer.apply[T](_asJava.createProducer(amqpAddress))
   }
 
@@ -96,15 +100,15 @@ class AmqpBridge(private val _asJava: io.vertx.amqpbridge.AmqpBridge) {
 
 object AmqpBridge {
 
-  def apply(_asJava: io.vertx.amqpbridge.AmqpBridge): io.vertx.scala.amqpbridge.AmqpBridge =
-    new io.vertx.scala.amqpbridge.AmqpBridge(_asJava)
+  def apply(_asJava: JAmqpBridge): AmqpBridge =
+    new AmqpBridge(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.amqpbridge.AmqpBridge = {
-    AmqpBridge.apply(io.vertx.amqpbridge.AmqpBridge.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): AmqpBridge = {
+    AmqpBridge.apply(io.vertx.amqpbridge.AmqpBridge.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.amqpbridge.AmqpBridgeOptions): io.vertx.scala.amqpbridge.AmqpBridge = {
-    AmqpBridge.apply(io.vertx.amqpbridge.AmqpBridge.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: AmqpBridgeOptions): AmqpBridge = {
+    AmqpBridge.apply(io.vertx.amqpbridge.AmqpBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

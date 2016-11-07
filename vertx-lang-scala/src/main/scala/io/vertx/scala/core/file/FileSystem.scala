@@ -24,6 +24,7 @@ import io.vertx.core.file.{AsyncFile => JAsyncFile}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
+import io.vertx.scala.core.file.OpenOptions
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 import io.vertx.core.file.{FileProps => JFileProps}
 

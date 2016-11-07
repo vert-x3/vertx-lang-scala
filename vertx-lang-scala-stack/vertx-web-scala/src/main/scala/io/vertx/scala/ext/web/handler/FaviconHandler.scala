@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{FaviconHandler => JFaviconHandler}
-  import io.vertx.ext.web.handler.{FaviconHandler => JFaviconHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   * A handler that serves favicons.
   * 

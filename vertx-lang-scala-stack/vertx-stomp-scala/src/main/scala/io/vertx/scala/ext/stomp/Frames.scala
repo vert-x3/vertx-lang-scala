@@ -20,8 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{Frames => JFrames}
-  import io.vertx.ext.stomp.{Frame => JFrame}
-      import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
+import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**
   * Utility methods to build common <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>s. It defines a non-STOMP frame (`PING`) that is used for

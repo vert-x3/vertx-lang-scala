@@ -20,23 +20,27 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{MongoService => JMongoService}
-    import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
-  import io.vertx.ext.mongo.WriteOption
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
+import io.vertx.scala.ext.mongo.MongoClientDeleteResult
+import io.vertx.ext.mongo.WriteOption
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.ext.mongo.{MongoClient => JMongoClient}
-  import io.vertx.ext.mongo.{MongoService => JMongoService}
-  import io.vertx.core.json.JsonArray
-      import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
-  import io.vertx.ext.mongo.{FindOptions => JFindOptions}
-  import io.vertx.core.json.JsonObject
-        import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
-  import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.mongo.{MongoClient => JMongoClient}
+import io.vertx.core.json.JsonArray
+import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
+import io.vertx.scala.ext.mongo.IndexOptions
+import io.vertx.ext.mongo.{FindOptions => JFindOptions}
+import io.vertx.scala.ext.mongo.FindOptions
+import io.vertx.core.json.JsonObject
+import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
+import io.vertx.scala.ext.mongo.MongoClientUpdateResult
+import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
+import io.vertx.scala.ext.mongo.UpdateOptions
 
 /**
   */
-class MongoService(private val _asJava: JMongoService) {
+class MongoService(private val _asJava: JMongoService) 
+    extends  {
 
   def asJava: JMongoService = _asJava
 

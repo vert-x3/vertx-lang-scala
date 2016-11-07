@@ -20,14 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
-  import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-import io.vertx.scala.ext.web.sstore.SessionStore
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-  import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.scala.ext.web.sstore.SessionStore
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    
+import io.vertx.scala.ext.web.RoutingContext
+
 /**
   * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser session.
   * 

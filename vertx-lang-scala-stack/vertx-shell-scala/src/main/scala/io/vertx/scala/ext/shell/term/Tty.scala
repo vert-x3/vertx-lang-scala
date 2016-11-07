@@ -19,14 +19,14 @@ package io.vertx.scala.ext.shell.term
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.ext.shell.term.{Tty => JTty}
 
 /**
   * Provide interactions with the Shell TTY.
   */
-class Tty(private val _asJava: io.vertx.ext.shell.term.Tty) {
+class Tty(private val _asJava: JTty) {
 
-  def asJava: io.vertx.ext.shell.term.Tty = _asJava
+  def asJava: JTty = _asJava
 
   /**
     * @return the declared tty type, for instance ` vt100`, ` xterm-256`, etc... it can be null when the tty does not have declared its type.
@@ -54,7 +54,7 @@ class Tty(private val _asJava: io.vertx.ext.shell.term.Tty) {
     * @param handler the standard input
     * @return this object
     */
-  def stdinHandler(handler: String => Unit): io.vertx.scala.ext.shell.term.Tty = {
+  def stdinHandler(handler: String => Unit): Tty = {
     _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
     this
   }
@@ -64,7 +64,7 @@ class Tty(private val _asJava: io.vertx.ext.shell.term.Tty) {
     * @param data the data to write
     * @return this object
     */
-  def write(data: String): io.vertx.scala.ext.shell.term.Tty = {
+  def write(data: String): Tty = {
     _asJava.write(data)
     this
   }
@@ -74,7 +74,7 @@ class Tty(private val _asJava: io.vertx.ext.shell.term.Tty) {
     * @param handler the resize handler
     * @return this object
     */
-  def resizehandler(handler: () => Unit): io.vertx.scala.ext.shell.term.Tty = {
+  def resizehandler(handler: () => Unit): Tty = {
     _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
     this
   }
@@ -83,7 +83,7 @@ class Tty(private val _asJava: io.vertx.ext.shell.term.Tty) {
 
 object Tty {
 
-  def apply(_asJava: io.vertx.ext.shell.term.Tty): io.vertx.scala.ext.shell.term.Tty =
-    new io.vertx.scala.ext.shell.term.Tty(_asJava)
+  def apply(_asJava: JTty): Tty =
+    new Tty(_asJava)
 
 }

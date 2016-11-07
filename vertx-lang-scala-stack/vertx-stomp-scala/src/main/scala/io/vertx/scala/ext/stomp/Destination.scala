@@ -20,15 +20,14 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{Destination => JDestination}
-  import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
-  import io.vertx.ext.stomp.{Destination => JDestination}
-    import io.vertx.ext.stomp.{Frame => JFrame}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
+import io.vertx.scala.ext.stomp.BridgeOptions
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.scala.ext.stomp.Frame
 import io.vertx.core.{Vertx => JVertx}
-    import io.vertx.core.shareddata.{Shareable => JShareable}
-import io.vertx.scala.core.shareddata.Shareable
-  import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.shareddata.{Shareable => JShareable}
+import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**
   * Represents a STOMP destination.

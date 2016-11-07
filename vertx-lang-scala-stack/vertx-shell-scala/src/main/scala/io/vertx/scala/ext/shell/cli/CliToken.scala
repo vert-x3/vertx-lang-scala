@@ -19,13 +19,14 @@ package io.vertx.scala.ext.shell.cli
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.cli.{CliToken => JCliToken}
 
 /**
   * A parsed token in the command line interface.
   */
-class CliToken(private val _asJava: io.vertx.ext.shell.cli.CliToken) {
+class CliToken(private val _asJava: JCliToken) {
 
-  def asJava: io.vertx.ext.shell.cli.CliToken = _asJava
+  def asJava: JCliToken = _asJava
 
   /**
     * @return the token value
@@ -59,18 +60,18 @@ class CliToken(private val _asJava: io.vertx.ext.shell.cli.CliToken) {
 
 object CliToken {
 
-  def apply(_asJava: io.vertx.ext.shell.cli.CliToken): io.vertx.scala.ext.shell.cli.CliToken =
-    new io.vertx.scala.ext.shell.cli.CliToken(_asJava)
+  def apply(_asJava: JCliToken): CliToken =
+    new CliToken(_asJava)
 
-  def createText(text: String): io.vertx.scala.ext.shell.cli.CliToken = {
+  def createText(text: String): CliToken = {
     CliToken.apply(io.vertx.ext.shell.cli.CliToken.createText(text))
   }
 
-  def createBlank(blank: String): io.vertx.scala.ext.shell.cli.CliToken = {
+  def createBlank(blank: String): CliToken = {
     CliToken.apply(io.vertx.ext.shell.cli.CliToken.createBlank(blank))
   }
 
-  def tokenize(s: String): scala.collection.mutable.Buffer[io.vertx.scala.ext.shell.cli.CliToken] = {
+  def tokenize(s: String): scala.collection.mutable.Buffer[CliToken] = {
     io.vertx.ext.shell.cli.CliToken.tokenize(s).asScala.map(CliToken.apply)
   }
 

@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
-    import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
-    import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-      
+import io.vertx.scala.core.Vertx
+import io.vertx.core.json.JsonObject
+
 /**
   */
 class RabbitMQClient(private val _asJava: JRabbitMQClient) {

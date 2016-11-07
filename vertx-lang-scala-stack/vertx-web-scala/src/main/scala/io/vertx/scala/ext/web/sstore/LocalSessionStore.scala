@@ -20,21 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.sstore.{LocalSessionStore => JLocalSessionStore}
-  import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.ext.web.Session
 import io.vertx.ext.web.{Session => JSession}
-  import io.vertx.ext.web.sstore.{LocalSessionStore => JLocalSessionStore}
-  import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.web.Session
+import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.core.{Vertx => JVertx}
-          
+import io.vertx.scala.core.Vertx
+
 /**
   * A session store which is only available on a single node.
   * 
   * Can be used when sticky sessions are being used.
   */
-class LocalSessionStore(private val _asJava: JLocalSessionStore) {
+class LocalSessionStore(private val _asJava: JLocalSessionStore) 
+    extends  {
 
   def asJava: JLocalSessionStore = _asJava
 

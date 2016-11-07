@@ -20,10 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{Route => JRoute}
-  import io.vertx.ext.web.{Route => JRoute}
-  import io.vertx.core.http.HttpMethod
-    import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-  
+import io.vertx.core.http.HttpMethod
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+
 /**
   * A route is a holder for a set of criteria which determine whether an HTTP request or failure should be routed
   * to a handler.

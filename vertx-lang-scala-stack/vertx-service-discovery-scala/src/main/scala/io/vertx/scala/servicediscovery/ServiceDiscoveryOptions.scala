@@ -17,19 +17,22 @@
 package io.vertx.scala.servicediscovery
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.servicediscovery.{ServiceDiscoveryOptions => JServiceDiscoveryOptions}
+import io.vertx.core.json.JsonObject
 
 /**
   * Options to configure the service discovery.
   */
 
-class ServiceDiscoveryOptions(val asJava: io.vertx.servicediscovery.ServiceDiscoveryOptions) {
+class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
 
   /**
     * Sets the event bus address on which the service arrivals, departures and modifications are announced. This
     * address must be consistent in the whole application.
     */
-  def setAnnounceAddress(value:String) = {
+  def setAnnounceAddress(value: String) = {
     asJava.setAnnounceAddress(value)
     this
   }
@@ -42,7 +45,7 @@ class ServiceDiscoveryOptions(val asJava: io.vertx.servicediscovery.ServiceDisco
     * Refer to the backend documentation to get more details on the requirements. The default backend
     * does not need any configuration.
     */
-  def setBackendConfiguration(value:io.vertx.core.json.JsonObject) = {
+  def setBackendConfiguration(value: JsonObject) = {
     asJava.setBackendConfiguration(value)
     this
   }
@@ -54,7 +57,7 @@ class ServiceDiscoveryOptions(val asJava: io.vertx.servicediscovery.ServiceDisco
     * Sets the service discovery name used in the service usage events.
     * If not set, the node id is used.
     */
-  def setName(value:String) = {
+  def setName(value: String) = {
     asJava.setName(value)
     this
   }
@@ -65,7 +68,7 @@ class ServiceDiscoveryOptions(val asJava: io.vertx.servicediscovery.ServiceDisco
   /**
     * Sets the usage address: the event bus address on which are sent the service usage events (bind / release).
     */
-  def setUsageAddress(value:String) = {
+  def setUsageAddress(value: String) = {
     asJava.setUsageAddress(value)
     this
   }
@@ -75,13 +78,12 @@ class ServiceDiscoveryOptions(val asJava: io.vertx.servicediscovery.ServiceDisco
 }
 
 object ServiceDiscoveryOptions {
-  type ServiceDiscoveryOptionsJava = io.vertx.servicediscovery.ServiceDiscoveryOptions
   
   def apply() = {
-    new ServiceDiscoveryOptions(new ServiceDiscoveryOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(emptyObj()))
   }
   
-  def apply(t: ServiceDiscoveryOptionsJava) = {
+  def apply(t: JServiceDiscoveryOptions) = {
     if(t != null)
       new ServiceDiscoveryOptions(t)
     else
@@ -90,7 +92,7 @@ object ServiceDiscoveryOptions {
   
   def fromJson(json: JsonObject):ServiceDiscoveryOptions = {
     if(json != null)
-      new ServiceDiscoveryOptions(new ServiceDiscoveryOptionsJava(json))
+      new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))
     else
       null
   }

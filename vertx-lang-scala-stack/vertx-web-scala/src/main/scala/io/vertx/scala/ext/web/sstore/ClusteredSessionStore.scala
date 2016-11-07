@@ -20,19 +20,17 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.sstore.{ClusteredSessionStore => JClusteredSessionStore}
-  import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.ext.web.Session
 import io.vertx.ext.web.{Session => JSession}
-  import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-  import io.vertx.ext.web.sstore.{ClusteredSessionStore => JClusteredSessionStore}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.ext.web.Session
+import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.core.{Vertx => JVertx}
-          
+import io.vertx.scala.core.Vertx
+
 /**
   * A session store which stores sessions in a distributed map so they are available across the cluster.
   */
-class ClusteredSessionStore(private val _asJava: JClusteredSessionStore) {
+class ClusteredSessionStore(private val _asJava: JClusteredSessionStore) 
+    extends  {
 
   def asJava: JClusteredSessionStore = _asJava
 

@@ -17,18 +17,23 @@
 package io.vertx.scala.ext.hawkular
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.ext.hawkular.{VertxHawkularOptions => JVertxHawkularOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
+import io.vertx.scala.core.http.HttpClientOptions
 
 /**
   * Vert.x Hawkular monitoring configuration.
   */
 
-class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOptions) {
+class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
 
   /**
     * Set the options for authentication.
     */
-  def setAuthenticationOptions(value:io.vertx.scala.ext.hawkular.AuthenticationOptions) = {
+  def setAuthenticationOptions(value: AuthenticationOptions) = {
     asJava.setAuthenticationOptions(value.asJava)
     this
   }
@@ -41,7 +46,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * data is sent to the Hawkular server in batches. A batch is sent as soon as the number of metrics collected reaches
     * the configured `batchSize`, or after the `batchDelay` expires. Defaults to `1` second.
     */
-  def setBatchDelay(value:Int) = {
+  def setBatchDelay(value: Int) = {
     asJava.setBatchDelay(value)
     this
   }
@@ -54,7 +59,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * Hawkular server in batches. A batch is sent as soon as the number of metrics collected reaches the configured
     * `batchSize`, or after the `batchDelay` expires. Defaults to `50`.
     */
-  def setBatchSize(value:Int) = {
+  def setBatchSize(value: Int) = {
     asJava.setBatchSize(value)
     this
   }
@@ -65,12 +70,12 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Sets metrics types that are disabled.
     */
-  def addDisabledMetricsType(value:io.vertx.ext.hawkular.MetricsType) = {
+  def addDisabledMetricsType(value: io.vertx.ext.hawkular.MetricsType) = {
     asJava.addDisabledMetricsType(value)
     this
   }
-  def setDisabledMetricsTypes(value:Set[io.vertx.ext.hawkular.MetricsType]) = {
-    asJava.setDisabledMetricsTypes(value)
+  def setDisabledMetricsTypes(value: Set[io.vertx.ext.hawkular.MetricsType]) = {
+    asJava.setDisabledMetricsTypes(value.asJava)
     this
   }
   def getDisabledMetricsTypes = {
@@ -80,7 +85,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set whether metrics will be enabled on the Vert.x instance. Metrics are not enabled by default.
     */
-  def setEnabled(value:Boolean) = {
+  def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
@@ -91,7 +96,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set the Hawkular Metrics service host. Defaults to `localhost`.
     */
-  def setHost(value:String) = {
+  def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
@@ -102,7 +107,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set specific headers to include in HTTP requests.
     */
-  def setHttpHeaders(value:io.vertx.core.json.JsonObject) = {
+  def setHttpHeaders(value: JsonObject) = {
     asJava.setHttpHeaders(value)
     this
   }
@@ -113,7 +118,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set the configuration of the Hawkular Metrics HTTP client.
     */
-  def setHttpOptions(value:io.vertx.scala.core.http.HttpClientOptions) = {
+  def setHttpOptions(value: HttpClientOptions) = {
     asJava.setHttpOptions(value.asJava)
     this
   }
@@ -128,7 +133,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * <p/>
     * Don't forget to also enable the bridge with `metricsBridgeEnabled`.
     */
-  def setMetricsBridgeAddress(value:String) = {
+  def setMetricsBridgeAddress(value: String) = {
     asJava.setMetricsBridgeAddress(value)
     this
   }
@@ -139,7 +144,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Sets whether or not the metrics bridge should be enabled. The metrics bridge is disabled by default.
     */
-  def setMetricsBridgeEnabled(value:Boolean) = {
+  def setMetricsBridgeEnabled(value: Boolean) = {
     asJava.setMetricsBridgeEnabled(value)
     this
   }
@@ -151,7 +156,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * Set the Hawkular Metrics service URI. Defaults to `/hawkular/metrics`. This can be useful if you host the
     * Hawkular server behind a proxy and manipulate the default service URI.
     */
-  def setMetricsServiceUri(value:String) = {
+  def setMetricsServiceUri(value: String) = {
     asJava.setMetricsServiceUri(value)
     this
   }
@@ -162,7 +167,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set the Hawkular Metrics service port.  Defaults to `8080`.
     */
-  def setPort(value:Int) = {
+  def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
@@ -174,7 +179,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * Set the metric name prefix. Metric names are not prefixed by default. Prefixing metric names is required to
     * distinguish data sent by different Vert.x instances.
     */
-  def setPrefix(value:String) = {
+  def setPrefix(value: String) = {
     asJava.setPrefix(value)
     this
   }
@@ -185,7 +190,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set the metric collection interval (in seconds). Defaults to `1`.
     */
-  def setSchedule(value:Int) = {
+  def setSchedule(value: Int) = {
     asJava.setSchedule(value)
     this
   }
@@ -197,7 +202,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
     * Set whether Hawkular tenant header should be sent. Defaults to `true`.
     * Must be set to `false` when working with pre-Alpha13 Hawkular servers.
     */
-  def setSendTenantHeader(value:Boolean) = {
+  def setSendTenantHeader(value: Boolean) = {
     asJava.setSendTenantHeader(value)
     this
   }
@@ -208,7 +213,7 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
   /**
     * Set the Hawkular tenant. Defaults to `default`.
     */
-  def setTenant(value:String) = {
+  def setTenant(value: String) = {
     asJava.setTenant(value)
     this
   }
@@ -218,13 +223,12 @@ class VertxHawkularOptions(val asJava: io.vertx.ext.hawkular.VertxHawkularOption
 }
 
 object VertxHawkularOptions {
-  type VertxHawkularOptionsJava = io.vertx.ext.hawkular.VertxHawkularOptions
   
   def apply() = {
-    new VertxHawkularOptions(new VertxHawkularOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new VertxHawkularOptions(new JVertxHawkularOptions(emptyObj()))
   }
   
-  def apply(t: VertxHawkularOptionsJava) = {
+  def apply(t: JVertxHawkularOptions) = {
     if(t != null)
       new VertxHawkularOptions(t)
     else
@@ -233,7 +237,7 @@ object VertxHawkularOptions {
   
   def fromJson(json: JsonObject):VertxHawkularOptions = {
     if(json != null)
-      new VertxHawkularOptions(new VertxHawkularOptionsJava(json))
+      new VertxHawkularOptions(new JVertxHawkularOptions(json))
     else
       null
   }

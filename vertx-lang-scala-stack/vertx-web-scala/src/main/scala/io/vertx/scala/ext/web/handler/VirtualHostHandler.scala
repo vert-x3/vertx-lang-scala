@@ -20,10 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{VirtualHostHandler => JVirtualHostHandler}
-  import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-      import io.vertx.ext.web.handler.{VirtualHostHandler => JVirtualHostHandler}
+import io.vertx.scala.ext.web.RoutingContext
 
 /**
   * Handler that will filter requests based on the request Host name.

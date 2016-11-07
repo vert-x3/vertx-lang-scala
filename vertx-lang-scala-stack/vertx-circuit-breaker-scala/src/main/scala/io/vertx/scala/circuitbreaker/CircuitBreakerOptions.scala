@@ -17,18 +17,20 @@
 package io.vertx.scala.circuitbreaker
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
 
 /**
   * Circuit breaker configuration options. All time are given in milliseconds.
   */
 
-class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOptions) {
+class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
 
   /**
     * Sets whether or not the fallback is executed on failure, even when the circuit is closed.
     */
-  def setFallbackOnFailure(value:Boolean) = {
+  def setFallbackOnFailure(value: Boolean) = {
     asJava.setFallbackOnFailure(value)
     this
   }
@@ -39,7 +41,7 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
   /**
     * Sets the maximum number of failures before opening the circuit.
     */
-  def setMaxFailures(value:Int) = {
+  def setMaxFailures(value: Int) = {
     asJava.setMaxFailures(value)
     this
   }
@@ -50,7 +52,7 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
   /**
     * Sets the event bus address on which the circuit breaker publish its state change.
     */
-  def setNotificationAddress(value:String) = {
+  def setNotificationAddress(value: String) = {
     asJava.setNotificationAddress(value)
     this
   }
@@ -62,7 +64,7 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
     * Configures the period in milliseconds where the circuit breaker send a notification on the event bus with its
     * current state.
     */
-  def setNotificationPeriod(value:Long) = {
+  def setNotificationPeriod(value: Long) = {
     asJava.setNotificationPeriod(value)
     this
   }
@@ -74,7 +76,7 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
     * Sets the time in ms before it attempts to re-close the circuit (by going to the hal-open state). If the cricuit
     * is closed when the timeout is reached, nothing happens. `-1` disables this feature.
     */
-  def setResetTimeout(value:Long) = {
+  def setResetTimeout(value: Long) = {
     asJava.setResetTimeout(value)
     this
   }
@@ -86,7 +88,7 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
     * Sets the timeout in milliseconds. If an action is not completed before this timeout, the action is considered as
     * a failure.
     */
-  def setTimeout(value:Long) = {
+  def setTimeout(value: Long) = {
     asJava.setTimeout(value)
     this
   }
@@ -96,13 +98,12 @@ class CircuitBreakerOptions(val asJava: io.vertx.circuitbreaker.CircuitBreakerOp
 }
 
 object CircuitBreakerOptions {
-  type CircuitBreakerOptionsJava = io.vertx.circuitbreaker.CircuitBreakerOptions
   
   def apply() = {
-    new CircuitBreakerOptions(new CircuitBreakerOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new CircuitBreakerOptions(new JCircuitBreakerOptions(emptyObj()))
   }
   
-  def apply(t: CircuitBreakerOptionsJava) = {
+  def apply(t: JCircuitBreakerOptions) = {
     if(t != null)
       new CircuitBreakerOptions(t)
     else
@@ -111,7 +112,7 @@ object CircuitBreakerOptions {
   
   def fromJson(json: JsonObject):CircuitBreakerOptions = {
     if(json != null)
-      new CircuitBreakerOptions(new CircuitBreakerOptionsJava(json))
+      new CircuitBreakerOptions(new JCircuitBreakerOptions(json))
     else
       null
   }

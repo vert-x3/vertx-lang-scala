@@ -20,14 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.{JWTAuthHandler => JJWTAuthHandler}
-  import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
-  import io.vertx.ext.web.handler.{JWTAuthHandler => JJWTAuthHandler}
-      import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-    import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
-import io.vertx.scala.ext.auth.jwt.JWTAuth
+import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
+import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 /**
   * An auth handler that provides JWT Authentication support.

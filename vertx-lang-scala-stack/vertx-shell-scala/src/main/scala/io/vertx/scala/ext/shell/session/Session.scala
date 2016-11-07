@@ -19,13 +19,14 @@ package io.vertx.scala.ext.shell.session
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.session.{Session => JSession}
 
 /**
   * A shell session.
   */
-class Session(private val _asJava: io.vertx.ext.shell.session.Session) {
+class Session(private val _asJava: JSession) {
 
-  def asJava: io.vertx.ext.shell.session.Session = _asJava
+  def asJava: JSession = _asJava
 
   /**
     * Put some data in a session
@@ -33,7 +34,7 @@ class Session(private val _asJava: io.vertx.ext.shell.session.Session) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-  def put(key: String, obj: AnyRef): io.vertx.scala.ext.shell.session.Session = {
+  def put(key: String, obj: AnyRef): Session = {
     _asJava.put(key, obj)
     this
   }
@@ -60,10 +61,10 @@ class Session(private val _asJava: io.vertx.ext.shell.session.Session) {
 
 object Session {
 
-  def apply(_asJava: io.vertx.ext.shell.session.Session): io.vertx.scala.ext.shell.session.Session =
-    new io.vertx.scala.ext.shell.session.Session(_asJava)
+  def apply(_asJava: JSession): Session =
+    new Session(_asJava)
 
-  def create(): io.vertx.scala.ext.shell.session.Session = {
+  def create(): Session = {
     Session.apply(io.vertx.ext.shell.session.Session.create())
   }
 

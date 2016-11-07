@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Future => JFuture}
 import java.util.function.{Function => JFunction}
-import java.util.function.Function
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.

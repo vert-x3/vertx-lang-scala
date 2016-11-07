@@ -19,19 +19,22 @@ package io.vertx.scala.servicediscovery.spi
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.servicediscovery.spi.{ServiceImporter => JServiceImporter}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
+import io.vertx.core.{Future => JFuture}
 import io.vertx.scala.core.Future
+import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
 
 /**
   * The service importer allows integrate other discovery technologies with the Vert.x service discovery. It maps
   * entries from another technology to a  and maps  to a publication in this other
   * technology. The importer is one side of a service discovery bridge.
   */
-class ServiceImporter(private val _asJava: io.vertx.servicediscovery.spi.ServiceImporter) {
+class ServiceImporter(private val _asJava: JServiceImporter) {
 
-  def asJava: io.vertx.servicediscovery.spi.ServiceImporter = _asJava
+  def asJava: JServiceImporter = _asJava
 
   /**
     * Starts the importer.
@@ -40,8 +43,8 @@ class ServiceImporter(private val _asJava: io.vertx.servicediscovery.spi.Service
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def start(vertx: io.vertx.scala.core.Vertx, publisher: io.vertx.scala.servicediscovery.spi.ServicePublisher, configuration: io.vertx.core.json.JsonObject, future: io.vertx.scala.core.Future[Unit]): Unit = {
-    _asJava.start(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], publisher.asJava.asInstanceOf[io.vertx.servicediscovery.spi.ServicePublisher], configuration, future.asJava.asInstanceOf[io.vertx.core.Future[java.lang.Void]])
+  def start(vertx: Vertx, publisher: ServicePublisher, configuration: JsonObject, future: Future[Unit]): Unit = {
+    _asJava.start(vertx.asJava.asInstanceOf[JVertx], publisher.asJava.asInstanceOf[JServicePublisher], configuration, future.asJava.asInstanceOf[JFuture[Void]])
   }
 
   /**
@@ -56,7 +59,7 @@ class ServiceImporter(private val _asJava: io.vertx.servicediscovery.spi.Service
 
 object ServiceImporter {
 
-  def apply(_asJava: io.vertx.servicediscovery.spi.ServiceImporter): io.vertx.scala.servicediscovery.spi.ServiceImporter =
-    new io.vertx.scala.servicediscovery.spi.ServiceImporter(_asJava)
+  def apply(_asJava: JServiceImporter): ServiceImporter =
+    new ServiceImporter(_asJava)
 
 }

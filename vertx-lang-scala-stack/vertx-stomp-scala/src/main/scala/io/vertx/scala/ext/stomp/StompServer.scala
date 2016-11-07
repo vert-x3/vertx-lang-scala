@@ -20,20 +20,17 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{StompServer => JStompServer}
-  import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-    import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.scala.core.http.ServerWebSocket
+import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-  import io.vertx.core.net.{NetServer => JNetServer}
-import io.vertx.scala.core.net.NetServer
+import io.vertx.scala.core.http.ServerWebSocket
 import io.vertx.core.net.{NetServer => JNetServer}
-  import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.net.NetServer
 import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.ext.stomp.{StompServer => JStompServer}
-  import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
-  import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
-      
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
+import io.vertx.scala.ext.stomp.StompServerOptions
+import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
+
 /**
   * Defines a STOMP server. STOMP servers delegates to a [[io.vertx.scala.ext.stomp.StompServerHandler]] that let customize the behavior of
   * the server. By default, it uses a handler compliant with the STOMP specification, but let you change anything.

@@ -20,10 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-    import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-import io.vertx.scala.ext.sql.SQLConnection
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-    
+import io.vertx.scala.ext.sql.SQLConnection
+
 /**
   * Represents an asynchronous SQL client
   */

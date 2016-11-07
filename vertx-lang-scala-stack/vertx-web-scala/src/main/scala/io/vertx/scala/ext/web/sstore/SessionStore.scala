@@ -20,10 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-  import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.ext.web.Session
 import io.vertx.ext.web.{Session => JSession}
-          
+import io.vertx.scala.ext.web.Session
+
 /**
   * A session store is used to store sessions for an Vert.x-Web web app
   */

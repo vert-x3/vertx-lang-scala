@@ -20,22 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
-import io.vertx.scala.ext.jdbc.JDBCClient
+import io.vertx.scala.ext.auth.User
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
-  import io.vertx.core.json.JsonObject
-        import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
-  import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.jdbc.JDBCClient
+import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.scala.ext.auth.AuthProvider
 
 /**
   * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
   */
-class JDBCAuth(private val _asJava: JJDBCAuth) {
+class JDBCAuth(private val _asJava: JJDBCAuth) 
+    extends  {
 
   def asJava: JJDBCAuth = _asJava
 

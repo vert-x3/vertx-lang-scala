@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.stomp.{StompClientOptions => JStompClientOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
@@ -38,8 +37,6 @@ import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
-import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
-import io.vertx.scala.core.net.NetClientOptions
 
 /**
   * Options used to configure a STOMP client. As a STOMP client wraps a Net client, you can also configure the
@@ -98,8 +95,8 @@ class StompClientOptions(val asJava: JStompClientOptions) {
   def getCrlPaths = {
     asJava.getCrlPaths()
   }
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

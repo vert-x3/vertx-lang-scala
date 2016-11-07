@@ -20,28 +20,20 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
-  import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
-      import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.ext.web.Session
 import io.vertx.ext.web.{Session => JSession}
-  import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
+import io.vertx.scala.ext.web.Session
 import io.vertx.ext.auth.{User => JUser}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.ext.auth.User
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-  import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.MultiMap
+import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.{MultiMap => JMultiMap}
-      import io.vertx.core.net.{SocketAddress => JSocketAddress}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.scala.core.MultiMap
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   *

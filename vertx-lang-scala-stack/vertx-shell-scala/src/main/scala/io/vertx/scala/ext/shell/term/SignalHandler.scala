@@ -19,12 +19,13 @@ package io.vertx.scala.ext.shell.term
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.ext.shell.term.{SignalHandler => JSignalHandler}
 
 /**
   */
-class SignalHandler(private val _asJava: io.vertx.ext.shell.term.SignalHandler) {
+class SignalHandler(private val _asJava: JSignalHandler) {
 
-  def asJava: io.vertx.ext.shell.term.SignalHandler = _asJava
+  def asJava: JSignalHandler = _asJava
 
   def deliver(key: Int): Boolean = {
     _asJava.deliver(key)
@@ -34,7 +35,7 @@ class SignalHandler(private val _asJava: io.vertx.ext.shell.term.SignalHandler) 
 
 object SignalHandler {
 
-  def apply(_asJava: io.vertx.ext.shell.term.SignalHandler): io.vertx.scala.ext.shell.term.SignalHandler =
-    new io.vertx.scala.ext.shell.term.SignalHandler(_asJava)
+  def apply(_asJava: JSignalHandler): SignalHandler =
+    new SignalHandler(_asJava)
 
 }

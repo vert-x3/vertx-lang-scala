@@ -20,12 +20,13 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-    import io.vertx.core.json.JsonArray
-    import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
-  import io.vertx.ext.sql.{ResultSet => JResultSet}
-  import io.vertx.ext.sql.TransactionIsolation
-  import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-          
+import io.vertx.core.json.JsonArray
+import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
+import io.vertx.scala.ext.sql.UpdateResult
+import io.vertx.ext.sql.{ResultSet => JResultSet}
+import io.vertx.scala.ext.sql.ResultSet
+import io.vertx.ext.sql.TransactionIsolation
+
 /**
   * Represents a connection to a SQL database
   */

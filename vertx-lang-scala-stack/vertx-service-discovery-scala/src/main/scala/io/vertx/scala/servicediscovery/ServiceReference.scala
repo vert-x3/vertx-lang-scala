@@ -19,7 +19,9 @@ package io.vertx.scala.servicediscovery
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.Record
+import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
+import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.scala.servicediscovery.Record
 
 /**
   * Once a consumer has chosen a service, it builds a [[io.vertx.scala.servicediscovery.ServiceReference]] managing the binding with the chosen
@@ -29,16 +31,16 @@ import io.vertx.servicediscovery.Record
   * * access the service (via a proxy or a client) with the [[io.vertx.scala.servicediscovery.ServiceReference#get]] method
   * * release the reference - so the binding between the consumer and the provider is removed
   */
-class ServiceReference(private val _asJava: io.vertx.servicediscovery.ServiceReference) {
+class ServiceReference(private val _asJava: JServiceReference) {
 
-  def asJava: io.vertx.servicediscovery.ServiceReference = _asJava
+  def asJava: JServiceReference = _asJava
 
   /**
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def record(): io.vertx.scala.servicediscovery.Record = {
+  def record(): Record = {
     if (cached_0 == null) {
-      cached_0=    io.vertx.scala.servicediscovery.Record(_asJava.record())
+      cached_0=    Record(_asJava.record())
     }
     cached_0
   }
@@ -68,12 +70,12 @@ class ServiceReference(private val _asJava: io.vertx.servicediscovery.ServiceRef
     _asJava.release()
   }
 
-  private var cached_0: io.vertx.scala.servicediscovery.Record = _
+  private var cached_0: Record = _
 }
 
 object ServiceReference {
 
-  def apply(_asJava: io.vertx.servicediscovery.ServiceReference): io.vertx.scala.servicediscovery.ServiceReference =
-    new io.vertx.scala.servicediscovery.ServiceReference(_asJava)
+  def apply(_asJava: JServiceReference): ServiceReference =
+    new ServiceReference(_asJava)
 
 }

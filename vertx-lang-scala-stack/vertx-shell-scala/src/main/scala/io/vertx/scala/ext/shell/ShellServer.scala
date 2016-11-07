@@ -19,11 +19,17 @@ package io.vertx.scala.ext.shell
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.ext.shell.ShellServerOptions
+import io.vertx.ext.shell.{ShellServer => JShellServer}
+import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
+import io.vertx.scala.ext.shell.ShellServerOptions
+import io.vertx.ext.shell.term.{TermServer => JTermServer}
 import io.vertx.scala.ext.shell.term.TermServer
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
-import io.vertx.core.Handler
+import io.vertx.ext.shell.{Shell => JShell}
+import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
 import io.vertx.scala.ext.shell.command.CommandResolver
+import io.vertx.ext.shell.term.{Term => JTerm}
 import io.vertx.scala.ext.shell.term.Term
 
 /**
@@ -37,17 +43,17 @@ import io.vertx.scala.ext.shell.term.Term
   *
   * The [[io.vertx.scala.ext.shell.ShellServer#createShell]] method can be used to create  instance for testing purposes.
   */
-class ShellServer(private val _asJava: io.vertx.ext.shell.ShellServer) {
+class ShellServer(private val _asJava: JShellServer) {
 
-  def asJava: io.vertx.ext.shell.ShellServer = _asJava
+  def asJava: JShellServer = _asJava
 
   /**
     * Register a command resolver for this server.
     * @param resolver the resolver
     * @return a reference to this, so the API can be used fluently
     */
-  def registerCommandResolver(resolver: io.vertx.scala.ext.shell.command.CommandResolver): io.vertx.scala.ext.shell.ShellServer = {
-    _asJava.registerCommandResolver(resolver.asJava.asInstanceOf[io.vertx.ext.shell.command.CommandResolver])
+  def registerCommandResolver(resolver: CommandResolver): ShellServer = {
+    _asJava.registerCommandResolver(resolver.asJava.asInstanceOf[JCommandResolver])
     this
   }
 
@@ -56,8 +62,8 @@ class ShellServer(private val _asJava: io.vertx.ext.shell.ShellServer) {
     * @param termServer the term server to add
     * @return a reference to this, so the API can be used fluently
     */
-  def registerTermServer(termServer: io.vertx.scala.ext.shell.term.TermServer): io.vertx.scala.ext.shell.ShellServer = {
-    _asJava.registerTermServer(termServer.asJava.asInstanceOf[io.vertx.ext.shell.term.TermServer])
+  def registerTermServer(termServer: TermServer): ShellServer = {
+    _asJava.registerTermServer(termServer.asJava.asInstanceOf[JTermServer])
     this
   }
 
@@ -66,22 +72,22 @@ class ShellServer(private val _asJava: io.vertx.ext.shell.ShellServer) {
     * @param term the shell associated terminal
     * @return the created shell
     */
-  def createShell(term: io.vertx.scala.ext.shell.term.Term): io.vertx.scala.ext.shell.Shell = {
-    Shell.apply(_asJava.createShell(term.asJava.asInstanceOf[io.vertx.ext.shell.term.Term]))
+  def createShell(term: Term): Shell = {
+    Shell.apply(_asJava.createShell(term.asJava.asInstanceOf[JTerm]))
   }
 
   /**
     * Create a new shell, the returned shell should be closed explicitely.
     * @return the created shell
     */
-  def createShell(): io.vertx.scala.ext.shell.Shell = {
+  def createShell(): Shell = {
     Shell.apply(_asJava.createShell())
   }
 
   /**
     * Start the shell service, this is an asynchronous start.
     */
-  def listen(): io.vertx.scala.ext.shell.ShellServer = {
+  def listen(): ShellServer = {
     _asJava.listen()
     this
   }
@@ -117,15 +123,15 @@ class ShellServer(private val _asJava: io.vertx.ext.shell.ShellServer) {
 
 object ShellServer {
 
-  def apply(_asJava: io.vertx.ext.shell.ShellServer): io.vertx.scala.ext.shell.ShellServer =
-    new io.vertx.scala.ext.shell.ShellServer(_asJava)
+  def apply(_asJava: JShellServer): ShellServer =
+    new ShellServer(_asJava)
 
-  def create(vertx: io.vertx.scala.core.Vertx, options: io.vertx.scala.ext.shell.ShellServerOptions): io.vertx.scala.ext.shell.ShellServer = {
-    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx], options.asJava))
+  def create(vertx: Vertx, options: ShellServerOptions): ShellServer = {
+    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def create(vertx: io.vertx.scala.core.Vertx): io.vertx.scala.ext.shell.ShellServer = {
-    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[io.vertx.core.Vertx]))
+  def create(vertx: Vertx): ShellServer = {
+    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

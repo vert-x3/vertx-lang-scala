@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{MultiMap => JMultiMap}
 import java.util.Map.{Entry => JEntry}
-import java.util.Map.Entry
 
 /**
   * This class represents a MultiMap of String keys to a List of String values.
