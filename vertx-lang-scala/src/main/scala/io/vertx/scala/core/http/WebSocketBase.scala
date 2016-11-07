@@ -20,20 +20,15 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
-      import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
-  import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-      import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-  import io.vertx.core.net.{SocketAddress => JSocketAddress}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * Base WebSocket implementation.

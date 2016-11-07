@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
-      import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-  import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-  import io.vertx.core.eventbus.{Message => JMessage}
-        import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.eventbus.{Message => JMessage}
 
 /**
   * Represents a stream of message that can be written to.

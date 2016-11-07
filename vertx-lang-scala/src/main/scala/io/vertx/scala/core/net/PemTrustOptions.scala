@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Certificate Authority options configuring certificates based on
@@ -72,8 +71,8 @@ class PemTrustOptions(val asJava: JPemTrustOptions) {
   /**
     * Add a certificate value
     */
-  def addCertValue(value: JBuffer) = {
-    asJava.addCertValue(value)
+  def addCertValue(value: Buffer) = {
+    asJava.addCertValue(value.asJava)
     this
   }
   def getCertValues = {

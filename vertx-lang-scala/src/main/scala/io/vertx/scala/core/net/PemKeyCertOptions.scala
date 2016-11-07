@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Key store options configuring a private key and its certificate based on
@@ -84,8 +83,8 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
   /**
     * Set the certificate as a buffer
     */
-  def setCertValue(value: JBuffer) = {
-    asJava.setCertValue(value)
+  def setCertValue(value: Buffer) = {
+    asJava.setCertValue(value.asJava)
     this
   }
   def getCertValue = {
@@ -106,8 +105,8 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
   /**
     * Set the key a a buffer
     */
-  def setKeyValue(value: JBuffer) = {
-    asJava.setKeyValue(value)
+  def setKeyValue(value: Buffer) = {
+    asJava.setKeyValue(value.asJava)
     this
   }
   def getKeyValue = {

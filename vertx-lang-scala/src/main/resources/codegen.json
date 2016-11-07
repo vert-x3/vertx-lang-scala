@@ -3,7 +3,7 @@
   "generators" : [
     {
       "kind": "dataObject",
-      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
+      "fileName": "if(concrete) {'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'} else null",
       "templateFileName": "vertx-scala/template/dataobject.templ"
     },
     {

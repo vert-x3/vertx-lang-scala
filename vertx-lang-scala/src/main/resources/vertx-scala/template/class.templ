@@ -29,15 +29,16 @@ package @{packageName}\n
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
-import @{typeToAliasedType(type)+"\n"}
+import @{typeToAliasedType(type)}\n
 @foreach{importedType : importedTypes}
-  @if{importedType.name.contains(".impl.")}
+	@if{importedType.name.contains(".impl.")}
 	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{typeToAliasedType(importedType)+"\n"}
+import @{typeToAliasedType(importedType)}\n
 import @{importedType.raw.translateName("scala")}\n
+		@else{importedType != type}
+import @{typeToAliasedType(importedType)}\n
 		@end{}
-import @{typeToAliasedType(importedType)+"\n"}
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
 				importedType.kind == CLASS_JSON_ARRAY ||
 				importedType.kind == CLASS_ENUM}
@@ -47,8 +48,9 @@ import @{importedType.raw}\n
 				importedType.kind != CLASS_HANDLER &&
 				importedType.kind != CLASS_LIST &&
 				importedType.kind != CLASS_SET &&
-				importedType.kind != CLASS_MAP}
-import @{typeToAliasedType(importedType)+"\n"}
+				importedType.kind != CLASS_MAP &&
+				importedType != type}
+import @{typeToAliasedType(importedType)}\n
 		@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
@@ -97,7 +99,7 @@ import @{importedType.raw.translateName("scala")}\n
 @end{}
 
 @comment{"## Inheritance"}
-@if{abstractSuperTypes.size() > 0}
+@if{superTypes.size() > 0}
 	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
 @end{}
 

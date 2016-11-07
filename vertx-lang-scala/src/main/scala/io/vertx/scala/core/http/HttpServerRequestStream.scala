@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
-      import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-  import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.streams.{ReadStream => JReadStream}
-  
+import io.vertx.scala.core.streams.ReadStream
+
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].

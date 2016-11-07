@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-      import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-  import io.vertx.core.eventbus.{Message => JMessage}
-      import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-  
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.eventbus.{Message => JMessage}
+
 /**
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
   * be read from.

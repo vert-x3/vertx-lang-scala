@@ -20,25 +20,20 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-      import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-  import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-  import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.http.{HttpFrame => JHttpFrame}
-  import io.vertx.core.http.HttpVersion
-  import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.HttpVersion
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-  import io.vertx.core.http.HttpMethod
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.streams.{ReadStream => JReadStream}
-    import io.vertx.core.http.{HttpConnection => JHttpConnection}
-  
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
+
 /**
   * Represents a client-side HTTP request.
   * 

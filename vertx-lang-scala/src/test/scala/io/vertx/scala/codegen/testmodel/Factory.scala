@@ -20,10 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{Factory => JFactory}
-    import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-  import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
-  import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
-  import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
+import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
 
 /**
   */

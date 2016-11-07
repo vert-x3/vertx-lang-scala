@@ -22,21 +22,20 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   */
 
 class DataObjectWithNestedBuffer(val asJava: JDataObjectWithNestedBuffer) {
-  def setBuffer(value: JBuffer) = {
-    asJava.setBuffer(value)
+  def setBuffer(value: Buffer) = {
+    asJava.setBuffer(value.asJava)
     this
   }
   def getBuffer = {
     asJava.getBuffer()
   }
-  def setBuffers(value: scala.collection.mutable.Buffer[JBuffer]) = {
-    asJava.setBuffers(value.asJava)
+  def setBuffers(value: scala.collection.mutable.Buffer[Buffer]) = {
+    asJava.setBuffers(value.map(_.asJava).asJava)
     this
   }
   def getBuffers = {

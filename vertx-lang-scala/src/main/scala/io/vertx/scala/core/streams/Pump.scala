@@ -20,9 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{Pump => JPump}
-  import io.vertx.core.streams.{WriteStream => JWriteStream}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-  import io.vertx.core.streams.{Pump => JPump}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to

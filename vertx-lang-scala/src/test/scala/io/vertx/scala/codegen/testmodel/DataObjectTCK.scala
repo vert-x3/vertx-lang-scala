@@ -20,11 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{DataObjectTCK => JDataObjectTCK}
-  import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
-  import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
-  import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
-  import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
-  import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
+import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
+import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
+import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
+import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
+import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
 
 /**
   * todo:

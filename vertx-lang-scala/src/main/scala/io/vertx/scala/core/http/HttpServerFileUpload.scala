@@ -20,14 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-      import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.streams.{ReadStream => JReadStream}
-    
+import io.vertx.scala.core.streams.ReadStream
+
 /**
   * Represents an file upload from an HTML FORM.
   */

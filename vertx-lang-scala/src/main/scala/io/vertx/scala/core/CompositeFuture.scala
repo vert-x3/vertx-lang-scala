@@ -20,16 +20,16 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{CompositeFuture => JCompositeFuture}
-    import io.vertx.core.{CompositeFuture => JCompositeFuture}
-          import io.vertx.core.{Future => JFuture}
-  import java.util.function.{Function => JFunction}
+import io.vertx.core.{Future => JFuture}
+import java.util.function.{Function => JFunction}
 import java.util.function.Function
 
 /**
   * The composite future wraps a list of [[io.vertx.scala.core.Future futures]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: JCompositeFuture) {
+class CompositeFuture(private val _asJava: JCompositeFuture) 
+    extends  {
 
   def asJava: JCompositeFuture = _asJava
 

@@ -20,13 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import com.acme.pkg.{MyInterface => JMyInterface}
-  import com.acme.pkg.{MyInterface => JMyInterface}
-  import com.acme.pkg.sub.{SubInterface => JSubInterface}
-import com.acme.scala.pkg.sub.SubInterface
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
-  import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
-import io.vertx.scala.codegen.testmodel.TestInterface
+import com.acme.scala.pkg.sub.SubInterface
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
+import io.vertx.scala.codegen.testmodel.TestInterface
 
 /**
   */

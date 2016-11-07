@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{TimeoutStream => JTimeoutStream}
-  import io.vertx.core.{TimeoutStream => JTimeoutStream}
-        import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-  
+import io.vertx.scala.core.streams.ReadStream
+
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
   * it can be once or several times depending on the nature of the timer related to this stream. The

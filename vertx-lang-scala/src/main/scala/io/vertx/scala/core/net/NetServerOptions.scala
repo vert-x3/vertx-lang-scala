@@ -23,7 +23,6 @@ import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.core.http.ClientAuth
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetServer]].
@@ -78,8 +77,8 @@ class NetServerOptions(val asJava: JNetServerOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

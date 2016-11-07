@@ -20,11 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-  import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-      import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-    import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying

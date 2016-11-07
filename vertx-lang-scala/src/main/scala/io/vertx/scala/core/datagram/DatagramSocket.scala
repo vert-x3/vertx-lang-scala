@@ -20,21 +20,16 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-      import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-  import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
-  import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
 import io.vertx.core.metrics.{Measured => JMeasured}
-  import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.streams.{ReadStream => JReadStream}
-        import io.vertx.core.net.{SocketAddress => JSocketAddress}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * A datagram socket can be used to send [[io.vertx.scala.core.datagram.DatagramPacket]]'s to remote datagram servers

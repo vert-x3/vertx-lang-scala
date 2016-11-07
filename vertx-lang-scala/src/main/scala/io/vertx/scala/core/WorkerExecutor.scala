@@ -20,10 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
-  import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-      import io.vertx.core.{Future => JFuture}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.{Future => JFuture}
 
 /**
   * An executor for executing blocking code in Vert.x .
