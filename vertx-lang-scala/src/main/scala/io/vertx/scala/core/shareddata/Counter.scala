@@ -20,7 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.shareddata.{Counter => JCounter}
-        
+
 /**
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
   * 

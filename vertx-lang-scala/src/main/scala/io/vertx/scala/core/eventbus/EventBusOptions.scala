@@ -23,7 +23,6 @@ import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 import io.vertx.core.http.ClientAuth
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
@@ -36,8 +35,6 @@ import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
-import io.vertx.scala.core.net.TCPSSLOptions
 
 /**
   * Options to configure the event bus.
@@ -153,8 +150,8 @@ class EventBusOptions(val asJava: JEventBusOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

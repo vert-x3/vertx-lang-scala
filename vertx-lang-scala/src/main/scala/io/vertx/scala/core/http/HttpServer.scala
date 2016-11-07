@@ -20,15 +20,13 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServer => JHttpServer}
-    import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-  import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-  import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.metrics.{Measured => JMeasured}
-  import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
-  import io.vertx.core.http.{HttpServer => JHttpServer}
-  import io.vertx.core.http.{HttpConnection => JHttpConnection}
-        import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
+import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**
   * An HTTP and WebSockets server.

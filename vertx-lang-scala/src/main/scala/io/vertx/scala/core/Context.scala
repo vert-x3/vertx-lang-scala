@@ -20,10 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Context => JContext}
-        import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.json.JsonObject
-          import io.vertx.core.{Future => JFuture}
-  import io.vertx.core.{Context => JContext}
+import io.vertx.core.{Vertx => JVertx}
+import io.vertx.core.json.JsonObject
+import io.vertx.core.{Future => JFuture}
 
 /**
   * The execution context of a scala-function execution.

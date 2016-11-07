@@ -20,13 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-      import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-  import io.vertx.core.http.{GoAway => JGoAway}
-  import io.vertx.core.http.{HttpConnection => JHttpConnection}
-  import io.vertx.core.http.{Http2Settings => JHttp2Settings}
-    
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.{GoAway => JGoAway}
+import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+
 /**
   * Represents an HTTP connection.
   * <p/>

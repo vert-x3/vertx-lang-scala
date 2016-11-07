@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
@@ -37,8 +36,6 @@ import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
-import io.vertx.core.net.{ClientOptionsBase => JClientOptionsBase}
-import io.vertx.scala.core.net.ClientOptionsBase
 
 /**
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
@@ -88,8 +85,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

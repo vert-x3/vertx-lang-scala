@@ -20,19 +20,16 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpClient => JHttpClient}
-    import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-  import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-  import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
+import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.metrics.{Measured => JMeasured}
-  import io.vertx.core.http.HttpMethod
-  import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
-  import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.MultiMap
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 import io.vertx.core.{MultiMap => JMultiMap}
-    import io.vertx.core.http.{WebSocket => JWebSocket}
-  import io.vertx.core.http.WebsocketVersion
-    import io.vertx.core.http.{HttpClient => JHttpClient}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.http.{WebSocket => JWebSocket}
+import io.vertx.core.http.WebsocketVersion
 
 /**
   * An asynchronous HTTP client.

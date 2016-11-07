@@ -20,9 +20,8 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.dns.{DnsClient => JDnsClient}
-  import io.vertx.core.dns.{DnsClient => JDnsClient}
-    import io.vertx.core.dns.{MxRecord => JMxRecord}
-        import io.vertx.core.dns.{SrvRecord => JSrvRecord}
+import io.vertx.core.dns.{MxRecord => JMxRecord}
+import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Provides a way to asynchronously lookup information from DNS servers.

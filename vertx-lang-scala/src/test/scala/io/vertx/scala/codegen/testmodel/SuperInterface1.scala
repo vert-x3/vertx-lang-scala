@@ -20,7 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
-  
+
 /**
   */
 class SuperInterface1(private val _asJava: JSuperInterface1) {

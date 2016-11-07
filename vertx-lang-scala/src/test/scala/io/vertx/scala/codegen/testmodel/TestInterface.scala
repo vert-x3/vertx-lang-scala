@@ -20,20 +20,19 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
-        import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
-    import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
-        import io.vertx.codegen.testmodel.TestEnum
-    import io.vertx.core.json.JsonObject
-        import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
-  import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
-  import io.vertx.codegen.testmodel.TestGenEnum
-    import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
-  import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-  import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
-  import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
-  import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
-  import io.vertx.core.json.JsonArray
-        import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
+import io.vertx.codegen.testmodel.TestEnum
+import io.vertx.core.json.JsonObject
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
+import io.vertx.codegen.testmodel.TestGenEnum
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
+import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
+import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
+import io.vertx.core.json.JsonArray
 
 /**
   */

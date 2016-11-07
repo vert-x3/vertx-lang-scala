@@ -20,53 +20,42 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Vertx => JVertx}
-    import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-import io.vertx.scala.core.datagram.DatagramSocket
 import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-  import io.vertx.core.http.{HttpServer => JHttpServer}
-import io.vertx.scala.core.http.HttpServer
+import io.vertx.scala.core.datagram.DatagramSocket
 import io.vertx.core.http.{HttpServer => JHttpServer}
-  import io.vertx.core.{Context => JContext}
-  import io.vertx.core.shareddata.{SharedData => JSharedData}
-import io.vertx.scala.core.shareddata.SharedData
+import io.vertx.scala.core.http.HttpServer
+import io.vertx.core.{Context => JContext}
 import io.vertx.core.shareddata.{SharedData => JSharedData}
-  import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
-  import io.vertx.core.{TimeoutStream => JTimeoutStream}
-  import io.vertx.core.eventbus.{EventBus => JEventBus}
-import io.vertx.scala.core.eventbus.EventBus
+import io.vertx.scala.core.shareddata.SharedData
+import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
+import io.vertx.core.{TimeoutStream => JTimeoutStream}
 import io.vertx.core.eventbus.{EventBus => JEventBus}
-      import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
+import io.vertx.scala.core.eventbus.EventBus
+import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.scala.core.http.HttpClientOptions
-  import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
+import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import io.vertx.scala.core.datagram.DatagramSocketOptions
-    import io.vertx.core.net.{NetClient => JNetClient}
-import io.vertx.scala.core.net.NetClient
 import io.vertx.core.net.{NetClient => JNetClient}
-    import io.vertx.core.{Vertx => JVertx}
-  import io.vertx.core.{VertxOptions => JVertxOptions}
-    import io.vertx.core.{Future => JFuture}
-  import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
+import io.vertx.scala.core.net.NetClient
+import io.vertx.core.{VertxOptions => JVertxOptions}
+import io.vertx.core.{Future => JFuture}
+import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.scala.core.net.NetClientOptions
-  import io.vertx.core.dns.{DnsClient => JDnsClient}
-import io.vertx.scala.core.dns.DnsClient
 import io.vertx.core.dns.{DnsClient => JDnsClient}
-  import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
+import io.vertx.scala.core.dns.DnsClient
+import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.net.NetServerOptions
-  import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-  import io.vertx.core.net.{NetServer => JNetServer}
-import io.vertx.scala.core.net.NetServer
+import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.net.{NetServer => JNetServer}
-  import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
-  import io.vertx.core.file.{FileSystem => JFileSystem}
-import io.vertx.scala.core.file.FileSystem
+import io.vertx.scala.core.net.NetServer
+import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 import io.vertx.core.file.{FileSystem => JFileSystem}
-  import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
+import io.vertx.scala.core.file.FileSystem
+import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
 import io.vertx.scala.core.http.HttpServerOptions
-    import io.vertx.core.http.{HttpClient => JHttpClient}
-import io.vertx.scala.core.http.HttpClient
 import io.vertx.core.http.{HttpClient => JHttpClient}
+import io.vertx.scala.core.http.HttpClient
 
 /**
   * The entry point into the Vert.x Core API.

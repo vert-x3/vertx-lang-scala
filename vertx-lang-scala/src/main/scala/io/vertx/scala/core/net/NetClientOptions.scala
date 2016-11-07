@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
@@ -55,8 +54,8 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: JBuffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {

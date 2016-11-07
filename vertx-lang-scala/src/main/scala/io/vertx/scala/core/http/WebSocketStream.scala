@@ -20,12 +20,10 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
-      import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
-  import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-  import io.vertx.core.http.{WebSocket => JWebSocket}
-  
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{WebSocket => JWebSocket}
+
 /**
   * A stream for [[io.vertx.scala.core.http.HttpClient]] WebSocket connection.
   * 

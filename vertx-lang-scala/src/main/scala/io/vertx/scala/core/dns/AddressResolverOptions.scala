@@ -22,7 +22,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 
 /**
   * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
@@ -88,8 +87,8 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * <p/>
     * The default value is null, so the operating system hosts config is used.
     */
-  def setHostsValue(value: JBuffer) = {
-    asJava.setHostsValue(value)
+  def setHostsValue(value: Buffer) = {
+    asJava.setHostsValue(value.asJava)
     this
   }
   def getHostsValue = {
