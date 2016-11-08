@@ -29,7 +29,6 @@ import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
 import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
 import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
-import io.vertx.scala.ext.auth.oauth2.OAuth2ClientOptions
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 

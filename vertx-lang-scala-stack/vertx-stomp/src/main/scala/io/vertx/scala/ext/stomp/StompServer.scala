@@ -28,7 +28,6 @@ import io.vertx.scala.core.net.NetServer
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
-import io.vertx.scala.ext.stomp.StompServerOptions
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 
 /**

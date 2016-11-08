@@ -28,11 +28,9 @@ import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
-import io.vertx.scala.ext.stomp.BridgeOptions
 import io.vertx.ext.stomp.{Destination => JDestination}
 import io.vertx.ext.stomp.{DestinationFactory => JDestinationFactory}
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 
 /**

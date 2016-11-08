@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.shell.{ShellServer => JShellServer}
 import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
-import io.vertx.scala.ext.shell.ShellServerOptions
 import io.vertx.ext.shell.term.{TermServer => JTermServer}
 import io.vertx.scala.ext.shell.term.TermServer
 import io.vertx.core.{Vertx => JVertx}

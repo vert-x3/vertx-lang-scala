@@ -21,13 +21,10 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.mail.{MailClient => JMailClient}
 import io.vertx.ext.mail.{MailConfig => JMailConfig}
-import io.vertx.scala.ext.mail.MailConfig
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.mail.{MailMessage => JMailMessage}
-import io.vertx.scala.ext.mail.MailMessage
 import io.vertx.ext.mail.{MailResult => JMailResult}
-import io.vertx.scala.ext.mail.MailResult
 
 /**
   * SMTP mail client for Vert.x

@@ -23,7 +23,6 @@ import io.vertx.ext.stomp.{StompClientConnection => JStompClientConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 
 /**
   * Once a connection to the STOMP server has been made, client receives a [[io.vertx.scala.ext.stomp.StompClientConnection]], that let

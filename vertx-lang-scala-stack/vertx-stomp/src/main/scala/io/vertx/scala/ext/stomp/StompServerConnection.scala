@@ -24,7 +24,6 @@ import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 import io.vertx.ext.stomp.{StompServer => JStompServer}
 
 /**

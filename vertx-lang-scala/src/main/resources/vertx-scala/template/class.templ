@@ -35,13 +35,17 @@ import @{typeToAliasedType(type)}\n
 	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
 import @{typeToAliasedType(importedType)}\n
+			@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
+			@end{}
 		@else{importedType != type}
 import @{typeToAliasedType(importedType)}\n
 		@end{}
 	@else{importedType.kind == CLASS_DATA_OBJECT}
 import @{typeToAliasedType(importedType)}\n
+		@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
+		@end{}
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
 				importedType.kind == CLASS_JSON_ARRAY ||
 				importedType.kind == CLASS_ENUM}

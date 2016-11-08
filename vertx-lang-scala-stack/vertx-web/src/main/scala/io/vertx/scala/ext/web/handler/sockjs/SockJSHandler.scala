@@ -29,9 +29,7 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandlerOptions
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
-import io.vertx.scala.ext.web.handler.sockjs.BridgeOptions
 
 /**
   *
