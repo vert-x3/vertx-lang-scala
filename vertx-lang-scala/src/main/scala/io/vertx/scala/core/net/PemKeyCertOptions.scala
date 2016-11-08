@@ -17,7 +17,11 @@
 package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Key store options configuring a private key and its certificate based on
@@ -63,12 +67,12 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
+class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
 
   /**
     * Set the path to the certificate
     */
-  def setCertPath(value:String) = {
+  def setCertPath(value: String) = {
     asJava.setCertPath(value)
     this
   }
@@ -79,8 +83,8 @@ class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
   /**
     * Set the certificate as a buffer
     */
-  def setCertValue(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setCertValue(value)
+  def setCertValue(value: Buffer) = {
+    asJava.setCertValue(value.asJava)
     this
   }
   def getCertValue = {
@@ -90,7 +94,7 @@ class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
   /**
     * Set the path to the key file
     */
-  def setKeyPath(value:String) = {
+  def setKeyPath(value: String) = {
     asJava.setKeyPath(value)
     this
   }
@@ -101,8 +105,8 @@ class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
   /**
     * Set the key a a buffer
     */
-  def setKeyValue(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setKeyValue(value)
+  def setKeyValue(value: Buffer) = {
+    asJava.setKeyValue(value.asJava)
     this
   }
   def getKeyValue = {
@@ -111,13 +115,12 @@ class PemKeyCertOptions(val asJava: io.vertx.core.net.PemKeyCertOptions) {
 }
 
 object PemKeyCertOptions {
-  type PemKeyCertOptionsJava = io.vertx.core.net.PemKeyCertOptions
   
   def apply() = {
-    new PemKeyCertOptions(new PemKeyCertOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PemKeyCertOptions(new JPemKeyCertOptions(emptyObj()))
   }
   
-  def apply(t: PemKeyCertOptionsJava) = {
+  def apply(t: JPemKeyCertOptions) = {
     if(t != null)
       new PemKeyCertOptions(t)
     else
@@ -126,7 +129,7 @@ object PemKeyCertOptions {
   
   def fromJson(json: JsonObject):PemKeyCertOptions = {
     if(json != null)
-      new PemKeyCertOptions(new PemKeyCertOptionsJava(json))
+      new PemKeyCertOptions(new JPemKeyCertOptions(json))
     else
       null
   }

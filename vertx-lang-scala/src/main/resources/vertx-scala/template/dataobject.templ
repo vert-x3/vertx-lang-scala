@@ -2,6 +2,7 @@
 
 @comment{"# Defines a few helper functions"}
 @includeNamed{'scala-doc.templ'}
+@includeNamed{'scala-helpers.templ'}
 
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
@@ -19,53 +20,8 @@
  * under the License.\n
  */\n\n
 @code{
-def changeJavaGenericNotationToScalaNotation(type) {
- type.name.replace('<', '[').replace('>', ']');
-}
-
-def toScalaType(type) {
-  var ret = '';
-  if (type.name == 'void' || type.name == 'java.lang.Void') {
-    ret = 'Unit';
-  } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
-    ret = 'AnyRef';
-  } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-    ret = 'Throwable';
-  } else if (type.kind == CLASS_STRING) {
-    ret = 'String';
-  } else if (type.kind == CLASS_PRIMITIVE || type.kind == CLASS_BOXED_PRIMITIVE) {
-    if (type.name == 'byte' || type.name == 'java.lang.Byte') {
-      ret = 'Byte';
-    } else if (type.name == 'short' || type.name == 'java.lang.Short') {
-      ret = 'Short';
-    } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
-      ret = 'Int';
-    } else if (type.name == 'long' || type.name == 'java.lang.Long') {
-      ret = 'Long';
-    } else if (type.name == 'float' || type.name == 'java.lang.Float') {
-      ret = 'Float';
-    } else if (type.name == 'double' || type.name == 'java.lang.Double') {
-      ret = 'Double';
-    } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
-      ret = 'Boolean';
-    } else if (type.name == 'char' || type.name == 'java.lang.Character') {
-      ret = 'Char';
-    }
-  } else if (type.kind == CLASS_DATA_OBJECT) {
-    ret = type.raw.translatePackageName("scala") + '.' + type.simpleName;
-  } else if (type.kind == CLASS_ENUM) {
-    ret = type.name;
-  } else if (type.kind == CLASS_JSON_OBJECT ||
-           type.kind == CLASS_JSON_ARRAY){
-    ret = changeJavaGenericNotationToScalaNotation(type)
-  } else {
-    ret = changeJavaGenericNotationToScalaNotation(type);
-  }
-  return ret;
-}
-
   var typeName = type.raw.simpleName;
-  var jTypeName = type.raw.simpleName + 'Java';
+  var jTypeName = toAliasedTypeName(type);
 }
 
 
@@ -74,7 +30,30 @@ package @{type.raw.translatePackageName("scala")}\n
 
 @comment{"# Generate the imports"}
 import io.vertx.core.json.JsonObject\n
-import scala.collection.JavaConversions._\n
+import scala.collection.JavaConverters._\n
+import io.vertx.lang.scala.json.Json._\n
+import @{typeToAliasedType(type)+"\n"}
+
+@foreach{importedType : importedTypes}
+	@if{superType == importedType}
+	@else{superTypes.contains(importedType)}
+	@else{importedType.kind == CLASS_API}
+import @{typeToAliasedType(importedType)+"\n"}
+import @{importedType.raw.translateName("scala")}\n
+	@else{importedType.kind == CLASS_JSON_OBJECT ||
+				importedType.kind == CLASS_JSON_ARRAY ||
+				importedType.kind == CLASS_ENUM}
+import @{importedType.raw}\n
+	@else{importedType.kind != CLASS_ASYNC_RESULT &&
+				!importedType.packageName.equals("java.lang") &&
+				importedType.kind != CLASS_HANDLER &&
+				importedType.kind != CLASS_LIST &&
+				importedType.kind != CLASS_SET &&
+				importedType.kind != CLASS_MAP}
+import @{typeToAliasedType(importedType)+"\n"}
+import @{importedType.raw.translateName("scala")}\n
+	@end{}
+@end{}
 \n
 
 @comment{"# Generate the Class or Interface/Trait"}
@@ -87,7 +66,7 @@ import scala.collection.JavaConversions._\n
 \n
 
 
-class @{typeName}(val asJava: @{type.raw.name}) {\n
+class @{typeName}(val asJava: @{jTypeName}) {\n
 @foreach{property:properties}
 @if{property.doc != null}
 \n
@@ -97,16 +76,20 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
 @end{}
 @if{property.adder}
 @if{property.isMap}
-  def @{property.adderMethod}(key: String, value:@{toScalaType(property.type)}) = {\n
+  def @{property.adderMethod}(key: String, value: @{toScalaType(property.type)}) = {\n
     asJava.@{property.adderMethod}(key, value)\n
     this\n
   }\n
 @else{}
-  def @{property.adderMethod}(value:@{toScalaType(property.type)}) = {\n
+  def @{property.adderMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
     asJava.@{property.adderMethod}(value.asJava)\n
-@else{}
+@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
+ property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
+ property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
     asJava.@{property.adderMethod}(value)\n
+@else{}
+    asJava.@{property.adderMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
@@ -114,44 +97,48 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
 @end{}
 @if{property.setter}
 @if{property.isList}
-  def @{property.setterMethod}(value:scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
-@else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
+@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
+    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
 @else{property.isSet}
-  def @{property.setterMethod}(value:Set[@{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: Set[@{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box))\n
-@else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.map(_.asJava))\n
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
+@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
+    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
 @else{property.isMap}
-  def @{property.setterMethod}(value:Map[String, @{toScalaType(property.type)}]) = {\n
+  def @{property.setterMethod}(value: Map[String, @{toScalaType(property.type)}]) = {\n
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box))\n
+    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.mapValues(_.asJava))\n
+    asJava.@{property.setterMethod}(value.mapValues(_.asJava).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value)\n
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
 @else{}
-  def @{property.setterMethod}(value:@{toScalaType(property.type)}) = {\n
+  def @{property.setterMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
     asJava.@{property.setterMethod}(value.asJava)\n
-@else{}
+@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
+  property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
+  property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
     asJava.@{property.setterMethod}(value)\n
+@else{}
+    asJava.@{property.setterMethod}(value.asJava)\n
 @end{}
     this\n
   }\n
@@ -166,11 +153,12 @@ class @{typeName}(val asJava: @{type.raw.name}) {\n
 @end{}
 }\n
 \n
+
+@if{concrete}
 object @{type.raw.simpleName} {\n
-  type @{jTypeName} = @{type.raw.name}\n
   \n
   def apply() = {\n
-    new @{typeName}(new @{jTypeName}(io.vertx.lang.scala.json.Json.emptyObj()))\n
+    new @{typeName}(new @{jTypeName}(emptyObj()))\n
   }\n
   \n
   def apply(t: @{jTypeName}) = {\n
@@ -187,3 +175,4 @@ object @{type.raw.simpleName} {\n
       null\n
   }\n
 }\n
+@end{}

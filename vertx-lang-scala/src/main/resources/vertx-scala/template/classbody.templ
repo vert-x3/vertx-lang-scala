@@ -2,24 +2,24 @@
 @code{cacheDecls=new java.util.ArrayList()}
 
 @comment{"# Generic asJava method"}
-@{indentation}  def asJava: @includeNamed{'writeDelegateType'} = _asJava\n\n
+@{indentation}  def asJava: @{writeDelegateType()} = _asJava\n\n
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
-@{indentation}  override def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  override def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}  }\n\n
 @else{}
 @if{shouldMethodReturnAFuture(method)}
-@{indentation}  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @{indentation}    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
 @{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}
 @{indentation}    promiseAndHandler._2.future\n
 @{indentation}  }\n\n
 @else{}
-@{indentation}  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+@{indentation}  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    if (cached_@{cacheDecls.size()} == null) {\n
 @{indentation}      cached_@{cacheDecls.size()}=

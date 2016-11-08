@@ -17,18 +17,20 @@
 package io.vertx.scala.core.datagram
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 
 /**
   * Options used to configure a datagram socket.
   */
 
-class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOptions) {
+class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
 
   /**
     * Set if the socket can receive broadcast packets
     */
-  def setBroadcast(value:Boolean) = {
+  def setBroadcast(value: Boolean) = {
     asJava.setBroadcast(value)
     this
   }
@@ -39,7 +41,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set if IP v6 should be used
     */
-  def setIpV6(value:Boolean) = {
+  def setIpV6(value: Boolean) = {
     asJava.setIpV6(value)
     this
   }
@@ -50,7 +52,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value:Boolean) = {
+  def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
@@ -61,7 +63,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set if loopback mode is disabled
     */
-  def setLoopbackModeDisabled(value:Boolean) = {
+  def setLoopbackModeDisabled(value: Boolean) = {
     asJava.setLoopbackModeDisabled(value)
     this
   }
@@ -72,7 +74,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the multicast network interface address
     */
-  def setMulticastNetworkInterface(value:String) = {
+  def setMulticastNetworkInterface(value: String) = {
     asJava.setMulticastNetworkInterface(value)
     this
   }
@@ -83,7 +85,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the multicast ttl value
     */
-  def setMulticastTimeToLive(value:Int) = {
+  def setMulticastTimeToLive(value: Int) = {
     asJava.setMulticastTimeToLive(value)
     this
   }
@@ -94,7 +96,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value:Int) = {
+  def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
@@ -105,7 +107,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value:Boolean) = {
+  def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
@@ -116,7 +118,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value:Int) = {
+  def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
@@ -127,7 +129,7 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value:Int) = {
+  def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
@@ -137,13 +139,12 @@ class DatagramSocketOptions(val asJava: io.vertx.core.datagram.DatagramSocketOpt
 }
 
 object DatagramSocketOptions {
-  type DatagramSocketOptionsJava = io.vertx.core.datagram.DatagramSocketOptions
   
   def apply() = {
-    new DatagramSocketOptions(new DatagramSocketOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
   }
   
-  def apply(t: DatagramSocketOptionsJava) = {
+  def apply(t: JDatagramSocketOptions) = {
     if(t != null)
       new DatagramSocketOptions(t)
     else
@@ -152,7 +153,7 @@ object DatagramSocketOptions {
   
   def fromJson(json: JsonObject):DatagramSocketOptions = {
     if(json != null)
-      new DatagramSocketOptions(new DatagramSocketOptionsJava(json))
+      new DatagramSocketOptions(new JDatagramSocketOptions(json))
     else
       null
   }

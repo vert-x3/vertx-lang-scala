@@ -19,12 +19,13 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T](private val _asJava: io.vertx.codegen.testmodel.GenericRefedInterface[T]) {
+class GenericRefedInterface[T](private val _asJava: JGenericRefedInterface[T]) {
 
-  def asJava: io.vertx.codegen.testmodel.GenericRefedInterface[T] = _asJava
+  def asJava: JGenericRefedInterface[T] = _asJava
 
   def setValue(value: T): Unit = {
     _asJava.setValue(value)
@@ -38,7 +39,7 @@ class GenericRefedInterface[T](private val _asJava: io.vertx.codegen.testmodel.G
 
 object GenericRefedInterface {
 
-  def apply[T](_asJava: io.vertx.codegen.testmodel.GenericRefedInterface[T]): io.vertx.scala.codegen.testmodel.GenericRefedInterface[T] =
-    new io.vertx.scala.codegen.testmodel.GenericRefedInterface(_asJava)
+  def apply[T](_asJava: JGenericRefedInterface[T]): GenericRefedInterface[T] =
+    new GenericRefedInterface(_asJava)
 
 }

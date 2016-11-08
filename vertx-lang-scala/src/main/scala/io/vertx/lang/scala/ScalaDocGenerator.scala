@@ -27,7 +27,7 @@ import javax.lang.model.`type`.TypeMirror
 
 import io.vertx.codetrans.lang.scala.ScalaLang
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
@@ -98,7 +98,7 @@ class ScalaDocGenerator extends DocGenerator {
       val `type`: TypeMirror = elt.asType
       val methodType: ExecutableType = env.getTypeUtils.erasure(`type`).asInstanceOf[ExecutableType]
 
-      methodType.getParameterTypes.zipWithIndex.foreach{
+      methodType.getParameterTypes.asScala.zipWithIndex.foreach{
         case (v, i) => {
           if(i > 0) anchor += ",%20"
           anchor += v.toString

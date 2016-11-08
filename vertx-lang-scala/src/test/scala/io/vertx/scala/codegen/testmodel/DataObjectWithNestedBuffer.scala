@@ -17,27 +17,31 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   */
 
-class DataObjectWithNestedBuffer(val asJava: io.vertx.codegen.testmodel.DataObjectWithNestedBuffer) {
-  def setBuffer(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setBuffer(value)
+class DataObjectWithNestedBuffer(val asJava: JDataObjectWithNestedBuffer) {
+  def setBuffer(value: Buffer) = {
+    asJava.setBuffer(value.asJava)
     this
   }
   def getBuffer = {
     asJava.getBuffer()
   }
-  def setBuffers(value:scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer]) = {
-    asJava.setBuffers(value)
+  def setBuffers(value: scala.collection.mutable.Buffer[Buffer]) = {
+    asJava.setBuffers(value.map(_.asJava).asJava)
     this
   }
   def getBuffers = {
     asJava.getBuffers()
   }
-  def setNested(value:io.vertx.scala.codegen.testmodel.DataObjectWithBuffer) = {
+  def setNested(value: DataObjectWithBuffer) = {
     asJava.setNested(value.asJava)
     this
   }
@@ -47,13 +51,12 @@ class DataObjectWithNestedBuffer(val asJava: io.vertx.codegen.testmodel.DataObje
 }
 
 object DataObjectWithNestedBuffer {
-  type DataObjectWithNestedBufferJava = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
   
   def apply() = {
-    new DataObjectWithNestedBuffer(new DataObjectWithNestedBufferJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(emptyObj()))
   }
   
-  def apply(t: DataObjectWithNestedBufferJava) = {
+  def apply(t: JDataObjectWithNestedBuffer) = {
     if(t != null)
       new DataObjectWithNestedBuffer(t)
     else
@@ -62,7 +65,7 @@ object DataObjectWithNestedBuffer {
   
   def fromJson(json: JsonObject):DataObjectWithNestedBuffer = {
     if(json != null)
-      new DataObjectWithNestedBuffer(new DataObjectWithNestedBufferJava(json))
+      new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))
     else
       null
   }

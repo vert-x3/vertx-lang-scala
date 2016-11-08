@@ -19,49 +19,55 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.DataObjectWithMaps
-import io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
-import io.vertx.codegen.testmodel.DataObjectWithLists
-import io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
-import io.vertx.codegen.testmodel.DataObjectWithValues
+import io.vertx.codegen.testmodel.{DataObjectTCK => JDataObjectTCK}
+import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
+import io.vertx.scala.codegen.testmodel.DataObjectWithMaps
+import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
+import io.vertx.scala.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
+import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
+import io.vertx.scala.codegen.testmodel.DataObjectWithLists
+import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
+import io.vertx.scala.codegen.testmodel.DataObjectWithNestedBuffer
+import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
+import io.vertx.scala.codegen.testmodel.DataObjectWithValues
 
 /**
   * todo:
   * - Buffer support
   */
-class DataObjectTCK(private val _asJava: io.vertx.codegen.testmodel.DataObjectTCK) {
+class DataObjectTCK(private val _asJava: JDataObjectTCK) {
 
-  def asJava: io.vertx.codegen.testmodel.DataObjectTCK = _asJava
+  def asJava: JDataObjectTCK = _asJava
 
-  def getDataObjectWithValues(): io.vertx.scala.codegen.testmodel.DataObjectWithValues = {
-    io.vertx.scala.codegen.testmodel.DataObjectWithValues(_asJava.getDataObjectWithValues())
+  def getDataObjectWithValues(): DataObjectWithValues = {
+    DataObjectWithValues(_asJava.getDataObjectWithValues())
   }
 
-  def setDataObjectWithValues(dataObject: io.vertx.scala.codegen.testmodel.DataObjectWithValues): Unit = {
+  def setDataObjectWithValues(dataObject: DataObjectWithValues): Unit = {
     _asJava.setDataObjectWithValues(dataObject.asJava)
   }
 
-  def getDataObjectWithLists(): io.vertx.scala.codegen.testmodel.DataObjectWithLists = {
-    io.vertx.scala.codegen.testmodel.DataObjectWithLists(_asJava.getDataObjectWithLists())
+  def getDataObjectWithLists(): DataObjectWithLists = {
+    DataObjectWithLists(_asJava.getDataObjectWithLists())
   }
 
-  def setDataObjectWithLists(dataObject: io.vertx.scala.codegen.testmodel.DataObjectWithLists): Unit = {
+  def setDataObjectWithLists(dataObject: DataObjectWithLists): Unit = {
     _asJava.setDataObjectWithLists(dataObject.asJava)
   }
 
-  def getDataObjectWithMaps(): io.vertx.scala.codegen.testmodel.DataObjectWithMaps = {
-    io.vertx.scala.codegen.testmodel.DataObjectWithMaps(_asJava.getDataObjectWithMaps())
+  def getDataObjectWithMaps(): DataObjectWithMaps = {
+    DataObjectWithMaps(_asJava.getDataObjectWithMaps())
   }
 
-  def setDataObjectWithMaps(dataObject: io.vertx.scala.codegen.testmodel.DataObjectWithMaps): Unit = {
+  def setDataObjectWithMaps(dataObject: DataObjectWithMaps): Unit = {
     _asJava.setDataObjectWithMaps(dataObject.asJava)
   }
 
-  def methodWithOnlyJsonObjectConstructorDataObject(dataObject: io.vertx.scala.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor): Unit = {
+  def methodWithOnlyJsonObjectConstructorDataObject(dataObject: DataObjectWithOnlyJsonObjectConstructor): Unit = {
     _asJava.methodWithOnlyJsonObjectConstructorDataObject(dataObject.asJava)
   }
 
-  def setDataObjectWithBuffer(dataObject: io.vertx.scala.codegen.testmodel.DataObjectWithNestedBuffer): Unit = {
+  def setDataObjectWithBuffer(dataObject: DataObjectWithNestedBuffer): Unit = {
     _asJava.setDataObjectWithBuffer(dataObject.asJava)
   }
 
@@ -69,7 +75,7 @@ class DataObjectTCK(private val _asJava: io.vertx.codegen.testmodel.DataObjectTC
 
 object DataObjectTCK {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.DataObjectTCK): io.vertx.scala.codegen.testmodel.DataObjectTCK =
-    new io.vertx.scala.codegen.testmodel.DataObjectTCK(_asJava)
+  def apply(_asJava: JDataObjectTCK): DataObjectTCK =
+    new DataObjectTCK(_asJava)
 
 }

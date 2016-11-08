@@ -17,22 +17,23 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
 
 /**
   */
 
-class DataObjectWithOnlyJsonObjectConstructor(val asJava: io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor) {
+class DataObjectWithOnlyJsonObjectConstructor(val asJava: JDataObjectWithOnlyJsonObjectConstructor) {
 }
 
 object DataObjectWithOnlyJsonObjectConstructor {
-  type DataObjectWithOnlyJsonObjectConstructorJava = io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
   
   def apply() = {
-    new DataObjectWithOnlyJsonObjectConstructor(new DataObjectWithOnlyJsonObjectConstructorJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(emptyObj()))
   }
   
-  def apply(t: DataObjectWithOnlyJsonObjectConstructorJava) = {
+  def apply(t: JDataObjectWithOnlyJsonObjectConstructor) = {
     if(t != null)
       new DataObjectWithOnlyJsonObjectConstructor(t)
     else
@@ -41,7 +42,7 @@ object DataObjectWithOnlyJsonObjectConstructor {
   
   def fromJson(json: JsonObject):DataObjectWithOnlyJsonObjectConstructor = {
     if(json != null)
-      new DataObjectWithOnlyJsonObjectConstructor(new DataObjectWithOnlyJsonObjectConstructorJava(json))
+      new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(json))
     else
       null
   }

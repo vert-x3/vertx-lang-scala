@@ -19,23 +19,24 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: io.vertx.codegen.testmodel.ConcreteHandlerUserType) {
+class ConcreteHandlerUserType(private val _asJava: JConcreteHandlerUserType) {
 
-  def asJava: io.vertx.codegen.testmodel.ConcreteHandlerUserType = _asJava
+  def asJava: JConcreteHandlerUserType = _asJava
 
-  def handle(arg0: io.vertx.scala.codegen.testmodel.RefedInterface1): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
+  def handle(arg0: RefedInterface1): Unit = {
+    _asJava.handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
 }
 
 object ConcreteHandlerUserType {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.ConcreteHandlerUserType): io.vertx.scala.codegen.testmodel.ConcreteHandlerUserType =
-    new io.vertx.scala.codegen.testmodel.ConcreteHandlerUserType(_asJava)
+  def apply(_asJava: JConcreteHandlerUserType): ConcreteHandlerUserType =
+    new ConcreteHandlerUserType(_asJava)
 
 }

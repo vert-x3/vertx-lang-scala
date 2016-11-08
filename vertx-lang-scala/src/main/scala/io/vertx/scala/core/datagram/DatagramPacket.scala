@@ -19,22 +19,25 @@ package io.vertx.scala.core.datagram
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
 
 /**
   * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
   */
-class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket) {
+class DatagramPacket(private val _asJava: JDatagramPacket) {
 
-  def asJava: io.vertx.core.datagram.DatagramPacket = _asJava
+  def asJava: JDatagramPacket = _asJava
 
   /**
     * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
     * this [[io.vertx.scala.core.datagram.DatagramPacket]].
     * @return the address of the sender
     */
-  def sender(): io.vertx.scala.core.net.SocketAddress = {
+  def sender(): SocketAddress = {
     SocketAddress.apply(_asJava.sender())
   }
 
@@ -42,7 +45,7 @@ class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket)
     * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
     * @return the data
     */
-  def data(): io.vertx.scala.core.buffer.Buffer = {
+  def data(): Buffer = {
     Buffer.apply(_asJava.data())
   }
 
@@ -50,7 +53,7 @@ class DatagramPacket(private val _asJava: io.vertx.core.datagram.DatagramPacket)
 
 object DatagramPacket {
 
-  def apply(_asJava: io.vertx.core.datagram.DatagramPacket): io.vertx.scala.core.datagram.DatagramPacket =
-    new io.vertx.scala.core.datagram.DatagramPacket(_asJava)
+  def apply(_asJava: JDatagramPacket): DatagramPacket =
+    new DatagramPacket(_asJava)
 
 }

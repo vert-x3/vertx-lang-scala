@@ -19,23 +19,27 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.TestDataObject
-import java.util.function.Function
+import io.vertx.codegen.testmodel.{FunctionParamTCK => JFunctionParamTCK}
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.scala.codegen.testmodel.TestDataObject
+import java.util.function.{Function => JFunction}
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.core.json.JsonObject
 
 /**
   */
-class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionParamTCK) {
+class FunctionParamTCK(private val _asJava: JFunctionParamTCK) {
 
-  def asJava: io.vertx.codegen.testmodel.FunctionParamTCK = _asJava
+  def asJava: JFunctionParamTCK = _asJava
 
   def methodWithBasicParam(byteFunc: java.lang.Byte => java.lang.String, shortFunc: java.lang.Short => java.lang.String, integerFunc: java.lang.Integer => java.lang.String, longFunc: java.lang.Long => java.lang.String, floatFunc: java.lang.Float => java.lang.String, doubleFunc: java.lang.Double => java.lang.String, booleanFunc: java.lang.Boolean => java.lang.String, charFunc: java.lang.Character => java.lang.String, stringFunc: java.lang.String => java.lang.String): scala.collection.mutable.Buffer[String] = {
     _asJava.methodWithBasicParam(asJavaFunction(byteFunc), asJavaFunction(shortFunc), asJavaFunction(integerFunc), asJavaFunction(longFunc), asJavaFunction(floatFunc), asJavaFunction(doubleFunc), asJavaFunction(booleanFunc), asJavaFunction(charFunc), asJavaFunction(stringFunc)).asScala.map(x => x:String)
   }
 
-  def methodWithJsonParam(objectFunc: io.vertx.core.json.JsonObject => java.lang.String, arrayFunc: io.vertx.core.json.JsonArray => java.lang.String): scala.collection.mutable.Buffer[String] = {
+  def methodWithJsonParam(objectFunc: JsonObject => java.lang.String, arrayFunc: JsonArray => java.lang.String): scala.collection.mutable.Buffer[String] = {
     _asJava.methodWithJsonParam(asJavaFunction(objectFunc), asJavaFunction(arrayFunc)).asScala.map(x => x:String)
   }
 
@@ -43,19 +47,19 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithVoidParam(asJavaFunction(func))
   }
 
-  def methodWithUserTypeParam(arg: io.vertx.scala.codegen.testmodel.RefedInterface1, func: io.vertx.codegen.testmodel.RefedInterface1 => java.lang.String): String = {
-    _asJava.methodWithUserTypeParam(arg.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1], asJavaFunction(func))
+  def methodWithUserTypeParam(arg: RefedInterface1, func: JRefedInterface1 => java.lang.String): String = {
+    _asJava.methodWithUserTypeParam(arg.asJava.asInstanceOf[JRefedInterface1], asJavaFunction(func))
   }
 
   def methodWithObjectParam(arg: AnyRef, func: java.lang.Object => java.lang.String): String = {
     _asJava.methodWithObjectParam(arg, asJavaFunction(func))
   }
 
-  def methodWithDataObjectParam(func: io.vertx.codegen.testmodel.TestDataObject => java.lang.String): String = {
+  def methodWithDataObjectParam(func: JTestDataObject => java.lang.String): String = {
     _asJava.methodWithDataObjectParam(asJavaFunction(func))
   }
 
-  def methodWithEnumParam(func: io.vertx.codegen.testmodel.TestEnum => java.lang.String): String = {
+  def methodWithEnumParam(func: TestEnum => java.lang.String): String = {
     _asJava.methodWithEnumParam(asJavaFunction(func))
   }
 
@@ -75,7 +79,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithGenericParam(t, asJavaFunction(func))
   }
 
-  def methodWithGenericUserTypeParam[T](t: T, func: io.vertx.codegen.testmodel.GenericRefedInterface[T] => java.lang.String): String = {
+  def methodWithGenericUserTypeParam[T](t: T, func: JGenericRefedInterface[T] => java.lang.String): String = {
     _asJava.methodWithGenericUserTypeParam(t, asJavaFunction(func))
   }
 
@@ -83,7 +87,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithBasicReturn(asJavaFunction(byteFunc), asJavaFunction(shortFunc), asJavaFunction(integerFunc), asJavaFunction(longFunc), asJavaFunction(floatFunc), asJavaFunction(doubleFunc), asJavaFunction(booleanFunc), asJavaFunction(charFunc), asJavaFunction(stringFunc))
   }
 
-  def methodWithJsonReturn(objectFunc: java.lang.String => io.vertx.core.json.JsonObject, arrayFunc: java.lang.String => io.vertx.core.json.JsonArray): String = {
+  def methodWithJsonReturn(objectFunc: java.lang.String => JsonObject, arrayFunc: java.lang.String => JsonArray): String = {
     _asJava.methodWithJsonReturn(asJavaFunction(objectFunc), asJavaFunction(arrayFunc))
   }
 
@@ -91,11 +95,11 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithObjectReturn(asJavaFunction(func))
   }
 
-  def methodWithDataObjectReturn(func: java.lang.String => io.vertx.codegen.testmodel.TestDataObject): String = {
+  def methodWithDataObjectReturn(func: java.lang.String => JTestDataObject): String = {
     _asJava.methodWithDataObjectReturn(asJavaFunction(func))
   }
 
-  def methodWithEnumReturn(func: java.lang.String => io.vertx.codegen.testmodel.TestEnum): String = {
+  def methodWithEnumReturn(func: java.lang.String => TestEnum): String = {
     _asJava.methodWithEnumReturn(asJavaFunction(func))
   }
 
@@ -115,7 +119,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
     _asJava.methodWithGenericReturn(asJavaFunction(func))
   }
 
-  def methodWithGenericUserTypeReturn[T](func: io.vertx.codegen.testmodel.GenericRefedInterface[T] => io.vertx.codegen.testmodel.GenericRefedInterface[T]): String = {
+  def methodWithGenericUserTypeReturn[T](func: JGenericRefedInterface[T] => JGenericRefedInterface[T]): String = {
     _asJava.methodWithGenericUserTypeReturn(asJavaFunction(func))
   }
 
@@ -131,7 +135,7 @@ class FunctionParamTCK(private val _asJava: io.vertx.codegen.testmodel.FunctionP
 
 object FunctionParamTCK {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.FunctionParamTCK): io.vertx.scala.codegen.testmodel.FunctionParamTCK =
-    new io.vertx.scala.codegen.testmodel.FunctionParamTCK(_asJava)
+  def apply(_asJava: JFunctionParamTCK): FunctionParamTCK =
+    new FunctionParamTCK(_asJava)
 
 }

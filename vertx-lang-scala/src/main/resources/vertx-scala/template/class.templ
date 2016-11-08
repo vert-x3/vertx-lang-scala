@@ -21,24 +21,42 @@
  * under the License.\n
  */\n\n
 
-package @{type.raw.translatePackageName("scala")}\n
+@code{var packageName = type.raw.translatePackageName("scala");}
+package @{packageName}\n
 \n
 
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
+import @{typeToAliasedType(type)}\n
 @foreach{importedType : importedTypes}
-	@if{importedType.kind == CLASS_API}
+	@if{importedType.name.contains(".impl.")}
+	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
+import @{typeToAliasedType(importedType)}\n
+import @{importedType.raw.translateName("scala")}\n
+		@else{importedType != type}
+import @{typeToAliasedType(importedType)}\n
+		@end{}
+	@else{importedType.kind == CLASS_DATA_OBJECT}
+import @{typeToAliasedType(importedType)}\n
+import @{importedType.raw.translateName("scala")}\n
+	@else{importedType.kind == CLASS_JSON_OBJECT ||
+				importedType.kind == CLASS_JSON_ARRAY ||
+				importedType.kind == CLASS_ENUM}
+import @{importedType.raw}\n
+	@else{importedType.kind != CLASS_ASYNC_RESULT &&
+				!importedType.packageName.equals("java.lang") &&
+				importedType.kind != CLASS_HANDLER &&
+				importedType.kind != CLASS_LIST &&
+				importedType.kind != CLASS_SET &&
+				importedType.kind != CLASS_MAP &&
+				importedType != type}
+import @{typeToAliasedType(importedType)}\n
+		@if{packageName != importedType.raw.translatePackageName("scala") && !packageName.startsWith("io.vertx")}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
-	@else{importedType.kind != CLASS_ASYNC_RESULT &&
-	      !importedType.packageName.equals("java.lang") &&
-        importedType.kind != CLASS_LIST &&
-        importedType.kind != CLASS_SET &&
-        importedType.kind != CLASS_MAP}
-import @{importedType}\n
 	@end{}
 @end{}
 \n
@@ -78,13 +96,13 @@ import @{importedType}\n
   */\n
 @end{}
 @if{concrete}
-	class @includeNamed{'writeType'}(private val _asJava: @includeNamed{'writeDelegateType'})
+	class @{writeType(type);}(private val _asJava: @{writeDelegateType(type)})
 @else{}
-	trait @includeNamed{'writeType'}
+	trait @{writeType(type);}
 @end{}
 
 @comment{"## Inheritance"}
-@if{abstractSuperTypes.size() > 0}
+@if{superTypes.size() > 0}
 	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
 @end{}
 
@@ -101,19 +119,19 @@ import @{importedType}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
+	  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
 	@if{shouldMethodReturnAFuture(method)}
-	  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 		    promiseAndHandler._2.future\n
 	  }\n
 	@else{}
-	  def @{createNameForMethod(method)}@includeNamed{'writeTypeParamsWithVariance';typeParams=method.typeParams}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
 	@end{}
@@ -125,10 +143,10 @@ import @{importedType}\n
 @else{}
 	object @{type.raw.simpleName} {\n
 	\n
-		  def apply@includeNamed{'writeTypeParamsWithVariance'}(_asJava: @includeNamed{'writeDelegateType'}): @{toScalaType(type);}@includeNamed{'writeTypeParamsWithVariance'} =\n
-		    new @includeNamed{'writeImplType'}(_asJava)\n
+		  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+		    new @{writeImplType(type)}(_asJava)\n
 		\n
-		  private class @includeNamed{'writeImplType'}(private val _asJava: @includeNamed{'writeDelegateType'}) extends @includeNamed{'writeType'} {\n\n
+		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
 			@includeNamed{'classbody.templ'; indentation='  '}
 		  }\n\n
 	}\n

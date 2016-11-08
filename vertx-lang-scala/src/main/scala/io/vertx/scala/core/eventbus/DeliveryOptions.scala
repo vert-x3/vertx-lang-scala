@@ -17,7 +17,9 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
   * Delivery options are used to configure message delivery.
@@ -26,12 +28,12 @@ import scala.collection.JavaConversions._
   * that you wish to send with the message.
   */
 
-class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
+class DeliveryOptions(val asJava: JDeliveryOptions) {
 
   /**
     * Set the codec name.
     */
-  def setCodecName(value:String) = {
+  def setCodecName(value: String) = {
     asJava.setCodecName(value)
     this
   }
@@ -45,7 +47,7 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
     * Message headers can be sent with any message and will be accessible with [[io.vertx.scala.core.eventbus.Message]]
     * at the recipient.
     */
-  def addHeader(key: String, value:String) = {
+  def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value)
     this
   }
@@ -53,7 +55,7 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
   /**
     * Set the send timeout.
     */
-  def setSendTimeout(value:Long) = {
+  def setSendTimeout(value: Long) = {
     asJava.setSendTimeout(value)
     this
   }
@@ -63,13 +65,12 @@ class DeliveryOptions(val asJava: io.vertx.core.eventbus.DeliveryOptions) {
 }
 
 object DeliveryOptions {
-  type DeliveryOptionsJava = io.vertx.core.eventbus.DeliveryOptions
   
   def apply() = {
-    new DeliveryOptions(new DeliveryOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DeliveryOptions(new JDeliveryOptions(emptyObj()))
   }
   
-  def apply(t: DeliveryOptionsJava) = {
+  def apply(t: JDeliveryOptions) = {
     if(t != null)
       new DeliveryOptions(t)
     else
@@ -78,7 +79,7 @@ object DeliveryOptions {
   
   def fromJson(json: JsonObject):DeliveryOptions = {
     if(json != null)
-      new DeliveryOptions(new DeliveryOptionsJava(json))
+      new DeliveryOptions(new JDeliveryOptions(json))
     else
       null
   }

@@ -17,94 +17,97 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
+import io.vertx.core.json.JsonArray
+import io.vertx.core.json.JsonObject
 
 /**
   */
 
-class DataObjectWithValues(val asJava: io.vertx.codegen.testmodel.DataObjectWithValues) {
-  def setBooleanValue(value:Boolean) = {
+class DataObjectWithValues(val asJava: JDataObjectWithValues) {
+  def setBooleanValue(value: Boolean) = {
     asJava.setBooleanValue(value)
     this
   }
-  def setBoxedBooleanValue(value:Boolean) = {
+  def setBoxedBooleanValue(value: Boolean) = {
     asJava.setBoxedBooleanValue(value)
     this
   }
-  def setBoxedDoubleValue(value:Double) = {
+  def setBoxedDoubleValue(value: Double) = {
     asJava.setBoxedDoubleValue(value)
     this
   }
-  def setBoxedFloatValue(value:Float) = {
+  def setBoxedFloatValue(value: Float) = {
     asJava.setBoxedFloatValue(value)
     this
   }
-  def setBoxedIntValue(value:Int) = {
+  def setBoxedIntValue(value: Int) = {
     asJava.setBoxedIntValue(value)
     this
   }
-  def setBoxedLongValue(value:Long) = {
+  def setBoxedLongValue(value: Long) = {
     asJava.setBoxedLongValue(value)
     this
   }
-  def setBoxedShortValue(value:Short) = {
+  def setBoxedShortValue(value: Short) = {
     asJava.setBoxedShortValue(value)
     this
   }
-  def setDataObjectValue(value:io.vertx.scala.codegen.testmodel.TestDataObject) = {
+  def setDataObjectValue(value: TestDataObject) = {
     asJava.setDataObjectValue(value.asJava)
     this
   }
-  def setDoubleValue(value:Double) = {
+  def setDoubleValue(value: Double) = {
     asJava.setDoubleValue(value)
     this
   }
-  def setEnumValue(value:io.vertx.codegen.testmodel.TestEnum) = {
+  def setEnumValue(value: io.vertx.codegen.testmodel.TestEnum) = {
     asJava.setEnumValue(value)
     this
   }
-  def setFloatValue(value:Float) = {
+  def setFloatValue(value: Float) = {
     asJava.setFloatValue(value)
     this
   }
-  def setGenEnumValue(value:io.vertx.codegen.testmodel.TestGenEnum) = {
+  def setGenEnumValue(value: io.vertx.codegen.testmodel.TestGenEnum) = {
     asJava.setGenEnumValue(value)
     this
   }
-  def setIntValue(value:Int) = {
+  def setIntValue(value: Int) = {
     asJava.setIntValue(value)
     this
   }
-  def setJsonArrayValue(value:io.vertx.core.json.JsonArray) = {
+  def setJsonArrayValue(value: JsonArray) = {
     asJava.setJsonArrayValue(value)
     this
   }
-  def setJsonObjectValue(value:io.vertx.core.json.JsonObject) = {
+  def setJsonObjectValue(value: JsonObject) = {
     asJava.setJsonObjectValue(value)
     this
   }
-  def setLongValue(value:Long) = {
+  def setLongValue(value: Long) = {
     asJava.setLongValue(value)
     this
   }
-  def setShortValue(value:Short) = {
+  def setShortValue(value: Short) = {
     asJava.setShortValue(value)
     this
   }
-  def setStringValue(value:String) = {
+  def setStringValue(value: String) = {
     asJava.setStringValue(value)
     this
   }
 }
 
 object DataObjectWithValues {
-  type DataObjectWithValuesJava = io.vertx.codegen.testmodel.DataObjectWithValues
   
   def apply() = {
-    new DataObjectWithValues(new DataObjectWithValuesJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithValues(new JDataObjectWithValues(emptyObj()))
   }
   
-  def apply(t: DataObjectWithValuesJava) = {
+  def apply(t: JDataObjectWithValues) = {
     if(t != null)
       new DataObjectWithValues(t)
     else
@@ -113,7 +116,7 @@ object DataObjectWithValues {
   
   def fromJson(json: JsonObject):DataObjectWithValues = {
     if(json != null)
-      new DataObjectWithValues(new DataObjectWithValuesJava(json))
+      new DataObjectWithValues(new JDataObjectWithValues(json))
     else
       null
   }

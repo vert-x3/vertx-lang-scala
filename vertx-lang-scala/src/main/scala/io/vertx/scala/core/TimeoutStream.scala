@@ -19,8 +19,9 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.{TimeoutStream => JTimeoutStream}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.Handler
 
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
@@ -30,32 +31,32 @@ import io.vertx.core.Handler
   * Pausing the timer inhibits the timer shots until the stream is resumed. Setting a null handler callback cancels
   * the timer.
   */
-class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream) 
-    extends io.vertx.scala.core.streams.ReadStream[Long] {
+class TimeoutStream(private val _asJava: JTimeoutStream) 
+    extends ReadStream[Long] {
 
-  def asJava: io.vertx.core.TimeoutStream = _asJava
+  def asJava: JTimeoutStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.TimeoutStream = {
+  def exceptionHandler(handler: Throwable => Unit): TimeoutStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Long => Unit): io.vertx.scala.core.TimeoutStream = {
+  def handler(handler: Long => Unit): TimeoutStream = {
     _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
     this
   }
 
-  def pause(): io.vertx.scala.core.TimeoutStream = {
+  def pause(): TimeoutStream = {
     _asJava.pause()
     this
   }
 
-  def resume(): io.vertx.scala.core.TimeoutStream = {
+  def resume(): TimeoutStream = {
     _asJava.resume()
     this
   }
 
-  def endHandler(endHandler: () => Unit): io.vertx.scala.core.TimeoutStream = {
+  def endHandler(endHandler: () => Unit): TimeoutStream = {
     _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
     this
   }
@@ -72,7 +73,7 @@ class TimeoutStream(private val _asJava: io.vertx.core.TimeoutStream)
 
 object TimeoutStream {
 
-  def apply(_asJava: io.vertx.core.TimeoutStream): io.vertx.scala.core.TimeoutStream =
-    new io.vertx.scala.core.TimeoutStream(_asJava)
+  def apply(_asJava: JTimeoutStream): TimeoutStream =
+    new TimeoutStream(_asJava)
 
 }

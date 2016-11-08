@@ -17,18 +17,22 @@
 package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
   */
 
-class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
+class NetClientOptions(val asJava: JNetClientOptions) {
 
   /**
     * Set the connect timeout
     */
-  def setConnectTimeout(value:Int) = {
+  def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
@@ -39,7 +43,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Add a CRL path
     */
-  def addCrlPath(value:String) = {
+  def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
@@ -50,8 +54,8 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Add a CRL value
     */
-  def addCrlValue(value:io.vertx.core.buffer.Buffer) = {
-    asJava.addCrlValue(value)
+  def addCrlValue(value: Buffer) = {
+    asJava.addCrlValue(value.asJava)
     this
   }
   def getCrlValues = {
@@ -61,7 +65,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value:String) = {
+  def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
@@ -72,7 +76,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value:String) = {
+  def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
@@ -84,7 +88,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
     * Set the hostname verification algorithm interval
     * To disable hostname verification, set hostnameVerificationAlgorithm to an empty String
     */
-  def setHostnameVerificationAlgorithm(value:String) = {
+  def setHostnameVerificationAlgorithm(value: String) = {
     asJava.setHostnameVerificationAlgorithm(value)
     this
   }
@@ -96,14 +100,14 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value:Int) = {
+  def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
   def getIdleTimeout = {
     asJava.getIdleTimeout()
   }
-  def setJdkSslEngineOptions(value:io.vertx.scala.core.net.JdkSSLEngineOptions) = {
+  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -111,7 +115,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
@@ -120,7 +124,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
     * Set the local interface to bind for network connections. When the local address is null,
     * it will pick any local address, the default local address is null.
     */
-  def setLocalAddress(value:String) = {
+  def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
     this
   }
@@ -131,7 +135,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value:Boolean) = {
+  def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
@@ -143,14 +147,14 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
     * Set the metrics name identifying the reported metrics, useful for grouping metrics
     * with the same name.
     */
-  def setMetricsName(value:String) = {
+  def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
   def getMetricsName = {
     asJava.getMetricsName()
   }
-  def setOpenSslEngineOptions(value:io.vertx.scala.core.net.OpenSSLEngineOptions) = {
+  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -158,7 +162,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value:io.vertx.scala.core.net.PemKeyCertOptions) = {
+  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
@@ -166,7 +170,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value:io.vertx.scala.core.net.PemTrustOptions) = {
+  def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
@@ -174,7 +178,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
@@ -182,7 +186,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value:io.vertx.scala.core.net.PfxOptions) = {
+  def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -190,7 +194,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
     */
-  def setProxyOptions(value:io.vertx.scala.core.net.ProxyOptions) = {
+  def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
   }
@@ -201,7 +205,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value:Int) = {
+  def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
@@ -212,7 +216,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the value of reconnect attempts
     */
-  def setReconnectAttempts(value:Int) = {
+  def setReconnectAttempts(value: Int) = {
     asJava.setReconnectAttempts(value)
     this
   }
@@ -223,7 +227,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the reconnect interval
     */
-  def setReconnectInterval(value:Long) = {
+  def setReconnectInterval(value: Long) = {
     asJava.setReconnectInterval(value)
     this
   }
@@ -234,7 +238,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value:Boolean) = {
+  def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
@@ -245,7 +249,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value:Int) = {
+  def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
@@ -256,7 +260,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value:Int) = {
+  def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
@@ -267,7 +271,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value:Boolean) = {
+  def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
@@ -278,7 +282,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value:Boolean) = {
+  def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
@@ -289,7 +293,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value:Boolean) = {
+  def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
@@ -300,7 +304,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value:Int) = {
+  def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
@@ -311,7 +315,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether all server certificates should be trusted
     */
-  def setTrustAll(value:Boolean) = {
+  def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
@@ -322,7 +326,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value:io.vertx.scala.core.net.JksOptions) = {
+  def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
@@ -330,7 +334,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value:Boolean) = {
+  def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
@@ -341,7 +345,7 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value:Boolean) = {
+  def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
@@ -351,13 +355,12 @@ class NetClientOptions(val asJava: io.vertx.core.net.NetClientOptions) {
 }
 
 object NetClientOptions {
-  type NetClientOptionsJava = io.vertx.core.net.NetClientOptions
   
   def apply() = {
-    new NetClientOptions(new NetClientOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new NetClientOptions(new JNetClientOptions(emptyObj()))
   }
   
-  def apply(t: NetClientOptionsJava) = {
+  def apply(t: JNetClientOptions) = {
     if(t != null)
       new NetClientOptions(t)
     else
@@ -366,7 +369,7 @@ object NetClientOptions {
   
   def fromJson(json: JsonObject):NetClientOptions = {
     if(json != null)
-      new NetClientOptions(new NetClientOptionsJava(json))
+      new NetClientOptions(new JNetClientOptions(json))
     else
       null
   }

@@ -17,14 +17,18 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithBuffer => JDataObjectWithBuffer}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   */
 
-class DataObjectWithBuffer(val asJava: io.vertx.codegen.testmodel.DataObjectWithBuffer) {
-  def setBuffer(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setBuffer(value)
+class DataObjectWithBuffer(val asJava: JDataObjectWithBuffer) {
+  def setBuffer(value: Buffer) = {
+    asJava.setBuffer(value.asJava)
     this
   }
   def getBuffer = {
@@ -33,13 +37,12 @@ class DataObjectWithBuffer(val asJava: io.vertx.codegen.testmodel.DataObjectWith
 }
 
 object DataObjectWithBuffer {
-  type DataObjectWithBufferJava = io.vertx.codegen.testmodel.DataObjectWithBuffer
   
   def apply() = {
-    new DataObjectWithBuffer(new DataObjectWithBufferJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithBuffer(new JDataObjectWithBuffer(emptyObj()))
   }
   
-  def apply(t: DataObjectWithBufferJava) = {
+  def apply(t: JDataObjectWithBuffer) = {
     if(t != null)
       new DataObjectWithBuffer(t)
     else
@@ -48,7 +51,7 @@ object DataObjectWithBuffer {
   
   def fromJson(json: JsonObject):DataObjectWithBuffer = {
     if(json != null)
-      new DataObjectWithBuffer(new DataObjectWithBufferJava(json))
+      new DataObjectWithBuffer(new JDataObjectWithBuffer(json))
     else
       null
   }

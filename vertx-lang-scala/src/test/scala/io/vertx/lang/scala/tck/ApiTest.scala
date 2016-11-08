@@ -24,6 +24,7 @@ import io.vertx.core.{Future, VertxException}
 import io.vertx.lang.scala.ScalaAsyncResult
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
+import io.vertx.lang.scala.tck._
 import io.vertx.scala.codegen.testmodel
 import io.vertx.scala.codegen.testmodel.{ConcreteHandlerUserTypeExtension, Factory, RefedInterface1, TestDataObject, TestInterface}
 import org.junit.ComparisonFailure
@@ -38,6 +39,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration.DurationLong
 import scala.language.postfixOps
+import scala.util.{Failure, Success}
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
@@ -531,8 +533,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableByteHandler(true,b => assert(testByte == b))
     nullableTCK.methodWithNullableByteHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(true).foreach(b => {w{assert(testByte == b)}; w.dismiss()}))
-    //TODO: Is this behavior correct? Check with other params, too
-    exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    //TODO: null will now translate to 0 => Uoh
+    exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableByteReturn(true)
     nullableTCK.methodWithNullableByteReturn(false)
   }
@@ -544,7 +549,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableShortHandler(true,b => assert(testShort == b))
     nullableTCK.methodWithNullableShortHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(true).foreach(b => {w{assert(testShort == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    //TODO: null will now translate to 0 => Uoh
+    exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableShortReturn(true)
     nullableTCK.methodWithNullableShortReturn(false)
   }
@@ -556,7 +565,11 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableIntegerHandler(true,b => assert(testInteger == b))
     nullableTCK.methodWithNullableIntegerHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(true).foreach(b => {w{assert(testInteger == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    //TODO: null will now translate to 0 => Uoh
+    exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableIntegerReturn(true)
     nullableTCK.methodWithNullableIntegerReturn(false)
   }
@@ -568,7 +581,10 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableLongHandler(true,b => assert(testLong == b))
     nullableTCK.methodWithNullableLongHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(true).foreach(b => {w{assert(testLong == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableLongReturn(true)
     nullableTCK.methodWithNullableLongReturn(false)
   }
@@ -580,7 +596,10 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableFloatHandler(true,b => assert(testFloat == b))
     nullableTCK.methodWithNullableFloatHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(true).foreach(b => {w{assert(testFloat == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableFloatReturn(true)
     nullableTCK.methodWithNullableFloatReturn(false)
   }
@@ -592,7 +611,10 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableDoubleHandler(true,b => assert(testDouble == b))
     nullableTCK.methodWithNullableDoubleHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(true).foreach(b => {w{assert(testDouble == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0.0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableDoubleReturn(true)
     nullableTCK.methodWithNullableDoubleReturn(false)
   }
@@ -604,7 +626,10 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableBooleanHandler(true,b => assert(testBoolean == b))
     nullableTCK.methodWithNullableBooleanHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(true).foreach(b => {w{assert(testBoolean == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(!r)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableBooleanReturn(true)
     nullableTCK.methodWithNullableBooleanReturn(false)
   }
@@ -616,7 +641,10 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableCharHandler(true,b => assert(testChar == b))
     nullableTCK.methodWithNullableCharHandler(false,b => assert(null == b))
     exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(true).foreach(b => {w{assert(testChar == b)}; w.dismiss()}))
-    exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(false).onFailure{case t => {w{assert(t.isInstanceOf[NullPointerException])}; w.dismiss()}})
+    exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(false).onComplete{
+      case Failure(t) => {w{fail()}; w.dismiss()}
+      case Success(r) => {w{assert(r == 0)}; w.dismiss()}
+    })
     nullableTCK.methodWithNullableCharReturn(true)
     nullableTCK.methodWithNullableCharReturn(false)
   }
