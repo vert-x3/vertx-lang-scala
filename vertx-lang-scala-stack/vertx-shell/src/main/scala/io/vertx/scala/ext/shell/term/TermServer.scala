@@ -21,11 +21,8 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.shell.term.{TermServer => JTermServer}
 import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
-import io.vertx.scala.ext.shell.term.TelnetTermOptions
 import io.vertx.ext.shell.term.{HttpTermOptions => JHttpTermOptions}
-import io.vertx.scala.ext.shell.term.HttpTermOptions
 import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
-import io.vertx.scala.ext.shell.term.SSHTermOptions
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.web.{Router => JRouter}

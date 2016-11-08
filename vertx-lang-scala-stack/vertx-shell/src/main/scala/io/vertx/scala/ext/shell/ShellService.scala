@@ -22,7 +22,6 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.shell.{ShellService => JShellService}
 import io.vertx.ext.shell.{ShellServer => JShellServer}
 import io.vertx.ext.shell.{ShellServiceOptions => JShellServiceOptions}
-import io.vertx.scala.ext.shell.ShellServiceOptions
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 

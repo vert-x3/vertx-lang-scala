@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 
 /**
   * Once a consumer has chosen a service, it builds a [[io.vertx.scala.servicediscovery.ServiceReference]] managing the binding with the chosen

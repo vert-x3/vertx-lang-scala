@@ -24,12 +24,10 @@ import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 import java.util.function.{Function => JFunction}
 import io.vertx.servicediscovery.spi.{ServiceImporter => JServiceImporter}
 import io.vertx.scala.servicediscovery.spi.ServiceImporter
 import io.vertx.servicediscovery.{ServiceDiscoveryOptions => JServiceDiscoveryOptions}
-import io.vertx.scala.servicediscovery.ServiceDiscoveryOptions
 import io.vertx.core.json.JsonObject
 import io.vertx.servicediscovery.spi.{ServiceExporter => JServiceExporter}
 import io.vertx.scala.servicediscovery.spi.ServiceExporter

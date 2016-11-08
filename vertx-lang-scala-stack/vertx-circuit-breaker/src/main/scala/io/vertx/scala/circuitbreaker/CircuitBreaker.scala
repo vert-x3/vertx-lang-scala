@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.circuitbreaker.{CircuitBreaker => JCircuitBreaker}
 import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
-import io.vertx.scala.circuitbreaker.CircuitBreakerOptions
 import io.vertx.circuitbreaker.CircuitBreakerState
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
