@@ -88,7 +88,7 @@ class CommandLine(private val _asJava: JCommandLine) {
   /**
     * Checks whether or not the given option has been assigned in the command line.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return `true` if the option has received a value, [[false]] otherwise.
+    * @return `true` if the option has received a value, false otherwise.
     */
   def isOptionAssigned(option: Option): Boolean = {
     _asJava.isOptionAssigned(option.asJava)
@@ -133,7 +133,7 @@ class CommandLine(private val _asJava: JCommandLine) {
   /**
     * Checks whether or not the given option accept more values.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return [[true]] if the option accepts more values, [[false]] otherwise.
+    * @return true if the option accepts more values, false otherwise.
     */
   def acceptMoreValues(option: Option): Boolean = {
     _asJava.acceptMoreValues(option.asJava)
@@ -151,7 +151,7 @@ class CommandLine(private val _asJava: JCommandLine) {
   /**
     * Checks whether or not the given argument has been assigned in the command line.
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    * @return `true` if the argument has received a value, [[false]] otherwise.
+    * @return `true` if the argument has received a value, false otherwise.
     */
   def isArgumentAssigned(arg: Argument): Boolean = {
     _asJava.isArgumentAssigned(arg.asJava)
@@ -169,7 +169,7 @@ class CommandLine(private val _asJava: JCommandLine) {
   /**
     * Checks whether or not the command line is valid, i.e. all constraints from arguments and options have been
     * satisfied. This method is used when the parser validation is disabled.
-    * @return `true` if the current [[CommandLine]] object is valid. [[false]] otherwise.
+    * @return `true` if the current CommandLine object is valid. false otherwise.
     */
   def isValid(): Boolean = {
     _asJava.isValid()
@@ -177,7 +177,7 @@ class CommandLine(private val _asJava: JCommandLine) {
 
   /**
     * Checks whether or not the user has passed a "help" option and is asking for help.
-    * @return `true` if the user command line has enabled a "Help" option, [[false]] otherwise.
+    * @return `true` if the user command line has enabled a "Help" option, false otherwise.
     */
   def isAskingForHelp(): Boolean = {
     _asJava.isAskingForHelp()

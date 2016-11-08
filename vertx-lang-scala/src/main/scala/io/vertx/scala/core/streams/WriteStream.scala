@@ -44,7 +44,7 @@ def exceptionHandler(handler: Throwable => Unit): WriteStream[T]
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
   * asynchronously. To avoid running out of memory by putting too much on the write queue,
-  * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
+  * check the [[io.vertx.scala.core.streams.WriteStream!.writeQueueFull():Boolean]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
   * @param data the data to write
   * @return a reference to this, so the API can be used fluently
   */
@@ -58,7 +58,7 @@ def write(data: T): WriteStream[T]
 def end(): Unit
 
   /**
-  * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+  * Same as [[io.vertx.scala.core.streams.WriteStream!.end():Unit]] but writes some data to the stream before ending.
   */
 def end(t: T): Unit
 
@@ -76,7 +76,7 @@ def end(t: T): Unit
 def setWriteQueueMaxSize(maxSize: Int): WriteStream[T]
 
   /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
+  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(Int):io.vertx.scala.core.streams.WriteStream[T]]]
   * @return true if write queue is full
   */
 def writeQueueFull(): Boolean
@@ -116,7 +116,7 @@ object WriteStream {
     /**
       * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
       * asynchronously. To avoid running out of memory by putting too much on the write queue,
-      * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
+      * check the [[io.vertx.scala.core.streams.WriteStream!.writeQueueFull():Boolean]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
       * @param data the data to write
       * @return a reference to this, so the API can be used fluently
       */
@@ -135,7 +135,7 @@ object WriteStream {
     }
 
     /**
-      * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+      * Same as [[io.vertx.scala.core.streams.WriteStream!.end():Unit]] but writes some data to the stream before ending.
       */
     def end(t: T): Unit = {
         _asJava.end(t)
@@ -158,7 +158,7 @@ object WriteStream {
     }
 
     /**
-      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
+      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(Int):io.vertx.scala.core.streams.WriteStream[T]]]
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {

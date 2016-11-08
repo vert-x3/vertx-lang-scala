@@ -75,8 +75,8 @@ import io.vertx.scala.core.http.HttpClient
   * 
   * Most functionality in Vert.x core is fairly low level.
   * 
-  * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
-  * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertx]].
+  * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx$.vertx():io.vertx.scala.core.Vertx]],
+  * [[io.vertx.scala.core.Vertx$.vertx(io.vertx.scala.core.VertxOptions):io.vertx.scala.core.Vertx]] and [[io.vertx.scala.core.Vertx$.clusteredVertx(io.vertx.scala.core.VertxOptions,io.vertx.lang.scala.AsyncResult):Unit]].
   * 
   * Please see the user manual for more detailed usage information.
   */
@@ -301,7 +301,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
+    * Like [[io.vertx.scala.core.Vertx!.close():Unit]] but the completionHandler will be called when the close is complete
     * @return The future will be notified when the close is complete.
     */
   def closeFuture(): concurrent.Future[Unit] = {
@@ -323,7 +323,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
+    * Like [[io.vertx.scala.core.Vertx!.deployVerticle(String):Unit]] but the completionHandler will be notified when the deployment is complete.
     * 
     * If the deployment is successful the result will contain a String representing the unique deployment ID of the
     * deployment.
@@ -339,7 +339,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * Like [[io.vertx.scala.core.Vertx!.deployVerticle(io.vertx.scala.core.Verticle):Unit]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
@@ -349,7 +349,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * Like [[io.vertx.scala.core.Vertx!.deployVerticle(String,io.vertx.lang.scala.AsyncResult):Unit]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
@@ -407,7 +407,7 @@ class Vertx(private val _asJava: JVertx)
     * (e.g. on the original event loop of the caller).
     * 
     * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
-    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+    * the handler should call the [[io.vertx.scala.core.Future!.complete(T):Unit]] or [[io.vertx.scala.core.Future!.complete(T):Unit]] method, or the [[io.vertx.scala.core.Future!.fail(Throwable):Unit]]
     * method if it failed.
     * 
     * In the `blockingCodeHandler` the current context remains the original context and therefore any task
@@ -423,7 +423,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#executeBlocking]] called with ordered = true.
+    * Like [[io.vertx.scala.core.Vertx!.executeBlocking(io.vertx.scala.core.Handler[io.vertx.scala.core.Future[T]],Boolean,io.vertx.lang.scala.AsyncResult):Unit]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
@@ -432,14 +432,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
+    * Like [[io.vertx.scala.core.Vertx!.createSharedWorkerExecutor(String,Int):io.vertx.scala.core.WorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
     */
   def createSharedWorkerExecutor(name: String): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name))
   }
 
   /**
-    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
+    * Like [[io.vertx.scala.core.Vertx!.createSharedWorkerExecutor(String,Int,Long):io.vertx.scala.core.WorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize))

@@ -72,7 +72,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Sets the name of the CLI.
     * @param name the name
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def setName(name: String): CLI = {
     _asJava.setName(name)
@@ -101,7 +101,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Sets the summary of the CLI.
     * @param summary the summary
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def setSummary(summary: String): CLI = {
     _asJava.setSummary(summary)
@@ -110,7 +110,7 @@ class CLI(private val _asJava: JCLI) {
 
   /**
     * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
-    * @return `true` if the current [[CLI]] is hidden, [[false]] otherwise
+    * @return `true` if the current CLI is hidden, false otherwise
     */
   def isHidden(): Boolean = {
     _asJava.isHidden()
@@ -120,7 +120,7 @@ class CLI(private val _asJava: JCLI) {
     * Sets whether or not the current instance of [[io.vertx.scala.core.cli.CLI]] must be hidden. Hidden CLI are not listed when
     * displaying usages / help messages. In other words, hidden commands are for power user.
     * @param hidden enables or disables the hidden aspect of the CI
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def setHidden(hidden: Boolean): CLI = {
     _asJava.setHidden(hidden)
@@ -138,7 +138,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Adds an option.
     * @param option the option, must not be `null`.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def addOption(option: Option): CLI = {
     _asJava.addOption(option.asJava)
@@ -146,10 +146,10 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI#setOptions]]`, this method does not remove the existing options.
+    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI!.setOptions(java.util.List[io.vertx.scala.core.cli.Option]):io.vertx.scala.core.cli.CLI]]`, this method does not remove the existing options.
     * The given list is appended to the existing list.
     * @param options the options, must not be `null`
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def addOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
     _asJava.addOptions(options.map(x => if (x == null) null else x.asJava).asJava)
@@ -159,7 +159,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Sets the list of arguments.
     * @param options the list of options, must not be `null`
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def setOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
     _asJava.setOptions(options.map(x => if (x == null) null else x.asJava).asJava)
@@ -177,7 +177,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Adds an argument.
     * @param arg the argument, must not be `null`see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def addArgument(arg: Argument): CLI = {
     _asJava.addArgument(arg.asJava)
@@ -185,10 +185,10 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI#setArguments]], this method does not remove the existing arguments.
+    * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI!.setArguments(java.util.List[io.vertx.scala.core.cli.Argument]):io.vertx.scala.core.cli.CLI]], this method does not remove the existing arguments.
     * The given list is appended to the existing list.
     * @param args the arguments, must not be `null`
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def addArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
     _asJava.addArguments(args.map(x => if (x == null) null else x.asJava).asJava)
@@ -198,7 +198,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Sets the list of arguments.
     * @param args the list of arguments, must not be `null`
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def setArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
     _asJava.setArguments(args.map(x => if (x == null) null else x.asJava).asJava)
@@ -208,7 +208,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Option.html">Option</a> based on its name (short name, long name or argument name).
     * @param name the name, must not be `null`
-    * @return the [[Option]], `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
+    * @return the Option, `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[Option] = {
         scala.Option(Option(_asJava.getOption(name)))
@@ -217,7 +217,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
     * @param name the name of the argument, must not be `null`
-    * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[Argument] = {
         scala.Option(Argument(_asJava.getArgument(name)))
@@ -226,7 +226,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
     * @param index the index, must be positive or zero.
-    * @return the [[Argument]], `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[Argument] = {
         scala.Option(Argument(_asJava.getArgument(index)))
@@ -235,7 +235,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Removes an option identified by its name. This method does nothing if the option cannot be found.
     * @param name the option name
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def removeOption(name: String): CLI = {
     _asJava.removeOption(name)
@@ -245,7 +245,7 @@ class CLI(private val _asJava: JCLI) {
   /**
     * Removes an argument identified by its index. This method does nothing if the argument cannot be found.
     * @param index the argument index
-    * @return the current [[CLI]] instance
+    * @return the current CLI instance
     */
   def removeArgument(index: Int): CLI = {
     _asJava.removeArgument(index)
