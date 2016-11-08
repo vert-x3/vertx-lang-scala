@@ -45,7 +45,7 @@ class MultiMap(private val _asJava: JMultiMap) {
   /**
     * Returns the values with the specified name
     * @param name The name to search
-    * @return A immutable [[scala.collection.immutable.List]] of values which will be empty if no values are found
+    * @return A immutable scala.collection.immutable.List of values which will be empty if no values are found
     */
   def getAll(name: String): scala.collection.mutable.Buffer[String] = {
     _asJava.getAll(name).asScala.map(x => x:String)
@@ -69,7 +69,7 @@ class MultiMap(private val _asJava: JMultiMap) {
 
   /**
     * Gets a immutable Set of all names
-    * @return A [[scala.collection.immutable.Set]] of all names
+    * @return A scala.collection.immutable.Set of all names
     */
   def names(): Set[String] = {
     _asJava.names().asScala.map(x => x:String).toSet

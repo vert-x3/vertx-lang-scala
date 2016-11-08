@@ -6,7 +6,7 @@
 
     var commentedIndentation = indentation;
     commentedIndentation += "  *";
-      
+
     if (method.doc != null) {
       var returnType = method.returnType;
       var returnDescription = method.returnDescription;
@@ -63,7 +63,7 @@
     for (name : CASE_QUALIFIED.parse(type.raw.getPackageName())) {
       link.append("../");
     }
-    
+
     link.append("../../../cheatsheet/").append(dataObjectType.simpleName).append(".html");
     return "<a href=\"" + link + "\">" + dataObjectType.simpleName + "</a>";;
   }
@@ -71,7 +71,7 @@
   def convertLink(doc) {
     var linkText = "{@link";
     var transformedDoc = '';
-    
+
     var start = 0;
     var index = doc.value.indexOf(linkText);
     while (index >= 0) {
@@ -80,7 +80,7 @@
        start = end + 1;
        index = doc.value.indexOf(linkText, start);
     }
-    
+
     transformedDoc += doc.value.substring(start, doc.value.length());
     return transformedDoc;
   }
@@ -88,44 +88,44 @@
   def toScalaDocType(type) {
 
     if(type.contains('AsyncResult')) {
-      return "[[io.vertx.lang.scala.AsyncResult]]";
+      return "io.vertx.lang.scala.AsyncResult";
     }
     else if (type == 'void' || type == 'java.lang.Void') {
-      return '[[Unit]]';
+      return 'Unit';
     } else if (type == 'Object' || type == 'java.lang.Object') {
-      return '[[AnyRef]]';
+      return 'AnyRef';
     } else if (type == 'Throwable' || type == 'java.lang.Throwable') {
-      return '[[Throwable]]';
+      return 'Throwable';
     } else if (type == 'String' || type == 'java.lang.String') {
-      return '[[String]]';
+      return 'String';
     } else if (type == 'byte' || type == 'java.lang.Byte') {
-        return '[[Byte]]';
+        return 'Byte';
     } else if (type == 'short' || type == 'java.lang.Short') {
-      return '[[Short]]';
+      return 'Short';
     } else if (type == 'int' || type == 'java.lang.Integer') {
-      return '[[Int]]';
+      return 'Int';
     } else if (type == 'long' || type == 'java.lang.Long') {
-      return '[[Long]]';
+      return 'Long';
     } else if (type == 'float' || type == 'java.lang.Float') {
-      return '[[Float]]';
+      return 'Float';
     } else if (type == 'double' || type == 'java.lang.Double') {
-      return '[[Double]]';
+      return 'Double';
     } else if (type == 'boolean' || type == 'java.lang.Boolean') {
-      return '[[Boolean]]';
+      return 'Boolean';
     } else if (type == 'char' || type == 'java.lang.Character') {
-      return '[[Char]]';
+      return 'Char';
     } else if (type == 'List' || type == 'java.util.List') {
-      return '[[scala.collection.immutable.List]]';
+      return 'scala.collection.immutable.List';
     } else if (type == 'Set' || type == 'java.util.Set') {
-      return '[[scala.collection.immutable.Set]]';
+      return 'scala.collection.immutable.Set';
     } else if (type == 'Map' || type == 'java.util.Map') {
-      return '[[scala.collection.immutable.Map]]';
+      return 'scala.collection.immutable.Map';
     } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
       return 'scala-function';
     } else if (type.contains('io.vertx') && !type.endsWith('Exception')) {
-      return '[[' + convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.") + ']]';
+      return convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.");
     } else {
-      return "[[" + type + "]]";
+      return type;
     }
   }
 
@@ -160,7 +160,22 @@
           var eltKind = elt.getKind().name();
           var ret = "[[" + rawType.translateName("scala");
           if (eltKind == "METHOD") {
-            ret += "#" + elt.getSimpleName().toString();
+            if((elt.flags() & com.sun.tools.javac.code.Flags.STATIC) != 0) {
+              ret += '$';
+            }
+            else {
+              ret += '!';
+            }
+            ret += '.' + elt.getSimpleName().toString() + "(";
+            var first = true;
+            for(Object n: elt.params) {
+              if(!first) {
+                ret += ',';
+              }
+              first = false;
+              ret += toScalaDocType(n.type.toString());
+            }
+            ret += "):" + toScalaDocType(elt.type.returnType.toString);
           }
           if (label.length() > 0) {
             ret += " " + label;
@@ -170,12 +185,12 @@
         }
       }
       else {
-        return toScalaDocType(rawType.name);
+        return "[[" + toScalaDocType(rawType.name) + "]]";
       }
     }
     return null;
   }
-  
+
   def renderDoc(margin, doc, renderDocLink) {
     var need = true;
     var output = new StringBuilder();
@@ -213,5 +228,5 @@
     }
     return output.toString().replace("<p>", "");
   }
-  
+
 }

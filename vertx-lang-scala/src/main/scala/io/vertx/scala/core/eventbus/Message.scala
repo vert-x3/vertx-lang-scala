@@ -27,12 +27,12 @@ import io.vertx.scala.core.MultiMap
 /**
   * Represents a message that is received from the event bus in a handler.
   * 
-  * Messages have a [[io.vertx.scala.core.eventbus.Message#body]], which can be null, and also [[io.vertx.scala.core.eventbus.Message#headers]], which can be empty.
+  * Messages have a [[io.vertx.scala.core.eventbus.Message!.body():T]], which can be null, and also [[io.vertx.scala.core.eventbus.Message!.headers():io.vertx.scala.core.MultiMap]], which can be empty.
   * 
-  * If the message was sent specifying a reply handler it will also have a [[io.vertx.scala.core.eventbus.Message#replyAddress]]. In that case the message
-  * can be replied to using that reply address, or, more simply by just using [[io.vertx.scala.core.eventbus.Message#reply]].
+  * If the message was sent specifying a reply handler it will also have a [[io.vertx.scala.core.eventbus.Message!.replyAddress():(@io.vertx.scala.codegen.annotations.Nullable :: String)]]. In that case the message
+  * can be replied to using that reply address, or, more simply by just using [[io.vertx.scala.core.eventbus.Message!.reply(AnyRef):Unit]].
   * 
-  * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
+  * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message!.fail(Int,String):Unit]] can be called.
   */
 class Message[T](private val _asJava: JMessage[T]) {
 
@@ -97,7 +97,7 @@ class Message[T](private val _asJava: JMessage[T]) {
   }
 
   /**
-    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
+    * Link [[io.vertx.scala.core.eventbus.Message!.reply(AnyRef):Unit]] but allows you to specify delivery options for the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */

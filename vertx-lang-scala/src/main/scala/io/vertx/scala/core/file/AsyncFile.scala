@@ -42,14 +42,14 @@ class AsyncFile(private val _asJava: JAsyncFile)
   def asJava: JAsyncFile = _asJava
 
   /**
-    * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.file.AsyncFile!.end():Unit]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile!.setWriteQueueMaxSize(Int):io.vertx.scala.core.file.AsyncFile]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -97,7 +97,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * Close the file, see [[io.vertx.scala.core.file.AsyncFile#close]].
+    * Close the file, see [[io.vertx.scala.core.file.AsyncFile!.close():Unit]].
     */
   def end(): Unit = {
     _asJava.end()
@@ -176,7 +176,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
+    * Same as [[io.vertx.scala.core.file.AsyncFile!.flush():io.vertx.scala.core.file.AsyncFile]] but the handler will be called when the flush is complete or if an error occurs
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def flushFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))

@@ -46,14 +46,14 @@ class NetSocket(private val _asJava: JNetSocket)
   def asJava: JNetSocket = _asJava
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.net.NetSocket!.end():Unit]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket!.setWriteQueueMaxSize(Int):io.vertx.scala.core.net.NetSocket]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -171,7 +171,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @return future
@@ -183,7 +183,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String,Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
@@ -196,7 +196,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String,Long,Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
@@ -230,7 +230,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Calls [[io.vertx.scala.core.net.NetSocket#close]]
+    * Calls [[io.vertx.scala.core.net.NetSocket!.close():Unit]]
     */
   def end(): Unit = {
     _asJava.end()
@@ -264,7 +264,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * @return true if this [[io.vertx.scala.core.net.NetSocket]] is encrypted via SSL/TLS.
+    * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS.
     */
   def isSsl(): Boolean = {
     _asJava.isSsl()

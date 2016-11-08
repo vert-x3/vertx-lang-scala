@@ -43,12 +43,12 @@ trait WebSocketBase
   def asJava: java.lang.Object
 
   /**
-  * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+  * Same as [[io.vertx.scala.core.http.WebSocketBase!.end():Unit]] but writes some data to the stream before ending.
   */
 def end(t: Buffer): Unit
 
   /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
+  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.WebSocketBase]]
   * @return true if write queue is full
   */
 def writeQueueFull(): Boolean
@@ -134,7 +134,7 @@ def closeHandler(handler: () => Unit): WebSocketBase
 def frameHandler(handler: WebSocketFrame => Unit): WebSocketBase
 
   /**
-  * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+  * Calls [[io.vertx.scala.core.http.WebSocketBase!.close():Unit]]
   */
 def end(): Unit
 
@@ -165,14 +165,14 @@ object WebSocketBase {
     def asJava: JWebSocketBase = _asJava
 
     /**
-      * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+      * Same as [[io.vertx.scala.core.http.WebSocketBase!.end():Unit]] but writes some data to the stream before ending.
       */
     def end(t: Buffer): Unit = {
         _asJava.end(t.asJava.asInstanceOf[JBuffer])
     }
 
     /**
-      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
+      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.WebSocketBase]]
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {
@@ -306,7 +306,7 @@ object WebSocketBase {
     }
 
     /**
-      * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+      * Calls [[io.vertx.scala.core.http.WebSocketBase!.close():Unit]]
       */
     def end(): Unit = {
         _asJava.end()
