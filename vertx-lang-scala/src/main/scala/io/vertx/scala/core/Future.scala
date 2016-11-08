@@ -19,16 +19,16 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
-import java.util.function.Function
+import io.vertx.core.{Future => JFuture}
+import java.util.function.{Function => JFunction}
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T](private val _asJava: io.vertx.core.Future[T]) {
+class Future[T](private val _asJava: JFuture[T]) {
 
-  def asJava: io.vertx.core.Future[T] = _asJava
+  def asJava: JFuture[T] = _asJava
 
   /**
     * Has the future completed?
@@ -130,8 +130,8 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param next the next future
     * @return the next future, used for chaining
     */
-  def compose[U](handler: T => Unit, next: io.vertx.scala.core.Future[U]): io.vertx.scala.core.Future[U] = {
-    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[io.vertx.core.Future[U]]))
+  def compose[U](handler: T => Unit, next: Future[U]): Future[U] = {
+    Future.apply[U](_asJava.compose(funcToHandler(handler), next.asJava.asInstanceOf[JFuture[U]]))
   }
 
   /**
@@ -148,7 +148,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param mapper the mapper function
     * @return the composed future
     */
-  def compose[U](mapper: T => io.vertx.core.Future[U]): io.vertx.scala.core.Future[U] = {
+  def compose[U](mapper: T => JFuture[U]): Future[U] = {
     Future.apply[U](_asJava.compose(asJavaFunction(mapper)))
   }
 
@@ -165,7 +165,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param mapper the mapper function
     * @return the mapped future
     */
-  def map[U](mapper: T => U): io.vertx.scala.core.Future[U] = {
+  def map[U](mapper: T => U): Future[U] = {
     Future.apply[U](_asJava.map(asJavaFunction(mapper)))
   }
 
@@ -178,7 +178,7 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
     * @param value the value that eventually completes the mapped future
     * @return the mapped future
     */
-  def map[V](value: V): io.vertx.scala.core.Future[V] = {
+  def map[V](value: V): Future[V] = {
     Future.apply[V](_asJava.map(value))
   }
 
@@ -197,22 +197,22 @@ class Future[T](private val _asJava: io.vertx.core.Future[T]) {
 
 object Future {
 
-  def apply[T](_asJava: io.vertx.core.Future[T]): io.vertx.scala.core.Future[T] =
-    new io.vertx.scala.core.Future(_asJava)
+  def apply[T](_asJava: JFuture[T]): Future[T] =
+    new Future(_asJava)
 
-  def future[T](): io.vertx.scala.core.Future[T] = {
+  def future[T](): Future[T] = {
     Future.apply[T](io.vertx.core.Future.future())
   }
 
-  def succeededFuture[T](): io.vertx.scala.core.Future[T] = {
+  def succeededFuture[T](): Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture())
   }
 
-  def succeededFuture[T](result: T): io.vertx.scala.core.Future[T] = {
+  def succeededFuture[T](result: T): Future[T] = {
     Future.apply[T](io.vertx.core.Future.succeededFuture(result))
   }
 
-  def failedFuture[T](failureMessage: String): io.vertx.scala.core.Future[T] = {
+  def failedFuture[T](failureMessage: String): Future[T] = {
     Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
   }
 

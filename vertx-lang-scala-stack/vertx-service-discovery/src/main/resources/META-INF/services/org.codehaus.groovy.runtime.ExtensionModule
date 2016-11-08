@@ -1,0 +1,4 @@
+moduleName = vertx-service-discovery-module
+moduleVersion = 1.0
+extensionClasses = io.vertx.groovy.servicediscovery.GroovyExtension
+staticExtensionClasses = io.vertx.groovy.servicediscovery.GroovyStaticExtension

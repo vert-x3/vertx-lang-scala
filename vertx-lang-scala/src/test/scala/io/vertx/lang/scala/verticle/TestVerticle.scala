@@ -14,6 +14,6 @@ class TestVerticle extends ScalaVerticle{
       .consumer[String]("hello")
       .handler(a => a.reply("world"))
       .completionFuture()
-      .foreach(c => startPromise.success())
+      .foreach(c => startPromise.success(()))
   }
 }

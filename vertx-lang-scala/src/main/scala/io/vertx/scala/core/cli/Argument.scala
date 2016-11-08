@@ -17,19 +17,21 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.cli.{Argument => JArgument}
 
 /**
   * Defines a command line argument. Unlike options, argument don't have names and are identified using an index. The
   * first index is 0 (because we are in the computer world).
   */
 
-class Argument(val asJava: io.vertx.core.cli.Argument) {
+class Argument(val asJava: JArgument) {
 
   /**
     * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setArgName(value:String) = {
+  def setArgName(value: String) = {
     asJava.setArgName(value)
     this
   }
@@ -40,7 +42,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets the default value of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setDefaultValue(value:String) = {
+  def setDefaultValue(value: String) = {
     asJava.setDefaultValue(value)
     this
   }
@@ -51,7 +53,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets the description of the <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */
-  def setDescription(value:String) = {
+  def setDescription(value: String) = {
     asJava.setDescription(value)
     this
   }
@@ -62,7 +64,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is hidden.
     */
-  def setHidden(value:Boolean) = {
+  def setHidden(value: Boolean) = {
     asJava.setHidden(value)
     this
   }
@@ -73,7 +75,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets the argument index.
     */
-  def setIndex(value:Int) = {
+  def setIndex(value: Int) = {
     asJava.setIndex(value)
     this
   }
@@ -84,7 +86,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets whether or not the argument can receive several values. Only the last argument can receive several values.
     */
-  def setMultiValued(value:Boolean) = {
+  def setMultiValued(value: Boolean) = {
     asJava.setMultiValued(value)
     this
   }
@@ -95,7 +97,7 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
   /**
     * Sets whether or not the current <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> is required.
     */
-  def setRequired(value:Boolean) = {
+  def setRequired(value: Boolean) = {
     asJava.setRequired(value)
     this
   }
@@ -105,13 +107,12 @@ class Argument(val asJava: io.vertx.core.cli.Argument) {
 }
 
 object Argument {
-  type ArgumentJava = io.vertx.core.cli.Argument
   
   def apply() = {
-    new Argument(new ArgumentJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Argument(new JArgument(emptyObj()))
   }
   
-  def apply(t: ArgumentJava) = {
+  def apply(t: JArgument) = {
     if(t != null)
       new Argument(t)
     else
@@ -120,7 +121,7 @@ object Argument {
   
   def fromJson(json: JsonObject):Argument = {
     if(json != null)
-      new Argument(new ArgumentJava(json))
+      new Argument(new JArgument(json))
     else
       null
   }

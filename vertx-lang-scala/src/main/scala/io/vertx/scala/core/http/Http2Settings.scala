@@ -17,7 +17,9 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 /**
   * HTTP2 settings, the settings is initialized with the default HTTP/2 values.
@@ -26,12 +28,12 @@ import scala.collection.JavaConversions._
   * protocol extensions.
   */
 
-class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
+class Http2Settings(val asJava: JHttp2Settings) {
 
   /**
     * Set  HTTP/2 setting.
     */
-  def setHeaderTableSize(value:Long) = {
+  def setHeaderTableSize(value: Long) = {
     asJava.setHeaderTableSize(value)
     this
   }
@@ -42,7 +44,7 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setInitialWindowSize(value:Int) = {
+  def setInitialWindowSize(value: Int) = {
     asJava.setInitialWindowSize(value)
     this
   }
@@ -53,7 +55,7 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxConcurrentStreams(value:Long) = {
+  def setMaxConcurrentStreams(value: Long) = {
     asJava.setMaxConcurrentStreams(value)
     this
   }
@@ -64,7 +66,7 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxFrameSize(value:Int) = {
+  def setMaxFrameSize(value: Int) = {
     asJava.setMaxFrameSize(value)
     this
   }
@@ -75,7 +77,7 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxHeaderListSize(value:Int) = {
+  def setMaxHeaderListSize(value: Int) = {
     asJava.setMaxHeaderListSize(value)
     this
   }
@@ -86,7 +88,7 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setPushEnabled(value:Boolean) = {
+  def setPushEnabled(value: Boolean) = {
     asJava.setPushEnabled(value)
     this
   }
@@ -96,13 +98,12 @@ class Http2Settings(val asJava: io.vertx.core.http.Http2Settings) {
 }
 
 object Http2Settings {
-  type Http2SettingsJava = io.vertx.core.http.Http2Settings
   
   def apply() = {
-    new Http2Settings(new Http2SettingsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Http2Settings(new JHttp2Settings(emptyObj()))
   }
   
-  def apply(t: Http2SettingsJava) = {
+  def apply(t: JHttp2Settings) = {
     if(t != null)
       new Http2Settings(t)
     else
@@ -111,7 +112,7 @@ object Http2Settings {
   
   def fromJson(json: JsonObject):Http2Settings = {
     if(json != null)
-      new Http2Settings(new Http2SettingsJava(json))
+      new Http2Settings(new JHttp2Settings(json))
     else
       null
   }

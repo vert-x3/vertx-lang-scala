@@ -17,70 +17,73 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
+import io.vertx.core.json.JsonArray
+import io.vertx.core.json.JsonObject
 
 /**
   */
 
-class DataObjectWithLists(val asJava: io.vertx.codegen.testmodel.DataObjectWithLists) {
-  def setBooleanValues(value:scala.collection.mutable.Buffer[Boolean]) = {
-    asJava.setBooleanValues(value.map(Boolean.box))
+class DataObjectWithLists(val asJava: JDataObjectWithLists) {
+  def setBooleanValues(value: scala.collection.mutable.Buffer[Boolean]) = {
+    asJava.setBooleanValues(value.map(Boolean.box).asJava)
     this
   }
-  def setDataObjectValues(value:scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]) = {
-    asJava.setDataObjectValues(value.map(_.asJava))
+  def setDataObjectValues(value: scala.collection.mutable.Buffer[TestDataObject]) = {
+    asJava.setDataObjectValues(value.map(_.asJava).asJava)
     this
   }
-  def setDoubleValues(value:scala.collection.mutable.Buffer[Double]) = {
-    asJava.setDoubleValues(value.map(Double.box))
+  def setDoubleValues(value: scala.collection.mutable.Buffer[Double]) = {
+    asJava.setDoubleValues(value.map(Double.box).asJava)
     this
   }
-  def setEnumValues(value:scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value)
+  def setEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]) = {
+    asJava.setEnumValues(value.asJava)
     this
   }
-  def setFloatValues(value:scala.collection.mutable.Buffer[Float]) = {
-    asJava.setFloatValues(value.map(Float.box))
+  def setFloatValues(value: scala.collection.mutable.Buffer[Float]) = {
+    asJava.setFloatValues(value.map(Float.box).asJava)
     this
   }
-  def setGenEnumValues(value:scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value)
+  def setGenEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]) = {
+    asJava.setGenEnumValues(value.asJava)
     this
   }
-  def setIntegerValues(value:scala.collection.mutable.Buffer[Int]) = {
-    asJava.setIntegerValues(value.map(Int.box))
+  def setIntegerValues(value: scala.collection.mutable.Buffer[Int]) = {
+    asJava.setIntegerValues(value.map(Int.box).asJava)
     this
   }
-  def setJsonArrayValues(value:scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
-    asJava.setJsonArrayValues(value)
+  def setJsonArrayValues(value: scala.collection.mutable.Buffer[JsonArray]) = {
+    asJava.setJsonArrayValues(value.asJava)
     this
   }
-  def setJsonObjectValues(value:scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]) = {
-    asJava.setJsonObjectValues(value)
+  def setJsonObjectValues(value: scala.collection.mutable.Buffer[JsonObject]) = {
+    asJava.setJsonObjectValues(value.asJava)
     this
   }
-  def setLongValues(value:scala.collection.mutable.Buffer[Long]) = {
-    asJava.setLongValues(value.map(Long.box))
+  def setLongValues(value: scala.collection.mutable.Buffer[Long]) = {
+    asJava.setLongValues(value.map(Long.box).asJava)
     this
   }
-  def setShortValues(value:scala.collection.mutable.Buffer[Short]) = {
-    asJava.setShortValues(value.map(Short.box))
+  def setShortValues(value: scala.collection.mutable.Buffer[Short]) = {
+    asJava.setShortValues(value.map(Short.box).asJava)
     this
   }
-  def setStringValues(value:scala.collection.mutable.Buffer[String]) = {
-    asJava.setStringValues(value)
+  def setStringValues(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setStringValues(value.asJava)
     this
   }
 }
 
 object DataObjectWithLists {
-  type DataObjectWithListsJava = io.vertx.codegen.testmodel.DataObjectWithLists
   
   def apply() = {
-    new DataObjectWithLists(new DataObjectWithListsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithLists(new JDataObjectWithLists(emptyObj()))
   }
   
-  def apply(t: DataObjectWithListsJava) = {
+  def apply(t: JDataObjectWithLists) = {
     if(t != null)
       new DataObjectWithLists(t)
     else
@@ -89,7 +92,7 @@ object DataObjectWithLists {
   
   def fromJson(json: JsonObject):DataObjectWithLists = {
     if(json != null)
-      new DataObjectWithLists(new DataObjectWithListsJava(json))
+      new DataObjectWithLists(new JDataObjectWithLists(json))
     else
       null
   }

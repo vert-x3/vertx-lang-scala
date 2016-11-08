@@ -17,70 +17,73 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
+import io.vertx.core.json.JsonArray
+import io.vertx.core.json.JsonObject
 
 /**
   */
 
-class DataObjectWithMaps(val asJava: io.vertx.codegen.testmodel.DataObjectWithMaps) {
-  def setBooleanValues(value:Map[String, Boolean]) = {
-    asJava.setBooleanValues(value.mapValues(Boolean.box))
+class DataObjectWithMaps(val asJava: JDataObjectWithMaps) {
+  def setBooleanValues(value: Map[String, Boolean]) = {
+    asJava.setBooleanValues(value.mapValues(Boolean.box).asJava)
     this
   }
-  def setDataObjectValues(value:Map[String, io.vertx.scala.codegen.testmodel.TestDataObject]) = {
-    asJava.setDataObjectValues(value.mapValues(_.asJava))
+  def setDataObjectValues(value: Map[String, TestDataObject]) = {
+    asJava.setDataObjectValues(value.mapValues(_.asJava).asJava)
     this
   }
-  def setDoubleValues(value:Map[String, Double]) = {
-    asJava.setDoubleValues(value.mapValues(Double.box))
+  def setDoubleValues(value: Map[String, Double]) = {
+    asJava.setDoubleValues(value.mapValues(Double.box).asJava)
     this
   }
-  def setEnumValues(value:Map[String, io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value)
+  def setEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestEnum]) = {
+    asJava.setEnumValues(value.asJava)
     this
   }
-  def setFloatValues(value:Map[String, Float]) = {
-    asJava.setFloatValues(value.mapValues(Float.box))
+  def setFloatValues(value: Map[String, Float]) = {
+    asJava.setFloatValues(value.mapValues(Float.box).asJava)
     this
   }
-  def setGenEnumValues(value:Map[String, io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value)
+  def setGenEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestGenEnum]) = {
+    asJava.setGenEnumValues(value.asJava)
     this
   }
-  def setIntegerValues(value:Map[String, Int]) = {
-    asJava.setIntegerValues(value.mapValues(Int.box))
+  def setIntegerValues(value: Map[String, Int]) = {
+    asJava.setIntegerValues(value.mapValues(Int.box).asJava)
     this
   }
-  def setJsonArrayValues(value:Map[String, io.vertx.core.json.JsonArray]) = {
-    asJava.setJsonArrayValues(value)
+  def setJsonArrayValues(value: Map[String, JsonArray]) = {
+    asJava.setJsonArrayValues(value.asJava)
     this
   }
-  def setJsonObjectValues(value:Map[String, io.vertx.core.json.JsonObject]) = {
-    asJava.setJsonObjectValues(value)
+  def setJsonObjectValues(value: Map[String, JsonObject]) = {
+    asJava.setJsonObjectValues(value.asJava)
     this
   }
-  def setLongValues(value:Map[String, Long]) = {
-    asJava.setLongValues(value.mapValues(Long.box))
+  def setLongValues(value: Map[String, Long]) = {
+    asJava.setLongValues(value.mapValues(Long.box).asJava)
     this
   }
-  def setShortValues(value:Map[String, Short]) = {
-    asJava.setShortValues(value.mapValues(Short.box))
+  def setShortValues(value: Map[String, Short]) = {
+    asJava.setShortValues(value.mapValues(Short.box).asJava)
     this
   }
-  def setStringValues(value:Map[String, String]) = {
-    asJava.setStringValues(value)
+  def setStringValues(value: Map[String, String]) = {
+    asJava.setStringValues(value.asJava)
     this
   }
 }
 
 object DataObjectWithMaps {
-  type DataObjectWithMapsJava = io.vertx.codegen.testmodel.DataObjectWithMaps
   
   def apply() = {
-    new DataObjectWithMaps(new DataObjectWithMapsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new DataObjectWithMaps(new JDataObjectWithMaps(emptyObj()))
   }
   
-  def apply(t: DataObjectWithMapsJava) = {
+  def apply(t: JDataObjectWithMaps) = {
     if(t != null)
       new DataObjectWithMaps(t)
     else
@@ -89,7 +92,7 @@ object DataObjectWithMaps {
   
   def fromJson(json: JsonObject):DataObjectWithMaps = {
     if(json != null)
-      new DataObjectWithMaps(new DataObjectWithMapsJava(json))
+      new DataObjectWithMaps(new JDataObjectWithMaps(json))
     else
       null
   }

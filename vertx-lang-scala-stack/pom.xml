@@ -309,30 +309,29 @@
   </build>
 
   <modules>
-    <module>vertx-sql-common-scala</module>
-    <module>vertx-bridge-common-scala</module>
-    <module>vertx-jdbc-client-scala</module>
-    <module>vertx-mongo-client-scala</module>
-    <module>vertx-mongo-service-scala</module>
-    <module>vertx-auth-common-scala</module>
-    <module>vertx-auth-shiro-scala</module>
-    <module>vertx-auth-oauth2-scala</module>
-    <module>vertx-auth-mongo-scala</module>
-    <module>vertx-auth-jwt-scala</module>
-    <module>vertx-auth-jdbc-scala</module>
-    <module>vertx-web-scala</module>
-    <module>vertx-mysql-postgresql-client-scala</module>
-    <module>vertx-mail-client-scala</module>
-    <module>vertx-rabbitmq-client-scala</module>
-    <module>vertx-redis-client-scala</module>
-    <module>vertx-stomp-scala</module>
-    <module>vertx-tcp-eventbus-bridge-scala</module>
-    <module>vertx-amqp-bridge-scala</module>
-    <module>vertx-dropwizard-metrics-scala</module>
-    <module>vertx-hawkular-metrics-scala</module>
-    <module>vertx-shell-scala</module>
-    <module>vertx-service-discovery-scala</module>
-    <module>vertx-circuit-breaker-scala</module>
-    <!--<module>vertx-unit-scala</module>-->
+    <module>vertx-sql-common</module>
+    <module>vertx-bridge-common</module>
+    <module>vertx-jdbc-client</module>
+    <module>vertx-mongo-client</module>
+    <module>vertx-mongo-service</module>
+    <module>vertx-auth-common</module>
+    <module>vertx-auth-shiro</module>
+    <module>vertx-auth-oauth2</module>
+    <module>vertx-auth-mongo</module>
+    <module>vertx-auth-jwt</module>
+    <module>vertx-auth-jdbc</module>
+    <module>vertx-web</module>
+    <module>vertx-mysql-postgresql-client</module>
+    <module>vertx-mail-client</module>
+    <module>vertx-rabbitmq-client</module>
+    <module>vertx-redis-client</module>
+    <module>vertx-stomp</module>
+    <module>vertx-tcp-eventbus-bridge</module>
+    <module>vertx-amqp-bridge</module>
+    <module>vertx-dropwizard-metrics</module>
+    <module>vertx-hawkular-metrics</module>
+    <module>vertx-shell</module>
+    <module>vertx-service-discovery</module>
+    <module>vertx-circuit-breaker</module>
   </modules>
 </project>

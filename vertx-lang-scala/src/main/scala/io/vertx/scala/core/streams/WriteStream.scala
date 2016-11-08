@@ -19,7 +19,8 @@ package io.vertx.scala.core.streams
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.streams.{StreamBase => JStreamBase}
 
 /**
   *
@@ -29,7 +30,7 @@ import io.vertx.core.Handler
   * to it.
   */
 trait WriteStream[T] 
-    extends io.vertx.scala.core.streams.StreamBase {
+    extends StreamBase {
 
   def asJava: java.lang.Object
 
@@ -38,7 +39,7 @@ trait WriteStream[T]
   * @param handler the exception handler
   * @return a reference to this, so the API can be used fluently
   */
-  def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T]
+def exceptionHandler(handler: Throwable => Unit): WriteStream[T]
 
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
@@ -47,19 +48,19 @@ trait WriteStream[T]
   * @param data the data to write
   * @return a reference to this, so the API can be used fluently
   */
-  def write(data: T): io.vertx.scala.core.streams.WriteStream[T]
+def write(data: T): WriteStream[T]
 
   /**
   * Ends the stream.
   * 
   * Once the stream has ended, it cannot be used any more.
   */
-  def end(): Unit
+def end(): Unit
 
   /**
   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
   */
-  def end(t: T): Unit
+def end(t: T): Unit
 
   /**
   * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
@@ -72,13 +73,13 @@ trait WriteStream[T]
   * @param maxSize the max size of the write stream
   * @return a reference to this, so the API can be used fluently
   */
-  def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.streams.WriteStream[T]
+def setWriteQueueMaxSize(maxSize: Int): WriteStream[T]
 
   /**
   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
   * @return true if write queue is full
   */
-  def writeQueueFull(): Boolean
+def writeQueueFull(): Boolean
 
   /**
   * Set a drain handler on the stream. If the write queue is full, then the handler will be called when the write
@@ -89,25 +90,25 @@ trait WriteStream[T]
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-  def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T]
+def drainHandler(handler: () => Unit): WriteStream[T]
 
 }
 
 object WriteStream {
 
-  def apply[T](_asJava: io.vertx.core.streams.WriteStream[T]): io.vertx.scala.core.streams.WriteStream[T] =
+  def apply[T](_asJava: JWriteStream[T]): WriteStream[T] =
     new WriteStreamImpl[T](_asJava)
 
-  private class WriteStreamImpl[T](private val _asJava: io.vertx.core.streams.WriteStream[T]) extends WriteStream[T] {
+  private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
 
-    def asJava: io.vertx.core.streams.WriteStream[T] = _asJava
+    def asJava: JWriteStream[T] = _asJava
 
     /**
       * Set an exception handler on the write stream.
       * @param handler the exception handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Throwable => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+    def exceptionHandler(handler: Throwable => Unit): WriteStream[T] = {
         _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
@@ -119,7 +120,7 @@ object WriteStream {
       * @param data the data to write
       * @return a reference to this, so the API can be used fluently
       */
-    def write(data: T): io.vertx.scala.core.streams.WriteStream[T] = {
+    def write(data: T): WriteStream[T] = {
         _asJava.write(data)
       this
     }
@@ -151,7 +152,7 @@ object WriteStream {
       * @param maxSize the max size of the write stream
       * @return a reference to this, so the API can be used fluently
       */
-    def setWriteQueueMaxSize(maxSize: Int): io.vertx.scala.core.streams.WriteStream[T] = {
+    def setWriteQueueMaxSize(maxSize: Int): WriteStream[T] = {
         _asJava.setWriteQueueMaxSize(maxSize)
       this
     }
@@ -173,7 +174,7 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: () => Unit): io.vertx.scala.core.streams.WriteStream[T] = {
+    def drainHandler(handler: () => Unit): WriteStream[T] = {
         _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
       this
     }

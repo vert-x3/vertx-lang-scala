@@ -19,19 +19,21 @@ package io.vertx.scala.codegen.testmodel
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.TestDataObject
+import io.vertx.codegen.testmodel.{NullableTCK => JNullableTCK}
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.scala.codegen.testmodel.TestDataObject
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.core.json.JsonObject
-import io.vertx.core.Handler
 import io.vertx.codegen.testmodel.TestGenEnum
 
 /**
   * The TCK for @Nullable.
   */
-class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
+class NullableTCK(private val _asJava: JNullableTCK) {
 
-  def asJava: io.vertx.codegen.testmodel.NullableTCK = _asJava
+  def asJava: JNullableTCK = _asJava
 
   def methodWithNonNullableByteParam(param: Byte): Boolean = {
     _asJava.methodWithNonNullableByteParam(param)
@@ -231,92 +233,92 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
         nullsafeConvToOption(_asJava.methodWithNullableCharReturn(notNull));
   }
 
-  def methodWithNonNullableJsonObjectParam(param: io.vertx.core.json.JsonObject): Boolean = {
+  def methodWithNonNullableJsonObjectParam(param: JsonObject): Boolean = {
     _asJava.methodWithNonNullableJsonObjectParam(param)
   }
 
-  def methodWithNullableJsonObjectParam(expectNull: Boolean, param: scala.Option[io.vertx.core.json.JsonObject]): Unit = {
+  def methodWithNullableJsonObjectParam(expectNull: Boolean, param: scala.Option[JsonObject]): Unit = {
     _asJava.methodWithNullableJsonObjectParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableJsonObjectHandler(notNull: Boolean, handler: io.vertx.core.json.JsonObject => Unit): Unit = {
-    _asJava.methodWithNullableJsonObjectHandler(notNull, funcToHandler[io.vertx.core.json.JsonObject](handler))
+  def methodWithNullableJsonObjectHandler(notNull: Boolean, handler: JsonObject => Unit): Unit = {
+    _asJava.methodWithNullableJsonObjectHandler(notNull, funcToHandler[JsonObject](handler))
   }
 
-  def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.core.json.JsonObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject]((x => x))
+  def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject,JsonObject]((x => x))
     _asJava.methodWithNullableJsonObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableJsonObjectReturn(notNull: Boolean): scala.Option[io.vertx.core.json.JsonObject] = {
+  def methodWithNullableJsonObjectReturn(notNull: Boolean): scala.Option[JsonObject] = {
         scala.Option(_asJava.methodWithNullableJsonObjectReturn(notNull))
   }
 
-  def methodWithNonNullableJsonArrayParam(param: io.vertx.core.json.JsonArray): Boolean = {
+  def methodWithNonNullableJsonArrayParam(param: JsonArray): Boolean = {
     _asJava.methodWithNonNullableJsonArrayParam(param)
   }
 
-  def methodWithNullableJsonArrayParam(expectNull: Boolean, param: scala.Option[io.vertx.core.json.JsonArray]): Unit = {
+  def methodWithNullableJsonArrayParam(expectNull: Boolean, param: scala.Option[JsonArray]): Unit = {
     _asJava.methodWithNullableJsonArrayParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableJsonArrayHandler(notNull: Boolean, handler: io.vertx.core.json.JsonArray => Unit): Unit = {
-    _asJava.methodWithNullableJsonArrayHandler(notNull, funcToHandler[io.vertx.core.json.JsonArray](handler))
+  def methodWithNullableJsonArrayHandler(notNull: Boolean, handler: JsonArray => Unit): Unit = {
+    _asJava.methodWithNullableJsonArrayHandler(notNull, funcToHandler[JsonArray](handler))
   }
 
-  def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.core.json.JsonArray] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.core.json.JsonArray,io.vertx.core.json.JsonArray]((x => x))
+  def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray,JsonArray]((x => x))
     _asJava.methodWithNullableJsonArrayHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableJsonArrayReturn(notNull: Boolean): scala.Option[io.vertx.core.json.JsonArray] = {
+  def methodWithNullableJsonArrayReturn(notNull: Boolean): scala.Option[JsonArray] = {
         scala.Option(_asJava.methodWithNullableJsonArrayReturn(notNull))
   }
 
-  def methodWithNonNullableApiParam(param: io.vertx.scala.codegen.testmodel.RefedInterface1): Boolean = {
-    _asJava.methodWithNonNullableApiParam(param.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1])
+  def methodWithNonNullableApiParam(param: RefedInterface1): Boolean = {
+    _asJava.methodWithNonNullableApiParam(param.asJava.asInstanceOf[JRefedInterface1])
   }
 
-  def methodWithNullableApiParam(expectNull: Boolean, param: scala.Option[io.vertx.scala.codegen.testmodel.RefedInterface1]): Unit = {
+  def methodWithNullableApiParam(expectNull: Boolean, param: scala.Option[RefedInterface1]): Unit = {
     _asJava.methodWithNullableApiParam(expectNull, (if (param.isDefined) param.get.asJava else null))
   }
 
-  def methodWithNullableApiHandler(notNull: Boolean, handler: io.vertx.scala.codegen.testmodel.RefedInterface1 => Unit): Unit = {
+  def methodWithNullableApiHandler(notNull: Boolean, handler: RefedInterface1 => Unit): Unit = {
     _asJava.methodWithNullableApiHandler(notNull, funcToMappedHandler(RefedInterface1.apply)(handler))
   }
 
-  def methodWithNullableApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.RefedInterface1,io.vertx.scala.codegen.testmodel.RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
+  def methodWithNullableApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[RefedInterface1] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRefedInterface1,RefedInterface1]((x => if (x == null) null else RefedInterface1.apply(x)))
     _asJava.methodWithNullableApiHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableApiReturn(notNull: Boolean): scala.Option[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
+  def methodWithNullableApiReturn(notNull: Boolean): scala.Option[RefedInterface1] = {
         scala.Option(RefedInterface1.apply(_asJava.methodWithNullableApiReturn(notNull)))
   }
 
-  def methodWithNonNullableDataObjectParam(param: io.vertx.scala.codegen.testmodel.TestDataObject): Boolean = {
+  def methodWithNonNullableDataObjectParam(param: TestDataObject): Boolean = {
     _asJava.methodWithNonNullableDataObjectParam(param.asJava)
   }
 
-  def methodWithNullableDataObjectParam(expectNull: Boolean, param: scala.Option[io.vertx.scala.codegen.testmodel.TestDataObject]): Unit = {
+  def methodWithNullableDataObjectParam(expectNull: Boolean, param: scala.Option[TestDataObject]): Unit = {
     _asJava.methodWithNullableDataObjectParam(expectNull, (if (param.isDefined) param.get.asJava else null))
   }
 
-  def methodWithNullableDataObjectHandler(notNull: Boolean, handler: io.vertx.scala.codegen.testmodel.TestDataObject => Unit): Unit = {
-    _asJava.methodWithNullableDataObjectHandler(notNull, funcToMappedHandler[io.vertx.codegen.testmodel.TestDataObject, io.vertx.scala.codegen.testmodel.TestDataObject](a => TestDataObject(a))(handler))
+  def methodWithNullableDataObjectHandler(notNull: Boolean, handler: TestDataObject => Unit): Unit = {
+    _asJava.methodWithNullableDataObjectHandler(notNull, funcToMappedHandler[JTestDataObject, TestDataObject](a => TestDataObject(a))(handler))
   }
 
-  def methodWithNullableDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.scala.codegen.testmodel.TestDataObject] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.TestDataObject,io.vertx.scala.codegen.testmodel.TestDataObject]((x => io.vertx.scala.codegen.testmodel.TestDataObject(x)))
+  def methodWithNullableDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[TestDataObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestDataObject,TestDataObject]((x => io.vertx.scala.codegen.testmodel.TestDataObject(x)))
     _asJava.methodWithNullableDataObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableDataObjectReturn(notNull: Boolean): scala.Option[io.vertx.scala.codegen.testmodel.TestDataObject] = {
-        scala.Option(io.vertx.scala.codegen.testmodel.TestDataObject(_asJava.methodWithNullableDataObjectReturn(notNull)))
+  def methodWithNullableDataObjectReturn(notNull: Boolean): scala.Option[TestDataObject] = {
+        scala.Option(TestDataObject(_asJava.methodWithNullableDataObjectReturn(notNull)))
   }
 
   def methodWithNonNullableEnumParam(param: io.vertx.codegen.testmodel.TestEnum): Boolean = {
@@ -332,7 +334,7 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
   }
 
   def methodWithNullableEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.TestEnum,io.vertx.codegen.testmodel.TestEnum]((x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestEnum,io.vertx.codegen.testmodel.TestEnum]((x => x))
     _asJava.methodWithNullableEnumHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -354,7 +356,7 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
   }
 
   def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[io.vertx.codegen.testmodel.TestGenEnum,io.vertx.codegen.testmodel.TestGenEnum]((x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestGenEnum,io.vertx.codegen.testmodel.TestGenEnum]((x => x))
     _asJava.methodWithNullableGenEnumHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -583,91 +585,91 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
         scala.Option(_asJava.methodWithNullableListCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Char)); case None => None};
   }
 
-  def methodWithNonNullableListJsonObjectParam(param: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]): Boolean = {
+  def methodWithNonNullableListJsonObjectParam(param: scala.collection.mutable.Buffer[JsonObject]): Boolean = {
     _asJava.methodWithNonNullableListJsonObjectParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithNullableListJsonObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]): Unit = {
+  def methodWithNullableListJsonObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[JsonObject]]): Unit = {
     _asJava.methodWithNullableListJsonObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava else null)
   }
 
-  def methodWithNullableListJsonObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithNullableListJsonObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala else null)(handler))
+  def methodWithNullableListJsonObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[JsonObject] => Unit): Unit = {
+    _asJava.methodWithNullableListJsonObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[JsonObject]](x => if (x != null) x.asScala else null)(handler))
   }
 
-  def methodWithNullableListJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonObject],scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala))
+  def methodWithNullableListJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonObject],scala.collection.mutable.Buffer[JsonObject]]((x => if (x == null) null else x.asScala))
     _asJava.methodWithNullableListJsonObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableListJsonObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
-        scala.Option(_asJava.methodWithNullableListJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.core.json.JsonObject)); case None => None};
+  def methodWithNullableListJsonObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[JsonObject]] = {
+        scala.Option(_asJava.methodWithNullableListJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonObject)); case None => None};
   }
 
-  def methodWithNonNullableListJsonArrayParam(param: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]): Boolean = {
+  def methodWithNonNullableListJsonArrayParam(param: scala.collection.mutable.Buffer[JsonArray]): Boolean = {
     _asJava.methodWithNonNullableListJsonArrayParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithNullableListJsonArrayParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]): Unit = {
+  def methodWithNullableListJsonArrayParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[JsonArray]]): Unit = {
     _asJava.methodWithNullableListJsonArrayParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava else null)
   }
 
-  def methodWithNullableListJsonArrayHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithNullableListJsonArrayHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala else null)(handler))
+  def methodWithNullableListJsonArrayHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[JsonArray] => Unit): Unit = {
+    _asJava.methodWithNullableListJsonArrayHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[JsonArray]](x => if (x != null) x.asScala else null)(handler))
   }
 
-  def methodWithNullableListJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonArray],scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala))
+  def methodWithNullableListJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonArray],scala.collection.mutable.Buffer[JsonArray]]((x => if (x == null) null else x.asScala))
     _asJava.methodWithNullableListJsonArrayHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableListJsonArrayReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
-        scala.Option(_asJava.methodWithNullableListJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.core.json.JsonArray)); case None => None};
+  def methodWithNullableListJsonArrayReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[JsonArray]] = {
+        scala.Option(_asJava.methodWithNullableListJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonArray)); case None => None};
   }
 
-  def methodWithNonNullableListApiParam(param: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]): Boolean = {
+  def methodWithNonNullableListApiParam(param: scala.collection.mutable.Buffer[RefedInterface1]): Boolean = {
     _asJava.methodWithNonNullableListApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithNullableListApiParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]]): Unit = {
+  def methodWithNullableListApiParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]): Unit = {
     _asJava.methodWithNullableListApiParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableListApiHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1] => Unit): Unit = {
-    _asJava.methodWithNullableListApiHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
+  def methodWithNullableListApiHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[RefedInterface1] => Unit): Unit = {
+    _asJava.methodWithNullableListApiHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
   }
 
-  def methodWithNullableListApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.RefedInterface1],scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply)))
+  def methodWithNullableListApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.RefedInterface1],scala.collection.mutable.Buffer[RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply)))
     _asJava.methodWithNullableListApiHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableListApiReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
+  def methodWithNullableListApiReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[RefedInterface1]] = {
         scala.Option(_asJava.methodWithNullableListApiReturn(notNull)) match { case Some(x) => Some(x.asScala.map(RefedInterface1.apply)); case None => None};
   }
 
-  def methodWithNonNullableListDataObjectParam(param: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]): Boolean = {
+  def methodWithNonNullableListDataObjectParam(param: scala.collection.mutable.Buffer[TestDataObject]): Boolean = {
     _asJava.methodWithNonNullableListDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithNullableListDataObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]]): Unit = {
+  def methodWithNullableListDataObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[TestDataObject]]): Unit = {
     _asJava.methodWithNullableListDataObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableListDataObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject] => Unit): Unit = {
-    _asJava.methodWithNullableListDataObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
+  def methodWithNullableListDataObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[TestDataObject] => Unit): Unit = {
+    _asJava.methodWithNullableListDataObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
   }
 
-  def methodWithNullableListDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.TestDataObject],scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x))))
+  def methodWithNullableListDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.TestDataObject],scala.collection.mutable.Buffer[TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x))))
     _asJava.methodWithNullableListDataObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableListDataObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
+  def methodWithNullableListDataObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[TestDataObject]] = {
         scala.Option(_asJava.methodWithNullableListDataObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => TestDataObject(x))); case None => None};
   }
 
@@ -913,91 +915,91 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
         scala.Option(_asJava.methodWithNullableSetCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Char).toSet); case None => None};
   }
 
-  def methodWithNonNullableSetJsonObjectParam(param: Set[io.vertx.core.json.JsonObject]): Boolean = {
+  def methodWithNonNullableSetJsonObjectParam(param: Set[JsonObject]): Boolean = {
     _asJava.methodWithNonNullableSetJsonObjectParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithNullableSetJsonObjectParam(expectNull: Boolean, param: scala.Option[Set[io.vertx.core.json.JsonObject]]): Unit = {
+  def methodWithNullableSetJsonObjectParam(expectNull: Boolean, param: scala.Option[Set[JsonObject]]): Unit = {
     _asJava.methodWithNullableSetJsonObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava else null)
   }
 
-  def methodWithNullableSetJsonObjectHandler(notNull: Boolean, handler: Set[io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithNullableSetJsonObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
+  def methodWithNullableSetJsonObjectHandler(notNull: Boolean, handler: Set[JsonObject] => Unit): Unit = {
+    _asJava.methodWithNullableSetJsonObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
-  def methodWithNullableSetJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonObject],Set[io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala.toSet))
+  def methodWithNullableSetJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonObject],Set[JsonObject]]((x => if (x == null) null else x.asScala.toSet))
     _asJava.methodWithNullableSetJsonObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableSetJsonObjectReturn(notNull: Boolean): scala.Option[Set[io.vertx.core.json.JsonObject]] = {
-        scala.Option(_asJava.methodWithNullableSetJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.core.json.JsonObject).toSet); case None => None};
+  def methodWithNullableSetJsonObjectReturn(notNull: Boolean): scala.Option[Set[JsonObject]] = {
+        scala.Option(_asJava.methodWithNullableSetJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonObject).toSet); case None => None};
   }
 
-  def methodWithNonNullableSetJsonArrayParam(param: Set[io.vertx.core.json.JsonArray]): Boolean = {
+  def methodWithNonNullableSetJsonArrayParam(param: Set[JsonArray]): Boolean = {
     _asJava.methodWithNonNullableSetJsonArrayParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithNullableSetJsonArrayParam(expectNull: Boolean, param: scala.Option[Set[io.vertx.core.json.JsonArray]]): Unit = {
+  def methodWithNullableSetJsonArrayParam(expectNull: Boolean, param: scala.Option[Set[JsonArray]]): Unit = {
     _asJava.methodWithNullableSetJsonArrayParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava else null)
   }
 
-  def methodWithNullableSetJsonArrayHandler(notNull: Boolean, handler: Set[io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithNullableSetJsonArrayHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
+  def methodWithNullableSetJsonArrayHandler(notNull: Boolean, handler: Set[JsonArray] => Unit): Unit = {
+    _asJava.methodWithNullableSetJsonArrayHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
-  def methodWithNullableSetJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonArray],Set[io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala.toSet))
+  def methodWithNullableSetJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonArray],Set[JsonArray]]((x => if (x == null) null else x.asScala.toSet))
     _asJava.methodWithNullableSetJsonArrayHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableSetJsonArrayReturn(notNull: Boolean): scala.Option[Set[io.vertx.core.json.JsonArray]] = {
-        scala.Option(_asJava.methodWithNullableSetJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.core.json.JsonArray).toSet); case None => None};
+  def methodWithNullableSetJsonArrayReturn(notNull: Boolean): scala.Option[Set[JsonArray]] = {
+        scala.Option(_asJava.methodWithNullableSetJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonArray).toSet); case None => None};
   }
 
-  def methodWithNonNullableSetApiParam(param: Set[io.vertx.scala.codegen.testmodel.RefedInterface1]): Boolean = {
+  def methodWithNonNullableSetApiParam(param: Set[RefedInterface1]): Boolean = {
     _asJava.methodWithNonNullableSetApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithNullableSetApiParam(expectNull: Boolean, param: scala.Option[Set[io.vertx.scala.codegen.testmodel.RefedInterface1]]): Unit = {
+  def methodWithNullableSetApiParam(expectNull: Boolean, param: scala.Option[Set[RefedInterface1]]): Unit = {
     _asJava.methodWithNullableSetApiParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableSetApiHandler(notNull: Boolean, handler: Set[io.vertx.scala.codegen.testmodel.RefedInterface1] => Unit): Unit = {
-    _asJava.methodWithNullableSetApiHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[io.vertx.scala.codegen.testmodel.RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
+  def methodWithNullableSetApiHandler(notNull: Boolean, handler: Set[RefedInterface1] => Unit): Unit = {
+    _asJava.methodWithNullableSetApiHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
   }
 
-  def methodWithNullableSetApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1],Set[io.vertx.scala.codegen.testmodel.RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply).toSet))
+  def methodWithNullableSetApiHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1],Set[RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply).toSet))
     _asJava.methodWithNullableSetApiHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableSetApiReturn(notNull: Boolean): scala.Option[Set[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
+  def methodWithNullableSetApiReturn(notNull: Boolean): scala.Option[Set[RefedInterface1]] = {
         scala.Option(_asJava.methodWithNullableSetApiReturn(notNull)) match { case Some(x) => Some(x.asScala.map(RefedInterface1.apply).toSet); case None => None};
   }
 
-  def methodWithNonNullableSetDataObjectParam(param: Set[io.vertx.scala.codegen.testmodel.TestDataObject]): Boolean = {
+  def methodWithNonNullableSetDataObjectParam(param: Set[TestDataObject]): Boolean = {
     _asJava.methodWithNonNullableSetDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithNullableSetDataObjectParam(expectNull: Boolean, param: scala.Option[Set[io.vertx.scala.codegen.testmodel.TestDataObject]]): Unit = {
+  def methodWithNullableSetDataObjectParam(expectNull: Boolean, param: scala.Option[Set[TestDataObject]]): Unit = {
     _asJava.methodWithNullableSetDataObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableSetDataObjectHandler(notNull: Boolean, handler: Set[io.vertx.scala.codegen.testmodel.TestDataObject] => Unit): Unit = {
-    _asJava.methodWithNullableSetDataObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[io.vertx.scala.codegen.testmodel.TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
+  def methodWithNullableSetDataObjectHandler(notNull: Boolean, handler: Set[TestDataObject] => Unit): Unit = {
+    _asJava.methodWithNullableSetDataObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
   }
 
-  def methodWithNullableSetDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.TestDataObject],Set[io.vertx.scala.codegen.testmodel.TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x)).toSet))
+  def methodWithNullableSetDataObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Set[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.TestDataObject],Set[TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x)).toSet))
     _asJava.methodWithNullableSetDataObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableSetDataObjectReturn(notNull: Boolean): scala.Option[Set[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
+  def methodWithNullableSetDataObjectReturn(notNull: Boolean): scala.Option[Set[TestDataObject]] = {
         scala.Option(_asJava.methodWithNullableSetDataObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => TestDataObject(x)).toSet); case None => None};
   }
 
@@ -1243,56 +1245,56 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
         scala.Option(_asJava.methodWithNullableMapCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Char)).toMap); case None => None};
   }
 
-  def methodWithNonNullableMapJsonObjectParam(param: Map[String, io.vertx.core.json.JsonObject]): Boolean = {
+  def methodWithNonNullableMapJsonObjectParam(param: Map[String, JsonObject]): Boolean = {
     _asJava.methodWithNonNullableMapJsonObjectParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonObject)).asJava)
   }
 
-  def methodWithNullableMapJsonObjectParam(expectNull: Boolean, param: scala.Option[Map[String, io.vertx.core.json.JsonObject]]): Unit = {
+  def methodWithNullableMapJsonObjectParam(expectNull: Boolean, param: scala.Option[Map[String, JsonObject]]): Unit = {
     _asJava.methodWithNullableMapJsonObjectParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonObject)).asJava else null)
   }
 
-  def methodWithNullableMapJsonObjectHandler(notNull: Boolean, handler: Map[String, io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithNullableMapJsonObjectHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
+  def methodWithNullableMapJsonObjectHandler(notNull: Boolean, handler: Map[String, JsonObject] => Unit): Unit = {
+    _asJava.methodWithNullableMapJsonObjectHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
-  def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Map[String, io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject],Map[String, io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
+  def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Map[String, JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject],Map[String, JsonObject]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
     _asJava.methodWithNullableMapJsonObjectHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableMapJsonObjectReturn(notNull: Boolean): scala.Option[Map[String, io.vertx.core.json.JsonObject]] = {
+  def methodWithNullableMapJsonObjectReturn(notNull: Boolean): scala.Option[Map[String, JsonObject]] = {
         scala.Option(_asJava.methodWithNullableMapJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.toMap); case None => None};
   }
 
-  def methodWithNonNullableMapJsonArrayParam(param: Map[String, io.vertx.core.json.JsonArray]): Boolean = {
+  def methodWithNonNullableMapJsonArrayParam(param: Map[String, JsonArray]): Boolean = {
     _asJava.methodWithNonNullableMapJsonArrayParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonArray)).asJava)
   }
 
-  def methodWithNullableMapJsonArrayParam(expectNull: Boolean, param: scala.Option[Map[String, io.vertx.core.json.JsonArray]]): Unit = {
+  def methodWithNullableMapJsonArrayParam(expectNull: Boolean, param: scala.Option[Map[String, JsonArray]]): Unit = {
     _asJava.methodWithNullableMapJsonArrayParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonArray)).asJava else null)
   }
 
-  def methodWithNullableMapJsonArrayHandler(notNull: Boolean, handler: Map[String, io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithNullableMapJsonArrayHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
+  def methodWithNullableMapJsonArrayHandler(notNull: Boolean, handler: Map[String, JsonArray] => Unit): Unit = {
+    _asJava.methodWithNullableMapJsonArrayHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
-  def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Map[String, io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray],Map[String, io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
+  def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[Map[String, JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray],Map[String, JsonArray]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
     _asJava.methodWithNullableMapJsonArrayHandlerAsyncResult(notNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableMapJsonArrayReturn(notNull: Boolean): scala.Option[Map[String, io.vertx.core.json.JsonArray]] = {
+  def methodWithNullableMapJsonArrayReturn(notNull: Boolean): scala.Option[Map[String, JsonArray]] = {
         scala.Option(_asJava.methodWithNullableMapJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.toMap); case None => None};
   }
 
-  def methodWithNonNullableMapApiParam(param: Map[String, io.vertx.scala.codegen.testmodel.RefedInterface1]): Boolean = {
-    _asJava.methodWithNonNullableMapApiParam(param.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1] else null)).asJava)
+  def methodWithNonNullableMapApiParam(param: Map[String, RefedInterface1]): Boolean = {
+    _asJava.methodWithNonNullableMapApiParam(param.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[JRefedInterface1] else null)).asJava)
   }
 
-  def methodWithNullableMapApiParam(expectNull: Boolean, param: scala.Option[Map[String, io.vertx.scala.codegen.testmodel.RefedInterface1]]): Unit = {
-    _asJava.methodWithNullableMapApiParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1] else null)).asJava else null)
+  def methodWithNullableMapApiParam(expectNull: Boolean, param: scala.Option[Map[String, RefedInterface1]]): Unit = {
+    _asJava.methodWithNullableMapApiParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[JRefedInterface1] else null)).asJava else null)
   }
 
   def methodWithListNullableByteParam(param: scala.collection.mutable.Buffer[Byte]): Unit = {
@@ -1457,75 +1459,75 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
     _asJava.methodWithListNullableCharReturn().asScala.map(x => x:Char)
   }
 
-  def methodWithListNullableJsonObjectParam(param: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]): Unit = {
+  def methodWithListNullableJsonObjectParam(param: scala.collection.mutable.Buffer[JsonObject]): Unit = {
     _asJava.methodWithListNullableJsonObjectParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithListNullableJsonObjectHandler(handler: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithListNullableJsonObjectHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala else null)(handler))
+  def methodWithListNullableJsonObjectHandler(handler: scala.collection.mutable.Buffer[JsonObject] => Unit): Unit = {
+    _asJava.methodWithListNullableJsonObjectHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[JsonObject]](x => if (x != null) x.asScala else null)(handler))
   }
 
-  def methodWithListNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonObject],scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala))
+  def methodWithListNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonObject],scala.collection.mutable.Buffer[JsonObject]]((x => if (x == null) null else x.asScala))
     _asJava.methodWithListNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithListNullableJsonObjectReturn(): scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject] = {
-    _asJava.methodWithListNullableJsonObjectReturn().asScala.map(x => x:io.vertx.core.json.JsonObject)
+  def methodWithListNullableJsonObjectReturn(): scala.collection.mutable.Buffer[JsonObject] = {
+    _asJava.methodWithListNullableJsonObjectReturn().asScala.map(x => x:JsonObject)
   }
 
-  def methodWithListNullableJsonArrayParam(param: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]): Unit = {
+  def methodWithListNullableJsonArrayParam(param: scala.collection.mutable.Buffer[JsonArray]): Unit = {
     _asJava.methodWithListNullableJsonArrayParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithListNullableJsonArrayHandler(handler: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithListNullableJsonArrayHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala else null)(handler))
+  def methodWithListNullableJsonArrayHandler(handler: scala.collection.mutable.Buffer[JsonArray] => Unit): Unit = {
+    _asJava.methodWithListNullableJsonArrayHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[JsonArray]](x => if (x != null) x.asScala else null)(handler))
   }
 
-  def methodWithListNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonArray],scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala))
+  def methodWithListNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.core.json.JsonArray],scala.collection.mutable.Buffer[JsonArray]]((x => if (x == null) null else x.asScala))
     _asJava.methodWithListNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithListNullableJsonArrayReturn(): scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] = {
-    _asJava.methodWithListNullableJsonArrayReturn().asScala.map(x => x:io.vertx.core.json.JsonArray)
+  def methodWithListNullableJsonArrayReturn(): scala.collection.mutable.Buffer[JsonArray] = {
+    _asJava.methodWithListNullableJsonArrayReturn().asScala.map(x => x:JsonArray)
   }
 
-  def methodWithListNullableApiParam(param: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]): Unit = {
+  def methodWithListNullableApiParam(param: scala.collection.mutable.Buffer[RefedInterface1]): Unit = {
     _asJava.methodWithListNullableApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithListNullableApiHandler(handler: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1] => Unit): Unit = {
-    _asJava.methodWithListNullableApiHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
+  def methodWithListNullableApiHandler(handler: scala.collection.mutable.Buffer[RefedInterface1] => Unit): Unit = {
+    _asJava.methodWithListNullableApiHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
   }
 
-  def methodWithListNullableApiHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.RefedInterface1],scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply)))
+  def methodWithListNullableApiHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.RefedInterface1],scala.collection.mutable.Buffer[RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply)))
     _asJava.methodWithListNullableApiHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithListNullableApiReturn(): scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
+  def methodWithListNullableApiReturn(): scala.collection.mutable.Buffer[RefedInterface1] = {
     _asJava.methodWithListNullableApiReturn().asScala.map(RefedInterface1.apply)
   }
 
-  def methodWithListNullableDataObjectParam(param: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]): Unit = {
+  def methodWithListNullableDataObjectParam(param: scala.collection.mutable.Buffer[TestDataObject]): Unit = {
     _asJava.methodWithListNullableDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithListNullableDataObjectHandler(handler: scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject] => Unit): Unit = {
-    _asJava.methodWithListNullableDataObjectHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
+  def methodWithListNullableDataObjectHandler(handler: scala.collection.mutable.Buffer[TestDataObject] => Unit): Unit = {
+    _asJava.methodWithListNullableDataObjectHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
   }
 
-  def methodWithListNullableDataObjectHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.TestDataObject],scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x))))
+  def methodWithListNullableDataObjectHandlerAsyncResultFuture(): concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.codegen.testmodel.TestDataObject],scala.collection.mutable.Buffer[TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x))))
     _asJava.methodWithListNullableDataObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithListNullableDataObjectReturn(): scala.collection.mutable.Buffer[io.vertx.scala.codegen.testmodel.TestDataObject] = {
+  def methodWithListNullableDataObjectReturn(): scala.collection.mutable.Buffer[TestDataObject] = {
     _asJava.methodWithListNullableDataObjectReturn().asScala.map(x => TestDataObject(x))
   }
 
@@ -1727,75 +1729,75 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
     _asJava.methodWithSetNullableCharReturn().asScala.map(x => x:Char).toSet
   }
 
-  def methodWithSetNullableJsonObjectParam(param: Set[io.vertx.core.json.JsonObject]): Unit = {
+  def methodWithSetNullableJsonObjectParam(param: Set[JsonObject]): Unit = {
     _asJava.methodWithSetNullableJsonObjectParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithSetNullableJsonObjectHandler(handler: Set[io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithSetNullableJsonObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
+  def methodWithSetNullableJsonObjectHandler(handler: Set[JsonObject] => Unit): Unit = {
+    _asJava.methodWithSetNullableJsonObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
-  def methodWithSetNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[Set[io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonObject],Set[io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala.toSet))
+  def methodWithSetNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[Set[JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonObject],Set[JsonObject]]((x => if (x == null) null else x.asScala.toSet))
     _asJava.methodWithSetNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithSetNullableJsonObjectReturn(): Set[io.vertx.core.json.JsonObject] = {
-    _asJava.methodWithSetNullableJsonObjectReturn().asScala.map(x => x:io.vertx.core.json.JsonObject).toSet
+  def methodWithSetNullableJsonObjectReturn(): Set[JsonObject] = {
+    _asJava.methodWithSetNullableJsonObjectReturn().asScala.map(x => x:JsonObject).toSet
   }
 
-  def methodWithSetNullableJsonArrayParam(param: Set[io.vertx.core.json.JsonArray]): Unit = {
+  def methodWithSetNullableJsonArrayParam(param: Set[JsonArray]): Unit = {
     _asJava.methodWithSetNullableJsonArrayParam(param.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithSetNullableJsonArrayHandler(handler: Set[io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithSetNullableJsonArrayHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
+  def methodWithSetNullableJsonArrayHandler(handler: Set[JsonArray] => Unit): Unit = {
+    _asJava.methodWithSetNullableJsonArrayHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
-  def methodWithSetNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[Set[io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonArray],Set[io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala.toSet))
+  def methodWithSetNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[Set[JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.core.json.JsonArray],Set[JsonArray]]((x => if (x == null) null else x.asScala.toSet))
     _asJava.methodWithSetNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithSetNullableJsonArrayReturn(): Set[io.vertx.core.json.JsonArray] = {
-    _asJava.methodWithSetNullableJsonArrayReturn().asScala.map(x => x:io.vertx.core.json.JsonArray).toSet
+  def methodWithSetNullableJsonArrayReturn(): Set[JsonArray] = {
+    _asJava.methodWithSetNullableJsonArrayReturn().asScala.map(x => x:JsonArray).toSet
   }
 
-  def methodWithSetNullableApiParam(param: Set[io.vertx.scala.codegen.testmodel.RefedInterface1]): Unit = {
+  def methodWithSetNullableApiParam(param: Set[RefedInterface1]): Unit = {
     _asJava.methodWithSetNullableApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithSetNullableApiHandler(handler: Set[io.vertx.scala.codegen.testmodel.RefedInterface1] => Unit): Unit = {
-    _asJava.methodWithSetNullableApiHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[io.vertx.scala.codegen.testmodel.RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
+  def methodWithSetNullableApiHandler(handler: Set[RefedInterface1] => Unit): Unit = {
+    _asJava.methodWithSetNullableApiHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
   }
 
-  def methodWithSetNullableApiHandlerAsyncResultFuture(): concurrent.Future[Set[io.vertx.scala.codegen.testmodel.RefedInterface1]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1],Set[io.vertx.scala.codegen.testmodel.RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply).toSet))
+  def methodWithSetNullableApiHandlerAsyncResultFuture(): concurrent.Future[Set[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1],Set[RefedInterface1]]((x => if (x == null) null else x.asScala.map(RefedInterface1.apply).toSet))
     _asJava.methodWithSetNullableApiHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithSetNullableApiReturn(): Set[io.vertx.scala.codegen.testmodel.RefedInterface1] = {
+  def methodWithSetNullableApiReturn(): Set[RefedInterface1] = {
     _asJava.methodWithSetNullableApiReturn().asScala.map(RefedInterface1.apply).toSet
   }
 
-  def methodWithSetNullableDataObjectParam(param: Set[io.vertx.scala.codegen.testmodel.TestDataObject]): Unit = {
+  def methodWithSetNullableDataObjectParam(param: Set[TestDataObject]): Unit = {
     _asJava.methodWithSetNullableDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithSetNullableDataObjectHandler(handler: Set[io.vertx.scala.codegen.testmodel.TestDataObject] => Unit): Unit = {
-    _asJava.methodWithSetNullableDataObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[io.vertx.scala.codegen.testmodel.TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
+  def methodWithSetNullableDataObjectHandler(handler: Set[TestDataObject] => Unit): Unit = {
+    _asJava.methodWithSetNullableDataObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
   }
 
-  def methodWithSetNullableDataObjectHandlerAsyncResultFuture(): concurrent.Future[Set[io.vertx.scala.codegen.testmodel.TestDataObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.TestDataObject],Set[io.vertx.scala.codegen.testmodel.TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x)).toSet))
+  def methodWithSetNullableDataObjectHandlerAsyncResultFuture(): concurrent.Future[Set[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[io.vertx.codegen.testmodel.TestDataObject],Set[TestDataObject]]((x => if (x == null) null else x.asScala.map(x => TestDataObject(x)).toSet))
     _asJava.methodWithSetNullableDataObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithSetNullableDataObjectReturn(): Set[io.vertx.scala.codegen.testmodel.TestDataObject] = {
+  def methodWithSetNullableDataObjectReturn(): Set[TestDataObject] = {
     _asJava.methodWithSetNullableDataObjectReturn().asScala.map(x => TestDataObject(x)).toSet
   }
 
@@ -1997,44 +1999,44 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
     _asJava.methodWithMapNullableCharReturn().asScala.map(kv => (kv._1, kv._2: Char)).toMap
   }
 
-  def methodWithMapNullableJsonObjectParam(param: Map[String, io.vertx.core.json.JsonObject]): Unit = {
+  def methodWithMapNullableJsonObjectParam(param: Map[String, JsonObject]): Unit = {
     _asJava.methodWithMapNullableJsonObjectParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonObject)).asJava)
   }
 
-  def methodWithMapNullableJsonObjectHandler(handler: Map[String, io.vertx.core.json.JsonObject] => Unit): Unit = {
-    _asJava.methodWithMapNullableJsonObjectHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, io.vertx.core.json.JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
+  def methodWithMapNullableJsonObjectHandler(handler: Map[String, JsonObject] => Unit): Unit = {
+    _asJava.methodWithMapNullableJsonObjectHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
-  def methodWithMapNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[Map[String, io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject],Map[String, io.vertx.core.json.JsonObject]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
+  def methodWithMapNullableJsonObjectHandlerAsyncResultFuture(): concurrent.Future[Map[String, JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject],Map[String, JsonObject]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
     _asJava.methodWithMapNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithMapNullableJsonObjectReturn(): Map[String, io.vertx.core.json.JsonObject] = {
+  def methodWithMapNullableJsonObjectReturn(): Map[String, JsonObject] = {
     _asJava.methodWithMapNullableJsonObjectReturn().asScala.toMap
   }
 
-  def methodWithMapNullableJsonArrayParam(param: Map[String, io.vertx.core.json.JsonArray]): Unit = {
+  def methodWithMapNullableJsonArrayParam(param: Map[String, JsonArray]): Unit = {
     _asJava.methodWithMapNullableJsonArrayParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonArray)).asJava)
   }
 
-  def methodWithMapNullableJsonArrayHandler(handler: Map[String, io.vertx.core.json.JsonArray] => Unit): Unit = {
-    _asJava.methodWithMapNullableJsonArrayHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, io.vertx.core.json.JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
+  def methodWithMapNullableJsonArrayHandler(handler: Map[String, JsonArray] => Unit): Unit = {
+    _asJava.methodWithMapNullableJsonArrayHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
-  def methodWithMapNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[Map[String, io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray],Map[String, io.vertx.core.json.JsonArray]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
+  def methodWithMapNullableJsonArrayHandlerAsyncResultFuture(): concurrent.Future[Map[String, JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray],Map[String, JsonArray]]((x => if (x == null) null else x.asScala.map((a) => (a._1,a._2)).toMap))
     _asJava.methodWithMapNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithMapNullableJsonArrayReturn(): Map[String, io.vertx.core.json.JsonArray] = {
+  def methodWithMapNullableJsonArrayReturn(): Map[String, JsonArray] = {
     _asJava.methodWithMapNullableJsonArrayReturn().asScala.toMap
   }
 
-  def methodWithMapNullableApiParam(param: Map[String, io.vertx.scala.codegen.testmodel.RefedInterface1]): Unit = {
-    _asJava.methodWithMapNullableApiParam(param.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1] else null)).asJava)
+  def methodWithMapNullableApiParam(param: Map[String, RefedInterface1]): Unit = {
+    _asJava.methodWithMapNullableApiParam(param.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[JRefedInterface1] else null)).asJava)
   }
 
   def methodWithNullableHandler(expectNull: Boolean, handler: String => Unit): Unit = {
@@ -2051,7 +2053,7 @@ class NullableTCK(private val _asJava: io.vertx.codegen.testmodel.NullableTCK) {
 
 object NullableTCK {
 
-  def apply(_asJava: io.vertx.codegen.testmodel.NullableTCK): io.vertx.scala.codegen.testmodel.NullableTCK =
-    new io.vertx.scala.codegen.testmodel.NullableTCK(_asJava)
+  def apply(_asJava: JNullableTCK): NullableTCK =
+    new NullableTCK(_asJava)
 
 }

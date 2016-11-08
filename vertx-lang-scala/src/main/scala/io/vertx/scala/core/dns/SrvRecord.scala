@@ -19,13 +19,14 @@ package io.vertx.scala.core.dns
 import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
+import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
+class SrvRecord(private val _asJava: JSrvRecord) {
 
-  def asJava: io.vertx.core.dns.SrvRecord = _asJava
+  def asJava: JSrvRecord = _asJava
 
   /**
     * Returns the priority for this service record.
@@ -80,7 +81,7 @@ class SrvRecord(private val _asJava: io.vertx.core.dns.SrvRecord) {
 
 object SrvRecord {
 
-  def apply(_asJava: io.vertx.core.dns.SrvRecord): io.vertx.scala.core.dns.SrvRecord =
-    new io.vertx.scala.core.dns.SrvRecord(_asJava)
+  def apply(_asJava: JSrvRecord): SrvRecord =
+    new SrvRecord(_asJava)
 
 }

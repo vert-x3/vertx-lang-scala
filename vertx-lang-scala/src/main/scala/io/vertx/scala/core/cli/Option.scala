@@ -17,7 +17,9 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.cli.{Option => JOption}
 
 /**
   * Models command line options. Options are values passed to a command line interface using -x or --x. Supported
@@ -26,12 +28,12 @@ import scala.collection.JavaConversions._
   * Short name is generally used with a single dash, while long name requires a double-dash.
   */
 
-class Option(val asJava: io.vertx.core.cli.Option) {
+class Option(val asJava: JOption) {
 
   /**
     * Sets te arg name for this option.
     */
-  def setArgName(value:String) = {
+  def setArgName(value: String) = {
     asJava.setArgName(value)
     this
   }
@@ -43,12 +45,12 @@ class Option(val asJava: io.vertx.core.cli.Option) {
     * Sets the list of values accepted by this option. If the value set by the user does not match once of these
     * values, a [[io.vertx.core.cli.InvalidValueException]] exception is thrown.
     */
-  def addChoice(value:String) = {
+  def addChoice(value: String) = {
     asJava.addChoice(value)
     this
   }
-  def setChoices(value:Set[String]) = {
-    asJava.setChoices(value)
+  def setChoices(value: Set[String]) = {
+    asJava.setChoices(value.asJava)
     this
   }
   def getChoices = {
@@ -58,7 +60,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets the default value of this option
     */
-  def setDefaultValue(value:String) = {
+  def setDefaultValue(value: String) = {
     asJava.setDefaultValue(value)
     this
   }
@@ -69,7 +71,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets te description of this option.
     */
-  def setDescription(value:String) = {
+  def setDescription(value: String) = {
     asJava.setDescription(value)
     this
   }
@@ -84,7 +86,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
     *   option.setFlag(true).setSingleValued(true)
     * </pre></code>
     */
-  def setFlag(value:Boolean) = {
+  def setFlag(value: Boolean) = {
     asJava.setFlag(value)
     this
   }
@@ -95,7 +97,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets whether or not this option is a "help" option
     */
-  def setHelp(value:Boolean) = {
+  def setHelp(value: Boolean) = {
     asJava.setHelp(value)
     this
   }
@@ -106,7 +108,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets whether or not this option should be hidden
     */
-  def setHidden(value:Boolean) = {
+  def setHidden(value: Boolean) = {
     asJava.setHidden(value)
     this
   }
@@ -117,7 +119,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets the long name of this option.
     */
-  def setLongName(value:String) = {
+  def setLongName(value: String) = {
     asJava.setLongName(value)
     this
   }
@@ -128,7 +130,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets whether or not this option can receive several values.
     */
-  def setMultiValued(value:Boolean) = {
+  def setMultiValued(value: Boolean) = {
     asJava.setMultiValued(value)
     this
   }
@@ -142,7 +144,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets whether or not this option is mandatory.
     */
-  def setRequired(value:Boolean) = {
+  def setRequired(value: Boolean) = {
     asJava.setRequired(value)
     this
   }
@@ -153,7 +155,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets the short name of this option.
     */
-  def setShortName(value:String) = {
+  def setShortName(value: String) = {
     asJava.setShortName(value)
     this
   }
@@ -164,7 +166,7 @@ class Option(val asJava: io.vertx.core.cli.Option) {
   /**
     * Sets whether or not this option can receive a value.
     */
-  def setSingleValued(value:Boolean) = {
+  def setSingleValued(value: Boolean) = {
     asJava.setSingleValued(value)
     this
   }
@@ -174,13 +176,12 @@ class Option(val asJava: io.vertx.core.cli.Option) {
 }
 
 object Option {
-  type OptionJava = io.vertx.core.cli.Option
   
   def apply() = {
-    new Option(new OptionJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new Option(new JOption(emptyObj()))
   }
   
-  def apply(t: OptionJava) = {
+  def apply(t: JOption) = {
     if(t != null)
       new Option(t)
     else
@@ -189,7 +190,7 @@ object Option {
   
   def fromJson(json: JsonObject):Option = {
     if(json != null)
-      new Option(new OptionJava(json))
+      new Option(new JOption(json))
     else
       null
   }

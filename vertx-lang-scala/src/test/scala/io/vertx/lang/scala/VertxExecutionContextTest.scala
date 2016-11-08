@@ -32,6 +32,6 @@ class PromiseTestVerticle extends ScalaVerticle {
       a1 <- f1
       a2 <- f2
     } yield (a1 + " " + a2)
-    res.map(a => startPromise.complete(Success()))
+    res.map(a => startPromise.success(()))
   }
 }

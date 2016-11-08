@@ -17,19 +17,23 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.http.{GoAway => JGoAway}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   * A  frame.
   */
 
-class GoAway(val asJava: io.vertx.core.http.GoAway) {
+class GoAway(val asJava: JGoAway) {
 
   /**
     * Set the additional debug data
     */
-  def setDebugData(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setDebugData(value)
+  def setDebugData(value: Buffer) = {
+    asJava.setDebugData(value.asJava)
     this
   }
   def getDebugData = {
@@ -38,7 +42,7 @@ class GoAway(val asJava: io.vertx.core.http.GoAway) {
 
   /**
     */
-  def setErrorCode(value:Long) = {
+  def setErrorCode(value: Long) = {
     asJava.setErrorCode(value)
     this
   }
@@ -49,7 +53,7 @@ class GoAway(val asJava: io.vertx.core.http.GoAway) {
   /**
     * Set the last stream id.
     */
-  def setLastStreamId(value:Int) = {
+  def setLastStreamId(value: Int) = {
     asJava.setLastStreamId(value)
     this
   }
@@ -59,13 +63,12 @@ class GoAway(val asJava: io.vertx.core.http.GoAway) {
 }
 
 object GoAway {
-  type GoAwayJava = io.vertx.core.http.GoAway
   
   def apply() = {
-    new GoAway(new GoAwayJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new GoAway(new JGoAway(emptyObj()))
   }
   
-  def apply(t: GoAwayJava) = {
+  def apply(t: JGoAway) = {
     if(t != null)
       new GoAway(t)
     else
@@ -74,7 +77,7 @@ object GoAway {
   
   def fromJson(json: JsonObject):GoAway = {
     if(json != null)
-      new GoAway(new GoAwayJava(json))
+      new GoAway(new JGoAway(json))
     else
       null
   }

@@ -17,7 +17,11 @@
 package io.vertx.scala.core.net
 
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Key or trust store options configuring private key and/or certificates based on PKCS#12 files.
@@ -41,12 +45,12 @@ import scala.collection.JavaConversions._
   * </pre>
   */
 
-class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
+class PfxOptions(val asJava: JPfxOptions) {
 
   /**
     * Set the password
     */
-  def setPassword(value:String) = {
+  def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
@@ -57,7 +61,7 @@ class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
   /**
     * Set the path
     */
-  def setPath(value:String) = {
+  def setPath(value: String) = {
     asJava.setPath(value)
     this
   }
@@ -68,8 +72,8 @@ class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
   /**
     * Set the store as a buffer
     */
-  def setValue(value:io.vertx.core.buffer.Buffer) = {
-    asJava.setValue(value)
+  def setValue(value: Buffer) = {
+    asJava.setValue(value.asJava)
     this
   }
   def getValue = {
@@ -78,13 +82,12 @@ class PfxOptions(val asJava: io.vertx.core.net.PfxOptions) {
 }
 
 object PfxOptions {
-  type PfxOptionsJava = io.vertx.core.net.PfxOptions
   
   def apply() = {
-    new PfxOptions(new PfxOptionsJava(io.vertx.lang.scala.json.Json.emptyObj()))
+    new PfxOptions(new JPfxOptions(emptyObj()))
   }
   
-  def apply(t: PfxOptionsJava) = {
+  def apply(t: JPfxOptions) = {
     if(t != null)
       new PfxOptions(t)
     else
@@ -93,7 +96,7 @@ object PfxOptions {
   
   def fromJson(json: JsonObject):PfxOptions = {
     if(json != null)
-      new PfxOptions(new PfxOptionsJava(json))
+      new PfxOptions(new JPfxOptions(json))
     else
       null
   }
