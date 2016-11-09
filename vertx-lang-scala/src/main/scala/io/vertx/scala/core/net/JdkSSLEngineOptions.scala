@@ -27,6 +27,7 @@ import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 
 class JdkSSLEngineOptions(val asJava: JJdkSSLEngineOptions) {
 
+
   /**
     */
 }

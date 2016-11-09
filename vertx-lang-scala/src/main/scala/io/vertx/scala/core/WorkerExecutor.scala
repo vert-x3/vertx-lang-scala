@@ -52,7 +52,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     * (e.g. on the original event loop of the caller).
     * 
     * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
-    * the handler should call the [[io.vertx.scala.core.Future!.complete(T):Unit]] or [[io.vertx.scala.core.Future!.complete(T):Unit]] method, or the [[io.vertx.scala.core.Future!.fail(Throwable):Unit]]
+    * the handler should call the [[io.vertx.scala.core.Future!.complete(result:T):Unit]] or [[io.vertx.scala.core.Future!.complete(result:T):Unit]] method, or the [[io.vertx.scala.core.Future!.fail(throwable:Throwable):Unit]]
     * method if it failed.
     * 
     * In the `blockingCodeHandler` the current context remains the original context and therefore any task
@@ -68,7 +68,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
   }
 
   /**
-    * Like [[io.vertx.scala.core.WorkerExecutor!.executeBlocking(io.vertx.scala.core.Handler[io.vertx.scala.core.Future[T]],Boolean,io.vertx.lang.scala.AsyncResult):Unit]] called with ordered = true.
+    * Like [[io.vertx.scala.core.WorkerExecutor!.executeBlocking(blockingCodeHandler:io.vertx.scala.core.Handler[io.vertx.scala.core.Future[T]],ordered:Boolean,resultHandler:io.vertx.lang.scala.AsyncResult):Unit]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))

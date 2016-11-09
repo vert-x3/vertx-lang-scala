@@ -27,239 +27,120 @@ import io.vertx.scala.core.buffer.Buffer
   * Base class. TCP and SSL related options
   */
 
-class TCPSSLOptions(val asJava: JTCPSSLOptions) {
+trait TCPSSLOptions {
+
 
   /**
     * Add a CRL path
     */
-  def addCrlPath(value: String) = {
-    asJava.addCrlPath(value)
-    this
-  }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
-  }
+  def addCrlPath(value: String):TCPSSLOptions
 
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
-    this
-  }
-  def getCrlValues = {
-    asJava.getCrlValues()
-  }
+  def addCrlValue(value: Buffer):TCPSSLOptions
 
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value: String) = {
-    asJava.addEnabledCipherSuite(value)
-    this
-  }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
-  }
+  def addEnabledCipherSuite(value: String):TCPSSLOptions
 
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value: String) = {
-    asJava.addEnabledSecureTransportProtocol(value)
-    this
-  }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
-  }
+  def addEnabledSecureTransportProtocol(value: String):TCPSSLOptions
 
   /**
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value: Int) = {
-    asJava.setIdleTimeout(value)
-    this
-  }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
-  }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
-    asJava.setJdkSslEngineOptions(value.asJava)
-    this
-  }
+  def setIdleTimeout(value: Int):TCPSSLOptions
+  def setJdkSslEngineOptions(value: JdkSSLEngineOptions):TCPSSLOptions
 
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value: JksOptions) = {
-    asJava.setKeyStoreOptions(value.asJava)
-    this
-  }
+  def setKeyStoreOptions(value: JksOptions):TCPSSLOptions
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
-    asJava.setLogActivity(value)
-    this
-  }
-  def getLogActivity = {
-    asJava.getLogActivity()
-  }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
-    asJava.setOpenSslEngineOptions(value.asJava)
-    this
-  }
+  def setLogActivity(value: Boolean):TCPSSLOptions
+  def setOpenSslEngineOptions(value: OpenSSLEngineOptions):TCPSSLOptions
 
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
-    asJava.setPemKeyCertOptions(value.asJava)
-    this
-  }
+  def setPemKeyCertOptions(value: PemKeyCertOptions):TCPSSLOptions
 
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value: PemTrustOptions) = {
-    asJava.setPemTrustOptions(value.asJava)
-    this
-  }
+  def setPemTrustOptions(value: PemTrustOptions):TCPSSLOptions
 
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value: PfxOptions) = {
-    asJava.setPfxKeyCertOptions(value.asJava)
-    this
-  }
+  def setPfxKeyCertOptions(value: PfxOptions):TCPSSLOptions
 
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value: PfxOptions) = {
-    asJava.setPfxTrustOptions(value.asJava)
-    this
-  }
+  def setPfxTrustOptions(value: PfxOptions):TCPSSLOptions
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
-    asJava.setReceiveBufferSize(value)
-    this
-  }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
-  }
+  def setReceiveBufferSize(value: Int):TCPSSLOptions
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
-    asJava.setReuseAddress(value)
-    this
-  }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
-  }
+  def setReuseAddress(value: Boolean):TCPSSLOptions
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
-    asJava.setSendBufferSize(value)
-    this
-  }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
-  }
+  def setSendBufferSize(value: Int):TCPSSLOptions
 
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value: Int) = {
-    asJava.setSoLinger(value)
-    this
-  }
-  def getSoLinger = {
-    asJava.getSoLinger()
-  }
+  def setSoLinger(value: Int):TCPSSLOptions
 
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value: Boolean) = {
-    asJava.setSsl(value)
-    this
-  }
-  def isSsl = {
-    asJava.isSsl()
-  }
+  def setSsl(value: Boolean):TCPSSLOptions
 
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value: Boolean) = {
-    asJava.setTcpKeepAlive(value)
-    this
-  }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
-  }
+  def setTcpKeepAlive(value: Boolean):TCPSSLOptions
 
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value: Boolean) = {
-    asJava.setTcpNoDelay(value)
-    this
-  }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
-  }
+  def setTcpNoDelay(value: Boolean):TCPSSLOptions
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
-    asJava.setTrafficClass(value)
-    this
-  }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
-  }
+  def setTrafficClass(value: Int):TCPSSLOptions
 
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value: JksOptions) = {
-    asJava.setTrustStoreOptions(value.asJava)
-    this
-  }
+  def setTrustStoreOptions(value: JksOptions):TCPSSLOptions
 
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value: Boolean) = {
-    asJava.setUseAlpn(value)
-    this
-  }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
-  }
+  def setUseAlpn(value: Boolean):TCPSSLOptions
 
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
-  }
+  def setUsePooledBuffers(value: Boolean):TCPSSLOptions
 }
 

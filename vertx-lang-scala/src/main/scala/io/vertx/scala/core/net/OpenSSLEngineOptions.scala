@@ -27,6 +27,7 @@ import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 
 class OpenSSLEngineOptions(val asJava: JOpenSSLEngineOptions) {
 
+
   /**
     */
 

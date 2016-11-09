@@ -30,6 +30,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class AddressResolverOptions(val asJava: JAddressResolverOptions) {
 
+
   /**
     * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
     * use this to set a maximum value to all responses TTL.

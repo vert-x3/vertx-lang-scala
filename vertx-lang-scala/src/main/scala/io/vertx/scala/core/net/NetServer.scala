@@ -100,7 +100,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.listen(Int,String):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
+    * Like [[io.vertx.scala.core.net.NetServer!.listen(port:Int,host:String):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @param host the host to listen on
     * @return future that will be notified when listening or failed
@@ -126,7 +126,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.listen(Int):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
+    * Like [[io.vertx.scala.core.net.NetServer!.listen(port:Int):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @return future that will be notified when listening or failed
     */

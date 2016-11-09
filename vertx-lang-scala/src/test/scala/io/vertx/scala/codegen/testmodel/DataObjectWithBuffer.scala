@@ -27,6 +27,7 @@ import io.vertx.scala.core.buffer.Buffer
   */
 
 class DataObjectWithBuffer(val asJava: JDataObjectWithBuffer) {
+
   def setBuffer(value: Buffer) = {
     asJava.setBuffer(value.asJava)
     this

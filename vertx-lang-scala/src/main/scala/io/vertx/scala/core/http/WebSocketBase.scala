@@ -48,7 +48,7 @@ trait WebSocketBase
 def end(t: Buffer): Unit
 
   /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.WebSocketBase]]
+  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.WebSocketBase]]
   * @return true if write queue is full
   */
 def writeQueueFull(): Boolean
@@ -172,7 +172,7 @@ object WebSocketBase {
     }
 
     /**
-      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.WebSocketBase]]
+      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.WebSocketBase]]
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {

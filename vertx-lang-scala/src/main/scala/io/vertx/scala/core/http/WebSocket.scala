@@ -43,7 +43,7 @@ class WebSocket(private val _asJava: JWebSocket)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.WebSocket]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.WebSocket]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {

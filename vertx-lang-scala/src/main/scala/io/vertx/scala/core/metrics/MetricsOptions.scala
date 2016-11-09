@@ -28,6 +28,7 @@ import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
 
 class MetricsOptions(val asJava: JMetricsOptions) {
 
+
   /**
     * Set whether metrics will be enabled on the Vert.x instance.
     */

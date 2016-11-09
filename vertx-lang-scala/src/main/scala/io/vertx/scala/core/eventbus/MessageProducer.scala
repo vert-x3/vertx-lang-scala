@@ -42,7 +42,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer!.setWriteQueueMaxSize(Int):io.vertx.scala.core.eventbus.MessageProducer[T]]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.eventbus.MessageProducer[T]]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -50,7 +50,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer!.write(T):io.vertx.scala.core.eventbus.MessageProducer[T]]].
+    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer!.write(data:T):io.vertx.scala.core.eventbus.MessageProducer[T]]].
     * @param message the message to send
     * @return reference to this for fluency
     */

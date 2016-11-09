@@ -47,6 +47,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class JksOptions(val asJava: JJksOptions) {
 
+
   /**
     * Set the password for the key store
     */

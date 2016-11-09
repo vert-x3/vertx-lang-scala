@@ -47,6 +47,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class PfxOptions(val asJava: JPfxOptions) {
 
+
   /**
     * Set the password
     */

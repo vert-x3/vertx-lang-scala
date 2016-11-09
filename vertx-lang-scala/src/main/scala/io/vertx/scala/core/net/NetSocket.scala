@@ -53,7 +53,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket!.setWriteQueueMaxSize(Int):io.vertx.scala.core.net.NetSocket]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.net.NetSocket]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -171,7 +171,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(filename:String):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @return future
@@ -183,7 +183,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String,Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(filename:String,offset:Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
@@ -196,7 +196,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(String,Long,Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket!.sendFile(filename:String,offset:Long,length:Long):io.vertx.scala.core.net.NetSocket]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset

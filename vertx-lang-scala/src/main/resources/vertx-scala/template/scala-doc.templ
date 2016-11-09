@@ -173,7 +173,7 @@
                 ret += ',';
               }
               first = false;
-              ret += toScalaDocType(n.type.toString());
+              ret += n.name+':'+toScalaDocType(n.type.toString());
             }
             ret += "):" + toScalaDocType(elt.type.returnType.toString);
           }

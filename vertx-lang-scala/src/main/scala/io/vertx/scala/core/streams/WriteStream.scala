@@ -76,7 +76,7 @@ def end(t: T): Unit
 def setWriteQueueMaxSize(maxSize: Int): WriteStream[T]
 
   /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(Int):io.vertx.scala.core.streams.WriteStream[T]]]
+  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.streams.WriteStream[T]]]
   * @return true if write queue is full
   */
 def writeQueueFull(): Boolean
@@ -158,7 +158,7 @@ object WriteStream {
     }
 
     /**
-      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(Int):io.vertx.scala.core.streams.WriteStream[T]]]
+      * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.streams.WriteStream[T]]]
       * @return true if write queue is full
       */
     def writeQueueFull(): Boolean = {

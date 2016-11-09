@@ -30,7 +30,7 @@ import io.vertx.core.http.{WebSocket => JWebSocket}
   * When the connection attempt is successful, the stream handler is called back with the [[io.vertx.scala.core.http.WebSocket]]
   * argument, immediately followed by a call to the end handler. When the connection attempt fails, the exception handler is invoked.
   * 
-  * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream!.handler(io.vertx.scala.core.Handler[io.vertx.scala.core.http.WebSocket]):io.vertx.scala.core.http.WebSocketStream]] method is called with a non null handler, the other handlers should be
+  * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream!.handler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.http.WebSocket]):io.vertx.scala.core.http.WebSocketStream]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
 class WebSocketStream(private val _asJava: JWebSocketStream) 

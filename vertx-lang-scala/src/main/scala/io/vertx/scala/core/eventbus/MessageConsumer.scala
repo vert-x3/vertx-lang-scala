@@ -28,12 +28,12 @@ import io.vertx.core.eventbus.{Message => JMessage}
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
   * be read from.
   * 
-  * The [[io.vertx.scala.core.eventbus.EventBus!.consumer(String):io.vertx.scala.core.eventbus.MessageConsumer[T]]] or [[io.vertx.scala.core.eventbus.EventBus!.localConsumer(String):io.vertx.scala.core.eventbus.MessageConsumer[T]]]
+  * The [[io.vertx.scala.core.eventbus.EventBus!.consumer(address:String):io.vertx.scala.core.eventbus.MessageConsumer[T]]] or [[io.vertx.scala.core.eventbus.EventBus!.localConsumer(address:String):io.vertx.scala.core.eventbus.MessageConsumer[T]]]
   * creates a new consumer, the returned consumer is not yet registered against the event bus. Registration
-  * is effective after the [[io.vertx.scala.core.eventbus.MessageConsumer!.handler(io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]] method is invoked.
+  * is effective after the [[io.vertx.scala.core.eventbus.MessageConsumer!.handler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]] method is invoked.
   *
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer!.unregister():Unit]] method or by calling the
-  * [[io.vertx.scala.core.eventbus.MessageConsumer!.handler(io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]] with a null value..
+  * [[io.vertx.scala.core.eventbus.MessageConsumer!.handler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]] with a null value..
   */
 class MessageConsumer[T](private val _asJava: JMessageConsumer[T]) 
     extends ReadStream[Message[T]] {

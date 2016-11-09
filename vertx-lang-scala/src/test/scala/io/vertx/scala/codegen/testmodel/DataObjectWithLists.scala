@@ -27,6 +27,7 @@ import io.vertx.core.json.JsonObject
   */
 
 class DataObjectWithLists(val asJava: JDataObjectWithLists) {
+
   def setBooleanValues(value: scala.collection.mutable.Buffer[Boolean]) = {
     asJava.setBooleanValues(value.map(Boolean.box).asJava)
     this

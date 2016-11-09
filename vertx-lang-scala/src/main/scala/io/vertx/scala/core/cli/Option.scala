@@ -30,6 +30,7 @@ import io.vertx.core.cli.{Option => JOption}
 
 class Option(val asJava: JOption) {
 
+
   /**
     * Sets te arg name for this option.
     */
