@@ -25,6 +25,7 @@ import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
   * A common base object for authentication options.
   */
 
-class AuthOptions(val asJava: JAuthOptions) {
+trait AuthOptions {
+
 }
 

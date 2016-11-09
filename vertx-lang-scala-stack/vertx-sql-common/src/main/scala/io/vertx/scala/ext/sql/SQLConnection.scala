@@ -22,7 +22,9 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
+import    io.vertx.scala.ext.sql.UpdateResult
 import io.vertx.ext.sql.{ResultSet => JResultSet}
+import    io.vertx.scala.ext.sql.ResultSet
 import io.vertx.ext.sql.TransactionIsolation
 
 /**

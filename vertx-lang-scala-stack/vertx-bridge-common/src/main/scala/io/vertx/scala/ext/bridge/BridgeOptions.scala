@@ -27,6 +27,7 @@ import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
 
 class BridgeOptions(val asJava: JBridgeOptions) {
 
+
   /**
     * Sets the list of inbound permitted options.
     */
