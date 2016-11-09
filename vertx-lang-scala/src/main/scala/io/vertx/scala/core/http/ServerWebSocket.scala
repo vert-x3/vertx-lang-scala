@@ -32,7 +32,7 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * Represents a server side WebSocket.
   * 
-  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer!.websocketHandler(io.vertx.scala.core.Handler[io.vertx.scala.core.http.ServerWebSocket]):io.vertx.scala.core.http.HttpServer]] or provided
+  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer!.websocketHandler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.http.ServerWebSocket]):io.vertx.scala.core.http.HttpServer]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest!.upgrade():io.vertx.scala.core.http.ServerWebSocket]]ed.
   */
 class ServerWebSocket(private val _asJava: JServerWebSocket) 
@@ -48,7 +48,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.ServerWebSocket]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.ServerWebSocket]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {

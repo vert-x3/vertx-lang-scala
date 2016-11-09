@@ -30,6 +30,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class NetServerOptions(val asJava: JNetServerOptions) {
 
+
   /**
     * Set the accept back log
     */

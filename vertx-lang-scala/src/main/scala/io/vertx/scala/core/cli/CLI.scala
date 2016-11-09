@@ -146,7 +146,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI!.setOptions(java.util.List[io.vertx.scala.core.cli.Option]):io.vertx.scala.core.cli.CLI]]`, this method does not remove the existing options.
+    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI!.setOptions(options:java.util.List[io.vertx.scala.core.cli.Option]):io.vertx.scala.core.cli.CLI]]`, this method does not remove the existing options.
     * The given list is appended to the existing list.
     * @param options the options, must not be `null`
     * @return the current CLI instance
@@ -185,7 +185,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI!.setArguments(java.util.List[io.vertx.scala.core.cli.Argument]):io.vertx.scala.core.cli.CLI]], this method does not remove the existing arguments.
+    * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI!.setArguments(args:java.util.List[io.vertx.scala.core.cli.Argument]):io.vertx.scala.core.cli.CLI]], this method does not remove the existing arguments.
     * The given list is appended to the existing list.
     * @param args the arguments, must not be `null`
     * @return the current CLI instance

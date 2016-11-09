@@ -28,6 +28,7 @@ import io.vertx.core.cli.{Argument => JArgument}
 
 class Argument(val asJava: JArgument) {
 
+
   /**
     * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
     */

@@ -49,7 +49,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile!.setWriteQueueMaxSize(Int):io.vertx.scala.core.file.AsyncFile]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.file.AsyncFile]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {

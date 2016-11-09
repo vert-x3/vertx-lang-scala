@@ -68,7 +68,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   def asJava: JHttpClientRequest = _asJava
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.HttpClientRequest]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.HttpClientRequest]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -272,14 +272,14 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpClientRequest!.end(io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String in UTF-8 encoding
+    * Same as [[io.vertx.scala.core.http.HttpClientRequest!.end(chunk:io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String in UTF-8 encoding
     */
   def end(chunk: String): Unit = {
     _asJava.end(chunk)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpClientRequest!.end(io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String with the specified encoding
+    * Same as [[io.vertx.scala.core.http.HttpClientRequest!.end(chunk:io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String with the specified encoding
     */
   def end(chunk: String, enc: String): Unit = {
     _asJava.end(chunk, enc)
@@ -333,7 +333,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     *   <li>[[io.vertx.scala.core.http.HttpClientRequest!.getHost():String]]</li>
     * </ul>
     *
-    * In addition the handler should call the [[io.vertx.scala.core.http.HttpClientRequest!.handler(io.vertx.scala.core.Handler[io.vertx.scala.core.http.HttpClientResponse]):io.vertx.scala.core.http.HttpClientRequest]] method to set an handler to
+    * In addition the handler should call the [[io.vertx.scala.core.http.HttpClientRequest!.handler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.http.HttpClientResponse]):io.vertx.scala.core.http.HttpClientRequest]] method to set an handler to
     * process the response.<p/>
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
@@ -393,7 +393,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * The frame is sent immediatly and is not subject to flow control.
     *
     * This method must be called after the request headers have been sent and only for the protocol HTTP/2.
-    * The [[io.vertx.scala.core.http.HttpClientRequest!.sendHead(io.vertx.scala.core.Handler[io.vertx.scala.core.http.HttpVersion]):io.vertx.scala.core.http.HttpClientRequest]] should be used for this purpose.
+    * The [[io.vertx.scala.core.http.HttpClientRequest!.sendHead(completionHandler:io.vertx.scala.core.Handler[io.vertx.scala.core.http.HttpVersion]):io.vertx.scala.core.http.HttpClientRequest]] should be used for this purpose.
     * @param type the 8-bit frame type
     * @param flags the 8-bit frame flags
     * @param payload the frame payload
@@ -412,7 +412,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpClientRequest!.writeCustomFrame(Int,Int,io.vertx.scala.core.buffer.Buffer):io.vertx.scala.core.http.HttpClientRequest]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+    * Like [[io.vertx.scala.core.http.HttpClientRequest!.writeCustomFrame(type:Int,flags:Int,payload:io.vertx.scala.core.buffer.Buffer):io.vertx.scala.core.http.HttpClientRequest]] but with an [[io.vertx.scala.core.http.HttpFrame]].
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpClientRequest = {

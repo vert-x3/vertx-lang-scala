@@ -114,9 +114,9 @@ import @{importedType.raw.translateName("scala")}\n
 \n
 
 @if{concrete}
-	@includeNamed{'classbody.templ'; indentation=''}
+	@includeNamed{'class-concrete.templ'; indentation=''}
 @else{}
-	@includeNamed{'traitbody.templ'}
+	@includeNamed{'class-trait.templ'}
 @end{}
 }\n
 \n
@@ -151,7 +151,7 @@ import @{importedType.raw.translateName("scala")}\n
 		    new @{writeImplType(type)}(_asJava)\n
 		\n
 		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
-			@includeNamed{'classbody.templ'; indentation='  '}
+			@includeNamed{'class-concrete.templ'; indentation='  '}
 		  }\n\n
 	}\n
 @end{}

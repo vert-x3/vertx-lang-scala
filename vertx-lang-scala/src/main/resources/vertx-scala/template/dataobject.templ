@@ -35,9 +35,7 @@ import io.vertx.lang.scala.json.Json._\n
 import @{typeToAliasedType(type)+"\n"}
 
 @foreach{importedType : importedTypes}
-	@if{superType == importedType}
-	@else{superTypes.contains(importedType)}
-	@else{importedType.kind == CLASS_API}
+	@if{importedType.kind == CLASS_API}
 import @{typeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
@@ -65,114 +63,46 @@ import @{importedType.raw.translateName("scala")}\n
 @end{}
 \n
 
-
-class @{typeName}(val asJava: @{jTypeName}) {\n
-@foreach{property:properties}
-@if{property.doc != null}
-\n
-  /**\n
-@{renderDoc("    *", property.doc, renderDocLink)}
-    */\n
-@end{}
-@if{property.adder}
-@if{property.isMap}
-  def @{property.adderMethod}(key: String, value: @{toScalaType(property.type)}) = {\n
-    asJava.@{property.adderMethod}(key, value)\n
-    this\n
-  }\n
+@code{
+  var hasSuperClass = false;
+  for(property:properties) {
+    if(!property.declared){
+      hasSuperClass = true;
+    }
+  }
+  var isInterface = true;
+  var meths = "";
+  var overrideIt = new java.util.HashSet();
+  if(superType != null) {
+    var clazz = Thread.currentThread().getContextClassLoader().loadClass(superType.getName());
+    isInterface = clazz.isInterface();
+    if(!isInterface) {
+      for(method:clazz.getMethods()) {
+        meths += "// "+method.getName()+"(";
+        var first = true;
+        for(param:method.getParameterTypes()) {
+          if(!first) {
+            meths +=  ',';
+          }
+          first = false;
+          meths += param.getName();
+        }
+        meths += "):" +method.getReturnType().getName();
+        overrideIt.add(meths);
+      }
+    }
+  }
+}
+@if{concrete}
+	class @{typeName}(val asJava: @{jTypeName})
 @else{}
-  def @{property.adderMethod}(value: @{toScalaType(property.type)}) = {\n
-@if{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.adderMethod}(value.asJava)\n
-@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
- property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
- property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
-    asJava.@{property.adderMethod}(value)\n
-@else{}
-    asJava.@{property.adderMethod}(value.asJava)\n
+	trait @{typeName}
 @end{}
-    this\n
-  }\n
-@end{}
-@end{}
-@if{property.setter}
-@if{property.isList}
-  def @{property.setterMethod}(value: scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
-@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
-@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
-    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
-@else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
-@end{}
-    this\n
-  }\n
-@else{property.isSet}
-  def @{property.setterMethod}(value: Set[@{toScalaType(property.type)}]) = {\n
-@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
-@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
-    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
-@else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
-@end{}
-    this\n
-  }\n
-@else{property.isMap}
-  def @{property.setterMethod}(value: Map[String, @{toScalaType(property.type)}]) = {\n
-@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
-    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box).asJava)\n
-@else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.mapValues(_.asJava).asJava)\n
-@else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
-@end{}
-    this\n
-  }\n
-@else{}
-  def @{property.setterMethod}(value: @{toScalaType(property.type)}) = {\n
-@if{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.asJava)\n
-@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
-  property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
-  property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
-    asJava.@{property.setterMethod}(value)\n
-@else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
-@end{}
-    this\n
-  }\n
-@end{}
-@end{}
-@comment{Some necessary filtering as PropertyInfo has no information about static methods}
-@if{(property.setter || property.adder) && property.getterMethod != null}
-  def @{property.getterMethod} = {\n
-    asJava.@{property.getterMethod}()\n
-  }\n
-@end{}
-@end{}
-}\n
+ {\n
 \n
 
 @if{concrete}
-object @{type.raw.simpleName} {\n
-  \n
-  def apply() = {\n
-    new @{typeName}(new @{jTypeName}(emptyObj()))\n
-  }\n
-  \n
-  def apply(t: @{jTypeName}) = {\n
-    if(t != null)\n
-      new @{typeName}(t)\n
-    else\n
-      null\n
-  }\n
-  \n
-  def fromJson(json: JsonObject):@{typeName} = {\n
-    if(json != null)\n
-      new @{typeName}(new @{jTypeName}(json))\n
-    else\n
-      null\n
-  }\n
-}\n
+	@includeNamed{'dataobject-concrete.templ'}
+@else{}
+	@includeNamed{'dataobject-trait.templ'}
 @end{}

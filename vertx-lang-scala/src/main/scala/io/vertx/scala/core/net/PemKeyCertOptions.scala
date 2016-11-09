@@ -69,6 +69,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
 
+
   /**
     * Set the path to the certificate
     */

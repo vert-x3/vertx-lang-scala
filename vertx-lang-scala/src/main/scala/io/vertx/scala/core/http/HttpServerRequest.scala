@@ -280,7 +280,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * Be aware that the attributes will only be available after the whole body has been received, i.e. after
     * the request end handler has been called.
     * 
-    * [[io.vertx.scala.core.http.HttpServerRequest!.setExpectMultipart(Boolean):io.vertx.scala.core.http.HttpServerRequest]] must be called first before trying to get the form attributes.
+    * [[io.vertx.scala.core.http.HttpServerRequest!.setExpectMultipart(expect:Boolean):io.vertx.scala.core.http.HttpServerRequest]] must be called first before trying to get the form attributes.
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {

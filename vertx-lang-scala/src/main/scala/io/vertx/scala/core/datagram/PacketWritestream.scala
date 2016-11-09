@@ -51,7 +51,7 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream!.setWriteQueueMaxSize(Int):io.vertx.scala.core.datagram.PacketWritestream]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.datagram.PacketWritestream]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {

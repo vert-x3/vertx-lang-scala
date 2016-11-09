@@ -55,7 +55,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   def asJava: JHttpServerResponse = _asJava
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse!.setWriteQueueMaxSize(Int):io.vertx.scala.core.http.HttpServerResponse]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse!.setWriteQueueMaxSize(maxSize:Int):io.vertx.scala.core.http.HttpServerResponse]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -226,7 +226,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.end(io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String in UTF-8 encoding before ending the response.
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.end(chunk:io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String in UTF-8 encoding before ending the response.
     * @param chunk the string to write before ending the response
     */
   def end(chunk: String): Unit = {
@@ -234,7 +234,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.end(io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String with the specified encoding before ending the response.
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.end(chunk:io.vertx.scala.core.buffer.Buffer):Unit]] but writes a String with the specified encoding before ending the response.
     * @param chunk the string to write before ending the response
     * @param enc the encoding to use
     */
@@ -262,7 +262,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(String,Long):io.vertx.scala.core.http.HttpServerResponse]] using offset `0` which means starting from the beginning of the file.
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(filename:String,offset:Long):io.vertx.scala.core.http.HttpServerResponse]] using offset `0` which means starting from the beginning of the file.
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
@@ -272,7 +272,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(String,Long,Long):io.vertx.scala.core.http.HttpServerResponse]] using length `Long.MAX_VALUE` which means until the end of the
+    * Same as [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(filename:String,offset:Long,length:Long):io.vertx.scala.core.http.HttpServerResponse]] using length `Long.MAX_VALUE` which means until the end of the
     * file.
     * @param filename path to the file to serve
     * @param offset offset to start serving from
@@ -300,7 +300,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(String):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been completely
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(filename:String):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
     * @return future that will be called on completion
@@ -312,7 +312,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(String,Long):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been completely
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(filename:String,offset:Long):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
     * @param offset the offset to serve from
@@ -325,7 +325,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(String,Long,Long):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.sendFile(filename:String,offset:Long,length:Long):io.vertx.scala.core.http.HttpServerResponse]] but providing a handler which will be notified once the file has been
     * completely written to the wire.
     * @param filename path to the file to serve
     * @param offset the offset to serve from
@@ -405,7 +405,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(io.vertx.scala.core.http.HttpMethod,String,String,io.vertx.scala.core.MultiMap,io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with no headers.
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(method:io.vertx.scala.core.http.HttpMethod,host:String,path:String,headers:io.vertx.scala.core.MultiMap,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with no headers.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -414,7 +414,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(io.vertx.scala.core.http.HttpMethod,String,String,io.vertx.scala.core.MultiMap,io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with the host copied from the current request.
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(method:io.vertx.scala.core.http.HttpMethod,host:String,path:String,headers:io.vertx.scala.core.MultiMap,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -423,7 +423,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(io.vertx.scala.core.http.HttpMethod,String,String,io.vertx.scala.core.MultiMap,io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with the host copied from the current request.
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.push(method:io.vertx.scala.core.http.HttpMethod,host:String,path:String,headers:io.vertx.scala.core.MultiMap,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.http.HttpServerResponse]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -483,7 +483,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse!.writeCustomFrame(Int,Int,io.vertx.scala.core.buffer.Buffer):io.vertx.scala.core.http.HttpServerResponse]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+    * Like [[io.vertx.scala.core.http.HttpServerResponse!.writeCustomFrame(type:Int,flags:Int,payload:io.vertx.scala.core.buffer.Buffer):io.vertx.scala.core.http.HttpServerResponse]] but with an [[io.vertx.scala.core.http.HttpFrame]].
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {
