@@ -28,6 +28,7 @@ import io.vertx.core.json.JsonObject
 
 class FindOptions(val asJava: JFindOptions) {
 
+
   /**
     * Set the fields
     */

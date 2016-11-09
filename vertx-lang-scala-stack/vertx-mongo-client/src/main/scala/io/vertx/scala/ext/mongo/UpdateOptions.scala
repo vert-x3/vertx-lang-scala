@@ -27,6 +27,7 @@ import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
 
 class UpdateOptions(val asJava: JUpdateOptions) {
 
+
   /**
     * Set whether multi is enabled
     */
