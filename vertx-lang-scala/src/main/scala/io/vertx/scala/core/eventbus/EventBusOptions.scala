@@ -35,8 +35,6 @@ import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
-import io.vertx.scala.core.net.TCPSSLOptions
 
 /**
   * Options to configure the event bus.

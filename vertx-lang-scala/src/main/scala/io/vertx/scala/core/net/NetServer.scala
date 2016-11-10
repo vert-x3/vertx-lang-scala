@@ -43,7 +43,7 @@ class NetServer(private val _asJava: JNetServer)
 
   /**
     * Return the connect stream for this server. The server can only have at most one handler at any one time.
-    * As the server accepts TCP or SSL connections it creates an instance of [[io.vertx.scala.core.net.NetSocket]] and passes it to the
+    * As the server accepts TCP or SSL connections it creates an instance of [[NetSocket]] and passes it to the
     * connect stream .
     * @return the connect stream
     */
@@ -53,7 +53,7 @@ class NetServer(private val _asJava: JNetServer)
 
   /**
     * Supply a connect handler for this server. The server can only have at most one connect handler at any one time.
-    * As the server accepts TCP or SSL connections it creates an instance of [[io.vertx.scala.core.net.NetSocket]] and passes it to the
+    * As the server accepts TCP or SSL connections it creates an instance of [[NetSocket]] and passes it to the
     * connect handler.
     * @return a reference to this, so the API can be used fluently
     */
@@ -74,7 +74,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.listen():io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
+    * Like [[NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return future that will be notified when listening or failed
     */
   def listenFuture(): concurrent.Future[NetServer] = {
@@ -100,7 +100,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.listen(port:Int,host:String):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
+    * Like [[NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @param host the host to listen on
     * @return future that will be notified when listening or failed
@@ -126,7 +126,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.listen(port:Int):io.vertx.scala.core.net.NetServer]] but providing a handler that will be notified when the server is listening, or fails.
+    * Like [[NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @param port the port to listen on
     * @return future that will be notified when listening or failed
     */
@@ -145,7 +145,7 @@ class NetServer(private val _asJava: JNetServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.net.NetServer!.close():Unit]] but supplying a handler that will be notified when close is complete.
+    * Like [[NetServer#close]] but supplying a handler that will be notified when close is complete.
     * @return the future
     */
   def closeFuture(): concurrent.Future[Unit] = {

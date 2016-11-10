@@ -45,6 +45,7 @@ import io.vertx.scala.core.net.ProxyOptions
 
 class StompClientOptions(val asJava: JStompClientOptions) {
 
+
   /**
     * Sets the list of STOMP protocol versions accepted by the client. The list must be ordered from the lowest
     * version to the highest. By default the following list is used: `1.0, 1.1, 1.2`

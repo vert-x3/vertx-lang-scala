@@ -33,9 +33,9 @@ import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConverters._\n
 import io.vertx.lang.scala.json.Json._\n
 import @{typeToAliasedType(type)+"\n"}
-
 @foreach{importedType : importedTypes}
-	@if{importedType.kind == CLASS_API}
+	@if{superType != null && (superType.toString() == importedType.toString())}
+	@else{importedType.kind == CLASS_API}
 import @{typeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
@@ -63,36 +63,6 @@ import @{importedType.raw.translateName("scala")}\n
 @end{}
 \n
 
-@code{
-  var hasSuperClass = false;
-  for(property:properties) {
-    if(!property.declared){
-      hasSuperClass = true;
-    }
-  }
-  var isInterface = true;
-  var meths = "";
-  var overrideIt = new java.util.HashSet();
-  if(superType != null) {
-    var clazz = Thread.currentThread().getContextClassLoader().loadClass(superType.getName());
-    isInterface = clazz.isInterface();
-    if(!isInterface) {
-      for(method:clazz.getMethods()) {
-        meths += "// "+method.getName()+"(";
-        var first = true;
-        for(param:method.getParameterTypes()) {
-          if(!first) {
-            meths +=  ',';
-          }
-          first = false;
-          meths += param.getName();
-        }
-        meths += "):" +method.getReturnType().getName();
-        overrideIt.add(meths);
-      }
-    }
-  }
-}
 @if{concrete}
 	class @{typeName}(val asJava: @{jTypeName})
 @else{}

@@ -30,6 +30,7 @@ import io.vertx.scala.core.http.HttpClientOptions
 
 class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
 
+
   /**
     * Set the options for authentication.
     */

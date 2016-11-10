@@ -20,12 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
+import io.vertx.ext.sql.TransactionIsolation
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
-import    io.vertx.scala.ext.sql.UpdateResult
 import io.vertx.ext.sql.{ResultSet => JResultSet}
-import    io.vertx.scala.ext.sql.ResultSet
-import io.vertx.ext.sql.TransactionIsolation
 
 /**
   * Represents a connection to a SQL database
@@ -68,6 +67,17 @@ class SQLConnection(private val _asJava: JSQLConnection) {
   }
 
   /**
+    * Executes the given SQL <code>SELECT</code> statement which returns the results of the query as a read stream.
+    * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
+    * @return the future which is called once the operation completes. It will return a `SQLRowStream`.
+    */
+  def queryStreamFuture(sql: String): concurrent.Future[SQLRowStream] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLRowStream,SQLRowStream]((x => if (x == null) null else SQLRowStream.apply(x)))
+    _asJava.queryStream(sql, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  /**
     * Executes the given SQL <code>SELECT</code> prepared statement which returns the results of the query.
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     * @param params these are the parameters to fill the statement.
@@ -76,6 +86,18 @@ class SQLConnection(private val _asJava: JSQLConnection) {
   def queryWithParamsFuture(sql: String, params: JsonArray): concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet,ResultSet]((x => io.vertx.scala.ext.sql.ResultSet(x)))
     _asJava.queryWithParams(sql, params, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  /**
+    * Executes the given SQL <code>SELECT</code> statement which returns the results of the query as a read stream.
+    * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
+    * @param params these are the parameters to fill the statement.
+    * @return the future which is called once the operation completes. It will return a `SQLRowStream`.
+    */
+  def queryStreamWithParamsFuture(sql: String, params: JsonArray): concurrent.Future[SQLRowStream] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLRowStream,SQLRowStream]((x => if (x == null) null else SQLRowStream.apply(x)))
+    _asJava.queryStreamWithParams(sql, params, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

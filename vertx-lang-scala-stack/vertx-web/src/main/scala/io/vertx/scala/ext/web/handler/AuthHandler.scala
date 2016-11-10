@@ -28,7 +28,7 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * An auth handler allows your application to provide authentication/authorisation support.
   * 
-  * Auth handler requires a [[io.vertx.scala.ext.web.handler.SessionHandler]] to be on the routing chain before it.
+  * Auth handler requires a [[SessionHandler]] to be on the routing chain before it.
   */
 trait AuthHandler {
 

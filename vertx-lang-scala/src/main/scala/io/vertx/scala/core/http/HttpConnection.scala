@@ -30,9 +30,9 @@ import io.vertx.core.http.{Http2Settings => JHttp2Settings}
   * <p/>
   * HTTP/1.x connection provides an limited implementation, the following methods are implemented:
   * <ul>
-  *   <li>[[io.vertx.scala.core.http.HttpConnection!.close():Unit]]</li>
-  *   <li>[[io.vertx.scala.core.http.HttpConnection!.closeHandler(handler:io.vertx.scala.core.Handler[Void]):io.vertx.scala.core.http.HttpConnection]]</li>
-  *   <li>[[io.vertx.scala.core.http.HttpConnection!.exceptionHandler(handler:io.vertx.scala.core.Handler[Throwable]):io.vertx.scala.core.http.HttpConnection]]</li>
+  *   <li>[[HttpConnection#close]]</li>
+  *   <li>[[HttpConnection#closeHandler]]</li>
+  *   <li>[[HttpConnection#exceptionHandler]]</li>
   * </ul>
   */
 class HttpConnection(private val _asJava: JHttpConnection) {
@@ -61,7 +61,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpConnection!.goAway(errorCode:Long,lastStreamId:Int):io.vertx.scala.core.http.HttpConnection]] with a last stream id `2^31-1`.
+    * Like [[HttpConnection#goAway]] with a last stream id `2^31-1`.
     */
   def goAway(errorCode: Long): HttpConnection = {
     _asJava.goAway(errorCode)
@@ -69,7 +69,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpConnection!.goAway(errorCode:Long,lastStreamId:Int,debugData:io.vertx.scala.core.buffer.Buffer):io.vertx.scala.core.http.HttpConnection]] with no buffer.
+    * Like [[HttpConnection#goAway]] with no buffer.
     */
   def goAway(errorCode: Long, lastStreamId: Int): HttpConnection = {
     _asJava.goAway(errorCode, lastStreamId)

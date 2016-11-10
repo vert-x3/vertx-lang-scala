@@ -66,7 +66,7 @@ class SharedData(private val _asJava: JSharedData) {
   }
 
   /**
-    * Like [[io.vertx.scala.core.shareddata.SharedData!.getLock(name:String,resultHandler:io.vertx.lang.scala.AsyncResult):Unit]] but specifying a timeout. If the lock is not obtained within the timeout
+    * Like [[SharedData#getLockFuture]] but specifying a timeout. If the lock is not obtained within the timeout
     * a failure will be sent to the handler
     * @param name the name of the lock
     * @param timeout the timeout in ms

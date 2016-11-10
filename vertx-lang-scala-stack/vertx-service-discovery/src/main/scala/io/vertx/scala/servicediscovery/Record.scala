@@ -29,6 +29,7 @@ import io.vertx.core.json.JsonObject
 
 class Record(val asJava: JRecord) {
 
+
   /**
     * Sets the json object describing the location of the service. By convention, this json object should contain
     * the <a href="../../../../../../cheatsheet/Record.html">Record</a> entry.

@@ -23,8 +23,8 @@ import io.vertx.ext.shell.term.{Pty => JPty}
 import io.vertx.ext.shell.term.{Tty => JTty}
 
 /**
-  * A pseudo terminal used for controlling a [[io.vertx.scala.ext.shell.term.Tty]]. This interface acts as a pseudo
-  * terminal master, [[io.vertx.scala.ext.shell.term.Pty#slave]] returns the assocated slave pseudo terminal.
+  * A pseudo terminal used for controlling a [[Tty]]. This interface acts as a pseudo
+  * terminal master, [[Pty#slave]] returns the assocated slave pseudo terminal.
   */
 class Pty(private val _asJava: JPty) {
 

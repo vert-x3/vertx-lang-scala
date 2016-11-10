@@ -25,8 +25,8 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 
 /**
-  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
-  * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
+  * A [[ReadStream]] of [[ServerWebSocket]], used for
+  * notifying web socket connections to a [[HttpServer]].
   */
 class ServerWebSocketStream(private val _asJava: JServerWebSocketStream) 
     extends ReadStream[ServerWebSocket] {

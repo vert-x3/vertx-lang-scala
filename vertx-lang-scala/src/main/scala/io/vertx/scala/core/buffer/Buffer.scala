@@ -190,7 +190,7 @@ class Buffer(private val _asJava: JBuffer) {
   }
 
   /**
-    * Returns a copy of a sub-sequence the Buffer as a [[io.vertx.scala.core.buffer.Buffer]] starting at position `start`
+    * Returns a copy of a sub-sequence the Buffer as a [[Buffer]] starting at position `start`
     * and ending at position `end - 1`
     */
   def getBuffer(start: Int, end: Int): Buffer = {

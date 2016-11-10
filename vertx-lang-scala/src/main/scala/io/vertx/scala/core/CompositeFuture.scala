@@ -24,7 +24,7 @@ import io.vertx.core.{Future => JFuture}
 import java.util.function.{Function => JFunction}
 
 /**
-  * The composite future wraps a list of [[io.vertx.scala.core.Future futures]], it is useful when several futures
+  * The composite future wraps a list of [[Future]], it is useful when several futures
   * needs to be coordinated.
   */
 class CompositeFuture(private val _asJava: JCompositeFuture) 

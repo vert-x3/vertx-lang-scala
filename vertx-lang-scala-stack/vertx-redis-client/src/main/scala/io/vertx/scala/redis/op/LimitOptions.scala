@@ -25,6 +25,7 @@ import io.vertx.redis.op.{LimitOptions => JLimitOptions}
   */
 
 class LimitOptions(val asJava: JLimitOptions) {
+
 }
 
 object LimitOptions {

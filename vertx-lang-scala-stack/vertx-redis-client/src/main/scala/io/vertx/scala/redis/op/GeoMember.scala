@@ -26,6 +26,7 @@ import io.vertx.redis.op.{GeoMember => JGeoMember}
 
 class GeoMember(val asJava: JGeoMember) {
 
+
   /**
     * Set Latitude as per EPSG:900913 / EPSG:3785 / OSGEO:41001
     */

@@ -25,6 +25,7 @@ import io.vertx.redis.op.{ScanOptions => JScanOptions}
   */
 
 class ScanOptions(val asJava: JScanOptions) {
+
   def setCount(value: Int) = {
     asJava.setCount(value)
     this

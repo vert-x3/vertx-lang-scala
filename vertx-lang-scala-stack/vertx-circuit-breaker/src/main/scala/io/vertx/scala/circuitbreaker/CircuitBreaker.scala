@@ -38,7 +38,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   /**
     * Closes the circuit breaker. It stops sending events on its state on the event bus.
     * This method is not related to the `close` state of the circuit breaker. To set the circuit breaker in the
-    * `close` state, use [[io.vertx.scala.circuitbreaker.CircuitBreaker#reset]].
+    * `close` state, use [[CircuitBreaker#reset]].
     */
   def close(): CircuitBreaker = {
     _asJava.close()
@@ -48,7 +48,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   /**
     * Sets a  invoked when the circuit breaker state switches to open.
     * @param handler the handler, must not be `null`
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def openHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.openHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
@@ -58,7 +58,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   /**
     * Sets a  invoked when the circuit breaker state switches to half-open.
     * @param handler the handler, must not be `null`
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def halfOpenHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.halfOpenHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
@@ -68,7 +68,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   /**
     * Sets a  invoked when the circuit breaker state switches to close.
     * @param handler the handler, must not be `null`
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def closeHandler(handler: () => Unit): CircuitBreaker = {
     _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
@@ -97,7 +97,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   }
 
   /**
-    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
+    * Same as [[CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
     * @param operation the operation
     * @return a future object completed when the operation or its fallback completes
     */
@@ -106,11 +106,11 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   }
 
   /**
-    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeAndReportWithFallback]] but using the circuit breaker default
+    * Same as [[CircuitBreaker#executeAndReportWithFallback]] but using the circuit breaker default
     * fallback.
     * @param resultFuture the future on which the operation result is reported
     * @param operation the operation
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def executeAndReport[T](resultFuture: Future[T], operation: Future[T] => Unit): CircuitBreaker = {
     _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation))
@@ -127,14 +127,14 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * circuit breaker also monitor the completion of the operation before a configure timeout. The operation is
     * considered as failed if it does not terminate in time.
     * 
-    * Unlike [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]],  this method does return a  object, but
+    * Unlike [[CircuitBreaker#executeWithFallback]],  this method does return a  object, but
     * let the caller pass a  object on which the result is reported. If the fallback is called, the future
     * is successfully completed with the value returned by the fallback function. If the fallback throws an exception,
     * the future is marked as failed.
     * @param resultFuture the future on which the operation result is reported
     * @param operation the operation
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def executeAndReportWithFallback[T](resultFuture: Future[T], operation: Future[T] => Unit, fallback: java.lang.Throwable => T): CircuitBreaker = {
     _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback))
@@ -147,7 +147,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * 
     * The function gets the exception as parameter and returns the <em>fallback</em> result.
     * @param handler the handler
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def fallback[T](handler: java.lang.Throwable => T): CircuitBreaker = {
     _asJava.fallback(asJavaFunction(handler))
@@ -156,7 +156,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
 
   /**
     * Resets the circuit breaker state (number of failure set to 0 and state set to closed).
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def reset(): CircuitBreaker = {
     _asJava.reset()
@@ -165,7 +165,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
 
   /**
     * Explicitly opens the circuit.
-    * @return the current [[CircuitBreaker]]
+    * @return the current CircuitBreaker
     */
   def open(): CircuitBreaker = {
     _asJava.open()

@@ -33,7 +33,7 @@ import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 
 /**
-  * Factory interface for creating OAuth2 based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
+  * Factory interface for creating OAuth2 based [[AuthProvider]] instances.
   */
 class OAuth2Auth(private val _asJava: JOAuth2Auth) 
     extends  {
