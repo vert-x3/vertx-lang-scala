@@ -34,6 +34,7 @@ import io.vertx.ext.stomp.Frame.Command
 
 class Frame(val asJava: JFrame) {
 
+
   /**
     * Gets the value of the `ack` header.
     */

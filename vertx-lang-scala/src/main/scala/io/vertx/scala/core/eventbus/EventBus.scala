@@ -65,7 +65,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.send(address:String,message:AnyRef):io.vertx.scala.core.eventbus.EventBus]] but specifying a `replyHandler` that will be called if the recipient
+    * Like [[EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
@@ -78,7 +78,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.send(address:String,message:AnyRef):io.vertx.scala.core.eventbus.EventBus]] but specifying `options` that can be used to configure the delivery.
+    * Like [[EventBus#send]] but specifying `options` that can be used to configure the delivery.
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
@@ -90,7 +90,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.send(address:String,message:AnyRef,options:io.vertx.scala.core.eventbus.DeliveryOptions):io.vertx.scala.core.eventbus.EventBus]] but specifying a `replyHandler` that will be called if the recipient
+    * Like [[EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
@@ -116,7 +116,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.publish(address:String,message:AnyRef):io.vertx.scala.core.eventbus.EventBus]] but specifying `options` that can be used to configure the delivery.
+    * Like [[EventBus#publish]] but specifying `options` that can be used to configure the delivery.
     * @param address the address to publish it to
     * @param message the message, may be `null`
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
@@ -131,7 +131,7 @@ class EventBus(private val _asJava: JEventBus)
     * Create a message consumer against the specified address.
     * 
     * The returned consumer is not yet registered
-    * at the address, registration will be effective when [[io.vertx.scala.core.eventbus.MessageConsumer!.handler(handler:io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]]
+    * at the address, registration will be effective when [[MessageConsumer#handler]]
     * is called.
     * @param address the address that it will register it at
     * @return the event bus message consumer
@@ -151,7 +151,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.consumer(address:String):io.vertx.scala.core.eventbus.MessageConsumer[T]]] but the address won't be propagated across the cluster.
+    * Like [[EventBus#consumer]] but the address won't be propagated across the cluster.
     * @param address the address to register it at
     * @return the event bus message consumer
     */
@@ -160,7 +160,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.consumer(address:String,handler:io.vertx.scala.core.Handler[io.vertx.scala.core.eventbus.Message[T]]):io.vertx.scala.core.eventbus.MessageConsumer[T]]] but the address won't be propagated across the cluster.
+    * Like [[EventBus#consumer]] but the address won't be propagated across the cluster.
     * @param address the address that will register it at
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
@@ -172,8 +172,8 @@ class EventBus(private val _asJava: JEventBus)
   /**
     * Create a message sender against the specified address.
     * 
-    * The returned sender will invoke the [[io.vertx.scala.core.eventbus.EventBus!.send(address:String,message:AnyRef):io.vertx.scala.core.eventbus.EventBus]]
-    * method when the stream [[io.vertx.scala.core.streams.WriteStream!.write(data:T):io.vertx.scala.core.streams.WriteStream[T]]] method is called with the sender
+    * The returned sender will invoke the [[EventBus#send]]
+    * method when the stream [[WriteStream#write]] method is called with the sender
     * address and the provided data.
     * @param address the address to send it to
     * @return The sender
@@ -183,7 +183,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.sender(address:String):io.vertx.scala.core.eventbus.MessageProducer[T]]] but specifying delivery options that will be used for configuring the delivery of
+    * Like [[EventBus#sender]] but specifying delivery options that will be used for configuring the delivery of
     * the message.
     * @param address the address to send it to
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
@@ -196,8 +196,8 @@ class EventBus(private val _asJava: JEventBus)
   /**
     * Create a message publisher against the specified address.
     * 
-    * The returned publisher will invoke the [[io.vertx.scala.core.eventbus.EventBus!.publish(address:String,message:AnyRef):io.vertx.scala.core.eventbus.EventBus]]
-    * method when the stream [[io.vertx.scala.core.streams.WriteStream!.write(data:T):io.vertx.scala.core.streams.WriteStream[T]]] method is called with the publisher
+    * The returned publisher will invoke the [[EventBus#publish]]
+    * method when the stream [[WriteStream#write]] method is called with the publisher
     * address and the provided data.
     * @param address The address to publish it to
     * @return The publisher
@@ -207,7 +207,7 @@ class EventBus(private val _asJava: JEventBus)
   }
 
   /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus!.publisher(address:String):io.vertx.scala.core.eventbus.MessageProducer[T]]] but specifying delivery options that will be used for configuring the delivery of
+    * Like [[EventBus#publisher]] but specifying delivery options that will be used for configuring the delivery of
     * the message.
     * @param address the address to publish it to
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>

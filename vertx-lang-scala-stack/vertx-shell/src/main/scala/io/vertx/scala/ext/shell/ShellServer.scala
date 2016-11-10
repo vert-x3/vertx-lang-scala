@@ -34,13 +34,13 @@ import io.vertx.scala.ext.shell.term.Term
 /**
   * The shell server.<p/>
   *
-  * A shell server is associated with a collection of : the [[io.vertx.scala.ext.shell.ShellServer#registerTermServer]]
+  * A shell server is associated with a collection of : the [[ShellServer#registerTermServer]]
   * method registers a term server. Term servers life cycle are managed by this server.<p/>
   *
   * When a  receives an incoming connection, a  instance is created and
   * associated with this connection.<p/>
   *
-  * The [[io.vertx.scala.ext.shell.ShellServer#createShell]] method can be used to create  instance for testing purposes.
+  * The [[ShellServer#createShell]] method can be used to create  instance for testing purposes.
   */
 class ShellServer(private val _asJava: JShellServer) {
 

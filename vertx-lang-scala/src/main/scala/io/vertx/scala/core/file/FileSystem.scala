@@ -60,7 +60,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.copy(from:String,to:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#copyFuture]]
     */
   def copyBlocking(from: String, to: String): FileSystem = {
     _asJava.copyBlocking(from, to)
@@ -85,7 +85,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.copyRecursive(from:String,to:String,recursive:Boolean,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#copyRecursiveFuture]]
     */
   def copyRecursiveBlocking(from: String, to: String, recursive: Boolean): FileSystem = {
     _asJava.copyRecursiveBlocking(from, to, recursive)
@@ -107,7 +107,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.move(from:String,to:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#moveFuture]]
     */
   def moveBlocking(from: String, to: String): FileSystem = {
     _asJava.moveBlocking(from, to)
@@ -129,7 +129,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.truncate(path:String,len:Long,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#truncateFuture]]
     */
   def truncateBlocking(path: String, len: Long): FileSystem = {
     _asJava.truncateBlocking(path, len)
@@ -152,7 +152,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem #chmod(String, String, Handler)]]
+    * Blocking version of [[FileSystem]]
     */
   def chmodBlocking(path: String, perms: String): FileSystem = {
     _asJava.chmodBlocking(path, perms)
@@ -178,7 +178,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.chmodRecursive(path:String,perms:String,dirPerms:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#chmodRecursiveFuture]]
     */
   def chmodRecursiveBlocking(path: String, perms: String, dirPerms: String): FileSystem = {
     _asJava.chmodRecursiveBlocking(path, perms, dirPerms)
@@ -221,7 +221,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.props(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#propsFuture]]
     */
   def propsBlocking(path: String): FileProps = {
     FileProps.apply(_asJava.propsBlocking(path))
@@ -241,7 +241,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.lprops(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#lpropsFuture]]
     */
   def lpropsBlocking(path: String): FileProps = {
     FileProps.apply(_asJava.lpropsBlocking(path))
@@ -260,7 +260,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.link(link:String,existing:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#linkFuture]]
     */
   def linkBlocking(link: String, existing: String): FileSystem = {
     _asJava.linkBlocking(link, existing)
@@ -280,7 +280,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.link(link:String,existing:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#linkFuture]]
     */
   def symlinkBlocking(link: String, existing: String): FileSystem = {
     _asJava.symlinkBlocking(link, existing)
@@ -299,7 +299,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.unlink(link:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#unlinkFuture]]
     */
   def unlinkBlocking(link: String): FileSystem = {
     _asJava.unlinkBlocking(link)
@@ -318,7 +318,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.readSymlink(link:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#readSymlinkFuture]]
     */
   def readSymlinkBlocking(link: String): String = {
     _asJava.readSymlinkBlocking(link)
@@ -336,7 +336,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.delete(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#deleteFuture]]
     */
   def deleteBlocking(path: String): FileSystem = {
     _asJava.deleteBlocking(path)
@@ -359,7 +359,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.deleteRecursive(path:String,recursive:Boolean,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#deleteRecursiveFuture]]
     */
   def deleteRecursiveBlocking(path: String, recursive: Boolean): FileSystem = {
     _asJava.deleteRecursiveBlocking(path, recursive)
@@ -380,7 +380,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.mkdir(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#mkdirFuture]]
     */
   def mkdirBlocking(path: String): FileSystem = {
     _asJava.mkdirBlocking(path)
@@ -407,7 +407,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.mkdir(path:String,perms:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#mkdirFuture]]
     */
   def mkdirBlocking(path: String, perms: String): FileSystem = {
     _asJava.mkdirBlocking(path, perms)
@@ -428,7 +428,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.mkdirs(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#mkdirsFuture]]
     */
   def mkdirsBlocking(path: String): FileSystem = {
     _asJava.mkdirsBlocking(path)
@@ -455,7 +455,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.mkdirs(path:String,perms:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#mkdirsFuture]]
     */
   def mkdirsBlocking(path: String, perms: String): FileSystem = {
     _asJava.mkdirsBlocking(path, perms)
@@ -476,7 +476,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.readDir(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#readDirFuture]]
     */
   def readDirBlocking(path: String): scala.collection.mutable.Buffer[String] = {
     _asJava.readDirBlocking(path).asScala.map(x => x:String)
@@ -500,7 +500,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.readDir(path:String,filter:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#readDirFuture]]
     */
   def readDirBlocking(path: String, filter: String): scala.collection.mutable.Buffer[String] = {
     _asJava.readDirBlocking(path, filter).asScala.map(x => x:String)
@@ -520,7 +520,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.readFile(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#readFileFuture]]
     */
   def readFileBlocking(path: String): Buffer = {
     Buffer.apply(_asJava.readFileBlocking(path))
@@ -539,7 +539,7 @@ class FileSystem(private val _asJava: JFileSystem) {
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.writeFile(path:String,data:io.vertx.scala.core.buffer.Buffer,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#writeFileFuture]]
     */
   def writeFileBlocking(path: String, data: Buffer): FileSystem = {
     _asJava.writeFileBlocking(path, data.asJava.asInstanceOf[JBuffer])
@@ -560,7 +560,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.open(path:String,options:io.vertx.scala.core.file.OpenOptions,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#openFuture]]
     */
   def openBlocking(path: String, options: OpenOptions): AsyncFile = {
     AsyncFile.apply(_asJava.openBlocking(path, options.asJava))
@@ -578,7 +578,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.createFile(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#createFileFuture]]
     */
   def createFileBlocking(path: String): FileSystem = {
     _asJava.createFileBlocking(path)
@@ -598,7 +598,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.createFile(path:String,perms:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#createFileFuture]]
     */
   def createFileBlocking(path: String, perms: String): FileSystem = {
     _asJava.createFileBlocking(path, perms)
@@ -617,7 +617,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.exists(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#existsFuture]]
     */
   def existsBlocking(path: String): Boolean = {
     _asJava.existsBlocking(path)
@@ -635,7 +635,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Blocking version of [[io.vertx.scala.core.file.FileSystem!.fsProps(path:String,handler:io.vertx.lang.scala.AsyncResult):io.vertx.scala.core.file.FileSystem]]
+    * Blocking version of [[FileSystem#fsPropsFuture]]
     */
   def fsPropsBlocking(path: String): FileSystemProps = {
     FileSystemProps.apply(_asJava.fsPropsBlocking(path))

@@ -21,12 +21,15 @@ import scala.collection.JavaConverters._
 import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.mongo.{MongoAuthOptions => JMongoAuthOptions}
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring Mongo authentication.
   */
 
 class MongoAuthOptions(val asJava: JMongoAuthOptions) {
+
 
   /**
     * The property name to be used to set the name of the collection inside the config.

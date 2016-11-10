@@ -42,6 +42,7 @@ import io.vertx.scala.core.net.ProxyOptions
   */
 
 class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
+
   def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this

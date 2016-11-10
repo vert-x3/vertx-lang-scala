@@ -36,8 +36,6 @@ import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
-import io.vertx.core.net.{ClientOptionsBase => JClientOptionsBase}
-import io.vertx.scala.core.net.ClientOptionsBase
 
 /**
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.

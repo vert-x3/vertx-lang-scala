@@ -28,6 +28,7 @@ import io.vertx.scala.core.http.HttpServerRequest
 import io.vertx.ext.web.{Session => JSession}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
+import io.vertx.ext.web.{LanguageHeader => JLanguageHeader}
 import io.vertx.ext.web.{FileUpload => JFileUpload}
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.auth.{User => JUser}
@@ -37,13 +38,14 @@ import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.scala.core.http.HttpServerResponse
 import io.vertx.core.http.HttpMethod
+import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
 import io.vertx.core.json.JsonObject
 
 /**
   * Represents the context for the handling of a request in Vert.x-Web.
   * 
   * A new instance is created for each HTTP request that is received in the
-  * [[io.vertx.scala.ext.web.Router#accept]] of the router.
+  * [[Router#accept]] of the router.
   * 
   * The same instance is passed to any matching request or failure handlers during the routing of the request or
   * failure.
@@ -52,7 +54,7 @@ import io.vertx.core.json.JsonObject
   * and allows you to maintain arbitrary data that lives for the lifetime of the context. Contexts are discarded once they
   * have been routed to the handler for the request.
   * 
-  * The context also provides access to the [[io.vertx.scala.ext.web.Session]], cookies and body for the request, given the correct handlers
+  * The context also provides access to the [[Session]], cookies and body for the request, given the correct handlers
   * in the application.
   */
 class RoutingContext(private val _asJava: JRoutingContext) {
@@ -143,7 +145,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * @return the Vert.x instance associated to the initiating [[Router]] for this context
+    * @return the Vert.x instance associated to the initiating Router for this context
     */
   def vertx(): Vertx = {
     Vertx.apply(_asJava.vertx())
@@ -182,7 +184,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * Get the cookie with the specified name. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.CookieHandler]]
+    * Get the cookie with the specified name. The context must have first been routed to a [[CookieHandler]]
     * for this to work.
     * @param name the cookie name
     * @return the cookie
@@ -193,7 +195,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * Add a cookie. This will be sent back to the client in the response. The context must have first been routed
-    * to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.
+    * to a [[CookieHandler]] for this to work.
     * @param cookie the cookie
     * @return a reference to this, so the API can be used fluently
     */
@@ -203,7 +205,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * Remove a cookie. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.CookieHandler]]
+    * Remove a cookie. The context must have first been routed to a [[CookieHandler]]
     * for this to work.
     * @param name the name of the cookie
     * @return the cookie, if it existed, or null
@@ -213,21 +215,21 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * @return the number of cookies. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.
+    * @return the number of cookies. The context must have first been routed to a io.vertx.scala.ext.web.handler.CookieHandler for this to work.
     */
   def cookieCount(): Int = {
     _asJava.cookieCount()
   }
 
   /**
-    * @return a set of all the cookies. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to be populated.
+    * @return a set of all the cookies. The context must have first been routed to a io.vertx.scala.ext.web.handler.CookieHandler for this to be populated.
     */
   def cookies(): Set[Cookie] = {
     _asJava.cookies().asScala.map(Cookie.apply).toSet
   }
 
   /**
-    * @return the entire HTTP request body as a string, assuming UTF-8 encoding. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to be populated.
+    * @return the entire HTTP request body as a string, assuming UTF-8 encoding. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
     */
   def getBodyAsString(): scala.Option[String] = {
         scala.Option(_asJava.getBodyAsString())
@@ -235,7 +237,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * Get the entire HTTP request body as a string, assuming the specified encoding. The context must have first been routed to a
-    * [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to be populated.
+    * [[BodyHandler]] for this to be populated.
     * @param encoding the encoding, e.g. "UTF-16"
     * @return the body
     */
@@ -244,35 +246,35 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * @return Get the entire HTTP request body as a [[JsonObject]]. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to be populated.
+    * @return Get the entire HTTP request body as a JsonObject. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
     */
   def getBodyAsJson(): scala.Option[JsonObject] = {
         scala.Option(_asJava.getBodyAsJson())
   }
 
   /**
-    * @return Get the entire HTTP request body as a [[JsonArray]]. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to be populated.
+    * @return Get the entire HTTP request body as a JsonArray. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
     */
   def getBodyAsJsonArray(): scala.Option[JsonArray] = {
         scala.Option(_asJava.getBodyAsJsonArray())
   }
 
   /**
-    * @return Get the entire HTTP request body as a [[Buffer]]. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to be populated.
+    * @return Get the entire HTTP request body as a Buffer. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
     */
   def getBody(): scala.Option[Buffer] = {
         scala.Option(Buffer.apply(_asJava.getBody()))
   }
 
   /**
-    * @return a set of fileuploads (if any) for the request. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.BodyHandler]] for this to work.
+    * @return a set of fileuploads (if any) for the request. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to work.
     */
   def fileUploads(): Set[FileUpload] = {
     _asJava.fileUploads().asScala.map(FileUpload.apply).toSet
   }
 
   /**
-    * Get the session. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.SessionHandler]]
+    * Get the session. The context must have first been routed to a [[SessionHandler]]
     * for this to be populated.
     * Sessions live for a browser session, and are maintained by session cookies.
     * @return the session.
@@ -291,7 +293,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * If the context is being routed to failure handlers after a failure has been triggered by calling
-    * [[io.vertx.scala.ext.web.RoutingContext#fail]] then this will return that throwable. It can be used by failure handlers to render a response,
+    * [[RoutingContext#fail]] then this will return that throwable. It can be used by failure handlers to render a response,
     * e.g. create a failure response page.
     * @return the throwable used when signalling failure
     */
@@ -304,7 +306,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * If the context is being routed to failure handlers after a failure has been triggered by calling
-    * [[io.vertx.scala.ext.web.RoutingContext#fail]]  then this will return that status code.  It can be used by failure handlers to render a response,
+    * [[RoutingContext#fail]]  then this will return that status code.  It can be used by failure handlers to render a response,
     * e.g. create a failure response page.
     *
     * When the status code has not been set yet (it is undefined) its value will be -1.
@@ -327,6 +329,25 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
+    * The headers:
+    * <ol>
+    * <li>Accept</li>
+    * <li>Accept-Charset</li>
+    * <li>Accept-Encoding</li>
+    * <li>Accept-Language</li>
+    * <li>Content-Type</li>
+    * </ol>
+    * Parsed into [[ParsedHeaderValue]]
+    * @return A container with the parsed headers.
+    */
+  def parsedHeaders(): ParsedHeaderValues = {
+    if (cached_4 == null) {
+      cached_4=    ParsedHeaderValues.apply(_asJava.parsedHeaders())
+    }
+    cached_4
+  }
+
+  /**
     * Add a handler that will be called just before headers are written to the response. This gives you a hook where
     * you can write any extra headers before the response has been written when it will be too late.
     * @param handler the handler
@@ -338,7 +359,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * Remove a headers end handler
-    * @param handlerID the id as returned from [[io.vertx.scala.ext.web.RoutingContext#addHeadersEndHandler(Handler)]].
+    * @param handlerID the id as returned from io.vertx.scala.ext.web.RoutingContext#addHeadersEndHandler(Handler).
     * @return true if the handler existed and was removed, false otherwise
     */
   def removeHeadersEndHandler(handlerID: Int): Boolean = {
@@ -359,7 +380,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
 
   /**
     * Remove a body end handler
-    * @param handlerID the id as returned from [[io.vertx.scala.ext.web.RoutingContext#addBodyEndHandler(Handler)]].
+    * @param handlerID the id as returned from io.vertx.scala.ext.web.RoutingContext#addBodyEndHandler(Handler).
     * @return true if the handler existed and was removed, false otherwise
     */
   def removeBodyEndHandler(handlerID: Int): Boolean = {
@@ -374,7 +395,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * Set the body. Used by the [[io.vertx.scala.ext.web.handler.BodyHandler]]. You will not normally call this method.
+    * Set the body. Used by the [[BodyHandler]]. You will not normally call this method.
     * @param body the body
     */
   def setBody(body: Buffer): Unit = {
@@ -382,7 +403,7 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   }
 
   /**
-    * Set the session. Used by the [[io.vertx.scala.ext.web.handler.SessionHandler]]. You will not normally call this method.
+    * Set the session. Used by the [[SessionHandler]]. You will not normally call this method.
     * @param session the session
     */
   def setSession(session: Session): Unit = {
@@ -442,10 +463,26 @@ class RoutingContext(private val _asJava: JRoutingContext) {
     * @return the best matched locale for the request
     */
   def acceptableLocales(): scala.collection.mutable.Buffer[Locale] = {
-    if (cached_4 == null) {
-      cached_4=    _asJava.acceptableLocales().asScala.map(Locale.apply)
+    if (cached_5 == null) {
+      cached_5=    _asJava.acceptableLocales().asScala.map(Locale.apply)
     }
-    cached_4
+    cached_5
+  }
+
+  /**
+    * Returns the languages for the current request. The languages are determined from the <code>Accept-Language</code>
+    * header and sorted on quality.
+    *
+    * When 2 or more entries have the same quality then the order used to return the best match is based on the lowest
+    * index on the original list. For example if a user has en-US and en-GB with same quality and this order the best
+    * match will be en-US because it was declared as first entry by the client.
+    * @return The best matched language for the request
+    */
+  def acceptableLanguages(): scala.collection.mutable.Buffer[LanguageHeader] = {
+    if (cached_6 == null) {
+      cached_6=    _asJava.acceptableLanguages().asScala.map(LanguageHeader.apply)
+    }
+    cached_6
   }
 
   /**
@@ -454,7 +491,22 @@ class RoutingContext(private val _asJava: JRoutingContext) {
     * @return the users preferred locale.
     */
   def preferredLocale(): Locale = {
-    Locale.apply(_asJava.preferredLocale())
+    if (cached_7 == null) {
+      cached_7=    Locale.apply(_asJava.preferredLocale())
+    }
+    cached_7
+  }
+
+  /**
+    * Helper to return the user preferred language.
+    * It is the same action as returning the first element of the acceptable languages.
+    * @return the users preferred locale.
+    */
+  def preferredLanguage(): LanguageHeader = {
+    if (cached_8 == null) {
+      cached_8=    LanguageHeader.apply(_asJava.preferredLanguage())
+    }
+    cached_8
   }
 
   /**
@@ -478,7 +530,11 @@ class RoutingContext(private val _asJava: JRoutingContext) {
   private var cached_1: HttpServerResponse = _
   private var cached_2: scala.Option[Throwable] = _
   private var cached_3: Int = _
-  private var cached_4: scala.collection.mutable.Buffer[Locale] = _
+  private var cached_4: ParsedHeaderValues = _
+  private var cached_5: scala.collection.mutable.Buffer[Locale] = _
+  private var cached_6: scala.collection.mutable.Buffer[LanguageHeader] = _
+  private var cached_7: Locale = _
+  private var cached_8: LanguageHeader = _
 }
 
 object RoutingContext {

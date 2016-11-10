@@ -27,6 +27,7 @@ import io.vertx.ext.mail.{MailResult => JMailResult}
 
 class MailResult(val asJava: JMailResult) {
 
+
   /**
     */
   def setMessageID(value: String) = {

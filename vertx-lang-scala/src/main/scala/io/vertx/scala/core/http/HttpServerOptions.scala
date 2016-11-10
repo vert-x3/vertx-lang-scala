@@ -34,8 +34,6 @@ import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
-import io.vertx.scala.core.net.NetServerOptions
 
 /**
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance

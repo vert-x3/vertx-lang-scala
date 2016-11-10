@@ -27,6 +27,7 @@ import io.vertx.redis.op.KillFilter.Type
 
 class KillFilter(val asJava: JKillFilter) {
 
+
   /**
     * Set ADDR filter
     */

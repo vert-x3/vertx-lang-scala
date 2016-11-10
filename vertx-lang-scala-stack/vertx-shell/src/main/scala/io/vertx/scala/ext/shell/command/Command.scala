@@ -30,8 +30,8 @@ import io.vertx.ext.shell.system.{Process => JProcess}
 import io.vertx.scala.ext.shell.system.Process
 
 /**
-  * A Vert.x Shell command, it can be created from any language using the [[io.vertx.scala.ext.shell.command.CommandBuilder#command]] or from a
-  * Java class using [[io.vertx.scala.ext.shell.command.Command#create]]
+  * A Vert.x Shell command, it can be created from any language using the [[CommandBuilder#command]] or from a
+  * Java class using [[Command#create]]
   */
 class Command(private val _asJava: JCommand) {
 

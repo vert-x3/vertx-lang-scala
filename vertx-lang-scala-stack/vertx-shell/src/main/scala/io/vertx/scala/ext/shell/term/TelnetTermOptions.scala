@@ -41,6 +41,7 @@ import io.vertx.scala.core.net.PfxOptions
   */
 
 class TelnetTermOptions(val asJava: JTelnetTermOptions) {
+
   def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this

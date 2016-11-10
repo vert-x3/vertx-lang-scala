@@ -48,6 +48,7 @@ import io.vertx.scala.ext.web.handler.sockjs.SockJSHandlerOptions
   */
 
 class HttpTermOptions(val asJava: JHttpTermOptions) {
+
   def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this

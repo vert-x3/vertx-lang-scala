@@ -34,35 +34,35 @@ import io.vertx.scala.servicediscovery.spi.ServiceExporter
 
 /**
   * Service Discovery main entry point.
-  *
+  * 
   * The service discovery is an infrastructure that let you publish and find `services`. A `service` is a discoverable
   * functionality. It can be qualified by its type, metadata, and location. So a `service` can be a database, a
   * service proxy, a HTTP endpoint. It does not have to be a vert.x entity, but can be anything. Each service is
   * described by a <a href="../../../../../../cheatsheet/Record.html">Record</a>.
-  *
+  * 
   * The service discovery implements the interactions defined in the service-oriented computing. And to some extend,
   * also provides the dynamic service-oriented computing interaction. So, application can react to arrival and
   * departure of services.
-  *
+  * 
   * A service provider can:
-  *
+  * 
   * * publish a service record
   * * un-publish a published record
   * * update the status of a published service (down, out of service...)
-  *
+  * 
   * A service consumer can:
-  *
+  * 
   * * lookup for services
-  * * bind to a selected service (it gets a [[io.vertx.scala.servicediscovery.ServiceReference]]) and use it
+  * * bind to a selected service (it gets a [[ServiceReference]]) and use it
   * * release the service once the consumer is done with it
   * * listen for arrival, departure and modification of services.
-  *
-  * Consumer would 1) lookup for service record matching their need, 2) retrieve the [[io.vertx.scala.servicediscovery.ServiceReference]] that give access
+  * 
+  * Consumer would 1) lookup for service record matching their need, 2) retrieve the [[ServiceReference]] that give access
   * to the service, 3) get a service object to access the service, 4) release the service object once done.
-  *
+  * 
   * A state above, the central piece of information shared by the providers and consumers are <a href="../../../../../../cheatsheet/Record.html">Record</a>.
-  *
-  * Providers and consumers must create their own [[io.vertx.scala.servicediscovery.ServiceDiscovery]] instance. These instances are collaborating
+  * 
+  * Providers and consumers must create their own [[ServiceDiscovery]] instance. These instances are collaborating
   * in background (distributed structure) to keep the set of services in sync.
   */
 class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
@@ -102,7 +102,7 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
     * discovery.
     * @param importer the service importer
     * @param configuration the optional configuration
-    * @return the current [[ServiceDiscovery]]
+    * @return the current ServiceDiscovery
     */
   def registerServiceImporter(importer: ServiceImporter, configuration: JsonObject): ServiceDiscovery = {
     ServiceDiscovery.apply(_asJava.registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration))
@@ -126,7 +126,7 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
     * discovery.
     * @param exporter the service exporter
     * @param configuration the optional configuration
-    * @return the current [[ServiceDiscovery]]
+    * @return the current ServiceDiscovery
     */
   def registerServiceExporter(exporter: ServiceExporter, configuration: JsonObject): ServiceDiscovery = {
     ServiceDiscovery.apply(_asJava.registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration))
@@ -176,11 +176,11 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
 
   /**
     * Lookups for a single record.
-    *
+    * 
     * Filters are expressed using a Json object. Each entry of the given filter will be checked against the record.
     * All entry must match exactly the record. The entry can use the special "*" value to denotes a requirement on the
     * key, but not on the value.
-    *
+    * 
     * Let's take some example:
     * <pre>
     *   { "name" = "a" ` => matches records with name set fo "a"
@@ -188,9 +188,9 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
     *   { "color" = "red" ` => only matches records with "color" set to "red"
     *   { "color" = "red", "name" = "a"` => only matches records with name set to "a", and color set to "red"
     * </pre>
-    *
+    * 
     * If the filter is not set (`null` or empty), it accepts all records.
-    *
+    * 
     * This method returns the first matching record.
     * @param filter the filter.
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
@@ -203,10 +203,10 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
 
   /**
     * Lookups for a single record.
-    *
+    * 
     * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
     * as an `accept` method of a filter. This method return a record passing the filter.
-    *
+    * 
     * This method only looks for records with a `UP` status.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @return the result future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
@@ -219,11 +219,11 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
 
   /**
     * Lookups for a single record.
-    *
+    * 
     * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
     * as an `accept` method of a filter. This method return a record passing the filter.
-    *
-    * Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecord]], this method may accept records with a `OUT OF SERVICE`
+    * 
+    * Unlike [[ServiceDiscovery#getRecordFuture]], this method may accept records with a `OUT OF SERVICE`
     * status, if the `includeOutOfService` parameter is set to `true`.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
@@ -236,9 +236,9 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
   }
 
   /**
-    * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecord]], this method returns all matching
+    * Lookups for a set of records. Unlike [[ServiceDiscovery#getRecordFuture]], this method returns all matching
     * records.
-    * @param filter the filter - see [[#getRecord(JsonObject, Handler)]]
+    * @param filter the filter - see #getRecord(JsonObject, Handler)
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
   def getRecordsFuture(filter: JsonObject): concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
@@ -248,12 +248,12 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
   }
 
   /**
-    * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecord]], this method returns all matching
+    * Lookups for a set of records. Unlike [[ServiceDiscovery#getRecordFuture]], this method returns all matching
     * records.
-    *
+    * 
     * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
     * as an `accept` method of a filter. This method return a record passing the filter.
-    *
+    * 
     * This method only looks for records with a `UP` status.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
@@ -265,13 +265,13 @@ class ServiceDiscovery(private val _asJava: JServiceDiscovery) {
   }
 
   /**
-    * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecord]], this method returns all matching
+    * Lookups for a set of records. Unlike [[ServiceDiscovery#getRecordFuture]], this method returns all matching
     * records.
-    *
+    * 
     * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
     * as an `accept` method of a filter. This method return a record passing the filter.
-    *
-    * Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecords]], this method may accept records with a `OUT OF SERVICE`
+    * 
+    * Unlike [[ServiceDiscovery#getRecordsFuture]], this method may accept records with a `OUT OF SERVICE`
     * status, if the `includeOutOfService` parameter is set to `true`.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records

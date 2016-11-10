@@ -24,7 +24,7 @@ import io.vertx.ext.stomp.{Frame => JFrame}
 
 /**
   * Structure passed to acknowledgement handler called when a `ACK` or `NACK` frame is received. The handler
-  * receives an instance of [[io.vertx.scala.ext.stomp.Acknowledgement]] with the subscription <a href="../../../../../../../cheatsheet/Frame.html">Frame</a> and the impacted messages. The
+  * receives an instance of [[Acknowledgement]] with the subscription <a href="../../../../../../../cheatsheet/Frame.html">Frame</a> and the impacted messages. The
   * list of messages depends on the type of acknowledgment used by the subscription.
   * <p/>
   * Subscriptions using the `client` mode receives all messages that were waiting for acknowledgment that were

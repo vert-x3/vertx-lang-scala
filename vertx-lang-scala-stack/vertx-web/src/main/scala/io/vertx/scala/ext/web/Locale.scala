@@ -21,6 +21,8 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{Locale => JLocale}
 
+/**
+  */
 class Locale(private val _asJava: JLocale) {
 
   def asJava: JLocale = _asJava

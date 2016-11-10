@@ -33,6 +33,7 @@ import io.vertx.scala.ext.shell.term.TelnetTermOptions
   */
 
 class ShellServiceOptions(val asJava: JShellServiceOptions) {
+
   def setHttpOptions(value: HttpTermOptions) = {
     asJava.setHttpOptions(value.asJava)
     this

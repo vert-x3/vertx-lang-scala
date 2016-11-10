@@ -23,11 +23,11 @@ import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
 import io.vertx.servicediscovery.{Record => JRecord}
 
 /**
-  * Once a consumer has chosen a service, it builds a [[io.vertx.scala.servicediscovery.ServiceReference]] managing the binding with the chosen
+  * Once a consumer has chosen a service, it builds a [[ServiceReference]] managing the binding with the chosen
   * service provider.
   * 
   * The reference lets the consumer:
-  * * access the service (via a proxy or a client) with the [[io.vertx.scala.servicediscovery.ServiceReference#get]] method
+  * * access the service (via a proxy or a client) with the [[ServiceReference#get]] method
   * * release the reference - so the binding between the consumer and the provider is removed
   */
 class ServiceReference(private val _asJava: JServiceReference) {

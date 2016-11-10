@@ -32,8 +32,8 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
 
 /**
-  * A datagram socket can be used to send [[io.vertx.scala.core.datagram.DatagramPacket]]'s to remote datagram servers
-  * and receive [[io.vertx.scala.core.datagram.DatagramPacket]]s .
+  * A datagram socket can be used to send [[DatagramPacket]]'s to remote datagram servers
+  * and receive [[DatagramPacket]]s .
   * 
   * Usually you use a datagram socket to send UDP over the wire. UDP is connection-less which means you are not connected
   * to the remote peer in a persistent way. Because of this you have to supply the address and port of the remote peer
@@ -58,12 +58,12 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given [[io.vertx.scala.core.buffer.Buffer]] to the [[io.vertx.scala.core.net.SocketAddress]].
-    * The scala-function will be notified once the write completes.
+    * Write the given [[Buffer]] to the [[SocketAddress]].
+    * The [[scala.concurrent.Future]] will be notified once the write completes.
     * @param packet the io.vertx.scala.core.buffer.Buffer to write
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the scala-function to notify once the write completes.
+    * @return the [[scala.concurrent.Future]] to complete once the write completes.
     */
   def sendFuture(packet: Buffer, port: Int, host: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -72,8 +72,8 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Returns a [[io.vertx.scala.core.datagram.PacketWritestream]] able to send  to the
-    * [[io.vertx.scala.core.net.SocketAddress]].
+    * Returns a [[PacketWritestream]] able to send  to the
+    * [[SocketAddress]].
     * @param port the port of the remote peer
     * @param host the host address of the remote peer
     * @return the write stream for sending packets
@@ -83,12 +83,12 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using UTF8 encoding.
+    * Write the given String to the [[SocketAddress]] using UTF8 encoding.
     * The  will be notified once the write completes.
     * @param str the String to write
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the scala-function to notify once the write completes.
+    * @return the [[scala.concurrent.Future]] to complete once the write completes.
     */
   def sendFuture(str: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -97,13 +97,13 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using the given encoding.
+    * Write the given String to the [[SocketAddress]] using the given encoding.
     * The  will be notified once the write completes.
     * @param str the String to write
     * @param enc the charset used for encoding
     * @param port the host port of the remote peer
     * @param host the host address of the remote peer
-    * @return the scala-function to notify once the write completes.
+    * @return the [[scala.concurrent.Future]] to complete once the write completes.
     */
   def sendFuture(str: String, enc: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -112,9 +112,9 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]] implementation asynchronous
+    * Closes the [[DatagramSocket]] implementation asynchronous
     * and notifies the handler once done.
-    * @return the future to notify once complete
+    * @return the future to complete once complete
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
@@ -123,15 +123,15 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]]. The close itself is asynchronous.
+    * Closes the [[DatagramSocket]]. The close itself is asynchronous.
     */
   def close(): Unit = {
     _asJava.close()
   }
 
   /**
-    * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
-    * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.
+    * Return the [[SocketAddress]] to which
+    * this [[DatagramSocket]] is bound.
     * @return the socket address
     */
   def localAddress(): SocketAddress = {
@@ -145,7 +145,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * Joins a multicast group and listens for packets send to it.
     * The  is notified once the operation completes.
     * @param multicastAddress the address of the multicast group to join
-    * @return then future to notify once the operation completes
+    * @return then future to complete once the operation completes
     */
   def listenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -159,7 +159,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * @param multicastAddress the address of the multicast group to join
     * @param networkInterface the network interface on which to listen for packets.
     * @param source the address of the source for which we will listen for multicast packets
-    * @return then future to notify once the operation completes
+    * @return then future to complete once the operation completes
     */
   def listenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -171,7 +171,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * Leaves a multicast group and stops listening for packets send to it.
     * The  is notified once the operation completes.
     * @param multicastAddress the address of the multicast group to leave
-    * @return then future to notify once the operation completes
+    * @return then future to complete once the operation completes
     */
   def unlistenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -185,7 +185,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * @param multicastAddress the address of the multicast group to join
     * @param networkInterface the network interface on which to listen for packets.
     * @param source the address of the source for which we will listen for multicast packets
-    * @return the future to notify once the operation completes
+    * @return the future to complete once the operation completes
     */
   def unlistenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -198,7 +198,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * the operation completes.
     * @param multicastAddress the address for which you want to block the source address
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the future to notify once the operation completes
+    * @return the future to complete once the operation completes
     */
   def blockMulticastGroupFuture(multicastAddress: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))
@@ -212,7 +212,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     * @param multicastAddress the address for which you want to block the source address
     * @param networkInterface the network interface on which the blocking should occur.
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the future to notify once the operation completes
+    * @return the future to complete once the operation completes
     */
   def blockMulticastGroupFuture(multicastAddress: String, networkInterface: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket,DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x)))

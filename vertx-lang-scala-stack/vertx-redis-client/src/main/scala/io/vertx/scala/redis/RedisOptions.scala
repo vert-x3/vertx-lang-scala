@@ -45,6 +45,7 @@ import io.vertx.redis.{RedisOptions => JRedisOptions}
 
 class RedisOptions(val asJava: JRedisOptions) {
 
+
   /**
     * Set the eventbus address prefix for `PUB/SUB`.
     */

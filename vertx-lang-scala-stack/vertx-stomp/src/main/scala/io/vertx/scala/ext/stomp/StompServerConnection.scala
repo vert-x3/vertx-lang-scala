@@ -37,7 +37,7 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
   /**
     * Writes the given frame to the socket.
     * @param frame the frame, must not be `null`.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
-    * @return the current [[StompServerConnection]]
+    * @return the current StompServerConnection
     */
   def write(frame: Frame): StompServerConnection = {
     _asJava.write(frame.asJava)
@@ -47,7 +47,7 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
   /**
     * Writes the given buffer to the socket. This is a low level API that should be used carefully.
     * @param buffer the buffer
-    * @return the current [[StompServerConnection]]
+    * @return the current StompServerConnection
     */
   def write(buffer: Buffer): StompServerConnection = {
     _asJava.write(buffer.asJava.asInstanceOf[JBuffer])

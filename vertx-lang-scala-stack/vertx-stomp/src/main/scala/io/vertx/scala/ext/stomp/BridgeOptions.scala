@@ -28,6 +28,7 @@ import io.vertx.scala.ext.bridge.PermittedOptions
   */
 
 class BridgeOptions(val asJava: JBridgeOptions) {
+
   def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this

@@ -29,8 +29,8 @@ import io.vertx.scala.core.Vertx
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 
 /**
-  * A router receives request from an [[io.vertx.scala.core.http.HttpServer]] and routes it to the first matching
-  * [[io.vertx.scala.ext.web.Route]] that it contains. A router can contain many routes.
+  * A router receives request from an [[HttpServer]] and routes it to the first matching
+  * [[Route]] that it contains. A router can contain many routes.
   * 
   * Routers are also used for routing failures.
   */
@@ -40,7 +40,7 @@ class Router(private val _asJava: JRouter) {
 
   /**
     * This method is used to provide a request to the router. Usually you take request from the
-    * [[io.vertx.scala.core.http.HttpServer#requestHandler]] and pass it to this method. The
+    * [[HttpServer#requestHandler]] and pass it to this method. The
     * router then routes it to matching routes.
     * @param request the request
     */

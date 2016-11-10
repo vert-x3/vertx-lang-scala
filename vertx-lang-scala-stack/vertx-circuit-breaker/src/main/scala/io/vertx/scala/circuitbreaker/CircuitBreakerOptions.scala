@@ -27,6 +27,7 @@ import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
 
 class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
 
+
   /**
     * Sets whether or not the fallback is executed on failure, even when the circuit is closed.
     */
@@ -47,6 +48,17 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
   }
   def getMaxFailures = {
     asJava.getMaxFailures()
+  }
+
+  /**
+    * Configures the number of times the circuit breaker tries to redo the operation before failing.
+    */
+  def setMaxRetries(value: Int) = {
+    asJava.setMaxRetries(value)
+    this
+  }
+  def getMaxRetries = {
+    asJava.getMaxRetries()
   }
 
   /**
