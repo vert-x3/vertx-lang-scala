@@ -29,6 +29,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class MailAttachment(val asJava: JMailAttachment) {
 
+
   /**
     * set the Content-ID field to be used in the attachment
     */

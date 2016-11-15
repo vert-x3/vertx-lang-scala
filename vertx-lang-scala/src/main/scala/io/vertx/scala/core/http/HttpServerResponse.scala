@@ -33,7 +33,7 @@ import io.vertx.scala.core.MultiMap
   * Represents a server-side HTTP response.
   * 
   * An instance of this is created and associated to every instance of
-  * [[io.vertx.scala.core.http.HttpServerRequest]] that.
+  * [[HttpServerRequest]] that.
   * 
   * It allows the developer to control the HTTP response that is sent back to the
   * client for a particular HTTP request.
@@ -46,8 +46,8 @@ import io.vertx.scala.core.MultiMap
   * serving files from the server since buffers do not have to be read one by one
   * from the file and written to the outgoing socket.
   * 
-  * It implements [[io.vertx.scala.core.streams.WriteStream]] so it can be used with
-  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
+  * It implements [[WriteStream]] so it can be used with
+  * [[Pump]] to pump data with flow control.
   */
 class HttpServerResponse(private val _asJava: JHttpServerResponse) 
     extends WriteStream[Buffer] {
@@ -55,7 +55,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   def asJava: JHttpServerResponse = _asJava
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[HttpServerResponse#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -100,7 +100,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * @return the HTTP status message of the response. If this is not specified a default value will be used depending on what [[#setStatusCode]] has been set to.
+    * @return the HTTP status message of the response. If this is not specified a default value will be used depending on what #setStatusCode has been set to.
     */
   def getStatusMessage(): String = {
     _asJava.getStatusMessage()
@@ -226,7 +226,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes a String in UTF-8 encoding before ending the response.
+    * Same as [[HttpServerResponse#end]] but writes a String in UTF-8 encoding before ending the response.
     * @param chunk the string to write before ending the response
     */
   def end(chunk: String): Unit = {
@@ -234,7 +234,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes a String with the specified encoding before ending the response.
+    * Same as [[HttpServerResponse#end]] but writes a String with the specified encoding before ending the response.
     * @param chunk the string to write before ending the response
     * @param enc the encoding to use
     */
@@ -243,7 +243,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes some data to the response body before ending. If the response is not chunked and
+    * Same as [[HttpServerResponse#end]] but writes some data to the response body before ending. If the response is not chunked and
     * no other data has been written then the `Content-Length` header will be automatically set.
     * @param chunk the buffer to write before ending the response
     */
@@ -262,7 +262,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using offset `0` which means starting from the beginning of the file.
+    * Same as [[HttpServerResponse#sendFile]] using offset `0` which means starting from the beginning of the file.
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
@@ -272,7 +272,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] using length `Long.MAX_VALUE` which means until the end of the
+    * Same as [[HttpServerResponse#sendFile]] using length `Long.MAX_VALUE` which means until the end of the
     * file.
     * @param filename path to the file to serve
     * @param offset offset to start serving from
@@ -300,7 +300,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
+    * Like [[HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
     * @return future that will be called on completion
@@ -312,7 +312,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
+    * Like [[HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
     * written to the wire.
     * @param filename path to the file to serve
     * @param offset the offset to serve from
@@ -325,7 +325,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been
+    * Like [[HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been
     * completely written to the wire.
     * @param filename path to the file to serve
     * @param offset the offset to serve from
@@ -405,7 +405,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with no headers.
+    * Like [[HttpServerResponse#pushFuture]] with no headers.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -414,7 +414,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
+    * Like [[HttpServerResponse#pushFuture]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -423,7 +423,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#push]] with the host copied from the current request.
+    * Like [[HttpServerResponse#pushFuture]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse,HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x)))
@@ -483,7 +483,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServerResponse#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+    * Like [[HttpServerResponse#writeCustomFrame]] but with an [[HttpFrame]].
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {

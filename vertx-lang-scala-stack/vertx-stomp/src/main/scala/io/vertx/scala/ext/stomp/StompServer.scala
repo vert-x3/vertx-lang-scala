@@ -28,11 +28,10 @@ import io.vertx.scala.core.net.NetServer
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
-import io.vertx.scala.ext.stomp.StompServerOptions
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 
 /**
-  * Defines a STOMP server. STOMP servers delegates to a [[io.vertx.scala.ext.stomp.StompServerHandler]] that let customize the behavior of
+  * Defines a STOMP server. STOMP servers delegates to a [[StompServerHandler]] that let customize the behavior of
   * the server. By default, it uses a handler compliant with the STOMP specification, but let you change anything.
   */
 class StompServer(private val _asJava: JStompServer) {
@@ -40,9 +39,9 @@ class StompServer(private val _asJava: JStompServer) {
   def asJava: JStompServer = _asJava
 
   /**
-    * Configures the [[io.vertx.scala.ext.stomp.StompServerHandler]]. You must calls this method before calling the [[io.vertx.scala.ext.stomp.StompServer#listen]] method.
+    * Configures the [[StompServerHandler]]. You must calls this method before calling the [[StompServer#listen]] method.
     * @param handler the handler
-    * @return the current [[StompServer]]
+    * @return the current StompServer
     */
   def handler(handler: StompServerHandler): StompServer = {
     _asJava.handler(handler.asJava.asInstanceOf[JStompServerHandler])
@@ -52,7 +51,7 @@ class StompServer(private val _asJava: JStompServer) {
   /**
     * Connects the STOMP server to the given port.
     * @param port the port
-    * @return the current [[StompServer]]
+    * @return the current StompServer
     */
   def listen(port: Int): StompServer = {
     _asJava.listen(port)
@@ -63,7 +62,7 @@ class StompServer(private val _asJava: JStompServer) {
     * Connects the STOMP server to the given port / interface.
     * @param port the port
     * @param host the interface
-    * @return the current [[StompServer]]
+    * @return the current StompServer
     */
   def listen(port: Int, host: String): StompServer = {
     _asJava.listen(port, host)
@@ -72,7 +71,7 @@ class StompServer(private val _asJava: JStompServer) {
 
   /**
     * Connects the STOMP server to the port / host configured in the server options.
-    * @return the current [[StompServer]]
+    * @return the current StompServer
     */
   def listen(): StompServer = {
     _asJava.listen()
@@ -165,7 +164,7 @@ class StompServer(private val _asJava: JStompServer) {
   }
 
   /**
-    * @return the [[StompServerHandler]] used by this server.
+    * @return the StompServerHandler used by this server.
     */
   def stompHandler(): StompServerHandler = {
     StompServerHandler.apply(_asJava.stompHandler())
@@ -174,7 +173,7 @@ class StompServer(private val _asJava: JStompServer) {
   /**
     * Gets the  able to manage web socket connections. If the web socket bridge is disabled, it returns
     * `null`.
-    * @return the handler that can be passed to [[io.vertx.scala.core.http.HttpServer#websocketHandler(Handler)]].
+    * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#websocketHandler(Handler).
     */
   def webSocketHandler(): ServerWebSocket => Unit = {
     handlerToMappedFunction[JServerWebSocket, ServerWebSocket](x => x.asJava)(_asJava.webSocketHandler())
@@ -184,7 +183,7 @@ class StompServer(private val _asJava: JStompServer) {
     * Configures the handler that is invoked every time a frame is going to be written to the "wire". It lets you log
     * the frames, but also adapt the frame if needed.
     * @param handler the handler, must not be `null`
-    * @return the current [[StompServer]]
+    * @return the current StompServer
     */
   def writingFrameHandler(handler: ServerFrame => Unit): StompServer = {
     _asJava.writingFrameHandler(funcToMappedHandler(ServerFrame.apply)(handler))

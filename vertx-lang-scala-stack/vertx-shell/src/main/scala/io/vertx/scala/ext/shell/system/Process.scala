@@ -41,7 +41,7 @@ class Process(private val _asJava: JProcess) {
   }
 
   /**
-    * @return the process exit code when the status is [[ExecStatus#TERMINATED]] otherwise `null`
+    * @return the process exit code when the status is ExecStatus#TERMINATED otherwise `null`
     */
   def exitCode(): Int = {
     _asJava.exitCode()

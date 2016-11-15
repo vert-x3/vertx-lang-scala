@@ -35,13 +35,17 @@ import @{typeToAliasedType(type)}\n
 	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
 import @{typeToAliasedType(importedType)}\n
+			@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
+			@end{}
 		@else{importedType != type}
 import @{typeToAliasedType(importedType)}\n
 		@end{}
 	@else{importedType.kind == CLASS_DATA_OBJECT}
 import @{typeToAliasedType(importedType)}\n
+		@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
+		@end{}
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
 				importedType.kind == CLASS_JSON_ARRAY ||
 				importedType.kind == CLASS_ENUM}
@@ -110,9 +114,9 @@ import @{importedType.raw.translateName("scala")}\n
 \n
 
 @if{concrete}
-	@includeNamed{'classbody.templ'; indentation=''}
+	@includeNamed{'class-concrete.templ'; indentation=''}
 @else{}
-	@includeNamed{'traitbody.templ'}
+	@includeNamed{'class-trait.templ'}
 @end{}
 }\n
 \n
@@ -147,7 +151,7 @@ import @{importedType.raw.translateName("scala")}\n
 		    new @{writeImplType(type)}(_asJava)\n
 		\n
 		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
-			@includeNamed{'classbody.templ'; indentation='  '}
+			@includeNamed{'class-concrete.templ'; indentation='  '}
 		  }\n\n
 	}\n
 @end{}

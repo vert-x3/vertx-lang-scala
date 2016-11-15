@@ -29,6 +29,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class GoAway(val asJava: JGoAway) {
 
+
   /**
     * Set the additional debug data
     */

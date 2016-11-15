@@ -25,6 +25,7 @@ import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
   */
 
 class TestDataObject(val asJava: JTestDataObject) {
+
   def setBar(value: Int) = {
     asJava.setBar(value)
     this

@@ -20,6 +20,10 @@ Sets whether or not the fallback is executed on failure, even when the circuit i
 +++
 Sets the maximum number of failures before opening the circuit.
 +++
+|[[maxRetries]]`maxRetries`|`Number (int)`|
++++
+Configures the number of times the circuit breaker tries to redo the operation before failing.
++++
 |[[notificationAddress]]`notificationAddress`|`String`|
 +++
 Sets the event bus address on which the circuit breaker publish its state change.

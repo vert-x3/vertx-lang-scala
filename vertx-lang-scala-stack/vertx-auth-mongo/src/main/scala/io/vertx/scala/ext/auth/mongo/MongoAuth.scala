@@ -38,7 +38,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   def asJava: JMongoAuth = _asJava
 
   /**
-    * Set the name of the collection to be used. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * Set the name of the collection to be used. Defaults to [[MongoAuth]]
     * @param collectionName the name of the collection to be used for storing and reading user data
     * @return the current instance itself for fluent calls
     */
@@ -48,7 +48,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Set the name of the field to be used for the username. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * Set the name of the field to be used for the username. Defaults to [[MongoAuth]]
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
@@ -58,7 +58,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Set the name of the field to be used for the password Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * Set the name of the field to be used for the password Defaults to [[MongoAuth]]
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
@@ -68,7 +68,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Set the name of the field to be used for the roles. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]. Roles are expected to
+    * Set the name of the field to be used for the roles. Defaults to [[MongoAuth]]. Roles are expected to
     * be saved as JsonArray
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
@@ -79,7 +79,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Set the name of the field to be used for the permissions. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]].
+    * Set the name of the field to be used for the permissions. Defaults to [[MongoAuth]].
     * Permissions are expected to be saved as JsonArray
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
@@ -91,7 +91,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * Set the name of the field to be used as property for the username in the method
-    * [[io.vertx.scala.ext.auth.AuthProvider#authenticate]]. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * [[AuthProvider#authenticateFuture]]. Defaults to [[MongoAuth]]
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
@@ -102,7 +102,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * Set the name of the field to be used as property for the password of credentials in the method
-    * [[io.vertx.scala.ext.auth.AuthProvider#authenticate]]. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * [[AuthProvider#authenticateFuture]]. Defaults to [[MongoAuth]]
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
@@ -112,7 +112,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Set the name of the field to be used for the salt. Only used when [[io.vertx.scala.ext.auth.mongo.HashStrategy#setSaltStyle]] is
+    * Set the name of the field to be used for the salt. Only used when [[HashStrategy#setSaltStyle]] is
     * set to 
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
@@ -123,7 +123,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * The name of the collection used to store User objects inside. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * The name of the collection used to store User objects inside. Defaults to [[MongoAuth]]
     * @return the collectionName
     */
   def getCollectionName(): String = {
@@ -131,7 +131,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Get the name of the field to be used for the username. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * Get the name of the field to be used for the username. Defaults to [[MongoAuth]]
     * @return the usernameField
     */
   def getUsernameField(): String = {
@@ -139,7 +139,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Get the name of the field to be used for the password Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * Get the name of the field to be used for the password Defaults to [[MongoAuth]]
     * @return the passwordField
     */
   def getPasswordField(): String = {
@@ -147,7 +147,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Get the name of the field to be used for the roles. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]. Roles are expected to
+    * Get the name of the field to be used for the roles. Defaults to [[MongoAuth]]. Roles are expected to
     * be saved as JsonArray
     * @return the roleField
     */
@@ -156,7 +156,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Get the name of the field to be used for the permissions. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]].
+    * Get the name of the field to be used for the permissions. Defaults to [[MongoAuth]].
     * Permissions are expected to be saved as JsonArray
     * @return the permissionField
     */
@@ -166,7 +166,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * Get the name of the field to be used as property for the username in the method
-    * [[io.vertx.scala.ext.auth.AuthProvider#authenticate]]. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * [[AuthProvider#authenticateFuture]]. Defaults to [[MongoAuth]]
     * @return the usernameCredentialField
     */
   def getUsernameCredentialField(): String = {
@@ -175,7 +175,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * Get the name of the field to be used as property for the password of credentials in the method
-    * [[io.vertx.scala.ext.auth.AuthProvider#authenticate]]. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
+    * [[AuthProvider#authenticateFuture]]. Defaults to [[MongoAuth]]
     * @return the passwordCredentialField
     */
   def getPasswordCredentialField(): String = {
@@ -183,7 +183,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   }
 
   /**
-    * Get the name of the field to be used for the salt. Only used when [[io.vertx.scala.ext.auth.mongo.HashStrategy#setSaltStyle]] is
+    * Get the name of the field to be used for the salt. Only used when [[HashStrategy#setSaltStyle]] is
     * set to 
     * @return the saltField
     */
@@ -193,7 +193,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * The HashStrategy which is used by the current instance
-    * @param hashStrategy the [[HashStrategy]] to be set
+    * @param hashStrategy the HashStrategy to be set
     * @return the current instance itself for fluent calls
     */
   def setHashStrategy(hashStrategy: HashStrategy): MongoAuth = {
@@ -203,7 +203,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
 
   /**
     * The HashStrategy which is used by the current instance
-    * @return the defined instance of [[HashStrategy]]
+    * @return the defined instance of HashStrategy
     */
   def getHashStrategy(): HashStrategy = {
     HashStrategy.apply(_asJava.getHashStrategy())
@@ -212,7 +212,7 @@ class MongoAuth(private val _asJava: JMongoAuth)
   /**
     * Insert a new user into mongo in the convenient way
     * @param username the username to be set
-    * @param password the passsword in clear text, will be adapted following the definitions of the defined [[HashStrategy]]
+    * @param password the passsword in clear text, will be adapted following the definitions of the defined HashStrategy
     * @param roles a list of roles to be set
     * @param permissions a list of permissions to be set
     * @return the ResultHandler will be provided with the id of the generated record

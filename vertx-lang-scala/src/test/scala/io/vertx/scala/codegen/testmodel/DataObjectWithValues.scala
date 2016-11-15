@@ -27,6 +27,7 @@ import io.vertx.core.json.JsonObject
   */
 
 class DataObjectWithValues(val asJava: JDataObjectWithValues) {
+
   def setBooleanValue(value: Boolean) = {
     asJava.setBooleanValue(value)
     this

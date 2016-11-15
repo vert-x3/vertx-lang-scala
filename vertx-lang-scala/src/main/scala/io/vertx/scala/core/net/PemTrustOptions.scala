@@ -57,6 +57,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class PemTrustOptions(val asJava: JPemTrustOptions) {
 
+
   /**
     * Add a certificate path
     */

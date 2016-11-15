@@ -28,9 +28,9 @@ import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
-  * A job executed in a [[io.vertx.scala.ext.shell.system.JobController]], grouping one or several process.<p/>
+  * A job executed in a [[JobController]], grouping one or several process.<p/>
   *
-  * The job life cycle can be controlled with the [[io.vertx.scala.ext.shell.system.Job#run]], [[io.vertx.scala.ext.shell.system.Job#resume]] and [[io.vertx.scala.ext.shell.system.Job#suspend]] and [[io.vertx.scala.ext.shell.system.Job#interrupt]]
+  * The job life cycle can be controlled with the [[Job#run]], [[Job#resume]] and [[Job#suspend]] and [[Job#interrupt]]
   * methods.
   */
 class Job(private val _asJava: JJob) {

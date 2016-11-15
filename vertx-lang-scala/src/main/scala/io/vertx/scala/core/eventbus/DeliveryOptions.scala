@@ -30,6 +30,7 @@ import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 class DeliveryOptions(val asJava: JDeliveryOptions) {
 
+
   /**
     * Set the codec name.
     */

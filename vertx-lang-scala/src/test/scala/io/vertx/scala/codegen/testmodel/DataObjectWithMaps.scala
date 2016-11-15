@@ -27,6 +27,7 @@ import io.vertx.core.json.JsonObject
   */
 
 class DataObjectWithMaps(val asJava: JDataObjectWithMaps) {
+
   def setBooleanValues(value: Map[String, Boolean]) = {
     asJava.setBooleanValues(value.mapValues(Boolean.box).asJava)
     this

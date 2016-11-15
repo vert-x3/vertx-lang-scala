@@ -24,61 +24,32 @@ import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
 /**
   */
 
-class NetworkOptions(val asJava: JNetworkOptions) {
+trait NetworkOptions {
+
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
-    asJava.setLogActivity(value)
-    this
-  }
-  def getLogActivity = {
-    asJava.getLogActivity()
-  }
+  def setLogActivity(value: Boolean):NetworkOptions
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
-    asJava.setReceiveBufferSize(value)
-    this
-  }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
-  }
+  def setReceiveBufferSize(value: Int):NetworkOptions
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
-    asJava.setReuseAddress(value)
-    this
-  }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
-  }
+  def setReuseAddress(value: Boolean):NetworkOptions
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
-    asJava.setSendBufferSize(value)
-    this
-  }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
-  }
+  def setSendBufferSize(value: Int):NetworkOptions
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
-    asJava.setTrafficClass(value)
-    this
-  }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
-  }
+  def setTrafficClass(value: Int):NetworkOptions
 }
 

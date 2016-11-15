@@ -43,6 +43,7 @@ import io.vertx.scala.core.net.ProxyOptions
 
 class HttpClientOptions(val asJava: JHttpClientOptions) {
 
+
   /**
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiation.
     * When the list is empty, the client provides a best effort list according to <a href="../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>:

@@ -37,7 +37,7 @@ class Shell(private val _asJava: JShell) {
   def asJava: JShell = _asJava
 
   /**
-    * Create a job, the created job should then be executed with the [[io.vertx.scala.ext.shell.system.Job#run]] method.
+    * Create a job, the created job should then be executed with the [[Job#run]] method.
     * @param line the command line creating this job
     * @return the created job
     */
@@ -46,7 +46,7 @@ class Shell(private val _asJava: JShell) {
   }
 
   /**
-    * See [[io.vertx.scala.ext.shell.Shell#createJob]]
+    * See [[Shell#createJob]]
     */
   def createJob(line: String): Job = {
     Job.apply(_asJava.createJob(line))

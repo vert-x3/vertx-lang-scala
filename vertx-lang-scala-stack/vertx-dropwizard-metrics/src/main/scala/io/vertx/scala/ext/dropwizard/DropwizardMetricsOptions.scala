@@ -27,6 +27,7 @@ import io.vertx.ext.dropwizard.{DropwizardMetricsOptions => JDropwizardMetricsOp
 
 class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
 
+
   /**
     * Set the path for a config file that contains options in JSON format, to be used to create a new options object.
     * The file will be looked for on the file system first and then on the classpath if it's not found.

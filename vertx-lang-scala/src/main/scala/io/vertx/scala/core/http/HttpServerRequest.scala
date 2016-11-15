@@ -43,10 +43,10 @@ import io.vertx.scala.core.net.NetSocket
   * 
   * Instances are created for each request and passed to the user via a handler.
   * 
-  * Each instance of this class is associated with a corresponding [[io.vertx.scala.core.http.HttpServerResponse]] instance via
-  * [[io.vertx.scala.core.http.HttpServerRequest#response]].
-  * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
-  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
+  * Each instance of this class is associated with a corresponding [[HttpServerResponse]] instance via
+  * [[HttpServerRequest#response]].
+  * It implements [[ReadStream]] so it can be used with
+  * [[Pump]] to pump data with flow control.
   * 
   */
 class HttpServerRequest(private val _asJava: JHttpServerRequest) 
@@ -101,7 +101,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   }
 
   /**
-    * @return true if this [[io.vertx.scala.core.net.NetSocket]] is encrypted via SSL/TLS
+    * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS
     */
   def isSSL(): Boolean = {
     _asJava.isSSL()
@@ -143,7 +143,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   }
 
   /**
-    * @return the response. Each instance of this class has an [[HttpServerResponse]] instance attached to it. This is used to send the response back to the client.
+    * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
     */
   def response(): HttpServerResponse = {
     if (cached_0 == null) {
@@ -258,7 +258,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   }
 
   /**
-    * @return true if we are expecting a multi-part body for this request. See [[#setExpectMultipart]].
+    * @return true if we are expecting a multi-part body for this request. See #setExpectMultipart.
     */
   def isExpectMultipart(): Boolean = {
     _asJava.isExpectMultipart()
@@ -280,7 +280,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * Be aware that the attributes will only be available after the whole body has been received, i.e. after
     * the request end handler has been called.
     * 
-    * [[io.vertx.scala.core.http.HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
+    * [[HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {
@@ -329,7 +329,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   }
 
   /**
-    * @return the [[HttpConnection]] associated with this request
+    * @return the HttpConnection associated with this request
     */
   def connection(): HttpConnection = {
     if (cached_7 == null) {

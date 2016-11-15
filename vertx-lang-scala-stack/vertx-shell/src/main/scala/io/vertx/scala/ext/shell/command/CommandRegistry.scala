@@ -36,7 +36,7 @@ class CommandRegistry(private val _asJava: JCommandRegistry)
   def asJava: JCommandRegistry = _asJava
 
   /**
-    * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommand]], without a completion handler.
+    * Like [[CommandRegistry#registerCommandFuture]], without a completion handler.
     */
   def registerCommand(command: Command): CommandRegistry = {
     _asJava.registerCommand(command.asJava.asInstanceOf[JCommand])
@@ -55,7 +55,7 @@ class CommandRegistry(private val _asJava: JCommandRegistry)
   }
 
   /**
-    * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommands]], without a completion handler.
+    * Like [[CommandRegistry#registerCommandsFuture]], without a completion handler.
     */
   def registerCommands(commands: scala.collection.mutable.Buffer[Command]): CommandRegistry = {
     _asJava.registerCommands(commands.map(x => if (x == null) null else x.asJava).asJava)
@@ -74,7 +74,7 @@ class CommandRegistry(private val _asJava: JCommandRegistry)
   }
 
   /**
-    * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#unregisterCommand]], without a completion handler.
+    * Like [[CommandRegistry#unregisterCommandFuture]], without a completion handler.
     */
   def unregisterCommand(commandName: String): CommandRegistry = {
     _asJava.unregisterCommand(commandName)

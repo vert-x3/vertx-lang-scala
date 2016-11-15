@@ -27,6 +27,7 @@ import io.vertx.ext.hawkular.{AuthenticationOptions => JAuthenticationOptions}
 
 class AuthenticationOptions(val asJava: JAuthenticationOptions) {
 
+
   /**
     * Set whether authentication is enabled. Defaults to `false`.
     */

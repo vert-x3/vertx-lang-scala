@@ -55,7 +55,6 @@ import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.redis.{RedisOptions => JRedisOptions}
-import io.vertx.scala.redis.RedisOptions
 
 class RedisClient(private val _asJava: JRedisClient) {
 

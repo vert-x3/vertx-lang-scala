@@ -28,6 +28,7 @@ import io.vertx.core.json.JsonObject
 
 class IndexOptions(val asJava: JIndexOptions) {
 
+
   /**
     * Create the index in the background
     */

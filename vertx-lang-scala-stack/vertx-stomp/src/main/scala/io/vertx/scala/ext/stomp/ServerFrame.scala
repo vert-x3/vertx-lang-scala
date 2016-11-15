@@ -21,12 +21,11 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**
   * Structure passed to server handler when receiving a frame. It provides a reference on the received <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
-  * but also on the [[io.vertx.scala.ext.stomp.StompServerConnection]].
+  * but also on the [[StompServerConnection]].
   */
 class ServerFrame(private val _asJava: JServerFrame) {
 

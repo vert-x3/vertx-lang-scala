@@ -25,6 +25,7 @@ import io.vertx.redis.op.{SetOptions => JSetOptions}
   */
 
 class SetOptions(val asJava: JSetOptions) {
+
   def setEX(value: Long) = {
     asJava.setEX(value)
     this

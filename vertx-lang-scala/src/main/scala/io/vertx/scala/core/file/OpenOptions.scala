@@ -27,6 +27,7 @@ import io.vertx.core.file.{OpenOptions => JOpenOptions}
 
 class OpenOptions(val asJava: JOpenOptions) {
 
+
   /**
     * Set whether the file should be created if it does not already exist.
     */

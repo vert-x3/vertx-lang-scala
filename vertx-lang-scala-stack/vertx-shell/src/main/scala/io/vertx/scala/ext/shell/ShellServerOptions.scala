@@ -27,6 +27,7 @@ import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
 
 class ShellServerOptions(val asJava: JShellServerOptions) {
 
+
   /**
     * Set the repear interval, i.e the period at which session eviction is performed.
     */

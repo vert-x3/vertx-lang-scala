@@ -21,9 +21,7 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{Destination => JDestination}
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
-import io.vertx.scala.ext.stomp.BridgeOptions
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.shareddata.{Shareable => JShareable}
@@ -51,7 +49,7 @@ class Destination(private val _asJava: JDestination) {
     * Dispatches the given frame.
     * @param connection the connection
     * @param frame the framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
-    * @return the current instance of [[Destination]]
+    * @return the current instance of Destination
     */
   def dispatch(connection: StompServerConnection, frame: Frame): Destination = {
     _asJava.dispatch(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
@@ -59,10 +57,10 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Handles a subscription request to the current [[io.vertx.scala.ext.stomp.Destination]].
+    * Handles a subscription request to the current [[Destination]].
     * @param connection the connection
     * @param frame the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
-    * @return the current instance of [[Destination]]
+    * @return the current instance of Destination
     */
   def subscribe(connection: StompServerConnection, frame: Frame): Destination = {
     _asJava.subscribe(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
@@ -70,7 +68,7 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Handles a un-subscription request to the current [[io.vertx.scala.ext.stomp.Destination]].
+    * Handles a un-subscription request to the current [[Destination]].
     * @param connection the connection
     * @param frame the `UNSUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return `true` if the un-subscription has been handled, `false` otherwise.
@@ -82,7 +80,7 @@ class Destination(private val _asJava: JDestination) {
   /**
     * Removes all subscriptions of the given connection
     * @param connection the connection
-    * @return the current instance of [[Destination]]
+    * @return the current instance of Destination
     */
   def unsubscribeConnection(connection: StompServerConnection): Destination = {
     _asJava.unsubscribeConnection(connection.asJava.asInstanceOf[JStompServerConnection])
@@ -119,7 +117,7 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Gets the number of subscriptions attached to the current [[io.vertx.scala.ext.stomp.Destination]].
+    * Gets the number of subscriptions attached to the current [[Destination]].
     * @return the number of subscriptions.
     */
   def numberOfSubscriptions(): Int = {

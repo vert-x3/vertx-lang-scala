@@ -28,6 +28,7 @@ import io.vertx.servicediscovery.types.{HttpLocation => JHttpLocation}
 
 class HttpLocation(val asJava: JHttpLocation) {
 
+
   /**
     * Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
     * other `setX` method.

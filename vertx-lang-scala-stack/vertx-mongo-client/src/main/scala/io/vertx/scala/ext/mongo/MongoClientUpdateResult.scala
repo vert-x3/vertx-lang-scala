@@ -28,6 +28,7 @@ import io.vertx.core.json.JsonObject
 
 class MongoClientUpdateResult(val asJava: JMongoClientUpdateResult) {
 
+
   /**
     * Get the number of documents that're matched
     */

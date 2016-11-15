@@ -46,6 +46,7 @@ import io.vertx.scala.core.net.ProxyOptions
   */
 
 class OAuth2ClientOptions(val asJava: JOAuth2ClientOptions) {
+
   def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
     asJava.setAlpnVersions(value.asJava)
     this

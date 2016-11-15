@@ -25,6 +25,7 @@ import io.vertx.redis.op.{SortOptions => JSortOptions}
   */
 
 class SortOptions(val asJava: JSortOptions) {
+
   def setBy(value: String) = {
     asJava.setBy(value)
     this

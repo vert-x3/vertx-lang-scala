@@ -27,6 +27,7 @@ import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
 
 class MongoClientDeleteResult(val asJava: JMongoClientDeleteResult) {
 
+
   /**
     * Get the number of removed documents
     */

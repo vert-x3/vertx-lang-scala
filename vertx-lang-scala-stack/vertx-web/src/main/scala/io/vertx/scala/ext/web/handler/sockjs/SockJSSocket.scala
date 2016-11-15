@@ -39,10 +39,10 @@ import io.vertx.scala.core.net.SocketAddress
   *
   * You interact with SockJS clients through instances of SockJS socket.
   * 
-  * The API is very similar to [[io.vertx.scala.core.http.WebSocket]].
+  * The API is very similar to [[WebSocket]].
   * It implements both  and 
   * so it can be used with
-  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
+  * [[Pump]] to pump data with flow control.
   */
 class SockJSSocket(private val _asJava: JSockJSSocket) 
     extends ReadStream[Buffer] 
@@ -111,7 +111,7 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
   }
 
   /**
-    * Call [[io.vertx.scala.ext.web.handler.sockjs.SockJSSocket#end]].
+    * Call [[SockJSSocket#end]].
     */
   def end(): Unit = {
     _asJava.end()

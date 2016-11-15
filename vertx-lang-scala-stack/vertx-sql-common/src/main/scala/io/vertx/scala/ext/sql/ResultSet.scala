@@ -32,6 +32,7 @@ import io.vertx.core.json.JsonObject
 
 class ResultSet(val asJava: JResultSet) {
 
+
   /**
     * Get the column names
     */

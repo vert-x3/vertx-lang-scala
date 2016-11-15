@@ -33,6 +33,7 @@ import io.vertx.core.json.JsonObject
 
 class JWTOptions(val asJava: JJWTOptions) {
 
+
   /**
     * The algorithm to use, it should be one of the alias [HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512]
     */

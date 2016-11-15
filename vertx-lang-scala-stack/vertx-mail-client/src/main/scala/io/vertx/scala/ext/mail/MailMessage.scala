@@ -27,6 +27,7 @@ import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 class MailMessage(val asJava: JMailMessage) {
 
+
   /**
     * set the list of attachments of this mail
     */

@@ -81,7 +81,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
   }
 
   /**
-    * Use [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#getRawMessage]] instead, will be removed in 3.3
+    * Use [[BridgeEvent#getRawMessage]] instead, will be removed in 3.3
     */
   def rawMessage(): JsonObject = {
     if (cached_2 == null) {
@@ -92,7 +92,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
 
   /**
     * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
-    * no message involved. If the returned message is modified, [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#setRawMessage]] should be called with the
+    * no message involved. If the returned message is modified, [[BridgeEvent#setRawMessage]] should be called with the
     * new message.
     * @return the raw JSON message for the event
     */

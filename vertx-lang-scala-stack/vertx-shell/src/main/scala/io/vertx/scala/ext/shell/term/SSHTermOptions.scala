@@ -35,6 +35,7 @@ import io.vertx.scala.core.net.PfxOptions
 
 class SSHTermOptions(val asJava: JSSHTermOptions) {
 
+
   /**
     */
 

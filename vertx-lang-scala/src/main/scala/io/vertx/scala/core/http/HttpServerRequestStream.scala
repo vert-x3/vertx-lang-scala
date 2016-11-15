@@ -25,8 +25,8 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 
 /**
-  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
-  * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
+  * A [[ReadStream]] of [[HttpServerRequest]], used for
+  * notifying http request to a [[HttpServer]].
   */
 class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream) 
     extends ReadStream[HttpServerRequest] {

@@ -27,6 +27,7 @@ import io.vertx.ext.dropwizard.{Match => JMatch}
 
 class Match(val asJava: JMatch) {
 
+
   /**
     * Set the type of matching to apply.
     */

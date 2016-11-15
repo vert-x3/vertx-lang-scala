@@ -26,6 +26,7 @@ import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
   */
 
 class BridgeOptions(val asJava: JBridgeOptions) {
+
   def setInboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setInboundPermitted(value.map(_.asJava).asJava)
     this

@@ -27,6 +27,7 @@ import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 
 class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
 
+
   /**
     * Set if the socket can receive broadcast packets
     */
