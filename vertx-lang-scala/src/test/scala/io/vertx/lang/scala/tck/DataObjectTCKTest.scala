@@ -97,9 +97,9 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     * This test is ignored as it is broken due to automatic conversion. There is currently no way to make ot work.
     */
   "testWriteDataObjectWithLists" should "work" ignore {
-    import collection.JavaConversions._
+    import collection.JavaConverters._
 
-    println(Json.arr(mapAsJavaMap(Map("foo" -> "eek")), mapAsJavaMap(Map("foo" -> "wibble"))).getValue(0).getClass)
+    println(Json.arr(Map("foo" -> "eek").asJava, Map("foo" -> "wibble").asJava).getValue(0).getClass)
 
     val dataObject = DataObjectWithLists.fromJson(Json.obj()
       .put("booleanValues", Json.arr(true, false, true))

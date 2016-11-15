@@ -33,6 +33,7 @@ import io.vertx.scala.core.metrics.MetricsOptions
 
 class VertxOptions(val asJava: JVertxOptions) {
 
+
   /**
     * Sets the address resolver configuration to configure resolving DNS servers, cache TTL, etc...
     */

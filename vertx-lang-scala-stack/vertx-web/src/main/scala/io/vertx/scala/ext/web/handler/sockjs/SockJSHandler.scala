@@ -29,9 +29,7 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandlerOptions
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
-import io.vertx.scala.ext.web.handler.sockjs.BridgeOptions
 
 /**
   *
@@ -72,7 +70,7 @@ class SockJSHandler(private val _asJava: JSockJSHandler) {
   }
 
   /**
-    * Like [[io.vertx.scala.ext.web.handler.sockjs.SockJSHandler#bridge]] but specifying a handler
+    * Like [[SockJSHandler#bridge]] but specifying a handler
     * that will receive bridge events.
     * @param bridgeOptions options to configure the bridge withsee <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
     * @param bridgeEventHandler handler to receive bridge events

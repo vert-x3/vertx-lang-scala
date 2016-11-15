@@ -26,6 +26,7 @@ import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
 
 class GeoRadiusOptions(val asJava: JGeoRadiusOptions) {
 
+
   /**
     * Set the radius options limit the result count.
     */

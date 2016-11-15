@@ -21,11 +21,8 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.shell.term.{TermServer => JTermServer}
 import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
-import io.vertx.scala.ext.shell.term.TelnetTermOptions
 import io.vertx.ext.shell.term.{HttpTermOptions => JHttpTermOptions}
-import io.vertx.scala.ext.shell.term.HttpTermOptions
 import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
-import io.vertx.scala.ext.shell.term.SSHTermOptions
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.web.{Router => JRouter}
@@ -43,7 +40,7 @@ class TermServer(private val _asJava: JTermServer) {
 
   /**
     * Set the term handler that will receive incoming client connections. When a remote terminal connects
-    * the `handler` will be called with the [[io.vertx.scala.ext.shell.term.Term]] which can be used to interact with the remote
+    * the `handler` will be called with the [[Term]] which can be used to interact with the remote
     * terminal.
     * @param handler the term handler
     * @return this object
@@ -65,7 +62,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
+    * Bind the term server, the [[TermServer#termHandler]] must be set before.
     * @return this object
     */
   def listen(): TermServer = {
@@ -74,7 +71,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
+    * Bind the term server, the [[TermServer#termHandler]] must be set before.
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[TermServer] = {
@@ -101,7 +98,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.
+    * Like [[TermServer#close]] but supplying a handler that will be notified when close is complete.
     * @return the future to be notified when the term server is closed
     */
   def closeFuture(): concurrent.Future[Unit] = {

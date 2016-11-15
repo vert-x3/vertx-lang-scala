@@ -25,6 +25,7 @@ import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JD
   */
 
 class DataObjectWithOnlyJsonObjectConstructor(val asJava: JDataObjectWithOnlyJsonObjectConstructor) {
+
 }
 
 object DataObjectWithOnlyJsonObjectConstructor {

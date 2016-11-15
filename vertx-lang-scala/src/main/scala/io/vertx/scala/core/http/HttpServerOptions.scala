@@ -41,6 +41,7 @@ import io.vertx.scala.core.net.PfxOptions
 
 class HttpServerOptions(val asJava: JHttpServerOptions) {
 
+
   /**
     * Set the accept back log
     */

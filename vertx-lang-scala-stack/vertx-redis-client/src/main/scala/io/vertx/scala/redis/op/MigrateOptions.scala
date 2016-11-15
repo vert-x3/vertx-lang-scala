@@ -25,6 +25,7 @@ import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
   */
 
 class MigrateOptions(val asJava: JMigrateOptions) {
+
 }
 
 object MigrateOptions {

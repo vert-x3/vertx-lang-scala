@@ -45,7 +45,7 @@ class AuthProvider(private val _asJava: JAuthProvider) {
     * </pre>
     * For other types of authentication it contain different information - for example a JWT token or OAuth bearer token.
     * 
-    * If the user is successfully authenticated a [[io.vertx.scala.ext.auth.User]] object is passed to the handler in an [[io.vertx.scala.core.AsyncResult]].
+    * If the user is successfully authenticated a [[User]] object is passed to the handler in an [[AsyncResult]].
     * The user object can then be used for authorisation.
     * @param authInfo The auth information
     * @return The result future

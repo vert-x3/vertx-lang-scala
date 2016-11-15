@@ -25,8 +25,8 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 
 /**
-  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
-  * socket connections to a [[io.vertx.scala.core.net.NetServer]].
+  * A [[ReadStream]] of [[NetSocket]], used for notifying
+  * socket connections to a [[NetServer]].
   */
 class NetSocketStream(private val _asJava: JNetSocketStream) 
     extends ReadStream[NetSocket] {

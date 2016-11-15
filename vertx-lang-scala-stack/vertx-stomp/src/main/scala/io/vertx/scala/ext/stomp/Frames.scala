@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.ext.stomp.{Frames => JFrames}
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.scala.ext.stomp.Frame
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 
 /**

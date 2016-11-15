@@ -24,22 +24,22 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 
 /**
-  * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
+  * Pumps data from a [[ReadStream]] to a [[WriteStream]] and performs flow control where necessary to
   * prevent the write stream buffer from getting overfull.
   * 
-  * Instances of this class read items from a [[io.vertx.scala.core.streams.ReadStream]] and write them to a [[io.vertx.scala.core.streams.WriteStream]]. If data
-  * can be read faster than it can be written this could result in the write queue of the [[io.vertx.scala.core.streams.WriteStream]] growing
+  * Instances of this class read items from a [[ReadStream]] and write them to a [[WriteStream]]. If data
+  * can be read faster than it can be written this could result in the write queue of the [[WriteStream]] growing
   * without bound, eventually causing it to exhaust all available RAM.
   * 
-  * To prevent this, after each write, instances of this class check whether the write queue of the [[io.vertx.scala.core.streams.WriteStream]] is full, and if so, the [[io.vertx.scala.core.streams.ReadStream]] is paused, and a `drainHandler` is set on the
-  * [[io.vertx.scala.core.streams.WriteStream]].
+  * To prevent this, after each write, instances of this class check whether the write queue of the [[WriteStream]] is full, and if so, the [[ReadStream]] is paused, and a `drainHandler` is set on the
+  * [[WriteStream]].
   * 
-  * When the [[io.vertx.scala.core.streams.WriteStream]] has processed half of its backlog, the `drainHandler` will be
-  * called, which results in the pump resuming the [[io.vertx.scala.core.streams.ReadStream]].
+  * When the [[WriteStream]] has processed half of its backlog, the `drainHandler` will be
+  * called, which results in the pump resuming the [[ReadStream]].
   * 
-  * This class can be used to pump from any [[io.vertx.scala.core.streams.ReadStream]] to any [[io.vertx.scala.core.streams.WriteStream]],
-  * e.g. from an [[io.vertx.scala.core.http.HttpServerRequest]] to an [[io.vertx.scala.core.file.AsyncFile]],
-  * or from [[io.vertx.scala.core.net.NetSocket]] to a [[io.vertx.scala.core.http.WebSocket]].
+  * This class can be used to pump from any [[ReadStream]] to any [[WriteStream]],
+  * e.g. from an [[HttpServerRequest]] to an [[AsyncFile]],
+  * or from [[NetSocket]] to a [[WebSocket]].
   * 
   * Please see the documentation for more information.
   */

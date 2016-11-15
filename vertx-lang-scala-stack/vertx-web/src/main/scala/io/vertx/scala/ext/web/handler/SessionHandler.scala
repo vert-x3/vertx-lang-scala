@@ -26,14 +26,14 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
 
 /**
-  * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser session.
+  * A handler that maintains a [[Session]] for each browser session.
   * 
   * It looks up the session for each request based on a session cookie which contains a session ID. It stores the session
   * when the response is ended in the session store.
   * 
   * The session is available on the routing context with .
   * 
-  * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing chain before it.
+  * The session handler requires a [[CookieHandler]] to be on the routing chain before it.
   */
 class SessionHandler(private val _asJava: JSessionHandler) {
 

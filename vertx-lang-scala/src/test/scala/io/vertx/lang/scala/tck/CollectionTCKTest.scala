@@ -247,12 +247,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListEnum" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultListEnumFuture().foreach(it => { w{assert(it.toSet.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetEnum" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultSetEnumFuture().foreach(it => { w{assert(it.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
   }
 
@@ -266,7 +264,6 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListAndSet" should "work" in {
-    import collection.JavaConverters._
     exec(4)(w => {
       obj.methodWithHandlerAsyncResultListStringFuture().foreach(it => {w {assert(List("foo", "bar", "wibble").diff(it).isEmpty)}; w.dismiss()})
       obj.methodWithHandlerAsyncResultListIntegerFuture().foreach(it => {w {assert(List(5, 12, 100).diff(it).isEmpty)}; w.dismiss()})
@@ -284,12 +281,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultListVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == ArrayBuffer("foo", "bar"))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListAbstractVertxGen" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultListAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == ArrayBuffer("abstractfoo", "abstractbar"))}; w.dismiss()}))
   }
 
@@ -302,12 +297,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultSetVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("bar", "foo"))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultSetAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("abstractbar", "abstractfoo"))}; w.dismiss()}))
   }
 
@@ -320,12 +313,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListJsonObject" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultListJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListComplexJsonObject" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
   }
 
@@ -338,12 +329,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {
-    import scala.collection.JavaConversions._
     exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
   }
 
@@ -387,12 +376,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultListJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListComplexJsonArray" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
   }
 
@@ -405,12 +392,10 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultSetJsonArray" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultSetJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetComplexJsonArray" should "work" in {
-    import collection.JavaConverters._
     exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
   }
 

@@ -28,6 +28,7 @@ import io.vertx.ext.mail.{MailConfig => JMailConfig}
 
 class MailConfig(val asJava: JMailConfig) {
 
+
   /**
     * set if sending allows rcpt errors
     * 

@@ -42,6 +42,7 @@ import io.vertx.scala.core.net.PfxOptions
 
 class EventBusOptions(val asJava: JEventBusOptions) {
 
+
   /**
     * Set the accept back log.
     */

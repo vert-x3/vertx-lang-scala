@@ -29,6 +29,7 @@ import io.vertx.core.json.JsonObject
 
 class PermittedOptions(val asJava: JPermittedOptions) {
 
+
   /**
     * The exact address the message is being sent to. If you want to allow messages based on
     * an exact address you use this field.

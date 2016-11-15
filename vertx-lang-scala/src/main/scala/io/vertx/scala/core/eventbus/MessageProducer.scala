@@ -21,7 +21,6 @@ import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-import io.vertx.scala.core.eventbus.DeliveryOptions
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{Message => JMessage}
@@ -36,14 +35,14 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   def asJava: JMessageProducer[T] = _asJava
 
   /**
-    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+    * Same as [[MessageProducer#end]] but writes some data to the stream before ending.
     */
   def end(t: T): Unit = {
     _asJava.end(t)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[MessageProducer#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -51,7 +50,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
+    * Synonym for [[MessageProducer#write]].
     * @param message the message to send
     * @return reference to this for fluency
     */
@@ -103,7 +102,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
+    * Closes the producer, calls [[MessageProducer#close]]
     */
   def end(): Unit = {
     _asJava.end()

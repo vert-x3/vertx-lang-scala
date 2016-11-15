@@ -30,6 +30,7 @@ import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 class Http2Settings(val asJava: JHttp2Settings) {
 
+
   /**
     * Set  HTTP/2 setting.
     */

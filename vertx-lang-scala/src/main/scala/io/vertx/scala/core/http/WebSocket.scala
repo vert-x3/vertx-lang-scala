@@ -36,14 +36,14 @@ class WebSocket(private val _asJava: JWebSocket)
   def asJava: JWebSocket = _asJava
 
   /**
-    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+    * Same as [[WebSocketBase#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[WebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -76,7 +76,7 @@ class WebSocket(private val _asJava: JWebSocket)
   }
 
   /**
-    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+    * Calls [[WebSocketBase#close]]
     */
   def end(): Unit = {
     _asJava.end()

@@ -26,6 +26,7 @@ import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOp
   */
 
 class SockJSHandlerOptions(val asJava: JSockJSHandlerOptions) {
+
   def addDisabledTransport(value: String) = {
     asJava.addDisabledTransport(value)
     this

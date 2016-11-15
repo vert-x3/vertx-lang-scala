@@ -104,7 +104,7 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
 
   /**
     * The size of the upload may not be available until it is all read.
-    * Check [[io.vertx.scala.core.http.HttpServerFileUpload#isSizeAvailable]] to determine this
+    * Check [[HttpServerFileUpload#isSizeAvailable]] to determine this
     * @return the size of the upload (in bytes)
     */
   def size(): Long = {
@@ -112,7 +112,7 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
   }
 
   /**
-    * @return true if the size of the upload can be retrieved via [[#size()]].
+    * @return true if the size of the upload can be retrieved via #size().
     */
   def isSizeAvailable(): Boolean = {
     _asJava.isSizeAvailable()

@@ -27,6 +27,7 @@ import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 
 class ProxyOptions(val asJava: JProxyOptions) {
 
+
   /**
     * Set proxy host.
     */

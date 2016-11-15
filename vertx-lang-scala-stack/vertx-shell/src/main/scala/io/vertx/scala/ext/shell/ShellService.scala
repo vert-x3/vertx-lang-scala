@@ -22,7 +22,6 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.shell.{ShellService => JShellService}
 import io.vertx.ext.shell.{ShellServer => JShellServer}
 import io.vertx.ext.shell.{ShellServiceOptions => JShellServiceOptions}
-import io.vertx.scala.ext.shell.ShellServiceOptions
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 
@@ -30,7 +29,7 @@ import io.vertx.scala.core.Vertx
   * The shell service, provides a remotely accessible shell available via Telnet or SSH according to the
   * <a href="../../../../../../../cheatsheet/ShellServiceOptions.html">ShellServiceOptions</a> configuration.<p/>
   *
-  * The shell service will expose commands using [[io.vertx.scala.ext.shell.command.CommandResolver]] on the classpath and
+  * The shell service will expose commands using [[CommandResolver]] on the classpath and
   * the shared command registry for the Vert.x instance.
   */
 class ShellService(private val _asJava: JShellService) {

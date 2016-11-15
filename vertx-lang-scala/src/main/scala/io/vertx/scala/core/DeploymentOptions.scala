@@ -29,6 +29,7 @@ import io.vertx.core.json.JsonObject
 
 class DeploymentOptions(val asJava: JDeploymentOptions) {
 
+
   /**
     * Set the JSON configuration that will be passed to the verticle(s) when it's deployed
     */

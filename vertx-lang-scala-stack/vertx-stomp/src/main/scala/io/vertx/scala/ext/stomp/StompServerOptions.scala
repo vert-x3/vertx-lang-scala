@@ -42,6 +42,7 @@ import io.vertx.scala.core.net.PfxOptions
   */
 
 class StompServerOptions(val asJava: JStompServerOptions) {
+
   def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this

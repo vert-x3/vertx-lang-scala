@@ -31,6 +31,7 @@ import io.vertx.core.json.JsonArray
 
 class UpdateResult(val asJava: JUpdateResult) {
 
+
   /**
     * Get any generated keys
     */

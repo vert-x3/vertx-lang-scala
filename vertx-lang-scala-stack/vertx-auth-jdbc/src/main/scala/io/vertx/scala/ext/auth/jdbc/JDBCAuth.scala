@@ -29,7 +29,7 @@ import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 
 /**
-  * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
+  * Factory interface for creating [[AuthProvider]] instances that use the Vert.x JDBC client
   */
 class JDBCAuth(private val _asJava: JJDBCAuth) 
     extends  {

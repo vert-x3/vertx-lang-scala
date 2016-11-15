@@ -29,6 +29,7 @@ import io.vertx.scala.core.buffer.Buffer
 
 class NetClientOptions(val asJava: JNetClientOptions) {
 
+
   /**
     * Set the connect timeout
     */

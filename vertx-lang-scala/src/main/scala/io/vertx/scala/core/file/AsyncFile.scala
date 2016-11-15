@@ -30,10 +30,10 @@ import io.vertx.scala.core.streams.ReadStream
 /**
   * Represents a file on the file-system which can be read from, or written to asynchronously.
   * 
-  * This class also implements [[io.vertx.scala.core.streams.ReadStream]] and
-  * [[io.vertx.scala.core.streams.WriteStream]]. This allows the data to be pumped to and from
-  * other streams, e.g. an [[io.vertx.scala.core.http.HttpClientRequest]] instance,
-  * using the [[io.vertx.scala.core.streams.Pump]] class
+  * This class also implements [[ReadStream]] and
+  * [[WriteStream]]. This allows the data to be pumped to and from
+  * other streams, e.g. an [[HttpClientRequest]] instance,
+  * using the [[Pump]] class
   */
 class AsyncFile(private val _asJava: JAsyncFile) 
     extends ReadStream[Buffer] 
@@ -42,14 +42,14 @@ class AsyncFile(private val _asJava: JAsyncFile)
   def asJava: JAsyncFile = _asJava
 
   /**
-    * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.
+    * Same as [[AsyncFile#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.file.AsyncFile#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[AsyncFile#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -97,7 +97,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * Close the file, see [[io.vertx.scala.core.file.AsyncFile#close]].
+    * Close the file, see [[AsyncFile#close]].
     */
   def end(): Unit = {
     _asJava.end()
@@ -122,7 +122,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * Write a [[io.vertx.scala.core.buffer.Buffer]] to the file at position `position` in the file, asynchronously.
+    * Write a [[Buffer]] to the file at position `position` in the file, asynchronously.
     * 
     * If `position` lies outside of the current size
     * of the file, the file will be enlarged to encompass it.
@@ -176,7 +176,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   /**
-    * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
+    * Same as [[AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def flushFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
@@ -185,7 +185,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Sets the position from which data will be read from when using the file as a [[io.vertx.scala.core.streams.ReadStream]].
+    * Sets the position from which data will be read from when using the file as a [[ReadStream]].
     * @param readPos the position in the file
     * @return a reference to this, so the API can be used fluently
     */
@@ -195,7 +195,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Sets the position from which data will be written when using the file as a [[io.vertx.scala.core.streams.WriteStream]].
+    * Sets the position from which data will be written when using the file as a [[WriteStream]].
     * @param writePos the position in the file
     * @return a reference to this, so the API can be used fluently
     */

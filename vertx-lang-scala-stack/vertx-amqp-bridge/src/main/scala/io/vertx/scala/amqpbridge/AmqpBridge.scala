@@ -27,7 +27,6 @@ import io.vertx.scala.core.eventbus.MessageConsumer
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.scala.core.eventbus.MessageProducer
 import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
-import io.vertx.scala.amqpbridge.AmqpBridgeOptions
 
 /**
   * Vert.x AMQP Bridge. Facilitates sending and receiving AMQP 1.0 messages.

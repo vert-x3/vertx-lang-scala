@@ -31,10 +31,10 @@ import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 /**
   * An HTTP and WebSockets server.
   * 
-  * You receive HTTP requests by providing a [[io.vertx.scala.core.http.HttpServer#requestHandler]]. As requests arrive on the server the handler
+  * You receive HTTP requests by providing a [[HttpServer#requestHandler]]. As requests arrive on the server the handler
   * will be called with the requests.
   * 
-  * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
+  * You receive WebSockets by providing a [[HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
   * WebSocket is passed to the handler.
   */
 class HttpServer(private val _asJava: JHttpServer) 
@@ -52,7 +52,7 @@ class HttpServer(private val _asJava: JHttpServer)
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
-    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
+    * instances of [[HttpServerRequest]] will be created and passed to the stream .
     * @return the request stream
     */
   def requestStream(): HttpServerRequestStream = {
@@ -64,7 +64,7 @@ class HttpServer(private val _asJava: JHttpServer)
 
   /**
     * Set the request handler for the server to `requestHandler`. As HTTP requests are received by the server,
-    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to this handler.
+    * instances of [[HttpServerRequest]] will be created and passed to this handler.
     * @return a reference to this, so the API can be used fluently
     */
   def requestHandler(handler: HttpServerRequest => Unit): HttpServer = {
@@ -83,7 +83,7 @@ class HttpServer(private val _asJava: JHttpServer)
 
   /**
     * Return the websocket stream for the server. If a websocket connect handshake is successful a
-    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
+    * new [[ServerWebSocket]] instance will be created and passed to the stream .
     * @return the websocket stream
     */
   def websocketStream(): ServerWebSocketStream = {
@@ -95,7 +95,7 @@ class HttpServer(private val _asJava: JHttpServer)
 
   /**
     * Set the websocket handler for the server to `wsHandler`. If a websocket connect handshake is successful a
-    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.
+    * new [[ServerWebSocket]] instance will be created and passed to the handler.
     * @return a reference to this, so the API can be used fluently
     */
   def websocketHandler(handler: ServerWebSocket => Unit): HttpServer = {
@@ -130,7 +130,7 @@ class HttpServer(private val _asJava: JHttpServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually
+    * Like [[HttpServer#listen]] but supplying a handler that will be called when the server is actually
     * listening (or has failed).
     * @param port the port to listen on
     * @param host the host to listen on
@@ -143,7 +143,7 @@ class HttpServer(private val _asJava: JHttpServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServer#listen]] but the server will listen on host "0.0.0.0" and port specified here ignoring
+    * Like [[HttpServer#listen]] but the server will listen on host "0.0.0.0" and port specified here ignoring
     * any value in the <a href="../../../../../../../cheatsheet/HttpServerOptions.html">HttpServerOptions</a> that was used when creating the server.
     * @param port the port to listen on
     * @return a reference to this, so the API can be used fluently
@@ -154,7 +154,7 @@ class HttpServer(private val _asJava: JHttpServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
+    * Like [[HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @param port the port to listen on
     * @return the listen future
     */
@@ -165,7 +165,7 @@ class HttpServer(private val _asJava: JHttpServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
+    * Like [[HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[HttpServer] = {
@@ -184,7 +184,7 @@ class HttpServer(private val _asJava: JHttpServer)
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).
+    * Like [[HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).
     * @return the future
     */
   def closeFuture(): concurrent.Future[Unit] = {

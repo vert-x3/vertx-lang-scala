@@ -28,6 +28,7 @@ import io.vertx.core.json.JsonObject
 
 class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
 
+
   /**
     * Sets the event bus address on which the service arrivals, departures and modifications are announced. This
     * address must be consistent in the whole application.
