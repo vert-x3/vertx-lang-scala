@@ -3,7 +3,7 @@
 Vert.x Circuit Breaker is an implementation of the Circuit Breaker _pattern_ for Vert.x.
 
 It keeps track of the
-number of failures and _open the circuit_ when a threshold is reached. Optionally, a fallback is executed.
+number of failures and _opens the circuit_ when a threshold is reached. Optionally, a fallback is executed.
 
 Supported failures are:
 
@@ -11,7 +11,7 @@ Supported failures are:
 * exception thrown by your code
 * uncompleted futures (timeout)
 
-Operations guarded by a circuit breaker are intended to by non-blocking and asynchronous in order to benefits from
+Operations guarded by a circuit breaker are intended to be non-blocking and asynchronous in order to benefit from
 the Vert.x execution model.
 
 == Using the vert.x circuit breaker
@@ -106,7 +106,7 @@ The result of the operation is provided using the:
 * returned `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]` when calling `execute` methods
 * provided `link:../../scaladoc/io/vertx/scala/core/Future.html[Future]` when calling the `executeAndReport` methods
 
-Optionally, you can provide a fallback executed when the circuit is open:
+Optionally, you can provide a fallback which is executed when the circuit is open:
 
 [source,scala]
 ----
@@ -141,7 +141,7 @@ breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String
 The fallback is called whenever the circuit is open, or if the
 `link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]` is enabled. When a fallback is
 set, the result is using the output of the fallback function. The fallback function takes as parameter a
-`Throwable` object and returned an object of the expected type.
+`Throwable` object and returns an object of the expected type.
 
 The fallback can also be set on the `link:../../scaladoc/io/vertx/scala/circuitbreaker/CircuitBreaker.html[CircuitBreaker]` object directly:
 
@@ -205,12 +205,12 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
 
 ----
 
-You can also be notified when the circuit breaker decide to attempt to reset (half-open state). You can register
-such as callback with `link:../../scaladoc/io/vertx/scala/circuitbreaker/CircuitBreaker.html#halfOpenHandler(io.vertx.core.Handler)[halfOpenHandler]`.
+You can also be notified when the circuit breaker decides to attempt to reset (half-open state). You can register
+such a callback with `link:../../scaladoc/io/vertx/scala/circuitbreaker/CircuitBreaker.html#halfOpenHandler(io.vertx.core.Handler)[halfOpenHandler]`.
 
 == Event bus notification
 
-Every time the circuit state changes, an event is published on the event bus. The address on which the event are
+Every time the circuit state changes, an event is published on the event bus. The address on which the events are
 sent is configurable with
 `link:../dataobjects.html#CircuitBreakerOptions#setNotificationAddress(java.lang.String)[notificationAddress]`. If `null` is
 passed to this method, the notifications are disabled. By default, the used address is `vertx.circuit-breaker`.
@@ -220,7 +220,7 @@ Each event contains a Json Object with:
 * `state` : the new circuit breaker state (`OPEN`, `CLOSED`, `HALF_OPEN`)
 * `name` : the name of the circuit breaker
 * `failures` : the number of failures
-* `node` : the identifier of the node (`local` is Vert.x is not running in cluster mode)
+* `node` : the identifier of the node (`local` if Vert.x is not running in cluster mode)
 
 == The half-open state
 
@@ -232,4 +232,38 @@ circuit breaker is allowed to execute the dangerous operation. Should the call s
 and returns to the `closed` state, ready for more routine operation. If this trial call fails, however, the circuit
 breaker returns to the `open` state until another timeout elapses.
 
+
+== Pushing circuit breaker metrics to the Hystrix Dashboard
+
+Netflix Hystrix comes with a dashboard to present the current state of the circuit breakers. The Vert.x circuit
+breakers can publish their metrics in order to be consumed by this Hystrix Dashboard. The Hystrix dashboard requires
+a SSE stream sending the metrics. This stream is provided by the
+`link:../../scaladoc/io/vertx/scala/circuitbreaker/HystrixMetricHandler.html[HystrixMetricHandler]` Vert.x Web Handler:
+
+
+[source,scala]
+----
+import io.vertx.scala.circuitbreaker.CircuitBreaker
+import io.vertx.scala.ext.web.Router
+import io.vertx.scala.circuitbreaker.HystrixMetricHandler
+// Create the circuit breaker as usual.
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx)
+var breaker2 = CircuitBreaker.create("my-second-circuit-breaker", vertx)
+
+// Create a Vert.x Web router
+var router = Router.router(vertx)
+// Register the metric handler
+router.get("/hystrix-metrics").handler(HystrixMetricHandler.create(vertx))
+
+// Create the HTTP server using the router to dispatch the requests
+vertx.createHttpServer().requestHandler(router.accept _).listen(8080)
+
+
+----
+
+In the Hystrix Dashboard, configure the stream url like: `http://localhost:8080/metrics`. The dashboard now consumes
+the metrics from the Vert.x circuit breakers.
+
+Notice that the metrics are collected by the Vert.x Web handler using the event bus notifications. If you don't use
+the default notification address, you need to pass it when creating the metrics handler.
 

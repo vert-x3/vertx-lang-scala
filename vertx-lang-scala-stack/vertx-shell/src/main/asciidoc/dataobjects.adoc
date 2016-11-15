@@ -24,6 +24,7 @@ Set the charset used for encoding / decoding text data from/to SockJS
 +++
 |[[clientAuth]]`clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
 |[[clientAuthRequired]]`clientAuthRequired`|`Boolean`|-
+|[[compressionLevel]]`compressionLevel`|`Number (int)`|-
 |[[compressionSupported]]`compressionSupported`|`Boolean`|-
 |[[crlPaths]]`crlPaths`|`Array of String`|-
 |[[crlValues]]`crlValues`|`Array of Buffer`|-

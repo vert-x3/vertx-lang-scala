@@ -88,32 +88,32 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * This method returns a  object to retrieve the status and result of the operation, with the status
     * being a success or a failure. If the fallback is called, the returned future is successfully completed with the
     * value returned from the fallback. If the fallback throws an exception, the returned future is marked as failed.
-    * @param operation the operation
+    * @param command the operation
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return a future object completed when the operation or its fallback completes
     */
-  def executeWithFallback[T](operation: Future[T] => Unit, fallback: java.lang.Throwable => T): Future[T] = {
-    Future.apply[T](_asJava.executeWithFallback(funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback)))
+  def executeWithFallback[T](command: Future[T] => Unit, fallback: java.lang.Throwable => T): Future[T] = {
+    Future.apply[T](_asJava.executeWithFallback(funcToMappedHandler(Future.apply[T])(command), asJavaFunction(fallback)))
   }
 
   /**
     * Same as [[CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
-    * @param operation the operation
+    * @param command the operation
     * @return a future object completed when the operation or its fallback completes
     */
-  def execute[T](operation: Future[T] => Unit): Future[T] = {
-    Future.apply[T](_asJava.execute(funcToMappedHandler(Future.apply[T])(operation)))
+  def execute[T](command: Future[T] => Unit): Future[T] = {
+    Future.apply[T](_asJava.execute(funcToMappedHandler(Future.apply[T])(command)))
   }
 
   /**
     * Same as [[CircuitBreaker#executeAndReportWithFallback]] but using the circuit breaker default
     * fallback.
     * @param resultFuture the future on which the operation result is reported
-    * @param operation the operation
+    * @param command the operation
     * @return the current CircuitBreaker
     */
-  def executeAndReport[T](resultFuture: Future[T], operation: Future[T] => Unit): CircuitBreaker = {
-    _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation))
+  def executeAndReport[T](resultFuture: Future[T], command: Future[T] => Unit): CircuitBreaker = {
+    _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(command))
     this
   }
 
@@ -132,12 +132,12 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * is successfully completed with the value returned by the fallback function. If the fallback throws an exception,
     * the future is marked as failed.
     * @param resultFuture the future on which the operation result is reported
-    * @param operation the operation
+    * @param command the operation
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current CircuitBreaker
     */
-  def executeAndReportWithFallback[T](resultFuture: Future[T], operation: Future[T] => Unit, fallback: java.lang.Throwable => T): CircuitBreaker = {
-    _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(operation), asJavaFunction(fallback))
+  def executeAndReportWithFallback[T](resultFuture: Future[T], command: Future[T] => Unit, fallback: java.lang.Throwable => T): CircuitBreaker = {
+    _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(command), asJavaFunction(fallback))
     this
   }
 

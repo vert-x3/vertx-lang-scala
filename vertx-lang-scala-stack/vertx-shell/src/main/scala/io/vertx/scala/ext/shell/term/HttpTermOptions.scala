@@ -91,6 +91,13 @@ class HttpTermOptions(val asJava: JHttpTermOptions) {
   def isClientAuthRequired = {
     asJava.isClientAuthRequired()
   }
+  def setCompressionLevel(value: Int) = {
+    asJava.setCompressionLevel(value)
+    this
+  }
+  def getCompressionLevel = {
+    asJava.getCompressionLevel()
+  }
   def setCompressionSupported(value: Boolean) = {
     asJava.setCompressionSupported(value)
     this
