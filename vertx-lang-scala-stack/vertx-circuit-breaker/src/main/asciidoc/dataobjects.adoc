@@ -24,6 +24,10 @@ Sets the maximum number of failures before opening the circuit.
 +++
 Configures the number of times the circuit breaker tries to redo the operation before failing.
 +++
+|[[metricsRollingWindow]]`metricsRollingWindow`|`Number (long)`|
++++
+Sets the rolling window used for metrics.
++++
 |[[notificationAddress]]`notificationAddress`|`String`|
 +++
 Sets the event bus address on which the circuit breaker publish its state change.

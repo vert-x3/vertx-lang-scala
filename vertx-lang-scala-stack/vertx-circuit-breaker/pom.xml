@@ -27,6 +27,11 @@
       <artifactId>${vertx-module}</artifactId>
       <version>${stack.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web_${scala.build.version}</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
     <!-- TODO most certainly a bug -->
     <dependency>
       <groupId>com.netflix.rxjava</groupId>

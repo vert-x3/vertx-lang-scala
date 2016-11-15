@@ -62,6 +62,17 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
   }
 
   /**
+    * Sets the rolling window used for metrics.
+    */
+  def setMetricsRollingWindow(value: Long) = {
+    asJava.setMetricsRollingWindow(value)
+    this
+  }
+  def getMetricsRollingWindow = {
+    asJava.getMetricsRollingWindow()
+  }
+
+  /**
     * Sets the event bus address on which the circuit breaker publish its state change.
     */
   def setNotificationAddress(value: String) = {

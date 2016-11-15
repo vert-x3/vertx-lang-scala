@@ -51,7 +51,7 @@ to share the same pool so you don't end up with multiple pools
 
 The simplest way to do this is as follows:
 
-[source,java]
+[source,scala]
 ----
 import io.vertx.scala.ext.mongo.MongoClient
 
@@ -69,7 +69,7 @@ Subsequent calls will return a new client instance that uses the same pool, so t
 
 You can create a client specifying a pool source name as follows
 
-[source,java]
+[source,scala]
 ----
 import io.vertx.scala.ext.mongo.MongoClient
 
@@ -96,7 +96,7 @@ However, it's possible you want to create a client instance that doesn't share i
 
 In that case you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createNonShared]`.
 
-[source,java]
+[source,scala]
 ----
 import io.vertx.scala.ext.mongo.MongoClient
 
