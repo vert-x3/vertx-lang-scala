@@ -214,7 +214,7 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_0 =    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -224,7 +224,7 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1=    SocketAddress.apply(_asJava.localAddress())
+      cached_1 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
   }

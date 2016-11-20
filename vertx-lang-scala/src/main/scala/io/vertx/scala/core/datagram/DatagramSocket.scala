@@ -136,7 +136,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.localAddress())
+      cached_0 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_0
   }

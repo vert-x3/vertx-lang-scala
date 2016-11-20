@@ -127,7 +127,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForOption(option: Option): scala.Option[String] = {
-        scala.Option(_asJava.getRawValueForOption(option.asJava))
+    scala.Option(_asJava.getRawValueForOption(option.asJava))
   }
 
   /**
@@ -145,7 +145,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForArgument(arg: Argument): scala.Option[String] = {
-        scala.Option(_asJava.getRawValueForArgument(arg.asJava))
+    scala.Option(_asJava.getRawValueForArgument(arg.asJava))
   }
 
   /**

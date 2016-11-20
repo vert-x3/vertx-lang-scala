@@ -63,7 +63,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def textData(): String = {
     if (cached_0 == null) {
-      cached_0=    _asJava.textData()
+      cached_0 =    _asJava.textData()
     }
     cached_0
   }
@@ -73,7 +73,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def binaryData(): Buffer = {
     if (cached_1 == null) {
-      cached_1=    Buffer.apply(_asJava.binaryData())
+      cached_1 =    Buffer.apply(_asJava.binaryData())
     }
     cached_1
   }

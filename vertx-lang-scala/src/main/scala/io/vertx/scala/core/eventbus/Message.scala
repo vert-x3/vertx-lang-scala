@@ -59,7 +59,7 @@ class Message[T](private val _asJava: JMessage[T]) {
     */
   def body(): T = {
     if (cached_0 == null) {
-      cached_0=    _asJava.body()
+      cached_0 =    _asJava.body()
     }
     cached_0
   }
@@ -69,7 +69,7 @@ class Message[T](private val _asJava: JMessage[T]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-        scala.Option(_asJava.replyAddress())
+    scala.Option(_asJava.replyAddress())
   }
 
   /**

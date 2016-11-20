@@ -96,7 +96,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0=    MultiMap.apply(_asJava.headers())
+      cached_0 =    MultiMap.apply(_asJava.headers())
     }
     cached_0
   }
@@ -107,7 +107,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     * @return the header value
     */
   def getHeader(headerName: String): scala.Option[String] = {
-        scala.Option(_asJava.getHeader(headerName))
+    scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -116,7 +116,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     * @return the trailer value
     */
   def getTrailer(trailerName: String): scala.Option[String] = {
-        scala.Option(_asJava.getTrailer(trailerName))
+    scala.Option(_asJava.getTrailer(trailerName))
   }
 
   /**
@@ -124,7 +124,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     */
   def trailers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1=    MultiMap.apply(_asJava.trailers())
+      cached_1 =    MultiMap.apply(_asJava.trailers())
     }
     cached_1
   }
@@ -134,7 +134,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
     if (cached_2 == null) {
-      cached_2=    _asJava.cookies().asScala.map(x => x:String)
+      cached_2 =    _asJava.cookies().asScala.map(x => x:String)
     }
     cached_2
   }
@@ -172,7 +172,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     */
   def netSocket(): NetSocket = {
     if (cached_3 == null) {
-      cached_3=    NetSocket.apply(_asJava.netSocket())
+      cached_3 =    NetSocket.apply(_asJava.netSocket())
     }
     cached_3
   }

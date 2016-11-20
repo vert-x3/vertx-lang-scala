@@ -304,21 +304,21 @@ class TestInterface(private val _asJava: JTestInterface)
 
   def methodWithCachedReturn(foo: String): RefedInterface1 = {
     if (cached_0 == null) {
-      cached_0=    RefedInterface1.apply(_asJava.methodWithCachedReturn(foo))
+      cached_0 =    RefedInterface1.apply(_asJava.methodWithCachedReturn(foo))
     }
     cached_0
   }
 
   def methodWithCachedReturnPrimitive(arg: Int): Int = {
     if (cached_1 == null) {
-      cached_1=    _asJava.methodWithCachedReturnPrimitive(arg)
+      cached_1 =    _asJava.methodWithCachedReturnPrimitive(arg)
     }
     cached_1
   }
 
   def methodWithCachedListReturn(): scala.collection.mutable.Buffer[RefedInterface1] = {
     if (cached_2 == null) {
-      cached_2=    _asJava.methodWithCachedListReturn().asScala.map(RefedInterface1.apply)
+      cached_2 =    _asJava.methodWithCachedListReturn().asScala.map(RefedInterface1.apply)
     }
     cached_2
   }

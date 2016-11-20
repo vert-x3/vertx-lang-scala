@@ -192,7 +192,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def fileSystem(): FileSystem = {
     if (cached_0 == null) {
-      cached_0=    FileSystem.apply(_asJava.fileSystem())
+      cached_0 =    FileSystem.apply(_asJava.fileSystem())
     }
     cached_0
   }
@@ -203,7 +203,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def eventBus(): EventBus = {
     if (cached_1 == null) {
-      cached_1=    EventBus.apply(_asJava.eventBus())
+      cached_1 =    EventBus.apply(_asJava.eventBus())
     }
     cached_1
   }
@@ -224,7 +224,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def sharedData(): SharedData = {
     if (cached_2 == null) {
-      cached_2=    SharedData.apply(_asJava.sharedData())
+      cached_2 =    SharedData.apply(_asJava.sharedData())
     }
     cached_2
   }
@@ -498,7 +498,7 @@ object Vertx {
   }
 
   def currentContext(): scala.Option[Context] = {
-        scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
+    scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
   }
 
 }

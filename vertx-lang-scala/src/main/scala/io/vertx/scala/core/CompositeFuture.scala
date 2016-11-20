@@ -106,7 +106,7 @@ class CompositeFuture(private val _asJava: JCompositeFuture)
     */
   def completer(): io.vertx.core.AsyncResult [CompositeFuture] => Unit = {
     if (cached_0 == null) {
-      cached_0=    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
+      cached_0 =    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
     }
     cached_0
   }
