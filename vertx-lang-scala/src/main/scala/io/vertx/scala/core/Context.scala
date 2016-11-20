@@ -114,7 +114,7 @@ class Context(private val _asJava: JContext) {
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
   def config(): scala.Option[JsonObject] = {
-        scala.Option(_asJava.config())
+    scala.Option(_asJava.config())
   }
 
   /**

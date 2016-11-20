@@ -201,7 +201,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0=    MultiMap.apply(_asJava.headers())
+      cached_0 =    MultiMap.apply(_asJava.headers())
     }
     cached_0
   }
@@ -372,7 +372,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def connection(): HttpConnection = {
     if (cached_1 == null) {
-      cached_1=    HttpConnection.apply(_asJava.connection())
+      cached_1 =    HttpConnection.apply(_asJava.connection())
     }
     cached_1
   }

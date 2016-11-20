@@ -27,8 +27,9 @@ class GenericRefedInterface[T](private val _asJava: JGenericRefedInterface[T]) {
 
   def asJava: JGenericRefedInterface[T] = _asJava
 
-  def setValue(value: T): Unit = {
+  def setValue(value: T): GenericRefedInterface[T] = {
     _asJava.setValue(value)
+    this
   }
 
   def getValue(): T = {

@@ -146,7 +146,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0=    MultiMap.apply(_asJava.headers())
+      cached_0 =    MultiMap.apply(_asJava.headers())
     }
     cached_0
   }
@@ -167,7 +167,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def trailers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1=    MultiMap.apply(_asJava.trailers())
+      cached_1 =    MultiMap.apply(_asJava.trailers())
     }
     cached_1
   }

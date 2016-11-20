@@ -35,7 +35,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
     */
   def `type`(): Int = {
     if (cached_0 == null) {
-      cached_0=    _asJava.`type`()
+      cached_0 =    _asJava.`type`()
     }
     cached_0
   }
@@ -45,7 +45,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
     */
   def flags(): Int = {
     if (cached_1 == null) {
-      cached_1=    _asJava.flags()
+      cached_1 =    _asJava.flags()
     }
     cached_1
   }
@@ -55,7 +55,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
     */
   def payload(): Buffer = {
     if (cached_2 == null) {
-      cached_2=    Buffer.apply(_asJava.payload())
+      cached_2 =    Buffer.apply(_asJava.payload())
     }
     cached_2
   }

@@ -504,7 +504,7 @@
     } else if (param.type.args[0].kind == CLASS_DATA_OBJECT){
       return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava).asJava');
     } else {
-      return handleOptionForCollection(param, '.map(x => if (x == null) null else x:' + param.type.args[0].name + ').asJava');
+      return handleOptionForCollection(param, '.map(x => x:' + param.type.args[0].name + ').asJava');
     }
   }
 
@@ -540,7 +540,7 @@
     return invocation;
   }
 
-  def handleMethodReturnList(method) {
+  def convertMethodReturnToScalaList(method) {
     if (method.returnType.args[0].kind == CLASS_API) {
       return '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ')';
     } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
@@ -550,7 +550,7 @@
     }
   }
 
-  def handleMethodReturnSet(method) {
+  def convertMethodReturnToScalaSet(method) {
     if (method.returnType.args[0].kind == CLASS_API) {
       return '.asScala.map(' + toScalaApply(method.returnType.args[0].getSimpleName()) + ').toSet';
     } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
@@ -560,7 +560,7 @@
     }
   }
 
-  def handleMethodReturnMap(method) {
+  def convertMethodReturnToScalaMap(method) {
     if (method.returnType.args[1].kind == CLASS_API) {
       return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1].getSimpleName()) + ')).toMap';
     } else if (method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
@@ -574,16 +574,14 @@
     }
   }
 
-  def handleMethodReturn(method) {
+  def convertMethodReturnToScalaType(method) {
     var invocation = '';
     if (method.returnType.kind == CLASS_LIST) {
-      invocation += handleMethodReturnList(method);
+      invocation += convertMethodReturnToScalaList(method);
     } else if (method.returnType.kind == CLASS_SET) {
-      invocation += handleMethodReturnSet(method);
+      invocation += convertMethodReturnToScalaSet(method);
     } else if (method.returnType.kind == CLASS_MAP) {
-      invocation += handleMethodReturnMap(method);
-    } else if (method.returnType.kind == CLASS_HANDLER) {
-      invocation += ')'
+      invocation += convertMethodReturnToScalaMap(method);
     }
     return invocation;
   }
@@ -592,80 +590,95 @@
     return method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT;
   }
 
+  def doesKindNeedConversionToScalaType(kind) {
+    return kind == CLASS_LIST || kind == CLASS_SET || kind == CLASS_MAP;
+  }
+
+  /**
+   * Central method for generating method invocations. Each generated wrapper-class uses this part to generate the
+   * invocations to the original API.
+   */
   def methodInvocation(target, method, indentation) {
     var invocation = '';
     var isFluent = method.isFluent();
     var isFuture = shouldMethodReturnAFuture(method);
-    var wrap = false;
+    var isConversionRequired = doesKindNeedConversionToScalaType(method.returnType.kind);
+    var rawMethodInvocation = target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) + ')';
+
+
+    /**
+     * Take care of methods returning Handler[AsyncResult]. They need to convert the provided handler into a
+     * a Scala function.
+     */
     if (returnsHandlerForAsyncResult(method)) {
       var kindOfAsyncResult = method.returnType.args[0].args[0].kind;
       if (kindOfAsyncResult == CLASS_API) {
-        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
+        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       } else if (kindOfAsyncResult == CLASS_PRIMITIVE || kindOfAsyncResult == CLASS_BOXED_PRIMITIVE) {
-        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
+        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       } else {
-        invocation += 'handlerToFunc[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+']](' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
+        invocation += 'handlerToFunc[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+']](' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       }
+      return indentation + invocation + '\n';
+    }
+
+    /**
+     * Wrap returned Handlers in Scala functions.
+     */
+    if (method.returnType.kind == CLASS_HANDLER) {
+      var ret = method.returnType.args[0];
+      var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
+      if (ret.kind == CLASS_API ||
+          ret.kind == CLASS_DATA_OBJECT ||
+          ret.kind == CLASS_ENUM) {
+        invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
+      } else if (ret.kind == CLASS_PRIMITIVE ||
+                 ret.kind == CLASS_BOXED_PRIMITIVE ||
+                 ret.name == 'Throwable' ||
+                 ret.name == 'java.lang.Throwable') {
+        invocation += 'handlerToFunc[' + scalaType +'](';
+      } else if (ret.kind == CLASS_STRING ||
+                 ret.kind == CLASS_JSON_OBJECT ||
+                 ret.kind == CLASS_JSON_ARRAY) {
+        invocation += 'handlerToFunc[' + scalaType +'](';
+      } else {
+        invocation += 'handlerToFunc[' + scalaType +'](';
+      }
+      invocation += rawMethodInvocation + ')'
+    }
+    else if (!isFluent and method.returnType.kind == CLASS_API) {
+      invocation += toScalaApply(method.returnType.getSimpleName()) + '(' + rawMethodInvocation + ')';
+    }
+    else if (method.returnType.kind == CLASS_DATA_OBJECT) {
+      invocation = method.returnType.simpleName + '(' +rawMethodInvocation + ')';
     }
     else {
-      if (method.returnType.kind == CLASS_HANDLER) {
-        var ret = method.returnType.args[0];
-        var scalaType = toOptionIfNullable(toScalaType(method.returnType.args[0]), method.returnType.args[0]);
-        if (ret.kind == CLASS_API ||
-            ret.kind == CLASS_DATA_OBJECT ||
-            ret.kind == CLASS_ENUM) {
-          invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
-        } else if (ret.kind == CLASS_PRIMITIVE ||
-                   ret.kind == CLASS_BOXED_PRIMITIVE ||
-                   ret.name == 'Throwable' ||
-                   ret.name == 'java.lang.Throwable') {
-          invocation += 'handlerToFunc[' + scalaType +'](';
-        } else if (ret.kind == CLASS_STRING ||
-                   ret.kind == CLASS_JSON_OBJECT ||
-                   ret.kind == CLASS_JSON_ARRAY) {
-          invocation += 'handlerToFunc[' + scalaType +'](';
-        } else {
-          invocation += 'handlerToFunc[' + scalaType +'](';
-        }
-      }
-
-      if (!isFluent and method.returnType.kind == CLASS_API) {
-        wrap = true;
-        invocation += toScalaApply(method.returnType.getSimpleName()) + '(';
-      }
-
-      invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method);
-
-      if (wrap) {
-        invocation += '))';
-      } else {
-        invocation += ')';
-      }
+      invocation += rawMethodInvocation;
     }
 
-    var conversion = handleMethodReturn(method);
-
-    if (method.returnType.kind == CLASS_DATA_OBJECT) {
-      invocation = method.returnType.simpleName + '(' +invocation + ')';
-    }
-
+    /**
+     * Take care of nullables by wrapping them in scala.Options
+     */
     if (method.returnType.isNullable){
-      if (conversion != '') {
-        invocation = indentation + 'scala.Option('+invocation+') match { case Some(x) => Some(x' + conversion + '); case None => None};\n'
+      if (isConversionRequired) {
+        invocation = 'scala.Option('+invocation+') match { case Some(x) => Some(x' + convertMethodReturnToScalaType(method) + '); case None => None};\n'
       }
       else {
         if (method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
-          invocation = indentation + 'nullsafeConvToOption('+invocation+');\n'
+          invocation = 'nullsafeConvToOption('+invocation+')\n'
         }
         else {
-          invocation = indentation + 'scala.Option('+invocation+')\n'
+          invocation = 'scala.Option('+invocation+')\n'
         }
       }
     }
     else {
-      invocation += conversion + '\n';
+      invocation += convertMethodReturnToScalaType(method) + '\n';
     }
 
+    /**
+     * Return `this` for fluent methods.
+     */
     if (method.isFluent() && !isFuture) {
       invocation += indentation;
       invocation += 'this\n';
@@ -686,6 +699,10 @@
     return true;
   }
 
+  /**
+   * Some emthod names require special treatment when used in lang-scala. e.g. we have to convert the name
+   * of methods where the original version gets replaced with one returning a scala.Future.
+   */
   def createNameForMethod(method) {
     var methodName = method.name;
     if (shouldMethodReturnAFuture(method)) {
@@ -697,6 +714,9 @@
     return escapeIfKeyword(methodName);
   }
 
+  /**
+   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
+   */
   def typeToAliasedType(type) {
     type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}"
   }

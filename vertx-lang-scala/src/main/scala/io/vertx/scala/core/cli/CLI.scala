@@ -49,7 +49,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
   }
 
   /**
@@ -59,7 +59,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava, validate))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
   }
 
   /**
@@ -83,7 +83,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the CLI description.
     */
   def getDescription(): scala.Option[String] = {
-        scala.Option(_asJava.getDescription())
+    scala.Option(_asJava.getDescription())
   }
 
   def setDescription(desc: String): CLI = {
@@ -95,7 +95,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the CLI summary.
     */
   def getSummary(): scala.Option[String] = {
-        scala.Option(_asJava.getSummary())
+    scala.Option(_asJava.getSummary())
   }
 
   /**
@@ -211,7 +211,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Option, `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[Option] = {
-        scala.Option(Option(_asJava.getOption(name)))
+    scala.Option(Option(_asJava.getOption(name)))
   }
 
   /**
@@ -220,7 +220,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[Argument] = {
-        scala.Option(Argument(_asJava.getArgument(name)))
+    scala.Option(Argument(_asJava.getArgument(name)))
   }
 
   /**
@@ -229,7 +229,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[Argument] = {
-        scala.Option(Argument(_asJava.getArgument(index)))
+    scala.Option(Argument(_asJava.getArgument(index)))
   }
 
   /**

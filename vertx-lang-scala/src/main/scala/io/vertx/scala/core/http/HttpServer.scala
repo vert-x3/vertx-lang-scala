@@ -57,7 +57,7 @@ class HttpServer(private val _asJava: JHttpServer)
     */
   def requestStream(): HttpServerRequestStream = {
     if (cached_0 == null) {
-      cached_0=    HttpServerRequestStream.apply(_asJava.requestStream())
+      cached_0 =    HttpServerRequestStream.apply(_asJava.requestStream())
     }
     cached_0
   }
@@ -88,7 +88,7 @@ class HttpServer(private val _asJava: JHttpServer)
     */
   def websocketStream(): ServerWebSocketStream = {
     if (cached_1 == null) {
-      cached_1=    ServerWebSocketStream.apply(_asJava.websocketStream())
+      cached_1 =    ServerWebSocketStream.apply(_asJava.websocketStream())
     }
     cached_1
   }

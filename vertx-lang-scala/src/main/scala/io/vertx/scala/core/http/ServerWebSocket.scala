@@ -99,7 +99,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_0 =    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -109,7 +109,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1=    SocketAddress.apply(_asJava.localAddress())
+      cached_1 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
   }
@@ -199,7 +199,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * @return the WebSocket handshake query string.
     */
   def query(): scala.Option[String] = {
-        scala.Option(_asJava.query())
+    scala.Option(_asJava.query())
   }
 
   /**
@@ -207,7 +207,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def headers(): MultiMap = {
     if (cached_2 == null) {
-      cached_2=    MultiMap.apply(_asJava.headers())
+      cached_2 =    MultiMap.apply(_asJava.headers())
     }
     cached_2
   }
