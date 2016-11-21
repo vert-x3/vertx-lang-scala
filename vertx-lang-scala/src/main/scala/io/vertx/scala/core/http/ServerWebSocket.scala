@@ -32,8 +32,8 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * Represents a server side WebSocket.
   * 
-  * Instances of this class are passed into a [[HttpServer#websocketHandler]] or provided
-  * when a WebSocket handshake is manually [[HttpServerRequest#upgrade]]ed.
+  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
+  * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 class ServerWebSocket(private val _asJava: JServerWebSocket) 
     extends WebSocketBase {
@@ -41,14 +41,14 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
   def asJava: JServerWebSocket = _asJava
 
   /**
-    * Same as [[WebSocketBase#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[ServerWebSocket#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -81,7 +81,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
   }
 
   /**
-    * Calls [[WebSocketBase#close]]
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
     */
   def end(): Unit = {
     _asJava.end()

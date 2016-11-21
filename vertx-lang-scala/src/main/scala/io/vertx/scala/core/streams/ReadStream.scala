@@ -25,8 +25,8 @@ import io.vertx.core.streams.{StreamBase => JStreamBase}
 /**
   * Represents a stream of items that can be read from.
   * 
-  * Any class that implements this interface can be used by a [[Pump]] to pump data from it
-  * to a [[WriteStream]].
+  * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from it
+  * to a [[io.vertx.scala.core.streams.WriteStream]].
   */
 trait ReadStream[T] 
     extends StreamBase {

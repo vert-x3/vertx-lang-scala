@@ -34,11 +34,11 @@ import io.vertx.scala.core.net.NetSocket
 /**
   * Represents a client-side HTTP response.
   * 
-  * Vert.x provides you with one of these via the handler that was provided when creating the [[HttpClientRequest]]
-  * or that was set on the [[HttpClientRequest]] instance.
+  * Vert.x provides you with one of these via the handler that was provided when creating the [[io.vertx.scala.core.http.HttpClientRequest]]
+  * or that was set on the [[io.vertx.scala.core.http.HttpClientRequest]] instance.
   * 
-  * It implements [[ReadStream]] so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpClientResponse(private val _asJava: JHttpClientResponse) 
     extends ReadStream[Buffer] {
@@ -140,6 +140,27 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
   }
 
   /**
+    * Reset this response with the error code `0`.
+    */
+  def reset(): Unit = {
+    _asJava.reset()
+  }
+
+  /**
+    * Reset this response:
+    * <p/>
+    * <ul>
+    *   <li>for HTTP/2, this performs send an HTTP/2 reset frame with the specified error `code`</li>
+    *   <li>for HTTP/1.x, this closes the connection</li>
+    * </ul>
+    * <p/>
+    * @param code the error code
+    */
+  def reset(code: Long): Unit = {
+    _asJava.reset(code)
+  }
+
+  /**
     * Convenience method for receiving the entire request body in one piece.
     * 
     * This saves you having to manually set a dataHandler and an endHandler and append the chunks of the body until
@@ -166,7 +187,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     * 
     * USE THIS WITH CAUTION! Writing to the socket directly if you don't know what you're doing can easily break the HTTP protocol
     * 
-    * One valid use-case for calling this is to receive the [[NetSocket]] after a HTTP CONNECT was issued to the
+    * One valid use-case for calling this is to receive the [[io.vertx.scala.core.net.NetSocket]] after a HTTP CONNECT was issued to the
     * remote peer and it responded with a status code of 200.
     * @return the net socket
     */

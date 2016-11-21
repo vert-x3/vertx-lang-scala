@@ -27,8 +27,8 @@ import io.vertx.core.{Future => JFuture}
 /**
   * An executor for executing blocking code in Vert.x .
   *
-  * It provides the same <code>executeBlocking</code> operation than [[Context]] and
-  * [[Vertx]] but on a separate worker pool.
+  * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
+  * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
 class WorkerExecutor(private val _asJava: JWorkerExecutor) 
     extends Measured {
@@ -52,7 +52,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     * (e.g. on the original event loop of the caller).
     * 
     * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
-    * the handler should call the [[Future#complete]] or [[Future#complete]] method, or the [[Future#fail]]
+    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
     * method if it failed.
     * 
     * In the `blockingCodeHandler` the current context remains the original context and therefore any task
@@ -68,7 +68,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
   }
 
   /**
-    * Like [[WorkerExecutor#executeBlockingFuture]] called with ordered = true.
+    * Like [[io.vertx.scala.core.WorkerExecutor#executeBlockingFuture]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))

@@ -27,7 +27,7 @@ import io.vertx.scala.core.buffer.Buffer
   * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed
   * size records.
   * 
-  * Instances of this class take as input [[Buffer]] instances containing raw bytes,
+  * Instances of this class take as input [[io.vertx.scala.core.buffer.Buffer]] instances containing raw bytes,
   * and output records.
   * 
   * For example, if I had a simple ASCII text protocol delimited by '\n' and the input was the following:

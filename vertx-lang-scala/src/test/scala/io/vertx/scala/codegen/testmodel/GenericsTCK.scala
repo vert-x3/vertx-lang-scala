@@ -39,211 +39,211 @@ class GenericsTCK(private val _asJava: JGenericsTCK) {
   def asJava: JGenericsTCK = _asJava
 
   def methodWithByteParameterizedReturn(): GenericRefedInterface[Byte] = {
-    GenericRefedInterface.apply[Byte](_asJava.methodWithByteParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Byte](_asJava.methodWithByteParameterizedReturn())
   }
 
   def methodWithShortParameterizedReturn(): GenericRefedInterface[Short] = {
-    GenericRefedInterface.apply[Short](_asJava.methodWithShortParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Short](_asJava.methodWithShortParameterizedReturn())
   }
 
   def methodWithIntegerParameterizedReturn(): GenericRefedInterface[Int] = {
-    GenericRefedInterface.apply[Integer](_asJava.methodWithIntegerParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Integer](_asJava.methodWithIntegerParameterizedReturn())
   }
 
   def methodWithLongParameterizedReturn(): GenericRefedInterface[Long] = {
-    GenericRefedInterface.apply[Long](_asJava.methodWithLongParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Long](_asJava.methodWithLongParameterizedReturn())
   }
 
   def methodWithFloatParameterizedReturn(): GenericRefedInterface[Float] = {
-    GenericRefedInterface.apply[Float](_asJava.methodWithFloatParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Float](_asJava.methodWithFloatParameterizedReturn())
   }
 
   def methodWithDoubleParameterizedReturn(): GenericRefedInterface[Double] = {
-    GenericRefedInterface.apply[Double](_asJava.methodWithDoubleParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Double](_asJava.methodWithDoubleParameterizedReturn())
   }
 
   def methodWithBooleanParameterizedReturn(): GenericRefedInterface[Boolean] = {
-    GenericRefedInterface.apply[Boolean](_asJava.methodWithBooleanParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Boolean](_asJava.methodWithBooleanParameterizedReturn())
   }
 
   def methodWithCharacterParameterizedReturn(): GenericRefedInterface[Char] = {
-    GenericRefedInterface.apply[Character](_asJava.methodWithCharacterParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.Character](_asJava.methodWithCharacterParameterizedReturn())
   }
 
   def methodWithStringParameterizedReturn(): GenericRefedInterface[String] = {
-    GenericRefedInterface.apply[String](_asJava.methodWithStringParameterizedReturn())
+    GenericRefedInterface.apply[java.lang.String](_asJava.methodWithStringParameterizedReturn())
   }
 
   def methodWithJsonObjectParameterizedReturn(): GenericRefedInterface[JsonObject] = {
-    GenericRefedInterface.apply[JsonObject](_asJava.methodWithJsonObjectParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.core.json.JsonObject](_asJava.methodWithJsonObjectParameterizedReturn())
   }
 
   def methodWithJsonArrayParameterizedReturn(): GenericRefedInterface[JsonArray] = {
-    GenericRefedInterface.apply[JsonArray](_asJava.methodWithJsonArrayParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.core.json.JsonArray](_asJava.methodWithJsonArrayParameterizedReturn())
   }
 
   def methodWithDataObjectParameterizedReturn(): GenericRefedInterface[TestDataObject] = {
-    GenericRefedInterface.apply[TestDataObject](_asJava.methodWithDataObjectParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestDataObject](_asJava.methodWithDataObjectParameterizedReturn())
   }
 
   def methodWithEnumParameterizedReturn(): GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum] = {
-    GenericRefedInterface.apply[TestEnum](_asJava.methodWithEnumParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestEnum](_asJava.methodWithEnumParameterizedReturn())
   }
 
   def methodWithGenEnumParameterizedReturn(): GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum] = {
-    GenericRefedInterface.apply[TestGenEnum](_asJava.methodWithGenEnumParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestGenEnum](_asJava.methodWithGenEnumParameterizedReturn())
   }
 
   def methodWithUserTypeParameterizedReturn(): GenericRefedInterface[RefedInterface1] = {
-    GenericRefedInterface.apply[RefedInterface1](_asJava.methodWithUserTypeParameterizedReturn())
+    GenericRefedInterface.apply[io.vertx.codegen.testmodel.RefedInterface1](_asJava.methodWithUserTypeParameterizedReturn())
   }
 
   def methodWithHandlerByteParameterized(handler: GenericRefedInterface[Byte] => Unit): Unit = {
-    _asJava.methodWithHandlerByteParameterized(funcToMappedHandler(GenericRefedInterface.apply[Byte])(handler))
+    _asJava.methodWithHandlerByteParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Byte])(handler))
   }
 
   def methodWithHandlerShortParameterized(handler: GenericRefedInterface[Short] => Unit): Unit = {
-    _asJava.methodWithHandlerShortParameterized(funcToMappedHandler(GenericRefedInterface.apply[Short])(handler))
+    _asJava.methodWithHandlerShortParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Short])(handler))
   }
 
   def methodWithHandlerIntegerParameterized(handler: GenericRefedInterface[Int] => Unit): Unit = {
-    _asJava.methodWithHandlerIntegerParameterized(funcToMappedHandler(GenericRefedInterface.apply[Integer])(handler))
+    _asJava.methodWithHandlerIntegerParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Integer])(handler))
   }
 
   def methodWithHandlerLongParameterized(handler: GenericRefedInterface[Long] => Unit): Unit = {
-    _asJava.methodWithHandlerLongParameterized(funcToMappedHandler(GenericRefedInterface.apply[Long])(handler))
+    _asJava.methodWithHandlerLongParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Long])(handler))
   }
 
   def methodWithHandlerFloatParameterized(handler: GenericRefedInterface[Float] => Unit): Unit = {
-    _asJava.methodWithHandlerFloatParameterized(funcToMappedHandler(GenericRefedInterface.apply[Float])(handler))
+    _asJava.methodWithHandlerFloatParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Float])(handler))
   }
 
   def methodWithHandlerDoubleParameterized(handler: GenericRefedInterface[Double] => Unit): Unit = {
-    _asJava.methodWithHandlerDoubleParameterized(funcToMappedHandler(GenericRefedInterface.apply[Double])(handler))
+    _asJava.methodWithHandlerDoubleParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Double])(handler))
   }
 
   def methodWithHandlerBooleanParameterized(handler: GenericRefedInterface[Boolean] => Unit): Unit = {
-    _asJava.methodWithHandlerBooleanParameterized(funcToMappedHandler(GenericRefedInterface.apply[Boolean])(handler))
+    _asJava.methodWithHandlerBooleanParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Boolean])(handler))
   }
 
   def methodWithHandlerCharacterParameterized(handler: GenericRefedInterface[Char] => Unit): Unit = {
-    _asJava.methodWithHandlerCharacterParameterized(funcToMappedHandler(GenericRefedInterface.apply[Character])(handler))
+    _asJava.methodWithHandlerCharacterParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.Character])(handler))
   }
 
   def methodWithHandlerStringParameterized(handler: GenericRefedInterface[String] => Unit): Unit = {
-    _asJava.methodWithHandlerStringParameterized(funcToMappedHandler(GenericRefedInterface.apply[String])(handler))
+    _asJava.methodWithHandlerStringParameterized(funcToMappedHandler(GenericRefedInterface.apply[java.lang.String])(handler))
   }
 
   def methodWithHandlerJsonObjectParameterized(handler: GenericRefedInterface[JsonObject] => Unit): Unit = {
-    _asJava.methodWithHandlerJsonObjectParameterized(funcToMappedHandler(GenericRefedInterface.apply[JsonObject])(handler))
+    _asJava.methodWithHandlerJsonObjectParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.core.json.JsonObject])(handler))
   }
 
   def methodWithHandlerJsonArrayParameterized(handler: GenericRefedInterface[JsonArray] => Unit): Unit = {
-    _asJava.methodWithHandlerJsonArrayParameterized(funcToMappedHandler(GenericRefedInterface.apply[JsonArray])(handler))
+    _asJava.methodWithHandlerJsonArrayParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.core.json.JsonArray])(handler))
   }
 
   def methodWithHandlerDataObjectParameterized(handler: GenericRefedInterface[TestDataObject] => Unit): Unit = {
-    _asJava.methodWithHandlerDataObjectParameterized(funcToMappedHandler(GenericRefedInterface.apply[TestDataObject])(handler))
+    _asJava.methodWithHandlerDataObjectParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestDataObject])(handler))
   }
 
   def methodWithHandlerEnumParameterized(handler: GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum] => Unit): Unit = {
-    _asJava.methodWithHandlerEnumParameterized(funcToMappedHandler(GenericRefedInterface.apply[TestEnum])(handler))
+    _asJava.methodWithHandlerEnumParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestEnum])(handler))
   }
 
   def methodWithHandlerGenEnumParameterized(handler: GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum] => Unit): Unit = {
-    _asJava.methodWithHandlerGenEnumParameterized(funcToMappedHandler(GenericRefedInterface.apply[TestGenEnum])(handler))
+    _asJava.methodWithHandlerGenEnumParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestGenEnum])(handler))
   }
 
   def methodWithHandlerUserTypeParameterized(handler: GenericRefedInterface[RefedInterface1] => Unit): Unit = {
-    _asJava.methodWithHandlerUserTypeParameterized(funcToMappedHandler(GenericRefedInterface.apply[RefedInterface1])(handler))
+    _asJava.methodWithHandlerUserTypeParameterized(funcToMappedHandler(GenericRefedInterface.apply[io.vertx.codegen.testmodel.RefedInterface1])(handler))
   }
 
   def methodWithHandlerAsyncResultByteParameterizedFuture(): concurrent.Future[GenericRefedInterface[Byte]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Byte],GenericRefedInterface[Byte]]((x => if (x == null) null else GenericRefedInterface.apply[Byte](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Byte],GenericRefedInterface[Byte]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Byte](x)))
     _asJava.methodWithHandlerAsyncResultByteParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultShortParameterizedFuture(): concurrent.Future[GenericRefedInterface[Short]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Short],GenericRefedInterface[Short]]((x => if (x == null) null else GenericRefedInterface.apply[Short](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Short],GenericRefedInterface[Short]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Short](x)))
     _asJava.methodWithHandlerAsyncResultShortParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultIntegerParameterizedFuture(): concurrent.Future[GenericRefedInterface[Int]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Integer],GenericRefedInterface[Int]]((x => if (x == null) null else GenericRefedInterface.apply[Integer](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Integer],GenericRefedInterface[Int]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Integer](x)))
     _asJava.methodWithHandlerAsyncResultIntegerParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultLongParameterizedFuture(): concurrent.Future[GenericRefedInterface[Long]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Long],GenericRefedInterface[Long]]((x => if (x == null) null else GenericRefedInterface.apply[Long](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Long],GenericRefedInterface[Long]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Long](x)))
     _asJava.methodWithHandlerAsyncResultLongParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultFloatParameterizedFuture(): concurrent.Future[GenericRefedInterface[Float]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Float],GenericRefedInterface[Float]]((x => if (x == null) null else GenericRefedInterface.apply[Float](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Float],GenericRefedInterface[Float]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Float](x)))
     _asJava.methodWithHandlerAsyncResultFloatParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultDoubleParameterizedFuture(): concurrent.Future[GenericRefedInterface[Double]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Double],GenericRefedInterface[Double]]((x => if (x == null) null else GenericRefedInterface.apply[Double](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Double],GenericRefedInterface[Double]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Double](x)))
     _asJava.methodWithHandlerAsyncResultDoubleParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultBooleanParameterizedFuture(): concurrent.Future[GenericRefedInterface[Boolean]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Boolean],GenericRefedInterface[Boolean]]((x => if (x == null) null else GenericRefedInterface.apply[Boolean](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Boolean],GenericRefedInterface[Boolean]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Boolean](x)))
     _asJava.methodWithHandlerAsyncResultBooleanParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultCharacterParameterizedFuture(): concurrent.Future[GenericRefedInterface[Char]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Character],GenericRefedInterface[Char]]((x => if (x == null) null else GenericRefedInterface.apply[Character](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Character],GenericRefedInterface[Char]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.Character](x)))
     _asJava.methodWithHandlerAsyncResultCharacterParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultStringParameterizedFuture(): concurrent.Future[GenericRefedInterface[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[String],GenericRefedInterface[String]]((x => if (x == null) null else GenericRefedInterface.apply[String](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[String],GenericRefedInterface[String]]((x => if (x == null) null else GenericRefedInterface.apply[java.lang.String](x)))
     _asJava.methodWithHandlerAsyncResultStringParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultJsonObjectParameterizedFuture(): concurrent.Future[GenericRefedInterface[JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[GenericRefedInterface[JsonObject],GenericRefedInterface[JsonObject]]((x => if (x == null) null else GenericRefedInterface.apply[JsonObject](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[GenericRefedInterface[JsonObject],GenericRefedInterface[JsonObject]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.core.json.JsonObject](x)))
     _asJava.methodWithHandlerAsyncResultJsonObjectParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultJsonArrayParameterizedFuture(): concurrent.Future[GenericRefedInterface[JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[GenericRefedInterface[JsonArray],GenericRefedInterface[JsonArray]]((x => if (x == null) null else GenericRefedInterface.apply[JsonArray](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[GenericRefedInterface[JsonArray],GenericRefedInterface[JsonArray]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.core.json.JsonArray](x)))
     _asJava.methodWithHandlerAsyncResultJsonArrayParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultDataObjectParameterizedFuture(): concurrent.Future[GenericRefedInterface[TestDataObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestDataObject],GenericRefedInterface[TestDataObject]]((x => if (x == null) null else GenericRefedInterface.apply[TestDataObject](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestDataObject],GenericRefedInterface[TestDataObject]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestDataObject](x)))
     _asJava.methodWithHandlerAsyncResultDataObjectParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultEnumParameterizedFuture(): concurrent.Future[GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestEnum],GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]((x => if (x == null) null else GenericRefedInterface.apply[TestEnum](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestEnum],GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestEnum](x)))
     _asJava.methodWithHandlerAsyncResultEnumParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultGenEnumParameterizedFuture(): concurrent.Future[GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestGenEnum],GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]((x => if (x == null) null else GenericRefedInterface.apply[TestGenEnum](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[TestGenEnum],GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.codegen.testmodel.TestGenEnum](x)))
     _asJava.methodWithHandlerAsyncResultGenEnumParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithHandlerAsyncResultUserTypeParameterizedFuture(): concurrent.Future[GenericRefedInterface[RefedInterface1]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[RefedInterface1],GenericRefedInterface[RefedInterface1]]((x => if (x == null) null else GenericRefedInterface.apply[RefedInterface1](x)))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[RefedInterface1],GenericRefedInterface[RefedInterface1]]((x => if (x == null) null else GenericRefedInterface.apply[io.vertx.codegen.testmodel.RefedInterface1](x)))
     _asJava.methodWithHandlerAsyncResultUserTypeParameterized(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -62,7 +62,7 @@ class TimeoutStream(private val _asJava: JTimeoutStream)
   }
 
   /**
-    * Cancels the timeout. Note this has the same effect as calling [[TimeoutStream#handler]] with a null
+    * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
     * argument.
     */
   def cancel(): Unit = {

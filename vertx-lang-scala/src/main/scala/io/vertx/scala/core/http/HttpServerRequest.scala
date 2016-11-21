@@ -43,10 +43,10 @@ import io.vertx.scala.core.net.NetSocket
   * 
   * Instances are created for each request and passed to the user via a handler.
   * 
-  * Each instance of this class is associated with a corresponding [[HttpServerResponse]] instance via
-  * [[HttpServerRequest#response]].
-  * It implements [[ReadStream]] so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * Each instance of this class is associated with a corresponding [[io.vertx.scala.core.http.HttpServerResponse]] instance via
+  * [[io.vertx.scala.core.http.HttpServerRequest#response]].
+  * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   */
 class HttpServerRequest(private val _asJava: JHttpServerRequest) 
@@ -280,7 +280,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * Be aware that the attributes will only be available after the whole body has been received, i.e. after
     * the request end handler has been called.
     * 
-    * [[HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
+    * [[io.vertx.scala.core.http.HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {
