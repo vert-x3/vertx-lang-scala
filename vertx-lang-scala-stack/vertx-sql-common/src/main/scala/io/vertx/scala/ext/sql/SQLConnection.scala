@@ -213,7 +213,7 @@ class SQLConnection(private val _asJava: JSQLConnection) {
     */
   def batchFuture(sqlStatements: scala.collection.mutable.Buffer[String]): concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]]((x => if (x == null) null else x.asScala.map(x => x:Int)))
-    _asJava.batch(sqlStatements.map(x => if (x == null) null else x:java.lang.String).asJava, promiseAndHandler._1)
+    _asJava.batch(sqlStatements.map(x => x:java.lang.String).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -226,7 +226,7 @@ class SQLConnection(private val _asJava: JSQLConnection) {
     */
   def batchWithParamsFuture(sqlStatement: String, args: scala.collection.mutable.Buffer[JsonArray]): concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]]((x => if (x == null) null else x.asScala.map(x => x:Int)))
-    _asJava.batchWithParams(sqlStatement, args.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava, promiseAndHandler._1)
+    _asJava.batchWithParams(sqlStatement, args.map(x => x:io.vertx.core.json.JsonArray).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -241,7 +241,7 @@ class SQLConnection(private val _asJava: JSQLConnection) {
     */
   def batchCallableWithParamsFuture(sqlStatement: String, inArgs: scala.collection.mutable.Buffer[JsonArray], outArgs: scala.collection.mutable.Buffer[JsonArray]): concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]]((x => if (x == null) null else x.asScala.map(x => x:Int)))
-    _asJava.batchCallableWithParams(sqlStatement, inArgs.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava, outArgs.map(x => if (x == null) null else x:io.vertx.core.json.JsonArray).asJava, promiseAndHandler._1)
+    _asJava.batchCallableWithParams(sqlStatement, inArgs.map(x => x:io.vertx.core.json.JsonArray).asJava, outArgs.map(x => x:io.vertx.core.json.JsonArray).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

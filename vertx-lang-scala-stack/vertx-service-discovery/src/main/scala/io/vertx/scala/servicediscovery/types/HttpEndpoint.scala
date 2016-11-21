@@ -67,9 +67,21 @@ object HttpEndpoint {
     promiseAndHandler._2.future
   }
 
+  def getClientFuture(discovery: ServiceDiscovery, filter: JsonObject, conf: JsonObject): concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
+    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
   def getClientFuture(discovery: ServiceDiscovery, filter: JRecord => java.lang.Boolean): concurrent.Future[HttpClient] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
     io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], asJavaFunction(filter), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def getClientFuture(discovery: ServiceDiscovery, filter: JRecord => java.lang.Boolean, conf: JsonObject): concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
+    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], asJavaFunction(filter), conf, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

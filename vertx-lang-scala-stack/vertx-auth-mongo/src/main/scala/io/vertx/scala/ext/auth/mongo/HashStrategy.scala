@@ -58,7 +58,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @return null in case of HashSaltStyle#NO_SALT the salt of the user or a defined external salt
     */
   def getSalt(user: User): scala.Option[String] = {
-        scala.Option(_asJava.getSalt(user.asJava.asInstanceOf[JUser]))
+    scala.Option(_asJava.getSalt(user.asJava.asInstanceOf[JUser]))
   }
 
   /**

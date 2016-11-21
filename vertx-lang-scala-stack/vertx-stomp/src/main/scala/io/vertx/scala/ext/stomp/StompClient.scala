@@ -86,7 +86,7 @@ class StompClient(private val _asJava: JStompClient) {
     * This handler can be used for logging, debugging or ad-hoc behavior. The frame can still be modified at the time.
     * 
     * When a connection is created, the handler is used as
-    * [[StompClientConnection#receivedFrameHandler]].
+    * [[io.vertx.scala.ext.stomp.StompClientConnection#receivedFrameHandler]].
     * @param handler the handler
     * @return the current StompClient
     */
@@ -100,7 +100,7 @@ class StompClient(private val _asJava: JStompClient) {
     * This handler can be used for logging, debugging or ad-hoc behavior. The frame can still be modified at the time.
     * 
     * When a connection is created, the handler is used as
-    * [[StompClientConnection#writingFrameHandler]].
+    * [[io.vertx.scala.ext.stomp.StompClientConnection#writingFrameHandler]].
     * @param handler the handler
     * @return the current StompClient
     */
@@ -111,7 +111,7 @@ class StompClient(private val _asJava: JStompClient) {
 
   /**
     * A general error frame handler. It can be used to catch `ERROR` frame emitted during the connection process
-    * (wrong authentication). This error handler will be pass to all [[StompClientConnection]] created from this
+    * (wrong authentication). This error handler will be pass to all [[io.vertx.scala.ext.stomp.StompClientConnection]] created from this
     * client. Obviously, the client can override it when the connection is established.
     * @param handler the handler
     * @return the current StompClient

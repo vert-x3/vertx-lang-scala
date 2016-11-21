@@ -70,7 +70,7 @@ class SockJSHandler(private val _asJava: JSockJSHandler) {
   }
 
   /**
-    * Like [[SockJSHandler#bridge]] but specifying a handler
+    * Like [[io.vertx.scala.ext.web.handler.sockjs.SockJSHandler#bridge]] but specifying a handler
     * that will receive bridge events.
     * @param bridgeOptions options to configure the bridge withsee <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
     * @param bridgeEventHandler handler to receive bridge events

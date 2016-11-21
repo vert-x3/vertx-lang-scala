@@ -56,7 +56,7 @@ class OAuth2AuthHandler(private val _asJava: JOAuth2AuthHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def addAuthorities(authorities: Set[String]): AuthHandler = {
-    _asJava.addAuthorities(authorities.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.addAuthorities(authorities.map(x => x:java.lang.String).asJava)
     this
   }
 

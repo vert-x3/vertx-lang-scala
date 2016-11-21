@@ -116,7 +116,7 @@ class Route(private val _asJava: JRoute) {
   }
 
   /**
-    * Like [[Route#blockingHandler]] called with ordered = true
+    * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
   def blockingHandler(requestHandler: RoutingContext => Unit): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
@@ -125,7 +125,7 @@ class Route(private val _asJava: JRoute) {
 
   /**
     * Specify a blocking request handler for the route.
-    * This method works just like [[Route#handler]] excepted that it will run the blocking handler on a worker thread
+    * This method works just like [[io.vertx.scala.ext.web.Route#handler]] excepted that it will run the blocking handler on a worker thread
     * so that it won't block the event loop. Note that it's safe to call context.next() from the
     * blocking handler as it will be executed on the event loop context (and not on the worker thread.
     *
@@ -195,7 +195,7 @@ class Route(private val _asJava: JRoute) {
     * @return the path prefix (if any) for this route
     */
   def getPath(): scala.Option[String] = {
-        scala.Option(_asJava.getPath())
+    scala.Option(_asJava.getPath())
   }
 
 }

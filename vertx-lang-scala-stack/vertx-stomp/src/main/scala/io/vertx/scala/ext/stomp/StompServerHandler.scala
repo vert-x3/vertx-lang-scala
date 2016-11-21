@@ -120,7 +120,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
 
   /**
     * Called when the connection is closed. This method executes a default behavior and must calls the configured
-    * [[StompServerHandler#closeHandler]] if any.
+    * [[io.vertx.scala.ext.stomp.StompServerHandler#closeHandler]] if any.
     * @param connection the connection
     */
   def onClose(connection: StompServerConnection): Unit = {
@@ -189,7 +189,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
 
   /**
     * Called when the client connects to a server requiring authentication. It invokes the  configured
-    * using [[StompServerHandler#authProvider]].
+    * using [[io.vertx.scala.ext.stomp.StompServerHandler#authProvider]].
     * @param server the STOMP server.
     * @param login the login
     * @param passcode the password
@@ -229,7 +229,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
 
   /**
     * Method called by single message (client-individual policy) or a set of message (client policy) are acknowledged.
-    * Implementations must call the handler configured using [[StompServerHandler#onAckHandler]].
+    * Implementations must call the handler configured using [[io.vertx.scala.ext.stomp.StompServerHandler#onAckHandler]].
     * @param connection the connection
     * @param subscribe the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @param messages the acknowledge messages
@@ -244,7 +244,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * Method called by single message (client-individual policy) or a set of message (client policy) are
     * <strong>not</strong> acknowledged. Not acknowledgment can result from a `NACK` frame or from a timeout (no
     * `ACK` frame received in a given time. Implementations must call the handler configured using
-    * [[StompServerHandler#onNackHandler]].
+    * [[io.vertx.scala.ext.stomp.StompServerHandler#onNackHandler]].
     * @param connection the connection
     * @param subscribe the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @param messages the acknowledge messages
@@ -290,8 +290,8 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
   }
 
   /**
-    * Gets a [[Destination]] object if existing, or create a new one. The creation is delegated to the
-    * [[DestinationFactory]].
+    * Gets a [[io.vertx.scala.ext.stomp.Destination]] object if existing, or create a new one. The creation is delegated to the
+    * [[io.vertx.scala.ext.stomp.DestinationFactory]].
     * @param destination the destination
     * @return the Destination instance, may have been created.
     */
@@ -300,7 +300,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
   }
 
   /**
-    * Configures the [[DestinationFactory]] used to create [[Destination]] objects.
+    * Configures the [[io.vertx.scala.ext.stomp.DestinationFactory]] used to create [[io.vertx.scala.ext.stomp.Destination]] objects.
     * @param factory the factory
     * @return the current StompServerHandler.
     */

@@ -965,7 +965,7 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableCharParam(true, None)
     nullableTCK.methodWithNullableCharParam(false, Option(testChar))
     nullableTCK.methodWithNullableCharHandler(true, b => assert(testChar == b))
-    nullableTCK.methodWithNullableCharHandler(false, b => assert("" == b))
+    nullableTCK.methodWithNullableCharHandler(false, b => assert(Char.MinValue == b))
     exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testChar == b)
@@ -1039,7 +1039,7 @@ class ApiTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableApiParam(true, None)
     nullableTCK.methodWithNullableApiParam(false, Option(testApi))
     nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi.asJava == b.asJava))
-    nullableTCK.methodWithNullableApiHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableApiHandler(false, b => assert(null == b.asJava)) //TODO: should only return null not the wrapper object
     exec1(w => nullableTCK.methodWithNullableApiHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testApi.asJava == b.asJava)

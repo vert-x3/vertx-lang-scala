@@ -40,6 +40,25 @@ var MessageSource = function(j_val) {
   this._jdel = j_messageSource;
 };
 
+MessageSource._jclass = utils.getJavaClass("io.vertx.servicediscovery.types.MessageSource");
+MessageSource._jtype = {
+  accept: function(obj) {
+    return MessageSource._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(MessageSource.prototype, {});
+    MessageSource.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+MessageSource._create = function(jdel) {
+  var obj = Object.create(MessageSource.prototype, {});
+  MessageSource.apply(obj, arguments);
+  return obj;
+}
 /**
  Create a record representing a data producer.
 
@@ -75,7 +94,7 @@ MessageSource.getConsumer = function(discovery, filter, resultHandler) {
   if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
     JMessageSource["getConsumer(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](discovery._jdel, utils.convParamJsonObject(filter), function(ar) {
     if (ar.succeeded()) {
-      resultHandler(utils.convReturnVertxGen(ar.result(), MessageConsumer), null);
+      resultHandler(utils.convReturnVertxGen(MessageConsumer, ar.result(), undefined), null);
     } else {
       resultHandler(null, ar.cause());
     }
@@ -83,5 +102,4 @@ MessageSource.getConsumer = function(discovery, filter, resultHandler) {
   } else throw new TypeError('function invoked with invalid arguments');
 };
 
-// We export the Constructor function
 module.exports = MessageSource;

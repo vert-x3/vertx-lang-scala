@@ -38,6 +38,25 @@ var EventBusService = function(j_val) {
   this._jdel = j_eventBusService;
 };
 
+EventBusService._jclass = utils.getJavaClass("io.vertx.servicediscovery.types.EventBusService");
+EventBusService._jtype = {
+  accept: function(obj) {
+    return EventBusService._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(EventBusService.prototype, {});
+    EventBusService.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+EventBusService._create = function(jdel) {
+  var obj = Object.create(EventBusService.prototype, {});
+  EventBusService.apply(obj, arguments);
+  return obj;
+}
 /**
  Sugar method to creates a record for this type.
  <p>
@@ -102,5 +121,4 @@ EventBusService.getProxy = function() {
   } else throw new TypeError('function invoked with invalid arguments');
 };
 
-// We export the Constructor function
 module.exports = EventBusService;
