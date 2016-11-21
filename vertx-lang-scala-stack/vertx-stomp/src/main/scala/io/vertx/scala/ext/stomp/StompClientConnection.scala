@@ -25,7 +25,7 @@ import io.vertx.scala.core.buffer.Buffer
 import io.vertx.ext.stomp.{Frame => JFrame}
 
 /**
-  * Once a connection to the STOMP server has been made, client receives a [[StompClientConnection]], that let
+  * Once a connection to the STOMP server has been made, client receives a [[io.vertx.scala.ext.stomp.StompClientConnection]], that let
   * send and receive STOMP frames.
   */
 class StompClientConnection(private val _asJava: JStompClientConnection) {
@@ -245,7 +245,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
   }
 
   /**
-    * Sets a handler notified when an `ERROR` frame is received by the client. The handler receives the `ERROR` frame and a reference on the [[StompClientConnection]].
+    * Sets a handler notified when an `ERROR` frame is received by the client. The handler receives the `ERROR` frame and a reference on the [[io.vertx.scala.ext.stomp.StompClientConnection]].
     * @param handler the handler
     * @return the current StompClientConnection
     */
@@ -420,7 +420,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
   }
 
   /**
-    * Disconnects the client. Unlike the [[StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
+    * Disconnects the client. Unlike the [[io.vertx.scala.ext.stomp.StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
     * server.
     * @return the current StompClientConnection
     */
@@ -430,7 +430,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
   }
 
   /**
-    * Disconnects the client. Unlike the [[StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
+    * Disconnects the client. Unlike the [[io.vertx.scala.ext.stomp.StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
     * server.
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the disconnection has been processed by the server. The handler receives the sent frame (`DISCONNECT`).
     * @return the current StompClientConnection
@@ -441,7 +441,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
   }
 
   /**
-    * Disconnects the client. Unlike the [[StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
+    * Disconnects the client. Unlike the [[io.vertx.scala.ext.stomp.StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
     * server. This method lets you customize the `DISCONNECT` frame.
     * @param frame the `DISCONNECT` frame.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current StompClientConnection
@@ -452,7 +452,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
   }
 
   /**
-    * Disconnects the client. Unlike the [[StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
+    * Disconnects the client. Unlike the [[io.vertx.scala.ext.stomp.StompClientConnection#close]] method, this method send the `DISCONNECT` frame to the
     * server. This method lets you customize the `DISCONNECT` frame.
     * @param frame the `DISCONNECT` frame.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @param receiptHandler the handler invoked when the `RECEIPT` frame associated with the disconnection has been processed by the server. The handler receives the sent frame (`DISCONNECT`).
@@ -563,7 +563,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
     * Configures a received handler that get notified when a STOMP frame is received by the client.
     * This handler can be used for logging, debugging or ad-hoc behavior. The frame can still be modified by the handler.
     * 
-    * Unlike [[StompClient#receivedFrameHandler]], the given handler won't receive the `CONNECTED` frame. If a received frame handler is set on the [[StompClient]], it will be used by all
+    * Unlike [[io.vertx.scala.ext.stomp.StompClient#receivedFrameHandler]], the given handler won't receive the `CONNECTED` frame. If a received frame handler is set on the [[io.vertx.scala.ext.stomp.StompClient]], it will be used by all
     * clients connection, so calling this method is useless, except if you want to use a different handler.
     * @param handler the handler
     * @return the current StompClientConnection
@@ -577,7 +577,7 @@ class StompClientConnection(private val _asJava: JStompClientConnection) {
     * Configures a handler notified when a frame is going to be written on the wire. This handler can be used from
     * logging, debugging. The handler can modify the received frame.
     *
-    * If a writing frame handler is set on the [[StompClient]], it will be used by all
+    * If a writing frame handler is set on the [[io.vertx.scala.ext.stomp.StompClient]], it will be used by all
     * clients connection, so calling this method is useless, except if you want to use a different handler.
     * @param handler the handler
     * @return the current StompClientConnection

@@ -98,6 +98,13 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
   def getEnabledSecureTransportProtocols = {
     asJava.getEnabledSecureTransportProtocols()
   }
+  def setHeartbeat(value: Int) = {
+    asJava.setHeartbeat(value)
+    this
+  }
+  def getHeartbeat = {
+    asJava.getHeartbeat()
+  }
   def setHostnameVerificationAlgorithm(value: String) = {
     asJava.setHostnameVerificationAlgorithm(value)
     this

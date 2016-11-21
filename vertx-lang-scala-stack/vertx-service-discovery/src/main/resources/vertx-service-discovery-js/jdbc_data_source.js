@@ -39,6 +39,25 @@ var JDBCDataSource = function(j_val) {
   this._jdel = j_jDBCDataSource;
 };
 
+JDBCDataSource._jclass = utils.getJavaClass("io.vertx.servicediscovery.types.JDBCDataSource");
+JDBCDataSource._jtype = {
+  accept: function(obj) {
+    return JDBCDataSource._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(JDBCDataSource.prototype, {});
+    JDBCDataSource.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+JDBCDataSource._create = function(jdel) {
+  var obj = Object.create(JDBCDataSource.prototype, {});
+  JDBCDataSource.apply(obj, arguments);
+  return obj;
+}
 /**
 
  @memberof module:vertx-service-discovery-js/jdbc_data_source
@@ -69,7 +88,7 @@ JDBCDataSource.getJDBCClient = function() {
   if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
     JJDBCDataSource["getJDBCClient(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
     if (ar.succeeded()) {
-      __args[2](utils.convReturnVertxGen(ar.result(), JDBCClient), null);
+      __args[2](utils.convReturnVertxGen(JDBCClient, ar.result()), null);
     } else {
       __args[2](null, ar.cause());
     }
@@ -77,7 +96,7 @@ JDBCDataSource.getJDBCClient = function() {
   }else if (__args.length === 4 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
     JJDBCDataSource["getJDBCClient(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), utils.convParamJsonObject(__args[2]), function(ar) {
     if (ar.succeeded()) {
-      __args[3](utils.convReturnVertxGen(ar.result(), JDBCClient), null);
+      __args[3](utils.convReturnVertxGen(JDBCClient, ar.result()), null);
     } else {
       __args[3](null, ar.cause());
     }
@@ -85,5 +104,4 @@ JDBCDataSource.getJDBCClient = function() {
   } else throw new TypeError('function invoked with invalid arguments');
 };
 
-// We export the Constructor function
 module.exports = JDBCDataSource;

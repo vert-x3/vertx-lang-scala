@@ -31,7 +31,7 @@ import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.scala.ext.auth.AuthProvider
 
 /**
-  * Factory interface for creating Apache Shiro based [[AuthProvider]] instances.
+  * Factory interface for creating Apache Shiro based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
 class ShiroAuth(private val _asJava: JShiroAuth) 
     extends  {

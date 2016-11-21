@@ -29,7 +29,7 @@ import io.vertx.ext.web.{Session => JSession}
   * 
   * Sessions can be used to maintain data for a browser session, e.g. a shopping basket.
   * 
-  * The context must have first been routed to a [[SessionHandler]]
+  * The context must have first been routed to a [[io.vertx.scala.ext.web.handler.SessionHandler]]
   * for sessions to be available.
   */
 class Session(private val _asJava: JSession) {

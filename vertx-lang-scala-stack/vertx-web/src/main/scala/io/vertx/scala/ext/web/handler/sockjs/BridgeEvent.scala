@@ -65,7 +65,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
 
   def completer(): io.vertx.core.AsyncResult [Boolean] => Unit = {
     if (cached_0 == null) {
-      cached_0=    handlerToMappedFunction[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult[Boolean]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (_asJava.completer())
+      cached_0 =    handlerToMappedFunction[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult[Boolean]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (_asJava.completer())
     }
     cached_0
   }
@@ -75,24 +75,24 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
     */
   def `type`(): io.vertx.ext.web.handler.sockjs.BridgeEventType = {
     if (cached_1 == null) {
-      cached_1=    _asJava.`type`()
+      cached_1 =    _asJava.`type`()
     }
     cached_1
   }
 
   /**
-    * Use [[BridgeEvent#getRawMessage]] instead, will be removed in 3.3
+    * Use [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#getRawMessage]] instead, will be removed in 3.3
     */
   def rawMessage(): JsonObject = {
     if (cached_2 == null) {
-      cached_2=    _asJava.rawMessage()
+      cached_2 =    _asJava.rawMessage()
     }
     cached_2
   }
 
   /**
     * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
-    * no message involved. If the returned message is modified, [[BridgeEvent#setRawMessage]] should be called with the
+    * no message involved. If the returned message is modified, [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#setRawMessage]] should be called with the
     * new message.
     * @return the raw JSON message for the event
     */
@@ -117,7 +117,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
     */
   def socket(): SockJSSocket = {
     if (cached_3 == null) {
-      cached_3=    SockJSSocket.apply(_asJava.socket())
+      cached_3 =    SockJSSocket.apply(_asJava.socket())
     }
     cached_3
   }

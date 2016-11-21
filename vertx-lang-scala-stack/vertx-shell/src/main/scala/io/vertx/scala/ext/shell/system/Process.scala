@@ -62,7 +62,7 @@ class Process(private val _asJava: JProcess) {
     */
   def getTty(): Tty = {
     if (cached_0 == null) {
-      cached_0=    Tty.apply(_asJava.getTty())
+      cached_0 =    Tty.apply(_asJava.getTty())
     }
     cached_0
   }
@@ -82,7 +82,7 @@ class Process(private val _asJava: JProcess) {
     */
   def getSession(): Session = {
     if (cached_1 == null) {
-      cached_1=    Session.apply(_asJava.getSession())
+      cached_1 =    Session.apply(_asJava.getSession())
     }
     cached_1
   }

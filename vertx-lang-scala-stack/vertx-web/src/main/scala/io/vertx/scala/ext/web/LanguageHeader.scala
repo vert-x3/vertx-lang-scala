@@ -68,7 +68,7 @@ class LanguageHeader(private val _asJava: JLanguageHeader)
     * @return 
     */
   def parameter(key: String): scala.Option[String] = {
-        scala.Option(_asJava.parameter(key))
+    scala.Option(_asJava.parameter(key))
   }
 
   /**
@@ -121,7 +121,7 @@ class LanguageHeader(private val _asJava: JLanguageHeader)
     * @return The language subtag
     */
   def subtag(): scala.Option[String] = {
-        scala.Option(_asJava.subtag())
+    scala.Option(_asJava.subtag())
   }
 
   /**
@@ -130,7 +130,7 @@ class LanguageHeader(private val _asJava: JLanguageHeader)
     * @return The language subtag at specified position
     */
   def subtag(level: Int): scala.Option[String] = {
-        scala.Option(_asJava.subtag(level))
+    scala.Option(_asJava.subtag(level))
   }
 
   /**

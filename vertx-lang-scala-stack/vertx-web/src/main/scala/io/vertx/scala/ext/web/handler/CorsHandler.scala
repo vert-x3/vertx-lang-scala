@@ -61,7 +61,7 @@ class CorsHandler(private val _asJava: JCorsHandler) {
     * @return a reference to this, so the API can be used fluently
     */
   def allowedHeaders(headerNames: Set[String]): CorsHandler = {
-    _asJava.allowedHeaders(headerNames.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.allowedHeaders(headerNames.map(x => x:java.lang.String).asJava)
     this
   }
 
@@ -81,7 +81,7 @@ class CorsHandler(private val _asJava: JCorsHandler) {
     * @return a reference to this, so the API can be used fluently
     */
   def exposedHeaders(headerNames: Set[String]): CorsHandler = {
-    _asJava.exposedHeaders(headerNames.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.exposedHeaders(headerNames.map(x => x:java.lang.String).asJava)
     this
   }
 

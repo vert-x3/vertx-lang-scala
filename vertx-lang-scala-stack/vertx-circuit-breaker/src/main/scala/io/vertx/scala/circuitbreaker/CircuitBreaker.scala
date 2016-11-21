@@ -38,7 +38,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   /**
     * Closes the circuit breaker. It stops sending events on its state on the event bus.
     * This method is not related to the `close` state of the circuit breaker. To set the circuit breaker in the
-    * `close` state, use [[CircuitBreaker#reset]].
+    * `close` state, use [[io.vertx.scala.circuitbreaker.CircuitBreaker#reset]].
     */
   def close(): CircuitBreaker = {
     _asJava.close()
@@ -97,7 +97,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   }
 
   /**
-    * Same as [[CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
+    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
     * @param command the operation
     * @return a future object completed when the operation or its fallback completes
     */
@@ -106,7 +106,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
   }
 
   /**
-    * Same as [[CircuitBreaker#executeAndReportWithFallback]] but using the circuit breaker default
+    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeAndReportWithFallback]] but using the circuit breaker default
     * fallback.
     * @param resultFuture the future on which the operation result is reported
     * @param command the operation
@@ -127,7 +127,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * circuit breaker also monitor the completion of the operation before a configure timeout. The operation is
     * considered as failed if it does not terminate in time.
     * 
-    * Unlike [[CircuitBreaker#executeWithFallback]],  this method does return a  object, but
+    * Unlike [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]],  this method does return a  object, but
     * let the caller pass a  object on which the result is reported. If the fallback is called, the future
     * is successfully completed with the value returned by the fallback function. If the fallback throws an exception,
     * the future is marked as failed.
@@ -191,7 +191,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     */
   def name(): String = {
     if (cached_0 == null) {
-      cached_0=    _asJava.name()
+      cached_0 =    _asJava.name()
     }
     cached_0
   }

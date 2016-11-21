@@ -70,7 +70,7 @@ class Cookie(private val _asJava: JCookie) {
     * @return the domain for the cookie
     */
   def getDomain(): scala.Option[String] = {
-        scala.Option(_asJava.getDomain())
+    scala.Option(_asJava.getDomain())
   }
 
   /**
@@ -87,7 +87,7 @@ class Cookie(private val _asJava: JCookie) {
     * @return the path for this cookie
     */
   def getPath(): scala.Option[String] = {
-        scala.Option(_asJava.getPath())
+    scala.Option(_asJava.getPath())
   }
 
   /**
