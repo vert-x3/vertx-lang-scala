@@ -12,7 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <artifactId>vertx-shell_${scala.build.version}</artifactId>
+  <artifactId>vertx-shell-scala_${scala.build.version}</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 
   <properties>
@@ -29,22 +29,22 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-jdbc-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-mongo_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-mongo-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-shiro-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web_${scala.build.version}</artifactId>
+      <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
