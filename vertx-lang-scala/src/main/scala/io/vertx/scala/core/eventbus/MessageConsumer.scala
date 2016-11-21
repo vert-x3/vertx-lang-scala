@@ -25,15 +25,15 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.eventbus.{Message => JMessage}
 
 /**
-  * An event bus consumer object representing a stream of message to an [[EventBus]] address that can
+  * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
   * be read from.
   * 
-  * The [[EventBus#consumer]] or [[EventBus#localConsumer]]
+  * The [[io.vertx.scala.core.eventbus.EventBus#consumer]] or [[io.vertx.scala.core.eventbus.EventBus#localConsumer]]
   * creates a new consumer, the returned consumer is not yet registered against the event bus. Registration
-  * is effective after the [[MessageConsumer#handler]] method is invoked.
+  * is effective after the [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] method is invoked.
   *
-  * The consumer is unregistered from the event bus using the [[MessageConsumer#unregister]] method or by calling the
-  * [[MessageConsumer#handler]] with a null value..
+  * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
+  * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
 class MessageConsumer[T](private val _asJava: JMessageConsumer[T]) 
     extends ReadStream[Message[T]] {

@@ -210,7 +210,22 @@
   }
 
   def toScalaApply(type) {
-    helper.getNonGenericType(type.getSimpleName()) + '.apply' + getGenericType(type.getSimpleName());
+    var ret = helper.getNonGenericType(type.getSimpleName()) + '.apply';
+    var first = true;
+    if(type.kind != CLASS_API || type.isParameterized) {
+      ret += '[';
+      for(arg: type.args) {
+        if(!first) {
+          ret += ',';
+        }
+        ret += arg;
+        if(first) {
+          first = false;
+        }
+      }
+      ret +=']';
+    }
+    return ret;
   }
 
   def toScalaApplyWithParam(type, param) {
