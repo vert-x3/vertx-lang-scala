@@ -64,8 +64,8 @@ class Context(private val _asJava: JContext) {
     * Run the specified action asynchronously on the same context, some time after the current execution has completed.
     * @param action the action to run
     */
-  def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+  def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action.handle()))
   }
 
   /**
@@ -83,7 +83,7 @@ class Context(private val _asJava: JContext) {
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -94,7 +94,7 @@ class Context(private val _asJava: JContext) {
     * @param blockingCodeHandler handler representing the blocking code to run
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -206,7 +206,7 @@ class Context(private val _asJava: JContext) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): Context = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Context = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

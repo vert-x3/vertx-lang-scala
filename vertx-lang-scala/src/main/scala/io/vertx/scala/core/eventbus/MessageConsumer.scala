@@ -40,12 +40,12 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
 
   def asJava: JMessageConsumer[T] = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): MessageConsumer[T] = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageConsumer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Message[T] => Unit): MessageConsumer[T] = {
+  def handler(handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
     _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
     this
   }
@@ -60,8 +60,8 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
     this
   }
 
-  def endHandler(endHandler: () => Unit): MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): MessageConsumer[T] = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 

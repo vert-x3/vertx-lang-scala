@@ -75,7 +75,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): HttpClientRequest = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpClientRequest = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -92,12 +92,12 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     this
   }
 
-  def drainHandler(handler: () => Unit): HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def handler(handler: HttpClientResponse => Unit): HttpClientRequest = {
+  def handler(handler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
     _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
     this
   }
@@ -112,8 +112,8 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -244,8 +244,8 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
     * @return a reference to this, so the API can be used fluently
     */
-  def continueHandler(handler: () => Unit): HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def continueHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -266,8 +266,8 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
     * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
-  def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit): HttpClientRequest = {
-    _asJava.sendHead(funcToHandler(completionHandler))
+  def sendHead(completionHandler: io.vertx.core.Handler[io.vertx.core.http.HttpVersion]): HttpClientRequest = {
+    _asJava.sendHead((completionHandler))
     this
   }
 
@@ -338,7 +338,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def pushHandler(handler: HttpClientRequest => Unit): HttpClientRequest = {
+  def pushHandler(handler: io.vertx.core.Handler[HttpClientRequest]): HttpClientRequest = {
     _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
     this
   }
@@ -382,7 +382,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: HttpConnection => Unit): HttpClientRequest = {
+  def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpClientRequest = {
     _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
     this
   }

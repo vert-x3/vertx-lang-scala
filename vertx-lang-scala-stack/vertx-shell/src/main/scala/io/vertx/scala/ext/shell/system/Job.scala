@@ -90,8 +90,8 @@ class Job(private val _asJava: JJob) {
     * @param handler the terminate handler
     * @return this object
     */
-  def statusUpdateHandler(handler: io.vertx.ext.shell.system.ExecStatus => Unit): Job = {
-    _asJava.statusUpdateHandler(funcToHandler(handler))
+  def statusUpdateHandler(handler: io.vertx.core.Handler[io.vertx.ext.shell.system.ExecStatus]): Job = {
+    _asJava.statusUpdateHandler((handler))
     this
   }
 

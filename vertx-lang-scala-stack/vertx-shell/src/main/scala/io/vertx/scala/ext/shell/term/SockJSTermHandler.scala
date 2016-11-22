@@ -28,7 +28,8 @@ import io.vertx.ext.shell.term.{Term => JTerm}
 
 /**
   */
-class SockJSTermHandler(private val _asJava: JSockJSTermHandler) {
+class SockJSTermHandler(private val _asJava: JSockJSTermHandler) 
+    extends io.vertx.core.Handler[SockJSSocket] {
 
   def asJava: JSockJSTermHandler = _asJava
 
@@ -36,7 +37,7 @@ class SockJSTermHandler(private val _asJava: JSockJSTermHandler) {
     _asJava.handle(arg0.asJava.asInstanceOf[JSockJSSocket])
   }
 
-  def termHandler(handler: Term => Unit): SockJSTermHandler = {
+  def termHandler(handler: io.vertx.core.Handler[Term]): SockJSTermHandler = {
     _asJava.termHandler(funcToMappedHandler(Term.apply)(handler))
     this
   }

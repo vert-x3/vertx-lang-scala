@@ -30,7 +30,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * Auth handler requires a [[io.vertx.scala.ext.web.handler.SessionHandler]] to be on the routing chain before it.
   */
-trait AuthHandler {
+trait AuthHandler 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: java.lang.Object
 

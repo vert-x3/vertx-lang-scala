@@ -103,7 +103,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: GoAway => Unit): HttpConnection = {
+  def goAwayHandler(handler: io.vertx.core.Handler[GoAway]): HttpConnection = {
     _asJava.goAwayHandler(funcToMappedHandler[JGoAway, GoAway](a => GoAway(a))(handler))
     this
   }
@@ -115,8 +115,8 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdownHandler(handler: () => Unit): HttpConnection = {
-    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def shutdownHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
+    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -150,8 +150,8 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler to be notified
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): HttpConnection = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -212,7 +212,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler for remote endpoint settings
     * @return a reference to this, so the API can be used fluently
     */
-  def remoteSettingsHandler(handler: Http2Settings => Unit): HttpConnection = {
+  def remoteSettingsHandler(handler: io.vertx.core.Handler[Http2Settings]): HttpConnection = {
     _asJava.remoteSettingsHandler(funcToMappedHandler[JHttp2Settings, Http2Settings](a => Http2Settings(a))(handler))
     this
   }
@@ -237,7 +237,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler to be called when a ` PING` is received
     * @return a reference to this, so the API can be used fluently
     */
-  def pingHandler(handler: Buffer => Unit): HttpConnection = {
+  def pingHandler(handler: io.vertx.core.Handler[Buffer]): HttpConnection = {
     _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -247,7 +247,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): HttpConnection = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpConnection = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

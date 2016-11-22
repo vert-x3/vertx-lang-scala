@@ -39,7 +39,8 @@ import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
   * designed to let you customize the server behavior. The default implementation is compliant with the STOMP
   * specification. In this default implementation, not acknowledge frames are dropped.
   */
-class StompServerHandler(private val _asJava: JStompServerHandler) {
+class StompServerHandler(private val _asJava: JStompServerHandler) 
+    extends io.vertx.core.Handler[ServerFrame] {
 
   def asJava: JStompServerHandler = _asJava
 
@@ -53,7 +54,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def receivedFrameHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def receivedFrameHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.receivedFrameHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -63,7 +64,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def connectHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def connectHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.connectHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -73,7 +74,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def stompHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def stompHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.stompHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -83,7 +84,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def subscribeHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def subscribeHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.subscribeHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -93,7 +94,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def unsubscribeHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def unsubscribeHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.unsubscribeHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -103,7 +104,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def sendHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def sendHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.sendHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -113,7 +114,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def closeHandler(handler: StompServerConnection => Unit): StompServerHandler = {
+  def closeHandler(handler: io.vertx.core.Handler[StompServerConnection]): StompServerHandler = {
     _asJava.closeHandler(funcToMappedHandler(StompServerConnection.apply)(handler))
     this
   }
@@ -132,7 +133,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def commitHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def commitHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.commitHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -142,7 +143,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def abortHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def abortHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.abortHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -152,7 +153,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def beginHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def beginHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.beginHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -162,7 +163,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def disconnectHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def disconnectHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.disconnectHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -172,7 +173,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def ackHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def ackHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.ackHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -182,7 +183,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def nackHandler(handler: ServerFrame => Unit): StompServerHandler = {
+  def nackHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServerHandler = {
     _asJava.nackHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }
@@ -260,7 +261,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def onAckHandler(handler: Acknowledgement => Unit): StompServerHandler = {
+  def onAckHandler(handler: io.vertx.core.Handler[Acknowledgement]): StompServerHandler = {
     _asJava.onAckHandler(funcToMappedHandler(Acknowledgement.apply)(handler))
     this
   }
@@ -270,7 +271,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the handler
     * @return the current StompServerHandler
     */
-  def onNackHandler(handler: Acknowledgement => Unit): StompServerHandler = {
+  def onNackHandler(handler: io.vertx.core.Handler[Acknowledgement]): StompServerHandler = {
     _asJava.onNackHandler(funcToMappedHandler(Acknowledgement.apply)(handler))
     this
   }
@@ -284,7 +285,7 @@ class StompServerHandler(private val _asJava: JStompServerHandler) {
     * @param handler the action to execute when a `PING` needs to be sent.
     * @return the current StompServerHandler
     */
-  def pingHandler(handler: StompServerConnection => Unit): StompServerHandler = {
+  def pingHandler(handler: io.vertx.core.Handler[StompServerConnection]): StompServerHandler = {
     _asJava.pingHandler(funcToMappedHandler(StompServerConnection.apply)(handler))
     this
   }

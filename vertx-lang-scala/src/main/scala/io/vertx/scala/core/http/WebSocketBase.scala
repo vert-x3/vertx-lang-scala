@@ -53,21 +53,21 @@ def end(t: Buffer): Unit
   */
 def writeQueueFull(): Boolean
 
-  def exceptionHandler(handler: Throwable => Unit): WebSocketBase
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketBase
 
-  def handler(handler: Buffer => Unit): WebSocketBase
+  def handler(handler: io.vertx.core.Handler[Buffer]): WebSocketBase
 
   def pause(): WebSocketBase
 
   def resume(): WebSocketBase
 
-  def endHandler(endHandler: () => Unit): WebSocketBase
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketBase
 
   def write(data: Buffer): WebSocketBase
 
   def setWriteQueueMaxSize(maxSize: Int): WebSocketBase
 
-  def drainHandler(handler: () => Unit): WebSocketBase
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase
 
   /**
   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
@@ -124,14 +124,14 @@ def writeBinaryMessage(data: Buffer): WebSocketBase
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-def closeHandler(handler: () => Unit): WebSocketBase
+def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase
 
   /**
   * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-def frameHandler(handler: WebSocketFrame => Unit): WebSocketBase
+def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocketBase
 
   /**
   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
@@ -179,12 +179,12 @@ object WebSocketBase {
         _asJava.writeQueueFull()
     }
 
-    def exceptionHandler(handler: Throwable => Unit): WebSocketBase = {
+    def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketBase = {
         _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
 
-    def handler(handler: Buffer => Unit): WebSocketBase = {
+    def handler(handler: io.vertx.core.Handler[Buffer]): WebSocketBase = {
         _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
       this
     }
@@ -199,8 +199,8 @@ object WebSocketBase {
       this
     }
 
-    def endHandler(endHandler: () => Unit): WebSocketBase = {
-        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+    def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketBase = {
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
       this
     }
 
@@ -214,8 +214,8 @@ object WebSocketBase {
       this
     }
 
-    def drainHandler(handler: () => Unit): WebSocketBase = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
       this
     }
 
@@ -290,8 +290,8 @@ object WebSocketBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def closeHandler(handler: () => Unit): WebSocketBase = {
-        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
+        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
       this
     }
 
@@ -300,7 +300,7 @@ object WebSocketBase {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def frameHandler(handler: WebSocketFrame => Unit): WebSocketBase = {
+    def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocketBase = {
         _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
       this
     }

@@ -175,7 +175,7 @@ class StompServer(private val _asJava: JStompServer) {
     * `null`.
     * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#websocketHandler(Handler).
     */
-  def webSocketHandler(): ServerWebSocket => Unit = {
+  def webSocketHandler(): io.vertx.core.Handler[ServerWebSocket] = {
     handlerToMappedFunction[JServerWebSocket, ServerWebSocket](x => x.asJava)(_asJava.webSocketHandler())
   }
 
@@ -185,7 +185,7 @@ class StompServer(private val _asJava: JStompServer) {
     * @param handler the handler, must not be `null`
     * @return the current StompServer
     */
-  def writingFrameHandler(handler: ServerFrame => Unit): StompServer = {
+  def writingFrameHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServer = {
     _asJava.writingFrameHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }

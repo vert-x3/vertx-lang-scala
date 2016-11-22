@@ -30,7 +30,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * A handler which renders responses using a template engine and where the template name is selected from the URI
   * path.
   */
-class TemplateHandler(private val _asJava: JTemplateHandler) {
+class TemplateHandler(private val _asJava: JTemplateHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JTemplateHandler = _asJava
 

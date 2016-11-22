@@ -31,8 +31,7 @@ import io.vertx.scala.core.Vertx
   * 
   * Can be used when sticky sessions are being used.
   */
-class LocalSessionStore(private val _asJava: JLocalSessionStore) 
-    extends  {
+class LocalSessionStore(private val _asJava: JLocalSessionStore) {
 
   def asJava: JLocalSessionStore = _asJava
 

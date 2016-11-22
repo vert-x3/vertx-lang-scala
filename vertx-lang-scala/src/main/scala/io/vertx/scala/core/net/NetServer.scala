@@ -57,7 +57,7 @@ class NetServer(private val _asJava: JNetServer)
     * connect handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectHandler(handler: NetSocket => Unit): NetServer = {
+  def connectHandler(handler: io.vertx.core.Handler[NetSocket]): NetServer = {
     NetServer.apply(_asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler)))
   }
 

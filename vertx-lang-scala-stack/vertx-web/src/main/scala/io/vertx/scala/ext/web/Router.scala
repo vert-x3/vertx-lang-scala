@@ -361,7 +361,7 @@ class Router(private val _asJava: JRouter) {
     * @param exceptionHandler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(exceptionHandler: Throwable => Unit): Router = {
+  def exceptionHandler(exceptionHandler: io.vertx.core.Handler[Throwable]): Router = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(exceptionHandler))
     this
   }

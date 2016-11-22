@@ -42,7 +42,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableByteParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableByteHandler(notNull: Boolean, handler: Byte => Unit): Unit = {
+  def methodWithNullableByteHandler(notNull: Boolean, handler: io.vertx.core.Handler[Byte]): Unit = {
     _asJava.methodWithNullableByteHandler(notNull, funcToMappedHandler[java.lang.Byte, Byte](x => x)(handler))
   }
 
@@ -64,7 +64,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableShortParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableShortHandler(notNull: Boolean, handler: Short => Unit): Unit = {
+  def methodWithNullableShortHandler(notNull: Boolean, handler: io.vertx.core.Handler[Short]): Unit = {
     _asJava.methodWithNullableShortHandler(notNull, funcToMappedHandler[java.lang.Short, Short](x => x)(handler))
   }
 
@@ -86,7 +86,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableIntegerParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableIntegerHandler(notNull: Boolean, handler: Int => Unit): Unit = {
+  def methodWithNullableIntegerHandler(notNull: Boolean, handler: io.vertx.core.Handler[Int]): Unit = {
     _asJava.methodWithNullableIntegerHandler(notNull, funcToMappedHandler[java.lang.Integer, Int](x => x)(handler))
   }
 
@@ -108,7 +108,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableLongParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableLongHandler(notNull: Boolean, handler: Long => Unit): Unit = {
+  def methodWithNullableLongHandler(notNull: Boolean, handler: io.vertx.core.Handler[Long]): Unit = {
     _asJava.methodWithNullableLongHandler(notNull, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -130,7 +130,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableFloatParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableFloatHandler(notNull: Boolean, handler: Float => Unit): Unit = {
+  def methodWithNullableFloatHandler(notNull: Boolean, handler: io.vertx.core.Handler[Float]): Unit = {
     _asJava.methodWithNullableFloatHandler(notNull, funcToMappedHandler[java.lang.Float, Float](x => x)(handler))
   }
 
@@ -152,7 +152,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableDoubleParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableDoubleHandler(notNull: Boolean, handler: Double => Unit): Unit = {
+  def methodWithNullableDoubleHandler(notNull: Boolean, handler: io.vertx.core.Handler[Double]): Unit = {
     _asJava.methodWithNullableDoubleHandler(notNull, funcToMappedHandler[java.lang.Double, Double](x => x)(handler))
   }
 
@@ -174,7 +174,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableBooleanParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableBooleanHandler(notNull: Boolean, handler: Boolean => Unit): Unit = {
+  def methodWithNullableBooleanHandler(notNull: Boolean, handler: io.vertx.core.Handler[Boolean]): Unit = {
     _asJava.methodWithNullableBooleanHandler(notNull, funcToMappedHandler[java.lang.Boolean, Boolean](x => x)(handler))
   }
 
@@ -196,8 +196,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableStringParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableStringHandler(notNull: Boolean, handler: String => Unit): Unit = {
-    _asJava.methodWithNullableStringHandler(notNull, funcToHandler[java.lang.String](handler))
+  def methodWithNullableStringHandler(notNull: Boolean, handler: io.vertx.core.Handler[String]): Unit = {
+    _asJava.methodWithNullableStringHandler(notNull, (handler))
   }
 
   def methodWithNullableStringHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[String] = {
@@ -218,7 +218,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableCharParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableCharHandler(notNull: Boolean, handler: Char => Unit): Unit = {
+  def methodWithNullableCharHandler(notNull: Boolean, handler: io.vertx.core.Handler[Char]): Unit = {
     _asJava.methodWithNullableCharHandler(notNull, funcToMappedHandler[java.lang.Character, Char](x => x)(handler))
   }
 
@@ -240,8 +240,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableJsonObjectParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableJsonObjectHandler(notNull: Boolean, handler: JsonObject => Unit): Unit = {
-    _asJava.methodWithNullableJsonObjectHandler(notNull, funcToHandler[JsonObject](handler))
+  def methodWithNullableJsonObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[JsonObject]): Unit = {
+    _asJava.methodWithNullableJsonObjectHandler(notNull, (handler))
   }
 
   def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[JsonObject] = {
@@ -262,8 +262,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableJsonArrayParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableJsonArrayHandler(notNull: Boolean, handler: JsonArray => Unit): Unit = {
-    _asJava.methodWithNullableJsonArrayHandler(notNull, funcToHandler[JsonArray](handler))
+  def methodWithNullableJsonArrayHandler(notNull: Boolean, handler: io.vertx.core.Handler[JsonArray]): Unit = {
+    _asJava.methodWithNullableJsonArrayHandler(notNull, (handler))
   }
 
   def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[JsonArray] = {
@@ -284,7 +284,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableApiParam(expectNull, (if (param.isDefined) param.get.asJava else null))
   }
 
-  def methodWithNullableApiHandler(notNull: Boolean, handler: RefedInterface1 => Unit): Unit = {
+  def methodWithNullableApiHandler(notNull: Boolean, handler: io.vertx.core.Handler[RefedInterface1]): Unit = {
     _asJava.methodWithNullableApiHandler(notNull, funcToMappedHandler(RefedInterface1.apply)(handler))
   }
 
@@ -306,7 +306,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableDataObjectParam(expectNull, (if (param.isDefined) param.get.asJava else null))
   }
 
-  def methodWithNullableDataObjectHandler(notNull: Boolean, handler: TestDataObject => Unit): Unit = {
+  def methodWithNullableDataObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[TestDataObject]): Unit = {
     _asJava.methodWithNullableDataObjectHandler(notNull, funcToMappedHandler[JTestDataObject, TestDataObject](a => TestDataObject(a))(handler))
   }
 
@@ -328,8 +328,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableEnumParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableEnumHandler(notNull: Boolean, handler: io.vertx.codegen.testmodel.TestEnum => Unit): Unit = {
-    _asJava.methodWithNullableEnumHandler(notNull, funcToHandler(handler))
+  def methodWithNullableEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[io.vertx.codegen.testmodel.TestEnum]): Unit = {
+    _asJava.methodWithNullableEnumHandler(notNull, (handler))
   }
 
   def methodWithNullableEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
@@ -350,8 +350,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableGenEnumParam(expectNull, (if (param.isDefined) param.get else null))
   }
 
-  def methodWithNullableGenEnumHandler(notNull: Boolean, handler: io.vertx.codegen.testmodel.TestGenEnum => Unit): Unit = {
-    _asJava.methodWithNullableGenEnumHandler(notNull, funcToHandler(handler))
+  def methodWithNullableGenEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[io.vertx.codegen.testmodel.TestGenEnum]): Unit = {
+    _asJava.methodWithNullableGenEnumHandler(notNull, (handler))
   }
 
   def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: Boolean): concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
@@ -368,8 +368,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableTypeVariableParam(expectNull, param)
   }
 
-  def methodWithNullableTypeVariableHandler[T](notNull: Boolean, value: T, handler: T => Unit): Unit = {
-    _asJava.methodWithNullableTypeVariableHandler(notNull, value, funcToHandler(handler))
+  def methodWithNullableTypeVariableHandler[T](notNull: Boolean, value: T, handler: io.vertx.core.Handler[T]): Unit = {
+    _asJava.methodWithNullableTypeVariableHandler(notNull, value, (handler))
   }
 
   def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: Boolean, value: T): concurrent.Future[T] = {
@@ -394,7 +394,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListByteParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Byte).asJava else null)
   }
 
-  def methodWithNullableListByteHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Byte] => Unit): Unit = {
+  def methodWithNullableListByteHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Byte]]): Unit = {
     _asJava.methodWithNullableListByteHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[Byte]](x => if (x != null) x.asScala.map(x => x:Byte) else null)(handler))
   }
 
@@ -416,7 +416,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListShortParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Short).asJava else null)
   }
 
-  def methodWithNullableListShortHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Short] => Unit): Unit = {
+  def methodWithNullableListShortHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Short]]): Unit = {
     _asJava.methodWithNullableListShortHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[Short]](x => if (x != null) x.asScala.map(x => x:Short) else null)(handler))
   }
 
@@ -438,7 +438,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListIntegerParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Integer).asJava else null)
   }
 
-  def methodWithNullableListIntegerHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Int] => Unit): Unit = {
+  def methodWithNullableListIntegerHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Int]]): Unit = {
     _asJava.methodWithNullableListIntegerHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => if (x != null) x.asScala.map(x => x:Int) else null)(handler))
   }
 
@@ -460,7 +460,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListLongParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Long).asJava else null)
   }
 
-  def methodWithNullableListLongHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Long] => Unit): Unit = {
+  def methodWithNullableListLongHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Long]]): Unit = {
     _asJava.methodWithNullableListLongHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[Long]](x => if (x != null) x.asScala.map(x => x:Long) else null)(handler))
   }
 
@@ -482,7 +482,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListFloatParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Float).asJava else null)
   }
 
-  def methodWithNullableListFloatHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Float] => Unit): Unit = {
+  def methodWithNullableListFloatHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Float]]): Unit = {
     _asJava.methodWithNullableListFloatHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[Float]](x => if (x != null) x.asScala.map(x => x:Float) else null)(handler))
   }
 
@@ -504,7 +504,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListDoubleParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Double).asJava else null)
   }
 
-  def methodWithNullableListDoubleHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Double] => Unit): Unit = {
+  def methodWithNullableListDoubleHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Double]]): Unit = {
     _asJava.methodWithNullableListDoubleHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[Double]](x => if (x != null) x.asScala.map(x => x:Double) else null)(handler))
   }
 
@@ -526,7 +526,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListBooleanParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Boolean).asJava else null)
   }
 
-  def methodWithNullableListBooleanHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Boolean] => Unit): Unit = {
+  def methodWithNullableListBooleanHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Boolean]]): Unit = {
     _asJava.methodWithNullableListBooleanHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[Boolean]](x => if (x != null) x.asScala.map(x => x:Boolean) else null)(handler))
   }
 
@@ -548,7 +548,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListStringParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.String).asJava else null)
   }
 
-  def methodWithNullableListStringHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[String] => Unit): Unit = {
+  def methodWithNullableListStringHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[String]]): Unit = {
     _asJava.methodWithNullableListStringHandler(notNull, funcToMappedHandler[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -570,7 +570,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListCharParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Character).asJava else null)
   }
 
-  def methodWithNullableListCharHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[Char] => Unit): Unit = {
+  def methodWithNullableListCharHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Char]]): Unit = {
     _asJava.methodWithNullableListCharHandler(notNull, funcToMappedHandler[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[Char]](x => if (x != null) x.asScala.map(x => x:Char) else null)(handler))
   }
 
@@ -592,7 +592,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListJsonObjectParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.core.json.JsonObject).asJava else null)
   }
 
-  def methodWithNullableListJsonObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[JsonObject] => Unit): Unit = {
+  def methodWithNullableListJsonObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[JsonObject]]): Unit = {
     _asJava.methodWithNullableListJsonObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[JsonObject]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -614,7 +614,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListJsonArrayParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.core.json.JsonArray).asJava else null)
   }
 
-  def methodWithNullableListJsonArrayHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[JsonArray] => Unit): Unit = {
+  def methodWithNullableListJsonArrayHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[JsonArray]]): Unit = {
     _asJava.methodWithNullableListJsonArrayHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[JsonArray]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -636,7 +636,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListApiParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableListApiHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[RefedInterface1] => Unit): Unit = {
+  def methodWithNullableListApiHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[RefedInterface1]]): Unit = {
     _asJava.methodWithNullableListApiHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
   }
 
@@ -658,7 +658,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListDataObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableListDataObjectHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[TestDataObject] => Unit): Unit = {
+  def methodWithNullableListDataObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[TestDataObject]]): Unit = {
     _asJava.methodWithNullableListDataObjectHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
   }
 
@@ -680,7 +680,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListEnumParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.codegen.testmodel.TestEnum).asJava else null)
   }
 
-  def methodWithNullableListEnumHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum] => Unit): Unit = {
+  def methodWithNullableListEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
     _asJava.methodWithNullableListEnumHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -702,7 +702,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableListGenEnumParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).asJava else null)
   }
 
-  def methodWithNullableListGenEnumHandler(notNull: Boolean, handler: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum] => Unit): Unit = {
+  def methodWithNullableListGenEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
     _asJava.methodWithNullableListGenEnumHandler(notNull, funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestGenEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -724,7 +724,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetByteParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Byte).asJava else null)
   }
 
-  def methodWithNullableSetByteHandler(notNull: Boolean, handler: Set[Byte] => Unit): Unit = {
+  def methodWithNullableSetByteHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Byte]]): Unit = {
     _asJava.methodWithNullableSetByteHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Byte], Set[Byte]](x => if (x != null) x.asScala.map(x => x:Byte).toSet else null)(handler))
   }
 
@@ -746,7 +746,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetShortParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Short).asJava else null)
   }
 
-  def methodWithNullableSetShortHandler(notNull: Boolean, handler: Set[Short] => Unit): Unit = {
+  def methodWithNullableSetShortHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Short]]): Unit = {
     _asJava.methodWithNullableSetShortHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Short], Set[Short]](x => if (x != null) x.asScala.map(x => x:Short).toSet else null)(handler))
   }
 
@@ -768,7 +768,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetIntegerParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Integer).asJava else null)
   }
 
-  def methodWithNullableSetIntegerHandler(notNull: Boolean, handler: Set[Int] => Unit): Unit = {
+  def methodWithNullableSetIntegerHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Int]]): Unit = {
     _asJava.methodWithNullableSetIntegerHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Integer], Set[Int]](x => if (x != null) x.asScala.map(x => x:Int).toSet else null)(handler))
   }
 
@@ -790,7 +790,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetLongParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Long).asJava else null)
   }
 
-  def methodWithNullableSetLongHandler(notNull: Boolean, handler: Set[Long] => Unit): Unit = {
+  def methodWithNullableSetLongHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Long]]): Unit = {
     _asJava.methodWithNullableSetLongHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Long], Set[Long]](x => if (x != null) x.asScala.map(x => x:Long).toSet else null)(handler))
   }
 
@@ -812,7 +812,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetFloatParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Float).asJava else null)
   }
 
-  def methodWithNullableSetFloatHandler(notNull: Boolean, handler: Set[Float] => Unit): Unit = {
+  def methodWithNullableSetFloatHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Float]]): Unit = {
     _asJava.methodWithNullableSetFloatHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Float], Set[Float]](x => if (x != null) x.asScala.map(x => x:Float).toSet else null)(handler))
   }
 
@@ -834,7 +834,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetDoubleParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Double).asJava else null)
   }
 
-  def methodWithNullableSetDoubleHandler(notNull: Boolean, handler: Set[Double] => Unit): Unit = {
+  def methodWithNullableSetDoubleHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Double]]): Unit = {
     _asJava.methodWithNullableSetDoubleHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Double], Set[Double]](x => if (x != null) x.asScala.map(x => x:Double).toSet else null)(handler))
   }
 
@@ -856,7 +856,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetBooleanParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Boolean).asJava else null)
   }
 
-  def methodWithNullableSetBooleanHandler(notNull: Boolean, handler: Set[Boolean] => Unit): Unit = {
+  def methodWithNullableSetBooleanHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Boolean]]): Unit = {
     _asJava.methodWithNullableSetBooleanHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Boolean], Set[Boolean]](x => if (x != null) x.asScala.map(x => x:Boolean).toSet else null)(handler))
   }
 
@@ -878,7 +878,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetStringParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.String).asJava else null)
   }
 
-  def methodWithNullableSetStringHandler(notNull: Boolean, handler: Set[String] => Unit): Unit = {
+  def methodWithNullableSetStringHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[String]]): Unit = {
     _asJava.methodWithNullableSetStringHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.String], Set[String]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -900,7 +900,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetCharParam(expectNull, if (param.isDefined) param.get.map(x => x:java.lang.Character).asJava else null)
   }
 
-  def methodWithNullableSetCharHandler(notNull: Boolean, handler: Set[Char] => Unit): Unit = {
+  def methodWithNullableSetCharHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[Char]]): Unit = {
     _asJava.methodWithNullableSetCharHandler(notNull, funcToMappedHandler[java.util.Set[java.lang.Character], Set[Char]](x => if (x != null) x.asScala.map(x => x:Char).toSet else null)(handler))
   }
 
@@ -922,7 +922,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetJsonObjectParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.core.json.JsonObject).asJava else null)
   }
 
-  def methodWithNullableSetJsonObjectHandler(notNull: Boolean, handler: Set[JsonObject] => Unit): Unit = {
+  def methodWithNullableSetJsonObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[JsonObject]]): Unit = {
     _asJava.methodWithNullableSetJsonObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -944,7 +944,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetJsonArrayParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.core.json.JsonArray).asJava else null)
   }
 
-  def methodWithNullableSetJsonArrayHandler(notNull: Boolean, handler: Set[JsonArray] => Unit): Unit = {
+  def methodWithNullableSetJsonArrayHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[JsonArray]]): Unit = {
     _asJava.methodWithNullableSetJsonArrayHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -966,7 +966,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetApiParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableSetApiHandler(notNull: Boolean, handler: Set[RefedInterface1] => Unit): Unit = {
+  def methodWithNullableSetApiHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[RefedInterface1]]): Unit = {
     _asJava.methodWithNullableSetApiHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
   }
 
@@ -988,7 +988,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetDataObjectParam(expectNull, if (param.isDefined) param.get.map(x => if (x == null) null else x.asJava).asJava else null)
   }
 
-  def methodWithNullableSetDataObjectHandler(notNull: Boolean, handler: Set[TestDataObject] => Unit): Unit = {
+  def methodWithNullableSetDataObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[TestDataObject]]): Unit = {
     _asJava.methodWithNullableSetDataObjectHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
   }
 
@@ -1010,7 +1010,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetEnumParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.codegen.testmodel.TestEnum).asJava else null)
   }
 
-  def methodWithNullableSetEnumHandler(notNull: Boolean, handler: Set[io.vertx.codegen.testmodel.TestEnum] => Unit): Unit = {
+  def methodWithNullableSetEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
     _asJava.methodWithNullableSetEnumHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestEnum], Set[io.vertx.codegen.testmodel.TestEnum]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1032,7 +1032,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableSetGenEnumParam(expectNull, if (param.isDefined) param.get.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).asJava else null)
   }
 
-  def methodWithNullableSetGenEnumHandler(notNull: Boolean, handler: Set[io.vertx.codegen.testmodel.TestGenEnum] => Unit): Unit = {
+  def methodWithNullableSetGenEnumHandler(notNull: Boolean, handler: io.vertx.core.Handler[Set[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
     _asJava.methodWithNullableSetGenEnumHandler(notNull, funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum], Set[io.vertx.codegen.testmodel.TestGenEnum]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1054,7 +1054,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapByteParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Byte)).asJava else null)
   }
 
-  def methodWithNullableMapByteHandler(notNull: Boolean, handler: Map[String, Byte] => Unit): Unit = {
+  def methodWithNullableMapByteHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Byte]]): Unit = {
     _asJava.methodWithNullableMapByteHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Byte], Map[String, Byte]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Byte)).toMap else null)(handler))
   }
 
@@ -1076,7 +1076,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapShortParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Short)).asJava else null)
   }
 
-  def methodWithNullableMapShortHandler(notNull: Boolean, handler: Map[String, Short] => Unit): Unit = {
+  def methodWithNullableMapShortHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Short]]): Unit = {
     _asJava.methodWithNullableMapShortHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Short], Map[String, Short]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Short)).toMap else null)(handler))
   }
 
@@ -1098,7 +1098,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapIntegerParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Integer)).asJava else null)
   }
 
-  def methodWithNullableMapIntegerHandler(notNull: Boolean, handler: Map[String, Int] => Unit): Unit = {
+  def methodWithNullableMapIntegerHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Int]]): Unit = {
     _asJava.methodWithNullableMapIntegerHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Integer], Map[String, Int]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Int)).toMap else null)(handler))
   }
 
@@ -1120,7 +1120,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapLongParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Long)).asJava else null)
   }
 
-  def methodWithNullableMapLongHandler(notNull: Boolean, handler: Map[String, Long] => Unit): Unit = {
+  def methodWithNullableMapLongHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Long]]): Unit = {
     _asJava.methodWithNullableMapLongHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Long], Map[String, Long]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Long)).toMap else null)(handler))
   }
 
@@ -1142,7 +1142,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapFloatParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Float)).asJava else null)
   }
 
-  def methodWithNullableMapFloatHandler(notNull: Boolean, handler: Map[String, Float] => Unit): Unit = {
+  def methodWithNullableMapFloatHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Float]]): Unit = {
     _asJava.methodWithNullableMapFloatHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Float], Map[String, Float]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Float)).toMap else null)(handler))
   }
 
@@ -1164,7 +1164,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapDoubleParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Double)).asJava else null)
   }
 
-  def methodWithNullableMapDoubleHandler(notNull: Boolean, handler: Map[String, Double] => Unit): Unit = {
+  def methodWithNullableMapDoubleHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Double]]): Unit = {
     _asJava.methodWithNullableMapDoubleHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Double], Map[String, Double]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Double)).toMap else null)(handler))
   }
 
@@ -1186,7 +1186,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapBooleanParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Boolean)).asJava else null)
   }
 
-  def methodWithNullableMapBooleanHandler(notNull: Boolean, handler: Map[String, Boolean] => Unit): Unit = {
+  def methodWithNullableMapBooleanHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Boolean]]): Unit = {
     _asJava.methodWithNullableMapBooleanHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Boolean], Map[String, Boolean]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Boolean)).toMap else null)(handler))
   }
 
@@ -1208,7 +1208,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapStringParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava else null)
   }
 
-  def methodWithNullableMapStringHandler(notNull: Boolean, handler: Map[String, String] => Unit): Unit = {
+  def methodWithNullableMapStringHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, String]]): Unit = {
     _asJava.methodWithNullableMapStringHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.String], Map[String, String]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -1230,7 +1230,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapCharParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Character)).asJava else null)
   }
 
-  def methodWithNullableMapCharHandler(notNull: Boolean, handler: Map[String, Char] => Unit): Unit = {
+  def methodWithNullableMapCharHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, Char]]): Unit = {
     _asJava.methodWithNullableMapCharHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Character], Map[String, Char]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Char)).toMap else null)(handler))
   }
 
@@ -1252,7 +1252,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapJsonObjectParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonObject)).asJava else null)
   }
 
-  def methodWithNullableMapJsonObjectHandler(notNull: Boolean, handler: Map[String, JsonObject] => Unit): Unit = {
+  def methodWithNullableMapJsonObjectHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, JsonObject]]): Unit = {
     _asJava.methodWithNullableMapJsonObjectHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -1274,7 +1274,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithNullableMapJsonArrayParam(expectNull, if (param.isDefined) param.get.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonArray)).asJava else null)
   }
 
-  def methodWithNullableMapJsonArrayHandler(notNull: Boolean, handler: Map[String, JsonArray] => Unit): Unit = {
+  def methodWithNullableMapJsonArrayHandler(notNull: Boolean, handler: io.vertx.core.Handler[Map[String, JsonArray]]): Unit = {
     _asJava.methodWithNullableMapJsonArrayHandler(notNull, funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -1300,7 +1300,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableByteParam(param.map(x => x:java.lang.Byte).asJava)
   }
 
-  def methodWithListNullableByteHandler(handler: scala.collection.mutable.Buffer[Byte] => Unit): Unit = {
+  def methodWithListNullableByteHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Byte]]): Unit = {
     _asJava.methodWithListNullableByteHandler(funcToMappedHandler[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[Byte]](x => if (x != null) x.asScala.map(x => x:Byte) else null)(handler))
   }
 
@@ -1318,7 +1318,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableShortParam(param.map(x => x:java.lang.Short).asJava)
   }
 
-  def methodWithListNullableShortHandler(handler: scala.collection.mutable.Buffer[Short] => Unit): Unit = {
+  def methodWithListNullableShortHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Short]]): Unit = {
     _asJava.methodWithListNullableShortHandler(funcToMappedHandler[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[Short]](x => if (x != null) x.asScala.map(x => x:Short) else null)(handler))
   }
 
@@ -1336,7 +1336,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableIntegerParam(param.map(x => x:java.lang.Integer).asJava)
   }
 
-  def methodWithListNullableIntegerHandler(handler: scala.collection.mutable.Buffer[Int] => Unit): Unit = {
+  def methodWithListNullableIntegerHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Int]]): Unit = {
     _asJava.methodWithListNullableIntegerHandler(funcToMappedHandler[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => if (x != null) x.asScala.map(x => x:Int) else null)(handler))
   }
 
@@ -1354,7 +1354,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableLongParam(param.map(x => x:java.lang.Long).asJava)
   }
 
-  def methodWithListNullableLongHandler(handler: scala.collection.mutable.Buffer[Long] => Unit): Unit = {
+  def methodWithListNullableLongHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Long]]): Unit = {
     _asJava.methodWithListNullableLongHandler(funcToMappedHandler[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[Long]](x => if (x != null) x.asScala.map(x => x:Long) else null)(handler))
   }
 
@@ -1372,7 +1372,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableBooleanParam(param.map(x => x:java.lang.Boolean).asJava)
   }
 
-  def methodWithListNullableBooleanHandler(handler: scala.collection.mutable.Buffer[Boolean] => Unit): Unit = {
+  def methodWithListNullableBooleanHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Boolean]]): Unit = {
     _asJava.methodWithListNullableBooleanHandler(funcToMappedHandler[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[Boolean]](x => if (x != null) x.asScala.map(x => x:Boolean) else null)(handler))
   }
 
@@ -1390,7 +1390,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableFloatParam(param.map(x => x:java.lang.Float).asJava)
   }
 
-  def methodWithListNullableFloatHandler(handler: scala.collection.mutable.Buffer[Float] => Unit): Unit = {
+  def methodWithListNullableFloatHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Float]]): Unit = {
     _asJava.methodWithListNullableFloatHandler(funcToMappedHandler[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[Float]](x => if (x != null) x.asScala.map(x => x:Float) else null)(handler))
   }
 
@@ -1408,7 +1408,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableDoubleParam(param.map(x => x:java.lang.Double).asJava)
   }
 
-  def methodWithListNullableDoubleHandler(handler: scala.collection.mutable.Buffer[Double] => Unit): Unit = {
+  def methodWithListNullableDoubleHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Double]]): Unit = {
     _asJava.methodWithListNullableDoubleHandler(funcToMappedHandler[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[Double]](x => if (x != null) x.asScala.map(x => x:Double) else null)(handler))
   }
 
@@ -1426,7 +1426,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableStringParam(param.map(x => x:java.lang.String).asJava)
   }
 
-  def methodWithListNullableStringHandler(handler: scala.collection.mutable.Buffer[String] => Unit): Unit = {
+  def methodWithListNullableStringHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[String]]): Unit = {
     _asJava.methodWithListNullableStringHandler(funcToMappedHandler[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -1444,7 +1444,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableCharParam(param.map(x => x:java.lang.Character).asJava)
   }
 
-  def methodWithListNullableCharHandler(handler: scala.collection.mutable.Buffer[Char] => Unit): Unit = {
+  def methodWithListNullableCharHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[Char]]): Unit = {
     _asJava.methodWithListNullableCharHandler(funcToMappedHandler[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[Char]](x => if (x != null) x.asScala.map(x => x:Char) else null)(handler))
   }
 
@@ -1462,7 +1462,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableJsonObjectParam(param.map(x => x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithListNullableJsonObjectHandler(handler: scala.collection.mutable.Buffer[JsonObject] => Unit): Unit = {
+  def methodWithListNullableJsonObjectHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[JsonObject]]): Unit = {
     _asJava.methodWithListNullableJsonObjectHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonObject], scala.collection.mutable.Buffer[JsonObject]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -1480,7 +1480,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableJsonArrayParam(param.map(x => x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithListNullableJsonArrayHandler(handler: scala.collection.mutable.Buffer[JsonArray] => Unit): Unit = {
+  def methodWithListNullableJsonArrayHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[JsonArray]]): Unit = {
     _asJava.methodWithListNullableJsonArrayHandler(funcToMappedHandler[java.util.List[io.vertx.core.json.JsonArray], scala.collection.mutable.Buffer[JsonArray]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -1498,7 +1498,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithListNullableApiHandler(handler: scala.collection.mutable.Buffer[RefedInterface1] => Unit): Unit = {
+  def methodWithListNullableApiHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[RefedInterface1]]): Unit = {
     _asJava.methodWithListNullableApiHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.RefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply) else null)(handler))
   }
 
@@ -1516,7 +1516,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithListNullableDataObjectHandler(handler: scala.collection.mutable.Buffer[TestDataObject] => Unit): Unit = {
+  def methodWithListNullableDataObjectHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[TestDataObject]]): Unit = {
     _asJava.methodWithListNullableDataObjectHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)) else null)(handler))
   }
 
@@ -1534,7 +1534,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableEnumParam(param.map(x => x:io.vertx.codegen.testmodel.TestEnum).asJava)
   }
 
-  def methodWithListNullableEnumHandler(handler: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum] => Unit): Unit = {
+  def methodWithListNullableEnumHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
     _asJava.methodWithListNullableEnumHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -1552,7 +1552,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithListNullableGenEnumParam(param.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).asJava)
   }
 
-  def methodWithListNullableGenEnumHandler(handler: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum] => Unit): Unit = {
+  def methodWithListNullableGenEnumHandler(handler: io.vertx.core.Handler[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
     _asJava.methodWithListNullableGenEnumHandler(funcToMappedHandler[java.util.List[io.vertx.codegen.testmodel.TestGenEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]](x => if (x != null) x.asScala else null)(handler))
   }
 
@@ -1570,7 +1570,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableByteParam(param.map(x => x:java.lang.Byte).asJava)
   }
 
-  def methodWithSetNullableByteHandler(handler: Set[Byte] => Unit): Unit = {
+  def methodWithSetNullableByteHandler(handler: io.vertx.core.Handler[Set[Byte]]): Unit = {
     _asJava.methodWithSetNullableByteHandler(funcToMappedHandler[java.util.Set[java.lang.Byte], Set[Byte]](x => if (x != null) x.asScala.map(x => x:Byte).toSet else null)(handler))
   }
 
@@ -1588,7 +1588,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableShortParam(param.map(x => x:java.lang.Short).asJava)
   }
 
-  def methodWithSetNullableShortHandler(handler: Set[Short] => Unit): Unit = {
+  def methodWithSetNullableShortHandler(handler: io.vertx.core.Handler[Set[Short]]): Unit = {
     _asJava.methodWithSetNullableShortHandler(funcToMappedHandler[java.util.Set[java.lang.Short], Set[Short]](x => if (x != null) x.asScala.map(x => x:Short).toSet else null)(handler))
   }
 
@@ -1606,7 +1606,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableIntegerParam(param.map(x => x:java.lang.Integer).asJava)
   }
 
-  def methodWithSetNullableIntegerHandler(handler: Set[Int] => Unit): Unit = {
+  def methodWithSetNullableIntegerHandler(handler: io.vertx.core.Handler[Set[Int]]): Unit = {
     _asJava.methodWithSetNullableIntegerHandler(funcToMappedHandler[java.util.Set[java.lang.Integer], Set[Int]](x => if (x != null) x.asScala.map(x => x:Int).toSet else null)(handler))
   }
 
@@ -1624,7 +1624,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableLongParam(param.map(x => x:java.lang.Long).asJava)
   }
 
-  def methodWithSetNullableLongHandler(handler: Set[Long] => Unit): Unit = {
+  def methodWithSetNullableLongHandler(handler: io.vertx.core.Handler[Set[Long]]): Unit = {
     _asJava.methodWithSetNullableLongHandler(funcToMappedHandler[java.util.Set[java.lang.Long], Set[Long]](x => if (x != null) x.asScala.map(x => x:Long).toSet else null)(handler))
   }
 
@@ -1642,7 +1642,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableBooleanParam(param.map(x => x:java.lang.Boolean).asJava)
   }
 
-  def methodWithSetNullableBooleanHandler(handler: Set[Boolean] => Unit): Unit = {
+  def methodWithSetNullableBooleanHandler(handler: io.vertx.core.Handler[Set[Boolean]]): Unit = {
     _asJava.methodWithSetNullableBooleanHandler(funcToMappedHandler[java.util.Set[java.lang.Boolean], Set[Boolean]](x => if (x != null) x.asScala.map(x => x:Boolean).toSet else null)(handler))
   }
 
@@ -1660,7 +1660,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableFloatParam(param.map(x => x:java.lang.Float).asJava)
   }
 
-  def methodWithSetNullableFloatHandler(handler: Set[Float] => Unit): Unit = {
+  def methodWithSetNullableFloatHandler(handler: io.vertx.core.Handler[Set[Float]]): Unit = {
     _asJava.methodWithSetNullableFloatHandler(funcToMappedHandler[java.util.Set[java.lang.Float], Set[Float]](x => if (x != null) x.asScala.map(x => x:Float).toSet else null)(handler))
   }
 
@@ -1678,7 +1678,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableDoubleParam(param.map(x => x:java.lang.Double).asJava)
   }
 
-  def methodWithSetNullableDoubleHandler(handler: Set[Double] => Unit): Unit = {
+  def methodWithSetNullableDoubleHandler(handler: io.vertx.core.Handler[Set[Double]]): Unit = {
     _asJava.methodWithSetNullableDoubleHandler(funcToMappedHandler[java.util.Set[java.lang.Double], Set[Double]](x => if (x != null) x.asScala.map(x => x:Double).toSet else null)(handler))
   }
 
@@ -1696,7 +1696,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableStringParam(param.map(x => x:java.lang.String).asJava)
   }
 
-  def methodWithSetNullableStringHandler(handler: Set[String] => Unit): Unit = {
+  def methodWithSetNullableStringHandler(handler: io.vertx.core.Handler[Set[String]]): Unit = {
     _asJava.methodWithSetNullableStringHandler(funcToMappedHandler[java.util.Set[java.lang.String], Set[String]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1714,7 +1714,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableCharParam(param.map(x => x:java.lang.Character).asJava)
   }
 
-  def methodWithSetNullableCharHandler(handler: Set[Char] => Unit): Unit = {
+  def methodWithSetNullableCharHandler(handler: io.vertx.core.Handler[Set[Char]]): Unit = {
     _asJava.methodWithSetNullableCharHandler(funcToMappedHandler[java.util.Set[java.lang.Character], Set[Char]](x => if (x != null) x.asScala.map(x => x:Char).toSet else null)(handler))
   }
 
@@ -1732,7 +1732,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableJsonObjectParam(param.map(x => x:io.vertx.core.json.JsonObject).asJava)
   }
 
-  def methodWithSetNullableJsonObjectHandler(handler: Set[JsonObject] => Unit): Unit = {
+  def methodWithSetNullableJsonObjectHandler(handler: io.vertx.core.Handler[Set[JsonObject]]): Unit = {
     _asJava.methodWithSetNullableJsonObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonObject], Set[JsonObject]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1750,7 +1750,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableJsonArrayParam(param.map(x => x:io.vertx.core.json.JsonArray).asJava)
   }
 
-  def methodWithSetNullableJsonArrayHandler(handler: Set[JsonArray] => Unit): Unit = {
+  def methodWithSetNullableJsonArrayHandler(handler: io.vertx.core.Handler[Set[JsonArray]]): Unit = {
     _asJava.methodWithSetNullableJsonArrayHandler(funcToMappedHandler[java.util.Set[io.vertx.core.json.JsonArray], Set[JsonArray]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1768,7 +1768,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableApiParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithSetNullableApiHandler(handler: Set[RefedInterface1] => Unit): Unit = {
+  def methodWithSetNullableApiHandler(handler: io.vertx.core.Handler[Set[RefedInterface1]]): Unit = {
     _asJava.methodWithSetNullableApiHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1], Set[RefedInterface1]](x => if (x != null) x.asScala.map(RefedInterface1.apply).toSet else null)(handler))
   }
 
@@ -1786,7 +1786,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableDataObjectParam(param.map(x => if (x == null) null else x.asJava).asJava)
   }
 
-  def methodWithSetNullableDataObjectHandler(handler: Set[TestDataObject] => Unit): Unit = {
+  def methodWithSetNullableDataObjectHandler(handler: io.vertx.core.Handler[Set[TestDataObject]]): Unit = {
     _asJava.methodWithSetNullableDataObjectHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestDataObject], Set[TestDataObject]](x => if (x != null) x.asScala.map(x => TestDataObject(x)).toSet else null)(handler))
   }
 
@@ -1804,7 +1804,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableEnumParam(param.map(x => x:io.vertx.codegen.testmodel.TestEnum).asJava)
   }
 
-  def methodWithSetNullableEnumHandler(handler: Set[io.vertx.codegen.testmodel.TestEnum] => Unit): Unit = {
+  def methodWithSetNullableEnumHandler(handler: io.vertx.core.Handler[Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
     _asJava.methodWithSetNullableEnumHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestEnum], Set[io.vertx.codegen.testmodel.TestEnum]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1822,7 +1822,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithSetNullableGenEnumParam(param.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).asJava)
   }
 
-  def methodWithSetNullableGenEnumHandler(handler: Set[io.vertx.codegen.testmodel.TestGenEnum] => Unit): Unit = {
+  def methodWithSetNullableGenEnumHandler(handler: io.vertx.core.Handler[Set[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
     _asJava.methodWithSetNullableGenEnumHandler(funcToMappedHandler[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum], Set[io.vertx.codegen.testmodel.TestGenEnum]](x => if (x != null) x.asScala.toSet else null)(handler))
   }
 
@@ -1840,7 +1840,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableByteParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Byte)).asJava)
   }
 
-  def methodWithMapNullableByteHandler(handler: Map[String, Byte] => Unit): Unit = {
+  def methodWithMapNullableByteHandler(handler: io.vertx.core.Handler[Map[String, Byte]]): Unit = {
     _asJava.methodWithMapNullableByteHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Byte], Map[String, Byte]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Byte)).toMap else null)(handler))
   }
 
@@ -1858,7 +1858,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableShortParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Short)).asJava)
   }
 
-  def methodWithMapNullableShortHandler(handler: Map[String, Short] => Unit): Unit = {
+  def methodWithMapNullableShortHandler(handler: io.vertx.core.Handler[Map[String, Short]]): Unit = {
     _asJava.methodWithMapNullableShortHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Short], Map[String, Short]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Short)).toMap else null)(handler))
   }
 
@@ -1876,7 +1876,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableIntegerParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Integer)).asJava)
   }
 
-  def methodWithMapNullableIntegerHandler(handler: Map[String, Int] => Unit): Unit = {
+  def methodWithMapNullableIntegerHandler(handler: io.vertx.core.Handler[Map[String, Int]]): Unit = {
     _asJava.methodWithMapNullableIntegerHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Integer], Map[String, Int]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Int)).toMap else null)(handler))
   }
 
@@ -1894,7 +1894,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableLongParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Long)).asJava)
   }
 
-  def methodWithMapNullableLongHandler(handler: Map[String, Long] => Unit): Unit = {
+  def methodWithMapNullableLongHandler(handler: io.vertx.core.Handler[Map[String, Long]]): Unit = {
     _asJava.methodWithMapNullableLongHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Long], Map[String, Long]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Long)).toMap else null)(handler))
   }
 
@@ -1912,7 +1912,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableBooleanParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Boolean)).asJava)
   }
 
-  def methodWithMapNullableBooleanHandler(handler: Map[String, Boolean] => Unit): Unit = {
+  def methodWithMapNullableBooleanHandler(handler: io.vertx.core.Handler[Map[String, Boolean]]): Unit = {
     _asJava.methodWithMapNullableBooleanHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Boolean], Map[String, Boolean]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Boolean)).toMap else null)(handler))
   }
 
@@ -1930,7 +1930,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableFloatParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Float)).asJava)
   }
 
-  def methodWithMapNullableFloatHandler(handler: Map[String, Float] => Unit): Unit = {
+  def methodWithMapNullableFloatHandler(handler: io.vertx.core.Handler[Map[String, Float]]): Unit = {
     _asJava.methodWithMapNullableFloatHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Float], Map[String, Float]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Float)).toMap else null)(handler))
   }
 
@@ -1948,7 +1948,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableDoubleParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Double)).asJava)
   }
 
-  def methodWithMapNullableDoubleHandler(handler: Map[String, Double] => Unit): Unit = {
+  def methodWithMapNullableDoubleHandler(handler: io.vertx.core.Handler[Map[String, Double]]): Unit = {
     _asJava.methodWithMapNullableDoubleHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Double], Map[String, Double]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Double)).toMap else null)(handler))
   }
 
@@ -1966,7 +1966,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableStringParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.String)).asJava)
   }
 
-  def methodWithMapNullableStringHandler(handler: Map[String, String] => Unit): Unit = {
+  def methodWithMapNullableStringHandler(handler: io.vertx.core.Handler[Map[String, String]]): Unit = {
     _asJava.methodWithMapNullableStringHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.String], Map[String, String]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -1984,7 +1984,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableCharParam(param.map(kv => (kv._1:java.lang.String, kv._2:java.lang.Character)).asJava)
   }
 
-  def methodWithMapNullableCharHandler(handler: Map[String, Char] => Unit): Unit = {
+  def methodWithMapNullableCharHandler(handler: io.vertx.core.Handler[Map[String, Char]]): Unit = {
     _asJava.methodWithMapNullableCharHandler(funcToMappedHandler[java.util.Map[java.lang.String,java.lang.Character], Map[String, Char]](x => if (x != null) x.asScala.map((a) => (a._1,a._2:Char)).toMap else null)(handler))
   }
 
@@ -2002,7 +2002,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableJsonObjectParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonObject)).asJava)
   }
 
-  def methodWithMapNullableJsonObjectHandler(handler: Map[String, JsonObject] => Unit): Unit = {
+  def methodWithMapNullableJsonObjectHandler(handler: io.vertx.core.Handler[Map[String, JsonObject]]): Unit = {
     _asJava.methodWithMapNullableJsonObjectHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject], Map[String, JsonObject]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -2020,7 +2020,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableJsonArrayParam(param.map(kv => (kv._1:java.lang.String, kv._2:io.vertx.core.json.JsonArray)).asJava)
   }
 
-  def methodWithMapNullableJsonArrayHandler(handler: Map[String, JsonArray] => Unit): Unit = {
+  def methodWithMapNullableJsonArrayHandler(handler: io.vertx.core.Handler[Map[String, JsonArray]]): Unit = {
     _asJava.methodWithMapNullableJsonArrayHandler(funcToMappedHandler[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray], Map[String, JsonArray]](x => if (x != null) x.asScala.map((a) => (a._1,a._2)).toMap else null)(handler))
   }
 
@@ -2038,8 +2038,8 @@ class NullableTCK(private val _asJava: JNullableTCK) {
     _asJava.methodWithMapNullableApiParam(param.map(kv => (kv._1:java.lang.String, if (kv._2 != null) kv._2.asJava.asInstanceOf[JRefedInterface1] else null)).asJava)
   }
 
-  def methodWithNullableHandler(expectNull: Boolean, handler: String => Unit): Unit = {
-    _asJava.methodWithNullableHandler(expectNull, funcToHandler[java.lang.String](handler))
+  def methodWithNullableHandler(expectNull: Boolean, handler: io.vertx.core.Handler[String]): Unit = {
+    _asJava.methodWithNullableHandler(expectNull, (handler))
   }
 
   def methodWithNullableHandlerAsyncResultFuture(expectNull: Boolean): concurrent.Future[String] = {

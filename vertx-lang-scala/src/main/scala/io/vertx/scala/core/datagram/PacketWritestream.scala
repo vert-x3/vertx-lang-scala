@@ -58,7 +58,7 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): PacketWritestream = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): PacketWritestream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -73,8 +73,8 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
     this
   }
 
-  def drainHandler(handler: () => Unit): PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): PacketWritestream = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

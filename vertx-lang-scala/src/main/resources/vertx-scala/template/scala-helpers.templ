@@ -61,11 +61,7 @@
           ret ='Map[' + toScalaType(type.args[0]) + '[_], ' + toScalaType(type.args[1]) + '[_]]';
     } else if (type.kind == CLASS_HANDLER) {
       var type = toScalaType(type.args[0]);
-      if (type.equals("Unit")) {
-        ret = "() => Unit";
-      } else {
-        ret = type + " => Unit";
-      }
+      ret = "io.vertx.core.Handler[" + type +"]";
     } else if (type.kind == CLASS_FUNCTION) {
       var type1 = changeJavaGenericNotationToScalaNotation(type.args[0]);
       var type2 = changeJavaGenericNotationToScalaNotation(type.args[1]);
@@ -402,7 +398,7 @@
         invocation += handleOption(param);
       }
     } else if (typeParam.kind == CLASS_OBJECT) {
-      invocation += 'funcToHandler[io.vertx.core.AsyncResult['+typeParam.name+']]('+param.name;
+      invocation += '('+param.name;
     }
     return invocation;
   }
@@ -442,7 +438,7 @@
     return invocation;
   }
 
-  def methodInvocationHandler(type, mappedFunc, func, convertUnit, param) {
+  def methodInvocationHandler(type, mappedFunc, convertUnit, param) {
     var invocation = '';
 
     if (type.kind == CLASS_API) {
@@ -462,20 +458,20 @@
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += func + '[' + changeJavaGenericNotationToScalaNotation(type) + '](' + handleOption(param);
+      invocation += '(' + handleOption(param);
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
       invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x.asInstanceOf[Unit])(';
       if (convertUnit) {
         invocation += '_ => ';
       }
       if (param.type.args[0].kind == CLASS_VOID) {
-         invocation += handleOption(param) + '()';
+         invocation += handleOption(param) + '.handle()';
       }
       else {
          invocation +=  handleOption(param) + '(_)';
       }
     } else {
-      invocation += func + '(' + handleOption(param);
+      invocation += '(' + handleOption(param);
     }
 
     return invocation;
@@ -545,7 +541,7 @@
       invocation += handleParamConversionMap(param);
     } else if (param.type.kind == CLASS_HANDLER) {
       var handlerType = param.type.args[0];
-      invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', 'funcToHandler', true, param);
+      invocation += methodInvocationHandler(handlerType, 'funcToMappedHandler', true, param);
       invocation += ')';
     } else if (param.type.kind == CLASS_FUNCTION) {
       invocation += 'asJavaFunction(' + param.name + ')'
@@ -631,7 +627,7 @@
       } else if (kindOfAsyncResult == CLASS_PRIMITIVE || kindOfAsyncResult == CLASS_BOXED_PRIMITIVE) {
         invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       } else {
-        invocation += 'handlerToFunc[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+']](' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
+        invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
       }
       return indentation + invocation + '\n';
     }
@@ -650,13 +646,13 @@
                  ret.kind == CLASS_BOXED_PRIMITIVE ||
                  ret.name == 'Throwable' ||
                  ret.name == 'java.lang.Throwable') {
-        invocation += 'handlerToFunc[' + scalaType +'](';
+        invocation += '(';
       } else if (ret.kind == CLASS_STRING ||
                  ret.kind == CLASS_JSON_OBJECT ||
                  ret.kind == CLASS_JSON_ARRAY) {
-        invocation += 'handlerToFunc[' + scalaType +'](';
+        invocation += '(';
       } else {
-        invocation += 'handlerToFunc[' + scalaType +'](';
+        invocation += '(';
       }
       invocation += rawMethodInvocation + ')'
     }

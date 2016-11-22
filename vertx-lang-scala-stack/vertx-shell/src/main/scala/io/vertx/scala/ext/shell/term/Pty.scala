@@ -35,8 +35,8 @@ class Pty(private val _asJava: JPty) {
     * @param handler the standard output
     * @return this current object
     */
-  def stdoutHandler(handler: String => Unit): Pty = {
-    _asJava.stdoutHandler(funcToHandler[java.lang.String](handler))
+  def stdoutHandler(handler: io.vertx.core.Handler[String]): Pty = {
+    _asJava.stdoutHandler((handler))
     this
   }
 

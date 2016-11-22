@@ -33,18 +33,18 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
 
   def asJava: JHttpServerFileUpload = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): HttpServerFileUpload = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerFileUpload = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): HttpServerFileUpload = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerFileUpload = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpServerFileUpload = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerFileUpload = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 

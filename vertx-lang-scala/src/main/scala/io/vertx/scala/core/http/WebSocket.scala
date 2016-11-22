@@ -109,12 +109,12 @@ class WebSocket(private val _asJava: JWebSocket)
     cached_1
   }
 
-  def exceptionHandler(handler: Throwable => Unit): WebSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): WebSocket = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): WebSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -129,8 +129,8 @@ class WebSocket(private val _asJava: JWebSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): WebSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -144,8 +144,8 @@ class WebSocket(private val _asJava: JWebSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): WebSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -169,12 +169,12 @@ class WebSocket(private val _asJava: JWebSocket)
     this
   }
 
-  def closeHandler(handler: () => Unit): WebSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocket = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def frameHandler(handler: WebSocketFrame => Unit): WebSocket = {
+  def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocket = {
     _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
     this
   }

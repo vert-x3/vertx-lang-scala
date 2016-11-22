@@ -319,36 +319,36 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerStringReturn" should "work" in {
     val handler = obj.methodWithHandlerStringReturn("the-result")
-    handler("the-result")
+    handler.handle("the-result")
     def failed = false
     intercept[ComparisonFailure](
-      handler("not-expected")
+      handler.handle("not-expected")
     )
   }
 
   "testMethodWithHandlerGenericReturn" should "work" in {
     obj.methodWithHandlerGenericReturn[String](res =>
-      assert("the-result" == res))("the-result")
+      assert("the-result" == res)).handle("the-result")
     obj.methodWithHandlerGenericReturn[TestInterface](res =>
-      assert(obj == res))(obj)
+      assert(obj == res)).handle(obj)
   }
 
   "testMethodWithHandlerVertxGenReturn" should "work" in {
     val handler = obj.methodWithHandlerVertxGenReturn("wibble")
-    handler(RefedInterface1(new RefedInterface1Impl().setString("wibble")))
+    handler.handle(RefedInterface1(new RefedInterface1Impl().setString("wibble")))
   }
 
   "testMethodWithHandlerAsyncResultStringReturn" should "work" in {
     val succeedingHandler = obj.methodWithHandlerAsyncResultStringReturn("the-result", false)
-    succeedingHandler(Future.succeededFuture("the-result"))
+    succeedingHandler.handle(Future.succeededFuture("the-result"))
     intercept[ComparisonFailure](
-      succeedingHandler(Future.succeededFuture("not-expected"))
+      succeedingHandler.handle(Future.succeededFuture("not-expected"))
     )
 
     val failingHandler = obj.methodWithHandlerAsyncResultStringReturn("an-error", true)
-    failingHandler(Future.failedFuture("an-error"))
+    failingHandler.handle(Future.failedFuture("an-error"))
     intercept[ComparisonFailure](
-      succeedingHandler(Future.succeededFuture("whatever"))
+      succeedingHandler.handle(Future.succeededFuture("whatever"))
     )
   }
 
@@ -360,7 +360,7 @@ class ApiTest extends FlatSpec with Matchers {
       }
       w.dismiss()
     })
-    stringHandler(ScalaAsyncResult("the-result"))
+    stringHandler.handle(ScalaAsyncResult("the-result"))
     w.await()
 
     val w2 = new Waiter
@@ -370,15 +370,15 @@ class ApiTest extends FlatSpec with Matchers {
       }
       w2.dismiss()
     })
-    objHandler(ScalaAsyncResult(obj))
+    objHandler.handle(ScalaAsyncResult(obj))
     w2.await()
   }
 
   "testMethodWithHandlerAsyncResultVertxGenReturn" should "work" in {
     var handler = obj.methodWithHandlerAsyncResultVertxGenReturn("wibble", false)
-    handler(Future.succeededFuture(RefedInterface1(new RefedInterface1Impl().setString("wibble"))))
+    handler.handle(Future.succeededFuture(RefedInterface1(new RefedInterface1Impl().setString("wibble"))))
     handler = obj.methodWithHandlerAsyncResultVertxGenReturn("oh-no", true)
-    handler(Future.failedFuture("oh-no"))
+    handler.handle(Future.failedFuture("oh-no"))
   }
 
   "testMethodWithHandlerUserTypes" should "work" in {
@@ -412,7 +412,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerVoid" should "work" in {
-    obj.methodWithHandlerVoid(() => assert(true))
+    obj.methodWithHandlerVoid((event:Unit) => assert(true))
   }
 
   "testMethodWithHandlerAsyncResultVoid" should "work" in {

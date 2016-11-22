@@ -27,7 +27,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * Handler that will timeout requests if the response has not been written after a certain time.
   * Timeout requests will be ended with an HTTP status code `503`.
   */
-class TimeoutHandler(private val _asJava: JTimeoutHandler) {
+class TimeoutHandler(private val _asJava: JTimeoutHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JTimeoutHandler = _asJava
 

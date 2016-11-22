@@ -32,8 +32,7 @@ import java.util.function.{Function => JFunction}
   * 
   * Please consult the documentation for a full explanation.
   */
-class BridgeEvent(private val _asJava: JBridgeEvent) 
-    extends  {
+class BridgeEvent(private val _asJava: JBridgeEvent) {
 
   def asJava: JBridgeEvent = _asJava
 
@@ -51,7 +50,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
     _asJava.result()
   }
 
-  def compose[U](handler: Boolean => Unit, next: Future[U]): Future[U] = {
+  def compose[U](handler: io.vertx.core.Handler[Boolean], next: Future[U]): Future[U] = {
     Future.apply[U](_asJava.compose(funcToMappedHandler[java.lang.Boolean, Boolean](x => x)(handler), next.asJava.asInstanceOf[JFuture[U]]))
   }
 
@@ -63,7 +62,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
     Future.apply[U](_asJava.map(asJavaFunction(mapper)))
   }
 
-  def completer(): io.vertx.core.AsyncResult [Boolean] => Unit = {
+  def completer(): io.vertx.core.Handler[io.vertx.core.AsyncResult [Boolean]] = {
     if (cached_0 == null) {
       cached_0 =    handlerToMappedFunction[io.vertx.core.AsyncResult[java.lang.Boolean], io.vertx.core.AsyncResult[Boolean]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (_asJava.completer())
     }
@@ -122,7 +121,7 @@ class BridgeEvent(private val _asJava: JBridgeEvent)
     cached_3
   }
 
-  private var cached_0: io.vertx.core.AsyncResult [Boolean] => Unit = _
+  private var cached_0: io.vertx.core.Handler[io.vertx.core.AsyncResult [Boolean]] = _
   private var cached_1: io.vertx.ext.web.handler.sockjs.BridgeEventType = _
   private var cached_2: JsonObject = _
   private var cached_3: SockJSSocket = _

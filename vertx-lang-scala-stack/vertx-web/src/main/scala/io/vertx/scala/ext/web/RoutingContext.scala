@@ -353,8 +353,8 @@ class RoutingContext(private val _asJava: JRoutingContext) {
     * @param handler the handler
     * @return the id of the handler. This can be used if you later want to remove the handler.
     */
-  def addHeadersEndHandler(handler: () => Unit): Int = {
-    _asJava.addHeadersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def addHeadersEndHandler(handler: io.vertx.core.Handler[Unit]): Int = {
+    _asJava.addHeadersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
   }
 
   /**
@@ -374,8 +374,8 @@ class RoutingContext(private val _asJava: JRoutingContext) {
     * @param handler the handler
     * @return the id of the handler. This can be used if you later want to remove the handler.
     */
-  def addBodyEndHandler(handler: () => Unit): Int = {
-    _asJava.addBodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def addBodyEndHandler(handler: io.vertx.core.Handler[Unit]): Int = {
+    _asJava.addBodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
   }
 
   /**

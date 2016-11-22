@@ -64,7 +64,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     promiseAndHandler._2.future
   }
 
-  def exceptionHandler(handler: Throwable => Unit): MessageProducer[T] = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageProducer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -79,8 +79,8 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     this
   }
 
-  def drainHandler(handler: () => Unit): MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): MessageProducer[T] = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

@@ -58,12 +58,12 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): SockJSSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): SockJSSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): SockJSSocket = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): SockJSSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -78,8 +78,8 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): SockJSSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): SockJSSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -93,8 +93,8 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): SockJSSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): SockJSSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
