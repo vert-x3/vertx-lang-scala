@@ -34,8 +34,7 @@ import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
 
 /**
   */
-class MongoService(private val _asJava: JMongoService) 
-    extends  {
+class MongoService(private val _asJava: JMongoService) {
 
   def asJava: JMongoService = _asJava
 

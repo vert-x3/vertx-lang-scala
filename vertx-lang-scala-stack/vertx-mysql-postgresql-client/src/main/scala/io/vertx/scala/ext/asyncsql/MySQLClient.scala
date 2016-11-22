@@ -30,8 +30,7 @@ import io.vertx.core.json.JsonObject
 /**
   * Represents an asynchronous MySQL client
   */
-class MySQLClient(private val _asJava: JMySQLClient) 
-    extends  {
+class MySQLClient(private val _asJava: JMySQLClient) {
 
   def asJava: JMySQLClient = _asJava
 

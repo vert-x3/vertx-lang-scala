@@ -29,7 +29,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * A Vert.x web handler to expose the circuit breaker to the Hystrix dasbboard. The handler listens to the circuit
   * breaker notifications sent on the event bus.
   */
-class HystrixMetricHandler(private val _asJava: JHystrixMetricHandler) {
+class HystrixMetricHandler(private val _asJava: JHystrixMetricHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JHystrixMetricHandler = _asJava
 

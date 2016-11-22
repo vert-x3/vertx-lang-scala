@@ -26,7 +26,8 @@ import io.vertx.scala.ext.web.RoutingContext
 /**
   * A handler for serving static resources from the file system or classpath.
   */
-class StaticHandler(private val _asJava: JStaticHandler) {
+class StaticHandler(private val _asJava: JStaticHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JStaticHandler = _asJava
 

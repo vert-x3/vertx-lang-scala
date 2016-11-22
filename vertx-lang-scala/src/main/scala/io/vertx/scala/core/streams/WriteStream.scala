@@ -39,7 +39,7 @@ trait WriteStream[T]
   * @param handler the exception handler
   * @return a reference to this, so the API can be used fluently
   */
-def exceptionHandler(handler: Throwable => Unit): WriteStream[T]
+def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WriteStream[T]
 
   /**
   * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
@@ -90,7 +90,7 @@ def writeQueueFull(): Boolean
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-def drainHandler(handler: () => Unit): WriteStream[T]
+def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T]
 
 }
 
@@ -108,7 +108,7 @@ object WriteStream {
       * @param handler the exception handler
       * @return a reference to this, so the API can be used fluently
       */
-    def exceptionHandler(handler: Throwable => Unit): WriteStream[T] = {
+    def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WriteStream[T] = {
         _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
       this
     }
@@ -174,8 +174,8 @@ object WriteStream {
       * @param handler the handler
       * @return a reference to this, so the API can be used fluently
       */
-    def drainHandler(handler: () => Unit): WriteStream[T] = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+    def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T] = {
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
       this
     }
 

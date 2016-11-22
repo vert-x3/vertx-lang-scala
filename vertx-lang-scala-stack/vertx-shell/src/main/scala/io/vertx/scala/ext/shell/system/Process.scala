@@ -92,7 +92,7 @@ class Process(private val _asJava: JProcess) {
     * @param handler the handler called when the process terminates.
     * @return this object
     */
-  def terminatedHandler(handler: Int => Unit): Process = {
+  def terminatedHandler(handler: io.vertx.core.Handler[Int]): Process = {
     _asJava.terminatedHandler(funcToMappedHandler[java.lang.Integer, Int](x => x)(handler))
     this
   }
@@ -115,16 +115,16 @@ class Process(private val _asJava: JProcess) {
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(completionHandler: () => Unit): Unit = {
-    _asJava.run(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def run(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.run(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(foregraound: Boolean, completionHandler: () => Unit): Unit = {
-    _asJava.run(foregraound, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def run(foregraound: Boolean, completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.run(foregraound, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -140,8 +140,8 @@ class Process(private val _asJava: JProcess) {
     * @param completionHandler handler called after interrupt callback
     * @return true if the process caught the signal
     */
-  def interrupt(completionHandler: () => Unit): Boolean = {
-    _asJava.interrupt(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def interrupt(completionHandler: io.vertx.core.Handler[Unit]): Boolean = {
+    _asJava.interrupt(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -162,16 +162,16 @@ class Process(private val _asJava: JProcess) {
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(completionHandler: () => Unit): Unit = {
-    _asJava.resume(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def resume(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.resume(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(foreground: Boolean, completionHandler: () => Unit): Unit = {
-    _asJava.resume(foreground, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def resume(foreground: Boolean, completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.resume(foreground, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -185,8 +185,8 @@ class Process(private val _asJava: JProcess) {
     * Resume the process.
     * @param completionHandler handler called after suspend callback
     */
-  def suspend(completionHandler: () => Unit): Unit = {
-    _asJava.suspend(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def suspend(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.suspend(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -200,8 +200,8 @@ class Process(private val _asJava: JProcess) {
     * Terminate the process.
     * @param completionHandler handler called after end callback
     */
-  def terminate(completionHandler: () => Unit): Unit = {
-    _asJava.terminate(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def terminate(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.terminate(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -215,8 +215,8 @@ class Process(private val _asJava: JProcess) {
     * Set the process in background.
     * @param completionHandler handler called after background callback
     */
-  def toBackground(completionHandler: () => Unit): Unit = {
-    _asJava.toBackground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def toBackground(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.toBackground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   /**
@@ -230,8 +230,8 @@ class Process(private val _asJava: JProcess) {
     * Set the process in foreground.
     * @param completionHandler handler called after foreground callback
     */
-  def toForeground(completionHandler: () => Unit): Unit = {
-    _asJava.toForeground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler()))
+  def toForeground(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.toForeground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
   }
 
   private var cached_0: Tty = _

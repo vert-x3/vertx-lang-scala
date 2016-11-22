@@ -62,7 +62,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): HttpServerResponse = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerResponse = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -77,8 +77,8 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     this
   }
 
-  def drainHandler(handler: () => Unit): HttpServerResponse = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -189,8 +189,8 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): HttpServerResponse = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -372,8 +372,8 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def headersEndHandler(handler: () => Unit): HttpServerResponse = {
-    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def headersEndHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
+    _asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -385,8 +385,8 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def bodyEndHandler(handler: () => Unit): HttpServerResponse = {
-    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def bodyEndHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
+    _asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

@@ -54,12 +54,12 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
 
   def asJava: JHttpServerRequest = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): HttpServerRequest = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequest = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): HttpServerRequest = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -74,8 +74,8 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -224,7 +224,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: Buffer => Unit): HttpServerRequest = {
+  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
     _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
     this
   }
@@ -269,7 +269,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * with the file upload.
     * @return a reference to this, so the API can be used fluently
     */
-  def uploadHandler(uploadHandler: HttpServerFileUpload => Unit): HttpServerRequest = {
+  def uploadHandler(uploadHandler: io.vertx.core.Handler[HttpServerFileUpload]): HttpServerRequest = {
     _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
     this
   }
@@ -323,7 +323,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * frame. HTTP/2 permits extension of the protocol.
     * @return a reference to this, so the API can be used fluently
     */
-  def customFrameHandler(handler: HttpFrame => Unit): HttpServerRequest = {
+  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]): HttpServerRequest = {
     _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }

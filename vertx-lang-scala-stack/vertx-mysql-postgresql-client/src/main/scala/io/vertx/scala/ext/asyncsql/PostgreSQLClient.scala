@@ -30,8 +30,7 @@ import io.vertx.core.json.JsonObject
 /**
   * Represents an PostgreSQL client
   */
-class PostgreSQLClient(private val _asJava: JPostgreSQLClient) 
-    extends  {
+class PostgreSQLClient(private val _asJava: JPostgreSQLClient) {
 
   def asJava: JPostgreSQLClient = _asJava
 

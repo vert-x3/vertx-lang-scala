@@ -49,21 +49,6 @@ object HandlerOps {
   }
 
   /**
-    * Create a Vert.x-Handler from the given Scala-Function
-    *
-    * @param f Scala-Function used by the resulting Vert.x-Handler
-    * @tparam J Event-type the Function supports
-    * @return a Vert.x-Handler that uses the given function to do its job
-    */
-  def funcToHandler[J](f: J => Unit): Handler[J] = {
-    if (f == null)
-      null
-    else
-      (event: J) => f(event)
-  }
-
-
-  /**
     * Create a Vert.x-Void-Handler from the given parameterless Scala-Function
     *
     * @param f Scala-Function used by the resulting Vert.x-Handler
@@ -87,12 +72,12 @@ object HandlerOps {
     * @tparam S type the Function consumes
     * @return the resulting Handler
     */
-  def funcToMappedHandler[J, S](mapper: J => S)(f: S => Unit): Handler[J] = {
+  def funcToMappedHandler[J, S](mapper: J => S)(f: Handler[S]): Handler[J] = {
     if (f == null) {
       null
     }
     else
-      (event: J) => f(mapper(event))
+      (event: J) => f.handle(mapper(event))
   }
 
   /**
@@ -105,7 +90,7 @@ object HandlerOps {
     * @tparam S type the Function consumes
     * @return the resulting Function
     */
-  def handlerToMappedFunction[J, S](mapper: S => J)(h: Handler[J]): S => Unit =
+  def handlerToMappedFunction[J, S](mapper: S => J)(h: Handler[J]): Handler[S] =
   if (h == null)
     (event: S) => {}
   else

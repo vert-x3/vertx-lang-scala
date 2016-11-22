@@ -26,7 +26,8 @@ import io.vertx.scala.ext.web.RoutingContext
 /**
   * Handler that will filter requests based on the request Host name.
   */
-class VirtualHostHandler(private val _asJava: JVirtualHostHandler) {
+class VirtualHostHandler(private val _asJava: JVirtualHostHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JVirtualHostHandler = _asJava
 
@@ -41,7 +42,7 @@ object VirtualHostHandler {
   def apply(_asJava: JVirtualHostHandler): VirtualHostHandler =
     new VirtualHostHandler(_asJava)
 
-  def create(hostname: String, handler: RoutingContext => Unit): VirtualHostHandler = {
+  def create(hostname: String, handler: io.vertx.core.Handler[RoutingContext]): VirtualHostHandler = {
     VirtualHostHandler.apply(io.vertx.ext.web.handler.VirtualHostHandler.create(hostname, funcToMappedHandler(RoutingContext.apply)(handler)))
   }
 

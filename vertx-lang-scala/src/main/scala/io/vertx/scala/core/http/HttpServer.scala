@@ -67,7 +67,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to this handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def requestHandler(handler: HttpServerRequest => Unit): HttpServer = {
+  def requestHandler(handler: io.vertx.core.Handler[HttpServerRequest]): HttpServer = {
     _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
@@ -76,7 +76,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * Set a connection handler for the server.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: HttpConnection => Unit): HttpServer = {
+  def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpServer = {
     _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
     this
   }
@@ -98,7 +98,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def websocketHandler(handler: ServerWebSocket => Unit): HttpServer = {
+  def websocketHandler(handler: io.vertx.core.Handler[ServerWebSocket]): HttpServer = {
     _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
     this
   }

@@ -146,7 +146,7 @@ class EventBus(private val _asJava: JEventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def consumer[T](address: String, handler: Message[T] => Unit): MessageConsumer[T] = {
+  def consumer[T](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 
@@ -165,7 +165,7 @@ class EventBus(private val _asJava: JEventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def localConsumer[T](address: String, handler: Message[T] => Unit): MessageConsumer[T] = {
+  def localConsumer[T](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
     MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler)))
   }
 

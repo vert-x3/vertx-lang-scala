@@ -30,7 +30,8 @@ import io.vertx.scala.ext.auth.AuthProvider
   * 
   * Used in conjunction with the [[io.vertx.scala.ext.web.handler.RedirectAuthHandler]].
   */
-class FormLoginHandler(private val _asJava: JFormLoginHandler) {
+class FormLoginHandler(private val _asJava: JFormLoginHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JFormLoginHandler = _asJava
 

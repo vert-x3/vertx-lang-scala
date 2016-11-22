@@ -32,8 +32,7 @@ import io.vertx.scala.ext.auth.AuthProvider
 /**
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class JWTAuth(private val _asJava: JJWTAuth) 
-    extends  {
+class JWTAuth(private val _asJava: JJWTAuth) {
 
   def asJava: JJWTAuth = _asJava
 

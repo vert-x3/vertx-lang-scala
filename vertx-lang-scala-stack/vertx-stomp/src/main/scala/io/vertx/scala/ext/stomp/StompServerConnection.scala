@@ -103,7 +103,7 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * @param pong pong time
     * @param pingHandler the ping handler
     */
-  def configureHeartbeat(ping: Long, pong: Long, pingHandler: StompServerConnection => Unit): Unit = {
+  def configureHeartbeat(ping: Long, pong: Long, pingHandler: io.vertx.core.Handler[StompServerConnection]): Unit = {
     _asJava.configureHeartbeat(ping, pong, funcToMappedHandler(StompServerConnection.apply)(pingHandler))
   }
 

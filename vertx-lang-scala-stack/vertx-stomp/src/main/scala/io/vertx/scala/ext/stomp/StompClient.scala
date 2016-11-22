@@ -90,7 +90,7 @@ class StompClient(private val _asJava: JStompClient) {
     * @param handler the handler
     * @return the current StompClient
     */
-  def receivedFrameHandler(handler: Frame => Unit): StompClient = {
+  def receivedFrameHandler(handler: io.vertx.core.Handler[Frame]): StompClient = {
     _asJava.receivedFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
@@ -104,7 +104,7 @@ class StompClient(private val _asJava: JStompClient) {
     * @param handler the handler
     * @return the current StompClient
     */
-  def writingFrameHandler(handler: Frame => Unit): StompClient = {
+  def writingFrameHandler(handler: io.vertx.core.Handler[Frame]): StompClient = {
     _asJava.writingFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }
@@ -116,7 +116,7 @@ class StompClient(private val _asJava: JStompClient) {
     * @param handler the handler
     * @return the current StompClient
     */
-  def errorFrameHandler(handler: Frame => Unit): StompClient = {
+  def errorFrameHandler(handler: io.vertx.core.Handler[Frame]): StompClient = {
     _asJava.errorFrameHandler(funcToMappedHandler[JFrame, Frame](a => Frame(a))(handler))
     this
   }

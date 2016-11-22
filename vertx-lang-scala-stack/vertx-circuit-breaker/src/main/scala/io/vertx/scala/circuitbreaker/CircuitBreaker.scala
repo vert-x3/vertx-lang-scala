@@ -50,8 +50,8 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def openHandler(handler: () => Unit): CircuitBreaker = {
-    _asJava.openHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def openHandler(handler: io.vertx.core.Handler[Unit]): CircuitBreaker = {
+    _asJava.openHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -60,8 +60,8 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def halfOpenHandler(handler: () => Unit): CircuitBreaker = {
-    _asJava.halfOpenHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def halfOpenHandler(handler: io.vertx.core.Handler[Unit]): CircuitBreaker = {
+    _asJava.halfOpenHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -70,8 +70,8 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def closeHandler(handler: () => Unit): CircuitBreaker = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): CircuitBreaker = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -92,7 +92,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return a future object completed when the operation or its fallback completes
     */
-  def executeWithFallback[T](command: Future[T] => Unit, fallback: java.lang.Throwable => T): Future[T] = {
+  def executeWithFallback[T](command: io.vertx.core.Handler[Future[T]], fallback: java.lang.Throwable => T): Future[T] = {
     Future.apply[T](_asJava.executeWithFallback(funcToMappedHandler(Future.apply[T])(command), asJavaFunction(fallback)))
   }
 
@@ -101,7 +101,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param command the operation
     * @return a future object completed when the operation or its fallback completes
     */
-  def execute[T](command: Future[T] => Unit): Future[T] = {
+  def execute[T](command: io.vertx.core.Handler[Future[T]]): Future[T] = {
     Future.apply[T](_asJava.execute(funcToMappedHandler(Future.apply[T])(command)))
   }
 
@@ -112,7 +112,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param command the operation
     * @return the current CircuitBreaker
     */
-  def executeAndReport[T](resultFuture: Future[T], command: Future[T] => Unit): CircuitBreaker = {
+  def executeAndReport[T](resultFuture: Future[T], command: io.vertx.core.Handler[Future[T]]): CircuitBreaker = {
     _asJava.executeAndReport(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(command))
     this
   }
@@ -136,7 +136,7 @@ class CircuitBreaker(private val _asJava: JCircuitBreaker) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current CircuitBreaker
     */
-  def executeAndReportWithFallback[T](resultFuture: Future[T], command: Future[T] => Unit, fallback: java.lang.Throwable => T): CircuitBreaker = {
+  def executeAndReportWithFallback[T](resultFuture: Future[T], command: io.vertx.core.Handler[Future[T]], fallback: java.lang.Throwable => T): CircuitBreaker = {
     _asJava.executeAndReportWithFallback(resultFuture.asJava.asInstanceOf[JFuture[T]], funcToMappedHandler(Future.apply[T])(command), asJavaFunction(fallback))
     this
   }

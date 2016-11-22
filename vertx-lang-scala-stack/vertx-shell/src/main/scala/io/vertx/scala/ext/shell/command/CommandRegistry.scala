@@ -30,8 +30,7 @@ import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
   *
   * It is a mutable command resolver.
   */
-class CommandRegistry(private val _asJava: JCommandRegistry) 
-    extends  {
+class CommandRegistry(private val _asJava: JCommandRegistry) {
 
   def asJava: JCommandRegistry = _asJava
 

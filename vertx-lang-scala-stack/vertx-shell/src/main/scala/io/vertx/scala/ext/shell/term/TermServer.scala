@@ -45,7 +45,7 @@ class TermServer(private val _asJava: JTermServer) {
     * @param handler the term handler
     * @return this object
     */
-  def termHandler(handler: Term => Unit): TermServer = {
+  def termHandler(handler: io.vertx.core.Handler[Term]): TermServer = {
     _asJava.termHandler(funcToMappedHandler(Term.apply)(handler))
     this
   }

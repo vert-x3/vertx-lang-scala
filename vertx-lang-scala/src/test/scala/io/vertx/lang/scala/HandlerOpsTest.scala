@@ -11,17 +11,10 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 @RunWith(classOf[JUnitRunner])
 class HandlerOpsTest extends FlatSpec with Matchers {
-  "A handler created by funcToHandler" should "use the provided function" in {
-    var changeMe = "unchanged"
-    val function = (event: String) => changeMe = event + "!"
-    val handler = funcToHandler(function)
-    handler.handle("changed")
-    assert(changeMe == "changed!")
-  }
 
   "A handler created by funcToMappedHandler" should "map the incoming value to that of the function and use the provided function" in {
     var changeMe = "unchanged"
-    val function = (event: String) => changeMe = event.toString
+    val function:Handler[String] = (event: String) => changeMe = event.toString
     val handler = funcToMappedHandler[Int, String](a => a.toString)(function)
     handler.handle(1)
     assert(changeMe == "1")
@@ -43,16 +36,8 @@ class HandlerOpsTest extends FlatSpec with Matchers {
       override def handle(event: Int): Unit = changeMe = event
     }
     val function = handlerToMappedFunction[Int, String](a => a.toInt)(handler)
-    function("1")
+    function.handle("1")
     assert(changeMe == 1)
   }
-
-//  "A null-byte-value" should "be converted to None" in {
-//    assert(None == num2OptNum[Byte](new NullBomb().nullByte()))
-//  }
-//
-//  "A byte-value of 23" should "be converted to Some(23)" in {
-//    assert(Some(23) == num2OptNum[Byte](new NullBomb().byte23()))
-//  }
 
 }

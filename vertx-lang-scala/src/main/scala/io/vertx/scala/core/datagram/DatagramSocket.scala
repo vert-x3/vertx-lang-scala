@@ -242,17 +242,17 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): DatagramSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
-  def handler(handler: DatagramPacket => Unit): DatagramSocket = {
+  def handler(handler: io.vertx.core.Handler[DatagramPacket]): DatagramSocket = {
     _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler))
     this
   }
 
-  def exceptionHandler(handler: Throwable => Unit): DatagramSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): DatagramSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

@@ -50,12 +50,12 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     this
   }
 
-  def exceptionHandler(handler: Throwable => Unit): HttpClientResponse = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpClientResponse = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): HttpClientResponse = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): HttpClientResponse = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -65,8 +65,8 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpClientResponse = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpClientResponse = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -140,34 +140,13 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
   }
 
   /**
-    * Reset this response with the error code `0`.
-    */
-  def reset(): Unit = {
-    _asJava.reset()
-  }
-
-  /**
-    * Reset this response:
-    * <p/>
-    * <ul>
-    *   <li>for HTTP/2, this performs send an HTTP/2 reset frame with the specified error `code`</li>
-    *   <li>for HTTP/1.x, this closes the connection</li>
-    * </ul>
-    * <p/>
-    * @param code the error code
-    */
-  def reset(code: Long): Unit = {
-    _asJava.reset(code)
-  }
-
-  /**
     * Convenience method for receiving the entire request body in one piece.
     * 
     * This saves you having to manually set a dataHandler and an endHandler and append the chunks of the body until
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: Buffer => Unit): HttpClientResponse = {
+  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]): HttpClientResponse = {
     _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
     this
   }
@@ -177,7 +156,7 @@ class HttpClientResponse(private val _asJava: JHttpClientResponse)
     * frame. HTTP/2 permits extension of the protocol.
     * @return a reference to this, so the API can be used fluently
     */
-  def customFrameHandler(handler: HttpFrame => Unit): HttpClientResponse = {
+  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]): HttpClientResponse = {
     _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }

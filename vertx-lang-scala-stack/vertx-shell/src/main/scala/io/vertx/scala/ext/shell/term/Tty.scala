@@ -54,8 +54,8 @@ class Tty(private val _asJava: JTty) {
     * @param handler the standard input
     * @return this object
     */
-  def stdinHandler(handler: String => Unit): Tty = {
-    _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
+  def stdinHandler(handler: io.vertx.core.Handler[String]): Tty = {
+    _asJava.stdinHandler((handler))
     this
   }
 
@@ -74,8 +74,8 @@ class Tty(private val _asJava: JTty) {
     * @param handler the resize handler
     * @return this object
     */
-  def resizehandler(handler: () => Unit): Tty = {
-    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def resizehandler(handler: io.vertx.core.Handler[Unit]): Tty = {
+    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

@@ -28,7 +28,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * It also handles HTTP file uploads and can be used to limit body sizes.
   */
-class BodyHandler(private val _asJava: JBodyHandler) {
+class BodyHandler(private val _asJava: JBodyHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JBodyHandler = _asJava
 

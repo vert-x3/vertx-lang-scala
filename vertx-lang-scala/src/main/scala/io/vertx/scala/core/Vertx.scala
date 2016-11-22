@@ -236,7 +236,7 @@ class Vertx(private val _asJava: JVertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setTimer(delay: Long, handler: Long => Unit): Long = {
+  def setTimer(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
     _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -257,7 +257,7 @@ class Vertx(private val _asJava: JVertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setPeriodic(delay: Long, handler: Long => Unit): Long = {
+  def setPeriodic(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
     _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -285,8 +285,8 @@ class Vertx(private val _asJava: JVertx)
     * preceeding events have been handled.
     * @param action - a handler representing the action to execute
     */
-  def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+  def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action.handle()))
   }
 
   /**
@@ -416,7 +416,7 @@ class Vertx(private val _asJava: JVertx)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -425,7 +425,7 @@ class Vertx(private val _asJava: JVertx)
   /**
     * Like [[io.vertx.scala.core.Vertx#executeBlockingFuture]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -468,7 +468,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): Vertx = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Vertx = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

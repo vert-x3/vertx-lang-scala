@@ -26,7 +26,8 @@ import io.vertx.scala.ext.web.RoutingContext
 /**
   * A pretty error handler for rendering error pages.
   */
-class ErrorHandler(private val _asJava: JErrorHandler) {
+class ErrorHandler(private val _asJava: JErrorHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JErrorHandler = _asJava
 

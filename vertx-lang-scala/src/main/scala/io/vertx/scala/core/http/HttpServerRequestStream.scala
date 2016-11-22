@@ -33,12 +33,12 @@ class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream)
 
   def asJava: JHttpServerRequestStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): HttpServerRequestStream = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequestStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: HttpServerRequest => Unit): HttpServerRequestStream = {
+  def handler(handler: io.vertx.core.Handler[HttpServerRequest]): HttpServerRequestStream = {
     _asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler))
     this
   }
@@ -53,8 +53,8 @@ class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpServerRequestStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequestStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 

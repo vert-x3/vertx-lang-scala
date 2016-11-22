@@ -110,7 +110,7 @@ class Route(private val _asJava: JRoute) {
     * @param requestHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(requestHandler: RoutingContext => Unit): Route = {
+  def handler(requestHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.handler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
@@ -118,7 +118,7 @@ class Route(private val _asJava: JRoute) {
   /**
     * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
-  def blockingHandler(requestHandler: RoutingContext => Unit): Route = {
+  def blockingHandler(requestHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
@@ -136,7 +136,7 @@ class Route(private val _asJava: JRoute) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
-  def blockingHandler(requestHandler: RoutingContext => Unit, ordered: Boolean): Route = {
+  def blockingHandler(requestHandler: io.vertx.core.Handler[RoutingContext], ordered: Boolean): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler), ordered)
     this
   }
@@ -148,7 +148,7 @@ class Route(private val _asJava: JRoute) {
     * @param failureHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def failureHandler(failureHandler: RoutingContext => Unit): Route = {
+  def failureHandler(failureHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.failureHandler(funcToMappedHandler(RoutingContext.apply)(failureHandler))
     this
   }

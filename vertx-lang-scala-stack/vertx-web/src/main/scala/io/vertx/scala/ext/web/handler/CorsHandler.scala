@@ -27,7 +27,8 @@ import io.vertx.scala.ext.web.RoutingContext
 /**
   * A handler which implements server side http://www.w3.org/TR/cors/[CORS] support for Vert.x-Web.
   */
-class CorsHandler(private val _asJava: JCorsHandler) {
+class CorsHandler(private val _asJava: JCorsHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JCorsHandler = _asJava
 

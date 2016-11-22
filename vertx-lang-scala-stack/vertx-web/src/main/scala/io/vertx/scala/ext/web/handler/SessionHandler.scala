@@ -35,7 +35,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing chain before it.
   */
-class SessionHandler(private val _asJava: JSessionHandler) {
+class SessionHandler(private val _asJava: JSessionHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JSessionHandler = _asJava
 
