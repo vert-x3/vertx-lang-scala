@@ -29,20 +29,20 @@ package @{packageName}\n
 import io.vertx.lang.scala.HandlerOps._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
-import @{typeToAliasedType(type)}\n
+import @{convertTypeToAliasedType(type)}\n
 @foreach{importedType : importedTypes}
 	@if{importedType.name.contains(".impl.")}
 	@else{importedType.kind == CLASS_API}
 		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{typeToAliasedType(importedType)}\n
+import @{convertTypeToAliasedType(importedType)}\n
 			@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
 			@end{}
 		@else{importedType != type}
-import @{typeToAliasedType(importedType)}\n
+import @{convertTypeToAliasedType(importedType)}\n
 		@end{}
 	@else{importedType.kind == CLASS_DATA_OBJECT}
-import @{typeToAliasedType(importedType)}\n
+import @{convertTypeToAliasedType(importedType)}\n
 		@if{packageName != importedType.raw.translatePackageName("scala")}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
@@ -57,7 +57,7 @@ import @{importedType.raw}\n
 				importedType.kind != CLASS_SET &&
 				importedType.kind != CLASS_MAP &&
 				importedType != type}
-import @{typeToAliasedType(importedType)}\n
+import @{convertTypeToAliasedType(importedType)}\n
 		@if{packageName != importedType.raw.translatePackageName("scala") && !packageName.startsWith("io.vertx")}
 import @{importedType.raw.translateName("scala")}\n
 		@end{}
@@ -129,7 +129,7 @@ import @{importedType.raw.translateName("scala")}\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
-	@if{includeMethod(method, staticMethods)}
+	@if{shouldMethodBeIncluded(method, staticMethods)}
 	@if{shouldMethodReturnAFuture(method)}
 	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
 		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n

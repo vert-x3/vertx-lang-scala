@@ -150,10 +150,10 @@
   }
 
   def lastParamIsAsyncResultHandler(params) {
-    params.size > 0 && isAsyncResultHandler(params.get(params.size-1).type)
+    params.size > 0 && isAsyncResultHandlerHandler(params.get(params.size-1).type)
   }
 
-  def isAsyncResultHandler(type) {
+  def isAsyncResultHandlerHandler(type) {
     type.toString.contains("io.vertx.core.Handler") && type.toString.contains("io.vertx.core.AsyncResult")
   }
 
@@ -176,7 +176,7 @@
           return "[[io.vertx.lang.scala.ScalaVerticle]]";
         }
         else if(elt.simpleName.toString() == 'Handler') {
-          if(isAsyncResultHandler(elt)) {
+          if(isAsyncResultHandlerHandler(elt)) {
             return "[[scala.concurrent.Future]]";
           }
           else {
@@ -187,7 +187,7 @@
           var eltKind = elt.getKind().name();
           var ret = "[[" + rawType.raw.translateName("scala");
           if (eltKind == "METHOD") {
-            if(elt.params.size > 0 && isAsyncResultHandler(elt.params.get(elt.params.size-1).type)) {
+            if(elt.params.size > 0 && isAsyncResultHandlerHandler(elt.params.get(elt.params.size-1).type)) {
               ret += '#' + elt.getSimpleName().toString() + "Future";
             } else {
               ret += '#' + elt.getSimpleName().toString();
