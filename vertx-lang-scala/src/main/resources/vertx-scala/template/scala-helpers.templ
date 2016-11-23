@@ -1,9 +1,5 @@
 @code{
 
-  def toAliasedTypeName(type) {
-    return 'J'+type.simpleName;
-  }
-
   def toScalaType(type) {
     var nullable = type.isNullable;
     var ret = '';
@@ -103,26 +99,6 @@
     }
     return ret;
   }
-
-  def isKeyword(possibleKeyword) {
-    if (possibleKeyword.equals("type")) {
-      return true;
-    }
-    if (possibleKeyword.equals("object")) {
-      return true;
-    }
-    return false;
-  }
-
-  def escapeIfKeyword(possibleKeyword) {
-    if (isKeyword(possibleKeyword)) {
-      return '`' + possibleKeyword + '`';
-    }
-    return possibleKeyword;
-  }
-
-
-
 
   def handleOption(param) {
     if (param.type.isNullable) {
@@ -228,15 +204,11 @@
     helper.getNonGenericType(type.getSimpleName()) + '.apply' + getGenericType(type.getSimpleName()) + '(' + param + ')';
   }
 
-  def isAsyncResult(param) {
-    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
-  }
-
   def importJavaConversions(method) {
     for (param : method.params) {
       if ((param.type.kind == CLASS_HANDLER &&
            param.type.args[0].kind.collection) ||
-          (isAsyncResult(param) &&
+          (isAsyncResultHandler(param) &&
            param.type.args[0].args[0].kind.collection) ||
           param.type.kind.collection) {
         return true;
@@ -351,31 +323,6 @@
     return conversion;
   }
 
-  def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
-    return typeParam.kind == CLASS_PRIMITIVE ||
-           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable';
-  }
-
-  def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
-    var len = typeParam.name.length();
-    return typeParam.kind == CLASS_PRIMITIVE ||
-           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable' ||
-           typeParam.kind == CLASS_VOID ||
-           (typeParam.kind == CLASS_OBJECT && len > 1) ||
-           typeParam.kind == CLASS_STRING ||
-           typeParam.kind == CLASS_JSON_OBJECT ||
-           typeParam.kind == CLASS_JSON_ARRAY ||
-           typeParam.kind == CLASS_ENUM ||
-           typeParam.kind == CLASS_DATA_OBJECT ||
-           typeParam.kind == CLASS_API ||
-           typeParam.kind == CLASS_LIST ||
-           typeParam.kind == CLASS_SET ||
-           typeParam.kind == CLASS_MAP;
-  }
 
 
   def methodInvocationHandlerAsyncResult(type, method) {
@@ -588,14 +535,6 @@
     return invocation;
   }
 
-  def returnsHandlerForAsyncResult(method) {
-    return method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT;
-  }
-
-  def doesKindNeedConversionToScalaType(kind) {
-    return kind == CLASS_LIST || kind == CLASS_SET || kind == CLASS_MAP;
-  }
-
   /**
    * Central method for generating method invocations. Each generated wrapper-class uses this part to generate the
    * invocations to the original API.
@@ -611,7 +550,7 @@
      * Take care of methods returning Handler[AsyncResult]. They need to convert the provided handler into a
      * a Scala function.
      */
-    if (returnsHandlerForAsyncResult(method)) {
+    if (doesReturnHandlerAsyncResult(method)) {
       var kindOfAsyncResult = method.returnType.args[0].args[0].kind;
       if (kindOfAsyncResult == CLASS_API) {
         invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
@@ -687,10 +626,55 @@
     indentation + invocation;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
+   */
+  def convertTypeToAliasedType(type) {
+    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+convertTypeNameToAliasedTypeName(type)+"}"
+  }
+
+  def isAsyncResultHandler(param) {
+    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def doesReturnHandlerAsyncResult(method) {
+    return method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def escapeIfKeyword(possibleKeyword) {
+    if (isKeyword(possibleKeyword)) {
+      return '`' + possibleKeyword + '`';
+    }
+    return possibleKeyword;
+  }
+
+  def isKeyword(possibleKeyword) {
+    if (possibleKeyword.equals("type")) {
+      return true;
+    }
+    if (possibleKeyword.equals("object")) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Check if a given method should be included in the generated class.
    */
-  def includeMethod(method, instanceMethods) {
+  def shouldMethodBeIncluded(method, instanceMethods) {
     if (method.name == 'addInterceptor') {
         return false;
     }
@@ -715,11 +699,39 @@
     return escapeIfKeyword(methodName);
   }
 
-  /**
-   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
-   */
-  def typeToAliasedType(type) {
-    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}"
+  def convertTypeNameToAliasedTypeName(type) {
+    return 'J'+type.simpleName;
+  }
+
+  def doesKindNeedConversionToScalaType(kind) {
+    return kind == CLASS_LIST || kind == CLASS_SET || kind == CLASS_MAP;
+  }
+
+
+  def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.name == 'Throwable' ||
+           typeParam.name == 'java.lang.Throwable';
+  }
+
+  def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
+    var len = typeParam.name.length();
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.name == 'Throwable' ||
+           typeParam.name == 'java.lang.Throwable' ||
+           typeParam.kind == CLASS_VOID ||
+           (typeParam.kind == CLASS_OBJECT && len > 1) ||
+           typeParam.kind == CLASS_STRING ||
+           typeParam.kind == CLASS_JSON_OBJECT ||
+           typeParam.kind == CLASS_JSON_ARRAY ||
+           typeParam.kind == CLASS_ENUM ||
+           typeParam.kind == CLASS_DATA_OBJECT ||
+           typeParam.kind == CLASS_API ||
+           typeParam.kind == CLASS_LIST ||
+           typeParam.kind == CLASS_SET ||
+           typeParam.kind == CLASS_MAP;
   }
 }
 

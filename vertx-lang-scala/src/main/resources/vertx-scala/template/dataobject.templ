@@ -21,7 +21,7 @@
  */\n\n
 @code{
   var typeName = type.raw.simpleName;
-  var jTypeName = toAliasedTypeName(type);
+  var jTypeName = convertTypeNameToAliasedTypeName(type);
 }
 
 
@@ -32,11 +32,11 @@ package @{type.raw.translatePackageName("scala")}\n
 import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConverters._\n
 import io.vertx.lang.scala.json.Json._\n
-import @{typeToAliasedType(type)+"\n"}
+import @{convertTypeToAliasedType(type)+"\n"}
 @foreach{importedType : importedTypes}
 	@if{superType != null && (superType.toString() == importedType.toString())}
 	@else{importedType.kind == CLASS_API}
-import @{typeToAliasedType(importedType)+"\n"}
+import @{convertTypeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 	@else{importedType.kind == CLASS_JSON_OBJECT ||
 				importedType.kind == CLASS_JSON_ARRAY ||
@@ -48,7 +48,7 @@ import @{importedType.raw}\n
 				importedType.kind != CLASS_LIST &&
 				importedType.kind != CLASS_SET &&
 				importedType.kind != CLASS_MAP}
-import @{typeToAliasedType(importedType)+"\n"}
+import @{convertTypeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 	@end{}
 @end{}

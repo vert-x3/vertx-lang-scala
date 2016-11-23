@@ -5,7 +5,7 @@
 @{indentation}  def asJava: @{writeDelegateType()} = _asJava\n\n
 @comment{"# Class methods"}
 @foreach{method : instanceMethods}
-@if{includeMethod(method, instanceMethods)}
+@if{shouldMethodBeIncluded(method, instanceMethods)}
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
 @{indentation}  override def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
