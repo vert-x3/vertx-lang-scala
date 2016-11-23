@@ -29,8 +29,7 @@ import io.vertx.scala.ext.auth.AuthProvider
 /**
   * AccessToken extension to the User interface
   */
-class AccessToken(private val _asJava: JAccessToken) 
-    extends  {
+class AccessToken(private val _asJava: JAccessToken) {
 
   def asJava: JAccessToken = _asJava
 

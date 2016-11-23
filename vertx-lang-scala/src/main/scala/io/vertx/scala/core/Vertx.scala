@@ -75,8 +75,8 @@ import io.vertx.scala.core.http.HttpClient
   * 
   * Most functionality in Vert.x core is fairly low level.
   * 
-  * To create an instance of this class you can use the static factory methods: [[Vertx#vertx]],
-  * [[Vertx#vertx]] and [[Vertx#clusteredVertxFuture]].
+  * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
+  * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
   * 
   * Please see the user manual for more detailed usage information.
   */
@@ -192,7 +192,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def fileSystem(): FileSystem = {
     if (cached_0 == null) {
-      cached_0=    FileSystem.apply(_asJava.fileSystem())
+      cached_0 =    FileSystem.apply(_asJava.fileSystem())
     }
     cached_0
   }
@@ -203,7 +203,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def eventBus(): EventBus = {
     if (cached_1 == null) {
-      cached_1=    EventBus.apply(_asJava.eventBus())
+      cached_1 =    EventBus.apply(_asJava.eventBus())
     }
     cached_1
   }
@@ -224,7 +224,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def sharedData(): SharedData = {
     if (cached_2 == null) {
-      cached_2=    SharedData.apply(_asJava.sharedData())
+      cached_2 =    SharedData.apply(_asJava.sharedData())
     }
     cached_2
   }
@@ -236,7 +236,7 @@ class Vertx(private val _asJava: JVertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setTimer(delay: Long, handler: Long => Unit): Long = {
+  def setTimer(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
     _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -257,7 +257,7 @@ class Vertx(private val _asJava: JVertx)
     * @param handler the handler that will be called with the timer ID when the timer fires
     * @return the unique ID of the timer
     */
-  def setPeriodic(delay: Long, handler: Long => Unit): Long = {
+  def setPeriodic(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
     _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
   }
 
@@ -285,8 +285,8 @@ class Vertx(private val _asJava: JVertx)
     * preceeding events have been handled.
     * @param action - a handler representing the action to execute
     */
-  def runOnContext(action: () => Unit): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action()))
+  def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action.handle()))
   }
 
   /**
@@ -301,7 +301,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[Vertx#close]] but the completionHandler will be called when the close is complete
+    * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
     * @return The future will be notified when the close is complete.
     */
   def closeFuture(): concurrent.Future[Unit] = {
@@ -323,7 +323,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
+    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
     * 
     * If the deployment is successful the result will contain a String representing the unique deployment ID of the
     * deployment.
@@ -339,7 +339,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
@@ -349,7 +349,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[Vertx#deployVerticleFuture]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
+    * Like [[io.vertx.scala.core.Vertx#deployVerticleFuture]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
@@ -372,7 +372,7 @@ class Vertx(private val _asJava: JVertx)
   }
 
   /**
-    * Like [[Vertx]] but the completionHandler will be notified when the undeployment is complete.
+    * Like [[io.vertx.scala.core.Vertx]] but the completionHandler will be notified when the undeployment is complete.
     * @param deploymentID the deployment ID
     * @return a future which will be notified when the undeployment is complete
     */
@@ -407,7 +407,7 @@ class Vertx(private val _asJava: JVertx)
     * (e.g. on the original event loop of the caller).
     * 
     * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
-    * the handler should call the [[Future#complete]] or [[Future#complete]] method, or the [[Future#fail]]
+    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
     * method if it failed.
     * 
     * In the `blockingCodeHandler` the current context remains the original context and therefore any task
@@ -416,30 +416,30 @@ class Vertx(private val _asJava: JVertx)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit, ordered: Boolean): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   /**
-    * Like [[Vertx#executeBlockingFuture]] called with ordered = true.
+    * Like [[io.vertx.scala.core.Vertx#executeBlockingFuture]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def executeBlockingFuture[T](blockingCodeHandler: Future[T] => Unit): concurrent.Future[T] = {
+  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
     _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   /**
-    * Like [[Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
+    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
     */
   def createSharedWorkerExecutor(name: String): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name))
   }
 
   /**
-    * Like [[Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
+    * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int): WorkerExecutor = {
     WorkerExecutor.apply(_asJava.createSharedWorkerExecutor(name, poolSize))
@@ -453,7 +453,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * the same worker pool. The worker pool size and max execute time are set when the worker pool is created and
     * won't change after.
     *
-    * The worker pool is released when all the [[WorkerExecutor]] sharing the same name are closed.
+    * The worker pool is released when all the [[io.vertx.scala.core.WorkerExecutor]] sharing the same name are closed.
     * @param name the name of the worker executor
     * @param poolSize the size of the pool
     * @param maxExecuteTime the value of max worker execute time, in ms
@@ -464,11 +464,11 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
   /**
-    * Set a default exception handler for [[Context]], set on  at creation.
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Throwable => Unit): Vertx = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Vertx = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -498,7 +498,7 @@ object Vertx {
   }
 
   def currentContext(): scala.Option[Context] = {
-        scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
+    scala.Option(Context.apply(io.vertx.core.Vertx.currentContext()))
   }
 
 }

@@ -49,7 +49,7 @@ class NetClient(private val _asJava: JNetClient)
     * Open a connection to a server at the specific `port` and `host`.
     * 
     * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
-    * [[NetSocket]] instance is supplied via the `connectHandler` instance
+    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */

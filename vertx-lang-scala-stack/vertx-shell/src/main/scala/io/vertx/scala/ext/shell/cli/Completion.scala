@@ -66,7 +66,7 @@ class Completion(private val _asJava: JCompletion) {
     * @param candidates the candidates
     */
   def complete(candidates: scala.collection.mutable.Buffer[String]): Unit = {
-    _asJava.complete(candidates.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.complete(candidates.map(x => x:java.lang.String).asJava)
   }
 
   /**

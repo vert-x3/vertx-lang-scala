@@ -25,7 +25,7 @@ import io.vertx.core.cli.{CLI => JCLI}
 import io.vertx.core.cli.{Argument => JArgument}
 
 /**
-  * The parser transforms a CLI (a model) into an [[CommandLine]]. This [[CommandLine]]
+  * The parser transforms a CLI (a model) into an [[io.vertx.scala.core.cli.CommandLine]]. This [[io.vertx.scala.core.cli.CommandLine]]
   * has stored the argument and option values. Only  instance of parser should create
   * objects of this type.
   */
@@ -127,7 +127,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForOption(option: Option): scala.Option[String] = {
-        scala.Option(_asJava.getRawValueForOption(option.asJava))
+    scala.Option(_asJava.getRawValueForOption(option.asJava))
   }
 
   /**
@@ -145,7 +145,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForArgument(arg: Argument): scala.Option[String] = {
-        scala.Option(_asJava.getRawValueForArgument(arg.asJava))
+    scala.Option(_asJava.getRawValueForArgument(arg.asJava))
   }
 
   /**

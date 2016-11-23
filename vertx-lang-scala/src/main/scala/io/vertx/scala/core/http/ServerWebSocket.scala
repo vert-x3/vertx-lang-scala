@@ -32,8 +32,8 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * Represents a server side WebSocket.
   * 
-  * Instances of this class are passed into a [[HttpServer#websocketHandler]] or provided
-  * when a WebSocket handshake is manually [[HttpServerRequest#upgrade]]ed.
+  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
+  * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 class ServerWebSocket(private val _asJava: JServerWebSocket) 
     extends WebSocketBase {
@@ -41,14 +41,14 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
   def asJava: JServerWebSocket = _asJava
 
   /**
-    * Same as [[WebSocketBase#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[ServerWebSocket#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -81,7 +81,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
   }
 
   /**
-    * Calls [[WebSocketBase#close]]
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
     */
   def end(): Unit = {
     _asJava.end()
@@ -99,7 +99,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_0 =    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -109,17 +109,17 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1=    SocketAddress.apply(_asJava.localAddress())
+      cached_1 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
   }
 
-  def exceptionHandler(handler: Throwable => Unit): ServerWebSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ServerWebSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): ServerWebSocket = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): ServerWebSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -134,8 +134,8 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): ServerWebSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -149,8 +149,8 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): ServerWebSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -174,12 +174,12 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     this
   }
 
-  def closeHandler(handler: () => Unit): ServerWebSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def frameHandler(handler: WebSocketFrame => Unit): ServerWebSocket = {
+  def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): ServerWebSocket = {
     _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
     this
   }
@@ -199,7 +199,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * @return the WebSocket handshake query string.
     */
   def query(): scala.Option[String] = {
-        scala.Option(_asJava.query())
+    scala.Option(_asJava.query())
   }
 
   /**
@@ -207,7 +207,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def headers(): MultiMap = {
     if (cached_2 == null) {
-      cached_2=    MultiMap.apply(_asJava.headers())
+      cached_2 =    MultiMap.apply(_asJava.headers())
     }
     cached_2
   }

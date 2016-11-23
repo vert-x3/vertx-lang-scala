@@ -25,12 +25,12 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.{WebSocket => JWebSocket}
 
 /**
-  * A stream for [[HttpClient]] WebSocket connection.
+  * A stream for [[io.vertx.scala.core.http.HttpClient]] WebSocket connection.
   * 
-  * When the connection attempt is successful, the stream handler is called back with the [[WebSocket]]
+  * When the connection attempt is successful, the stream handler is called back with the [[io.vertx.scala.core.http.WebSocket]]
   * argument, immediately followed by a call to the end handler. When the connection attempt fails, the exception handler is invoked.
   * 
-  * The connection occurs when the [[WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
+  * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
 class WebSocketStream(private val _asJava: JWebSocketStream) 
@@ -38,12 +38,12 @@ class WebSocketStream(private val _asJava: JWebSocketStream)
 
   def asJava: JWebSocketStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): WebSocketStream = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: WebSocket => Unit): WebSocketStream = {
+  def handler(handler: io.vertx.core.Handler[WebSocket]): WebSocketStream = {
     _asJava.handler(funcToMappedHandler(WebSocket.apply)(handler))
     this
   }
@@ -58,8 +58,8 @@ class WebSocketStream(private val _asJava: JWebSocketStream)
     this
   }
 
-  def endHandler(endHandler: () => Unit): WebSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 

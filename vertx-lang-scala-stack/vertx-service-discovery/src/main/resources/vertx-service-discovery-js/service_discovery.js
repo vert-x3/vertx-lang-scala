@@ -50,7 +50,7 @@ var ServiceDiscovery = function(j_val) {
   this.getReference = function(record) {
     var __args = arguments;
     if (__args.length === 1 && (typeof __args[0] === 'object' && __args[0] != null)) {
-      return utils.convReturnVertxGen(j_serviceDiscovery["getReference(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null), ServiceReference);
+      return utils.convReturnVertxGen(ServiceReference, j_serviceDiscovery["getReference(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -65,7 +65,7 @@ var ServiceDiscovery = function(j_val) {
   this.getReferenceWithConfiguration = function(record, configuration) {
     var __args = arguments;
     if (__args.length === 2 && (typeof __args[0] === 'object' && __args[0] != null) && (typeof __args[1] === 'object' && __args[1] != null)) {
-      return utils.convReturnVertxGen(j_serviceDiscovery["getReferenceWithConfiguration(io.vertx.servicediscovery.Record,io.vertx.core.json.JsonObject)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null, utils.convParamJsonObject(configuration)), ServiceReference);
+      return utils.convReturnVertxGen(ServiceReference, j_serviceDiscovery["getReferenceWithConfiguration(io.vertx.servicediscovery.Record,io.vertx.core.json.JsonObject)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null, utils.convParamJsonObject(configuration)));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -96,15 +96,15 @@ var ServiceDiscovery = function(j_val) {
   this.registerServiceImporter = function() {
     var __args = arguments;
     if (__args.length === 2 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null)) {
-      return utils.convReturnVertxGen(j_serviceDiscovery["registerServiceImporter(io.vertx.servicediscovery.spi.ServiceImporter,io.vertx.core.json.JsonObject)"](__args[0]._jdel, utils.convParamJsonObject(__args[1])), ServiceDiscovery);
+      return utils.convReturnVertxGen(ServiceDiscovery, j_serviceDiscovery["registerServiceImporter(io.vertx.servicediscovery.spi.ServiceImporter,io.vertx.core.json.JsonObject)"](__args[0]._jdel, utils.convParamJsonObject(__args[1])));
     }  else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
-      return utils.convReturnVertxGen(j_serviceDiscovery["registerServiceImporter(io.vertx.servicediscovery.spi.ServiceImporter,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
+      return utils.convReturnVertxGen(ServiceDiscovery, j_serviceDiscovery["registerServiceImporter(io.vertx.servicediscovery.spi.ServiceImporter,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
       if (ar.succeeded()) {
         __args[2](null, null);
       } else {
         __args[2](null, ar.cause());
       }
-    }), ServiceDiscovery);
+    }));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -121,15 +121,15 @@ var ServiceDiscovery = function(j_val) {
   this.registerServiceExporter = function() {
     var __args = arguments;
     if (__args.length === 2 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null)) {
-      return utils.convReturnVertxGen(j_serviceDiscovery["registerServiceExporter(io.vertx.servicediscovery.spi.ServiceExporter,io.vertx.core.json.JsonObject)"](__args[0]._jdel, utils.convParamJsonObject(__args[1])), ServiceDiscovery);
+      return utils.convReturnVertxGen(ServiceDiscovery, j_serviceDiscovery["registerServiceExporter(io.vertx.servicediscovery.spi.ServiceExporter,io.vertx.core.json.JsonObject)"](__args[0]._jdel, utils.convParamJsonObject(__args[1])));
     }  else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
-      return utils.convReturnVertxGen(j_serviceDiscovery["registerServiceExporter(io.vertx.servicediscovery.spi.ServiceExporter,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
+      return utils.convReturnVertxGen(ServiceDiscovery, j_serviceDiscovery["registerServiceExporter(io.vertx.servicediscovery.spi.ServiceExporter,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
       if (ar.succeeded()) {
         __args[2](null, null);
       } else {
         __args[2](null, ar.cause());
       }
-    }), ServiceDiscovery);
+    }));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -337,6 +337,25 @@ var ServiceDiscovery = function(j_val) {
   this._jdel = j_serviceDiscovery;
 };
 
+ServiceDiscovery._jclass = utils.getJavaClass("io.vertx.servicediscovery.ServiceDiscovery");
+ServiceDiscovery._jtype = {
+  accept: function(obj) {
+    return ServiceDiscovery._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(ServiceDiscovery.prototype, {});
+    ServiceDiscovery.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+ServiceDiscovery._create = function(jdel) {
+  var obj = Object.create(ServiceDiscovery.prototype, {});
+  ServiceDiscovery.apply(obj, arguments);
+  return obj;
+}
 /**
  Creates an instance of {@link ServiceDiscovery}.
 
@@ -348,9 +367,9 @@ var ServiceDiscovery = function(j_val) {
 ServiceDiscovery.create = function() {
   var __args = arguments;
   if (__args.length === 1 && typeof __args[0] === 'object' && __args[0]._jdel) {
-    return utils.convReturnVertxGen(JServiceDiscovery["create(io.vertx.core.Vertx)"](__args[0]._jdel), ServiceDiscovery);
+    return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx)"](__args[0]._jdel));
   }else if (__args.length === 2 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null)) {
-    return utils.convReturnVertxGen(JServiceDiscovery["create(io.vertx.core.Vertx,io.vertx.servicediscovery.ServiceDiscoveryOptions)"](__args[0]._jdel, __args[1] != null ? new ServiceDiscoveryOptions(new JsonObject(JSON.stringify(__args[1]))) : null), ServiceDiscovery);
+    return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx,io.vertx.servicediscovery.ServiceDiscoveryOptions)"](__args[0]._jdel, __args[1] != null ? new ServiceDiscoveryOptions(new JsonObject(JSON.stringify(__args[1]))) : null));
   } else throw new TypeError('function invoked with invalid arguments');
 };
 
@@ -369,5 +388,4 @@ ServiceDiscovery.releaseServiceObject = function(discovery, svcObject) {
   } else throw new TypeError('function invoked with invalid arguments');
 };
 
-// We export the Constructor function
 module.exports = ServiceDiscovery;

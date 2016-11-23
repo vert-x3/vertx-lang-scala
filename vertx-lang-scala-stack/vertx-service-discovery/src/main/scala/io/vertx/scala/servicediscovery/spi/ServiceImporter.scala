@@ -51,8 +51,8 @@ class ServiceImporter(private val _asJava: JServiceImporter) {
     * Closes the importer
     * @param closeHandler the handle to be notified when importer is closed, may be `null`
     */
-  def close(closeHandler: () => Unit): Unit = {
-    _asJava.close(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => closeHandler()))
+  def close(closeHandler: io.vertx.core.Handler[Unit]): Unit = {
+    _asJava.close(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => closeHandler.handle()))
   }
 
 }

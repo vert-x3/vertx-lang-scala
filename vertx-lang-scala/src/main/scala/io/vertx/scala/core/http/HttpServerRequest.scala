@@ -43,10 +43,10 @@ import io.vertx.scala.core.net.NetSocket
   * 
   * Instances are created for each request and passed to the user via a handler.
   * 
-  * Each instance of this class is associated with a corresponding [[HttpServerResponse]] instance via
-  * [[HttpServerRequest#response]].
-  * It implements [[ReadStream]] so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * Each instance of this class is associated with a corresponding [[io.vertx.scala.core.http.HttpServerResponse]] instance via
+  * [[io.vertx.scala.core.http.HttpServerRequest#response]].
+  * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   */
 class HttpServerRequest(private val _asJava: JHttpServerRequest) 
@@ -54,12 +54,12 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
 
   def asJava: JHttpServerRequest = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): HttpServerRequest = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequest = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): HttpServerRequest = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -74,8 +74,8 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -111,7 +111,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the scheme of the request
     */
   def scheme(): scala.Option[String] = {
-        scala.Option(_asJava.scheme())
+    scala.Option(_asJava.scheme())
   }
 
   /**
@@ -125,21 +125,21 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
   def path(): scala.Option[String] = {
-        scala.Option(_asJava.path())
+    scala.Option(_asJava.path())
   }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
   def query(): scala.Option[String] = {
-        scala.Option(_asJava.query())
+    scala.Option(_asJava.query())
   }
 
   /**
     * @return the request host. For HTTP2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
     */
   def host(): scala.Option[String] = {
-        scala.Option(_asJava.host())
+    scala.Option(_asJava.host())
   }
 
   /**
@@ -147,7 +147,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def response(): HttpServerResponse = {
     if (cached_0 == null) {
-      cached_0=    HttpServerResponse.apply(_asJava.response())
+      cached_0 =    HttpServerResponse.apply(_asJava.response())
     }
     cached_0
   }
@@ -157,7 +157,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def headers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1=    MultiMap.apply(_asJava.headers())
+      cached_1 =    MultiMap.apply(_asJava.headers())
     }
     cached_1
   }
@@ -168,7 +168,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the header value
     */
   def getHeader(headerName: String): scala.Option[String] = {
-        scala.Option(_asJava.getHeader(headerName))
+    scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -176,7 +176,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def params(): MultiMap = {
     if (cached_2 == null) {
-      cached_2=    MultiMap.apply(_asJava.params())
+      cached_2 =    MultiMap.apply(_asJava.params())
     }
     cached_2
   }
@@ -187,7 +187,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the param value
     */
   def getParam(paramName: String): scala.Option[String] = {
-        scala.Option(_asJava.getParam(paramName))
+    scala.Option(_asJava.getParam(paramName))
   }
 
   /**
@@ -195,7 +195,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_3 == null) {
-      cached_3=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_3 =    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_3
   }
@@ -205,7 +205,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def localAddress(): SocketAddress = {
     if (cached_4 == null) {
-      cached_4=    SocketAddress.apply(_asJava.localAddress())
+      cached_4 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_4
   }
@@ -224,7 +224,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: Buffer => Unit): HttpServerRequest = {
+  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
     _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
     this
   }
@@ -241,7 +241,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def netSocket(): NetSocket = {
     if (cached_5 == null) {
-      cached_5=    NetSocket.apply(_asJava.netSocket())
+      cached_5 =    NetSocket.apply(_asJava.netSocket())
     }
     cached_5
   }
@@ -269,7 +269,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * with the file upload.
     * @return a reference to this, so the API can be used fluently
     */
-  def uploadHandler(uploadHandler: HttpServerFileUpload => Unit): HttpServerRequest = {
+  def uploadHandler(uploadHandler: io.vertx.core.Handler[HttpServerFileUpload]): HttpServerRequest = {
     _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
     this
   }
@@ -280,12 +280,12 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * Be aware that the attributes will only be available after the whole body has been received, i.e. after
     * the request end handler has been called.
     * 
-    * [[HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
+    * [[io.vertx.scala.core.http.HttpServerRequest#setExpectMultipart]] must be called first before trying to get the form attributes.
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {
     if (cached_6 == null) {
-      cached_6=    MultiMap.apply(_asJava.formAttributes())
+      cached_6 =    MultiMap.apply(_asJava.formAttributes())
     }
     cached_6
   }
@@ -296,7 +296,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the attribute value
     */
   def getFormAttribute(attributeName: String): scala.Option[String] = {
-        scala.Option(_asJava.getFormAttribute(attributeName))
+    scala.Option(_asJava.getFormAttribute(attributeName))
   }
 
   /**
@@ -323,7 +323,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * frame. HTTP/2 permits extension of the protocol.
     * @return a reference to this, so the API can be used fluently
     */
-  def customFrameHandler(handler: HttpFrame => Unit): HttpServerRequest = {
+  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]): HttpServerRequest = {
     _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
     this
   }
@@ -333,7 +333,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def connection(): HttpConnection = {
     if (cached_7 == null) {
-      cached_7=    HttpConnection.apply(_asJava.connection())
+      cached_7 =    HttpConnection.apply(_asJava.connection())
     }
     cached_7
   }

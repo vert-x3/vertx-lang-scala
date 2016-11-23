@@ -28,9 +28,9 @@ import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
 
 /**
-  * A job executed in a [[JobController]], grouping one or several process.<p/>
+  * A job executed in a [[io.vertx.scala.ext.shell.system.JobController]], grouping one or several process.<p/>
   *
-  * The job life cycle can be controlled with the [[Job#run]], [[Job#resume]] and [[Job#suspend]] and [[Job#interrupt]]
+  * The job life cycle can be controlled with the [[io.vertx.scala.ext.shell.system.Job#run]], [[io.vertx.scala.ext.shell.system.Job#resume]] and [[io.vertx.scala.ext.shell.system.Job#suspend]] and [[io.vertx.scala.ext.shell.system.Job#interrupt]]
   * methods.
   */
 class Job(private val _asJava: JJob) {
@@ -90,8 +90,8 @@ class Job(private val _asJava: JJob) {
     * @param handler the terminate handler
     * @return this object
     */
-  def statusUpdateHandler(handler: io.vertx.ext.shell.system.ExecStatus => Unit): Job = {
-    _asJava.statusUpdateHandler(funcToHandler(handler))
+  def statusUpdateHandler(handler: io.vertx.core.Handler[io.vertx.ext.shell.system.ExecStatus]): Job = {
+    _asJava.statusUpdateHandler((handler))
     this
   }
 
@@ -167,7 +167,7 @@ class Job(private val _asJava: JJob) {
     */
   def process(): Process = {
     if (cached_0 == null) {
-      cached_0=    Process.apply(_asJava.process())
+      cached_0 =    Process.apply(_asJava.process())
     }
     cached_0
   }

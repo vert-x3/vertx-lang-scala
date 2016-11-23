@@ -27,12 +27,12 @@ import io.vertx.scala.core.MultiMap
 /**
   * Represents a message that is received from the event bus in a handler.
   * 
-  * Messages have a [[Message#body]], which can be null, and also [[Message#headers]], which can be empty.
+  * Messages have a [[io.vertx.scala.core.eventbus.Message#body]], which can be null, and also [[io.vertx.scala.core.eventbus.Message#headers]], which can be empty.
   * 
-  * If the message was sent specifying a reply handler it will also have a [[Message#replyAddress]]. In that case the message
-  * can be replied to using that reply address, or, more simply by just using [[Message#reply]].
+  * If the message was sent specifying a reply handler it will also have a [[io.vertx.scala.core.eventbus.Message#replyAddress]]. In that case the message
+  * can be replied to using that reply address, or, more simply by just using [[io.vertx.scala.core.eventbus.Message#reply]].
   * 
-  * If you want to notify the sender that processing failed, then [[Message#fail]] can be called.
+  * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
 class Message[T](private val _asJava: JMessage[T]) {
 
@@ -59,7 +59,7 @@ class Message[T](private val _asJava: JMessage[T]) {
     */
   def body(): T = {
     if (cached_0 == null) {
-      cached_0=    _asJava.body()
+      cached_0 =    _asJava.body()
     }
     cached_0
   }
@@ -69,7 +69,7 @@ class Message[T](private val _asJava: JMessage[T]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-        scala.Option(_asJava.replyAddress())
+    scala.Option(_asJava.replyAddress())
   }
 
   /**
@@ -97,7 +97,7 @@ class Message[T](private val _asJava: JMessage[T]) {
   }
 
   /**
-    * Link [[Message#reply]] but allows you to specify delivery options for the reply.
+    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */

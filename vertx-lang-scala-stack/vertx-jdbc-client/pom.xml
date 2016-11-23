@@ -12,7 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <artifactId>vertx-jdbc-client_${scala.build.version}</artifactId>
+  <artifactId>vertx-jdbc-client-scala_${scala.build.version}</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 
   <properties>
@@ -24,7 +24,7 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-sql-common_${scala.build.version}</artifactId>
+      <artifactId>vertx-sql-common-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>

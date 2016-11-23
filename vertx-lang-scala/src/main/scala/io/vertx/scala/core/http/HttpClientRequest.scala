@@ -37,26 +37,26 @@ import io.vertx.core.http.{HttpConnection => JHttpConnection}
 /**
   * Represents a client-side HTTP request.
   * 
-  * Instances are created by an [[HttpClient]] instance, via one of the methods corresponding to the
+  * Instances are created by an [[io.vertx.scala.core.http.HttpClient]] instance, via one of the methods corresponding to the
   * specific HTTP methods, or the generic request methods. On creation the request will not have been written to the
   * wire.
   * 
   * Once a request has been obtained, headers can be set on it, and data can be written to its body if required. Once
-  * you are ready to send the request, one of the [[HttpClientRequest#end]] methods should be called.
+  * you are ready to send the request, one of the [[io.vertx.scala.core.http.HttpClientRequest#end]] methods should be called.
   * 
   * Nothing is actually sent until the request has been internally assigned an HTTP connection.
   * 
-  * The [[HttpClient]] instance will return an instance of this class immediately, even if there are no HTTP
+  * The [[io.vertx.scala.core.http.HttpClient]] instance will return an instance of this class immediately, even if there are no HTTP
   * connections available in the pool. Any requests sent before a connection is assigned will be queued
   * internally and actually sent when an HTTP connection becomes available from the pool.
   * 
-  * The headers of the request are queued for writing either when the [[HttpClientRequest#end]] method is called, or, when the first
+  * The headers of the request are queued for writing either when the [[io.vertx.scala.core.http.HttpClientRequest#end]] method is called, or, when the first
   * part of the body is written, whichever occurs first.
   * 
   * This class supports both chunked and non-chunked HTTP.
   * 
-  * It implements [[WriteStream]] so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * It implements [[io.vertx.scala.core.streams.WriteStream]] so it can be used with
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   * An example of using this class is as follows:
   * 
@@ -68,14 +68,14 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   def asJava: JHttpClientRequest = _asJava
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[HttpClientRequest#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): HttpClientRequest = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpClientRequest = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -92,12 +92,12 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     this
   }
 
-  def drainHandler(handler: () => Unit): HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def handler(handler: HttpClientResponse => Unit): HttpClientRequest = {
+  def handler(handler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
     _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
     this
   }
@@ -112,8 +112,8 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     this
   }
 
-  def endHandler(endHandler: () => Unit): HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -201,7 +201,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0=    MultiMap.apply(_asJava.headers())
+      cached_0 =    MultiMap.apply(_asJava.headers())
     }
     cached_0
   }
@@ -241,16 +241,16 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * has been set using this method, then the `handler` will be called.
     * 
     * You can then continue to write data to the request body and later end it. This is normally used in conjunction with
-    * the [[HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
+    * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
     * @return a reference to this, so the API can be used fluently
     */
-  def continueHandler(handler: () => Unit): HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def continueHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
   /**
-    * Forces the head of the request to be written before [[HttpClientRequest#end]] is called on the request or any data is
+    * Forces the head of the request to be written before [[io.vertx.scala.core.http.HttpClientRequest#end]] is called on the request or any data is
     * written to it.
     * 
     * This is normally used to implement HTTP 100-continue handling, see  for
@@ -263,30 +263,30 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   /**
-    * Like [[HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
+    * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
     * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
-  def sendHead(completionHandler: io.vertx.core.http.HttpVersion => Unit): HttpClientRequest = {
-    _asJava.sendHead(funcToHandler(completionHandler))
+  def sendHead(completionHandler: io.vertx.core.Handler[io.vertx.core.http.HttpVersion]): HttpClientRequest = {
+    _asJava.sendHead((completionHandler))
     this
   }
 
   /**
-    * Same as [[HttpClientRequest#end]] but writes a String in UTF-8 encoding
+    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String in UTF-8 encoding
     */
   def end(chunk: String): Unit = {
     _asJava.end(chunk)
   }
 
   /**
-    * Same as [[HttpClientRequest#end]] but writes a String with the specified encoding
+    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String with the specified encoding
     */
   def end(chunk: String, enc: String): Unit = {
     _asJava.end(chunk, enc)
   }
 
   /**
-    * Same as [[HttpClientRequest#end]] but writes some data to the request body before ending. If the request is not chunked and
+    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes some data to the request body before ending. If the request is not chunked and
     * no other data has been written then the `Content-Length` header will be automatically set
     */
   def end(chunk: Buffer): Unit = {
@@ -294,7 +294,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   /**
-    * Ends the request. If no data has been written to the request body, and [[HttpClientRequest#sendHead]] has not been called then
+    * Ends the request. If no data has been written to the request body, and [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] has not been called then
     * the actual request won't get written until this method gets called.
     * 
     * Once the request has ended, it cannot be used any more,
@@ -324,21 +324,21 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * The handler is called when the client receives a <i>push promise</i> from the server. The handler can be called
     * multiple times, for each push promise.<p/>
     *
-    * The handler is called with a <i>read-only</i> [[HttpClientRequest]], the following methods can be called:<p/>
+    * The handler is called with a <i>read-only</i> [[io.vertx.scala.core.http.HttpClientRequest]], the following methods can be called:<p/>
     *
     * <ul>
-    *   <li>[[HttpClientRequest#method]]</li>
-    *   <li>[[HttpClientRequest#uri]]</li>
-    *   <li>[[HttpClientRequest#headers]]</li>
-    *   <li>[[HttpClientRequest#getHost]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#method]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#uri]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#headers]]</li>
+    *   <li>[[io.vertx.scala.core.http.HttpClientRequest#getHost]]</li>
     * </ul>
     *
-    * In addition the handler should call the [[HttpClientRequest#handler]] method to set an handler to
+    * In addition the handler should call the [[io.vertx.scala.core.http.HttpClientRequest#handler]] method to set an handler to
     * process the response.<p/>
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def pushHandler(handler: HttpClientRequest => Unit): HttpClientRequest = {
+  def pushHandler(handler: io.vertx.core.Handler[HttpClientRequest]): HttpClientRequest = {
     _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
     this
   }
@@ -372,7 +372,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def connection(): HttpConnection = {
     if (cached_1 == null) {
-      cached_1=    HttpConnection.apply(_asJava.connection())
+      cached_1 =    HttpConnection.apply(_asJava.connection())
     }
     cached_1
   }
@@ -382,7 +382,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def connectionHandler(handler: HttpConnection => Unit): HttpClientRequest = {
+  def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpClientRequest = {
     _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
     this
   }
@@ -393,7 +393,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * The frame is sent immediatly and is not subject to flow control.
     *
     * This method must be called after the request headers have been sent and only for the protocol HTTP/2.
-    * The [[HttpClientRequest#sendHead]] should be used for this purpose.
+    * The [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] should be used for this purpose.
     * @param type the 8-bit frame type
     * @param flags the 8-bit frame flags
     * @param payload the frame payload
@@ -412,7 +412,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   /**
-    * Like [[HttpClientRequest#writeCustomFrame]] but with an [[HttpFrame]].
+    * Like [[io.vertx.scala.core.http.HttpClientRequest#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpClientRequest = {

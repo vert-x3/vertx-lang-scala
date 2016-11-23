@@ -63,7 +63,7 @@ class MIMEHeader(private val _asJava: JMIMEHeader)
     * @return 
     */
   def parameter(key: String): scala.Option[String] = {
-        scala.Option(_asJava.parameter(key))
+    scala.Option(_asJava.parameter(key))
   }
 
   /**

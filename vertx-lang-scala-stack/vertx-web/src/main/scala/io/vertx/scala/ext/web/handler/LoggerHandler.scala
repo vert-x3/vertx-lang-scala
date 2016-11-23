@@ -27,7 +27,8 @@ import io.vertx.ext.web.handler.LoggerFormat
 /**
   * A handler which logs request information to the Vert.x logger.
   */
-class LoggerHandler(private val _asJava: JLoggerHandler) {
+class LoggerHandler(private val _asJava: JLoggerHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JLoggerHandler = _asJava
 

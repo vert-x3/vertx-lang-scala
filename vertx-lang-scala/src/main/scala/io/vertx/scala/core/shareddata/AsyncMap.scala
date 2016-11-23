@@ -53,7 +53,7 @@ class AsyncMap[K, V](private val _asJava: JAsyncMap[K, V]) {
   }
 
   /**
-    * Like [[AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
+    * Like [[io.vertx.scala.core.shareddata.AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
     * ttl.
     * @param k the key
     * @param v the value
@@ -80,7 +80,7 @@ class AsyncMap[K, V](private val _asJava: JAsyncMap[K, V]) {
   }
 
   /**
-    * Link [[AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
+    * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
     * after the ttl.
     * @param k the key
     * @param v the value

@@ -37,29 +37,29 @@ import io.vertx.core.cli.{Argument => JArgument}
   * . To disable the help generation, set the `hidden` attribute to `true`.
   * <p/>
   * Command Line Interface object does not contains "value", it's a model. It must be evaluated by a
-  * parser that returns a [[CommandLine]] object containing the argument and option values.
+  * parser that returns a [[io.vertx.scala.core.cli.CommandLine]] object containing the argument and option values.
   */
 class CLI(private val _asJava: JCLI) {
 
   def asJava: JCLI = _asJava
 
   /**
-    * Parses the user command line interface and create a new [[CommandLine]] containing extracting values.
+    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
     * @param arguments the arguments
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
   }
 
   /**
-    * Parses the user command line interface and create a new [[CommandLine]] containing extracting values.
+    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
     * @param arguments the arguments
     * @param validate enable / disable parsing validation
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => if (x == null) null else x:java.lang.String).asJava, validate))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
   }
 
   /**
@@ -83,7 +83,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the CLI description.
     */
   def getDescription(): scala.Option[String] = {
-        scala.Option(_asJava.getDescription())
+    scala.Option(_asJava.getDescription())
   }
 
   def setDescription(desc: String): CLI = {
@@ -95,7 +95,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the CLI summary.
     */
   def getSummary(): scala.Option[String] = {
-        scala.Option(_asJava.getSummary())
+    scala.Option(_asJava.getSummary())
   }
 
   /**
@@ -109,7 +109,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Checks whether or not the current [[CLI]] instance is hidden.
+    * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
     * @return `true` if the current CLI is hidden, false otherwise
     */
   def isHidden(): Boolean = {
@@ -117,7 +117,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Sets whether or not the current instance of [[CLI]] must be hidden. Hidden CLI are not listed when
+    * Sets whether or not the current instance of [[io.vertx.scala.core.cli.CLI]] must be hidden. Hidden CLI are not listed when
     * displaying usages / help messages. In other words, hidden commands are for power user.
     * @param hidden enables or disables the hidden aspect of the CI
     * @return the current CLI instance
@@ -146,7 +146,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of options. Unlike [[CLI#setOptions]]`, this method does not remove the existing options.
+    * Adds a set of options. Unlike [[io.vertx.scala.core.cli.CLI#setOptions]]`, this method does not remove the existing options.
     * The given list is appended to the existing list.
     * @param options the options, must not be `null`
     * @return the current CLI instance
@@ -185,7 +185,7 @@ class CLI(private val _asJava: JCLI) {
   }
 
   /**
-    * Adds a set of arguments. Unlike [[CLI#setArguments]], this method does not remove the existing arguments.
+    * Adds a set of arguments. Unlike [[io.vertx.scala.core.cli.CLI#setArguments]], this method does not remove the existing arguments.
     * The given list is appended to the existing list.
     * @param args the arguments, must not be `null`
     * @return the current CLI instance
@@ -211,7 +211,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Option, `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     */
   def getOption(name: String): scala.Option[Option] = {
-        scala.Option(Option(_asJava.getOption(name)))
+    scala.Option(Option(_asJava.getOption(name)))
   }
 
   /**
@@ -220,7 +220,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(name: String): scala.Option[Argument] = {
-        scala.Option(Argument(_asJava.getArgument(name)))
+    scala.Option(Argument(_asJava.getArgument(name)))
   }
 
   /**
@@ -229,7 +229,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     */
   def getArgument(index: Int): scala.Option[Argument] = {
-        scala.Option(Argument(_asJava.getArgument(index)))
+    scala.Option(Argument(_asJava.getArgument(index)))
   }
 
   /**

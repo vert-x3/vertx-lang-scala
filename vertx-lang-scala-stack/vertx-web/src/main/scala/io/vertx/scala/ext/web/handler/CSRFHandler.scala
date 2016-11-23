@@ -31,7 +31,8 @@ import io.vertx.scala.ext.web.RoutingContext
   *
   * This Handler requires session support, thus should be added somewhere below Session and Body handlers.
   */
-class CSRFHandler(private val _asJava: JCSRFHandler) {
+class CSRFHandler(private val _asJava: JCSRFHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JCSRFHandler = _asJava
 

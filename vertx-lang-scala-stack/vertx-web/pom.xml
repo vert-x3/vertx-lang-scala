@@ -12,7 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <artifactId>vertx-web_${scala.build.version}</artifactId>
+  <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 
   <properties>
@@ -24,37 +24,37 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-common_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-common-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jwt_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-jwt-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-oauth2_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-oauth2-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-jdbc-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-mongo_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-mongo-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-shiro-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>

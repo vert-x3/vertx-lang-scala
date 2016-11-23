@@ -24,7 +24,8 @@ import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-trait AbstractHandlerUserType {
+trait AbstractHandlerUserType 
+    extends io.vertx.core.Handler[RefedInterface1] {
 
   def asJava: java.lang.Object
 

@@ -29,8 +29,7 @@ import io.vertx.scala.core.Vertx
 /**
   * A session store which stores sessions in a distributed map so they are available across the cluster.
   */
-class ClusteredSessionStore(private val _asJava: JClusteredSessionStore) 
-    extends  {
+class ClusteredSessionStore(private val _asJava: JClusteredSessionStore) {
 
   def asJava: JClusteredSessionStore = _asJava
 

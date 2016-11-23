@@ -38,7 +38,8 @@ import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
   * We currently support version 0.3.3 of the SockJS protocol, which can be found in
   * <a href="https://github.com/sockjs/sockjs-protocol/tree/v0.3.3">this tag:</a>
   */
-class SockJSHandler(private val _asJava: JSockJSHandler) {
+class SockJSHandler(private val _asJava: JSockJSHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JSockJSHandler = _asJava
 
@@ -52,7 +53,7 @@ class SockJSHandler(private val _asJava: JSockJSHandler) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def socketHandler(handler: SockJSSocket => Unit): SockJSHandler = {
+  def socketHandler(handler: io.vertx.core.Handler[SockJSSocket]): SockJSHandler = {
     _asJava.socketHandler(funcToMappedHandler(SockJSSocket.apply)(handler))
     this
   }
@@ -70,13 +71,13 @@ class SockJSHandler(private val _asJava: JSockJSHandler) {
   }
 
   /**
-    * Like [[SockJSHandler#bridge]] but specifying a handler
+    * Like [[io.vertx.scala.ext.web.handler.sockjs.SockJSHandler#bridge]] but specifying a handler
     * that will receive bridge events.
     * @param bridgeOptions options to configure the bridge withsee <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
     * @param bridgeEventHandler handler to receive bridge events
     * @return a reference to this, so the API can be used fluently
     */
-  def bridge(bridgeOptions: BridgeOptions, bridgeEventHandler: BridgeEvent => Unit): SockJSHandler = {
+  def bridge(bridgeOptions: BridgeOptions, bridgeEventHandler: io.vertx.core.Handler[BridgeEvent]): SockJSHandler = {
     _asJava.bridge(bridgeOptions.asJava, funcToMappedHandler(BridgeEvent.apply)(bridgeEventHandler))
     this
   }

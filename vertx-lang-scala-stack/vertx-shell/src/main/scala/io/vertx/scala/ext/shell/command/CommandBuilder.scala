@@ -41,7 +41,7 @@ class CommandBuilder(private val _asJava: JCommandBuilder) {
     * @param handler the process handler
     * @return this command object
     */
-  def processHandler(handler: CommandProcess => Unit): CommandBuilder = {
+  def processHandler(handler: io.vertx.core.Handler[CommandProcess]): CommandBuilder = {
     _asJava.processHandler(funcToMappedHandler(CommandProcess.apply)(handler))
     this
   }
@@ -52,7 +52,7 @@ class CommandBuilder(private val _asJava: JCommandBuilder) {
     * @param handler the completion handler
     * @return this command object
     */
-  def completionHandler(handler: Completion => Unit): CommandBuilder = {
+  def completionHandler(handler: io.vertx.core.Handler[Completion]): CommandBuilder = {
     _asJava.completionHandler(funcToMappedHandler(Completion.apply)(handler))
     this
   }

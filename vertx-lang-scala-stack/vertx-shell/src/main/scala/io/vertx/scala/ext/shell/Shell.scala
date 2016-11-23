@@ -37,7 +37,7 @@ class Shell(private val _asJava: JShell) {
   def asJava: JShell = _asJava
 
   /**
-    * Create a job, the created job should then be executed with the [[Job#run]] method.
+    * Create a job, the created job should then be executed with the [[io.vertx.scala.ext.shell.system.Job#run]] method.
     * @param line the command line creating this job
     * @return the created job
     */
@@ -46,7 +46,7 @@ class Shell(private val _asJava: JShell) {
   }
 
   /**
-    * See [[Shell#createJob]]
+    * See [[io.vertx.scala.ext.shell.Shell#createJob]]
     */
   def createJob(line: String): Job = {
     Job.apply(_asJava.createJob(line))
@@ -57,7 +57,7 @@ class Shell(private val _asJava: JShell) {
     */
   def jobController(): JobController = {
     if (cached_0 == null) {
-      cached_0=    JobController.apply(_asJava.jobController())
+      cached_0 =    JobController.apply(_asJava.jobController())
     }
     cached_0
   }
@@ -67,7 +67,7 @@ class Shell(private val _asJava: JShell) {
     */
   def session(): Session = {
     if (cached_1 == null) {
-      cached_1=    Session.apply(_asJava.session())
+      cached_1 =    Session.apply(_asJava.session())
     }
     cached_1
   }

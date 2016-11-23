@@ -110,5 +110,23 @@ var ServiceExporter = function(j_val) {
   this._jdel = j_serviceExporter;
 };
 
-// We export the Constructor function
+ServiceExporter._jclass = utils.getJavaClass("io.vertx.servicediscovery.spi.ServiceExporter");
+ServiceExporter._jtype = {
+  accept: function(obj) {
+    return ServiceExporter._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(ServiceExporter.prototype, {});
+    ServiceExporter.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+ServiceExporter._create = function(jdel) {
+  var obj = Object.create(ServiceExporter.prototype, {});
+  ServiceExporter.apply(obj, arguments);
+  return obj;
+}
 module.exports = ServiceExporter;

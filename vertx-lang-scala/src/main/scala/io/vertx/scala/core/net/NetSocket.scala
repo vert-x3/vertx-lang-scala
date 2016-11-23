@@ -32,12 +32,12 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
   * Represents a socket-like interface to a TCP connection on either the
   * client or the server side.
   * 
-  * Instances of this class are created on the client side by an [[NetClient]]
-  * when a connection to a server is made, or on the server side by a [[NetServer]]
+  * Instances of this class are created on the client side by an [[io.vertx.scala.core.net.NetClient]]
+  * when a connection to a server is made, or on the server side by a [[io.vertx.scala.core.net.NetServer]]
   * when a server accepts a connection.
   * 
   * It implements both  and  so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class NetSocket(private val _asJava: JNetSocket) 
     extends ReadStream[Buffer] 
@@ -46,26 +46,26 @@ class NetSocket(private val _asJava: JNetSocket)
   def asJava: JNetSocket = _asJava
 
   /**
-    * Same as [[NetSocket#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[NetSocket#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): NetSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): NetSocket = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): NetSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -80,8 +80,8 @@ class NetSocket(private val _asJava: JNetSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): NetSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -95,8 +95,8 @@ class NetSocket(private val _asJava: JNetSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): NetSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -171,7 +171,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @return future
@@ -183,7 +183,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
@@ -196,7 +196,7 @@ class NetSocket(private val _asJava: JNetSocket)
   }
 
   /**
-    * Same as [[NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
+    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
@@ -214,7 +214,7 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.remoteAddress())
+      cached_0 =    SocketAddress.apply(_asJava.remoteAddress())
     }
     cached_0
   }
@@ -224,13 +224,13 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1=    SocketAddress.apply(_asJava.localAddress())
+      cached_1 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_1
   }
 
   /**
-    * Calls [[NetSocket#close]]
+    * Calls [[io.vertx.scala.core.net.NetSocket#close]]
     */
   def end(): Unit = {
     _asJava.end()
@@ -248,8 +248,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): NetSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -258,8 +258,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @param handler the handler will be notified when it's upgraded
     * @return a reference to this, so the API can be used fluently
     */
-  def upgradeToSsl(handler: () => Unit): NetSocket = {
-    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def upgradeToSsl(handler: io.vertx.core.Handler[Unit]): NetSocket = {
+    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

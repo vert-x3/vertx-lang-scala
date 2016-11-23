@@ -110,22 +110,22 @@ class Route(private val _asJava: JRoute) {
     * @param requestHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(requestHandler: RoutingContext => Unit): Route = {
+  def handler(requestHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.handler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
 
   /**
-    * Like [[Route#blockingHandler]] called with ordered = true
+    * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
-  def blockingHandler(requestHandler: RoutingContext => Unit): Route = {
+  def blockingHandler(requestHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler))
     this
   }
 
   /**
     * Specify a blocking request handler for the route.
-    * This method works just like [[Route#handler]] excepted that it will run the blocking handler on a worker thread
+    * This method works just like [[io.vertx.scala.ext.web.Route#handler]] excepted that it will run the blocking handler on a worker thread
     * so that it won't block the event loop. Note that it's safe to call context.next() from the
     * blocking handler as it will be executed on the event loop context (and not on the worker thread.
     *
@@ -136,7 +136,7 @@ class Route(private val _asJava: JRoute) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
-  def blockingHandler(requestHandler: RoutingContext => Unit, ordered: Boolean): Route = {
+  def blockingHandler(requestHandler: io.vertx.core.Handler[RoutingContext], ordered: Boolean): Route = {
     _asJava.blockingHandler(funcToMappedHandler(RoutingContext.apply)(requestHandler), ordered)
     this
   }
@@ -148,7 +148,7 @@ class Route(private val _asJava: JRoute) {
     * @param failureHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def failureHandler(failureHandler: RoutingContext => Unit): Route = {
+  def failureHandler(failureHandler: io.vertx.core.Handler[RoutingContext]): Route = {
     _asJava.failureHandler(funcToMappedHandler(RoutingContext.apply)(failureHandler))
     this
   }
@@ -195,7 +195,7 @@ class Route(private val _asJava: JRoute) {
     * @return the path prefix (if any) for this route
     */
   def getPath(): scala.Option[String] = {
-        scala.Option(_asJava.getPath())
+    scala.Option(_asJava.getPath())
   }
 
 }

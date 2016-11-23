@@ -54,7 +54,7 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def addAuthorities(authorities: Set[String]): AuthHandler = {
-    _asJava.addAuthorities(authorities.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.addAuthorities(authorities.map(x => x:java.lang.String).asJava)
     this
   }
 
@@ -64,7 +64,7 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @return a reference to this for fluency
     */
   def setAudience(audience: scala.collection.mutable.Buffer[String]): JWTAuthHandler = {
-    _asJava.setAudience(audience.map(x => if (x == null) null else x:java.lang.String).asJava)
+    _asJava.setAudience(audience.map(x => x:java.lang.String).asJava)
     this
   }
 
