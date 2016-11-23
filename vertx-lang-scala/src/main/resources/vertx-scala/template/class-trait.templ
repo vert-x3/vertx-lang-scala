@@ -5,6 +5,6 @@
 @foreach{method : instanceMethods}
 @if{includeMethod(method, instanceMethods)}
   @if{method.doc != null}@{methodDoc(method, '');}@end{}
-	def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);}\n\n
+	def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);}\n\n
 @end{}
 @end{}

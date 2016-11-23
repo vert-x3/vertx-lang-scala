@@ -284,15 +284,6 @@
     paramList;
   }
 
-  def multiMethodParams(method) {
-    params = methodParams(method);
-    if (params.isEmpty()) {
-      params = '()';
-    } else {
-      params = '(' + params + ')';
-    }
-  }
-
   def isLastParamAHandlerWithAsyncResult(method) {
     var size = method.params.size;
     return method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
