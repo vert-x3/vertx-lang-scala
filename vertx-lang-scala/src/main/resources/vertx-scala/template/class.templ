@@ -131,13 +131,13 @@ import @{importedType.raw.translateName("scala")}\n
 	@foreach{method : staticMethods}
 	@if{includeMethod(method, staticMethods)}
 	@if{shouldMethodReturnAFuture(method)}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
 		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 		    promiseAndHandler._2.future\n
 	  }\n
 	@else{}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}@{multiMethodParams(method);}: @{returnTypeOf(method);} = {\n
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
 			@{methodInvocation(type.raw.name, method, '    ');}
 	  }\n
 	@end{}
