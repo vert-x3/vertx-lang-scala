@@ -16,12 +16,9 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
@@ -43,58 +40,44 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
   * 
   * Please see the documentation for more information.
   */
-class Pump(private val _asJava: JPump) {
+class Pump(private val _asJava: Object) {
 
-  def asJava: JPump = _asJava
+  def asJava = _asJava
 
-  /**
-    * Set the write queue max size to `maxSize`
-    * @param maxSize the max size
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setWriteQueueMaxSize(maxSize: Int): Pump = {
-    _asJava.setWriteQueueMaxSize(maxSize)
+//methods returning a future
+//cached methods
+//fluent methods
+  def setWriteQueueMaxSize(maxSize: Int):Pump = {
+    asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize)
     this
   }
 
-  /**
-    * Start the Pump. The Pump can be started and stopped multiple times.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def start(): Pump = {
-    _asJava.start()
+  def start():Pump = {
+    asJava.asInstanceOf[JPump].start()
     this
   }
 
-  /**
-    * Stop the Pump. The Pump can be started and stopped multiple times.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def stop(): Pump = {
-    _asJava.stop()
+  def stop():Pump = {
+    asJava.asInstanceOf[JPump].stop()
     this
   }
 
-  /**
-    * Return the total number of items pumped by this pump.
-    */
-  def numberPumped(): Int = {
-    _asJava.numberPumped()
+//basic methods
+  def numberPumped():Int = {
+    asJava.asInstanceOf[JPump].numberPumped()
   }
 
 }
 
-object Pump {
-
-  def apply(_asJava: JPump): Pump =
-    new Pump(_asJava)
-
-  def pump[T](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]]))
+object Pump{
+  def apply(asJava: JPump) = new Pump(asJava)
+//static methods
+  def pump[T](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
+    Pump(JPump.pump(rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
   }
 
-  def pump[T](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]], writeQueueMaxSize))
+  def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
+    Pump(JPump.pump(rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize))
   }
 
 }

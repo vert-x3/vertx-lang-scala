@@ -16,20 +16,18 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpClient => JHttpClient}
-import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.http.HttpMethod
-import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+import io.vertx.core.http.{WebSocket => JWebSocket}
+import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
-import io.vertx.core.http.{WebSocket => JWebSocket}
 import io.vertx.core.http.WebsocketVersion
+import io.vertx.core.Handler
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 
 /**
   * An asynchronous HTTP client.
@@ -57,1251 +55,462 @@ import io.vertx.core.http.WebsocketVersion
   * 
   * The client is designed to be reused between requests.
   */
-class HttpClient(private val _asJava: JHttpClient) 
-    extends Measured {
+class HttpClient(private val _asJava: Object) 
+    extends Measured(_asJava) {
 
-  def asJava: JHttpClient = _asJava
 
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the specified host and port.
-    * @param method the HTTP method
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the specified host and default port.
-    * @param method the HTTP method
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param method the HTTP method
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param method the HTTP method
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the default host and port.
-    * @param method the HTTP method
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, requestURI))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param method the HTTP method
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.request(method, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP request to send to the server using an absolute URI
-    * @param method the HTTP method
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.requestAbs(method, absoluteURI))
-  }
-
-  /**
-    * Create an HTTP request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param method the HTTP method
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.requestAbs(method, absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def get(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def get(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def get(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def get(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def get(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(requestURI))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def get(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.get(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def getAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.getAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP GET request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def getAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.getAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Sends an HTTP GET request to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def getNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.getNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+//methods returning a future
+//cached methods
+//fluent methods
+  def getNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP GET request to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def getNow(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.getNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def getNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP GET request  to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def getNow(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.getNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def getNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Create an HTTP POST request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def post(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def post(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def post(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def post(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def post(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(requestURI))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def post(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.post(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def postAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.postAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP POST request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def postAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.postAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def head(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def head(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def head(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def head(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def head(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(requestURI))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def head(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.head(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def headAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.headAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP HEAD request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def headAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.headAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Sends an HTTP HEAD request to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def headNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.headNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def headNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP HEAD request to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def headNow(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.headNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def headNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP HEAD request  to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def headNow(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.headNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def headNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def options(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def options(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def options(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def options(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def options(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(requestURI))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def options(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.options(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def optionsAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.optionsAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP OPTIONS request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def optionsAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.optionsAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Sends an HTTP OPTIONS request to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def optionsNow(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.optionsNow(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def optionsNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP OPTIONS request to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def optionsNow(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.optionsNow(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def optionsNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Sends an HTTP OPTIONS request  to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def optionsNow(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClient = {
-    _asJava.optionsNow(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler))
+  def optionsNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
-  /**
-    * Create an HTTP PUT request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def put(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def put(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def put(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def put(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def put(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(requestURI))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def put(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.put(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def putAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.putAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP PUT request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def putAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.putAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the specified host and port.
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def delete(port: Int, host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(port, host, requestURI))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the specified host and default port.
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def delete(host: String, requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(host, requestURI))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the specified host and port, specifying a response handler to receive
-    * the response
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def delete(port: Int, host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(port, host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the specified host and default port, specifying a response handler to receive
-    * the response
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def delete(host: String, requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(host, requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the default host and port.
-    * @param requestURI the relative URI
-    * @return an HTTP client request object
-    */
-  def delete(requestURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(requestURI))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server at the default host and port, specifying a response handler to receive
-    * the response
-    * @param requestURI the relative URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def delete(requestURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.delete(requestURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server using an absolute URI
-    * @param absoluteURI the absolute URI
-    * @return an HTTP client request object
-    */
-  def deleteAbs(absoluteURI: String): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.deleteAbs(absoluteURI))
-  }
-
-  /**
-    * Create an HTTP DELETE request to send to the server using an absolute URI, specifying a response handler to receive
-    * the response
-    * @param absoluteURI the absolute URI
-    * @param responseHandler the response handler
-    * @return an HTTP client request object
-    */
-  def deleteAbs(absoluteURI: String, responseHandler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest.apply(_asJava.deleteAbs(absoluteURI, funcToMappedHandler(HttpClientResponse.apply)(responseHandler)))
-  }
-
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(port: Int,host: String,requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(port: Int,host: String,requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the host and relative request URI and default port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(host: String,requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the host and relative request URI and default port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(host, requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(host: String,requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, and with the specified headers
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, and with the specified headers
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host,relative request UR, and default port and with the specified headers
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host,relative request UR, and default port and with the specified headers
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers and using
-    * the specified version of WebSockets
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers and using
-    * the specified version of WebSockets
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host, relative request URI and default port with the specified headers and using
-    * the specified version of WebSockets
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host, relative request URI and default port with the specified headers and using
-    * the specified version of WebSockets
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host, relative request URI and default port, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket to the specified host, relative request URI and default port, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port
-    * @param requestURI the relative URI
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(requestURI, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port and the specified headers
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port and the specified headers
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers and the
-    * specified version of WebSockets
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers and the
-    * specified version of WebSockets
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],version,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers, the
-    * specified version of WebSockets and the specified sub protocols
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect))
+  def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
-  /**
-    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers, the
-    * specified version of WebSockets and the specified sub protocols
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols
-    * @param wsConnect handler that will be called with the websocket when connected
-    * @param failureHandler handler that will be called if websocket connection fails
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: io.vertx.core.Handler[WebSocket], failureHandler: io.vertx.core.Handler[Throwable]): HttpClient = {
-    _asJava.websocket(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols, funcToMappedHandler(WebSocket.apply)(wsConnect), funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(failureHandler))
+  def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols,x => wsConnect.handle(x.asJava.asInstanceOf[JWebSocket]),x => failureHandler.handle(x))
     this
   }
 
-  /**
-    * Create a WebSocket stream to the specified port, host and relative request URI
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(port: Int, host: String, requestURI: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI))
+//basic methods
+  override def isMetricsEnabled():Boolean = {
+    asJava.asInstanceOf[JHttpClient].isMetricsEnabled()
   }
 
-  /**
-    * Create a WebSocket stream to the specified host, relative request URI and default port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(host: String, requestURI: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI))
+  def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,port,host,requestURI))
   }
 
-  /**
-    * Create a WebSocket stream to the specified port, host and relative request URI, and with the specified headers
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap]))
+  def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,host,requestURI))
   }
 
-  /**
-    * Create a WebSocket stream to the specified host, relative request URI and default port and with the specified headers
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(host: String, requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap]))
+  def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
   }
 
-  /**
-    * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers and using
-    * the specified version of WebSockets
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
+  def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
   }
 
-  /**
-    * Create a WebSocket stream to the specified host, relative request URI and default port and with the specified headers and using
-    * the specified version of WebSockets
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
+  def request(method: io.vertx.core.http.HttpMethod,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,requestURI))
   }
 
-  /**
-    * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param port the port
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(port, host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
+  def request(method: io.vertx.core.http.HttpMethod,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
   }
 
-  /**
-    * Create a WebSocket stream to the specified host, relative request URI and default port, with the specified headers, using
-    * the specified version of WebSockets, and the specified websocket sub protocols
-    * @param host the host
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(host, requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
+  def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method,absoluteURI))
   }
 
-  /**
-    * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers
-    * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(requestURI: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI))
+  def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method,absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
   }
 
-  /**
-    * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(requestURI: String, headers: MultiMap): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap]))
+  def get(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port,host,requestURI))
   }
 
-  /**
-    * Create a WebSocket stream at the relative request URI using the default host and port, the specified headers and the
-    * specified version of WebSockets
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap], version))
+  def get(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host,requestURI))
   }
 
-  /**
-    * Create a WebSocket stream at the relative request URI using the default host and port, the specified headers, the
-    * specified version of WebSockets and the specified sub protocols
-    * @param requestURI the relative URI
-    * @param headers the headers
-    * @param version the websocket version
-    * @param subProtocols the subprotocols
-    * @return a reference to this, so the API can be used fluently
-    */
-  def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
-    WebSocketStream.apply(_asJava.websocketStream(requestURI, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols))
+  def get(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
   }
 
-  /**
-    * Close the client. Closing will close down any pooled connections.
-    * Clients should always be closed after use.
-    */
-  def close(): Unit = {
-    _asJava.close()
+  def get(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def get(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI))
+  }
+
+  def get(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def getAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI))
+  }
+
+  def getAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def post(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port,host,requestURI))
+  }
+
+  def post(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host,requestURI))
+  }
+
+  def post(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def post(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def post(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI))
+  }
+
+  def post(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def postAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI))
+  }
+
+  def postAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def head(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port,host,requestURI))
+  }
+
+  def head(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host,requestURI))
+  }
+
+  def head(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def head(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def head(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI))
+  }
+
+  def head(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def headAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI))
+  }
+
+  def headAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def options(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port,host,requestURI))
+  }
+
+  def options(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host,requestURI))
+  }
+
+  def options(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def options(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def options(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI))
+  }
+
+  def options(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def optionsAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI))
+  }
+
+  def optionsAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def put(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port,host,requestURI))
+  }
+
+  def put(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host,requestURI))
+  }
+
+  def put(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def put(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def put(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI))
+  }
+
+  def put(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def putAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI))
+  }
+
+  def putAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def delete(port: Int,host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port,host,requestURI))
+  }
+
+  def delete(host: String,requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host,requestURI))
+  }
+
+  def delete(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port,host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def delete(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host,requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def delete(requestURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI))
+  }
+
+  def delete(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def deleteAbs(absoluteURI: String):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI))
+  }
+
+  def deleteAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI,x => responseHandler.handle(x.asJava.asInstanceOf[JHttpClientResponse])))
+  }
+
+  def websocketStream(port: Int,host: String,requestURI: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port,host,requestURI))
+  }
+
+  def websocketStream(host: String,requestURI: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host,requestURI))
+  }
+
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap]))
+  }
+
+  def websocketStream(host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host,requestURI,headers.asJava.asInstanceOf[JMultiMap]))
+  }
+
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version))
+  }
+
+  def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version))
+  }
+
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port,host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols))
+  }
+
+  def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host,requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols))
+  }
+
+  def websocketStream(requestURI: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI))
+  }
+
+  def websocketStream(requestURI: String,headers: MultiMap):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI,headers.asJava.asInstanceOf[JMultiMap]))
+  }
+
+  def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI,headers.asJava.asInstanceOf[JMultiMap],version))
+  }
+
+  def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI,headers.asJava.asInstanceOf[JMultiMap],version,subProtocols))
+  }
+
+  def close():Unit = {
+    asJava.asInstanceOf[JHttpClient].close()
   }
 
 }
 
-object HttpClient {
-
-  def apply(_asJava: JHttpClient): HttpClient =
-    new HttpClient(_asJava)
-
+object HttpClient{
+  def apply(asJava: JHttpClient) = new HttpClient(asJava)
+//static methods
 }

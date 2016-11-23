@@ -16,231 +16,146 @@
 
 package io.vertx.scala.core
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.{CompositeFuture => JCompositeFuture}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
-import java.util.function.{Function => JFunction}
+import io.vertx.core.{CompositeFuture => JCompositeFuture}
+import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
 
 /**
   * The composite future wraps a list of [[io.vertx.scala.core.Future]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: JCompositeFuture) {
+class CompositeFuture(private val _asJava: Object) 
+    extends Future[CompositeFuture](_asJava) {
 
-  def asJava: JCompositeFuture = _asJava
-
-  /**
-    * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
-    * @param result the result
-    */
-  def complete(result: CompositeFuture): Unit = {
-    _asJava.complete(result.asJava.asInstanceOf[JCompositeFuture])
-  }
-
-  /**
-    * The result of the operation. This will be null if the operation failed.
-    * @return the result or null if the operation failed.
-    */
-  def result(): CompositeFuture = {
-    CompositeFuture.apply(_asJava.result())
-  }
-
-  /**
-    * Compose this future with a provided `next` future.
-    *
-    * When this (the one on which `compose` is called) future succeeds, the `handler` will be called with
-    * the completed value, this handler should complete the next future.
-    *
-    * If the `handler` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the `next` future and the `handler`
-    * will not be called.
-    * @param handler the handler
-    * @param next the next future
-    * @return the next future, used for chaining
-    */
-  def compose[U](handler: io.vertx.core.Handler[CompositeFuture], next: Future[U]): Future[U] = {
-    Future.apply[U](_asJava.compose(funcToMappedHandler(CompositeFuture.apply)(handler), next.asJava.asInstanceOf[JFuture[U]]))
-  }
-
-  /**
-    * Compose this future with a `mapper` function.
-    *
-    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
-    * the completed value and this mapper returns another future object. This returned future completion will complete
-    * the future returned by this method call.
-    *
-    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the returned future and the `mapper`
-    * will not be called.
-    * @param mapper the mapper function
-    * @return the composed future
-    */
-  def compose[U](mapper: JCompositeFuture => JFuture[U]): Future[U] = {
-    Future.apply[U](_asJava.compose(asJavaFunction(mapper)))
-  }
-
-  /**
-    * Apply a `mapper` function on this future.
-    *
-    * When this future succeeds, the `mapper` will be called with the completed value and this mapper
-    * returns a value. This value will complete the future returned by this method call.
-    *
-    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the returned future and the `mapper`
-    * will not be called.
-    * @param mapper the mapper function
-    * @return the mapped future
-    */
-  def map[U](mapper: JCompositeFuture => U): Future[U] = {
-    Future.apply[U](_asJava.map(asJavaFunction(mapper)))
-  }
-
-  /**
-    * @return an handler completing this future
-    */
-  def completer(): io.vertx.core.Handler[io.vertx.core.AsyncResult [CompositeFuture]] = {
-    if (cached_0 == null) {
-      cached_0 =    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
+  private var cached_0:Handler[AsyncResult[CompositeFuture]] = _
+  
+//methods returning a future
+//cached methods
+  override def completer():Handler[AsyncResult[CompositeFuture]] = {
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JCompositeFuture].completer()
+      cached_0 = x => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))
     }
-    cached_0
+    return cached_0
   }
 
-  def setFuture(): concurrent.Future[CompositeFuture] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JCompositeFuture,CompositeFuture]((x => if (x == null) null else CompositeFuture.apply(x)))
-    _asJava.setHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
+//fluent methods
+  override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]):CompositeFuture = {
+    asJava.asInstanceOf[JCompositeFuture].setHandler(x => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a))))
+    this
   }
 
-  /**
-    * Returns a cause of a wrapped future
-    * @param index the wrapped future index
-    */
-  def cause(index: Int): Throwable = {
-    _asJava.cause(index)
+//basic methods
+  override def complete(result: CompositeFuture):Unit = {
+    asJava.asInstanceOf[JCompositeFuture].complete(result.asJava.asInstanceOf[JCompositeFuture])
   }
 
-  /**
-    * Returns true if a wrapped future is succeeded
-    * @param index the wrapped future index
-    */
-  def succeeded(index: Int): Boolean = {
-    _asJava.succeeded(index)
+  override def result():CompositeFuture = {
+    CompositeFuture(asJava.asInstanceOf[JCompositeFuture].result())
   }
 
-  /**
-    * Returns true if a wrapped future is failed
-    * @param index the wrapped future index
-    */
-  def failed(index: Int): Boolean = {
-    _asJava.failed(index)
+  def cause(index: Int):Throwable = {
+    asJava.asInstanceOf[JCompositeFuture].cause(index)
   }
 
-  /**
-    * Returns true if a wrapped future is completed
-    * @param index the wrapped future index
-    */
-  def isComplete(index: Int): Boolean = {
-    _asJava.isComplete(index)
+  def succeeded(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].succeeded(index)
   }
 
-  /**
-    * Returns the result of a wrapped future
-    * @param index the wrapped future index
-    */
-  def resultAt[T](index: Int): T = {
-    _asJava.resultAt(index)
+  def failed(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].failed(index)
   }
 
-  /**
-    * @return the number of wrapped future
-    */
-  def size(): Int = {
-    _asJava.size()
+  def isComplete(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].isComplete(index)
   }
 
-  private var cached_0: io.vertx.core.Handler[io.vertx.core.AsyncResult [CompositeFuture]] = _
+  def resultAt[T](index: Int):T = {
+    asJava.asInstanceOf[JCompositeFuture].resultAt(index)
+  }
+
+  def size():Int = {
+    asJava.asInstanceOf[JCompositeFuture].size()
+  }
+
 }
 
-object CompositeFuture {
-
-  def apply(_asJava: JCompositeFuture): CompositeFuture =
-    new CompositeFuture(_asJava)
-
-  def all[T1, T2](f1: Future[T1], f2: Future[T2]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]]))
+object CompositeFuture{
+  def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)
+//static methods
+  def all[T1,T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
   }
 
-  def all[T1, T2, T3](f1: Future[T1], f2: Future[T2], f3: Future[T3]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]]))
+  def all[T1,T2,T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
   }
 
-  def all[T1, T2, T3, T4](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]]))
+  def all[T1,T2,T3,T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
   }
 
-  def all[T1, T2, T3, T4, T5](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]]))
+  def all[T1,T2,T3,T4,T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
   }
 
-  def all[T1, T2, T3, T4, T5, T6](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5], f6: Future[T6]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]], f6.asJava.asInstanceOf[JFuture[T6]]))
+  def all[T1,T2,T3,T4,T5,T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
   }
 
-  def all(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.all(futures.map(x => if (x == null) null else x.asJava).asJava))
+  def all(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
   }
 
-  def any[T1, T2](f1: Future[T1], f2: Future[T2]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]]))
+  def any[T1,T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
   }
 
-  def any[T1, T2, T3](f1: Future[T1], f2: Future[T2], f3: Future[T3]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]]))
+  def any[T1,T2,T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
   }
 
-  def any[T1, T2, T3, T4](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]]))
+  def any[T1,T2,T3,T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
   }
 
-  def any[T1, T2, T3, T4, T5](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]]))
+  def any[T1,T2,T3,T4,T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
   }
 
-  def any[T1, T2, T3, T4, T5, T6](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5], f6: Future[T6]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]], f6.asJava.asInstanceOf[JFuture[T6]]))
+  def any[T1,T2,T3,T4,T5,T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
   }
 
-  def any(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.any(futures.map(x => if (x == null) null else x.asJava).asJava))
+  def any(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
   }
 
-  def join[T1, T2](f1: Future[T1], f2: Future[T2]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]]))
+  def join[T1,T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
   }
 
-  def join[T1, T2, T3](f1: Future[T1], f2: Future[T2], f3: Future[T3]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]]))
+  def join[T1,T2,T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
   }
 
-  def join[T1, T2, T3, T4](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]]))
+  def join[T1,T2,T3,T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
   }
 
-  def join[T1, T2, T3, T4, T5](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]]))
+  def join[T1,T2,T3,T4,T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
   }
 
-  def join[T1, T2, T3, T4, T5, T6](f1: Future[T1], f2: Future[T2], f3: Future[T3], f4: Future[T4], f5: Future[T5], f6: Future[T6]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]], f2.asJava.asInstanceOf[JFuture[T2]], f3.asJava.asInstanceOf[JFuture[T3]], f4.asJava.asInstanceOf[JFuture[T4]], f5.asJava.asInstanceOf[JFuture[T5]], f6.asJava.asInstanceOf[JFuture[T6]]))
+  def join[T1,T2,T3,T4,T5,T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
   }
 
-  def join(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture.apply(io.vertx.core.CompositeFuture.join(futures.map(x => if (x == null) null else x.asJava).asJava))
+  def join(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+    CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
   }
 
 }

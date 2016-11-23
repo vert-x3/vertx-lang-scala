@@ -16,46 +16,35 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 
 /**
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T](private val _asJava: JSendContext[T]) {
+class SendContext[T](private val _asJava: Object) {
 
-  def asJava: JSendContext[T] = _asJava
+  def asJava = _asJava
 
-  /**
-    * @return The message being sent
-    */
-  def message(): Message[T] = {
-    Message.apply[T](_asJava.message())
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+  def message():Message[T] = {
+    Message<T>(asJava.asInstanceOf[JSendContext].message())
   }
 
-  /**
-    * Call the next interceptor
-    */
-  def next(): Unit = {
-    _asJava.next()
+  def next():Unit = {
+    asJava.asInstanceOf[JSendContext].next()
   }
 
-  /**
-    * @return true if the message is being sent (point to point) or False if the message is being published
-    */
-  def send(): Boolean = {
-    _asJava.send()
+  def send():Boolean = {
+    asJava.asInstanceOf[JSendContext].send()
   }
 
 }
 
-object SendContext {
-
-  def apply[T](_asJava: JSendContext[T]): SendContext[T] =
-    new SendContext(_asJava)
-
+object SendContext{
+  def apply(asJava: JSendContext) = new SendContext(asJava)
+//static methods
 }

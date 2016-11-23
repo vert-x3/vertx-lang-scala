@@ -16,10 +16,6 @@
 
 package io.vertx.scala.core.shareddata
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
@@ -30,113 +26,61 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
   */
-class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
+class LocalMap[K,V](private val _asJava: Object) {
 
-  def asJava: JLocalMap[K, V] = _asJava
+  def asJava = _asJava
 
-  /**
-    * Get a value from the map
-    * @param key the key
-    * @return the value, or null if none
-    */
-  def get(key: K): V = {
-    _asJava.get(key)
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+  def get(key: K):V = {
+    asJava.asInstanceOf[JLocalMap].get(key)
   }
 
-  /**
-    * Put an entry in the map
-    * @param key the key
-    * @param value the value
-    * @return return the old value, or null if none
-    */
-  def put(key: K, value: V): V = {
-    _asJava.put(key, value)
+  def put(key: K,value: V):V = {
+    asJava.asInstanceOf[JLocalMap].put(key,value)
   }
 
-  /**
-    * Remove an entry from the map
-    * @param key the key
-    * @return the old value
-    */
-  def remove(key: K): V = {
-    _asJava.remove(key)
+  def remove(key: K):V = {
+    asJava.asInstanceOf[JLocalMap].remove(key)
   }
 
-  /**
-    * Clear all entries in the map
-    */
-  def clear(): Unit = {
-    _asJava.clear()
+  def clear():Unit = {
+    asJava.asInstanceOf[JLocalMap].clear()
   }
 
-  /**
-    * Get the size of the map
-    * @return the number of entries in the map
-    */
-  def size(): Int = {
-    _asJava.size()
+  def size():Int = {
+    asJava.asInstanceOf[JLocalMap].size()
   }
 
-  /**
-    * @return true if there are zero entries in the map
-    */
-  def isEmpty(): Boolean = {
-    _asJava.isEmpty()
+  def isEmpty():Boolean = {
+    asJava.asInstanceOf[JLocalMap].isEmpty()
   }
 
-  /**
-    * Put the entry only if there is no existing entry for that key
-    * @param key the key
-    * @param value the value
-    * @return the old value or null, if none
-    */
-  def putIfAbsent(key: K, value: V): V = {
-    _asJava.putIfAbsent(key, value)
+  def putIfAbsent(key: K,value: V):V = {
+    asJava.asInstanceOf[JLocalMap].putIfAbsent(key,value)
   }
 
-  /**
-    * Remove the entry only if there is an entry with the specified key and value
-    * @param key the key
-    * @param value the value
-    * @return true if removed
-    */
-  def removeIfPresent(key: K, value: V): Boolean = {
-    _asJava.removeIfPresent(key, value)
+  def removeIfPresent(key: K,value: V):Boolean = {
+    asJava.asInstanceOf[JLocalMap].removeIfPresent(key,value)
   }
 
-  /**
-    * Replace the entry only if there is an existing entry with the specified key and value
-    * @param key the key
-    * @param oldValue the old value
-    * @param newValue the new value
-    * @return true if removed
-    */
-  def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    _asJava.replaceIfPresent(key, oldValue, newValue)
+  def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
+    asJava.asInstanceOf[JLocalMap].replaceIfPresent(key,oldValue,newValue)
   }
 
-  /**
-    * Replace the entry only if there is an existing entry with the key
-    * @param key the key
-    * @param value the new value
-    * @return the old value
-    */
-  def replace(key: K, value: V): V = {
-    _asJava.replace(key, value)
+  def replace(key: K,value: V):V = {
+    asJava.asInstanceOf[JLocalMap].replace(key,value)
   }
 
-  /**
-    * Close and release the map
-    */
-  def close(): Unit = {
-    _asJava.close()
+  def close():Unit = {
+    asJava.asInstanceOf[JLocalMap].close()
   }
 
 }
 
-object LocalMap {
-
-  def apply[K, V](_asJava: JLocalMap[K, V]): LocalMap[K, V] =
-    new LocalMap(_asJava)
-
+object LocalMap{
+  def apply(asJava: JLocalMap) = new LocalMap(asJava)
+//static methods
 }

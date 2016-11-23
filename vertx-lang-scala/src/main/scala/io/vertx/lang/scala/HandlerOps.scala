@@ -67,7 +67,7 @@ object HandlerOps {
     * one the function understands.
     *
     * @param mapper a function to map the Handlers event-type to that of the given Scala-function
-    * @param f      the Scala-Function to be used by the Handler
+    * @param f the Scala-Function to be used by the Handler
     * @tparam J type the Handler consumes
     * @tparam S type the Function consumes
     * @return the resulting Handler
@@ -139,10 +139,14 @@ object HandlerOps {
   }
 
   /**
+    * Create a handler and its associated Promise to wrap [io.vertx.core.Handler] for [io.vertx.core.AsyncResult] in
+    * a [scala.concurrent.Promise]
     *
+    * {{{
     * val promiseAndHandler = handlerForAsyncResult[Void]
     * _asJava.close(promiseAndHandler._1)
     * promiseAndHandler._2.future
+    * }}}
     *
     * @tparam T
     * @return
@@ -159,16 +163,15 @@ object HandlerOps {
   }
 
   /**
+    * Safely convert from Java type to Scala type.
     *
-    *
-    * @param conversion convert from Java type to Scala type
-    * @tparam J incoming Java type
+    * @param conversion function to convert from Java to Scala
     * @tparam S outgoing Scala type
     * @return
     */
-  def handlerForAsyncResultWithConversion[J, S](conversion: J => S): (Handler[core.AsyncResult[J]], Promise[S]) = {
+  def handlerForAsyncResultWithConversion[S](conversion: Object => S): (Handler[core.AsyncResult[Object]], Promise[S]) = {
     val promise = Promise[S]()
-    val handler: Handler[core.AsyncResult[J]] = (event: core.AsyncResult[J]) => {
+    val handler: Handler[core.AsyncResult[Object]] = (event: core.AsyncResult[Object]) => {
       if (event.failed())
         promise.failure(event.cause())
       else {

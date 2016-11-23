@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 
 /**
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
@@ -35,107 +35,82 @@ import io.vertx.core.eventbus.{Message => JMessage}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T](private val _asJava: JMessageConsumer[T]) 
-    extends ReadStream[Message[T]] {
+class MessageConsumer[T](private val _asJava: Object) 
+    extends ReadStream[Message[T]](_asJava) {
 
-  def asJava: JMessageConsumer[T] = _asJava
 
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageConsumer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+//methods returning a future
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+  }
+
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+  }
+
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer].exceptionHandler(x => handler.handle(x))
     this
   }
 
-  def handler(handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
+  override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage[T]]))
     this
   }
 
-  def pause(): MessageConsumer[T] = {
-    _asJava.pause()
+  override def pause():MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer].pause()
     this
   }
 
-  def resume(): MessageConsumer[T] = {
-    _asJava.resume()
+  override def resume():MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer].resume()
     this
   }
 
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+  override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer].endHandler(x => endHandler.handle(x))
     this
   }
 
-  /**
-    * @return a read stream for the body of the message stream.
-    */
-  def bodyStream(): ReadStream[T] = {
-    ReadStream.apply[T](_asJava.bodyStream())
+//basic methods
+  def bodyStream():ReadStream[T] = {
+    ReadStream<T>(asJava.asInstanceOf[JMessageConsumer].bodyStream())
   }
 
-  /**
-    * @return true if the current consumer is registered
-    */
-  def isRegistered(): Boolean = {
-    _asJava.isRegistered()
+  def isRegistered():Boolean = {
+    asJava.asInstanceOf[JMessageConsumer].isRegistered()
   }
 
-  /**
-    * @return The address the handler was registered with.
-    */
-  def address(): String = {
-    _asJava.address()
+  def address():String = {
+    asJava.asInstanceOf[JMessageConsumer].address()
   }
 
-  /**
-    * Set the number of messages this registration will buffer when this stream is paused. The default
-    * value is <code>0</code>. When a new value is set, buffered messages may be discarded to reach
-    * the new value.
-    * @param maxBufferedMessages the maximum number of messages that can be buffered
-    * @return this registration
-    */
-  def setMaxBufferedMessages(maxBufferedMessages: Int): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.setMaxBufferedMessages(maxBufferedMessages))
+  def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].setMaxBufferedMessages(maxBufferedMessages))
   }
 
-  /**
-    * @return the maximum number of messages that can be buffered when this stream is paused
-    */
-  def getMaxBufferedMessages(): Int = {
-    _asJava.getMaxBufferedMessages()
+  def getMaxBufferedMessages():Int = {
+    asJava.asInstanceOf[JMessageConsumer].getMaxBufferedMessages()
   }
 
-  /**
-    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-    * @return the completion future
-    */
-  def completionFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.completionHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
-  /**
-    * Unregisters the handler which created this registration
-    */
-  def unregister(): Unit = {
-    _asJava.unregister()
+  def unregister():Unit = {
+    asJava.asInstanceOf[JMessageConsumer].unregister()
   }
 
-  /**
-    * Unregisters the handler which created this registration
-    * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
-    */
-  def unregisterFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.unregister(promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 }
 
-object MessageConsumer {
-
-  def apply[T](_asJava: JMessageConsumer[T]): MessageConsumer[T] =
-    new MessageConsumer(_asJava)
-
+object MessageConsumer{
+  def apply(asJava: JMessageConsumer) = new MessageConsumer(asJava)
+//static methods
 }

@@ -21,7 +21,7 @@ package io.vertx.lang.scala
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
   */
-class AsyncResult[J,S](val _java: io.vertx.core.AsyncResult[J], val converter: J => S) extends io.vertx.core.AsyncResult[S]{
+class AsyncResultWrapper[J,S](val _java: io.vertx.core.AsyncResult[J], val converter: J => S) extends io.vertx.core.AsyncResult[S]{
 
   lazy val result:S = converter(_java.result())
 
@@ -32,7 +32,7 @@ class AsyncResult[J,S](val _java: io.vertx.core.AsyncResult[J], val converter: J
   override def failed(): Boolean = _java.failed()
 }
 
-object AsyncResult {
+object AsyncResultWrapper {
   def apply[J,S](asyncResult: io.vertx.core.AsyncResult[J], converter: J => S): io.vertx.core.AsyncResult[S] =
-    new AsyncResult(asyncResult, converter)
+    new AsyncResultWrapper(asyncResult, converter)
 }

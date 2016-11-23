@@ -14,13 +14,13 @@
 @else{}
   def @{property.adderMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.adderMethod}(value.asJava)\n
+    asJava.@{property.adderMethod}(value.asInstanceOf)\n
 @else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
  property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
  property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
     asJava.@{property.adderMethod}(value)\n
 @else{}
-    asJava.@{property.adderMethod}(value.asJava)\n
+    asJava.@{property.adderMethod}(value.asInstanceOf)\n
 @end{}
     this\n
   }\n
@@ -32,9 +32,9 @@
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
-    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
+    asJava.@{property.setterMethod}(value.map(_@{generateAsJavaForType(property.type)}).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
 @end{}
     this\n
   }\n
@@ -43,9 +43,9 @@
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
-    asJava.@{property.setterMethod}(value.map(_.asJava).asJava)\n
+    asJava.@{property.setterMethod}(value.map(_@{generateAsJavaForType(property.type)}).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
 @end{}
     this\n
   }\n
@@ -54,22 +54,22 @@
 @if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
     asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box).asJava)\n
 @else{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.mapValues(_.asJava).asJava)\n
+    asJava.@{property.setterMethod}(value.mapValues(_@{generateAsJavaForType(property.type)}).asJava)\n
 @else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
 @end{}
     this\n
   }\n
 @else{}
   def @{property.setterMethod}(value: @{toScalaType(property.type)}) = {\n
 @if{property.type.kind == CLASS_DATA_OBJECT}
-    asJava.@{property.setterMethod}(value.asJava)\n
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
 @else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
   property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
   property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
     asJava.@{property.setterMethod}(value)\n
 @else{}
-    asJava.@{property.setterMethod}(value.asJava)\n
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
 @end{}
     this\n
   }\n

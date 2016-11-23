@@ -16,72 +16,49 @@
 
 package io.vertx.scala.core.dns
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: JSrvRecord) {
+class SrvRecord(private val _asJava: Object) {
 
-  def asJava: JSrvRecord = _asJava
+  def asJava = _asJava
 
-  /**
-    * Returns the priority for this service record.
-    */
-  def priority(): Int = {
-    _asJava.priority()
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+  def priority():Int = {
+    asJava.asInstanceOf[JSrvRecord].priority()
   }
 
-  /**
-    * Returns the weight of this service record.
-    */
-  def weight(): Int = {
-    _asJava.weight()
+  def weight():Int = {
+    asJava.asInstanceOf[JSrvRecord].weight()
   }
 
-  /**
-    * Returns the port the service is running on.
-    */
-  def port(): Int = {
-    _asJava.port()
+  def port():Int = {
+    asJava.asInstanceOf[JSrvRecord].port()
   }
 
-  /**
-    * Returns the name for the server being queried.
-    */
-  def name(): String = {
-    _asJava.name()
+  def name():String = {
+    asJava.asInstanceOf[JSrvRecord].name()
   }
 
-  /**
-    * Returns the protocol for the service being queried (i.e. "_tcp").
-    */
-  def protocol(): String = {
-    _asJava.protocol()
+  def protocol():String = {
+    asJava.asInstanceOf[JSrvRecord].protocol()
   }
 
-  /**
-    * Returns the service's name (i.e. "_http").
-    */
-  def service(): String = {
-    _asJava.service()
+  def service():String = {
+    asJava.asInstanceOf[JSrvRecord].service()
   }
 
-  /**
-    * Returns the name of the host for the service.
-    */
-  def target(): scala.Option[String] = {
-    scala.Option(_asJava.target())
+  def target():String = {
+    asJava.asInstanceOf[JSrvRecord].target()
   }
 
 }
 
-object SrvRecord {
-
-  def apply(_asJava: JSrvRecord): SrvRecord =
-    new SrvRecord(_asJava)
-
+object SrvRecord{
+  def apply(asJava: JSrvRecord) = new SrvRecord(asJava)
+//static methods
 }
