@@ -16,42 +16,17 @@
 
 package io.vertx.scala.core.metrics
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.metrics.{Measured => JMeasured}
 
 /**
   */
 trait Measured {
 
-  def asJava: java.lang.Object
-
-  /**
-  * Whether the metrics are enabled for this measured object
-  * @return true if the metrics are enabled
-  */
-def isMetricsEnabled(): Boolean
-
-}
-
-object Measured {
-
-  def apply(_asJava: JMeasured): Measured =
-    new MeasuredImpl(_asJava)
-
-  private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
-
-    def asJava: JMeasured = _asJava
-
-    /**
-      * Whether the metrics are enabled for this measured object
-      * @return true if the metrics are enabled
-      */
-    def isMetricsEnabled(): Boolean = {
-        _asJava.isMetricsEnabled()
-    }
-
-  }
-
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+def isMetricsEnabled()
+//in object!
+//static methods
+//default methods
 }

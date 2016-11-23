@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * Represents a message that is received from the event bus in a handler.
@@ -34,108 +34,70 @@ import io.vertx.scala.core.MultiMap
   * 
   * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
-class Message[T](private val _asJava: JMessage[T]) {
+class Message[T](private val _asJava: Object) {
 
-  def asJava: JMessage[T] = _asJava
-
-  /**
-    * The address the message was sent to
-    */
-  def address(): String = {
-    _asJava.address()
+  def asJava = _asJava
+  private var cached_0:T = _
+  
+//methods returning a future
+  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
-  /**
-    * Multi-map of message headers. Can be empty
-    * @return the headers
-    */
-  def headers(): MultiMap = {
-    MultiMap.apply(_asJava.headers())
+  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
-  /**
-    * The body of the message. Can be null.
-    * @return the body, or null.
-    */
-  def body(): T = {
-    if (cached_0 == null) {
-      cached_0 =    _asJava.body()
+//cached methods
+  def body():T = {
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JMessage].body()
+      cached_0 = tmp
     }
-    cached_0
+    return cached_0
   }
 
-  /**
-    * The reply address. Can be null.
-    * @return the reply address, or null, if message was sent without a reply handler.
-    */
-  def replyAddress(): scala.Option[String] = {
-    scala.Option(_asJava.replyAddress())
+//fluent methods
+//basic methods
+  def address():String = {
+    asJava.asInstanceOf[JMessage].address()
   }
 
-  /**
-    * Reply to this message.
-    * 
-    * If the message was sent specifying a reply handler, that handler will be
-    * called when it has received a reply. If the message wasn't sent specifying a receipt handler
-    * this method does nothing.
-    * @param message the message to reply with.
-    */
-  def reply(message: AnyRef): Unit = {
-    _asJava.reply(message)
+  def headers():MultiMap = {
+    MultiMap(asJava.asInstanceOf[JMessage].headers())
   }
 
-  /**
-    * The same as `reply(R message)` but you can specify handler for the reply - i.e.
-    * to receive the reply to the reply.
-    * @param message the message to reply with.
-    * @return the reply future for the reply.
-    */
-  def replyFuture[R](message: AnyRef): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    _asJava.reply(message, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def replyAddress():String = {
+    asJava.asInstanceOf[JMessage].replyAddress()
   }
 
-  /**
-    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
-    * @param message the reply message
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    */
-  def reply(message: AnyRef, options: DeliveryOptions): Unit = {
-    _asJava.reply(message, options.asJava)
+  def isSend():Boolean = {
+    asJava.asInstanceOf[JMessage].isSend()
   }
 
-  /**
-    * The same as `reply(R message, DeliveryOptions)` but you can specify handler for the reply - i.e.
-    * to receive the reply to the reply.
-    * @param message the reply message
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return the reply future for the reply.
-    */
-  def replyFuture[R](message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    _asJava.reply(message, options.asJava, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def reply(message: AnyRef):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message)
   }
 
-  /**
-    * Signal to the sender that processing of this message failed.
-    * 
-    * If the message was sent specifying a result handler
-    * the handler will be called with a failure corresponding to the failure code and message specified here.
-    * @param failureCode A failure code to pass back to the sender
-    * @param message A message to pass back to the sender
-    */
-  def fail(failureCode: Int, message: String): Unit = {
-    _asJava.fail(failureCode, message)
+  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
-  private var cached_0: T = _
+  def reply(message: AnyRef,options: DeliveryOptions):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions])
+  }
+
+  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
+  }
+
+  def fail(failureCode: Int,message: String):Unit = {
+    asJava.asInstanceOf[JMessage].fail(failureCode,message)
+  }
+
 }
 
-object Message {
-
-  def apply[T](_asJava: JMessage[T]): Message[T] =
-    new Message(_asJava)
-
+object Message{
+  def apply(asJava: JMessage) = new Message(asJava)
+//static methods
 }

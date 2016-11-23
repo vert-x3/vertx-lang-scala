@@ -1,17 +1,13 @@
 @code{
 
-  def toAliasedTypeName(type) {
-    return 'J'+type.simpleName;
-  }
-
   def toScalaType(type) {
     var nullable = type.isNullable;
     var ret = '';
-    if (type.name == 'void' || type.name == 'java.lang.Void') {
+    if (type.kind == CLASS_VOID) {
       ret = 'Unit';
     } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
       ret = 'AnyRef';
-    } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
+    } else if (type.kind == CLASS_THROWABLE) {
       ret = 'Throwable';
     } else if (type.kind == CLASS_STRING) {
       ret = 'String';
@@ -80,7 +76,7 @@
       if (type.args.isEmpty)
         ret = 'io.vertx.core.AsyncResult';
       else
-        ret = 'io.vertx.core.AsyncResult [' + toScalaType(type.args[0]) + ']';
+        ret = 'io.vertx.core.AsyncResult[' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_API) {
       var retVal = helper.getNonGenericType(type.simpleName);
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
@@ -104,30 +100,10 @@
     return ret;
   }
 
-  def isKeyword(possibleKeyword) {
-    if (possibleKeyword.equals("type")) {
-      return true;
-    }
-    if (possibleKeyword.equals("object")) {
-      return true;
-    }
-    return false;
-  }
-
-  def escapeIfKeyword(possibleKeyword) {
-    if (isKeyword(possibleKeyword)) {
-      return '`' + possibleKeyword + '`';
-    }
-    return possibleKeyword;
-  }
-
-
-
-
   def handleOption(param) {
     if (param.type.isNullable) {
       if (param.type.kind == CLASS_API || param.type.kind == CLASS_DATA_OBJECT) {
-        return '(if ('+param.name+'.isDefined) '+param.name+'.get.asJava else null)'
+        return '(if ('+param.name+'.isDefined) '+param.name+'.get' + generateAsJavaForType(param.type) + ' else null)'
       }
       else if (param.type.kind == CLASS_HANDLER) {
         return param.name;
@@ -144,13 +120,13 @@
         if(!className.startsWith("io.vertx.codegen.testmodel"))
           isInterface =  Thread.currentThread().getContextClassLoader().loadClass(className.replaceAll("\\<.*?>","")).isInterface();
         if(isInterface) {
-          return param.name + '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type) +']';
+          return param.name + generateAsJavaForType(param.type);
         } else {
-          return param.name + '.asJava';
+          return param.name + generateAsJavaForType(param.type);
         }
       }
       else if (param.type.kind == CLASS_DATA_OBJECT) {
-        return param.name + '.asJava';
+        return param.name + generateAsJavaForType(param.type);
       }
       else {
         return param.name;
@@ -188,21 +164,10 @@
   def changeJavaGenericNotationToScalaNotation(type) {
     var ret = "";
     if(!type.name.startsWith("java"))
-      ret = type.simpleName.replace('<', '[').replace('>', ']');
+      ret = type.name.replace('<', '[').replace('>', ']');
     else
       ret = type.name.replace('<', '[').replace('>', ']');
-    if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray") && !(type.kind==CLASS_ENUM))
-      ret = 'J' + ret;
     return ret;
-  }
-
-  def getGenericType(name) {
-    var start = name.indexOf("<");
-    if (start >= 0) {
-       var end = name.indexOf(">");
-       return '[' + name.substring(start + 1, end) + ']';
-    }
-    return '';
   }
 
   def toScalaApply(type) {
@@ -214,7 +179,7 @@
         if(!first) {
           ret += ',';
         }
-        ret += arg;
+        ret += toScalaType(arg);
         if(first) {
           first = false;
         }
@@ -224,19 +189,11 @@
     return ret;
   }
 
-  def toScalaApplyWithParam(type, param) {
-    helper.getNonGenericType(type.getSimpleName()) + '.apply' + getGenericType(type.getSimpleName()) + '(' + param + ')';
-  }
-
-  def isAsyncResult(param) {
-    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
-  }
-
   def importJavaConversions(method) {
     for (param : method.params) {
       if ((param.type.kind == CLASS_HANDLER &&
            param.type.args[0].kind.collection) ||
-          (isAsyncResult(param) &&
+          (isAsyncResultHandler(param) &&
            param.type.args[0].args[0].kind.collection) ||
           param.type.kind.collection) {
         return true;
@@ -284,15 +241,6 @@
     paramList;
   }
 
-  def multiMethodParams(method) {
-    params = methodParams(method);
-    if (params.isEmpty()) {
-      params = '()';
-    } else {
-      params = '(' + params + ')';
-    }
-  }
-
   def isLastParamAHandlerWithAsyncResult(method) {
     var size = method.params.size;
     return method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
@@ -309,14 +257,9 @@
 
   def createGenericFromTypeWithParamName(type, paramName) {
     var invocation = '';
-    if (type.kind == CLASS_API ||
-        type.kind == CLASS_DATA_OBJECT ||
-        type.kind == CLASS_ENUM) {
-      invocation += toScalaApplyWithParam(type, paramName);
-    } else if (type.kind == CLASS_PRIMITIVE ||
-               type.kind == CLASS_BOXED_PRIMITIVE ||
-               type.name == 'Throwable' ||
-               type.name == 'java.lang.Throwable') {
+    if (type.kind == CLASS_PRIMITIVE ||
+       type.kind == CLASS_BOXED_PRIMITIVE ||
+       type.kind == CLASS_THROWABLE) {
       invocation += paramName + ':' + toOptionIfNullable(toScalaType(type), type);
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
@@ -328,7 +271,7 @@
 
 
   def convertCollectionFromScalaToJava(type) {
-    conversion = 'x.asScala';
+    conversion = 'x.asInstanceOf['+assembleTypeString()+'].asScala';
     if (type.kind == CLASS_MAP) {
       conversion += '.map((a) => (' + createGenericFromTypeWithParamName(type.args[0], 'a._1') + ',' + createGenericFromTypeWithParamName(type.args[1], 'a._2') + '))';
     }
@@ -340,8 +283,7 @@
         conversion += '.map(x => ' + listType.getSimpleName() + '(x))';
       } else if (listType.kind == CLASS_PRIMITIVE ||
                  listType.kind == CLASS_BOXED_PRIMITIVE ||
-                 listType.name == 'Throwable' ||
-                 listType.name == 'java.lang.Throwable') {
+                 listType.kind == CLASS_THROWABLE) {
         conversion += '.map(x => x:' + toOptionIfNullable(toScalaType(listType),listType) + ')';
       } else if (listType.kind == CLASS_STRING ||
                  listType.kind == CLASS_JSON_OBJECT ||
@@ -360,31 +302,6 @@
     return conversion;
   }
 
-  def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
-    return typeParam.kind == CLASS_PRIMITIVE ||
-           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable';
-  }
-
-  def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
-    var len = typeParam.name.length();
-    return typeParam.kind == CLASS_PRIMITIVE ||
-           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable' ||
-           typeParam.kind == CLASS_VOID ||
-           (typeParam.kind == CLASS_OBJECT && len > 1) ||
-           typeParam.kind == CLASS_STRING ||
-           typeParam.kind == CLASS_JSON_OBJECT ||
-           typeParam.kind == CLASS_JSON_ARRAY ||
-           typeParam.kind == CLASS_ENUM ||
-           typeParam.kind == CLASS_DATA_OBJECT ||
-           typeParam.kind == CLASS_API ||
-           typeParam.kind == CLASS_LIST ||
-           typeParam.kind == CLASS_SET ||
-           typeParam.kind == CLASS_MAP;
-  }
 
 
   def methodInvocationHandlerAsyncResult(type, method) {
@@ -407,21 +324,19 @@
     var invocation = '';
     if (type.kind == CLASS_PRIMITIVE ||
         type.kind == CLASS_BOXED_PRIMITIVE ||
-        type.name == 'Throwable' ||
-        type.name == 'java.lang.Throwable') {
-      invocation += '(x => x)';
+        type.kind == CLASS_THROWABLE ||
+        type.kind == CLASS_OBJECT ||
+        type.kind == CLASS_STRING ||
+        type.kind == CLASS_JSON_OBJECT ||
+        type.kind == CLASS_JSON_ARRAY ||
+        type.kind == CLASS_ENUM) {
+      invocation += '(x => x.asInstanceOf)';
     } else if (type.kind == CLASS_VOID) {
-      invocation += '(x => ())';
-    } else if (type.kind == CLASS_OBJECT ||
-               type.kind == CLASS_STRING ||
-               type.kind == CLASS_JSON_OBJECT ||
-               type.kind == CLASS_JSON_ARRAY ||
-               type.kind == CLASS_ENUM) {
-      invocation += '(x => x)';
+      invocation += '(_ => ())';
     } else if (type.kind == CLASS_DATA_OBJECT) {
-      invocation += '(x => ' + type.translateName('scala') + '(x))';
+      invocation += '(x => ' + type.translateName('scala') + '(x.asInstanceOf))';
     } else if (type.kind == CLASS_API) {
-      invocation += '(x => if (x == null) null else ' + toScalaApply(type) + '(x))';
+      invocation += '(x => if (x == null) null else ' + toScalaApply(type) + '(x.asInstanceOf))';
     } else if (type.kind == CLASS_LIST ||
                type.kind == CLASS_SET ||
                type.kind == CLASS_MAP) {
@@ -442,7 +357,7 @@
     var invocation = '';
 
     if (type.kind == CLASS_API) {
-      invocation += mappedFunc + '(' + toScalaApply(type) + ')('+ handleOption(param);
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](' + toScalaApply(type) + ')('+ handleOption(param);
     } else if (type.kind == CLASS_DATA_OBJECT) {
       invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toScalaType(type) + '](a => '+type.getSimpleName()+'(a))('+ handleOption(param);
     } else if (type.kind == CLASS_LIST ||
@@ -453,14 +368,13 @@
       invocation += methodInvocationHandlerAsyncResult(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE ||
                type.kind == CLASS_BOXED_PRIMITIVE ||
-               type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x)('+handleOption(param);
-    } else if (type.kind == CLASS_STRING ||
+               type.kind == CLASS_THROWABLE ||
+               type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
-      invocation += '(' + handleOption(param);
-    } else if (type.name == 'void' || type.name == 'java.lang.Void') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x.asInstanceOf[Unit])(';
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x)('+handleOption(param);
+    } else if (type.kind == CLASS_VOID) {
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](_ => ())(';
       if (convertUnit) {
         invocation += '_ => ';
       }
@@ -493,27 +407,74 @@
       } else {
         invocation += ', ';
       }
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation += "toJava["+param.type.name+"](";
+      }
       if (isKeyword(param.name)) {
         invocation += escapeIfKeyword(param.name);
       } else {
         invocation += handleParamConversion(param);
+      }
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation += ")";
+      }
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation +=
+      }
+      else{param.type.isParameterized) {
+        invocation += ".asInstanceOf["+assembleTypeString(param.type)+"]";
       }
     }
     if (isFuture) {
       if (!first) {
         invocation += ', ';
       }
-      invocation += 'promiseAndHandler._1';
+      /*TODO: Here we go!! */
+      invocation += 'promiseAndHandler._1.asInstanceOf['+assembleTypeString(method.params[method.params.size-1].type)+']';
     }
     return invocation;
+  }
+
+  def assembleTypeString(type) {
+    var ret = '';
+    if(type.isParameterized()) {
+      ret += type.name.substring(0, type.name.indexOf('<'));
+    }
+    else if (type.kind == CLASS_OBJECT){
+      ret += 'Object';
+    }
+    else {
+      ret += type.name;
+      if((type.isParameterized() || type.kind == CLASS_API) && type.params.size > 0) {
+        ret += '[_]';
+      }
+    }
+    var first = true;
+    if(type.isParameterized()){
+      ret += '[';
+      for(arg:type.args) {
+        if (!first) {
+          ret += ',';
+        }
+        first = false;
+        if(arg.kind == CLASS_OBJECT) {
+          ret += 'Object';
+        }
+        else {
+          ret += assembleTypeString(arg);
+        }
+      }
+      ret += ']';
+    }
+    return ret;
   }
 
 
   def handleParamConversionListSet(param) {
     if (param.type.args[0].kind == CLASS_API) {
-      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava).asJava');
+      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+']).asJava');
     } else if (param.type.args[0].kind == CLASS_DATA_OBJECT){
-      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava).asJava');
+      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+']).asJava');
     } else {
       return handleOptionForCollection(param, '.map(x => x:' + param.type.args[0].name + ').asJava');
     }
@@ -522,11 +483,11 @@
   def handleParamConversionMap(param) {
     if (param.type.args[0].kind == CLASS_API &&
       param.type.args[1].kind == CLASS_API) {
-      return handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '])).asJava');
+      return handleOptionForCollection(param, '.map(kv => (kv._1' + generateAsJavaForType(param.type.args[0]) + ', kv._2' + generateAsJavaForType(param.type.args[1]) + ')).asJava');
     } else if (param.type.args[0].kind == CLASS_API) {
-      return handleOptionForCollection(param, '.map(kv => (kv._1.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[0]) + '], kv._2:' + param.type.args[1].name + ')).asJava');
+      return handleOptionForCollection(param, '.map(kv => (kv._1' + generateAsJavaForType(param.type.args[0]) + ', kv._2:' + param.type.args[1].name + ')).asJava');
     } else if (param.type.args[1].kind == CLASS_API) {
-      return handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', if (kv._2 != null) kv._2.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(param.type.args[1]) + '] else null)).asJava');
+      return handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', if (kv._2 != null) kv._2' + generateAsJavaForType(param.type.args[1]) + ' else null)).asJava');
     } else {
       return handleOptionForCollection(param, '.map(kv => (kv._1:' + param.type.args[0].name + ', kv._2:' + param.type.args[1].name + ')).asJava');
     }
@@ -545,64 +506,68 @@
       invocation += ')';
     } else if (param.type.kind == CLASS_FUNCTION) {
       invocation += 'asJavaFunction(' + param.name + ')'
+    } else if (param.type.kind == CLASS_OBJECT) {
+      invocation += param.name
     } else {
       invocation += handleOption(param);
     }
     return invocation;
   }
 
-  def convertMethodReturnToScalaList(method) {
-    if (method.returnType.args[0].kind == CLASS_API) {
-      return '.asScala.map(' + toScalaApply(method.returnType.args[0]) + ')';
-    } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x))';
+  def conversionToScalaList(type) {
+    if (type.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(type.args[0]) + ')';
+    } else if (type.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ type.args[0].simpleName +'(x))';
     } else {
-      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ')';
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(type.args[0]),type.args[0]) + ')';
     }
   }
 
-  def convertMethodReturnToScalaSet(method) {
-    if (method.returnType.args[0].kind == CLASS_API) {
-      return '.asScala.map(' + toScalaApply(method.returnType.args[0]) + ').toSet';
-    } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x)).toSet';
+  def conversionToScalaSet(type) {
+    if (type.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(type.args[0]) + ').toSet';
+    } else if (type.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ type.args[0].simpleName +'(x)).toSet';
     } else {
-      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(type.args[0]),type.args[0]) + ').toSet';
     }
   }
 
-  def convertMethodReturnToScalaMap(method) {
-    if (method.returnType.args[1].kind == CLASS_API) {
-      return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1]) + ')).toMap';
-    } else if (method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(kv => (kv._1, '+ method.returnType.args[1].simpleName +'(kv._2))).toMap';
-    } else if (method.returnType.args[1].kind == CLASS_STRING ||
-               method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
-               method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
+  def conversionToScalaMap(type) {
+    if (type.args[1].kind == CLASS_API) {
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(type.args[1]) + ')).toMap';
+    } else if (type.args[1].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(kv => (kv._1, '+ type.args[1].simpleName +'(kv._2))).toMap';
+    } else if (type.args[1].kind == CLASS_STRING ||
+               type.args[1].kind == CLASS_JSON_OBJECT ||
+               type.args[1].kind == CLASS_JSON_ARRAY) {
       return '.asScala.toMap';
     } else {
-      return '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(type.args[1]), type.args[1]) + ')).toMap';
     }
   }
 
-  def convertMethodReturnToScalaType(method) {
+  def generateConversionForType(type, targetStatement) {
     var invocation = '';
-    if (method.returnType.kind == CLASS_LIST) {
-      invocation += convertMethodReturnToScalaList(method);
-    } else if (method.returnType.kind == CLASS_SET) {
-      invocation += convertMethodReturnToScalaSet(method);
-    } else if (method.returnType.kind == CLASS_MAP) {
-      invocation += convertMethodReturnToScalaMap(method);
+    var typeKind = type.kind;
+    if (typeKind == CLASS_LIST) {
+      invocation += targetStatement + conversionToScalaList(method.returnType);
+    } else if (typeKind == CLASS_SET) {
+      invocation += targetStatement + conversionToScalaSet(method.returnType);
+    } else if (typeKind == CLASS_MAP) {
+      invocation += targetStatement + conversionToScalaMap(method.returnType);
+    } else if(typeKind == CLASS_PRIMITIVE || typeKind == CLASS_BOXED_PRIMITIVE) {
+    } else if(typeKind == CLASS_API) {
+      invocation += toScalaApply(type) + '(' + targetStatement + ')';
+    } else if(typeKind == CLASS_DATA_OBJECT) {
+      invocation += type.simpleName + '(' + targetStatement + ')';
     }
-    return invocation;
-  }
 
-  def returnsHandlerForAsyncResult(method) {
-    return method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT;
-  }
-
-  def doesKindNeedConversionToScalaType(kind) {
-    return kind == CLASS_LIST || kind == CLASS_SET || kind == CLASS_MAP;
+    if(invocation != '') {
+      return invocation;
+    }
+    return targetStatement;
   }
 
   /**
@@ -614,22 +579,24 @@
     var isFluent = method.isFluent();
     var isFuture = shouldMethodReturnAFuture(method);
     var isConversionRequired = doesKindNeedConversionToScalaType(method.returnType.kind);
-    var rawMethodInvocation = target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) + ')';
+
+    var javaMethod = target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) + ')';
 
     /**
      * Take care of methods returning Handler[AsyncResult]. They need to convert the provided handler into a
      * a Scala function.
      */
-    if (returnsHandlerForAsyncResult(method)) {
+    if (doesReturnHandlerAsyncResult(method)) {
       var kindOfAsyncResult = method.returnType.args[0].args[0].kind;
+      var typeOfAsyncResult = method.returnType.args[0].args[0];
       if (kindOfAsyncResult == CLASS_API) {
-        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
+        invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result'+generateAsJavaForType(typeOfAsyncResult)+')) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       } else if (kindOfAsyncResult == CLASS_PRIMITIVE || kindOfAsyncResult == CLASS_BOXED_PRIMITIVE) {
         invocation += 'handlerToMappedFunction[io.vertx.core.AsyncResult['+method.returnType.args[0].args[0]+'], io.vertx.core.AsyncResult['+toScalaType(method.returnType.args[0].args[0])+']](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result)) (' +target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +'))';
       } else {
         invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
       }
-      return indentation + invocation + '\n';
+      return indentation + invocation;
     }
 
     /**
@@ -641,29 +608,21 @@
       if (ret.kind == CLASS_API ||
           ret.kind == CLASS_DATA_OBJECT ||
           ret.kind == CLASS_ENUM) {
-        invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x.asJava)(';
-      } else if (ret.kind == CLASS_PRIMITIVE ||
-                 ret.kind == CLASS_BOXED_PRIMITIVE ||
-                 ret.name == 'Throwable' ||
-                 ret.name == 'java.lang.Throwable') {
-        invocation += '(';
-      } else if (ret.kind == CLASS_STRING ||
-                 ret.kind == CLASS_JSON_OBJECT ||
-                 ret.kind == CLASS_JSON_ARRAY) {
-        invocation += '(';
+        invocation += 'handlerToMappedFunction[' + changeJavaGenericNotationToScalaNotation(ret) + ', ' + scalaType +'](x => x'+generateAsJavaForType(ret)+')(';
       } else {
         invocation += '(';
       }
-      invocation += rawMethodInvocation + ')'
+      invocation += javaMethod + ')';
     }
-    else if (!isFluent and method.returnType.kind == CLASS_API) {
-      invocation += toScalaApply(method.returnType) + '(' + rawMethodInvocation + ')';
-    }
-    else if (method.returnType.kind == CLASS_DATA_OBJECT) {
-      invocation = method.returnType.simpleName + '(' +rawMethodInvocation + ')';
+    else if (!isFluent) {
+      invocation += generateConversionForType(method.returnType, javaMethod);
     }
     else {
-      invocation += rawMethodInvocation;
+      invocation += javaMethod;
+    }
+
+    if(method.returnType.kind == CLASS_OBJECT) {
+      invocation = "toScala["+method.returnType.name+"]("+invocation+")";
     }
 
     /**
@@ -671,35 +630,71 @@
      */
     if (method.returnType.isNullable){
       if (isConversionRequired) {
-        invocation = 'scala.Option('+invocation+') match { case Some(x) => Some(x' + convertMethodReturnToScalaType(method) + '); case None => None};\n'
+        invocation = 'scala.Option('+javaMethod+').map(_' + generateConversionForType(method.returnType, '') + ')'
       }
       else {
         if (method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
-          invocation = 'nullsafeConvToOption('+invocation+')\n'
+          invocation = 'nullsafeConvToOption('+invocation+')'
         }
         else {
-          invocation = 'scala.Option('+invocation+')\n'
+          invocation = 'scala.Option('+invocation+')'
         }
       }
     }
-    else {
-      invocation += convertMethodReturnToScalaType(method) + '\n';
-    }
-
-    /**
-     * Return `this` for fluent methods.
-     */
-    if (method.isFluent() && !isFuture) {
-      invocation += indentation;
-      invocation += 'this\n';
-    }
     indentation + invocation;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  def generateAsJavaForType(type) {
+    return '.asJava.asInstanceOf[' + changeJavaGenericNotationToScalaNotation(type) +']'
+  }
+
+  /**
+   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
+   */
+  def convertTypeToAliasedType(type) {
+    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+convertTypeNameToAliasedTypeName(type)+"}"
+  }
+
+  def isAsyncResultHandler(param) {
+    param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def doesReturnHandlerAsyncResult(method) {
+    return method.returnType.kind == CLASS_HANDLER && method.returnType.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def escapeIfKeyword(possibleKeyword) {
+    if (isKeyword(possibleKeyword)) {
+      return '`' + possibleKeyword + '`';
+    }
+    return possibleKeyword;
+  }
+
+  def isKeyword(possibleKeyword) {
+    if (possibleKeyword.equals("type")) {
+      return true;
+    }
+    if (possibleKeyword.equals("object")) {
+      return true;
+    }
+    return false;
   }
 
   /**
    * Check if a given method should be included in the generated class.
    */
-  def includeMethod(method, instanceMethods) {
+  def shouldMethodBeIncluded(method, instanceMethods) {
     if (method.name == 'addInterceptor') {
         return false;
     }
@@ -724,11 +719,37 @@
     return escapeIfKeyword(methodName);
   }
 
-  /**
-   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
-   */
-  def typeToAliasedType(type) {
-    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => "+toAliasedTypeName(type)+"}"
+  def convertTypeNameToAliasedTypeName(type) {
+    return 'J'+type.simpleName;
+  }
+
+  def doesKindNeedConversionToScalaType(kind) {
+    return kind == CLASS_LIST || kind == CLASS_SET || kind == CLASS_MAP;
+  }
+
+
+  def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.kind == CLASS_THROWABLE;
+  }
+
+  def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
+    var len = typeParam.name.length();
+    return typeParam.kind == CLASS_PRIMITIVE ||
+           typeParam.kind == CLASS_BOXED_PRIMITIVE ||
+           typeParam.kind == CLASS_THROWABLE ||
+           typeParam.kind == CLASS_VOID ||
+           (typeParam.kind == CLASS_OBJECT && len > 1) ||
+           typeParam.kind == CLASS_STRING ||
+           typeParam.kind == CLASS_JSON_OBJECT ||
+           typeParam.kind == CLASS_JSON_ARRAY ||
+           typeParam.kind == CLASS_ENUM ||
+           typeParam.kind == CLASS_DATA_OBJECT ||
+           typeParam.kind == CLASS_API ||
+           typeParam.kind == CLASS_LIST ||
+           typeParam.kind == CLASS_SET ||
+           typeParam.kind == CLASS_MAP;
   }
 }
 

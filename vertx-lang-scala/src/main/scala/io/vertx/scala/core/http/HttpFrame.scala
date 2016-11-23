@@ -16,58 +16,50 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 
 /**
   * An HTTP/2 frame.
   */
-class HttpFrame(private val _asJava: JHttpFrame) {
+class HttpFrame(private val _asJava: Object) {
 
-  def asJava: JHttpFrame = _asJava
-
-  /**
-    * @return the 8-bit type of the frame
-    */
-  def `type`(): Int = {
-    if (cached_0 == null) {
-      cached_0 =    _asJava.`type`()
+  def asJava = _asJava
+  private var cached_0:Int = _
+    private var cached_1:Int = _
+    private var cached_2:Buffer = _
+  
+//methods returning a future
+//cached methods
+  def `type`():Int = {
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
+      cached_0 = tmp
     }
-    cached_0
+    return cached_0
   }
 
-  /**
-    * @return the 8-bit flags specific to the frame
-    */
-  def flags(): Int = {
-    if (cached_1 == null) {
-      cached_1 =    _asJava.flags()
+  def flags():Int = {
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].flags()
+      cached_1 = tmp
     }
-    cached_1
+    return cached_1
   }
 
-  /**
-    * @return the frame payload
-    */
-  def payload(): Buffer = {
-    if (cached_2 == null) {
-      cached_2 =    Buffer.apply(_asJava.payload())
+  def payload():Buffer = {
+    if(cached_2 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].payload()
+      cached_2 = Buffer(tmp)
     }
-    cached_2
+    return cached_2
   }
 
-  private var cached_0: Int = _
-  private var cached_1: Int = _
-  private var cached_2: Buffer = _
+//fluent methods
+//basic methods
 }
 
-object HttpFrame {
-
-  def apply(_asJava: JHttpFrame): HttpFrame =
-    new HttpFrame(_asJava)
-
+object HttpFrame{
+  def apply(asJava: JHttpFrame) = new HttpFrame(asJava)
+//static methods
 }

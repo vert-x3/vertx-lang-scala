@@ -2378,6 +2378,6 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   def refedIfaceToJavaOrNull(x: RefedInterface1): io.vertx.codegen.testmodel.RefedInterface1 = {
-    if (x != null) x.asJava else null
+    if (x != null) x.asJava.asInstanceOf[io.vertx.codegen.testmodel.RefedInterface1] else null
   }
 }

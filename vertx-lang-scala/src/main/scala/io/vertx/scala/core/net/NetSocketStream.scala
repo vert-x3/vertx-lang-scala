@@ -16,53 +16,52 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+import io.vertx.core.Handler
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
-class NetSocketStream(private val _asJava: JNetSocketStream) 
-    extends ReadStream[NetSocket] {
+class NetSocketStream(private val _asJava: Object) 
+    extends ReadStream[NetSocket](_asJava) {
 
-  def asJava: JNetSocketStream = _asJava
 
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocketStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+//methods returning a future
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
+    asJava.asInstanceOf[JNetSocketStream].exceptionHandler(x => handler.handle(x))
     this
   }
 
-  def handler(handler: io.vertx.core.Handler[NetSocket]): NetSocketStream = {
-    _asJava.handler(funcToMappedHandler(NetSocket.apply)(handler))
+  override def handler(handler: Handler[NetSocket]):NetSocketStream = {
+    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket]))
     this
   }
 
-  def pause(): NetSocketStream = {
-    _asJava.pause()
+  override def pause():NetSocketStream = {
+    asJava.asInstanceOf[JNetSocketStream].pause()
     this
   }
 
-  def resume(): NetSocketStream = {
-    _asJava.resume()
+  override def resume():NetSocketStream = {
+    asJava.asInstanceOf[JNetSocketStream].resume()
     this
   }
 
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+  override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
+    asJava.asInstanceOf[JNetSocketStream].endHandler(x => endHandler.handle(x))
     this
   }
 
+//basic methods
 }
 
-object NetSocketStream {
-
-  def apply(_asJava: JNetSocketStream): NetSocketStream =
-    new NetSocketStream(_asJava)
-
+object NetSocketStream{
+  def apply(asJava: JNetSocketStream) = new NetSocketStream(asJava)
+//static methods
 }

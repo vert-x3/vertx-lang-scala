@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.net.{NetClient => JNetClient}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.net.{NetClient => JNetClient}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * A TCP client.
@@ -32,48 +32,30 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: JNetClient) 
-    extends Measured {
+class NetClient(private val _asJava: Object) 
+    extends Measured(_asJava) {
 
-  def asJava: JNetClient = _asJava
 
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
+//methods returning a future
+//cached methods
+//fluent methods
+  def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
+    asJava.asInstanceOf[JNetClient].connect(port,host,x => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a))))
+    this
   }
 
-  /**
-    * Open a connection to a server at the specific `port` and `host`.
-    * 
-    * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
-    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
-    * @param port the port
-    * @param host the host
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
-    _asJava.connect(port, host, promiseAndHandler._1)
-    promiseAndHandler._2.future
+//basic methods
+  override def isMetricsEnabled():Boolean = {
+    asJava.asInstanceOf[JNetClient].isMetricsEnabled()
   }
 
-  /**
-    * Close the client.
-    * 
-    * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
-    * complete until some time after the method has returned.
-    */
-  def close(): Unit = {
-    _asJava.close()
+  def close():Unit = {
+    asJava.asInstanceOf[JNetClient].close()
   }
 
 }
 
-object NetClient {
-
-  def apply(_asJava: JNetClient): NetClient =
-    new NetClient(_asJava)
-
+object NetClient{
+  def apply(asJava: JNetClient) = new NetClient(asJava)
+//static methods
 }

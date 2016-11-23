@@ -16,156 +16,113 @@
 
 package io.vertx.scala.core.shareddata
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   *
   * An asynchronous map.
   */
-class AsyncMap[K, V](private val _asJava: JAsyncMap[K, V]) {
+class AsyncMap[K,V](private val _asJava: Object) {
 
-  def asJava: JAsyncMap[K, V] = _asJava
+  def asJava = _asJava
 
-  /**
-    * Get a value from the map, asynchronously.
-    * @param k the key
-    * @return - this will be called some time later with the async result.
-    */
-  def getFuture(k: K): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
-    _asJava.get(k, promiseAndHandler._1)
-    promiseAndHandler._2.future
+//methods returning a future
+  def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].get(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
-  /**
-    * Put a value in the map, asynchronously.
-    * @param k the key
-    * @param v the value
-    * @return - this will be called some time later to signify the value has been put
-    */
-  def putFuture(k: K, v: V): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.put(k, v, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
-  /**
-    * Like [[io.vertx.scala.core.shareddata.AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
-    * ttl.
-    * @param k the key
-    * @param v the value
-    * @param ttl The time to live (in ms) for the entry
-    * @return the future
-    */
-  def putFuture(k: K, v: V, ttl: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.put(k, v, ttl, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
-  /**
-    * Put the entry only if there is no entry with the key already present. If key already present then the existing
-    * value will be returned to the handler, otherwise null.
-    * @param k the key
-    * @param v the value
-    * @return the future
-    */
-  def putIfAbsentFuture(k: K, v: V): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
-    _asJava.putIfAbsent(k, v, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
-  /**
-    * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
-    * after the ttl.
-    * @param k the key
-    * @param v the value
-    * @param ttl The time to live (in ms) for the entry
-    * @return the future
-    */
-  def putIfAbsentFuture(k: K, v: V, ttl: Long): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
-    _asJava.putIfAbsent(k, v, ttl, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
-  /**
-    * Remove a value from the map, asynchronously.
-    * @param k the key
-    * @return - this will be called some time later to signify the value has been removed
-    */
-  def removeFuture(k: K): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
-    _asJava.remove(k, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].remove(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
-  /**
-    * Remove a value from the map, only if entry already exists with same value.
-    * @param k the key
-    * @param v the value
-    * @return - this will be called some time later to signify the value has been removed
-    */
-  def removeIfPresentFuture(k: K, v: V): concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
-    _asJava.removeIfPresent(k, v, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
-  /**
-    * Replace the entry only if it is currently mapped to some value
-    * @param k the key
-    * @param v the new value
-    * @return the result future will be passed the previous value
-    */
-  def replaceFuture(k: K, v: V): concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V,V]((x => x))
-    _asJava.replace(k, v, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
-  /**
-    * Replace the entry only if it is currently mapped to a specific value
-    * @param k the key
-    * @param oldValue the existing value
-    * @param newValue the new value
-    * @return the result future
-    */
-  def replaceIfPresentFuture(k: K, oldValue: V, newValue: V): concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean,Boolean]((x => x))
-    _asJava.replaceIfPresent(k, oldValue, newValue, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
-  /**
-    * Clear all entries in the map
-    * @return called on completion
-    */
-  def clearFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.clear(promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].clear(x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
-  /**
-    * Provide the number of entries in the map
-    * @return future which will receive the number of entries
-    */
-  def sizeFuture(): concurrent.Future[Int] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer,Int]((x => x))
-    _asJava.size(promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[Integer,Int](x, a => a)))
+  }
+
+//cached methods
+//fluent methods
+//basic methods
+  def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].get(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
+  }
+
+  def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+  }
+
+  def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+  }
+
+  def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
+  }
+
+  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
+  }
+
+  def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].remove(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
+  }
+
+  def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
+  }
+
+  def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
+  }
+
+  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
+  }
+
+  def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].clear(x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+  }
+
+  def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[Integer,Int](x, a => a)))
   }
 
 }
 
-object AsyncMap {
-
-  def apply[K, V](_asJava: JAsyncMap[K, V]): AsyncMap[K, V] =
-    new AsyncMap(_asJava)
-
+object AsyncMap{
+  def apply(asJava: JAsyncMap) = new AsyncMap(asJava)
+//static methods
 }
