@@ -24,7 +24,7 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
   * 
-  * The map only allows immutable keys and values in the map, OR certain mutable objects such as [[Buffer]]
+  * The map only allows immutable keys and values in the map, OR certain mutable objects such as [[io.vertx.scala.core.buffer.Buffer]]
   * instances which will be copied when they are added to the map.
   * 
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the

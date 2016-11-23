@@ -35,7 +35,8 @@ import io.vertx.scala.ext.auth.AuthProvider
   * It requires an Auth provider so, if the user is deserialized from a clustered session it knows which Auth provider
   * to associate the session with.
   */
-class UserSessionHandler(private val _asJava: JUserSessionHandler) {
+class UserSessionHandler(private val _asJava: JUserSessionHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JUserSessionHandler = _asJava
 

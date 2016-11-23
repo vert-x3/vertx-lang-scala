@@ -25,20 +25,20 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
 
 /**
-  * A [[ReadStream]] of [[ServerWebSocket]], used for
-  * notifying web socket connections to a [[HttpServer]].
+  * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
+  * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class ServerWebSocketStream(private val _asJava: JServerWebSocketStream) 
     extends ReadStream[ServerWebSocket] {
 
   def asJava: JServerWebSocketStream = _asJava
 
-  def exceptionHandler(handler: Throwable => Unit): ServerWebSocketStream = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ServerWebSocketStream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: ServerWebSocket => Unit): ServerWebSocketStream = {
+  def handler(handler: io.vertx.core.Handler[ServerWebSocket]): ServerWebSocketStream = {
     _asJava.handler(funcToMappedHandler(ServerWebSocket.apply)(handler))
     this
   }
@@ -53,8 +53,8 @@ class ServerWebSocketStream(private val _asJava: JServerWebSocketStream)
     this
   }
 
-  def endHandler(endHandler: () => Unit): ServerWebSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): ServerWebSocketStream = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 

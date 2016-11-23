@@ -38,15 +38,15 @@ object Factory {
   def apply(_asJava: JFactory): Factory =
     new Factory(_asJava)
 
-  def createConcreteHandlerUserType(handler: RefedInterface1 => Unit): ConcreteHandlerUserType = {
+  def createConcreteHandlerUserType(handler: io.vertx.core.Handler[RefedInterface1]): ConcreteHandlerUserType = {
     ConcreteHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserType(funcToMappedHandler(RefedInterface1.apply)(handler)))
   }
 
-  def createAbstractHandlerUserType(handler: RefedInterface1 => Unit): AbstractHandlerUserType = {
+  def createAbstractHandlerUserType(handler: io.vertx.core.Handler[RefedInterface1]): AbstractHandlerUserType = {
     AbstractHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createAbstractHandlerUserType(funcToMappedHandler(RefedInterface1.apply)(handler)))
   }
 
-  def createConcreteHandlerUserTypeExtension(handler: RefedInterface1 => Unit): ConcreteHandlerUserTypeExtension = {
+  def createConcreteHandlerUserTypeExtension(handler: io.vertx.core.Handler[RefedInterface1]): ConcreteHandlerUserTypeExtension = {
     ConcreteHandlerUserTypeExtension.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserTypeExtension(funcToMappedHandler(RefedInterface1.apply)(handler)))
   }
 

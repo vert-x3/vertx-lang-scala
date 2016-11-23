@@ -78,5 +78,23 @@ var ServicePublisher = function(j_val) {
   this._jdel = j_servicePublisher;
 };
 
-// We export the Constructor function
+ServicePublisher._jclass = utils.getJavaClass("io.vertx.servicediscovery.spi.ServicePublisher");
+ServicePublisher._jtype = {
+  accept: function(obj) {
+    return ServicePublisher._jclass.isInstance(obj._jdel);
+  },
+  wrap: function(jdel) {
+    var obj = Object.create(ServicePublisher.prototype, {});
+    ServicePublisher.apply(obj, arguments);
+    return obj;
+  },
+  unwrap: function(obj) {
+    return obj._jdel;
+  }
+};
+ServicePublisher._create = function(jdel) {
+  var obj = Object.create(ServicePublisher.prototype, {});
+  ServicePublisher.apply(obj, arguments);
+  return obj;
+}
 module.exports = ServicePublisher;

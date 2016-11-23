@@ -34,8 +34,7 @@ import io.vertx.scala.ext.shell.session.Session
 /**
   * The command process provides interaction with the process of the command provided by Vert.x Shell.
   */
-class CommandProcess(private val _asJava: JCommandProcess) 
-    extends  {
+class CommandProcess(private val _asJava: JCommandProcess) {
 
   def asJava: JCommandProcess = _asJava
 
@@ -81,8 +80,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     _asJava.isForeground()
   }
 
-  def stdinHandler(handler: String => Unit): CommandProcess = {
-    _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
+  def stdinHandler(handler: io.vertx.core.Handler[String]): CommandProcess = {
+    _asJava.stdinHandler((handler))
     this
   }
 
@@ -92,8 +91,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the interrupt handler
     * @return this command
     */
-  def interruptHandler(handler: () => Unit): CommandProcess = {
-    _asJava.interruptHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def interruptHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.interruptHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -103,8 +102,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the interrupt handler
     * @return this command
     */
-  def suspendHandler(handler: () => Unit): CommandProcess = {
-    _asJava.suspendHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def suspendHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.suspendHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -114,8 +113,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the interrupt handler
     * @return this command
     */
-  def resumeHandler(handler: () => Unit): CommandProcess = {
-    _asJava.resumeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def resumeHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.resumeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -125,8 +124,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the end handler
     * @return a reference to this, so the API can be used fluently
     */
-  def endHandler(handler: () => Unit): CommandProcess = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def endHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -145,8 +144,8 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the background handler
     * @return this command
     */
-  def backgroundHandler(handler: () => Unit): CommandProcess = {
-    _asJava.backgroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def backgroundHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.backgroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -155,13 +154,13 @@ class CommandProcess(private val _asJava: JCommandProcess)
     * @param handler the foreground handler
     * @return this command
     */
-  def foregroundHandler(handler: () => Unit): CommandProcess = {
-    _asJava.foregroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def foregroundHandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.foregroundHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def resizehandler(handler: () => Unit): CommandProcess = {
-    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def resizehandler(handler: io.vertx.core.Handler[Unit]): CommandProcess = {
+    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

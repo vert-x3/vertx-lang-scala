@@ -31,7 +31,7 @@ import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 
 /**
-  * Defines a STOMP server. STOMP servers delegates to a [[StompServerHandler]] that let customize the behavior of
+  * Defines a STOMP server. STOMP servers delegates to a [[io.vertx.scala.ext.stomp.StompServerHandler]] that let customize the behavior of
   * the server. By default, it uses a handler compliant with the STOMP specification, but let you change anything.
   */
 class StompServer(private val _asJava: JStompServer) {
@@ -39,7 +39,7 @@ class StompServer(private val _asJava: JStompServer) {
   def asJava: JStompServer = _asJava
 
   /**
-    * Configures the [[StompServerHandler]]. You must calls this method before calling the [[StompServer#listen]] method.
+    * Configures the [[io.vertx.scala.ext.stomp.StompServerHandler]]. You must calls this method before calling the [[io.vertx.scala.ext.stomp.StompServer#listen]] method.
     * @param handler the handler
     * @return the current StompServer
     */
@@ -175,7 +175,7 @@ class StompServer(private val _asJava: JStompServer) {
     * `null`.
     * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#websocketHandler(Handler).
     */
-  def webSocketHandler(): ServerWebSocket => Unit = {
+  def webSocketHandler(): io.vertx.core.Handler[ServerWebSocket] = {
     handlerToMappedFunction[JServerWebSocket, ServerWebSocket](x => x.asJava)(_asJava.webSocketHandler())
   }
 
@@ -185,7 +185,7 @@ class StompServer(private val _asJava: JStompServer) {
     * @param handler the handler, must not be `null`
     * @return the current StompServer
     */
-  def writingFrameHandler(handler: ServerFrame => Unit): StompServer = {
+  def writingFrameHandler(handler: io.vertx.core.Handler[ServerFrame]): StompServer = {
     _asJava.writingFrameHandler(funcToMappedHandler(ServerFrame.apply)(handler))
     this
   }

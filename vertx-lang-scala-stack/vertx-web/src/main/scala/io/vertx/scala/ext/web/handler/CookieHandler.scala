@@ -27,7 +27,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * A handler which decodes cookies from the request, makes them available in the 
   * and writes them back in the response.
   */
-class CookieHandler(private val _asJava: JCookieHandler) {
+class CookieHandler(private val _asJava: JCookieHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JCookieHandler = _asJava
 

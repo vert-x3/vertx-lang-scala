@@ -39,10 +39,10 @@ import io.vertx.scala.core.net.SocketAddress
   *
   * You interact with SockJS clients through instances of SockJS socket.
   * 
-  * The API is very similar to [[WebSocket]].
+  * The API is very similar to [[io.vertx.scala.core.http.WebSocket]].
   * It implements both  and 
   * so it can be used with
-  * [[Pump]] to pump data with flow control.
+  * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class SockJSSocket(private val _asJava: JSockJSSocket) 
     extends ReadStream[Buffer] 
@@ -58,12 +58,12 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): SockJSSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): SockJSSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
 
-  def handler(handler: Buffer => Unit): SockJSSocket = {
+  def handler(handler: io.vertx.core.Handler[Buffer]): SockJSSocket = {
     _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
     this
   }
@@ -78,8 +78,8 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): SockJSSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): SockJSSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
@@ -93,8 +93,8 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     this
   }
 
-  def drainHandler(handler: () => Unit): SockJSSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): SockJSSocket = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -111,7 +111,7 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
   }
 
   /**
-    * Call [[SockJSSocket#end]].
+    * Call [[io.vertx.scala.ext.web.handler.sockjs.SockJSSocket#end]].
     */
   def end(): Unit = {
     _asJava.end()
@@ -157,14 +157,14 @@ class SockJSSocket(private val _asJava: JSockJSSocket)
     * @return the Vert.x-Web session corresponding to this socket
     */
   def webSession(): scala.Option[Session] = {
-        scala.Option(Session.apply(_asJava.webSession()))
+    scala.Option(Session.apply(_asJava.webSession()))
   }
 
   /**
     * @return the Vert.x-Web user corresponding to this socket
     */
   def webUser(): scala.Option[User] = {
-        scala.Option(User.apply(_asJava.webUser()))
+    scala.Option(User.apply(_asJava.webUser()))
   }
 
 }

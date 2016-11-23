@@ -28,7 +28,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * If no file system path is specified it will attempt to serve a resource called `favicon.ico` from the classpath.
   */
-class FaviconHandler(private val _asJava: JFaviconHandler) {
+class FaviconHandler(private val _asJava: JFaviconHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JFaviconHandler = _asJava
 

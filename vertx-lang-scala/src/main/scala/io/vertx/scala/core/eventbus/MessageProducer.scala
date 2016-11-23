@@ -35,14 +35,14 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   def asJava: JMessageProducer[T] = _asJava
 
   /**
-    * Same as [[MessageProducer#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
     */
   def end(t: T): Unit = {
     _asJava.end(t)
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[MessageProducer#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
@@ -50,7 +50,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * Synonym for [[MessageProducer#write]].
+    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
     * @param message the message to send
     * @return reference to this for fluency
     */
@@ -64,7 +64,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     promiseAndHandler._2.future
   }
 
-  def exceptionHandler(handler: Throwable => Unit): MessageProducer[T] = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageProducer[T] = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -79,8 +79,8 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     this
   }
 
-  def drainHandler(handler: () => Unit): MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): MessageProducer[T] = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
@@ -102,7 +102,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   /**
-    * Closes the producer, calls [[MessageProducer#close]]
+    * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
     */
   def end(): Unit = {
     _asJava.end()

@@ -185,7 +185,7 @@
         }
         else {
           var eltKind = elt.getKind().name();
-          var ret = "[[" + rawType.simpleName;
+          var ret = "[[" + rawType.raw.translateName("scala");
           if (eltKind == "METHOD") {
             if(elt.params.size > 0 && isAsyncResultHandler(elt.params.get(elt.params.size-1).type)) {
               ret += '#' + elt.getSimpleName().toString() + "Future";

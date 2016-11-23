@@ -40,12 +40,12 @@ class TermServer(private val _asJava: JTermServer) {
 
   /**
     * Set the term handler that will receive incoming client connections. When a remote terminal connects
-    * the `handler` will be called with the [[Term]] which can be used to interact with the remote
+    * the `handler` will be called with the [[io.vertx.scala.ext.shell.term.Term]] which can be used to interact with the remote
     * terminal.
     * @param handler the term handler
     * @return this object
     */
-  def termHandler(handler: Term => Unit): TermServer = {
+  def termHandler(handler: io.vertx.core.Handler[Term]): TermServer = {
     _asJava.termHandler(funcToMappedHandler(Term.apply)(handler))
     this
   }
@@ -62,7 +62,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Bind the term server, the [[TermServer#termHandler]] must be set before.
+    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
     * @return this object
     */
   def listen(): TermServer = {
@@ -71,7 +71,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Bind the term server, the [[TermServer#termHandler]] must be set before.
+    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[TermServer] = {
@@ -98,7 +98,7 @@ class TermServer(private val _asJava: JTermServer) {
   }
 
   /**
-    * Like [[TermServer#close]] but supplying a handler that will be notified when close is complete.
+    * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.
     * @return the future to be notified when the term server is closed
     */
   def closeFuture(): concurrent.Future[Unit] = {

@@ -24,6 +24,7 @@ Sets the value to use as the container-id field in the AMQP Open frame. Some ser
 |[[enabledCipherSuites]]`enabledCipherSuites`|`Array of String`|-
 |[[enabledSaslMechanisms]]`enabledSaslMechanisms`|`Array of String`|-
 |[[enabledSecureTransportProtocols]]`enabledSecureTransportProtocols`|`Array of String`|-
+|[[heartbeat]]`heartbeat`|`Number (int)`|-
 |[[hostnameVerificationAlgorithm]]`hostnameVerificationAlgorithm`|`String`|-
 |[[idleTimeout]]`idleTimeout`|`Number (int)`|-
 |[[jdkSslEngineOptions]]`jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-

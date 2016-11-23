@@ -32,8 +32,8 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
 
 /**
-  * A datagram socket can be used to send [[DatagramPacket]]'s to remote datagram servers
-  * and receive [[DatagramPacket]]s .
+  * A datagram socket can be used to send [[io.vertx.scala.core.datagram.DatagramPacket]]'s to remote datagram servers
+  * and receive [[io.vertx.scala.core.datagram.DatagramPacket]]s .
   * 
   * Usually you use a datagram socket to send UDP over the wire. UDP is connection-less which means you are not connected
   * to the remote peer in a persistent way. Because of this you have to supply the address and port of the remote peer
@@ -58,7 +58,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given [[Buffer]] to the [[SocketAddress]].
+    * Write the given [[io.vertx.scala.core.buffer.Buffer]] to the [[io.vertx.scala.core.net.SocketAddress]].
     * The [[scala.concurrent.Future]] will be notified once the write completes.
     * @param packet the io.vertx.scala.core.buffer.Buffer to write
     * @param port the host port of the remote peer
@@ -72,8 +72,8 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Returns a [[PacketWritestream]] able to send  to the
-    * [[SocketAddress]].
+    * Returns a [[io.vertx.scala.core.datagram.PacketWritestream]] able to send  to the
+    * [[io.vertx.scala.core.net.SocketAddress]].
     * @param port the port of the remote peer
     * @param host the host address of the remote peer
     * @return the write stream for sending packets
@@ -83,7 +83,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given String to the [[SocketAddress]] using UTF8 encoding.
+    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using UTF8 encoding.
     * The  will be notified once the write completes.
     * @param str the String to write
     * @param port the host port of the remote peer
@@ -97,7 +97,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Write the given String to the [[SocketAddress]] using the given encoding.
+    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using the given encoding.
     * The  will be notified once the write completes.
     * @param str the String to write
     * @param enc the charset used for encoding
@@ -112,7 +112,7 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Closes the [[DatagramSocket]] implementation asynchronous
+    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]] implementation asynchronous
     * and notifies the handler once done.
     * @return the future to complete once complete
     */
@@ -123,20 +123,20 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
   }
 
   /**
-    * Closes the [[DatagramSocket]]. The close itself is asynchronous.
+    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]]. The close itself is asynchronous.
     */
   def close(): Unit = {
     _asJava.close()
   }
 
   /**
-    * Return the [[SocketAddress]] to which
-    * this [[DatagramSocket]] is bound.
+    * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
+    * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.
     * @return the socket address
     */
   def localAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0=    SocketAddress.apply(_asJava.localAddress())
+      cached_0 =    SocketAddress.apply(_asJava.localAddress())
     }
     cached_0
   }
@@ -242,17 +242,17 @@ class DatagramSocket(private val _asJava: JDatagramSocket)
     this
   }
 
-  def endHandler(endHandler: () => Unit): DatagramSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler()))
+  def endHandler(endHandler: io.vertx.core.Handler[Unit]): DatagramSocket = {
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
     this
   }
 
-  def handler(handler: DatagramPacket => Unit): DatagramSocket = {
+  def handler(handler: io.vertx.core.Handler[DatagramPacket]): DatagramSocket = {
     _asJava.handler(funcToMappedHandler(DatagramPacket.apply)(handler))
     this
   }
 
-  def exceptionHandler(handler: Throwable => Unit): DatagramSocket = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): DatagramSocket = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }

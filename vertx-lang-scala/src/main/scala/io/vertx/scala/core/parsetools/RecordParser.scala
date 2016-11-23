@@ -27,7 +27,7 @@ import io.vertx.scala.core.buffer.Buffer
   * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed
   * size records.
   * 
-  * Instances of this class take as input [[Buffer]] instances containing raw bytes,
+  * Instances of this class take as input [[io.vertx.scala.core.buffer.Buffer]] instances containing raw bytes,
   * and output records.
   * 
   * For example, if I had a simple ASCII text protocol delimited by '\n' and the input was the following:
@@ -54,11 +54,12 @@ import io.vertx.scala.core.buffer.Buffer
   * 
   * Please see the documentation for more information.
   */
-class RecordParser(private val _asJava: JRecordParser) {
+class RecordParser(private val _asJava: JRecordParser) 
+    extends io.vertx.core.Handler[Buffer] {
 
   def asJava: JRecordParser = _asJava
 
-  def setOutput(output: Buffer => Unit): Unit = {
+  def setOutput(output: io.vertx.core.Handler[Buffer]): Unit = {
     _asJava.setOutput(funcToMappedHandler(Buffer.apply)(output))
   }
 
@@ -109,15 +110,15 @@ object RecordParser {
   def apply(_asJava: JRecordParser): RecordParser =
     new RecordParser(_asJava)
 
-  def newDelimited(delim: String, output: Buffer => Unit): RecordParser = {
+  def newDelimited(delim: String, output: io.vertx.core.Handler[Buffer]): RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim, funcToMappedHandler(Buffer.apply)(output)))
   }
 
-  def newDelimited(delim: Buffer, output: Buffer => Unit): RecordParser = {
+  def newDelimited(delim: Buffer, output: io.vertx.core.Handler[Buffer]): RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer], funcToMappedHandler(Buffer.apply)(output)))
   }
 
-  def newFixed(size: Int, output: Buffer => Unit): RecordParser = {
+  def newFixed(size: Int, output: io.vertx.core.Handler[Buffer]): RecordParser = {
     RecordParser.apply(io.vertx.core.parsetools.RecordParser.newFixed(size, funcToMappedHandler(Buffer.apply)(output)))
   }
 

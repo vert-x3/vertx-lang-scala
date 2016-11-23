@@ -24,11 +24,10 @@ import io.vertx.core.{Future => JFuture}
 import java.util.function.{Function => JFunction}
 
 /**
-  * The composite future wraps a list of [[Future]], it is useful when several futures
+  * The composite future wraps a list of [[io.vertx.scala.core.Future]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: JCompositeFuture) 
-    extends  {
+class CompositeFuture(private val _asJava: JCompositeFuture) {
 
   def asJava: JCompositeFuture = _asJava
 
@@ -62,7 +61,7 @@ class CompositeFuture(private val _asJava: JCompositeFuture)
     * @param next the next future
     * @return the next future, used for chaining
     */
-  def compose[U](handler: CompositeFuture => Unit, next: Future[U]): Future[U] = {
+  def compose[U](handler: io.vertx.core.Handler[CompositeFuture], next: Future[U]): Future[U] = {
     Future.apply[U](_asJava.compose(funcToMappedHandler(CompositeFuture.apply)(handler), next.asJava.asInstanceOf[JFuture[U]]))
   }
 
@@ -104,9 +103,9 @@ class CompositeFuture(private val _asJava: JCompositeFuture)
   /**
     * @return an handler completing this future
     */
-  def completer(): io.vertx.core.AsyncResult [CompositeFuture] => Unit = {
+  def completer(): io.vertx.core.Handler[io.vertx.core.AsyncResult [CompositeFuture]] = {
     if (cached_0 == null) {
-      cached_0=    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
+      cached_0 =    handlerToMappedFunction[io.vertx.core.AsyncResult[io.vertx.core.CompositeFuture], io.vertx.core.AsyncResult[CompositeFuture]](s => if (s.failed()) io.vertx.lang.scala.ScalaAsyncResult(cause = s.cause()) else io.vertx.lang.scala.ScalaAsyncResult(result = s.result.asJava)) (_asJava.completer())
     }
     cached_0
   }
@@ -164,7 +163,7 @@ class CompositeFuture(private val _asJava: JCompositeFuture)
     _asJava.size()
   }
 
-  private var cached_0: io.vertx.core.AsyncResult [CompositeFuture] => Unit = _
+  private var cached_0: io.vertx.core.Handler[io.vertx.core.AsyncResult [CompositeFuture]] = _
 }
 
 object CompositeFuture {

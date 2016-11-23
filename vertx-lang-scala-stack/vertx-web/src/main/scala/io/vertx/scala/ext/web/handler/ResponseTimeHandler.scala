@@ -27,7 +27,8 @@ import io.vertx.scala.ext.web.RoutingContext
   * Handler which adds a header `x-response-time` in the response of matching requests containing the time taken
   * in ms to process the request.
   */
-class ResponseTimeHandler(private val _asJava: JResponseTimeHandler) {
+class ResponseTimeHandler(private val _asJava: JResponseTimeHandler) 
+    extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: JResponseTimeHandler = _asJava
 

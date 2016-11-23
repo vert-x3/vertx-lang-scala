@@ -57,7 +57,7 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Handles a subscription request to the current [[Destination]].
+    * Handles a subscription request to the current [[io.vertx.scala.ext.stomp.Destination]].
     * @param connection the connection
     * @param frame the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current instance of Destination
@@ -68,7 +68,7 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Handles a un-subscription request to the current [[Destination]].
+    * Handles a un-subscription request to the current [[io.vertx.scala.ext.stomp.Destination]].
     * @param connection the connection
     * @param frame the `UNSUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return `true` if the un-subscription has been handled, `false` otherwise.
@@ -117,7 +117,7 @@ class Destination(private val _asJava: JDestination) {
   }
 
   /**
-    * Gets the number of subscriptions attached to the current [[Destination]].
+    * Gets the number of subscriptions attached to the current [[io.vertx.scala.ext.stomp.Destination]].
     * @return the number of subscriptions.
     */
   def numberOfSubscriptions(): Int = {

@@ -30,18 +30,17 @@ import io.vertx.scala.ext.shell.session.Session
 /**
   * The terminal.
   */
-class Term(private val _asJava: JTerm) 
-    extends  {
+class Term(private val _asJava: JTerm) {
 
   def asJava: JTerm = _asJava
 
-  def resizehandler(handler: () => Unit): Term = {
-    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def resizehandler(handler: io.vertx.core.Handler[Unit]): Term = {
+    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
-  def stdinHandler(handler: String => Unit): Term = {
-    _asJava.stdinHandler(funcToHandler[java.lang.String](handler))
+  def stdinHandler(handler: io.vertx.core.Handler[String]): Term = {
+    _asJava.stdinHandler((handler))
     this
   }
 
@@ -101,8 +100,8 @@ class Term(private val _asJava: JTerm)
     * @param prompt the displayed prompt
     * @param lineHandler the line handler called with the line
     */
-  def readline(prompt: String, lineHandler: String => Unit): Unit = {
-    _asJava.readline(prompt, funcToHandler[java.lang.String](lineHandler))
+  def readline(prompt: String, lineHandler: io.vertx.core.Handler[String]): Unit = {
+    _asJava.readline(prompt, (lineHandler))
   }
 
   /**
@@ -111,8 +110,8 @@ class Term(private val _asJava: JTerm)
     * @param lineHandler the line handler called with the line
     * @param completionHandler the completion handler
     */
-  def readline(prompt: String, lineHandler: String => Unit, completionHandler: Completion => Unit): Unit = {
-    _asJava.readline(prompt, funcToHandler[java.lang.String](lineHandler), funcToMappedHandler(Completion.apply)(completionHandler))
+  def readline(prompt: String, lineHandler: io.vertx.core.Handler[String], completionHandler: io.vertx.core.Handler[Completion]): Unit = {
+    _asJava.readline(prompt, (lineHandler), funcToMappedHandler(Completion.apply)(completionHandler))
   }
 
   /**
@@ -120,8 +119,8 @@ class Term(private val _asJava: JTerm)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: () => Unit): Term = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def closeHandler(handler: io.vertx.core.Handler[Unit]): Term = {
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 

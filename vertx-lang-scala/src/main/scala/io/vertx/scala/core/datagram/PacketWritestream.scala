@@ -26,7 +26,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.WriteStream
 
 /**
-  * A [[WriteStream]] for sending packets to a [[SocketAddress]].
+  * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
   * The stream  is called when the write fails.
   */
 class PacketWritestream(private val _asJava: JPacketWritestream) 
@@ -44,21 +44,21 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
   }
 
   /**
-    * Same as [[WriteStream#end]] but writes some data to the stream before ending.
+    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
     _asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[PacketWritestream#setWriteQueueMaxSize]]
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
     _asJava.writeQueueFull()
   }
 
-  def exceptionHandler(handler: Throwable => Unit): PacketWritestream = {
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): PacketWritestream = {
     _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
     this
   }
@@ -73,8 +73,8 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
     this
   }
 
-  def drainHandler(handler: () => Unit): PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler()))
+  def drainHandler(handler: io.vertx.core.Handler[Unit]): PacketWritestream = {
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
     this
   }
 
