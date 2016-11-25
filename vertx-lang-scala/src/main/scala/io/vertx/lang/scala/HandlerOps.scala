@@ -139,10 +139,14 @@ object HandlerOps {
   }
 
   /**
+    * Create a handler and its associated Promise to wrap [io.vertx.core.Handler] for [io.vertx.core.AsyncResult] in
+    * a [scala.concurrent.Promise]
     *
+    * {{{
     * val promiseAndHandler = handlerForAsyncResult[Void]
     * _asJava.close(promiseAndHandler._1)
     * promiseAndHandler._2.future
+    * }}}
     *
     * @tparam T
     * @return
@@ -159,9 +163,9 @@ object HandlerOps {
   }
 
   /**
+    * Safely convert from Java type to Scala type.
     *
-    *
-    * @param conversion convert from Java type to Scala type
+    * @param conversion function to convert from Java to Scala
     * @tparam J incoming Java type
     * @tparam S outgoing Scala type
     * @return

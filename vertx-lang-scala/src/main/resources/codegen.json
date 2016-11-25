@@ -8,7 +8,7 @@
     },
     {
       "kind" : "class",
-      "fileName": "if(type.simpleName != 'GenericsTCK' && type.simpleName != 'InterfaceWithApiArg' && type.simpleName != 'InterfaceWithStringArg' && type.simpleName != 'InterfaceWithVariableArg') {'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}",
+      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
       "templateFileName" : "vertx-scala/template/class.templ"
     }
   ]

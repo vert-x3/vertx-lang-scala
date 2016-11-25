@@ -273,6 +273,28 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   }
 
   /**
+    * Set the maximum length of all headers for HTTP/1.x .
+    */
+  def setMaxHeaderSize(value: Int) = {
+    asJava.setMaxHeaderSize(value)
+    this
+  }
+  def getMaxHeaderSize = {
+    asJava.getMaxHeaderSize()
+  }
+
+  /**
+    * Set the maximum length of the initial line for HTTP/1.x (e.g. `"HTTP/1.1 200 OK"`)
+    */
+  def setMaxInitialLineLength(value: Int) = {
+    asJava.setMaxInitialLineLength(value)
+    this
+  }
+  def getMaxInitialLineLength = {
+    asJava.getMaxInitialLineLength()
+  }
+
+  /**
     * Set the maximum pool size for connections
     */
   def setMaxPoolSize(value: Int) = {
