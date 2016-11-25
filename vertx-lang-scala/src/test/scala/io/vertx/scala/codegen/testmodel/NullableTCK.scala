@@ -405,7 +405,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListByteReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Byte]] = {
-    scala.Option(_asJava.methodWithNullableListByteReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Byte)); case None => None};
+    scala.Option(_asJava.methodWithNullableListByteReturn(notNull)).map(_.asScala.map(x => x:Byte))
   }
 
   def methodWithNonNullableListShortParam(param: scala.collection.mutable.Buffer[Short]): Boolean = {
@@ -427,7 +427,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListShortReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Short]] = {
-    scala.Option(_asJava.methodWithNullableListShortReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Short)); case None => None};
+    scala.Option(_asJava.methodWithNullableListShortReturn(notNull)).map(_.asScala.map(x => x:Short))
   }
 
   def methodWithNonNullableListIntegerParam(param: scala.collection.mutable.Buffer[Int]): Boolean = {
@@ -449,7 +449,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListIntegerReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Int]] = {
-    scala.Option(_asJava.methodWithNullableListIntegerReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Int)); case None => None};
+    scala.Option(_asJava.methodWithNullableListIntegerReturn(notNull)).map(_.asScala.map(x => x:Int))
   }
 
   def methodWithNonNullableListLongParam(param: scala.collection.mutable.Buffer[Long]): Boolean = {
@@ -471,7 +471,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListLongReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Long]] = {
-    scala.Option(_asJava.methodWithNullableListLongReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Long)); case None => None};
+    scala.Option(_asJava.methodWithNullableListLongReturn(notNull)).map(_.asScala.map(x => x:Long))
   }
 
   def methodWithNonNullableListFloatParam(param: scala.collection.mutable.Buffer[Float]): Boolean = {
@@ -493,7 +493,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListFloatReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Float]] = {
-    scala.Option(_asJava.methodWithNullableListFloatReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Float)); case None => None};
+    scala.Option(_asJava.methodWithNullableListFloatReturn(notNull)).map(_.asScala.map(x => x:Float))
   }
 
   def methodWithNonNullableListDoubleParam(param: scala.collection.mutable.Buffer[Double]): Boolean = {
@@ -515,7 +515,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListDoubleReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Double]] = {
-    scala.Option(_asJava.methodWithNullableListDoubleReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Double)); case None => None};
+    scala.Option(_asJava.methodWithNullableListDoubleReturn(notNull)).map(_.asScala.map(x => x:Double))
   }
 
   def methodWithNonNullableListBooleanParam(param: scala.collection.mutable.Buffer[Boolean]): Boolean = {
@@ -537,7 +537,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListBooleanReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Boolean]] = {
-    scala.Option(_asJava.methodWithNullableListBooleanReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Boolean)); case None => None};
+    scala.Option(_asJava.methodWithNullableListBooleanReturn(notNull)).map(_.asScala.map(x => x:Boolean))
   }
 
   def methodWithNonNullableListStringParam(param: scala.collection.mutable.Buffer[String]): Boolean = {
@@ -559,7 +559,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListStringReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[String]] = {
-    scala.Option(_asJava.methodWithNullableListStringReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:String)); case None => None};
+    scala.Option(_asJava.methodWithNullableListStringReturn(notNull)).map(_.asScala.map(x => x:String))
   }
 
   def methodWithNonNullableListCharParam(param: scala.collection.mutable.Buffer[Char]): Boolean = {
@@ -581,7 +581,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListCharReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[Char]] = {
-    scala.Option(_asJava.methodWithNullableListCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Char)); case None => None};
+    scala.Option(_asJava.methodWithNullableListCharReturn(notNull)).map(_.asScala.map(x => x:Char))
   }
 
   def methodWithNonNullableListJsonObjectParam(param: scala.collection.mutable.Buffer[JsonObject]): Boolean = {
@@ -603,7 +603,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListJsonObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[JsonObject]] = {
-    scala.Option(_asJava.methodWithNullableListJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonObject)); case None => None};
+    scala.Option(_asJava.methodWithNullableListJsonObjectReturn(notNull)).map(_.asScala.map(x => x:JsonObject))
   }
 
   def methodWithNonNullableListJsonArrayParam(param: scala.collection.mutable.Buffer[JsonArray]): Boolean = {
@@ -625,7 +625,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListJsonArrayReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[JsonArray]] = {
-    scala.Option(_asJava.methodWithNullableListJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonArray)); case None => None};
+    scala.Option(_asJava.methodWithNullableListJsonArrayReturn(notNull)).map(_.asScala.map(x => x:JsonArray))
   }
 
   def methodWithNonNullableListApiParam(param: scala.collection.mutable.Buffer[RefedInterface1]): Boolean = {
@@ -647,7 +647,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListApiReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[RefedInterface1]] = {
-    scala.Option(_asJava.methodWithNullableListApiReturn(notNull)) match { case Some(x) => Some(x.asScala.map(RefedInterface1.apply)); case None => None};
+    scala.Option(_asJava.methodWithNullableListApiReturn(notNull)).map(_.asScala.map(RefedInterface1.apply))
   }
 
   def methodWithNonNullableListDataObjectParam(param: scala.collection.mutable.Buffer[TestDataObject]): Boolean = {
@@ -669,7 +669,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListDataObjectReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[TestDataObject]] = {
-    scala.Option(_asJava.methodWithNullableListDataObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => TestDataObject(x))); case None => None};
+    scala.Option(_asJava.methodWithNullableListDataObjectReturn(notNull)).map(_.asScala.map(x => TestDataObject(x)))
   }
 
   def methodWithNonNullableListEnumParam(param: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]): Boolean = {
@@ -691,7 +691,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListEnumReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
-    scala.Option(_asJava.methodWithNullableListEnumReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.codegen.testmodel.TestEnum)); case None => None};
+    scala.Option(_asJava.methodWithNullableListEnumReturn(notNull)).map(_.asScala.map(x => x:io.vertx.codegen.testmodel.TestEnum))
   }
 
   def methodWithNonNullableListGenEnumParam(param: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]): Boolean = {
@@ -713,7 +713,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableListGenEnumReturn(notNull: Boolean): scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
-    scala.Option(_asJava.methodWithNullableListGenEnumReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.codegen.testmodel.TestGenEnum)); case None => None};
+    scala.Option(_asJava.methodWithNullableListGenEnumReturn(notNull)).map(_.asScala.map(x => x:io.vertx.codegen.testmodel.TestGenEnum))
   }
 
   def methodWithNonNullableSetByteParam(param: Set[Byte]): Boolean = {
@@ -735,7 +735,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetByteReturn(notNull: Boolean): scala.Option[Set[Byte]] = {
-    scala.Option(_asJava.methodWithNullableSetByteReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Byte).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetByteReturn(notNull)).map(_.asScala.map(x => x:Byte).toSet)
   }
 
   def methodWithNonNullableSetShortParam(param: Set[Short]): Boolean = {
@@ -757,7 +757,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetShortReturn(notNull: Boolean): scala.Option[Set[Short]] = {
-    scala.Option(_asJava.methodWithNullableSetShortReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Short).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetShortReturn(notNull)).map(_.asScala.map(x => x:Short).toSet)
   }
 
   def methodWithNonNullableSetIntegerParam(param: Set[Int]): Boolean = {
@@ -779,7 +779,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetIntegerReturn(notNull: Boolean): scala.Option[Set[Int]] = {
-    scala.Option(_asJava.methodWithNullableSetIntegerReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Int).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetIntegerReturn(notNull)).map(_.asScala.map(x => x:Int).toSet)
   }
 
   def methodWithNonNullableSetLongParam(param: Set[Long]): Boolean = {
@@ -801,7 +801,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetLongReturn(notNull: Boolean): scala.Option[Set[Long]] = {
-    scala.Option(_asJava.methodWithNullableSetLongReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Long).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetLongReturn(notNull)).map(_.asScala.map(x => x:Long).toSet)
   }
 
   def methodWithNonNullableSetFloatParam(param: Set[Float]): Boolean = {
@@ -823,7 +823,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetFloatReturn(notNull: Boolean): scala.Option[Set[Float]] = {
-    scala.Option(_asJava.methodWithNullableSetFloatReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Float).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetFloatReturn(notNull)).map(_.asScala.map(x => x:Float).toSet)
   }
 
   def methodWithNonNullableSetDoubleParam(param: Set[Double]): Boolean = {
@@ -845,7 +845,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetDoubleReturn(notNull: Boolean): scala.Option[Set[Double]] = {
-    scala.Option(_asJava.methodWithNullableSetDoubleReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Double).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetDoubleReturn(notNull)).map(_.asScala.map(x => x:Double).toSet)
   }
 
   def methodWithNonNullableSetBooleanParam(param: Set[Boolean]): Boolean = {
@@ -867,7 +867,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetBooleanReturn(notNull: Boolean): scala.Option[Set[Boolean]] = {
-    scala.Option(_asJava.methodWithNullableSetBooleanReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Boolean).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetBooleanReturn(notNull)).map(_.asScala.map(x => x:Boolean).toSet)
   }
 
   def methodWithNonNullableSetStringParam(param: Set[String]): Boolean = {
@@ -889,7 +889,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetStringReturn(notNull: Boolean): scala.Option[Set[String]] = {
-    scala.Option(_asJava.methodWithNullableSetStringReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:String).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetStringReturn(notNull)).map(_.asScala.map(x => x:String).toSet)
   }
 
   def methodWithNonNullableSetCharParam(param: Set[Char]): Boolean = {
@@ -911,7 +911,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetCharReturn(notNull: Boolean): scala.Option[Set[Char]] = {
-    scala.Option(_asJava.methodWithNullableSetCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:Char).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetCharReturn(notNull)).map(_.asScala.map(x => x:Char).toSet)
   }
 
   def methodWithNonNullableSetJsonObjectParam(param: Set[JsonObject]): Boolean = {
@@ -933,7 +933,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetJsonObjectReturn(notNull: Boolean): scala.Option[Set[JsonObject]] = {
-    scala.Option(_asJava.methodWithNullableSetJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonObject).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetJsonObjectReturn(notNull)).map(_.asScala.map(x => x:JsonObject).toSet)
   }
 
   def methodWithNonNullableSetJsonArrayParam(param: Set[JsonArray]): Boolean = {
@@ -955,7 +955,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetJsonArrayReturn(notNull: Boolean): scala.Option[Set[JsonArray]] = {
-    scala.Option(_asJava.methodWithNullableSetJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:JsonArray).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetJsonArrayReturn(notNull)).map(_.asScala.map(x => x:JsonArray).toSet)
   }
 
   def methodWithNonNullableSetApiParam(param: Set[RefedInterface1]): Boolean = {
@@ -977,7 +977,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetApiReturn(notNull: Boolean): scala.Option[Set[RefedInterface1]] = {
-    scala.Option(_asJava.methodWithNullableSetApiReturn(notNull)) match { case Some(x) => Some(x.asScala.map(RefedInterface1.apply).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetApiReturn(notNull)).map(_.asScala.map(RefedInterface1.apply).toSet)
   }
 
   def methodWithNonNullableSetDataObjectParam(param: Set[TestDataObject]): Boolean = {
@@ -999,7 +999,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetDataObjectReturn(notNull: Boolean): scala.Option[Set[TestDataObject]] = {
-    scala.Option(_asJava.methodWithNullableSetDataObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => TestDataObject(x)).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetDataObjectReturn(notNull)).map(_.asScala.map(x => TestDataObject(x)).toSet)
   }
 
   def methodWithNonNullableSetEnumParam(param: Set[io.vertx.codegen.testmodel.TestEnum]): Boolean = {
@@ -1021,7 +1021,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetEnumReturn(notNull: Boolean): scala.Option[Set[io.vertx.codegen.testmodel.TestEnum]] = {
-    scala.Option(_asJava.methodWithNullableSetEnumReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.codegen.testmodel.TestEnum).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetEnumReturn(notNull)).map(_.asScala.map(x => x:io.vertx.codegen.testmodel.TestEnum).toSet)
   }
 
   def methodWithNonNullableSetGenEnumParam(param: Set[io.vertx.codegen.testmodel.TestGenEnum]): Boolean = {
@@ -1043,7 +1043,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableSetGenEnumReturn(notNull: Boolean): scala.Option[Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
-    scala.Option(_asJava.methodWithNullableSetGenEnumReturn(notNull)) match { case Some(x) => Some(x.asScala.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).toSet); case None => None};
+    scala.Option(_asJava.methodWithNullableSetGenEnumReturn(notNull)).map(_.asScala.map(x => x:io.vertx.codegen.testmodel.TestGenEnum).toSet)
   }
 
   def methodWithNonNullableMapByteParam(param: Map[String, Byte]): Boolean = {
@@ -1065,7 +1065,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapByteReturn(notNull: Boolean): scala.Option[Map[String, Byte]] = {
-    scala.Option(_asJava.methodWithNullableMapByteReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Byte)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapByteReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Byte)).toMap)
   }
 
   def methodWithNonNullableMapShortParam(param: Map[String, Short]): Boolean = {
@@ -1087,7 +1087,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapShortReturn(notNull: Boolean): scala.Option[Map[String, Short]] = {
-    scala.Option(_asJava.methodWithNullableMapShortReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Short)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapShortReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Short)).toMap)
   }
 
   def methodWithNonNullableMapIntegerParam(param: Map[String, Int]): Boolean = {
@@ -1109,7 +1109,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapIntegerReturn(notNull: Boolean): scala.Option[Map[String, Int]] = {
-    scala.Option(_asJava.methodWithNullableMapIntegerReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Int)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapIntegerReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Int)).toMap)
   }
 
   def methodWithNonNullableMapLongParam(param: Map[String, Long]): Boolean = {
@@ -1131,7 +1131,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapLongReturn(notNull: Boolean): scala.Option[Map[String, Long]] = {
-    scala.Option(_asJava.methodWithNullableMapLongReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Long)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapLongReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Long)).toMap)
   }
 
   def methodWithNonNullableMapFloatParam(param: Map[String, Float]): Boolean = {
@@ -1153,7 +1153,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapFloatReturn(notNull: Boolean): scala.Option[Map[String, Float]] = {
-    scala.Option(_asJava.methodWithNullableMapFloatReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Float)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapFloatReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Float)).toMap)
   }
 
   def methodWithNonNullableMapDoubleParam(param: Map[String, Double]): Boolean = {
@@ -1175,7 +1175,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapDoubleReturn(notNull: Boolean): scala.Option[Map[String, Double]] = {
-    scala.Option(_asJava.methodWithNullableMapDoubleReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Double)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapDoubleReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Double)).toMap)
   }
 
   def methodWithNonNullableMapBooleanParam(param: Map[String, Boolean]): Boolean = {
@@ -1197,7 +1197,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapBooleanReturn(notNull: Boolean): scala.Option[Map[String, Boolean]] = {
-    scala.Option(_asJava.methodWithNullableMapBooleanReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Boolean)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapBooleanReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Boolean)).toMap)
   }
 
   def methodWithNonNullableMapStringParam(param: Map[String, String]): Boolean = {
@@ -1219,7 +1219,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapStringReturn(notNull: Boolean): scala.Option[Map[String, String]] = {
-    scala.Option(_asJava.methodWithNullableMapStringReturn(notNull)) match { case Some(x) => Some(x.asScala.toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapStringReturn(notNull)).map(_.asScala.toMap)
   }
 
   def methodWithNonNullableMapCharParam(param: Map[String, Char]): Boolean = {
@@ -1241,7 +1241,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapCharReturn(notNull: Boolean): scala.Option[Map[String, Char]] = {
-    scala.Option(_asJava.methodWithNullableMapCharReturn(notNull)) match { case Some(x) => Some(x.asScala.map(kv => (kv._1, kv._2: Char)).toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapCharReturn(notNull)).map(_.asScala.map(kv => (kv._1, kv._2: Char)).toMap)
   }
 
   def methodWithNonNullableMapJsonObjectParam(param: Map[String, JsonObject]): Boolean = {
@@ -1263,7 +1263,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapJsonObjectReturn(notNull: Boolean): scala.Option[Map[String, JsonObject]] = {
-    scala.Option(_asJava.methodWithNullableMapJsonObjectReturn(notNull)) match { case Some(x) => Some(x.asScala.toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapJsonObjectReturn(notNull)).map(_.asScala.toMap)
   }
 
   def methodWithNonNullableMapJsonArrayParam(param: Map[String, JsonArray]): Boolean = {
@@ -1285,7 +1285,7 @@ class NullableTCK(private val _asJava: JNullableTCK) {
   }
 
   def methodWithNullableMapJsonArrayReturn(notNull: Boolean): scala.Option[Map[String, JsonArray]] = {
-    scala.Option(_asJava.methodWithNullableMapJsonArrayReturn(notNull)) match { case Some(x) => Some(x.asScala.toMap); case None => None};
+    scala.Option(_asJava.methodWithNullableMapJsonArrayReturn(notNull)).map(_.asScala.toMap)
   }
 
   def methodWithNonNullableMapApiParam(param: Map[String, RefedInterface1]): Boolean = {
