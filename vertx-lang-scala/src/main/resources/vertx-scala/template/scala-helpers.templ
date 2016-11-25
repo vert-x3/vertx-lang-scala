@@ -489,50 +489,60 @@
     return invocation;
   }
 
-  def convertMethodReturnToScalaList(method) {
-    if (method.returnType.args[0].kind == CLASS_API) {
-      return '.asScala.map(' + toScalaApply(method.returnType.args[0]) + ')';
-    } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x))';
+  def conversionToScalaList(type) {
+    if (type.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(type.args[0]) + ')';
+    } else if (type.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ type.args[0].simpleName +'(x))';
     } else {
-      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ')';
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(type.args[0]),type.args[0]) + ')';
     }
   }
 
-  def convertMethodReturnToScalaSet(method) {
-    if (method.returnType.args[0].kind == CLASS_API) {
-      return '.asScala.map(' + toScalaApply(method.returnType.args[0]) + ').toSet';
-    } else if (method.returnType.args[0].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(x => '+ method.returnType.args[0].simpleName +'(x)).toSet';
+  def conversionToScalaSet(type) {
+    if (type.args[0].kind == CLASS_API) {
+      return '.asScala.map(' + toScalaApply(type.args[0]) + ').toSet';
+    } else if (type.args[0].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(x => '+ type.args[0].simpleName +'(x)).toSet';
     } else {
-      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(method.returnType.args[0]),method.returnType.args[0]) + ').toSet';
+      return '.asScala.map(x => x:' + toOptionIfNullable(toScalaType(type.args[0]),type.args[0]) + ').toSet';
     }
   }
 
-  def convertMethodReturnToScalaMap(method) {
-    if (method.returnType.args[1].kind == CLASS_API) {
-      return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(method.returnType.args[1]) + ')).toMap';
-    } else if (method.returnType.args[1].kind == CLASS_DATA_OBJECT) {
-      return '.asScala.map(kv => (kv._1, '+ method.returnType.args[1].simpleName +'(kv._2))).toMap';
-    } else if (method.returnType.args[1].kind == CLASS_STRING ||
-               method.returnType.args[1].kind == CLASS_JSON_OBJECT ||
-               method.returnType.args[1].kind == CLASS_JSON_ARRAY) {
+  def conversionToScalaMap(type) {
+    if (type.args[1].kind == CLASS_API) {
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toScalaApply(type.args[1]) + ')).toMap';
+    } else if (type.args[1].kind == CLASS_DATA_OBJECT) {
+      return '.asScala.map(kv => (kv._1, '+ type.args[1].simpleName +'(kv._2))).toMap';
+    } else if (type.args[1].kind == CLASS_STRING ||
+               type.args[1].kind == CLASS_JSON_OBJECT ||
+               type.args[1].kind == CLASS_JSON_ARRAY) {
       return '.asScala.toMap';
     } else {
-      return '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(method.returnType.args[1]), method.returnType.args[1]) + ')).toMap';
+      return '.asScala.map(kv => (kv._1, kv._2: ' + toOptionIfNullable(toScalaType(type.args[1]), type.args[1]) + ')).toMap';
     }
   }
 
-  def convertMethodReturnToScalaType(method) {
+  def generateConversionForType(type, targetStatement) {
     var invocation = '';
-    if (method.returnType.kind == CLASS_LIST) {
-      invocation += convertMethodReturnToScalaList(method);
-    } else if (method.returnType.kind == CLASS_SET) {
-      invocation += convertMethodReturnToScalaSet(method);
-    } else if (method.returnType.kind == CLASS_MAP) {
-      invocation += convertMethodReturnToScalaMap(method);
+    var typeKind = type.kind;
+    if (typeKind == CLASS_LIST) {
+      invocation += targetStatement + conversionToScalaList(method.returnType);
+    } else if (typeKind == CLASS_SET) {
+      invocation += targetStatement + conversionToScalaSet(method.returnType);
+    } else if (typeKind == CLASS_MAP) {
+      invocation += targetStatement + conversionToScalaMap(method.returnType);
+    } else if(typeKind == CLASS_PRIMITIVE || typeKind == CLASS_BOXED_PRIMITIVE) {
+    } else if(typeKind == CLASS_API) {
+      invocation += toScalaApply(type) + '(' + targetStatement + ')';
+    } else if(typeKind == CLASS_DATA_OBJECT) {
+      invocation += type.simpleName + '(' + targetStatement + ')';
     }
-    return invocation;
+
+    if(invocation != '') {
+      return invocation;
+    }
+    return targetStatement;
   }
 
   /**
@@ -544,7 +554,8 @@
     var isFluent = method.isFluent();
     var isFuture = shouldMethodReturnAFuture(method);
     var isConversionRequired = doesKindNeedConversionToScalaType(method.returnType.kind);
-    var rawMethodInvocation = target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) + ')';
+
+    var javaMethod = target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) + ')';
 
     /**
      * Take care of methods returning Handler[AsyncResult]. They need to convert the provided handler into a
@@ -584,16 +595,13 @@
       } else {
         invocation += '(';
       }
-      invocation += rawMethodInvocation + ')'
+      invocation += javaMethod + ')';
     }
-    else if (!isFluent and method.returnType.kind == CLASS_API) {
-      invocation += toScalaApply(method.returnType) + '(' + rawMethodInvocation + ')';
-    }
-    else if (method.returnType.kind == CLASS_DATA_OBJECT) {
-      invocation = method.returnType.simpleName + '(' +rawMethodInvocation + ')';
+    else if (!isFluent) {
+      invocation += generateConversionForType(method.returnType, javaMethod);
     }
     else {
-      invocation += rawMethodInvocation;
+      invocation += javaMethod;
     }
 
     /**
@@ -601,7 +609,7 @@
      */
     if (method.returnType.isNullable){
       if (isConversionRequired) {
-        invocation = 'scala.Option('+invocation+') match { case Some(x) => Some(x' + convertMethodReturnToScalaType(method) + '); case None => None};\n'
+        invocation = 'scala.Option('+javaMethod+').map(_' + generateConversionForType(method.returnType, '') + ')\n'
       }
       else {
         if (method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
@@ -613,7 +621,7 @@
       }
     }
     else {
-      invocation += convertMethodReturnToScalaType(method) + '\n';
+      invocation += '\n';
     }
 
     /**
