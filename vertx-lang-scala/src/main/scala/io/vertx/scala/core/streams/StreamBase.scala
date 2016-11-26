@@ -39,7 +39,7 @@ def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase
 
 object StreamBase {
 
-  def apply(_asJava: JStreamBase): StreamBase =
+    def apply(_asJava: JStreamBase): StreamBase =
     new StreamBaseImpl(_asJava)
 
   private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {

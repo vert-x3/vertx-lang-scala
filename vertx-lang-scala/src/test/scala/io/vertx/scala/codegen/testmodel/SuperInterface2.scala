@@ -33,7 +33,7 @@ trait SuperInterface2 {
 
 object SuperInterface2 {
 
-  def apply(_asJava: JSuperInterface2): SuperInterface2 =
+    def apply(_asJava: JSuperInterface2): SuperInterface2 =
     new SuperInterface2Impl(_asJava)
 
   private class SuperInterface2Impl(private val _asJava: JSuperInterface2) extends SuperInterface2 {

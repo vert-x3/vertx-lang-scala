@@ -37,7 +37,7 @@ def isMetricsEnabled(): Boolean
 
 object Measured {
 
-  def apply(_asJava: JMeasured): Measured =
+    def apply(_asJava: JMeasured): Measured =
     new MeasuredImpl(_asJava)
 
   private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
