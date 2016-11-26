@@ -157,7 +157,7 @@ def localAddress(): SocketAddress
 
 object WebSocketBase {
 
-  def apply(_asJava: JWebSocketBase): WebSocketBase =
+    def apply(_asJava: JWebSocketBase): WebSocketBase =
     new WebSocketBaseImpl(_asJava)
 
   private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {

@@ -149,7 +149,7 @@ import @{importedType.raw.translateName("scala")}\n
 @else{}
 	object @{type.raw.simpleName} {\n
 	\n
-		  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+    def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 		    new @{writeImplType(type)}(_asJava)\n
 		\n
 		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n

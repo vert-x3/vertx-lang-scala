@@ -96,7 +96,7 @@ def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T]
 
 object WriteStream {
 
-  def apply[T](_asJava: JWriteStream[T]): WriteStream[T] =
+    def apply[T](_asJava: JWriteStream[T]): WriteStream[T] =
     new WriteStreamImpl[T](_asJava)
 
   private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {

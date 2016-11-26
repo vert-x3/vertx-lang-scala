@@ -68,7 +68,7 @@ def endHandler(endHandler: io.vertx.core.Handler[Unit]): ReadStream[T]
 
 object ReadStream {
 
-  def apply[T](_asJava: JReadStream[T]): ReadStream[T] =
+    def apply[T](_asJava: JReadStream[T]): ReadStream[T] =
     new ReadStreamImpl[T](_asJava)
 
   private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
