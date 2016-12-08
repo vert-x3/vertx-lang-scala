@@ -17,6 +17,8 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Vertx => JVertx}
@@ -192,7 +194,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def fileSystem(): FileSystem = {
     if (cached_0 == null) {
-      cached_0 =    FileSystem.apply(_asJava.fileSystem())
+      cached_0 = FileSystem.apply(_asJava.fileSystem()).asInstanceOf
     }
     cached_0
   }
@@ -203,7 +205,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def eventBus(): EventBus = {
     if (cached_1 == null) {
-      cached_1 =    EventBus.apply(_asJava.eventBus())
+      cached_1 = EventBus.apply(_asJava.eventBus()).asInstanceOf
     }
     cached_1
   }
@@ -224,7 +226,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def sharedData(): SharedData = {
     if (cached_2 == null) {
-      cached_2 =    SharedData.apply(_asJava.sharedData())
+      cached_2 = SharedData.apply(_asJava.sharedData()).asInstanceOf
     }
     cached_2
   }
@@ -237,7 +239,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the unique ID of the timer
     */
   def setTimer(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
-    _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
+    _asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => toScala(x))(handler).asInstanceOf)
   }
 
   /**
@@ -258,7 +260,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the unique ID of the timer
     */
   def setPeriodic(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
-    _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler))
+    _asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => toScala(x))(handler).asInstanceOf)
   }
 
   /**
@@ -286,7 +288,7 @@ class Vertx(private val _asJava: JVertx)
     * @param action - a handler representing the action to execute
     */
   def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action.handle()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => action.handle()).asInstanceOf)
   }
 
   /**
@@ -305,8 +307,8 @@ class Vertx(private val _asJava: JVertx)
     * @return The future will be notified when the close is complete.
     */
   def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.close(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -333,8 +335,8 @@ class Vertx(private val _asJava: JVertx)
     * @return a future which will be notified when the deployment is complete
     */
   def deployVerticleFuture(name: String): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
-    _asJava.deployVerticle(name, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => toScala(x)))
+    _asJava.deployVerticle(name, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -356,8 +358,8 @@ class Vertx(private val _asJava: JVertx)
     * @return a future which will be notified when the deployment is complete
     */
   def deployVerticleFuture(name: String, options: DeploymentOptions): concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String,String]((x => x))
-    _asJava.deployVerticle(name, options.asJava, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => toScala(x)))
+    _asJava.deployVerticle(name, options.asJava, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -377,8 +379,8 @@ class Vertx(private val _asJava: JVertx)
     * @return a future which will be notified when the undeployment is complete
     */
   def undeployFuture(deploymentID: String): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.undeploy(deploymentID, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.undeploy(deploymentID, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -416,18 +418,18 @@ class Vertx(private val _asJava: JVertx)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
+  def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, ordered, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx#executeBlockingFuture]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
+  def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -469,7 +471,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Vertx = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
@@ -492,8 +494,8 @@ object Vertx {
   }
 
   def clusteredVertxFuture(options: VertxOptions): concurrent.Future[Vertx] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JVertx,Vertx]((x => if (x == null) null else Vertx.apply(x)))
-    io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Vertx]((x => if (x == null) null else Vertx.apply(x)))
+    io.vertx.core.Vertx.clusteredVertx(options.asJava, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 

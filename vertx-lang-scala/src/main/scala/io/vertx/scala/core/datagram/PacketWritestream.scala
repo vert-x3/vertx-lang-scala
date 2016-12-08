@@ -17,6 +17,8 @@
 package io.vertx.scala.core.datagram
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
@@ -59,7 +61,7 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): PacketWritestream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
@@ -74,7 +76,7 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): PacketWritestream = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 

@@ -17,6 +17,8 @@
 package io.vertx.scala.core.parsetools
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.parsetools.{RecordParser => JRecordParser}
@@ -60,7 +62,7 @@ class RecordParser(private val _asJava: JRecordParser)
   def asJava: JRecordParser = _asJava
 
   def setOutput(output: io.vertx.core.Handler[Buffer]): Unit = {
-    _asJava.setOutput(funcToMappedHandler(Buffer.apply)(output))
+    _asJava.setOutput(funcToMappedHandler(Buffer.apply)(output).asInstanceOf)
   }
 
   /**
@@ -111,15 +113,15 @@ object RecordParser {
     new RecordParser(_asJava)
 
   def newDelimited(delim: String, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim, funcToMappedHandler(Buffer.apply)(output)))
+    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim, funcToMappedHandler(Buffer.apply)(output).asInstanceOf))
   }
 
   def newDelimited(delim: Buffer, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer], funcToMappedHandler(Buffer.apply)(output)))
+    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer], funcToMappedHandler(Buffer.apply)(output).asInstanceOf))
   }
 
   def newFixed(size: Int, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newFixed(size, funcToMappedHandler(Buffer.apply)(output)))
+    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newFixed(size, funcToMappedHandler(Buffer.apply)(output).asInstanceOf))
   }
 
 }

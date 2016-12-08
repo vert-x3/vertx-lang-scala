@@ -17,6 +17,8 @@
 package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.net.{NetClient => JNetClient}
@@ -54,8 +56,8 @@ class NetClient(private val _asJava: JNetClient)
     * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
-    _asJava.connect(port, host, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
+    _asJava.connect(port, host, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 

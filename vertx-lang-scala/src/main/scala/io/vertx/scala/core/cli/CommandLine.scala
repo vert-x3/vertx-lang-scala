@@ -17,6 +17,8 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.cli.{CommandLine => JCommandLine}
@@ -52,8 +54,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getOptionValue[T](name: String): T = {
-    _asJava.getOptionValue(name)
+  def getOptionValue[T: TypeTag](name: String): T = {
+    toScala(_asJava.getOptionValue(name))
   }
 
   /**
@@ -61,8 +63,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T](name: String): T = {
-    _asJava.getArgumentValue(name)
+  def getArgumentValue[T: TypeTag](name: String): T = {
+    toScala(_asJava.getArgumentValue(name))
   }
 
   /**
@@ -70,8 +72,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param index the index
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T](index: Int): T = {
-    _asJava.getArgumentValue(index)
+  def getArgumentValue[T: TypeTag](index: Int): T = {
+    toScala(_asJava.getArgumentValue(index))
   }
 
   /**

@@ -76,7 +76,7 @@
       if (type.args.isEmpty)
         ret = 'io.vertx.core.AsyncResult';
       else
-        ret = 'io.vertx.core.AsyncResult [' + toScalaType(type.args[0]) + ']';
+        ret = 'io.vertx.core.AsyncResult[' + toScalaType(type.args[0]) + ']';
     } else if (type.kind == CLASS_API) {
       var retVal = helper.getNonGenericType(type.simpleName);
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
@@ -330,7 +330,7 @@
         type.kind == CLASS_BOXED_PRIMITIVE ||
         type.name == 'Throwable' ||
         type.name == 'java.lang.Throwable') {
-      invocation += '(x => x)';
+      invocation += '(x => toScala(x))';
     } else if (type.kind == CLASS_VOID) {
       invocation += '(x => ())';
     } else if (type.kind == CLASS_OBJECT ||
@@ -338,7 +338,7 @@
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY ||
                type.kind == CLASS_ENUM) {
-      invocation += '(x => x)';
+      invocation += '(x => toScala(x))';
     } else if (type.kind == CLASS_DATA_OBJECT) {
       invocation += '(x => ' + type.translateName('scala') + '(x))';
     } else if (type.kind == CLASS_API) {
@@ -375,13 +375,13 @@
     } else if (type.kind == CLASS_PRIMITIVE ||
                type.kind == CLASS_BOXED_PRIMITIVE ||
                type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x)('+handleOption(param);
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => toScala(x))('+handleOption(param);
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
       invocation += '(' + handleOption(param);
     } else if (type.name == 'void' || type.name == 'java.lang.Void') {
-      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => x.asInstanceOf[Unit])(';
+      invocation += mappedFunc + '[' + changeJavaGenericNotationToScalaNotation(type) + ', ' + toOptionIfNullable(toScalaType(type),type) + '](x => toScala(x))(';
       if (convertUnit) {
         invocation += '_ => ';
       }
@@ -414,17 +414,26 @@
       } else {
         invocation += ', ';
       }
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation += "toJava(";
+      }
       if (isKeyword(param.name)) {
         invocation += escapeIfKeyword(param.name);
       } else {
         invocation += handleParamConversion(param);
+      }
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation += ")";
+      }
+      if(param.type.kind == CLASS_OBJECT || param.type.isParameterized) {
+        invocation += ".asInstanceOf";
       }
     }
     if (isFuture) {
       if (!first) {
         invocation += ', ';
       }
-      invocation += 'promiseAndHandler._1';
+      invocation += 'promiseAndHandler._1.asInstanceOf';
     }
     return invocation;
   }
@@ -466,6 +475,8 @@
       invocation += ')';
     } else if (param.type.kind == CLASS_FUNCTION) {
       invocation += 'asJavaFunction(' + param.name + ')'
+    } else if (param.type.kind == CLASS_OBJECT) {
+      invocation += param.name
     } else {
       invocation += handleOption(param);
     }
@@ -553,7 +564,7 @@
       } else {
         invocation += target + '.' + escapeIfKeyword(method.name) + '(' + handleMethodParams(method) +')';
       }
-      return indentation + invocation + '\n';
+      return indentation + invocation;
     }
 
     /**
@@ -587,32 +598,25 @@
       invocation += javaMethod;
     }
 
+    if(method.returnType.kind == CLASS_OBJECT) {
+      invocation = "toScala("+invocation+")";
+    }
+
     /**
      * Take care of nullables by wrapping them in scala.Options
      */
     if (method.returnType.isNullable){
       if (isConversionRequired) {
-        invocation = 'scala.Option('+javaMethod+').map(_' + generateConversionForType(method.returnType, '') + ')\n'
+        invocation = 'scala.Option('+javaMethod+').map(_' + generateConversionForType(method.returnType, '') + ')'
       }
       else {
         if (method.returnType.kind == CLASS_PRIMITIVE || method.returnType.kind == CLASS_BOXED_PRIMITIVE) {
-          invocation = 'nullsafeConvToOption('+invocation+')\n'
+          invocation = 'nullsafeConvToOption('+invocation+')'
         }
         else {
-          invocation = 'scala.Option('+invocation+')\n'
+          invocation = 'scala.Option('+invocation+')'
         }
       }
-    }
-    else {
-      invocation += '\n';
-    }
-
-    /**
-     * Return `this` for fluent methods.
-     */
-    if (method.isFluent() && !isFuture) {
-      invocation += indentation;
-      invocation += 'this\n';
     }
     indentation + invocation;
   }

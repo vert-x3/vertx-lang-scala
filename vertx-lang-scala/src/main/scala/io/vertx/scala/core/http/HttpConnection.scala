@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
@@ -24,6 +26,8 @@ import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.http.{GoAway => JGoAway}
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * Represents an HTTP connection.
@@ -104,7 +108,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def goAwayHandler(handler: io.vertx.core.Handler[GoAway]): HttpConnection = {
-    _asJava.goAwayHandler(funcToMappedHandler[JGoAway, GoAway](a => GoAway(a))(handler))
+    _asJava.goAwayHandler(funcToMappedHandler[JGoAway, GoAway](a => GoAway(a))(handler).asInstanceOf)
     this
   }
 
@@ -116,7 +120,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def shutdownHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
-    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
@@ -151,7 +155,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
@@ -193,8 +197,8 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return the future notified when the settings have been acknowledged by the remote endpoint
     */
   def updateSettingsFuture(settings: Http2Settings): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.updateSettings(settings.asJava, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.updateSettings(settings.asJava, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -213,7 +217,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def remoteSettingsHandler(handler: io.vertx.core.Handler[Http2Settings]): HttpConnection = {
-    _asJava.remoteSettingsHandler(funcToMappedHandler[JHttp2Settings, Http2Settings](a => Http2Settings(a))(handler))
+    _asJava.remoteSettingsHandler(funcToMappedHandler[JHttp2Settings, Http2Settings](a => Http2Settings(a))(handler).asInstanceOf)
     this
   }
 
@@ -225,8 +229,8 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return an async result future notified with pong reply or the failure
     */
   def pingFuture(data: Buffer): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
-    _asJava.ping(data.asJava.asInstanceOf[JBuffer], promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.ping(data.asJava.asInstanceOf[JBuffer], promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -238,7 +242,7 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def pingHandler(handler: io.vertx.core.Handler[Buffer]): HttpConnection = {
-    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.pingHandler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf)
     this
   }
 
@@ -248,10 +252,32 @@ class HttpConnection(private val _asJava: JHttpConnection) {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpConnection = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
+  /**
+    * @return the remote address for this connection
+    */
+  def remoteAddress(): SocketAddress = {
+    if (cached_0 == null) {
+      cached_0 = SocketAddress.apply(_asJava.remoteAddress()).asInstanceOf
+    }
+    cached_0
+  }
+
+  /**
+    * @return the remote address for this connection
+    */
+  def localAddress(): SocketAddress = {
+    if (cached_1 == null) {
+      cached_1 = SocketAddress.apply(_asJava.localAddress()).asInstanceOf
+    }
+    cached_1
+  }
+
+  private var cached_0: SocketAddress = _
+  private var cached_1: SocketAddress = _
 }
 
 object HttpConnection {

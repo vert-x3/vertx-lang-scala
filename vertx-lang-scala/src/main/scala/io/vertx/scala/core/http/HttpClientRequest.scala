@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
@@ -76,7 +78,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpClientRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
@@ -93,12 +95,12 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
   def handler(handler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler))
+    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler).asInstanceOf)
     this
   }
 
@@ -113,7 +115,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
     this
   }
 
@@ -201,7 +203,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0 =    MultiMap.apply(_asJava.headers())
+      cached_0 = MultiMap.apply(_asJava.headers()).asInstanceOf
     }
     cached_0
   }
@@ -245,7 +247,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def continueHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
@@ -267,7 +269,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
   def sendHead(completionHandler: io.vertx.core.Handler[io.vertx.core.http.HttpVersion]): HttpClientRequest = {
-    _asJava.sendHead((completionHandler))
+    _asJava.sendHead((completionHandler).asInstanceOf)
     this
   }
 
@@ -339,7 +341,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def pushHandler(handler: io.vertx.core.Handler[HttpClientRequest]): HttpClientRequest = {
-    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler))
+    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler).asInstanceOf)
     this
   }
 
@@ -372,7 +374,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def connection(): HttpConnection = {
     if (cached_1 == null) {
-      cached_1 =    HttpConnection.apply(_asJava.connection())
+      cached_1 = HttpConnection.apply(_asJava.connection()).asInstanceOf
     }
     cached_1
   }
@@ -383,7 +385,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpClientRequest = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler).asInstanceOf)
     this
   }
 

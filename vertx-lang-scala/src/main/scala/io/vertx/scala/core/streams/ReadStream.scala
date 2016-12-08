@@ -17,6 +17,8 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -68,12 +70,12 @@ def endHandler(endHandler: io.vertx.core.Handler[Unit]): ReadStream[T]
 
 object ReadStream {
 
-    def apply[T](_asJava: JReadStream[T]): ReadStream[T] =
-    new ReadStreamImpl[T](_asJava)
+    def apply[T: TypeTag](_asJava: JReadStream[Object]): ReadStream[T] =
+    new ReadStream(_asJava)
 
-  private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
+  private class ReadStreamImpl[T: TypeTag](private val _asJava: JReadStream[Object]) extends ReadStream[T] {
 
-    def asJava: JReadStream[T] = _asJava
+    def asJava: JReadStream[Object] = _asJava
 
     /**
       * Set an exception handler on the read stream.
@@ -81,8 +83,8 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ReadStream[T] = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-      this
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    this
     }
 
     /**
@@ -90,8 +92,8 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def handler(handler: io.vertx.core.Handler[T]): ReadStream[T] = {
-        _asJava.handler((handler))
-      this
+        _asJava.handler((handler).asInstanceOf)
+    this
     }
 
     /**
@@ -100,7 +102,7 @@ object ReadStream {
       */
     def pause(): ReadStream[T] = {
         _asJava.pause()
-      this
+    this
     }
 
     /**
@@ -109,7 +111,7 @@ object ReadStream {
       */
     def resume(): ReadStream[T] = {
         _asJava.resume()
-      this
+    this
     }
 
     /**
@@ -117,8 +119,8 @@ object ReadStream {
       * @return a reference to this, so the API can be used fluently
       */
     def endHandler(endHandler: io.vertx.core.Handler[Unit]): ReadStream[T] = {
-        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
-      this
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    this
     }
 
   }

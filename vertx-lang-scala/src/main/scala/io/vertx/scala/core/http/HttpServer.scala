@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServer => JHttpServer}
@@ -57,7 +59,7 @@ class HttpServer(private val _asJava: JHttpServer)
     */
   def requestStream(): HttpServerRequestStream = {
     if (cached_0 == null) {
-      cached_0 =    HttpServerRequestStream.apply(_asJava.requestStream())
+      cached_0 = HttpServerRequestStream.apply(_asJava.requestStream()).asInstanceOf
     }
     cached_0
   }
@@ -68,7 +70,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def requestHandler(handler: io.vertx.core.Handler[HttpServerRequest]): HttpServer = {
-    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler))
+    _asJava.requestHandler(funcToMappedHandler(HttpServerRequest.apply)(handler).asInstanceOf)
     this
   }
 
@@ -77,7 +79,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpServer = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler))
+    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler).asInstanceOf)
     this
   }
 
@@ -88,7 +90,7 @@ class HttpServer(private val _asJava: JHttpServer)
     */
   def websocketStream(): ServerWebSocketStream = {
     if (cached_1 == null) {
-      cached_1 =    ServerWebSocketStream.apply(_asJava.websocketStream())
+      cached_1 = ServerWebSocketStream.apply(_asJava.websocketStream()).asInstanceOf
     }
     cached_1
   }
@@ -99,7 +101,7 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return a reference to this, so the API can be used fluently
     */
   def websocketHandler(handler: io.vertx.core.Handler[ServerWebSocket]): HttpServer = {
-    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler))
+    _asJava.websocketHandler(funcToMappedHandler(ServerWebSocket.apply)(handler).asInstanceOf)
     this
   }
 
@@ -137,8 +139,8 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int, host: String): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
-    _asJava.listen(port, host, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    _asJava.listen(port, host, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -159,8 +161,8 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return the listen future
     */
   def listenFuture(port: Int): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
-    _asJava.listen(port, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    _asJava.listen(port, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -169,8 +171,8 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return the listen future
     */
   def listenFuture(): concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer,HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
-    _asJava.listen(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServer]((x => if (x == null) null else HttpServer.apply(x)))
+    _asJava.listen(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -188,8 +190,8 @@ class HttpServer(private val _asJava: JHttpServer)
     * @return the future
     */
   def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.close(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 

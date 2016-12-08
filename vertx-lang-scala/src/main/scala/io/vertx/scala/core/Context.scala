@@ -17,6 +17,8 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.{Context => JContext}
@@ -65,7 +67,7 @@ class Context(private val _asJava: JContext) {
     * @param action the action to run
     */
   def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => action.handle()))
+    _asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => action.handle()).asInstanceOf)
   }
 
   /**
@@ -83,9 +85,9 @@ class Context(private val _asJava: JContext) {
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), ordered, promiseAndHandler._1)
+  def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, ordered, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -94,9 +96,9 @@ class Context(private val _asJava: JContext) {
     * @param blockingCodeHandler handler representing the blocking code to run
     * @return future that will be called when the blocking code is complete
     */
-  def executeBlockingFuture[T](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T,T]((x => x))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler), promiseAndHandler._1)
+  def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
+    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -161,8 +163,8 @@ class Context(private val _asJava: JContext) {
     * @param key the key of the data
     * @return the data
     */
-  def get[T](key: String): T = {
-    _asJava.get(key)
+  def get[T: TypeTag](key: String): T = {
+    toScala(_asJava.get(key))
   }
 
   /**
@@ -173,7 +175,7 @@ class Context(private val _asJava: JContext) {
     * @param value the data
     */
   def put(key: String, value: AnyRef): Unit = {
-    _asJava.put(key, value)
+    _asJava.put(key, toJava(value).asInstanceOf)
   }
 
   /**
@@ -207,7 +209,7 @@ class Context(private val _asJava: JContext) {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Context = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 

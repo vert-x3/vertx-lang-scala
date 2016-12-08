@@ -20,16 +20,66 @@
     return ret;
   }
 
+  def writeTypeParamsWithVarianceAndTypeTag(typeParams) {
+    var ret = "";
+    var first = true;
+    if(typeParams.size > 0) {
+      ret += '[';
+    }
+    for(t : typeParams) {
+      if(!first) {
+        ret += ", ";
+      }
+      else {
+        first = false;
+      }
+      ret += t.name+': TypeTag';
+    }
+    if(typeParams.size > 0) {
+          ret += ']';
+        }
+    return ret;
+  }
+
+  def writeTypeParamsWithoutVariance(typeParams) {
+    var ret = "";
+    var first = true;
+    if(typeParams.size > 0) {
+      ret += '[';
+    }
+    for(t : typeParams) {
+      if(!first) {
+        ret += ", ";
+      }
+      else {
+        first = false;
+      }
+      ret += 'Object';
+    }
+    if(typeParams.size > 0) {
+          ret += ']';
+        }
+    return ret;
+  }
+
   def writeType(type) {
     return helper.getSimpleName(type.raw.name)+(writeTypeParamsWithVariance(typeParams));
+  }
+
+  def writeCLassType(type) {
+    return helper.getSimpleName(type.raw.name)+(writeTypeParamsWithVarianceAndTypeTag(typeParams));
   }
 
   def writeImplType(type) {
     return helper.getSimpleName(type.raw.name)+"Impl"+(writeTypeParamsWithVariance(typeParams));
   }
 
+  def writeImplTypeWithTypeTag(type) {
+    return helper.getSimpleName(type.raw.name)+"Impl"+(writeTypeParamsWithVarianceAndTypeTag(typeParams));
+  }
+
   def writeDelegateType(type) {
-    return 'J'+type.raw.simpleName+(writeTypeParamsWithVariance(typeParams));
+    return 'J'+type.raw.simpleName+(writeTypeParamsWithoutVariance(typeParams));
   }
 
 }
