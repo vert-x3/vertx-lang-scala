@@ -166,13 +166,12 @@ object HandlerOps {
     * Safely convert from Java type to Scala type.
     *
     * @param conversion function to convert from Java to Scala
-    * @tparam J incoming Java type
     * @tparam S outgoing Scala type
     * @return
     */
-  def handlerForAsyncResultWithConversion[J, S](conversion: J => S): (Handler[core.AsyncResult[J]], Promise[S]) = {
+  def handlerForAsyncResultWithConversion[S](conversion: Object => S): (Handler[core.AsyncResult[Object]], Promise[S]) = {
     val promise = Promise[S]()
-    val handler: Handler[core.AsyncResult[J]] = (event: core.AsyncResult[J]) => {
+    val handler: Handler[core.AsyncResult[Object]] = (event: core.AsyncResult[Object]) => {
       if (event.failed())
         promise.failure(event.cause())
       else {

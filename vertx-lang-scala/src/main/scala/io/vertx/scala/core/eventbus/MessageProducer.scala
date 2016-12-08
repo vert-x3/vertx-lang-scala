@@ -17,6 +17,8 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
@@ -29,16 +31,16 @@ import io.vertx.core.eventbus.{Message => JMessage}
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: JMessageProducer[T]) 
+class MessageProducer[T: TypeTag](private val _asJava: JMessageProducer[Object]) 
     extends WriteStream[T] {
 
-  def asJava: JMessageProducer[T] = _asJava
+  def asJava: JMessageProducer[Object] = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
     */
   def end(t: T): Unit = {
-    _asJava.end(t)
+    _asJava.end(toJava(t).asInstanceOf)
   }
 
   /**
@@ -55,22 +57,22 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     * @return reference to this for fluency
     */
   def send(message: T): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message))
+    MessageProducer.apply[T](_asJava.send(toJava(message).asInstanceOf))
   }
 
-  def sendFuture[R](message: T): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
+  def sendFuture[R: TypeTag](message: T): concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x)))
+    MessageProducer.apply[T](_asJava.send(toJava(message).asInstanceOf, promiseAndHandler._1.asInstanceOf))
     promiseAndHandler._2.future
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageProducer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
   def write(data: T): MessageProducer[T] = {
-    _asJava.write(data)
+    _asJava.write(toJava(data).asInstanceOf)
     this
   }
 
@@ -80,7 +82,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
@@ -119,7 +121,7 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
 
 object MessageProducer {
 
-  def apply[T](_asJava: JMessageProducer[T]): MessageProducer[T] =
+  def apply[T: TypeTag](_asJava: JMessageProducer[Object]): MessageProducer[T] =
     new MessageProducer(_asJava)
 
 }

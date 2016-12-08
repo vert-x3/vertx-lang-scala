@@ -17,6 +17,8 @@
 package io.vertx.scala.core.shareddata
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.shareddata.{LocalMap => JLocalMap}
@@ -30,9 +32,9 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
   */
-class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
+class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Object]) {
 
-  def asJava: JLocalMap[K, V] = _asJava
+  def asJava: JLocalMap[Object, Object] = _asJava
 
   /**
     * Get a value from the map
@@ -40,7 +42,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return the value, or null if none
     */
   def get(key: K): V = {
-    _asJava.get(key)
+    toScala(_asJava.get(toJava(key).asInstanceOf))
   }
 
   /**
@@ -50,7 +52,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return return the old value, or null if none
     */
   def put(key: K, value: V): V = {
-    _asJava.put(key, value)
+    toScala(_asJava.put(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
   }
 
   /**
@@ -59,7 +61,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return the old value
     */
   def remove(key: K): V = {
-    _asJava.remove(key)
+    toScala(_asJava.remove(toJava(key).asInstanceOf))
   }
 
   /**
@@ -91,7 +93,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return the old value or null, if none
     */
   def putIfAbsent(key: K, value: V): V = {
-    _asJava.putIfAbsent(key, value)
+    toScala(_asJava.putIfAbsent(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
   }
 
   /**
@@ -101,7 +103,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return true if removed
     */
   def removeIfPresent(key: K, value: V): Boolean = {
-    _asJava.removeIfPresent(key, value)
+    _asJava.removeIfPresent(toJava(key).asInstanceOf, toJava(value).asInstanceOf)
   }
 
   /**
@@ -112,7 +114,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return true if removed
     */
   def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    _asJava.replaceIfPresent(key, oldValue, newValue)
+    _asJava.replaceIfPresent(toJava(key).asInstanceOf, toJava(oldValue).asInstanceOf, toJava(newValue).asInstanceOf)
   }
 
   /**
@@ -122,7 +124,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
     * @return the old value
     */
   def replace(key: K, value: V): V = {
-    _asJava.replace(key, value)
+    toScala(_asJava.replace(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
   }
 
   /**
@@ -136,7 +138,7 @@ class LocalMap[K, V](private val _asJava: JLocalMap[K, V]) {
 
 object LocalMap {
 
-  def apply[K, V](_asJava: JLocalMap[K, V]): LocalMap[K, V] =
+  def apply[K: TypeTag, V: TypeTag](_asJava: JLocalMap[Object, Object]): LocalMap[K, V] =
     new LocalMap(_asJava)
 
 }

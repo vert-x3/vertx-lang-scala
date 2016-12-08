@@ -27,6 +27,8 @@ package @{packageName}\n
 
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.HandlerOps._\n
+import io.vertx.lang.scala.Converter._\n
+import scala.reflect.runtime.universe._\n
 import scala.compat.java8.FunctionConverters._\n
 import scala.collection.JavaConverters._\n
 import @{convertTypeToAliasedType(type)}\n
@@ -100,7 +102,7 @@ import @{importedType.raw.translateName("scala")}\n
   */\n
 @end{}
 @if{concrete}
-	class @{writeType(type);}(private val _asJava: @{writeDelegateType(type)})
+	class @{writeCLassType(type);}(private val _asJava: @{writeDelegateType(type)})
 @else{}
 	trait @{writeType(type);}
 @end{}
@@ -125,20 +127,23 @@ import @{importedType.raw.translateName("scala")}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+	  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
 	@if{shouldMethodBeIncluded(method, staticMethods)}
 	@if{shouldMethodReturnAFuture(method)}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
-		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{changeJavaGenericNotationToScalaNotation(typeOfReturnedFuture(method))},@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
-			@{methodInvocation(type.raw.name, method, '    ');}
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
+		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
+			@{methodInvocation(type.raw.name, method, '    ');}\n
 		    promiseAndHandler._2.future\n
 	  }\n
 	@else{}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVariance(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
-			@{methodInvocation(type.raw.name, method, '    ');}
+	  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
+			@{methodInvocation(type.raw.name, method, '    ');}\n
+			@if{method.isFluent() && !shouldMethodReturnAFuture(method)}
+          this;
+      @end{}
 	  }\n
 	@end{}
 	\n
@@ -149,10 +154,10 @@ import @{importedType.raw.translateName("scala")}\n
 @else{}
 	object @{type.raw.simpleName} {\n
 	\n
-    def apply@{writeTypeParamsWithVariance(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
-		    new @{writeImplType(type)}(_asJava)\n
+    def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+		    new @{toScalaType(type)}(_asJava)\n
 		\n
-		  private class @{writeImplType(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
+		  private class @{writeImplTypeWithTypeTag(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
 			@includeNamed{'class-concrete.templ'; indentation='  '}
 		  }\n\n
 	}\n

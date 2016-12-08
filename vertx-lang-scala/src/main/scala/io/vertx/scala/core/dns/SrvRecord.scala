@@ -17,6 +17,8 @@
 package io.vertx.scala.core.dns
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}

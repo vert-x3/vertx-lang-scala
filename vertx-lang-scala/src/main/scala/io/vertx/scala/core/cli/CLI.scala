@@ -17,6 +17,8 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.cli.{CLI => JCLI}
@@ -49,7 +51,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava.asInstanceOf))
   }
 
   /**
@@ -59,7 +61,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
+    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava.asInstanceOf, validate))
   }
 
   /**
@@ -152,7 +154,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
-    _asJava.addOptions(options.map(x => if (x == null) null else x.asJava).asJava)
+    _asJava.addOptions(options.map(x => if (x == null) null else x.asJava).asJava.asInstanceOf)
     this
   }
 
@@ -162,7 +164,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
-    _asJava.setOptions(options.map(x => if (x == null) null else x.asJava).asJava)
+    _asJava.setOptions(options.map(x => if (x == null) null else x.asJava).asJava.asInstanceOf)
     this
   }
 
@@ -191,7 +193,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
-    _asJava.addArguments(args.map(x => if (x == null) null else x.asJava).asJava)
+    _asJava.addArguments(args.map(x => if (x == null) null else x.asJava).asJava.asInstanceOf)
     this
   }
 
@@ -201,7 +203,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
-    _asJava.setArguments(args.map(x => if (x == null) null else x.asJava).asJava)
+    _asJava.setArguments(args.map(x => if (x == null) null else x.asJava).asJava.asInstanceOf)
     this
   }
 

@@ -17,6 +17,8 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
@@ -35,18 +37,18 @@ import io.vertx.core.eventbus.{Message => JMessage}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T](private val _asJava: JMessageConsumer[T]) 
+class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object]) 
     extends ReadStream[Message[T]] {
 
-  def asJava: JMessageConsumer[T] = _asJava
+  def asJava: JMessageConsumer[Object] = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageConsumer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler))
+    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler).asInstanceOf)
     this
   }
 
@@ -61,7 +63,7 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
     this
   }
 
@@ -109,8 +111,8 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
     * @return the completion future
     */
   def completionFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.completionHandler(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.completionHandler(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -126,8 +128,8 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
     * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
   def unregisterFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.unregister(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.unregister(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -135,7 +137,7 @@ class MessageConsumer[T](private val _asJava: JMessageConsumer[T])
 
 object MessageConsumer {
 
-  def apply[T](_asJava: JMessageConsumer[T]): MessageConsumer[T] =
+  def apply[T: TypeTag](_asJava: JMessageConsumer[Object]): MessageConsumer[T] =
     new MessageConsumer(_asJava)
 
 }

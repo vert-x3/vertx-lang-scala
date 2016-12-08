@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
@@ -55,12 +57,12 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   def asJava: JHttpServerRequest = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf)
     this
   }
 
@@ -75,7 +77,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
     this
   }
 
@@ -147,7 +149,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def response(): HttpServerResponse = {
     if (cached_0 == null) {
-      cached_0 =    HttpServerResponse.apply(_asJava.response())
+      cached_0 = HttpServerResponse.apply(_asJava.response()).asInstanceOf
     }
     cached_0
   }
@@ -157,7 +159,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def headers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1 =    MultiMap.apply(_asJava.headers())
+      cached_1 = MultiMap.apply(_asJava.headers()).asInstanceOf
     }
     cached_1
   }
@@ -176,7 +178,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def params(): MultiMap = {
     if (cached_2 == null) {
-      cached_2 =    MultiMap.apply(_asJava.params())
+      cached_2 = MultiMap.apply(_asJava.params()).asInstanceOf
     }
     cached_2
   }
@@ -195,7 +197,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_3 == null) {
-      cached_3 =    SocketAddress.apply(_asJava.remoteAddress())
+      cached_3 = SocketAddress.apply(_asJava.remoteAddress()).asInstanceOf
     }
     cached_3
   }
@@ -205,7 +207,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def localAddress(): SocketAddress = {
     if (cached_4 == null) {
-      cached_4 =    SocketAddress.apply(_asJava.localAddress())
+      cached_4 = SocketAddress.apply(_asJava.localAddress()).asInstanceOf
     }
     cached_4
   }
@@ -225,7 +227,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @param bodyHandler This handler will be called after all the body has been received
     */
   def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
+    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler).asInstanceOf)
     this
   }
 
@@ -241,7 +243,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def netSocket(): NetSocket = {
     if (cached_5 == null) {
-      cached_5 =    NetSocket.apply(_asJava.netSocket())
+      cached_5 = NetSocket.apply(_asJava.netSocket()).asInstanceOf
     }
     cached_5
   }
@@ -270,7 +272,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def uploadHandler(uploadHandler: io.vertx.core.Handler[HttpServerFileUpload]): HttpServerRequest = {
-    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
+    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler).asInstanceOf)
     this
   }
 
@@ -285,7 +287,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def formAttributes(): MultiMap = {
     if (cached_6 == null) {
-      cached_6 =    MultiMap.apply(_asJava.formAttributes())
+      cached_6 = MultiMap.apply(_asJava.formAttributes()).asInstanceOf
     }
     cached_6
   }
@@ -324,7 +326,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]): HttpServerRequest = {
-    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
+    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler).asInstanceOf)
     this
   }
 
@@ -333,7 +335,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def connection(): HttpConnection = {
     if (cached_7 == null) {
-      cached_7 =    HttpConnection.apply(_asJava.connection())
+      cached_7 = HttpConnection.apply(_asJava.connection()).asInstanceOf
     }
     cached_7
   }

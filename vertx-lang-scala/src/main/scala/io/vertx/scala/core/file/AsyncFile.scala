@@ -17,6 +17,8 @@
 package io.vertx.scala.core.file
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
@@ -57,7 +59,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   def handler(handler: io.vertx.core.Handler[Buffer]): AsyncFile = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
+    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf)
     this
   }
 
@@ -72,7 +74,7 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): AsyncFile = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
+    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
     this
   }
 
@@ -87,12 +89,12 @@ class AsyncFile(private val _asJava: JAsyncFile)
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): AsyncFile = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
     this
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): AsyncFile = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
     this
   }
 
@@ -116,8 +118,8 @@ class AsyncFile(private val _asJava: JAsyncFile)
     * @return the future
     */
   def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.close(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -136,8 +138,8 @@ class AsyncFile(private val _asJava: JAsyncFile)
     * @return the future to call when the write is complete
     */
   def writeFuture(buffer: Buffer, position: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.write(buffer.asJava.asInstanceOf[JBuffer], position, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.write(buffer.asJava.asInstanceOf[JBuffer], position, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -157,8 +159,8 @@ class AsyncFile(private val _asJava: JAsyncFile)
     * @return the future to call when the write is complete
     */
   def readFuture(buffer: Buffer, offset: Int, position: Long, length: Int): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
-    _asJava.read(buffer.asJava.asInstanceOf[JBuffer], offset, position, length, promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer]((x => if (x == null) null else Buffer.apply(x)))
+    _asJava.read(buffer.asJava.asInstanceOf[JBuffer], offset, position, length, promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 
@@ -179,8 +181,8 @@ class AsyncFile(private val _asJava: JAsyncFile)
     * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def flushFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.flush(promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
+    _asJava.flush(promiseAndHandler._1.asInstanceOf)
     promiseAndHandler._2.future
   }
 

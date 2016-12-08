@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
@@ -63,7 +65,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def textData(): String = {
     if (cached_0 == null) {
-      cached_0 =    _asJava.textData()
+      cached_0 = _asJava.textData().asInstanceOf
     }
     cached_0
   }
@@ -73,7 +75,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def binaryData(): Buffer = {
     if (cached_1 == null) {
-      cached_1 =    Buffer.apply(_asJava.binaryData())
+      cached_1 = Buffer.apply(_asJava.binaryData()).asInstanceOf
     }
     cached_1
   }

@@ -17,6 +17,8 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.streams.{Pump => JPump}
@@ -89,12 +91,12 @@ object Pump {
   def apply(_asJava: JPump): Pump =
     new Pump(_asJava)
 
-  def pump[T](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]]))
+  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf, ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf))
   }
 
-  def pump[T](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]], ws.asJava.asInstanceOf[JWriteStream[T]], writeQueueMaxSize))
+  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf, ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf, writeQueueMaxSize))
   }
 
 }

@@ -17,6 +17,8 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{SendContext => JSendContext}
@@ -26,9 +28,9 @@ import io.vertx.core.eventbus.{Message => JMessage}
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T](private val _asJava: JSendContext[T]) {
+class SendContext[T: TypeTag](private val _asJava: JSendContext[Object]) {
 
-  def asJava: JSendContext[T] = _asJava
+  def asJava: JSendContext[Object] = _asJava
 
   /**
     * @return The message being sent
@@ -55,7 +57,7 @@ class SendContext[T](private val _asJava: JSendContext[T]) {
 
 object SendContext {
 
-  def apply[T](_asJava: JSendContext[T]): SendContext[T] =
+  def apply[T: TypeTag](_asJava: JSendContext[Object]): SendContext[T] =
     new SendContext(_asJava)
 
 }

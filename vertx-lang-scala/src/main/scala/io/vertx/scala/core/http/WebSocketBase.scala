@@ -17,6 +17,8 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
@@ -158,7 +160,7 @@ def localAddress(): SocketAddress
 object WebSocketBase {
 
     def apply(_asJava: JWebSocketBase): WebSocketBase =
-    new WebSocketBaseImpl(_asJava)
+    new WebSocketBase(_asJava)
 
   private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
 
@@ -180,43 +182,43 @@ object WebSocketBase {
     }
 
     def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketBase = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-      this
+        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    this
     }
 
     def handler(handler: io.vertx.core.Handler[Buffer]): WebSocketBase = {
-        _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
-      this
+        _asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf)
+    this
     }
 
     def pause(): WebSocketBase = {
         _asJava.pause()
-      this
+    this
     }
 
     def resume(): WebSocketBase = {
         _asJava.resume()
-      this
+    this
     }
 
     def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
-      this
+        _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    this
     }
 
     def write(data: Buffer): WebSocketBase = {
         _asJava.write(data.asJava.asInstanceOf[JBuffer])
-      this
+    this
     }
 
     def setWriteQueueMaxSize(maxSize: Int): WebSocketBase = {
         _asJava.setWriteQueueMaxSize(maxSize)
-      this
+    this
     }
 
     def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
-      this
+        _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    this
     }
 
     /**
@@ -251,7 +253,7 @@ object WebSocketBase {
       */
     def writeFrame(frame: WebSocketFrame): WebSocketBase = {
         _asJava.writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
-      this
+    this
     }
 
     /**
@@ -261,7 +263,7 @@ object WebSocketBase {
       */
     def writeFinalTextFrame(text: String): WebSocketBase = {
         _asJava.writeFinalTextFrame(text)
-      this
+    this
     }
 
     /**
@@ -271,7 +273,7 @@ object WebSocketBase {
       */
     def writeFinalBinaryFrame(data: Buffer): WebSocketBase = {
         _asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
-      this
+    this
     }
 
     /**
@@ -282,7 +284,7 @@ object WebSocketBase {
       */
     def writeBinaryMessage(data: Buffer): WebSocketBase = {
         _asJava.writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
-      this
+    this
     }
 
     /**
@@ -291,8 +293,8 @@ object WebSocketBase {
       * @return a reference to this, so the API can be used fluently
       */
     def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
-      this
+        _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    this
     }
 
     /**
@@ -301,8 +303,8 @@ object WebSocketBase {
       * @return a reference to this, so the API can be used fluently
       */
     def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocketBase = {
-        _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler))
-      this
+        _asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler).asInstanceOf)
+    this
     }
 
     /**
@@ -324,7 +326,7 @@ object WebSocketBase {
       */
     def remoteAddress(): SocketAddress = {
       if (cached_0 == null) {
-        cached_0 =        SocketAddress.apply(_asJava.remoteAddress())
+        cached_0 =     SocketAddress.apply(_asJava.remoteAddress()).asInstanceOf
       }
       cached_0
     }
@@ -334,7 +336,7 @@ object WebSocketBase {
       */
     def localAddress(): SocketAddress = {
       if (cached_1 == null) {
-        cached_1 =        SocketAddress.apply(_asJava.localAddress())
+        cached_1 =     SocketAddress.apply(_asJava.localAddress()).asInstanceOf
       }
       cached_1
     }
