@@ -44,7 +44,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * The address the message was sent to
     */
   def address(): String = {
-    _asJava.address()
+    asJava.address()
   }
 
   /**
@@ -52,7 +52,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the headers
     */
   def headers(): MultiMap = {
-    MultiMap.apply(_asJava.headers())
+    MultiMap.apply(asJava.headers())
   }
 
   /**
@@ -61,7 +61,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     */
   def body(): T = {
     if (cached_0 == null) {
-      cached_0 = toScala(_asJava.body()).asInstanceOf
+      cached_0 = toScala[T](asJava.body()).asInstanceOf
     }
     cached_0
   }
@@ -71,7 +71,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-    scala.Option(_asJava.replyAddress())
+    scala.Option(asJava.replyAddress())
   }
 
   /**
@@ -83,7 +83,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param message the message to reply with.
     */
   def reply(message: AnyRef): Unit = {
-    _asJava.reply(toJava(message).asInstanceOf)
+    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object])
   }
 
   /**
@@ -93,8 +93,8 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the reply future for the reply.
     */
   def replyFuture[R: TypeTag](message: AnyRef): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    _asJava.reply(toJava(message).asInstanceOf, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x.asInstanceOf)))
+    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
     promiseAndHandler._2.future
   }
 
@@ -104,7 +104,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply(message: AnyRef, options: DeliveryOptions): Unit = {
-    _asJava.reply(toJava(message).asInstanceOf, options.asJava)
+    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava)
   }
 
   /**
@@ -115,8 +115,8 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the reply future for the reply.
     */
   def replyFuture[R: TypeTag](message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    _asJava.reply(toJava(message).asInstanceOf, options.asJava, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x.asInstanceOf)))
+    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
     promiseAndHandler._2.future
   }
 
@@ -129,7 +129,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param message A message to pass back to the sender
     */
   def fail(failureCode: Int, message: String): Unit = {
-    _asJava.fail(failureCode, message)
+    asJava.fail(failureCode, message)
   }
 
   private var cached_0: T = _

@@ -127,7 +127,7 @@ import @{importedType.raw.translateName("scala")}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-	  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}
@@ -154,11 +154,11 @@ import @{importedType.raw.translateName("scala")}\n
 @else{}
 	object @{type.raw.simpleName} {\n
 	\n
-    def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
-		    new @{toScalaType(type)}(_asJava)\n
+  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+    new @{writeImplType(type)}(_asJava)\n
 		\n
 		  private class @{writeImplTypeWithTypeTag(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
-			@includeNamed{'class-concrete.templ'; indentation='  '}
+			@includeNamed{'class-concrete.templ'; indentation=''}
 		  }\n\n
 	}\n
 @end{}

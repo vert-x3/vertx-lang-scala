@@ -55,7 +55,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def setWriteQueueMaxSize(maxSize: Int): Pump = {
-    _asJava.setWriteQueueMaxSize(maxSize)
+    asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
@@ -64,7 +64,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def start(): Pump = {
-    _asJava.start()
+    asJava.start()
     this
   }
 
@@ -73,7 +73,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def stop(): Pump = {
-    _asJava.stop()
+    asJava.stop()
     this
   }
 
@@ -81,7 +81,7 @@ class Pump(private val _asJava: JPump) {
     * Return the total number of items pumped by this pump.
     */
   def numberPumped(): Int = {
-    _asJava.numberPumped()
+    asJava.numberPumped()
   }
 
 }
@@ -92,11 +92,11 @@ object Pump {
     new Pump(_asJava)
 
   def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf, ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf))
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf[io.vertx.core.streams.ReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf[io.vertx.core.streams.WriteStream[Object]]))
   }
 
   def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
-    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf, ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf, writeQueueMaxSize))
+    Pump.apply(io.vertx.core.streams.Pump.pump(rs.asJava.asInstanceOf[JReadStream[T]].asInstanceOf[io.vertx.core.streams.ReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[T]].asInstanceOf[io.vertx.core.streams.WriteStream[Object]], writeQueueMaxSize))
   }
 
 }

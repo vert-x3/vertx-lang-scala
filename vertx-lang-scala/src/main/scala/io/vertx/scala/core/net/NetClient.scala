@@ -44,7 +44,7 @@ class NetClient(private val _asJava: JNetClient)
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
+    asJava.isMetricsEnabled()
   }
 
   /**
@@ -56,8 +56,8 @@ class NetClient(private val _asJava: JNetClient)
     * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
-    _asJava.connect(port, host, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[NetSocket]((x => if (x == null) null else NetSocket.apply(x.asInstanceOf)))
+    asJava.connect(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket]]])
     promiseAndHandler._2.future
   }
 
@@ -68,7 +68,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * complete until some time after the method has returned.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.close()
   }
 
 }

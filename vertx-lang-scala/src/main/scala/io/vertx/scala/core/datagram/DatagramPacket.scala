@@ -40,7 +40,7 @@ class DatagramPacket(private val _asJava: JDatagramPacket) {
     * @return the address of the sender
     */
   def sender(): SocketAddress = {
-    SocketAddress.apply(_asJava.sender())
+    SocketAddress.apply(asJava.sender())
   }
 
   /**
@@ -48,7 +48,7 @@ class DatagramPacket(private val _asJava: JDatagramPacket) {
     * @return the data
     */
   def data(): Buffer = {
-    Buffer.apply(_asJava.data())
+    Buffer.apply(asJava.data())
   }
 
 }

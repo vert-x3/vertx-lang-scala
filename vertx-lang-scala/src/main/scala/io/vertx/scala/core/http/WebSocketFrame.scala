@@ -43,21 +43,21 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     * @return true if it's a text frame
     */
   def isText(): Boolean = {
-    _asJava.isText()
+    asJava.isText()
   }
 
   /**
     * @return true if it's a binary frame
     */
   def isBinary(): Boolean = {
-    _asJava.isBinary()
+    asJava.isBinary()
   }
 
   /**
     * @return true if it's a continuation frame
     */
   def isContinuation(): Boolean = {
-    _asJava.isContinuation()
+    asJava.isContinuation()
   }
 
   /**
@@ -65,7 +65,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def textData(): String = {
     if (cached_0 == null) {
-      cached_0 = _asJava.textData().asInstanceOf
+      cached_0 = asJava.textData().asInstanceOf
     }
     cached_0
   }
@@ -75,7 +75,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def binaryData(): Buffer = {
     if (cached_1 == null) {
-      cached_1 = Buffer.apply(_asJava.binaryData()).asInstanceOf
+      cached_1 = Buffer.apply(asJava.binaryData()).asInstanceOf
     }
     cached_1
   }
@@ -84,7 +84,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     * @return true if this is the final frame.
     */
   def isFinal(): Boolean = {
-    _asJava.isFinal()
+    asJava.isFinal()
   }
 
   private var cached_0: String = _

@@ -39,14 +39,14 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the model of this command line object.
     */
   def cli(): CLI = {
-    CLI.apply(_asJava.cli())
+    CLI.apply(asJava.cli())
   }
 
   /**
     * @return the ordered list of arguments. Arguments are command line arguments not matching an option.
     */
   def allArguments(): scala.collection.mutable.Buffer[String] = {
-    _asJava.allArguments().asScala.map(x => x:String)
+    asJava.allArguments().asScala.map(x => x:String)
   }
 
   /**
@@ -55,7 +55,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if not set
     */
   def getOptionValue[T: TypeTag](name: String): T = {
-    toScala(_asJava.getOptionValue(name))
+    toScala[T](asJava.getOptionValue(name))
   }
 
   /**
@@ -64,7 +64,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if not set
     */
   def getArgumentValue[T: TypeTag](name: String): T = {
-    toScala(_asJava.getArgumentValue(name))
+    toScala[T](asJava.getArgumentValue(name))
   }
 
   /**
@@ -73,7 +73,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if not set
     */
   def getArgumentValue[T: TypeTag](index: Int): T = {
-    toScala(_asJava.getArgumentValue(index))
+    toScala[T](asJava.getArgumentValue(index))
   }
 
   /**
@@ -84,7 +84,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the flag has been set in the command line, `false` otherwise.
     */
   def isFlagEnabled(name: String): Boolean = {
-    _asJava.isFlagEnabled(name)
+    asJava.isFlagEnabled(name)
   }
 
   /**
@@ -93,7 +93,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the option has received a value, false otherwise.
     */
   def isOptionAssigned(option: Option): Boolean = {
-    _asJava.isOptionAssigned(option.asJava)
+    asJava.isOptionAssigned(option.asJava)
   }
 
   /**
@@ -102,7 +102,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the list of values, empty if none
     */
   def getRawValues(option: Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValues(option.asJava).asScala.map(x => x:String)
+    asJava.getRawValues(option.asJava).asScala.map(x => x:String)
   }
 
   /**
@@ -111,7 +111,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the list of values, empty if none
     */
   def getRawValuesForOption(option: Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForOption(option.asJava).asScala.map(x => x:String)
+    asJava.getRawValuesForOption(option.asJava).asScala.map(x => x:String)
   }
 
   /**
@@ -120,7 +120,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the list of values, empty if none
     */
   def getRawValuesForArgument(argument: Argument): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForArgument(argument.asJava).asScala.map(x => x:String)
+    asJava.getRawValuesForArgument(argument.asJava).asScala.map(x => x:String)
   }
 
   /**
@@ -129,7 +129,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForOption(option: Option): scala.Option[String] = {
-    scala.Option(_asJava.getRawValueForOption(option.asJava))
+    scala.Option(asJava.getRawValueForOption(option.asJava))
   }
 
   /**
@@ -138,7 +138,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return true if the option accepts more values, false otherwise.
     */
   def acceptMoreValues(option: Option): Boolean = {
-    _asJava.acceptMoreValues(option.asJava)
+    asJava.acceptMoreValues(option.asJava)
   }
 
   /**
@@ -147,7 +147,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForArgument(arg: Argument): scala.Option[String] = {
-    scala.Option(_asJava.getRawValueForArgument(arg.asJava))
+    scala.Option(asJava.getRawValueForArgument(arg.asJava))
   }
 
   /**
@@ -156,7 +156,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the argument has received a value, false otherwise.
     */
   def isArgumentAssigned(arg: Argument): Boolean = {
-    _asJava.isArgumentAssigned(arg.asJava)
+    asJava.isArgumentAssigned(arg.asJava)
   }
 
   /**
@@ -165,7 +165,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the user command line has used the option
     */
   def isSeenInCommandLine(option: Option): Boolean = {
-    _asJava.isSeenInCommandLine(option.asJava)
+    asJava.isSeenInCommandLine(option.asJava)
   }
 
   /**
@@ -174,7 +174,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the current CommandLine object is valid. false otherwise.
     */
   def isValid(): Boolean = {
-    _asJava.isValid()
+    asJava.isValid()
   }
 
   /**
@@ -182,7 +182,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the user command line has enabled a "Help" option, false otherwise.
     */
   def isAskingForHelp(): Boolean = {
-    _asJava.isAskingForHelp()
+    asJava.isAskingForHelp()
   }
 
 }

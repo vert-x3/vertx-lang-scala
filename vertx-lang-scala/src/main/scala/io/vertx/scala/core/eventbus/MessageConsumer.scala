@@ -43,27 +43,27 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
   def asJava: JMessageConsumer[Object] = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageConsumer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    _asJava.handler(funcToMappedHandler(Message.apply[T])(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(Message.apply[T])(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.eventbus.Message[Object]]])
     this
   }
 
   def pause(): MessageConsumer[T] = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): MessageConsumer[T] = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): MessageConsumer[T] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -71,21 +71,21 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return a read stream for the body of the message stream.
     */
   def bodyStream(): ReadStream[T] = {
-    ReadStream.apply[T](_asJava.bodyStream())
+    ReadStream.apply[T](asJava.bodyStream())
   }
 
   /**
     * @return true if the current consumer is registered
     */
   def isRegistered(): Boolean = {
-    _asJava.isRegistered()
+    asJava.isRegistered()
   }
 
   /**
     * @return The address the handler was registered with.
     */
   def address(): String = {
-    _asJava.address()
+    asJava.address()
   }
 
   /**
@@ -96,14 +96,14 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return this registration
     */
   def setMaxBufferedMessages(maxBufferedMessages: Int): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer.apply[T](asJava.setMaxBufferedMessages(maxBufferedMessages))
   }
 
   /**
     * @return the maximum number of messages that can be buffered when this stream is paused
     */
   def getMaxBufferedMessages(): Int = {
-    _asJava.getMaxBufferedMessages()
+    asJava.getMaxBufferedMessages()
   }
 
   /**
@@ -111,8 +111,8 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return the completion future
     */
   def completionFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
-    _asJava.completionHandler(promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
+    asJava.completionHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -120,7 +120,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * Unregisters the handler which created this registration
     */
   def unregister(): Unit = {
-    _asJava.unregister()
+    asJava.unregister()
   }
 
   /**
@@ -128,8 +128,8 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
   def unregisterFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
-    _asJava.unregister(promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
+    asJava.unregister(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 

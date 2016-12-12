@@ -42,7 +42,7 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return the value, or null if none
     */
   def get(key: K): V = {
-    toScala(_asJava.get(toJava(key).asInstanceOf))
+    toScala[V](asJava.get(toJava[K](key).asInstanceOf[Object]))
   }
 
   /**
@@ -52,7 +52,7 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return return the old value, or null if none
     */
   def put(key: K, value: V): V = {
-    toScala(_asJava.put(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
+    toScala[V](asJava.put(toJava[K](key).asInstanceOf[Object], toJava[V](value).asInstanceOf[Object]))
   }
 
   /**
@@ -61,14 +61,14 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return the old value
     */
   def remove(key: K): V = {
-    toScala(_asJava.remove(toJava(key).asInstanceOf))
+    toScala[V](asJava.remove(toJava[K](key).asInstanceOf[Object]))
   }
 
   /**
     * Clear all entries in the map
     */
   def clear(): Unit = {
-    _asJava.clear()
+    asJava.clear()
   }
 
   /**
@@ -76,14 +76,14 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return the number of entries in the map
     */
   def size(): Int = {
-    _asJava.size()
+    asJava.size()
   }
 
   /**
     * @return true if there are zero entries in the map
     */
   def isEmpty(): Boolean = {
-    _asJava.isEmpty()
+    asJava.isEmpty()
   }
 
   /**
@@ -93,7 +93,7 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return the old value or null, if none
     */
   def putIfAbsent(key: K, value: V): V = {
-    toScala(_asJava.putIfAbsent(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
+    toScala[V](asJava.putIfAbsent(toJava[K](key).asInstanceOf[Object], toJava[V](value).asInstanceOf[Object]))
   }
 
   /**
@@ -103,7 +103,7 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return true if removed
     */
   def removeIfPresent(key: K, value: V): Boolean = {
-    _asJava.removeIfPresent(toJava(key).asInstanceOf, toJava(value).asInstanceOf)
+    asJava.removeIfPresent(toJava[K](key).asInstanceOf[Object], toJava[V](value).asInstanceOf[Object])
   }
 
   /**
@@ -114,7 +114,7 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return true if removed
     */
   def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    _asJava.replaceIfPresent(toJava(key).asInstanceOf, toJava(oldValue).asInstanceOf, toJava(newValue).asInstanceOf)
+    asJava.replaceIfPresent(toJava[K](key).asInstanceOf[Object], toJava[V](oldValue).asInstanceOf[Object], toJava[V](newValue).asInstanceOf[Object])
   }
 
   /**
@@ -124,14 +124,14 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: JLocalMap[Object, Ob
     * @return the old value
     */
   def replace(key: K, value: V): V = {
-    toScala(_asJava.replace(toJava(key).asInstanceOf, toJava(value).asInstanceOf))
+    toScala[V](asJava.replace(toJava[K](key).asInstanceOf[Object], toJava[V](value).asInstanceOf[Object]))
   }
 
   /**
     * Close and release the map
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.close()
   }
 
 }

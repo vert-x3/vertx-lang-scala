@@ -51,7 +51,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[JBuffer])
+    asJava.end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -59,46 +59,46 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    _asJava.writeQueueFull()
+    asJava.writeQueueFull()
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Buffer]): NetSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
     this
   }
 
   def pause(): NetSocket = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): NetSocket = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def write(data: Buffer): NetSocket = {
-    _asJava.write(data.asJava.asInstanceOf[JBuffer])
+    asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int): NetSocket = {
-    _asJava.setWriteQueueMaxSize(maxSize)
+    asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -112,7 +112,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return the write handler ID
     */
   def writeHandlerID(): String = {
-    _asJava.writeHandlerID()
+    asJava.writeHandlerID()
   }
 
   /**
@@ -121,7 +121,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def write(str: String): NetSocket = {
-    _asJava.write(str)
+    asJava.write(str)
     this
   }
 
@@ -132,7 +132,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def write(str: String, enc: String): NetSocket = {
-    _asJava.write(str, enc)
+    asJava.write(str, enc)
     this
   }
 
@@ -143,7 +143,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String): NetSocket = {
-    _asJava.sendFile(filename)
+    asJava.sendFile(filename)
     this
   }
 
@@ -155,7 +155,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long): NetSocket = {
-    _asJava.sendFile(filename, offset)
+    asJava.sendFile(filename, offset)
     this
   }
 
@@ -168,7 +168,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long): NetSocket = {
-    _asJava.sendFile(filename, offset, length)
+    asJava.sendFile(filename, offset, length)
     this
   }
 
@@ -179,8 +179,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return future
     */
   def sendFileFuture(filename: String): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
-    _asJava.sendFile(filename, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
+    asJava.sendFile(filename, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -192,8 +192,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return future
     */
   def sendFileFuture(filename: String, offset: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
-    _asJava.sendFile(filename, offset, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
+    asJava.sendFile(filename, offset, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -206,8 +206,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return future
     */
   def sendFileFuture(filename: String, offset: Long, length: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((x => ()))
-    _asJava.sendFile(filename, offset, length, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
+    asJava.sendFile(filename, offset, length, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -216,7 +216,7 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0 = SocketAddress.apply(_asJava.remoteAddress()).asInstanceOf
+      cached_0 = SocketAddress.apply(asJava.remoteAddress()).asInstanceOf
     }
     cached_0
   }
@@ -226,7 +226,7 @@ class NetSocket(private val _asJava: JNetSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1 = SocketAddress.apply(_asJava.localAddress()).asInstanceOf
+      cached_1 = SocketAddress.apply(asJava.localAddress()).asInstanceOf
     }
     cached_1
   }
@@ -235,14 +235,14 @@ class NetSocket(private val _asJava: JNetSocket)
     * Calls [[io.vertx.scala.core.net.NetSocket#close]]
     */
   def end(): Unit = {
-    _asJava.end()
+    asJava.end()
   }
 
   /**
     * Close the NetSocket
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.close()
   }
 
   /**
@@ -251,7 +251,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -261,7 +261,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def upgradeToSsl(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -269,7 +269,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS.
     */
   def isSsl(): Boolean = {
-    _asJava.isSsl()
+    asJava.isSsl()
   }
 
   private var cached_0: SocketAddress = _

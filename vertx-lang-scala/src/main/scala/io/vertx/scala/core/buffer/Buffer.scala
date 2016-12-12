@@ -41,154 +41,154 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a `String` representation of the Buffer with the `UTF-8`encoding
     */
   override def toString(): String = {
-    _asJava.toString()
+    asJava.toString()
   }
 
   /**
     * Returns a `String` representation of the Buffer with the encoding specified by `enc`
     */
   def toString(enc: String): String = {
-    _asJava.toString(enc)
+    asJava.toString(enc)
   }
 
   /**
     * Returns a Json object representation of the Buffer
     */
   def toJsonObject(): JsonObject = {
-    _asJava.toJsonObject()
+    asJava.toJsonObject()
   }
 
   /**
     * Returns a Json array representation of the Buffer
     */
   def toJsonArray(): JsonArray = {
-    _asJava.toJsonArray()
+    asJava.toJsonArray()
   }
 
   /**
     * Returns the `byte` at position `pos` in the Buffer.
     */
   def getByte(pos: Int): Byte = {
-    _asJava.getByte(pos)
+    asJava.getByte(pos)
   }
 
   /**
     * Returns the unsigned `byte` at position `pos` in the Buffer, as a `short`.
     */
   def getUnsignedByte(pos: Int): Short = {
-    _asJava.getUnsignedByte(pos)
+    asJava.getUnsignedByte(pos)
   }
 
   /**
     * Returns the `int` at position `pos` in the Buffer.
     */
   def getInt(pos: Int): Int = {
-    _asJava.getInt(pos)
+    asJava.getInt(pos)
   }
 
   /**
     * Gets a 32-bit integer at the specified absolute `index` in this buffer with Little Endian Byte Order.
     */
   def getIntLE(pos: Int): Int = {
-    _asJava.getIntLE(pos)
+    asJava.getIntLE(pos)
   }
 
   /**
     * Returns the unsigned `int` at position `pos` in the Buffer, as a `long`.
     */
   def getUnsignedInt(pos: Int): Long = {
-    _asJava.getUnsignedInt(pos)
+    asJava.getUnsignedInt(pos)
   }
 
   /**
     * Returns the unsigned `int` at position `pos` in the Buffer, as a `long` in Little Endian Byte Order.
     */
   def getUnsignedIntLE(pos: Int): Long = {
-    _asJava.getUnsignedIntLE(pos)
+    asJava.getUnsignedIntLE(pos)
   }
 
   /**
     * Returns the `long` at position `pos` in the Buffer.
     */
   def getLong(pos: Int): Long = {
-    _asJava.getLong(pos)
+    asJava.getLong(pos)
   }
 
   /**
     * Gets a 64-bit long integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
     */
   def getLongLE(pos: Int): Long = {
-    _asJava.getLongLE(pos)
+    asJava.getLongLE(pos)
   }
 
   /**
     * Returns the `double` at position `pos` in the Buffer.
     */
   def getDouble(pos: Int): Double = {
-    _asJava.getDouble(pos)
+    asJava.getDouble(pos)
   }
 
   /**
     * Returns the `float` at position `pos` in the Buffer.
     */
   def getFloat(pos: Int): Float = {
-    _asJava.getFloat(pos)
+    asJava.getFloat(pos)
   }
 
   /**
     * Returns the `short` at position `pos` in the Buffer.
     */
   def getShort(pos: Int): Short = {
-    _asJava.getShort(pos)
+    asJava.getShort(pos)
   }
 
   /**
     * Gets a 16-bit short integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
     */
   def getShortLE(pos: Int): Short = {
-    _asJava.getShortLE(pos)
+    asJava.getShortLE(pos)
   }
 
   /**
     * Returns the unsigned `short` at position `pos` in the Buffer, as an `int`.
     */
   def getUnsignedShort(pos: Int): Int = {
-    _asJava.getUnsignedShort(pos)
+    asJava.getUnsignedShort(pos)
   }
 
   /**
     * Gets an unsigned 16-bit short integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
     */
   def getUnsignedShortLE(pos: Int): Int = {
-    _asJava.getUnsignedShortLE(pos)
+    asJava.getUnsignedShortLE(pos)
   }
 
   /**
     * Gets a 24-bit medium integer at the specified absolute `index` in this buffer.
     */
   def getMedium(pos: Int): Int = {
-    _asJava.getMedium(pos)
+    asJava.getMedium(pos)
   }
 
   /**
     * Gets a 24-bit medium integer at the specified absolute `index` in this buffer in the Little Endian Byte Order.
     */
   def getMediumLE(pos: Int): Int = {
-    _asJava.getMediumLE(pos)
+    asJava.getMediumLE(pos)
   }
 
   /**
     * Gets an unsigned 24-bit medium integer at the specified absolute `index` in this buffer.
     */
   def getUnsignedMedium(pos: Int): Int = {
-    _asJava.getUnsignedMedium(pos)
+    asJava.getUnsignedMedium(pos)
   }
 
   /**
     * Gets an unsigned 24-bit medium integer at the specified absolute `index` in this buffer in Little Endian Byte Order.
     */
   def getUnsignedMediumLE(pos: Int): Int = {
-    _asJava.getUnsignedMediumLE(pos)
+    asJava.getUnsignedMediumLE(pos)
   }
 
   /**
@@ -196,7 +196,7 @@ class Buffer(private val _asJava: JBuffer) {
     * and ending at position `end - 1`
     */
   def getBuffer(start: Int, end: Int): Buffer = {
-    Buffer.apply(_asJava.getBuffer(start, end))
+    Buffer.apply(asJava.getBuffer(start, end))
   }
 
   /**
@@ -204,7 +204,7 @@ class Buffer(private val _asJava: JBuffer) {
     * and ending at position `end - 1` interpreted as a String in the specified encoding
     */
   def getString(start: Int, end: Int, enc: String): String = {
-    _asJava.getString(start, end, enc)
+    asJava.getString(start, end, enc)
   }
 
   /**
@@ -212,7 +212,7 @@ class Buffer(private val _asJava: JBuffer) {
     * and ending at position `end - 1` interpreted as a String in UTF-8 encoding
     */
   def getString(start: Int, end: Int): String = {
-    _asJava.getString(start, end)
+    asJava.getString(start, end)
   }
 
   /**
@@ -221,7 +221,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendBuffer(buff: Buffer): Buffer = {
-    _asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer])
+    asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -231,7 +231,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendBuffer(buff: Buffer, offset: Int, len: Int): Buffer = {
-    _asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer], offset, len)
+    asJava.appendBuffer(buff.asJava.asInstanceOf[JBuffer], offset, len)
     this
   }
 
@@ -240,7 +240,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendByte(b: Byte): Buffer = {
-    _asJava.appendByte(b)
+    asJava.appendByte(b)
     this
   }
 
@@ -249,7 +249,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendUnsignedByte(b: Short): Buffer = {
-    _asJava.appendUnsignedByte(b)
+    asJava.appendUnsignedByte(b)
     this
   }
 
@@ -258,7 +258,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendInt(i: Int): Buffer = {
-    _asJava.appendInt(i)
+    asJava.appendInt(i)
     this
   }
 
@@ -267,7 +267,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendIntLE(i: Int): Buffer = {
-    _asJava.appendIntLE(i)
+    asJava.appendIntLE(i)
     this
   }
 
@@ -276,7 +276,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendUnsignedInt(i: Long): Buffer = {
-    _asJava.appendUnsignedInt(i)
+    asJava.appendUnsignedInt(i)
     this
   }
 
@@ -285,7 +285,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendUnsignedIntLE(i: Long): Buffer = {
-    _asJava.appendUnsignedIntLE(i)
+    asJava.appendUnsignedIntLE(i)
     this
   }
 
@@ -294,7 +294,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendMedium(i: Int): Buffer = {
-    _asJava.appendMedium(i)
+    asJava.appendMedium(i)
     this
   }
 
@@ -303,7 +303,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendMediumLE(i: Int): Buffer = {
-    _asJava.appendMediumLE(i)
+    asJava.appendMediumLE(i)
     this
   }
 
@@ -312,7 +312,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendLong(l: Long): Buffer = {
-    _asJava.appendLong(l)
+    asJava.appendLong(l)
     this
   }
 
@@ -321,7 +321,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendLongLE(l: Long): Buffer = {
-    _asJava.appendLongLE(l)
+    asJava.appendLongLE(l)
     this
   }
 
@@ -330,7 +330,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendShort(s: Short): Buffer = {
-    _asJava.appendShort(s)
+    asJava.appendShort(s)
     this
   }
 
@@ -339,7 +339,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendShortLE(s: Short): Buffer = {
-    _asJava.appendShortLE(s)
+    asJava.appendShortLE(s)
     this
   }
 
@@ -348,7 +348,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendUnsignedShort(s: Int): Buffer = {
-    _asJava.appendUnsignedShort(s)
+    asJava.appendUnsignedShort(s)
     this
   }
 
@@ -357,7 +357,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendUnsignedShortLE(s: Int): Buffer = {
-    _asJava.appendUnsignedShortLE(s)
+    asJava.appendUnsignedShortLE(s)
     this
   }
 
@@ -366,7 +366,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendFloat(f: Float): Buffer = {
-    _asJava.appendFloat(f)
+    asJava.appendFloat(f)
     this
   }
 
@@ -375,7 +375,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendDouble(d: Double): Buffer = {
-    _asJava.appendDouble(d)
+    asJava.appendDouble(d)
     this
   }
 
@@ -385,7 +385,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together.
     */
   def appendString(str: String, enc: String): Buffer = {
-    _asJava.appendString(str, enc)
+    asJava.appendString(str, enc)
     this
   }
 
@@ -395,7 +395,7 @@ class Buffer(private val _asJava: JBuffer) {
     * Returns a reference to `this` so multiple operations can be appended together
     */
   def appendString(str: String): Buffer = {
-    _asJava.appendString(str)
+    asJava.appendString(str)
     this
   }
 
@@ -404,7 +404,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setByte(pos: Int, b: Byte): Buffer = {
-    _asJava.setByte(pos, b)
+    asJava.setByte(pos, b)
     this
   }
 
@@ -413,7 +413,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setUnsignedByte(pos: Int, b: Short): Buffer = {
-    _asJava.setUnsignedByte(pos, b)
+    asJava.setUnsignedByte(pos, b)
     this
   }
 
@@ -422,7 +422,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setInt(pos: Int, i: Int): Buffer = {
-    _asJava.setInt(pos, i)
+    asJava.setInt(pos, i)
     this
   }
 
@@ -431,7 +431,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setIntLE(pos: Int, i: Int): Buffer = {
-    _asJava.setIntLE(pos, i)
+    asJava.setIntLE(pos, i)
     this
   }
 
@@ -440,7 +440,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setUnsignedInt(pos: Int, i: Long): Buffer = {
-    _asJava.setUnsignedInt(pos, i)
+    asJava.setUnsignedInt(pos, i)
     this
   }
 
@@ -449,7 +449,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setUnsignedIntLE(pos: Int, i: Long): Buffer = {
-    _asJava.setUnsignedIntLE(pos, i)
+    asJava.setUnsignedIntLE(pos, i)
     this
   }
 
@@ -458,7 +458,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setMedium(pos: Int, i: Int): Buffer = {
-    _asJava.setMedium(pos, i)
+    asJava.setMedium(pos, i)
     this
   }
 
@@ -467,7 +467,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setMediumLE(pos: Int, i: Int): Buffer = {
-    _asJava.setMediumLE(pos, i)
+    asJava.setMediumLE(pos, i)
     this
   }
 
@@ -476,7 +476,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setLong(pos: Int, l: Long): Buffer = {
-    _asJava.setLong(pos, l)
+    asJava.setLong(pos, l)
     this
   }
 
@@ -485,7 +485,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setLongLE(pos: Int, l: Long): Buffer = {
-    _asJava.setLongLE(pos, l)
+    asJava.setLongLE(pos, l)
     this
   }
 
@@ -494,7 +494,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setDouble(pos: Int, d: Double): Buffer = {
-    _asJava.setDouble(pos, d)
+    asJava.setDouble(pos, d)
     this
   }
 
@@ -503,7 +503,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setFloat(pos: Int, f: Float): Buffer = {
-    _asJava.setFloat(pos, f)
+    asJava.setFloat(pos, f)
     this
   }
 
@@ -512,7 +512,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setShort(pos: Int, s: Short): Buffer = {
-    _asJava.setShort(pos, s)
+    asJava.setShort(pos, s)
     this
   }
 
@@ -521,7 +521,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setShortLE(pos: Int, s: Short): Buffer = {
-    _asJava.setShortLE(pos, s)
+    asJava.setShortLE(pos, s)
     this
   }
 
@@ -530,7 +530,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setUnsignedShort(pos: Int, s: Int): Buffer = {
-    _asJava.setUnsignedShort(pos, s)
+    asJava.setUnsignedShort(pos, s)
     this
   }
 
@@ -539,7 +539,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setUnsignedShortLE(pos: Int, s: Int): Buffer = {
-    _asJava.setUnsignedShortLE(pos, s)
+    asJava.setUnsignedShortLE(pos, s)
     this
   }
 
@@ -548,7 +548,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setBuffer(pos: Int, b: Buffer): Buffer = {
-    _asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer])
+    asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -557,7 +557,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setBuffer(pos: Int, b: Buffer, offset: Int, len: Int): Buffer = {
-    _asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer], offset, len)
+    asJava.setBuffer(pos, b.asJava.asInstanceOf[JBuffer], offset, len)
     this
   }
 
@@ -566,7 +566,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setString(pos: Int, str: String): Buffer = {
-    _asJava.setString(pos, str)
+    asJava.setString(pos, str)
     this
   }
 
@@ -575,7 +575,7 @@ class Buffer(private val _asJava: JBuffer) {
     * The buffer will expand as necessary to accommodate any value written.
     */
   def setString(pos: Int, str: String, enc: String): Buffer = {
-    _asJava.setString(pos, str, enc)
+    asJava.setString(pos, str, enc)
     this
   }
 
@@ -584,14 +584,14 @@ class Buffer(private val _asJava: JBuffer) {
     * All positions are indexed from zero.
     */
   def length(): Int = {
-    _asJava.length()
+    asJava.length()
   }
 
   /**
     * Returns a copy of the entire Buffer.
     */
   def copy(): Buffer = {
-    Buffer.apply(_asJava.copy())
+    Buffer.apply(asJava.copy())
   }
 
   /**
@@ -600,7 +600,7 @@ class Buffer(private val _asJava: JBuffer) {
     * while they maintain separate indexes and marks.
     */
   def slice(): Buffer = {
-    Buffer.apply(_asJava.slice())
+    Buffer.apply(asJava.slice())
   }
 
   /**
@@ -609,7 +609,7 @@ class Buffer(private val _asJava: JBuffer) {
     * while they maintain separate indexes and marks.
     */
   def slice(start: Int, end: Int): Buffer = {
-    Buffer.apply(_asJava.slice(start, end))
+    Buffer.apply(asJava.slice(start, end))
   }
 
 }

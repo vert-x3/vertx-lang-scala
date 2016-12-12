@@ -35,28 +35,28 @@ trait StreamBase {
   * @param handler the handler
   * @return a reference to this, so the API can be used fluently
   */
-def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase
 
 }
 
 object StreamBase {
 
-    def apply(_asJava: JStreamBase): StreamBase =
-    new StreamBase(_asJava)
+  def apply(_asJava: JStreamBase): StreamBase =
+    new StreamBaseImpl(_asJava)
 
   private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
 
-    def asJava: JStreamBase = _asJava
+  def asJava: JStreamBase = _asJava
 
-    /**
-      * Set an exception handler.
-      * @param handler the handler
-      * @return a reference to this, so the API can be used fluently
-      */
-    def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+  /**
+    * Set an exception handler.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase = {
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
-    }
+  }
 
   }
 

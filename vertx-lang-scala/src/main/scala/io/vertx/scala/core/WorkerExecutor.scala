@@ -42,7 +42,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
+    asJava.isMetricsEnabled()
   }
 
   /**
@@ -64,8 +64,8 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     * @return future that will be called when the blocking code is complete
     */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, ordered, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
+    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], ordered, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -73,8 +73,8 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     * Like [[io.vertx.scala.core.WorkerExecutor#executeBlockingFuture]] called with ordered = true.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => toScala(x)))
-    _asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf, promiseAndHandler._1.asInstanceOf)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
+    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -82,7 +82,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Close the executor.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.close()
   }
 
 }

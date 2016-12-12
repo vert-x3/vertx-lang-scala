@@ -36,27 +36,27 @@ class ServerWebSocketStream(private val _asJava: JServerWebSocketStream)
   def asJava: JServerWebSocketStream = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ServerWebSocketStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[ServerWebSocket]): ServerWebSocketStream = {
-    _asJava.handler(funcToMappedHandler(ServerWebSocket.apply)(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(ServerWebSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.ServerWebSocket]])
     this
   }
 
   def pause(): ServerWebSocketStream = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): ServerWebSocketStream = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): ServerWebSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 

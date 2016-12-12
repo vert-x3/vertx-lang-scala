@@ -74,48 +74,48 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    _asJava.writeQueueFull()
+    asJava.writeQueueFull()
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpClientRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   /**
     */
   def write(data: Buffer): HttpClientRequest = {
-    _asJava.write(data.asJava.asInstanceOf[JBuffer])
+    asJava.write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int): HttpClientRequest = {
-    _asJava.setWriteQueueMaxSize(maxSize)
+    asJava.setWriteQueueMaxSize(maxSize)
     this
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[HttpClientResponse]): HttpClientRequest = {
-    _asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(HttpClientResponse.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpClientResponse]])
     this
   }
 
   def pause(): HttpClientRequest = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): HttpClientRequest = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -125,7 +125,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def setChunked(chunked: Boolean): HttpClientRequest = {
-    _asJava.setChunked(chunked)
+    asJava.setChunked(chunked)
     this
   }
 
@@ -133,21 +133,21 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return Is the request chunked?
     */
   def isChunked(): Boolean = {
-    _asJava.isChunked()
+    asJava.isChunked()
   }
 
   /**
     * The HTTP method for the request.
     */
   def method(): io.vertx.core.http.HttpMethod = {
-    _asJava.method()
+    asJava.method()
   }
 
   /**
     * @return the raw value of the method this request sends
     */
   def getRawMethod(): String = {
-    _asJava.getRawMethod()
+    asJava.getRawMethod()
   }
 
   /**
@@ -156,7 +156,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def setRawMethod(method: String): HttpClientRequest = {
-    _asJava.setRawMethod(method)
+    asJava.setRawMethod(method)
     this
   }
 
@@ -164,21 +164,21 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return The URI of the request.
     */
   def uri(): String = {
-    _asJava.uri()
+    asJava.uri()
   }
 
   /**
     * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
     */
   def path(): String = {
-    _asJava.path()
+    asJava.path()
   }
 
   /**
     * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
     */
   def query(): String = {
-    _asJava.query()
+    asJava.query()
   }
 
   /**
@@ -187,7 +187,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * For HTTP/2 it sets the  pseudo header otherwise it sets the  header
     */
   def setHost(host: String): HttpClientRequest = {
-    _asJava.setHost(host)
+    asJava.setHost(host)
     this
   }
 
@@ -195,7 +195,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return the request host. For HTTP/2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
     */
   def getHost(): String = {
-    _asJava.getHost()
+    asJava.getHost()
   }
 
   /**
@@ -203,7 +203,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0 = MultiMap.apply(_asJava.headers()).asInstanceOf
+      cached_0 = MultiMap.apply(asJava.headers()).asInstanceOf
     }
     cached_0
   }
@@ -215,7 +215,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def putHeader(name: String, value: String): HttpClientRequest = {
-    _asJava.putHeader(name, value)
+    asJava.putHeader(name, value)
     this
   }
 
@@ -224,7 +224,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String): HttpClientRequest = {
-    _asJava.write(chunk)
+    asJava.write(chunk)
     this
   }
 
@@ -233,7 +233,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String, enc: String): HttpClientRequest = {
-    _asJava.write(chunk, enc)
+    asJava.write(chunk, enc)
     this
   }
 
@@ -247,7 +247,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def continueHandler(handler: io.vertx.core.Handler[Unit]): HttpClientRequest = {
-    _asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => handler.handle()).asInstanceOf)
+    asJava.continueHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -260,7 +260,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def sendHead(): HttpClientRequest = {
-    _asJava.sendHead()
+    asJava.sendHead()
     this
   }
 
@@ -269,7 +269,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
     */
   def sendHead(completionHandler: io.vertx.core.Handler[io.vertx.core.http.HttpVersion]): HttpClientRequest = {
-    _asJava.sendHead((completionHandler).asInstanceOf)
+    asJava.sendHead((completionHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpVersion]])
     this
   }
 
@@ -277,14 +277,14 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String in UTF-8 encoding
     */
   def end(chunk: String): Unit = {
-    _asJava.end(chunk)
+    asJava.end(chunk)
   }
 
   /**
     * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String with the specified encoding
     */
   def end(chunk: String, enc: String): Unit = {
-    _asJava.end(chunk, enc)
+    asJava.end(chunk, enc)
   }
 
   /**
@@ -292,7 +292,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * no other data has been written then the `Content-Length` header will be automatically set
     */
   def end(chunk: Buffer): Unit = {
-    _asJava.end(chunk.asJava.asInstanceOf[JBuffer])
+    asJava.end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -302,7 +302,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * Once the request has ended, it cannot be used any more,
     */
   def end(): Unit = {
-    _asJava.end()
+    asJava.end()
   }
 
   /**
@@ -316,7 +316,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def setTimeout(timeoutMs: Long): HttpClientRequest = {
-    _asJava.setTimeout(timeoutMs)
+    asJava.setTimeout(timeoutMs)
     this
   }
 
@@ -341,7 +341,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def pushHandler(handler: io.vertx.core.Handler[HttpClientRequest]): HttpClientRequest = {
-    _asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler).asInstanceOf)
+    asJava.pushHandler(funcToMappedHandler(HttpClientRequest.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpClientRequest]])
     this
   }
 
@@ -349,7 +349,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * Reset this stream with the error code `0`.
     */
   def reset(): Boolean = {
-    _asJava.reset()
+    asJava.reset()
   }
 
   /**
@@ -366,7 +366,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return true when reset has been performed
     */
   def reset(code: Long): Boolean = {
-    _asJava.reset(code)
+    asJava.reset(code)
   }
 
   /**
@@ -374,7 +374,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     */
   def connection(): HttpConnection = {
     if (cached_1 == null) {
-      cached_1 = HttpConnection.apply(_asJava.connection()).asInstanceOf
+      cached_1 = HttpConnection.apply(asJava.connection()).asInstanceOf
     }
     cached_1
   }
@@ -385,7 +385,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]): HttpClientRequest = {
-    _asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler).asInstanceOf)
+    asJava.connectionHandler(funcToMappedHandler(HttpConnection.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpConnection]])
     this
   }
 
@@ -402,7 +402,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return a reference to this, so the API can be used fluently
     */
   def writeCustomFrame(`type`: Int, flags: Int, payload: Buffer): HttpClientRequest = {
-    _asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
+    asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -410,7 +410,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @return the id of the stream of this response, ` -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
     */
   def streamId(): Int = {
-    _asJava.streamId()
+    asJava.streamId()
   }
 
   /**
@@ -418,7 +418,7 @@ class HttpClientRequest(private val _asJava: JHttpClientRequest)
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpClientRequest = {
-    _asJava.writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
+    asJava.writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 

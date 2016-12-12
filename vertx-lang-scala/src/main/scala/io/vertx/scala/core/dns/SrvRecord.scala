@@ -34,49 +34,49 @@ class SrvRecord(private val _asJava: JSrvRecord) {
     * Returns the priority for this service record.
     */
   def priority(): Int = {
-    _asJava.priority()
+    asJava.priority()
   }
 
   /**
     * Returns the weight of this service record.
     */
   def weight(): Int = {
-    _asJava.weight()
+    asJava.weight()
   }
 
   /**
     * Returns the port the service is running on.
     */
   def port(): Int = {
-    _asJava.port()
+    asJava.port()
   }
 
   /**
     * Returns the name for the server being queried.
     */
   def name(): String = {
-    _asJava.name()
+    asJava.name()
   }
 
   /**
     * Returns the protocol for the service being queried (i.e. "_tcp").
     */
   def protocol(): String = {
-    _asJava.protocol()
+    asJava.protocol()
   }
 
   /**
     * Returns the service's name (i.e. "_http").
     */
   def service(): String = {
-    _asJava.service()
+    asJava.service()
   }
 
   /**
     * Returns the name of the host for the service.
     */
   def target(): scala.Option[String] = {
-    scala.Option(_asJava.target())
+    scala.Option(asJava.target())
   }
 
 }

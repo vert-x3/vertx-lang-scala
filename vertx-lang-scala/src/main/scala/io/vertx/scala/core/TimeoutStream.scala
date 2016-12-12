@@ -39,27 +39,27 @@ class TimeoutStream(private val _asJava: JTimeoutStream)
   def asJava: JTimeoutStream = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): TimeoutStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Long]): TimeoutStream = {
-    _asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => toScala(x))(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
     this
   }
 
   def pause(): TimeoutStream = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): TimeoutStream = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): TimeoutStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -68,7 +68,7 @@ class TimeoutStream(private val _asJava: JTimeoutStream)
     * argument.
     */
   def cancel(): Unit = {
-    _asJava.cancel()
+    asJava.cancel()
   }
 
 }

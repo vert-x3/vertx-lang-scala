@@ -37,7 +37,7 @@ class Lock(private val _asJava: JLock) {
     * Release the lock. Once the lock is released another will be able to obtain the lock.
     */
   def release(): Unit = {
-    _asJava.release()
+    asJava.release()
   }
 
 }

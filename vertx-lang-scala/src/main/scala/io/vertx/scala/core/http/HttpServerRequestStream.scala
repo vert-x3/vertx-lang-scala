@@ -36,27 +36,27 @@ class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream)
   def asJava: JHttpServerRequestStream = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequestStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[HttpServerRequest]): HttpServerRequestStream = {
-    _asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpServerRequest]])
     this
   }
 
   def pause(): HttpServerRequestStream = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): HttpServerRequestStream = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequestStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
