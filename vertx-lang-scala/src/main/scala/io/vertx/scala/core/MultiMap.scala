@@ -41,7 +41,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return The first header value or `null` if there is no such entry
     */
   def get(name: String): scala.Option[String] = {
-    scala.Option(_asJava.get(name))
+    scala.Option(asJava.get(name))
   }
 
   /**
@@ -50,7 +50,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return A immutable scala.collection.immutable.List of values which will be empty if no values are found
     */
   def getAll(name: String): scala.collection.mutable.Buffer[String] = {
-    _asJava.getAll(name).asScala.map(x => x:String)
+    asJava.getAll(name).asScala.map(x => x:String)
   }
 
   /**
@@ -59,14 +59,14 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return true if at least one entry is found
     */
   def contains(name: String): Boolean = {
-    _asJava.contains(name)
+    asJava.contains(name)
   }
 
   /**
     * Return true if empty
     */
   def isEmpty(): Boolean = {
-    _asJava.isEmpty()
+    asJava.isEmpty()
   }
 
   /**
@@ -74,7 +74,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return A scala.collection.immutable.Set of all names
     */
   def names(): Set[String] = {
-    _asJava.names().asScala.map(x => x:String).toSet
+    asJava.names().asScala.map(x => x:String).toSet
   }
 
   /**
@@ -84,7 +84,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def add(name: String, value: String): MultiMap = {
-    _asJava.add(name, value)
+    asJava.add(name, value)
     this
   }
 
@@ -93,7 +93,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def addAll(map: MultiMap): MultiMap = {
-    _asJava.addAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -106,7 +106,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def set(name: String, value: String): MultiMap = {
-    _asJava.set(name, value)
+    asJava.set(name, value)
     this
   }
 
@@ -115,7 +115,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def setAll(map: MultiMap): MultiMap = {
-    _asJava.setAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -125,7 +125,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def remove(name: String): MultiMap = {
-    _asJava.remove(name)
+    asJava.remove(name)
     this
   }
 
@@ -134,7 +134,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def clear(): MultiMap = {
-    _asJava.clear()
+    asJava.clear()
     this
   }
 
@@ -142,7 +142,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * Return the number of keys.
     */
   def size(): Int = {
-    _asJava.size()
+    asJava.size()
   }
 
 }

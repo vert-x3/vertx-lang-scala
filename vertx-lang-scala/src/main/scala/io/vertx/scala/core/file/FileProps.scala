@@ -35,56 +35,56 @@ class FileProps(private val _asJava: JFileProps) {
     * The date the file was created
     */
   def creationTime(): Long = {
-    _asJava.creationTime()
+    asJava.creationTime()
   }
 
   /**
     * The date the file was last accessed
     */
   def lastAccessTime(): Long = {
-    _asJava.lastAccessTime()
+    asJava.lastAccessTime()
   }
 
   /**
     * The date the file was last modified
     */
   def lastModifiedTime(): Long = {
-    _asJava.lastModifiedTime()
+    asJava.lastModifiedTime()
   }
 
   /**
     * Is the file a directory?
     */
   def isDirectory(): Boolean = {
-    _asJava.isDirectory()
+    asJava.isDirectory()
   }
 
   /**
     * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
     */
   def isOther(): Boolean = {
-    _asJava.isOther()
+    asJava.isOther()
   }
 
   /**
     * Is the file a regular file?
     */
   def isRegularFile(): Boolean = {
-    _asJava.isRegularFile()
+    asJava.isRegularFile()
   }
 
   /**
     * Is the file a symbolic link?
     */
   def isSymbolicLink(): Boolean = {
-    _asJava.isSymbolicLink()
+    asJava.isSymbolicLink()
   }
 
   /**
     * The size of the file, in bytes
     */
   def size(): Long = {
-    _asJava.size()
+    asJava.size()
   }
 
 }

@@ -36,27 +36,27 @@ class NetSocketStream(private val _asJava: JNetSocketStream)
   def asJava: JNetSocketStream = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocketStream = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => toScala(x))(handler).asInstanceOf)
+    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[NetSocket]): NetSocketStream = {
-    _asJava.handler(funcToMappedHandler(NetSocket.apply)(handler).asInstanceOf)
+    asJava.handler(funcToMappedHandler(NetSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.net.NetSocket]])
     this
   }
 
   def pause(): NetSocketStream = {
-    _asJava.pause()
+    asJava.pause()
     this
   }
 
   def resume(): NetSocketStream = {
-    _asJava.resume()
+    asJava.resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocketStream = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => toScala(x))(_ => endHandler.handle()).asInstanceOf)
+    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 

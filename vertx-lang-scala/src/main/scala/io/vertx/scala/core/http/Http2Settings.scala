@@ -78,7 +78,7 @@ class Http2Settings(val asJava: JHttp2Settings) {
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxHeaderListSize(value: Int) = {
+  def setMaxHeaderListSize(value: Long) = {
     asJava.setMaxHeaderListSize(value)
     this
   }

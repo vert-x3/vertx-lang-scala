@@ -67,7 +67,7 @@ object HandlerOps {
     * one the function understands.
     *
     * @param mapper a function to map the Handlers event-type to that of the given Scala-function
-    * @param f      the Scala-Function to be used by the Handler
+    * @param f the Scala-Function to be used by the Handler
     * @tparam J type the Handler consumes
     * @tparam S type the Function consumes
     * @return the resulting Handler

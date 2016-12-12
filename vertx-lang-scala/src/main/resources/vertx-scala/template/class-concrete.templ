@@ -9,7 +9,7 @@
 @if{method.doc != null}@{methodDoc(method, indentation + '  ');}@end{}
 @if{method.name == 'toString' && method.params.size == 0}
 @{indentation}  override def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
-@{methodInvocation('_asJava', method, indentation + '    ');}\n
+@{methodInvocation('asJava', method, indentation + '    ');}\n
 @if{method.isFluent() && !shouldMethodReturnAFuture(method)}
     this;
 @end{}
@@ -18,19 +18,19 @@
 @if{shouldMethodReturnAFuture(method)}
 @{indentation}  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
 @{indentation}    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
-@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}\n
+@{indentation}@{methodInvocation('asJava', method, indentation + '    ');}\n
 @{indentation}    promiseAndHandler._2.future\n
 @{indentation}  }\n\n
 @else{}
 @{indentation}  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
 @if{method.cacheReturn && !method.fluent}
 @{indentation}    if (cached_@{cacheDecls.size()} == null) {\n
-@{indentation}      cached_@{cacheDecls.size()} = @{indentation}@{methodInvocation('_asJava', method, indentation + '');}.asInstanceOf\n
+@{indentation}      cached_@{cacheDecls.size()} = @{indentation}@{methodInvocation('asJava', method, indentation + '');}.asInstanceOf\n
 @{indentation}    }\n
 @{indentation}    cached_@{cacheDecls.size()}\n
 @code{cacheDecls.add('private var cached_' + cacheDecls.size() +': '+ returnTypeOf(method) + ' = _')}
 @else{}
-@{indentation}@{methodInvocation('_asJava', method, indentation + '    ');}\n
+@{indentation}@{methodInvocation('asJava', method, indentation + '    ');}\n
 @if{method.isFluent() && !shouldMethodReturnAFuture(method)}
     this\n
 @end{}

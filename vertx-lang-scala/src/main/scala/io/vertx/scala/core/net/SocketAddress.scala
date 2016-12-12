@@ -31,11 +31,11 @@ class SocketAddress(private val _asJava: JSocketAddress) {
   def asJava: JSocketAddress = _asJava
 
   def host(): String = {
-    _asJava.host()
+    asJava.host()
   }
 
   def port(): Int = {
-    _asJava.port()
+    asJava.port()
   }
 
 }

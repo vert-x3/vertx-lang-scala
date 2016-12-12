@@ -36,21 +36,21 @@ class SendContext[T: TypeTag](private val _asJava: JSendContext[Object]) {
     * @return The message being sent
     */
   def message(): Message[T] = {
-    Message.apply[T](_asJava.message())
+    Message.apply[T](asJava.message())
   }
 
   /**
     * Call the next interceptor
     */
   def next(): Unit = {
-    _asJava.next()
+    asJava.next()
   }
 
   /**
     * @return true if the message is being sent (point to point) or False if the message is being published
     */
   def send(): Boolean = {
-    _asJava.send()
+    asJava.send()
   }
 
 }
