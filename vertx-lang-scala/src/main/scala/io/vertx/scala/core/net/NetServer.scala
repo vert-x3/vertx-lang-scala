@@ -30,17 +30,17 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
 /**
   * Represents a TCP server
   */
-class NetServer(private val _asJava: JNetServer) 
+class NetServer(private val _asJava: Object) 
     extends Measured {
 
-  def asJava: JNetServer = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    asJava.isMetricsEnabled()
+    asJava.asInstanceOf[JNetServer].isMetricsEnabled()
   }
 
   /**
@@ -50,7 +50,7 @@ class NetServer(private val _asJava: JNetServer)
     * @return the connect stream
     */
   def connectStream(): NetSocketStream = {
-    NetSocketStream.apply(asJava.connectStream())
+    NetSocketStream.apply(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
   /**
@@ -60,7 +60,7 @@ class NetServer(private val _asJava: JNetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def connectHandler(handler: io.vertx.core.Handler[NetSocket]): NetServer = {
-    NetServer.apply(asJava.connectHandler(funcToMappedHandler(NetSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.net.NetSocket]]))
+    NetServer.apply(asJava.asInstanceOf[JNetServer].connectHandler(funcToMappedHandler[JNetSocket, NetSocket](NetSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.net.NetSocket]]))
   }
 
   /**
@@ -71,7 +71,7 @@ class NetServer(private val _asJava: JNetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(): NetServer = {
-    asJava.listen()
+    asJava.asInstanceOf[JNetServer].listen()
     this
   }
 
@@ -81,7 +81,7 @@ class NetServer(private val _asJava: JNetServer)
     */
   def listenFuture(): concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[NetServer]((x => if (x == null) null else NetServer.apply(x.asInstanceOf)))
-    asJava.listen(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
+    asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
     promiseAndHandler._2.future
   }
 
@@ -97,7 +97,7 @@ class NetServer(private val _asJava: JNetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String): NetServer = {
-    asJava.listen(port, host)
+    asJava.asInstanceOf[JNetServer].listen(port, host)
     this
   }
 
@@ -109,7 +109,7 @@ class NetServer(private val _asJava: JNetServer)
     */
   def listenFuture(port: Int, host: String): concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[NetServer]((x => if (x == null) null else NetServer.apply(x.asInstanceOf)))
-    asJava.listen(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
+    asJava.asInstanceOf[JNetServer].listen(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
     promiseAndHandler._2.future
   }
 
@@ -123,7 +123,7 @@ class NetServer(private val _asJava: JNetServer)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int): NetServer = {
-    asJava.listen(port)
+    asJava.asInstanceOf[JNetServer].listen(port)
     this
   }
 
@@ -134,7 +134,7 @@ class NetServer(private val _asJava: JNetServer)
     */
   def listenFuture(port: Int): concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[NetServer]((x => if (x == null) null else NetServer.apply(x.asInstanceOf)))
-    asJava.listen(port, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
+    asJava.asInstanceOf[JNetServer].listen(port, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetServer]]])
     promiseAndHandler._2.future
   }
 
@@ -143,7 +143,7 @@ class NetServer(private val _asJava: JNetServer)
     * method has returned.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JNetServer].close()
   }
 
   /**
@@ -152,7 +152,7 @@ class NetServer(private val _asJava: JNetServer)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.close(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -162,14 +162,14 @@ class NetServer(private val _asJava: JNetServer)
     * @return the actual port the server is listening on.
     */
   def actualPort(): Int = {
-    asJava.actualPort()
+    asJava.asInstanceOf[JNetServer].actualPort()
   }
 
 }
 
 object NetServer {
 
-  def apply(_asJava: JNetServer): NetServer =
+  def apply(_asJava: Object): NetServer =
     new NetServer(_asJava)
 
 }

@@ -34,7 +34,7 @@ class GoAway(val asJava: JGoAway) {
     * Set the additional debug data
     */
   def setDebugData(value: Buffer) = {
-    asJava.setDebugData(value.asJava)
+    asJava.setDebugData(value.asInstanceOf)
     this
   }
   def getDebugData = {

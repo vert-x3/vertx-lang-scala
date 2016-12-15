@@ -26,36 +26,36 @@ import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 /**
   * Represents properties of the file system.
   */
-class FileSystemProps(private val _asJava: JFileSystemProps) {
+class FileSystemProps(private val _asJava: Object) {
 
-  def asJava: JFileSystemProps = _asJava
+  def asJava: Object = _asJava
 
   /**
     * @return The total space on the file system, in bytes
     */
   def totalSpace(): Long = {
-    asJava.totalSpace()
+    asJava.asInstanceOf[JFileSystemProps].totalSpace()
   }
 
   /**
     * @return The total un-allocated space on the file system, in bytes
     */
   def unallocatedSpace(): Long = {
-    asJava.unallocatedSpace()
+    asJava.asInstanceOf[JFileSystemProps].unallocatedSpace()
   }
 
   /**
     * @return The total usable space on the file system, in bytes
     */
   def usableSpace(): Long = {
-    asJava.usableSpace()
+    asJava.asInstanceOf[JFileSystemProps].usableSpace()
   }
 
 }
 
 object FileSystemProps {
 
-  def apply(_asJava: JFileSystemProps): FileSystemProps =
+  def apply(_asJava: Object): FileSystemProps =
     new FileSystemProps(_asJava)
 
 }

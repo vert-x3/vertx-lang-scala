@@ -25,23 +25,23 @@ import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
 
 /**
   */
-class SuperInterface1(private val _asJava: JSuperInterface1) {
+class SuperInterface1(private val _asJava: Object) {
 
-  def asJava: JSuperInterface1 = _asJava
+  def asJava: Object = _asJava
 
   def superMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
-    asJava.superMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
+    asJava.asInstanceOf[JSuperInterface1].superMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
   }
 
   def superMethodOverloadedBySubclass(): Int = {
-    asJava.superMethodOverloadedBySubclass()
+    asJava.asInstanceOf[JSuperInterface1].superMethodOverloadedBySubclass()
   }
 
 }
 
 object SuperInterface1 {
 
-  def apply(_asJava: JSuperInterface1): SuperInterface1 =
+  def apply(_asJava: Object): SuperInterface1 =
     new SuperInterface1(_asJava)
 
 }

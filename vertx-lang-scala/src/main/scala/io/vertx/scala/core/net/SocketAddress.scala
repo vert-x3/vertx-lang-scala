@@ -26,23 +26,23 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
 /**
   * The address of a socket
   */
-class SocketAddress(private val _asJava: JSocketAddress) {
+class SocketAddress(private val _asJava: Object) {
 
-  def asJava: JSocketAddress = _asJava
+  def asJava: Object = _asJava
 
   def host(): String = {
-    asJava.host()
+    asJava.asInstanceOf[JSocketAddress].host()
   }
 
   def port(): Int = {
-    asJava.port()
+    asJava.asInstanceOf[JSocketAddress].port()
   }
 
 }
 
 object SocketAddress {
 
-  def apply(_asJava: JSocketAddress): SocketAddress =
+  def apply(_asJava: Object): SocketAddress =
     new SocketAddress(_asJava)
 
 }

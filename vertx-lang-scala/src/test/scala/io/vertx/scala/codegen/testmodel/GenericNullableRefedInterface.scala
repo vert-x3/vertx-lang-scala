@@ -21,33 +21,23 @@ import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import scala.compat.java8.FunctionConverters._
 import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
-import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNullableRefedInterface}
 
 /**
   */
-trait AbstractHandlerUserType 
-    extends io.vertx.core.Handler[RefedInterface1] {
-
-  def asJava: java.lang.Object
-
-    def handle(arg0: RefedInterface1): Unit
-
-}
-
-object AbstractHandlerUserType {
-
-  def apply(_asJava: JAbstractHandlerUserType): AbstractHandlerUserType =
-    new AbstractHandlerUserTypeImpl(_asJava)
-
-  private class AbstractHandlerUserTypeImpl(private val _asJava: JAbstractHandlerUserType) extends AbstractHandlerUserType {
+class GenericNullableRefedInterface[T: TypeTag](private val _asJava: Object) {
 
   def asJava: Object = _asJava
 
-  def handle(arg0: RefedInterface1): Unit = {
-    asJava.asInstanceOf[JAbstractHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
+  def getValue(): T = {
+    toScala[T](asJava.asInstanceOf[JGenericNullableRefedInterface[Object]].getValue())
   }
 
-  }
+}
+
+object GenericNullableRefedInterface {
+
+  def apply[T: TypeTag](_asJava: Object): GenericNullableRefedInterface[T] =
+    new GenericNullableRefedInterface(_asJava)
 
 }

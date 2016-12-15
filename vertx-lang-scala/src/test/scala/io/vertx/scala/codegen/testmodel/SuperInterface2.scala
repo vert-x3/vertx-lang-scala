@@ -40,10 +40,10 @@ object SuperInterface2 {
 
   private class SuperInterface2Impl(private val _asJava: JSuperInterface2) extends SuperInterface2 {
 
-  def asJava: JSuperInterface2 = _asJava
+  def asJava: Object = _asJava
 
   def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
-    asJava.otherSuperMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
+    asJava.asInstanceOf[JSuperInterface2].otherSuperMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
   }
 
   }

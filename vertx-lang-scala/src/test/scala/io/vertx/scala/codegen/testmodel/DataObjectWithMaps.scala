@@ -29,51 +29,51 @@ import io.vertx.core.json.JsonObject
 class DataObjectWithMaps(val asJava: JDataObjectWithMaps) {
 
   def setBooleanValues(value: Map[String, Boolean]) = {
-    asJava.setBooleanValues(value.mapValues(Boolean.box).asJava)
+    asJava.setBooleanValues(value.mapValues(Boolean.box).asJava.asInstanceOf[java.lang.Boolean])
     this
   }
   def setDataObjectValues(value: Map[String, TestDataObject]) = {
-    asJava.setDataObjectValues(value.mapValues(_.asJava).asJava)
+    asJava.setDataObjectValues(value.mapValues(_.asJava.asInstanceOf[JTestDataObject]).asJava)
     this
   }
   def setDoubleValues(value: Map[String, Double]) = {
-    asJava.setDoubleValues(value.mapValues(Double.box).asJava)
+    asJava.setDoubleValues(value.mapValues(Double.box).asJava.asInstanceOf[java.lang.Double])
     this
   }
   def setEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value.asJava)
+    asJava.setEnumValues(value.asInstanceOf)
     this
   }
   def setFloatValues(value: Map[String, Float]) = {
-    asJava.setFloatValues(value.mapValues(Float.box).asJava)
+    asJava.setFloatValues(value.mapValues(Float.box).asJava.asInstanceOf[java.lang.Float])
     this
   }
   def setGenEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value.asJava)
+    asJava.setGenEnumValues(value.asInstanceOf)
     this
   }
   def setIntegerValues(value: Map[String, Int]) = {
-    asJava.setIntegerValues(value.mapValues(Int.box).asJava)
+    asJava.setIntegerValues(value.mapValues(Int.box).asJava.asInstanceOf[java.lang.Integer])
     this
   }
   def setJsonArrayValues(value: Map[String, JsonArray]) = {
-    asJava.setJsonArrayValues(value.asJava)
+    asJava.setJsonArrayValues(value.asInstanceOf)
     this
   }
   def setJsonObjectValues(value: Map[String, JsonObject]) = {
-    asJava.setJsonObjectValues(value.asJava)
+    asJava.setJsonObjectValues(value.asInstanceOf)
     this
   }
   def setLongValues(value: Map[String, Long]) = {
-    asJava.setLongValues(value.mapValues(Long.box).asJava)
+    asJava.setLongValues(value.mapValues(Long.box).asJava.asInstanceOf[java.lang.Long])
     this
   }
   def setShortValues(value: Map[String, Short]) = {
-    asJava.setShortValues(value.mapValues(Short.box).asJava)
+    asJava.setShortValues(value.mapValues(Short.box).asJava.asInstanceOf[java.lang.Short])
     this
   }
   def setStringValues(value: Map[String, String]) = {
-    asJava.setStringValues(value.asJava)
+    asJava.setStringValues(value.asInstanceOf)
     this
   }
 }

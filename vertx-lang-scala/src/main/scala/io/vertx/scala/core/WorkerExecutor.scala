@@ -32,17 +32,17 @@ import io.vertx.core.{Future => JFuture}
   * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
-class WorkerExecutor(private val _asJava: JWorkerExecutor) 
+class WorkerExecutor(private val _asJava: Object) 
     extends Measured {
 
-  def asJava: JWorkerExecutor = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    asJava.isMetricsEnabled()
+    asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled()
   }
 
   /**
@@ -65,7 +65,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
     */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], ordered, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(funcToMappedHandler[JFuture[T], Future[T]](Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], ordered, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -74,7 +74,7 @@ class WorkerExecutor(private val _asJava: JWorkerExecutor)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(funcToMappedHandler[JFuture[T], Future[T]](Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -82,14 +82,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Close the executor.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JWorkerExecutor].close()
   }
 
 }
 
 object WorkerExecutor {
 
-  def apply(_asJava: JWorkerExecutor): WorkerExecutor =
+  def apply(_asJava: Object): WorkerExecutor =
     new WorkerExecutor(_asJava)
 
 }

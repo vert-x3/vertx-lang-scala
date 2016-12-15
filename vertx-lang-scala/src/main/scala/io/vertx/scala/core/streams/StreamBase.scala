@@ -46,7 +46,7 @@ object StreamBase {
 
   private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
 
-  def asJava: JStreamBase = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Set an exception handler.
@@ -54,7 +54,7 @@ object StreamBase {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JStreamBase].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 

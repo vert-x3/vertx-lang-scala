@@ -37,16 +37,16 @@ import io.vertx.scala.core.net.SocketAddress
   * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
-class ServerWebSocket(private val _asJava: JServerWebSocket) 
+class ServerWebSocket(private val _asJava: Object) 
     extends WebSocketBase {
 
-  def asJava: JServerWebSocket = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    asJava.end(t.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -54,7 +54,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    asJava.writeQueueFull()
+    asJava.asInstanceOf[JServerWebSocket].writeQueueFull()
   }
 
   /**
@@ -67,7 +67,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * @return the binary handler id
     */
   def binaryHandlerID(): String = {
-    asJava.binaryHandlerID()
+    asJava.asInstanceOf[JServerWebSocket].binaryHandlerID()
   }
 
   /**
@@ -79,21 +79,21 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * allows you to write data to other WebSockets which are owned by different event loops.
     */
   def textHandlerID(): String = {
-    asJava.textHandlerID()
+    asJava.asInstanceOf[JServerWebSocket].textHandlerID()
   }
 
   /**
     * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
     */
   def end(): Unit = {
-    asJava.end()
+    asJava.asInstanceOf[JServerWebSocket].end()
   }
 
   /**
     * Close the WebSocket.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JServerWebSocket].close()
   }
 
   /**
@@ -101,7 +101,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == null) {
-      cached_0 = SocketAddress.apply(asJava.remoteAddress()).asInstanceOf
+      cached_0 = SocketAddress.apply(asJava.asInstanceOf[JServerWebSocket].remoteAddress()).asInstanceOf
     }
     cached_0
   }
@@ -111,97 +111,97 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def localAddress(): SocketAddress = {
     if (cached_1 == null) {
-      cached_1 = SocketAddress.apply(asJava.localAddress()).asInstanceOf
+      cached_1 = SocketAddress.apply(asJava.asInstanceOf[JServerWebSocket].localAddress()).asInstanceOf
     }
     cached_1
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ServerWebSocket = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JServerWebSocket].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Buffer]): ServerWebSocket = {
-    asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
+    asJava.asInstanceOf[JServerWebSocket].handler(funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
     this
   }
 
   def pause(): ServerWebSocket = {
-    asJava.pause()
+    asJava.asInstanceOf[JServerWebSocket].pause()
     this
   }
 
   def resume(): ServerWebSocket = {
-    asJava.resume()
+    asJava.asInstanceOf[JServerWebSocket].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JServerWebSocket].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def write(data: Buffer): ServerWebSocket = {
-    asJava.write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int): ServerWebSocket = {
-    asJava.setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize)
     this
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
-    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JServerWebSocket].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def writeFrame(frame: WebSocketFrame): ServerWebSocket = {
-    asJava.writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
+    asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
   def writeFinalTextFrame(text: String): ServerWebSocket = {
-    asJava.writeFinalTextFrame(text)
+    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text)
     this
   }
 
   def writeFinalBinaryFrame(data: Buffer): ServerWebSocket = {
-    asJava.writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def writeBinaryMessage(data: Buffer): ServerWebSocket = {
-    asJava.writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def closeHandler(handler: io.vertx.core.Handler[Unit]): ServerWebSocket = {
-    asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JServerWebSocket].closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): ServerWebSocket = {
-    asJava.frameHandler(funcToMappedHandler(WebSocketFrame.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.WebSocketFrame]])
+    asJava.asInstanceOf[JServerWebSocket].frameHandler(funcToMappedHandler[JWebSocketFrame, WebSocketFrame](WebSocketFrame.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.WebSocketFrame]])
     this
   }
 
   def uri(): String = {
-    asJava.uri()
+    asJava.asInstanceOf[JServerWebSocket].uri()
   }
 
   /**
     * @return the WebSocket handshake path.
     */
   def path(): String = {
-    asJava.path()
+    asJava.asInstanceOf[JServerWebSocket].path()
   }
 
   /**
     * @return the WebSocket handshake query string.
     */
   def query(): scala.Option[String] = {
-    scala.Option(asJava.query())
+    scala.Option(asJava.asInstanceOf[JServerWebSocket].query())
   }
 
   /**
@@ -209,7 +209,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     */
   def headers(): MultiMap = {
     if (cached_2 == null) {
-      cached_2 = MultiMap.apply(asJava.headers()).asInstanceOf
+      cached_2 = MultiMap.apply(asJava.asInstanceOf[JServerWebSocket].headers()).asInstanceOf
     }
     cached_2
   }
@@ -224,7 +224,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
     * You might use this method, if for example you only want to accept WebSockets with a particular path.
     */
   def reject(): Unit = {
-    asJava.reject()
+    asJava.asInstanceOf[JServerWebSocket].reject()
   }
 
   private var cached_0: SocketAddress = _
@@ -234,7 +234,7 @@ class ServerWebSocket(private val _asJava: JServerWebSocket)
 
 object ServerWebSocket {
 
-  def apply(_asJava: JServerWebSocket): ServerWebSocket =
+  def apply(_asJava: Object): ServerWebSocket =
     new ServerWebSocket(_asJava)
 
 }

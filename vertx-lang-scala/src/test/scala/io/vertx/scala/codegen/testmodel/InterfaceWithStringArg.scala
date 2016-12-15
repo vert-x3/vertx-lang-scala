@@ -26,28 +26,28 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 
 /**
   */
-class InterfaceWithStringArg(private val _asJava: JInterfaceWithStringArg) {
+class InterfaceWithStringArg(private val _asJava: Object) {
 
-  def asJava: JInterfaceWithStringArg = _asJava
+  def asJava: Object = _asJava
 
   def setValue(value: String): GenericRefedInterface[String] = {
-    asJava.setValue(value)
+    asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value)
     this
   }
 
   def getValue(): String = {
-    asJava.getValue()
+    asJava.asInstanceOf[JInterfaceWithStringArg].getValue()
   }
 
   def meth(): Unit = {
-    asJava.meth()
+    asJava.asInstanceOf[JInterfaceWithStringArg].meth()
   }
 
 }
 
 object InterfaceWithStringArg {
 
-  def apply(_asJava: JInterfaceWithStringArg): InterfaceWithStringArg =
+  def apply(_asJava: Object): InterfaceWithStringArg =
     new InterfaceWithStringArg(_asJava)
 
 }

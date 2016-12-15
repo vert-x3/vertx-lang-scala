@@ -30,33 +30,33 @@ import io.vertx.scala.core.streams.ReadStream
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream) 
+class HttpServerRequestStream(private val _asJava: Object) 
     extends ReadStream[HttpServerRequest] {
 
-  def asJava: JHttpServerRequestStream = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequestStream = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[HttpServerRequest]): HttpServerRequestStream = {
-    asJava.handler(funcToMappedHandler(HttpServerRequest.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpServerRequest]])
+    asJava.asInstanceOf[JHttpServerRequestStream].handler(funcToMappedHandler[JHttpServerRequest, HttpServerRequest](HttpServerRequest.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.HttpServerRequest]])
     this
   }
 
   def pause(): HttpServerRequestStream = {
-    asJava.pause()
+    asJava.asInstanceOf[JHttpServerRequestStream].pause()
     this
   }
 
   def resume(): HttpServerRequestStream = {
-    asJava.resume()
+    asJava.asInstanceOf[JHttpServerRequestStream].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequestStream = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerRequestStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -64,7 +64,7 @@ class HttpServerRequestStream(private val _asJava: JHttpServerRequestStream)
 
 object HttpServerRequestStream {
 
-  def apply(_asJava: JHttpServerRequestStream): HttpServerRequestStream =
+  def apply(_asJava: Object): HttpServerRequestStream =
     new HttpServerRequestStream(_asJava)
 
 }

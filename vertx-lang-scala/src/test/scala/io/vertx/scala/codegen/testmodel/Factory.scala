@@ -29,27 +29,27 @@ import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcrete
 
 /**
   */
-class Factory(private val _asJava: JFactory) {
+class Factory(private val _asJava: Object) {
 
-  def asJava: JFactory = _asJava
+  def asJava: Object = _asJava
 
 }
 
 object Factory {
 
-  def apply(_asJava: JFactory): Factory =
+  def apply(_asJava: Object): Factory =
     new Factory(_asJava)
 
   def createConcreteHandlerUserType(handler: io.vertx.core.Handler[RefedInterface1]): ConcreteHandlerUserType = {
-    ConcreteHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserType(funcToMappedHandler(RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
+    ConcreteHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserType(funcToMappedHandler[JRefedInterface1, RefedInterface1](RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
   }
 
   def createAbstractHandlerUserType(handler: io.vertx.core.Handler[RefedInterface1]): AbstractHandlerUserType = {
-    AbstractHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createAbstractHandlerUserType(funcToMappedHandler(RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
+    AbstractHandlerUserType.apply(io.vertx.codegen.testmodel.Factory.createAbstractHandlerUserType(funcToMappedHandler[JRefedInterface1, RefedInterface1](RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
   }
 
   def createConcreteHandlerUserTypeExtension(handler: io.vertx.core.Handler[RefedInterface1]): ConcreteHandlerUserTypeExtension = {
-    ConcreteHandlerUserTypeExtension.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserTypeExtension(funcToMappedHandler(RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
+    ConcreteHandlerUserTypeExtension.apply(io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserTypeExtension(funcToMappedHandler[JRefedInterface1, RefedInterface1](RefedInterface1.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]]))
   }
 
 }

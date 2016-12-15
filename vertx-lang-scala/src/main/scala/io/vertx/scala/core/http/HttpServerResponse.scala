@@ -51,36 +51,36 @@ import io.vertx.scala.core.MultiMap
   * It implements [[io.vertx.scala.core.streams.WriteStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpServerResponse(private val _asJava: JHttpServerResponse) 
+class HttpServerResponse(private val _asJava: Object) 
     extends WriteStream[Buffer] {
 
-  def asJava: JHttpServerResponse = _asJava
+  def asJava: Object = _asJava
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    asJava.writeQueueFull()
+    asJava.asInstanceOf[JHttpServerResponse].writeQueueFull()
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerResponse = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JHttpServerResponse].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def write(data: Buffer): HttpServerResponse = {
-    asJava.write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int): HttpServerResponse = {
-    asJava.setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JHttpServerResponse].setWriteQueueMaxSize(maxSize)
     this
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
-    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerResponse].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -88,7 +88,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return the HTTP status code of the response. The default is `200` representing `OK`.
     */
   def getStatusCode(): Int = {
-    asJava.getStatusCode()
+    asJava.asInstanceOf[JHttpServerResponse].getStatusCode()
   }
 
   /**
@@ -97,7 +97,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def setStatusCode(statusCode: Int): HttpServerResponse = {
-    asJava.setStatusCode(statusCode)
+    asJava.asInstanceOf[JHttpServerResponse].setStatusCode(statusCode)
     this
   }
 
@@ -105,7 +105,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return the HTTP status message of the response. If this is not specified a default value will be used depending on what #setStatusCode has been set to.
     */
   def getStatusMessage(): String = {
-    asJava.getStatusMessage()
+    asJava.asInstanceOf[JHttpServerResponse].getStatusMessage()
   }
 
   /**
@@ -113,7 +113,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def setStatusMessage(statusMessage: String): HttpServerResponse = {
-    asJava.setStatusMessage(statusMessage)
+    asJava.asInstanceOf[JHttpServerResponse].setStatusMessage(statusMessage)
     this
   }
 
@@ -132,7 +132,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def setChunked(chunked: Boolean): HttpServerResponse = {
-    asJava.setChunked(chunked)
+    asJava.asInstanceOf[JHttpServerResponse].setChunked(chunked)
     this
   }
 
@@ -140,7 +140,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return is the response chunked?
     */
   def isChunked(): Boolean = {
-    asJava.isChunked()
+    asJava.asInstanceOf[JHttpServerResponse].isChunked()
   }
 
   /**
@@ -148,7 +148,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def headers(): MultiMap = {
     if (cached_0 == null) {
-      cached_0 = MultiMap.apply(asJava.headers()).asInstanceOf
+      cached_0 = MultiMap.apply(asJava.asInstanceOf[JHttpServerResponse].headers()).asInstanceOf
     }
     cached_0
   }
@@ -160,7 +160,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def putHeader(name: String, value: String): HttpServerResponse = {
-    asJava.putHeader(name, value)
+    asJava.asInstanceOf[JHttpServerResponse].putHeader(name, value)
     this
   }
 
@@ -169,7 +169,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def trailers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1 = MultiMap.apply(asJava.trailers()).asInstanceOf
+      cached_1 = MultiMap.apply(asJava.asInstanceOf[JHttpServerResponse].trailers()).asInstanceOf
     }
     cached_1
   }
@@ -181,7 +181,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def putTrailer(name: String, value: String): HttpServerResponse = {
-    asJava.putTrailer(name, value)
+    asJava.asInstanceOf[JHttpServerResponse].putTrailer(name, value)
     this
   }
 
@@ -192,7 +192,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def closeHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
-    asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerResponse].closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -203,7 +203,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String, enc: String): HttpServerResponse = {
-    asJava.write(chunk, enc)
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk, enc)
     this
   }
 
@@ -213,7 +213,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String): HttpServerResponse = {
-    asJava.write(chunk)
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk)
     this
   }
 
@@ -223,7 +223,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def writeContinue(): HttpServerResponse = {
-    asJava.writeContinue()
+    asJava.asInstanceOf[JHttpServerResponse].writeContinue()
     this
   }
 
@@ -232,7 +232,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param chunk the string to write before ending the response
     */
   def end(chunk: String): Unit = {
-    asJava.end(chunk)
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk)
   }
 
   /**
@@ -241,7 +241,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param enc the encoding to use
     */
   def end(chunk: String, enc: String): Unit = {
-    asJava.end(chunk, enc)
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk, enc)
   }
 
   /**
@@ -250,7 +250,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @param chunk the buffer to write before ending the response
     */
   def end(chunk: Buffer): Unit = {
-    asJava.end(chunk.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -260,7 +260,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * Once the response has ended, it cannot be used any more.
     */
   def end(): Unit = {
-    asJava.end()
+    asJava.asInstanceOf[JHttpServerResponse].end()
   }
 
   /**
@@ -269,7 +269,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String): HttpServerResponse = {
-    asJava.sendFile(filename)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename)
     this
   }
 
@@ -281,7 +281,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long): HttpServerResponse = {
-    asJava.sendFile(filename, offset)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename, offset)
     this
   }
 
@@ -297,7 +297,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long): HttpServerResponse = {
-    asJava.sendFile(filename, offset, length)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename, offset, length)
     this
   }
 
@@ -309,7 +309,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def sendFileFuture(filename: String): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.sendFile(filename, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -322,7 +322,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def sendFileFuture(filename: String, offset: Long): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.sendFile(filename, offset, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename, offset, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -336,7 +336,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     */
   def sendFileFuture(filename: String, offset: Long, length: Long): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.sendFile(filename, offset, length, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename, offset, length, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -344,28 +344,28 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * Close the underlying TCP connection corresponding to the request.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JHttpServerResponse].close()
   }
 
   /**
     * @return has the response already ended?
     */
   def ended(): Boolean = {
-    asJava.ended()
+    asJava.asInstanceOf[JHttpServerResponse].ended()
   }
 
   /**
     * @return has the underlying TCP connection corresponding to the request already been closed?
     */
   def closed(): Boolean = {
-    asJava.closed()
+    asJava.asInstanceOf[JHttpServerResponse].closed()
   }
 
   /**
     * @return have the headers for the response already been written?
     */
   def headWritten(): Boolean = {
-    asJava.headWritten()
+    asJava.asInstanceOf[JHttpServerResponse].headWritten()
   }
 
   /**
@@ -375,7 +375,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def headersEndHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
-    asJava.headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerResponse].headersEndHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -388,7 +388,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return a reference to this, so the API can be used fluently
     */
   def bodyEndHandler(handler: io.vertx.core.Handler[Unit]): HttpServerResponse = {
-    asJava.bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -396,14 +396,14 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
     * @return the total number of bytes written for the body of the response.
     */
   def bytesWritten(): Long = {
-    asJava.bytesWritten()
+    asJava.asInstanceOf[JHttpServerResponse].bytesWritten()
   }
 
   /**
     * @return the id of the stream of this response, ` -1` for HTTP/1.x
     */
   def streamId(): Int = {
-    asJava.streamId()
+    asJava.asInstanceOf[JHttpServerResponse].streamId()
   }
 
   /**
@@ -411,7 +411,7 @@ class HttpServerResponse(private val _asJava: JHttpServerResponse)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x.asInstanceOf)))
-    HttpServerResponse.apply(asJava.push(method, host, path, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]]))
+    HttpServerResponse.apply(asJava.asInstanceOf[JHttpServerResponse].push(method, host, path, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]]))
     promiseAndHandler._2.future
   }
 
@@ -420,7 +420,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x.asInstanceOf)))
-    HttpServerResponse.apply(asJava.push(method, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]]))
+    HttpServerResponse.apply(asJava.asInstanceOf[JHttpServerResponse].push(method, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]]))
     promiseAndHandler._2.future
   }
 
@@ -429,7 +429,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x.asInstanceOf)))
-    asJava.push(method, path, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]])
+    asJava.asInstanceOf[JHttpServerResponse].push(method, path, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]])
     promiseAndHandler._2.future
   }
 
@@ -451,7 +451,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: MultiMap): concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[HttpServerResponse]((x => if (x == null) null else HttpServerResponse.apply(x.asInstanceOf)))
-    asJava.push(method, host, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]])
+    asJava.asInstanceOf[JHttpServerResponse].push(method, host, path, headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.http.HttpServerResponse]]])
     promiseAndHandler._2.future
   }
 
@@ -459,7 +459,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Reset this HTTP/2 stream with the error code `0`.
     */
   def reset(): Unit = {
-    asJava.reset()
+    asJava.asInstanceOf[JHttpServerResponse].reset()
   }
 
   /**
@@ -467,7 +467,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param code the error code
     */
   def reset(code: Long): Unit = {
-    asJava.reset(code)
+    asJava.asInstanceOf[JHttpServerResponse].reset(code)
   }
 
   /**
@@ -480,7 +480,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return a reference to this, so the API can be used fluently
     */
   def writeCustomFrame(`type`: Int, flags: Int, payload: Buffer): HttpServerResponse = {
-    asJava.writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`, flags, payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -489,7 +489,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @param frame the frame to write
     */
   def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {
-    asJava.writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -499,7 +499,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object HttpServerResponse {
 
-  def apply(_asJava: JHttpServerResponse): HttpServerResponse =
+  def apply(_asJava: Object): HttpServerResponse =
     new HttpServerResponse(_asJava)
 
 }

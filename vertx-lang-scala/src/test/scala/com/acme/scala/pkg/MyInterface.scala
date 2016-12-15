@@ -29,23 +29,23 @@ import io.vertx.scala.codegen.testmodel.TestInterface
 
 /**
   */
-class MyInterface(private val _asJava: JMyInterface) {
+class MyInterface(private val _asJava: Object) {
 
-  def asJava: JMyInterface = _asJava
+  def asJava: Object = _asJava
 
   def sub(): SubInterface = {
-    SubInterface.apply(asJava.sub())
+    SubInterface.apply(asJava.asInstanceOf[MyInterface].sub())
   }
 
   def method(): TestInterface = {
-    TestInterface.apply(asJava.method())
+    TestInterface.apply(asJava.asInstanceOf[MyInterface].method())
   }
 
 }
 
 object MyInterface {
 
-  def apply(_asJava: JMyInterface): MyInterface =
+  def apply(_asJava: Object): MyInterface =
     new MyInterface(_asJava)
 
   def create(): MyInterface = {

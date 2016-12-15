@@ -27,71 +27,71 @@ import io.vertx.core.file.{FileProps => JFileProps}
   * Represents properties of a file on the file system.
   * 
   */
-class FileProps(private val _asJava: JFileProps) {
+class FileProps(private val _asJava: Object) {
 
-  def asJava: JFileProps = _asJava
+  def asJava: Object = _asJava
 
   /**
     * The date the file was created
     */
   def creationTime(): Long = {
-    asJava.creationTime()
+    asJava.asInstanceOf[JFileProps].creationTime()
   }
 
   /**
     * The date the file was last accessed
     */
   def lastAccessTime(): Long = {
-    asJava.lastAccessTime()
+    asJava.asInstanceOf[JFileProps].lastAccessTime()
   }
 
   /**
     * The date the file was last modified
     */
   def lastModifiedTime(): Long = {
-    asJava.lastModifiedTime()
+    asJava.asInstanceOf[JFileProps].lastModifiedTime()
   }
 
   /**
     * Is the file a directory?
     */
   def isDirectory(): Boolean = {
-    asJava.isDirectory()
+    asJava.asInstanceOf[JFileProps].isDirectory()
   }
 
   /**
     * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
     */
   def isOther(): Boolean = {
-    asJava.isOther()
+    asJava.asInstanceOf[JFileProps].isOther()
   }
 
   /**
     * Is the file a regular file?
     */
   def isRegularFile(): Boolean = {
-    asJava.isRegularFile()
+    asJava.asInstanceOf[JFileProps].isRegularFile()
   }
 
   /**
     * Is the file a symbolic link?
     */
   def isSymbolicLink(): Boolean = {
-    asJava.isSymbolicLink()
+    asJava.asInstanceOf[JFileProps].isSymbolicLink()
   }
 
   /**
     * The size of the file, in bytes
     */
   def size(): Long = {
-    asJava.size()
+    asJava.asInstanceOf[JFileProps].size()
   }
 
 }
 
 object FileProps {
 
-  def apply(_asJava: JFileProps): FileProps =
+  def apply(_asJava: Object): FileProps =
     new FileProps(_asJava)
 
 }

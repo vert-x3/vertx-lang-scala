@@ -30,9 +30,9 @@ import io.vertx.core.dns.{SrvRecord => JSrvRecord}
   * 
   * Please consult the documentation for more information on DNS clients.
   */
-class DnsClient(private val _asJava: JDnsClient) {
+class DnsClient(private val _asJava: Object) {
 
-  def asJava: JDnsClient = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Try to lookup the A (ipv4) or AAAA (ipv6) record for the given name. The first found will be used.
@@ -41,7 +41,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def lookupFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.lookup(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JDnsClient].lookup(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -52,7 +52,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def lookup4Future(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.lookup4(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JDnsClient].lookup4(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -63,7 +63,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def lookup6Future(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.lookup6(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JDnsClient].lookup6(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -74,7 +74,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveAFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asInstanceOf[java.util.List[java.lang.String]].asScala))
-    asJava.resolveA(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
+    asJava.asInstanceOf[JDnsClient].resolveA(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
     promiseAndHandler._2.future
   }
 
@@ -85,7 +85,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveAAAAFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asInstanceOf[java.util.List[java.lang.String]].asScala))
-    asJava.resolveAAAA(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
     promiseAndHandler._2.future
   }
 
@@ -96,7 +96,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveCNAMEFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asInstanceOf[java.util.List[java.lang.String]].asScala))
-    asJava.resolveCNAME(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
     promiseAndHandler._2.future
   }
 
@@ -107,7 +107,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveMXFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[MxRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[MxRecord]]((x => if (x == null) null else x.asInstanceOf[java.util.List[io.vertx.core.dns.MxRecord]].asScala.map(MxRecord.apply)))
-    asJava.resolveMX(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.MxRecord]]]])
+    asJava.asInstanceOf[JDnsClient].resolveMX(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.MxRecord]]]])
     promiseAndHandler._2.future
   }
 
@@ -118,7 +118,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveTXTFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asInstanceOf[java.util.List[java.lang.String]].asScala))
-    asJava.resolveTXT(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
     promiseAndHandler._2.future
   }
 
@@ -129,7 +129,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolvePTRFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.resolvePTR(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -140,7 +140,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveNSFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[String]]((x => if (x == null) null else x.asInstanceOf[java.util.List[java.lang.String]].asScala))
-    asJava.resolveNS(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
+    asJava.asInstanceOf[JDnsClient].resolveNS(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[java.lang.String]]]])
     promiseAndHandler._2.future
   }
 
@@ -151,7 +151,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def resolveSRVFuture(name: String): concurrent.Future[scala.collection.mutable.Buffer[SrvRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[scala.collection.mutable.Buffer[SrvRecord]]((x => if (x == null) null else x.asInstanceOf[java.util.List[io.vertx.core.dns.SrvRecord]].asScala.map(SrvRecord.apply)))
-    asJava.resolveSRV(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.SrvRecord]]]])
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.util.List[io.vertx.core.dns.SrvRecord]]]])
     promiseAndHandler._2.future
   }
 
@@ -163,7 +163,7 @@ class DnsClient(private val _asJava: JDnsClient) {
     */
   def reverseLookupFuture(ipaddress: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.reverseLookup(ipaddress, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -171,7 +171,7 @@ class DnsClient(private val _asJava: JDnsClient) {
 
 object DnsClient {
 
-  def apply(_asJava: JDnsClient): DnsClient =
+  def apply(_asJava: Object): DnsClient =
     new DnsClient(_asJava)
 
 }

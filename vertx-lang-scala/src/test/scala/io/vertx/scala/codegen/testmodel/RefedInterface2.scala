@@ -42,14 +42,14 @@ object RefedInterface2 {
 
   private class RefedInterface2Impl(private val _asJava: JRefedInterface2) extends RefedInterface2 {
 
-  def asJava: JRefedInterface2 = _asJava
+  def asJava: Object = _asJava
 
   def getString(): String = {
-    asJava.getString()
+    asJava.asInstanceOf[JRefedInterface2].getString()
   }
 
   def setString(str: String): RefedInterface2 = {
-    asJava.setString(str)
+    asJava.asInstanceOf[JRefedInterface2].setString(str)
     this
   }
 

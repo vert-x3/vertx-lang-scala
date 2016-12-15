@@ -45,9 +45,9 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
   * 
   * Please see the documentation for more information.
   */
-class Pump(private val _asJava: JPump) {
+class Pump(private val _asJava: Object) {
 
-  def asJava: JPump = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Set the write queue max size to `maxSize`
@@ -55,7 +55,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def setWriteQueueMaxSize(maxSize: Int): Pump = {
-    asJava.setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize)
     this
   }
 
@@ -64,7 +64,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def start(): Pump = {
-    asJava.start()
+    asJava.asInstanceOf[JPump].start()
     this
   }
 
@@ -73,7 +73,7 @@ class Pump(private val _asJava: JPump) {
     * @return a reference to this, so the API can be used fluently
     */
   def stop(): Pump = {
-    asJava.stop()
+    asJava.asInstanceOf[JPump].stop()
     this
   }
 
@@ -81,14 +81,14 @@ class Pump(private val _asJava: JPump) {
     * Return the total number of items pumped by this pump.
     */
   def numberPumped(): Int = {
-    asJava.numberPumped()
+    asJava.asInstanceOf[JPump].numberPumped()
   }
 
 }
 
 object Pump {
 
-  def apply(_asJava: JPump): Pump =
+  def apply(_asJava: Object): Pump =
     new Pump(_asJava)
 
   def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {

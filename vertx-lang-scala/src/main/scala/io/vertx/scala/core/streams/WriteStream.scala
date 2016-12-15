@@ -103,7 +103,7 @@ object WriteStream {
 
   private class WriteStreamImpl[T: TypeTag](private val _asJava: JWriteStream[Object]) extends WriteStream[T] {
 
-  def asJava: JWriteStream[Object] = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Set an exception handler on the write stream.
@@ -111,7 +111,7 @@ object WriteStream {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WriteStream[T] = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
@@ -123,7 +123,7 @@ object WriteStream {
     * @return a reference to this, so the API can be used fluently
     */
   def write(data: T): WriteStream[T] = {
-    asJava.write(toJava[T](data).asInstanceOf[Object])
+    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data).asInstanceOf[Object])
     this
   }
 
@@ -133,14 +133,14 @@ object WriteStream {
     * Once the stream has ended, it cannot be used any more.
     */
   def end(): Unit = {
-    asJava.end()
+    asJava.asInstanceOf[JWriteStream[Object]].end()
   }
 
   /**
     * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
     */
   def end(t: T): Unit = {
-    asJava.end(toJava[T](t).asInstanceOf[Object])
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](t).asInstanceOf[Object])
   }
 
   /**
@@ -155,7 +155,7 @@ object WriteStream {
     * @return a reference to this, so the API can be used fluently
     */
   def setWriteQueueMaxSize(maxSize: Int): WriteStream[T] = {
-    asJava.setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JWriteStream[Object]].setWriteQueueMaxSize(maxSize)
     this
   }
 
@@ -164,7 +164,7 @@ object WriteStream {
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    asJava.writeQueueFull()
+    asJava.asInstanceOf[JWriteStream[Object]].writeQueueFull()
   }
 
   /**
@@ -177,7 +177,7 @@ object WriteStream {
     * @return a reference to this, so the API can be used fluently
     */
   def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T] = {
-    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JWriteStream[Object]].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 

@@ -82,17 +82,17 @@ import io.vertx.scala.core.http.HttpClient
   * 
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: JVertx) 
+class Vertx(private val _asJava: Object) 
     extends Measured {
 
-  def asJava: JVertx = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    asJava.isMetricsEnabled()
+    asJava.asInstanceOf[JVertx].isMetricsEnabled()
   }
 
   /**
@@ -100,7 +100,7 @@ class Vertx(private val _asJava: JVertx)
     * @return The current context (created if didn't exist)
     */
   def getOrCreateContext(): Context = {
-    Context.apply(asJava.getOrCreateContext())
+    Context.apply(asJava.asInstanceOf[JVertx].getOrCreateContext())
   }
 
   /**
@@ -109,7 +109,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the server
     */
   def createNetServer(options: NetServerOptions): NetServer = {
-    NetServer.apply(asJava.createNetServer(options.asJava))
+    NetServer.apply(asJava.asInstanceOf[JVertx].createNetServer(options.asJava))
   }
 
   /**
@@ -117,7 +117,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the server
     */
   def createNetServer(): NetServer = {
-    NetServer.apply(asJava.createNetServer())
+    NetServer.apply(asJava.asInstanceOf[JVertx].createNetServer())
   }
 
   /**
@@ -126,7 +126,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the client
     */
   def createNetClient(options: NetClientOptions): NetClient = {
-    NetClient.apply(asJava.createNetClient(options.asJava))
+    NetClient.apply(asJava.asInstanceOf[JVertx].createNetClient(options.asJava))
   }
 
   /**
@@ -134,7 +134,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the client
     */
   def createNetClient(): NetClient = {
-    NetClient.apply(asJava.createNetClient())
+    NetClient.apply(asJava.asInstanceOf[JVertx].createNetClient())
   }
 
   /**
@@ -143,7 +143,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the server
     */
   def createHttpServer(options: HttpServerOptions): HttpServer = {
-    HttpServer.apply(asJava.createHttpServer(options.asJava))
+    HttpServer.apply(asJava.asInstanceOf[JVertx].createHttpServer(options.asJava))
   }
 
   /**
@@ -151,7 +151,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the server
     */
   def createHttpServer(): HttpServer = {
-    HttpServer.apply(asJava.createHttpServer())
+    HttpServer.apply(asJava.asInstanceOf[JVertx].createHttpServer())
   }
 
   /**
@@ -160,7 +160,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the client
     */
   def createHttpClient(options: HttpClientOptions): HttpClient = {
-    HttpClient.apply(asJava.createHttpClient(options.asJava))
+    HttpClient.apply(asJava.asInstanceOf[JVertx].createHttpClient(options.asJava))
   }
 
   /**
@@ -168,7 +168,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the client
     */
   def createHttpClient(): HttpClient = {
-    HttpClient.apply(asJava.createHttpClient())
+    HttpClient.apply(asJava.asInstanceOf[JVertx].createHttpClient())
   }
 
   /**
@@ -177,7 +177,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the socket
     */
   def createDatagramSocket(options: DatagramSocketOptions): DatagramSocket = {
-    DatagramSocket.apply(asJava.createDatagramSocket(options.asJava))
+    DatagramSocket.apply(asJava.asInstanceOf[JVertx].createDatagramSocket(options.asJava))
   }
 
   /**
@@ -185,7 +185,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the socket
     */
   def createDatagramSocket(): DatagramSocket = {
-    DatagramSocket.apply(asJava.createDatagramSocket())
+    DatagramSocket.apply(asJava.asInstanceOf[JVertx].createDatagramSocket())
   }
 
   /**
@@ -194,7 +194,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def fileSystem(): FileSystem = {
     if (cached_0 == null) {
-      cached_0 = FileSystem.apply(asJava.fileSystem()).asInstanceOf
+      cached_0 = FileSystem.apply(asJava.asInstanceOf[JVertx].fileSystem()).asInstanceOf
     }
     cached_0
   }
@@ -205,7 +205,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def eventBus(): EventBus = {
     if (cached_1 == null) {
-      cached_1 = EventBus.apply(asJava.eventBus()).asInstanceOf
+      cached_1 = EventBus.apply(asJava.asInstanceOf[JVertx].eventBus()).asInstanceOf
     }
     cached_1
   }
@@ -217,7 +217,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the DNS client
     */
   def createDnsClient(port: Int, host: String): DnsClient = {
-    DnsClient.apply(asJava.createDnsClient(port, host))
+    DnsClient.apply(asJava.asInstanceOf[JVertx].createDnsClient(port, host))
   }
 
   /**
@@ -226,7 +226,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def sharedData(): SharedData = {
     if (cached_2 == null) {
-      cached_2 = SharedData.apply(asJava.sharedData()).asInstanceOf
+      cached_2 = SharedData.apply(asJava.asInstanceOf[JVertx].sharedData()).asInstanceOf
     }
     cached_2
   }
@@ -239,7 +239,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the unique ID of the timer
     */
   def setTimer(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
-    asJava.setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
+    asJava.asInstanceOf[JVertx].setTimer(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
   }
 
   /**
@@ -249,7 +249,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the timer stream
     */
   def timerStream(delay: Long): TimeoutStream = {
-    TimeoutStream.apply(asJava.timerStream(delay))
+    TimeoutStream.apply(asJava.asInstanceOf[JVertx].timerStream(delay))
   }
 
   /**
@@ -260,7 +260,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the unique ID of the timer
     */
   def setPeriodic(delay: Long, handler: io.vertx.core.Handler[Long]): Long = {
-    asJava.setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
+    asJava.asInstanceOf[JVertx].setPeriodic(delay, funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
   }
 
   /**
@@ -270,7 +270,7 @@ class Vertx(private val _asJava: JVertx)
     * @return the periodic stream
     */
   def periodicStream(delay: Long): TimeoutStream = {
-    TimeoutStream.apply(asJava.periodicStream(delay))
+    TimeoutStream.apply(asJava.asInstanceOf[JVertx].periodicStream(delay))
   }
 
   /**
@@ -279,7 +279,7 @@ class Vertx(private val _asJava: JVertx)
     * @return true if the timer was successfully cancelled, or false if the timer does not exist.
     */
   def cancelTimer(id: Long): Boolean = {
-    asJava.cancelTimer(id)
+    asJava.asInstanceOf[JVertx].cancelTimer(id)
   }
 
   /**
@@ -288,7 +288,7 @@ class Vertx(private val _asJava: JVertx)
     * @param action - a handler representing the action to execute
     */
   def runOnContext(action: io.vertx.core.Handler[Unit]): Unit = {
-    asJava.runOnContext(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => action.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JVertx].runOnContext(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => action.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
   }
 
   /**
@@ -299,7 +299,7 @@ class Vertx(private val _asJava: JVertx)
     * The actual close is asynchronous and may not complete until after the call has returned.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JVertx].close()
   }
 
   /**
@@ -308,7 +308,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def closeFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.close(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JVertx].close(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -321,7 +321,7 @@ class Vertx(private val _asJava: JVertx)
     * @param name the name.
     */
   def deployVerticle(name: String): Unit = {
-    asJava.deployVerticle(name)
+    asJava.asInstanceOf[JVertx].deployVerticle(name)
   }
 
   /**
@@ -336,7 +336,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def deployVerticleFuture(name: String): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.deployVerticle(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JVertx].deployVerticle(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -347,7 +347,7 @@ class Vertx(private val _asJava: JVertx)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     */
   def deployVerticle(name: String, options: DeploymentOptions): Unit = {
-    asJava.deployVerticle(name, options.asJava)
+    asJava.asInstanceOf[JVertx].deployVerticle(name, options.asJava)
   }
 
   /**
@@ -359,7 +359,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def deployVerticleFuture(name: String, options: DeploymentOptions): concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[String]((x => x.asInstanceOf))
-    asJava.deployVerticle(name, options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+    asJava.asInstanceOf[JVertx].deployVerticle(name, options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
     promiseAndHandler._2.future
   }
 
@@ -370,7 +370,7 @@ class Vertx(private val _asJava: JVertx)
     * @param deploymentID the deployment ID
     */
   def undeploy(deploymentID: String): Unit = {
-    asJava.undeploy(deploymentID)
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID)
   }
 
   /**
@@ -380,7 +380,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def undeployFuture(deploymentID: String): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.undeploy(deploymentID, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -389,7 +389,7 @@ class Vertx(private val _asJava: JVertx)
     * @return Set of deployment IDs
     */
   def deploymentIDs(): Set[String] = {
-    asJava.deploymentIDs().asScala.map(x => x:String).toSet
+    asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x:String).toSet
   }
 
   /**
@@ -397,7 +397,7 @@ class Vertx(private val _asJava: JVertx)
     * @return true if clustered
     */
   def isClustered(): Boolean = {
-    asJava.isClustered()
+    asJava.asInstanceOf[JVertx].isClustered()
   }
 
   /**
@@ -420,7 +420,7 @@ class Vertx(private val _asJava: JVertx)
     */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]], ordered: Boolean): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], ordered, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
+    asJava.asInstanceOf[JVertx].executeBlocking(funcToMappedHandler[JFuture[T], Future[T]](Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], ordered, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -429,7 +429,7 @@ class Vertx(private val _asJava: JVertx)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def executeBlockingFuture[T: TypeTag](blockingCodeHandler: io.vertx.core.Handler[Future[T]]): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.executeBlocking(funcToMappedHandler(Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
+    asJava.asInstanceOf[JVertx].executeBlocking(funcToMappedHandler[JFuture[T], Future[T]](Future.apply[T])(blockingCodeHandler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.Future[Object]]], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -437,14 +437,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `poolSize`.
     */
   def createSharedWorkerExecutor(name: String): WorkerExecutor = {
-    WorkerExecutor.apply(asJava.createSharedWorkerExecutor(name))
+    WorkerExecutor.apply(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name))
   }
 
   /**
     * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int): WorkerExecutor = {
-    WorkerExecutor.apply(asJava.createSharedWorkerExecutor(name, poolSize))
+    WorkerExecutor.apply(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name, poolSize))
   }
 
   /**
@@ -462,7 +462,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return the named worker executor
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): WorkerExecutor = {
-    WorkerExecutor.apply(asJava.createSharedWorkerExecutor(name, poolSize, maxExecuteTime))
+    WorkerExecutor.apply(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name, poolSize, maxExecuteTime))
   }
 
   /**
@@ -471,7 +471,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): Vertx = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JVertx].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
@@ -482,7 +482,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object Vertx {
 
-  def apply(_asJava: JVertx): Vertx =
+  def apply(_asJava: Object): Vertx =
     new Vertx(_asJava)
 
   def vertx(): Vertx = {

@@ -74,7 +74,7 @@ class JksOptions(val asJava: JJksOptions) {
     * Set the key store as a buffer
     */
   def setValue(value: Buffer) = {
-    asJava.setValue(value.asJava)
+    asJava.setValue(value.asInstanceOf)
     this
   }
   def getValue = {

@@ -102,7 +102,7 @@ import @{importedType.raw.translateName("scala")}\n
   */\n
 @end{}
 @if{concrete}
-	class @{writeCLassType(type);}(private val _asJava: @{writeDelegateType(type)})
+	class @{writeCLassType(type);}(private val _asJava: Object)
 @else{}
 	trait @{writeType(type);}
 @end{}
@@ -127,7 +127,7 @@ import @{importedType.raw.translateName("scala")}\n
 @if{concrete}
 	object @{type.raw.simpleName} {\n
 	\n
-  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
+  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: Object): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
 	    new @{toScalaType(type);}(_asJava)\n
 	\n
 	@foreach{method : staticMethods}

@@ -51,7 +51,7 @@ class Option(val asJava: JOption) {
     this
   }
   def setChoices(value: Set[String]) = {
-    asJava.setChoices(value.asJava)
+    asJava.setChoices(value.asInstanceOf)
     this
   }
   def getChoices = {

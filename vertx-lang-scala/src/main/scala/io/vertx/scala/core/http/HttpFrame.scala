@@ -28,16 +28,16 @@ import io.vertx.scala.core.buffer.Buffer
 /**
   * An HTTP/2 frame.
   */
-class HttpFrame(private val _asJava: JHttpFrame) {
+class HttpFrame(private val _asJava: Object) {
 
-  def asJava: JHttpFrame = _asJava
+  def asJava: Object = _asJava
 
   /**
     * @return the 8-bit type of the frame
     */
   def `type`(): Int = {
     if (cached_0 == null) {
-      cached_0 = asJava.`type`().asInstanceOf
+      cached_0 = asJava.asInstanceOf[JHttpFrame].`type`().asInstanceOf
     }
     cached_0
   }
@@ -47,7 +47,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
     */
   def flags(): Int = {
     if (cached_1 == null) {
-      cached_1 = asJava.flags().asInstanceOf
+      cached_1 = asJava.asInstanceOf[JHttpFrame].flags().asInstanceOf
     }
     cached_1
   }
@@ -57,7 +57,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
     */
   def payload(): Buffer = {
     if (cached_2 == null) {
-      cached_2 = Buffer.apply(asJava.payload()).asInstanceOf
+      cached_2 = Buffer.apply(asJava.asInstanceOf[JHttpFrame].payload()).asInstanceOf
     }
     cached_2
   }
@@ -69,7 +69,7 @@ class HttpFrame(private val _asJava: JHttpFrame) {
 
 object HttpFrame {
 
-  def apply(_asJava: JHttpFrame): HttpFrame =
+  def apply(_asJava: Object): HttpFrame =
     new HttpFrame(_asJava)
 
 }

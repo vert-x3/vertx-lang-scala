@@ -57,7 +57,7 @@ class DataObjectWithValues(val asJava: JDataObjectWithValues) {
     this
   }
   def setDataObjectValue(value: TestDataObject) = {
-    asJava.setDataObjectValue(value.asJava)
+    asJava.setDataObjectValue(value.asInstanceOf)
     this
   }
   def setDoubleValue(value: Double) = {

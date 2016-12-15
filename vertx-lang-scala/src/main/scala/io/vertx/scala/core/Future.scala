@@ -28,9 +28,9 @@ import java.util.function.{Function => JFunction}
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
+class Future[T: TypeTag](private val _asJava: Object) {
 
-  def asJava: JFuture[Object] = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Has the future completed?
@@ -39,7 +39,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return true if completed, false if not
     */
   def isComplete(): Boolean = {
-    asJava.isComplete()
+    asJava.asInstanceOf[JFuture[Object]].isComplete()
   }
 
   /**
@@ -51,7 +51,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     */
   def setFuture(): concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.setHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
+    asJava.asInstanceOf[JFuture[Object]].setHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
     promiseAndHandler._2.future
   }
 
@@ -60,14 +60,14 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @param result the result
     */
   def complete(result: T): Unit = {
-    asJava.complete(toJava[T](result).asInstanceOf[Object])
+    asJava.asInstanceOf[JFuture[Object]].complete(toJava[T](result).asInstanceOf[Object])
   }
 
   /**
     * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
     */
   def complete(): Unit = {
-    asJava.complete()
+    asJava.asInstanceOf[JFuture[Object]].complete()
   }
 
   /**
@@ -75,7 +75,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @param throwable the failure cause
     */
   def fail(throwable: Throwable): Unit = {
-    asJava.fail(throwable)
+    asJava.asInstanceOf[JFuture[Object]].fail(throwable)
   }
 
   /**
@@ -83,7 +83,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @param failureMessage the failure message
     */
   def fail(failureMessage: String): Unit = {
-    asJava.fail(failureMessage)
+    asJava.asInstanceOf[JFuture[Object]].fail(failureMessage)
   }
 
   /**
@@ -91,7 +91,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the result or null if the operation failed.
     */
   def result(): T = {
-    toScala[T](asJava.result())
+    toScala[T](asJava.asInstanceOf[JFuture[Object]].result())
   }
 
   /**
@@ -99,7 +99,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the cause or null if the operation succeeded.
     */
   def cause(): Throwable = {
-    asJava.cause()
+    asJava.asInstanceOf[JFuture[Object]].cause()
   }
 
   /**
@@ -107,7 +107,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return true if it succeded or false otherwise
     */
   def succeeded(): Boolean = {
-    asJava.succeeded()
+    asJava.asInstanceOf[JFuture[Object]].succeeded()
   }
 
   /**
@@ -115,7 +115,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return true if it failed or false otherwise
     */
   def failed(): Boolean = {
-    asJava.failed()
+    asJava.asInstanceOf[JFuture[Object]].failed()
   }
 
   /**
@@ -133,7 +133,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the next future, used for chaining
     */
   def compose[U: TypeTag](handler: io.vertx.core.Handler[T], next: Future[U]): Future[U] = {
-    Future.apply[U](asJava.compose((handler).asInstanceOf[io.vertx.core.Handler[Object]], next.asJava.asInstanceOf[JFuture[U]].asInstanceOf[io.vertx.core.Future[Object]]))
+    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].compose((handler).asInstanceOf[io.vertx.core.Handler[Object]], next.asJava.asInstanceOf[JFuture[U]].asInstanceOf[io.vertx.core.Future[Object]]))
   }
 
   /**
@@ -151,7 +151,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the composed future
     */
   def compose[U: TypeTag](mapper: T => JFuture[U]): Future[U] = {
-    Future.apply[U](asJava.compose(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,io.vertx.core.Future[Object]]]))
+    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].compose(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,io.vertx.core.Future[Object]]]))
   }
 
   /**
@@ -168,7 +168,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the mapped future
     */
   def map[U: TypeTag](mapper: T => U): Future[U] = {
-    Future.apply[U](asJava.map(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,Object]]))
+    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].map(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,Object]]))
   }
 
   /**
@@ -181,7 +181,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     * @return the mapped future
     */
   def map[V: TypeTag](value: V): Future[V] = {
-    Future.apply[V](asJava.map(toJava[V](value).asInstanceOf[Object]))
+    Future.apply[V](asJava.asInstanceOf[JFuture[Object]].map(toJava[V](value).asInstanceOf[Object]))
   }
 
   /**
@@ -189,7 +189,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
     */
   def completer(): io.vertx.core.Handler[io.vertx.core.AsyncResult[T]] = {
     if (cached_0 == null) {
-      cached_0 = asJava.completer().asInstanceOf
+      cached_0 = asJava.asInstanceOf[JFuture[Object]].completer().asInstanceOf
     }
     cached_0
   }
@@ -199,7 +199,7 @@ class Future[T: TypeTag](private val _asJava: JFuture[Object]) {
 
 object Future {
 
-  def apply[T: TypeTag](_asJava: JFuture[Object]): Future[T] =
+  def apply[T: TypeTag](_asJava: Object): Future[T] =
     new Future(_asJava)
 
   def future[T: TypeTag](): Future[T] = {

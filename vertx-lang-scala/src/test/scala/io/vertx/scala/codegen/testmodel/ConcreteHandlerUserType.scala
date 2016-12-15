@@ -26,20 +26,20 @@ import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: JConcreteHandlerUserType) 
+class ConcreteHandlerUserType(private val _asJava: Object) 
     extends io.vertx.core.Handler[RefedInterface1] {
 
-  def asJava: JConcreteHandlerUserType = _asJava
+  def asJava: Object = _asJava
 
   def handle(arg0: RefedInterface1): Unit = {
-    asJava.handle(arg0.asJava.asInstanceOf[JRefedInterface1])
+    asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
 }
 
 object ConcreteHandlerUserType {
 
-  def apply(_asJava: JConcreteHandlerUserType): ConcreteHandlerUserType =
+  def apply(_asJava: Object): ConcreteHandlerUserType =
     new ConcreteHandlerUserType(_asJava)
 
 }

@@ -34,17 +34,17 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: JNetClient) 
+class NetClient(private val _asJava: Object) 
     extends Measured {
 
-  def asJava: JNetClient = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    asJava.isMetricsEnabled()
+    asJava.asInstanceOf[JNetClient].isMetricsEnabled()
   }
 
   /**
@@ -57,7 +57,7 @@ class NetClient(private val _asJava: JNetClient)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
   def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[NetSocket]((x => if (x == null) null else NetSocket.apply(x.asInstanceOf)))
-    asJava.connect(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket]]])
+    asJava.asInstanceOf[JNetClient].connect(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.net.NetSocket]]])
     promiseAndHandler._2.future
   }
 
@@ -68,14 +68,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * complete until some time after the method has returned.
     */
   def close(): Unit = {
-    asJava.close()
+    asJava.asInstanceOf[JNetClient].close()
   }
 
 }
 
 object NetClient {
 
-  def apply(_asJava: JNetClient): NetClient =
+  def apply(_asJava: Object): NetClient =
     new NetClient(_asJava)
 
 }
