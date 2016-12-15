@@ -31,10 +31,10 @@ import io.vertx.scala.core.streams.WriteStream
   * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
   * The stream  is called when the write fails.
   */
-class PacketWritestream(private val _asJava: JPacketWritestream) 
+class PacketWritestream(private val _asJava: Object) 
     extends WriteStream[Buffer] {
 
-  def asJava: JPacketWritestream = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Ends the stream.
@@ -42,14 +42,14 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
     * Once the stream has ended, it cannot be used any more.
     */
   def end(): Unit = {
-    asJava.end()
+    asJava.asInstanceOf[JPacketWritestream].end()
   }
 
   /**
     * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
     */
   def end(t: Buffer): Unit = {
-    asJava.end(t.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
 
   /**
@@ -57,26 +57,26 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
     * @return true if write queue is full
     */
   def writeQueueFull(): Boolean = {
-    asJava.writeQueueFull()
+    asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
   }
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): PacketWritestream = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JPacketWritestream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def write(data: Buffer): PacketWritestream = {
-    asJava.write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int): PacketWritestream = {
-    asJava.setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize)
     this
   }
 
   def drainHandler(handler: io.vertx.core.Handler[Unit]): PacketWritestream = {
-    asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JPacketWritestream].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -84,7 +84,7 @@ class PacketWritestream(private val _asJava: JPacketWritestream)
 
 object PacketWritestream {
 
-  def apply(_asJava: JPacketWritestream): PacketWritestream =
+  def apply(_asJava: Object): PacketWritestream =
     new PacketWritestream(_asJava)
 
 }

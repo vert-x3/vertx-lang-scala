@@ -25,19 +25,19 @@ import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**
   */
-class SubInterface(private val _asJava: JSubInterface) {
+class SubInterface(private val _asJava: Object) {
 
-  def asJava: JSubInterface = _asJava
+  def asJava: Object = _asJava
 
   def reverse(s: String): String = {
-    asJava.reverse(s)
+    asJava.asInstanceOf[SubInterface].reverse(s)
   }
 
 }
 
 object SubInterface {
 
-  def apply(_asJava: JSubInterface): SubInterface =
+  def apply(_asJava: Object): SubInterface =
     new SubInterface(_asJava)
 
 }

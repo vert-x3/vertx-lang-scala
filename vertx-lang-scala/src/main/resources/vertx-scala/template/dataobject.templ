@@ -35,7 +35,7 @@ import io.vertx.lang.scala.json.Json._\n
 import @{convertTypeToAliasedType(type)+"\n"}
 @foreach{importedType : importedTypes}
 	@if{superType != null && (superType.toString() == importedType.toString())}
-	@else{importedType.kind == CLASS_API}
+	@else{importedType.kind == CLASS_API || importedType.kind == CLASS_DATA_OBJECT}
 import @{convertTypeToAliasedType(importedType)+"\n"}
 import @{importedType.raw.translateName("scala")}\n
 	@else{importedType.kind == CLASS_JSON_OBJECT ||

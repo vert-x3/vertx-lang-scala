@@ -35,33 +35,33 @@ import io.vertx.core.http.{WebSocket => JWebSocket}
   * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
-class WebSocketStream(private val _asJava: JWebSocketStream) 
+class WebSocketStream(private val _asJava: Object) 
     extends ReadStream[WebSocket] {
 
-  def asJava: JWebSocketStream = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketStream = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JWebSocketStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[WebSocket]): WebSocketStream = {
-    asJava.handler(funcToMappedHandler(WebSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.WebSocket]])
+    asJava.asInstanceOf[JWebSocketStream].handler(funcToMappedHandler[JWebSocket, WebSocket](WebSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.WebSocket]])
     this
   }
 
   def pause(): WebSocketStream = {
-    asJava.pause()
+    asJava.asInstanceOf[JWebSocketStream].pause()
     this
   }
 
   def resume(): WebSocketStream = {
-    asJava.resume()
+    asJava.asInstanceOf[JWebSocketStream].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketStream = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JWebSocketStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -69,7 +69,7 @@ class WebSocketStream(private val _asJava: JWebSocketStream)
 
 object WebSocketStream {
 
-  def apply(_asJava: JWebSocketStream): WebSocketStream =
+  def apply(_asJava: Object): WebSocketStream =
     new WebSocketStream(_asJava)
 
 }

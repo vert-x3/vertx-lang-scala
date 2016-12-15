@@ -33,7 +33,7 @@ class DataObjectWithLists(val asJava: JDataObjectWithLists) {
     this
   }
   def setDataObjectValues(value: scala.collection.mutable.Buffer[TestDataObject]) = {
-    asJava.setDataObjectValues(value.map(_.asJava).asJava)
+    asJava.setDataObjectValues(value.map(_.asJava.asInstanceOf[JTestDataObject]).asJava)
     this
   }
   def setDoubleValues(value: scala.collection.mutable.Buffer[Double]) = {
@@ -41,7 +41,7 @@ class DataObjectWithLists(val asJava: JDataObjectWithLists) {
     this
   }
   def setEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value.asJava)
+    asJava.setEnumValues(value.asInstanceOf)
     this
   }
   def setFloatValues(value: scala.collection.mutable.Buffer[Float]) = {
@@ -49,7 +49,7 @@ class DataObjectWithLists(val asJava: JDataObjectWithLists) {
     this
   }
   def setGenEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value.asJava)
+    asJava.setGenEnumValues(value.asInstanceOf)
     this
   }
   def setIntegerValues(value: scala.collection.mutable.Buffer[Int]) = {
@@ -57,11 +57,11 @@ class DataObjectWithLists(val asJava: JDataObjectWithLists) {
     this
   }
   def setJsonArrayValues(value: scala.collection.mutable.Buffer[JsonArray]) = {
-    asJava.setJsonArrayValues(value.asJava)
+    asJava.setJsonArrayValues(value.asInstanceOf)
     this
   }
   def setJsonObjectValues(value: scala.collection.mutable.Buffer[JsonObject]) = {
-    asJava.setJsonObjectValues(value.asJava)
+    asJava.setJsonObjectValues(value.asInstanceOf)
     this
   }
   def setLongValues(value: scala.collection.mutable.Buffer[Long]) = {
@@ -73,7 +73,7 @@ class DataObjectWithLists(val asJava: JDataObjectWithLists) {
     this
   }
   def setStringValues(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setStringValues(value.asJava)
+    asJava.setStringValues(value.asInstanceOf)
     this
   }
 }

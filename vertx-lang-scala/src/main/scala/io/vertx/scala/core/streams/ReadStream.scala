@@ -75,7 +75,7 @@ object ReadStream {
 
   private class ReadStreamImpl[T: TypeTag](private val _asJava: JReadStream[Object]) extends ReadStream[T] {
 
-  def asJava: JReadStream[Object] = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Set an exception handler on the read stream.
@@ -83,7 +83,7 @@ object ReadStream {
     * @return a reference to this, so the API can be used fluently
     */
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ReadStream[T] = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JReadStream[Object]].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
@@ -92,7 +92,7 @@ object ReadStream {
     * @return a reference to this, so the API can be used fluently
     */
   def handler(handler: io.vertx.core.Handler[T]): ReadStream[T] = {
-    asJava.handler((handler).asInstanceOf[io.vertx.core.Handler[Object]])
+    asJava.asInstanceOf[JReadStream[Object]].handler((handler).asInstanceOf[io.vertx.core.Handler[Object]])
     this
   }
 
@@ -101,7 +101,7 @@ object ReadStream {
     * @return a reference to this, so the API can be used fluently
     */
   def pause(): ReadStream[T] = {
-    asJava.pause()
+    asJava.asInstanceOf[JReadStream[Object]].pause()
     this
   }
 
@@ -110,7 +110,7 @@ object ReadStream {
     * @return a reference to this, so the API can be used fluently
     */
   def resume(): ReadStream[T] = {
-    asJava.resume()
+    asJava.asInstanceOf[JReadStream[Object]].resume()
     this
   }
 
@@ -119,7 +119,7 @@ object ReadStream {
     * @return a reference to this, so the API can be used fluently
     */
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): ReadStream[T] = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JReadStream[Object]].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 

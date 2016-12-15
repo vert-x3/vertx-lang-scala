@@ -27,9 +27,9 @@ import io.vertx.core.shareddata.{Counter => JCounter}
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
   * 
   */
-class Counter(private val _asJava: JCounter) {
+class Counter(private val _asJava: Object) {
 
-  def asJava: JCounter = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Get the current value of the counter
@@ -37,7 +37,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def getFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.get(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].get(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -47,7 +47,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def incrementAndGetFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.incrementAndGet(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].incrementAndGet(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -57,7 +57,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def getAndIncrementFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.getAndIncrement(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].getAndIncrement(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -67,7 +67,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def decrementAndGetFuture(): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.decrementAndGet(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].decrementAndGet(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -78,7 +78,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def addAndGetFuture(value: Long): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.addAndGet(value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].addAndGet(value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -89,7 +89,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def getAndAddFuture(value: Long): concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Long]((x => x.asInstanceOf))
-    asJava.getAndAdd(value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
+    asJava.asInstanceOf[JCounter].getAndAdd(value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Long]]])
     promiseAndHandler._2.future
   }
 
@@ -102,7 +102,7 @@ class Counter(private val _asJava: JCounter) {
     */
   def compareAndSetFuture(expected: Long, value: Long): concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Boolean]((x => x.asInstanceOf))
-    asJava.compareAndSet(expected, value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Boolean]]])
+    asJava.asInstanceOf[JCounter].compareAndSet(expected, value, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Boolean]]])
     promiseAndHandler._2.future
   }
 
@@ -110,7 +110,7 @@ class Counter(private val _asJava: JCounter) {
 
 object Counter {
 
-  def apply(_asJava: JCounter): Counter =
+  def apply(_asJava: Object): Counter =
     new Counter(_asJava)
 
 }

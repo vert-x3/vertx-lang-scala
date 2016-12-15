@@ -26,29 +26,29 @@ import io.vertx.core.dns.{MxRecord => JMxRecord}
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
   */
-class MxRecord(private val _asJava: JMxRecord) {
+class MxRecord(private val _asJava: Object) {
 
-  def asJava: JMxRecord = _asJava
+  def asJava: Object = _asJava
 
   /**
     * The priority of the MX record.
     */
   def priority(): Int = {
-    asJava.priority()
+    asJava.asInstanceOf[JMxRecord].priority()
   }
 
   /**
     * The name of the MX record
     */
   def name(): String = {
-    asJava.name()
+    asJava.asInstanceOf[JMxRecord].name()
   }
 
 }
 
 object MxRecord {
 
-  def apply(_asJava: JMxRecord): MxRecord =
+  def apply(_asJava: Object): MxRecord =
     new MxRecord(_asJava)
 
 }

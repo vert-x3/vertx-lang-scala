@@ -30,33 +30,33 @@ import io.vertx.scala.core.streams.ReadStream
 /**
   * Represents an file upload from an HTML FORM.
   */
-class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload) 
+class HttpServerFileUpload(private val _asJava: Object) 
     extends ReadStream[Buffer] {
 
-  def asJava: JHttpServerFileUpload = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerFileUpload = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerFileUpload = {
-    asJava.handler(funcToMappedHandler(Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
+    asJava.asInstanceOf[JHttpServerFileUpload].handler(funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerFileUpload = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JHttpServerFileUpload].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
   def pause(): HttpServerFileUpload = {
-    asJava.pause()
+    asJava.asInstanceOf[JHttpServerFileUpload].pause()
     this
   }
 
   def resume(): HttpServerFileUpload = {
-    asJava.resume()
+    asJava.asInstanceOf[JHttpServerFileUpload].resume()
     this
   }
 
@@ -65,7 +65,7 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
     * @param filename the name of the file
     */
   def streamToFileSystem(filename: String): HttpServerFileUpload = {
-    asJava.streamToFileSystem(filename)
+    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename)
     this
   }
 
@@ -73,35 +73,35 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
     * @return the filename which was used when upload the file.
     */
   def filename(): String = {
-    asJava.filename()
+    asJava.asInstanceOf[JHttpServerFileUpload].filename()
   }
 
   /**
     * @return the name of the attribute
     */
   def name(): String = {
-    asJava.name()
+    asJava.asInstanceOf[JHttpServerFileUpload].name()
   }
 
   /**
     * @return the content type for the upload
     */
   def contentType(): String = {
-    asJava.contentType()
+    asJava.asInstanceOf[JHttpServerFileUpload].contentType()
   }
 
   /**
     * @return the contentTransferEncoding for the upload
     */
   def contentTransferEncoding(): String = {
-    asJava.contentTransferEncoding()
+    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding()
   }
 
   /**
     * @return the charset for the upload
     */
   def charset(): String = {
-    asJava.charset()
+    asJava.asInstanceOf[JHttpServerFileUpload].charset()
   }
 
   /**
@@ -110,21 +110,21 @@ class HttpServerFileUpload(private val _asJava: JHttpServerFileUpload)
     * @return the size of the upload (in bytes)
     */
   def size(): Long = {
-    asJava.size()
+    asJava.asInstanceOf[JHttpServerFileUpload].size()
   }
 
   /**
     * @return true if the size of the upload can be retrieved via #size().
     */
   def isSizeAvailable(): Boolean = {
-    asJava.isSizeAvailable()
+    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable()
   }
 
 }
 
 object HttpServerFileUpload {
 
-  def apply(_asJava: JHttpServerFileUpload): HttpServerFileUpload =
+  def apply(_asJava: Object): HttpServerFileUpload =
     new HttpServerFileUpload(_asJava)
 
 }

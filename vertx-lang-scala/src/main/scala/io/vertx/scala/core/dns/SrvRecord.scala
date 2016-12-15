@@ -26,64 +26,64 @@ import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: JSrvRecord) {
+class SrvRecord(private val _asJava: Object) {
 
-  def asJava: JSrvRecord = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Returns the priority for this service record.
     */
   def priority(): Int = {
-    asJava.priority()
+    asJava.asInstanceOf[JSrvRecord].priority()
   }
 
   /**
     * Returns the weight of this service record.
     */
   def weight(): Int = {
-    asJava.weight()
+    asJava.asInstanceOf[JSrvRecord].weight()
   }
 
   /**
     * Returns the port the service is running on.
     */
   def port(): Int = {
-    asJava.port()
+    asJava.asInstanceOf[JSrvRecord].port()
   }
 
   /**
     * Returns the name for the server being queried.
     */
   def name(): String = {
-    asJava.name()
+    asJava.asInstanceOf[JSrvRecord].name()
   }
 
   /**
     * Returns the protocol for the service being queried (i.e. "_tcp").
     */
   def protocol(): String = {
-    asJava.protocol()
+    asJava.asInstanceOf[JSrvRecord].protocol()
   }
 
   /**
     * Returns the service's name (i.e. "_http").
     */
   def service(): String = {
-    asJava.service()
+    asJava.asInstanceOf[JSrvRecord].service()
   }
 
   /**
     * Returns the name of the host for the service.
     */
   def target(): scala.Option[String] = {
-    scala.Option(asJava.target())
+    scala.Option(asJava.asInstanceOf[JSrvRecord].target())
   }
 
 }
 
 object SrvRecord {
 
-  def apply(_asJava: JSrvRecord): SrvRecord =
+  def apply(_asJava: Object): SrvRecord =
     new SrvRecord(_asJava)
 
 }

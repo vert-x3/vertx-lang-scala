@@ -32,47 +32,47 @@ import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues
   * todo:
   * - Buffer support
   */
-class DataObjectTCK(private val _asJava: JDataObjectTCK) {
+class DataObjectTCK(private val _asJava: Object) {
 
-  def asJava: JDataObjectTCK = _asJava
+  def asJava: Object = _asJava
 
   def getDataObjectWithValues(): DataObjectWithValues = {
-    DataObjectWithValues(asJava.getDataObjectWithValues())
+    DataObjectWithValues(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithValues())
   }
 
   def setDataObjectWithValues(dataObject: DataObjectWithValues): Unit = {
-    asJava.setDataObjectWithValues(dataObject.asJava)
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithValues(dataObject.asJava)
   }
 
   def getDataObjectWithLists(): DataObjectWithLists = {
-    DataObjectWithLists(asJava.getDataObjectWithLists())
+    DataObjectWithLists(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithLists())
   }
 
   def setDataObjectWithLists(dataObject: DataObjectWithLists): Unit = {
-    asJava.setDataObjectWithLists(dataObject.asJava)
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithLists(dataObject.asJava)
   }
 
   def getDataObjectWithMaps(): DataObjectWithMaps = {
-    DataObjectWithMaps(asJava.getDataObjectWithMaps())
+    DataObjectWithMaps(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithMaps())
   }
 
   def setDataObjectWithMaps(dataObject: DataObjectWithMaps): Unit = {
-    asJava.setDataObjectWithMaps(dataObject.asJava)
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithMaps(dataObject.asJava)
   }
 
   def methodWithOnlyJsonObjectConstructorDataObject(dataObject: DataObjectWithOnlyJsonObjectConstructor): Unit = {
-    asJava.methodWithOnlyJsonObjectConstructorDataObject(dataObject.asJava)
+    asJava.asInstanceOf[JDataObjectTCK].methodWithOnlyJsonObjectConstructorDataObject(dataObject.asJava)
   }
 
   def setDataObjectWithBuffer(dataObject: DataObjectWithNestedBuffer): Unit = {
-    asJava.setDataObjectWithBuffer(dataObject.asJava)
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithBuffer(dataObject.asJava)
   }
 
 }
 
 object DataObjectTCK {
 
-  def apply(_asJava: JDataObjectTCK): DataObjectTCK =
+  def apply(_asJava: Object): DataObjectTCK =
     new DataObjectTCK(_asJava)
 
 }

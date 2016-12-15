@@ -37,33 +37,33 @@ import io.vertx.core.eventbus.{Message => JMessage}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object]) 
+class MessageConsumer[T: TypeTag](private val _asJava: Object) 
     extends ReadStream[Message[T]] {
 
-  def asJava: JMessageConsumer[Object] = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageConsumer[T] = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    asJava.handler(funcToMappedHandler(Message.apply[T])(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.eventbus.Message[Object]]])
+    asJava.asInstanceOf[JMessageConsumer[Object]].handler(funcToMappedHandler[JMessage[T], Message[T]](Message.apply[T])(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.eventbus.Message[Object]]])
     this
   }
 
   def pause(): MessageConsumer[T] = {
-    asJava.pause()
+    asJava.asInstanceOf[JMessageConsumer[Object]].pause()
     this
   }
 
   def resume(): MessageConsumer[T] = {
-    asJava.resume()
+    asJava.asInstanceOf[JMessageConsumer[Object]].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): MessageConsumer[T] = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JMessageConsumer[Object]].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -71,21 +71,21 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return a read stream for the body of the message stream.
     */
   def bodyStream(): ReadStream[T] = {
-    ReadStream.apply[T](asJava.bodyStream())
+    ReadStream.apply[T](asJava.asInstanceOf[JMessageConsumer[Object]].bodyStream())
   }
 
   /**
     * @return true if the current consumer is registered
     */
   def isRegistered(): Boolean = {
-    asJava.isRegistered()
+    asJava.asInstanceOf[JMessageConsumer[Object]].isRegistered()
   }
 
   /**
     * @return The address the handler was registered with.
     */
   def address(): String = {
-    asJava.address()
+    asJava.asInstanceOf[JMessageConsumer[Object]].address()
   }
 
   /**
@@ -96,14 +96,14 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * @return this registration
     */
   def setMaxBufferedMessages(maxBufferedMessages: Int): MessageConsumer[T] = {
-    MessageConsumer.apply[T](asJava.setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer.apply[T](asJava.asInstanceOf[JMessageConsumer[Object]].setMaxBufferedMessages(maxBufferedMessages))
   }
 
   /**
     * @return the maximum number of messages that can be buffered when this stream is paused
     */
   def getMaxBufferedMessages(): Int = {
-    asJava.getMaxBufferedMessages()
+    asJava.asInstanceOf[JMessageConsumer[Object]].getMaxBufferedMessages()
   }
 
   /**
@@ -112,7 +112,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     */
   def completionFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.completionHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -120,7 +120,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     * Unregisters the handler which created this registration
     */
   def unregister(): Unit = {
-    asJava.unregister()
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister()
   }
 
   /**
@@ -129,7 +129,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
     */
   def unregisterFuture(): concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.unregister(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
     promiseAndHandler._2.future
   }
 
@@ -137,7 +137,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: JMessageConsumer[Object])
 
 object MessageConsumer {
 
-  def apply[T: TypeTag](_asJava: JMessageConsumer[Object]): MessageConsumer[T] =
+  def apply[T: TypeTag](_asJava: Object): MessageConsumer[T] =
     new MessageConsumer(_asJava)
 
 }

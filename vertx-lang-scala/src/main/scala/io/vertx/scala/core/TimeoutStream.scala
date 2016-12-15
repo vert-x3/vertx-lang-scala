@@ -33,33 +33,33 @@ import io.vertx.scala.core.streams.ReadStream
   * Pausing the timer inhibits the timer shots until the stream is resumed. Setting a null handler callback cancels
   * the timer.
   */
-class TimeoutStream(private val _asJava: JTimeoutStream) 
+class TimeoutStream(private val _asJava: Object) 
     extends ReadStream[Long] {
 
-  def asJava: JTimeoutStream = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): TimeoutStream = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JTimeoutStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[Long]): TimeoutStream = {
-    asJava.handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
+    asJava.asInstanceOf[JTimeoutStream].handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
     this
   }
 
   def pause(): TimeoutStream = {
-    asJava.pause()
+    asJava.asInstanceOf[JTimeoutStream].pause()
     this
   }
 
   def resume(): TimeoutStream = {
-    asJava.resume()
+    asJava.asInstanceOf[JTimeoutStream].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): TimeoutStream = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JTimeoutStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -68,14 +68,14 @@ class TimeoutStream(private val _asJava: JTimeoutStream)
     * argument.
     */
   def cancel(): Unit = {
-    asJava.cancel()
+    asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
 }
 
 object TimeoutStream {
 
-  def apply(_asJava: JTimeoutStream): TimeoutStream =
+  def apply(_asJava: Object): TimeoutStream =
     new TimeoutStream(_asJava)
 
 }

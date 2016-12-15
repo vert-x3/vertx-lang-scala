@@ -44,14 +44,14 @@ object Measured {
 
   private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
 
-  def asJava: JMeasured = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   def isMetricsEnabled(): Boolean = {
-    asJava.isMetricsEnabled()
+    asJava.asInstanceOf[JMeasured].isMetricsEnabled()
   }
 
   }

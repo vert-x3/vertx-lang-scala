@@ -47,7 +47,7 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     * Ignored if no isolation group is set.
     */
   def setExtraClasspath(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setExtraClasspath(value.asJava)
+    asJava.setExtraClasspath(value.asInstanceOf)
     this
   }
   def getExtraClasspath = {
@@ -80,7 +80,7 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     * Set the isolated class names.
     */
   def setIsolatedClasses(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setIsolatedClasses(value.asJava)
+    asJava.setIsolatedClasses(value.asInstanceOf)
     this
   }
   def getIsolatedClasses = {

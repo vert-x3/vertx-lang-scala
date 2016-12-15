@@ -26,32 +26,32 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 
 /**
   */
-class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: JInterfaceWithVariableArg[Object, Object]) {
+class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Object) {
 
-  def asJava: JInterfaceWithVariableArg[Object, Object] = _asJava
+  def asJava: Object = _asJava
 
   def setValue(value: U): GenericRefedInterface[U] = {
-    asJava.setValue(toJava[U](value).asInstanceOf[Object])
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setValue(toJava[U](value).asInstanceOf[Object])
     this
   }
 
   def getValue(): U = {
-    toScala[U](asJava.getValue())
+    toScala[U](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getValue())
   }
 
   def setOtherValue(value: T): Unit = {
-    asJava.setOtherValue(toJava[T](value).asInstanceOf[Object])
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setOtherValue(toJava[T](value).asInstanceOf[Object])
   }
 
   def getOtherValue(): T = {
-    toScala[T](asJava.getOtherValue())
+    toScala[T](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getOtherValue())
   }
 
 }
 
 object InterfaceWithVariableArg {
 
-  def apply[T: TypeTag, U: TypeTag](_asJava: JInterfaceWithVariableArg[Object, Object]): InterfaceWithVariableArg[T, U] =
+  def apply[T: TypeTag, U: TypeTag](_asJava: Object): InterfaceWithVariableArg[T, U] =
     new InterfaceWithVariableArg(_asJava)
 
 }

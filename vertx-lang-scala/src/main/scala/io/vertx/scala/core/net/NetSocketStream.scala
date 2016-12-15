@@ -30,33 +30,33 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
-class NetSocketStream(private val _asJava: JNetSocketStream) 
+class NetSocketStream(private val _asJava: Object) 
     extends ReadStream[NetSocket] {
 
-  def asJava: JNetSocketStream = _asJava
+  def asJava: Object = _asJava
 
   def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocketStream = {
-    asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+    asJava.asInstanceOf[JNetSocketStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
     this
   }
 
   def handler(handler: io.vertx.core.Handler[NetSocket]): NetSocketStream = {
-    asJava.handler(funcToMappedHandler(NetSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.net.NetSocket]])
+    asJava.asInstanceOf[JNetSocketStream].handler(funcToMappedHandler[JNetSocket, NetSocket](NetSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.net.NetSocket]])
     this
   }
 
   def pause(): NetSocketStream = {
-    asJava.pause()
+    asJava.asInstanceOf[JNetSocketStream].pause()
     this
   }
 
   def resume(): NetSocketStream = {
-    asJava.resume()
+    asJava.asInstanceOf[JNetSocketStream].resume()
     this
   }
 
   def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocketStream = {
-    asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+    asJava.asInstanceOf[JNetSocketStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
     this
   }
 
@@ -64,7 +64,7 @@ class NetSocketStream(private val _asJava: JNetSocketStream)
 
 object NetSocketStream {
 
-  def apply(_asJava: JNetSocketStream): NetSocketStream =
+  def apply(_asJava: Object): NetSocketStream =
     new NetSocketStream(_asJava)
 
 }

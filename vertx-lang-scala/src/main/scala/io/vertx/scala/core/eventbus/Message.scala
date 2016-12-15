@@ -36,15 +36,15 @@ import io.vertx.scala.core.MultiMap
   * 
   * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
-class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
+class Message[T: TypeTag](private val _asJava: Object) {
 
-  def asJava: JMessage[Object] = _asJava
+  def asJava: Object = _asJava
 
   /**
     * The address the message was sent to
     */
   def address(): String = {
-    asJava.address()
+    asJava.asInstanceOf[JMessage[Object]].address()
   }
 
   /**
@@ -52,7 +52,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the headers
     */
   def headers(): MultiMap = {
-    MultiMap.apply(asJava.headers())
+    MultiMap.apply(asJava.asInstanceOf[JMessage[Object]].headers())
   }
 
   /**
@@ -61,7 +61,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     */
   def body(): T = {
     if (cached_0 == null) {
-      cached_0 = toScala[T](asJava.body()).asInstanceOf
+      cached_0 = toScala[T](asJava.asInstanceOf[JMessage[Object]].body()).asInstanceOf
     }
     cached_0
   }
@@ -71,7 +71,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @return the reply address, or null, if message was sent without a reply handler.
     */
   def replyAddress(): scala.Option[String] = {
-    scala.Option(asJava.replyAddress())
+    scala.Option(asJava.asInstanceOf[JMessage[Object]].replyAddress())
   }
 
   /**
@@ -83,7 +83,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param message the message to reply with.
     */
   def reply(message: AnyRef): Unit = {
-    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object])
+    asJava.asInstanceOf[JMessage[Object]].reply(toJava[java.lang.Object](message).asInstanceOf[Object])
   }
 
   /**
@@ -94,7 +94,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     */
   def replyFuture[R: TypeTag](message: AnyRef): concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x.asInstanceOf)))
-    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
+    asJava.asInstanceOf[JMessage[Object]].reply(toJava[java.lang.Object](message).asInstanceOf[Object], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
     promiseAndHandler._2.future
   }
 
@@ -104,7 +104,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply(message: AnyRef, options: DeliveryOptions): Unit = {
-    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava)
+    asJava.asInstanceOf[JMessage[Object]].reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava)
   }
 
   /**
@@ -116,7 +116,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     */
   def replyFuture[R: TypeTag](message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Message[R]]((x => if (x == null) null else Message.apply[R](x.asInstanceOf)))
-    asJava.reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
+    asJava.asInstanceOf[JMessage[Object]].reply(toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
     promiseAndHandler._2.future
   }
 
@@ -129,7 +129,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
     * @param message A message to pass back to the sender
     */
   def fail(failureCode: Int, message: String): Unit = {
-    asJava.fail(failureCode, message)
+    asJava.asInstanceOf[JMessage[Object]].fail(failureCode, message)
   }
 
   private var cached_0: T = _
@@ -137,7 +137,7 @@ class Message[T: TypeTag](private val _asJava: JMessage[Object]) {
 
 object Message {
 
-  def apply[T: TypeTag](_asJava: JMessage[Object]): Message[T] =
+  def apply[T: TypeTag](_asJava: Object): Message[T] =
     new Message(_asJava)
 
 }

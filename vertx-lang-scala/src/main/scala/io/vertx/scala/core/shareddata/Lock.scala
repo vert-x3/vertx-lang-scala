@@ -29,22 +29,22 @@ import io.vertx.core.shareddata.{Lock => JLock}
   * When the lock is obtained, no-one else in the cluster can obtain the lock with the same name until the lock
   * is released.
   */
-class Lock(private val _asJava: JLock) {
+class Lock(private val _asJava: Object) {
 
-  def asJava: JLock = _asJava
+  def asJava: Object = _asJava
 
   /**
     * Release the lock. Once the lock is released another will be able to obtain the lock.
     */
   def release(): Unit = {
-    asJava.release()
+    asJava.asInstanceOf[JLock].release()
   }
 
 }
 
 object Lock {
 
-  def apply(_asJava: JLock): Lock =
+  def apply(_asJava: Object): Lock =
     new Lock(_asJava)
 
 }

@@ -27,28 +27,28 @@ import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class InterfaceWithApiArg(private val _asJava: JInterfaceWithApiArg) {
+class InterfaceWithApiArg(private val _asJava: Object) {
 
-  def asJava: JInterfaceWithApiArg = _asJava
+  def asJava: Object = _asJava
 
   def setValue(value: RefedInterface1): GenericRefedInterface[RefedInterface1] = {
-    asJava.setValue(value.asJava.asInstanceOf[JRefedInterface1])
+    asJava.asInstanceOf[JInterfaceWithApiArg].setValue(value.asJava.asInstanceOf[JRefedInterface1])
     this
   }
 
   def getValue(): RefedInterface1 = {
-    RefedInterface1.apply(asJava.getValue())
+    RefedInterface1.apply(asJava.asInstanceOf[JInterfaceWithApiArg].getValue())
   }
 
   def meth(): Unit = {
-    asJava.meth()
+    asJava.asInstanceOf[JInterfaceWithApiArg].meth()
   }
 
 }
 
 object InterfaceWithApiArg {
 
-  def apply(_asJava: JInterfaceWithApiArg): InterfaceWithApiArg =
+  def apply(_asJava: Object): InterfaceWithApiArg =
     new InterfaceWithApiArg(_asJava)
 
 }

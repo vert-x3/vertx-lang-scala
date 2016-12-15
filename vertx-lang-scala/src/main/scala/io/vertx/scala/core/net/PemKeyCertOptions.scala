@@ -85,7 +85,7 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
     * Set the certificate as a buffer
     */
   def setCertValue(value: Buffer) = {
-    asJava.setCertValue(value.asJava)
+    asJava.setCertValue(value.asInstanceOf)
     this
   }
   def getCertValue = {
@@ -107,7 +107,7 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
     * Set the key a a buffer
     */
   def setKeyValue(value: Buffer) = {
-    asJava.setKeyValue(value.asJava)
+    asJava.setKeyValue(value.asInstanceOf)
     this
   }
   def getKeyValue = {

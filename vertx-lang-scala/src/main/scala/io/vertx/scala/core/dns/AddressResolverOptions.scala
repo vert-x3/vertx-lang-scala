@@ -89,7 +89,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     * The default value is null, so the operating system hosts config is used.
     */
   def setHostsValue(value: Buffer) = {
-    asJava.setHostsValue(value.asJava)
+    asJava.setHostsValue(value.asInstanceOf)
     this
   }
   def getHostsValue = {
@@ -164,7 +164,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     this
   }
   def setSearchDomains(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setSearchDomains(value.asJava)
+    asJava.setSearchDomains(value.asInstanceOf)
     this
   }
   def getSearchDomains = {
@@ -182,7 +182,7 @@ class AddressResolverOptions(val asJava: JAddressResolverOptions) {
     this
   }
   def setServers(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setServers(value.asJava)
+    asJava.setServers(value.asInstanceOf)
     this
   }
   def getServers = {

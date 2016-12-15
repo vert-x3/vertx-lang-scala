@@ -28,36 +28,36 @@ import io.vertx.core.eventbus.{Message => JMessage}
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T: TypeTag](private val _asJava: JSendContext[Object]) {
+class SendContext[T: TypeTag](private val _asJava: Object) {
 
-  def asJava: JSendContext[Object] = _asJava
+  def asJava: Object = _asJava
 
   /**
     * @return The message being sent
     */
   def message(): Message[T] = {
-    Message.apply[T](asJava.message())
+    Message.apply[T](asJava.asInstanceOf[JSendContext[Object]].message())
   }
 
   /**
     * Call the next interceptor
     */
   def next(): Unit = {
-    asJava.next()
+    asJava.asInstanceOf[JSendContext[Object]].next()
   }
 
   /**
     * @return true if the message is being sent (point to point) or False if the message is being published
     */
   def send(): Boolean = {
-    asJava.send()
+    asJava.asInstanceOf[JSendContext[Object]].send()
   }
 
 }
 
 object SendContext {
 
-  def apply[T: TypeTag](_asJava: JSendContext[Object]): SendContext[T] =
+  def apply[T: TypeTag](_asJava: Object): SendContext[T] =
     new SendContext(_asJava)
 
 }

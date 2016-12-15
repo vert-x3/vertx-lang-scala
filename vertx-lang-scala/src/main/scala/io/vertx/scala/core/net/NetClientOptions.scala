@@ -56,7 +56,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Add a CRL value
     */
   def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+    asJava.addCrlValue(value.asInstanceOf)
     this
   }
   def getCrlValues = {
@@ -109,7 +109,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     asJava.getIdleTimeout()
   }
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
-    asJava.setJdkSslEngineOptions(value.asJava)
+    asJava.setJdkSslEngineOptions(value.asInstanceOf)
     this
   }
 
@@ -117,7 +117,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the key/cert options in jks format, aka Java keystore.
     */
   def setKeyStoreOptions(value: JksOptions) = {
-    asJava.setKeyStoreOptions(value.asJava)
+    asJava.setKeyStoreOptions(value.asInstanceOf)
     this
   }
 
@@ -156,7 +156,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     asJava.getMetricsName()
   }
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
-    asJava.setOpenSslEngineOptions(value.asJava)
+    asJava.setOpenSslEngineOptions(value.asInstanceOf)
     this
   }
 
@@ -164,7 +164,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the key/cert store options in pem format.
     */
   def setPemKeyCertOptions(value: PemKeyCertOptions) = {
-    asJava.setPemKeyCertOptions(value.asJava)
+    asJava.setPemKeyCertOptions(value.asInstanceOf)
     this
   }
 
@@ -172,7 +172,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the trust options in pem format
     */
   def setPemTrustOptions(value: PemTrustOptions) = {
-    asJava.setPemTrustOptions(value.asJava)
+    asJava.setPemTrustOptions(value.asInstanceOf)
     this
   }
 
@@ -180,7 +180,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the key/cert options in pfx format.
     */
   def setPfxKeyCertOptions(value: PfxOptions) = {
-    asJava.setPfxKeyCertOptions(value.asJava)
+    asJava.setPfxKeyCertOptions(value.asInstanceOf)
     this
   }
 
@@ -188,7 +188,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the trust options in pfx format
     */
   def setPfxTrustOptions(value: PfxOptions) = {
-    asJava.setPfxTrustOptions(value.asJava)
+    asJava.setPfxTrustOptions(value.asInstanceOf)
     this
   }
 
@@ -196,7 +196,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
     */
   def setProxyOptions(value: ProxyOptions) = {
-    asJava.setProxyOptions(value.asJava)
+    asJava.setProxyOptions(value.asInstanceOf)
     this
   }
   def getProxyOptions = {
@@ -328,7 +328,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the trust options in jks format, aka Java trustore
     */
   def setTrustStoreOptions(value: JksOptions) = {
-    asJava.setTrustStoreOptions(value.asJava)
+    asJava.setTrustStoreOptions(value.asInstanceOf)
     this
   }
 

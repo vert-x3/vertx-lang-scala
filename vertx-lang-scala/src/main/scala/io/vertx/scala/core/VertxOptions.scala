@@ -38,7 +38,7 @@ class VertxOptions(val asJava: JVertxOptions) {
     * Sets the address resolver configuration to configure resolving DNS servers, cache TTL, etc...
     */
   def setAddressResolverOptions(value: AddressResolverOptions) = {
-    asJava.setAddressResolverOptions(value.asJava)
+    asJava.setAddressResolverOptions(value.asInstanceOf)
     this
   }
   def getAddressResolverOptions = {
@@ -141,7 +141,7 @@ class VertxOptions(val asJava: JVertxOptions) {
     * Sets the event bus configuration to configure the host, port, ssl...
     */
   def setEventBusOptions(value: EventBusOptions) = {
-    asJava.setEventBusOptions(value.asJava)
+    asJava.setEventBusOptions(value.asInstanceOf)
     this
   }
   def getEventBusOptions = {
@@ -218,7 +218,7 @@ class VertxOptions(val asJava: JVertxOptions) {
     * Set the metrics options
     */
   def setMetricsOptions(value: MetricsOptions) = {
-    asJava.setMetricsOptions(value.asJava)
+    asJava.setMetricsOptions(value.asInstanceOf)
     this
   }
   def getMetricsOptions = {

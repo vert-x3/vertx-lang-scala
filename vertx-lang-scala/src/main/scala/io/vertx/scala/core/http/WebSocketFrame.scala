@@ -35,29 +35,29 @@ import io.vertx.scala.core.buffer.Buffer
   * If there are more than one frames in the message, then the first frame should be a text or binary frame with
   * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
   */
-class WebSocketFrame(private val _asJava: JWebSocketFrame) {
+class WebSocketFrame(private val _asJava: Object) {
 
-  def asJava: JWebSocketFrame = _asJava
+  def asJava: Object = _asJava
 
   /**
     * @return true if it's a text frame
     */
   def isText(): Boolean = {
-    asJava.isText()
+    asJava.asInstanceOf[JWebSocketFrame].isText()
   }
 
   /**
     * @return true if it's a binary frame
     */
   def isBinary(): Boolean = {
-    asJava.isBinary()
+    asJava.asInstanceOf[JWebSocketFrame].isBinary()
   }
 
   /**
     * @return true if it's a continuation frame
     */
   def isContinuation(): Boolean = {
-    asJava.isContinuation()
+    asJava.asInstanceOf[JWebSocketFrame].isContinuation()
   }
 
   /**
@@ -65,7 +65,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def textData(): String = {
     if (cached_0 == null) {
-      cached_0 = asJava.textData().asInstanceOf
+      cached_0 = asJava.asInstanceOf[JWebSocketFrame].textData().asInstanceOf
     }
     cached_0
   }
@@ -75,7 +75,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     */
   def binaryData(): Buffer = {
     if (cached_1 == null) {
-      cached_1 = Buffer.apply(asJava.binaryData()).asInstanceOf
+      cached_1 = Buffer.apply(asJava.asInstanceOf[JWebSocketFrame].binaryData()).asInstanceOf
     }
     cached_1
   }
@@ -84,7 +84,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
     * @return true if this is the final frame.
     */
   def isFinal(): Boolean = {
-    asJava.isFinal()
+    asJava.asInstanceOf[JWebSocketFrame].isFinal()
   }
 
   private var cached_0: String = _
@@ -93,7 +93,7 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
 
 object WebSocketFrame {
 
-  def apply(_asJava: JWebSocketFrame): WebSocketFrame =
+  def apply(_asJava: Object): WebSocketFrame =
     new WebSocketFrame(_asJava)
 
   def binaryFrame(data: Buffer, isFinal: Boolean): WebSocketFrame = {
