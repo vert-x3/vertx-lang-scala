@@ -82,4 +82,8 @@
     return 'J'+type.raw.simpleName+(writeTypeParamsWithoutVariance(typeParams));
   }
 
+  def writeDelegateTypeWithVariance(type) {
+    return 'J'+type.raw.simpleName+(writeTypeParamsWithVariance(typeParams));
+  }
+
 }

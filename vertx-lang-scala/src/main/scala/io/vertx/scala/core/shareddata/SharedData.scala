@@ -16,15 +16,13 @@
 
 package io.vertx.scala.core.shareddata
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.shareddata.{SharedData => JSharedData}
+import io.vertx.scala.core.shareddata.AsyncMap
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
+import io.vertx.scala.core.shareddata.Lock
 import io.vertx.core.shareddata.{Lock => JLock}
+import io.vertx.scala.core.shareddata.LocalMap
 import io.vertx.core.shareddata.{LocalMap => JLocalMap}
+import io.vertx.scala.core.shareddata.Counter
 import io.vertx.core.shareddata.{Counter => JCounter}
 
 /**
@@ -42,69 +40,50 @@ import io.vertx.core.shareddata.{Counter => JCounter}
   */
 class SharedData(private val _asJava: Object) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * Get the cluster wide map with the specified name. The map is accessible to all nodes in the cluster and data
-    * put into the map from any node is visible to to any other node.
-    * @param name the name of the map
-    * @return the map will be returned asynchronously in this future
-    */
-  def getClusterWideMapFuture[K: TypeTag, V: TypeTag](name: String): concurrent.Future[AsyncMap[K, V]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[AsyncMap[K, V]]((x => if (x == null) null else AsyncMap.apply[K,V](x.asInstanceOf)))
-    asJava.asInstanceOf[JSharedData].getClusterWideMap(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.AsyncMap[Object,Object]]]])
-    promiseAndHandler._2.future
+def asJava = _asJava.asInstanceOf[JSharedData]
+//methods returning a future
+  def getClusterWideMap(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[AsyncMap[K, V]]]):Unit = {
+    asJava.getClusterWideMap( )
   }
 
-  /**
-    * Get a cluster wide lock with the specified name. The lock will be passed to the handler when it is available.
-    * @param name the name of the lock
-    * @return the future
-    */
-  def getLockFuture(name: String): concurrent.Future[Lock] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Lock]((x => if (x == null) null else Lock.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JSharedData].getLock(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock]]])
-    promiseAndHandler._2.future
+  def getLock(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
+    asJava.getLock( )
   }
 
-  /**
-    * Like [[io.vertx.scala.core.shareddata.SharedData#getLockFuture]] but specifying a timeout. If the lock is not obtained within the timeout
-    * a failure will be sent to the handler
-    * @param name the name of the lock
-    * @param timeout the timeout in ms
-    * @return the future
-    */
-  def getLockWithTimeoutFuture(name: String, timeout: Long): concurrent.Future[Lock] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Lock]((x => if (x == null) null else Lock.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name, timeout, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Lock]]])
-    promiseAndHandler._2.future
+  def getLockWithTimeout(name: String,timeout: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
+    asJava.getLockWithTimeout( )
   }
 
-  /**
-    * Get a cluster wide counter. The counter will be passed to the handler.
-    * @param name the name of the counter.
-    * @return the future
-    */
-  def getCounterFuture(name: String): concurrent.Future[Counter] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Counter]((x => if (x == null) null else Counter.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JSharedData].getCounter(name, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.shareddata.Counter]]])
-    promiseAndHandler._2.future
+  def getCounter(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Counter]]):Unit = {
+    asJava.getCounter( )
   }
 
-  /**
-    * Return a `LocalMap` with the specific `name`.
-    * @param name the name of the map
-    * @return the msp
-    */
-  def getLocalMap[K: TypeTag, V: TypeTag](name: String): LocalMap[K, V] = {
-    LocalMap.apply[K,V](asJava.asInstanceOf[JSharedData].getLocalMap(name))
+//cached methods
+//fluent methods
+//basic methods
+  def getClusterWideMap(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[AsyncMap[K, V]]]):Unit = {
+    asJava.getClusterWideMap( )
+  }
+
+  def getLock(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
+    asJava.getLock( )
+  }
+
+  def getLockWithTimeout(name: String,timeout: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
+    asJava.getLockWithTimeout( )
+  }
+
+  def getCounter(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Counter]]):Unit = {
+    asJava.getCounter( )
+  }
+
+  def getLocalMap(name: String):LocalMap[K, V] = {
+    asJava.getLocalMap( )
   }
 
 }
 
-object SharedData {
-
-  def apply(_asJava: Object): SharedData =
-    new SharedData(_asJava)
-
+object SharedData{
+//in object!
+//static methods
 }

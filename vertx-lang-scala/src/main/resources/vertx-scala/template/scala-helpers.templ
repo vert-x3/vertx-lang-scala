@@ -3,11 +3,11 @@
   def toScalaType(type) {
     var nullable = type.isNullable;
     var ret = '';
-    if (type.name == 'void' || type.name == 'java.lang.Void') {
+    if (type.kind == CLASS_VOID) {
       ret = 'Unit';
     } else if (type.name == 'Object' || type.name == 'java.lang.Object') {
       ret = 'AnyRef';
-    } else if (type.name == 'Throwable' || type.name == 'java.lang.Throwable') {
+    } else if (type.kind == CLASS_THROWABLE) {
       ret = 'Throwable';
     } else if (type.kind == CLASS_STRING) {
       ret = 'String';
@@ -103,7 +103,7 @@
   def handleOption(param) {
     if (param.type.isNullable) {
       if (param.type.kind == CLASS_API || param.type.kind == CLASS_DATA_OBJECT) {
-        return '(if ('+param.name+'.isDefined) '+param.name+'.get.asJava else null)'
+        return '(if ('+param.name+'.isDefined) '+param.name+'.get' + generateAsJavaForType(param.type) + ' else null)'
       }
       else if (param.type.kind == CLASS_HANDLER) {
         return param.name;
@@ -126,7 +126,7 @@
         }
       }
       else if (param.type.kind == CLASS_DATA_OBJECT) {
-        return param.name + ".asJava";
+        return param.name + generateAsJavaForType(param.type);
       }
       else {
         return param.name;
@@ -164,11 +164,9 @@
   def changeJavaGenericNotationToScalaNotation(type) {
     var ret = "";
     if(!type.name.startsWith("java"))
-      ret = type.simpleName.replace('<', '[').replace('>', ']');
+      ret = type.name.replace('<', '[').replace('>', ']');
     else
       ret = type.name.replace('<', '[').replace('>', ']');
-    if(type.name.startsWith("io.vertx") && !type.name.contains("JsonObject") && !type.name.contains("JsonArray") && !(type.kind==CLASS_ENUM))
-      ret = 'J' + ret;
     return ret;
   }
 
@@ -261,8 +259,7 @@
     var invocation = '';
     if (type.kind == CLASS_PRIMITIVE ||
        type.kind == CLASS_BOXED_PRIMITIVE ||
-       type.name == 'Throwable' ||
-       type.name == 'java.lang.Throwable') {
+       type.kind == CLASS_THROWABLE) {
       invocation += paramName + ':' + toOptionIfNullable(toScalaType(type), type);
     } else if (type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
@@ -286,8 +283,7 @@
         conversion += '.map(x => ' + listType.getSimpleName() + '(x))';
       } else if (listType.kind == CLASS_PRIMITIVE ||
                  listType.kind == CLASS_BOXED_PRIMITIVE ||
-                 listType.name == 'Throwable' ||
-                 listType.name == 'java.lang.Throwable') {
+                 listType.kind == CLASS_THROWABLE) {
         conversion += '.map(x => x:' + toOptionIfNullable(toScalaType(listType),listType) + ')';
       } else if (listType.kind == CLASS_STRING ||
                  listType.kind == CLASS_JSON_OBJECT ||
@@ -328,8 +324,7 @@
     var invocation = '';
     if (type.kind == CLASS_PRIMITIVE ||
         type.kind == CLASS_BOXED_PRIMITIVE ||
-        type.name == 'Throwable' ||
-        type.name == 'java.lang.Throwable' ||
+        type.kind == CLASS_THROWABLE ||
         type.kind == CLASS_OBJECT ||
         type.kind == CLASS_STRING ||
         type.kind == CLASS_JSON_OBJECT ||
@@ -373,7 +368,7 @@
       invocation += methodInvocationHandlerAsyncResult(type, mappedFunc);
     } else if (type.kind == CLASS_PRIMITIVE ||
                type.kind == CLASS_BOXED_PRIMITIVE ||
-               type.name == 'Throwable' || type.name == 'java.lang.Throwable' ||
+               type.kind == CLASS_THROWABLE ||
                type.kind == CLASS_STRING ||
                type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY) {
@@ -423,7 +418,10 @@
       if(param.type.kind == CLASS_OBJECT) {
         invocation += ")";
       }
-      if(param.type.kind == CLASS_OBJECT || param.type.isParameterized || param.type.kind == CLASS_HANDLER) {
+      if(param.type.kind == CLASS_OBJECT) {
+        invocation +=
+      }
+      else{param.type.isParameterized) {
         invocation += ".asInstanceOf["+assembleTypeString(param.type)+"]";
       }
     }
@@ -474,9 +472,9 @@
 
   def handleParamConversionListSet(param) {
     if (param.type.args[0].kind == CLASS_API) {
-      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+'])');
+      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+']).asJava');
     } else if (param.type.args[0].kind == CLASS_DATA_OBJECT){
-      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+'])');
+      return handleOptionForCollection(param, '.map(x => if (x == null) null else x.asJava.asInstanceOf['+assembleTypeString(param.type.args[0])+']).asJava');
     } else {
       return handleOptionForCollection(param, '.map(x => x:' + param.type.args[0].name + ').asJava');
     }
@@ -733,16 +731,14 @@
   def doesTypeParamRequireFurtherOptionHandlingForAsyncResult(typeParam) {
     return typeParam.kind == CLASS_PRIMITIVE ||
            typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable';
+           typeParam.kind == CLASS_THROWABLE;
   }
 
   def doesTypeParamRequireExplicitConversionForAsyncResult(typeParam) {
     var len = typeParam.name.length();
     return typeParam.kind == CLASS_PRIMITIVE ||
            typeParam.kind == CLASS_BOXED_PRIMITIVE ||
-           typeParam.name == 'Throwable' ||
-           typeParam.name == 'java.lang.Throwable' ||
+           typeParam.kind == CLASS_THROWABLE ||
            typeParam.kind == CLASS_VOID ||
            (typeParam.kind == CLASS_OBJECT && len > 1) ||
            typeParam.kind == CLASS_STRING ||

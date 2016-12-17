@@ -1,0 +1,82 @@
+@code{
+
+  def basicMethods(methods) {
+    var ret = new java.util.ArrayList();
+    for(method : methods) {
+      if(!method.isFluent() && !method.isCacheReturn && !method.isStaticMethod && !method.isDefaultMethod)
+        ret.add(method);
+    }
+    return ret;
+  }
+
+  def defaultMethods(methods) {
+    var ret = new java.util.ArrayList();
+    for(method : methods) {
+      if(method.isDefaultMethod)
+        ret.add(method);
+    }
+    return ret;
+  }
+
+  def fluentMethods(methods) {
+    var ret = new java.util.ArrayList();
+    for(method : methods) {
+      if(method.isFluent)
+        ret.add(method);
+    }
+    return ret;
+  }
+
+  def cacheReturnMethods(methods) {
+    var ret = new java.util.ArrayList();
+    for(method : methods) {
+      if(method.isCacheReturn)
+        ret.add(method);
+    }
+    return ret;
+  }
+
+  def futureMethods(methods) {
+    var ret = new java.util.ArrayList();
+    for(method : methods) {
+      if(!method.isFluent() && shouldMethodReturnAFuture(method))
+        ret.add(method);
+    }
+    return ret;
+  }
+
+  def isLastParamAHandlerWithAsyncResult(method) {
+    var size = method.params.size;
+    return method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def isMethodNeedsOverride(callingClassName, method) {
+    if (method.ownerTypes.size() > 1)
+      return true;
+    else {
+      /*There is only one entry in here (0 would be a bug)*/
+      for(ownerType : method.ownerTypes) {
+        if(ownerType.name != callingClassName)
+          return true;
+      }
+    }
+    return false;
+  }
+
+  def shouldMethodReturnAFuture(method) {
+    var size = method.params.size;
+    return size > 0 && isLastParamAHandlerWithAsyncResult(method) && !(method.returnType.kind == CLASS_HANDLER);
+  }
+
+  def invokeMethod(target, type, method) {
+    return target + '.' + method.name + '(' + ' ' + ')';
+  }
+
+  def invokeStaticMethod(target, type, method) {
+    return target + '.' + method.name + '(' + ' ' + ')';
+  }
+
+  def createJavaNameForType(type) {
+    return 'J'+type.simpleName.replace('<', '[').replace('>', ']');
+  }
+}

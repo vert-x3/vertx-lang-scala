@@ -16,210 +16,87 @@
 
 package io.vertx.scala.core
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
 import io.vertx.core.{Future => JFuture}
-import java.util.function.{Function => JFunction}
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T: TypeTag](private val _asJava: Object) {
+class Future[T](private val _asJava: Object) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * Has the future completed?
-    * 
-    * It's completed if it's either succeeded or failed.
-    * @return true if completed, false if not
-    */
-  def isComplete(): Boolean = {
-    asJava.asInstanceOf[JFuture[Object]].isComplete()
+def asJava = _asJava.asInstanceOf[JFuture]
+//methods returning a future
+//cached methods
+  def completer():io.vertx.core.Handler[io.vertx.core.AsyncResult[T]] = {
+    asJava.completer( )
   }
 
-  /**
-    * Set a handler for the result.
-    * 
-    * If the future has already been completed it will be called immediately. Otherwise it will be called when the
-    * future is completed.
-    * @return the Handler that will be called with the result
-    */
-  def setFuture(): concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T]((x => x.asInstanceOf))
-    asJava.asInstanceOf[JFuture[Object]].setHandler(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[Object]]])
-    promiseAndHandler._2.future
+//fluent methods
+  def setHandler(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Future[T] = {
+    asJava.setHandler( )
+    this
   }
 
-  /**
-    * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
-    * @param result the result
-    */
-  def complete(result: T): Unit = {
-    asJava.asInstanceOf[JFuture[Object]].complete(toJava[T](result).asInstanceOf[Object])
+//basic methods
+  def isComplete():Boolean = {
+    asJava.isComplete( )
   }
 
-  /**
-    * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
-    */
-  def complete(): Unit = {
-    asJava.asInstanceOf[JFuture[Object]].complete()
+  def complete(result: T):Unit = {
+    asJava.complete( )
   }
 
-  /**
-    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
-    * @param throwable the failure cause
-    */
-  def fail(throwable: Throwable): Unit = {
-    asJava.asInstanceOf[JFuture[Object]].fail(throwable)
+  def complete():Unit = {
+    asJava.complete( )
   }
 
-  /**
-    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
-    * @param failureMessage the failure message
-    */
-  def fail(failureMessage: String): Unit = {
-    asJava.asInstanceOf[JFuture[Object]].fail(failureMessage)
+  def fail(throwable: Throwable):Unit = {
+    asJava.fail( )
   }
 
-  /**
-    * The result of the operation. This will be null if the operation failed.
-    * @return the result or null if the operation failed.
-    */
-  def result(): T = {
-    toScala[T](asJava.asInstanceOf[JFuture[Object]].result())
+  def fail(failureMessage: String):Unit = {
+    asJava.fail( )
   }
 
-  /**
-    * A Throwable describing failure. This will be null if the operation succeeded.
-    * @return the cause or null if the operation succeeded.
-    */
-  def cause(): Throwable = {
-    asJava.asInstanceOf[JFuture[Object]].cause()
+  def result():T = {
+    asJava.result( )
   }
 
-  /**
-    * Did it succeed?
-    * @return true if it succeded or false otherwise
-    */
-  def succeeded(): Boolean = {
-    asJava.asInstanceOf[JFuture[Object]].succeeded()
+  def cause():Throwable = {
+    asJava.cause( )
   }
 
-  /**
-    * Did it fail?
-    * @return true if it failed or false otherwise
-    */
-  def failed(): Boolean = {
-    asJava.asInstanceOf[JFuture[Object]].failed()
+  def succeeded():Boolean = {
+    asJava.succeeded( )
   }
 
-  /**
-    * Compose this future with a provided `next` future.
-    *
-    * When this (the one on which `compose` is called) future succeeds, the `handler` will be called with
-    * the completed value, this handler should complete the next future.
-    *
-    * If the `handler` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the `next` future and the `handler`
-    * will not be called.
-    * @param handler the handler
-    * @param next the next future
-    * @return the next future, used for chaining
-    */
-  def compose[U: TypeTag](handler: io.vertx.core.Handler[T], next: Future[U]): Future[U] = {
-    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].compose((handler).asInstanceOf[io.vertx.core.Handler[Object]], next.asJava.asInstanceOf[JFuture[U]].asInstanceOf[io.vertx.core.Future[Object]]))
+  def failed():Boolean = {
+    asJava.failed( )
   }
 
-  /**
-    * Compose this future with a `mapper` function.
-    *
-    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
-    * the completed value and this mapper returns another future object. This returned future completion will complete
-    * the future returned by this method call.
-    *
-    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the returned future and the `mapper`
-    * will not be called.
-    * @param mapper the mapper function
-    * @return the composed future
-    */
-  def compose[U: TypeTag](mapper: T => JFuture[U]): Future[U] = {
-    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].compose(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,io.vertx.core.Future[Object]]]))
-  }
-
-  /**
-    * Apply a `mapper` function on this future.
-    *
-    * When this future succeeds, the `mapper` will be called with the completed value and this mapper
-    * returns a value. This value will complete the future returned by this method call.
-    *
-    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-    *
-    * When this future fails, the failure will be propagated to the returned future and the `mapper`
-    * will not be called.
-    * @param mapper the mapper function
-    * @return the mapped future
-    */
-  def map[U: TypeTag](mapper: T => U): Future[U] = {
-    Future.apply[U](asJava.asInstanceOf[JFuture[Object]].map(asJavaFunction(mapper).asInstanceOf[java.util.function.Function[Object,Object]]))
-  }
-
-  /**
-    * Map the result of a future to a specific `value`.
-    *
-    * When this future succeeds, this `value` will complete the future returned by this method call.
-    *
-    * When this future fails, the failure will be propagated to the returned future.
-    * @param value the value that eventually completes the mapped future
-    * @return the mapped future
-    */
-  def map[V: TypeTag](value: V): Future[V] = {
-    Future.apply[V](asJava.asInstanceOf[JFuture[Object]].map(toJava[V](value).asInstanceOf[Object]))
-  }
-
-  /**
-    * @return an handler completing this future
-    */
-  def completer(): io.vertx.core.Handler[io.vertx.core.AsyncResult[T]] = {
-    if (cached_0 == null) {
-      cached_0 = asJava.asInstanceOf[JFuture[Object]].completer().asInstanceOf
-    }
-    cached_0
-  }
-
-  private var cached_0: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]] = _
 }
 
-object Future {
-
-  def apply[T: TypeTag](_asJava: Object): Future[T] =
-    new Future(_asJava)
-
-  def future[T: TypeTag](): Future[T] = {
-    Future.apply[T](io.vertx.core.Future.future())
+object Future{
+//in object!
+//static methods
+  def future[T]():Future[T] = {
+    JFuture.future( )
   }
 
-  def succeededFuture[T: TypeTag](): Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture())
+  def succeededFuture[T]():Future[T] = {
+    JFuture.succeededFuture( )
   }
 
-  def succeededFuture[T: TypeTag](result: T): Future[T] = {
-    Future.apply[T](io.vertx.core.Future.succeededFuture(toJava[T](result).asInstanceOf[Object]))
+  def succeededFuture[T](result: T):Future[T] = {
+    JFuture.succeededFuture( )
   }
 
-  def failedFuture[T: TypeTag](t: Throwable): Future[T] = {
-    Future.apply[T](io.vertx.core.Future.failedFuture(t))
+  def failedFuture[T](t: Throwable):Future[T] = {
+    JFuture.failedFuture( )
   }
 
-  def failedFuture[T: TypeTag](failureMessage: String): Future[T] = {
-    Future.apply[T](io.vertx.core.Future.failedFuture(failureMessage))
+  def failedFuture[T](failureMessage: String):Future[T] = {
+    JFuture.failedFuture( )
   }
 
 }

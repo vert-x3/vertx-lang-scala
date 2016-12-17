@@ -16,22 +16,19 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+import io.vertx.scala.core.datagram.PacketWritestream
 import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.datagram.DatagramPacket
 import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
-import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.scala.core.metrics.Measured
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * A datagram socket can be used to send [[io.vertx.scala.core.datagram.DatagramPacket]]'s to remote datagram servers
@@ -46,225 +43,116 @@ import io.vertx.scala.core.net.SocketAddress
   * Please consult the documentation for more information on datagram sockets.
   */
 class DatagramSocket(private val _asJava: Object) 
-    extends ReadStream[DatagramPacket] 
-    with Measured {
+    extends ReadStream[DatagramPacket](_asJava) 
+    with Measured(_asJava) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled()
+  override def asJava = _asJava.asInstanceOf[JDatagramSocket]
+//methods returning a future
+  def close(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
+    asJava.close( )
   }
 
-  /**
-    * Write the given [[io.vertx.scala.core.buffer.Buffer]] to the [[io.vertx.scala.core.net.SocketAddress]].
-    * The [[scala.concurrent.Future]] will be notified once the write completes.
-    * @param packet the io.vertx.scala.core.buffer.Buffer to write
-    * @param port the host port of the remote peer
-    * @param host the host address of the remote peer
-    * @return the [[scala.concurrent.Future]] to complete once the write completes.
-    */
-  def sendFuture(packet: Buffer, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer], port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
+//cached methods
+  def localAddress():SocketAddress = {
+    asJava.localAddress( )
   }
 
-  /**
-    * Returns a [[io.vertx.scala.core.datagram.PacketWritestream]] able to send  to the
-    * [[io.vertx.scala.core.net.SocketAddress]].
-    * @param port the port of the remote peer
-    * @param host the host address of the remote peer
-    * @return the write stream for sending packets
-    */
-  def sender(port: Int, host: String): PacketWritestream = {
-    PacketWritestream.apply(asJava.asInstanceOf[JDatagramSocket].sender(port, host))
-  }
-
-  /**
-    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using UTF8 encoding.
-    * The  will be notified once the write completes.
-    * @param str the String to write
-    * @param port the host port of the remote peer
-    * @param host the host address of the remote peer
-    * @return the [[scala.concurrent.Future]] to complete once the write completes.
-    */
-  def sendFuture(str: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].send(str, port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Write the given String to the [[io.vertx.scala.core.net.SocketAddress]] using the given encoding.
-    * The  will be notified once the write completes.
-    * @param str the String to write
-    * @param enc the charset used for encoding
-    * @param port the host port of the remote peer
-    * @param host the host address of the remote peer
-    * @return the [[scala.concurrent.Future]] to complete once the write completes.
-    */
-  def sendFuture(str: String, enc: String, port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].send(str, enc, port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]] implementation asynchronous
-    * and notifies the handler once done.
-    * @return the future to complete once complete
-    */
-  def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.asInstanceOf[JDatagramSocket].close(promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Closes the [[io.vertx.scala.core.datagram.DatagramSocket]]. The close itself is asynchronous.
-    */
-  def close(): Unit = {
-    asJava.asInstanceOf[JDatagramSocket].close()
-  }
-
-  /**
-    * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
-    * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.
-    * @return the socket address
-    */
-  def localAddress(): SocketAddress = {
-    if (cached_0 == null) {
-      cached_0 = SocketAddress.apply(asJava.asInstanceOf[JDatagramSocket].localAddress()).asInstanceOf
-    }
-    cached_0
-  }
-
-  /**
-    * Joins a multicast group and listens for packets send to it.
-    * The  is notified once the operation completes.
-    * @param multicastAddress the address of the multicast group to join
-    * @return then future to complete once the operation completes
-    */
-  def listenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Joins a multicast group and listens for packets send to it on the given network interface.
-    * The  is notified once the operation completes.
-    * @param multicastAddress the address of the multicast group to join
-    * @param networkInterface the network interface on which to listen for packets.
-    * @param source the address of the source for which we will listen for multicast packets
-    * @return then future to complete once the operation completes
-    */
-  def listenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Leaves a multicast group and stops listening for packets send to it.
-    * The  is notified once the operation completes.
-    * @param multicastAddress the address of the multicast group to leave
-    * @return then future to complete once the operation completes
-    */
-  def unlistenMulticastGroupFuture(multicastAddress: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Leaves a multicast group and stops listening for packets send to it on the given network interface.
-    * The  is notified once the operation completes.
-    * @param multicastAddress the address of the multicast group to join
-    * @param networkInterface the network interface on which to listen for packets.
-    * @param source the address of the source for which we will listen for multicast packets
-    * @return the future to complete once the operation completes
-    */
-  def unlistenMulticastGroupFuture(multicastAddress: String, networkInterface: String, source: scala.Option[String]): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress, networkInterface, (if (source.isDefined) source.get else null), promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Block the given address for the given multicast address and notifies the  once
-    * the operation completes.
-    * @param multicastAddress the address for which you want to block the source address
-    * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the future to complete once the operation completes
-    */
-  def blockMulticastGroupFuture(multicastAddress: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress, sourceToBlock, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Block the given address for the given multicast address on the given network interface and notifies
-    * the  once the operation completes.
-    * @param multicastAddress the address for which you want to block the source address
-    * @param networkInterface the network interface on which the blocking should occur.
-    * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
-    * @return the future to complete once the operation completes
-    */
-  def blockMulticastGroupFuture(multicastAddress: String, networkInterface: String, sourceToBlock: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress, networkInterface, sourceToBlock, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Start listening on the given port and host. The handler will be called when the socket is listening.
-    * @param port the port to listen on
-    * @param host the host to listen on
-    * @return the future will be called when listening
-    */
-  def listenFuture(port: Int, host: String): concurrent.Future[DatagramSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[DatagramSocket]((x => if (x == null) null else DatagramSocket.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JDatagramSocket].listen(port, host, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.datagram.DatagramSocket]]])
-    promiseAndHandler._2.future
-  }
-
-  def pause(): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].pause()
+//fluent methods
+  def send(packet: Buffer,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.send( )
     this
   }
 
-  def resume(): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].resume()
+  def send(str: String,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.send( )
     this
   }
 
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  def send(str: String,enc: String,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.send( )
     this
   }
 
-  def handler(handler: io.vertx.core.Handler[DatagramPacket]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].handler(funcToMappedHandler[JDatagramPacket, DatagramPacket](DatagramPacket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.datagram.DatagramPacket]])
+  def listenMulticastGroup(multicastAddress: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.listenMulticastGroup( )
     this
   }
 
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.listenMulticastGroup( )
     this
   }
 
-  private var cached_0: SocketAddress = _
+  def unlistenMulticastGroup(multicastAddress: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.unlistenMulticastGroup( )
+    this
+  }
+
+  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.unlistenMulticastGroup( )
+    this
+  }
+
+  def blockMulticastGroup(multicastAddress: String,sourceToBlock: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.blockMulticastGroup( )
+    this
+  }
+
+  def blockMulticastGroup(multicastAddress: String,networkInterface: String,sourceToBlock: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.blockMulticastGroup( )
+    this
+  }
+
+  def listen(port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.listen( )
+    this
+  }
+
+  override def pause():DatagramSocket = {
+    asJava.pause( )
+    this
+  }
+
+  override def resume():DatagramSocket = {
+    asJava.resume( )
+    this
+  }
+
+  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):DatagramSocket = {
+    asJava.endHandler( )
+    this
+  }
+
+  override def handler(handler: io.vertx.core.Handler[DatagramPacket]):DatagramSocket = {
+    asJava.handler( )
+    this
+  }
+
+  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):DatagramSocket = {
+    asJava.exceptionHandler( )
+    this
+  }
+
+//basic methods
+  override def isMetricsEnabled():Boolean = {
+    asJava.isMetricsEnabled( )
+  }
+
+  def sender(port: Int,host: String):PacketWritestream = {
+    asJava.sender( )
+  }
+
+  def close(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
+    asJava.close( )
+  }
+
+  def close():Unit = {
+    asJava.close( )
+  }
+
 }
 
-object DatagramSocket {
-
-  def apply(_asJava: Object): DatagramSocket =
-    new DatagramSocket(_asJava)
-
+object DatagramSocket{
+//in object!
+//static methods
 }

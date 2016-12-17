@@ -16,12 +16,6 @@
 
 package io.vertx.scala.core.file
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.file.{FileProps => JFileProps}
 
 /**
   * Represents properties of a file on the file system.
@@ -29,69 +23,46 @@ import io.vertx.core.file.{FileProps => JFileProps}
   */
 class FileProps(private val _asJava: Object) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * The date the file was created
-    */
-  def creationTime(): Long = {
-    asJava.asInstanceOf[JFileProps].creationTime()
+def asJava = _asJava.asInstanceOf[JFileProps]
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+  def creationTime():Long = {
+    asJava.creationTime( )
   }
 
-  /**
-    * The date the file was last accessed
-    */
-  def lastAccessTime(): Long = {
-    asJava.asInstanceOf[JFileProps].lastAccessTime()
+  def lastAccessTime():Long = {
+    asJava.lastAccessTime( )
   }
 
-  /**
-    * The date the file was last modified
-    */
-  def lastModifiedTime(): Long = {
-    asJava.asInstanceOf[JFileProps].lastModifiedTime()
+  def lastModifiedTime():Long = {
+    asJava.lastModifiedTime( )
   }
 
-  /**
-    * Is the file a directory?
-    */
-  def isDirectory(): Boolean = {
-    asJava.asInstanceOf[JFileProps].isDirectory()
+  def isDirectory():Boolean = {
+    asJava.isDirectory( )
   }
 
-  /**
-    * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
-    */
-  def isOther(): Boolean = {
-    asJava.asInstanceOf[JFileProps].isOther()
+  def isOther():Boolean = {
+    asJava.isOther( )
   }
 
-  /**
-    * Is the file a regular file?
-    */
-  def isRegularFile(): Boolean = {
-    asJava.asInstanceOf[JFileProps].isRegularFile()
+  def isRegularFile():Boolean = {
+    asJava.isRegularFile( )
   }
 
-  /**
-    * Is the file a symbolic link?
-    */
-  def isSymbolicLink(): Boolean = {
-    asJava.asInstanceOf[JFileProps].isSymbolicLink()
+  def isSymbolicLink():Boolean = {
+    asJava.isSymbolicLink( )
   }
 
-  /**
-    * The size of the file, in bytes
-    */
-  def size(): Long = {
-    asJava.asInstanceOf[JFileProps].size()
+  def size():Long = {
+    asJava.size( )
   }
 
 }
 
-object FileProps {
-
-  def apply(_asJava: Object): FileProps =
-    new FileProps(_asJava)
-
+object FileProps{
+//in object!
+//static methods
 }

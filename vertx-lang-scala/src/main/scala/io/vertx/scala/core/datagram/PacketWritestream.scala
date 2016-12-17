@@ -16,75 +16,55 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
 import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
   * The stream  is called when the write fails.
   */
 class PacketWritestream(private val _asJava: Object) 
-    extends WriteStream[Buffer] {
+    extends WriteStream[Buffer](_asJava) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * Ends the stream.
-    * 
-    * Once the stream has ended, it cannot be used any more.
-    */
-  def end(): Unit = {
-    asJava.asInstanceOf[JPacketWritestream].end()
-  }
-
-  /**
-    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
-    */
-  def end(t: Buffer): Unit = {
-    asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
-  }
-
-  /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
-    * @return true if write queue is full
-    */
-  def writeQueueFull(): Boolean = {
-    asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
-  }
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+  override def asJava = _asJava.asInstanceOf[JPacketWritestream]
+//methods returning a future
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):PacketWritestream = {
+    asJava.exceptionHandler( )
     this
   }
 
-  def write(data: Buffer): PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
+  override def write(data: Buffer):PacketWritestream = {
+    asJava.write( )
     this
   }
 
-  def setWriteQueueMaxSize(maxSize: Int): PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize)
+  override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
+    asJava.setWriteQueueMaxSize( )
     this
   }
 
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  override def drainHandler(handler: io.vertx.core.Handler[Unit]):PacketWritestream = {
+    asJava.drainHandler( )
     this
+  }
+
+//basic methods
+  override def end():Unit = {
+    asJava.end( )
+  }
+
+  override def writeQueueFull():Boolean = {
+    asJava.writeQueueFull( )
   }
 
 }
 
-object PacketWritestream {
-
-  def apply(_asJava: Object): PacketWritestream =
-    new PacketWritestream(_asJava)
-
+object PacketWritestream{
+//in object!
+//static methods
 }

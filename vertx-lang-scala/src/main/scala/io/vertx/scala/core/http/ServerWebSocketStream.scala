@@ -16,55 +16,52 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+import io.vertx.scala.core.http.ServerWebSocket
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class ServerWebSocketStream(private val _asJava: Object) 
-    extends ReadStream[ServerWebSocket] {
+    extends ReadStream[ServerWebSocket](_asJava) {
 
-  def asJava: Object = _asJava
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+  override def asJava = _asJava.asInstanceOf[JServerWebSocketStream]
+//methods returning a future
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):ServerWebSocketStream = {
+    asJava.exceptionHandler( )
     this
   }
 
-  def handler(handler: io.vertx.core.Handler[ServerWebSocket]): ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].handler(funcToMappedHandler[JServerWebSocket, ServerWebSocket](ServerWebSocket.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.ServerWebSocket]])
+  override def handler(handler: io.vertx.core.Handler[ServerWebSocket]):ServerWebSocketStream = {
+    asJava.handler( )
     this
   }
 
-  def pause(): ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].pause()
+  override def pause():ServerWebSocketStream = {
+    asJava.pause( )
     this
   }
 
-  def resume(): ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].resume()
+  override def resume():ServerWebSocketStream = {
+    asJava.resume( )
     this
   }
 
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):ServerWebSocketStream = {
+    asJava.endHandler( )
     this
   }
 
+//basic methods
 }
 
-object ServerWebSocketStream {
-
-  def apply(_asJava: Object): ServerWebSocketStream =
-    new ServerWebSocketStream(_asJava)
-
+object ServerWebSocketStream{
+//in object!
+//static methods
 }

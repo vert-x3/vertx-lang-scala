@@ -16,14 +16,9 @@
 
 package io.vertx.scala.core.parsetools
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.parsetools.{RecordParser => JRecordParser}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.parsetools.{RecordParser => JRecordParser}
 
 /**
   * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed
@@ -59,69 +54,46 @@ import io.vertx.scala.core.buffer.Buffer
 class RecordParser(private val _asJava: Object) 
     extends io.vertx.core.Handler[Buffer] {
 
-  def asJava: Object = _asJava
-
-  def setOutput(output: io.vertx.core.Handler[Buffer]): Unit = {
-    asJava.asInstanceOf[JRecordParser].setOutput(funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(output).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
+def asJava = _asJava.asInstanceOf[JRecordParser]
+//methods returning a future
+//cached methods
+//fluent methods
+//basic methods
+  def setOutput(output: io.vertx.core.Handler[Buffer]):Unit = {
+    asJava.setOutput( )
   }
 
-  /**
-    * Flip the parser into delimited mode, and where the delimiter can be represented
-    * by the String `delim` encoded in latin-1 . Don't use this if your String contains other than latin-1 characters.
-    * 
-    * This method can be called multiple times with different values of delim while data is being parsed.
-    * @param delim the new delimeter
-    */
-  def delimitedMode(delim: String): Unit = {
-    asJava.asInstanceOf[JRecordParser].delimitedMode(delim)
+  def delimitedMode(delim: String):Unit = {
+    asJava.delimitedMode( )
   }
 
-  /**
-    * Flip the parser into delimited mode, and where the delimiter can be represented
-    * by the delimiter `delim`.
-    * 
-    * This method can be called multiple times with different values of delim while data is being parsed.
-    * @param delim the new delimiter
-    */
-  def delimitedMode(delim: Buffer): Unit = {
-    asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asJava.asInstanceOf[JBuffer])
+  def delimitedMode(delim: Buffer):Unit = {
+    asJava.delimitedMode( )
   }
 
-  /**
-    * Flip the parser into fixed size mode, where the record size is specified by `size` in bytes.
-    * 
-    * This method can be called multiple times with different values of size while data is being parsed.
-    * @param size the new record size
-    */
-  def fixedSizeMode(size: Int): Unit = {
-    asJava.asInstanceOf[JRecordParser].fixedSizeMode(size)
+  def fixedSizeMode(size: Int):Unit = {
+    asJava.fixedSizeMode( )
   }
 
-  /**
-    * This method is called to provide the parser with data.
-    * @param buffer a chunk of data
-    */
-  def handle(buffer: Buffer): Unit = {
-    asJava.asInstanceOf[JRecordParser].handle(buffer.asJava.asInstanceOf[JBuffer])
+  def handle(buffer: Buffer):Unit = {
+    asJava.handle( )
   }
 
 }
 
-object RecordParser {
-
-  def apply(_asJava: Object): RecordParser =
-    new RecordParser(_asJava)
-
-  def newDelimited(delim: String, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim, funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(output).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]]))
+object RecordParser{
+//in object!
+//static methods
+  def newDelimited(delim: String,output: io.vertx.core.Handler[Buffer]):RecordParser = {
+    JRecordParser.newDelimited( )
   }
 
-  def newDelimited(delim: Buffer, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer], funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(output).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]]))
+  def newDelimited(delim: Buffer,output: io.vertx.core.Handler[Buffer]):RecordParser = {
+    JRecordParser.newDelimited( )
   }
 
-  def newFixed(size: Int, output: io.vertx.core.Handler[Buffer]): RecordParser = {
-    RecordParser.apply(io.vertx.core.parsetools.RecordParser.newFixed(size, funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(output).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]]))
+  def newFixed(size: Int,output: io.vertx.core.Handler[Buffer]):RecordParser = {
+    JRecordParser.newFixed( )
   }
 
 }
