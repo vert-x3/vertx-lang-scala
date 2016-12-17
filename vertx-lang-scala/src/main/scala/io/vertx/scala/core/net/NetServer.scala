@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.scala.core.net.NetSocketStream
-import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetServer => JNetServer}
-import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * Represents a TCP server
@@ -30,72 +30,71 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
 class NetServer(private val _asJava: Object) 
     extends Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JNetServer]
+
 //methods returning a future
-  def close(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JNetServer].close(completionHandler)
   }
 
 //cached methods
 //fluent methods
   def listen():NetServer = {
-    asJava.listen( )
+    NetServer(asJava.asInstanceOf[JNetServer].listen())
     this
   }
 
-  def listen(listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[NetServer]]):NetServer = {
-    asJava.listen( )
+  def listen(listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+    NetServer(asJava.asInstanceOf[JNetServer].listen(listenHandler))
     this
   }
 
   def listen(port: Int,host: String):NetServer = {
-    asJava.listen( )
+    NetServer(asJava.asInstanceOf[JNetServer].listen(port,host))
     this
   }
 
-  def listen(port: Int,host: String,listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[NetServer]]):NetServer = {
-    asJava.listen( )
+  def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+    NetServer(asJava.asInstanceOf[JNetServer].listen(port,host,listenHandler))
     this
   }
 
   def listen(port: Int):NetServer = {
-    asJava.listen( )
+    NetServer(asJava.asInstanceOf[JNetServer].listen(port))
     this
   }
 
-  def listen(port: Int,listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[NetServer]]):NetServer = {
-    asJava.listen( )
+  def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+    NetServer(asJava.asInstanceOf[JNetServer].listen(port,listenHandler))
     this
   }
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JNetServer].isMetricsEnabled()
   }
 
   def connectStream():NetSocketStream = {
-    asJava.connectStream( )
+    NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
-  def connectHandler(handler: io.vertx.core.Handler[NetSocket]):NetServer = {
-    asJava.connectHandler( )
+  def connectHandler(handler: Handler[NetSocket]):NetServer = {
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(handler))
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JNetServer].close()
   }
 
-  def close(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JNetServer].close(completionHandler)
   }
 
   def actualPort():Int = {
-    asJava.actualPort( )
+    asJava.asInstanceOf[JNetServer].actualPort()
   }
 
 }
 
 object NetServer{
-//in object!
-//static methods
+  def apply(asJava: JNetServer) = new NetServer(asJava)//static methods
 }

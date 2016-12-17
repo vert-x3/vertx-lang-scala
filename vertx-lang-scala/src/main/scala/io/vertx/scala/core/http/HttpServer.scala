@@ -16,19 +16,16 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.http.HttpServerRequest
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.scala.core.http.ServerWebSocket
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.scala.core.metrics.Measured
-import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.http.HttpServerRequestStream
-import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 import io.vertx.core.http.{HttpServer => JHttpServer}
-import io.vertx.scala.core.http.HttpConnection
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.scala.core.http.ServerWebSocketStream
 import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 
 /**
   * An HTTP and WebSockets server.
@@ -42,87 +39,92 @@ import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 class HttpServer(private val _asJava: Object) 
     extends Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpServer]
+  private var cached_0:HttpServerRequestStream = _
+    private var cached_1:ServerWebSocketStream = _
+  
 //methods returning a future
-  def close(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JHttpServer].close(completionHandler)
   }
 
 //cached methods
   def requestStream():HttpServerRequestStream = {
-    asJava.requestStream( )
+    if(cached_0 == null)
+      cached_0 = HttpServerRequestStream(asJava.asInstanceOf[JHttpServer].requestStream())
+    return cached_0
   }
 
   def websocketStream():ServerWebSocketStream = {
-    asJava.websocketStream( )
+    if(cached_1 == null)
+      cached_1 = ServerWebSocketStream(asJava.asInstanceOf[JHttpServer].websocketStream())
+    return cached_1
   }
 
 //fluent methods
-  def requestHandler(handler: io.vertx.core.Handler[HttpServerRequest]):HttpServer = {
-    asJava.requestHandler( )
+  def requestHandler(handler: Handler[HttpServerRequest]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].requestHandler(handler))
     this
   }
 
-  def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]):HttpServer = {
-    asJava.connectionHandler( )
+  def connectionHandler(handler: Handler[HttpConnection]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].connectionHandler(handler))
     this
   }
 
-  def websocketHandler(handler: io.vertx.core.Handler[ServerWebSocket]):HttpServer = {
-    asJava.websocketHandler( )
+  def websocketHandler(handler: Handler[ServerWebSocket]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].websocketHandler(handler))
     this
   }
 
   def listen():HttpServer = {
-    asJava.listen( )
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen())
     this
   }
 
   def listen(port: Int,host: String):HttpServer = {
-    asJava.listen( )
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,host))
     this
   }
 
-  def listen(port: Int,host: String,listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServer]]):HttpServer = {
-    asJava.listen( )
+  def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,host,listenHandler))
     this
   }
 
   def listen(port: Int):HttpServer = {
-    asJava.listen( )
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port))
     this
   }
 
-  def listen(port: Int,listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServer]]):HttpServer = {
-    asJava.listen( )
+  def listen(port: Int,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,listenHandler))
     this
   }
 
-  def listen(listenHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServer]]):HttpServer = {
-    asJava.listen( )
+  def listen(listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
+    HttpServer(asJava.asInstanceOf[JHttpServer].listen(listenHandler))
     this
   }
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JHttpServer].isMetricsEnabled()
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JHttpServer].close()
   }
 
-  def close(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JHttpServer].close(completionHandler)
   }
 
   def actualPort():Int = {
-    asJava.actualPort( )
+    asJava.asInstanceOf[JHttpServer].actualPort()
   }
 
 }
 
 object HttpServer{
-//in object!
-//static methods
+  def apply(asJava: JHttpServer) = new HttpServer(asJava)//static methods
 }

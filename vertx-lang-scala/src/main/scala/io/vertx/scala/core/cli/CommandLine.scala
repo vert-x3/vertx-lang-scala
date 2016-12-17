@@ -16,13 +16,11 @@
 
 package io.vertx.scala.core.cli
 
-import io.vertx.scala.core.cli.Option
-import io.vertx.core.cli.{Option => JOption}
-import io.vertx.core.cli.{CommandLine => JCommandLine}
-import io.vertx.scala.core.cli.CLI
-import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.scala.core.cli.Argument
 import io.vertx.core.cli.{Argument => JArgument}
+import io.vertx.core.cli.{Option => JOption}
+import io.vertx.core.cli.{CLI => JCLI}
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.collection.JavaConverters._
 
 /**
   * The parser transforms a CLI (a model) into an [[io.vertx.scala.core.cli.CommandLine]]. This [[io.vertx.scala.core.cli.CommandLine]]
@@ -31,82 +29,82 @@ import io.vertx.core.cli.{Argument => JArgument}
   */
 class CommandLine(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JCommandLine]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def cli():CLI = {
-    asJava.cli( )
+    CLI(asJava.asInstanceOf[JCommandLine].cli())
   }
 
   def allArguments():scala.collection.mutable.Buffer[String] = {
-    asJava.allArguments( )
+    asJava.asInstanceOf[JCommandLine].allArguments().map(x => x)
   }
 
-  def getOptionValue(name: String):T = {
-    asJava.getOptionValue( )
+  def getOptionValue[T](name: String):T = {
+    asJava.asInstanceOf[JCommandLine].getOptionValue(name)
   }
 
-  def getArgumentValue(name: String):T = {
-    asJava.getArgumentValue( )
+  def getArgumentValue[T](name: String):T = {
+    asJava.asInstanceOf[JCommandLine].getArgumentValue(name)
   }
 
-  def getArgumentValue(index: Int):T = {
-    asJava.getArgumentValue( )
+  def getArgumentValue[T](index: Int):T = {
+    asJava.asInstanceOf[JCommandLine].getArgumentValue(index)
   }
 
   def isFlagEnabled(name: String):Boolean = {
-    asJava.isFlagEnabled( )
+    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name)
   }
 
   def isOptionAssigned(option: Option):Boolean = {
-    asJava.isOptionAssigned( )
+    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava.asInstanceOf[JOption])
   }
 
   def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
-    asJava.getRawValuesForOption( )
+    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava.asInstanceOf[JOption]).map(x => x)
   }
 
   def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
-    asJava.getRawValuesForArgument( )
+    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava.asInstanceOf[JArgument]).map(x => x)
   }
 
   def getRawValueForOption(option: Option):String = {
-    asJava.getRawValueForOption( )
+    asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava.asInstanceOf[JOption])
   }
 
   def acceptMoreValues(option: Option):Boolean = {
-    asJava.acceptMoreValues( )
+    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava.asInstanceOf[JOption])
   }
 
   def getRawValueForArgument(arg: Argument):String = {
-    asJava.getRawValueForArgument( )
+    asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava.asInstanceOf[JArgument])
   }
 
   def isArgumentAssigned(arg: Argument):Boolean = {
-    asJava.isArgumentAssigned( )
+    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava.asInstanceOf[JArgument])
   }
 
   def isSeenInCommandLine(option: Option):Boolean = {
-    asJava.isSeenInCommandLine( )
+    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava.asInstanceOf[JOption])
   }
 
   def isValid():Boolean = {
-    asJava.isValid( )
+    asJava.asInstanceOf[JCommandLine].isValid()
   }
 
   def isAskingForHelp():Boolean = {
-    asJava.isAskingForHelp( )
+    asJava.asInstanceOf[JCommandLine].isAskingForHelp()
   }
 
 }
 
 object CommandLine{
-//in object!
-//static methods
+  def apply(asJava: JCommandLine) = new CommandLine(asJava)//static methods
   def create(cli: CLI):CommandLine = {
-    JCommandLine.create( )
+    CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
   }
 
 }

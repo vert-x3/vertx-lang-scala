@@ -16,11 +16,11 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.http.HttpServerRequest
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.Handler
+import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
@@ -29,32 +29,32 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 class HttpServerRequestStream(private val _asJava: Object) 
     extends ReadStream[HttpServerRequest](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpServerRequestStream]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpServerRequestStream = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
+    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[HttpServerRequest]):HttpServerRequestStream = {
-    asJava.handler( )
+  override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
+    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].handler(handler))
     this
   }
 
   override def pause():HttpServerRequestStream = {
-    asJava.pause( )
+    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].pause())
     this
   }
 
   override def resume():HttpServerRequestStream = {
-    asJava.resume( )
+    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):HttpServerRequestStream = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):HttpServerRequestStream = {
+    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].endHandler(endHandler))
     this
   }
 
@@ -62,6 +62,5 @@ class HttpServerRequestStream(private val _asJava: Object)
 }
 
 object HttpServerRequestStream{
-//in object!
-//static methods
+  def apply(asJava: JHttpServerRequestStream) = new HttpServerRequestStream(asJava)//static methods
 }

@@ -1,21 +1,51 @@
 @code{
-  def generateImports(type, importedTypes, methods) {
-    var ret = new java.util.ArrayList();
-    for(imported : importedTypes) {
-      /*Don't import implementations*/
-      if(!imported.name.contains(".impl.")) {
-        if(imported.kind == CLASS_API || imported.kind == CLASS_DATA_OBJECT) {
-          ret.add(imported.raw.translateName("scala"));
-          ret.add(convertTypeToAliasedType(imported));
-        }
-        else if(imported.kind == CLASS_JSON_OBJECT ||
-        				imported.kind == CLASS_JSON_ARRAY ||
-        				imported.kind == CLASS_ENUM) {
-          ret.add(imported.raw);
+
+  def importForType(package, type, ret) {
+    if(type.kind == CLASS_API || type.kind == CLASS_DATA_OBJECT) {
+      if(helper.getPackageName(type.name) != package) {
+        ret.add(helper.getNonGenericType(type.raw.translateName("scala")));
+      }
+      ret.add(convertTypeToAliasedType(type));
+    }
+    else if(type.kind == CLASS_JSON_OBJECT ||
+            type.kind == CLASS_JSON_ARRAY ||
+            type.kind == CLASS_ENUM) {
+      ret.add(type.raw);
+    }
+    else if(type.kind.collection) {
+      ret.add('scala.collection.JavaConverters._');
+    }
+    else if(type.kind == CLASS_HANDLER) {
+      ret.add(type.raw);
+      if(type.isParameterized) {
+        for(param : type.args) {
+          importForType(package, param, ret)
         }
       }
     }
-    ret.remove(type.raw.translateName("scala"));
+    else if(type.kind == CLASS_ASYNC_RESULT) {
+      ret.add(type.raw);
+      if(type.isParameterized) {
+        for(param : type.args) {
+          importForType(package, param, ret)
+        }
+      }
+    }
+  }
+
+  def generateImports(type, imps, methods) {
+    var ret = new java.util.HashSet();
+    for(imported : imps) {
+      /*Don't import implementations*/
+      if(!imported.name.contains(".impl.")) {
+        importForType(helper.getPackageName(type.name), imported, ret);
+      }
+    }
+    for(method : methods) {
+      for(param : method.params) {
+        importForType(helper.getPackageName(type.name), param.type, ret);
+      }
+    }
     return ret;
   }
 
@@ -23,6 +53,6 @@
    * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
    */
   def convertTypeToAliasedType(type) {
-    type.name.replace(type.simpleName,"")+'{'+type.simpleName+" => J"+type.simpleName+"}"
+    type.name.replace(type.simpleName,"")+'{'+helper.getNonGenericType(type.simpleName)+" => J"+helper.getNonGenericType(type.simpleName)+"}"
   }
 }

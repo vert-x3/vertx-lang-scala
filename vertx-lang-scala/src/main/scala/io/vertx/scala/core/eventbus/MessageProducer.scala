@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.scala.core.eventbus.DeliveryOptions
-import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.eventbus.Message
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * Represents a stream of message that can be written to.
@@ -31,67 +31,66 @@ import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 class MessageProducer[T](private val _asJava: Object) 
     extends WriteStream[T](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JMessageProducer]
+
 //methods returning a future
-  def send(message: T,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):MessageProducer[T] = {
-    asJava.send( )
+  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,replyHandler))
   }
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):MessageProducer[T] = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].exceptionHandler(handler))
     this
   }
 
   override def write(data: T):MessageProducer[T] = {
-    asJava.write( )
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].write(data))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    asJava.setWriteQueueMaxSize( )
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].setWriteQueueMaxSize(maxSize))
     this
   }
 
-  override def drainHandler(handler: io.vertx.core.Handler[Unit]):MessageProducer[T] = {
-    asJava.drainHandler( )
+  override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].drainHandler(handler))
     this
   }
 
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
-    asJava.deliveryOptions( )
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava.asInstanceOf[JDeliveryOptions]))
     this
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.writeQueueFull( )
+    asJava.asInstanceOf[JMessageProducer].writeQueueFull()
   }
 
   def send(message: T):MessageProducer[T] = {
-    asJava.send( )
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message))
   }
 
-  def send(message: T,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):MessageProducer[T] = {
-    asJava.send( )
+  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,replyHandler))
   }
 
   def address():String = {
-    asJava.address( )
+    asJava.asInstanceOf[JMessageProducer].address()
   }
 
   override def end():Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JMessageProducer].end()
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JMessageProducer].close()
   }
 
 }
 
 object MessageProducer{
-//in object!
-//static methods
+  def apply(asJava: JMessageProducer) = new MessageProducer(asJava)//static methods
 }

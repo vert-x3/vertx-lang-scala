@@ -1,20 +1,20 @@
 //methods returning a future\n
-@foreach{method : futureMethods(instanceMethods)}
+@foreach{method : findFutureMethods(instanceMethods)}
 def @{method.name}\n
 @end{}
 
 //cached methods\n
-@foreach{method : cacheReturnMethods(instanceMethods)}
+@foreach{method : findCacheReturnMethods(instanceMethods)}
 def @{method.name}\n
 @end{}
 
 //fluent methods\n
-@foreach{method : fluentMethods(instanceMethods)}
+@foreach{method : findFluentMethods(instanceMethods)}
 def @{method.name}\n
 @end{}
 
 //basic methods\n
-@foreach{method : basicMethods(instanceMethods)}
+@foreach{method : findBasicMethods(instanceMethods)}
 def @{method.name}(
 	@foreach{param:method.params}
 		@{param.name}:@{toScalaType(param.type)}
@@ -29,6 +29,6 @@ def @{method.name}\n
 @end{}
 
 //default methods\n
-@foreach{method : defaultMethods(instanceMethods)}
+@foreach{method : findDefaultMethods(instanceMethods)}
 def @{method.name}\n
 @end{}

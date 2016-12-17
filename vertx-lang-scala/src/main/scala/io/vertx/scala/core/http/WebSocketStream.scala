@@ -16,11 +16,11 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.http.WebSocket
 import io.vertx.core.http.{WebSocket => JWebSocket}
+import io.vertx.core.Handler
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 
 /**
   * A stream for [[io.vertx.scala.core.http.HttpClient]] WebSocket connection.
@@ -34,32 +34,32 @@ import io.vertx.core.http.{WebSocket => JWebSocket}
 class WebSocketStream(private val _asJava: Object) 
     extends ReadStream[WebSocket](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JWebSocketStream]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):WebSocketStream = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[WebSocket]):WebSocketStream = {
-    asJava.handler( )
+  override def handler(handler: Handler[WebSocket]):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].handler(handler))
     this
   }
 
   override def pause():WebSocketStream = {
-    asJava.pause( )
+    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].pause())
     this
   }
 
   override def resume():WebSocketStream = {
-    asJava.resume( )
+    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):WebSocketStream = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].endHandler(endHandler))
     this
   }
 
@@ -67,6 +67,5 @@ class WebSocketStream(private val _asJava: Object)
 }
 
 object WebSocketStream{
-//in object!
-//static methods
+  def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)//static methods
 }

@@ -16,32 +16,32 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
   */
 class DatagramPacket(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JDatagramPacket]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def sender():SocketAddress = {
-    asJava.sender( )
+    SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())
   }
 
   def data():Buffer = {
-    asJava.data( )
+    Buffer(asJava.asInstanceOf[JDatagramPacket].data())
   }
 
 }
 
 object DatagramPacket{
-//in object!
-//static methods
+  def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)//static methods
 }

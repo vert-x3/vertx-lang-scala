@@ -16,9 +16,9 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.scala.core.streams.StreamBase
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.Handler
 
 /**
   * Represents a stream of items that can be read from.

@@ -28,58 +28,58 @@ package io.vertx.scala.core.shareddata
   */
 class LocalMap[K,V](private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JLocalMap]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def get(key: K):V = {
-    asJava.get( )
+    asJava.asInstanceOf[JLocalMap].get(key)
   }
 
   def put(key: K,value: V):V = {
-    asJava.put( )
+    asJava.asInstanceOf[JLocalMap].put(key,value)
   }
 
   def remove(key: K):V = {
-    asJava.remove( )
+    asJava.asInstanceOf[JLocalMap].remove(key)
   }
 
   def clear():Unit = {
-    asJava.clear( )
+    asJava.asInstanceOf[JLocalMap].clear()
   }
 
   def size():Int = {
-    asJava.size( )
+    asJava.asInstanceOf[JLocalMap].size()
   }
 
   def isEmpty():Boolean = {
-    asJava.isEmpty( )
+    asJava.asInstanceOf[JLocalMap].isEmpty()
   }
 
   def putIfAbsent(key: K,value: V):V = {
-    asJava.putIfAbsent( )
+    asJava.asInstanceOf[JLocalMap].putIfAbsent(key,value)
   }
 
   def removeIfPresent(key: K,value: V):Boolean = {
-    asJava.removeIfPresent( )
+    asJava.asInstanceOf[JLocalMap].removeIfPresent(key,value)
   }
 
   def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
-    asJava.replaceIfPresent( )
+    asJava.asInstanceOf[JLocalMap].replaceIfPresent(key,oldValue,newValue)
   }
 
   def replace(key: K,value: V):V = {
-    asJava.replace( )
+    asJava.asInstanceOf[JLocalMap].replace(key,value)
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JLocalMap].close()
   }
 
 }
 
 object LocalMap{
-//in object!
-//static methods
+  def apply(asJava: JLocalMap) = new LocalMap(asJava)//static methods
 }

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.core.streams.{StreamBase => JStreamBase}
+import io.vertx.core.Handler
 
 /**
   * Base interface for a stream.

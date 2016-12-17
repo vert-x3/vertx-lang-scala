@@ -16,6 +16,8 @@
 
 package io.vertx.scala.core.shareddata
 
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   *
@@ -23,102 +25,102 @@ package io.vertx.scala.core.shareddata
   */
 class AsyncMap[K,V](private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JAsyncMap]
+  def asJava = _asJava
+
 //methods returning a future
-  def get(k: K,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.get( )
+  def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].get(k,resultHandler)
   }
 
-  def put(k: K,v: V,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.put( )
+  def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,completionHandler)
   }
 
-  def put(k: K,v: V,ttl: Long,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.put( )
+  def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,completionHandler)
   }
 
-  def putIfAbsent(k: K,v: V,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.putIfAbsent( )
+  def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,completionHandler)
   }
 
-  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.putIfAbsent( )
+  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,completionHandler)
   }
 
-  def remove(k: K,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.remove( )
+  def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].remove(k,resultHandler)
   }
 
-  def removeIfPresent(k: K,v: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.removeIfPresent( )
+  def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,resultHandler)
   }
 
-  def replace(k: K,v: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.replace( )
+  def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,resultHandler)
   }
 
-  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.replaceIfPresent( )
+  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,resultHandler)
   }
 
-  def clear(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.clear( )
+  def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].clear(resultHandler)
   }
 
-  def size(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Int]]):Unit = {
-    asJava.size( )
+  def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].size(resultHandler)
   }
 
 //cached methods
 //fluent methods
 //basic methods
-  def get(k: K,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.get( )
+  def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].get(k,resultHandler)
   }
 
-  def put(k: K,v: V,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.put( )
+  def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,completionHandler)
   }
 
-  def put(k: K,v: V,ttl: Long,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.put( )
+  def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,completionHandler)
   }
 
-  def putIfAbsent(k: K,v: V,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.putIfAbsent( )
+  def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,completionHandler)
   }
 
-  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.putIfAbsent( )
+  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,completionHandler)
   }
 
-  def remove(k: K,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.remove( )
+  def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].remove(k,resultHandler)
   }
 
-  def removeIfPresent(k: K,v: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.removeIfPresent( )
+  def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,resultHandler)
   }
 
-  def replace(k: K,v: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[V]]):Unit = {
-    asJava.replace( )
+  def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,resultHandler)
   }
 
-  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.replaceIfPresent( )
+  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,resultHandler)
   }
 
-  def clear(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.clear( )
+  def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].clear(resultHandler)
   }
 
-  def size(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Int]]):Unit = {
-    asJava.size( )
+  def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap].size(resultHandler)
   }
 
 }
 
 object AsyncMap{
-//in object!
-//static methods
+  def apply(asJava: JAsyncMap) = new AsyncMap(asJava)//static methods
 }

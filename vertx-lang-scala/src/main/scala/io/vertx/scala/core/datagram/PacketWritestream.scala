@@ -16,11 +16,12 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
 
 /**
   * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
@@ -29,42 +30,41 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 class PacketWritestream(private val _asJava: Object) 
     extends WriteStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JPacketWritestream]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):PacketWritestream = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
+    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].exceptionHandler(handler))
     this
   }
 
   override def write(data: Buffer):PacketWritestream = {
-    asJava.write( )
+    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
-    asJava.setWriteQueueMaxSize( )
+    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize))
     this
   }
 
-  override def drainHandler(handler: io.vertx.core.Handler[Unit]):PacketWritestream = {
-    asJava.drainHandler( )
+  override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
+    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].drainHandler(handler))
     this
   }
 
 //basic methods
   override def end():Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JPacketWritestream].end()
   }
 
   override def writeQueueFull():Boolean = {
-    asJava.writeQueueFull( )
+    asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
   }
 
 }
 
 object PacketWritestream{
-//in object!
-//static methods
+  def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)//static methods
 }

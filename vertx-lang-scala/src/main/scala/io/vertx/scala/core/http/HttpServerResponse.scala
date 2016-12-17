@@ -16,16 +16,17 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.http.HttpFrame
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.HttpMethod
-import io.vertx.scala.core.MultiMap
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * Represents a server-side HTTP response.
@@ -50,223 +51,228 @@ import io.vertx.core.{MultiMap => JMultiMap}
 class HttpServerResponse(private val _asJava: Object) 
     extends WriteStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpServerResponse]
+  private var cached_0:MultiMap = _
+    private var cached_1:MultiMap = _
+  
 //methods returning a future
-  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,handler))
   }
 
-  def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],handler))
   }
 
 //cached methods
   def headers():MultiMap = {
-    asJava.headers( )
+    if(cached_0 == null)
+      cached_0 = MultiMap(asJava.asInstanceOf[JHttpServerResponse].headers())
+    return cached_0
   }
 
   def trailers():MultiMap = {
-    asJava.trailers( )
+    if(cached_1 == null)
+      cached_1 = MultiMap(asJava.asInstanceOf[JHttpServerResponse].trailers())
+    return cached_1
   }
 
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpServerResponse = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].exceptionHandler(handler))
     this
   }
 
   override def write(data: Buffer):HttpServerResponse = {
-    asJava.write( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(data.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):HttpServerResponse = {
-    asJava.setWriteQueueMaxSize( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setWriteQueueMaxSize(maxSize))
     this
   }
 
-  override def drainHandler(handler: io.vertx.core.Handler[Unit]):HttpServerResponse = {
-    asJava.drainHandler( )
+  override def drainHandler(handler: Handler[Unit]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].drainHandler(handler))
     this
   }
 
   def setStatusCode(statusCode: Int):HttpServerResponse = {
-    asJava.setStatusCode( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setStatusCode(statusCode))
     this
   }
 
   def setStatusMessage(statusMessage: String):HttpServerResponse = {
-    asJava.setStatusMessage( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setStatusMessage(statusMessage))
     this
   }
 
   def setChunked(chunked: Boolean):HttpServerResponse = {
-    asJava.setChunked( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setChunked(chunked))
     this
   }
 
   def putHeader(name: String,value: String):HttpServerResponse = {
-    asJava.putHeader( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].putHeader(name,value))
     this
   }
 
   def putTrailer(name: String,value: String):HttpServerResponse = {
-    asJava.putTrailer( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].putTrailer(name,value))
     this
   }
 
-  def closeHandler(handler: io.vertx.core.Handler[Unit]):HttpServerResponse = {
-    asJava.closeHandler( )
+  def closeHandler(handler: Handler[Unit]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].closeHandler(handler))
     this
   }
 
   def write(chunk: String,enc: String):HttpServerResponse = {
-    asJava.write( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(chunk,enc))
     this
   }
 
   def write(chunk: String):HttpServerResponse = {
-    asJava.write( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(chunk))
     this
   }
 
   def writeContinue():HttpServerResponse = {
-    asJava.writeContinue( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeContinue())
     this
   }
 
   def sendFile(filename: String):HttpServerResponse = {
-    asJava.sendFile( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename))
     this
   }
 
   def sendFile(filename: String,offset: Long):HttpServerResponse = {
-    asJava.sendFile( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset))
     this
   }
 
   def sendFile(filename: String,offset: Long,length: Long):HttpServerResponse = {
-    asJava.sendFile( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length))
     this
   }
 
-  def sendFile(filename: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):HttpServerResponse = {
-    asJava.sendFile( )
+  def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,resultHandler))
     this
   }
 
-  def sendFile(filename: String,offset: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):HttpServerResponse = {
-    asJava.sendFile( )
+  def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,resultHandler))
     this
   }
 
-  def sendFile(filename: String,offset: Long,length: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):HttpServerResponse = {
-    asJava.sendFile( )
+  def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length,resultHandler))
     this
   }
 
-  def headersEndHandler(handler: io.vertx.core.Handler[Unit]):HttpServerResponse = {
-    asJava.headersEndHandler( )
+  def headersEndHandler(handler: Handler[Unit]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].headersEndHandler(handler))
     this
   }
 
-  def bodyEndHandler(handler: io.vertx.core.Handler[Unit]):HttpServerResponse = {
-    asJava.bodyEndHandler( )
+  def bodyEndHandler(handler: Handler[Unit]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler(handler))
     this
   }
 
-  def push(method: io.vertx.core.http.HttpMethod,path: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,handler))
     this
   }
 
-  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava.asInstanceOf[JMultiMap],handler))
     this
   }
 
   def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpServerResponse = {
-    asJava.writeCustomFrame( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpServerResponse = {
-    asJava.writeCustomFrame( )
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame]))
     this
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.writeQueueFull( )
+    asJava.asInstanceOf[JHttpServerResponse].writeQueueFull()
   }
 
   def getStatusCode():Int = {
-    asJava.getStatusCode( )
+    asJava.asInstanceOf[JHttpServerResponse].getStatusCode()
   }
 
   def getStatusMessage():String = {
-    asJava.getStatusMessage( )
+    asJava.asInstanceOf[JHttpServerResponse].getStatusMessage()
   }
 
   def isChunked():Boolean = {
-    asJava.isChunked( )
+    asJava.asInstanceOf[JHttpServerResponse].isChunked()
   }
 
   def end(chunk: String):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk)
   }
 
   def end(chunk: String,enc: String):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk,enc)
   }
 
   override def end(chunk: Buffer):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   override def end():Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpServerResponse].end()
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JHttpServerResponse].close()
   }
 
   def ended():Boolean = {
-    asJava.ended( )
+    asJava.asInstanceOf[JHttpServerResponse].ended()
   }
 
   def closed():Boolean = {
-    asJava.closed( )
+    asJava.asInstanceOf[JHttpServerResponse].closed()
   }
 
   def headWritten():Boolean = {
-    asJava.headWritten( )
+    asJava.asInstanceOf[JHttpServerResponse].headWritten()
   }
 
   def bytesWritten():Long = {
-    asJava.bytesWritten( )
+    asJava.asInstanceOf[JHttpServerResponse].bytesWritten()
   }
 
   def streamId():Int = {
-    asJava.streamId( )
+    asJava.asInstanceOf[JHttpServerResponse].streamId()
   }
 
-  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,handler))
   }
 
-  def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.push( )
+  def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],handler))
   }
 
   def reset(code: Long):Unit = {
-    asJava.reset( )
+    asJava.asInstanceOf[JHttpServerResponse].reset(code)
   }
 
 }
 
 object HttpServerResponse{
-//in object!
-//static methods
+  def apply(asJava: JHttpServerResponse) = new HttpServerResponse(asJava)//static methods
 }

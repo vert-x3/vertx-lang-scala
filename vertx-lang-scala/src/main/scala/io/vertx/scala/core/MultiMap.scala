@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import io.vertx.core.{MultiMap => JMultiMap}
+import scala.collection.JavaConverters._
 
 /**
   * This class represents a MultiMap of String keys to a List of String values.
@@ -26,72 +27,72 @@ import io.vertx.core.{MultiMap => JMultiMap}
   */
 class MultiMap(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JMultiMap]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
   def add(name: String,value: String):MultiMap = {
-    asJava.add( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].add(name,value))
     this
   }
 
   def addAll(map: MultiMap):MultiMap = {
-    asJava.addAll( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap]))
     this
   }
 
   def set(name: String,value: String):MultiMap = {
-    asJava.set( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].set(name,value))
     this
   }
 
   def setAll(map: MultiMap):MultiMap = {
-    asJava.setAll( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap]))
     this
   }
 
   def remove(name: String):MultiMap = {
-    asJava.remove( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].remove(name))
     this
   }
 
   def clear():MultiMap = {
-    asJava.clear( )
+    MultiMap(asJava.asInstanceOf[JMultiMap].clear())
     this
   }
 
 //basic methods
   def get(name: String):String = {
-    asJava.get( )
+    asJava.asInstanceOf[JMultiMap].get(name)
   }
 
   def getAll(name: String):scala.collection.mutable.Buffer[String] = {
-    asJava.getAll( )
+    asJava.asInstanceOf[JMultiMap].getAll(name).map(x => x)
   }
 
   def contains(name: String):Boolean = {
-    asJava.contains( )
+    asJava.asInstanceOf[JMultiMap].contains(name)
   }
 
   def isEmpty():Boolean = {
-    asJava.isEmpty( )
+    asJava.asInstanceOf[JMultiMap].isEmpty()
   }
 
   def names():Set[String] = {
-    asJava.names( )
+    asJava.asInstanceOf[JMultiMap].names().map(x => x)
   }
 
   def size():Int = {
-    asJava.size( )
+    asJava.asInstanceOf[JMultiMap].size()
   }
 
 }
 
 object MultiMap{
-//in object!
-//static methods
+  def apply(asJava: JMultiMap) = new MultiMap(asJava)//static methods
   def caseInsensitiveMultiMap():MultiMap = {
-    JMultiMap.caseInsensitiveMultiMap( )
+    MultiMap(JMultiMap.caseInsensitiveMultiMap())
   }
 
 }

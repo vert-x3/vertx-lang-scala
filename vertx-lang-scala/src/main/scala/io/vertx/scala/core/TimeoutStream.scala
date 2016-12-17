@@ -16,9 +16,10 @@
 
 package io.vertx.scala.core
 
-import io.vertx.core.{TimeoutStream => JTimeoutStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.Handler
+import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
@@ -31,43 +32,42 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 class TimeoutStream(private val _asJava: Object) 
     extends ReadStream[Long](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JTimeoutStream]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):TimeoutStream = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {
+    TimeoutStream(asJava.asInstanceOf[JTimeoutStream].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Long]):TimeoutStream = {
-    asJava.handler( )
+  override def handler(handler: Handler[Long]):TimeoutStream = {
+    TimeoutStream(asJava.asInstanceOf[JTimeoutStream].handler(handler))
     this
   }
 
   override def pause():TimeoutStream = {
-    asJava.pause( )
+    TimeoutStream(asJava.asInstanceOf[JTimeoutStream].pause())
     this
   }
 
   override def resume():TimeoutStream = {
-    asJava.resume( )
+    TimeoutStream(asJava.asInstanceOf[JTimeoutStream].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):TimeoutStream = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):TimeoutStream = {
+    TimeoutStream(asJava.asInstanceOf[JTimeoutStream].endHandler(endHandler))
     this
   }
 
 //basic methods
   def cancel():Unit = {
-    asJava.cancel( )
+    asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
 }
 
 object TimeoutStream{
-//in object!
-//static methods
+  def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)//static methods
 }

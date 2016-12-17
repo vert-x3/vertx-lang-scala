@@ -16,13 +16,11 @@
 
 package io.vertx.scala.core.cli
 
-import io.vertx.scala.core.cli.Option
-import io.vertx.core.cli.{Option => JOption}
-import io.vertx.scala.core.cli.CommandLine
-import io.vertx.core.cli.{CommandLine => JCommandLine}
-import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.scala.core.cli.Argument
 import io.vertx.core.cli.{Argument => JArgument}
+import io.vertx.core.cli.{Option => JOption}
+import io.vertx.core.cli.{CLI => JCLI}
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.collection.JavaConverters._
 
 /**
   * Interface defining a command-line interface (in other words a command such as 'run', 'ls'...).
@@ -41,122 +39,122 @@ import io.vertx.core.cli.{Argument => JArgument}
   */
 class CLI(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JCLI]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
   def setName(name: String):CLI = {
-    asJava.setName( )
+    CLI(asJava.asInstanceOf[JCLI].setName(name))
     this
   }
 
   def setDescription(desc: String):CLI = {
-    asJava.setDescription( )
+    CLI(asJava.asInstanceOf[JCLI].setDescription(desc))
     this
   }
 
   def setSummary(summary: String):CLI = {
-    asJava.setSummary( )
+    CLI(asJava.asInstanceOf[JCLI].setSummary(summary))
     this
   }
 
   def setHidden(hidden: Boolean):CLI = {
-    asJava.setHidden( )
+    CLI(asJava.asInstanceOf[JCLI].setHidden(hidden))
     this
   }
 
   def addOption(option: Option):CLI = {
-    asJava.addOption( )
+    CLI(asJava.asInstanceOf[JCLI].addOption(option.asJava.asInstanceOf[JOption]))
     this
   }
 
   def addOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    asJava.addOptions( )
+    CLI(asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava))
     this
   }
 
   def setOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    asJava.setOptions( )
+    CLI(asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava))
     this
   }
 
   def addArgument(arg: Argument):CLI = {
-    asJava.addArgument( )
+    CLI(asJava.asInstanceOf[JCLI].addArgument(arg.asJava.asInstanceOf[JArgument]))
     this
   }
 
   def addArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    asJava.addArguments( )
+    CLI(asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava))
     this
   }
 
   def setArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    asJava.setArguments( )
+    CLI(asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava))
     this
   }
 
   def removeOption(name: String):CLI = {
-    asJava.removeOption( )
+    CLI(asJava.asInstanceOf[JCLI].removeOption(name))
     this
   }
 
   def removeArgument(index: Int):CLI = {
-    asJava.removeArgument( )
+    CLI(asJava.asInstanceOf[JCLI].removeArgument(index))
     this
   }
 
 //basic methods
   def parse(arguments: scala.collection.mutable.Buffer[String]):CommandLine = {
-    asJava.parse( )
+    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x).asJava))
   }
 
   def parse(arguments: scala.collection.mutable.Buffer[String],validate: Boolean):CommandLine = {
-    asJava.parse( )
+    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x).asJava,validate))
   }
 
   def getName():String = {
-    asJava.getName( )
+    asJava.asInstanceOf[JCLI].getName()
   }
 
   def getDescription():String = {
-    asJava.getDescription( )
+    asJava.asInstanceOf[JCLI].getDescription()
   }
 
   def getSummary():String = {
-    asJava.getSummary( )
+    asJava.asInstanceOf[JCLI].getSummary()
   }
 
   def isHidden():Boolean = {
-    asJava.isHidden( )
+    asJava.asInstanceOf[JCLI].isHidden()
   }
 
   def getOptions():scala.collection.mutable.Buffer[Option] = {
-    asJava.getOptions( )
+    asJava.asInstanceOf[JCLI].getOptions().map(x => Option(x))
   }
 
   def getArguments():scala.collection.mutable.Buffer[Argument] = {
-    asJava.getArguments( )
+    asJava.asInstanceOf[JCLI].getArguments().map(x => Argument(x))
   }
 
   def getOption(name: String):Option = {
-    asJava.getOption( )
+    Option(asJava.asInstanceOf[JCLI].getOption(name))
   }
 
   def getArgument(name: String):Argument = {
-    asJava.getArgument( )
+    Argument(asJava.asInstanceOf[JCLI].getArgument(name))
   }
 
   def getArgument(index: Int):Argument = {
-    asJava.getArgument( )
+    Argument(asJava.asInstanceOf[JCLI].getArgument(index))
   }
 
 }
 
 object CLI{
-//in object!
-//static methods
+  def apply(asJava: JCLI) = new CLI(asJava)//static methods
   def create(name: String):CLI = {
-    JCLI.create( )
+    CLI(JCLI.create(name))
   }
 
 }

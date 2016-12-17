@@ -16,6 +16,8 @@
 
 package io.vertx.scala.core.shareddata
 
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
@@ -23,70 +25,70 @@ package io.vertx.scala.core.shareddata
   */
 class Counter(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JCounter]
+  def asJava = _asJava
+
 //methods returning a future
-  def get(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.get( )
+  def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].get(resultHandler)
   }
 
-  def incrementAndGet(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.incrementAndGet( )
+  def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].incrementAndGet(resultHandler)
   }
 
-  def getAndIncrement(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.getAndIncrement( )
+  def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].getAndIncrement(resultHandler)
   }
 
-  def decrementAndGet(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.decrementAndGet( )
+  def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].decrementAndGet(resultHandler)
   }
 
-  def addAndGet(value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.addAndGet( )
+  def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].addAndGet(value,resultHandler)
   }
 
-  def getAndAdd(value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.getAndAdd( )
+  def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].getAndAdd(value,resultHandler)
   }
 
-  def compareAndSet(expected: Long,value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.compareAndSet( )
+  def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,resultHandler)
   }
 
 //cached methods
 //fluent methods
 //basic methods
-  def get(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.get( )
+  def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].get(resultHandler)
   }
 
-  def incrementAndGet(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.incrementAndGet( )
+  def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].incrementAndGet(resultHandler)
   }
 
-  def getAndIncrement(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.getAndIncrement( )
+  def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].getAndIncrement(resultHandler)
   }
 
-  def decrementAndGet(resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.decrementAndGet( )
+  def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].decrementAndGet(resultHandler)
   }
 
-  def addAndGet(value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.addAndGet( )
+  def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].addAndGet(value,resultHandler)
   }
 
-  def getAndAdd(value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Long]]):Unit = {
-    asJava.getAndAdd( )
+  def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+    asJava.asInstanceOf[JCounter].getAndAdd(value,resultHandler)
   }
 
-  def compareAndSet(expected: Long,value: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Boolean]]):Unit = {
-    asJava.compareAndSet( )
+  def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,resultHandler)
   }
 
 }
 
 object Counter{
-//in object!
-//static methods
+  def apply(asJava: JCounter) = new Counter(asJava)//static methods
 }

@@ -1,4 +1,75 @@
 @code{
+  def toScalaWithConversion(name, type) {
+    var nullable = type.isNullable;
+    /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
+    if (type.kind.basic) {
+      return name;
+    } else if (type.kind == CLASS_THROWABLE) {
+      return name;
+    } else if (type.kind == CLASS_OBJECT) {
+      return name;
+    } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
+      return name;
+    }
+    else if (type.kind == CLASS_JSON_OBJECT || type.kind == CLASS_JSON_ARRAY || type.kind == CLASS_ENUM) {
+      return name;
+    } else if (type.kind == CLASS_DATA_OBJECT) {
+      return type.simpleName + '(' + name + ')';
+    } else if (type.kind == CLASS_API) {
+      return type.simpleName + '(' + name + ')';
+    } else if (type.kind == CLASS_HANDLER) {
+      return name;
+    } else if (type.kind.collection) {
+      var ret = name;
+      if (type.kind == CLASS_LIST){
+        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+      } else if (type.kind == CLASS_SET){
+        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+      } else if (type.kind == CLASS_MAP){
+        ret += '.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+      }
+    }
+    else {
+      return 'WTF!!!!!!'+type.name+' '+type.kind;
+    }
+  }
+
+  def toJavaWithConversion(name, type) {
+    var nullable = type.isNullable;
+    /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
+    if (type.kind.basic) {
+      return name;
+    } else if (type.kind == CLASS_THROWABLE) {
+      return name;
+    } else if (type.kind == CLASS_OBJECT) {
+      return name;
+    } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
+      return name;
+    }
+    else if (type.kind == CLASS_JSON_OBJECT || type.kind == CLASS_JSON_ARRAY || type.kind == CLASS_ENUM) {
+      return name;
+    } else if (type.kind == CLASS_DATA_OBJECT) {
+      return name + '.asJava' + fromObjectToInstanceOf(type);
+    } else if (type.kind == CLASS_API) {
+      return name + '.asJava' + fromObjectToInstanceOf(type);
+    } else if (type.kind == CLASS_HANDLER) {
+      return name;
+    } else if (type.kind.collection) {
+      var ret = name;
+      if (type.kind == CLASS_LIST){
+        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+      } else if (type.kind == CLASS_SET){
+        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+      } else if (type.kind == CLASS_MAP){
+        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+      }
+      return ret + '.asJava';
+    }
+    else {
+      return 'WTF!!!!!!'+type.name+' '+type.kind;
+    }
+  }
+
   def toScalaType(type) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
@@ -51,7 +122,7 @@
           ret = 'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
         return ret;
     } else if (type.kind == CLASS_HANDLER) {
-      return "io.vertx.core.Handler[" + toScalaType(type.args[0]) +"]";
+      return "Handler[" + toScalaType(type.args[0]) +"]";
     } else if (type.kind == CLASS_FUNCTION) {
       var type1 = toScalaType(type.args[0]);
       var type2 = toScalaType(type.args[1]);
@@ -68,7 +139,7 @@
                type.kind == CLASS_ENUM){
       return type.name
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      var ret = 'io.vertx.core.AsyncResult';
+      var ret = 'AsyncResult';
       if(!type.args.isEmpty)
         ret += '[' + toScalaType(type.args[0]) + ']';
       else
@@ -117,5 +188,20 @@
     else {
       return '';
     }
+  }
+
+  def createJavaNameForType(type) {
+    return 'J'+type.simpleName.replace('<', '[').replace('>', ']');
+  }
+
+  def fromObjectToInstanceOf(type) {
+    var ret = '';
+    if(type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
+      ret += '.asInstanceOf[JFuture[_]]';
+    }
+    else {
+      ret += '.asInstanceOf[' + createJavaNameForType(type) + ']';
+    }
+    return ret;
   }
 }

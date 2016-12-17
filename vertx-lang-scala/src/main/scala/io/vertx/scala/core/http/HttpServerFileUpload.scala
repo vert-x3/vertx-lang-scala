@@ -17,10 +17,11 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.Handler
 
 /**
   * Represents an file upload from an HTML FORM.
@@ -28,72 +29,71 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 class HttpServerFileUpload(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpServerFileUpload]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpServerFileUpload = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Buffer]):HttpServerFileUpload = {
-    asJava.handler( )
+  override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].handler(handler))
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):HttpServerFileUpload = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):HttpServerFileUpload = {
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].endHandler(endHandler))
     this
   }
 
   override def pause():HttpServerFileUpload = {
-    asJava.pause( )
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].pause())
     this
   }
 
   override def resume():HttpServerFileUpload = {
-    asJava.resume( )
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].resume())
     this
   }
 
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
-    asJava.streamToFileSystem( )
+    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename))
     this
   }
 
 //basic methods
   def filename():String = {
-    asJava.filename( )
+    asJava.asInstanceOf[JHttpServerFileUpload].filename()
   }
 
   def name():String = {
-    asJava.name( )
+    asJava.asInstanceOf[JHttpServerFileUpload].name()
   }
 
   def contentType():String = {
-    asJava.contentType( )
+    asJava.asInstanceOf[JHttpServerFileUpload].contentType()
   }
 
   def contentTransferEncoding():String = {
-    asJava.contentTransferEncoding( )
+    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding()
   }
 
   def charset():String = {
-    asJava.charset( )
+    asJava.asInstanceOf[JHttpServerFileUpload].charset()
   }
 
   def size():Long = {
-    asJava.size( )
+    asJava.asInstanceOf[JHttpServerFileUpload].size()
   }
 
   def isSizeAvailable():Boolean = {
-    asJava.isSizeAvailable( )
+    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable()
   }
 
 }
 
 object HttpServerFileUpload{
-//in object!
-//static methods
+  def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)//static methods
 }

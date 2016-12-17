@@ -16,15 +16,16 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * Represents a socket-like interface to a TCP connection on either the
@@ -41,132 +42,137 @@ class NetSocket(private val _asJava: Object)
     extends ReadStream[Buffer](_asJava) 
     with WriteStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JNetSocket]
+  private var cached_0:SocketAddress = _
+    private var cached_1:SocketAddress = _
+  
 //methods returning a future
 //cached methods
   def remoteAddress():SocketAddress = {
-    asJava.remoteAddress( )
+    if(cached_0 == null)
+      cached_0 = SocketAddress(asJava.asInstanceOf[JNetSocket].remoteAddress())
+    return cached_0
   }
 
   def localAddress():SocketAddress = {
-    asJava.localAddress( )
+    if(cached_1 == null)
+      cached_1 = SocketAddress(asJava.asInstanceOf[JNetSocket].localAddress())
+    return cached_1
   }
 
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):NetSocket = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Buffer]):NetSocket = {
-    asJava.handler( )
+  override def handler(handler: Handler[Buffer]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].handler(handler))
     this
   }
 
   override def pause():NetSocket = {
-    asJava.pause( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].pause())
     this
   }
 
   override def resume():NetSocket = {
-    asJava.resume( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):NetSocket = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].endHandler(endHandler))
     this
   }
 
   override def write(data: Buffer):NetSocket = {
-    asJava.write( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].write(data.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):NetSocket = {
-    asJava.setWriteQueueMaxSize( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].setWriteQueueMaxSize(maxSize))
     this
   }
 
-  override def drainHandler(handler: io.vertx.core.Handler[Unit]):NetSocket = {
-    asJava.drainHandler( )
+  override def drainHandler(handler: Handler[Unit]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].drainHandler(handler))
     this
   }
 
   def write(str: String):NetSocket = {
-    asJava.write( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].write(str))
     this
   }
 
   def write(str: String,enc: String):NetSocket = {
-    asJava.write( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].write(str,enc))
     this
   }
 
   def sendFile(filename: String):NetSocket = {
-    asJava.sendFile( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename))
     this
   }
 
   def sendFile(filename: String,offset: Long):NetSocket = {
-    asJava.sendFile( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename,offset))
     this
   }
 
   def sendFile(filename: String,offset: Long,length: Long):NetSocket = {
-    asJava.sendFile( )
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,length))
     this
   }
 
-  def sendFile(filename: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):NetSocket = {
-    asJava.sendFile( )
+  def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename,resultHandler))
     this
   }
 
-  def sendFile(filename: String,offset: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):NetSocket = {
-    asJava.sendFile( )
+  def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,resultHandler))
     this
   }
 
-  def sendFile(filename: String,offset: Long,length: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):NetSocket = {
-    asJava.sendFile( )
+  def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,length,resultHandler))
     this
   }
 
-  def closeHandler(handler: io.vertx.core.Handler[Unit]):NetSocket = {
-    asJava.closeHandler( )
+  def closeHandler(handler: Handler[Unit]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].closeHandler(handler))
     this
   }
 
-  def upgradeToSsl(handler: io.vertx.core.Handler[Unit]):NetSocket = {
-    asJava.upgradeToSsl( )
+  def upgradeToSsl(handler: Handler[Unit]):NetSocket = {
+    NetSocket(asJava.asInstanceOf[JNetSocket].upgradeToSsl(handler))
     this
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.writeQueueFull( )
+    asJava.asInstanceOf[JNetSocket].writeQueueFull()
   }
 
   def writeHandlerID():String = {
-    asJava.writeHandlerID( )
+    asJava.asInstanceOf[JNetSocket].writeHandlerID()
   }
 
   override def end():Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JNetSocket].end()
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JNetSocket].close()
   }
 
   def isSsl():Boolean = {
-    asJava.isSsl( )
+    asJava.asInstanceOf[JNetSocket].isSsl()
   }
 
 }
 
 object NetSocket{
-//in object!
-//static methods
+  def apply(asJava: JNetSocket) = new NetSocket(asJava)//static methods
 }
