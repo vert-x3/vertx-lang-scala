@@ -16,18 +16,18 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.{EventBus => JEventBus}
+import io.vertx.scala.core.eventbus.DeliveryOptions
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.eventbus.{EventBus => JEventBus}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.scala.core.eventbus.SendContext
 import io.vertx.core.eventbus.{SendContext => JSendContext}
+import io.vertx.scala.core.eventbus.Message
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.scala.core.eventbus.MessageConsumer
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+import io.vertx.scala.core.eventbus.MessageProducer
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 
 /**
@@ -41,189 +41,90 @@ import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
   * Please refer to the documentation for more information on the event bus.
   */
 class EventBus(private val _asJava: Object) 
-    extends Measured {
+    extends Measured(_asJava) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    asJava.asInstanceOf[JEventBus].isMetricsEnabled()
-  }
-
-  /**
-    * Sends a message.
-    * 
-    * The message will be delivered to at most one of the handlers registered to the address.
-    * @param address the address to send it to
-    * @param message the message, may be `null`
-    * @return a reference to this, so the API can be used fluently
-    */
-  def send(address: String, message: AnyRef): EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address, toJava[java.lang.Object](message).asInstanceOf[Object])
+  override def asJava = _asJava.asInstanceOf[JEventBus]
+//methods returning a future
+//cached methods
+//fluent methods
+  def send(address: String,message: AnyRef):EventBus = {
+    asJava.send( )
     this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
-    * subsequently replies to the message.
-    * @param address the address to send it to
-    * @param message the message, may be `null`
-    * @return reply future will be called when any reply from the recipient is received, may be `null`
-    */
-  def sendFuture[T: TypeTag](address: String, message: AnyRef): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[T]]((x => if (x == null) null else Message.apply[T](x.asInstanceOf)))
-    asJava.asInstanceOf[JEventBus].send(address, toJava[java.lang.Object](message).asInstanceOf[Object], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying `options` that can be used to configure the delivery.
-    * @param address the address to send it to
-    * @param message the message, may be `null`
-    * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return a reference to this, so the API can be used fluently
-    */
-  def send(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address, toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava)
+  def send(address: String,message: AnyRef,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[T]]]):EventBus = {
+    asJava.send( )
     this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
-    * subsequently replies to the message.
-    * @param address the address to send it to
-    * @param message the message, may be `null`
-    * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return reply future will be called when any reply from the recipient is received, may be `null`
-    */
-  def sendFuture[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Message[T]]((x => if (x == null) null else Message.apply[T](x.asInstanceOf)))
-    asJava.asInstanceOf[JEventBus].send(address, toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.eventbus.Message[Object]]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Publish a message.
-    * The message will be delivered to all handlers registered to the address.
-    * @param address the address to publish it to
-    * @param message the message, may be `null`
-    * @return a reference to this, so the API can be used fluently
-    */
-  def publish(address: String, message: AnyRef): EventBus = {
-    asJava.asInstanceOf[JEventBus].publish(address, toJava[java.lang.Object](message).asInstanceOf[Object])
+  def send(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
+    asJava.send( )
     this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#publish]] but specifying `options` that can be used to configure the delivery.
-    * @param address the address to publish it to
-    * @param message the message, may be `null`
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return a reference to this, so the API can be used fluently
-    */
-  def publish(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
-    asJava.asInstanceOf[JEventBus].publish(address, toJava[java.lang.Object](message).asInstanceOf[Object], options.asJava)
+  def send(address: String,message: AnyRef,options: DeliveryOptions,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[T]]]):EventBus = {
+    asJava.send( )
     this
   }
 
-  /**
-    * Create a message consumer against the specified address.
-    * 
-    * The returned consumer is not yet registered
-    * at the address, registration will be effective when [[io.vertx.scala.core.eventbus.MessageConsumer#handler]]
-    * is called.
-    * @param address the address that it will register it at
-    * @return the event bus message consumer
-    */
-  def consumer[T: TypeTag](address: String): MessageConsumer[T] = {
-    MessageConsumer.apply[T](asJava.asInstanceOf[JEventBus].consumer(address))
+  def publish(address: String,message: AnyRef):EventBus = {
+    asJava.publish( )
+    this
   }
 
-  /**
-    * Create a consumer and register it against the specified address.
-    * @param address the address that will register it at
-    * @param handler the handler that will process the received messages
-    * @return the event bus message consumer
-    */
-  def consumer[T: TypeTag](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer.apply[T](asJava.asInstanceOf[JEventBus].consumer(address, funcToMappedHandler[JMessage[T], Message[T]](Message.apply[T])(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.eventbus.Message[Object]]]))
+  def publish(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
+    asJava.publish( )
+    this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#consumer]] but the address won't be propagated across the cluster.
-    * @param address the address to register it at
-    * @return the event bus message consumer
-    */
-  def localConsumer[T: TypeTag](address: String): MessageConsumer[T] = {
-    MessageConsumer.apply[T](asJava.asInstanceOf[JEventBus].localConsumer(address))
+//basic methods
+  override def isMetricsEnabled():Boolean = {
+    asJava.isMetricsEnabled( )
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#consumer]] but the address won't be propagated across the cluster.
-    * @param address the address that will register it at
-    * @param handler the handler that will process the received messages
-    * @return the event bus message consumer
-    */
-  def localConsumer[T: TypeTag](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer.apply[T](asJava.asInstanceOf[JEventBus].localConsumer(address, funcToMappedHandler[JMessage[T], Message[T]](Message.apply[T])(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.eventbus.Message[Object]]]))
+  def consumer(address: String):MessageConsumer[T] = {
+    asJava.consumer( )
   }
 
-  /**
-    * Create a message sender against the specified address.
-    * 
-    * The returned sender will invoke the [[io.vertx.scala.core.eventbus.EventBus#send]]
-    * method when the stream [[io.vertx.scala.core.streams.WriteStream#write]] method is called with the sender
-    * address and the provided data.
-    * @param address the address to send it to
-    * @return The sender
-    */
-  def sender[T: TypeTag](address: String): MessageProducer[T] = {
-    MessageProducer.apply[T](asJava.asInstanceOf[JEventBus].sender(address))
+  def consumer(address: String,handler: io.vertx.core.Handler[Message[T]]):MessageConsumer[T] = {
+    asJava.consumer( )
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#sender]] but specifying delivery options that will be used for configuring the delivery of
-    * the message.
-    * @param address the address to send it to
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return The sender
-    */
-  def sender[T: TypeTag](address: String, options: DeliveryOptions): MessageProducer[T] = {
-    MessageProducer.apply[T](asJava.asInstanceOf[JEventBus].sender(address, options.asJava))
+  def localConsumer(address: String):MessageConsumer[T] = {
+    asJava.localConsumer( )
   }
 
-  /**
-    * Create a message publisher against the specified address.
-    * 
-    * The returned publisher will invoke the [[io.vertx.scala.core.eventbus.EventBus#publish]]
-    * method when the stream [[io.vertx.scala.core.streams.WriteStream#write]] method is called with the publisher
-    * address and the provided data.
-    * @param address The address to publish it to
-    * @return The publisher
-    */
-  def publisher[T: TypeTag](address: String): MessageProducer[T] = {
-    MessageProducer.apply[T](asJava.asInstanceOf[JEventBus].publisher(address))
+  def localConsumer(address: String,handler: io.vertx.core.Handler[Message[T]]):MessageConsumer[T] = {
+    asJava.localConsumer( )
   }
 
-  /**
-    * Like [[io.vertx.scala.core.eventbus.EventBus#publisher]] but specifying delivery options that will be used for configuring the delivery of
-    * the message.
-    * @param address the address to publish it to
-    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return The publisher
-    */
-  def publisher[T: TypeTag](address: String, options: DeliveryOptions): MessageProducer[T] = {
-    MessageProducer.apply[T](asJava.asInstanceOf[JEventBus].publisher(address, options.asJava))
+  def sender(address: String):MessageProducer[T] = {
+    asJava.sender( )
+  }
+
+  def sender(address: String,options: DeliveryOptions):MessageProducer[T] = {
+    asJava.sender( )
+  }
+
+  def publisher(address: String):MessageProducer[T] = {
+    asJava.publisher( )
+  }
+
+  def publisher(address: String,options: DeliveryOptions):MessageProducer[T] = {
+    asJava.publisher( )
+  }
+
+  def addInterceptor(interceptor: io.vertx.core.Handler[SendContext]):EventBus = {
+    asJava.addInterceptor( )
+  }
+
+  def removeInterceptor(interceptor: io.vertx.core.Handler[SendContext]):EventBus = {
+    asJava.removeInterceptor( )
   }
 
 }
 
-object EventBus {
-
-  def apply(_asJava: Object): EventBus =
-    new EventBus(_asJava)
-
+object EventBus{
+//in object!
+//static methods
 }

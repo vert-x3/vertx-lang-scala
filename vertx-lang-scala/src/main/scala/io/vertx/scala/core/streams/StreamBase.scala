@@ -16,11 +16,6 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 
 /**
@@ -28,36 +23,12 @@ import io.vertx.core.streams.{StreamBase => JStreamBase}
   */
 trait StreamBase {
 
-  def asJava: java.lang.Object
-
-  /**
-  * Set an exception handler.
-  * @param handler the handler
-  * @return a reference to this, so the API can be used fluently
-  */
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase
-
-}
-
-object StreamBase {
-
-  def apply(_asJava: JStreamBase): StreamBase =
-    new StreamBaseImpl(_asJava)
-
-  private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
-
-  def asJava: Object = _asJava
-
-  /**
-    * Set an exception handler.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase = {
-    asJava.asInstanceOf[JStreamBase].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
-    this
-  }
-
-  }
-
+//methods returning a future
+//cached methods
+//fluent methods
+def exceptionHandler
+//basic methods
+//in object!
+//static methods
+//default methods
 }

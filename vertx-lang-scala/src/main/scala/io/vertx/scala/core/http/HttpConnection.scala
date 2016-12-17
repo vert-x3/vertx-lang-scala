@@ -16,18 +16,15 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.http.GoAway
 import io.vertx.core.http.{GoAway => JGoAway}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
+import io.vertx.scala.core.http.Http2Settings
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * Represents an HTTP connection.
@@ -41,248 +38,109 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class HttpConnection(private val _asJava: Object) {
 
-  def asJava: Object = _asJava
-
-  /**
-    * @return the current connection window size or `-1` for HTTP/1.x
-    */
-  def getWindowSize(): Int = {
-    asJava.asInstanceOf[JHttpConnection].getWindowSize()
+def asJava = _asJava.asInstanceOf[JHttpConnection]
+//methods returning a future
+//cached methods
+  def remoteAddress():SocketAddress = {
+    asJava.remoteAddress( )
   }
 
-  /**
-    * Update the current connection wide window size to a new size.
-    * <p/>
-    * Increasing this value, gives better performance when several data streams are multiplexed
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param windowSize the new window size
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setWindowSize(windowSize: Int): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize)
+  def localAddress():SocketAddress = {
+    asJava.localAddress( )
+  }
+
+//fluent methods
+  def setWindowSize(windowSize: Int):HttpConnection = {
+    asJava.setWindowSize( )
     this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with a last stream id `2^31-1`.
-    */
-  def goAway(errorCode: Long): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode)
+  def goAway(errorCode: Long):HttpConnection = {
+    asJava.goAway( )
     this
   }
 
-  /**
-    * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with no buffer.
-    */
-  def goAway(errorCode: Long, lastStreamId: Int): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode, lastStreamId)
+  def goAway(errorCode: Long,lastStreamId: Int):HttpConnection = {
+    asJava.goAway( )
     this
   }
 
-  /**
-    * Send a go away frame to the remote endpoint of the connection.
-    * <p/>
-    * <ul>
-    *   <li>a  frame is sent to the to the remote endpoint with the `errorCode` and `debugData`</li>
-    *   <li>any stream created after the stream identified by `lastStreamId` will be closed</li>
-    *   <li>for an  is different than `0` when all the remaining streams are closed this connection will be closed automatically</li>
-    * </ul>
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param errorCode the ` GOAWAY` error code
-    * @param lastStreamId the last stream id
-    * @param debugData additional debug data sent to the remote endpoint
-    * @return a reference to this, so the API can be used fluently
-    */
-  def goAway(errorCode: Long, lastStreamId: Int, debugData: Buffer): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode, lastStreamId, debugData.asJava.asInstanceOf[JBuffer])
+  def goAway(errorCode: Long,lastStreamId: Int,debugData: Buffer):HttpConnection = {
+    asJava.goAway( )
     this
   }
 
-  /**
-    * Set an handler called when a  frame is received.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def goAwayHandler(handler: io.vertx.core.Handler[GoAway]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAwayHandler(funcToMappedHandler[JGoAway, GoAway](a => GoAway(a))(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.GoAway]])
+  def goAwayHandler(handler: io.vertx.core.Handler[GoAway]):HttpConnection = {
+    asJava.goAwayHandler( )
     this
   }
 
-  /**
-    * Set an handler called when a  frame has been sent or received and all connections are closed.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def shutdownHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdownHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  def shutdownHandler(handler: io.vertx.core.Handler[Unit]):HttpConnection = {
+    asJava.shutdownHandler( )
     this
   }
 
-  /**
-    * Initiate a connection shutdown, a go away frame is sent and the connection is closed when all current active streams
-    * are closed or after a time out of 30 seconds.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def shutdown(): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdown()
+  def shutdown():HttpConnection = {
+    asJava.shutdown( )
     this
   }
 
-  /**
-    * Initiate a connection shutdown, a go away frame is sent and the connection is closed when all current streams
-    * will be closed or the `timeout` is fired.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param timeoutMs the timeout in milliseconds
-    * @return a reference to this, so the API can be used fluently
-    */
-  def shutdown(timeoutMs: Long): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs)
+  def shutdown(timeoutMs: Long):HttpConnection = {
+    asJava.shutdown( )
     this
   }
 
-  /**
-    * Set a close handler. The handler will get notified when the connection is closed.
-    * @param handler the handler to be notified
-    * @return a reference to this, so the API can be used fluently
-    */
-  def closeHandler(handler: io.vertx.core.Handler[Unit]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  def closeHandler(handler: io.vertx.core.Handler[Unit]):HttpConnection = {
+    asJava.closeHandler( )
     this
   }
 
-  /**
-    * Close the connection and all the currently active streams.
-    * <p/>
-    * An HTTP/2 connection will send a  frame before.
-    */
-  def close(): Unit = {
-    asJava.asInstanceOf[JHttpConnection].close()
-  }
-
-  /**
-    * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    */
-  def settings(): Http2Settings = {
-    Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
-  }
-
-  /**
-    * Send to the remote endpoint an update of the server settings.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    * @return a reference to this, so the API can be used fluently
-    */
-  def updateSettings(settings: Http2Settings): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava)
+  def updateSettings(settings: Http2Settings):HttpConnection = {
+    asJava.updateSettings( )
     this
   }
 
-  /**
-    * Send to the remote endpoint an update of this endpoint settings
-    * <p/>
-    * The `completionHandler` will be notified when the remote endpoint has acknowledged the settings.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    * @return the future notified when the settings have been acknowledged by the remote endpoint
-    */
-  def updateSettingsFuture(settings: Http2Settings): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Unit]((_ => ()))
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava, promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.Void]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-    */
-  def remoteSettings(): Http2Settings = {
-    Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
-  }
-
-  /**
-    * Set an handler that is called when remote endpoint <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a> are updated.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param handler the handler for remote endpoint settings
-    * @return a reference to this, so the API can be used fluently
-    */
-  def remoteSettingsHandler(handler: io.vertx.core.Handler[Http2Settings]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(funcToMappedHandler[JHttp2Settings, Http2Settings](a => Http2Settings(a))(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.Http2Settings]])
+  def updateSettings(settings: Http2Settings,completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):HttpConnection = {
+    asJava.updateSettings( )
     this
   }
 
-  /**
-    * Send a  frame to the remote endpoint.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param data the 8 bytes data of the frame
-    * @return an async result future notified with pong reply or the failure
-    */
-  def pingFuture(data: Buffer): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer]((x => if (x == null) null else Buffer.apply(x.asInstanceOf)))
-    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer], promiseAndHandler._1.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.buffer.Buffer]]])
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * Set an handler notified when a  frame is received from the remote endpoint.
-    * <p/>
-    * This is not implemented for HTTP/1.x.
-    * @param handler the handler to be called when a ` PING` is received
-    * @return a reference to this, so the API can be used fluently
-    */
-  def pingHandler(handler: io.vertx.core.Handler[Buffer]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].pingHandler(funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
+  def remoteSettingsHandler(handler: io.vertx.core.Handler[Http2Settings]):HttpConnection = {
+    asJava.remoteSettingsHandler( )
     this
   }
 
-  /**
-    * Set an handler called when a connection error happens
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+  def ping(data: Buffer,pongHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Buffer]]):HttpConnection = {
+    asJava.ping( )
     this
   }
 
-  /**
-    * @return the remote address for this connection
-    */
-  def remoteAddress(): SocketAddress = {
-    if (cached_0 == null) {
-      cached_0 = SocketAddress.apply(asJava.asInstanceOf[JHttpConnection].remoteAddress()).asInstanceOf
-    }
-    cached_0
+  def pingHandler(handler: io.vertx.core.Handler[Buffer]):HttpConnection = {
+    asJava.pingHandler( )
+    this
   }
 
-  /**
-    * @return the remote address for this connection
-    */
-  def localAddress(): SocketAddress = {
-    if (cached_1 == null) {
-      cached_1 = SocketAddress.apply(asJava.asInstanceOf[JHttpConnection].localAddress()).asInstanceOf
-    }
-    cached_1
+  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpConnection = {
+    asJava.exceptionHandler( )
+    this
   }
 
-  private var cached_0: SocketAddress = _
-  private var cached_1: SocketAddress = _
+//basic methods
+  def close():Unit = {
+    asJava.close( )
+  }
+
+  def settings():Http2Settings = {
+    asJava.settings( )
+  }
+
+  def remoteSettings():Http2Settings = {
+    asJava.remoteSettings( )
+  }
+
 }
 
-object HttpConnection {
-
-  def apply(_asJava: Object): HttpConnection =
-    new HttpConnection(_asJava)
-
+object HttpConnection{
+//in object!
+//static methods
 }

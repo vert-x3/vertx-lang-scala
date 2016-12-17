@@ -16,14 +16,9 @@
 
 package io.vertx.scala.core
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
 import io.vertx.core.{TimeoutStream => JTimeoutStream}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
 
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
@@ -34,48 +29,45 @@ import io.vertx.scala.core.streams.ReadStream
   * the timer.
   */
 class TimeoutStream(private val _asJava: Object) 
-    extends ReadStream[Long] {
+    extends ReadStream[Long](_asJava) {
 
-  def asJava: Object = _asJava
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+  override def asJava = _asJava.asInstanceOf[JTimeoutStream]
+//methods returning a future
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):TimeoutStream = {
+    asJava.exceptionHandler( )
     this
   }
 
-  def handler(handler: io.vertx.core.Handler[Long]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].handler(funcToMappedHandler[java.lang.Long, Long](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Long]])
+  override def handler(handler: io.vertx.core.Handler[Long]):TimeoutStream = {
+    asJava.handler( )
     this
   }
 
-  def pause(): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].pause()
+  override def pause():TimeoutStream = {
+    asJava.pause( )
     this
   }
 
-  def resume(): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].resume()
+  override def resume():TimeoutStream = {
+    asJava.resume( )
     this
   }
 
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):TimeoutStream = {
+    asJava.endHandler( )
     this
   }
 
-  /**
-    * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
-    * argument.
-    */
-  def cancel(): Unit = {
-    asJava.asInstanceOf[JTimeoutStream].cancel()
+//basic methods
+  def cancel():Unit = {
+    asJava.cancel( )
   }
 
 }
 
-object TimeoutStream {
-
-  def apply(_asJava: Object): TimeoutStream =
-    new TimeoutStream(_asJava)
-
+object TimeoutStream{
+//in object!
+//static methods
 }

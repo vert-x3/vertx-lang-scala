@@ -16,21 +16,17 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.scala.core.http.WebSocketFrame
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * Base WebSocket implementation.
@@ -39,310 +35,36 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 trait WebSocketBase 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+    extends ReadStream[Buffer](_asJava) 
+    with WriteStream[Buffer](_asJava) {
 
-  def asJava: java.lang.Object
-
-  /**
-  * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
-  */
-  def end(t: Buffer): Unit
-
-  /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
-  * @return true if write queue is full
-  */
-  def writeQueueFull(): Boolean
-
-    def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketBase
-
-    def handler(handler: io.vertx.core.Handler[Buffer]): WebSocketBase
-
-    def pause(): WebSocketBase
-
-    def resume(): WebSocketBase
-
-    def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketBase
-
-    def write(data: Buffer): WebSocketBase
-
-    def setWriteQueueMaxSize(maxSize: Int): WebSocketBase
-
-    def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase
-
-  /**
-  * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-  * handler is given by this method.
-  * 
-  * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-  * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-  * allows you to write data to other WebSockets which are owned by different event loops.
-  * @return the binary handler id
-  */
-  def binaryHandlerID(): String
-
-  /**
-  * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-  * handler is given by `textHandlerID`.
-  * 
-  * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-  * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-  * allows you to write data to other WebSockets which are owned by different event loops.
-  */
-  def textHandlerID(): String
-
-  /**
-  * Write a WebSocket frame to the connection
-  * @param frame the frame to write
-  * @return a reference to this, so the API can be used fluently
-  */
-  def writeFrame(frame: WebSocketFrame): WebSocketBase
-
-  /**
-  * Write a final WebSocket text frame to the connection
-  * @param text The text to write
-  * @return a reference to this, so the API can be used fluently
-  */
-  def writeFinalTextFrame(text: String): WebSocketBase
-
-  /**
-  * Write a final WebSocket binary frame to the connection
-  * @param data The data to write
-  * @return a reference to this, so the API can be used fluently
-  */
-  def writeFinalBinaryFrame(data: Buffer): WebSocketBase
-
-  /**
-  * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
-  * if it exceeds the maximum WebSocket frame size.
-  * @param data the data to write
-  * @return a reference to this, so the API can be used fluently
-  */
-  def writeBinaryMessage(data: Buffer): WebSocketBase
-
-  /**
-  * Set a close handler. This will be called when the WebSocket is closed.
-  * @param handler the handler
-  * @return a reference to this, so the API can be used fluently
-  */
-  def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase
-
-  /**
-  * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
-  * @param handler the handler
-  * @return a reference to this, so the API can be used fluently
-  */
-  def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocketBase
-
-  /**
-  * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
-  */
-  def end(): Unit
-
-  /**
-  * Close the WebSocket.
-  */
-  def close(): Unit
-
-  /**
-  * @return the remote address for this socket
-  */
-  def remoteAddress(): SocketAddress
-
-  /**
-  * @return the local address for this socket
-  */
-  def localAddress(): SocketAddress
-
-}
-
-object WebSocketBase {
-
-  def apply(_asJava: JWebSocketBase): WebSocketBase =
-    new WebSocketBaseImpl(_asJava)
-
-  private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
-
-  def asJava: Object = _asJava
-
-  /**
-    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
-    */
-  def end(t: Buffer): Unit = {
-    asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
-  }
-
-  /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
-    * @return true if write queue is full
-    */
-  def writeQueueFull(): Boolean = {
-    asJava.asInstanceOf[JWebSocketBase].writeQueueFull()
-  }
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
-    this
-  }
-
-  def handler(handler: io.vertx.core.Handler[Buffer]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].handler(funcToMappedHandler[JBuffer, Buffer](Buffer.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
-    this
-  }
-
-  def pause(): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].pause()
-    this
-  }
-
-  def resume(): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].resume()
-    this
-  }
-
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].endHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => endHandler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-    this
-  }
-
-  def write(data: Buffer): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].write(data.asJava.asInstanceOf[JBuffer])
-    this
-  }
-
-  def setWriteQueueMaxSize(maxSize: Int): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize)
-    this
-  }
-
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-    this
-  }
-
-  /**
-    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-    * handler is given by this method.
-    * 
-    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-    * allows you to write data to other WebSockets which are owned by different event loops.
-    * @return the binary handler id
-    */
-  def binaryHandlerID(): String = {
-    asJava.asInstanceOf[JWebSocketBase].binaryHandlerID()
-  }
-
-  /**
-    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-    * handler is given by `textHandlerID`.
-    * 
-    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-    * allows you to write data to other WebSockets which are owned by different event loops.
-    */
-  def textHandlerID(): String = {
-    asJava.asInstanceOf[JWebSocketBase].textHandlerID()
-  }
-
-  /**
-    * Write a WebSocket frame to the connection
-    * @param frame the frame to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeFrame(frame: WebSocketFrame): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
-    this
-  }
-
-  /**
-    * Write a final WebSocket text frame to the connection
-    * @param text The text to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeFinalTextFrame(text: String): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text)
-    this
-  }
-
-  /**
-    * Write a final WebSocket binary frame to the connection
-    * @param data The data to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeFinalBinaryFrame(data: Buffer): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
-    this
-  }
-
-  /**
-    * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
-    * if it exceeds the maximum WebSocket frame size.
-    * @param data the data to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def writeBinaryMessage(data: Buffer): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
-    this
-  }
-
-  /**
-    * Set a close handler. This will be called when the WebSocket is closed.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def closeHandler(handler: io.vertx.core.Handler[Unit]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].closeHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-    this
-  }
-
-  /**
-    * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def frameHandler(handler: io.vertx.core.Handler[WebSocketFrame]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].frameHandler(funcToMappedHandler[JWebSocketFrame, WebSocketFrame](WebSocketFrame.apply)(handler).asInstanceOf[io.vertx.core.Handler[io.vertx.core.http.WebSocketFrame]])
-    this
-  }
-
-  /**
-    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
-    */
-  def end(): Unit = {
-    asJava.asInstanceOf[JWebSocketBase].end()
-  }
-
-  /**
-    * Close the WebSocket.
-    */
-  def close(): Unit = {
-    asJava.asInstanceOf[JWebSocketBase].close()
-  }
-
-  /**
-    * @return the remote address for this socket
-    */
-  def remoteAddress(): SocketAddress = {
-    if (cached_0 == null) {
-      cached_0 = SocketAddress.apply(asJava.asInstanceOf[JWebSocketBase].remoteAddress()).asInstanceOf
-    }
-    cached_0
-  }
-
-  /**
-    * @return the local address for this socket
-    */
-  def localAddress(): SocketAddress = {
-    if (cached_1 == null) {
-      cached_1 = SocketAddress.apply(asJava.asInstanceOf[JWebSocketBase].localAddress()).asInstanceOf
-    }
-    cached_1
-  }
-
-  private var cached_0: SocketAddress = _
-  private var cached_1: SocketAddress = _
-  }
-
+//methods returning a future
+//cached methods
+def remoteAddress
+def localAddress
+//fluent methods
+def exceptionHandler
+def handler
+def pause
+def resume
+def endHandler
+def write
+def setWriteQueueMaxSize
+def drainHandler
+def writeFrame
+def writeFinalTextFrame
+def writeFinalBinaryFrame
+def writeBinaryMessage
+def closeHandler
+def frameHandler
+//basic methods
+def writeQueueFull()
+def binaryHandlerID()
+def textHandlerID()
+def end()
+def close()
+//in object!
+//static methods
+//default methods
+def end
 }

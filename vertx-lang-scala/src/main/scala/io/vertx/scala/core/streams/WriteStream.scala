@@ -16,12 +16,8 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
-import scala.reflect.runtime.universe._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
 import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.scala.core.streams.StreamBase
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 
 /**
@@ -31,156 +27,21 @@ import io.vertx.core.streams.{StreamBase => JStreamBase}
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from a `ReadStream`
   * to it.
   */
-trait WriteStream[T] 
-    extends StreamBase {
+trait WriteStream 
+    extends StreamBase(_asJava) {
 
-  def asJava: java.lang.Object
-
-  /**
-  * Set an exception handler on the write stream.
-  * @param handler the exception handler
-  * @return a reference to this, so the API can be used fluently
-  */
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WriteStream[T]
-
-  /**
-  * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
-  * asynchronously. To avoid running out of memory by putting too much on the write queue,
-  * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
-  * @param data the data to write
-  * @return a reference to this, so the API can be used fluently
-  */
-  def write(data: T): WriteStream[T]
-
-  /**
-  * Ends the stream.
-  * 
-  * Once the stream has ended, it cannot be used any more.
-  */
-  def end(): Unit
-
-  /**
-  * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
-  */
-  def end(t: T): Unit
-
-  /**
-  * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
-  * if there is more than `maxSize` items in the write queue. This is used as an indicator by classes such as
-  * `Pump` to provide flow control.
-  * <p/>
-  * The value is defined by the implementation of the stream, e.g in bytes for a
-  * [[io.vertx.scala.core.net.NetSocket]], the number of [[io.vertx.scala.core.eventbus.Message]] for a
-  * [[io.vertx.scala.core.eventbus.MessageProducer]], etc...
-  * @param maxSize the max size of the write stream
-  * @return a reference to this, so the API can be used fluently
-  */
-  def setWriteQueueMaxSize(maxSize: Int): WriteStream[T]
-
-  /**
-  * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
-  * @return true if write queue is full
-  */
-  def writeQueueFull(): Boolean
-
-  /**
-  * Set a drain handler on the stream. If the write queue is full, then the handler will be called when the write
-  * queue is ready to accept buffers again. See [[io.vertx.scala.core.streams.Pump]] for an example of this being used.
-  * <p/>
-  * The stream implementation defines when the drain handler, for example it could be when the queue size has been
-  * reduced to `maxSize / 2`.
-  * @param handler the handler
-  * @return a reference to this, so the API can be used fluently
-  */
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T]
-
-}
-
-object WriteStream {
-
-  def apply[T: TypeTag](_asJava: JWriteStream[Object]): WriteStream[T] =
-    new WriteStreamImpl[T](_asJava)
-
-  private class WriteStreamImpl[T: TypeTag](private val _asJava: JWriteStream[Object]) extends WriteStream[T] {
-
-  def asJava: Object = _asJava
-
-  /**
-    * Set an exception handler on the write stream.
-    * @param handler the exception handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler).asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
-    this
-  }
-
-  /**
-    * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
-    * asynchronously. To avoid running out of memory by putting too much on the write queue,
-    * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
-    * @param data the data to write
-    * @return a reference to this, so the API can be used fluently
-    */
-  def write(data: T): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data).asInstanceOf[Object])
-    this
-  }
-
-  /**
-    * Ends the stream.
-    * 
-    * Once the stream has ended, it cannot be used any more.
-    */
-  def end(): Unit = {
-    asJava.asInstanceOf[JWriteStream[Object]].end()
-  }
-
-  /**
-    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
-    */
-  def end(t: T): Unit = {
-    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](t).asInstanceOf[Object])
-  }
-
-  /**
-    * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
-    * if there is more than `maxSize` items in the write queue. This is used as an indicator by classes such as
-    * `Pump` to provide flow control.
-    * <p/>
-    * The value is defined by the implementation of the stream, e.g in bytes for a
-    * [[io.vertx.scala.core.net.NetSocket]], the number of [[io.vertx.scala.core.eventbus.Message]] for a
-    * [[io.vertx.scala.core.eventbus.MessageProducer]], etc...
-    * @param maxSize the max size of the write stream
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setWriteQueueMaxSize(maxSize: Int): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].setWriteQueueMaxSize(maxSize)
-    this
-  }
-
-  /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]
-    * @return true if write queue is full
-    */
-  def writeQueueFull(): Boolean = {
-    asJava.asInstanceOf[JWriteStream[Object]].writeQueueFull()
-  }
-
-  /**
-    * Set a drain handler on the stream. If the write queue is full, then the handler will be called when the write
-    * queue is ready to accept buffers again. See [[io.vertx.scala.core.streams.Pump]] for an example of this being used.
-    * <p/>
-    * The stream implementation defines when the drain handler, for example it could be when the queue size has been
-    * reduced to `maxSize / 2`.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].drainHandler(funcToMappedHandler[java.lang.Void, Unit](_ => ())(_ => handler.handle()).asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-    this
-  }
-
-  }
-
+//methods returning a future
+//cached methods
+//fluent methods
+def exceptionHandler
+def write
+def setWriteQueueMaxSize
+def drainHandler
+//basic methods
+def end()
+def writeQueueFull()
+//in object!
+//static methods
+//default methods
+def end
 }

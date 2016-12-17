@@ -1,0 +1,72 @@
+@if{!superTypes.isEmpty}  override @end{}
+def asJava = _asJava.asInstanceOf[@{createJavaNameForType(type)}]\n
+
+//methods returning a future\n
+@foreach{method : futureMethods(instanceMethods)}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{method.name}(
+	@foreach{param:method.params}
+		@{param.name}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)} = {\n
+    @{invokeMethod('asJava', type, method)}\n
+  }\n
+	\n
+@end{}
+
+//cached methods\n
+@foreach{method : cacheReturnMethods(instanceMethods)}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{method.name}(
+	@foreach{param:method.params}
+		@{param.name}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)} = {\n
+    @{invokeMethod('asJava', type, method)}\n
+  }\n
+	\n
+@end{}
+
+//fluent methods\n
+@foreach{method : fluentMethods(instanceMethods)}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{method.name}(
+	@foreach{param:method.params}
+		@{param.name}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)} = {\n
+    @{invokeMethod('asJava', type, method)}\n
+    this\n
+  }\n
+	\n
+@end{}
+
+//basic methods\n
+@foreach{method : basicMethods(instanceMethods)}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{method.name}(
+	@foreach{param:method.params}
+		@{param.name}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)} = {\n
+    @{invokeMethod('asJava', type, method)}\n
+  }\n
+	\n
+@end{}
+}\n
+\n
+object @{className}{\n
+//in object!\n
+
+//static methods\n
+
+@foreach{method : staticMethods}
+  def @{method.name}
+@if{!method.typeParams.isEmpty}
+[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
+@end{}
+(
+	@foreach{param:method.params}
+		@{param.name}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)} = {\n
+    @{invokeStaticMethod('J'+className, type, method)}\n
+  }\n
+	\n
+@end{}
+
