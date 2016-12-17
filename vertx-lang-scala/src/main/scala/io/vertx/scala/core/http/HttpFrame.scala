@@ -16,27 +16,37 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.scala.core.buffer.Buffer
 
 /**
   * An HTTP/2 frame.
   */
 class HttpFrame(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JHttpFrame]
+  def asJava = _asJava
+  private var cached_0:Int = _
+    private var cached_1:Int = _
+    private var cached_2:Buffer = _
+  
 //methods returning a future
 //cached methods
   def type():Int = {
-    asJava.type( )
+    if(cached_0 == null)
+      cached_0 = asJava.asInstanceOf[JHttpFrame].type()
+    return cached_0
   }
 
   def flags():Int = {
-    asJava.flags( )
+    if(cached_1 == null)
+      cached_1 = asJava.asInstanceOf[JHttpFrame].flags()
+    return cached_1
   }
 
   def payload():Buffer = {
-    asJava.payload( )
+    if(cached_2 == null)
+      cached_2 = Buffer(asJava.asInstanceOf[JHttpFrame].payload())
+    return cached_2
   }
 
 //fluent methods
@@ -44,6 +54,5 @@ def asJava = _asJava.asInstanceOf[JHttpFrame]
 }
 
 object HttpFrame{
-//in object!
-//static methods
+  def apply(asJava: JHttpFrame) = new HttpFrame(asJava)//static methods
 }

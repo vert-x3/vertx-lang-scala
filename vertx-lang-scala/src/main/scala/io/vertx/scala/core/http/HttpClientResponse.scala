@@ -16,18 +16,19 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import scala.collection.JavaConverters._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.http.HttpVersion
+import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.http.HttpFrame
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.MultiMap
 import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.net.NetSocket
-import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.Handler
 
 /**
   * Represents a client-side HTTP response.
@@ -41,85 +42,96 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
 class HttpClientResponse(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpClientResponse]
+  private var cached_0:MultiMap = _
+    private var cached_1:MultiMap = _
+    private var cached_2:scala.collection.mutable.Buffer[String] = _
+    private var cached_3:NetSocket = _
+  
 //methods returning a future
 //cached methods
   def headers():MultiMap = {
-    asJava.headers( )
+    if(cached_0 == null)
+      cached_0 = MultiMap(asJava.asInstanceOf[JHttpClientResponse].headers())
+    return cached_0
   }
 
   def trailers():MultiMap = {
-    asJava.trailers( )
+    if(cached_1 == null)
+      cached_1 = MultiMap(asJava.asInstanceOf[JHttpClientResponse].trailers())
+    return cached_1
   }
 
   def cookies():scala.collection.mutable.Buffer[String] = {
-    asJava.cookies( )
+    if(cached_2 == null)
+      cached_2 = asJava.asInstanceOf[JHttpClientResponse].cookies().map(x => x)
+    return cached_2
   }
 
   def netSocket():NetSocket = {
-    asJava.netSocket( )
+    if(cached_3 == null)
+      cached_3 = NetSocket(asJava.asInstanceOf[JHttpClientResponse].netSocket())
+    return cached_3
   }
 
 //fluent methods
   override def resume():HttpClientResponse = {
-    asJava.resume( )
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].resume())
     this
   }
 
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpClientResponse = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Buffer]):HttpClientResponse = {
-    asJava.handler( )
+  override def handler(handler: Handler[Buffer]):HttpClientResponse = {
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].handler(handler))
     this
   }
 
   override def pause():HttpClientResponse = {
-    asJava.pause( )
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].pause())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):HttpClientResponse = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].endHandler(endHandler))
     this
   }
 
-  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]):HttpClientResponse = {
-    asJava.bodyHandler( )
+  def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].bodyHandler(bodyHandler))
     this
   }
 
-  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]):HttpClientResponse = {
-    asJava.customFrameHandler( )
+  def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
+    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(handler))
     this
   }
 
 //basic methods
   def version():io.vertx.core.http.HttpVersion = {
-    asJava.version( )
+    asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
   def statusCode():Int = {
-    asJava.statusCode( )
+    asJava.asInstanceOf[JHttpClientResponse].statusCode()
   }
 
   def statusMessage():String = {
-    asJava.statusMessage( )
+    asJava.asInstanceOf[JHttpClientResponse].statusMessage()
   }
 
   def getHeader(headerName: String):String = {
-    asJava.getHeader( )
+    asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName)
   }
 
   def getTrailer(trailerName: String):String = {
-    asJava.getTrailer( )
+    asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName)
   }
 
 }
 
 object HttpClientResponse{
-//in object!
-//static methods
+  def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)//static methods
 }

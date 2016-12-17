@@ -16,14 +16,12 @@
 
 package io.vertx.scala.core.shareddata
 
-import io.vertx.scala.core.shareddata.AsyncMap
-import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
-import io.vertx.scala.core.shareddata.Lock
-import io.vertx.core.shareddata.{Lock => JLock}
-import io.vertx.scala.core.shareddata.LocalMap
-import io.vertx.core.shareddata.{LocalMap => JLocalMap}
-import io.vertx.scala.core.shareddata.Counter
 import io.vertx.core.shareddata.{Counter => JCounter}
+import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
+import io.vertx.core.shareddata.{LocalMap => JLocalMap}
+import io.vertx.core.shareddata.{Lock => JLock}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * Shared data allows you to share data safely between different parts of your application in a safe way.
@@ -40,50 +38,50 @@ import io.vertx.core.shareddata.{Counter => JCounter}
   */
 class SharedData(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JSharedData]
+  def asJava = _asJava
+
 //methods returning a future
-  def getClusterWideMap(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.getClusterWideMap( )
+  def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,resultHandler)
   }
 
-  def getLock(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
-    asJava.getLock( )
+  def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getLock(name,resultHandler)
   }
 
-  def getLockWithTimeout(name: String,timeout: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
-    asJava.getLockWithTimeout( )
+  def getLockWithTimeout(name: String,timeout: Long,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,resultHandler)
   }
 
-  def getCounter(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Counter]]):Unit = {
-    asJava.getCounter( )
+  def getCounter(name: String,resultHandler: Handler[AsyncResult[Counter]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getCounter(name,resultHandler)
   }
 
 //cached methods
 //fluent methods
 //basic methods
-  def getClusterWideMap(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.getClusterWideMap( )
+  def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,resultHandler)
   }
 
-  def getLock(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
-    asJava.getLock( )
+  def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getLock(name,resultHandler)
   }
 
-  def getLockWithTimeout(name: String,timeout: Long,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Lock]]):Unit = {
-    asJava.getLockWithTimeout( )
+  def getLockWithTimeout(name: String,timeout: Long,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,resultHandler)
   }
 
-  def getCounter(name: String,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Counter]]):Unit = {
-    asJava.getCounter( )
+  def getCounter(name: String,resultHandler: Handler[AsyncResult[Counter]]):Unit = {
+    asJava.asInstanceOf[JSharedData].getCounter(name,resultHandler)
   }
 
-  def getLocalMap(name: String):LocalMap[K, V] = {
-    asJava.getLocalMap( )
+  def getLocalMap[K,V](name: String):LocalMap[K, V] = {
+    LocalMap<K,V>(asJava.asInstanceOf[JSharedData].getLocalMap(name))
   }
 
 }
 
 object SharedData{
-//in object!
-//static methods
+  def apply(asJava: JSharedData) = new SharedData(asJava)//static methods
 }

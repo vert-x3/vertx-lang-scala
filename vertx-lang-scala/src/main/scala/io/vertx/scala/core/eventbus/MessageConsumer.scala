@@ -18,8 +18,9 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.eventbus.Message
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 
 /**
@@ -36,79 +37,78 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 class MessageConsumer[T](private val _asJava: Object) 
     extends ReadStream[Message[T]](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JMessageConsumer]
+
 //methods returning a future
-  def completionHandler(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.completionHandler( )
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(completionHandler)
   }
 
-  def unregister(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.unregister( )
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].unregister(completionHandler)
   }
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):MessageConsumer[T] = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.handler( )
+  override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].handler(handler))
     this
   }
 
   override def pause():MessageConsumer[T] = {
-    asJava.pause( )
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].pause())
     this
   }
 
   override def resume():MessageConsumer[T] = {
-    asJava.resume( )
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):MessageConsumer[T] = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].endHandler(endHandler))
     this
   }
 
 //basic methods
   def bodyStream():ReadStream[T] = {
-    asJava.bodyStream( )
+    ReadStream<T>(asJava.asInstanceOf[JMessageConsumer].bodyStream())
   }
 
   def isRegistered():Boolean = {
-    asJava.isRegistered( )
+    asJava.asInstanceOf[JMessageConsumer].isRegistered()
   }
 
   def address():String = {
-    asJava.address( )
+    asJava.asInstanceOf[JMessageConsumer].address()
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
-    asJava.setMaxBufferedMessages( )
+    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].setMaxBufferedMessages(maxBufferedMessages))
   }
 
   def getMaxBufferedMessages():Int = {
-    asJava.getMaxBufferedMessages( )
+    asJava.asInstanceOf[JMessageConsumer].getMaxBufferedMessages()
   }
 
-  def completionHandler(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.completionHandler( )
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(completionHandler)
   }
 
   def unregister():Unit = {
-    asJava.unregister( )
+    asJava.asInstanceOf[JMessageConsumer].unregister()
   }
 
-  def unregister(completionHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.unregister( )
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JMessageConsumer].unregister(completionHandler)
   }
 
 }
 
 object MessageConsumer{
-//in object!
-//static methods
+  def apply(asJava: JMessageConsumer) = new MessageConsumer(asJava)//static methods
 }

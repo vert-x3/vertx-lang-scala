@@ -22,42 +22,42 @@ package io.vertx.scala.core.dns
   */
 class SrvRecord(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JSrvRecord]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def priority():Int = {
-    asJava.priority( )
+    asJava.asInstanceOf[JSrvRecord].priority()
   }
 
   def weight():Int = {
-    asJava.weight( )
+    asJava.asInstanceOf[JSrvRecord].weight()
   }
 
   def port():Int = {
-    asJava.port( )
+    asJava.asInstanceOf[JSrvRecord].port()
   }
 
   def name():String = {
-    asJava.name( )
+    asJava.asInstanceOf[JSrvRecord].name()
   }
 
   def protocol():String = {
-    asJava.protocol( )
+    asJava.asInstanceOf[JSrvRecord].protocol()
   }
 
   def service():String = {
-    asJava.service( )
+    asJava.asInstanceOf[JSrvRecord].service()
   }
 
   def target():String = {
-    asJava.target( )
+    asJava.asInstanceOf[JSrvRecord].target()
   }
 
 }
 
 object SrvRecord{
-//in object!
-//static methods
+  def apply(asJava: JSrvRecord) = new SrvRecord(asJava)//static methods
 }

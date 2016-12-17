@@ -16,10 +16,11 @@
 
 package io.vertx.scala.core
 
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.Future
 import io.vertx.core.{Future => JFuture}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * An executor for executing blocking code in Vert.x .
@@ -30,30 +31,29 @@ import io.vertx.core.{Future => JFuture}
 class WorkerExecutor(private val _asJava: Object) 
     extends Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JWorkerExecutor]
+
 //methods returning a future
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],ordered: Boolean,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(blockingCodeHandler,ordered,resultHandler)
   }
 
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(blockingCodeHandler,resultHandler)
   }
 
 //cached methods
 //fluent methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled()
   }
 
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],ordered: Boolean,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(blockingCodeHandler,ordered,resultHandler)
   }
 
 }
 
 object WorkerExecutor{
-//in object!
-//static methods
+  def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)//static methods
 }

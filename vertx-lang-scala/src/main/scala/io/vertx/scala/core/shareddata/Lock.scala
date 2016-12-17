@@ -25,18 +25,18 @@ package io.vertx.scala.core.shareddata
   */
 class Lock(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JLock]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def release():Unit = {
-    asJava.release( )
+    asJava.asInstanceOf[JLock].release()
   }
 
 }
 
 object Lock{
-//in object!
-//static methods
+  def apply(asJava: JLock) = new Lock(asJava)//static methods
 }

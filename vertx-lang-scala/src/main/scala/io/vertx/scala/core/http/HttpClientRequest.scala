@@ -16,23 +16,21 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.MultiMap
-import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.http.HttpClientResponse
-import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.http.HttpFrame
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.core.http.HttpMethod
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.http.HttpConnection
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.http.HttpVersion
+import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.scala.core.buffer.Buffer
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.Handler
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 
 /**
   * Represents a client-side HTTP request.
@@ -65,184 +63,189 @@ class HttpClientRequest(private val _asJava: Object)
     extends WriteStream[Buffer](_asJava) 
     with ReadStream[HttpClientResponse](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpClientRequest]
+  private var cached_0:MultiMap = _
+    private var cached_1:HttpConnection = _
+  
 //methods returning a future
 //cached methods
   def headers():MultiMap = {
-    asJava.headers( )
+    if(cached_0 == null)
+      cached_0 = MultiMap(asJava.asInstanceOf[JHttpClientRequest].headers())
+    return cached_0
   }
 
   def connection():HttpConnection = {
-    asJava.connection( )
+    if(cached_1 == null)
+      cached_1 = HttpConnection(asJava.asInstanceOf[JHttpClientRequest].connection())
+    return cached_1
   }
 
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpClientRequest = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].exceptionHandler(handler))
     this
   }
 
   override def write(data: Buffer):HttpClientRequest = {
-    asJava.write( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(data.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):HttpClientRequest = {
-    asJava.setWriteQueueMaxSize( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setWriteQueueMaxSize(maxSize))
     this
   }
 
-  override def drainHandler(handler: io.vertx.core.Handler[Unit]):HttpClientRequest = {
-    asJava.drainHandler( )
+  override def drainHandler(handler: Handler[Unit]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].drainHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[HttpClientResponse]):HttpClientRequest = {
-    asJava.handler( )
+  override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].handler(handler))
     this
   }
 
   override def pause():HttpClientRequest = {
-    asJava.pause( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].pause())
     this
   }
 
   override def resume():HttpClientRequest = {
-    asJava.resume( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):HttpClientRequest = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].endHandler(endHandler))
     this
   }
 
   def setChunked(chunked: Boolean):HttpClientRequest = {
-    asJava.setChunked( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked))
     this
   }
 
   def setRawMethod(method: String):HttpClientRequest = {
-    asJava.setRawMethod( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method))
     this
   }
 
   def setHost(host: String):HttpClientRequest = {
-    asJava.setHost( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setHost(host))
     this
   }
 
   def putHeader(name: String,value: String):HttpClientRequest = {
-    asJava.putHeader( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].putHeader(name,value))
     this
   }
 
   def write(chunk: String):HttpClientRequest = {
-    asJava.write( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(chunk))
     this
   }
 
   def write(chunk: String,enc: String):HttpClientRequest = {
-    asJava.write( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(chunk,enc))
     this
   }
 
-  def continueHandler(handler: io.vertx.core.Handler[Unit]):HttpClientRequest = {
-    asJava.continueHandler( )
+  def continueHandler(handler: Handler[Unit]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].continueHandler(handler))
     this
   }
 
   def sendHead():HttpClientRequest = {
-    asJava.sendHead( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].sendHead())
     this
   }
 
-  def sendHead(completionHandler: io.vertx.core.Handler[io.vertx.core.http.HttpVersion]):HttpClientRequest = {
-    asJava.sendHead( )
+  def sendHead(completionHandler: Handler[io.vertx.core.http.HttpVersion]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].sendHead(completionHandler))
     this
   }
 
   def setTimeout(timeoutMs: Long):HttpClientRequest = {
-    asJava.setTimeout( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs))
     this
   }
 
-  def pushHandler(handler: io.vertx.core.Handler[HttpClientRequest]):HttpClientRequest = {
-    asJava.pushHandler( )
+  def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].pushHandler(handler))
     this
   }
 
-  def connectionHandler(handler: io.vertx.core.Handler[HttpConnection]):HttpClientRequest = {
-    asJava.connectionHandler( )
+  def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].connectionHandler(handler))
     this
   }
 
   def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpClientRequest = {
-    asJava.writeCustomFrame( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpClientRequest = {
-    asJava.writeCustomFrame( )
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame]))
     this
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.writeQueueFull( )
+    asJava.asInstanceOf[JHttpClientRequest].writeQueueFull()
   }
 
   def isChunked():Boolean = {
-    asJava.isChunked( )
+    asJava.asInstanceOf[JHttpClientRequest].isChunked()
   }
 
   def method():io.vertx.core.http.HttpMethod = {
-    asJava.method( )
+    asJava.asInstanceOf[JHttpClientRequest].method()
   }
 
   def getRawMethod():String = {
-    asJava.getRawMethod( )
+    asJava.asInstanceOf[JHttpClientRequest].getRawMethod()
   }
 
   def uri():String = {
-    asJava.uri( )
+    asJava.asInstanceOf[JHttpClientRequest].uri()
   }
 
   def path():String = {
-    asJava.path( )
+    asJava.asInstanceOf[JHttpClientRequest].path()
   }
 
   def query():String = {
-    asJava.query( )
+    asJava.asInstanceOf[JHttpClientRequest].query()
   }
 
   def getHost():String = {
-    asJava.getHost( )
+    asJava.asInstanceOf[JHttpClientRequest].getHost()
   }
 
   def end(chunk: String):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk)
   }
 
   def end(chunk: String,enc: String):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk,enc)
   }
 
   override def end(chunk: Buffer):Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   override def end():Unit = {
-    asJava.end( )
+    asJava.asInstanceOf[JHttpClientRequest].end()
   }
 
   def reset(code: Long):Boolean = {
-    asJava.reset( )
+    asJava.asInstanceOf[JHttpClientRequest].reset(code)
   }
 
 }
 
 object HttpClientRequest{
-//in object!
-//static methods
+  def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)//static methods
 }

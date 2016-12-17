@@ -17,6 +17,8 @@
 package io.vertx.scala.core
 
 import io.vertx.core.{Future => JFuture}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * Represents the result of an action that may, or may not, have occurred yet.
@@ -24,79 +26,82 @@ import io.vertx.core.{Future => JFuture}
   */
 class Future[T](private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JFuture]
+  def asJava = _asJava
+  private var cached_0:Handler[AsyncResult[T]] = _
+  
 //methods returning a future
 //cached methods
-  def completer():io.vertx.core.Handler[io.vertx.core.AsyncResult[T]] = {
-    asJava.completer( )
+  def completer():Handler[AsyncResult[T]] = {
+    if(cached_0 == null)
+      cached_0 = asJava.asInstanceOf[JFuture[_]].completer()
+    return cached_0
   }
 
 //fluent methods
-  def setHandler(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Future[T] = {
-    asJava.setHandler( )
+  def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
+    Future<T>(asJava.asInstanceOf[JFuture[_]].setHandler(handler))
     this
   }
 
 //basic methods
   def isComplete():Boolean = {
-    asJava.isComplete( )
+    asJava.asInstanceOf[JFuture[_]].isComplete()
   }
 
   def complete(result: T):Unit = {
-    asJava.complete( )
+    asJava.asInstanceOf[JFuture[_]].complete(result)
   }
 
   def complete():Unit = {
-    asJava.complete( )
+    asJava.asInstanceOf[JFuture[_]].complete()
   }
 
   def fail(throwable: Throwable):Unit = {
-    asJava.fail( )
+    asJava.asInstanceOf[JFuture[_]].fail(throwable)
   }
 
   def fail(failureMessage: String):Unit = {
-    asJava.fail( )
+    asJava.asInstanceOf[JFuture[_]].fail(failureMessage)
   }
 
   def result():T = {
-    asJava.result( )
+    asJava.asInstanceOf[JFuture[_]].result()
   }
 
   def cause():Throwable = {
-    asJava.cause( )
+    asJava.asInstanceOf[JFuture[_]].cause()
   }
 
   def succeeded():Boolean = {
-    asJava.succeeded( )
+    asJava.asInstanceOf[JFuture[_]].succeeded()
   }
 
   def failed():Boolean = {
-    asJava.failed( )
+    asJava.asInstanceOf[JFuture[_]].failed()
   }
 
 }
 
 object Future{
-//in object!
-//static methods
+  def apply(asJava: JFuture) = new Future(asJava)//static methods
   def future[T]():Future[T] = {
-    JFuture.future( )
+    Future<T>(JFuture.future())
   }
 
   def succeededFuture[T]():Future[T] = {
-    JFuture.succeededFuture( )
+    Future<T>(JFuture.succeededFuture())
   }
 
   def succeededFuture[T](result: T):Future[T] = {
-    JFuture.succeededFuture( )
+    Future<T>(JFuture.succeededFuture(result))
   }
 
   def failedFuture[T](t: Throwable):Future[T] = {
-    JFuture.failedFuture( )
+    Future<T>(JFuture.failedFuture(t))
   }
 
   def failedFuture[T](failureMessage: String):Future[T] = {
-    JFuture.failedFuture( )
+    Future<T>(JFuture.failedFuture(failureMessage))
   }
 
 }

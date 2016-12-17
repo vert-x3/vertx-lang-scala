@@ -1,6 +1,6 @@
 @code{
 
-  def basicMethods(methods) {
+  def findBasicMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
       if(!method.isFluent() && !method.isCacheReturn && !method.isStaticMethod && !method.isDefaultMethod)
@@ -9,7 +9,7 @@
     return ret;
   }
 
-  def defaultMethods(methods) {
+  def findDefaultMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
       if(method.isDefaultMethod)
@@ -18,7 +18,7 @@
     return ret;
   }
 
-  def fluentMethods(methods) {
+  def findFluentMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
       if(method.isFluent)
@@ -27,7 +27,7 @@
     return ret;
   }
 
-  def cacheReturnMethods(methods) {
+  def findCacheReturnMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
       if(method.isCacheReturn)
@@ -36,7 +36,7 @@
     return ret;
   }
 
-  def futureMethods(methods) {
+  def findFutureMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
       if(!method.isFluent() && shouldMethodReturnAFuture(method))
@@ -69,14 +69,23 @@
   }
 
   def invokeMethod(target, type, method) {
-    return target + '.' + method.name + '(' + ' ' + ')';
+    var paramString = '';
+    for(param : method.params) {
+      if (paramString != '')
+        paramString += ',';
+      paramString += toJavaWithConversion(param.name, param.type);
+    }
+    return toScalaWithConversion(target + '.' + method.name + '(' + paramString + ')', method.returnType);
   }
 
   def invokeStaticMethod(target, type, method) {
-    return target + '.' + method.name + '(' + ' ' + ')';
+    var paramString = '';
+    for(param : method.params) {
+      if (paramString != '')
+        paramString += ',';
+      paramString += toJavaWithConversion(param.name, param.type);
+    }
+    return toScalaWithConversion(target + '.' + method.name + '(' + paramString + ')', method.returnType);
   }
 
-  def createJavaNameForType(type) {
-    return 'J'+type.simpleName.replace('<', '[').replace('>', ']');
-  }
 }

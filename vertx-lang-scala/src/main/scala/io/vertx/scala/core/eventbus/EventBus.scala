@@ -16,19 +16,16 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.scala.core.eventbus.DeliveryOptions
-import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-import io.vertx.core.eventbus.{EventBus => JEventBus}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.eventbus.SendContext
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{SendContext => JSendContext}
-import io.vertx.scala.core.eventbus.Message
 import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.scala.core.eventbus.MessageConsumer
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-import io.vertx.scala.core.eventbus.MessageProducer
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.eventbus.{EventBus => JEventBus}
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 
 /**
   * A Vert.x event-bus is a light-weight distributed messaging system which allows different parts of your application,
@@ -43,88 +40,87 @@ import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 class EventBus(private val _asJava: Object) 
     extends Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JEventBus]
+
 //methods returning a future
 //cached methods
 //fluent methods
   def send(address: String,message: AnyRef):EventBus = {
-    asJava.send( )
+    EventBus(asJava.asInstanceOf[JEventBus].send(address,message))
     this
   }
 
-  def send(address: String,message: AnyRef,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[T]]]):EventBus = {
-    asJava.send( )
+  def send[T](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
+    EventBus(asJava.asInstanceOf[JEventBus].send(address,message,replyHandler))
     this
   }
 
   def send(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.send( )
+    EventBus(asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions]))
     this
   }
 
-  def send(address: String,message: AnyRef,options: DeliveryOptions,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[T]]]):EventBus = {
-    asJava.send( )
+  def send[T](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
+    EventBus(asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions],replyHandler))
     this
   }
 
   def publish(address: String,message: AnyRef):EventBus = {
-    asJava.publish( )
+    EventBus(asJava.asInstanceOf[JEventBus].publish(address,message))
     this
   }
 
   def publish(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.publish( )
+    EventBus(asJava.asInstanceOf[JEventBus].publish(address,message,options.asJava.asInstanceOf[JDeliveryOptions]))
     this
   }
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JEventBus].isMetricsEnabled()
   }
 
-  def consumer(address: String):MessageConsumer[T] = {
-    asJava.consumer( )
+  def consumer[T](address: String):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address))
   }
 
-  def consumer(address: String,handler: io.vertx.core.Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.consumer( )
+  def consumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address,handler))
   }
 
-  def localConsumer(address: String):MessageConsumer[T] = {
-    asJava.localConsumer( )
+  def localConsumer[T](address: String):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address))
   }
 
-  def localConsumer(address: String,handler: io.vertx.core.Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.localConsumer( )
+  def localConsumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address,handler))
   }
 
-  def sender(address: String):MessageProducer[T] = {
-    asJava.sender( )
+  def sender[T](address: String):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JEventBus].sender(address))
   }
 
-  def sender(address: String,options: DeliveryOptions):MessageProducer[T] = {
-    asJava.sender( )
+  def sender[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JEventBus].sender(address,options.asJava.asInstanceOf[JDeliveryOptions]))
   }
 
-  def publisher(address: String):MessageProducer[T] = {
-    asJava.publisher( )
+  def publisher[T](address: String):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JEventBus].publisher(address))
   }
 
-  def publisher(address: String,options: DeliveryOptions):MessageProducer[T] = {
-    asJava.publisher( )
+  def publisher[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
+    MessageProducer<T>(asJava.asInstanceOf[JEventBus].publisher(address,options.asJava.asInstanceOf[JDeliveryOptions]))
   }
 
-  def addInterceptor(interceptor: io.vertx.core.Handler[SendContext]):EventBus = {
-    asJava.addInterceptor( )
+  def addInterceptor(interceptor: Handler[SendContext]):EventBus = {
+    EventBus(asJava.asInstanceOf[JEventBus].addInterceptor(interceptor))
   }
 
-  def removeInterceptor(interceptor: io.vertx.core.Handler[SendContext]):EventBus = {
-    asJava.removeInterceptor( )
+  def removeInterceptor(interceptor: Handler[SendContext]):EventBus = {
+    EventBus(asJava.asInstanceOf[JEventBus].removeInterceptor(interceptor))
   }
 
 }
 
 object EventBus{
-//in object!
-//static methods
+  def apply(asJava: JEventBus) = new EventBus(asJava)//static methods
 }

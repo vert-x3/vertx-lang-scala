@@ -22,22 +22,22 @@ package io.vertx.scala.core.net
   */
 class SocketAddress(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JSocketAddress]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def host():String = {
-    asJava.host( )
+    asJava.asInstanceOf[JSocketAddress].host()
   }
 
   def port():Int = {
-    asJava.port( )
+    asJava.asInstanceOf[JSocketAddress].port()
   }
 
 }
 
 object SocketAddress{
-//in object!
-//static methods
+  def apply(asJava: JSocketAddress) = new SocketAddress(asJava)//static methods
 }

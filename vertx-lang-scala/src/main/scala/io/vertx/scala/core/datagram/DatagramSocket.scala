@@ -16,19 +16,19 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.scala.core.datagram.PacketWritestream
-import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.datagram.DatagramPacket
-import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * A datagram socket can be used to send [[io.vertx.scala.core.datagram.DatagramPacket]]'s to remote datagram servers
@@ -46,113 +46,115 @@ class DatagramSocket(private val _asJava: Object)
     extends ReadStream[DatagramPacket](_asJava) 
     with Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JDatagramSocket]
+  private var cached_0:SocketAddress = _
+  
 //methods returning a future
-  def close(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JDatagramSocket].close(handler)
   }
 
 //cached methods
   def localAddress():SocketAddress = {
-    asJava.localAddress( )
+    if(cached_0 == null)
+      cached_0 = SocketAddress(asJava.asInstanceOf[JDatagramSocket].localAddress())
+    return cached_0
   }
 
 //fluent methods
-  def send(packet: Buffer,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.send( )
+  def send(packet: Buffer,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port,host,handler))
     this
   }
 
-  def send(str: String,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.send( )
+  def send(str: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].send(str,port,host,handler))
     this
   }
 
-  def send(str: String,enc: String,port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.send( )
+  def send(str: String,enc: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].send(str,enc,port,host,handler))
     this
   }
 
-  def listenMulticastGroup(multicastAddress: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.listenMulticastGroup( )
+  def listenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,handler))
     this
   }
 
-  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.listenMulticastGroup( )
+  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source,handler))
     this
   }
 
-  def unlistenMulticastGroup(multicastAddress: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.unlistenMulticastGroup( )
+  def unlistenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,handler))
     this
   }
 
-  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.unlistenMulticastGroup( )
+  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source,handler))
     this
   }
 
-  def blockMulticastGroup(multicastAddress: String,sourceToBlock: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.blockMulticastGroup( )
+  def blockMulticastGroup(multicastAddress: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,sourceToBlock,handler))
     this
   }
 
-  def blockMulticastGroup(multicastAddress: String,networkInterface: String,sourceToBlock: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.blockMulticastGroup( )
+  def blockMulticastGroup(multicastAddress: String,networkInterface: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,networkInterface,sourceToBlock,handler))
     this
   }
 
-  def listen(port: Int,host: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.listen( )
+  def listen(port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].listen(port,host,handler))
     this
   }
 
   override def pause():DatagramSocket = {
-    asJava.pause( )
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].pause())
     this
   }
 
   override def resume():DatagramSocket = {
-    asJava.resume( )
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):DatagramSocket = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].endHandler(endHandler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[DatagramPacket]):DatagramSocket = {
-    asJava.handler( )
+  override def handler(handler: Handler[DatagramPacket]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].handler(handler))
     this
   }
 
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):DatagramSocket = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):DatagramSocket = {
+    DatagramSocket(asJava.asInstanceOf[JDatagramSocket].exceptionHandler(handler))
     this
   }
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled()
   }
 
   def sender(port: Int,host: String):PacketWritestream = {
-    asJava.sender( )
+    PacketWritestream(asJava.asInstanceOf[JDatagramSocket].sender(port,host))
   }
 
-  def close(handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Unit]]):Unit = {
-    asJava.close( )
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JDatagramSocket].close(handler)
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JDatagramSocket].close()
   }
 
 }
 
 object DatagramSocket{
-//in object!
-//static methods
+  def apply(asJava: JDatagramSocket) = new DatagramSocket(asJava)//static methods
 }

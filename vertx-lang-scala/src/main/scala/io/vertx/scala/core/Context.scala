@@ -16,12 +16,13 @@
 
 package io.vertx.scala.core
 
-import io.vertx.scala.core.Vertx
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.core.json.JsonObject
-import io.vertx.scala.core.Future
-import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{Context => JContext}
+import io.vertx.core.{Future => JFuture}
+import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * The execution context of a scala-function execution.
@@ -57,95 +58,95 @@ import io.vertx.core.{Context => JContext}
   */
 class Context(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JContext]
+  def asJava = _asJava
+
 //methods returning a future
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],ordered: Boolean,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,ordered,resultHandler)
   }
 
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,resultHandler)
   }
 
 //cached methods
 //fluent methods
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):Context = {
-    asJava.exceptionHandler( )
+  def exceptionHandler(handler: Handler[Throwable]):Context = {
+    Context(asJava.asInstanceOf[JContext].exceptionHandler(handler))
     this
   }
 
 //basic methods
-  def runOnContext(action: io.vertx.core.Handler[Unit]):Unit = {
-    asJava.runOnContext( )
+  def runOnContext(action: Handler[Unit]):Unit = {
+    asJava.asInstanceOf[JContext].runOnContext(action)
   }
 
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],ordered: Boolean,resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,ordered,resultHandler)
   }
 
-  def executeBlocking(blockingCodeHandler: io.vertx.core.Handler[Future[T]],resultHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]):Unit = {
-    asJava.executeBlocking( )
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,resultHandler)
   }
 
   def deploymentID():String = {
-    asJava.deploymentID( )
+    asJava.asInstanceOf[JContext].deploymentID()
   }
 
   def config():io.vertx.core.json.JsonObject = {
-    asJava.config( )
+    asJava.asInstanceOf[JContext].config()
   }
 
   def processArgs():scala.collection.mutable.Buffer[String] = {
-    asJava.processArgs( )
+    asJava.asInstanceOf[JContext].processArgs().map(x => x)
   }
 
   def isEventLoopContext():Boolean = {
-    asJava.isEventLoopContext( )
+    asJava.asInstanceOf[JContext].isEventLoopContext()
   }
 
   def isWorkerContext():Boolean = {
-    asJava.isWorkerContext( )
+    asJava.asInstanceOf[JContext].isWorkerContext()
   }
 
   def isMultiThreadedWorkerContext():Boolean = {
-    asJava.isMultiThreadedWorkerContext( )
+    asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext()
   }
 
-  def get(key: String):T = {
-    asJava.get( )
+  def get[T](key: String):T = {
+    asJava.asInstanceOf[JContext].get(key)
   }
 
   def put(key: String,value: AnyRef):Unit = {
-    asJava.put( )
+    asJava.asInstanceOf[JContext].put(key,value)
   }
 
   def remove(key: String):Boolean = {
-    asJava.remove( )
+    asJava.asInstanceOf[JContext].remove(key)
   }
 
   def owner():Vertx = {
-    asJava.owner( )
+    Vertx(asJava.asInstanceOf[JContext].owner())
   }
 
   def getInstanceCount():Int = {
-    asJava.getInstanceCount( )
+    asJava.asInstanceOf[JContext].getInstanceCount()
   }
 
 }
 
 object Context{
-//in object!
-//static methods
+  def apply(asJava: JContext) = new Context(asJava)//static methods
   def isOnWorkerThread():Boolean = {
-    JContext.isOnWorkerThread( )
+    JContext.isOnWorkerThread()
   }
 
   def isOnEventLoopThread():Boolean = {
-    JContext.isOnEventLoopThread( )
+    JContext.isOnEventLoopThread()
   }
 
   def isOnVertxThread():Boolean = {
-    JContext.isOnVertxThread( )
+    JContext.isOnVertxThread()
   }
 
 }

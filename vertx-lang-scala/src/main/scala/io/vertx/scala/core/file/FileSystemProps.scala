@@ -22,26 +22,26 @@ package io.vertx.scala.core.file
   */
 class FileSystemProps(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JFileSystemProps]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def totalSpace():Long = {
-    asJava.totalSpace( )
+    asJava.asInstanceOf[JFileSystemProps].totalSpace()
   }
 
   def unallocatedSpace():Long = {
-    asJava.unallocatedSpace( )
+    asJava.asInstanceOf[JFileSystemProps].unallocatedSpace()
   }
 
   def usableSpace():Long = {
-    asJava.usableSpace( )
+    asJava.asInstanceOf[JFileSystemProps].usableSpace()
   }
 
 }
 
 object FileSystemProps{
-//in object!
-//static methods
+  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)//static methods
 }

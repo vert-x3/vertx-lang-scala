@@ -22,22 +22,22 @@ package io.vertx.scala.core.dns
   */
 class MxRecord(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JMxRecord]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def priority():Int = {
-    asJava.priority( )
+    asJava.asInstanceOf[JMxRecord].priority()
   }
 
   def name():String = {
-    asJava.name( )
+    asJava.asInstanceOf[JMxRecord].name()
   }
 
 }
 
 object MxRecord{
-//in object!
-//static methods
+  def apply(asJava: JMxRecord) = new MxRecord(asJava)//static methods
 }

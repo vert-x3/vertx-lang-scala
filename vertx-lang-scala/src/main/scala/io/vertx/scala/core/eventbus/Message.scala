@@ -16,11 +16,12 @@
 
 package io.vertx.scala.core.eventbus
 
-import io.vertx.scala.core.eventbus.DeliveryOptions
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-import io.vertx.scala.core.MultiMap
-import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * Represents a message that is received from the event bus in a handler.
@@ -34,58 +35,61 @@ import io.vertx.core.eventbus.{Message => JMessage}
   */
 class Message[T](private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JMessage]
+  def asJava = _asJava
+  private var cached_0:T = _
+  
 //methods returning a future
-  def reply(message: AnyRef,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):Unit = {
-    asJava.reply( )
+  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,replyHandler)
   }
 
-  def reply(message: AnyRef,options: DeliveryOptions,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):Unit = {
-    asJava.reply( )
+  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],replyHandler)
   }
 
 //cached methods
   def body():T = {
-    asJava.body( )
+    if(cached_0 == null)
+      cached_0 = asJava.asInstanceOf[JMessage].body()
+    return cached_0
   }
 
 //fluent methods
 //basic methods
   def address():String = {
-    asJava.address( )
+    asJava.asInstanceOf[JMessage].address()
   }
 
   def headers():MultiMap = {
-    asJava.headers( )
+    MultiMap(asJava.asInstanceOf[JMessage].headers())
   }
 
   def replyAddress():String = {
-    asJava.replyAddress( )
+    asJava.asInstanceOf[JMessage].replyAddress()
   }
 
   def reply(message: AnyRef):Unit = {
-    asJava.reply( )
+    asJava.asInstanceOf[JMessage].reply(message)
   }
 
-  def reply(message: AnyRef,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):Unit = {
-    asJava.reply( )
+  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,replyHandler)
   }
 
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
-    asJava.reply( )
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions])
   }
 
-  def reply(message: AnyRef,options: DeliveryOptions,replyHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[Message[R]]]):Unit = {
-    asJava.reply( )
+  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],replyHandler)
   }
 
   def fail(failureCode: Int,message: String):Unit = {
-    asJava.fail( )
+    asJava.asInstanceOf[JMessage].fail(failureCode,message)
   }
 
 }
 
 object Message{
-//in object!
-//static methods
+  def apply(asJava: JMessage) = new Message(asJava)//static methods
 }

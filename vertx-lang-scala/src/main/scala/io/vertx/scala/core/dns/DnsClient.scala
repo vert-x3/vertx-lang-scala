@@ -17,10 +17,11 @@
 package io.vertx.scala.core.dns
 
 import io.vertx.core.dns.{DnsClient => JDnsClient}
-import io.vertx.scala.core.dns.MxRecord
-import io.vertx.core.dns.{MxRecord => JMxRecord}
-import io.vertx.scala.core.dns.SrvRecord
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}
+import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
+import io.vertx.core.dns.{MxRecord => JMxRecord}
 
 /**
   * Provides a way to asynchronously lookup information from DNS servers.
@@ -29,67 +30,68 @@ import io.vertx.core.dns.{SrvRecord => JSrvRecord}
   */
 class DnsClient(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JDnsClient]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
-  def lookup(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[String]]):DnsClient = {
-    asJava.lookup( )
+  def lookup(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].lookup(name,handler))
     this
   }
 
-  def lookup4(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[String]]):DnsClient = {
-    asJava.lookup4( )
+  def lookup4(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].lookup4(name,handler))
     this
   }
 
-  def lookup6(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[String]]):DnsClient = {
-    asJava.lookup6( )
+  def lookup6(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].lookup6(name,handler))
     this
   }
 
-  def resolveA(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.resolveA( )
+  def resolveA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveA(name,handler))
     this
   }
 
-  def resolveAAAA(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.resolveAAAA( )
+  def resolveAAAA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveAAAA(name,handler))
     this
   }
 
-  def resolveCNAME(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.resolveCNAME( )
+  def resolveCNAME(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveCNAME(name,handler))
     this
   }
 
-  def resolveMX(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]):DnsClient = {
-    asJava.resolveMX( )
+  def resolveMX(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveMX(name,handler))
     this
   }
 
-  def resolveTXT(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.resolveTXT( )
+  def resolveTXT(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveTXT(name,handler))
     this
   }
 
-  def resolvePTR(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[String]]):DnsClient = {
-    asJava.resolvePTR( )
+  def resolvePTR(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolvePTR(name,handler))
     this
   }
 
-  def resolveNS(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.resolveNS( )
+  def resolveNS(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveNS(name,handler))
     this
   }
 
-  def resolveSRV(name: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]):DnsClient = {
-    asJava.resolveSRV( )
+  def resolveSRV(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].resolveSRV(name,handler))
     this
   }
 
-  def reverseLookup(ipaddress: String,handler: io.vertx.core.Handler[io.vertx.core.AsyncResult[String]]):DnsClient = {
-    asJava.reverseLookup( )
+  def reverseLookup(ipaddress: String,handler: Handler[AsyncResult[String]]):DnsClient = {
+    DnsClient(asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress,handler))
     this
   }
 
@@ -97,6 +99,5 @@ def asJava = _asJava.asInstanceOf[JDnsClient]
 }
 
 object DnsClient{
-//in object!
-//static methods
+  def apply(asJava: JDnsClient) = new DnsClient(asJava)//static methods
 }

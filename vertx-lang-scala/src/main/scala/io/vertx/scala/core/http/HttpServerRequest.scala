@@ -16,29 +16,25 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.scala.core.http.ServerWebSocket
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.scala.core.http.HttpServerFileUpload
+import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-import io.vertx.scala.core.MultiMap
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.http.HttpVersion
+import io.vertx.scala.core.net.NetSocket
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.http.HttpFrame
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.core.http.HttpMethod
-import io.vertx.scala.core.http.HttpServerResponse
-import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.http.HttpConnection
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.scala.core.net.SocketAddress
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
-import io.vertx.scala.core.net.NetSocket
-import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.Handler
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * Represents a server-side HTTP request.
@@ -54,155 +50,178 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
 class HttpServerRequest(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JHttpServerRequest]
+  private var cached_0:HttpServerResponse = _
+    private var cached_1:MultiMap = _
+    private var cached_2:MultiMap = _
+    private var cached_3:SocketAddress = _
+    private var cached_4:SocketAddress = _
+    private var cached_5:NetSocket = _
+    private var cached_6:MultiMap = _
+    private var cached_7:HttpConnection = _
+  
 //methods returning a future
 //cached methods
   def response():HttpServerResponse = {
-    asJava.response( )
+    if(cached_0 == null)
+      cached_0 = HttpServerResponse(asJava.asInstanceOf[JHttpServerRequest].response())
+    return cached_0
   }
 
   def headers():MultiMap = {
-    asJava.headers( )
+    if(cached_1 == null)
+      cached_1 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].headers())
+    return cached_1
   }
 
   def params():MultiMap = {
-    asJava.params( )
+    if(cached_2 == null)
+      cached_2 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].params())
+    return cached_2
   }
 
   def remoteAddress():SocketAddress = {
-    asJava.remoteAddress( )
+    if(cached_3 == null)
+      cached_3 = SocketAddress(asJava.asInstanceOf[JHttpServerRequest].remoteAddress())
+    return cached_3
   }
 
   def localAddress():SocketAddress = {
-    asJava.localAddress( )
+    if(cached_4 == null)
+      cached_4 = SocketAddress(asJava.asInstanceOf[JHttpServerRequest].localAddress())
+    return cached_4
   }
 
   def netSocket():NetSocket = {
-    asJava.netSocket( )
+    if(cached_5 == null)
+      cached_5 = NetSocket(asJava.asInstanceOf[JHttpServerRequest].netSocket())
+    return cached_5
   }
 
   def formAttributes():MultiMap = {
-    asJava.formAttributes( )
+    if(cached_6 == null)
+      cached_6 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].formAttributes())
+    return cached_6
   }
 
   def connection():HttpConnection = {
-    asJava.connection( )
+    if(cached_7 == null)
+      cached_7 = HttpConnection(asJava.asInstanceOf[JHttpServerRequest].connection())
+    return cached_7
   }
 
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):HttpServerRequest = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[Buffer]):HttpServerRequest = {
-    asJava.handler( )
+  override def handler(handler: Handler[Buffer]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].handler(handler))
     this
   }
 
   override def pause():HttpServerRequest = {
-    asJava.pause( )
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].pause())
     this
   }
 
   override def resume():HttpServerRequest = {
-    asJava.resume( )
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):HttpServerRequest = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].endHandler(endHandler))
     this
   }
 
-  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]):HttpServerRequest = {
-    asJava.bodyHandler( )
+  def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].bodyHandler(bodyHandler))
     this
   }
 
   def setExpectMultipart(expect: Boolean):HttpServerRequest = {
-    asJava.setExpectMultipart( )
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect))
     this
   }
 
-  def uploadHandler(uploadHandler: io.vertx.core.Handler[HttpServerFileUpload]):HttpServerRequest = {
-    asJava.uploadHandler( )
+  def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].uploadHandler(uploadHandler))
     this
   }
 
-  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]):HttpServerRequest = {
-    asJava.customFrameHandler( )
+  def customFrameHandler(handler: Handler[HttpFrame]):HttpServerRequest = {
+    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(handler))
     this
   }
 
 //basic methods
   def version():io.vertx.core.http.HttpVersion = {
-    asJava.version( )
+    asJava.asInstanceOf[JHttpServerRequest].version()
   }
 
   def method():io.vertx.core.http.HttpMethod = {
-    asJava.method( )
+    asJava.asInstanceOf[JHttpServerRequest].method()
   }
 
   def rawMethod():String = {
-    asJava.rawMethod( )
+    asJava.asInstanceOf[JHttpServerRequest].rawMethod()
   }
 
   def isSSL():Boolean = {
-    asJava.isSSL( )
+    asJava.asInstanceOf[JHttpServerRequest].isSSL()
   }
 
   def scheme():String = {
-    asJava.scheme( )
+    asJava.asInstanceOf[JHttpServerRequest].scheme()
   }
 
   def uri():String = {
-    asJava.uri( )
+    asJava.asInstanceOf[JHttpServerRequest].uri()
   }
 
   def path():String = {
-    asJava.path( )
+    asJava.asInstanceOf[JHttpServerRequest].path()
   }
 
   def query():String = {
-    asJava.query( )
+    asJava.asInstanceOf[JHttpServerRequest].query()
   }
 
   def host():String = {
-    asJava.host( )
+    asJava.asInstanceOf[JHttpServerRequest].host()
   }
 
   def getHeader(headerName: String):String = {
-    asJava.getHeader( )
+    asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName)
   }
 
   def getParam(paramName: String):String = {
-    asJava.getParam( )
+    asJava.asInstanceOf[JHttpServerRequest].getParam(paramName)
   }
 
   def absoluteURI():String = {
-    asJava.absoluteURI( )
+    asJava.asInstanceOf[JHttpServerRequest].absoluteURI()
   }
 
   def isExpectMultipart():Boolean = {
-    asJava.isExpectMultipart( )
+    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart()
   }
 
   def getFormAttribute(attributeName: String):String = {
-    asJava.getFormAttribute( )
+    asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName)
   }
 
   def upgrade():ServerWebSocket = {
-    asJava.upgrade( )
+    ServerWebSocket(asJava.asInstanceOf[JHttpServerRequest].upgrade())
   }
 
   def isEnded():Boolean = {
-    asJava.isEnded( )
+    asJava.asInstanceOf[JHttpServerRequest].isEnded()
   }
 
 }
 
 object HttpServerRequest{
-//in object!
-//static methods
+  def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)//static methods
 }

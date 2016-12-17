@@ -23,46 +23,46 @@ package io.vertx.scala.core.file
   */
 class FileProps(private val _asJava: Object) {
 
-def asJava = _asJava.asInstanceOf[JFileProps]
+  def asJava = _asJava
+
 //methods returning a future
 //cached methods
 //fluent methods
 //basic methods
   def creationTime():Long = {
-    asJava.creationTime( )
+    asJava.asInstanceOf[JFileProps].creationTime()
   }
 
   def lastAccessTime():Long = {
-    asJava.lastAccessTime( )
+    asJava.asInstanceOf[JFileProps].lastAccessTime()
   }
 
   def lastModifiedTime():Long = {
-    asJava.lastModifiedTime( )
+    asJava.asInstanceOf[JFileProps].lastModifiedTime()
   }
 
   def isDirectory():Boolean = {
-    asJava.isDirectory( )
+    asJava.asInstanceOf[JFileProps].isDirectory()
   }
 
   def isOther():Boolean = {
-    asJava.isOther( )
+    asJava.asInstanceOf[JFileProps].isOther()
   }
 
   def isRegularFile():Boolean = {
-    asJava.isRegularFile( )
+    asJava.asInstanceOf[JFileProps].isRegularFile()
   }
 
   def isSymbolicLink():Boolean = {
-    asJava.isSymbolicLink( )
+    asJava.asInstanceOf[JFileProps].isSymbolicLink()
   }
 
   def size():Long = {
-    asJava.size( )
+    asJava.asInstanceOf[JFileProps].size()
   }
 
 }
 
 object FileProps{
-//in object!
-//static methods
+  def apply(asJava: JFileProps) = new FileProps(asJava)//static methods
 }

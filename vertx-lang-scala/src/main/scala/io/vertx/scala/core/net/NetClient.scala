@@ -16,11 +16,12 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.core.net.{NetClient => JNetClient}
-import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.net.{NetClient => JNetClient}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * A TCP client.
@@ -33,27 +34,26 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
 class NetClient(private val _asJava: Object) 
     extends Measured(_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JNetClient]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  def connect(port: Int,host: String,connectHandler: io.vertx.core.Handler[io.vertx.core.AsyncResult[NetSocket]]):NetClient = {
-    asJava.connect( )
+  def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
+    NetClient(asJava.asInstanceOf[JNetClient].connect(port,host,connectHandler))
     this
   }
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.isMetricsEnabled( )
+    asJava.asInstanceOf[JNetClient].isMetricsEnabled()
   }
 
   def close():Unit = {
-    asJava.close( )
+    asJava.asInstanceOf[JNetClient].close()
   }
 
 }
 
 object NetClient{
-//in object!
-//static methods
+  def apply(asJava: JNetClient) = new NetClient(asJava)//static methods
 }

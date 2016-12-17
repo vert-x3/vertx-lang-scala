@@ -16,11 +16,11 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.scala.core.http.ServerWebSocket
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
+import io.vertx.core.Handler
 
 /**
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
@@ -29,32 +29,32 @@ import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 class ServerWebSocketStream(private val _asJava: Object) 
     extends ReadStream[ServerWebSocket](_asJava) {
 
-  override def asJava = _asJava.asInstanceOf[JServerWebSocketStream]
+
 //methods returning a future
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: io.vertx.core.Handler[Throwable]):ServerWebSocketStream = {
-    asJava.exceptionHandler( )
+  override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocketStream = {
+    ServerWebSocketStream(asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler(handler))
     this
   }
 
-  override def handler(handler: io.vertx.core.Handler[ServerWebSocket]):ServerWebSocketStream = {
-    asJava.handler( )
+  override def handler(handler: Handler[ServerWebSocket]):ServerWebSocketStream = {
+    ServerWebSocketStream(asJava.asInstanceOf[JServerWebSocketStream].handler(handler))
     this
   }
 
   override def pause():ServerWebSocketStream = {
-    asJava.pause( )
+    ServerWebSocketStream(asJava.asInstanceOf[JServerWebSocketStream].pause())
     this
   }
 
   override def resume():ServerWebSocketStream = {
-    asJava.resume( )
+    ServerWebSocketStream(asJava.asInstanceOf[JServerWebSocketStream].resume())
     this
   }
 
-  override def endHandler(endHandler: io.vertx.core.Handler[Unit]):ServerWebSocketStream = {
-    asJava.endHandler( )
+  override def endHandler(endHandler: Handler[Unit]):ServerWebSocketStream = {
+    ServerWebSocketStream(asJava.asInstanceOf[JServerWebSocketStream].endHandler(endHandler))
     this
   }
 
@@ -62,6 +62,5 @@ class ServerWebSocketStream(private val _asJava: Object)
 }
 
 object ServerWebSocketStream{
-//in object!
-//static methods
+  def apply(asJava: JServerWebSocketStream) = new ServerWebSocketStream(asJava)//static methods
 }
