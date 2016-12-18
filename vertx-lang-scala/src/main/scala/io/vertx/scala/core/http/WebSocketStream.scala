@@ -34,8 +34,9 @@ import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 class WebSocketStream(private val _asJava: Object) 
     extends ReadStream[WebSocket](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketStream = {

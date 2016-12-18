@@ -29,8 +29,9 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 class HttpServerRequestStream(private val _asJava: Object) 
     extends ReadStream[HttpServerRequest](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {

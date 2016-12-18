@@ -63,10 +63,11 @@ class HttpClientRequest(private val _asJava: Object)
     extends WriteStream[Buffer](_asJava) 
     with ReadStream[HttpClientResponse](_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:MultiMap = _
-    private var cached_1:HttpConnection = _
-  
-//methods returning a future
+  private var cached_1:HttpConnection = _
+
 //cached methods
   def headers():MultiMap = {
     if(cached_0 == null) {

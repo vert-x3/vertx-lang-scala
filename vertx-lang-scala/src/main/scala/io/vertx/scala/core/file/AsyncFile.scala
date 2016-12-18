@@ -39,11 +39,8 @@ class AsyncFile(private val _asJava: Object)
     extends ReadStream[Buffer](_asJava) 
     with WriteStream[Buffer](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
-  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncFile].close(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
 
 //cached methods
 //fluent methods

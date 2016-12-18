@@ -40,13 +40,10 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 class HttpServer(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:HttpServerRequestStream = _
-    private var cached_1:ServerWebSocketStream = _
-  
-//methods returning a future
-  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JHttpServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
+  private var cached_1:ServerWebSocketStream = _
 
 //cached methods
   def requestStream():HttpServerRequestStream = {

@@ -16,7 +16,18 @@
     } else if (type.kind == CLASS_DATA_OBJECT) {
       return type.simpleName + '(' + name + ')';
     } else if (type.kind == CLASS_API) {
-      return type.simpleName + '(' + name + ')';
+      var args = '';
+      if(type.isParameterized()) {
+        for(arg : type.args) {
+          if(args != '') {
+            args += ',';
+          }
+          args += toScalaType(arg);
+        }
+        if (args != '')
+          args = '[' + args + ']';
+      }
+      return helper.getNonGenericType(type.simpleName) + args + '(' + name + ')';
     } else if (type.kind == CLASS_HANDLER) {
       return 'x => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0]) + ')';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
@@ -51,7 +62,7 @@
     else if (type.kind == CLASS_JSON_OBJECT || type.kind == CLASS_JSON_ARRAY || type.kind == CLASS_ENUM) {
       return name;
     } else if (type.kind == CLASS_DATA_OBJECT) {
-      return name + '.asJava' + fromObjectToInstanceOf(type);
+      return name + '.asJava';
     } else if (type.kind == CLASS_API) {
       return name + '.asJava' + fromObjectToInstanceOf(type);
     } else if (type.kind == CLASS_HANDLER) {
@@ -272,4 +283,14 @@
     }
     return false;
   }
+
+  def isParentConcrete(superTypes) {
+    for(stype : superTypes) {
+      if(stype.raw.concrete) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

@@ -42,12 +42,13 @@ import io.vertx.core.Handler
 class HttpClientResponse(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:MultiMap = _
-    private var cached_1:MultiMap = _
-    private var cached_2:scala.collection.mutable.Buffer[String] = _
-    private var cached_3:NetSocket = _
-  
-//methods returning a future
+  private var cached_1:MultiMap = _
+  private var cached_2:scala.collection.mutable.Buffer[String] = _
+  private var cached_3:NetSocket = _
+
 //cached methods
   def headers():MultiMap = {
     if(cached_0 == null) {

@@ -2,6 +2,11 @@
   "name" : "Scala",
   "generators" : [
     {
+      "kind": "dataObject",
+      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
+      "templateFileName": "vertx-scala/template2/dataobject.templ"
+    },
+    {
       "kind" : "class",
       "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
       "templateFileName" : "vertx-scala/template2/class.templ"

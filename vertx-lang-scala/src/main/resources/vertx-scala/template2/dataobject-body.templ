@@ -1,0 +1,108 @@
+  def asJava = _asJava\n
+@foreach{property:properties}
+@if{property.doc != null}
+\n
+  /**\n
+@{renderDoc("    *", property.doc, renderDocLink)}
+    */\n
+@end{}
+@if{property.adder}
+@if{property.isMap}
+  def @{property.adderMethod}(key: String, value: @{toScalaType(property.type)}) = {\n
+    asJava.@{property.adderMethod}(key, value)\n
+    this\n
+  }\n
+@else{}
+  def @{property.adderMethod}(value: @{toScalaType(property.type)}) = {\n
+@if{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.adderMethod}(value.asInstanceOf)\n
+@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
+ property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
+ property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
+    asJava.@{property.adderMethod}(value)\n
+@else{}
+    asJava.@{property.adderMethod}(value.asInstanceOf)\n
+@end{}
+    this\n
+  }\n
+@end{}
+@end{}
+@if{property.setter}
+@if{property.isList}
+  def @{property.setterMethod}(value: scala.collection.mutable.Buffer[@{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
+@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
+    asJava.@{property.setterMethod}(value.map(_@{generateAsJavaForType(property.type)}).asJava)\n
+@else{}
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
+@end{}
+    this\n
+  }\n
+@else{property.isSet}
+  def @{property.setterMethod}(value: Set[@{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.map(@{toScalaType(property.type)}.box).asJava)\n
+@else{property.type.kind == CLASS_DATA_OBJECT || property.type.kind == CLASS_API}
+    asJava.@{property.setterMethod}(value.map(_@{generateAsJavaForType(property.type)}).asJava)\n
+@else{}
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
+@end{}
+    this\n
+  }\n
+@else{property.isMap}
+  def @{property.setterMethod}(value: Map[String, @{toScalaType(property.type)}]) = {\n
+@if{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE}
+    asJava.@{property.setterMethod}(value.mapValues(@{toScalaType(property.type)}.box).asJava)\n
+@else{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.mapValues(_@{generateAsJavaForType(property.type)}).asJava)\n
+@else{}
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
+@end{}
+    this\n
+  }\n
+@else{}
+  def @{property.setterMethod}(value: @{toScalaType(property.type)}) = {\n
+@if{property.type.kind == CLASS_DATA_OBJECT}
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
+@else{property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE ||
+  property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT ||
+  property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM}
+    asJava.@{property.setterMethod}(value)\n
+@else{}
+    asJava.@{property.setterMethod}(value.asInstanceOf)\n
+@end{}
+    this\n
+  }\n
+@end{}
+@end{}
+@comment{Some necessary filtering as PropertyInfo has no information about static methods}
+@if{(property.setter || property.adder) && property.getterMethod != null}
+  def @{property.getterMethod} = {\n
+    asJava.@{property.getterMethod}()\n
+  }\n
+@end{}
+@end{}
+}\n
+\n
+
+object @{type.raw.simpleName} {\n
+  \n
+  def apply() = {\n
+    new @{className}(new J@{className}(emptyObj()))\n
+  }\n
+  \n
+  def apply(t: J@{className}) = {\n
+    if(t != null)\n
+      new @{className}(t)\n
+    else\n
+      null\n
+  }\n
+  \n
+  def fromJson(json: JsonObject):@{className} = {\n
+    if(json != null)\n
+      new @{className}(new J@{className}(json))\n
+    else\n
+      null\n
+  }\n
+}\n

@@ -35,8 +35,9 @@ import io.vertx.core.Handler
 class NetClient(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {

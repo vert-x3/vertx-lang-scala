@@ -17,8 +17,8 @@
 package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetServer => JNetServer}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
 import io.vertx.scala.core.metrics.Measured
@@ -31,11 +31,8 @@ import io.vertx.core.Handler
 class NetServer(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
-  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JNetServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
 
 //cached methods
 //fluent methods

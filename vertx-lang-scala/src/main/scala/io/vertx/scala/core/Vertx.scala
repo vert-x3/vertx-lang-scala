@@ -46,8 +46,8 @@ import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
 import io.vertx.scala.core.metrics.Measured
 import scala.collection.JavaConverters._
 import io.vertx.core.shareddata.{SharedData => JSharedData}
-import io.vertx.scala.core.shareddata.SharedData
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.scala.core.shareddata.SharedData
 import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.{Context => JContext}
@@ -60,7 +60,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  * 
+  *
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -73,45 +73,22 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  * 
+  *
   * Most functionality in Vert.x core is fairly low level.
-  * 
+  *
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  * 
+  *
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object) 
+class Vertx(private val _asJava: Object)
     extends Measured(_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:FileSystem = _
-    private var cached_1:EventBus = _
-    private var cached_2:SharedData = _
-  
-//methods returning a future
-  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JVertx].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
-
-  def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
-  }
-
-  def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava.asInstanceOf[JDeploymentOptions],x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
-  }
-
-  def undeploy(deploymentID: String,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
-
-  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
-  }
-
-  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
-  }
+  private var cached_1:EventBus = _
+  private var cached_2:SharedData = _
 
 //cached methods
   def fileSystem():FileSystem = {
@@ -154,7 +131,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def createNetServer(options: NetServerOptions):NetServer = {
-    NetServer(asJava.asInstanceOf[JVertx].createNetServer(options.asJava.asInstanceOf[JNetServerOptions]))
+    NetServer(asJava.asInstanceOf[JVertx].createNetServer(options.asJava))
   }
 
   def createNetServer():NetServer = {
@@ -162,7 +139,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def createNetClient(options: NetClientOptions):NetClient = {
-    NetClient(asJava.asInstanceOf[JVertx].createNetClient(options.asJava.asInstanceOf[JNetClientOptions]))
+    NetClient(asJava.asInstanceOf[JVertx].createNetClient(options.asJava))
   }
 
   def createNetClient():NetClient = {
@@ -170,7 +147,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def createHttpServer(options: HttpServerOptions):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JVertx].createHttpServer(options.asJava.asInstanceOf[JHttpServerOptions]))
+    HttpServer(asJava.asInstanceOf[JVertx].createHttpServer(options.asJava))
   }
 
   def createHttpServer():HttpServer = {
@@ -178,7 +155,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def createHttpClient(options: HttpClientOptions):HttpClient = {
-    HttpClient(asJava.asInstanceOf[JVertx].createHttpClient(options.asJava.asInstanceOf[JHttpClientOptions]))
+    HttpClient(asJava.asInstanceOf[JVertx].createHttpClient(options.asJava))
   }
 
   def createHttpClient():HttpClient = {
@@ -186,7 +163,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def createDatagramSocket(options: DatagramSocketOptions):DatagramSocket = {
-    DatagramSocket(asJava.asInstanceOf[JVertx].createDatagramSocket(options.asJava.asInstanceOf[JDatagramSocketOptions]))
+    DatagramSocket(asJava.asInstanceOf[JVertx].createDatagramSocket(options.asJava))
   }
 
   def createDatagramSocket():DatagramSocket = {
@@ -238,11 +215,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava.asInstanceOf[JDeploymentOptions])
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava.asInstanceOf[JDeploymentOptions],x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
   }
 
   def undeploy(deploymentID: String):Unit = {
@@ -262,11 +239,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def createSharedWorkerExecutor(name: String):WorkerExecutor = {
@@ -291,11 +268,11 @@ object Vertx{
   }
 
   def vertx(options: VertxOptions):Vertx = {
-    Vertx(JVertx.vertx(options.asJava.asInstanceOf[JVertxOptions]))
+    Vertx(JVertx.vertx(options.asJava))
   }
 
   def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
-    JVertx.clusteredVertx(options.asJava.asInstanceOf[JVertxOptions],x => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a))))
+    JVertx.clusteredVertx(options.asJava,x => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a))))
   }
 
   def currentContext():Context = {

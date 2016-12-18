@@ -28,9 +28,9 @@ import io.vertx.core.Handler
 class Future[T](private val _asJava: Object) {
 
   def asJava = _asJava
+
   private var cached_0:Handler[AsyncResult[T]] = _
-  
-//methods returning a future
+
 //cached methods
   def completer():Handler[AsyncResult[T]] = {
     if(cached_0 == null) {
@@ -86,26 +86,26 @@ class Future[T](private val _asJava: Object) {
 }
 
 object Future{
-  def apply(asJava: JFuture) = new Future(asJava)
+  def apply[T](asJava: JFuture[T]) = new Future[T](asJava)
 //static methods
   def future[T]():Future[T] = {
-    Future<T>(JFuture.future())
+    Future[T](JFuture.future[T]())
   }
 
   def succeededFuture[T]():Future[T] = {
-    Future<T>(JFuture.succeededFuture())
+    Future[T](JFuture.succeededFuture[T]())
   }
 
   def succeededFuture[T](result: T):Future[T] = {
-    Future<T>(JFuture.succeededFuture(result))
+    Future[T](JFuture.succeededFuture[T](result))
   }
 
   def failedFuture[T](t: Throwable):Future[T] = {
-    Future<T>(JFuture.failedFuture(t))
+    Future[T](JFuture.failedFuture[T](t))
   }
 
   def failedFuture[T](failureMessage: String):Future[T] = {
-    Future<T>(JFuture.failedFuture(failureMessage))
+    Future[T](JFuture.failedFuture[T](failureMessage))
   }
 
 }

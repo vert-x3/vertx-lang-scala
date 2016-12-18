@@ -1,31 +1,16 @@
-@if{superTypes.isEmpty}  def asJava = _asJava\n@end{}
 @code{
   var futureMethods = findFutureMethods(instanceMethods);
   var cacheReturnMethods = findCacheReturnMethods(instanceMethods);
   var fluentMethods = findFluentMethods(instanceMethods);
   var basicMethods = findBasicMethods(instanceMethods);
 }
+@if{superTypes.isEmpty || !isParentConcrete(superTypes)}  def asJava = _asJava\n@end{}\n
 @code{var cached_counter = 0;}
 @foreach{method : cacheReturnMethods}
   private var cached_@{cached_counter}:@{toScalaType(method.returnType)} = _\n
-  @code{cached_counter++}
+@code{cached_counter++}
 @end{}
 \n
-//methods returning a future\n
-@foreach{method : futureMethods}
-  @if{isMethodNeedsOverride(type.name, method)}override @end{}
-	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
-	@end{}(
-	@foreach{param:method.params}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):@{toScalaType(method.returnType)} = {\n
-    @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method)}\n
-  }\n
-	\n
-@end{}
-
 //cached methods\n
 @code{var cached_method_counter = 0}
 @foreach{method : cacheReturnMethods}
@@ -80,7 +65,7 @@
 }\n
 \n
 object @{className}{\n
-  def apply(asJava: J@{className}) = new @{className}(asJava)
+  def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}) = new @{className}@{assembleTypeParams(typeParams)}(asJava)
 \n
 //static methods\n
 @foreach{method : staticMethods}

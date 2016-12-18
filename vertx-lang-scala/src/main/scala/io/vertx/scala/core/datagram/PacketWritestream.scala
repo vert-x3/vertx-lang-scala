@@ -30,8 +30,9 @@ import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
 class PacketWritestream(private val _asJava: Object) 
     extends WriteStream[Buffer](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
