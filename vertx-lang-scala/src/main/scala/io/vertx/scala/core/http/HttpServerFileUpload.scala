@@ -29,8 +29,9 @@ import io.vertx.core.Handler
 class HttpServerFileUpload(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {

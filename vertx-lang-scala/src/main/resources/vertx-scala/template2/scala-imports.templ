@@ -36,6 +36,7 @@
 
   def generateImports(type, imps, methods) {
     var ret = new java.util.HashSet();
+    ret.add(helper.getPackageName(type.name) + '.{' + helper.getNonGenericType(type.simpleName) + ' => J' + helper.getNonGenericType(type.simpleName) + '}');
     for(imported : imps) {
       /*Don't import implementations*/
       if(!imported.name.contains(".impl.")) {

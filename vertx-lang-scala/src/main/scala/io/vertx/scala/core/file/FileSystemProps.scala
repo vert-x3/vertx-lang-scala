@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 
 /**
   * Represents properties of the file system.
@@ -24,7 +25,7 @@ class FileSystemProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

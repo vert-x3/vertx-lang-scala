@@ -31,7 +31,7 @@ class CommandLine(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods
@@ -44,15 +44,15 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def getOptionValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getOptionValue(name)
+    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name)
   }
 
   def getArgumentValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue(name)
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name)
   }
 
   def getArgumentValue[T](index: Int):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue(index)
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index)
   }
 
   def isFlagEnabled(name: String):Boolean = {
@@ -60,35 +60,35 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def isOptionAssigned(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava.asInstanceOf[JOption])
+    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava)
   }
 
   def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava.asInstanceOf[JOption]).map(x => x)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).map(x => x)
   }
 
   def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava.asInstanceOf[JArgument]).map(x => x)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).map(x => x)
   }
 
   def getRawValueForOption(option: Option):String = {
-    asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava.asInstanceOf[JOption])
+    asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava)
   }
 
   def acceptMoreValues(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava.asInstanceOf[JOption])
+    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava)
   }
 
   def getRawValueForArgument(arg: Argument):String = {
-    asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava.asInstanceOf[JArgument])
+    asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava)
   }
 
   def isArgumentAssigned(arg: Argument):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava.asInstanceOf[JArgument])
+    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava)
   }
 
   def isSeenInCommandLine(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava.asInstanceOf[JOption])
+    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava)
   }
 
   def isValid():Boolean = {

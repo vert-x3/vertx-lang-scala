@@ -79,7 +79,17 @@
         paramString += ',';
       paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
     }
-    return target + '.' + escapeIfKeyword(method.name) + '(' + paramString + ')';
+    var typeParamString = '';
+    if(!method.typeParams.isEmpty){
+      for(typeParam : method.typeParams) {
+        if (typeParamString != '')
+          typeParamString += ',';
+        typeParamString += typeParam.name;
+      }
+      typeParamString = '[' + typeParamString + ']';
+    }
+
+    return target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')';
   }
 
   def invokeStaticMethod(target, type, method) {
@@ -89,7 +99,16 @@
         paramString += ',';
       paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
     }
-    return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + '(' + paramString + ')', method.returnType);
+    var typeParamString = '';
+    if(!method.typeParams.isEmpty){
+      for(typeParam : method.typeParams) {
+        if (typeParamString != '')
+          typeParamString += ',';
+        typeParamString += typeParam.name;
+      }
+      typeParamString = '[' + typeParamString + ']';
+    }
+    return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')', method.returnType);
   }
 
 }

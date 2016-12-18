@@ -18,8 +18,8 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.buffer.Buffer
@@ -43,10 +43,11 @@ class NetSocket(private val _asJava: Object)
     extends ReadStream[Buffer](_asJava) 
     with WriteStream[Buffer](_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:SocketAddress = _
-    private var cached_1:SocketAddress = _
-  
-//methods returning a future
+  private var cached_1:SocketAddress = _
+
 //cached methods
   def remoteAddress():SocketAddress = {
     if(cached_0 == null) {

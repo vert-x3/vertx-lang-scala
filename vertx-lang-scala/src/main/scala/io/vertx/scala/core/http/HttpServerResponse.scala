@@ -52,17 +52,10 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 class HttpServerResponse(private val _asJava: Object) 
     extends WriteStream[Buffer](_asJava) {
 
-  private var cached_0:MultiMap = _
-    private var cached_1:MultiMap = _
-  
-//methods returning a future
-  def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
-  }
+  def asJava = _asJava
 
-  def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
-  }
+  private var cached_0:MultiMap = _
+  private var cached_1:MultiMap = _
 
 //cached methods
   def headers():MultiMap = {
