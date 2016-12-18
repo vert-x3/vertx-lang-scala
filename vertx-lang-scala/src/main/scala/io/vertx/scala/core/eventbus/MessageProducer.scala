@@ -18,9 +18,9 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -32,11 +32,8 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 class MessageProducer[T](private val _asJava: Object) 
     extends WriteStream[T](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
-  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a)))))
-  }
 
 //cached methods
 //fluent methods
@@ -61,7 +58,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava.asInstanceOf[JDeliveryOptions])
+    asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava)
     this
   }
 
@@ -71,11 +68,11 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def send(message: T):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer].send(message))
   }
 
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a)))))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer].send[R](message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))))
   }
 
   def address():String = {
@@ -93,6 +90,6 @@ class MessageProducer[T](private val _asJava: Object)
 }
 
 object MessageProducer{
-  def apply(asJava: JMessageProducer) = new MessageProducer(asJava)
+  def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)
 //static methods
 }

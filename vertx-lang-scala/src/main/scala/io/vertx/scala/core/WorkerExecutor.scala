@@ -19,6 +19,7 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.{Future => JFuture}
+import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -32,15 +33,8 @@ import io.vertx.core.Handler
 class WorkerExecutor(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
-  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
-  }
-
-  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
-  }
 
 //cached methods
 //fluent methods
@@ -50,7 +44,7 @@ class WorkerExecutor(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 }

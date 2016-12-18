@@ -16,8 +16,8 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{Pump => JPump}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
@@ -44,7 +44,7 @@ class Pump(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def setWriteQueueMaxSize(maxSize: Int):Pump = {
@@ -73,11 +73,11 @@ object Pump{
   def apply(asJava: JPump) = new Pump(asJava)
 //static methods
   def pump[T](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
-    Pump(JPump.pump(rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
+    Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
   }
 
   def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
-    Pump(JPump.pump(rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize))
+    Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize))
   }
 
 }

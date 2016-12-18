@@ -17,8 +17,8 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.AsyncResult
@@ -37,16 +37,8 @@ import io.vertx.core.Handler
 class Message[T](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:T = _
-  
-//methods returning a future
-  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
-  }
 
-  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
-  }
+  private var cached_0:T = _
 
 //cached methods
   def body():T = {
@@ -80,15 +72,15 @@ class Message[T](private val _asJava: Object) {
   }
 
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply[R](message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a))))
   }
 
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions])
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava)
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply[R](message,options.asJava,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a))))
   }
 
   def fail(failureCode: Int,message: String):Unit = {
@@ -98,6 +90,6 @@ class Message[T](private val _asJava: Object) {
 }
 
 object Message{
-  def apply(asJava: JMessage) = new Message(asJava)
+  def apply[T](asJava: JMessage[T]) = new Message[T](asJava)
 //static methods
 }

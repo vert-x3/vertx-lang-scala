@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 
 /**
@@ -26,12 +27,12 @@ class SendContext[T](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods
   def message():Message[T] = {
-    Message<T>(asJava.asInstanceOf[JSendContext].message())
+    Message[T](asJava.asInstanceOf[JSendContext].message())
   }
 
   def next():Unit = {
@@ -45,6 +46,6 @@ class SendContext[T](private val _asJava: Object) {
 }
 
 object SendContext{
-  def apply(asJava: JSendContext) = new SendContext(asJava)
+  def apply[T](asJava: JSendContext[T]) = new SendContext[T](asJava)
 //static methods
 }

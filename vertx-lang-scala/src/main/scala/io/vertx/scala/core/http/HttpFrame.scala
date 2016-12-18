@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.scala.core.buffer.Buffer
 
 /**
@@ -25,11 +26,11 @@ import io.vertx.scala.core.buffer.Buffer
 class HttpFrame(private val _asJava: Object) {
 
   def asJava = _asJava
+
   private var cached_0:Int = _
-    private var cached_1:Int = _
-    private var cached_2:Buffer = _
-  
-//methods returning a future
+  private var cached_1:Int = _
+  private var cached_2:Buffer = _
+
 //cached methods
   def `type`():Int = {
     if(cached_0 == null) {

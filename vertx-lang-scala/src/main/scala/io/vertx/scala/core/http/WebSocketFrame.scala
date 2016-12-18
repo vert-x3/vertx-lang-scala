@@ -33,10 +33,10 @@ import io.vertx.scala.core.buffer.Buffer
 class WebSocketFrame(private val _asJava: Object) {
 
   def asJava = _asJava
+
   private var cached_0:String = _
-    private var cached_1:Buffer = _
-  
-//methods returning a future
+  private var cached_1:Buffer = _
+
 //cached methods
   def textData():String = {
     if(cached_0 == null) {

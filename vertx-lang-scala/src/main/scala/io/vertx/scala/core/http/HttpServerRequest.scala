@@ -50,16 +50,17 @@ import io.vertx.scala.core.net.SocketAddress
 class HttpServerRequest(private val _asJava: Object) 
     extends ReadStream[Buffer](_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:HttpServerResponse = _
-    private var cached_1:MultiMap = _
-    private var cached_2:MultiMap = _
-    private var cached_3:SocketAddress = _
-    private var cached_4:SocketAddress = _
-    private var cached_5:NetSocket = _
-    private var cached_6:MultiMap = _
-    private var cached_7:HttpConnection = _
-  
-//methods returning a future
+  private var cached_1:MultiMap = _
+  private var cached_2:MultiMap = _
+  private var cached_3:SocketAddress = _
+  private var cached_4:SocketAddress = _
+  private var cached_5:NetSocket = _
+  private var cached_6:MultiMap = _
+  private var cached_7:HttpConnection = _
+
 //cached methods
   def response():HttpServerResponse = {
     if(cached_0 == null) {

@@ -46,7 +46,7 @@ class FileSystem(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def copy(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
@@ -250,7 +250,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def open(path: String,options: OpenOptions,handler: Handler[AsyncResult[AsyncFile]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].open(path,options.asJava.asInstanceOf[JOpenOptions],x => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a))))
+    asJava.asInstanceOf[JFileSystem].open(path,options.asJava,x => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a))))
     this
   }
 
@@ -310,7 +310,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def openBlocking(path: String,options: OpenOptions):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JFileSystem].openBlocking(path,options.asJava.asInstanceOf[JOpenOptions]))
+    AsyncFile(asJava.asInstanceOf[JFileSystem].openBlocking(path,options.asJava))
   }
 
   def existsBlocking(path: String):Boolean = {

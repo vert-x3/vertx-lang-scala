@@ -41,7 +41,7 @@ class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def setName(name: String):CLI = {
@@ -65,32 +65,32 @@ class CLI(private val _asJava: Object) {
   }
 
   def addOption(option: Option):CLI = {
-    asJava.asInstanceOf[JCLI].addOption(option.asJava.asInstanceOf[JOption])
+    asJava.asInstanceOf[JCLI].addOption(option.asJava)
     this
   }
 
   def addOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava)
+    asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava).asJava)
     this
   }
 
   def setOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava)
+    asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava).asJava)
     this
   }
 
   def addArgument(arg: Argument):CLI = {
-    asJava.asInstanceOf[JCLI].addArgument(arg.asJava.asInstanceOf[JArgument])
+    asJava.asInstanceOf[JCLI].addArgument(arg.asJava)
     this
   }
 
   def addArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava)
+    asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava).asJava)
     this
   }
 
   def setArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava)
+    asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava).asJava)
     this
   }
 

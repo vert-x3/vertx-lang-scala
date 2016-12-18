@@ -57,7 +57,7 @@ class RecordParser(private val _asJava: Object)
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

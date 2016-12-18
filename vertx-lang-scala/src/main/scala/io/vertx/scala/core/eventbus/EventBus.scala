@@ -41,8 +41,9 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 class EventBus(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def send(address: String,message: AnyRef):EventBus = {
@@ -51,17 +52,17 @@ class EventBus(private val _asJava: Object)
   }
 
   def send[T](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address,message,x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message<T>(a))))
+    asJava.asInstanceOf[JEventBus].send[T](address,message,x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message[T](a))))
     this
   }
 
   def send(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions])
+    asJava.asInstanceOf[JEventBus].send(address,message,options.asJava)
     this
   }
 
   def send[T](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message<T>(a))))
+    asJava.asInstanceOf[JEventBus].send[T](address,message,options.asJava,x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message[T](a))))
     this
   }
 
@@ -71,7 +72,7 @@ class EventBus(private val _asJava: Object)
   }
 
   def publish(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.asInstanceOf[JEventBus].publish(address,message,options.asJava.asInstanceOf[JDeliveryOptions])
+    asJava.asInstanceOf[JEventBus].publish(address,message,options.asJava)
     this
   }
 
@@ -81,35 +82,35 @@ class EventBus(private val _asJava: Object)
   }
 
   def consumer[T](address: String):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[T](address))
   }
 
   def consumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[T](address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
   }
 
   def localConsumer[T](address: String):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[T](address))
   }
 
   def localConsumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[T](address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
   }
 
   def sender[T](address: String):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JEventBus].sender(address))
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[T](address))
   }
 
   def sender[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JEventBus].sender(address,options.asJava.asInstanceOf[JDeliveryOptions]))
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[T](address,options.asJava))
   }
 
   def publisher[T](address: String):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JEventBus].publisher(address))
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[T](address))
   }
 
   def publisher[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JEventBus].publisher(address,options.asJava.asInstanceOf[JDeliveryOptions]))
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[T](address,options.asJava))
   }
 
   def addInterceptor(interceptor: Handler[SendContext]):EventBus = {
