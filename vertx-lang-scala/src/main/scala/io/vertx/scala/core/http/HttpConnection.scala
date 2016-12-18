@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{GoAway => JGoAway}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
@@ -45,90 +46,94 @@ class HttpConnection(private val _asJava: Object) {
 //methods returning a future
 //cached methods
   def remoteAddress():SocketAddress = {
-    if(cached_0 == null)
-      cached_0 = SocketAddress(asJava.asInstanceOf[JHttpConnection].remoteAddress())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
+      cached_0 = SocketAddress(tmp)
+    }
     return cached_0
   }
 
   def localAddress():SocketAddress = {
-    if(cached_1 == null)
-      cached_1 = SocketAddress(asJava.asInstanceOf[JHttpConnection].localAddress())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
+      cached_1 = SocketAddress(tmp)
+    }
     return cached_1
   }
 
 //fluent methods
   def setWindowSize(windowSize: Int):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize))
+    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize)
     this
   }
 
   def goAway(errorCode: Long):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].goAway(errorCode))
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode)
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId))
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId)
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int,debugData: Buffer):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].goAwayHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(x.asJava.asInstanceOf[JGoAway]))
     this
   }
 
   def shutdownHandler(handler: Handler[Unit]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].shutdownHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].shutdownHandler(x => handler.handle(x))
     this
   }
 
   def shutdown():HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].shutdown())
+    asJava.asInstanceOf[JHttpConnection].shutdown()
     this
   }
 
   def shutdown(timeoutMs: Long):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs))
+    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs)
     this
   }
 
   def closeHandler(handler: Handler[Unit]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].closeHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].closeHandler(x => handler.handle(x))
     this
   }
 
   def updateSettings(settings: Http2Settings):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings]))
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings])
     this
   }
 
   def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings],completionHandler))
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings],x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def remoteSettingsHandler(handler: Handler[Http2Settings]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(x.asJava.asInstanceOf[JHttp2Settings]))
     this
   }
 
   def ping(data: Buffer,pongHandler: Handler[AsyncResult[Buffer]]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],pongHandler))
+    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],x => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
     this
   }
 
   def pingHandler(handler: Handler[Buffer]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].pingHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def exceptionHandler(handler: Handler[Throwable]):HttpConnection = {
-    HttpConnection(asJava.asInstanceOf[JHttpConnection].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpConnection].exceptionHandler(x => handler.handle(x))
     this
   }
 

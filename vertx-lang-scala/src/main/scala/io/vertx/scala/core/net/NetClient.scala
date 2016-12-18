@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.net.{NetClient => JNetClient}
@@ -39,7 +40,7 @@ class NetClient(private val _asJava: Object)
 //cached methods
 //fluent methods
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
-    NetClient(asJava.asInstanceOf[JNetClient].connect(port,host,connectHandler))
+    asJava.asInstanceOf[JNetClient].connect(port,host,x => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a))))
     this
   }
 

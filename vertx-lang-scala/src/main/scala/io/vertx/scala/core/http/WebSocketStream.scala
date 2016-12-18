@@ -39,27 +39,27 @@ class WebSocketStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketStream = {
-    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].exceptionHandler(handler))
+    asJava.asInstanceOf[JWebSocketStream].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[WebSocket]):WebSocketStream = {
-    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].handler(handler))
+    asJava.asInstanceOf[JWebSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JWebSocket]))
     this
   }
 
   override def pause():WebSocketStream = {
-    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].pause())
+    asJava.asInstanceOf[JWebSocketStream].pause()
     this
   }
 
   override def resume():WebSocketStream = {
-    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].resume())
+    asJava.asInstanceOf[JWebSocketStream].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):WebSocketStream = {
-    WebSocketStream(asJava.asInstanceOf[JWebSocketStream].endHandler(endHandler))
+    asJava.asInstanceOf[JWebSocketStream].endHandler(x => endHandler.handle(x))
     this
   }
 

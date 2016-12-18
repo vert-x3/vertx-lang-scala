@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import io.vertx.core.http.{HttpServer => JHttpServer}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
@@ -44,65 +45,69 @@ class HttpServer(private val _asJava: Object)
   
 //methods returning a future
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JHttpServer].close(completionHandler)
+    asJava.asInstanceOf[JHttpServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 //cached methods
   def requestStream():HttpServerRequestStream = {
-    if(cached_0 == null)
-      cached_0 = HttpServerRequestStream(asJava.asInstanceOf[JHttpServer].requestStream())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServer].requestStream()
+      cached_0 = HttpServerRequestStream(tmp)
+    }
     return cached_0
   }
 
   def websocketStream():ServerWebSocketStream = {
-    if(cached_1 == null)
-      cached_1 = ServerWebSocketStream(asJava.asInstanceOf[JHttpServer].websocketStream())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
+      cached_1 = ServerWebSocketStream(tmp)
+    }
     return cached_1
   }
 
 //fluent methods
   def requestHandler(handler: Handler[HttpServerRequest]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].requestHandler(handler))
+    asJava.asInstanceOf[JHttpServer].requestHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].connectionHandler(handler))
+    asJava.asInstanceOf[JHttpServer].connectionHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpConnection]))
     this
   }
 
   def websocketHandler(handler: Handler[ServerWebSocket]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].websocketHandler(handler))
+    asJava.asInstanceOf[JHttpServer].websocketHandler(x => handler.handle(x.asJava.asInstanceOf[JServerWebSocket]))
     this
   }
 
   def listen():HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen())
+    asJava.asInstanceOf[JHttpServer].listen()
     this
   }
 
   def listen(port: Int,host: String):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,host))
+    asJava.asInstanceOf[JHttpServer].listen(port,host)
     this
   }
 
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,host,listenHandler))
+    asJava.asInstanceOf[JHttpServer].listen(port,host,x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
     this
   }
 
   def listen(port: Int):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port))
+    asJava.asInstanceOf[JHttpServer].listen(port)
     this
   }
 
   def listen(port: Int,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen(port,listenHandler))
+    asJava.asInstanceOf[JHttpServer].listen(port,x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
     this
   }
 
   def listen(listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    HttpServer(asJava.asInstanceOf[JHttpServer].listen(listenHandler))
+    asJava.asInstanceOf[JHttpServer].listen(x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
     this
   }
 
@@ -116,7 +121,7 @@ class HttpServer(private val _asJava: Object)
   }
 
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JHttpServer].close(completionHandler)
+    asJava.asInstanceOf[JHttpServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def actualPort():Int = {

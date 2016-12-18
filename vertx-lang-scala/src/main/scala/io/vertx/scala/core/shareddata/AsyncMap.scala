@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 
@@ -29,94 +30,94 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
 //methods returning a future
   def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].get(k,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].get(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].put(k,v,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].put(k,v,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].remove(k,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].remove(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
   def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].replace(k,v,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
   def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].clear(resultHandler)
+    asJava.asInstanceOf[JAsyncMap].clear(x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].size(resultHandler)
+    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[Integer,Int](x, a => a)))
   }
 
 //cached methods
 //fluent methods
 //basic methods
   def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].get(k,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].get(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].put(k,v,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].put(k,v,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].put(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,completionHandler)
+    asJava.asInstanceOf[JAsyncMap].putIfAbsent(k,v,ttl,x => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].remove(k,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].remove(k,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
   def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].replace(k,v,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].replace(k,v,x => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a)))
   }
 
   def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,resultHandler)
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
   }
 
   def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].clear(resultHandler)
+    asJava.asInstanceOf[JAsyncMap].clear(x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].size(resultHandler)
+    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[Integer,Int](x, a => a)))
   }
 
 }

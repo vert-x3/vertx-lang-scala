@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -56,149 +57,153 @@ class HttpServerResponse(private val _asJava: Object)
   
 //methods returning a future
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,handler))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
   }
 
   def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],handler))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
   }
 
 //cached methods
   def headers():MultiMap = {
-    if(cached_0 == null)
-      cached_0 = MultiMap(asJava.asInstanceOf[JHttpServerResponse].headers())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
+      cached_0 = MultiMap(tmp)
+    }
     return cached_0
   }
 
   def trailers():MultiMap = {
-    if(cached_1 == null)
-      cached_1 = MultiMap(asJava.asInstanceOf[JHttpServerResponse].trailers())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
+      cached_1 = MultiMap(tmp)
+    }
     return cached_1
   }
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpServerResponse].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def write(data: Buffer):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerResponse].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JHttpServerResponse].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].drainHandler(handler))
+    asJava.asInstanceOf[JHttpServerResponse].drainHandler(x => handler.handle(x))
     this
   }
 
   def setStatusCode(statusCode: Int):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setStatusCode(statusCode))
+    asJava.asInstanceOf[JHttpServerResponse].setStatusCode(statusCode)
     this
   }
 
   def setStatusMessage(statusMessage: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setStatusMessage(statusMessage))
+    asJava.asInstanceOf[JHttpServerResponse].setStatusMessage(statusMessage)
     this
   }
 
   def setChunked(chunked: Boolean):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].setChunked(chunked))
+    asJava.asInstanceOf[JHttpServerResponse].setChunked(chunked)
     this
   }
 
   def putHeader(name: String,value: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].putHeader(name,value))
+    asJava.asInstanceOf[JHttpServerResponse].putHeader(name,value)
     this
   }
 
   def putTrailer(name: String,value: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].putTrailer(name,value))
+    asJava.asInstanceOf[JHttpServerResponse].putTrailer(name,value)
     this
   }
 
   def closeHandler(handler: Handler[Unit]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].closeHandler(handler))
+    asJava.asInstanceOf[JHttpServerResponse].closeHandler(x => handler.handle(x))
     this
   }
 
   def write(chunk: String,enc: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(chunk,enc))
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk,enc)
     this
   }
 
   def write(chunk: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].write(chunk))
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk)
     this
   }
 
   def writeContinue():HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeContinue())
+    asJava.asInstanceOf[JHttpServerResponse].writeContinue()
     this
   }
 
   def sendFile(filename: String):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename)
     this
   }
 
   def sendFile(filename: String,offset: Long):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset)
     this
   }
 
   def sendFile(filename: String,offset: Long,length: Long):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length)
     this
   }
 
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,resultHandler))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,resultHandler))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length,resultHandler))
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def headersEndHandler(handler: Handler[Unit]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].headersEndHandler(handler))
+    asJava.asInstanceOf[JHttpServerResponse].headersEndHandler(x => handler.handle(x))
     this
   }
 
   def bodyEndHandler(handler: Handler[Unit]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler(handler))
+    asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler(x => handler.handle(x))
     this
   }
 
   def push(method: io.vertx.core.http.HttpMethod,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,handler))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,path,x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a))))
     this
   }
 
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava.asInstanceOf[JMultiMap],handler))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a))))
     this
   }
 
   def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -260,11 +265,11 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,handler))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
   }
 
   def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],handler))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
   }
 
   def reset(code: Long):Unit = {

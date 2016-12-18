@@ -43,91 +43,97 @@ class ServerWebSocket(private val _asJava: Object)
 //methods returning a future
 //cached methods
   override def remoteAddress():SocketAddress = {
-    if(cached_0 == null)
-      cached_0 = SocketAddress(asJava.asInstanceOf[JServerWebSocket].remoteAddress())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
+      cached_0 = SocketAddress(tmp)
+    }
     return cached_0
   }
 
   override def localAddress():SocketAddress = {
-    if(cached_1 == null)
-      cached_1 = SocketAddress(asJava.asInstanceOf[JServerWebSocket].localAddress())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
+      cached_1 = SocketAddress(tmp)
+    }
     return cached_1
   }
 
   def headers():MultiMap = {
-    if(cached_2 == null)
-      cached_2 = MultiMap(asJava.asInstanceOf[JServerWebSocket].headers())
+    if(cached_2 == null) {
+      var tmp = asJava.asInstanceOf[JServerWebSocket].headers()
+      cached_2 = MultiMap(tmp)
+    }
     return cached_2
   }
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].exceptionHandler(handler))
+    asJava.asInstanceOf[JServerWebSocket].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Buffer]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].handler(handler))
+    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def pause():ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].pause())
+    asJava.asInstanceOf[JServerWebSocket].pause()
     this
   }
 
   override def resume():ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].resume())
+    asJava.asInstanceOf[JServerWebSocket].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].endHandler(endHandler))
+    asJava.asInstanceOf[JServerWebSocket].endHandler(x => endHandler.handle(x))
     this
   }
 
   override def write(data: Buffer):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].write(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JServerWebSocket].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].drainHandler(handler))
+    asJava.asInstanceOf[JServerWebSocket].drainHandler(x => handler.handle(x))
     this
   }
 
   override def writeFrame(frame: WebSocketFrame):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame]))
+    asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
   override def writeFinalTextFrame(text: String):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text))
+    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text)
     this
   }
 
   override def writeFinalBinaryFrame(data: Buffer):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def writeBinaryMessage(data: Buffer):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def closeHandler(handler: Handler[Unit]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].closeHandler(handler))
+    asJava.asInstanceOf[JServerWebSocket].closeHandler(x => handler.handle(x))
     this
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
-    ServerWebSocket(asJava.asInstanceOf[JServerWebSocket].frameHandler(handler))
+    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(x.asJava.asInstanceOf[JWebSocketFrame]))
     this
   }
 

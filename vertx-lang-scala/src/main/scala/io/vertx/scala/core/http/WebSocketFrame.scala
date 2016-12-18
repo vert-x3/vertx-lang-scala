@@ -39,14 +39,18 @@ class WebSocketFrame(private val _asJava: Object) {
 //methods returning a future
 //cached methods
   def textData():String = {
-    if(cached_0 == null)
-      cached_0 = asJava.asInstanceOf[JWebSocketFrame].textData()
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
+      cached_0 = tmp
+    }
     return cached_0
   }
 
   def binaryData():Buffer = {
-    if(cached_1 == null)
-      cached_1 = Buffer(asJava.asInstanceOf[JWebSocketFrame].binaryData())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JWebSocketFrame].binaryData()
+      cached_1 = Buffer(tmp)
+    }
     return cached_1
   }
 

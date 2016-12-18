@@ -34,32 +34,32 @@ class HttpServerFileUpload(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].handler(handler))
+    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].endHandler(endHandler))
+    asJava.asInstanceOf[JHttpServerFileUpload].endHandler(x => endHandler.handle(x))
     this
   }
 
   override def pause():HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].pause())
+    asJava.asInstanceOf[JHttpServerFileUpload].pause()
     this
   }
 
   override def resume():HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].resume())
+    asJava.asInstanceOf[JHttpServerFileUpload].resume()
     this
   }
 
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
-    HttpServerFileUpload(asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename))
+    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename)
     this
   }
 

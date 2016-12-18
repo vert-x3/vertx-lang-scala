@@ -33,32 +33,32 @@ class MultiMap(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def add(name: String,value: String):MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].add(name,value))
+    asJava.asInstanceOf[JMultiMap].add(name,value)
     this
   }
 
   def addAll(map: MultiMap):MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap]))
+    asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
   def set(name: String,value: String):MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].set(name,value))
+    asJava.asInstanceOf[JMultiMap].set(name,value)
     this
   }
 
   def setAll(map: MultiMap):MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap]))
+    asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
   def remove(name: String):MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].remove(name))
+    asJava.asInstanceOf[JMultiMap].remove(name)
     this
   }
 
   def clear():MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMultiMap].clear())
+    asJava.asInstanceOf[JMultiMap].clear()
     this
   }
 

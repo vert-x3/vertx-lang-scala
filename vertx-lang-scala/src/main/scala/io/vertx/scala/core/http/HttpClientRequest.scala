@@ -69,125 +69,129 @@ class HttpClientRequest(private val _asJava: Object)
 //methods returning a future
 //cached methods
   def headers():MultiMap = {
-    if(cached_0 == null)
-      cached_0 = MultiMap(asJava.asInstanceOf[JHttpClientRequest].headers())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
+      cached_0 = MultiMap(tmp)
+    }
     return cached_0
   }
 
   def connection():HttpConnection = {
-    if(cached_1 == null)
-      cached_1 = HttpConnection(asJava.asInstanceOf[JHttpClientRequest].connection())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
+      cached_1 = HttpConnection(tmp)
+    }
     return cached_1
   }
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def write(data: Buffer):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientRequest].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JHttpClientRequest].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].drainHandler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].drainHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].handler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
     this
   }
 
   override def pause():HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].pause())
+    asJava.asInstanceOf[JHttpClientRequest].pause()
     this
   }
 
   override def resume():HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].resume())
+    asJava.asInstanceOf[JHttpClientRequest].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].endHandler(endHandler))
+    asJava.asInstanceOf[JHttpClientRequest].endHandler(x => endHandler.handle(x))
     this
   }
 
   def setChunked(chunked: Boolean):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked))
+    asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked)
     this
   }
 
   def setRawMethod(method: String):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method))
+    asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method)
     this
   }
 
   def setHost(host: String):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setHost(host))
+    asJava.asInstanceOf[JHttpClientRequest].setHost(host)
     this
   }
 
   def putHeader(name: String,value: String):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].putHeader(name,value))
+    asJava.asInstanceOf[JHttpClientRequest].putHeader(name,value)
     this
   }
 
   def write(chunk: String):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(chunk))
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk)
     this
   }
 
   def write(chunk: String,enc: String):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].write(chunk,enc))
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk,enc)
     this
   }
 
   def continueHandler(handler: Handler[Unit]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].continueHandler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].continueHandler(x => handler.handle(x))
     this
   }
 
   def sendHead():HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].sendHead())
+    asJava.asInstanceOf[JHttpClientRequest].sendHead()
     this
   }
 
   def sendHead(completionHandler: Handler[io.vertx.core.http.HttpVersion]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].sendHead(completionHandler))
+    asJava.asInstanceOf[JHttpClientRequest].sendHead(x => completionHandler.handle(x))
     this
   }
 
   def setTimeout(timeoutMs: Long):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs))
+    asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs)
     this
   }
 
   def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].pushHandler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientRequest]))
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].connectionHandler(handler))
+    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpConnection]))
     this
   }
 
   def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 

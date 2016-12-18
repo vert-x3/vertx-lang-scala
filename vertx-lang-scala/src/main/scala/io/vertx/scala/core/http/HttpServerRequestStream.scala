@@ -34,27 +34,27 @@ class HttpServerRequestStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
-    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
-    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].handler(handler))
+    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
     this
   }
 
   override def pause():HttpServerRequestStream = {
-    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].pause())
+    asJava.asInstanceOf[JHttpServerRequestStream].pause()
     this
   }
 
   override def resume():HttpServerRequestStream = {
-    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].resume())
+    asJava.asInstanceOf[JHttpServerRequestStream].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpServerRequestStream = {
-    HttpServerRequestStream(asJava.asInstanceOf[JHttpServerRequestStream].endHandler(endHandler))
+    asJava.asInstanceOf[JHttpServerRequestStream].endHandler(x => endHandler.handle(x))
     this
   }
 

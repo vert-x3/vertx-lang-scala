@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.{MultiMap => JMultiMap}
@@ -40,17 +41,19 @@ class Message[T](private val _asJava: Object) {
   
 //methods returning a future
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,replyHandler)
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],replyHandler)
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
   }
 
 //cached methods
   def body():T = {
-    if(cached_0 == null)
-      cached_0 = asJava.asInstanceOf[JMessage].body()
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JMessage].body()
+      cached_0 = tmp
+    }
     return cached_0
   }
 
@@ -68,12 +71,16 @@ class Message[T](private val _asJava: Object) {
     asJava.asInstanceOf[JMessage].replyAddress()
   }
 
+  def isSend():Boolean = {
+    asJava.asInstanceOf[JMessage].isSend()
+  }
+
   def reply(message: AnyRef):Unit = {
     asJava.asInstanceOf[JMessage].reply(message)
   }
 
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,replyHandler)
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
   }
 
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
@@ -81,7 +88,7 @@ class Message[T](private val _asJava: Object) {
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],replyHandler)
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
   }
 
   def fail(failureCode: Int,message: String):Unit = {

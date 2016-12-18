@@ -45,62 +45,62 @@ class CLI(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def setName(name: String):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setName(name))
+    asJava.asInstanceOf[JCLI].setName(name)
     this
   }
 
   def setDescription(desc: String):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setDescription(desc))
+    asJava.asInstanceOf[JCLI].setDescription(desc)
     this
   }
 
   def setSummary(summary: String):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setSummary(summary))
+    asJava.asInstanceOf[JCLI].setSummary(summary)
     this
   }
 
   def setHidden(hidden: Boolean):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setHidden(hidden))
+    asJava.asInstanceOf[JCLI].setHidden(hidden)
     this
   }
 
   def addOption(option: Option):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].addOption(option.asJava.asInstanceOf[JOption]))
+    asJava.asInstanceOf[JCLI].addOption(option.asJava.asInstanceOf[JOption])
     this
   }
 
   def addOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava))
+    asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava)
     this
   }
 
   def setOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava))
+    asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava.asInstanceOf[JOption]).asJava)
     this
   }
 
   def addArgument(arg: Argument):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].addArgument(arg.asJava.asInstanceOf[JArgument]))
+    asJava.asInstanceOf[JCLI].addArgument(arg.asJava.asInstanceOf[JArgument])
     this
   }
 
   def addArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava))
+    asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava)
     this
   }
 
   def setArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava))
+    asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava.asInstanceOf[JArgument]).asJava)
     this
   }
 
   def removeOption(name: String):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].removeOption(name))
+    asJava.asInstanceOf[JCLI].removeOption(name)
     this
   }
 
   def removeArgument(index: Int):CLI = {
-    CLI(asJava.asInstanceOf[JCLI].removeArgument(index))
+    asJava.asInstanceOf[JCLI].removeArgument(index)
     this
   }
 

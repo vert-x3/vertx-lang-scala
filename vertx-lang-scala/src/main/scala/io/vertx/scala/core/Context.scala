@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Context => JContext}
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.json.JsonObject
@@ -62,31 +63,31 @@ class Context(private val _asJava: Object) {
 
 //methods returning a future
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,ordered,resultHandler)
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,resultHandler)
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 //cached methods
 //fluent methods
   def exceptionHandler(handler: Handler[Throwable]):Context = {
-    Context(asJava.asInstanceOf[JContext].exceptionHandler(handler))
+    asJava.asInstanceOf[JContext].exceptionHandler(x => handler.handle(x))
     this
   }
 
 //basic methods
   def runOnContext(action: Handler[Unit]):Unit = {
-    asJava.asInstanceOf[JContext].runOnContext(action)
+    asJava.asInstanceOf[JContext].runOnContext(x => action.handle(x))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,ordered,resultHandler)
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(blockingCodeHandler,resultHandler)
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def deploymentID():String = {

@@ -50,62 +50,70 @@ class HttpClientResponse(private val _asJava: Object)
 //methods returning a future
 //cached methods
   def headers():MultiMap = {
-    if(cached_0 == null)
-      cached_0 = MultiMap(asJava.asInstanceOf[JHttpClientResponse].headers())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
+      cached_0 = MultiMap(tmp)
+    }
     return cached_0
   }
 
   def trailers():MultiMap = {
-    if(cached_1 == null)
-      cached_1 = MultiMap(asJava.asInstanceOf[JHttpClientResponse].trailers())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
+      cached_1 = MultiMap(tmp)
+    }
     return cached_1
   }
 
   def cookies():scala.collection.mutable.Buffer[String] = {
-    if(cached_2 == null)
-      cached_2 = asJava.asInstanceOf[JHttpClientResponse].cookies().map(x => x)
+    if(cached_2 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
+      cached_2 = tmp.map(x => x)
+    }
     return cached_2
   }
 
   def netSocket():NetSocket = {
-    if(cached_3 == null)
-      cached_3 = NetSocket(asJava.asInstanceOf[JHttpClientResponse].netSocket())
+    if(cached_3 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
+      cached_3 = NetSocket(tmp)
+    }
     return cached_3
   }
 
 //fluent methods
   override def resume():HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].resume())
+    asJava.asInstanceOf[JHttpClientResponse].resume()
     this
   }
 
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpClientResponse].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].handler(handler))
+    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def pause():HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].pause())
+    asJava.asInstanceOf[JHttpClientResponse].pause()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].endHandler(endHandler))
+    asJava.asInstanceOf[JHttpClientResponse].endHandler(x => endHandler.handle(x))
     this
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].bodyHandler(bodyHandler))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    HttpClientResponse(asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(handler))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
     this
   }
 

@@ -32,20 +32,26 @@ class HttpFrame(private val _asJava: Object) {
 //methods returning a future
 //cached methods
   def type():Int = {
-    if(cached_0 == null)
-      cached_0 = asJava.asInstanceOf[JHttpFrame].type()
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].type()
+      cached_0 = tmp
+    }
     return cached_0
   }
 
   def flags():Int = {
-    if(cached_1 == null)
-      cached_1 = asJava.asInstanceOf[JHttpFrame].flags()
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].flags()
+      cached_1 = tmp
+    }
     return cached_1
   }
 
   def payload():Buffer = {
-    if(cached_2 == null)
-      cached_2 = Buffer(asJava.asInstanceOf[JHttpFrame].payload())
+    if(cached_2 == null) {
+      var tmp = asJava.asInstanceOf[JHttpFrame].payload()
+      cached_2 = Buffer(tmp)
+    }
     return cached_2
   }
 
