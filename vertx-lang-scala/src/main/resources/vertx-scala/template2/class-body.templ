@@ -37,8 +37,10 @@
 	@foreach{param:method.params}
 		@{param.name}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
-    if(cached_@{cached_method_counter} == null)\n
-      cached_@{cached_method_counter} = @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method)}\n
+    if(cached_@{cached_method_counter} == null) {\n
+      var tmp = @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method)}\n
+      cached_@{cached_method_counter} = @{toScalaWithConversion('tmp', method.returnType)}\n
+    }\n
     return cached_@{cached_method_counter}\n
   }\n
 	\n
@@ -55,7 +57,7 @@
 	@foreach{param:method.params}
 		@{param.name}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
-    @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method)}\n
+    @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method)}\n
     this\n
   }\n
 	\n

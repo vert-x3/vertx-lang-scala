@@ -36,202 +36,202 @@ class Buffer(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def appendBuffer(buff: Buffer):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def appendBuffer(buff: Buffer,offset: Int,len: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer],offset,len))
+    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer],offset,len)
     this
   }
 
   def appendByte(b: Byte):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendByte(b))
+    asJava.asInstanceOf[JBuffer].appendByte(b)
     this
   }
 
   def appendUnsignedByte(b: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendUnsignedByte(b))
+    asJava.asInstanceOf[JBuffer].appendUnsignedByte(b)
     this
   }
 
   def appendInt(i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendInt(i))
+    asJava.asInstanceOf[JBuffer].appendInt(i)
     this
   }
 
   def appendIntLE(i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendIntLE(i))
+    asJava.asInstanceOf[JBuffer].appendIntLE(i)
     this
   }
 
   def appendUnsignedInt(i: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendUnsignedInt(i))
+    asJava.asInstanceOf[JBuffer].appendUnsignedInt(i)
     this
   }
 
   def appendUnsignedIntLE(i: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendUnsignedIntLE(i))
+    asJava.asInstanceOf[JBuffer].appendUnsignedIntLE(i)
     this
   }
 
   def appendMedium(i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendMedium(i))
+    asJava.asInstanceOf[JBuffer].appendMedium(i)
     this
   }
 
   def appendMediumLE(i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendMediumLE(i))
+    asJava.asInstanceOf[JBuffer].appendMediumLE(i)
     this
   }
 
   def appendLong(l: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendLong(l))
+    asJava.asInstanceOf[JBuffer].appendLong(l)
     this
   }
 
   def appendLongLE(l: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendLongLE(l))
+    asJava.asInstanceOf[JBuffer].appendLongLE(l)
     this
   }
 
   def appendShort(s: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendShort(s))
+    asJava.asInstanceOf[JBuffer].appendShort(s)
     this
   }
 
   def appendShortLE(s: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendShortLE(s))
+    asJava.asInstanceOf[JBuffer].appendShortLE(s)
     this
   }
 
   def appendUnsignedShort(s: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendUnsignedShort(s))
+    asJava.asInstanceOf[JBuffer].appendUnsignedShort(s)
     this
   }
 
   def appendUnsignedShortLE(s: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendUnsignedShortLE(s))
+    asJava.asInstanceOf[JBuffer].appendUnsignedShortLE(s)
     this
   }
 
   def appendFloat(f: Float):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendFloat(f))
+    asJava.asInstanceOf[JBuffer].appendFloat(f)
     this
   }
 
   def appendDouble(d: Double):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendDouble(d))
+    asJava.asInstanceOf[JBuffer].appendDouble(d)
     this
   }
 
   def appendString(str: String,enc: String):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendString(str,enc))
+    asJava.asInstanceOf[JBuffer].appendString(str,enc)
     this
   }
 
   def appendString(str: String):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].appendString(str))
+    asJava.asInstanceOf[JBuffer].appendString(str)
     this
   }
 
   def setByte(pos: Int,b: Byte):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setByte(pos,b))
+    asJava.asInstanceOf[JBuffer].setByte(pos,b)
     this
   }
 
   def setUnsignedByte(pos: Int,b: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setUnsignedByte(pos,b))
+    asJava.asInstanceOf[JBuffer].setUnsignedByte(pos,b)
     this
   }
 
   def setInt(pos: Int,i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setInt(pos,i))
+    asJava.asInstanceOf[JBuffer].setInt(pos,i)
     this
   }
 
   def setIntLE(pos: Int,i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setIntLE(pos,i))
+    asJava.asInstanceOf[JBuffer].setIntLE(pos,i)
     this
   }
 
   def setUnsignedInt(pos: Int,i: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setUnsignedInt(pos,i))
+    asJava.asInstanceOf[JBuffer].setUnsignedInt(pos,i)
     this
   }
 
   def setUnsignedIntLE(pos: Int,i: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setUnsignedIntLE(pos,i))
+    asJava.asInstanceOf[JBuffer].setUnsignedIntLE(pos,i)
     this
   }
 
   def setMedium(pos: Int,i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setMedium(pos,i))
+    asJava.asInstanceOf[JBuffer].setMedium(pos,i)
     this
   }
 
   def setMediumLE(pos: Int,i: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setMediumLE(pos,i))
+    asJava.asInstanceOf[JBuffer].setMediumLE(pos,i)
     this
   }
 
   def setLong(pos: Int,l: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setLong(pos,l))
+    asJava.asInstanceOf[JBuffer].setLong(pos,l)
     this
   }
 
   def setLongLE(pos: Int,l: Long):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setLongLE(pos,l))
+    asJava.asInstanceOf[JBuffer].setLongLE(pos,l)
     this
   }
 
   def setDouble(pos: Int,d: Double):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setDouble(pos,d))
+    asJava.asInstanceOf[JBuffer].setDouble(pos,d)
     this
   }
 
   def setFloat(pos: Int,f: Float):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setFloat(pos,f))
+    asJava.asInstanceOf[JBuffer].setFloat(pos,f)
     this
   }
 
   def setShort(pos: Int,s: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setShort(pos,s))
+    asJava.asInstanceOf[JBuffer].setShort(pos,s)
     this
   }
 
   def setShortLE(pos: Int,s: Short):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setShortLE(pos,s))
+    asJava.asInstanceOf[JBuffer].setShortLE(pos,s)
     this
   }
 
   def setUnsignedShort(pos: Int,s: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setUnsignedShort(pos,s))
+    asJava.asInstanceOf[JBuffer].setUnsignedShort(pos,s)
     this
   }
 
   def setUnsignedShortLE(pos: Int,s: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setUnsignedShortLE(pos,s))
+    asJava.asInstanceOf[JBuffer].setUnsignedShortLE(pos,s)
     this
   }
 
   def setBuffer(pos: Int,b: Buffer):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setBuffer(pos: Int,b: Buffer,offset: Int,len: Int):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer],offset,len))
+    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer],offset,len)
     this
   }
 
   def setString(pos: Int,str: String):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setString(pos,str))
+    asJava.asInstanceOf[JBuffer].setString(pos,str)
     this
   }
 
   def setString(pos: Int,str: String,enc: String):Buffer = {
-    Buffer(asJava.asInstanceOf[JBuffer].setString(pos,str,enc))
+    asJava.asInstanceOf[JBuffer].setString(pos,str,enc)
     this
   }
 

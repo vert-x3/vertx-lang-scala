@@ -17,6 +17,7 @@
 package io.vertx.scala.core.file
 
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
@@ -49,237 +50,237 @@ class FileSystem(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def copy(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].copy(from,to,handler))
+    asJava.asInstanceOf[JFileSystem].copy(from,to,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def copyBlocking(from: String,to: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].copyBlocking(from,to))
+    asJava.asInstanceOf[JFileSystem].copyBlocking(from,to)
     this
   }
 
   def copyRecursive(from: String,to: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].copyRecursive(from,to,recursive,handler))
+    asJava.asInstanceOf[JFileSystem].copyRecursive(from,to,recursive,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def copyRecursiveBlocking(from: String,to: String,recursive: Boolean):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].copyRecursiveBlocking(from,to,recursive))
+    asJava.asInstanceOf[JFileSystem].copyRecursiveBlocking(from,to,recursive)
     this
   }
 
   def move(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].move(from,to,handler))
+    asJava.asInstanceOf[JFileSystem].move(from,to,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def moveBlocking(from: String,to: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].moveBlocking(from,to))
+    asJava.asInstanceOf[JFileSystem].moveBlocking(from,to)
     this
   }
 
   def truncate(path: String,len: Long,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].truncate(path,len,handler))
+    asJava.asInstanceOf[JFileSystem].truncate(path,len,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def truncateBlocking(path: String,len: Long):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].truncateBlocking(path,len))
+    asJava.asInstanceOf[JFileSystem].truncateBlocking(path,len)
     this
   }
 
   def chmod(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chmod(path,perms,handler))
+    asJava.asInstanceOf[JFileSystem].chmod(path,perms,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def chmodBlocking(path: String,perms: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chmodBlocking(path,perms))
+    asJava.asInstanceOf[JFileSystem].chmodBlocking(path,perms)
     this
   }
 
   def chmodRecursive(path: String,perms: String,dirPerms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chmodRecursive(path,perms,dirPerms,handler))
+    asJava.asInstanceOf[JFileSystem].chmodRecursive(path,perms,dirPerms,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def chmodRecursiveBlocking(path: String,perms: String,dirPerms: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chmodRecursiveBlocking(path,perms,dirPerms))
+    asJava.asInstanceOf[JFileSystem].chmodRecursiveBlocking(path,perms,dirPerms)
     this
   }
 
   def chown(path: String,user: String,group: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chown(path,user,group,handler))
+    asJava.asInstanceOf[JFileSystem].chown(path,user,group,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def chownBlocking(path: String,user: String,group: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].chownBlocking(path,user,group))
+    asJava.asInstanceOf[JFileSystem].chownBlocking(path,user,group)
     this
   }
 
   def props(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].props(path,handler))
+    asJava.asInstanceOf[JFileSystem].props(path,x => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a))))
     this
   }
 
   def lprops(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].lprops(path,handler))
+    asJava.asInstanceOf[JFileSystem].lprops(path,x => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a))))
     this
   }
 
   def link(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].link(link,existing,handler))
+    asJava.asInstanceOf[JFileSystem].link(link,existing,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def linkBlocking(link: String,existing: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].linkBlocking(link,existing))
+    asJava.asInstanceOf[JFileSystem].linkBlocking(link,existing)
     this
   }
 
   def symlink(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].symlink(link,existing,handler))
+    asJava.asInstanceOf[JFileSystem].symlink(link,existing,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def symlinkBlocking(link: String,existing: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].symlinkBlocking(link,existing))
+    asJava.asInstanceOf[JFileSystem].symlinkBlocking(link,existing)
     this
   }
 
   def unlink(link: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].unlink(link,handler))
+    asJava.asInstanceOf[JFileSystem].unlink(link,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def unlinkBlocking(link: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].unlinkBlocking(link))
+    asJava.asInstanceOf[JFileSystem].unlinkBlocking(link)
     this
   }
 
   def readSymlink(link: String,handler: Handler[AsyncResult[String]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].readSymlink(link,handler))
+    asJava.asInstanceOf[JFileSystem].readSymlink(link,x => handler.handle(AsyncResultWrapper[String,String](x, a => a)))
     this
   }
 
   def delete(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].delete(path,handler))
+    asJava.asInstanceOf[JFileSystem].delete(path,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def deleteBlocking(path: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].deleteBlocking(path))
+    asJava.asInstanceOf[JFileSystem].deleteBlocking(path)
     this
   }
 
   def deleteRecursive(path: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].deleteRecursive(path,recursive,handler))
+    asJava.asInstanceOf[JFileSystem].deleteRecursive(path,recursive,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def deleteRecursiveBlocking(path: String,recursive: Boolean):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].deleteRecursiveBlocking(path,recursive))
+    asJava.asInstanceOf[JFileSystem].deleteRecursiveBlocking(path,recursive)
     this
   }
 
   def mkdir(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdir(path,handler))
+    asJava.asInstanceOf[JFileSystem].mkdir(path,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def mkdirBlocking(path: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirBlocking(path))
+    asJava.asInstanceOf[JFileSystem].mkdirBlocking(path)
     this
   }
 
   def mkdir(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdir(path,perms,handler))
+    asJava.asInstanceOf[JFileSystem].mkdir(path,perms,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def mkdirBlocking(path: String,perms: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirBlocking(path,perms))
+    asJava.asInstanceOf[JFileSystem].mkdirBlocking(path,perms)
     this
   }
 
   def mkdirs(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirs(path,handler))
+    asJava.asInstanceOf[JFileSystem].mkdirs(path,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def mkdirsBlocking(path: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path))
+    asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path)
     this
   }
 
   def mkdirs(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirs(path,perms,handler))
+    asJava.asInstanceOf[JFileSystem].mkdirs(path,perms,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def mkdirsBlocking(path: String,perms: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path,perms))
+    asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path,perms)
     this
   }
 
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].readDir(path,handler))
+    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[List<String>[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
     this
   }
 
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].readDir(path,filter,handler))
+    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[List<String>[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
     this
   }
 
   def readFile(path: String,handler: Handler[AsyncResult[Buffer]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].readFile(path,handler))
+    asJava.asInstanceOf[JFileSystem].readFile(path,x => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
     this
   }
 
   def writeFile(path: String,data: Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava.asInstanceOf[JBuffer],handler))
+    asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava.asInstanceOf[JBuffer],x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def writeFileBlocking(path: String,data: Buffer):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def open(path: String,options: OpenOptions,handler: Handler[AsyncResult[AsyncFile]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].open(path,options.asJava.asInstanceOf[JOpenOptions],handler))
+    asJava.asInstanceOf[JFileSystem].open(path,options.asJava.asInstanceOf[JOpenOptions],x => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a))))
     this
   }
 
   def createFile(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].createFile(path,handler))
+    asJava.asInstanceOf[JFileSystem].createFile(path,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def createFileBlocking(path: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].createFileBlocking(path))
+    asJava.asInstanceOf[JFileSystem].createFileBlocking(path)
     this
   }
 
   def createFile(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].createFile(path,perms,handler))
+    asJava.asInstanceOf[JFileSystem].createFile(path,perms,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def createFileBlocking(path: String,perms: String):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].createFileBlocking(path,perms))
+    asJava.asInstanceOf[JFileSystem].createFileBlocking(path,perms)
     this
   }
 
   def exists(path: String,handler: Handler[AsyncResult[Boolean]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].exists(path,handler))
+    asJava.asInstanceOf[JFileSystem].exists(path,x => handler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
     this
   }
 
   def fsProps(path: String,handler: Handler[AsyncResult[FileSystemProps]]):FileSystem = {
-    FileSystem(asJava.asInstanceOf[JFileSystem].fsProps(path,handler))
+    asJava.asInstanceOf[JFileSystem].fsProps(path,x => handler.handle(AsyncResultWrapper[JFileSystemProps,FileSystemProps](x, a => FileSystemProps(a))))
     this
   }
 

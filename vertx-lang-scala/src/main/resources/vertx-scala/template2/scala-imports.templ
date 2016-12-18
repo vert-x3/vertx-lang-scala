@@ -19,15 +19,16 @@
       ret.add(type.raw);
       if(type.isParameterized) {
         for(param : type.args) {
-          importForType(package, param, ret)
+          importForType(package, param, ret);
         }
       }
     }
     else if(type.kind == CLASS_ASYNC_RESULT) {
+      ret.add('io.vertx.lang.scala.AsyncResultWrapper');
       ret.add(type.raw);
       if(type.isParameterized) {
         for(param : type.args) {
-          importForType(package, param, ret)
+          importForType(package, param, ret);
         }
       }
     }

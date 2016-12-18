@@ -35,22 +35,22 @@ class PacketWritestream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].exceptionHandler(handler))
+    asJava.asInstanceOf[JPacketWritestream].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def write(data: Buffer):PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JPacketWritestream].drainHandler(handler))
+    asJava.asInstanceOf[JPacketWritestream].drainHandler(x => handler.handle(x))
     this
   }
 

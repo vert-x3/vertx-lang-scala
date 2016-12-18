@@ -69,13 +69,17 @@
   }
 
   def invokeMethod(target, type, method) {
+    return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method), method.returnType);
+  }
+
+  def invokeMethodWithoutConvertingReturn(target, type, method) {
     var paramString = '';
     for(param : method.params) {
       if (paramString != '')
         paramString += ',';
       paramString += toJavaWithConversion(param.name, param.type);
     }
-    return toScalaWithConversion(target + '.' + method.name + '(' + paramString + ')', method.returnType);
+    return target + '.' + method.name + '(' + paramString + ')';
   }
 
   def invokeStaticMethod(target, type, method) {

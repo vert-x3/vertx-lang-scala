@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.eventbus.{Message => JMessage}
@@ -40,37 +41,37 @@ class MessageConsumer[T](private val _asJava: Object)
 
 //methods returning a future
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].completionHandler(completionHandler)
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].unregister(completionHandler)
+    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].exceptionHandler(handler))
+    asJava.asInstanceOf[JMessageConsumer].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].handler(handler))
+    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage<T>]))
     this
   }
 
   override def pause():MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].pause())
+    asJava.asInstanceOf[JMessageConsumer].pause()
     this
   }
 
   override def resume():MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].resume())
+    asJava.asInstanceOf[JMessageConsumer].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].endHandler(endHandler))
+    asJava.asInstanceOf[JMessageConsumer].endHandler(x => endHandler.handle(x))
     this
   }
 
@@ -96,7 +97,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].completionHandler(completionHandler)
+    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def unregister():Unit = {
@@ -104,7 +105,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].unregister(completionHandler)
+    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 }

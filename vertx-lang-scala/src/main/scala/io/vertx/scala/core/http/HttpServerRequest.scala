@@ -62,96 +62,112 @@ class HttpServerRequest(private val _asJava: Object)
 //methods returning a future
 //cached methods
   def response():HttpServerResponse = {
-    if(cached_0 == null)
-      cached_0 = HttpServerResponse(asJava.asInstanceOf[JHttpServerRequest].response())
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].response()
+      cached_0 = HttpServerResponse(tmp)
+    }
     return cached_0
   }
 
   def headers():MultiMap = {
-    if(cached_1 == null)
-      cached_1 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].headers())
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
+      cached_1 = MultiMap(tmp)
+    }
     return cached_1
   }
 
   def params():MultiMap = {
-    if(cached_2 == null)
-      cached_2 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].params())
+    if(cached_2 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].params()
+      cached_2 = MultiMap(tmp)
+    }
     return cached_2
   }
 
   def remoteAddress():SocketAddress = {
-    if(cached_3 == null)
-      cached_3 = SocketAddress(asJava.asInstanceOf[JHttpServerRequest].remoteAddress())
+    if(cached_3 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
+      cached_3 = SocketAddress(tmp)
+    }
     return cached_3
   }
 
   def localAddress():SocketAddress = {
-    if(cached_4 == null)
-      cached_4 = SocketAddress(asJava.asInstanceOf[JHttpServerRequest].localAddress())
+    if(cached_4 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
+      cached_4 = SocketAddress(tmp)
+    }
     return cached_4
   }
 
   def netSocket():NetSocket = {
-    if(cached_5 == null)
-      cached_5 = NetSocket(asJava.asInstanceOf[JHttpServerRequest].netSocket())
+    if(cached_5 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
+      cached_5 = NetSocket(tmp)
+    }
     return cached_5
   }
 
   def formAttributes():MultiMap = {
-    if(cached_6 == null)
-      cached_6 = MultiMap(asJava.asInstanceOf[JHttpServerRequest].formAttributes())
+    if(cached_6 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
+      cached_6 = MultiMap(tmp)
+    }
     return cached_6
   }
 
   def connection():HttpConnection = {
-    if(cached_7 == null)
-      cached_7 = HttpConnection(asJava.asInstanceOf[JHttpServerRequest].connection())
+    if(cached_7 == null) {
+      var tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
+      cached_7 = HttpConnection(tmp)
+    }
     return cached_7
   }
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].exceptionHandler(handler))
+    asJava.asInstanceOf[JHttpServerRequest].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].handler(handler))
+    asJava.asInstanceOf[JHttpServerRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def pause():HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].pause())
+    asJava.asInstanceOf[JHttpServerRequest].pause()
     this
   }
 
   override def resume():HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].resume())
+    asJava.asInstanceOf[JHttpServerRequest].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].endHandler(endHandler))
+    asJava.asInstanceOf[JHttpServerRequest].endHandler(x => endHandler.handle(x))
     this
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].bodyHandler(bodyHandler))
+    asJava.asInstanceOf[JHttpServerRequest].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def setExpectMultipart(expect: Boolean):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect))
+    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect)
     this
   }
 
   def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].uploadHandler(uploadHandler))
+    asJava.asInstanceOf[JHttpServerRequest].uploadHandler(x => uploadHandler.handle(x.asJava.asInstanceOf[JHttpServerFileUpload]))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpServerRequest = {
-    HttpServerRequest(asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(handler))
+    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
     this
   }
 

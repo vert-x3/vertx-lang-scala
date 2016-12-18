@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
@@ -41,83 +42,83 @@ class AsyncFile(private val _asJava: Object)
 
 //methods returning a future
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncFile].close(handler)
+    asJava.asInstanceOf[JAsyncFile].close(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 //cached methods
 //fluent methods
   override def handler(handler: Handler[Buffer]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].handler(handler))
+    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   override def pause():AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].pause())
+    asJava.asInstanceOf[JAsyncFile].pause()
     this
   }
 
   override def resume():AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].resume())
+    asJava.asInstanceOf[JAsyncFile].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].endHandler(endHandler))
+    asJava.asInstanceOf[JAsyncFile].endHandler(x => endHandler.handle(x))
     this
   }
 
   override def write(data: Buffer):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].write(data.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JAsyncFile].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JAsyncFile].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].drainHandler(handler))
+    asJava.asInstanceOf[JAsyncFile].drainHandler(x => handler.handle(x))
     this
   }
 
   override def exceptionHandler(handler: Handler[Throwable]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].exceptionHandler(handler))
+    asJava.asInstanceOf[JAsyncFile].exceptionHandler(x => handler.handle(x))
     this
   }
 
   def write(buffer: Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,handler))
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def read(buffer: Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[Buffer]]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,handler))
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,x => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
     this
   }
 
   def flush():AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].flush())
+    asJava.asInstanceOf[JAsyncFile].flush()
     this
   }
 
   def flush(handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].flush(handler))
+    asJava.asInstanceOf[JAsyncFile].flush(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def setReadPos(readPos: Long):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].setReadPos(readPos))
+    asJava.asInstanceOf[JAsyncFile].setReadPos(readPos)
     this
   }
 
   def setWritePos(writePos: Long):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].setWritePos(writePos))
+    asJava.asInstanceOf[JAsyncFile].setWritePos(writePos)
     this
   }
 
   def setReadBufferSize(readBufferSize: Int):AsyncFile = {
-    AsyncFile(asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize))
+    asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize)
     this
   }
 
@@ -135,7 +136,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncFile].close(handler)
+    asJava.asInstanceOf[JAsyncFile].close(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 }

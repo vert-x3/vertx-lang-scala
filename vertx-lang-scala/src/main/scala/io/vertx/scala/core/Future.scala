@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -32,14 +33,16 @@ class Future[T](private val _asJava: Object) {
 //methods returning a future
 //cached methods
   def completer():Handler[AsyncResult[T]] = {
-    if(cached_0 == null)
-      cached_0 = asJava.asInstanceOf[JFuture[_]].completer()
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JFuture[_]].completer()
+      cached_0 = x => tmp.handle(AsyncResultWrapper[T,T](x, a => a))
+    }
     return cached_0
   }
 
 //fluent methods
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
-    Future<T>(asJava.asInstanceOf[JFuture[_]].setHandler(handler))
+    asJava.asInstanceOf[JFuture[_]].setHandler(x => handler.handle(AsyncResultWrapper[T,T](x, a => a)))
     this
   }
 

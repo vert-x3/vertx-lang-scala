@@ -34,27 +34,27 @@ class NetSocketStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetSocketStream].exceptionHandler(handler))
+    asJava.asInstanceOf[JNetSocketStream].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetSocketStream].handler(handler))
+    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket]))
     this
   }
 
   override def pause():NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetSocketStream].pause())
+    asJava.asInstanceOf[JNetSocketStream].pause()
     this
   }
 
   override def resume():NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetSocketStream].resume())
+    asJava.asInstanceOf[JNetSocketStream].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetSocketStream].endHandler(endHandler))
+    asJava.asInstanceOf[JNetSocketStream].endHandler(x => endHandler.handle(x))
     this
   }
 

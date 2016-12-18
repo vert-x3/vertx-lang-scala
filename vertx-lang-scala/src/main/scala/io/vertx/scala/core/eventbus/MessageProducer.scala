@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{Message => JMessage}
@@ -34,33 +35,33 @@ class MessageProducer[T](private val _asJava: Object)
 
 //methods returning a future
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,replyHandler))
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a)))))
   }
 
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].exceptionHandler(handler))
+    asJava.asInstanceOf[JMessageProducer].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def write(data: T):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].write(data))
+    asJava.asInstanceOf[JMessageProducer].write(data)
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].setWriteQueueMaxSize(maxSize))
+    asJava.asInstanceOf[JMessageProducer].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].drainHandler(handler))
+    asJava.asInstanceOf[JMessageProducer].drainHandler(x => handler.handle(x))
     this
   }
 
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava.asInstanceOf[JDeliveryOptions]))
+    asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava.asInstanceOf[JDeliveryOptions])
     this
   }
 
@@ -74,7 +75,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,replyHandler))
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a)))))
   }
 
   def address():String = {

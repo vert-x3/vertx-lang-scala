@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -33,38 +34,38 @@ class NetServer(private val _asJava: Object)
 
 //methods returning a future
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JNetServer].close(completionHandler)
+    asJava.asInstanceOf[JNetServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 //cached methods
 //fluent methods
   def listen():NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen())
+    asJava.asInstanceOf[JNetServer].listen()
     this
   }
 
   def listen(listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen(listenHandler))
+    asJava.asInstanceOf[JNetServer].listen(x => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a))))
     this
   }
 
   def listen(port: Int,host: String):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen(port,host))
+    asJava.asInstanceOf[JNetServer].listen(port,host)
     this
   }
 
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen(port,host,listenHandler))
+    asJava.asInstanceOf[JNetServer].listen(port,host,x => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a))))
     this
   }
 
   def listen(port: Int):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen(port))
+    asJava.asInstanceOf[JNetServer].listen(port)
     this
   }
 
   def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].listen(port,listenHandler))
+    asJava.asInstanceOf[JNetServer].listen(port,x => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a))))
     this
   }
 
@@ -78,7 +79,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def connectHandler(handler: Handler[NetSocket]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(handler))
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket])))
   }
 
   def close():Unit = {
@@ -86,7 +87,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JNetServer].close(completionHandler)
+    asJava.asInstanceOf[JNetServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def actualPort():Int = {
