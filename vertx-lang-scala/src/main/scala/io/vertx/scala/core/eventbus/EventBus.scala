@@ -51,7 +51,7 @@ class EventBus(private val _asJava: Object)
   }
 
   def send[T](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address,message,x => replyHandler.handle(AsyncResultWrapper[JMessage<T>,Message[T]](x, a => Message<T>(a))))
+    asJava.asInstanceOf[JEventBus].send(address,message,x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message<T>(a))))
     this
   }
 
@@ -61,7 +61,7 @@ class EventBus(private val _asJava: Object)
   }
 
   def send[T](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage<T>,Message[T]](x, a => Message<T>(a))))
+    asJava.asInstanceOf[JEventBus].send(address,message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[T],Message[T]](x, a => Message<T>(a))))
     this
   }
 
@@ -85,7 +85,7 @@ class EventBus(private val _asJava: Object)
   }
 
   def consumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage<T>])))
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].consumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
   }
 
   def localConsumer[T](address: String):MessageConsumer[T] = {
@@ -93,7 +93,7 @@ class EventBus(private val _asJava: Object)
   }
 
   def localConsumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage<T>])))
+    MessageConsumer<T>(asJava.asInstanceOf[JEventBus].localConsumer(address,x => handler.handle(x.asJava.asInstanceOf[JMessage[T]])))
   }
 
   def sender[T](address: String):MessageProducer[T] = {
@@ -123,5 +123,6 @@ class EventBus(private val _asJava: Object)
 }
 
 object EventBus{
-  def apply(asJava: JEventBus) = new EventBus(asJava)//static methods
+  def apply(asJava: JEventBus) = new EventBus(asJava)
+//static methods
 }

@@ -35,7 +35,7 @@ class MessageProducer[T](private val _asJava: Object)
 
 //methods returning a future
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a)))))
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a)))))
   }
 
 //cached methods
@@ -75,7 +75,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a)))))
+    MessageProducer<T>(asJava.asInstanceOf[JMessageProducer].send(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a)))))
   }
 
   def address():String = {
@@ -93,5 +93,6 @@ class MessageProducer[T](private val _asJava: Object)
 }
 
 object MessageProducer{
-  def apply(asJava: JMessageProducer) = new MessageProducer(asJava)//static methods
+  def apply(asJava: JMessageProducer) = new MessageProducer(asJava)
+//static methods
 }

@@ -93,17 +93,28 @@
     } else if (type.kind == CLASS_DATA_OBJECT) {
       return 'J' + type.simpleName;
     } else if (type.kind == CLASS_API) {
-      return 'J' + type.simpleName;
+      var ret = 'J' + helper.getNonGenericType(type.simpleName);
+      if(type.isParameterized()) {
+        var args = '';
+        for(arg : type.args) {
+          if(args != '') {
+            args += ',';
+          }
+          args += toJavaType(arg);
+        }
+        ret += '[' + args + ']';
+      }
+      return ret;
     } else if (type.kind == CLASS_HANDLER) {
       return 'Handler['+ toJavaType(type.args[0]) +']';
     } else if (type.kind.collection) {
-      var ret = type.simpleName;
+      var ret = '';
       if (type.kind == CLASS_LIST){
-        ret += '['+ toJavaType(type.args[0]) +']';
+        ret += 'java.util.List['+ toJavaType(type.args[0]) +']';
       } else if (type.kind == CLASS_SET){
-        ret += '['+ toJavaType(type.args[0]) +']';
+        ret += 'java.util.Set['+ toJavaType(type.args[0]) +']';
       } else if (type.kind == CLASS_MAP){
-        ret += '[String, '+ toJavaType(type.args[0]) +']';
+        ret += 'java.util.Map[String, '+ toJavaType(type.args[0]) +']';
       }
       return ret;
     } else if(type.kind == CLASS_ASYNC_RESULT) {
@@ -243,5 +254,22 @@
       ret += '.asInstanceOf[' + toJavaType(type) + ']';
     }
     return ret;
+  }
+
+  def escapeIfKeyword(possibleKeyword) {
+    if (isKeyword(possibleKeyword)) {
+      return '`' + possibleKeyword + '`';
+    }
+    return possibleKeyword;
+  }
+
+  def isKeyword(possibleKeyword) {
+    if (possibleKeyword.equals("type")) {
+      return true;
+    }
+    if (possibleKeyword.equals("object")) {
+      return true;
+    }
+    return false;
   }
 }

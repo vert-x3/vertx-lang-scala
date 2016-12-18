@@ -95,5 +95,6 @@ class HttpServerFileUpload(private val _asJava: Object)
 }
 
 object HttpServerFileUpload{
-  def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)//static methods
+  def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)
+//static methods
 }

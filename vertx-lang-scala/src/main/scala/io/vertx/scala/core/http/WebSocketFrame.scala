@@ -75,7 +75,8 @@ class WebSocketFrame(private val _asJava: Object) {
 }
 
 object WebSocketFrame{
-  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)//static methods
+  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)
+//static methods
   def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
   }

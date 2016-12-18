@@ -56,7 +56,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage<T>]))
+    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage[T]]))
     this
   }
 
@@ -111,5 +111,6 @@ class MessageConsumer[T](private val _asJava: Object)
 }
 
 object MessageConsumer{
-  def apply(asJava: JMessageConsumer) = new MessageConsumer(asJava)//static methods
+  def apply(asJava: JMessageConsumer) = new MessageConsumer(asJava)
+//static methods
 }

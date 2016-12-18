@@ -43,5 +43,6 @@ class FileSystemProps(private val _asJava: Object) {
 }
 
 object FileSystemProps{
-  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)//static methods
+  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)
+//static methods
 }

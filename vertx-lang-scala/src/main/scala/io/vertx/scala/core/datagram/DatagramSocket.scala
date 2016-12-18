@@ -159,5 +159,6 @@ class DatagramSocket(private val _asJava: Object)
 }
 
 object DatagramSocket{
-  def apply(asJava: JDatagramSocket) = new DatagramSocket(asJava)//static methods
+  def apply(asJava: JDatagramSocket) = new DatagramSocket(asJava)
+//static methods
 }

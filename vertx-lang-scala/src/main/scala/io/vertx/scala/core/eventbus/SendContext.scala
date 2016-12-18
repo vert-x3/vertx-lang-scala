@@ -45,5 +45,6 @@ class SendContext[T](private val _asJava: Object) {
 }
 
 object SendContext{
-  def apply(asJava: JSendContext) = new SendContext(asJava)//static methods
+  def apply(asJava: JSendContext) = new SendContext(asJava)
+//static methods
 }
