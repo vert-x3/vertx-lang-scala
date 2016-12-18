@@ -197,8 +197,8 @@ class HttpServerResponse(private val _asJava: Object)
     this
   }
 
-  def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer])
+  def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`,flags,payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -279,5 +279,6 @@ class HttpServerResponse(private val _asJava: Object)
 }
 
 object HttpServerResponse{
-  def apply(asJava: JHttpServerResponse) = new HttpServerResponse(asJava)//static methods
+  def apply(asJava: JHttpServerResponse) = new HttpServerResponse(asJava)
+//static methods
 }

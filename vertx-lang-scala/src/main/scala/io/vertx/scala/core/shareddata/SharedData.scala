@@ -43,7 +43,7 @@ class SharedData(private val _asJava: Object) {
 
 //methods returning a future
   def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap<K,V>,AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
+    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
   }
 
   def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
@@ -62,7 +62,7 @@ class SharedData(private val _asJava: Object) {
 //fluent methods
 //basic methods
   def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap<K,V>,AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
+    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
   }
 
   def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
@@ -84,5 +84,6 @@ class SharedData(private val _asJava: Object) {
 }
 
 object SharedData{
-  def apply(asJava: JSharedData) = new SharedData(asJava)//static methods
+  def apply(asJava: JSharedData) = new SharedData(asJava)
+//static methods
 }

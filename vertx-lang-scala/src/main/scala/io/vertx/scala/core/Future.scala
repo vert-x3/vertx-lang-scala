@@ -86,7 +86,8 @@ class Future[T](private val _asJava: Object) {
 }
 
 object Future{
-  def apply(asJava: JFuture) = new Future(asJava)//static methods
+  def apply(asJava: JFuture) = new Future(asJava)
+//static methods
   def future[T]():Future[T] = {
     Future<T>(JFuture.future())
   }

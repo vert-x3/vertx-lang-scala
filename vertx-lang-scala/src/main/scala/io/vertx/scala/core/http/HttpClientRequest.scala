@@ -185,8 +185,8 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-  def writeCustomFrame(type: Int,flags: Int,payload: Buffer):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(type,flags,payload.asJava.asInstanceOf[JBuffer])
+  def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`,flags,payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -251,5 +251,6 @@ class HttpClientRequest(private val _asJava: Object)
 }
 
 object HttpClientRequest{
-  def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)//static methods
+  def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)
+//static methods
 }

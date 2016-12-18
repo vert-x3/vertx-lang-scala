@@ -63,11 +63,11 @@ class Context(private val _asJava: Object) {
 
 //methods returning a future
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 //cached methods
@@ -83,11 +83,11 @@ class Context(private val _asJava: Object) {
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def deploymentID():String = {
@@ -137,7 +137,8 @@ class Context(private val _asJava: Object) {
 }
 
 object Context{
-  def apply(asJava: JContext) = new Context(asJava)//static methods
+  def apply(asJava: JContext) = new Context(asJava)
+//static methods
   def isOnWorkerThread():Boolean = {
     JContext.isOnWorkerThread()
   }

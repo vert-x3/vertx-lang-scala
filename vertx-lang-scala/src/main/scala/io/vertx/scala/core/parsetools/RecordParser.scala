@@ -84,7 +84,8 @@ class RecordParser(private val _asJava: Object)
 }
 
 object RecordParser{
-  def apply(asJava: JRecordParser) = new RecordParser(asJava)//static methods
+  def apply(asJava: JRecordParser) = new RecordParser(asJava)
+//static methods
   def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
     RecordParser(JRecordParser.newDelimited(delim,x => output.handle(x.asJava.asInstanceOf[JBuffer])))
   }

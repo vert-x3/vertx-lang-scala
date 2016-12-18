@@ -41,11 +41,11 @@ class Message[T](private val _asJava: Object) {
   
 //methods returning a future
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
 //cached methods
@@ -80,7 +80,7 @@ class Message[T](private val _asJava: Object) {
   }
 
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply(message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
@@ -88,7 +88,7 @@ class Message[T](private val _asJava: Object) {
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage<R>,Message[R]](x, a => Message<R>(a))))
+    asJava.asInstanceOf[JMessage].reply(message,options.asJava.asInstanceOf[JDeliveryOptions],x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message<R>(a))))
   }
 
   def fail(failureCode: Int,message: String):Unit = {
@@ -98,5 +98,6 @@ class Message[T](private val _asJava: Object) {
 }
 
 object Message{
-  def apply(asJava: JMessage) = new Message(asJava)//static methods
+  def apply(asJava: JMessage) = new Message(asJava)
+//static methods
 }

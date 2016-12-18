@@ -106,11 +106,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 //cached methods
@@ -262,11 +262,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def createSharedWorkerExecutor(name: String):WorkerExecutor = {
@@ -284,7 +284,8 @@ class Vertx(private val _asJava: Object)
 }
 
 object Vertx{
-  def apply(asJava: JVertx) = new Vertx(asJava)//static methods
+  def apply(asJava: JVertx) = new Vertx(asJava)
+//static methods
   def vertx():Vertx = {
     Vertx(JVertx.vertx())
   }

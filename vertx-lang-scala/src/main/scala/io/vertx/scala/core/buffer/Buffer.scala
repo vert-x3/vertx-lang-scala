@@ -355,7 +355,8 @@ class Buffer(private val _asJava: Object) {
 }
 
 object Buffer{
-  def apply(asJava: JBuffer) = new Buffer(asJava)//static methods
+  def apply(asJava: JBuffer) = new Buffer(asJava)
+//static methods
   def buffer():Buffer = {
     Buffer(JBuffer.buffer())
   }

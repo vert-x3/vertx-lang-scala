@@ -81,5 +81,6 @@ class LocalMap[K,V](private val _asJava: Object) {
 }
 
 object LocalMap{
-  def apply(asJava: JLocalMap) = new LocalMap(asJava)//static methods
+  def apply(asJava: JLocalMap) = new LocalMap(asJava)
+//static methods
 }

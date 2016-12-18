@@ -31,9 +31,9 @@ class HttpFrame(private val _asJava: Object) {
   
 //methods returning a future
 //cached methods
-  def type():Int = {
+  def `type`():Int = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpFrame].type()
+      var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
       cached_0 = tmp
     }
     return cached_0
@@ -60,5 +60,6 @@ class HttpFrame(private val _asJava: Object) {
 }
 
 object HttpFrame{
-  def apply(asJava: JHttpFrame) = new HttpFrame(asJava)//static methods
+  def apply(asJava: JHttpFrame) = new HttpFrame(asJava)
+//static methods
 }

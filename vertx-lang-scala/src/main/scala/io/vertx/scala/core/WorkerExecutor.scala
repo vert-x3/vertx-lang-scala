@@ -35,11 +35,11 @@ class WorkerExecutor(private val _asJava: Object)
 
 //methods returning a future
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 //cached methods
@@ -50,11 +50,12 @@ class WorkerExecutor(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture<T>]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking(x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
 }
 
 object WorkerExecutor{
-  def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)//static methods
+  def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)
+//static methods
 }

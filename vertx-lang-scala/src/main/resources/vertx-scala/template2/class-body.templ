@@ -14,12 +14,12 @@
 //methods returning a future\n
 @foreach{method : futureMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
-	def @{method.name}
+	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{param.name}: @{toScalaType(param.type)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method)}\n
   }\n
@@ -30,12 +30,12 @@
 @code{var cached_method_counter = 0}
 @foreach{method : cacheReturnMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
-	def @{method.name}
+	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{param.name}: @{toScalaType(param.type)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
     if(cached_@{cached_method_counter} == null) {\n
       var tmp = @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method)}\n
@@ -50,12 +50,12 @@
 //fluent methods\n
 @foreach{method : fluentMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
-	def @{method.name}
+	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{param.name}: @{toScalaType(param.type)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
     @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method)}\n
     this\n
@@ -66,12 +66,12 @@
 //basic methods\n
 @foreach{method : basicMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
-	def @{method.name}
+	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{param.name}: @{toScalaType(param.type)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method)}\n
   }\n
@@ -81,17 +81,16 @@
 \n
 object @{className}{\n
   def apply(asJava: J@{className}) = new @{className}(asJava)
-
+\n
 //static methods\n
-
 @foreach{method : staticMethods}
-  def @{method.name}
+  def @{escapeIfKeyword(method.name)}
 @if{!method.typeParams.isEmpty}
 [@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 @end{}
 (
 	@foreach{param:method.params}
-		@{param.name}: @{toScalaType(param.type)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
     @{invokeStaticMethod('J'+className, type, method)}\n
   }\n

@@ -66,5 +66,6 @@ class PacketWritestream(private val _asJava: Object)
 }
 
 object PacketWritestream{
-  def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)//static methods
+  def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)
+//static methods
 }

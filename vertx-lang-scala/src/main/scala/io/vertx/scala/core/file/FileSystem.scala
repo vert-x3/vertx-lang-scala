@@ -225,12 +225,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[List<String>[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
     this
   }
 
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[List<String>[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
     this
   }
 
@@ -324,5 +324,6 @@ class FileSystem(private val _asJava: Object) {
 }
 
 object FileSystem{
-  def apply(asJava: JFileSystem) = new FileSystem(asJava)//static methods
+  def apply(asJava: JFileSystem) = new FileSystem(asJava)
+//static methods
 }

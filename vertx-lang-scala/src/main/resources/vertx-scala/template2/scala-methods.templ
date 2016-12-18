@@ -77,9 +77,9 @@
     for(param : method.params) {
       if (paramString != '')
         paramString += ',';
-      paramString += toJavaWithConversion(param.name, param.type);
+      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
     }
-    return target + '.' + method.name + '(' + paramString + ')';
+    return target + '.' + escapeIfKeyword(method.name) + '(' + paramString + ')';
   }
 
   def invokeStaticMethod(target, type, method) {
@@ -87,9 +87,9 @@
     for(param : method.params) {
       if (paramString != '')
         paramString += ',';
-      paramString += toJavaWithConversion(param.name, param.type);
+      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
     }
-    return toScalaWithConversion(target + '.' + method.name + '(' + paramString + ')', method.returnType);
+    return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + '(' + paramString + ')', method.returnType);
   }
 
 }
