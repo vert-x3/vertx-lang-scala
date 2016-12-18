@@ -32,8 +32,9 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 class TimeoutStream(private val _asJava: Object) 
     extends ReadStream[Long](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {

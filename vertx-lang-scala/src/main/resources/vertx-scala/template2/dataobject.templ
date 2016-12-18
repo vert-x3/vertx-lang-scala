@@ -1,0 +1,58 @@
+@comment{"# Template for DataObject code generation"}
+
+@comment{"# Defines a few helper functions"}
+@includeNamed{'scala-doc.templ'}
+@includeNamed{'scala-imports.templ'}
+@includeNamed{'scala-types.templ'}
+@includeNamed{'scala-methods.templ'}
+@code{
+  var className = helper.getSimpleName(type.name);
+}
+/*\n
+ * Copyright 2014 Red Hat, Inc.\n
+ *\n
+ * Red Hat licenses this file to you under the Apache License, version 2.0\n
+ * (the "License"); you may not use this file except in compliance with the\n
+ * License.  You may obtain a copy of the License at:\n
+ *\n
+ * http://www.apache.org/licenses/LICENSE-2.0\n
+ *\n
+ * Unless required by applicable law or agreed to in writing, software\n
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT\n
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the\n
+ * License for the specific language governing permissions and limitations\n
+ * under the License.\n
+ */\n\n
+
+package @{type.raw.translatePackageName("scala")}\n
+\n
+@comment{"# Generate the imports"}
+import io.vertx.lang.scala.json.Json._\n
+@foreach{importedType : generateImports(type, importedTypes, java.util.Collections.emptyList())}
+import @{importedType}\n
+@end{}
+\n
+
+@if{doc != null}
+/**\n
+@{renderDoc("  *", doc, renderDocLink)}
+  */\n
+@end{}
+@if{concrete}
+	class @{className}(private val _asJava: J@{className})
+@else{}
+	trait @{className}
+@end{}
+
+@comment{"## Inheritance"}
+@if{!superTypes.isEmpty}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}(_asJava)@end{' \n    with '}
+@end{}
+ {\n
+\n
+
+@if{concrete}
+	@includeNamed{'dataobject-body.templ'; indentation=''}
+@else{}
+	@includeNamed{'dataobject-trait-body.templ'}
+@end{}

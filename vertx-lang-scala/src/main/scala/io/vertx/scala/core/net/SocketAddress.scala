@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 
 /**
   * The address of a socket
@@ -24,7 +25,7 @@ class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

@@ -23,6 +23,7 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 import io.vertx.core.shareddata.{Lock => JLock}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.shareddata.{SharedData => JSharedData}
 
 /**
   * Shared data allows you to share data safely between different parts of your application in a safe way.
@@ -41,28 +42,12 @@ class SharedData(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
-  def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
-  }
-
-  def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLock(name,x => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a))))
-  }
-
-  def getLockWithTimeout(name: String,timeout: Long,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,x => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a))))
-  }
-
-  def getCounter(name: String,resultHandler: Handler[AsyncResult[Counter]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getCounter(name,x => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a))))
-  }
 
 //cached methods
 //fluent methods
 //basic methods
   def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap(name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap<K,V>(a))))
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a))))
   }
 
   def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
@@ -78,7 +63,7 @@ class SharedData(private val _asJava: Object) {
   }
 
   def getLocalMap[K,V](name: String):LocalMap[K, V] = {
-    LocalMap<K,V>(asJava.asInstanceOf[JSharedData].getLocalMap(name))
+    LocalMap[K,V](asJava.asInstanceOf[JSharedData].getLocalMap[K,V](name))
   }
 
 }

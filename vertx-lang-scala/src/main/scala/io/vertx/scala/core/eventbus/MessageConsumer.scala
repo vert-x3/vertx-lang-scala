@@ -38,15 +38,8 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 class MessageConsumer[T](private val _asJava: Object) 
     extends ReadStream[Message[T]](_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
-  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
-
-  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
 
 //cached methods
 //fluent methods
@@ -77,7 +70,7 @@ class MessageConsumer[T](private val _asJava: Object)
 
 //basic methods
   def bodyStream():ReadStream[T] = {
-    ReadStream<T>(asJava.asInstanceOf[JMessageConsumer].bodyStream())
+    ReadStream[T](asJava.asInstanceOf[JMessageConsumer].bodyStream())
   }
 
   def isRegistered():Boolean = {
@@ -89,7 +82,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
-    MessageConsumer<T>(asJava.asInstanceOf[JMessageConsumer].setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer].setMaxBufferedMessages(maxBufferedMessages))
   }
 
   def getMaxBufferedMessages():Int = {
@@ -111,6 +104,6 @@ class MessageConsumer[T](private val _asJava: Object)
 }
 
 object MessageConsumer{
-  def apply(asJava: JMessageConsumer) = new MessageConsumer(asJava)
+  def apply[T](asJava: JMessageConsumer[T]) = new MessageConsumer[T](asJava)
 //static methods
 }

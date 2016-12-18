@@ -36,11 +36,12 @@ import io.vertx.scala.core.net.SocketAddress
 class ServerWebSocket(private val _asJava: Object) 
     extends WebSocketBase(_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:SocketAddress = _
-    private var cached_1:SocketAddress = _
-    private var cached_2:MultiMap = _
-  
-//methods returning a future
+  private var cached_1:SocketAddress = _
+  private var cached_2:MultiMap = _
+
 //cached methods
   override def remoteAddress():SocketAddress = {
     if(cached_0 == null) {

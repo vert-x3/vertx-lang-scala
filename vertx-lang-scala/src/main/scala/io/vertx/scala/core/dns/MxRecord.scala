@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.dns
 
+import io.vertx.core.dns.{MxRecord => JMxRecord}
 
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
@@ -24,7 +25,7 @@ class MxRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

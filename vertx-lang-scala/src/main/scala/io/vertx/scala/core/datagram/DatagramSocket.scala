@@ -47,12 +47,9 @@ class DatagramSocket(private val _asJava: Object)
     extends ReadStream[DatagramPacket](_asJava) 
     with Measured(_asJava) {
 
+  def asJava = _asJava
+
   private var cached_0:SocketAddress = _
-  
-//methods returning a future
-  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JDatagramSocket].close(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
-  }
 
 //cached methods
   def localAddress():SocketAddress = {

@@ -19,6 +19,7 @@ package io.vertx.scala.core.datagram
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
 import io.vertx.scala.core.net.SocketAddress
 
 /**
@@ -28,7 +29,7 @@ class DatagramPacket(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

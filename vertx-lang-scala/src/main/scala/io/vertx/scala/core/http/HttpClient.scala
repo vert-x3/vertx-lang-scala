@@ -16,8 +16,8 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.{HttpClient => JHttpClient}
+import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.http.{WebSocket => JWebSocket}
@@ -58,8 +58,9 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 class HttpClient(private val _asJava: Object) 
     extends Measured(_asJava) {
 
+  def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def getNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {

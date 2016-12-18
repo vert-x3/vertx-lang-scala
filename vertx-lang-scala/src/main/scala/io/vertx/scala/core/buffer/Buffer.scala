@@ -32,7 +32,7 @@ class Buffer(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
   def appendBuffer(buff: Buffer):Buffer = {

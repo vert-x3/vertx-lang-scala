@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.dns
 
+import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
@@ -24,7 +25,7 @@ class SrvRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

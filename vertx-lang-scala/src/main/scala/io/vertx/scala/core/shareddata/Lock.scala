@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import io.vertx.core.shareddata.{Lock => JLock}
 
 /**
   * An asynchronous exclusive lock which can be obtained from any node in the cluster.
@@ -27,7 +28,7 @@ class Lock(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods

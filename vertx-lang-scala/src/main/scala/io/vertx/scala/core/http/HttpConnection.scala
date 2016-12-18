@@ -17,9 +17,9 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{GoAway => JGoAway}
-import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
@@ -40,10 +40,10 @@ import io.vertx.scala.core.net.SocketAddress
 class HttpConnection(private val _asJava: Object) {
 
   def asJava = _asJava
+
   private var cached_0:SocketAddress = _
-    private var cached_1:SocketAddress = _
-  
-//methods returning a future
+  private var cached_1:SocketAddress = _
+
 //cached methods
   def remoteAddress():SocketAddress = {
     if(cached_0 == null) {
@@ -83,7 +83,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(x.asJava.asInstanceOf[JGoAway]))
+    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(x.asJava))
     this
   }
 
@@ -108,17 +108,17 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def updateSettings(settings: Http2Settings):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings])
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava)
     this
   }
 
   def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava.asInstanceOf[JHttp2Settings],x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def remoteSettingsHandler(handler: Handler[Http2Settings]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(x.asJava.asInstanceOf[JHttp2Settings]))
+    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(x.asJava))
     this
   }
 

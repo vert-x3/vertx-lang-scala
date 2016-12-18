@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
@@ -30,7 +31,7 @@ class LocalMap[K,V](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//methods returning a future
+
 //cached methods
 //fluent methods
 //basic methods
@@ -81,6 +82,6 @@ class LocalMap[K,V](private val _asJava: Object) {
 }
 
 object LocalMap{
-  def apply(asJava: JLocalMap) = new LocalMap(asJava)
+  def apply[K,V](asJava: JLocalMap[K,V]) = new LocalMap[K,V](asJava)
 //static methods
 }

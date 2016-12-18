@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.metrics
 
+import io.vertx.core.metrics.{Measured => JMeasured}
 
 /**
   */
