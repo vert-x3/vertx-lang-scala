@@ -34,7 +34,7 @@ import io.vertx.scala.core.net.SocketAddress
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 class ServerWebSocket(private val _asJava: Object) 
-    extends WebSocketBase(_asJava) {
+    extends WebSocketBase {
 
   def asJava = _asJava
 
@@ -74,7 +74,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
@@ -94,7 +94,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def write(data: Buffer):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].write(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -109,7 +109,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def writeFrame(frame: WebSocketFrame):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava!!.asInstanceOf[JWebSocketFrame])
+    asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
@@ -119,12 +119,12 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def writeFinalBinaryFrame(data: Buffer):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
   override def writeBinaryMessage(data: Buffer):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -134,7 +134,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(x.asJava!!.asInstanceOf[JWebSocketFrame]))
+    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(x.asJava.asInstanceOf[JWebSocketFrame]))
     this
   }
 

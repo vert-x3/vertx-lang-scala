@@ -27,7 +27,7 @@ import io.vertx.core.Handler
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
 class NetSocketStream(private val _asJava: Object) 
-    extends ReadStream[NetSocket](_asJava) {
+    extends ReadStream[NetSocket] {
 
   def asJava = _asJava
 
@@ -40,7 +40,7 @@ class NetSocketStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava!!.asInstanceOf[JNetSocket]))
+    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket]))
     this
   }
 

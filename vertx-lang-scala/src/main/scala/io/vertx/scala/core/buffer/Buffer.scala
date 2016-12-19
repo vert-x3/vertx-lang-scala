@@ -36,12 +36,12 @@ class Buffer(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def appendBuffer(buff: Buffer):Buffer = {
-    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def appendBuffer(buff: Buffer,offset: Int,len: Int):Buffer = {
-    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava!!.asInstanceOf[JBuffer],offset,len)
+    asJava.asInstanceOf[JBuffer].appendBuffer(buff.asJava.asInstanceOf[JBuffer],offset,len)
     this
   }
 
@@ -216,12 +216,12 @@ class Buffer(private val _asJava: Object) {
   }
 
   def setBuffer(pos: Int,b: Buffer):Buffer = {
-    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def setBuffer(pos: Int,b: Buffer,offset: Int,len: Int):Buffer = {
-    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava!!.asInstanceOf[JBuffer],offset,len)
+    asJava.asInstanceOf[JBuffer].setBuffer(pos,b.asJava.asInstanceOf[JBuffer],offset,len)
     this
   }
 

@@ -50,7 +50,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpServerResponse(private val _asJava: Object) 
-    extends WriteStream[Buffer](_asJava) {
+    extends WriteStream[Buffer] {
 
   def asJava = _asJava
 
@@ -81,7 +81,7 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   override def write(data: Buffer):HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].write(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -186,17 +186,17 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava!!.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a))))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a))))
     this
   }
 
   def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`,flags,payload.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`,flags,payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava!!.asInstanceOf[JHttpFrame])
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -226,7 +226,7 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   override def end(chunk: Buffer):Unit = {
-    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
   override def end():Unit = {
@@ -262,7 +262,7 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava!!.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],x => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))))
   }
 
   def reset(code: Long):Unit = {

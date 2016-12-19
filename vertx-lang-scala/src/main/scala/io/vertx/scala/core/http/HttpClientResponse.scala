@@ -40,7 +40,7 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpClientResponse(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] {
 
   def asJava = _asJava
 
@@ -94,7 +94,7 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
@@ -109,12 +109,12 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava!!.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
     this
   }
 

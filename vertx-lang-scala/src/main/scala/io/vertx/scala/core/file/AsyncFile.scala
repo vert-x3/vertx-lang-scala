@@ -36,8 +36,8 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
 class AsyncFile(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) 
-    with WriteStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] 
+    with WriteStream[Buffer] {
 
   def asJava = _asJava
 
@@ -45,7 +45,7 @@ class AsyncFile(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def handler(handler: Handler[Buffer]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 
@@ -65,7 +65,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   override def write(data: Buffer):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JAsyncFile].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -85,12 +85,12 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def write(buffer: Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava!!.asInstanceOf[JBuffer],position,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def read(buffer: Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[Buffer]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava!!.asInstanceOf[JBuffer],offset,position,length,x => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,x => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
     this
   }
 

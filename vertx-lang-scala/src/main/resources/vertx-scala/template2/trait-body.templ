@@ -1,34 +1,11 @@
-//methods returning a future\n
-@foreach{method : findFutureMethods(instanceMethods)}
-def @{method.name}\n
-@end{}
-
-//cached methods\n
-@foreach{method : findCacheReturnMethods(instanceMethods)}
-def @{method.name}\n
-@end{}
-
-//fluent methods\n
-@foreach{method : findFluentMethods(instanceMethods)}
-def @{method.name}\n
-@end{}
-
-//basic methods\n
-@foreach{method : findBasicMethods(instanceMethods)}
-def @{method.name}(
+@foreach{method : instanceMethods}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{escapeIfKeyword(method.name)}
+	@if{!method.typeParams.isEmpty}
+	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
+	@end{}(
 	@foreach{param:method.params}
-		@{param.name}:@{toScalaType(param.type)}
-	@end{})\n
-@end{}
-
-//in object!\n
-
-//static methods\n
-@foreach{method : staticMethods}
-def @{method.name}\n
-@end{}
-
-//default methods\n
-@foreach{method : findDefaultMethods(instanceMethods)}
-def @{method.name}\n
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
+	@end{','}):@{toScalaType(method.returnType)}\n
+	\n
 @end{}

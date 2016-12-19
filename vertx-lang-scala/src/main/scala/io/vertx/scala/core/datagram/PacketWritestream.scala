@@ -28,7 +28,7 @@ import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
   * The stream  is called when the write fails.
   */
 class PacketWritestream(private val _asJava: Object) 
-    extends WriteStream[Buffer](_asJava) {
+    extends WriteStream[Buffer] {
 
   def asJava = _asJava
 
@@ -41,7 +41,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def write(data: Buffer):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].write(data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
