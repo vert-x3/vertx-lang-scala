@@ -34,14 +34,14 @@ class Future[T](private val _asJava: Object) {
   def completer():Handler[AsyncResult[T]] = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JFuture[_]].completer()
-      cached_0 = x => tmp.handle(AsyncResultWrapper[T,T](x, a => a))
+      cached_0 = {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T,T](x, a => a))}
     }
     cached_0
   }
 
 //fluent methods
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
-    asJava.asInstanceOf[JFuture[_]].setHandler(x => handler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JFuture[_]].setHandler({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
     this
   }
 

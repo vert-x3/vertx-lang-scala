@@ -36,14 +36,14 @@ class CompositeFuture(private val _asJava: Object)
   override def completer():Handler[AsyncResult[CompositeFuture]] = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JCompositeFuture].completer()
-      cached_0 = x => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))
+      cached_0 = {x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))}
     }
     cached_0
   }
 
 //fluent methods
   override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]):CompositeFuture = {
-    asJava.asInstanceOf[JCompositeFuture].setHandler(x => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a))))
+    asJava.asInstanceOf[JCompositeFuture].setHandler({x: AsyncResult[JCompositeFuture] => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a)))})
     this
   }
 

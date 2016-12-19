@@ -63,17 +63,17 @@ class HttpServer(private val _asJava: Object)
 
 //fluent methods
   def requestHandler(handler: Handler[HttpServerRequest]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].requestHandler(x => handler.handle(HttpServerRequest(x)))
+    asJava.asInstanceOf[JHttpServer].requestHandler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].connectionHandler(x => handler.handle(HttpConnection(x)))
+    asJava.asInstanceOf[JHttpServer].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
   }
 
   def websocketHandler(handler: Handler[ServerWebSocket]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].websocketHandler(x => handler.handle(ServerWebSocket(x)))
+    asJava.asInstanceOf[JHttpServer].websocketHandler({x: JServerWebSocket => handler.handle(ServerWebSocket(x))})
     this
   }
 
@@ -88,7 +88,7 @@ class HttpServer(private val _asJava: Object)
   }
 
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port,host,x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
+    asJava.asInstanceOf[JHttpServer].listen(port,host,{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
   }
 
@@ -98,12 +98,12 @@ class HttpServer(private val _asJava: Object)
   }
 
   def listen(port: Int,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port,x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
+    asJava.asInstanceOf[JHttpServer].listen(port,{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
   }
 
   def listen(listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(x => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a))))
+    asJava.asInstanceOf[JHttpServer].listen({x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
   }
 
@@ -117,7 +117,7 @@ class HttpServer(private val _asJava: Object)
   }
 
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JHttpServer].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JHttpServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   def actualPort():Int = {

@@ -88,12 +88,12 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JHttpClientResponse].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
@@ -103,17 +103,17 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(Buffer(x)))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler({x: JBuffer => bodyHandler.handle(Buffer(x))})
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(HttpFrame(x)))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
     this
   }
 

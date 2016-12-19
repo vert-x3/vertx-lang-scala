@@ -34,17 +34,17 @@ class HttpServerFileUpload(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JHttpServerFileUpload].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JHttpServerFileUpload].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 

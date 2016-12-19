@@ -37,12 +37,12 @@ class TimeoutStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JTimeoutStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Long]):TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].handler(x => handler.handle(x))
+    asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x)})
     this
   }
 
@@ -57,7 +57,7 @@ class TimeoutStream(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JTimeoutStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 

@@ -61,7 +61,7 @@ class RecordParser(private val _asJava: Object)
 //fluent methods
 //basic methods
   def setOutput(output: Handler[Buffer]):Unit = {
-    asJava.asInstanceOf[JRecordParser].setOutput(x => output.handle(Buffer(x)))
+    asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})
   }
 
   def delimitedMode(delim: String):Unit = {
@@ -86,15 +86,15 @@ object RecordParser{
   def apply(asJava: JRecordParser) = new RecordParser(asJava)
 //static methods
   def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim,x => output.handle(Buffer(x))))
+    RecordParser(JRecordParser.newDelimited(delim,{x: JBuffer => output.handle(Buffer(x))}))
   }
 
   def newDelimited(delim: Buffer,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],x => output.handle(Buffer(x))))
+    RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],{x: JBuffer => output.handle(Buffer(x))}))
   }
 
   def newFixed(size: Int,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newFixed(size,x => output.handle(Buffer(x))))
+    RecordParser(JRecordParser.newFixed(size,{x: JBuffer => output.handle(Buffer(x))}))
   }
 
 }

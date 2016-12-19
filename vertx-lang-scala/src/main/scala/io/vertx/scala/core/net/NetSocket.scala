@@ -66,12 +66,12 @@ class NetSocket(private val _asJava: Object)
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Buffer]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JNetSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
@@ -86,7 +86,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -101,7 +101,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JNetSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -131,27 +131,27 @@ class NetSocket(private val _asJava: Object)
   }
 
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,length,x => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,length,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def closeHandler(handler: Handler[Unit]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].closeHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JNetSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
   def upgradeToSsl(handler: Handler[Unit]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].upgradeToSsl(x => handler.handle(x))
+    asJava.asInstanceOf[JNetSocket].upgradeToSsl({x: Void => handler.handle(x)})
     this
   }
 
