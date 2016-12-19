@@ -32,7 +32,6 @@ class WebSocket(private val _asJava: Object)
     extends WebSocketBase {
 
   def asJava = _asJava
-
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -60,7 +59,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JWebSocket].handler(x => handler.handle(Buffer(x)))
     this
   }
 
@@ -120,7 +119,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].frameHandler(x => handler.handle(x.asJava.asInstanceOf[JWebSocketFrame]))
+    asJava.asInstanceOf[JWebSocket].frameHandler(x => handler.handle(WebSocketFrame(x)))
     this
   }
 

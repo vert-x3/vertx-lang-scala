@@ -31,7 +31,6 @@ class HttpServerFileUpload(private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
@@ -40,7 +39,7 @@ class HttpServerFileUpload(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(Buffer(x)))
     this
   }
 

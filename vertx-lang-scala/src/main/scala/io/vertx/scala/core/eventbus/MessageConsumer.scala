@@ -40,7 +40,6 @@ class MessageConsumer[T](private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
@@ -49,7 +48,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage[T]]))
+    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(Message[T](x)))
     this
   }
 

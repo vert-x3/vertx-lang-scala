@@ -46,7 +46,6 @@ class FileSystem(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def copy(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {

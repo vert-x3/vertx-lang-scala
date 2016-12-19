@@ -29,7 +29,6 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
 //basic methods

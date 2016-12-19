@@ -41,7 +41,6 @@ class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def setName(name: String):CLI = {

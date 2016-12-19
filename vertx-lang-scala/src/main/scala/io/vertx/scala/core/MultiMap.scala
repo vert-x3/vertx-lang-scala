@@ -29,7 +29,6 @@ class MultiMap(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def add(name: String,value: String):MultiMap = {

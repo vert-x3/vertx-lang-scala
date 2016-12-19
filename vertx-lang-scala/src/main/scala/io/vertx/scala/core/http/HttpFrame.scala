@@ -26,7 +26,6 @@ import io.vertx.scala.core.buffer.Buffer
 class HttpFrame(private val _asJava: Object) {
 
   def asJava = _asJava
-
   private var cached_0:Int = _
   private var cached_1:Int = _
   private var cached_2:Buffer = _

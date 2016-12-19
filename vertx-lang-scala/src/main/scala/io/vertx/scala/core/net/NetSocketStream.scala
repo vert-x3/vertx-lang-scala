@@ -31,7 +31,6 @@ class NetSocketStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
@@ -40,7 +39,7 @@ class NetSocketStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket]))
+    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(NetSocket(x)))
     this
   }
 

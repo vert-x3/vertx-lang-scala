@@ -34,7 +34,6 @@ class MessageProducer[T](private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {

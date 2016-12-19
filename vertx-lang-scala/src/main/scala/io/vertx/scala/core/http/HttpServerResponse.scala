@@ -53,7 +53,6 @@ class HttpServerResponse(private val _asJava: Object)
     extends WriteStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:MultiMap = _
   private var cached_1:MultiMap = _
 

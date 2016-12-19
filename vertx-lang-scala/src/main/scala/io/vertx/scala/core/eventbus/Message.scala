@@ -37,7 +37,6 @@ import io.vertx.core.Handler
 class Message[T](private val _asJava: Object) {
 
   def asJava = _asJava
-
   private var cached_0:T = _
 
 //cached methods

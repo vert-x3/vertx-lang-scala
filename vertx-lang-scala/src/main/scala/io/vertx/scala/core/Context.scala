@@ -61,7 +61,6 @@ class Context(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def exceptionHandler(handler: Handler[Throwable]):Context = {
@@ -75,11 +74,11 @@ class Context(private val _asJava: Object) {
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def deploymentID():String = {
