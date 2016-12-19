@@ -37,7 +37,7 @@ class Future[T](private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JFuture[_]].completer()
       cached_0 = x => tmp.handle(AsyncResultWrapper[T,T](x, a => a))
     }
-    return cached_0
+    cached_0
   }
 
 //fluent methods

@@ -46,7 +46,7 @@ class Message[T](private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JMessage].body()
       cached_0 = tmp
     }
-    return cached_0
+    cached_0
   }
 
 //fluent methods

@@ -39,7 +39,7 @@ class CompositeFuture(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JCompositeFuture].completer()
       cached_0 = x => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))
     }
-    return cached_0
+    cached_0
   }
 
 //fluent methods

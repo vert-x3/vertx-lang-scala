@@ -74,7 +74,7 @@ class HttpClientRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def connection():HttpConnection = {
@@ -82,7 +82,7 @@ class HttpClientRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
       cached_1 = HttpConnection(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

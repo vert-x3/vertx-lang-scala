@@ -48,7 +48,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   override def localAddress():SocketAddress = {
@@ -56,7 +56,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def headers():MultiMap = {
@@ -64,7 +64,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].headers()
       cached_2 = MultiMap(tmp)
     }
-    return cached_2
+    cached_2
   }
 
 //fluent methods

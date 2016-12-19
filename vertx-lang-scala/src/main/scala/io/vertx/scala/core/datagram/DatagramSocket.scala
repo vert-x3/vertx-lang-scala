@@ -57,7 +57,7 @@ class DatagramSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JDatagramSocket].localAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
 //fluent methods
