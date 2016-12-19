@@ -27,10 +27,9 @@ import io.vertx.core.Handler
   * Represents an file upload from an HTML FORM.
   */
 class HttpServerFileUpload(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods
@@ -40,7 +39,7 @@ class HttpServerFileUpload(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(Buffer(x)))
     this
   }
 

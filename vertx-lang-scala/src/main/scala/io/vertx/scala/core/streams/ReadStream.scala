@@ -26,19 +26,17 @@ import io.vertx.core.Handler
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from it
   * to a [[io.vertx.scala.core.streams.WriteStream]].
   */
-trait ReadStream 
-    extends StreamBase(_asJava) {
+trait ReadStream[T] 
+    extends StreamBase {
 
-//methods returning a future
-//cached methods
-//fluent methods
-def exceptionHandler
-def handler
-def pause
-def resume
-def endHandler
-//basic methods
-//in object!
-//static methods
-//default methods
+  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T]
+
+  def handler(handler: Handler[T]):ReadStream[T]
+
+  def pause():ReadStream[T]
+
+  def resume():ReadStream[T]
+
+  def endHandler(endHandler: Handler[Unit]):ReadStream[T]
+
 }

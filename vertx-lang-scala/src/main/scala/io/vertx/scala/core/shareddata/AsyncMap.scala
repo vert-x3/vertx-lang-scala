@@ -29,7 +29,6 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
 //basic methods
@@ -58,7 +57,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
+    asJava.asInstanceOf[JAsyncMap].removeIfPresent(k,v,x => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a)))
   }
 
   def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
@@ -66,7 +65,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
+    asJava.asInstanceOf[JAsyncMap].replaceIfPresent(k,oldValue,newValue,x => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a)))
   }
 
   def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
@@ -74,7 +73,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[Integer,Int](x, a => a)))
+    asJava.asInstanceOf[JAsyncMap].size(x => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a)))
   }
 
 }

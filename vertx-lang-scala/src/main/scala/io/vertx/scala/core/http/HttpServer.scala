@@ -38,10 +38,9 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * WebSocket is passed to the handler.
   */
 class HttpServer(private val _asJava: Object) 
-    extends Measured(_asJava) {
+    extends Measured {
 
   def asJava = _asJava
-
   private var cached_0:HttpServerRequestStream = _
   private var cached_1:ServerWebSocketStream = _
 
@@ -51,7 +50,7 @@ class HttpServer(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServer].requestStream()
       cached_0 = HttpServerRequestStream(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def websocketStream():ServerWebSocketStream = {
@@ -59,22 +58,22 @@ class HttpServer(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
       cached_1 = ServerWebSocketStream(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods
   def requestHandler(handler: Handler[HttpServerRequest]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].requestHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
+    asJava.asInstanceOf[JHttpServer].requestHandler(x => handler.handle(HttpServerRequest(x)))
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].connectionHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpConnection]))
+    asJava.asInstanceOf[JHttpServer].connectionHandler(x => handler.handle(HttpConnection(x)))
     this
   }
 
   def websocketHandler(handler: Handler[ServerWebSocket]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].websocketHandler(x => handler.handle(x.asJava.asInstanceOf[JServerWebSocket]))
+    asJava.asInstanceOf[JHttpServer].websocketHandler(x => handler.handle(ServerWebSocket(x)))
     this
   }
 

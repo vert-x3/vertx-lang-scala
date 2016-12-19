@@ -28,10 +28,9 @@ import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
   * The stream  is called when the write fails.
   */
 class PacketWritestream(private val _asJava: Object) 
-    extends WriteStream[Buffer](_asJava) {
+    extends WriteStream[Buffer] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods

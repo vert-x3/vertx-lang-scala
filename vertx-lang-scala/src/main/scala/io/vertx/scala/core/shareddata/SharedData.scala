@@ -42,11 +42,10 @@ class SharedData(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
 //basic methods
-  def getClusterWideMap[K,V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
+  def getClusterWideMap[K, V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
     asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a))))
   }
 
@@ -62,7 +61,7 @@ class SharedData(private val _asJava: Object) {
     asJava.asInstanceOf[JSharedData].getCounter(name,x => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a))))
   }
 
-  def getLocalMap[K,V](name: String):LocalMap[K, V] = {
+  def getLocalMap[K, V](name: String):LocalMap[K, V] = {
     LocalMap[K,V](asJava.asInstanceOf[JSharedData].getLocalMap[K,V](name))
   }
 

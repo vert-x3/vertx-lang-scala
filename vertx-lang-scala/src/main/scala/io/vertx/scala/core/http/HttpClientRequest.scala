@@ -60,11 +60,10 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * 
   */
 class HttpClientRequest(private val _asJava: Object) 
-    extends WriteStream[Buffer](_asJava) 
-    with ReadStream[HttpClientResponse](_asJava) {
+    extends WriteStream[Buffer] 
+    with ReadStream[HttpClientResponse] {
 
   def asJava = _asJava
-
   private var cached_0:MultiMap = _
   private var cached_1:HttpConnection = _
 
@@ -74,7 +73,7 @@ class HttpClientRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def connection():HttpConnection = {
@@ -82,7 +81,7 @@ class HttpClientRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
       cached_1 = HttpConnection(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods
@@ -107,7 +106,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
+    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(HttpClientResponse(x)))
     this
   }
 
@@ -177,12 +176,12 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientRequest]))
+    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(HttpClientRequest(x)))
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpConnection]))
+    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(HttpConnection(x)))
     this
   }
 

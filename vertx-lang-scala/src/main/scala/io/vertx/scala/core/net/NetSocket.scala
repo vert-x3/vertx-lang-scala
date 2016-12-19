@@ -40,11 +40,10 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class NetSocket(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) 
-    with WriteStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] 
+    with WriteStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -54,7 +53,7 @@ class NetSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JNetSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def localAddress():SocketAddress = {
@@ -62,7 +61,7 @@ class NetSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JNetSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods
@@ -72,7 +71,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(Buffer(x)))
     this
   }
 

@@ -40,10 +40,9 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpClientResponse(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:MultiMap = _
   private var cached_1:MultiMap = _
   private var cached_2:scala.collection.mutable.Buffer[String] = _
@@ -55,7 +54,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def trailers():MultiMap = {
@@ -63,15 +62,15 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def cookies():scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
-      cached_2 = tmp.map(x => x)
+      cached_2 = tmp.asScala.map(x => x)
     }
-    return cached_2
+    cached_2
   }
 
   def netSocket():NetSocket = {
@@ -79,7 +78,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
       cached_3 = NetSocket(tmp)
     }
-    return cached_3
+    cached_3
   }
 
 //fluent methods
@@ -94,7 +93,7 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(Buffer(x)))
     this
   }
 
@@ -109,12 +108,12 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(Buffer(x)))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(HttpFrame(x)))
     this
   }
 

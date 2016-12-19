@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
 import io.vertx.scala.core.eventbus.EventBusOptions
