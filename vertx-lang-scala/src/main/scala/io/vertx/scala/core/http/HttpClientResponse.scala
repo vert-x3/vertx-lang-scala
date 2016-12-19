@@ -69,7 +69,7 @@ class HttpClientResponse(private val _asJava: Object)
   def cookies():scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
-      cached_2 = tmp.map(x => x)
+      cached_2 = tmp.asScala.map(x => x)
     }
     cached_2
   }
@@ -94,7 +94,7 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
@@ -109,12 +109,12 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpFrame]))
     this
   }
 

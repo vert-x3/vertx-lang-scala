@@ -40,7 +40,7 @@ class HttpServerFileUpload(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerFileUpload].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 

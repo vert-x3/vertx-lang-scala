@@ -45,7 +45,7 @@ class WebSocketStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[WebSocket]):WebSocketStream = {
-    asJava.asInstanceOf[JWebSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JWebSocket]))
+    asJava.asInstanceOf[JWebSocketStream].handler(x => handler.handle(x.asJava!!.asInstanceOf[JWebSocket]))
     this
   }
 

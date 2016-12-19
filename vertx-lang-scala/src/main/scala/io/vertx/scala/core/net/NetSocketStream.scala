@@ -40,7 +40,7 @@ class NetSocketStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket]))
+    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(x.asJava!!.asInstanceOf[JNetSocket]))
     this
   }
 

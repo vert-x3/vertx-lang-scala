@@ -225,12 +225,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
@@ -240,12 +240,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def writeFile(path: String,data: Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava.asInstanceOf[JBuffer],x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava!!.asInstanceOf[JBuffer],x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def writeFileBlocking(path: String,data: Buffer):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
@@ -298,11 +298,11 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readDirBlocking(path: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JFileSystem].readDirBlocking(path).map(x => x)
+    asJava.asInstanceOf[JFileSystem].readDirBlocking(path).asScala.map(x => x)
   }
 
   def readDirBlocking(path: String,filter: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JFileSystem].readDirBlocking(path,filter).map(x => x)
+    asJava.asInstanceOf[JFileSystem].readDirBlocking(path,filter).asScala.map(x => x)
   }
 
   def readFileBlocking(path: String):Buffer = {

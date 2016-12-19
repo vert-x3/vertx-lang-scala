@@ -72,7 +72,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
@@ -92,7 +92,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def write(data: Buffer):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JNetSocket].write(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 

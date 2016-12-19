@@ -60,7 +60,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  * 
+  *
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -73,15 +73,15 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  * 
+  *
   * Most functionality in Vert.x core is fairly low level.
-  * 
+  *
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  * 
+  *
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object) 
+class Vertx(private val _asJava: Object)
     extends Measured(_asJava) {
 
   def asJava = _asJava
@@ -231,7 +231,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deploymentIDs():Set[String] = {
-    asJava.asInstanceOf[JVertx].deploymentIDs().map(x => x)
+    asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x)
   }
 
   def isClustered():Boolean = {

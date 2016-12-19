@@ -35,11 +35,11 @@
     } else if (type.kind.collection) {
       var ret = name;
       if (type.kind == CLASS_LIST){
-        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       } else if (type.kind == CLASS_SET){
-        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       } else if (type.kind == CLASS_MAP){
-        ret += '.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       }
     }
     else {

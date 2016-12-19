@@ -60,7 +60,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JWebSocket].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
@@ -80,7 +80,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def write(data: Buffer):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JWebSocket].write(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
@@ -95,7 +95,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def writeFrame(frame: WebSocketFrame):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
+    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava!!.asInstanceOf[JWebSocketFrame])
     this
   }
 
@@ -105,12 +105,12 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def writeFinalBinaryFrame(data: Buffer):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
   override def writeBinaryMessage(data: Buffer):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
@@ -120,7 +120,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].frameHandler(x => handler.handle(x.asJava.asInstanceOf[JWebSocketFrame]))
+    asJava.asInstanceOf[JWebSocket].frameHandler(x => handler.handle(x.asJava!!.asInstanceOf[JWebSocketFrame]))
     this
   }
 

@@ -40,7 +40,7 @@ class HttpServerRequestStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
-    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
+    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpServerRequest]))
     this
   }
 

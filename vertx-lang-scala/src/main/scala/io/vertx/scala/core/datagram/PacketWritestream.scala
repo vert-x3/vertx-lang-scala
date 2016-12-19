@@ -41,7 +41,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def write(data: Buffer):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JPacketWritestream].write(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
