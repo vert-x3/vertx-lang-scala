@@ -92,7 +92,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def write(data: Buffer):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(data.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpClientRequest].write(data.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
@@ -107,7 +107,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientResponse]))
+    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpClientResponse]))
     this
   }
 
@@ -177,22 +177,22 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpClientRequest]))
+    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpClientRequest]))
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpConnection]))
+    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpConnection]))
     this
   }
 
   def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`,flags,payload.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`,flags,payload.asJava!!.asInstanceOf[JBuffer])
     this
   }
 
   def writeCustomFrame(frame: HttpFrame):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava!!.asInstanceOf[JHttpFrame])
     this
   }
 
@@ -238,7 +238,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def end(chunk: Buffer):Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asJava!!.asInstanceOf[JBuffer])
   }
 
   override def end():Unit = {

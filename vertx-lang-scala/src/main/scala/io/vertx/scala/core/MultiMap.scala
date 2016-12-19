@@ -38,7 +38,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def addAll(map: MultiMap):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].addAll(map.asJava!!.asInstanceOf[JMultiMap])
     this
   }
 
@@ -48,7 +48,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def setAll(map: MultiMap):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].setAll(map.asJava!!.asInstanceOf[JMultiMap])
     this
   }
 
@@ -68,7 +68,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def getAll(name: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JMultiMap].getAll(name).map(x => x)
+    asJava.asInstanceOf[JMultiMap].getAll(name).asScala.map(x => x)
   }
 
   def contains(name: String):Boolean = {
@@ -80,7 +80,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def names():Set[String] = {
-    asJava.asInstanceOf[JMultiMap].names().map(x => x)
+    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x)
   }
 
   def size():Int = {

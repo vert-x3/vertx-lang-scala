@@ -133,7 +133,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerRequest].handler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
@@ -153,7 +153,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerRequest].bodyHandler(x => bodyHandler.handle(x.asJava!!.asInstanceOf[JBuffer]))
     this
   }
 
@@ -163,12 +163,12 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].uploadHandler(x => uploadHandler.handle(x.asJava.asInstanceOf[JHttpServerFileUpload]))
+    asJava.asInstanceOf[JHttpServerRequest].uploadHandler(x => uploadHandler.handle(x.asJava!!.asInstanceOf[JHttpServerFileUpload]))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(x => handler.handle(x.asJava!!.asInstanceOf[JHttpFrame]))
     this
   }
 

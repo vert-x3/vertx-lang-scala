@@ -76,7 +76,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def connectHandler(handler: Handler[NetSocket]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket])))
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava!!.asInstanceOf[JNetSocket])))
   }
 
   def close():Unit = {

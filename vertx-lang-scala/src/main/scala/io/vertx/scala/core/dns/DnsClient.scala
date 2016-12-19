@@ -52,27 +52,27 @@ class DnsClient(private val _asJava: Object) {
   }
 
   def resolveA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveA(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JDnsClient].resolveA(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def resolveAAAA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveAAAA(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def resolveCNAME(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveCNAME(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def resolveMX(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveMX(name,x => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.map(x => MxRecord(x)))))
+    asJava.asInstanceOf[JDnsClient].resolveMX(name,x => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x)))))
     this
   }
 
   def resolveTXT(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveTXT(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
@@ -82,12 +82,12 @@ class DnsClient(private val _asJava: Object) {
   }
 
   def resolveNS(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveNS(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.map(x => x))))
+    asJava.asInstanceOf[JDnsClient].resolveNS(name,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def resolveSRV(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveSRV(name,x => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.map(x => SrvRecord(x)))))
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name,x => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x)))))
     this
   }
 

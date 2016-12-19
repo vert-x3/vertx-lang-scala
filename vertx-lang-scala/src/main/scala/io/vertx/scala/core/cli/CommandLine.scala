@@ -40,7 +40,7 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def allArguments():scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].allArguments().map(x => x)
+    asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x)
   }
 
   def getOptionValue[T](name: String):T = {
@@ -64,11 +64,11 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).map(x => x)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).asScala.map(x => x)
   }
 
   def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).map(x => x)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x)
   }
 
   def getRawValueForOption(option: Option):String = {
@@ -105,7 +105,7 @@ object CommandLine{
   def apply(asJava: JCommandLine) = new CommandLine(asJava)
 //static methods
   def create(cli: CLI):CommandLine = {
-    CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
+    CommandLine(JCommandLine.create(cli.asJava!!.asInstanceOf[JCLI]))
   }
 
 }
