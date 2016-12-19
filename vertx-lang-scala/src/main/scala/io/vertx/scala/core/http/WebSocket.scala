@@ -54,12 +54,12 @@ class WebSocket(private val _asJava: Object)
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Buffer]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JWebSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
@@ -74,7 +74,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -89,7 +89,7 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -114,12 +114,12 @@ class WebSocket(private val _asJava: Object)
   }
 
   override def closeHandler(handler: Handler[Unit]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].closeHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):WebSocket = {
-    asJava.asInstanceOf[JWebSocket].frameHandler(x => handler.handle(WebSocketFrame(x)))
+    asJava.asInstanceOf[JWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }
 

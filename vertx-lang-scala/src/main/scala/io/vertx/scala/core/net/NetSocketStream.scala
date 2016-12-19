@@ -34,12 +34,12 @@ class NetSocketStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JNetSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].handler(x => handler.handle(NetSocket(x)))
+    asJava.asInstanceOf[JNetSocketStream].handler({x: JNetSocket => handler.handle(NetSocket(x))})
     this
   }
 
@@ -54,7 +54,7 @@ class NetSocketStream(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
-    asJava.asInstanceOf[JNetSocketStream].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JNetSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 

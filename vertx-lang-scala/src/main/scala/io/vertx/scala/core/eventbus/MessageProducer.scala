@@ -37,7 +37,7 @@ class MessageProducer[T](private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageProducer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -52,7 +52,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageProducer[T]].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -71,7 +71,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
   }
 
   def address():String = {

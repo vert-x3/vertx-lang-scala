@@ -44,7 +44,7 @@ class AsyncFile(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def handler(handler: Handler[Buffer]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JAsyncFile].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
@@ -59,7 +59,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JAsyncFile].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -74,22 +74,22 @@ class AsyncFile(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JAsyncFile].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
   override def exceptionHandler(handler: Handler[Throwable]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JAsyncFile].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   def write(buffer: Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def read(buffer: Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[Buffer]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,x => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
     this
   }
 
@@ -99,7 +99,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def flush(handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].flush(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JAsyncFile].flush({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -132,7 +132,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncFile].close(x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
 }

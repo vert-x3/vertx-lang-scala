@@ -43,12 +43,12 @@ class MessageConsumer[T](private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageConsumer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].handler(x => handler.handle(Message[T](x)))
+    asJava.asInstanceOf[JMessageConsumer[T]].handler({x: JMessage[T] => handler.handle(Message[T](x))})
     this
   }
 
@@ -63,7 +63,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JMessageConsumer[T]].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -89,7 +89,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   def unregister():Unit = {
@@ -97,7 +97,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer[T]].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JMessageConsumer[T]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
 }
