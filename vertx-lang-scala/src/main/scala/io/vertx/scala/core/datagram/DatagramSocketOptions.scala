@@ -17,6 +17,7 @@
 package io.vertx.scala.core.datagram
 
 import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
 import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
 import io.vertx.scala.core.net.NetworkOptions

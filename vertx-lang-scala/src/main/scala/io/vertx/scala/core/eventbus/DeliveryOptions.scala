@@ -17,6 +17,7 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
