@@ -210,7 +210,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
   }
 
   def deployVerticle(name: String,options: DeploymentOptions):Unit = {
@@ -218,7 +218,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
   }
 
   def undeploy(deploymentID: String):Unit = {
