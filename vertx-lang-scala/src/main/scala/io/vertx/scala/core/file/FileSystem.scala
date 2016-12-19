@@ -159,7 +159,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readSymlink(link: String,handler: Handler[AsyncResult[String]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readSymlink(link,x => handler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JFileSystem].readSymlink(link,x => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
     this
   }
 
@@ -224,12 +224,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,x => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[java.util.List[String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
+    asJava.asInstanceOf[JFileSystem].readDir(path,filter,x => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x))))
     this
   }
 
@@ -274,7 +274,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def exists(path: String,handler: Handler[AsyncResult[Boolean]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].exists(path,x => handler.handle(AsyncResultWrapper[Boolean,Boolean](x, a => a)))
+    asJava.asInstanceOf[JFileSystem].exists(path,x => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a)))
     this
   }
 

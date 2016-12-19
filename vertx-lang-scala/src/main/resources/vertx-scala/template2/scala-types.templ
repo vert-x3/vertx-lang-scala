@@ -91,7 +91,7 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      return type.simpleName;
+      return type.name;
     } else if (type.kind == CLASS_THROWABLE) {
       return type.simpleName;
     } else if (type.kind == CLASS_OBJECT) {
