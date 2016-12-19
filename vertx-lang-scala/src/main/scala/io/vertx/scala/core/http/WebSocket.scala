@@ -42,7 +42,7 @@ class WebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JWebSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   override def localAddress():SocketAddress = {
@@ -50,7 +50,7 @@ class WebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JWebSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

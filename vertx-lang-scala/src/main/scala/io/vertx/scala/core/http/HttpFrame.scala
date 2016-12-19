@@ -37,7 +37,7 @@ class HttpFrame(private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
       cached_0 = tmp
     }
-    return cached_0
+    cached_0
   }
 
   def flags():Int = {
@@ -45,7 +45,7 @@ class HttpFrame(private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JHttpFrame].flags()
       cached_1 = tmp
     }
-    return cached_1
+    cached_1
   }
 
   def payload():Buffer = {
@@ -53,7 +53,7 @@ class HttpFrame(private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JHttpFrame].payload()
       cached_2 = Buffer(tmp)
     }
-    return cached_2
+    cached_2
   }
 
 //fluent methods

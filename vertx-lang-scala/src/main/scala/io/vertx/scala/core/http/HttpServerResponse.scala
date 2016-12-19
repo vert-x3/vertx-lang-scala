@@ -63,7 +63,7 @@ class HttpServerResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def trailers():MultiMap = {
@@ -71,7 +71,7 @@ class HttpServerResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

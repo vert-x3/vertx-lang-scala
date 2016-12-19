@@ -54,7 +54,7 @@ class NetSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JNetSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def localAddress():SocketAddress = {
@@ -62,7 +62,7 @@ class NetSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JNetSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

@@ -26,7 +26,7 @@
       var tmp = @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method)}\n
       cached_@{cached_method_counter} = @{toScalaWithConversion('tmp', method.returnType)}\n
     }\n
-    return cached_@{cached_method_counter}\n
+    cached_@{cached_method_counter}\n
   }\n
 	\n
 	@code{cached_method_counter++}

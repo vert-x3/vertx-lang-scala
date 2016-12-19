@@ -55,7 +55,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def trailers():MultiMap = {
@@ -63,7 +63,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def cookies():scala.collection.mutable.Buffer[String] = {
@@ -71,7 +71,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
       cached_2 = tmp.map(x => x)
     }
-    return cached_2
+    cached_2
   }
 
   def netSocket():NetSocket = {
@@ -79,7 +79,7 @@ class HttpClientResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
       cached_3 = NetSocket(tmp)
     }
-    return cached_3
+    cached_3
   }
 
 //fluent methods

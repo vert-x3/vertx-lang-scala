@@ -51,7 +51,7 @@ class HttpServer(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServer].requestStream()
       cached_0 = HttpServerRequestStream(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def websocketStream():ServerWebSocketStream = {
@@ -59,7 +59,7 @@ class HttpServer(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
       cached_1 = ServerWebSocketStream(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

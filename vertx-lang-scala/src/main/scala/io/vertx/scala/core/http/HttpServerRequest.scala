@@ -67,7 +67,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].response()
       cached_0 = HttpServerResponse(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def headers():MultiMap = {
@@ -75,7 +75,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def params():MultiMap = {
@@ -83,7 +83,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].params()
       cached_2 = MultiMap(tmp)
     }
-    return cached_2
+    cached_2
   }
 
   def remoteAddress():SocketAddress = {
@@ -91,7 +91,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
       cached_3 = SocketAddress(tmp)
     }
-    return cached_3
+    cached_3
   }
 
   def localAddress():SocketAddress = {
@@ -99,7 +99,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
       cached_4 = SocketAddress(tmp)
     }
-    return cached_4
+    cached_4
   }
 
   def netSocket():NetSocket = {
@@ -107,7 +107,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
       cached_5 = NetSocket(tmp)
     }
-    return cached_5
+    cached_5
   }
 
   def formAttributes():MultiMap = {
@@ -115,7 +115,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
       cached_6 = MultiMap(tmp)
     }
-    return cached_6
+    cached_6
   }
 
   def connection():HttpConnection = {
@@ -123,7 +123,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
       cached_7 = HttpConnection(tmp)
     }
-    return cached_7
+    cached_7
   }
 
 //fluent methods

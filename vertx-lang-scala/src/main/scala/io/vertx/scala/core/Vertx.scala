@@ -60,7 +60,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  *
+  * 
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -73,15 +73,15 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  *
+  * 
   * Most functionality in Vert.x core is fairly low level.
-  *
+  * 
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  *
+  * 
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object)
+class Vertx(private val _asJava: Object) 
     extends Measured(_asJava) {
 
   def asJava = _asJava
@@ -96,7 +96,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].fileSystem()
       cached_0 = FileSystem(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def eventBus():EventBus = {
@@ -104,7 +104,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].eventBus()
       cached_1 = EventBus(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def sharedData():SharedData = {
@@ -112,7 +112,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].sharedData()
       cached_2 = SharedData(tmp)
     }
-    return cached_2
+    cached_2
   }
 
 //fluent methods
