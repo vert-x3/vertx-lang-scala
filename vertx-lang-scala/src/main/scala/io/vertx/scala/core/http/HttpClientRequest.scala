@@ -86,7 +86,7 @@ class HttpClientRequest(private val _asJava: Object)
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpClientRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -101,12 +101,12 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpClientRequest].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].handler(x => handler.handle(HttpClientResponse(x)))
+    asJava.asInstanceOf[JHttpClientRequest].handler({x: JHttpClientResponse => handler.handle(HttpClientResponse(x))})
     this
   }
 
@@ -121,7 +121,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -156,7 +156,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def continueHandler(handler: Handler[Unit]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].continueHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpClientRequest].continueHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -166,7 +166,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def sendHead(completionHandler: Handler[io.vertx.core.http.HttpVersion]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].sendHead(x => completionHandler.handle(x))
+    asJava.asInstanceOf[JHttpClientRequest].sendHead({x: HttpVersion => completionHandler.handle(x)})
     this
   }
 
@@ -176,12 +176,12 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].pushHandler(x => handler.handle(HttpClientRequest(x)))
+    asJava.asInstanceOf[JHttpClientRequest].pushHandler({x: JHttpClientRequest => handler.handle(HttpClientRequest(x))})
     this
   }
 
   def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].connectionHandler(x => handler.handle(HttpConnection(x)))
+    asJava.asInstanceOf[JHttpClientRequest].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
   }
 
@@ -250,7 +250,7 @@ class HttpClientRequest(private val _asJava: Object)
 
 }
 
-object HttpClientRequest{
-  def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)
-//static methods
-}
+  object HttpClientRequest{
+    def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
+  //static methods
+  }

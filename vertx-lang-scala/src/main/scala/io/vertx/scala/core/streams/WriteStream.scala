@@ -30,6 +30,8 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 trait WriteStream[T] 
     extends StreamBase {
 
+  def asJava: java.lang.Object
+
   override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T]
 
   def write(data: T):WriteStream[T]
@@ -44,4 +46,45 @@ trait WriteStream[T]
 
   def drainHandler(handler: Handler[Unit]):WriteStream[T]
 
+
+  object WriteStream{
+    def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
+      private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
+
+        def asJava = _asJava
+
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T] = {
+    asJava.asInstanceOf[JWriteStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  def write(data: T):WriteStream[T] = {
+    asJava.asInstanceOf[JWriteStream[T]].write(data)
+    this
+  }
+
+  def setWriteQueueMaxSize(maxSize: Int):WriteStream[T] = {
+    asJava.asInstanceOf[JWriteStream[T]].setWriteQueueMaxSize(maxSize)
+    this
+  }
+
+  def drainHandler(handler: Handler[Unit]):WriteStream[T] = {
+    asJava.asInstanceOf[JWriteStream[T]].drainHandler({x: Void => handler.handle(x)})
+    this
+  }
+
+//basic methods
+  def end():Unit = {
+    asJava.asInstanceOf[JWriteStream[T]].end()
+  }
+
+  def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull()
+  }
+
 }
+      }
+
+  }

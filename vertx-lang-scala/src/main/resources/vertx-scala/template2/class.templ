@@ -53,10 +53,40 @@ import @{importedType}\n
 \n
 
 @if{concrete}
-	@includeNamed{'class-body.templ'; indentation=''}
+	@includeNamed{'class-body.templ'}
+	\n
+  object @{className}{\n
+    def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}) = new @{className}@{assembleTypeParams(typeParams)}(asJava)
+  \n
+  //static methods\n
+	@foreach{method : staticMethods}
+    def @{escapeIfKeyword(method.name)}
+	@if{!method.typeParams.isEmpty}
+	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
+	@end{}
+	(
+		@foreach{param:method.params}
+			@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
+		@end{','}):@{toScalaType(method.returnType)} = {\n
+      @{invokeStaticMethod('J'+className, type, method)}\n
+    }\n
+	\n
+	@end{}
+  }\n
 @else{}
 	@includeNamed{'trait-body.templ'}
+	\n
+  object @{className}{\n
+    def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}):@{className}@{assembleTypeParams(typeParams)} = new @{className}Impl@{assembleTypeParams(typeParams)}(asJava)
+    \n
+      private class @{className}Impl@{assembleTypeParams(typeParams)}(private val _asJava: J@{className}@{assembleTypeParams(typeParams)}) extends @{className}@{assembleTypeParams(typeParams)} {\n\n
+      @includeNamed{'class-body.templ'}
+      }\n\n
+  }\n
 @end{}
-}\n
+
+
+
+
 
 

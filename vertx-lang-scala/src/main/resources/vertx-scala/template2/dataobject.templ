@@ -47,7 +47,7 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}(_asJava)@end{' \n    with '}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}@end{' \n    with '}
 @end{}
  {\n
 \n

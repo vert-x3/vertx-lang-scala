@@ -41,7 +41,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
   * Options to configure the event bus.
   */
 class EventBusOptions(private val _asJava: JEventBusOptions) 
-    extends TCPSSLOptions(_asJava) {
+    extends TCPSSLOptions {
 
   def asJava = _asJava
 

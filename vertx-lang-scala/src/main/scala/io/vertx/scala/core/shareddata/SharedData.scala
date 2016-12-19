@@ -46,19 +46,19 @@ class SharedData(private val _asJava: Object) {
 //fluent methods
 //basic methods
   def getClusterWideMap[K, V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,x => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a))))
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,{x: AsyncResult[JAsyncMap[K,V]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a)))})
   }
 
   def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLock(name,x => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a))))
+    asJava.asInstanceOf[JSharedData].getLock(name,{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
   }
 
   def getLockWithTimeout(name: String,timeout: Long,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,x => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a))))
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
   }
 
   def getCounter(name: String,resultHandler: Handler[AsyncResult[Counter]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getCounter(name,x => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a))))
+    asJava.asInstanceOf[JSharedData].getCounter(name,{x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a)))})
   }
 
   def getLocalMap[K, V](name: String):LocalMap[K, V] = {
@@ -67,7 +67,7 @@ class SharedData(private val _asJava: Object) {
 
 }
 
-object SharedData{
-  def apply(asJava: JSharedData) = new SharedData(asJava)
-//static methods
-}
+  object SharedData{
+    def apply(asJava: JSharedData) = new SharedData(asJava)  
+  //static methods
+  }

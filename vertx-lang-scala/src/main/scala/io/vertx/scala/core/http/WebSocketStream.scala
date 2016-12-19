@@ -39,12 +39,12 @@ class WebSocketStream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketStream = {
-    asJava.asInstanceOf[JWebSocketStream].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[WebSocket]):WebSocketStream = {
-    asJava.asInstanceOf[JWebSocketStream].handler(x => handler.handle(WebSocket(x)))
+    asJava.asInstanceOf[JWebSocketStream].handler({x: JWebSocket => handler.handle(WebSocket(x))})
     this
   }
 
@@ -59,14 +59,14 @@ class WebSocketStream(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):WebSocketStream = {
-    asJava.asInstanceOf[JWebSocketStream].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JWebSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
 //basic methods
 }
 
-object WebSocketStream{
-  def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)
-//static methods
-}
+  object WebSocketStream{
+    def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)  
+  //static methods
+  }

@@ -68,12 +68,12 @@ class ServerWebSocket(private val _asJava: Object)
 
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Buffer]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JServerWebSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
@@ -88,7 +88,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def endHandler(endHandler: Handler[Unit]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JServerWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -103,7 +103,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JServerWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -128,12 +128,12 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def closeHandler(handler: Handler[Unit]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].closeHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JServerWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(WebSocketFrame(x)))
+    asJava.asInstanceOf[JServerWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }
 
@@ -176,7 +176,7 @@ class ServerWebSocket(private val _asJava: Object)
 
 }
 
-object ServerWebSocket{
-  def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)
-//static methods
-}
+  object ServerWebSocket{
+    def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
+  //static methods
+  }

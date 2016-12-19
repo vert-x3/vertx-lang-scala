@@ -33,36 +33,36 @@ class Counter(private val _asJava: Object) {
 //fluent methods
 //basic methods
   def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].get(x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].incrementAndGet(x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].incrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].getAndIncrement(x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].getAndIncrement({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].decrementAndGet(x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].decrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].addAndGet(value,x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].addAndGet(value,{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].getAndAdd(value,x => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a)))
+    asJava.asInstanceOf[JCounter].getAndAdd(value,{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,x => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a)))
+    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
   }
 
 }
 
-object Counter{
-  def apply(asJava: JCounter) = new Counter(asJava)
-//static methods
-}
+  object Counter{
+    def apply(asJava: JCounter) = new Counter(asJava)  
+  //static methods
+  }

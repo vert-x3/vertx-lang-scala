@@ -22,6 +22,25 @@ import io.vertx.core.metrics.{Measured => JMeasured}
   */
 trait Measured {
 
+  def asJava: java.lang.Object
+
   def isMetricsEnabled():Boolean
 
+
+  object Measured{
+    def apply(asJava: JMeasured):Measured = new MeasuredImpl(asJava)    
+      private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
+
+        def asJava = _asJava
+
+//cached methods
+//fluent methods
+//basic methods
+  def isMetricsEnabled():Boolean = {
+    asJava.asInstanceOf[JMeasured].isMetricsEnabled()
+  }
+
 }
+      }
+
+  }

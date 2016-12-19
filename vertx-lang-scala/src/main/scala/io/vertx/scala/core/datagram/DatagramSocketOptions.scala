@@ -26,7 +26,7 @@ import io.vertx.scala.core.net.NetworkOptions
   * Options used to configure a datagram socket.
   */
 class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions) 
-    extends NetworkOptions(_asJava) {
+    extends NetworkOptions {
 
   def asJava = _asJava
 

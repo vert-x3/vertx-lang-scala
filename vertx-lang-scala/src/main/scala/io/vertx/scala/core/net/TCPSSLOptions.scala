@@ -26,7 +26,7 @@ import io.vertx.scala.core.buffer.Buffer
   * Base class. TCP and SSL related options
   */
 trait TCPSSLOptions 
-    extends NetworkOptions(_asJava) {
+    extends NetworkOptions {
 
 
   /**

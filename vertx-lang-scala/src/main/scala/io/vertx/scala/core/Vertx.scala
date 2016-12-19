@@ -116,7 +116,7 @@ class Vertx(private val _asJava: Object)
 
 //fluent methods
   def exceptionHandler(handler: Handler[Throwable]):Vertx = {
-    asJava.asInstanceOf[JVertx].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JVertx].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -174,7 +174,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def setTimer(delay: Long,handler: Handler[Long]):Long = {
-    asJava.asInstanceOf[JVertx].setTimer(delay,x => handler.handle(x))
+    asJava.asInstanceOf[JVertx].setTimer(delay,{x: java.lang.Long => handler.handle(x)})
   }
 
   def timerStream(delay: Long):TimeoutStream = {
@@ -182,7 +182,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def setPeriodic(delay: Long,handler: Handler[Long]):Long = {
-    asJava.asInstanceOf[JVertx].setPeriodic(delay,x => handler.handle(x))
+    asJava.asInstanceOf[JVertx].setPeriodic(delay,{x: java.lang.Long => handler.handle(x)})
   }
 
   def periodicStream(delay: Long):TimeoutStream = {
@@ -194,7 +194,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def runOnContext(action: Handler[Unit]):Unit = {
-    asJava.asInstanceOf[JVertx].runOnContext(x => action.handle(x))
+    asJava.asInstanceOf[JVertx].runOnContext({x: Void => action.handle(x)})
   }
 
   def close():Unit = {
@@ -202,7 +202,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JVertx].close(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   def deployVerticle(name: String):Unit = {
@@ -210,7 +210,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
   }
 
   def deployVerticle(name: String,options: DeploymentOptions):Unit = {
@@ -218,7 +218,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
   }
 
   def undeploy(deploymentID: String):Unit = {
@@ -226,10 +226,10 @@ class Vertx(private val _asJava: Object)
   }
 
   def undeploy(deploymentID: String,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-  def deploymentIDs():Set[String] = {
+  def deploymentIDs():scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x)
   }
 
@@ -238,11 +238,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   def createSharedWorkerExecutor(name: String):WorkerExecutor = {
@@ -259,23 +259,23 @@ class Vertx(private val _asJava: Object)
 
 }
 
-object Vertx{
-  def apply(asJava: JVertx) = new Vertx(asJava)
-//static methods
-  def vertx():Vertx = {
-    Vertx(JVertx.vertx())
-  }
+  object Vertx{
+    def apply(asJava: JVertx) = new Vertx(asJava)  
+  //static methods
+    def vertx():Vertx = {
+      Vertx(JVertx.vertx())
+    }
 
-  def vertx(options: VertxOptions):Vertx = {
-    Vertx(JVertx.vertx(options.asJava))
-  }
+    def vertx(options: VertxOptions):Vertx = {
+      Vertx(JVertx.vertx(options.asJava))
+    }
 
-  def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
-    JVertx.clusteredVertx(options.asJava,x => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a))))
-  }
+    def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
+      JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
+    }
 
-  def currentContext():Context = {
-    Context(JVertx.currentContext())
-  }
+    def currentContext():Context = {
+      Context(JVertx.currentContext())
+    }
 
-}
+  }

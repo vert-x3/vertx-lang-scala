@@ -64,21 +64,21 @@ class Context(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def exceptionHandler(handler: Handler[Throwable]):Context = {
-    asJava.asInstanceOf[JContext].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
 //basic methods
   def runOnContext(action: Handler[Unit]):Unit = {
-    asJava.asInstanceOf[JContext].runOnContext(x => action.handle(x))
+    asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   def deploymentID():String = {
@@ -127,19 +127,19 @@ class Context(private val _asJava: Object) {
 
 }
 
-object Context{
-  def apply(asJava: JContext) = new Context(asJava)
-//static methods
-  def isOnWorkerThread():Boolean = {
-    JContext.isOnWorkerThread()
-  }
+  object Context{
+    def apply(asJava: JContext) = new Context(asJava)  
+  //static methods
+    def isOnWorkerThread():Boolean = {
+      JContext.isOnWorkerThread()
+    }
 
-  def isOnEventLoopThread():Boolean = {
-    JContext.isOnEventLoopThread()
-  }
+    def isOnEventLoopThread():Boolean = {
+      JContext.isOnEventLoopThread()
+    }
 
-  def isOnVertxThread():Boolean = {
-    JContext.isOnVertxThread()
-  }
+    def isOnVertxThread():Boolean = {
+      JContext.isOnVertxThread()
+    }
 
-}
+  }

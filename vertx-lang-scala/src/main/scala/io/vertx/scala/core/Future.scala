@@ -34,14 +34,14 @@ class Future[T](private val _asJava: Object) {
   def completer():Handler[AsyncResult[T]] = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JFuture[_]].completer()
-      cached_0 = x => tmp.handle(AsyncResultWrapper[T,T](x, a => a))
+      cached_0 = {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T,T](x, a => a))}
     }
     cached_0
   }
 
 //fluent methods
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
-    asJava.asInstanceOf[JFuture[_]].setHandler(x => handler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JFuture[_]].setHandler({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
     this
   }
 
@@ -84,27 +84,27 @@ class Future[T](private val _asJava: Object) {
 
 }
 
-object Future{
-  def apply[T](asJava: JFuture[T]) = new Future[T](asJava)
-//static methods
-  def future[T]():Future[T] = {
-    Future[T](JFuture.future[T]())
-  }
+  object Future{
+    def apply[T](asJava: JFuture[T]) = new Future[T](asJava)  
+  //static methods
+    def future[T]():Future[T] = {
+      Future[T](JFuture.future[T]())
+    }
 
-  def succeededFuture[T]():Future[T] = {
-    Future[T](JFuture.succeededFuture[T]())
-  }
+    def succeededFuture[T]():Future[T] = {
+      Future[T](JFuture.succeededFuture[T]())
+    }
 
-  def succeededFuture[T](result: T):Future[T] = {
-    Future[T](JFuture.succeededFuture[T](result))
-  }
+    def succeededFuture[T](result: T):Future[T] = {
+      Future[T](JFuture.succeededFuture[T](result))
+    }
 
-  def failedFuture[T](t: Throwable):Future[T] = {
-    Future[T](JFuture.failedFuture[T](t))
-  }
+    def failedFuture[T](t: Throwable):Future[T] = {
+      Future[T](JFuture.failedFuture[T](t))
+    }
 
-  def failedFuture[T](failureMessage: String):Future[T] = {
-    Future[T](JFuture.failedFuture[T](failureMessage))
-  }
+    def failedFuture[T](failureMessage: String):Future[T] = {
+      Future[T](JFuture.failedFuture[T](failureMessage))
+    }
 
-}
+  }
