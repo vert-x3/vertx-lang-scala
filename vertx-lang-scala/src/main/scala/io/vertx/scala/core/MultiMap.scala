@@ -78,7 +78,7 @@ class MultiMap(private val _asJava: Object) {
     asJava.asInstanceOf[JMultiMap].isEmpty()
   }
 
-  def names():Set[String] = {
+  def names():scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x)
   }
 
@@ -88,11 +88,11 @@ class MultiMap(private val _asJava: Object) {
 
 }
 
-object MultiMap{
-  def apply(asJava: JMultiMap) = new MultiMap(asJava)
-//static methods
-  def caseInsensitiveMultiMap():MultiMap = {
-    MultiMap(JMultiMap.caseInsensitiveMultiMap())
-  }
+  object MultiMap{
+    def apply(asJava: JMultiMap) = new MultiMap(asJava)  
+  //static methods
+    def caseInsensitiveMultiMap():MultiMap = {
+      MultiMap(JMultiMap.caseInsensitiveMultiMap())
+    }
 
-}
+  }

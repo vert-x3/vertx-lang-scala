@@ -36,14 +36,14 @@ class CompositeFuture(private val _asJava: Object)
   override def completer():Handler[AsyncResult[CompositeFuture]] = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JCompositeFuture].completer()
-      cached_0 = x => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))
+      cached_0 = {x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))}
     }
     cached_0
   }
 
 //fluent methods
   override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]):CompositeFuture = {
-    asJava.asInstanceOf[JCompositeFuture].setHandler(x => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a))))
+    asJava.asInstanceOf[JCompositeFuture].setHandler({x: AsyncResult[JCompositeFuture] => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a)))})
     this
   }
 
@@ -82,79 +82,79 @@ class CompositeFuture(private val _asJava: Object)
 
 }
 
-object CompositeFuture{
-  def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)
-//static methods
-  def all[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
-  }
+  object CompositeFuture{
+    def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)  
+  //static methods
+    def all[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
+    }
 
-  def all[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
-  }
+    def all[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
+    }
 
-  def all[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
-  }
+    def all[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
+    }
 
-  def all[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
-  }
+    def all[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
+    }
 
-  def all[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
-  }
+    def all[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
+    }
 
-  def all(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
-  }
+    def all(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    }
 
-  def any[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
-  }
+    def any[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
+    }
 
-  def any[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
-  }
+    def any[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
+    }
 
-  def any[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
-  }
+    def any[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
+    }
 
-  def any[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
-  }
+    def any[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
+    }
 
-  def any[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
-  }
+    def any[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
+    }
 
-  def any(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
-  }
+    def any(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    }
 
-  def join[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
-  }
+    def join[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))
+    }
 
-  def join[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
-  }
+    def join[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join[T1,T2,T3](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]]))
+    }
 
-  def join[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
-  }
+    def join[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]]))
+    }
 
-  def join[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
-  }
+    def join[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4,T5](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]]))
+    }
 
-  def join[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
-  }
+    def join[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join[T1,T2,T3,T4,T5,T6](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]],f3.asJava.asInstanceOf[JFuture[T3]],f4.asJava.asInstanceOf[JFuture[T4]],f5.asJava.asInstanceOf[JFuture[T5]],f6.asJava.asInstanceOf[JFuture[T6]]))
+    }
 
-  def join(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
-  }
+    def join(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
+      CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    }
 
-}
+  }

@@ -82,12 +82,12 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(GoAway(x)))
+    asJava.asInstanceOf[JHttpConnection].goAwayHandler({x: JGoAway => handler.handle(GoAway(x))})
     this
   }
 
   def shutdownHandler(handler: Handler[Unit]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdownHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpConnection].shutdownHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -102,7 +102,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def closeHandler(handler: Handler[Unit]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].closeHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpConnection].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -112,27 +112,27 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def remoteSettingsHandler(handler: Handler[Http2Settings]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(Http2Settings(x)))
+    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler({x: JHttp2Settings => handler.handle(Http2Settings(x))})
     this
   }
 
   def ping(data: Buffer,pongHandler: Handler[AsyncResult[Buffer]]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],x => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
+    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],{x: AsyncResult[JBuffer] => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
     this
   }
 
   def pingHandler(handler: Handler[Buffer]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(Buffer(x)))
+    asJava.asInstanceOf[JHttpConnection].pingHandler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
 
   def exceptionHandler(handler: Handler[Throwable]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JHttpConnection].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -151,7 +151,7 @@ class HttpConnection(private val _asJava: Object) {
 
 }
 
-object HttpConnection{
-  def apply(asJava: JHttpConnection) = new HttpConnection(asJava)
-//static methods
-}
+  object HttpConnection{
+    def apply(asJava: JHttpConnection) = new HttpConnection(asJava)  
+  //static methods
+  }

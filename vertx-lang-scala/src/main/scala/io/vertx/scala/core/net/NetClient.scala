@@ -40,7 +40,7 @@ class NetClient(private val _asJava: Object)
 //cached methods
 //fluent methods
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(port,host,x => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a))))
+    asJava.asInstanceOf[JNetClient].connect(port,host,{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
 
@@ -55,7 +55,7 @@ class NetClient(private val _asJava: Object)
 
 }
 
-object NetClient{
-  def apply(asJava: JNetClient) = new NetClient(asJava)
-//static methods
-}
+  object NetClient{
+    def apply(asJava: JNetClient) = new NetClient(asJava)  
+  //static methods
+  }

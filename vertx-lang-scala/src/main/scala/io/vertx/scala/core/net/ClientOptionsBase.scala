@@ -26,7 +26,7 @@ import io.vertx.scala.core.buffer.Buffer
   * Base class for Client options
   */
 trait ClientOptionsBase 
-    extends TCPSSLOptions(_asJava) {
+    extends TCPSSLOptions {
 
 
   /**

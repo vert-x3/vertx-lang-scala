@@ -26,7 +26,7 @@ import io.vertx.scala.core.buffer.Buffer
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
   */
 class NetClientOptions(private val _asJava: JNetClientOptions) 
-    extends ClientOptionsBase(_asJava) {
+    extends ClientOptionsBase {
 
   def asJava = _asJava
 

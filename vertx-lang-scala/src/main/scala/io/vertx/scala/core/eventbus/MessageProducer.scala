@@ -37,58 +37,58 @@ class MessageProducer[T](private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageProducer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def write(data: T):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].write(data)
+    asJava.asInstanceOf[JMessageProducer[T]].write(data)
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize)
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageProducer[T]].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer].deliveryOptions(options.asJava)
+    asJava.asInstanceOf[JMessageProducer[T]].deliveryOptions(options.asJava)
     this
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JMessageProducer].writeQueueFull()
+    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull()
   }
 
   def send(message: T):MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer].send(message))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send(message))
   }
 
   def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer].send[R](message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
   }
 
   def address():String = {
-    asJava.asInstanceOf[JMessageProducer].address()
+    asJava.asInstanceOf[JMessageProducer[T]].address()
   }
 
   override def end():Unit = {
-    asJava.asInstanceOf[JMessageProducer].end()
+    asJava.asInstanceOf[JMessageProducer[T]].end()
   }
 
   def close():Unit = {
-    asJava.asInstanceOf[JMessageProducer].close()
+    asJava.asInstanceOf[JMessageProducer[T]].close()
   }
 
 }
 
-object MessageProducer{
-  def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)
-//static methods
-}
+  object MessageProducer{
+    def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)  
+  //static methods
+  }

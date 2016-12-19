@@ -35,7 +35,7 @@ class PacketWritestream(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JPacketWritestream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -50,7 +50,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].drainHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JPacketWritestream].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -65,7 +65,7 @@ class PacketWritestream(private val _asJava: Object)
 
 }
 
-object PacketWritestream{
-  def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)
-//static methods
-}
+  object PacketWritestream{
+    def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)  
+  //static methods
+  }

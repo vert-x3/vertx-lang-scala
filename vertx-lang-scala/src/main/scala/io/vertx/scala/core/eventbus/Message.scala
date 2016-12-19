@@ -42,7 +42,7 @@ class Message[T](private val _asJava: Object) {
 //cached methods
   def body():T = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JMessage].body()
+      var tmp = asJava.asInstanceOf[JMessage[T]].body()
       cached_0 = tmp
     }
     cached_0
@@ -51,44 +51,44 @@ class Message[T](private val _asJava: Object) {
 //fluent methods
 //basic methods
   def address():String = {
-    asJava.asInstanceOf[JMessage].address()
+    asJava.asInstanceOf[JMessage[T]].address()
   }
 
   def headers():MultiMap = {
-    MultiMap(asJava.asInstanceOf[JMessage].headers())
+    MultiMap(asJava.asInstanceOf[JMessage[T]].headers())
   }
 
   def replyAddress():String = {
-    asJava.asInstanceOf[JMessage].replyAddress()
+    asJava.asInstanceOf[JMessage[T]].replyAddress()
   }
 
   def isSend():Boolean = {
-    asJava.asInstanceOf[JMessage].isSend()
+    asJava.asInstanceOf[JMessage[T]].isSend()
   }
 
   def reply(message: AnyRef):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message)
+    asJava.asInstanceOf[JMessage[T]].reply(message)
   }
 
   def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply[R](message,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a))))
+    asJava.asInstanceOf[JMessage[T]].reply[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
-    asJava.asInstanceOf[JMessage].reply(message,options.asJava)
+    asJava.asInstanceOf[JMessage[T]].reply(message,options.asJava)
   }
 
   def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
-    asJava.asInstanceOf[JMessage].reply[R](message,options.asJava,x => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a))))
+    asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
   def fail(failureCode: Int,message: String):Unit = {
-    asJava.asInstanceOf[JMessage].fail(failureCode,message)
+    asJava.asInstanceOf[JMessage[T]].fail(failureCode,message)
   }
 
 }
 
-object Message{
-  def apply[T](asJava: JMessage[T]) = new Message[T](asJava)
-//static methods
-}
+  object Message{
+    def apply[T](asJava: JMessage[T]) = new Message[T](asJava)  
+  //static methods
+  }

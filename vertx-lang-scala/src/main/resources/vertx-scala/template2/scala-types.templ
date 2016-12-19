@@ -1,5 +1,5 @@
 @code{
-  def toScalaWithConversion(name, type) {
+  def toScalaWithConversion(name, type, typeParams, methodTypeParams) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
@@ -29,17 +29,17 @@
       }
       return helper.getNonGenericType(type.simpleName) + args + '(' + name + ')';
     } else if (type.kind == CLASS_HANDLER) {
-      return 'x => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0]) + ')';
+      return '{x: ' + toScalaType(type.args[0], typeParams, methodTypeParams) + ' => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toJavaType(type.args[0]) + ',' + toScalaType(type.args[0]) + '](x, a => ' + toScalaWithConversion('a', type.args[0]) + ')';
+      return 'AsyncResultWrapper[' + toJavaType(type.args[0]) + ',' + toScalaType(type.args[0]) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       var ret = name;
       if (type.kind == CLASS_LIST){
-        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       } else if (type.kind == CLASS_SET){
-        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       } else if (type.kind == CLASS_MAP){
-        ret += '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       }
     }
     else {
@@ -47,7 +47,7 @@
     }
   }
 
-  def toJavaWithConversion(name, type) {
+  def toJavaWithConversion(name, type, typeParams, methodTypeParams) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
@@ -66,17 +66,17 @@
     } else if (type.kind == CLASS_API) {
       return name + '.asJava' + fromObjectToInstanceOf(type);
     } else if (type.kind == CLASS_HANDLER) {
-      return 'x => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0]) + ')';
+      return '{x: ' + toJavaType(type.args[0], typeParams, methodTypeParams) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toScalaType(type.args[0]) + ',' + toJavaType(type.args[0]) + '](x, a => ' + toJavaWithConversion('a', type.args[0]) + ')';
+      return 'AsyncResultWrapper[' + toScalaType(type.args[0]) + ',' + toJavaType(type.args[0]) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       var ret = name;
       if (type.kind == CLASS_LIST){
-        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       } else if (type.kind == CLASS_SET){
-        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       } else if (type.kind == CLASS_MAP){
-        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[0]) +')';
+        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       }
       return ret + '.asJava';
     } else if(type.kind == CLASS_ASYNC_RESULT) {
@@ -112,6 +112,15 @@
             args += ',';
           }
           args += toJavaType(arg);
+        }
+        ret += '[' + args + ']';
+      } else if(!type.raw.params.isEmpty) {
+        var args = '';
+        for(arg : type.raw.params) {
+          if(args != '') {
+            args += ',';
+          }
+          args += arg.name;
         }
         ret += '[' + args + ']';
       }
@@ -178,7 +187,7 @@
           ret += '[' + toScalaType(type.args[0]) + ']';
         return ret;
     } else if (type.kind == CLASS_SET){
-        var ret = 'Set';
+        var ret = 'scala.collection.mutable.Set';
         if (!type.args.isEmpty)
           ret += '[' + toScalaType(type.args[0]) + ']';
         return ret;
