@@ -31,7 +31,6 @@ class HttpServerRequestStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
@@ -40,7 +39,7 @@ class HttpServerRequestStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
-    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
+    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(HttpServerRequest(x)))
     this
   }
 

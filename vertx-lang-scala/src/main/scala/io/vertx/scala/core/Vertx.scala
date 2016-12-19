@@ -85,7 +85,6 @@ class Vertx(private val _asJava: Object)
     extends Measured {
 
   def asJava = _asJava
-
   private var cached_0:FileSystem = _
   private var cached_1:EventBus = _
   private var cached_2:SharedData = _
@@ -239,11 +238,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def createSharedWorkerExecutor(name: String):WorkerExecutor = {

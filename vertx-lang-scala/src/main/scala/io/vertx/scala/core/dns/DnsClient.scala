@@ -33,7 +33,6 @@ class DnsClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def lookup(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {

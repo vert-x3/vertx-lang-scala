@@ -41,11 +41,10 @@ class AsyncFile(private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   override def handler(handler: Handler[Buffer]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(Buffer(x)))
     this
   }
 

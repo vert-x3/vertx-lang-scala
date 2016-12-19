@@ -43,7 +43,6 @@ class HttpClientResponse(private val _asJava: Object)
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:MultiMap = _
   private var cached_1:MultiMap = _
   private var cached_2:scala.collection.mutable.Buffer[String] = _
@@ -94,7 +93,7 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].handler(x => handler.handle(Buffer(x)))
     this
   }
 
@@ -109,12 +108,12 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler(x => bodyHandler.handle(Buffer(x)))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler(x => handler.handle(HttpFrame(x)))
     this
   }
 

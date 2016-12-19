@@ -28,7 +28,6 @@ import io.vertx.core.Handler
 class Future[T](private val _asJava: Object) {
 
   def asJava = _asJava
-
   private var cached_0:Handler[AsyncResult[T]] = _
 
 //cached methods

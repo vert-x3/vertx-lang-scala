@@ -33,7 +33,6 @@ class NetServer(private val _asJava: Object)
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def listen():NetServer = {
@@ -76,7 +75,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def connectHandler(handler: Handler[NetSocket]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket])))
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(NetSocket(x))))
   }
 
   def close():Unit = {

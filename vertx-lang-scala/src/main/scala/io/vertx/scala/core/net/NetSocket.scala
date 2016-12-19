@@ -44,7 +44,6 @@ class NetSocket(private val _asJava: Object)
     with WriteStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -72,7 +71,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JNetSocket].handler(x => handler.handle(Buffer(x)))
     this
   }
 
