@@ -27,10 +27,9 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class HttpServerRequestStream(private val _asJava: Object) 
-    extends ReadStream[HttpServerRequest](_asJava) {
+    extends ReadStream[HttpServerRequest] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods
@@ -40,7 +39,7 @@ class HttpServerRequestStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
-    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(x.asJava.asInstanceOf[JHttpServerRequest]))
+    asJava.asInstanceOf[JHttpServerRequestStream].handler(x => handler.handle(HttpServerRequest(x)))
     this
   }
 

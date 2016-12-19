@@ -36,16 +36,15 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
 class AsyncFile(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) 
-    with WriteStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] 
+    with WriteStream[Buffer] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods
   override def handler(handler: Handler[Buffer]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JAsyncFile].handler(x => handler.handle(Buffer(x)))
     this
   }
 

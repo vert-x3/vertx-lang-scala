@@ -36,10 +36,9 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
 class MessageConsumer[T](private val _asJava: Object) 
-    extends ReadStream[Message[T]](_asJava) {
+    extends ReadStream[Message[T]] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods
@@ -49,7 +48,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(x.asJava.asInstanceOf[JMessage[T]]))
+    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(Message[T](x)))
     this
   }
 

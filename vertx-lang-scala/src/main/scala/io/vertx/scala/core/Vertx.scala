@@ -60,7 +60,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  *
+  * 
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -73,19 +73,18 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  *
+  * 
   * Most functionality in Vert.x core is fairly low level.
-  *
+  * 
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  *
+  * 
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object)
-    extends Measured(_asJava) {
+class Vertx(private val _asJava: Object) 
+    extends Measured {
 
   def asJava = _asJava
-
   private var cached_0:FileSystem = _
   private var cached_1:EventBus = _
   private var cached_2:SharedData = _
@@ -96,7 +95,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].fileSystem()
       cached_0 = FileSystem(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def eventBus():EventBus = {
@@ -104,7 +103,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].eventBus()
       cached_1 = EventBus(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def sharedData():SharedData = {
@@ -112,7 +111,7 @@ class Vertx(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JVertx].sharedData()
       cached_2 = SharedData(tmp)
     }
-    return cached_2
+    cached_2
   }
 
 //fluent methods
@@ -211,7 +210,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
   }
 
   def deployVerticle(name: String,options: DeploymentOptions):Unit = {
@@ -219,7 +218,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[String,String](x, a => a)))
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,x => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a)))
   }
 
   def undeploy(deploymentID: String):Unit = {
@@ -231,7 +230,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deploymentIDs():Set[String] = {
-    asJava.asInstanceOf[JVertx].deploymentIDs().map(x => x)
+    asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x)
   }
 
   def isClustered():Boolean = {
@@ -239,11 +238,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),ordered,x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(x.asJava.asInstanceOf[JFuture[T]]),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
+    asJava.asInstanceOf[JVertx].executeBlocking[T](x => blockingCodeHandler.handle(Future[T](x)),x => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a)))
   }
 
   def createSharedWorkerExecutor(name: String):WorkerExecutor = {

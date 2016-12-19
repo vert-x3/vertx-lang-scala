@@ -44,7 +44,6 @@ class Pump(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def setWriteQueueMaxSize(maxSize: Int):Pump = {

@@ -27,10 +27,9 @@ import io.vertx.core.Handler
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class ServerWebSocketStream(private val _asJava: Object) 
-    extends ReadStream[ServerWebSocket](_asJava) {
+    extends ReadStream[ServerWebSocket] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods
@@ -40,7 +39,7 @@ class ServerWebSocketStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[ServerWebSocket]):ServerWebSocketStream = {
-    asJava.asInstanceOf[JServerWebSocketStream].handler(x => handler.handle(x.asJava.asInstanceOf[JServerWebSocket]))
+    asJava.asInstanceOf[JServerWebSocketStream].handler(x => handler.handle(ServerWebSocket(x)))
     this
   }
 

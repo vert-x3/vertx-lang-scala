@@ -50,10 +50,9 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpServerResponse(private val _asJava: Object) 
-    extends WriteStream[Buffer](_asJava) {
+    extends WriteStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:MultiMap = _
   private var cached_1:MultiMap = _
 
@@ -63,7 +62,7 @@ class HttpServerResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
       cached_0 = MultiMap(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def trailers():MultiMap = {
@@ -71,7 +70,7 @@ class HttpServerResponse(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods

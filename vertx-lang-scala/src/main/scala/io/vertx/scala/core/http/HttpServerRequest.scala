@@ -48,10 +48,9 @@ import io.vertx.scala.core.net.SocketAddress
   * 
   */
 class HttpServerRequest(private val _asJava: Object) 
-    extends ReadStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] {
 
   def asJava = _asJava
-
   private var cached_0:HttpServerResponse = _
   private var cached_1:MultiMap = _
   private var cached_2:MultiMap = _
@@ -67,7 +66,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].response()
       cached_0 = HttpServerResponse(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def headers():MultiMap = {
@@ -75,7 +74,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
       cached_1 = MultiMap(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def params():MultiMap = {
@@ -83,7 +82,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].params()
       cached_2 = MultiMap(tmp)
     }
-    return cached_2
+    cached_2
   }
 
   def remoteAddress():SocketAddress = {
@@ -91,7 +90,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
       cached_3 = SocketAddress(tmp)
     }
-    return cached_3
+    cached_3
   }
 
   def localAddress():SocketAddress = {
@@ -99,7 +98,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
       cached_4 = SocketAddress(tmp)
     }
-    return cached_4
+    cached_4
   }
 
   def netSocket():NetSocket = {
@@ -107,7 +106,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
       cached_5 = NetSocket(tmp)
     }
-    return cached_5
+    cached_5
   }
 
   def formAttributes():MultiMap = {
@@ -115,7 +114,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
       cached_6 = MultiMap(tmp)
     }
-    return cached_6
+    cached_6
   }
 
   def connection():HttpConnection = {
@@ -123,7 +122,7 @@ class HttpServerRequest(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
       cached_7 = HttpConnection(tmp)
     }
-    return cached_7
+    cached_7
   }
 
 //fluent methods
@@ -133,7 +132,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerRequest].handler(x => handler.handle(Buffer(x)))
     this
   }
 
@@ -153,7 +152,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].bodyHandler(x => bodyHandler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpServerRequest].bodyHandler(x => bodyHandler.handle(Buffer(x)))
     this
   }
 
@@ -163,12 +162,12 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].uploadHandler(x => uploadHandler.handle(x.asJava.asInstanceOf[JHttpServerFileUpload]))
+    asJava.asInstanceOf[JHttpServerRequest].uploadHandler(x => uploadHandler.handle(HttpServerFileUpload(x)))
     this
   }
 
   def customFrameHandler(handler: Handler[HttpFrame]):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(x => handler.handle(x.asJava.asInstanceOf[JHttpFrame]))
+    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler(x => handler.handle(HttpFrame(x)))
     this
   }
 

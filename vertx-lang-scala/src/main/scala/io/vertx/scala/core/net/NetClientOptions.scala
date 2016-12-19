@@ -17,6 +17,7 @@
 package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.scala.core.buffer.Buffer

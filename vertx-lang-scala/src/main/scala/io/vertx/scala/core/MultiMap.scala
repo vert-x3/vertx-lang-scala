@@ -29,7 +29,6 @@ class MultiMap(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def add(name: String,value: String):MultiMap = {
@@ -68,7 +67,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def getAll(name: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JMultiMap].getAll(name).map(x => x)
+    asJava.asInstanceOf[JMultiMap].getAll(name).asScala.map(x => x)
   }
 
   def contains(name: String):Boolean = {
@@ -80,7 +79,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def names():Set[String] = {
-    asJava.asInstanceOf[JMultiMap].names().map(x => x)
+    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x)
   }
 
   def size():Int = {

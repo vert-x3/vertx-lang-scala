@@ -29,17 +29,17 @@
       }
       return helper.getNonGenericType(type.simpleName) + args + '(' + name + ')';
     } else if (type.kind == CLASS_HANDLER) {
-      return 'x => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0]) + ')';
+      return 'x => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0]) + ')';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toScalaType(type.args[0]) + ',' + toJavaType(type.args[0]) + '](x, a => ' + toJavaWithConversion('a', type.args[0]) + ')';
+      return 'AsyncResultWrapper[' + toJavaType(type.args[0]) + ',' + toScalaType(type.args[0]) + '](x, a => ' + toScalaWithConversion('a', type.args[0]) + ')';
     } else if (type.kind.collection) {
       var ret = name;
       if (type.kind == CLASS_LIST){
-        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       } else if (type.kind == CLASS_SET){
-        ret += '.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       } else if (type.kind == CLASS_MAP){
-        ret += '.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
+        ret += '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0]) +')';
       }
     }
     else {
@@ -66,9 +66,9 @@
     } else if (type.kind == CLASS_API) {
       return name + '.asJava' + fromObjectToInstanceOf(type);
     } else if (type.kind == CLASS_HANDLER) {
-      return 'x => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0]) + ')';
+      return 'x => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0]) + ')';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toJavaType(type.args[0]) + ',' + toScalaType(type.args[0]) + '](x, a => ' + toScalaWithConversion('a', type.args[0]) + ')';
+      return 'AsyncResultWrapper[' + toScalaType(type.args[0]) + ',' + toJavaType(type.args[0]) + '](x, a => ' + toJavaWithConversion('a', type.args[0]) + ')';
     } else if (type.kind.collection) {
       var ret = name;
       if (type.kind == CLASS_LIST){
@@ -91,7 +91,7 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      return type.simpleName;
+      return type.name;
     } else if (type.kind == CLASS_THROWABLE) {
       return type.simpleName;
     } else if (type.kind == CLASS_OBJECT) {

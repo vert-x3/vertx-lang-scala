@@ -41,7 +41,6 @@ class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
-
 //cached methods
 //fluent methods
   def setName(name: String):CLI = {
@@ -130,11 +129,11 @@ class CLI(private val _asJava: Object) {
   }
 
   def getOptions():scala.collection.mutable.Buffer[Option] = {
-    asJava.asInstanceOf[JCLI].getOptions().map(x => Option(x))
+    asJava.asInstanceOf[JCLI].getOptions().asScala.map(x => Option(x))
   }
 
   def getArguments():scala.collection.mutable.Buffer[Argument] = {
-    asJava.asInstanceOf[JCLI].getArguments().map(x => Argument(x))
+    asJava.asInstanceOf[JCLI].getArguments().asScala.map(x => Argument(x))
   }
 
   def getOption(name: String):Option = {

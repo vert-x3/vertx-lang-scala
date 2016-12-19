@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
 import io.vertx.core.http.{GoAway => JGoAway}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer

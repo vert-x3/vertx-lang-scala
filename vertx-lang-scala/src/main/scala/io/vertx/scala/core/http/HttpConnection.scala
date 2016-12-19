@@ -40,7 +40,6 @@ import io.vertx.scala.core.net.SocketAddress
 class HttpConnection(private val _asJava: Object) {
 
   def asJava = _asJava
-
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -50,7 +49,7 @@ class HttpConnection(private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   def localAddress():SocketAddress = {
@@ -58,7 +57,7 @@ class HttpConnection(private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
 //fluent methods
@@ -83,7 +82,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(x.asJava))
+    asJava.asInstanceOf[JHttpConnection].goAwayHandler(x => handler.handle(GoAway(x)))
     this
   }
 
@@ -118,7 +117,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def remoteSettingsHandler(handler: Handler[Http2Settings]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(x.asJava))
+    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler(x => handler.handle(Http2Settings(x)))
     this
   }
 
@@ -128,7 +127,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def pingHandler(handler: Handler[Buffer]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(Buffer(x)))
     this
   }
 

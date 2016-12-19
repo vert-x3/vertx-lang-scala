@@ -37,7 +37,6 @@ import io.vertx.core.Handler
 class Message[T](private val _asJava: Object) {
 
   def asJava = _asJava
-
   private var cached_0:T = _
 
 //cached methods
@@ -46,7 +45,7 @@ class Message[T](private val _asJava: Object) {
       var tmp = asJava.asInstanceOf[JMessage].body()
       cached_0 = tmp
     }
-    return cached_0
+    cached_0
   }
 
 //fluent methods

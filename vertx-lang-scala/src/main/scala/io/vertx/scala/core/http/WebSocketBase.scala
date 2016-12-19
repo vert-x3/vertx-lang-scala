@@ -35,36 +35,51 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 trait WebSocketBase 
-    extends ReadStream[Buffer](_asJava) 
-    with WriteStream[Buffer](_asJava) {
+    extends ReadStream[Buffer] 
+    with WriteStream[Buffer] {
 
-//methods returning a future
-//cached methods
-def remoteAddress
-def localAddress
-//fluent methods
-def exceptionHandler
-def handler
-def pause
-def resume
-def endHandler
-def write
-def setWriteQueueMaxSize
-def drainHandler
-def writeFrame
-def writeFinalTextFrame
-def writeFinalBinaryFrame
-def writeBinaryMessage
-def closeHandler
-def frameHandler
-//basic methods
-def writeQueueFull()
-def binaryHandlerID()
-def textHandlerID()
-def end()
-def close()
-//in object!
-//static methods
-//default methods
-def end
+  override def end(t: Buffer):Unit
+
+  override def writeQueueFull():Boolean
+
+  override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase
+
+  override def handler(handler: Handler[Buffer]):WebSocketBase
+
+  override def pause():WebSocketBase
+
+  override def resume():WebSocketBase
+
+  override def endHandler(endHandler: Handler[Unit]):WebSocketBase
+
+  override def write(data: Buffer):WebSocketBase
+
+  override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase
+
+  override def drainHandler(handler: Handler[Unit]):WebSocketBase
+
+  def binaryHandlerID():String
+
+  def textHandlerID():String
+
+  def writeFrame(frame: WebSocketFrame):WebSocketBase
+
+  def writeFinalTextFrame(text: String):WebSocketBase
+
+  def writeFinalBinaryFrame(data: Buffer):WebSocketBase
+
+  def writeBinaryMessage(data: Buffer):WebSocketBase
+
+  def closeHandler(handler: Handler[Unit]):WebSocketBase
+
+  def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase
+
+  override def end():Unit
+
+  def close():Unit
+
+  def remoteAddress():SocketAddress
+
+  def localAddress():SocketAddress
+
 }

@@ -30,10 +30,9 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * the timer.
   */
 class TimeoutStream(private val _asJava: Object) 
-    extends ReadStream[Long](_asJava) {
+    extends ReadStream[Long] {
 
   def asJava = _asJava
-
 
 //cached methods
 //fluent methods

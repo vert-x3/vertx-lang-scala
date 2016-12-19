@@ -34,10 +34,9 @@ import io.vertx.scala.core.net.SocketAddress
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 class ServerWebSocket(private val _asJava: Object) 
-    extends WebSocketBase(_asJava) {
+    extends WebSocketBase {
 
   def asJava = _asJava
-
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
   private var cached_2:MultiMap = _
@@ -48,7 +47,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
-    return cached_0
+    cached_0
   }
 
   override def localAddress():SocketAddress = {
@@ -56,7 +55,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
-    return cached_1
+    cached_1
   }
 
   def headers():MultiMap = {
@@ -64,7 +63,7 @@ class ServerWebSocket(private val _asJava: Object)
       var tmp = asJava.asInstanceOf[JServerWebSocket].headers()
       cached_2 = MultiMap(tmp)
     }
-    return cached_2
+    cached_2
   }
 
 //fluent methods
@@ -74,7 +73,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Buffer]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JServerWebSocket].handler(x => handler.handle(Buffer(x)))
     this
   }
 
@@ -134,7 +133,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(x.asJava.asInstanceOf[JWebSocketFrame]))
+    asJava.asInstanceOf[JServerWebSocket].frameHandler(x => handler.handle(WebSocketFrame(x)))
     this
   }
 
