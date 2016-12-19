@@ -114,6 +114,15 @@
           args += toJavaType(arg);
         }
         ret += '[' + args + ']';
+      } else if(!type.raw.params.isEmpty) {
+        var args = '';
+        for(arg : type.raw.params) {
+          if(args != '') {
+            args += ',';
+          }
+          args += arg.name;
+        }
+        ret += '[' + args + ']';
       }
       return ret;
     } else if (type.kind == CLASS_HANDLER) {

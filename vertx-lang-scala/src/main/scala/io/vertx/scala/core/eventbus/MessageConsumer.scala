@@ -43,61 +43,61 @@ class MessageConsumer[T](private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].exceptionHandler(x => handler.handle(x))
+    asJava.asInstanceOf[JMessageConsumer[T]].exceptionHandler(x => handler.handle(x))
     this
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].handler(x => handler.handle(Message[T](x)))
+    asJava.asInstanceOf[JMessageConsumer[T]].handler(x => handler.handle(Message[T](x)))
     this
   }
 
   override def pause():MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].pause()
+    asJava.asInstanceOf[JMessageConsumer[T]].pause()
     this
   }
 
   override def resume():MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].resume()
+    asJava.asInstanceOf[JMessageConsumer[T]].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer].endHandler(x => endHandler.handle(x))
+    asJava.asInstanceOf[JMessageConsumer[T]].endHandler(x => endHandler.handle(x))
     this
   }
 
 //basic methods
   def bodyStream():ReadStream[T] = {
-    ReadStream[T](asJava.asInstanceOf[JMessageConsumer].bodyStream())
+    ReadStream[T](asJava.asInstanceOf[JMessageConsumer[T]].bodyStream())
   }
 
   def isRegistered():Boolean = {
-    asJava.asInstanceOf[JMessageConsumer].isRegistered()
+    asJava.asInstanceOf[JMessageConsumer[T]].isRegistered()
   }
 
   def address():String = {
-    asJava.asInstanceOf[JMessageConsumer].address()
+    asJava.asInstanceOf[JMessageConsumer[T]].address()
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
-    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer].setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[T]].setMaxBufferedMessages(maxBufferedMessages))
   }
 
   def getMaxBufferedMessages():Int = {
-    asJava.asInstanceOf[JMessageConsumer].getMaxBufferedMessages()
+    asJava.asInstanceOf[JMessageConsumer[T]].getMaxBufferedMessages()
   }
 
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
   def unregister():Unit = {
-    asJava.asInstanceOf[JMessageConsumer].unregister()
+    asJava.asInstanceOf[JMessageConsumer[T]].unregister()
   }
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JMessageConsumer[T]].unregister(x => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
   }
 
 }

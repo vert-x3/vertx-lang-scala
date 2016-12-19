@@ -31,15 +31,15 @@ class SendContext[T](private val _asJava: Object) {
 //fluent methods
 //basic methods
   def message():Message[T] = {
-    Message[T](asJava.asInstanceOf[JSendContext].message())
+    Message[T](asJava.asInstanceOf[JSendContext[T]].message())
   }
 
   def next():Unit = {
-    asJava.asInstanceOf[JSendContext].next()
+    asJava.asInstanceOf[JSendContext[T]].next()
   }
 
   def send():Boolean = {
-    asJava.asInstanceOf[JSendContext].send()
+    asJava.asInstanceOf[JSendContext[T]].send()
   }
 
 }
