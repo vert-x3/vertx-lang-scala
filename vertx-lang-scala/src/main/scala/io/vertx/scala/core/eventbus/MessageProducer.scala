@@ -30,7 +30,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * 
   */
 class MessageProducer[T](private val _asJava: Object) 
-    extends WriteStream[T](_asJava) {
+    extends WriteStream[T] {
 
   def asJava = _asJava
 

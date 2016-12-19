@@ -78,7 +78,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def goAway(errorCode: Long,lastStreamId: Int,debugData: Buffer):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -123,12 +123,12 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def ping(data: Buffer,pongHandler: Handler[AsyncResult[Buffer]]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].ping(data.asJava!!.asInstanceOf[JBuffer],x => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
+    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],x => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a))))
     this
   }
 
   def pingHandler(handler: Handler[Buffer]):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(x.asJava!!.asInstanceOf[JBuffer]))
+    asJava.asInstanceOf[JHttpConnection].pingHandler(x => handler.handle(x.asJava.asInstanceOf[JBuffer]))
     this
   }
 

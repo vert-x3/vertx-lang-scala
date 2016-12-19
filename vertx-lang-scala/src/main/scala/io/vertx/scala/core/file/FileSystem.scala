@@ -240,12 +240,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def writeFile(path: String,data: Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava!!.asInstanceOf[JBuffer],x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
+    asJava.asInstanceOf[JFileSystem].writeFile(path,data.asJava.asInstanceOf[JBuffer],x => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a)))
     this
   }
 
   def writeFileBlocking(path: String,data: Buffer):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava!!.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path,data.asJava.asInstanceOf[JBuffer])
     this
   }
 

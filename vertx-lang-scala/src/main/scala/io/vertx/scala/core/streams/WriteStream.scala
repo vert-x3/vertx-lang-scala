@@ -27,21 +27,21 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from a `ReadStream`
   * to it.
   */
-trait WriteStream 
-    extends StreamBase(_asJava) {
+trait WriteStream[T] 
+    extends StreamBase {
 
-//methods returning a future
-//cached methods
-//fluent methods
-def exceptionHandler
-def write
-def setWriteQueueMaxSize
-def drainHandler
-//basic methods
-def end()
-def writeQueueFull()
-//in object!
-//static methods
-//default methods
-def end
+  override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T]
+
+  def write(data: T):WriteStream[T]
+
+  def end():Unit
+
+  def end(t: T):Unit
+
+  def setWriteQueueMaxSize(maxSize: Int):WriteStream[T]
+
+  def writeQueueFull():Boolean
+
+  def drainHandler(handler: Handler[Unit]):WriteStream[T]
+
 }

@@ -44,8 +44,8 @@ import io.vertx.scala.core.net.SocketAddress
   * Please consult the documentation for more information on datagram sockets.
   */
 class DatagramSocket(private val _asJava: Object) 
-    extends ReadStream[DatagramPacket](_asJava) 
-    with Measured(_asJava) {
+    extends ReadStream[DatagramPacket] 
+    with Measured {
 
   def asJava = _asJava
 
@@ -62,7 +62,7 @@ class DatagramSocket(private val _asJava: Object)
 
 //fluent methods
   def send(packet: Buffer,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava!!.asInstanceOf[JBuffer],port,host,x => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a))))
+    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port,host,x => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a))))
     this
   }
 
@@ -127,7 +127,7 @@ class DatagramSocket(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[DatagramPacket]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].handler(x => handler.handle(x.asJava!!.asInstanceOf[JDatagramPacket]))
+    asJava.asInstanceOf[JDatagramSocket].handler(x => handler.handle(x.asJava.asInstanceOf[JDatagramPacket]))
     this
   }
 

@@ -33,7 +33,7 @@ import io.vertx.core.Handler
   * delay between attempts.
   */
 class NetClient(private val _asJava: Object) 
-    extends Measured(_asJava) {
+    extends Measured {
 
   def asJava = _asJava
 

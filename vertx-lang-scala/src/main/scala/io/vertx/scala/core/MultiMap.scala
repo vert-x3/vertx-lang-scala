@@ -38,7 +38,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def addAll(map: MultiMap):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].addAll(map.asJava!!.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -48,7 +48,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def setAll(map: MultiMap):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].setAll(map.asJava!!.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 

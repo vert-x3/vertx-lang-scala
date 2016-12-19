@@ -24,12 +24,6 @@ import io.vertx.core.Handler
   */
 trait StreamBase {
 
-//methods returning a future
-//cached methods
-//fluent methods
-def exceptionHandler
-//basic methods
-//in object!
-//static methods
-//default methods
+  def exceptionHandler(handler: Handler[Throwable]):StreamBase
+
 }

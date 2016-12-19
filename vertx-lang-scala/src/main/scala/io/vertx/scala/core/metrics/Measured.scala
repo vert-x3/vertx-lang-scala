@@ -22,12 +22,6 @@ import io.vertx.core.metrics.{Measured => JMeasured}
   */
 trait Measured {
 
-//methods returning a future
-//cached methods
-//fluent methods
-//basic methods
-def isMetricsEnabled()
-//in object!
-//static methods
-//default methods
+  def isMetricsEnabled():Boolean
+
 }

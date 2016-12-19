@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * Represents a TCP server
   */
 class NetServer(private val _asJava: Object) 
-    extends Measured(_asJava) {
+    extends Measured {
 
   def asJava = _asJava
 
@@ -76,7 +76,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def connectHandler(handler: Handler[NetSocket]):NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava!!.asInstanceOf[JNetSocket])))
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler(x => handler.handle(x.asJava.asInstanceOf[JNetSocket])))
   }
 
   def close():Unit = {
