@@ -83,3 +83,129 @@ trait WebSocketBase
   def localAddress():SocketAddress
 
 }
+object WebSocketBase{
+  def apply(asJava: JWebSocketBase) = new WebSocketBaseImpl(asJava)  
+    private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
+
+      def asJava = _asJava
+  private var cached_0:SocketAddress = _
+  private var cached_1:SocketAddress = _
+
+//cached methods
+  def remoteAddress():SocketAddress = {
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JWebSocketBase].remoteAddress()
+      cached_0 = SocketAddress(tmp)
+    }
+    cached_0
+  }
+
+  def localAddress():SocketAddress = {
+    if(cached_1 == null) {
+      var tmp = asJava.asInstanceOf[JWebSocketBase].localAddress()
+      cached_1 = SocketAddress(tmp)
+    }
+    cached_1
+  }
+
+//fluent methods
+  override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  override def handler(handler: Handler[Buffer]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].handler({x: JBuffer => handler.handle(Buffer(x))})
+    this
+  }
+
+  override def pause():WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].pause()
+    this
+  }
+
+  override def resume():WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].resume()
+    this
+  }
+
+  override def endHandler(endHandler: Handler[Unit]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
+
+  override def write(data: Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].write(data.asJava.asInstanceOf[JBuffer])
+    this
+  }
+
+  override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize)
+    this
+  }
+
+  override def drainHandler(handler: Handler[Unit]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].drainHandler({x: Void => handler.handle(x)})
+    this
+  }
+
+  def writeFrame(frame: WebSocketFrame):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
+    this
+  }
+
+  def writeFinalTextFrame(text: String):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text)
+    this
+  }
+
+  def writeFinalBinaryFrame(data: Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
+    this
+  }
+
+  def writeBinaryMessage(data: Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
+    this
+  }
+
+  def closeHandler(handler: Handler[Unit]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].closeHandler({x: Void => handler.handle(x)})
+    this
+  }
+
+  def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
+    this
+  }
+
+//basic methods
+  override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JWebSocketBase].writeQueueFull()
+  }
+
+  def binaryHandlerID():String = {
+    asJava.asInstanceOf[JWebSocketBase].binaryHandlerID()
+  }
+
+  def textHandlerID():String = {
+    asJava.asInstanceOf[JWebSocketBase].textHandlerID()
+  }
+
+  override def end():Unit = {
+    asJava.asInstanceOf[JWebSocketBase].end()
+  }
+
+  def close():Unit = {
+    asJava.asInstanceOf[JWebSocketBase].close()
+  }
+
+}
+
+object WebSocketBase{
+  def apply(asJava: JWebSocketBase) = new WebSocketBase(asJava)
+//static methods
+    }
+
+}
+}
