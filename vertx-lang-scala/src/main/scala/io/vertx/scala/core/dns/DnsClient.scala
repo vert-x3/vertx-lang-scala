@@ -95,6 +95,7 @@ class DnsClient(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
 }
 

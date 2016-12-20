@@ -75,6 +75,7 @@ class EventBus(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JEventBus].isMetricsEnabled()

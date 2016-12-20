@@ -40,7 +40,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
   */
 class HttpServerOptions(private val _asJava: JHttpServerOptions) 
-    extends NetServerOptions {
+    extends NetServerOptions(_asJava) {
 
   def asJava = _asJava
 

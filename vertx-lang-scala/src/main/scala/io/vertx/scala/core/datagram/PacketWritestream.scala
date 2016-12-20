@@ -54,6 +54,11 @@ class PacketWritestream(private val _asJava: Object)
     this
   }
 
+//default methods
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
+  }
+
 //basic methods
   override def end():Unit = {
     asJava.asInstanceOf[JPacketWritestream].end()

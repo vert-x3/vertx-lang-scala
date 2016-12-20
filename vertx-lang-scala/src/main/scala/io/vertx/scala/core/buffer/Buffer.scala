@@ -234,6 +234,7 @@ class Buffer(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def toString():String = {
     asJava.asInstanceOf[JBuffer].toString()

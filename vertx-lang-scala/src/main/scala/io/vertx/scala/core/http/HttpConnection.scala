@@ -136,6 +136,11 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
+//default methods
+  override def getWindowSize():Int = {
+    asJava.asInstanceOf[JHttpConnection].getWindowSize()
+  }
+
 //basic methods
   def close():Unit = {
     asJava.asInstanceOf[JHttpConnection].close()

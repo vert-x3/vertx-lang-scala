@@ -67,6 +67,7 @@ class MessageConsumer[T](private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   def bodyStream():ReadStream[T] = {
     ReadStream[T](asJava.asInstanceOf[JMessageConsumer[T]].bodyStream())

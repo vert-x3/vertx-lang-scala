@@ -49,6 +49,7 @@ class Message[T](private val _asJava: Object) {
   }
 
 //fluent methods
+//default methods
 //basic methods
   def address():String = {
     asJava.asInstanceOf[JMessage[T]].address()

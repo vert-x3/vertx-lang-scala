@@ -63,6 +63,7 @@ class HttpServerFileUpload(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   def filename():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].filename()

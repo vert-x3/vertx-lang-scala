@@ -31,6 +31,7 @@ class DatagramPacket(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def sender():SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())

@@ -31,6 +31,7 @@ class Counter(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})

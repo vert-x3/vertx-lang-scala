@@ -195,6 +195,15 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
+//default methods
+  override def reset():Boolean = {
+    asJava.asInstanceOf[JHttpClientRequest].reset()
+  }
+
+  override def streamId():Int = {
+    asJava.asInstanceOf[JHttpClientRequest].streamId()
+  }
+
 //basic methods
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].writeQueueFull()

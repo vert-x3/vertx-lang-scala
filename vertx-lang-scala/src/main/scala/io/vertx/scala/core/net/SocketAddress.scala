@@ -27,6 +27,7 @@ class SocketAddress(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def host():String = {
     asJava.asInstanceOf[JSocketAddress].host()

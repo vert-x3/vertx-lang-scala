@@ -56,6 +56,7 @@ class HttpFrame(private val _asJava: Object) {
   }
 
 //fluent methods
+//default methods
 //basic methods
 }
 
