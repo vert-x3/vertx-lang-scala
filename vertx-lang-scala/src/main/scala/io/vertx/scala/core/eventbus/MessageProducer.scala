@@ -88,7 +88,7 @@ class MessageProducer[T](private val _asJava: Object)
 
 }
 
-object MessageProducer{
-  def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)
-//static methods
-}
+  object MessageProducer{
+    def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)  
+  //static methods
+    }

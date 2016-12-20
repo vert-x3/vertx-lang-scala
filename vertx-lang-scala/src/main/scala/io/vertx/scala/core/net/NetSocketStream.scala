@@ -61,7 +61,7 @@ class NetSocketStream(private val _asJava: Object)
 //basic methods
 }
 
-object NetSocketStream{
-  def apply(asJava: JNetSocketStream) = new NetSocketStream(asJava)
-//static methods
-}
+  object NetSocketStream{
+    def apply(asJava: JNetSocketStream) = new NetSocketStream(asJava)  
+  //static methods
+    }

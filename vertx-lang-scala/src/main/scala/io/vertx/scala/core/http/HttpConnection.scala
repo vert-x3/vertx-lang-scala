@@ -151,7 +151,7 @@ class HttpConnection(private val _asJava: Object) {
 
 }
 
-object HttpConnection{
-  def apply(asJava: JHttpConnection) = new HttpConnection(asJava)
-//static methods
-}
+  object HttpConnection{
+    def apply(asJava: JHttpConnection) = new HttpConnection(asJava)  
+  //static methods
+    }

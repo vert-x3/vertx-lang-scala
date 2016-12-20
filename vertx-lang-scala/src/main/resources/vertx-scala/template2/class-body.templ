@@ -63,22 +63,4 @@
 	\n
 @end{}
 }\n
-\n
-object @{className}{\n
-  def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}) = new @{className}@{assembleTypeParams(typeParams)}(asJava)
-\n
-//static methods\n
-@foreach{method : staticMethods}
-  def @{escapeIfKeyword(method.name)}
-@if{!method.typeParams.isEmpty}
-[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-@end{}
-(
-	@foreach{param:method.params}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):@{toScalaType(method.returnType)} = {\n
-    @{invokeStaticMethod('J'+className, type, method)}\n
-  }\n
-	\n
-@end{}
 

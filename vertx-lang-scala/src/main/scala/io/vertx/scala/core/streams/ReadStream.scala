@@ -29,6 +29,8 @@ import io.vertx.core.Handler
 trait ReadStream[T] 
     extends StreamBase {
 
+  def asJava: java.lang.Object
+
   override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T]
 
   def handler(handler: Handler[T]):ReadStream[T]
@@ -39,12 +41,12 @@ trait ReadStream[T]
 
   def endHandler(endHandler: Handler[Unit]):ReadStream[T]
 
-}
-object ReadStream{
-  def apply[T](asJava: JReadStream[T]) = new ReadStreamImpl[T](asJava)  
-    private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
 
-      def asJava = _asJava
+  object ReadStream{
+    def apply[T](asJava: JReadStream[T]):ReadStream[T] = new ReadStreamImpl[T](asJava)    
+      private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
+
+        def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -75,11 +77,6 @@ object ReadStream{
 
 //basic methods
 }
+      }
 
-object ReadStream{
-  def apply[T](asJava: JReadStream[T]) = new ReadStream[T](asJava)
-//static methods
-    }
-
-}
-}
+  }

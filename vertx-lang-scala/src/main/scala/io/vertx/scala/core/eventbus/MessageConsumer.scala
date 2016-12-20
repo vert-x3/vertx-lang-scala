@@ -102,7 +102,7 @@ class MessageConsumer[T](private val _asJava: Object)
 
 }
 
-object MessageConsumer{
-  def apply[T](asJava: JMessageConsumer[T]) = new MessageConsumer[T](asJava)
-//static methods
-}
+  object MessageConsumer{
+    def apply[T](asJava: JMessageConsumer[T]) = new MessageConsumer[T](asJava)  
+  //static methods
+    }

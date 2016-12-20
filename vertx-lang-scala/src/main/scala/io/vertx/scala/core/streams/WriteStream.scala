@@ -30,6 +30,8 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 trait WriteStream[T] 
     extends StreamBase {
 
+  def asJava: java.lang.Object
+
   override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T]
 
   def write(data: T):WriteStream[T]
@@ -44,12 +46,12 @@ trait WriteStream[T]
 
   def drainHandler(handler: Handler[Unit]):WriteStream[T]
 
-}
-object WriteStream{
-  def apply[T](asJava: JWriteStream[T]) = new WriteStreamImpl[T](asJava)  
-    private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
 
-      def asJava = _asJava
+  object WriteStream{
+    def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
+      private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
+
+        def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -83,11 +85,6 @@ object WriteStream{
   }
 
 }
+      }
 
-object WriteStream{
-  def apply[T](asJava: JWriteStream[T]) = new WriteStream[T](asJava)
-//static methods
-    }
-
-}
-}
+  }

@@ -24,14 +24,16 @@ import io.vertx.core.Handler
   */
 trait StreamBase {
 
+  def asJava: java.lang.Object
+
   def exceptionHandler(handler: Handler[Throwable]):StreamBase
 
-}
-object StreamBase{
-  def apply(asJava: JStreamBase) = new StreamBaseImpl(asJava)  
-    private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
 
-      def asJava = _asJava
+  object StreamBase{
+    def apply(asJava: JStreamBase):StreamBase = new StreamBaseImpl(asJava)    
+      private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
+
+        def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -42,11 +44,6 @@ object StreamBase{
 
 //basic methods
 }
+      }
 
-object StreamBase{
-  def apply(asJava: JStreamBase) = new StreamBase(asJava)
-//static methods
-    }
-
-}
-}
+  }

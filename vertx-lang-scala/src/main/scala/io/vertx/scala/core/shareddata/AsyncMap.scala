@@ -78,7 +78,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
 }
 
-object AsyncMap{
-  def apply[K,V](asJava: JAsyncMap[K,V]) = new AsyncMap[K,V](asJava)
-//static methods
-}
+  object AsyncMap{
+    def apply[K,V](asJava: JAsyncMap[K,V]) = new AsyncMap[K,V](asJava)  
+  //static methods
+    }

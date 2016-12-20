@@ -88,11 +88,11 @@ class MultiMap(private val _asJava: Object) {
 
 }
 
-object MultiMap{
-  def apply(asJava: JMultiMap) = new MultiMap(asJava)
-//static methods
-  def caseInsensitiveMultiMap():MultiMap = {
-    MultiMap(JMultiMap.caseInsensitiveMultiMap())
-  }
-
-}
+  object MultiMap{
+    def apply(asJava: JMultiMap) = new MultiMap(asJava)  
+  //static methods
+      def caseInsensitiveMultiMap    (  ):MultiMap = {
+      MultiMap(JMultiMap.caseInsensitiveMultiMap())
+    }
+  
+    }
