@@ -37,6 +37,15 @@ class WorkerExecutor(private val _asJava: Object)
 
 //cached methods
 //fluent methods
+//default methods
+  override def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
+  }
+
+  override def close():Unit = {
+    asJava.asInstanceOf[JWorkerExecutor].close()
+  }
+
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled()

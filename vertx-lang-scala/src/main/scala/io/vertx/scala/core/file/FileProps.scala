@@ -28,6 +28,7 @@ class FileProps(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def creationTime():Long = {
     asJava.asInstanceOf[JFileProps].creationTime()

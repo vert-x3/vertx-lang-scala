@@ -283,6 +283,7 @@ class FileSystem(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def propsBlocking(path: String):FileProps = {
     FileProps(asJava.asInstanceOf[JFileSystem].propsBlocking(path))

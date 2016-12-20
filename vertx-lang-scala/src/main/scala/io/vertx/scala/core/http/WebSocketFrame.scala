@@ -54,6 +54,7 @@ class WebSocketFrame(private val _asJava: Object) {
   }
 
 //fluent methods
+//default methods
 //basic methods
   def isText():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText()

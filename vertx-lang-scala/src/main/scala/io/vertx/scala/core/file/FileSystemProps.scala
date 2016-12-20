@@ -27,6 +27,7 @@ class FileSystemProps(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def totalSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].totalSpace()

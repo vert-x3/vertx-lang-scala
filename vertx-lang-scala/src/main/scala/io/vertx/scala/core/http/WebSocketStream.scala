@@ -63,6 +63,7 @@ class WebSocketStream(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
 }
 

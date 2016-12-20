@@ -30,6 +30,7 @@ class Lock(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def release():Unit = {
     asJava.asInstanceOf[JLock].release()

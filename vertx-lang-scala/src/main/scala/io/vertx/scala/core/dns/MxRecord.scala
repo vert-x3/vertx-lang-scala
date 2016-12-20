@@ -27,6 +27,7 @@ class MxRecord(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def priority():Int = {
     asJava.asInstanceOf[JMxRecord].priority()

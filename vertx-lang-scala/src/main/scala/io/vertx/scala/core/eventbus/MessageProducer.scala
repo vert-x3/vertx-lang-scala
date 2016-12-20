@@ -61,6 +61,11 @@ class MessageProducer[T](private val _asJava: Object)
     this
   }
 
+//default methods
+  override def end(t: T):Unit = {
+    asJava.asInstanceOf[JMessageProducer[T]].end(t)
+  }
+
 //basic methods
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull()

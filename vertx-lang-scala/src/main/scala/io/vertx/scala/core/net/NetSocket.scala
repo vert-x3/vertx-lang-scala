@@ -155,6 +155,11 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
+//default methods
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JNetSocket].end(t.asJava.asInstanceOf[JBuffer])
+  }
+
 //basic methods
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JNetSocket].writeQueueFull()

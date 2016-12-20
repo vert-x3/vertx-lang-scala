@@ -75,6 +75,7 @@ trait ReadStream[T]
     this
   }
 
+//default methods
 //basic methods
 }
       }

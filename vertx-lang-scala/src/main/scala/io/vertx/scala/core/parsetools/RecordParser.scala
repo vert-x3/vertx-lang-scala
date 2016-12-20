@@ -59,6 +59,7 @@ class RecordParser(private val _asJava: Object)
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def setOutput(output: Handler[Buffer]):Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})

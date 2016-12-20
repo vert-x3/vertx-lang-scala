@@ -68,6 +68,7 @@ class Context(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def runOnContext(action: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})

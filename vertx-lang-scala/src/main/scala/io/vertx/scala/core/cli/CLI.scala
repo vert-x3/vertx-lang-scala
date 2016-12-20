@@ -103,6 +103,7 @@ class CLI(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def parse(arguments: scala.collection.mutable.Buffer[String]):CommandLine = {
     CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x).asJava))

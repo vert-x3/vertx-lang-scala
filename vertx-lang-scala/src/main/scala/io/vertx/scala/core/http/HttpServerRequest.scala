@@ -171,6 +171,7 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpServerRequest].version()

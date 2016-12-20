@@ -75,6 +75,11 @@ trait WriteStream[T]
     this
   }
 
+//default methods
+  override def end(t: T):Unit = {
+    asJava.asInstanceOf[JWriteStream[T]].end(t)
+  }
+
 //basic methods
   def end():Unit = {
     asJava.asInstanceOf[JWriteStream[T]].end()

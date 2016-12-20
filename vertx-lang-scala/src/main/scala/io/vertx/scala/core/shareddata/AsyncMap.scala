@@ -31,6 +31,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[K,V]].get(k,{x: AsyncResult[V] => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a))})

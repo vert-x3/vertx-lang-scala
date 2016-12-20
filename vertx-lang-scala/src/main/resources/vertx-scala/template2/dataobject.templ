@@ -29,7 +29,7 @@ package @{type.raw.translatePackageName("scala")}\n
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.json.Json._\n
 import io.vertx.core.json.JsonObject\n
-@foreach{importedType : generateImports(type, importedTypes, java.util.Collections.emptyList())}
+@foreach{importedType : generateImports(type, importedTypes, new java.util.ArrayList())}
 import @{importedType}\n
 @end{}
 \n
@@ -47,7 +47,7 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}@end{' \n    with '}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
 @end{}
  {\n
 \n

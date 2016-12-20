@@ -64,7 +64,7 @@
     } else if (type.kind == CLASS_DATA_OBJECT) {
       return name + '.asJava';
     } else if (type.kind == CLASS_API) {
-      return name + '.asJava' + fromObjectToInstanceOf(type);
+      return name + '.asJava' + fromObjectToInstanceOf(type, typeParams, methodTypeParams);
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toJavaType(type.args[0], typeParams, methodTypeParams) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
@@ -265,10 +265,13 @@
     }
   }
 
-  def fromObjectToInstanceOf(type) {
+  def fromObjectToInstanceOf(type, typeParams, methodTypeParams) {
     var ret = '';
     if(type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
-      ret += '.asInstanceOf[JFuture[_]]';
+      if(typeParams.isEmpty && methodTypeParams.isEmpty)
+        ret += '.asInstanceOf[JFuture[_]]';
+      else
+        ret += '.asInstanceOf[JFuture[T]]';
     }
     else {
       ret += '.asInstanceOf[' + toJavaType(type) + ']';

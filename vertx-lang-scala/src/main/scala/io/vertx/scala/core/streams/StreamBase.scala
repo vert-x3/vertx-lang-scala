@@ -42,6 +42,7 @@ trait StreamBase {
     this
   }
 
+//default methods
 //basic methods
 }
       }

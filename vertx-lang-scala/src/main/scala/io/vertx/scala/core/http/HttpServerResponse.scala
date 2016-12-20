@@ -199,6 +199,11 @@ class HttpServerResponse(private val _asJava: Object)
     this
   }
 
+//default methods
+  override def reset():Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].reset()
+  }
+
 //basic methods
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JHttpServerResponse].writeQueueFull()

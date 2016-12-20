@@ -33,6 +33,7 @@ class LocalMap[K,V](private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def get(key: K):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].get(key)
