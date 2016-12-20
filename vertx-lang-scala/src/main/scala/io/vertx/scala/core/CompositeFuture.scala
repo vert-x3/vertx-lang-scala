@@ -106,7 +106,7 @@ class CompositeFuture(private val _asJava: Object)
     }
 
     def all(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-      CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[T]]).asJava))
+      CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
     }
 
     def any[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
@@ -130,7 +130,7 @@ class CompositeFuture(private val _asJava: Object)
     }
 
     def any(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-      CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[T]]).asJava))
+      CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
     }
 
     def join[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
@@ -154,7 +154,7 @@ class CompositeFuture(private val _asJava: Object)
     }
 
     def join(futures: scala.collection.mutable.Buffer[Future[_]]):CompositeFuture = {
-      CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[T]]).asJava))
+      CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
     }
 
   }
