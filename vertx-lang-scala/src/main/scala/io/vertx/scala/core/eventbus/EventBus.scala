@@ -112,14 +112,6 @@ class EventBus(private val _asJava: Object)
     MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[T](address,options.asJava))
   }
 
-  def addInterceptor(interceptor: Handler[SendContext]):EventBus = {
-    EventBus(asJava.asInstanceOf[JEventBus].addInterceptor({x: JSendContext[T] => interceptor.handle(SendContext(x))}))
-  }
-
-  def removeInterceptor(interceptor: Handler[SendContext]):EventBus = {
-    EventBus(asJava.asInstanceOf[JEventBus].removeInterceptor({x: JSendContext[T] => interceptor.handle(SendContext(x))}))
-  }
-
 }
 
   object EventBus{

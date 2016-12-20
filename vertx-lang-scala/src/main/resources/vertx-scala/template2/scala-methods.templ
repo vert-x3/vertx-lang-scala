@@ -1,9 +1,14 @@
 @code{
 
+  /*TODO: some methods lack necessary type infos for scala*/
+  def skipMethod(method) {
+    return method.name == 'addInterceptor' || method.name == 'removeInterceptor';
+  }
+
   def findBasicMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(!method.isFluent() && !method.isCacheReturn && !method.isStaticMethod && !method.isDefaultMethod)
+      if(!method.isFluent() && !method.isCacheReturn && !method.isStaticMethod && !method.isDefaultMethod && !skipMethod(method))
         ret.add(method);
     }
     return ret;
@@ -12,7 +17,7 @@
   def findDefaultMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(method.isDefaultMethod)
+      if(method.isDefaultMethod && !skipMethod(method))
         ret.add(method);
     }
     return ret;
@@ -21,7 +26,7 @@
   def findFluentMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(method.isFluent)
+      if(method.isFluent && !skipMethod(method))
         ret.add(method);
     }
     return ret;
@@ -30,7 +35,7 @@
   def findCacheReturnMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(method.isCacheReturn)
+      if(method.isCacheReturn && !skipMethod(method))
         ret.add(method);
     }
     return ret;
@@ -39,7 +44,7 @@
   def findFutureMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(!method.isFluent() && shouldMethodReturnAFuture(method))
+      if(!method.isFluent() && shouldMethodReturnAFuture(method) && !skipMethod(method))
         ret.add(method);
     }
     return ret;
