@@ -40,3 +40,46 @@ trait ReadStream[T]
   def endHandler(endHandler: Handler[Unit]):ReadStream[T]
 
 }
+object ReadStream{
+  def apply[T](asJava: JReadStream[T]) = new ReadStreamImpl[T](asJava)  
+    private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
+
+      def asJava = _asJava
+
+//cached methods
+//fluent methods
+  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  def handler(handler: Handler[T]):ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[T]].handler({x: T => handler.handle(x)})
+    this
+  }
+
+  def pause():ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[T]].pause()
+    this
+  }
+
+  def resume():ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[T]].resume()
+    this
+  }
+
+  def endHandler(endHandler: Handler[Unit]):ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[T]].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
+
+//basic methods
+}
+
+object ReadStream{
+  def apply[T](asJava: JReadStream[T]) = new ReadStream[T](asJava)
+//static methods
+    }
+
+}
+}

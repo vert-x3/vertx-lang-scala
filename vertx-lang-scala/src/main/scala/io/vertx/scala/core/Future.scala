@@ -33,7 +33,7 @@ class Future[T](private val _asJava: Object) {
 //cached methods
   def completer():Handler[AsyncResult[T]] = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JFuture[_]].completer()
+      var tmp = asJava.asInstanceOf[JFuture[T]].completer()
       cached_0 = {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T,T](x, a => a))}
     }
     cached_0
@@ -41,45 +41,45 @@ class Future[T](private val _asJava: Object) {
 
 //fluent methods
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
-    asJava.asInstanceOf[JFuture[_]].setHandler({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
+    asJava.asInstanceOf[JFuture[T]].setHandler({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
     this
   }
 
 //basic methods
   def isComplete():Boolean = {
-    asJava.asInstanceOf[JFuture[_]].isComplete()
+    asJava.asInstanceOf[JFuture[T]].isComplete()
   }
 
   def complete(result: T):Unit = {
-    asJava.asInstanceOf[JFuture[_]].complete(result)
+    asJava.asInstanceOf[JFuture[T]].complete(result)
   }
 
   def complete():Unit = {
-    asJava.asInstanceOf[JFuture[_]].complete()
+    asJava.asInstanceOf[JFuture[T]].complete()
   }
 
   def fail(throwable: Throwable):Unit = {
-    asJava.asInstanceOf[JFuture[_]].fail(throwable)
+    asJava.asInstanceOf[JFuture[T]].fail(throwable)
   }
 
   def fail(failureMessage: String):Unit = {
-    asJava.asInstanceOf[JFuture[_]].fail(failureMessage)
+    asJava.asInstanceOf[JFuture[T]].fail(failureMessage)
   }
 
   def result():T = {
-    asJava.asInstanceOf[JFuture[_]].result()
+    asJava.asInstanceOf[JFuture[T]].result()
   }
 
   def cause():Throwable = {
-    asJava.asInstanceOf[JFuture[_]].cause()
+    asJava.asInstanceOf[JFuture[T]].cause()
   }
 
   def succeeded():Boolean = {
-    asJava.asInstanceOf[JFuture[_]].succeeded()
+    asJava.asInstanceOf[JFuture[T]].succeeded()
   }
 
   def failed():Boolean = {
-    asJava.asInstanceOf[JFuture[_]].failed()
+    asJava.asInstanceOf[JFuture[T]].failed()
   }
 
 }

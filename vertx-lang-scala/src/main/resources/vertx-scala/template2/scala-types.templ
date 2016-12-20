@@ -268,7 +268,7 @@
   def fromObjectToInstanceOf(type) {
     var ret = '';
     if(type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
-      ret += '.asInstanceOf[JFuture[_]]';
+      ret += '.asInstanceOf[JFuture[T]]';
     }
     else {
       ret += '.asInstanceOf[' + toJavaType(type) + ']';
