@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -134,6 +135,12 @@ class HttpConnection(private val _asJava: Object) {
   def exceptionHandler(handler: Handler[Throwable]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].exceptionHandler({x: Throwable => handler.handle(x)})
     this
+  }
+
+//default methods
+  //io.vertx.core.http.HttpConnection
+  override def getWindowSize():Int = {
+    asJava.asInstanceOf[JHttpConnection].getWindowSize()
   }
 
 //basic methods

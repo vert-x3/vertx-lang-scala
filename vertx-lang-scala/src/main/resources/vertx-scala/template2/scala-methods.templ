@@ -17,7 +17,7 @@
   def findDefaultMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(method.isDefaultMethod && !skipMethod(method))
+      if(method.isDefaultMethod && !skipMethod(method) && !method.isFluent && !method.isCacheReturn)
         ret.add(method);
     }
     return ret;
@@ -100,7 +100,7 @@
 
   def invokeStaticMethod(target, type, method) {
     /*class level typeparams aren't needed for static methods*/
-    var typeParams = java.util.Collections.emptyList();
+    var typeParams = new java.util.ArrayList();
 
     var paramString = '';
     for(param : method.params) {

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
@@ -193,6 +194,17 @@ class HttpClientRequest(private val _asJava: Object)
   def writeCustomFrame(frame: HttpFrame):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
+  }
+
+//default methods
+  //io.vertx.core.http.HttpClientRequest
+  override def reset():Boolean = {
+    asJava.asInstanceOf[JHttpClientRequest].reset()
+  }
+
+  //io.vertx.core.http.HttpClientRequest
+  override def streamId():Int = {
+    asJava.asInstanceOf[JHttpClientRequest].streamId()
   }
 
 //basic methods

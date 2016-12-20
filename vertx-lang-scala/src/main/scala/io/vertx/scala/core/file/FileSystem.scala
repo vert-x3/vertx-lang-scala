@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}
@@ -283,6 +284,7 @@ class FileSystem(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def propsBlocking(path: String):FileProps = {
     FileProps(asJava.asInstanceOf[JFileSystem].propsBlocking(path))

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -179,6 +180,12 @@ trait WebSocketBase
   def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods

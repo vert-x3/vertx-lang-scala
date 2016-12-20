@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.cli
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -103,6 +104,7 @@ class CLI(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def parse(arguments: scala.collection.mutable.Buffer[String]):CommandLine = {
     CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x).asJava))

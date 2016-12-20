@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -153,6 +154,12 @@ class NetSocket(private val _asJava: Object)
   def upgradeToSsl(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].upgradeToSsl({x: Void => handler.handle(x)})
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JNetSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods

@@ -18,6 +18,7 @@ package io.vertx.scala.core.metrics
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
 
 /**
@@ -35,7 +36,7 @@ class MetricsOptions(private val _asJava: JMetricsOptions) {
     asJava.setEnabled(value)
     this
   }
-  def isEnabled = {
+  def isEnabled: Boolean = {
     asJava.isEnabled()
   }
 }

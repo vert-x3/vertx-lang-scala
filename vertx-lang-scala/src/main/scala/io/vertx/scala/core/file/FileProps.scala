@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.file.{FileProps => JFileProps}
 
 /**
@@ -28,6 +29,7 @@ class FileProps(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def creationTime():Long = {
     asJava.asInstanceOf[JFileProps].creationTime()

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.dns
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.dns.{MxRecord => JMxRecord}
 
 /**
@@ -27,6 +28,7 @@ class MxRecord(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def priority():Int = {
     asJava.asInstanceOf[JMxRecord].priority()

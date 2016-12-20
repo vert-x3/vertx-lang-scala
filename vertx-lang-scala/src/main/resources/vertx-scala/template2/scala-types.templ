@@ -64,7 +64,7 @@
     } else if (type.kind == CLASS_DATA_OBJECT) {
       return name + '.asJava';
     } else if (type.kind == CLASS_API) {
-      return name + '.asJava' + fromObjectToInstanceOf(type);
+      return name + '.asJava' + fromObjectToInstanceOf(type, typeParams, methodTypeParams);
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toJavaType(type.args[0], typeParams, methodTypeParams) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
@@ -81,6 +81,11 @@
       return ret + '.asJava';
     } else if(type.kind == CLASS_ASYNC_RESULT) {
       return 'AsyncResultWrapper('+name+')';
+    }
+    else if(type.kind == CLASS_FUNCTION) {
+      var executed = name + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
+      executed = toJavaWithConversion(executed, type.args[1], typeParams, methodTypeParams);
+      return "{x:" + toJavaType(type.args[0]) + "=> " + executed + "}";
     }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
@@ -250,6 +255,41 @@
     }
   }
 
+  def fromPropertyInfoToScalaTypeWithConversion(name, info) {
+    var typeParams = new java.util.ArrayList();
+    var methodTypeParams = new java.util.ArrayList();
+    if (info.kind.isValue){
+      return toScalaWithConversion(name, info.type, typeParams, methodTypeParams);
+    } else if (info.kind.isList){
+      return name + '.asScala.map(x => '+ toScalaWithConversion('x', info.type, typeParams, methodTypeParams) +')';
+    } else if (info.kind.isSet){
+      return name + '.asScala.map(x => '+ toScalaWithConversion('x', info.type, typeParams, methodTypeParams) +')';
+    } else if (info.kind.isMap){
+      return name + '.asScala.mapValues(x => '+ toScalaWithConversion('x', info.type, typeParams, methodTypeParams) +')';
+    }
+    return "UNKOWN PROPERTY TYPE";
+  }
+
+
+  def fromPropertyInfoToScala(info) {
+    if (info.kind.isValue){
+      return toScalaType(info.type);
+    }else if (info.kind.isList){
+      var ret = 'scala.collection.mutable.Buffer';
+      ret += '[' + toScalaType(info.type) + ']';
+      return ret;
+    } else if (info.kind.isSet){
+      var ret = 'scala.collection.mutable.Set';
+      ret += '[' + toScalaType(info.type) + ']';
+      return ret;
+    } else if (info.kind.isMap){
+      var ret = 'Map';
+      ret = 'Map[String, ' + toScalaType(info.type) + ']';
+      return ret;
+    }
+    return "UNKOWN PROPERTY TYPE";
+  }
+
   def assembleTypeParams(typeParams) {
     if(!typeParams.isEmpty){
   		var ret = '';
@@ -265,10 +305,13 @@
     }
   }
 
-  def fromObjectToInstanceOf(type) {
+  def fromObjectToInstanceOf(type, typeParams, methodTypeParams) {
     var ret = '';
     if(type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
-      ret += '.asInstanceOf[JFuture[_]]';
+      if(typeParams.isEmpty && methodTypeParams.isEmpty)
+        ret += '.asInstanceOf[JFuture[_]]';
+      else
+        ret += '.asInstanceOf[JFuture[T]]';
     }
     else {
       ret += '.asInstanceOf[' + toJavaType(type) + ']';

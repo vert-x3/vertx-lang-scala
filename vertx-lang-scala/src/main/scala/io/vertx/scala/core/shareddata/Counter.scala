@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{Counter => JCounter}
 import io.vertx.core.AsyncResult
@@ -31,6 +32,7 @@ class Counter(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})

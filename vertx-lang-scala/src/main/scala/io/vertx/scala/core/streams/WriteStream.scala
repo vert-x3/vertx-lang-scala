@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.streams
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -73,6 +74,12 @@ trait WriteStream[T]
   def drainHandler(handler: Handler[Unit]):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[T]].drainHandler({x: Void => handler.handle(x)})
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: T):Unit = {
+    asJava.asInstanceOf[JWriteStream[T]].end(t)
   }
 
 //basic methods

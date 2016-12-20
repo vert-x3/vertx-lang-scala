@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.datagram
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
@@ -52,6 +53,12 @@ class PacketWritestream(private val _asJava: Object)
   override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].drainHandler({x: Void => handler.handle(x)})
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods

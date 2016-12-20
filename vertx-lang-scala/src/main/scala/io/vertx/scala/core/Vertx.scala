@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
@@ -120,6 +121,7 @@ class Vertx(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JVertx].isMetricsEnabled()

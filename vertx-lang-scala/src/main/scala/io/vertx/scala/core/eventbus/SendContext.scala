@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 
@@ -29,6 +30,7 @@ class SendContext[T](private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def message():Message[T] = {
     Message[T](asJava.asInstanceOf[JSendContext[T]].message())

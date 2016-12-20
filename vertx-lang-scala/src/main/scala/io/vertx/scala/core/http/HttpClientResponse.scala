@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
@@ -117,6 +118,7 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()

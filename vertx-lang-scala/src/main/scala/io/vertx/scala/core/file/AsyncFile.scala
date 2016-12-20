@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
@@ -116,6 +117,12 @@ class AsyncFile(private val _asJava: Object)
   def setReadBufferSize(readBufferSize: Int):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize)
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JAsyncFile].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods

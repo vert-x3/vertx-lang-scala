@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{JksOptions => JJksOptions}
@@ -54,7 +55,7 @@ class JksOptions(private val _asJava: JJksOptions) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
+  def getPassword: String = {
     asJava.getPassword()
   }
 
@@ -65,7 +66,7 @@ class JksOptions(private val _asJava: JJksOptions) {
     asJava.setPath(value)
     this
   }
-  def getPath = {
+  def getPath: String = {
     asJava.getPath()
   }
 
@@ -76,8 +77,8 @@ class JksOptions(private val _asJava: JJksOptions) {
     asJava.setValue(value.asInstanceOf)
     this
   }
-  def getValue = {
-    asJava.getValue()
+  def getValue: Buffer = {
+    Buffer(asJava.getValue())
   }
 }
 

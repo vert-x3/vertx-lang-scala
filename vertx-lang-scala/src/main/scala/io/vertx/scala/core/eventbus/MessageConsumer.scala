@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -67,6 +68,7 @@ class MessageConsumer[T](private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   def bodyStream():ReadStream[T] = {
     ReadStream[T](asJava.asInstanceOf[JMessageConsumer[T]].bodyStream())

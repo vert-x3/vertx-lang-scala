@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -44,6 +45,7 @@ class NetClient(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled()

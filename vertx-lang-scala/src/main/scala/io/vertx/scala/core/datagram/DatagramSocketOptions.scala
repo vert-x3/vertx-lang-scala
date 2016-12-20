@@ -18,6 +18,7 @@ package io.vertx.scala.core.datagram
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
 import io.vertx.scala.core.net.NetworkOptions
@@ -37,7 +38,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     asJava.setBroadcast(value)
     this
   }
-  def isBroadcast = {
+  def isBroadcast: Boolean = {
     asJava.isBroadcast()
   }
 
@@ -48,18 +49,18 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     asJava.setIpV6(value)
     this
   }
-  def isIpV6 = {
+  def isIpV6: Boolean = {
     asJava.isIpV6()
   }
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
+  override def getLogActivity: Boolean = {
     asJava.getLogActivity()
   }
 
@@ -70,7 +71,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     asJava.setLoopbackModeDisabled(value)
     this
   }
-  def isLoopbackModeDisabled = {
+  def isLoopbackModeDisabled: Boolean = {
     asJava.isLoopbackModeDisabled()
   }
 
@@ -81,7 +82,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     asJava.setMulticastNetworkInterface(value)
     this
   }
-  def getMulticastNetworkInterface = {
+  def getMulticastNetworkInterface: String = {
     asJava.getMulticastNetworkInterface()
   }
 
@@ -92,51 +93,51 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     asJava.setMulticastTimeToLive(value)
     this
   }
-  def getMulticastTimeToLive = {
+  def getMulticastTimeToLive: Int = {
     asJava.getMulticastTimeToLive()
   }
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
+  override def getReceiveBufferSize: Int = {
     asJava.getReceiveBufferSize()
   }
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
+  override def isReuseAddress: Boolean = {
     asJava.isReuseAddress()
   }
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
+  override def getSendBufferSize: Int = {
     asJava.getSendBufferSize()
   }
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
+  override def getTrafficClass: Int = {
     asJava.getTrafficClass()
   }
 }
