@@ -73,17 +73,11 @@
     return size > 0 && isLastParamAHandlerWithAsyncResult(method) && !(method.returnType.kind == CLASS_HANDLER);
   }
 
-  def invokeMethod(target, type, method) {
-    return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method), method.returnType);
+  def invokeMethod(target, type, method, typeParams) {
+    return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method, typeParams), method.returnType, typeParams, method.typeParams);
   }
 
-  def invokeMethodWithoutConvertingReturn(target, type, method) {
-    var paramString = '';
-    for(param : method.params) {
-      if (paramString != '')
-        paramString += ',';
-      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
-    }
+  def invokeMethodWithoutConvertingReturn(target, type, method, typeParams) {
     var typeParamString = '';
     if(!method.typeParams.isEmpty){
       for(typeParam : method.typeParams) {
@@ -92,18 +86,29 @@
         typeParamString += typeParam.name;
       }
       typeParamString = '[' + typeParamString + ']';
+    }
+
+    var paramString = '';
+    for(param : method.params) {
+      if (paramString != '')
+        paramString += ',';
+      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type, typeParams, method.typeParams);
     }
 
     return target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')';
   }
 
   def invokeStaticMethod(target, type, method) {
+    /*class level typeparams aren't needed for static methods*/
+    var typeParams = java.util.Collections.emptyList();
+
     var paramString = '';
     for(param : method.params) {
       if (paramString != '')
         paramString += ',';
-      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type);
+      paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type, typeParams, method.typeParams);
     }
+
     var typeParamString = '';
     if(!method.typeParams.isEmpty){
       for(typeParam : method.typeParams) {
@@ -113,7 +118,7 @@
       }
       typeParamString = '[' + typeParamString + ']';
     }
-    return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')', method.returnType);
+    return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')', method.returnType, typeParams, method.typeParams);
   }
 
 }
