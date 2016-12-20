@@ -61,7 +61,7 @@ class HttpServerRequestStream(private val _asJava: Object)
 //basic methods
 }
 
-object HttpServerRequestStream{
-  def apply(asJava: JHttpServerRequestStream) = new HttpServerRequestStream(asJava)
-//static methods
-}
+  object HttpServerRequestStream{
+    def apply(asJava: JHttpServerRequestStream) = new HttpServerRequestStream(asJava)  
+  //static methods
+    }

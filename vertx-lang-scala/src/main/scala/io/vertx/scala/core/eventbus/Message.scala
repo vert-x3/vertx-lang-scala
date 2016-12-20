@@ -88,7 +88,7 @@ class Message[T](private val _asJava: Object) {
 
 }
 
-object Message{
-  def apply[T](asJava: JMessage[T]) = new Message[T](asJava)
-//static methods
-}
+  object Message{
+    def apply[T](asJava: JMessage[T]) = new Message[T](asJava)  
+  //static methods
+    }

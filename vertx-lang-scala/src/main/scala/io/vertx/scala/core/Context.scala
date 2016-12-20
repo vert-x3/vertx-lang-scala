@@ -127,19 +127,19 @@ class Context(private val _asJava: Object) {
 
 }
 
-object Context{
-  def apply(asJava: JContext) = new Context(asJava)
-//static methods
-  def isOnWorkerThread():Boolean = {
-    JContext.isOnWorkerThread()
-  }
-
-  def isOnEventLoopThread():Boolean = {
-    JContext.isOnEventLoopThread()
-  }
-
-  def isOnVertxThread():Boolean = {
-    JContext.isOnVertxThread()
-  }
-
-}
+  object Context{
+    def apply(asJava: JContext) = new Context(asJava)  
+  //static methods
+      def isOnWorkerThread    (  ):Boolean = {
+      JContext.isOnWorkerThread()
+    }
+  
+      def isOnEventLoopThread    (  ):Boolean = {
+      JContext.isOnEventLoopThread()
+    }
+  
+      def isOnVertxThread    (  ):Boolean = {
+      JContext.isOnVertxThread()
+    }
+  
+    }

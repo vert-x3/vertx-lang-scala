@@ -73,19 +73,19 @@ class WebSocketFrame(private val _asJava: Object) {
 
 }
 
-object WebSocketFrame{
-  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)
-//static methods
-  def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
-  }
-
-  def textFrame(str: String,isFinal: Boolean):WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.textFrame(str,isFinal))
-  }
-
-  def continuationFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
-  }
-
-}
+  object WebSocketFrame{
+    def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
+  //static methods
+      def binaryFrame    (    data: Buffer  ,  isFinal: Boolean  ):WebSocketFrame = {
+      WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
+    }
+  
+      def textFrame    (    str: String  ,  isFinal: Boolean  ):WebSocketFrame = {
+      WebSocketFrame(JWebSocketFrame.textFrame(str,isFinal))
+    }
+  
+      def continuationFrame    (    data: Buffer  ,  isFinal: Boolean  ):WebSocketFrame = {
+      WebSocketFrame(JWebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
+    }
+  
+    }

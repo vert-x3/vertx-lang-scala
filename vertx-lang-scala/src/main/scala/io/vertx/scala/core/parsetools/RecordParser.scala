@@ -82,19 +82,19 @@ class RecordParser(private val _asJava: Object)
 
 }
 
-object RecordParser{
-  def apply(asJava: JRecordParser) = new RecordParser(asJava)
-//static methods
-  def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim,{x: JBuffer => output.handle(Buffer(x))}))
-  }
-
-  def newDelimited(delim: Buffer,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],{x: JBuffer => output.handle(Buffer(x))}))
-  }
-
-  def newFixed(size: Int,output: Handler[Buffer]):RecordParser = {
-    RecordParser(JRecordParser.newFixed(size,{x: JBuffer => output.handle(Buffer(x))}))
-  }
-
-}
+  object RecordParser{
+    def apply(asJava: JRecordParser) = new RecordParser(asJava)  
+  //static methods
+      def newDelimited    (    delim: String  ,  output: Handler[Buffer]  ):RecordParser = {
+      RecordParser(JRecordParser.newDelimited(delim,{x: JBuffer => output.handle(Buffer(x))}))
+    }
+  
+      def newDelimited    (    delim: Buffer  ,  output: Handler[Buffer]  ):RecordParser = {
+      RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],{x: JBuffer => output.handle(Buffer(x))}))
+    }
+  
+      def newFixed    (    size: Int  ,  output: Handler[Buffer]  ):RecordParser = {
+      RecordParser(JRecordParser.newFixed(size,{x: JBuffer => output.handle(Buffer(x))}))
+    }
+  
+    }

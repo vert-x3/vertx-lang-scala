@@ -55,7 +55,7 @@ class NetClient(private val _asJava: Object)
 
 }
 
-object NetClient{
-  def apply(asJava: JNetClient) = new NetClient(asJava)
-//static methods
-}
+  object NetClient{
+    def apply(asJava: JNetClient) = new NetClient(asJava)  
+  //static methods
+    }

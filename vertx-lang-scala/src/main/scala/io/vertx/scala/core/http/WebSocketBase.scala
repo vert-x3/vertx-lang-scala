@@ -38,6 +38,8 @@ trait WebSocketBase
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
+  def asJava: java.lang.Object
+
   override def end(t: Buffer):Unit
 
   override def writeQueueFull():Boolean
@@ -82,12 +84,12 @@ trait WebSocketBase
 
   def localAddress():SocketAddress
 
-}
-object WebSocketBase{
-  def apply(asJava: JWebSocketBase) = new WebSocketBaseImpl(asJava)  
-    private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
 
-      def asJava = _asJava
+  object WebSocketBase{
+    def apply(asJava: JWebSocketBase):WebSocketBase = new WebSocketBaseImpl(asJava)    
+      private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
+
+        def asJava = _asJava
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -201,11 +203,6 @@ object WebSocketBase{
   }
 
 }
+      }
 
-object WebSocketBase{
-  def apply(asJava: JWebSocketBase) = new WebSocketBase(asJava)
-//static methods
-    }
-
-}
-}
+  }
