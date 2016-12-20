@@ -71,12 +71,12 @@ class Pump(private val _asJava: Object) {
   object Pump{
     def apply(asJava: JPump) = new Pump(asJava)  
   //static methods
-      def pump    [T]    (    rs: ReadStream[T]  ,  ws: WriteStream[T]  ):Pump = {
+    def pump[T](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
       Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
     }
-  
-      def pump    [T]    (    rs: ReadStream[T]  ,  ws: WriteStream[T]  ,  writeQueueMaxSize: Int  ):Pump = {
+
+    def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
       Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize))
     }
-  
-    }
+
+  }

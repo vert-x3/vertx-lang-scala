@@ -153,8 +153,8 @@ class CLI(private val _asJava: Object) {
   object CLI{
     def apply(asJava: JCLI) = new CLI(asJava)  
   //static methods
-      def create    (    name: String  ):CLI = {
+    def create(name: String):CLI = {
       CLI(JCLI.create(name))
     }
-  
-    }
+
+  }

@@ -64,4 +64,4 @@ class NetSocketStream(private val _asJava: Object)
   object NetSocketStream{
     def apply(asJava: JNetSocketStream) = new NetSocketStream(asJava)  
   //static methods
-    }
+  }

@@ -229,7 +229,7 @@ class Vertx(private val _asJava: Object)
     asJava.asInstanceOf[JVertx].undeploy(deploymentID,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-  def deploymentIDs():Set[String] = {
+  def deploymentIDs():scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x)
   }
 
@@ -262,20 +262,20 @@ class Vertx(private val _asJava: Object)
   object Vertx{
     def apply(asJava: JVertx) = new Vertx(asJava)  
   //static methods
-      def vertx    (  ):Vertx = {
+    def vertx():Vertx = {
       Vertx(JVertx.vertx())
     }
-  
-      def vertx    (    options: VertxOptions  ):Vertx = {
+
+    def vertx(options: VertxOptions):Vertx = {
       Vertx(JVertx.vertx(options.asJava))
     }
-  
-      def clusteredVertx    (    options: VertxOptions  ,  resultHandler: Handler[AsyncResult[Vertx]]  ):Unit = {
+
+    def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
       JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
     }
-  
-      def currentContext    (  ):Context = {
+
+    def currentContext():Context = {
       Context(JVertx.currentContext())
     }
-  
-    }
+
+  }

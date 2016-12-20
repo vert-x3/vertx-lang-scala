@@ -40,4 +40,4 @@ class Lock(private val _asJava: Object) {
   object Lock{
     def apply(asJava: JLock) = new Lock(asJava)  
   //static methods
-    }
+  }
