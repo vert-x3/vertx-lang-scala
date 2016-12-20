@@ -187,7 +187,7 @@
           ret += '[' + toScalaType(type.args[0]) + ']';
         return ret;
     } else if (type.kind == CLASS_SET){
-        var ret = 'Set';
+        var ret = 'scala.collection.mutable.Set';
         if (!type.args.isEmpty)
           ret += '[' + toScalaType(type.args[0]) + ']';
         return ret;

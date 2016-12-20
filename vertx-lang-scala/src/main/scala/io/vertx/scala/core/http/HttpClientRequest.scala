@@ -253,4 +253,4 @@ class HttpClientRequest(private val _asJava: Object)
   object HttpClientRequest{
     def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
   //static methods
-    }
+  }

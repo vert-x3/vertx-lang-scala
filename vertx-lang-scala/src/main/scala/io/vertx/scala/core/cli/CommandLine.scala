@@ -103,8 +103,8 @@ class CommandLine(private val _asJava: Object) {
   object CommandLine{
     def apply(asJava: JCommandLine) = new CommandLine(asJava)  
   //static methods
-      def create    (    cli: CLI  ):CommandLine = {
+    def create(cli: CLI):CommandLine = {
       CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
     }
-  
-    }
+
+  }

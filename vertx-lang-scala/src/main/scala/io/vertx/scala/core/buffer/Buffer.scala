@@ -356,20 +356,20 @@ class Buffer(private val _asJava: Object) {
   object Buffer{
     def apply(asJava: JBuffer) = new Buffer(asJava)  
   //static methods
-      def buffer    (  ):Buffer = {
+    def buffer():Buffer = {
       Buffer(JBuffer.buffer())
     }
-  
-      def buffer    (    initialSizeHint: Int  ):Buffer = {
+
+    def buffer(initialSizeHint: Int):Buffer = {
       Buffer(JBuffer.buffer(initialSizeHint))
     }
-  
-      def buffer    (    string: String  ):Buffer = {
+
+    def buffer(string: String):Buffer = {
       Buffer(JBuffer.buffer(string))
     }
-  
-      def buffer    (    string: String  ,  enc: String  ):Buffer = {
+
+    def buffer(string: String,enc: String):Buffer = {
       Buffer(JBuffer.buffer(string,enc))
     }
-  
-    }
+
+  }

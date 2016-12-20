@@ -87,24 +87,24 @@ class Future[T](private val _asJava: Object) {
   object Future{
     def apply[T](asJava: JFuture[T]) = new Future[T](asJava)  
   //static methods
-      def future    [T]    (  ):Future[T] = {
+    def future[T]():Future[T] = {
       Future[T](JFuture.future[T]())
     }
-  
-      def succeededFuture    [T]    (  ):Future[T] = {
+
+    def succeededFuture[T]():Future[T] = {
       Future[T](JFuture.succeededFuture[T]())
     }
-  
-      def succeededFuture    [T]    (    result: T  ):Future[T] = {
+
+    def succeededFuture[T](result: T):Future[T] = {
       Future[T](JFuture.succeededFuture[T](result))
     }
-  
-      def failedFuture    [T]    (    t: Throwable  ):Future[T] = {
+
+    def failedFuture[T](t: Throwable):Future[T] = {
       Future[T](JFuture.failedFuture[T](t))
     }
-  
-      def failedFuture    [T]    (    failureMessage: String  ):Future[T] = {
+
+    def failedFuture[T](failureMessage: String):Future[T] = {
       Future[T](JFuture.failedFuture[T](failureMessage))
     }
-  
-    }
+
+  }

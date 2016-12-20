@@ -42,7 +42,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
   */
 class HttpClientOptions(private val _asJava: JHttpClientOptions) 
-    extends ClientOptionsBase(_asJava) {
+    extends ClientOptionsBase {
 
   def asJava = _asJava
 

@@ -129,4 +129,4 @@ class HttpServer(private val _asJava: Object)
   object HttpServer{
     def apply(asJava: JHttpServer) = new HttpServer(asJava)  
   //static methods
-    }
+  }

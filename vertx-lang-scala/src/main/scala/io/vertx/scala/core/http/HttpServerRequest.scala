@@ -241,4 +241,4 @@ class HttpServerRequest(private val _asJava: Object)
   object HttpServerRequest{
     def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)  
   //static methods
-    }
+  }

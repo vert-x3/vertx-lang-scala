@@ -325,4 +325,4 @@ class FileSystem(private val _asJava: Object) {
   object FileSystem{
     def apply(asJava: JFileSystem) = new FileSystem(asJava)  
   //static methods
-    }
+  }

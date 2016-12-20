@@ -181,4 +181,4 @@ class NetSocket(private val _asJava: Object)
   object NetSocket{
     def apply(asJava: JNetSocket) = new NetSocket(asJava)  
   //static methods
-    }
+  }

@@ -140,4 +140,4 @@ class AsyncFile(private val _asJava: Object)
   object AsyncFile{
     def apply(asJava: JAsyncFile) = new AsyncFile(asJava)  
   //static methods
-    }
+  }
