@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{Counter => JCounter}
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
@@ -44,6 +45,7 @@ class SharedData(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def getClusterWideMap[K, V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
     asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,{x: AsyncResult[JAsyncMap[K,V]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a)))})

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.{MultiMap => JMultiMap}
 import scala.collection.JavaConverters._
 
@@ -61,6 +62,7 @@ class MultiMap(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def get(name: String):String = {
     asJava.asInstanceOf[JMultiMap].get(name)

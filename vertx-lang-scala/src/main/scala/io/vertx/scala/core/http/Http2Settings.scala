@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 /**
@@ -37,7 +38,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setHeaderTableSize(value)
     this
   }
-  def getHeaderTableSize = {
+  def getHeaderTableSize: Long = {
     asJava.getHeaderTableSize()
   }
 
@@ -48,7 +49,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setInitialWindowSize(value)
     this
   }
-  def getInitialWindowSize = {
+  def getInitialWindowSize: Int = {
     asJava.getInitialWindowSize()
   }
 
@@ -59,7 +60,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setMaxConcurrentStreams(value)
     this
   }
-  def getMaxConcurrentStreams = {
+  def getMaxConcurrentStreams: Long = {
     asJava.getMaxConcurrentStreams()
   }
 
@@ -70,7 +71,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setMaxFrameSize(value)
     this
   }
-  def getMaxFrameSize = {
+  def getMaxFrameSize: Int = {
     asJava.getMaxFrameSize()
   }
 
@@ -81,7 +82,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setMaxHeaderListSize(value)
     this
   }
-  def getMaxHeaderListSize = {
+  def getMaxHeaderListSize: Long = {
     asJava.getMaxHeaderListSize()
   }
 
@@ -92,7 +93,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     asJava.setPushEnabled(value)
     this
   }
-  def isPushEnabled = {
+  def isPushEnabled: Boolean = {
     asJava.isPushEnabled()
   }
 }

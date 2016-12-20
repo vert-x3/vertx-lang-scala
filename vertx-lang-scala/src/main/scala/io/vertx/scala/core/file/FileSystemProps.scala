@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 
 /**
@@ -27,6 +28,7 @@ class FileSystemProps(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def totalSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].totalSpace()

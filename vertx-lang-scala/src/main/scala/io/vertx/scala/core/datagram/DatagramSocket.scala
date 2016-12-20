@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.datagram
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -135,6 +136,7 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled()

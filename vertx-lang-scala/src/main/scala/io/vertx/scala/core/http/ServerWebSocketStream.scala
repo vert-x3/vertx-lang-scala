@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -58,6 +59,7 @@ class ServerWebSocketStream(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
 }
 

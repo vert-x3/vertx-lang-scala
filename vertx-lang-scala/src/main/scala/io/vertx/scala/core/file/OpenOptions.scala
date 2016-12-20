@@ -18,6 +18,7 @@ package io.vertx.scala.core.file
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 
 /**
@@ -34,7 +35,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setCreate(value)
     this
   }
-  def isCreate = {
+  def isCreate: Boolean = {
     asJava.isCreate()
   }
 
@@ -45,7 +46,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setCreateNew(value)
     this
   }
-  def isCreateNew = {
+  def isCreateNew: Boolean = {
     asJava.isCreateNew()
   }
 
@@ -56,7 +57,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setDeleteOnClose(value)
     this
   }
-  def isDeleteOnClose = {
+  def isDeleteOnClose: Boolean = {
     asJava.isDeleteOnClose()
   }
 
@@ -67,7 +68,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setDsync(value)
     this
   }
-  def isDsync = {
+  def isDsync: Boolean = {
     asJava.isDsync()
   }
 
@@ -78,7 +79,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setPerms(value)
     this
   }
-  def getPerms = {
+  def getPerms: String = {
     asJava.getPerms()
   }
 
@@ -89,7 +90,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setRead(value)
     this
   }
-  def isRead = {
+  def isRead: Boolean = {
     asJava.isRead()
   }
 
@@ -100,7 +101,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setSparse(value)
     this
   }
-  def isSparse = {
+  def isSparse: Boolean = {
     asJava.isSparse()
   }
 
@@ -111,7 +112,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setSync(value)
     this
   }
-  def isSync = {
+  def isSync: Boolean = {
     asJava.isSync()
   }
 
@@ -122,7 +123,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setTruncateExisting(value)
     this
   }
-  def isTruncateExisting = {
+  def isTruncateExisting: Boolean = {
     asJava.isTruncateExisting()
   }
 
@@ -133,7 +134,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     asJava.setWrite(value)
     this
   }
-  def isWrite = {
+  def isWrite: Boolean = {
     asJava.isWrite()
   }
 }

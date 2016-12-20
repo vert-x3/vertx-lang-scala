@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.HttpMethod
@@ -227,6 +228,7 @@ class HttpClient(private val _asJava: Object)
     this
   }
 
+//default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JHttpClient].isMetricsEnabled()

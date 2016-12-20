@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.parsetools
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler
@@ -59,6 +60,7 @@ class RecordParser(private val _asJava: Object)
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def setOutput(output: Handler[Buffer]):Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})

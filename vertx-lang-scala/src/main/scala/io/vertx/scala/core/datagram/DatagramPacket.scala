@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.datagram
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
@@ -31,6 +32,7 @@ class DatagramPacket(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def sender():SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())

@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
@@ -37,7 +38,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     asJava.setCodecName(value)
     this
   }
-  def getCodecName = {
+  def getCodecName: String = {
     asJava.getCodecName()
   }
 
@@ -59,7 +60,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     asJava.setSendTimeout(value)
     this
   }
-  def getSendTimeout = {
+  def getSendTimeout: Long = {
     asJava.getSendTimeout()
   }
 }

@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Context => JContext}
 import io.vertx.core.{Future => JFuture}
@@ -68,6 +69,7 @@ class Context(private val _asJava: Object) {
     this
   }
 
+//default methods
 //basic methods
   def runOnContext(action: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})

@@ -23,6 +23,9 @@
   def @{property.setterMethod}(value: @{toScalaType(property.type)}):@{className}\n
 	@end{}
 @end{}
+@if{(property.setter || property.adder) && property.getterMethod != null}
+  def @{property.getterMethod}: @{fromPropertyInfoToScala(property)} \n
+@end{}
 @end{}
 }\n
 \n

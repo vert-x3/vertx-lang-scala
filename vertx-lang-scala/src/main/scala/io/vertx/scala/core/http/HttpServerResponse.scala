@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
@@ -197,6 +198,12 @@ class HttpServerResponse(private val _asJava: Object)
   def writeCustomFrame(frame: HttpFrame):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
+  }
+
+//default methods
+  //io.vertx.core.http.HttpServerResponse
+  override def reset():Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].reset()
   }
 
 //basic methods

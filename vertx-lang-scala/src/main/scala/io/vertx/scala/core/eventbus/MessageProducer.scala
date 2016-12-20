@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.eventbus
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
@@ -59,6 +60,12 @@ class MessageProducer[T](private val _asJava: Object)
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[T]].deliveryOptions(options.asJava)
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: T):Unit = {
+    asJava.asInstanceOf[JMessageProducer[T]].end(t)
   }
 
 //basic methods

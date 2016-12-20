@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
@@ -135,6 +136,12 @@ class ServerWebSocket(private val _asJava: Object)
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
+  }
+
+//default methods
+  //io.vertx.core.streams.WriteStream
+  override def end(t: Buffer):Unit = {
+    asJava.asInstanceOf[JServerWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods

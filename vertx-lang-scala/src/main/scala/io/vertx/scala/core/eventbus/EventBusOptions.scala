@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
@@ -52,7 +53,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setAcceptBacklog(value)
     this
   }
-  def getAcceptBacklog = {
+  def getAcceptBacklog: Int = {
     asJava.getAcceptBacklog()
   }
 
@@ -63,7 +64,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClientAuth(value)
     this
   }
-  def getClientAuth = {
+  def getClientAuth: io.vertx.core.http.ClientAuth = {
     asJava.getClientAuth()
   }
 
@@ -74,7 +75,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClusterPingInterval(value)
     this
   }
-  def getClusterPingInterval = {
+  def getClusterPingInterval: Long = {
     asJava.getClusterPingInterval()
   }
 
@@ -85,7 +86,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClusterPingReplyInterval(value)
     this
   }
-  def getClusterPingReplyInterval = {
+  def getClusterPingReplyInterval: Long = {
     asJava.getClusterPingReplyInterval()
   }
 
@@ -102,7 +103,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClusterPublicHost(value)
     this
   }
-  def getClusterPublicHost = {
+  def getClusterPublicHost: String = {
     asJava.getClusterPublicHost()
   }
 
@@ -113,7 +114,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClusterPublicPort(value)
     this
   }
-  def getClusterPublicPort = {
+  def getClusterPublicPort: Int = {
     asJava.getClusterPublicPort()
   }
 
@@ -124,7 +125,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setClustered(value)
     this
   }
-  def isClustered = {
+  def isClustered: Boolean = {
     asJava.isClustered()
   }
 
@@ -135,52 +136,52 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout = {
+  def getConnectTimeout: Int = {
     asJava.getConnectTimeout()
   }
 
   /**
     * Add a CRL path
     */
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x)
   }
 
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: Buffer) = {
+  override def addCrlValue(value: Buffer) = {
     asJava.addCrlValue(value.asInstanceOf)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[Buffer] = {
+    asJava.getCrlValues().asScala.map(x => Buffer(x))
   }
 
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x)
   }
 
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x)
   }
 
   /**
@@ -190,7 +191,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setHost(value)
     this
   }
-  def getHost = {
+  def getHost: String = {
     asJava.getHost()
   }
 
@@ -198,14 +199,14 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
+  override def getIdleTimeout: Int = {
     asJava.getIdleTimeout()
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asInstanceOf)
     this
   }
@@ -213,7 +214,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asInstanceOf)
     this
   }
@@ -221,14 +222,14 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
+  override def getLogActivity: Boolean = {
     asJava.getLogActivity()
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asInstanceOf)
     this
   }
@@ -236,7 +237,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asInstanceOf)
     this
   }
@@ -244,7 +245,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asInstanceOf)
     this
   }
@@ -252,7 +253,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asInstanceOf)
     this
   }
@@ -260,7 +261,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asInstanceOf)
     this
   }
@@ -272,18 +273,18 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setPort(value)
     this
   }
-  def getPort = {
+  def getPort: Int = {
     asJava.getPort()
   }
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
+  override def getReceiveBufferSize: Int = {
     asJava.getReceiveBufferSize()
   }
 
@@ -294,7 +295,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setReconnectAttempts(value)
     this
   }
-  def getReconnectAttempts = {
+  def getReconnectAttempts: Int = {
     asJava.getReconnectAttempts()
   }
 
@@ -305,84 +306,84 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setReconnectInterval(value)
     this
   }
-  def getReconnectInterval = {
+  def getReconnectInterval: Long = {
     asJava.getReconnectInterval()
   }
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
+  override def isReuseAddress: Boolean = {
     asJava.isReuseAddress()
   }
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
+  override def getSendBufferSize: Int = {
     asJava.getSendBufferSize()
   }
 
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
+  override def getSoLinger: Int = {
     asJava.getSoLinger()
   }
 
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
+  override def isSsl: Boolean = {
     asJava.isSsl()
   }
 
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
+  override def isTcpKeepAlive: Boolean = {
     asJava.isTcpKeepAlive()
   }
 
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
+  override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay()
   }
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
+  override def getTrafficClass: Int = {
     asJava.getTrafficClass()
   }
 
@@ -393,14 +394,14 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
+  def isTrustAll: Boolean = {
     asJava.isTrustAll()
   }
 
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asInstanceOf)
     this
   }
@@ -408,22 +409,22 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
+  override def isUseAlpn: Boolean = {
     asJava.isUseAlpn()
   }
 
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
+  override def isUsePooledBuffers: Boolean = {
     asJava.isUsePooledBuffers()
   }
 }

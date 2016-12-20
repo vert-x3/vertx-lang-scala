@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.cli.{Option => JOption}
 
 /**
@@ -37,7 +38,7 @@ class Option(private val _asJava: JOption) {
     asJava.setArgName(value)
     this
   }
-  def getArgName = {
+  def getArgName: String = {
     asJava.getArgName()
   }
 
@@ -53,8 +54,8 @@ class Option(private val _asJava: JOption) {
     asJava.setChoices(value.asInstanceOf)
     this
   }
-  def getChoices = {
-    asJava.getChoices()
+  def getChoices: scala.collection.mutable.Set[String] = {
+    asJava.getChoices().asScala.map(x => x)
   }
 
   /**
@@ -64,7 +65,7 @@ class Option(private val _asJava: JOption) {
     asJava.setDefaultValue(value)
     this
   }
-  def getDefaultValue = {
+  def getDefaultValue: String = {
     asJava.getDefaultValue()
   }
 
@@ -75,7 +76,7 @@ class Option(private val _asJava: JOption) {
     asJava.setDescription(value)
     this
   }
-  def getDescription = {
+  def getDescription: String = {
     asJava.getDescription()
   }
 
@@ -90,7 +91,7 @@ class Option(private val _asJava: JOption) {
     asJava.setFlag(value)
     this
   }
-  def isFlag = {
+  def isFlag: Boolean = {
     asJava.isFlag()
   }
 
@@ -101,7 +102,7 @@ class Option(private val _asJava: JOption) {
     asJava.setHelp(value)
     this
   }
-  def isHelp = {
+  def isHelp: Boolean = {
     asJava.isHelp()
   }
 
@@ -112,7 +113,7 @@ class Option(private val _asJava: JOption) {
     asJava.setHidden(value)
     this
   }
-  def isHidden = {
+  def isHidden: Boolean = {
     asJava.isHidden()
   }
 
@@ -123,7 +124,7 @@ class Option(private val _asJava: JOption) {
     asJava.setLongName(value)
     this
   }
-  def getLongName = {
+  def getLongName: String = {
     asJava.getLongName()
   }
 
@@ -134,7 +135,7 @@ class Option(private val _asJava: JOption) {
     asJava.setMultiValued(value)
     this
   }
-  def isMultiValued = {
+  def isMultiValued: Boolean = {
     asJava.isMultiValued()
   }
 
@@ -148,7 +149,7 @@ class Option(private val _asJava: JOption) {
     asJava.setRequired(value)
     this
   }
-  def isRequired = {
+  def isRequired: Boolean = {
     asJava.isRequired()
   }
 
@@ -159,7 +160,7 @@ class Option(private val _asJava: JOption) {
     asJava.setShortName(value)
     this
   }
-  def getShortName = {
+  def getShortName: String = {
     asJava.getShortName()
   }
 
@@ -170,7 +171,7 @@ class Option(private val _asJava: JOption) {
     asJava.setSingleValued(value)
     this
   }
-  def isSingleValued = {
+  def isSingleValued: Boolean = {
     asJava.isSingleValued()
   }
 }

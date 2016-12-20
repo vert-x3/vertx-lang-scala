@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.metrics
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.metrics.{Measured => JMeasured}
 
 /**
@@ -35,6 +36,7 @@ trait Measured {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled()

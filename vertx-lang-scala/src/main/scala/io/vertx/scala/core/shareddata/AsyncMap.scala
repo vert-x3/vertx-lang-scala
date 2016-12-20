@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
 import io.vertx.core.AsyncResult
@@ -31,6 +32,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
 
 //cached methods
 //fluent methods
+//default methods
 //basic methods
   def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[K,V]].get(k,{x: AsyncResult[V] => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
