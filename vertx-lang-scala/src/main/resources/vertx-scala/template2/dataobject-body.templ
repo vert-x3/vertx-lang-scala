@@ -1,4 +1,11 @@
-  def asJava = _asJava\n
+@code{
+  var isAllSuperTypesAbstract = true;
+  for(superType : superTypes) {
+    if(!superType.isAbstract)
+      isAllSuperTypesAbstract = false;
+  }
+}
+  @if{!isAllSuperTypesAbstract}override @end{}def asJava = _asJava\n
 @foreach{property:properties}
 @if{property.doc != null}
 \n

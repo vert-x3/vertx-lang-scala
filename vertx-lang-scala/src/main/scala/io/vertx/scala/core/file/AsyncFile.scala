@@ -120,6 +120,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JAsyncFile].end(t.asJava.asInstanceOf[JBuffer])
   }

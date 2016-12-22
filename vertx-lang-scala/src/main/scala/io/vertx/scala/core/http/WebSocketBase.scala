@@ -183,6 +183,7 @@ trait WebSocketBase
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
   }

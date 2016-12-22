@@ -47,18 +47,22 @@ class Future[T](private val _asJava: Object) {
   }
 
 //default methods
+  //io.vertx.core.Future
   override def compose[U](handler: Handler[T],next: Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x: T => handler.handle(x)},next.asJava.asInstanceOf[JFuture[U]]))
   }
 
+  //io.vertx.core.Future
   override def compose[U](mapper: T => Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x:T=> mapper(x).asJava.asInstanceOf[JFuture[U]]}))
   }
 
+  //io.vertx.core.Future
   override def map[U](mapper: T => U):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x:T=> mapper(x)}))
   }
 
+  //io.vertx.core.Future
   override def map[V](value: V):Future[V] = {
     Future[V](asJava.asInstanceOf[JFuture[T]].map[V](value))
   }

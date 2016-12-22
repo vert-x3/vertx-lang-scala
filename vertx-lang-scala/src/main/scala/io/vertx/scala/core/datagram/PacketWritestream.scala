@@ -56,6 +56,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
