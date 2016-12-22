@@ -42,7 +42,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
 class HttpServerOptions(private val _asJava: JHttpServerOptions) 
     extends NetServerOptions(_asJava) {
 
-  def asJava = _asJava
+  override def asJava = _asJava
 
   /**
     * Set the accept back log

@@ -197,10 +197,12 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.http.HttpClientRequest
   override def reset():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset()
   }
 
+  //io.vertx.core.http.HttpClientRequest
   override def streamId():Int = {
     asJava.asInstanceOf[JHttpClientRequest].streamId()
   }

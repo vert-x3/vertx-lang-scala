@@ -77,6 +77,7 @@ trait WriteStream[T]
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: T):Unit = {
     asJava.asInstanceOf[JWriteStream[T]].end(t)
   }

@@ -125,6 +125,7 @@ class WebSocket(private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }

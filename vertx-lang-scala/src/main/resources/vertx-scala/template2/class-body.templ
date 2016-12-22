@@ -51,6 +51,7 @@
 
 //default methods\n
 @foreach{method : defaultMethods}
+  @foreach{ownerType : method.ownerTypes}//@{ownerType.name}\n@end{}
   override def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]

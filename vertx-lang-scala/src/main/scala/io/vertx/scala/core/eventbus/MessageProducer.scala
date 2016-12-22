@@ -63,6 +63,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: T):Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].end(t)
   }

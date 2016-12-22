@@ -157,6 +157,7 @@ class NetSocket(private val _asJava: Object)
   }
 
 //default methods
+  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JNetSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
