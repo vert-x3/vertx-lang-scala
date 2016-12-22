@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.streams
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}

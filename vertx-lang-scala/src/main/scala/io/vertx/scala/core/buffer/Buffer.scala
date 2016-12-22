@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.buffer
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.json.JsonObject

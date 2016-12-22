@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}

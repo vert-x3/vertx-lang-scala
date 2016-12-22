@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.net
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}

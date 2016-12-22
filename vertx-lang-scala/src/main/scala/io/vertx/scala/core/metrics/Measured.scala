@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.metrics
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.metrics.{Measured => JMeasured}
 
 /**

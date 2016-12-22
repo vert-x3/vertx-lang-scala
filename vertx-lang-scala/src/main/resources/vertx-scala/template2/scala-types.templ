@@ -82,6 +82,11 @@
     } else if(type.kind == CLASS_ASYNC_RESULT) {
       return 'AsyncResultWrapper('+name+')';
     }
+    else if(type.kind == CLASS_FUNCTION) {
+      var executed = name + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
+      executed = toJavaWithConversion(executed, type.args[1], typeParams, methodTypeParams);
+      return "{x:" + toJavaType(type.args[0]) + "=> " + executed + "}";
+    }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
     }

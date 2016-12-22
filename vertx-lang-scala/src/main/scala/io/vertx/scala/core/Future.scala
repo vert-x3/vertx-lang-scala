@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
@@ -51,11 +52,11 @@ class Future[T](private val _asJava: Object) {
   }
 
   override def compose[U](mapper: T => Future[U]):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U](WTF!!!!!!java.util.function.Function<T,io.vertx.core.Future<U>> FUNCTION))
+    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x:T=> mapper(x).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   override def map[U](mapper: T => U):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].map[U](WTF!!!!!!java.util.function.Function<T,U> FUNCTION))
+    Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x:T=> mapper(x)}))
   }
 
   override def map[V](value: V):Future[V] = {

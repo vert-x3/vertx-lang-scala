@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.dns
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.dns.{DnsClient => JDnsClient}
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}
