@@ -36,7 +36,7 @@
 
   def generateImports(type, imps, methods) {
     var ret = new java.util.HashSet();
-    ret.add(helper.getPackageName(type.name) + '.{' + helper.getNonGenericType(type.simpleName) + ' => J' + helper.getNonGenericType(type.simpleName) + '}');
+    ret.add(convertTypeToAliasedType(type));
     for(imported : imps) {
       /*Don't import implementations*/
       if(!imported.name.contains(".impl.")) {
@@ -55,6 +55,6 @@
    * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
    */
   def convertTypeToAliasedType(type) {
-    type.name.replace(type.simpleName,"")+'{'+helper.getNonGenericType(type.simpleName)+" => J"+helper.getNonGenericType(type.simpleName)+"}"
+    helper.getPackageName(type.name) + '.{'+helper.getNonGenericType(type.simpleName)+" => J"+helper.getNonGenericType(type.simpleName)+"}"
   }
 }
