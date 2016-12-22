@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.buffer.Buffer
@@ -54,7 +55,7 @@ class PfxOptions(private val _asJava: JPfxOptions) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
+  def getPassword: String = {
     asJava.getPassword()
   }
 
@@ -65,7 +66,7 @@ class PfxOptions(private val _asJava: JPfxOptions) {
     asJava.setPath(value)
     this
   }
-  def getPath = {
+  def getPath: String = {
     asJava.getPath()
   }
 
@@ -76,8 +77,8 @@ class PfxOptions(private val _asJava: JPfxOptions) {
     asJava.setValue(value.asInstanceOf)
     this
   }
-  def getValue = {
-    asJava.getValue()
+  def getValue: Buffer = {
+    Buffer(asJava.getValue())
   }
 }
 

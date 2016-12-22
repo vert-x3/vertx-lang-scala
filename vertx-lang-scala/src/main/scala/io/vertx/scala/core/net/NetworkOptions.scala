@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
 
 /**
@@ -29,25 +30,30 @@ trait NetworkOptions {
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
   def setLogActivity(value: Boolean):NetworkOptions
+  def getLogActivity: Boolean 
 
   /**
     * Set the TCP receive buffer size
     */
   def setReceiveBufferSize(value: Int):NetworkOptions
+  def getReceiveBufferSize: Int 
 
   /**
     * Set the value of reuse address
     */
   def setReuseAddress(value: Boolean):NetworkOptions
+  def isReuseAddress: Boolean 
 
   /**
     * Set the TCP send buffer size
     */
   def setSendBufferSize(value: Int):NetworkOptions
+  def getSendBufferSize: Int 
 
   /**
     * Set the value of traffic class
     */
   def setTrafficClass(value: Int):NetworkOptions
+  def getTrafficClass: Int 
 }
 

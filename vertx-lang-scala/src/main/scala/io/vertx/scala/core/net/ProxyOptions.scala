@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 
 /**
@@ -34,7 +35,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
+  def getHost: String = {
     asJava.getHost()
   }
 
@@ -45,7 +46,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
+  def getPassword: String = {
     asJava.getPassword()
   }
 
@@ -56,7 +57,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
+  def getPort: Int = {
     asJava.getPort()
   }
 
@@ -69,7 +70,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     asJava.setType(value)
     this
   }
-  def getType = {
+  def getType: io.vertx.core.net.ProxyType = {
     asJava.getType()
   }
 
@@ -80,7 +81,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     asJava.setUsername(value)
     this
   }
-  def getUsername = {
+  def getUsername: String = {
     asJava.getUsername()
   }
 }

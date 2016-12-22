@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
 import io.vertx.scala.core.eventbus.EventBusOptions
@@ -40,8 +41,8 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setAddressResolverOptions(value.asInstanceOf)
     this
   }
-  def getAddressResolverOptions = {
-    asJava.getAddressResolverOptions()
+  def getAddressResolverOptions: AddressResolverOptions = {
+    AddressResolverOptions(asJava.getAddressResolverOptions())
   }
 
   /**
@@ -51,7 +52,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setBlockedThreadCheckInterval(value)
     this
   }
-  def getBlockedThreadCheckInterval = {
+  def getBlockedThreadCheckInterval: Long = {
     asJava.getBlockedThreadCheckInterval()
   }
 
@@ -62,7 +63,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterHost(value)
     this
   }
-  def getClusterHost = {
+  def getClusterHost: String = {
     asJava.getClusterHost()
   }
 
@@ -73,7 +74,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterPingInterval(value)
     this
   }
-  def getClusterPingInterval = {
+  def getClusterPingInterval: Long = {
     asJava.getClusterPingInterval()
   }
 
@@ -84,7 +85,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterPingReplyInterval(value)
     this
   }
-  def getClusterPingReplyInterval = {
+  def getClusterPingReplyInterval: Long = {
     asJava.getClusterPingReplyInterval()
   }
 
@@ -95,7 +96,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterPort(value)
     this
   }
-  def getClusterPort = {
+  def getClusterPort: Int = {
     asJava.getClusterPort()
   }
 
@@ -110,7 +111,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterPublicHost(value)
     this
   }
-  def getClusterPublicHost = {
+  def getClusterPublicHost: String = {
     asJava.getClusterPublicHost()
   }
 
@@ -121,7 +122,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClusterPublicPort(value)
     this
   }
-  def getClusterPublicPort = {
+  def getClusterPublicPort: Int = {
     asJava.getClusterPublicPort()
   }
 
@@ -132,7 +133,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setClustered(value)
     this
   }
-  def isClustered = {
+  def isClustered: Boolean = {
     asJava.isClustered()
   }
 
@@ -143,8 +144,8 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setEventBusOptions(value.asInstanceOf)
     this
   }
-  def getEventBusOptions = {
-    asJava.getEventBusOptions()
+  def getEventBusOptions: EventBusOptions = {
+    EventBusOptions(asJava.getEventBusOptions())
   }
 
   /**
@@ -154,7 +155,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setEventLoopPoolSize(value)
     this
   }
-  def getEventLoopPoolSize = {
+  def getEventLoopPoolSize: Int = {
     asJava.getEventLoopPoolSize()
   }
 
@@ -165,7 +166,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setHAEnabled(value)
     this
   }
-  def isHAEnabled = {
+  def isHAEnabled: Boolean = {
     asJava.isHAEnabled()
   }
 
@@ -176,7 +177,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setHAGroup(value)
     this
   }
-  def getHAGroup = {
+  def getHAGroup: String = {
     asJava.getHAGroup()
   }
 
@@ -187,7 +188,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setInternalBlockingPoolSize(value)
     this
   }
-  def getInternalBlockingPoolSize = {
+  def getInternalBlockingPoolSize: Int = {
     asJava.getInternalBlockingPoolSize()
   }
 
@@ -198,7 +199,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setMaxEventLoopExecuteTime(value)
     this
   }
-  def getMaxEventLoopExecuteTime = {
+  def getMaxEventLoopExecuteTime: Long = {
     asJava.getMaxEventLoopExecuteTime()
   }
 
@@ -209,7 +210,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setMaxWorkerExecuteTime(value)
     this
   }
-  def getMaxWorkerExecuteTime = {
+  def getMaxWorkerExecuteTime: Long = {
     asJava.getMaxWorkerExecuteTime()
   }
 
@@ -220,8 +221,8 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setMetricsOptions(value.asInstanceOf)
     this
   }
-  def getMetricsOptions = {
-    asJava.getMetricsOptions()
+  def getMetricsOptions: MetricsOptions = {
+    MetricsOptions(asJava.getMetricsOptions())
   }
 
   /**
@@ -231,7 +232,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setQuorumSize(value)
     this
   }
-  def getQuorumSize = {
+  def getQuorumSize: Int = {
     asJava.getQuorumSize()
   }
 
@@ -242,7 +243,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setWarningExceptionTime(value)
     this
   }
-  def getWarningExceptionTime = {
+  def getWarningExceptionTime: Long = {
     asJava.getWarningExceptionTime()
   }
 
@@ -253,7 +254,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
     asJava.setWorkerPoolSize(value)
     this
   }
-  def getWorkerPoolSize = {
+  def getWorkerPoolSize: Int = {
     asJava.getWorkerPoolSize()
   }
 }

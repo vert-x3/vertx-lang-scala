@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.cli.{Argument => JArgument}
 
 /**
@@ -35,7 +36,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setArgName(value)
     this
   }
-  def getArgName = {
+  def getArgName: String = {
     asJava.getArgName()
   }
 
@@ -46,7 +47,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setDefaultValue(value)
     this
   }
-  def getDefaultValue = {
+  def getDefaultValue: String = {
     asJava.getDefaultValue()
   }
 
@@ -57,7 +58,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setDescription(value)
     this
   }
-  def getDescription = {
+  def getDescription: String = {
     asJava.getDescription()
   }
 
@@ -68,7 +69,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setHidden(value)
     this
   }
-  def isHidden = {
+  def isHidden: Boolean = {
     asJava.isHidden()
   }
 
@@ -79,7 +80,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setIndex(value)
     this
   }
-  def getIndex = {
+  def getIndex: Int = {
     asJava.getIndex()
   }
 
@@ -90,7 +91,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setMultiValued(value)
     this
   }
-  def isMultiValued = {
+  def isMultiValued: Boolean = {
     asJava.isMultiValued()
   }
 
@@ -101,7 +102,7 @@ class Argument(private val _asJava: JArgument) {
     asJava.setRequired(value)
     this
   }
-  def isRequired = {
+  def isRequired: Boolean = {
     asJava.isRequired()
   }
 }

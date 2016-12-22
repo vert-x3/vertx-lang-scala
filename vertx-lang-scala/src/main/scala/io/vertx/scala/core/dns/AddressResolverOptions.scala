@@ -18,6 +18,7 @@ package io.vertx.scala.core.dns
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
@@ -38,7 +39,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setCacheMaxTimeToLive(value)
     this
   }
-  def getCacheMaxTimeToLive = {
+  def getCacheMaxTimeToLive: Int = {
     asJava.getCacheMaxTimeToLive()
   }
 
@@ -50,7 +51,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setCacheMinTimeToLive(value)
     this
   }
-  def getCacheMinTimeToLive = {
+  def getCacheMinTimeToLive: Int = {
     asJava.getCacheMinTimeToLive()
   }
 
@@ -63,7 +64,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setCacheNegativeTimeToLive(value)
     this
   }
-  def getCacheNegativeTimeToLive = {
+  def getCacheNegativeTimeToLive: Int = {
     asJava.getCacheNegativeTimeToLive()
   }
 
@@ -76,7 +77,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setHostsPath(value)
     this
   }
-  def getHostsPath = {
+  def getHostsPath: String = {
     asJava.getHostsPath()
   }
 
@@ -91,8 +92,8 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setHostsValue(value.asInstanceOf)
     this
   }
-  def getHostsValue = {
-    asJava.getHostsValue()
+  def getHostsValue: Buffer = {
+    Buffer(asJava.getHostsValue())
   }
 
   /**
@@ -102,7 +103,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setMaxQueries(value)
     this
   }
-  def getMaxQueries = {
+  def getMaxQueries: Int = {
     asJava.getMaxQueries()
   }
 
@@ -114,7 +115,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setNdots(value)
     this
   }
-  def getNdots = {
+  def getNdots: Int = {
     asJava.getNdots()
   }
 
@@ -126,7 +127,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setOptResourceEnabled(value)
     this
   }
-  def isOptResourceEnabled = {
+  def isOptResourceEnabled: Boolean = {
     asJava.isOptResourceEnabled()
   }
 
@@ -137,7 +138,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setQueryTimeout(value)
     this
   }
-  def getQueryTimeout = {
+  def getQueryTimeout: Long = {
     asJava.getQueryTimeout()
   }
 
@@ -148,7 +149,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setRdFlag(value)
     this
   }
-  def getRdFlag = {
+  def getRdFlag: Boolean = {
     asJava.getRdFlag()
   }
 
@@ -166,8 +167,8 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setSearchDomains(value.asInstanceOf)
     this
   }
-  def getSearchDomains = {
-    asJava.getSearchDomains()
+  def getSearchDomains: scala.collection.mutable.Buffer[String] = {
+    asJava.getSearchDomains().asScala.map(x => x)
   }
 
   /**
@@ -184,8 +185,8 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     asJava.setServers(value.asInstanceOf)
     this
   }
-  def getServers = {
-    asJava.getServers()
+  def getServers: scala.collection.mutable.Buffer[String] = {
+    asJava.getServers().asScala.map(x => x)
   }
 }
 
