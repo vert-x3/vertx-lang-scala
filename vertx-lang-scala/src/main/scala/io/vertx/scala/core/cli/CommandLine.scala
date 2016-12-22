@@ -36,7 +36,7 @@ class CommandLine(private val _asJava: Object) {
 //fluent methods
 //default methods
   //io.vertx.core.cli.CommandLine
-  override def getRawValues(option: Option):scala.collection.mutable.Buffer[String] = {
+  def getRawValues(option: Option):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x)
   }
 

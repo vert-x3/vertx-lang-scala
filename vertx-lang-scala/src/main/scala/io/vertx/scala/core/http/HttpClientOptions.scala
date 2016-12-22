@@ -211,14 +211,14 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the HTTP/2 connection settings immediately sent by to the server when the client connects.
     */
   def setInitialSettings(value: Http2Settings) = {
-    asJava.setInitialSettings(value.asInstanceOf)
+    asJava.setInitialSettings(value.asJava)
     this
   }
   def getInitialSettings: Http2Settings = {
     Http2Settings(asJava.getInitialSettings())
   }
   override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
-    asJava.setJdkSslEngineOptions(value.asInstanceOf)
+    asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
 
@@ -237,7 +237,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the key/cert options in jks format, aka Java keystore.
     */
   override def setKeyStoreOptions(value: JksOptions) = {
-    asJava.setKeyStoreOptions(value.asInstanceOf)
+    asJava.setKeyStoreOptions(value.asJava)
     this
   }
 
@@ -343,7 +343,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     asJava.getMetricsName()
   }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
-    asJava.setOpenSslEngineOptions(value.asInstanceOf)
+    asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
 
@@ -351,7 +351,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the key/cert store options in pem format.
     */
   override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
-    asJava.setPemKeyCertOptions(value.asInstanceOf)
+    asJava.setPemKeyCertOptions(value.asJava)
     this
   }
 
@@ -359,7 +359,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the trust options in pem format
     */
   override def setPemTrustOptions(value: PemTrustOptions) = {
-    asJava.setPemTrustOptions(value.asInstanceOf)
+    asJava.setPemTrustOptions(value.asJava)
     this
   }
 
@@ -367,7 +367,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the key/cert options in pfx format.
     */
   override def setPfxKeyCertOptions(value: PfxOptions) = {
-    asJava.setPfxKeyCertOptions(value.asInstanceOf)
+    asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
 
@@ -375,7 +375,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the trust options in pfx format
     */
   override def setPfxTrustOptions(value: PfxOptions) = {
-    asJava.setPfxTrustOptions(value.asInstanceOf)
+    asJava.setPfxTrustOptions(value.asJava)
     this
   }
 
@@ -416,7 +416,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
     */
   override def setProxyOptions(value: ProxyOptions) = {
-    asJava.setProxyOptions(value.asInstanceOf)
+    asJava.setProxyOptions(value.asJava)
     this
   }
   override def getProxyOptions: ProxyOptions = {
@@ -526,7 +526,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     * Set the trust options in jks format, aka Java trustore
     */
   override def setTrustStoreOptions(value: JksOptions) = {
-    asJava.setTrustStoreOptions(value.asInstanceOf)
+    asJava.setTrustStoreOptions(value.asJava)
     this
   }
 
