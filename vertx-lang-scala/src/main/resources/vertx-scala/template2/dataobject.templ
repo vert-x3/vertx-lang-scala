@@ -29,6 +29,7 @@ package @{type.raw.translatePackageName("scala")}\n
 @comment{"# Generate the imports"}
 import io.vertx.lang.scala.json.Json._\n
 import io.vertx.core.json.JsonObject\n
+import scala.collection.JavaConverters._\n
 @foreach{importedType : generateImports(type, importedTypes, new java.util.ArrayList())}
 import @{importedType}\n
 @end{}

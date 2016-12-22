@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 import io.vertx.core.json.JsonObject
 
@@ -36,7 +37,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setConfig(value)
     this
   }
-  def getConfig = {
+  def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
@@ -49,8 +50,8 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setExtraClasspath(value.asInstanceOf)
     this
   }
-  def getExtraClasspath = {
-    asJava.getExtraClasspath()
+  def getExtraClasspath: scala.collection.mutable.Buffer[String] = {
+    asJava.getExtraClasspath().asScala.map(x => x)
   }
 
   /**
@@ -60,7 +61,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setHa(value)
     this
   }
-  def isHa = {
+  def isHa: Boolean = {
     asJava.isHa()
   }
 
@@ -71,7 +72,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setInstances(value)
     this
   }
-  def getInstances = {
+  def getInstances: Int = {
     asJava.getInstances()
   }
 
@@ -82,8 +83,8 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setIsolatedClasses(value.asInstanceOf)
     this
   }
-  def getIsolatedClasses = {
-    asJava.getIsolatedClasses()
+  def getIsolatedClasses: scala.collection.mutable.Buffer[String] = {
+    asJava.getIsolatedClasses().asScala.map(x => x)
   }
 
   /**
@@ -93,7 +94,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setIsolationGroup(value)
     this
   }
-  def getIsolationGroup = {
+  def getIsolationGroup: String = {
     asJava.getIsolationGroup()
   }
 
@@ -104,7 +105,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setMaxWorkerExecuteTime(value)
     this
   }
-  def getMaxWorkerExecuteTime = {
+  def getMaxWorkerExecuteTime: Long = {
     asJava.getMaxWorkerExecuteTime()
   }
 
@@ -115,7 +116,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setMultiThreaded(value)
     this
   }
-  def isMultiThreaded = {
+  def isMultiThreaded: Boolean = {
     asJava.isMultiThreaded()
   }
 
@@ -126,7 +127,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setWorker(value)
     this
   }
-  def isWorker = {
+  def isWorker: Boolean = {
     asJava.isWorker()
   }
 
@@ -138,7 +139,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setWorkerPoolName(value)
     this
   }
-  def getWorkerPoolName = {
+  def getWorkerPoolName: String = {
     asJava.getWorkerPoolName()
   }
 
@@ -149,7 +150,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     asJava.setWorkerPoolSize(value)
     this
   }
-  def getWorkerPoolSize = {
+  def getWorkerPoolSize: Int = {
     asJava.getWorkerPoolSize()
   }
 }

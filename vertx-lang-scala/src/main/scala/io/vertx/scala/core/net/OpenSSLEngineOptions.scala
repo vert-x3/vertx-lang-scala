@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 
 /**
@@ -40,7 +41,7 @@ class OpenSSLEngineOptions(private val _asJava: JOpenSSLEngineOptions) {
     asJava.setSessionCacheEnabled(value)
     this
   }
-  def isSessionCacheEnabled = {
+  def isSessionCacheEnabled: Boolean = {
     asJava.isSessionCacheEnabled()
   }
 }
