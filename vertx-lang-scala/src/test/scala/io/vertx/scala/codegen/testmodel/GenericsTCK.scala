@@ -21,15 +21,12 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.codegen.testmodel.{InterfaceWithStringArg => JInterfaceWithStringArg}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.scala.codegen.testmodel.GenericRefedInterface
-import io.vertx.codegen.testmodel.GenericRefedInterface<io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
-import io.vertx.codegen.testmodel.GenericRefedInterface<io.vertx.core.json.{GenericRefedInterface => JGenericRefedInterface}
 import io.vertx.codegen.testmodel.{GenericsTCK => JGenericsTCK}
 import io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNullableRefedInterface}
 import io.vertx.core.json.JsonArray
 import io.vertx.scala.codegen.testmodel.GenericNullableRefedInterface
 import io.vertx.codegen.testmodel.TestEnum
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
-import io.vertx.codegen.testmodel.GenericRefedInterface<java.lang.{GenericRefedInterface => JGenericRefedInterface}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.codegen.testmodel.{InterfaceWithApiArg => JInterfaceWithApiArg}
@@ -37,7 +34,6 @@ import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVar
 import io.vertx.core.Handler
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 import io.vertx.codegen.testmodel.TestGenEnum
-import io.vertx.codegen.testmodel.GenericNullableRefedInterface<io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNullableRefedInterface}
 
 /**
   */
