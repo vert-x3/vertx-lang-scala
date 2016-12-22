@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.file.{FileProps => JFileProps}
 
 /**

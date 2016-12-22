@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}

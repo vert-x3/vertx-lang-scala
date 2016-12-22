@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.{MultiMap => JMultiMap}
 import scala.collection.JavaConverters._
 

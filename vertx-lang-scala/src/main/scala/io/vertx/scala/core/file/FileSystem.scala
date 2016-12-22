@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.file
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}

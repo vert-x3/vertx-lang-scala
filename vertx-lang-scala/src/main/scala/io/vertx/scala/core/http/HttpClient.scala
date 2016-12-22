@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.HttpMethod

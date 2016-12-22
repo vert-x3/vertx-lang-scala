@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import scala.compat.java8.FunctionConverters._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocket => JWebSocket}
