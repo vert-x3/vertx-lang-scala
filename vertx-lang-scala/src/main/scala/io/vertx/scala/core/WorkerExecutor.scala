@@ -40,12 +40,12 @@ class WorkerExecutor(private val _asJava: Object)
 //fluent methods
 //default methods
   //io.vertx.core.WorkerExecutor
-  override def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   //io.vertx.core.WorkerExecutor
-  override def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JWorkerExecutor].close()
   }
 

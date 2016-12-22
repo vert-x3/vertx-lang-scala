@@ -202,7 +202,7 @@ class HttpServerResponse(private val _asJava: Object)
 
 //default methods
   //io.vertx.core.http.HttpServerResponse
-  override def reset():Unit = {
+  def reset():Unit = {
     asJava.asInstanceOf[JHttpServerResponse].reset()
   }
 
