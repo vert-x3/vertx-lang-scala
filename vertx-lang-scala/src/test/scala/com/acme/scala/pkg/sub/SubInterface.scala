@@ -17,6 +17,7 @@
 package com.acme.scala.pkg.sub
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**

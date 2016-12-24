@@ -17,6 +17,7 @@
 package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.core.Handler
@@ -30,6 +31,7 @@ trait AbstractHandlerUserType
 
   override def handle(arg0: RefedInterface1):Unit
 
+}
 
   object AbstractHandlerUserType{
     def apply(asJava: JAbstractHandlerUserType):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)    
@@ -46,6 +48,4 @@ trait AbstractHandlerUserType
   }
 
 }
-      }
-
   }

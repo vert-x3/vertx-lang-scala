@@ -27,6 +27,7 @@
 package @{type.raw.translatePackageName("scala")}\n
 \n
 import scala.compat.java8.FunctionConverters._\n
+import io.vertx.lang.scala.HandlerOps._\n
 @comment{"# Generate the imports"}
 @foreach{importedType : generateImports(type, importedTypes, methods)}
 import @{importedType}\n
@@ -82,7 +83,6 @@ import @{importedType}\n
     \n
       private class @{className}Impl@{assembleTypeParams(typeParams)}(private val _asJava: J@{className}@{assembleTypeParams(typeParams)}) extends @{className}@{assembleTypeParams(typeParams)} {\n\n
       @includeNamed{'class-body.templ'}
-      }\n\n
   }\n
 @end{}
 

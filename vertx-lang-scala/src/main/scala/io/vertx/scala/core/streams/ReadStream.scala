@@ -17,6 +17,7 @@
 package io.vertx.scala.core.streams
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
@@ -42,6 +43,7 @@ trait ReadStream[T]
 
   def endHandler(endHandler: Handler[Unit]):ReadStream[T]
 
+}
 
   object ReadStream{
     def apply[T](asJava: JReadStream[T]):ReadStream[T] = new ReadStreamImpl[T](asJava)    
@@ -79,6 +81,4 @@ trait ReadStream[T]
 //default methods
 //basic methods
 }
-      }
-
   }

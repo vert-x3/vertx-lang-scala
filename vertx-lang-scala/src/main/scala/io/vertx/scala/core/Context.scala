@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Context => JContext}
 import io.vertx.core.{Future => JFuture}
@@ -87,8 +88,8 @@ class Context(private val _asJava: Object) {
     asJava.asInstanceOf[JContext].deploymentID()
   }
 
-  def config():io.vertx.core.json.JsonObject = {
-    asJava.asInstanceOf[JContext].config()
+  def config():scala.Option[io.vertx.core.json.JsonObject] = {
+    scala.Option(asJava.asInstanceOf[JContext].config())
   }
 
   def processArgs():scala.collection.mutable.Buffer[String] = {

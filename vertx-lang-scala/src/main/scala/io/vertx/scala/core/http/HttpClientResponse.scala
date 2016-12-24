@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
@@ -132,12 +133,12 @@ class HttpClientResponse(private val _asJava: Object)
     asJava.asInstanceOf[JHttpClientResponse].statusMessage()
   }
 
-  def getHeader(headerName: String):String = {
-    asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName)
+  def getHeader(headerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName))
   }
 
-  def getTrailer(trailerName: String):String = {
-    asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName)
+  def getTrailer(trailerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName))
   }
 
 }

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.streams
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 
@@ -29,6 +30,7 @@ trait StreamBase {
 
   def exceptionHandler(handler: Handler[Throwable]):StreamBase
 
+}
 
   object StreamBase{
     def apply(asJava: JStreamBase):StreamBase = new StreamBaseImpl(asJava)    
@@ -46,6 +48,4 @@ trait StreamBase {
 //default methods
 //basic methods
 }
-      }
-
   }

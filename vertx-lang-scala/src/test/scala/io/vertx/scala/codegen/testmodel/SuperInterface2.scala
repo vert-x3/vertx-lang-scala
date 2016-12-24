@@ -17,6 +17,7 @@
 package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
 
 /**
@@ -27,6 +28,7 @@ trait SuperInterface2 {
 
   def otherSuperMethodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit
 
+}
 
   object SuperInterface2{
     def apply(asJava: JSuperInterface2):SuperInterface2 = new SuperInterface2Impl(asJava)    
@@ -43,6 +45,4 @@ trait SuperInterface2 {
   }
 
 }
-      }
-
   }
