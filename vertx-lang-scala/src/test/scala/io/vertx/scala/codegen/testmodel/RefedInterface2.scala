@@ -29,6 +29,7 @@ trait RefedInterface2 {
 
   def setString(str: String):RefedInterface2
 
+}
 
   object RefedInterface2{
     def apply(asJava: JRefedInterface2):RefedInterface2 = new RefedInterface2Impl(asJava)    
@@ -50,6 +51,4 @@ trait RefedInterface2 {
   }
 
 }
-      }
-
   }

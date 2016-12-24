@@ -42,6 +42,7 @@ trait ReadStream[T]
 
   def endHandler(endHandler: Handler[Unit]):ReadStream[T]
 
+}
 
   object ReadStream{
     def apply[T](asJava: JReadStream[T]):ReadStream[T] = new ReadStreamImpl[T](asJava)    
@@ -79,6 +80,4 @@ trait ReadStream[T]
 //default methods
 //basic methods
 }
-      }
-
   }

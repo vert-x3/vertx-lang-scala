@@ -29,6 +29,7 @@ trait StreamBase {
 
   def exceptionHandler(handler: Handler[Throwable]):StreamBase
 
+}
 
   object StreamBase{
     def apply(asJava: JStreamBase):StreamBase = new StreamBaseImpl(asJava)    
@@ -46,6 +47,4 @@ trait StreamBase {
 //default methods
 //basic methods
 }
-      }
-
   }

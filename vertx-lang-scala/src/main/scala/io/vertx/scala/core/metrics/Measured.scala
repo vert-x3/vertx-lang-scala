@@ -27,6 +27,7 @@ trait Measured {
 
   def isMetricsEnabled():Boolean
 
+}
 
   object Measured{
     def apply(asJava: JMeasured):Measured = new MeasuredImpl(asJava)    
@@ -43,6 +44,4 @@ trait Measured {
   }
 
 }
-      }
-
   }

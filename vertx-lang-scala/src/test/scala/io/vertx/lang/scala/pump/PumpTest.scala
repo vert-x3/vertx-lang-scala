@@ -14,8 +14,8 @@ import org.scalatest.{FlatSpec, Matchers}
 class PumpTest extends FlatSpec with Matchers {
 
   "A Pump" should "be able to pump results between a ReadStream and a WriteStream" in {
-    val jrs = new JavaFakeReadStream[MyClass]().asInstanceOf[JavaFakeReadStream[Object]]
-    val jws = new JavaFakeWriteStream[MyClass]().asInstanceOf[JavaFakeWriteStream[Object]]
+    val jrs = new JavaFakeReadStream[MyClass]()
+    val jws = new JavaFakeWriteStream[MyClass]()
 
     val rs = ReadStream[MyClass](jrs)
     val ws = WriteStream[MyClass](jws)
@@ -44,8 +44,8 @@ class PumpTest extends FlatSpec with Matchers {
   }
 
   "A Pump" should "be pausable" in {
-    val jrs = new JavaFakeReadStream[MyClass]().asInstanceOf[JavaFakeReadStream[Object]]
-    val jws = new JavaFakeWriteStream[MyClass]().asInstanceOf[JavaFakeWriteStream[Object]]
+    val jrs = new JavaFakeReadStream[MyClass]
+    val jws = new JavaFakeWriteStream[MyClass]
 
     val rs = ReadStream[MyClass](jrs)
     val ws = WriteStream[MyClass](jws)
@@ -79,28 +79,28 @@ class PumpTest extends FlatSpec with Matchers {
   }
 
   "testPumpReadStreamNull" should "work" in {
-    val rs = new JavaFakeReadStream[MyClass]().asInstanceOf[JavaFakeReadStream[Object]]
+    val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](ReadStream[MyClass](rs), null)
     }
   }
 
   "testPumpWriteStreamNull" should "work" in {
-    val ws = new JavaFakeWriteStream[MyClass]().asInstanceOf[JavaFakeWriteStream[Object]]
+    val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](null, WriteStream[MyClass](ws))
     }
   }
 
   "testPumpReadStreamNull2" should "work" in {
-    val rs = new JavaFakeReadStream[MyClass]().asInstanceOf[JavaFakeReadStream[Object]]
+    val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](ReadStream[MyClass](rs), null, 1000)
     }
   }
 
   "testPumpWriteStreamNull2" should "work" in {
-    val ws = new JavaFakeWriteStream[MyClass]().asInstanceOf[JavaFakeWriteStream[Object]]
+    val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](null, WriteStream[MyClass](ws), 1000)
     }

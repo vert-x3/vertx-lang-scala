@@ -30,6 +30,7 @@ trait AbstractHandlerUserType
 
   override def handle(arg0: RefedInterface1):Unit
 
+}
 
   object AbstractHandlerUserType{
     def apply(asJava: JAbstractHandlerUserType):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)    
@@ -46,6 +47,4 @@ trait AbstractHandlerUserType
   }
 
 }
-      }
-
   }
