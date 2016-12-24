@@ -17,6 +17,7 @@
 package io.vertx.scala.core.streams
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -47,6 +48,7 @@ trait WriteStream[T]
 
   def drainHandler(handler: Handler[Unit]):WriteStream[T]
 
+}
 
   object WriteStream{
     def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
@@ -92,6 +94,4 @@ trait WriteStream[T]
   }
 
 }
-      }
-
   }

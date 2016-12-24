@@ -17,6 +17,7 @@
 package io.vertx.scala.core.cli
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -118,12 +119,12 @@ class CLI(private val _asJava: Object) {
     asJava.asInstanceOf[JCLI].getName()
   }
 
-  def getDescription():String = {
-    asJava.asInstanceOf[JCLI].getDescription()
+  def getDescription():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getDescription())
   }
 
-  def getSummary():String = {
-    asJava.asInstanceOf[JCLI].getSummary()
+  def getSummary():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getSummary())
   }
 
   def isHidden():Boolean = {
@@ -138,16 +139,16 @@ class CLI(private val _asJava: Object) {
     asJava.asInstanceOf[JCLI].getArguments().asScala.map(x => Argument(x))
   }
 
-  def getOption(name: String):Option = {
-    Option(asJava.asInstanceOf[JCLI].getOption(name))
+  def getOption(name: String):scala.Option[Option] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getOption(name)).map(Option(_))
   }
 
-  def getArgument(name: String):Argument = {
-    Argument(asJava.asInstanceOf[JCLI].getArgument(name))
+  def getArgument(name: String):scala.Option[Argument] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getArgument(name)).map(Argument(_))
   }
 
-  def getArgument(index: Int):Argument = {
-    Argument(asJava.asInstanceOf[JCLI].getArgument(index))
+  def getArgument(index: Int):scala.Option[Argument] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getArgument(index)).map(Argument(_))
   }
 
 }

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.datagram
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -81,8 +82,8 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -91,8 +92,8 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
