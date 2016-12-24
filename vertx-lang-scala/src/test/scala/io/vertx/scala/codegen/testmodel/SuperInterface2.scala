@@ -27,6 +27,7 @@ trait SuperInterface2 {
 
   def otherSuperMethodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit
 
+}
 
   object SuperInterface2{
     def apply(asJava: JSuperInterface2):SuperInterface2 = new SuperInterface2Impl(asJava)    
@@ -43,6 +44,4 @@ trait SuperInterface2 {
   }
 
 }
-      }
-
   }

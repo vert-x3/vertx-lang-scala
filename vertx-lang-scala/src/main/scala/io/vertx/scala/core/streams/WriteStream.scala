@@ -47,6 +47,7 @@ trait WriteStream[T]
 
   def drainHandler(handler: Handler[Unit]):WriteStream[T]
 
+}
 
   object WriteStream{
     def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
@@ -92,6 +93,4 @@ trait WriteStream[T]
   }
 
 }
-      }
-
   }

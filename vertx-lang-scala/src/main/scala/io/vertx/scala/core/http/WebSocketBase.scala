@@ -85,6 +85,7 @@ trait WebSocketBase
 
   def localAddress():SocketAddress
 
+}
 
   object WebSocketBase{
     def apply(asJava: JWebSocketBase):WebSocketBase = new WebSocketBaseImpl(asJava)    
@@ -210,6 +211,4 @@ trait WebSocketBase
   }
 
 }
-      }
-
   }
