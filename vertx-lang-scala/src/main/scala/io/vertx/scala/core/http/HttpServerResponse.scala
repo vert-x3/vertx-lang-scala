@@ -75,7 +75,7 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):HttpServerResponse = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -90,7 +90,7 @@ class HttpServerResponse(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Handler[Unit]):HttpServerResponse = {
+  override def drainHandler(handler: Option[Handler[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].drainHandler({x: Void => handler.handle(x)})
     this
   }
@@ -120,7 +120,7 @@ class HttpServerResponse(private val _asJava: Object)
     this
   }
 
-  def closeHandler(handler: Handler[Unit]):HttpServerResponse = {
+  def closeHandler(handler: Option[Handler[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].closeHandler({x: Void => handler.handle(x)})
     this
   }
@@ -170,12 +170,12 @@ class HttpServerResponse(private val _asJava: Object)
     this
   }
 
-  def headersEndHandler(handler: Handler[Unit]):HttpServerResponse = {
+  def headersEndHandler(handler: Option[Handler[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].headersEndHandler({x: Void => handler.handle(x)})
     this
   }
 
-  def bodyEndHandler(handler: Handler[Unit]):HttpServerResponse = {
+  def bodyEndHandler(handler: Option[Handler[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler({x: Void => handler.handle(x)})
     this
   }

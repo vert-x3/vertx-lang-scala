@@ -37,7 +37,7 @@ class MessageProducer[T](private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -52,7 +52,7 @@ class MessageProducer[T](private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
+  override def drainHandler(handler: Option[Handler[Unit]]):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[T]].drainHandler({x: Void => handler.handle(x)})
     this
   }

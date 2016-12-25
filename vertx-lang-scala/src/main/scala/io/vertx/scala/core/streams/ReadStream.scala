@@ -32,15 +32,15 @@ trait ReadStream[T]
 
   def asJava: java.lang.Object
 
-  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T]
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):ReadStream[T]
 
-  def handler(handler: Handler[T]):ReadStream[T]
+  def handler(handler: Option[Handler[T]]):ReadStream[T]
 
   def pause():ReadStream[T]
 
   def resume():ReadStream[T]
 
-  def endHandler(endHandler: Handler[Unit]):ReadStream[T]
+  def endHandler(endHandler: Option[Handler[Unit]]):ReadStream[T]
 
 }
 
@@ -52,12 +52,12 @@ trait ReadStream[T]
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T] = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  def handler(handler: Handler[T]):ReadStream[T] = {
+  def handler(handler: Option[Handler[T]]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[T]].handler({x: T => handler.handle(x)})
     this
   }
@@ -72,7 +72,7 @@ trait ReadStream[T]
     this
   }
 
-  def endHandler(endHandler: Handler[Unit]):ReadStream[T] = {
+  def endHandler(endHandler: Option[Handler[Unit]]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[T]].endHandler({x: Void => endHandler.handle(x)})
     this
   }

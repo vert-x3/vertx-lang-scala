@@ -127,12 +127,12 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequest = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):HttpServerRequest = {
+  override def handler(handler: Option[Handler[Buffer]]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -147,12 +147,12 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):HttpServerRequest = {
+  override def endHandler(endHandler: Option[Handler[Unit]]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
+  def bodyHandler(bodyHandler: Option[Handler[Buffer]]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].bodyHandler({x: JBuffer => bodyHandler.handle(Buffer(x))})
     this
   }
@@ -162,7 +162,7 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
-  def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
+  def uploadHandler(uploadHandler: Option[Handler[HttpServerFileUpload]]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].uploadHandler({x: JHttpServerFileUpload => uploadHandler.handle(HttpServerFileUpload(x))})
     this
   }

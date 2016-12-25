@@ -88,12 +88,12 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-  override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):HttpClientResponse = {
+  override def handler(handler: Option[Handler[Buffer]]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -103,7 +103,7 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
+  override def endHandler(endHandler: Option[Handler[Unit]]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
     this
   }

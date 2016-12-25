@@ -82,12 +82,12 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
-  def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
+  def goAwayHandler(handler: Option[Handler[GoAway]]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAwayHandler({x: JGoAway => handler.handle(GoAway(x))})
     this
   }
 
-  def shutdownHandler(handler: Handler[Unit]):HttpConnection = {
+  def shutdownHandler(handler: Option[Handler[Unit]]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].shutdownHandler({x: Void => handler.handle(x)})
     this
   }
@@ -127,7 +127,7 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
-  def pingHandler(handler: Handler[Buffer]):HttpConnection = {
+  def pingHandler(handler: Option[Handler[Buffer]]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].pingHandler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }

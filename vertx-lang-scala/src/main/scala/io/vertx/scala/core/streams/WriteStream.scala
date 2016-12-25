@@ -33,7 +33,7 @@ trait WriteStream[T]
 
   def asJava: java.lang.Object
 
-  override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T]
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):WriteStream[T]
 
   def write(data: T):WriteStream[T]
 
@@ -45,7 +45,7 @@ trait WriteStream[T]
 
   def writeQueueFull():Boolean
 
-  def drainHandler(handler: Handler[Unit]):WriteStream[T]
+  def drainHandler(handler: Option[Handler[Unit]]):WriteStream[T]
 
 }
 
@@ -57,7 +57,7 @@ trait WriteStream[T]
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T] = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -72,7 +72,7 @@ trait WriteStream[T]
     this
   }
 
-  def drainHandler(handler: Handler[Unit]):WriteStream[T] = {
+  def drainHandler(handler: Option[Handler[Unit]]):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[T]].drainHandler({x: Void => handler.handle(x)})
     this
   }

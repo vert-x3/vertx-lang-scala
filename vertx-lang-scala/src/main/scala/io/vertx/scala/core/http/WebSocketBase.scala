@@ -45,21 +45,21 @@ trait WebSocketBase
 
   override def writeQueueFull():Boolean
 
-  override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):WebSocketBase
 
-  override def handler(handler: Handler[Buffer]):WebSocketBase
+  override def handler(handler: Option[Handler[Buffer]]):WebSocketBase
 
   override def pause():WebSocketBase
 
   override def resume():WebSocketBase
 
-  override def endHandler(endHandler: Handler[Unit]):WebSocketBase
+  override def endHandler(endHandler: Option[Handler[Unit]]):WebSocketBase
 
   override def write(data: Buffer):WebSocketBase
 
   override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase
 
-  override def drainHandler(handler: Handler[Unit]):WebSocketBase
+  override def drainHandler(handler: Option[Handler[Unit]]):WebSocketBase
 
   def binaryHandlerID():String
 
@@ -73,9 +73,9 @@ trait WebSocketBase
 
   def writeBinaryMessage(data: Buffer):WebSocketBase
 
-  def closeHandler(handler: Handler[Unit]):WebSocketBase
+  def closeHandler(handler: Option[Handler[Unit]]):WebSocketBase
 
-  def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase
+  def frameHandler(handler: Option[Handler[WebSocketFrame]]):WebSocketBase
 
   override def end():Unit
 
@@ -113,12 +113,12 @@ trait WebSocketBase
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):WebSocketBase = {
+  override def handler(handler: Option[Handler[Buffer]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -133,7 +133,7 @@ trait WebSocketBase
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):WebSocketBase = {
+  override def endHandler(endHandler: Option[Handler[Unit]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -148,7 +148,7 @@ trait WebSocketBase
     this
   }
 
-  override def drainHandler(handler: Handler[Unit]):WebSocketBase = {
+  override def drainHandler(handler: Option[Handler[Unit]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].drainHandler({x: Void => handler.handle(x)})
     this
   }
@@ -173,12 +173,12 @@ trait WebSocketBase
     this
   }
 
-  def closeHandler(handler: Handler[Unit]):WebSocketBase = {
+  def closeHandler(handler: Option[Handler[Unit]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
-  def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase = {
+  def frameHandler(handler: Option[Handler[WebSocketFrame]]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }

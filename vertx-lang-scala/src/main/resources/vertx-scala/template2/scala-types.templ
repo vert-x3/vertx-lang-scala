@@ -157,10 +157,10 @@
       return 'Unit';
     } else if (type.kind == CLASS_OBJECT) {
       if(type.name.contains('Object')){
-        return 'AnyRef'
+        return wrapInOptionIfNullable(nullable, 'AnyRef')
       }
       else {
-        return type.name;
+        return wrapInOptionIfNullable(nullable, type.name);
       }
     } else if (type.kind == CLASS_THROWABLE) {
       return 'Throwable';
@@ -185,24 +185,24 @@
         return 'String';
       }
     } else if (type.kind == CLASS_DATA_OBJECT) {
-      return type.simpleName;
+      return wrapInOptionIfNullable(nullable, type.simpleName);
     } else if (type.kind == CLASS_LIST){
         var ret = 'scala.collection.mutable.Buffer';
         if (!type.args.isEmpty)
           ret += '[' + toScalaType(type.args[0]) + ']';
-        return ret;
+        return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_SET){
         var ret = 'scala.collection.mutable.Set';
         if (!type.args.isEmpty)
           ret += '[' + toScalaType(type.args[0]) + ']';
-        return ret;
+        return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_MAP){
         var ret = 'Map';
         if (!type.args.isEmpty())
           ret = 'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
-        return ret;
+        return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_HANDLER) {
-      return "Handler[" + toScalaType(type.args[0]) +"]";
+      return wrapInOptionIfNullable(nullable, "Handler[" + toScalaType(type.args[0]) +"]");
     } else if (type.kind == CLASS_FUNCTION) {
       var type1 = toScalaType(type.args[0]);
       var type2 = toScalaType(type.args[1]);
@@ -213,18 +213,18 @@
       } else {
         ret = type1 + " => " + type2;
       }
-      return ret;
+      return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_JSON_OBJECT ||
                type.kind == CLASS_JSON_ARRAY ||
                type.kind == CLASS_ENUM){
-      return type.name
+      return wrapInOptionIfNullable(nullable, type.name);
     } else if (type.kind == CLASS_ASYNC_RESULT) {
       var ret = 'AsyncResult';
       if(!type.args.isEmpty)
         ret += '[' + toScalaType(type.args[0]) + ']';
       else
         ret += '[_]';
-      return ret;
+      return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_API) {
       var ret = helper.getNonGenericType(type.simpleName);
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
@@ -248,11 +248,18 @@
       else if(type.name.contains('io.vertx.core.Future')) {
         ret += '[_]';
       }
-      return ret;
+      return wrapInOptionIfNullable(nullable, ret);
     }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
     }
+  }
+
+  def wrapInOptionIfNullable(nullable, expression) {
+    if(nullable) {
+      return 'Option[' + expression + ']';
+    }
+    return expression;
   }
 
   def fromPropertyInfoToScalaTypeWithConversion(name, info) {

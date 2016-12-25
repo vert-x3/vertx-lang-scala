@@ -43,12 +43,12 @@ class MessageConsumer[T](private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
+  override def handler(handler: Option[Handler[Message[T]]]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[T]].handler({x: JMessage[T] => handler.handle(Message[T](x))})
     this
   }
@@ -63,7 +63,7 @@ class MessageConsumer[T](private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
+  override def endHandler(endHandler: Option[Handler[Unit]]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[T]].endHandler({x: Void => endHandler.handle(x)})
     this
   }

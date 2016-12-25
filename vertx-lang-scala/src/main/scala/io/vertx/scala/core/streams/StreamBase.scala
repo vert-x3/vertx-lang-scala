@@ -27,7 +27,7 @@ trait StreamBase {
 
   def asJava: java.lang.Object
 
-  def exceptionHandler(handler: Handler[Throwable]):StreamBase
+  def exceptionHandler(handler: Option[Handler[Throwable]]):StreamBase
 
 }
 
@@ -39,7 +39,7 @@ trait StreamBase {
 
 //cached methods
 //fluent methods
-  def exceptionHandler(handler: Handler[Throwable]):StreamBase = {
+  def exceptionHandler(handler: Option[Handler[Throwable]]):StreamBase = {
     asJava.asInstanceOf[JStreamBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
