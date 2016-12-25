@@ -116,7 +116,7 @@ class Vertx(private val _asJava: Object)
   }
 
 //fluent methods
-  def exceptionHandler(handler: Handler[Throwable]):Vertx = {
+  def exceptionHandler(handler: Option[Handler[Throwable]]):Vertx = {
     asJava.asInstanceOf[JVertx].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -276,7 +276,7 @@ class Vertx(private val _asJava: Object)
       JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
     }
 
-    def currentContext():Context = {
+    def currentContext():Option[Context] = {
       Context(JVertx.currentContext())
     }
 

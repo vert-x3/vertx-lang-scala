@@ -76,7 +76,7 @@ class NetServer(private val _asJava: Object)
     NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
-  def connectHandler(handler: Handler[NetSocket]):NetServer = {
+  def connectHandler(handler: Option[Handler[NetSocket]]):NetServer = {
     NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
   }
 

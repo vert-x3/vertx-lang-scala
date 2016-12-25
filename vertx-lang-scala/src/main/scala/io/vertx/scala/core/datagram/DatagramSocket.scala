@@ -121,17 +121,17 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):DatagramSocket = {
+  override def endHandler(endHandler: Option[Handler[Unit]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[DatagramPacket]):DatagramSocket = {
+  override def handler(handler: Option[Handler[DatagramPacket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].handler({x: JDatagramPacket => handler.handle(DatagramPacket(x))})
     this
   }
 
-  override def exceptionHandler(handler: Handler[Throwable]):DatagramSocket = {
+  override def exceptionHandler(handler: Option[Handler[Throwable]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }

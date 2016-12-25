@@ -64,7 +64,7 @@ class Context(private val _asJava: Object) {
 
 //cached methods
 //fluent methods
-  def exceptionHandler(handler: Handler[Throwable]):Context = {
+  def exceptionHandler(handler: Option[Handler[Throwable]]):Context = {
     asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -87,7 +87,7 @@ class Context(private val _asJava: Object) {
     asJava.asInstanceOf[JContext].deploymentID()
   }
 
-  def config():io.vertx.core.json.JsonObject = {
+  def config():Option[io.vertx.core.json.JsonObject] = {
     asJava.asInstanceOf[JContext].config()
   }
 

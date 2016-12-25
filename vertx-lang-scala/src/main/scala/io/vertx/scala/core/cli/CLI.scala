@@ -138,15 +138,15 @@ class CLI(private val _asJava: Object) {
     asJava.asInstanceOf[JCLI].getArguments().asScala.map(x => Argument(x))
   }
 
-  def getOption(name: String):Option = {
+  def getOption(name: String):Option[Option] = {
     Option(asJava.asInstanceOf[JCLI].getOption(name))
   }
 
-  def getArgument(name: String):Argument = {
+  def getArgument(name: String):Option[Argument] = {
     Argument(asJava.asInstanceOf[JCLI].getArgument(name))
   }
 
-  def getArgument(index: Int):Argument = {
+  def getArgument(index: Int):Option[Argument] = {
     Argument(asJava.asInstanceOf[JCLI].getArgument(index))
   }
 
