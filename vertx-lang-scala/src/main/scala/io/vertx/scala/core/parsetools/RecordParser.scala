@@ -17,6 +17,7 @@
 package io.vertx.scala.core.parsetools
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler

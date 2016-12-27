@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
@@ -88,12 +89,12 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpClientResponse = {
+  override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Buffer]]):HttpClientResponse = {
+  override def handler(handler: Handler[Buffer]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -103,7 +104,7 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):HttpClientResponse = {
+  override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -132,12 +133,12 @@ class HttpClientResponse(private val _asJava: Object)
     asJava.asInstanceOf[JHttpClientResponse].statusMessage()
   }
 
-  def getHeader(headerName: String):String = {
-    asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName)
+  def getHeader(headerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName))
   }
 
-  def getTrailer(trailerName: String):String = {
-    asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName)
+  def getTrailer(trailerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName))
   }
 
 }

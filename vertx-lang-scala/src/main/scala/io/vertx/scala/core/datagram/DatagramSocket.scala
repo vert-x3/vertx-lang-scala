@@ -17,6 +17,7 @@
 package io.vertx.scala.core.datagram
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -81,8 +82,8 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+  def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -91,8 +92,8 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+  def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -121,17 +122,17 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):DatagramSocket = {
+  override def endHandler(endHandler: Handler[Unit]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[DatagramPacket]]):DatagramSocket = {
+  override def handler(handler: Handler[DatagramPacket]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].handler({x: JDatagramPacket => handler.handle(DatagramPacket(x))})
     this
   }
 
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):DatagramSocket = {
+  override def exceptionHandler(handler: Handler[Throwable]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }

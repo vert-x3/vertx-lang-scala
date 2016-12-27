@@ -17,6 +17,7 @@
 package io.vertx.scala.core.net
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.metrics.{Measured => JMeasured}
@@ -76,7 +77,7 @@ class NetServer(private val _asJava: Object)
     NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
-  def connectHandler(handler: Option[Handler[NetSocket]]):NetServer = {
+  def connectHandler(handler: Handler[NetSocket]):NetServer = {
     NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
   }
 

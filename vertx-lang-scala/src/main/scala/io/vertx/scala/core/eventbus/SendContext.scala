@@ -17,6 +17,7 @@
 package io.vertx.scala.core.eventbus
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 

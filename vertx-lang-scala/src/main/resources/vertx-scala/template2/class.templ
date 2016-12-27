@@ -27,6 +27,7 @@
 package @{type.raw.translatePackageName("scala")}\n
 \n
 import scala.compat.java8.FunctionConverters._\n
+import io.vertx.lang.scala.HandlerOps._\n
 @comment{"# Generate the imports"}
 @foreach{importedType : generateImports(type, importedTypes, methods)}
 import @{importedType}\n

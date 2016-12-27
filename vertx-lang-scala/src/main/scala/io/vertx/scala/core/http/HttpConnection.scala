@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -82,12 +83,12 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
-  def goAwayHandler(handler: Option[Handler[GoAway]]):HttpConnection = {
+  def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAwayHandler({x: JGoAway => handler.handle(GoAway(x))})
     this
   }
 
-  def shutdownHandler(handler: Option[Handler[Unit]]):HttpConnection = {
+  def shutdownHandler(handler: Handler[Unit]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].shutdownHandler({x: Void => handler.handle(x)})
     this
   }
@@ -127,7 +128,7 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
-  def pingHandler(handler: Option[Handler[Buffer]]):HttpConnection = {
+  def pingHandler(handler: Handler[Buffer]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].pingHandler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }

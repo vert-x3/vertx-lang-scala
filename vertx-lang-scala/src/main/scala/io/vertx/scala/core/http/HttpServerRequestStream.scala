@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -34,12 +35,12 @@ class HttpServerRequestStream(private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpServerRequestStream = {
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[HttpServerRequest]]):HttpServerRequestStream = {
+  override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].handler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
     this
   }
@@ -54,7 +55,7 @@ class HttpServerRequestStream(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):HttpServerRequestStream = {
+  override def endHandler(endHandler: Handler[Unit]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

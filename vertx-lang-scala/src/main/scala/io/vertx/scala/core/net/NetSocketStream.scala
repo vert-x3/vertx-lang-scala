@@ -17,6 +17,7 @@
 package io.vertx.scala.core.net
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -34,12 +35,12 @@ class NetSocketStream(private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):NetSocketStream = {
+  override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[NetSocket]]):NetSocketStream = {
+  override def handler(handler: Handler[NetSocket]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].handler({x: JNetSocket => handler.handle(NetSocket(x))})
     this
   }
@@ -54,7 +55,7 @@ class NetSocketStream(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):NetSocketStream = {
+  override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

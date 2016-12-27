@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
@@ -116,7 +117,7 @@ class Vertx(private val _asJava: Object)
   }
 
 //fluent methods
-  def exceptionHandler(handler: Option[Handler[Throwable]]):Vertx = {
+  def exceptionHandler(handler: Handler[Throwable]):Vertx = {
     asJava.asInstanceOf[JVertx].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -276,8 +277,8 @@ class Vertx(private val _asJava: Object)
       JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
     }
 
-    def currentContext():Option[Context] = {
-      Context(JVertx.currentContext())
+    def currentContext():scala.Option[Context] = {
+      scala.Option(JVertx.currentContext()).map(Context(_))
     }
 
   }
