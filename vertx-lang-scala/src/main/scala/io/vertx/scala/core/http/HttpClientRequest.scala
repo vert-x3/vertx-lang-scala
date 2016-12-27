@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
@@ -86,7 +87,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpClientRequest = {
+  override def exceptionHandler(handler: Handler[Throwable]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -101,12 +102,12 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Option[Handler[Unit]]):HttpClientRequest = {
+  override def drainHandler(handler: Handler[Unit]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[HttpClientResponse]]):HttpClientRequest = {
+  override def handler(handler: Handler[HttpClientResponse]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].handler({x: JHttpClientResponse => handler.handle(HttpClientResponse(x))})
     this
   }
@@ -121,7 +122,7 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):HttpClientRequest = {
+  override def endHandler(endHandler: Handler[Unit]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -156,7 +157,7 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-  def continueHandler(handler: Option[Handler[Unit]]):HttpClientRequest = {
+  def continueHandler(handler: Handler[Unit]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].continueHandler({x: Void => handler.handle(x)})
     this
   }
@@ -181,7 +182,7 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-  def connectionHandler(handler: Option[Handler[HttpConnection]]):HttpClientRequest = {
+  def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
   }

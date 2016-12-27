@@ -17,6 +17,7 @@
 package io.vertx.scala.core.eventbus
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
@@ -60,8 +61,8 @@ class Message[T](private val _asJava: Object) {
     MultiMap(asJava.asInstanceOf[JMessage[T]].headers())
   }
 
-  def replyAddress():String = {
-    asJava.asInstanceOf[JMessage[T]].replyAddress()
+  def replyAddress():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JMessage[T]].replyAddress())
   }
 
   def isSend():Boolean = {

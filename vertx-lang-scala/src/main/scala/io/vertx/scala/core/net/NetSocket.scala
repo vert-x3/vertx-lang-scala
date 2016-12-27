@@ -17,6 +17,7 @@
 package io.vertx.scala.core.net
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -66,12 +67,12 @@ class NetSocket(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):NetSocket = {
+  override def exceptionHandler(handler: Handler[Throwable]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Buffer]]):NetSocket = {
+  override def handler(handler: Handler[Buffer]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -86,7 +87,7 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):NetSocket = {
+  override def endHandler(endHandler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -101,7 +102,7 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Option[Handler[Unit]]):NetSocket = {
+  override def drainHandler(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
@@ -146,7 +147,7 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
-  def closeHandler(handler: Option[Handler[Unit]]):NetSocket = {
+  def closeHandler(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocket => JWebSocket}
@@ -54,12 +55,12 @@ class WebSocket(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):WebSocket = {
+  override def exceptionHandler(handler: Handler[Throwable]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Buffer]]):WebSocket = {
+  override def handler(handler: Handler[Buffer]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -74,7 +75,7 @@ class WebSocket(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):WebSocket = {
+  override def endHandler(endHandler: Handler[Unit]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -89,7 +90,7 @@ class WebSocket(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Option[Handler[Unit]]):WebSocket = {
+  override def drainHandler(handler: Handler[Unit]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
@@ -114,12 +115,12 @@ class WebSocket(private val _asJava: Object)
     this
   }
 
-  override def closeHandler(handler: Option[Handler[Unit]]):WebSocket = {
+  override def closeHandler(handler: Handler[Unit]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def frameHandler(handler: Option[Handler[WebSocketFrame]]):WebSocket = {
+  override def frameHandler(handler: Handler[WebSocketFrame]):WebSocket = {
     asJava.asInstanceOf[JWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }

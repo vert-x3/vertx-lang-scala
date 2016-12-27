@@ -17,6 +17,7 @@
 package io.vertx.scala.core.cli
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -77,16 +78,16 @@ class CommandLine(private val _asJava: Object) {
     asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x)
   }
 
-  def getRawValueForOption(option: Option):String = {
-    asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava)
+  def getRawValueForOption(option: Option):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava))
   }
 
   def acceptMoreValues(option: Option):Boolean = {
     asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava)
   }
 
-  def getRawValueForArgument(arg: Argument):String = {
-    asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava)
+  def getRawValueForArgument(arg: Argument):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava))
   }
 
   def isArgumentAssigned(arg: Argument):Boolean = {

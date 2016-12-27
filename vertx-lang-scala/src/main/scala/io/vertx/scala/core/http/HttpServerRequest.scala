@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -127,12 +128,12 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):HttpServerRequest = {
+  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Buffer]]):HttpServerRequest = {
+  override def handler(handler: Handler[Buffer]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -147,12 +148,12 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):HttpServerRequest = {
+  override def endHandler(endHandler: Handler[Unit]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  def bodyHandler(bodyHandler: Option[Handler[Buffer]]):HttpServerRequest = {
+  def bodyHandler(bodyHandler: Handler[Buffer]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].bodyHandler({x: JBuffer => bodyHandler.handle(Buffer(x))})
     this
   }
@@ -162,7 +163,7 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
-  def uploadHandler(uploadHandler: Option[Handler[HttpServerFileUpload]]):HttpServerRequest = {
+  def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].uploadHandler({x: JHttpServerFileUpload => uploadHandler.handle(HttpServerFileUpload(x))})
     this
   }
@@ -190,32 +191,32 @@ class HttpServerRequest(private val _asJava: Object)
     asJava.asInstanceOf[JHttpServerRequest].isSSL()
   }
 
-  def scheme():String = {
-    asJava.asInstanceOf[JHttpServerRequest].scheme()
+  def scheme():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme())
   }
 
   def uri():String = {
     asJava.asInstanceOf[JHttpServerRequest].uri()
   }
 
-  def path():String = {
-    asJava.asInstanceOf[JHttpServerRequest].path()
+  def path():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path())
   }
 
-  def query():String = {
-    asJava.asInstanceOf[JHttpServerRequest].query()
+  def query():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query())
   }
 
-  def host():String = {
-    asJava.asInstanceOf[JHttpServerRequest].host()
+  def host():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host())
   }
 
-  def getHeader(headerName: String):String = {
-    asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName)
+  def getHeader(headerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName))
   }
 
-  def getParam(paramName: String):String = {
-    asJava.asInstanceOf[JHttpServerRequest].getParam(paramName)
+  def getParam(paramName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName))
   }
 
   def absoluteURI():String = {
@@ -226,8 +227,8 @@ class HttpServerRequest(private val _asJava: Object)
     asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart()
   }
 
-  def getFormAttribute(attributeName: String):String = {
-    asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName)
+  def getFormAttribute(attributeName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName))
   }
 
   def upgrade():ServerWebSocket = {

@@ -17,6 +17,7 @@
 package io.vertx.scala.core.file
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}
@@ -109,13 +110,13 @@ class FileSystem(private val _asJava: Object) {
     this
   }
 
-  def chown(path: String,user: String,group: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].chown(path,user,group,{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  def chown(path: String,user: scala.Option[String],group: scala.Option[String],handler: Handler[AsyncResult[Unit]]):FileSystem = {
+    asJava.asInstanceOf[JFileSystem].chown(path,user.map(x => x).getOrElse(null),group.map(x => x).getOrElse(null),{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
-  def chownBlocking(path: String,user: String,group: String):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].chownBlocking(path,user,group)
+  def chownBlocking(path: String,user: scala.Option[String],group: scala.Option[String]):FileSystem = {
+    asJava.asInstanceOf[JFileSystem].chownBlocking(path,user.map(x => x).getOrElse(null),group.map(x => x).getOrElse(null))
     this
   }
 

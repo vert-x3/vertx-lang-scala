@@ -17,6 +17,7 @@
 package io.vertx.scala.core.file
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
@@ -44,7 +45,7 @@ class AsyncFile(private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def handler(handler: Option[Handler[Buffer]]):AsyncFile = {
+  override def handler(handler: Handler[Buffer]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -59,7 +60,7 @@ class AsyncFile(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):AsyncFile = {
+  override def endHandler(endHandler: Handler[Unit]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -74,12 +75,12 @@ class AsyncFile(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Option[Handler[Unit]]):AsyncFile = {
+  override def drainHandler(handler: Handler[Unit]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):AsyncFile = {
+  override def exceptionHandler(handler: Handler[Throwable]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }

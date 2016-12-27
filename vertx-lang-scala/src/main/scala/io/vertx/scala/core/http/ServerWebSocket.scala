@@ -17,6 +17,7 @@
 package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
@@ -68,12 +69,12 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):ServerWebSocket = {
+  override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Buffer]]):ServerWebSocket = {
+  override def handler(handler: Handler[Buffer]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
     this
   }
@@ -88,7 +89,7 @@ class ServerWebSocket(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):ServerWebSocket = {
+  override def endHandler(endHandler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -103,7 +104,7 @@ class ServerWebSocket(private val _asJava: Object)
     this
   }
 
-  override def drainHandler(handler: Option[Handler[Unit]]):ServerWebSocket = {
+  override def drainHandler(handler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
@@ -128,12 +129,12 @@ class ServerWebSocket(private val _asJava: Object)
     this
   }
 
-  override def closeHandler(handler: Option[Handler[Unit]]):ServerWebSocket = {
+  override def closeHandler(handler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def frameHandler(handler: Option[Handler[WebSocketFrame]]):ServerWebSocket = {
+  override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }
@@ -173,8 +174,8 @@ class ServerWebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JServerWebSocket].path()
   }
 
-  def query():String = {
-    asJava.asInstanceOf[JServerWebSocket].query()
+  def query():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JServerWebSocket].query())
   }
 
   def reject():Unit = {

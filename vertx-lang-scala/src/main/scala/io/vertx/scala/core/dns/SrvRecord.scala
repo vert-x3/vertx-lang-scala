@@ -17,6 +17,7 @@
 package io.vertx.scala.core.dns
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
@@ -54,8 +55,8 @@ class SrvRecord(private val _asJava: Object) {
     asJava.asInstanceOf[JSrvRecord].service()
   }
 
-  def target():String = {
-    asJava.asInstanceOf[JSrvRecord].target()
+  def target():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JSrvRecord].target())
   }
 
 }

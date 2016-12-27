@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
+import io.vertx.lang.scala.HandlerOps._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
@@ -37,12 +38,12 @@ class TimeoutStream(private val _asJava: Object)
 
 //cached methods
 //fluent methods
-  override def exceptionHandler(handler: Option[Handler[Throwable]]):TimeoutStream = {
+  override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Option[Handler[Long]]):TimeoutStream = {
+  override def handler(handler: Handler[Long]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x)})
     this
   }
@@ -57,7 +58,7 @@ class TimeoutStream(private val _asJava: Object)
     this
   }
 
-  override def endHandler(endHandler: Option[Handler[Unit]]):TimeoutStream = {
+  override def endHandler(endHandler: Handler[Unit]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }
