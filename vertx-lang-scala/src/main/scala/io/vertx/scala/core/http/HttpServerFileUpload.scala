@@ -62,38 +62,38 @@ class HttpServerFileUpload(private val _asJava: Object)
   }
 
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename)
+    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename.asInstanceOf[java.lang.String])
     this
   }
 
 //default methods
 //basic methods
-  def filename():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].filename()
+      def filename():String = {
+    asJava.asInstanceOf[JHttpServerFileUpload].filename().asInstanceOf[String]
   }
 
-  def name():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].name()
+      def name():String = {
+    asJava.asInstanceOf[JHttpServerFileUpload].name().asInstanceOf[String]
   }
 
-  def contentType():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].contentType()
+      def contentType():String = {
+    asJava.asInstanceOf[JHttpServerFileUpload].contentType().asInstanceOf[String]
   }
 
-  def contentTransferEncoding():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding()
+      def contentTransferEncoding():String = {
+    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding().asInstanceOf[String]
   }
 
-  def charset():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].charset()
+      def charset():String = {
+    asJava.asInstanceOf[JHttpServerFileUpload].charset().asInstanceOf[String]
   }
 
-  def size():Long = {
-    asJava.asInstanceOf[JHttpServerFileUpload].size()
+      def size():Long = {
+    asJava.asInstanceOf[JHttpServerFileUpload].size().asInstanceOf[Long]
   }
 
-  def isSizeAvailable():Boolean = {
-    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable()
+      def isSizeAvailable():Boolean = {
+    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable().asInstanceOf[Boolean]
   }
 
 //future methods

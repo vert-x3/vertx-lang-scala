@@ -36,7 +36,7 @@ class GenericRefedInterface[T](private val _asJava: Object) {
 
 //default methods
 //basic methods
-  def getValue():T = {
+      def getValue():T = {
     asJava.asInstanceOf[JGenericRefedInterface[T]].getValue()
   }
 

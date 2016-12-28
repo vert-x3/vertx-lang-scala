@@ -49,72 +49,72 @@ class NetServer(private val _asJava: Object)
   }
 
   def listen(port: Int,host: String):NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port,host)
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
   }
 
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port,host,{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
 
   def listen(port: Int):NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port)
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer])
     this
   }
 
   def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port,{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
 
 //default methods
 //basic methods
-  override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JNetServer].isMetricsEnabled()
+      override def isMetricsEnabled():Boolean = {
+    asJava.asInstanceOf[JNetServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-  def connectStream():NetSocketStream = {
+      def connectStream():NetSocketStream = {
     NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
-  def connectHandler(handler: Handler[NetSocket]):NetServer = {
+      def connectHandler(handler: Handler[NetSocket]):NetServer = {
     NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JNetServer].close()
   }
 
-  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+      def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-  def actualPort():Int = {
-    asJava.asInstanceOf[JNetServer].actualPort()
+      def actualPort():Int = {
+    asJava.asInstanceOf[JNetServer].actualPort().asInstanceOf[Int]
   }
 
 //future methods
   def listenFuture():scala.concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
-    asJava.asInstanceOf[JNetServer].listen(port,host,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
-    asJava.asInstanceOf[JNetServer].listen(port,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def closeFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

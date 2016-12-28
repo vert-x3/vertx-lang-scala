@@ -56,12 +56,12 @@ class Future[T](private val _asJava: Object) {
 
   //io.vertx.core.Future
   def compose[U](mapper: T => Future[U]):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x:T=> mapper(x).asJava.asInstanceOf[JFuture[U]]}))
+    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x: T => mapper(x).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   //io.vertx.core.Future
   def map[U](mapper: T => U):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x:T=> mapper(x)}))
+    Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x: T => mapper(x)}))
   }
 
   //io.vertx.core.Future
@@ -70,49 +70,43 @@ class Future[T](private val _asJava: Object) {
   }
 
 //basic methods
-  def isComplete():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].isComplete()
+      def isComplete():Boolean = {
+    asJava.asInstanceOf[JFuture[T]].isComplete().asInstanceOf[Boolean]
   }
 
-  def complete(result: T):Unit = {
+      def complete(result: T):Unit = {
     asJava.asInstanceOf[JFuture[T]].complete(result)
   }
 
-  def complete():Unit = {
+      def complete():Unit = {
     asJava.asInstanceOf[JFuture[T]].complete()
   }
 
-  def fail(throwable: Throwable):Unit = {
+      def fail(throwable: Throwable):Unit = {
     asJava.asInstanceOf[JFuture[T]].fail(throwable)
   }
 
-  def fail(failureMessage: String):Unit = {
-    asJava.asInstanceOf[JFuture[T]].fail(failureMessage)
+      def fail(failureMessage: String):Unit = {
+    asJava.asInstanceOf[JFuture[T]].fail(failureMessage.asInstanceOf[java.lang.String])
   }
 
-  def result():T = {
+      def result():T = {
     asJava.asInstanceOf[JFuture[T]].result()
   }
 
-  def cause():Throwable = {
+      def cause():Throwable = {
     asJava.asInstanceOf[JFuture[T]].cause()
   }
 
-  def succeeded():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].succeeded()
+      def succeeded():Boolean = {
+    asJava.asInstanceOf[JFuture[T]].succeeded().asInstanceOf[Boolean]
   }
 
-  def failed():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].failed()
+      def failed():Boolean = {
+    asJava.asInstanceOf[JFuture[T]].failed().asInstanceOf[Boolean]
   }
 
 //future methods
-  def setHandlerFuture():scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
-    asJava.asInstanceOf[JFuture[T]].setHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
 }
 
   object Future{
@@ -135,7 +129,7 @@ class Future[T](private val _asJava: Object) {
     }
 
     def failedFuture[T](failureMessage: String):Future[T] = {
-      Future[T](JFuture.failedFuture[T](failureMessage))
+      Future[T](JFuture.failedFuture[T](failureMessage.asInstanceOf[java.lang.String]))
     }
 
   }

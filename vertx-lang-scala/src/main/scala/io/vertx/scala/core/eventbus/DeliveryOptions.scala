@@ -39,7 +39,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     this
   }
   def getCodecName: String = {
-    asJava.getCodecName()
+    asJava.getCodecName().asInstanceOf[String]
   }
 
   /**
@@ -49,7 +49,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     * at the recipient.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -61,7 +61,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     this
   }
   def getSendTimeout: Long = {
-    asJava.getSendTimeout()
+    asJava.getSendTimeout().asInstanceOf[Long]
   }
 }
 

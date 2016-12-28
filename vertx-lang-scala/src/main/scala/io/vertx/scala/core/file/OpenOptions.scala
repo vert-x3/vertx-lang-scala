@@ -36,7 +36,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isCreate: Boolean = {
-    asJava.isCreate()
+    asJava.isCreate().asInstanceOf[Boolean]
   }
 
   /**
@@ -47,7 +47,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isCreateNew: Boolean = {
-    asJava.isCreateNew()
+    asJava.isCreateNew().asInstanceOf[Boolean]
   }
 
   /**
@@ -58,7 +58,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isDeleteOnClose: Boolean = {
-    asJava.isDeleteOnClose()
+    asJava.isDeleteOnClose().asInstanceOf[Boolean]
   }
 
   /**
@@ -69,7 +69,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isDsync: Boolean = {
-    asJava.isDsync()
+    asJava.isDsync().asInstanceOf[Boolean]
   }
 
   /**
@@ -80,7 +80,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def getPerms: String = {
-    asJava.getPerms()
+    asJava.getPerms().asInstanceOf[String]
   }
 
   /**
@@ -91,7 +91,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isRead: Boolean = {
-    asJava.isRead()
+    asJava.isRead().asInstanceOf[Boolean]
   }
 
   /**
@@ -102,7 +102,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isSparse: Boolean = {
-    asJava.isSparse()
+    asJava.isSparse().asInstanceOf[Boolean]
   }
 
   /**
@@ -113,7 +113,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isSync: Boolean = {
-    asJava.isSync()
+    asJava.isSync().asInstanceOf[Boolean]
   }
 
   /**
@@ -124,7 +124,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isTruncateExisting: Boolean = {
-    asJava.isTruncateExisting()
+    asJava.isTruncateExisting().asInstanceOf[Boolean]
   }
 
   /**
@@ -135,7 +135,7 @@ class OpenOptions(private val _asJava: JOpenOptions) {
     this
   }
   def isWrite: Boolean = {
-    asJava.isWrite()
+    asJava.isWrite().asInstanceOf[Boolean]
   }
 }
 

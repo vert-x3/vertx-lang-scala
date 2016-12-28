@@ -33,7 +33,7 @@ class DataObjectWithLists(private val _asJava: JDataObjectWithLists) {
     this
   }
   def setDataObjectValues(value: scala.collection.mutable.Buffer[TestDataObject]) = {
-    asJava.setDataObjectValues(value.map(__.asJava).asJava)
+    asJava.setDataObjectValues(value.map(_.asJava).asJava)
     this
   }
   def setDoubleValues(value: scala.collection.mutable.Buffer[Double]) = {

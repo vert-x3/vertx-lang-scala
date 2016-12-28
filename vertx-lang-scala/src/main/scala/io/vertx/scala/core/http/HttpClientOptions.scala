@@ -72,7 +72,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getConnectTimeout: Int = {
-    asJava.getConnectTimeout()
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -83,7 +83,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
-    asJava.getCrlPaths().asScala.map(x => x)
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -105,7 +105,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getDefaultHost: String = {
-    asJava.getDefaultHost()
+    asJava.getDefaultHost().asInstanceOf[String]
   }
 
   /**
@@ -116,7 +116,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getDefaultPort: Int = {
-    asJava.getDefaultPort()
+    asJava.getDefaultPort().asInstanceOf[Int]
   }
 
   /**
@@ -127,7 +127,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledCipherSuites().asScala.map(x => x)
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -138,7 +138,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x)
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -150,7 +150,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def isHttp2ClearTextUpgrade: Boolean = {
-    asJava.isHttp2ClearTextUpgrade()
+    asJava.isHttp2ClearTextUpgrade().asInstanceOf[Boolean]
   }
 
   /**
@@ -165,7 +165,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getHttp2ConnectionWindowSize: Int = {
-    asJava.getHttp2ConnectionWindowSize()
+    asJava.getHttp2ConnectionWindowSize().asInstanceOf[Int]
   }
 
   /**
@@ -176,7 +176,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getHttp2MaxPoolSize: Int = {
-    asJava.getHttp2MaxPoolSize()
+    asJava.getHttp2MaxPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -192,7 +192,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getHttp2MultiplexingLimit: Int = {
-    asJava.getHttp2MultiplexingLimit()
+    asJava.getHttp2MultiplexingLimit().asInstanceOf[Int]
   }
 
   /**
@@ -204,7 +204,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getIdleTimeout: Int = {
-    asJava.getIdleTimeout()
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -230,7 +230,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def isKeepAlive: Boolean = {
-    asJava.isKeepAlive()
+    asJava.isKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -250,7 +250,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getLocalAddress: String = {
-    asJava.getLocalAddress()
+    asJava.getLocalAddress().asInstanceOf[String]
   }
 
   /**
@@ -261,7 +261,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getLogActivity: Boolean = {
-    asJava.getLogActivity()
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
@@ -272,7 +272,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxChunkSize: Int = {
-    asJava.getMaxChunkSize()
+    asJava.getMaxChunkSize().asInstanceOf[Int]
   }
 
   /**
@@ -283,7 +283,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxHeaderSize: Int = {
-    asJava.getMaxHeaderSize()
+    asJava.getMaxHeaderSize().asInstanceOf[Int]
   }
 
   /**
@@ -294,7 +294,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxInitialLineLength: Int = {
-    asJava.getMaxInitialLineLength()
+    asJava.getMaxInitialLineLength().asInstanceOf[Int]
   }
 
   /**
@@ -305,7 +305,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxPoolSize: Int = {
-    asJava.getMaxPoolSize()
+    asJava.getMaxPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -317,7 +317,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxWaitQueueSize: Int = {
-    asJava.getMaxWaitQueueSize()
+    asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
 
   /**
@@ -328,7 +328,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getMaxWebsocketFrameSize: Int = {
-    asJava.getMaxWebsocketFrameSize()
+    asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
 
   /**
@@ -340,7 +340,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getMetricsName: String = {
-    asJava.getMetricsName()
+    asJava.getMetricsName().asInstanceOf[String]
   }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -387,7 +387,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def isPipelining: Boolean = {
-    asJava.isPipelining()
+    asJava.isPipelining().asInstanceOf[Boolean]
   }
 
   /**
@@ -398,7 +398,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def getPipeliningLimit: Int = {
-    asJava.getPipeliningLimit()
+    asJava.getPipeliningLimit().asInstanceOf[Int]
   }
 
   /**
@@ -431,7 +431,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getReceiveBufferSize: Int = {
-    asJava.getReceiveBufferSize()
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -442,7 +442,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isReuseAddress: Boolean = {
-    asJava.isReuseAddress()
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
@@ -453,7 +453,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getSendBufferSize: Int = {
-    asJava.getSendBufferSize()
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -464,7 +464,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getSoLinger: Int = {
-    asJava.getSoLinger()
+    asJava.getSoLinger().asInstanceOf[Int]
   }
 
   /**
@@ -475,7 +475,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isSsl: Boolean = {
-    asJava.isSsl()
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
@@ -486,7 +486,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isTcpKeepAlive: Boolean = {
-    asJava.isTcpKeepAlive()
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -497,7 +497,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isTcpNoDelay: Boolean = {
-    asJava.isTcpNoDelay()
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
@@ -508,7 +508,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def getTrafficClass: Int = {
-    asJava.getTrafficClass()
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
@@ -519,7 +519,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isTrustAll: Boolean = {
-    asJava.isTrustAll()
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
@@ -538,7 +538,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def isTryUseCompression: Boolean = {
-    asJava.isTryUseCompression()
+    asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
 
   /**
@@ -549,7 +549,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isUseAlpn: Boolean = {
-    asJava.isUseAlpn()
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
   /**
@@ -560,7 +560,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers()
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**
@@ -571,7 +571,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
     this
   }
   def isVerifyHost: Boolean = {
-    asJava.isVerifyHost()
+    asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 }
 

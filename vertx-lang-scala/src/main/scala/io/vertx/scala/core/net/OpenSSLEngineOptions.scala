@@ -42,7 +42,7 @@ class OpenSSLEngineOptions(private val _asJava: JOpenSSLEngineOptions) {
     this
   }
   def isSessionCacheEnabled: Boolean = {
-    asJava.isSessionCacheEnabled()
+    asJava.isSessionCacheEnabled().asInstanceOf[Boolean]
   }
 }
 

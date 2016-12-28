@@ -56,7 +56,7 @@ class JksOptions(private val _asJava: JJksOptions) {
     this
   }
   def getPassword: String = {
-    asJava.getPassword()
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -67,7 +67,7 @@ class JksOptions(private val _asJava: JJksOptions) {
     this
   }
   def getPath: String = {
-    asJava.getPath()
+    asJava.getPath().asInstanceOf[String]
   }
 
   /**

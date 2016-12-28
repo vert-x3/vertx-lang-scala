@@ -37,7 +37,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def getArgName: String = {
-    asJava.getArgName()
+    asJava.getArgName().asInstanceOf[String]
   }
 
   /**
@@ -48,7 +48,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def getDefaultValue: String = {
-    asJava.getDefaultValue()
+    asJava.getDefaultValue().asInstanceOf[String]
   }
 
   /**
@@ -59,7 +59,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def getDescription: String = {
-    asJava.getDescription()
+    asJava.getDescription().asInstanceOf[String]
   }
 
   /**
@@ -70,7 +70,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def isHidden: Boolean = {
-    asJava.isHidden()
+    asJava.isHidden().asInstanceOf[Boolean]
   }
 
   /**
@@ -81,7 +81,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def getIndex: Int = {
-    asJava.getIndex()
+    asJava.getIndex().asInstanceOf[Int]
   }
 
   /**
@@ -92,7 +92,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def isMultiValued: Boolean = {
-    asJava.isMultiValued()
+    asJava.isMultiValued().asInstanceOf[Boolean]
   }
 
   /**
@@ -103,7 +103,7 @@ class Argument(private val _asJava: JArgument) {
     this
   }
   def isRequired: Boolean = {
-    asJava.isRequired()
+    asJava.isRequired().asInstanceOf[Boolean]
   }
 }
 

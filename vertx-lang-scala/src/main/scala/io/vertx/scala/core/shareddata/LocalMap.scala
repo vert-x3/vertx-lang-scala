@@ -38,47 +38,47 @@ class LocalMap[K,V](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def get(key: K):V = {
+      def get(key: K):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].get(key)
   }
 
-  def put(key: K,value: V):V = {
+      def put(key: K,value: V):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].put(key,value)
   }
 
-  def remove(key: K):V = {
+      def remove(key: K):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].remove(key)
   }
 
-  def clear():Unit = {
+      def clear():Unit = {
     asJava.asInstanceOf[JLocalMap[K,V]].clear()
   }
 
-  def size():Int = {
-    asJava.asInstanceOf[JLocalMap[K,V]].size()
+      def size():Int = {
+    asJava.asInstanceOf[JLocalMap[K,V]].size().asInstanceOf[Int]
   }
 
-  def isEmpty():Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].isEmpty()
+      def isEmpty():Boolean = {
+    asJava.asInstanceOf[JLocalMap[K,V]].isEmpty().asInstanceOf[Boolean]
   }
 
-  def putIfAbsent(key: K,value: V):V = {
+      def putIfAbsent(key: K,value: V):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].putIfAbsent(key,value)
   }
 
-  def removeIfPresent(key: K,value: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].removeIfPresent(key,value)
+      def removeIfPresent(key: K,value: V):Boolean = {
+    asJava.asInstanceOf[JLocalMap[K,V]].removeIfPresent(key,value).asInstanceOf[Boolean]
   }
 
-  def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].replaceIfPresent(key,oldValue,newValue)
+      def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
+    asJava.asInstanceOf[JLocalMap[K,V]].replaceIfPresent(key,oldValue,newValue).asInstanceOf[Boolean]
   }
 
-  def replace(key: K,value: V):V = {
+      def replace(key: K,value: V):V = {
     asJava.asInstanceOf[JLocalMap[K,V]].replace(key,value)
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JLocalMap[K,V]].close()
   }
 

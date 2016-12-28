@@ -43,7 +43,7 @@ class WebSocketFrame(private val _asJava: Object) {
   def textData():String = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
-      cached_0 = tmp
+      cached_0 = tmp.asInstanceOf[String]
     }
     cached_0
   }
@@ -59,20 +59,20 @@ class WebSocketFrame(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def isText():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isText()
+      def isText():Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
-  def isBinary():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isBinary()
+      def isBinary():Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
-  def isContinuation():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isContinuation()
+      def isContinuation():Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
-  def isFinal():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isFinal()
+      def isFinal():Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
 //future methods
@@ -82,15 +82,15 @@ class WebSocketFrame(private val _asJava: Object) {
     def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
   //static methods
     def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
-      WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
+      WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))
     }
 
     def textFrame(str: String,isFinal: Boolean):WebSocketFrame = {
-      WebSocketFrame(JWebSocketFrame.textFrame(str,isFinal))
+      WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String],isFinal.asInstanceOf[java.lang.Boolean]))
     }
 
     def continuationFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
-      WebSocketFrame(JWebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer],isFinal))
+      WebSocketFrame(JWebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))
     }
 
   }

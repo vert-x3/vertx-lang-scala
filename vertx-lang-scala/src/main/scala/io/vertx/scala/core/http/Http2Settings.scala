@@ -39,7 +39,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def getHeaderTableSize: Long = {
-    asJava.getHeaderTableSize()
+    asJava.getHeaderTableSize().asInstanceOf[Long]
   }
 
   /**
@@ -50,7 +50,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def getInitialWindowSize: Int = {
-    asJava.getInitialWindowSize()
+    asJava.getInitialWindowSize().asInstanceOf[Int]
   }
 
   /**
@@ -61,7 +61,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def getMaxConcurrentStreams: Long = {
-    asJava.getMaxConcurrentStreams()
+    asJava.getMaxConcurrentStreams().asInstanceOf[Long]
   }
 
   /**
@@ -72,7 +72,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def getMaxFrameSize: Int = {
-    asJava.getMaxFrameSize()
+    asJava.getMaxFrameSize().asInstanceOf[Int]
   }
 
   /**
@@ -83,7 +83,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def getMaxHeaderListSize: Long = {
-    asJava.getMaxHeaderListSize()
+    asJava.getMaxHeaderListSize().asInstanceOf[Long]
   }
 
   /**
@@ -94,7 +94,7 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
     this
   }
   def isPushEnabled: Boolean = {
-    asJava.isPushEnabled()
+    asJava.isPushEnabled().asInstanceOf[Boolean]
   }
 }
 

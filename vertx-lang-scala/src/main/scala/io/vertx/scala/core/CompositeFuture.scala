@@ -58,54 +58,48 @@ class CompositeFuture(private val _asJava: Object)
 
   //io.vertx.core.Future
   override def compose[U](mapper: CompositeFuture => Future[U]):Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[U]({x:JCompositeFuture=> mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[U]]}))
+    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[U]({x: JCompositeFuture => mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   //io.vertx.core.Future
   override def map[U](mapper: CompositeFuture => U):Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].map[U]({x:JCompositeFuture=> mapper(CompositeFuture(x))}))
+    Future[U](asJava.asInstanceOf[JCompositeFuture].map[U]({x: JCompositeFuture => mapper(CompositeFuture(x))}))
   }
 
 //basic methods
-  override def complete(result: CompositeFuture):Unit = {
+      override def complete(result: CompositeFuture):Unit = {
     asJava.asInstanceOf[JCompositeFuture].complete(result.asJava.asInstanceOf[JCompositeFuture])
   }
 
-  override def result():CompositeFuture = {
+      override def result():CompositeFuture = {
     CompositeFuture(asJava.asInstanceOf[JCompositeFuture].result())
   }
 
-  def cause(index: Int):Throwable = {
-    asJava.asInstanceOf[JCompositeFuture].cause(index)
+      def cause(index: Int):Throwable = {
+    asJava.asInstanceOf[JCompositeFuture].cause(index.asInstanceOf[java.lang.Integer])
   }
 
-  def succeeded(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].succeeded(index)
+      def succeeded(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def failed(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].failed(index)
+      def failed(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def isComplete(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].isComplete(index)
+      def isComplete(index: Int):Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def resultAt[T](index: Int):T = {
-    asJava.asInstanceOf[JCompositeFuture].resultAt[T](index)
+      def resultAt[T](index: Int):T = {
+    asJava.asInstanceOf[JCompositeFuture].resultAt[T](index.asInstanceOf[java.lang.Integer])
   }
 
-  def size():Int = {
-    asJava.asInstanceOf[JCompositeFuture].size()
+      def size():Int = {
+    asJava.asInstanceOf[JCompositeFuture].size().asInstanceOf[Int]
   }
 
 //future methods
-  override def setHandlerFuture():scala.concurrent.Future[CompositeFuture] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JCompositeFuture, CompositeFuture](x => CompositeFuture(x))
-    asJava.asInstanceOf[JCompositeFuture].setHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
 }
 
   object CompositeFuture{

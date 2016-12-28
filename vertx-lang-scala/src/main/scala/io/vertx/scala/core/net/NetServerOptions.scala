@@ -40,7 +40,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   def getAcceptBacklog: Int = {
-    asJava.getAcceptBacklog()
+    asJava.getAcceptBacklog().asInstanceOf[Int]
   }
 
   /**
@@ -62,7 +62,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   def isClientAuthRequired: Boolean = {
-    asJava.isClientAuthRequired()
+    asJava.isClientAuthRequired().asInstanceOf[Boolean]
   }
 
   /**
@@ -73,7 +73,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
-    asJava.getCrlPaths().asScala.map(x => x)
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -95,7 +95,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledCipherSuites().asScala.map(x => x)
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -106,7 +106,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x)
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -117,7 +117,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   def getHost: String = {
-    asJava.getHost()
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -129,7 +129,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getIdleTimeout: Int = {
-    asJava.getIdleTimeout()
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
   override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
@@ -152,7 +152,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getLogActivity: Boolean = {
-    asJava.getLogActivity()
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -199,7 +199,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   def getPort: Int = {
-    asJava.getPort()
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -210,7 +210,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getReceiveBufferSize: Int = {
-    asJava.getReceiveBufferSize()
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -221,7 +221,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isReuseAddress: Boolean = {
-    asJava.isReuseAddress()
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
@@ -232,7 +232,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getSendBufferSize: Int = {
-    asJava.getSendBufferSize()
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -243,7 +243,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getSoLinger: Int = {
-    asJava.getSoLinger()
+    asJava.getSoLinger().asInstanceOf[Int]
   }
 
   /**
@@ -254,7 +254,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isSsl: Boolean = {
-    asJava.isSsl()
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
@@ -265,7 +265,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isTcpKeepAlive: Boolean = {
-    asJava.isTcpKeepAlive()
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -276,7 +276,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isTcpNoDelay: Boolean = {
-    asJava.isTcpNoDelay()
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
@@ -287,7 +287,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def getTrafficClass: Int = {
-    asJava.getTrafficClass()
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
@@ -306,7 +306,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isUseAlpn: Boolean = {
-    asJava.isUseAlpn()
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
   /**
@@ -317,7 +317,7 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
     this
   }
   override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers()
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 }
 

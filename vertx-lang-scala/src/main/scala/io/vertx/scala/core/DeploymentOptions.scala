@@ -51,7 +51,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getExtraClasspath: scala.collection.mutable.Buffer[String] = {
-    asJava.getExtraClasspath().asScala.map(x => x)
+    asJava.getExtraClasspath().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -62,7 +62,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def isHa: Boolean = {
-    asJava.isHa()
+    asJava.isHa().asInstanceOf[Boolean]
   }
 
   /**
@@ -73,7 +73,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getInstances: Int = {
-    asJava.getInstances()
+    asJava.getInstances().asInstanceOf[Int]
   }
 
   /**
@@ -84,7 +84,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getIsolatedClasses: scala.collection.mutable.Buffer[String] = {
-    asJava.getIsolatedClasses().asScala.map(x => x)
+    asJava.getIsolatedClasses().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -95,7 +95,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getIsolationGroup: String = {
-    asJava.getIsolationGroup()
+    asJava.getIsolationGroup().asInstanceOf[String]
   }
 
   /**
@@ -106,7 +106,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getMaxWorkerExecuteTime: Long = {
-    asJava.getMaxWorkerExecuteTime()
+    asJava.getMaxWorkerExecuteTime().asInstanceOf[Long]
   }
 
   /**
@@ -117,7 +117,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def isMultiThreaded: Boolean = {
-    asJava.isMultiThreaded()
+    asJava.isMultiThreaded().asInstanceOf[Boolean]
   }
 
   /**
@@ -128,7 +128,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def isWorker: Boolean = {
-    asJava.isWorker()
+    asJava.isWorker().asInstanceOf[Boolean]
   }
 
   /**
@@ -140,7 +140,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getWorkerPoolName: String = {
-    asJava.getWorkerPoolName()
+    asJava.getWorkerPoolName().asInstanceOf[String]
   }
 
   /**
@@ -151,7 +151,7 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
     this
   }
   def getWorkerPoolSize: Int = {
-    asJava.getWorkerPoolSize()
+    asJava.getWorkerPoolSize().asInstanceOf[Int]
   }
 }
 

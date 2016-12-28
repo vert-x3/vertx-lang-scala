@@ -39,72 +39,72 @@ class CommandLine(private val _asJava: Object) {
 //default methods
   //io.vertx.core.cli.CommandLine
   def getRawValues(option: Option):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x)
+    asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
 //basic methods
-  def cli():CLI = {
+      def cli():CLI = {
     CLI(asJava.asInstanceOf[JCommandLine].cli())
   }
 
-  def allArguments():scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x)
+      def allArguments():scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x.asInstanceOf[String])
   }
 
-  def getOptionValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name)
+      def getOptionValue[T](name: String):T = {
+    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name.asInstanceOf[java.lang.String])
   }
 
-  def getArgumentValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name)
+      def getArgumentValue[T](name: String):T = {
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name.asInstanceOf[java.lang.String])
   }
 
-  def getArgumentValue[T](index: Int):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index)
+      def getArgumentValue[T](index: Int):T = {
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index.asInstanceOf[java.lang.Integer])
   }
 
-  def isFlagEnabled(name: String):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name)
+      def isFlagEnabled(name: String):Boolean = {
+    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
-  def isOptionAssigned(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava)
+      def isOptionAssigned(option: Option):Boolean = {
+    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava).asInstanceOf[Boolean]
   }
 
-  def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).asScala.map(x => x)
+      def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x)
+      def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def getRawValueForOption(option: Option):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava))
+      def getRawValueForOption(option: Option):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava).asInstanceOf[String])
   }
 
-  def acceptMoreValues(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava)
+      def acceptMoreValues(option: Option):Boolean = {
+    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava).asInstanceOf[Boolean]
   }
 
-  def getRawValueForArgument(arg: Argument):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava))
+      def getRawValueForArgument(arg: Argument):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava).asInstanceOf[String])
   }
 
-  def isArgumentAssigned(arg: Argument):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava)
+      def isArgumentAssigned(arg: Argument):Boolean = {
+    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava).asInstanceOf[Boolean]
   }
 
-  def isSeenInCommandLine(option: Option):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava)
+      def isSeenInCommandLine(option: Option):Boolean = {
+    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava).asInstanceOf[Boolean]
   }
 
-  def isValid():Boolean = {
-    asJava.asInstanceOf[JCommandLine].isValid()
+      def isValid():Boolean = {
+    asJava.asInstanceOf[JCommandLine].isValid().asInstanceOf[Boolean]
   }
 
-  def isAskingForHelp():Boolean = {
-    asJava.asInstanceOf[JCommandLine].isAskingForHelp()
+      def isAskingForHelp():Boolean = {
+    asJava.asInstanceOf[JCommandLine].isAskingForHelp().asInstanceOf[Boolean]
   }
 
 //future methods

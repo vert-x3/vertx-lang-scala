@@ -48,7 +48,7 @@ class GoAway(private val _asJava: JGoAway) {
     this
   }
   def getErrorCode: Long = {
-    asJava.getErrorCode()
+    asJava.getErrorCode().asInstanceOf[Long]
   }
 
   /**
@@ -59,7 +59,7 @@ class GoAway(private val _asJava: JGoAway) {
     this
   }
   def getLastStreamId: Int = {
-    asJava.getLastStreamId()
+    asJava.getLastStreamId().asInstanceOf[Int]
   }
 }
 

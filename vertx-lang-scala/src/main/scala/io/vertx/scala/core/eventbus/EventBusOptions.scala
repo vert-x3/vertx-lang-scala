@@ -54,7 +54,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getAcceptBacklog: Int = {
-    asJava.getAcceptBacklog()
+    asJava.getAcceptBacklog().asInstanceOf[Int]
   }
 
   /**
@@ -76,7 +76,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getClusterPingInterval: Long = {
-    asJava.getClusterPingInterval()
+    asJava.getClusterPingInterval().asInstanceOf[Long]
   }
 
   /**
@@ -87,7 +87,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getClusterPingReplyInterval: Long = {
-    asJava.getClusterPingReplyInterval()
+    asJava.getClusterPingReplyInterval().asInstanceOf[Long]
   }
 
   /**
@@ -104,7 +104,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getClusterPublicHost: String = {
-    asJava.getClusterPublicHost()
+    asJava.getClusterPublicHost().asInstanceOf[String]
   }
 
   /**
@@ -115,7 +115,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getClusterPublicPort: Int = {
-    asJava.getClusterPublicPort()
+    asJava.getClusterPublicPort().asInstanceOf[Int]
   }
 
   /**
@@ -126,7 +126,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def isClustered: Boolean = {
-    asJava.isClustered()
+    asJava.isClustered().asInstanceOf[Boolean]
   }
 
   /**
@@ -137,7 +137,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getConnectTimeout: Int = {
-    asJava.getConnectTimeout()
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -148,7 +148,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
-    asJava.getCrlPaths().asScala.map(x => x)
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -170,7 +170,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledCipherSuites().asScala.map(x => x)
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -181,7 +181,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
-    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x)
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -192,7 +192,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getHost: String = {
-    asJava.getHost()
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -204,7 +204,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getIdleTimeout: Int = {
-    asJava.getIdleTimeout()
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
   override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
@@ -227,7 +227,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getLogActivity: Boolean = {
-    asJava.getLogActivity()
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -274,7 +274,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getPort: Int = {
-    asJava.getPort()
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -285,7 +285,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getReceiveBufferSize: Int = {
-    asJava.getReceiveBufferSize()
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -296,7 +296,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getReconnectAttempts: Int = {
-    asJava.getReconnectAttempts()
+    asJava.getReconnectAttempts().asInstanceOf[Int]
   }
 
   /**
@@ -307,7 +307,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def getReconnectInterval: Long = {
-    asJava.getReconnectInterval()
+    asJava.getReconnectInterval().asInstanceOf[Long]
   }
 
   /**
@@ -318,7 +318,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isReuseAddress: Boolean = {
-    asJava.isReuseAddress()
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
@@ -329,7 +329,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getSendBufferSize: Int = {
-    asJava.getSendBufferSize()
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -340,7 +340,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getSoLinger: Int = {
-    asJava.getSoLinger()
+    asJava.getSoLinger().asInstanceOf[Int]
   }
 
   /**
@@ -351,7 +351,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isSsl: Boolean = {
-    asJava.isSsl()
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
@@ -362,7 +362,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isTcpKeepAlive: Boolean = {
-    asJava.isTcpKeepAlive()
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -373,7 +373,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isTcpNoDelay: Boolean = {
-    asJava.isTcpNoDelay()
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
@@ -384,7 +384,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def getTrafficClass: Int = {
-    asJava.getTrafficClass()
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
@@ -395,7 +395,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   def isTrustAll: Boolean = {
-    asJava.isTrustAll()
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
@@ -414,7 +414,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isUseAlpn: Boolean = {
-    asJava.isUseAlpn()
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
   /**
@@ -425,7 +425,7 @@ class EventBusOptions(private val _asJava: JEventBusOptions)
     this
   }
   override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers()
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 }
 

@@ -39,7 +39,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   def isBroadcast: Boolean = {
-    asJava.isBroadcast()
+    asJava.isBroadcast().asInstanceOf[Boolean]
   }
 
   /**
@@ -50,7 +50,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   def isIpV6: Boolean = {
-    asJava.isIpV6()
+    asJava.isIpV6().asInstanceOf[Boolean]
   }
 
   /**
@@ -61,7 +61,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   override def getLogActivity: Boolean = {
-    asJava.getLogActivity()
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
@@ -72,7 +72,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   def isLoopbackModeDisabled: Boolean = {
-    asJava.isLoopbackModeDisabled()
+    asJava.isLoopbackModeDisabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -83,7 +83,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   def getMulticastNetworkInterface: String = {
-    asJava.getMulticastNetworkInterface()
+    asJava.getMulticastNetworkInterface().asInstanceOf[String]
   }
 
   /**
@@ -94,7 +94,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   def getMulticastTimeToLive: Int = {
-    asJava.getMulticastTimeToLive()
+    asJava.getMulticastTimeToLive().asInstanceOf[Int]
   }
 
   /**
@@ -105,7 +105,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   override def getReceiveBufferSize: Int = {
-    asJava.getReceiveBufferSize()
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -116,7 +116,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   override def isReuseAddress: Boolean = {
-    asJava.isReuseAddress()
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
@@ -127,7 +127,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   override def getSendBufferSize: Int = {
-    asJava.getSendBufferSize()
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -138,7 +138,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
     this
   }
   override def getTrafficClass: Int = {
-    asJava.getTrafficClass()
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 }
 

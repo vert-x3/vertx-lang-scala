@@ -78,7 +78,7 @@ class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
     this
   }
   def getCertPath: String = {
-    asJava.getCertPath()
+    asJava.getCertPath().asInstanceOf[String]
   }
 
   /**
@@ -100,7 +100,7 @@ class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
     this
   }
   def getKeyPath: String = {
-    asJava.getKeyPath()
+    asJava.getKeyPath().asInstanceOf[String]
   }
 
   /**

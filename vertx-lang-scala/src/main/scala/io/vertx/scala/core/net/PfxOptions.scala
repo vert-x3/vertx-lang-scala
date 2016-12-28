@@ -56,7 +56,7 @@ class PfxOptions(private val _asJava: JPfxOptions) {
     this
   }
   def getPassword: String = {
-    asJava.getPassword()
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -67,7 +67,7 @@ class PfxOptions(private val _asJava: JPfxOptions) {
     this
   }
   def getPath: String = {
-    asJava.getPath()
+    asJava.getPath().asInstanceOf[String]
   }
 
   /**

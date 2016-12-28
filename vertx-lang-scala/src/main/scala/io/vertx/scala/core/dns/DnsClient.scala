@@ -39,62 +39,62 @@ class DnsClient(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def lookup(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup(name,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
   def lookup4(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup4(name,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
   def lookup6(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup6(name,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
   def resolveA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveA(name,{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def resolveAAAA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveAAAA(name,{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def resolveCNAME(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveCNAME(name,{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def resolveMX(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveMX(name,{x: AsyncResult[java.util.List[JMxRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x))))})
+    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JMxRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x))))})
     this
   }
 
   def resolveTXT(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveTXT(name,{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def resolvePTR(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolvePTR(name,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
   def resolveNS(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveNS(name,{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def resolveSRV(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveSRV(name,{x: AsyncResult[java.util.List[JSrvRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x))))})
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JSrvRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x))))})
     this
   }
 
   def reverseLookup(ipaddress: String,handler: Handler[AsyncResult[String]]):DnsClient = {
-    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -102,74 +102,74 @@ class DnsClient(private val _asJava: Object) {
 //basic methods
 //future methods
   def lookupFuture(name: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
-    asJava.asInstanceOf[JDnsClient].lookup(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
+    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def lookup4Future(name: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
-    asJava.asInstanceOf[JDnsClient].lookup4(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
+    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def lookup6Future(name: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
-    asJava.asInstanceOf[JDnsClient].lookup6(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
+    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveAFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
-    asJava.asInstanceOf[JDnsClient].resolveA(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
+    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveAAAAFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
-    asJava.asInstanceOf[JDnsClient].resolveAAAA(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveCNAMEFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
-    asJava.asInstanceOf[JDnsClient].resolveCNAME(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveMXFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[MxRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JMxRecord], scala.collection.mutable.Buffer[MxRecord]](x => x.asScala.map(x => MxRecord(x)))
-    asJava.asInstanceOf[JDnsClient].resolveMX(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JMxRecord], scala.collection.mutable.Buffer[MxRecord]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[MxRecord]] else x.asScala.map(x => MxRecord(x)))
+    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveTXTFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
-    asJava.asInstanceOf[JDnsClient].resolveTXT(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolvePTRFuture(name: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
-    asJava.asInstanceOf[JDnsClient].resolvePTR(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveNSFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
-    asJava.asInstanceOf[JDnsClient].resolveNS(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
+    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def resolveSRVFuture(name: String):scala.concurrent.Future[scala.collection.mutable.Buffer[SrvRecord]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JSrvRecord], scala.collection.mutable.Buffer[SrvRecord]](x => x.asScala.map(x => SrvRecord(x)))
-    asJava.asInstanceOf[JDnsClient].resolveSRV(name,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JSrvRecord], scala.collection.mutable.Buffer[SrvRecord]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[SrvRecord]] else x.asScala.map(x => SrvRecord(x)))
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def reverseLookupFuture(ipaddress: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
-    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
