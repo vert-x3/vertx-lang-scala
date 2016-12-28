@@ -18,6 +18,7 @@ package io.vertx.scala.core.streams
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -69,6 +70,7 @@ class Pump(private val _asJava: Object) {
     asJava.asInstanceOf[JPump].numberPumped()
   }
 
+//future methods
 }
 
   object Pump{

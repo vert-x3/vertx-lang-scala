@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
@@ -398,6 +399,127 @@ class TestInterface(private val _asJava: Object)
 
   def superMethodOverloadedBySubclass(s: String):Int = {
     asJava.asInstanceOf[JTestInterface].superMethodOverloadedBySubclass(s)
+  }
+
+//future methods
+  def methodWithHandlerAsyncResultByteFuture(sendFailure: Boolean):scala.concurrent.Future[Byte] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Byte, Byte](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultByte(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultShortFuture(sendFailure: Boolean):scala.concurrent.Future[Short] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Short, Short](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultShort(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultIntegerFuture(sendFailure: Boolean):scala.concurrent.Future[Int] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultInteger(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultLongFuture(sendFailure: Boolean):scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultLong(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultFloatFuture(sendFailure: Boolean):scala.concurrent.Future[Float] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Float, Float](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultFloat(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultDoubleFuture(sendFailure: Boolean):scala.concurrent.Future[Double] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Double, Double](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDouble(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultBooleanFuture(sendFailure: Boolean):scala.concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultBoolean(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultCharacterFuture(sendFailure: Boolean):scala.concurrent.Future[Char] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Character, Char](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultCharacter(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultStringFuture(sendFailure: Boolean):scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultString(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultDataObjectFuture(sendFailure: Boolean):scala.concurrent.Future[TestDataObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestDataObject, TestDataObject](x => TestDataObject(x))
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDataObject(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultUserTypesFuture():scala.concurrent.Future[RefedInterface1] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRefedInterface1, RefedInterface1](x => RefedInterface1(x))
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultUserTypes(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultVoidFuture(sendFailure: Boolean):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVoid(sendFailure,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U):scala.concurrent.Future[GenericRefedInterface[U]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[U], GenericRefedInterface[U]](x => GenericRefedInterface[U](x))
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[U](value,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithGenericHandlerAsyncResultFuture[U](`type`: String):scala.concurrent.Future[U] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[U, U](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[U](`type`,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultJsonObjectFuture():scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonObject(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultNullJsonObjectFuture():scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultComplexJsonObjectFuture():scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonObject(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultJsonArrayFuture():scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonArray(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultNullJsonArrayFuture():scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultComplexJsonArrayFuture():scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonArray(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

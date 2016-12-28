@@ -18,6 +18,7 @@ package com.acme.scala.pkg
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
 import com.acme.pkg.{MyInterface => JMyInterface}
 import com.acme.scala.pkg.sub.SubInterface
@@ -42,6 +43,7 @@ class MyInterface(private val _asJava: Object) {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 
+//future methods
 }
 
   object MyInterface{

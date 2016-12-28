@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -95,6 +96,7 @@ class HttpServerFileUpload(private val _asJava: Object)
     asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable()
   }
 
+//future methods
 }
 
   object HttpServerFileUpload{

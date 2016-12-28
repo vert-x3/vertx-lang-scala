@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
 
 /**
@@ -51,5 +52,6 @@ trait RefedInterface2 {
     asJava.asInstanceOf[JRefedInterface2].getString()
   }
 
+//future methods
 }
   }

@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.{MultiMap => JMultiMap}
 import scala.collection.JavaConverters._
 
@@ -89,6 +90,7 @@ class MultiMap(private val _asJava: Object) {
     asJava.asInstanceOf[JMultiMap].size()
   }
 
+//future methods
 }
 
   object MultiMap{

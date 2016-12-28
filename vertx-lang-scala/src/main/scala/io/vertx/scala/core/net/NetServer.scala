@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.metrics.{Measured => JMeasured}
@@ -91,6 +92,31 @@ class NetServer(private val _asJava: Object)
 
   def actualPort():Int = {
     asJava.asInstanceOf[JNetServer].actualPort()
+  }
+
+//future methods
+  def listenFuture():scala.concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(port,host,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(port,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def closeFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

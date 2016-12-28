@@ -18,6 +18,7 @@ package io.vertx.scala.core.file
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 
 /**
@@ -43,6 +44,7 @@ class FileSystemProps(private val _asJava: Object) {
     asJava.asInstanceOf[JFileSystemProps].usableSpace()
   }
 
+//future methods
 }
 
   object FileSystemProps{

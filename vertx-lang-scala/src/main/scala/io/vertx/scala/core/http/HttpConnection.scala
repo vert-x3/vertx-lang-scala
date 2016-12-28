@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -155,6 +156,19 @@ class HttpConnection(private val _asJava: Object) {
 
   def remoteSettings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
+  }
+
+//future methods
+  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

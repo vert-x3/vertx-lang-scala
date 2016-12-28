@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
@@ -92,6 +93,13 @@ class MessageProducer[T](private val _asJava: Object)
 
   def close():Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].close()
+  }
+
+//future methods
+  def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessageProducer[T]].send[R](message,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

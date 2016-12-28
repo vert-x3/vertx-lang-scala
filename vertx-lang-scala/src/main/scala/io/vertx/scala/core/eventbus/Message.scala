@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
@@ -87,6 +88,19 @@ class Message[T](private val _asJava: Object) {
 
   def fail(failureCode: Int,message: String):Unit = {
     asJava.asInstanceOf[JMessage[T]].fail(failureCode,message)
+  }
+
+//future methods
+  def replyFuture[R](message: AnyRef):scala.concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessage[T]].reply[R](message,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def replyFuture[R](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

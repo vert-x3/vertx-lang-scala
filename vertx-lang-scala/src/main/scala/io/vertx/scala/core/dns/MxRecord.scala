@@ -18,6 +18,7 @@ package io.vertx.scala.core.dns
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.dns.{MxRecord => JMxRecord}
 
 /**
@@ -39,6 +40,7 @@ class MxRecord(private val _asJava: Object) {
     asJava.asInstanceOf[JMxRecord].name()
   }
 
+//future methods
 }
 
   object MxRecord{

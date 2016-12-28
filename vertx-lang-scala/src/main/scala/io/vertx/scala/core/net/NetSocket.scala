@@ -18,6 +18,7 @@ package io.vertx.scala.core.net
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -182,6 +183,25 @@ class NetSocket(private val _asJava: Object)
 
   def isSsl():Boolean = {
     asJava.asInstanceOf[JNetSocket].isSsl()
+  }
+
+//future methods
+  def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename,offset,length,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
