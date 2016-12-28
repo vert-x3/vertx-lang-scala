@@ -48,7 +48,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 

@@ -42,15 +42,15 @@ class CollectionTCK(private val _asJava: Object) {
 //default methods
 //basic methods
   def methodWithListParams(listString: scala.collection.mutable.Buffer[String],listByte: scala.collection.mutable.Buffer[Byte],listShort: scala.collection.mutable.Buffer[Short],listInt: scala.collection.mutable.Buffer[Int],listLong: scala.collection.mutable.Buffer[Long],listJsonObject: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject],listJsonArray: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],listVertxGen: scala.collection.mutable.Buffer[RefedInterface1],listDataObject: scala.collection.mutable.Buffer[TestDataObject],listEnum: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]):Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithListParams(listString.map(x => x).asJava,listByte.map(x => x).asJava,listShort.map(x => x).asJava,listInt.map(x => x).asJava,listLong.map(x => x).asJava,listJsonObject.map(x => x).asJava,listJsonArray.map(x => x).asJava,listVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava,listDataObject.map(x => x.asJava).asJava,listEnum.map(x => x).asJava)
+    asJava.asInstanceOf[JCollectionTCK].methodWithListParams(listString.map(x => x.asInstanceOf[java.lang.String]).asJava,listByte.map(x => x.asInstanceOf[java.lang.Byte]).asJava,listShort.map(x => x.asInstanceOf[java.lang.Short]).asJava,listInt.map(x => x.asInstanceOf[java.lang.Integer]).asJava,listLong.map(x => x.asInstanceOf[java.lang.Long]).asJava,listJsonObject.map(x => x).asJava,listJsonArray.map(x => x).asJava,listVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava,listDataObject.map(x => x.asJava).asJava,listEnum.map(x => x).asJava)
   }
 
   def methodWithSetParams(setString: scala.collection.mutable.Set[String],setByte: scala.collection.mutable.Set[Byte],setShort: scala.collection.mutable.Set[Short],setInt: scala.collection.mutable.Set[Int],setLong: scala.collection.mutable.Set[Long],setJsonObject: scala.collection.mutable.Set[io.vertx.core.json.JsonObject],setJsonArray: scala.collection.mutable.Set[io.vertx.core.json.JsonArray],setVertxGen: scala.collection.mutable.Set[RefedInterface1],setDataObject: scala.collection.mutable.Set[TestDataObject],setEnum: scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]):Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithSetParams(setString.map(x => x).asJava,setByte.map(x => x).asJava,setShort.map(x => x).asJava,setInt.map(x => x).asJava,setLong.map(x => x).asJava,setJsonObject.map(x => x).asJava,setJsonArray.map(x => x).asJava,setVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava,setDataObject.map(x => x.asJava).asJava,setEnum.map(x => x).asJava)
+    asJava.asInstanceOf[JCollectionTCK].methodWithSetParams(setString.map(x => x.asInstanceOf[java.lang.String]).asJava,setByte.map(x => x.asInstanceOf[java.lang.Byte]).asJava,setShort.map(x => x.asInstanceOf[java.lang.Short]).asJava,setInt.map(x => x.asInstanceOf[java.lang.Integer]).asJava,setLong.map(x => x.asInstanceOf[java.lang.Long]).asJava,setJsonObject.map(x => x).asJava,setJsonArray.map(x => x).asJava,setVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava,setDataObject.map(x => x.asJava).asJava,setEnum.map(x => x).asJava)
   }
 
-  def methodWithMapParams(mapString: Map[String, String],mapByte: Map[String, Byte],mapShort: Map[String, Short],mapInt: Map[String, Int],mapLong: Map[String, Long],mapJsonObject: Map[String, io.vertx.core.json.JsonObject],mapJsonArray: Map[String, io.vertx.core.json.JsonArray],mapVertxGen: Map[String, RefedInterface1]):Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapParams(mapString.mapValues(x => x).asJava,mapByte.mapValues(x => x).asJava,mapShort.mapValues(x => x).asJava,mapInt.mapValues(x => x).asJava,mapLong.mapValues(x => x).asJava,mapJsonObject.mapValues(x => x).asJava,mapJsonArray.mapValues(x => x).asJava,mapVertxGen.mapValues(x => x).asJava)
+  def methodWithMapParams(mapString: scala.collection.mutable.Map[String, String],mapByte: scala.collection.mutable.Map[String, Byte],mapShort: scala.collection.mutable.Map[String, Short],mapInt: scala.collection.mutable.Map[String, Int],mapLong: scala.collection.mutable.Map[String, Long],mapJsonObject: scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject],mapJsonArray: scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray],mapVertxGen: scala.collection.mutable.Map[String, RefedInterface1]):Unit = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithMapParams(mapString.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,mapByte.mapValues(x => x.asInstanceOf[java.lang.Byte]).asJava,mapShort.mapValues(x => x.asInstanceOf[java.lang.Short]).asJava,mapInt.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava,mapLong.mapValues(x => x.asInstanceOf[java.lang.Long]).asJava,mapJsonObject.mapValues(x => x).asJava,mapJsonArray.mapValues(x => x).asJava,mapVertxGen.mapValues(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava)
   }
 
   def methodWithHandlerListAndSet(listStringHandler: Handler[scala.collection.mutable.Buffer[String]],listIntHandler: Handler[scala.collection.mutable.Buffer[Int]],setStringHandler: Handler[scala.collection.mutable.Set[String]],setIntHandler: Handler[scala.collection.mutable.Set[Int]]):Unit = {
@@ -201,59 +201,59 @@ class CollectionTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetEnum({x: AsyncResult[java.util.Set[TestEnum]] => setHandler.handle(AsyncResultWrapper[java.util.Set[TestEnum],scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x, a => a.asScala.map(x => x)))})
   }
 
-  def methodWithMapReturn(handler: Handler[String]):Map[String, String] = {
+  def methodWithMapReturn(handler: Handler[String]):scala.collection.mutable.Map[String, String] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapStringReturn(handler: Handler[String]):Map[String, String] = {
+  def methodWithMapStringReturn(handler: Handler[String]):scala.collection.mutable.Map[String, String] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapLongReturn(handler: Handler[String]):Map[String, Long] = {
+  def methodWithMapLongReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Long] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapLongReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapIntegerReturn(handler: Handler[String]):Map[String, Int] = {
+  def methodWithMapIntegerReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Int] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapIntegerReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapShortReturn(handler: Handler[String]):Map[String, Short] = {
+  def methodWithMapShortReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Short] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapShortReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapByteReturn(handler: Handler[String]):Map[String, Byte] = {
+  def methodWithMapByteReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Byte] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapByteReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapCharacterReturn(handler: Handler[String]):Map[String, Char] = {
+  def methodWithMapCharacterReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Char] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapCharacterReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapBooleanReturn(handler: Handler[String]):Map[String, Boolean] = {
+  def methodWithMapBooleanReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Boolean] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapBooleanReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapFloatReturn(handler: Handler[String]):Map[String, Float] = {
+  def methodWithMapFloatReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Float] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapFloatReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapDoubleReturn(handler: Handler[String]):Map[String, Double] = {
+  def methodWithMapDoubleReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Double] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapDoubleReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapJsonObjectReturn(handler: Handler[String]):Map[String, io.vertx.core.json.JsonObject] = {
+  def methodWithMapJsonObjectReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapComplexJsonObjectReturn(handler: Handler[String]):Map[String, io.vertx.core.json.JsonObject] = {
+  def methodWithMapComplexJsonObjectReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonObjectReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapJsonArrayReturn(handler: Handler[String]):Map[String, io.vertx.core.json.JsonArray] = {
+  def methodWithMapJsonArrayReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonArrayReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
-  def methodWithMapComplexJsonArrayReturn(handler: Handler[String]):Map[String, io.vertx.core.json.JsonArray] = {
+  def methodWithMapComplexJsonArrayReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn({x: java.lang.String => handler.handle(x)}).asScala.mapValues(x => x)
   }
 
@@ -330,121 +330,121 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 //future methods
-  def methodWithHandlerAsyncResultListStringFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+def methodWithHandlerAsyncResultListStringFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListString(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListIntegerFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
+def methodWithHandlerAsyncResultListIntegerFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListInteger(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetStringFuture():scala.concurrent.Future[scala.collection.mutable.Set[String]] = {
+def methodWithHandlerAsyncResultSetStringFuture():scala.concurrent.Future[scala.collection.mutable.Set[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetString(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetIntegerFuture():scala.concurrent.Future[scala.collection.mutable.Set[Int]] = {
+def methodWithHandlerAsyncResultSetIntegerFuture():scala.concurrent.Future[scala.collection.mutable.Set[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[Int]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetInteger(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
+def methodWithHandlerAsyncResultListVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListVertxGen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListAbstractVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface2]] = {
+def methodWithHandlerAsyncResultListAbstractVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface2]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRefedInterface2], scala.collection.mutable.Buffer[RefedInterface2]](x => x.asScala.map(x => RefedInterface2(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListAbstractVertxGen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+def methodWithHandlerAsyncResultListJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListComplexJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+def methodWithHandlerAsyncResultListComplexJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+def methodWithHandlerAsyncResultListJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListComplexJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+def methodWithHandlerAsyncResultListComplexJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListDataObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
+def methodWithHandlerAsyncResultListDataObjectFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListDataObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultListEnumFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+def methodWithHandlerAsyncResultListEnumFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListEnum(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface1]] = {
+def methodWithHandlerAsyncResultSetVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface1]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetVertxGen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetAbstractVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface2]] = {
+def methodWithHandlerAsyncResultSetAbstractVertxGenFuture():scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface2]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JRefedInterface2], scala.collection.mutable.Set[RefedInterface2]](x => x.asScala.map(x => RefedInterface2(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetAbstractVertxGen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+def methodWithHandlerAsyncResultSetJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetComplexJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+def methodWithHandlerAsyncResultSetComplexJsonObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+def methodWithHandlerAsyncResultSetJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetComplexJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+def methodWithHandlerAsyncResultSetComplexJsonArrayFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetDataObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[TestDataObject]] = {
+def methodWithHandlerAsyncResultSetDataObjectFuture():scala.concurrent.Future[scala.collection.mutable.Set[TestDataObject]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JTestDataObject], scala.collection.mutable.Set[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetDataObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def methodWithHandlerAsyncResultSetEnumFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+def methodWithHandlerAsyncResultSetEnumFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetEnum(promiseAndHandler._1)
     promiseAndHandler._2.future

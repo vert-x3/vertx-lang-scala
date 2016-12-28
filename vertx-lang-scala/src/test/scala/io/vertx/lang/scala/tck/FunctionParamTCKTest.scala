@@ -2,13 +2,16 @@ package io.vertx.lang.scala.tck
 
 import java.lang.Boolean
 
-import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, TestDataObject, TestEnum}
+import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, TestEnum}
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
-import io.vertx.scala.codegen.testmodel.{FunctionParamTCK, RefedInterface1}
+import io.vertx.scala.codegen.testmodel.{FunctionParamTCK, RefedInterface1, TestDataObject}
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
+
+import scala.collection.mutable
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
@@ -38,7 +41,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testVoidParam" should "work" in {
-    assert("ok" == obj.methodWithVoidParam(it => { assert(null == it); "ok" }))
+    assert("ok" == obj.methodWithVoidParam(() => { assert(true); "ok" }))
   }
 
   "testUserTypeParam" should "work" in {
@@ -153,7 +156,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
 
   "testObjectReturn" should "work" in {
     assert("ok" == obj.methodWithObjectReturn(
-      it => it.asInstanceOf[Int] match {
+      it => it match {
           case 0 => "the-string".asInstanceOf[Object]
           case 1 => 123.asInstanceOf[Object]
           case 2 => true.asInstanceOf[Object]
@@ -165,7 +168,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testDataObjectReturn" should "work" in {
-    assert("ok" == obj.methodWithDataObjectReturn(it => {new TestDataObject().setFoo("wasabi").setBar(6).setWibble(0.01)}))
+    assert("ok" == obj.methodWithDataObjectReturn(it => {TestDataObject(new JTestDataObject().setFoo("wasabi").setBar(6).setWibble(0.01))}))
   }
 
   "testEnumReturn" should "work" in {
@@ -173,18 +176,15 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testListReturn" should "work" in {
-    import collection.JavaConverters._
-    assert("ok" == obj.methodWithListReturn(it => {List("one", "two", "three").asJava}))
+    assert("ok" == obj.methodWithListReturn(it => {mutable.Buffer("one", "two", "three")}))
   }
 
   "testSetReturn" should "work" in {
-    import collection.JavaConverters._
-    assert("ok" == obj.methodWithSetReturn(it => {Set("one", "two", "three").asJava}))
+    assert("ok" == obj.methodWithSetReturn(it => {mutable.Set("one", "two", "three")}))
   }
 
   "testMapReturn" should "work" in {
-    import collection.JavaConverters._
-    assert("ok" == obj.methodWithMapReturn(it => {Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
+    assert("ok" == obj.methodWithMapReturn(it => {mutable.Map("one" -> "one", "two" -> "two", "three" -> "three")}))
   }
 
   "testGenericReturn" should "work" in {

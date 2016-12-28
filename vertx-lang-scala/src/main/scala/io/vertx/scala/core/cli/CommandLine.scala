@@ -52,19 +52,19 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def getOptionValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name)
+    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name.asInstanceOf[java.lang.String])
   }
 
   def getArgumentValue[T](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name)
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name.asInstanceOf[java.lang.String])
   }
 
   def getArgumentValue[T](index: Int):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index)
+    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index.asInstanceOf[java.lang.Integer])
   }
 
   def isFlagEnabled(name: String):Boolean = {
-    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name)
+    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name.asInstanceOf[java.lang.String])
   }
 
   def isOptionAssigned(option: Option):Boolean = {

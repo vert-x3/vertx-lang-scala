@@ -65,22 +65,22 @@ class HttpConnection(private val _asJava: Object) {
 
 //fluent methods
   def setWindowSize(windowSize: Int):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize)
+    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize.asInstanceOf[java.lang.Integer])
     this
   }
 
   def goAway(errorCode: Long):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode)
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long])
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId)
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer])
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int,debugData: Buffer):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer],debugData.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -100,7 +100,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def shutdown(timeoutMs: Long):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs)
+    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -159,13 +159,13 @@ class HttpConnection(private val _asJava: Object) {
   }
 
 //future methods
-  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
+def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
     promiseAndHandler._2.future

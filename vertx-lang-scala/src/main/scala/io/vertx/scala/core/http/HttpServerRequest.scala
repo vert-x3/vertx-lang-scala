@@ -160,7 +160,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def setExpectMultipart(expect: Boolean):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect)
+    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -213,11 +213,11 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def getHeader(headerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]))
   }
 
   def getParam(paramName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]))
   }
 
   def absoluteURI():String = {
@@ -229,7 +229,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def getFormAttribute(attributeName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]))
   }
 
   def upgrade():ServerWebSocket = {

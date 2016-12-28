@@ -72,7 +72,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JAsyncFile].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -87,12 +87,12 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def write(buffer: Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   def read(buffer: Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[Buffer]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
     this
   }
 
@@ -107,17 +107,17 @@ class AsyncFile(private val _asJava: Object)
   }
 
   def setReadPos(readPos: Long):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].setReadPos(readPos)
+    asJava.asInstanceOf[JAsyncFile].setReadPos(readPos.asInstanceOf[java.lang.Long])
     this
   }
 
   def setWritePos(writePos: Long):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].setWritePos(writePos)
+    asJava.asInstanceOf[JAsyncFile].setWritePos(writePos.asInstanceOf[java.lang.Long])
     this
   }
 
   def setReadBufferSize(readBufferSize: Int):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize)
+    asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -145,25 +145,25 @@ class AsyncFile(private val _asJava: Object)
   }
 
 //future methods
-  def closeFuture():scala.concurrent.Future[Unit] = {
+def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncFile].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
+def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
+def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def flushFuture():scala.concurrent.Future[Unit] = {
+def flushFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncFile].flush(promiseAndHandler._1)
     promiseAndHandler._2.future

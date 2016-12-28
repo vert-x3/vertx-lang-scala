@@ -49,7 +49,7 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
     * at the recipient.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 

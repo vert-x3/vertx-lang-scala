@@ -30,7 +30,7 @@ class RefedInterface1(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def setString(str: String):RefedInterface1 = {
-    asJava.asInstanceOf[JRefedInterface1].setString(str)
+    asJava.asInstanceOf[JRefedInterface1].setString(str.asInstanceOf[java.lang.String])
     this
   }
 

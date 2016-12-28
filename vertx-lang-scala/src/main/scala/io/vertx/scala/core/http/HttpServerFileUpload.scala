@@ -62,7 +62,7 @@ class HttpServerFileUpload(private val _asJava: Object)
   }
 
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename)
+    asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename.asInstanceOf[java.lang.String])
     this
   }
 

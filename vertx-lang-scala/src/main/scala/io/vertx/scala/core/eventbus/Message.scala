@@ -87,17 +87,17 @@ class Message[T](private val _asJava: Object) {
   }
 
   def fail(failureCode: Int,message: String):Unit = {
-    asJava.asInstanceOf[JMessage[T]].fail(failureCode,message)
+    asJava.asInstanceOf[JMessage[T]].fail(failureCode.asInstanceOf[java.lang.Integer],message.asInstanceOf[java.lang.String])
   }
 
 //future methods
-  def replyFuture[R](message: AnyRef):scala.concurrent.Future[Message[R]] = {
+def replyFuture[R](message: AnyRef):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessage[T]].reply[R](message,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def replyFuture[R](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
+def replyFuture[R](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
