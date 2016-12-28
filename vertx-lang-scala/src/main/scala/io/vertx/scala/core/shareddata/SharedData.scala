@@ -50,47 +50,47 @@ class SharedData(private val _asJava: Object) {
 //default methods
 //basic methods
   def getClusterWideMap[K, V](name: String,resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,{x: AsyncResult[JAsyncMap[K,V]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a)))})
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name.asInstanceOf[java.lang.String],{x: AsyncResult[JAsyncMap[K,V]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[K,V],AsyncMap[K, V]](x, a => AsyncMap[K,V](a)))})
   }
 
   def getLock(name: String,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLock(name,{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String],{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
   }
 
   def getLockWithTimeout(name: String,timeout: Long,resultHandler: Handler[AsyncResult[Lock]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String],timeout.asInstanceOf[java.lang.Long],{x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock,Lock](x, a => Lock(a)))})
   }
 
   def getCounter(name: String,resultHandler: Handler[AsyncResult[Counter]]):Unit = {
-    asJava.asInstanceOf[JSharedData].getCounter(name,{x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a)))})
+    asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String],{x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter,Counter](x, a => Counter(a)))})
   }
 
   def getLocalMap[K, V](name: String):LocalMap[K, V] = {
-    LocalMap[K,V](asJava.asInstanceOf[JSharedData].getLocalMap[K,V](name))
+    LocalMap[K,V](asJava.asInstanceOf[JSharedData].getLocalMap[K,V](name.asInstanceOf[java.lang.String]))
   }
 
 //future methods
-  def getClusterWideMapFuture[K, V](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
+def getClusterWideMapFuture[K, V](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[K,V], AsyncMap[K, V]](x => AsyncMap[K,V](x))
-    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,promiseAndHandler._1)
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
+def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
-    asJava.asInstanceOf[JSharedData].getLock(name,promiseAndHandler._1)
+    asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
+def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,promiseAndHandler._1)
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String],timeout.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
+def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => Counter(x))
-    asJava.asInstanceOf[JSharedData].getCounter(name,promiseAndHandler._1)
+    asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -78,7 +78,7 @@ class Context(private val _asJava: Object) {
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
+    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
@@ -110,15 +110,15 @@ class Context(private val _asJava: Object) {
   }
 
   def get[T](key: String):T = {
-    asJava.asInstanceOf[JContext].get[T](key)
+    asJava.asInstanceOf[JContext].get[T](key.asInstanceOf[java.lang.String])
   }
 
   def put(key: String,value: AnyRef):Unit = {
-    asJava.asInstanceOf[JContext].put(key,value)
+    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
   }
 
   def remove(key: String):Boolean = {
-    asJava.asInstanceOf[JContext].remove(key)
+    asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String])
   }
 
   def owner():Vertx = {
@@ -130,13 +130,13 @@ class Context(private val _asJava: Object) {
   }
 
 //future methods
-  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,promiseAndHandler._1)
+    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
     asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -85,7 +85,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
-    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[T]].setMaxBufferedMessages(maxBufferedMessages))
+    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[T]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
   }
 
   def getMaxBufferedMessages():Int = {
@@ -105,13 +105,13 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
 //future methods
-  def completionHandlerFuture():scala.concurrent.Future[Unit] = {
+def completionFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[T]].completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def unregisterFuture():scala.concurrent.Future[Unit] = {
+def unregisterFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[T]].unregister(promiseAndHandler._1)
     promiseAndHandler._2.future

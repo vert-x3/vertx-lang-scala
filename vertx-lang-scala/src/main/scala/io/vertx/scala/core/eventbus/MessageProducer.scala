@@ -50,7 +50,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -96,7 +96,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
 //future methods
-  def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
+def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessageProducer[T]].send[R](message,promiseAndHandler._1)
     promiseAndHandler._2.future

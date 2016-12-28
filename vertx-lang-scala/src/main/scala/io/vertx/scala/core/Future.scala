@@ -87,7 +87,7 @@ class Future[T](private val _asJava: Object) {
   }
 
   def fail(failureMessage: String):Unit = {
-    asJava.asInstanceOf[JFuture[T]].fail(failureMessage)
+    asJava.asInstanceOf[JFuture[T]].fail(failureMessage.asInstanceOf[java.lang.String])
   }
 
   def result():T = {
@@ -107,12 +107,6 @@ class Future[T](private val _asJava: Object) {
   }
 
 //future methods
-  def setHandlerFuture():scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
-    asJava.asInstanceOf[JFuture[T]].setHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
 }
 
   object Future{
@@ -135,7 +129,7 @@ class Future[T](private val _asJava: Object) {
     }
 
     def failedFuture[T](failureMessage: String):Future[T] = {
-      Future[T](JFuture.failedFuture[T](failureMessage))
+      Future[T](JFuture.failedFuture[T](failureMessage.asInstanceOf[java.lang.String]))
     }
 
   }

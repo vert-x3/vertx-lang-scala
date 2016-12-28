@@ -135,11 +135,11 @@ class HttpClientResponse(private val _asJava: Object)
   }
 
   def getHeader(headerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName))
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]))
   }
 
   def getTrailer(trailerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName))
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]))
   }
 
 //future methods

@@ -50,7 +50,7 @@ class Pump(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def setWriteQueueMaxSize(maxSize: Int):Pump = {
-    asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -81,7 +81,7 @@ class Pump(private val _asJava: Object) {
     }
 
     def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
-      Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize))
+      Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
     }
 
   }

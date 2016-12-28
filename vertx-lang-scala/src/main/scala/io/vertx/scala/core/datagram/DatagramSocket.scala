@@ -64,52 +64,52 @@ class DatagramSocket(private val _asJava: Object)
 
 //fluent methods
   def send(packet: Buffer,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port,host,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def send(str: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str,port,host,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def send(str: String,enc: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str,enc,port,host,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def listenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def unlistenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def blockMulticastGroup(multicastAddress: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,sourceToBlock,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def blockMulticastGroup(multicastAddress: String,networkInterface: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,networkInterface,sourceToBlock,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
   def listen(port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listen(port,host,{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -145,7 +145,7 @@ class DatagramSocket(private val _asJava: Object)
   }
 
   def sender(port: Int,host: String):PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JDatagramSocket].sender(port,host))
+    PacketWritestream(asJava.asInstanceOf[JDatagramSocket].sender(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String]))
   }
 
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
@@ -157,69 +157,69 @@ class DatagramSocket(private val _asJava: Object)
   }
 
 //future methods
-  def sendFuture(packet: Buffer,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
+def sendFuture(packet: Buffer,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port,host,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].send(packet.asJava.asInstanceOf[JBuffer],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def sendFuture(str: String,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
+def sendFuture(str: String,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].send(str,port,host,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def sendFuture(str: String,enc: String,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
+def sendFuture(str: String,enc: String,port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].send(str,enc,port,host,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def closeFuture():scala.concurrent.Future[Unit] = {
+def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JDatagramSocket].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenMulticastGroupFuture(multicastAddress: String):scala.concurrent.Future[DatagramSocket] = {
+def listenMulticastGroupFuture(multicastAddress: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenMulticastGroupFuture(multicastAddress: String,networkInterface: String,source: scala.Option[String]):scala.concurrent.Future[DatagramSocket] = {
+def listenMulticastGroupFuture(multicastAddress: String,networkInterface: String,source: scala.Option[String]):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def unlistenMulticastGroupFuture(multicastAddress: String):scala.concurrent.Future[DatagramSocket] = {
+def unlistenMulticastGroupFuture(multicastAddress: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def unlistenMulticastGroupFuture(multicastAddress: String,networkInterface: String,source: scala.Option[String]):scala.concurrent.Future[DatagramSocket] = {
+def unlistenMulticastGroupFuture(multicastAddress: String,networkInterface: String,source: scala.Option[String]):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress,networkInterface,source.map(x => x).getOrElse(null),promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def blockMulticastGroupFuture(multicastAddress: String,sourceToBlock: String):scala.concurrent.Future[DatagramSocket] = {
+def blockMulticastGroupFuture(multicastAddress: String,sourceToBlock: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,sourceToBlock,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def blockMulticastGroupFuture(multicastAddress: String,networkInterface: String,sourceToBlock: String):scala.concurrent.Future[DatagramSocket] = {
+def blockMulticastGroupFuture(multicastAddress: String,networkInterface: String,sourceToBlock: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress,networkInterface,sourceToBlock,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenFuture(port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
+def listenFuture(port: Int,host: String):scala.concurrent.Future[DatagramSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JDatagramSocket, DatagramSocket](x => DatagramSocket(x))
-    asJava.asInstanceOf[JDatagramSocket].listen(port,host,promiseAndHandler._1)
+    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

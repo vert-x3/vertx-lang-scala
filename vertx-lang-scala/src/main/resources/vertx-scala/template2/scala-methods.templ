@@ -163,4 +163,17 @@
     ret.remove(params.size - 1);
     return ret;
   }
+
+  /**
+   * Some method names require special treatment when used in lang-scala. e.g. we have to convert the name
+   * of methods where the original version gets replaced with one returning a scala.Future.
+   */
+  def createNameForMethodReturningAFuture(method) {
+    var methodName = method.name;
+    if (methodName.endsWith('Handler')) {
+      methodName = methodName.substring(0, methodName.length-7);
+    }
+    methodName += 'Future';
+    return escapeIfKeyword(methodName);
+  }
 }

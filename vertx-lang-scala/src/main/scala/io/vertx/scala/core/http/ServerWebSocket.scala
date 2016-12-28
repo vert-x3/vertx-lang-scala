@@ -101,7 +101,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -116,7 +116,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def writeFinalTextFrame(text: String):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text)
+    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 

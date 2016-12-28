@@ -31,7 +31,7 @@ class InterfaceWithStringArg(private val _asJava: Object)
 //cached methods
 //fluent methods
   override def setValue(value: String):GenericRefedInterface[String] = {
-    asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value)
+    asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value.asInstanceOf[java.lang.String])
     this
   }
 

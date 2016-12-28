@@ -86,22 +86,22 @@ class HttpServer(private val _asJava: Object)
   }
 
   def listen(port: Int,host: String):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port,host)
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
   }
 
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port,host,{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
   }
 
   def listen(port: Int):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port)
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer])
     this
   }
 
   def listen(port: Int,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port,{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
   }
 
@@ -129,25 +129,25 @@ class HttpServer(private val _asJava: Object)
   }
 
 //future methods
-  def listenFuture(port: Int,host: String):scala.concurrent.Future[HttpServer] = {
+def listenFuture(port: Int,host: String):scala.concurrent.Future[HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
-    asJava.asInstanceOf[JHttpServer].listen(port,host,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenFuture(port: Int):scala.concurrent.Future[HttpServer] = {
+def listenFuture(port: Int):scala.concurrent.Future[HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
-    asJava.asInstanceOf[JHttpServer].listen(port,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenFuture():scala.concurrent.Future[HttpServer] = {
+def listenFuture():scala.concurrent.Future[HttpServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
     asJava.asInstanceOf[JHttpServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def closeFuture():scala.concurrent.Future[Unit] = {
+def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

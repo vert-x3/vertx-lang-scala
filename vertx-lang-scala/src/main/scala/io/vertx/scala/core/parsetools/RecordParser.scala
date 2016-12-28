@@ -69,7 +69,7 @@ class RecordParser(private val _asJava: Object)
   }
 
   def delimitedMode(delim: String):Unit = {
-    asJava.asInstanceOf[JRecordParser].delimitedMode(delim)
+    asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asInstanceOf[java.lang.String])
   }
 
   def delimitedMode(delim: Buffer):Unit = {
@@ -77,7 +77,7 @@ class RecordParser(private val _asJava: Object)
   }
 
   def fixedSizeMode(size: Int):Unit = {
-    asJava.asInstanceOf[JRecordParser].fixedSizeMode(size)
+    asJava.asInstanceOf[JRecordParser].fixedSizeMode(size.asInstanceOf[java.lang.Integer])
   }
 
   def handle(buffer: Buffer):Unit = {
@@ -91,7 +91,7 @@ class RecordParser(private val _asJava: Object)
     def apply(asJava: JRecordParser) = new RecordParser(asJava)  
   //static methods
     def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
-      RecordParser(JRecordParser.newDelimited(delim,{x: JBuffer => output.handle(Buffer(x))}))
+      RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: JBuffer => output.handle(Buffer(x))}))
     }
 
     def newDelimited(delim: Buffer,output: Handler[Buffer]):RecordParser = {
@@ -99,7 +99,7 @@ class RecordParser(private val _asJava: Object)
     }
 
     def newFixed(size: Int,output: Handler[Buffer]):RecordParser = {
-      RecordParser(JRecordParser.newFixed(size,{x: JBuffer => output.handle(Buffer(x))}))
+      RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer],{x: JBuffer => output.handle(Buffer(x))}))
     }
 
   }

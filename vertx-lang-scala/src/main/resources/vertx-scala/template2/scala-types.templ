@@ -74,10 +74,10 @@
         }
       } else if (type.kind == CLASS_MAP){
         if(nullable) {
-          return 'scala.Option(' + name + ').map(_.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +'))';
+          return 'scala.Option(' + name + ').map(_.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) +'))';
         }
         else {
-          return name + '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+          return name + '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) +')';
         }
       }
     }
@@ -99,9 +99,28 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      var ret = name;
+      var typeName = type.name;
+      if (type.name == 'byte') {
+        typeName = 'java.lang.Byte';
+      } else if (type.name == 'short') {
+        typeName = 'java.lang.Short';
+      } else if (type.name == 'int') {
+        typeName = 'java.lang.Integer';
+      } else if (type.name == 'long') {
+        typeName = 'java.lang.Long';
+      } else if (type.name == 'float') {
+        typeName = 'java.lang.Float';
+      } else if (type.name == 'double') {
+        typeName = 'java.lang.Double';
+      } else if (type.name == 'boolean') {
+        typeName = 'java.lang.Boolean';
+      } else if (type.name == 'char') {
+        typeName = 'java.lang.Character';
+      }
+
+      var ret = name + '.asInstanceOf[' + typeName + ']';
       if(nullable)
-        ret = name + '.map(x => x).getOrElse(null)';
+        ret = name + '.map(x => x.asInstanceOf[' + typeName + ']).getOrElse(null)';
       return ret;
     } else if (type.kind == CLASS_THROWABLE) {
       var ret = name;
@@ -146,7 +165,7 @@
       } else if (type.kind == CLASS_SET){
         ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
       } else if (type.kind == CLASS_MAP){
-        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[1], typeParams, methodTypeParams) +')';
       }
       ret += '.asJava';
       if(nullable)
@@ -276,9 +295,9 @@
           ret += '[' + toScalaType(type.args[0]) + ']';
         return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_MAP){
-        var ret = 'Map';
+        var ret = 'scala.collection.mutable.Map';
         if (!type.args.isEmpty())
-          ret = 'Map[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
+          ret += '[' + toScalaType(type.args[0]) + ', ' + toScalaType(type.args[1]) + ']';
         return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_HANDLER) {
       return "Handler[" + toScalaType(type.args[0]) + "]";
@@ -369,8 +388,8 @@
       ret += '[' + toScalaType(info.type) + ']';
       return ret;
     } else if (info.kind.isMap){
-      var ret = 'Map';
-      ret = 'Map[String, ' + toScalaType(info.type) + ']';
+      var ret = 'scala.collection.mutable.Map';
+      ret += '[String, ' + toScalaType(info.type) + ']';
       return ret;
     }
     return "UNKOWN PROPERTY TYPE";

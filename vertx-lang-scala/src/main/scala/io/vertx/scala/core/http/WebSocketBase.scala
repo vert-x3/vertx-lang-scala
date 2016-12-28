@@ -146,7 +146,7 @@ trait WebSocketBase
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -161,7 +161,7 @@ trait WebSocketBase
   }
 
   def writeFinalTextFrame(text: String):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text)
+    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 

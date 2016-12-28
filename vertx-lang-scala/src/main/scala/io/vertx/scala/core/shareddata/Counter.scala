@@ -53,57 +53,57 @@ class Counter(private val _asJava: Object) {
   }
 
   def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].addAndGet(value,{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
+    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
-    asJava.asInstanceOf[JCounter].getAndAdd(value,{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
+    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a))})
   }
 
   def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
+    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
   }
 
 //future methods
-  def getFuture():scala.concurrent.Future[Long] = {
+def getFuture():scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
     asJava.asInstanceOf[JCounter].get(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def incrementAndGetFuture():scala.concurrent.Future[Long] = {
+def incrementAndGetFuture():scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
     asJava.asInstanceOf[JCounter].incrementAndGet(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getAndIncrementFuture():scala.concurrent.Future[Long] = {
+def getAndIncrementFuture():scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
     asJava.asInstanceOf[JCounter].getAndIncrement(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def decrementAndGetFuture():scala.concurrent.Future[Long] = {
+def decrementAndGetFuture():scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
     asJava.asInstanceOf[JCounter].decrementAndGet(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def addAndGetFuture(value: Long):scala.concurrent.Future[Long] = {
+def addAndGetFuture(value: Long):scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
-    asJava.asInstanceOf[JCounter].addAndGet(value,promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getAndAddFuture(value: Long):scala.concurrent.Future[Long] = {
+def getAndAddFuture(value: Long):scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
-    asJava.asInstanceOf[JCounter].getAndAdd(value,promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def compareAndSetFuture(expected: Long,value: Long):scala.concurrent.Future[Boolean] = {
+def compareAndSetFuture(expected: Long,value: Long):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
-    asJava.asInstanceOf[JCounter].compareAndSet(expected,value,promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

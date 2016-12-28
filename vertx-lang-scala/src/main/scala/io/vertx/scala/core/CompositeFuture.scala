@@ -76,23 +76,23 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   def cause(index: Int):Throwable = {
-    asJava.asInstanceOf[JCompositeFuture].cause(index)
+    asJava.asInstanceOf[JCompositeFuture].cause(index.asInstanceOf[java.lang.Integer])
   }
 
   def succeeded(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].succeeded(index)
+    asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer])
   }
 
   def failed(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].failed(index)
+    asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer])
   }
 
   def isComplete(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].isComplete(index)
+    asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer])
   }
 
   def resultAt[T](index: Int):T = {
-    asJava.asInstanceOf[JCompositeFuture].resultAt[T](index)
+    asJava.asInstanceOf[JCompositeFuture].resultAt[T](index.asInstanceOf[java.lang.Integer])
   }
 
   def size():Int = {
@@ -100,12 +100,6 @@ class CompositeFuture(private val _asJava: Object)
   }
 
 //future methods
-  override def setHandlerFuture():scala.concurrent.Future[CompositeFuture] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JCompositeFuture, CompositeFuture](x => CompositeFuture(x))
-    asJava.asInstanceOf[JCompositeFuture].setHandler(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
 }
 
   object CompositeFuture{

@@ -99,7 +99,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JHttpClientRequest].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -129,32 +129,32 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def setChunked(chunked: Boolean):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked)
+    asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked.asInstanceOf[java.lang.Boolean])
     this
   }
 
   def setRawMethod(method: String):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method)
+    asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method.asInstanceOf[java.lang.String])
     this
   }
 
   def setHost(host: String):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].setHost(host)
+    asJava.asInstanceOf[JHttpClientRequest].setHost(host.asInstanceOf[java.lang.String])
     this
   }
 
   def putHeader(name: String,value: String):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].putHeader(name,value)
+    asJava.asInstanceOf[JHttpClientRequest].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
 
   def write(chunk: String):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(chunk)
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String])
     this
   }
 
   def write(chunk: String,enc: String):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(chunk,enc)
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
     this
   }
 
@@ -174,7 +174,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def setTimeout(timeoutMs: Long):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs)
+    asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -189,7 +189,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`,flags,payload.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer],flags.asInstanceOf[java.lang.Integer],payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -243,11 +243,11 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def end(chunk: String):Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk)
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String])
   }
 
   def end(chunk: String,enc: String):Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk,enc)
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
   }
 
   override def end(chunk: Buffer):Unit = {
@@ -259,7 +259,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def reset(code: Long):Boolean = {
-    asJava.asInstanceOf[JHttpClientRequest].reset(code)
+    asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long])
   }
 
 //future methods
