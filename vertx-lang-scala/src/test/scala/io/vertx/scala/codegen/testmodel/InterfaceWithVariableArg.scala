@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
@@ -48,6 +49,7 @@ class InterfaceWithVariableArg[T,U](private val _asJava: Object)
     asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].getOtherValue()
   }
 
+//future methods
 }
 
   object InterfaceWithVariableArg{

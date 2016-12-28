@@ -18,6 +18,7 @@ package io.vertx.scala.core.streams
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -93,5 +94,6 @@ trait WriteStream[T]
     asJava.asInstanceOf[JWriteStream[T]].writeQueueFull()
   }
 
+//future methods
 }
   }

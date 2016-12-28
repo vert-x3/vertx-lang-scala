@@ -18,6 +18,7 @@ package com.acme.scala.pkg.sub
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**
@@ -34,6 +35,7 @@ class SubInterface(private val _asJava: Object) {
     asJava.asInstanceOf[JSubInterface].reverse(s)
   }
 
+//future methods
 }
 
   object SubInterface{

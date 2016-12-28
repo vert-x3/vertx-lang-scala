@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
@@ -39,6 +40,7 @@ class RefedInterface1(private val _asJava: Object) {
     asJava.asInstanceOf[JRefedInterface1].getString()
   }
 
+//future methods
 }
 
   object RefedInterface1{

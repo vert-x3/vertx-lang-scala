@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
@@ -103,6 +104,13 @@ class Future[T](private val _asJava: Object) {
 
   def failed():Boolean = {
     asJava.asInstanceOf[JFuture[T]].failed()
+  }
+
+//future methods
+  def setHandlerFuture():scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JFuture[T]].setHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

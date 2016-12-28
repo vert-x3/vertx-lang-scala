@@ -18,6 +18,7 @@ package io.vertx.scala.core.shareddata
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{Lock => JLock}
 
 /**
@@ -38,6 +39,7 @@ class Lock(private val _asJava: Object) {
     asJava.asInstanceOf[JLock].release()
   }
 
+//future methods
 }
 
   object Lock{

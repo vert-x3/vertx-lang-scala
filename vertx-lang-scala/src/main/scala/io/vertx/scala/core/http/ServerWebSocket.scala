@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
@@ -182,6 +183,7 @@ class ServerWebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
 
+//future methods
 }
 
   object ServerWebSocket{

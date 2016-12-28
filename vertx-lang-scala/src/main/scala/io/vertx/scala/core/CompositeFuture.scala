@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{CompositeFuture => JCompositeFuture}
@@ -96,6 +97,13 @@ class CompositeFuture(private val _asJava: Object)
 
   def size():Int = {
     asJava.asInstanceOf[JCompositeFuture].size()
+  }
+
+//future methods
+  override def setHandlerFuture():scala.concurrent.Future[CompositeFuture] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JCompositeFuture, CompositeFuture](x => CompositeFuture(x))
+    asJava.asInstanceOf[JCompositeFuture].setHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

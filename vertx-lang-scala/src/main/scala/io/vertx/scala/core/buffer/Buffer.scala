@@ -18,6 +18,7 @@ package io.vertx.scala.core.buffer
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.json.JsonObject
@@ -354,6 +355,7 @@ class Buffer(private val _asJava: Object) {
     Buffer(asJava.asInstanceOf[JBuffer].slice(start,end))
   }
 
+//future methods
 }
 
   object Buffer{
