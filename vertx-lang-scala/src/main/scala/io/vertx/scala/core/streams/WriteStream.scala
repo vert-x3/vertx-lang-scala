@@ -91,7 +91,7 @@ trait WriteStream[T]
   }
 
   def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull()
+    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 
 //future methods

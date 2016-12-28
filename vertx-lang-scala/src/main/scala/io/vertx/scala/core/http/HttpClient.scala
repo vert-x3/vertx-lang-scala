@@ -233,7 +233,7 @@ class HttpClient(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JHttpClient].isMetricsEnabled()
+    asJava.asInstanceOf[JHttpClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String):HttpClientRequest = {

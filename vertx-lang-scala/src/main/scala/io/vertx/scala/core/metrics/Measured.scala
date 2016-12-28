@@ -42,7 +42,7 @@ trait Measured {
 //default methods
 //basic methods
   def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JMeasured].isMetricsEnabled()
+    asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
 //future methods

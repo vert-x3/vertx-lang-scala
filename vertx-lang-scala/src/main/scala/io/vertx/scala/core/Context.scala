@@ -86,7 +86,7 @@ class Context(private val _asJava: Object) {
   }
 
   def deploymentID():String = {
-    asJava.asInstanceOf[JContext].deploymentID()
+    asJava.asInstanceOf[JContext].deploymentID().asInstanceOf[String]
   }
 
   def config():scala.Option[io.vertx.core.json.JsonObject] = {
@@ -94,19 +94,19 @@ class Context(private val _asJava: Object) {
   }
 
   def processArgs():scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JContext].processArgs().asScala.map(x => x)
+    asJava.asInstanceOf[JContext].processArgs().asScala.map(x => x.asInstanceOf[String])
   }
 
   def isEventLoopContext():Boolean = {
-    asJava.asInstanceOf[JContext].isEventLoopContext()
+    asJava.asInstanceOf[JContext].isEventLoopContext().asInstanceOf[Boolean]
   }
 
   def isWorkerContext():Boolean = {
-    asJava.asInstanceOf[JContext].isWorkerContext()
+    asJava.asInstanceOf[JContext].isWorkerContext().asInstanceOf[Boolean]
   }
 
   def isMultiThreadedWorkerContext():Boolean = {
-    asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext()
+    asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext().asInstanceOf[Boolean]
   }
 
   def get[T](key: String):T = {
@@ -118,7 +118,7 @@ class Context(private val _asJava: Object) {
   }
 
   def remove(key: String):Boolean = {
-    asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   def owner():Vertx = {
@@ -126,7 +126,7 @@ class Context(private val _asJava: Object) {
   }
 
   def getInstanceCount():Int = {
-    asJava.asInstanceOf[JContext].getInstanceCount()
+    asJava.asInstanceOf[JContext].getInstanceCount().asInstanceOf[Int]
   }
 
 //future methods
@@ -148,15 +148,15 @@ def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.conc
     def apply(asJava: JContext) = new Context(asJava)  
   //static methods
     def isOnWorkerThread():Boolean = {
-      JContext.isOnWorkerThread()
+      JContext.isOnWorkerThread().asInstanceOf[Boolean]
     }
 
     def isOnEventLoopThread():Boolean = {
-      JContext.isOnEventLoopThread()
+      JContext.isOnEventLoopThread().asInstanceOf[Boolean]
     }
 
     def isOnVertxThread():Boolean = {
-      JContext.isOnVertxThread()
+      JContext.isOnVertxThread().asInstanceOf[Boolean]
     }
 
   }

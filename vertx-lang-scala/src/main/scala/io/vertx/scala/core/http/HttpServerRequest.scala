@@ -185,51 +185,51 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def rawMethod():String = {
-    asJava.asInstanceOf[JHttpServerRequest].rawMethod()
+    asJava.asInstanceOf[JHttpServerRequest].rawMethod().asInstanceOf[String]
   }
 
   def isSSL():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isSSL()
+    asJava.asInstanceOf[JHttpServerRequest].isSSL().asInstanceOf[Boolean]
   }
 
   def scheme():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme())
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme().asInstanceOf[ String])
   }
 
   def uri():String = {
-    asJava.asInstanceOf[JHttpServerRequest].uri()
+    asJava.asInstanceOf[JHttpServerRequest].uri().asInstanceOf[String]
   }
 
   def path():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path())
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path().asInstanceOf[ String])
   }
 
   def query():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query())
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query().asInstanceOf[ String])
   }
 
   def host():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host())
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host().asInstanceOf[ String])
   }
 
   def getHeader(headerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[ String])
   }
 
   def getParam(paramName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]).asInstanceOf[ String])
   }
 
   def absoluteURI():String = {
-    asJava.asInstanceOf[JHttpServerRequest].absoluteURI()
+    asJava.asInstanceOf[JHttpServerRequest].absoluteURI().asInstanceOf[String]
   }
 
   def isExpectMultipart():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart()
+    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart().asInstanceOf[Boolean]
   }
 
   def getFormAttribute(attributeName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]).asInstanceOf[ String])
   }
 
   def upgrade():ServerWebSocket = {
@@ -237,7 +237,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def isEnded():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isEnded()
+    asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
 //future methods

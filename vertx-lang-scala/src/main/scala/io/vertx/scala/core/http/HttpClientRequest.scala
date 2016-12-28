@@ -201,21 +201,21 @@ class HttpClientRequest(private val _asJava: Object)
 //default methods
   //io.vertx.core.http.HttpClientRequest
   def reset():Boolean = {
-    asJava.asInstanceOf[JHttpClientRequest].reset()
+    asJava.asInstanceOf[JHttpClientRequest].reset().asInstanceOf[Boolean]
   }
 
   //io.vertx.core.http.HttpClientRequest
   def streamId():Int = {
-    asJava.asInstanceOf[JHttpClientRequest].streamId()
+    asJava.asInstanceOf[JHttpClientRequest].streamId().asInstanceOf[Int]
   }
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JHttpClientRequest].writeQueueFull()
+    asJava.asInstanceOf[JHttpClientRequest].writeQueueFull().asInstanceOf[Boolean]
   }
 
   def isChunked():Boolean = {
-    asJava.asInstanceOf[JHttpClientRequest].isChunked()
+    asJava.asInstanceOf[JHttpClientRequest].isChunked().asInstanceOf[Boolean]
   }
 
   def method():io.vertx.core.http.HttpMethod = {
@@ -223,23 +223,23 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def getRawMethod():String = {
-    asJava.asInstanceOf[JHttpClientRequest].getRawMethod()
+    asJava.asInstanceOf[JHttpClientRequest].getRawMethod().asInstanceOf[String]
   }
 
   def uri():String = {
-    asJava.asInstanceOf[JHttpClientRequest].uri()
+    asJava.asInstanceOf[JHttpClientRequest].uri().asInstanceOf[String]
   }
 
   def path():String = {
-    asJava.asInstanceOf[JHttpClientRequest].path()
+    asJava.asInstanceOf[JHttpClientRequest].path().asInstanceOf[String]
   }
 
   def query():String = {
-    asJava.asInstanceOf[JHttpClientRequest].query()
+    asJava.asInstanceOf[JHttpClientRequest].query().asInstanceOf[String]
   }
 
   def getHost():String = {
-    asJava.asInstanceOf[JHttpClientRequest].getHost()
+    asJava.asInstanceOf[JHttpClientRequest].getHost().asInstanceOf[String]
   }
 
   def end(chunk: String):Unit = {
@@ -259,7 +259,7 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
   def reset(code: Long):Boolean = {
-    asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long])
+    asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
 //future methods

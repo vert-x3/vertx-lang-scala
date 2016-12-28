@@ -129,7 +129,7 @@ class AsyncFile(private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JAsyncFile].writeQueueFull()
+    asJava.asInstanceOf[JAsyncFile].writeQueueFull().asInstanceOf[Boolean]
   }
 
   override def end():Unit = {

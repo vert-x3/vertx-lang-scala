@@ -134,15 +134,15 @@ class WebSocket(private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JWebSocket].writeQueueFull()
+    asJava.asInstanceOf[JWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
   override def binaryHandlerID():String = {
-    asJava.asInstanceOf[JWebSocket].binaryHandlerID()
+    asJava.asInstanceOf[JWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
   override def textHandlerID():String = {
-    asJava.asInstanceOf[JWebSocket].textHandlerID()
+    asJava.asInstanceOf[JWebSocket].textHandlerID().asInstanceOf[String]
   }
 
   override def end():Unit = {

@@ -45,7 +45,7 @@ class TimeoutStream(private val _asJava: Object)
   }
 
   override def handler(handler: Handler[Long]):TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x)})
+    asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x.asInstanceOf[Long])})
     this
   }
 

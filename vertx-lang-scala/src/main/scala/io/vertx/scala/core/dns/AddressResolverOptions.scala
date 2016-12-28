@@ -40,7 +40,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getCacheMaxTimeToLive: Int = {
-    asJava.getCacheMaxTimeToLive()
+    asJava.getCacheMaxTimeToLive().asInstanceOf[Int]
   }
 
   /**
@@ -52,7 +52,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getCacheMinTimeToLive: Int = {
-    asJava.getCacheMinTimeToLive()
+    asJava.getCacheMinTimeToLive().asInstanceOf[Int]
   }
 
   /**
@@ -65,7 +65,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getCacheNegativeTimeToLive: Int = {
-    asJava.getCacheNegativeTimeToLive()
+    asJava.getCacheNegativeTimeToLive().asInstanceOf[Int]
   }
 
   /**
@@ -78,7 +78,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getHostsPath: String = {
-    asJava.getHostsPath()
+    asJava.getHostsPath().asInstanceOf[String]
   }
 
   /**
@@ -104,7 +104,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getMaxQueries: Int = {
-    asJava.getMaxQueries()
+    asJava.getMaxQueries().asInstanceOf[Int]
   }
 
   /**
@@ -116,7 +116,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getNdots: Int = {
-    asJava.getNdots()
+    asJava.getNdots().asInstanceOf[Int]
   }
 
   /**
@@ -128,7 +128,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def isOptResourceEnabled: Boolean = {
-    asJava.isOptResourceEnabled()
+    asJava.isOptResourceEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -139,7 +139,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getQueryTimeout: Long = {
-    asJava.getQueryTimeout()
+    asJava.getQueryTimeout().asInstanceOf[Long]
   }
 
   /**
@@ -150,7 +150,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getRdFlag: Boolean = {
-    asJava.getRdFlag()
+    asJava.getRdFlag().asInstanceOf[Boolean]
   }
 
   /**
@@ -168,7 +168,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getSearchDomains: scala.collection.mutable.Buffer[String] = {
-    asJava.getSearchDomains().asScala.map(x => x)
+    asJava.getSearchDomains().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -186,7 +186,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def getServers: scala.collection.mutable.Buffer[String] = {
-    asJava.getServers().asScala.map(x => x)
+    asJava.getServers().asScala.map(x => x.asInstanceOf[String])
   }
 }
 

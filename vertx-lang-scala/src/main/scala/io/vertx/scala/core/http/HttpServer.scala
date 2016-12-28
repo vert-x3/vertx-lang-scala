@@ -113,7 +113,7 @@ class HttpServer(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JHttpServer].isMetricsEnabled()
+    asJava.asInstanceOf[JHttpServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def close():Unit = {
@@ -125,7 +125,7 @@ class HttpServer(private val _asJava: Object)
   }
 
   def actualPort():Int = {
-    asJava.asInstanceOf[JHttpServer].actualPort()
+    asJava.asInstanceOf[JHttpServer].actualPort().asInstanceOf[Int]
   }
 
 //future methods

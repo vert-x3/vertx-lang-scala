@@ -49,7 +49,7 @@ trait RefedInterface2 {
 //default methods
 //basic methods
   def getString():String = {
-    asJava.asInstanceOf[JRefedInterface2].getString()
+    asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 
 //future methods

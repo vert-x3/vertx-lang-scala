@@ -148,15 +148,15 @@ class ServerWebSocket(private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JServerWebSocket].writeQueueFull()
+    asJava.asInstanceOf[JServerWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
   override def binaryHandlerID():String = {
-    asJava.asInstanceOf[JServerWebSocket].binaryHandlerID()
+    asJava.asInstanceOf[JServerWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
   override def textHandlerID():String = {
-    asJava.asInstanceOf[JServerWebSocket].textHandlerID()
+    asJava.asInstanceOf[JServerWebSocket].textHandlerID().asInstanceOf[String]
   }
 
   override def end():Unit = {
@@ -168,15 +168,15 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   def uri():String = {
-    asJava.asInstanceOf[JServerWebSocket].uri()
+    asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }
 
   def path():String = {
-    asJava.asInstanceOf[JServerWebSocket].path()
+    asJava.asInstanceOf[JServerWebSocket].path().asInstanceOf[String]
   }
 
   def query():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JServerWebSocket].query())
+    scala.Option(asJava.asInstanceOf[JServerWebSocket].query().asInstanceOf[ String])
   }
 
   def reject():Unit = {

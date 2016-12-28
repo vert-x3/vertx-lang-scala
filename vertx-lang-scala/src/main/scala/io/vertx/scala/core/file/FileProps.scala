@@ -34,35 +34,35 @@ class FileProps(private val _asJava: Object) {
 //default methods
 //basic methods
   def creationTime():Long = {
-    asJava.asInstanceOf[JFileProps].creationTime()
+    asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
   def lastAccessTime():Long = {
-    asJava.asInstanceOf[JFileProps].lastAccessTime()
+    asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
   def lastModifiedTime():Long = {
-    asJava.asInstanceOf[JFileProps].lastModifiedTime()
+    asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
   def isDirectory():Boolean = {
-    asJava.asInstanceOf[JFileProps].isDirectory()
+    asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
   def isOther():Boolean = {
-    asJava.asInstanceOf[JFileProps].isOther()
+    asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
   def isRegularFile():Boolean = {
-    asJava.asInstanceOf[JFileProps].isRegularFile()
+    asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
   def isSymbolicLink():Boolean = {
-    asJava.asInstanceOf[JFileProps].isSymbolicLink()
+    asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
   def size():Long = {
-    asJava.asInstanceOf[JFileProps].size()
+    asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 
 //future methods

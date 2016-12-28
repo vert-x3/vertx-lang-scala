@@ -53,7 +53,7 @@ class WorkerExecutor(private val _asJava: Object)
 
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled()
+    asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {

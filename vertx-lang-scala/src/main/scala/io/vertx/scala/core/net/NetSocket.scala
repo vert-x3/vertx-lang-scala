@@ -166,11 +166,11 @@ class NetSocket(private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JNetSocket].writeQueueFull()
+    asJava.asInstanceOf[JNetSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
   def writeHandlerID():String = {
-    asJava.asInstanceOf[JNetSocket].writeHandlerID()
+    asJava.asInstanceOf[JNetSocket].writeHandlerID().asInstanceOf[String]
   }
 
   override def end():Unit = {
@@ -182,7 +182,7 @@ class NetSocket(private val _asJava: Object)
   }
 
   def isSsl():Boolean = {
-    asJava.asInstanceOf[JNetSocket].isSsl()
+    asJava.asInstanceOf[JNetSocket].isSsl().asInstanceOf[Boolean]
   }
 
 //future methods

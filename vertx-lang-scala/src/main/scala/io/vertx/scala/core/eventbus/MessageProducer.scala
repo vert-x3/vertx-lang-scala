@@ -72,7 +72,7 @@ class MessageProducer[T](private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull()
+    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 
   def send(message: T):MessageProducer[T] = {
@@ -84,7 +84,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   def address():String = {
-    asJava.asInstanceOf[JMessageProducer[T]].address()
+    asJava.asInstanceOf[JMessageProducer[T]].address().asInstanceOf[String]
   }
 
   override def end():Unit = {

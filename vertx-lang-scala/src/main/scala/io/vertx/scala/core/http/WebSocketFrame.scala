@@ -43,7 +43,7 @@ class WebSocketFrame(private val _asJava: Object) {
   def textData():String = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
-      cached_0 = tmp
+      cached_0 = tmp.asInstanceOf[String]
     }
     cached_0
   }
@@ -60,19 +60,19 @@ class WebSocketFrame(private val _asJava: Object) {
 //default methods
 //basic methods
   def isText():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isText()
+    asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
   def isBinary():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isBinary()
+    asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
   def isContinuation():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isContinuation()
+    asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
   def isFinal():Boolean = {
-    asJava.asInstanceOf[JWebSocketFrame].isFinal()
+    asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
 //future methods

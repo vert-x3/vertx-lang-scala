@@ -210,19 +210,19 @@ class HttpServerResponse(private val _asJava: Object)
 
 //basic methods
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JHttpServerResponse].writeQueueFull()
+    asJava.asInstanceOf[JHttpServerResponse].writeQueueFull().asInstanceOf[Boolean]
   }
 
   def getStatusCode():Int = {
-    asJava.asInstanceOf[JHttpServerResponse].getStatusCode()
+    asJava.asInstanceOf[JHttpServerResponse].getStatusCode().asInstanceOf[Int]
   }
 
   def getStatusMessage():String = {
-    asJava.asInstanceOf[JHttpServerResponse].getStatusMessage()
+    asJava.asInstanceOf[JHttpServerResponse].getStatusMessage().asInstanceOf[String]
   }
 
   def isChunked():Boolean = {
-    asJava.asInstanceOf[JHttpServerResponse].isChunked()
+    asJava.asInstanceOf[JHttpServerResponse].isChunked().asInstanceOf[Boolean]
   }
 
   def end(chunk: String):Unit = {
@@ -246,23 +246,23 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   def ended():Boolean = {
-    asJava.asInstanceOf[JHttpServerResponse].ended()
+    asJava.asInstanceOf[JHttpServerResponse].ended().asInstanceOf[Boolean]
   }
 
   def closed():Boolean = {
-    asJava.asInstanceOf[JHttpServerResponse].closed()
+    asJava.asInstanceOf[JHttpServerResponse].closed().asInstanceOf[Boolean]
   }
 
   def headWritten():Boolean = {
-    asJava.asInstanceOf[JHttpServerResponse].headWritten()
+    asJava.asInstanceOf[JHttpServerResponse].headWritten().asInstanceOf[Boolean]
   }
 
   def bytesWritten():Long = {
-    asJava.asInstanceOf[JHttpServerResponse].bytesWritten()
+    asJava.asInstanceOf[JHttpServerResponse].bytesWritten().asInstanceOf[Long]
   }
 
   def streamId():Int = {
-    asJava.asInstanceOf[JHttpServerResponse].streamId()
+    asJava.asInstanceOf[JHttpServerResponse].streamId().asInstanceOf[Int]
   }
 
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {

@@ -80,15 +80,15 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   def succeeded(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
   def failed(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
   def isComplete(index: Int):Boolean = {
-    asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
   def resultAt[T](index: Int):T = {
@@ -96,7 +96,7 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   def size():Int = {
-    asJava.asInstanceOf[JCompositeFuture].size()
+    asJava.asInstanceOf[JCompositeFuture].size().asInstanceOf[Int]
   }
 
 //future methods
