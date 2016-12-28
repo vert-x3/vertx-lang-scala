@@ -81,7 +81,7 @@ class EventBus(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JEventBus].isMetricsEnabled()
+    asJava.asInstanceOf[JEventBus].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def consumer[T](address: String):MessageConsumer[T] = {

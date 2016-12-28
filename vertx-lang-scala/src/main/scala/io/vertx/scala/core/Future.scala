@@ -71,7 +71,7 @@ class Future[T](private val _asJava: Object) {
 
 //basic methods
   def isComplete():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].isComplete()
+    asJava.asInstanceOf[JFuture[T]].isComplete().asInstanceOf[Boolean]
   }
 
   def complete(result: T):Unit = {
@@ -99,11 +99,11 @@ class Future[T](private val _asJava: Object) {
   }
 
   def succeeded():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].succeeded()
+    asJava.asInstanceOf[JFuture[T]].succeeded().asInstanceOf[Boolean]
   }
 
   def failed():Boolean = {
-    asJava.asInstanceOf[JFuture[T]].failed()
+    asJava.asInstanceOf[JFuture[T]].failed().asInstanceOf[Boolean]
   }
 
 //future methods

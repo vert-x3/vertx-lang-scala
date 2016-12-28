@@ -142,7 +142,7 @@ class HttpConnection(private val _asJava: Object) {
 //default methods
   //io.vertx.core.http.HttpConnection
   def getWindowSize():Int = {
-    asJava.asInstanceOf[JHttpConnection].getWindowSize()
+    asJava.asInstanceOf[JHttpConnection].getWindowSize().asInstanceOf[Int]
   }
 
 //basic methods

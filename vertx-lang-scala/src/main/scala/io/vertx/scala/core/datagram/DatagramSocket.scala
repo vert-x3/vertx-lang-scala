@@ -141,7 +141,7 @@ class DatagramSocket(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled()
+    asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def sender(port: Int,host: String):PacketWritestream = {

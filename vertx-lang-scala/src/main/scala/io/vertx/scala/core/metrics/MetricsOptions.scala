@@ -37,7 +37,7 @@ class MetricsOptions(private val _asJava: JMetricsOptions) {
     this
   }
   def isEnabled: Boolean = {
-    asJava.isEnabled()
+    asJava.isEnabled().asInstanceOf[Boolean]
   }
 }
 

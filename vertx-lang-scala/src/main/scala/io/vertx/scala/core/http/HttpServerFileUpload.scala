@@ -69,31 +69,31 @@ class HttpServerFileUpload(private val _asJava: Object)
 //default methods
 //basic methods
   def filename():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].filename()
+    asJava.asInstanceOf[JHttpServerFileUpload].filename().asInstanceOf[String]
   }
 
   def name():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].name()
+    asJava.asInstanceOf[JHttpServerFileUpload].name().asInstanceOf[String]
   }
 
   def contentType():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].contentType()
+    asJava.asInstanceOf[JHttpServerFileUpload].contentType().asInstanceOf[String]
   }
 
   def contentTransferEncoding():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding()
+    asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding().asInstanceOf[String]
   }
 
   def charset():String = {
-    asJava.asInstanceOf[JHttpServerFileUpload].charset()
+    asJava.asInstanceOf[JHttpServerFileUpload].charset().asInstanceOf[String]
   }
 
   def size():Long = {
-    asJava.asInstanceOf[JHttpServerFileUpload].size()
+    asJava.asInstanceOf[JHttpServerFileUpload].size().asInstanceOf[Long]
   }
 
   def isSizeAvailable():Boolean = {
-    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable()
+    asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable().asInstanceOf[Boolean]
   }
 
 //future methods

@@ -324,7 +324,7 @@ class GenericsTCK(private val _asJava: Object) {
   }
 
   def methodWithClassTypeFunctionReturn[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE,f: String => U):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionReturn[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x:java.lang.String=> f(x)})
+    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionReturn[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x:java.lang.String=> f(x.asInstanceOf[String])})
   }
 
   def interfaceWithApiArg(value: RefedInterface1):InterfaceWithApiArg = {

@@ -33,31 +33,31 @@ class SrvRecord(private val _asJava: Object) {
 //default methods
 //basic methods
   def priority():Int = {
-    asJava.asInstanceOf[JSrvRecord].priority()
+    asJava.asInstanceOf[JSrvRecord].priority().asInstanceOf[Int]
   }
 
   def weight():Int = {
-    asJava.asInstanceOf[JSrvRecord].weight()
+    asJava.asInstanceOf[JSrvRecord].weight().asInstanceOf[Int]
   }
 
   def port():Int = {
-    asJava.asInstanceOf[JSrvRecord].port()
+    asJava.asInstanceOf[JSrvRecord].port().asInstanceOf[Int]
   }
 
   def name():String = {
-    asJava.asInstanceOf[JSrvRecord].name()
+    asJava.asInstanceOf[JSrvRecord].name().asInstanceOf[String]
   }
 
   def protocol():String = {
-    asJava.asInstanceOf[JSrvRecord].protocol()
+    asJava.asInstanceOf[JSrvRecord].protocol().asInstanceOf[String]
   }
 
   def service():String = {
-    asJava.asInstanceOf[JSrvRecord].service()
+    asJava.asInstanceOf[JSrvRecord].service().asInstanceOf[String]
   }
 
   def target():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JSrvRecord].target())
+    scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[ String])
   }
 
 //future methods

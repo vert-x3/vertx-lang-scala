@@ -55,7 +55,7 @@ class Message[T](private val _asJava: Object) {
 //default methods
 //basic methods
   def address():String = {
-    asJava.asInstanceOf[JMessage[T]].address()
+    asJava.asInstanceOf[JMessage[T]].address().asInstanceOf[String]
   }
 
   def headers():MultiMap = {
@@ -63,11 +63,11 @@ class Message[T](private val _asJava: Object) {
   }
 
   def replyAddress():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JMessage[T]].replyAddress())
+    scala.Option(asJava.asInstanceOf[JMessage[T]].replyAddress().asInstanceOf[ String])
   }
 
   def isSend():Boolean = {
-    asJava.asInstanceOf[JMessage[T]].isSend()
+    asJava.asInstanceOf[JMessage[T]].isSend().asInstanceOf[Boolean]
   }
 
   def reply(message: AnyRef):Unit = {

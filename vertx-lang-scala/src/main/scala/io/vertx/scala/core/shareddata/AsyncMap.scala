@@ -61,7 +61,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].removeIfPresent(k,v,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[K,V]].removeIfPresent(k,v,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
@@ -69,7 +69,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].replaceIfPresent(k,oldValue,newValue,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[K,V]].replaceIfPresent(k,oldValue,newValue,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
@@ -77,7 +77,7 @@ class AsyncMap[K,V](private val _asJava: Object) {
   }
 
   def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[K,V]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
   }
 
 //future methods
@@ -118,7 +118,7 @@ def removeFuture(k: K):scala.concurrent.Future[V] = {
   }
 
 def removeIfPresentFuture(k: K,v: V):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JAsyncMap[K,V]].removeIfPresent(k,v,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -130,7 +130,7 @@ def replaceFuture(k: K,v: V):scala.concurrent.Future[V] = {
   }
 
 def replaceIfPresentFuture(k: K,oldValue: V,newValue: V):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JAsyncMap[K,V]].replaceIfPresent(k,oldValue,newValue,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -142,7 +142,7 @@ def clearFuture():scala.concurrent.Future[Unit] = {
   }
 
 def sizeFuture():scala.concurrent.Future[Int] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
     asJava.asInstanceOf[JAsyncMap[K,V]].size(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

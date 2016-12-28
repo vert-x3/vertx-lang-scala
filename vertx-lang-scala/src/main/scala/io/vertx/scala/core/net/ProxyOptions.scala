@@ -36,7 +36,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     this
   }
   def getHost: String = {
-    asJava.getHost()
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -47,7 +47,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     this
   }
   def getPassword: String = {
-    asJava.getPassword()
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -58,7 +58,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     this
   }
   def getPort: Int = {
-    asJava.getPort()
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -82,7 +82,7 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
     this
   }
   def getUsername: String = {
-    asJava.getUsername()
+    asJava.getUsername().asInstanceOf[String]
   }
 }
 

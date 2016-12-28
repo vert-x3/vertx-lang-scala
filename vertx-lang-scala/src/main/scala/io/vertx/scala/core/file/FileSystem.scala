@@ -162,7 +162,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readSymlink(link: String,handler: Handler[AsyncResult[String]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -227,12 +227,12 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x)))})
+    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -277,7 +277,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def exists(path: String,handler: Handler[AsyncResult[Boolean]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
@@ -297,15 +297,15 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def readSymlinkBlocking(link: String):String = {
-    asJava.asInstanceOf[JFileSystem].readSymlinkBlocking(link.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JFileSystem].readSymlinkBlocking(link.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
   def readDirBlocking(path: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String]).asScala.map(x => x)
+    asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
   def readDirBlocking(path: String,filter: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String]).asScala.map(x => x)
+    asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
   def readFileBlocking(path: String):Buffer = {
@@ -317,7 +317,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   def existsBlocking(path: String):Boolean = {
-    asJava.asInstanceOf[JFileSystem].existsBlocking(path.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JFileSystem].existsBlocking(path.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   def fsPropsBlocking(path: String):FileSystemProps = {
@@ -398,7 +398,7 @@ def unlinkFuture(link: String):scala.concurrent.Future[Unit] = {
   }
 
 def readSymlinkFuture(link: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -440,13 +440,13 @@ def mkdirsFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
   }
 
 def readDirFuture(path: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def readDirFuture(path: String,filter: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -482,7 +482,7 @@ def createFileFuture(path: String,perms: String):scala.concurrent.Future[Unit] =
   }
 
 def existsFuture(path: String):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

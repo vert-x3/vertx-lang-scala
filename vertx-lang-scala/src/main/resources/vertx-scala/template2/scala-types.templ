@@ -4,10 +4,10 @@
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
       if(nullable) {
-        return 'scala.Option(' + name + ')';
+        return 'scala.Option(' + name + '.asInstanceOf[ ' + typeNameForPrimitiveScala(type) + '])';
       }
       else {
-        return name;
+        return name + '.asInstanceOf[' + typeNameForPrimitiveScala(type) + ']';;
       }
     } else if (type.kind == CLASS_THROWABLE) {
       return name;
@@ -99,28 +99,9 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      var typeName = type.name;
-      if (type.name == 'byte') {
-        typeName = 'java.lang.Byte';
-      } else if (type.name == 'short') {
-        typeName = 'java.lang.Short';
-      } else if (type.name == 'int') {
-        typeName = 'java.lang.Integer';
-      } else if (type.name == 'long') {
-        typeName = 'java.lang.Long';
-      } else if (type.name == 'float') {
-        typeName = 'java.lang.Float';
-      } else if (type.name == 'double') {
-        typeName = 'java.lang.Double';
-      } else if (type.name == 'boolean') {
-        typeName = 'java.lang.Boolean';
-      } else if (type.name == 'char') {
-        typeName = 'java.lang.Character';
-      }
-
-      var ret = name + '.asInstanceOf[' + typeName + ']';
+      var ret = name + '.asInstanceOf[' + toJavaType(type) + ']';
       if(nullable)
-        ret = name + '.map(x => x.asInstanceOf[' + typeName + ']).getOrElse(null)';
+        ret = name + '.map(x => x.asInstanceOf[' + toJavaType(type) + ']).getOrElse(null)';
       return ret;
     } else if (type.kind == CLASS_THROWABLE) {
       var ret = name;
@@ -194,7 +175,25 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      return type.name;
+      var typeName = type.name;
+      if (type.name == 'byte') {
+        typeName = 'java.lang.Byte';
+      } else if (type.name == 'short') {
+        typeName = 'java.lang.Short';
+      } else if (type.name == 'int') {
+        typeName = 'java.lang.Integer';
+      } else if (type.name == 'long') {
+        typeName = 'java.lang.Long';
+      } else if (type.name == 'float') {
+        typeName = 'java.lang.Float';
+      } else if (type.name == 'double') {
+        typeName = 'java.lang.Double';
+      } else if (type.name == 'boolean') {
+        typeName = 'java.lang.Boolean';
+      } else if (type.name == 'char') {
+        typeName = 'java.lang.Character';
+      }
+      return typeName;
     } else if (type.kind == CLASS_THROWABLE) {
       return type.simpleName;
     } else if (type.kind == CLASS_OBJECT) {
@@ -263,25 +262,7 @@
     } else if (type.kind == CLASS_THROWABLE) {
       return 'Throwable';
     } else if (type.kind.basic) {
-      if (type.name == 'byte' || type.name == 'java.lang.Byte') {
-        return wrapInOptionIfNullable(nullable, 'Byte');
-      } else if (type.name == 'short' || type.name == 'java.lang.Short') {
-        return wrapInOptionIfNullable(nullable, 'Short');
-      } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
-        return wrapInOptionIfNullable(nullable, 'Int');
-      } else if (type.name == 'long' || type.name == 'java.lang.Long') {
-        return wrapInOptionIfNullable(nullable, 'Long');
-      } else if (type.name == 'float' || type.name == 'java.lang.Float') {
-        return wrapInOptionIfNullable(nullable, 'Float');
-      } else if (type.name == 'double' || type.name == 'java.lang.Double') {
-        return wrapInOptionIfNullable(nullable, 'Double');
-      } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
-        return wrapInOptionIfNullable(nullable, 'Boolean');
-      } else if (type.name == 'char' || type.name == 'java.lang.Character') {
-        return wrapInOptionIfNullable(nullable, 'Char');
-      } else if (type.kind == CLASS_STRING) {
-        return wrapInOptionIfNullable(nullable, 'String');
-      }
+      return wrapInOptionIfNullable(nullable, typeNameForPrimitiveScala(type));
     } else if (type.kind == CLASS_DATA_OBJECT) {
       return wrapInOptionIfNullable(nullable, type.simpleName);
     } else if (type.kind == CLASS_LIST){
@@ -351,6 +332,29 @@
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
     }
+  }
+
+  def typeNameForPrimitiveScala(type) {
+    if (type.name == 'byte' || type.name == 'java.lang.Byte') {
+      return  'Byte';
+    } else if (type.name == 'short' || type.name == 'java.lang.Short') {
+      return  'Short';
+    } else if (type.name == 'int' || type.name == 'java.lang.Integer') {
+      return  'Int';
+    } else if (type.name == 'long' || type.name == 'java.lang.Long') {
+      return  'Long';
+    } else if (type.name == 'float' || type.name == 'java.lang.Float') {
+      return  'Float';
+    } else if (type.name == 'double' || type.name == 'java.lang.Double') {
+      return  'Double';
+    } else if (type.name == 'boolean' || type.name == 'java.lang.Boolean') {
+      return  'Boolean';
+    } else if (type.name == 'char' || type.name == 'java.lang.Character') {
+      return  'Char';
+    } else if (type.kind == CLASS_STRING) {
+      return  'String';
+    }
+    return 'WTF!!!';
   }
 
   def wrapInOptionIfNullable(nullable, expression) {

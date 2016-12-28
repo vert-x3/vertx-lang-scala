@@ -38,7 +38,7 @@ class InterfaceWithStringArg(private val _asJava: Object)
 //default methods
 //basic methods
   override def getValue():String = {
-    asJava.asInstanceOf[JInterfaceWithStringArg].getValue()
+    asJava.asInstanceOf[JInterfaceWithStringArg].getValue().asInstanceOf[String]
   }
 
   def meth():Unit = {

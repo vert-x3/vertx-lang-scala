@@ -67,27 +67,27 @@ class MultiMap(private val _asJava: Object) {
 //default methods
 //basic methods
   def get(name: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]))
+    scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]).asInstanceOf[ String])
   }
 
   def getAll(name: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x)
+    asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
   def contains(name: String):Boolean = {
-    asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   def isEmpty():Boolean = {
-    asJava.asInstanceOf[JMultiMap].isEmpty()
+    asJava.asInstanceOf[JMultiMap].isEmpty().asInstanceOf[Boolean]
   }
 
   def names():scala.collection.mutable.Set[String] = {
-    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x)
+    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x.asInstanceOf[String])
   }
 
   def size():Int = {
-    asJava.asInstanceOf[JMultiMap].size()
+    asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
 //future methods

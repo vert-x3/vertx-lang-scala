@@ -36,7 +36,7 @@ class SuperInterface1(private val _asJava: Object) {
   }
 
   def superMethodOverloadedBySubclass():Int = {
-    asJava.asInstanceOf[JSuperInterface1].superMethodOverloadedBySubclass()
+    asJava.asInstanceOf[JSuperInterface1].superMethodOverloadedBySubclass().asInstanceOf[Int]
   }
 
 //future methods

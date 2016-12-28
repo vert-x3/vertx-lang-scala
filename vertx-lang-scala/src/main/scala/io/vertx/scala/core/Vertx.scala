@@ -126,7 +126,7 @@ class Vertx(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JVertx].isMetricsEnabled()
+    asJava.asInstanceOf[JVertx].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def getOrCreateContext():Context = {
@@ -178,7 +178,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def setTimer(delay: Long,handler: Handler[Long]):Long = {
-    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x)})
+    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
   def timerStream(delay: Long):TimeoutStream = {
@@ -186,7 +186,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def setPeriodic(delay: Long,handler: Handler[Long]):Long = {
-    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x)})
+    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
   def periodicStream(delay: Long):TimeoutStream = {
@@ -194,7 +194,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def cancelTimer(id: Long):Boolean = {
-    asJava.asInstanceOf[JVertx].cancelTimer(id.asInstanceOf[java.lang.Long])
+    asJava.asInstanceOf[JVertx].cancelTimer(id.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
   def runOnContext(action: Handler[Unit]):Unit = {
@@ -214,7 +214,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
   def deployVerticle(name: String,options: DeploymentOptions):Unit = {
@@ -222,7 +222,7 @@ class Vertx(private val _asJava: Object)
   }
 
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
   def undeploy(deploymentID: String):Unit = {
@@ -234,11 +234,11 @@ class Vertx(private val _asJava: Object)
   }
 
   def deploymentIDs():scala.collection.mutable.Set[String] = {
-    asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x)
+    asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x.asInstanceOf[String])
   }
 
   def isClustered():Boolean = {
-    asJava.asInstanceOf[JVertx].isClustered()
+    asJava.asInstanceOf[JVertx].isClustered().asInstanceOf[Boolean]
   }
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
@@ -269,13 +269,13 @@ def closeFuture():scala.concurrent.Future[Unit] = {
   }
 
 def deployVerticleFuture(name: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def deployVerticleFuture(name: String,options: DeploymentOptions):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }

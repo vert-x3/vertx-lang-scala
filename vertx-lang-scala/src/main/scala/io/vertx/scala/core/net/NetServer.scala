@@ -71,7 +71,7 @@ class NetServer(private val _asJava: Object)
 //default methods
 //basic methods
   override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JNetServer].isMetricsEnabled()
+    asJava.asInstanceOf[JNetServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   def connectStream():NetSocketStream = {
@@ -91,7 +91,7 @@ class NetServer(private val _asJava: Object)
   }
 
   def actualPort():Int = {
-    asJava.asInstanceOf[JNetServer].actualPort()
+    asJava.asInstanceOf[JNetServer].actualPort().asInstanceOf[Int]
   }
 
 //future methods

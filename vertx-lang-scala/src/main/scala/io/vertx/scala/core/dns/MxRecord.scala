@@ -33,11 +33,11 @@ class MxRecord(private val _asJava: Object) {
 //default methods
 //basic methods
   def priority():Int = {
-    asJava.asInstanceOf[JMxRecord].priority()
+    asJava.asInstanceOf[JMxRecord].priority().asInstanceOf[Int]
   }
 
   def name():String = {
-    asJava.asInstanceOf[JMxRecord].name()
+    asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
 
 //future methods

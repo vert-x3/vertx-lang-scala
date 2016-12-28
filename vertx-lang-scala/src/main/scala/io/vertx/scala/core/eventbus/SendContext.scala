@@ -43,7 +43,7 @@ class SendContext[T](private val _asJava: Object) {
   }
 
   def send():Boolean = {
-    asJava.asInstanceOf[JSendContext[T]].send()
+    asJava.asInstanceOf[JSendContext[T]].send().asInstanceOf[Boolean]
   }
 
 //future methods

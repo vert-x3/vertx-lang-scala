@@ -37,7 +37,7 @@ class HttpFrame(private val _asJava: Object) {
   def `type`():Int = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
-      cached_0 = tmp
+      cached_0 = tmp.asInstanceOf[Int]
     }
     cached_0
   }
@@ -45,7 +45,7 @@ class HttpFrame(private val _asJava: Object) {
   def flags():Int = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].flags()
-      cached_1 = tmp
+      cached_1 = tmp.asInstanceOf[Int]
     }
     cached_1
   }

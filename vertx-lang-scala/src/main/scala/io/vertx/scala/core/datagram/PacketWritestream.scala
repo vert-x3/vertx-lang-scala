@@ -69,7 +69,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
+    asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }
 
 //future methods

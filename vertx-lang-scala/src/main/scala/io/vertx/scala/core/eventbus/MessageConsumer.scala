@@ -77,11 +77,11 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def isRegistered():Boolean = {
-    asJava.asInstanceOf[JMessageConsumer[T]].isRegistered()
+    asJava.asInstanceOf[JMessageConsumer[T]].isRegistered().asInstanceOf[Boolean]
   }
 
   def address():String = {
-    asJava.asInstanceOf[JMessageConsumer[T]].address()
+    asJava.asInstanceOf[JMessageConsumer[T]].address().asInstanceOf[String]
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
@@ -89,7 +89,7 @@ class MessageConsumer[T](private val _asJava: Object)
   }
 
   def getMaxBufferedMessages():Int = {
-    asJava.asInstanceOf[JMessageConsumer[T]].getMaxBufferedMessages()
+    asJava.asInstanceOf[JMessageConsumer[T]].getMaxBufferedMessages().asInstanceOf[Int]
   }
 
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {

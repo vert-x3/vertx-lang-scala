@@ -55,11 +55,11 @@ class LocalMap[K,V](private val _asJava: Object) {
   }
 
   def size():Int = {
-    asJava.asInstanceOf[JLocalMap[K,V]].size()
+    asJava.asInstanceOf[JLocalMap[K,V]].size().asInstanceOf[Int]
   }
 
   def isEmpty():Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].isEmpty()
+    asJava.asInstanceOf[JLocalMap[K,V]].isEmpty().asInstanceOf[Boolean]
   }
 
   def putIfAbsent(key: K,value: V):V = {
@@ -67,11 +67,11 @@ class LocalMap[K,V](private val _asJava: Object) {
   }
 
   def removeIfPresent(key: K,value: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].removeIfPresent(key,value)
+    asJava.asInstanceOf[JLocalMap[K,V]].removeIfPresent(key,value).asInstanceOf[Boolean]
   }
 
   def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].replaceIfPresent(key,oldValue,newValue)
+    asJava.asInstanceOf[JLocalMap[K,V]].replaceIfPresent(key,oldValue,newValue).asInstanceOf[Boolean]
   }
 
   def replace(key: K,value: V):V = {

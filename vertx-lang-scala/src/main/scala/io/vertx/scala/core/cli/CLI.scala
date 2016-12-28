@@ -117,19 +117,19 @@ class CLI(private val _asJava: Object) {
   }
 
   def getName():String = {
-    asJava.asInstanceOf[JCLI].getName()
+    asJava.asInstanceOf[JCLI].getName().asInstanceOf[String]
   }
 
   def getDescription():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JCLI].getDescription())
+    scala.Option(asJava.asInstanceOf[JCLI].getDescription().asInstanceOf[ String])
   }
 
   def getSummary():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JCLI].getSummary())
+    scala.Option(asJava.asInstanceOf[JCLI].getSummary().asInstanceOf[ String])
   }
 
   def isHidden():Boolean = {
-    asJava.asInstanceOf[JCLI].isHidden()
+    asJava.asInstanceOf[JCLI].isHidden().asInstanceOf[Boolean]
   }
 
   def getOptions():scala.collection.mutable.Buffer[Option] = {
