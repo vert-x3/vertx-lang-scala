@@ -32,12 +32,12 @@ class SocketAddress(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def host():String = {
-    asJava.asInstanceOf[JSocketAddress].host()
+      def host():String = {
+    asJava.asInstanceOf[JSocketAddress].host().asInstanceOf[String]
   }
 
-  def port():Int = {
-    asJava.asInstanceOf[JSocketAddress].port()
+      def port():Int = {
+    asJava.asInstanceOf[JSocketAddress].port().asInstanceOf[Int]
   }
 
 //future methods

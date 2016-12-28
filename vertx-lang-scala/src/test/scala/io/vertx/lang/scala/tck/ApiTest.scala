@@ -1508,7 +1508,7 @@ class ApiTest extends FlatSpec with Matchers {
 
 
   "testNullableSetByte" should "work" in {
-    val testSetByte = Set(12.toByte, 24.toByte, (-12).toByte)
+    val testSetByte = mutable.Set(12.toByte, 24.toByte, (-12).toByte)
     nullableTCK.methodWithNullableSetByteParam(true, None)
     nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
     nullableTCK.methodWithNullableSetByteHandler(true, b => assert(testSetByte == b))
@@ -1530,7 +1530,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetShort" should "work" in {
-    val testSetShort = Set(520.toShort, 1040.toShort, (-520).toShort)
+    val testSetShort = mutable.Set(520.toShort, 1040.toShort, (-520).toShort)
     nullableTCK.methodWithNullableSetShortParam(true, None)
     nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
     nullableTCK.methodWithNullableSetShortHandler(true, b => assert(testSetShort == b))
@@ -1552,7 +1552,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetInteger" should "work" in {
-    val testSetInteger = Set(12345, 54321, -12345)
+    val testSetInteger = mutable.Set(12345, 54321, -12345)
     nullableTCK.methodWithNullableSetIntegerParam(true, None)
     nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
     nullableTCK.methodWithNullableSetIntegerHandler(true, b => assert(testSetInteger == b))
@@ -1574,7 +1574,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetLong" should "work" in {
-    val testSetLong = Set(123456789l, 987654321l, -123456789l)
+    val testSetLong = mutable.Set(123456789l, 987654321l, -123456789l)
     nullableTCK.methodWithNullableSetLongParam(true, None)
     nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
     nullableTCK.methodWithNullableSetLongHandler(true, b => assert(testSetLong == b))
@@ -1596,7 +1596,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetFloat" should "work" in {
-    val testSetFloat = Set(1.1f, 2.2f, 3.3f)
+    val testSetFloat = mutable.Set(1.1f, 2.2f, 3.3f)
     nullableTCK.methodWithNullableSetFloatParam(true, None)
     nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
     nullableTCK.methodWithNullableSetFloatHandler(true, b => assert(testSetFloat == b))
@@ -1618,7 +1618,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetDouble" should "work" in {
-    val testSetDouble = Set(1.11, 2.22, 3.33)
+    val testSetDouble = mutable.Set(1.11, 2.22, 3.33)
     nullableTCK.methodWithNullableSetDoubleParam(true, None)
     nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
     nullableTCK.methodWithNullableSetDoubleHandler(true, b => assert(testSetDouble == b))
@@ -1640,7 +1640,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetBoolean" should "work" in {
-    val testSetBoolean = Set(true, false, true)
+    val testSetBoolean = mutable.Set(true, false, true)
     nullableTCK.methodWithNullableSetBooleanParam(true, None)
     nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
     nullableTCK.methodWithNullableSetBooleanHandler(true, b => assert(testSetBoolean == b))
@@ -1662,7 +1662,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetString" should "work" in {
-    val testSetString = Set("first", "second", "third")
+    val testSetString = mutable.Set("first", "second", "third")
     nullableTCK.methodWithNullableSetStringParam(true, None)
     nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
     nullableTCK.methodWithNullableSetStringHandler(true, b => assert(testSetString == b))
@@ -1684,7 +1684,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetChar" should "work" in {
-    val testSetChar = Set('x', 'y', 'z')
+    val testSetChar = mutable.Set('x', 'y', 'z')
     nullableTCK.methodWithNullableSetCharParam(true, None)
     nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
     nullableTCK.methodWithNullableSetCharHandler(true, b => assert(testSetChar == b))
@@ -1706,7 +1706,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetJsonObject" should "work" in {
-    val testSetJsonObject = Set(Json.obj(("foo", "bar")), Json.obj(("juu", 3)))
+    val testSetJsonObject = mutable.Set(Json.obj(("foo", "bar")), Json.obj(("juu", 3)))
     nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
     nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
     nullableTCK.methodWithNullableSetJsonObjectHandler(true, b => assert(testSetJsonObject == b))
@@ -1728,7 +1728,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetJsonArray" should "work" in {
-    val testSetJsonArray = Set(Json.arr("foo", "bar"), Json.arr("juu"))
+    val testSetJsonArray = mutable.Set(Json.arr("foo", "bar"), Json.arr("juu"))
     nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
     nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
     nullableTCK.methodWithNullableSetJsonArrayHandler(true, b => assert(testSetJsonArray == b))
@@ -1751,7 +1751,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testNullableSetApi" should "work" in {
     val iface = new RefedInterface1Impl().setString("refed_is_here")
-    val testSetApi = Set(RefedInterface1(iface))
+    val testSetApi = mutable.Set(RefedInterface1(iface))
     nullableTCK.methodWithNullableSetApiParam(true, None)
     nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
     nullableTCK.methodWithNullableSetApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
@@ -1774,7 +1774,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testNullableSetDataObject" should "work" in {
     val json = Json.obj(("foo", "foo_value"), ("bar", 12345), ("wibble", 5.6))
-    val testSetDataObject = Set(TestDataObject.fromJson(json))
+    val testSetDataObject= mutable.Set(TestDataObject.fromJson(json))
     nullableTCK.methodWithNullableSetDataObjectParam(true, None)
     nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
     nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.asJava.toJson == json)))
@@ -1796,7 +1796,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetEnum" should "work" in {
-    val testSetEnum = Set(TestEnum.TIM, TestEnum.JULIEN)
+    val testSetEnum= mutable.Set(TestEnum.TIM, TestEnum.JULIEN)
     nullableTCK.methodWithNullableSetEnumParam(true, None)
     nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
     nullableTCK.methodWithNullableSetEnumHandler(true, b => assert(testSetEnum == b))
@@ -1818,7 +1818,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableSetGenEnum" should "work" in {
-    val testSetGenEnum = Set(TestGenEnum.BOB, TestGenEnum.LELAND)
+    val testSetGenEnum= mutable.Set(TestGenEnum.BOB, TestGenEnum.LELAND)
     nullableTCK.methodWithNullableSetGenEnumParam(true, None)
     nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
     nullableTCK.methodWithNullableSetGenEnumHandler(true, b => assert(testSetGenEnum == b))
@@ -1853,7 +1853,7 @@ class ApiTest extends FlatSpec with Matchers {
 
 
   "testNullableMapByte" should "work" in {
-    val testMapByte = Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
+    val testMapByte = mutable.Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
     nullableTCK.methodWithNullableMapByteParam(true, None)
     nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
     nullableTCK.methodWithNullableMapByteHandler(true, b => assert(testMapByte == b))
@@ -1875,7 +1875,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapShort" should "work" in {
-    val testMapShort = Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
+    val testMapShort = mutable.Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
     nullableTCK.methodWithNullableMapShortParam(true, None)
     nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
     nullableTCK.methodWithNullableMapShortHandler(true, b => assert(testMapShort == b))
@@ -1897,7 +1897,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapInteger" should "work" in {
-    val testMapInteger = Map("1" -> 1, "2" -> 2, "3" -> 3)
+    val testMapInteger = mutable.Map("1" -> 1, "2" -> 2, "3" -> 3)
     nullableTCK.methodWithNullableMapIntegerParam(true, None)
     nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
     nullableTCK.methodWithNullableMapIntegerHandler(true, b => assert(testMapInteger == b))
@@ -1919,7 +1919,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapLong" should "work" in {
-    val testMapLong = Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
+    val testMapLong = mutable.Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
     nullableTCK.methodWithNullableMapLongParam(true, None)
     nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
     nullableTCK.methodWithNullableMapLongHandler(true, b => assert(testMapLong == b))
@@ -1941,7 +1941,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapFloat" should "work" in {
-    val testMapFloat = Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
+    val testMapFloat = mutable.Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
     nullableTCK.methodWithNullableMapFloatParam(true, None)
     nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
     nullableTCK.methodWithNullableMapFloatHandler(true, b => assert(testMapFloat == b))
@@ -1963,7 +1963,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapDouble" should "work" in {
-    val testMapDouble = Map("1" -> 1.11, "2" -> 2.22, "3" -> 3.33)
+    val testMapDouble = mutable.Map("1" -> 1.11, "2" -> 2.22, "3" -> 3.33)
     nullableTCK.methodWithNullableMapDoubleParam(true, None)
     nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
     nullableTCK.methodWithNullableMapDoubleHandler(true, b => assert(testMapDouble == b))
@@ -1985,7 +1985,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapBoolean" should "work" in {
-    val testMapBoolean = Map("1" -> true, "2" -> false, "3" -> true)
+    val testMapBoolean = mutable.Map("1" -> true, "2" -> false, "3" -> true)
     nullableTCK.methodWithNullableMapBooleanParam(true, None)
     nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
     nullableTCK.methodWithNullableMapBooleanHandler(true, b => assert(testMapBoolean == b))
@@ -2007,7 +2007,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapString" should "work" in {
-    val testMapString = Map("1" -> "first", "2" -> "second", "3" -> "third")
+    val testMapString = mutable.Map("1" -> "first", "2" -> "second", "3" -> "third")
     nullableTCK.methodWithNullableMapStringParam(true, None)
     nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
     nullableTCK.methodWithNullableMapStringHandler(true, b => assert(testMapString == b))
@@ -2029,7 +2029,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapChar" should "work" in {
-    val testMapChar = Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
+    val testMapChar = mutable.Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
     nullableTCK.methodWithNullableMapCharParam(true, None)
     nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
     nullableTCK.methodWithNullableMapCharHandler(true, b => assert(testMapChar == b))
@@ -2051,7 +2051,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapJsonObject" should "work" in {
-    val testMapJsonObject = Map("1" -> Json.obj(("foo", "bar")), "2" -> Json.obj(("juu", 3)))
+    val testMapJsonObject = mutable.Map("1" -> Json.obj(("foo", "bar")), "2" -> Json.obj(("juu", 3)))
     nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
     nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
     nullableTCK.methodWithNullableMapJsonObjectHandler(true, b => assert(testMapJsonObject == b))
@@ -2073,7 +2073,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullableMapJsonArray" should "work" in {
-    val testMapJsonArray: Map[String, JsonArray] = Map("2" -> Json.arr("juu"), "1" -> Json.arr("foo", "bar"))
+    val testMapJsonArray: mutable.Map[String, JsonArray] = mutable.Map("2" -> Json.arr("juu"), "1" -> Json.arr("foo", "bar"))
     nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
     nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
     nullableTCK.methodWithNullableMapJsonArrayHandler(true, b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
@@ -2096,7 +2096,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testNullableMapApi" should "work" in {
     val iface = new RefedInterface1Impl().setString("refed_is_here")
-    val testMapApi = Map("1" -> RefedInterface1(iface))
+    val testMapApi = mutable.Map("1" -> RefedInterface1(iface))
     nullableTCK.methodWithNullableMapApiParam(true, None)
     nullableTCK.methodWithNullableMapApiParam(false, Option(testMapApi))
   }
@@ -2211,7 +2211,7 @@ class ApiTest extends FlatSpec with Matchers {
   //  shared test void testSetNullableChar() => testSetNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithSetNullableCharParam, nullableTCK.methodWithSetNullableCharHandler, nullableTCK.methodWithSetNullableCharHandlerAsyncResult, nullableTCK.methodWithSetNullableCharReturn)
 
   "testSetNullableString" should "work" in {
-    val testSetString: Set[String] = Set("first", null, "third")
+    val testSetString: mutable.Set[String]= mutable.Set("first", null, "third")
     nullableTCK.methodWithSetNullableStringParam(testSetString)
     nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableStringHandlerAsyncResultFuture().foreach(b => {
@@ -2224,7 +2224,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testSetNullableJsonObject" should "work" in {
-    val testSetJsonObject: Set[JsonObject] = Set(Json.obj(("foo", "bar")), null, Json.obj(("juu", 3)))
+    val testSetJsonObject: mutable.Set[JsonObject]= mutable.Set(Json.obj(("foo", "bar")), null, Json.obj(("juu", 3)))
     nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
     nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {
@@ -2237,7 +2237,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testSetNullableJsonArray" should "work" in {
-    val testSetJsonArray: Set[JsonArray] = Set(Json.arr("foo", "bar"), null, Json.arr("juu"))
+    val testSetJsonArray: mutable.Set[JsonArray]= mutable.Set(Json.arr("foo", "bar"), null, Json.arr("juu"))
     nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
     nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {
@@ -2252,7 +2252,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testSetNullableApi" should "work" in {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
-    val testSetApi: Set[RefedInterface1] = Set(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    val testSetApi: mutable.Set[RefedInterface1]= mutable.Set(RefedInterface1(iface1), null, RefedInterface1(iface2))
     //TODO: RefedInterface1Impl needs a nullsafe equals method!
     //    nullableTCK.methodWithSetNullableApiParam(testSetApi)
     //    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
@@ -2263,7 +2263,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testSetNullableDataObject" should "work" in {
     val json1 = Json.obj(("foo", "first"), ("bar", 1), ("wibble", 1.1))
     val json2 = Json.obj(("foo", "third"), ("bar", 3), ("wibble", 3.3))
-    val testSetDataObject: Set[TestDataObject] = Set(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
+    val testSetDataObject: mutable.Set[TestDataObject]= mutable.Set(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
     nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
     nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
     exec1(w => nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResultFuture().foreach(b => {
@@ -2278,7 +2278,7 @@ class ApiTest extends FlatSpec with Matchers {
 
 
   "testSetNullableGenEnum" should "work" in {
-    val testSetGenEnum: Set[TestGenEnum] = Set(TestGenEnum.BOB, null, TestGenEnum.LELAND)
+    val testSetGenEnum: mutable.Set[TestGenEnum]= mutable.Set(TestGenEnum.BOB, null, TestGenEnum.LELAND)
     nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
     nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResultFuture().foreach(b => {
@@ -2301,7 +2301,7 @@ class ApiTest extends FlatSpec with Matchers {
   //  shared test void testMapNullableChar() => testMapNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithMapNullableCharParam, nullableTCK.methodWithMapNullableCharHandler, nullableTCK.methodWithMapNullableCharHandlerAsyncResult, nullableTCK.methodWithMapNullableCharReturn)
 
   "testMapNullableString" should "work" in {
-    val testMapString: Map[String, String] = Map("1" -> "first", "2" -> null, "3" -> "third")
+    val testMapString: mutable.Map[String, String] = mutable.Map("1" -> "first", "2" -> null, "3" -> "third")
     nullableTCK.methodWithMapNullableStringParam(testMapString)
     nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableStringHandlerAsyncResultFuture().foreach(b => {
@@ -2314,7 +2314,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMapNullableJsonObject" should "work" in {
-    val testMapJsonObject: Map[String, JsonObject] = Map("1" -> Json.obj(("foo", "bar")), "2" -> null, "3" -> Json.obj(("juu", 3)))
+    val testMapJsonObject: mutable.Map[String, JsonObject] = mutable.Map("1" -> Json.obj(("foo", "bar")), "2" -> null, "3" -> Json.obj(("juu", 3)))
     nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
     nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {
@@ -2327,7 +2327,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMapNullableJsonArray" should "work" in {
-    val testMapJsonArray: Map[String, JsonArray] = Map("1" -> Json.arr("foo", "bar"), "2" -> null, "3" -> Json.arr("juu"))
+    val testMapJsonArray: mutable.Map[String, JsonArray] = mutable.Map("1" -> Json.arr("foo", "bar"), "2" -> null, "3" -> Json.arr("juu"))
     nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
     nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {
@@ -2342,7 +2342,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testMapNullableApi" should "work" in {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
-    val testMapApi: Map[String, RefedInterface1] = Map("1" -> RefedInterface1(iface1), "2" -> null, "3" -> RefedInterface1(iface2))
+    val testMapApi: mutable.Map[String, RefedInterface1] = mutable.Map("1" -> RefedInterface1(iface1), "2" -> null, "3" -> RefedInterface1(iface2))
     nullableTCK.methodWithMapNullableApiParam(testMapApi)
   }
 

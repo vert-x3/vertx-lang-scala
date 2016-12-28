@@ -50,7 +50,7 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -71,33 +71,33 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
 //basic methods
-  override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull()
+      override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 
-  def send(message: T):MessageProducer[T] = {
+      def send(message: T):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send(message))
   }
 
-  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+      def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
   }
 
-  def address():String = {
-    asJava.asInstanceOf[JMessageProducer[T]].address()
+      def address():String = {
+    asJava.asInstanceOf[JMessageProducer[T]].address().asInstanceOf[String]
   }
 
-  override def end():Unit = {
+        override def end():Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].end()
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].close()
   }
 
 //future methods
   def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => Message[R](x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessageProducer[T]].send[R](message,promiseAndHandler._1)
     promiseAndHandler._2.future
   }

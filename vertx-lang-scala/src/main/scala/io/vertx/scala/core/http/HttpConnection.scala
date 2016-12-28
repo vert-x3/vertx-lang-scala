@@ -65,22 +65,22 @@ class HttpConnection(private val _asJava: Object) {
 
 //fluent methods
   def setWindowSize(windowSize: Int):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize)
+    asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize.asInstanceOf[java.lang.Integer])
     this
   }
 
   def goAway(errorCode: Long):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode)
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long])
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId)
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer])
     this
   }
 
   def goAway(errorCode: Long,lastStreamId: Int,debugData: Buffer):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode,lastStreamId,debugData.asJava.asInstanceOf[JBuffer])
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer],debugData.asJava.asInstanceOf[JBuffer])
     this
   }
 
@@ -100,7 +100,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   def shutdown(timeoutMs: Long):HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs)
+    asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -142,31 +142,31 @@ class HttpConnection(private val _asJava: Object) {
 //default methods
   //io.vertx.core.http.HttpConnection
   def getWindowSize():Int = {
-    asJava.asInstanceOf[JHttpConnection].getWindowSize()
+    asJava.asInstanceOf[JHttpConnection].getWindowSize().asInstanceOf[Int]
   }
 
 //basic methods
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JHttpConnection].close()
   }
 
-  def settings():Http2Settings = {
+      def settings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
   }
 
-  def remoteSettings():Http2Settings = {
+      def remoteSettings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
 //future methods
   def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

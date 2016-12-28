@@ -71,7 +71,7 @@ class HttpClientResponse(private val _asJava: Object)
   def cookies():scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
-      cached_2 = tmp.asScala.map(x => x)
+      cached_2 = tmp.asScala.map(x => x.asInstanceOf[String])
     }
     cached_2
   }
@@ -122,24 +122,24 @@ class HttpClientResponse(private val _asJava: Object)
 
 //default methods
 //basic methods
-  def version():io.vertx.core.http.HttpVersion = {
+      def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
-  def statusCode():Int = {
-    asJava.asInstanceOf[JHttpClientResponse].statusCode()
+      def statusCode():Int = {
+    asJava.asInstanceOf[JHttpClientResponse].statusCode().asInstanceOf[Int]
   }
 
-  def statusMessage():String = {
-    asJava.asInstanceOf[JHttpClientResponse].statusMessage()
+      def statusMessage():String = {
+    asJava.asInstanceOf[JHttpClientResponse].statusMessage().asInstanceOf[String]
   }
 
-  def getHeader(headerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName))
+      def getHeader(headerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-  def getTrailer(trailerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName))
+      def getTrailer(trailerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
 //future methods

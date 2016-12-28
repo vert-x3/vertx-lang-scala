@@ -43,24 +43,24 @@ class NetClient(private val _asJava: Object)
 //cached methods
 //fluent methods
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(port,host,{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
 
 //default methods
 //basic methods
-  override def isMetricsEnabled():Boolean = {
-    asJava.asInstanceOf[JNetClient].isMetricsEnabled()
+      override def isMetricsEnabled():Boolean = {
+    asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }
 
 //future methods
   def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
-    asJava.asInstanceOf[JNetClient].connect(port,host,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => if (x == null) null.asInstanceOf[NetSocket] else NetSocket(x))
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

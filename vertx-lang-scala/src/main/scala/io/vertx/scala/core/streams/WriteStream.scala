@@ -70,7 +70,7 @@ trait WriteStream[T]
   }
 
   def setWriteQueueMaxSize(maxSize: Int):WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[T]].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JWriteStream[T]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -86,12 +86,12 @@ trait WriteStream[T]
   }
 
 //basic methods
-  def end():Unit = {
+      def end():Unit = {
     asJava.asInstanceOf[JWriteStream[T]].end()
   }
 
-  def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull()
+      def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 
 //future methods

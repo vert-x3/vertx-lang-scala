@@ -32,32 +32,32 @@ class SrvRecord(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def priority():Int = {
-    asJava.asInstanceOf[JSrvRecord].priority()
+      def priority():Int = {
+    asJava.asInstanceOf[JSrvRecord].priority().asInstanceOf[Int]
   }
 
-  def weight():Int = {
-    asJava.asInstanceOf[JSrvRecord].weight()
+      def weight():Int = {
+    asJava.asInstanceOf[JSrvRecord].weight().asInstanceOf[Int]
   }
 
-  def port():Int = {
-    asJava.asInstanceOf[JSrvRecord].port()
+      def port():Int = {
+    asJava.asInstanceOf[JSrvRecord].port().asInstanceOf[Int]
   }
 
-  def name():String = {
-    asJava.asInstanceOf[JSrvRecord].name()
+      def name():String = {
+    asJava.asInstanceOf[JSrvRecord].name().asInstanceOf[String]
   }
 
-  def protocol():String = {
-    asJava.asInstanceOf[JSrvRecord].protocol()
+      def protocol():String = {
+    asJava.asInstanceOf[JSrvRecord].protocol().asInstanceOf[String]
   }
 
-  def service():String = {
-    asJava.asInstanceOf[JSrvRecord].service()
+      def service():String = {
+    asJava.asInstanceOf[JSrvRecord].service().asInstanceOf[String]
   }
 
-  def target():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JSrvRecord].target())
+      def target():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[String])
   }
 
 //future methods

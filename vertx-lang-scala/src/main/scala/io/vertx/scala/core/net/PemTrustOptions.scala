@@ -66,7 +66,7 @@ class PemTrustOptions(private val _asJava: JPemTrustOptions) {
     this
   }
   def getCertPaths: scala.collection.mutable.Buffer[String] = {
-    asJava.getCertPaths().asScala.map(x => x)
+    asJava.getCertPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**

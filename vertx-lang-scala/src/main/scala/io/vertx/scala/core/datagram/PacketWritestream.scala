@@ -48,7 +48,7 @@ class PacketWritestream(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -64,12 +64,12 @@ class PacketWritestream(private val _asJava: Object)
   }
 
 //basic methods
-  override def end():Unit = {
+      override def end():Unit = {
     asJava.asInstanceOf[JPacketWritestream].end()
   }
 
-  override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
+      override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }
 
 //future methods

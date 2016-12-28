@@ -39,7 +39,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getArgName: String = {
-    asJava.getArgName()
+    asJava.getArgName().asInstanceOf[String]
   }
 
   /**
@@ -55,7 +55,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getChoices: scala.collection.mutable.Set[String] = {
-    asJava.getChoices().asScala.map(x => x)
+    asJava.getChoices().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -66,7 +66,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getDefaultValue: String = {
-    asJava.getDefaultValue()
+    asJava.getDefaultValue().asInstanceOf[String]
   }
 
   /**
@@ -77,7 +77,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getDescription: String = {
-    asJava.getDescription()
+    asJava.getDescription().asInstanceOf[String]
   }
 
   /**
@@ -92,7 +92,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isFlag: Boolean = {
-    asJava.isFlag()
+    asJava.isFlag().asInstanceOf[Boolean]
   }
 
   /**
@@ -103,7 +103,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isHelp: Boolean = {
-    asJava.isHelp()
+    asJava.isHelp().asInstanceOf[Boolean]
   }
 
   /**
@@ -114,7 +114,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isHidden: Boolean = {
-    asJava.isHidden()
+    asJava.isHidden().asInstanceOf[Boolean]
   }
 
   /**
@@ -125,7 +125,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getLongName: String = {
-    asJava.getLongName()
+    asJava.getLongName().asInstanceOf[String]
   }
 
   /**
@@ -136,7 +136,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isMultiValued: Boolean = {
-    asJava.isMultiValued()
+    asJava.isMultiValued().asInstanceOf[Boolean]
   }
 
   /**
@@ -150,7 +150,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isRequired: Boolean = {
-    asJava.isRequired()
+    asJava.isRequired().asInstanceOf[Boolean]
   }
 
   /**
@@ -161,7 +161,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def getShortName: String = {
-    asJava.getShortName()
+    asJava.getShortName().asInstanceOf[String]
   }
 
   /**
@@ -172,7 +172,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def isSingleValued: Boolean = {
-    asJava.isSingleValued()
+    asJava.isSingleValued().asInstanceOf[Boolean]
   }
 }
 

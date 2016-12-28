@@ -33,36 +33,36 @@ class FileProps(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def creationTime():Long = {
-    asJava.asInstanceOf[JFileProps].creationTime()
+      def creationTime():Long = {
+    asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
-  def lastAccessTime():Long = {
-    asJava.asInstanceOf[JFileProps].lastAccessTime()
+      def lastAccessTime():Long = {
+    asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
-  def lastModifiedTime():Long = {
-    asJava.asInstanceOf[JFileProps].lastModifiedTime()
+      def lastModifiedTime():Long = {
+    asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
-  def isDirectory():Boolean = {
-    asJava.asInstanceOf[JFileProps].isDirectory()
+      def isDirectory():Boolean = {
+    asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
-  def isOther():Boolean = {
-    asJava.asInstanceOf[JFileProps].isOther()
+      def isOther():Boolean = {
+    asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
-  def isRegularFile():Boolean = {
-    asJava.asInstanceOf[JFileProps].isRegularFile()
+      def isRegularFile():Boolean = {
+    asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
-  def isSymbolicLink():Boolean = {
-    asJava.asInstanceOf[JFileProps].isSymbolicLink()
+      def isSymbolicLink():Boolean = {
+    asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
-  def size():Long = {
-    asJava.asInstanceOf[JFileProps].size()
+      def size():Long = {
+    asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 
 //future methods

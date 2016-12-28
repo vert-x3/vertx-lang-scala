@@ -146,7 +146,7 @@ trait WebSocketBase
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -161,7 +161,7 @@ trait WebSocketBase
   }
 
   def writeFinalTextFrame(text: String):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text)
+    asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 
@@ -192,23 +192,23 @@ trait WebSocketBase
   }
 
 //basic methods
-  override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JWebSocketBase].writeQueueFull()
+      override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JWebSocketBase].writeQueueFull().asInstanceOf[Boolean]
   }
 
-  def binaryHandlerID():String = {
-    asJava.asInstanceOf[JWebSocketBase].binaryHandlerID()
+      def binaryHandlerID():String = {
+    asJava.asInstanceOf[JWebSocketBase].binaryHandlerID().asInstanceOf[String]
   }
 
-  def textHandlerID():String = {
-    asJava.asInstanceOf[JWebSocketBase].textHandlerID()
+      def textHandlerID():String = {
+    asJava.asInstanceOf[JWebSocketBase].textHandlerID().asInstanceOf[String]
   }
 
-  override def end():Unit = {
+        override def end():Unit = {
     asJava.asInstanceOf[JWebSocketBase].end()
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
   }
 

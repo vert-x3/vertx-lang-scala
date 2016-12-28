@@ -160,7 +160,7 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   def setExpectMultipart(expect: Boolean):HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect)
+    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -176,68 +176,68 @@ class HttpServerRequest(private val _asJava: Object)
 
 //default methods
 //basic methods
-  def version():io.vertx.core.http.HttpVersion = {
+      def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpServerRequest].version()
   }
 
-  def method():io.vertx.core.http.HttpMethod = {
+      def method():io.vertx.core.http.HttpMethod = {
     asJava.asInstanceOf[JHttpServerRequest].method()
   }
 
-  def rawMethod():String = {
-    asJava.asInstanceOf[JHttpServerRequest].rawMethod()
+      def rawMethod():String = {
+    asJava.asInstanceOf[JHttpServerRequest].rawMethod().asInstanceOf[String]
   }
 
-  def isSSL():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isSSL()
+      def isSSL():Boolean = {
+    asJava.asInstanceOf[JHttpServerRequest].isSSL().asInstanceOf[Boolean]
   }
 
-  def scheme():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme())
+      def scheme():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme().asInstanceOf[String])
   }
 
-  def uri():String = {
-    asJava.asInstanceOf[JHttpServerRequest].uri()
+      def uri():String = {
+    asJava.asInstanceOf[JHttpServerRequest].uri().asInstanceOf[String]
   }
 
-  def path():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path())
+      def path():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path().asInstanceOf[String])
   }
 
-  def query():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query())
+      def query():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query().asInstanceOf[String])
   }
 
-  def host():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host())
+      def host():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host().asInstanceOf[String])
   }
 
-  def getHeader(headerName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName))
+      def getHeader(headerName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-  def getParam(paramName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName))
+      def getParam(paramName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-  def absoluteURI():String = {
-    asJava.asInstanceOf[JHttpServerRequest].absoluteURI()
+      def absoluteURI():String = {
+    asJava.asInstanceOf[JHttpServerRequest].absoluteURI().asInstanceOf[String]
   }
 
-  def isExpectMultipart():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart()
+      def isExpectMultipart():Boolean = {
+    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart().asInstanceOf[Boolean]
   }
 
-  def getFormAttribute(attributeName: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName))
+      def getFormAttribute(attributeName: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-  def upgrade():ServerWebSocket = {
+      def upgrade():ServerWebSocket = {
     ServerWebSocket(asJava.asInstanceOf[JHttpServerRequest].upgrade())
   }
 
-  def isEnded():Boolean = {
-    asJava.asInstanceOf[JHttpServerRequest].isEnded()
+      def isEnded():Boolean = {
+    asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
 //future methods

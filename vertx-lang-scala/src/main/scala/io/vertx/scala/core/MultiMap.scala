@@ -35,7 +35,7 @@ class MultiMap(private val _asJava: Object) {
 //cached methods
 //fluent methods
   def add(name: String,value: String):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].add(name,value)
+    asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -45,7 +45,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def set(name: String,value: String):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].set(name,value)
+    asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -55,7 +55,7 @@ class MultiMap(private val _asJava: Object) {
   }
 
   def remove(name: String):MultiMap = {
-    asJava.asInstanceOf[JMultiMap].remove(name)
+    asJava.asInstanceOf[JMultiMap].remove(name.asInstanceOf[java.lang.String])
     this
   }
 
@@ -66,28 +66,28 @@ class MultiMap(private val _asJava: Object) {
 
 //default methods
 //basic methods
-  def get(name: String):scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JMultiMap].get(name))
+      def get(name: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-  def getAll(name: String):scala.collection.mutable.Buffer[String] = {
-    asJava.asInstanceOf[JMultiMap].getAll(name).asScala.map(x => x)
+      def getAll(name: String):scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def contains(name: String):Boolean = {
-    asJava.asInstanceOf[JMultiMap].contains(name)
+      def contains(name: String):Boolean = {
+    asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
-  def isEmpty():Boolean = {
-    asJava.asInstanceOf[JMultiMap].isEmpty()
+      def isEmpty():Boolean = {
+    asJava.asInstanceOf[JMultiMap].isEmpty().asInstanceOf[Boolean]
   }
 
-  def names():scala.collection.mutable.Set[String] = {
-    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x)
+      def names():scala.collection.mutable.Set[String] = {
+    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x.asInstanceOf[String])
   }
 
-  def size():Int = {
-    asJava.asInstanceOf[JMultiMap].size()
+      def size():Int = {
+    asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
 //future methods

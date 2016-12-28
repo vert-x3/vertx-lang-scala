@@ -101,7 +101,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize)
+    asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -116,7 +116,7 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
   override def writeFinalTextFrame(text: String):ServerWebSocket = {
-    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text)
+    asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 
@@ -147,39 +147,39 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
 //basic methods
-  override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JServerWebSocket].writeQueueFull()
+      override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JServerWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
-  override def binaryHandlerID():String = {
-    asJava.asInstanceOf[JServerWebSocket].binaryHandlerID()
+      override def binaryHandlerID():String = {
+    asJava.asInstanceOf[JServerWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
-  override def textHandlerID():String = {
-    asJava.asInstanceOf[JServerWebSocket].textHandlerID()
+      override def textHandlerID():String = {
+    asJava.asInstanceOf[JServerWebSocket].textHandlerID().asInstanceOf[String]
   }
 
-  override def end():Unit = {
+        override def end():Unit = {
     asJava.asInstanceOf[JServerWebSocket].end()
   }
 
-  override def close():Unit = {
+      override def close():Unit = {
     asJava.asInstanceOf[JServerWebSocket].close()
   }
 
-  def uri():String = {
-    asJava.asInstanceOf[JServerWebSocket].uri()
+      def uri():String = {
+    asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }
 
-  def path():String = {
-    asJava.asInstanceOf[JServerWebSocket].path()
+      def path():String = {
+    asJava.asInstanceOf[JServerWebSocket].path().asInstanceOf[String]
   }
 
-  def query():scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JServerWebSocket].query())
+      def query():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JServerWebSocket].query().asInstanceOf[String])
   }
 
-  def reject():Unit = {
+      def reject():Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
 

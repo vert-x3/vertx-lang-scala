@@ -31,21 +31,21 @@ class TestDataObject(private val _asJava: JTestDataObject) {
     this
   }
   def getBar: Int = {
-    asJava.getBar()
+    asJava.getBar().asInstanceOf[Int]
   }
   def setFoo(value: String) = {
     asJava.setFoo(value)
     this
   }
   def getFoo: String = {
-    asJava.getFoo()
+    asJava.getFoo().asInstanceOf[String]
   }
   def setWibble(value: Double) = {
     asJava.setWibble(value)
     this
   }
   def getWibble: Double = {
-    asJava.getWibble()
+    asJava.getWibble().asInstanceOf[Double]
   }
 }
 
