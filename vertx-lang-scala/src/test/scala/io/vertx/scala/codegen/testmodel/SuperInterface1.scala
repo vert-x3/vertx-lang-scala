@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
 
 /**
@@ -38,6 +39,7 @@ class SuperInterface1(private val _asJava: Object) {
     asJava.asInstanceOf[JSuperInterface1].superMethodOverloadedBySubclass()
   }
 
+//future methods
 }
 
   object SuperInterface1{

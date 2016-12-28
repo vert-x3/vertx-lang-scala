@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.scala.core.buffer.Buffer
@@ -60,6 +61,7 @@ class HttpFrame(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
+//future methods
 }
 
   object HttpFrame{

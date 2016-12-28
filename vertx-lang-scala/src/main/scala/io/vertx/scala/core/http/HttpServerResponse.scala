@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
@@ -274,6 +275,49 @@ class HttpServerResponse(private val _asJava: Object)
 
   def reset(code: Long):Unit = {
     asJava.asInstanceOf[JHttpServerResponse].reset(code)
+  }
+
+//future methods
+  def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename,offset,length,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def pushFuture(method: io.vertx.core.http.HttpMethod,host: String,path: String):scala.concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def pushFuture(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap):scala.concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,path,headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def pushFuture(method: io.vertx.core.http.HttpMethod,path: String):scala.concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,path,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def pushFuture(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap):scala.concurrent.Future[HttpServerResponse] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
+    asJava.asInstanceOf[JHttpServerResponse].push(method,host,path,headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

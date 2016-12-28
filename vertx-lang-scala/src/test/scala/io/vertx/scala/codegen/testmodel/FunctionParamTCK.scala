@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.TestEnum
@@ -133,6 +134,7 @@ class FunctionParamTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x:java.lang.String=> func(x).map(x => x).asJava})
   }
 
+//future methods
 }
 
   object FunctionParamTCK{

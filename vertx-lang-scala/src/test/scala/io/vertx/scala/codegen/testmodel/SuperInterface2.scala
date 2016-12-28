@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
 
 /**
@@ -44,5 +45,6 @@ trait SuperInterface2 {
     asJava.asInstanceOf[JSuperInterface2].otherSuperMethodWithBasicParams(b,s,i,l,f,d,bool,ch,str)
   }
 
+//future methods
 }
   }

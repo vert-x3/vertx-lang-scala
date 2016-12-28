@@ -18,6 +18,7 @@ package io.vertx.scala.core.datagram
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
@@ -71,6 +72,7 @@ class PacketWritestream(private val _asJava: Object)
     asJava.asInstanceOf[JPacketWritestream].writeQueueFull()
   }
 
+//future methods
 }
 
   object PacketWritestream{

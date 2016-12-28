@@ -18,6 +18,7 @@ package io.vertx.scala.core.shareddata
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{Counter => JCounter}
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
@@ -66,6 +67,31 @@ class SharedData(private val _asJava: Object) {
 
   def getLocalMap[K, V](name: String):LocalMap[K, V] = {
     LocalMap[K,V](asJava.asInstanceOf[JSharedData].getLocalMap[K,V](name))
+  }
+
+//future methods
+  def getClusterWideMapFuture[K, V](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[K,V], AsyncMap[K, V]](x => AsyncMap[K,V](x))
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[K,V](name,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
+    asJava.asInstanceOf[JSharedData].getLock(name,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name,timeout,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => Counter(x))
+    asJava.asInstanceOf[JSharedData].getCounter(name,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNullableRefedInterface}
 
 /**
@@ -34,6 +35,7 @@ class GenericNullableRefedInterface[T](private val _asJava: Object) {
     asJava.asInstanceOf[JGenericNullableRefedInterface[T]].getValue()
   }
 
+//future methods
 }
 
   object GenericNullableRefedInterface{

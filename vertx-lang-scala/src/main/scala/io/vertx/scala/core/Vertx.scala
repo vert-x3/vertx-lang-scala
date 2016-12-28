@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
@@ -258,6 +259,43 @@ class Vertx(private val _asJava: Object)
 
   def createSharedWorkerExecutor(name: String,poolSize: Int,maxExecuteTime: Long):WorkerExecutor = {
     WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name,poolSize,maxExecuteTime))
+  }
+
+//future methods
+  def closeFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JVertx].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def deployVerticleFuture(name: String):scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    asJava.asInstanceOf[JVertx].deployVerticle(name,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def deployVerticleFuture(name: String,options: DeploymentOptions):scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    asJava.asInstanceOf[JVertx].deployVerticle(name,options.asJava,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def undeployFuture(deploymentID: String):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
