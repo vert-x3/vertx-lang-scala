@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
@@ -1855,6 +1856,601 @@ class NullableTCK(private val _asJava: Object) {
 
   def methodWithNullableHandlerAsyncResult(expectNull: Boolean,handler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableHandlerAsyncResult(expectNull,{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a))})
+  }
+
+//future methods
+  def methodWithNullableByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Byte] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Byte, Byte](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableShortHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Short] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Short, Short](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableShortHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableIntegerHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Int] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableIntegerHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableLongHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableLongHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableFloatHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Float] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Float, Float](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableFloatHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableDoubleHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Double] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Double, Double](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDoubleHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableBooleanHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableBooleanHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableStringHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableStringHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableCharHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Char] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Character, Char](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableCharHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonArrayHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableApiHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[RefedInterface1] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRefedInterface1, RefedInterface1](x => RefedInterface1(x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableApiHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableDataObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[TestDataObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JTestDataObject, TestDataObject](x => TestDataObject(x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDataObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestEnum, io.vertx.codegen.testmodel.TestEnum](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[TestGenEnum, io.vertx.codegen.testmodel.TestGenEnum](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: Boolean,value: T):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[T](notNull,value,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[Byte]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListShortHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[Short]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListIntegerHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListLongHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[Long]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListFloatHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[Float]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListDoubleHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[Double]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListBooleanHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[Boolean]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListStringHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListCharHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[Char]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListJsonObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListJsonArrayHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListApiHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListDataObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableListGenEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Byte], scala.collection.mutable.Set[Byte]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetShortHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Short], scala.collection.mutable.Set[Short]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetIntegerHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[Int]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetLongHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Long], scala.collection.mutable.Set[Long]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetFloatHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Float], scala.collection.mutable.Set[Float]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetDoubleHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Double], scala.collection.mutable.Set[Double]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetBooleanHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Boolean], scala.collection.mutable.Set[Boolean]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetStringHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetCharHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Character], scala.collection.mutable.Set[Char]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetJsonObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetJsonArrayHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetApiHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetDataObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JTestDataObject], scala.collection.mutable.Set[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableSetGenEnumHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestGenEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Byte]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapShortHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Short]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapIntegerHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Int]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapLongHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Long]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapFloatHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Float]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapDoubleHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Double]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapBooleanHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Boolean]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapStringHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, String]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapCharHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Char]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, io.vertx.core.json.JsonObject]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Map[String, io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, io.vertx.core.json.JsonArray]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableByteHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[Byte]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableByteHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableShortHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[Short]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableShortHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableIntegerHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableIntegerHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableLongHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[Long]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableLongHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableBooleanHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[Boolean]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableBooleanHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableFloatHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[Float]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableFloatHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableDoubleHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[Double]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDoubleHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableStringHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableStringHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableCharHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[Char]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableCharHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableJsonObjectHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableJsonArrayHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableApiHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableApiHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableDataObjectHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDataObjectHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableEnumHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithListNullableGenEnumHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableByteHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Byte], scala.collection.mutable.Set[Byte]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableByteHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableShortHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Short], scala.collection.mutable.Set[Short]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableShortHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableIntegerHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[Int]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableIntegerHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableLongHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Long], scala.collection.mutable.Set[Long]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableLongHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableBooleanHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Boolean], scala.collection.mutable.Set[Boolean]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableBooleanHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableFloatHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Float], scala.collection.mutable.Set[Float]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableFloatHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableDoubleHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Double], scala.collection.mutable.Set[Double]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDoubleHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableStringHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableStringHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableCharHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[java.lang.Character], scala.collection.mutable.Set[Char]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableCharHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableJsonObjectHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableJsonArrayHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableApiHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[RefedInterface1]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[RefedInterface1]](x => x.asScala.map(x => RefedInterface1(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableApiHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableDataObjectHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[TestDataObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JTestDataObject], scala.collection.mutable.Set[TestDataObject]](x => x.asScala.map(x => TestDataObject(x)))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDataObjectHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableEnumHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithSetNullableGenEnumHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestGenEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]](x => x.asScala.map(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableByteHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Byte]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Byte]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableShortHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Short]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Short]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableIntegerHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Int]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Int]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableLongHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Long]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Long]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableBooleanHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Boolean]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Boolean]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableFloatHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Float]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Float]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableDoubleHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Double]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Double]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableStringHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, String]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableStringHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableCharHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, Char]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, Char]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableJsonObjectHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, io.vertx.core.json.JsonObject]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, io.vertx.core.json.JsonObject]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithMapNullableJsonArrayHandlerAsyncResultFuture():scala.concurrent.Future[Map[String, io.vertx.core.json.JsonArray]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], Map[String, io.vertx.core.json.JsonArray]](x => x.asScala.mapValues(x => x))
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithNullableHandlerAsyncResultFuture(expectNull: Boolean):scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableHandlerAsyncResult(expectNull,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

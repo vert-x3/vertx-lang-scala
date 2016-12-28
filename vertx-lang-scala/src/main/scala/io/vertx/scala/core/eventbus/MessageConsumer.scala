@@ -18,6 +18,7 @@ package io.vertx.scala.core.eventbus
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -101,6 +102,19 @@ class MessageConsumer[T](private val _asJava: Object)
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[T]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  }
+
+//future methods
+  def completionHandlerFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def unregisterFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageConsumer[T]].unregister(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

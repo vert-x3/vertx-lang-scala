@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
 import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
 import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
@@ -69,6 +70,7 @@ class DataObjectTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithBuffer(dataObject.asJava)
   }
 
+//future methods
 }
 
   object DataObjectTCK{

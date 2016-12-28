@@ -18,6 +18,7 @@ package io.vertx.scala.core.file
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
@@ -141,6 +142,31 @@ class AsyncFile(private val _asJava: Object)
 
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  }
+
+//future methods
+  def closeFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncFile].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset,position,length,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def flushFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncFile].flush(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

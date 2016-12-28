@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
@@ -125,6 +126,31 @@ class HttpServer(private val _asJava: Object)
 
   def actualPort():Int = {
     asJava.asInstanceOf[JHttpServer].actualPort()
+  }
+
+//future methods
+  def listenFuture(port: Int,host: String):scala.concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
+    asJava.asInstanceOf[JHttpServer].listen(port,host,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def listenFuture(port: Int):scala.concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
+    asJava.asInstanceOf[JHttpServer].listen(port,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def listenFuture():scala.concurrent.Future[HttpServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
+    asJava.asInstanceOf[JHttpServer].listen(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def closeFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServer].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

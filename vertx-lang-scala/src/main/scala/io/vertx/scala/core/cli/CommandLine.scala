@@ -18,6 +18,7 @@ package io.vertx.scala.core.cli
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -106,6 +107,7 @@ class CommandLine(private val _asJava: Object) {
     asJava.asInstanceOf[JCommandLine].isAskingForHelp()
   }
 
+//future methods
 }
 
   object CommandLine{

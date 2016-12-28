@@ -44,15 +44,20 @@
   def findFutureMethods(methods) {
     var ret = new java.util.ArrayList();
     for(method : methods) {
-      if(!method.isFluent() && shouldMethodReturnAFuture(method) && !skipMethod(method))
+      if(shouldMethodReturnAFuture(method) && !skipMethod(method))
         ret.add(method);
     }
     return ret;
   }
 
-  def isLastParamAHandlerWithAsyncResult(method) {
+
+  def isAsyncResultHandler(type) {
+    return type.kind == CLASS_HANDLER && type.args[0].kind == CLASS_ASYNC_RESULT;
+  }
+
+  def isLastParamAsyncResultHandler(method) {
     var size = method.params.size;
-    return method.params[size-1].type.kind == CLASS_HANDLER && method.params[size-1].type.args[0].kind == CLASS_ASYNC_RESULT;
+    return isAsyncResultHandler(method.params[size-1].type);
   }
 
   def isMethodNeedsOverride(callingClassName, method) {
@@ -71,9 +76,13 @@
     return false;
   }
 
+  def typeOfReturnedFuture(method) {
+    return method.params[method.params.size-1].type.args[0].args[0];
+  }
+
   def shouldMethodReturnAFuture(method) {
     var size = method.params.size;
-    return size > 0 && isLastParamAHandlerWithAsyncResult(method) && !(method.returnType.kind == CLASS_HANDLER);
+    return size > 0 && isLastParamAsyncResultHandler(method) && !(method.returnType.kind == CLASS_HANDLER);
   }
 
   def invokeMethod(target, type, method, typeParams) {
@@ -96,6 +105,31 @@
       if (paramString != '')
         paramString += ',';
       paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type, typeParams, method.typeParams);
+    }
+
+    return target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')';
+  }
+
+  def invokeMethodAndUseProvidedHandler(target, type, method, typeParams, handler) {
+    var typeParamString = '';
+    if(!method.typeParams.isEmpty){
+      for(typeParam : method.typeParams) {
+        if (typeParamString != '')
+          typeParamString += ',';
+        typeParamString += typeParam.name;
+      }
+      typeParamString = '[' + typeParamString + ']';
+    }
+
+    var paramString = '';
+    for(param : method.params) {
+      if (paramString != '')
+        paramString += ',';
+      if(isAsyncResultHandler(param.type)) {
+        paramString += handler;
+      } else {
+        paramString += toJavaWithConversion(escapeIfKeyword(param.name), param.type, typeParams, method.typeParams);
+      }
     }
 
     return target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')';
@@ -124,4 +158,9 @@
     return toScalaWithConversion(target + '.' + escapeIfKeyword(method.name) + typeParamString + '(' + paramString + ')', method.returnType, typeParams, method.typeParams);
   }
 
+  def removeLastParam(params) {
+    var ret = new java.util.ArrayList(params);
+    ret.remove(params.size - 1);
+    return ret;
+  }
 }

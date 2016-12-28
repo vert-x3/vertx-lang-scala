@@ -18,6 +18,7 @@ package io.vertx.scala.core.file
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{FileProps => JFileProps}
 
 /**
@@ -64,6 +65,7 @@ class FileProps(private val _asJava: Object) {
     asJava.asInstanceOf[JFileProps].size()
   }
 
+//future methods
 }
 
   object FileProps{

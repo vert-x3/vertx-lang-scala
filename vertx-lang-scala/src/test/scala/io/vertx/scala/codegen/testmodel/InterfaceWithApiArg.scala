@@ -18,6 +18,7 @@ package io.vertx.scala.codegen.testmodel
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.{InterfaceWithApiArg => JInterfaceWithApiArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
@@ -45,6 +46,7 @@ class InterfaceWithApiArg(private val _asJava: Object)
     asJava.asInstanceOf[JInterfaceWithApiArg].meth()
   }
 
+//future methods
 }
 
   object InterfaceWithApiArg{

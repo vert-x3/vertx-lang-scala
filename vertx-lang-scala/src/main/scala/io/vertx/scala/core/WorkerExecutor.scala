@@ -18,6 +18,7 @@ package io.vertx.scala.core
 
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.{Future => JFuture}
@@ -57,6 +58,19 @@ class WorkerExecutor(private val _asJava: Object)
 
   def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
+  }
+
+//future methods
+  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered,promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => x)
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
