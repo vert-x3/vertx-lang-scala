@@ -19,6 +19,8 @@ package io.vertx.scala.core.dns
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.dns.{MxRecord => JMxRecord}
 
 /**
@@ -32,11 +34,11 @@ class MxRecord(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def priority():Int = {
+  def priority():Int = {
     asJava.asInstanceOf[JMxRecord].priority().asInstanceOf[Int]
   }
 
-      def name():String = {
+  def name():String = {
     asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
 
@@ -44,6 +46,6 @@ class MxRecord(private val _asJava: Object) {
 }
 
   object MxRecord{
-    def apply(asJava: JMxRecord) = new MxRecord(asJava)  
+    def apply(asJava: Object) = new MxRecord(asJava)  
   //static methods
   }

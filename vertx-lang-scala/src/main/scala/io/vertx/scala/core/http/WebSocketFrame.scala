@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
 import io.vertx.scala.core.buffer.Buffer
@@ -59,19 +61,19 @@ class WebSocketFrame(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def isText():Boolean = {
+  def isText():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
-      def isBinary():Boolean = {
+  def isBinary():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
-      def isContinuation():Boolean = {
+  def isContinuation():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
-      def isFinal():Boolean = {
+  def isFinal():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
@@ -79,7 +81,7 @@ class WebSocketFrame(private val _asJava: Object) {
 }
 
   object WebSocketFrame{
-    def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
+    def apply(asJava: Object) = new WebSocketFrame(asJava)  
   //static methods
     def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
       WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))

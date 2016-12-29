@@ -19,6 +19,8 @@ package io.vertx.scala.core
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
@@ -66,7 +68,7 @@ class TimeoutStream(private val _asJava: Object)
 
 //default methods
 //basic methods
-      def cancel():Unit = {
+  def cancel():Unit = {
     asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
@@ -74,6 +76,6 @@ class TimeoutStream(private val _asJava: Object)
 }
 
   object TimeoutStream{
-    def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
+    def apply(asJava: Object) = new TimeoutStream(asJava)  
   //static methods
   }

@@ -19,6 +19,8 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcreteHandlerUserTypeExtension}
@@ -33,7 +35,7 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
 //fluent methods
 //default methods
 //basic methods
-      override def handle(arg0: RefedInterface1):Unit = {
+  override def handle(arg0: RefedInterface1):Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserTypeExtension].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
@@ -41,6 +43,6 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
 }
 
   object ConcreteHandlerUserTypeExtension{
-    def apply(asJava: JConcreteHandlerUserTypeExtension) = new ConcreteHandlerUserTypeExtension(asJava)  
+    def apply(asJava: Object) = new ConcreteHandlerUserTypeExtension(asJava)  
   //static methods
   }

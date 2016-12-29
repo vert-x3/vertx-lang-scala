@@ -86,7 +86,12 @@
   }
 
   def invokeMethod(target, type, method, typeParams) {
-    return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method, typeParams), method.returnType, typeParams, method.typeParams);
+    if(method.returnType.kind == CLASS_OBJECT) {
+      return 'toScala[' + method.returnType.name + '](' + invokeMethodWithoutConvertingReturn(target, type, method, typeParams) + ')';
+    }
+    else {
+      return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method, typeParams), method.returnType, typeParams, method.typeParams);
+    }
   }
 
   def invokeMethodWithoutConvertingReturn(target, type, method, typeParams) {
@@ -95,7 +100,7 @@
       for(typeParam : method.typeParams) {
         if (typeParamString != '')
           typeParamString += ',';
-        typeParamString += typeParam.name;
+        typeParamString += 'Object';
       }
       typeParamString = '[' + typeParamString + ']';
     }
@@ -116,7 +121,7 @@
       for(typeParam : method.typeParams) {
         if (typeParamString != '')
           typeParamString += ',';
-        typeParamString += typeParam.name;
+        typeParamString += 'Object';
       }
       typeParamString = '[' + typeParamString + ']';
     }
@@ -151,7 +156,7 @@
       for(typeParam : method.typeParams) {
         if (typeParamString != '')
           typeParamString += ',';
-        typeParamString += typeParam.name;
+        typeParamString += 'Object';
       }
       typeParamString = '[' + typeParamString + ']';
     }

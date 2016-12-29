@@ -19,6 +19,8 @@ package io.vertx.scala.core.streams
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -51,49 +53,49 @@ trait WriteStream[T]
 
 }
 
-  object WriteStream{
-    def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
-      private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
+object WriteStream{
+  def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None):WriteStream[T] = new WriteStreamImpl[T](asJava, objectToT)
+    private class WriteStreamImpl[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) extends WriteStream[T] {
 
-        def asJava = _asJava
+      def asJava = _asJava
 
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   def write(data: T):WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[T]].write(data)
+    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data))
     this
   }
 
   def setWriteQueueMaxSize(maxSize: Int):WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[T]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JWriteStream[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
   def drainHandler(handler: Handler[Unit]):WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[T]].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JWriteStream[Object]].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
 //default methods
   //io.vertx.core.streams.WriteStream
   def end(t: T):Unit = {
-    asJava.asInstanceOf[JWriteStream[T]].end(t)
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](t))
   }
 
 //basic methods
-      def end():Unit = {
-    asJava.asInstanceOf[JWriteStream[T]].end()
+  def end():Unit = {
+    asJava.asInstanceOf[JWriteStream[Object]].end()
   }
 
-      def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JWriteStream[T]].writeQueueFull().asInstanceOf[Boolean]
+  def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JWriteStream[Object]].writeQueueFull().asInstanceOf[Boolean]
   }
 
 //future methods
 }
-  }
+}

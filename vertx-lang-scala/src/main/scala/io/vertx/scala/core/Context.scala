@@ -19,6 +19,8 @@ package io.vertx.scala.core
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Context => JContext}
 import io.vertx.core.{Future => JFuture}
@@ -73,79 +75,79 @@ class Context(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def runOnContext(action: Handler[Unit]):Unit = {
+  def runOnContext(action: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})
   }
 
-      def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
+  def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
-      def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
+  def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
-      def deploymentID():String = {
+  def deploymentID():String = {
     asJava.asInstanceOf[JContext].deploymentID().asInstanceOf[String]
   }
 
-      def config():scala.Option[io.vertx.core.json.JsonObject] = {
+  def config():scala.Option[io.vertx.core.json.JsonObject] = {
     scala.Option(asJava.asInstanceOf[JContext].config())
   }
 
-      def processArgs():scala.collection.mutable.Buffer[String] = {
+  def processArgs():scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JContext].processArgs().asScala.map(x => x.asInstanceOf[String])
   }
 
-      def isEventLoopContext():Boolean = {
+  def isEventLoopContext():Boolean = {
     asJava.asInstanceOf[JContext].isEventLoopContext().asInstanceOf[Boolean]
   }
 
-      def isWorkerContext():Boolean = {
+  def isWorkerContext():Boolean = {
     asJava.asInstanceOf[JContext].isWorkerContext().asInstanceOf[Boolean]
   }
 
-      def isMultiThreadedWorkerContext():Boolean = {
+  def isMultiThreadedWorkerContext():Boolean = {
     asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext().asInstanceOf[Boolean]
   }
 
-      def get[T](key: String):T = {
-    asJava.asInstanceOf[JContext].get[T](key.asInstanceOf[java.lang.String])
+  def get[T:TypeTag](key: String):T = {
+    toScala[T](asJava.asInstanceOf[JContext].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
-      def put(key: String,value: AnyRef):Unit = {
-    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
+  def put(key: String,value: AnyRef):Unit = {
+    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],toJava[Object](value))
   }
 
-      def remove(key: String):Boolean = {
+  def remove(key: String):Boolean = {
     asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
-      def owner():Vertx = {
+  def owner():Vertx = {
     Vertx(asJava.asInstanceOf[JContext].owner())
   }
 
-      def getInstanceCount():Int = {
+  def getInstanceCount():Int = {
     asJava.asInstanceOf[JContext].getInstanceCount().asInstanceOf[Int]
   }
 
 //future methods
-  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => if (x == null) null.asInstanceOf[T] else x)
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
+  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
+    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def executeBlockingFuture[T](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => if (x == null) null.asInstanceOf[T] else x)
-    asJava.asInstanceOf[JContext].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
+  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
+    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
   object Context{
-    def apply(asJava: JContext) = new Context(asJava)  
+    def apply(asJava: Object) = new Context(asJava)  
   //static methods
     def isOnWorkerThread():Boolean = {
       JContext.isOnWorkerThread().asInstanceOf[Boolean]

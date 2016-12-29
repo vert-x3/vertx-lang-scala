@@ -18,9 +18,7 @@
 @foreach{method : cacheReturnMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -38,9 +36,7 @@
 @foreach{method : fluentMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -54,9 +50,7 @@
 @foreach{method : defaultMethods}
   @foreach{ownerType : method.ownerTypes}//@{ownerType.name}\n@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -67,13 +61,9 @@
 
 //basic methods\n
 @foreach{method : basicMethods}
-  @foreach{ty : method.ownerTypes}
-  @end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -86,14 +76,12 @@
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
   def @{createNameForMethodReturningAFuture(method)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method))}] = {\n
 		@comment{'TODO: Why is there no nullable-info available in here??'}
-    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method))}, @{toScalaType(typeOfReturnedFuture(method))}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method))}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
+    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method))}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method))}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
     @{invokeMethodAndUseProvidedHandler('asJava' + fromObjectToInstanceOf(type), type, method, typeParams, 'promiseAndHandler._1')}\n
     promiseAndHandler._2.future\n
   }\n
