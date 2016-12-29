@@ -19,12 +19,13 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class InterfaceWithVariableArg[T,U](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends GenericRefedInterface[U](_asJava) {
 
 
@@ -53,6 +54,6 @@ class InterfaceWithVariableArg[T,U](private val _asJava: Object, private val _us
 }
 
   object InterfaceWithVariableArg{
-    def apply[T,U](asJava: Object, useTypeTags:Boolean = false) = new InterfaceWithVariableArg[T,U](asJava, useTypeTags)  
+    def apply[T:TypeTag,U:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new InterfaceWithVariableArg[T,U](asJava, useTypeTags)  
   //static methods
   }

@@ -19,6 +19,7 @@ package io.vertx.scala.core.cli
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -51,15 +52,15 @@ class CommandLine(private val _asJava: Object, private val _useTypeTags:Boolean 
     asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x.asInstanceOf[String])
   }
 
-  def getOptionValue[T](name: String):T = {
+  def getOptionValue[T:TypeTag](name: String):T = {
     asJava.asInstanceOf[JCommandLine].getOptionValue[T](name.asInstanceOf[java.lang.String])
   }
 
-  def getArgumentValue[T](name: String):T = {
+  def getArgumentValue[T:TypeTag](name: String):T = {
     asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name.asInstanceOf[java.lang.String])
   }
 
-  def getArgumentValue[T](index: Int):T = {
+  def getArgumentValue[T:TypeTag](index: Int):T = {
     asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index.asInstanceOf[java.lang.Integer])
   }
 

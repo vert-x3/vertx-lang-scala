@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
@@ -37,7 +38,7 @@ import io.vertx.core.Handler
   * 
   * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
-class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Message[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:T = _
@@ -74,7 +75,7 @@ class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean =
     asJava.asInstanceOf[JMessage[T]].reply(message)
   }
 
-  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+  def reply[R:TypeTag](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
@@ -82,7 +83,7 @@ class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean =
     asJava.asInstanceOf[JMessage[T]].reply(message,options.asJava)
   }
 
-  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+  def reply[R:TypeTag](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
@@ -91,13 +92,13 @@ class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean =
   }
 
 //future methods
-  def replyFuture[R](message: AnyRef):scala.concurrent.Future[Message[R]] = {
+  def replyFuture[R:TypeTag](message: AnyRef):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessage[T]].reply[R](message,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def replyFuture[R](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
+  def replyFuture[R:TypeTag](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -106,6 +107,6 @@ class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean =
 }
 
   object Message{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new Message[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new Message[T](asJava, useTypeTags)  
   //static methods
   }

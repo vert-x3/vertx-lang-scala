@@ -19,6 +19,7 @@ package io.vertx.scala.core.streams
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -52,8 +53,8 @@ trait WriteStream[T]
 }
 
   object WriteStream{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false):WriteStream[T] = new WriteStreamImpl[T](asJava, useTypeTags)    
-      private class WriteStreamImpl[T](private val _asJava: Object, private val _useTypeTags:Boolean) extends WriteStream[T] {
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false):WriteStream[T] = new WriteStreamImpl[T](asJava, useTypeTags)    
+      private class WriteStreamImpl[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean) extends WriteStream[T] {
 
         def asJava = _asJava
 

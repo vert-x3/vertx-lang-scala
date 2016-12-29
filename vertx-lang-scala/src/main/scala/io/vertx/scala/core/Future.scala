@@ -19,6 +19,7 @@ package io.vertx.scala.core
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
@@ -28,7 +29,7 @@ import io.vertx.core.Handler
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Future[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:Handler[AsyncResult[T]] = _
@@ -50,22 +51,22 @@ class Future[T](private val _asJava: Object, private val _useTypeTags:Boolean = 
 
 //default methods
   //io.vertx.core.Future
-  def compose[U](handler: Handler[T],next: Future[U]):Future[U] = {
+  def compose[U:TypeTag](handler: Handler[T],next: Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x: T => handler.handle(x)},next.asJava.asInstanceOf[JFuture[U]]))
   }
 
   //io.vertx.core.Future
-  def compose[U](mapper: T => Future[U]):Future[U] = {
+  def compose[U:TypeTag](mapper: T => Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x: T => mapper(x).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   //io.vertx.core.Future
-  def map[U](mapper: T => U):Future[U] = {
+  def map[U:TypeTag](mapper: T => U):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x: T => mapper(x)}))
   }
 
   //io.vertx.core.Future
-  def map[V](value: V):Future[V] = {
+  def map[V:TypeTag](value: V):Future[V] = {
     Future[V](asJava.asInstanceOf[JFuture[T]].map[V](value))
   }
 
@@ -110,25 +111,25 @@ class Future[T](private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object Future{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new Future[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new Future[T](asJava, useTypeTags)  
   //static methods
-    def future[T]():Future[T] = {
+    def future[T:TypeTag]():Future[T] = {
       Future[T](JFuture.future[T]())
     }
 
-    def succeededFuture[T]():Future[T] = {
+    def succeededFuture[T:TypeTag]():Future[T] = {
       Future[T](JFuture.succeededFuture[T]())
     }
 
-    def succeededFuture[T](result: T):Future[T] = {
+    def succeededFuture[T:TypeTag](result: T):Future[T] = {
       Future[T](JFuture.succeededFuture[T](result))
     }
 
-    def failedFuture[T](t: Throwable):Future[T] = {
+    def failedFuture[T:TypeTag](t: Throwable):Future[T] = {
       Future[T](JFuture.failedFuture[T](t))
     }
 
-    def failedFuture[T](failureMessage: String):Future[T] = {
+    def failedFuture[T:TypeTag](failureMessage: String):Future[T] = {
       Future[T](JFuture.failedFuture[T](failureMessage.asInstanceOf[java.lang.String]))
     }
 

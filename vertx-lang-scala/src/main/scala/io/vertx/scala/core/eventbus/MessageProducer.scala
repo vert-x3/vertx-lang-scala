@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
@@ -32,7 +33,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class MessageProducer[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends WriteStream[T] {
 
   def asJava = _asJava
@@ -79,7 +80,7 @@ class MessageProducer[T](private val _asJava: Object, private val _useTypeTags:B
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send(message))
   }
 
-  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+  def send[R:TypeTag](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
   }
 
@@ -96,7 +97,7 @@ class MessageProducer[T](private val _asJava: Object, private val _useTypeTags:B
   }
 
 //future methods
-  def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
+  def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessageProducer[T]].send[R](message,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -105,6 +106,6 @@ class MessageProducer[T](private val _asJava: Object, private val _useTypeTags:B
 }
 
   object MessageProducer{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new MessageProducer[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new MessageProducer[T](asJava, useTypeTags)  
   //static methods
   }

@@ -19,6 +19,7 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}

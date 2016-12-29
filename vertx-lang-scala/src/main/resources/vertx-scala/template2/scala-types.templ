@@ -398,13 +398,16 @@
     return "UNKOWN PROPERTY TYPE";
   }
 
-  def assembleTypeParams(typeParams) {
+  def assembleTypeParams(typeParams, withTypeParams) {
     if(!typeParams.isEmpty){
   		var ret = '';
   		for(param:typeParams){
   		  if(ret != '')
   		    ret += ',';
   		  ret += param.name;
+  		  if(withTypeParams && param.name.length == 1) {
+  		    ret += ':TypeTag';
+  		  }
   		}
   		return '[' + ret + ']';
     }

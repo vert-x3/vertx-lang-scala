@@ -19,11 +19,12 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class GenericRefedInterface[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -44,6 +45,6 @@ class GenericRefedInterface[T](private val _asJava: Object, private val _useType
 }
 
   object GenericRefedInterface{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new GenericRefedInterface[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new GenericRefedInterface[T](asJava, useTypeTags)  
   //static methods
   }
