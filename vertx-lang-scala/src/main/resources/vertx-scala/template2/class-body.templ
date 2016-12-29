@@ -83,7 +83,7 @@
 //future methods\n
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
-	def @{createNameForMethodReturningAFuture(method)}
+  def @{createNameForMethodReturningAFuture(method)}
 	@if{!method.typeParams.isEmpty}
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
 	@end{}(
