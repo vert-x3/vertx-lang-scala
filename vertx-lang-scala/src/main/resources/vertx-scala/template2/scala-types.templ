@@ -163,9 +163,13 @@
       return ret;
     }
     else if(type.kind == CLASS_FUNCTION) {
-      var executed = name + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
+      var executed = name;
+      if(type.args[0].kind == CLASS_VOID)
+        executed = executed + "()";
+      else
+        executed = executed + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
       executed = toJavaWithConversion(executed, type.args[1], typeParams, methodTypeParams);
-      var ret = "{x:" + toJavaType(type.args[0]) + "=> " + executed + "}";
+      var ret = "{x: " + toJavaType(type.args[0]) + " => " + executed + "}";
       if(nullable)
         ret = name + '.map(' + name +' => ' + ret + ').getOrElse(null)';
       return ret;

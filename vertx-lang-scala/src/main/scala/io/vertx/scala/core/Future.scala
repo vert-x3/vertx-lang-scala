@@ -56,12 +56,12 @@ class Future[T](private val _asJava: Object) {
 
   //io.vertx.core.Future
   def compose[U](mapper: T => Future[U]):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x:T=> mapper(x).asJava.asInstanceOf[JFuture[U]]}))
+    Future[U](asJava.asInstanceOf[JFuture[T]].compose[U]({x: T => mapper(x).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   //io.vertx.core.Future
   def map[U](mapper: T => U):Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x:T=> mapper(x)}))
+    Future[U](asJava.asInstanceOf[JFuture[T]].map[U]({x: T => mapper(x)}))
   }
 
   //io.vertx.core.Future
