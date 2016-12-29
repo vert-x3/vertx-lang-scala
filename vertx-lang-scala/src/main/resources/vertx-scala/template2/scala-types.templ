@@ -59,25 +59,28 @@
       return 'AsyncResultWrapper[' + toJavaType(type.args[0]) + ',' + toScalaType(type.args[0]) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
+        var conversion = '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         if(nullable) {
-          return 'scala.Option(' + name + ').map(_.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +'))';
+          return 'scala.Option(' + name + ').map(_' + conversion + ')';
         }
         else {
-          return name + '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+          return name + conversion;
         }
       } else if (type.kind == CLASS_SET){
+        var conversion = '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         if(nullable) {
-          return 'scala.Option(' + name + ').map(_.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +'))';
+          return 'scala.Option(' + name + ').map(_' + conversion + ')';
         }
         else {
-          return name + '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+          return name + conversion;
         }
       } else if (type.kind == CLASS_MAP){
+        var conversion = '.asScala.mapValues(x => ' + toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) + ')';
         if(nullable) {
-          return 'scala.Option(' + name + ').map(_.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) +'))';
+          return 'scala.Option(' + name + ').map(_' + conversion +')';
         }
         else {
-          return name + '.asScala.mapValues(x => '+ toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) +')';
+          return name + conversion;
         }
       }
     }
