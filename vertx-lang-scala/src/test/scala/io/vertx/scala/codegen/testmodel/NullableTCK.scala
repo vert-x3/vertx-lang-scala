@@ -971,15 +971,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapByteHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Byte]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Byte] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))})
   }
 
   def methodWithNullableMapByteHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Byte]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Byte]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte],scala.collection.mutable.Map[String, Byte]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))})
   }
 
   def methodWithNullableMapByteReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Byte]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
   }
 
   def methodWithNonNullableMapShortParam(param: scala.collection.mutable.Map[String, Short]):Boolean = {
@@ -991,15 +991,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapShortHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Short]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Short] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))})
   }
 
   def methodWithNullableMapShortHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Short]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Short]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short],scala.collection.mutable.Map[String, Short]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))})
   }
 
   def methodWithNullableMapShortReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Short]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
   }
 
   def methodWithNonNullableMapIntegerParam(param: scala.collection.mutable.Map[String, Int]):Boolean = {
@@ -1011,15 +1011,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapIntegerHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Int]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Integer] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))})
   }
 
   def methodWithNullableMapIntegerHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Int]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Int]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer],scala.collection.mutable.Map[String, Int]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))})
   }
 
   def methodWithNullableMapIntegerReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Int]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
   }
 
   def methodWithNonNullableMapLongParam(param: scala.collection.mutable.Map[String, Long]):Boolean = {
@@ -1031,15 +1031,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapLongHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Long]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Long] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))})
   }
 
   def methodWithNullableMapLongHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Long]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Long]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long],scala.collection.mutable.Map[String, Long]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))})
   }
 
   def methodWithNullableMapLongReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Long]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
   }
 
   def methodWithNonNullableMapFloatParam(param: scala.collection.mutable.Map[String, Float]):Boolean = {
@@ -1051,15 +1051,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapFloatHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Float]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Float] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))})
   }
 
   def methodWithNullableMapFloatHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Float]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Float]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float],scala.collection.mutable.Map[String, Float]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))})
   }
 
   def methodWithNullableMapFloatReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Float]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
   }
 
   def methodWithNonNullableMapDoubleParam(param: scala.collection.mutable.Map[String, Double]):Boolean = {
@@ -1071,15 +1071,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapDoubleHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Double]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Double] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))})
   }
 
   def methodWithNullableMapDoubleHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Double]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Double]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double],scala.collection.mutable.Map[String, Double]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))})
   }
 
   def methodWithNullableMapDoubleReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Double]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
   }
 
   def methodWithNonNullableMapBooleanParam(param: scala.collection.mutable.Map[String, Boolean]):Boolean = {
@@ -1091,15 +1091,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapBooleanHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Boolean]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Boolean] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))})
   }
 
   def methodWithNullableMapBooleanHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Boolean]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Boolean]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean],scala.collection.mutable.Map[String, Boolean]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))})
   }
 
   def methodWithNullableMapBooleanReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Boolean]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
   }
 
   def methodWithNonNullableMapStringParam(param: scala.collection.mutable.Map[String, String]):Boolean = {
@@ -1119,7 +1119,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapStringReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, String]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*))
   }
 
   def methodWithNonNullableMapCharParam(param: scala.collection.mutable.Map[String, Char]):Boolean = {
@@ -1131,15 +1131,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapCharHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, Char]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.Character] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))})
   }
 
   def methodWithNullableMapCharHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Char]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Char]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character],scala.collection.mutable.Map[String, Char]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))})
   }
 
   def methodWithNullableMapCharReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, Char]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
   }
 
   def methodWithNonNullableMapJsonObjectParam(param: scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]):Boolean = {
@@ -1151,15 +1151,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapJsonObjectHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, JsonObject] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
   }
 
   def methodWithNullableMapJsonObjectHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject],scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
   }
 
   def methodWithNullableMapJsonObjectReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
   }
 
   def methodWithNonNullableMapJsonArrayParam(param: scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]):Boolean = {
@@ -1171,15 +1171,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapJsonArrayHandler(notNull: Boolean,handler: Handler[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean],{x: java.util.Map[String, JsonArray] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
   }
 
   def methodWithNullableMapJsonArrayHandlerAsyncResult(notNull: Boolean,handler: Handler[AsyncResult[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray],scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
   }
 
   def methodWithNullableMapJsonArrayReturn(notNull: Boolean):scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
-    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayReturn(notNull.asInstanceOf[java.lang.Boolean])).map(collection.mutable.Map(_.asScala.mapValues(x => x).toSeq: _*))
+    scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayReturn(notNull.asInstanceOf[java.lang.Boolean])).map(x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
   }
 
   def methodWithNonNullableMapApiParam(param: scala.collection.mutable.Map[String, RefedInterface1]):Boolean = {
@@ -1675,11 +1675,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableByteHandler(handler: Handler[scala.collection.mutable.Map[String, Byte]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandler({x: java.util.Map[String, java.lang.Byte] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))})
   }
 
   def methodWithMapNullableByteHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Byte]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Byte]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte],scala.collection.mutable.Map[String, Byte]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))})
   }
 
   def methodWithMapNullableByteReturn():scala.collection.mutable.Map[String, Byte] = {
@@ -1691,11 +1691,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableShortHandler(handler: Handler[scala.collection.mutable.Map[String, Short]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandler({x: java.util.Map[String, java.lang.Short] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))})
   }
 
   def methodWithMapNullableShortHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Short]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Short]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short],scala.collection.mutable.Map[String, Short]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))})
   }
 
   def methodWithMapNullableShortReturn():scala.collection.mutable.Map[String, Short] = {
@@ -1707,11 +1707,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableIntegerHandler(handler: Handler[scala.collection.mutable.Map[String, Int]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandler({x: java.util.Map[String, java.lang.Integer] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))})
   }
 
   def methodWithMapNullableIntegerHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Int]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Int]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer],scala.collection.mutable.Map[String, Int]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))})
   }
 
   def methodWithMapNullableIntegerReturn():scala.collection.mutable.Map[String, Int] = {
@@ -1723,11 +1723,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableLongHandler(handler: Handler[scala.collection.mutable.Map[String, Long]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandler({x: java.util.Map[String, java.lang.Long] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))})
   }
 
   def methodWithMapNullableLongHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Long]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Long]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long],scala.collection.mutable.Map[String, Long]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))})
   }
 
   def methodWithMapNullableLongReturn():scala.collection.mutable.Map[String, Long] = {
@@ -1739,11 +1739,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableBooleanHandler(handler: Handler[scala.collection.mutable.Map[String, Boolean]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandler({x: java.util.Map[String, java.lang.Boolean] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))})
   }
 
   def methodWithMapNullableBooleanHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Boolean]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Boolean]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean],scala.collection.mutable.Map[String, Boolean]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))})
   }
 
   def methodWithMapNullableBooleanReturn():scala.collection.mutable.Map[String, Boolean] = {
@@ -1755,11 +1755,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableFloatHandler(handler: Handler[scala.collection.mutable.Map[String, Float]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandler({x: java.util.Map[String, java.lang.Float] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))})
   }
 
   def methodWithMapNullableFloatHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Float]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Float]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float],scala.collection.mutable.Map[String, Float]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))})
   }
 
   def methodWithMapNullableFloatReturn():scala.collection.mutable.Map[String, Float] = {
@@ -1771,11 +1771,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableDoubleHandler(handler: Handler[scala.collection.mutable.Map[String, Double]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandler({x: java.util.Map[String, java.lang.Double] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))})
   }
 
   def methodWithMapNullableDoubleHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Double]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Double]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double],scala.collection.mutable.Map[String, Double]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))})
   }
 
   def methodWithMapNullableDoubleReturn():scala.collection.mutable.Map[String, Double] = {
@@ -1803,11 +1803,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableCharHandler(handler: Handler[scala.collection.mutable.Map[String, Char]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandler({x: java.util.Map[String, java.lang.Character] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))})
   }
 
   def methodWithMapNullableCharHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, Char]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, Char]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character],scala.collection.mutable.Map[String, Char]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))})
   }
 
   def methodWithMapNullableCharReturn():scala.collection.mutable.Map[String, Char] = {
@@ -1819,11 +1819,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler({x: java.util.Map[String, JsonObject] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
   }
 
   def methodWithMapNullableJsonObjectHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject],scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
   }
 
   def methodWithMapNullableJsonObjectReturn():scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
@@ -1835,11 +1835,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler({x: java.util.Map[String, JsonArray] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))})
   }
 
   def methodWithMapNullableJsonArrayHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String],scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray],scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x, a => collection.mutable.Map(a.asScala.mapValues(x => x).toSeq: _*)))})
   }
 
   def methodWithMapNullableJsonArrayReturn():scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
@@ -2136,43 +2136,43 @@ def methodWithNullableSetGenEnumHandlerAsyncResultFuture(notNull: Boolean):scala
   }
 
 def methodWithNullableMapByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Byte]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Byte]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Byte], scala.collection.mutable.Map[String, Byte]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapShortHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Short]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Short]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Short], scala.collection.mutable.Map[String, Short]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapIntegerHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Int]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Int]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Integer], scala.collection.mutable.Map[String, Int]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapLongHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Long]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Long]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Long], scala.collection.mutable.Map[String, Long]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapFloatHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Float]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Float]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Float], scala.collection.mutable.Map[String, Float]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapDoubleHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Double]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Double]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Double], scala.collection.mutable.Map[String, Double]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapBooleanHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Boolean]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Boolean]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Boolean], scala.collection.mutable.Map[String, Boolean]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2184,19 +2184,19 @@ def methodWithNullableMapStringHandlerAsyncResultFuture(notNull: Boolean):scala.
   }
 
 def methodWithNullableMapCharHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, Char]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Char]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Character], scala.collection.mutable.Map[String, Char]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2382,43 +2382,43 @@ def methodWithSetNullableGenEnumHandlerAsyncResultFuture():scala.concurrent.Futu
   }
 
 def methodWithMapNullableByteHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Byte]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Byte]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Byte], scala.collection.mutable.Map[String, Byte]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableShortHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Short]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Short]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Short], scala.collection.mutable.Map[String, Short]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableIntegerHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Int]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Int]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Integer], scala.collection.mutable.Map[String, Int]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableLongHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Long]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Long]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Long], scala.collection.mutable.Map[String, Long]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableBooleanHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Boolean]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Boolean]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Boolean], scala.collection.mutable.Map[String, Boolean]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableFloatHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Float]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Float]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Float], scala.collection.mutable.Map[String, Float]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableDoubleHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Double]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Double]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Double], scala.collection.mutable.Map[String, Double]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2430,19 +2430,19 @@ def methodWithMapNullableStringHandlerAsyncResultFuture():scala.concurrent.Futur
   }
 
 def methodWithMapNullableCharHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, Char]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, Char]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.Character], scala.collection.mutable.Map[String, Char]](x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableJsonObjectHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 def methodWithMapNullableJsonArrayHandlerAsyncResultFuture():scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]](x => collection.mutable.Map(x.asScala.mapValues(x => x).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

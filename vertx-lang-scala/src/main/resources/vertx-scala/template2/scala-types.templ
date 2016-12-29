@@ -78,7 +78,7 @@
         /*TODO: this feels very expensive*/
         var conversion = '.asScala.mapValues(x => ' + toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) + ')';
         if(nullable) {
-          return 'scala.Option(' + name + ').map(collection.mutable.Map(_' + conversion +'.toSeq: _*))';
+          return 'scala.Option(' + name + ').map(x => collection.mutable.Map(x' + conversion +'.toSeq: _*))';
         }
         else {
           return 'collection.mutable.Map('+ name + conversion + '.toSeq: _*)';
@@ -244,7 +244,7 @@
       } else if (type.kind == CLASS_SET){
         ret += 'java.util.Set['+ toJavaType(type.args[0]) +']';
       } else if (type.kind == CLASS_MAP){
-        ret += 'java.util.Map[String, '+ toJavaType(type.args[0]) +']';
+        ret += 'java.util.Map[String, '+ toJavaType(type.args[1]) +']';
       }
       return ret;
     } else if(type.kind == CLASS_ASYNC_RESULT) {
