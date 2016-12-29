@@ -36,7 +36,7 @@ class DataObjectWithNestedBuffer(private val _asJava: JDataObjectWithNestedBuffe
     Buffer(asJava.getBuffer())
   }
   def setBuffers(value: scala.collection.mutable.Buffer[Buffer]) = {
-    asJava.setBuffers(value.map(__.asJava.asInstanceOf[JBuffer]).asJava)
+    asJava.setBuffers(value.map(_.asJava.asInstanceOf[JBuffer]).asJava)
     this
   }
   def getBuffers: scala.collection.mutable.Buffer[Buffer] = {
