@@ -202,59 +202,59 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
   def methodWithMapReturn(handler: Handler[String]):scala.collection.mutable.Map[String, String] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
   def methodWithMapStringReturn(handler: Handler[String]):scala.collection.mutable.Map[String, String] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
   def methodWithMapLongReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Long] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapLongReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Long])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapLongReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)
   }
 
   def methodWithMapIntegerReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Int] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapIntegerReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Int])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapIntegerReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)
   }
 
   def methodWithMapShortReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Short] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapShortReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Short])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapShortReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)
   }
 
   def methodWithMapByteReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Byte] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapByteReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Byte])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapByteReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)
   }
 
   def methodWithMapCharacterReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Char] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapCharacterReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Char])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapCharacterReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)
   }
 
   def methodWithMapBooleanReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Boolean] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapBooleanReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Boolean])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapBooleanReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)
   }
 
   def methodWithMapFloatReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Float] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapFloatReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Float])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapFloatReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)
   }
 
   def methodWithMapDoubleReturn(handler: Handler[String]):scala.collection.mutable.Map[String, Double] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapDoubleReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Double])
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapDoubleReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)
   }
 
   def methodWithMapJsonObjectReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
   }
 
   def methodWithMapComplexJsonObjectReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
   }
 
   def methodWithMapJsonArrayReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
   }
 
   def methodWithMapComplexJsonArrayReturn(handler: Handler[String]):scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
   }
 
   def methodWithListStringReturn():scala.collection.mutable.Buffer[String] = {

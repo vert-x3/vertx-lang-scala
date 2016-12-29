@@ -75,7 +75,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithMapParam(func: scala.collection.mutable.Map[String, String] => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithMapParam({x:java.util.Map[String, java.lang.String]=> func(x.asScala.mapValues(x => x.asInstanceOf[String])).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithMapParam({x:java.util.Map[String, java.lang.String]=> func(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithGenericParam[T](t: T,func: T => String):String = {
