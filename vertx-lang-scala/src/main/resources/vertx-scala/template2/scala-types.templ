@@ -75,12 +75,13 @@
           return name + conversion;
         }
       } else if (type.kind == CLASS_MAP){
+        /*TODO: this feels very expensive*/
         var conversion = '.asScala.mapValues(x => ' + toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) + ')';
         if(nullable) {
-          return 'scala.Option(' + name + ').map(_' + conversion +')';
+          return 'scala.Option(' + name + ').map(collection.mutable.Map(_' + conversion +'.toSeq: _*))';
         }
         else {
-          return name + conversion;
+          return 'collection.mutable.Map('+ name + conversion + '.toSeq: _*)';
         }
       }
     }
