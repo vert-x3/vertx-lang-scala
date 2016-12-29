@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class ServerWebSocketStream(private val _asJava: Object) 
+class ServerWebSocketStream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[ServerWebSocket] {
 
   def asJava = _asJava
@@ -67,6 +67,6 @@ class ServerWebSocketStream(private val _asJava: Object)
 }
 
   object ServerWebSocketStream{
-    def apply(asJava: JServerWebSocketStream) = new ServerWebSocketStream(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new ServerWebSocketStream(asJava, useTypeTags)  
   //static methods
   }

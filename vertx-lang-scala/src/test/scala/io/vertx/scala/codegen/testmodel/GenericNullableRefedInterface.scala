@@ -23,7 +23,7 @@ import io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNull
 
 /**
   */
-class GenericNullableRefedInterface[T](private val _asJava: Object) {
+class GenericNullableRefedInterface[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -31,7 +31,7 @@ class GenericNullableRefedInterface[T](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def getValue():T = {
+  def getValue():T = {
     asJava.asInstanceOf[JGenericNullableRefedInterface[T]].getValue()
   }
 
@@ -39,6 +39,6 @@ class GenericNullableRefedInterface[T](private val _asJava: Object) {
 }
 
   object GenericNullableRefedInterface{
-    def apply[T](asJava: JGenericNullableRefedInterface[T]) = new GenericNullableRefedInterface[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new GenericNullableRefedInterface[T](asJava, useTypeTags)  
   //static methods
   }

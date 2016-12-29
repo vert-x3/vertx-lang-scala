@@ -23,7 +23,7 @@ import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class RefedInterface1(private val _asJava: Object) {
+class RefedInterface1(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -36,7 +36,7 @@ class RefedInterface1(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def getString():String = {
+  def getString():String = {
     asJava.asInstanceOf[JRefedInterface1].getString().asInstanceOf[String]
   }
 
@@ -44,6 +44,6 @@ class RefedInterface1(private val _asJava: Object) {
 }
 
   object RefedInterface1{
-    def apply(asJava: JRefedInterface1) = new RefedInterface1(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new RefedInterface1(asJava, useTypeTags)  
   //static methods
   }

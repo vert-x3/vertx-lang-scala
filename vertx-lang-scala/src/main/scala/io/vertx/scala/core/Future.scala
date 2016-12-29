@@ -28,7 +28,7 @@ import io.vertx.core.Handler
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T](private val _asJava: Object) {
+class Future[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:Handler[AsyncResult[T]] = _
@@ -70,39 +70,39 @@ class Future[T](private val _asJava: Object) {
   }
 
 //basic methods
-      def isComplete():Boolean = {
+  def isComplete():Boolean = {
     asJava.asInstanceOf[JFuture[T]].isComplete().asInstanceOf[Boolean]
   }
 
-      def complete(result: T):Unit = {
+  def complete(result: T):Unit = {
     asJava.asInstanceOf[JFuture[T]].complete(result)
   }
 
-      def complete():Unit = {
+  def complete():Unit = {
     asJava.asInstanceOf[JFuture[T]].complete()
   }
 
-      def fail(throwable: Throwable):Unit = {
+  def fail(throwable: Throwable):Unit = {
     asJava.asInstanceOf[JFuture[T]].fail(throwable)
   }
 
-      def fail(failureMessage: String):Unit = {
+  def fail(failureMessage: String):Unit = {
     asJava.asInstanceOf[JFuture[T]].fail(failureMessage.asInstanceOf[java.lang.String])
   }
 
-      def result():T = {
+  def result():T = {
     asJava.asInstanceOf[JFuture[T]].result()
   }
 
-      def cause():Throwable = {
+  def cause():Throwable = {
     asJava.asInstanceOf[JFuture[T]].cause()
   }
 
-      def succeeded():Boolean = {
+  def succeeded():Boolean = {
     asJava.asInstanceOf[JFuture[T]].succeeded().asInstanceOf[Boolean]
   }
 
-      def failed():Boolean = {
+  def failed():Boolean = {
     asJava.asInstanceOf[JFuture[T]].failed().asInstanceOf[Boolean]
   }
 
@@ -110,7 +110,7 @@ class Future[T](private val _asJava: Object) {
 }
 
   object Future{
-    def apply[T](asJava: JFuture[T]) = new Future[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new Future[T](asJava, useTypeTags)  
   //static methods
     def future[T]():Future[T] = {
       Future[T](JFuture.future[T]())

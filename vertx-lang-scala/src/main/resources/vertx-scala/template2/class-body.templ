@@ -67,8 +67,6 @@
 
 //basic methods\n
 @foreach{method : basicMethods}
-  @foreach{ty : method.ownerTypes}
-  @end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}

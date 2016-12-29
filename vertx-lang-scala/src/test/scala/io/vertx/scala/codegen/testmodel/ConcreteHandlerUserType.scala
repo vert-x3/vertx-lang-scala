@@ -25,7 +25,7 @@ import io.vertx.core.Handler
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: Object) 
+class ConcreteHandlerUserType(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends io.vertx.core.Handler[RefedInterface1] {
 
   def asJava = _asJava
@@ -34,7 +34,7 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 //fluent methods
 //default methods
 //basic methods
-      override def handle(arg0: RefedInterface1):Unit = {
+  override def handle(arg0: RefedInterface1):Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
@@ -42,6 +42,6 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 }
 
   object ConcreteHandlerUserType{
-    def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new ConcreteHandlerUserType(asJava, useTypeTags)  
   //static methods
   }

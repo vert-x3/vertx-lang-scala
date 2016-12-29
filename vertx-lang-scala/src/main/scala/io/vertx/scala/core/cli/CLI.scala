@@ -40,7 +40,7 @@ import scala.collection.JavaConverters._
   * Command Line Interface object does not contains "value", it's a model. It must be evaluated by a
   * parser that returns a [[io.vertx.scala.core.cli.CommandLine]] object containing the argument and option values.
   */
-class CLI(private val _asJava: Object) {
+class CLI(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -108,47 +108,47 @@ class CLI(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def parse(arguments: scala.collection.mutable.Buffer[String]):CommandLine = {
+  def parse(arguments: scala.collection.mutable.Buffer[String]):CommandLine = {
     CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava))
   }
 
-      def parse(arguments: scala.collection.mutable.Buffer[String],validate: Boolean):CommandLine = {
+  def parse(arguments: scala.collection.mutable.Buffer[String],validate: Boolean):CommandLine = {
     CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava,validate.asInstanceOf[java.lang.Boolean]))
   }
 
-      def getName():String = {
+  def getName():String = {
     asJava.asInstanceOf[JCLI].getName().asInstanceOf[String]
   }
 
-      def getDescription():scala.Option[String] = {
+  def getDescription():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JCLI].getDescription().asInstanceOf[String])
   }
 
-      def getSummary():scala.Option[String] = {
+  def getSummary():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JCLI].getSummary().asInstanceOf[String])
   }
 
-      def isHidden():Boolean = {
+  def isHidden():Boolean = {
     asJava.asInstanceOf[JCLI].isHidden().asInstanceOf[Boolean]
   }
 
-      def getOptions():scala.collection.mutable.Buffer[Option] = {
+  def getOptions():scala.collection.mutable.Buffer[Option] = {
     asJava.asInstanceOf[JCLI].getOptions().asScala.map(x => Option(x))
   }
 
-      def getArguments():scala.collection.mutable.Buffer[Argument] = {
+  def getArguments():scala.collection.mutable.Buffer[Argument] = {
     asJava.asInstanceOf[JCLI].getArguments().asScala.map(x => Argument(x))
   }
 
-      def getOption(name: String):scala.Option[Option] = {
+  def getOption(name: String):scala.Option[Option] = {
     scala.Option(asJava.asInstanceOf[JCLI].getOption(name.asInstanceOf[java.lang.String])).map(Option(_))
   }
 
-      def getArgument(name: String):scala.Option[Argument] = {
+  def getArgument(name: String):scala.Option[Argument] = {
     scala.Option(asJava.asInstanceOf[JCLI].getArgument(name.asInstanceOf[java.lang.String])).map(Argument(_))
   }
 
-      def getArgument(index: Int):scala.Option[Argument] = {
+  def getArgument(index: Int):scala.Option[Argument] = {
     scala.Option(asJava.asInstanceOf[JCLI].getArgument(index.asInstanceOf[java.lang.Integer])).map(Argument(_))
   }
 
@@ -156,7 +156,7 @@ class CLI(private val _asJava: Object) {
 }
 
   object CLI{
-    def apply(asJava: JCLI) = new CLI(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new CLI(asJava, useTypeTags)  
   //static methods
     def create(name: String):CLI = {
       CLI(JCLI.create(name.asInstanceOf[java.lang.String]))

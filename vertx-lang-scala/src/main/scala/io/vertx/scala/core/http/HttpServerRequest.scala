@@ -50,7 +50,7 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   */
-class HttpServerRequest(private val _asJava: Object) 
+class HttpServerRequest(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
@@ -176,67 +176,67 @@ class HttpServerRequest(private val _asJava: Object)
 
 //default methods
 //basic methods
-      def version():io.vertx.core.http.HttpVersion = {
+  def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpServerRequest].version()
   }
 
-      def method():io.vertx.core.http.HttpMethod = {
+  def method():io.vertx.core.http.HttpMethod = {
     asJava.asInstanceOf[JHttpServerRequest].method()
   }
 
-      def rawMethod():String = {
+  def rawMethod():String = {
     asJava.asInstanceOf[JHttpServerRequest].rawMethod().asInstanceOf[String]
   }
 
-      def isSSL():Boolean = {
+  def isSSL():Boolean = {
     asJava.asInstanceOf[JHttpServerRequest].isSSL().asInstanceOf[Boolean]
   }
 
-      def scheme():scala.Option[String] = {
+  def scheme():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme().asInstanceOf[String])
   }
 
-      def uri():String = {
+  def uri():String = {
     asJava.asInstanceOf[JHttpServerRequest].uri().asInstanceOf[String]
   }
 
-      def path():scala.Option[String] = {
+  def path():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].path().asInstanceOf[String])
   }
 
-      def query():scala.Option[String] = {
+  def query():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].query().asInstanceOf[String])
   }
 
-      def host():scala.Option[String] = {
+  def host():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].host().asInstanceOf[String])
   }
 
-      def getHeader(headerName: String):scala.Option[String] = {
+  def getHeader(headerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def getParam(paramName: String):scala.Option[String] = {
+  def getParam(paramName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def absoluteURI():String = {
+  def absoluteURI():String = {
     asJava.asInstanceOf[JHttpServerRequest].absoluteURI().asInstanceOf[String]
   }
 
-      def isExpectMultipart():Boolean = {
+  def isExpectMultipart():Boolean = {
     asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart().asInstanceOf[Boolean]
   }
 
-      def getFormAttribute(attributeName: String):scala.Option[String] = {
+  def getFormAttribute(attributeName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def upgrade():ServerWebSocket = {
+  def upgrade():ServerWebSocket = {
     ServerWebSocket(asJava.asInstanceOf[JHttpServerRequest].upgrade())
   }
 
-      def isEnded():Boolean = {
+  def isEnded():Boolean = {
     asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
@@ -244,6 +244,6 @@ class HttpServerRequest(private val _asJava: Object)
 }
 
   object HttpServerRequest{
-    def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServerRequest(asJava, useTypeTags)  
   //static methods
   }

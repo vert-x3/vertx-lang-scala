@@ -30,7 +30,7 @@ import io.vertx.codegen.testmodel.{DataObjectTCK => JDataObjectTCK}
   * todo:
   * - Buffer support
   */
-class DataObjectTCK(private val _asJava: Object) {
+class DataObjectTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -38,35 +38,35 @@ class DataObjectTCK(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def getDataObjectWithValues():DataObjectWithValues = {
+  def getDataObjectWithValues():DataObjectWithValues = {
     DataObjectWithValues(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithValues())
   }
 
-      def setDataObjectWithValues(dataObject: DataObjectWithValues):Unit = {
+  def setDataObjectWithValues(dataObject: DataObjectWithValues):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithValues(dataObject.asJava)
   }
 
-      def getDataObjectWithLists():DataObjectWithLists = {
+  def getDataObjectWithLists():DataObjectWithLists = {
     DataObjectWithLists(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithLists())
   }
 
-      def setDataObjectWithLists(dataObject: DataObjectWithLists):Unit = {
+  def setDataObjectWithLists(dataObject: DataObjectWithLists):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithLists(dataObject.asJava)
   }
 
-      def getDataObjectWithMaps():DataObjectWithMaps = {
+  def getDataObjectWithMaps():DataObjectWithMaps = {
     DataObjectWithMaps(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithMaps())
   }
 
-      def setDataObjectWithMaps(dataObject: DataObjectWithMaps):Unit = {
+  def setDataObjectWithMaps(dataObject: DataObjectWithMaps):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithMaps(dataObject.asJava)
   }
 
-      def methodWithOnlyJsonObjectConstructorDataObject(dataObject: DataObjectWithOnlyJsonObjectConstructor):Unit = {
+  def methodWithOnlyJsonObjectConstructorDataObject(dataObject: DataObjectWithOnlyJsonObjectConstructor):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].methodWithOnlyJsonObjectConstructorDataObject(dataObject.asJava)
   }
 
-      def setDataObjectWithBuffer(dataObject: DataObjectWithNestedBuffer):Unit = {
+  def setDataObjectWithBuffer(dataObject: DataObjectWithNestedBuffer):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithBuffer(dataObject.asJava)
   }
 
@@ -74,6 +74,6 @@ class DataObjectTCK(private val _asJava: Object) {
 }
 
   object DataObjectTCK{
-    def apply(asJava: JDataObjectTCK) = new DataObjectTCK(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new DataObjectTCK(asJava, useTypeTags)  
   //static methods
   }

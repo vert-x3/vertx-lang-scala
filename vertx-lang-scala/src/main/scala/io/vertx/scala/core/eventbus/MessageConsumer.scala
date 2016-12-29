@@ -38,7 +38,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T](private val _asJava: Object) 
+class MessageConsumer[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[Message[T]] {
 
   def asJava = _asJava
@@ -72,35 +72,35 @@ class MessageConsumer[T](private val _asJava: Object)
 
 //default methods
 //basic methods
-      def bodyStream():ReadStream[T] = {
+  def bodyStream():ReadStream[T] = {
     ReadStream[T](asJava.asInstanceOf[JMessageConsumer[T]].bodyStream())
   }
 
-      def isRegistered():Boolean = {
+  def isRegistered():Boolean = {
     asJava.asInstanceOf[JMessageConsumer[T]].isRegistered().asInstanceOf[Boolean]
   }
 
-      def address():String = {
+  def address():String = {
     asJava.asInstanceOf[JMessageConsumer[T]].address().asInstanceOf[String]
   }
 
-      def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
+  def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[T]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
   }
 
-      def getMaxBufferedMessages():Int = {
+  def getMaxBufferedMessages():Int = {
     asJava.asInstanceOf[JMessageConsumer[T]].getMaxBufferedMessages().asInstanceOf[Int]
   }
 
-      def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[T]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def unregister():Unit = {
+  def unregister():Unit = {
     asJava.asInstanceOf[JMessageConsumer[T]].unregister()
   }
 
-      def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[T]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -120,6 +120,6 @@ class MessageConsumer[T](private val _asJava: Object)
 }
 
   object MessageConsumer{
-    def apply[T](asJava: JMessageConsumer[T]) = new MessageConsumer[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new MessageConsumer[T](asJava, useTypeTags)  
   //static methods
   }

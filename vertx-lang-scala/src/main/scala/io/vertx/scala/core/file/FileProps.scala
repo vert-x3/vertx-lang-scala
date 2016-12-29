@@ -25,7 +25,7 @@ import io.vertx.core.file.{FileProps => JFileProps}
   * Represents properties of a file on the file system.
   * 
   */
-class FileProps(private val _asJava: Object) {
+class FileProps(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -33,35 +33,35 @@ class FileProps(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def creationTime():Long = {
+  def creationTime():Long = {
     asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
-      def lastAccessTime():Long = {
+  def lastAccessTime():Long = {
     asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
-      def lastModifiedTime():Long = {
+  def lastModifiedTime():Long = {
     asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
-      def isDirectory():Boolean = {
+  def isDirectory():Boolean = {
     asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
-      def isOther():Boolean = {
+  def isOther():Boolean = {
     asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
-      def isRegularFile():Boolean = {
+  def isRegularFile():Boolean = {
     asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
-      def isSymbolicLink():Boolean = {
+  def isSymbolicLink():Boolean = {
     asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
-      def size():Long = {
+  def size():Long = {
     asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 
@@ -69,6 +69,6 @@ class FileProps(private val _asJava: Object) {
 }
 
   object FileProps{
-    def apply(asJava: JFileProps) = new FileProps(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new FileProps(asJava, useTypeTags)  
   //static methods
   }

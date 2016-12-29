@@ -19,31 +19,40 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class InterfaceWithVariableArg[T,U](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+    extends GenericRefedInterface[U](_asJava) {
 
-  def asJava = _asJava
 
 //cached methods
 //fluent methods
-  def setValue(value: T):GenericRefedInterface[T] = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].setValue(value)
+  override def setValue(value: U):GenericRefedInterface[U] = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].setValue(value)
     this
   }
 
 //default methods
 //basic methods
-  def getValue():T = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].getValue()
+  override def getValue():U = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].getValue()
+  }
+
+  def setOtherValue(value: T):Unit = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].setOtherValue(value)
+  }
+
+  def getOtherValue():T = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].getOtherValue()
   }
 
 //future methods
 }
 
-  object GenericRefedInterface{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new GenericRefedInterface[T](asJava, useTypeTags)  
+  object InterfaceWithVariableArg{
+    def apply[T,U](asJava: Object, useTypeTags:Boolean = false) = new InterfaceWithVariableArg[T,U](asJava, useTypeTags)  
   //static methods
   }

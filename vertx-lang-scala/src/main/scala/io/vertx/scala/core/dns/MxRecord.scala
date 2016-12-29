@@ -24,7 +24,7 @@ import io.vertx.core.dns.{MxRecord => JMxRecord}
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
   */
-class MxRecord(private val _asJava: Object) {
+class MxRecord(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -32,11 +32,11 @@ class MxRecord(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def priority():Int = {
+  def priority():Int = {
     asJava.asInstanceOf[JMxRecord].priority().asInstanceOf[Int]
   }
 
-      def name():String = {
+  def name():String = {
     asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
 
@@ -44,6 +44,6 @@ class MxRecord(private val _asJava: Object) {
 }
 
   object MxRecord{
-    def apply(asJava: JMxRecord) = new MxRecord(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new MxRecord(asJava, useTypeTags)  
   //static methods
   }

@@ -27,7 +27,7 @@ import io.vertx.scala.codegen.testmodel.TestInterface
 
 /**
   */
-class MyInterface(private val _asJava: Object) {
+class MyInterface(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -35,11 +35,11 @@ class MyInterface(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def sub():SubInterface = {
+  def sub():SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
 
-      def method():TestInterface = {
+  def method():TestInterface = {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 
@@ -47,7 +47,7 @@ class MyInterface(private val _asJava: Object) {
 }
 
   object MyInterface{
-    def apply(asJava: JMyInterface) = new MyInterface(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new MyInterface(asJava, useTypeTags)  
   //static methods
     def create():MyInterface = {
       MyInterface(JMyInterface.create())

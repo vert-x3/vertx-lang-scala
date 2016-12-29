@@ -26,7 +26,7 @@ import io.vertx.core.eventbus.{Message => JMessage}
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T](private val _asJava: Object) {
+class SendContext[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -34,15 +34,15 @@ class SendContext[T](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def message():Message[T] = {
+  def message():Message[T] = {
     Message[T](asJava.asInstanceOf[JSendContext[T]].message())
   }
 
-      def next():Unit = {
+  def next():Unit = {
     asJava.asInstanceOf[JSendContext[T]].next()
   }
 
-      def send():Boolean = {
+  def send():Boolean = {
     asJava.asInstanceOf[JSendContext[T]].send().asInstanceOf[Boolean]
   }
 
@@ -50,6 +50,6 @@ class SendContext[T](private val _asJava: Object) {
 }
 
   object SendContext{
-    def apply[T](asJava: JSendContext[T]) = new SendContext[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new SendContext[T](asJava, useTypeTags)  
   //static methods
   }

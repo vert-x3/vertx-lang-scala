@@ -28,7 +28,7 @@ import scala.collection.JavaConverters._
   * It's useful in Vert.x to represent things in Vert.x like HTTP headers and HTTP parameters which allow
   * multiple values for keys.
   */
-class MultiMap(private val _asJava: Object) {
+class MultiMap(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -66,27 +66,27 @@ class MultiMap(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def get(name: String):scala.Option[String] = {
+  def get(name: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def getAll(name: String):scala.collection.mutable.Buffer[String] = {
+  def getAll(name: String):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
-      def contains(name: String):Boolean = {
+  def contains(name: String):Boolean = {
     asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
-      def isEmpty():Boolean = {
+  def isEmpty():Boolean = {
     asJava.asInstanceOf[JMultiMap].isEmpty().asInstanceOf[Boolean]
   }
 
-      def names():scala.collection.mutable.Set[String] = {
+  def names():scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x.asInstanceOf[String])
   }
 
-      def size():Int = {
+  def size():Int = {
     asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
@@ -94,7 +94,7 @@ class MultiMap(private val _asJava: Object) {
 }
 
   object MultiMap{
-    def apply(asJava: JMultiMap) = new MultiMap(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new MultiMap(asJava, useTypeTags)  
   //static methods
     def caseInsensitiveMultiMap():MultiMap = {
       MultiMap(JMultiMap.caseInsensitiveMultiMap())

@@ -24,7 +24,7 @@ import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: Object) {
+class SrvRecord(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -32,31 +32,31 @@ class SrvRecord(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def priority():Int = {
+  def priority():Int = {
     asJava.asInstanceOf[JSrvRecord].priority().asInstanceOf[Int]
   }
 
-      def weight():Int = {
+  def weight():Int = {
     asJava.asInstanceOf[JSrvRecord].weight().asInstanceOf[Int]
   }
 
-      def port():Int = {
+  def port():Int = {
     asJava.asInstanceOf[JSrvRecord].port().asInstanceOf[Int]
   }
 
-      def name():String = {
+  def name():String = {
     asJava.asInstanceOf[JSrvRecord].name().asInstanceOf[String]
   }
 
-      def protocol():String = {
+  def protocol():String = {
     asJava.asInstanceOf[JSrvRecord].protocol().asInstanceOf[String]
   }
 
-      def service():String = {
+  def service():String = {
     asJava.asInstanceOf[JSrvRecord].service().asInstanceOf[String]
   }
 
-      def target():scala.Option[String] = {
+  def target():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[String])
   }
 
@@ -64,6 +64,6 @@ class SrvRecord(private val _asJava: Object) {
 }
 
   object SrvRecord{
-    def apply(asJava: JSrvRecord) = new SrvRecord(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new SrvRecord(asJava, useTypeTags)  
   //static methods
   }

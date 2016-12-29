@@ -58,7 +58,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * 
   * The client is designed to be reused between requests.
   */
-class HttpClient(private val _asJava: Object) 
+class HttpClient(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -232,283 +232,283 @@ class HttpClient(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JHttpClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,requestURI: String):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def request(method: io.vertx.core.http.HttpMethod,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def request(method: io.vertx.core.http.HttpMethod,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method,requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String):HttpClientRequest = {
+  def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method,absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def requestAbs(method: io.vertx.core.http.HttpMethod,absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method,absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def get(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def get(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def get(host: String,requestURI: String):HttpClientRequest = {
+  def get(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def get(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def get(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def get(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def get(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def get(requestURI: String):HttpClientRequest = {
+  def get(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def get(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def get(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def getAbs(absoluteURI: String):HttpClientRequest = {
+  def getAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def getAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def getAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def post(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def post(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def post(host: String,requestURI: String):HttpClientRequest = {
+  def post(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def post(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def post(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def post(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def post(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def post(requestURI: String):HttpClientRequest = {
+  def post(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def post(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def post(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def postAbs(absoluteURI: String):HttpClientRequest = {
+  def postAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def postAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def postAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def head(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def head(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def head(host: String,requestURI: String):HttpClientRequest = {
+  def head(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def head(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def head(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def head(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def head(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def head(requestURI: String):HttpClientRequest = {
+  def head(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def head(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def head(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def headAbs(absoluteURI: String):HttpClientRequest = {
+  def headAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def headAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def headAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def options(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def options(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def options(host: String,requestURI: String):HttpClientRequest = {
+  def options(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def options(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def options(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def options(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def options(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def options(requestURI: String):HttpClientRequest = {
+  def options(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def options(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def options(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def optionsAbs(absoluteURI: String):HttpClientRequest = {
+  def optionsAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def optionsAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def optionsAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def put(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def put(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def put(host: String,requestURI: String):HttpClientRequest = {
+  def put(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def put(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def put(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def put(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def put(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def put(requestURI: String):HttpClientRequest = {
+  def put(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def put(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def put(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def putAbs(absoluteURI: String):HttpClientRequest = {
+  def putAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def putAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def putAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def delete(port: Int,host: String,requestURI: String):HttpClientRequest = {
+  def delete(port: Int,host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def delete(host: String,requestURI: String):HttpClientRequest = {
+  def delete(host: String,requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def delete(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def delete(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def delete(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def delete(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def delete(requestURI: String):HttpClientRequest = {
+  def delete(requestURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def delete(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def delete(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def deleteAbs(absoluteURI: String):HttpClientRequest = {
+  def deleteAbs(absoluteURI: String):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String]))
   }
 
-      def deleteAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
+  def deleteAbs(absoluteURI: String,responseHandler: Handler[HttpClientResponse]):HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
-      def websocketStream(port: Int,host: String,requestURI: String):WebSocketStream = {
+  def websocketStream(port: Int,host: String,requestURI: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def websocketStream(host: String,requestURI: String):WebSocketStream = {
+  def websocketStream(host: String,requestURI: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap]))
   }
 
-      def websocketStream(host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
+  def websocketStream(host: String,requestURI: String,headers: MultiMap):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap]))
   }
 
-      def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version))
   }
 
-      def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+  def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version))
   }
 
-      def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+  def websocketStream(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String]))
   }
 
-      def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+  def websocketStream(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String]))
   }
 
-      def websocketStream(requestURI: String):WebSocketStream = {
+  def websocketStream(requestURI: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String]))
   }
 
-      def websocketStream(requestURI: String,headers: MultiMap):WebSocketStream = {
+  def websocketStream(requestURI: String,headers: MultiMap):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap]))
   }
 
-      def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
+  def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version))
   }
 
-      def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
+  def websocketStream(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String):WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String]))
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JHttpClient].close()
   }
 
@@ -516,6 +516,6 @@ class HttpClient(private val _asJava: Object)
 }
 
   object HttpClient{
-    def apply(asJava: JHttpClient) = new HttpClient(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClient(asJava, useTypeTags)  
   //static methods
   }

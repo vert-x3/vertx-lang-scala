@@ -33,7 +33,7 @@ import io.vertx.scala.core.buffer.Buffer
   * If there are more than one frames in the message, then the first frame should be a text or binary frame with
   * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
   */
-class WebSocketFrame(private val _asJava: Object) {
+class WebSocketFrame(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:String = _
@@ -59,19 +59,19 @@ class WebSocketFrame(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def isText():Boolean = {
+  def isText():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
-      def isBinary():Boolean = {
+  def isBinary():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
-      def isContinuation():Boolean = {
+  def isContinuation():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
-      def isFinal():Boolean = {
+  def isFinal():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
@@ -79,7 +79,7 @@ class WebSocketFrame(private val _asJava: Object) {
 }
 
   object WebSocketFrame{
-    def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new WebSocketFrame(asJava, useTypeTags)  
   //static methods
     def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
       WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))

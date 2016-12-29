@@ -40,7 +40,7 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
   * WebSocket is passed to the handler.
   */
-class HttpServer(private val _asJava: Object) 
+class HttpServer(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -112,19 +112,19 @@ class HttpServer(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JHttpServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JHttpServer].close()
   }
 
-      def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JHttpServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def actualPort():Int = {
+  def actualPort():Int = {
     asJava.asInstanceOf[JHttpServer].actualPort().asInstanceOf[Int]
   }
 
@@ -156,6 +156,6 @@ class HttpServer(private val _asJava: Object)
 }
 
   object HttpServer{
-    def apply(asJava: JHttpServer) = new HttpServer(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServer(asJava, useTypeTags)  
   //static methods
   }
