@@ -19,6 +19,7 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.TestEnum
@@ -78,11 +79,11 @@ class FunctionParamTCK(private val _asJava: Object, private val _useTypeTags:Boo
     asJava.asInstanceOf[JFunctionParamTCK].methodWithMapParam({x: java.util.Map[String, java.lang.String] => func(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericParam[T](t: T,func: T => String):String = {
+  def methodWithGenericParam[T:TypeTag](t: T,func: T => String):String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericParam[T](t,{x: T => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericUserTypeParam[T](t: T,func: GenericRefedInterface[T] => String):String = {
+  def methodWithGenericUserTypeParam[T:TypeTag](t: T,func: GenericRefedInterface[T] => String):String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeParam[T](t,{x: JGenericRefedInterface[T] => func(GenericRefedInterface[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
@@ -118,11 +119,11 @@ class FunctionParamTCK(private val _asJava: Object, private val _useTypeTags:Boo
     asJava.asInstanceOf[JFunctionParamTCK].methodWithMapReturn({x: java.lang.String => func(x.asInstanceOf[String]).mapValues(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
-  def methodWithGenericReturn[T](func: Int => T):String = {
+  def methodWithGenericReturn[T:TypeTag](func: Int => T):String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericReturn[T]({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
   }
 
-  def methodWithGenericUserTypeReturn[T](func: GenericRefedInterface[T] => GenericRefedInterface[T]):String = {
+  def methodWithGenericUserTypeReturn[T:TypeTag](func: GenericRefedInterface[T] => GenericRefedInterface[T]):String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeReturn[T]({x: JGenericRefedInterface[T] => func(GenericRefedInterface[T](x)).asJava.asInstanceOf[JGenericRefedInterface[T]]}).asInstanceOf[String]
   }
 

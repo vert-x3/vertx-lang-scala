@@ -19,6 +19,7 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
@@ -342,19 +343,19 @@ class NullableTCK(private val _asJava: Object, private val _useTypeTags:Boolean 
     scala.Option(asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumReturn(notNull.asInstanceOf[java.lang.Boolean]))
   }
 
-  def methodWithNullableTypeVariableParam[T](expectNull: Boolean,param: T):Unit = {
+  def methodWithNullableTypeVariableParam[T:TypeTag](expectNull: Boolean,param: T):Unit = {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableParam[T](expectNull.asInstanceOf[java.lang.Boolean],param)
   }
 
-  def methodWithNullableTypeVariableHandler[T](notNull: Boolean,value: T,handler: Handler[T]):Unit = {
+  def methodWithNullableTypeVariableHandler[T:TypeTag](notNull: Boolean,value: T,handler: Handler[T]):Unit = {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandler[T](notNull.asInstanceOf[java.lang.Boolean],value,{x: T => handler.handle(x)})
   }
 
-  def methodWithNullableTypeVariableHandlerAsyncResult[T](notNull: Boolean,value: T,handler: Handler[AsyncResult[T]]):Unit = {
+  def methodWithNullableTypeVariableHandlerAsyncResult[T:TypeTag](notNull: Boolean,value: T,handler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[T](notNull.asInstanceOf[java.lang.Boolean],value,{x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
-  def methodWithNullableTypeVariableReturn[T](notNull: Boolean,value: T):T = {
+  def methodWithNullableTypeVariableReturn[T:TypeTag](notNull: Boolean,value: T):T = {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableReturn[T](notNull.asInstanceOf[java.lang.Boolean],value)
   }
 
@@ -1949,7 +1950,7 @@ class NullableTCK(private val _asJava: Object, private val _useTypeTags:Boolean 
     promiseAndHandler._2.future
   }
 
-  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: Boolean,value: T):scala.concurrent.Future[T] = {
+  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T:TypeTag](notNull: Boolean,value: T):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => if (x == null) null.asInstanceOf[T] else x)
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[T](notNull.asInstanceOf[java.lang.Boolean],value,promiseAndHandler._1)
     promiseAndHandler._2.future

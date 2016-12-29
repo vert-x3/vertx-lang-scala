@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -38,7 +39,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class MessageConsumer[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[Message[T]] {
 
   def asJava = _asJava
@@ -120,6 +121,6 @@ class MessageConsumer[T](private val _asJava: Object, private val _useTypeTags:B
 }
 
   object MessageConsumer{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new MessageConsumer[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new MessageConsumer[T](asJava, useTypeTags)  
   //static methods
   }

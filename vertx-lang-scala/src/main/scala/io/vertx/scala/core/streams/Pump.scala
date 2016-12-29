@@ -19,6 +19,7 @@ package io.vertx.scala.core.streams
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -76,11 +77,11 @@ class Pump(private val _asJava: Object, private val _useTypeTags:Boolean = false
   object Pump{
     def apply(asJava: Object, useTypeTags:Boolean = false) = new Pump(asJava, useTypeTags)  
   //static methods
-    def pump[T](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
+    def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
       Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
     }
 
-    def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
+    def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
       Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
     }
 

@@ -18,9 +18,7 @@
 @foreach{method : cacheReturnMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -38,9 +36,7 @@
 @foreach{method : fluentMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -54,9 +50,7 @@
 @foreach{method : defaultMethods}
   @foreach{ownerType : method.ownerTypes}//@{ownerType.name}\n@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -69,9 +63,7 @@
 @foreach{method : basicMethods}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):@{toScalaType(method.returnType)} = {\n
@@ -84,9 +76,7 @@
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
   def @{createNameForMethodReturningAFuture(method)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method))}] = {\n

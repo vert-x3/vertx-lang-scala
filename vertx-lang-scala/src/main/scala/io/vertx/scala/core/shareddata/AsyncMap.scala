@@ -19,6 +19,7 @@ package io.vertx.scala.core.shareddata
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
 import io.vertx.core.AsyncResult
@@ -28,7 +29,7 @@ import io.vertx.core.Handler
   *
   * An asynchronous map.
   */
-class AsyncMap[K,V](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -150,6 +151,6 @@ class AsyncMap[K,V](private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object AsyncMap{
-    def apply[K,V](asJava: Object, useTypeTags:Boolean = false) = new AsyncMap[K,V](asJava, useTypeTags)  
+    def apply[K:TypeTag,V:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new AsyncMap[K,V](asJava, useTypeTags)  
   //static methods
   }
