@@ -58,12 +58,12 @@ class CompositeFuture(private val _asJava: Object)
 
   //io.vertx.core.Future
   override def compose[U](mapper: CompositeFuture => Future[U]):Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[U]({x:JCompositeFuture=> mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[U]]}))
+    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[U]({x: JCompositeFuture => mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[U]]}))
   }
 
   //io.vertx.core.Future
   override def map[U](mapper: CompositeFuture => U):Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].map[U]({x:JCompositeFuture=> mapper(CompositeFuture(x))}))
+    Future[U](asJava.asInstanceOf[JCompositeFuture].map[U]({x: JCompositeFuture => mapper(CompositeFuture(x))}))
   }
 
 //basic methods

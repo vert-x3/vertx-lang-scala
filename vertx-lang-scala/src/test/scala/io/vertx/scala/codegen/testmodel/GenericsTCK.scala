@@ -228,63 +228,63 @@ class GenericsTCK(private val _asJava: Object) {
   }
 
   def methodWithFunctionParamByteParameterized(handler: GenericRefedInterface[Byte] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamByteParameterized({x:JGenericRefedInterface[java.lang.Byte]=> handler(GenericRefedInterface[Byte](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamByteParameterized({x: JGenericRefedInterface[java.lang.Byte] => handler(GenericRefedInterface[Byte](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamShortParameterized(handler: GenericRefedInterface[Short] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamShortParameterized({x:JGenericRefedInterface[java.lang.Short]=> handler(GenericRefedInterface[Short](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamShortParameterized({x: JGenericRefedInterface[java.lang.Short] => handler(GenericRefedInterface[Short](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamIntegerParameterized(handler: GenericRefedInterface[Int] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamIntegerParameterized({x:JGenericRefedInterface[java.lang.Integer]=> handler(GenericRefedInterface[Int](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamIntegerParameterized({x: JGenericRefedInterface[java.lang.Integer] => handler(GenericRefedInterface[Int](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamLongParameterized(handler: GenericRefedInterface[Long] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamLongParameterized({x:JGenericRefedInterface[java.lang.Long]=> handler(GenericRefedInterface[Long](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamLongParameterized({x: JGenericRefedInterface[java.lang.Long] => handler(GenericRefedInterface[Long](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamFloatParameterized(handler: GenericRefedInterface[Float] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamFloatParameterized({x:JGenericRefedInterface[java.lang.Float]=> handler(GenericRefedInterface[Float](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamFloatParameterized({x: JGenericRefedInterface[java.lang.Float] => handler(GenericRefedInterface[Float](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamDoubleParameterized(handler: GenericRefedInterface[Double] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamDoubleParameterized({x:JGenericRefedInterface[java.lang.Double]=> handler(GenericRefedInterface[Double](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamDoubleParameterized({x: JGenericRefedInterface[java.lang.Double] => handler(GenericRefedInterface[Double](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamBooleanParameterized(handler: GenericRefedInterface[Boolean] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamBooleanParameterized({x:JGenericRefedInterface[java.lang.Boolean]=> handler(GenericRefedInterface[Boolean](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamBooleanParameterized({x: JGenericRefedInterface[java.lang.Boolean] => handler(GenericRefedInterface[Boolean](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamCharacterParameterized(handler: GenericRefedInterface[Char] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamCharacterParameterized({x:JGenericRefedInterface[java.lang.Character]=> handler(GenericRefedInterface[Char](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamCharacterParameterized({x: JGenericRefedInterface[java.lang.Character] => handler(GenericRefedInterface[Char](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamStringParameterized(handler: GenericRefedInterface[String] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamStringParameterized({x:JGenericRefedInterface[java.lang.String]=> handler(GenericRefedInterface[String](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamStringParameterized({x: JGenericRefedInterface[java.lang.String] => handler(GenericRefedInterface[String](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamJsonObjectParameterized(handler: GenericRefedInterface[io.vertx.core.json.JsonObject] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamJsonObjectParameterized({x:JGenericRefedInterface[JsonObject]=> handler(GenericRefedInterface[io.vertx.core.json.JsonObject](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamJsonObjectParameterized({x: JGenericRefedInterface[JsonObject] => handler(GenericRefedInterface[io.vertx.core.json.JsonObject](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamJsonArrayParameterized(handler: GenericRefedInterface[io.vertx.core.json.JsonArray] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamJsonArrayParameterized({x:JGenericRefedInterface[JsonArray]=> handler(GenericRefedInterface[io.vertx.core.json.JsonArray](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamJsonArrayParameterized({x: JGenericRefedInterface[JsonArray] => handler(GenericRefedInterface[io.vertx.core.json.JsonArray](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamDataObjectParameterized(handler: GenericRefedInterface[TestDataObject] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamDataObjectParameterized({x:JGenericRefedInterface[JTestDataObject]=> handler(GenericRefedInterface[TestDataObject](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamDataObjectParameterized({x: JGenericRefedInterface[JTestDataObject] => handler(GenericRefedInterface[TestDataObject](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamEnumParameterized(handler: GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamEnumParameterized({x:JGenericRefedInterface[TestEnum]=> handler(GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamEnumParameterized({x: JGenericRefedInterface[TestEnum] => handler(GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamGenEnumParameterized(handler: GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamGenEnumParameterized({x:JGenericRefedInterface[TestGenEnum]=> handler(GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamGenEnumParameterized({x: JGenericRefedInterface[TestGenEnum] => handler(GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithFunctionParamUserTypeParameterized(handler: GenericRefedInterface[RefedInterface1] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamUserTypeParameterized({x:JGenericRefedInterface[JRefedInterface1]=> handler(GenericRefedInterface[RefedInterface1](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamUserTypeParameterized({x: JGenericRefedInterface[JRefedInterface1] => handler(GenericRefedInterface[RefedInterface1](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithClassTypeParameterizedReturn[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE):GenericRefedInterface[U] = {
@@ -300,7 +300,7 @@ class GenericsTCK(private val _asJava: Object) {
   }
 
   def methodWithFunctionParamClassTypeParameterized[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE,handler: GenericRefedInterface[U] => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamClassTypeParameterized[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x:JGenericRefedInterface[U]=> handler(GenericRefedInterface[U](x)).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithFunctionParamClassTypeParameterized[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x: JGenericRefedInterface[U] => handler(GenericRefedInterface[U](x)).asInstanceOf[java.lang.String]})
   }
 
   def methodWithClassTypeParam[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE,u: U):Unit = {
@@ -320,11 +320,11 @@ class GenericsTCK(private val _asJava: Object) {
   }
 
   def methodWithClassTypeFunctionParam[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE,f: U => String):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionParam[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x:U=> f(x).asInstanceOf[java.lang.String]})
+    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionParam[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x: U => f(x).asInstanceOf[java.lang.String]})
   }
 
   def methodWithClassTypeFunctionReturn[U](`type`: WTF!!!!!!java.lang.Class<U> CLASS_TYPE,f: String => U):Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionReturn[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x:java.lang.String=> f(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeFunctionReturn[U](WTF!!!!!!java.lang.Class<U> CLASS_TYPE,{x: java.lang.String => f(x.asInstanceOf[String])})
   }
 
   def interfaceWithApiArg(value: RefedInterface1):InterfaceWithApiArg = {
