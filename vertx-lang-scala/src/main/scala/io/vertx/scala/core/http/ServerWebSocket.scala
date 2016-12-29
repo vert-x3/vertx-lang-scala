@@ -36,7 +36,7 @@ import io.vertx.scala.core.net.SocketAddress
   * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
-class ServerWebSocket(private val _asJava: Object) 
+class ServerWebSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends WebSocketBase {
 
   def asJava = _asJava
@@ -147,39 +147,39 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JServerWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      override def binaryHandlerID():String = {
+  override def binaryHandlerID():String = {
     asJava.asInstanceOf[JServerWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
-      override def textHandlerID():String = {
+  override def textHandlerID():String = {
     asJava.asInstanceOf[JServerWebSocket].textHandlerID().asInstanceOf[String]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JServerWebSocket].end()
   }
 
-      override def close():Unit = {
+  override def close():Unit = {
     asJava.asInstanceOf[JServerWebSocket].close()
   }
 
-      def uri():String = {
+  def uri():String = {
     asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }
 
-      def path():String = {
+  def path():String = {
     asJava.asInstanceOf[JServerWebSocket].path().asInstanceOf[String]
   }
 
-      def query():scala.Option[String] = {
+  def query():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JServerWebSocket].query().asInstanceOf[String])
   }
 
-      def reject():Unit = {
+  def reject():Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
 
@@ -187,6 +187,6 @@ class ServerWebSocket(private val _asJava: Object)
 }
 
   object ServerWebSocket{
-    def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new ServerWebSocket(asJava, useTypeTags)  
   //static methods
   }

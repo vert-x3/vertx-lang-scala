@@ -41,7 +41,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * 
   * Please refer to the documentation for more information on the event bus.
   */
-class EventBus(private val _asJava: Object) 
+class EventBus(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -80,39 +80,39 @@ class EventBus(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JEventBus].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def consumer[T](address: String):MessageConsumer[T] = {
+  def consumer[T](address: String):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[T](address.asInstanceOf[java.lang.String]))
   }
 
-      def consumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
+  def consumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[T](address.asInstanceOf[java.lang.String],{x: JMessage[T] => handler.handle(Message[T](x))}))
   }
 
-      def localConsumer[T](address: String):MessageConsumer[T] = {
+  def localConsumer[T](address: String):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[T](address.asInstanceOf[java.lang.String]))
   }
 
-      def localConsumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
+  def localConsumer[T](address: String,handler: Handler[Message[T]]):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[T](address.asInstanceOf[java.lang.String],{x: JMessage[T] => handler.handle(Message[T](x))}))
   }
 
-      def sender[T](address: String):MessageProducer[T] = {
+  def sender[T](address: String):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[T](address.asInstanceOf[java.lang.String]))
   }
 
-      def sender[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
+  def sender[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[T](address.asInstanceOf[java.lang.String],options.asJava))
   }
 
-      def publisher[T](address: String):MessageProducer[T] = {
+  def publisher[T](address: String):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[T](address.asInstanceOf[java.lang.String]))
   }
 
-      def publisher[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
+  def publisher[T](address: String,options: DeliveryOptions):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[T](address.asInstanceOf[java.lang.String],options.asJava))
   }
 
@@ -132,6 +132,6 @@ class EventBus(private val _asJava: Object)
 }
 
   object EventBus{
-    def apply(asJava: JEventBus) = new EventBus(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new EventBus(asJava, useTypeTags)  
   //static methods
   }

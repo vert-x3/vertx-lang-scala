@@ -34,7 +34,7 @@ import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
   * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
-class WebSocketStream(private val _asJava: Object) 
+class WebSocketStream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[WebSocket] {
 
   def asJava = _asJava
@@ -72,6 +72,6 @@ class WebSocketStream(private val _asJava: Object)
 }
 
   object WebSocketStream{
-    def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new WebSocketStream(asJava, useTypeTags)  
   //static methods
   }

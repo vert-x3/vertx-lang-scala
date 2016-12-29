@@ -40,7 +40,7 @@ import io.vertx.codegen.testmodel.TestGenEnum
 
 /**
   */
-class TestInterface(private val _asJava: Object) 
+class TestInterface(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends SuperInterface1(_asJava) 
     with SuperInterface2 {
 
@@ -81,323 +81,323 @@ class TestInterface(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def otherSuperMethodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit = {
+  override def otherSuperMethodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit = {
     asJava.asInstanceOf[JTestInterface].otherSuperMethodWithBasicParams(b.asInstanceOf[java.lang.Byte],s.asInstanceOf[java.lang.Short],i.asInstanceOf[java.lang.Integer],l.asInstanceOf[java.lang.Long],f.asInstanceOf[java.lang.Float],d.asInstanceOf[java.lang.Double],bool.asInstanceOf[java.lang.Boolean],ch.asInstanceOf[java.lang.Character],str.asInstanceOf[java.lang.String])
   }
 
-      def methodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit = {
+  def methodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithBasicParams(b.asInstanceOf[java.lang.Byte],s.asInstanceOf[java.lang.Short],i.asInstanceOf[java.lang.Integer],l.asInstanceOf[java.lang.Long],f.asInstanceOf[java.lang.Float],d.asInstanceOf[java.lang.Double],bool.asInstanceOf[java.lang.Boolean],ch.asInstanceOf[java.lang.Character],str.asInstanceOf[java.lang.String])
   }
 
-      def methodWithBasicBoxedParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char):Unit = {
+  def methodWithBasicBoxedParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithBasicBoxedParams(b.asInstanceOf[java.lang.Byte],s.asInstanceOf[java.lang.Short],i.asInstanceOf[java.lang.Integer],l.asInstanceOf[java.lang.Long],f.asInstanceOf[java.lang.Float],d.asInstanceOf[java.lang.Double],bool.asInstanceOf[java.lang.Boolean],ch.asInstanceOf[java.lang.Character])
   }
 
-      def methodWithHandlerBasicTypes(byteHandler: Handler[Byte],shortHandler: Handler[Short],intHandler: Handler[Int],longHandler: Handler[Long],floatHandler: Handler[Float],doubleHandler: Handler[Double],booleanHandler: Handler[Boolean],charHandler: Handler[Char],stringHandler: Handler[String]):Unit = {
+  def methodWithHandlerBasicTypes(byteHandler: Handler[Byte],shortHandler: Handler[Short],intHandler: Handler[Int],longHandler: Handler[Long],floatHandler: Handler[Float],doubleHandler: Handler[Double],booleanHandler: Handler[Boolean],charHandler: Handler[Char],stringHandler: Handler[String]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerBasicTypes({x: java.lang.Byte => byteHandler.handle(x.asInstanceOf[Byte])},{x: java.lang.Short => shortHandler.handle(x.asInstanceOf[Short])},{x: java.lang.Integer => intHandler.handle(x.asInstanceOf[Int])},{x: java.lang.Long => longHandler.handle(x.asInstanceOf[Long])},{x: java.lang.Float => floatHandler.handle(x.asInstanceOf[Float])},{x: java.lang.Double => doubleHandler.handle(x.asInstanceOf[Double])},{x: java.lang.Boolean => booleanHandler.handle(x.asInstanceOf[Boolean])},{x: java.lang.Character => charHandler.handle(x.asInstanceOf[Char])},{x: java.lang.String => stringHandler.handle(x.asInstanceOf[String])})
   }
 
-      def methodWithHandlerStringReturn(expected: String):Handler[String] = {
+  def methodWithHandlerStringReturn(expected: String):Handler[String] = {
     {x: String => asJava.asInstanceOf[JTestInterface].methodWithHandlerStringReturn(expected.asInstanceOf[java.lang.String]).handle(x.asInstanceOf[java.lang.String])}
   }
 
-      def methodWithHandlerGenericReturn[T](handler: Handler[T]):Handler[T] = {
+  def methodWithHandlerGenericReturn[T](handler: Handler[T]):Handler[T] = {
     {x: T => asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[T]({x: T => handler.handle(x)}).handle(x)}
   }
 
-      def methodWithHandlerVertxGenReturn(expected: String):Handler[RefedInterface1] = {
+  def methodWithHandlerVertxGenReturn(expected: String):Handler[RefedInterface1] = {
     {x: RefedInterface1 => asJava.asInstanceOf[JTestInterface].methodWithHandlerVertxGenReturn(expected.asInstanceOf[java.lang.String]).handle(x.asJava.asInstanceOf[JRefedInterface1])}
   }
 
-      def methodWithHandlerAsyncResultByte(sendFailure: Boolean,handler: Handler[AsyncResult[Byte]]):Unit = {
+  def methodWithHandlerAsyncResultByte(sendFailure: Boolean,handler: Handler[AsyncResult[Byte]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultByte(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Byte] => handler.handle(AsyncResultWrapper[java.lang.Byte,Byte](x, a => a.asInstanceOf[Byte]))})
   }
 
-      def methodWithHandlerAsyncResultShort(sendFailure: Boolean,handler: Handler[AsyncResult[Short]]):Unit = {
+  def methodWithHandlerAsyncResultShort(sendFailure: Boolean,handler: Handler[AsyncResult[Short]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultShort(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Short] => handler.handle(AsyncResultWrapper[java.lang.Short,Short](x, a => a.asInstanceOf[Short]))})
   }
 
-      def methodWithHandlerAsyncResultInteger(sendFailure: Boolean,handler: Handler[AsyncResult[Int]]):Unit = {
+  def methodWithHandlerAsyncResultInteger(sendFailure: Boolean,handler: Handler[AsyncResult[Int]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultInteger(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Integer] => handler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
   }
 
-      def methodWithHandlerAsyncResultLong(sendFailure: Boolean,handler: Handler[AsyncResult[Long]]):Unit = {
+  def methodWithHandlerAsyncResultLong(sendFailure: Boolean,handler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultLong(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def methodWithHandlerAsyncResultFloat(sendFailure: Boolean,handler: Handler[AsyncResult[Float]]):Unit = {
+  def methodWithHandlerAsyncResultFloat(sendFailure: Boolean,handler: Handler[AsyncResult[Float]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultFloat(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Float] => handler.handle(AsyncResultWrapper[java.lang.Float,Float](x, a => a.asInstanceOf[Float]))})
   }
 
-      def methodWithHandlerAsyncResultDouble(sendFailure: Boolean,handler: Handler[AsyncResult[Double]]):Unit = {
+  def methodWithHandlerAsyncResultDouble(sendFailure: Boolean,handler: Handler[AsyncResult[Double]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDouble(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Double] => handler.handle(AsyncResultWrapper[java.lang.Double,Double](x, a => a.asInstanceOf[Double]))})
   }
 
-      def methodWithHandlerAsyncResultBoolean(sendFailure: Boolean,handler: Handler[AsyncResult[Boolean]]):Unit = {
+  def methodWithHandlerAsyncResultBoolean(sendFailure: Boolean,handler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultBoolean(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
-      def methodWithHandlerAsyncResultCharacter(sendFailure: Boolean,handler: Handler[AsyncResult[Char]]):Unit = {
+  def methodWithHandlerAsyncResultCharacter(sendFailure: Boolean,handler: Handler[AsyncResult[Char]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultCharacter(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.Character] => handler.handle(AsyncResultWrapper[java.lang.Character,Char](x, a => a.asInstanceOf[Char]))})
   }
 
-      def methodWithHandlerAsyncResultString(sendFailure: Boolean,handler: Handler[AsyncResult[String]]):Unit = {
+  def methodWithHandlerAsyncResultString(sendFailure: Boolean,handler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultString(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
-      def methodWithHandlerAsyncResultDataObject(sendFailure: Boolean,handler: Handler[AsyncResult[TestDataObject]]):Unit = {
+  def methodWithHandlerAsyncResultDataObject(sendFailure: Boolean,handler: Handler[AsyncResult[TestDataObject]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDataObject(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[JTestDataObject] => handler.handle(AsyncResultWrapper[JTestDataObject,TestDataObject](x, a => TestDataObject(a)))})
   }
 
-      def methodWithHandlerAsyncResultStringReturn(expected: String,fail: Boolean):Handler[AsyncResult[String]] = {
+  def methodWithHandlerAsyncResultStringReturn(expected: String,fail: Boolean):Handler[AsyncResult[String]] = {
     {x: AsyncResult[String] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultStringReturn(expected.asInstanceOf[java.lang.String],fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[String,java.lang.String](x, a => a.asInstanceOf[java.lang.String]))}
   }
 
-      def methodWithHandlerAsyncResultGenericReturn[T](handler: Handler[AsyncResult[T]]):Handler[AsyncResult[T]] = {
+  def methodWithHandlerAsyncResultGenericReturn[T](handler: Handler[AsyncResult[T]]):Handler[AsyncResult[T]] = {
     {x: AsyncResult[T] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[T]({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))}).handle(AsyncResultWrapper[T,T](x, a => a))}
   }
 
-      def methodWithHandlerAsyncResultVertxGenReturn(expected: String,fail: Boolean):Handler[AsyncResult[RefedInterface1]] = {
+  def methodWithHandlerAsyncResultVertxGenReturn(expected: String,fail: Boolean):Handler[AsyncResult[RefedInterface1]] = {
     {x: AsyncResult[RefedInterface1] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVertxGenReturn(expected.asInstanceOf[java.lang.String],fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[RefedInterface1,JRefedInterface1](x, a => a.asJava.asInstanceOf[JRefedInterface1]))}
   }
 
-      def methodWithUserTypes(refed: RefedInterface1):Unit = {
+  def methodWithUserTypes(refed: RefedInterface1):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithUserTypes(refed.asJava.asInstanceOf[JRefedInterface1])
   }
 
-      def methodWithObjectParam(str: String,obj: AnyRef):Unit = {
+  def methodWithObjectParam(str: String,obj: AnyRef):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithObjectParam(str.asInstanceOf[java.lang.String],obj)
   }
 
-      def methodWithDataObjectParam(dataObject: TestDataObject):Unit = {
+  def methodWithDataObjectParam(dataObject: TestDataObject):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithDataObjectParam(dataObject.asJava)
   }
 
-      def methodWithHandlerUserTypes(handler: Handler[RefedInterface1]):Unit = {
+  def methodWithHandlerUserTypes(handler: Handler[RefedInterface1]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerUserTypes({x: JRefedInterface1 => handler.handle(RefedInterface1(x))})
   }
 
-      def methodWithHandlerAsyncResultUserTypes(handler: Handler[AsyncResult[RefedInterface1]]):Unit = {
+  def methodWithHandlerAsyncResultUserTypes(handler: Handler[AsyncResult[RefedInterface1]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultUserTypes({x: AsyncResult[JRefedInterface1] => handler.handle(AsyncResultWrapper[JRefedInterface1,RefedInterface1](x, a => RefedInterface1(a)))})
   }
 
-      def methodWithConcreteHandlerUserTypeSubtype(handler: ConcreteHandlerUserType):Unit = {
+  def methodWithConcreteHandlerUserTypeSubtype(handler: ConcreteHandlerUserType):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithConcreteHandlerUserTypeSubtype(handler.asJava.asInstanceOf[JConcreteHandlerUserType])
   }
 
-      def methodWithAbstractHandlerUserTypeSubtype(handler: AbstractHandlerUserType):Unit = {
+  def methodWithAbstractHandlerUserTypeSubtype(handler: AbstractHandlerUserType):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithAbstractHandlerUserTypeSubtype(handler.asJava.asInstanceOf[JAbstractHandlerUserType])
   }
 
-      def methodWithConcreteHandlerUserTypeSubtypeExtension(handler: ConcreteHandlerUserTypeExtension):Unit = {
+  def methodWithConcreteHandlerUserTypeSubtypeExtension(handler: ConcreteHandlerUserTypeExtension):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithConcreteHandlerUserTypeSubtypeExtension(handler.asJava.asInstanceOf[JConcreteHandlerUserTypeExtension])
   }
 
-      def methodWithHandlerVoid(handler: Handler[Unit]):Unit = {
+  def methodWithHandlerVoid(handler: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerVoid({x: Void => handler.handle(x)})
   }
 
-      def methodWithHandlerAsyncResultVoid(sendFailure: Boolean,handler: Handler[AsyncResult[Unit]]):Unit = {
+  def methodWithHandlerAsyncResultVoid(sendFailure: Boolean,handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVoid(sendFailure.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def methodWithHandlerThrowable(handler: Handler[Throwable]):Unit = {
+  def methodWithHandlerThrowable(handler: Handler[Throwable]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerThrowable({x: Throwable => handler.handle(x)})
   }
 
-      def methodWithHandlerDataObject(handler: Handler[TestDataObject]):Unit = {
+  def methodWithHandlerDataObject(handler: Handler[TestDataObject]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerDataObject({x: JTestDataObject => handler.handle(TestDataObject(x))})
   }
 
-      def methodWithHandlerGenericUserType[U](value: U,handler: Handler[GenericRefedInterface[U]]):Unit = {
+  def methodWithHandlerGenericUserType[U](value: U,handler: Handler[GenericRefedInterface[U]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericUserType[U](value,{x: JGenericRefedInterface[U] => handler.handle(GenericRefedInterface[U](x))})
   }
 
-      def methodWithHandlerAsyncResultGenericUserType[U](value: U,handler: Handler[AsyncResult[GenericRefedInterface[U]]]):Unit = {
+  def methodWithHandlerAsyncResultGenericUserType[U](value: U,handler: Handler[AsyncResult[GenericRefedInterface[U]]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[U](value,{x: AsyncResult[JGenericRefedInterface[U]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[U],GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))})
   }
 
-      def methodWithByteReturn():Byte = {
+  def methodWithByteReturn():Byte = {
     asJava.asInstanceOf[JTestInterface].methodWithByteReturn().asInstanceOf[Byte]
   }
 
-      def methodWithShortReturn():Short = {
+  def methodWithShortReturn():Short = {
     asJava.asInstanceOf[JTestInterface].methodWithShortReturn().asInstanceOf[Short]
   }
 
-      def methodWithIntReturn():Int = {
+  def methodWithIntReturn():Int = {
     asJava.asInstanceOf[JTestInterface].methodWithIntReturn().asInstanceOf[Int]
   }
 
-      def methodWithLongReturn():Long = {
+  def methodWithLongReturn():Long = {
     asJava.asInstanceOf[JTestInterface].methodWithLongReturn().asInstanceOf[Long]
   }
 
-      def methodWithFloatReturn():Float = {
+  def methodWithFloatReturn():Float = {
     asJava.asInstanceOf[JTestInterface].methodWithFloatReturn().asInstanceOf[Float]
   }
 
-      def methodWithDoubleReturn():Double = {
+  def methodWithDoubleReturn():Double = {
     asJava.asInstanceOf[JTestInterface].methodWithDoubleReturn().asInstanceOf[Double]
   }
 
-      def methodWithBooleanReturn():Boolean = {
+  def methodWithBooleanReturn():Boolean = {
     asJava.asInstanceOf[JTestInterface].methodWithBooleanReturn().asInstanceOf[Boolean]
   }
 
-      def methodWithCharReturn():Char = {
+  def methodWithCharReturn():Char = {
     asJava.asInstanceOf[JTestInterface].methodWithCharReturn().asInstanceOf[Char]
   }
 
-      def methodWithStringReturn():String = {
+  def methodWithStringReturn():String = {
     asJava.asInstanceOf[JTestInterface].methodWithStringReturn().asInstanceOf[String]
   }
 
-      def methodWithVertxGenReturn():RefedInterface1 = {
+  def methodWithVertxGenReturn():RefedInterface1 = {
     RefedInterface1(asJava.asInstanceOf[JTestInterface].methodWithVertxGenReturn())
   }
 
-      def methodWithVertxGenNullReturn():RefedInterface1 = {
+  def methodWithVertxGenNullReturn():RefedInterface1 = {
     RefedInterface1(asJava.asInstanceOf[JTestInterface].methodWithVertxGenNullReturn())
   }
 
-      def methodWithAbstractVertxGenReturn():RefedInterface2 = {
+  def methodWithAbstractVertxGenReturn():RefedInterface2 = {
     RefedInterface2(asJava.asInstanceOf[JTestInterface].methodWithAbstractVertxGenReturn())
   }
 
-      def methodWithDataObjectReturn():TestDataObject = {
+  def methodWithDataObjectReturn():TestDataObject = {
     TestDataObject(asJava.asInstanceOf[JTestInterface].methodWithDataObjectReturn())
   }
 
-      def methodWithDataObjectNullReturn():TestDataObject = {
+  def methodWithDataObjectNullReturn():TestDataObject = {
     TestDataObject(asJava.asInstanceOf[JTestInterface].methodWithDataObjectNullReturn())
   }
 
-      def methodWithGenericUserTypeReturn[U](value: U):GenericRefedInterface[U] = {
+  def methodWithGenericUserTypeReturn[U](value: U):GenericRefedInterface[U] = {
     GenericRefedInterface[U](asJava.asInstanceOf[JTestInterface].methodWithGenericUserTypeReturn[U](value))
   }
 
-      def overloadedMethod(str: String,handler: Handler[String]):String = {
+  def overloadedMethod(str: String,handler: Handler[String]):String = {
     asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String],{x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
-      def overloadedMethod(str: String,refed: RefedInterface1):String = {
+  def overloadedMethod(str: String,refed: RefedInterface1):String = {
     asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String],refed.asJava.asInstanceOf[JRefedInterface1]).asInstanceOf[String]
   }
 
-      def overloadedMethod(str: String,refed: RefedInterface1,handler: Handler[String]):String = {
+  def overloadedMethod(str: String,refed: RefedInterface1,handler: Handler[String]):String = {
     asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String],refed.asJava.asInstanceOf[JRefedInterface1],{x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
-      def overloadedMethod(str: String,refed: RefedInterface1,period: Long,handler: Handler[String]):String = {
+  def overloadedMethod(str: String,refed: RefedInterface1,period: Long,handler: Handler[String]):String = {
     asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String],refed.asJava.asInstanceOf[JRefedInterface1],period.asInstanceOf[java.lang.Long],{x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
-      def methodWithGenericReturn[U](`type`: String):U = {
+  def methodWithGenericReturn[U](`type`: String):U = {
     asJava.asInstanceOf[JTestInterface].methodWithGenericReturn[U](`type`.asInstanceOf[java.lang.String])
   }
 
-      def methodWithGenericParam[U](`type`: String,u: U):Unit = {
+  def methodWithGenericParam[U](`type`: String,u: U):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithGenericParam[U](`type`.asInstanceOf[java.lang.String],u)
   }
 
-      def methodWithGenericHandler[U](`type`: String,handler: Handler[U]):Unit = {
+  def methodWithGenericHandler[U](`type`: String,handler: Handler[U]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithGenericHandler[U](`type`.asInstanceOf[java.lang.String],{x: U => handler.handle(x)})
   }
 
-      def methodWithGenericHandlerAsyncResult[U](`type`: String,asyncResultHandler: Handler[AsyncResult[U]]):Unit = {
+  def methodWithGenericHandlerAsyncResult[U](`type`: String,asyncResultHandler: Handler[AsyncResult[U]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[U](`type`.asInstanceOf[java.lang.String],{x: AsyncResult[U] => asyncResultHandler.handle(AsyncResultWrapper[U,U](x, a => a))})
   }
 
-      def methodWithJsonObjectReturn():io.vertx.core.json.JsonObject = {
+  def methodWithJsonObjectReturn():io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JTestInterface].methodWithJsonObjectReturn()
   }
 
-      def methodWithNullJsonObjectReturn():io.vertx.core.json.JsonObject = {
+  def methodWithNullJsonObjectReturn():io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JTestInterface].methodWithNullJsonObjectReturn()
   }
 
-      def methodWithComplexJsonObjectReturn():io.vertx.core.json.JsonObject = {
+  def methodWithComplexJsonObjectReturn():io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JTestInterface].methodWithComplexJsonObjectReturn()
   }
 
-      def methodWithJsonArrayReturn():io.vertx.core.json.JsonArray = {
+  def methodWithJsonArrayReturn():io.vertx.core.json.JsonArray = {
     asJava.asInstanceOf[JTestInterface].methodWithJsonArrayReturn()
   }
 
-      def methodWithNullJsonArrayReturn():io.vertx.core.json.JsonArray = {
+  def methodWithNullJsonArrayReturn():io.vertx.core.json.JsonArray = {
     asJava.asInstanceOf[JTestInterface].methodWithNullJsonArrayReturn()
   }
 
-      def methodWithComplexJsonArrayReturn():io.vertx.core.json.JsonArray = {
+  def methodWithComplexJsonArrayReturn():io.vertx.core.json.JsonArray = {
     asJava.asInstanceOf[JTestInterface].methodWithComplexJsonArrayReturn()
   }
 
-      def methodWithJsonParams(jsonObject: io.vertx.core.json.JsonObject,jsonArray: io.vertx.core.json.JsonArray):Unit = {
+  def methodWithJsonParams(jsonObject: io.vertx.core.json.JsonObject,jsonArray: io.vertx.core.json.JsonArray):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithJsonParams(jsonObject,jsonArray)
   }
 
-      def methodWithNullJsonParams(jsonObject: io.vertx.core.json.JsonObject,jsonArray: io.vertx.core.json.JsonArray):Unit = {
+  def methodWithNullJsonParams(jsonObject: io.vertx.core.json.JsonObject,jsonArray: io.vertx.core.json.JsonArray):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithNullJsonParams(jsonObject,jsonArray)
   }
 
-      def methodWithHandlerJson(jsonObjectHandler: Handler[io.vertx.core.json.JsonObject],jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]):Unit = {
+  def methodWithHandlerJson(jsonObjectHandler: Handler[io.vertx.core.json.JsonObject],jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerJson({x: JsonObject => jsonObjectHandler.handle(x)},{x: JsonArray => jsonArrayHandler.handle(x)})
   }
 
-      def methodWithHandlerComplexJson(jsonObjectHandler: Handler[io.vertx.core.json.JsonObject],jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]):Unit = {
+  def methodWithHandlerComplexJson(jsonObjectHandler: Handler[io.vertx.core.json.JsonObject],jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerComplexJson({x: JsonObject => jsonObjectHandler.handle(x)},{x: JsonArray => jsonArrayHandler.handle(x)})
   }
 
-      def methodWithHandlerAsyncResultJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
+  def methodWithHandlerAsyncResultJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
   }
 
-      def methodWithHandlerAsyncResultNullJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
+  def methodWithHandlerAsyncResultNullJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
   }
 
-      def methodWithHandlerAsyncResultComplexJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
+  def methodWithHandlerAsyncResultComplexJsonObject(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
   }
 
-      def methodWithHandlerAsyncResultJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
+  def methodWithHandlerAsyncResultJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
   }
 
-      def methodWithHandlerAsyncResultNullJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
+  def methodWithHandlerAsyncResultNullJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
   }
 
-      def methodWithHandlerAsyncResultComplexJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
+  def methodWithHandlerAsyncResultComplexJsonArray(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):Unit = {
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
   }
 
-      def methodWithEnumParam(strVal: String,weirdo: io.vertx.codegen.testmodel.TestEnum):String = {
+  def methodWithEnumParam(strVal: String,weirdo: io.vertx.codegen.testmodel.TestEnum):String = {
     asJava.asInstanceOf[JTestInterface].methodWithEnumParam(strVal.asInstanceOf[java.lang.String],weirdo).asInstanceOf[String]
   }
 
-      def methodWithEnumReturn(strVal: String):io.vertx.codegen.testmodel.TestEnum = {
+  def methodWithEnumReturn(strVal: String):io.vertx.codegen.testmodel.TestEnum = {
     asJava.asInstanceOf[JTestInterface].methodWithEnumReturn(strVal.asInstanceOf[java.lang.String])
   }
 
-      def methodWithGenEnumParam(strVal: String,weirdo: io.vertx.codegen.testmodel.TestGenEnum):String = {
+  def methodWithGenEnumParam(strVal: String,weirdo: io.vertx.codegen.testmodel.TestGenEnum):String = {
     asJava.asInstanceOf[JTestInterface].methodWithGenEnumParam(strVal.asInstanceOf[java.lang.String],weirdo).asInstanceOf[String]
   }
 
-      def methodWithGenEnumReturn(strVal: String):io.vertx.codegen.testmodel.TestGenEnum = {
+  def methodWithGenEnumReturn(strVal: String):io.vertx.codegen.testmodel.TestGenEnum = {
     asJava.asInstanceOf[JTestInterface].methodWithGenEnumReturn(strVal.asInstanceOf[java.lang.String])
   }
 
-      def methodWithThrowableReturn(strVal: String):Throwable = {
+  def methodWithThrowableReturn(strVal: String):Throwable = {
     asJava.asInstanceOf[JTestInterface].methodWithThrowableReturn(strVal.asInstanceOf[java.lang.String])
   }
 
-      def methodWithThrowableParam(t: Throwable):String = {
+  def methodWithThrowableParam(t: Throwable):String = {
     asJava.asInstanceOf[JTestInterface].methodWithThrowableParam(t).asInstanceOf[String]
   }
 
-      def superMethodOverloadedBySubclass(s: String):Int = {
+  def superMethodOverloadedBySubclass(s: String):Int = {
     asJava.asInstanceOf[JTestInterface].superMethodOverloadedBySubclass(s.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
@@ -525,7 +525,7 @@ class TestInterface(private val _asJava: Object)
 }
 
   object TestInterface{
-    def apply(asJava: JTestInterface) = new TestInterface(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new TestInterface(asJava, useTypeTags)  
   //static methods
     def staticFactoryMethod(foo: String):RefedInterface1 = {
       RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))

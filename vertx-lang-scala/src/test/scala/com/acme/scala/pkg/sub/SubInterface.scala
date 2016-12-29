@@ -23,7 +23,7 @@ import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**
   */
-class SubInterface(private val _asJava: Object) {
+class SubInterface(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -31,7 +31,7 @@ class SubInterface(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def reverse(s: String):String = {
+  def reverse(s: String):String = {
     asJava.asInstanceOf[JSubInterface].reverse(s.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
@@ -39,6 +39,6 @@ class SubInterface(private val _asJava: Object) {
 }
 
   object SubInterface{
-    def apply(asJava: JSubInterface) = new SubInterface(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new SubInterface(asJava, useTypeTags)  
   //static methods
   }

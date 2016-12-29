@@ -34,8 +34,8 @@ trait RefedInterface2 {
 }
 
   object RefedInterface2{
-    def apply(asJava: JRefedInterface2):RefedInterface2 = new RefedInterface2Impl(asJava)    
-      private class RefedInterface2Impl(private val _asJava: JRefedInterface2) extends RefedInterface2 {
+    def apply(asJava: Object, useTypeTags:Boolean = false):RefedInterface2 = new RefedInterface2Impl(asJava, useTypeTags)    
+      private class RefedInterface2Impl(private val _asJava: Object, private val _useTypeTags:Boolean) extends RefedInterface2 {
 
         def asJava = _asJava
 
@@ -48,7 +48,7 @@ trait RefedInterface2 {
 
 //default methods
 //basic methods
-      def getString():String = {
+  def getString():String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 

@@ -52,8 +52,8 @@ trait WriteStream[T]
 }
 
   object WriteStream{
-    def apply[T](asJava: JWriteStream[T]):WriteStream[T] = new WriteStreamImpl[T](asJava)    
-      private class WriteStreamImpl[T](private val _asJava: JWriteStream[T]) extends WriteStream[T] {
+    def apply[T](asJava: Object, useTypeTags:Boolean = false):WriteStream[T] = new WriteStreamImpl[T](asJava, useTypeTags)    
+      private class WriteStreamImpl[T](private val _asJava: Object, private val _useTypeTags:Boolean) extends WriteStream[T] {
 
         def asJava = _asJava
 
@@ -86,11 +86,11 @@ trait WriteStream[T]
   }
 
 //basic methods
-      def end():Unit = {
+  def end():Unit = {
     asJava.asInstanceOf[JWriteStream[T]].end()
   }
 
-      def writeQueueFull():Boolean = {
+  def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWriteStream[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 

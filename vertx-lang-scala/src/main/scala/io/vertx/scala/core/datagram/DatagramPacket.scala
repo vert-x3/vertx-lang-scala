@@ -28,7 +28,7 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
   */
-class DatagramPacket(private val _asJava: Object) {
+class DatagramPacket(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -36,11 +36,11 @@ class DatagramPacket(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def sender():SocketAddress = {
+  def sender():SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())
   }
 
-      def data():Buffer = {
+  def data():Buffer = {
     Buffer(asJava.asInstanceOf[JDatagramPacket].data())
   }
 
@@ -48,6 +48,6 @@ class DatagramPacket(private val _asJava: Object) {
 }
 
   object DatagramPacket{
-    def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new DatagramPacket(asJava, useTypeTags)  
   //static methods
   }

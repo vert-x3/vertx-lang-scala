@@ -47,8 +47,8 @@ trait ReadStream[T]
 }
 
   object ReadStream{
-    def apply[T](asJava: JReadStream[T]):ReadStream[T] = new ReadStreamImpl[T](asJava)    
-      private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
+    def apply[T](asJava: Object, useTypeTags:Boolean = false):ReadStream[T] = new ReadStreamImpl[T](asJava, useTypeTags)    
+      private class ReadStreamImpl[T](private val _asJava: Object, private val _useTypeTags:Boolean) extends ReadStream[T] {
 
         def asJava = _asJava
 

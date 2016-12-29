@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * The composite future wraps a list of [[io.vertx.scala.core.Future]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: Object) 
+class CompositeFuture(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Future[CompositeFuture](_asJava) {
 
   private var cached_0:Handler[AsyncResult[CompositeFuture]] = _
@@ -67,35 +67,35 @@ class CompositeFuture(private val _asJava: Object)
   }
 
 //basic methods
-      override def complete(result: CompositeFuture):Unit = {
+  override def complete(result: CompositeFuture):Unit = {
     asJava.asInstanceOf[JCompositeFuture].complete(result.asJava.asInstanceOf[JCompositeFuture])
   }
 
-      override def result():CompositeFuture = {
+  override def result():CompositeFuture = {
     CompositeFuture(asJava.asInstanceOf[JCompositeFuture].result())
   }
 
-      def cause(index: Int):Throwable = {
+  def cause(index: Int):Throwable = {
     asJava.asInstanceOf[JCompositeFuture].cause(index.asInstanceOf[java.lang.Integer])
   }
 
-      def succeeded(index: Int):Boolean = {
+  def succeeded(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-      def failed(index: Int):Boolean = {
+  def failed(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-      def isComplete(index: Int):Boolean = {
+  def isComplete(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-      def resultAt[T](index: Int):T = {
+  def resultAt[T](index: Int):T = {
     asJava.asInstanceOf[JCompositeFuture].resultAt[T](index.asInstanceOf[java.lang.Integer])
   }
 
-      def size():Int = {
+  def size():Int = {
     asJava.asInstanceOf[JCompositeFuture].size().asInstanceOf[Int]
   }
 
@@ -103,7 +103,7 @@ class CompositeFuture(private val _asJava: Object)
 }
 
   object CompositeFuture{
-    def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new CompositeFuture(asJava, useTypeTags)  
   //static methods
     def all[T1, T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
       CompositeFuture(JCompositeFuture.all[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))

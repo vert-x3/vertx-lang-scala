@@ -26,7 +26,7 @@ import io.vertx.scala.core.buffer.Buffer
 /**
   * An HTTP/2 frame.
   */
-class HttpFrame(private val _asJava: Object) {
+class HttpFrame(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:Int = _
@@ -65,6 +65,6 @@ class HttpFrame(private val _asJava: Object) {
 }
 
   object HttpFrame{
-    def apply(asJava: JHttpFrame) = new HttpFrame(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpFrame(asJava, useTypeTags)  
   //static methods
   }

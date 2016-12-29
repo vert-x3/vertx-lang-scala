@@ -42,7 +42,7 @@ import io.vertx.core.Handler
   * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpClientResponse(private val _asJava: Object) 
+class HttpClientResponse(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
@@ -122,23 +122,23 @@ class HttpClientResponse(private val _asJava: Object)
 
 //default methods
 //basic methods
-      def version():io.vertx.core.http.HttpVersion = {
+  def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
-      def statusCode():Int = {
+  def statusCode():Int = {
     asJava.asInstanceOf[JHttpClientResponse].statusCode().asInstanceOf[Int]
   }
 
-      def statusMessage():String = {
+  def statusMessage():String = {
     asJava.asInstanceOf[JHttpClientResponse].statusMessage().asInstanceOf[String]
   }
 
-      def getHeader(headerName: String):scala.Option[String] = {
+  def getHeader(headerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def getTrailer(trailerName: String):scala.Option[String] = {
+  def getTrailer(trailerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -146,6 +146,6 @@ class HttpClientResponse(private val _asJava: Object)
 }
 
   object HttpClientResponse{
-    def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClientResponse(asJava, useTypeTags)  
   //static methods
   }

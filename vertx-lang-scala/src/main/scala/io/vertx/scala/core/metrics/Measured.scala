@@ -32,8 +32,8 @@ trait Measured {
 }
 
   object Measured{
-    def apply(asJava: JMeasured):Measured = new MeasuredImpl(asJava)    
-      private class MeasuredImpl(private val _asJava: JMeasured) extends Measured {
+    def apply(asJava: Object, useTypeTags:Boolean = false):Measured = new MeasuredImpl(asJava, useTypeTags)    
+      private class MeasuredImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends Measured {
 
         def asJava = _asJava
 
@@ -41,7 +41,7 @@ trait Measured {
 //fluent methods
 //default methods
 //basic methods
-      def isMetricsEnabled():Boolean = {
+  def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
 

@@ -31,7 +31,7 @@ import io.vertx.core.Handler
 /**
   * Represents a TCP server
   */
-class NetServer(private val _asJava: Object) 
+class NetServer(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -70,27 +70,27 @@ class NetServer(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def connectStream():NetSocketStream = {
+  def connectStream():NetSocketStream = {
     NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
-      def connectHandler(handler: Handler[NetSocket]):NetServer = {
+  def connectHandler(handler: Handler[NetSocket]):NetServer = {
     NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JNetServer].close()
   }
 
-      def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def actualPort():Int = {
+  def actualPort():Int = {
     asJava.asInstanceOf[JNetServer].actualPort().asInstanceOf[Int]
   }
 
@@ -122,6 +122,6 @@ class NetServer(private val _asJava: Object)
 }
 
   object NetServer{
-    def apply(asJava: JNetServer) = new NetServer(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new NetServer(asJava, useTypeTags)  
   //static methods
   }

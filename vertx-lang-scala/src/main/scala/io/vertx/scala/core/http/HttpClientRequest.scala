@@ -62,7 +62,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * An example of using this class is as follows:
   * 
   */
-class HttpClientRequest(private val _asJava: Object) 
+class HttpClientRequest(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends WriteStream[Buffer] 
     with ReadStream[HttpClientResponse] {
 
@@ -210,55 +210,55 @@ class HttpClientRequest(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      def isChunked():Boolean = {
+  def isChunked():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].isChunked().asInstanceOf[Boolean]
   }
 
-      def method():io.vertx.core.http.HttpMethod = {
+  def method():io.vertx.core.http.HttpMethod = {
     asJava.asInstanceOf[JHttpClientRequest].method()
   }
 
-      def getRawMethod():String = {
+  def getRawMethod():String = {
     asJava.asInstanceOf[JHttpClientRequest].getRawMethod().asInstanceOf[String]
   }
 
-      def uri():String = {
+  def uri():String = {
     asJava.asInstanceOf[JHttpClientRequest].uri().asInstanceOf[String]
   }
 
-      def path():String = {
+  def path():String = {
     asJava.asInstanceOf[JHttpClientRequest].path().asInstanceOf[String]
   }
 
-      def query():String = {
+  def query():String = {
     asJava.asInstanceOf[JHttpClientRequest].query().asInstanceOf[String]
   }
 
-      def getHost():String = {
+  def getHost():String = {
     asJava.asInstanceOf[JHttpClientRequest].getHost().asInstanceOf[String]
   }
 
-      def end(chunk: String):Unit = {
+  def end(chunk: String):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String])
   }
 
-      def end(chunk: String,enc: String):Unit = {
+  def end(chunk: String,enc: String):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
   }
 
-        override def end(chunk: Buffer):Unit = {
+  override def end(chunk: Buffer):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end()
   }
 
-      def reset(code: Long):Boolean = {
+  def reset(code: Long):Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
@@ -266,6 +266,6 @@ class HttpClientRequest(private val _asJava: Object)
 }
 
   object HttpClientRequest{
-    def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClientRequest(asJava, useTypeTags)  
   //static methods
   }

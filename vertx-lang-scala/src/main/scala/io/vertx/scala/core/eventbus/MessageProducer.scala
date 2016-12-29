@@ -32,7 +32,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: Object) 
+class MessageProducer[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends WriteStream[T] {
 
   def asJava = _asJava
@@ -71,27 +71,27 @@ class MessageProducer[T](private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      def send(message: T):MessageProducer[T] = {
+  def send(message: T):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send(message))
   }
 
-      def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+  def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
   }
 
-      def address():String = {
+  def address():String = {
     asJava.asInstanceOf[JMessageProducer[T]].address().asInstanceOf[String]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].end()
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JMessageProducer[T]].close()
   }
 
@@ -105,6 +105,6 @@ class MessageProducer[T](private val _asJava: Object)
 }
 
   object MessageProducer{
-    def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new MessageProducer[T](asJava, useTypeTags)  
   //static methods
   }

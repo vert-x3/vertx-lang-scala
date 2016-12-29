@@ -84,7 +84,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * 
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object) 
+class Vertx(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -125,139 +125,139 @@ class Vertx(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JVertx].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def getOrCreateContext():Context = {
+  def getOrCreateContext():Context = {
     Context(asJava.asInstanceOf[JVertx].getOrCreateContext())
   }
 
-      def createNetServer(options: NetServerOptions):NetServer = {
+  def createNetServer(options: NetServerOptions):NetServer = {
     NetServer(asJava.asInstanceOf[JVertx].createNetServer(options.asJava))
   }
 
-      def createNetServer():NetServer = {
+  def createNetServer():NetServer = {
     NetServer(asJava.asInstanceOf[JVertx].createNetServer())
   }
 
-      def createNetClient(options: NetClientOptions):NetClient = {
+  def createNetClient(options: NetClientOptions):NetClient = {
     NetClient(asJava.asInstanceOf[JVertx].createNetClient(options.asJava))
   }
 
-      def createNetClient():NetClient = {
+  def createNetClient():NetClient = {
     NetClient(asJava.asInstanceOf[JVertx].createNetClient())
   }
 
-      def createHttpServer(options: HttpServerOptions):HttpServer = {
+  def createHttpServer(options: HttpServerOptions):HttpServer = {
     HttpServer(asJava.asInstanceOf[JVertx].createHttpServer(options.asJava))
   }
 
-      def createHttpServer():HttpServer = {
+  def createHttpServer():HttpServer = {
     HttpServer(asJava.asInstanceOf[JVertx].createHttpServer())
   }
 
-      def createHttpClient(options: HttpClientOptions):HttpClient = {
+  def createHttpClient(options: HttpClientOptions):HttpClient = {
     HttpClient(asJava.asInstanceOf[JVertx].createHttpClient(options.asJava))
   }
 
-      def createHttpClient():HttpClient = {
+  def createHttpClient():HttpClient = {
     HttpClient(asJava.asInstanceOf[JVertx].createHttpClient())
   }
 
-      def createDatagramSocket(options: DatagramSocketOptions):DatagramSocket = {
+  def createDatagramSocket(options: DatagramSocketOptions):DatagramSocket = {
     DatagramSocket(asJava.asInstanceOf[JVertx].createDatagramSocket(options.asJava))
   }
 
-      def createDatagramSocket():DatagramSocket = {
+  def createDatagramSocket():DatagramSocket = {
     DatagramSocket(asJava.asInstanceOf[JVertx].createDatagramSocket())
   }
 
-      def createDnsClient(port: Int,host: String):DnsClient = {
+  def createDnsClient(port: Int,host: String):DnsClient = {
     DnsClient(asJava.asInstanceOf[JVertx].createDnsClient(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String]))
   }
 
-      def setTimer(delay: Long,handler: Handler[Long]):Long = {
+  def setTimer(delay: Long,handler: Handler[Long]):Long = {
     asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
-      def timerStream(delay: Long):TimeoutStream = {
+  def timerStream(delay: Long):TimeoutStream = {
     TimeoutStream(asJava.asInstanceOf[JVertx].timerStream(delay.asInstanceOf[java.lang.Long]))
   }
 
-      def setPeriodic(delay: Long,handler: Handler[Long]):Long = {
+  def setPeriodic(delay: Long,handler: Handler[Long]):Long = {
     asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
-      def periodicStream(delay: Long):TimeoutStream = {
+  def periodicStream(delay: Long):TimeoutStream = {
     TimeoutStream(asJava.asInstanceOf[JVertx].periodicStream(delay.asInstanceOf[java.lang.Long]))
   }
 
-      def cancelTimer(id: Long):Boolean = {
+  def cancelTimer(id: Long):Boolean = {
     asJava.asInstanceOf[JVertx].cancelTimer(id.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
-      def runOnContext(action: Handler[Unit]):Unit = {
+  def runOnContext(action: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JVertx].runOnContext({x: Void => action.handle(x)})
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JVertx].close()
   }
 
-      def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def deployVerticle(name: String):Unit = {
+  def deployVerticle(name: String):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String])
   }
 
-      def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
+  def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
-      def deployVerticle(name: String,options: DeploymentOptions):Unit = {
+  def deployVerticle(name: String,options: DeploymentOptions):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava)
   }
 
-      def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
+  def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
-      def undeploy(deploymentID: String):Unit = {
+  def undeploy(deploymentID: String):Unit = {
     asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String])
   }
 
-      def undeploy(deploymentID: String,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def undeploy(deploymentID: String,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def deploymentIDs():scala.collection.mutable.Set[String] = {
+  def deploymentIDs():scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JVertx].deploymentIDs().asScala.map(x => x.asInstanceOf[String])
   }
 
-      def isClustered():Boolean = {
+  def isClustered():Boolean = {
     asJava.asInstanceOf[JVertx].isClustered().asInstanceOf[Boolean]
   }
 
-      def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
-      def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JVertx].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
-      def createSharedWorkerExecutor(name: String):WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String):WorkerExecutor = {
     WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String]))
   }
 
-      def createSharedWorkerExecutor(name: String,poolSize: Int):WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String,poolSize: Int):WorkerExecutor = {
     WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String],poolSize.asInstanceOf[java.lang.Integer]))
   }
 
-      def createSharedWorkerExecutor(name: String,poolSize: Int,maxExecuteTime: Long):WorkerExecutor = {
+  def createSharedWorkerExecutor(name: String,poolSize: Int,maxExecuteTime: Long):WorkerExecutor = {
     WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String],poolSize.asInstanceOf[java.lang.Integer],maxExecuteTime.asInstanceOf[java.lang.Long]))
   }
 
@@ -301,7 +301,7 @@ class Vertx(private val _asJava: Object)
 }
 
   object Vertx{
-    def apply(asJava: JVertx) = new Vertx(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new Vertx(asJava, useTypeTags)  
   //static methods
     def vertx():Vertx = {
       Vertx(JVertx.vertx())

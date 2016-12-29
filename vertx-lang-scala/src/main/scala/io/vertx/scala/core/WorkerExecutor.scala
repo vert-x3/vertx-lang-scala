@@ -33,7 +33,7 @@ import io.vertx.core.Handler
   * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
-class WorkerExecutor(private val _asJava: Object) 
+class WorkerExecutor(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends Measured {
 
   def asJava = _asJava
@@ -52,11 +52,11 @@ class WorkerExecutor(private val _asJava: Object)
   }
 
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
+  def executeBlocking[T](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T]({x: JFuture[T] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[T] => resultHandler.handle(AsyncResultWrapper[T,T](x, a => a))})
   }
 
@@ -76,6 +76,6 @@ class WorkerExecutor(private val _asJava: Object)
 }
 
   object WorkerExecutor{
-    def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new WorkerExecutor(asJava, useTypeTags)  
   //static methods
   }

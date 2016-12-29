@@ -31,7 +31,7 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * Represents a client-side WebSocket.
   */
-class WebSocket(private val _asJava: Object) 
+class WebSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends WebSocketBase {
 
   def asJava = _asJava
@@ -133,23 +133,23 @@ class WebSocket(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      override def binaryHandlerID():String = {
+  override def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
-      override def textHandlerID():String = {
+  override def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].textHandlerID().asInstanceOf[String]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JWebSocket].end()
   }
 
-      override def close():Unit = {
+  override def close():Unit = {
     asJava.asInstanceOf[JWebSocket].close()
   }
 
@@ -157,6 +157,6 @@ class WebSocket(private val _asJava: Object)
 }
 
   object WebSocket{
-    def apply(asJava: JWebSocket) = new WebSocket(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new WebSocket(asJava, useTypeTags)  
   //static methods
   }

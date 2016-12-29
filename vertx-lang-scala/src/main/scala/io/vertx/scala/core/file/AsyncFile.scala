@@ -38,7 +38,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * other streams, e.g. an [[io.vertx.scala.core.http.HttpClientRequest]] instance,
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
-class AsyncFile(private val _asJava: Object) 
+class AsyncFile(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
@@ -128,19 +128,19 @@ class AsyncFile(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JAsyncFile].writeQueueFull().asInstanceOf[Boolean]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JAsyncFile].end()
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JAsyncFile].close()
   }
 
-      def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -172,6 +172,6 @@ class AsyncFile(private val _asJava: Object)
 }
 
   object AsyncFile{
-    def apply(asJava: JAsyncFile) = new AsyncFile(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new AsyncFile(asJava, useTypeTags)  
   //static methods
   }

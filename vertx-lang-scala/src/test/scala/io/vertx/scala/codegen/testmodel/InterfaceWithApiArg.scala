@@ -19,31 +19,37 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import io.vertx.codegen.testmodel.{InterfaceWithApiArg => JInterfaceWithApiArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class InterfaceWithApiArg(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+    extends GenericRefedInterface[RefedInterface1](_asJava) {
 
-  def asJava = _asJava
 
 //cached methods
 //fluent methods
-  def setValue(value: T):GenericRefedInterface[T] = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].setValue(value)
+  override def setValue(value: RefedInterface1):GenericRefedInterface[RefedInterface1] = {
+    asJava.asInstanceOf[JInterfaceWithApiArg].setValue(value.asJava.asInstanceOf[JRefedInterface1])
     this
   }
 
 //default methods
 //basic methods
-  def getValue():T = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].getValue()
+  override def getValue():RefedInterface1 = {
+    RefedInterface1(asJava.asInstanceOf[JInterfaceWithApiArg].getValue())
+  }
+
+  def meth():Unit = {
+    asJava.asInstanceOf[JInterfaceWithApiArg].meth()
   }
 
 //future methods
 }
 
-  object GenericRefedInterface{
-    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new GenericRefedInterface[T](asJava, useTypeTags)  
+  object InterfaceWithApiArg{
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new InterfaceWithApiArg(asJava, useTypeTags)  
   //static methods
   }

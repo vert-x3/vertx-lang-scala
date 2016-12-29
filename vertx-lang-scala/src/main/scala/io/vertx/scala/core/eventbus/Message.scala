@@ -37,7 +37,7 @@ import io.vertx.core.Handler
   * 
   * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
-class Message[T](private val _asJava: Object) {
+class Message[T](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:T = _
@@ -54,39 +54,39 @@ class Message[T](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def address():String = {
+  def address():String = {
     asJava.asInstanceOf[JMessage[T]].address().asInstanceOf[String]
   }
 
-      def headers():MultiMap = {
+  def headers():MultiMap = {
     MultiMap(asJava.asInstanceOf[JMessage[T]].headers())
   }
 
-      def replyAddress():scala.Option[String] = {
+  def replyAddress():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JMessage[T]].replyAddress().asInstanceOf[String])
   }
 
-      def isSend():Boolean = {
+  def isSend():Boolean = {
     asJava.asInstanceOf[JMessage[T]].isSend().asInstanceOf[Boolean]
   }
 
-      def reply(message: AnyRef):Unit = {
+  def reply(message: AnyRef):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply(message)
   }
 
-      def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+  def reply[R](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
-      def reply(message: AnyRef,options: DeliveryOptions):Unit = {
+  def reply(message: AnyRef,options: DeliveryOptions):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply(message,options.asJava)
   }
 
-      def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
+  def reply[R](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[T]].reply[R](message,options.asJava,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))})
   }
 
-      def fail(failureCode: Int,message: String):Unit = {
+  def fail(failureCode: Int,message: String):Unit = {
     asJava.asInstanceOf[JMessage[T]].fail(failureCode.asInstanceOf[java.lang.Integer],message.asInstanceOf[java.lang.String])
   }
 
@@ -106,6 +106,6 @@ class Message[T](private val _asJava: Object) {
 }
 
   object Message{
-    def apply[T](asJava: JMessage[T]) = new Message[T](asJava)  
+    def apply[T](asJava: Object, useTypeTags:Boolean = false) = new Message[T](asJava, useTypeTags)  
   //static methods
   }

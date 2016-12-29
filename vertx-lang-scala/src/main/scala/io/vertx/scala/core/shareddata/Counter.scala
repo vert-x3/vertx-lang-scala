@@ -28,7 +28,7 @@ import io.vertx.core.Handler
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
   * 
   */
-class Counter(private val _asJava: Object) {
+class Counter(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
 
@@ -36,31 +36,31 @@ class Counter(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].incrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndIncrement({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].decrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
+  def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
-      def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+  def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
@@ -110,6 +110,6 @@ class Counter(private val _asJava: Object) {
 }
 
   object Counter{
-    def apply(asJava: JCounter) = new Counter(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new Counter(asJava, useTypeTags)  
   //static methods
   }

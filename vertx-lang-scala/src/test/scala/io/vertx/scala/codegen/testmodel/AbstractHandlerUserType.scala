@@ -35,8 +35,8 @@ trait AbstractHandlerUserType
 }
 
   object AbstractHandlerUserType{
-    def apply(asJava: JAbstractHandlerUserType):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)    
-      private class AbstractHandlerUserTypeImpl(private val _asJava: JAbstractHandlerUserType) extends AbstractHandlerUserType {
+    def apply(asJava: Object, useTypeTags:Boolean = false):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava, useTypeTags)    
+      private class AbstractHandlerUserTypeImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends AbstractHandlerUserType {
 
         def asJava = _asJava
 
@@ -44,7 +44,7 @@ trait AbstractHandlerUserType
 //fluent methods
 //default methods
 //basic methods
-      override def handle(arg0: RefedInterface1):Unit = {
+  override def handle(arg0: RefedInterface1):Unit = {
     asJava.asInstanceOf[JAbstractHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 

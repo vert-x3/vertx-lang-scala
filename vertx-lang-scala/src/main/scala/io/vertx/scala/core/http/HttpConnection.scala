@@ -40,7 +40,7 @@ import io.vertx.scala.core.net.SocketAddress
   *   <li>[[io.vertx.scala.core.http.HttpConnection#exceptionHandler]]</li>
   * </ul>
   */
-class HttpConnection(private val _asJava: Object) {
+class HttpConnection(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
 
   def asJava = _asJava
   private var cached_0:SocketAddress = _
@@ -146,15 +146,15 @@ class HttpConnection(private val _asJava: Object) {
   }
 
 //basic methods
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JHttpConnection].close()
   }
 
-      def settings():Http2Settings = {
+  def settings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
   }
 
-      def remoteSettings():Http2Settings = {
+  def remoteSettings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
@@ -174,6 +174,6 @@ class HttpConnection(private val _asJava: Object) {
 }
 
   object HttpConnection{
-    def apply(asJava: JHttpConnection) = new HttpConnection(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpConnection(asJava, useTypeTags)  
   //static methods
   }

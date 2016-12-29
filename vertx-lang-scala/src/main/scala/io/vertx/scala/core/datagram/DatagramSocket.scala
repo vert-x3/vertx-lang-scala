@@ -46,7 +46,7 @@ import io.vertx.scala.core.net.SocketAddress
   * 
   * Please consult the documentation for more information on datagram sockets.
   */
-class DatagramSocket(private val _asJava: Object) 
+class DatagramSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
     extends ReadStream[DatagramPacket] 
     with Measured {
 
@@ -140,19 +140,19 @@ class DatagramSocket(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def sender(port: Int,host: String):PacketWritestream = {
+  def sender(port: Int,host: String):PacketWritestream = {
     PacketWritestream(asJava.asInstanceOf[JDatagramSocket].sender(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String]))
   }
 
-      def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JDatagramSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JDatagramSocket].close()
   }
 
@@ -226,6 +226,6 @@ class DatagramSocket(private val _asJava: Object)
 }
 
   object DatagramSocket{
-    def apply(asJava: JDatagramSocket) = new DatagramSocket(asJava)  
+    def apply(asJava: Object, useTypeTags:Boolean = false) = new DatagramSocket(asJava, useTypeTags)  
   //static methods
   }
