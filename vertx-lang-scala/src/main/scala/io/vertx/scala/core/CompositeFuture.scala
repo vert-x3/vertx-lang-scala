@@ -67,35 +67,35 @@ class CompositeFuture(private val _asJava: Object)
   }
 
 //basic methods
-  override def complete(result: CompositeFuture):Unit = {
+      override def complete(result: CompositeFuture):Unit = {
     asJava.asInstanceOf[JCompositeFuture].complete(result.asJava.asInstanceOf[JCompositeFuture])
   }
 
-  override def result():CompositeFuture = {
+      override def result():CompositeFuture = {
     CompositeFuture(asJava.asInstanceOf[JCompositeFuture].result())
   }
 
-  def cause(index: Int):Throwable = {
+      def cause(index: Int):Throwable = {
     asJava.asInstanceOf[JCompositeFuture].cause(index.asInstanceOf[java.lang.Integer])
   }
 
-  def succeeded(index: Int):Boolean = {
+      def succeeded(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].succeeded(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def failed(index: Int):Boolean = {
+      def failed(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].failed(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def isComplete(index: Int):Boolean = {
+      def isComplete(index: Int):Boolean = {
     asJava.asInstanceOf[JCompositeFuture].isComplete(index.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
-  def resultAt[T](index: Int):T = {
+      def resultAt[T](index: Int):T = {
     asJava.asInstanceOf[JCompositeFuture].resultAt[T](index.asInstanceOf[java.lang.Integer])
   }
 
-  def size():Int = {
+      def size():Int = {
     asJava.asInstanceOf[JCompositeFuture].size().asInstanceOf[Int]
   }
 

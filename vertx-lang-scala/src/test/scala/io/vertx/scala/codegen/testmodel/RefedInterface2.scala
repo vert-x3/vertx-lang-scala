@@ -48,7 +48,7 @@ trait RefedInterface2 {
 
 //default methods
 //basic methods
-  def getString():String = {
+      def getString():String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 

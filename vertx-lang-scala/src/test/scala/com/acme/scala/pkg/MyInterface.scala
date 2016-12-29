@@ -35,11 +35,11 @@ class MyInterface(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def sub():SubInterface = {
+      def sub():SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
 
-  def method():TestInterface = {
+      def method():TestInterface = {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 

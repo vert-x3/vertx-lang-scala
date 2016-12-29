@@ -36,7 +36,7 @@ class RefedInterface1(private val _asJava: Object) {
 
 //default methods
 //basic methods
-  def getString():String = {
+      def getString():String = {
     asJava.asInstanceOf[JRefedInterface1].getString().asInstanceOf[String]
   }
 

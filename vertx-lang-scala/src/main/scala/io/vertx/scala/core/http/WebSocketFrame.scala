@@ -59,19 +59,19 @@ class WebSocketFrame(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def isText():Boolean = {
+      def isText():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
-  def isBinary():Boolean = {
+      def isBinary():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
-  def isContinuation():Boolean = {
+      def isContinuation():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
-  def isFinal():Boolean = {
+      def isFinal():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 

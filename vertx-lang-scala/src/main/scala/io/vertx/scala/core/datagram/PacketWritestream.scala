@@ -64,11 +64,11 @@ class PacketWritestream(private val _asJava: Object)
   }
 
 //basic methods
-  override def end():Unit = {
+      override def end():Unit = {
     asJava.asInstanceOf[JPacketWritestream].end()
   }
 
-  override def writeQueueFull():Boolean = {
+      override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }
 

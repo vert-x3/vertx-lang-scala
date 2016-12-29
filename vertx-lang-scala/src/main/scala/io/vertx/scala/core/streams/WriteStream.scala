@@ -86,11 +86,11 @@ trait WriteStream[T]
   }
 
 //basic methods
-  def end():Unit = {
+      def end():Unit = {
     asJava.asInstanceOf[JWriteStream[T]].end()
   }
 
-  def writeQueueFull():Boolean = {
+      def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWriteStream[T]].writeQueueFull().asInstanceOf[Boolean]
   }
 

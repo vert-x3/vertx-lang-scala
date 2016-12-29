@@ -4,7 +4,7 @@
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
       if(nullable) {
-        return 'scala.Option(' + name + '.asInstanceOf[ ' + typeNameForPrimitiveScala(type) + '])';
+        return 'scala.Option(' + name + '.asInstanceOf[' + typeNameForPrimitiveScala(type) + '])';
       }
       else {
         return name + '.asInstanceOf[' + typeNameForPrimitiveScala(type) + ']';;
@@ -87,15 +87,6 @@
     }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
-    }
-  }
-
-  def ifNullableCobvertWithOption(type, expr, typeParams, methodTypeParams) {
-    if(type.isNullable) {
-      return 'scala.Option('+expr').map(x => ' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')';
-    }
-    else {
-      return expr ;
     }
   }
 

@@ -192,23 +192,23 @@ trait WebSocketBase
   }
 
 //basic methods
-  override def writeQueueFull():Boolean = {
+      override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocketBase].writeQueueFull().asInstanceOf[Boolean]
   }
 
-  def binaryHandlerID():String = {
+      def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].binaryHandlerID().asInstanceOf[String]
   }
 
-  def textHandlerID():String = {
+      def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].textHandlerID().asInstanceOf[String]
   }
 
-  override def end():Unit = {
+        override def end():Unit = {
     asJava.asInstanceOf[JWebSocketBase].end()
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
   }
 

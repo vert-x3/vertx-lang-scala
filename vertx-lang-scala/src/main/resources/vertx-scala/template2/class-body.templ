@@ -67,6 +67,8 @@
 
 //basic methods\n
 @foreach{method : basicMethods}
+  @foreach{ty : method.ownerTypes}
+  @end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
@@ -90,7 +92,8 @@
 	@foreach{param:removeLastParam(method.params)}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
 	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method))}] = {\n
-    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method))}, @{toScalaType(typeOfReturnedFuture(method))}](x => @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
+		@comment{'TODO: Why is there no nullable-info available in here??'}
+    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method))}, @{toScalaType(typeOfReturnedFuture(method))}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method))}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
     @{invokeMethodAndUseProvidedHandler('asJava' + fromObjectToInstanceOf(type), type, method, typeParams, 'promiseAndHandler._1')}\n
     promiseAndHandler._2.future\n
   }\n
