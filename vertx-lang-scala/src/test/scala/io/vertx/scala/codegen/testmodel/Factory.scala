@@ -19,6 +19,8 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
@@ -40,7 +42,7 @@ class Factory(private val _asJava: Object) {
 }
 
   object Factory{
-    def apply(asJava: JFactory) = new Factory(asJava)  
+    def apply(asJava: Object) = new Factory(asJava)  
   //static methods
     def createConcreteHandlerUserType(handler: Handler[RefedInterface1]):ConcreteHandlerUserType = {
       ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))

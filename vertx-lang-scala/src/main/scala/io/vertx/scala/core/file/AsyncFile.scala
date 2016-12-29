@@ -19,6 +19,8 @@ package io.vertx.scala.core.file
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
@@ -128,19 +130,19 @@ class AsyncFile(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JAsyncFile].writeQueueFull().asInstanceOf[Boolean]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JAsyncFile].end()
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JAsyncFile].close()
   }
 
-      def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -172,6 +174,6 @@ class AsyncFile(private val _asJava: Object)
 }
 
   object AsyncFile{
-    def apply(asJava: JAsyncFile) = new AsyncFile(asJava)  
+    def apply(asJava: Object) = new AsyncFile(asJava)  
   //static methods
   }

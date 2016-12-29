@@ -19,6 +19,8 @@ package io.vertx.scala.core.net
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}
@@ -49,11 +51,11 @@ class NetClient(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }
 
@@ -67,6 +69,6 @@ class NetClient(private val _asJava: Object)
 }
 
   object NetClient{
-    def apply(asJava: JNetClient) = new NetClient(asJava)  
+    def apply(asJava: Object) = new NetClient(asJava)  
   //static methods
   }

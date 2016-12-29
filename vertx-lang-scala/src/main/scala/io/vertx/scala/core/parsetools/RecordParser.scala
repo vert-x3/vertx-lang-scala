@@ -19,6 +19,8 @@ package io.vertx.scala.core.parsetools
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler
@@ -64,23 +66,23 @@ class RecordParser(private val _asJava: Object)
 //fluent methods
 //default methods
 //basic methods
-      def setOutput(output: Handler[Buffer]):Unit = {
+  def setOutput(output: Handler[Buffer]):Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})
   }
 
-      def delimitedMode(delim: String):Unit = {
+  def delimitedMode(delim: String):Unit = {
     asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asInstanceOf[java.lang.String])
   }
 
-      def delimitedMode(delim: Buffer):Unit = {
+  def delimitedMode(delim: Buffer):Unit = {
     asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asJava.asInstanceOf[JBuffer])
   }
 
-      def fixedSizeMode(size: Int):Unit = {
+  def fixedSizeMode(size: Int):Unit = {
     asJava.asInstanceOf[JRecordParser].fixedSizeMode(size.asInstanceOf[java.lang.Integer])
   }
 
-      def handle(buffer: Buffer):Unit = {
+  def handle(buffer: Buffer):Unit = {
     asJava.asInstanceOf[JRecordParser].handle(buffer.asJava.asInstanceOf[JBuffer])
   }
 
@@ -88,7 +90,7 @@ class RecordParser(private val _asJava: Object)
 }
 
   object RecordParser{
-    def apply(asJava: JRecordParser) = new RecordParser(asJava)  
+    def apply(asJava: Object) = new RecordParser(asJava)  
   //static methods
     def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
       RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: JBuffer => output.handle(Buffer(x))}))

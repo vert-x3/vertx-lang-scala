@@ -19,6 +19,8 @@ package io.vertx.scala.codegen.testmodel
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
 
 /**
@@ -33,11 +35,11 @@ trait RefedInterface2 {
 
 }
 
-  object RefedInterface2{
-    def apply(asJava: JRefedInterface2):RefedInterface2 = new RefedInterface2Impl(asJava)    
-      private class RefedInterface2Impl(private val _asJava: JRefedInterface2) extends RefedInterface2 {
+object RefedInterface2{
+  def apply(asJava: Object):RefedInterface2 = new RefedInterface2Impl(asJava)
+    private class RefedInterface2Impl(private val _asJava: Object) extends RefedInterface2 {
 
-        def asJava = _asJava
+      def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -48,10 +50,10 @@ trait RefedInterface2 {
 
 //default methods
 //basic methods
-      def getString():String = {
+  def getString():String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 
 //future methods
 }
-  }
+}

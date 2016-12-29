@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
@@ -122,23 +124,23 @@ class HttpClientResponse(private val _asJava: Object)
 
 //default methods
 //basic methods
-      def version():io.vertx.core.http.HttpVersion = {
+  def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
-      def statusCode():Int = {
+  def statusCode():Int = {
     asJava.asInstanceOf[JHttpClientResponse].statusCode().asInstanceOf[Int]
   }
 
-      def statusMessage():String = {
+  def statusMessage():String = {
     asJava.asInstanceOf[JHttpClientResponse].statusMessage().asInstanceOf[String]
   }
 
-      def getHeader(headerName: String):scala.Option[String] = {
+  def getHeader(headerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-      def getTrailer(trailerName: String):scala.Option[String] = {
+  def getTrailer(trailerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -146,6 +148,6 @@ class HttpClientResponse(private val _asJava: Object)
 }
 
   object HttpClientResponse{
-    def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
+    def apply(asJava: Object) = new HttpClientResponse(asJava)  
   //static methods
   }

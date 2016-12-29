@@ -19,6 +19,8 @@ package io.vertx.scala.core.eventbus
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 
@@ -26,7 +28,7 @@ import io.vertx.core.eventbus.{Message => JMessage}
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T](private val _asJava: Object) {
+class SendContext[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
 
   def asJava = _asJava
 
@@ -34,22 +36,22 @@ class SendContext[T](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def message():Message[T] = {
-    Message[T](asJava.asInstanceOf[JSendContext[T]].message())
+  def message():Message[T] = {
+    Message[T](asJava.asInstanceOf[JSendContext[Object]].message())
   }
 
-      def next():Unit = {
-    asJava.asInstanceOf[JSendContext[T]].next()
+  def next():Unit = {
+    asJava.asInstanceOf[JSendContext[Object]].next()
   }
 
-      def send():Boolean = {
-    asJava.asInstanceOf[JSendContext[T]].send().asInstanceOf[Boolean]
+  def send():Boolean = {
+    asJava.asInstanceOf[JSendContext[Object]].send().asInstanceOf[Boolean]
   }
 
 //future methods
 }
 
   object SendContext{
-    def apply[T](asJava: JSendContext[T]) = new SendContext[T](asJava)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new SendContext[T](asJava, objectToT)  
   //static methods
   }

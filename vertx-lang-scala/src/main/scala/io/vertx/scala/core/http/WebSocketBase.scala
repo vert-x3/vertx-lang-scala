@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -89,11 +91,11 @@ trait WebSocketBase
 
 }
 
-  object WebSocketBase{
-    def apply(asJava: JWebSocketBase):WebSocketBase = new WebSocketBaseImpl(asJava)    
-      private class WebSocketBaseImpl(private val _asJava: JWebSocketBase) extends WebSocketBase {
+object WebSocketBase{
+  def apply(asJava: Object):WebSocketBase = new WebSocketBaseImpl(asJava)
+    private class WebSocketBaseImpl(private val _asJava: Object) extends WebSocketBase {
 
-        def asJava = _asJava
+      def asJava = _asJava
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -192,26 +194,26 @@ trait WebSocketBase
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocketBase].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      def binaryHandlerID():String = {
+  def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].binaryHandlerID().asInstanceOf[String]
   }
 
-      def textHandlerID():String = {
+  def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].textHandlerID().asInstanceOf[String]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JWebSocketBase].end()
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
   }
 
 //future methods
 }
-  }
+}

@@ -21,31 +21,40 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
+class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) 
+    extends GenericRefedInterface[U](_asJava) {
 
-  def asJava = _asJava
 
 //cached methods
 //fluent methods
-  def setValue(value: T):GenericRefedInterface[T] = {
-    asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
+  override def setValue(value: U):GenericRefedInterface[U] = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setValue(toJava[U](value))
     this
   }
 
 //default methods
 //basic methods
-  def getValue():T = {
-    toScala[T](asJava.asInstanceOf[JGenericRefedInterface[Object]].getValue())
+  override def getValue():U = {
+    toScala[U](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getValue())
+  }
+
+  def setOtherValue(value: T):Unit = {
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setOtherValue(toJava[T](value))
+  }
+
+  def getOtherValue():T = {
+    toScala[T](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getOtherValue())
   }
 
 //future methods
 }
 
-  object GenericRefedInterface{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new GenericRefedInterface[T](asJava, objectToT)  
+  object InterfaceWithVariableArg{
+    def apply[T:TypeTag,U:TypeTag](asJava: Object, objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) = new InterfaceWithVariableArg[T,U](asJava, objectToT, objectToU)  
   //static methods
   }

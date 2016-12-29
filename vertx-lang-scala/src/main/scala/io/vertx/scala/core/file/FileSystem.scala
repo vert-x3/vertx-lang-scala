@@ -19,6 +19,8 @@ package io.vertx.scala.core.file
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}
@@ -288,39 +290,39 @@ class FileSystem(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def propsBlocking(path: String):FileProps = {
+  def propsBlocking(path: String):FileProps = {
     FileProps(asJava.asInstanceOf[JFileSystem].propsBlocking(path.asInstanceOf[java.lang.String]))
   }
 
-      def lpropsBlocking(path: String):FileProps = {
+  def lpropsBlocking(path: String):FileProps = {
     FileProps(asJava.asInstanceOf[JFileSystem].lpropsBlocking(path.asInstanceOf[java.lang.String]))
   }
 
-      def readSymlinkBlocking(link: String):String = {
+  def readSymlinkBlocking(link: String):String = {
     asJava.asInstanceOf[JFileSystem].readSymlinkBlocking(link.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
-      def readDirBlocking(path: String):scala.collection.mutable.Buffer[String] = {
+  def readDirBlocking(path: String):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
-      def readDirBlocking(path: String,filter: String):scala.collection.mutable.Buffer[String] = {
+  def readDirBlocking(path: String,filter: String):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFileSystem].readDirBlocking(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
-      def readFileBlocking(path: String):Buffer = {
+  def readFileBlocking(path: String):Buffer = {
     Buffer(asJava.asInstanceOf[JFileSystem].readFileBlocking(path.asInstanceOf[java.lang.String]))
   }
 
-      def openBlocking(path: String,options: OpenOptions):AsyncFile = {
+  def openBlocking(path: String,options: OpenOptions):AsyncFile = {
     AsyncFile(asJava.asInstanceOf[JFileSystem].openBlocking(path.asInstanceOf[java.lang.String],options.asJava))
   }
 
-      def existsBlocking(path: String):Boolean = {
+  def existsBlocking(path: String):Boolean = {
     asJava.asInstanceOf[JFileSystem].existsBlocking(path.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
-      def fsPropsBlocking(path: String):FileSystemProps = {
+  def fsPropsBlocking(path: String):FileSystemProps = {
     FileSystemProps(asJava.asInstanceOf[JFileSystem].fsPropsBlocking(path.asInstanceOf[java.lang.String]))
   }
 
@@ -496,6 +498,6 @@ class FileSystem(private val _asJava: Object) {
 }
 
   object FileSystem{
-    def apply(asJava: JFileSystem) = new FileSystem(asJava)  
+    def apply(asJava: Object) = new FileSystem(asJava)  
   //static methods
   }

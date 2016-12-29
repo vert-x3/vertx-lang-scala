@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocket => JWebSocket}
@@ -133,23 +135,23 @@ class WebSocket(private val _asJava: Object)
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
+  override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      override def binaryHandlerID():String = {
+  override def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
-      override def textHandlerID():String = {
+  override def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].textHandlerID().asInstanceOf[String]
   }
 
-        override def end():Unit = {
+  override def end():Unit = {
     asJava.asInstanceOf[JWebSocket].end()
   }
 
-      override def close():Unit = {
+  override def close():Unit = {
     asJava.asInstanceOf[JWebSocket].close()
   }
 
@@ -157,6 +159,6 @@ class WebSocket(private val _asJava: Object)
 }
 
   object WebSocket{
-    def apply(asJava: JWebSocket) = new WebSocket(asJava)  
+    def apply(asJava: Object) = new WebSocket(asJava)  
   //static methods
   }

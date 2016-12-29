@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
@@ -112,19 +114,19 @@ class HttpServer(private val _asJava: Object)
 
 //default methods
 //basic methods
-      override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JHttpServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JHttpServer].close()
   }
 
-      def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JHttpServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def actualPort():Int = {
+  def actualPort():Int = {
     asJava.asInstanceOf[JHttpServer].actualPort().asInstanceOf[Int]
   }
 
@@ -156,6 +158,6 @@ class HttpServer(private val _asJava: Object)
 }
 
   object HttpServer{
-    def apply(asJava: JHttpServer) = new HttpServer(asJava)  
+    def apply(asJava: Object) = new HttpServer(asJava)  
   //static methods
   }

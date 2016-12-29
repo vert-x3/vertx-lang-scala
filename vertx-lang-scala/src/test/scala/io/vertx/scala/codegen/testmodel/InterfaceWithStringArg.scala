@@ -21,29 +21,36 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
-import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-import io.vertx.core.Handler
+import io.vertx.codegen.testmodel.{InterfaceWithStringArg => JInterfaceWithStringArg}
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: Object) 
-    extends io.vertx.core.Handler[RefedInterface1] {
+class InterfaceWithStringArg(private val _asJava: Object) 
+    extends GenericRefedInterface[String](_asJava) {
 
-  def asJava = _asJava
 
 //cached methods
 //fluent methods
+  override def setValue(value: String):GenericRefedInterface[String] = {
+    asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value.asInstanceOf[java.lang.String])
+    this
+  }
+
 //default methods
 //basic methods
-  override def handle(arg0: RefedInterface1):Unit = {
-    asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
+  override def getValue():String = {
+    asJava.asInstanceOf[JInterfaceWithStringArg].getValue().asInstanceOf[String]
+  }
+
+  def meth():Unit = {
+    asJava.asInstanceOf[JInterfaceWithStringArg].meth()
   }
 
 //future methods
 }
 
-  object ConcreteHandlerUserType{
-    def apply(asJava: Object) = new ConcreteHandlerUserType(asJava)  
+  object InterfaceWithStringArg{
+    def apply(asJava: Object) = new InterfaceWithStringArg(asJava)  
   //static methods
   }

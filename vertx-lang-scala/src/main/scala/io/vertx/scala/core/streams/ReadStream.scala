@@ -19,6 +19,8 @@ package io.vertx.scala.core.streams
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
@@ -46,36 +48,36 @@ trait ReadStream[T]
 
 }
 
-  object ReadStream{
-    def apply[T](asJava: JReadStream[T]):ReadStream[T] = new ReadStreamImpl[T](asJava)    
-      private class ReadStreamImpl[T](private val _asJava: JReadStream[T]) extends ReadStream[T] {
+object ReadStream{
+  def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None):ReadStream[T] = new ReadStreamImpl[T](asJava, objectToT)
+    private class ReadStreamImpl[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) extends ReadStream[T] {
 
-        def asJava = _asJava
+      def asJava = _asJava
 
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JReadStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   def handler(handler: Handler[T]):ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[T]].handler({x: T => handler.handle(x)})
+    asJava.asInstanceOf[JReadStream[Object]].handler({x: Object => handler.handle(toScala[T](x))})
     this
   }
 
   def pause():ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[T]].pause()
+    asJava.asInstanceOf[JReadStream[Object]].pause()
     this
   }
 
   def resume():ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[T]].resume()
+    asJava.asInstanceOf[JReadStream[Object]].resume()
     this
   }
 
   def endHandler(endHandler: Handler[Unit]):ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[T]].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JReadStream[Object]].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -83,4 +85,4 @@ trait ReadStream[T]
 //basic methods
 //future methods
 }
-  }
+}

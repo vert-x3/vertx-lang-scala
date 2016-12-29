@@ -29,6 +29,8 @@ package @{type.raw.translatePackageName("scala")}\n
 import scala.compat.java8.FunctionConverters._\n
 import io.vertx.lang.scala.HandlerOps._\n
 import io.vertx.lang.scala.Converter._\n
+import scala.reflect.runtime.universe._\n
+import io.vertx.lang.scala.Converter._\n
 @comment{"# Generate the imports"}
 @foreach{importedType : generateImports(type, importedTypes, methods)}
 import @{importedType}\n
@@ -41,9 +43,13 @@ import @{importedType}\n
   */\n
 @end{}
 @if{concrete}
-	class @{className}@{assembleTypeParams(typeParams)}(private val _asJava: Object)
+	class @{className}@{assembleTypeParams(typeParams, true)}(private val _asJava: Object
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
+	@end{}
+	)
 @else{}
-	trait @{className}@{assembleTypeParams(typeParams)}
+	trait @{className}@{assembleTypeParams(typeParams, false)}
 @end{}
 
 @comment{"## Inheritance"}
@@ -59,14 +65,19 @@ import @{importedType}\n
 	@includeNamed{'class-body.templ'}
 	\n
   object @{className}{\n
-    def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}) = new @{className}@{assembleTypeParams(typeParams)}(asJava)
+    def apply@{assembleTypeParams(typeParams, true)}(asJava: Object
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
+	@end{}
+	) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}
+	@end{})
   \n
   //static methods\n
 	@foreach{method : staticMethods}
     def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}
+	@{assembleTypeParams(method.typeParams, true)}
 	(
 		@foreach{param:method.params}
 			@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
@@ -79,12 +90,20 @@ import @{importedType}\n
 @else{}
 	@includeNamed{'trait-body.templ'}
 	\n
-  object @{className}{\n
-    def apply@{assembleTypeParams(typeParams)}(asJava: J@{className}@{assembleTypeParams(typeParams)}):@{className}@{assembleTypeParams(typeParams)} = new @{className}Impl@{assembleTypeParams(typeParams)}(asJava)
-    \n
-      private class @{className}Impl@{assembleTypeParams(typeParams)}(private val _asJava: J@{className}@{assembleTypeParams(typeParams)}) extends @{className}@{assembleTypeParams(typeParams)} {\n\n
-      @includeNamed{'class-body.templ'}
-  }\n
+object @{className}{\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: Object
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
+	@end{}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}
+	@end{})\n
+    private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object
+	@foreach{typeParam : typeParams}
+	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
+	@end{}) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
+    @includeNamed{'class-body.templ'}
+}\n
 @end{}
 
 

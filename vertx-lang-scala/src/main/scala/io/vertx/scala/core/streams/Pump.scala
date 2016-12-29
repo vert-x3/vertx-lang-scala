@@ -19,6 +19,8 @@ package io.vertx.scala.core.streams
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -66,7 +68,7 @@ class Pump(private val _asJava: Object) {
 
 //default methods
 //basic methods
-      def numberPumped():Int = {
+  def numberPumped():Int = {
     asJava.asInstanceOf[JPump].numberPumped().asInstanceOf[Int]
   }
 
@@ -74,14 +76,14 @@ class Pump(private val _asJava: Object) {
 }
 
   object Pump{
-    def apply(asJava: JPump) = new Pump(asJava)  
+    def apply(asJava: Object) = new Pump(asJava)  
   //static methods
-    def pump[T](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
-      Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))
+    def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
+      Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]]))
     }
 
-    def pump[T](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
-      Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
+    def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
+      Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
     }
 
   }

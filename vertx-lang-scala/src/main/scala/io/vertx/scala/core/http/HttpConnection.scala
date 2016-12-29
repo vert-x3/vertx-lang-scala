@@ -19,6 +19,8 @@ package io.vertx.scala.core.http
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -146,15 +148,15 @@ class HttpConnection(private val _asJava: Object) {
   }
 
 //basic methods
-      def close():Unit = {
+  def close():Unit = {
     asJava.asInstanceOf[JHttpConnection].close()
   }
 
-      def settings():Http2Settings = {
+  def settings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
   }
 
-      def remoteSettings():Http2Settings = {
+  def remoteSettings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
@@ -174,6 +176,6 @@ class HttpConnection(private val _asJava: Object) {
 }
 
   object HttpConnection{
-    def apply(asJava: JHttpConnection) = new HttpConnection(asJava)  
+    def apply(asJava: Object) = new HttpConnection(asJava)  
   //static methods
   }

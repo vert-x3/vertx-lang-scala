@@ -19,6 +19,8 @@ package io.vertx.scala.core.eventbus
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
@@ -32,7 +34,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: Object) 
+class MessageProducer[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) 
     extends WriteStream[T] {
 
   def asJava = _asJava
@@ -40,71 +42,71 @@ class MessageProducer[T](private val _asJava: Object)
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def write(data: T):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].write(data)
+    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data))
     this
   }
 
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JMessageProducer[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
   override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JMessageProducer[Object]].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[T]].deliveryOptions(options.asJava)
+    asJava.asInstanceOf[JMessageProducer[Object]].deliveryOptions(options.asJava)
     this
   }
 
 //default methods
   //io.vertx.core.streams.WriteStream
   override def end(t: T):Unit = {
-    asJava.asInstanceOf[JMessageProducer[T]].end(t)
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](t))
   }
 
 //basic methods
-      override def writeQueueFull():Boolean = {
-    asJava.asInstanceOf[JMessageProducer[T]].writeQueueFull().asInstanceOf[Boolean]
+  override def writeQueueFull():Boolean = {
+    asJava.asInstanceOf[JMessageProducer[Object]].writeQueueFull().asInstanceOf[Boolean]
   }
 
-      def send(message: T):MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send(message))
+  def send(message: T):MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send(toJava[T](message)))
   }
 
-      def send[R](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[T]].send[R](message,{x: AsyncResult[JMessage[R]] => replyHandler.handle(AsyncResultWrapper[JMessage[R],Message[R]](x, a => Message[R](a)))}))
+  def send[R:TypeTag](message: T,replyHandler: Handler[AsyncResult[Message[R]]]):MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))}))
   }
 
-      def address():String = {
-    asJava.asInstanceOf[JMessageProducer[T]].address().asInstanceOf[String]
+  def address():String = {
+    asJava.asInstanceOf[JMessageProducer[Object]].address().asInstanceOf[String]
   }
 
-        override def end():Unit = {
-    asJava.asInstanceOf[JMessageProducer[T]].end()
+  override def end():Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end()
   }
 
-      def close():Unit = {
-    asJava.asInstanceOf[JMessageProducer[T]].close()
+  def close():Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].close()
   }
 
 //future methods
-  def sendFuture[R](message: T):scala.concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
-    asJava.asInstanceOf[JMessageProducer[T]].send[R](message,promiseAndHandler._1)
+  def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
+    asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
   object MessageProducer{
-    def apply[T](asJava: JMessageProducer[T]) = new MessageProducer[T](asJava)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new MessageProducer[T](asJava, objectToT)  
   //static methods
   }

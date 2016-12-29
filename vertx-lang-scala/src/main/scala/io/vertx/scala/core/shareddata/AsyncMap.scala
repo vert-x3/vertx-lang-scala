@@ -19,6 +19,8 @@ package io.vertx.scala.core.shareddata
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.shareddata.{AsyncMap => JAsyncMap}
 import io.vertx.core.AsyncResult
@@ -28,7 +30,7 @@ import io.vertx.core.Handler
   *
   * An asynchronous map.
   */
-class AsyncMap[K,V](private val _asJava: Object) {
+class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) {
 
   def asJava = _asJava
 
@@ -36,120 +38,120 @@ class AsyncMap[K,V](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].get(k,{x: AsyncResult[V] => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
+  def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
-      def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].put(k,v,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].put(k,v,ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].putIfAbsent(k,v,{x: AsyncResult[V] => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
+  def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),{x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
-      def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].putIfAbsent(k,v,ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[V] => completionHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
+  def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
-      def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].remove(k,{x: AsyncResult[V] => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
+  def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
-      def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].removeIfPresent(k,v,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k),toJava[V](v),{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
-      def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].replace(k,v,{x: AsyncResult[V] => resultHandler.handle(AsyncResultWrapper[V,V](x, a => a))})
+  def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k),toJava[V](v),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
-      def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].replaceIfPresent(k,oldValue,newValue,{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k),toJava[V](oldValue),toJava[V](newValue),{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
-      def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-      def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
-    asJava.asInstanceOf[JAsyncMap[K,V]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
+  def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
   }
 
 //future methods
   def getFuture(k: K):scala.concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V, V](x => if (x == null) null.asInstanceOf[V] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].get(k,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def putFuture(k: K,v: V):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].put(k,v,promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def putFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].put(k,v,ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def putIfAbsentFuture(k: K,v: V):scala.concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V, V](x => if (x == null) null.asInstanceOf[V] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].putIfAbsent(k,v,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def putIfAbsentFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V, V](x => if (x == null) null.asInstanceOf[V] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].putIfAbsent(k,v,ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def removeFuture(k: K):scala.concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V, V](x => if (x == null) null.asInstanceOf[V] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].remove(k,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def removeIfPresentFuture(k: K,v: V):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JAsyncMap[K,V]].removeIfPresent(k,v,promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def replaceFuture(k: K,v: V):scala.concurrent.Future[V] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[V, V](x => if (x == null) null.asInstanceOf[V] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].replace(k,v,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def replaceIfPresentFuture(k: K,oldValue: V,newValue: V):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JAsyncMap[K,V]].replaceIfPresent(k,oldValue,newValue,promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k),toJava[V](oldValue),toJava[V](newValue),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def clearFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
-    asJava.asInstanceOf[JAsyncMap[K,V]].clear(promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def sizeFuture():scala.concurrent.Future[Int] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => if (x == null) null.asInstanceOf[Int] else x.asInstanceOf[Int])
-    asJava.asInstanceOf[JAsyncMap[K,V]].size(promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object,Object]].size(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
   object AsyncMap{
-    def apply[K,V](asJava: JAsyncMap[K,V]) = new AsyncMap[K,V](asJava)  
+    def apply[K:TypeTag,V:TypeTag](asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new AsyncMap[K,V](asJava, objectToK, objectToV)  
   //static methods
   }

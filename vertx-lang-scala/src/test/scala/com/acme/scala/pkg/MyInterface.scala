@@ -19,6 +19,8 @@ package com.acme.scala.pkg
 import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
 import com.acme.pkg.{MyInterface => JMyInterface}
 import com.acme.scala.pkg.sub.SubInterface
@@ -35,11 +37,11 @@ class MyInterface(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-      def sub():SubInterface = {
+  def sub():SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
 
-      def method():TestInterface = {
+  def method():TestInterface = {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 
@@ -47,7 +49,7 @@ class MyInterface(private val _asJava: Object) {
 }
 
   object MyInterface{
-    def apply(asJava: JMyInterface) = new MyInterface(asJava)  
+    def apply(asJava: Object) = new MyInterface(asJava)  
   //static methods
     def create():MyInterface = {
       MyInterface(JMyInterface.create())
