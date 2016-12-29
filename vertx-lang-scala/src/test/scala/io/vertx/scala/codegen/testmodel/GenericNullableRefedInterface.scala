@@ -31,7 +31,7 @@ class GenericNullableRefedInterface[T](private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
-  def getValue():T = {
+      def getValue():T = {
     asJava.asInstanceOf[JGenericNullableRefedInterface[T]].getValue()
   }
 

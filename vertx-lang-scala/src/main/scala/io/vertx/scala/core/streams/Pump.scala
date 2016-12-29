@@ -66,7 +66,7 @@ class Pump(private val _asJava: Object) {
 
 //default methods
 //basic methods
-  def numberPumped():Int = {
+      def numberPumped():Int = {
     asJava.asInstanceOf[JPump].numberPumped().asInstanceOf[Int]
   }
 

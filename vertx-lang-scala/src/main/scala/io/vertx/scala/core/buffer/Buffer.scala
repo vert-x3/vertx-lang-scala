@@ -239,119 +239,119 @@ class Buffer(private val _asJava: Object) {
 
 //default methods
 //basic methods
-  override def toString():String = {
+      override def toString():String = {
     asJava.asInstanceOf[JBuffer].toString().asInstanceOf[String]
   }
 
-  def toString(enc: String):String = {
+      def toString(enc: String):String = {
     asJava.asInstanceOf[JBuffer].toString(enc.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
-  def toJsonObject():io.vertx.core.json.JsonObject = {
+      def toJsonObject():io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JBuffer].toJsonObject()
   }
 
-  def toJsonArray():io.vertx.core.json.JsonArray = {
+      def toJsonArray():io.vertx.core.json.JsonArray = {
     asJava.asInstanceOf[JBuffer].toJsonArray()
   }
 
-  def getByte(pos: Int):Byte = {
+      def getByte(pos: Int):Byte = {
     asJava.asInstanceOf[JBuffer].getByte(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Byte]
   }
 
-  def getUnsignedByte(pos: Int):Short = {
+      def getUnsignedByte(pos: Int):Short = {
     asJava.asInstanceOf[JBuffer].getUnsignedByte(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Short]
   }
 
-  def getInt(pos: Int):Int = {
+      def getInt(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getInt(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getIntLE(pos: Int):Int = {
+      def getIntLE(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getIntLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getUnsignedInt(pos: Int):Long = {
+      def getUnsignedInt(pos: Int):Long = {
     asJava.asInstanceOf[JBuffer].getUnsignedInt(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Long]
   }
 
-  def getUnsignedIntLE(pos: Int):Long = {
+      def getUnsignedIntLE(pos: Int):Long = {
     asJava.asInstanceOf[JBuffer].getUnsignedIntLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Long]
   }
 
-  def getLong(pos: Int):Long = {
+      def getLong(pos: Int):Long = {
     asJava.asInstanceOf[JBuffer].getLong(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Long]
   }
 
-  def getLongLE(pos: Int):Long = {
+      def getLongLE(pos: Int):Long = {
     asJava.asInstanceOf[JBuffer].getLongLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Long]
   }
 
-  def getDouble(pos: Int):Double = {
+      def getDouble(pos: Int):Double = {
     asJava.asInstanceOf[JBuffer].getDouble(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Double]
   }
 
-  def getFloat(pos: Int):Float = {
+      def getFloat(pos: Int):Float = {
     asJava.asInstanceOf[JBuffer].getFloat(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Float]
   }
 
-  def getShort(pos: Int):Short = {
+      def getShort(pos: Int):Short = {
     asJava.asInstanceOf[JBuffer].getShort(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Short]
   }
 
-  def getShortLE(pos: Int):Short = {
+      def getShortLE(pos: Int):Short = {
     asJava.asInstanceOf[JBuffer].getShortLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Short]
   }
 
-  def getUnsignedShort(pos: Int):Int = {
+      def getUnsignedShort(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getUnsignedShort(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getUnsignedShortLE(pos: Int):Int = {
+      def getUnsignedShortLE(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getUnsignedShortLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getMedium(pos: Int):Int = {
+      def getMedium(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getMedium(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getMediumLE(pos: Int):Int = {
+      def getMediumLE(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getMediumLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getUnsignedMedium(pos: Int):Int = {
+      def getUnsignedMedium(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getUnsignedMedium(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getUnsignedMediumLE(pos: Int):Int = {
+      def getUnsignedMediumLE(pos: Int):Int = {
     asJava.asInstanceOf[JBuffer].getUnsignedMediumLE(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
-  def getBuffer(start: Int,end: Int):Buffer = {
+      def getBuffer(start: Int,end: Int):Buffer = {
     Buffer(asJava.asInstanceOf[JBuffer].getBuffer(start.asInstanceOf[java.lang.Integer],end.asInstanceOf[java.lang.Integer]))
   }
 
-  def getString(start: Int,end: Int,enc: String):String = {
+      def getString(start: Int,end: Int,enc: String):String = {
     asJava.asInstanceOf[JBuffer].getString(start.asInstanceOf[java.lang.Integer],end.asInstanceOf[java.lang.Integer],enc.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
-  def getString(start: Int,end: Int):String = {
+      def getString(start: Int,end: Int):String = {
     asJava.asInstanceOf[JBuffer].getString(start.asInstanceOf[java.lang.Integer],end.asInstanceOf[java.lang.Integer]).asInstanceOf[String]
   }
 
-  def length():Int = {
+      def length():Int = {
     asJava.asInstanceOf[JBuffer].length().asInstanceOf[Int]
   }
 
-  def copy():Buffer = {
+      def copy():Buffer = {
     Buffer(asJava.asInstanceOf[JBuffer].copy())
   }
 
-  def slice():Buffer = {
+      def slice():Buffer = {
     Buffer(asJava.asInstanceOf[JBuffer].slice())
   }
 
-  def slice(start: Int,end: Int):Buffer = {
+      def slice(start: Int,end: Int):Buffer = {
     Buffer(asJava.asInstanceOf[JBuffer].slice(start.asInstanceOf[java.lang.Integer],end.asInstanceOf[java.lang.Integer]))
   }
 

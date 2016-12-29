@@ -49,17 +49,17 @@ class NetClient(private val _asJava: Object)
 
 //default methods
 //basic methods
-  override def isMetricsEnabled():Boolean = {
+      override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }
 
 //future methods
-def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
+  def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => if (x == null) null.asInstanceOf[NetSocket] else NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

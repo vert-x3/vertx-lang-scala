@@ -165,41 +165,41 @@ class NetSocket(private val _asJava: Object)
   }
 
 //basic methods
-  override def writeQueueFull():Boolean = {
+      override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JNetSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
-  def writeHandlerID():String = {
+      def writeHandlerID():String = {
     asJava.asInstanceOf[JNetSocket].writeHandlerID().asInstanceOf[String]
   }
 
-  override def end():Unit = {
+        override def end():Unit = {
     asJava.asInstanceOf[JNetSocket].end()
   }
 
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JNetSocket].close()
   }
 
-  def isSsl():Boolean = {
+      def isSsl():Boolean = {
     asJava.asInstanceOf[JNetSocket].isSsl().asInstanceOf[Boolean]
   }
 
 //future methods
-def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+  def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+  def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+  def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

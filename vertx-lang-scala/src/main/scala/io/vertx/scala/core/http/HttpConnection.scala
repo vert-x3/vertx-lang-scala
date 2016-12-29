@@ -146,27 +146,27 @@ class HttpConnection(private val _asJava: Object) {
   }
 
 //basic methods
-  def close():Unit = {
+      def close():Unit = {
     asJava.asInstanceOf[JHttpConnection].close()
   }
 
-  def settings():Http2Settings = {
+      def settings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
   }
 
-  def remoteSettings():Http2Settings = {
+      def remoteSettings():Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
 //future methods
-def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+  def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

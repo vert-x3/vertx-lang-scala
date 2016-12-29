@@ -66,7 +66,7 @@ class TimeoutStream(private val _asJava: Object)
 
 //default methods
 //basic methods
-  def cancel():Unit = {
+      def cancel():Unit = {
     asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
