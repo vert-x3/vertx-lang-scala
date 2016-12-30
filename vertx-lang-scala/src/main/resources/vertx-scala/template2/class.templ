@@ -78,12 +78,11 @@ import @{importedType}\n
 @else{}
 	@includeNamed{'trait-body.templ'}
 	\n
-  object @{className}{\n
-    def apply@{assembleTypeParams(typeParams, true)}(asJava: Object, useTypeTags:Boolean = false):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava, useTypeTags)
-    \n
-      private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object, private val _useTypeTags:Boolean) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
-      @includeNamed{'class-body.templ'}
-  }\n
+object @{className}{\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: Object, useTypeTags:Boolean = false):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava, useTypeTags)\n
+    private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object, private val _useTypeTags:Boolean) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
+    @includeNamed{'class-body.templ'}
+}\n
 @end{}
 
 

@@ -47,11 +47,11 @@ trait ReadStream[T]
 
 }
 
-  object ReadStream{
-    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false):ReadStream[T] = new ReadStreamImpl[T](asJava, useTypeTags)    
-      private class ReadStreamImpl[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean) extends ReadStream[T] {
+object ReadStream{
+  def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false):ReadStream[T] = new ReadStreamImpl[T](asJava, useTypeTags)
+    private class ReadStreamImpl[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean) extends ReadStream[T] {
 
-        def asJava = _asJava
+      def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -84,4 +84,4 @@ trait ReadStream[T]
 //basic methods
 //future methods
 }
-  }
+}
