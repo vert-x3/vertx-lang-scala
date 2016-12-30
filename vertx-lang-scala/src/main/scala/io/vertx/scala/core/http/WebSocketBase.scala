@@ -90,11 +90,11 @@ trait WebSocketBase
 
 }
 
-  object WebSocketBase{
-    def apply(asJava: Object, useTypeTags:Boolean = false):WebSocketBase = new WebSocketBaseImpl(asJava, useTypeTags)    
-      private class WebSocketBaseImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends WebSocketBase {
+object WebSocketBase{
+  def apply(asJava: Object, useTypeTags:Boolean = false):WebSocketBase = new WebSocketBaseImpl(asJava, useTypeTags)
+    private class WebSocketBaseImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends WebSocketBase {
 
-        def asJava = _asJava
+      def asJava = _asJava
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
@@ -215,4 +215,4 @@ trait WebSocketBase
 
 //future methods
 }
-  }
+}

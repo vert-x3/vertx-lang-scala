@@ -34,11 +34,11 @@ trait StreamBase {
 
 }
 
-  object StreamBase{
-    def apply(asJava: Object, useTypeTags:Boolean = false):StreamBase = new StreamBaseImpl(asJava, useTypeTags)    
-      private class StreamBaseImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends StreamBase {
+object StreamBase{
+  def apply(asJava: Object, useTypeTags:Boolean = false):StreamBase = new StreamBaseImpl(asJava, useTypeTags)
+    private class StreamBaseImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends StreamBase {
 
-        def asJava = _asJava
+      def asJava = _asJava
 
 //cached methods
 //fluent methods
@@ -51,4 +51,4 @@ trait StreamBase {
 //basic methods
 //future methods
 }
-  }
+}
