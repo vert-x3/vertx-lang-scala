@@ -1,7 +1,6 @@
 package io.vertx.lang.scala.tck
 
 import io.vertx.codegen.testmodel.{GenericsTCKImpl, RefedInterface1Impl, TestEnum, TestGenEnum}
-import io.vertx.lang.scala.VertxExecutionContext
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
