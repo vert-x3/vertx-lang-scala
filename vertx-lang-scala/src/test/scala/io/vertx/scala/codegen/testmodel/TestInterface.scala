@@ -41,7 +41,7 @@ import io.vertx.codegen.testmodel.TestGenEnum
 
 /**
   */
-class TestInterface(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class TestInterface(private val _asJava: Object) 
     extends SuperInterface1(_asJava) 
     with SuperInterface2 {
 
@@ -526,7 +526,7 @@ class TestInterface(private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object TestInterface{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new TestInterface(asJava, useTypeTags)  
+    def apply(asJava: Object) = new TestInterface(asJava)  
   //static methods
     def staticFactoryMethod(foo: String):RefedInterface1 = {
       RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))

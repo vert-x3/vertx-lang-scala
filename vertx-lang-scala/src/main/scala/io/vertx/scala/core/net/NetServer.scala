@@ -32,7 +32,7 @@ import io.vertx.core.Handler
 /**
   * Represents a TCP server
   */
-class NetServer(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class NetServer(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -123,6 +123,6 @@ class NetServer(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object NetServer{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new NetServer(asJava, useTypeTags)  
+    def apply(asJava: Object) = new NetServer(asJava)  
   //static methods
   }

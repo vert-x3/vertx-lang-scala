@@ -51,7 +51,7 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   */
-class HttpServerRequest(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpServerRequest(private val _asJava: Object) 
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
@@ -245,6 +245,6 @@ class HttpServerRequest(private val _asJava: Object, private val _useTypeTags:Bo
 }
 
   object HttpServerRequest{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServerRequest(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpServerRequest(asJava)  
   //static methods
   }

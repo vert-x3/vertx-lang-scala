@@ -25,7 +25,7 @@ import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SrvRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -65,6 +65,6 @@ class SrvRecord(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object SrvRecord{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new SrvRecord(asJava, useTypeTags)  
+    def apply(asJava: Object) = new SrvRecord(asJava)  
   //static methods
   }

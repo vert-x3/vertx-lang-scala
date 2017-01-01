@@ -29,7 +29,7 @@ import io.vertx.codegen.testmodel.{Factory => JFactory}
 
 /**
   */
-class Factory(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Factory(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -41,7 +41,7 @@ class Factory(private val _asJava: Object, private val _useTypeTags:Boolean = fa
 }
 
   object Factory{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Factory(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Factory(asJava)  
   //static methods
     def createConcreteHandlerUserType(handler: Handler[RefedInterface1]):ConcreteHandlerUserType = {
       ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))

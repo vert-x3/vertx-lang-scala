@@ -85,7 +85,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * 
   * Please see the user manual for more detailed usage information.
   */
-class Vertx(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class Vertx(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -302,7 +302,7 @@ class Vertx(private val _asJava: Object, private val _useTypeTags:Boolean = fals
 }
 
   object Vertx{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Vertx(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Vertx(asJava)  
   //static methods
     def vertx():Vertx = {
       Vertx(JVertx.vertx())

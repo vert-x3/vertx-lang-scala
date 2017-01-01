@@ -42,7 +42,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * 
   * Please refer to the documentation for more information on the event bus.
   */
-class EventBus(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class EventBus(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -133,6 +133,6 @@ class EventBus(private val _asJava: Object, private val _useTypeTags:Boolean = f
 }
 
   object EventBus{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new EventBus(asJava, useTypeTags)  
+    def apply(asJava: Object) = new EventBus(asJava)  
   //static methods
   }

@@ -63,7 +63,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * An example of using this class is as follows:
   * 
   */
-class HttpClientRequest(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpClientRequest(private val _asJava: Object) 
     extends WriteStream[Buffer] 
     with ReadStream[HttpClientResponse] {
 
@@ -267,6 +267,6 @@ class HttpClientRequest(private val _asJava: Object, private val _useTypeTags:Bo
 }
 
   object HttpClientRequest{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClientRequest(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpClientRequest(asJava)  
   //static methods
   }

@@ -35,7 +35,7 @@ import io.vertx.codegen.testmodel.TestGenEnum
 /**
   * The TCK for @Nullable.
   */
-class NullableTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class NullableTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -2457,6 +2457,6 @@ class NullableTCK(private val _asJava: Object, private val _useTypeTags:Boolean 
 }
 
   object NullableTCK{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new NullableTCK(asJava, useTypeTags)  
+    def apply(asJava: Object) = new NullableTCK(asJava)  
   //static methods
   }

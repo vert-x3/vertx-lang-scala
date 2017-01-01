@@ -61,7 +61,7 @@ import io.vertx.core.{Vertx => JVertx}
   * 
   * This class also provides [[io.vertx.scala.core.Context#runOnContext]] which allows an action to be executed asynchronously using the same context.
   */
-class Context(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Context(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -146,7 +146,7 @@ class Context(private val _asJava: Object, private val _useTypeTags:Boolean = fa
 }
 
   object Context{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Context(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Context(asJava)  
   //static methods
     def isOnWorkerThread():Boolean = {
       JContext.isOnWorkerThread().asInstanceOf[Boolean]

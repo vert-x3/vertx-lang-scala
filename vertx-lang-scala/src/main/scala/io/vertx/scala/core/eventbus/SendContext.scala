@@ -27,7 +27,7 @@ import io.vertx.core.eventbus.{Message => JMessage}
   *
   * Encapsulates a message being sent from Vert.x. Used with event bus interceptors
   */
-class SendContext[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SendContext[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
 
   def asJava = _asJava
 
@@ -51,6 +51,6 @@ class SendContext[T:TypeTag](private val _asJava: Object, private val _useTypeTa
 }
 
   object SendContext{
-    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new SendContext[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new SendContext[T](asJava, objectToT)  
   //static methods
   }

@@ -24,7 +24,7 @@ import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 
 /**
   */
-class RefedInterface1(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class RefedInterface1(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -45,6 +45,6 @@ class RefedInterface1(private val _asJava: Object, private val _useTypeTags:Bool
 }
 
   object RefedInterface1{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new RefedInterface1(asJava, useTypeTags)  
+    def apply(asJava: Object) = new RefedInterface1(asJava)  
   //static methods
   }

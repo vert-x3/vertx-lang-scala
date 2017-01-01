@@ -37,7 +37,7 @@ import io.vertx.scala.core.net.SocketAddress
   * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
-class ServerWebSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class ServerWebSocket(private val _asJava: Object) 
     extends WebSocketBase {
 
   def asJava = _asJava
@@ -188,6 +188,6 @@ class ServerWebSocket(private val _asJava: Object, private val _useTypeTags:Bool
 }
 
   object ServerWebSocket{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new ServerWebSocket(asJava, useTypeTags)  
+    def apply(asJava: Object) = new ServerWebSocket(asJava)  
   //static methods
   }

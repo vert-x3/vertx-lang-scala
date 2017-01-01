@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   *
   * An asynchronous map.
   */
-class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) {
 
   def asJava = _asJava
 
@@ -151,6 +151,6 @@ class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, private val _us
 }
 
   object AsyncMap{
-    def apply[K:TypeTag,V:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new AsyncMap[K,V](asJava, useTypeTags)  
+    def apply[K:TypeTag,V:TypeTag](asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new AsyncMap[K,V](asJava, objectToK, objectToV)  
   //static methods
   }

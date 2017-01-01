@@ -34,7 +34,7 @@ import io.vertx.codegen.testmodel.{CollectionTCK => JCollectionTCK}
 
 /**
   */
-class CollectionTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class CollectionTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -454,6 +454,6 @@ class CollectionTCK(private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object CollectionTCK{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new CollectionTCK(asJava, useTypeTags)  
+    def apply(asJava: Object) = new CollectionTCK(asJava)  
   //static methods
   }

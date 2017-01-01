@@ -56,7 +56,7 @@ import io.vertx.core.parsetools.{RecordParser => JRecordParser}
   * 
   * Please see the documentation for more information.
   */
-class RecordParser(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class RecordParser(private val _asJava: Object) 
     extends io.vertx.core.Handler[Buffer] {
 
   def asJava = _asJava
@@ -89,7 +89,7 @@ class RecordParser(private val _asJava: Object, private val _useTypeTags:Boolean
 }
 
   object RecordParser{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new RecordParser(asJava, useTypeTags)  
+    def apply(asJava: Object) = new RecordParser(asJava)  
   //static methods
     def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
       RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: JBuffer => output.handle(Buffer(x))}))

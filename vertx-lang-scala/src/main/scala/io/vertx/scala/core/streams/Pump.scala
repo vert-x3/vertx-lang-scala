@@ -44,7 +44,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * 
   * Please see the documentation for more information.
   */
-class Pump(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Pump(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -75,7 +75,7 @@ class Pump(private val _asJava: Object, private val _useTypeTags:Boolean = false
 }
 
   object Pump{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Pump(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Pump(asJava)  
   //static methods
     def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
       Pump(JPump.pump[T](rs.asJava.asInstanceOf[JReadStream[T]],ws.asJava.asInstanceOf[JWriteStream[T]]))

@@ -35,8 +35,8 @@ trait RefedInterface2 {
 }
 
 object RefedInterface2{
-  def apply(asJava: Object, useTypeTags:Boolean = false):RefedInterface2 = new RefedInterface2Impl(asJava, useTypeTags)
-    private class RefedInterface2Impl(private val _asJava: Object, private val _useTypeTags:Boolean) extends RefedInterface2 {
+  def apply(asJava: Object):RefedInterface2 = new RefedInterface2Impl(asJava)
+    private class RefedInterface2Impl(private val _asJava: Object) extends RefedInterface2 {
 
       def asJava = _asJava
 

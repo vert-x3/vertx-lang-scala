@@ -43,7 +43,7 @@ import io.vertx.core.Handler
   * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpClientResponse(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpClientResponse(private val _asJava: Object) 
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
@@ -147,6 +147,6 @@ class HttpClientResponse(private val _asJava: Object, private val _useTypeTags:B
 }
 
   object HttpClientResponse{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClientResponse(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpClientResponse(asJava)  
   //static methods
   }

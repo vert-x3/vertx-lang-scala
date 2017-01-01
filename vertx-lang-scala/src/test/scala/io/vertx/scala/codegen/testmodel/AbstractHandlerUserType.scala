@@ -36,8 +36,8 @@ trait AbstractHandlerUserType
 }
 
 object AbstractHandlerUserType{
-  def apply(asJava: Object, useTypeTags:Boolean = false):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava, useTypeTags)
-    private class AbstractHandlerUserTypeImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends AbstractHandlerUserType {
+  def apply(asJava: Object):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)
+    private class AbstractHandlerUserTypeImpl(private val _asJava: Object) extends AbstractHandlerUserType {
 
       def asJava = _asJava
 

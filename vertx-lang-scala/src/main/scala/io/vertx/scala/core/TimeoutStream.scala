@@ -33,7 +33,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * Pausing the timer inhibits the timer shots until the stream is resumed. Setting a null handler callback cancels
   * the timer.
   */
-class TimeoutStream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class TimeoutStream(private val _asJava: Object) 
     extends ReadStream[Long] {
 
   def asJava = _asJava
@@ -75,6 +75,6 @@ class TimeoutStream(private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object TimeoutStream{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new TimeoutStream(asJava, useTypeTags)  
+    def apply(asJava: Object) = new TimeoutStream(asJava)  
   //static methods
   }

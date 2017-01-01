@@ -25,7 +25,7 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
 /**
   * The address of a socket
   */
-class SocketAddress(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -45,6 +45,6 @@ class SocketAddress(private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object SocketAddress{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new SocketAddress(asJava, useTypeTags)  
+    def apply(asJava: Object) = new SocketAddress(asJava)  
   //static methods
   }

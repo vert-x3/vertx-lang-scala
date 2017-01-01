@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * An asynchronous counter that can be used to across the cluster to maintain a consistent count.
   * 
   */
-class Counter(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Counter(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -111,6 +111,6 @@ class Counter(private val _asJava: Object, private val _useTypeTags:Boolean = fa
 }
 
   object Counter{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Counter(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Counter(asJava)  
   //static methods
   }
