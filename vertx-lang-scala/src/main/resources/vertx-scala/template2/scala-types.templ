@@ -108,6 +108,11 @@
       if(nullable)
         ret = name + '.map(x => x).getOrElse(null)';
       return ret;
+    } else if (type.kind == CLASS_CLASS_TYPE) {
+      var ret = name;
+      if(nullable)
+        ret = name + '.map(x => x).getOrElse(null)';
+      return ret;
     } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
       return name;
     }
@@ -226,6 +231,16 @@
         ret += '[' + args + ']';
       }
       return ret;
+    } else if (type.kind == CLASS_CLASS_TYPE) {
+      var ret = type.simpleName;
+      var args = '';
+      for(arg : type.args) {
+        if(args != '') {
+          args += ',';
+        }
+        args += toJavaType(arg);
+      }
+      return  ret + '[' + args + ']';
     } else if (type.kind == CLASS_HANDLER) {
       return 'Handler['+ toJavaType(type.args[0]) +']';
     } else if (type.kind.collection) {
@@ -327,6 +342,26 @@
         ret += '[_]';
       }
       return wrapInOptionIfNullable(nullable, ret);
+    }
+    else if(type.kind == CLASS_CLASS_TYPE) {
+        var ret = 'Class';
+        if(type.args.empty) {
+          ret += '[_]';
+        }
+        else {
+          ret += '[';
+          var first = true;
+          for (arg : type.args) {
+            if (first) {
+              first = false;
+            } else {
+              ret += ', ';
+            }
+            ret += toScalaType(arg);
+          }
+          ret += ']';
+        }
+        return ret;
     }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
