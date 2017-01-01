@@ -34,7 +34,7 @@ import io.vertx.scala.core.buffer.Buffer
   * If there are more than one frames in the message, then the first frame should be a text or binary frame with
   * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
   */
-class WebSocketFrame(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class WebSocketFrame(private val _asJava: Object) {
 
   def asJava = _asJava
   private var cached_0:String = _
@@ -80,7 +80,7 @@ class WebSocketFrame(private val _asJava: Object, private val _useTypeTags:Boole
 }
 
   object WebSocketFrame{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new WebSocketFrame(asJava, useTypeTags)  
+    def apply(asJava: Object) = new WebSocketFrame(asJava)  
   //static methods
     def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
       WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))

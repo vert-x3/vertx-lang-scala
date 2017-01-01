@@ -31,7 +31,7 @@ import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
   * A [[io.vertx.scala.core.streams.WriteStream]] for sending packets to a [[io.vertx.scala.core.net.SocketAddress]].
   * The stream  is called when the write fails.
   */
-class PacketWritestream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class PacketWritestream(private val _asJava: Object) 
     extends WriteStream[Buffer] {
 
   def asJava = _asJava
@@ -77,6 +77,6 @@ class PacketWritestream(private val _asJava: Object, private val _useTypeTags:Bo
 }
 
   object PacketWritestream{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new PacketWritestream(asJava, useTypeTags)  
+    def apply(asJava: Object) = new PacketWritestream(asJava)  
   //static methods
   }

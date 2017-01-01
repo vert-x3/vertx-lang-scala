@@ -39,7 +39,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * other streams, e.g. an [[io.vertx.scala.core.http.HttpClientRequest]] instance,
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
-class AsyncFile(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class AsyncFile(private val _asJava: Object) 
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
@@ -173,6 +173,6 @@ class AsyncFile(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object AsyncFile{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new AsyncFile(asJava, useTypeTags)  
+    def apply(asJava: Object) = new AsyncFile(asJava)  
   //static methods
   }

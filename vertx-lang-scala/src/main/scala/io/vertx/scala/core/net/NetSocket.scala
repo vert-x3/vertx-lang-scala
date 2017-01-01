@@ -43,7 +43,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * It implements both  and  so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class NetSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class NetSocket(private val _asJava: Object) 
     extends ReadStream[Buffer] 
     with WriteStream[Buffer] {
 
@@ -208,6 +208,6 @@ class NetSocket(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object NetSocket{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new NetSocket(asJava, useTypeTags)  
+    def apply(asJava: Object) = new NetSocket(asJava)  
   //static methods
   }

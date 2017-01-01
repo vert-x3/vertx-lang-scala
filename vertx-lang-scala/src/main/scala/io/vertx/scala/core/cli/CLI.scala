@@ -41,7 +41,7 @@ import scala.collection.JavaConverters._
   * Command Line Interface object does not contains "value", it's a model. It must be evaluated by a
   * parser that returns a [[io.vertx.scala.core.cli.CommandLine]] object containing the argument and option values.
   */
-class CLI(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -157,7 +157,7 @@ class CLI(private val _asJava: Object, private val _useTypeTags:Boolean = false)
 }
 
   object CLI{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new CLI(asJava, useTypeTags)  
+    def apply(asJava: Object) = new CLI(asJava)  
   //static methods
     def create(name: String):CLI = {
       CLI(JCLI.create(name.asInstanceOf[java.lang.String]))

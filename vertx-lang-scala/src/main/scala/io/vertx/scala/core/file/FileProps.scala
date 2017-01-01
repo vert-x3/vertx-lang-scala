@@ -26,7 +26,7 @@ import io.vertx.core.file.{FileProps => JFileProps}
   * Represents properties of a file on the file system.
   * 
   */
-class FileProps(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class FileProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -70,6 +70,6 @@ class FileProps(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object FileProps{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new FileProps(asJava, useTypeTags)  
+    def apply(asJava: Object) = new FileProps(asJava)  
   //static methods
   }

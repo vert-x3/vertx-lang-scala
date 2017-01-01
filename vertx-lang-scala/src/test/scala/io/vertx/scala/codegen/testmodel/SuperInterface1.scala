@@ -24,7 +24,7 @@ import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
 
 /**
   */
-class SuperInterface1(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SuperInterface1(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -44,6 +44,6 @@ class SuperInterface1(private val _asJava: Object, private val _useTypeTags:Bool
 }
 
   object SuperInterface1{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new SuperInterface1(asJava, useTypeTags)  
+    def apply(asJava: Object) = new SuperInterface1(asJava)  
   //static methods
   }

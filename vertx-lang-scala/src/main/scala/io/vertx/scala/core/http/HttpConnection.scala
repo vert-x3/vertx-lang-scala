@@ -41,7 +41,7 @@ import io.vertx.scala.core.net.SocketAddress
   *   <li>[[io.vertx.scala.core.http.HttpConnection#exceptionHandler]]</li>
   * </ul>
   */
-class HttpConnection(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class HttpConnection(private val _asJava: Object) {
 
   def asJava = _asJava
   private var cached_0:SocketAddress = _
@@ -175,6 +175,6 @@ class HttpConnection(private val _asJava: Object, private val _useTypeTags:Boole
 }
 
   object HttpConnection{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpConnection(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpConnection(asJava)  
   //static methods
   }

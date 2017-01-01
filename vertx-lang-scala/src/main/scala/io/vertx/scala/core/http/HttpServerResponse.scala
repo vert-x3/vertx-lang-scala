@@ -53,7 +53,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * It implements [[io.vertx.scala.core.streams.WriteStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpServerResponse(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpServerResponse(private val _asJava: Object) 
     extends WriteStream[Buffer] {
 
   def asJava = _asJava
@@ -324,6 +324,6 @@ class HttpServerResponse(private val _asJava: Object, private val _useTypeTags:B
 }
 
   object HttpServerResponse{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServerResponse(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpServerResponse(asJava)  
   //static methods
   }

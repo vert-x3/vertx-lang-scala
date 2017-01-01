@@ -33,7 +33,7 @@ import io.vertx.core.dns.{MxRecord => JMxRecord}
   * 
   * Please consult the documentation for more information on DNS clients.
   */
-class DnsClient(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class DnsClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -177,6 +177,6 @@ class DnsClient(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object DnsClient{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new DnsClient(asJava, useTypeTags)  
+    def apply(asJava: Object) = new DnsClient(asJava)  
   //static methods
   }

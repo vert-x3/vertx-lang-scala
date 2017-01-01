@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
-class NetSocketStream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class NetSocketStream(private val _asJava: Object) 
     extends ReadStream[NetSocket] {
 
   def asJava = _asJava
@@ -68,6 +68,6 @@ class NetSocketStream(private val _asJava: Object, private val _useTypeTags:Bool
 }
 
   object NetSocketStream{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new NetSocketStream(asJava, useTypeTags)  
+    def apply(asJava: Object) = new NetSocketStream(asJava)  
   //static methods
   }

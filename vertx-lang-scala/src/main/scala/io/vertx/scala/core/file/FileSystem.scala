@@ -46,7 +46,7 @@ import io.vertx.core.Handler
   * 
   * Please consult the documentation for more information on file system support.
   */
-class FileSystem(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class FileSystem(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -497,6 +497,6 @@ class FileSystem(private val _asJava: Object, private val _useTypeTags:Boolean =
 }
 
   object FileSystem{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new FileSystem(asJava, useTypeTags)  
+    def apply(asJava: Object) = new FileSystem(asJava)  
   //static methods
   }

@@ -36,7 +36,7 @@ import io.vertx.core.Handler
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class NetClient(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -68,6 +68,6 @@ class NetClient(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object NetClient{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new NetClient(asJava, useTypeTags)  
+    def apply(asJava: Object) = new NetClient(asJava)  
   //static methods
   }

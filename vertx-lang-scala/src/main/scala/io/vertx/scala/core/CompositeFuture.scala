@@ -31,7 +31,7 @@ import io.vertx.core.Handler
   * The composite future wraps a list of [[io.vertx.scala.core.Future]], it is useful when several futures
   * needs to be coordinated.
   */
-class CompositeFuture(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class CompositeFuture(private val _asJava: Object) 
     extends Future[CompositeFuture](_asJava) {
 
   private var cached_0:Handler[AsyncResult[CompositeFuture]] = _
@@ -104,7 +104,7 @@ class CompositeFuture(private val _asJava: Object, private val _useTypeTags:Bool
 }
 
   object CompositeFuture{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new CompositeFuture(asJava, useTypeTags)  
+    def apply(asJava: Object) = new CompositeFuture(asJava)  
   //static methods
     def all[T1,T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
       CompositeFuture(JCompositeFuture.all[T1,T2](f1.asJava.asInstanceOf[JFuture[T1]],f2.asJava.asInstanceOf[JFuture[T2]]))

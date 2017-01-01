@@ -31,7 +31,7 @@ import io.vertx.codegen.testmodel.{FunctionParamTCK => JFunctionParamTCK}
 
 /**
   */
-class FunctionParamTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class FunctionParamTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -139,6 +139,6 @@ class FunctionParamTCK(private val _asJava: Object, private val _useTypeTags:Boo
 }
 
   object FunctionParamTCK{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new FunctionParamTCK(asJava, useTypeTags)  
+    def apply(asJava: Object) = new FunctionParamTCK(asJava)  
   //static methods
   }

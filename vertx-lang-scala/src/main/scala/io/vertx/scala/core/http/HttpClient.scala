@@ -59,7 +59,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * 
   * The client is designed to be reused between requests.
   */
-class HttpClient(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpClient(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -517,6 +517,6 @@ class HttpClient(private val _asJava: Object, private val _useTypeTags:Boolean =
 }
 
   object HttpClient{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpClient(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpClient(asJava)  
   //static methods
   }

@@ -31,7 +31,7 @@ import scala.collection.JavaConverters._
   * has stored the argument and option values. Only  instance of parser should create
   * objects of this type.
   */
-class CommandLine(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class CommandLine(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -112,7 +112,7 @@ class CommandLine(private val _asJava: Object, private val _useTypeTags:Boolean 
 }
 
   object CommandLine{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new CommandLine(asJava, useTypeTags)  
+    def apply(asJava: Object) = new CommandLine(asJava)  
   //static methods
     def create(cli: CLI):CommandLine = {
       CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))

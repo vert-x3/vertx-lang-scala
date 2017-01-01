@@ -32,7 +32,7 @@ import io.vertx.core.json.JsonObject
   * 
   * Please consult the documentation for more information on buffers.
   */
-class Buffer(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Buffer(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -360,7 +360,7 @@ class Buffer(private val _asJava: Object, private val _useTypeTags:Boolean = fal
 }
 
   object Buffer{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new Buffer(asJava, useTypeTags)  
+    def apply(asJava: Object) = new Buffer(asJava)  
   //static methods
     def buffer():Buffer = {
       Buffer(JBuffer.buffer())

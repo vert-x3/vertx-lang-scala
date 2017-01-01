@@ -41,7 +41,7 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
   * WebSocket is passed to the handler.
   */
-class HttpServer(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpServer(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -157,6 +157,6 @@ class HttpServer(private val _asJava: Object, private val _useTypeTags:Boolean =
 }
 
   object HttpServer{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServer(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpServer(asJava)  
   //static methods
   }

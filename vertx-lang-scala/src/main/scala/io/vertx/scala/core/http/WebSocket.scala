@@ -32,7 +32,7 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * Represents a client-side WebSocket.
   */
-class WebSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class WebSocket(private val _asJava: Object) 
     extends WebSocketBase {
 
   def asJava = _asJava
@@ -158,6 +158,6 @@ class WebSocket(private val _asJava: Object, private val _useTypeTags:Boolean = 
 }
 
   object WebSocket{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new WebSocket(asJava, useTypeTags)  
+    def apply(asJava: Object) = new WebSocket(asJava)  
   //static methods
   }

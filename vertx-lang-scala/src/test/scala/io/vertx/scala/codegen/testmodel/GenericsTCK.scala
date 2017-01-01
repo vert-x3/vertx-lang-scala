@@ -40,7 +40,7 @@ import io.vertx.codegen.testmodel.TestGenEnum
 
 /**
   */
-class GenericsTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class GenericsTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -464,6 +464,6 @@ class GenericsTCK(private val _asJava: Object, private val _useTypeTags:Boolean 
 }
 
   object GenericsTCK{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new GenericsTCK(asJava, useTypeTags)  
+    def apply(asJava: Object) = new GenericsTCK(asJava)  
   //static methods
   }

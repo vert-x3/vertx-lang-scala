@@ -33,8 +33,8 @@ trait SuperInterface2 {
 }
 
 object SuperInterface2{
-  def apply(asJava: Object, useTypeTags:Boolean = false):SuperInterface2 = new SuperInterface2Impl(asJava, useTypeTags)
-    private class SuperInterface2Impl(private val _asJava: Object, private val _useTypeTags:Boolean) extends SuperInterface2 {
+  def apply(asJava: Object):SuperInterface2 = new SuperInterface2Impl(asJava)
+    private class SuperInterface2Impl(private val _asJava: Object) extends SuperInterface2 {
 
       def asJava = _asJava
 

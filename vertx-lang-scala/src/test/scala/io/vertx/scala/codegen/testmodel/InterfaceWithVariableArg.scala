@@ -25,7 +25,7 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 
 /**
   */
-class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) 
     extends GenericRefedInterface[U](_asJava) {
 
 
@@ -54,6 +54,6 @@ class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object,
 }
 
   object InterfaceWithVariableArg{
-    def apply[T:TypeTag,U:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new InterfaceWithVariableArg[T,U](asJava, useTypeTags)  
+    def apply[T:TypeTag,U:TypeTag](asJava: Object, objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) = new InterfaceWithVariableArg[T,U](asJava, objectToT, objectToU)  
   //static methods
   }

@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Future[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
 
   def asJava = _asJava
   private var cached_0:Handler[AsyncResult[T]] = _
@@ -111,7 +111,7 @@ class Future[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Bo
 }
 
   object Future{
-    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new Future[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new Future[T](asJava, objectToT)  
   //static methods
     def future[T:TypeTag]():Future[T] = {
       Future[T](JFuture.future[T]())

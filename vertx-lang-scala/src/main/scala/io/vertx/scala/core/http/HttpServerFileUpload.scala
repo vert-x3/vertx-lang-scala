@@ -30,7 +30,7 @@ import io.vertx.core.Handler
 /**
   * Represents an file upload from an HTML FORM.
   */
-class HttpServerFileUpload(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpServerFileUpload(private val _asJava: Object) 
     extends ReadStream[Buffer] {
 
   def asJava = _asJava
@@ -101,6 +101,6 @@ class HttpServerFileUpload(private val _asJava: Object, private val _useTypeTags
 }
 
   object HttpServerFileUpload{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServerFileUpload(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpServerFileUpload(asJava)  
   //static methods
   }

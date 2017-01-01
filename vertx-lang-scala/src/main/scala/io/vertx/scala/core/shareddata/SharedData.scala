@@ -42,7 +42,7 @@ import io.vertx.core.shareddata.{SharedData => JSharedData}
   * 
   * Please see the documentation for more information.
   */
-class SharedData(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SharedData(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -98,6 +98,6 @@ class SharedData(private val _asJava: Object, private val _useTypeTags:Boolean =
 }
 
   object SharedData{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new SharedData(asJava, useTypeTags)  
+    def apply(asJava: Object) = new SharedData(asJava)  
   //static methods
   }

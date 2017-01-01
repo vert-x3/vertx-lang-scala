@@ -33,7 +33,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class MessageProducer[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) 
     extends WriteStream[T] {
 
   def asJava = _asJava
@@ -106,6 +106,6 @@ class MessageProducer[T:TypeTag](private val _asJava: Object, private val _useTy
 }
 
   object MessageProducer{
-    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new MessageProducer[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new MessageProducer[T](asJava, objectToT)  
   //static methods
   }

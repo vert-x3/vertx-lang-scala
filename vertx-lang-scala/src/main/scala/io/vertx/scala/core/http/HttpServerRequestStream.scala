@@ -30,7 +30,7 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class HttpServerRequestStream(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class HttpServerRequestStream(private val _asJava: Object) 
     extends ReadStream[HttpServerRequest] {
 
   def asJava = _asJava
@@ -68,6 +68,6 @@ class HttpServerRequestStream(private val _asJava: Object, private val _useTypeT
 }
 
   object HttpServerRequestStream{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new HttpServerRequestStream(asJava, useTypeTags)  
+    def apply(asJava: Object) = new HttpServerRequestStream(asJava)  
   //static methods
   }

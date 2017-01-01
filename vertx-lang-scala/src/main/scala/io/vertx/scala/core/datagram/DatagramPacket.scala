@@ -29,7 +29,7 @@ import io.vertx.scala.core.net.SocketAddress
 /**
   * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
   */
-class DatagramPacket(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class DatagramPacket(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -49,6 +49,6 @@ class DatagramPacket(private val _asJava: Object, private val _useTypeTags:Boole
 }
 
   object DatagramPacket{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new DatagramPacket(asJava, useTypeTags)  
+    def apply(asJava: Object) = new DatagramPacket(asJava)  
   //static methods
   }

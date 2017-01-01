@@ -29,7 +29,7 @@ import scala.collection.JavaConverters._
   * It's useful in Vert.x to represent things in Vert.x like HTTP headers and HTTP parameters which allow
   * multiple values for keys.
   */
-class MultiMap(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class MultiMap(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -95,7 +95,7 @@ class MultiMap(private val _asJava: Object, private val _useTypeTags:Boolean = f
 }
 
   object MultiMap{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new MultiMap(asJava, useTypeTags)  
+    def apply(asJava: Object) = new MultiMap(asJava)  
   //static methods
     def caseInsensitiveMultiMap():MultiMap = {
       MultiMap(JMultiMap.caseInsensitiveMultiMap())

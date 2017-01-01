@@ -34,7 +34,7 @@ import io.vertx.core.Handler
   * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
-class WorkerExecutor(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class WorkerExecutor(private val _asJava: Object) 
     extends Measured {
 
   def asJava = _asJava
@@ -77,6 +77,6 @@ class WorkerExecutor(private val _asJava: Object, private val _useTypeTags:Boole
 }
 
   object WorkerExecutor{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new WorkerExecutor(asJava, useTypeTags)  
+    def apply(asJava: Object) = new WorkerExecutor(asJava)  
   //static methods
   }

@@ -47,7 +47,7 @@ import io.vertx.scala.core.net.SocketAddress
   * 
   * Please consult the documentation for more information on datagram sockets.
   */
-class DatagramSocket(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class DatagramSocket(private val _asJava: Object) 
     extends ReadStream[DatagramPacket] 
     with Measured {
 
@@ -227,6 +227,6 @@ class DatagramSocket(private val _asJava: Object, private val _useTypeTags:Boole
 }
 
   object DatagramSocket{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new DatagramSocket(asJava, useTypeTags)  
+    def apply(asJava: Object) = new DatagramSocket(asJava)  
   //static methods
   }

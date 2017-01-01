@@ -38,7 +38,7 @@ import io.vertx.core.Handler
   * 
   * If you want to notify the sender that processing failed, then [[io.vertx.scala.core.eventbus.Message#fail]] can be called.
   */
-class Message[T:TypeTag](private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class Message[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
 
   def asJava = _asJava
   private var cached_0:T = _
@@ -107,6 +107,6 @@ class Message[T:TypeTag](private val _asJava: Object, private val _useTypeTags:B
 }
 
   object Message{
-    def apply[T:TypeTag](asJava: Object, useTypeTags:Boolean = false) = new Message[T](asJava, useTypeTags)  
+    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new Message[T](asJava, objectToT)  
   //static methods
   }

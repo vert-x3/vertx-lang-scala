@@ -33,8 +33,8 @@ trait Measured {
 }
 
 object Measured{
-  def apply(asJava: Object, useTypeTags:Boolean = false):Measured = new MeasuredImpl(asJava, useTypeTags)
-    private class MeasuredImpl(private val _asJava: Object, private val _useTypeTags:Boolean) extends Measured {
+  def apply(asJava: Object):Measured = new MeasuredImpl(asJava)
+    private class MeasuredImpl(private val _asJava: Object) extends Measured {
 
       def asJava = _asJava
 

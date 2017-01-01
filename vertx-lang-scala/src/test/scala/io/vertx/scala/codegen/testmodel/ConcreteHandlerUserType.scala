@@ -26,7 +26,7 @@ import io.vertx.core.Handler
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class ConcreteHandlerUserType(private val _asJava: Object) 
     extends io.vertx.core.Handler[RefedInterface1] {
 
   def asJava = _asJava
@@ -43,6 +43,6 @@ class ConcreteHandlerUserType(private val _asJava: Object, private val _useTypeT
 }
 
   object ConcreteHandlerUserType{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new ConcreteHandlerUserType(asJava, useTypeTags)  
+    def apply(asJava: Object) = new ConcreteHandlerUserType(asJava)  
   //static methods
   }

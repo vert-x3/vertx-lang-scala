@@ -24,7 +24,7 @@ import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**
   */
-class SubInterface(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class SubInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -40,6 +40,6 @@ class SubInterface(private val _asJava: Object, private val _useTypeTags:Boolean
 }
 
   object SubInterface{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new SubInterface(asJava, useTypeTags)  
+    def apply(asJava: Object) = new SubInterface(asJava)  
   //static methods
   }

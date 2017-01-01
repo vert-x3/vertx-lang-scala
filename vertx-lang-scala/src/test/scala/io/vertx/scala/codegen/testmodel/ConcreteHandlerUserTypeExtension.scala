@@ -26,7 +26,7 @@ import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcrete
 
 /**
   */
-class ConcreteHandlerUserTypeExtension(private val _asJava: Object, private val _useTypeTags:Boolean = false) 
+class ConcreteHandlerUserTypeExtension(private val _asJava: Object) 
     extends ConcreteHandlerUserType(_asJava) {
 
 
@@ -42,6 +42,6 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object, private val 
 }
 
   object ConcreteHandlerUserTypeExtension{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new ConcreteHandlerUserTypeExtension(asJava, useTypeTags)  
+    def apply(asJava: Object) = new ConcreteHandlerUserTypeExtension(asJava)  
   //static methods
   }

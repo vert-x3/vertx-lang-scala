@@ -31,7 +31,7 @@ import io.vertx.codegen.testmodel.{DataObjectTCK => JDataObjectTCK}
   * todo:
   * - Buffer support
   */
-class DataObjectTCK(private val _asJava: Object, private val _useTypeTags:Boolean = false) {
+class DataObjectTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -75,6 +75,6 @@ class DataObjectTCK(private val _asJava: Object, private val _useTypeTags:Boolea
 }
 
   object DataObjectTCK{
-    def apply(asJava: Object, useTypeTags:Boolean = false) = new DataObjectTCK(asJava, useTypeTags)  
+    def apply(asJava: Object) = new DataObjectTCK(asJava)  
   //static methods
   }
