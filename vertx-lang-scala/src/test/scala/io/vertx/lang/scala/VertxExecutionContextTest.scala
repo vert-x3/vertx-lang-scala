@@ -18,8 +18,8 @@ class VertxExecutionContextTest extends FlatSpec with Matchers {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
     vertx.deployVerticleFuture(s"scala:${classOf[PromiseTestVerticle].getName}").foreach(r => cl.countDown())
-    val delay = cl.await(100, TimeUnit.MILLISECONDS)
-    assert(delay, "Deploy took longer than 100 ms")
+    val delay = cl.await(10000, TimeUnit.MILLISECONDS)
+    assert(delay, "Deploy took longer than 10000 ms")
   }
 }
 

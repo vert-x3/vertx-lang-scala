@@ -81,25 +81,22 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testListParam" should "work" in {
-    import collection.JavaConverters._
     assert("ok" == obj.methodWithListParam(it => {
-      assert(List("one", "two", "three").asJava == it)
+      assert(List("one", "two", "three") == it)
       "ok"
     }))
   }
 
   "testSetParam" should "work" in {
-    import collection.JavaConverters._
     assert("ok" == obj.methodWithSetParam(it => {
-      assert(Set("one", "two", "three").asJava == it)
+      assert(Set("one", "two", "three") == it)
       "ok"
     }))
   }
 
   "testMapParam" should "work" in {
-    import collection.JavaConverters._
     assert("ok" == obj.methodWithMapParam(it => {
-      assert(Map("one" ->"one", "two" -> "two", "three" -> "three").asJava == it)
+      assert(Map("one" ->"one", "two" -> "two", "three" -> "three") == it)
       "ok"
     }))
   }
