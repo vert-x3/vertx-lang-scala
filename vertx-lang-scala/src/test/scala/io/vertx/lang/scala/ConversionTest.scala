@@ -1,28 +1,75 @@
 package io.vertx.lang.scala
 
-import scala.language.implicitConversions
+
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
+import io.vertx.core.Handler
+import io.vertx.lang.scala.Converter.{toJava, toScala}
+import io.vertx.lang.scala.HandlerOps.funcToMappedHandler
+import io.vertx.lang.scala.json.{Json, JsonObject}
 import io.vertx.scala.codegen.testmodel.TestDataObject
+import org.junit.runner.RunWith
+import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.junit.JUnitRunner
 
+import scala.reflect.runtime.universe._
 /**
-  * Created by jochen on 31.12.16.
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
-object ConversionTest {
-  implicit def testDataObjectToScala(x: JTestDataObject): TestDataObject = TestDataObject(x)
-  implicit def testDataObjectToJava(x: TestDataObject): JTestDataObject = x.asJava
+@RunWith(classOf[JUnitRunner])
+class ConversionTest extends FlatSpec with Matchers {
 
-  def main(args: Array[String]): Unit = {
-    println("WTF")
-    val jt = new JTestDataObject()
-    testIt(jt)
-    println(getIt(jt))
+  "A generic method " should "return a Java instance" in {
+    val j = new Con().returnsJava[JTestDataObject]()
+    assert(j.isInstanceOf[JTestDataObject])
   }
 
-  def testIt(tt: TestDataObject): Unit = {
-    println(tt.getWibble)
+  "A generic method " should "return a Scala instance" in {
+    val s = new Con().returnsScala[TestDataObject]()
+    assert(s.isInstanceOf[TestDataObject])
   }
 
-  def getIt(tt: JTestDataObject): TestDataObject = {
-    tt
+  "A generic method " should "returns a JsonObject for Scala" in {
+    val s = new Con().returnsJsonObjectScala[JsonObject]()
+    assert(s.isInstanceOf[JsonObject])
+  }
+
+  "A generic method " should "returns a JsonObject for Java" in {
+    val j = new Con().returnsJsonObjectJava[JsonObject]()
+    assert(j.isInstanceOf[JsonObject])
+  }
+
+
+  "A generic method " should "dubbidu1" in {
+    val j:Int = new Con().convertParamToScala[java.lang.Integer, Int](1)
+  }
+
+  "A generic method " should "dubbidu" in {
+    val j:java.lang.Integer = new Con().convertParamToJava[Int, java.lang.Integer](Integer.valueOf(1))
+  }
+
+  class Con {
+    def returnsScala[T:TypeTag](): T = {
+      toScala[T](new JTestDataObject())
+    }
+
+    def returnsJava[T:TypeTag](): T = {
+      toJava[T](TestDataObject())
+    }
+
+    def returnsJsonObjectJava[T:TypeTag](): T = {
+      toJava[T](Json.obj(("hallo","welt")))
+    }
+
+    def returnsJsonObjectScala[T:TypeTag](): T = {
+      toJava[T](Json.obj(("hallo","welt")))
+    }
+
+    def convertParamToJava[T:TypeTag, V:TypeTag](param:V): T = {
+      toJava[T](param.asInstanceOf[Object])
+    }
+
+    def convertParamToScala[T:TypeTag, V:TypeTag](param:V): T = {
+      toScala[T](param.asInstanceOf[Object])
+    }
   }
 }
