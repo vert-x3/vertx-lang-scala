@@ -13,7 +13,8 @@ object Converter {
   def toScala[T](t: Object)(implicit tag: TypeTag[T]): T = {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
-    if(t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx.scala")){
+    val n = t == null
+    if(n || t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx.scala")){
       t.asInstanceOf[T]
     }
     else {
@@ -27,7 +28,8 @@ object Converter {
   def toJava[T](t: T)(implicit tag: TypeTag[T]): Object = {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
-    if(t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx")){
+    val n = t == null
+    if(n || t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx")){
       t.asInstanceOf[Object]
     }
     else
