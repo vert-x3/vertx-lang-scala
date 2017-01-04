@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
@@ -53,15 +54,15 @@ class CommandLine(private val _asJava: Object) {
   }
 
   def getOptionValue[T:TypeTag](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getOptionValue[T](name.asInstanceOf[java.lang.String])
+    toScala[T](asJava.asInstanceOf[JCommandLine].getOptionValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
   def getArgumentValue[T:TypeTag](name: String):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](name.asInstanceOf[java.lang.String])
+    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
   def getArgumentValue[T:TypeTag](index: Int):T = {
-    asJava.asInstanceOf[JCommandLine].getArgumentValue[T](index.asInstanceOf[java.lang.Integer])
+    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](index.asInstanceOf[java.lang.Integer]))
   }
 
   def isFlagEnabled(name: String):Boolean = {

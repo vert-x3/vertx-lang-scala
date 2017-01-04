@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
@@ -103,7 +104,7 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithHandlerGenericReturn[T:TypeTag](handler: Handler[T]):Handler[T] = {
-    {x: T => asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[T]({x: T => handler.handle(x)}).handle(x)}
+    {x: T => asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[Object]({x: Object => handler.handle(toScala[T](x))}).handle(toJava[T](x))}
   }
 
   def methodWithHandlerVertxGenReturn(expected: String):Handler[RefedInterface1] = {
@@ -155,7 +156,7 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithHandlerAsyncResultGenericReturn[T:TypeTag](handler: Handler[AsyncResult[T]]):Handler[AsyncResult[T]] = {
-    {x: AsyncResult[T] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[T]({x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))}).handle(AsyncResultWrapper[T,T](x, a => a))}
+    {x: AsyncResult[T] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[Object]({x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}).handle(AsyncResultWrapper[T,Object](x, a => toJava[T](a)))}
   }
 
   def methodWithHandlerAsyncResultVertxGenReturn(expected: String,fail: Boolean):Handler[AsyncResult[RefedInterface1]] = {
@@ -167,7 +168,7 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithObjectParam(str: String,obj: AnyRef):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithObjectParam(str.asInstanceOf[java.lang.String],obj)
+    asJava.asInstanceOf[JTestInterface].methodWithObjectParam(str.asInstanceOf[java.lang.String],toJava[Object](obj))
   }
 
   def methodWithDataObjectParam(dataObject: TestDataObject):Unit = {
@@ -211,11 +212,11 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithHandlerGenericUserType[U:TypeTag](value: U,handler: Handler[GenericRefedInterface[U]]):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericUserType[U](value,{x: JGenericRefedInterface[U] => handler.handle(GenericRefedInterface[U](x))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericUserType[Object](toJava[U](value),{x: JGenericRefedInterface[Object] => handler.handle(GenericRefedInterface[U](x))})
   }
 
   def methodWithHandlerAsyncResultGenericUserType[U:TypeTag](value: U,handler: Handler[AsyncResult[GenericRefedInterface[U]]]):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[U](value,{x: AsyncResult[JGenericRefedInterface[U]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[U],GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[Object](toJava[U](value),{x: AsyncResult[JGenericRefedInterface[Object]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object],GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))})
   }
 
   def methodWithByteReturn():Byte = {
@@ -275,7 +276,7 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithGenericUserTypeReturn[U:TypeTag](value: U):GenericRefedInterface[U] = {
-    GenericRefedInterface[U](asJava.asInstanceOf[JTestInterface].methodWithGenericUserTypeReturn[U](value))
+    GenericRefedInterface[U](asJava.asInstanceOf[JTestInterface].methodWithGenericUserTypeReturn[Object](toJava[U](value)))
   }
 
   def overloadedMethod(str: String,handler: Handler[String]):String = {
@@ -295,19 +296,19 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithGenericReturn[U:TypeTag](`type`: String):U = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericReturn[U](`type`.asInstanceOf[java.lang.String])
+    toScala[U](asJava.asInstanceOf[JTestInterface].methodWithGenericReturn[Object](`type`.asInstanceOf[java.lang.String]))
   }
 
   def methodWithGenericParam[U:TypeTag](`type`: String,u: U):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericParam[U](`type`.asInstanceOf[java.lang.String],u)
+    asJava.asInstanceOf[JTestInterface].methodWithGenericParam[Object](`type`.asInstanceOf[java.lang.String],toJava[U](u))
   }
 
   def methodWithGenericHandler[U:TypeTag](`type`: String,handler: Handler[U]):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericHandler[U](`type`.asInstanceOf[java.lang.String],{x: U => handler.handle(x)})
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandler[Object](`type`.asInstanceOf[java.lang.String],{x: Object => handler.handle(toScala[U](x))})
   }
 
   def methodWithGenericHandlerAsyncResult[U:TypeTag](`type`: String,asyncResultHandler: Handler[AsyncResult[U]]):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[U](`type`.asInstanceOf[java.lang.String],{x: AsyncResult[U] => asyncResultHandler.handle(AsyncResultWrapper[U,U](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[Object](`type`.asInstanceOf[java.lang.String],{x: AsyncResult[Object] => asyncResultHandler.handle(AsyncResultWrapper[Object,U](x, a => toScala[U](a)))})
   }
 
   def methodWithJsonObjectReturn():io.vertx.core.json.JsonObject = {
@@ -476,14 +477,14 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithHandlerAsyncResultGenericUserTypeFuture[U:TypeTag](value: U):scala.concurrent.Future[GenericRefedInterface[U]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[U], GenericRefedInterface[U]](x => if (x == null) null.asInstanceOf[GenericRefedInterface[U]] else GenericRefedInterface[U](x))
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[U](value,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Object], GenericRefedInterface[U]](x => if (x == null) null.asInstanceOf[GenericRefedInterface[U]] else GenericRefedInterface[U](x))
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[Object](toJava[U](value),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithGenericHandlerAsyncResultFuture[U:TypeTag](`type`: String):scala.concurrent.Future[U] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[U, U](x => if (x == null) null.asInstanceOf[U] else x)
-    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[U](`type`.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, U](x => if (x == null) null.asInstanceOf[U] else toScala[U](x))
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[Object](`type`.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

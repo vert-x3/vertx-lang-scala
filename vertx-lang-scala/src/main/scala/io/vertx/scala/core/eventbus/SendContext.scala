@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 
@@ -36,15 +37,15 @@ class SendContext[T:TypeTag](private val _asJava: Object, objectToT: Option[Obje
 //default methods
 //basic methods
   def message():Message[T] = {
-    Message[T](asJava.asInstanceOf[JSendContext[T]].message())
+    Message[T](asJava.asInstanceOf[JSendContext[Object]].message())
   }
 
   def next():Unit = {
-    asJava.asInstanceOf[JSendContext[T]].next()
+    asJava.asInstanceOf[JSendContext[Object]].next()
   }
 
   def send():Boolean = {
-    asJava.asInstanceOf[JSendContext[T]].send().asInstanceOf[Boolean]
+    asJava.asInstanceOf[JSendContext[Object]].send().asInstanceOf[Boolean]
   }
 
 //future methods

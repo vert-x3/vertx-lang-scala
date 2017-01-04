@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -47,74 +48,74 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object, objectToT: Option[
 //cached methods
 //fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].handler({x: JMessage[T] => handler.handle(Message[T](x))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].handler({x: JMessage[Object] => handler.handle(Message[T](x))})
     this
   }
 
   override def pause():MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].pause()
+    asJava.asInstanceOf[JMessageConsumer[Object]].pause()
     this
   }
 
   override def resume():MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].resume()
+    asJava.asInstanceOf[JMessageConsumer[Object]].resume()
     this
   }
 
   override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[T]].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JMessageConsumer[Object]].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
 //default methods
 //basic methods
   def bodyStream():ReadStream[T] = {
-    ReadStream[T](asJava.asInstanceOf[JMessageConsumer[T]].bodyStream())
+    ReadStream[T](asJava.asInstanceOf[JMessageConsumer[Object]].bodyStream())
   }
 
   def isRegistered():Boolean = {
-    asJava.asInstanceOf[JMessageConsumer[T]].isRegistered().asInstanceOf[Boolean]
+    asJava.asInstanceOf[JMessageConsumer[Object]].isRegistered().asInstanceOf[Boolean]
   }
 
   def address():String = {
-    asJava.asInstanceOf[JMessageConsumer[T]].address().asInstanceOf[String]
+    asJava.asInstanceOf[JMessageConsumer[Object]].address().asInstanceOf[String]
   }
 
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
-    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[T]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
+    MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[Object]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
   }
 
   def getMaxBufferedMessages():Int = {
-    asJava.asInstanceOf[JMessageConsumer[T]].getMaxBufferedMessages().asInstanceOf[Int]
+    asJava.asInstanceOf[JMessageConsumer[Object]].getMaxBufferedMessages().asInstanceOf[Int]
   }
 
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   def unregister():Unit = {
-    asJava.asInstanceOf[JMessageConsumer[T]].unregister()
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister()
   }
 
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
-    asJava.asInstanceOf[JMessageConsumer[T]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
 //future methods
   def completionFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
-    asJava.asInstanceOf[JMessageConsumer[T]].completionHandler(promiseAndHandler._1)
+    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def unregisterFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
-    asJava.asInstanceOf[JMessageConsumer[T]].unregister(promiseAndHandler._1)
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
