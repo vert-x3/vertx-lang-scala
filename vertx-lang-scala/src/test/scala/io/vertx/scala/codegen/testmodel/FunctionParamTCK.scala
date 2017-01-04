@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.TestEnum
@@ -56,7 +57,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectParam(arg: AnyRef,func: AnyRef => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(toJava[Object](arg),{x: Object => func(toScala[java.lang.Object](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithDataObjectParam(func: TestDataObject => String):String = {
@@ -80,11 +81,11 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithGenericParam[T:TypeTag](t: T,func: T => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericParam[T](t,{x: T => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericParam[Object](toJava[T](t),{x: Object => func(toScala[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithGenericUserTypeParam[T:TypeTag](t: T,func: GenericRefedInterface[T] => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeParam[T](t,{x: JGenericRefedInterface[T] => func(GenericRefedInterface[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeParam[Object](toJava[T](t),{x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithBasicReturn(byteFunc: String => Byte,shortFunc: String => Short,integerFunc: String => Int,longFunc: String => Long,floatFunc: String => Float,doubleFunc: String => Double,booleanFunc: String => Boolean,charFunc: String => Char,stringFunc: String => String):String = {
@@ -96,7 +97,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectReturn(func: Int => AnyRef):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => toJava[Object](func(x.asInstanceOf[Int]))}).asInstanceOf[String]
   }
 
   def methodWithDataObjectReturn(func: String => TestDataObject):String = {
@@ -120,11 +121,11 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithGenericReturn[T:TypeTag](func: Int => T):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericReturn[T]({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericReturn[Object]({x: java.lang.Integer => toJava[T](func(x.asInstanceOf[Int]))}).asInstanceOf[String]
   }
 
   def methodWithGenericUserTypeReturn[T:TypeTag](func: GenericRefedInterface[T] => GenericRefedInterface[T]):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeReturn[T]({x: JGenericRefedInterface[T] => func(GenericRefedInterface[T](x)).asJava.asInstanceOf[JGenericRefedInterface[T]]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeReturn[Object]({x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asJava.asInstanceOf[JGenericRefedInterface[Object]]}).asInstanceOf[String]
   }
 
   def methodWithNullableListParam(func: scala.collection.mutable.Buffer[String] => String):String = {

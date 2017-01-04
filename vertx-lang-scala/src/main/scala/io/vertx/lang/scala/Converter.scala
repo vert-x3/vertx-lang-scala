@@ -24,14 +24,14 @@ object Converter {
     }
   }
 
-  def toJava[T](t: Object)(implicit tag: TypeTag[T]): T = {
+  def toJava[T](t: T)(implicit tag: TypeTag[T]): Object = {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
     if(t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx")){
-      t.asInstanceOf[T]
+      t.asInstanceOf[Object]
     }
     else
-      t.getClass.getMethod("asJava").invoke(t).asInstanceOf[T]
+      t.getClass.getMethod("asJava").invoke(t)
   }
 
   def companion(name: String): Object =

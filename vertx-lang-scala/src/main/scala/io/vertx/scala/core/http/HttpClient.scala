@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.HttpMethod

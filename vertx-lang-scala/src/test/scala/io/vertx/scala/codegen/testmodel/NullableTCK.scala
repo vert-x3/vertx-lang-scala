@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
@@ -344,23 +345,23 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableTypeVariableParam[T:TypeTag](expectNull: Boolean,param: T):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableParam[T](expectNull.asInstanceOf[java.lang.Boolean],param)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableParam[Object](expectNull.asInstanceOf[java.lang.Boolean],toJava[T](param))
   }
 
   def methodWithNullableTypeVariableHandler[T:TypeTag](notNull: Boolean,value: T,handler: Handler[T]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandler[T](notNull.asInstanceOf[java.lang.Boolean],value,{x: T => handler.handle(x)})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandler[Object](notNull.asInstanceOf[java.lang.Boolean],toJava[T](value),{x: Object => handler.handle(toScala[T](x))})
   }
 
   def methodWithNullableTypeVariableHandlerAsyncResult[T:TypeTag](notNull: Boolean,value: T,handler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[T](notNull.asInstanceOf[java.lang.Boolean],value,{x: AsyncResult[T] => handler.handle(AsyncResultWrapper[T,T](x, a => a))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[Object](notNull.asInstanceOf[java.lang.Boolean],toJava[T](value),{x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
   def methodWithNullableTypeVariableReturn[T:TypeTag](notNull: Boolean,value: T):T = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableReturn[T](notNull.asInstanceOf[java.lang.Boolean],value)
+    toScala[T](asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableReturn[Object](notNull.asInstanceOf[java.lang.Boolean],toJava[T](value)))
   }
 
   def methodWithNullableObjectParam(expectNull: Boolean,param: AnyRef):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableObjectParam(expectNull.asInstanceOf[java.lang.Boolean],param)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableObjectParam(expectNull.asInstanceOf[java.lang.Boolean],toJava[Object](param))
   }
 
   def methodWithNonNullableListByteParam(param: scala.collection.mutable.Buffer[Byte]):Boolean = {
@@ -1951,8 +1952,8 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableTypeVariableHandlerAsyncResultFuture[T:TypeTag](notNull: Boolean,value: T):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[T, T](x => if (x == null) null.asInstanceOf[T] else x)
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[T](notNull.asInstanceOf[java.lang.Boolean],value,promiseAndHandler._1)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[Object](notNull.asInstanceOf[java.lang.Boolean],toJava[T](value),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

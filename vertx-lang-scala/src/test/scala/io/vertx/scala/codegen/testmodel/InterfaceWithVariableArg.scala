@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
@@ -32,22 +33,22 @@ class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object,
 //cached methods
 //fluent methods
   override def setValue(value: U):GenericRefedInterface[U] = {
-    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].setValue(value)
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setValue(toJava[U](value))
     this
   }
 
 //default methods
 //basic methods
   override def getValue():U = {
-    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].getValue()
+    toScala[U](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getValue())
   }
 
   def setOtherValue(value: T):Unit = {
-    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].setOtherValue(value)
+    asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setOtherValue(toJava[T](value))
   }
 
   def getOtherValue():T = {
-    asJava.asInstanceOf[JInterfaceWithVariableArg[T,U]].getOtherValue()
+    toScala[T](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getOtherValue())
   }
 
 //future methods

@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{LocalMap => JLocalMap}
 
 /**
@@ -40,47 +41,47 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Opti
 //default methods
 //basic methods
   def get(key: K):V = {
-    asJava.asInstanceOf[JLocalMap[K,V]].get(key)
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].get(toJava[K](key)))
   }
 
   def put(key: K,value: V):V = {
-    asJava.asInstanceOf[JLocalMap[K,V]].put(key,value)
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].put(toJava[K](key),toJava[V](value)))
   }
 
   def remove(key: K):V = {
-    asJava.asInstanceOf[JLocalMap[K,V]].remove(key)
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].remove(toJava[K](key)))
   }
 
   def clear():Unit = {
-    asJava.asInstanceOf[JLocalMap[K,V]].clear()
+    asJava.asInstanceOf[JLocalMap[Object,Object]].clear()
   }
 
   def size():Int = {
-    asJava.asInstanceOf[JLocalMap[K,V]].size().asInstanceOf[Int]
+    asJava.asInstanceOf[JLocalMap[Object,Object]].size().asInstanceOf[Int]
   }
 
   def isEmpty():Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].isEmpty().asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object,Object]].isEmpty().asInstanceOf[Boolean]
   }
 
   def putIfAbsent(key: K,value: V):V = {
-    asJava.asInstanceOf[JLocalMap[K,V]].putIfAbsent(key,value)
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].putIfAbsent(toJava[K](key),toJava[V](value)))
   }
 
   def removeIfPresent(key: K,value: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].removeIfPresent(key,value).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object,Object]].removeIfPresent(toJava[K](key),toJava[V](value)).asInstanceOf[Boolean]
   }
 
   def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
-    asJava.asInstanceOf[JLocalMap[K,V]].replaceIfPresent(key,oldValue,newValue).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object,Object]].replaceIfPresent(toJava[K](key),toJava[V](oldValue),toJava[V](newValue)).asInstanceOf[Boolean]
   }
 
   def replace(key: K,value: V):V = {
-    asJava.asInstanceOf[JLocalMap[K,V]].replace(key,value)
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].replace(toJava[K](key),toJava[V](value)))
   }
 
   def close():Unit = {
-    asJava.asInstanceOf[JLocalMap[K,V]].close()
+    asJava.asInstanceOf[JLocalMap[Object,Object]].close()
   }
 
 //future methods

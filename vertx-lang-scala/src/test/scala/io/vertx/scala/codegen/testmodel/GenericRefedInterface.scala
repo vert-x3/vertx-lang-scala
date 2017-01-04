@@ -20,6 +20,7 @@ import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
@@ -31,14 +32,14 @@ class GenericRefedInterface[T:TypeTag](private val _asJava: Object, objectToT: O
 //cached methods
 //fluent methods
   def setValue(value: T):GenericRefedInterface[T] = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].setValue(value)
+    asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
     this
   }
 
 //default methods
 //basic methods
   def getValue():T = {
-    asJava.asInstanceOf[JGenericRefedInterface[T]].getValue()
+    toScala[T](asJava.asInstanceOf[JGenericRefedInterface[Object]].getValue())
   }
 
 //future methods
