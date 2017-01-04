@@ -110,7 +110,7 @@
         ret = 'toJava['+type.simpleName+'](' + name + ')';
       return ret;
     } else if (type.kind == CLASS_CLASS_TYPE) {
-      var ret = name;
+      var ret = name+'.asInstanceOf[Class[Object]]';
       if(nullable)
         ret = name + '.map(x => x).getOrElse(null)';
       return ret;
