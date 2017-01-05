@@ -50,9 +50,9 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : superTypes}@{toScalaTypeAndTypeParamTreatment(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
 @else{type.isHandler}
-	 \n    extends io.vertx.core.Handler[@{toScalaTypeAndTypeParamTreatment(type.getHandlerArg, false);}]
+	 \n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false);}]
 @end{}
  {\n
 \n
@@ -69,8 +69,8 @@ import @{importedType}\n
 	@{assembleTypeParams(method.typeParams, true)}
 	(
 		@foreach{param:method.params}
-			@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
-		@end{','}):@{toScalaTypeAndTypeParamTreatment(method.returnType, false)} = {\n
+			@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
+		@end{','}):@{toScalaType(method.returnType, false)} = {\n
       @{invokeStaticMethod('J'+className, type, method)}\n
     }\n
 	\n
