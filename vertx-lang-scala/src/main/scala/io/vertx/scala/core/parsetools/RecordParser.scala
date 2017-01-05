@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.parsetools
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -62,46 +60,88 @@ class RecordParser(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def setOutput(output: Handler[Buffer]):Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})
   }
 
+  /**
+    * Flip the parser into delimited mode, and where the delimiter can be represented
+    * by the String `delim` encoded in latin-1 . Don't use this if your String contains other than latin-1 characters.
+    * 
+    * This method can be called multiple times with different values of delim while data is being parsed.
+    * @param delim the new delimeter
+    */
   def delimitedMode(delim: String):Unit = {
     asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asInstanceOf[java.lang.String])
   }
 
+  /**
+    * Flip the parser into delimited mode, and where the delimiter can be represented
+    * by the delimiter `delim`.
+    * 
+    * This method can be called multiple times with different values of delim while data is being parsed.
+    * @param delim the new delimiter
+    */
   def delimitedMode(delim: Buffer):Unit = {
     asJava.asInstanceOf[JRecordParser].delimitedMode(delim.asJava.asInstanceOf[JBuffer])
   }
 
+  /**
+    * Flip the parser into fixed size mode, where the record size is specified by `size` in bytes.
+    * 
+    * This method can be called multiple times with different values of size while data is being parsed.
+    * @param size the new record size
+    */
   def fixedSizeMode(size: Int):Unit = {
     asJava.asInstanceOf[JRecordParser].fixedSizeMode(size.asInstanceOf[java.lang.Integer])
   }
 
+  /**
+    * This method is called to provide the parser with data.
+    * @param buffer a chunk of data
+    */
   def handle(buffer: Buffer):Unit = {
     asJava.asInstanceOf[JRecordParser].handle(buffer.asJava.asInstanceOf[JBuffer])
   }
 
-//future methods
 }
 
-  object RecordParser{
-    def apply(asJava: JRecordParser) = new RecordParser(asJava)  
-  //static methods
-    def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
-      RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: JBuffer => output.handle(Buffer(x))}))
-    }
-
-    def newDelimited(delim: Buffer,output: Handler[Buffer]):RecordParser = {
-      RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],{x: JBuffer => output.handle(Buffer(x))}))
-    }
-
-    def newFixed(size: Int,output: Handler[Buffer]):RecordParser = {
-      RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer],{x: JBuffer => output.handle(Buffer(x))}))
-    }
-
+object RecordParser{
+  def apply(asJava: JRecordParser) = new RecordParser(asJava)  
+  /**
+    * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
+    * by the String `` delim endcoded in latin-1 . Don't use this if your String contains other than latin-1 characters.
+    * 
+    * `output` Will receive whole records which have been parsed.
+    * @param delim the initial delimiter string
+    * @param output handler that will receive the output
+    */
+  def newDelimited(delim: String,output: Handler[Buffer]):RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: JBuffer => output.handle(Buffer(x))}))
   }
+
+  /**
+    * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
+    * by the `Buffer` delim.
+    * 
+    * `output` Will receive whole records which have been parsed.
+    * @param delim the initial delimiter buffer
+    * @param output handler that will receive the output
+    */
+  def newDelimited(delim: Buffer,output: Handler[Buffer]):RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim.asJava.asInstanceOf[JBuffer],{x: JBuffer => output.handle(Buffer(x))}))
+  }
+
+  /**
+    * Create a new `RecordParser` instance, initially in fixed size mode, and where the record size is specified
+    * by the `size` parameter.
+    * 
+    * `output` Will receive whole records which have been parsed.
+    * @param size the initial record size
+    * @param output handler that will receive the output
+    */
+  def newFixed(size: Int,output: Handler[Buffer]):RecordParser = {
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer],{x: JBuffer => output.handle(Buffer(x))}))
+  }
+
+}

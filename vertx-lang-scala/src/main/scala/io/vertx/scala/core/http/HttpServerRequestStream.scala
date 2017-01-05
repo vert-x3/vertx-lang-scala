@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.http
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
@@ -36,8 +34,6 @@ class HttpServerRequestStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -63,12 +59,8 @@ class HttpServerRequestStream(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
-//future methods
 }
 
-  object HttpServerRequestStream{
-    def apply(asJava: JHttpServerRequestStream) = new HttpServerRequestStream(asJava)  
-  //static methods
-  }
+object HttpServerRequestStream{
+  def apply(asJava: JHttpServerRequestStream) = new HttpServerRequestStream(asJava)  
+}

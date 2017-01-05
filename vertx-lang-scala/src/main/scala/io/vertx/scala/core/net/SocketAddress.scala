@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.net
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
@@ -30,10 +28,6 @@ class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def host():String = {
     asJava.asInstanceOf[JSocketAddress].host().asInstanceOf[String]
   }
@@ -42,10 +36,8 @@ class SocketAddress(private val _asJava: Object) {
     asJava.asInstanceOf[JSocketAddress].port().asInstanceOf[Int]
   }
 
-//future methods
 }
 
-  object SocketAddress{
-    def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
-  //static methods
-  }
+object SocketAddress{
+  def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
+}

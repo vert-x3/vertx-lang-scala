@@ -16,9 +16,7 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
@@ -30,15 +28,11 @@ class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object)
     extends GenericRefedInterface[U](_asJava) {
 
 
-//cached methods
-//fluent methods
   override def setValue(value: U):GenericRefedInterface[U] = {
     asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].setValue(toJava[U](value))
     this
   }
 
-//default methods
-//basic methods
   override def getValue():U = {
     toScala[U](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getValue())
   }
@@ -51,10 +45,8 @@ class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object)
     toScala[T](asJava.asInstanceOf[JInterfaceWithVariableArg[Object,Object]].getOtherValue())
   }
 
-//future methods
 }
 
-  object InterfaceWithVariableArg{
-    def apply[T:TypeTag,U:TypeTag](asJava: JInterfaceWithVariableArg[_,_]) = new InterfaceWithVariableArg[T,U](asJava)  
-  //static methods
-  }
+object InterfaceWithVariableArg{
+  def apply[T:TypeTag,U:TypeTag](asJava: JInterfaceWithVariableArg[_,_]) = new InterfaceWithVariableArg[T,U](asJava)  
+}

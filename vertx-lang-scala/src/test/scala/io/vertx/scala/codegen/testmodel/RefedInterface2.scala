@@ -16,9 +16,7 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface2 => JRefedInterface2}
@@ -41,19 +39,14 @@ object RefedInterface2{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
   def setString(str: String):RefedInterface2 = {
     asJava.asInstanceOf[JRefedInterface2].setString(str.asInstanceOf[java.lang.String])
     this
   }
 
-//default methods
-//basic methods
   def getString():String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 
-//future methods
 }
 }

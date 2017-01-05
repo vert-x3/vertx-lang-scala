@@ -1,8 +1,7 @@
 @code{
 
-  def methodDoc(method, indentation) {
+  def methodDoc(method, indentation, future) {
     var doc = '';
-    var future = shouldMethodReturnAFuture(method);
 
     var commentedIndentation = indentation;
     commentedIndentation += "  *";

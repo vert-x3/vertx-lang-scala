@@ -93,10 +93,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.arr("BOB", "LAURA").toString === dataObject.getJsonArray("genEnumValues").toString)
   }
 
-  /**
-    * TODO: DataObjectWithLists.java:67 contains a conversion that breaks this test => Bug
-    */
-  "testWriteDataObjectWithLists" should "work" ignore {
+  "testWriteDataObjectWithLists" should "work" in {
     import collection.JavaConverters._
 
     println(Json.arr(Map("foo" -> "eek").asJava, Map("foo" -> "wibble").asJava).getValue(0).getClass)
@@ -113,7 +110,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("stringValues", Json.arr("stringValues1", "stringValues2", "stringValues3"))
       .put("dataObjectValues", Json.arr(Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f), Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f)))
       .put("enumValues", Json.arr("TIM", "JULIEN"))
-      .put("genEnumValues", Json.arr("bob", "laura")))
+      .put("genEnumValues", Json.arr("BOB", "LAURA")))
     dataObjectTCK.setDataObjectWithLists(dataObject)
   }
 
@@ -137,10 +134,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.obj().put("1", "BOB").put("2", "LAURA").toString == dataObject.getJsonObject("genEnumValues").toString)
   }
 
-  /**
-    * TODO: DataObjectWithLists.java:67 contains a conversion that breaks this test => Bug
-    */
-  "testWriteDataObjectWithMaps" should "work" ignore {
+  "testWriteDataObjectWithMaps" should "work" in {
     val dataObject = DataObjectWithMaps.fromJson(Json.obj()
       .put("booleanValues", Json.obj().put("1", true).put("2", false))
       .put("shortValues", Json.obj().put("1", 520).put("2", 1040))
@@ -151,9 +145,9 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("stringValues", Json.obj().put("1", "stringValues1").put("2", "stringValues2"))
       .put("jsonObjectValues", Json.obj().put("1", Json.obj().put("foo", "eek")).put("2", Json.obj().put("foo", "wibble")))
       .put("jsonArrayValues", Json.obj().put("1", Json.arr("foo")).put("2", Json.arr("bar")))
-      .put("dataObjectValues", Json.obj().put("1", Json.arr(Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f), Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f))))
+      .put("dataObjectValues", Json.obj(("1", Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f)), ("2", Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f))))
       .put("enumValues", Json.obj().put("1", "TIM").put("2", "JULIEN"))
-      .put("genEnumValues", Json.obj().put("1", "bob").put("2", "laura"))
+      .put("genEnumValues", Json.obj().put("1", "BOB").put("2", "LAURA"))
     )
     dataObjectTCK.setDataObjectWithMaps(dataObject)
   }

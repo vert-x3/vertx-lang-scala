@@ -24,6 +24,7 @@
 |[[defaultPort]]`defaultPort`|`Number (int)`|-
 |[[enabledCipherSuites]]`enabledCipherSuites`|`Array of String`|-
 |[[enabledSecureTransportProtocols]]`enabledSecureTransportProtocols`|`Array of String`|-
+|[[extraParameters]]`extraParameters`|`Json object`|-
 |[[headers]]`headers`|`Json object`|-
 |[[http2ClearTextUpgrade]]`http2ClearTextUpgrade`|`Boolean`|-
 |[[http2ConnectionWindowSize]]`http2ConnectionWindowSize`|`Number (int)`|-
@@ -31,6 +32,7 @@
 |[[http2MultiplexingLimit]]`http2MultiplexingLimit`|`Number (int)`|-
 |[[idleTimeout]]`idleTimeout`|`Number (int)`|-
 |[[initialSettings]]`initialSettings`|`link:dataobjects.html#Http2Settings[Http2Settings]`|-
+|[[introspectionPath]]`introspectionPath`|`String`|-
 |[[jdkSslEngineOptions]]`jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
 |[[jwtToken]]`jwtToken`|`Boolean`|-
 |[[keepAlive]]`keepAlive`|`Boolean`|-
@@ -39,6 +41,8 @@
 |[[logActivity]]`logActivity`|`Boolean`|-
 |[[logoutPath]]`logoutPath`|`String`|-
 |[[maxChunkSize]]`maxChunkSize`|`Number (int)`|-
+|[[maxHeaderSize]]`maxHeaderSize`|`Number (int)`|-
+|[[maxInitialLineLength]]`maxInitialLineLength`|`Number (int)`|-
 |[[maxPoolSize]]`maxPoolSize`|`Number (int)`|-
 |[[maxWaitQueueSize]]`maxWaitQueueSize`|`Number (int)`|-
 |[[maxWebsocketFrameSize]]`maxWebsocketFrameSize`|`Number (int)`|-
@@ -50,12 +54,14 @@
 |[[pfxTrustOptions]]`pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[pipelining]]`pipelining`|`Boolean`|-
 |[[pipeliningLimit]]`pipeliningLimit`|`Number (int)`|-
+|[[privateKey]]`privateKey`|`String`|-
 |[[protocolVersion]]`protocolVersion`|`link:enums.html#HttpVersion[HttpVersion]`|-
 |[[proxyOptions]]`proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[publicKey]]`publicKey`|`String`|-
 |[[receiveBufferSize]]`receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`reuseAddress`|`Boolean`|-
 |[[revocationPath]]`revocationPath`|`String`|-
+|[[scopeSeparator]]`scopeSeparator`|`String`|-
 |[[sendBufferSize]]`sendBufferSize`|`Number (int)`|-
 |[[site]]`site`|`String`|-
 |[[soLinger]]`soLinger`|`Number (int)`|-

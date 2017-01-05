@@ -206,6 +206,36 @@ is complete
 `example6`
 ----
 
+=== Multiple ResultSet responses
+
+In some cases your query might return more than one result set, in this case and to preserve the compatibility when
+the returned result set object is converted to pure json, the next result sets are chained to the current result set
+under the property `next`. A simple walk of all result sets can be achieved like this:
+
+[source,scala]
+----
+`example13`
+----
+
+=== Streaming
+
+When dealing with large data sets, it is not advised to use API just described but to stream data since it avoids
+inflating the whole response into memory and JSON and data is just processed on a row by row basis, for example:
+
+[source,scala]
+----
+`example14`
+----
+
+You still have full control on when the stream is pauses, resumed and ended. For cases where your query returns
+multiple result sets you should use the result set ended event to fetch the next one if available. If there is more
+data the stream handler will receive the new data, otherwise the end handler is invoked.
+
+[source,scala]
+----
+`example15`
+----
+
 === Using transactions
 
 To use transactions first set auto-commit to false with `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.

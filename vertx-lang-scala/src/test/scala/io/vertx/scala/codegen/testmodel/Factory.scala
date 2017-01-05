@@ -16,9 +16,7 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{ConcreteHandlerUserType => JConcreteHandlerUserType}
@@ -34,26 +32,20 @@ class Factory(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
-  object Factory{
-    def apply(asJava: JFactory) = new Factory(asJava)  
-  //static methods
-    def createConcreteHandlerUserType(handler: Handler[RefedInterface1]):ConcreteHandlerUserType = {
-      ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
-    }
-
-    def createAbstractHandlerUserType(handler: Handler[RefedInterface1]):AbstractHandlerUserType = {
-      AbstractHandlerUserType(JFactory.createAbstractHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
-    }
-
-    def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]):ConcreteHandlerUserTypeExtension = {
-      ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
-    }
-
+object Factory{
+  def apply(asJava: JFactory) = new Factory(asJava)  
+  def createConcreteHandlerUserType(handler: Handler[RefedInterface1]):ConcreteHandlerUserType = {
+    ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
   }
+
+  def createAbstractHandlerUserType(handler: Handler[RefedInterface1]):AbstractHandlerUserType = {
+    AbstractHandlerUserType(JFactory.createAbstractHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
+  }
+
+  def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]):ConcreteHandlerUserTypeExtension = {
+    ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
+  }
+
+}

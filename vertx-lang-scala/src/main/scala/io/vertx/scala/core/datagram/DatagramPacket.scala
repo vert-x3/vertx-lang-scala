@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.datagram
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.{Buffer => JBuffer}
@@ -34,22 +32,25 @@ class DatagramPacket(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
+    * this [[io.vertx.scala.core.datagram.DatagramPacket]].
+    * @return the address of the sender
+    */
   def sender():SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())
   }
 
+  /**
+    * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
+    * @return the data
+    */
   def data():Buffer = {
     Buffer(asJava.asInstanceOf[JDatagramPacket].data())
   }
 
-//future methods
 }
 
-  object DatagramPacket{
-    def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
-  //static methods
-  }
+object DatagramPacket{
+  def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
+}

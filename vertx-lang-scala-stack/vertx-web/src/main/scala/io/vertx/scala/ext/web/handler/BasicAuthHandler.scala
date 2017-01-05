@@ -17,34 +17,31 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.web.handler.{BasicAuthHandler => JBasicAuthHandler}
 import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import scala.collection.JavaConverters._
 
 /**
   * An auth handler that provides HTTP Basic Authentication support.
   */
-class BasicAuthHandler(private val _asJava: JBasicAuthHandler) 
+class BasicAuthHandler(private val _asJava: Object) 
     extends AuthHandler {
 
-  def asJava: JBasicAuthHandler = _asJava
-
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-  }
+  def asJava = _asJava
 
   /**
     * Add a required authority for this auth handler
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthority(authority: String): AuthHandler = {
-    _asJava.addAuthority(authority)
+  override def addAuthority(authority: String):AuthHandler = {
+    asJava.asInstanceOf[JBasicAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
@@ -53,24 +50,36 @@ class BasicAuthHandler(private val _asJava: JBasicAuthHandler)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthorities(authorities: Set[String]): AuthHandler = {
-    _asJava.addAuthorities(authorities.map(x => x:java.lang.String).asJava)
+  override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
+    asJava.asInstanceOf[JBasicAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
+  }
+
+  override def handle(arg0: RoutingContext):Unit = {
+    asJava.asInstanceOf[JBasicAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
-object BasicAuthHandler {
-
-  def apply(_asJava: JBasicAuthHandler): BasicAuthHandler =
-    new BasicAuthHandler(_asJava)
-
-  def create(authProvider: AuthProvider): AuthHandler = {
-    AuthHandler.apply(io.vertx.ext.web.handler.BasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
+object BasicAuthHandler{
+  def apply(asJava: JBasicAuthHandler) = new BasicAuthHandler(asJava)  
+  /**
+    * Create a basic auth handler
+    * @param authProvider the auth provider to use
+    * @return the auth handler
+    */
+  def create(authProvider: AuthProvider):AuthHandler = {
+    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
-  def create(authProvider: AuthProvider, realm: String): AuthHandler = {
-    AuthHandler.apply(io.vertx.ext.web.handler.BasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], realm))
+  /**
+    * Create a basic auth handler, specifying realm
+    * @param authProvider the auth service to use
+    * @param realm the realm to use
+    * @return the auth handler
+    */
+  def create(authProvider: AuthProvider,realm: String):AuthHandler = {
+    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
   }
 
 }

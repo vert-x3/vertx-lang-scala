@@ -16,9 +16,9 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.web.handler.sockjs.{PermittedOptions => JPermittedOptions}
 import io.vertx.core.json.JsonObject
 
@@ -26,9 +26,9 @@ import io.vertx.core.json.JsonObject
   * Specify a match to allow for inbound and outbound traffic using the
   * <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>.
   */
+class PermittedOptions(private val _asJava: JPermittedOptions) {
 
-class PermittedOptions(val asJava: JPermittedOptions) {
-
+  def asJava = _asJava
 
   /**
     * The exact address the message is being sent to. If you want to allow messages based on
@@ -38,8 +38,8 @@ class PermittedOptions(val asJava: JPermittedOptions) {
     asJava.setAddress(value)
     this
   }
-  def getAddress = {
-    asJava.getAddress()
+  def getAddress: String = {
+    asJava.getAddress().asInstanceOf[String]
   }
 
   /**
@@ -51,19 +51,19 @@ class PermittedOptions(val asJava: JPermittedOptions) {
     asJava.setAddressRegex(value)
     this
   }
-  def getAddressRegex = {
-    asJava.getAddressRegex()
+  def getAddressRegex: String = {
+    asJava.getAddressRegex().asInstanceOf[String]
   }
 
   /**
     * This allows you to allow messages based on their structure. Any fields in the match must exist in the
     * message with the same values for them to be allowed. This currently only works with JSON messages.
     */
-  def setMatch(value: JsonObject) = {
+  def setMatch(value: io.vertx.core.json.JsonObject) = {
     asJava.setMatch(value)
     this
   }
-  def getMatch = {
+  def getMatch: io.vertx.core.json.JsonObject = {
     asJava.getMatch()
   }
 
@@ -74,8 +74,8 @@ class PermittedOptions(val asJava: JPermittedOptions) {
     asJava.setRequiredAuthority(value)
     this
   }
-  def getRequiredAuthority = {
-    asJava.getRequiredAuthority()
+  def getRequiredAuthority: String = {
+    asJava.getRequiredAuthority().asInstanceOf[String]
   }
 }
 
