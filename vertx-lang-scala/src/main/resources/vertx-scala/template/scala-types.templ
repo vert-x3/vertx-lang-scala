@@ -41,7 +41,7 @@
           if(args != '') {
             args += ',';
           }
-          args += toScalaTypeAndTypeParamTreatment(arg, false);
+          args += toScalaType(arg, false);
         }
         if (args != '')
           args = '[' + args + ']';
@@ -53,9 +53,9 @@
         return helper.getNonGenericType(type.simpleName) + args + '(' + name + ')';
       }
     } else if (type.kind == CLASS_HANDLER) {
-      return '{x: ' + toScalaTypeAndTypeParamTreatment(type.args[0], false) + ' => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
+      return '{x: ' + toScalaType(type.args[0], false) + ' => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + ',' + toScalaTypeAndTypeParamTreatment(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      return 'AsyncResultWrapper[' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + ',' + toScalaType(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
         var conversion = '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
@@ -135,7 +135,7 @@
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      var ret = 'AsyncResultWrapper[' + toScalaTypeAndTypeParamTreatment(type.args[0], false) + ',' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      var ret = 'AsyncResultWrapper[' + toScalaType(type.args[0], false) + ',' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
       if(nullable)
         ret = name + '.map(' + name +' => ' + ret + ').getOrElse(null)';
       return ret;
@@ -263,7 +263,7 @@
     }
   }
 
-  def toScalaTypeAndTypeParamTreatment(type, convertTypeParamsToObject) {
+  def toScalaType(type, convertTypeParamsToObject) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
@@ -289,23 +289,23 @@
     } else if (type.kind == CLASS_LIST){
         var ret = 'scala.collection.mutable.Buffer';
         if (!type.args.isEmpty)
-          ret += '[' + toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) + ']';
+          ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ']';
         return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_SET){
         var ret = 'scala.collection.mutable.Set';
         if (!type.args.isEmpty)
-          ret += '[' + toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) + ']';
+          ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ']';
         return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_MAP){
         var ret = 'scala.collection.mutable.Map';
         if (!type.args.isEmpty())
-          ret += '[' + toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) + ', ' + toScalaTypeAndTypeParamTreatment(type.args[1], convertTypeParamsToObject) + ']';
+          ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ', ' + toScalaType(type.args[1], convertTypeParamsToObject) + ']';
         return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_HANDLER) {
-      return "Handler[" + toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) + "]";
+      return "Handler[" + toScalaType(type.args[0], convertTypeParamsToObject) + "]";
     } else if (type.kind == CLASS_FUNCTION) {
-      var type1 = toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject);
-      var type2 = toScalaTypeAndTypeParamTreatment(type.args[1], convertTypeParamsToObject);
+      var type1 = toScalaType(type.args[0], convertTypeParamsToObject);
+      var type2 = toScalaType(type.args[1], convertTypeParamsToObject);
 
       var ret = "";
       if (type1.equals("Unit")) {
@@ -321,7 +321,7 @@
     } else if (type.kind == CLASS_ASYNC_RESULT) {
       var ret = 'AsyncResult';
       if(!type.args.isEmpty)
-        ret += '[' + toScalaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) + ']';
+        ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ']';
       else
         ret += '[_]';
       return wrapInOptionIfNullable(nullable, ret);
@@ -340,7 +340,7 @@
             } else {
               ret += ', ';
             }
-            ret += toScalaTypeAndTypeParamTreatment(arg, convertTypeParamsToObject);
+            ret += toScalaType(arg, convertTypeParamsToObject);
           }
           ret += ']';
         }
@@ -364,7 +364,7 @@
             } else {
               ret += ', ';
             }
-            ret += toScalaTypeAndTypeParamTreatment(arg, convertTypeParamsToObject);
+            ret += toScalaType(arg, convertTypeParamsToObject);
           }
           ret += ']';
         }
@@ -423,18 +423,18 @@
 
   def fromPropertyInfoToScala(info) {
     if (info.kind.isValue){
-      return toScalaTypeAndTypeParamTreatment(info.type, false);
+      return toScalaType(info.type, false);
     }else if (info.kind.isList){
       var ret = 'scala.collection.mutable.Buffer';
-      ret += '[' + toScalaTypeAndTypeParamTreatment(info.type, false) + ']';
+      ret += '[' + toScalaType(info.type, false) + ']';
       return ret;
     } else if (info.kind.isSet){
       var ret = 'scala.collection.mutable.Set';
-      ret += '[' + toScalaTypeAndTypeParamTreatment(info.type, false) + ']';
+      ret += '[' + toScalaType(info.type, false) + ']';
       return ret;
     } else if (info.kind.isMap){
       var ret = 'scala.collection.mutable.Map';
-      ret += '[String, ' + toScalaTypeAndTypeParamTreatment(info.type, false) + ']';
+      ret += '[String, ' + toScalaType(info.type, false) + ']';
       return ret;
     }
     return "UNKOWN PROPERTY TYPE";

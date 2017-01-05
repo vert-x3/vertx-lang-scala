@@ -48,7 +48,7 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : superTypes}@{toScalaTypeAndTypeParamTreatment(superType, false);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType, false);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
 @end{}
  {\n
 \n
