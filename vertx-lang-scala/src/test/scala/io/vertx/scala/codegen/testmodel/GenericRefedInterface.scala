@@ -45,7 +45,7 @@ class GenericRefedInterface[T:TypeTag](private val _asJava: Object) {
 //future methods
 }
 
-  object GenericRefedInterface{
-    def apply[T:TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
+object GenericRefedInterface{
+  def apply[T:TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
   //static methods
-  }
+}

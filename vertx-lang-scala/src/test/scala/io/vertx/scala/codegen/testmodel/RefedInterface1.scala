@@ -45,7 +45,7 @@ class RefedInterface1(private val _asJava: Object) {
 //future methods
 }
 
-  object RefedInterface1{
-    def apply(asJava: JRefedInterface1) = new RefedInterface1(asJava)  
+object RefedInterface1{
+  def apply(asJava: JRefedInterface1) = new RefedInterface1(asJava)  
   //static methods
-  }
+}

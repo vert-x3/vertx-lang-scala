@@ -54,6 +54,9 @@ class HttpClientResponse(private val _asJava: Object)
   private var cached_3:NetSocket = _
 
 //cached methods
+ /**
+   * @return the headers
+   */
   def headers():MultiMap = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
@@ -62,6 +65,9 @@ class HttpClientResponse(private val _asJava: Object)
     cached_0
   }
 
+ /**
+   * @return the trailers
+   */
   def trailers():MultiMap = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
@@ -70,6 +76,9 @@ class HttpClientResponse(private val _asJava: Object)
     cached_1
   }
 
+ /**
+   * @return the Set-Cookie headers (including trailers)
+   */
   def cookies():scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
@@ -78,6 +87,15 @@ class HttpClientResponse(private val _asJava: Object)
     cached_2
   }
 
+ /**
+   * Get a net socket for the underlying connection of this request.
+   * 
+   * USE THIS WITH CAUTION! Writing to the socket directly if you don't know what you're doing can easily break the HTTP protocol
+   * 
+   * One valid use-case for calling this is to receive the [[io.vertx.scala.core.net.NetSocket]] after a HTTP CONNECT was issued to the
+   * remote peer and it responded with a status code of 200.
+   * @return the net socket
+   */
   def netSocket():NetSocket = {
     if(cached_3 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
@@ -112,11 +130,23 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
+ /**
+   * Convenience method for receiving the entire request body in one piece.
+   * 
+   * This saves you having to manually set a dataHandler and an endHandler and append the chunks of the body until
+   * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
+   * @param bodyHandler This handler will be called after all the body has been received
+   */
   def bodyHandler(bodyHandler: Handler[Buffer]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].bodyHandler({x: JBuffer => bodyHandler.handle(Buffer(x))})
     this
   }
 
+ /**
+   * Set an custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
+   * frame. HTTP/2 permits extension of the protocol.
+   * @return a reference to this, so the API can be used fluently
+   */
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
     this
@@ -124,22 +154,41 @@ class HttpClientResponse(private val _asJava: Object)
 
 //default methods
 //basic methods
+ /**
+   * @return the version of the response
+   */
   def version():io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
+ /**
+   * @return the status code of the response
+   */
   def statusCode():Int = {
     asJava.asInstanceOf[JHttpClientResponse].statusCode().asInstanceOf[Int]
   }
 
+ /**
+   * @return the status message of the response
+   */
   def statusMessage():String = {
     asJava.asInstanceOf[JHttpClientResponse].statusMessage().asInstanceOf[String]
   }
 
+ /**
+   * Return the first header value with the specified name
+   * @param headerName the header name
+   * @return the header value
+   */
   def getHeader(headerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
+ /**
+   * Return the first trailer value with the specified name
+   * @param trailerName the trailer name
+   * @return the trailer value
+   */
   def getTrailer(trailerName: String):scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
@@ -147,7 +196,7 @@ class HttpClientResponse(private val _asJava: Object)
 //future methods
 }
 
-  object HttpClientResponse{
-    def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
+object HttpClientResponse{
+  def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
   //static methods
-  }
+}

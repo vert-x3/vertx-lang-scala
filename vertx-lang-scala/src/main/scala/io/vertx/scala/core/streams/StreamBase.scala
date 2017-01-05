@@ -31,6 +31,11 @@ trait StreamBase {
 
   def asJava: java.lang.Object
 
+ /**
+   * Set an exception handler.
+   * @param handler the handler
+   * @return a reference to this, so the API can be used fluently
+   */
   def exceptionHandler(handler: Handler[Throwable]):StreamBase
 
 }
@@ -43,6 +48,11 @@ object StreamBase{
 
 //cached methods
 //fluent methods
+ /**
+   * Set an exception handler.
+   * @param handler the handler
+   * @return a reference to this, so the API can be used fluently
+   */
   def exceptionHandler(handler: Handler[Throwable]):StreamBase = {
     asJava.asInstanceOf[JStreamBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this

@@ -47,6 +47,9 @@ class ServerWebSocket(private val _asJava: Object)
   private var cached_2:MultiMap = _
 
 //cached methods
+ /**
+   * @return the remote address for this socket
+   */
   override def remoteAddress():SocketAddress = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
@@ -55,6 +58,9 @@ class ServerWebSocket(private val _asJava: Object)
     cached_0
   }
 
+ /**
+   * @return the local address for this socket
+   */
   override def localAddress():SocketAddress = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
@@ -63,6 +69,9 @@ class ServerWebSocket(private val _asJava: Object)
     cached_1
   }
 
+ /**
+   * @return the headers in the WebSocket handshake
+   */
   def headers():MultiMap = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].headers()
@@ -143,28 +152,58 @@ class ServerWebSocket(private val _asJava: Object)
   }
 
 //default methods
+ /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+   */
   //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JServerWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
 //basic methods
+ /**
+   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]
+   * @return true if write queue is full
+   */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JServerWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
+ /**
+   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+   * handler is given by this method.
+   * 
+   * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+   * allows you to write data to other WebSockets which are owned by different event loops.
+   * @return the binary handler id
+   */
   override def binaryHandlerID():String = {
     asJava.asInstanceOf[JServerWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
+ /**
+   * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+   * handler is given by `textHandlerID`.
+   * 
+   * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+   * allows you to write data to other WebSockets which are owned by different event loops.
+   */
   override def textHandlerID():String = {
     asJava.asInstanceOf[JServerWebSocket].textHandlerID().asInstanceOf[String]
   }
 
+ /**
+   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+   */
   override def end():Unit = {
     asJava.asInstanceOf[JServerWebSocket].end()
   }
 
+ /**
+   * Close the WebSocket.
+   */
   override def close():Unit = {
     asJava.asInstanceOf[JServerWebSocket].close()
   }
@@ -173,14 +212,29 @@ class ServerWebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }
 
+ /**
+   * @return the WebSocket handshake path.
+   */
   def path():String = {
     asJava.asInstanceOf[JServerWebSocket].path().asInstanceOf[String]
   }
 
+ /**
+   * @return the WebSocket handshake query string.
+   */
   def query():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JServerWebSocket].query().asInstanceOf[String])
   }
 
+ /**
+   * Reject the WebSocket.
+   * 
+   * Calling this method from the websocket handler when it is first passed to you gives you the opportunity to reject
+   * the websocket, which will cause the websocket handshake to fail by returning
+   * a 404 response code.
+   * 
+   * You might use this method, if for example you only want to accept WebSockets with a particular path.
+   */
   def reject():Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
@@ -188,7 +242,7 @@ class ServerWebSocket(private val _asJava: Object)
 //future methods
 }
 
-  object ServerWebSocket{
-    def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
+object ServerWebSocket{
+  def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
   //static methods
-  }
+}

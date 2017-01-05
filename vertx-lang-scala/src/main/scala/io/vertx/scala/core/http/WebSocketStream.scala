@@ -73,7 +73,7 @@ class WebSocketStream(private val _asJava: Object)
 //future methods
 }
 
-  object WebSocketStream{
-    def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)  
+object WebSocketStream{
+  def apply(asJava: JWebSocketStream) = new WebSocketStream(asJava)  
   //static methods
-  }
+}

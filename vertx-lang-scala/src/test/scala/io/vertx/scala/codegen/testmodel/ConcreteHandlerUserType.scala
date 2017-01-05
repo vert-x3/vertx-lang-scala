@@ -43,7 +43,7 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 //future methods
 }
 
-  object ConcreteHandlerUserType{
-    def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)  
+object ConcreteHandlerUserType{
+  def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)  
   //static methods
-  }
+}

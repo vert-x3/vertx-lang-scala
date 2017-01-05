@@ -68,6 +68,10 @@ class TimeoutStream(private val _asJava: Object)
 
 //default methods
 //basic methods
+ /**
+   * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
+   * argument.
+   */
   def cancel():Unit = {
     asJava.asInstanceOf[JTimeoutStream].cancel()
   }
@@ -75,7 +79,7 @@ class TimeoutStream(private val _asJava: Object)
 //future methods
 }
 
-  object TimeoutStream{
-    def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
+object TimeoutStream{
+  def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
   //static methods
-  }
+}

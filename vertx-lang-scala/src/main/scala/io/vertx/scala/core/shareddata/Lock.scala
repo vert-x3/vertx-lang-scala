@@ -37,6 +37,9 @@ class Lock(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
+ /**
+   * Release the lock. Once the lock is released another will be able to obtain the lock.
+   */
   def release():Unit = {
     asJava.asInstanceOf[JLock].release()
   }
@@ -44,7 +47,7 @@ class Lock(private val _asJava: Object) {
 //future methods
 }
 
-  object Lock{
-    def apply(asJava: JLock) = new Lock(asJava)  
+object Lock{
+  def apply(asJava: JLock) = new Lock(asJava)  
   //static methods
-  }
+}

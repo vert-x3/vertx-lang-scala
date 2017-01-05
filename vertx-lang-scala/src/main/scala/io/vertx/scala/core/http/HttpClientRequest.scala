@@ -73,6 +73,9 @@ class HttpClientRequest(private val _asJava: Object)
   private var cached_1:HttpConnection = _
 
 //cached methods
+ /**
+   * @return The HTTP headers
+   */
   def headers():MultiMap = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
@@ -81,6 +84,9 @@ class HttpClientRequest(private val _asJava: Object)
     cached_0
   }
 
+ /**
+   * @return the HttpConnection associated with this request
+   */
   def connection():HttpConnection = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
@@ -95,6 +101,8 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
+ /**
+   */
   override def write(data: Buffer):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].write(data.asJava.asInstanceOf[JBuffer])
     this
@@ -130,136 +138,297 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
+ /**
+   * If chunked is true then the request will be set into HTTP chunked mode
+   * @param chunked true if chunked encoding
+   * @return a reference to this, so the API can be used fluently
+   */
   def setChunked(chunked: Boolean):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].setChunked(chunked.asInstanceOf[java.lang.Boolean])
     this
   }
 
+ /**
+   * Set the value the method to send when the method  is used.
+   * @param method the raw method
+   * @return a reference to this, so the API can be used fluently
+   */
   def setRawMethod(method: String):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].setRawMethod(method.asInstanceOf[java.lang.String])
     this
   }
 
+ /**
+   * Set the request host.<p/>
+   *
+   * For HTTP/2 it sets the  pseudo header otherwise it sets the  header
+   */
   def setHost(host: String):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].setHost(host.asInstanceOf[java.lang.String])
     this
   }
 
+ /**
+   * Put an HTTP header
+   * @param name The header name
+   * @param value The header value
+   * @return a reference to this, so the API can be used fluently
+   */
   def putHeader(name: String,value: String):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
 
+ /**
+   * Write a String to the request body, encoded as UTF-8.
+   * @return @return a reference to this, so the API can be used fluently
+   */
   def write(chunk: String):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String])
     this
   }
 
+ /**
+   * Write a String to the request body, encoded using the encoding `enc`.
+   * @return @return a reference to this, so the API can be used fluently
+   */
   def write(chunk: String,enc: String):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
     this
   }
 
+ /**
+   * If you send an HTTP request with the header `Expect` set to the value `100-continue`
+   * and the server responds with an interim HTTP response with a status code of `100` and a continue handler
+   * has been set using this method, then the `handler` will be called.
+   * 
+   * You can then continue to write data to the request body and later end it. This is normally used in conjunction with
+   * the [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] method to force the request header to be written before the request has ended.
+   * @return a reference to this, so the API can be used fluently
+   */
   def continueHandler(handler: Handler[Unit]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].continueHandler({x: Void => handler.handle(x)})
     this
   }
 
+ /**
+   * Forces the head of the request to be written before [[io.vertx.scala.core.http.HttpClientRequest#end]] is called on the request or any data is
+   * written to it.
+   * 
+   * This is normally used to implement HTTP 100-continue handling, see  for
+   * more information.
+   * @return a reference to this, so the API can be used fluently
+   */
   def sendHead():HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].sendHead()
     this
   }
 
+ /**
+   * Like [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] but with an handler after headers have been sent. The handler will be called with
+   * the [[io.vertx.core.http.HttpVersion]] if it can be determined or null otherwise.
+   */
   def sendHead(completionHandler: Handler[io.vertx.core.http.HttpVersion]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].sendHead({x: HttpVersion => completionHandler.handle(x)})
     this
   }
 
+ /**
+   * Set's the amount of time after which if the request does not return any data within the timeout period an
+   * TimeoutException will be passed to the exception handler (if provided) and
+   * the request will be closed.
+   * 
+   * Calling this method more than once has the effect of canceling any existing timeout and starting
+   * the timeout from scratch.
+   * @param timeoutMs The quantity of time in milliseconds.
+   * @return a reference to this, so the API can be used fluently
+   */
   def setTimeout(timeoutMs: Long):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].setTimeout(timeoutMs.asInstanceOf[java.lang.Long])
     this
   }
 
+ /**
+   * Set a push handler for this request.<p/>
+   *
+   * The handler is called when the client receives a <i>push promise</i> from the server. The handler can be called
+   * multiple times, for each push promise.<p/>
+   *
+   * The handler is called with a <i>read-only</i> [[io.vertx.scala.core.http.HttpClientRequest]], the following methods can be called:<p/>
+   *
+   * <ul>
+   *   <li>[[io.vertx.scala.core.http.HttpClientRequest#method]]</li>
+   *   <li>[[io.vertx.scala.core.http.HttpClientRequest#uri]]</li>
+   *   <li>[[io.vertx.scala.core.http.HttpClientRequest#headers]]</li>
+   *   <li>[[io.vertx.scala.core.http.HttpClientRequest#getHost]]</li>
+   * </ul>
+   *
+   * In addition the handler should call the [[io.vertx.scala.core.http.HttpClientRequest#handler]] method to set an handler to
+   * process the response.<p/>
+   * @param handler the handler
+   * @return a reference to this, so the API can be used fluently
+   */
   def pushHandler(handler: Handler[HttpClientRequest]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].pushHandler({x: JHttpClientRequest => handler.handle(HttpClientRequest(x))})
     this
   }
 
+ /**
+   * Set a connection handler called when an HTTP connection has been established.
+   * @param handler the handler
+   * @return a reference to this, so the API can be used fluently
+   */
   def connectionHandler(handler: Handler[HttpConnection]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
   }
 
+ /**
+   * Write an HTTP/2 frame to the request, allowing to extend the HTTP/2 protocol.
+   *
+   * The frame is sent immediatly and is not subject to flow control.
+   *
+   * This method must be called after the request headers have been sent and only for the protocol HTTP/2.
+   * The [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] should be used for this purpose.
+   * @param type the 8-bit frame type
+   * @param flags the 8-bit frame flags
+   * @param payload the frame payload
+   * @return a reference to this, so the API can be used fluently
+   */
   def writeCustomFrame(`type`: Int,flags: Int,payload: Buffer):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer],flags.asInstanceOf[java.lang.Integer],payload.asJava.asInstanceOf[JBuffer])
     this
   }
 
+ /**
+   * Like [[io.vertx.scala.core.http.HttpClientRequest#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
+   * @param frame the frame to write
+   */
   def writeCustomFrame(frame: HttpFrame):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this
   }
 
 //default methods
+ /**
+   * Reset this stream with the error code `0`.
+   */
   //io.vertx.core.http.HttpClientRequest
   def reset():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset().asInstanceOf[Boolean]
   }
 
+ /**
+   * @return the id of the stream of this response, ` -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
+   */
   //io.vertx.core.http.HttpClientRequest
   def streamId():Int = {
     asJava.asInstanceOf[JHttpClientRequest].streamId().asInstanceOf[Int]
   }
 
 //basic methods
+ /**
+   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
+   * @return true if write queue is full
+   */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].writeQueueFull().asInstanceOf[Boolean]
   }
 
+ /**
+   * @return Is the request chunked?
+   */
   def isChunked():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].isChunked().asInstanceOf[Boolean]
   }
 
+ /**
+   * The HTTP method for the request.
+   */
   def method():io.vertx.core.http.HttpMethod = {
     asJava.asInstanceOf[JHttpClientRequest].method()
   }
 
+ /**
+   * @return the raw value of the method this request sends
+   */
   def getRawMethod():String = {
     asJava.asInstanceOf[JHttpClientRequest].getRawMethod().asInstanceOf[String]
   }
 
+ /**
+   * @return The URI of the request.
+   */
   def uri():String = {
     asJava.asInstanceOf[JHttpClientRequest].uri().asInstanceOf[String]
   }
 
+ /**
+   * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
+   */
   def path():String = {
     asJava.asInstanceOf[JHttpClientRequest].path().asInstanceOf[String]
   }
 
+ /**
+   * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
+   */
   def query():String = {
     asJava.asInstanceOf[JHttpClientRequest].query().asInstanceOf[String]
   }
 
+ /**
+   * @return the request host. For HTTP/2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
+   */
   def getHost():String = {
     asJava.asInstanceOf[JHttpClientRequest].getHost().asInstanceOf[String]
   }
 
+ /**
+   * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String in UTF-8 encoding
+   */
   def end(chunk: String):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String])
   }
 
+ /**
+   * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String with the specified encoding
+   */
   def end(chunk: String,enc: String):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
   }
 
+ /**
+   * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes some data to the request body before ending. If the request is not chunked and
+   * no other data has been written then the `Content-Length` header will be automatically set
+   */
   override def end(chunk: Buffer):Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asJava.asInstanceOf[JBuffer])
   }
 
+ /**
+   * Ends the request. If no data has been written to the request body, and [[io.vertx.scala.core.http.HttpClientRequest#sendHead]] has not been called then
+   * the actual request won't get written until this method gets called.
+   * 
+   * Once the request has ended, it cannot be used any more,
+   */
   override def end():Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end()
   }
 
+ /**
+   * Reset this request:
+   * <p/>
+   * <ul>
+   *   <li>for HTTP/2, this performs send an HTTP/2 reset frame with the specified error `code`</li>
+   *   <li>for HTTP/1.x, this closes the connection after the current in-flight requests are ended</li>
+   * </ul>
+   * <p/>
+   * When the request has not yet been sent, the request will be aborted and false is returned as indicator.
+   * <p/>
+   * @param code the error code
+   * @return true when reset has been performed
+   */
   def reset(code: Long):Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
@@ -267,7 +436,7 @@ class HttpClientRequest(private val _asJava: Object)
 //future methods
 }
 
-  object HttpClientRequest{
-    def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
+object HttpClientRequest{
+  def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
   //static methods
-  }
+}

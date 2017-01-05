@@ -48,11 +48,11 @@ class MyInterface(private val _asJava: Object) {
 //future methods
 }
 
-  object MyInterface{
-    def apply(asJava: JMyInterface) = new MyInterface(asJava)  
+object MyInterface{
+  def apply(asJava: JMyInterface) = new MyInterface(asJava)  
   //static methods
-    def create():MyInterface = {
-      MyInterface(JMyInterface.create())
-    }
-
+  def create():MyInterface = {
+    MyInterface(JMyInterface.create())
   }
+
+}

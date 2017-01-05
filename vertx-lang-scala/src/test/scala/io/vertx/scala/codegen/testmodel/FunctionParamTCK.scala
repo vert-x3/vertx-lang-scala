@@ -139,7 +139,7 @@ class FunctionParamTCK(private val _asJava: Object) {
 //future methods
 }
 
-  object FunctionParamTCK{
-    def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
+object FunctionParamTCK{
+  def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
   //static methods
-  }
+}

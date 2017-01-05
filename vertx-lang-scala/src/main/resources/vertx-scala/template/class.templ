@@ -60,22 +60,22 @@ import @{importedType}\n
 @if{concrete}
 	@includeNamed{'class-body.templ'}
 	\n
-  object @{className}{\n
-    def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
+object @{className}{\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
   \n
-  //static methods\n
 	@foreach{method : staticMethods}
-    def @{escapeIfKeyword(method.name)}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
+  def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}
 	(
 		@foreach{param:method.params}
 			@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
 		@end{','}):@{toScalaType(method.returnType, false)} = {\n
-      @{invokeStaticMethod('J'+className, type, method)}\n
-    }\n
+    @{invokeStaticMethod('J'+className, type, method)}\n
+  }\n
 	\n
 	@end{}
-  }\n
+}\n
 @else{}
 	@includeNamed{'trait-body.templ'}
 	\n

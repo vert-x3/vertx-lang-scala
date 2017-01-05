@@ -44,6 +44,14 @@ class NetClient(private val _asJava: Object)
 
 //cached methods
 //fluent methods
+ /**
+   * Open a connection to a server at the specific `port` and `host`.
+   * 
+   * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
+   * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+   * @param port the port
+   * @param host the host
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
@@ -51,15 +59,33 @@ class NetClient(private val _asJava: Object)
 
 //default methods
 //basic methods
+ /**
+   * Whether the metrics are enabled for this measured object
+   * @return true if the metrics are enabled
+   */
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
+ /**
+   * Close the client.
+   * 
+   * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
+   * complete until some time after the method has returned.
+   */
   def close():Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }
 
 //future methods
+ /**
+   * Open a connection to a server at the specific `port` and `host`.
+   * 
+   * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
+   * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+   * @param port the port
+   * @param host the host
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
     def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => if (x == null) null.asInstanceOf[NetSocket] else NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
@@ -68,7 +94,7 @@ class NetClient(private val _asJava: Object)
 
 }
 
-  object NetClient{
-    def apply(asJava: JNetClient) = new NetClient(asJava)  
+object NetClient{
+  def apply(asJava: JNetClient) = new NetClient(asJava)  
   //static methods
-  }
+}

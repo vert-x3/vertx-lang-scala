@@ -51,7 +51,7 @@ class InterfaceWithApiArg(private val _asJava: Object)
 //future methods
 }
 
-  object InterfaceWithApiArg{
-    def apply(asJava: JInterfaceWithApiArg) = new InterfaceWithApiArg(asJava)  
+object InterfaceWithApiArg{
+  def apply(asJava: JInterfaceWithApiArg) = new InterfaceWithApiArg(asJava)  
   //static methods
-  }
+}
