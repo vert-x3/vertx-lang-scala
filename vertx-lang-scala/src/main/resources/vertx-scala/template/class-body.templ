@@ -26,7 +26,11 @@
       var tmp = @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
       cached_@{cached_method_counter} = @{toScalaWithConversion('tmp', method.returnType, typeParams, method.typeParams)}\n
     }\n
+		@if{!method.isFluent}
     cached_@{cached_method_counter}\n
+		@else{}
+    this\n
+		@end{}
   }\n
 	\n
 	@code{cached_method_counter++}
@@ -75,6 +79,7 @@
 //future methods\n
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
   def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}

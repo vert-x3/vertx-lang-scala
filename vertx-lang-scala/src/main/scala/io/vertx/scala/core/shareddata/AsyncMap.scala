@@ -83,67 +83,67 @@ class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
   }
 
 //future methods
-  def getFuture(k: K):scala.concurrent.Future[V] = {
+    def getFuture(k: K):scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
     asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def putFuture(k: K,v: V):scala.concurrent.Future[Unit] = {
+    def putFuture(k: K,v: V):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def putFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[Unit] = {
+    def putFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def putIfAbsentFuture(k: K,v: V):scala.concurrent.Future[V] = {
+    def putIfAbsentFuture(k: K,v: V):scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
     asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def putIfAbsentFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[V] = {
+    def putIfAbsentFuture(k: K,v: V,ttl: Long):scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
     asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def removeFuture(k: K):scala.concurrent.Future[V] = {
+    def removeFuture(k: K):scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
     asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def removeIfPresentFuture(k: K,v: V):scala.concurrent.Future[Boolean] = {
+    def removeIfPresentFuture(k: K,v: V):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def replaceFuture(k: K,v: V):scala.concurrent.Future[V] = {
+    def replaceFuture(k: K,v: V):scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => if (x == null) null.asInstanceOf[V] else toScala[V](x))
     asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k),toJava[V](v),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def replaceIfPresentFuture(k: K,oldValue: V,newValue: V):scala.concurrent.Future[Boolean] = {
+    def replaceIfPresentFuture(k: K,oldValue: V,newValue: V):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k),toJava[V](oldValue),toJava[V](newValue),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def clearFuture():scala.concurrent.Future[Unit] = {
+    def clearFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncMap[Object,Object]].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def sizeFuture():scala.concurrent.Future[Int] = {
+    def sizeFuture():scala.concurrent.Future[Int] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => if (x == null) null.asInstanceOf[Int] else x.asInstanceOf[Int])
     asJava.asInstanceOf[JAsyncMap[Object,Object]].size(promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -16,13 +16,18 @@
 
 package io.vertx.scala.ext.sql
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * A ReadStream of Rows from the underlying RDBMS. This class follows the ReadStream semantics and will automatically
@@ -32,58 +37,70 @@ import io.vertx.scala.core.streams.ReadStream
   *
   * The interface is minimal in order to support all SQL clients not just JDBC.
   */
-class SQLRowStream(private val _asJava: JSQLRowStream) 
-    extends ReadStream[JsonArray] {
+class SQLRowStream(private val _asJava: Object) 
+    extends ReadStream[io.vertx.core.json.JsonArray] {
 
-  def asJava: JSQLRowStream = _asJava
+  def asJava = _asJava
 
-  def exceptionHandler(arg0: io.vertx.core.Handler[Throwable]): ReadStream[JsonArray] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(arg0))
+//cached methods
+//fluent methods
+  override def exceptionHandler(arg0: Handler[Throwable]):ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => arg0.handle(x)})
     this
   }
 
-  def handler(arg0: io.vertx.core.Handler[JsonArray]): ReadStream[JsonArray] = {
-    _asJava.handler((arg0))
+  override def handler(arg0: Handler[io.vertx.core.json.JsonArray]):ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => arg0.handle(x)})
     this
   }
 
-  def pause(): ReadStream[JsonArray] = {
-    _asJava.pause()
+  override def pause():ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].pause()
     this
   }
 
-  def resume(): ReadStream[JsonArray] = {
-    _asJava.resume()
+  override def resume():ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].resume()
     this
   }
 
-  def endHandler(arg0: io.vertx.core.Handler[Unit]): ReadStream[JsonArray] = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => arg0.handle()))
+  override def endHandler(arg0: Handler[Unit]):ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => arg0.handle(x)})
     this
   }
 
-  /**
-    * Will convert the column name to the json array index
-    * @return 
-    */
-  def column(name: String): Int = {
-    _asJava.column(name)
+//default methods
+//basic methods
+  def column(name: String):Int = {
+    asJava.asInstanceOf[JSQLRowStream].column(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
-  /**
-    * Closes the stream/underlying cursor(s)
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
+  def resultSetClosedHandler(handler: Handler[Unit]):SQLRowStream = {
+    SQLRowStream(asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)}))
+  }
+
+  def moreResults():Unit = {
+    asJava.asInstanceOf[JSQLRowStream].moreResults()
+  }
+
+  def close():Unit = {
+    asJava.asInstanceOf[JSQLRowStream].close()
+  }
+
+  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  }
+
+//future methods
+    def closeFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
-object SQLRowStream {
-
-  def apply(_asJava: JSQLRowStream): SQLRowStream =
-    new SQLRowStream(_asJava)
-
-}
+  object SQLRowStream{
+    def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)  
+  //static methods
+  }

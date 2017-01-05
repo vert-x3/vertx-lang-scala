@@ -16,67 +16,84 @@
 
 package io.vertx.scala.ext.auth.oauth2
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
 import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * AccessToken extension to the User interface
   */
-class AccessToken(private val _asJava: JAccessToken) {
+class AccessToken(private val _asJava: Object) 
+    extends User(_asJava) {
 
-  def asJava: JAccessToken = _asJava
 
-  /**
-    * Check if the access token is expired or not.
-    */
-  def expired(): Boolean = {
-    _asJava.expired()
+//cached methods
+//fluent methods
+  def refresh(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+    asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    this
   }
 
-  /**
-    * Refresh the access token
-    * @return - The callback function returning the results.
-    */
-  def refreshFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.refresh(promiseAndHandler._1)
+  def revoke(token_type: String,callback: Handler[AsyncResult[Unit]]):AccessToken = {
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    this
+  }
+
+  def logout(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+    asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    this
+  }
+
+  def introspect(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+    asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    this
+  }
+
+//default methods
+//basic methods
+  def expired():Boolean = {
+    asJava.asInstanceOf[JAccessToken].expired().asInstanceOf[Boolean]
+  }
+
+//future methods
+    def refreshFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    asJava.asInstanceOf[JAccessToken].refresh(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  /**
-    * Revoke access or refresh token
-    * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
-    * @return - The callback function returning the results.
-    */
-  def revokeFuture(token_type: String): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.revoke(token_type, promiseAndHandler._1)
+    def revokeFuture(token_type: String):scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  /**
-    * Revoke refresh token and calls the logout endpoint. This is a openid-connect extension and might not be
-    * available on all providers.
-    * @return - The callback function returning the results.
-    */
-  def logoutFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.logout(promiseAndHandler._1)
+    def logoutFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    asJava.asInstanceOf[JAccessToken].logout(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+    def introspectFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    asJava.asInstanceOf[JAccessToken].introspect(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
-object AccessToken {
-
-  def apply(_asJava: JAccessToken): AccessToken =
-    new AccessToken(_asJava)
-
-}
+  object AccessToken{
+    def apply(asJava: JAccessToken) = new AccessToken(asJava)  
+  //static methods
+  }

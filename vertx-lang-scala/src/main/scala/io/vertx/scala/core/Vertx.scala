@@ -264,37 +264,37 @@ class Vertx(private val _asJava: Object)
   }
 
 //future methods
-  def closeFuture():scala.concurrent.Future[Unit] = {
+    def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JVertx].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def deployVerticleFuture(name: String):scala.concurrent.Future[String] = {
+    def deployVerticleFuture(name: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def deployVerticleFuture(name: String,options: DeploymentOptions):scala.concurrent.Future[String] = {
+    def deployVerticleFuture(name: String,options: DeploymentOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def undeployFuture(deploymentID: String):scala.concurrent.Future[Unit] = {
+    def undeployFuture(deploymentID: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
     asJava.asInstanceOf[JVertx].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
     asJava.asInstanceOf[JVertx].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -16,154 +16,78 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{ParsedHeaderValue => JParsedHeaderValue}
+import scala.collection.JavaConverters._
 
 trait ParsedHeaderValue {
 
   def asJava: java.lang.Object
 
-  /**
-  * Contains the raw value that was received from the user agent 
-  */
-def rawValue(): String
+  def rawValue():String
 
-  /**
-  * Holds the unparsed value of the header.<br>
-  * For the most part, this is the content before the semi-colon (";")
-  */
-def value(): String
+  def value():String
 
-  /**
-  * Holds the weight specified in the "q" parameter of the header.<br>
-  * If the parameter is not specified, 1.0 is assumed according to 
-  * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
-  * @return 
-  */
-def weight(): Float
+  def weight():Float
 
-  /**
-  * The value of the parameter specified by this key. Each is one of 3 things:
-  * <ol>
-  * <li>null &lt;- That key was not specified</li>
-  * <li>ParsedHeaderValue.EMPTY (tested using ==) &lt;- The value was not specified</li>
-  * <li>[Other] <- The value of the parameter</li>
-  * </ol>
-  * <b>Note:</b> The <code>q</code> parameter is never present.
-  * @return 
-  */
-def parameter(key: String): scala.Option[String]
+  def parameter(key: String):scala.Option[String]
 
-  /**
-  * The parameters specified in this header value.
-  * <b>Note:</b> The <code>q</code> parameter is never present.
-  * @return Unmodifiable Map of parameters of this header value
-  */
-def parameters(): Map[String, String]
+  def parameters():scala.collection.mutable.Map[String, String]
 
-  /**
-  * Is this an allowed operation as specified by the corresponding header?
-  * @return 
-  */
-def isPermitted(): Boolean
+  def isPermitted():Boolean
 
-  /**
-  * Test if this header is matched by matchTry header 
-  * @param matchTry The header to be matched from
-  * @return true if this header represents a subset of matchTry, otherwise, false
-  */
-def isMatchedBy(matchTry: ParsedHeaderValue): Boolean
+  def isMatchedBy(matchTry: ParsedHeaderValue):Boolean
 
-  /**
-  * An integer that represents the absolute order position of this header
-  */
-def weightedOrder(): Int
+  def weightedOrder():Int
 
 }
 
-object ParsedHeaderValue {
+object ParsedHeaderValue{
+  def apply(asJava: JParsedHeaderValue):ParsedHeaderValue = new ParsedHeaderValueImpl(asJava)
+    private class ParsedHeaderValueImpl(private val _asJava: Object) extends ParsedHeaderValue {
 
-  def apply(_asJava: JParsedHeaderValue): ParsedHeaderValue =
-    new ParsedHeaderValueImpl(_asJava)
+      def asJava = _asJava
 
-  private class ParsedHeaderValueImpl(private val _asJava: JParsedHeaderValue) extends ParsedHeaderValue {
-
-    def asJava: JParsedHeaderValue = _asJava
-
-    /**
-      * Contains the raw value that was received from the user agent 
-      */
-    def rawValue(): String = {
-        _asJava.rawValue()
-    }
-
-    /**
-      * Holds the unparsed value of the header.<br>
-      * For the most part, this is the content before the semi-colon (";")
-      */
-    def value(): String = {
-        _asJava.value()
-    }
-
-    /**
-      * Holds the weight specified in the "q" parameter of the header.<br>
-      * If the parameter is not specified, 1.0 is assumed according to 
-      * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
-      * @return 
-      */
-    def weight(): Float = {
-        _asJava.weight()
-    }
-
-    /**
-      * The value of the parameter specified by this key. Each is one of 3 things:
-      * <ol>
-      * <li>null &lt;- That key was not specified</li>
-      * <li>ParsedHeaderValue.EMPTY (tested using ==) &lt;- The value was not specified</li>
-      * <li>[Other] <- The value of the parameter</li>
-      * </ol>
-      * <b>Note:</b> The <code>q</code> parameter is never present.
-      * @return 
-      */
-    def parameter(key: String): scala.Option[String] = {
-        scala.Option(_asJava.parameter(key))
-    }
-
-    /**
-      * The parameters specified in this header value.
-      * <b>Note:</b> The <code>q</code> parameter is never present.
-      * @return Unmodifiable Map of parameters of this header value
-      */
-    def parameters(): Map[String, String] = {
-        _asJava.parameters().asScala.toMap
-    }
-
-    /**
-      * Is this an allowed operation as specified by the corresponding header?
-      * @return 
-      */
-    def isPermitted(): Boolean = {
-        _asJava.isPermitted()
-    }
-
-    /**
-      * Test if this header is matched by matchTry header 
-      * @param matchTry The header to be matched from
-      * @return true if this header represents a subset of matchTry, otherwise, false
-      */
-    def isMatchedBy(matchTry: ParsedHeaderValue): Boolean = {
-        _asJava.isMatchedBy(matchTry.asJava.asInstanceOf[JParsedHeaderValue])
-    }
-
-    /**
-      * An integer that represents the absolute order position of this header
-      */
-    def weightedOrder(): Int = {
-        _asJava.weightedOrder()
-    }
-
+//cached methods
+//fluent methods
+//default methods
+//basic methods
+  def rawValue():String = {
+    asJava.asInstanceOf[JParsedHeaderValue].rawValue().asInstanceOf[String]
   }
 
+  def value():String = {
+    asJava.asInstanceOf[JParsedHeaderValue].value().asInstanceOf[String]
+  }
+
+  def weight():Float = {
+    asJava.asInstanceOf[JParsedHeaderValue].weight().asInstanceOf[Float]
+  }
+
+  def parameter(key: String):scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JParsedHeaderValue].parameter(key.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  def parameters():scala.collection.mutable.Map[String, String] = {
+    collection.mutable.Map(asJava.asInstanceOf[JParsedHeaderValue].parameters().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
+  }
+
+  def isPermitted():Boolean = {
+    asJava.asInstanceOf[JParsedHeaderValue].isPermitted().asInstanceOf[Boolean]
+  }
+
+  def isMatchedBy(matchTry: ParsedHeaderValue):Boolean = {
+    asJava.asInstanceOf[JParsedHeaderValue].isMatchedBy(matchTry.asJava.asInstanceOf[JParsedHeaderValue]).asInstanceOf[Boolean]
+  }
+
+  def weightedOrder():Int = {
+    asJava.asInstanceOf[JParsedHeaderValue].weightedOrder().asInstanceOf[Int]
+  }
+
+//future methods
+}
 }

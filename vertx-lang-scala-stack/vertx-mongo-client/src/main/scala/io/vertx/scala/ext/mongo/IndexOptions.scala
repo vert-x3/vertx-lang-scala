@@ -16,18 +16,18 @@
 
 package io.vertx.scala.ext.mongo
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
 
 /**
   * Options used to configure index.
   */
+class IndexOptions(private val _asJava: JIndexOptions) {
 
-class IndexOptions(val asJava: JIndexOptions) {
-
+  def asJava = _asJava
 
   /**
     * Create the index in the background

@@ -60,7 +60,7 @@ class NetClient(private val _asJava: Object)
   }
 
 //future methods
-  def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
+    def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => if (x == null) null.asInstanceOf[NetSocket] else NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

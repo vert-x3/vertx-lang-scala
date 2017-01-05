@@ -16,42 +16,48 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.{TemplateHandler => JTemplateHandler}
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.templ.TemplateEngine
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.scala.ext.web.templ.TemplateEngine
+import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   *
   * A handler which renders responses using a template engine and where the template name is selected from the URI
   * path.
   */
-class TemplateHandler(private val _asJava: JTemplateHandler) 
+class TemplateHandler(private val _asJava: Object) 
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JTemplateHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
+//cached methods
+//fluent methods
+//default methods
+//basic methods
+  override def handle(arg0: RoutingContext):Unit = {
+    asJava.asInstanceOf[JTemplateHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
+//future methods
 }
 
-object TemplateHandler {
+  object TemplateHandler{
+    def apply(asJava: JTemplateHandler) = new TemplateHandler(asJava)  
+  //static methods
+    def create(engine: TemplateEngine):TemplateHandler = {
+      TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
+    }
 
-  def apply(_asJava: JTemplateHandler): TemplateHandler =
-    new TemplateHandler(_asJava)
+    def create(engine: TemplateEngine,templateDirectory: String,contentType: String):TemplateHandler = {
+      TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
+    }
 
-  def create(engine: TemplateEngine): TemplateHandler = {
-    TemplateHandler.apply(io.vertx.ext.web.handler.TemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
   }
-
-  def create(engine: TemplateEngine, templateDirectory: String, contentType: String): TemplateHandler = {
-    TemplateHandler.apply(io.vertx.ext.web.handler.TemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine], templateDirectory, contentType))
-  }
-
-}

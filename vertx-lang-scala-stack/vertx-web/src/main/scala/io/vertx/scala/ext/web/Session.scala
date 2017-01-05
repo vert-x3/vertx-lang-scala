@@ -16,9 +16,11 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{Session => JSession}
 
 /**
@@ -32,86 +34,67 @@ import io.vertx.ext.web.{Session => JSession}
   * The context must have first been routed to a [[io.vertx.scala.ext.web.handler.SessionHandler]]
   * for sessions to be available.
   */
-class Session(private val _asJava: JSession) {
+class Session(private val _asJava: Object) {
 
-  def asJava: JSession = _asJava
+  def asJava = _asJava
 
-  /**
-    * @return The unique ID of the session. This is generated using a random secure UUID.
-    */
-  def id(): String = {
-    _asJava.id()
-  }
-
-  /**
-    * Put some data in a session
-    * @param key the key for the data
-    * @param obj the data
-    * @return a reference to this, so the API can be used fluently
-    */
-  def put(key: String, obj: AnyRef): Session = {
-    _asJava.put(key, obj)
+//cached methods
+//fluent methods
+  def put(key: String,obj: AnyRef):Session = {
+    asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String],toJava[Object](obj))
     this
   }
 
-  /**
-    * Get some data from the session
-    * @param key the key of the data
-    * @return the data
-    */
-  def get[T](key: String): T = {
-    _asJava.get(key)
+//default methods
+//basic methods
+  def regenerateId():Session = {
+    Session(asJava.asInstanceOf[JSession].regenerateId())
   }
 
-  /**
-    * Remove some data from the session
-    * @param key the key of the data
-    * @return the data that was there or null if none there
-    */
-  def remove[T](key: String): T = {
-    _asJava.remove(key)
+  def id():String = {
+    asJava.asInstanceOf[JSession].id().asInstanceOf[String]
   }
 
-  /**
-    * @return the time the session was last accessed
-    */
-  def lastAccessed(): Long = {
-    _asJava.lastAccessed()
+  def get[T:TypeTag](key: String):T = {
+    toScala[T](asJava.asInstanceOf[JSession].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
-  /**
-    * Destroy the session
-    */
-  def destroy(): Unit = {
-    _asJava.destroy()
+  def remove[T:TypeTag](key: String):T = {
+    toScala[T](asJava.asInstanceOf[JSession].remove[Object](key.asInstanceOf[java.lang.String]))
   }
 
-  /**
-    * @return has the session been destroyed?
-    */
-  def isDestroyed(): Boolean = {
-    _asJava.isDestroyed()
+  def lastAccessed():Long = {
+    asJava.asInstanceOf[JSession].lastAccessed().asInstanceOf[Long]
   }
 
-  /**
-    * @return the amount of time in ms, after which the session will expire, if not accessed.
-    */
-  def timeout(): Long = {
-    _asJava.timeout()
+  def destroy():Unit = {
+    asJava.asInstanceOf[JSession].destroy()
   }
 
-  /**
-    * Mark the session as being accessed.
-    */
-  def setAccessed(): Unit = {
-    _asJava.setAccessed()
+  def isDestroyed():Boolean = {
+    asJava.asInstanceOf[JSession].isDestroyed().asInstanceOf[Boolean]
   }
 
+  def isRegenerated():Boolean = {
+    asJava.asInstanceOf[JSession].isRegenerated().asInstanceOf[Boolean]
+  }
+
+  def oldId():String = {
+    asJava.asInstanceOf[JSession].oldId().asInstanceOf[String]
+  }
+
+  def timeout():Long = {
+    asJava.asInstanceOf[JSession].timeout().asInstanceOf[Long]
+  }
+
+  def setAccessed():Unit = {
+    asJava.asInstanceOf[JSession].setAccessed()
+  }
+
+//future methods
 }
 
-object Session {
-
-  def apply(_asJava: JSession): Session =
-    new Session(_asJava)
-
-}
+  object Session{
+    def apply(asJava: JSession) = new Session(asJava)  
+  //static methods
+  }

@@ -16,9 +16,9 @@
 
 package io.vertx.scala.ext.auth.shiro
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
@@ -27,18 +27,19 @@ import io.vertx.scala.ext.auth.AuthOptions
 /**
   * Shiro auth configuration options, see Vert.x Auth Shiro component and/or Apache Shiro project.
   */
+class ShiroAuthOptions(private val _asJava: JShiroAuthOptions) 
+    extends AuthOptions {
 
-class ShiroAuthOptions(val asJava: JShiroAuthOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the Shiro auth config.
     */
-  def setConfig(value: JsonObject) = {
+  def setConfig(value: io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
   }
-  def getConfig = {
+  def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
@@ -49,7 +50,7 @@ class ShiroAuthOptions(val asJava: JShiroAuthOptions) {
     asJava.setType(value)
     this
   }
-  def getType = {
+  def getType: io.vertx.ext.auth.shiro.ShiroAuthRealmType = {
     asJava.getType()
   }
 }

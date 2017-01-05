@@ -97,25 +97,25 @@ class NetServer(private val _asJava: Object)
   }
 
 //future methods
-  def listenFuture():scala.concurrent.Future[NetServer] = {
+    def listenFuture():scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
+    def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
+    def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => if (x == null) null.asInstanceOf[NetServer] else NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def closeFuture():scala.concurrent.Future[Unit] = {
+    def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

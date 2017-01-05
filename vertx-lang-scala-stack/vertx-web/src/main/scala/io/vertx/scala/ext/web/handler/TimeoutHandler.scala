@@ -16,43 +16,49 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{TimeoutHandler => JTimeoutHandler}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.web.handler.{TimeoutHandler => JTimeoutHandler}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   * Handler that will timeout requests if the response has not been written after a certain time.
   * Timeout requests will be ended with an HTTP status code `503`.
   */
-class TimeoutHandler(private val _asJava: JTimeoutHandler) 
+class TimeoutHandler(private val _asJava: Object) 
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JTimeoutHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
+//cached methods
+//fluent methods
+//default methods
+//basic methods
+  override def handle(arg0: RoutingContext):Unit = {
+    asJava.asInstanceOf[JTimeoutHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
+//future methods
 }
 
-object TimeoutHandler {
+  object TimeoutHandler{
+    def apply(asJava: JTimeoutHandler) = new TimeoutHandler(asJava)  
+  //static methods
+    def create():TimeoutHandler = {
+      TimeoutHandler(JTimeoutHandler.create())
+    }
 
-  def apply(_asJava: JTimeoutHandler): TimeoutHandler =
-    new TimeoutHandler(_asJava)
+    def create(timeout: Long):TimeoutHandler = {
+      TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))
+    }
 
-  def create(): TimeoutHandler = {
-    TimeoutHandler.apply(io.vertx.ext.web.handler.TimeoutHandler.create())
+    def create(timeout: Long,errorCode: Int):TimeoutHandler = {
+      TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
+    }
+
   }
-
-  def create(timeout: Long): TimeoutHandler = {
-    TimeoutHandler.apply(io.vertx.ext.web.handler.TimeoutHandler.create(timeout))
-  }
-
-  def create(timeout: Long, errorCode: Int): TimeoutHandler = {
-    TimeoutHandler.apply(io.vertx.ext.web.handler.TimeoutHandler.create(timeout, errorCode))
-  }
-
-}

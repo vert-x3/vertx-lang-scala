@@ -72,25 +72,25 @@ class SharedData(private val _asJava: Object) {
   }
 
 //future methods
-  def getClusterWideMapFuture[K:TypeTag,V:TypeTag](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
+    def getClusterWideMapFuture[K:TypeTag,V:TypeTag](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[Object,Object], AsyncMap[K, V]](x => if (x == null) null.asInstanceOf[AsyncMap[K, V]] else AsyncMap[K,V](x))
     asJava.asInstanceOf[JSharedData].getClusterWideMap[Object,Object](name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
+    def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => if (x == null) null.asInstanceOf[Lock] else Lock(x))
     asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
+    def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => if (x == null) null.asInstanceOf[Lock] else Lock(x))
     asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String],timeout.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
+    def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => if (x == null) null.asInstanceOf[Counter] else Counter(x))
     asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
