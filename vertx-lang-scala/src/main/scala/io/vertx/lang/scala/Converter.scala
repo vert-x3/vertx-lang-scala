@@ -41,26 +41,26 @@ object Converter {
       t.getClass.getMethod("asJava").invoke(t)
   }
 
-  def toJavaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[_] = {
+  def toJavaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[Object] = {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
     val n = clazz == null
     if(n || clazz == classOf[JsonObject] || clazz == classOf[JsonArray] || !name.startsWith("io.vertx.scala")){
-      clazz.asInstanceOf[Class[_]]
+      clazz.asInstanceOf[Class[Object]]
     }
     else {
-      clazz.getClassLoader.loadClass(name.replace(".scala",""))
+      clazz.getClassLoader.loadClass(name.replace(".scala","")).asInstanceOf[Class[Object]]
     }
   }
-  def toScalaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[_] = {
+  def toScalaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[Object] = {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
     val n = clazz == null
     if(n || clazz == classOf[JsonObject] || clazz == classOf[JsonArray] || !name.startsWith("io.vertx")){
-      clazz.asInstanceOf[Class[_]]
+      clazz.asInstanceOf[Class[Object]]
     }
     else {
-      clazz.getClassLoader.loadClass(name.replace("io.vertx", "io.vertx.scala"))
+      clazz.getClassLoader.loadClass(name.replace("io.vertx", "io.vertx.scala")).asInstanceOf[Class[Object]]
     }
   }
 
