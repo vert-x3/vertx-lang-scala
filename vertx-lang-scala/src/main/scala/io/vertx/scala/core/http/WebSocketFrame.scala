@@ -41,9 +41,9 @@ class WebSocketFrame(private val _asJava: Object) {
   private var cached_0:String = _
   private var cached_1:Buffer = _
 
- /**
-   * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
-   */
+  /**
+    * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
+    */
   def textData():String = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
@@ -52,9 +52,9 @@ class WebSocketFrame(private val _asJava: Object) {
     cached_0
   }
 
- /**
-   * @return the data of the frame
-   */
+  /**
+    * @return the data of the frame
+    */
   def binaryData():Buffer = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketFrame].binaryData()
@@ -63,30 +63,30 @@ class WebSocketFrame(private val _asJava: Object) {
     cached_1
   }
 
- /**
-   * @return true if it's a text frame
-   */
+  /**
+    * @return true if it's a text frame
+    */
   def isText():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
- /**
-   * @return true if it's a binary frame
-   */
+  /**
+    * @return true if it's a binary frame
+    */
   def isBinary():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
- /**
-   * @return true if it's a continuation frame
-   */
+  /**
+    * @return true if it's a continuation frame
+    */
   def isContinuation():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
- /**
-   * @return true if this is the final frame.
-   */
+  /**
+    * @return true if this is the final frame.
+    */
   def isFinal():Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
@@ -95,32 +95,32 @@ class WebSocketFrame(private val _asJava: Object) {
 
 object WebSocketFrame{
   def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
- /**
-   * Create a binary WebSocket frame.
-   * @param data the data for the frame
-   * @param isFinal true if it's the final frame in the WebSocket message
-   * @return the frame
-   */
+  /**
+    * Create a binary WebSocket frame.
+    * @param data the data for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
   def binaryFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
- /**
-   * Create a text WebSocket frame.
-   * @param str the string for the frame
-   * @param isFinal true if it's the final frame in the WebSocket message
-   * @return the frame
-   */
+  /**
+    * Create a text WebSocket frame.
+    * @param str the string for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
   def textFrame(str: String,isFinal: Boolean):WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String],isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
- /**
-   * Create a continuation frame
-   * @param data the data for the frame
-   * @param isFinal true if it's the final frame in the WebSocket message
-   * @return the frame
-   */
+  /**
+    * Create a continuation frame
+    * @param data the data for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
   def continuationFrame(data: Buffer,isFinal: Boolean):WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer],isFinal.asInstanceOf[java.lang.Boolean]))
   }

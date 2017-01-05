@@ -34,56 +34,56 @@ class Counter(private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * Get the current value of the counter
-   */
+  /**
+    * Get the current value of the counter
+    */
   def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Increment the counter atomically and return the new count
-   */
+  /**
+    * Increment the counter atomically and return the new count
+    */
   def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].incrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Increment the counter atomically and return the value before the increment.
-   */
+  /**
+    * Increment the counter atomically and return the value before the increment.
+    */
   def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndIncrement({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Decrement the counter atomically and return the new count
-   */
+  /**
+    * Decrement the counter atomically and return the new count
+    */
   def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].decrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Add the value to the counter atomically and return the new count
-   * @param value the value to add
-   */
+  /**
+    * Add the value to the counter atomically and return the new count
+    * @param value the value to add
+    */
   def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Add the value to the counter atomically and return the value before the add
-   * @param value the value to add
-   */
+  /**
+    * Add the value to the counter atomically and return the value before the add
+    * @param value the value to add
+    */
   def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
- /**
-   * Set the counter to the specified value only if the current value is the expectec value. This happens
-   * atomically.
-   * @param expected the expected value
-   * @param value the new value
-   */
+  /**
+    * Set the counter to the specified value only if the current value is the expectec value. This happens
+    * atomically.
+    * @param expected the expected value
+    * @param value the new value
+    */
   def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }

@@ -45,15 +45,15 @@ trait WebSocketBase
 
   def asJava: java.lang.Object
 
- /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
-   */
+  /**
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+    */
   override def end(t: Buffer):Unit
 
- /**
-   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
-   * @return true if write queue is full
-   */
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   override def writeQueueFull():Boolean
 
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase
@@ -72,88 +72,88 @@ trait WebSocketBase
 
   override def drainHandler(handler: Handler[Unit]):WebSocketBase
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-   * handler is given by this method.
-   * 
-   * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   * @return the binary handler id
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+    * handler is given by this method.
+    * 
+    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    * @return the binary handler id
+    */
   def binaryHandlerID():String
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-   * handler is given by `textHandlerID`.
-   * 
-   * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+    * handler is given by `textHandlerID`.
+    * 
+    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    */
   def textHandlerID():String
 
- /**
-   * Write a WebSocket frame to the connection
-   * @param frame the frame to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a WebSocket frame to the connection
+    * @param frame the frame to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFrame(frame: WebSocketFrame):WebSocketBase
 
- /**
-   * Write a final WebSocket text frame to the connection
-   * @param text The text to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a final WebSocket text frame to the connection
+    * @param text The text to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFinalTextFrame(text: String):WebSocketBase
 
- /**
-   * Write a final WebSocket binary frame to the connection
-   * @param data The data to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a final WebSocket binary frame to the connection
+    * @param data The data to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFinalBinaryFrame(data: Buffer):WebSocketBase
 
- /**
-   * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
-   * if it exceeds the maximum WebSocket frame size.
-   * @param data the data to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
+    * if it exceeds the maximum WebSocket frame size.
+    * @param data the data to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeBinaryMessage(data: Buffer):WebSocketBase
 
- /**
-   * Set a close handler. This will be called when the WebSocket is closed.
-   * @param handler the handler
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Set a close handler. This will be called when the WebSocket is closed.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def closeHandler(handler: Handler[Unit]):WebSocketBase
 
- /**
-   * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
-   * @param handler the handler
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase
 
- /**
-   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
-   */
+  /**
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+    */
   override def end():Unit
 
- /**
-   * Close the WebSocket.
-   */
+  /**
+    * Close the WebSocket.
+    */
   def close():Unit
 
- /**
-   * @return the remote address for this socket
-   */
+  /**
+    * @return the remote address for this socket
+    */
   def remoteAddress():SocketAddress
 
- /**
-   * @return the local address for this socket
-   */
+  /**
+    * @return the local address for this socket
+    */
   def localAddress():SocketAddress
 
 }
@@ -166,9 +166,9 @@ object WebSocketBase{
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
- /**
-   * @return the remote address for this socket
-   */
+  /**
+    * @return the remote address for this socket
+    */
   def remoteAddress():SocketAddress = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketBase].remoteAddress()
@@ -177,9 +177,9 @@ object WebSocketBase{
     cached_0
   }
 
- /**
-   * @return the local address for this socket
-   */
+  /**
+    * @return the local address for this socket
+    */
   def localAddress():SocketAddress = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JWebSocketBase].localAddress()
@@ -228,117 +228,117 @@ object WebSocketBase{
     this
   }
 
- /**
-   * Write a WebSocket frame to the connection
-   * @param frame the frame to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a WebSocket frame to the connection
+    * @param frame the frame to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFrame(frame: WebSocketFrame):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
- /**
-   * Write a final WebSocket text frame to the connection
-   * @param text The text to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a final WebSocket text frame to the connection
+    * @param text The text to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFinalTextFrame(text: String):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 
- /**
-   * Write a final WebSocket binary frame to the connection
-   * @param data The data to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Write a final WebSocket binary frame to the connection
+    * @param data The data to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeFinalBinaryFrame(data: Buffer):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
- /**
-   * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
-   * if it exceeds the maximum WebSocket frame size.
-   * @param data the data to write
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
+    * if it exceeds the maximum WebSocket frame size.
+    * @param data the data to write
+    * @return a reference to this, so the API can be used fluently
+    */
   def writeBinaryMessage(data: Buffer):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
     this
   }
 
- /**
-   * Set a close handler. This will be called when the WebSocket is closed.
-   * @param handler the handler
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Set a close handler. This will be called when the WebSocket is closed.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def closeHandler(handler: Handler[Unit]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
- /**
-   * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
-   * @param handler the handler
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Set a frame handler on the connection. This handler will be called when frames are read on the connection.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }
 
- /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
-   */
+  /**
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+    */
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
   }
 
- /**
-   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
-   * @return true if write queue is full
-   */
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocketBase].writeQueueFull().asInstanceOf[Boolean]
   }
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-   * handler is given by this method.
-   * 
-   * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   * @return the binary handler id
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+    * handler is given by this method.
+    * 
+    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    * @return the binary handler id
+    */
   def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].binaryHandlerID().asInstanceOf[String]
   }
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-   * handler is given by `textHandlerID`.
-   * 
-   * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+    * handler is given by `textHandlerID`.
+    * 
+    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    */
   def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocketBase].textHandlerID().asInstanceOf[String]
   }
 
- /**
-   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
-   */
+  /**
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+    */
   override def end():Unit = {
     asJava.asInstanceOf[JWebSocketBase].end()
   }
 
- /**
-   * Close the WebSocket.
-   */
+  /**
+    * Close the WebSocket.
+    */
   def close():Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
   }

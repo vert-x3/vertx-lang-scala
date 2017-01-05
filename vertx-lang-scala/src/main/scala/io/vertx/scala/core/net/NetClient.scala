@@ -42,34 +42,34 @@ class NetClient(private val _asJava: Object)
 
   def asJava = _asJava
 
- /**
-   * Open a connection to a server at the specific `port` and `host`.
-   * 
-   * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
-   * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
-   * @param port the port
-   * @param host the host
-   * @return a reference to this, so the API can be used fluently
-   */
+  /**
+    * Open a connection to a server at the specific `port` and `host`.
+    * 
+    * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
+    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+    * @param port the port
+    * @param host the host
+    * @return a reference to this, so the API can be used fluently
+    */
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
 
- /**
-   * Whether the metrics are enabled for this measured object
-   * @return true if the metrics are enabled
-   */
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
- /**
-   * Close the client.
-   * 
-   * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
-   * complete until some time after the method has returned.
-   */
+  /**
+    * Close the client.
+    * 
+    * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
+    * complete until some time after the method has returned.
+    */
   def close():Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }

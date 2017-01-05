@@ -57,26 +57,26 @@ class PacketWritestream(private val _asJava: Object)
     this
   }
 
- /**
-   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
-   */
+  /**
+    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+    */
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
 
- /**
-   * Ends the stream.
-   * 
-   * Once the stream has ended, it cannot be used any more.
-   */
+  /**
+    * Ends the stream.
+    * 
+    * Once the stream has ended, it cannot be used any more.
+    */
   override def end():Unit = {
     asJava.asInstanceOf[JPacketWritestream].end()
   }
 
- /**
-   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
-   * @return true if write queue is full
-   */
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }

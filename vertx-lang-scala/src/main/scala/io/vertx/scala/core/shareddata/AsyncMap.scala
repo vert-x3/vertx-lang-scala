@@ -34,101 +34,101 @@ class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * Get a value from the map, asynchronously.
-   * @param k the key
-   */
+  /**
+    * Get a value from the map, asynchronously.
+    * @param k the key
+    */
   def get(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
- /**
-   * Put a value in the map, asynchronously.
-   * @param k the key
-   * @param v the value
-   */
+  /**
+    * Put a value in the map, asynchronously.
+    * @param k the key
+    * @param v the value
+    */
   def put(k: K,v: V,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
- /**
-   * Like [[io.vertx.scala.core.shareddata.AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
-   * ttl.
-   * @param k the key
-   * @param v the value
-   * @param ttl The time to live (in ms) for the entry
-   */
+  /**
+    * Like [[io.vertx.scala.core.shareddata.AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
+    * ttl.
+    * @param k the key
+    * @param v the value
+    * @param ttl The time to live (in ms) for the entry
+    */
   def put(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
- /**
-   * Put the entry only if there is no entry with the key already present. If key already present then the existing
-   * value will be returned to the handler, otherwise null.
-   * @param k the key
-   * @param v the value
-   */
+  /**
+    * Put the entry only if there is no entry with the key already present. If key already present then the existing
+    * value will be returned to the handler, otherwise null.
+    * @param k the key
+    * @param v the value
+    */
   def putIfAbsent(k: K,v: V,completionHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),{x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
- /**
-   * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
-   * after the ttl.
-   * @param k the key
-   * @param v the value
-   * @param ttl The time to live (in ms) for the entry
-   */
+  /**
+    * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
+    * after the ttl.
+    * @param k the key
+    * @param v the value
+    * @param ttl The time to live (in ms) for the entry
+    */
   def putIfAbsent(k: K,v: V,ttl: Long,completionHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k),toJava[V](v),ttl.asInstanceOf[java.lang.Long],{x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
- /**
-   * Remove a value from the map, asynchronously.
-   * @param k the key
-   */
+  /**
+    * Remove a value from the map, asynchronously.
+    * @param k the key
+    */
   def remove(k: K,resultHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
- /**
-   * Remove a value from the map, only if entry already exists with same value.
-   * @param k the key
-   * @param v the value
-   */
+  /**
+    * Remove a value from the map, only if entry already exists with same value.
+    * @param k the key
+    * @param v the value
+    */
   def removeIfPresent(k: K,v: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k),toJava[V](v),{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
- /**
-   * Replace the entry only if it is currently mapped to some value
-   * @param k the key
-   * @param v the new value
-   */
+  /**
+    * Replace the entry only if it is currently mapped to some value
+    * @param k the key
+    * @param v the new value
+    */
   def replace(k: K,v: V,resultHandler: Handler[AsyncResult[V]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k),toJava[V](v),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
   }
 
- /**
-   * Replace the entry only if it is currently mapped to a specific value
-   * @param k the key
-   * @param oldValue the existing value
-   * @param newValue the new value
-   */
+  /**
+    * Replace the entry only if it is currently mapped to a specific value
+    * @param k the key
+    * @param oldValue the existing value
+    * @param newValue the new value
+    */
   def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k),toJava[V](oldValue),toJava[V](newValue),{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
- /**
-   * Clear all entries in the map
-   */
+  /**
+    * Clear all entries in the map
+    */
   def clear(resultHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
- /**
-   * Provide the number of entries in the map
-   */
+  /**
+    * Provide the number of entries in the map
+    */
   def size(resultHandler: Handler[AsyncResult[Int]]):Unit = {
     asJava.asInstanceOf[JAsyncMap[Object,Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
   }

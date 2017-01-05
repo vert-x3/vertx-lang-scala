@@ -31,58 +31,58 @@ class FileProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * The date the file was created
-   */
+  /**
+    * The date the file was created
+    */
   def creationTime():Long = {
     asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
- /**
-   * The date the file was last accessed
-   */
+  /**
+    * The date the file was last accessed
+    */
   def lastAccessTime():Long = {
     asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
- /**
-   * The date the file was last modified
-   */
+  /**
+    * The date the file was last modified
+    */
   def lastModifiedTime():Long = {
     asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
- /**
-   * Is the file a directory?
-   */
+  /**
+    * Is the file a directory?
+    */
   def isDirectory():Boolean = {
     asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
- /**
-   * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
-   */
+  /**
+    * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
+    */
   def isOther():Boolean = {
     asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
- /**
-   * Is the file a regular file?
-   */
+  /**
+    * Is the file a regular file?
+    */
   def isRegularFile():Boolean = {
     asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
- /**
-   * Is the file a symbolic link?
-   */
+  /**
+    * Is the file a symbolic link?
+    */
   def isSymbolicLink():Boolean = {
     asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
- /**
-   * The size of the file, in bytes
-   */
+  /**
+    * The size of the file, in bytes
+    */
   def size():Long = {
     asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
