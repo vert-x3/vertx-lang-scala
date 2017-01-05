@@ -36,10 +36,6 @@ class DataObjectTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def getDataObjectWithValues():DataObjectWithValues = {
     DataObjectWithValues(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithValues())
   }
@@ -72,10 +68,8 @@ class DataObjectTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithBuffer(dataObject.asJava)
   }
 
-//future methods
 }
 
 object DataObjectTCK{
   def apply(asJava: JDataObjectTCK) = new DataObjectTCK(asJava)  
-  //static methods
 }

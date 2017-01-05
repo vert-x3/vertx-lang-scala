@@ -166,7 +166,6 @@ object WebSocketBase{
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
-//cached methods
  /**
    * @return the remote address for this socket
    */
@@ -189,7 +188,6 @@ object WebSocketBase{
     cached_1
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -291,16 +289,13 @@ object WebSocketBase{
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -348,6 +343,5 @@ object WebSocketBase{
     asJava.asInstanceOf[JWebSocketBase].close()
   }
 
-//future methods
 }
 }

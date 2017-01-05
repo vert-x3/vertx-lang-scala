@@ -30,10 +30,6 @@ class FileSystemProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * @return The total space on the file system, in bytes
    */
@@ -55,10 +51,8 @@ class FileSystemProps(private val _asJava: Object) {
     asJava.asInstanceOf[JFileSystemProps].usableSpace().asInstanceOf[Long]
   }
 
-//future methods
 }
 
 object FileSystemProps{
   def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
-  //static methods
 }

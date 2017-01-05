@@ -39,8 +39,6 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -71,16 +69,13 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   override def end(t: T):Unit = {
     asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](t))
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -123,7 +118,6 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     asJava.asInstanceOf[JMessageProducer[Object]].close()
   }
 
-//future methods
     def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),promiseAndHandler._1)
@@ -134,5 +128,4 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
 
 object MessageProducer{
   def apply[T:TypeTag](asJava: JMessageProducer[_]) = new MessageProducer[T](asJava)  
-  //static methods
 }

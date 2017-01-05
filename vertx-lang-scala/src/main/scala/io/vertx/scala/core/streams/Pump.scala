@@ -49,8 +49,6 @@ class Pump(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Set the write queue max size to `maxSize`
    * @param maxSize the max size
@@ -79,8 +77,6 @@ class Pump(private val _asJava: Object) {
     this
   }
 
-//default methods
-//basic methods
  /**
    * Return the total number of items pumped by this pump.
    */
@@ -88,12 +84,10 @@ class Pump(private val _asJava: Object) {
     asJava.asInstanceOf[JPump].numberPumped().asInstanceOf[Int]
   }
 
-//future methods
 }
 
 object Pump{
   def apply(asJava: JPump) = new Pump(asJava)  
-  //static methods
  /**
    * Create a new `Pump` with the given `ReadStream` and `WriteStream`
    * @param rs the read stream

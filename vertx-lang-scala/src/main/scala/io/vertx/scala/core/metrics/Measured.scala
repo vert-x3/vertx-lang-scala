@@ -43,10 +43,6 @@ object Measured{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * Whether the metrics are enabled for this measured object
    * @return true if the metrics are enabled
@@ -55,6 +51,5 @@ object Measured{
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 }

@@ -33,10 +33,6 @@ class MyInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def sub():SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
@@ -45,12 +41,10 @@ class MyInterface(private val _asJava: Object) {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 
-//future methods
 }
 
 object MyInterface{
   def apply(asJava: JMyInterface) = new MyInterface(asJava)  
-  //static methods
   def create():MyInterface = {
     MyInterface(JMyInterface.create())
   }

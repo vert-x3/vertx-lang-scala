@@ -52,7 +52,6 @@ class NetSocket(private val _asJava: Object)
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
-//cached methods
  /**
    * @return the remote address for this socket
    */
@@ -75,7 +74,6 @@ class NetSocket(private val _asJava: Object)
     cached_1
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -177,7 +175,7 @@ class NetSocket(private val _asJava: Object)
    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
    * a failure has occurred
    * @param filename file name of the file to send
-   * @return future
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -189,7 +187,7 @@ class NetSocket(private val _asJava: Object)
    * a failure has occurred
    * @param filename file name of the file to send
    * @param offset offset
-   * @return future
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -202,7 +200,7 @@ class NetSocket(private val _asJava: Object)
    * @param filename file name of the file to send
    * @param offset offset
    * @param length length
-   * @return future
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -229,16 +227,13 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JNetSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -281,7 +276,6 @@ class NetSocket(private val _asJava: Object)
     asJava.asInstanceOf[JNetSocket].isSsl().asInstanceOf[Boolean]
   }
 
-//future methods
  /**
    * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
    * a failure has occurred
@@ -325,5 +319,4 @@ class NetSocket(private val _asJava: Object)
 
 object NetSocket{
   def apply(asJava: JNetSocket) = new NetSocket(asJava)  
-  //static methods
 }

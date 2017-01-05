@@ -61,7 +61,6 @@ class HttpServerResponse(private val _asJava: Object)
   private var cached_0:MultiMap = _
   private var cached_1:MultiMap = _
 
-//cached methods
  /**
    * @return The HTTP headers
    */
@@ -84,7 +83,6 @@ class HttpServerResponse(private val _asJava: Object)
     cached_1
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -249,7 +247,7 @@ class HttpServerResponse(private val _asJava: Object)
    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
    * written to the wire.
    * @param filename path to the file to serve
-   * @return future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -261,7 +259,7 @@ class HttpServerResponse(private val _asJava: Object)
    * written to the wire.
    * @param filename path to the file to serve
    * @param offset the offset to serve from
-   * @return future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -274,7 +272,7 @@ class HttpServerResponse(private val _asJava: Object)
    * @param filename path to the file to serve
    * @param offset the offset to serve from
    * @param length the length to serve to
-   * @return future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -307,7 +305,7 @@ class HttpServerResponse(private val _asJava: Object)
 
  /**
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   */
   def push(method: io.vertx.core.http.HttpMethod,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
     this
@@ -327,7 +325,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param host the host of the promised request
    * @param path the path of the promised request
    * @param headers the headers of the promised request
-   * @return the future notified when the response can be written
+   * @return a reference to this, so the API can be used fluently
    */
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
@@ -357,16 +355,13 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     this
   }
 
-//default methods
  /**
    * Reset this HTTP/2 stream with the error code `0`.
    */
-  //io.vertx.core.http.HttpServerResponse
   def reset():Unit = {
     asJava.asInstanceOf[JHttpServerResponse].reset()
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -476,14 +471,14 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
  /**
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with no headers.
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   */
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
   }
 
  /**
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   */
   def push(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
   }
@@ -496,7 +491,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     asJava.asInstanceOf[JHttpServerResponse].reset(code.asInstanceOf[java.lang.Long])
   }
 
-//future methods
  /**
    * Like [[io.vertx.scala.core.http.HttpServerResponse#sendFile]] but providing a handler which will be notified once the file has been completely
    * written to the wire.
@@ -589,5 +583,4 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object HttpServerResponse{
   def apply(asJava: JHttpServerResponse) = new HttpServerResponse(asJava)  
-  //static methods
 }

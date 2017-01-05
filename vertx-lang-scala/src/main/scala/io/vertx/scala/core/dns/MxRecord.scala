@@ -30,10 +30,6 @@ class MxRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * The priority of the MX record.
    */
@@ -48,10 +44,8 @@ class MxRecord(private val _asJava: Object) {
     asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
 
-//future methods
 }
 
 object MxRecord{
   def apply(asJava: JMxRecord) = new MxRecord(asJava)  
-  //static methods
 }

@@ -39,10 +39,6 @@ class CollectionTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def methodWithListParams(listString: scala.collection.mutable.Buffer[String],listByte: scala.collection.mutable.Buffer[Byte],listShort: scala.collection.mutable.Buffer[Short],listInt: scala.collection.mutable.Buffer[Int],listLong: scala.collection.mutable.Buffer[Long],listJsonObject: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject],listJsonArray: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],listVertxGen: scala.collection.mutable.Buffer[RefedInterface1],listDataObject: scala.collection.mutable.Buffer[TestDataObject],listEnum: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]):Unit = {
     asJava.asInstanceOf[JCollectionTCK].methodWithListParams(listString.map(x => x.asInstanceOf[java.lang.String]).asJava,listByte.map(x => x.asInstanceOf[java.lang.Byte]).asJava,listShort.map(x => x.asInstanceOf[java.lang.Short]).asJava,listInt.map(x => x.asInstanceOf[java.lang.Integer]).asJava,listLong.map(x => x.asInstanceOf[java.lang.Long]).asJava,listJsonObject.map(x => x).asJava,listJsonArray.map(x => x).asJava,listVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava,listDataObject.map(x => x.asJava).asJava,listEnum.map(x => x).asJava)
   }
@@ -331,7 +327,6 @@ class CollectionTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JCollectionTCK].methodWithSetEnumReturn().asScala.map(x => x)
   }
 
-//future methods
     def methodWithHandlerAsyncResultListStringFuture():scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => if (x == null) null.asInstanceOf[scala.collection.mutable.Buffer[String]] else x.asScala.map(x => x.asInstanceOf[String]))
     asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListString(promiseAndHandler._1)
@@ -456,5 +451,4 @@ class CollectionTCK(private val _asJava: Object) {
 
 object CollectionTCK{
   def apply(asJava: JCollectionTCK) = new CollectionTCK(asJava)  
-  //static methods
 }

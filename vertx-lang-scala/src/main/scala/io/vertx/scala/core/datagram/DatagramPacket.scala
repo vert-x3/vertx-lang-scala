@@ -34,10 +34,6 @@ class DatagramPacket(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
    * this [[io.vertx.scala.core.datagram.DatagramPacket]].
@@ -55,10 +51,8 @@ class DatagramPacket(private val _asJava: Object) {
     Buffer(asJava.asInstanceOf[JDatagramPacket].data())
   }
 
-//future methods
 }
 
 object DatagramPacket{
   def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
-  //static methods
 }

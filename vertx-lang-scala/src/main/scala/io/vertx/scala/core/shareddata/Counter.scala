@@ -34,13 +34,8 @@ class Counter(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * Get the current value of the counter
-   * @return future which will be passed the value
    */
   def get(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -48,7 +43,6 @@ class Counter(private val _asJava: Object) {
 
  /**
    * Increment the counter atomically and return the new count
-   * @return future which will be passed the value
    */
   def incrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].incrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -56,7 +50,6 @@ class Counter(private val _asJava: Object) {
 
  /**
    * Increment the counter atomically and return the value before the increment.
-   * @return future which will be passed the value
    */
   def getAndIncrement(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndIncrement({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -64,7 +57,6 @@ class Counter(private val _asJava: Object) {
 
  /**
    * Decrement the counter atomically and return the new count
-   * @return future which will be passed the value
    */
   def decrementAndGet(resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].decrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -73,7 +65,6 @@ class Counter(private val _asJava: Object) {
  /**
    * Add the value to the counter atomically and return the new count
    * @param value the value to add
-   * @return future which will be passed the value
    */
   def addAndGet(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -82,7 +73,6 @@ class Counter(private val _asJava: Object) {
  /**
    * Add the value to the counter atomically and return the value before the add
    * @param value the value to add
-   * @return future which will be passed the value
    */
   def getAndAdd(value: Long,resultHandler: Handler[AsyncResult[Long]]):Unit = {
     asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
@@ -93,13 +83,11 @@ class Counter(private val _asJava: Object) {
    * atomically.
    * @param expected the expected value
    * @param value the new value
-   * @return the future will be passed true on success
    */
   def compareAndSet(expected: Long,value: Long,resultHandler: Handler[AsyncResult[Boolean]]):Unit = {
     asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
-//future methods
  /**
    * Get the current value of the counter
    * @return future which will be passed the value
@@ -179,5 +167,4 @@ class Counter(private val _asJava: Object) {
 
 object Counter{
   def apply(asJava: JCounter) = new Counter(asJava)  
-  //static methods
 }

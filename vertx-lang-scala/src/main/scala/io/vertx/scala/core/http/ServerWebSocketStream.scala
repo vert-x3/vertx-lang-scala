@@ -36,8 +36,6 @@ class ServerWebSocketStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -63,12 +61,8 @@ class ServerWebSocketStream(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
-//future methods
 }
 
 object ServerWebSocketStream{
   def apply(asJava: JServerWebSocketStream) = new ServerWebSocketStream(asJava)  
-  //static methods
 }

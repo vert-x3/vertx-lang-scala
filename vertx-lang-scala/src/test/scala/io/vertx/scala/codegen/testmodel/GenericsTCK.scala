@@ -45,10 +45,6 @@ class GenericsTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def methodWithByteParameterizedReturn():GenericRefedInterface[Byte] = {
     GenericRefedInterface[Byte](asJava.asInstanceOf[JGenericsTCK].methodWithByteParameterizedReturn())
   }
@@ -353,7 +349,6 @@ class GenericsTCK(private val _asJava: Object) {
     GenericNullableRefedInterface[RefedInterface1](asJava.asInstanceOf[JGenericsTCK].methodWithGenericNullableApiReturn(notNull.asInstanceOf[java.lang.Boolean]))
   }
 
-//future methods
     def methodWithHandlerAsyncResultByteParameterizedFuture():scala.concurrent.Future[GenericRefedInterface[Byte]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[java.lang.Byte], GenericRefedInterface[Byte]](x => if (x == null) null.asInstanceOf[GenericRefedInterface[Byte]] else GenericRefedInterface[Byte](x))
     asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultByteParameterized(promiseAndHandler._1)
@@ -466,5 +461,4 @@ class GenericsTCK(private val _asJava: Object) {
 
 object GenericsTCK{
   def apply(asJava: JGenericsTCK) = new GenericsTCK(asJava)  
-  //static methods
 }

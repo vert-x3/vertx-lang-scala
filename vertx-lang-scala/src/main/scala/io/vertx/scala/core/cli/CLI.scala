@@ -46,8 +46,6 @@ class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Sets the name of the CLI.
    * @param name the name
@@ -166,8 +164,6 @@ class CLI(private val _asJava: Object) {
     this
   }
 
-//default methods
-//basic methods
  /**
    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
    * @param arguments the arguments
@@ -259,12 +255,10 @@ class CLI(private val _asJava: Object) {
     scala.Option(asJava.asInstanceOf[JCLI].getArgument(index.asInstanceOf[java.lang.Integer])).map(Argument(_))
   }
 
-//future methods
 }
 
 object CLI{
   def apply(asJava: JCLI) = new CLI(asJava)  
-  //static methods
  /**
    * Creates an instance of [[io.vertx.scala.core.cli.CLI]] using the default implementation.
    * @param name the name of the CLI (must not be `null`)

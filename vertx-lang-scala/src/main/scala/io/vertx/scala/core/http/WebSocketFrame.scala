@@ -41,7 +41,6 @@ class WebSocketFrame(private val _asJava: Object) {
   private var cached_0:String = _
   private var cached_1:Buffer = _
 
-//cached methods
  /**
    * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
    */
@@ -64,9 +63,6 @@ class WebSocketFrame(private val _asJava: Object) {
     cached_1
   }
 
-//fluent methods
-//default methods
-//basic methods
  /**
    * @return true if it's a text frame
    */
@@ -95,12 +91,10 @@ class WebSocketFrame(private val _asJava: Object) {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object WebSocketFrame{
   def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
-  //static methods
  /**
    * Create a binary WebSocket frame.
    * @param data the data for the frame

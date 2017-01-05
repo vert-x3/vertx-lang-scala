@@ -31,18 +31,12 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
     extends ConcreteHandlerUserType(_asJava) {
 
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RefedInterface1):Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserTypeExtension].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
-//future methods
 }
 
 object ConcreteHandlerUserTypeExtension{
   def apply(asJava: JConcreteHandlerUserTypeExtension) = new ConcreteHandlerUserTypeExtension(asJava)  
-  //static methods
 }

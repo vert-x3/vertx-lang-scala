@@ -65,7 +65,6 @@ class HttpServerRequest(private val _asJava: Object)
   private var cached_6:MultiMap = _
   private var cached_7:HttpConnection = _
 
-//cached methods
  /**
    * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
    */
@@ -167,7 +166,6 @@ class HttpServerRequest(private val _asJava: Object)
     cached_7
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -236,8 +234,6 @@ class HttpServerRequest(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * @return the HTTP version of the request
    */
@@ -361,10 +357,8 @@ class HttpServerRequest(private val _asJava: Object)
     asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object HttpServerRequest{
   def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)  
-  //static methods
 }

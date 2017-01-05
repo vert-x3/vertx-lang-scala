@@ -29,23 +29,17 @@ class GenericRefedInterface[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   def setValue(value: T):GenericRefedInterface[T] = {
     asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
     this
   }
 
-//default methods
-//basic methods
   def getValue():T = {
     toScala[T](asJava.asInstanceOf[JGenericRefedInterface[Object]].getValue())
   }
 
-//future methods
 }
 
 object GenericRefedInterface{
   def apply[T:TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
-  //static methods
 }

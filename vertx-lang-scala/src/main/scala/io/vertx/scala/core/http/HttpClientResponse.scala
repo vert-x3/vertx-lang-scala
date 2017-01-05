@@ -53,7 +53,6 @@ class HttpClientResponse(private val _asJava: Object)
   private var cached_2:scala.collection.mutable.Buffer[String] = _
   private var cached_3:NetSocket = _
 
-//cached methods
  /**
    * @return the headers
    */
@@ -104,7 +103,6 @@ class HttpClientResponse(private val _asJava: Object)
     cached_3
   }
 
-//fluent methods
   override def resume():HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].resume()
     this
@@ -152,8 +150,6 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * @return the version of the response
    */
@@ -193,10 +189,8 @@ class HttpClientResponse(private val _asJava: Object)
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
-//future methods
 }
 
 object HttpClientResponse{
   def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
-  //static methods
 }

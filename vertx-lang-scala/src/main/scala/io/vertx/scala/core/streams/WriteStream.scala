@@ -103,8 +103,6 @@ object WriteStream{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Set an exception handler on the write stream.
    * @param handler the exception handler
@@ -157,16 +155,13 @@ object WriteStream{
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   def end(t: T):Unit = {
     asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](t))
   }
 
-//basic methods
  /**
    * Ends the stream.
    * 
@@ -184,6 +179,5 @@ object WriteStream{
     asJava.asInstanceOf[JWriteStream[Object]].writeQueueFull().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 }

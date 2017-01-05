@@ -30,10 +30,6 @@ class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def host():String = {
     asJava.asInstanceOf[JSocketAddress].host().asInstanceOf[String]
   }
@@ -42,10 +38,8 @@ class SocketAddress(private val _asJava: Object) {
     asJava.asInstanceOf[JSocketAddress].port().asInstanceOf[Int]
   }
 
-//future methods
 }
 
 object SocketAddress{
   def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
-  //static methods
 }
