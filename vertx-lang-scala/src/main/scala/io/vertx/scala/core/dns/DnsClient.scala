@@ -178,6 +178,6 @@ class DnsClient(private val _asJava: Object) {
 }
 
   object DnsClient{
-    def apply(asJava: Object) = new DnsClient(asJava)  
+    def apply(asJava: JDnsClient) = new DnsClient(asJava)  
   //static methods
   }

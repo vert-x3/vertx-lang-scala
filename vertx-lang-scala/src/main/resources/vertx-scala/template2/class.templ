@@ -65,7 +65,7 @@ import @{importedType}\n
 	@includeNamed{'class-body.templ'}
 	\n
   object @{className}{\n
-    def apply@{assembleTypeParams(typeParams, true)}(asJava: Object
+    def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}
 	@foreach{typeParam : typeParams}
 	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
 	@end{}
@@ -91,7 +91,7 @@ import @{importedType}\n
 	@includeNamed{'trait-body.templ'}
 	\n
 object @{className}{\n
-  def apply@{assembleTypeParams(typeParams, true)}(asJava: Object
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}
 	@foreach{typeParam : typeParams}
 	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
 	@end{}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava

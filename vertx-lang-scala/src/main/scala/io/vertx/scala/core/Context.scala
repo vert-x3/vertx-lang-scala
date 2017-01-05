@@ -147,7 +147,7 @@ class Context(private val _asJava: Object) {
 }
 
   object Context{
-    def apply(asJava: Object) = new Context(asJava)  
+    def apply(asJava: JContext) = new Context(asJava)  
   //static methods
     def isOnWorkerThread():Boolean = {
       JContext.isOnWorkerThread().asInstanceOf[Boolean]

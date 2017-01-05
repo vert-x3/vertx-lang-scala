@@ -134,6 +134,6 @@ class EventBus(private val _asJava: Object)
 }
 
   object EventBus{
-    def apply(asJava: Object) = new EventBus(asJava)  
+    def apply(asJava: JEventBus) = new EventBus(asJava)  
   //static methods
   }

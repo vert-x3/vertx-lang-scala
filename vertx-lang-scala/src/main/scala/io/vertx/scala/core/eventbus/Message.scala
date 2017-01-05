@@ -108,6 +108,6 @@ class Message[T:TypeTag](private val _asJava: Object, objectToT: Option[Object =
 }
 
   object Message{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new Message[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JMessage[_], objectToT: Option[Object => T] = None) = new Message[T](asJava, objectToT)  
   //static methods
   }

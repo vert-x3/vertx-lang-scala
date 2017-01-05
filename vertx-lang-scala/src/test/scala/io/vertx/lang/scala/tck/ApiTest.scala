@@ -330,7 +330,7 @@ class ApiTest extends FlatSpec with Matchers {
     obj.methodWithHandlerGenericReturn[String](res =>
       assert("the-result" == res)).handle("the-result")
     obj.methodWithHandlerGenericReturn[TestInterface](res =>
-      assert(obj == res)).handle(obj)
+      assert(obj.asJava == res.asJava)).handle(obj)
   }
 
   "testMethodWithHandlerVertxGenReturn" should "work" in {
@@ -366,7 +366,7 @@ class ApiTest extends FlatSpec with Matchers {
     val w2 = new Waiter
     def objHandler = obj.methodWithHandlerAsyncResultGenericReturn[TestInterface](a => {
       w2 {
-        assert(a.result() == obj)
+        assert(a.result().asJava == obj.asJava)
       }
       w2.dismiss()
     })

@@ -189,6 +189,6 @@ class ServerWebSocket(private val _asJava: Object)
 }
 
   object ServerWebSocket{
-    def apply(asJava: Object) = new ServerWebSocket(asJava)  
+    def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
   //static methods
   }

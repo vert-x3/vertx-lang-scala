@@ -527,7 +527,7 @@ class TestInterface(private val _asJava: Object)
 }
 
   object TestInterface{
-    def apply(asJava: Object) = new TestInterface(asJava)  
+    def apply(asJava: JTestInterface) = new TestInterface(asJava)  
   //static methods
     def staticFactoryMethod(foo: String):RefedInterface1 = {
       RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))

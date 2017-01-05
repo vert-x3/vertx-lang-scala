@@ -105,7 +105,7 @@ class CompositeFuture(private val _asJava: Object)
 }
 
   object CompositeFuture{
-    def apply(asJava: Object) = new CompositeFuture(asJava)  
+    def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)  
   //static methods
     def all[T1,T2](f1: Future[T1],f2: Future[T2]):CompositeFuture = {
       CompositeFuture(JCompositeFuture.all[Object,Object](f1.asJava.asInstanceOf[JFuture[Object]],f2.asJava.asInstanceOf[JFuture[Object]]))

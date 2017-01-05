@@ -124,6 +124,6 @@ class NetServer(private val _asJava: Object)
 }
 
   object NetServer{
-    def apply(asJava: Object) = new NetServer(asJava)  
+    def apply(asJava: JNetServer) = new NetServer(asJava)  
   //static methods
   }

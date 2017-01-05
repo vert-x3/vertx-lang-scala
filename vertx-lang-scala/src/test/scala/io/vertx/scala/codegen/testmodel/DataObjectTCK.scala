@@ -76,6 +76,6 @@ class DataObjectTCK(private val _asJava: Object) {
 }
 
   object DataObjectTCK{
-    def apply(asJava: Object) = new DataObjectTCK(asJava)  
+    def apply(asJava: JDataObjectTCK) = new DataObjectTCK(asJava)  
   //static methods
   }

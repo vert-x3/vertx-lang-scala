@@ -55,6 +55,6 @@ class InterfaceWithVariableArg[T:TypeTag,U:TypeTag](private val _asJava: Object,
 }
 
   object InterfaceWithVariableArg{
-    def apply[T:TypeTag,U:TypeTag](asJava: Object, objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) = new InterfaceWithVariableArg[T,U](asJava, objectToT, objectToU)  
+    def apply[T:TypeTag,U:TypeTag](asJava: JInterfaceWithVariableArg[_,_], objectToT: Option[Object => T] = None, objectToU: Option[Object => U] = None) = new InterfaceWithVariableArg[T,U](asJava, objectToT, objectToU)  
   //static methods
   }

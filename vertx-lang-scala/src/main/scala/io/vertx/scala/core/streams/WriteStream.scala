@@ -54,7 +54,7 @@ trait WriteStream[T]
 }
 
 object WriteStream{
-  def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None):WriteStream[T] = new WriteStreamImpl[T](asJava, objectToT)
+  def apply[T:TypeTag](asJava: JWriteStream[_], objectToT: Option[Object => T] = None):WriteStream[T] = new WriteStreamImpl[T](asJava, objectToT)
     private class WriteStreamImpl[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) extends WriteStream[T] {
 
       def asJava = _asJava

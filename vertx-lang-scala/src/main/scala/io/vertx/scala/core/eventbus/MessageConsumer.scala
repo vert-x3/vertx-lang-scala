@@ -122,6 +122,6 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object, objectToT: Option[
 }
 
   object MessageConsumer{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new MessageConsumer[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JMessageConsumer[_], objectToT: Option[Object => T] = None) = new MessageConsumer[T](asJava, objectToT)  
   //static methods
   }
