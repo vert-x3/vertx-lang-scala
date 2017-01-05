@@ -55,7 +55,7 @@
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toScalaType(type.args[0], false) + ' => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + ',' + toScalaType(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      return 'AsyncResultWrapper[' + toJavaType(type.args[0], true) + ',' + toScalaType(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
         var conversion = '.asScala.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
@@ -93,9 +93,9 @@
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
-      var ret = name + '.asInstanceOf[' + toJavaType(type) + ']';
+      var ret = name + '.asInstanceOf[' + toJavaType(type, false) + ']';
       if(nullable)
-        ret = name + '.map(x => x.asInstanceOf[' + toJavaType(type) + ']).getOrElse(null)';
+        ret = name + '.map(x => x.asInstanceOf[' + toJavaType(type, false) + ']).getOrElse(null)';
       return ret;
     } else if (type.kind == CLASS_THROWABLE) {
       var ret = name;
@@ -133,9 +133,9 @@
         ret = name + '.map(' + name +' => ' + ret + ').getOrElse(null)';
       return ret;
     } else if (type.kind == CLASS_HANDLER) {
-      return '{x: ' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
+      return '{x: ' + toJavaType(type.args[0], true) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      var ret = 'AsyncResultWrapper[' + toScalaType(type.args[0], false) + ',' + toJavaTypeAndTypeParamTreatment(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      var ret = 'AsyncResultWrapper[' + toScalaType(type.args[0], false) + ',' + toJavaType(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
       if(nullable)
         ret = name + '.map(' + name +' => ' + ret + ').getOrElse(null)';
       return ret;
@@ -160,7 +160,7 @@
       else
         executed = executed + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
       executed = toJavaWithConversion(executed, type.args[1], typeParams, methodTypeParams);
-      var ret = "{x: " + toJavaTypeAndTypeParamTreatment(type.args[0], true) + " => " + executed + "}";
+      var ret = "{x: " + toJavaType(type.args[0], true) + " => " + executed + "}";
       if(nullable)
         ret = name + '.map(' + name +' => ' + ret + ').getOrElse(null)';
       return ret;
@@ -170,11 +170,7 @@
     }
   }
 
-  def toJavaType(type) {
-    toJavaTypeAndTypeParamTreatment(type, false);
-  }
-
-  def toJavaTypeAndTypeParamTreatment(type, convertTypeParamsToObject) {
+  def toJavaType(type, convertTypeParamsToObject) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
     if (type.kind.basic) {
@@ -219,7 +215,7 @@
           if(args != '') {
             args += ',';
           }
-          args += toJavaTypeAndTypeParamTreatment(arg, convertTypeParamsToObject);
+          args += toJavaType(arg, convertTypeParamsToObject);
         }
         ret += '[' + args + ']';
       } else if(!type.raw.params.isEmpty) {
@@ -240,23 +236,23 @@
         if(args != '') {
           args += ',';
         }
-        args += toJavaTypeAndTypeParamTreatment(arg, convertTypeParamsToObject);
+        args += toJavaType(arg, convertTypeParamsToObject);
       }
       return  ret + '[' + args + ']';
     } else if (type.kind == CLASS_HANDLER) {
-      return 'Handler['+ toJavaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) +']';
+      return 'Handler['+ toJavaType(type.args[0], convertTypeParamsToObject) +']';
     } else if (type.kind.collection) {
       var ret = '';
       if (type.kind == CLASS_LIST){
-        ret += 'java.util.List['+ toJavaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) +']';
+        ret += 'java.util.List['+ toJavaType(type.args[0], convertTypeParamsToObject) +']';
       } else if (type.kind == CLASS_SET){
-        ret += 'java.util.Set['+ toJavaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) +']';
+        ret += 'java.util.Set['+ toJavaType(type.args[0], convertTypeParamsToObject) +']';
       } else if (type.kind == CLASS_MAP){
-        ret += 'java.util.Map[String, '+ toJavaTypeAndTypeParamTreatment(type.args[1], convertTypeParamsToObject) +']';
+        ret += 'java.util.Map[String, '+ toJavaType(type.args[1], convertTypeParamsToObject) +']';
       }
       return ret;
     } else if(type.kind == CLASS_ASYNC_RESULT) {
-      return helper.getNonGenericType(type.simpleName) + '['+ toJavaTypeAndTypeParamTreatment(type.args[0], convertTypeParamsToObject) +']';
+      return helper.getNonGenericType(type.simpleName) + '['+ toJavaType(type.args[0], convertTypeParamsToObject) +']';
     }
     else {
       return 'WTF!!!!!!'+type.name+' '+type.kind;
@@ -483,7 +479,7 @@
         ret += '.asInstanceOf[JFuture[Object]]';
     }
     else {
-      ret += '.asInstanceOf[' + toJavaTypeAndTypeParamTreatment(type, true) + ']';
+      ret += '.asInstanceOf[' + toJavaType(type, true) + ']';
     }
     return ret;
   }

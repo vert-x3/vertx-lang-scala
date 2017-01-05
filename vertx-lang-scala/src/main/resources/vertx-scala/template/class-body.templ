@@ -81,7 +81,7 @@
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
 	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method), false)}] = {\n
 		@comment{'TODO: Why is there no nullable-info available in here??'}
-    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method), false)}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method), false)}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
+    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method), false)}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method), false)}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
     @{invokeMethodAndUseProvidedHandler('asJava' + fromObjectToInstanceOf(type), type, method, typeParams, 'promiseAndHandler._1')}\n
     promiseAndHandler._2.future\n
   }\n
