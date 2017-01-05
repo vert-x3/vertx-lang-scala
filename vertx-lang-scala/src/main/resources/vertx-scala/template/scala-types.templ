@@ -17,6 +17,7 @@
         ret = 'scala.Option(' + ret + ')';
       }
       return ret;
+      return ret;
     } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
       return name;
     }
@@ -110,7 +111,7 @@
         ret = 'toJava['+type.simpleName+'](' + name + ')';
       return ret;
     } else if (type.kind == CLASS_CLASS_TYPE) {
-      var ret = name+'.asInstanceOf[Class[Object]]';
+      var ret = 'toJavaClass('+name+')';
       if(nullable)
         ret = name + '.map(x => x).getOrElse(null)';
       return ret;
