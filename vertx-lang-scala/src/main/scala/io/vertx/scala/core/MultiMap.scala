@@ -34,8 +34,6 @@ class MultiMap(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Adds a new value with the specified name and value.
    * @param name The name
@@ -97,8 +95,6 @@ class MultiMap(private val _asJava: Object) {
     this
   }
 
-//default methods
-//basic methods
  /**
    * Returns the value of with the specified name.  If there are
    * more than one values for the specified name, the first value is returned.
@@ -149,12 +145,10 @@ class MultiMap(private val _asJava: Object) {
     asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
-//future methods
 }
 
 object MultiMap{
   def apply(asJava: JMultiMap) = new MultiMap(asJava)  
-  //static methods
  /**
    * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.
    * @return the multi-map

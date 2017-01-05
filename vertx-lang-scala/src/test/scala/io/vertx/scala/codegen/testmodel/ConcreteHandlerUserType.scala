@@ -32,18 +32,12 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RefedInterface1):Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 
-//future methods
 }
 
 object ConcreteHandlerUserType{
   def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)  
-  //static methods
 }

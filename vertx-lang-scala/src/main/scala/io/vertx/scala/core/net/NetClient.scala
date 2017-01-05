@@ -42,8 +42,6 @@ class NetClient(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Open a connection to a server at the specific `port` and `host`.
    * 
@@ -51,14 +49,13 @@ class NetClient(private val _asJava: Object)
    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
    * @param port the port
    * @param host the host
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * @return a reference to this, so the API can be used fluently
+   */
   def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
 
-//default methods
-//basic methods
  /**
    * Whether the metrics are enabled for this measured object
    * @return true if the metrics are enabled
@@ -77,7 +74,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     asJava.asInstanceOf[JNetClient].close()
   }
 
-//future methods
  /**
    * Open a connection to a server at the specific `port` and `host`.
    * 
@@ -96,5 +92,4 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object NetClient{
   def apply(asJava: JNetClient) = new NetClient(asJava)  
-  //static methods
 }

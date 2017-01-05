@@ -46,8 +46,6 @@ object StreamBase{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Set an exception handler.
    * @param handler the handler
@@ -58,8 +56,5 @@ object StreamBase{
     this
   }
 
-//default methods
-//basic methods
-//future methods
 }
 }

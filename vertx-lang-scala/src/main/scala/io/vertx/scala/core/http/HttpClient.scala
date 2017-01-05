@@ -65,8 +65,6 @@ class HttpClient(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Sends an HTTP GET request to the server at the specified host and port, specifying a response handler to receive
    * the response
@@ -532,8 +530,6 @@ class HttpClient(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * Whether the metrics are enabled for this measured object
    * @return true if the metrics are enabled
@@ -1304,10 +1300,8 @@ class HttpClient(private val _asJava: Object)
     asJava.asInstanceOf[JHttpClient].close()
   }
 
-//future methods
 }
 
 object HttpClient{
   def apply(asJava: JHttpClient) = new HttpClient(asJava)  
-  //static methods
 }

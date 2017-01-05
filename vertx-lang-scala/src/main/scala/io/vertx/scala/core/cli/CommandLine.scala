@@ -36,20 +36,15 @@ class CommandLine(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
  /**
    * Gets the raw values of the given option. Raw values are simple "String", not converted to the option type.
    * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
    * @return the list of values, empty if none
    */
-  //io.vertx.core.cli.CommandLine
   def getRawValues(option: Option):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
-//basic methods
  /**
    * @return the model of this command line object.
    */
@@ -191,12 +186,10 @@ class CommandLine(private val _asJava: Object) {
     asJava.asInstanceOf[JCommandLine].isAskingForHelp().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object CommandLine{
   def apply(asJava: JCommandLine) = new CommandLine(asJava)  
-  //static methods
  /**
    * Creates a command line object from the [[io.vertx.scala.core.cli.CLI]]. This object is intended to be used by
    * the parser to set the argument and option values.

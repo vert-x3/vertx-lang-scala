@@ -62,10 +62,6 @@ class RecordParser(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def setOutput(output: Handler[Buffer]):Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: JBuffer => output.handle(Buffer(x))})
   }
@@ -110,12 +106,10 @@ class RecordParser(private val _asJava: Object)
     asJava.asInstanceOf[JRecordParser].handle(buffer.asJava.asInstanceOf[JBuffer])
   }
 
-//future methods
 }
 
 object RecordParser{
   def apply(asJava: JRecordParser) = new RecordParser(asJava)  
-  //static methods
  /**
    * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
    * by the String `` delim endcoded in latin-1 . Don't use this if your String contains other than latin-1 characters.

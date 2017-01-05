@@ -48,7 +48,6 @@ class HttpConnection(private val _asJava: Object) {
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
-//cached methods
  /**
    * @return the remote address for this connection
    */
@@ -71,7 +70,6 @@ class HttpConnection(private val _asJava: Object) {
     cached_1
   }
 
-//fluent methods
  /**
    * Update the current connection wide window size to a new size.
    * <p/>
@@ -200,7 +198,7 @@ class HttpConnection(private val _asJava: Object) {
    * <p/>
    * This is not implemented for HTTP/1.x.
    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-   * @return the future notified when the settings have been acknowledged by the remote endpoint
+   * @return a reference to this, so the API can be used fluently
    */
   def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -224,7 +222,7 @@ class HttpConnection(private val _asJava: Object) {
    * <p/>
    * This is not implemented for HTTP/1.x.
    * @param data the 8 bytes data of the frame
-   * @return an async result future notified with pong reply or the failure
+   * @return a reference to this, so the API can be used fluently
    */
   def ping(data: Buffer,pongHandler: Handler[AsyncResult[Buffer]]):HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],{x: AsyncResult[JBuffer] => pongHandler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
@@ -253,16 +251,13 @@ class HttpConnection(private val _asJava: Object) {
     this
   }
 
-//default methods
  /**
    * @return the current connection window size or `-1` for HTTP/1.x
    */
-  //io.vertx.core.http.HttpConnection
   def getWindowSize():Int = {
     asJava.asInstanceOf[JHttpConnection].getWindowSize().asInstanceOf[Int]
   }
 
-//basic methods
  /**
    * Close the connection and all the currently active streams.
    * <p/>
@@ -286,7 +281,6 @@ class HttpConnection(private val _asJava: Object) {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
-//future methods
  /**
    * Send to the remote endpoint an update of this endpoint settings
    * <p/>
@@ -319,5 +313,4 @@ class HttpConnection(private val _asJava: Object) {
 
 object HttpConnection{
   def apply(asJava: JHttpConnection) = new HttpConnection(asJava)  
-  //static methods
 }

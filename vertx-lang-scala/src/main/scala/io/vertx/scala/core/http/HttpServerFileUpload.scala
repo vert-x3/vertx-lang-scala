@@ -36,8 +36,6 @@ class HttpServerFileUpload(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -72,8 +70,6 @@ class HttpServerFileUpload(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * @return the filename which was used when upload the file.
    */
@@ -125,10 +121,8 @@ class HttpServerFileUpload(private val _asJava: Object)
     asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object HttpServerFileUpload{
   def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)  
-  //static methods
 }

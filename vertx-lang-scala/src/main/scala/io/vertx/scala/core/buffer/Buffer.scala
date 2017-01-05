@@ -37,8 +37,6 @@ class Buffer(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Appends the specified `Buffer` to the end of this Buffer. The buffer will expand as necessary to accommodate
    * any bytes written.
@@ -403,8 +401,6 @@ class Buffer(private val _asJava: Object) {
     this
   }
 
-//default methods
-//basic methods
  /**
    * Returns a `String` representation of the Buffer with the `UTF-8`encoding
    */
@@ -616,12 +612,10 @@ class Buffer(private val _asJava: Object) {
     Buffer(asJava.asInstanceOf[JBuffer].slice(start.asInstanceOf[java.lang.Integer],end.asInstanceOf[java.lang.Integer]))
   }
 
-//future methods
 }
 
 object Buffer{
   def apply(asJava: JBuffer) = new Buffer(asJava)  
-  //static methods
  /**
    * Create a new, empty buffer.
    * @return the buffer

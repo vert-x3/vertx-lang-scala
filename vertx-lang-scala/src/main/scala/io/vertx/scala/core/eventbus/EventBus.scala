@@ -48,8 +48,6 @@ class EventBus(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Sends a message.
    * 
@@ -68,7 +66,7 @@ class EventBus(private val _asJava: Object)
    * subsequently replies to the message.
    * @param address the address to send it to
    * @param message the message, may be `null`
-   * @return reply future will be called when any reply from the recipient is received, may be `null`
+   * @return a reference to this, so the API can be used fluently
    */
   def send[T:TypeTag](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
@@ -93,7 +91,7 @@ class EventBus(private val _asJava: Object)
    * @param address the address to send it to
    * @param message the message, may be `null`
    * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   * @return reply future will be called when any reply from the recipient is received, may be `null`
+   * @return a reference to this, so the API can be used fluently
    */
   def send[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
@@ -124,8 +122,6 @@ class EventBus(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * Whether the metrics are enabled for this measured object
    * @return true if the metrics are enabled
@@ -224,7 +220,6 @@ class EventBus(private val _asJava: Object)
     MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[Object](address.asInstanceOf[java.lang.String],options.asJava))
   }
 
-//future methods
  /**
    * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
    * subsequently replies to the message.
@@ -256,5 +251,4 @@ class EventBus(private val _asJava: Object)
 
 object EventBus{
   def apply(asJava: JEventBus) = new EventBus(asJava)  
-  //static methods
 }

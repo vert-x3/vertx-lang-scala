@@ -94,7 +94,6 @@ class Vertx(private val _asJava: Object)
   private var cached_1:EventBus = _
   private var cached_2:SharedData = _
 
-//cached methods
  /**
    * Get the filesystem object. There is a single instance of FileSystem per Vertx instance.
    * @return the filesystem object
@@ -131,7 +130,6 @@ class Vertx(private val _asJava: Object)
     cached_2
   }
 
-//fluent methods
  /**
    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
    * @param handler the exception handler
@@ -142,8 +140,6 @@ class Vertx(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * Whether the metrics are enabled for this measured object
    * @return true if the metrics are enabled
@@ -328,7 +324,6 @@ class Vertx(private val _asJava: Object)
 
  /**
    * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
-   * @return The future will be notified when the close is complete.
    */
   def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -354,7 +349,6 @@ class Vertx(private val _asJava: Object)
    * 
    * This deployment ID can subsequently be used to undeploy the verticle.
    * @param name The identifier
-   * @return a future which will be notified when the deployment is complete
    */
   def deployVerticle(name: String,completionHandler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
@@ -375,7 +369,6 @@ class Vertx(private val _asJava: Object)
    * deployment.
    * @param name the name
    * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
-   * @return a future which will be notified when the deployment is complete
    */
   def deployVerticle(name: String,options: DeploymentOptions,completionHandler: Handler[AsyncResult[String]]):Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
@@ -394,7 +387,6 @@ class Vertx(private val _asJava: Object)
  /**
    * Like [[io.vertx.scala.core.Vertx]] but the completionHandler will be notified when the undeployment is complete.
    * @param deploymentID the deployment ID
-   * @return a future which will be notified when the undeployment is complete
    */
   def undeploy(deploymentID: String,completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -432,7 +424,6 @@ class Vertx(private val _asJava: Object)
    * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
    * @param blockingCodeHandler handler representing the blocking code to run
    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-   * @return future that will be called when the blocking code is complete
    */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JVertx].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
@@ -440,7 +431,7 @@ class Vertx(private val _asJava: Object)
 
  /**
    * Like [[io.vertx.scala.core.Vertx#executeBlockingFuture]] called with ordered = true.
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JVertx].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
@@ -477,7 +468,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String],poolSize.asInstanceOf[java.lang.Integer],maxExecuteTime.asInstanceOf[java.lang.Long]))
   }
 
-//future methods
  /**
    * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
    * @return The future will be notified when the close is complete.
@@ -565,7 +555,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object Vertx{
   def apply(asJava: JVertx) = new Vertx(asJava)  
-  //static methods
  /**
    * Creates a non clustered instance using default options.
    * @return the instance
@@ -588,7 +577,6 @@ object Vertx{
    * 
    * The instance is created asynchronously and the resultHandler is called with the result when it is ready.
    * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
-   * @return the result future that will receive the result
    */
   def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
     JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})

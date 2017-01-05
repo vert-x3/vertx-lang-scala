@@ -35,7 +35,6 @@ class HttpFrame(private val _asJava: Object) {
   private var cached_1:Int = _
   private var cached_2:Buffer = _
 
-//cached methods
  /**
    * @return the 8-bit type of the frame
    */
@@ -69,13 +68,8 @@ class HttpFrame(private val _asJava: Object) {
     cached_2
   }
 
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
 object HttpFrame{
   def apply(asJava: JHttpFrame) = new HttpFrame(asJava)  
-  //static methods
 }

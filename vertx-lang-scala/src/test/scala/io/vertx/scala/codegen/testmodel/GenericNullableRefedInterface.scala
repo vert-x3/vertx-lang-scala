@@ -29,18 +29,12 @@ class GenericNullableRefedInterface[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def getValue():T = {
     toScala[T](asJava.asInstanceOf[JGenericNullableRefedInterface[Object]].getValue())
   }
 
-//future methods
 }
 
 object GenericNullableRefedInterface{
   def apply[T:TypeTag](asJava: JGenericNullableRefedInterface[_]) = new GenericNullableRefedInterface[T](asJava)  
-  //static methods
 }

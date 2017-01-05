@@ -50,7 +50,6 @@ class TestInterface(private val _asJava: Object)
   private var cached_1:Int = _
   private var cached_2:scala.collection.mutable.Buffer[RefedInterface1] = _
 
-//cached methods
   def methodWithCachedReturn(foo: String):RefedInterface1 = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JTestInterface].methodWithCachedReturn(foo.asInstanceOf[java.lang.String])
@@ -75,14 +74,11 @@ class TestInterface(private val _asJava: Object)
     cached_2
   }
 
-//fluent methods
   def fluentMethod(str: String):TestInterface = {
     asJava.asInstanceOf[JTestInterface].fluentMethod(str.asInstanceOf[java.lang.String])
     this
   }
 
-//default methods
-//basic methods
   override def otherSuperMethodWithBasicParams(b: Byte,s: Short,i: Int,l: Long,f: Float,d: Double,bool: Boolean,ch: Char,str: String):Unit = {
     asJava.asInstanceOf[JTestInterface].otherSuperMethodWithBasicParams(b.asInstanceOf[java.lang.Byte],s.asInstanceOf[java.lang.Short],i.asInstanceOf[java.lang.Integer],l.asInstanceOf[java.lang.Long],f.asInstanceOf[java.lang.Float],d.asInstanceOf[java.lang.Double],bool.asInstanceOf[java.lang.Boolean],ch.asInstanceOf[java.lang.Character],str.asInstanceOf[java.lang.String])
   }
@@ -403,7 +399,6 @@ class TestInterface(private val _asJava: Object)
     asJava.asInstanceOf[JTestInterface].superMethodOverloadedBySubclass(s.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
-//future methods
     def methodWithHandlerAsyncResultByteFuture(sendFailure: Boolean):scala.concurrent.Future[Byte] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Byte, Byte](x => if (x == null) null.asInstanceOf[Byte] else x.asInstanceOf[Byte])
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultByte(sendFailure.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
@@ -528,7 +523,6 @@ class TestInterface(private val _asJava: Object)
 
 object TestInterface{
   def apply(asJava: JTestInterface) = new TestInterface(asJava)  
-  //static methods
   def staticFactoryMethod(foo: String):RefedInterface1 = {
     RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))
   }

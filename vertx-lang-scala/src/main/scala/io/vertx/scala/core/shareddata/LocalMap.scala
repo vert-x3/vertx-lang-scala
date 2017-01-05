@@ -36,10 +36,6 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * Get a value from the map
    * @param key the key
@@ -138,10 +134,8 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
     asJava.asInstanceOf[JLocalMap[Object,Object]].close()
   }
 
-//future methods
 }
 
 object LocalMap{
   def apply[K:TypeTag,V:TypeTag](asJava: JLocalMap[_,_]) = new LocalMap[K,V](asJava)  
-  //static methods
 }

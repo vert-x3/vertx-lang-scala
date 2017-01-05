@@ -35,7 +35,6 @@ class Future[T:TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0:Handler[AsyncResult[T]] = _
 
-//cached methods
  /**
    * @return an handler completing this future
    */
@@ -47,20 +46,18 @@ class Future[T:TypeTag](private val _asJava: Object) {
     cached_0
   }
 
-//fluent methods
  /**
    * Set a handler for the result.
    * 
    * If the future has already been completed it will be called immediately. Otherwise it will be called when the
    * future is completed.
-   * @return the Handler that will be called with the result
+   * @return a reference to this, so it can be used fluently
    */
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
     asJava.asInstanceOf[JFuture[Object]].setHandler({x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
     this
   }
 
-//default methods
  /**
    * Compose this future with a provided `next` future.
    *
@@ -75,7 +72,6 @@ class Future[T:TypeTag](private val _asJava: Object) {
    * @param next the next future
    * @return the next future, used for chaining
    */
-  //io.vertx.core.Future
   def compose[U:TypeTag](handler: Handler[T],next: Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => handler.handle(toScala[T](x))},next.asJava.asInstanceOf[JFuture[Object]]))
   }
@@ -94,7 +90,6 @@ class Future[T:TypeTag](private val _asJava: Object) {
    * @param mapper the mapper function
    * @return the composed future
    */
-  //io.vertx.core.Future
   def compose[U:TypeTag](mapper: T => Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => mapper(toScala[T](x)).asJava.asInstanceOf[JFuture[Object]]}))
   }
@@ -112,7 +107,6 @@ class Future[T:TypeTag](private val _asJava: Object) {
    * @param mapper the mapper function
    * @return the mapped future
    */
-  //io.vertx.core.Future
   def map[U:TypeTag](mapper: T => U):Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[Object]].map[Object]({x: Object => toJava[U](mapper(toScala[T](x)))}))
   }
@@ -126,12 +120,10 @@ class Future[T:TypeTag](private val _asJava: Object) {
    * @param value the value that eventually completes the mapped future
    * @return the mapped future
    */
-  //io.vertx.core.Future
   def map[V:TypeTag](value: V):Future[V] = {
     Future[V](asJava.asInstanceOf[JFuture[Object]].map[Object](toJava[V](value)))
   }
 
-//basic methods
  /**
    * Has the future completed?
    * 
@@ -205,12 +197,10 @@ class Future[T:TypeTag](private val _asJava: Object) {
     asJava.asInstanceOf[JFuture[Object]].failed().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object Future{
   def apply[T:TypeTag](asJava: JFuture[_]) = new Future[T](asJava)  
-  //static methods
  /**
    * Create a future that hasn't completed yet
    * @return the future

@@ -40,10 +40,6 @@ class NullableTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def methodWithNonNullableByteParam(param: Byte):Boolean = {
     asJava.asInstanceOf[JNullableTCK].methodWithNonNullableByteParam(param.asInstanceOf[java.lang.Byte]).asInstanceOf[Boolean]
   }
@@ -1860,7 +1856,6 @@ class NullableTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableHandlerAsyncResult(expectNull.asInstanceOf[java.lang.Boolean],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
-//future methods
     def methodWithNullableByteHandlerAsyncResultFuture(notNull: Boolean):scala.concurrent.Future[Byte] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Byte, Byte](x => if (x == null) null.asInstanceOf[Byte] else x.asInstanceOf[Byte])
     asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
@@ -2459,5 +2454,4 @@ class NullableTCK(private val _asJava: Object) {
 
 object NullableTCK{
   def apply(asJava: JNullableTCK) = new NullableTCK(asJava)  
-  //static methods
 }

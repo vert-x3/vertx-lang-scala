@@ -30,10 +30,6 @@ class SrvRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * Returns the priority for this service record.
    */
@@ -83,10 +79,8 @@ class SrvRecord(private val _asJava: Object) {
     scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[String])
   }
 
-//future methods
 }
 
 object SrvRecord{
   def apply(asJava: JSrvRecord) = new SrvRecord(asJava)  
-  //static methods
 }

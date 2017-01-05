@@ -75,8 +75,6 @@ object ReadStream{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Set an exception handler on the read stream.
    * @param handler the exception handler
@@ -123,8 +121,5 @@ object ReadStream{
     this
   }
 
-//default methods
-//basic methods
-//future methods
 }
 }

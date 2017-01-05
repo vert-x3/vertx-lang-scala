@@ -41,19 +41,14 @@ object RefedInterface2{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
   def setString(str: String):RefedInterface2 = {
     asJava.asInstanceOf[JRefedInterface2].setString(str.asInstanceOf[java.lang.String])
     this
   }
 
-//default methods
-//basic methods
   def getString():String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 
-//future methods
 }
 }

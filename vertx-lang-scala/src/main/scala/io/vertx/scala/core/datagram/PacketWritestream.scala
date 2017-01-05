@@ -37,8 +37,6 @@ class PacketWritestream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -59,16 +57,13 @@ class PacketWritestream(private val _asJava: Object)
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
 
-//basic methods
  /**
    * Ends the stream.
    * 
@@ -86,10 +81,8 @@ class PacketWritestream(private val _asJava: Object)
     asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object PacketWritestream{
   def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)  
-  //static methods
 }

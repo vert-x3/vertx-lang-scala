@@ -32,10 +32,6 @@ class SendContext[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * @return The message being sent
    */
@@ -57,10 +53,8 @@ class SendContext[T:TypeTag](private val _asJava: Object) {
     asJava.asInstanceOf[JSendContext[Object]].send().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object SendContext{
   def apply[T:TypeTag](asJava: JSendContext[_]) = new SendContext[T](asJava)  
-  //static methods
 }

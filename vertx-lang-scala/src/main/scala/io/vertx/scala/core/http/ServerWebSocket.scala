@@ -46,7 +46,6 @@ class ServerWebSocket(private val _asJava: Object)
   private var cached_1:SocketAddress = _
   private var cached_2:MultiMap = _
 
-//cached methods
  /**
    * @return the remote address for this socket
    */
@@ -80,7 +79,6 @@ class ServerWebSocket(private val _asJava: Object)
     cached_2
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -151,16 +149,13 @@ class ServerWebSocket(private val _asJava: Object)
     this
   }
 
-//default methods
  /**
    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
    */
-  //io.vertx.core.streams.WriteStream
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JServerWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -239,10 +234,8 @@ class ServerWebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
 
-//future methods
 }
 
 object ServerWebSocket{
   def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
-  //static methods
 }

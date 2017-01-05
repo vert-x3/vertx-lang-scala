@@ -72,7 +72,6 @@ class HttpClientRequest(private val _asJava: Object)
   private var cached_0:MultiMap = _
   private var cached_1:HttpConnection = _
 
-//cached methods
  /**
    * @return The HTTP headers
    */
@@ -95,7 +94,6 @@ class HttpClientRequest(private val _asJava: Object)
     cached_1
   }
 
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -309,11 +307,9 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
-//default methods
  /**
    * Reset this stream with the error code `0`.
    */
-  //io.vertx.core.http.HttpClientRequest
   def reset():Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset().asInstanceOf[Boolean]
   }
@@ -321,12 +317,10 @@ class HttpClientRequest(private val _asJava: Object)
  /**
    * @return the id of the stream of this response, ` -1` when it is not yet determined, i.e the request has not been yet sent or it is not supported HTTP/1.x
    */
-  //io.vertx.core.http.HttpClientRequest
   def streamId():Int = {
     asJava.asInstanceOf[JHttpClientRequest].streamId().asInstanceOf[Int]
   }
 
-//basic methods
  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpClientRequest#setWriteQueueMaxSize]]
    * @return true if write queue is full
@@ -433,10 +427,8 @@ class HttpClientRequest(private val _asJava: Object)
     asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
 object HttpClientRequest{
   def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
-  //static methods
 }

@@ -37,7 +37,6 @@ class CompositeFuture(private val _asJava: Object)
 
   private var cached_0:Handler[AsyncResult[CompositeFuture]] = _
 
-//cached methods
  /**
    * @return an handler completing this future
    */
@@ -49,13 +48,11 @@ class CompositeFuture(private val _asJava: Object)
     cached_0
   }
 
-//fluent methods
   override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]):CompositeFuture = {
     asJava.asInstanceOf[JCompositeFuture].setHandler({x: AsyncResult[JCompositeFuture] => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a)))})
     this
   }
 
-//default methods
  /**
    * Compose this future with a provided `next` future.
    *
@@ -70,7 +67,6 @@ class CompositeFuture(private val _asJava: Object)
    * @param next the next future
    * @return the next future, used for chaining
    */
-  //io.vertx.core.Future
   override def compose[U:TypeTag](handler: Handler[CompositeFuture],next: Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]({x: JCompositeFuture => handler.handle(CompositeFuture(x))},next.asJava.asInstanceOf[JFuture[Object]]))
   }
@@ -89,7 +85,6 @@ class CompositeFuture(private val _asJava: Object)
    * @param mapper the mapper function
    * @return the composed future
    */
-  //io.vertx.core.Future
   override def compose[U:TypeTag](mapper: CompositeFuture => Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]({x: JCompositeFuture => mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[Object]]}))
   }
@@ -107,12 +102,10 @@ class CompositeFuture(private val _asJava: Object)
    * @param mapper the mapper function
    * @return the mapped future
    */
-  //io.vertx.core.Future
   override def map[U:TypeTag](mapper: CompositeFuture => U):Future[U] = {
     Future[U](asJava.asInstanceOf[JCompositeFuture].map[Object]({x: JCompositeFuture => toJava[U](mapper(CompositeFuture(x)))}))
   }
 
-//basic methods
  /**
    * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
    * @param result the result
@@ -176,12 +169,10 @@ class CompositeFuture(private val _asJava: Object)
     asJava.asInstanceOf[JCompositeFuture].size().asInstanceOf[Int]
   }
 
-//future methods
 }
 
 object CompositeFuture{
   def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)  
-  //static methods
  /**
    * Return a composite future, succeeded when all futures are succeeded, failed when any future is failed.
    * <p/>

@@ -45,8 +45,6 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -72,8 +70,6 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
  /**
    * @return a read stream for the body of the message stream.
    */
@@ -115,7 +111,6 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 
  /**
    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-   * @return the completion future
    */
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -130,13 +125,11 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 
  /**
    * Unregisters the handler which created this registration
-   * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
    */
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-//future methods
  /**
    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
    * @return the completion future
@@ -161,5 +154,4 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 
 object MessageConsumer{
   def apply[T:TypeTag](asJava: JMessageConsumer[_]) = new MessageConsumer[T](asJava)  
-  //static methods
 }

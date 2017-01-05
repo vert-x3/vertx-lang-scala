@@ -29,23 +29,17 @@ class RefedInterface1(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   def setString(str: String):RefedInterface1 = {
     asJava.asInstanceOf[JRefedInterface1].setString(str.asInstanceOf[java.lang.String])
     this
   }
 
-//default methods
-//basic methods
   def getString():String = {
     asJava.asInstanceOf[JRefedInterface1].getString().asInstanceOf[String]
   }
 
-//future methods
 }
 
 object RefedInterface1{
   def apply(asJava: JRefedInterface1) = new RefedInterface1(asJava)  
-  //static methods
 }

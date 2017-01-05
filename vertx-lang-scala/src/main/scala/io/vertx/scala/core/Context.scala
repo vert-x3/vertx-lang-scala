@@ -66,8 +66,6 @@ class Context(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Set an exception handler called when the context runs an action throwing an uncaught throwable.<p/>
    *
@@ -80,8 +78,6 @@ class Context(private val _asJava: Object) {
     this
   }
 
-//default methods
-//basic methods
  /**
    * Run the specified action asynchronously on the same context, some time after the current execution has completed.
    * @param action the action to run
@@ -103,7 +99,6 @@ class Context(private val _asJava: Object) {
    * method if it failed.
    * @param blockingCodeHandler handler representing the blocking code to run
    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
-   * @return future that will be called when the blocking code is complete
    */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
@@ -112,7 +107,6 @@ class Context(private val _asJava: Object) {
  /**
    * Invoke [[io.vertx.scala.core.Context#executeBlockingFuture]] with order = true.
    * @param blockingCodeHandler handler representing the blocking code to run
-   * @return future that will be called when the blocking code is complete
    */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
@@ -217,7 +211,6 @@ class Context(private val _asJava: Object) {
     asJava.asInstanceOf[JContext].getInstanceCount().asInstanceOf[Int]
   }
 
-//future methods
  /**
    * Safely execute some blocking code.
    * 
@@ -254,7 +247,6 @@ class Context(private val _asJava: Object) {
 
 object Context{
   def apply(asJava: JContext) = new Context(asJava)  
-  //static methods
  /**
    * Is the current thread a worker thread?
    * 

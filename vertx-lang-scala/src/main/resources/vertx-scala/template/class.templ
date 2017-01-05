@@ -64,7 +64,7 @@ object @{className}{\n
   def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
   \n
 	@foreach{method : staticMethods}
-	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
+	@if{method.doc != null}@{methodDoc(method, ' ', false);}@end{}
   def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}
 	(

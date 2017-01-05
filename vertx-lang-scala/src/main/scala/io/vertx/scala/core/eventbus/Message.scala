@@ -44,7 +44,6 @@ class Message[T:TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0:T = _
 
-//cached methods
  /**
    * The body of the message. Can be null.
    * @return the body, or null.
@@ -57,9 +56,6 @@ class Message[T:TypeTag](private val _asJava: Object) {
     cached_0
   }
 
-//fluent methods
-//default methods
-//basic methods
  /**
    * The address the message was sent to
    */
@@ -107,7 +103,6 @@ class Message[T:TypeTag](private val _asJava: Object) {
    * The same as `reply(R message)` but you can specify handler for the reply - i.e.
    * to receive the reply to the reply.
    * @param message the message to reply with.
-   * @return the reply future for the reply.
    */
   def reply[R:TypeTag](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
@@ -127,7 +122,6 @@ class Message[T:TypeTag](private val _asJava: Object) {
    * to receive the reply to the reply.
    * @param message the reply message
    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   * @return the reply future for the reply.
    */
   def reply[R:TypeTag](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
@@ -145,7 +139,6 @@ class Message[T:TypeTag](private val _asJava: Object) {
     asJava.asInstanceOf[JMessage[Object]].fail(failureCode.asInstanceOf[java.lang.Integer],message.asInstanceOf[java.lang.String])
   }
 
-//future methods
  /**
    * The same as `reply(R message)` but you can specify handler for the reply - i.e.
    * to receive the reply to the reply.
@@ -175,5 +168,4 @@ class Message[T:TypeTag](private val _asJava: Object) {
 
 object Message{
   def apply[T:TypeTag](asJava: JMessage[_]) = new Message[T](asJava)  
-  //static methods
 }

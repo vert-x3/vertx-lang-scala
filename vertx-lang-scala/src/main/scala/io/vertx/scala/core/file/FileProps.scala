@@ -31,10 +31,6 @@ class FileProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
  /**
    * The date the file was created
    */
@@ -91,10 +87,8 @@ class FileProps(private val _asJava: Object) {
     asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 
-//future methods
 }
 
 object FileProps{
   def apply(asJava: JFileProps) = new FileProps(asJava)  
-  //static methods
 }

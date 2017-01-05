@@ -51,15 +51,13 @@ class FileSystem(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
  /**
    * Copy a file from the path `from` to path `to`, asynchronously.
    * 
    * The copy will fail if the destination already exists.
    * @param from the path to copy from
    * @param to the path to copy to
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def copy(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -83,7 +81,7 @@ class FileSystem(private val _asJava: Object) {
    * The copy will fail if the destination if the destination already exists.
    * @param from the path to copy from
    * @param to the path to copy to
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def copyRecursive(from: String,to: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copyRecursive(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -104,7 +102,7 @@ class FileSystem(private val _asJava: Object) {
    * The move will fail if the destination already exists.
    * @param from the path to copy from
    * @param to the path to copy to
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def move(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -125,7 +123,7 @@ class FileSystem(private val _asJava: Object) {
    * The operation will fail if the file does not exist or `len` is less than `zero`.
    * @param path the path to the file
    * @param len the length to truncate it to
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def truncate(path: String,len: Long,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].truncate(path.asInstanceOf[java.lang.String],len.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -147,7 +145,7 @@ class FileSystem(private val _asJava: Object) {
    * specified <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
    * @param path the path to the file
    * @param perms the permissions string
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def chmod(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmod(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -172,7 +170,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path the path to the file
    * @param perms the permissions string
    * @param dirPerms the directory permissions
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def chmodRecursive(path: String,perms: String,dirPerms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmodRecursive(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],dirPerms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -192,7 +190,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path the path to the file
    * @param user the user name, `null` will not change the user name
    * @param group the user group, `null` will not change the user group name
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def chown(path: String,user: scala.Option[String],group: scala.Option[String],handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chown(path.asInstanceOf[java.lang.String],user.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),group.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -213,7 +211,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * If the file is a link, the link will be followed.
    * @param path the path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def props(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].props(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
@@ -225,7 +223,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * The link will not be followed.
    * @param path the path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def lprops(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].lprops(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
@@ -236,7 +234,7 @@ class FileSystem(private val _asJava: Object) {
    * Create a hard link on the file system from `link` to `existing`, asynchronously.
    * @param link the link
    * @param existing the link destination
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def link(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].link(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -255,7 +253,7 @@ class FileSystem(private val _asJava: Object) {
    * Create a symbolic link on the file system from `link` to `existing`, asynchronously.
    * @param link the link
    * @param existing the link destination
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def symlink(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].symlink(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -273,7 +271,7 @@ class FileSystem(private val _asJava: Object) {
  /**
    * Unlinks the link on the file system represented by the path `link`, asynchronously.
    * @param link the link
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def unlink(link: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].unlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -291,7 +289,7 @@ class FileSystem(private val _asJava: Object) {
  /**
    * Returns the path representing the file that the symbolic link specified by `link` points to, asynchronously.
    * @param link the link
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def readSymlink(link: String,handler: Handler[AsyncResult[String]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
@@ -301,7 +299,7 @@ class FileSystem(private val _asJava: Object) {
  /**
    * Deletes the file represented by the specified `path`, asynchronously.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def delete(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].delete(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -323,7 +321,7 @@ class FileSystem(private val _asJava: Object) {
    * deleted recursively.
    * @param path path to the file
    * @param recursive delete recursively?
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def deleteRecursive(path: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].deleteRecursive(path.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -343,7 +341,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * The operation will fail if the directory already exists.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def mkdir(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -369,7 +367,7 @@ class FileSystem(private val _asJava: Object) {
    * The operation will fail if the directory already exists.
    * @param path path to the file
    * @param perms the permissions string
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def mkdir(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -389,7 +387,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * The operation will fail if the directory already exists.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def mkdirs(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -415,7 +413,7 @@ class FileSystem(private val _asJava: Object) {
    * The operation will fail if the directory already exists.
    * @param path path to the file
    * @param perms the permissions string
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def mkdirs(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -435,7 +433,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * The result is an array of String representing the paths of the files inside the directory.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
@@ -451,7 +449,7 @@ class FileSystem(private val _asJava: Object) {
    * The result is an array of String representing the paths of the files inside the directory.
    * @param path path to the directory
    * @param filter the filter expression
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
@@ -463,7 +461,7 @@ class FileSystem(private val _asJava: Object) {
    * 
    * Do not user this method to read very large files or you risk running out of available RAM.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def readFile(path: String,handler: Handler[AsyncResult[Buffer]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
@@ -474,7 +472,7 @@ class FileSystem(private val _asJava: Object) {
    * Creates the file, and writes the specified `Buffer data` to the file represented by the path `path`,
    * asynchronously.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def writeFile(path: String,data: Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data.asJava.asInstanceOf[JBuffer],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -495,7 +493,8 @@ class FileSystem(private val _asJava: Object) {
    * The file is opened for both reading and writing. If the file does not already exist it will be created.
    * @param path path to the file
    * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * @return a reference to this, so the API can be used fluently
+   */
   def open(path: String,options: OpenOptions,handler: Handler[AsyncResult[AsyncFile]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].open(path.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[JAsyncFile] => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a)))})
     this
@@ -504,7 +503,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Creates an empty file with the specified `path`, asynchronously.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def createFile(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -523,7 +522,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Creates an empty file with the specified `path` and permissions `perms`, asynchronously.
    * @param path path to the file
    * @param perms the permissions string
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def createFile(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
@@ -541,7 +540,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Determines whether the file as specified by the path `path` exists, asynchronously.
    * @param path path to the file
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def exists(path: String,handler: Handler[AsyncResult[Boolean]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -551,15 +550,13 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Returns properties of the file-system being used by the specified `path`, asynchronously.
    * @param path path to anywhere on the filesystem
-   * @return the future that will be called on completion
+   * @return a reference to this, so the API can be used fluently
    */
   def fsProps(path: String,handler: Handler[AsyncResult[FileSystemProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileSystemProps] => handler.handle(AsyncResultWrapper[JFileSystemProps,FileSystemProps](x, a => FileSystemProps(a)))})
     this
   }
 
-//default methods
-//basic methods
  /**
    * Blocking version of [[io.vertx.scala.core.file.FileSystem#propsFuture]]
    */
@@ -623,7 +620,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     FileSystemProps(asJava.asInstanceOf[JFileSystem].fsPropsBlocking(path.asInstanceOf[java.lang.String]))
   }
 
-//future methods
  /**
    * Copy a file from the path `from` to path `to`, asynchronously.
    * 
@@ -1008,5 +1004,4 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 object FileSystem{
   def apply(asJava: JFileSystem) = new FileSystem(asJava)  
-  //static methods
 }

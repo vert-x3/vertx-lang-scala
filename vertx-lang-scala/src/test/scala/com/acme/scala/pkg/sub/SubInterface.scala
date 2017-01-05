@@ -29,18 +29,12 @@ class SubInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def reverse(s: String):String = {
     asJava.asInstanceOf[JSubInterface].reverse(s.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
-//future methods
 }
 
 object SubInterface{
   def apply(asJava: JSubInterface) = new SubInterface(asJava)  
-  //static methods
 }
