@@ -92,7 +92,7 @@ trait WebSocketBase
 }
 
 object WebSocketBase{
-  def apply(asJava: Object):WebSocketBase = new WebSocketBaseImpl(asJava)
+  def apply(asJava: JWebSocketBase):WebSocketBase = new WebSocketBaseImpl(asJava)
     private class WebSocketBaseImpl(private val _asJava: Object) extends WebSocketBase {
 
       def asJava = _asJava

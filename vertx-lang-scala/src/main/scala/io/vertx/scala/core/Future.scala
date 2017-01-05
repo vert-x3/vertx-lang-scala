@@ -112,7 +112,7 @@ class Future[T:TypeTag](private val _asJava: Object, objectToT: Option[Object =>
 }
 
   object Future{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new Future[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JFuture[_], objectToT: Option[Object => T] = None) = new Future[T](asJava, objectToT)  
   //static methods
     def future[T:TypeTag]():Future[T] = {
       Future[T](JFuture.future[Object]())

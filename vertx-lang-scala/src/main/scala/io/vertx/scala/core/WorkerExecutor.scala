@@ -78,6 +78,6 @@ class WorkerExecutor(private val _asJava: Object)
 }
 
   object WorkerExecutor{
-    def apply(asJava: Object) = new WorkerExecutor(asJava)  
+    def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)  
   //static methods
   }

@@ -76,6 +76,6 @@ class TimeoutStream(private val _asJava: Object)
 }
 
   object TimeoutStream{
-    def apply(asJava: Object) = new TimeoutStream(asJava)  
+    def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
   //static methods
   }

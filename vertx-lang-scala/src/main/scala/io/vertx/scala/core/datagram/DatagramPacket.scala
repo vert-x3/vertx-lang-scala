@@ -50,6 +50,6 @@ class DatagramPacket(private val _asJava: Object) {
 }
 
   object DatagramPacket{
-    def apply(asJava: Object) = new DatagramPacket(asJava)  
+    def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
   //static methods
   }

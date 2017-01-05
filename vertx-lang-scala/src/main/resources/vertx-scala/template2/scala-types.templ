@@ -462,6 +462,22 @@
     }
   }
 
+  def assembleTypeParamsAsObjects(typeParams) {
+    if(!typeParams.isEmpty){
+      var ret = '';
+      for(param:typeParams){
+        if(ret != '')
+          ret += ',';
+        ret += '_';
+      }
+      return '[' + ret + ']';
+    }
+    else {
+      return '';
+    }
+  }
+
+
   def fromObjectToInstanceOf(type, typeParams, methodTypeParams) {
     var ret = '';
     if(type.name == 'io.vertx.core.Future' && !type.isParameterized()) {

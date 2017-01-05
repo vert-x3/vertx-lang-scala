@@ -51,6 +51,6 @@ class InterfaceWithStringArg(private val _asJava: Object)
 }
 
   object InterfaceWithStringArg{
-    def apply(asJava: Object) = new InterfaceWithStringArg(asJava)  
+    def apply(asJava: JInterfaceWithStringArg) = new InterfaceWithStringArg(asJava)  
   //static methods
   }

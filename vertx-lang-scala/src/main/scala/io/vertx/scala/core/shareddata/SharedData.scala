@@ -99,6 +99,6 @@ class SharedData(private val _asJava: Object) {
 }
 
   object SharedData{
-    def apply(asJava: Object) = new SharedData(asJava)  
+    def apply(asJava: JSharedData) = new SharedData(asJava)  
   //static methods
   }

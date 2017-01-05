@@ -88,6 +88,6 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Opti
 }
 
   object LocalMap{
-    def apply[K:TypeTag,V:TypeTag](asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new LocalMap[K,V](asJava, objectToK, objectToV)  
+    def apply[K:TypeTag,V:TypeTag](asJava: JLocalMap[_,_], objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new LocalMap[K,V](asJava, objectToK, objectToV)  
   //static methods
   }

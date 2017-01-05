@@ -46,6 +46,6 @@ class MxRecord(private val _asJava: Object) {
 }
 
   object MxRecord{
-    def apply(asJava: Object) = new MxRecord(asJava)  
+    def apply(asJava: JMxRecord) = new MxRecord(asJava)  
   //static methods
   }

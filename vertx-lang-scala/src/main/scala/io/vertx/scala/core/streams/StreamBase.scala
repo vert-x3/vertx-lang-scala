@@ -36,7 +36,7 @@ trait StreamBase {
 }
 
 object StreamBase{
-  def apply(asJava: Object):StreamBase = new StreamBaseImpl(asJava)
+  def apply(asJava: JStreamBase):StreamBase = new StreamBaseImpl(asJava)
     private class StreamBaseImpl(private val _asJava: Object) extends StreamBase {
 
       def asJava = _asJava

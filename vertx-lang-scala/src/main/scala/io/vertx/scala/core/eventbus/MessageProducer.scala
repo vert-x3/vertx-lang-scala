@@ -107,6 +107,6 @@ class MessageProducer[T:TypeTag](private val _asJava: Object, objectToT: Option[
 }
 
   object MessageProducer{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new MessageProducer[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JMessageProducer[_], objectToT: Option[Object => T] = None) = new MessageProducer[T](asJava, objectToT)  
   //static methods
   }

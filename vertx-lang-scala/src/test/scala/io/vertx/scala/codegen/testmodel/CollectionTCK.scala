@@ -455,6 +455,6 @@ class CollectionTCK(private val _asJava: Object) {
 }
 
   object CollectionTCK{
-    def apply(asJava: Object) = new CollectionTCK(asJava)  
+    def apply(asJava: JCollectionTCK) = new CollectionTCK(asJava)  
   //static methods
   }

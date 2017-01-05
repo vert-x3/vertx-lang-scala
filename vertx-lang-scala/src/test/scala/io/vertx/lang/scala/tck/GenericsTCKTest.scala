@@ -110,7 +110,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     val res = obj.methodWithUserTypeParameterizedReturn()
     val refed = RefedInterface1(new RefedInterface1Impl)
     res.setValue(refed)
-    assert(res.getValue() == refed)
+    assert(res.getValue().asJava == refed.asJava)
   }
 
   "testMethodWithHandlerByteParameterized" should "work" in {
@@ -158,7 +158,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerDataObjectParameterized" should "work" in {
-    obj.methodWithHandlerDataObjectParameterized(h => assert(h.getValue().getBar == 1))
+    obj.methodWithHandlerDataObjectParameterized(h => assert(h.getValue().getBar == 123456))
   }
 
   "testMethodWithHandlerEnumParameterized" should "work" in {
@@ -170,7 +170,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerUserTypeParameterized" should "work" in {
-    obj.methodWithHandlerUserTypeParameterized(h => assert(h.getValue().getString() == "asd"))
+    obj.methodWithHandlerUserTypeParameterized(h => assert(h.getValue().getString() == "foo"))
   }
 
   "testMethodWithHandlerAsyncResultByteParameterized" should "work" in {
@@ -226,11 +226,11 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultUserTypeParameterized" should "work" in {
-    obj.methodWithHandlerAsyncResultUserTypeParameterized(h => assert(h.result().getValue().getString() == "asd"))
+    obj.methodWithHandlerAsyncResultUserTypeParameterized(h => assert(h.result().getValue().getString() == "foo"))
   }
 
   "testMethodWithHandlerAsyncResultDataObjectParameterized" should "work" in {
-    obj.methodWithHandlerAsyncResultDataObjectParameterized(h => assert(h.result().getValue().getBar == 1))
+    obj.methodWithHandlerAsyncResultDataObjectParameterized(h => assert(h.result().getValue().getBar == 123456))
   }
 
   "testMethodWithFunctionParamByteParameterized" should "work" in {
@@ -342,7 +342,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     obj.methodWithFunctionParamUserTypeParameterized(h => {
       v = h.getValue().getString()
       h.getValue().toString})
-    assert(v == "asd")
+    assert(v == "foo")
   }
 
   "testMethodWithFunctionParamDataObjectParameterized" should "work" in {
@@ -350,7 +350,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     obj.methodWithFunctionParamDataObjectParameterized(h => {
       v = h.getValue().getBar
       h.getValue().toString})
-    assert(v == 1)
+    assert(v == 123456)
   }
 
   "testMethodWithHandlerAsyncResultByteParameterizedFuture" should "work" in {
@@ -467,7 +467,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultDataObjectParameterizedFuture().foreach(result => {
         w {
-          assert(result.getValue().getBar == 1)
+          assert(result.getValue().getBar == 123456)
         }
         w.dismiss()})
     )
@@ -497,7 +497,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultUserTypeParameterizedFuture().foreach(result => {
         w {
-          assert(result.getValue().getString() == "asd")
+          assert(result.getValue().getString() == "foo")
         }
         w.dismiss()})
     )
@@ -507,7 +507,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultGenericNullableApiFuture(true).foreach(result => {
         w {
-          assert(result.getValue().getString() == "asd")
+          assert(result.getValue().getString() == "the_string_value")
         }
         w.dismiss()})
     )

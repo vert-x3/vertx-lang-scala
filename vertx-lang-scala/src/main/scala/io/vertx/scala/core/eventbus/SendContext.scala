@@ -52,6 +52,6 @@ class SendContext[T:TypeTag](private val _asJava: Object, objectToT: Option[Obje
 }
 
   object SendContext{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new SendContext[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JSendContext[_], objectToT: Option[Object => T] = None) = new SendContext[T](asJava, objectToT)  
   //static methods
   }
