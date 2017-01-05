@@ -145,9 +145,9 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("stringValues", Json.obj().put("1", "stringValues1").put("2", "stringValues2"))
       .put("jsonObjectValues", Json.obj().put("1", Json.obj().put("foo", "eek")).put("2", Json.obj().put("foo", "wibble")))
       .put("jsonArrayValues", Json.obj().put("1", Json.arr("foo")).put("2", Json.arr("bar")))
-      .put("dataObjectValues", Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f))
+      .put("dataObjectValues", Json.obj(("1", Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f)), ("2", Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f))))
       .put("enumValues", Json.obj().put("1", "TIM").put("2", "JULIEN"))
-      .put("genEnumValues", Json.obj().put("1", "bob").put("2", "laura"))
+      .put("genEnumValues", Json.obj().put("1", "BOB").put("2", "LAURA"))
     )
     dataObjectTCK.setDataObjectWithMaps(dataObject)
   }
