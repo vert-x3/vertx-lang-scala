@@ -41,6 +41,29 @@ object Converter {
       t.getClass.getMethod("asJava").invoke(t)
   }
 
+  def toJavaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[_] = {
+    val typ = typeOf(tag)
+    val name = typ.typeSymbol.fullName
+    val n = clazz == null
+    if(n || clazz == classOf[JsonObject] || clazz == classOf[JsonArray] || !name.startsWith("io.vertx.scala")){
+      clazz.asInstanceOf[Class[_]]
+    }
+    else {
+      clazz.getClassLoader.loadClass(name.replace(".scala",""))
+    }
+  }
+  def toScalaClass[T](clazz: Class[T])(implicit tag: TypeTag[T]): Class[_] = {
+    val typ = typeOf(tag)
+    val name = typ.typeSymbol.fullName
+    val n = clazz == null
+    if(n || clazz == classOf[JsonObject] || clazz == classOf[JsonArray] || !name.startsWith("io.vertx")){
+      clazz.asInstanceOf[Class[_]]
+    }
+    else {
+      clazz.getClassLoader.loadClass(name.replace("io.vertx", "io.vertx.scala"))
+    }
+  }
+
   def companion(name: String): Object =
     Class.forName(name + "$").getField("MODULE$").get(null)
 

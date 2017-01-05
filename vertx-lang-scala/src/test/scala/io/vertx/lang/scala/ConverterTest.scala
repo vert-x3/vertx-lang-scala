@@ -2,7 +2,7 @@ package io.vertx.lang.scala
 
 
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
-import io.vertx.lang.scala.Converter.{toJava, toScala}
+import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.json.{Json, JsonObject}
 import io.vertx.scala.codegen.testmodel.TestDataObject
 import org.junit.runner.RunWith
@@ -39,4 +39,11 @@ class ConverterTest extends FlatSpec with Matchers {
     assert(toJava[java.lang.Integer](10000.asInstanceOf[Int]).isInstanceOf[java.lang.Integer])
   }
 
+  "A generic method " should "Hurrrz" in {
+    assert(toJavaClass(classOf[TestDataObject]) == classOf[JTestDataObject])
+  }
+
+  "A generic method " should "Hurrrz2" in {
+    assert(toScalaClass(classOf[JTestDataObject]) == classOf[TestDataObject])
+  }
 }
