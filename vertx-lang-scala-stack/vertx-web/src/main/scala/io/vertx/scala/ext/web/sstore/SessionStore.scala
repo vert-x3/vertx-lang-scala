@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.web.sstore
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -115,7 +113,7 @@ class SessionStore(private val _asJava: Object) {
    * @return will be called with a result holding the session, or a failure
    */
     def getFuture(id: String):scala.concurrent.Future[Session] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, Session](x => if (x == null) null.asInstanceOf[Session] else Session(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, Session](x => Session(x))
     asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -126,7 +124,7 @@ class SessionStore(private val _asJava: Object) {
    * @return will be called with a result true/false, or a failure
    */
     def deleteFuture(id: String):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -137,7 +135,7 @@ class SessionStore(private val _asJava: Object) {
    * @return will be called with a result true/false, or a failure
    */
     def putFuture(session: Session):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -147,7 +145,7 @@ class SessionStore(private val _asJava: Object) {
    * @return will be called with a result true/false, or a failure
    */
     def clearFuture():scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JSessionStore].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -157,7 +155,7 @@ class SessionStore(private val _asJava: Object) {
    * @return will be called with the number, or a failure
    */
     def sizeFuture():scala.concurrent.Future[Int] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => if (x == null) null.asInstanceOf[Int] else x.asInstanceOf[Int])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
     asJava.asInstanceOf[JSessionStore].size(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

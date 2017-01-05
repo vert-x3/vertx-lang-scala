@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.sql
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -109,7 +107,7 @@ class SQLRowStream(private val _asJava: Object)
    * @return called when the stream/underlying cursor(s) is(are) closed
    */
     def closeFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -117,7 +117,7 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
   }
 
     def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),promiseAndHandler._1)
     promiseAndHandler._2.future
   }

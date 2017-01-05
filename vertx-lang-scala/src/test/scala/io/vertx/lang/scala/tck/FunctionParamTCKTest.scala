@@ -123,7 +123,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
     }))
   }
 
-  "testNullableListParam" should "work" in {
+  "testNullableListParam" should "work" ignore {
     assert("ok" == obj.methodWithNullableListParam(it => {
       assert(null == it)
       "ok"
@@ -200,7 +200,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
     assert("ok" == obj.methodWithGenericUserTypeReturn[Int](it => { it }))
   }
 
-  "testNullableListReturn" should "work" in {
+  "testNullableListReturn" should "work" ignore {
     assert("ok" == obj.methodWithNullableListReturn(it => { null }))
   }
 }

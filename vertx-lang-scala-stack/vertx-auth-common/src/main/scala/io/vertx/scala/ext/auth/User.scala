@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -94,7 +92,7 @@ class User(private val _asJava: Object) {
    * @return future that will be called with an io.vertx.lang.scala.AsyncResult containing the value `true` if the they has the authority or `false` otherwise.
    */
     def isAuthorisedFuture(authority: String):scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -78,7 +76,7 @@ class AuthProvider(private val _asJava: Object) {
    * @return The result future
    */
     def authenticateFuture(authInfo: io.vertx.core.json.JsonObject):scala.concurrent.Future[User] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JUser, User](x => if (x == null) null.asInstanceOf[User] else User(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JUser, User](x => User(x))
     asJava.asInstanceOf[JAuthProvider].authenticate(authInfo,promiseAndHandler._1)
     promiseAndHandler._2.future
   }

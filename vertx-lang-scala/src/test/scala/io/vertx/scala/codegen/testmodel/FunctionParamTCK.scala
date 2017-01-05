@@ -51,7 +51,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectParam(arg: AnyRef,func: AnyRef => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(null).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithDataObjectParam(func: TestDataObject => String):String = {

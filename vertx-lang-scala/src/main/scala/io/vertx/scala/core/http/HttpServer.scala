@@ -208,7 +208,7 @@ class HttpServer(private val _asJava: Object)
    * @return the listen future
    */
     def listenFuture(port: Int,host: String):scala.concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => if (x == null) null.asInstanceOf[HttpServer] else HttpServer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -219,7 +219,7 @@ class HttpServer(private val _asJava: Object)
    * @return the listen future
    */
     def listenFuture(port: Int):scala.concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => if (x == null) null.asInstanceOf[HttpServer] else HttpServer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -229,7 +229,7 @@ class HttpServer(private val _asJava: Object)
    * @return the listen future
    */
     def listenFuture():scala.concurrent.Future[HttpServer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => if (x == null) null.asInstanceOf[HttpServer] else HttpServer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServer, HttpServer](x => HttpServer(x))
     asJava.asInstanceOf[JHttpServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -239,7 +239,7 @@ class HttpServer(private val _asJava: Object)
    * @return the future
    */
     def closeFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

@@ -133,7 +133,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * @return the completion future
    */
     def completionFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -143,7 +143,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
    */
     def unregisterFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

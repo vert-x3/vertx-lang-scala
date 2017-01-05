@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.jdbc
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.sql.SQLConnection
@@ -60,7 +58,7 @@ class JDBCClient(private val _asJava: Object) {
    * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
    */
     def getConnectionFuture():scala.concurrent.Future[SQLConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => if (x == null) null.asInstanceOf[SQLConnection] else SQLConnection(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))
     asJava.asInstanceOf[JJDBCClient].getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

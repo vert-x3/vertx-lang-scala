@@ -289,7 +289,7 @@ class HttpConnection(private val _asJava: Object) {
    * @return the future notified when the settings have been acknowledged by the remote endpoint
    */
     def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -302,7 +302,7 @@ class HttpConnection(private val _asJava: Object) {
    * @return an async result future notified with pong reply or the failure
    */
     def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

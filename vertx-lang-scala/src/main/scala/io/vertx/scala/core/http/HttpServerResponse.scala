@@ -496,7 +496,7 @@ class HttpServerResponse(private val _asJava: Object)
    * @return future that will be called on completion
    */
     def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -509,7 +509,7 @@ class HttpServerResponse(private val _asJava: Object)
    * @return future that will be called on completion
    */
     def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -523,7 +523,7 @@ class HttpServerResponse(private val _asJava: Object)
    * @return future that will be called on completion
    */
     def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -532,7 +532,7 @@ class HttpServerResponse(private val _asJava: Object)
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with no headers.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
     def pushFuture(method: io.vertx.core.http.HttpMethod,host: String,path: String):scala.concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => if (x == null) null.asInstanceOf[HttpServerResponse] else HttpServerResponse(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
     asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -541,7 +541,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
     def pushFuture(method: io.vertx.core.http.HttpMethod,path: String,headers: MultiMap):scala.concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => if (x == null) null.asInstanceOf[HttpServerResponse] else HttpServerResponse(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
     asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -550,7 +550,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
     def pushFuture(method: io.vertx.core.http.HttpMethod,path: String):scala.concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => if (x == null) null.asInstanceOf[HttpServerResponse] else HttpServerResponse(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
     asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -572,7 +572,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @return the future notified when the response can be written
    */
     def pushFuture(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap):scala.concurrent.Future[HttpServerResponse] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => if (x == null) null.asInstanceOf[HttpServerResponse] else HttpServerResponse(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
     asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
