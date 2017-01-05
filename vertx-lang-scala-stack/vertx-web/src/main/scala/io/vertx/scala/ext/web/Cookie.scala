@@ -16,9 +16,11 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{Cookie => JCookie}
 
 /**
@@ -28,139 +30,80 @@ import io.vertx.ext.web.{Cookie => JCookie}
   * 
   * (Derived from io.netty.handler.codec.http.Cookie)
   */
-class Cookie(private val _asJava: JCookie) {
+class Cookie(private val _asJava: Object) {
 
-  def asJava: JCookie = _asJava
+  def asJava = _asJava
 
-  /**
-    * @return the name of this cookie
-    */
-  def getName(): String = {
-    _asJava.getName()
-  }
-
-  /**
-    * @return the value of this cookie
-    */
-  def getValue(): String = {
-    _asJava.getValue()
-  }
-
-  /**
-    * Sets the value of this cookie
-    * @param value The value to set
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setValue(value: String): Cookie = {
-    _asJava.setValue(value)
+//cached methods
+//fluent methods
+  def setValue(value: String):Cookie = {
+    asJava.asInstanceOf[JCookie].setValue(value.asInstanceOf[java.lang.String])
     this
   }
 
-  /**
-    * Sets the domain of this cookie
-    * @param domain The domain to use
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setDomain(domain: scala.Option[String]): Cookie = {
-    _asJava.setDomain((if (domain.isDefined) domain.get else null))
+  def setDomain(domain: scala.Option[String]):Cookie = {
+    asJava.asInstanceOf[JCookie].setDomain(domain.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null))
     this
   }
 
-  /**
-    * @return the domain for the cookie
-    */
-  def getDomain(): scala.Option[String] = {
-    scala.Option(_asJava.getDomain())
-  }
-
-  /**
-    * Sets the path of this cookie.
-    * @param path The path to use for this cookie
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setPath(path: scala.Option[String]): Cookie = {
-    _asJava.setPath((if (path.isDefined) path.get else null))
+  def setPath(path: scala.Option[String]):Cookie = {
+    asJava.asInstanceOf[JCookie].setPath(path.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null))
     this
   }
 
-  /**
-    * @return the path for this cookie
-    */
-  def getPath(): scala.Option[String] = {
-    scala.Option(_asJava.getPath())
-  }
-
-  /**
-    * Sets the maximum age of this cookie in seconds.
-    * If an age of `0` is specified, this cookie will be
-    * automatically removed by browser because it will expire immediately.
-    * If MIN_VALUE is specified, this cookie will be removed when the
-    * browser is closed.
-    * If you don't set this the cookie will be a session cookie and be removed when the browser is closed.
-    * @param maxAge The maximum age of this cookie in seconds
-    */
-  def setMaxAge(maxAge: Long): Cookie = {
-    _asJava.setMaxAge(maxAge)
+  def setMaxAge(maxAge: Long):Cookie = {
+    asJava.asInstanceOf[JCookie].setMaxAge(maxAge.asInstanceOf[java.lang.Long])
     this
   }
 
-  /**
-    * Sets the security getStatus of this cookie
-    * @param secure True if this cookie is to be secure, otherwise false
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setSecure(secure: Boolean): Cookie = {
-    _asJava.setSecure(secure)
+  def setSecure(secure: Boolean):Cookie = {
+    asJava.asInstanceOf[JCookie].setSecure(secure.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Determines if this cookie is HTTP only.
-    * If set to true, this cookie cannot be accessed by a client
-    * side script. However, this works only if the browser supports it.
-    * For for information, please look
-    * <a href="http://www.owasp.org/index.php/HTTPOnly">here</a>.
-    * @param httpOnly True if the cookie is HTTP only, otherwise false.
-    */
-  def setHttpOnly(httpOnly: Boolean): Cookie = {
-    _asJava.setHttpOnly(httpOnly)
+  def setHttpOnly(httpOnly: Boolean):Cookie = {
+    asJava.asInstanceOf[JCookie].setHttpOnly(httpOnly.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Encode the cookie to a string. This is what is used in the Set-Cookie header
-    * @return the encoded cookie
-    */
-  def encode(): String = {
-    _asJava.encode()
+//default methods
+//basic methods
+  def getName():String = {
+    asJava.asInstanceOf[JCookie].getName().asInstanceOf[String]
   }
 
-  /**
-    * Has the cookie been changed? Changed cookies will be saved out in the response and sent to the browser.
-    * @return true if changed
-    */
-  def isChanged(): Boolean = {
-    _asJava.isChanged()
+  def getValue():String = {
+    asJava.asInstanceOf[JCookie].getValue().asInstanceOf[String]
   }
 
-  /**
-    * Set the cookie as being changed. Changed will be true for a cookie just created, false by default if just
-    * read from the request
-    * @param changed true if changed
-    */
-  def setChanged(changed: Boolean): Unit = {
-    _asJava.setChanged(changed)
+  def getDomain():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCookie].getDomain().asInstanceOf[String])
   }
 
+  def getPath():scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCookie].getPath().asInstanceOf[String])
+  }
+
+  def encode():String = {
+    asJava.asInstanceOf[JCookie].encode().asInstanceOf[String]
+  }
+
+  def isChanged():Boolean = {
+    asJava.asInstanceOf[JCookie].isChanged().asInstanceOf[Boolean]
+  }
+
+  def setChanged(changed: Boolean):Unit = {
+    asJava.asInstanceOf[JCookie].setChanged(changed.asInstanceOf[java.lang.Boolean])
+  }
+
+//future methods
 }
 
-object Cookie {
+  object Cookie{
+    def apply(asJava: JCookie) = new Cookie(asJava)  
+  //static methods
+    def cookie(name: String,value: String):Cookie = {
+      Cookie(JCookie.cookie(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String]))
+    }
 
-  def apply(_asJava: JCookie): Cookie =
-    new Cookie(_asJava)
-
-  def cookie(name: String, value: String): Cookie = {
-    Cookie.apply(io.vertx.ext.web.Cookie.cookie(name, value))
   }
-
-}

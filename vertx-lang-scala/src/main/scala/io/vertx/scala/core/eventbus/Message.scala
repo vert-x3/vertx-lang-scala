@@ -93,13 +93,13 @@ class Message[T:TypeTag](private val _asJava: Object) {
   }
 
 //future methods
-  def replyFuture[R:TypeTag](message: AnyRef):scala.concurrent.Future[Message[R]] = {
+    def replyFuture[R:TypeTag](message: AnyRef):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def replyFuture[R:TypeTag](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
+    def replyFuture[R:TypeTag](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => if (x == null) null.asInstanceOf[Message[R]] else Message[R](x))
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

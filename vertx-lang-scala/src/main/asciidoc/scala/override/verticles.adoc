@@ -1,0 +1,99 @@
+=== Writing Verticles
+
+There are two alternatives to create verticles in Scala:
+
+ * a Scala class extending the `ScalaVerticle` class
+ * a Scala class implementing the `Verticle` interface or extending the `AbstractVerticle` class
+
+ We will not cover the third case in this manual, as it is a plain Java class and instead you should read the
+ Vert.x manual for Java.
+
+Alternatively, you can extend the `ScalaVerticle` class and implement the `start` and
+`stop` methods:
+
+[source, scala]
+----
+import io.vertx.lang.scala.ScalaVerticle;
+
+class HelloWorldHttpVerticle extends ScalaVerticle {
+
+ override def start(): Unit = {
+   println("Starting")
+ }
+
+ override def stop(): Unit = {
+   println("Stopping")
+ }
+----
+
+As in Java, vert.x creates a new instance of the class automatically.  When Vert.x deploys the verticle it will call
+the `start` method, and when the method has completed the verticle will be considered started.
+
+You can also optionally override the `stop` method. This will be called by Vert.x when the verticle is undeployed
+and when the method has completed the verticle will be considered stopped.
+
+=== Accessing the vertx instance from a verticle
+
+Regardless the way you use to implement your verticle, you access the vert.x instance using the `vertx` field.
+
+Access to the vert.x instance in a ScalaVerticle class
+[source, scala]
+----
+import io.vertx.lang.scala.ScalaVerticle;
+
+public class HelloWorldVerticle extends ScalaVerticle {
+
+   override def start(): Unit = {
+     vertx.deployVerticle("another_verticle.js")
+   }
+}
+----
+
+To deploy a Scala based verticle you have to prefix the classname with `scala:`
+[source, scala]
+----
+val vertx = Vertx.vertx
+vertx.deployVerticle(s"scala:${classOf[HelloWorldVerticle].getName}")
+----
+
+=== Asynchronous Verticle start and stop
+
+Sometimes you want to do something in your verticle start-up which takes some time and you don't want the verticle to
+be considered deployed until that happens. For example you might want to deploy other verticles in the start method.
+
+You can't block waiting for the other verticles to deploy in your start method as that would break the <<golden_rule, Golden Rule>>.
+
+So how can you do this?
+
+The way to do it is to implement the *asynchronous* start method. This version of the method takes a Promise as a parameter.When the method returns the verticle will *not* be considered deployed.
+
+Some time later, after you've done everything you need to do (e.g. start other verticles), you can call success/failure
+on the Promise to signal that you're done. Similarly, there is an asynchronous version of the stop method too.
+You use this if you want to do some verticle cleanup that takes some time.
+
+If your verticle extends `ScalaVerticle`, you override the
+`start` and
+`stop` methods:
+
+[source, scala]
+----
+import io.vertx.lang.scala.ScalaVerticle
+
+public class HelloWorldVerticle extends ScalaVerticle {
+ public void start(startpromise: scala.concurrent.Promise[Unit]) {
+  println "starting"
+  vertx.deployVerticleFuture("v.rb").onComplete{
+   case Success(deploymentId) => startPromise.success()
+   case Failure(throwable) => startPromise.failure(throwable)
+  }
+ }
+
+ public void stop(stopPromise: scala.concurrent.Promise[Unit]) {
+  println("stopping")
+  stopPromise.success()
+ }
+}
+----
+
+NOTE: You don't need to manually undeploy child verticles started by a verticle, in the verticle's stop method.
+Vert.x will automatically undeploy any child verticles when the parent is undeployed.

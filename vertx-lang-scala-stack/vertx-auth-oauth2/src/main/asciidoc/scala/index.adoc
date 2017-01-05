@@ -65,6 +65,10 @@ The client credentials grant type MUST only be used by confidential clients.
 
 For more details see http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4[Oauth2 specification, section 4.4].
 
+=== Extensions
+
+The provider supports RFC7523 an extension to allow server to server authorization based on JWT.
+
 === Getting Started
 
 An example on how to use this provider and authenticate with GitHub can be implemented as:
@@ -262,144 +266,42 @@ token.revokeFuture("access_token").onComplete{
 
 === Example configuration for common OAuth2 providers
 
-==== Google
+For convenience there are several helpers to assist your with your configuration. Currently we provide:
 
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// Set the client credentials and the OAuth2 server
-var credentials = OAuth2ClientOptions()
-  .setClientID("CLIENT_ID")
-  .setClientSecret("CLIENT_SECRET")
-  .setSite("https://accounts.google.com")
-  .setTokenPath("https://www.googleapis.com/oauth2/v3/token")
-  .setAuthorizationPath("/o/oauth2/auth")
-
-
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
-
-----
-
-==== GitHub
-
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// Set the client credentials and the OAuth2 server
-var credentials = OAuth2ClientOptions()
-  .setClientID("CLIENT_ID")
-  .setClientSecret("CLIENT_SECRET")
-  .setSite("https://github.com/login")
-  .setTokenPath("/oauth/access_token")
-  .setAuthorizationPath("/oauth/authorize")
-
-
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
-
-----
-
-==== Linkedin
-
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// Set the client credentials and the OAuth2 server
-var credentials = OAuth2ClientOptions()
-  .setClientID("CLIENT_ID")
-  .setClientSecret("CLIENT_SECRET")
-  .setSite("https://www.linkedin.com")
-  .setAuthorizationPath("/uas/oauth2/authorization")
-  .setTokenPath("/uas/oauth2/accessToken")
-
-
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
-
-----
-
-==== Twitter
-
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// Set the client credentials and the OAuth2 server
-var credentials = OAuth2ClientOptions()
-  .setClientID("CLIENT_ID")
-  .setClientSecret("CLIENT_SECRET")
-  .setSite("https://api.twitter.com")
-  .setAuthorizationPath("/oauth/authorize")
-  .setTokenPath("/oauth/access_token")
-
-
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
-
-----
-
-==== Facebook
-
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// Set the client credentials and the OAuth2 server
-var credentials = OAuth2ClientOptions()
-  .setClientID("CLIENT_ID")
-  .setClientSecret("CLIENT_SECRET")
-  .setSite("https://www.facebook.com")
-  .setAuthorizationPath("/dialog/oauth")
-  .setTokenPath("https://graph.facebook.com/oauth/access_token")
-
-
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
-
-----
+* App.net `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/AppNetAuth.html[AppNetAuth]`
+* Azure Active Directory `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/AzureADAuth.html[AzureADAuth]`
+* Box.com `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/BoxAuth.html[BoxAuth]`
+* Dropbox `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/DropboxAuth.html[DropboxAuth]`
+* Facebook `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/FacebookAuth.html[FacebookAuth]`
+* Foursquare `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/FoursquareAuth.html[FoursquareAuth]`
+* Github `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/GithubAuth.html[GithubAuth]`
+* Google `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/GoogleAuth.html[GoogleAuth]`
+* Instagram `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/InstagramAuth.html[InstagramAuth]`
+* Keycloak `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/KeycloakAuth.html[KeycloakAuth]`
+* LinkedIn `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/LinkedInAuth.html[LinkedInAuth]`
+* Mailchimp `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/MailchimpAuth.html[MailchimpAuth]`
+* Salesforce `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/SalesforceAuth.html[SalesforceAuth]`
+* Shopify `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/ShopifyAuth.html[ShopifyAuth]`
+* Soundcloud `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/SoundcloudAuth.html[SoundcloudAuth]`
+* Stripe `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/StripeAuth.html[StripeAuth]`
+* Twitter `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/TwitterAuth.html[TwitterAuth]`
 
 ==== JBoss Keycloak
 
-When working with keycloak it will be quite simple to setup the OAuth2 provider, just export the JSON config from the
-web UI and use it as the OAuth2 config with the helper class `link:../dataobjects.html#OAuth2ClientOptions[OAuth2ClientOptions]`.
-
-[source,scala]
-----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// After setting up the application and users in keycloak export
-// the configuration json file from the web interface and load it in your application e.g.:
-
-var keycloakJson = new io.vertx.core.json.JsonObject().put("realm", "master").put("realm-public-key", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqGQkaBkiZWpUjFOuaabgfXgjzZzfJd0wozrS1czX5qHNKG3P79P/UtZeR3wGN8r15jVYiH42GMINMs7R7iP5Mbm1iImge5p/7/dPmXirKOKOBhjA3hNTiV5BlPDTQyiuuTAUEms5dY4+moswXo5zM4q9DFu6B7979o+v3kX6ZB+k3kNhP08wH82I4eJKoenN/0iCT7ALoG3ysEJf18+HEysSnniLMJr8R1pYF2QRFlqaDv3Mqyp7ipxYkt4ebMCgE7aDzT6OrfpyPowObpdjSMTUXpcwIcH8mIZCWFmyfF675zEeE0e+dHKkL1rPeCI7rr7Bqc5+1DS5YM54fk8xQwIDAQAB").put("auth-server-url", "http://localhost:9000/auth").put("ssl-required", "external").put("resource", "frontend").put("credentials", new io.vertx.core.json.JsonObject().put("secret", "2fbf5e18-b923-4a83-9657-b4ebd5317f60"))
-
-// Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.createKeycloak(vertx, OAuth2FlowType.CLIENT, keycloakJson)
-
-----
-
-When using this approach the provider has knowledge on how to parse access tokens and extract grants from inside.
+When using this Keycloak the provider has knowledge on how to parse access tokens and extract grants from inside.
 This information is quite valuable since it allows to do authorization at the API level, for example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import io.vertx.scala.ext.auth.oauth2.providers.KeycloakAuth
 import scala.util.Failure
 import scala.util.Success
 import io.vertx.ext.auth.oauth2.OAuth2FlowType
-// you can now use this config with the OAuth2 provider like this:
-var keycloakJson = new io.vertx.core.json.JsonObject().put("realm", "master").put("realm-public-key", "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqGQkaBkiZWpUjFOuaabgfXgjzZzfJd0wozrS1czX5qHNKG3P79P/UtZeR3wGN8r15jVYiH42GMINMs7R7iP5Mbm1iImge5p/7/dPmXirKOKOBhjA3hNTiV5BlPDTQyiuuTAUEms5dY4+moswXo5zM4q9DFu6B7979o+v3kX6ZB+k3kNhP08wH82I4eJKoenN/0iCT7ALoG3ysEJf18+HEysSnniLMJr8R1pYF2QRFlqaDv3Mqyp7ipxYkt4ebMCgE7aDzT6OrfpyPowObpdjSMTUXpcwIcH8mIZCWFmyfF675zEeE0e+dHKkL1rPeCI7rr7Bqc5+1DS5YM54fk8xQwIDAQAB").put("auth-server-url", "http://localhost:9000/auth").put("ssl-required", "external").put("resource", "frontend").put("credentials", new io.vertx.core.json.JsonObject().put("secret", "2fbf5e18-b923-4a83-9657-b4ebd5317f60"))
+// you would get this config from the keycloak admin console
+var keycloakJson = new io.vertx.core.json.JsonObject().put("realm", "master").put("realm-public-key", "MIIBIjANBgkqhk...wIDAQAB").put("auth-server-url", "http://localhost:9000/auth").put("ssl-required", "external").put("resource", "frontend").put("credentials", new io.vertx.core.json.JsonObject().put("secret", "2fbf5e18-b923-4a83-9657-b4ebd5317f60"))
 
 // Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.createKeycloak(vertx, OAuth2FlowType.PASSWORD, keycloakJson)
+var oauth2 = KeycloakAuth.create(vertx, OAuth2FlowType.PASSWORD, keycloakJson)
 
 // first get a token (authenticate)
 oauth2.getTokenFuture(new io.vertx.core.json.JsonObject().put("username", "user").put("password", "secret")).onComplete{
@@ -425,5 +327,66 @@ var idToken = KeycloakHelper.idToken(principal)
 // you can also retrieve some properties directly from the Keycloak principal
 // e.g. `preferred_username`
 var username = KeycloakHelper.preferredUsername(principal)
+
+----
+
+==== Google Server to Server
+
+The provider also supports Server to Server or the RFC7523 extension. This is a feature present on Google with their
+service account.
+
+=== Token Introspection
+
+Tokens can be introspected in order to assert that they are still valid. Although there is RFC7660 for this purpose
+not many providers implement it. Instead there are variations also known as `TokenInfo` end points. The OAuth2
+provider will accept both end points as a configuration. Currently we are known to work with `Google` and `Keycloak`.
+
+Token introspection assumes that tokens are opaque, so they need to be validated on the provider server. Every time a
+token is validated it requires a round trip to the provider. Introspection can be performed at the OAuth2 level or at
+the User level:
+
+[source,scala]
+----
+import scala.util.Failure
+import scala.util.Success
+// OAuth2Auth level
+oauth2.introspectTokenFuture("opaque string").onComplete{
+  case Success(result) => {
+    // token is valid!
+    var accessToken = result
+  }
+  case Failure(cause) => println("Failure")
+}
+
+// User level
+token.introspectFuture().onComplete{
+  case Success(result) => {
+    // Token is valid!
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Verifying JWT tokens
+
+We've just covered how to introspect a token however when dealing with JWT tokens one can reduce the amount of trips
+to the provider server thus enhancing your overall response times. In this case tokens will be verified using the
+JWT protocol at your application side only. Verifying JWT tokens is cheaper and offers better performance, however
+due to the stateless nature of JWTs it is not possible to know if a user is logged out and a token is invalid. For
+this specific case one needs to use the token introspection if the provider supports it.
+
+[source,scala]
+----
+import scala.util.Failure
+import scala.util.Success
+// OAuth2Auth level
+oauth2.decodeTokenFuture("jwt-token").onComplete{
+  case Success(result) => {
+    // token is valid!
+    var accessToken = result
+  }
+  case Failure(cause) => println("Failure")
+}
 
 ----

@@ -35,6 +35,9 @@ public class ResultSetConverter {
       });
       obj.setColumnNames(list);
     }
+    if (json.getValue("next") instanceof JsonObject) {
+      obj.setNext(new io.vertx.ext.sql.ResultSet((JsonObject)json.getValue("next")));
+    }
     if (json.getValue("output") instanceof JsonArray) {
       obj.setOutput(((JsonArray)json.getValue("output")).copy());
     }
@@ -57,6 +60,9 @@ public class ResultSetConverter {
               stream().
               map(item -> item).
               collect(java.util.stream.Collectors.toList())));
+    }
+    if (obj.getNext() != null) {
+      json.put("next", obj.getNext().toJson());
     }
     json.put("numColumns", obj.getNumColumns());
     json.put("numRows", obj.getNumRows());

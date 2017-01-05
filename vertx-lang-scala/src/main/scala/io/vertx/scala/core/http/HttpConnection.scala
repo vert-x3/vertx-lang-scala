@@ -161,13 +161,13 @@ class HttpConnection(private val _asJava: Object) {
   }
 
 //future methods
-  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+    def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
+    def pingFuture(data: Buffer):scala.concurrent.Future[Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
     asJava.asInstanceOf[JHttpConnection].ping(data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
     promiseAndHandler._2.future

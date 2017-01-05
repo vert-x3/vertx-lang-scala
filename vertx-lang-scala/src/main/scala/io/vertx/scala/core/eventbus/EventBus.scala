@@ -119,13 +119,13 @@ class EventBus(private val _asJava: Object)
   }
 
 //future methods
-  def sendFuture[T:TypeTag](address: String,message: AnyRef):scala.concurrent.Future[Message[T]] = {
+    def sendFuture[T:TypeTag](address: String,message: AnyRef):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => if (x == null) null.asInstanceOf[Message[T]] else Message[T](x))
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def sendFuture[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[T]] = {
+    def sendFuture[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => if (x == null) null.asInstanceOf[Message[T]] else Message[T](x))
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

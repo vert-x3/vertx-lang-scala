@@ -16,198 +16,124 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   * A handler for serving static resources from the file system or classpath.
   */
-class StaticHandler(private val _asJava: JStaticHandler) 
+class StaticHandler(private val _asJava: Object) 
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JStaticHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-  }
-
-  /**
-    * Enable/Disable access to the root of the filesystem
-    * @param allowRootFileSystemAccess whether root access is allowed
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean): StaticHandler = {
-    _asJava.setAllowRootFileSystemAccess(allowRootFileSystemAccess)
+//cached methods
+//fluent methods
+  def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setAllowRootFileSystemAccess(allowRootFileSystemAccess.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set the web root
-    * @param webRoot the web root
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setWebRoot(webRoot: String): StaticHandler = {
-    _asJava.setWebRoot(webRoot)
+  def setWebRoot(webRoot: String):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setWebRoot(webRoot.asInstanceOf[java.lang.String])
     this
   }
 
-  /**
-    * Set whether files are read-only and will never change
-    * @param readOnly whether files are read-only
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setFilesReadOnly(readOnly: Boolean): StaticHandler = {
-    _asJava.setFilesReadOnly(readOnly)
+  def setFilesReadOnly(readOnly: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setFilesReadOnly(readOnly.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set value for max age in caching headers
-    * @param maxAgeSeconds maximum time for browser to cache, in seconds
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setMaxAgeSeconds(maxAgeSeconds: Long): StaticHandler = {
-    _asJava.setMaxAgeSeconds(maxAgeSeconds)
+  def setMaxAgeSeconds(maxAgeSeconds: Long):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setMaxAgeSeconds(maxAgeSeconds.asInstanceOf[java.lang.Long])
     this
   }
 
-  /**
-    * Set whether cache header handling is enabled
-    * @param enabled true if enabled
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setCachingEnabled(enabled: Boolean): StaticHandler = {
-    _asJava.setCachingEnabled(enabled)
+  def setCachingEnabled(enabled: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setCachingEnabled(enabled.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set whether directory listing is enabled
-    * @param directoryListing true if enabled
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setDirectoryListing(directoryListing: Boolean): StaticHandler = {
-    _asJava.setDirectoryListing(directoryListing)
+  def setDirectoryListing(directoryListing: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setDirectoryListing(directoryListing.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set whether hidden files should be served
-    * @param includeHidden true if hidden files should be served
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setIncludeHidden(includeHidden: Boolean): StaticHandler = {
-    _asJava.setIncludeHidden(includeHidden)
+  def setIncludeHidden(includeHidden: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setIncludeHidden(includeHidden.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set the server cache entry timeout when caching is enabled
-    * @param timeout the timeout, in ms
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setCacheEntryTimeout(timeout: Long): StaticHandler = {
-    _asJava.setCacheEntryTimeout(timeout)
+  def setCacheEntryTimeout(timeout: Long):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setCacheEntryTimeout(timeout.asInstanceOf[java.lang.Long])
     this
   }
 
-  /**
-    * Set the index page
-    * @param indexPage the index page
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setIndexPage(indexPage: String): StaticHandler = {
-    _asJava.setIndexPage(indexPage)
+  def setIndexPage(indexPage: String):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setIndexPage(indexPage.asInstanceOf[java.lang.String])
     this
   }
 
-  /**
-    * Set the max cache size, when caching is enabled
-    * @param maxCacheSize the max cache size
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setMaxCacheSize(maxCacheSize: Int): StaticHandler = {
-    _asJava.setMaxCacheSize(maxCacheSize)
+  def setMaxCacheSize(maxCacheSize: Int):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-  /**
-    * Set whether async filesystem access should always be used
-    * @param alwaysAsyncFS true for always async FS access
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setAlwaysAsyncFS(alwaysAsyncFS: Boolean): StaticHandler = {
-    _asJava.setAlwaysAsyncFS(alwaysAsyncFS)
+  def setAlwaysAsyncFS(alwaysAsyncFS: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setAlwaysAsyncFS(alwaysAsyncFS.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set whether async/sync filesystem tuning should enabled
-    * @param enableFSTuning true to enabled FS tuning
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setEnableFSTuning(enableFSTuning: Boolean): StaticHandler = {
-    _asJava.setEnableFSTuning(enableFSTuning)
+  def setEnableFSTuning(enableFSTuning: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setEnableFSTuning(enableFSTuning.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set the max serve time in ns, above which serves are considered slow
-    * @param maxAvgServeTimeNanoSeconds max serve time, in ns
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long): StaticHandler = {
-    _asJava.setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds)
+  def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds.asInstanceOf[java.lang.Long])
     this
   }
 
-  /**
-    * Set the directory template to be used when directory listing
-    * @param directoryTemplate the directory template
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setDirectoryTemplate(directoryTemplate: String): StaticHandler = {
-    _asJava.setDirectoryTemplate(directoryTemplate)
+  def setDirectoryTemplate(directoryTemplate: String):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setDirectoryTemplate(directoryTemplate.asInstanceOf[java.lang.String])
     this
   }
 
-  /**
-    * Set whether range requests (resumable downloads; media streaming) should be enabled.
-    * @param enableRangeSupport true to enable range support
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setEnableRangeSupport(enableRangeSupport: Boolean): StaticHandler = {
-    _asJava.setEnableRangeSupport(enableRangeSupport)
+  def setEnableRangeSupport(enableRangeSupport: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setEnableRangeSupport(enableRangeSupport.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  /**
-    * Set whether vary header should be sent with response.
-    * @param varyHeader true to sent vary header
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setSendVaryHeader(varyHeader: Boolean): StaticHandler = {
-    _asJava.setSendVaryHeader(varyHeader)
+  def setSendVaryHeader(varyHeader: Boolean):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setSendVaryHeader(varyHeader.asInstanceOf[java.lang.Boolean])
     this
   }
 
+//default methods
+//basic methods
+  override def handle(arg0: RoutingContext):Unit = {
+    asJava.asInstanceOf[JStaticHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  }
+
+//future methods
 }
 
-object StaticHandler {
+  object StaticHandler{
+    def apply(asJava: JStaticHandler) = new StaticHandler(asJava)  
+  //static methods
+    def create():StaticHandler = {
+      StaticHandler(JStaticHandler.create())
+    }
 
-  def apply(_asJava: JStaticHandler): StaticHandler =
-    new StaticHandler(_asJava)
+    def create(root: String):StaticHandler = {
+      StaticHandler(JStaticHandler.create(root.asInstanceOf[java.lang.String]))
+    }
 
-  def create(): StaticHandler = {
-    StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create())
   }
-
-  def create(root: String): StaticHandler = {
-    StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create(root))
-  }
-
-}

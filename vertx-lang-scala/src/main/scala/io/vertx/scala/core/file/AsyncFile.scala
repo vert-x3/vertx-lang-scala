@@ -147,25 +147,25 @@ class AsyncFile(private val _asJava: Object)
   }
 
 //future methods
-  def closeFuture():scala.concurrent.Future[Unit] = {
+    def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncFile].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
+    def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
+    def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
     asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def flushFuture():scala.concurrent.Future[Unit] = {
+    def flushFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JAsyncFile].flush(promiseAndHandler._1)
     promiseAndHandler._2.future

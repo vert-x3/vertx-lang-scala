@@ -16,27 +16,27 @@
 
 package io.vertx.scala.ext.mongo
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mongo.{FindOptions => JFindOptions}
 import io.vertx.core.json.JsonObject
 
 /**
   * Options used to configure find operations.
   */
+class FindOptions(private val _asJava: JFindOptions) {
 
-class FindOptions(val asJava: JFindOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the fields
     */
-  def setFields(value: JsonObject) = {
+  def setFields(value: io.vertx.core.json.JsonObject) = {
     asJava.setFields(value)
     this
   }
-  def getFields = {
+  def getFields: io.vertx.core.json.JsonObject = {
     asJava.getFields()
   }
 
@@ -47,8 +47,8 @@ class FindOptions(val asJava: JFindOptions) {
     asJava.setLimit(value)
     this
   }
-  def getLimit = {
-    asJava.getLimit()
+  def getLimit: Int = {
+    asJava.getLimit().asInstanceOf[Int]
   }
 
   /**
@@ -58,18 +58,18 @@ class FindOptions(val asJava: JFindOptions) {
     asJava.setSkip(value)
     this
   }
-  def getSkip = {
-    asJava.getSkip()
+  def getSkip: Int = {
+    asJava.getSkip().asInstanceOf[Int]
   }
 
   /**
     * Set the sort document
     */
-  def setSort(value: JsonObject) = {
+  def setSort(value: io.vertx.core.json.JsonObject) = {
     asJava.setSort(value)
     this
   }
-  def getSort = {
+  def getSort: io.vertx.core.json.JsonObject = {
     asJava.getSort()
   }
 }
