@@ -44,7 +44,6 @@ class BridgeEvent(private val _asJava: Object)
   private var cached_2:io.vertx.core.json.JsonObject = _
   private var cached_3:SockJSSocket = _
 
-//cached methods
   override def completer():Handler[AsyncResult[Boolean]] = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JBridgeEvent].completer()
@@ -53,6 +52,9 @@ class BridgeEvent(private val _asJava: Object)
     cached_0
   }
 
+  /**
+    * @return the type of the event
+    */
   def `type`():io.vertx.ext.web.handler.sockjs.BridgeEventType = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JBridgeEvent].`type`()
@@ -61,6 +63,9 @@ class BridgeEvent(private val _asJava: Object)
     cached_1
   }
 
+  /**
+    * Use [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#getRawMessage]] instead, will be removed in 3.3
+    */
   def rawMessage():io.vertx.core.json.JsonObject = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JBridgeEvent].rawMessage()
@@ -69,6 +74,10 @@ class BridgeEvent(private val _asJava: Object)
     cached_2
   }
 
+  /**
+    * Get the SockJSSocket instance corresponding to the event
+    * @return the SockJSSocket instance
+    */
   def socket():SockJSSocket = {
     if(cached_3 == null) {
       var tmp = asJava.asInstanceOf[JBridgeEvent].socket()
@@ -77,34 +86,34 @@ class BridgeEvent(private val _asJava: Object)
     cached_3
   }
 
-//fluent methods
   override def setHandler(arg0: Handler[AsyncResult[Boolean]]):Future[Boolean] = {
     asJava.asInstanceOf[JBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
+  /**
+    * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
+    * no message involved.
+    * @param message the raw message
+    * @return this reference, so it can be used fluently
+    */
   def setRawMessage(message: io.vertx.core.json.JsonObject):BridgeEvent = {
     asJava.asInstanceOf[JBridgeEvent].setRawMessage(message)
     this
   }
 
-//default methods
-  //io.vertx.core.Future
   override def compose[U:TypeTag](handler: Handler[Boolean],next: Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].compose[Object]({x: java.lang.Boolean => handler.handle(x.asInstanceOf[Boolean])},next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
-  //io.vertx.core.Future
   override def compose[U:TypeTag](mapper: Boolean => Future[U]):Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].compose[Object]({x: java.lang.Boolean => mapper(x.asInstanceOf[Boolean]).asJava.asInstanceOf[JFuture[Object]]}))
   }
 
-  //io.vertx.core.Future
   override def map[U:TypeTag](mapper: Boolean => U):Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].map[Object]({x: java.lang.Boolean => toJava[U](mapper(x.asInstanceOf[Boolean]))}))
   }
 
-//basic methods
   override def complete(arg0: Boolean):Unit = {
     asJava.asInstanceOf[JBridgeEvent].complete(arg0.asInstanceOf[java.lang.Boolean])
   }
@@ -113,11 +122,16 @@ class BridgeEvent(private val _asJava: Object)
     asJava.asInstanceOf[JBridgeEvent].result().asInstanceOf[Boolean]
   }
 
+  /**
+    * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
+    * no message involved. If the returned message is modified, [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#setRawMessage]] should be called with the
+    * new message.
+    * @return the raw JSON message for the event
+    */
   def getRawMessage():io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JBridgeEvent].getRawMessage()
   }
 
-//future methods
   override   def setFuture():scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JBridgeEvent].setHandler(promiseAndHandler._1)
@@ -126,7 +140,6 @@ class BridgeEvent(private val _asJava: Object)
 
 }
 
-  object BridgeEvent{
-    def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)  
-  //static methods
-  }
+object BridgeEvent{
+  def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)  
+}

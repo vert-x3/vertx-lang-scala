@@ -43,52 +43,84 @@ class SessionHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Set the session timeout
+    * @param timeout the timeout, in ms.
+    * @return a reference to this, so the API can be used fluently
+    */
   def setSessionTimeout(timeout: Long):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionTimeout(timeout.asInstanceOf[java.lang.Long])
     this
   }
 
+  /**
+    * Set whether a nagging log warning should be written if the session handler is accessed over HTTP, not
+    * HTTPS
+    * @param nag true to nag
+    * @return a reference to this, so the API can be used fluently
+    */
   def setNagHttps(nag: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
   }
 
+  /**
+    * Sets whether the 'secure' flag should be set for the session cookie. When set this flag instructs browsers to only
+    * send the cookie over HTTPS. Note that this will probably stop your sessions working if used without HTTPS (e.g. in development).
+    * @param secure true to set the secure flag on the cookie
+    * @return a reference to this, so the API can be used fluently
+    */
   def setCookieSecureFlag(secure: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieSecureFlag(secure.asInstanceOf[java.lang.Boolean])
     this
   }
 
+  /**
+    * Sets whether the 'HttpOnly' flag should be set for the session cookie. When set this flag instructs browsers to
+    * prevent Javascript access to the the cookie. Used as a line of defence against the most common XSS attacks.
+    * @param httpOnly true to set the HttpOnly flag on the cookie
+    * @return a reference to this, so the API can be used fluently
+    */
   def setCookieHttpOnlyFlag(httpOnly: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieHttpOnlyFlag(httpOnly.asInstanceOf[java.lang.Boolean])
     this
   }
 
+  /**
+    * Set the session cookie name
+    * @param sessionCookieName the session cookie name
+    * @return a reference to this, so the API can be used fluently
+    */
   def setSessionCookieName(sessionCookieName: String):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionCookieName(sessionCookieName.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set expected session id minimum length.
+    * @param minLength the session id minimal length
+    * @return a reference to this, so the API can be used fluently
+    */
   def setMinLength(minLength: Int):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setMinLength(minLength.asInstanceOf[java.lang.Integer])
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object SessionHandler{
-    def apply(asJava: JSessionHandler) = new SessionHandler(asJava)  
-  //static methods
-    def create(sessionStore: SessionStore):SessionHandler = {
-      SessionHandler(JSessionHandler.create(sessionStore.asJava.asInstanceOf[JSessionStore]))
-    }
-
+object SessionHandler{
+  def apply(asJava: JSessionHandler) = new SessionHandler(asJava)  
+  /**
+    * Create a session handler
+    * @param sessionStore the session store
+    * @return the handler
+    */
+  def create(sessionStore: SessionStore):SessionHandler = {
+    SessionHandler(JSessionHandler.create(sessionStore.asJava.asInstanceOf[JSessionStore]))
   }
+
+}

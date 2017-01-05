@@ -57,7 +57,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String,message: AnyRef):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],toJava[Object](message))
+    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],message)
     this
   }
 
@@ -69,7 +69,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send[T:TypeTag](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
     this
   }
 
@@ -81,7 +81,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava)
+    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],message,options.asJava)
     this
   }
 
@@ -94,7 +94,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
     this
   }
 
@@ -106,7 +106,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String,message: AnyRef):EventBus = {
-    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],toJava[Object](message))
+    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],message)
     this
   }
 
@@ -118,7 +118,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
-    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava)
+    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],message,options.asJava)
     this
   }
 
@@ -229,7 +229,7 @@ class EventBus(private val _asJava: Object)
    */
     def sendFuture[T:TypeTag](address: String,message: AnyRef):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => if (x == null) null.asInstanceOf[Message[T]] else Message[T](x))
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),promiseAndHandler._1)
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -243,7 +243,7 @@ class EventBus(private val _asJava: Object)
    */
     def sendFuture[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => if (x == null) null.asInstanceOf[Message[T]] else Message[T](x))
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],toJava[Object](message),options.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

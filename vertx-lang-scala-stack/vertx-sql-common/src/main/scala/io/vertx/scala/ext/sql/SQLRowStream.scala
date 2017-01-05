@@ -42,8 +42,6 @@ class SQLRowStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(arg0: Handler[Throwable]):ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => arg0.handle(x)})
     this
@@ -69,29 +67,47 @@ class SQLRowStream(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
+  /**
+    * Will convert the column name to the json array index.
+    * @param name the column name
+    * @return the json array index
+    */
   def column(name: String):Int = {
     asJava.asInstanceOf[JSQLRowStream].column(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
+  /**
+    * Event handler when a resultset is closed. This is useful to request for more results.
+    */
   def resultSetClosedHandler(handler: Handler[Unit]):SQLRowStream = {
     SQLRowStream(asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)}))
   }
 
+  /**
+    * Request for more results if available
+    */
   def moreResults():Unit = {
     asJava.asInstanceOf[JSQLRowStream].moreResults()
   }
 
+  /**
+    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
+    */
   def close():Unit = {
     asJava.asInstanceOf[JSQLRowStream].close()
   }
 
+  /**
+    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
+    */
   def close(handler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
-//future methods
+ /**
+   * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
+   * @return called when the stream/underlying cursor(s) is(are) closed
+   */
     def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
     asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
@@ -100,7 +116,6 @@ class SQLRowStream(private val _asJava: Object)
 
 }
 
-  object SQLRowStream{
-    def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)  
-  //static methods
-  }
+object SQLRowStream{
+  def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)  
+}

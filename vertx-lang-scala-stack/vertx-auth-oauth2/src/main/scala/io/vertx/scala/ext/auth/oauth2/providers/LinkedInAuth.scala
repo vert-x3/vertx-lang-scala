@@ -36,22 +36,27 @@ class LinkedInAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
-  object LinkedInAuth{
-    def apply(asJava: JLinkedInAuth) = new LinkedInAuth(asJava)  
-  //static methods
-    def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
-      OAuth2Auth(JLinkedInAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
-    }
-
-    def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
-      OAuth2Auth(JLinkedInAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
-    }
-
+object LinkedInAuth{
+  def apply(asJava: JLinkedInAuth) = new LinkedInAuth(asJava)  
+  /**
+    * Create a OAuth2Auth provider for LinkedIn
+    * @param clientId the client id given to you by LinkedIn
+    * @param clientSecret the client secret given to you by LinkedIn
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+    OAuth2Auth(JLinkedInAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
+
+  /**
+    * Create a OAuth2Auth provider for LinkedIn
+    * @param clientId the client id given to you by LinkedIn
+    * @param clientSecret the client secret given to you by LinkedIn
+    * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+    OAuth2Auth(JLinkedInAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
+  }
+
+}

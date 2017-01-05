@@ -12,12 +12,14 @@
     } else if (type.kind == CLASS_THROWABLE) {
       return name;
     } else if (type.kind == CLASS_OBJECT) {
-      var ret = 'toScala[' + type.name + '](' + name + ')';
-      if(nullable) {
-        ret = 'scala.Option(' + ret + ')';
+      var ret = type.name;
+      if(type.isVariable) {
+        var ret = 'toScala[' + type.name + '](' + name + ')';
+        if(nullable) {
+          ret = 'scala.Option(' + ret + ')';
+        }
+        return ret;
       }
-      return ret;
-      return ret;
     } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
       return name;
     }
@@ -105,10 +107,12 @@
       return ret;
     } else if (type.kind == CLASS_OBJECT) {
       var ret = name;
-      if(nullable)
-        ret = name + '.map(x => toJava['+type.simpleName+'](x)).getOrElse(null)';
-      else
-        ret = 'toJava['+type.simpleName+'](' + name + ')';
+      if(type.isVariable) {
+        if(nullable)
+          ret = name + '.map(x => toJava['+type.simpleName+'](x)).getOrElse(null)';
+        else
+          ret = 'toJava['+type.simpleName+'](' + name + ')';
+      }
       return ret;
     } else if (type.kind == CLASS_CLASS_TYPE) {
       var ret = 'toJavaClass('+name+')';

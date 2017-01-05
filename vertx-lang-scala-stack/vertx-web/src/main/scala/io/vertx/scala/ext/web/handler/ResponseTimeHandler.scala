@@ -35,22 +35,20 @@ class ResponseTimeHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JResponseTimeHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object ResponseTimeHandler{
-    def apply(asJava: JResponseTimeHandler) = new ResponseTimeHandler(asJava)  
-  //static methods
-    def create():ResponseTimeHandler = {
-      ResponseTimeHandler(JResponseTimeHandler.create())
-    }
-
+object ResponseTimeHandler{
+  def apply(asJava: JResponseTimeHandler) = new ResponseTimeHandler(asJava)  
+  /**
+    * Create a handler
+    * @return the handler
+    */
+  def create():ResponseTimeHandler = {
+    ResponseTimeHandler(JResponseTimeHandler.create())
   }
+
+}

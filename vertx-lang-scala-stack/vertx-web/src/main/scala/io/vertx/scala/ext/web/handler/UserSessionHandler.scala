@@ -43,22 +43,21 @@ class UserSessionHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JUserSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object UserSessionHandler{
-    def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)  
-  //static methods
-    def create(authProvider: AuthProvider):UserSessionHandler = {
-      UserSessionHandler(JUserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
-    }
-
+object UserSessionHandler{
+  def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)  
+  /**
+    * Create a new handler
+    * @param authProvider The auth provider to use
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider):UserSessionHandler = {
+    UserSessionHandler(JUserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
+
+}

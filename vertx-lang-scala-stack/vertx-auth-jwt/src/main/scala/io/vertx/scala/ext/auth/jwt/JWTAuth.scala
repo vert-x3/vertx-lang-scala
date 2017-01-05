@@ -41,22 +41,28 @@ class JWTAuth(private val _asJava: Object)
     extends AuthProvider(_asJava) {
 
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Generate a new JWT token.
+    * @param claims Json with user defined claims for a list of official claims
+    * @param options extra options for the generationsee <a href="../../../../../../../../cheatsheet/JWTOptions.html">JWTOptions</a>
+    * @return JWT encoded token
+    */
   def generateToken(claims: io.vertx.core.json.JsonObject,options: JWTOptions):String = {
     asJava.asInstanceOf[JJWTAuth].generateToken(claims,options.asJava).asInstanceOf[String]
   }
 
-//future methods
 }
 
-  object JWTAuth{
-    def apply(asJava: JJWTAuth) = new JWTAuth(asJava)  
-  //static methods
-    def create(vertx: Vertx,config: io.vertx.core.json.JsonObject):JWTAuth = {
-      JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
-    }
-
+object JWTAuth{
+  def apply(asJava: JJWTAuth) = new JWTAuth(asJava)  
+  /**
+    * Create a JWT auth provider
+    * @param vertx the Vertx instance
+    * @param config the config
+    * @return the auth provider
+    */
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject):JWTAuth = {
+    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
   }
+
+}

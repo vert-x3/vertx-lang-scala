@@ -36,46 +36,69 @@ class BodyHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Set the maximum body size -1 means unlimited
+    * @param bodyLimit the max size
+    * @return reference to this for fluency
+    */
   def setBodyLimit(bodyLimit: Long):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setBodyLimit(bodyLimit.asInstanceOf[java.lang.Long])
     this
   }
 
+  /**
+    * Set the uploads directory to use
+    * @param uploadsDirectory the uploads directory
+    * @return reference to this for fluency
+    */
   def setUploadsDirectory(uploadsDirectory: String):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setUploadsDirectory(uploadsDirectory.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set whether form attributes will be added to the request parameters
+    * @param mergeFormAttributes true if they should be merged
+    * @return reference to this for fluency
+    */
   def setMergeFormAttributes(mergeFormAttributes: Boolean):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setMergeFormAttributes(mergeFormAttributes.asInstanceOf[java.lang.Boolean])
     this
   }
 
+  /**
+    * Set whether uploaded files should be removed after handling the request
+    * @param deleteUploadedFilesOnEnd true if uploaded files should be removed after handling the request
+    * @return reference to this for fluency
+    */
   def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd.asInstanceOf[java.lang.Boolean])
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JBodyHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object BodyHandler{
-    def apply(asJava: JBodyHandler) = new BodyHandler(asJava)  
-  //static methods
-    def create():BodyHandler = {
-      BodyHandler(JBodyHandler.create())
-    }
-
-    def create(uploadDirectory: String):BodyHandler = {
-      BodyHandler(JBodyHandler.create(uploadDirectory.asInstanceOf[java.lang.String]))
-    }
-
+object BodyHandler{
+  def apply(asJava: JBodyHandler) = new BodyHandler(asJava)  
+  /**
+    * Create a body handler with defaults
+    * @return the body handler
+    */
+  def create():BodyHandler = {
+    BodyHandler(JBodyHandler.create())
   }
+
+  /**
+    * Create a body handler and use the given upload directory.
+    * @param uploadDirectory the uploads directory
+    * @return the body handler
+    */
+  def create(uploadDirectory: String):BodyHandler = {
+    BodyHandler(JBodyHandler.create(uploadDirectory.asInstanceOf[java.lang.String]))
+  }
+
+}

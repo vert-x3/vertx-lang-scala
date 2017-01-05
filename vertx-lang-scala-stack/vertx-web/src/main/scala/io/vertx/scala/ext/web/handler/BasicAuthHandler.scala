@@ -37,36 +37,51 @@ class BasicAuthHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JBasicAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object BasicAuthHandler{
-    def apply(asJava: JBasicAuthHandler) = new BasicAuthHandler(asJava)  
-  //static methods
-    def create(authProvider: AuthProvider):AuthHandler = {
-      AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
-    }
-
-    def create(authProvider: AuthProvider,realm: String):AuthHandler = {
-      AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
-    }
-
+object BasicAuthHandler{
+  def apply(asJava: JBasicAuthHandler) = new BasicAuthHandler(asJava)  
+  /**
+    * Create a basic auth handler
+    * @param authProvider the auth provider to use
+    * @return the auth handler
+    */
+  def create(authProvider: AuthProvider):AuthHandler = {
+    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
+
+  /**
+    * Create a basic auth handler, specifying realm
+    * @param authProvider the auth service to use
+    * @param realm the realm to use
+    * @return the auth handler
+    */
+  def create(authProvider: AuthProvider,realm: String):AuthHandler = {
+    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
+  }
+
+}
