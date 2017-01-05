@@ -71,6 +71,6 @@ class FileProps(private val _asJava: Object) {
 }
 
   object FileProps{
-    def apply(asJava: Object) = new FileProps(asJava)  
+    def apply(asJava: JFileProps) = new FileProps(asJava)  
   //static methods
   }

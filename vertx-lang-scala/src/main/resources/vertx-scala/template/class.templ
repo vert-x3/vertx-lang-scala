@@ -1,10 +1,13 @@
-@comment{"# Template for Scala code generation"}
+@comment{"# Template for DataObject code generation"}
 
 @comment{"# Defines a few helper functions"}
-@includeNamed{'common.templ'}
-@includeNamed{'scala-helpers.templ'}
 @includeNamed{'scala-doc.templ'}
-
+@includeNamed{'scala-imports.templ'}
+@includeNamed{'scala-types.templ'}
+@includeNamed{'scala-methods.templ'}
+@code{
+  var className = helper.getSimpleName(type.name);
+}
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
  *\n
@@ -21,80 +24,18 @@
  * under the License.\n
  */\n\n
 
-@code{var packageName = type.raw.translatePackageName("scala");}
-package @{packageName}\n
+package @{type.raw.translatePackageName("scala")}\n
 \n
-
-@comment{"# Generate the imports"}
+import scala.compat.java8.FunctionConverters._\n
 import io.vertx.lang.scala.HandlerOps._\n
 import io.vertx.lang.scala.Converter._\n
 import scala.reflect.runtime.universe._\n
-import scala.compat.java8.FunctionConverters._\n
-import scala.collection.JavaConverters._\n
-import @{convertTypeToAliasedType(type)}\n
-@foreach{importedType : importedTypes}
-	@if{importedType.name.contains(".impl.")}
-	@else{importedType.kind == CLASS_API}
-		@if{!ifacePackageName.equals(importedType.packageName)}
-import @{convertTypeToAliasedType(importedType)}\n
-			@if{packageName != importedType.raw.translatePackageName("scala")}
-import @{importedType.raw.translateName("scala")}\n
-			@end{}
-		@else{importedType != type}
-import @{convertTypeToAliasedType(importedType)}\n
-		@end{}
-	@else{importedType.kind == CLASS_DATA_OBJECT}
-import @{convertTypeToAliasedType(importedType)}\n
-		@if{packageName != importedType.raw.translatePackageName("scala")}
-import @{importedType.raw.translateName("scala")}\n
-		@end{}
-	@else{importedType.kind == CLASS_JSON_OBJECT ||
-				importedType.kind == CLASS_JSON_ARRAY ||
-				importedType.kind == CLASS_ENUM}
-import @{importedType.raw}\n
-	@else{importedType.kind != CLASS_ASYNC_RESULT &&
-				!importedType.packageName.equals("java.lang") &&
-				importedType.kind != CLASS_HANDLER &&
-				importedType.kind != CLASS_LIST &&
-				importedType.kind != CLASS_SET &&
-				importedType.kind != CLASS_MAP &&
-				importedType != type}
-import @{convertTypeToAliasedType(importedType)}\n
-		@if{packageName != importedType.raw.translatePackageName("scala") && !packageName.startsWith("io.vertx")}
-import @{importedType.raw.translateName("scala")}\n
-		@end{}
-	@end{}
+import io.vertx.lang.scala.Converter._\n
+@comment{"# Generate the imports"}
+@foreach{importedType : generateImports(type, importedTypes, methods)}
+import @{importedType}\n
 @end{}
 \n
-
-@comment{'the current index of the cache'}
-@code{cacheDecls=new java.util.ArrayList()}
-
-@comment{"# Generate the Class or Interface/Trait"}
-@code{
-  def getVarianceType(t) {
-    return t;
-  }
-
-  def getClassNameWithTypeInfo(c, typeName) {
-    var genericType = helper.getGenericType(c);
-    if (genericType != null) {
-      return typeName + '[' + getVarianceType(genericType) + ']';
-    } else {
-      return typeName;
-    }
-  }
-
-  def getClassName(c) {
-    var typeName = helper.getSimpleName(helper.getNonGenericType(c));
-    return getClassNameWithTypeInfo(c, typeName);
-  }
-
-  def toScalaGeneric(c) {
-    var typeName = helper.getNonGenericType(c);
-    return getClassNameWithTypeInfo(c, typeName);
-  }
-}
 
 @if{doc != null}
 /**\n
@@ -102,66 +43,51 @@ import @{importedType.raw.translateName("scala")}\n
   */\n
 @end{}
 @if{concrete}
-	class @{writeCLassType(type);}(private val _asJava: Object)
+	class @{className}@{assembleTypeParams(typeParams, true)}(private val _asJava: Object)
 @else{}
-	trait @{writeType(type);}
+	trait @{className}@{assembleTypeParams(typeParams, false)}
 @end{}
 
 @comment{"## Inheritance"}
-@foreach{superType:superTypes}
-//@{superType.name}\n
-@end{}
-@if{abstractSuperTypes.size() > 0}
-	 \n    extends @foreach{abstractSuperType : abstractSuperTypes}@{toScalaType(abstractSuperType);}@end{' \n    with '}
+@if{!superTypes.isEmpty}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
 @else{type.isHandler}
-	 \n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg);}]
+	 \n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false);}]
 @end{}
-
  {\n
 \n
 
 @if{concrete}
-	@includeNamed{'class-concrete.templ'; indentation=''}
-@else{}
-	@includeNamed{'class-trait.templ'}
-@end{}
-}\n
-\n
-@if{concrete}
-	object @{type.raw.simpleName} {\n
+	@includeNamed{'class-body.templ'}
 	\n
-  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateTypeWithVariance(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
-	    new @{toScalaType(type);}(_asJava)\n
-	\n
+  object @{className}{\n
+    def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
+  \n
+  //static methods\n
 	@foreach{method : staticMethods}
-	@if{shouldMethodBeIncluded(method, staticMethods)}
-	@if{shouldMethodReturnAFuture(method)}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
-		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toScalaType(typeOfReturnedFuture(method))}](@{convertType(typeOfReturnedFuture(method))})\n
-			@{methodInvocation(type.raw.name, method, '    ');}\n
-		    promiseAndHandler._2.future\n
-	  }\n
-	@else{}
-	  def @{createNameForMethod(method)}@{writeTypeParamsWithVarianceAndTypeTag(method.typeParams)}(@{methodParams(method);}): @{returnTypeOf(method);} = {\n
-			@{methodInvocation(type.raw.name, method, '    ');}\n
-			@if{method.isFluent() && !shouldMethodReturnAFuture(method)}
-          this;
-      @end{}
-	  }\n
-	@end{}
+    def @{escapeIfKeyword(method.name)}
+	@{assembleTypeParams(method.typeParams, true)}
+	(
+		@foreach{param:method.params}
+			@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
+		@end{','}):@{toScalaType(method.returnType, false)} = {\n
+      @{invokeStaticMethod('J'+className, type, method)}\n
+    }\n
 	\n
 	@end{}
-	@end{}
-
-	}\n
+  }\n
 @else{}
-	object @{type.raw.simpleName} {\n
+	@includeNamed{'trait-body.templ'}
 	\n
-  def apply@{writeTypeParamsWithVarianceAndTypeTag(type.params);}(_asJava: @{writeDelegateType(type)}): @{toScalaType(type);}@{writeTypeParamsWithVariance(type.params);} =\n
-    new @{writeImplType(type)}(_asJava)\n
-		\n
-		  private class @{writeImplTypeWithTypeTag(type)}(private val _asJava: @{writeDelegateType()}) extends @{writeType(type)} {\n\n
-			@includeNamed{'class-concrete.templ'; indentation=''}
-		  }\n\n
-	}\n
+object @{className}{\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava)\n
+    private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
+    @includeNamed{'class-body.templ'}
+}\n
 @end{}
+
+
+
+
+
+

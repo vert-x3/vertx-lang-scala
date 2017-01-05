@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * Represents the result of an action that may, or may not, have occurred yet.
   * 
   */
-class Future[T:TypeTag](private val _asJava: Object, objectToT: Option[Object => T] = None) {
+class Future[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
   private var cached_0:Handler[AsyncResult[T]] = _
@@ -112,7 +112,7 @@ class Future[T:TypeTag](private val _asJava: Object, objectToT: Option[Object =>
 }
 
   object Future{
-    def apply[T:TypeTag](asJava: Object, objectToT: Option[Object => T] = None) = new Future[T](asJava, objectToT)  
+    def apply[T:TypeTag](asJava: JFuture[_]) = new Future[T](asJava)  
   //static methods
     def future[T:TypeTag]():Future[T] = {
       Future[T](JFuture.future[Object]())
