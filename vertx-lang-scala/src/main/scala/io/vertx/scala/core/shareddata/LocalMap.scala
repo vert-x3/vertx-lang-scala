@@ -36,100 +36,100 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * Get a value from the map
-   * @param key the key
-   * @return the value, or null if none
-   */
+  /**
+    * Get a value from the map
+    * @param key the key
+    * @return the value, or null if none
+    */
   def get(key: K):V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].get(toJava[K](key)))
   }
 
- /**
-   * Put an entry in the map
-   * @param key the key
-   * @param value the value
-   * @return return the old value, or null if none
-   */
+  /**
+    * Put an entry in the map
+    * @param key the key
+    * @param value the value
+    * @return return the old value, or null if none
+    */
   def put(key: K,value: V):V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].put(toJava[K](key),toJava[V](value)))
   }
 
- /**
-   * Remove an entry from the map
-   * @param key the key
-   * @return the old value
-   */
+  /**
+    * Remove an entry from the map
+    * @param key the key
+    * @return the old value
+    */
   def remove(key: K):V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].remove(toJava[K](key)))
   }
 
- /**
-   * Clear all entries in the map
-   */
+  /**
+    * Clear all entries in the map
+    */
   def clear():Unit = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].clear()
   }
 
- /**
-   * Get the size of the map
-   * @return the number of entries in the map
-   */
+  /**
+    * Get the size of the map
+    * @return the number of entries in the map
+    */
   def size():Int = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].size().asInstanceOf[Int]
   }
 
- /**
-   * @return true if there are zero entries in the map
-   */
+  /**
+    * @return true if there are zero entries in the map
+    */
   def isEmpty():Boolean = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].isEmpty().asInstanceOf[Boolean]
   }
 
- /**
-   * Put the entry only if there is no existing entry for that key
-   * @param key the key
-   * @param value the value
-   * @return the old value or null, if none
-   */
+  /**
+    * Put the entry only if there is no existing entry for that key
+    * @param key the key
+    * @param value the value
+    * @return the old value or null, if none
+    */
   def putIfAbsent(key: K,value: V):V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].putIfAbsent(toJava[K](key),toJava[V](value)))
   }
 
- /**
-   * Remove the entry only if there is an entry with the specified key and value
-   * @param key the key
-   * @param value the value
-   * @return true if removed
-   */
+  /**
+    * Remove the entry only if there is an entry with the specified key and value
+    * @param key the key
+    * @param value the value
+    * @return true if removed
+    */
   def removeIfPresent(key: K,value: V):Boolean = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].removeIfPresent(toJava[K](key),toJava[V](value)).asInstanceOf[Boolean]
   }
 
- /**
-   * Replace the entry only if there is an existing entry with the specified key and value
-   * @param key the key
-   * @param oldValue the old value
-   * @param newValue the new value
-   * @return true if removed
-   */
+  /**
+    * Replace the entry only if there is an existing entry with the specified key and value
+    * @param key the key
+    * @param oldValue the old value
+    * @param newValue the new value
+    * @return true if removed
+    */
   def replaceIfPresent(key: K,oldValue: V,newValue: V):Boolean = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].replaceIfPresent(toJava[K](key),toJava[V](oldValue),toJava[V](newValue)).asInstanceOf[Boolean]
   }
 
- /**
-   * Replace the entry only if there is an existing entry with the key
-   * @param key the key
-   * @param value the new value
-   * @return the old value
-   */
+  /**
+    * Replace the entry only if there is an existing entry with the key
+    * @param key the key
+    * @param value the new value
+    * @return the old value
+    */
   def replace(key: K,value: V):V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].replace(toJava[K](key),toJava[V](value)))
   }
 
- /**
-   * Close and release the map
-   */
+  /**
+    * Close and release the map
+    */
   def close():Unit = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].close()
   }

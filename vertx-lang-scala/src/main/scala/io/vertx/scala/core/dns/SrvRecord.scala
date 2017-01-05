@@ -30,51 +30,51 @@ class SrvRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * Returns the priority for this service record.
-   */
+  /**
+    * Returns the priority for this service record.
+    */
   def priority():Int = {
     asJava.asInstanceOf[JSrvRecord].priority().asInstanceOf[Int]
   }
 
- /**
-   * Returns the weight of this service record.
-   */
+  /**
+    * Returns the weight of this service record.
+    */
   def weight():Int = {
     asJava.asInstanceOf[JSrvRecord].weight().asInstanceOf[Int]
   }
 
- /**
-   * Returns the port the service is running on.
-   */
+  /**
+    * Returns the port the service is running on.
+    */
   def port():Int = {
     asJava.asInstanceOf[JSrvRecord].port().asInstanceOf[Int]
   }
 
- /**
-   * Returns the name for the server being queried.
-   */
+  /**
+    * Returns the name for the server being queried.
+    */
   def name():String = {
     asJava.asInstanceOf[JSrvRecord].name().asInstanceOf[String]
   }
 
- /**
-   * Returns the protocol for the service being queried (i.e. "_tcp").
-   */
+  /**
+    * Returns the protocol for the service being queried (i.e. "_tcp").
+    */
   def protocol():String = {
     asJava.asInstanceOf[JSrvRecord].protocol().asInstanceOf[String]
   }
 
- /**
-   * Returns the service's name (i.e. "_http").
-   */
+  /**
+    * Returns the service's name (i.e. "_http").
+    */
   def service():String = {
     asJava.asInstanceOf[JSrvRecord].service().asInstanceOf[String]
   }
 
- /**
-   * Returns the name of the host for the service.
-   */
+  /**
+    * Returns the name of the host for the service.
+    */
   def target():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[String])
   }

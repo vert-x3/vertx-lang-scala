@@ -40,9 +40,9 @@ class WebSocket(private val _asJava: Object)
   private var cached_0:SocketAddress = _
   private var cached_1:SocketAddress = _
 
- /**
-   * @return the remote address for this socket
-   */
+  /**
+    * @return the remote address for this socket
+    */
   override def remoteAddress():SocketAddress = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JWebSocket].remoteAddress()
@@ -51,9 +51,9 @@ class WebSocket(private val _asJava: Object)
     cached_0
   }
 
- /**
-   * @return the local address for this socket
-   */
+  /**
+    * @return the local address for this socket
+    */
   override def localAddress():SocketAddress = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JWebSocket].localAddress()
@@ -132,56 +132,56 @@ class WebSocket(private val _asJava: Object)
     this
   }
 
- /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
-   */
+  /**
+    * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+    */
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JWebSocket].end(t.asJava.asInstanceOf[JBuffer])
   }
 
- /**
-   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
-   * @return true if write queue is full
-   */
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocket#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
-   * handler is given by this method.
-   * 
-   * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   * @return the binary handler id
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+    * handler is given by this method.
+    * 
+    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    * @return the binary handler id
+    */
   override def binaryHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
- /**
-   * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
-   * handler is given by `textHandlerID`.
-   * 
-   * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
-   * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-   * allows you to write data to other WebSockets which are owned by different event loops.
-   */
+  /**
+    * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+    * handler is given by `textHandlerID`.
+    * 
+    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other WebSockets which are owned by different event loops.
+    */
   override def textHandlerID():String = {
     asJava.asInstanceOf[JWebSocket].textHandlerID().asInstanceOf[String]
   }
 
- /**
-   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
-   */
+  /**
+    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+    */
   override def end():Unit = {
     asJava.asInstanceOf[JWebSocket].end()
   }
 
- /**
-   * Close the WebSocket.
-   */
+  /**
+    * Close the WebSocket.
+    */
   override def close():Unit = {
     asJava.asInstanceOf[JWebSocket].close()
   }

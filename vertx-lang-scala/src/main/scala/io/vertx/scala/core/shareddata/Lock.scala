@@ -33,9 +33,9 @@ class Lock(private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * Release the lock. Once the lock is released another will be able to obtain the lock.
-   */
+  /**
+    * Release the lock. Once the lock is released another will be able to obtain the lock.
+    */
   def release():Unit = {
     asJava.asInstanceOf[JLock].release()
   }

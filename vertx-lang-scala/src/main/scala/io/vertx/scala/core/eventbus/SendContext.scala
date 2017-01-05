@@ -32,23 +32,23 @@ class SendContext[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
- /**
-   * @return The message being sent
-   */
+  /**
+    * @return The message being sent
+    */
   def message():Message[T] = {
     Message[T](asJava.asInstanceOf[JSendContext[Object]].message())
   }
 
- /**
-   * Call the next interceptor
-   */
+  /**
+    * Call the next interceptor
+    */
   def next():Unit = {
     asJava.asInstanceOf[JSendContext[Object]].next()
   }
 
- /**
-   * @return true if the message is being sent (point to point) or False if the message is being published
-   */
+  /**
+    * @return true if the message is being sent (point to point) or False if the message is being published
+    */
   def send():Boolean = {
     asJava.asInstanceOf[JSendContext[Object]].send().asInstanceOf[Boolean]
   }

@@ -44,10 +44,10 @@ class Message[T:TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0:T = _
 
- /**
-   * The body of the message. Can be null.
-   * @return the body, or null.
-   */
+  /**
+    * The body of the message. Can be null.
+    * @return the body, or null.
+    */
   def body():T = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JMessage[Object]].body()
@@ -56,85 +56,85 @@ class Message[T:TypeTag](private val _asJava: Object) {
     cached_0
   }
 
- /**
-   * The address the message was sent to
-   */
+  /**
+    * The address the message was sent to
+    */
   def address():String = {
     asJava.asInstanceOf[JMessage[Object]].address().asInstanceOf[String]
   }
 
- /**
-   * Multi-map of message headers. Can be empty
-   * @return the headers
-   */
+  /**
+    * Multi-map of message headers. Can be empty
+    * @return the headers
+    */
   def headers():MultiMap = {
     MultiMap(asJava.asInstanceOf[JMessage[Object]].headers())
   }
 
- /**
-   * The reply address. Can be null.
-   * @return the reply address, or null, if message was sent without a reply handler.
-   */
+  /**
+    * The reply address. Can be null.
+    * @return the reply address, or null, if message was sent without a reply handler.
+    */
   def replyAddress():scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JMessage[Object]].replyAddress().asInstanceOf[String])
   }
 
- /**
-   * Signals if this message represents a send or publish event.
-   * @return true if this is a send.
-   */
+  /**
+    * Signals if this message represents a send or publish event.
+    * @return true if this is a send.
+    */
   def isSend():Boolean = {
     asJava.asInstanceOf[JMessage[Object]].isSend().asInstanceOf[Boolean]
   }
 
- /**
-   * Reply to this message.
-   * 
-   * If the message was sent specifying a reply handler, that handler will be
-   * called when it has received a reply. If the message wasn't sent specifying a receipt handler
-   * this method does nothing.
-   * @param message the message to reply with.
-   */
+  /**
+    * Reply to this message.
+    * 
+    * If the message was sent specifying a reply handler, that handler will be
+    * called when it has received a reply. If the message wasn't sent specifying a receipt handler
+    * this method does nothing.
+    * @param message the message to reply with.
+    */
   def reply(message: AnyRef):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply(toJava[Object](message))
   }
 
- /**
-   * The same as `reply(R message)` but you can specify handler for the reply - i.e.
-   * to receive the reply to the reply.
-   * @param message the message to reply with.
-   */
+  /**
+    * The same as `reply(R message)` but you can specify handler for the reply - i.e.
+    * to receive the reply to the reply.
+    * @param message the message to reply with.
+    */
   def reply[R:TypeTag](message: AnyRef,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
   }
 
- /**
-   * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
-   * @param message the reply message
-   * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   */
+  /**
+    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.
+    * @param message the reply message
+    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    */
   def reply(message: AnyRef,options: DeliveryOptions):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply(toJava[Object](message),options.asJava)
   }
 
- /**
-   * The same as `reply(R message, DeliveryOptions)` but you can specify handler for the reply - i.e.
-   * to receive the reply to the reply.
-   * @param message the reply message
-   * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   */
+  /**
+    * The same as `reply(R message, DeliveryOptions)` but you can specify handler for the reply - i.e.
+    * to receive the reply to the reply.
+    * @param message the reply message
+    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    */
   def reply[R:TypeTag](message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[R]]]):Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](toJava[Object](message),options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
   }
 
- /**
-   * Signal to the sender that processing of this message failed.
-   * 
-   * If the message was sent specifying a result handler
-   * the handler will be called with a failure corresponding to the failure code and message specified here.
-   * @param failureCode A failure code to pass back to the sender
-   * @param message A message to pass back to the sender
-   */
+  /**
+    * Signal to the sender that processing of this message failed.
+    * 
+    * If the message was sent specifying a result handler
+    * the handler will be called with a failure corresponding to the failure code and message specified here.
+    * @param failureCode A failure code to pass back to the sender
+    * @param message A message to pass back to the sender
+    */
   def fail(failureCode: Int,message: String):Unit = {
     asJava.asInstanceOf[JMessage[Object]].fail(failureCode.asInstanceOf[java.lang.Integer],message.asInstanceOf[java.lang.String])
   }

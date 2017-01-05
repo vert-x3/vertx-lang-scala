@@ -70,62 +70,62 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
     this
   }
 
- /**
-   * @return a read stream for the body of the message stream.
-   */
+  /**
+    * @return a read stream for the body of the message stream.
+    */
   def bodyStream():ReadStream[T] = {
     ReadStream[T](asJava.asInstanceOf[JMessageConsumer[Object]].bodyStream())
   }
 
- /**
-   * @return true if the current consumer is registered
-   */
+  /**
+    * @return true if the current consumer is registered
+    */
   def isRegistered():Boolean = {
     asJava.asInstanceOf[JMessageConsumer[Object]].isRegistered().asInstanceOf[Boolean]
   }
 
- /**
-   * @return The address the handler was registered with.
-   */
+  /**
+    * @return The address the handler was registered with.
+    */
   def address():String = {
     asJava.asInstanceOf[JMessageConsumer[Object]].address().asInstanceOf[String]
   }
 
- /**
-   * Set the number of messages this registration will buffer when this stream is paused. The default
-   * value is <code>0</code>. When a new value is set, buffered messages may be discarded to reach
-   * the new value.
-   * @param maxBufferedMessages the maximum number of messages that can be buffered
-   * @return this registration
-   */
+  /**
+    * Set the number of messages this registration will buffer when this stream is paused. The default
+    * value is <code>0</code>. When a new value is set, buffered messages may be discarded to reach
+    * the new value.
+    * @param maxBufferedMessages the maximum number of messages that can be buffered
+    * @return this registration
+    */
   def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[Object]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
   }
 
- /**
-   * @return the maximum number of messages that can be buffered when this stream is paused
-   */
+  /**
+    * @return the maximum number of messages that can be buffered when this stream is paused
+    */
   def getMaxBufferedMessages():Int = {
     asJava.asInstanceOf[JMessageConsumer[Object]].getMaxBufferedMessages().asInstanceOf[Int]
   }
 
- /**
-   * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-   */
+  /**
+    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
+    */
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
- /**
-   * Unregisters the handler which created this registration
-   */
+  /**
+    * Unregisters the handler which created this registration
+    */
   def unregister():Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister()
   }
 
- /**
-   * Unregisters the handler which created this registration
-   */
+  /**
+    * Unregisters the handler which created this registration
+    */
   def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
