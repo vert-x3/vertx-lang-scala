@@ -2,8 +2,12 @@
 
 @comment{"# Defines a few helper functions"}
 @includeNamed{'scala-doc.templ'}
-@includeNamed{'scala-helpers.templ'}
-
+@includeNamed{'scala-imports.templ'}
+@includeNamed{'scala-types.templ'}
+@includeNamed{'scala-methods.templ'}
+@code{
+  var className = helper.getSimpleName(type.name);
+}
 /*\n
  * Copyright 2014 Red Hat, Inc.\n
  *\n
@@ -19,60 +23,38 @@
  * License for the specific language governing permissions and limitations\n
  * under the License.\n
  */\n\n
-@code{
-  var typeName = type.raw.simpleName;
-  var jTypeName = convertTypeNameToAliasedTypeName(type);
-}
-
 
 package @{type.raw.translatePackageName("scala")}\n
 \n
-
 @comment{"# Generate the imports"}
+import io.vertx.lang.scala.json.Json._\n
 import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConverters._\n
-import io.vertx.lang.scala.json.Json._\n
-import @{convertTypeToAliasedType(type)+"\n"}
-@foreach{importedType : importedTypes}
-	@if{superType != null && (superType.toString() == importedType.toString())}
-	@else{importedType.kind == CLASS_API || importedType.kind == CLASS_DATA_OBJECT}
-import @{convertTypeToAliasedType(importedType)+"\n"}
-import @{importedType.raw.translateName("scala")}\n
-	@else{importedType.kind == CLASS_JSON_OBJECT ||
-				importedType.kind == CLASS_JSON_ARRAY ||
-				importedType.kind == CLASS_ENUM}
-import @{importedType.raw}\n
-	@else{importedType.kind != CLASS_ASYNC_RESULT &&
-				!importedType.packageName.equals("java.lang") &&
-				importedType.kind != CLASS_HANDLER &&
-				importedType.kind != CLASS_LIST &&
-				importedType.kind != CLASS_SET &&
-				importedType.kind != CLASS_MAP}
-import @{convertTypeToAliasedType(importedType)+"\n"}
-import @{importedType.raw.translateName("scala")}\n
-	@end{}
+@foreach{importedType : generateImports(type, importedTypes, new java.util.ArrayList())}
+import @{importedType}\n
 @end{}
 \n
-
-@comment{"# Generate the Class or Interface/Trait"}
 
 @if{doc != null}
 /**\n
 @{renderDoc("  *", doc, renderDocLink)}
   */\n
 @end{}
-\n
-
 @if{concrete}
-	class @{typeName}(val asJava: @{jTypeName})
+	class @{className}(private val _asJava: J@{className})
 @else{}
-	trait @{typeName}
+	trait @{className}
+@end{}
+
+@comment{"## Inheritance"}
+@if{!superTypes.isEmpty}
+	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
 @end{}
  {\n
 \n
 
 @if{concrete}
-	@includeNamed{'dataobject-concrete.templ'}
+	@includeNamed{'dataobject-body.templ'; indentation=''}
 @else{}
-	@includeNamed{'dataobject-trait.templ'}
+	@includeNamed{'dataobject-trait-body.templ'}
 @end{}
