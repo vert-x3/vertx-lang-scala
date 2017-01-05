@@ -1,17 +1,10 @@
 package io.vertx.lang.scala.tck
 
-import com.acme.scala.pkg.MyInterface
 import io.vertx.codegen.testmodel._
-import io.vertx.core.http.HttpServerOptions
 import io.vertx.core.json.{JsonArray, JsonObject}
-import io.vertx.core.{Future, VertxException}
-import io.vertx.lang.scala.ScalaAsyncResult
 import io.vertx.lang.scala.json.Json
-import io.vertx.lang.scala.json.Json.arr
-import io.vertx.scala.codegen.testmodel.{ConcreteHandlerUserTypeExtension, Factory, RefedInterface1, TestDataObject, TestInterface, NullableTCK}
-import org.junit.ComparisonFailure
+import io.vertx.scala.codegen.testmodel.{NullableTCK, RefedInterface1, TestDataObject}
 import org.junit.runner.RunWith
-import org.scalatest.concurrent.Waiters.Waiter
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
