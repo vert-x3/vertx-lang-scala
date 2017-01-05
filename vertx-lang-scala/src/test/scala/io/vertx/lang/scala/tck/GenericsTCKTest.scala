@@ -1,11 +1,12 @@
 package io.vertx.lang.scala.tck
 
-import io.vertx.codegen.testmodel.{GenericsTCKImpl, RefedInterface1Impl, TestEnum, TestGenEnum}
+import io.vertx.codegen.testmodel._
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
-import io.vertx.scala.codegen.testmodel.{GenericsTCK, RefedInterface1, TestDataObject}
+import io.vertx.scala.codegen.testmodel.{GenericRefedInterface, GenericsTCK, RefedInterface1, TestDataObject}
+import io.vertx.codegen.testmodel.RefedInterface1Impl
 
 import scala.concurrent.ExecutionContext
 
@@ -515,30 +516,103 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultGenericNullableApiFuture(false).foreach(result => {
         w {
-          assert(result.getValue().getString() == "asd")
+          assert(result.getValue() == null)
         }
         w.dismiss()})
     )
   }
 
+  "testMethodWithClassTypeParameterizedReturn" should "work" in {
+    val res = obj.methodWithClassTypeParameterizedReturn(classOf[String])
+    assert(res.getValue() == "zoumbawe")
+  }
 
-  //  def methodWithClassTypeParameterizedReturn[U:TypeTag]
-  //  def methodWithHandlerClassTypeParameterized[U:TypeTag]
-  //  def methodWithHandlerAsyncResultClassTypeParameterized
-  //  def methodWithFunctionParamClassTypeParameterized[U:TypeTag]
-  //  def methodWithClassTypeParam[U:TypeTag]
-  //  def methodWithClassTypeReturn[U:TypeTag]
-  //  def methodWithClassTypeHandler[U:TypeTag]
-  //  def methodWithClassTypeHandlerAsyncResult[U:TypeTag]
-  //  def methodWithClassTypeFunctionParam[U:TypeTag]
-  //  def methodWithClassTypeFunctionReturn[U:TypeTag]
-  //  def interfaceWithApiArg
-  //  def interfaceWithStringArg(value: String)
-  //  def interfaceWithVariableArg[T:TypeTag,U:TypeTag]
-  //  def methodWithHandlerGenericNullableApi
-  //  def methodWithHandlerAsyncResultGenericNullableApi
-  //  def methodWithGenericNullableApiReturn
-  //  def methodWithHandlerAsyncResultClassTypeParameterizedFuture[U:TypeTag]
-  //  def methodWithClassTypeHandlerAsyncResultFuture[U:TypeTag]
+  "testMethodWithHandlerClassTypeParameterized" should "work" in {
+    obj.methodWithHandlerClassTypeParameterized[String](classOf[String], h => assert(h.getValue() == "zoumbawe"))
+  }
+
+  "testMethodWithFunctionParamClassTypeParameterized" should "work" in {
+    obj.methodWithFunctionParamClassTypeParameterized[String](classOf[String], {
+      h => {
+        assert(h.getValue() == "zoumbawe")
+        h.getValue
+      }
+    })
+  }
+
+  "testMethodWithClassTypeParam" should "work" in {
+     obj.methodWithClassTypeParam[String](classOf[String], "zoumbawe")
+  }
+
+  "testMethodWithClassTypeReturn" should "work" in {
+    val res = obj.methodWithClassTypeReturn[String](classOf[String])
+    assert(res == "zoumbawe")
+  }
+
+  "testMethodWithClassTypeHandler" should "work" in {
+     obj.methodWithClassTypeHandler[String](classOf[String], h => assert(h == "zoumbawe"))
+  }
+
+  "testMethodWithClassTypeFunctionParam" should "work" in {
+    val res = obj.methodWithClassTypeFunctionParam[String](classOf[String], h => {
+      assert(h == "zoumbawe")
+      h
+    })
+  }
+
+  "testMethodWithClassTypeFunctionReturn" should "work" in {
+    obj.methodWithClassTypeFunctionReturn[String](classOf[String], h => {
+      assert(h == "whatever")
+      "zoumbawe"
+    })
+  }
+
+  "testInterfaceWithApiArg" should "work" in {
+    val res = obj.interfaceWithApiArg(RefedInterface1(new RefedInterface1Impl))
+    assert(res.getValue() != null)
+  }
+
+  "testInterfaceWithStringArg" should "work" in {
+    val res = obj.interfaceWithStringArg("hhh")
+    assert(res.getValue() == "hhh")
+  }
+
+  "testInterfaceWithVariableArg" should "work" in {
+    val res = obj.interfaceWithVariableArg[Float, String](1.0f, classOf[String], "hhh")
+    assert(res.getValue() == "hhh")
+  }
+
+  "testMethodWithHandlerGenericNullableApi" should "work" in {
+    obj.methodWithHandlerGenericNullableApi(true, h => assert(h.getValue().getString() == "the_string_value"))
+    obj.methodWithHandlerGenericNullableApi(false, h => assert(h.getValue() == null))
+  }
+
+  "testMethodWithGenericNullableApiReturn" should "work" in {
+    assert(obj.methodWithGenericNullableApiReturn(true).getValue() != null)
+    assert(obj.methodWithGenericNullableApiReturn(false).getValue() == null)
+  }
+
+  "testMethodWithHandlerAsyncResultClassTypeParameterized" should "work" in {
+    obj.methodWithHandlerAsyncResultClassTypeParameterized[String](classOf[String], h => assert(h.result().getValue() == "zoumbawe"))
+  }
+
+  "testMethodWithHandlerAsyncResultGenericNullableApi" should "work" in {
+    obj.methodWithHandlerAsyncResultGenericNullableApi(true, h => assert(h.result().getValue() != null))
+    obj.methodWithHandlerAsyncResultGenericNullableApi(false, h => assert(h.result().getValue() == null))
+  }
+
+  "testMethodWithHandlerAsyncResultClassTypeParameterizedFuture" should "work" in {
+    exec1(w =>
+      obj.methodWithHandlerAsyncResultClassTypeParameterizedFuture[String](classOf[String]).foreach(result => {
+        w {
+          assert(result.getValue() == "zoumbawe")
+        }
+        w.dismiss()})
+    )
+  }
+
+  "testMethodWithClassTypeHandlerAsyncResult" should "work" in {
+    obj.methodWithClassTypeHandlerAsyncResult[String](classOf[String], h => assert(h.result() == "zoumbawe"))
+  }
 
 }
