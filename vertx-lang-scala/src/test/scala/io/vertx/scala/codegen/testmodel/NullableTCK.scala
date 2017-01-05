@@ -2457,7 +2457,7 @@ class NullableTCK(private val _asJava: Object) {
 
 }
 
-  object NullableTCK{
-    def apply(asJava: JNullableTCK) = new NullableTCK(asJava)  
+object NullableTCK{
+  def apply(asJava: JNullableTCK) = new NullableTCK(asJava)  
   //static methods
-  }
+}

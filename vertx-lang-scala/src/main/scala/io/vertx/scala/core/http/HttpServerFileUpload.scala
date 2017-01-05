@@ -63,6 +63,10 @@ class HttpServerFileUpload(private val _asJava: Object)
     this
   }
 
+ /**
+   * Stream the content of this upload to the given file on storage.
+   * @param filename the name of the file
+   */
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename.asInstanceOf[java.lang.String])
     this
@@ -70,30 +74,53 @@ class HttpServerFileUpload(private val _asJava: Object)
 
 //default methods
 //basic methods
+ /**
+   * @return the filename which was used when upload the file.
+   */
   def filename():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].filename().asInstanceOf[String]
   }
 
+ /**
+   * @return the name of the attribute
+   */
   def name():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].name().asInstanceOf[String]
   }
 
+ /**
+   * @return the content type for the upload
+   */
   def contentType():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].contentType().asInstanceOf[String]
   }
 
+ /**
+   * @return the contentTransferEncoding for the upload
+   */
   def contentTransferEncoding():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].contentTransferEncoding().asInstanceOf[String]
   }
 
+ /**
+   * @return the charset for the upload
+   */
   def charset():String = {
     asJava.asInstanceOf[JHttpServerFileUpload].charset().asInstanceOf[String]
   }
 
+ /**
+   * The size of the upload may not be available until it is all read.
+   * Check [[io.vertx.scala.core.http.HttpServerFileUpload#isSizeAvailable]] to determine this
+   * @return the size of the upload (in bytes)
+   */
   def size():Long = {
     asJava.asInstanceOf[JHttpServerFileUpload].size().asInstanceOf[Long]
   }
 
+ /**
+   * @return true if the size of the upload can be retrieved via #size().
+   */
   def isSizeAvailable():Boolean = {
     asJava.asInstanceOf[JHttpServerFileUpload].isSizeAvailable().asInstanceOf[Boolean]
   }
@@ -101,7 +128,7 @@ class HttpServerFileUpload(private val _asJava: Object)
 //future methods
 }
 
-  object HttpServerFileUpload{
-    def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)  
+object HttpServerFileUpload{
+  def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)  
   //static methods
-  }
+}

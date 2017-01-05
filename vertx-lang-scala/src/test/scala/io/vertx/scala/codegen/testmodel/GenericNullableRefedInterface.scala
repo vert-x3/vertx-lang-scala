@@ -40,7 +40,7 @@ class GenericNullableRefedInterface[T:TypeTag](private val _asJava: Object) {
 //future methods
 }
 
-  object GenericNullableRefedInterface{
-    def apply[T:TypeTag](asJava: JGenericNullableRefedInterface[_]) = new GenericNullableRefedInterface[T](asJava)  
+object GenericNullableRefedInterface{
+  def apply[T:TypeTag](asJava: JGenericNullableRefedInterface[_]) = new GenericNullableRefedInterface[T](asJava)  
   //static methods
-  }
+}

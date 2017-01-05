@@ -45,7 +45,7 @@ class SocketAddress(private val _asJava: Object) {
 //future methods
 }
 
-  object SocketAddress{
-    def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
+object SocketAddress{
+  def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
   //static methods
-  }
+}

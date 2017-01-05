@@ -464,7 +464,7 @@ class GenericsTCK(private val _asJava: Object) {
 
 }
 
-  object GenericsTCK{
-    def apply(asJava: JGenericsTCK) = new GenericsTCK(asJava)  
+object GenericsTCK{
+  def apply(asJava: JGenericsTCK) = new GenericsTCK(asJava)  
   //static methods
-  }
+}

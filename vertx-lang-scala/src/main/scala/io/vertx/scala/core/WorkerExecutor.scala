@@ -43,32 +43,81 @@ class WorkerExecutor(private val _asJava: Object)
 //cached methods
 //fluent methods
 //default methods
+ /**
+   * Like [[io.vertx.scala.core.WorkerExecutor#executeBlockingFuture]] called with ordered = true.
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   //io.vertx.core.WorkerExecutor
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
+ /**
+   * Close the executor.
+   */
   //io.vertx.core.WorkerExecutor
   def close():Unit = {
     asJava.asInstanceOf[JWorkerExecutor].close()
   }
 
 //basic methods
+ /**
+   * Whether the metrics are enabled for this measured object
+   * @return true if the metrics are enabled
+   */
   override def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
+ /**
+   * Safely execute some blocking code.
+   * 
+   * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+   * 
+   * When the code is complete the handler `resultHandler` will be called with the result on the original context
+   * (e.g. on the original event loop of the caller).
+   * 
+   * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
+   * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+   * method if it failed.
+   * 
+   * In the `blockingCodeHandler` the current context remains the original context and therefore any task
+   * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
+   * @param blockingCodeHandler handler representing the blocking code to run
+   * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+   * @return future that will be called when the blocking code is complete
+   */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
 //future methods
+ /**
+   * Safely execute some blocking code.
+   * 
+   * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+   * 
+   * When the code is complete the handler `resultHandler` will be called with the result on the original context
+   * (e.g. on the original event loop of the caller).
+   * 
+   * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
+   * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+   * method if it failed.
+   * 
+   * In the `blockingCodeHandler` the current context remains the original context and therefore any task
+   * scheduled in the `blockingCodeHandler` will be executed on the this context and not on the worker thread.
+   * @param blockingCodeHandler handler representing the blocking code to run
+   * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+   * @return future that will be called when the blocking code is complete
+   */
     def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
+ /**
+   * Like [[io.vertx.scala.core.WorkerExecutor#executeBlockingFuture]] called with ordered = true.
+WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
     def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
     asJava.asInstanceOf[JWorkerExecutor].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
@@ -77,7 +126,7 @@ class WorkerExecutor(private val _asJava: Object)
 
 }
 
-  object WorkerExecutor{
-    def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)  
+object WorkerExecutor{
+  def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)  
   //static methods
-  }
+}

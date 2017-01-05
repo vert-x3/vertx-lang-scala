@@ -40,7 +40,7 @@ class SubInterface(private val _asJava: Object) {
 //future methods
 }
 
-  object SubInterface{
-    def apply(asJava: JSubInterface) = new SubInterface(asJava)  
+object SubInterface{
+  def apply(asJava: JSubInterface) = new SubInterface(asJava)  
   //static methods
-  }
+}

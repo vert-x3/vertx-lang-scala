@@ -34,14 +34,23 @@ class FileSystemProps(private val _asJava: Object) {
 //fluent methods
 //default methods
 //basic methods
+ /**
+   * @return The total space on the file system, in bytes
+   */
   def totalSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].totalSpace().asInstanceOf[Long]
   }
 
+ /**
+   * @return The total un-allocated space on the file system, in bytes
+   */
   def unallocatedSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].unallocatedSpace().asInstanceOf[Long]
   }
 
+ /**
+   * @return The total usable space on the file system, in bytes
+   */
   def usableSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].usableSpace().asInstanceOf[Long]
   }
@@ -49,7 +58,7 @@ class FileSystemProps(private val _asJava: Object) {
 //future methods
 }
 
-  object FileSystemProps{
-    def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
+object FileSystemProps{
+  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
   //static methods
-  }
+}

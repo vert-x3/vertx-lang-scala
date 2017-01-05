@@ -29,6 +29,10 @@ trait Measured {
 
   def asJava: java.lang.Object
 
+ /**
+   * Whether the metrics are enabled for this measured object
+   * @return true if the metrics are enabled
+   */
   def isMetricsEnabled():Boolean
 
 }
@@ -43,6 +47,10 @@ object Measured{
 //fluent methods
 //default methods
 //basic methods
+ /**
+   * Whether the metrics are enabled for this measured object
+   * @return true if the metrics are enabled
+   */
   def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }

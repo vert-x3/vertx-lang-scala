@@ -36,6 +36,9 @@ class HttpFrame(private val _asJava: Object) {
   private var cached_2:Buffer = _
 
 //cached methods
+ /**
+   * @return the 8-bit type of the frame
+   */
   def `type`():Int = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
@@ -44,6 +47,9 @@ class HttpFrame(private val _asJava: Object) {
     cached_0
   }
 
+ /**
+   * @return the 8-bit flags specific to the frame
+   */
   def flags():Int = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].flags()
@@ -52,6 +58,9 @@ class HttpFrame(private val _asJava: Object) {
     cached_1
   }
 
+ /**
+   * @return the frame payload
+   */
   def payload():Buffer = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].payload()
@@ -66,7 +75,7 @@ class HttpFrame(private val _asJava: Object) {
 //future methods
 }
 
-  object HttpFrame{
-    def apply(asJava: JHttpFrame) = new HttpFrame(asJava)  
+object HttpFrame{
+  def apply(asJava: JHttpFrame) = new HttpFrame(asJava)  
   //static methods
-  }
+}

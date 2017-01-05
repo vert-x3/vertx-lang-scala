@@ -61,22 +61,39 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     this
   }
 
+ /**
+   * Update the delivery options of this producer.
+   * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+   * @return this producer object
+   */
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].deliveryOptions(options.asJava)
     this
   }
 
 //default methods
+ /**
+   * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+   */
   //io.vertx.core.streams.WriteStream
   override def end(t: T):Unit = {
     asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](t))
   }
 
 //basic methods
+ /**
+   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
+   * @return true if write queue is full
+   */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JMessageProducer[Object]].writeQueueFull().asInstanceOf[Boolean]
   }
 
+ /**
+   * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
+   * @param message the message to send
+   * @return reference to this for fluency
+   */
   def send(message: T):MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send(toJava[T](message)))
   }
@@ -85,14 +102,23 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))}))
   }
 
+ /**
+   * @return The address to which the producer produces messages.
+   */
   def address():String = {
     asJava.asInstanceOf[JMessageProducer[Object]].address().asInstanceOf[String]
   }
 
+ /**
+   * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
+   */
   override def end():Unit = {
     asJava.asInstanceOf[JMessageProducer[Object]].end()
   }
 
+ /**
+   * Closes the producer, this method should be called when the message producer is not used anymore.
+   */
   def close():Unit = {
     asJava.asInstanceOf[JMessageProducer[Object]].close()
   }
@@ -106,7 +132,7 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
 
 }
 
-  object MessageProducer{
-    def apply[T:TypeTag](asJava: JMessageProducer[_]) = new MessageProducer[T](asJava)  
+object MessageProducer{
+  def apply[T:TypeTag](asJava: JMessageProducer[_]) = new MessageProducer[T](asJava)  
   //static methods
-  }
+}

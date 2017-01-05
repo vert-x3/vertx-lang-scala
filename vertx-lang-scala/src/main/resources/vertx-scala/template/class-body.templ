@@ -13,9 +13,9 @@
 @code{cached_counter++}
 @end{}
 \n
-//cached methods\n
 @code{var cached_method_counter = 0}
 @foreach{method : cacheReturnMethods}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -36,8 +36,8 @@
 	@code{cached_method_counter++}
 @end{}
 
-//fluent methods\n
 @foreach{method : fluentMethods}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -50,9 +50,8 @@
 	\n
 @end{}
 
-//default methods\n
 @foreach{method : defaultMethods}
-  @foreach{ownerType : method.ownerTypes}//@{ownerType.name}\n@end{}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
@@ -63,8 +62,8 @@
 	\n
 @end{}
 
-//basic methods\n
 @foreach{method : basicMethods}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -76,9 +75,9 @@
 	\n
 @end{}
 
-//future methods\n
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
+	@if{method.doc != null}@{methodDoc(method, ' ');}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
   def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
