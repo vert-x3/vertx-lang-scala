@@ -12,7 +12,7 @@
     } else if (type.kind == CLASS_THROWABLE) {
       return name;
     } else if (type.kind == CLASS_OBJECT) {
-      var ret = type.name;
+      var ret = name;
       if(type.isVariable) {
         var ret = 'toScala[' + type.name + '](' + name + ')';
         if(nullable) {
@@ -20,6 +20,7 @@
         }
         return ret;
       }
+      return ret;
     } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
       return name;
     }

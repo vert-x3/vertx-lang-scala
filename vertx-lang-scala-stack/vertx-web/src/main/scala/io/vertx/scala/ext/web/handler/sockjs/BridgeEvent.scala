@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.sockjs.BridgeEventType
@@ -133,7 +131,7 @@ class BridgeEvent(private val _asJava: Object)
   }
 
   override   def setFuture():scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => if (x == null) null.asInstanceOf[Boolean] else x.asInstanceOf[Boolean])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JBridgeEvent].setHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

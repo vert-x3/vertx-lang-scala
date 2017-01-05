@@ -16,9 +16,7 @@
 
 package io.vertx.scala.ext.auth.oauth2
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -84,7 +82,7 @@ class AccessToken(private val _asJava: Object)
    * @return - The callback function returning the results.
    */
     def refreshFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].refresh(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -95,7 +93,7 @@ class AccessToken(private val _asJava: Object)
    * @return - The callback function returning the results.
    */
     def revokeFuture(token_type: String):scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -106,7 +104,7 @@ class AccessToken(private val _asJava: Object)
    * @return - The callback function returning the results.
    */
     def logoutFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].logout(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -116,7 +114,7 @@ class AccessToken(private val _asJava: Object)
    * @return - The callback function returning the results.
    */
     def introspectFuture():scala.concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => if (x == null) null.asInstanceOf[Unit] else x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].introspect(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
