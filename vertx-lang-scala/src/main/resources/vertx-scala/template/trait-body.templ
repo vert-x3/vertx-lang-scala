@@ -7,8 +7,8 @@
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):@{toScalaType(method.returnType)}\n
+		@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
+	@end{','}):@{toScalaTypeAndTypeParamTreatment(method.returnType, false)}\n
 	\n
 @end{}
 
@@ -19,8 +19,8 @@
 	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
 	@end{}(
 	@foreach{param:method.params}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):@{toScalaType(method.returnType)}\n
+		@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
+	@end{','}):@{toScalaTypeAndTypeParamTreatment(method.returnType, false)}\n
 	\n
 @end{}
 }\n

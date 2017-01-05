@@ -53,7 +53,7 @@
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
-	@end{','}):@{toScalaType(method.returnType)} = {\n
+	@end{','}):@{toScalaTypeAndTypeParamTreatment(method.returnType, false)} = {\n
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
   }\n
 	\n
@@ -65,8 +65,8 @@
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):@{toScalaType(method.returnType)} = {\n
+		@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
+	@end{','}):@{toScalaTypeAndTypeParamTreatment(method.returnType, false)} = {\n
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
   }\n
 	\n
@@ -78,10 +78,10 @@
   def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}
-		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type)}
-	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method))}] = {\n
+		@{escapeIfKeyword(param.name)}: @{toScalaTypeAndTypeParamTreatment(param.type, false)}
+	@end{','}):scala.concurrent.Future[@{toScalaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), false)}] = {\n
 		@comment{'TODO: Why is there no nullable-info available in here??'}
-    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method))}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method))}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
+    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), true)}, @{toScalaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), false)}](x => if (x == null) null.asInstanceOf[@{toScalaTypeAndTypeParamTreatment(typeOfReturnedFuture(method), false)}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
     @{invokeMethodAndUseProvidedHandler('asJava' + fromObjectToInstanceOf(type), type, method, typeParams, 'promiseAndHandler._1')}\n
     promiseAndHandler._2.future\n
   }\n
