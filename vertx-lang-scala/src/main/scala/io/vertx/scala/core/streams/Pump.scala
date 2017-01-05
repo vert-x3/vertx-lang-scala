@@ -76,7 +76,7 @@ class Pump(private val _asJava: Object) {
 }
 
   object Pump{
-    def apply(asJava: Object) = new Pump(asJava)  
+    def apply(asJava: JPump) = new Pump(asJava)  
   //static methods
     def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
       Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]]))

@@ -303,7 +303,7 @@ class Vertx(private val _asJava: Object)
 }
 
   object Vertx{
-    def apply(asJava: Object) = new Vertx(asJava)  
+    def apply(asJava: JVertx) = new Vertx(asJava)  
   //static methods
     def vertx():Vertx = {
       Vertx(JVertx.vertx())

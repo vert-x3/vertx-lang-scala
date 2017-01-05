@@ -43,6 +43,6 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
 }
 
   object ConcreteHandlerUserTypeExtension{
-    def apply(asJava: Object) = new ConcreteHandlerUserTypeExtension(asJava)  
+    def apply(asJava: JConcreteHandlerUserTypeExtension) = new ConcreteHandlerUserTypeExtension(asJava)  
   //static methods
   }

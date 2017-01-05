@@ -518,6 +518,6 @@ class HttpClient(private val _asJava: Object)
 }
 
   object HttpClient{
-    def apply(asJava: Object) = new HttpClient(asJava)  
+    def apply(asJava: JHttpClient) = new HttpClient(asJava)  
   //static methods
   }

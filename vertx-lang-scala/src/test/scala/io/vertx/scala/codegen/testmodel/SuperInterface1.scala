@@ -45,6 +45,6 @@ class SuperInterface1(private val _asJava: Object) {
 }
 
   object SuperInterface1{
-    def apply(asJava: Object) = new SuperInterface1(asJava)  
+    def apply(asJava: JSuperInterface1) = new SuperInterface1(asJava)  
   //static methods
   }

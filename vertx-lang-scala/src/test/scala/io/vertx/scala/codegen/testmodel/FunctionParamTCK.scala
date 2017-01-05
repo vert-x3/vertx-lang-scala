@@ -140,6 +140,6 @@ class FunctionParamTCK(private val _asJava: Object) {
 }
 
   object FunctionParamTCK{
-    def apply(asJava: Object) = new FunctionParamTCK(asJava)  
+    def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
   //static methods
   }
