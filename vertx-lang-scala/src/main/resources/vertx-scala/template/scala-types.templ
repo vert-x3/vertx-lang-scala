@@ -263,10 +263,6 @@
     }
   }
 
-  def toScalaType(type) {
-    toScalaTypeAndTypeParamTreatment(type, false);
-  }
-
   def toScalaTypeAndTypeParamTreatment(type, convertTypeParamsToObject) {
     var nullable = type.isNullable;
     /*TODO: Bug, some types get returned as CLASS_OTHER instead of CLASS_VOID*/
