@@ -35,22 +35,20 @@ class CookieHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JCookieHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object CookieHandler{
-    def apply(asJava: JCookieHandler) = new CookieHandler(asJava)  
-  //static methods
-    def create():CookieHandler = {
-      CookieHandler(JCookieHandler.create())
-    }
-
+object CookieHandler{
+  def apply(asJava: JCookieHandler) = new CookieHandler(asJava)  
+  /**
+    * Create a cookie handler
+    * @return the cookie handler
+    */
+  def create():CookieHandler = {
+    CookieHandler(JCookieHandler.create())
   }
+
+}

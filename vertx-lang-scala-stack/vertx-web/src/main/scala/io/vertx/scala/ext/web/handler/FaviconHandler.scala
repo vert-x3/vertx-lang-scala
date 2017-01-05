@@ -36,34 +36,48 @@ class FaviconHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JFaviconHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object FaviconHandler{
-    def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)  
-  //static methods
-    def create():FaviconHandler = {
-      FaviconHandler(JFaviconHandler.create())
-    }
-
-    def create(path: String):FaviconHandler = {
-      FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))
-    }
-
-    def create(path: String,maxAgeSeconds: Long):FaviconHandler = {
-      FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String],maxAgeSeconds.asInstanceOf[java.lang.Long]))
-    }
-
-    def create(maxAgeSeconds: Long):FaviconHandler = {
-      FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))
-    }
-
+object FaviconHandler{
+  def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)  
+  /**
+    * Create a handler with defaults
+    * @return the handler
+    */
+  def create():FaviconHandler = {
+    FaviconHandler(JFaviconHandler.create())
   }
+
+  /**
+    * Create a handler attempting to load favicon file from the specified path
+    * @param path the path
+    * @return the handler
+    */
+  def create(path: String):FaviconHandler = {
+    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create a handler attempting to load favicon file from the specified path, and with the specified max cache time
+    * @param path the path
+    * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
+    * @return the handler
+    */
+  def create(path: String,maxAgeSeconds: Long):FaviconHandler = {
+    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String],maxAgeSeconds.asInstanceOf[java.lang.Long]))
+  }
+
+  /**
+    * Create a handler with the specified max cache time
+    * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
+    * @return the handler
+    */
+  def create(maxAgeSeconds: Long):FaviconHandler = {
+    FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))
+  }
+
+}

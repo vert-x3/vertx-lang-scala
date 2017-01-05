@@ -38,46 +38,75 @@ class FormLoginHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Set the name of the form param used to submit the username
+    * @param usernameParam the name of the param
+    * @return a reference to this for a fluent API
+    */
   def setUsernameParam(usernameParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setUsernameParam(usernameParam.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set the name of the form param used to submit the password
+    * @param passwordParam the name of the param
+    * @return a reference to this for a fluent API
+    */
   def setPasswordParam(passwordParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setPasswordParam(passwordParam.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set the name of the session attrioute used to specify the return url
+    * @param returnURLParam the name of the param
+    * @return a reference to this for a fluent API
+    */
   def setReturnURLParam(returnURLParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setReturnURLParam(returnURLParam.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set the url to redirect to if the user logs in directly at the url of the form login handler
+    * without being redirected here first
+    * @param directLoggedInOKURL the URL to redirect to
+    * @return a reference to this for a fluent API
+    */
   def setDirectLoggedInOKURL(directLoggedInOKURL: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setDirectLoggedInOKURL(directLoggedInOKURL.asInstanceOf[java.lang.String])
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JFormLoginHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object FormLoginHandler{
-    def apply(asJava: JFormLoginHandler) = new FormLoginHandler(asJava)  
-  //static methods
-    def create(authProvider: AuthProvider):FormLoginHandler = {
-      FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
-    }
-
-    def create(authProvider: AuthProvider,usernameParam: String,passwordParam: String,returnURLParam: String,directLoggedInOKURL: String):FormLoginHandler = {
-      FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],usernameParam.asInstanceOf[java.lang.String],passwordParam.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String],directLoggedInOKURL.asInstanceOf[java.lang.String]))
-    }
-
+object FormLoginHandler{
+  def apply(asJava: JFormLoginHandler) = new FormLoginHandler(asJava)  
+  /**
+    * Create a handler
+    * @param authProvider the auth service to use
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider):FormLoginHandler = {
+    FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
+
+  /**
+    * Create a handler
+    * @param authProvider the auth service to use
+    * @param usernameParam the value of the form attribute which will contain the username
+    * @param passwordParam the value of the form attribute which will contain the password
+    * @param returnURLParam the value of the session attribute which will contain the return url
+    * @param directLoggedInOKURL a url to redirect to if the user logs in directly at the url of the form login handler without being redirected here first
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider,usernameParam: String,passwordParam: String,returnURLParam: String,directLoggedInOKURL: String):FormLoginHandler = {
+    FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],usernameParam.asInstanceOf[java.lang.String],passwordParam.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String],directLoggedInOKURL.asInstanceOf[java.lang.String]))
+  }
+
+}

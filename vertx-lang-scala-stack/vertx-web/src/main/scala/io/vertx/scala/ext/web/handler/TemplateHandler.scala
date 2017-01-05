@@ -38,26 +38,32 @@ class TemplateHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JTemplateHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object TemplateHandler{
-    def apply(asJava: JTemplateHandler) = new TemplateHandler(asJava)  
-  //static methods
-    def create(engine: TemplateEngine):TemplateHandler = {
-      TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
-    }
-
-    def create(engine: TemplateEngine,templateDirectory: String,contentType: String):TemplateHandler = {
-      TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
-    }
-
+object TemplateHandler{
+  def apply(asJava: JTemplateHandler) = new TemplateHandler(asJava)  
+  /**
+    * Create a handler
+    * @param engine the template engine
+    * @return the handler
+    */
+  def create(engine: TemplateEngine):TemplateHandler = {
+    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
   }
+
+  /**
+    * Create a handler
+    * @param engine the template engine
+    * @param templateDirectory the template directory where templates will be looked for
+    * @param contentType the content type header to be used in the response
+    * @return the handler
+    */
+  def create(engine: TemplateEngine,templateDirectory: String,contentType: String):TemplateHandler = {
+    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
+  }
+
+}

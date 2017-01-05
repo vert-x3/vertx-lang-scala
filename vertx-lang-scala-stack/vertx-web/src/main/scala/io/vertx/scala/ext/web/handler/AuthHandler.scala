@@ -41,8 +41,18 @@ trait AuthHandler
 
   override def handle(arg0: RoutingContext):Unit
 
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   def addAuthority(authority: String):AuthHandler
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler
 
 }
@@ -53,24 +63,29 @@ object AuthHandler{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 }

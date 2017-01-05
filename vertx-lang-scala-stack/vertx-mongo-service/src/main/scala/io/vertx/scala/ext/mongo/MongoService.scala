@@ -44,8 +44,6 @@ class MongoService(private val _asJava: Object)
     extends MongoClient(_asJava) {
 
 
-//cached methods
-//fluent methods
   override def save(collection: String,document: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[String]]):MongoService = {
     asJava.asInstanceOf[JMongoService].save(collection.asInstanceOf[java.lang.String],document,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -256,13 +254,10 @@ class MongoService(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
   override def close():Unit = {
     asJava.asInstanceOf[JMongoService].close()
   }
 
-//future methods
   override   def saveFuture(collection: String,document: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => if (x == null) null.asInstanceOf[String] else x.asInstanceOf[String])
     asJava.asInstanceOf[JMongoService].save(collection.asInstanceOf[java.lang.String],document,promiseAndHandler._1)
@@ -517,11 +512,16 @@ class MongoService(private val _asJava: Object)
 
 }
 
-  object MongoService{
-    def apply(asJava: JMongoService) = new MongoService(asJava)  
-  //static methods
-    def createEventBusProxy(vertx: Vertx,address: String):MongoService = {
-      MongoService(JMongoService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx],address.asInstanceOf[java.lang.String]))
-    }
-
+object MongoService{
+  def apply(asJava: JMongoService) = new MongoService(asJava)  
+  /**
+    * Create a proxy to a service that is deployed somewhere on the event bus
+    * @param vertx the Vert.x instance
+    * @param address the address the service is listening on on the event bus
+    * @return the service
+    */
+  def createEventBusProxy(vertx: Vertx,address: String):MongoService = {
+    MongoService(JMongoService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx],address.asInstanceOf[java.lang.String]))
   }
+
+}

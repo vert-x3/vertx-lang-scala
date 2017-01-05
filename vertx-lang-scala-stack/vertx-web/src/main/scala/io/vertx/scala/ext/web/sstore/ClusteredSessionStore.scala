@@ -38,30 +38,54 @@ class ClusteredSessionStore(private val _asJava: Object)
     extends SessionStore(_asJava) {
 
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
-  object ClusteredSessionStore{
-    def apply(asJava: JClusteredSessionStore) = new ClusteredSessionStore(asJava)  
-  //static methods
-    def create(vertx: Vertx,sessionMapName: String):ClusteredSessionStore = {
-      ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
-    }
-
-    def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long):ClusteredSessionStore = {
-      ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],retryTimeout.asInstanceOf[java.lang.Long]))
-    }
-
-    def create(vertx: Vertx):ClusteredSessionStore = {
-      ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
-    }
-
-    def create(vertx: Vertx,retryTimeout: Long):ClusteredSessionStore = {
-      ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],retryTimeout.asInstanceOf[java.lang.Long]))
-    }
-
+object ClusteredSessionStore{
+  def apply(asJava: JClusteredSessionStore) = new ClusteredSessionStore(asJava)  
+  /**
+    * Create a session store
+    * @param vertx the Vert.x instance
+    * @param sessionMapName the session map name
+    * @return the session store
+    */
+  def create(vertx: Vertx,sessionMapName: String):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
   }
+
+  /**
+    * Create a session store.<p/>
+    *
+    * The retry timeout value, configures how long the session handler will retry to get a session from the store
+    * when it is not found.
+    * @param vertx the Vert.x instance
+    * @param sessionMapName the session map name
+    * @param retryTimeout the store retry timeout, in ms
+    * @return the session store
+    */
+  def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],retryTimeout.asInstanceOf[java.lang.Long]))
+  }
+
+  /**
+    * Create a session store
+    * @param vertx the Vert.x instance
+    * @return the session store
+    */
+  def create(vertx: Vertx):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+  }
+
+  /**
+    * Create a session store.<p/>
+    *
+    * The retry timeout value, configures how long the session handler will retry to get a session from the store
+    * when it is not found.
+    * @param vertx the Vert.x instance
+    * @param retryTimeout the store retry timeout, in ms
+    * @return the session store
+    */
+  def create(vertx: Vertx,retryTimeout: Long):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],retryTimeout.asInstanceOf[java.lang.Long]))
+  }
+
+}

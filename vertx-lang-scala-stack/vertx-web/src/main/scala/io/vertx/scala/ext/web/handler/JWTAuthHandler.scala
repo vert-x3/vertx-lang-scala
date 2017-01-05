@@ -37,51 +37,80 @@ class JWTAuthHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JJWTAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JJWTAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
+  /**
+    * Set the audience list
+    * @param audience the audience list
+    * @return a reference to this for fluency
+    */
   def setAudience(audience: scala.collection.mutable.Buffer[String]):JWTAuthHandler = {
     asJava.asInstanceOf[JJWTAuthHandler].setAudience(audience.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
+  /**
+    * Set the issuer
+    * @param issuer the issuer
+    * @return a reference to this for fluency
+    */
   def setIssuer(issuer: String):JWTAuthHandler = {
     asJava.asInstanceOf[JJWTAuthHandler].setIssuer(issuer.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Set whether expiration is ignored
+    * @param ignoreExpiration whether expiration is ignored
+    * @return a reference to this for fluency
+    */
   def setIgnoreExpiration(ignoreExpiration: Boolean):JWTAuthHandler = {
     asJava.asInstanceOf[JJWTAuthHandler].setIgnoreExpiration(ignoreExpiration.asInstanceOf[java.lang.Boolean])
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JJWTAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object JWTAuthHandler{
-    def apply(asJava: JJWTAuthHandler) = new JWTAuthHandler(asJava)  
-  //static methods
-    def create(authProvider: JWTAuth):JWTAuthHandler = {
-      JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))
-    }
-
-    def create(authProvider: JWTAuth,skip: String):JWTAuthHandler = {
-      JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth],skip.asInstanceOf[java.lang.String]))
-    }
-
+object JWTAuthHandler{
+  def apply(asJava: JJWTAuthHandler) = new JWTAuthHandler(asJava)  
+  /**
+    * Create a JWT auth handler
+    * @param authProvider the auth provider to use
+    * @return the auth handler
+    */
+  def create(authProvider: JWTAuth):JWTAuthHandler = {
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))
   }
+
+  /**
+    * Create a JWT auth handler
+    * @param authProvider the auth provider to use.
+    * @return the auth handler
+    */
+  def create(authProvider: JWTAuth,skip: String):JWTAuthHandler = {
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth],skip.asInstanceOf[java.lang.String]))
+  }
+
+}

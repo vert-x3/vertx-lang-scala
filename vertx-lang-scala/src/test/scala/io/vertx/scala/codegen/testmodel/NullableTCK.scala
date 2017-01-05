@@ -357,7 +357,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableObjectParam(expectNull: Boolean,param: AnyRef):Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableObjectParam(expectNull.asInstanceOf[java.lang.Boolean],toJava[Object](param))
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableObjectParam(expectNull.asInstanceOf[java.lang.Boolean],param)
   }
 
   def methodWithNonNullableListByteParam(param: scala.collection.mutable.Buffer[Byte]):Boolean = {

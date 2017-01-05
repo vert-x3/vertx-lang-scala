@@ -42,26 +42,38 @@ class ShiroAuth(private val _asJava: Object)
     extends AuthProvider(_asJava) {
 
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Set the role prefix to distinguish from permissions when checking for isPermitted requests.
+    * @param rolePrefix a Prefix e.g.: "role:"
+    * @return a reference to this for fluency
+    */
   def setRolePrefix(rolePrefix: String):ShiroAuth = {
     ShiroAuth(asJava.asInstanceOf[JShiroAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
   }
 
-//future methods
 }
 
-  object ShiroAuth{
-    def apply(asJava: JShiroAuth) = new ShiroAuth(asJava)  
-  //static methods
-    def create(vertx: Vertx,realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType,config: io.vertx.core.json.JsonObject):ShiroAuth = {
-      ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],realmType,config))
-    }
-
-    def create(vertx: Vertx,options: ShiroAuthOptions):ShiroAuth = {
-      ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
-    }
-
+object ShiroAuth{
+  def apply(asJava: JShiroAuth) = new ShiroAuth(asJava)  
+  /**
+    * Create a Shiro auth provider
+    * @param vertx the Vert.x instance
+    * @param realmType the Shiro realm type
+    * @param config the config
+    * @return the auth provider
+    */
+  def create(vertx: Vertx,realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType,config: io.vertx.core.json.JsonObject):ShiroAuth = {
+    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],realmType,config))
   }
+
+  /**
+    * Create a Shiro auth provider
+    * @param vertx the Vert.x instance
+    * @param options the Shiro configuration optionssee <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
+    * @return the auth provider
+    */
+  def create(vertx: Vertx,options: ShiroAuthOptions):ShiroAuth = {
+    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
+  }
+
+}

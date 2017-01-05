@@ -164,7 +164,7 @@ class TestInterface(private val _asJava: Object)
   }
 
   def methodWithObjectParam(str: String,obj: AnyRef):Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithObjectParam(str.asInstanceOf[java.lang.String],toJava[Object](obj))
+    asJava.asInstanceOf[JTestInterface].methodWithObjectParam(str.asInstanceOf[java.lang.String],obj)
   }
 
   def methodWithDataObjectParam(dataObject: TestDataObject):Unit = {

@@ -53,7 +53,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectParam(arg: AnyRef,func: AnyRef => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(toJava[Object](arg),{x: Object => func(toScala[java.lang.Object](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(null).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithDataObjectParam(func: TestDataObject => String):String = {
@@ -93,7 +93,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectReturn(func: Int => AnyRef):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => toJava[Object](func(x.asInstanceOf[Int]))}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
   }
 
   def methodWithDataObjectReturn(func: String => TestDataObject):String = {

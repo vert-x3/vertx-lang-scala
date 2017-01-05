@@ -39,15 +39,21 @@ class TemplateEngine(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Render
+    * @param context the routing context
+    * @param templateFileName the template file name to use
+    */
   def render(context: RoutingContext,templateFileName: String,handler: Handler[AsyncResult[Buffer]]):Unit = {
     asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
   }
 
-//future methods
+ /**
+   * Render
+   * @param context the routing context
+   * @param templateFileName the template file name to use
+   * @return the future that will be called with a result containing the buffer or a failure.
+   */
     def renderFuture(context: RoutingContext,templateFileName: String):scala.concurrent.Future[Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => if (x == null) null.asInstanceOf[Buffer] else Buffer(x))
     asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],promiseAndHandler._1)
@@ -56,7 +62,6 @@ class TemplateEngine(private val _asJava: Object) {
 
 }
 
-  object TemplateEngine{
-    def apply(asJava: JTemplateEngine) = new TemplateEngine(asJava)  
-  //static methods
-  }
+object TemplateEngine{
+  def apply(asJava: JTemplateEngine) = new TemplateEngine(asJava)  
+}

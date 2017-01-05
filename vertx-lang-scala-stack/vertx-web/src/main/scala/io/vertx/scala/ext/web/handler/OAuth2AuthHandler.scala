@@ -40,42 +40,62 @@ class OAuth2AuthHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
+  /**
+    * Extra parameters needed to be passed while requesting a token.
+    * @param extraParams extra optional parameters.
+    * @return self
+    */
   def extraParams(extraParams: io.vertx.core.json.JsonObject):OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].extraParams(extraParams)
     this
   }
 
+  /**
+    * add the callback handler to a given route.
+    * @param route a given route e.g.: `/callback`
+    * @return self
+    */
   def setupCallback(route: Route):OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].setupCallback(route.asJava.asInstanceOf[JRoute])
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JOAuth2AuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object OAuth2AuthHandler{
-    def apply(asJava: JOAuth2AuthHandler) = new OAuth2AuthHandler(asJava)  
-  //static methods
-    def create(authProvider: OAuth2Auth,callbackURL: String):OAuth2AuthHandler = {
-      OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth],callbackURL.asInstanceOf[java.lang.String]))
-    }
-
+object OAuth2AuthHandler{
+  def apply(asJava: JOAuth2AuthHandler) = new OAuth2AuthHandler(asJava)  
+  /**
+    * Create a OAuth2 auth handler with host pinning
+    * @param authProvider the auth provider to use
+    * @param callbackURL the callback URL you entered in your provider admin console, usually it should be something like: `https://myserver:8888/callback`
+    * @return the auth handler
+    */
+  def create(authProvider: OAuth2Auth,callbackURL: String):OAuth2AuthHandler = {
+    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth],callbackURL.asInstanceOf[java.lang.String]))
   }
+
+}

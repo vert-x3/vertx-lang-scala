@@ -36,22 +36,27 @@ class StripeAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
-  object StripeAuth{
-    def apply(asJava: JStripeAuth) = new StripeAuth(asJava)  
-  //static methods
-    def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
-      OAuth2Auth(JStripeAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
-    }
-
-    def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
-      OAuth2Auth(JStripeAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
-    }
-
+object StripeAuth{
+  def apply(asJava: JStripeAuth) = new StripeAuth(asJava)  
+  /**
+    * Create a OAuth2Auth provider for Dropbox
+    * @param clientId the client id given to you by Stripe
+    * @param clientSecret the client secret given to you by Stripe
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+    OAuth2Auth(JStripeAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
+
+  /**
+    * Create a OAuth2Auth provider for Dropbox
+    * @param clientId the client id given to you by Stripe
+    * @param clientSecret the client secret given to you by Stripe
+    * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+    OAuth2Auth(JStripeAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
+  }
+
+}

@@ -35,30 +35,39 @@ class LoggerHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JLoggerHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object LoggerHandler{
-    def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)  
-  //static methods
-    def create():LoggerHandler = {
-      LoggerHandler(JLoggerHandler.create())
-    }
-
-    def create(format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
-      LoggerHandler(JLoggerHandler.create(format))
-    }
-
-    def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
-      LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean],format))
-    }
-
+object LoggerHandler{
+  def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)  
+  /**
+    * Create a handler with default format
+    * @return the handler
+    */
+  def create():LoggerHandler = {
+    LoggerHandler(JLoggerHandler.create())
   }
+
+  /**
+    * Create a handler with he specified format
+    * @param format the format
+    * @return the handler
+    */
+  def create(format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
+    LoggerHandler(JLoggerHandler.create(format))
+  }
+
+  /**
+    * Create a handler with he specified format
+    * @param immediate true if logging should occur as soon as request arrives
+    * @param format the format
+    * @return the handler
+    */
+  def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
+    LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean],format))
+  }
+
+}

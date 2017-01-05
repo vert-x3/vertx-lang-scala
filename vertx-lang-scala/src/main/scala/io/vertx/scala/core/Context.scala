@@ -185,7 +185,7 @@ class Context(private val _asJava: Object) {
     * @param value the data
     */
   def put(key: String,value: AnyRef):Unit = {
-    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],toJava[Object](value))
+    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
   }
 
   /**

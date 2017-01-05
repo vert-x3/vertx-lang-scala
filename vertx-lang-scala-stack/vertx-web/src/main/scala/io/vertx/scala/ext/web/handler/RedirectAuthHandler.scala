@@ -37,40 +37,62 @@ class RedirectAuthHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JRedirectAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JRedirectAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JRedirectAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object RedirectAuthHandler{
-    def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)  
-  //static methods
-    def create(authProvider: AuthProvider):AuthHandler = {
-      AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
-    }
-
-    def create(authProvider: AuthProvider,loginRedirectURL: String):AuthHandler = {
-      AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String]))
-    }
-
-    def create(authProvider: AuthProvider,loginRedirectURL: String,returnURLParam: String):AuthHandler = {
-      AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String]))
-    }
-
+object RedirectAuthHandler{
+  def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)  
+  /**
+    * Create a handler
+    * @param authProvider the auth service to use
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider):AuthHandler = {
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
+
+  /**
+    * Create a handler
+    * @param authProvider the auth service to use
+    * @param loginRedirectURL the url to redirect the user to
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider,loginRedirectURL: String):AuthHandler = {
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create a handler
+    * @param authProvider the auth service to use
+    * @param loginRedirectURL the url to redirect the user to
+    * @param returnURLParam the name of param used to store return url information in session
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider,loginRedirectURL: String,returnURLParam: String):AuthHandler = {
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String]))
+  }
+
+}

@@ -40,34 +40,53 @@ class JDBCAuth(private val _asJava: Object)
     extends AuthProvider(_asJava) {
 
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Set the authentication query to use. Use this if you want to override the default authentication query.
+    * @param authenticationQuery the authentication query
+    * @return a reference to this for fluency
+    */
   def setAuthenticationQuery(authenticationQuery: String):JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setAuthenticationQuery(authenticationQuery.asInstanceOf[java.lang.String]))
   }
 
+  /**
+    * Set the roles query to use. Use this if you want to override the default roles query.
+    * @param rolesQuery the roles query
+    * @return a reference to this for fluency
+    */
   def setRolesQuery(rolesQuery: String):JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolesQuery(rolesQuery.asInstanceOf[java.lang.String]))
   }
 
+  /**
+    * Set the permissions query to use. Use this if you want to override the default permissions query.
+    * @param permissionsQuery the permissions query
+    * @return a reference to this for fluency
+    */
   def setPermissionsQuery(permissionsQuery: String):JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setPermissionsQuery(permissionsQuery.asInstanceOf[java.lang.String]))
   }
 
+  /**
+    * Set the role prefix to distinguish from permissions when checking for isPermitted requests.
+    * @param rolePrefix a Prefix e.g.: "role:"
+    * @return a reference to this for fluency
+    */
   def setRolePrefix(rolePrefix: String):JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
   }
 
-//future methods
 }
 
-  object JDBCAuth{
-    def apply(asJava: JJDBCAuth) = new JDBCAuth(asJava)  
-  //static methods
-    def create(client: JDBCClient):JDBCAuth = {
-      JDBCAuth(JJDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
-    }
-
+object JDBCAuth{
+  def apply(asJava: JJDBCAuth) = new JDBCAuth(asJava)  
+  /**
+    * Create a JDBC auth provider implementation
+    * @param client the JDBC client instance
+    * @return the auth provider
+    */
+  def create(client: JDBCClient):JDBCAuth = {
+    JDBCAuth(JJDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
   }
+
+}

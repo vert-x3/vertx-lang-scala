@@ -36,22 +36,27 @@ class AppNetAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
-//future methods
 }
 
-  object AppNetAuth{
-    def apply(asJava: JAppNetAuth) = new AppNetAuth(asJava)  
-  //static methods
-    def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
-      OAuth2Auth(JAppNetAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
-    }
-
-    def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
-      OAuth2Auth(JAppNetAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
-    }
-
+object AppNetAuth{
+  def apply(asJava: JAppNetAuth) = new AppNetAuth(asJava)  
+  /**
+    * Create a OAuth2Auth provider for App.net
+    * @param clientId the client id given to you by App.net
+    * @param clientSecret the client secret given to you by App.net
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+    OAuth2Auth(JAppNetAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
+
+  /**
+    * Create a OAuth2Auth provider for App.net
+    * @param clientId the client id given to you by App.net
+    * @param clientSecret the client secret given to you by App.net
+    * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+    */
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+    OAuth2Auth(JAppNetAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
+  }
+
+}

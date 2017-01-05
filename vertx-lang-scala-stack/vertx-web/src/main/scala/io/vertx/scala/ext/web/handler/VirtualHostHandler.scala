@@ -34,22 +34,20 @@ class VirtualHostHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JVirtualHostHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object VirtualHostHandler{
-    def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)  
-  //static methods
-    def create(hostname: String,handler: Handler[RoutingContext]):VirtualHostHandler = {
-      VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String],{x: JRoutingContext => handler.handle(RoutingContext(x))}))
-    }
-
+object VirtualHostHandler{
+  def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)  
+  /**
+    * Create a handler
+    * @return the handler
+    */
+  def create(hostname: String,handler: Handler[RoutingContext]):VirtualHostHandler = {
+    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String],{x: JRoutingContext => handler.handle(RoutingContext(x))}))
   }
+
+}

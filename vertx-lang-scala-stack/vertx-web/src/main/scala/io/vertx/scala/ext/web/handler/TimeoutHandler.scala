@@ -35,30 +35,38 @@ class TimeoutHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JTimeoutHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-//future methods
 }
 
-  object TimeoutHandler{
-    def apply(asJava: JTimeoutHandler) = new TimeoutHandler(asJava)  
-  //static methods
-    def create():TimeoutHandler = {
-      TimeoutHandler(JTimeoutHandler.create())
-    }
-
-    def create(timeout: Long):TimeoutHandler = {
-      TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))
-    }
-
-    def create(timeout: Long,errorCode: Int):TimeoutHandler = {
-      TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
-    }
-
+object TimeoutHandler{
+  def apply(asJava: JTimeoutHandler) = new TimeoutHandler(asJava)  
+  /**
+    * Create a handler
+    * @return the handler
+    */
+  def create():TimeoutHandler = {
+    TimeoutHandler(JTimeoutHandler.create())
   }
+
+  /**
+    * Create a handler
+    * @param timeout the timeout, in ms
+    * @return the handler
+    */
+  def create(timeout: Long):TimeoutHandler = {
+    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))
+  }
+
+  /**
+    * Create a handler
+    * @param timeout the timeout, in ms
+    * @return the handler
+    */
+  def create(timeout: Long,errorCode: Int):TimeoutHandler = {
+    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
+  }
+
+}

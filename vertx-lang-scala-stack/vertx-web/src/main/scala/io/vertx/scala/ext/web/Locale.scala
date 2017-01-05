@@ -29,42 +29,48 @@ class Locale(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Returns the language as reported by the HTTP client.
+    * @return language
+    */
   def language():String = {
     asJava.asInstanceOf[JLocale].language().asInstanceOf[String]
   }
 
+  /**
+    * Returns the country as reported by the HTTP client.
+    * @return variant
+    */
   def country():String = {
     asJava.asInstanceOf[JLocale].country().asInstanceOf[String]
   }
 
+  /**
+    * Returns the variant as reported by the HTTP client.
+    * @return variant
+    */
   def variant():String = {
     asJava.asInstanceOf[JLocale].variant().asInstanceOf[String]
   }
 
-//future methods
 }
 
-  object Locale{
-    def apply(asJava: JLocale) = new Locale(asJava)  
-  //static methods
-    def create():Locale = {
-      Locale(JLocale.create())
-    }
-
-    def create(language: String):Locale = {
-      Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
-    }
-
-    def create(language: String,country: String):Locale = {
-      Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String]))
-    }
-
-    def create(language: String,country: String,variant: String):Locale = {
-      Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String],variant.asInstanceOf[java.lang.String]))
-    }
-
+object Locale{
+  def apply(asJava: JLocale) = new Locale(asJava)  
+  def create():Locale = {
+    Locale(JLocale.create())
   }
+
+  def create(language: String):Locale = {
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
+  }
+
+  def create(language: String,country: String):Locale = {
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String]))
+  }
+
+  def create(language: String,country: String,variant: String):Locale = {
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String],variant.asInstanceOf[java.lang.String]))
+  }
+
+}
