@@ -13,7 +13,7 @@ import org.scalatest.junit.JUnitRunner
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
-class ConversionTest extends FlatSpec with Matchers {
+class ConverterTest extends FlatSpec with Matchers {
 
   "A generic method " should "return a Java instance" in {
     assert(toJava[TestDataObject](TestDataObject()).isInstanceOf[JTestDataObject])

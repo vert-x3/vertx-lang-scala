@@ -519,26 +519,26 @@ class GenericsTCKTest extends FlatSpec with Matchers {
         }
         w.dismiss()})
     )
-
-
-    //  def methodWithClassTypeParameterizedReturn[U:TypeTag]
-    //  def methodWithHandlerClassTypeParameterized[U:TypeTag]
-    //  def methodWithHandlerAsyncResultClassTypeParameterized
-    //  def methodWithFunctionParamClassTypeParameterized[U:TypeTag]
-    //  def methodWithClassTypeParam[U:TypeTag]
-    //  def methodWithClassTypeReturn[U:TypeTag]
-    //  def methodWithClassTypeHandler[U:TypeTag]
-    //  def methodWithClassTypeHandlerAsyncResult[U:TypeTag]
-    //  def methodWithClassTypeFunctionParam[U:TypeTag]
-    //  def methodWithClassTypeFunctionReturn[U:TypeTag]
-    //  def interfaceWithApiArg
-    //  def interfaceWithStringArg(value: String)
-    //  def interfaceWithVariableArg[T:TypeTag,U:TypeTag]
-    //  def methodWithHandlerGenericNullableApi
-    //  def methodWithHandlerAsyncResultGenericNullableApi
-    //  def methodWithGenericNullableApiReturn
-    //  def methodWithHandlerAsyncResultClassTypeParameterizedFuture[U:TypeTag]
-    //  def methodWithClassTypeHandlerAsyncResultFuture[U:TypeTag]
   }
+
+
+  //  def methodWithClassTypeParameterizedReturn[U:TypeTag]
+  //  def methodWithHandlerClassTypeParameterized[U:TypeTag]
+  //  def methodWithHandlerAsyncResultClassTypeParameterized
+  //  def methodWithFunctionParamClassTypeParameterized[U:TypeTag]
+  //  def methodWithClassTypeParam[U:TypeTag]
+  //  def methodWithClassTypeReturn[U:TypeTag]
+  //  def methodWithClassTypeHandler[U:TypeTag]
+  //  def methodWithClassTypeHandlerAsyncResult[U:TypeTag]
+  //  def methodWithClassTypeFunctionParam[U:TypeTag]
+  //  def methodWithClassTypeFunctionReturn[U:TypeTag]
+  //  def interfaceWithApiArg
+  //  def interfaceWithStringArg(value: String)
+  //  def interfaceWithVariableArg[T:TypeTag,U:TypeTag]
+  //  def methodWithHandlerGenericNullableApi
+  //  def methodWithHandlerAsyncResultGenericNullableApi
+  //  def methodWithGenericNullableApiReturn
+  //  def methodWithHandlerAsyncResultClassTypeParameterizedFuture[U:TypeTag]
+  //  def methodWithClassTypeHandlerAsyncResultFuture[U:TypeTag]
 
 }
