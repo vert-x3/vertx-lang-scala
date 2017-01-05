@@ -32,7 +32,7 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
   */
-class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) {
+class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -88,6 +88,6 @@ class LocalMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Opti
 }
 
   object LocalMap{
-    def apply[K:TypeTag,V:TypeTag](asJava: JLocalMap[_,_], objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new LocalMap[K,V](asJava, objectToK, objectToV)  
+    def apply[K:TypeTag,V:TypeTag](asJava: JLocalMap[_,_]) = new LocalMap[K,V](asJava)  
   //static methods
   }

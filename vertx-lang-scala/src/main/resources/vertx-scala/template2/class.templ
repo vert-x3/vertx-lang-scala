@@ -43,11 +43,7 @@ import @{importedType}\n
   */\n
 @end{}
 @if{concrete}
-	class @{className}@{assembleTypeParams(typeParams, true)}(private val _asJava: Object
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
-	@end{}
-	)
+	class @{className}@{assembleTypeParams(typeParams, true)}(private val _asJava: Object)
 @else{}
 	trait @{className}@{assembleTypeParams(typeParams, false)}
 @end{}
@@ -65,14 +61,7 @@ import @{importedType}\n
 	@includeNamed{'class-body.templ'}
 	\n
   object @{className}{\n
-    def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
-	@end{}
-	) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}
-	@end{})
+    def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
   \n
   //static methods\n
 	@foreach{method : staticMethods}
@@ -91,17 +80,8 @@ import @{importedType}\n
 	@includeNamed{'trait-body.templ'}
 	\n
 object @{className}{\n
-  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
-	@end{}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}
-	@end{})\n
-    private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object
-	@foreach{typeParam : typeParams}
-	, objectTo@{typeParam.name}: Option[Object => @{typeParam.name}] = None
-	@end{}) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava)\n
+    private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
     @includeNamed{'class-body.templ'}
 }\n
 @end{}

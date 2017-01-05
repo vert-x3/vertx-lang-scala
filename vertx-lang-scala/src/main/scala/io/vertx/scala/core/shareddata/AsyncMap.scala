@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   *
   * An asynchronous map.
   */
-class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) {
+class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -152,6 +152,6 @@ class AsyncMap[K:TypeTag,V:TypeTag](private val _asJava: Object, objectToK: Opti
 }
 
   object AsyncMap{
-    def apply[K:TypeTag,V:TypeTag](asJava: JAsyncMap[_,_], objectToK: Option[Object => K] = None, objectToV: Option[Object => V] = None) = new AsyncMap[K,V](asJava, objectToK, objectToV)  
+    def apply[K:TypeTag,V:TypeTag](asJava: JAsyncMap[_,_]) = new AsyncMap[K,V](asJava)  
   //static methods
   }
