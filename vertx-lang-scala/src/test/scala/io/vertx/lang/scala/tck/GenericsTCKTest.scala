@@ -1,12 +1,11 @@
 package io.vertx.lang.scala.tck
 
-import io.vertx.codegen.testmodel._
+import io.vertx.codegen.testmodel.{RefedInterface1Impl, _}
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
+import io.vertx.scala.codegen.testmodel.{GenericsTCK, RefedInterface1, TestDataObject}
 import org.junit.runner.RunWith
-import org.scalatest.{FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
-import io.vertx.scala.codegen.testmodel.{GenericRefedInterface, GenericsTCK, RefedInterface1, TestDataObject}
-import io.vertx.codegen.testmodel.RefedInterface1Impl
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.concurrent.ExecutionContext
 

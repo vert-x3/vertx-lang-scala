@@ -32,7 +32,6 @@ import org.scalatest.concurrent.Waiters.Waiter
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
-import scala.collection.mutable
 import scala.concurrent.ExecutionContext
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
@@ -622,8 +621,6 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testNullJsonReturns" should "work" in {
     val ret = obj.methodWithNullJsonObjectReturn()
-    assert(null == ret)
-    val ret2 = obj.methodWithNullJsonObjectReturn()
     assert(null == ret)
   }
 
