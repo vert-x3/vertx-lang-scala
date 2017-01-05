@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.file
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
@@ -30,26 +28,29 @@ class FileSystemProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * @return The total space on the file system, in bytes
+    */
   def totalSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].totalSpace().asInstanceOf[Long]
   }
 
+  /**
+    * @return The total un-allocated space on the file system, in bytes
+    */
   def unallocatedSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].unallocatedSpace().asInstanceOf[Long]
   }
 
+  /**
+    * @return The total usable space on the file system, in bytes
+    */
   def usableSpace():Long = {
     asJava.asInstanceOf[JFileSystemProps].usableSpace().asInstanceOf[Long]
   }
 
-//future methods
 }
 
-  object FileSystemProps{
-    def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
-  //static methods
-  }
+object FileSystemProps{
+  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
+}

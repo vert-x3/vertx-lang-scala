@@ -16,9 +16,9 @@
 
 package io.vertx.scala.ext.auth.jdbc
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.jdbc.{JDBCAuthOptions => JJDBCAuthOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
@@ -27,9 +27,10 @@ import io.vertx.scala.ext.auth.AuthOptions
 /**
   * Options configuring JDBC authentication.
   */
+class JDBCAuthOptions(private val _asJava: JJDBCAuthOptions) 
+    extends AuthOptions {
 
-class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the authentication query to use. Use this if you want to override the default authentication query.
@@ -38,18 +39,18 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setAuthenticationQuery(value)
     this
   }
-  def getAuthenticationQuery = {
-    asJava.getAuthenticationQuery()
+  def getAuthenticationQuery: String = {
+    asJava.getAuthenticationQuery().asInstanceOf[String]
   }
 
   /**
     * The configuration of the JDBC client: refer to the Vert.x JDBC Client configuration.
     */
-  def setConfig(value: JsonObject) = {
+  def setConfig(value: io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
   }
-  def getConfig = {
+  def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
@@ -60,8 +61,8 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setDatasourceName(value)
     this
   }
-  def getDatasourceName = {
-    asJava.getDatasourceName()
+  def getDatasourceName: String = {
+    asJava.getDatasourceName().asInstanceOf[String]
   }
 
   /**
@@ -71,8 +72,8 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setPermissionsQuery(value)
     this
   }
-  def getPermissionsQuery = {
-    asJava.getPermissionsQuery()
+  def getPermissionsQuery: String = {
+    asJava.getPermissionsQuery().asInstanceOf[String]
   }
 
   /**
@@ -82,8 +83,8 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setRolesPrefix(value)
     this
   }
-  def getRolesPrefix = {
-    asJava.getRolesPrefix()
+  def getRolesPrefix: String = {
+    asJava.getRolesPrefix().asInstanceOf[String]
   }
 
   /**
@@ -93,8 +94,8 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setRolesQuery(value)
     this
   }
-  def getRolesQuery = {
-    asJava.getRolesQuery()
+  def getRolesQuery: String = {
+    asJava.getRolesQuery().asInstanceOf[String]
   }
 
   /**
@@ -104,8 +105,8 @@ class JDBCAuthOptions(val asJava: JJDBCAuthOptions) {
     asJava.setShared(value)
     this
   }
-  def isShared = {
-    asJava.isShared()
+  def isShared: Boolean = {
+    asJava.isShared().asInstanceOf[Boolean]
   }
 }
 

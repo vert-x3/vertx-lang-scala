@@ -13,9 +13,9 @@
 @code{cached_counter++}
 @end{}
 \n
-//cached methods\n
 @code{var cached_method_counter = 0}
 @foreach{method : cacheReturnMethods}
+	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -26,14 +26,18 @@
       var tmp = @{invokeMethodWithoutConvertingReturn('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
       cached_@{cached_method_counter} = @{toScalaWithConversion('tmp', method.returnType, typeParams, method.typeParams)}\n
     }\n
+		@if{!method.isFluent}
     cached_@{cached_method_counter}\n
+		@else{}
+    this\n
+		@end{}
   }\n
 	\n
 	@code{cached_method_counter++}
 @end{}
 
-//fluent methods\n
 @foreach{method : fluentMethods}
+	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -46,9 +50,8 @@
 	\n
 @end{}
 
-//default methods\n
 @foreach{method : defaultMethods}
-  @foreach{ownerType : method.ownerTypes}//@{ownerType.name}\n@end{}
+	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:method.params}
@@ -59,8 +62,8 @@
 	\n
 @end{}
 
-//basic methods\n
 @foreach{method : basicMethods}
+	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -72,16 +75,17 @@
 	\n
 @end{}
 
-//future methods\n
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
+	@if{method.doc != null}@{methodDoc(method, ' ', true);}@end{}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
   def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
 	@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method), false)}] = {\n
 		@comment{'TODO: Why is there no nullable-info available in here??'}
-    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method), false)}](x => if (x == null) null.asInstanceOf[@{toScalaType(typeOfReturnedFuture(method), false)}] else @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
+    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method), false)}](x => @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
     @{invokeMethodAndUseProvidedHandler('asJava' + fromObjectToInstanceOf(type), type, method, typeParams, 'promiseAndHandler._1')}\n
     promiseAndHandler._2.future\n
   }\n

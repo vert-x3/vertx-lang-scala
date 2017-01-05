@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
@@ -39,8 +37,6 @@ class TimeoutStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -66,16 +62,16 @@ class TimeoutStream(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
+  /**
+    * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
+    * argument.
+    */
   def cancel():Unit = {
     asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
-//future methods
 }
 
-  object TimeoutStream{
-    def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
-  //static methods
-  }
+object TimeoutStream{
+  def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)  
+}

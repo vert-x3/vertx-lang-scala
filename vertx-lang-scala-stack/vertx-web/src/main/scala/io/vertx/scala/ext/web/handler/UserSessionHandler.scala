@@ -17,13 +17,14 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
+import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   *
@@ -35,24 +36,26 @@ import io.vertx.scala.ext.auth.AuthProvider
   * It requires an Auth provider so, if the user is deserialized from a clustered session it knows which Auth provider
   * to associate the session with.
   */
-class UserSessionHandler(private val _asJava: JUserSessionHandler) 
+class UserSessionHandler(private val _asJava: Object) 
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JUserSessionHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  override def handle(arg0: RoutingContext):Unit = {
+    asJava.asInstanceOf[JUserSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
-object UserSessionHandler {
-
-  def apply(_asJava: JUserSessionHandler): UserSessionHandler =
-    new UserSessionHandler(_asJava)
-
-  def create(authProvider: AuthProvider): UserSessionHandler = {
-    UserSessionHandler.apply(io.vertx.ext.web.handler.UserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
+object UserSessionHandler{
+  def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)  
+  /**
+    * Create a new handler
+    * @param authProvider The auth provider to use
+    * @return the handler
+    */
+  def create(authProvider: AuthProvider):UserSessionHandler = {
+    UserSessionHandler(JUserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
 }

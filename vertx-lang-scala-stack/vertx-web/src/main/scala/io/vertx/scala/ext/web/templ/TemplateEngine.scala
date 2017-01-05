@@ -17,40 +17,49 @@
 package io.vertx.scala.ext.web.templ
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
+import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * A template engine uses a specific template and the data in a routing context to render a resource into a buffer.
   * 
   * Concrete implementations exist for several well-known template engines.
   */
-class TemplateEngine(private val _asJava: JTemplateEngine) {
+class TemplateEngine(private val _asJava: Object) {
 
-  def asJava: JTemplateEngine = _asJava
+  def asJava = _asJava
 
   /**
     * Render
     * @param context the routing context
     * @param templateFileName the template file name to use
-    * @return the future that will be called with a result containing the buffer or a failure.
     */
-  def renderFuture(context: RoutingContext, templateFileName: String): concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer,Buffer]((x => if (x == null) null else Buffer.apply(x)))
-    _asJava.render(context.asJava.asInstanceOf[JRoutingContext], templateFileName, promiseAndHandler._1)
+  def render(context: RoutingContext,templateFileName: String,handler: Handler[AsyncResult[Buffer]]):Unit = {
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
+  }
+
+ /**
+   * Render
+   * @param context the routing context
+   * @param templateFileName the template file name to use
+   * @return the future that will be called with a result containing the buffer or a failure.
+   */
+    def renderFuture(context: RoutingContext,templateFileName: String):scala.concurrent.Future[Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
-object TemplateEngine {
-
-  def apply(_asJava: JTemplateEngine): TemplateEngine =
-    new TemplateEngine(_asJava)
-
+object TemplateEngine{
+  def apply(asJava: JTemplateEngine) = new TemplateEngine(asJava)  
 }

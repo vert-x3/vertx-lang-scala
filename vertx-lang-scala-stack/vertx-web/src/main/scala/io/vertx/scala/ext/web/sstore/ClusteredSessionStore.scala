@@ -17,43 +17,73 @@
 package io.vertx.scala.ext.web.sstore
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.sstore.{ClusteredSessionStore => JClusteredSessionStore}
-import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.ext.web.Session
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
-import io.vertx.core.{Vertx => JVertx}
+import io.vertx.ext.web.{Session => JSession}
+import io.vertx.core.AsyncResult
+import io.vertx.ext.web.sstore.{ClusteredSessionStore => JClusteredSessionStore}
+import io.vertx.core.Handler
+import io.vertx.scala.ext.web.Session
 import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * A session store which stores sessions in a distributed map so they are available across the cluster.
   */
-class ClusteredSessionStore(private val _asJava: JClusteredSessionStore) {
+class ClusteredSessionStore(private val _asJava: Object) 
+    extends SessionStore(_asJava) {
 
-  def asJava: JClusteredSessionStore = _asJava
 
 }
 
-object ClusteredSessionStore {
-
-  def apply(_asJava: JClusteredSessionStore): ClusteredSessionStore =
-    new ClusteredSessionStore(_asJava)
-
-  def create(vertx: Vertx, sessionMapName: String): ClusteredSessionStore = {
-    ClusteredSessionStore.apply(io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName))
+object ClusteredSessionStore{
+  def apply(asJava: JClusteredSessionStore) = new ClusteredSessionStore(asJava)  
+  /**
+    * Create a session store
+    * @param vertx the Vert.x instance
+    * @param sessionMapName the session map name
+    * @return the session store
+    */
+  def create(vertx: Vertx,sessionMapName: String):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
   }
 
-  def create(vertx: Vertx, sessionMapName: String, retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore.apply(io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName, retryTimeout))
+  /**
+    * Create a session store.<p/>
+    *
+    * The retry timeout value, configures how long the session handler will retry to get a session from the store
+    * when it is not found.
+    * @param vertx the Vert.x instance
+    * @param sessionMapName the session map name
+    * @param retryTimeout the store retry timeout, in ms
+    * @return the session store
+    */
+  def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],retryTimeout.asInstanceOf[java.lang.Long]))
   }
 
-  def create(vertx: Vertx): ClusteredSessionStore = {
-    ClusteredSessionStore.apply(io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+  /**
+    * Create a session store
+    * @param vertx the Vert.x instance
+    * @return the session store
+    */
+  def create(vertx: Vertx):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: Vertx, retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore.apply(io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], retryTimeout))
+  /**
+    * Create a session store.<p/>
+    *
+    * The retry timeout value, configures how long the session handler will retry to get a session from the store
+    * when it is not found.
+    * @param vertx the Vert.x instance
+    * @param retryTimeout the store retry timeout, in ms
+    * @return the session store
+    */
+  def create(vertx: Vertx,retryTimeout: Long):ClusteredSessionStore = {
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],retryTimeout.asInstanceOf[java.lang.Long]))
   }
 
 }

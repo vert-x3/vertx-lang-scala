@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.datagram
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
@@ -37,8 +35,6 @@ class PacketWritestream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -59,25 +55,32 @@ class PacketWritestream(private val _asJava: Object)
     this
   }
 
-//default methods
-  //io.vertx.core.streams.WriteStream
+  /**
+    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+    */
   override def end(t: Buffer):Unit = {
     asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
   }
 
-//basic methods
+  /**
+    * Ends the stream.
+    * 
+    * Once the stream has ended, it cannot be used any more.
+    */
   override def end():Unit = {
     asJava.asInstanceOf[JPacketWritestream].end()
   }
 
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.datagram.PacketWritestream#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
   override def writeQueueFull():Boolean = {
     asJava.asInstanceOf[JPacketWritestream].writeQueueFull().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 
-  object PacketWritestream{
-    def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)  
-  //static methods
-  }
+object PacketWritestream{
+  def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)  
+}

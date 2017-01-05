@@ -16,9 +16,7 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{GenericNullableRefedInterface => JGenericNullableRefedInterface}
@@ -29,18 +27,12 @@ class GenericNullableRefedInterface[T:TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def getValue():T = {
     toScala[T](asJava.asInstanceOf[JGenericNullableRefedInterface[Object]].getValue())
   }
 
-//future methods
 }
 
-  object GenericNullableRefedInterface{
-    def apply[T:TypeTag](asJava: JGenericNullableRefedInterface[_]) = new GenericNullableRefedInterface[T](asJava)  
-  //static methods
-  }
+object GenericNullableRefedInterface{
+  def apply[T:TypeTag](asJava: JGenericNullableRefedInterface[_]) = new GenericNullableRefedInterface[T](asJava)  
+}

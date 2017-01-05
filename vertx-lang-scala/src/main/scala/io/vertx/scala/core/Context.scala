@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
@@ -66,99 +64,215 @@ class Context(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
+  /**
+    * Set an exception handler called when the context runs an action throwing an uncaught throwable.<p/>
+    *
+    * When this handler is called, [[io.vertx.scala.core.Vertx#currentContext]] will return this context.
+    * @param handler the exception handler
+    * @return a reference to this, so the API can be used fluently
+    */
   def exceptionHandler(handler: Handler[Throwable]):Context = {
     asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//default methods
-//basic methods
+  /**
+    * Run the specified action asynchronously on the same context, some time after the current execution has completed.
+    * @param action the action to run
+    */
   def runOnContext(action: Handler[Unit]):Unit = {
     asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})
   }
 
+  /**
+    * Safely execute some blocking code.
+    * 
+    * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+    * 
+    * When the code is complete the handler `resultHandler` will be called with the result on the original context
+    * (e.g. on the original event loop of the caller).
+    * 
+    * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
+    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+    * method if it failed.
+    * @param blockingCodeHandler handler representing the blocking code to run
+    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+    */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
+  /**
+    * Invoke [[io.vertx.scala.core.Context#executeBlockingFuture]] with order = true.
+    * @param blockingCodeHandler handler representing the blocking code to run
+    */
   def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
   }
 
+  /**
+    * If the context is associated with a Verticle deployment, this returns the deployment ID of that deployment.
+    * @return the deployment ID of the deployment or null if not a Verticle deployment
+    */
   def deploymentID():String = {
     asJava.asInstanceOf[JContext].deploymentID().asInstanceOf[String]
   }
 
+  /**
+    * If the context is associated with a Verticle deployment, this returns the configuration that was specified when
+    * the verticle was deployed.
+    * @return the configuration of the deployment or null if not a Verticle deployment
+    */
   def config():scala.Option[io.vertx.core.json.JsonObject] = {
     scala.Option(asJava.asInstanceOf[JContext].config())
   }
 
+  /**
+    * The process args
+    */
   def processArgs():scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JContext].processArgs().asScala.map(x => x.asInstanceOf[String])
   }
 
+  /**
+    * Is the current context an event loop context?
+    * 
+    * NOTE! when running blocking code using [[io.vertx.scala.core.Vertx#executeBlockingFuture]] from a
+    * standard (not worker) verticle, the context will still an event loop context and this 
+    * will return true.
+    * @return true if false otherwise
+    */
   def isEventLoopContext():Boolean = {
     asJava.asInstanceOf[JContext].isEventLoopContext().asInstanceOf[Boolean]
   }
 
+  /**
+    * Is the current context a worker context?
+    * 
+    * NOTE! when running blocking code using [[io.vertx.scala.core.Vertx#executeBlockingFuture]] from a
+    * standard (not worker) verticle, the context will still an event loop context and this 
+    * will return false.
+    * @return true if the current context is a worker context, false otherwise
+    */
   def isWorkerContext():Boolean = {
     asJava.asInstanceOf[JContext].isWorkerContext().asInstanceOf[Boolean]
   }
 
+  /**
+    * Is the current context a multi-threaded worker context?
+    * @return true if the current context is a multi-threaded worker context, false otherwise
+    */
   def isMultiThreadedWorkerContext():Boolean = {
     asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext().asInstanceOf[Boolean]
   }
 
+  /**
+    * Get some data from the context.
+    * @param key the key of the data
+    * @return the data
+    */
   def get[T:TypeTag](key: String):T = {
     toScala[T](asJava.asInstanceOf[JContext].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
+  /**
+    * Put some data in the context.
+    * 
+    * This can be used to share data between different handlers that share a context
+    * @param key the key of the data
+    * @param value the data
+    */
   def put(key: String,value: AnyRef):Unit = {
-    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],toJava[Object](value))
+    asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
   }
 
+  /**
+    * Remove some data from the context.
+    * @param key the key to remove
+    * @return true if removed successfully, false otherwise
+    */
   def remove(key: String):Boolean = {
     asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
+  /**
+    * @return The Vertx instance that created the context
+    */
   def owner():Vertx = {
     Vertx(asJava.asInstanceOf[JContext].owner())
   }
 
+  /**
+    * @return the number of instances of the verticle that were deployed in the deployment (if any) related to this context
+    */
   def getInstanceCount():Int = {
     asJava.asInstanceOf[JContext].getInstanceCount().asInstanceOf[Int]
   }
 
-//future methods
-  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
+ /**
+   * Safely execute some blocking code.
+   * 
+   * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+   * 
+   * When the code is complete the handler `resultHandler` will be called with the result on the original context
+   * (e.g. on the original event loop of the caller).
+   * 
+   * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
+   * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
+   * method if it failed.
+   * @param blockingCodeHandler handler representing the blocking code to run
+   * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+   * @return future that will be called when the blocking code is complete
+   */
+    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => if (x == null) null.asInstanceOf[T] else toScala[T](x))
+ /**
+   * Invoke [[io.vertx.scala.core.Context#executeBlockingFuture]] with order = true.
+   * @param blockingCodeHandler handler representing the blocking code to run
+   * @return future that will be called when the blocking code is complete
+   */
+    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
-  object Context{
-    def apply(asJava: JContext) = new Context(asJava)  
-  //static methods
-    def isOnWorkerThread():Boolean = {
-      JContext.isOnWorkerThread().asInstanceOf[Boolean]
-    }
-
-    def isOnEventLoopThread():Boolean = {
-      JContext.isOnEventLoopThread().asInstanceOf[Boolean]
-    }
-
-    def isOnVertxThread():Boolean = {
-      JContext.isOnVertxThread().asInstanceOf[Boolean]
-    }
-
+object Context{
+  def apply(asJava: JContext) = new Context(asJava)  
+  /**
+    * Is the current thread a worker thread?
+    * 
+    * NOTE! This is not always the same as calling [[io.vertx.scala.core.Context#isWorkerContext]]. If you are running blocking code
+    * from an event loop context, then this will return true but [[io.vertx.scala.core.Context#isWorkerContext]] will return false.
+    * @return true if current thread is a worker thread, false otherwise
+    */
+  def isOnWorkerThread():Boolean = {
+    JContext.isOnWorkerThread().asInstanceOf[Boolean]
   }
+
+  /**
+    * Is the current thread an event thread?
+    * 
+    * NOTE! This is not always the same as calling [[io.vertx.scala.core.Context#isEventLoopContext]]. If you are running blocking code
+    * from an event loop context, then this will return false but [[io.vertx.scala.core.Context#isEventLoopContext]] will return true.
+    * @return true if current thread is a worker thread, false otherwise
+    */
+  def isOnEventLoopThread():Boolean = {
+    JContext.isOnEventLoopThread().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Is the current thread a Vert.x thread? That's either a worker thread or an event loop thread
+    * @return true if current thread is a Vert.x thread, false otherwise
+    */
+  def isOnVertxThread():Boolean = {
+    JContext.isOnVertxThread().asInstanceOf[Boolean]
+  }
+
+}

@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.shareddata
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{Lock => JLock}
@@ -33,18 +31,15 @@ class Lock(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Release the lock. Once the lock is released another will be able to obtain the lock.
+    */
   def release():Unit = {
     asJava.asInstanceOf[JLock].release()
   }
 
-//future methods
 }
 
-  object Lock{
-    def apply(asJava: JLock) = new Lock(asJava)  
-  //static methods
-  }
+object Lock{
+  def apply(asJava: JLock) = new Lock(asJava)  
+}

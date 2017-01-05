@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.http
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
@@ -36,8 +34,6 @@ class ServerWebSocketStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -63,12 +59,8 @@ class ServerWebSocketStream(private val _asJava: Object)
     this
   }
 
-//default methods
-//basic methods
-//future methods
 }
 
-  object ServerWebSocketStream{
-    def apply(asJava: JServerWebSocketStream) = new ServerWebSocketStream(asJava)  
-  //static methods
-  }
+object ServerWebSocketStream{
+  def apply(asJava: JServerWebSocketStream) = new ServerWebSocketStream(asJava)  
+}

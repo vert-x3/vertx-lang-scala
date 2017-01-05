@@ -16,9 +16,7 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
@@ -36,10 +34,6 @@ class FunctionParamTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
   def methodWithBasicParam(byteFunc: Byte => String,shortFunc: Short => String,integerFunc: Int => String,longFunc: Long => String,floatFunc: Float => String,doubleFunc: Double => String,booleanFunc: Boolean => String,charFunc: Char => String,stringFunc: String => String):scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicParam({x: java.lang.Byte => byteFunc(x.asInstanceOf[Byte]).asInstanceOf[java.lang.String]},{x: java.lang.Short => shortFunc(x.asInstanceOf[Short]).asInstanceOf[java.lang.String]},{x: java.lang.Integer => integerFunc(x.asInstanceOf[Int]).asInstanceOf[java.lang.String]},{x: java.lang.Long => longFunc(x.asInstanceOf[Long]).asInstanceOf[java.lang.String]},{x: java.lang.Float => floatFunc(x.asInstanceOf[Float]).asInstanceOf[java.lang.String]},{x: java.lang.Double => doubleFunc(x.asInstanceOf[Double]).asInstanceOf[java.lang.String]},{x: java.lang.Boolean => booleanFunc(x.asInstanceOf[Boolean]).asInstanceOf[java.lang.String]},{x: java.lang.Character => charFunc(x.asInstanceOf[Char]).asInstanceOf[java.lang.String]},{x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }
@@ -57,7 +51,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectParam(arg: AnyRef,func: AnyRef => String):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(toJava[Object](arg),{x: Object => func(toScala[java.lang.Object](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
   def methodWithDataObjectParam(func: TestDataObject => String):String = {
@@ -97,7 +91,7 @@ class FunctionParamTCK(private val _asJava: Object) {
   }
 
   def methodWithObjectReturn(func: Int => AnyRef):String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => toJava[Object](func(x.asInstanceOf[Int]))}).asInstanceOf[String]
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
   }
 
   def methodWithDataObjectReturn(func: String => TestDataObject):String = {
@@ -136,10 +130,8 @@ class FunctionParamTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
-//future methods
 }
 
-  object FunctionParamTCK{
-    def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
-  //static methods
-  }
+object FunctionParamTCK{
+  def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
+}

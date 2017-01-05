@@ -16,9 +16,7 @@
 
 package io.vertx.scala.core.metrics
 
-import scala.compat.java8.FunctionConverters._
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.metrics.{Measured => JMeasured}
@@ -29,6 +27,10 @@ trait Measured {
 
   def asJava: java.lang.Object
 
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
   def isMetricsEnabled():Boolean
 
 }
@@ -39,14 +41,13 @@ object Measured{
 
       def asJava = _asJava
 
-//cached methods
-//fluent methods
-//default methods
-//basic methods
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
   def isMetricsEnabled():Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
-//future methods
 }
 }
