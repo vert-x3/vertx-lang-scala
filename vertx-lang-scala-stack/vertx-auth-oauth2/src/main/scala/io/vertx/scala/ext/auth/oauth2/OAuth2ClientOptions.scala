@@ -20,7 +20,6 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.scala.core.http.Http2Settings
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
@@ -28,13 +27,13 @@ import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.http.HttpVersion
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.net.ProxyOptions
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
@@ -51,7 +50,7 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
 
   override def asJava = _asJava
   override def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    asJava.setAlpnVersions(value.asInstanceOf)
+    asJava.setAlpnVersions(value.asJava)
     this
   }
   override def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
@@ -99,12 +98,12 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
     asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  override def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asInstanceOf)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  override def getCrlValues: scala.collection.mutable.Buffer[Buffer] = {
-    asJava.getCrlValues().asScala.map(x => Buffer(x))
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
   override def setDefaultHost(value: String) = {
     asJava.setDefaultHost(value)

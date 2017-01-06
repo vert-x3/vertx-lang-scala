@@ -16,9 +16,9 @@
 
 package io.vertx.scala.redis
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.{RedisOptions => JRedisOptions}
 
 /**
@@ -42,9 +42,9 @@ import io.vertx.redis.{RedisOptions => JRedisOptions}
   * will perform the authentication handshake and database selection, however if you don't do this and call [[io.vertx.scala.redis.RedisClient]]
   * yourself in case of connection failure the client will not be able to perform the correct authentication handshake.
   */
+class RedisOptions(private val _asJava: JRedisOptions) {
 
-class RedisOptions(val asJava: JRedisOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the eventbus address prefix for `PUB/SUB`.
@@ -53,8 +53,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setAddress(value)
     this
   }
-  def getAddress = {
-    asJava.getAddress()
+  def getAddress: String = {
+    asJava.getAddress().asInstanceOf[String]
   }
 
   /**
@@ -64,8 +64,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setAuth(value)
     this
   }
-  def getAuth = {
-    asJava.getAuth()
+  def getAuth: String = {
+    asJava.getAuth().asInstanceOf[String]
   }
 
   /**
@@ -75,8 +75,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setBinary(value)
     this
   }
-  def isBinary = {
-    asJava.isBinary()
+  def isBinary: Boolean = {
+    asJava.isBinary().asInstanceOf[Boolean]
   }
 
   /**
@@ -86,8 +86,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setEncoding(value)
     this
   }
-  def getEncoding = {
-    asJava.getEncoding()
+  def getEncoding: String = {
+    asJava.getEncoding().asInstanceOf[String]
   }
 
   /**
@@ -97,8 +97,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -108,8 +108,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -119,8 +119,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setSelect(value)
     this
   }
-  def getSelect = {
-    asJava.getSelect()
+  def getSelect: Int = {
+    asJava.getSelect().asInstanceOf[Int]
   }
 
   /**
@@ -130,8 +130,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -141,8 +141,8 @@ class RedisOptions(val asJava: JRedisOptions) {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 }
 

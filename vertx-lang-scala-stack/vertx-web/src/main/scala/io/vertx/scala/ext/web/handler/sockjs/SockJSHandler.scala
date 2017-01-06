@@ -50,6 +50,7 @@ class SockJSHandler(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<io.vertx.ext.web.handler.sockjs.SockJSSocket>
   def socketHandler(handler: Handler[SockJSSocket]):SockJSHandler = {
     asJava.asInstanceOf[JSockJSHandler].socketHandler({x: JSockJSSocket => handler.handle(SockJSSocket(x))})
     this
@@ -62,6 +63,7 @@ class SockJSHandler(private val _asJava: Object)
     * @param bridgeOptions options to configure the bridge withsee <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.ext.web.handler.sockjs.BridgeOptions
   def bridge(bridgeOptions: BridgeOptions):SockJSHandler = {
     asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava)
     this
@@ -74,6 +76,8 @@ class SockJSHandler(private val _asJava: Object)
     * @param bridgeEventHandler handler to receive bridge events
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.ext.web.handler.sockjs.BridgeOptions
+//io.vertx.core.Handler<io.vertx.ext.web.handler.sockjs.BridgeEvent>
   def bridge(bridgeOptions: BridgeOptions,bridgeEventHandler: Handler[BridgeEvent]):SockJSHandler = {
     asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava,{x: JBridgeEvent => bridgeEventHandler.handle(BridgeEvent(x))})
     this

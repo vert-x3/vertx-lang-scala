@@ -433,7 +433,9 @@
         } else if (info.kind.isSet){
           ret += '.map(x => '+ toScalaWithConversion('x', info.type, typeParams, methodTypeParams) +')';
         } else if (info.kind.isMap){
+          /*TODO: expensive*/
           ret += '.mapValues(x => '+ toScalaWithConversion('x', info.type, typeParams, methodTypeParams) +')';
+          ret = 'collection.mutable.Map('+ ret + '.toSeq: _*)';
         }
       }
       return ret;

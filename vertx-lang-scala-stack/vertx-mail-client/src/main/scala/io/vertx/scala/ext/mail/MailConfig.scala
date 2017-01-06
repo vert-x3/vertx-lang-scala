@@ -16,18 +16,18 @@
 
 package io.vertx.scala.ext.mail
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mail.{MailConfig => JMailConfig}
 
 /**
   * represents the configuration of a mail service with mail server hostname,
   * port, security options, login options and login/password
   */
+class MailConfig(private val _asJava: JMailConfig) {
 
-class MailConfig(val asJava: JMailConfig) {
-
+  def asJava = _asJava
 
   /**
     * set if sending allows rcpt errors
@@ -39,8 +39,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setAllowRcptErrors(value)
     this
   }
-  def isAllowRcptErrors = {
-    asJava.isAllowRcptErrors()
+  def isAllowRcptErrors: Boolean = {
+    asJava.isAllowRcptErrors().asInstanceOf[Boolean]
   }
 
   /**
@@ -53,8 +53,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setAuthMethods(value)
     this
   }
-  def getAuthMethods = {
-    asJava.getAuthMethods()
+  def getAuthMethods: String = {
+    asJava.getAuthMethods().asInstanceOf[String]
   }
 
   /**
@@ -73,8 +73,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setDisableEsmtp(value)
     this
   }
-  def isDisableEsmtp = {
-    asJava.isDisableEsmtp()
+  def isDisableEsmtp: Boolean = {
+    asJava.isDisableEsmtp().asInstanceOf[Boolean]
   }
 
   /**
@@ -84,8 +84,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setHostname(value)
     this
   }
-  def getHostname = {
-    asJava.getHostname()
+  def getHostname: String = {
+    asJava.getHostname().asInstanceOf[String]
   }
 
   /**
@@ -99,8 +99,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setKeepAlive(value)
     this
   }
-  def isKeepAlive = {
-    asJava.isKeepAlive()
+  def isKeepAlive: Boolean = {
+    asJava.isKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
@@ -113,8 +113,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setKeyStore(value)
     this
   }
-  def getKeyStore = {
-    asJava.getKeyStore()
+  def getKeyStore: String = {
+    asJava.getKeyStore().asInstanceOf[String]
   }
 
   /**
@@ -124,8 +124,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setKeyStorePassword(value)
     this
   }
-  def getKeyStorePassword = {
-    asJava.getKeyStorePassword()
+  def getKeyStorePassword: String = {
+    asJava.getKeyStorePassword().asInstanceOf[String]
   }
 
   /**
@@ -137,7 +137,7 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setLogin(value)
     this
   }
-  def getLogin = {
+  def getLogin: io.vertx.ext.mail.LoginOption = {
     asJava.getLogin()
   }
 
@@ -149,8 +149,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setMaxPoolSize(value)
     this
   }
-  def getMaxPoolSize = {
-    asJava.getMaxPoolSize()
+  def getMaxPoolSize: Int = {
+    asJava.getMaxPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -160,8 +160,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setOwnHostname(value)
     this
   }
-  def getOwnHostname = {
-    asJava.getOwnHostname()
+  def getOwnHostname: String = {
+    asJava.getOwnHostname().asInstanceOf[String]
   }
 
   /**
@@ -171,8 +171,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
-    asJava.getPassword()
+  def getPassword: String = {
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -182,8 +182,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -193,8 +193,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
@@ -206,7 +206,7 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setStarttls(value)
     this
   }
-  def getStarttls = {
+  def getStarttls: io.vertx.ext.mail.StartTLSOptions = {
     asJava.getStarttls()
   }
 
@@ -218,8 +218,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
-    asJava.isTrustAll()
+  def isTrustAll: Boolean = {
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
@@ -229,8 +229,8 @@ class MailConfig(val asJava: JMailConfig) {
     asJava.setUsername(value)
     this
   }
-  def getUsername = {
-    asJava.getUsername()
+  def getUsername: String = {
+    asJava.getUsername().asInstanceOf[String]
   }
 }
 

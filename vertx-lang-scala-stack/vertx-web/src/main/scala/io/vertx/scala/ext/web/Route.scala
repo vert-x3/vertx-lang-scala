@@ -38,6 +38,7 @@ class Route(private val _asJava: Object) {
     * @param method the HTTP method to add
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.http.HttpMethod
   def method(method: io.vertx.core.http.HttpMethod):Route = {
     asJava.asInstanceOf[JRoute].method(method)
     this
@@ -49,6 +50,7 @@ class Route(private val _asJava: Object) {
     * @param path the path prefix
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def path(path: String):Route = {
     asJava.asInstanceOf[JRoute].path(path.asInstanceOf[java.lang.String])
     this
@@ -60,6 +62,7 @@ class Route(private val _asJava: Object) {
     * @param path the path regex
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def pathRegex(path: String):Route = {
     asJava.asInstanceOf[JRoute].pathRegex(path.asInstanceOf[java.lang.String])
     this
@@ -70,6 +73,7 @@ class Route(private val _asJava: Object) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def produces(contentType: String):Route = {
     asJava.asInstanceOf[JRoute].produces(contentType.asInstanceOf[java.lang.String])
     this
@@ -80,6 +84,7 @@ class Route(private val _asJava: Object) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def consumes(contentType: String):Route = {
     asJava.asInstanceOf[JRoute].consumes(contentType.asInstanceOf[java.lang.String])
     this
@@ -90,6 +95,7 @@ class Route(private val _asJava: Object) {
     * @param order the order
     * @return a reference to this, so the API can be used fluently
     */
+//int
   def order(order: Int):Route = {
     asJava.asInstanceOf[JRoute].order(order.asInstanceOf[java.lang.Integer])
     this
@@ -111,6 +117,7 @@ class Route(private val _asJava: Object) {
     * @param requestHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<io.vertx.ext.web.RoutingContext>
   def handler(requestHandler: Handler[RoutingContext]):Route = {
     asJava.asInstanceOf[JRoute].handler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
     this
@@ -119,6 +126,7 @@ class Route(private val _asJava: Object) {
   /**
     * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
+//io.vertx.core.Handler<io.vertx.ext.web.RoutingContext>
   def blockingHandler(requestHandler: Handler[RoutingContext]):Route = {
     asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
     this
@@ -137,6 +145,8 @@ class Route(private val _asJava: Object) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<io.vertx.ext.web.RoutingContext>
+//boolean
   def blockingHandler(requestHandler: Handler[RoutingContext],ordered: Boolean):Route = {
     asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))},ordered.asInstanceOf[java.lang.Boolean])
     this
@@ -149,6 +159,7 @@ class Route(private val _asJava: Object) {
     * @param failureHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<io.vertx.ext.web.RoutingContext>
   def failureHandler(failureHandler: Handler[RoutingContext]):Route = {
     asJava.asInstanceOf[JRoute].failureHandler({x: JRoutingContext => failureHandler.handle(RoutingContext(x))})
     this
@@ -187,6 +198,7 @@ class Route(private val _asJava: Object) {
     * @param useNormalisedPath use normalised path for routing?
     * @return a reference to this, so the API can be used fluently
     */
+//boolean
   def useNormalisedPath(useNormalisedPath: Boolean):Route = {
     asJava.asInstanceOf[JRoute].useNormalisedPath(useNormalisedPath.asInstanceOf[java.lang.Boolean])
     this

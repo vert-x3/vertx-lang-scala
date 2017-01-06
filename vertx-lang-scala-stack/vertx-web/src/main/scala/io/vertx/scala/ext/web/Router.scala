@@ -55,6 +55,8 @@ class Router(private val _asJava: Object) {
     * @param subRouter the router to mount as a sub router
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.ext.web.Router
   def mountSubRouter(mountPoint: String,subRouter: Router):Router = {
     asJava.asInstanceOf[JRouter].mountSubRouter(mountPoint.asInstanceOf[java.lang.String],subRouter.asJava.asInstanceOf[JRouter])
     this
@@ -66,6 +68,7 @@ class Router(private val _asJava: Object) {
     * @param exceptionHandler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Throwable>
   def exceptionHandler(exceptionHandler: Handler[Throwable]):Router = {
     asJava.asInstanceOf[JRouter].exceptionHandler({x: Throwable => exceptionHandler.handle(x)})
     this

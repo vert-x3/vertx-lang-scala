@@ -40,6 +40,7 @@ class BasicAuthHandler(private val _asJava: Object)
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
@@ -50,6 +51,7 @@ class BasicAuthHandler(private val _asJava: Object)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
+//java.util.Set<java.lang.String>
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this

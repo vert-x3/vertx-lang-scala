@@ -41,6 +41,8 @@ class SQLConnection(private val _asJava: Object) {
     * Sets the auto commit flag for this connection. True by default.
     * @param autoCommit the autoCommit flag, true by default.
     */
+//boolean
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def setAutoCommit(autoCommit: Boolean,resultHandler: Handler[AsyncResult[Unit]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].setAutoCommit(autoCommit.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -50,6 +52,8 @@ class SQLConnection(private val _asJava: Object) {
     * Executes the given SQL statement
     * @param sql the SQL to execute. For example <code>CREATE TABLE IF EXISTS table ...</code>
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def execute(sql: String,resultHandler: Handler[AsyncResult[Unit]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].execute(sql.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -59,6 +63,8 @@ class SQLConnection(private val _asJava: Object) {
     * Executes the given SQL <code>SELECT</code> statement which returns the results of the query.
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.ResultSet>>
   def query(sql: String,resultHandler: Handler[AsyncResult[ResultSet]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].query(sql.asInstanceOf[java.lang.String],{x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet,ResultSet](x, a => ResultSet(a)))})
     this
@@ -68,6 +74,8 @@ class SQLConnection(private val _asJava: Object) {
     * Executes the given SQL <code>SELECT</code> statement which returns the results of the query as a read stream.
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.SQLRowStream>>
   def queryStream(sql: String,handler: Handler[AsyncResult[SQLRowStream]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].queryStream(sql.asInstanceOf[java.lang.String],{x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream,SQLRowStream](x, a => SQLRowStream(a)))})
     this
@@ -78,6 +86,9 @@ class SQLConnection(private val _asJava: Object) {
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     * @param params these are the parameters to fill the statement.
     */
+//java.lang.String
+//io.vertx.core.json.JsonArray
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.ResultSet>>
   def queryWithParams(sql: String,params: io.vertx.core.json.JsonArray,resultHandler: Handler[AsyncResult[ResultSet]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].queryWithParams(sql.asInstanceOf[java.lang.String],params,{x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet,ResultSet](x, a => ResultSet(a)))})
     this
@@ -88,6 +99,9 @@ class SQLConnection(private val _asJava: Object) {
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     * @param params these are the parameters to fill the statement.
     */
+//java.lang.String
+//io.vertx.core.json.JsonArray
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.SQLRowStream>>
   def queryStreamWithParams(sql: String,params: io.vertx.core.json.JsonArray,handler: Handler[AsyncResult[SQLRowStream]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].queryStreamWithParams(sql.asInstanceOf[java.lang.String],params,{x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream,SQLRowStream](x, a => SQLRowStream(a)))})
     this
@@ -98,6 +112,8 @@ class SQLConnection(private val _asJava: Object) {
     * statement.
     * @param sql the SQL to execute. For example <code>INSERT INTO table ...</code>
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.UpdateResult>>
   def update(sql: String,resultHandler: Handler[AsyncResult[UpdateResult]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].update(sql.asInstanceOf[java.lang.String],{x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult,UpdateResult](x, a => UpdateResult(a)))})
     this
@@ -109,6 +125,9 @@ class SQLConnection(private val _asJava: Object) {
     * @param sql the SQL to execute. For example <code>INSERT INTO table ...</code>
     * @param params these are the parameters to fill the statement.
     */
+//java.lang.String
+//io.vertx.core.json.JsonArray
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.UpdateResult>>
   def updateWithParams(sql: String,params: io.vertx.core.json.JsonArray,resultHandler: Handler[AsyncResult[UpdateResult]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].updateWithParams(sql.asInstanceOf[java.lang.String],params,{x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult,UpdateResult](x, a => UpdateResult(a)))})
     this
@@ -116,8 +135,10 @@ class SQLConnection(private val _asJava: Object) {
 
   /**
     * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
-    * @param sql the SQL to execute. For example <code>{call getEmpName (?, ?)`</code>.
+    * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.ResultSet>>
   def call(sql: String,resultHandler: Handler[AsyncResult[ResultSet]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].call(sql.asInstanceOf[java.lang.String],{x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet,ResultSet](x, a => ResultSet(a)))})
     this
@@ -137,6 +158,10 @@ class SQLConnection(private val _asJava: Object) {
     * @param params these are the parameters to fill the statement.
     * @param outputs these are the outputs to fill the statement.
     */
+//java.lang.String
+//io.vertx.core.json.JsonArray
+//io.vertx.core.json.JsonArray
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.ResultSet>>
   def callWithParams(sql: String,params: io.vertx.core.json.JsonArray,outputs: io.vertx.core.json.JsonArray,resultHandler: Handler[AsyncResult[ResultSet]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].callWithParams(sql.asInstanceOf[java.lang.String],params,outputs,{x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet,ResultSet](x, a => ResultSet(a)))})
     this
@@ -145,6 +170,7 @@ class SQLConnection(private val _asJava: Object) {
   /**
     * Commits all changes made since the previous commit/rollback.
     */
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def commit(handler: Handler[AsyncResult[Unit]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].commit({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -153,6 +179,7 @@ class SQLConnection(private val _asJava: Object) {
   /**
     * Rolls back all changes made since the previous commit/rollback.
     */
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def rollback(handler: Handler[AsyncResult[Unit]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].rollback({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -164,6 +191,7 @@ class SQLConnection(private val _asJava: Object) {
     * It can be over written at any time and becomes active on the next query call.
     * @param timeoutInSeconds the max amount of seconds the query can take to execute.
     */
+//int
   def setQueryTimeout(timeoutInSeconds: Int):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].setQueryTimeout(timeoutInSeconds.asInstanceOf[java.lang.Integer])
     this
@@ -173,6 +201,8 @@ class SQLConnection(private val _asJava: Object) {
     * Batch simple SQL strings and execute the batch where the async result contains a array of Integers.
     * @param sqlStatements sql statement
     */
+//java.util.List<java.lang.String>
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.Integer>>>
   def batch(sqlStatements: scala.collection.mutable.Buffer[String],handler: Handler[AsyncResult[scala.collection.mutable.Buffer[Int]]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].batch(sqlStatements.map(x => x.asInstanceOf[java.lang.String]).asJava,{x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
     this
@@ -184,8 +214,11 @@ class SQLConnection(private val _asJava: Object) {
     * @param sqlStatement sql statement
     * @param args the prepared statement arguments
     */
+//java.lang.String
+//java.util.List<io.vertx.core.json.JsonArray>
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.Integer>>>
   def batchWithParams(sqlStatement: String,args: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],handler: Handler[AsyncResult[scala.collection.mutable.Buffer[Int]]]):SQLConnection = {
-    asJava.asInstanceOf[JSQLConnection].batchWithParams(sqlStatement.asInstanceOf[java.lang.String],args.map(x => x).asJava,{x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JSQLConnection].batchWithParams(sqlStatement.asInstanceOf[java.lang.String],args.asJava,{x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
     this
   }
 
@@ -197,8 +230,12 @@ class SQLConnection(private val _asJava: Object) {
     * @param inArgs the callable statement input arguments
     * @param outArgs the callable statement output arguments
     */
+//java.lang.String
+//java.util.List<io.vertx.core.json.JsonArray>
+//java.util.List<io.vertx.core.json.JsonArray>
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.Integer>>>
   def batchCallableWithParams(sqlStatement: String,inArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],outArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],handler: Handler[AsyncResult[scala.collection.mutable.Buffer[Int]]]):SQLConnection = {
-    asJava.asInstanceOf[JSQLConnection].batchCallableWithParams(sqlStatement.asInstanceOf[java.lang.String],inArgs.map(x => x).asJava,outArgs.map(x => x).asJava,{x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JSQLConnection].batchCallableWithParams(sqlStatement.asInstanceOf[java.lang.String],inArgs.asJava,outArgs.asJava,{x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer],scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
     this
   }
 
@@ -208,6 +245,8 @@ class SQLConnection(private val _asJava: Object) {
     * The constants defined in the interface Connection are the possible transaction isolation levels.
     * @param isolation the level of isolation
     */
+//io.vertx.ext.sql.TransactionIsolation
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def setTransactionIsolation(isolation: io.vertx.ext.sql.TransactionIsolation,handler: Handler[AsyncResult[Unit]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].setTransactionIsolation(isolation,{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -216,6 +255,7 @@ class SQLConnection(private val _asJava: Object) {
   /**
     * Attempts to return the transaction isolation level for this Connection object to the one given.
     */
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.TransactionIsolation>>
   def getTransactionIsolation(handler: Handler[AsyncResult[io.vertx.ext.sql.TransactionIsolation]]):SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].getTransactionIsolation({x: AsyncResult[TransactionIsolation] => handler.handle(AsyncResultWrapper[TransactionIsolation,io.vertx.ext.sql.TransactionIsolation](x, a => a))})
     this
@@ -330,7 +370,7 @@ class SQLConnection(private val _asJava: Object) {
 
  /**
    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
-   * @param sql the SQL to execute. For example <code>{call getEmpName (?, ?)`</code>.
+   * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
    * @return the future which is called once the operation completes. It will return a `ResultSet`.
    */
     def callFuture(sql: String):scala.concurrent.Future[ResultSet] = {
@@ -410,7 +450,7 @@ class SQLConnection(private val _asJava: Object) {
    */
     def batchWithParamsFuture(sqlStatement: String,args: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]):scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => x.asScala.map(x => x.asInstanceOf[Int]))
-    asJava.asInstanceOf[JSQLConnection].batchWithParams(sqlStatement.asInstanceOf[java.lang.String],args.map(x => x).asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JSQLConnection].batchWithParams(sqlStatement.asInstanceOf[java.lang.String],args.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -425,7 +465,7 @@ class SQLConnection(private val _asJava: Object) {
    */
     def batchCallableWithParamsFuture(sqlStatement: String,inArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],outArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]):scala.concurrent.Future[scala.collection.mutable.Buffer[Int]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x => x.asScala.map(x => x.asInstanceOf[Int]))
-    asJava.asInstanceOf[JSQLConnection].batchCallableWithParams(sqlStatement.asInstanceOf[java.lang.String],inArgs.map(x => x).asJava,outArgs.map(x => x).asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JSQLConnection].batchCallableWithParams(sqlStatement.asInstanceOf[java.lang.String],inArgs.asJava,outArgs.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

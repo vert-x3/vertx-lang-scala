@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{ScanOptions => JScanOptions}
 
 /**
   */
+class ScanOptions(private val _asJava: JScanOptions) {
 
-class ScanOptions(val asJava: JScanOptions) {
-
+  def asJava = _asJava
   def setCount(value: Int) = {
     asJava.setCount(value)
     this

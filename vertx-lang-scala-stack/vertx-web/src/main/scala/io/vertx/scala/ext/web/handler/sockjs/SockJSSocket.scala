@@ -20,15 +20,14 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.ext.auth.User
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.ext.web.{Session => JSession}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
@@ -46,18 +45,20 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class SockJSSocket(private val _asJava: Object) 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
+//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):SockJSSocket = {
+    asJava.asInstanceOf[JSockJSSocket].handler({x: Buffer => handler.handle(x)})
     this
   }
 
@@ -71,28 +72,32 @@ class SockJSSocket(private val _asJava: Object)
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def write(data: Buffer):SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].write(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  override def write(data: io.vertx.core.buffer.Buffer):SockJSSocket = {
+    asJava.asInstanceOf[JSockJSSocket].write(data)
     this
   }
 
+//int
   override def setWriteQueueMaxSize(maxSize: Int):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def end(t: Buffer):Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end(t.asJava.asInstanceOf[JBuffer])
+  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end(t)
   }
 
   override def writeQueueFull():Boolean = {

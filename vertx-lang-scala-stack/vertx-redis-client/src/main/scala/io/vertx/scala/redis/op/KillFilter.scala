@@ -16,17 +16,17 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.redis.op.{KillFilter => JKillFilter}
 import io.vertx.redis.op.KillFilter.Type
+import io.vertx.redis.op.{KillFilter => JKillFilter}
 
 /**
   */
+class KillFilter(private val _asJava: JKillFilter) {
 
-class KillFilter(val asJava: JKillFilter) {
-
+  def asJava = _asJava
 
   /**
     * Set ADDR filter

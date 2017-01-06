@@ -41,6 +41,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param usernameParam the name of the param
     * @return a reference to this for a fluent API
     */
+//java.lang.String
   def setUsernameParam(usernameParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setUsernameParam(usernameParam.asInstanceOf[java.lang.String])
     this
@@ -51,6 +52,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param passwordParam the name of the param
     * @return a reference to this for a fluent API
     */
+//java.lang.String
   def setPasswordParam(passwordParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setPasswordParam(passwordParam.asInstanceOf[java.lang.String])
     this
@@ -61,6 +63,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param returnURLParam the name of the param
     * @return a reference to this for a fluent API
     */
+//java.lang.String
   def setReturnURLParam(returnURLParam: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setReturnURLParam(returnURLParam.asInstanceOf[java.lang.String])
     this
@@ -72,6 +75,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param directLoggedInOKURL the URL to redirect to
     * @return a reference to this for a fluent API
     */
+//java.lang.String
   def setDirectLoggedInOKURL(directLoggedInOKURL: String):FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setDirectLoggedInOKURL(directLoggedInOKURL.asInstanceOf[java.lang.String])
     this
