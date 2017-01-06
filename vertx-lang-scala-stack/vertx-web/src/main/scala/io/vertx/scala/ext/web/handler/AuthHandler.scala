@@ -66,6 +66,7 @@ object AuthHandler{
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
@@ -76,6 +77,7 @@ object AuthHandler{
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
+//java.util.Set<java.lang.String>
   def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this

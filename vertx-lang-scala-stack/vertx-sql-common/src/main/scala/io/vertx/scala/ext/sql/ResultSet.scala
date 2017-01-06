@@ -37,7 +37,7 @@ class ResultSet(private val _asJava: JResultSet) {
     * Get the column names
     */
   def setColumnNames(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setColumnNames(value.asInstanceOf)
+    asJava.setColumnNames(value.asJava)
     this
   }
   def getColumnNames: scala.collection.mutable.Buffer[String] = {
@@ -78,7 +78,7 @@ class ResultSet(private val _asJava: JResultSet) {
     * Get the results
     */
   def setResults(value: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
-    asJava.setResults(value.asInstanceOf)
+    asJava.setResults(value.asJava)
     this
   }
   def getResults: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] = {

@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
 
 /**
   */
+class MigrateOptions(private val _asJava: JMigrateOptions) {
 
-class MigrateOptions(val asJava: JMigrateOptions) {
-
+  def asJava = _asJava
 }
 
 object MigrateOptions {

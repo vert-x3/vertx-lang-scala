@@ -16,17 +16,17 @@
 
 package io.vertx.scala.ext.mail
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mail.{MailResult => JMailResult}
 
 /**
   * Represent the result of the sendMail operation
   */
+class MailResult(private val _asJava: JMailResult) {
 
-class MailResult(val asJava: JMailResult) {
-
+  def asJava = _asJava
 
   /**
     */
@@ -34,8 +34,8 @@ class MailResult(val asJava: JMailResult) {
     asJava.setMessageID(value)
     this
   }
-  def getMessageID = {
-    asJava.getMessageID()
+  def getMessageID: String = {
+    asJava.getMessageID().asInstanceOf[String]
   }
 
   /**
@@ -44,8 +44,8 @@ class MailResult(val asJava: JMailResult) {
     asJava.setRecipients(value.asJava)
     this
   }
-  def getRecipients = {
-    asJava.getRecipients()
+  def getRecipients: scala.collection.mutable.Buffer[String] = {
+    asJava.getRecipients().asScala.map(x => x.asInstanceOf[String])
   }
 }
 

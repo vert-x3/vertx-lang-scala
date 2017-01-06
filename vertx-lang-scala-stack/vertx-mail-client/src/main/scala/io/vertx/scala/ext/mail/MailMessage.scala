@@ -16,17 +16,17 @@
 
 package io.vertx.scala.ext.mail
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 /**
   * represent a mail message that can be sent via the MailClient
   */
+class MailMessage(private val _asJava: JMailMessage) {
 
-class MailMessage(val asJava: JMailMessage) {
-
+  def asJava = _asJava
 
   /**
     * set the list of attachments of this mail
@@ -35,8 +35,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setAttachment(value.map(_.asJava).asJava)
     this
   }
-  def getAttachment = {
-    asJava.getAttachment()
+  def getAttachment: scala.collection.mutable.Buffer[MailAttachment] = {
+    asJava.getAttachment().asScala.map(x => MailAttachment(x))
   }
 
   /**
@@ -46,8 +46,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setBcc(value.asJava)
     this
   }
-  def getBcc = {
-    asJava.getBcc()
+  def getBcc: scala.collection.mutable.Buffer[String] = {
+    asJava.getBcc().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -57,8 +57,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setBounceAddress(value)
     this
   }
-  def getBounceAddress = {
-    asJava.getBounceAddress()
+  def getBounceAddress: String = {
+    asJava.getBounceAddress().asInstanceOf[String]
   }
 
   /**
@@ -68,8 +68,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setCc(value.asJava)
     this
   }
-  def getCc = {
-    asJava.getCc()
+  def getCc: scala.collection.mutable.Buffer[String] = {
+    asJava.getCc().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -79,8 +79,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setFixedHeaders(value)
     this
   }
-  def isFixedHeaders = {
-    asJava.isFixedHeaders()
+  def isFixedHeaders: Boolean = {
+    asJava.isFixedHeaders().asInstanceOf[Boolean]
   }
 
   /**
@@ -90,15 +90,15 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setFrom(value)
     this
   }
-  def getFrom = {
-    asJava.getFrom()
+  def getFrom: String = {
+    asJava.getFrom().asInstanceOf[String]
   }
 
   /**
     * Add a message header.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -109,8 +109,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setHtml(value)
     this
   }
-  def getHtml = {
-    asJava.getHtml()
+  def getHtml: String = {
+    asJava.getHtml().asInstanceOf[String]
   }
 
   /**
@@ -120,8 +120,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setInlineAttachment(value.map(_.asJava).asJava)
     this
   }
-  def getInlineAttachment = {
-    asJava.getInlineAttachment()
+  def getInlineAttachment: scala.collection.mutable.Buffer[MailAttachment] = {
+    asJava.getInlineAttachment().asScala.map(x => MailAttachment(x))
   }
 
   /**
@@ -131,8 +131,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setSubject(value)
     this
   }
-  def getSubject = {
-    asJava.getSubject()
+  def getSubject: String = {
+    asJava.getSubject().asInstanceOf[String]
   }
 
   /**
@@ -142,8 +142,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setText(value)
     this
   }
-  def getText = {
-    asJava.getText()
+  def getText: String = {
+    asJava.getText().asInstanceOf[String]
   }
 
   /**
@@ -153,8 +153,8 @@ class MailMessage(val asJava: JMailMessage) {
     asJava.setTo(value.asJava)
     this
   }
-  def getTo = {
-    asJava.getTo()
+  def getTo: scala.collection.mutable.Buffer[String] = {
+    asJava.getTo().asScala.map(x => x.asInstanceOf[String])
   }
 }
 

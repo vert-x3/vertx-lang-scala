@@ -16,16 +16,17 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
 
 /**
   */
+class RangeLimitOptions(private val _asJava: JRangeLimitOptions) 
+    extends LimitOptions(_asJava) {
 
-class RangeLimitOptions(val asJava: JRangeLimitOptions) {
-
+  override def asJava = _asJava
 }
 
 object RangeLimitOptions {

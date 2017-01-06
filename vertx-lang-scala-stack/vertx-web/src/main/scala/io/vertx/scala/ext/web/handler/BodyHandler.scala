@@ -39,6 +39,7 @@ class BodyHandler(private val _asJava: Object)
     * @param bodyLimit the max size
     * @return reference to this for fluency
     */
+//long
   def setBodyLimit(bodyLimit: Long):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setBodyLimit(bodyLimit.asInstanceOf[java.lang.Long])
     this
@@ -49,6 +50,7 @@ class BodyHandler(private val _asJava: Object)
     * @param uploadsDirectory the uploads directory
     * @return reference to this for fluency
     */
+//java.lang.String
   def setUploadsDirectory(uploadsDirectory: String):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setUploadsDirectory(uploadsDirectory.asInstanceOf[java.lang.String])
     this
@@ -59,6 +61,7 @@ class BodyHandler(private val _asJava: Object)
     * @param mergeFormAttributes true if they should be merged
     * @return reference to this for fluency
     */
+//boolean
   def setMergeFormAttributes(mergeFormAttributes: Boolean):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setMergeFormAttributes(mergeFormAttributes.asInstanceOf[java.lang.Boolean])
     this
@@ -69,6 +72,7 @@ class BodyHandler(private val _asJava: Object)
     * @param deleteUploadedFilesOnEnd true if uploaded files should be removed after handling the request
     * @return reference to this for fluency
     */
+//boolean
   def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean):BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd.asInstanceOf[java.lang.Boolean])
     this

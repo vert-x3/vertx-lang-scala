@@ -17,40 +17,59 @@
 package io.vertx.scala.ext.asyncsql
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.asyncsql.{PostgreSQLClient => JPostgreSQLClient}
 import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-import io.vertx.scala.ext.sql.SQLConnection
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
 import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * Represents an PostgreSQL client
   */
-class PostgreSQLClient(private val _asJava: JPostgreSQLClient) {
+class PostgreSQLClient(private val _asJava: Object) 
+    extends AsyncSQLClient(_asJava) {
 
-  def asJava: JPostgreSQLClient = _asJava
 
 }
 
-object PostgreSQLClient {
-
-  def apply(_asJava: JPostgreSQLClient): PostgreSQLClient =
-    new PostgreSQLClient(_asJava)
-
-  def createNonShared(vertx: Vertx, config: JsonObject): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.PostgreSQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
+object PostgreSQLClient{
+  def apply(asJava: JPostgreSQLClient) = new PostgreSQLClient(asJava)  
+  /**
+    * Create a PostgreSQL client which maintains its own pool.
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @return the client
+    */
+  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):AsyncSQLClient = {
+    AsyncSQLClient(JPostgreSQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
-  def createShared(vertx: Vertx, config: JsonObject, poolName: String): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.PostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, poolName))
+  /**
+    * Create a PostgreSQL client which shares its pool with any other MySQL clients created with the same pool name.
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @param poolName the pool name
+    * @return the client
+    */
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,poolName: String):AsyncSQLClient = {
+    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config,poolName.asInstanceOf[java.lang.String]))
   }
 
-  def createShared(vertx: Vertx, config: JsonObject): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.PostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
+  /**
+    * Like [[io.vertx.scala.ext.asyncsql.PostgreSQLClient#createShared]] but with the default pool name
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @return the client
+    */
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):AsyncSQLClient = {
+    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
 }

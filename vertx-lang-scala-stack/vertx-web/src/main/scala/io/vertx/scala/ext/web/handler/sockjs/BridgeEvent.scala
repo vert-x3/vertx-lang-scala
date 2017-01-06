@@ -84,6 +84,7 @@ class BridgeEvent(private val _asJava: Object)
     cached_3
   }
 
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Boolean>>
   override def setHandler(arg0: Handler[AsyncResult[Boolean]]):Future[Boolean] = {
     asJava.asInstanceOf[JBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
@@ -95,6 +96,7 @@ class BridgeEvent(private val _asJava: Object)
     * @param message the raw message
     * @return this reference, so it can be used fluently
     */
+//io.vertx.core.json.JsonObject
   def setRawMessage(message: io.vertx.core.json.JsonObject):BridgeEvent = {
     asJava.asInstanceOf[JBridgeEvent].setRawMessage(message)
     this

@@ -49,7 +49,7 @@ class JWTOptions(private val _asJava: JJWTOptions) {
     * The target audience of this token
     */
   def setAudience(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setAudience(value.asInstanceOf)
+    asJava.setAudience(value.asJava)
     this
   }
   def getAudience: scala.collection.mutable.Buffer[String] = {
@@ -120,7 +120,7 @@ class JWTOptions(private val _asJava: JJWTOptions) {
     this
   }
   def setPermissions(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setPermissions(value.asInstanceOf)
+    asJava.setPermissions(value.asJava)
     this
   }
 

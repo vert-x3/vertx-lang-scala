@@ -43,6 +43,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param name a new name for the cookie.
     * @return fluent
     */
+//java.lang.String
   def setCookieName(name: String):CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setCookieName(name.asInstanceOf[java.lang.String])
     this
@@ -54,6 +55,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param name a new name for the header.
     * @return fluent
     */
+//java.lang.String
   def setHeaderName(name: String):CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setHeaderName(name.asInstanceOf[java.lang.String])
     this
@@ -64,6 +66,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param nag true to nag
     * @return fluent
     */
+//boolean
   def setNagHttps(nag: Boolean):CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
@@ -74,6 +77,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param timeout token timeout
     * @return fluent
     */
+//long
   def setTimeout(timeout: Long):CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setTimeout(timeout.asInstanceOf[java.lang.Long])
     this

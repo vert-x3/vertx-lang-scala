@@ -17,40 +17,60 @@
 package io.vertx.scala.ext.asyncsql
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.asyncsql.{MySQLClient => JMySQLClient}
 import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
-import io.vertx.scala.ext.sql.SQLConnection
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
 import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * Represents an asynchronous MySQL client
   */
-class MySQLClient(private val _asJava: JMySQLClient) {
+class MySQLClient(private val _asJava: Object) 
+    extends AsyncSQLClient(_asJava) {
 
-  def asJava: JMySQLClient = _asJava
 
 }
 
-object MySQLClient {
-
-  def apply(_asJava: JMySQLClient): MySQLClient =
-    new MySQLClient(_asJava)
-
-  def createNonShared(vertx: Vertx, config: JsonObject): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.MySQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
+object MySQLClient{
+  def apply(asJava: JMySQLClient) = new MySQLClient(asJava)  
+  /**
+    * Create a MySQL client which maintains its own pool.
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @return the client
+    */
+  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):AsyncSQLClient = {
+    AsyncSQLClient(JMySQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
-  def createShared(vertx: Vertx, config: JsonObject, poolName: String): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.MySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, poolName))
+  /**
+    * Create a MySQL client which shares its data source with any other MySQL clients created with the same
+    * data source name
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @param poolName the pool name
+    * @return the client
+    */
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,poolName: String):AsyncSQLClient = {
+    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config,poolName.asInstanceOf[java.lang.String]))
   }
 
-  def createShared(vertx: Vertx, config: JsonObject): AsyncSQLClient = {
-    AsyncSQLClient.apply(io.vertx.ext.asyncsql.MySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
+  /**
+    * Like [[io.vertx.scala.ext.asyncsql.MySQLClient#createShared]] but with the default pool name
+    * @param vertx the Vert.x instance
+    * @param config the configuration
+    * @return the client
+    */
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):AsyncSQLClient = {
+    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
 }

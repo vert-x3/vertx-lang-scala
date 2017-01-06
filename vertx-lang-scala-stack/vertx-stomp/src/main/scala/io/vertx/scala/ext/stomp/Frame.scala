@@ -16,12 +16,11 @@
 
 package io.vertx.scala.ext.stomp
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.ext.stomp.Frame.Command
 
 /**
@@ -31,9 +30,9 @@ import io.vertx.ext.stomp.Frame.Command
   * <p/>
   * This class is <strong>NOT</strong> thread-safe.
   */
+class Frame(private val _asJava: JFrame) {
 
-class Frame(val asJava: JFrame) {
-
+  def asJava = _asJava
 
   /**
     * Gets the value of the `ack` header.
@@ -42,11 +41,11 @@ class Frame(val asJava: JFrame) {
   /**
     * Sets the body of the frame.
     */
-  def setBody(value: Buffer) = {
-    asJava.setBody(value.asJava)
+  def setBody(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setBody(value)
     this
   }
-  def getBody = {
+  def getBody: io.vertx.core.buffer.Buffer = {
     asJava.getBody()
   }
 
@@ -61,44 +60,44 @@ class Frame(val asJava: JFrame) {
     asJava.setCommand(value)
     this
   }
-  def getCommand = {
+  def getCommand: io.vertx.ext.stomp.Frame.Command = {
     asJava.getCommand()
   }
   def setDestination(value: String) = {
     asJava.setDestination(value)
     this
   }
-  def getDestination = {
-    asJava.getDestination()
+  def getDestination: String = {
+    asJava.getDestination().asInstanceOf[String]
   }
 
   /**
     * Sets the headers of the frames.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
   def setHeaders(value: Map[String, String]) = {
     asJava.setHeaders(value.asJava)
     this
   }
-  def getHeaders = {
-    asJava.getHeaders()
+  def getHeaders: scala.collection.mutable.Map[String, String] = {
+    collection.mutable.Map(asJava.getHeaders().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
-  def getId = {
-    asJava.getId()
+  def getId: String = {
+    asJava.getId().asInstanceOf[String]
   }
   def setTransaction(value: String) = {
     asJava.setTransaction(value)
     this
   }
-  def getTransaction = {
-    asJava.getTransaction()
+  def getTransaction: String = {
+    asJava.getTransaction().asInstanceOf[String]
   }
 }
 

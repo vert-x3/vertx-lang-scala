@@ -21,9 +21,8 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -42,8 +41,8 @@ class TemplateEngine(private val _asJava: Object) {
     * @param context the routing context
     * @param templateFileName the template file name to use
     */
-  def render(context: RoutingContext,templateFileName: String,handler: Handler[AsyncResult[Buffer]]):Unit = {
-    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
+  def render(context: RoutingContext,templateFileName: String,handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]):Unit = {
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],{x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
   }
 
  /**
@@ -52,8 +51,8 @@ class TemplateEngine(private val _asJava: Object) {
    * @param templateFileName the template file name to use
    * @return the future that will be called with a result containing the buffer or a failure.
    */
-    def renderFuture(context: RoutingContext,templateFileName: String):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    def renderFuture(context: RoutingContext,templateFileName: String):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }

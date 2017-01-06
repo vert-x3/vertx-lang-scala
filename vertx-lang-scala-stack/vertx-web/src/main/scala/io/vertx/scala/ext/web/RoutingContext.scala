@@ -21,7 +21,6 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.http.HttpServerResponse
 import io.vertx.scala.core.http.HttpServerRequest
 import io.vertx.ext.web.{Route => JRoute}
@@ -32,13 +31,13 @@ import io.vertx.core.json.JsonArray
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.web.{Cookie => JCookie}
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.{Locale => JLocale}
 import io.vertx.ext.web.{LanguageHeader => JLanguageHeader}
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.ext.web.{Session => JSession}
 import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler
 import io.vertx.ext.web.{FileUpload => JFileUpload}
@@ -210,6 +209,8 @@ class RoutingContext(private val _asJava: Object) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.Object
   def put(key: String,obj: AnyRef):RoutingContext = {
     asJava.asInstanceOf[JRoutingContext].put(key.asInstanceOf[java.lang.String],obj)
     this
@@ -221,6 +222,7 @@ class RoutingContext(private val _asJava: Object) {
     * @param cookie the cookie
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.ext.web.Cookie
   def addCookie(cookie: Cookie):RoutingContext = {
     asJava.asInstanceOf[JRoutingContext].addCookie(cookie.asJava.asInstanceOf[JCookie])
     this
@@ -394,8 +396,8 @@ class RoutingContext(private val _asJava: Object) {
   /**
     * @return Get the entire HTTP request body as a Buffer. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
     */
-  def getBody():scala.Option[Buffer] = {
-    scala.Option(asJava.asInstanceOf[JRoutingContext].getBody()).map(Buffer(_))
+  def getBody():scala.Option[io.vertx.core.buffer.Buffer] = {
+    scala.Option(asJava.asInstanceOf[JRoutingContext].getBody())
   }
 
   /**
@@ -483,8 +485,8 @@ class RoutingContext(private val _asJava: Object) {
     * Set the body. Used by the [[io.vertx.scala.ext.web.handler.BodyHandler]]. You will not normally call this method.
     * @param body the body
     */
-  def setBody(body: Buffer):Unit = {
-    asJava.asInstanceOf[JRoutingContext].setBody(body.asJava.asInstanceOf[JBuffer])
+  def setBody(body: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JRoutingContext].setBody(body)
   }
 
   /**

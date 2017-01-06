@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
 
 /**
   */
+class GeoRadiusOptions(private val _asJava: JGeoRadiusOptions) {
 
-class GeoRadiusOptions(val asJava: JGeoRadiusOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the radius options limit the result count.
