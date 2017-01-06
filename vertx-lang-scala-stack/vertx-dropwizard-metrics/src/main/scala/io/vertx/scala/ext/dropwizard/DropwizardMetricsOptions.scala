@@ -16,17 +16,19 @@
 
 package io.vertx.scala.ext.dropwizard
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.metrics.{MetricsOptions => ExtMetricsOptions}
 import io.vertx.ext.dropwizard.{DropwizardMetricsOptions => JDropwizardMetricsOptions}
 
 /**
   * Vert.x Dropwizard metrics configuration.
   */
+class DropwizardMetricsOptions(private val _asJava: JDropwizardMetricsOptions) 
+    extends ExtMetricsOptions(_asJava) {
 
-class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
-
+  override def asJava = _asJava
 
   /**
     * Set the path for a config file that contains options in JSON format, to be used to create a new options object.
@@ -36,15 +38,15 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.setConfigPath(value)
     this
   }
-  def getConfigPath = {
-    asJava.getConfigPath()
+  def getConfigPath: String = {
+    asJava.getConfigPath().asInstanceOf[String]
   }
-  def setEnabled(value: Boolean) = {
+  override def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
-  def isEnabled = {
-    asJava.isEnabled()
+  override def isEnabled: Boolean = {
+    asJava.isEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -54,8 +56,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.setJmxDomain(value)
     this
   }
-  def getJmxDomain = {
-    asJava.getJmxDomain()
+  def getJmxDomain: String = {
+    asJava.getJmxDomain().asInstanceOf[String]
   }
 
   /**
@@ -65,8 +67,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.setJmxEnabled(value)
     this
   }
-  def isJmxEnabled = {
-    asJava.isJmxEnabled()
+  def isJmxEnabled: Boolean = {
+    asJava.isJmxEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -76,8 +78,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.addMonitoredEventBusHandler(value.asJava)
     this
   }
-  def getMonitoredEventBusHandlers = {
-    asJava.getMonitoredEventBusHandlers()
+  def getMonitoredEventBusHandlers: scala.collection.mutable.Buffer[Match] = {
+    asJava.getMonitoredEventBusHandlers().asScala.map(x => Match(x))
   }
 
   /**
@@ -98,8 +100,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.addMonitoredHttpClientUri(value.asJava)
     this
   }
-  def getMonitoredHttpClientUris = {
-    asJava.getMonitoredHttpClientUris()
+  def getMonitoredHttpClientUris: scala.collection.mutable.Buffer[Match] = {
+    asJava.getMonitoredHttpClientUris().asScala.map(x => Match(x))
   }
 
   /**
@@ -109,8 +111,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.addMonitoredHttpServerUri(value.asJava)
     this
   }
-  def getMonitoredHttpServerUris = {
-    asJava.getMonitoredHttpServerUris()
+  def getMonitoredHttpServerUris: scala.collection.mutable.Buffer[Match] = {
+    asJava.getMonitoredHttpServerUris().asScala.map(x => Match(x))
   }
 
   /**
@@ -120,8 +122,8 @@ class DropwizardMetricsOptions(val asJava: JDropwizardMetricsOptions) {
     asJava.setRegistryName(value)
     this
   }
-  def getRegistryName = {
-    asJava.getRegistryName()
+  def getRegistryName: String = {
+    asJava.getRegistryName().asInstanceOf[String]
   }
 }
 

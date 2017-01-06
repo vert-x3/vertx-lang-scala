@@ -17,13 +17,16 @@
 package io.vertx.scala.ext.shell
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.{ShellService => JShellService}
-import io.vertx.ext.shell.{ShellServer => JShellServer}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.{ShellServiceOptions => JShellServiceOptions}
-import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.shell.{ShellServer => JShellServer}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.shell.{ShellService => JShellService}
 import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * The shell service, provides a remotely accessible shell available via Telnet or SSH according to the
@@ -32,64 +35,84 @@ import io.vertx.scala.core.Vertx
   * The shell service will expose commands using [[io.vertx.scala.ext.shell.command.CommandResolver]] on the classpath and
   * the shared command registry for the Vert.x instance.
   */
-class ShellService(private val _asJava: JShellService) {
+class ShellService(private val _asJava: Object) {
 
-  def asJava: JShellService = _asJava
-
-  /**
-    * Start the shell service, this is an asynchronous start.
-    */
-  def start(): Unit = {
-    _asJava.start()
-  }
+  def asJava = _asJava
 
   /**
     * Start the shell service, this is an asynchronous start.
-    * @return future for getting notified when service is started
     */
-  def startFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.start(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * @return the shell server
-    */
-  def server(): ShellServer = {
-    ShellServer.apply(_asJava.server())
+  def start():Unit = {
+    asJava.asInstanceOf[JShellService].start()
   }
 
   /**
     * Stop the shell service, this is an asynchronous stop.
     */
-  def stop(): Unit = {
-    _asJava.stop()
+  def stop():Unit = {
+    asJava.asInstanceOf[JShellService].stop()
+  }
+
+  /**
+    * Start the shell service, this is an asynchronous start.
+    */
+  def start(startHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JShellService].start({x: AsyncResult[Void] => startHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  }
+
+  /**
+    * @return the shell server
+    */
+  def server():ShellServer = {
+    ShellServer(asJava.asInstanceOf[JShellService].server())
   }
 
   /**
     * Stop the shell service, this is an asynchronous start.
-    * @return future for getting notified when service is stopped
     */
-  def stopFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.stop(promiseAndHandler._1)
+  def stop(stopHandler: Handler[AsyncResult[Unit]]):Unit = {
+    asJava.asInstanceOf[JShellService].stop({x: AsyncResult[Void] => stopHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+  }
+
+ /**
+   * Start the shell service, this is an asynchronous start.
+   * @return future for getting notified when service is started
+   */
+    def startFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JShellService].start(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Stop the shell service, this is an asynchronous start.
+   * @return future for getting notified when service is stopped
+   */
+    def stopFuture():scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JShellService].stop(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
-object ShellService {
-
-  def apply(_asJava: JShellService): ShellService =
-    new ShellService(_asJava)
-
-  def create(vertx: Vertx): ShellService = {
-    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[JVertx]))
+object ShellService{
+  def apply(asJava: JShellService) = new ShellService(asJava)  
+  /**
+    * Like [[io.vertx.scala.ext.shell.ShellService#create]], with default options.
+    */
+  def create(vertx: Vertx):ShellService = {
+    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: Vertx, options: ShellServiceOptions): ShellService = {
-    ShellService.apply(io.vertx.ext.shell.ShellService.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+  /**
+    * Create a new shell service.
+    * @param vertx the Vert.x instance
+    * @param options the service config optionssee <a href="../../../../../../../cheatsheet/ShellServiceOptions.html">ShellServiceOptions</a>
+    * @return the shell service
+    */
+  def create(vertx: Vertx,options: ShellServiceOptions):ShellService = {
+    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
 }

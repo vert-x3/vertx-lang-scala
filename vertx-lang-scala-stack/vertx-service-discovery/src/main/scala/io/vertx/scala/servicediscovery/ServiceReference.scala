@@ -17,8 +17,8 @@
 package io.vertx.scala.servicediscovery
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.servicediscovery.{ServiceReference => JServiceReference}
 import io.vertx.servicediscovery.{Record => JRecord}
 
@@ -30,16 +30,18 @@ import io.vertx.servicediscovery.{Record => JRecord}
   * * access the service (via a proxy or a client) with the [[io.vertx.scala.servicediscovery.ServiceReference#get]] method
   * * release the reference - so the binding between the consumer and the provider is removed
   */
-class ServiceReference(private val _asJava: JServiceReference) {
+class ServiceReference(private val _asJava: Object) {
 
-  def asJava: JServiceReference = _asJava
+  def asJava = _asJava
+  private var cached_0:Record = _
 
   /**
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def record(): Record = {
-    if (cached_0 == null) {
-      cached_0 =    Record(_asJava.record())
+  def record():Record = {
+    if(cached_0 == null) {
+      var tmp = asJava.asInstanceOf[JServiceReference].record()
+      cached_0 = Record(tmp)
     }
     cached_0
   }
@@ -49,32 +51,28 @@ class ServiceReference(private val _asJava: JServiceReference) {
     * service type and the server itself.
     * @return the object to access the service
     */
-  def get[T](): T = {
-    _asJava.get()
+  def get[T:TypeTag]():T = {
+    toScala[T](asJava.asInstanceOf[JServiceReference].get[Object]())
   }
 
   /**
     * Gets the service object if already retrieved. It won't try to acquire the service object if not retrieved yet.
     * @return the object, `null` if not yet retrieved
     */
-  def cached[T](): T = {
-    _asJava.cached()
+  def cached[T:TypeTag]():T = {
+    toScala[T](asJava.asInstanceOf[JServiceReference].cached[Object]())
   }
 
   /**
     * Releases the reference. Once released, the consumer must not use the reference anymore.
     * This method must be idempotent and defensive, as multiple call may happen.
     */
-  def release(): Unit = {
-    _asJava.release()
+  def release():Unit = {
+    asJava.asInstanceOf[JServiceReference].release()
   }
 
-  private var cached_0: Record = _
 }
 
-object ServiceReference {
-
-  def apply(_asJava: JServiceReference): ServiceReference =
-    new ServiceReference(_asJava)
-
+object ServiceReference{
+  def apply(asJava: JServiceReference) = new ServiceReference(asJava)  
 }

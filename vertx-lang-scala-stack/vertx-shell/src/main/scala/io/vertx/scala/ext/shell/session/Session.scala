@@ -17,16 +17,16 @@
 package io.vertx.scala.ext.shell.session
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.session.{Session => JSession}
 
 /**
   * A shell session.
   */
-class Session(private val _asJava: JSession) {
+class Session(private val _asJava: Object) {
 
-  def asJava: JSession = _asJava
+  def asJava = _asJava
 
   /**
     * Put some data in a session
@@ -34,8 +34,10 @@ class Session(private val _asJava: JSession) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-  def put(key: String, obj: AnyRef): Session = {
-    _asJava.put(key, obj)
+//java.lang.String
+//java.lang.Object
+  def put(key: String,obj: AnyRef):Session = {
+    asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String],obj)
     this
   }
 
@@ -44,8 +46,8 @@ class Session(private val _asJava: JSession) {
     * @param key the key of the data
     * @return the data
     */
-  def get[T](key: String): T = {
-    _asJava.get(key)
+  def get[T:TypeTag](key: String):T = {
+    toScala[T](asJava.asInstanceOf[JSession].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -53,19 +55,20 @@ class Session(private val _asJava: JSession) {
     * @param key the key of the data
     * @return the data that was there or null if none there
     */
-  def remove[T](key: String): T = {
-    _asJava.remove(key)
+  def remove[T:TypeTag](key: String):T = {
+    toScala[T](asJava.asInstanceOf[JSession].remove[Object](key.asInstanceOf[java.lang.String]))
   }
 
 }
 
-object Session {
-
-  def apply(_asJava: JSession): Session =
-    new Session(_asJava)
-
-  def create(): Session = {
-    Session.apply(io.vertx.ext.shell.session.Session.create())
+object Session{
+  def apply(asJava: JSession) = new Session(asJava)  
+  /**
+    * Create a new empty session.
+    * @return the created session
+    */
+  def create():Session = {
+    Session(JSession.create())
   }
 
 }

@@ -17,26 +17,27 @@
 package io.vertx.scala.servicediscovery.spi
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.spi.{ServiceExporter => JServiceExporter}
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
-import io.vertx.core.json.JsonObject
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 import io.vertx.core.{Future => JFuture}
-import io.vertx.scala.core.Future
 import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
+import io.vertx.core.json.JsonObject
+import io.vertx.scala.core.Future
+import io.vertx.core.Handler
+import io.vertx.servicediscovery.spi.{ServiceExporter => JServiceExporter}
+import io.vertx.scala.servicediscovery.Record
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * The service exporter allows integrate other discovery technologies with the Vert.x service discovery. It maps
   * entries from another technology to a  and maps  to a publication in this other
   * technology. The exporter is one side of a service discovery bridge.
   */
-class ServiceExporter(private val _asJava: JServiceExporter) {
+class ServiceExporter(private val _asJava: Object) {
 
-  def asJava: JServiceExporter = _asJava
+  def asJava = _asJava
 
   /**
     * Starts the exporter.
@@ -45,8 +46,8 @@ class ServiceExporter(private val _asJava: JServiceExporter) {
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def init(vertx: Vertx, publisher: ServicePublisher, configuration: JsonObject, future: Future[Unit]): Unit = {
-    _asJava.init(vertx.asJava.asInstanceOf[JVertx], publisher.asJava.asInstanceOf[JServicePublisher], configuration, future.asJava.asInstanceOf[JFuture[Void]])
+  def init(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]):Unit = {
+    asJava.asInstanceOf[JServiceExporter].init(vertx.asJava.asInstanceOf[JVertx],publisher.asJava.asInstanceOf[JServicePublisher],configuration,future.asJava.asInstanceOf[JFuture[Void]])
   }
 
   /**
@@ -54,8 +55,8 @@ class ServiceExporter(private val _asJava: JServiceExporter) {
     * identify the record
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def onPublish(record: Record): Unit = {
-    _asJava.onPublish(record.asJava)
+  def onPublish(record: Record):Unit = {
+    asJava.asInstanceOf[JServiceExporter].onPublish(record.asJava)
   }
 
   /**
@@ -63,31 +64,28 @@ class ServiceExporter(private val _asJava: JServiceExporter) {
     * identify the record
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def onUpdate(record: Record): Unit = {
-    _asJava.onUpdate(record.asJava)
+  def onUpdate(record: Record):Unit = {
+    asJava.asInstanceOf[JServiceExporter].onUpdate(record.asJava)
   }
 
   /**
     * Notify an existing record has been removed
     * @param id the record registration id
     */
-  def onUnpublish(id: String): Unit = {
-    _asJava.onUnpublish(id)
+  def onUnpublish(id: String):Unit = {
+    asJava.asInstanceOf[JServiceExporter].onUnpublish(id.asInstanceOf[java.lang.String])
   }
 
   /**
     * Close the exporter
     * @param closeHandler the handle to be notified when exporter is closed, may be `null`
     */
-  def close(closeHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.close(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => closeHandler.handle()))
+  def close(closeHandler: Handler[Unit]):Unit = {
+    asJava.asInstanceOf[JServiceExporter].close({x: Void => closeHandler.handle(x)})
   }
 
 }
 
-object ServiceExporter {
-
-  def apply(_asJava: JServiceExporter): ServiceExporter =
-    new ServiceExporter(_asJava)
-
+object ServiceExporter{
+  def apply(asJava: JServiceExporter) = new ServiceExporter(asJava)  
 }

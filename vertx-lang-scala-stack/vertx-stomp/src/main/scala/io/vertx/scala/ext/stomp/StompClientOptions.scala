@@ -19,6 +19,7 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{NetClientOptions => ExtNetClientOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
@@ -27,12 +28,10 @@ import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
-import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.ext.stomp.{StompClientOptions => JStompClientOptions}
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.NetClientOptions
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.net.ProxyOptions
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
@@ -44,7 +43,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
   * underlying NET client.
   */
 class StompClientOptions(private val _asJava: JStompClientOptions) 
-    extends NetClientOptions(_asJava) {
+    extends ExtNetClientOptions(_asJava) {
 
   override def asJava = _asJava
 

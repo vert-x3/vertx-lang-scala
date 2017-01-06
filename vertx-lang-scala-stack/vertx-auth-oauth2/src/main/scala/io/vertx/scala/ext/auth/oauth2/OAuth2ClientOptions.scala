@@ -19,10 +19,10 @@ package io.vertx.scala.ext.auth.oauth2
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.http.{HttpClientOptions => ExtHttpClientOptions}
 import io.vertx.scala.core.http.Http2Settings
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
@@ -39,14 +39,13 @@ import io.vertx.scala.core.net.ProxyOptions
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
-import io.vertx.scala.core.http.HttpClientOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Options describing how an OAuth2  will make connections.
   */
 class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) 
-    extends HttpClientOptions(_asJava) {
+    extends ExtHttpClientOptions(_asJava) {
 
   override def asJava = _asJava
   override def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {

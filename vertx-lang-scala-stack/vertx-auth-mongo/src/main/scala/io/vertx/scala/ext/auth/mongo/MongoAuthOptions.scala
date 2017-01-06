@@ -19,16 +19,15 @@ package io.vertx.scala.ext.auth.mongo
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
 import io.vertx.ext.auth.mongo.{MongoAuthOptions => JMongoAuthOptions}
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
-import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring Mongo authentication.
   */
 class MongoAuthOptions(private val _asJava: JMongoAuthOptions) 
-    extends AuthOptions {
+    extends ExtAuthOptions {
 
   def asJava = _asJava
 

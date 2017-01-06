@@ -19,6 +19,7 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{TCPSSLOptions => ExtTCPSSLOptions}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.ClientAuth
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
@@ -27,7 +28,7 @@ import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
   * Options for configuring a [[io.vertx.scala.core.net.NetServer]].
   */
 class NetServerOptions(private val _asJava: JNetServerOptions) 
-    extends TCPSSLOptions {
+    extends ExtTCPSSLOptions {
 
   def asJava = _asJava
 

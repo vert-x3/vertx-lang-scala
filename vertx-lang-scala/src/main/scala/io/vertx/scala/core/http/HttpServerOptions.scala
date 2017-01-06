@@ -19,12 +19,12 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{NetServerOptions => ExtNetServerOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
-import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
@@ -33,14 +33,13 @@ import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.NetServerOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Represents options used by an [[io.vertx.scala.core.http.HttpServer]] instance
   */
 class HttpServerOptions(private val _asJava: JHttpServerOptions) 
-    extends NetServerOptions(_asJava) {
+    extends ExtNetServerOptions(_asJava) {
 
   override def asJava = _asJava
 

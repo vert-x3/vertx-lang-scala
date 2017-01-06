@@ -19,16 +19,15 @@ package io.vertx.scala.ext.auth.jdbc
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
 import io.vertx.ext.auth.jdbc.{JDBCAuthOptions => JJDBCAuthOptions}
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
-import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring JDBC authentication.
   */
 class JDBCAuthOptions(private val _asJava: JJDBCAuthOptions) 
-    extends AuthOptions {
+    extends ExtAuthOptions {
 
   def asJava = _asJava
 

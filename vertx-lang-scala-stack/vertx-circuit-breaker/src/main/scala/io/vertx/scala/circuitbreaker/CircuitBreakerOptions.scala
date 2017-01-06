@@ -16,17 +16,17 @@
 
 package io.vertx.scala.circuitbreaker
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
 
 /**
   * Circuit breaker configuration options. All time are given in milliseconds.
   */
+class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
 
-class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
-
+  def asJava = _asJava
 
   /**
     * Sets whether or not the fallback is executed on failure, even when the circuit is closed.
@@ -35,8 +35,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setFallbackOnFailure(value)
     this
   }
-  def isFallbackOnFailure = {
-    asJava.isFallbackOnFailure()
+  def isFallbackOnFailure: Boolean = {
+    asJava.isFallbackOnFailure().asInstanceOf[Boolean]
   }
 
   /**
@@ -46,8 +46,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setMaxFailures(value)
     this
   }
-  def getMaxFailures = {
-    asJava.getMaxFailures()
+  def getMaxFailures: Int = {
+    asJava.getMaxFailures().asInstanceOf[Int]
   }
 
   /**
@@ -57,8 +57,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setMaxRetries(value)
     this
   }
-  def getMaxRetries = {
-    asJava.getMaxRetries()
+  def getMaxRetries: Int = {
+    asJava.getMaxRetries().asInstanceOf[Int]
   }
 
   /**
@@ -68,8 +68,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setMetricsRollingWindow(value)
     this
   }
-  def getMetricsRollingWindow = {
-    asJava.getMetricsRollingWindow()
+  def getMetricsRollingWindow: Long = {
+    asJava.getMetricsRollingWindow().asInstanceOf[Long]
   }
 
   /**
@@ -79,8 +79,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setNotificationAddress(value)
     this
   }
-  def getNotificationAddress = {
-    asJava.getNotificationAddress()
+  def getNotificationAddress: String = {
+    asJava.getNotificationAddress().asInstanceOf[String]
   }
 
   /**
@@ -91,8 +91,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setNotificationPeriod(value)
     this
   }
-  def getNotificationPeriod = {
-    asJava.getNotificationPeriod()
+  def getNotificationPeriod: Long = {
+    asJava.getNotificationPeriod().asInstanceOf[Long]
   }
 
   /**
@@ -103,8 +103,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setResetTimeout(value)
     this
   }
-  def getResetTimeout = {
-    asJava.getResetTimeout()
+  def getResetTimeout: Long = {
+    asJava.getResetTimeout().asInstanceOf[Long]
   }
 
   /**
@@ -115,8 +115,8 @@ class CircuitBreakerOptions(val asJava: JCircuitBreakerOptions) {
     asJava.setTimeout(value)
     this
   }
-  def getTimeout = {
-    asJava.getTimeout()
+  def getTimeout: Long = {
+    asJava.getTimeout().asInstanceOf[Long]
   }
 }
 

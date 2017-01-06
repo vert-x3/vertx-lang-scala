@@ -19,11 +19,11 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{NetServerOptions => ExtNetServerOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
@@ -35,14 +35,13 @@ import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.NetServerOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * STOMP Server options. You can also configure the Net Server used by the STOMP server from these options.
   */
 class StompServerOptions(private val _asJava: JStompServerOptions) 
-    extends NetServerOptions(_asJava) {
+    extends ExtNetServerOptions(_asJava) {
 
   override def asJava = _asJava
   override def setAcceptBacklog(value: Int) = {

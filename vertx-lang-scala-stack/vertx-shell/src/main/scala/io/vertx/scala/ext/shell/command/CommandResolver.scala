@@ -17,45 +17,46 @@
 package io.vertx.scala.ext.shell.command
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
 import io.vertx.ext.shell.command.{Command => JCommand}
-import io.vertx.core.{Vertx => JVertx}
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * A resolver for commands, so the shell can discover commands.
   */
-class CommandResolver(private val _asJava: JCommandResolver) {
+class CommandResolver(private val _asJava: Object) {
 
-  def asJava: JCommandResolver = _asJava
-
-  /**
-    * @return the current commands
-    */
-  def commands(): scala.collection.mutable.Buffer[Command] = {
-    _asJava.commands().asScala.map(Command.apply)
-  }
+  def asJava = _asJava
 
   /**
     * Returns a single command by its name.
     * @param name the command name
     * @return the commad or null
     */
-  def getCommand(name: String): Command = {
-    Command.apply(_asJava.getCommand(name))
+  def getCommand(name: String):Command = {
+    Command(asJava.asInstanceOf[JCommandResolver].getCommand(name.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * @return the current commands
+    */
+  def commands():scala.collection.mutable.Buffer[Command] = {
+    asJava.asInstanceOf[JCommandResolver].commands().asScala.map(x => Command(x))
   }
 
 }
 
-object CommandResolver {
-
-  def apply(_asJava: JCommandResolver): CommandResolver =
-    new CommandResolver(_asJava)
-
-  def baseCommands(vertx: Vertx): CommandResolver = {
-    CommandResolver.apply(io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))
+object CommandResolver{
+  def apply(asJava: JCommandResolver) = new CommandResolver(asJava)  
+  /**
+    * @return the base commands of Vert.x Shell.
+    */
+  def baseCommands(vertx: Vertx):CommandResolver = {
+    CommandResolver(JCommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }
