@@ -16,20 +16,22 @@
 
 package io.vertx.scala.ext.hawkular
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.metrics.{MetricsOptions => ExtMetricsOptions}
 import io.vertx.ext.hawkular.{VertxHawkularOptions => JVertxHawkularOptions}
-import io.vertx.core.json.JsonObject
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
+import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.http.HttpClientOptions
 
 /**
   * Vert.x Hawkular monitoring configuration.
   */
+class VertxHawkularOptions(private val _asJava: JVertxHawkularOptions) 
+    extends ExtMetricsOptions(_asJava) {
 
-class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
-
+  override def asJava = _asJava
 
   /**
     * Set the options for authentication.
@@ -38,8 +40,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setAuthenticationOptions(value.asJava)
     this
   }
-  def getAuthenticationOptions = {
-    asJava.getAuthenticationOptions()
+  def getAuthenticationOptions: AuthenticationOptions = {
+    AuthenticationOptions(asJava.getAuthenticationOptions())
   }
 
   /**
@@ -51,8 +53,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setBatchDelay(value)
     this
   }
-  def getBatchDelay = {
-    asJava.getBatchDelay()
+  def getBatchDelay: Int = {
+    asJava.getBatchDelay().asInstanceOf[Int]
   }
 
   /**
@@ -64,8 +66,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setBatchSize(value)
     this
   }
-  def getBatchSize = {
-    asJava.getBatchSize()
+  def getBatchSize: Int = {
+    asJava.getBatchSize().asInstanceOf[Int]
   }
 
   /**
@@ -79,19 +81,19 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setDisabledMetricsTypes(value.asJava)
     this
   }
-  def getDisabledMetricsTypes = {
-    asJava.getDisabledMetricsTypes()
+  def getDisabledMetricsTypes: scala.collection.mutable.Set[io.vertx.ext.hawkular.MetricsType] = {
+    asJava.getDisabledMetricsTypes().asScala.map(x => x)
   }
 
   /**
     * Set whether metrics will be enabled on the Vert.x instance. Metrics are not enabled by default.
     */
-  def setEnabled(value: Boolean) = {
+  override def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
-  def isEnabled = {
-    asJava.isEnabled()
+  override def isEnabled: Boolean = {
+    asJava.isEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -101,18 +103,18 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
     * Set specific headers to include in HTTP requests.
     */
-  def setHttpHeaders(value: JsonObject) = {
+  def setHttpHeaders(value: io.vertx.core.json.JsonObject) = {
     asJava.setHttpHeaders(value)
     this
   }
-  def getHttpHeaders = {
+  def getHttpHeaders: io.vertx.core.json.JsonObject = {
     asJava.getHttpHeaders()
   }
 
@@ -123,8 +125,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setHttpOptions(value.asJava)
     this
   }
-  def getHttpOptions = {
-    asJava.getHttpOptions()
+  def getHttpOptions: HttpClientOptions = {
+    HttpClientOptions(asJava.getHttpOptions())
   }
 
   /**
@@ -138,8 +140,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setMetricsBridgeAddress(value)
     this
   }
-  def getMetricsBridgeAddress = {
-    asJava.getMetricsBridgeAddress()
+  def getMetricsBridgeAddress: String = {
+    asJava.getMetricsBridgeAddress().asInstanceOf[String]
   }
 
   /**
@@ -149,8 +151,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setMetricsBridgeEnabled(value)
     this
   }
-  def isMetricsBridgeEnabled = {
-    asJava.isMetricsBridgeEnabled()
+  def isMetricsBridgeEnabled: Boolean = {
+    asJava.isMetricsBridgeEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -161,8 +163,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setMetricsServiceUri(value)
     this
   }
-  def getMetricsServiceUri = {
-    asJava.getMetricsServiceUri()
+  def getMetricsServiceUri: String = {
+    asJava.getMetricsServiceUri().asInstanceOf[String]
   }
 
   /**
@@ -172,8 +174,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -184,8 +186,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setPrefix(value)
     this
   }
-  def getPrefix = {
-    asJava.getPrefix()
+  def getPrefix: String = {
+    asJava.getPrefix().asInstanceOf[String]
   }
 
   /**
@@ -195,8 +197,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setSchedule(value)
     this
   }
-  def getSchedule = {
-    asJava.getSchedule()
+  def getSchedule: Int = {
+    asJava.getSchedule().asInstanceOf[Int]
   }
 
   /**
@@ -207,8 +209,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setSendTenantHeader(value)
     this
   }
-  def isSendTenantHeader = {
-    asJava.isSendTenantHeader()
+  def isSendTenantHeader: Boolean = {
+    asJava.isSendTenantHeader().asInstanceOf[Boolean]
   }
 
   /**
@@ -218,8 +220,8 @@ class VertxHawkularOptions(val asJava: JVertxHawkularOptions) {
     asJava.setTenant(value)
     this
   }
-  def getTenant = {
-    asJava.getTenant()
+  def getTenant: String = {
+    asJava.getTenant().asInstanceOf[String]
   }
 }
 

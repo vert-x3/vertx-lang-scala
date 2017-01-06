@@ -17,31 +17,33 @@
 package io.vertx.scala.ext.shell.system
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.system.{JobController => JJobController}
-import io.vertx.ext.shell.system.{Job => JJob}
 import io.vertx.ext.shell.system.{Process => JProcess}
+import io.vertx.ext.shell.system.{Job => JJob}
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
 
 /**
   * The job controller.<p/>
   */
-class JobController(private val _asJava: JJobController) {
+class JobController(private val _asJava: Object) {
 
-  def asJava: JJobController = _asJava
+  def asJava = _asJava
 
   /**
     * @return the current foreground job
     */
-  def foregroundJob(): Job = {
-    Job.apply(_asJava.foregroundJob())
+  def foregroundJob():Job = {
+    Job(asJava.asInstanceOf[JJobController].foregroundJob())
   }
 
   /**
     * @return the active jobs
     */
-  def jobs(): Set[Job] = {
-    _asJava.jobs().asScala.map(Job.apply).toSet
+  def jobs():scala.collection.mutable.Set[Job] = {
+    asJava.asInstanceOf[JJobController].jobs().asScala.map(x => Job(x))
   }
 
   /**
@@ -49,8 +51,8 @@ class JobController(private val _asJava: JJobController) {
     * @param id the job id
     * @return the job of ` null` when not found
     */
-  def getJob(id: Int): Job = {
-    Job.apply(_asJava.getJob(id))
+  def getJob(id: Int):Job = {
+    Job(asJava.asInstanceOf[JJobController].getJob(id.asInstanceOf[java.lang.Integer]))
   }
 
   /**
@@ -59,29 +61,26 @@ class JobController(private val _asJava: JJobController) {
     * @param line the line
     * @return the created job
     */
-  def createJob(process: Process, line: String): Job = {
-    Job.apply(_asJava.createJob(process.asJava.asInstanceOf[JProcess], line))
+  def createJob(process: Process,line: String):Job = {
+    Job(asJava.asInstanceOf[JJobController].createJob(process.asJava.asInstanceOf[JProcess],line.asInstanceOf[java.lang.String]))
   }
 
   /**
     * Close the controller and terminate all the underlying jobs, a closed controller does not accept anymore jobs.
     */
-  def close(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.close(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
+  def close(completionHandler: Handler[Unit]):Unit = {
+    asJava.asInstanceOf[JJobController].close({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Close the shell session and terminate all the underlying jobs.
     */
-  def close(): Unit = {
-    _asJava.close()
+  def close():Unit = {
+    asJava.asInstanceOf[JJobController].close()
   }
 
 }
 
-object JobController {
-
-  def apply(_asJava: JJobController): JobController =
-    new JobController(_asJava)
-
+object JobController{
+  def apply(asJava: JJobController) = new JobController(asJava)  
 }

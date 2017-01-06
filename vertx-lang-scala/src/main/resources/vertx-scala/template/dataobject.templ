@@ -30,7 +30,17 @@ package @{type.raw.translatePackageName("scala")}\n
 import io.vertx.lang.scala.json.Json._\n
 import io.vertx.core.json.JsonObject\n
 import scala.collection.JavaConverters._\n
-@foreach{importedType : generateImports(type, importedTypes, new java.util.ArrayList())}
+@code{
+  var imps = generateImports(type, importedTypes, new java.util.ArrayList());
+  for(superType : superTypes) {
+    imps.remove(superType.raw.translatePackageName("scala")+'.'+superType.simpleName);
+    imps.remove(superType.raw.getPackageName+'.{'+superType.simpleName+' => J'+superType.simpleName+'}');
+  }
+}
+@foreach{superType : superTypes}
+import @{superType.raw.translatePackageName("scala")}.{@{superType.simpleName} => Ext@{superType.simpleName}}\n
+@end{}
+@foreach{importedType : imps}
 import @{importedType}\n
 @end{}
 \n
@@ -48,7 +58,7 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : superTypes}@{toScalaType(superType, false);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
+	 \n    extends @foreach{superType : superTypes}Ext@{toScalaType(superType, false);}@if{!superType.isAbstract()}(_asJava)@end{}@end{' \n    with '}
 @end{}
  {\n
 \n

@@ -19,17 +19,16 @@ package io.vertx.scala.ext.stomp
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.bridge.{BridgeOptions => ExtBridgeOptions}
 import io.vertx.scala.ext.bridge.PermittedOptions
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
-import io.vertx.scala.ext.bridge.BridgeOptions
-import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
 
 /**
   * Specify the event bus bridge options.
   */
 class BridgeOptions(private val _asJava: JBridgeOptions) 
-    extends BridgeOptions(_asJava) {
+    extends ExtBridgeOptions(_asJava) {
 
   override def asJava = _asJava
   override def addInboundPermitted(value: PermittedOptions) = {

@@ -16,17 +16,17 @@
 
 package io.vertx.scala.ext.dropwizard
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.dropwizard.{Match => JMatch}
 
 /**
   * A match for a value.
   */
+class Match(private val _asJava: JMatch) {
 
-class Match(val asJava: JMatch) {
-
+  def asJava = _asJava
 
   /**
     * Set the type of matching to apply.
@@ -35,7 +35,7 @@ class Match(val asJava: JMatch) {
     asJava.setType(value)
     this
   }
-  def getType = {
+  def getType: io.vertx.ext.dropwizard.MatchType = {
     asJava.getType()
   }
 
@@ -46,8 +46,8 @@ class Match(val asJava: JMatch) {
     asJava.setValue(value)
     this
   }
-  def getValue = {
-    asJava.getValue()
+  def getValue: String = {
+    asJava.getValue().asInstanceOf[String]
   }
 }
 

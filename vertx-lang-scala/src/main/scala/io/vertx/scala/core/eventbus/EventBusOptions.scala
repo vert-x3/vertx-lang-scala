@@ -19,6 +19,7 @@ package io.vertx.scala.core.eventbus
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{TCPSSLOptions => ExtTCPSSLOptions}
 import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
@@ -32,16 +33,14 @@ import io.vertx.core.http.ClientAuth
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.core.net.{TCPSSLOptions => JTCPSSLOptions}
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.TCPSSLOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Options to configure the event bus.
   */
 class EventBusOptions(private val _asJava: JEventBusOptions) 
-    extends TCPSSLOptions {
+    extends ExtTCPSSLOptions {
 
   def asJava = _asJava
 

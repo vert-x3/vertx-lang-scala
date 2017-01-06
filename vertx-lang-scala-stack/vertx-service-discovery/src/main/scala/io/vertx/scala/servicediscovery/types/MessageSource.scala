@@ -17,48 +17,73 @@
 package io.vertx.scala.servicediscovery.types
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.types.{MessageSource => JMessageSource}
-import io.vertx.servicediscovery.spi.{ServiceType => JServiceType}
-import io.vertx.core.json.JsonObject
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 import io.vertx.scala.core.eventbus.MessageConsumer
+import io.vertx.core.json.JsonObject
+import io.vertx.servicediscovery.types.{MessageSource => JMessageSource}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.scala.servicediscovery.Record
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 
 /**
   * Service type for data producer. Providers are publishing data to a specific event bus address.
   */
-class MessageSource(private val _asJava: JMessageSource) {
+class MessageSource(private val _asJava: Object) {
 
-  def asJava: JMessageSource = _asJava
+  def asJava = _asJava
 
 }
 
-object MessageSource {
-
-  def apply(_asJava: JMessageSource): MessageSource =
-    new MessageSource(_asJava)
-
-  def createRecord(name: String, address: String, `type`: String, metadata: JsonObject): Record = {
-    Record(io.vertx.servicediscovery.types.MessageSource.createRecord(name, address, `type`, metadata))
+object MessageSource{
+  def apply(asJava: JMessageSource) = new MessageSource(asJava)  
+  /**
+    * Create a record representing a data producer.
+    * @param name the name of the service
+    * @param address the address on which the data is sent
+    * @param type the type of payload (fully qualified name of the class)
+    * @param metadata additional metadata
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,address: String,`type`: String,metadata: io.vertx.core.json.JsonObject):Record = {
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String],metadata))
   }
 
-  def createRecord(name: String, address: String, `type`: String): Record = {
-    Record(io.vertx.servicediscovery.types.MessageSource.createRecord(name, address, `type`))
+  /**
+    * Same as [[io.vertx.scala.servicediscovery.types.MessageSource#createRecord]] without additional metadata.
+    * @param name the name of the service
+    * @param address the address on which the data is sent
+    * @param type the type of payload
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,address: String,`type`: String):Record = {
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String]))
   }
 
-  def createRecord(name: String, address: String): Record = {
-    Record(io.vertx.servicediscovery.types.MessageSource.createRecord(name, address))
+  /**
+    * Same as [[io.vertx.scala.servicediscovery.types.MessageSource#createRecord]] without additional metadata, and no type for
+    * the payload.
+    * @param name the name of the service
+    * @param address the address on which the data is sent.
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,address: String):Record = {
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String]))
   }
 
-  def getConsumerFuture[T](discovery: ServiceDiscovery, filter: JsonObject): concurrent.Future[MessageConsumer[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessageConsumer[T],MessageConsumer[T]]((x => if (x == null) null else MessageConsumer.apply[T](x)))
-    io.vertx.servicediscovery.types.MessageSource.getConsumer(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a message source and provides the configured . The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, optional
+    */
+  def getConsumer[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]):Unit = {
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 
 }

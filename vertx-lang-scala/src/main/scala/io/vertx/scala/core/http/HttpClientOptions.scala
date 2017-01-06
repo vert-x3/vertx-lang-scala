@@ -19,6 +19,7 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{ClientOptionsBase => ExtClientOptionsBase}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
@@ -31,9 +32,7 @@ import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.core.net.{ClientOptionsBase => JClientOptionsBase}
 import io.vertx.scala.core.net.ProxyOptions
-import io.vertx.scala.core.net.ClientOptionsBase
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
@@ -42,7 +41,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
   */
 class HttpClientOptions(private val _asJava: JHttpClientOptions) 
-    extends ClientOptionsBase {
+    extends ExtClientOptionsBase {
 
   def asJava = _asJava
 

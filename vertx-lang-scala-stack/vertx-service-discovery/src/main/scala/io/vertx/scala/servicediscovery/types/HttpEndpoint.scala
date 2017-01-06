@@ -17,72 +17,125 @@
 package io.vertx.scala.servicediscovery.types
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.servicediscovery.types.{HttpEndpoint => JHttpEndpoint}
-import io.vertx.servicediscovery.spi.{ServiceType => JServiceType}
-import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.http.HttpClient
+import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-import java.util.function.{Function => JFunction}
-import io.vertx.core.http.{HttpClient => JHttpClient}
-import io.vertx.scala.core.http.HttpClient
+import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.scala.servicediscovery.Record
 
 /**
   *  for HTTP endpoint (REST api).
   * Consumers receive a HTTP client configured with the host and port of the endpoint.
   */
-class HttpEndpoint(private val _asJava: JHttpEndpoint) {
+class HttpEndpoint(private val _asJava: Object) {
 
-  def asJava: JHttpEndpoint = _asJava
+  def asJava = _asJava
 
 }
 
-object HttpEndpoint {
-
-  def apply(_asJava: JHttpEndpoint): HttpEndpoint =
-    new HttpEndpoint(_asJava)
-
-  def createRecord(name: String, host: String, port: Int, root: String, metadata: JsonObject): Record = {
-    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root, metadata))
+object HttpEndpoint{
+  def apply(asJava: JHttpEndpoint) = new HttpEndpoint(asJava)  
+  /**
+    * Convenient method to create a record for a HTTP endpoint.
+    * @param name the service name
+    * @param host the host (IP or DNS name), it must be the _public_ IP / name
+    * @param port the port, it must be the _public_ port
+    * @param root the path of the service, "/" if not set
+    * @param metadata additional metadata
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,host: String,port: Int,root: String,metadata: io.vertx.core.json.JsonObject):Record = {
+    Record(JHttpEndpoint.createRecord(name.asInstanceOf[java.lang.String],host.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],root.asInstanceOf[java.lang.String],metadata))
   }
 
-  def createRecord(name: String, ssl: Boolean, host: String, port: Int, root: String, metadata: JsonObject): Record = {
-    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, ssl, host, port, root, metadata))
+  /**
+    * Same as [[io.vertx.scala.servicediscovery.types.HttpEndpoint#createRecord]] but let you configure whether or not the
+    * service is using `https`.
+    * @param name the service name
+    * @param ssl whether or not the service is using HTTPS
+    * @param host the host (IP or DNS name), it must be the _public_ IP / name
+    * @param port the port, it must be the _public_ port
+    * @param root the path of the service, "/" if not set
+    * @param metadata additional metadata
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,ssl: Boolean,host: String,port: Int,root: String,metadata: io.vertx.core.json.JsonObject):Record = {
+    Record(JHttpEndpoint.createRecord(name.asInstanceOf[java.lang.String],ssl.asInstanceOf[java.lang.Boolean],host.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],root.asInstanceOf[java.lang.String],metadata))
   }
 
-  def createRecord(name: String, host: String, port: Int, root: String): Record = {
-    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root))
+  /**
+    * Same as [[io.vertx.scala.servicediscovery.types.HttpEndpoint#createRecord]] but without metadata.
+    * @param name the service name
+    * @param host the host, must be public
+    * @param port the port
+    * @param root the root, if not set "/" is used
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,host: String,port: Int,root: String):Record = {
+    Record(JHttpEndpoint.createRecord(name.asInstanceOf[java.lang.String],host.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],root.asInstanceOf[java.lang.String]))
   }
 
-  def createRecord(name: String, host: String): Record = {
-    Record(io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host))
+  /**
+    * Same as [[io.vertx.scala.servicediscovery.types.HttpEndpoint#createRecord]] but without metadata, using the port 80
+    * and using "/" as root.
+    * @param name the name
+    * @param host the host
+    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,host: String):Record = {
+    Record(JHttpEndpoint.createRecord(name.asInstanceOf[java.lang.String],host.asInstanceOf[java.lang.String]))
   }
 
-  def getClientFuture(discovery: ServiceDiscovery, filter: JsonObject): concurrent.Future[HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a HTTP endpoint and provides the configured . The async result
+    * is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, optional
+    */
+  def getClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
   }
 
-  def getClientFuture(discovery: ServiceDiscovery, filter: JsonObject, conf: JsonObject): concurrent.Future[HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a HTTP endpoint and provides the configured . The async result
+    * is marked as failed is there are no matching services, or if the lookup fails. This method accepts a
+    * configuration for the HTTP client
+    * @param discovery The service discovery instance
+    * @param filter The filter, optional
+    * @param conf the configuration of the client
+    */
+  def getClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,conf,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
   }
 
-  def getClientFuture(discovery: ServiceDiscovery, filter: JRecord => java.lang.Boolean): concurrent.Future[HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], asJavaFunction(filter), promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a HTTP endpoint and provides the configured . The async result
+    * is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter
+    */
+  def getClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
   }
 
-  def getClientFuture(discovery: ServiceDiscovery, filter: JRecord => java.lang.Boolean, conf: JsonObject): concurrent.Future[HttpClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient,HttpClient]((x => if (x == null) null else HttpClient.apply(x)))
-    io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], asJavaFunction(filter), conf, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a HTTP endpoint and provides the configured . The async result
+    * is marked as failed is there are no matching services, or if the lookup fails. This method accepts a
+    * configuration for the HTTP client.
+    * @param discovery The service discovery instance
+    * @param filter The filter
+    * @param conf the configuration of the client
+    */
+  def getClient(discovery: ServiceDiscovery,filter: Record => Boolean,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},conf,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
   }
 
 }

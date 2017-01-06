@@ -17,43 +17,40 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.ext.shell.term.{SignalHandler => JSignalHandler}
+import io.vertx.scala.ext.shell.cli.Completion
+import io.vertx.ext.shell.term.{Tty => JTty}
+import io.vertx.scala.ext.shell.session.Session
+import io.vertx.core.Handler
 import io.vertx.ext.shell.term.{Term => JTerm}
 import io.vertx.ext.shell.cli.{Completion => JCompletion}
-import io.vertx.scala.ext.shell.cli.Completion
-import io.vertx.ext.shell.term.{SignalHandler => JSignalHandler}
-import io.vertx.ext.shell.term.{Tty => JTty}
 import io.vertx.ext.shell.session.{Session => JSession}
-import io.vertx.scala.ext.shell.session.Session
 
 /**
   * The terminal.
   */
-class Term(private val _asJava: JTerm) {
+class Term(private val _asJava: Object) 
+    extends Tty(_asJava) {
 
-  def asJava: JTerm = _asJava
 
-  def resizehandler(handler: io.vertx.core.Handler[Unit]): Term = {
-    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+//io.vertx.core.Handler<java.lang.Void>
+  override def resizehandler(handler: Handler[Unit]):Term = {
+    asJava.asInstanceOf[JTerm].resizehandler({x: Void => handler.handle(x)})
     this
   }
 
-  def stdinHandler(handler: io.vertx.core.Handler[String]): Term = {
-    _asJava.stdinHandler((handler))
+//io.vertx.core.Handler<java.lang.String>
+  override def stdinHandler(handler: Handler[String]):Term = {
+    asJava.asInstanceOf[JTerm].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
 
-  def write(data: String): Term = {
-    _asJava.write(data)
+//java.lang.String
+  override def write(data: String):Term = {
+    asJava.asInstanceOf[JTerm].write(data.asInstanceOf[java.lang.String])
     this
-  }
-
-  /**
-    * @return the last time this term received input
-    */
-  def lastAccessedTime(): Long = {
-    _asJava.lastAccessedTime()
   }
 
   /**
@@ -61,18 +58,10 @@ class Term(private val _asJava: JTerm) {
     * @param text the text to echo
     * @return a reference to this, so the API can be used fluently
     */
-  def echo(text: String): Term = {
-    _asJava.echo(text)
+//java.lang.String
+  def echo(text: String):Term = {
+    asJava.asInstanceOf[JTerm].echo(text.asInstanceOf[java.lang.String])
     this
-  }
-
-  /**
-    * Associate the term with a session.
-    * @param session the session to set
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setSession(session: Session): Term = {
-    Term.apply(_asJava.setSession(session.asJava.asInstanceOf[JSession]))
   }
 
   /**
@@ -80,8 +69,9 @@ class Term(private val _asJava: JTerm) {
     * @param handler the interrupt handler
     * @return a reference to this, so the API can be used fluently
     */
-  def interruptHandler(handler: SignalHandler): Term = {
-    _asJava.interruptHandler(handler.asJava.asInstanceOf[JSignalHandler])
+//io.vertx.ext.shell.term.SignalHandler
+  def interruptHandler(handler: SignalHandler):Term = {
+    asJava.asInstanceOf[JTerm].interruptHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
   }
 
@@ -90,9 +80,37 @@ class Term(private val _asJava: JTerm) {
     * @param handler the suspend handler
     * @return a reference to this, so the API can be used fluently
     */
-  def suspendHandler(handler: SignalHandler): Term = {
-    _asJava.suspendHandler(handler.asJava.asInstanceOf[JSignalHandler])
+//io.vertx.ext.shell.term.SignalHandler
+  def suspendHandler(handler: SignalHandler):Term = {
+    asJava.asInstanceOf[JTerm].suspendHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
+  }
+
+  /**
+    * Set a handler that will be called when the terminal is closed.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+//io.vertx.core.Handler<java.lang.Void>
+  def closeHandler(handler: Handler[Unit]):Term = {
+    asJava.asInstanceOf[JTerm].closeHandler({x: Void => handler.handle(x)})
+    this
+  }
+
+  /**
+    * @return the last time this term received input
+    */
+  def lastAccessedTime():Long = {
+    asJava.asInstanceOf[JTerm].lastAccessedTime().asInstanceOf[Long]
+  }
+
+  /**
+    * Associate the term with a session.
+    * @param session the session to set
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setSession(session: Session):Term = {
+    Term(asJava.asInstanceOf[JTerm].setSession(session.asJava.asInstanceOf[JSession]))
   }
 
   /**
@@ -100,8 +118,8 @@ class Term(private val _asJava: JTerm) {
     * @param prompt the displayed prompt
     * @param lineHandler the line handler called with the line
     */
-  def readline(prompt: String, lineHandler: io.vertx.core.Handler[String]): Unit = {
-    _asJava.readline(prompt, (lineHandler))
+  def readline(prompt: String,lineHandler: Handler[String]):Unit = {
+    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String],{x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])})
   }
 
   /**
@@ -110,32 +128,19 @@ class Term(private val _asJava: JTerm) {
     * @param lineHandler the line handler called with the line
     * @param completionHandler the completion handler
     */
-  def readline(prompt: String, lineHandler: io.vertx.core.Handler[String], completionHandler: io.vertx.core.Handler[Completion]): Unit = {
-    _asJava.readline(prompt, (lineHandler), funcToMappedHandler(Completion.apply)(completionHandler))
-  }
-
-  /**
-    * Set a handler that will be called when the terminal is closed.
-    * @param handler the handler
-    * @return a reference to this, so the API can be used fluently
-    */
-  def closeHandler(handler: io.vertx.core.Handler[Unit]): Term = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
-    this
+  def readline(prompt: String,lineHandler: Handler[String],completionHandler: Handler[Completion]):Unit = {
+    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String],{x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])},{x: JCompletion => completionHandler.handle(Completion(x))})
   }
 
   /**
     * Close the connection to terminal.
     */
-  def close(): Unit = {
-    _asJava.close()
+  def close():Unit = {
+    asJava.asInstanceOf[JTerm].close()
   }
 
 }
 
-object Term {
-
-  def apply(_asJava: JTerm): Term =
-    new Term(_asJava)
-
+object Term{
+  def apply(asJava: JTerm) = new Term(asJava)  
 }

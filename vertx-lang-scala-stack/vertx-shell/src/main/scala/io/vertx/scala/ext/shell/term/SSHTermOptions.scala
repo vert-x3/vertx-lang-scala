@@ -16,25 +16,25 @@
 
 package io.vertx.scala.ext.shell.term
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
-import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
-import io.vertx.scala.ext.auth.AuthOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
 import io.vertx.scala.core.net.JksOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.scala.core.net.PfxOptions
+import io.vertx.scala.ext.auth.AuthOptions
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * The SSH term configuration options.
   */
+class SSHTermOptions(private val _asJava: JSSHTermOptions) {
 
-class SSHTermOptions(val asJava: JSSHTermOptions) {
-
+  def asJava = _asJava
 
   /**
     */
@@ -46,8 +46,8 @@ class SSHTermOptions(val asJava: JSSHTermOptions) {
     asJava.setDefaultCharset(value)
     this
   }
-  def getDefaultCharset = {
-    asJava.getDefaultCharset()
+  def getDefaultCharset: String = {
+    asJava.getDefaultCharset().asInstanceOf[String]
   }
 
   /**
@@ -57,8 +57,8 @@ class SSHTermOptions(val asJava: JSSHTermOptions) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -68,8 +68,8 @@ class SSHTermOptions(val asJava: JSSHTermOptions) {
     asJava.setIntputrc(value)
     this
   }
-  def getIntputrc = {
-    asJava.getIntputrc()
+  def getIntputrc: String = {
+    asJava.getIntputrc().asInstanceOf[String]
   }
 
   /**
@@ -103,8 +103,8 @@ class SSHTermOptions(val asJava: JSSHTermOptions) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 }
 

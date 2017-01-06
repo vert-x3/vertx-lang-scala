@@ -19,6 +19,7 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.core.net.{ClientOptionsBase => ExtClientOptionsBase}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 
@@ -26,7 +27,7 @@ import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
   */
 class NetClientOptions(private val _asJava: JNetClientOptions) 
-    extends ClientOptionsBase {
+    extends ExtClientOptionsBase {
 
   def asJava = _asJava
 

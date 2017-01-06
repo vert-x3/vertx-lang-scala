@@ -16,17 +16,17 @@
 
 package io.vertx.scala.ext.hawkular
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.hawkular.{AuthenticationOptions => JAuthenticationOptions}
 
 /**
   * Authentication options.
   */
+class AuthenticationOptions(private val _asJava: JAuthenticationOptions) {
 
-class AuthenticationOptions(val asJava: JAuthenticationOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set whether authentication is enabled. Defaults to `false`.
@@ -35,8 +35,8 @@ class AuthenticationOptions(val asJava: JAuthenticationOptions) {
     asJava.setEnabled(value)
     this
   }
-  def isEnabled = {
-    asJava.isEnabled()
+  def isEnabled: Boolean = {
+    asJava.isEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -46,8 +46,8 @@ class AuthenticationOptions(val asJava: JAuthenticationOptions) {
     asJava.setId(value)
     this
   }
-  def getId = {
-    asJava.getId()
+  def getId: String = {
+    asJava.getId().asInstanceOf[String]
   }
 
   /**
@@ -57,8 +57,8 @@ class AuthenticationOptions(val asJava: JAuthenticationOptions) {
     asJava.setSecret(value)
     this
   }
-  def getSecret = {
-    asJava.getSecret()
+  def getSecret: String = {
+    asJava.getSecret().asInstanceOf[String]
   }
 }
 

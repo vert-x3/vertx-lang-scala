@@ -17,55 +17,47 @@
 package io.vertx.scala.ext.shell.command
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.command.{Command => JCommand}
-import io.vertx.ext.shell.cli.{Completion => JCompletion}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.shell.cli.Completion
 import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.scala.core.cli.CLI
-import io.vertx.ext.shell.cli.{CliToken => JCliToken}
-import io.vertx.scala.ext.shell.cli.CliToken
-import io.vertx.ext.shell.system.{Process => JProcess}
 import io.vertx.scala.ext.shell.system.Process
+import io.vertx.ext.shell.system.{Process => JProcess}
+import io.vertx.ext.shell.command.{Command => JCommand}
+import scala.collection.JavaConverters._
+import io.vertx.ext.shell.cli.{CliToken => JCliToken}
+import io.vertx.ext.shell.cli.{Completion => JCompletion}
+import io.vertx.scala.core.cli.CLI
+import io.vertx.scala.ext.shell.cli.CliToken
 
 /**
   * A Vert.x Shell command, it can be created from any language using the [[io.vertx.scala.ext.shell.command.CommandBuilder#command]] or from a
   * Java class using [[io.vertx.scala.ext.shell.command.Command#create]]
   */
-class Command(private val _asJava: JCommand) {
+class Command(private val _asJava: Object) {
 
-  def asJava: JCommand = _asJava
+  def asJava = _asJava
 
   /**
     * @return the command name
     */
-  def name(): String = {
-    _asJava.name()
+  def name():String = {
+    asJava.asInstanceOf[JCommand].name().asInstanceOf[String]
   }
 
   /**
     * @return the command line interface, can be null
     */
-  def cli(): CLI = {
-    CLI.apply(_asJava.cli())
+  def cli():CLI = {
+    CLI(asJava.asInstanceOf[JCommand].cli())
   }
 
   /**
     * Create a new process with empty arguments.
     * @return the process
     */
-  def createProcess(): Process = {
-    Process.apply(_asJava.createProcess())
-  }
-
-  /**
-    * Create a new process with the passed arguments.
-    * @param args the process arguments
-    * @return the process
-    */
-  def createProcess(args: scala.collection.mutable.Buffer[CliToken]): Process = {
-    Process.apply(_asJava.createProcess(args.map(x => if (x == null) null else x.asJava).asJava))
+  def createProcess():Process = {
+    Process(asJava.asInstanceOf[JCommand].createProcess())
   }
 
   /**
@@ -73,15 +65,21 @@ class Command(private val _asJava: JCommand) {
     * or  )` method to signal completion is done.
     * @param completion the completion object
     */
-  def complete(completion: Completion): Unit = {
-    _asJava.complete(completion.asJava.asInstanceOf[JCompletion])
+  def complete(completion: Completion):Unit = {
+    asJava.asInstanceOf[JCommand].complete(completion.asJava.asInstanceOf[JCompletion])
+  }
+
+  /**
+    * Create a new process with the passed arguments.
+    * @param args the process arguments
+    * @return the process
+    */
+  def createProcess(args: scala.collection.mutable.Buffer[CliToken]):Process = {
+    Process(asJava.asInstanceOf[JCommand].createProcess(args.map(x => x.asJava.asInstanceOf[JCliToken]).asJava))
   }
 
 }
 
-object Command {
-
-  def apply(_asJava: JCommand): Command =
-    new Command(_asJava)
-
+object Command{
+  def apply(asJava: JCommand) = new Command(asJava)  
 }

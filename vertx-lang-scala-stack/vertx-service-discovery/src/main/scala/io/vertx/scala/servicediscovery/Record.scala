@@ -16,9 +16,9 @@
 
 package io.vertx.scala.servicediscovery
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.servicediscovery.{Record => JRecord}
 import io.vertx.core.json.JsonObject
 
@@ -26,30 +26,30 @@ import io.vertx.core.json.JsonObject
   * Describes a `service`. The record is the only piece of information shared between consumer and provider. It should
   * contains enough metadata to let consumer find the service they want.
   */
+class Record(private val _asJava: JRecord) {
 
-class Record(val asJava: JRecord) {
-
+  def asJava = _asJava
 
   /**
     * Sets the json object describing the location of the service. By convention, this json object should contain
     * the <a href="../../../../../../cheatsheet/Record.html">Record</a> entry.
     */
-  def setLocation(value: JsonObject) = {
+  def setLocation(value: io.vertx.core.json.JsonObject) = {
     asJava.setLocation(value)
     this
   }
-  def getLocation = {
+  def getLocation: io.vertx.core.json.JsonObject = {
     asJava.getLocation()
   }
 
   /**
     * Gets the metadata attached to the record.
     */
-  def setMetadata(value: JsonObject) = {
+  def setMetadata(value: io.vertx.core.json.JsonObject) = {
     asJava.setMetadata(value)
     this
   }
-  def getMetadata = {
+  def getMetadata: io.vertx.core.json.JsonObject = {
     asJava.getMetadata()
   }
 
@@ -60,8 +60,8 @@ class Record(val asJava: JRecord) {
     asJava.setName(value)
     this
   }
-  def getName = {
-    asJava.getName()
+  def getName: String = {
+    asJava.getName().asInstanceOf[String]
   }
 
   /**
@@ -71,8 +71,8 @@ class Record(val asJava: JRecord) {
     asJava.setRegistration(value)
     this
   }
-  def getRegistration = {
-    asJava.getRegistration()
+  def getRegistration: String = {
+    asJava.getRegistration().asInstanceOf[String]
   }
 
   /**
@@ -83,7 +83,7 @@ class Record(val asJava: JRecord) {
     asJava.setStatus(value)
     this
   }
-  def getStatus = {
+  def getStatus: io.vertx.servicediscovery.Status = {
     asJava.getStatus()
   }
 
@@ -94,8 +94,8 @@ class Record(val asJava: JRecord) {
     asJava.setType(value)
     this
   }
-  def getType = {
-    asJava.getType()
+  def getType: String = {
+    asJava.getType().asInstanceOf[String]
   }
 }
 

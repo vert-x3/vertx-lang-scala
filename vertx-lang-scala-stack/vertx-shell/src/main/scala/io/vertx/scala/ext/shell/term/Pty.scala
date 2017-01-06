@@ -17,26 +17,28 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.term.{Pty => JPty}
 import io.vertx.ext.shell.term.{Tty => JTty}
+import io.vertx.core.Handler
 
 /**
   * A pseudo terminal used for controlling a [[io.vertx.scala.ext.shell.term.Tty]]. This interface acts as a pseudo
   * terminal master, [[io.vertx.scala.ext.shell.term.Pty#slave]] returns the assocated slave pseudo terminal.
   */
-class Pty(private val _asJava: JPty) {
+class Pty(private val _asJava: Object) {
 
-  def asJava: JPty = _asJava
+  def asJava = _asJava
 
   /**
     * Set the standard out handler of the pseudo terminal.
     * @param handler the standard output
     * @return this current object
     */
-  def stdoutHandler(handler: io.vertx.core.Handler[String]): Pty = {
-    _asJava.stdoutHandler((handler))
+//io.vertx.core.Handler<java.lang.String>
+  def stdoutHandler(handler: Handler[String]):Pty = {
+    asJava.asInstanceOf[JPty].stdoutHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
 
@@ -45,8 +47,9 @@ class Pty(private val _asJava: JPty) {
     * @param data the data to write
     * @return this current object
     */
-  def write(data: String): Pty = {
-    _asJava.write(data)
+//java.lang.String
+  def write(data: String):Pty = {
+    asJava.asInstanceOf[JPty].write(data.asInstanceOf[java.lang.String])
     this
   }
 
@@ -54,31 +57,38 @@ class Pty(private val _asJava: JPty) {
     * Resize the terminal.
     * @return this current object
     */
-  def setSize(width: Int, height: Int): Pty = {
-    _asJava.setSize(width, height)
+//int
+//int
+  def setSize(width: Int,height: Int):Pty = {
+    asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer],height.asInstanceOf[java.lang.Integer])
     this
   }
 
   /**
     * @return the pseudo terminal slave
     */
-  def slave(): Tty = {
-    Tty.apply(_asJava.slave())
+  def slave():Tty = {
+    Tty(asJava.asInstanceOf[JPty].slave())
   }
 
 }
 
-object Pty {
-
-  def apply(_asJava: JPty): Pty =
-    new Pty(_asJava)
-
-  def create(): Pty = {
-    Pty.apply(io.vertx.ext.shell.term.Pty.create())
+object Pty{
+  def apply(asJava: JPty) = new Pty(asJava)  
+  /**
+    * Create a new pseudo terminal with no terminal type.
+    */
+  def create():Pty = {
+    Pty(JPty.create())
   }
 
-  def create(terminalType: String): Pty = {
-    Pty.apply(io.vertx.ext.shell.term.Pty.create(terminalType))
+  /**
+    * Create a new pseudo terminal.
+    * @param terminalType the terminal type, for instance ` vt100`
+    * @return the created pseudo terminal
+    */
+  def create(terminalType: String):Pty = {
+    Pty(JPty.create(terminalType.asInstanceOf[java.lang.String]))
   }
 
 }
