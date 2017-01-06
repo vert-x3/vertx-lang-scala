@@ -19,9 +19,8 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{GoAway => JGoAway}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * A  frame.
@@ -33,12 +32,12 @@ class GoAway(private val _asJava: JGoAway) {
   /**
     * Set the additional debug data
     */
-  def setDebugData(value: Buffer) = {
-    asJava.setDebugData(value.asInstanceOf)
+  def setDebugData(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setDebugData(value)
     this
   }
-  def getDebugData: Buffer = {
-    Buffer(asJava.getDebugData())
+  def getDebugData: io.vertx.core.buffer.Buffer = {
+    asJava.getDebugData()
   }
 
   /**

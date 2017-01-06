@@ -38,6 +38,9 @@
 
 @foreach{method : fluentMethods}
 	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
+@foreach{param:method.params}
+//@{param.type.name}\n
+@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(

@@ -23,9 +23,8 @@ import io.vertx.core.file.{OpenOptions => JOpenOptions}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.AsyncResult
 import io.vertx.core.file.{FileProps => JFileProps}
 import scala.collection.JavaConverters._
@@ -57,6 +56,9 @@ class FileSystem(private val _asJava: Object) {
     * @param to the path to copy to
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def copy(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -65,6 +67,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#copyFuture]]
     */
+//java.lang.String
+//java.lang.String
   def copyBlocking(from: String,to: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copyBlocking(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String])
     this
@@ -81,6 +85,10 @@ class FileSystem(private val _asJava: Object) {
     * @param to the path to copy to
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//boolean
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def copyRecursive(from: String,to: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copyRecursive(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -89,6 +97,9 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#copyRecursiveFuture]]
     */
+//java.lang.String
+//java.lang.String
+//boolean
   def copyRecursiveBlocking(from: String,to: String,recursive: Boolean):FileSystem = {
     asJava.asInstanceOf[JFileSystem].copyRecursiveBlocking(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean])
     this
@@ -102,6 +113,9 @@ class FileSystem(private val _asJava: Object) {
     * @param to the path to copy to
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def move(from: String,to: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -110,6 +124,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#moveFuture]]
     */
+//java.lang.String
+//java.lang.String
   def moveBlocking(from: String,to: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].moveBlocking(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String])
     this
@@ -123,6 +139,9 @@ class FileSystem(private val _asJava: Object) {
     * @param len the length to truncate it to
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//long
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def truncate(path: String,len: Long,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].truncate(path.asInstanceOf[java.lang.String],len.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -131,6 +150,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#truncateFuture]]
     */
+//java.lang.String
+//long
   def truncateBlocking(path: String,len: Long):FileSystem = {
     asJava.asInstanceOf[JFileSystem].truncateBlocking(path.asInstanceOf[java.lang.String],len.asInstanceOf[java.lang.Long])
     this
@@ -145,6 +166,9 @@ class FileSystem(private val _asJava: Object) {
     * @param perms the permissions string
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def chmod(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmod(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -153,6 +177,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem]]
     */
+//java.lang.String
+//java.lang.String
   def chmodBlocking(path: String,perms: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmodBlocking(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String])
     this
@@ -170,6 +196,10 @@ class FileSystem(private val _asJava: Object) {
     * @param dirPerms the directory permissions
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def chmodRecursive(path: String,perms: String,dirPerms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmodRecursive(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],dirPerms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -178,6 +208,9 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#chmodRecursiveFuture]]
     */
+//java.lang.String
+//java.lang.String
+//java.lang.String
   def chmodRecursiveBlocking(path: String,perms: String,dirPerms: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chmodRecursiveBlocking(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],dirPerms.asInstanceOf[java.lang.String])
     this
@@ -190,6 +223,10 @@ class FileSystem(private val _asJava: Object) {
     * @param group the user group, `null` will not change the user group name
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def chown(path: String,user: scala.Option[String],group: scala.Option[String],handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chown(path.asInstanceOf[java.lang.String],user.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),group.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -199,6 +236,9 @@ class FileSystem(private val _asJava: Object) {
     * Blocking version of 
     *
     */
+//java.lang.String
+//java.lang.String
+//java.lang.String
   def chownBlocking(path: String,user: scala.Option[String],group: scala.Option[String]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].chownBlocking(path.asInstanceOf[java.lang.String],user.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),group.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null))
     this
@@ -211,6 +251,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path the path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.file.FileProps>>
   def props(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].props(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
     this
@@ -223,6 +265,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path the path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.file.FileProps>>
   def lprops(path: String,handler: Handler[AsyncResult[FileProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].lprops(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
     this
@@ -234,6 +278,9 @@ class FileSystem(private val _asJava: Object) {
     * @param existing the link destination
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def link(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].link(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -242,6 +289,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#linkFuture]]
     */
+//java.lang.String
+//java.lang.String
   def linkBlocking(link: String,existing: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].linkBlocking(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String])
     this
@@ -253,6 +302,9 @@ class FileSystem(private val _asJava: Object) {
     * @param existing the link destination
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def symlink(link: String,existing: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].symlink(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -261,6 +313,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#linkFuture]]
     */
+//java.lang.String
+//java.lang.String
   def symlinkBlocking(link: String,existing: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].symlinkBlocking(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String])
     this
@@ -271,6 +325,8 @@ class FileSystem(private val _asJava: Object) {
     * @param link the link
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def unlink(link: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].unlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -279,6 +335,7 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#unlinkFuture]]
     */
+//java.lang.String
   def unlinkBlocking(link: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].unlinkBlocking(link.asInstanceOf[java.lang.String])
     this
@@ -289,6 +346,8 @@ class FileSystem(private val _asJava: Object) {
     * @param link the link
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def readSymlink(link: String,handler: Handler[AsyncResult[String]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -299,6 +358,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def delete(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].delete(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -307,6 +368,7 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#deleteFuture]]
     */
+//java.lang.String
   def deleteBlocking(path: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].deleteBlocking(path.asInstanceOf[java.lang.String])
     this
@@ -321,6 +383,9 @@ class FileSystem(private val _asJava: Object) {
     * @param recursive delete recursively?
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//boolean
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def deleteRecursive(path: String,recursive: Boolean,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].deleteRecursive(path.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -329,6 +394,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#deleteRecursiveFuture]]
     */
+//java.lang.String
+//boolean
   def deleteRecursiveBlocking(path: String,recursive: Boolean):FileSystem = {
     asJava.asInstanceOf[JFileSystem].deleteRecursiveBlocking(path.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean])
     this
@@ -341,6 +408,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def mkdir(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -349,6 +418,7 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#mkdirFuture]]
     */
+//java.lang.String
   def mkdirBlocking(path: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirBlocking(path.asInstanceOf[java.lang.String])
     this
@@ -367,6 +437,9 @@ class FileSystem(private val _asJava: Object) {
     * @param perms the permissions string
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def mkdir(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -375,6 +448,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#mkdirFuture]]
     */
+//java.lang.String
+//java.lang.String
   def mkdirBlocking(path: String,perms: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirBlocking(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String])
     this
@@ -387,6 +462,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def mkdirs(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -395,6 +472,7 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#mkdirsFuture]]
     */
+//java.lang.String
   def mkdirsBlocking(path: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path.asInstanceOf[java.lang.String])
     this
@@ -413,6 +491,9 @@ class FileSystem(private val _asJava: Object) {
     * @param perms the permissions string
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def mkdirs(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -421,6 +502,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#mkdirsFuture]]
     */
+//java.lang.String
+//java.lang.String
   def mkdirsBlocking(path: String,perms: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].mkdirsBlocking(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String])
     this
@@ -433,6 +516,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def readDir(path: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -449,6 +534,9 @@ class FileSystem(private val _asJava: Object) {
     * @param filter the filter expression
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def readDir(path: String,filter: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -461,8 +549,10 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
-  def readFile(path: String,handler: Handler[AsyncResult[Buffer]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>>
+  def readFile(path: String,handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]):FileSystem = {
+    asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String],{x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -472,16 +562,21 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
-  def writeFile(path: String,data: Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data.asJava.asInstanceOf[JBuffer],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+//java.lang.String
+//io.vertx.core.buffer.Buffer
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
+  def writeFile(path: String,data: io.vertx.core.buffer.Buffer,handler: Handler[AsyncResult[Unit]]):FileSystem = {
+    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data,{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#writeFileFuture]]
     */
-  def writeFileBlocking(path: String,data: Buffer):FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path.asInstanceOf[java.lang.String],data.asJava.asInstanceOf[JBuffer])
+//java.lang.String
+//io.vertx.core.buffer.Buffer
+  def writeFileBlocking(path: String,data: io.vertx.core.buffer.Buffer):FileSystem = {
+    asJava.asInstanceOf[JFileSystem].writeFileBlocking(path.asInstanceOf[java.lang.String],data)
     this
   }
 
@@ -493,6 +588,9 @@ class FileSystem(private val _asJava: Object) {
     * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.file.OpenOptions
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.file.AsyncFile>>
   def open(path: String,options: OpenOptions,handler: Handler[AsyncResult[AsyncFile]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].open(path.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[JAsyncFile] => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a)))})
     this
@@ -503,6 +601,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def createFile(path: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -511,6 +611,7 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#createFileFuture]]
     */
+//java.lang.String
   def createFileBlocking(path: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFileBlocking(path.asInstanceOf[java.lang.String])
     this
@@ -522,6 +623,9 @@ class FileSystem(private val _asJava: Object) {
     * @param perms the permissions string
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def createFile(path: String,perms: String,handler: Handler[AsyncResult[Unit]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -530,6 +634,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#createFileFuture]]
     */
+//java.lang.String
+//java.lang.String
   def createFileBlocking(path: String,perms: String):FileSystem = {
     asJava.asInstanceOf[JFileSystem].createFileBlocking(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String])
     this
@@ -540,6 +646,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to the file
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Boolean>>
   def exists(path: String,handler: Handler[AsyncResult[Boolean]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
@@ -550,6 +658,8 @@ class FileSystem(private val _asJava: Object) {
     * @param path path to anywhere on the filesystem
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.file.FileSystemProps>>
   def fsProps(path: String,handler: Handler[AsyncResult[FileSystemProps]]):FileSystem = {
     asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String],{x: AsyncResult[JFileSystemProps] => handler.handle(AsyncResultWrapper[JFileSystemProps,FileSystemProps](x, a => FileSystemProps(a)))})
     this
@@ -593,8 +703,8 @@ class FileSystem(private val _asJava: Object) {
   /**
     * Blocking version of [[io.vertx.scala.core.file.FileSystem#readFileFuture]]
     */
-  def readFileBlocking(path: String):Buffer = {
-    Buffer(asJava.asInstanceOf[JFileSystem].readFileBlocking(path.asInstanceOf[java.lang.String]))
+  def readFileBlocking(path: String):io.vertx.core.buffer.Buffer = {
+    asJava.asInstanceOf[JFileSystem].readFileBlocking(path.asInstanceOf[java.lang.String])
   }
 
   /**
@@ -922,8 +1032,8 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def readFileFuture(path: String):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
+    def readFileFuture(path: String):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -934,9 +1044,9 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def writeFileFuture(path: String,data: Buffer):scala.concurrent.Future[Unit] = {
+    def writeFileFuture(path: String,data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data.asJava.asInstanceOf[JBuffer],promiseAndHandler._1)
+    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data,promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

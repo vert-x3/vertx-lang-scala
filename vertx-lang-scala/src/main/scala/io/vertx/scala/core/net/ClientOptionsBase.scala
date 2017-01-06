@@ -19,9 +19,8 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{ClientOptionsBase => JClientOptionsBase}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Base class for Client options
@@ -45,8 +44,8 @@ trait ClientOptionsBase
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: Buffer):ClientOptionsBase
-  def getCrlValues: scala.collection.mutable.Buffer[Buffer] 
+  def addCrlValue(value: io.vertx.core.buffer.Buffer):ClientOptionsBase
+  def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] 
 
   /**
     * Add an enabled cipher suite, appended to the ordered suites.

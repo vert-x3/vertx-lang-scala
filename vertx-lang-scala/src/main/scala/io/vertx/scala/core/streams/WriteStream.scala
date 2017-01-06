@@ -106,6 +106,7 @@ object WriteStream{
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -118,6 +119,7 @@ object WriteStream{
     * @param data the data to write
     * @return a reference to this, so the API can be used fluently
     */
+//T
   def write(data: T):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data))
     this
@@ -134,6 +136,7 @@ object WriteStream{
     * @param maxSize the max size of the write stream
     * @return a reference to this, so the API can be used fluently
     */
+//int
   def setWriteQueueMaxSize(maxSize: Int):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
@@ -148,6 +151,7 @@ object WriteStream{
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Void>
   def drainHandler(handler: Handler[Unit]):WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[Object]].drainHandler({x: Void => handler.handle(x)})
     this

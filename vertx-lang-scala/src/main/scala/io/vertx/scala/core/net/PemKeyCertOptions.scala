@@ -19,8 +19,7 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 
 /**
@@ -84,12 +83,12 @@ class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
   /**
     * Set the certificate as a buffer
     */
-  def setCertValue(value: Buffer) = {
-    asJava.setCertValue(value.asInstanceOf)
+  def setCertValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setCertValue(value)
     this
   }
-  def getCertValue: Buffer = {
-    Buffer(asJava.getCertValue())
+  def getCertValue: io.vertx.core.buffer.Buffer = {
+    asJava.getCertValue()
   }
 
   /**
@@ -106,12 +105,12 @@ class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
   /**
     * Set the key a a buffer
     */
-  def setKeyValue(value: Buffer) = {
-    asJava.setKeyValue(value.asInstanceOf)
+  def setKeyValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setKeyValue(value)
     this
   }
-  def getKeyValue: Buffer = {
-    Buffer(asJava.getKeyValue())
+  def getKeyValue: io.vertx.core.buffer.Buffer = {
+    asJava.getKeyValue()
   }
 }
 

@@ -19,8 +19,7 @@ package io.vertx.scala.core.datagram
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
 import io.vertx.scala.core.net.SocketAddress
@@ -45,8 +44,8 @@ class DatagramPacket(private val _asJava: Object) {
     * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
     * @return the data
     */
-  def data():Buffer = {
-    Buffer(asJava.asInstanceOf[JDatagramPacket].data())
+  def data():io.vertx.core.buffer.Buffer = {
+    asJava.asInstanceOf[JDatagramPacket].data()
   }
 
 }

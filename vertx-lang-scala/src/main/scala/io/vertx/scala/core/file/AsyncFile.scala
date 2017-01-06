@@ -22,10 +22,9 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -39,13 +38,14 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * using the [[io.vertx.scala.core.streams.Pump]] class
   */
 class AsyncFile(private val _asJava: Object) 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
 
-  override def handler(handler: Handler[Buffer]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler({x: JBuffer => handler.handle(Buffer(x))})
+//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].handler({x: Buffer => handler.handle(x)})
     this
   }
 
@@ -59,26 +59,31 @@ class AsyncFile(private val _asJava: Object)
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def write(data: Buffer):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  override def write(data: io.vertx.core.buffer.Buffer):AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].write(data)
     this
   }
 
+//int
   override def setWriteQueueMaxSize(maxSize: Int):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -98,8 +103,11 @@ class AsyncFile(private val _asJava: Object)
     * @param position the position in the file to write it at
     * @return a reference to this, so the API can be used fluently
     */
-  def write(buffer: Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+//io.vertx.core.buffer.Buffer
+//long
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
+  def write(buffer: io.vertx.core.buffer.Buffer,position: Long,handler: Handler[AsyncResult[Unit]]):AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].write(buffer,position.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -118,8 +126,13 @@ class AsyncFile(private val _asJava: Object)
     * @param length the number of bytes to read
     * @return a reference to this, so the API can be used fluently
     */
-  def read(buffer: Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[Buffer]]):AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],{x: AsyncResult[JBuffer] => handler.handle(AsyncResultWrapper[JBuffer,Buffer](x, a => Buffer(a)))})
+//io.vertx.core.buffer.Buffer
+//int
+//long
+//int
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.buffer.Buffer>>
+  def read(buffer: io.vertx.core.buffer.Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]):AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].read(buffer,offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],{x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -139,6 +152,7 @@ class AsyncFile(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
     */
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def flush(handler: Handler[AsyncResult[Unit]]):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].flush({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -149,6 +163,7 @@ class AsyncFile(private val _asJava: Object)
     * @param readPos the position in the file
     * @return a reference to this, so the API can be used fluently
     */
+//long
   def setReadPos(readPos: Long):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].setReadPos(readPos.asInstanceOf[java.lang.Long])
     this
@@ -159,6 +174,7 @@ class AsyncFile(private val _asJava: Object)
     * @param writePos the position in the file
     * @return a reference to this, so the API can be used fluently
     */
+//long
   def setWritePos(writePos: Long):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].setWritePos(writePos.asInstanceOf[java.lang.Long])
     this
@@ -170,6 +186,7 @@ class AsyncFile(private val _asJava: Object)
     * @param readBufferSize the buffer size
     * @return a reference to this, so the API can be used fluently
     */
+//int
   def setReadBufferSize(readBufferSize: Int):AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].setReadBufferSize(readBufferSize.asInstanceOf[java.lang.Integer])
     this
@@ -178,8 +195,8 @@ class AsyncFile(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.
     */
-  override def end(t: Buffer):Unit = {
-    asJava.asInstanceOf[JAsyncFile].end(t.asJava.asInstanceOf[JBuffer])
+  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JAsyncFile].end(t)
   }
 
   /**
@@ -237,9 +254,9 @@ class AsyncFile(private val _asJava: Object)
    * @param position the position in the file to write it at
    * @return the future to call when the write is complete
    */
-    def writeFuture(buffer: Buffer,position: Long):scala.concurrent.Future[Unit] = {
+    def writeFuture(buffer: io.vertx.core.buffer.Buffer,position: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncFile].write(buffer.asJava.asInstanceOf[JBuffer],position.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncFile].write(buffer,position.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -258,9 +275,9 @@ class AsyncFile(private val _asJava: Object)
    * @param length the number of bytes to read
    * @return the future to call when the write is complete
    */
-    def readFuture(buffer: Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[Buffer] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JBuffer, Buffer](x => Buffer(x))
-    asJava.asInstanceOf[JAsyncFile].read(buffer.asJava.asInstanceOf[JBuffer],offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
+    def readFuture(buffer: io.vertx.core.buffer.Buffer,offset: Int,position: Long,length: Int):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
+    asJava.asInstanceOf[JAsyncFile].read(buffer,offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

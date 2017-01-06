@@ -19,9 +19,8 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.ClientAuth
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 
 /**
@@ -79,12 +78,12 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
   /**
     * Add a CRL value
     */
-  override def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asInstanceOf)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  override def getCrlValues: scala.collection.mutable.Buffer[Buffer] = {
-    asJava.getCrlValues().asScala.map(x => Buffer(x))
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
 
   /**

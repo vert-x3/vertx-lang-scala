@@ -72,6 +72,7 @@ class TestInterface(private val _asJava: Object)
     cached_2
   }
 
+//java.lang.String
   def fluentMethod(str: String):TestInterface = {
     asJava.asInstanceOf[JTestInterface].fluentMethod(str.asInstanceOf[java.lang.String])
     this

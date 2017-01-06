@@ -17,7 +17,6 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.json.{JsonArray, JsonObject}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Type definitions for commonly used types.
@@ -36,5 +35,4 @@ object Types {
   type DoubleAsyncMsg = io.vertx.core.AsyncResult[io.vertx.scala.core.eventbus.Message[Double]]
   type JsonObjectAsyncMsg= io.vertx.core.AsyncResult[io.vertx.scala.core.eventbus.Message[JsonObject]]
   type JsonArrayAsyncMsg = io.vertx.core.AsyncResult[io.vertx.scala.core.eventbus.Message[JsonArray]]
-  type BufferAsyncMsg = io.vertx.core.AsyncResult[io.vertx.scala.core.eventbus.Message[Buffer]]
 }

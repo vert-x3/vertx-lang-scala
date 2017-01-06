@@ -20,8 +20,7 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.Buffer
 
 /**
   * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
@@ -88,12 +87,12 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     * <p/>
     * The default value is null, so the operating system hosts config is used.
     */
-  def setHostsValue(value: Buffer) = {
-    asJava.setHostsValue(value.asInstanceOf)
+  def setHostsValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setHostsValue(value)
     this
   }
-  def getHostsValue: Buffer = {
-    Buffer(asJava.getHostsValue())
+  def getHostsValue: io.vertx.core.buffer.Buffer = {
+    asJava.getHostsValue()
   }
 
   /**
@@ -164,7 +163,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def setSearchDomains(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setSearchDomains(value.asInstanceOf)
+    asJava.setSearchDomains(value.asJava)
     this
   }
   def getSearchDomains: scala.collection.mutable.Buffer[String] = {
@@ -182,7 +181,7 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
     this
   }
   def setServers(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setServers(value.asInstanceOf)
+    asJava.setServers(value.asJava)
     this
   }
   def getServers: scala.collection.mutable.Buffer[String] = {

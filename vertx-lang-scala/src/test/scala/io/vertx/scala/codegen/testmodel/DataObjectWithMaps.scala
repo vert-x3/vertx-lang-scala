@@ -41,7 +41,7 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
     this
   }
   def setEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestEnum]) = {
-    asJava.setEnumValues(value.asInstanceOf)
+    asJava.setEnumValues(value.asJava)
     this
   }
   def setFloatValues(value: Map[String, Float]) = {
@@ -49,7 +49,7 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
     this
   }
   def setGenEnumValues(value: Map[String, io.vertx.codegen.testmodel.TestGenEnum]) = {
-    asJava.setGenEnumValues(value.asInstanceOf)
+    asJava.setGenEnumValues(value.asJava)
     this
   }
   def setIntegerValues(value: Map[String, Int]) = {
@@ -57,11 +57,11 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
     this
   }
   def setJsonArrayValues(value: Map[String, io.vertx.core.json.JsonArray]) = {
-    asJava.setJsonArrayValues(value.asInstanceOf)
+    asJava.setJsonArrayValues(value.asJava)
     this
   }
   def setJsonObjectValues(value: Map[String, io.vertx.core.json.JsonObject]) = {
-    asJava.setJsonObjectValues(value.asInstanceOf)
+    asJava.setJsonObjectValues(value.asJava)
     this
   }
   def setLongValues(value: Map[String, Long]) = {
@@ -73,7 +73,7 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
     this
   }
   def setStringValues(value: Map[String, String]) = {
-    asJava.setStringValues(value.asInstanceOf)
+    asJava.setStringValues(value.asJava)
     this
   }
 }

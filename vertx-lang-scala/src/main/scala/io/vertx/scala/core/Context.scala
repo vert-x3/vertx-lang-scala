@@ -71,6 +71,7 @@ class Context(private val _asJava: Object) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Throwable>
   def exceptionHandler(handler: Handler[Throwable]):Context = {
     asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
     this
