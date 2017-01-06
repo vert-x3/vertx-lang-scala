@@ -23,9 +23,8 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -43,8 +42,8 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class NetSocket(private val _asJava: Object) 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
   private var cached_0:SocketAddress = _
@@ -72,13 +71,15 @@ class NetSocket(private val _asJava: Object)
     cached_1
   }
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler({x: JBuffer => handler.handle(Buffer(x))})
+//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):NetSocket = {
+    asJava.asInstanceOf[JNetSocket].handler({x: Buffer => handler.handle(x)})
     this
   }
 
@@ -92,21 +93,25 @@ class NetSocket(private val _asJava: Object)
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def write(data: Buffer):NetSocket = {
-    asJava.asInstanceOf[JNetSocket].write(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  override def write(data: io.vertx.core.buffer.Buffer):NetSocket = {
+    asJava.asInstanceOf[JNetSocket].write(data)
     this
   }
 
+//int
   override def setWriteQueueMaxSize(maxSize: Int):NetSocket = {
     asJava.asInstanceOf[JNetSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].drainHandler({x: Void => handler.handle(x)})
     this
@@ -117,6 +122,7 @@ class NetSocket(private val _asJava: Object)
     * @param str the string to write
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def write(str: String):NetSocket = {
     asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String])
     this
@@ -128,6 +134,8 @@ class NetSocket(private val _asJava: Object)
     * @param enc the encoding to use
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//java.lang.String
   def write(str: String,enc: String):NetSocket = {
     asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
     this
@@ -139,6 +147,7 @@ class NetSocket(private val _asJava: Object)
     * @param filename file name of the file to send
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def sendFile(filename: String):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String])
     this
@@ -151,6 +160,8 @@ class NetSocket(private val _asJava: Object)
     * @param offset offset
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//long
   def sendFile(filename: String,offset: Long):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long])
     this
@@ -164,6 +175,9 @@ class NetSocket(private val _asJava: Object)
     * @param length length
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//long
+//long
   def sendFile(filename: String,offset: Long,length: Long):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long])
     this
@@ -175,6 +189,8 @@ class NetSocket(private val _asJava: Object)
     * @param filename file name of the file to send
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -187,6 +203,9 @@ class NetSocket(private val _asJava: Object)
     * @param offset offset
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//long
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -200,6 +219,10 @@ class NetSocket(private val _asJava: Object)
     * @param length length
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
+//long
+//long
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -210,6 +233,7 @@ class NetSocket(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Void>
   def closeHandler(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].closeHandler({x: Void => handler.handle(x)})
     this
@@ -220,6 +244,7 @@ class NetSocket(private val _asJava: Object)
     * @param handler the handler will be notified when it's upgraded
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Void>
   def upgradeToSsl(handler: Handler[Unit]):NetSocket = {
     asJava.asInstanceOf[JNetSocket].upgradeToSsl({x: Void => handler.handle(x)})
     this
@@ -228,8 +253,8 @@ class NetSocket(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
     */
-  override def end(t: Buffer):Unit = {
-    asJava.asInstanceOf[JNetSocket].end(t.asJava.asInstanceOf[JBuffer])
+  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JNetSocket].end(t)
   }
 
   /**

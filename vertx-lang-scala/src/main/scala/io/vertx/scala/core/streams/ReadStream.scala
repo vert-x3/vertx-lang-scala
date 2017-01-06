@@ -78,6 +78,7 @@ object ReadStream{
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -87,6 +88,7 @@ object ReadStream{
     * Set a data handler. As data is read, the handler will be called with the data.
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<T>
   def handler(handler: Handler[T]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].handler({x: Object => handler.handle(toScala[T](x))})
     this
@@ -114,6 +116,7 @@ object ReadStream{
     * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Void>
   def endHandler(endHandler: Handler[Unit]):ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].endHandler({x: Void => endHandler.handle(x)})
     this

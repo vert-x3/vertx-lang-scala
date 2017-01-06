@@ -19,9 +19,8 @@ package io.vertx.scala.core.net
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Key or trust store options configuring private key and/or certificates based on PKCS#12 files.
@@ -73,12 +72,12 @@ class PfxOptions(private val _asJava: JPfxOptions) {
   /**
     * Set the store as a buffer
     */
-  def setValue(value: Buffer) = {
-    asJava.setValue(value.asInstanceOf)
+  def setValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setValue(value)
     this
   }
-  def getValue: Buffer = {
-    Buffer(asJava.getValue())
+  def getValue: io.vertx.core.buffer.Buffer = {
+    asJava.getValue()
   }
 }
 

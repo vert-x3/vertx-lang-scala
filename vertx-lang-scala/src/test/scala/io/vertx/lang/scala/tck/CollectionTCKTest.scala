@@ -21,7 +21,6 @@ class CollectionTCKTest extends FlatSpec with Matchers {
     override def execute(runnable: Runnable): Unit = runnable.run()
   }
 
-
   "testMethodListParams" should "work" in {
     val refed1 = new RefedInterface1(new RefedInterface1Impl())
     refed1.setString("foo")
@@ -329,7 +328,11 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {assert(mutable.Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {
+      assert(it.contains(Json.obj(("socks", "tartan"))))
+      assert(it.contains(Json.obj(("cheese", "stilton"))))
+      assert(it.size == 2)
+    }; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {

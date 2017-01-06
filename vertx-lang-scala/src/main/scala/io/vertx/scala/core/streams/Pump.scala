@@ -52,6 +52,7 @@ class Pump(private val _asJava: Object) {
     * @param maxSize the max size
     * @return a reference to this, so the API can be used fluently
     */
+//int
   def setWriteQueueMaxSize(maxSize: Int):Pump = {
     asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this

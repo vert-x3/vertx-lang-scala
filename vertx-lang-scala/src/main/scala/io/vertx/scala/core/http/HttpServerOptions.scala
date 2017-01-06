@@ -19,7 +19,6 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.buffer.{Buffer => JBuffer}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
@@ -27,12 +26,12 @@ import io.vertx.scala.core.net.PfxOptions
 import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.scala.core.net.NetServerOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
@@ -60,7 +59,7 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiatiation.
     */
   def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
-    asJava.setAlpnVersions(value.asInstanceOf)
+    asJava.setAlpnVersions(value.asJava)
     this
   }
   def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
@@ -147,12 +146,12 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   /**
     * Add a CRL value
     */
-  override def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asInstanceOf)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  override def getCrlValues: scala.collection.mutable.Buffer[Buffer] = {
-    asJava.getCrlValues().asScala.map(x => Buffer(x))
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
 
   /**

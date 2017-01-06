@@ -1,16 +1,17 @@
 @code{
 
   def importForType(package, type, ret) {
-    if(type.kind == CLASS_API || type.kind == CLASS_DATA_OBJECT) {
+    if(type.kind == CLASS_JSON_OBJECT ||
+       type.kind == CLASS_JSON_ARRAY ||
+       type.kind == CLASS_ENUM ||
+       type.name == 'io.vertx.core.buffer.Buffer') {
+      ret.add(type.raw);
+    }
+    else if(type.kind == CLASS_API || type.kind == CLASS_DATA_OBJECT) {
       if(helper.getPackageName(type.name) != package) {
         ret.add(helper.getNonGenericType(type.raw.translateName("scala")));
       }
       ret.add(convertTypeToAliasedType(type));
-    }
-    else if(type.kind == CLASS_JSON_OBJECT ||
-            type.kind == CLASS_JSON_ARRAY ||
-            type.kind == CLASS_ENUM) {
-      ret.add(type.raw);
     }
     else if(type.kind.collection) {
       ret.add('scala.collection.JavaConverters._');

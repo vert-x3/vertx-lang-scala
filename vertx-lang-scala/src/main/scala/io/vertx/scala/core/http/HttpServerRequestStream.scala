@@ -34,11 +34,13 @@ class HttpServerRequestStream(private val _asJava: Object)
 
   def asJava = _asJava
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
+//io.vertx.core.Handler<io.vertx.core.http.HttpServerRequest>
   override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].handler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
     this
@@ -54,6 +56,7 @@ class HttpServerRequestStream(private val _asJava: Object)
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].endHandler({x: Void => endHandler.handle(x)})
     this

@@ -46,6 +46,7 @@ class CompositeFuture(private val _asJava: Object)
     cached_0
   }
 
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.CompositeFuture>>
   override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]):CompositeFuture = {
     asJava.asInstanceOf[JCompositeFuture].setHandler({x: AsyncResult[JCompositeFuture] => handler.handle(AsyncResultWrapper[JCompositeFuture,CompositeFuture](x, a => CompositeFuture(a)))})
     this

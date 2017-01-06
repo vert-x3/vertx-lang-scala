@@ -19,9 +19,8 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * An HTTP/2 frame.
@@ -31,7 +30,7 @@ class HttpFrame(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0:Int = _
   private var cached_1:Int = _
-  private var cached_2:Buffer = _
+  private var cached_2:io.vertx.core.buffer.Buffer = _
 
   /**
     * @return the 8-bit type of the frame
@@ -58,10 +57,10 @@ class HttpFrame(private val _asJava: Object) {
   /**
     * @return the frame payload
     */
-  def payload():Buffer = {
+  def payload():io.vertx.core.buffer.Buffer = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpFrame].payload()
-      cached_2 = Buffer(tmp)
+      cached_2 = tmp
     }
     cached_2
   }

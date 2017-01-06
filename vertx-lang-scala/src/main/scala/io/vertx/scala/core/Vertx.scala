@@ -133,6 +133,7 @@ class Vertx(private val _asJava: Object)
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Throwable>
   def exceptionHandler(handler: Handler[Throwable]):Vertx = {
     asJava.asInstanceOf[JVertx].exceptionHandler({x: Throwable => handler.handle(x)})
     this

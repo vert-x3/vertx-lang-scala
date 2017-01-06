@@ -49,11 +49,13 @@ class CLI(private val _asJava: Object) {
     * @param name the name
     * @return the current CLI instance
     */
+//java.lang.String
   def setName(name: String):CLI = {
     asJava.asInstanceOf[JCLI].setName(name.asInstanceOf[java.lang.String])
     this
   }
 
+//java.lang.String
   def setDescription(desc: String):CLI = {
     asJava.asInstanceOf[JCLI].setDescription(desc.asInstanceOf[java.lang.String])
     this
@@ -64,6 +66,7 @@ class CLI(private val _asJava: Object) {
     * @param summary the summary
     * @return the current CLI instance
     */
+//java.lang.String
   def setSummary(summary: String):CLI = {
     asJava.asInstanceOf[JCLI].setSummary(summary.asInstanceOf[java.lang.String])
     this
@@ -75,6 +78,7 @@ class CLI(private val _asJava: Object) {
     * @param hidden enables or disables the hidden aspect of the CI
     * @return the current CLI instance
     */
+//boolean
   def setHidden(hidden: Boolean):CLI = {
     asJava.asInstanceOf[JCLI].setHidden(hidden.asInstanceOf[java.lang.Boolean])
     this
@@ -85,6 +89,7 @@ class CLI(private val _asJava: Object) {
     * @param option the option, must not be `null`.see <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the current CLI instance
     */
+//io.vertx.core.cli.Option
   def addOption(option: Option):CLI = {
     asJava.asInstanceOf[JCLI].addOption(option.asJava)
     this
@@ -96,6 +101,7 @@ class CLI(private val _asJava: Object) {
     * @param options the options, must not be `null`
     * @return the current CLI instance
     */
+//java.util.List<io.vertx.core.cli.Option>
   def addOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
     asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava).asJava)
     this
@@ -106,6 +112,7 @@ class CLI(private val _asJava: Object) {
     * @param options the list of options, must not be `null`
     * @return the current CLI instance
     */
+//java.util.List<io.vertx.core.cli.Option>
   def setOptions(options: scala.collection.mutable.Buffer[Option]):CLI = {
     asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava).asJava)
     this
@@ -116,6 +123,7 @@ class CLI(private val _asJava: Object) {
     * @param arg the argument, must not be `null`see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the current CLI instance
     */
+//io.vertx.core.cli.Argument
   def addArgument(arg: Argument):CLI = {
     asJava.asInstanceOf[JCLI].addArgument(arg.asJava)
     this
@@ -127,6 +135,7 @@ class CLI(private val _asJava: Object) {
     * @param args the arguments, must not be `null`
     * @return the current CLI instance
     */
+//java.util.List<io.vertx.core.cli.Argument>
   def addArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
     asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava).asJava)
     this
@@ -137,6 +146,7 @@ class CLI(private val _asJava: Object) {
     * @param args the list of arguments, must not be `null`
     * @return the current CLI instance
     */
+//java.util.List<io.vertx.core.cli.Argument>
   def setArguments(args: scala.collection.mutable.Buffer[Argument]):CLI = {
     asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava).asJava)
     this
@@ -147,6 +157,7 @@ class CLI(private val _asJava: Object) {
     * @param name the option name
     * @return the current CLI instance
     */
+//java.lang.String
   def removeOption(name: String):CLI = {
     asJava.asInstanceOf[JCLI].removeOption(name.asInstanceOf[java.lang.String])
     this
@@ -157,6 +168,7 @@ class CLI(private val _asJava: Object) {
     * @param index the argument index
     * @return the current CLI instance
     */
+//int
   def removeArgument(index: Int):CLI = {
     asJava.asInstanceOf[JCLI].removeArgument(index.asInstanceOf[java.lang.Integer])
     this

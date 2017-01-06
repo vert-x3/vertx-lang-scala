@@ -20,8 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
@@ -31,25 +30,29 @@ import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
   * The stream  is called when the write fails.
   */
 class PacketWritestream(private val _asJava: Object) 
-    extends WriteStream[Buffer] {
+    extends WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def write(data: Buffer):PacketWritestream = {
-    asJava.asInstanceOf[JPacketWritestream].write(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  override def write(data: io.vertx.core.buffer.Buffer):PacketWritestream = {
+    asJava.asInstanceOf[JPacketWritestream].write(data)
     this
   }
 
+//int
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].drainHandler({x: Void => handler.handle(x)})
     this
@@ -58,8 +61,8 @@ class PacketWritestream(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
     */
-  override def end(t: Buffer):Unit = {
-    asJava.asInstanceOf[JPacketWritestream].end(t.asJava.asInstanceOf[JBuffer])
+  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JPacketWritestream].end(t)
   }
 
   /**

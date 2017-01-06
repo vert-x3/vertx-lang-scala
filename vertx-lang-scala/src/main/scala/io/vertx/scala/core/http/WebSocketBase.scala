@@ -21,11 +21,10 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
@@ -38,15 +37,15 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 trait WebSocketBase 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava: java.lang.Object
 
   /**
     * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
-  override def end(t: Buffer):Unit
+  override def end(t: io.vertx.core.buffer.Buffer):Unit
 
   /**
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]
@@ -56,7 +55,7 @@ trait WebSocketBase
 
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase
 
-  override def handler(handler: Handler[Buffer]):WebSocketBase
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):WebSocketBase
 
   override def pause():WebSocketBase
 
@@ -64,7 +63,7 @@ trait WebSocketBase
 
   override def endHandler(endHandler: Handler[Unit]):WebSocketBase
 
-  override def write(data: Buffer):WebSocketBase
+  override def write(data: io.vertx.core.buffer.Buffer):WebSocketBase
 
   override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase
 
@@ -110,7 +109,7 @@ trait WebSocketBase
     * @param data The data to write
     * @return a reference to this, so the API can be used fluently
     */
-  def writeFinalBinaryFrame(data: Buffer):WebSocketBase
+  def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer):WebSocketBase
 
   /**
     * Writes a (potentially large) piece of binary data to the connection. This data might be written as multiple frames
@@ -118,7 +117,7 @@ trait WebSocketBase
     * @param data the data to write
     * @return a reference to this, so the API can be used fluently
     */
-  def writeBinaryMessage(data: Buffer):WebSocketBase
+  def writeBinaryMessage(data: io.vertx.core.buffer.Buffer):WebSocketBase
 
   /**
     * Set a close handler. This will be called when the WebSocket is closed.
@@ -186,13 +185,15 @@ object WebSocketBase{
     cached_1
   }
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].handler({x: JBuffer => handler.handle(Buffer(x))})
+//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].handler({x: Buffer => handler.handle(x)})
     this
   }
 
@@ -206,21 +207,25 @@ object WebSocketBase{
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def write(data: Buffer):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].write(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  override def write(data: io.vertx.core.buffer.Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].write(data)
     this
   }
 
+//int
   override def setWriteQueueMaxSize(maxSize: Int):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].drainHandler({x: Void => handler.handle(x)})
     this
@@ -231,6 +236,7 @@ object WebSocketBase{
     * @param frame the frame to write
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.http.WebSocketFrame
   def writeFrame(frame: WebSocketFrame):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
@@ -241,6 +247,7 @@ object WebSocketBase{
     * @param text The text to write
     * @return a reference to this, so the API can be used fluently
     */
+//java.lang.String
   def writeFinalTextFrame(text: String):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
@@ -251,8 +258,9 @@ object WebSocketBase{
     * @param data The data to write
     * @return a reference to this, so the API can be used fluently
     */
-  def writeFinalBinaryFrame(data: Buffer):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeFinalBinaryFrame(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeFinalBinaryFrame(data)
     this
   }
 
@@ -262,8 +270,9 @@ object WebSocketBase{
     * @param data the data to write
     * @return a reference to this, so the API can be used fluently
     */
-  def writeBinaryMessage(data: Buffer):WebSocketBase = {
-    asJava.asInstanceOf[JWebSocketBase].writeBinaryMessage(data.asJava.asInstanceOf[JBuffer])
+//io.vertx.core.buffer.Buffer
+  def writeBinaryMessage(data: io.vertx.core.buffer.Buffer):WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeBinaryMessage(data)
     this
   }
 
@@ -272,6 +281,7 @@ object WebSocketBase{
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<java.lang.Void>
   def closeHandler(handler: Handler[Unit]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].closeHandler({x: Void => handler.handle(x)})
     this
@@ -282,6 +292,7 @@ object WebSocketBase{
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
+//io.vertx.core.Handler<io.vertx.core.http.WebSocketFrame>
   def frameHandler(handler: Handler[WebSocketFrame]):WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
@@ -290,8 +301,8 @@ object WebSocketBase{
   /**
     * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
-  override def end(t: Buffer):Unit = {
-    asJava.asInstanceOf[JWebSocketBase].end(t.asJava.asInstanceOf[JBuffer])
+  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+    asJava.asInstanceOf[JWebSocketBase].end(t)
   }
 
   /**

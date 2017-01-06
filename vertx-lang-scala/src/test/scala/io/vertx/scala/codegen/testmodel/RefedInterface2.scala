@@ -39,6 +39,7 @@ object RefedInterface2{
 
       def asJava = _asJava
 
+//java.lang.String
   def setString(str: String):RefedInterface2 = {
     asJava.asInstanceOf[JRefedInterface2].setString(str.asInstanceOf[java.lang.String])
     this

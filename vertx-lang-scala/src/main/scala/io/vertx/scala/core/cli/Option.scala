@@ -51,7 +51,7 @@ class Option(private val _asJava: JOption) {
     this
   }
   def setChoices(value: Set[String]) = {
-    asJava.setChoices(value.asInstanceOf)
+    asJava.setChoices(value.asJava)
     this
   }
   def getChoices: scala.collection.mutable.Set[String] = {

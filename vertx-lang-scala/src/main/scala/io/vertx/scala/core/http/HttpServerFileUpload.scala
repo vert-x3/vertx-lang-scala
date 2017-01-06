@@ -21,29 +21,31 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.buffer.{Buffer => JBuffer}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.buffer.Buffer
 import io.vertx.core.Handler
 
 /**
   * Represents an file upload from an HTML FORM.
   */
 class HttpServerFileUpload(private val _asJava: Object) 
-    extends ReadStream[Buffer] {
+    extends ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
 
+//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Buffer]):HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler({x: JBuffer => handler.handle(Buffer(x))})
+//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):HttpServerFileUpload = {
+    asJava.asInstanceOf[JHttpServerFileUpload].handler({x: Buffer => handler.handle(x)})
     this
   }
 
+//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].endHandler({x: Void => endHandler.handle(x)})
     this
@@ -63,6 +65,7 @@ class HttpServerFileUpload(private val _asJava: Object)
     * Stream the content of this upload to the given file on storage.
     * @param filename the name of the file
     */
+//java.lang.String
   def streamToFileSystem(filename: String):HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].streamToFileSystem(filename.asInstanceOf[java.lang.String])
     this
