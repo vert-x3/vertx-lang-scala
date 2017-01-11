@@ -736,7 +736,7 @@ class FileSystem(private val _asJava: Object) {
    * @param to the path to copy to
    * @return the future that will be called on completion
    */
-    def copyFuture(from: String,to: String):scala.concurrent.Future[Unit] = {
+  def copyFuture(from: String,to: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -753,7 +753,7 @@ class FileSystem(private val _asJava: Object) {
    * @param to the path to copy to
    * @return the future that will be called on completion
    */
-    def copyRecursiveFuture(from: String,to: String,recursive: Boolean):scala.concurrent.Future[Unit] = {
+  def copyRecursiveFuture(from: String,to: String,recursive: Boolean):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].copyRecursive(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -767,7 +767,7 @@ class FileSystem(private val _asJava: Object) {
    * @param to the path to copy to
    * @return the future that will be called on completion
    */
-    def moveFuture(from: String,to: String):scala.concurrent.Future[Unit] = {
+  def moveFuture(from: String,to: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String],to.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -781,7 +781,7 @@ class FileSystem(private val _asJava: Object) {
    * @param len the length to truncate it to
    * @return the future that will be called on completion
    */
-    def truncateFuture(path: String,len: Long):scala.concurrent.Future[Unit] = {
+  def truncateFuture(path: String,len: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].truncate(path.asInstanceOf[java.lang.String],len.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -796,7 +796,7 @@ class FileSystem(private val _asJava: Object) {
    * @param perms the permissions string
    * @return the future that will be called on completion
    */
-    def chmodFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
+  def chmodFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].chmod(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -814,7 +814,7 @@ class FileSystem(private val _asJava: Object) {
    * @param dirPerms the directory permissions
    * @return the future that will be called on completion
    */
-    def chmodRecursiveFuture(path: String,perms: String,dirPerms: String):scala.concurrent.Future[Unit] = {
+  def chmodRecursiveFuture(path: String,perms: String,dirPerms: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].chmodRecursive(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],dirPerms.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -827,7 +827,7 @@ class FileSystem(private val _asJava: Object) {
    * @param group the user group, `null` will not change the user group name
    * @return the future that will be called on completion
    */
-    def chownFuture(path: String,user: scala.Option[String],group: scala.Option[String]):scala.concurrent.Future[Unit] = {
+  def chownFuture(path: String,user: scala.Option[String],group: scala.Option[String]):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].chown(path.asInstanceOf[java.lang.String],user.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),group.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -840,7 +840,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path the path to the file
    * @return the future that will be called on completion
    */
-    def propsFuture(path: String):scala.concurrent.Future[FileProps] = {
+  def propsFuture(path: String):scala.concurrent.Future[FileProps] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JFileProps, FileProps](x => FileProps(x))
     asJava.asInstanceOf[JFileSystem].props(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -853,7 +853,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path the path to the file
    * @return the future that will be called on completion
    */
-    def lpropsFuture(path: String):scala.concurrent.Future[FileProps] = {
+  def lpropsFuture(path: String):scala.concurrent.Future[FileProps] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JFileProps, FileProps](x => FileProps(x))
     asJava.asInstanceOf[JFileSystem].lprops(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -865,7 +865,7 @@ class FileSystem(private val _asJava: Object) {
    * @param existing the link destination
    * @return the future that will be called on completion
    */
-    def linkFuture(link: String,existing: String):scala.concurrent.Future[Unit] = {
+  def linkFuture(link: String,existing: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].link(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -877,7 +877,7 @@ class FileSystem(private val _asJava: Object) {
    * @param existing the link destination
    * @return the future that will be called on completion
    */
-    def symlinkFuture(link: String,existing: String):scala.concurrent.Future[Unit] = {
+  def symlinkFuture(link: String,existing: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].symlink(link.asInstanceOf[java.lang.String],existing.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -888,7 +888,7 @@ class FileSystem(private val _asJava: Object) {
    * @param link the link
    * @return the future that will be called on completion
    */
-    def unlinkFuture(link: String):scala.concurrent.Future[Unit] = {
+  def unlinkFuture(link: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].unlink(link.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -899,7 +899,7 @@ class FileSystem(private val _asJava: Object) {
    * @param link the link
    * @return the future that will be called on completion
    */
-    def readSymlinkFuture(link: String):scala.concurrent.Future[String] = {
+  def readSymlinkFuture(link: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -910,7 +910,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def deleteFuture(path: String):scala.concurrent.Future[Unit] = {
+  def deleteFuture(path: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].delete(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -925,7 +925,7 @@ class FileSystem(private val _asJava: Object) {
    * @param recursive delete recursively?
    * @return the future that will be called on completion
    */
-    def deleteRecursiveFuture(path: String,recursive: Boolean):scala.concurrent.Future[Unit] = {
+  def deleteRecursiveFuture(path: String,recursive: Boolean):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].deleteRecursive(path.asInstanceOf[java.lang.String],recursive.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -938,7 +938,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def mkdirFuture(path: String):scala.concurrent.Future[Unit] = {
+  def mkdirFuture(path: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -957,7 +957,7 @@ class FileSystem(private val _asJava: Object) {
    * @param perms the permissions string
    * @return the future that will be called on completion
    */
-    def mkdirFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
+  def mkdirFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -970,7 +970,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def mkdirsFuture(path: String):scala.concurrent.Future[Unit] = {
+  def mkdirsFuture(path: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -989,7 +989,7 @@ class FileSystem(private val _asJava: Object) {
    * @param perms the permissions string
    * @return the future that will be called on completion
    */
-    def mkdirsFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
+  def mkdirsFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1002,7 +1002,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def readDirFuture(path: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+  def readDirFuture(path: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1019,7 +1019,7 @@ class FileSystem(private val _asJava: Object) {
    * @param filter the filter expression
    * @return the future that will be called on completion
    */
-    def readDirFuture(path: String,filter: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
+  def readDirFuture(path: String,filter: String):scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
     asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String],filter.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1032,7 +1032,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def readFileFuture(path: String):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+  def readFileFuture(path: String):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1044,7 +1044,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def writeFileFuture(path: String,data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[Unit] = {
+  def writeFileFuture(path: String,data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String],data,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1057,7 +1057,7 @@ class FileSystem(private val _asJava: Object) {
    * @param path path to the file
    * @param options options describing how the file should be openedsee <a href="../../../../../../../cheatsheet/OpenOptions.html">OpenOptions</a>
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def openFuture(path: String,options: OpenOptions):scala.concurrent.Future[AsyncFile] = {
+  def openFuture(path: String,options: OpenOptions):scala.concurrent.Future[AsyncFile] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncFile, AsyncFile](x => AsyncFile(x))
     asJava.asInstanceOf[JFileSystem].open(path.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1068,7 +1068,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def createFileFuture(path: String):scala.concurrent.Future[Unit] = {
+  def createFileFuture(path: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1080,7 +1080,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param perms the permissions string
    * @return the future that will be called on completion
    */
-    def createFileFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
+  def createFileFuture(path: String,perms: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String],perms.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1091,7 +1091,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param path path to the file
    * @return the future that will be called on completion
    */
-    def existsFuture(path: String):scala.concurrent.Future[Boolean] = {
+  def existsFuture(path: String):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -1102,7 +1102,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param path path to anywhere on the filesystem
    * @return the future that will be called on completion
    */
-    def fsPropsFuture(path: String):scala.concurrent.Future[FileSystemProps] = {
+  def fsPropsFuture(path: String):scala.concurrent.Future[FileSystemProps] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JFileSystemProps, FileSystemProps](x => FileSystemProps(x))
     asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

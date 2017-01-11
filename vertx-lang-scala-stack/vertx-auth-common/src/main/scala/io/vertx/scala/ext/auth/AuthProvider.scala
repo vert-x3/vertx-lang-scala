@@ -75,7 +75,7 @@ class AuthProvider(private val _asJava: Object) {
    * @param authInfo The auth information
    * @return The result future
    */
-    def authenticateFuture(authInfo: io.vertx.core.json.JsonObject):scala.concurrent.Future[User] = {
+  def authenticateFuture(authInfo: io.vertx.core.json.JsonObject):scala.concurrent.Future[User] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUser, User](x => User(x))
     asJava.asInstanceOf[JAuthProvider].authenticate(authInfo,promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -143,7 +143,7 @@ class Message[T:TypeTag](private val _asJava: Object) {
    * @param message the message to reply with.
    * @return the reply future for the reply.
    */
-    def replyFuture[R:TypeTag](message: AnyRef):scala.concurrent.Future[Message[R]] = {
+  def replyFuture[R:TypeTag](message: AnyRef):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessage[Object]].reply[Object](message,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -156,7 +156,7 @@ class Message[T:TypeTag](private val _asJava: Object) {
    * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @return the reply future for the reply.
    */
-    def replyFuture[R:TypeTag](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
+  def replyFuture[R:TypeTag](message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessage[Object]].reply[Object](message,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

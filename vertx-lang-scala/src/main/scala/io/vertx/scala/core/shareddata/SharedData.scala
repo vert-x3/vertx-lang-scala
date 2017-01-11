@@ -95,7 +95,7 @@ class SharedData(private val _asJava: Object) {
    * @param name the name of the map
    * @return the map will be returned asynchronously in this future
    */
-    def getClusterWideMapFuture[K:TypeTag,V:TypeTag](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
+  def getClusterWideMapFuture[K:TypeTag,V:TypeTag](name: String):scala.concurrent.Future[AsyncMap[K, V]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[Object,Object], AsyncMap[K, V]](x => AsyncMap[K,V](x))
     asJava.asInstanceOf[JSharedData].getClusterWideMap[Object,Object](name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -106,7 +106,7 @@ class SharedData(private val _asJava: Object) {
    * @param name the name of the lock
    * @return the future
    */
-    def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
+  def getLockFuture(name: String):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
     asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -119,7 +119,7 @@ class SharedData(private val _asJava: Object) {
    * @param timeout the timeout in ms
    * @return the future
    */
-    def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
+  def getLockWithTimeoutFuture(name: String,timeout: Long):scala.concurrent.Future[Lock] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
     asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String],timeout.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -130,7 +130,7 @@ class SharedData(private val _asJava: Object) {
    * @param name the name of the counter.
    * @return the future
    */
-    def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
+  def getCounterFuture(name: String):scala.concurrent.Future[Counter] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => Counter(x))
     asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

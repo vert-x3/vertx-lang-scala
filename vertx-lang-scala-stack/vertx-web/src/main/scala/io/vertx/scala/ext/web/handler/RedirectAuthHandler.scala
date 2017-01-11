@@ -31,7 +31,7 @@ import scala.collection.JavaConverters._
   * An auth handler that's used to handle auth by redirecting user to a custom login page.
   */
 class RedirectAuthHandler(private val _asJava: Object) 
-    extends AuthHandler {
+    extends  AuthHandler {
 
   def asJava = _asJava
 

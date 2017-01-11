@@ -62,7 +62,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * 
   */
 class HttpClientRequest(private val _asJava: Object) 
-    extends WriteStream[io.vertx.core.buffer.Buffer] 
+    extends  WriteStream[io.vertx.core.buffer.Buffer] 
     with ReadStream[HttpClientResponse] {
 
   def asJava = _asJava

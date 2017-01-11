@@ -124,7 +124,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    * Listen on default port 7000 with a handler to report the state of the socket listen operation.
    * @return the result future
    */
-    def listenFuture():scala.concurrent.Future[TcpEventBusBridge] = {
+  def listenFuture():scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -136,7 +136,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    * @param address tcp address to the bind
    * @return the result future
    */
-    def listenFuture(port: Int,address: String):scala.concurrent.Future[TcpEventBusBridge] = {
+  def listenFuture(port: Int,address: String):scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer],address.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -147,7 +147,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    * @param port tcp port
    * @return the result future
    */
-    def listenFuture(port: Int):scala.concurrent.Future[TcpEventBusBridge] = {
+  def listenFuture(port: Int):scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -157,7 +157,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    * Close the current socket.
    * @return the result future
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JTcpEventBusBridge].close(promiseAndHandler._1)
     promiseAndHandler._2.future

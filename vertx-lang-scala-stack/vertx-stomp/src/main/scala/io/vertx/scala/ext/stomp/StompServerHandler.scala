@@ -360,7 +360,7 @@ class StompServerHandler(private val _asJava: Object)
    * @param passcode the password
    * @return future receiving the authentication result
    */
-    def onAuthenticationRequestFuture(server: StompServer,login: String,passcode: String):scala.concurrent.Future[Boolean] = {
+  def onAuthenticationRequestFuture(server: StompServer,login: String,passcode: String):scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer],login.asInstanceOf[java.lang.String],passcode.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -36,7 +36,7 @@ import io.vertx.core.Handler
   * The interface is minimal in order to support all SQL clients not just JDBC.
   */
 class SQLRowStream(private val _asJava: Object) 
-    extends ReadStream[io.vertx.core.json.JsonArray] {
+    extends  ReadStream[io.vertx.core.json.JsonArray] {
 
   def asJava = _asJava
 
@@ -109,7 +109,7 @@ class SQLRowStream(private val _asJava: Object)
    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
    * @return called when the stream/underlying cursor(s) is(are) closed
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
     promiseAndHandler._2.future

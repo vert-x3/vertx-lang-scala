@@ -50,7 +50,7 @@ import io.vertx.scala.core.net.SocketAddress
   * 
   */
 class HttpServerRequest(private val _asJava: Object) 
-    extends ReadStream[io.vertx.core.buffer.Buffer] {
+    extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
   private var cached_0:HttpServerResponse = _

@@ -31,7 +31,7 @@ import io.vertx.core.Handler
   * needs to be coordinated.
   */
 class CompositeFuture(private val _asJava: Object) 
-    extends Future[CompositeFuture](_asJava) {
+    extends Future[CompositeFuture](_asJava)  {
 
   private var cached_0:Handler[AsyncResult[CompositeFuture]] = _
 

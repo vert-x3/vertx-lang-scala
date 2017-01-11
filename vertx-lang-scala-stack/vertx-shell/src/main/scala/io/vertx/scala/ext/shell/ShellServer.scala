@@ -123,7 +123,7 @@ class ShellServer(private val _asJava: Object) {
    * Start the shell service, this is an asynchronous start.
    * @return future for getting notified when service is started
    */
-    def listenFuture():scala.concurrent.Future[Unit] = {
+  def listenFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JShellServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -133,7 +133,7 @@ class ShellServer(private val _asJava: Object) {
    * Close the shell server, this is an asynchronous close.
    * @return future for getting notified when service is stopped
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JShellServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

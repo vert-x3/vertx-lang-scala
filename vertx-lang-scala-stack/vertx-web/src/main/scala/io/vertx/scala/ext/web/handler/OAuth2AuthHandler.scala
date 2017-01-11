@@ -34,7 +34,7 @@ import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
   * An auth handler that provides OAuth2 Authentication support. This handler is suitable for AuthCode flows.
   */
 class OAuth2AuthHandler(private val _asJava: Object) 
-    extends AuthHandler {
+    extends  AuthHandler {
 
   def asJava = _asJava
 

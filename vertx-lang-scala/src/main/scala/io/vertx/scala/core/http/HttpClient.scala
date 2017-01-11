@@ -59,7 +59,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * The client is designed to be reused between requests.
   */
 class HttpClient(private val _asJava: Object) 
-    extends Measured {
+    extends  Measured {
 
   def asJava = _asJava
 

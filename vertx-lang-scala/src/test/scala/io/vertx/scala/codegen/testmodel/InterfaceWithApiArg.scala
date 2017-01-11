@@ -26,7 +26,7 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 /**
   */
 class InterfaceWithApiArg(private val _asJava: Object) 
-    extends GenericRefedInterface[RefedInterface1](_asJava) {
+    extends GenericRefedInterface[RefedInterface1](_asJava)  {
 
 
 //io.vertx.codegen.testmodel.RefedInterface1

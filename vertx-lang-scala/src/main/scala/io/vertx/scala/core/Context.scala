@@ -225,7 +225,7 @@ class Context(private val _asJava: Object) {
    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
    * @return future that will be called when the blocking code is complete
    */
-    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
+  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -236,7 +236,7 @@ class Context(private val _asJava: Object) {
    * @param blockingCodeHandler handler representing the blocking code to run
    * @return future that will be called when the blocking code is complete
    */
-    def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
+  def executeBlockingFuture[T:TypeTag](blockingCodeHandler: Handler[Future[T]]):scala.concurrent.Future[T] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
     asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},promiseAndHandler._1)
     promiseAndHandler._2.future

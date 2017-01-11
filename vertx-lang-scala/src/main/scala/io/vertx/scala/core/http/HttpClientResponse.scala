@@ -42,7 +42,7 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpClientResponse(private val _asJava: Object) 
-    extends ReadStream[io.vertx.core.buffer.Buffer] {
+    extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
   private var cached_0:MultiMap = _

@@ -30,7 +30,7 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class HttpServerRequestStream(private val _asJava: Object) 
-    extends ReadStream[HttpServerRequest] {
+    extends  ReadStream[HttpServerRequest] {
 
   def asJava = _asJava
 

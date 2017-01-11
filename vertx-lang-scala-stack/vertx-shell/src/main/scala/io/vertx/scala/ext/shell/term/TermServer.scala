@@ -113,7 +113,7 @@ class TermServer(private val _asJava: Object) {
    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
    * @return the listen future
    */
-    def listenFuture():scala.concurrent.Future[TermServer] = {
+  def listenFuture():scala.concurrent.Future[TermServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTermServer, TermServer](x => TermServer(x))
     asJava.asInstanceOf[JTermServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -123,7 +123,7 @@ class TermServer(private val _asJava: Object) {
    * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.
    * @return the future to be notified when the term server is closed
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JTermServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

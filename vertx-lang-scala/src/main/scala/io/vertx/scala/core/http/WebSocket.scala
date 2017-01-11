@@ -31,7 +31,7 @@ import io.vertx.scala.core.net.SocketAddress
   * Represents a client-side WebSocket.
   */
 class WebSocket(private val _asJava: Object) 
-    extends WebSocketBase {
+    extends  WebSocketBase {
 
   def asJava = _asJava
   private var cached_0:SocketAddress = _

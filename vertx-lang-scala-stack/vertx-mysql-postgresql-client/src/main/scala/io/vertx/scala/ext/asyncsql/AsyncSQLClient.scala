@@ -62,7 +62,7 @@ class AsyncSQLClient(private val _asJava: Object) {
    * Call the handler when close is complete.
    * @return future that will be called when close is complete
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncSQLClient].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -73,7 +73,7 @@ class AsyncSQLClient(private val _asJava: Object) {
    * connection when you are done, so it is returned to the pool.
    * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
    */
-    def getConnectionFuture():scala.concurrent.Future[SQLConnection] = {
+  def getConnectionFuture():scala.concurrent.Future[SQLConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))
     asJava.asInstanceOf[JAsyncSQLClient].getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future

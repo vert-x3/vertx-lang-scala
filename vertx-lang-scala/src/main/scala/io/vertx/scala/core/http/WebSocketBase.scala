@@ -37,7 +37,7 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 trait WebSocketBase 
-    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    extends  ReadStream[io.vertx.core.buffer.Buffer] 
     with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava: java.lang.Object

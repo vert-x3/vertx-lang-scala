@@ -39,7 +39,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
 class MessageConsumer[T:TypeTag](private val _asJava: Object) 
-    extends ReadStream[Message[T]] {
+    extends  ReadStream[Message[T]] {
 
   def asJava = _asJava
 
@@ -135,7 +135,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
    * @return the completion future
    */
-    def completionFuture():scala.concurrent.Future[Unit] = {
+  def completionFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -145,7 +145,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * Unregisters the handler which created this registration
    * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
    */
-    def unregisterFuture():scala.concurrent.Future[Unit] = {
+  def unregisterFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister(promiseAndHandler._1)
     promiseAndHandler._2.future
