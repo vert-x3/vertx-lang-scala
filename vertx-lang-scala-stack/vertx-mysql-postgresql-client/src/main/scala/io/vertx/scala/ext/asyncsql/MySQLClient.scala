@@ -34,7 +34,7 @@ import io.vertx.core.{Vertx => JVertx}
   * Represents an asynchronous MySQL client
   */
 class MySQLClient(private val _asJava: Object) 
-    extends AsyncSQLClient(_asJava) {
+    extends AsyncSQLClient(_asJava)  {
 
 
 }

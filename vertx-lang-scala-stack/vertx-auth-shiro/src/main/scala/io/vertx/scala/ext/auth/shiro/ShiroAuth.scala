@@ -37,7 +37,7 @@ import io.vertx.ext.auth.shiro.ShiroAuthRealmType
   * Factory interface for creating Apache Shiro based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
 class ShiroAuth(private val _asJava: Object) 
-    extends AuthProvider(_asJava) {
+    extends AuthProvider(_asJava)  {
 
 
   /**

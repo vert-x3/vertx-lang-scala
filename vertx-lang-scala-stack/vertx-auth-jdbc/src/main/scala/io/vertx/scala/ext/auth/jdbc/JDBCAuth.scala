@@ -35,7 +35,7 @@ import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
   * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
   */
 class JDBCAuth(private val _asJava: Object) 
-    extends AuthProvider(_asJava) {
+    extends AuthProvider(_asJava)  {
 
 
   /**

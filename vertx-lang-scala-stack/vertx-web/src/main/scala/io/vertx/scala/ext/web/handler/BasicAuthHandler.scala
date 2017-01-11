@@ -31,7 +31,7 @@ import scala.collection.JavaConverters._
   * An auth handler that provides HTTP Basic Authentication support.
   */
 class BasicAuthHandler(private val _asJava: Object) 
-    extends AuthHandler {
+    extends  AuthHandler {
 
   def asJava = _asJava
 

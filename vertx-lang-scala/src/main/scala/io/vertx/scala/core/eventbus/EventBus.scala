@@ -42,7 +42,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * Please refer to the documentation for more information on the event bus.
   */
 class EventBus(private val _asJava: Object) 
-    extends Measured {
+    extends  Measured {
 
   def asJava = _asJava
 
@@ -242,7 +242,7 @@ class EventBus(private val _asJava: Object)
    * @param message the message, may be `null`
    * @return reply future will be called when any reply from the recipient is received, may be `null`
    */
-    def sendFuture[T:TypeTag](address: String,message: AnyRef):scala.concurrent.Future[Message[T]] = {
+  def sendFuture[T:TypeTag](address: String,message: AnyRef):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -256,7 +256,7 @@ class EventBus(private val _asJava: Object)
    * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @return reply future will be called when any reply from the recipient is received, may be `null`
    */
-    def sendFuture[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[T]] = {
+  def sendFuture[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions):scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

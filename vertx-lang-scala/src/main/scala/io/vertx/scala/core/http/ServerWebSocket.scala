@@ -36,7 +36,7 @@ import io.vertx.scala.core.net.SocketAddress
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 class ServerWebSocket(private val _asJava: Object) 
-    extends WebSocketBase {
+    extends  WebSocketBase {
 
   def asJava = _asJava
   private var cached_0:SocketAddress = _

@@ -35,7 +35,7 @@ import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
   * set before setting the handler.
   */
 class WebSocketStream(private val _asJava: Object) 
-    extends ReadStream[WebSocket] {
+    extends  ReadStream[WebSocket] {
 
   def asJava = _asJava
 

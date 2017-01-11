@@ -81,8 +81,8 @@
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
 	@if{method.doc != null}@{methodDoc(method, ' ', true);}@end{}
-  @if{isMethodNeedsOverride(type.name, method)}override @end{}
-  def @{createNameForMethodReturningAFuture(method)}
+  @if{isMethodNeedsOverride(type.name, method) && !method.name.endsWith("Handler")}override @end{}
+	def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param:removeLastParam(method.params)}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}

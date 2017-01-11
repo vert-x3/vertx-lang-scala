@@ -97,7 +97,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param password the password
    * @return the result future
    */
-    def startFuture(hostname: String,port: Int,username: String,password: String):scala.concurrent.Future[AmqpBridge] = {
+  def startFuture(hostname: String,port: Int,username: String,password: String):scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -109,7 +109,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param port the port to connect to
    * @return the result future
    */
-    def startFuture(hostname: String,port: Int):scala.concurrent.Future[AmqpBridge] = {
+  def startFuture(hostname: String,port: Int):scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -119,7 +119,7 @@ class AmqpBridge(private val _asJava: Object) {
    * Shuts the bridge down, closing the underlying connection.
    * @return the result future
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAmqpBridge].close(promiseAndHandler._1)
     promiseAndHandler._2.future

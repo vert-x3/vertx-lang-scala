@@ -2076,9 +2076,9 @@ class RedisTransaction(private val _asJava: Object) {
     * @param key Key string
     */
 //java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
-  def smembers(key: String,handler: Handler[AsyncResult[String]]):RedisTransaction = {
-    asJava.asInstanceOf[JRedisTransaction].smembers(key.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonArray>>
+  def smembers(key: String,handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):RedisTransaction = {
+    asJava.asInstanceOf[JRedisTransaction].smembers(key.asInstanceOf[java.lang.String],{x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
     this
   }
 
@@ -2973,7 +2973,7 @@ class RedisTransaction(private val _asJava: Object) {
  /**
    * Close the client - when it is fully closed the handler will be called.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JRedisTransaction].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2985,7 +2985,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to append
    * @return Handler for the result of this call.
    */
-    def appendFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def appendFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].append(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -2996,7 +2996,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param password Password for authentication
    * @return Handler for the result of this call.
    */
-    def authFuture(password: String):scala.concurrent.Future[String] = {
+  def authFuture(password: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].auth(password.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3005,7 +3005,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Asynchronously rewrite the append-only file
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def bgrewriteaofFuture():scala.concurrent.Future[String] = {
+  def bgrewriteaofFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bgrewriteaof(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3014,7 +3014,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Asynchronously save the dataset to disk
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def bgsaveFuture():scala.concurrent.Future[String] = {
+  def bgsaveFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bgsave(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3025,7 +3025,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def bitcountFuture(key: String):scala.concurrent.Future[String] = {
+  def bitcountFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitcount(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3038,7 +3038,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param end End index
    * @return Handler for the result of this call.
    */
-    def bitcountRangeFuture(key: String,start: Long,end: Long):scala.concurrent.Future[String] = {
+  def bitcountRangeFuture(key: String,start: Long,end: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitcountRange(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],end.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3051,7 +3051,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys on which to perform the operation
    * @return Handler for the result of this call.
    */
-    def bitopFuture(operation: io.vertx.redis.op.BitOperation,destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def bitopFuture(operation: io.vertx.redis.op.BitOperation,destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitop(operation,destkey.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3063,7 +3063,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param bit What bit value to look for - must be 1, or 0
    * @return Handler for the result of this call.
    */
-    def bitposFuture(key: String,bit: Int):scala.concurrent.Future[String] = {
+  def bitposFuture(key: String,bit: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitpos(key.asInstanceOf[java.lang.String],bit.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3078,7 +3078,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param start Start offset
    * @return Handler for the result of this call.
    */
-    def bitposFromFuture(key: String,bit: Int,start: Int):scala.concurrent.Future[String] = {
+  def bitposFromFuture(key: String,bit: Int,start: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitposFrom(key.asInstanceOf[java.lang.String],bit.asInstanceOf[java.lang.Integer],start.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3095,7 +3095,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param stop End offset - inclusive
    * @return Handler for the result of this call.
    */
-    def bitposRangeFuture(key: String,bit: Int,start: Int,stop: Int):scala.concurrent.Future[String] = {
+  def bitposRangeFuture(key: String,bit: Int,start: Int,stop: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].bitposRange(key.asInstanceOf[java.lang.String],bit.asInstanceOf[java.lang.Integer],start.asInstanceOf[java.lang.Integer],stop.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3107,7 +3107,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Timeout in seconds
    * @return Handler for the result of this call.
    */
-    def blpopFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
+  def blpopFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].blpop(key.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3119,7 +3119,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Timeout in seconds
    * @return Handler for the result of this call.
    */
-    def blpopManyFuture(keys: scala.collection.mutable.Buffer[String],seconds: Int):scala.concurrent.Future[String] = {
+  def blpopManyFuture(keys: scala.collection.mutable.Buffer[String],seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].blpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3131,7 +3131,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Timeout in seconds
    * @return Handler for the result of this call.
    */
-    def brpopFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
+  def brpopFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].brpop(key.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3143,7 +3143,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Timeout in seconds
    * @return Handler for the result of this call.
    */
-    def brpopManyFuture(keys: scala.collection.mutable.Buffer[String],seconds: Int):scala.concurrent.Future[String] = {
+  def brpopManyFuture(keys: scala.collection.mutable.Buffer[String],seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].brpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3156,7 +3156,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Timeout in seconds
    * @return Handler for the result of this call.
    */
-    def brpoplpushFuture(key: String,destkey: String,seconds: Int):scala.concurrent.Future[String] = {
+  def brpoplpushFuture(key: String,destkey: String,seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].brpoplpush(key.asInstanceOf[java.lang.String],destkey.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3167,7 +3167,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param filter Filter optionssee <a href="../../../../../../cheatsheet/KillFilter.html">KillFilter</a>
    * @return Handler for the result of this call.
    */
-    def clientKillFuture(filter: KillFilter):scala.concurrent.Future[String] = {
+  def clientKillFuture(filter: KillFilter):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clientKill(filter.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3176,7 +3176,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get the list of client connections
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def clientListFuture():scala.concurrent.Future[String] = {
+  def clientListFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clientList(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3185,7 +3185,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get the current connection name
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def clientGetnameFuture():scala.concurrent.Future[String] = {
+  def clientGetnameFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clientGetname(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3196,7 +3196,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param millis Pause time in milliseconds
    * @return Handler for the result of this call.
    */
-    def clientPauseFuture(millis: Long):scala.concurrent.Future[String] = {
+  def clientPauseFuture(millis: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clientPause(millis.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3207,7 +3207,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param name New name for current connection
    * @return Handler for the result of this call.
    */
-    def clientSetnameFuture(name: String):scala.concurrent.Future[String] = {
+  def clientSetnameFuture(name: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clientSetname(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3217,7 +3217,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Assign new hash slots to receiving node.
    * @return Handler for the result of this call.
    */
-    def clusterAddslotsFuture(slots: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def clusterAddslotsFuture(slots: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterAddslots(slots.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3227,7 +3227,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Return the number of failure reports active for a given node.
    * @return Handler for the result of this call.
    */
-    def clusterCountFailureReportsFuture(nodeId: String):scala.concurrent.Future[String] = {
+  def clusterCountFailureReportsFuture(nodeId: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterCountFailureReports(nodeId.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3237,7 +3237,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Return the number of local keys in the specified hash slot.
    * @return Handler for the result of this call.
    */
-    def clusterCountkeysinslotFuture(slot: Long):scala.concurrent.Future[String] = {
+  def clusterCountkeysinslotFuture(slot: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterCountkeysinslot(slot.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3247,7 +3247,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Set hash slots as unbound in receiving node.
    * @return Handler for the result of this call.
    */
-    def clusterDelslotsFuture(slot: Long):scala.concurrent.Future[String] = {
+  def clusterDelslotsFuture(slot: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterDelslots(slot.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3257,7 +3257,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Set hash slots as unbound in receiving node.
    * @return Handler for the result of this call.
    */
-    def clusterDelslotsManyFuture(slots: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def clusterDelslotsManyFuture(slots: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterDelslotsMany(slots.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3267,7 +3267,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Forces a slave to perform a manual failover of its master.
    * @return Handler for the result of this call.
    */
-    def clusterFailoverFuture():scala.concurrent.Future[String] = {
+  def clusterFailoverFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterFailover(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3277,7 +3277,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Forces a slave to perform a manual failover of its master.
    * @return Handler for the result of this call.
    */
-    def clusterFailOverWithOptionsFuture(options: io.vertx.redis.op.FailoverOptions):scala.concurrent.Future[String] = {
+  def clusterFailOverWithOptionsFuture(options: io.vertx.redis.op.FailoverOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterFailOverWithOptions(options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3287,7 +3287,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Remove a node from the nodes table.
    * @return Handler for the result of this call.
    */
-    def clusterForgetFuture(nodeId: String):scala.concurrent.Future[String] = {
+  def clusterForgetFuture(nodeId: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterForget(nodeId.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3297,7 +3297,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Return local key names in the specified hash slot.
    * @return Handler for the result of this call.
    */
-    def clusterGetkeysinslotFuture(slot: Long,count: Long):scala.concurrent.Future[String] = {
+  def clusterGetkeysinslotFuture(slot: Long,count: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterGetkeysinslot(slot.asInstanceOf[java.lang.Long],count.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3307,7 +3307,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Provides info about Redis Cluster node state.
    * @return Handler for the result of this call.
    */
-    def clusterInfoFuture():scala.concurrent.Future[String] = {
+  def clusterInfoFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterInfo(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3317,7 +3317,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Returns the hash slot of the specified key.
    * @return Handler for the result of this call.
    */
-    def clusterKeyslotFuture(key: String):scala.concurrent.Future[String] = {
+  def clusterKeyslotFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterKeyslot(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3327,7 +3327,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Force a node cluster to handshake with another node.
    * @return Handler for the result of this call.
    */
-    def clusterMeetFuture(ip: String,port: Long):scala.concurrent.Future[String] = {
+  def clusterMeetFuture(ip: String,port: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterMeet(ip.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3337,7 +3337,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Get Cluster config for the node.
    * @return Handler for the result of this call.
    */
-    def clusterNodesFuture():scala.concurrent.Future[String] = {
+  def clusterNodesFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterNodes(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3347,7 +3347,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Reconfigure a node as a slave of the specified master node.
    * @return Handler for the result of this call.
    */
-    def clusterReplicateFuture(nodeId: String):scala.concurrent.Future[String] = {
+  def clusterReplicateFuture(nodeId: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterReplicate(nodeId.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3357,7 +3357,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Reset a Redis Cluster node.
    * @return Handler for the result of this call.
    */
-    def clusterResetFuture():scala.concurrent.Future[String] = {
+  def clusterResetFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterReset(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3367,7 +3367,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Reset a Redis Cluster node.
    * @return Handler for the result of this call.
    */
-    def clusterResetWithOptionsFuture(options: io.vertx.redis.op.ResetOptions):scala.concurrent.Future[String] = {
+  def clusterResetWithOptionsFuture(options: io.vertx.redis.op.ResetOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterResetWithOptions(options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3377,7 +3377,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Forces the node to save cluster state on disk.
    * @return Handler for the result of this call.
    */
-    def clusterSaveconfigFuture():scala.concurrent.Future[String] = {
+  def clusterSaveconfigFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSaveconfig(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3387,7 +3387,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Set the configuration epoch in a new node.
    * @return Handler for the result of this call.
    */
-    def clusterSetConfigEpochFuture(epoch: Long):scala.concurrent.Future[String] = {
+  def clusterSetConfigEpochFuture(epoch: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSetConfigEpoch(epoch.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3397,7 +3397,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Bind an hash slot to a specific node.
    * @return Handler for the result of this call.
    */
-    def clusterSetslotFuture(slot: Long,subcommand: io.vertx.redis.op.SlotCmd):scala.concurrent.Future[String] = {
+  def clusterSetslotFuture(slot: Long,subcommand: io.vertx.redis.op.SlotCmd):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSetslot(slot.asInstanceOf[java.lang.Long],subcommand,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3407,7 +3407,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Bind an hash slot to a specific node.
    * @return Handler for the result of this call.
    */
-    def clusterSetslotWithNodeFuture(slot: Long,subcommand: io.vertx.redis.op.SlotCmd,nodeId: String):scala.concurrent.Future[String] = {
+  def clusterSetslotWithNodeFuture(slot: Long,subcommand: io.vertx.redis.op.SlotCmd,nodeId: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSetslotWithNode(slot.asInstanceOf[java.lang.Long],subcommand,nodeId.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3417,7 +3417,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * List slave nodes of the specified master node.
    * @return Handler for the result of this call.
    */
-    def clusterSlavesFuture(nodeId: String):scala.concurrent.Future[String] = {
+  def clusterSlavesFuture(nodeId: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSlaves(nodeId.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3426,7 +3426,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get array of Cluster slot to node mappings
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def clusterSlotsFuture():scala.concurrent.Future[String] = {
+  def clusterSlotsFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].clusterSlots(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3435,7 +3435,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get array of Redis command details
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def commandFuture():scala.concurrent.Future[String] = {
+  def commandFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].command(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3444,7 +3444,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get total number of Redis commands
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def commandCountFuture():scala.concurrent.Future[String] = {
+  def commandCountFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].commandCount(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3453,7 +3453,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Extract keys given a full Redis command
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def commandGetkeysFuture():scala.concurrent.Future[String] = {
+  def commandGetkeysFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].commandGetkeys(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3464,7 +3464,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param commands List of commands to get info for
    * @return Handler for the result of this call.
    */
-    def commandInfoFuture(commands: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def commandInfoFuture(commands: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].commandInfo(commands.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3475,7 +3475,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param parameter Configuration parameter
    * @return Handler for the result of this call.
    */
-    def configGetFuture(parameter: String):scala.concurrent.Future[String] = {
+  def configGetFuture(parameter: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].configGet(parameter.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3484,7 +3484,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Rewrite the configuration file with the in memory configuration
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def configRewriteFuture():scala.concurrent.Future[String] = {
+  def configRewriteFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].configRewrite(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3496,7 +3496,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value
    * @return Handler for the result of this call.
    */
-    def configSetFuture(parameter: String,value: String):scala.concurrent.Future[String] = {
+  def configSetFuture(parameter: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].configSet(parameter.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3505,7 +3505,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Reset the stats returned by INFO
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def configResetstatFuture():scala.concurrent.Future[String] = {
+  def configResetstatFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].configResetstat(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3514,7 +3514,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Return the number of keys in the selected database
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def dbsizeFuture():scala.concurrent.Future[String] = {
+  def dbsizeFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].dbsize(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3525,7 +3525,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def debugObjectFuture(key: String):scala.concurrent.Future[String] = {
+  def debugObjectFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].debugObject(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3534,7 +3534,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Make the server crash
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def debugSegfaultFuture():scala.concurrent.Future[String] = {
+  def debugSegfaultFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].debugSegfault(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3545,7 +3545,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def decrFuture(key: String):scala.concurrent.Future[String] = {
+  def decrFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].decr(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3557,7 +3557,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param decrement Value by which to decrement
    * @return Handler for the result of this call.
    */
-    def decrbyFuture(key: String,decrement: Long):scala.concurrent.Future[String] = {
+  def decrbyFuture(key: String,decrement: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].decrby(key.asInstanceOf[java.lang.String],decrement.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3568,7 +3568,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Keys to delete
    * @return Handler for the result of this call.
    */
-    def delFuture(key: String):scala.concurrent.Future[String] = {
+  def delFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].del(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3579,7 +3579,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys to delete
    * @return Handler for the result of this call.
    */
-    def delManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def delManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].delMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3588,7 +3588,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Discard all commands issued after MULTI
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def discardFuture():scala.concurrent.Future[String] = {
+  def discardFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].discard(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3599,7 +3599,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def dumpFuture(key: String):scala.concurrent.Future[String] = {
+  def dumpFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].dump(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3610,7 +3610,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param message String to echo
    * @return Handler for the result of this call.
    */
-    def echoFuture(message: String):scala.concurrent.Future[String] = {
+  def echoFuture(message: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].echo(message.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3627,7 +3627,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param args List of argument values
    * @return Handler for the result of this call.
    */
-    def evalFuture(script: String,keys: scala.collection.mutable.Buffer[String],args: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def evalFuture(script: String,keys: scala.collection.mutable.Buffer[String],args: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].eval(script.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,args.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3644,7 +3644,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param values List of values
    * @return Handler for the result of this call.
    */
-    def evalshaFuture(sha1: String,keys: scala.collection.mutable.Buffer[String],values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def evalshaFuture(sha1: String,keys: scala.collection.mutable.Buffer[String],values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].evalsha(sha1.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,values.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3653,7 +3653,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Execute all commands issued after MULTI
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def execFuture():scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  def execFuture():scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
     asJava.asInstanceOf[JRedisTransaction].exec(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3664,7 +3664,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def existsFuture(key: String):scala.concurrent.Future[String] = {
+  def existsFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].exists(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3676,7 +3676,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Time to live in seconds
    * @return Handler for the result of this call.
    */
-    def expireFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
+  def expireFuture(key: String,seconds: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].expire(key.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3688,7 +3688,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param seconds Expiry time as Unix timestamp in seconds
    * @return Handler for the result of this call.
    */
-    def expireatFuture(key: String,seconds: Long):scala.concurrent.Future[String] = {
+  def expireatFuture(key: String,seconds: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].expireat(key.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3697,7 +3697,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Remove all keys from all databases
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def flushallFuture():scala.concurrent.Future[String] = {
+  def flushallFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].flushall(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3706,7 +3706,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Remove all keys from the current database
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def flushdbFuture():scala.concurrent.Future[String] = {
+  def flushdbFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].flushdb(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3717,7 +3717,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def getFuture(key: String):scala.concurrent.Future[String] = {
+  def getFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].get(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3728,7 +3728,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def getBinaryFuture(key: String):scala.concurrent.Future[String] = {
+  def getBinaryFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].getBinary(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3740,7 +3740,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param offset Offset in bits
    * @return Handler for the result of this call.
    */
-    def getbitFuture(key: String,offset: Long):scala.concurrent.Future[String] = {
+  def getbitFuture(key: String,offset: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].getbit(key.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3753,7 +3753,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param end End offset - inclusive
    * @return Handler for the result of this call.
    */
-    def getrangeFuture(key: String,start: Long,end: Long):scala.concurrent.Future[String] = {
+  def getrangeFuture(key: String,start: Long,end: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].getrange(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],end.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3765,7 +3765,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for the key
    * @return Handler for the result of this call.
    */
-    def getsetFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def getsetFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].getset(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3777,7 +3777,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param field Field name
    * @return Handler for the result of this call.
    */
-    def hdelFuture(key: String,field: String):scala.concurrent.Future[String] = {
+  def hdelFuture(key: String,field: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hdel(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3789,7 +3789,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param fields Field names
    * @return Handler for the result of this call.
    */
-    def hdelManyFuture(key: String,fields: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def hdelManyFuture(key: String,fields: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hdelMany(key.asInstanceOf[java.lang.String],fields.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3801,7 +3801,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param field Field name
    * @return Handler for the result of this call.
    */
-    def hexistsFuture(key: String,field: String):scala.concurrent.Future[String] = {
+  def hexistsFuture(key: String,field: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hexists(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3813,7 +3813,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param field Field name
    * @return Handler for the result of this call.
    */
-    def hgetFuture(key: String,field: String):scala.concurrent.Future[String] = {
+  def hgetFuture(key: String,field: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hget(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3824,7 +3824,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def hgetallFuture(key: String):scala.concurrent.Future[String] = {
+  def hgetallFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hgetall(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3837,7 +3837,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param increment Value by which to increment
    * @return Handler for the result of this call.
    */
-    def hincrbyFuture(key: String,field: String,increment: Long):scala.concurrent.Future[String] = {
+  def hincrbyFuture(key: String,field: String,increment: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hincrby(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],increment.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3850,7 +3850,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param increment Value by which to increment
    * @return Handler for the result of this call.
    */
-    def hincrbyfloatFuture(key: String,field: String,increment: Double):scala.concurrent.Future[String] = {
+  def hincrbyfloatFuture(key: String,field: String,increment: Double):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hincrbyfloat(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],increment.asInstanceOf[java.lang.Double],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3861,7 +3861,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def hkeysFuture(key: String):scala.concurrent.Future[String] = {
+  def hkeysFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hkeys(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3872,7 +3872,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def hlenFuture(key: String):scala.concurrent.Future[String] = {
+  def hlenFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hlen(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3884,7 +3884,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param fields Field names
    * @return Handler for the result of this call.
    */
-    def hmgetFuture(key: String,fields: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def hmgetFuture(key: String,fields: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hmget(key.asInstanceOf[java.lang.String],fields.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3896,7 +3896,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param values Map of field:value pairs
    * @return Handler for the result of this call.
    */
-    def hmsetFuture(key: String,values: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
+  def hmsetFuture(key: String,values: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hmset(key.asInstanceOf[java.lang.String],values,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3909,7 +3909,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value
    * @return Handler for the result of this call.
    */
-    def hsetFuture(key: String,field: String,value: String):scala.concurrent.Future[String] = {
+  def hsetFuture(key: String,field: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hset(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3922,7 +3922,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value
    * @return Handler for the result of this call.
    */
-    def hsetnxFuture(key: String,field: String,value: String):scala.concurrent.Future[String] = {
+  def hsetnxFuture(key: String,field: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hsetnx(key.asInstanceOf[java.lang.String],field.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3933,7 +3933,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def hvalsFuture(key: String):scala.concurrent.Future[String] = {
+  def hvalsFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hvals(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3944,7 +3944,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def incrFuture(key: String):scala.concurrent.Future[String] = {
+  def incrFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].incr(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3956,7 +3956,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param increment Value by which to increment
    * @return Handler for the result of this call.
    */
-    def incrbyFuture(key: String,increment: Long):scala.concurrent.Future[String] = {
+  def incrbyFuture(key: String,increment: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].incrby(key.asInstanceOf[java.lang.String],increment.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3968,7 +3968,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param increment Value by which to increment
    * @return Handler for the result of this call.
    */
-    def incrbyfloatFuture(key: String,increment: Double):scala.concurrent.Future[String] = {
+  def incrbyfloatFuture(key: String,increment: Double):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].incrbyfloat(key.asInstanceOf[java.lang.String],increment.asInstanceOf[java.lang.Double],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3978,7 +3978,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Get information and statistics about the server
    * @return Handler for the result of this call.
    */
-    def infoFuture():scala.concurrent.Future[String] = {
+  def infoFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].info(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -3989,7 +3989,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param section Specific section of information to return
    * @return Handler for the result of this call.
    */
-    def infoSectionFuture(section: String):scala.concurrent.Future[String] = {
+  def infoSectionFuture(section: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].infoSection(section.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4000,7 +4000,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param pattern Pattern to limit the keys returned
    * @return Handler for the result of this call.
    */
-    def keysFuture(pattern: String):scala.concurrent.Future[String] = {
+  def keysFuture(pattern: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].keys(pattern.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4009,7 +4009,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Get the UNIX time stamp of the last successful save to disk
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def lastsaveFuture():scala.concurrent.Future[String] = {
+  def lastsaveFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lastsave(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4021,7 +4021,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param index Index of list element to get
    * @return Handler for the result of this call.
    */
-    def lindexFuture(key: String,index: Int):scala.concurrent.Future[String] = {
+  def lindexFuture(key: String,index: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lindex(key.asInstanceOf[java.lang.String],index.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4035,7 +4035,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to be inserted before or after the pivot
    * @return Handler for the result of this call.
    */
-    def linsertFuture(key: String,option: io.vertx.redis.op.InsertOptions,pivot: String,value: String):scala.concurrent.Future[String] = {
+  def linsertFuture(key: String,option: io.vertx.redis.op.InsertOptions,pivot: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].linsert(key.asInstanceOf[java.lang.String],option,pivot.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4046,7 +4046,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key String key
    * @return Handler for the result of this call.
    */
-    def llenFuture(key: String):scala.concurrent.Future[String] = {
+  def llenFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].llen(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4057,7 +4057,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key String key
    * @return Handler for the result of this call.
    */
-    def lpopFuture(key: String):scala.concurrent.Future[String] = {
+  def lpopFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lpop(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4069,7 +4069,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param values Values to be added at the beginning of the list, one by one
    * @return Handler for the result of this call.
    */
-    def lpushManyFuture(key: String,values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def lpushManyFuture(key: String,values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lpushMany(key.asInstanceOf[java.lang.String],values.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4081,7 +4081,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to be added at the beginning of the list
    * @return Handler for the result of this call.
    */
-    def lpushFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def lpushFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lpush(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4093,7 +4093,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to add at the beginning of the list
    * @return Handler for the result of this call.
    */
-    def lpushxFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def lpushxFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lpushx(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4106,7 +4106,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param to Stop index
    * @return Handler for the result of this call.
    */
-    def lrangeFuture(key: String,from: Long,to: Long):scala.concurrent.Future[String] = {
+  def lrangeFuture(key: String,from: Long,to: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lrange(key.asInstanceOf[java.lang.String],from.asInstanceOf[java.lang.Long],to.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4119,7 +4119,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to be removed
    * @return Handler for the result of this call.
    */
-    def lremFuture(key: String,count: Long,value: String):scala.concurrent.Future[String] = {
+  def lremFuture(key: String,count: Long,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lrem(key.asInstanceOf[java.lang.String],count.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4132,7 +4132,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value
    * @return Handler for the result of this call.
    */
-    def lsetFuture(key: String,index: Long,value: String):scala.concurrent.Future[String] = {
+  def lsetFuture(key: String,index: Long,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].lset(key.asInstanceOf[java.lang.String],index.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4145,7 +4145,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param to Stop index
    * @return Handler for the result of this call.
    */
-    def ltrimFuture(key: String,from: Long,to: Long):scala.concurrent.Future[String] = {
+  def ltrimFuture(key: String,from: Long,to: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].ltrim(key.asInstanceOf[java.lang.String],from.asInstanceOf[java.lang.Long],to.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4156,7 +4156,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def mgetFuture(key: String):scala.concurrent.Future[String] = {
+  def mgetFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].mget(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4167,7 +4167,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys to get
    * @return Handler for the result of this call.
    */
-    def mgetManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def mgetManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].mgetMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4182,7 +4182,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Migrate optionssee <a href="../../../../../../cheatsheet/MigrateOptions.html">MigrateOptions</a>
    * @return Handler for the result of this call.
    */
-    def migrateFuture(host: String,port: Int,key: String,destdb: Int,timeout: Long,options: MigrateOptions):scala.concurrent.Future[String] = {
+  def migrateFuture(host: String,port: Int,key: String,destdb: Int,timeout: Long,options: MigrateOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].migrate(host.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],key.asInstanceOf[java.lang.String],destdb.asInstanceOf[java.lang.Integer],timeout.asInstanceOf[java.lang.Long],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4191,7 +4191,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Listen for all requests received by the server in real time
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def monitorFuture():scala.concurrent.Future[String] = {
+  def monitorFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].monitor(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4203,7 +4203,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param destdb Destination database index
    * @return Handler for the result of this call.
    */
-    def moveFuture(key: String,destdb: Int):scala.concurrent.Future[String] = {
+  def moveFuture(key: String,destdb: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].move(key.asInstanceOf[java.lang.String],destdb.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4214,7 +4214,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keyvals Key value pairs to set
    * @return Handler for the result of this call.
    */
-    def msetFuture(keyvals: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
+  def msetFuture(keyvals: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].mset(keyvals,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4225,7 +4225,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keyvals Key value pairs to set
    * @return Handler for the result of this call.
    */
-    def msetnxFuture(keyvals: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
+  def msetnxFuture(keyvals: io.vertx.core.json.JsonObject):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].msetnx(keyvals,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4234,7 +4234,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Mark the start of a RedisTransaction block
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def multiFuture():scala.concurrent.Future[String] = {
+  def multiFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].multi(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4246,7 +4246,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param cmd Object sub command
    * @return Handler for the result of this call.
    */
-    def objectFuture(key: String,cmd: io.vertx.redis.op.ObjectCmd):scala.concurrent.Future[String] = {
+  def objectFuture(key: String,cmd: io.vertx.redis.op.ObjectCmd):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].`object`(key.asInstanceOf[java.lang.String],cmd,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4257,7 +4257,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def persistFuture(key: String):scala.concurrent.Future[String] = {
+  def persistFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].persist(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4269,7 +4269,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param millis Time to live in milliseconds
    * @return Handler for the result of this call.
    */
-    def pexpireFuture(key: String,millis: Long):scala.concurrent.Future[String] = {
+  def pexpireFuture(key: String,millis: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pexpire(key.asInstanceOf[java.lang.String],millis.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4281,7 +4281,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param millis Expiry time as Unix timestamp in milliseconds
    * @return Handler for the result of this call.
    */
-    def pexpireatFuture(key: String,millis: Long):scala.concurrent.Future[String] = {
+  def pexpireatFuture(key: String,millis: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pexpireat(key.asInstanceOf[java.lang.String],millis.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4293,7 +4293,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param element Element to add
    * @return Handler for the result of this call.
    */
-    def pfaddFuture(key: String,element: String):scala.concurrent.Future[String] = {
+  def pfaddFuture(key: String,element: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pfadd(key.asInstanceOf[java.lang.String],element.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4305,7 +4305,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param elements Elementa to add
    * @return Handler for the result of this call.
    */
-    def pfaddManyFuture(key: String,elements: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def pfaddManyFuture(key: String,elements: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pfaddMany(key.asInstanceOf[java.lang.String],elements.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4316,7 +4316,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def pfcountFuture(key: String):scala.concurrent.Future[String] = {
+  def pfcountFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pfcount(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4327,7 +4327,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys
    * @return Handler for the result of this call.
    */
-    def pfcountManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def pfcountManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pfcountMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4339,7 +4339,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of source keys
    * @return Handler for the result of this call.
    */
-    def pfmergeFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def pfmergeFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pfmerge(destkey.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4348,7 +4348,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Ping the server
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def pingFuture():scala.concurrent.Future[String] = {
+  def pingFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].ping(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4361,7 +4361,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for key
    * @return Handler for the result of this call.
    */
-    def psetexFuture(key: String,millis: Long,value: String):scala.concurrent.Future[String] = {
+  def psetexFuture(key: String,millis: Long,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].psetex(key.asInstanceOf[java.lang.String],millis.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4372,7 +4372,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param pattern Pattern string
    * @return Handler for the result of this call.
    */
-    def psubscribeFuture(pattern: String):scala.concurrent.Future[String] = {
+  def psubscribeFuture(pattern: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].psubscribe(pattern.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4383,7 +4383,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param patterns List of patterns
    * @return Handler for the result of this call.
    */
-    def psubscribeManyFuture(patterns: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def psubscribeManyFuture(patterns: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].psubscribeMany(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4394,7 +4394,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param pattern A glob-style pattern - an empty string means no pattern
    * @return Handler for the result of this call.
    */
-    def pubsubChannelsFuture(pattern: String):scala.concurrent.Future[String] = {
+  def pubsubChannelsFuture(pattern: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pubsubChannels(pattern.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4405,7 +4405,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param channels List of channels
    * @return Handler for the result of this call.
    */
-    def pubsubNumsubFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def pubsubNumsubFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pubsubNumsub(channels.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4415,7 +4415,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Returns the number of subscriptions to patterns (that are performed using the PSUBSCRIBE command)
    * @return Handler for the result of this call.
    */
-    def pubsubNumpatFuture():scala.concurrent.Future[String] = {
+  def pubsubNumpatFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pubsubNumpat(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4426,7 +4426,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def pttlFuture(key: String):scala.concurrent.Future[String] = {
+  def pttlFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].pttl(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4438,7 +4438,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param message Message to send to channel
    * @return Handler for the result of this call.
    */
-    def publishFuture(channel: String,message: String):scala.concurrent.Future[String] = {
+  def publishFuture(channel: String,message: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].publish(channel.asInstanceOf[java.lang.String],message.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4449,7 +4449,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param patterns List of patterns to match against
    * @return Handler for the result of this call.
    */
-    def punsubscribeFuture(patterns: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def punsubscribeFuture(patterns: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].punsubscribe(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4458,7 +4458,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Return a random key from the keyspace
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def randomkeyFuture():scala.concurrent.Future[String] = {
+  def randomkeyFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].randomkey(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4470,7 +4470,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param newkey New key string
    * @return Handler for the result of this call.
    */
-    def renameFuture(key: String,newkey: String):scala.concurrent.Future[String] = {
+  def renameFuture(key: String,newkey: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rename(key.asInstanceOf[java.lang.String],newkey.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4482,7 +4482,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param newkey New key string
    * @return Handler for the result of this call.
    */
-    def renamenxFuture(key: String,newkey: String):scala.concurrent.Future[String] = {
+  def renamenxFuture(key: String,newkey: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].renamenx(key.asInstanceOf[java.lang.String],newkey.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4495,7 +4495,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param serialized Serialized form of the key value as obtained using DUMP
    * @return Handler for the result of this call.
    */
-    def restoreFuture(key: String,millis: Long,serialized: String):scala.concurrent.Future[String] = {
+  def restoreFuture(key: String,millis: Long,serialized: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].restore(key.asInstanceOf[java.lang.String],millis.asInstanceOf[java.lang.Long],serialized.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4504,7 +4504,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Return the role of the instance in the context of replication
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def roleFuture():scala.concurrent.Future[String] = {
+  def roleFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].role(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4515,7 +4515,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def rpopFuture(key: String):scala.concurrent.Future[String] = {
+  def rpopFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rpop(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4527,7 +4527,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param destkey Key string identifying destination list
    * @return Handler for the result of this call.
    */
-    def rpoplpushFuture(key: String,destkey: String):scala.concurrent.Future[String] = {
+  def rpoplpushFuture(key: String,destkey: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rpoplpush(key.asInstanceOf[java.lang.String],destkey.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4539,7 +4539,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param values List of values to add to the end of the list
    * @return Handler for the result of this call.
    */
-    def rpushManyFuture(key: String,values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def rpushManyFuture(key: String,values: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rpushMany(key.asInstanceOf[java.lang.String],values.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4551,7 +4551,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to be added to the end of the list
    * @return Handler for the result of this call.
    */
-    def rpushFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def rpushFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rpush(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4563,7 +4563,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to be added to the end of the list
    * @return Handler for the result of this call.
    */
-    def rpushxFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def rpushxFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].rpushx(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4575,7 +4575,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Value to be added to the set
    * @return Handler for the result of this call.
    */
-    def saddFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def saddFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sadd(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4587,7 +4587,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members Values to be added to the set
    * @return Handler for the result of this call.
    */
-    def saddManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def saddManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].saddMany(key.asInstanceOf[java.lang.String],members.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4596,7 +4596,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Synchronously save the dataset to disk
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def saveFuture():scala.concurrent.Future[String] = {
+  def saveFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].save(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4607,7 +4607,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def scardFuture(key: String):scala.concurrent.Future[String] = {
+  def scardFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scard(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4618,7 +4618,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param script SHA1 digest identifying a script in the script cache
    * @return Handler for the result of this call.
    */
-    def scriptExistsFuture(script: String):scala.concurrent.Future[String] = {
+  def scriptExistsFuture(script: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scriptExists(script.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4629,7 +4629,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param scripts List of SHA1 digests identifying scripts in the script cache
    * @return Handler for the result of this call.
    */
-    def scriptExistsManyFuture(scripts: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def scriptExistsManyFuture(scripts: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scriptExistsMany(scripts.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4638,7 +4638,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Remove all the scripts from the script cache.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def scriptFlushFuture():scala.concurrent.Future[String] = {
+  def scriptFlushFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scriptFlush(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4647,7 +4647,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Kill the script currently in execution.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def scriptKillFuture():scala.concurrent.Future[String] = {
+  def scriptKillFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scriptKill(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4658,7 +4658,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param script Lua script
    * @return Handler for the result of this call.
    */
-    def scriptLoadFuture(script: String):scala.concurrent.Future[String] = {
+  def scriptLoadFuture(script: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scriptLoad(script.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4670,7 +4670,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param cmpkeys List of keys identifying sets to subtract from the key set
    * @return Handler for the result of this call.
    */
-    def sdiffFuture(key: String,cmpkeys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sdiffFuture(key: String,cmpkeys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sdiff(key.asInstanceOf[java.lang.String],cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4683,7 +4683,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param cmpkeys List of keys identifying sets to subtract from the key set
    * @return Handler for the result of this call.
    */
-    def sdiffstoreFuture(destkey: String,key: String,cmpkeys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sdiffstoreFuture(destkey: String,key: String,cmpkeys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sdiffstore(destkey.asInstanceOf[java.lang.String],key.asInstanceOf[java.lang.String],cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4694,7 +4694,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param dbindex Index identifying the new active database
    * @return Handler for the result of this call.
    */
-    def selectFuture(dbindex: Int):scala.concurrent.Future[String] = {
+  def selectFuture(dbindex: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].select(dbindex.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4706,7 +4706,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for the key
    * @return Handler for the result of this call.
    */
-    def setFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def setFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].set(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4719,7 +4719,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Set optionssee <a href="../../../../../../cheatsheet/SetOptions.html">SetOptions</a>
    * @return Handler for the result of this call.
    */
-    def setWithOptionsFuture(key: String,value: String,options: SetOptions):scala.concurrent.Future[String] = {
+  def setWithOptionsFuture(key: String,value: String,options: SetOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setWithOptions(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4731,7 +4731,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for the key
    * @return Handler for the result of this call.
    */
-    def setBinaryFuture(key: String,value: io.vertx.core.buffer.Buffer):scala.concurrent.Future[String] = {
+  def setBinaryFuture(key: String,value: io.vertx.core.buffer.Buffer):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setBinary(key.asInstanceOf[java.lang.String],value,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4744,7 +4744,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Set optionssee <a href="../../../../../../cheatsheet/SetOptions.html">SetOptions</a>
    * @return Handler for the result of this call.
    */
-    def setBinaryWithOptionsFuture(key: String,value: io.vertx.core.buffer.Buffer,options: SetOptions):scala.concurrent.Future[String] = {
+  def setBinaryWithOptionsFuture(key: String,value: io.vertx.core.buffer.Buffer,options: SetOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setBinaryWithOptions(key.asInstanceOf[java.lang.String],value,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4757,7 +4757,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param bit New value - must be 1 or 0
    * @return Handler for the result of this call.
    */
-    def setbitFuture(key: String,offset: Long,bit: Int):scala.concurrent.Future[String] = {
+  def setbitFuture(key: String,offset: Long,bit: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setbit(key.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],bit.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4770,7 +4770,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for key
    * @return Handler for the result of this call.
    */
-    def setexFuture(key: String,seconds: Long,value: String):scala.concurrent.Future[String] = {
+  def setexFuture(key: String,seconds: Long,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setex(key.asInstanceOf[java.lang.String],seconds.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4782,7 +4782,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value New value for the key
    * @return Handler for the result of this call.
    */
-    def setnxFuture(key: String,value: String):scala.concurrent.Future[String] = {
+  def setnxFuture(key: String,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setnx(key.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4795,7 +4795,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param value Value to overwrite with
    * @return Handler for the result of this call.
    */
-    def setrangeFuture(key: String,offset: Int,value: String):scala.concurrent.Future[String] = {
+  def setrangeFuture(key: String,offset: Int,value: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].setrange(key.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Integer],value.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4806,7 +4806,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys to perform intersection on
    * @return Handler for the result of this call.
    */
-    def sinterFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sinterFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sinter(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4818,7 +4818,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys to perform intersection on
    * @return Handler for the result of this call.
    */
-    def sinterstoreFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sinterstoreFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sinterstore(destkey.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4830,7 +4830,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member to look for
    * @return Handler for the result of this call.
    */
-    def sismemberFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def sismemberFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sismember(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4842,7 +4842,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param port Port of our new master
    * @return Handler for the result of this call.
    */
-    def slaveofFuture(host: String,port: Int):scala.concurrent.Future[String] = {
+  def slaveofFuture(host: String,port: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].slaveof(host.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4852,7 +4852,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Make this server a master
    * @return Handler for the result of this call.
    */
-    def slaveofNooneFuture():scala.concurrent.Future[String] = {
+  def slaveofNooneFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].slaveofNoone(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4863,7 +4863,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param limit Number of log entries to return. If value is less than zero all entries are returned
    * @return Handler for the result of this call.
    */
-    def slowlogGetFuture(limit: Int):scala.concurrent.Future[String] = {
+  def slowlogGetFuture(limit: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].slowlogGet(limit.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4873,7 +4873,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Get the length of the Redis slow queries log
    * @return Handler for the result of this call.
    */
-    def slowlogLenFuture():scala.concurrent.Future[String] = {
+  def slowlogLenFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].slowlogLen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4883,7 +4883,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Reset the Redis slow queries log
    * @return Handler for the result of this call.
    */
-    def slowlogResetFuture():scala.concurrent.Future[String] = {
+  def slowlogResetFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].slowlogReset(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4894,8 +4894,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def smembersFuture(key: String):scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def smembersFuture(key: String):scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
     asJava.asInstanceOf[JRedisTransaction].smembers(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -4907,7 +4907,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member to move
    * @return Handler for the result of this call.
    */
-    def smoveFuture(key: String,destkey: String,member: String):scala.concurrent.Future[String] = {
+  def smoveFuture(key: String,destkey: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].smove(key.asInstanceOf[java.lang.String],destkey.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4919,7 +4919,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Sort optionssee <a href="../../../../../../cheatsheet/SortOptions.html">SortOptions</a>
    * @return Handler for the result of this call.
    */
-    def sortFuture(key: String,options: SortOptions):scala.concurrent.Future[String] = {
+  def sortFuture(key: String,options: SortOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sort(key.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4930,7 +4930,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def spopFuture(key: String):scala.concurrent.Future[String] = {
+  def spopFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].spop(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4942,7 +4942,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param count Number of members to remove
    * @return Handler for the result of this call.
    */
-    def spopManyFuture(key: String,count: Int):scala.concurrent.Future[String] = {
+  def spopManyFuture(key: String,count: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].spopMany(key.asInstanceOf[java.lang.String],count.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4953,7 +4953,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def srandmemberFuture(key: String):scala.concurrent.Future[String] = {
+  def srandmemberFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].srandmember(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4965,7 +4965,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param count Number of members to get
    * @return Handler for the result of this call.
    */
-    def srandmemberCountFuture(key: String,count: Int):scala.concurrent.Future[String] = {
+  def srandmemberCountFuture(key: String,count: Int):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].srandmemberCount(key.asInstanceOf[java.lang.String],count.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4977,7 +4977,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member to remove
    * @return Handler for the result of this call.
    */
-    def sremFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def sremFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].srem(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -4989,7 +4989,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members Members to remove
    * @return Handler for the result of this call.
    */
-    def sremManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sremManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sremMany(key.asInstanceOf[java.lang.String],members.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5000,7 +5000,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def strlenFuture(key: String):scala.concurrent.Future[String] = {
+  def strlenFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].strlen(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5011,7 +5011,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param channel Channel to subscribe to
    * @return Handler for the result of this call.
    */
-    def subscribeFuture(channel: String):scala.concurrent.Future[String] = {
+  def subscribeFuture(channel: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].subscribe(channel.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5022,7 +5022,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param channels List of channels to subscribe to
    * @return Handler for the result of this call.
    */
-    def subscribeManyFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def subscribeManyFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].subscribeMany(channels.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5033,7 +5033,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys identifying sets to add up
    * @return Handler for the result of this call.
    */
-    def sunionFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sunionFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sunion(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5045,7 +5045,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys identifying sets to add up
    * @return Handler for the result of this call.
    */
-    def sunionstoreFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def sunionstoreFuture(destkey: String,keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sunionstore(destkey.asInstanceOf[java.lang.String],keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5054,7 +5054,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Internal command used for replication
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def syncFuture():scala.concurrent.Future[String] = {
+  def syncFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sync(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5063,7 +5063,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Return the current server time
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def timeFuture():scala.concurrent.Future[String] = {
+  def timeFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].time(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5074,7 +5074,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def ttlFuture(key: String):scala.concurrent.Future[String] = {
+  def ttlFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].ttl(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5085,7 +5085,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def typeFuture(key: String):scala.concurrent.Future[String] = {
+  def typeFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].`type`(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5096,7 +5096,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param channels List of channels to subscribe to
    * @return Handler for the result of this call.
    */
-    def unsubscribeFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def unsubscribeFuture(channels: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].unsubscribe(channels.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5105,7 +5105,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Forget about all watched keys
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def unwatchFuture():scala.concurrent.Future[String] = {
+  def unwatchFuture():scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].unwatch(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5115,7 +5115,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Wait for the synchronous replication of all the write commands sent in the context of the current connection.
    * @return Handler for the result of this call.
    */
-    def waitFuture(numSlaves: Long,timeout: Long):scala.concurrent.Future[String] = {
+  def waitFuture(numSlaves: Long,timeout: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].wait(numSlaves.asInstanceOf[java.lang.Long],timeout.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5126,7 +5126,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key to watch
    * @return Handler for the result of this call.
    */
-    def watchFuture(key: String):scala.concurrent.Future[String] = {
+  def watchFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].watch(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5137,7 +5137,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param keys List of keys to watch
    * @return Handler for the result of this call.
    */
-    def watchManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def watchManyFuture(keys: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].watchMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5150,7 +5150,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member New member key
    * @return Handler for the result of this call.
    */
-    def zaddFuture(key: String,score: Double,member: String):scala.concurrent.Future[String] = {
+  def zaddFuture(key: String,score: Double,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zadd(key.asInstanceOf[java.lang.String],score.asInstanceOf[java.lang.Double],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5162,7 +5162,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members New member keys and their scores
    * @return Handler for the result of this call.
    */
-    def zaddManyFuture(key: String,members: scala.collection.mutable.Map[String, Double]):scala.concurrent.Future[String] = {
+  def zaddManyFuture(key: String,members: scala.collection.mutable.Map[String, Double]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zaddMany(key.asInstanceOf[java.lang.String],members.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5173,7 +5173,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param key Key string
    * @return Handler for the result of this call.
    */
-    def zcardFuture(key: String):scala.concurrent.Future[String] = {
+  def zcardFuture(key: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zcard(key.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5186,7 +5186,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param max Maximum score
    * @return Handler for the result of this call.
    */
-    def zcountFuture(key: String,min: Double,max: Double):scala.concurrent.Future[String] = {
+  def zcountFuture(key: String,min: Double,max: Double):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zcount(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.Double],max.asInstanceOf[java.lang.Double],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5199,7 +5199,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member key
    * @return Handler for the result of this call.
    */
-    def zincrbyFuture(key: String,increment: Double,member: String):scala.concurrent.Future[String] = {
+  def zincrbyFuture(key: String,increment: Double,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zincrby(key.asInstanceOf[java.lang.String],increment.asInstanceOf[java.lang.Double],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5212,7 +5212,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Aggregation options
    * @return Handler for the result of this call.
    */
-    def zinterstoreFuture(destkey: String,sets: scala.collection.mutable.Buffer[String],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
+  def zinterstoreFuture(destkey: String,sets: scala.collection.mutable.Buffer[String],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zinterstore(destkey.asInstanceOf[java.lang.String],sets.map(x => x.asInstanceOf[java.lang.String]).asJava,options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5225,7 +5225,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Aggregation options
    * @return Handler for the result of this call.
    */
-    def zinterstoreWeighedFuture(destkey: String,sets: scala.collection.mutable.Map[String, Double],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
+  def zinterstoreWeighedFuture(destkey: String,sets: scala.collection.mutable.Map[String, Double],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zinterstoreWeighed(destkey.asInstanceOf[java.lang.String],sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava,options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5238,7 +5238,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param max Pattern to compare against for maximum value
    * @return Handler for the result of this call.
    */
-    def zlexcountFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
+  def zlexcountFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zlexcount(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5251,7 +5251,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param stop Stop index for the range - inclusive
    * @return Handler for the result of this call.
    */
-    def zrangeFuture(key: String,start: Long,stop: Long):scala.concurrent.Future[String] = {
+  def zrangeFuture(key: String,start: Long,stop: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrange(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],stop.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5265,7 +5265,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Range options
    * @return Handler for the result of this call.
    */
-    def zrangeWithOptionsFuture(key: String,start: Long,stop: Long,options: io.vertx.redis.op.RangeOptions):scala.concurrent.Future[String] = {
+  def zrangeWithOptionsFuture(key: String,start: Long,stop: Long,options: io.vertx.redis.op.RangeOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrangeWithOptions(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],stop.asInstanceOf[java.lang.Long],options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5279,7 +5279,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Limit options where limit can be specifiedsee <a href="../../../../../../cheatsheet/LimitOptions.html">LimitOptions</a>
    * @return Handler for the result of this call.
    */
-    def zrangebylexFuture(key: String,min: String,max: String,options: LimitOptions):scala.concurrent.Future[String] = {
+  def zrangebylexFuture(key: String,min: String,max: String,options: LimitOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrangebylex(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5293,7 +5293,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Range and limit optionssee <a href="../../../../../../cheatsheet/RangeLimitOptions.html">RangeLimitOptions</a>
    * @return Handler for the result of this call.
    */
-    def zrangebyscoreFuture(key: String,min: String,max: String,options: RangeLimitOptions):scala.concurrent.Future[String] = {
+  def zrangebyscoreFuture(key: String,min: String,max: String,options: RangeLimitOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrangebyscore(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5305,7 +5305,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member in the sorted set identified by key
    * @return Handler for the result of this call.
    */
-    def zrankFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def zrankFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrank(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5317,7 +5317,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member in the sorted set identified by key
    * @return Handler for the result of this call.
    */
-    def zremFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def zremFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrem(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5329,7 +5329,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members Members in the sorted set identified by key
    * @return Handler for the result of this call.
    */
-    def zremManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def zremManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zremMany(key.asInstanceOf[java.lang.String],members.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5342,7 +5342,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param max Pattern defining a maximum value
    * @return Handler for the result of this call.
    */
-    def zremrangebylexFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
+  def zremrangebylexFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zremrangebylex(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5355,7 +5355,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param stop Stop index
    * @return Handler for the result of this call.
    */
-    def zremrangebyrankFuture(key: String,start: Long,stop: Long):scala.concurrent.Future[String] = {
+  def zremrangebyrankFuture(key: String,start: Long,stop: Long):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zremrangebyrank(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],stop.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5367,7 +5367,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param min Pattern defining a minimum value
    * @param max Pattern defining a maximum value
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def zremrangebyscoreFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
+  def zremrangebyscoreFuture(key: String,min: String,max: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zremrangebyscore(key.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5381,7 +5381,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Range options
    * @return Handler for the result of this call.
    */
-    def zrevrangeFuture(key: String,start: Long,stop: Long,options: io.vertx.redis.op.RangeOptions):scala.concurrent.Future[String] = {
+  def zrevrangeFuture(key: String,start: Long,stop: Long,options: io.vertx.redis.op.RangeOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrevrange(key.asInstanceOf[java.lang.String],start.asInstanceOf[java.lang.Long],stop.asInstanceOf[java.lang.Long],options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5395,7 +5395,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Limit optionssee <a href="../../../../../../cheatsheet/LimitOptions.html">LimitOptions</a>
    * @return Handler for the result of this call.
    */
-    def zrevrangebylexFuture(key: String,max: String,min: String,options: LimitOptions):scala.concurrent.Future[String] = {
+  def zrevrangebylexFuture(key: String,max: String,min: String,options: LimitOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrevrangebylex(key.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5409,7 +5409,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Range and limit optionssee <a href="../../../../../../cheatsheet/RangeLimitOptions.html">RangeLimitOptions</a>
    * @return Handler for the result of this call.
    */
-    def zrevrangebyscoreFuture(key: String,max: String,min: String,options: RangeLimitOptions):scala.concurrent.Future[String] = {
+  def zrevrangebyscoreFuture(key: String,max: String,min: String,options: RangeLimitOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrevrangebyscore(key.asInstanceOf[java.lang.String],max.asInstanceOf[java.lang.String],min.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5421,7 +5421,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member in the sorted set identified by key
    * @return Handler for the result of this call.
    */
-    def zrevrankFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def zrevrankFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zrevrank(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5433,7 +5433,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member Member in the sorted set identified by key
    * @return Handler for the result of this call.
    */
-    def zscoreFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def zscoreFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zscore(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5446,7 +5446,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Aggregation options
    * @return Handler for the result of this call.
    */
-    def zunionstoreFuture(destkey: String,sets: scala.collection.mutable.Buffer[String],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
+  def zunionstoreFuture(destkey: String,sets: scala.collection.mutable.Buffer[String],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zunionstore(destkey.asInstanceOf[java.lang.String],sets.map(x => x.asInstanceOf[java.lang.String]).asJava,options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5459,7 +5459,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Aggregation options
    * @return Handler for the result of this call.
    */
-    def zunionstoreWeighedFuture(key: String,sets: scala.collection.mutable.Map[String, Double],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
+  def zunionstoreWeighedFuture(key: String,sets: scala.collection.mutable.Map[String, Double],options: io.vertx.redis.op.AggregateOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zunionstoreWeighed(key.asInstanceOf[java.lang.String],sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava,options,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5471,7 +5471,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
    * @return Handler for the result of this call.
    */
-    def scanFuture(cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
+  def scanFuture(cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].scan(cursor.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5484,7 +5484,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
    * @return Handler for the result of this call.
    */
-    def sscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
+  def sscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].sscan(key.asInstanceOf[java.lang.String],cursor.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5497,7 +5497,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
    * @return Handler for the result of this call.
    */
-    def hscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
+  def hscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].hscan(key.asInstanceOf[java.lang.String],cursor.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5510,7 +5510,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options Scan optionssee <a href="../../../../../../cheatsheet/ScanOptions.html">ScanOptions</a>
    * @return Handler for the result of this call.
    */
-    def zscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
+  def zscanFuture(key: String,cursor: String,options: ScanOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].zscan(key.asInstanceOf[java.lang.String],cursor.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5524,7 +5524,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member member
    * @return Handler for the result of this call.
    */
-    def geoaddFuture(key: String,longitude: Double,latitude: Double,member: String):scala.concurrent.Future[String] = {
+  def geoaddFuture(key: String,longitude: Double,latitude: Double,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geoadd(key.asInstanceOf[java.lang.String],longitude.asInstanceOf[java.lang.Double],latitude.asInstanceOf[java.lang.Double],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5536,7 +5536,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members list of &lt;lon, lat, member&gt;
    * @return Handler for the result of this call.
    */
-    def geoaddManyFuture(key: String,members: scala.collection.mutable.Buffer[GeoMember]):scala.concurrent.Future[String] = {
+  def geoaddManyFuture(key: String,members: scala.collection.mutable.Buffer[GeoMember]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geoaddMany(key.asInstanceOf[java.lang.String],members.map(x => x.asJava).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5549,7 +5549,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member member
    * @return Handler for the result of this call.
    */
-    def geohashFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def geohashFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geohash(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5562,7 +5562,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members list of members
    * @return Handler for the result of this call.
    */
-    def geohashManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def geohashManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geohashMany(key.asInstanceOf[java.lang.String],members.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5575,7 +5575,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member member
    * @return Handler for the result of this call.
    */
-    def geoposFuture(key: String,member: String):scala.concurrent.Future[String] = {
+  def geoposFuture(key: String,member: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geopos(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5588,7 +5588,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param members list of members
    * @return Handler for the result of this call.
    */
-    def geoposManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def geoposManyFuture(key: String,members: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geoposMany(key.asInstanceOf[java.lang.String],members.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5601,7 +5601,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param member2 member 2
    * @return Handler for the result of this call.
    */
-    def geodistFuture(key: String,member1: String,member2: String):scala.concurrent.Future[String] = {
+  def geodistFuture(key: String,member1: String,member2: String):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geodist(key.asInstanceOf[java.lang.String],member1.asInstanceOf[java.lang.String],member2.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5615,7 +5615,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param unit geo unit
    * @return Handler for the result of this call.
    */
-    def geodistWithUnitFuture(key: String,member1: String,member2: String,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
+  def geodistWithUnitFuture(key: String,member1: String,member2: String,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].geodistWithUnit(key.asInstanceOf[java.lang.String],member1.asInstanceOf[java.lang.String],member2.asInstanceOf[java.lang.String],unit,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5631,7 +5631,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param unit geo unit
    * @return Handler for the result of this call.
    */
-    def georadiusFuture(key: String,longitude: Double,latitude: Double,radius: Double,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
+  def georadiusFuture(key: String,longitude: Double,latitude: Double,radius: Double,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].georadius(key.asInstanceOf[java.lang.String],longitude.asInstanceOf[java.lang.Double],latitude.asInstanceOf[java.lang.Double],radius.asInstanceOf[java.lang.Double],unit,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5648,7 +5648,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options geo radius optionssee <a href="../../../../../../cheatsheet/GeoRadiusOptions.html">GeoRadiusOptions</a>
    * @return Handler for the result of this call.
    */
-    def georadiusWithOptionsFuture(key: String,longitude: Double,latitude: Double,radius: Double,unit: io.vertx.redis.op.GeoUnit,options: GeoRadiusOptions):scala.concurrent.Future[String] = {
+  def georadiusWithOptionsFuture(key: String,longitude: Double,latitude: Double,radius: Double,unit: io.vertx.redis.op.GeoUnit,options: GeoRadiusOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].georadiusWithOptions(key.asInstanceOf[java.lang.String],longitude.asInstanceOf[java.lang.Double],latitude.asInstanceOf[java.lang.Double],radius.asInstanceOf[java.lang.Double],unit,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5664,7 +5664,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param unit geo unit
    * @return Handler for the result of this call.
    */
-    def georadiusbymemberFuture(key: String,member: String,radius: Double,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
+  def georadiusbymemberFuture(key: String,member: String,radius: Double,unit: io.vertx.redis.op.GeoUnit):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].georadiusbymember(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],radius.asInstanceOf[java.lang.Double],unit,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -5681,7 +5681,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * @param options geo radius optionssee <a href="../../../../../../cheatsheet/GeoRadiusOptions.html">GeoRadiusOptions</a>
    * @return Handler for the result of this call.
    */
-    def georadiusbymemberWithOptionsFuture(key: String,member: String,radius: Double,unit: io.vertx.redis.op.GeoUnit,options: GeoRadiusOptions):scala.concurrent.Future[String] = {
+  def georadiusbymemberWithOptionsFuture(key: String,member: String,radius: Double,unit: io.vertx.redis.op.GeoUnit,options: GeoRadiusOptions):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].georadiusbymemberWithOptions(key.asInstanceOf[java.lang.String],member.asInstanceOf[java.lang.String],radius.asInstanceOf[java.lang.Double],unit,options.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

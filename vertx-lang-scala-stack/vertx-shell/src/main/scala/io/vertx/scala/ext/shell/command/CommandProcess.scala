@@ -37,7 +37,7 @@ import io.vertx.core.Handler
   * The command process provides interaction with the process of the command provided by Vert.x Shell.
   */
 class CommandProcess(private val _asJava: Object) 
-    extends Tty(_asJava) {
+    extends Tty(_asJava)  {
 
 
 //io.vertx.core.Handler<java.lang.String>

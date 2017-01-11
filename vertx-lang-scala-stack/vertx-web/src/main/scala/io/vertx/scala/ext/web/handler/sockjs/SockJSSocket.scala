@@ -45,7 +45,7 @@ import io.vertx.scala.core.net.SocketAddress
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class SockJSSocket(private val _asJava: Object) 
-    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    extends  ReadStream[io.vertx.core.buffer.Buffer] 
     with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava

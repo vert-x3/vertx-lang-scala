@@ -36,7 +36,7 @@ import io.vertx.core.Handler
   * delay between attempts.
   */
 class NetClient(private val _asJava: Object) 
-    extends Measured {
+    extends  Measured {
 
   def asJava = _asJava
 
@@ -83,7 +83,7 @@ class NetClient(private val _asJava: Object)
    * @param port the port
    * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-    def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
+  def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

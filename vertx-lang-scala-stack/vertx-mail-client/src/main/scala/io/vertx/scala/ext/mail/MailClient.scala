@@ -62,7 +62,7 @@ class MailClient(private val _asJava: Object) {
    * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
    * @return will be called when the operation is finished or it fails (may be null to ignore the result)
    */
-    def sendMailFuture(email: MailMessage):scala.concurrent.Future[MailResult] = {
+  def sendMailFuture(email: MailMessage):scala.concurrent.Future[MailResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMailResult, MailResult](x => MailResult(x))
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -33,7 +33,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * 
   */
 class MessageProducer[T:TypeTag](private val _asJava: Object) 
-    extends WriteStream[T] {
+    extends  WriteStream[T] {
 
   def asJava = _asJava
 
@@ -121,7 +121,7 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     asJava.asInstanceOf[JMessageProducer[Object]].close()
   }
 
-    def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
+  def sendFuture[R:TypeTag](message: T):scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),promiseAndHandler._1)
     promiseAndHandler._2.future

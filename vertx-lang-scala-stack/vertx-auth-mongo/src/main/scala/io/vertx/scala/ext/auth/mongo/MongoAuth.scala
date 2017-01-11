@@ -37,7 +37,7 @@ import io.vertx.scala.ext.mongo.MongoClient
   * An extension of AuthProvider which is using  as store
   */
 class MongoAuth(private val _asJava: Object) 
-    extends AuthProvider(_asJava) {
+    extends AuthProvider(_asJava)  {
 
 
   /**
@@ -240,7 +240,7 @@ class MongoAuth(private val _asJava: Object)
    * @param permissions a list of permissions to be set
    * @return the ResultHandler will be provided with the id of the generated record
    */
-    def insertUserFuture(username: String,password: String,roles: scala.collection.mutable.Buffer[String],permissions: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
+  def insertUserFuture(username: String,password: String,roles: scala.collection.mutable.Buffer[String],permissions: scala.collection.mutable.Buffer[String]):scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],roles.map(x => x.asInstanceOf[java.lang.String]).asJava,permissions.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future

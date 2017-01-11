@@ -35,7 +35,7 @@ import io.vertx.core.{Vertx => JVertx}
   * It is a mutable command resolver.
   */
 class CommandRegistry(private val _asJava: Object) 
-    extends CommandResolver(_asJava) {
+    extends CommandResolver(_asJava)  {
 
 
   /**
@@ -106,7 +106,7 @@ class CommandRegistry(private val _asJava: Object)
    * @param command the command to register
    * @return notified when the command is registered
    */
-    def registerCommandFuture(command: Command):scala.concurrent.Future[Command] = {
+  def registerCommandFuture(command: Command):scala.concurrent.Future[Command] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand, Command](x => Command(x))
     asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -117,7 +117,7 @@ class CommandRegistry(private val _asJava: Object)
    * @param commands the commands to register
    * @return notified when the command is registered
    */
-    def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]):scala.concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
+  def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]):scala.concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x => x.asScala.map(x => Command(x)))
     asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -128,7 +128,7 @@ class CommandRegistry(private val _asJava: Object)
    * @param commandName the command name
    * @return notified when the command is unregistered
    */
-    def unregisterCommandFuture(commandName: String):scala.concurrent.Future[Unit] = {
+  def unregisterCommandFuture(commandName: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

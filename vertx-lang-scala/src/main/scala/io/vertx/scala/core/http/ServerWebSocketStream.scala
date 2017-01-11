@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
 class ServerWebSocketStream(private val _asJava: Object) 
-    extends ReadStream[ServerWebSocket] {
+    extends  ReadStream[ServerWebSocket] {
 
   def asJava = _asJava
 

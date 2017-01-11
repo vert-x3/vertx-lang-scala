@@ -31,7 +31,7 @@ import scala.collection.JavaConverters._
   * An auth handler that provides JWT Authentication support.
   */
 class JWTAuthHandler(private val _asJava: Object) 
-    extends AuthHandler {
+    extends  AuthHandler {
 
   def asJava = _asJava
 

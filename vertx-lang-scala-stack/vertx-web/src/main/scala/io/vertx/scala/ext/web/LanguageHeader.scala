@@ -29,8 +29,7 @@ import scala.collection.JavaConverters._
   * Delivers a more direct access to the individual elements of the header it represents
   */
 class LanguageHeader(private val _asJava: Object) 
-    extends ParsedHeaderValue 
-    with Locale(_asJava) {
+    extends Locale(_asJava) with ParsedHeaderValue {
 
 
   /**

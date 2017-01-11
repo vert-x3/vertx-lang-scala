@@ -203,7 +203,7 @@ class StompServer(private val _asJava: Object) {
    * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
    * @return the future to call with the result
    */
-    def listenFuture():scala.concurrent.Future[StompServer] = {
+  def listenFuture():scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
     asJava.asInstanceOf[JStompServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -215,7 +215,7 @@ class StompServer(private val _asJava: Object) {
    * @param port the port
    * @return the future to call with the result
    */
-    def listenFuture(port: Int):scala.concurrent.Future[StompServer] = {
+  def listenFuture(port: Int):scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -228,7 +228,7 @@ class StompServer(private val _asJava: Object) {
    * @param host the host / interface
    * @return the future to call with the result
    */
-    def listenFuture(port: Int,host: String):scala.concurrent.Future[StompServer] = {
+  def listenFuture(port: Int,host: String):scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -238,7 +238,7 @@ class StompServer(private val _asJava: Object) {
    * Closes the server.
    * @return future called once the server has been stopped
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JStompServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

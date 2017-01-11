@@ -32,7 +32,7 @@ import io.vertx.core.Handler
   * Represents a TCP server
   */
 class NetServer(private val _asJava: Object) 
-    extends Measured {
+    extends  Measured {
 
   def asJava = _asJava
 
@@ -173,7 +173,7 @@ class NetServer(private val _asJava: Object)
    * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
    * @return future that will be notified when listening or failed
    */
-    def listenFuture():scala.concurrent.Future[NetServer] = {
+  def listenFuture():scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -185,7 +185,7 @@ class NetServer(private val _asJava: Object)
    * @param host the host to listen on
    * @return future that will be notified when listening or failed
    */
-    def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
+  def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -196,7 +196,7 @@ class NetServer(private val _asJava: Object)
    * @param port the port to listen on
    * @return future that will be notified when listening or failed
    */
-    def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
+  def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -206,7 +206,7 @@ class NetServer(private val _asJava: Object)
    * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
    * @return the future
    */
-    def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture():scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

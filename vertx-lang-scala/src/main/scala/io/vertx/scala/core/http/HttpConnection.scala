@@ -306,7 +306,7 @@ class HttpConnection(private val _asJava: Object) {
    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
    * @return the future notified when the settings have been acknowledged by the remote endpoint
    */
-    def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -319,7 +319,7 @@ class HttpConnection(private val _asJava: Object) {
    * @param data the 8 bytes data of the frame
    * @return an async result future notified with pong reply or the failure
    */
-    def pingFuture(data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+  def pingFuture(data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JHttpConnection].ping(data,promiseAndHandler._1)
     promiseAndHandler._2.future

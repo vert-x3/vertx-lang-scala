@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
 class NetSocketStream(private val _asJava: Object) 
-    extends ReadStream[NetSocket] {
+    extends  ReadStream[NetSocket] {
 
   def asJava = _asJava
 

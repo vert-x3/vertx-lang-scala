@@ -35,7 +35,7 @@ import io.vertx.core.Handler
   * Please consult the documentation for a full explanation.
   */
 class BridgeEvent(private val _asJava: Object) 
-    extends Future[Boolean](_asJava) {
+    extends Future[Boolean](_asJava)  {
 
   private var cached_0:Handler[AsyncResult[Boolean]] = _
   private var cached_1:io.vertx.ext.web.handler.sockjs.BridgeEventType = _
@@ -132,7 +132,7 @@ class BridgeEvent(private val _asJava: Object)
     asJava.asInstanceOf[JBridgeEvent].getRawMessage()
   }
 
-  override   def setFuture():scala.concurrent.Future[Boolean] = {
+  def setFuture():scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JBridgeEvent].setHandler(promiseAndHandler._1)
     promiseAndHandler._2.future

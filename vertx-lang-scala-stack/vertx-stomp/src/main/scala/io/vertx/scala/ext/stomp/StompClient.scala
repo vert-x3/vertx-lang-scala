@@ -167,7 +167,7 @@ class StompClient(private val _asJava: Object) {
    * @param host the server host
    * @return future called with the connection result
    */
-    def connectFuture(port: Int,host: String):scala.concurrent.Future[StompClientConnection] = {
+  def connectFuture(port: Int,host: String):scala.concurrent.Future[StompClientConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection, StompClientConnection](x => StompClientConnection(x))
     asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -178,7 +178,7 @@ class StompClient(private val _asJava: Object) {
    * @param net the NET client to use
    * @return future called with the connection result
    */
-    def connectFuture(net: NetClient):scala.concurrent.Future[StompClientConnection] = {
+  def connectFuture(net: NetClient):scala.concurrent.Future[StompClientConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection, StompClientConnection](x => StompClientConnection(x))
     asJava.asInstanceOf[JStompClient].connect(net.asJava.asInstanceOf[JNetClient],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -191,7 +191,7 @@ class StompClient(private val _asJava: Object) {
    * @param net the NET client to use
    * @return future called with the connection result
    */
-    def connectFuture(port: Int,host: String,net: NetClient):scala.concurrent.Future[StompClientConnection] = {
+  def connectFuture(port: Int,host: String,net: NetClient):scala.concurrent.Future[StompClientConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection, StompClientConnection](x => StompClientConnection(x))
     asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],net.asJava.asInstanceOf[JNetClient],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -201,7 +201,7 @@ class StompClient(private val _asJava: Object) {
    * Connects to the server using the host and port configured in the client's options.
    * @return future called with the connection result
    */
-    def connectFuture():scala.concurrent.Future[StompClientConnection] = {
+  def connectFuture():scala.concurrent.Future[StompClientConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompClientConnection, StompClientConnection](x => StompClientConnection(x))
     asJava.asInstanceOf[JStompClient].connect(promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -42,7 +42,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class NetSocket(private val _asJava: Object) 
-    extends ReadStream[io.vertx.core.buffer.Buffer] 
+    extends  ReadStream[io.vertx.core.buffer.Buffer] 
     with WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
@@ -305,7 +305,7 @@ class NetSocket(private val _asJava: Object)
    * @param filename file name of the file to send
    * @return future
    */
-    def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
+  def sendFileFuture(filename: String):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -318,7 +318,7 @@ class NetSocket(private val _asJava: Object)
    * @param offset offset
    * @return future
    */
-    def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
+  def sendFileFuture(filename: String,offset: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -332,7 +332,7 @@ class NetSocket(private val _asJava: Object)
    * @param length length
    * @return future
    */
-    def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
+  def sendFileFuture(filename: String,offset: Long,length: Long):scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future

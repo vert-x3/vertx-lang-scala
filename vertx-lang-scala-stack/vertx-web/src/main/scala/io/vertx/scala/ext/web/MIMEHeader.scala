@@ -24,7 +24,7 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.web.{MIMEHeader => JMIMEHeader}
 
 class MIMEHeader(private val _asJava: Object) 
-    extends ParsedHeaderValue {
+    extends  ParsedHeaderValue {
 
   def asJava = _asJava
 
