@@ -12,11 +12,11 @@
   <modelVersion>4.0.0</modelVersion>
 
 
-  <artifactId>vertx-service-discovery-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-web-client-scala_${scala.build.version}</artifactId>
   <version>3.4.0-SNAPSHOT</version>
 
   <properties>
-    <vertx-module>vertx-service-discovery</vertx-module>
+    <vertx-module>vertx-web-client</vertx-module>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
@@ -24,45 +24,12 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client-scala_${scala.build.version}</artifactId>
-      <version>${stack.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>${vertx-module}</artifactId>
+      <artifactId>vertx-core</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-redis-client-scala_${scala.build.version}</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-jdbc-client-scala_${scala.build.version}</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client-scala_${scala.build.version}</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
-      <version>${stack.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <!-- TODO: this has to be a bug -->
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-groovy</artifactId>
+      <artifactId>vertx-rx-java</artifactId>
       <version>${stack.version}</version>
       <scope>provided</scope>
     </dependency>
@@ -72,6 +39,11 @@
       <version>${stack.version}</version>
       <scope>provided</scope>
       <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>${vertx-module}</artifactId>
+      <version>${stack.version}</version>
     </dependency>
   </dependencies>
 
@@ -106,7 +78,7 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>io.vertx.scala.ext.sql;version=${project.version}
+            <Export-Package>io.vertx.scala.ext.auth;version=${project.version}
             </Export-Package>
             <Import-Package>*</Import-Package>
             <Include-Resource>{maven-resources}</Include-Resource>

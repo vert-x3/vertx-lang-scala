@@ -322,6 +322,14 @@
     <module>vertx-auth-jwt</module>
     <module>vertx-auth-jdbc</module>
     <module>vertx-web</module>
+    <module>vertx-web-client</module>
+    <module>vertx-sockjs-service-proxy</module>
+    <module>vertx-web-templ-freemarker</module>
+    <module>vertx-web-templ-handlebars</module>
+    <module>vertx-web-templ-jade</module>
+    <module>vertx-web-templ-mvel</module>
+    <module>vertx-web-templ-pebble</module>
+    <module>vertx-web-templ-thymeleaf</module>
     <module>vertx-mysql-postgresql-client</module>
     <module>vertx-mail-client</module>
     <module>vertx-rabbitmq-client</module>
