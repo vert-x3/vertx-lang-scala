@@ -57,31 +57,41 @@ object EventBusService{
 
   /**
     * Lookup for a service record and if found, retrieve it and return the service object (used to consume the service).
-    * This is a convenient method to avoid explicit lookup and then retrieval of the service.
-    * @param discovery the service discovery instance
-    * @param filter the filter to select the service
+    * This is a convenient method to avoid explicit lookup and then retrieval of the service. This method requires to
+    * have the `clientClass` set with the expected set of client. This is important for usages not using Java so
+    * you can pass the expected type.
+    * @param discovery the service discovery
+    * @param filter the filter
+    * @param clientClass the client class
+    * @return `null` - do not use
     */
-  def getProxy[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    JEventBusService.getProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
-  }
-
-  def getProxy[T:TypeTag](discovery: ServiceDiscovery,serviceInterface: String,proxyInterface: String,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    JEventBusService.getProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],serviceInterface.asInstanceOf[java.lang.String],proxyInterface.asInstanceOf[java.lang.String],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
-  }
-
-  def getProxy[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,proxyClass: String,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    JEventBusService.getProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,proxyClass.asInstanceOf[java.lang.String],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
+  def getServiceProxy[T:TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]):T = {
+    toScala[T](JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
   }
 
   /**
     * Lookup for a service record and if found, retrieve it and return the service object (used to consume the service).
-    * This is a convenient method to avoid explicit lookup and then retrieval of the service. A filter based on the
-    * request interface is used.
-    * @param discovery the service discovery instance
-    * @param itf the service interface
+    * This is a convenient method to avoid explicit lookup and then retrieval of the service. This method requires to
+    * have the `clientClass` set with the expected set of client. This is important for usages not using Java so
+    * you can pass the expected type.
+    * @param discovery the service discovery
+    * @param filter the filter as json object
+    * @param clientClass the client class
+    * @return `null` - do not use
     */
-  def getProxy[T:TypeTag](discovery: ServiceDiscovery,itf: String,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    JEventBusService.getProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],itf.asInstanceOf[java.lang.String],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
+  def getServiceProxyWithJsonFilter[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]):T = {
+    toScala[T](JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
+  }
+
+  /**
+    * Creates a record based on the parameters.
+    * @param name the service name
+    * @param address the address
+    * @param classname the payload class
+    * @return the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    */
+  def createRecord(name: String,address: String,classname: String):Record = {
+    Record(JEventBusService.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],classname.asInstanceOf[java.lang.String]))
   }
 
 }

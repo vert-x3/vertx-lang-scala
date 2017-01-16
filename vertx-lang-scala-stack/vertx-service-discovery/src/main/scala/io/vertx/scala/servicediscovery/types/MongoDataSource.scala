@@ -63,6 +63,17 @@ object MongoDataSource{
   }
 
   /**
+    * Convenient method that looks for a Mongo datasource source and provides the configured
+    * [[io.vertx.scala.ext.mongo.MongoClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter
+    */
+  def getMongoClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MongoClient]]):Unit = {
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
+  }
+
+  /**
     * Convenient method that looks for a Mongo datasource source and provides the configured [[io.vertx.scala.ext.mongo.MongoClient]]. The
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance

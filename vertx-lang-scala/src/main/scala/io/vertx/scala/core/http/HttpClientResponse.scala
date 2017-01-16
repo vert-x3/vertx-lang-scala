@@ -19,18 +19,19 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
-import scala.collection.JavaConverters._
 import io.vertx.core.Handler
+import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 
 /**
   * Represents a client-side HTTP response.
@@ -49,6 +50,7 @@ class HttpClientResponse(private val _asJava: Object)
   private var cached_1:MultiMap = _
   private var cached_2:scala.collection.mutable.Buffer[String] = _
   private var cached_3:NetSocket = _
+  private var cached_4:HttpClientRequest = _
 
   /**
     * @return the headers
@@ -98,6 +100,17 @@ class HttpClientResponse(private val _asJava: Object)
       cached_3 = NetSocket(tmp)
     }
     cached_3
+  }
+
+  /**
+    * @return the corresponding request
+    */
+  def request():HttpClientRequest = {
+    if(cached_4 == null) {
+      var tmp = asJava.asInstanceOf[JHttpClientResponse].request()
+      cached_4 = HttpClientRequest(tmp)
+    }
+    cached_4
   }
 
   override def resume():HttpClientResponse = {

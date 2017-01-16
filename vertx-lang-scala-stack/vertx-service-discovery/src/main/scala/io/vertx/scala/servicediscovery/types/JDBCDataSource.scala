@@ -59,11 +59,32 @@ object JDBCDataSource{
     * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
+    * @param filter The filter (must not be `null`)
+    */
+  def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  }
+
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
     */
   def getJDBCClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
     JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  }
+
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, must not be `null`
+    * @param consumerConfiguration the consumer configuration
+    */
+  def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},consumerConfiguration,{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
   }
 
 }

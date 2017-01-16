@@ -347,7 +347,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * 
    * This method returns the first matching record.
    * @param filter the filter.
-   * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
+   * @return future called when the lookup has been completed. When there are no matching record, the operation succeeds, but the async result has no result (`null`).
    */
   def getRecordFuture(filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
