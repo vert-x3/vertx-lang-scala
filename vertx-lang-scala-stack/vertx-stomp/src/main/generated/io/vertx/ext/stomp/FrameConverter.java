@@ -37,12 +37,10 @@ public class FrameConverter {
       obj.setDestination((String)json.getValue("destination"));
     }
     if (json.getValue("headers") instanceof JsonObject) {
-      java.util.Map<String, java.lang.String> map = new java.util.LinkedHashMap<>();
       json.getJsonObject("headers").forEach(entry -> {
         if (entry.getValue() instanceof String)
-          map.put(entry.getKey(), (String)entry.getValue());
+          obj.addHeader(entry.getKey(), (String)entry.getValue());
       });
-      obj.setHeaders(map);
     }
     if (json.getValue("id") instanceof String) {
       obj.setId((String)json.getValue("id"));

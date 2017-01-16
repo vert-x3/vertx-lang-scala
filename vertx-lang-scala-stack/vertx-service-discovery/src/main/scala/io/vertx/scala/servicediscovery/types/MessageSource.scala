@@ -86,4 +86,14 @@ object MessageSource{
     JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 
+  /**
+    * Convenient method that looks for a message source and provides the configured . The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, must not be `null`
+    */
+  def getConsumer[T:TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]):Unit = {
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
+  }
+
 }

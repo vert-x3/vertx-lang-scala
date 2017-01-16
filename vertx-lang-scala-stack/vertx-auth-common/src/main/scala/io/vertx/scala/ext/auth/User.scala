@@ -34,19 +34,16 @@ import io.vertx.core.Handler
 class User(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:User = _
-  private var cached_1:User = _
 
   /**
     * Is the user authorised to
     * @param authority the authority - what this really means is determined by the specific implementation. It might represent a permission to access a resource e.g. `printers:printer34` or it might represent authority to a role in a roles based model, e.g. `role:admin`.
     * @return the User to enable fluent use
     */
+//java.lang.String
+//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Boolean>>
   def isAuthorised(authority: String,resultHandler: Handler[AsyncResult[Boolean]]):User = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
-      cached_0 = User(tmp)
-    }
+    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
@@ -56,10 +53,7 @@ class User(private val _asJava: Object) {
     * @return the User to enable fluent use
     */
   def clearCache():User = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JUser].clearCache()
-      cached_1 = User(tmp)
-    }
+    asJava.asInstanceOf[JUser].clearCache()
     this
   }
 
