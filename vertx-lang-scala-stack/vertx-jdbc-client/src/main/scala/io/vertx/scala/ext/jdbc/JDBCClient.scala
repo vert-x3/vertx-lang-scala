@@ -40,7 +40,6 @@ class JDBCClient(private val _asJava: Object) {
     * Returns a connection that can be used to perform SQL operations on. It's important to remember
     * to close the connection when you are done, so it is returned to the pool.
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.sql.SQLConnection>>
   def getConnection(handler: Handler[AsyncResult[SQLConnection]]):JDBCClient = {
     asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection,SQLConnection](x, a => SQLConnection(a)))})
     this

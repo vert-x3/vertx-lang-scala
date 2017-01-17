@@ -73,10 +73,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param host the host address of the remote peer
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.buffer.Buffer
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def send(packet: io.vertx.core.buffer.Buffer,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].send(packet,port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -90,10 +86,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param host the host address of the remote peer
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def send(str: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -108,11 +100,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param host the host address of the remote peer
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def send(str: String,enc: String,port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -124,8 +111,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param multicastAddress the address of the multicast group to join
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def listenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -139,10 +124,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param source the address of the source for which we will listen for multicast packets
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def listenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -154,8 +135,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param multicastAddress the address of the multicast group to leave
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def unlistenMulticastGroup(multicastAddress: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -169,10 +148,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param source the address of the source for which we will listen for multicast packets
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def unlistenMulticastGroup(multicastAddress: String,networkInterface: String,source: scala.Option[String],handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],source.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null),{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -185,9 +160,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def blockMulticastGroup(multicastAddress: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -201,10 +173,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param sourceToBlock the source address which should be blocked. You will not receive an multicast packets for it anymore.
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def blockMulticastGroup(multicastAddress: String,networkInterface: String,sourceToBlock: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String],networkInterface.asInstanceOf[java.lang.String],sourceToBlock.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -216,9 +184,6 @@ class DatagramSocket(private val _asJava: Object)
     * @param host the host to listen on
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.datagram.DatagramSocket>>
   def listen(port: Int,host: String,handler: Handler[AsyncResult[DatagramSocket]]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
     this
@@ -234,19 +199,16 @@ class DatagramSocket(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.datagram.DatagramPacket>
   override def handler(handler: Handler[DatagramPacket]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].handler({x: JDatagramPacket => handler.handle(DatagramPacket(x))})
     this
   }
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this

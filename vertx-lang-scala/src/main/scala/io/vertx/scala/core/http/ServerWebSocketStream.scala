@@ -34,13 +34,11 @@ class ServerWebSocketStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.http.ServerWebSocket>
   override def handler(handler: Handler[ServerWebSocket]):ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].handler({x: JServerWebSocket => handler.handle(ServerWebSocket(x))})
     this
@@ -56,7 +54,6 @@ class ServerWebSocketStream(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this

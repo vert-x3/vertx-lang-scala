@@ -34,13 +34,11 @@ class NetSocketStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.net.NetSocket>
   override def handler(handler: Handler[NetSocket]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].handler({x: JNetSocket => handler.handle(NetSocket(x))})
     this
@@ -56,7 +54,6 @@ class NetSocketStream(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this

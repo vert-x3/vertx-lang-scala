@@ -80,25 +80,21 @@ class HttpServerResponse(private val _asJava: Object)
     cached_1
   }
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def write(data: io.vertx.core.buffer.Buffer):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].write(data)
     this
   }
 
-//int
   override def setWriteQueueMaxSize(maxSize: Int):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].drainHandler({x: Void => handler.handle(x)})
     this
@@ -109,7 +105,6 @@ class HttpServerResponse(private val _asJava: Object)
     * to the code will be looked-up and used.
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def setStatusCode(statusCode: Int):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].setStatusCode(statusCode.asInstanceOf[java.lang.Integer])
     this
@@ -119,7 +114,6 @@ class HttpServerResponse(private val _asJava: Object)
     * Set the status message
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setStatusMessage(statusMessage: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].setStatusMessage(statusMessage.asInstanceOf[java.lang.String])
     this
@@ -139,7 +133,6 @@ class HttpServerResponse(private val _asJava: Object)
     * An HTTP chunked response is typically used when you do not know the total size of the request body up front.
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setChunked(chunked: Boolean):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].setChunked(chunked.asInstanceOf[java.lang.Boolean])
     this
@@ -151,8 +144,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param value the header value.
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def putHeader(name: String,value: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
@@ -164,8 +155,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param value the trailer value
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def putTrailer(name: String,value: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].putTrailer(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
@@ -177,7 +166,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<java.lang.Void>
   def closeHandler(handler: Handler[Unit]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].closeHandler({x: Void => handler.handle(x)})
     this
@@ -189,8 +177,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param enc the encoding to use
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def write(chunk: String,enc: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
     this
@@ -201,7 +187,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param chunk the string to write
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def write(chunk: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String])
     this
@@ -222,7 +207,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def sendFile(filename: String):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String])
     this
@@ -235,8 +219,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param offset offset to start serving from
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//long
   def sendFile(filename: String,offset: Long):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long])
     this
@@ -253,9 +235,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param length length to serve to
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//long
-//long
   def sendFile(filename: String,offset: Long,length: Long):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long])
     this
@@ -267,8 +246,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param filename path to the file to serve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -281,9 +258,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param offset the offset to serve from
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//long
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,offset: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -297,10 +271,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param length the length to serve to
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//long
-//long
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def sendFile(filename: String,offset: Long,length: Long,resultHandler: Handler[AsyncResult[Unit]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -312,7 +282,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<java.lang.Void>
   def headersEndHandler(handler: Handler[Unit]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].headersEndHandler({x: Void => handler.handle(x)})
     this
@@ -326,7 +295,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<java.lang.Void>
   def bodyEndHandler(handler: Handler[Unit]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].bodyEndHandler({x: Void => handler.handle(x)})
     this
@@ -335,9 +303,6 @@ class HttpServerResponse(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
     */
-//io.vertx.core.http.HttpMethod
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.http.HttpServerResponse>>
   def push(method: io.vertx.core.http.HttpMethod,path: String,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
     this
@@ -359,11 +324,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param headers the headers of the promised request
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.http.HttpMethod
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.http.HttpServerResponse>>
   def push(method: io.vertx.core.http.HttpMethod,host: String,path: String,headers: MultiMap,handler: Handler[AsyncResult[HttpServerResponse]]):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
     this
@@ -378,9 +338,6 @@ class HttpServerResponse(private val _asJava: Object)
     * @param payload the frame payload
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//int
-//io.vertx.core.buffer.Buffer
   def writeCustomFrame(`type`: Int,flags: Int,payload: io.vertx.core.buffer.Buffer):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer],flags.asInstanceOf[java.lang.Integer],payload)
     this
@@ -390,7 +347,6 @@ class HttpServerResponse(private val _asJava: Object)
     * Like [[io.vertx.scala.core.http.HttpServerResponse#writeCustomFrame]] but with an [[io.vertx.scala.core.http.HttpFrame]].
     * @param frame the frame to write
     */
-//io.vertx.core.http.HttpFrame
   def writeCustomFrame(frame: HttpFrame):HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
     this

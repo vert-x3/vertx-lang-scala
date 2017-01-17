@@ -34,8 +34,6 @@ class Session(private val _asJava: Object) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
   def put(key: String,obj: AnyRef):Session = {
     asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String],obj)
     this

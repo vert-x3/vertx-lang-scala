@@ -78,7 +78,6 @@ class HttpServer(private val _asJava: Object)
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to this handler.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.http.HttpServerRequest>
   def requestHandler(handler: Handler[HttpServerRequest]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].requestHandler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
     this
@@ -88,7 +87,6 @@ class HttpServer(private val _asJava: Object)
     * Set a connection handler for the server.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.http.HttpConnection>
   def connectionHandler(handler: Handler[HttpConnection]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
@@ -99,7 +97,6 @@ class HttpServer(private val _asJava: Object)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.http.ServerWebSocket>
   def websocketHandler(handler: Handler[ServerWebSocket]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].websocketHandler({x: JServerWebSocket => handler.handle(ServerWebSocket(x))})
     this
@@ -126,8 +123,6 @@ class HttpServer(private val _asJava: Object)
     * @param host the host to listen on
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
   def listen(port: Int,host: String):HttpServer = {
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
@@ -139,9 +134,6 @@ class HttpServer(private val _asJava: Object)
     * @param port the port to listen on
     * @param host the host to listen on
     */
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.http.HttpServer>>
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
@@ -153,7 +145,6 @@ class HttpServer(private val _asJava: Object)
     * @param port the port to listen on
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def listen(port: Int):HttpServer = {
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer])
     this
@@ -163,8 +154,6 @@ class HttpServer(private val _asJava: Object)
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     * @param port the port to listen on
     */
-//int
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.http.HttpServer>>
   def listen(port: Int,listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this
@@ -173,7 +162,6 @@ class HttpServer(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.core.http.HttpServer#listen]] but supplying a handler that will be called when the server is actually listening (or has failed).
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.http.HttpServer>>
   def listen(listenHandler: Handler[AsyncResult[HttpServer]]):HttpServer = {
     asJava.asInstanceOf[JHttpServer].listen({x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer,HttpServer](x, a => HttpServer(a)))})
     this

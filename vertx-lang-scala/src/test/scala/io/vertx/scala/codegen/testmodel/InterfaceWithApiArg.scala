@@ -29,7 +29,6 @@ class InterfaceWithApiArg(private val _asJava: Object)
     extends GenericRefedInterface[RefedInterface1](_asJava)  {
 
 
-//io.vertx.codegen.testmodel.RefedInterface1
   override def setValue(value: RefedInterface1):GenericRefedInterface[RefedInterface1] = {
     asJava.asInstanceOf[JInterfaceWithApiArg].setValue(value.asJava.asInstanceOf[JRefedInterface1])
     this

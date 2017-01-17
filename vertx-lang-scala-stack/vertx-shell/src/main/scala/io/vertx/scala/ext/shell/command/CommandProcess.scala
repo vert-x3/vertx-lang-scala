@@ -40,7 +40,6 @@ class CommandProcess(private val _asJava: Object)
     extends Tty(_asJava)  {
 
 
-//io.vertx.core.Handler<java.lang.String>
   override def stdinHandler(handler: Handler[String]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
@@ -52,7 +51,6 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-//io.vertx.core.Handler<java.lang.Void>
   def interruptHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].interruptHandler({x: Void => handler.handle(x)})
     this
@@ -64,7 +62,6 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-//io.vertx.core.Handler<java.lang.Void>
   def suspendHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].suspendHandler({x: Void => handler.handle(x)})
     this
@@ -76,7 +73,6 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-//io.vertx.core.Handler<java.lang.Void>
   def resumeHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].resumeHandler({x: Void => handler.handle(x)})
     this
@@ -88,7 +84,6 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the end handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<java.lang.Void>
   def endHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].endHandler({x: Void => handler.handle(x)})
     this
@@ -99,7 +94,6 @@ class CommandProcess(private val _asJava: Object)
     * @param data the text
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   override def write(data: String):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].write(data.asInstanceOf[java.lang.String])
     this
@@ -110,7 +104,6 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the background handler
     * @return this command
     */
-//io.vertx.core.Handler<java.lang.Void>
   def backgroundHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].backgroundHandler({x: Void => handler.handle(x)})
     this
@@ -121,13 +114,11 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the foreground handler
     * @return this command
     */
-//io.vertx.core.Handler<java.lang.Void>
   def foregroundHandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].foregroundHandler({x: Void => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def resizehandler(handler: Handler[Unit]):CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].resizehandler({x: Void => handler.handle(x)})
     this

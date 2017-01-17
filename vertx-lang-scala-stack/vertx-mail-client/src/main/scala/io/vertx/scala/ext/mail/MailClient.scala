@@ -43,8 +43,6 @@ class MailClient(private val _asJava: Object) {
     * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
     * @return this MailClient instance so the method can be used fluently
     */
-//io.vertx.ext.mail.MailMessage
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mail.MailResult>>
   def sendMail(email: MailMessage,resultHandler: Handler[AsyncResult[MailResult]]):MailClient = {
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava,{x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult,MailResult](x, a => MailResult(a)))})
     this

@@ -49,10 +49,6 @@ class OAuth2Auth(private val _asJava: Object)
     * @param params parameters
     * @return self
     */
-//io.vertx.core.http.HttpMethod
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def api(method: io.vertx.core.http.HttpMethod,path: String,params: io.vertx.core.json.JsonObject,handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):OAuth2Auth = {
     asJava.asInstanceOf[JOAuth2Auth].api(method,path.asInstanceOf[java.lang.String],params,{x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -63,8 +59,6 @@ class OAuth2Auth(private val _asJava: Object)
     * @param token the access token (base64 string)
     * @return self
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.auth.oauth2.AccessToken>>
   def decodeToken(token: String,handler: Handler[AsyncResult[AccessToken]]):OAuth2Auth = {
     asJava.asInstanceOf[JOAuth2Auth].decodeToken(token.asInstanceOf[java.lang.String],{x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken,AccessToken](x, a => AccessToken(a)))})
     this
@@ -76,8 +70,6 @@ class OAuth2Auth(private val _asJava: Object)
     * @param token the access token (base64 string)
     * @return self
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.auth.oauth2.AccessToken>>
   def introspectToken(token: String,handler: Handler[AsyncResult[AccessToken]]):OAuth2Auth = {
     asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String],{x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken,AccessToken](x, a => AccessToken(a)))})
     this
@@ -90,9 +82,6 @@ class OAuth2Auth(private val _asJava: Object)
     * @param tokenType hint to the token type e.g.: `access_token`
     * @return self
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def introspectToken(token: String,tokenType: String,handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):OAuth2Auth = {
     asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String],tokenType.asInstanceOf[java.lang.String],{x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this

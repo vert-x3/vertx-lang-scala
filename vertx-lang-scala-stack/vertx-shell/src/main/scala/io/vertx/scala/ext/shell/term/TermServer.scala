@@ -48,7 +48,6 @@ class TermServer(private val _asJava: Object) {
     * @param handler the term handler
     * @return this object
     */
-//io.vertx.core.Handler<io.vertx.ext.shell.term.Term>
   def termHandler(handler: Handler[Term]):TermServer = {
     asJava.asInstanceOf[JTermServer].termHandler({x: JTerm => handler.handle(Term(x))})
     this
@@ -60,7 +59,6 @@ class TermServer(private val _asJava: Object) {
     * @param provider the auth to use
     * @return this object
     */
-//io.vertx.ext.auth.AuthProvider
   def authProvider(provider: AuthProvider):TermServer = {
     asJava.asInstanceOf[JTermServer].authProvider(provider.asJava.asInstanceOf[JAuthProvider])
     this
@@ -79,7 +77,6 @@ class TermServer(private val _asJava: Object) {
     * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
     * @return this object
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.shell.term.TermServer>>
   def listen(listenHandler: Handler[AsyncResult[TermServer]]):TermServer = {
     asJava.asInstanceOf[JTermServer].listen({x: AsyncResult[JTermServer] => listenHandler.handle(AsyncResultWrapper[JTermServer,TermServer](x, a => TermServer(a)))})
     this

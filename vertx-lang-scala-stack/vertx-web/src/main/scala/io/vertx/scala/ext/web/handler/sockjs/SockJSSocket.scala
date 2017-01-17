@@ -50,13 +50,11 @@ class SockJSSocket(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
   override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].handler({x: Buffer => handler.handle(x)})
     this
@@ -72,25 +70,21 @@ class SockJSSocket(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def write(data: io.vertx.core.buffer.Buffer):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].write(data)
     this
   }
 
-//int
   override def setWriteQueueMaxSize(maxSize: Int):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].drainHandler({x: Void => handler.handle(x)})
     this

@@ -76,13 +76,11 @@ class ServerWebSocket(private val _asJava: Object)
     cached_2
   }
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
   override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].handler({x: Buffer => handler.handle(x)})
     this
@@ -98,61 +96,51 @@ class ServerWebSocket(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def write(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].write(data)
     this
   }
 
-//int
   override def setWriteQueueMaxSize(maxSize: Int):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
-//io.vertx.core.http.WebSocketFrame
   override def writeFrame(frame: WebSocketFrame):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
-//java.lang.String
   override def writeFinalTextFrame(text: String):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data)
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def writeBinaryMessage(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def closeHandler(handler: Handler[Unit]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.http.WebSocketFrame>
   override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this

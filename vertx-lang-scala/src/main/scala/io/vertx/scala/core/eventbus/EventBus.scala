@@ -54,8 +54,6 @@ class EventBus(private val _asJava: Object)
     * @param message the message, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
   def send(address: String,message: AnyRef):EventBus = {
     asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],message)
     this
@@ -68,9 +66,6 @@ class EventBus(private val _asJava: Object)
     * @param message the message, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.eventbus.Message<T>>>
   def send[T:TypeTag](address: String,message: AnyRef,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
     this
@@ -83,9 +78,6 @@ class EventBus(private val _asJava: Object)
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
-//io.vertx.core.eventbus.DeliveryOptions
   def send(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
     asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String],message,options.asJava)
     this
@@ -99,10 +91,6 @@ class EventBus(private val _asJava: Object)
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
-//io.vertx.core.eventbus.DeliveryOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.eventbus.Message<T>>>
   def send[T:TypeTag](address: String,message: AnyRef,options: DeliveryOptions,replyHandler: Handler[AsyncResult[Message[T]]]):EventBus = {
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String],message,options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
     this
@@ -115,8 +103,6 @@ class EventBus(private val _asJava: Object)
     * @param message the message, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
   def publish(address: String,message: AnyRef):EventBus = {
     asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],message)
     this
@@ -129,9 +115,6 @@ class EventBus(private val _asJava: Object)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
-//io.vertx.core.eventbus.DeliveryOptions
   def publish(address: String,message: AnyRef,options: DeliveryOptions):EventBus = {
     asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String],message,options.asJava)
     this

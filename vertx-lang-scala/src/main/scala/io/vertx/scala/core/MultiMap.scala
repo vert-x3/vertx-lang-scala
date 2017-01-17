@@ -38,8 +38,6 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value being added
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def add(name: String,value: String):MultiMap = {
     asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
@@ -49,7 +47,6 @@ class MultiMap(private val _asJava: Object) {
     * Adds all the entries from another MultiMap to this one
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.MultiMap
   def addAll(map: MultiMap):MultiMap = {
     asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
     this
@@ -63,8 +60,6 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def set(name: String,value: String):MultiMap = {
     asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
@@ -74,7 +69,6 @@ class MultiMap(private val _asJava: Object) {
     * Cleans this instance.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.MultiMap
   def setAll(map: MultiMap):MultiMap = {
     asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
     this
@@ -85,7 +79,6 @@ class MultiMap(private val _asJava: Object) {
     * @param name The name of the value to remove
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def remove(name: String):MultiMap = {
     asJava.asInstanceOf[JMultiMap].remove(name.asInstanceOf[java.lang.String])
     this

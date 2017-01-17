@@ -46,7 +46,6 @@ class StompServer(private val _asJava: Object) {
     * @param handler the handler
     * @return the current StompServer
     */
-//io.vertx.ext.stomp.StompServerHandler
   def handler(handler: StompServerHandler):StompServer = {
     asJava.asInstanceOf[JStompServer].handler(handler.asJava.asInstanceOf[JStompServerHandler])
     this
@@ -57,7 +56,6 @@ class StompServer(private val _asJava: Object) {
     * @param port the port
     * @return the current StompServer
     */
-//int
   def listen(port: Int):StompServer = {
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer])
     this
@@ -69,8 +67,6 @@ class StompServer(private val _asJava: Object) {
     * @param host the interface
     * @return the current StompServer
     */
-//int
-//java.lang.String
   def listen(port: Int,host: String):StompServer = {
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
@@ -90,7 +86,6 @@ class StompServer(private val _asJava: Object) {
     * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
     * @return the current StompServer
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.stomp.StompServer>>
   def listen(handler: Handler[AsyncResult[StompServer]]):StompServer = {
     asJava.asInstanceOf[JStompServer].listen({x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
     this
@@ -102,8 +97,6 @@ class StompServer(private val _asJava: Object) {
     * @param port the port
     * @return the current StompServer
     */
-//int
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.stomp.StompServer>>
   def listen(port: Int,handler: Handler[AsyncResult[StompServer]]):StompServer = {
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
     this
@@ -116,9 +109,6 @@ class StompServer(private val _asJava: Object) {
     * @param host the host / interface
     * @return the current StompServer
     */
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.stomp.StompServer>>
   def listen(port: Int,host: String,handler: Handler[AsyncResult[StompServer]]):StompServer = {
     asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
     this
@@ -130,7 +120,6 @@ class StompServer(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current StompServer
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def writingFrameHandler(handler: Handler[ServerFrame]):StompServer = {
     asJava.asInstanceOf[JStompServer].writingFrameHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this

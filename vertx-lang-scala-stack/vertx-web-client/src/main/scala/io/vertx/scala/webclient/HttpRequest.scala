@@ -84,7 +84,6 @@ class HttpRequest(private val _asJava: Object) {
     * Configure the request to use a new method `value`.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.http.HttpMethod
   def method(value: io.vertx.core.http.HttpMethod):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].method(value)
     this
@@ -94,7 +93,6 @@ class HttpRequest(private val _asJava: Object) {
     * Configure the request to use a new port `value`.
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def port(value: Int):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].port(value.asInstanceOf[java.lang.Integer])
     this
@@ -104,7 +102,6 @@ class HttpRequest(private val _asJava: Object) {
     * Configure the request to use a new host `value`.
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def host(value: String):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].host(value.asInstanceOf[java.lang.String])
     this
@@ -117,7 +114,6 @@ class HttpRequest(private val _asJava: Object) {
     * any parameters previously set.
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def uri(value: String):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].uri(value.asInstanceOf[java.lang.String])
     this
@@ -129,8 +125,6 @@ class HttpRequest(private val _asJava: Object) {
     * @param value the header value
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def putHeader(name: String,value: String):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
@@ -144,7 +138,6 @@ class HttpRequest(private val _asJava: Object) {
     * @param value The quantity of time in milliseconds.
     * @return a reference to this, so the API can be used fluently
     */
-//long
   def timeout(value: Long):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].timeout(value.asInstanceOf[java.lang.Long])
     this
@@ -156,8 +149,6 @@ class HttpRequest(private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def addQueryParam(paramName: String,paramValue: String):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].addQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this
@@ -169,8 +160,6 @@ class HttpRequest(private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
   def setQueryParam(paramName: String,paramValue: String):HttpRequest = {
     asJava.asInstanceOf[JHttpRequest].setQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this

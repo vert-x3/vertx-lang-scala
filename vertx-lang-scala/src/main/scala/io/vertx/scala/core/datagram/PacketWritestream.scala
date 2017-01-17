@@ -34,25 +34,21 @@ class PacketWritestream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.buffer.Buffer
   override def write(data: io.vertx.core.buffer.Buffer):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].write(data)
     this
   }
 
-//int
   override def setWriteQueueMaxSize(maxSize: Int):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):PacketWritestream = {
     asJava.asInstanceOf[JPacketWritestream].drainHandler({x: Void => handler.handle(x)})
     this

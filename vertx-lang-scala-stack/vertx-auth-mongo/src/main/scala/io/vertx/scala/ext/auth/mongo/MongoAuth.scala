@@ -45,7 +45,6 @@ class MongoAuth(private val _asJava: Object)
     * @param collectionName the name of the collection to be used for storing and reading user data
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setCollectionName(collectionName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setCollectionName(collectionName.asInstanceOf[java.lang.String])
     this
@@ -56,7 +55,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setUsernameField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setUsernameField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -67,7 +65,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setPasswordField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setPasswordField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -79,7 +76,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setRoleField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setRoleField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -91,7 +87,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setPermissionField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setPermissionField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -103,7 +98,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setUsernameCredentialField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setUsernameCredentialField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -115,7 +109,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setPasswordCredentialField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setPasswordCredentialField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -127,7 +120,6 @@ class MongoAuth(private val _asJava: Object)
     * @param fieldName the name of the field to be used
     * @return the current instance itself for fluent calls
     */
-//java.lang.String
   def setSaltField(fieldName: String):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setSaltField(fieldName.asInstanceOf[java.lang.String])
     this
@@ -138,7 +130,6 @@ class MongoAuth(private val _asJava: Object)
     * @param hashStrategy the HashStrategy to be set
     * @return the current instance itself for fluent calls
     */
-//io.vertx.ext.auth.mongo.HashStrategy
   def setHashStrategy(hashStrategy: HashStrategy):MongoAuth = {
     asJava.asInstanceOf[JMongoAuth].setHashStrategy(hashStrategy.asJava.asInstanceOf[JHashStrategy])
     this

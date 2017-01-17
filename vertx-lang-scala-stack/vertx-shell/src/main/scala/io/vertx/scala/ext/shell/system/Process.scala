@@ -63,7 +63,6 @@ class Process(private val _asJava: Object) {
     * @param tty the process tty
     * @return this object
     */
-//io.vertx.ext.shell.term.Tty
   def setTty(tty: Tty):Process = {
     asJava.asInstanceOf[JProcess].setTty(tty.asJava.asInstanceOf[JTty])
     this
@@ -74,7 +73,6 @@ class Process(private val _asJava: Object) {
     * @param session the process session
     * @return this object
     */
-//io.vertx.ext.shell.session.Session
   def setSession(session: Session):Process = {
     asJava.asInstanceOf[JProcess].setSession(session.asJava.asInstanceOf[JSession])
     this
@@ -85,7 +83,6 @@ class Process(private val _asJava: Object) {
     * @param handler the handler called when the process terminates.
     * @return this object
     */
-//io.vertx.core.Handler<java.lang.Integer>
   def terminatedHandler(handler: Handler[Int]):Process = {
     asJava.asInstanceOf[JProcess].terminatedHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
     this

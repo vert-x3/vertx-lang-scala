@@ -51,9 +51,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param document the document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def save(collection: String,document: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[String]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].save(collection.asInstanceOf[java.lang.String],document,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -67,10 +64,6 @@ class MongoClient(private val _asJava: Object) {
     * @param document the document
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def saveWithOptions(collection: String,document: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[String]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].saveWithOptions(collection.asInstanceOf[java.lang.String],document,writeOption,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -83,9 +76,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param document the document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def insert(collection: String,document: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[String]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].insert(collection.asInstanceOf[java.lang.String],document,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -99,10 +89,6 @@ class MongoClient(private val _asJava: Object) {
     * @param document the document
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def insertWithOptions(collection: String,document: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[String]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].insertWithOptions(collection.asInstanceOf[java.lang.String],document,writeOption,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -114,10 +100,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match the documents
     * @param update used to describe how the documents will be updated
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def update(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].update(collection.asInstanceOf[java.lang.String],query,update,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -129,10 +111,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match the documents
     * @param update used to describe how the documents will be updated
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientUpdateResult>>
   def updateCollection(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].updateCollection(collection.asInstanceOf[java.lang.String],query,update,{x: AsyncResult[JMongoClientUpdateResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult,MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))})
     this
@@ -145,11 +123,6 @@ class MongoClient(private val _asJava: Object) {
     * @param update used to describe how the documents will be updated
     * @param options options to configure the updatesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def updateWithOptions(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,options: UpdateOptions,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].updateWithOptions(collection.asInstanceOf[java.lang.String],query,update,options.asJava,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -162,11 +135,6 @@ class MongoClient(private val _asJava: Object) {
     * @param update used to describe how the documents will be updated
     * @param options options to configure the updatesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientUpdateResult>>
   def updateCollectionWithOptions(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,options: UpdateOptions,resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].updateCollectionWithOptions(collection.asInstanceOf[java.lang.String],query,update,options.asJava,{x: AsyncResult[JMongoClientUpdateResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult,MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))})
     this
@@ -180,10 +148,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match the documents
     * @param replace all matching documents will be replaced with this
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def replace(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].replace(collection.asInstanceOf[java.lang.String],query,replace,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -195,10 +159,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match the documents
     * @param replace all matching documents will be replaced with this
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientUpdateResult>>
   def replaceDocuments(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].replaceDocuments(collection.asInstanceOf[java.lang.String],query,replace,{x: AsyncResult[JMongoClientUpdateResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult,MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))})
     this
@@ -213,11 +173,6 @@ class MongoClient(private val _asJava: Object) {
     * @param replace all matching documents will be replaced with this
     * @param options options to configure the replacesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def replaceWithOptions(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,options: UpdateOptions,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].replaceWithOptions(collection.asInstanceOf[java.lang.String],query,replace,options.asJava,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -230,11 +185,6 @@ class MongoClient(private val _asJava: Object) {
     * @param replace all matching documents will be replaced with this
     * @param options options to configure the replacesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientUpdateResult>>
   def replaceDocumentsWithOptions(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,options: UpdateOptions,resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String],query,replace,options.asJava,{x: AsyncResult[JMongoClientUpdateResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult,MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))})
     this
@@ -245,9 +195,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match documents
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<io.vertx.core.json.JsonObject>>>
   def find(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].find(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[java.util.List[JsonObject]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JsonObject],scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
     this
@@ -259,9 +206,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match documents
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findBatch(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findBatch(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -273,10 +217,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match documents
     * @param options options to configure the findsee <a href="../../../../../../../cheatsheet/FindOptions.html">FindOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.FindOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<io.vertx.core.json.JsonObject>>>
   def findWithOptions(collection: String,query: io.vertx.core.json.JsonObject,options: FindOptions,resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findWithOptions(collection.asInstanceOf[java.lang.String],query,options.asJava,{x: AsyncResult[java.util.List[JsonObject]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JsonObject],scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
     this
@@ -289,10 +229,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match documents
     * @param options options to configure the findsee <a href="../../../../../../../cheatsheet/FindOptions.html">FindOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.FindOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findBatchWithOptions(collection: String,query: io.vertx.core.json.JsonObject,options: FindOptions,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findBatchWithOptions(collection.asInstanceOf[java.lang.String],query,options.asJava,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -306,10 +242,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query the query used to match the document
     * @param fields the fields
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOne(collection: String,query: io.vertx.core.json.JsonObject,fields: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOne(collection.asInstanceOf[java.lang.String],query,fields,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -323,10 +255,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query the query used to match the document
     * @param update used to describe how the documents will be updated
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndUpdate(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndUpdate(collection.asInstanceOf[java.lang.String],query,update,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -342,12 +270,6 @@ class MongoClient(private val _asJava: Object) {
     * @param findOptions options to configure the findsee <a href="../../../../../../../cheatsheet/FindOptions.html">FindOptions</a>
     * @param updateOptions options to configure the updatesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.FindOptions
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndUpdateWithOptions(collection: String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,findOptions: FindOptions,updateOptions: UpdateOptions,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndUpdateWithOptions(collection.asInstanceOf[java.lang.String],query,update,findOptions.asJava,updateOptions.asJava,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -361,10 +283,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query the query used to match the document
     * @param replace the replacement document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndReplace(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndReplace(collection.asInstanceOf[java.lang.String],query,replace,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -380,12 +298,6 @@ class MongoClient(private val _asJava: Object) {
     * @param findOptions options to configure the findsee <a href="../../../../../../../cheatsheet/FindOptions.html">FindOptions</a>
     * @param updateOptions options to configure the updatesee <a href="../../../../../../../cheatsheet/UpdateOptions.html">UpdateOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.FindOptions
-//io.vertx.ext.mongo.UpdateOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndReplaceWithOptions(collection: String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,findOptions: FindOptions,updateOptions: UpdateOptions,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndReplaceWithOptions(collection.asInstanceOf[java.lang.String],query,replace,findOptions.asJava,updateOptions.asJava,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -398,9 +310,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query the query used to match the document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndDelete(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndDelete(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -414,10 +323,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query the query used to match the document
     * @param findOptions options to configure the findsee <a href="../../../../../../../cheatsheet/FindOptions.html">FindOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.FindOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def findOneAndDeleteWithOptions(collection: String,query: io.vertx.core.json.JsonObject,findOptions: FindOptions,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].findOneAndDeleteWithOptions(collection.asInstanceOf[java.lang.String],query,findOptions.asJava,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -428,9 +333,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match documents
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Long>>
   def count(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Long]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].count(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
     this
@@ -441,9 +343,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match documents
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def remove(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].remove(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -454,9 +353,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match documents
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientDeleteResult>>
   def removeDocuments(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeDocuments(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[JMongoClientDeleteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult,MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))})
     this
@@ -468,10 +364,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match documents
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def removeWithOptions(collection: String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeWithOptions(collection.asInstanceOf[java.lang.String],query,writeOption,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -483,10 +375,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match documents
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientDeleteResult>>
   def removeDocumentsWithOptions(collection: String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeDocumentsWithOptions(collection.asInstanceOf[java.lang.String],query,writeOption,{x: AsyncResult[JMongoClientDeleteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult,MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))})
     this
@@ -497,9 +385,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def removeOne(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeOne(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -510,9 +395,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param query query used to match document
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientDeleteResult>>
   def removeDocument(collection: String,query: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeDocument(collection.asInstanceOf[java.lang.String],query,{x: AsyncResult[JMongoClientDeleteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult,MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))})
     this
@@ -524,10 +406,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match document
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def removeOneWithOptions(collection: String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeOneWithOptions(collection.asInstanceOf[java.lang.String],query,writeOption,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -539,10 +417,6 @@ class MongoClient(private val _asJava: Object) {
     * @param query query used to match document
     * @param writeOption the write option to use
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.WriteOption
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.mongo.MongoClientDeleteResult>>
   def removeDocumentWithOptions(collection: String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption,resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].removeDocumentWithOptions(collection.asInstanceOf[java.lang.String],query,writeOption,{x: AsyncResult[JMongoClientDeleteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult,MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))})
     this
@@ -552,8 +426,6 @@ class MongoClient(private val _asJava: Object) {
     * Create a new collection
     * @param collectionName the name of the collection
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def createCollection(collectionName: String,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].createCollection(collectionName.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -562,7 +434,6 @@ class MongoClient(private val _asJava: Object) {
   /**
     * Get a list of all collections in the database.
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def getCollections(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].getCollections({x: AsyncResult[java.util.List[java.lang.String]] => resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -572,8 +443,6 @@ class MongoClient(private val _asJava: Object) {
     * Drop a collection
     * @param collection the collection
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def dropCollection(collection: String,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].dropCollection(collection.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -584,9 +453,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param key A document that contains the field and value pairs where the field is the index key and the value describes the type of index for that field. For an ascending index on a field, specify a value of 1; for descending index, specify a value of -1.
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def createIndex(collection: String,key: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].createIndex(collection.asInstanceOf[java.lang.String],key,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -598,10 +464,6 @@ class MongoClient(private val _asJava: Object) {
     * @param key A document that contains the field and value pairs where the field is the index key and the value describes the type of index for that field. For an ascending index on a field, specify a value of 1; for descending index, specify a value of -1.
     * @param options the options for the indexsee <a href="../../../../../../../cheatsheet/IndexOptions.html">IndexOptions</a>
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.ext.mongo.IndexOptions
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def createIndexWithOptions(collection: String,key: io.vertx.core.json.JsonObject,options: IndexOptions,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].createIndexWithOptions(collection.asInstanceOf[java.lang.String],key,options.asJava,{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -611,8 +473,6 @@ class MongoClient(private val _asJava: Object) {
     * Get all the indexes in this collection.
     * @param collection the collection
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonArray>>
   def listIndexes(collection: String,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].listIndexes(collection.asInstanceOf[java.lang.String],{x: AsyncResult[JsonArray] => resultHandler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
     this
@@ -623,9 +483,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param indexName the name of the index to remove
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def dropIndex(collection: String,indexName: String,resultHandler: Handler[AsyncResult[Unit]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].dropIndex(collection.asInstanceOf[java.lang.String],indexName.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
@@ -636,9 +493,6 @@ class MongoClient(private val _asJava: Object) {
     * @param commandName the name of the command
     * @param command the command
     */
-//java.lang.String
-//io.vertx.core.json.JsonObject
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def runCommand(commandName: String,command: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].runCommand(commandName.asInstanceOf[java.lang.String],command,{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
@@ -650,10 +504,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param fieldName the field name
     */
-//java.lang.String
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonArray>>
   def distinct(collection: String,fieldName: String,resultClassname: String,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].distinct(collection.asInstanceOf[java.lang.String],fieldName.asInstanceOf[java.lang.String],resultClassname.asInstanceOf[java.lang.String],{x: AsyncResult[JsonArray] => resultHandler.handle(AsyncResultWrapper[JsonArray,io.vertx.core.json.JsonArray](x, a => a))})
     this
@@ -666,10 +516,6 @@ class MongoClient(private val _asJava: Object) {
     * @param collection the collection
     * @param fieldName the field name
     */
-//java.lang.String
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.json.JsonObject>>
   def distinctBatch(collection: String,fieldName: String,resultClassname: String,resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]):MongoClient = {
     asJava.asInstanceOf[JMongoClient].distinctBatch(collection.asInstanceOf[java.lang.String],fieldName.asInstanceOf[java.lang.String],resultClassname.asInstanceOf[java.lang.String],{x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject,io.vertx.core.json.JsonObject](x, a => a))})
     this
