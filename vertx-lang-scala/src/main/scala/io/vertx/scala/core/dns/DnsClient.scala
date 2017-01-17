@@ -41,8 +41,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def lookup(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -53,8 +51,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def lookup4(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -65,8 +61,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def lookup6(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -77,8 +71,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def resolveA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -89,8 +81,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def resolveAAAA(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -101,8 +91,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve the CNAME for
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def resolveCNAME(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -113,8 +101,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name for which the MX records should be resolved
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<io.vertx.core.dns.MxRecord>>>
   def resolveMX(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JMxRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x))))})
     this
@@ -125,8 +111,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name for which the TXT records should be resolved
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def resolveTXT(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -137,8 +121,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name to resolve the PTR for
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def resolvePTR(name: String,handler: Handler[AsyncResult[String]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
@@ -149,8 +131,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name for which the NS records should be resolved
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<java.lang.String>>>
   def resolveNS(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
@@ -161,8 +141,6 @@ class DnsClient(private val _asJava: Object) {
     * @param name the name for which the SRV records should be resolved
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<io.vertx.core.dns.SrvRecord>>>
   def resolveSRV(name: String,handler: Handler[AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JSrvRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x))))})
     this
@@ -174,8 +152,6 @@ class DnsClient(private val _asJava: Object) {
     * @param ipaddress the IP address to resolve the PTR for
     * @return a reference to this, so the API can be used fluently.
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.String>>
   def reverseLookup(ipaddress: String,handler: Handler[AsyncResult[String]]):DnsClient = {
     asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this

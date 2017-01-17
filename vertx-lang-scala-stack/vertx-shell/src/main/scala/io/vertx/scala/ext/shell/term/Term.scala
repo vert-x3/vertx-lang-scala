@@ -35,19 +35,16 @@ class Term(private val _asJava: Object)
     extends Tty(_asJava)  {
 
 
-//io.vertx.core.Handler<java.lang.Void>
   override def resizehandler(handler: Handler[Unit]):Term = {
     asJava.asInstanceOf[JTerm].resizehandler({x: Void => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<java.lang.String>
   override def stdinHandler(handler: Handler[String]):Term = {
     asJava.asInstanceOf[JTerm].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
 
-//java.lang.String
   override def write(data: String):Term = {
     asJava.asInstanceOf[JTerm].write(data.asInstanceOf[java.lang.String])
     this
@@ -58,7 +55,6 @@ class Term(private val _asJava: Object)
     * @param text the text to echo
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def echo(text: String):Term = {
     asJava.asInstanceOf[JTerm].echo(text.asInstanceOf[java.lang.String])
     this
@@ -69,7 +65,6 @@ class Term(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.shell.term.SignalHandler
   def interruptHandler(handler: SignalHandler):Term = {
     asJava.asInstanceOf[JTerm].interruptHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
@@ -80,7 +75,6 @@ class Term(private val _asJava: Object)
     * @param handler the suspend handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.shell.term.SignalHandler
   def suspendHandler(handler: SignalHandler):Term = {
     asJava.asInstanceOf[JTerm].suspendHandler(handler.asJava.asInstanceOf[JSignalHandler])
     this
@@ -91,7 +85,6 @@ class Term(private val _asJava: Object)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<java.lang.Void>
   def closeHandler(handler: Handler[Unit]):Term = {
     asJava.asInstanceOf[JTerm].closeHandler({x: Void => handler.handle(x)})
     this

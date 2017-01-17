@@ -51,7 +51,6 @@ class Future[T:TypeTag](private val _asJava: Object) {
     * future is completed.
     * @return a reference to this, so it can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<T>>
   def setHandler(handler: Handler[AsyncResult[T]]):Future[T] = {
     asJava.asInstanceOf[JFuture[Object]].setHandler({x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
     this

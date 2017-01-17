@@ -41,7 +41,6 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommandFuture]], without a completion handler.
     */
-//io.vertx.ext.shell.command.Command
   def registerCommand(command: Command):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand])
     this
@@ -52,8 +51,6 @@ class CommandRegistry(private val _asJava: Object)
     * @param command the command to register
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.shell.command.Command
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.shell.command.Command>>
   def registerCommand(command: Command,completionHandler: Handler[AsyncResult[Command]]):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand],{x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand,Command](x, a => Command(a)))})
     this
@@ -62,7 +59,6 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommandsFuture]], without a completion handler.
     */
-//java.util.List<io.vertx.ext.shell.command.Command>
   def registerCommands(commands: scala.collection.mutable.Buffer[Command]):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava)
     this
@@ -73,8 +69,6 @@ class CommandRegistry(private val _asJava: Object)
     * @param commands the commands to register
     * @return a reference to this, so the API can be used fluently
     */
-//java.util.List<io.vertx.ext.shell.command.Command>
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.util.List<io.vertx.ext.shell.command.Command>>>
   def registerCommands(commands: scala.collection.mutable.Buffer[Command],completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava,{x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand],scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
     this
@@ -83,7 +77,6 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#unregisterCommandFuture]], without a completion handler.
     */
-//java.lang.String
   def unregisterCommand(commandName: String):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String])
     this
@@ -94,8 +87,6 @@ class CommandRegistry(private val _asJava: Object)
     * @param commandName the command name
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def unregisterCommand(commandName: String,completionHandler: Handler[AsyncResult[Unit]]):CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this

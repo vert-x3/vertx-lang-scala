@@ -39,7 +39,6 @@ class StompServerConnection(private val _asJava: Object) {
     * @param frame the frame, must not be `null`.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current StompServerConnection
     */
-//io.vertx.ext.stomp.Frame
   def write(frame: Frame):StompServerConnection = {
     asJava.asInstanceOf[JStompServerConnection].write(frame.asJava)
     this
@@ -50,7 +49,6 @@ class StompServerConnection(private val _asJava: Object) {
     * @param buffer the buffer
     * @return the current StompServerConnection
     */
-//io.vertx.core.buffer.Buffer
   def write(buffer: io.vertx.core.buffer.Buffer):StompServerConnection = {
     asJava.asInstanceOf[JStompServerConnection].write(buffer)
     this

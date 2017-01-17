@@ -72,10 +72,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def getNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -89,9 +85,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def getNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -104,8 +97,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def getNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -120,10 +111,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def headNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -137,9 +124,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def headNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -152,8 +136,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def headNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -168,10 +150,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def optionsNow(port: Int,host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -185,9 +163,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def optionsNow(host: String,requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -200,8 +175,6 @@ class HttpClient(private val _asJava: Object)
     * @param responseHandler the response handler
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.HttpClientResponse>
   def optionsNow(requestURI: String,responseHandler: Handler[HttpClientResponse]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String],{x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
@@ -215,10 +188,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(port: Int,host: String,requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -233,11 +202,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(port: Int,host: String,requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -250,9 +214,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(host: String,requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -266,10 +227,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(host: String,requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -284,11 +241,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -304,12 +256,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -323,10 +269,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -341,11 +283,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(host: String,requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -362,12 +299,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -385,13 +316,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -407,11 +331,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -428,12 +347,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -451,13 +364,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -476,14 +382,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(port: Int,host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -500,12 +398,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -523,13 +415,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(host: String,requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -541,8 +426,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(requestURI: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -555,9 +438,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(requestURI: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -570,9 +450,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -586,10 +463,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(requestURI: String,headers: MultiMap,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -604,10 +477,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -623,11 +492,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this
@@ -643,11 +507,6 @@ class HttpClient(private val _asJava: Object)
     * @param wsConnect handler that will be called with the websocket when connected
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
   def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))})
     this
@@ -664,12 +523,6 @@ class HttpClient(private val _asJava: Object)
     * @param failureHandler handler that will be called if websocket connection fails
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//io.vertx.core.MultiMap
-//io.vertx.core.http.WebsocketVersion
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.http.WebSocket>
-//io.vertx.core.Handler<java.lang.Throwable>
   def websocket(requestURI: String,headers: MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: String,wsConnect: Handler[WebSocket],failureHandler: Handler[Throwable]):HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],version,subProtocols.asInstanceOf[java.lang.String],{x: JWebSocket => wsConnect.handle(WebSocket(x))},{x: Throwable => failureHandler.handle(x)})
     this

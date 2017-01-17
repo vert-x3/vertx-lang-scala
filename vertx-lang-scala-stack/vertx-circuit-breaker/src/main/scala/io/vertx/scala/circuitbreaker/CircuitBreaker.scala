@@ -62,7 +62,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-//io.vertx.core.Handler<java.lang.Void>
   def openHandler(handler: Handler[Unit]):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].openHandler({x: Void => handler.handle(x)})
     this
@@ -73,7 +72,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-//io.vertx.core.Handler<java.lang.Void>
   def halfOpenHandler(handler: Handler[Unit]):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].halfOpenHandler({x: Void => handler.handle(x)})
     this
@@ -84,7 +82,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-//io.vertx.core.Handler<java.lang.Void>
   def closeHandler(handler: Handler[Unit]):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].closeHandler({x: Void => handler.handle(x)})
     this
@@ -97,8 +94,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param command the operation
     * @return the current CircuitBreaker
     */
-//io.vertx.core.Future<T>
-//io.vertx.core.Handler<io.vertx.core.Future<T>>
   def executeAndReport[T:TypeTag](resultFuture: Future[T],command: Handler[Future[T]]):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReport[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))})
     this
@@ -123,9 +118,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current CircuitBreaker
     */
-//io.vertx.core.Future<T>
-//io.vertx.core.Handler<io.vertx.core.Future<T>>
-//java.util.function.Function<java.lang.Throwable,T>
   def executeAndReportWithFallback[T:TypeTag](resultFuture: Future[T],command: Handler[Future[T]],fallback: Throwable => T):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReportWithFallback[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))})
     this
@@ -139,7 +131,6 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler
     * @return the current CircuitBreaker
     */
-//java.util.function.Function<java.lang.Throwable,T>
   def fallback[T:TypeTag](handler: Throwable => T):CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].fallback[Object]({x: Throwable => toJava[T](handler(x))})
     this

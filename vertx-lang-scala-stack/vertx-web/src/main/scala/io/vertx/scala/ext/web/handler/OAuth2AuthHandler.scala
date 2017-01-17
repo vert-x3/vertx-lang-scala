@@ -43,7 +43,6 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   override def addAuthority(authority: String):AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
@@ -54,7 +53,6 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-//java.util.Set<java.lang.String>
   override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
@@ -65,7 +63,6 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param extraParams extra optional parameters.
     * @return self
     */
-//io.vertx.core.json.JsonObject
   def extraParams(extraParams: io.vertx.core.json.JsonObject):OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].extraParams(extraParams)
     this
@@ -76,7 +73,6 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param route a given route e.g.: `/callback`
     * @return self
     */
-//io.vertx.ext.web.Route
   def setupCallback(route: Route):OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].setupCallback(route.asJava.asInstanceOf[JRoute])
     this

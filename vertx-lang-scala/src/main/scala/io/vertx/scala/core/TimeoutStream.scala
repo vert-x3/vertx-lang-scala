@@ -37,13 +37,11 @@ class TimeoutStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<java.lang.Long>
   override def handler(handler: Handler[Long]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x.asInstanceOf[Long])})
     this
@@ -59,7 +57,6 @@ class TimeoutStream(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].endHandler({x: Void => endHandler.handle(x)})
     this

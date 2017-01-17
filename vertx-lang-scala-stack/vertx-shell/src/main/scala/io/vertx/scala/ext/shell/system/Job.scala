@@ -55,7 +55,6 @@ class Job(private val _asJava: Object) {
     * @param tty the tty to use
     * @return this object
     */
-//io.vertx.ext.shell.term.Tty
   def setTty(tty: Tty):Job = {
     asJava.asInstanceOf[JJob].setTty(tty.asJava.asInstanceOf[JTty])
     this
@@ -66,7 +65,6 @@ class Job(private val _asJava: Object) {
     * @param session the session to use
     * @return this object
     */
-//io.vertx.ext.shell.session.Session
   def setSession(session: Session):Job = {
     asJava.asInstanceOf[JJob].setSession(session.asJava.asInstanceOf[JSession])
     this
@@ -77,7 +75,6 @@ class Job(private val _asJava: Object) {
     * @param handler the terminate handler
     * @return this object
     */
-//io.vertx.core.Handler<io.vertx.ext.shell.system.ExecStatus>
   def statusUpdateHandler(handler: Handler[io.vertx.ext.shell.system.ExecStatus]):Job = {
     asJava.asInstanceOf[JJob].statusUpdateHandler({x: ExecStatus => handler.handle(x)})
     this
@@ -114,7 +111,6 @@ class Job(private val _asJava: Object) {
     * Resume the job.
     * @param foreground true when the job is resumed in foreground
     */
-//boolean
   def resume(foreground: Boolean):Job = {
     asJava.asInstanceOf[JJob].resume(foreground.asInstanceOf[java.lang.Boolean])
     this

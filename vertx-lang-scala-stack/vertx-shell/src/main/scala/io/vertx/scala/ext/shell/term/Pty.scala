@@ -36,7 +36,6 @@ class Pty(private val _asJava: Object) {
     * @param handler the standard output
     * @return this current object
     */
-//io.vertx.core.Handler<java.lang.String>
   def stdoutHandler(handler: Handler[String]):Pty = {
     asJava.asInstanceOf[JPty].stdoutHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
@@ -47,7 +46,6 @@ class Pty(private val _asJava: Object) {
     * @param data the data to write
     * @return this current object
     */
-//java.lang.String
   def write(data: String):Pty = {
     asJava.asInstanceOf[JPty].write(data.asInstanceOf[java.lang.String])
     this
@@ -57,8 +55,6 @@ class Pty(private val _asJava: Object) {
     * Resize the terminal.
     * @return this current object
     */
-//int
-//int
   def setSize(width: Int,height: Int):Pty = {
     asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer],height.asInstanceOf[java.lang.Integer])
     this

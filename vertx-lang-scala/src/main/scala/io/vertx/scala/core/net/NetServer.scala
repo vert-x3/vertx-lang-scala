@@ -52,7 +52,6 @@ class NetServer(private val _asJava: Object)
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>>
   def listen(listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
     asJava.asInstanceOf[JNetServer].listen({x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
@@ -69,8 +68,6 @@ class NetServer(private val _asJava: Object)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
   def listen(port: Int,host: String):NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
@@ -82,9 +79,6 @@ class NetServer(private val _asJava: Object)
     * @param host the host to listen on
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>>
   def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
@@ -99,7 +93,6 @@ class NetServer(private val _asJava: Object)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def listen(port: Int):NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer])
     this
@@ -110,8 +103,6 @@ class NetServer(private val _asJava: Object)
     * @param port the port to listen on
     * @return a reference to this, so the API can be used fluently
     */
-//int
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.core.net.NetServer>>
   def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this

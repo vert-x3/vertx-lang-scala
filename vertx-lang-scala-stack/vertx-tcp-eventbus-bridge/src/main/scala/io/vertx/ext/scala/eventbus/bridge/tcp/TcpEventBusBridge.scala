@@ -50,7 +50,6 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * Listen on default port 7000 with a handler to report the state of the socket listen operation.
     * @return self
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge>>
   def listen(handler: Handler[AsyncResult[TcpEventBusBridge]]):TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen({x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
@@ -62,8 +61,6 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @param address tcp address to the bind
     * @return self
     */
-//int
-//java.lang.String
   def listen(port: Int,address: String):TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer],address.asInstanceOf[java.lang.String])
     this
@@ -75,9 +72,6 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @param address tcp address to the bind
     * @return self
     */
-//int
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge>>
   def listen(port: Int,address: String,handler: Handler[AsyncResult[TcpEventBusBridge]]):TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer],address.asInstanceOf[java.lang.String],{x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
@@ -88,7 +82,6 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @param port tcp port
     * @return self
     */
-//int
   def listen(port: Int):TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer])
     this
@@ -99,8 +92,6 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @param port tcp port
     * @return self
     */
-//int
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge>>
   def listen(port: Int,handler: Handler[AsyncResult[TcpEventBusBridge]]):TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this

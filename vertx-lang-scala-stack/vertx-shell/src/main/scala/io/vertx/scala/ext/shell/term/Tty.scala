@@ -34,7 +34,6 @@ class Tty(private val _asJava: Object) {
     * @param handler the standard input
     * @return this object
     */
-//io.vertx.core.Handler<java.lang.String>
   def stdinHandler(handler: Handler[String]):Tty = {
     asJava.asInstanceOf[JTty].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
@@ -45,7 +44,6 @@ class Tty(private val _asJava: Object) {
     * @param data the data to write
     * @return this object
     */
-//java.lang.String
   def write(data: String):Tty = {
     asJava.asInstanceOf[JTty].write(data.asInstanceOf[java.lang.String])
     this
@@ -56,7 +54,6 @@ class Tty(private val _asJava: Object) {
     * @param handler the resize handler
     * @return this object
     */
-//io.vertx.core.Handler<java.lang.Void>
   def resizehandler(handler: Handler[Unit]):Tty = {
     asJava.asInstanceOf[JTty].resizehandler({x: Void => handler.handle(x)})
     this

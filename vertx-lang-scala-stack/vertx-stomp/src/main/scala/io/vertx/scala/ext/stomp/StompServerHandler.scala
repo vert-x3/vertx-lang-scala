@@ -54,7 +54,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def receivedFrameHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].receivedFrameHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -65,7 +64,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def connectHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].connectHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -76,7 +74,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def stompHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].stompHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -87,7 +84,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def subscribeHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].subscribeHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -98,7 +94,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def unsubscribeHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].unsubscribeHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -109,7 +104,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def sendHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].sendHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -120,7 +114,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.StompServerConnection>
   def closeHandler(handler: Handler[StompServerConnection]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].closeHandler({x: JStompServerConnection => handler.handle(StompServerConnection(x))})
     this
@@ -131,7 +124,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def commitHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].commitHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -142,7 +134,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def abortHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].abortHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -153,7 +144,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def beginHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].beginHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -164,7 +154,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def disconnectHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].disconnectHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -175,7 +164,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def ackHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].ackHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -186,7 +174,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.ServerFrame>
   def nackHandler(handler: Handler[ServerFrame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].nackHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
     this
@@ -200,10 +187,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param passcode the password
     * @return the current StompServerHandler
     */
-//io.vertx.ext.stomp.StompServer
-//java.lang.String
-//java.lang.String
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Boolean>>
   def onAuthenticationRequest(server: StompServer,login: String,passcode: String,handler: Handler[AsyncResult[Boolean]]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer],login.asInstanceOf[java.lang.String],passcode.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
@@ -214,7 +197,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.ext.auth.AuthProvider
   def authProvider(handler: AuthProvider):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].authProvider(handler.asJava.asInstanceOf[JAuthProvider])
     this
@@ -228,9 +210,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param messages the acknowledge messages
     * @return the current StompServerHandler
     */
-//io.vertx.ext.stomp.StompServerConnection
-//io.vertx.ext.stomp.Frame
-//java.util.List<io.vertx.ext.stomp.Frame>
   def onAck(connection: StompServerConnection,subscribe: Frame,messages: scala.collection.mutable.Buffer[Frame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onAck(connection.asJava.asInstanceOf[JStompServerConnection],subscribe.asJava,messages.map(x => x.asJava).asJava)
     this
@@ -246,9 +225,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param messages the acknowledge messages
     * @return the current StompServerHandler
     */
-//io.vertx.ext.stomp.StompServerConnection
-//io.vertx.ext.stomp.Frame
-//java.util.List<io.vertx.ext.stomp.Frame>
   def onNack(connection: StompServerConnection,subscribe: Frame,messages: scala.collection.mutable.Buffer[Frame]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onNack(connection.asJava.asInstanceOf[JStompServerConnection],subscribe.asJava,messages.map(x => x.asJava).asJava)
     this
@@ -259,7 +235,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.Acknowledgement>
   def onAckHandler(handler: Handler[Acknowledgement]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onAckHandler({x: JAcknowledgement => handler.handle(Acknowledgement(x))})
     this
@@ -270,7 +245,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the handler
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.Acknowledgement>
   def onNackHandler(handler: Handler[Acknowledgement]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onNackHandler({x: JAcknowledgement => handler.handle(Acknowledgement(x))})
     this
@@ -285,7 +259,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param handler the action to execute when a `PING` needs to be sent.
     * @return the current StompServerHandler
     */
-//io.vertx.core.Handler<io.vertx.ext.stomp.StompServerConnection>
   def pingHandler(handler: Handler[StompServerConnection]):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].pingHandler({x: JStompServerConnection => handler.handle(StompServerConnection(x))})
     this
@@ -296,7 +269,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param factory the factory
     * @return the current StompServerHandler.
     */
-//io.vertx.ext.stomp.DestinationFactory
   def destinationFactory(factory: DestinationFactory):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].destinationFactory(factory.asJava.asInstanceOf[JDestinationFactory])
     this
@@ -307,7 +279,6 @@ class StompServerHandler(private val _asJava: Object)
     * @param options the configuration optionssee <a href="../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
     * @return the current StompServerHandler.
     */
-//io.vertx.ext.stomp.BridgeOptions
   def bridge(options: BridgeOptions):StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].bridge(options.asJava)
     this

@@ -209,8 +209,6 @@ class RoutingContext(private val _asJava: Object) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
-//java.lang.Object
   def put(key: String,obj: AnyRef):RoutingContext = {
     asJava.asInstanceOf[JRoutingContext].put(key.asInstanceOf[java.lang.String],obj)
     this
@@ -222,7 +220,6 @@ class RoutingContext(private val _asJava: Object) {
     * @param cookie the cookie
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.web.Cookie
   def addCookie(cookie: Cookie):RoutingContext = {
     asJava.asInstanceOf[JRoutingContext].addCookie(cookie.asJava.asInstanceOf[JCookie])
     this

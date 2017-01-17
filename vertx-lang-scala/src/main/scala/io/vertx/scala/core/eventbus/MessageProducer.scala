@@ -37,25 +37,21 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//T
   override def write(data: T):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data))
     this
   }
 
-//int
   override def setWriteQueueMaxSize(maxSize: Int):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def drainHandler(handler: Handler[Unit]):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].drainHandler({x: Void => handler.handle(x)})
     this
@@ -66,7 +62,6 @@ class MessageProducer[T:TypeTag](private val _asJava: Object)
     * @param options the new optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return this producer object
     */
-//io.vertx.core.eventbus.DeliveryOptions
   def deliveryOptions(options: DeliveryOptions):MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].deliveryOptions(options.asJava)
     this

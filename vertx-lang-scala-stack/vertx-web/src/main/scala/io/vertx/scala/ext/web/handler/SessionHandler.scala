@@ -46,7 +46,6 @@ class SessionHandler(private val _asJava: Object)
     * @param timeout the timeout, in ms.
     * @return a reference to this, so the API can be used fluently
     */
-//long
   def setSessionTimeout(timeout: Long):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionTimeout(timeout.asInstanceOf[java.lang.Long])
     this
@@ -58,7 +57,6 @@ class SessionHandler(private val _asJava: Object)
     * @param nag true to nag
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setNagHttps(nag: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
@@ -70,7 +68,6 @@ class SessionHandler(private val _asJava: Object)
     * @param secure true to set the secure flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setCookieSecureFlag(secure: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieSecureFlag(secure.asInstanceOf[java.lang.Boolean])
     this
@@ -82,7 +79,6 @@ class SessionHandler(private val _asJava: Object)
     * @param httpOnly true to set the HttpOnly flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setCookieHttpOnlyFlag(httpOnly: Boolean):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieHttpOnlyFlag(httpOnly.asInstanceOf[java.lang.Boolean])
     this
@@ -93,7 +89,6 @@ class SessionHandler(private val _asJava: Object)
     * @param sessionCookieName the session cookie name
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setSessionCookieName(sessionCookieName: String):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionCookieName(sessionCookieName.asInstanceOf[java.lang.String])
     this
@@ -104,7 +99,6 @@ class SessionHandler(private val _asJava: Object)
     * @param minLength the session id minimal length
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def setMinLength(minLength: Int):SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setMinLength(minLength.asInstanceOf[java.lang.Integer])
     this

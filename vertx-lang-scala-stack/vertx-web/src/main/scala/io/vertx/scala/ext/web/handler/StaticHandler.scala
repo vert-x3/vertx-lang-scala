@@ -37,7 +37,6 @@ class StaticHandler(private val _asJava: Object)
     * @param allowRootFileSystemAccess whether root access is allowed
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setAllowRootFileSystemAccess(allowRootFileSystemAccess.asInstanceOf[java.lang.Boolean])
     this
@@ -48,7 +47,6 @@ class StaticHandler(private val _asJava: Object)
     * @param webRoot the web root
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setWebRoot(webRoot: String):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setWebRoot(webRoot.asInstanceOf[java.lang.String])
     this
@@ -59,7 +57,6 @@ class StaticHandler(private val _asJava: Object)
     * @param readOnly whether files are read-only
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setFilesReadOnly(readOnly: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setFilesReadOnly(readOnly.asInstanceOf[java.lang.Boolean])
     this
@@ -70,7 +67,6 @@ class StaticHandler(private val _asJava: Object)
     * @param maxAgeSeconds maximum time for browser to cache, in seconds
     * @return a reference to this, so the API can be used fluently
     */
-//long
   def setMaxAgeSeconds(maxAgeSeconds: Long):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setMaxAgeSeconds(maxAgeSeconds.asInstanceOf[java.lang.Long])
     this
@@ -81,7 +77,6 @@ class StaticHandler(private val _asJava: Object)
     * @param enabled true if enabled
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setCachingEnabled(enabled: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setCachingEnabled(enabled.asInstanceOf[java.lang.Boolean])
     this
@@ -92,7 +87,6 @@ class StaticHandler(private val _asJava: Object)
     * @param directoryListing true if enabled
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setDirectoryListing(directoryListing: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setDirectoryListing(directoryListing.asInstanceOf[java.lang.Boolean])
     this
@@ -103,7 +97,6 @@ class StaticHandler(private val _asJava: Object)
     * @param includeHidden true if hidden files should be served
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setIncludeHidden(includeHidden: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setIncludeHidden(includeHidden.asInstanceOf[java.lang.Boolean])
     this
@@ -114,7 +107,6 @@ class StaticHandler(private val _asJava: Object)
     * @param timeout the timeout, in ms
     * @return a reference to this, so the API can be used fluently
     */
-//long
   def setCacheEntryTimeout(timeout: Long):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setCacheEntryTimeout(timeout.asInstanceOf[java.lang.Long])
     this
@@ -125,7 +117,6 @@ class StaticHandler(private val _asJava: Object)
     * @param indexPage the index page
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setIndexPage(indexPage: String):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setIndexPage(indexPage.asInstanceOf[java.lang.String])
     this
@@ -136,7 +127,6 @@ class StaticHandler(private val _asJava: Object)
     * @param maxCacheSize the max cache size
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def setMaxCacheSize(maxCacheSize: Int):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
@@ -147,7 +137,6 @@ class StaticHandler(private val _asJava: Object)
     * @param alwaysAsyncFS true for always async FS access
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setAlwaysAsyncFS(alwaysAsyncFS: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setAlwaysAsyncFS(alwaysAsyncFS.asInstanceOf[java.lang.Boolean])
     this
@@ -158,7 +147,6 @@ class StaticHandler(private val _asJava: Object)
     * @param enableFSTuning true to enabled FS tuning
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setEnableFSTuning(enableFSTuning: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setEnableFSTuning(enableFSTuning.asInstanceOf[java.lang.Boolean])
     this
@@ -169,7 +157,6 @@ class StaticHandler(private val _asJava: Object)
     * @param maxAvgServeTimeNanoSeconds max serve time, in ns
     * @return a reference to this, so the API can be used fluently
     */
-//long
   def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds.asInstanceOf[java.lang.Long])
     this
@@ -180,7 +167,6 @@ class StaticHandler(private val _asJava: Object)
     * @param directoryTemplate the directory template
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setDirectoryTemplate(directoryTemplate: String):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setDirectoryTemplate(directoryTemplate.asInstanceOf[java.lang.String])
     this
@@ -191,7 +177,6 @@ class StaticHandler(private val _asJava: Object)
     * @param enableRangeSupport true to enable range support
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setEnableRangeSupport(enableRangeSupport: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setEnableRangeSupport(enableRangeSupport.asInstanceOf[java.lang.Boolean])
     this
@@ -202,7 +187,6 @@ class StaticHandler(private val _asJava: Object)
     * @param varyHeader true to sent vary header
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setSendVaryHeader(varyHeader: Boolean):StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setSendVaryHeader(varyHeader.asInstanceOf[java.lang.Boolean])
     this

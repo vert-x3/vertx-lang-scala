@@ -39,7 +39,6 @@ class CorsHandler(private val _asJava: Object)
     * @param method the method to add
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.http.HttpMethod
   def allowedMethod(method: io.vertx.core.http.HttpMethod):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].allowedMethod(method)
     this
@@ -50,7 +49,6 @@ class CorsHandler(private val _asJava: Object)
     * @param headerName the allowed header name
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def allowedHeader(headerName: String):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].allowedHeader(headerName.asInstanceOf[java.lang.String])
     this
@@ -61,7 +59,6 @@ class CorsHandler(private val _asJava: Object)
     * @param headerNames the allowed header names
     * @return a reference to this, so the API can be used fluently
     */
-//java.util.Set<java.lang.String>
   def allowedHeaders(headerNames: scala.collection.mutable.Set[String]):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].allowedHeaders(headerNames.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
@@ -72,7 +69,6 @@ class CorsHandler(private val _asJava: Object)
     * @param headerName the exposed header name
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def exposedHeader(headerName: String):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].exposedHeader(headerName.asInstanceOf[java.lang.String])
     this
@@ -83,7 +79,6 @@ class CorsHandler(private val _asJava: Object)
     * @param headerNames the exposed header names
     * @return a reference to this, so the API can be used fluently
     */
-//java.util.Set<java.lang.String>
   def exposedHeaders(headerNames: scala.collection.mutable.Set[String]):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].exposedHeaders(headerNames.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
@@ -94,7 +89,6 @@ class CorsHandler(private val _asJava: Object)
     * @param allow true if allowed
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def allowCredentials(allow: Boolean):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].allowCredentials(allow.asInstanceOf[java.lang.Boolean])
     this
@@ -105,7 +99,6 @@ class CorsHandler(private val _asJava: Object)
     * @param maxAgeSeconds max age in seconds
     * @return a reference to this, so the API can be used fluently
     */
-//int
   def maxAgeSeconds(maxAgeSeconds: Int):CorsHandler = {
     asJava.asInstanceOf[JCorsHandler].maxAgeSeconds(maxAgeSeconds.asInstanceOf[java.lang.Integer])
     this

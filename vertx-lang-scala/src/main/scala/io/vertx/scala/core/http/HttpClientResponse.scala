@@ -118,13 +118,11 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
   override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].handler({x: Buffer => handler.handle(x)})
     this
@@ -135,7 +133,6 @@ class HttpClientResponse(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
     this
@@ -148,7 +145,6 @@ class HttpClientResponse(private val _asJava: Object)
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-//io.vertx.core.Handler<io.vertx.core.buffer.Buffer>
   def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].bodyHandler({x: Buffer => bodyHandler.handle(x)})
     this
@@ -159,7 +155,6 @@ class HttpClientResponse(private val _asJava: Object)
     * frame. HTTP/2 permits extension of the protocol.
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.core.Handler<io.vertx.core.http.HttpFrame>
   def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
     this

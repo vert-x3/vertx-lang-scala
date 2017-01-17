@@ -44,8 +44,6 @@ class Destination(private val _asJava: Object) {
     * @param frame the framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current instance of Destination
     */
-//io.vertx.ext.stomp.StompServerConnection
-//io.vertx.ext.stomp.Frame
   def dispatch(connection: StompServerConnection,frame: Frame):Destination = {
     asJava.asInstanceOf[JDestination].dispatch(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava)
     this
@@ -57,8 +55,6 @@ class Destination(private val _asJava: Object) {
     * @param frame the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current instance of Destination
     */
-//io.vertx.ext.stomp.StompServerConnection
-//io.vertx.ext.stomp.Frame
   def subscribe(connection: StompServerConnection,frame: Frame):Destination = {
     asJava.asInstanceOf[JDestination].subscribe(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava)
     this
@@ -69,7 +65,6 @@ class Destination(private val _asJava: Object) {
     * @param connection the connection
     * @return the current instance of Destination
     */
-//io.vertx.ext.stomp.StompServerConnection
   def unsubscribeConnection(connection: StompServerConnection):Destination = {
     asJava.asInstanceOf[JDestination].unsubscribeConnection(connection.asJava.asInstanceOf[JStompServerConnection])
     this

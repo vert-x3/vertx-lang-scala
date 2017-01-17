@@ -40,13 +40,11 @@ class SQLRowStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(arg0: Handler[Throwable]):ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => arg0.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.json.JsonArray>
   override def handler(arg0: Handler[io.vertx.core.json.JsonArray]):ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => arg0.handle(x)})
     this
@@ -62,7 +60,6 @@ class SQLRowStream(private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(arg0: Handler[Unit]):ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => arg0.handle(x)})
     this

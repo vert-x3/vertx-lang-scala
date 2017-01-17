@@ -43,13 +43,11 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
-//io.vertx.core.Handler<java.lang.Throwable>
   override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-//io.vertx.core.Handler<io.vertx.core.eventbus.Message<T>>
   override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].handler({x: JMessage[Object] => handler.handle(Message[T](x))})
     this
@@ -65,7 +63,6 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
     this
   }
 
-//io.vertx.core.Handler<java.lang.Void>
   override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].endHandler({x: Void => endHandler.handle(x)})
     this

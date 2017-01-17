@@ -42,7 +42,6 @@ class CommandBuilder(private val _asJava: Object) {
     * @param handler the process handler
     * @return this command object
     */
-//io.vertx.core.Handler<io.vertx.ext.shell.command.CommandProcess>
   def processHandler(handler: Handler[CommandProcess]):CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].processHandler({x: JCommandProcess => handler.handle(CommandProcess(x))})
     this
@@ -54,7 +53,6 @@ class CommandBuilder(private val _asJava: Object) {
     * @param handler the completion handler
     * @return this command object
     */
-//io.vertx.core.Handler<io.vertx.ext.shell.cli.Completion>
   def completionHandler(handler: Handler[Completion]):CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].completionHandler({x: JCompletion => handler.handle(Completion(x))})
     this

@@ -37,7 +37,6 @@ class Cookie(private val _asJava: Object) {
     * @param value The value to set
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setValue(value: String):Cookie = {
     asJava.asInstanceOf[JCookie].setValue(value.asInstanceOf[java.lang.String])
     this
@@ -48,7 +47,6 @@ class Cookie(private val _asJava: Object) {
     * @param domain The domain to use
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setDomain(domain: scala.Option[String]):Cookie = {
     asJava.asInstanceOf[JCookie].setDomain(domain.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null))
     this
@@ -59,7 +57,6 @@ class Cookie(private val _asJava: Object) {
     * @param path The path to use for this cookie
     * @return a reference to this, so the API can be used fluently
     */
-//java.lang.String
   def setPath(path: scala.Option[String]):Cookie = {
     asJava.asInstanceOf[JCookie].setPath(path.map(x => x.asInstanceOf[java.lang.String]).getOrElse(null))
     this
@@ -74,7 +71,6 @@ class Cookie(private val _asJava: Object) {
     * If you don't set this the cookie will be a session cookie and be removed when the browser is closed.
     * @param maxAge The maximum age of this cookie in seconds
     */
-//long
   def setMaxAge(maxAge: Long):Cookie = {
     asJava.asInstanceOf[JCookie].setMaxAge(maxAge.asInstanceOf[java.lang.Long])
     this
@@ -85,7 +81,6 @@ class Cookie(private val _asJava: Object) {
     * @param secure True if this cookie is to be secure, otherwise false
     * @return a reference to this, so the API can be used fluently
     */
-//boolean
   def setSecure(secure: Boolean):Cookie = {
     asJava.asInstanceOf[JCookie].setSecure(secure.asInstanceOf[java.lang.Boolean])
     this
@@ -99,7 +94,6 @@ class Cookie(private val _asJava: Object) {
     * <a href="http://www.owasp.org/index.php/HTTPOnly">here</a>.
     * @param httpOnly True if the cookie is HTTP only, otherwise false.
     */
-//boolean
   def setHttpOnly(httpOnly: Boolean):Cookie = {
     asJava.asInstanceOf[JCookie].setHttpOnly(httpOnly.asInstanceOf[java.lang.Boolean])
     this

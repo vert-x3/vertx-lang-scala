@@ -54,7 +54,6 @@ class ShellServer(private val _asJava: Object) {
     * @param resolver the resolver
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.shell.command.CommandResolver
   def registerCommandResolver(resolver: CommandResolver):ShellServer = {
     asJava.asInstanceOf[JShellServer].registerCommandResolver(resolver.asJava.asInstanceOf[JCommandResolver])
     this
@@ -65,7 +64,6 @@ class ShellServer(private val _asJava: Object) {
     * @param termServer the term server to add
     * @return a reference to this, so the API can be used fluently
     */
-//io.vertx.ext.shell.term.TermServer
   def registerTermServer(termServer: TermServer):ShellServer = {
     asJava.asInstanceOf[JShellServer].registerTermServer(termServer.asJava.asInstanceOf[JTermServer])
     this
@@ -82,7 +80,6 @@ class ShellServer(private val _asJava: Object) {
   /**
     * Start the shell service, this is an asynchronous start.
     */
-//io.vertx.core.Handler<io.vertx.core.AsyncResult<java.lang.Void>>
   def listen(listenHandler: Handler[AsyncResult[Unit]]):ShellServer = {
     asJava.asInstanceOf[JShellServer].listen({x: AsyncResult[Void] => listenHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this

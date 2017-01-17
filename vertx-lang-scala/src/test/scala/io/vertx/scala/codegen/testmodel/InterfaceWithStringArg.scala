@@ -28,7 +28,6 @@ class InterfaceWithStringArg(private val _asJava: Object)
     extends GenericRefedInterface[String](_asJava)  {
 
 
-//java.lang.String
   override def setValue(value: String):GenericRefedInterface[String] = {
     asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value.asInstanceOf[java.lang.String])
     this
