@@ -74,30 +74,16 @@ object @{className}{\n
   def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
   \n
 	@foreach{method : staticMethods}
-		@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
-		@if{shouldMethodReturnAFuture(method)}
-		  def @{createNameForMethodReturningAFuture(method)}
-			@{assembleTypeParams(method.typeParams, true)}(
-			@foreach{param:removeLastParam(method.params)}
+	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
+	  def @{escapeIfKeyword(method.name)}
+		@{assembleTypeParams(method.typeParams, true)}
+		(
+			@foreach{param:method.params}
 				@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-			@end{','}):scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method), false)}] = {\n
-				@comment{'TODO: Why is there no nullable-info available in here??'}
-		    val promiseAndHandler = handlerForAsyncResultWithConversion[@{toJavaType(typeOfReturnedFuture(method), true)}, @{toScalaType(typeOfReturnedFuture(method), false)}](x => @{toScalaWithConversion('x', typeOfReturnedFuture(method), typeParams, method.typeParams)})\n
-		    @{invokeMethodAndUseProvidedHandler('J'+className, type, method, typeParams, 'promiseAndHandler._1')}\n
-		    promiseAndHandler._2.future\n
-		  }\n
-			\n
-		@else{}
-		  def @{escapeIfKeyword(method.name)}
-			@{assembleTypeParams(method.typeParams, true)}
-			(
-				@foreach{param:method.params}
-					@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-				@end{','}):@{toScalaType(method.returnType, false)} = {\n
-		    @{invokeStaticMethod('J'+className, type, method)}\n
-		  }\n
-			\n
-		@end{}
+			@end{','}):@{toScalaType(method.returnType, false)} = {\n
+	    @{invokeStaticMethod('J'+className, type, method)}\n
+	  }\n
+		\n
 	@end{}
 }\n
 @else{}

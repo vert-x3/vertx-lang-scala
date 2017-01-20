@@ -65,10 +65,8 @@ object EventBusService{
     * @param clientClass the client class
     * @return `null` - do not use
     */
-  def getServiceProxyFuture[T:TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,clientClass: Class[T]):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
-    JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},toJavaClass(clientClass),promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def getServiceProxy[T:TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]):T = {
+    toScala[T](JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
   }
 
   /**
@@ -81,10 +79,8 @@ object EventBusService{
     * @param clientClass the client class
     * @return `null` - do not use
     */
-  def getServiceProxyWithJsonFilterFuture[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T]):scala.concurrent.Future[T] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
-    JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,toJavaClass(clientClass),promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def getServiceProxyWithJsonFilter[T:TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]):T = {
+    toScala[T](JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
   }
 
   /**
