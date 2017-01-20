@@ -20,7 +20,7 @@ import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
-import scala.concurrent.{ExecutionContext, Promise}
+import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -30,7 +30,7 @@ import scala.collection.mutable
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
-class ScalaVerticle {
+abstract class ScalaVerticle {
   protected implicit var executionContext:ExecutionContext = _
   protected var vertx: Vertx = _
   protected var ctx: Context = _
@@ -51,41 +51,27 @@ class ScalaVerticle {
   }
 
   /**
-    * Shortcut to stop the verticle.
-    * Use this method if stopping is complete after the method returns. Otherwise use [[stop(stopPromise: concurrent.Promise[Unit])]]
-    */
-  def stop(): Unit = {}
-
-  /**
-    * Shortcut to start the verticle.
-    * Use this method if starting is complete after the method returns. Otherwise use [[start(stopPromise: concurrent.Promise[Unit])]]
-    */
-  def start(): Unit = {}
-
-  /**
     * Stop the verticle.<p>
     * This is called by Vert.x when the verticle instance is un-deployed. Don't call it yourself.<p>
     * If your verticle does things in it's shut-down which take some time then you can override this method
-    * and complete the stopPromise some time later when clean-up is complete.
+    * and complete the futrue some time later when clean-up is complete.
     *
-    * @param stopPromise a promise which should be completed when verticle clean-up is complete.
+    * @return a future which should be completed when verticle clean-up is complete.
     */
-  def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
-    stop()
-    stopPromise.success(())
+  def stop(): concurrent.Future[Unit] = {
+    concurrent.Future.successful(())
   }
 
   /**
     * Start the verticle.<p>
     * This is called by Vert.x when the verticle instance is deployed. Don't call it yourself.<p>
     * If your verticle does things in it's startup which take some time then you can override this method
-    * and complete the startPromise some time later when start up is complete.
+    * and complete the future some time later when start up is complete.
     *
-    * @param startPromise a promise which should be completed when verticle start-up is complete.
+    * @return a future which should be completed when verticle start-up is complete.
     */
-  def start(startPromise: concurrent.Promise[Unit]): Unit = {
-    start()
-    startPromise.success(())
+  def start(): concurrent.Future[Unit] = {
+    concurrent.Future.successful(())
   }
 
   /**
@@ -120,21 +106,17 @@ class ScalaVerticle {
     }
 
     override def start(startFuture: Future[Void]): Unit = {
-      val promise = Promise[Unit]()
-      promise.future.onComplete{
+      that.start().onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
       }
-      that.start(promise)
     }
 
     override def stop(stopFuture: Future[Void]): Unit = {
-      val promise = Promise[Unit]()
-      promise.future.onComplete{
+      that.stop().onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)
       }
-      that.stop(promise)
     }
   }
 }
