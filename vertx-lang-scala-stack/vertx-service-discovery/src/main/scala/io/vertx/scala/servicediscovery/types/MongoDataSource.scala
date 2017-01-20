@@ -58,10 +58,8 @@ object MongoDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getMongoClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[MongoClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClient, MongoClient](x => MongoClient(x))
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]):Unit = {
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 
   /**
@@ -71,10 +69,8 @@ object MongoDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter
     */
-  def getMongoClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean):scala.concurrent.Future[MongoClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClient, MongoClient](x => MongoClient(x))
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def getMongoClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MongoClient]]):Unit = {
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 
   /**
@@ -84,10 +80,8 @@ object MongoDataSource{
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
     */
-  def getMongoClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject):scala.concurrent.Future[MongoClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClient, MongoClient](x => MongoClient(x))
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]):Unit = {
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 
 }
