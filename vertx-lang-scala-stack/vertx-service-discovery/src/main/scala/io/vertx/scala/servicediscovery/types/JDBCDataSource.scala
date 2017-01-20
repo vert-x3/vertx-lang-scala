@@ -51,8 +51,10 @@ object JDBCDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getJDBCClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  def getJDBCClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[JDBCClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient, JDBCClient](x => JDBCClient(x))
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -61,8 +63,10 @@ object JDBCDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter (must not be `null`)
     */
-  def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  def getJDBCClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean):scala.concurrent.Future[JDBCClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient, JDBCClient](x => JDBCClient(x))
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -72,8 +76,10 @@ object JDBCDataSource{
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
     */
-  def getJDBCClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  def getJDBCClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject):scala.concurrent.Future[JDBCClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient, JDBCClient](x => JDBCClient(x))
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -83,8 +89,10 @@ object JDBCDataSource{
     * @param filter The filter, must not be `null`
     * @param consumerConfiguration the consumer configuration
     */
-  def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]):Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},consumerConfiguration,{x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient,JDBCClient](x, a => JDBCClient(a)))})
+  def getJDBCClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject):scala.concurrent.Future[JDBCClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient, JDBCClient](x => JDBCClient(x))
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},consumerConfiguration,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

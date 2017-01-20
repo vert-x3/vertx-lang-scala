@@ -102,8 +102,10 @@ object HttpEndpoint{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+  def getClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient, HttpClient](x => HttpClient(x))
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -112,8 +114,10 @@ object HttpEndpoint{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getWebClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[WebClient]]):Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+  def getWebClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[WebClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebClient, WebClient](x => WebClient(x))
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -124,8 +128,10 @@ object HttpEndpoint{
     * @param filter The filter, optional
     * @param conf the configuration of the client
     */
-  def getClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,conf,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+  def getClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject):scala.concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient, HttpClient](x => HttpClient(x))
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,conf,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -136,8 +142,10 @@ object HttpEndpoint{
     * @param filter The filter, optional
     * @param conf the configuration of the client
     */
-  def getWebClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[WebClient]]):Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,conf,{x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+  def getWebClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject):scala.concurrent.Future[WebClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebClient, WebClient](x => WebClient(x))
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,conf,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -146,8 +154,10 @@ object HttpEndpoint{
     * @param discovery The service discovery instance
     * @param filter The filter
     */
-  def getClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+  def getClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean):scala.concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient, HttpClient](x => HttpClient(x))
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -156,8 +166,10 @@ object HttpEndpoint{
     * @param discovery The service discovery instance
     * @param filter The filter
     */
-  def getWebClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[WebClient]]):Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+  def getWebClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean):scala.concurrent.Future[WebClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebClient, WebClient](x => WebClient(x))
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -168,8 +180,10 @@ object HttpEndpoint{
     * @param filter The filter
     * @param conf the configuration of the client
     */
-  def getClient(discovery: ServiceDiscovery,filter: Record => Boolean,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[HttpClient]]):Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},conf,{x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+  def getClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean,conf: io.vertx.core.json.JsonObject):scala.concurrent.Future[HttpClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClient, HttpClient](x => HttpClient(x))
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},conf,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -180,8 +194,10 @@ object HttpEndpoint{
     * @param filter The filter
     * @param conf the configuration of the client
     */
-  def getWebClient(discovery: ServiceDiscovery,filter: Record => Boolean,conf: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[WebClient]]):Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},conf,{x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+  def getWebClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean,conf: io.vertx.core.json.JsonObject):scala.concurrent.Future[WebClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebClient, WebClient](x => WebClient(x))
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},conf,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

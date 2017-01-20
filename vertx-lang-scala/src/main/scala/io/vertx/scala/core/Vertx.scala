@@ -576,8 +576,10 @@ object Vertx{
     * The instance is created asynchronously and the resultHandler is called with the result when it is ready.
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
     */
-  def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]):Unit = {
-    JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
+  def clusteredVertxFuture(options: VertxOptions):scala.concurrent.Future[Vertx] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JVertx, Vertx](x => Vertx(x))
+    JVertx.clusteredVertx(options.asJava,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**

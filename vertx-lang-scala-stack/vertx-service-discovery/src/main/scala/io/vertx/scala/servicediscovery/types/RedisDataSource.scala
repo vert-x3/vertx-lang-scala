@@ -59,8 +59,10 @@ object RedisDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getRedisClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[RedisClient]]):Unit = {
-    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient,RedisClient](x, a => RedisClient(a)))})
+  def getRedisClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject):scala.concurrent.Future[RedisClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedisClient, RedisClient](x => RedisClient(x))
+    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -69,8 +71,10 @@ object RedisDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter, cannot be `null`
     */
-  def getRedisClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[RedisClient]]):Unit = {
-    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient,RedisClient](x, a => RedisClient(a)))})
+  def getRedisClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean):scala.concurrent.Future[RedisClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedisClient, RedisClient](x => RedisClient(x))
+    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -80,8 +84,10 @@ object RedisDataSource{
     * @param filter The filter, optional
     * @param consumerConfiguration The additional consumer configuration
     */
-  def getRedisClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[RedisClient]]):Unit = {
-    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,{x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient,RedisClient](x, a => RedisClient(a)))})
+  def getRedisClientFuture(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject):scala.concurrent.Future[RedisClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedisClient, RedisClient](x => RedisClient(x))
+    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
   /**
@@ -91,8 +97,10 @@ object RedisDataSource{
     * @param filter The filter, cannot be `null`
     * @param consumerConfiguration The additional consumer configuration
     */
-  def getRedisClient(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[RedisClient]]):Unit = {
-    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},consumerConfiguration,{x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient,RedisClient](x, a => RedisClient(a)))})
+  def getRedisClientFuture(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject):scala.concurrent.Future[RedisClient] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedisClient, RedisClient](x => RedisClient(x))
+    JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},consumerConfiguration,promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
