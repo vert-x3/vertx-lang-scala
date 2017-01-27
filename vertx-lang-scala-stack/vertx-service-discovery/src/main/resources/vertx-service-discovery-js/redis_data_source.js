@@ -21,8 +21,8 @@ var ServiceDiscovery = require('vertx-service-discovery-js/service_discovery');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JRedisDataSource = io.vertx.servicediscovery.types.RedisDataSource;
-var Record = io.vertx.servicediscovery.Record;
+var JRedisDataSource = Java.type('io.vertx.servicediscovery.types.RedisDataSource');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
  Service type for Redis data source.

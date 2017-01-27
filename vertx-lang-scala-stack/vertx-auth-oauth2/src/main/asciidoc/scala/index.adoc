@@ -268,7 +268,6 @@ token.revokeFuture("access_token").onComplete{
 
 For convenience there are several helpers to assist your with your configuration. Currently we provide:
 
-* App.net `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/AppNetAuth.html[AppNetAuth]`
 * Azure Active Directory `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/AzureADAuth.html[AzureADAuth]`
 * Box.com `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/BoxAuth.html[BoxAuth]`
 * Dropbox `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/DropboxAuth.html[DropboxAuth]`

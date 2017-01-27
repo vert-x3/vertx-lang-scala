@@ -192,6 +192,16 @@ class StaticHandler(private val _asJava: Object)
     this
   }
 
+  /**
+    * Set the default content encoding for text related files. This allows overriding the system settings default value.
+    * @param contentEncoding the desired content encoding e.g.: "UTF-8"
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setDefaultContentEncoding(contentEncoding: String):StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setDefaultContentEncoding(contentEncoding.asInstanceOf[java.lang.String])
+    this
+  }
+
   override def handle(arg0: RoutingContext):Unit = {
     asJava.asInstanceOf[JStaticHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }

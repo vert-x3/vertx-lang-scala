@@ -88,11 +88,9 @@ public class StompServerOptionsConverter {
     json.put("secured", obj.isSecured());
     json.put("sendErrorOnNoSubscriptions", obj.isSendErrorOnNoSubscriptions());
     if (obj.getSupportedVersions() != null) {
-      json.put("supportedVersions", new JsonArray(
-          obj.getSupportedVersions().
-              stream().
-              map(item -> item).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getSupportedVersions().forEach(item -> array.add(item));
+      json.put("supportedVersions", array);
     }
     json.put("timeFactor", obj.getTimeFactor());
     json.put("trailingLine", obj.isTrailingLine());

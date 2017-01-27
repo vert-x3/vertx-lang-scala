@@ -322,6 +322,7 @@
     <module>vertx-auth-jwt</module>
     <module>vertx-auth-jdbc</module>
     <module>vertx-web</module>
+    <module>vertx-web-common</module>
     <module>vertx-web-client</module>
     <module>vertx-sockjs-service-proxy</module>
     <module>vertx-web-templ-freemarker</module>

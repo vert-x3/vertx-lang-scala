@@ -55,11 +55,9 @@ public class ResultSetConverter {
 
   public static void toJson(ResultSet obj, JsonObject json) {
     if (obj.getColumnNames() != null) {
-      json.put("columnNames", new JsonArray(
-          obj.getColumnNames().
-              stream().
-              map(item -> item).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getColumnNames().forEach(item -> array.add(item));
+      json.put("columnNames", array);
     }
     if (obj.getNext() != null) {
       json.put("next", obj.getNext().toJson());
@@ -70,18 +68,14 @@ public class ResultSetConverter {
       json.put("output", obj.getOutput());
     }
     if (obj.getResults() != null) {
-      json.put("results", new JsonArray(
-          obj.getResults().
-              stream().
-              map(item -> item).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getResults().forEach(item -> array.add(item));
+      json.put("results", array);
     }
     if (obj.getRows() != null) {
-      json.put("rows", new JsonArray(
-          obj.getRows().
-              stream().
-              map(item -> item).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getRows().forEach(item -> array.add(item));
+      json.put("rows", array);
     }
   }
 }

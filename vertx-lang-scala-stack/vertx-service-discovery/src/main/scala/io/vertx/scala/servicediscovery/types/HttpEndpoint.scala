@@ -22,9 +22,8 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.http.HttpClient
 import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.ext.web.client.{WebClient => JWebClient}
 import io.vertx.scala.servicediscovery.ServiceDiscovery
-import io.vertx.webclient.{WebClient => JWebClient}
-import io.vertx.scala.webclient.WebClient
 import io.vertx.servicediscovery.types.{HttpEndpoint => JHttpEndpoint}
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
@@ -32,6 +31,7 @@ import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.scala.servicediscovery.Record
+import io.vertx.scala.ext.web.client.WebClient
 
 /**
   *  for HTTP endpoint (REST api).

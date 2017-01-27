@@ -20,8 +20,8 @@ var ServiceDiscovery = require('vertx-service-discovery-js/service_discovery');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JEventBusService = io.vertx.servicediscovery.types.EventBusService;
-var Record = io.vertx.servicediscovery.Record;
+var JEventBusService = Java.type('io.vertx.servicediscovery.types.EventBusService');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 

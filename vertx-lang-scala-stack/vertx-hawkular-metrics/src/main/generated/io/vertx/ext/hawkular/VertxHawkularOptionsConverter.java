@@ -84,11 +84,9 @@ public class VertxHawkularOptionsConverter {
     json.put("batchDelay", obj.getBatchDelay());
     json.put("batchSize", obj.getBatchSize());
     if (obj.getDisabledMetricsTypes() != null) {
-      json.put("disabledMetricsTypes", new JsonArray(
-          obj.getDisabledMetricsTypes().
-              stream().
-              map(item -> item.name()).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getDisabledMetricsTypes().forEach(item -> array.add(item.name()));
+      json.put("disabledMetricsTypes", array);
     }
     json.put("enabled", obj.isEnabled());
     if (obj.getHost() != null) {

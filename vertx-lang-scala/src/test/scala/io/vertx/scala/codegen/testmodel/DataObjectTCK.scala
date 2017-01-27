@@ -20,8 +20,11 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
+import io.vertx.codegen.testmodel.{DataObjectWithRecursion => JDataObjectWithRecursion}
 import io.vertx.codegen.testmodel.{DataObjectWithMaps => JDataObjectWithMaps}
 import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
+import io.vertx.codegen.testmodel.{DataObjectWithMapAdders => JDataObjectWithMapAdders}
+import io.vertx.codegen.testmodel.{DataObjectWithListAdders => JDataObjectWithListAdders}
 import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
 import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
 import io.vertx.codegen.testmodel.{DataObjectTCK => JDataObjectTCK}
@@ -64,6 +67,18 @@ class DataObjectTCK(private val _asJava: Object) {
 
   def setDataObjectWithBuffer(dataObject: DataObjectWithNestedBuffer):Unit = {
     asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithBuffer(dataObject.asJava)
+  }
+
+  def setDataObjectWithListAdders(dataObject: DataObjectWithListAdders):Unit = {
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithListAdders(dataObject.asJava)
+  }
+
+  def setDataObjectWithMapAdders(dataObject: DataObjectWithMapAdders):Unit = {
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithMapAdders(dataObject.asJava)
+  }
+
+  def setDataObjectWithRecursion(dataObject: DataObjectWithRecursion):Unit = {
+    asJava.asInstanceOf[JDataObjectTCK].setDataObjectWithRecursion(dataObject.asJava)
   }
 
 }

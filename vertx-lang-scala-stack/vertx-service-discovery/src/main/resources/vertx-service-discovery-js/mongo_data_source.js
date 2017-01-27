@@ -21,8 +21,8 @@ var ServiceDiscovery = require('vertx-service-discovery-js/service_discovery');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JMongoDataSource = io.vertx.servicediscovery.types.MongoDataSource;
-var Record = io.vertx.servicediscovery.Record;
+var JMongoDataSource = Java.type('io.vertx.servicediscovery.types.MongoDataSource');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 

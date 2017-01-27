@@ -756,13 +756,47 @@ Here's an example of getting disting value
 
 [source,scala]
 ----
-Code not translatable
+import scala.util.Failure
+import scala.util.Success
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+
+    mongoClient.distinctFuture("books", "title", java.lang.String.class.getName()).onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 Here's an example of getting distinct value in batch mode
 
 [source,scala]
 ----
-Code not translatable
+import scala.util.Failure
+import scala.util.Success
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+
+    mongoClient.distinctBatchFuture("books", "title", java.lang.String.class.getName()).onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 == Configuring the client

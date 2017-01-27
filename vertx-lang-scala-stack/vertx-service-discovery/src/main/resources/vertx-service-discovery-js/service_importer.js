@@ -22,7 +22,7 @@ var ServicePublisher = require('vertx-service-discovery-js/service_publisher');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JServiceImporter = io.vertx.servicediscovery.spi.ServiceImporter;
+var JServiceImporter = Java.type('io.vertx.servicediscovery.spi.ServiceImporter');
 
 /**
  The service importer allows integrate other discovery technologies with the Vert.x service discovery. It maps

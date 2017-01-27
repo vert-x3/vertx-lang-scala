@@ -19,8 +19,8 @@ var utils = require('vertx-js/util/utils');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JServiceReference = io.vertx.servicediscovery.ServiceReference;
-var Record = io.vertx.servicediscovery.Record;
+var JServiceReference = Java.type('io.vertx.servicediscovery.ServiceReference');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 
