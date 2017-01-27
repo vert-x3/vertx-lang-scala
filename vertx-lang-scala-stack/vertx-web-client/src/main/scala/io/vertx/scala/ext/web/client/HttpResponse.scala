@@ -14,17 +14,17 @@
  * under the License.
  */
 
-package io.vertx.scala.webclient
+package io.vertx.scala.ext.web.client
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.MultiMap
-import io.vertx.webclient.{HttpResponse => JHttpResponse}
 import scala.collection.JavaConverters._
 
 /**
@@ -32,13 +32,13 @@ import scala.collection.JavaConverters._
   * 
   * The usual HTTP response attributes are available:
   * <ul>
-  *   <li>[[io.vertx.scala.webclient.HttpResponse#statusCode]] the HTTP status code</li>
-  *   <li>[[io.vertx.scala.webclient.HttpResponse#statusMessage]] the HTTP status message</li>
-  *   <li>[[io.vertx.scala.webclient.HttpResponse#headers]] the HTTP headers</li>
-  *   <li>[[io.vertx.scala.webclient.HttpResponse#version]] the HTTP version</li>
+  *   <li>[[io.vertx.scala.ext.web.client.HttpResponse#statusCode]] the HTTP status code</li>
+  *   <li>[[io.vertx.scala.ext.web.client.HttpResponse#statusMessage]] the HTTP status message</li>
+  *   <li>[[io.vertx.scala.ext.web.client.HttpResponse#headers]] the HTTP headers</li>
+  *   <li>[[io.vertx.scala.ext.web.client.HttpResponse#version]] the HTTP version</li>
   * </ul>
   * 
-  * The body of the response is returned by [[io.vertx.scala.webclient.HttpResponse#body]] decoded as the format specified by the [[io.vertx.scala.webclient.BodyCodec]] that
+  * The body of the response is returned by [[io.vertx.scala.ext.web.client.HttpResponse#body]] decoded as the format specified by the  that
   * built the response.
   * 
   * Keep in mind that using this `HttpResponse` impose to fully buffer the response body and should be used for payload

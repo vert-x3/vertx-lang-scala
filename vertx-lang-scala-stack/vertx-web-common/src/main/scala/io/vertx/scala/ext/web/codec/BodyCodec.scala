@@ -14,14 +14,14 @@
  * under the License.
  */
 
-package io.vertx.scala.webclient
+package io.vertx.scala.ext.web.codec
 
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.webclient.{BodyCodec => JBodyCodec}
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
+import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 

@@ -22,8 +22,8 @@ var ServicePublisher = require('vertx-service-discovery-js/service_publisher');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JServiceExporter = io.vertx.servicediscovery.spi.ServiceExporter;
-var Record = io.vertx.servicediscovery.Record;
+var JServiceExporter = Java.type('io.vertx.servicediscovery.spi.ServiceExporter');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
  The service exporter allows integrate other discovery technologies with the Vert.x service discovery. It maps
@@ -60,7 +60,7 @@ var ServiceExporter = function(j_val) {
   this.onPublish = function(record) {
     var __args = arguments;
     if (__args.length === 1 && (typeof __args[0] === 'object' && __args[0] != null)) {
-      j_serviceExporter["onPublish(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null);
+      j_serviceExporter["onPublish(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(Java.asJSONCompatible(record))) : null);
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -74,7 +74,7 @@ var ServiceExporter = function(j_val) {
   this.onUpdate = function(record) {
     var __args = arguments;
     if (__args.length === 1 && (typeof __args[0] === 'object' && __args[0] != null)) {
-      j_serviceExporter["onUpdate(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null);
+      j_serviceExporter["onUpdate(io.vertx.servicediscovery.Record)"](record != null ? new Record(new JsonObject(Java.asJSONCompatible(record))) : null);
     } else throw new TypeError('function invoked with invalid arguments');
   };
 

@@ -65,6 +65,11 @@
 @end{}
 
 @foreach{method : basicMethods}
+	@if{method.name == 'executeBlocking'}
+	@if{method.params.size == 2}
+	@includeNamed{'executeblocking.templ'}
+	@end{}
+	@else{}
 	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
@@ -75,6 +80,7 @@
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
   }\n
 	\n
+	@end{}
 @end{}
 
 @if{className != 'CompositeFuture' && className != 'Future' }

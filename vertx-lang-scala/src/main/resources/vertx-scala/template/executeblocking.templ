@@ -1,0 +1,21 @@
+  /**\n
+    * Safely execute some blocking code.\n
+    *\n
+    * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.\n
+    *\n
+    * When the code is complete the returned Future will be completed with the result.\n
+    *\n
+    * @param blockingFunction function containing blocking code\n
+    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees\n
+    * @return a Future representing the result of the blocking operation\n
+    */\n
+  def executeBlocking[T](blockingFunction: () => T, ordered:Boolean = true): concurrent.Future[T] = {\n
+    val promise = concurrent.Promise[T]\n
+    val h:Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {\n
+      case util.Success(s) => f.complete(s)\n
+      case util.Failure(t) => f.fail(t)\n
+    }}\n
+    asJava.asInstanceOf[J@{className}].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })\n
+    promise.future\n
+  }\n
+\n

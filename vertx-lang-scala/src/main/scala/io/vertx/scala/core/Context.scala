@@ -86,28 +86,23 @@ class Context(private val _asJava: Object) {
 
   /**
     * Safely execute some blocking code.
-    * 
+    *
     * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
-    * 
-    * When the code is complete the handler `resultHandler` will be called with the result on the original context
-    * (e.g. on the original event loop of the caller).
-    * 
-    * A `Future` instance is passed into `blockingCodeHandler`. When the blocking code successfully completes,
-    * the handler should call the [[io.vertx.scala.core.Future#complete]] or [[io.vertx.scala.core.Future#complete]] method, or the [[io.vertx.scala.core.Future#fail]]
-    * method if it failed.
-    * @param blockingCodeHandler handler representing the blocking code to run
+    *
+    * When the code is complete the returned Future will be completed with the result.
+    *
+    * @param blockingFunction function containing blocking code
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+    * @return a Future representing the result of the blocking operation
     */
-  def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],ordered: Boolean,resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},ordered.asInstanceOf[java.lang.Boolean],{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
-  }
-
-  /**
-    * Invoke [[io.vertx.scala.core.Context#executeBlockingFuture]] with order = true.
-    * @param blockingCodeHandler handler representing the blocking code to run
-    */
-  def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JContext].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
+  def executeBlocking[T](blockingFunction: () => T, ordered:Boolean = true): concurrent.Future[T] = {
+    val promise = concurrent.Promise[T]
+    val h:Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+      case util.Success(s) => f.complete(s)
+      case util.Failure(t) => f.fail(t)
+    }}
+    asJava.asInstanceOf[JContext].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+    promise.future
   }
 
   /**

@@ -21,8 +21,8 @@ var MessageConsumer = require('vertx-js/message_consumer');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JMessageSource = io.vertx.servicediscovery.types.MessageSource;
-var Record = io.vertx.servicediscovery.Record;
+var JMessageSource = Java.type('io.vertx.servicediscovery.types.MessageSource');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
  Service type for data producer. Providers are publishing data to a specific event bus address.

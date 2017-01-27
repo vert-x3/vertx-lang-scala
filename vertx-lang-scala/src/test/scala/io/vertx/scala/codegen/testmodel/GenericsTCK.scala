@@ -347,6 +347,18 @@ class GenericsTCK(private val _asJava: Object) {
     GenericNullableRefedInterface[RefedInterface1](asJava.asInstanceOf[JGenericsTCK].methodWithGenericNullableApiReturn(notNull.asInstanceOf[java.lang.Boolean]))
   }
 
+  def methodWithParamInferedReturn[T:TypeTag](param: GenericRefedInterface[T]):GenericRefedInterface[T] = {
+    GenericRefedInterface[T](asJava.asInstanceOf[JGenericsTCK].methodWithParamInferedReturn[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]]))
+  }
+
+  def methodWithHandlerParamInfered[T:TypeTag](param: GenericRefedInterface[T],handler: Handler[GenericRefedInterface[T]]):Unit = {
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]],{x: JGenericRefedInterface[Object] => handler.handle(GenericRefedInterface[T](x))})
+  }
+
+  def methodWithHandlerAsyncResultParamInfered[T:TypeTag](param: GenericRefedInterface[T],handler: Handler[AsyncResult[GenericRefedInterface[T]]]):Unit = {
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]],{x: AsyncResult[JGenericRefedInterface[Object]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object],GenericRefedInterface[T]](x, a => GenericRefedInterface[T](a)))})
+  }
+
   def methodWithHandlerAsyncResultByteParameterizedFuture():scala.concurrent.Future[GenericRefedInterface[Byte]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[java.lang.Byte], GenericRefedInterface[Byte]](x => GenericRefedInterface[Byte](x))
     asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultByteParameterized(promiseAndHandler._1)
@@ -452,6 +464,12 @@ class GenericsTCK(private val _asJava: Object) {
   def methodWithHandlerAsyncResultGenericNullableApiFuture(notNull: Boolean):scala.concurrent.Future[GenericNullableRefedInterface[RefedInterface1]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericNullableRefedInterface[JRefedInterface1], GenericNullableRefedInterface[RefedInterface1]](x => GenericNullableRefedInterface[RefedInterface1](x))
     asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultGenericNullableApi(notNull.asInstanceOf[java.lang.Boolean],promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  def methodWithHandlerAsyncResultParamInferedFuture[T:TypeTag](param: GenericRefedInterface[T]):scala.concurrent.Future[GenericRefedInterface[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JGenericRefedInterface[Object], GenericRefedInterface[T]](x => GenericRefedInterface[T](x))
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]],promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
