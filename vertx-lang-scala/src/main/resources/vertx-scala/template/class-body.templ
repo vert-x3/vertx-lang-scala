@@ -85,6 +85,7 @@
 
 @if{className != 'CompositeFuture' && className != 'Future' }
 @foreach{method : futureMethods}
+	@if{method.name != 'executeBlocking'}
 	@if{method.doc != null}@{methodDoc(method, ' ', true);}@end{}
   @if{isMethodNeedsOverride(type.name, method) && !method.name.endsWith("Handler")}override @end{}
 	def @{createNameForMethodReturningAFuture(method)}
@@ -98,6 +99,7 @@
     promiseAndHandler._2.future\n
   }\n
 	\n
+	@end{}
 @end{}
 @end{}
 }\n
