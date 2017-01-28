@@ -38,14 +38,28 @@ class WorkerExecutor(private val _asJava: Object)
 
   def asJava = _asJava
 
-  /**
-    * Like [[io.vertx.scala.core.WorkerExecutor#executeBlockingFuture]] called with ordered = true.
+   /**
+    * Safely execute some blocking code.
+    *
+    * Executes the blocking code in the handler `blockingCodeHandler` using a thread from the worker pool.
+    *
+    * When the code is complete the returned Future will be completed with the result.
+    *
+    * @param blockingFunction function containing blocking code
+    * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+    * @return a Future representing the result of the blocking operation
     */
-  def executeBlocking[T:TypeTag](blockingCodeHandler: Handler[Future[T]],resultHandler: Handler[AsyncResult[T]]):Unit = {
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[Object]({x: JFuture[Object] => blockingCodeHandler.handle(Future[T](x))},{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))})
+  def executeBlocking[T](blockingFunction: () => T, ordered:Boolean = true): concurrent.Future[T] = {
+    val promise = concurrent.Promise[T]
+    val h:Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+      case util.Success(s) => f.complete(s)
+      case util.Failure(t) => f.fail(t)
+    }}
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+    promise.future
   }
 
-  /**
+   /**
     * Close the executor.
     */
   def close():Unit = {

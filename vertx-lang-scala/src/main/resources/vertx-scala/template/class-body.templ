@@ -53,6 +53,11 @@
 @end{}
 
 @foreach{method : defaultMethods}
+	@if{method.name == 'executeBlocking'}
+	@if{method.params.size == 2}
+ 	@includeNamed{'executeblocking.templ'}
+ 	@end{}
+	@else{}
 	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}def @{escapeIfKeyword(method.name)}
 	@{assembleTypeParams(method.typeParams, true)}(
@@ -62,6 +67,7 @@
     @{invokeMethod('asJava' + fromObjectToInstanceOf(type), type, method, typeParams)}\n
   }\n
 	\n
+	@end{}
 @end{}
 
 @foreach{method : basicMethods}
