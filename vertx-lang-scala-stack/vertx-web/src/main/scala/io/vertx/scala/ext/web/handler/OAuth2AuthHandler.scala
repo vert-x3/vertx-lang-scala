@@ -33,7 +33,7 @@ import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 /**
   * An auth handler that provides OAuth2 Authentication support. This handler is suitable for AuthCode flows.
   */
-class OAuth2AuthHandler(private val _asJava: Object) 
+class OAuth2AuthHandler(private val _asJava: Object)
     extends  AuthHandler {
 
   def asJava = _asJava
@@ -43,7 +43,7 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthority(authority: String):AuthHandler = {
+  override def addAuthority(authority: String): AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
@@ -53,7 +53,7 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
+  override def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
@@ -63,7 +63,7 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param extraParams extra optional parameters.
     * @return self
     */
-  def extraParams(extraParams: io.vertx.core.json.JsonObject):OAuth2AuthHandler = {
+  def extraParams(extraParams: io.vertx.core.json.JsonObject): OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].extraParams(extraParams)
     this
   }
@@ -73,12 +73,12 @@ class OAuth2AuthHandler(private val _asJava: Object)
     * @param route a given route e.g.: `/callback`
     * @return self
     */
-  def setupCallback(route: Route):OAuth2AuthHandler = {
+  def setupCallback(route: Route): OAuth2AuthHandler = {
     asJava.asInstanceOf[JOAuth2AuthHandler].setupCallback(route.asJava.asInstanceOf[JRoute])
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JOAuth2AuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -92,7 +92,7 @@ object OAuth2AuthHandler{
     * @param callbackURL the callback URL you entered in your provider admin console, usually it should be something like: `https://myserver:8888/callback`
     * @return the auth handler
     */
-  def create(authProvider: OAuth2Auth,callbackURL: String):OAuth2AuthHandler = {
+  def create(authProvider: OAuth2Auth,callbackURL: String): OAuth2AuthHandler = {
     OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth],callbackURL.asInstanceOf[java.lang.String]))
   }
 

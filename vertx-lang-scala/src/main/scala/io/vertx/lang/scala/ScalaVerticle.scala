@@ -26,7 +26,7 @@ import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 /**
-  * Base class for verticle implementiations.
+  * Base class for verticle implementations.
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
@@ -105,14 +105,14 @@ abstract class ScalaVerticle {
       ScalaVerticle.this.init(vertx, context, this)
     }
 
-    override def start(startFuture: Future[Void]): Unit = {
+    override final def start(startFuture: Future[Void]): Unit = {
       that.start().onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
       }
     }
 
-    override def stop(stopFuture: Future[Void]): Unit = {
+    override final def stop(stopFuture: Future[Void]): Unit = {
       that.stop().onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)

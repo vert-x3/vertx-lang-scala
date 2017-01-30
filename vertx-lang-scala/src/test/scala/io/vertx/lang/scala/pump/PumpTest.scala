@@ -78,28 +78,28 @@ class PumpTest extends FlatSpec with Matchers {
     })
   }
 
-  "testPumpReadStreamNull" should "work" in {
+  "testPumpReadStreamNull" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](ReadStream[MyClass](rs), null)
     }
   }
 
-  "testPumpWriteStreamNull" should "work" in {
+  "testPumpWriteStreamNull" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](null, WriteStream[MyClass](ws))
     }
   }
 
-  "testPumpReadStreamNull2" should "work" in {
+  "testPumpReadStreamNull2" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](ReadStream[MyClass](rs), null, 1000)
     }
   }
 
-  "testPumpWriteStreamNull2" should "work" in {
+  "testPumpWriteStreamNull2" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
       Pump.pump[MyClass](null, WriteStream[MyClass](ws), 1000)

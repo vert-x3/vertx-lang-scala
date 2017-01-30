@@ -120,7 +120,7 @@ object Argument {
       null
   }
   
-  def fromJson(json: JsonObject):Argument = {
+  def fromJson(json: JsonObject): Argument = {
     if(json != null)
       new Argument(new JArgument(json))
     else

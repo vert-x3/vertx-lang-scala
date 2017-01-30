@@ -9,7 +9,7 @@
 	@end{}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-	@end{','}):@{toScalaType(method.returnType, false)}\n
+	@end{','}): @{toScalaType(method.returnType, false)}\n
 	\n
 @end{}
 
@@ -22,7 +22,7 @@
 	@end{}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-	@end{','}):@{toScalaType(method.returnType, false)}\n
+	@end{','}): @{toScalaType(method.returnType, false)}\n
 	\n
 @end{}
 }\n

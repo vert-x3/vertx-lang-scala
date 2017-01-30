@@ -115,7 +115,7 @@ object DataObjectWithValues {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithValues = {
+  def fromJson(json: JsonObject): DataObjectWithValues = {
     if(json != null)
       new DataObjectWithValues(new JDataObjectWithValues(json))
     else

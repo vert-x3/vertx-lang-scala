@@ -31,12 +31,12 @@ import io.vertx.core.Handler
   * A handler which renders responses using a template engine and where the template name is selected from the URI
   * path.
   */
-class TemplateHandler(private val _asJava: Object) 
+class TemplateHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JTemplateHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -49,7 +49,7 @@ object TemplateHandler{
     * @param engine the template engine
     * @return the handler
     */
-  def create(engine: TemplateEngine):TemplateHandler = {
+  def create(engine: TemplateEngine): TemplateHandler = {
     TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
   }
 
@@ -60,7 +60,7 @@ object TemplateHandler{
     * @param contentType the content type header to be used in the response
     * @return the handler
     */
-  def create(engine: TemplateEngine,templateDirectory: String,contentType: String):TemplateHandler = {
+  def create(engine: TemplateEngine,templateDirectory: String,contentType: String): TemplateHandler = {
     TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
   }
 

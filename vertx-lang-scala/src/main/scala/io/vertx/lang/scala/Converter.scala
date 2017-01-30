@@ -7,7 +7,7 @@ import scala.util.{Success, Failure, Try}
 import scala.reflect.runtime.universe._
 
 /**
-  * Created by jochen on 26.11.16.
+  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 object Converter {
 

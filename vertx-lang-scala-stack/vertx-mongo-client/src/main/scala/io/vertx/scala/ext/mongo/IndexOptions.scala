@@ -114,7 +114,7 @@ object IndexOptions {
       null
   }
   
-  def fromJson(json: JsonObject):IndexOptions = {
+  def fromJson(json: JsonObject): IndexOptions = {
     if(json != null)
       new IndexOptions(new JIndexOptions(json))
     else

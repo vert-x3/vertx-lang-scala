@@ -28,14 +28,14 @@ import scala.collection.JavaConverters._
   * A parsed language header.
   * Delivers a more direct access to the individual elements of the header it represents
   */
-class LanguageHeader(private val _asJava: Object) 
+class LanguageHeader(private val _asJava: Object)
     extends Locale(_asJava) with ParsedHeaderValue {
 
 
   /**
     * Contains the raw value that was received from the user agent 
     */
-  override def rawValue():String = {
+  override def rawValue(): String = {
     asJava.asInstanceOf[JLanguageHeader].rawValue().asInstanceOf[String]
   }
 
@@ -43,7 +43,7 @@ class LanguageHeader(private val _asJava: Object)
     * Holds the unparsed value of the header.<br>
     * For the most part, this is the content before the semi-colon (";")
     */
-  override def value():String = {
+  override def value(): String = {
     asJava.asInstanceOf[JLanguageHeader].value().asInstanceOf[String]
   }
 
@@ -53,7 +53,7 @@ class LanguageHeader(private val _asJava: Object)
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
-  override def weight():Float = {
+  override def weight(): Float = {
     asJava.asInstanceOf[JLanguageHeader].weight().asInstanceOf[Float]
   }
 
@@ -67,7 +67,7 @@ class LanguageHeader(private val _asJava: Object)
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return 
     */
-  override def parameter(key: String):scala.Option[String] = {
+  override def parameter(key: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JLanguageHeader].parameter(key.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -76,7 +76,7 @@ class LanguageHeader(private val _asJava: Object)
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return Unmodifiable Map of parameters of this header value
     */
-  override def parameters():scala.collection.mutable.Map[String, String] = {
+  override def parameters(): scala.collection.mutable.Map[String, String] = {
     collection.mutable.Map(asJava.asInstanceOf[JLanguageHeader].parameters().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
@@ -84,7 +84,7 @@ class LanguageHeader(private val _asJava: Object)
     * Is this an allowed operation as specified by the corresponding header?
     * @return 
     */
-  override def isPermitted():Boolean = {
+  override def isPermitted(): Boolean = {
     asJava.asInstanceOf[JLanguageHeader].isPermitted().asInstanceOf[Boolean]
   }
 
@@ -93,14 +93,14 @@ class LanguageHeader(private val _asJava: Object)
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
-  override def isMatchedBy(matchTry: ParsedHeaderValue):Boolean = {
+  override def isMatchedBy(matchTry: ParsedHeaderValue): Boolean = {
     asJava.asInstanceOf[JLanguageHeader].isMatchedBy(matchTry.asJava.asInstanceOf[JParsedHeaderValue]).asInstanceOf[Boolean]
   }
 
   /**
     * An integer that represents the absolute order position of this header
     */
-  override def weightedOrder():Int = {
+  override def weightedOrder(): Int = {
     asJava.asInstanceOf[JLanguageHeader].weightedOrder().asInstanceOf[Int]
   }
 
@@ -110,7 +110,7 @@ class LanguageHeader(private val _asJava: Object)
     * Equivalent to 
     * @return The language tag
     */
-  def tag():String = {
+  def tag(): String = {
     asJava.asInstanceOf[JLanguageHeader].tag().asInstanceOf[String]
   }
 
@@ -120,7 +120,7 @@ class LanguageHeader(private val _asJava: Object)
     * Equivalent to 
     * @return The language subtag
     */
-  def subtag():scala.Option[String] = {
+  def subtag(): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JLanguageHeader].subtag().asInstanceOf[String])
   }
 
@@ -129,14 +129,14 @@ class LanguageHeader(private val _asJava: Object)
     * + info: <a href="https://tools.ietf.org/html/rfc7231#section-3.1.3.1">rfc7231#section-3.1.3.1</a>
     * @return The language subtag at specified position
     */
-  def subtag(level: Int):scala.Option[String] = {
+  def subtag(level: Int): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JLanguageHeader].subtag(level.asInstanceOf[java.lang.Integer]).asInstanceOf[String])
   }
 
   /**
     * @return the number of subtags this value has
     */
-  def subtagCount():Int = {
+  def subtagCount(): Int = {
     asJava.asInstanceOf[JLanguageHeader].subtagCount().asInstanceOf[Int]
   }
 

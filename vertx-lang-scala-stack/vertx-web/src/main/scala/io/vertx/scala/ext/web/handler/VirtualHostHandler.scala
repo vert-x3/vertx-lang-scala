@@ -27,12 +27,12 @@ import io.vertx.core.Handler
 /**
   * Handler that will filter requests based on the request Host name.
   */
-class VirtualHostHandler(private val _asJava: Object) 
+class VirtualHostHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JVirtualHostHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -44,7 +44,7 @@ object VirtualHostHandler{
     * Create a handler
     * @return the handler
     */
-  def create(hostname: String,handler: Handler[RoutingContext]):VirtualHostHandler = {
+  def create(hostname: String,handler: Handler[RoutingContext]): VirtualHostHandler = {
     VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String],{x: JRoutingContext => handler.handle(RoutingContext(x))}))
   }
 

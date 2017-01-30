@@ -107,7 +107,7 @@ object @{type.raw.simpleName} {\n
       null\n
   }\n
   \n
-  def fromJson(json: JsonObject):@{className} = {\n
+  def fromJson(json: JsonObject): @{className} = {\n
     if(json != null)\n
       new @{className}(new J@{className}(json))\n
     else\n

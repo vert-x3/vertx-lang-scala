@@ -41,14 +41,14 @@ class Command(private val _asJava: Object) {
   /**
     * @return the command name
     */
-  def name():String = {
+  def name(): String = {
     asJava.asInstanceOf[JCommand].name().asInstanceOf[String]
   }
 
   /**
     * @return the command line interface, can be null
     */
-  def cli():CLI = {
+  def cli(): CLI = {
     CLI(asJava.asInstanceOf[JCommand].cli())
   }
 
@@ -56,7 +56,7 @@ class Command(private val _asJava: Object) {
     * Create a new process with empty arguments.
     * @return the process
     */
-  def createProcess():Process = {
+  def createProcess(): Process = {
     Process(asJava.asInstanceOf[JCommand].createProcess())
   }
 
@@ -65,7 +65,7 @@ class Command(private val _asJava: Object) {
     * or  )` method to signal completion is done.
     * @param completion the completion object
     */
-  def complete(completion: Completion):Unit = {
+  def complete(completion: Completion): Unit = {
     asJava.asInstanceOf[JCommand].complete(completion.asJava.asInstanceOf[JCompletion])
   }
 
@@ -74,7 +74,7 @@ class Command(private val _asJava: Object) {
     * @param args the process arguments
     * @return the process
     */
-  def createProcess(args: scala.collection.mutable.Buffer[CliToken]):Process = {
+  def createProcess(args: scala.collection.mutable.Buffer[CliToken]): Process = {
     Process(asJava.asInstanceOf[JCommand].createProcess(args.map(x => x.asJava.asInstanceOf[JCliToken]).asJava))
   }
 

@@ -238,7 +238,7 @@ object VertxHawkularOptions {
       null
   }
   
-  def fromJson(json: JsonObject):VertxHawkularOptions = {
+  def fromJson(json: JsonObject): VertxHawkularOptions = {
     if(json != null)
       new VertxHawkularOptions(new JVertxHawkularOptions(json))
     else

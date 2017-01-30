@@ -80,7 +80,7 @@ object PermittedOptions {
       null
   }
   
-  def fromJson(json: JsonObject):PermittedOptions = {
+  def fromJson(json: JsonObject): PermittedOptions = {
     if(json != null)
       new PermittedOptions(new JPermittedOptions(json))
     else

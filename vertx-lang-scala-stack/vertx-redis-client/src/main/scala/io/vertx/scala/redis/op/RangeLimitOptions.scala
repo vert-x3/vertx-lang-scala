@@ -43,7 +43,7 @@ object RangeLimitOptions {
       null
   }
   
-  def fromJson(json: JsonObject):RangeLimitOptions = {
+  def fromJson(json: JsonObject): RangeLimitOptions = {
     if(json != null)
       new RangeLimitOptions(new JRangeLimitOptions(json))
     else

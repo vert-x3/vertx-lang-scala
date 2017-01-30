@@ -36,13 +36,13 @@ import io.vertx.scala.ext.shell.cli.CliToken
 class Shell(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:JobController = _
-  private var cached_1:Session = _
+  private var cached_0: JobController = _
+  private var cached_1: Session = _
 
   /**
     * @return the shell's job controller
     */
-  def jobController():JobController = {
+  def jobController(): JobController = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JShell].jobController()
       cached_0 = JobController(tmp)
@@ -53,7 +53,7 @@ class Shell(private val _asJava: Object) {
   /**
     * @return the current shell session
     */
-  def session():Session = {
+  def session(): Session = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JShell].session()
       cached_1 = Session(tmp)
@@ -66,21 +66,21 @@ class Shell(private val _asJava: Object) {
     * @param line the command line creating this job
     * @return the created job
     */
-  def createJob(line: scala.collection.mutable.Buffer[CliToken]):Job = {
+  def createJob(line: scala.collection.mutable.Buffer[CliToken]): Job = {
     Job(asJava.asInstanceOf[JShell].createJob(line.map(x => x.asJava.asInstanceOf[JCliToken]).asJava))
   }
 
   /**
     * See [[io.vertx.scala.ext.shell.Shell#createJob]]
     */
-  def createJob(line: String):Job = {
+  def createJob(line: String): Job = {
     Job(asJava.asInstanceOf[JShell].createJob(line.asInstanceOf[java.lang.String]))
   }
 
   /**
     * Close the shell.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JShell].close()
   }
 

@@ -35,32 +35,32 @@ import io.vertx.core.Handler
   *
   * The interface is minimal in order to support all SQL clients not just JDBC.
   */
-class SQLRowStream(private val _asJava: Object) 
+class SQLRowStream(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.json.JsonArray] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(arg0: Handler[Throwable]):ReadStream[io.vertx.core.json.JsonArray] = {
+  override def exceptionHandler(arg0: Handler[Throwable]): ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => arg0.handle(x)})
     this
   }
 
-  override def handler(arg0: Handler[io.vertx.core.json.JsonArray]):ReadStream[io.vertx.core.json.JsonArray] = {
+  override def handler(arg0: Handler[io.vertx.core.json.JsonArray]): ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => arg0.handle(x)})
     this
   }
 
-  override def pause():ReadStream[io.vertx.core.json.JsonArray] = {
+  override def pause(): ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].pause()
     this
   }
 
-  override def resume():ReadStream[io.vertx.core.json.JsonArray] = {
+  override def resume(): ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].resume()
     this
   }
 
-  override def endHandler(arg0: Handler[Unit]):ReadStream[io.vertx.core.json.JsonArray] = {
+  override def endHandler(arg0: Handler[Unit]): ReadStream[io.vertx.core.json.JsonArray] = {
     asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => arg0.handle(x)})
     this
   }
@@ -70,35 +70,35 @@ class SQLRowStream(private val _asJava: Object)
     * @param name the column name
     * @return the json array index
     */
-  def column(name: String):Int = {
+  def column(name: String): Int = {
     asJava.asInstanceOf[JSQLRowStream].column(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
   /**
     * Event handler when a resultset is closed. This is useful to request for more results.
     */
-  def resultSetClosedHandler(handler: Handler[Unit]):SQLRowStream = {
+  def resultSetClosedHandler(handler: Handler[Unit]): SQLRowStream = {
     SQLRowStream(asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)}))
   }
 
   /**
     * Request for more results if available
     */
-  def moreResults():Unit = {
+  def moreResults(): Unit = {
     asJava.asInstanceOf[JSQLRowStream].moreResults()
   }
 
   /**
     * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JSQLRowStream].close()
   }
 
   /**
     * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
     */
-  def close(handler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -106,7 +106,7 @@ class SQLRowStream(private val _asJava: Object)
    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
    * @return called when the stream/underlying cursor(s) is(are) closed
    */
-  def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
     promiseAndHandler._2.future

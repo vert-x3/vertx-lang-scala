@@ -99,7 +99,7 @@ object ProxyOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ProxyOptions = {
+  def fromJson(json: JsonObject): ProxyOptions = {
     if(json != null)
       new ProxyOptions(new JProxyOptions(json))
     else

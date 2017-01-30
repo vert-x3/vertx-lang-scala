@@ -283,7 +283,7 @@ object TelnetTermOptions {
       null
   }
   
-  def fromJson(json: JsonObject):TelnetTermOptions = {
+  def fromJson(json: JsonObject): TelnetTermOptions = {
     if(json != null)
       new TelnetTermOptions(new JTelnetTermOptions(json))
     else

@@ -44,7 +44,7 @@ object GoogleAuth{
     * @param clientId the client id given to you by Google
     * @param clientSecret the client secret given to you by Google
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
 
@@ -54,7 +54,7 @@ object GoogleAuth{
     * @param clientSecret the client secret given to you by Google
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 
@@ -62,7 +62,7 @@ object GoogleAuth{
     * Create a OAuth2Auth provider for Google Service Account (Server to Server)
     * @param serviceAccountJson the configuration json file from your Google API page
     */
-  def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject):OAuth2Auth = {
+  def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject): OAuth2Auth = {
     OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx],serviceAccountJson))
   }
 
@@ -71,7 +71,7 @@ object GoogleAuth{
     * @param serviceAccountJson the configuration json file from your Google API page
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx],serviceAccountJson,httpClientOptions.asJava))
   }
 

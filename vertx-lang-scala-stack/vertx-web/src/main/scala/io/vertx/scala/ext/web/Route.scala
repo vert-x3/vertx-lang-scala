@@ -38,7 +38,7 @@ class Route(private val _asJava: Object) {
     * @param method the HTTP method to add
     * @return a reference to this, so the API can be used fluently
     */
-  def method(method: io.vertx.core.http.HttpMethod):Route = {
+  def method(method: io.vertx.core.http.HttpMethod): Route = {
     asJava.asInstanceOf[JRoute].method(method)
     this
   }
@@ -49,7 +49,7 @@ class Route(private val _asJava: Object) {
     * @param path the path prefix
     * @return a reference to this, so the API can be used fluently
     */
-  def path(path: String):Route = {
+  def path(path: String): Route = {
     asJava.asInstanceOf[JRoute].path(path.asInstanceOf[java.lang.String])
     this
   }
@@ -60,7 +60,7 @@ class Route(private val _asJava: Object) {
     * @param path the path regex
     * @return a reference to this, so the API can be used fluently
     */
-  def pathRegex(path: String):Route = {
+  def pathRegex(path: String): Route = {
     asJava.asInstanceOf[JRoute].pathRegex(path.asInstanceOf[java.lang.String])
     this
   }
@@ -70,7 +70,7 @@ class Route(private val _asJava: Object) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
-  def produces(contentType: String):Route = {
+  def produces(contentType: String): Route = {
     asJava.asInstanceOf[JRoute].produces(contentType.asInstanceOf[java.lang.String])
     this
   }
@@ -80,7 +80,7 @@ class Route(private val _asJava: Object) {
     * @param contentType the content type
     * @return a reference to this, so the API can be used fluently
     */
-  def consumes(contentType: String):Route = {
+  def consumes(contentType: String): Route = {
     asJava.asInstanceOf[JRoute].consumes(contentType.asInstanceOf[java.lang.String])
     this
   }
@@ -90,7 +90,7 @@ class Route(private val _asJava: Object) {
     * @param order the order
     * @return a reference to this, so the API can be used fluently
     */
-  def order(order: Int):Route = {
+  def order(order: Int): Route = {
     asJava.asInstanceOf[JRoute].order(order.asInstanceOf[java.lang.Integer])
     this
   }
@@ -99,7 +99,7 @@ class Route(private val _asJava: Object) {
     * Specify this is the last route for the router.
     * @return a reference to this, so the API can be used fluently
     */
-  def last():Route = {
+  def last(): Route = {
     asJava.asInstanceOf[JRoute].last()
     this
   }
@@ -111,7 +111,7 @@ class Route(private val _asJava: Object) {
     * @param requestHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(requestHandler: Handler[RoutingContext]):Route = {
+  def handler(requestHandler: Handler[RoutingContext]): Route = {
     asJava.asInstanceOf[JRoute].handler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
     this
   }
@@ -119,7 +119,7 @@ class Route(private val _asJava: Object) {
   /**
     * Like [[io.vertx.scala.ext.web.Route#blockingHandler]] called with ordered = true
     */
-  def blockingHandler(requestHandler: Handler[RoutingContext]):Route = {
+  def blockingHandler(requestHandler: Handler[RoutingContext]): Route = {
     asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
     this
   }
@@ -137,7 +137,7 @@ class Route(private val _asJava: Object) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
-  def blockingHandler(requestHandler: Handler[RoutingContext],ordered: Boolean):Route = {
+  def blockingHandler(requestHandler: Handler[RoutingContext],ordered: Boolean): Route = {
     asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))},ordered.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -149,7 +149,7 @@ class Route(private val _asJava: Object) {
     * @param failureHandler the request handler
     * @return a reference to this, so the API can be used fluently
     */
-  def failureHandler(failureHandler: Handler[RoutingContext]):Route = {
+  def failureHandler(failureHandler: Handler[RoutingContext]): Route = {
     asJava.asInstanceOf[JRoute].failureHandler({x: JRoutingContext => failureHandler.handle(RoutingContext(x))})
     this
   }
@@ -158,7 +158,7 @@ class Route(private val _asJava: Object) {
     * Remove this route from the router
     * @return a reference to this, so the API can be used fluently
     */
-  def remove():Route = {
+  def remove(): Route = {
     asJava.asInstanceOf[JRoute].remove()
     this
   }
@@ -167,7 +167,7 @@ class Route(private val _asJava: Object) {
     * Disable this route. While disabled the router will not route any requests or failures to it.
     * @return a reference to this, so the API can be used fluently
     */
-  def disable():Route = {
+  def disable(): Route = {
     asJava.asInstanceOf[JRoute].disable()
     this
   }
@@ -176,7 +176,7 @@ class Route(private val _asJava: Object) {
     * Enable this route.
     * @return a reference to this, so the API can be used fluently
     */
-  def enable():Route = {
+  def enable(): Route = {
     asJava.asInstanceOf[JRoute].enable()
     this
   }
@@ -187,7 +187,7 @@ class Route(private val _asJava: Object) {
     * @param useNormalisedPath use normalised path for routing?
     * @return a reference to this, so the API can be used fluently
     */
-  def useNormalisedPath(useNormalisedPath: Boolean):Route = {
+  def useNormalisedPath(useNormalisedPath: Boolean): Route = {
     asJava.asInstanceOf[JRoute].useNormalisedPath(useNormalisedPath.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -195,7 +195,7 @@ class Route(private val _asJava: Object) {
   /**
     * @return the path prefix (if any) for this route
     */
-  def getPath():scala.Option[String] = {
+  def getPath(): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JRoute].getPath().asInstanceOf[String])
   }
 

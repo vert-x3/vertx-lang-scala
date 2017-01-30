@@ -32,14 +32,14 @@ import io.vertx.core.Handler
 /**
   * AccessToken extension to the User interface
   */
-class AccessToken(private val _asJava: Object) 
+class AccessToken(private val _asJava: Object)
     extends User(_asJava)  {
 
 
   /**
     * Refresh the access token
     */
-  def refresh(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+  def refresh(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -48,7 +48,7 @@ class AccessToken(private val _asJava: Object)
     * Revoke access or refresh token
     * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
     */
-  def revoke(token_type: String,callback: Handler[AsyncResult[Unit]]):AccessToken = {
+  def revoke(token_type: String,callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -57,7 +57,7 @@ class AccessToken(private val _asJava: Object)
     * Revoke refresh token and calls the logout endpoint. This is a openid-connect extension and might not be
     * available on all providers.
     */
-  def logout(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+  def logout(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -65,7 +65,7 @@ class AccessToken(private val _asJava: Object)
   /**
     * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
     */
-  def introspect(callback: Handler[AsyncResult[Unit]]):AccessToken = {
+  def introspect(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -73,7 +73,7 @@ class AccessToken(private val _asJava: Object)
   /**
     * Check if the access token is expired or not.
     */
-  def expired():Boolean = {
+  def expired(): Boolean = {
     asJava.asInstanceOf[JAccessToken].expired().asInstanceOf[Boolean]
   }
 
@@ -81,7 +81,7 @@ class AccessToken(private val _asJava: Object)
    * Refresh the access token
    * @return - The callback function returning the results.
    */
-  def refreshFuture():scala.concurrent.Future[Unit] = {
+  def refreshFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].refresh(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -92,7 +92,7 @@ class AccessToken(private val _asJava: Object)
    * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
    * @return - The callback function returning the results.
    */
-  def revokeFuture(token_type: String):scala.concurrent.Future[Unit] = {
+  def revokeFuture(token_type: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -103,7 +103,7 @@ class AccessToken(private val _asJava: Object)
    * available on all providers.
    * @return - The callback function returning the results.
    */
-  def logoutFuture():scala.concurrent.Future[Unit] = {
+  def logoutFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].logout(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -113,7 +113,7 @@ class AccessToken(private val _asJava: Object)
    * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
    * @return - The callback function returning the results.
    */
-  def introspectFuture():scala.concurrent.Future[Unit] = {
+  def introspectFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].introspect(promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -34,7 +34,7 @@ import io.vertx.core.{Vertx => JVertx}
 /**
   * An extension of AuthProvider which is using .htdigest file as store
   */
-class HtdigestAuth(private val _asJava: Object) 
+class HtdigestAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)  {
 
 
@@ -42,7 +42,7 @@ class HtdigestAuth(private val _asJava: Object)
     * Return the currently used realm
     * @return the realm
     */
-  def realm():String = {
+  def realm(): String = {
     asJava.asInstanceOf[JHtdigestAuth].realm().asInstanceOf[String]
   }
 
@@ -54,7 +54,7 @@ object HtdigestAuth{
     * Creates an instance of HtdigestAuth.
     * @return the created instance of HtdigestAuths
     */
-  def create(vertx: Vertx):HtdigestAuth = {
+  def create(vertx: Vertx): HtdigestAuth = {
     HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
@@ -63,7 +63,7 @@ object HtdigestAuth{
     * @param htfile the existing htfile.
     * @return the created instance of HtdigestAuths
     */
-  def create(vertx: Vertx,htfile: String):HtdigestAuth = {
+  def create(vertx: Vertx,htfile: String): HtdigestAuth = {
     HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx],htfile.asInstanceOf[java.lang.String]))
   }
 

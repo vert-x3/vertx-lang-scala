@@ -42,13 +42,13 @@ import io.vertx.scala.core.net.SocketAddress
 class HttpConnection(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:SocketAddress = _
-  private var cached_1:SocketAddress = _
+  private var cached_0: SocketAddress = _
+  private var cached_1: SocketAddress = _
 
   /**
     * @return the remote address for this connection
     */
-  def remoteAddress():SocketAddress = {
+  def remoteAddress(): SocketAddress = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
       cached_0 = SocketAddress(tmp)
@@ -59,7 +59,7 @@ class HttpConnection(private val _asJava: Object) {
   /**
     * @return the remote address for this connection
     */
-  def localAddress():SocketAddress = {
+  def localAddress(): SocketAddress = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
       cached_1 = SocketAddress(tmp)
@@ -76,7 +76,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param windowSize the new window size
     * @return a reference to this, so the API can be used fluently
     */
-  def setWindowSize(windowSize: Int):HttpConnection = {
+  def setWindowSize(windowSize: Int): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].setWindowSize(windowSize.asInstanceOf[java.lang.Integer])
     this
   }
@@ -84,7 +84,7 @@ class HttpConnection(private val _asJava: Object) {
   /**
     * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with a last stream id `2^31-1`.
     */
-  def goAway(errorCode: Long):HttpConnection = {
+  def goAway(errorCode: Long): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long])
     this
   }
@@ -92,7 +92,7 @@ class HttpConnection(private val _asJava: Object) {
   /**
     * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with no buffer.
     */
-  def goAway(errorCode: Long,lastStreamId: Int):HttpConnection = {
+  def goAway(errorCode: Long,lastStreamId: Int): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer])
     this
   }
@@ -112,7 +112,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param debugData additional debug data sent to the remote endpoint
     * @return a reference to this, so the API can be used fluently
     */
-  def goAway(errorCode: Long,lastStreamId: Int,debugData: io.vertx.core.buffer.Buffer):HttpConnection = {
+  def goAway(errorCode: Long,lastStreamId: Int,debugData: io.vertx.core.buffer.Buffer): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer],debugData)
     this
   }
@@ -124,7 +124,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def goAwayHandler(handler: Handler[GoAway]):HttpConnection = {
+  def goAwayHandler(handler: Handler[GoAway]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAwayHandler({x: JGoAway => handler.handle(GoAway(x))})
     this
   }
@@ -136,7 +136,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdownHandler(handler: Handler[Unit]):HttpConnection = {
+  def shutdownHandler(handler: Handler[Unit]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].shutdownHandler({x: Void => handler.handle(x)})
     this
   }
@@ -148,7 +148,7 @@ class HttpConnection(private val _asJava: Object) {
     * This is not implemented for HTTP/1.x.
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdown():HttpConnection = {
+  def shutdown(): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].shutdown()
     this
   }
@@ -161,7 +161,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param timeoutMs the timeout in milliseconds
     * @return a reference to this, so the API can be used fluently
     */
-  def shutdown(timeoutMs: Long):HttpConnection = {
+  def shutdown(timeoutMs: Long): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].shutdown(timeoutMs.asInstanceOf[java.lang.Long])
     this
   }
@@ -171,7 +171,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler to be notified
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: Handler[Unit]):HttpConnection = {
+  def closeHandler(handler: Handler[Unit]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].closeHandler({x: Void => handler.handle(x)})
     this
   }
@@ -183,7 +183,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: Http2Settings):HttpConnection = {
+  def updateSettings(settings: Http2Settings): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava)
     this
   }
@@ -197,7 +197,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     * @return a reference to this, so the API can be used fluently
     */
-  def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]):HttpConnection = {
+  def updateSettings(settings: Http2Settings,completionHandler: Handler[AsyncResult[Unit]]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -209,7 +209,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler for remote endpoint settings
     * @return a reference to this, so the API can be used fluently
     */
-  def remoteSettingsHandler(handler: Handler[Http2Settings]):HttpConnection = {
+  def remoteSettingsHandler(handler: Handler[Http2Settings]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler({x: JHttp2Settings => handler.handle(Http2Settings(x))})
     this
   }
@@ -221,7 +221,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param data the 8 bytes data of the frame
     * @return a reference to this, so the API can be used fluently
     */
-  def ping(data: io.vertx.core.buffer.Buffer,pongHandler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]):HttpConnection = {
+  def ping(data: io.vertx.core.buffer.Buffer,pongHandler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].ping(data,{x: AsyncResult[Buffer] => pongHandler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
@@ -233,7 +233,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler to be called when a ` PING` is received
     * @return a reference to this, so the API can be used fluently
     */
-  def pingHandler(handler: Handler[io.vertx.core.buffer.Buffer]):HttpConnection = {
+  def pingHandler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].pingHandler({x: Buffer => handler.handle(x)})
     this
   }
@@ -243,7 +243,7 @@ class HttpConnection(private val _asJava: Object) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Handler[Throwable]):HttpConnection = {
+  def exceptionHandler(handler: Handler[Throwable]): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -251,7 +251,7 @@ class HttpConnection(private val _asJava: Object) {
   /**
     * @return the current connection window size or `-1` for HTTP/1.x
     */
-  def getWindowSize():Int = {
+  def getWindowSize(): Int = {
     asJava.asInstanceOf[JHttpConnection].getWindowSize().asInstanceOf[Int]
   }
 
@@ -260,21 +260,21 @@ class HttpConnection(private val _asJava: Object) {
     * <p/>
     * An HTTP/2 connection will send a  frame before.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JHttpConnection].close()
   }
 
   /**
     * @return the latest server settings acknowledged by the remote endpoint - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
-  def settings():Http2Settings = {
+  def settings(): Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].settings())
   }
 
   /**
     * @return the current remote endpoint settings for this connection - this is not implemented for HTTP/1.xsee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
     */
-  def remoteSettings():Http2Settings = {
+  def remoteSettings(): Http2Settings = {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
@@ -287,7 +287,7 @@ class HttpConnection(private val _asJava: Object) {
    * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
    * @return the future notified when the settings have been acknowledged by the remote endpoint
    */
-  def updateSettingsFuture(settings: Http2Settings):scala.concurrent.Future[Unit] = {
+  def updateSettingsFuture(settings: Http2Settings): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -300,7 +300,7 @@ class HttpConnection(private val _asJava: Object) {
    * @param data the 8 bytes data of the frame
    * @return an async result future notified with pong reply or the failure
    */
-  def pingFuture(data: io.vertx.core.buffer.Buffer):scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+  def pingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JHttpConnection].ping(data,promiseAndHandler._1)
     promiseAndHandler._2.future

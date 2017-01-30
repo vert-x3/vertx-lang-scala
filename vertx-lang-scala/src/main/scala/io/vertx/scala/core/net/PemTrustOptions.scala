@@ -93,7 +93,7 @@ object PemTrustOptions {
       null
   }
   
-  def fromJson(json: JsonObject):PemTrustOptions = {
+  def fromJson(json: JsonObject): PemTrustOptions = {
     if(json != null)
       new PemTrustOptions(new JPemTrustOptions(json))
     else

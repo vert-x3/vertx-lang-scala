@@ -47,22 +47,24 @@ import @{importedType}\n
 @end{}
 
 @code{
-  var clazzes = new java.util.ArrayList();
-  var fazzes = new java.util.ArrayList();
+  var classes = new java.util.ArrayList();
+  var abstractClasses = new java.util.ArrayList();
   for(superType : superTypes) {
-    if(superType.raw.isConcrete())
-      clazzes.add(superType);
-    else
-      fazzes.add(superType);
+    if(superType.raw.isConcrete()){
+      classes.add(superType);
+    }
+    else {
+      abstractClasses.add(superType);
+    }
   }
 }
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	 \n    extends @foreach{superType : clazzes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
-	 @if{!clazzes.isEmpty() && !fazzes.isEmpty()}with @end{}@foreach{superType : fazzes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	\n    extends @foreach{superType : classes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	 @if{!classes.isEmpty() && !abstractClasses.isEmpty()}with @end{}@foreach{superType : abstractClasses}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
 @else{type.isHandler}
-	 \n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false);}]
+	\n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false);}]
 @end{}
  {\n
 \n
@@ -70,34 +72,13 @@ import @{importedType}\n
 @if{concrete}
 	@includeNamed{'class-body.templ'}
 	\n
-object @{className}{\n
-  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}) = new @{className}@{assembleTypeParams(typeParams, false)}(asJava)
-  \n
-	@foreach{method : staticMethods}
-	@if{method.doc != null}@{methodDoc(method, '  ', false);}@end{}
-	  def @{escapeIfKeyword(method.name)}
-		@{assembleTypeParams(method.typeParams, true)}
-		(
-			@foreach{param:method.params}
-				@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-			@end{','}):@{toScalaType(method.returnType, false)} = {\n
-	    @{invokeStaticMethod('J'+className, type, method)}\n
-	  }\n
-		\n
-	@end{}
-}\n
+	@includeNamed{'class-object-body.templ'}
 @else{}
 	@includeNamed{'trait-body.templ'}
 	\n
 object @{className}{\n
-  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}):@{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava)\n
+  def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}): @{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava)\n
     private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
     @includeNamed{'class-body.templ'}
 }\n
 @end{}
-
-
-
-
-
-

@@ -94,7 +94,7 @@ object PfxOptions {
       null
   }
   
-  def fromJson(json: JsonObject):PfxOptions = {
+  def fromJson(json: JsonObject): PfxOptions = {
     if(json != null)
       new PfxOptions(new JPfxOptions(json))
     else

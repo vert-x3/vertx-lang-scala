@@ -44,7 +44,7 @@ object KeycloakAuth{
     * Create a OAuth2Auth provider for Keycloak
     * @param config the json config file exported from Keycloak admin console
     */
-  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject):OAuth2Auth = {
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): OAuth2Auth = {
     OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
@@ -53,7 +53,7 @@ object KeycloakAuth{
     * @param flow the oauth2 flow to use
     * @param config the json config file exported from Keycloak admin console
     */
-  def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject):OAuth2Auth = {
+  def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject): OAuth2Auth = {
     OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],flow,config))
   }
 
@@ -62,7 +62,7 @@ object KeycloakAuth{
     * @param config the json config file exported from Keycloak admin console
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],config,httpClientOptions.asJava))
   }
 
@@ -72,7 +72,7 @@ object KeycloakAuth{
     * @param config the json config file exported from Keycloak admin console
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],flow,config,httpClientOptions.asJava))
   }
 

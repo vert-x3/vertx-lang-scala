@@ -166,7 +166,7 @@ object MongoAuthOptions {
       null
   }
   
-  def fromJson(json: JsonObject):MongoAuthOptions = {
+  def fromJson(json: JsonObject): MongoAuthOptions = {
     if(json != null)
       new MongoAuthOptions(new JMongoAuthOptions(json))
     else

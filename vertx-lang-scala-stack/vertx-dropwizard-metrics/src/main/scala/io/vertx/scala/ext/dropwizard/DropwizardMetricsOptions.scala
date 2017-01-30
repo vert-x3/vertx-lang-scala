@@ -140,7 +140,7 @@ object DropwizardMetricsOptions {
       null
   }
   
-  def fromJson(json: JsonObject):DropwizardMetricsOptions = {
+  def fromJson(json: JsonObject): DropwizardMetricsOptions = {
     if(json != null)
       new DropwizardMetricsOptions(new JDropwizardMetricsOptions(json))
     else

@@ -23,21 +23,21 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 
 /**
   */
-class GenericRefedInterface[T:TypeTag](private val _asJava: Object) {
+class GenericRefedInterface[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
-  def setValue(value: T):GenericRefedInterface[T] = {
+  def setValue(value: T): GenericRefedInterface[T] = {
     asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
     this
   }
 
-  def getValue():T = {
+  def getValue(): T = {
     toScala[T](asJava.asInstanceOf[JGenericRefedInterface[Object]].getValue())
   }
 
 }
 
 object GenericRefedInterface{
-  def apply[T:TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
+  def apply[T: TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
 }

@@ -32,49 +32,49 @@ class FileUpload(private val _asJava: Object) {
   /**
     * @return the name of the upload as provided in the form submission
     */
-  def name():String = {
+  def name(): String = {
     asJava.asInstanceOf[JFileUpload].name().asInstanceOf[String]
   }
 
   /**
     * @return the actual temporary file name on the server where the file was uploaded to.
     */
-  def uploadedFileName():String = {
+  def uploadedFileName(): String = {
     asJava.asInstanceOf[JFileUpload].uploadedFileName().asInstanceOf[String]
   }
 
   /**
     * @return the file name of the upload as provided in the form submission
     */
-  def fileName():String = {
+  def fileName(): String = {
     asJava.asInstanceOf[JFileUpload].fileName().asInstanceOf[String]
   }
 
   /**
     * @return the size of the upload, in bytes
     */
-  def size():Long = {
+  def size(): Long = {
     asJava.asInstanceOf[JFileUpload].size().asInstanceOf[Long]
   }
 
   /**
     * @return the content type (MIME type) of the upload
     */
-  def contentType():String = {
+  def contentType(): String = {
     asJava.asInstanceOf[JFileUpload].contentType().asInstanceOf[String]
   }
 
   /**
     * @return the content transfer encoding of the upload - this describes how the upload was encoded in the form submission.
     */
-  def contentTransferEncoding():String = {
+  def contentTransferEncoding(): String = {
     asJava.asInstanceOf[JFileUpload].contentTransferEncoding().asInstanceOf[String]
   }
 
   /**
     * @return the charset of the upload
     */
-  def charSet():String = {
+  def charSet(): String = {
     asJava.asInstanceOf[JFileUpload].charSet().asInstanceOf[String]
   }
 

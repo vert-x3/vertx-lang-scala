@@ -44,7 +44,7 @@ object CloudFoundryAuth{
     * @param clientSecret the client secret given to you by CloudFoundry UAA
     * @param uuaURL the url to your UUA server instance
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,uuaURL: String):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String,uuaURL: String): OAuth2Auth = {
     OAuth2Auth(JCloudFoundryAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],uuaURL.asInstanceOf[java.lang.String]))
   }
 
@@ -55,7 +55,7 @@ object CloudFoundryAuth{
     * @param uuaURL the url to your UUA server instance
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,uuaURL: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String,uuaURL: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JCloudFoundryAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],uuaURL.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 

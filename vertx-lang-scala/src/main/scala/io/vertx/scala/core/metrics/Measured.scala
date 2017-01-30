@@ -31,12 +31,12 @@ trait Measured {
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled():Boolean
+  def isMetricsEnabled(): Boolean
 
 }
 
 object Measured{
-  def apply(asJava: JMeasured):Measured = new MeasuredImpl(asJava)
+  def apply(asJava: JMeasured): Measured = new MeasuredImpl(asJava)
     private class MeasuredImpl(private val _asJava: Object) extends Measured {
 
       def asJava = _asJava
@@ -45,7 +45,7 @@ object Measured{
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  def isMetricsEnabled():Boolean = {
+  def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
 

@@ -37,28 +37,28 @@ class Completion(private val _asJava: Object) {
   /**
     * @return the current Vert.x instance
     */
-  def vertx():Vertx = {
+  def vertx(): Vertx = {
     Vertx(asJava.asInstanceOf[JCompletion].vertx())
   }
 
   /**
     * @return the shell current session, useful for accessing data like the current path for file completion, etc...
     */
-  def session():Session = {
+  def session(): Session = {
     Session(asJava.asInstanceOf[JCompletion].session())
   }
 
   /**
     * @return the current line being completed in raw format, i.e without any char escape performed
     */
-  def rawLine():String = {
+  def rawLine(): String = {
     asJava.asInstanceOf[JCompletion].rawLine().asInstanceOf[String]
   }
 
   /**
     * @return the current line being completed as preparsed tokens
     */
-  def lineTokens():scala.collection.mutable.Buffer[CliToken] = {
+  def lineTokens(): scala.collection.mutable.Buffer[CliToken] = {
     asJava.asInstanceOf[JCompletion].lineTokens().asScala.map(x => CliToken(x))
   }
 
@@ -66,7 +66,7 @@ class Completion(private val _asJava: Object) {
     * End the completion with a list of candidates, these candidates will be displayed by the shell on the console.
     * @param candidates the candidates
     */
-  def complete(candidates: scala.collection.mutable.Buffer[String]):Unit = {
+  def complete(candidates: scala.collection.mutable.Buffer[String]): Unit = {
     asJava.asInstanceOf[JCompletion].complete(candidates.map(x => x.asInstanceOf[java.lang.String]).asJava)
   }
 
@@ -75,7 +75,7 @@ class Completion(private val _asJava: Object) {
     * @param value the value to complete with
     * @param terminal true if the value is terminal, i.e can be further completed
     */
-  def complete(value: String,terminal: Boolean):Unit = {
+  def complete(value: String,terminal: Boolean): Unit = {
     asJava.asInstanceOf[JCompletion].complete(value.asInstanceOf[java.lang.String],terminal.asInstanceOf[java.lang.Boolean])
   }
 

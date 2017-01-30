@@ -107,7 +107,7 @@ object ResultSet {
       null
   }
   
-  def fromJson(json: JsonObject):ResultSet = {
+  def fromJson(json: JsonObject): ResultSet = {
     if(json != null)
       new ResultSet(new JResultSet(json))
     else

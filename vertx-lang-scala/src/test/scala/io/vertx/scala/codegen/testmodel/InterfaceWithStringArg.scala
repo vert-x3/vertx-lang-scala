@@ -24,20 +24,20 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 
 /**
   */
-class InterfaceWithStringArg(private val _asJava: Object) 
+class InterfaceWithStringArg(private val _asJava: Object)
     extends GenericRefedInterface[String](_asJava)  {
 
 
-  override def setValue(value: String):GenericRefedInterface[String] = {
+  override def setValue(value: String): GenericRefedInterface[String] = {
     asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value.asInstanceOf[java.lang.String])
     this
   }
 
-  override def getValue():String = {
+  override def getValue(): String = {
     asJava.asInstanceOf[JInterfaceWithStringArg].getValue().asInstanceOf[String]
   }
 
-  def meth():Unit = {
+  def meth(): Unit = {
     asJava.asInstanceOf[JInterfaceWithStringArg].meth()
   }
 

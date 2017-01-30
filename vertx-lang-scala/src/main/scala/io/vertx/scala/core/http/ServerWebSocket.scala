@@ -35,18 +35,18 @@ import io.vertx.scala.core.net.SocketAddress
   * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
-class ServerWebSocket(private val _asJava: Object) 
+class ServerWebSocket(private val _asJava: Object)
     extends  WebSocketBase {
 
   def asJava = _asJava
-  private var cached_0:SocketAddress = _
-  private var cached_1:SocketAddress = _
-  private var cached_2:MultiMap = _
+  private var cached_0: SocketAddress = _
+  private var cached_1: SocketAddress = _
+  private var cached_2: MultiMap = _
 
   /**
     * @return the remote address for this socket
     */
-  override def remoteAddress():SocketAddress = {
+  override def remoteAddress(): SocketAddress = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
@@ -57,7 +57,7 @@ class ServerWebSocket(private val _asJava: Object)
   /**
     * @return the local address for this socket
     */
-  override def localAddress():SocketAddress = {
+  override def localAddress(): SocketAddress = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
       cached_1 = SocketAddress(tmp)
@@ -68,7 +68,7 @@ class ServerWebSocket(private val _asJava: Object)
   /**
     * @return the headers in the WebSocket handshake
     */
-  def headers():MultiMap = {
+  def headers(): MultiMap = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JServerWebSocket].headers()
       cached_2 = MultiMap(tmp)
@@ -76,72 +76,72 @@ class ServerWebSocket(private val _asJava: Object)
     cached_2
   }
 
-  override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocket = {
+  override def exceptionHandler(handler: Handler[Throwable]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):ServerWebSocket = {
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].handler({x: Buffer => handler.handle(x)})
     this
   }
 
-  override def pause():ServerWebSocket = {
+  override def pause(): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].pause()
     this
   }
 
-  override def resume():ServerWebSocket = {
+  override def resume(): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):ServerWebSocket = {
+  override def endHandler(endHandler: Handler[Unit]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
-  override def write(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
+  override def write(data: io.vertx.core.buffer.Buffer): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].write(data)
     this
   }
 
-  override def setWriteQueueMaxSize(maxSize: Int):ServerWebSocket = {
+  override def setWriteQueueMaxSize(maxSize: Int): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-  override def drainHandler(handler: Handler[Unit]):ServerWebSocket = {
+  override def drainHandler(handler: Handler[Unit]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def writeFrame(frame: WebSocketFrame):ServerWebSocket = {
+  override def writeFrame(frame: WebSocketFrame): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame])
     this
   }
 
-  override def writeFinalTextFrame(text: String):ServerWebSocket = {
+  override def writeFinalTextFrame(text: String): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
     this
   }
 
-  override def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
+  override def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeFinalBinaryFrame(data)
     this
   }
 
-  override def writeBinaryMessage(data: io.vertx.core.buffer.Buffer):ServerWebSocket = {
+  override def writeBinaryMessage(data: io.vertx.core.buffer.Buffer): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].writeBinaryMessage(data)
     this
   }
 
-  override def closeHandler(handler: Handler[Unit]):ServerWebSocket = {
+  override def closeHandler(handler: Handler[Unit]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def frameHandler(handler: Handler[WebSocketFrame]):ServerWebSocket = {
+  override def frameHandler(handler: Handler[WebSocketFrame]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
     this
   }
@@ -149,7 +149,7 @@ class ServerWebSocket(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
     */
-  override def end(t: io.vertx.core.buffer.Buffer):Unit = {
+  override def end(t: io.vertx.core.buffer.Buffer): Unit = {
     asJava.asInstanceOf[JServerWebSocket].end(t)
   }
 
@@ -157,7 +157,7 @@ class ServerWebSocket(private val _asJava: Object)
     * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]
     * @return true if write queue is full
     */
-  override def writeQueueFull():Boolean = {
+  override def writeQueueFull(): Boolean = {
     asJava.asInstanceOf[JServerWebSocket].writeQueueFull().asInstanceOf[Boolean]
   }
 
@@ -170,7 +170,7 @@ class ServerWebSocket(private val _asJava: Object)
     * allows you to write data to other WebSockets which are owned by different event loops.
     * @return the binary handler id
     */
-  override def binaryHandlerID():String = {
+  override def binaryHandlerID(): String = {
     asJava.asInstanceOf[JServerWebSocket].binaryHandlerID().asInstanceOf[String]
   }
 
@@ -182,39 +182,39 @@ class ServerWebSocket(private val _asJava: Object)
     * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
     * allows you to write data to other WebSockets which are owned by different event loops.
     */
-  override def textHandlerID():String = {
+  override def textHandlerID(): String = {
     asJava.asInstanceOf[JServerWebSocket].textHandlerID().asInstanceOf[String]
   }
 
   /**
     * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
     */
-  override def end():Unit = {
+  override def end(): Unit = {
     asJava.asInstanceOf[JServerWebSocket].end()
   }
 
   /**
     * Close the WebSocket.
     */
-  override def close():Unit = {
+  override def close(): Unit = {
     asJava.asInstanceOf[JServerWebSocket].close()
   }
 
-  def uri():String = {
+  def uri(): String = {
     asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }
 
   /**
     * @return the WebSocket handshake path.
     */
-  def path():String = {
+  def path(): String = {
     asJava.asInstanceOf[JServerWebSocket].path().asInstanceOf[String]
   }
 
   /**
     * @return the WebSocket handshake query string.
     */
-  def query():scala.Option[String] = {
+  def query(): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JServerWebSocket].query().asInstanceOf[String])
   }
 
@@ -227,7 +227,7 @@ class ServerWebSocket(private val _asJava: Object)
     * 
     * You might use this method, if for example you only want to accept WebSockets with a particular path.
     */
-  def reject():Unit = {
+  def reject(): Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
 

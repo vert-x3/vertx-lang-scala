@@ -62,7 +62,7 @@ object TestDataObject {
       null
   }
   
-  def fromJson(json: JsonObject):TestDataObject = {
+  def fromJson(json: JsonObject): TestDataObject = {
     if(json != null)
       new TestDataObject(new JTestDataObject(json))
     else

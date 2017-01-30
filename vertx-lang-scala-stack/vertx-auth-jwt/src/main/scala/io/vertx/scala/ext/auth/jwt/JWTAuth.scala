@@ -35,7 +35,7 @@ import io.vertx.core.{Vertx => JVertx}
 /**
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class JWTAuth(private val _asJava: Object) 
+class JWTAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)  {
 
 
@@ -45,7 +45,7 @@ class JWTAuth(private val _asJava: Object)
     * @param options extra options for the generationsee <a href="../../../../../../../../cheatsheet/JWTOptions.html">JWTOptions</a>
     * @return JWT encoded token
     */
-  def generateToken(claims: io.vertx.core.json.JsonObject,options: JWTOptions):String = {
+  def generateToken(claims: io.vertx.core.json.JsonObject,options: JWTOptions): String = {
     asJava.asInstanceOf[JJWTAuth].generateToken(claims,options.asJava).asInstanceOf[String]
   }
 
@@ -59,7 +59,7 @@ object JWTAuth{
     * @param config the config
     * @return the auth provider
     */
-  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject):JWTAuth = {
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): JWTAuth = {
     JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
   }
 

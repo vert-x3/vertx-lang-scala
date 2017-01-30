@@ -38,32 +38,32 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * The consumer is unregistered from the event bus using the [[io.vertx.scala.core.eventbus.MessageConsumer#unregister]] method or by calling the
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
-class MessageConsumer[T:TypeTag](private val _asJava: Object) 
+class MessageConsumer[T: TypeTag](private val _asJava: Object)
     extends  ReadStream[Message[T]] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(handler: Handler[Throwable]):MessageConsumer[T] = {
+  override def exceptionHandler(handler: Handler[Throwable]): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[Message[T]]):MessageConsumer[T] = {
+  override def handler(handler: Handler[Message[T]]): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].handler({x: JMessage[Object] => handler.handle(Message[T](x))})
     this
   }
 
-  override def pause():MessageConsumer[T] = {
+  override def pause(): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].pause()
     this
   }
 
-  override def resume():MessageConsumer[T] = {
+  override def resume(): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):MessageConsumer[T] = {
+  override def endHandler(endHandler: Handler[Unit]): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -71,21 +71,21 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
   /**
     * @return a read stream for the body of the message stream.
     */
-  def bodyStream():ReadStream[T] = {
+  def bodyStream(): ReadStream[T] = {
     ReadStream[T](asJava.asInstanceOf[JMessageConsumer[Object]].bodyStream())
   }
 
   /**
     * @return true if the current consumer is registered
     */
-  def isRegistered():Boolean = {
+  def isRegistered(): Boolean = {
     asJava.asInstanceOf[JMessageConsumer[Object]].isRegistered().asInstanceOf[Boolean]
   }
 
   /**
     * @return The address the handler was registered with.
     */
-  def address():String = {
+  def address(): String = {
     asJava.asInstanceOf[JMessageConsumer[Object]].address().asInstanceOf[String]
   }
 
@@ -96,35 +96,35 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
     * @param maxBufferedMessages the maximum number of messages that can be buffered
     * @return this registration
     */
-  def setMaxBufferedMessages(maxBufferedMessages: Int):MessageConsumer[T] = {
+  def setMaxBufferedMessages(maxBufferedMessages: Int): MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JMessageConsumer[Object]].setMaxBufferedMessages(maxBufferedMessages.asInstanceOf[java.lang.Integer]))
   }
 
   /**
     * @return the maximum number of messages that can be buffered when this stream is paused
     */
-  def getMaxBufferedMessages():Int = {
+  def getMaxBufferedMessages(): Int = {
     asJava.asInstanceOf[JMessageConsumer[Object]].getMaxBufferedMessages().asInstanceOf[Int]
   }
 
   /**
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
     */
-  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def completionHandler(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   /**
     * Unregisters the handler which created this registration
     */
-  def unregister():Unit = {
+  def unregister(): Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister()
   }
 
   /**
     * Unregisters the handler which created this registration
     */
-  def unregister(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def unregister(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -132,7 +132,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * Optional method which can be called to indicate when the registration has been propagated across the cluster.
    * @return the completion future
    */
-  def completionFuture():scala.concurrent.Future[Unit] = {
+  def completionFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -142,7 +142,7 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
    * Unregisters the handler which created this registration
    * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
    */
-  def unregisterFuture():scala.concurrent.Future[Unit] = {
+  def unregisterFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -151,5 +151,5 @@ class MessageConsumer[T:TypeTag](private val _asJava: Object)
 }
 
 object MessageConsumer{
-  def apply[T:TypeTag](asJava: JMessageConsumer[_]) = new MessageConsumer[T](asJava)  
+  def apply[T: TypeTag](asJava: JMessageConsumer[_]) = new MessageConsumer[T](asJava)  
 }

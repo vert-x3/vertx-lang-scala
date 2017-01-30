@@ -111,7 +111,7 @@ object Http2Settings {
       null
   }
   
-  def fromJson(json: JsonObject):Http2Settings = {
+  def fromJson(json: JsonObject): Http2Settings = {
     if(json != null)
       new Http2Settings(new JHttp2Settings(json))
     else

@@ -36,15 +36,15 @@ class Factory(private val _asJava: Object) {
 
 object Factory{
   def apply(asJava: JFactory) = new Factory(asJava)  
-  def createConcreteHandlerUserType(handler: Handler[RefedInterface1]):ConcreteHandlerUserType = {
+  def createConcreteHandlerUserType(handler: Handler[RefedInterface1]): ConcreteHandlerUserType = {
     ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
   }
 
-  def createAbstractHandlerUserType(handler: Handler[RefedInterface1]):AbstractHandlerUserType = {
+  def createAbstractHandlerUserType(handler: Handler[RefedInterface1]): AbstractHandlerUserType = {
     AbstractHandlerUserType(JFactory.createAbstractHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
   }
 
-  def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]):ConcreteHandlerUserTypeExtension = {
+  def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]): ConcreteHandlerUserTypeExtension = {
     ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
   }
 

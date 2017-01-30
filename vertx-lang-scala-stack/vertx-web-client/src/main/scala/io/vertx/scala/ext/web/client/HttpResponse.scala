@@ -44,24 +44,24 @@ import scala.collection.JavaConverters._
   * Keep in mind that using this `HttpResponse` impose to fully buffer the response body and should be used for payload
   * that can fit in memory.
   */
-class HttpResponse[T:TypeTag](private val _asJava: Object) {
+class HttpResponse[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:io.vertx.core.http.HttpVersion = _
-  private var cached_1:Int = _
-  private var cached_2:String = _
-  private var cached_3:MultiMap = _
-  private var cached_4:MultiMap = _
-  private var cached_5:scala.collection.mutable.Buffer[String] = _
-  private var cached_6:T = _
-  private var cached_7:scala.Option[io.vertx.core.buffer.Buffer] = _
-  private var cached_8:scala.Option[String] = _
-  private var cached_9:scala.Option[io.vertx.core.json.JsonObject] = _
+  private var cached_0: io.vertx.core.http.HttpVersion = _
+  private var cached_1: Int = _
+  private var cached_2: String = _
+  private var cached_3: MultiMap = _
+  private var cached_4: MultiMap = _
+  private var cached_5: scala.collection.mutable.Buffer[String] = _
+  private var cached_6: T = _
+  private var cached_7: scala.Option[io.vertx.core.buffer.Buffer] = _
+  private var cached_8: scala.Option[String] = _
+  private var cached_9: scala.Option[io.vertx.core.json.JsonObject] = _
 
   /**
     * @return the version of the response
     */
-  def version():io.vertx.core.http.HttpVersion = {
+  def version(): io.vertx.core.http.HttpVersion = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].version()
       cached_0 = tmp
@@ -72,7 +72,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the status code of the response
     */
-  def statusCode():Int = {
+  def statusCode(): Int = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusCode()
       cached_1 = tmp.asInstanceOf[Int]
@@ -83,7 +83,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the status message of the response
     */
-  def statusMessage():String = {
+  def statusMessage(): String = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusMessage()
       cached_2 = tmp.asInstanceOf[String]
@@ -94,7 +94,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the headers
     */
-  def headers():MultiMap = {
+  def headers(): MultiMap = {
     if(cached_3 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].headers()
       cached_3 = MultiMap(tmp)
@@ -105,7 +105,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the trailers
     */
-  def trailers():MultiMap = {
+  def trailers(): MultiMap = {
     if(cached_4 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].trailers()
       cached_4 = MultiMap(tmp)
@@ -116,7 +116,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the Set-Cookie headers (including trailers)
     */
-  def cookies():scala.collection.mutable.Buffer[String] = {
+  def cookies(): scala.collection.mutable.Buffer[String] = {
     if(cached_5 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].cookies()
       cached_5 = tmp.asScala.map(x => x.asInstanceOf[String])
@@ -127,7 +127,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the response body in the format it was decoded.
     */
-  def body():T = {
+  def body(): T = {
     if(cached_6 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].body()
       cached_6 = toScala[T](tmp)
@@ -138,7 +138,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the response body decoded as a Buffer
     */
-  def bodyAsBuffer():scala.Option[io.vertx.core.buffer.Buffer] = {
+  def bodyAsBuffer(): scala.Option[io.vertx.core.buffer.Buffer] = {
     if(cached_7 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsBuffer()
       cached_7 = scala.Option(tmp)
@@ -149,7 +149,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the response body decoded as a `String`
     */
-  def bodyAsString():scala.Option[String] = {
+  def bodyAsString(): scala.Option[String] = {
     if(cached_8 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString()
       cached_8 = scala.Option(tmp.asInstanceOf[String])
@@ -160,7 +160,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
   /**
     * @return the response body decoded as a json object
     */
-  def bodyAsJsonObject():scala.Option[io.vertx.core.json.JsonObject] = {
+  def bodyAsJsonObject(): scala.Option[io.vertx.core.json.JsonObject] = {
     if(cached_9 == null) {
       var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonObject()
       cached_9 = scala.Option(tmp)
@@ -173,7 +173,7 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String):scala.Option[String] = {
+  def getHeader(headerName: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -182,26 +182,26 @@ class HttpResponse[T:TypeTag](private val _asJava: Object) {
     * @param trailerName the trailer name
     * @return the trailer value
     */
-  def getTrailer(trailerName: String):scala.Option[String] = {
+  def getTrailer(trailerName: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
   /**
     * @return the response body decoded as a `String` given a specific `encoding`
     */
-  def bodyAsString(encoding: String):scala.Option[String] = {
+  def bodyAsString(encoding: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString(encoding.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
   /**
     * @return the response body decoded as the specified `type` with the Jackson mapper.
     */
-  def bodyAsJson[R:TypeTag](`type`: Class[R]):R = {
+  def bodyAsJson[R: TypeTag](`type`: Class[R]): R = {
     toScala[R](asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJson[Object](toJavaClass(`type`)))
   }
 
 }
 
 object HttpResponse{
-  def apply[T:TypeTag](asJava: JHttpResponse[_]) = new HttpResponse[T](asJava)  
+  def apply[T: TypeTag](asJava: JHttpResponse[_]) = new HttpResponse[T](asJava)  
 }

@@ -91,7 +91,7 @@ object DataObjectWithLists {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithLists = {
+  def fromJson(json: JsonObject): DataObjectWithLists = {
     if(json != null)
       new DataObjectWithLists(new JDataObjectWithLists(json))
     else

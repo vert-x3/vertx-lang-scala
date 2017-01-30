@@ -30,12 +30,12 @@ import io.vertx.core.{Vertx => JVertx}
   * A Vert.x web handler to expose the circuit breaker to the Hystrix dasbboard. The handler listens to the circuit
   * breaker notifications sent on the event bus.
   */
-class HystrixMetricHandler(private val _asJava: Object) 
+class HystrixMetricHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JHystrixMetricHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -48,7 +48,7 @@ object HystrixMetricHandler{
     * @param vertx the Vert.x instance
     * @return the handler
     */
-  def create(vertx: Vertx):HystrixMetricHandler = {
+  def create(vertx: Vertx): HystrixMetricHandler = {
     HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
@@ -58,7 +58,7 @@ object HystrixMetricHandler{
     * @param address the address to listen on the event bus
     * @return the handler
     */
-  def create(vertx: Vertx,address: String):HystrixMetricHandler = {
+  def create(vertx: Vertx,address: String): HystrixMetricHandler = {
     HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx],address.asInstanceOf[java.lang.String]))
   }
 

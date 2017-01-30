@@ -152,7 +152,7 @@ object OpenOptions {
       null
   }
   
-  def fromJson(json: JsonObject):OpenOptions = {
+  def fromJson(json: JsonObject): OpenOptions = {
     if(json != null)
       new OpenOptions(new JOpenOptions(json))
     else

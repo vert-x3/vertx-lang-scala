@@ -28,11 +28,11 @@ class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
-  def host():String = {
+  def host(): String = {
     asJava.asInstanceOf[JSocketAddress].host().asInstanceOf[String]
   }
 
-  def port():Int = {
+  def port(): Int = {
     asJava.asInstanceOf[JSocketAddress].port().asInstanceOf[Int]
   }
 

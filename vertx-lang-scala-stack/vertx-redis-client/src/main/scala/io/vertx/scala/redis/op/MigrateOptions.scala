@@ -41,7 +41,7 @@ object MigrateOptions {
       null
   }
   
-  def fromJson(json: JsonObject):MigrateOptions = {
+  def fromJson(json: JsonObject): MigrateOptions = {
     if(json != null)
       new MigrateOptions(new JMigrateOptions(json))
     else

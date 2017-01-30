@@ -28,12 +28,12 @@ import io.vertx.core.Handler
   * A handler which decodes cookies from the request, makes them available in the 
   * and writes them back in the response.
   */
-class CookieHandler(private val _asJava: Object) 
+class CookieHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JCookieHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -45,7 +45,7 @@ object CookieHandler{
     * Create a cookie handler
     * @return the cookie handler
     */
-  def create():CookieHandler = {
+  def create(): CookieHandler = {
     CookieHandler(JCookieHandler.create())
   }
 

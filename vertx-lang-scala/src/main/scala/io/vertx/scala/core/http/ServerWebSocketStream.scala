@@ -29,32 +29,32 @@ import io.vertx.core.Handler
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.ServerWebSocket]], used for
   * notifying web socket connections to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class ServerWebSocketStream(private val _asJava: Object) 
+class ServerWebSocketStream(private val _asJava: Object)
     extends  ReadStream[ServerWebSocket] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(handler: Handler[Throwable]):ServerWebSocketStream = {
+  override def exceptionHandler(handler: Handler[Throwable]): ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[ServerWebSocket]):ServerWebSocketStream = {
+  override def handler(handler: Handler[ServerWebSocket]): ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].handler({x: JServerWebSocket => handler.handle(ServerWebSocket(x))})
     this
   }
 
-  override def pause():ServerWebSocketStream = {
+  override def pause(): ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].pause()
     this
   }
 
-  override def resume():ServerWebSocketStream = {
+  override def resume(): ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):ServerWebSocketStream = {
+  override def endHandler(endHandler: Handler[Unit]): ServerWebSocketStream = {
     asJava.asInstanceOf[JServerWebSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

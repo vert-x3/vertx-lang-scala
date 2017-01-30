@@ -31,7 +31,7 @@ import io.vertx.ext.web.templ.{MVELTemplateEngine => JMVELTemplateEngine}
 /**
   * A template engine that uses the Handlebars library.
   */
-class MVELTemplateEngine(private val _asJava: Object) 
+class MVELTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)  {
 
 
@@ -40,7 +40,7 @@ class MVELTemplateEngine(private val _asJava: Object)
     * @param extension the extension
     * @return a reference to this for fluency
     */
-  def setExtension(extension: String):MVELTemplateEngine = {
+  def setExtension(extension: String): MVELTemplateEngine = {
     MVELTemplateEngine(asJava.asInstanceOf[JMVELTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String]))
   }
 
@@ -49,7 +49,7 @@ class MVELTemplateEngine(private val _asJava: Object)
     * @param maxCacheSize the maxCacheSize
     * @return a reference to this for fluency
     */
-  def setMaxCacheSize(maxCacheSize: Int):MVELTemplateEngine = {
+  def setMaxCacheSize(maxCacheSize: Int): MVELTemplateEngine = {
     MVELTemplateEngine(asJava.asInstanceOf[JMVELTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer]))
   }
 
@@ -61,7 +61,7 @@ object MVELTemplateEngine{
     * Create a template engine using defaults
     * @return the engine
     */
-  def create():MVELTemplateEngine = {
+  def create(): MVELTemplateEngine = {
     MVELTemplateEngine(JMVELTemplateEngine.create())
   }
 

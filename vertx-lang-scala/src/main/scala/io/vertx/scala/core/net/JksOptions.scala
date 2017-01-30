@@ -94,7 +94,7 @@ object JksOptions {
       null
   }
   
-  def fromJson(json: JsonObject):JksOptions = {
+  def fromJson(json: JsonObject): JksOptions = {
     if(json != null)
       new JksOptions(new JJksOptions(json))
     else

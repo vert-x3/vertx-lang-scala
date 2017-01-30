@@ -59,7 +59,7 @@ object OpenSSLEngineOptions {
       null
   }
   
-  def fromJson(json: JsonObject):OpenSSLEngineOptions = {
+  def fromJson(json: JsonObject): OpenSSLEngineOptions = {
     if(json != null)
       new OpenSSLEngineOptions(new JOpenSSLEngineOptions(json))
     else

@@ -43,7 +43,7 @@ class MailClient(private val _asJava: Object) {
     * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
     * @return this MailClient instance so the method can be used fluently
     */
-  def sendMail(email: MailMessage,resultHandler: Handler[AsyncResult[MailResult]]):MailClient = {
+  def sendMail(email: MailMessage,resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava,{x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult,MailResult](x, a => MailResult(a)))})
     this
   }
@@ -51,7 +51,7 @@ class MailClient(private val _asJava: Object) {
   /**
     * close the MailClient
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JMailClient].close()
   }
 
@@ -60,7 +60,7 @@ class MailClient(private val _asJava: Object) {
    * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
    * @return will be called when the operation is finished or it fails (may be null to ignore the result)
    */
-  def sendMailFuture(email: MailMessage):scala.concurrent.Future[MailResult] = {
+  def sendMailFuture(email: MailMessage): scala.concurrent.Future[MailResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMailResult, MailResult](x => MailResult(x))
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -76,7 +76,7 @@ object MailClient{
     * @param config MailConfig configuration to be used for sending mailssee <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
     * @return MailClient instance that can then be used to send multiple mails
     */
-  def createNonShared(vertx: Vertx,config: MailConfig):MailClient = {
+  def createNonShared(vertx: Vertx,config: MailConfig): MailClient = {
     MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config.asJava))
   }
 
@@ -88,7 +88,7 @@ object MailClient{
     * @param poolName the pool name
     * @return the client
     */
-  def createShared(vertx: Vertx,config: MailConfig,poolName: String):MailClient = {
+  def createShared(vertx: Vertx,config: MailConfig,poolName: String): MailClient = {
     MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx],config.asJava,poolName.asInstanceOf[java.lang.String]))
   }
 
@@ -98,7 +98,7 @@ object MailClient{
     * @param config the configurationsee <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
     * @return the client
     */
-  def createShared(vertx: Vertx,config: MailConfig):MailClient = {
+  def createShared(vertx: Vertx,config: MailConfig): MailClient = {
     MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx],config.asJava))
   }
 

@@ -86,7 +86,7 @@ object UpdateOptions {
       null
   }
   
-  def fromJson(json: JsonObject):UpdateOptions = {
+  def fromJson(json: JsonObject): UpdateOptions = {
     if(json != null)
       new UpdateOptions(new JUpdateOptions(json))
     else

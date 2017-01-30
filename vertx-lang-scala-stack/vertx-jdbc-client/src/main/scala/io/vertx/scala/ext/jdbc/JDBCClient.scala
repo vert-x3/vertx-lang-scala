@@ -40,7 +40,7 @@ class JDBCClient(private val _asJava: Object) {
     * Returns a connection that can be used to perform SQL operations on. It's important to remember
     * to close the connection when you are done, so it is returned to the pool.
     */
-  def getConnection(handler: Handler[AsyncResult[SQLConnection]]):JDBCClient = {
+  def getConnection(handler: Handler[AsyncResult[SQLConnection]]): JDBCClient = {
     asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection,SQLConnection](x, a => SQLConnection(a)))})
     this
   }
@@ -48,7 +48,7 @@ class JDBCClient(private val _asJava: Object) {
   /**
     * Close the client
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JJDBCClient].close()
   }
 
@@ -57,7 +57,7 @@ class JDBCClient(private val _asJava: Object) {
    * to close the connection when you are done, so it is returned to the pool.
    * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
    */
-  def getConnectionFuture():scala.concurrent.Future[SQLConnection] = {
+  def getConnectionFuture(): scala.concurrent.Future[SQLConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))
     asJava.asInstanceOf[JJDBCClient].getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -73,7 +73,7 @@ object JDBCClient{
     * @param config the configuration
     * @return the client
     */
-  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):JDBCClient = {
+  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
     JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 
@@ -85,7 +85,7 @@ object JDBCClient{
     * @param dataSourceName the data source name
     * @return the client
     */
-  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,dataSourceName: String):JDBCClient = {
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,dataSourceName: String): JDBCClient = {
     JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx],config,dataSourceName.asInstanceOf[java.lang.String]))
   }
 
@@ -95,7 +95,7 @@ object JDBCClient{
     * @param config the configuration
     * @return the client
     */
-  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject):JDBCClient = {
+  def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
     JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx],config))
   }
 

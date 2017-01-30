@@ -32,7 +32,7 @@ import io.vertx.core.{Vertx => JVertx}
 /**
   * A session store which stores sessions in a distributed map so they are available across the cluster.
   */
-class ClusteredSessionStore(private val _asJava: Object) 
+class ClusteredSessionStore(private val _asJava: Object)
     extends SessionStore(_asJava)  {
 
 
@@ -46,7 +46,7 @@ object ClusteredSessionStore{
     * @param sessionMapName the session map name
     * @return the session store
     */
-  def create(vertx: Vertx,sessionMapName: String):ClusteredSessionStore = {
+  def create(vertx: Vertx,sessionMapName: String): ClusteredSessionStore = {
     ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
   }
 
@@ -60,7 +60,7 @@ object ClusteredSessionStore{
     * @param retryTimeout the store retry timeout, in ms
     * @return the session store
     */
-  def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long):ClusteredSessionStore = {
+  def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long): ClusteredSessionStore = {
     ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],retryTimeout.asInstanceOf[java.lang.Long]))
   }
 
@@ -69,7 +69,7 @@ object ClusteredSessionStore{
     * @param vertx the Vert.x instance
     * @return the session store
     */
-  def create(vertx: Vertx):ClusteredSessionStore = {
+  def create(vertx: Vertx): ClusteredSessionStore = {
     ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
@@ -82,7 +82,7 @@ object ClusteredSessionStore{
     * @param retryTimeout the store retry timeout, in ms
     * @return the session store
     */
-  def create(vertx: Vertx,retryTimeout: Long):ClusteredSessionStore = {
+  def create(vertx: Vertx,retryTimeout: Long): ClusteredSessionStore = {
     ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],retryTimeout.asInstanceOf[java.lang.Long]))
   }
 

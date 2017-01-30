@@ -202,7 +202,7 @@ object AddressResolverOptions {
       null
   }
   
-  def fromJson(json: JsonObject):AddressResolverOptions = {
+  def fromJson(json: JsonObject): AddressResolverOptions = {
     if(json != null)
       new AddressResolverOptions(new JAddressResolverOptions(json))
     else

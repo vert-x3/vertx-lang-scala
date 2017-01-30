@@ -75,7 +75,7 @@ object AuthenticationOptions {
       null
   }
   
-  def fromJson(json: JsonObject):AuthenticationOptions = {
+  def fromJson(json: JsonObject): AuthenticationOptions = {
     if(json != null)
       new AuthenticationOptions(new JAuthenticationOptions(json))
     else

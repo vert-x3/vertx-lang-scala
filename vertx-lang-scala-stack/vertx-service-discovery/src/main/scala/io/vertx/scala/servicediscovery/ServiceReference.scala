@@ -33,12 +33,12 @@ import io.vertx.servicediscovery.{Record => JRecord}
 class ServiceReference(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:Record = _
+  private var cached_0: Record = _
 
   /**
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def record():Record = {
+  def record(): Record = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JServiceReference].record()
       cached_0 = Record(tmp)
@@ -52,7 +52,7 @@ class ServiceReference(private val _asJava: Object) {
     * [[io.vertx.scala.servicediscovery.ServiceReference#getAs]] to retrieve the polyglot instance of the object or another facet..
     * @return the object to access the service
     */
-  def get[T:TypeTag]():T = {
+  def get[T: TypeTag](): T = {
     toScala[T](asJava.asInstanceOf[JServiceReference].get[Object]())
   }
 
@@ -62,7 +62,7 @@ class ServiceReference(private val _asJava: Object) {
     * @param x the type of object
     * @return the object to access the service wrapped to the given type
     */
-  def getAs[X:TypeTag](x: Class[X]):X = {
+  def getAs[X: TypeTag](x: Class[X]): X = {
     toScala[X](asJava.asInstanceOf[JServiceReference].getAs[Object](toJavaClass(x)))
   }
 
@@ -72,7 +72,7 @@ class ServiceReference(private val _asJava: Object) {
     * @param x the type of object
     * @return the object, `null` if not yet retrieved
     */
-  def cachedAs[X:TypeTag](x: Class[X]):X = {
+  def cachedAs[X: TypeTag](x: Class[X]): X = {
     toScala[X](asJava.asInstanceOf[JServiceReference].cachedAs[Object](toJavaClass(x)))
   }
 
@@ -80,7 +80,7 @@ class ServiceReference(private val _asJava: Object) {
     * Gets the service object if already retrieved. It won't try to acquire the service object if not retrieved yet.
     * @return the object, `null` if not yet retrieved
     */
-  def cached[T:TypeTag]():T = {
+  def cached[T: TypeTag](): T = {
     toScala[T](asJava.asInstanceOf[JServiceReference].cached[Object]())
   }
 
@@ -88,7 +88,7 @@ class ServiceReference(private val _asJava: Object) {
     * Releases the reference. Once released, the consumer must not use the reference anymore.
     * This method must be idempotent and defensive, as multiple call may happen.
     */
-  def release():Unit = {
+  def release(): Unit = {
     asJava.asInstanceOf[JServiceReference].release()
   }
 
@@ -97,7 +97,7 @@ class ServiceReference(private val _asJava: Object) {
     * @param object the service object, must not be `null`
     * @return `true` if the service reference service object is equal to the given object, `false` otherwise.
     */
-  def isHolding(`object`: AnyRef):Boolean = {
+  def isHolding(`object`: AnyRef): Boolean = {
     asJava.asInstanceOf[JServiceReference].isHolding(`object`).asInstanceOf[Boolean]
   }
 

@@ -42,35 +42,35 @@ class ShellService(private val _asJava: Object) {
   /**
     * Start the shell service, this is an asynchronous start.
     */
-  def start():Unit = {
+  def start(): Unit = {
     asJava.asInstanceOf[JShellService].start()
   }
 
   /**
     * Stop the shell service, this is an asynchronous stop.
     */
-  def stop():Unit = {
+  def stop(): Unit = {
     asJava.asInstanceOf[JShellService].stop()
   }
 
   /**
     * Start the shell service, this is an asynchronous start.
     */
-  def start(startHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def start(startHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JShellService].start({x: AsyncResult[Void] => startHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   /**
     * @return the shell server
     */
-  def server():ShellServer = {
+  def server(): ShellServer = {
     ShellServer(asJava.asInstanceOf[JShellService].server())
   }
 
   /**
     * Stop the shell service, this is an asynchronous start.
     */
-  def stop(stopHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def stop(stopHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JShellService].stop({x: AsyncResult[Void] => stopHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -78,7 +78,7 @@ class ShellService(private val _asJava: Object) {
    * Start the shell service, this is an asynchronous start.
    * @return future for getting notified when service is started
    */
-  def startFuture():scala.concurrent.Future[Unit] = {
+  def startFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JShellService].start(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -88,7 +88,7 @@ class ShellService(private val _asJava: Object) {
    * Stop the shell service, this is an asynchronous start.
    * @return future for getting notified when service is stopped
    */
-  def stopFuture():scala.concurrent.Future[Unit] = {
+  def stopFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JShellService].stop(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -101,7 +101,7 @@ object ShellService{
   /**
     * Like [[io.vertx.scala.ext.shell.ShellService#create]], with default options.
     */
-  def create(vertx: Vertx):ShellService = {
+  def create(vertx: Vertx): ShellService = {
     ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
@@ -111,7 +111,7 @@ object ShellService{
     * @param options the service config optionssee <a href="../../../../../../../cheatsheet/ShellServiceOptions.html">ShellServiceOptions</a>
     * @return the shell service
     */
-  def create(vertx: Vertx,options: ShellServiceOptions):ShellService = {
+  def create(vertx: Vertx,options: ShellServiceOptions): ShellService = {
     ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

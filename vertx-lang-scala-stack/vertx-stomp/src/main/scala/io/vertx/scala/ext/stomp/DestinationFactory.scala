@@ -37,7 +37,7 @@ class DestinationFactory(private val _asJava: Object) {
     * @param name the destination name.
     * @return the destination, `null` to reject the creation.
     */
-  def create(vertx: Vertx,name: String):Destination = {
+  def create(vertx: Vertx,name: String): Destination = {
     Destination(asJava.asInstanceOf[JDestinationFactory].create(vertx.asJava.asInstanceOf[JVertx],name.asInstanceOf[java.lang.String]))
   }
 

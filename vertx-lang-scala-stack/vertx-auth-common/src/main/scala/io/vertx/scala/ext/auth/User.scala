@@ -40,7 +40,7 @@ class User(private val _asJava: Object) {
     * @param authority the authority - what this really means is determined by the specific implementation. It might represent a permission to access a resource e.g. `printers:printer34` or it might represent authority to a role in a roles based model, e.g. `role:admin`.
     * @return the User to enable fluent use
     */
-  def isAuthorised(authority: String,resultHandler: Handler[AsyncResult[Boolean]]):User = {
+  def isAuthorised(authority: String,resultHandler: Handler[AsyncResult[Boolean]]): User = {
     asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
@@ -50,7 +50,7 @@ class User(private val _asJava: Object) {
     * underlying auth provider each time.  Use this method if you want to clear this cache.
     * @return the User to enable fluent use
     */
-  def clearCache():User = {
+  def clearCache(): User = {
     asJava.asInstanceOf[JUser].clearCache()
     this
   }
@@ -65,7 +65,7 @@ class User(private val _asJava: Object) {
     * </pre>
     * @return JSON representation of the Principal
     */
-  def principal():io.vertx.core.json.JsonObject = {
+  def principal(): io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JUser].principal()
   }
 
@@ -74,7 +74,7 @@ class User(private val _asJava: Object) {
     * after it has been deserialized.
     * @param authProvider the AuthProvider - this must be the same type of AuthProvider that originally created the User
     */
-  def setAuthProvider(authProvider: AuthProvider):Unit = {
+  def setAuthProvider(authProvider: AuthProvider): Unit = {
     asJava.asInstanceOf[JUser].setAuthProvider(authProvider.asJava.asInstanceOf[JAuthProvider])
   }
 
@@ -83,7 +83,7 @@ class User(private val _asJava: Object) {
    * @param authority the authority - what this really means is determined by the specific implementation. It might represent a permission to access a resource e.g. `printers:printer34` or it might represent authority to a role in a roles based model, e.g. `role:admin`.
    * @return future that will be called with an io.vertx.lang.scala.AsyncResult containing the value `true` if the they has the authority or `false` otherwise.
    */
-  def isAuthorisedFuture(authority: String):scala.concurrent.Future[Boolean] = {
+  def isAuthorisedFuture(authority: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

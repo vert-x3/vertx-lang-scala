@@ -43,7 +43,7 @@ object InstagramAuth{
     * @param clientId the client id given to you by Instagram
     * @param clientSecret the client secret given to you by Instagram
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JInstagramAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
 
@@ -53,7 +53,7 @@ object InstagramAuth{
     * @param clientSecret the client secret given to you by Instagram
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JInstagramAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 

@@ -35,7 +35,7 @@ import io.vertx.core.Handler
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: Object) 
+class NetClient(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
@@ -49,7 +49,7 @@ class NetClient(private val _asJava: Object)
     * @param host the host
     * @return a reference to this, so the API can be used fluently
     */
-  def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]):NetClient = {
+  def connect(port: Int,host: String,connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
@@ -58,7 +58,7 @@ class NetClient(private val _asJava: Object)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
@@ -68,7 +68,7 @@ class NetClient(private val _asJava: Object)
     * Any sockets which have not been closed manually will be closed here. The close is asynchronous and may not
     * complete until some time after the method has returned.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JNetClient].close()
   }
 
@@ -80,7 +80,7 @@ class NetClient(private val _asJava: Object)
    * @param port the port
    * @param host the host
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def connectFuture(port: Int,host: String):scala.concurrent.Future[NetSocket] = {
+  def connectFuture(port: Int,host: String): scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

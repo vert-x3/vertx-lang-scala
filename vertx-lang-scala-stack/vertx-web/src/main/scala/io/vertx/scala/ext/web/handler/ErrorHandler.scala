@@ -27,12 +27,12 @@ import io.vertx.ext.web.handler.{ErrorHandler => JErrorHandler}
 /**
   * A pretty error handler for rendering error pages.
   */
-class ErrorHandler(private val _asJava: Object) 
+class ErrorHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JErrorHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -44,7 +44,7 @@ object ErrorHandler{
     * Create an error handler using defaults
     * @return the handler
     */
-  def create():ErrorHandler = {
+  def create(): ErrorHandler = {
     ErrorHandler(JErrorHandler.create())
   }
 
@@ -54,7 +54,7 @@ object ErrorHandler{
     * @param displayExceptionDetails true if exception details should be displayed
     * @return the handler
     */
-  def create(errorTemplateName: String,displayExceptionDetails: Boolean):ErrorHandler = {
+  def create(errorTemplateName: String,displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String],displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 
@@ -63,7 +63,7 @@ object ErrorHandler{
     * @param displayExceptionDetails true if exception details should be displayed
     * @return the handler
     */
-  def create(displayExceptionDetails: Boolean):ErrorHandler = {
+  def create(displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 
@@ -72,7 +72,7 @@ object ErrorHandler{
     * @param errorTemplateName the error template name - will be looked up from the classpath
     * @return the handler
     */
-  def create(errorTemplateName: String):ErrorHandler = {
+  def create(errorTemplateName: String): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String]))
   }
 

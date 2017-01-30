@@ -30,7 +30,7 @@ import scala.collection.JavaConverters._
 /**
   * An auth handler that provides HTTP Basic Authentication support.
   */
-class DigestAuthHandler(private val _asJava: Object) 
+class DigestAuthHandler(private val _asJava: Object)
     extends  AuthHandler {
 
   def asJava = _asJava
@@ -40,7 +40,7 @@ class DigestAuthHandler(private val _asJava: Object)
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthority(authority: String):AuthHandler = {
+  override def addAuthority(authority: String): AuthHandler = {
     asJava.asInstanceOf[JDigestAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
@@ -50,12 +50,12 @@ class DigestAuthHandler(private val _asJava: Object)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
+  override def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
     asJava.asInstanceOf[JDigestAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JDigestAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -68,7 +68,7 @@ object DigestAuthHandler{
     * @param authProvider the auth provider to use
     * @return the auth handler
     */
-  def create(authProvider: HtdigestAuth):DigestAuthHandler = {
+  def create(authProvider: HtdigestAuth): DigestAuthHandler = {
     DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth]))
   }
 
@@ -78,7 +78,7 @@ object DigestAuthHandler{
     * @param nonceExpireTimeout the nonce expire timeout in milliseconds.
     * @return the auth handler
     */
-  def create(authProvider: HtdigestAuth,nonceExpireTimeout: Long):DigestAuthHandler = {
+  def create(authProvider: HtdigestAuth,nonceExpireTimeout: Long): DigestAuthHandler = {
     DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth],nonceExpireTimeout.asInstanceOf[java.lang.Long]))
   }
 

@@ -114,7 +114,7 @@ object Frame {
       null
   }
   
-  def fromJson(json: JsonObject):Frame = {
+  def fromJson(json: JsonObject): Frame = {
     if(json != null)
       new Frame(new JFrame(json))
     else

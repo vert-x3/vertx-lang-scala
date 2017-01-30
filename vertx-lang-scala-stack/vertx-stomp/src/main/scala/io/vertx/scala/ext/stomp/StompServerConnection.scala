@@ -39,7 +39,7 @@ class StompServerConnection(private val _asJava: Object) {
     * @param frame the frame, must not be `null`.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current StompServerConnection
     */
-  def write(frame: Frame):StompServerConnection = {
+  def write(frame: Frame): StompServerConnection = {
     asJava.asInstanceOf[JStompServerConnection].write(frame.asJava)
     this
   }
@@ -49,7 +49,7 @@ class StompServerConnection(private val _asJava: Object) {
     * @param buffer the buffer
     * @return the current StompServerConnection
     */
-  def write(buffer: io.vertx.core.buffer.Buffer):StompServerConnection = {
+  def write(buffer: io.vertx.core.buffer.Buffer): StompServerConnection = {
     asJava.asInstanceOf[JStompServerConnection].write(buffer)
     this
   }
@@ -57,35 +57,35 @@ class StompServerConnection(private val _asJava: Object) {
   /**
     * @return the STOMP server serving this connection.
     */
-  def server():StompServer = {
+  def server(): StompServer = {
     StompServer(asJava.asInstanceOf[JStompServerConnection].server())
   }
 
   /**
     * @return the STOMP server handler dealing with this connection
     */
-  def handler():StompServerHandler = {
+  def handler(): StompServerHandler = {
     StompServerHandler(asJava.asInstanceOf[JStompServerConnection].handler())
   }
 
   /**
     * @return the STOMP session id computed when the client has established the connection to the server
     */
-  def session():String = {
+  def session(): String = {
     asJava.asInstanceOf[JStompServerConnection].session().asInstanceOf[String]
   }
 
   /**
     * Closes the connection with the client.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JStompServerConnection].close()
   }
 
   /**
     * Sends a `PING` frame to the client. A `PING` frame is a frame containing only `EOL`.
     */
-  def ping():Unit = {
+  def ping(): Unit = {
     asJava.asInstanceOf[JStompServerConnection].ping()
   }
 
@@ -93,7 +93,7 @@ class StompServerConnection(private val _asJava: Object) {
     * Notifies the connection about server activity (the server has sent a frame). This method is used to handle the
     * heartbeat.
     */
-  def onServerActivity():Unit = {
+  def onServerActivity(): Unit = {
     asJava.asInstanceOf[JStompServerConnection].onServerActivity()
   }
 
@@ -103,7 +103,7 @@ class StompServerConnection(private val _asJava: Object) {
     * @param pong pong time
     * @param pingHandler the ping handler
     */
-  def configureHeartbeat(ping: Long,pong: Long,pingHandler: Handler[StompServerConnection]):Unit = {
+  def configureHeartbeat(ping: Long,pong: Long,pingHandler: Handler[StompServerConnection]): Unit = {
     asJava.asInstanceOf[JStompServerConnection].configureHeartbeat(ping.asInstanceOf[java.lang.Long],pong.asInstanceOf[java.lang.Long],{x: JStompServerConnection => pingHandler.handle(StompServerConnection(x))})
   }
 

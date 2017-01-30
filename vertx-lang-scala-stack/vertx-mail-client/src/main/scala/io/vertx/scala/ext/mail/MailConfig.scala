@@ -247,7 +247,7 @@ object MailConfig {
       null
   }
   
-  def fromJson(json: JsonObject):MailConfig = {
+  def fromJson(json: JsonObject): MailConfig = {
     if(json != null)
       new MailConfig(new JMailConfig(json))
     else

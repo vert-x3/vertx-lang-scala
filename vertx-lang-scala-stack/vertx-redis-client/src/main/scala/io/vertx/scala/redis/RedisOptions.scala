@@ -159,7 +159,7 @@ object RedisOptions {
       null
   }
   
-  def fromJson(json: JsonObject):RedisOptions = {
+  def fromJson(json: JsonObject): RedisOptions = {
     if(json != null)
       new RedisOptions(new JRedisOptions(json))
     else

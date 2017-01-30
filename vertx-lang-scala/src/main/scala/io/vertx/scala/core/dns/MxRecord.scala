@@ -31,14 +31,14 @@ class MxRecord(private val _asJava: Object) {
   /**
     * The priority of the MX record.
     */
-  def priority():Int = {
+  def priority(): Int = {
     asJava.asInstanceOf[JMxRecord].priority().asInstanceOf[Int]
   }
 
   /**
     * The name of the MX record
     */
-  def name():String = {
+  def name(): String = {
     asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
 

@@ -63,7 +63,7 @@ object DataObjectWithNestedBuffer {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithNestedBuffer = {
+  def fromJson(json: JsonObject): DataObjectWithNestedBuffer = {
     if(json != null)
       new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))
     else

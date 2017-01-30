@@ -54,7 +54,7 @@ object MetricsOptions {
       null
   }
   
-  def fromJson(json: JsonObject):MetricsOptions = {
+  def fromJson(json: JsonObject): MetricsOptions = {
     if(json != null)
       new MetricsOptions(new JMetricsOptions(json))
     else

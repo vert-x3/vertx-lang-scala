@@ -29,32 +29,32 @@ import io.vertx.core.Handler
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.net.NetSocket]], used for notifying
   * socket connections to a [[io.vertx.scala.core.net.NetServer]].
   */
-class NetSocketStream(private val _asJava: Object) 
+class NetSocketStream(private val _asJava: Object)
     extends  ReadStream[NetSocket] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(handler: Handler[Throwable]):NetSocketStream = {
+  override def exceptionHandler(handler: Handler[Throwable]): NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[NetSocket]):NetSocketStream = {
+  override def handler(handler: Handler[NetSocket]): NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].handler({x: JNetSocket => handler.handle(NetSocket(x))})
     this
   }
 
-  override def pause():NetSocketStream = {
+  override def pause(): NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].pause()
     this
   }
 
-  override def resume():NetSocketStream = {
+  override def resume(): NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):NetSocketStream = {
+  override def endHandler(endHandler: Handler[Unit]): NetSocketStream = {
     asJava.asInstanceOf[JNetSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from it
   * to a [[io.vertx.scala.core.streams.WriteStream]].
   */
-trait ReadStream[T] 
+trait ReadStream[T]
     extends  StreamBase {
 
   def asJava: java.lang.Object
@@ -39,37 +39,37 @@ trait ReadStream[T]
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T]
+  override def exceptionHandler(handler: Handler[Throwable]): ReadStream[T]
 
   /**
     * Set a data handler. As data is read, the handler will be called with the data.
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(handler: Handler[T]):ReadStream[T]
+  def handler(handler: Handler[T]): ReadStream[T]
 
   /**
     * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
     * @return a reference to this, so the API can be used fluently
     */
-  def pause():ReadStream[T]
+  def pause(): ReadStream[T]
 
   /**
     * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
     * @return a reference to this, so the API can be used fluently
     */
-  def resume():ReadStream[T]
+  def resume(): ReadStream[T]
 
   /**
     * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
     * @return a reference to this, so the API can be used fluently
     */
-  def endHandler(endHandler: Handler[Unit]):ReadStream[T]
+  def endHandler(endHandler: Handler[Unit]): ReadStream[T]
 
 }
 
 object ReadStream{
-  def apply[T:TypeTag](asJava: JReadStream[_]):ReadStream[T] = new ReadStreamImpl[T](asJava)
-    private class ReadStreamImpl[T:TypeTag](private val _asJava: Object) extends ReadStream[T] {
+  def apply[T: TypeTag](asJava: JReadStream[_]): ReadStream[T] = new ReadStreamImpl[T](asJava)
+    private class ReadStreamImpl[T: TypeTag](private val _asJava: Object) extends ReadStream[T] {
 
       def asJava = _asJava
 
@@ -78,7 +78,7 @@ object ReadStream{
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  override def exceptionHandler(handler: Handler[Throwable]):ReadStream[T] = {
+  override def exceptionHandler(handler: Handler[Throwable]): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -87,7 +87,7 @@ object ReadStream{
     * Set a data handler. As data is read, the handler will be called with the data.
     * @return a reference to this, so the API can be used fluently
     */
-  def handler(handler: Handler[T]):ReadStream[T] = {
+  def handler(handler: Handler[T]): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].handler({x: Object => handler.handle(toScala[T](x))})
     this
   }
@@ -96,7 +96,7 @@ object ReadStream{
     * Pause the `ReadSupport`. While it's paused, no data will be sent to the `dataHandler`
     * @return a reference to this, so the API can be used fluently
     */
-  def pause():ReadStream[T] = {
+  def pause(): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].pause()
     this
   }
@@ -105,7 +105,7 @@ object ReadStream{
     * Resume reading. If the `ReadSupport` has been paused, reading will recommence on it.
     * @return a reference to this, so the API can be used fluently
     */
-  def resume():ReadStream[T] = {
+  def resume(): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].resume()
     this
   }
@@ -114,7 +114,7 @@ object ReadStream{
     * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.
     * @return a reference to this, so the API can be used fluently
     */
-  def endHandler(endHandler: Handler[Unit]):ReadStream[T] = {
+  def endHandler(endHandler: Handler[Unit]): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].endHandler({x: Void => endHandler.handle(x)})
     this
   }

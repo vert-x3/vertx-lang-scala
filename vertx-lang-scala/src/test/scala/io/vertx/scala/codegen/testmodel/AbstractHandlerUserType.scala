@@ -25,22 +25,22 @@ import io.vertx.core.Handler
 
 /**
   */
-trait AbstractHandlerUserType 
+trait AbstractHandlerUserType
     extends io.vertx.core.Handler[RefedInterface1] {
 
   def asJava: java.lang.Object
 
-  override def handle(arg0: RefedInterface1):Unit
+  override def handle(arg0: RefedInterface1): Unit
 
 }
 
 object AbstractHandlerUserType{
-  def apply(asJava: JAbstractHandlerUserType):AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)
+  def apply(asJava: JAbstractHandlerUserType): AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)
     private class AbstractHandlerUserTypeImpl(private val _asJava: Object) extends AbstractHandlerUserType {
 
       def asJava = _asJava
 
-  override def handle(arg0: RefedInterface1):Unit = {
+  override def handle(arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JAbstractHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 

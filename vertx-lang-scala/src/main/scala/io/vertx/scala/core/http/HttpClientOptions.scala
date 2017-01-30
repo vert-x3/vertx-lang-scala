@@ -586,7 +586,7 @@ object HttpClientOptions {
       null
   }
   
-  def fromJson(json: JsonObject):HttpClientOptions = {
+  def fromJson(json: JsonObject): HttpClientOptions = {
     if(json != null)
       new HttpClientOptions(new JHttpClientOptions(json))
     else

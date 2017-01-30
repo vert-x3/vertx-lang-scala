@@ -62,7 +62,7 @@ object MailResult {
       null
   }
   
-  def fromJson(json: JsonObject):MailResult = {
+  def fromJson(json: JsonObject): MailResult = {
     if(json != null)
       new MailResult(new JMailResult(json))
     else

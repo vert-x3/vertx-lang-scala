@@ -390,7 +390,7 @@ object StompClientOptions {
       null
   }
   
-  def fromJson(json: JsonObject):StompClientOptions = {
+  def fromJson(json: JsonObject): StompClientOptions = {
     if(json != null)
       new StompClientOptions(new JStompClientOptions(json))
     else

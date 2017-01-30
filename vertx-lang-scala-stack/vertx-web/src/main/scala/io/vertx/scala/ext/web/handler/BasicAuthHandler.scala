@@ -30,7 +30,7 @@ import scala.collection.JavaConverters._
 /**
   * An auth handler that provides HTTP Basic Authentication support.
   */
-class BasicAuthHandler(private val _asJava: Object) 
+class BasicAuthHandler(private val _asJava: Object)
     extends  AuthHandler {
 
   def asJava = _asJava
@@ -40,7 +40,7 @@ class BasicAuthHandler(private val _asJava: Object)
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthority(authority: String):AuthHandler = {
+  override def addAuthority(authority: String): AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
@@ -50,12 +50,12 @@ class BasicAuthHandler(private val _asJava: Object)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  override def addAuthorities(authorities: scala.collection.mutable.Set[String]):AuthHandler = {
+  override def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
     asJava.asInstanceOf[JBasicAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JBasicAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -68,7 +68,7 @@ object BasicAuthHandler{
     * @param authProvider the auth provider to use
     * @return the auth handler
     */
-  def create(authProvider: AuthProvider):AuthHandler = {
+  def create(authProvider: AuthProvider): AuthHandler = {
     AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
@@ -78,7 +78,7 @@ object BasicAuthHandler{
     * @param realm the realm to use
     * @return the auth handler
     */
-  def create(authProvider: AuthProvider,realm: String):AuthHandler = {
+  def create(authProvider: AuthProvider,realm: String): AuthHandler = {
     AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
   }
 

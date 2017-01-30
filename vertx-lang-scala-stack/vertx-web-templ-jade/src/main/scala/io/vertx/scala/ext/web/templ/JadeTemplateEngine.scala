@@ -31,7 +31,7 @@ import io.vertx.core.Handler
 /**
   * A template engine that uses Jade.
   */
-class JadeTemplateEngine(private val _asJava: Object) 
+class JadeTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)  {
 
 
@@ -40,7 +40,7 @@ class JadeTemplateEngine(private val _asJava: Object)
     * @param extension the extension
     * @return a reference to this for fluency
     */
-  def setExtension(extension: String):JadeTemplateEngine = {
+  def setExtension(extension: String): JadeTemplateEngine = {
     JadeTemplateEngine(asJava.asInstanceOf[JJadeTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String]))
   }
 
@@ -49,7 +49,7 @@ class JadeTemplateEngine(private val _asJava: Object)
     * @param maxCacheSize the maxCacheSize
     * @return a reference to this for fluency
     */
-  def setMaxCacheSize(maxCacheSize: Int):JadeTemplateEngine = {
+  def setMaxCacheSize(maxCacheSize: Int): JadeTemplateEngine = {
     JadeTemplateEngine(asJava.asInstanceOf[JJadeTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer]))
   }
 
@@ -61,7 +61,7 @@ object JadeTemplateEngine{
     * Create a template engine using defaults
     * @return the engine
     */
-  def create():JadeTemplateEngine = {
+  def create(): JadeTemplateEngine = {
     JadeTemplateEngine(JJadeTemplateEngine.create())
   }
 

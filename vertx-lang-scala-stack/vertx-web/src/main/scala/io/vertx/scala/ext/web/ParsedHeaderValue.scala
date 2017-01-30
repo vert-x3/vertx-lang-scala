@@ -29,13 +29,13 @@ trait ParsedHeaderValue {
   /**
     * Contains the raw value that was received from the user agent 
     */
-  def rawValue():String
+  def rawValue(): String
 
   /**
     * Holds the unparsed value of the header.<br>
     * For the most part, this is the content before the semi-colon (";")
     */
-  def value():String
+  def value(): String
 
   /**
     * Holds the weight specified in the "q" parameter of the header.<br>
@@ -43,7 +43,7 @@ trait ParsedHeaderValue {
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
-  def weight():Float
+  def weight(): Float
 
   /**
     * The value of the parameter specified by this key. Each is one of 3 things:
@@ -55,37 +55,37 @@ trait ParsedHeaderValue {
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return 
     */
-  def parameter(key: String):scala.Option[String]
+  def parameter(key: String): scala.Option[String]
 
   /**
     * The parameters specified in this header value.
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return Unmodifiable Map of parameters of this header value
     */
-  def parameters():scala.collection.mutable.Map[String, String]
+  def parameters(): scala.collection.mutable.Map[String, String]
 
   /**
     * Is this an allowed operation as specified by the corresponding header?
     * @return 
     */
-  def isPermitted():Boolean
+  def isPermitted(): Boolean
 
   /**
     * Test if this header is matched by matchTry header 
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
-  def isMatchedBy(matchTry: ParsedHeaderValue):Boolean
+  def isMatchedBy(matchTry: ParsedHeaderValue): Boolean
 
   /**
     * An integer that represents the absolute order position of this header
     */
-  def weightedOrder():Int
+  def weightedOrder(): Int
 
 }
 
 object ParsedHeaderValue{
-  def apply(asJava: JParsedHeaderValue):ParsedHeaderValue = new ParsedHeaderValueImpl(asJava)
+  def apply(asJava: JParsedHeaderValue): ParsedHeaderValue = new ParsedHeaderValueImpl(asJava)
     private class ParsedHeaderValueImpl(private val _asJava: Object) extends ParsedHeaderValue {
 
       def asJava = _asJava
@@ -93,7 +93,7 @@ object ParsedHeaderValue{
   /**
     * Contains the raw value that was received from the user agent 
     */
-  def rawValue():String = {
+  def rawValue(): String = {
     asJava.asInstanceOf[JParsedHeaderValue].rawValue().asInstanceOf[String]
   }
 
@@ -101,7 +101,7 @@ object ParsedHeaderValue{
     * Holds the unparsed value of the header.<br>
     * For the most part, this is the content before the semi-colon (";")
     */
-  def value():String = {
+  def value(): String = {
     asJava.asInstanceOf[JParsedHeaderValue].value().asInstanceOf[String]
   }
 
@@ -111,7 +111,7 @@ object ParsedHeaderValue{
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
-  def weight():Float = {
+  def weight(): Float = {
     asJava.asInstanceOf[JParsedHeaderValue].weight().asInstanceOf[Float]
   }
 
@@ -125,7 +125,7 @@ object ParsedHeaderValue{
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return 
     */
-  def parameter(key: String):scala.Option[String] = {
+  def parameter(key: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JParsedHeaderValue].parameter(key.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -134,7 +134,7 @@ object ParsedHeaderValue{
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return Unmodifiable Map of parameters of this header value
     */
-  def parameters():scala.collection.mutable.Map[String, String] = {
+  def parameters(): scala.collection.mutable.Map[String, String] = {
     collection.mutable.Map(asJava.asInstanceOf[JParsedHeaderValue].parameters().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
@@ -142,7 +142,7 @@ object ParsedHeaderValue{
     * Is this an allowed operation as specified by the corresponding header?
     * @return 
     */
-  def isPermitted():Boolean = {
+  def isPermitted(): Boolean = {
     asJava.asInstanceOf[JParsedHeaderValue].isPermitted().asInstanceOf[Boolean]
   }
 
@@ -151,14 +151,14 @@ object ParsedHeaderValue{
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
-  def isMatchedBy(matchTry: ParsedHeaderValue):Boolean = {
+  def isMatchedBy(matchTry: ParsedHeaderValue): Boolean = {
     asJava.asInstanceOf[JParsedHeaderValue].isMatchedBy(matchTry.asJava.asInstanceOf[JParsedHeaderValue]).asInstanceOf[Boolean]
   }
 
   /**
     * An integer that represents the absolute order position of this header
     */
-  def weightedOrder():Int = {
+  def weightedOrder(): Int = {
     asJava.asInstanceOf[JParsedHeaderValue].weightedOrder().asInstanceOf[Int]
   }
 

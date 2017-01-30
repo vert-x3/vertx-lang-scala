@@ -37,14 +37,14 @@ class CommandResolver(private val _asJava: Object) {
     * @param name the command name
     * @return the commad or null
     */
-  def getCommand(name: String):Command = {
+  def getCommand(name: String): Command = {
     Command(asJava.asInstanceOf[JCommandResolver].getCommand(name.asInstanceOf[java.lang.String]))
   }
 
   /**
     * @return the current commands
     */
-  def commands():scala.collection.mutable.Buffer[Command] = {
+  def commands(): scala.collection.mutable.Buffer[Command] = {
     asJava.asInstanceOf[JCommandResolver].commands().asScala.map(x => Command(x))
   }
 
@@ -55,7 +55,7 @@ object CommandResolver{
   /**
     * @return the base commands of Vert.x Shell.
     */
-  def baseCommands(vertx: Vertx):CommandResolver = {
+  def baseCommands(vertx: Vertx): CommandResolver = {
     CommandResolver(JCommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))
   }
 

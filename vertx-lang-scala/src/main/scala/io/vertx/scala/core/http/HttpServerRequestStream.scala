@@ -29,32 +29,32 @@ import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
   * A [[io.vertx.scala.core.streams.ReadStream]] of [[io.vertx.scala.core.http.HttpServerRequest]], used for
   * notifying http request to a [[io.vertx.scala.core.http.HttpServer]].
   */
-class HttpServerRequestStream(private val _asJava: Object) 
+class HttpServerRequestStream(private val _asJava: Object)
     extends  ReadStream[HttpServerRequest] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(handler: Handler[Throwable]):HttpServerRequestStream = {
+  override def exceptionHandler(handler: Handler[Throwable]): HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[HttpServerRequest]):HttpServerRequestStream = {
+  override def handler(handler: Handler[HttpServerRequest]): HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].handler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
     this
   }
 
-  override def pause():HttpServerRequestStream = {
+  override def pause(): HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].pause()
     this
   }
 
-  override def resume():HttpServerRequestStream = {
+  override def resume(): HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):HttpServerRequestStream = {
+  override def endHandler(endHandler: Handler[Unit]): HttpServerRequestStream = {
     asJava.asInstanceOf[JHttpServerRequestStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

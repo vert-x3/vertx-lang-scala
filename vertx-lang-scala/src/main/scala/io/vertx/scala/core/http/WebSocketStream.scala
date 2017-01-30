@@ -34,32 +34,32 @@ import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
   * The connection occurs when the [[io.vertx.scala.core.http.WebSocketStream#handler]] method is called with a non null handler, the other handlers should be
   * set before setting the handler.
   */
-class WebSocketStream(private val _asJava: Object) 
+class WebSocketStream(private val _asJava: Object)
     extends  ReadStream[WebSocket] {
 
   def asJava = _asJava
 
-  override def exceptionHandler(handler: Handler[Throwable]):WebSocketStream = {
+  override def exceptionHandler(handler: Handler[Throwable]): WebSocketStream = {
     asJava.asInstanceOf[JWebSocketStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[WebSocket]):WebSocketStream = {
+  override def handler(handler: Handler[WebSocket]): WebSocketStream = {
     asJava.asInstanceOf[JWebSocketStream].handler({x: JWebSocket => handler.handle(WebSocket(x))})
     this
   }
 
-  override def pause():WebSocketStream = {
+  override def pause(): WebSocketStream = {
     asJava.asInstanceOf[JWebSocketStream].pause()
     this
   }
 
-  override def resume():WebSocketStream = {
+  override def resume(): WebSocketStream = {
     asJava.asInstanceOf[JWebSocketStream].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):WebSocketStream = {
+  override def endHandler(endHandler: Handler[Unit]): WebSocketStream = {
     asJava.asInstanceOf[JWebSocketStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }

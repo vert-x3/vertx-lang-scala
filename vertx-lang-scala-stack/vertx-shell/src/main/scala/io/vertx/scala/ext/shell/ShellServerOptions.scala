@@ -75,7 +75,7 @@ object ShellServerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ShellServerOptions = {
+  def fromJson(json: JsonObject): ShellServerOptions = {
     if(json != null)
       new ShellServerOptions(new JShellServerOptions(json))
     else

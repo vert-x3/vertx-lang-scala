@@ -27,7 +27,7 @@ class SubInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
-  def reverse(s: String):String = {
+  def reverse(s: String): String = {
     asJava.asInstanceOf[JSubInterface].reverse(s.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 

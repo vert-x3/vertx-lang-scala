@@ -46,7 +46,7 @@ class ServiceExporter(private val _asJava: Object) {
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def init(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]):Unit = {
+  def init(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]): Unit = {
     asJava.asInstanceOf[JServiceExporter].init(vertx.asJava.asInstanceOf[JVertx],publisher.asJava.asInstanceOf[JServicePublisher],configuration,future.asJava.asInstanceOf[JFuture[Void]])
   }
 
@@ -55,7 +55,7 @@ class ServiceExporter(private val _asJava: Object) {
     * identify the record
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def onPublish(record: Record):Unit = {
+  def onPublish(record: Record): Unit = {
     asJava.asInstanceOf[JServiceExporter].onPublish(record.asJava)
   }
 
@@ -64,7 +64,7 @@ class ServiceExporter(private val _asJava: Object) {
     * identify the record
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def onUpdate(record: Record):Unit = {
+  def onUpdate(record: Record): Unit = {
     asJava.asInstanceOf[JServiceExporter].onUpdate(record.asJava)
   }
 
@@ -72,7 +72,7 @@ class ServiceExporter(private val _asJava: Object) {
     * Notify an existing record has been removed
     * @param id the record registration id
     */
-  def onUnpublish(id: String):Unit = {
+  def onUnpublish(id: String): Unit = {
     asJava.asInstanceOf[JServiceExporter].onUnpublish(id.asInstanceOf[java.lang.String])
   }
 
@@ -80,7 +80,7 @@ class ServiceExporter(private val _asJava: Object) {
     * Close the exporter
     * @param closeHandler the handle to be notified when exporter is closed, may be `null`
     */
-  def close(closeHandler: Handler[Unit]):Unit = {
+  def close(closeHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JServiceExporter].close({x: Void => closeHandler.handle(x)})
   }
 

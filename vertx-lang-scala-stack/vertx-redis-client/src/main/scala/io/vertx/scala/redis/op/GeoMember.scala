@@ -65,7 +65,7 @@ object GeoMember {
       null
   }
   
-  def fromJson(json: JsonObject):GeoMember = {
+  def fromJson(json: JsonObject): GeoMember = {
     if(json != null)
       new GeoMember(new JGeoMember(json))
     else

@@ -31,11 +31,11 @@ class MyInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
-  def sub():SubInterface = {
+  def sub(): SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
 
-  def method():TestInterface = {
+  def method(): TestInterface = {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
 
@@ -43,7 +43,7 @@ class MyInterface(private val _asJava: Object) {
 
 object MyInterface{
   def apply(asJava: JMyInterface) = new MyInterface(asJava)  
-  def create():MyInterface = {
+  def create(): MyInterface = {
     MyInterface(JMyInterface.create())
   }
 

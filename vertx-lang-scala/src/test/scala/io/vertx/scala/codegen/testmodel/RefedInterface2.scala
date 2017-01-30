@@ -27,24 +27,24 @@ trait RefedInterface2 {
 
   def asJava: java.lang.Object
 
-  def getString():String
+  def getString(): String
 
-  def setString(str: String):RefedInterface2
+  def setString(str: String): RefedInterface2
 
 }
 
 object RefedInterface2{
-  def apply(asJava: JRefedInterface2):RefedInterface2 = new RefedInterface2Impl(asJava)
+  def apply(asJava: JRefedInterface2): RefedInterface2 = new RefedInterface2Impl(asJava)
     private class RefedInterface2Impl(private val _asJava: Object) extends RefedInterface2 {
 
       def asJava = _asJava
 
-  def setString(str: String):RefedInterface2 = {
+  def setString(str: String): RefedInterface2 = {
     asJava.asInstanceOf[JRefedInterface2].setString(str.asInstanceOf[java.lang.String])
     this
   }
 
-  def getString():String = {
+  def getString(): String = {
     asJava.asInstanceOf[JRefedInterface2].getString().asInstanceOf[String]
   }
 
