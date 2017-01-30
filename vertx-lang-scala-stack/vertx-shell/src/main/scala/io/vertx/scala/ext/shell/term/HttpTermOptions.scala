@@ -408,7 +408,7 @@ object HttpTermOptions {
       null
   }
   
-  def fromJson(json: JsonObject):HttpTermOptions = {
+  def fromJson(json: JsonObject): HttpTermOptions = {
     if(json != null)
       new HttpTermOptions(new JHttpTermOptions(json))
     else

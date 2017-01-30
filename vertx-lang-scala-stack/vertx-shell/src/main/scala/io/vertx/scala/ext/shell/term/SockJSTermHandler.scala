@@ -29,17 +29,17 @@ import io.vertx.core.{Vertx => JVertx}
 
 /**
   */
-class SockJSTermHandler(private val _asJava: Object) 
+class SockJSTermHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[SockJSSocket] {
 
   def asJava = _asJava
 
-  def termHandler(handler: Handler[Term]):SockJSTermHandler = {
+  def termHandler(handler: Handler[Term]): SockJSTermHandler = {
     asJava.asInstanceOf[JSockJSTermHandler].termHandler({x: JTerm => handler.handle(Term(x))})
     this
   }
 
-  override def handle(arg0: SockJSSocket):Unit = {
+  override def handle(arg0: SockJSSocket): Unit = {
     asJava.asInstanceOf[JSockJSTermHandler].handle(arg0.asJava.asInstanceOf[JSockJSSocket])
   }
 
@@ -47,7 +47,7 @@ class SockJSTermHandler(private val _asJava: Object)
 
 object SockJSTermHandler{
   def apply(asJava: JSockJSTermHandler) = new SockJSTermHandler(asJava)  
-  def create(vertx: Vertx,charset: String):SockJSTermHandler = {
+  def create(vertx: Vertx,charset: String): SockJSTermHandler = {
     SockJSTermHandler(JSockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx],charset.asInstanceOf[java.lang.String]))
   }
 

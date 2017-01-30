@@ -508,7 +508,7 @@ object OAuth2ClientOptions {
       null
   }
   
-  def fromJson(json: JsonObject):OAuth2ClientOptions = {
+  def fromJson(json: JsonObject): OAuth2ClientOptions = {
     if(json != null)
       new OAuth2ClientOptions(new JOAuth2ClientOptions(json))
     else

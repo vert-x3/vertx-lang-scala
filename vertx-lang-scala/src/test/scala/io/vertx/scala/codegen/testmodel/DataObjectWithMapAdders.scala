@@ -91,7 +91,7 @@ object DataObjectWithMapAdders {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithMapAdders = {
+  def fromJson(json: JsonObject): DataObjectWithMapAdders = {
     if(json != null)
       new DataObjectWithMapAdders(new JDataObjectWithMapAdders(json))
     else

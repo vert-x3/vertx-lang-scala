@@ -272,7 +272,7 @@ object VertxOptions {
       null
   }
   
-  def fromJson(json: JsonObject):VertxOptions = {
+  def fromJson(json: JsonObject): VertxOptions = {
     if(json != null)
       new VertxOptions(new JVertxOptions(json))
     else

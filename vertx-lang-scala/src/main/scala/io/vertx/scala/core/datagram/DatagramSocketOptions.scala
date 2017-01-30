@@ -154,7 +154,7 @@ object DatagramSocketOptions {
       null
   }
   
-  def fromJson(json: JsonObject):DatagramSocketOptions = {
+  def fromJson(json: JsonObject): DatagramSocketOptions = {
     if(json != null)
       new DatagramSocketOptions(new JDatagramSocketOptions(json))
     else

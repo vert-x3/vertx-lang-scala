@@ -35,14 +35,14 @@ class JobController(private val _asJava: Object) {
   /**
     * @return the current foreground job
     */
-  def foregroundJob():Job = {
+  def foregroundJob(): Job = {
     Job(asJava.asInstanceOf[JJobController].foregroundJob())
   }
 
   /**
     * @return the active jobs
     */
-  def jobs():scala.collection.mutable.Set[Job] = {
+  def jobs(): scala.collection.mutable.Set[Job] = {
     asJava.asInstanceOf[JJobController].jobs().asScala.map(x => Job(x))
   }
 
@@ -51,7 +51,7 @@ class JobController(private val _asJava: Object) {
     * @param id the job id
     * @return the job of ` null` when not found
     */
-  def getJob(id: Int):Job = {
+  def getJob(id: Int): Job = {
     Job(asJava.asInstanceOf[JJobController].getJob(id.asInstanceOf[java.lang.Integer]))
   }
 
@@ -61,21 +61,21 @@ class JobController(private val _asJava: Object) {
     * @param line the line
     * @return the created job
     */
-  def createJob(process: Process,line: String):Job = {
+  def createJob(process: Process,line: String): Job = {
     Job(asJava.asInstanceOf[JJobController].createJob(process.asJava.asInstanceOf[JProcess],line.asInstanceOf[java.lang.String]))
   }
 
   /**
     * Close the controller and terminate all the underlying jobs, a closed controller does not accept anymore jobs.
     */
-  def close(completionHandler: Handler[Unit]):Unit = {
+  def close(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JJobController].close({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Close the shell session and terminate all the underlying jobs.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JJobController].close()
   }
 

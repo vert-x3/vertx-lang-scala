@@ -18,7 +18,6 @@ package io.vertx.lang.scala
 
 import io.vertx.core
 import io.vertx.core.Handler
-import io.vertx.core.logging.LoggerFactory
 
 import scala.concurrent.Promise
 import scala.language.implicitConversions
@@ -29,10 +28,6 @@ import scala.language.implicitConversions
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 object HandlerOps {
-
-  //Can't include ScalaLogger here as I had to separate the builds for Java and Scala-code
-  //See the associated Scalac-Bug https://issues.scala-lang.org/browse/SI-9853
-  val log = LoggerFactory.getLogger(HandlerOps.getClass.getName)
 
   /**
     * Safely convert from Java type to Scala type.

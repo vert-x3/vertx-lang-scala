@@ -32,7 +32,7 @@ import io.vertx.core.Handler
 /**
   * A template engine that uses the Thymeleaf library.
   */
-class ThymeleafTemplateEngine(private val _asJava: Object) 
+class ThymeleafTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)  {
 
 
@@ -41,7 +41,7 @@ class ThymeleafTemplateEngine(private val _asJava: Object)
     * @param mode the mode
     * @return a reference to this for fluency
     */
-  def setMode(mode: org.thymeleaf.templatemode.TemplateMode):ThymeleafTemplateEngine = {
+  def setMode(mode: org.thymeleaf.templatemode.TemplateMode): ThymeleafTemplateEngine = {
     ThymeleafTemplateEngine(asJava.asInstanceOf[JThymeleafTemplateEngine].setMode(mode))
   }
 
@@ -53,7 +53,7 @@ object ThymeleafTemplateEngine{
     * Create a template engine using defaults
     * @return the engine
     */
-  def create():ThymeleafTemplateEngine = {
+  def create(): ThymeleafTemplateEngine = {
     ThymeleafTemplateEngine(JThymeleafTemplateEngine.create())
   }
 

@@ -75,7 +75,7 @@ object GoAway {
       null
   }
   
-  def fromJson(json: JsonObject):GoAway = {
+  def fromJson(json: JsonObject): GoAway = {
     if(json != null)
       new GoAway(new JGoAway(json))
     else

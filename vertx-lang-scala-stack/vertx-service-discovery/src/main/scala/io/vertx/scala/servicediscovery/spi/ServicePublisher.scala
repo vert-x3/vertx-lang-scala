@@ -37,7 +37,7 @@ class ServicePublisher(private val _asJava: Object) {
     * Publishes a record.
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def publish(record: Record,resultHandler: Handler[AsyncResult[Record]]):Unit = {
+  def publish(record: Record,resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].publish(record.asJava,{x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord,Record](x, a => Record(a)))})
   }
 
@@ -45,7 +45,7 @@ class ServicePublisher(private val _asJava: Object) {
     * Un-publishes a record.
     * @param id the registration id
     */
-  def unpublish(id: String,resultHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def unpublish(id: String,resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -54,7 +54,7 @@ class ServicePublisher(private val _asJava: Object) {
    * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
    * @return future called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
    */
-  def publishFuture(record: Record):scala.concurrent.Future[Record] = {
+  def publishFuture(record: Record): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
     asJava.asInstanceOf[JServicePublisher].publish(record.asJava,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -65,7 +65,7 @@ class ServicePublisher(private val _asJava: Object) {
    * @param id the registration id
    * @return future called when the operation has completed (successfully or not).
    */
-  def unpublishFuture(id: String):scala.concurrent.Future[Unit] = {
+  def unpublishFuture(id: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future

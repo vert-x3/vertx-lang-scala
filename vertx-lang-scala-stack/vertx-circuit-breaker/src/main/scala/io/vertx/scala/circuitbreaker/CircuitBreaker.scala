@@ -34,12 +34,12 @@ import io.vertx.core.{Vertx => JVertx}
 class CircuitBreaker(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:String = _
+  private var cached_0: String = _
 
   /**
     * @return the name of the circuit breaker.
     */
-  def name():String = {
+  def name(): String = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JCircuitBreaker].name()
       cached_0 = tmp.asInstanceOf[String]
@@ -52,7 +52,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * This method is not related to the `close` state of the circuit breaker. To set the circuit breaker in the
     * `close` state, use [[io.vertx.scala.circuitbreaker.CircuitBreaker#reset]].
     */
-  def close():CircuitBreaker = {
+  def close(): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].close()
     this
   }
@@ -62,7 +62,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def openHandler(handler: Handler[Unit]):CircuitBreaker = {
+  def openHandler(handler: Handler[Unit]): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].openHandler({x: Void => handler.handle(x)})
     this
   }
@@ -72,7 +72,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def halfOpenHandler(handler: Handler[Unit]):CircuitBreaker = {
+  def halfOpenHandler(handler: Handler[Unit]): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].halfOpenHandler({x: Void => handler.handle(x)})
     this
   }
@@ -82,7 +82,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler, must not be `null`
     * @return the current CircuitBreaker
     */
-  def closeHandler(handler: Handler[Unit]):CircuitBreaker = {
+  def closeHandler(handler: Handler[Unit]): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].closeHandler({x: Void => handler.handle(x)})
     this
   }
@@ -94,7 +94,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param command the operation
     * @return the current CircuitBreaker
     */
-  def executeAndReport[T:TypeTag](resultFuture: Future[T],command: Handler[Future[T]]):CircuitBreaker = {
+  def executeAndReport[T: TypeTag](resultFuture: Future[T],command: Handler[Future[T]]): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReport[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))})
     this
   }
@@ -118,7 +118,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current CircuitBreaker
     */
-  def executeAndReportWithFallback[T:TypeTag](resultFuture: Future[T],command: Handler[Future[T]],fallback: Throwable => T):CircuitBreaker = {
+  def executeAndReportWithFallback[T: TypeTag](resultFuture: Future[T],command: Handler[Future[T]],fallback: Throwable => T): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReportWithFallback[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))})
     this
   }
@@ -131,7 +131,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param handler the handler
     * @return the current CircuitBreaker
     */
-  def fallback[T:TypeTag](handler: Throwable => T):CircuitBreaker = {
+  def fallback[T: TypeTag](handler: Throwable => T): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].fallback[Object]({x: Throwable => toJava[T](handler(x))})
     this
   }
@@ -140,7 +140,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * Resets the circuit breaker state (number of failure set to 0 and state set to closed).
     * @return the current CircuitBreaker
     */
-  def reset():CircuitBreaker = {
+  def reset(): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].reset()
     this
   }
@@ -149,7 +149,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * Explicitly opens the circuit.
     * @return the current CircuitBreaker
     */
-  def open():CircuitBreaker = {
+  def open(): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].open()
     this
   }
@@ -171,7 +171,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return a future object completed when the operation or its fallback completes
     */
-  def executeWithFallback[T:TypeTag](command: Handler[Future[T]],fallback: Throwable => T):Future[T] = {
+  def executeWithFallback[T: TypeTag](command: Handler[Future[T]],fallback: Throwable => T): Future[T] = {
     Future[T](asJava.asInstanceOf[JCircuitBreaker].executeWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))}))
   }
 
@@ -180,21 +180,21 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param command the operation
     * @return a future object completed when the operation or its fallback completes
     */
-  def execute[T:TypeTag](command: Handler[Future[T]]):Future[T] = {
+  def execute[T: TypeTag](command: Handler[Future[T]]): Future[T] = {
     Future[T](asJava.asInstanceOf[JCircuitBreaker].execute[Object]({x: JFuture[Object] => command.handle(Future[T](x))}))
   }
 
   /**
     * @return the current state.
     */
-  def state():io.vertx.circuitbreaker.CircuitBreakerState = {
+  def state(): io.vertx.circuitbreaker.CircuitBreakerState = {
     asJava.asInstanceOf[JCircuitBreaker].state()
   }
 
   /**
     * @return the current number of failures.
     */
-  def failureCount():Long = {
+  def failureCount(): Long = {
     asJava.asInstanceOf[JCircuitBreaker].failureCount().asInstanceOf[Long]
   }
 
@@ -209,7 +209,7 @@ object CircuitBreaker{
     * @param options the configuration optionsee <a href="../../../../../../cheatsheet/CircuitBreakerOptions.html">CircuitBreakerOptions</a>
     * @return the created instance
     */
-  def create(name: String,vertx: Vertx,options: CircuitBreakerOptions):CircuitBreaker = {
+  def create(name: String,vertx: Vertx,options: CircuitBreakerOptions): CircuitBreaker = {
     CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -219,7 +219,7 @@ object CircuitBreaker{
     * @param vertx the Vert.x instance
     * @return the created instance
     */
-  def create(name: String,vertx: Vertx):CircuitBreaker = {
+  def create(name: String,vertx: Vertx): CircuitBreaker = {
     CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx]))
   }
 

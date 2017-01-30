@@ -33,13 +33,13 @@ import io.vertx.ext.shell.session.{Session => JSession}
 class Process(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:Tty = _
-  private var cached_1:Session = _
+  private var cached_0: Tty = _
+  private var cached_1: Session = _
 
   /**
     * @return the process tty
     */
-  def getTty():Tty = {
+  def getTty(): Tty = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JProcess].getTty()
       cached_0 = Tty(tmp)
@@ -50,7 +50,7 @@ class Process(private val _asJava: Object) {
   /**
     * @return the process session
     */
-  def getSession():Session = {
+  def getSession(): Session = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JProcess].getSession()
       cached_1 = Session(tmp)
@@ -63,7 +63,7 @@ class Process(private val _asJava: Object) {
     * @param tty the process tty
     * @return this object
     */
-  def setTty(tty: Tty):Process = {
+  def setTty(tty: Tty): Process = {
     asJava.asInstanceOf[JProcess].setTty(tty.asJava.asInstanceOf[JTty])
     this
   }
@@ -73,7 +73,7 @@ class Process(private val _asJava: Object) {
     * @param session the process session
     * @return this object
     */
-  def setSession(session: Session):Process = {
+  def setSession(session: Session): Process = {
     asJava.asInstanceOf[JProcess].setSession(session.asJava.asInstanceOf[JSession])
     this
   }
@@ -83,7 +83,7 @@ class Process(private val _asJava: Object) {
     * @param handler the handler called when the process terminates.
     * @return this object
     */
-  def terminatedHandler(handler: Handler[Int]):Process = {
+  def terminatedHandler(handler: Handler[Int]): Process = {
     asJava.asInstanceOf[JProcess].terminatedHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
     this
   }
@@ -91,14 +91,14 @@ class Process(private val _asJava: Object) {
   /**
     * Run the process.
     */
-  def run():Unit = {
+  def run(): Unit = {
     asJava.asInstanceOf[JProcess].run()
   }
 
   /**
     * Run the process.
     */
-  def run(foreground: Boolean):Unit = {
+  def run(foreground: Boolean): Unit = {
     asJava.asInstanceOf[JProcess].run(foreground.asInstanceOf[java.lang.Boolean])
   }
 
@@ -106,7 +106,7 @@ class Process(private val _asJava: Object) {
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(completionHandler: Handler[Unit]):Unit = {
+  def run(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].run({x: Void => completionHandler.handle(x)})
   }
 
@@ -114,21 +114,21 @@ class Process(private val _asJava: Object) {
     * Attempt to interrupt the process.
     * @return true if the process caught the signal
     */
-  def interrupt():Boolean = {
+  def interrupt(): Boolean = {
     asJava.asInstanceOf[JProcess].interrupt().asInstanceOf[Boolean]
   }
 
   /**
     * Suspend the process.
     */
-  def resume():Unit = {
+  def resume(): Unit = {
     asJava.asInstanceOf[JProcess].resume()
   }
 
   /**
     * Suspend the process.
     */
-  def resume(foreground: Boolean):Unit = {
+  def resume(foreground: Boolean): Unit = {
     asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean])
   }
 
@@ -136,49 +136,49 @@ class Process(private val _asJava: Object) {
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(completionHandler: Handler[Unit]):Unit = {
+  def resume(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].resume({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Resume the process.
     */
-  def suspend():Unit = {
+  def suspend(): Unit = {
     asJava.asInstanceOf[JProcess].suspend()
   }
 
   /**
     * Terminate the process.
     */
-  def terminate():Unit = {
+  def terminate(): Unit = {
     asJava.asInstanceOf[JProcess].terminate()
   }
 
   /**
     * Set the process in background.
     */
-  def toBackground():Unit = {
+  def toBackground(): Unit = {
     asJava.asInstanceOf[JProcess].toBackground()
   }
 
   /**
     * Set the process in foreground.
     */
-  def toForeground():Unit = {
+  def toForeground(): Unit = {
     asJava.asInstanceOf[JProcess].toForeground()
   }
 
   /**
     * @return the current process status
     */
-  def status():io.vertx.ext.shell.system.ExecStatus = {
+  def status(): io.vertx.ext.shell.system.ExecStatus = {
     asJava.asInstanceOf[JProcess].status()
   }
 
   /**
     * @return the process exit code when the status is ExecStatus#TERMINATED otherwise `null`
     */
-  def exitCode():Int = {
+  def exitCode(): Int = {
     asJava.asInstanceOf[JProcess].exitCode().asInstanceOf[Int]
   }
 
@@ -186,7 +186,7 @@ class Process(private val _asJava: Object) {
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(foregraound: Boolean,completionHandler: Handler[Unit]):Unit = {
+  def run(foregraound: Boolean,completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
   }
 
@@ -195,7 +195,7 @@ class Process(private val _asJava: Object) {
     * @param completionHandler handler called after interrupt callback
     * @return true if the process caught the signal
     */
-  def interrupt(completionHandler: Handler[Unit]):Boolean = {
+  def interrupt(completionHandler: Handler[Unit]): Boolean = {
     asJava.asInstanceOf[JProcess].interrupt({x: Void => completionHandler.handle(x)}).asInstanceOf[Boolean]
   }
 
@@ -203,7 +203,7 @@ class Process(private val _asJava: Object) {
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(foreground: Boolean,completionHandler: Handler[Unit]):Unit = {
+  def resume(foreground: Boolean,completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
   }
 
@@ -211,7 +211,7 @@ class Process(private val _asJava: Object) {
     * Resume the process.
     * @param completionHandler handler called after suspend callback
     */
-  def suspend(completionHandler: Handler[Unit]):Unit = {
+  def suspend(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].suspend({x: Void => completionHandler.handle(x)})
   }
 
@@ -219,7 +219,7 @@ class Process(private val _asJava: Object) {
     * Terminate the process.
     * @param completionHandler handler called after end callback
     */
-  def terminate(completionHandler: Handler[Unit]):Unit = {
+  def terminate(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].terminate({x: Void => completionHandler.handle(x)})
   }
 
@@ -227,7 +227,7 @@ class Process(private val _asJava: Object) {
     * Set the process in background.
     * @param completionHandler handler called after background callback
     */
-  def toBackground(completionHandler: Handler[Unit]):Unit = {
+  def toBackground(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].toBackground({x: Void => completionHandler.handle(x)})
   }
 
@@ -235,7 +235,7 @@ class Process(private val _asJava: Object) {
     * Set the process in foreground.
     * @param completionHandler handler called after foreground callback
     */
-  def toForeground(completionHandler: Handler[Unit]):Unit = {
+  def toForeground(completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].toForeground({x: Void => completionHandler.handle(x)})
   }
 

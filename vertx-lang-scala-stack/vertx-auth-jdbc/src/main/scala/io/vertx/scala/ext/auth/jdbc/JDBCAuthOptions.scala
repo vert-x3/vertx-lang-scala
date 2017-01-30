@@ -122,7 +122,7 @@ object JDBCAuthOptions {
       null
   }
   
-  def fromJson(json: JsonObject):JDBCAuthOptions = {
+  def fromJson(json: JsonObject): JDBCAuthOptions = {
     if(json != null)
       new JDBCAuthOptions(new JJDBCAuthOptions(json))
     else

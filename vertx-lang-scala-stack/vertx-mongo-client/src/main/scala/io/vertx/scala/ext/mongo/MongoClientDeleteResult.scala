@@ -46,7 +46,7 @@ object MongoClientDeleteResult {
       null
   }
   
-  def fromJson(json: JsonObject):MongoClientDeleteResult = {
+  def fromJson(json: JsonObject): MongoClientDeleteResult = {
     if(json != null)
       new MongoClientDeleteResult(new JMongoClientDeleteResult(json))
     else

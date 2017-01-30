@@ -23,7 +23,7 @@ import io.vertx.ext.web.{ParsedHeaderValue => JParsedHeaderValue}
 import scala.collection.JavaConverters._
 import io.vertx.ext.web.{MIMEHeader => JMIMEHeader}
 
-class MIMEHeader(private val _asJava: Object) 
+class MIMEHeader(private val _asJava: Object)
     extends  ParsedHeaderValue {
 
   def asJava = _asJava
@@ -31,7 +31,7 @@ class MIMEHeader(private val _asJava: Object)
   /**
     * Contains the raw value that was received from the user agent 
     */
-  override def rawValue():String = {
+  override def rawValue(): String = {
     asJava.asInstanceOf[JMIMEHeader].rawValue().asInstanceOf[String]
   }
 
@@ -39,7 +39,7 @@ class MIMEHeader(private val _asJava: Object)
     * Holds the unparsed value of the header.<br>
     * For the most part, this is the content before the semi-colon (";")
     */
-  override def value():String = {
+  override def value(): String = {
     asJava.asInstanceOf[JMIMEHeader].value().asInstanceOf[String]
   }
 
@@ -49,7 +49,7 @@ class MIMEHeader(private val _asJava: Object)
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
-  override def weight():Float = {
+  override def weight(): Float = {
     asJava.asInstanceOf[JMIMEHeader].weight().asInstanceOf[Float]
   }
 
@@ -63,7 +63,7 @@ class MIMEHeader(private val _asJava: Object)
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return 
     */
-  override def parameter(key: String):scala.Option[String] = {
+  override def parameter(key: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JMIMEHeader].parameter(key.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -72,7 +72,7 @@ class MIMEHeader(private val _asJava: Object)
     * <b>Note:</b> The <code>q</code> parameter is never present.
     * @return Unmodifiable Map of parameters of this header value
     */
-  override def parameters():scala.collection.mutable.Map[String, String] = {
+  override def parameters(): scala.collection.mutable.Map[String, String] = {
     collection.mutable.Map(asJava.asInstanceOf[JMIMEHeader].parameters().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
@@ -80,7 +80,7 @@ class MIMEHeader(private val _asJava: Object)
     * Is this an allowed operation as specified by the corresponding header?
     * @return 
     */
-  override def isPermitted():Boolean = {
+  override def isPermitted(): Boolean = {
     asJava.asInstanceOf[JMIMEHeader].isPermitted().asInstanceOf[Boolean]
   }
 
@@ -89,14 +89,14 @@ class MIMEHeader(private val _asJava: Object)
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
-  override def isMatchedBy(matchTry: ParsedHeaderValue):Boolean = {
+  override def isMatchedBy(matchTry: ParsedHeaderValue): Boolean = {
     asJava.asInstanceOf[JMIMEHeader].isMatchedBy(matchTry.asJava.asInstanceOf[JParsedHeaderValue]).asInstanceOf[Boolean]
   }
 
   /**
     * An integer that represents the absolute order position of this header
     */
-  override def weightedOrder():Int = {
+  override def weightedOrder(): Int = {
     asJava.asInstanceOf[JMIMEHeader].weightedOrder().asInstanceOf[Int]
   }
 
@@ -105,7 +105,7 @@ class MIMEHeader(private val _asJava: Object)
     * of the MIME
     * @return The component of the MIME this represents
     */
-  def component():String = {
+  def component(): String = {
     asJava.asInstanceOf[JMIMEHeader].component().asInstanceOf[String]
   }
 
@@ -113,7 +113,7 @@ class MIMEHeader(private val _asJava: Object)
     * Gets the parsed subcomponent part of the MIME. This is the string between the first @{code '/'` and the
     * @return The subcomponent of the MIME this represents
     */
-  def subComponent():String = {
+  def subComponent(): String = {
     asJava.asInstanceOf[JMIMEHeader].subComponent().asInstanceOf[String]
   }
 

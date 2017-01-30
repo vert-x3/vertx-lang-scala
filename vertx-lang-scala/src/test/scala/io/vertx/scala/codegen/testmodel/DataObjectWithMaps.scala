@@ -91,7 +91,7 @@ object DataObjectWithMaps {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithMaps = {
+  def fromJson(json: JsonObject): DataObjectWithMaps = {
     if(json != null)
       new DataObjectWithMaps(new JDataObjectWithMaps(json))
     else

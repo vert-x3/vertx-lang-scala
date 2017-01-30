@@ -36,7 +36,7 @@ import io.vertx.scala.ext.web.sstore.SessionStore
   * 
   * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing chain before it.
   */
-class SessionHandler(private val _asJava: Object) 
+class SessionHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
@@ -46,7 +46,7 @@ class SessionHandler(private val _asJava: Object)
     * @param timeout the timeout, in ms.
     * @return a reference to this, so the API can be used fluently
     */
-  def setSessionTimeout(timeout: Long):SessionHandler = {
+  def setSessionTimeout(timeout: Long): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionTimeout(timeout.asInstanceOf[java.lang.Long])
     this
   }
@@ -57,7 +57,7 @@ class SessionHandler(private val _asJava: Object)
     * @param nag true to nag
     * @return a reference to this, so the API can be used fluently
     */
-  def setNagHttps(nag: Boolean):SessionHandler = {
+  def setNagHttps(nag: Boolean): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -68,7 +68,7 @@ class SessionHandler(private val _asJava: Object)
     * @param secure true to set the secure flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-  def setCookieSecureFlag(secure: Boolean):SessionHandler = {
+  def setCookieSecureFlag(secure: Boolean): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieSecureFlag(secure.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -79,7 +79,7 @@ class SessionHandler(private val _asJava: Object)
     * @param httpOnly true to set the HttpOnly flag on the cookie
     * @return a reference to this, so the API can be used fluently
     */
-  def setCookieHttpOnlyFlag(httpOnly: Boolean):SessionHandler = {
+  def setCookieHttpOnlyFlag(httpOnly: Boolean): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setCookieHttpOnlyFlag(httpOnly.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -89,7 +89,7 @@ class SessionHandler(private val _asJava: Object)
     * @param sessionCookieName the session cookie name
     * @return a reference to this, so the API can be used fluently
     */
-  def setSessionCookieName(sessionCookieName: String):SessionHandler = {
+  def setSessionCookieName(sessionCookieName: String): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionCookieName(sessionCookieName.asInstanceOf[java.lang.String])
     this
   }
@@ -99,12 +99,12 @@ class SessionHandler(private val _asJava: Object)
     * @param minLength the session id minimal length
     * @return a reference to this, so the API can be used fluently
     */
-  def setMinLength(minLength: Int):SessionHandler = {
+  def setMinLength(minLength: Int): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setMinLength(minLength.asInstanceOf[java.lang.Integer])
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -117,7 +117,7 @@ object SessionHandler{
     * @param sessionStore the session store
     * @return the handler
     */
-  def create(sessionStore: SessionStore):SessionHandler = {
+  def create(sessionStore: SessionStore): SessionHandler = {
     SessionHandler(JSessionHandler.create(sessionStore.asJava.asInstanceOf[JSessionStore]))
   }
 

@@ -39,21 +39,21 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValues(option: Option):scala.collection.mutable.Buffer[String] = {
+  def getRawValues(option: Option): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * @return the model of this command line object.
     */
-  def cli():CLI = {
+  def cli(): CLI = {
     CLI(asJava.asInstanceOf[JCommandLine].cli())
   }
 
   /**
     * @return the ordered list of arguments. Arguments are command line arguments not matching an option.
     */
-  def allArguments():scala.collection.mutable.Buffer[String] = {
+  def allArguments(): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -62,7 +62,7 @@ class CommandLine(private val _asJava: Object) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getOptionValue[T:TypeTag](name: String):T = {
+  def getOptionValue[T: TypeTag](name: String): T = {
     toScala[T](asJava.asInstanceOf[JCommandLine].getOptionValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
@@ -71,7 +71,7 @@ class CommandLine(private val _asJava: Object) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T:TypeTag](name: String):T = {
+  def getArgumentValue[T: TypeTag](name: String): T = {
     toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
@@ -80,7 +80,7 @@ class CommandLine(private val _asJava: Object) {
     * @param index the index
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T:TypeTag](index: Int):T = {
+  def getArgumentValue[T: TypeTag](index: Int): T = {
     toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](index.asInstanceOf[java.lang.Integer]))
   }
 
@@ -91,7 +91,7 @@ class CommandLine(private val _asJava: Object) {
     * @param name the option name
     * @return `true` if the flag has been set in the command line, `false` otherwise.
     */
-  def isFlagEnabled(name: String):Boolean = {
+  def isFlagEnabled(name: String): Boolean = {
     asJava.asInstanceOf[JCommandLine].isFlagEnabled(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
@@ -100,7 +100,7 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return `true` if the option has received a value, false otherwise.
     */
-  def isOptionAssigned(option: Option):Boolean = {
+  def isOptionAssigned(option: Option): Boolean = {
     asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava).asInstanceOf[Boolean]
   }
 
@@ -109,7 +109,7 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForOption(option: Option):scala.collection.mutable.Buffer[String] = {
+  def getRawValuesForOption(option: Option): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -118,7 +118,7 @@ class CommandLine(private val _asJava: Object) {
     * @param argument the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the list of values, empty if none
     */
-  def getRawValuesForArgument(argument: Argument):scala.collection.mutable.Buffer[String] = {
+  def getRawValuesForArgument(argument: Argument): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -127,7 +127,7 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return the value, `null` if none.
     */
-  def getRawValueForOption(option: Option):scala.Option[String] = {
+  def getRawValueForOption(option: Option): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava).asInstanceOf[String])
   }
 
@@ -136,7 +136,7 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return true if the option accepts more values, false otherwise.
     */
-  def acceptMoreValues(option: Option):Boolean = {
+  def acceptMoreValues(option: Option): Boolean = {
     asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava).asInstanceOf[Boolean]
   }
 
@@ -145,7 +145,7 @@ class CommandLine(private val _asJava: Object) {
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return the value, `null` if none.
     */
-  def getRawValueForArgument(arg: Argument):scala.Option[String] = {
+  def getRawValueForArgument(arg: Argument): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava).asInstanceOf[String])
   }
 
@@ -154,7 +154,7 @@ class CommandLine(private val _asJava: Object) {
     * @param arg the argumentsee <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
     * @return `true` if the argument has received a value, false otherwise.
     */
-  def isArgumentAssigned(arg: Argument):Boolean = {
+  def isArgumentAssigned(arg: Argument): Boolean = {
     asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava).asInstanceOf[Boolean]
   }
 
@@ -163,7 +163,7 @@ class CommandLine(private val _asJava: Object) {
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
     * @return `true` if the user command line has used the option
     */
-  def isSeenInCommandLine(option: Option):Boolean = {
+  def isSeenInCommandLine(option: Option): Boolean = {
     asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava).asInstanceOf[Boolean]
   }
 
@@ -172,7 +172,7 @@ class CommandLine(private val _asJava: Object) {
     * satisfied. This method is used when the parser validation is disabled.
     * @return `true` if the current CommandLine object is valid. false otherwise.
     */
-  def isValid():Boolean = {
+  def isValid(): Boolean = {
     asJava.asInstanceOf[JCommandLine].isValid().asInstanceOf[Boolean]
   }
 
@@ -180,7 +180,7 @@ class CommandLine(private val _asJava: Object) {
     * Checks whether or not the user has passed a "help" option and is asking for help.
     * @return `true` if the user command line has enabled a "Help" option, false otherwise.
     */
-  def isAskingForHelp():Boolean = {
+  def isAskingForHelp(): Boolean = {
     asJava.asInstanceOf[JCommandLine].isAskingForHelp().asInstanceOf[Boolean]
   }
 
@@ -194,7 +194,7 @@ object CommandLine{
     * @param cli the CLI definition
     * @return the command line object
     */
-  def create(cli: CLI):CommandLine = {
+  def create(cli: CLI): CommandLine = {
     CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
   }
 

@@ -31,7 +31,7 @@ class Locale(private val _asJava: Object) {
     * Returns the language as reported by the HTTP client.
     * @return language
     */
-  def language():String = {
+  def language(): String = {
     asJava.asInstanceOf[JLocale].language().asInstanceOf[String]
   }
 
@@ -39,7 +39,7 @@ class Locale(private val _asJava: Object) {
     * Returns the country as reported by the HTTP client.
     * @return variant
     */
-  def country():String = {
+  def country(): String = {
     asJava.asInstanceOf[JLocale].country().asInstanceOf[String]
   }
 
@@ -47,7 +47,7 @@ class Locale(private val _asJava: Object) {
     * Returns the variant as reported by the HTTP client.
     * @return variant
     */
-  def variant():String = {
+  def variant(): String = {
     asJava.asInstanceOf[JLocale].variant().asInstanceOf[String]
   }
 
@@ -55,19 +55,19 @@ class Locale(private val _asJava: Object) {
 
 object Locale{
   def apply(asJava: JLocale) = new Locale(asJava)  
-  def create():Locale = {
+  def create(): Locale = {
     Locale(JLocale.create())
   }
 
-  def create(language: String):Locale = {
+  def create(language: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
   }
 
-  def create(language: String,country: String):Locale = {
+  def create(language: String,country: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String]))
   }
 
-  def create(language: String,country: String,variant: String):Locale = {
+  def create(language: String,country: String,variant: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String],country.asInstanceOf[java.lang.String],variant.asInstanceOf[java.lang.String]))
   }
 

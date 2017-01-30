@@ -42,7 +42,7 @@ class CommandBuilder(private val _asJava: Object) {
     * @param handler the process handler
     * @return this command object
     */
-  def processHandler(handler: Handler[CommandProcess]):CommandBuilder = {
+  def processHandler(handler: Handler[CommandProcess]): CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].processHandler({x: JCommandProcess => handler.handle(CommandProcess(x))})
     this
   }
@@ -53,7 +53,7 @@ class CommandBuilder(private val _asJava: Object) {
     * @param handler the completion handler
     * @return this command object
     */
-  def completionHandler(handler: Handler[Completion]):CommandBuilder = {
+  def completionHandler(handler: Handler[Completion]): CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].completionHandler({x: JCompletion => handler.handle(Completion(x))})
     this
   }
@@ -63,7 +63,7 @@ class CommandBuilder(private val _asJava: Object) {
     * @param vertx the vertx instance
     * @return the built command
     */
-  def build(vertx: Vertx):Command = {
+  def build(vertx: Vertx): Command = {
     Command(asJava.asInstanceOf[JCommandBuilder].build(vertx.asJava.asInstanceOf[JVertx]))
   }
 
@@ -77,7 +77,7 @@ object CommandBuilder{
     * @param name the command name
     * @return the command
     */
-  def command(name: String):CommandBuilder = {
+  def command(name: String): CommandBuilder = {
     CommandBuilder(JCommandBuilder.command(name.asInstanceOf[java.lang.String]))
   }
 
@@ -87,7 +87,7 @@ object CommandBuilder{
     * @param cli the cli to use
     * @return the command
     */
-  def command(cli: CLI):CommandBuilder = {
+  def command(cli: CLI): CommandBuilder = {
     CommandBuilder(JCommandBuilder.command(cli.asJava.asInstanceOf[JCLI]))
   }
 

@@ -53,7 +53,7 @@
   }
 
   /**
-   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snipped.
+   * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snippet.
    */
   def convertTypeToAliasedType(type) {
     helper.getPackageName(helper.getNonGenericType(type.name)) + '.{'+helper.getNonGenericType(type.simpleName)+" => J"+helper.getNonGenericType(type.simpleName)+"}"

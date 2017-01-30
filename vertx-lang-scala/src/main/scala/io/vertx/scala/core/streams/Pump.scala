@@ -52,7 +52,7 @@ class Pump(private val _asJava: Object) {
     * @param maxSize the max size
     * @return a reference to this, so the API can be used fluently
     */
-  def setWriteQueueMaxSize(maxSize: Int):Pump = {
+  def setWriteQueueMaxSize(maxSize: Int): Pump = {
     asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
@@ -61,7 +61,7 @@ class Pump(private val _asJava: Object) {
     * Start the Pump. The Pump can be started and stopped multiple times.
     * @return a reference to this, so the API can be used fluently
     */
-  def start():Pump = {
+  def start(): Pump = {
     asJava.asInstanceOf[JPump].start()
     this
   }
@@ -70,7 +70,7 @@ class Pump(private val _asJava: Object) {
     * Stop the Pump. The Pump can be started and stopped multiple times.
     * @return a reference to this, so the API can be used fluently
     */
-  def stop():Pump = {
+  def stop(): Pump = {
     asJava.asInstanceOf[JPump].stop()
     this
   }
@@ -78,7 +78,7 @@ class Pump(private val _asJava: Object) {
   /**
     * Return the total number of items pumped by this pump.
     */
-  def numberPumped():Int = {
+  def numberPumped(): Int = {
     asJava.asInstanceOf[JPump].numberPumped().asInstanceOf[Int]
   }
 
@@ -92,7 +92,7 @@ object Pump{
     * @param ws the write stream
     * @return the pump
     */
-  def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T]):Pump = {
+  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T]): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]]))
   }
 
@@ -104,7 +104,7 @@ object Pump{
     * @param writeQueueMaxSize the max size of the write queue
     * @return the pump
     */
-  def pump[T:TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int):Pump = {
+  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
   }
 

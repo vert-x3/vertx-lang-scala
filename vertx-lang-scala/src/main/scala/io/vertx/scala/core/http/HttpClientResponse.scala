@@ -42,20 +42,20 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * It implements [[io.vertx.scala.core.streams.ReadStream]] so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class HttpClientResponse(private val _asJava: Object) 
+class HttpClientResponse(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
-  private var cached_0:MultiMap = _
-  private var cached_1:MultiMap = _
-  private var cached_2:scala.collection.mutable.Buffer[String] = _
-  private var cached_3:NetSocket = _
-  private var cached_4:HttpClientRequest = _
+  private var cached_0: MultiMap = _
+  private var cached_1: MultiMap = _
+  private var cached_2: scala.collection.mutable.Buffer[String] = _
+  private var cached_3: NetSocket = _
+  private var cached_4: HttpClientRequest = _
 
   /**
     * @return the headers
     */
-  def headers():MultiMap = {
+  def headers(): MultiMap = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
       cached_0 = MultiMap(tmp)
@@ -66,7 +66,7 @@ class HttpClientResponse(private val _asJava: Object)
   /**
     * @return the trailers
     */
-  def trailers():MultiMap = {
+  def trailers(): MultiMap = {
     if(cached_1 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
       cached_1 = MultiMap(tmp)
@@ -77,7 +77,7 @@ class HttpClientResponse(private val _asJava: Object)
   /**
     * @return the Set-Cookie headers (including trailers)
     */
-  def cookies():scala.collection.mutable.Buffer[String] = {
+  def cookies(): scala.collection.mutable.Buffer[String] = {
     if(cached_2 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
       cached_2 = tmp.asScala.map(x => x.asInstanceOf[String])
@@ -94,7 +94,7 @@ class HttpClientResponse(private val _asJava: Object)
     * remote peer and it responded with a status code of 200.
     * @return the net socket
     */
-  def netSocket():NetSocket = {
+  def netSocket(): NetSocket = {
     if(cached_3 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
       cached_3 = NetSocket(tmp)
@@ -105,7 +105,7 @@ class HttpClientResponse(private val _asJava: Object)
   /**
     * @return the corresponding request
     */
-  def request():HttpClientRequest = {
+  def request(): HttpClientRequest = {
     if(cached_4 == null) {
       var tmp = asJava.asInstanceOf[JHttpClientResponse].request()
       cached_4 = HttpClientRequest(tmp)
@@ -113,27 +113,27 @@ class HttpClientResponse(private val _asJava: Object)
     cached_4
   }
 
-  override def resume():HttpClientResponse = {
+  override def resume(): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].resume()
     this
   }
 
-  override def exceptionHandler(handler: Handler[Throwable]):HttpClientResponse = {
+  override def exceptionHandler(handler: Handler[Throwable]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]):HttpClientResponse = {
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].handler({x: Buffer => handler.handle(x)})
     this
   }
 
-  override def pause():HttpClientResponse = {
+  override def pause(): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].pause()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]):HttpClientResponse = {
+  override def endHandler(endHandler: Handler[Unit]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
     this
   }
@@ -145,7 +145,7 @@ class HttpClientResponse(private val _asJava: Object)
     * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
     * @param bodyHandler This handler will be called after all the body has been received
     */
-  def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]):HttpClientResponse = {
+  def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].bodyHandler({x: Buffer => bodyHandler.handle(x)})
     this
   }
@@ -155,7 +155,7 @@ class HttpClientResponse(private val _asJava: Object)
     * frame. HTTP/2 permits extension of the protocol.
     * @return a reference to this, so the API can be used fluently
     */
-  def customFrameHandler(handler: Handler[HttpFrame]):HttpClientResponse = {
+  def customFrameHandler(handler: Handler[HttpFrame]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
     this
   }
@@ -163,21 +163,21 @@ class HttpClientResponse(private val _asJava: Object)
   /**
     * @return the version of the response
     */
-  def version():io.vertx.core.http.HttpVersion = {
+  def version(): io.vertx.core.http.HttpVersion = {
     asJava.asInstanceOf[JHttpClientResponse].version()
   }
 
   /**
     * @return the status code of the response
     */
-  def statusCode():Int = {
+  def statusCode(): Int = {
     asJava.asInstanceOf[JHttpClientResponse].statusCode().asInstanceOf[Int]
   }
 
   /**
     * @return the status message of the response
     */
-  def statusMessage():String = {
+  def statusMessage(): String = {
     asJava.asInstanceOf[JHttpClientResponse].statusMessage().asInstanceOf[String]
   }
 
@@ -186,7 +186,7 @@ class HttpClientResponse(private val _asJava: Object)
     * @param headerName the header name
     * @return the header value
     */
-  def getHeader(headerName: String):scala.Option[String] = {
+  def getHeader(headerName: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -195,7 +195,7 @@ class HttpClientResponse(private val _asJava: Object)
     * @param trailerName the trailer name
     * @return the trailer value
     */
-  def getTrailer(trailerName: String):scala.Option[String] = {
+  def getTrailer(trailerName: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 

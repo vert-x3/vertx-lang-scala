@@ -34,7 +34,7 @@ class Tty(private val _asJava: Object) {
     * @param handler the standard input
     * @return this object
     */
-  def stdinHandler(handler: Handler[String]):Tty = {
+  def stdinHandler(handler: Handler[String]): Tty = {
     asJava.asInstanceOf[JTty].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
@@ -44,7 +44,7 @@ class Tty(private val _asJava: Object) {
     * @param data the data to write
     * @return this object
     */
-  def write(data: String):Tty = {
+  def write(data: String): Tty = {
     asJava.asInstanceOf[JTty].write(data.asInstanceOf[java.lang.String])
     this
   }
@@ -54,7 +54,7 @@ class Tty(private val _asJava: Object) {
     * @param handler the resize handler
     * @return this object
     */
-  def resizehandler(handler: Handler[Unit]):Tty = {
+  def resizehandler(handler: Handler[Unit]): Tty = {
     asJava.asInstanceOf[JTty].resizehandler({x: Void => handler.handle(x)})
     this
   }
@@ -62,21 +62,21 @@ class Tty(private val _asJava: Object) {
   /**
     * @return the declared tty type, for instance ` vt100`, ` xterm-256`, etc... it can be null when the tty does not have declared its type.
     */
-  def `type`():String = {
+  def `type`(): String = {
     asJava.asInstanceOf[JTty].`type`().asInstanceOf[String]
   }
 
   /**
     * @return the current width, i.e the number of rows or ` -1` if unknown
     */
-  def width():Int = {
+  def width(): Int = {
     asJava.asInstanceOf[JTty].width().asInstanceOf[Int]
   }
 
   /**
     * @return the current height, i.e the number of columns or ` -1` if unknown
     */
-  def height():Int = {
+  def height(): Int = {
     asJava.asInstanceOf[JTty].height().asInstanceOf[Int]
   }
 

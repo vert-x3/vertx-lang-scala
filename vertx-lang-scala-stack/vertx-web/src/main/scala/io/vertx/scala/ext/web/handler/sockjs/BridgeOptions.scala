@@ -92,7 +92,7 @@ object BridgeOptions {
       null
   }
   
-  def fromJson(json: JsonObject):BridgeOptions = {
+  def fromJson(json: JsonObject): BridgeOptions = {
     if(json != null)
       new BridgeOptions(new JBridgeOptions(json))
     else

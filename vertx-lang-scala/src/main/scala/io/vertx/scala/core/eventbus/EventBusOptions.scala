@@ -440,7 +440,7 @@ object EventBusOptions {
       null
   }
   
-  def fromJson(json: JsonObject):EventBusOptions = {
+  def fromJson(json: JsonObject): EventBusOptions = {
     if(json != null)
       new EventBusOptions(new JEventBusOptions(json))
     else

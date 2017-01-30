@@ -127,7 +127,7 @@ object PemKeyCertOptions {
       null
   }
   
-  def fromJson(json: JsonObject):PemKeyCertOptions = {
+  def fromJson(json: JsonObject): PemKeyCertOptions = {
     if(json != null)
       new PemKeyCertOptions(new JPemKeyCertOptions(json))
     else

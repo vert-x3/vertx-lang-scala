@@ -84,7 +84,7 @@ object SockJSHandlerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):SockJSHandlerOptions = {
+  def fromJson(json: JsonObject): SockJSHandlerOptions = {
     if(json != null)
       new SockJSHandlerOptions(new JSockJSHandlerOptions(json))
     else

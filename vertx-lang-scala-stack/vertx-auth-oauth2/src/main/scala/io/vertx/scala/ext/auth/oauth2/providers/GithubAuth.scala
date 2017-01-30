@@ -43,7 +43,7 @@ object GithubAuth{
     * @param clientId the client id given to you by Github
     * @param clientSecret the client secret given to you by Github
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JGithubAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
 
@@ -53,7 +53,7 @@ object GithubAuth{
     * @param clientSecret the client secret given to you by Github
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions):OAuth2Auth = {
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JGithubAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 

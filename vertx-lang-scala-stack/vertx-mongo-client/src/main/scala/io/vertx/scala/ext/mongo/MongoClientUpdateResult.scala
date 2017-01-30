@@ -55,7 +55,7 @@ object MongoClientUpdateResult {
       null
   }
   
-  def fromJson(json: JsonObject):MongoClientUpdateResult = {
+  def fromJson(json: JsonObject): MongoClientUpdateResult = {
     if(json != null)
       new MongoClientUpdateResult(new JMongoClientUpdateResult(json))
     else

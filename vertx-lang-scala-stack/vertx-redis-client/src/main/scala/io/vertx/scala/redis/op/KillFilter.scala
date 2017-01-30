@@ -74,7 +74,7 @@ object KillFilter {
       null
   }
   
-  def fromJson(json: JsonObject):KillFilter = {
+  def fromJson(json: JsonObject): KillFilter = {
     if(json != null)
       new KillFilter(new JKillFilter(json))
     else

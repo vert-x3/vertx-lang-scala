@@ -67,7 +67,7 @@ object ShiroAuthOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ShiroAuthOptions = {
+  def fromJson(json: JsonObject): ShiroAuthOptions = {
     if(json != null)
       new ShiroAuthOptions(new JShiroAuthOptions(json))
     else

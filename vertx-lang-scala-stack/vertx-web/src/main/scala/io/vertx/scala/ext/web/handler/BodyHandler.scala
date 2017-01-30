@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * 
   * It also handles HTTP file uploads and can be used to limit body sizes.
   */
-class BodyHandler(private val _asJava: Object) 
+class BodyHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
@@ -39,7 +39,7 @@ class BodyHandler(private val _asJava: Object)
     * @param bodyLimit the max size
     * @return reference to this for fluency
     */
-  def setBodyLimit(bodyLimit: Long):BodyHandler = {
+  def setBodyLimit(bodyLimit: Long): BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setBodyLimit(bodyLimit.asInstanceOf[java.lang.Long])
     this
   }
@@ -49,7 +49,7 @@ class BodyHandler(private val _asJava: Object)
     * @param uploadsDirectory the uploads directory
     * @return reference to this for fluency
     */
-  def setUploadsDirectory(uploadsDirectory: String):BodyHandler = {
+  def setUploadsDirectory(uploadsDirectory: String): BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setUploadsDirectory(uploadsDirectory.asInstanceOf[java.lang.String])
     this
   }
@@ -59,7 +59,7 @@ class BodyHandler(private val _asJava: Object)
     * @param mergeFormAttributes true if they should be merged
     * @return reference to this for fluency
     */
-  def setMergeFormAttributes(mergeFormAttributes: Boolean):BodyHandler = {
+  def setMergeFormAttributes(mergeFormAttributes: Boolean): BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setMergeFormAttributes(mergeFormAttributes.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -69,12 +69,12 @@ class BodyHandler(private val _asJava: Object)
     * @param deleteUploadedFilesOnEnd true if uploaded files should be removed after handling the request
     * @return reference to this for fluency
     */
-  def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean):BodyHandler = {
+  def setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd: Boolean): BodyHandler = {
     asJava.asInstanceOf[JBodyHandler].setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd.asInstanceOf[java.lang.Boolean])
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JBodyHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -86,7 +86,7 @@ object BodyHandler{
     * Create a body handler with defaults
     * @return the body handler
     */
-  def create():BodyHandler = {
+  def create(): BodyHandler = {
     BodyHandler(JBodyHandler.create())
   }
 
@@ -95,7 +95,7 @@ object BodyHandler{
     * @param uploadDirectory the uploads directory
     * @return the body handler
     */
-  def create(uploadDirectory: String):BodyHandler = {
+  def create(uploadDirectory: String): BodyHandler = {
     BodyHandler(JBodyHandler.create(uploadDirectory.asInstanceOf[java.lang.String]))
   }
 

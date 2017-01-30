@@ -32,56 +32,56 @@ class FileProps(private val _asJava: Object) {
   /**
     * The date the file was created
     */
-  def creationTime():Long = {
+  def creationTime(): Long = {
     asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
   /**
     * The date the file was last accessed
     */
-  def lastAccessTime():Long = {
+  def lastAccessTime(): Long = {
     asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
   /**
     * The date the file was last modified
     */
-  def lastModifiedTime():Long = {
+  def lastModifiedTime(): Long = {
     asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
   /**
     * Is the file a directory?
     */
-  def isDirectory():Boolean = {
+  def isDirectory(): Boolean = {
     asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
     */
-  def isOther():Boolean = {
+  def isOther(): Boolean = {
     asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file a regular file?
     */
-  def isRegularFile():Boolean = {
+  def isRegularFile(): Boolean = {
     asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file a symbolic link?
     */
-  def isSymbolicLink():Boolean = {
+  def isSymbolicLink(): Boolean = {
     asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
   /**
     * The size of the file, in bytes
     */
-  def size():Long = {
+  def size(): Long = {
     asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 

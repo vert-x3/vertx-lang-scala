@@ -44,7 +44,7 @@ class Router(private val _asJava: Object) {
     * Remove all the routes from this router
     * @return a reference to this, so the API can be used fluently
     */
-  def clear():Router = {
+  def clear(): Router = {
     asJava.asInstanceOf[JRouter].clear()
     this
   }
@@ -55,7 +55,7 @@ class Router(private val _asJava: Object) {
     * @param subRouter the router to mount as a sub router
     * @return a reference to this, so the API can be used fluently
     */
-  def mountSubRouter(mountPoint: String,subRouter: Router):Router = {
+  def mountSubRouter(mountPoint: String,subRouter: Router): Router = {
     asJava.asInstanceOf[JRouter].mountSubRouter(mountPoint.asInstanceOf[java.lang.String],subRouter.asJava.asInstanceOf[JRouter])
     this
   }
@@ -66,7 +66,7 @@ class Router(private val _asJava: Object) {
     * @param exceptionHandler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(exceptionHandler: Handler[Throwable]):Router = {
+  def exceptionHandler(exceptionHandler: Handler[Throwable]): Router = {
     asJava.asInstanceOf[JRouter].exceptionHandler({x: Throwable => exceptionHandler.handle(x)})
     this
   }
@@ -77,7 +77,7 @@ class Router(private val _asJava: Object) {
     * router then routes it to matching routes.
     * @param request the request
     */
-  def accept(request: HttpServerRequest):Unit = {
+  def accept(request: HttpServerRequest): Unit = {
     asJava.asInstanceOf[JRouter].accept(request.asJava.asInstanceOf[JHttpServerRequest])
   }
 
@@ -85,7 +85,7 @@ class Router(private val _asJava: Object) {
     * Add a route with no matching criteria, i.e. it matches all requests or failures.
     * @return the route
     */
-  def route():Route = {
+  def route(): Route = {
     Route(asJava.asInstanceOf[JRouter].route())
   }
 
@@ -95,7 +95,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def route(method: io.vertx.core.http.HttpMethod,path: String):Route = {
+  def route(method: io.vertx.core.http.HttpMethod,path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].route(method,path.asInstanceOf[java.lang.String]))
   }
 
@@ -104,7 +104,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def route(path: String):Route = {
+  def route(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].route(path.asInstanceOf[java.lang.String]))
   }
 
@@ -114,7 +114,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def routeWithRegex(method: io.vertx.core.http.HttpMethod,regex: String):Route = {
+  def routeWithRegex(method: io.vertx.core.http.HttpMethod,regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].routeWithRegex(method,regex.asInstanceOf[java.lang.String]))
   }
 
@@ -123,7 +123,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def routeWithRegex(regex: String):Route = {
+  def routeWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].routeWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -131,7 +131,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP GET request
     * @return the route
     */
-  def get():Route = {
+  def get(): Route = {
     Route(asJava.asInstanceOf[JRouter].get())
   }
 
@@ -140,7 +140,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def get(path: String):Route = {
+  def get(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].get(path.asInstanceOf[java.lang.String]))
   }
 
@@ -149,7 +149,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def getWithRegex(regex: String):Route = {
+  def getWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].getWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -157,7 +157,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP HEAD request
     * @return the route
     */
-  def head():Route = {
+  def head(): Route = {
     Route(asJava.asInstanceOf[JRouter].head())
   }
 
@@ -166,7 +166,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def head(path: String):Route = {
+  def head(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].head(path.asInstanceOf[java.lang.String]))
   }
 
@@ -175,7 +175,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def headWithRegex(regex: String):Route = {
+  def headWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].headWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -183,7 +183,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP OPTIONS request
     * @return the route
     */
-  def options():Route = {
+  def options(): Route = {
     Route(asJava.asInstanceOf[JRouter].options())
   }
 
@@ -192,7 +192,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def options(path: String):Route = {
+  def options(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].options(path.asInstanceOf[java.lang.String]))
   }
 
@@ -201,7 +201,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def optionsWithRegex(regex: String):Route = {
+  def optionsWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].optionsWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -209,7 +209,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP PUT request
     * @return the route
     */
-  def put():Route = {
+  def put(): Route = {
     Route(asJava.asInstanceOf[JRouter].put())
   }
 
@@ -218,7 +218,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def put(path: String):Route = {
+  def put(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].put(path.asInstanceOf[java.lang.String]))
   }
 
@@ -227,7 +227,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def putWithRegex(regex: String):Route = {
+  def putWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].putWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -235,7 +235,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP POST request
     * @return the route
     */
-  def post():Route = {
+  def post(): Route = {
     Route(asJava.asInstanceOf[JRouter].post())
   }
 
@@ -244,7 +244,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def post(path: String):Route = {
+  def post(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].post(path.asInstanceOf[java.lang.String]))
   }
 
@@ -253,7 +253,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def postWithRegex(regex: String):Route = {
+  def postWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].postWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -261,7 +261,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP DELETE request
     * @return the route
     */
-  def delete():Route = {
+  def delete(): Route = {
     Route(asJava.asInstanceOf[JRouter].delete())
   }
 
@@ -270,7 +270,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def delete(path: String):Route = {
+  def delete(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].delete(path.asInstanceOf[java.lang.String]))
   }
 
@@ -279,7 +279,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def deleteWithRegex(regex: String):Route = {
+  def deleteWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].deleteWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -287,7 +287,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP TRACE request
     * @return the route
     */
-  def trace():Route = {
+  def trace(): Route = {
     Route(asJava.asInstanceOf[JRouter].trace())
   }
 
@@ -296,7 +296,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def trace(path: String):Route = {
+  def trace(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].trace(path.asInstanceOf[java.lang.String]))
   }
 
@@ -305,7 +305,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def traceWithRegex(regex: String):Route = {
+  def traceWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].traceWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -313,7 +313,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP CONNECT request
     * @return the route
     */
-  def connect():Route = {
+  def connect(): Route = {
     Route(asJava.asInstanceOf[JRouter].connect())
   }
 
@@ -322,7 +322,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def connect(path: String):Route = {
+  def connect(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].connect(path.asInstanceOf[java.lang.String]))
   }
 
@@ -331,7 +331,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def connectWithRegex(regex: String):Route = {
+  def connectWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].connectWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
@@ -339,7 +339,7 @@ class Router(private val _asJava: Object) {
     * Add a route that matches any HTTP PATCH request
     * @return the route
     */
-  def patch():Route = {
+  def patch(): Route = {
     Route(asJava.asInstanceOf[JRouter].patch())
   }
 
@@ -348,7 +348,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def patch(path: String):Route = {
+  def patch(path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].patch(path.asInstanceOf[java.lang.String]))
   }
 
@@ -357,14 +357,14 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def patchWithRegex(regex: String):Route = {
+  def patchWithRegex(regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].patchWithRegex(regex.asInstanceOf[java.lang.String]))
   }
 
   /**
     * @return a list of all the routes on this router
     */
-  def getRoutes():scala.collection.mutable.Buffer[Route] = {
+  def getRoutes(): scala.collection.mutable.Buffer[Route] = {
     asJava.asInstanceOf[JRouter].getRoutes().asScala.map(x => Route(x))
   }
 
@@ -372,7 +372,7 @@ class Router(private val _asJava: Object) {
     * Used to route a context to the router. Used for sub-routers. You wouldn't normally call this method directly.
     * @param context the routing context
     */
-  def handleContext(context: RoutingContext):Unit = {
+  def handleContext(context: RoutingContext): Unit = {
     asJava.asInstanceOf[JRouter].handleContext(context.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -380,7 +380,7 @@ class Router(private val _asJava: Object) {
     * Used to route a failure to the router. Used for sub-routers. You wouldn't normally call this method directly.
     * @param context the routing context
     */
-  def handleFailure(context: RoutingContext):Unit = {
+  def handleFailure(context: RoutingContext): Unit = {
     asJava.asInstanceOf[JRouter].handleFailure(context.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -393,7 +393,7 @@ object Router{
     * @param vertx the Vert.x instance
     * @return the router
     */
-  def router(vertx: Vertx):Router = {
+  def router(vertx: Vertx): Router = {
     Router(JRouter.router(vertx.asJava.asInstanceOf[JVertx]))
   }
 

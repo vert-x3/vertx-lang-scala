@@ -57,7 +57,7 @@ object SetOptions {
       null
   }
   
-  def fromJson(json: JsonObject):SetOptions = {
+  def fromJson(json: JsonObject): SetOptions = {
     if(json != null)
       new SetOptions(new JSetOptions(json))
     else

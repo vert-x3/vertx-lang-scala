@@ -34,12 +34,12 @@ trait StreamBase {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Handler[Throwable]):StreamBase
+  def exceptionHandler(handler: Handler[Throwable]): StreamBase
 
 }
 
 object StreamBase{
-  def apply(asJava: JStreamBase):StreamBase = new StreamBaseImpl(asJava)
+  def apply(asJava: JStreamBase): StreamBase = new StreamBaseImpl(asJava)
     private class StreamBaseImpl(private val _asJava: Object) extends StreamBase {
 
       def asJava = _asJava
@@ -49,7 +49,7 @@ object StreamBase{
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Handler[Throwable]):StreamBase = {
+  def exceptionHandler(handler: Handler[Throwable]): StreamBase = {
     asJava.asInstanceOf[JStreamBase].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }

@@ -34,7 +34,7 @@ import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 /**
   * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
   */
-class JDBCAuth(private val _asJava: Object) 
+class JDBCAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)  {
 
 
@@ -43,7 +43,7 @@ class JDBCAuth(private val _asJava: Object)
     * @param authenticationQuery the authentication query
     * @return a reference to this for fluency
     */
-  def setAuthenticationQuery(authenticationQuery: String):JDBCAuth = {
+  def setAuthenticationQuery(authenticationQuery: String): JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setAuthenticationQuery(authenticationQuery.asInstanceOf[java.lang.String]))
   }
 
@@ -52,7 +52,7 @@ class JDBCAuth(private val _asJava: Object)
     * @param rolesQuery the roles query
     * @return a reference to this for fluency
     */
-  def setRolesQuery(rolesQuery: String):JDBCAuth = {
+  def setRolesQuery(rolesQuery: String): JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolesQuery(rolesQuery.asInstanceOf[java.lang.String]))
   }
 
@@ -61,7 +61,7 @@ class JDBCAuth(private val _asJava: Object)
     * @param permissionsQuery the permissions query
     * @return a reference to this for fluency
     */
-  def setPermissionsQuery(permissionsQuery: String):JDBCAuth = {
+  def setPermissionsQuery(permissionsQuery: String): JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setPermissionsQuery(permissionsQuery.asInstanceOf[java.lang.String]))
   }
 
@@ -70,7 +70,7 @@ class JDBCAuth(private val _asJava: Object)
     * @param rolePrefix a Prefix e.g.: "role:"
     * @return a reference to this for fluency
     */
-  def setRolePrefix(rolePrefix: String):JDBCAuth = {
+  def setRolePrefix(rolePrefix: String): JDBCAuth = {
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
   }
 
@@ -83,7 +83,7 @@ object JDBCAuth{
     * @param client the JDBC client instance
     * @return the auth provider
     */
-  def create(client: JDBCClient):JDBCAuth = {
+  def create(client: JDBCClient): JDBCAuth = {
     JDBCAuth(JJDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
   }
 

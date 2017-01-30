@@ -41,7 +41,7 @@ object DataObjectWithOnlyJsonObjectConstructor {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithOnlyJsonObjectConstructor = {
+  def fromJson(json: JsonObject): DataObjectWithOnlyJsonObjectConstructor = {
     if(json != null)
       new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(json))
     else

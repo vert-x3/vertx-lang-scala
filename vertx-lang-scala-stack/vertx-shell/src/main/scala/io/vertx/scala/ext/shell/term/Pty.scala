@@ -36,7 +36,7 @@ class Pty(private val _asJava: Object) {
     * @param handler the standard output
     * @return this current object
     */
-  def stdoutHandler(handler: Handler[String]):Pty = {
+  def stdoutHandler(handler: Handler[String]): Pty = {
     asJava.asInstanceOf[JPty].stdoutHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
@@ -46,7 +46,7 @@ class Pty(private val _asJava: Object) {
     * @param data the data to write
     * @return this current object
     */
-  def write(data: String):Pty = {
+  def write(data: String): Pty = {
     asJava.asInstanceOf[JPty].write(data.asInstanceOf[java.lang.String])
     this
   }
@@ -55,7 +55,7 @@ class Pty(private val _asJava: Object) {
     * Resize the terminal.
     * @return this current object
     */
-  def setSize(width: Int,height: Int):Pty = {
+  def setSize(width: Int,height: Int): Pty = {
     asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer],height.asInstanceOf[java.lang.Integer])
     this
   }
@@ -63,7 +63,7 @@ class Pty(private val _asJava: Object) {
   /**
     * @return the pseudo terminal slave
     */
-  def slave():Tty = {
+  def slave(): Tty = {
     Tty(asJava.asInstanceOf[JPty].slave())
   }
 
@@ -74,7 +74,7 @@ object Pty{
   /**
     * Create a new pseudo terminal with no terminal type.
     */
-  def create():Pty = {
+  def create(): Pty = {
     Pty(JPty.create())
   }
 
@@ -83,7 +83,7 @@ object Pty{
     * @param terminalType the terminal type, for instance ` vt100`
     * @return the created pseudo terminal
     */
-  def create(terminalType: String):Pty = {
+  def create(terminalType: String): Pty = {
     Pty(JPty.create(terminalType.asInstanceOf[java.lang.String]))
   }
 

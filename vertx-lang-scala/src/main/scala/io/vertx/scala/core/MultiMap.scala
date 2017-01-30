@@ -38,7 +38,7 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value being added
     * @return a reference to this, so the API can be used fluently
     */
-  def add(name: String,value: String):MultiMap = {
+  def add(name: String,value: String): MultiMap = {
     asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -47,7 +47,7 @@ class MultiMap(private val _asJava: Object) {
     * Adds all the entries from another MultiMap to this one
     * @return a reference to this, so the API can be used fluently
     */
-  def addAll(map: MultiMap):MultiMap = {
+  def addAll(map: MultiMap): MultiMap = {
     asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
@@ -60,7 +60,7 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value
     * @return a reference to this, so the API can be used fluently
     */
-  def set(name: String,value: String):MultiMap = {
+  def set(name: String,value: String): MultiMap = {
     asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -69,7 +69,7 @@ class MultiMap(private val _asJava: Object) {
     * Cleans this instance.
     * @return a reference to this, so the API can be used fluently
     */
-  def setAll(map: MultiMap):MultiMap = {
+  def setAll(map: MultiMap): MultiMap = {
     asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
@@ -79,7 +79,7 @@ class MultiMap(private val _asJava: Object) {
     * @param name The name of the value to remove
     * @return a reference to this, so the API can be used fluently
     */
-  def remove(name: String):MultiMap = {
+  def remove(name: String): MultiMap = {
     asJava.asInstanceOf[JMultiMap].remove(name.asInstanceOf[java.lang.String])
     this
   }
@@ -88,7 +88,7 @@ class MultiMap(private val _asJava: Object) {
     * Removes all
     * @return a reference to this, so the API can be used fluently
     */
-  def clear():MultiMap = {
+  def clear(): MultiMap = {
     asJava.asInstanceOf[JMultiMap].clear()
     this
   }
@@ -99,7 +99,7 @@ class MultiMap(private val _asJava: Object) {
     * @param name The name of the header to search
     * @return The first header value or `null` if there is no such entry
     */
-  def get(name: String):scala.Option[String] = {
+  def get(name: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
@@ -108,7 +108,7 @@ class MultiMap(private val _asJava: Object) {
     * @param name The name to search
     * @return A immutable scala.collection.immutable.List of values which will be empty if no values are found
     */
-  def getAll(name: String):scala.collection.mutable.Buffer[String] = {
+  def getAll(name: String): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -117,14 +117,14 @@ class MultiMap(private val _asJava: Object) {
     * @param name The name to search for
     * @return true if at least one entry is found
     */
-  def contains(name: String):Boolean = {
+  def contains(name: String): Boolean = {
     asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**
     * Return true if empty
     */
-  def isEmpty():Boolean = {
+  def isEmpty(): Boolean = {
     asJava.asInstanceOf[JMultiMap].isEmpty().asInstanceOf[Boolean]
   }
 
@@ -132,14 +132,14 @@ class MultiMap(private val _asJava: Object) {
     * Gets a immutable Set of all names
     * @return A scala.collection.immutable.Set of all names
     */
-  def names():scala.collection.mutable.Set[String] = {
+  def names(): scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Return the number of keys.
     */
-  def size():Int = {
+  def size(): Int = {
     asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
@@ -151,7 +151,7 @@ object MultiMap{
     * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.
     * @return the multi-map
     */
-  def caseInsensitiveMultiMap():MultiMap = {
+  def caseInsensitiveMultiMap(): MultiMap = {
     MultiMap(JMultiMap.caseInsensitiveMultiMap())
   }
 

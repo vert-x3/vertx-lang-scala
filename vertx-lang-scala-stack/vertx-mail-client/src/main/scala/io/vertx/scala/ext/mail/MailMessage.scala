@@ -171,7 +171,7 @@ object MailMessage {
       null
   }
   
-  def fromJson(json: JsonObject):MailMessage = {
+  def fromJson(json: JsonObject): MailMessage = {
     if(json != null)
       new MailMessage(new JMailMessage(json))
     else

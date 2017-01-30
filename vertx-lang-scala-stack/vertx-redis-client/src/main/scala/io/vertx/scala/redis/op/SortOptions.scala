@@ -53,7 +53,7 @@ object SortOptions {
       null
   }
   
-  def fromJson(json: JsonObject):SortOptions = {
+  def fromJson(json: JsonObject): SortOptions = {
     if(json != null)
       new SortOptions(new JSortOptions(json))
     else

@@ -87,7 +87,7 @@ object FindOptions {
       null
   }
   
-  def fromJson(json: JsonObject):FindOptions = {
+  def fromJson(json: JsonObject): FindOptions = {
     if(json != null)
       new FindOptions(new JFindOptions(json))
     else

@@ -40,14 +40,14 @@ class Acknowledgement(private val _asJava: Object) {
   /**
     * @return the subscription framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     */
-  def subscription():Frame = {
+  def subscription(): Frame = {
     Frame(asJava.asInstanceOf[JAcknowledgement].subscription())
   }
 
   /**
     * @return the list of frames that have been acknowledged / not-acknowledged. The content of the list depends on the type of subscription.
     */
-  def frames():scala.collection.mutable.Buffer[Frame] = {
+  def frames(): scala.collection.mutable.Buffer[Frame] = {
     asJava.asInstanceOf[JAcknowledgement].frames().asScala.map(x => Frame(x))
   }
 

@@ -402,7 +402,7 @@ object StompServerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):StompServerOptions = {
+  def fromJson(json: JsonObject): StompServerOptions = {
     if(json != null)
       new StompServerOptions(new JStompServerOptions(json))
     else

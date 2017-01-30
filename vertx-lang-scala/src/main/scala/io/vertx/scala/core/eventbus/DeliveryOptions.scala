@@ -78,7 +78,7 @@ object DeliveryOptions {
       null
   }
   
-  def fromJson(json: JsonObject):DeliveryOptions = {
+  def fromJson(json: JsonObject): DeliveryOptions = {
     if(json != null)
       new DeliveryOptions(new JDeliveryOptions(json))
     else

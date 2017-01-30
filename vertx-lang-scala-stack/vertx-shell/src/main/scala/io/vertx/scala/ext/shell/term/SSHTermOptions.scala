@@ -121,7 +121,7 @@ object SSHTermOptions {
       null
   }
   
-  def fromJson(json: JsonObject):SSHTermOptions = {
+  def fromJson(json: JsonObject): SSHTermOptions = {
     if(json != null)
       new SSHTermOptions(new JSSHTermOptions(json))
     else

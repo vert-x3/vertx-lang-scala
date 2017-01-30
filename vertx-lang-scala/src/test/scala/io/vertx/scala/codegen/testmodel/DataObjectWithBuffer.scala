@@ -49,7 +49,7 @@ object DataObjectWithBuffer {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithBuffer = {
+  def fromJson(json: JsonObject): DataObjectWithBuffer = {
     if(json != null)
       new DataObjectWithBuffer(new JDataObjectWithBuffer(json))
     else

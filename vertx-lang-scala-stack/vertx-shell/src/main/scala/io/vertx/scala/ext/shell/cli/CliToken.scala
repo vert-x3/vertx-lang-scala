@@ -32,28 +32,28 @@ class CliToken(private val _asJava: Object) {
   /**
     * @return the token value
     */
-  def value():String = {
+  def value(): String = {
     asJava.asInstanceOf[JCliToken].value().asInstanceOf[String]
   }
 
   /**
     * @return the raw token value, that may contain unescaped chars, for instance ` "ab\"cd"`
     */
-  def raw():String = {
+  def raw(): String = {
     asJava.asInstanceOf[JCliToken].raw().asInstanceOf[String]
   }
 
   /**
     * @return true when it's a text token
     */
-  def isText():Boolean = {
+  def isText(): Boolean = {
     asJava.asInstanceOf[JCliToken].isText().asInstanceOf[Boolean]
   }
 
   /**
     * @return true when it's a blank token
     */
-  def isBlank():Boolean = {
+  def isBlank(): Boolean = {
     asJava.asInstanceOf[JCliToken].isBlank().asInstanceOf[Boolean]
   }
 
@@ -66,7 +66,7 @@ object CliToken{
     * @param text the text
     * @return the token
     */
-  def createText(text: String):CliToken = {
+  def createText(text: String): CliToken = {
     CliToken(JCliToken.createText(text.asInstanceOf[java.lang.String]))
   }
 
@@ -75,7 +75,7 @@ object CliToken{
     * @param blank the blank value
     * @return the token
     */
-  def createBlank(blank: String):CliToken = {
+  def createBlank(blank: String): CliToken = {
     CliToken(JCliToken.createBlank(blank.asInstanceOf[java.lang.String]))
   }
 
@@ -84,7 +84,7 @@ object CliToken{
     * @param s the tokenized string
     * @return the tokens
     */
-  def tokenize(s: String):scala.collection.mutable.Buffer[CliToken] = {
+  def tokenize(s: String): scala.collection.mutable.Buffer[CliToken] = {
     JCliToken.tokenize(s.asInstanceOf[java.lang.String]).asScala.map(x => CliToken(x))
   }
 

@@ -32,7 +32,7 @@ import io.vertx.core.Handler
   *
   * This Handler requires session support, thus should be added somewhere below Session and Body handlers.
   */
-class CSRFHandler(private val _asJava: Object) 
+class CSRFHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
@@ -43,7 +43,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param name a new name for the cookie.
     * @return fluent
     */
-  def setCookieName(name: String):CSRFHandler = {
+  def setCookieName(name: String): CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setCookieName(name.asInstanceOf[java.lang.String])
     this
   }
@@ -54,7 +54,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param name a new name for the header.
     * @return fluent
     */
-  def setHeaderName(name: String):CSRFHandler = {
+  def setHeaderName(name: String): CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setHeaderName(name.asInstanceOf[java.lang.String])
     this
   }
@@ -64,7 +64,7 @@ class CSRFHandler(private val _asJava: Object)
     * @param nag true to nag
     * @return fluent
     */
-  def setNagHttps(nag: Boolean):CSRFHandler = {
+  def setNagHttps(nag: Boolean): CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -74,12 +74,12 @@ class CSRFHandler(private val _asJava: Object)
     * @param timeout token timeout
     * @return fluent
     */
-  def setTimeout(timeout: Long):CSRFHandler = {
+  def setTimeout(timeout: Long): CSRFHandler = {
     asJava.asInstanceOf[JCSRFHandler].setTimeout(timeout.asInstanceOf[java.lang.Long])
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JCSRFHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -95,7 +95,7 @@ object CSRFHandler{
     * </pre>
     * @param secret server secret to sign the token.
     */
-  def create(secret: String):CSRFHandler = {
+  def create(secret: String): CSRFHandler = {
     CSRFHandler(JCSRFHandler.create(secret.asInstanceOf[java.lang.String]))
   }
 

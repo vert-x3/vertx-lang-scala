@@ -149,7 +149,7 @@ object JWTOptions {
       null
   }
   
-  def fromJson(json: JsonObject):JWTOptions = {
+  def fromJson(json: JsonObject): JWTOptions = {
     if(json != null)
       new JWTOptions(new JJWTOptions(json))
     else

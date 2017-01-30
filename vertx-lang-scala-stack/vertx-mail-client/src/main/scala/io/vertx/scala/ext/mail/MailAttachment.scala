@@ -117,7 +117,7 @@ object MailAttachment {
       null
   }
   
-  def fromJson(json: JsonObject):MailAttachment = {
+  def fromJson(json: JsonObject): MailAttachment = {
     if(json != null)
       new MailAttachment(new JMailAttachment(json))
     else

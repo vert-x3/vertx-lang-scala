@@ -41,7 +41,7 @@ class ServiceImporter(private val _asJava: Object) {
     * Closes the importer
     * @param closeHandler the handle to be notified when importer is closed, may be `null`
     */
-  def close(closeHandler: Handler[Unit]):Unit = {
+  def close(closeHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JServiceImporter].close({x: Void => closeHandler.handle(x)})
   }
 
@@ -52,7 +52,7 @@ class ServiceImporter(private val _asJava: Object) {
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def start(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]):Unit = {
+  def start(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]): Unit = {
     asJava.asInstanceOf[JServiceImporter].start(vertx.asJava.asInstanceOf[JVertx],publisher.asJava.asInstanceOf[JServicePublisher],configuration,future.asJava.asInstanceOf[JFuture[Void]])
   }
 

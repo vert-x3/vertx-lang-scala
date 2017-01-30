@@ -31,7 +31,7 @@ import io.vertx.core.Handler
 /**
   * A template engine that uses the Handlebars library.
   */
-class HandlebarsTemplateEngine(private val _asJava: Object) 
+class HandlebarsTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)  {
 
 
@@ -40,7 +40,7 @@ class HandlebarsTemplateEngine(private val _asJava: Object)
     * @param extension the extension
     * @return a reference to this for fluency
     */
-  def setExtension(extension: String):HandlebarsTemplateEngine = {
+  def setExtension(extension: String): HandlebarsTemplateEngine = {
     HandlebarsTemplateEngine(asJava.asInstanceOf[JHandlebarsTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String]))
   }
 
@@ -49,7 +49,7 @@ class HandlebarsTemplateEngine(private val _asJava: Object)
     * @param maxCacheSize the maxCacheSize
     * @return a reference to this for fluency
     */
-  def setMaxCacheSize(maxCacheSize: Int):HandlebarsTemplateEngine = {
+  def setMaxCacheSize(maxCacheSize: Int): HandlebarsTemplateEngine = {
     HandlebarsTemplateEngine(asJava.asInstanceOf[JHandlebarsTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer]))
   }
 
@@ -61,7 +61,7 @@ object HandlebarsTemplateEngine{
     * Create a template engine using defaults
     * @return the engine
     */
-  def create():HandlebarsTemplateEngine = {
+  def create(): HandlebarsTemplateEngine = {
     HandlebarsTemplateEngine(JHandlebarsTemplateEngine.create())
   }
 

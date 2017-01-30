@@ -91,7 +91,7 @@ object ServiceDiscoveryOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ServiceDiscoveryOptions = {
+  def fromJson(json: JsonObject): ServiceDiscoveryOptions = {
     if(json != null)
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))
     else

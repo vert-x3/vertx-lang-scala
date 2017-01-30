@@ -36,12 +36,12 @@ import io.vertx.core.Handler
   * It requires an Auth provider so, if the user is deserialized from a clustered session it knows which Auth provider
   * to associate the session with.
   */
-class UserSessionHandler(private val _asJava: Object) 
+class UserSessionHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JUserSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -54,7 +54,7 @@ object UserSessionHandler{
     * @param authProvider The auth provider to use
     * @return the handler
     */
-  def create(authProvider: AuthProvider):UserSessionHandler = {
+  def create(authProvider: AuthProvider): UserSessionHandler = {
     UserSessionHandler(JUserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 

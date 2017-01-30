@@ -31,7 +31,7 @@ import io.vertx.core.Handler
   * 
   * Used in conjunction with the [[io.vertx.scala.ext.web.handler.RedirectAuthHandler]].
   */
-class FormLoginHandler(private val _asJava: Object) 
+class FormLoginHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
@@ -41,7 +41,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param usernameParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setUsernameParam(usernameParam: String):FormLoginHandler = {
+  def setUsernameParam(usernameParam: String): FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setUsernameParam(usernameParam.asInstanceOf[java.lang.String])
     this
   }
@@ -51,7 +51,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param passwordParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setPasswordParam(passwordParam: String):FormLoginHandler = {
+  def setPasswordParam(passwordParam: String): FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setPasswordParam(passwordParam.asInstanceOf[java.lang.String])
     this
   }
@@ -61,7 +61,7 @@ class FormLoginHandler(private val _asJava: Object)
     * @param returnURLParam the name of the param
     * @return a reference to this for a fluent API
     */
-  def setReturnURLParam(returnURLParam: String):FormLoginHandler = {
+  def setReturnURLParam(returnURLParam: String): FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setReturnURLParam(returnURLParam.asInstanceOf[java.lang.String])
     this
   }
@@ -72,12 +72,12 @@ class FormLoginHandler(private val _asJava: Object)
     * @param directLoggedInOKURL the URL to redirect to
     * @return a reference to this for a fluent API
     */
-  def setDirectLoggedInOKURL(directLoggedInOKURL: String):FormLoginHandler = {
+  def setDirectLoggedInOKURL(directLoggedInOKURL: String): FormLoginHandler = {
     asJava.asInstanceOf[JFormLoginHandler].setDirectLoggedInOKURL(directLoggedInOKURL.asInstanceOf[java.lang.String])
     this
   }
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JFormLoginHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -90,7 +90,7 @@ object FormLoginHandler{
     * @param authProvider the auth service to use
     * @return the handler
     */
-  def create(authProvider: AuthProvider):FormLoginHandler = {
+  def create(authProvider: AuthProvider): FormLoginHandler = {
     FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
@@ -103,7 +103,7 @@ object FormLoginHandler{
     * @param directLoggedInOKURL a url to redirect to if the user logs in directly at the url of the form login handler without being redirected here first
     * @return the handler
     */
-  def create(authProvider: AuthProvider,usernameParam: String,passwordParam: String,returnURLParam: String,directLoggedInOKURL: String):FormLoginHandler = {
+  def create(authProvider: AuthProvider,usernameParam: String,passwordParam: String,returnURLParam: String,directLoggedInOKURL: String): FormLoginHandler = {
     FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],usernameParam.asInstanceOf[java.lang.String],passwordParam.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String],directLoggedInOKURL.asInstanceOf[java.lang.String]))
   }
 

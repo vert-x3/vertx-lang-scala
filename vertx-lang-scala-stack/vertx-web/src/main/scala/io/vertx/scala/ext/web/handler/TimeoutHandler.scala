@@ -28,12 +28,12 @@ import io.vertx.core.Handler
   * Handler that will timeout requests if the response has not been written after a certain time.
   * Timeout requests will be ended with an HTTP status code `503`.
   */
-class TimeoutHandler(private val _asJava: Object) 
+class TimeoutHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JTimeoutHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -45,7 +45,7 @@ object TimeoutHandler{
     * Create a handler
     * @return the handler
     */
-  def create():TimeoutHandler = {
+  def create(): TimeoutHandler = {
     TimeoutHandler(JTimeoutHandler.create())
   }
 
@@ -54,7 +54,7 @@ object TimeoutHandler{
     * @param timeout the timeout, in ms
     * @return the handler
     */
-  def create(timeout: Long):TimeoutHandler = {
+  def create(timeout: Long): TimeoutHandler = {
     TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))
   }
 
@@ -63,7 +63,7 @@ object TimeoutHandler{
     * @param timeout the timeout, in ms
     * @return the handler
     */
-  def create(timeout: Long,errorCode: Int):TimeoutHandler = {
+  def create(timeout: Long,errorCode: Int): TimeoutHandler = {
     TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
   }
 

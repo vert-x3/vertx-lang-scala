@@ -91,7 +91,7 @@ object DataObjectWithListAdders {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithListAdders = {
+  def fromJson(json: JsonObject): DataObjectWithListAdders = {
     if(json != null)
       new DataObjectWithListAdders(new JDataObjectWithListAdders(json))
     else

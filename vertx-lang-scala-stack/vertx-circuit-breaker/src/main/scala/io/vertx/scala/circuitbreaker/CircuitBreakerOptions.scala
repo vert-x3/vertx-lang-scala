@@ -133,7 +133,7 @@ object CircuitBreakerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):CircuitBreakerOptions = {
+  def fromJson(json: JsonObject): CircuitBreakerOptions = {
     if(json != null)
       new CircuitBreakerOptions(new JCircuitBreakerOptions(json))
     else

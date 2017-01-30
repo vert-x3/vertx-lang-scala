@@ -64,7 +64,7 @@ object Match {
       null
   }
   
-  def fromJson(json: JsonObject):Match = {
+  def fromJson(json: JsonObject): Match = {
     if(json != null)
       new Match(new JMatch(json))
     else

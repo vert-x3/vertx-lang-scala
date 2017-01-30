@@ -34,14 +34,14 @@ class ServerFrame(private val _asJava: Object) {
   /**
     * @return the received framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     */
-  def frame():Frame = {
+  def frame(): Frame = {
     Frame(asJava.asInstanceOf[JServerFrame].frame())
   }
 
   /**
     * @return the connection
     */
-  def connection():StompServerConnection = {
+  def connection(): StompServerConnection = {
     StompServerConnection(asJava.asInstanceOf[JServerFrame].connection())
   }
 

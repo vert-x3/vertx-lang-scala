@@ -55,7 +55,7 @@ object DataObjectWithRecursion {
       null
   }
   
-  def fromJson(json: JsonObject):DataObjectWithRecursion = {
+  def fromJson(json: JsonObject): DataObjectWithRecursion = {
     if(json != null)
       new DataObjectWithRecursion(new JDataObjectWithRecursion(json))
     else

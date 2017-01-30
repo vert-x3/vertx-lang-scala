@@ -41,7 +41,7 @@ object LimitOptions {
       null
   }
   
-  def fromJson(json: JsonObject):LimitOptions = {
+  def fromJson(json: JsonObject): LimitOptions = {
     if(json != null)
       new LimitOptions(new JLimitOptions(json))
     else

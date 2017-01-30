@@ -36,11 +36,11 @@ import io.vertx.core.Handler
 /**
   * The command process provides interaction with the process of the command provided by Vert.x Shell.
   */
-class CommandProcess(private val _asJava: Object) 
+class CommandProcess(private val _asJava: Object)
     extends Tty(_asJava)  {
 
 
-  override def stdinHandler(handler: Handler[String]):CommandProcess = {
+  override def stdinHandler(handler: Handler[String]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
@@ -51,7 +51,7 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-  def interruptHandler(handler: Handler[Unit]):CommandProcess = {
+  def interruptHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].interruptHandler({x: Void => handler.handle(x)})
     this
   }
@@ -62,7 +62,7 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-  def suspendHandler(handler: Handler[Unit]):CommandProcess = {
+  def suspendHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].suspendHandler({x: Void => handler.handle(x)})
     this
   }
@@ -73,7 +73,7 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the interrupt handler
     * @return this command
     */
-  def resumeHandler(handler: Handler[Unit]):CommandProcess = {
+  def resumeHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].resumeHandler({x: Void => handler.handle(x)})
     this
   }
@@ -84,7 +84,7 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the end handler
     * @return a reference to this, so the API can be used fluently
     */
-  def endHandler(handler: Handler[Unit]):CommandProcess = {
+  def endHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].endHandler({x: Void => handler.handle(x)})
     this
   }
@@ -94,7 +94,7 @@ class CommandProcess(private val _asJava: Object)
     * @param data the text
     * @return a reference to this, so the API can be used fluently
     */
-  override def write(data: String):CommandProcess = {
+  override def write(data: String): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].write(data.asInstanceOf[java.lang.String])
     this
   }
@@ -104,7 +104,7 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the background handler
     * @return this command
     */
-  def backgroundHandler(handler: Handler[Unit]):CommandProcess = {
+  def backgroundHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].backgroundHandler({x: Void => handler.handle(x)})
     this
   }
@@ -114,12 +114,12 @@ class CommandProcess(private val _asJava: Object)
     * @param handler the foreground handler
     * @return this command
     */
-  def foregroundHandler(handler: Handler[Unit]):CommandProcess = {
+  def foregroundHandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].foregroundHandler({x: Void => handler.handle(x)})
     this
   }
 
-  override def resizehandler(handler: Handler[Unit]):CommandProcess = {
+  override def resizehandler(handler: Handler[Unit]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].resizehandler({x: Void => handler.handle(x)})
     this
   }
@@ -127,49 +127,49 @@ class CommandProcess(private val _asJava: Object)
   /**
     * @return the current Vert.x instance
     */
-  def vertx():Vertx = {
+  def vertx(): Vertx = {
     Vertx(asJava.asInstanceOf[JCommandProcess].vertx())
   }
 
   /**
     * @return the unparsed arguments tokens
     */
-  def argsTokens():scala.collection.mutable.Buffer[CliToken] = {
+  def argsTokens(): scala.collection.mutable.Buffer[CliToken] = {
     asJava.asInstanceOf[JCommandProcess].argsTokens().asScala.map(x => CliToken(x))
   }
 
   /**
     * @return the actual string arguments of the command
     */
-  def args():scala.collection.mutable.Buffer[String] = {
+  def args(): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCommandProcess].args().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * @return the command line object or null
     */
-  def commandLine():CommandLine = {
+  def commandLine(): CommandLine = {
     CommandLine(asJava.asInstanceOf[JCommandProcess].commandLine())
   }
 
   /**
     * @return the shell session
     */
-  def session():Session = {
+  def session(): Session = {
     Session(asJava.asInstanceOf[JCommandProcess].session())
   }
 
   /**
     * @return true if the command is running in foreground
     */
-  def isForeground():Boolean = {
+  def isForeground(): Boolean = {
     asJava.asInstanceOf[JCommandProcess].isForeground().asInstanceOf[Boolean]
   }
 
   /**
     * End the process with the exit status 
     */
-  def end():Unit = {
+  def end(): Unit = {
     asJava.asInstanceOf[JCommandProcess].end()
   }
 
@@ -177,7 +177,7 @@ class CommandProcess(private val _asJava: Object)
     * End the process.
     * @param status the exit status.
     */
-  def end(status: Int):Unit = {
+  def end(status: Int): Unit = {
     asJava.asInstanceOf[JCommandProcess].end(status.asInstanceOf[java.lang.Integer])
   }
 

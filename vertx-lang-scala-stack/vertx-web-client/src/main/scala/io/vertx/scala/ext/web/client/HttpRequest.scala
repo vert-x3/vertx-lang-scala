@@ -64,15 +64,15 @@ import io.vertx.scala.ext.web.codec.BodyCodec
   * Most of the time, this client will buffer the HTTP response fully unless a specific  is used
   * such as .
   */
-class HttpRequest[T:TypeTag](private val _asJava: Object) {
+class HttpRequest[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:MultiMap = _
+  private var cached_0: MultiMap = _
 
   /**
     * @return The HTTP headers
     */
-  def headers():MultiMap = {
+  def headers(): MultiMap = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JHttpRequest[Object]].headers()
       cached_0 = MultiMap(tmp)
@@ -84,7 +84,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Configure the request to use a new method `value`.
     * @return a reference to this, so the API can be used fluently
     */
-  def method(value: io.vertx.core.http.HttpMethod):HttpRequest[T] = {
+  def method(value: io.vertx.core.http.HttpMethod): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].method(value)
     this
   }
@@ -93,7 +93,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Configure the request to use a new port `value`.
     * @return a reference to this, so the API can be used fluently
     */
-  def port(value: Int):HttpRequest[T] = {
+  def port(value: Int): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].port(value.asInstanceOf[java.lang.Integer])
     this
   }
@@ -102,7 +102,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Configure the request to use a new host `value`.
     * @return a reference to this, so the API can be used fluently
     */
-  def host(value: String):HttpRequest[T] = {
+  def host(value: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].host(value.asInstanceOf[java.lang.String])
     this
   }
@@ -114,7 +114,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * any parameters previously set.
     * @return a reference to this, so the API can be used fluently
     */
-  def uri(value: String):HttpRequest[T] = {
+  def uri(value: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].uri(value.asInstanceOf[java.lang.String])
     this
   }
@@ -125,7 +125,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * @param value the header value
     * @return a reference to this, so the API can be used fluently
     */
-  def putHeader(name: String,value: String):HttpRequest[T] = {
+  def putHeader(name: String,value: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -138,7 +138,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * @param value The quantity of time in milliseconds.
     * @return a reference to this, so the API can be used fluently
     */
-  def timeout(value: Long):HttpRequest[T] = {
+  def timeout(value: Long): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].timeout(value.asInstanceOf[java.lang.Long])
     this
   }
@@ -149,7 +149,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-  def addQueryParam(paramName: String,paramValue: String):HttpRequest[T] = {
+  def addQueryParam(paramName: String,paramValue: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].addQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this
   }
@@ -160,7 +160,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-  def setQueryParam(paramName: String,paramValue: String):HttpRequest[T] = {
+  def setQueryParam(paramName: String,paramValue: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].setQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this
   }
@@ -170,7 +170,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * @param responseCodec the response codec
     * @return a reference to this, so the API can be used fluently
     */
-  def as[U:TypeTag](responseCodec: BodyCodec[U]):HttpRequest[U] = {
+  def as[U: TypeTag](responseCodec: BodyCodec[U]): HttpRequest[U] = {
     HttpRequest[U](asJava.asInstanceOf[JHttpRequest[Object]].as[Object](responseCodec.asJava.asInstanceOf[JBodyCodec[Object]]))
   }
 
@@ -178,7 +178,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Return the current query parameters.
     * @return the current query parameters
     */
-  def queryParams():MultiMap = {
+  def queryParams(): MultiMap = {
     MultiMap(asJava.asInstanceOf[JHttpRequest[Object]].queryParams())
   }
 
@@ -186,7 +186,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Copy this request
     * @return a copy of this request
     */
-  def copy():HttpRequest[T] = {
+  def copy(): HttpRequest[T] = {
     HttpRequest[T](asJava.asInstanceOf[JHttpRequest[Object]].copy())
   }
 
@@ -194,7 +194,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` stream.
     * @param body the body
     */
-  def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer],handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer],handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -202,7 +202,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` buffer.
     * @param body the body
     */
-  def sendBuffer(body: io.vertx.core.buffer.Buffer,handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def sendBuffer(body: io.vertx.core.buffer.Buffer,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -211,7 +211,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * set to `application/json`.
     * @param body the body
     */
-  def sendJsonObject(body: io.vertx.core.json.JsonObject,handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def sendJsonObject(body: io.vertx.core.json.JsonObject,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -220,7 +220,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * set to `application/json`.
     * @param body the body
     */
-  def sendJson(body: AnyRef,handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def sendJson(body: AnyRef,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -231,14 +231,14 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
     * When the content type header is previously set to `multipart/form-data` it will be used instead.
     * @param body the body
     */
-  def sendForm(body: MultiMap,handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def sendForm(body: MultiMap,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
     * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
     */
-  def send(handler: Handler[AsyncResult[HttpResponse[T]]]):Unit = {
+  def send(handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].send({x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -246,7 +246,7 @@ class HttpRequest[T:TypeTag](private val _asJava: Object) {
    * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` stream.
    * @param body the body
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendStreamFuture(body: ReadStream[io.vertx.core.buffer.Buffer]):scala.concurrent.Future[HttpResponse[T]] = {
+  def sendStreamFuture(body: ReadStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -256,7 +256,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` buffer.
    * @param body the body
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendBufferFuture(body: io.vertx.core.buffer.Buffer):scala.concurrent.Future[HttpResponse[T]] = {
+  def sendBufferFuture(body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -267,7 +267,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * set to `application/json`.
    * @param body the body
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject):scala.concurrent.Future[HttpResponse[T]] = {
+  def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -278,7 +278,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * set to `application/json`.
    * @param body the body
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendJsonFuture(body: AnyRef):scala.concurrent.Future[HttpResponse[T]] = {
+  def sendJsonFuture(body: AnyRef): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body,promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -291,7 +291,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    * When the content type header is previously set to `multipart/form-data` it will be used instead.
    * @param body the body
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendFormFuture(body: MultiMap):scala.concurrent.Future[HttpResponse[T]] = {
+  def sendFormFuture(body: MultiMap): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -300,7 +300,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
  /**
    * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
-  def sendFuture():scala.concurrent.Future[HttpResponse[T]] = {
+  def sendFuture(): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].send(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -309,5 +309,5 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 }
 
 object HttpRequest{
-  def apply[T:TypeTag](asJava: JHttpRequest[_]) = new HttpRequest[T](asJava)  
+  def apply[T: TypeTag](asJava: JHttpRequest[_]) = new HttpRequest[T](asJava)  
 }

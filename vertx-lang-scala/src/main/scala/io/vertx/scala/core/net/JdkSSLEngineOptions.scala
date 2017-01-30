@@ -45,7 +45,7 @@ object JdkSSLEngineOptions {
       null
   }
   
-  def fromJson(json: JsonObject):JdkSSLEngineOptions = {
+  def fromJson(json: JsonObject): JdkSSLEngineOptions = {
     if(json != null)
       new JdkSSLEngineOptions(new JJdkSSLEngineOptions(json))
     else

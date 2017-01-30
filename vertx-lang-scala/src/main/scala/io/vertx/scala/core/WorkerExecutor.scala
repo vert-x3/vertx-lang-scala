@@ -33,7 +33,7 @@ import io.vertx.core.Handler
   * It provides the same <code>executeBlocking</code> operation than [[io.vertx.scala.core.Context]] and
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
-class WorkerExecutor(private val _asJava: Object) 
+class WorkerExecutor(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
@@ -49,9 +49,9 @@ class WorkerExecutor(private val _asJava: Object)
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return a Future representing the result of the blocking operation
     */
-  def executeBlocking[T](blockingFunction: () => T, ordered:Boolean = true): concurrent.Future[T] = {
+  def executeBlocking[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
     val promise = concurrent.Promise[T]
-    val h:Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+    val h: Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}
@@ -62,7 +62,7 @@ class WorkerExecutor(private val _asJava: Object)
    /**
     * Close the executor.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JWorkerExecutor].close()
   }
 
@@ -70,7 +70,7 @@ class WorkerExecutor(private val _asJava: Object)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JWorkerExecutor].isMetricsEnabled().asInstanceOf[Boolean]
   }
 

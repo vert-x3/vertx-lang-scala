@@ -369,7 +369,7 @@ object NetClientOptions {
       null
   }
   
-  def fromJson(json: JsonObject):NetClientOptions = {
+  def fromJson(json: JsonObject): NetClientOptions = {
     if(json != null)
       new NetClientOptions(new JNetClientOptions(json))
     else

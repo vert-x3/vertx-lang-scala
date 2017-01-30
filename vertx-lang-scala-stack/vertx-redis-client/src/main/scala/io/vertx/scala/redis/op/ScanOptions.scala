@@ -49,7 +49,7 @@ object ScanOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ScanOptions = {
+  def fromJson(json: JsonObject): ScanOptions = {
     if(json != null)
       new ScanOptions(new JScanOptions(json))
     else

@@ -38,7 +38,7 @@ class HashStrategy(private val _asJava: Object) {
     * @param user the user to get the salt for. This paramter is needed, if the HashSaltStyle#COLUMN is declared to be used
     * @return the hashed password
     */
-  def computeHash(password: String,user: User):String = {
+  def computeHash(password: String,user: User): String = {
     asJava.asInstanceOf[JHashStrategy].computeHash(password.asInstanceOf[java.lang.String],user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
@@ -47,7 +47,7 @@ class HashStrategy(private val _asJava: Object) {
     * @param user the user to get the stored password for
     * @return the password, either as hashed version or as cleartext, depending on the preferences
     */
-  def getStoredPwd(user: User):String = {
+  def getStoredPwd(user: User): String = {
     asJava.asInstanceOf[JHashStrategy].getStoredPwd(user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
@@ -57,7 +57,7 @@ class HashStrategy(private val _asJava: Object) {
     * @param user the user to get the salt for. This paramter is needed, if the HashSaltStyle#COLUMN is declared to be used
     * @return null in case of HashSaltStyle#NO_SALT the salt of the user or a defined external salt
     */
-  def getSalt(user: User):scala.Option[String] = {
+  def getSalt(user: User): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHashStrategy].getSalt(user.asJava.asInstanceOf[JUser]).asInstanceOf[String])
   }
 
@@ -65,7 +65,7 @@ class HashStrategy(private val _asJava: Object) {
     * Set an external salt. This method should be used in case of 
     * @param salt the salt, which shall be used
     */
-  def setExternalSalt(salt: String):Unit = {
+  def setExternalSalt(salt: String): Unit = {
     asJava.asInstanceOf[JHashStrategy].setExternalSalt(salt.asInstanceOf[java.lang.String])
   }
 
@@ -73,7 +73,7 @@ class HashStrategy(private val _asJava: Object) {
     * Set the saltstyle as defined by [[io.vertx.ext.auth.mongo.HashSaltStyle]].
     * @param saltStyle the HashSaltStyle to be used
     */
-  def setSaltStyle(saltStyle: io.vertx.ext.auth.mongo.HashSaltStyle):Unit = {
+  def setSaltStyle(saltStyle: io.vertx.ext.auth.mongo.HashSaltStyle): Unit = {
     asJava.asInstanceOf[JHashStrategy].setSaltStyle(saltStyle)
   }
 
@@ -81,7 +81,7 @@ class HashStrategy(private val _asJava: Object) {
     * Get the defined [[io.vertx.ext.auth.mongo.HashSaltStyle]] of the current instance
     * @return the saltStyle
     */
-  def getSaltStyle():io.vertx.ext.auth.mongo.HashSaltStyle = {
+  def getSaltStyle(): io.vertx.ext.auth.mongo.HashSaltStyle = {
     asJava.asInstanceOf[JHashStrategy].getSaltStyle()
   }
 

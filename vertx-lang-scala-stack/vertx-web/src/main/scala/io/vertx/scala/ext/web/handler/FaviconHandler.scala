@@ -29,12 +29,12 @@ import io.vertx.core.Handler
   * 
   * If no file system path is specified it will attempt to serve a resource called `favicon.ico` from the classpath.
   */
-class FaviconHandler(private val _asJava: Object) 
+class FaviconHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JFaviconHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -46,7 +46,7 @@ object FaviconHandler{
     * Create a handler with defaults
     * @return the handler
     */
-  def create():FaviconHandler = {
+  def create(): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create())
   }
 
@@ -55,7 +55,7 @@ object FaviconHandler{
     * @param path the path
     * @return the handler
     */
-  def create(path: String):FaviconHandler = {
+  def create(path: String): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))
   }
 
@@ -65,7 +65,7 @@ object FaviconHandler{
     * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
     * @return the handler
     */
-  def create(path: String,maxAgeSeconds: Long):FaviconHandler = {
+  def create(path: String,maxAgeSeconds: Long): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String],maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }
 
@@ -74,7 +74,7 @@ object FaviconHandler{
     * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
     * @return the handler
     */
-  def create(maxAgeSeconds: Long):FaviconHandler = {
+  def create(maxAgeSeconds: Long): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }
 

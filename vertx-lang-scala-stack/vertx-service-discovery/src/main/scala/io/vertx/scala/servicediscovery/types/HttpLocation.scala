@@ -99,7 +99,7 @@ object HttpLocation {
       null
   }
   
-  def fromJson(json: JsonObject):HttpLocation = {
+  def fromJson(json: JsonObject): HttpLocation = {
     if(json != null)
       new HttpLocation(new JHttpLocation(json))
     else

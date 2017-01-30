@@ -113,7 +113,7 @@ object ShellServiceOptions {
       null
   }
   
-  def fromJson(json: JsonObject):ShellServiceOptions = {
+  def fromJson(json: JsonObject): ShellServiceOptions = {
     if(json != null)
       new ShellServiceOptions(new JShellServiceOptions(json))
     else

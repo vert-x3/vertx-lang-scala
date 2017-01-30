@@ -73,7 +73,7 @@ object GeoRadiusOptions {
       null
   }
   
-  def fromJson(json: JsonObject):GeoRadiusOptions = {
+  def fromJson(json: JsonObject): GeoRadiusOptions = {
     if(json != null)
       new GeoRadiusOptions(new JGeoRadiusOptions(json))
     else

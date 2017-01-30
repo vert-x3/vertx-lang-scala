@@ -28,12 +28,12 @@ import io.vertx.ext.web.handler.LoggerFormat
 /**
   * A handler which logs request information to the Vert.x logger.
   */
-class LoggerHandler(private val _asJava: Object) 
+class LoggerHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RoutingContext):Unit = {
+  override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JLoggerHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
@@ -45,7 +45,7 @@ object LoggerHandler{
     * Create a handler with default format
     * @return the handler
     */
-  def create():LoggerHandler = {
+  def create(): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create())
   }
 
@@ -54,7 +54,7 @@ object LoggerHandler{
     * @param format the format
     * @return the handler
     */
-  def create(format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
+  def create(format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create(format))
   }
 
@@ -64,7 +64,7 @@ object LoggerHandler{
     * @param format the format
     * @return the handler
     */
-  def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat):LoggerHandler = {
+  def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean],format))
   }
 

@@ -37,12 +37,12 @@ import io.vertx.ext.shell.session.{Session => JSession}
 class Job(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0:Process = _
+  private var cached_0: Process = _
 
   /**
     * @return the first process in the job
     */
-  def process():Process = {
+  def process(): Process = {
     if(cached_0 == null) {
       var tmp = asJava.asInstanceOf[JJob].process()
       cached_0 = Process(tmp)
@@ -55,7 +55,7 @@ class Job(private val _asJava: Object) {
     * @param tty the tty to use
     * @return this object
     */
-  def setTty(tty: Tty):Job = {
+  def setTty(tty: Tty): Job = {
     asJava.asInstanceOf[JJob].setTty(tty.asJava.asInstanceOf[JTty])
     this
   }
@@ -65,7 +65,7 @@ class Job(private val _asJava: Object) {
     * @param session the session to use
     * @return this object
     */
-  def setSession(session: Session):Job = {
+  def setSession(session: Session): Job = {
     asJava.asInstanceOf[JJob].setSession(session.asJava.asInstanceOf[JSession])
     this
   }
@@ -75,7 +75,7 @@ class Job(private val _asJava: Object) {
     * @param handler the terminate handler
     * @return this object
     */
-  def statusUpdateHandler(handler: Handler[io.vertx.ext.shell.system.ExecStatus]):Job = {
+  def statusUpdateHandler(handler: Handler[io.vertx.ext.shell.system.ExecStatus]): Job = {
     asJava.asInstanceOf[JJob].statusUpdateHandler({x: ExecStatus => handler.handle(x)})
     this
   }
@@ -84,7 +84,7 @@ class Job(private val _asJava: Object) {
     * Run the job, before running the job a  must be set.
     * @return this object
     */
-  def run():Job = {
+  def run(): Job = {
     asJava.asInstanceOf[JJob].run()
     this
   }
@@ -93,7 +93,7 @@ class Job(private val _asJava: Object) {
     * Send the job to background.
     * @return this object
     */
-  def toBackground():Job = {
+  def toBackground(): Job = {
     asJava.asInstanceOf[JJob].toBackground()
     this
   }
@@ -102,7 +102,7 @@ class Job(private val _asJava: Object) {
     * Send the job to foreground.
     * @return this object
     */
-  def toForeground():Job = {
+  def toForeground(): Job = {
     asJava.asInstanceOf[JJob].toForeground()
     this
   }
@@ -111,7 +111,7 @@ class Job(private val _asJava: Object) {
     * Resume the job.
     * @param foreground true when the job is resumed in foreground
     */
-  def resume(foreground: Boolean):Job = {
+  def resume(foreground: Boolean): Job = {
     asJava.asInstanceOf[JJob].resume(foreground.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -120,7 +120,7 @@ class Job(private val _asJava: Object) {
     * Resume the job.
     * @return this object
     */
-  def suspend():Job = {
+  def suspend(): Job = {
     asJava.asInstanceOf[JJob].suspend()
     this
   }
@@ -128,35 +128,35 @@ class Job(private val _asJava: Object) {
   /**
     * Resume the job to foreground.
     */
-  def resume():Job = {
+  def resume(): Job = {
     Job(asJava.asInstanceOf[JJob].resume())
   }
 
   /**
     * @return the job id
     */
-  def id():Int = {
+  def id(): Int = {
     asJava.asInstanceOf[JJob].id().asInstanceOf[Int]
   }
 
   /**
     * @return the job exec status
     */
-  def status():io.vertx.ext.shell.system.ExecStatus = {
+  def status(): io.vertx.ext.shell.system.ExecStatus = {
     asJava.asInstanceOf[JJob].status()
   }
 
   /**
     * @return when the job was last stopped
     */
-  def lastStopped():Long = {
+  def lastStopped(): Long = {
     asJava.asInstanceOf[JJob].lastStopped().asInstanceOf[Long]
   }
 
   /**
     * @return the execution line of the job, i.e the shell command line that launched this job
     */
-  def line():String = {
+  def line(): String = {
     asJava.asInstanceOf[JJob].line().asInstanceOf[String]
   }
 
@@ -164,14 +164,14 @@ class Job(private val _asJava: Object) {
     * Attempt to interrupt the job.
     * @return true if the job is actually interrupted
     */
-  def interrupt():Boolean = {
+  def interrupt(): Boolean = {
     asJava.asInstanceOf[JJob].interrupt().asInstanceOf[Boolean]
   }
 
   /**
     * Terminate the job.
     */
-  def terminate():Unit = {
+  def terminate(): Unit = {
     asJava.asInstanceOf[JJob].terminate()
   }
 

@@ -36,7 +36,7 @@ class DatagramPacket(private val _asJava: Object) {
     * this [[io.vertx.scala.core.datagram.DatagramPacket]].
     * @return the address of the sender
     */
-  def sender():SocketAddress = {
+  def sender(): SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())
   }
 
@@ -44,7 +44,7 @@ class DatagramPacket(private val _asJava: Object) {
     * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
     * @return the data
     */
-  def data():io.vertx.core.buffer.Buffer = {
+  def data(): io.vertx.core.buffer.Buffer = {
     asJava.asInstanceOf[JDatagramPacket].data()
   }
 

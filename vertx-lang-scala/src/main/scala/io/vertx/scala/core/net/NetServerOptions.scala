@@ -334,7 +334,7 @@ object NetServerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):NetServerOptions = {
+  def fromJson(json: JsonObject): NetServerOptions = {
     if(json != null)
       new NetServerOptions(new JNetServerOptions(json))
     else

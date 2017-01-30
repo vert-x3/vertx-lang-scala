@@ -38,14 +38,14 @@ class MetricsService(private val _asJava: Object) {
     * @param measured the measure object
     * @return the base name of the measured object
     */
-  def getBaseName(measured: Measured):String = {
+  def getBaseName(measured: Measured): String = {
     asJava.asInstanceOf[JMetricsService].getBaseName(measured.asJava.asInstanceOf[JMeasured]).asInstanceOf[String]
   }
 
   /**
     * @return the known metrics names by this service
     */
-  def metricsNames():scala.collection.mutable.Set[String] = {
+  def metricsNames(): scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JMetricsService].metricsNames().asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -56,7 +56,7 @@ class MetricsService(private val _asJava: Object) {
     * dropwizard backend reports to a single server.
     * @return the map of metrics where the key is the name of the metric (excluding the base name unless for the Vert.x object) and the value is the json data representing that metric
     */
-  def getMetricsSnapshot(measured: Measured):io.vertx.core.json.JsonObject = {
+  def getMetricsSnapshot(measured: Measured): io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JMetricsService].getMetricsSnapshot(measured.asJava.asInstanceOf[JMeasured])
   }
 
@@ -67,7 +67,7 @@ class MetricsService(private val _asJava: Object) {
     * dropwizard backend reports to a single server.
     * @return the map of metrics where the key is the name of the metric and the value is the json data representing that metric
     */
-  def getMetricsSnapshot(baseName: String):io.vertx.core.json.JsonObject = {
+  def getMetricsSnapshot(baseName: String): io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JMetricsService].getMetricsSnapshot(baseName.asInstanceOf[java.lang.String])
   }
 
@@ -80,7 +80,7 @@ object MetricsService{
     * @param vertx the vertx instance
     * @return the metrics service
     */
-  def create(vertx: Vertx):MetricsService = {
+  def create(vertx: Vertx): MetricsService = {
     MetricsService(JMetricsService.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 

@@ -28,18 +28,18 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 /**
   * A codec for encoding and decoding HTTP bodies.
   */
-class BodyCodec[T:TypeTag](private val _asJava: Object) {
+class BodyCodec[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
 }
 
 object BodyCodec{
-  def apply[T:TypeTag](asJava: JBodyCodec[_]) = new BodyCodec[T](asJava)  
+  def apply[T: TypeTag](asJava: JBodyCodec[_]) = new BodyCodec[T](asJava)  
   /**
     * @return the UTF-8 string codec
     */
-  def string():BodyCodec[String] = {
+  def string(): BodyCodec[String] = {
     BodyCodec[String](JBodyCodec.string())
   }
 
@@ -48,28 +48,28 @@ object BodyCodec{
     * @param encoding the encoding
     * @return the codec
     */
-  def string(encoding: String):BodyCodec[String] = {
+  def string(encoding: String): BodyCodec[String] = {
     BodyCodec[String](JBodyCodec.string(encoding.asInstanceOf[java.lang.String]))
   }
 
   /**
     * @return the Buffer codec
     */
-  def buffer():BodyCodec[io.vertx.core.buffer.Buffer] = {
+  def buffer(): BodyCodec[io.vertx.core.buffer.Buffer] = {
     BodyCodec[io.vertx.core.buffer.Buffer](JBodyCodec.buffer())
   }
 
   /**
     * @return the JsonObject codec
     */
-  def jsonObject():BodyCodec[io.vertx.core.json.JsonObject] = {
+  def jsonObject(): BodyCodec[io.vertx.core.json.JsonObject] = {
     BodyCodec[io.vertx.core.json.JsonObject](JBodyCodec.jsonObject())
   }
 
   /**
     * @return a codec that simply discards the response
     */
-  def none():BodyCodec[Unit] = {
+  def none(): BodyCodec[Unit] = {
     BodyCodec[Unit](JBodyCodec.none())
   }
 
@@ -78,7 +78,7 @@ object BodyCodec{
     * @param decode the decode function
     * @return the created codec
     */
-  def create[T:TypeTag](decode: io.vertx.core.buffer.Buffer => T):BodyCodec[T] = {
+  def create[T: TypeTag](decode: io.vertx.core.buffer.Buffer => T): BodyCodec[T] = {
     BodyCodec[T](JBodyCodec.create[Object]({x: Buffer => toJava[T](decode(x))}))
   }
 
@@ -87,7 +87,7 @@ object BodyCodec{
     * @param stream the destination tream
     * @return the body codec for a write stream
     */
-  def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer]):BodyCodec[Unit] = {
+  def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer]): BodyCodec[Unit] = {
     BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]]))
   }
 

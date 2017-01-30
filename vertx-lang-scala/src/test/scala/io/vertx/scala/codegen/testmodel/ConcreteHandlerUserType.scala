@@ -25,12 +25,12 @@ import io.vertx.core.Handler
 
 /**
   */
-class ConcreteHandlerUserType(private val _asJava: Object) 
+class ConcreteHandlerUserType(private val _asJava: Object)
     extends io.vertx.core.Handler[RefedInterface1] {
 
   def asJava = _asJava
 
-  override def handle(arg0: RefedInterface1):Unit = {
+  override def handle(arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
 

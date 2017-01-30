@@ -189,7 +189,7 @@ object Option {
       null
   }
   
-  def fromJson(json: JsonObject):Option = {
+  def fromJson(json: JsonObject): Option = {
     if(json != null)
       new Option(new JOption(json))
     else

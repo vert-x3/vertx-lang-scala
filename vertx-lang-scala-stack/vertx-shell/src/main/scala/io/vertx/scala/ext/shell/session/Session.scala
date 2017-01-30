@@ -34,7 +34,7 @@ class Session(private val _asJava: Object) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-  def put(key: String,obj: AnyRef):Session = {
+  def put(key: String,obj: AnyRef): Session = {
     asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String],obj)
     this
   }
@@ -44,7 +44,7 @@ class Session(private val _asJava: Object) {
     * @param key the key of the data
     * @return the data
     */
-  def get[T:TypeTag](key: String):T = {
+  def get[T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
@@ -53,7 +53,7 @@ class Session(private val _asJava: Object) {
     * @param key the key of the data
     * @return the data that was there or null if none there
     */
-  def remove[T:TypeTag](key: String):T = {
+  def remove[T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].remove[Object](key.asInstanceOf[java.lang.String]))
   }
 
@@ -65,7 +65,7 @@ object Session{
     * Create a new empty session.
     * @return the created session
     */
-  def create():Session = {
+  def create(): Session = {
     Session(JSession.create())
   }
 

@@ -309,7 +309,7 @@ object AmqpBridgeOptions {
       null
   }
   
-  def fromJson(json: JsonObject):AmqpBridgeOptions = {
+  def fromJson(json: JsonObject): AmqpBridgeOptions = {
     if(json != null)
       new AmqpBridgeOptions(new JAmqpBridgeOptions(json))
     else

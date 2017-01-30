@@ -31,7 +31,7 @@ import io.vertx.core.Handler
 /**
   * Represents a TCP server
   */
-class NetServer(private val _asJava: Object) 
+class NetServer(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
@@ -43,7 +43,7 @@ class NetServer(private val _asJava: Object)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen():NetServer = {
+  def listen(): NetServer = {
     asJava.asInstanceOf[JNetServer].listen()
     this
   }
@@ -52,7 +52,7 @@ class NetServer(private val _asJava: Object)
     * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+  def listen(listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
     asJava.asInstanceOf[JNetServer].listen({x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
@@ -68,7 +68,7 @@ class NetServer(private val _asJava: Object)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int,host: String):NetServer = {
+  def listen(port: Int,host: String): NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
     this
   }
@@ -79,7 +79,7 @@ class NetServer(private val _asJava: Object)
     * @param host the host to listen on
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+  def listen(port: Int,host: String,listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
@@ -93,7 +93,7 @@ class NetServer(private val _asJava: Object)
     * The server may not be listening until some time after the call to listen has returned.
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int):NetServer = {
+  def listen(port: Int): NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer])
     this
   }
@@ -103,7 +103,7 @@ class NetServer(private val _asJava: Object)
     * @param port the port to listen on
     * @return a reference to this, so the API can be used fluently
     */
-  def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]):NetServer = {
+  def listen(port: Int,listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
@@ -112,7 +112,7 @@ class NetServer(private val _asJava: Object)
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
-  override def isMetricsEnabled():Boolean = {
+  override def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JNetServer].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
@@ -122,7 +122,7 @@ class NetServer(private val _asJava: Object)
     * connect stream .
     * @return the connect stream
     */
-  def connectStream():NetSocketStream = {
+  def connectStream(): NetSocketStream = {
     NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
   }
 
@@ -132,7 +132,7 @@ class NetServer(private val _asJava: Object)
     * connect handler.
     * @return a reference to this, so the API can be used fluently
     */
-  def connectHandler(handler: Handler[NetSocket]):NetServer = {
+  def connectHandler(handler: Handler[NetSocket]): NetServer = {
     NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
   }
 
@@ -140,14 +140,14 @@ class NetServer(private val _asJava: Object)
     * Close the server. This will close any currently open connections. The close may not complete until after this
     * method has returned.
     */
-  def close():Unit = {
+  def close(): Unit = {
     asJava.asInstanceOf[JNetServer].close()
   }
 
   /**
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
     */
-  def close(completionHandler: Handler[AsyncResult[Unit]]):Unit = {
+  def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -156,7 +156,7 @@ class NetServer(private val _asJava: Object)
     * signifying an ephemeral port
     * @return the actual port the server is listening on.
     */
-  def actualPort():Int = {
+  def actualPort(): Int = {
     asJava.asInstanceOf[JNetServer].actualPort().asInstanceOf[Int]
   }
 
@@ -164,7 +164,7 @@ class NetServer(private val _asJava: Object)
    * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
    * @return future that will be notified when listening or failed
    */
-  def listenFuture():scala.concurrent.Future[NetServer] = {
+  def listenFuture(): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -176,7 +176,7 @@ class NetServer(private val _asJava: Object)
    * @param host the host to listen on
    * @return future that will be notified when listening or failed
    */
-  def listenFuture(port: Int,host: String):scala.concurrent.Future[NetServer] = {
+  def listenFuture(port: Int,host: String): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -187,7 +187,7 @@ class NetServer(private val _asJava: Object)
    * @param port the port to listen on
    * @return future that will be notified when listening or failed
    */
-  def listenFuture(port: Int):scala.concurrent.Future[NetServer] = {
+  def listenFuture(port: Int): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -197,7 +197,7 @@ class NetServer(private val _asJava: Object)
    * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
    * @return the future
    */
-  def closeFuture():scala.concurrent.Future[Unit] = {
+  def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future

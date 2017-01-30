@@ -168,7 +168,7 @@ object DeploymentOptions {
       null
   }
   
-  def fromJson(json: JsonObject):DeploymentOptions = {
+  def fromJson(json: JsonObject): DeploymentOptions = {
     if(json != null)
       new DeploymentOptions(new JDeploymentOptions(json))
     else

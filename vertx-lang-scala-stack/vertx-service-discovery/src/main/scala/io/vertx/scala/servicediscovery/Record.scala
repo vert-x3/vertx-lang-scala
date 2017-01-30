@@ -112,7 +112,7 @@ object Record {
       null
   }
   
-  def fromJson(json: JsonObject):Record = {
+  def fromJson(json: JsonObject): Record = {
     if(json != null)
       new Record(new JRecord(json))
     else

@@ -71,7 +71,7 @@ class Context(private val _asJava: Object) {
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
-  def exceptionHandler(handler: Handler[Throwable]):Context = {
+  def exceptionHandler(handler: Handler[Throwable]): Context = {
     asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
@@ -80,7 +80,7 @@ class Context(private val _asJava: Object) {
     * Run the specified action asynchronously on the same context, some time after the current execution has completed.
     * @param action the action to run
     */
-  def runOnContext(action: Handler[Unit]):Unit = {
+  def runOnContext(action: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})
   }
 
@@ -95,9 +95,9 @@ class Context(private val _asJava: Object) {
     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
     * @return a Future representing the result of the blocking operation
     */
-  def executeBlocking[T](blockingFunction: () => T, ordered:Boolean = true): concurrent.Future[T] = {
+  def executeBlocking[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
     val promise = concurrent.Promise[T]
-    val h:Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+    val h: Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}
@@ -109,7 +109,7 @@ class Context(private val _asJava: Object) {
     * If the context is associated with a Verticle deployment, this returns the deployment ID of that deployment.
     * @return the deployment ID of the deployment or null if not a Verticle deployment
     */
-  def deploymentID():String = {
+  def deploymentID(): String = {
     asJava.asInstanceOf[JContext].deploymentID().asInstanceOf[String]
   }
 
@@ -118,14 +118,14 @@ class Context(private val _asJava: Object) {
     * the verticle was deployed.
     * @return the configuration of the deployment or null if not a Verticle deployment
     */
-  def config():scala.Option[io.vertx.core.json.JsonObject] = {
+  def config(): scala.Option[io.vertx.core.json.JsonObject] = {
     scala.Option(asJava.asInstanceOf[JContext].config())
   }
 
   /**
     * The process args
     */
-  def processArgs():scala.collection.mutable.Buffer[String] = {
+  def processArgs(): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JContext].processArgs().asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -137,7 +137,7 @@ class Context(private val _asJava: Object) {
     * will return true.
     * @return true if false otherwise
     */
-  def isEventLoopContext():Boolean = {
+  def isEventLoopContext(): Boolean = {
     asJava.asInstanceOf[JContext].isEventLoopContext().asInstanceOf[Boolean]
   }
 
@@ -149,7 +149,7 @@ class Context(private val _asJava: Object) {
     * will return false.
     * @return true if the current context is a worker context, false otherwise
     */
-  def isWorkerContext():Boolean = {
+  def isWorkerContext(): Boolean = {
     asJava.asInstanceOf[JContext].isWorkerContext().asInstanceOf[Boolean]
   }
 
@@ -157,7 +157,7 @@ class Context(private val _asJava: Object) {
     * Is the current context a multi-threaded worker context?
     * @return true if the current context is a multi-threaded worker context, false otherwise
     */
-  def isMultiThreadedWorkerContext():Boolean = {
+  def isMultiThreadedWorkerContext(): Boolean = {
     asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext().asInstanceOf[Boolean]
   }
 
@@ -166,7 +166,7 @@ class Context(private val _asJava: Object) {
     * @param key the key of the data
     * @return the data
     */
-  def get[T:TypeTag](key: String):T = {
+  def get[T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JContext].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
@@ -177,7 +177,7 @@ class Context(private val _asJava: Object) {
     * @param key the key of the data
     * @param value the data
     */
-  def put(key: String,value: AnyRef):Unit = {
+  def put(key: String,value: AnyRef): Unit = {
     asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
   }
 
@@ -186,21 +186,21 @@ class Context(private val _asJava: Object) {
     * @param key the key to remove
     * @return true if removed successfully, false otherwise
     */
-  def remove(key: String):Boolean = {
+  def remove(key: String): Boolean = {
     asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**
     * @return The Vertx instance that created the context
     */
-  def owner():Vertx = {
+  def owner(): Vertx = {
     Vertx(asJava.asInstanceOf[JContext].owner())
   }
 
   /**
     * @return the number of instances of the verticle that were deployed in the deployment (if any) related to this context
     */
-  def getInstanceCount():Int = {
+  def getInstanceCount(): Int = {
     asJava.asInstanceOf[JContext].getInstanceCount().asInstanceOf[Int]
   }
 
@@ -215,7 +215,7 @@ object Context{
     * from an event loop context, then this will return true but [[io.vertx.scala.core.Context#isWorkerContext]] will return false.
     * @return true if current thread is a worker thread, false otherwise
     */
-  def isOnWorkerThread():Boolean = {
+  def isOnWorkerThread(): Boolean = {
     JContext.isOnWorkerThread().asInstanceOf[Boolean]
   }
 
@@ -226,7 +226,7 @@ object Context{
     * from an event loop context, then this will return false but [[io.vertx.scala.core.Context#isEventLoopContext]] will return true.
     * @return true if current thread is a worker thread, false otherwise
     */
-  def isOnEventLoopThread():Boolean = {
+  def isOnEventLoopThread(): Boolean = {
     JContext.isOnEventLoopThread().asInstanceOf[Boolean]
   }
 
@@ -234,7 +234,7 @@ object Context{
     * Is the current thread a Vert.x thread? That's either a worker thread or an event loop thread
     * @return true if current thread is a Vert.x thread, false otherwise
     */
-  def isOnVertxThread():Boolean = {
+  def isOnVertxThread(): Boolean = {
     JContext.isOnVertxThread().asInstanceOf[Boolean]
   }
 

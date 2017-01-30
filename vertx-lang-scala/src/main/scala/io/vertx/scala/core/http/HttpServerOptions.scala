@@ -503,7 +503,7 @@ object HttpServerOptions {
       null
   }
   
-  def fromJson(json: JsonObject):HttpServerOptions = {
+  def fromJson(json: JsonObject): HttpServerOptions = {
     if(json != null)
       new HttpServerOptions(new JHttpServerOptions(json))
     else
