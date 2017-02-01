@@ -82,6 +82,6 @@ class Tty(private val _asJava: Object) {
 
 }
 
-object Tty{
+object Tty {
   def apply(asJava: JTty) = new Tty(asJava)  
 }

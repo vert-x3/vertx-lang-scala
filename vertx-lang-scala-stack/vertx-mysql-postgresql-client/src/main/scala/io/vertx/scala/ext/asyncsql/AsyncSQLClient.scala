@@ -81,6 +81,6 @@ class AsyncSQLClient(private val _asJava: Object) {
 
 }
 
-object AsyncSQLClient{
+object AsyncSQLClient {
   def apply(asJava: JAsyncSQLClient) = new AsyncSQLClient(asJava)  
 }

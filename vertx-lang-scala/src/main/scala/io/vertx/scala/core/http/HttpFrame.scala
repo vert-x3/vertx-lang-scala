@@ -67,6 +67,6 @@ class HttpFrame(private val _asJava: Object) {
 
 }
 
-object HttpFrame{
+object HttpFrame {
   def apply(asJava: JHttpFrame) = new HttpFrame(asJava)  
 }

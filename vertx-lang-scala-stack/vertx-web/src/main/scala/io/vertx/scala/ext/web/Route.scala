@@ -137,7 +137,7 @@ class Route(private val _asJava: Object) {
     * @param ordered if true handlers are executed in sequence, otherwise are run in parallel
     * @return a reference to this, so the API can be used fluently
     */
-  def blockingHandler(requestHandler: Handler[RoutingContext],ordered: Boolean): Route = {
+  def blockingHandler(requestHandler: Handler[RoutingContext], ordered: Boolean): Route = {
     asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))},ordered.asInstanceOf[java.lang.Boolean])
     this
   }
@@ -201,6 +201,6 @@ class Route(private val _asJava: Object) {
 
 }
 
-object Route{
+object Route {
   def apply(asJava: JRoute) = new Route(asJava)  
 }

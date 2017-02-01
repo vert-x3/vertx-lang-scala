@@ -51,6 +51,6 @@ class FileSystemProps(private val _asJava: Object) {
 
 }
 
-object FileSystemProps{
+object FileSystemProps {
   def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
 }

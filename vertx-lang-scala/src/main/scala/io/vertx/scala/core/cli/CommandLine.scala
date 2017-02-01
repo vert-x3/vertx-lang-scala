@@ -186,7 +186,7 @@ class CommandLine(private val _asJava: Object) {
 
 }
 
-object CommandLine{
+object CommandLine {
   def apply(asJava: JCommandLine) = new CommandLine(asJava)  
   /**
     * Creates a command line object from the [[io.vertx.scala.core.cli.CLI]]. This object is intended to be used by

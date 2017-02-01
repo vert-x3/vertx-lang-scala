@@ -51,7 +51,7 @@ class CommandRegistry(private val _asJava: Object)
     * @param command the command to register
     * @return a reference to this, so the API can be used fluently
     */
-  def registerCommand(command: Command,completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
+  def registerCommand(command: Command, completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand],{x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand,Command](x, a => Command(a)))})
     this
   }
@@ -69,7 +69,7 @@ class CommandRegistry(private val _asJava: Object)
     * @param commands the commands to register
     * @return a reference to this, so the API can be used fluently
     */
-  def registerCommands(commands: scala.collection.mutable.Buffer[Command],completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
+  def registerCommands(commands: scala.collection.mutable.Buffer[Command], completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava,{x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand],scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
     this
   }
@@ -87,7 +87,7 @@ class CommandRegistry(private val _asJava: Object)
     * @param commandName the command name
     * @return a reference to this, so the API can be used fluently
     */
-  def unregisterCommand(commandName: String,completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
+  def unregisterCommand(commandName: String, completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
     asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -127,7 +127,7 @@ class CommandRegistry(private val _asJava: Object)
 
 }
 
-object CommandRegistry{
+object CommandRegistry {
   def apply(asJava: JCommandRegistry) = new CommandRegistry(asJava)  
   /**
     * Get the shared registry for the Vert.x instance.

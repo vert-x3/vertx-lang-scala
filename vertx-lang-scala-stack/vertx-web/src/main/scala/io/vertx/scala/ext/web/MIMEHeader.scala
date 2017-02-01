@@ -119,6 +119,6 @@ class MIMEHeader(private val _asJava: Object)
 
 }
 
-object MIMEHeader{
+object MIMEHeader {
   def apply(asJava: JMIMEHeader) = new MIMEHeader(asJava)  
 }

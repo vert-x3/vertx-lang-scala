@@ -38,6 +38,6 @@ class RefedInterface1(private val _asJava: Object) {
 
 }
 
-object RefedInterface1{
+object RefedInterface1 {
   def apply(asJava: JRefedInterface1) = new RefedInterface1(asJava)  
 }

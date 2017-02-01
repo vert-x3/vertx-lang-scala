@@ -61,7 +61,7 @@ class DigestAuthHandler(private val _asJava: Object)
 
 }
 
-object DigestAuthHandler{
+object DigestAuthHandler {
   def apply(asJava: JDigestAuthHandler) = new DigestAuthHandler(asJava)  
   /**
     * Create a digest auth handler
@@ -78,7 +78,7 @@ object DigestAuthHandler{
     * @param nonceExpireTimeout the nonce expire timeout in milliseconds.
     * @return the auth handler
     */
-  def create(authProvider: HtdigestAuth,nonceExpireTimeout: Long): DigestAuthHandler = {
+  def create(authProvider: HtdigestAuth, nonceExpireTimeout: Long): DigestAuthHandler = {
     DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth],nonceExpireTimeout.asInstanceOf[java.lang.Long]))
   }
 

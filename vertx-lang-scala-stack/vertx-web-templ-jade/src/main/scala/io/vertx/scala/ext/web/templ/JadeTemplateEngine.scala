@@ -55,7 +55,7 @@ class JadeTemplateEngine(private val _asJava: Object)
 
 }
 
-object JadeTemplateEngine{
+object JadeTemplateEngine {
   def apply(asJava: JJadeTemplateEngine) = new JadeTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

@@ -38,7 +38,7 @@ class HashStrategy(private val _asJava: Object) {
     * @param user the user to get the salt for. This paramter is needed, if the HashSaltStyle#COLUMN is declared to be used
     * @return the hashed password
     */
-  def computeHash(password: String,user: User): String = {
+  def computeHash(password: String, user: User): String = {
     asJava.asInstanceOf[JHashStrategy].computeHash(password.asInstanceOf[java.lang.String],user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
@@ -87,6 +87,6 @@ class HashStrategy(private val _asJava: Object) {
 
 }
 
-object HashStrategy{
+object HashStrategy {
   def apply(asJava: JHashStrategy) = new HashStrategy(asJava)  
 }

@@ -100,7 +100,7 @@ class BridgeEvent(private val _asJava: Object)
     this
   }
 
-  override def compose[U: TypeTag](handler: Handler[Boolean],next: Future[U]): Future[U] = {
+  override def compose[U: TypeTag](handler: Handler[Boolean], next: Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].compose[Object]({x: java.lang.Boolean => handler.handle(x.asInstanceOf[Boolean])},next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
@@ -138,6 +138,6 @@ class BridgeEvent(private val _asJava: Object)
 
 }
 
-object BridgeEvent{
+object BridgeEvent {
   def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)  
 }

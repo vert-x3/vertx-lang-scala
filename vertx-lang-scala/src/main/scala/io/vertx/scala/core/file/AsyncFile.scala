@@ -97,7 +97,7 @@ class AsyncFile(private val _asJava: Object)
     * @param position the position in the file to write it at
     * @return a reference to this, so the API can be used fluently
     */
-  def write(buffer: io.vertx.core.buffer.Buffer,position: Long,handler: Handler[AsyncResult[Unit]]): AsyncFile = {
+  def write(buffer: io.vertx.core.buffer.Buffer, position: Long, handler: Handler[AsyncResult[Unit]]): AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].write(buffer,position.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -117,7 +117,7 @@ class AsyncFile(private val _asJava: Object)
     * @param length the number of bytes to read
     * @return a reference to this, so the API can be used fluently
     */
-  def read(buffer: io.vertx.core.buffer.Buffer,offset: Int,position: Long,length: Int,handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): AsyncFile = {
+  def read(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].read(buffer,offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],{x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
@@ -236,7 +236,7 @@ class AsyncFile(private val _asJava: Object)
    * @param position the position in the file to write it at
    * @return the future to call when the write is complete
    */
-  def writeFuture(buffer: io.vertx.core.buffer.Buffer,position: Long): scala.concurrent.Future[Unit] = {
+  def writeFuture(buffer: io.vertx.core.buffer.Buffer, position: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncFile].write(buffer,position.asInstanceOf[java.lang.Long],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -257,7 +257,7 @@ class AsyncFile(private val _asJava: Object)
    * @param length the number of bytes to read
    * @return the future to call when the write is complete
    */
-  def readFuture(buffer: io.vertx.core.buffer.Buffer,offset: Int,position: Long,length: Int): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+  def readFuture(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JAsyncFile].read(buffer,offset.asInstanceOf[java.lang.Integer],position.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -274,6 +274,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 }
 
-object AsyncFile{
+object AsyncFile {
   def apply(asJava: JAsyncFile) = new AsyncFile(asJava)  
 }

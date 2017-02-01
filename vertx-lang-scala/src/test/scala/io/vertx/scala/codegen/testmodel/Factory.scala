@@ -34,7 +34,7 @@ class Factory(private val _asJava: Object) {
 
 }
 
-object Factory{
+object Factory {
   def apply(asJava: JFactory) = new Factory(asJava)  
   def createConcreteHandlerUserType(handler: Handler[RefedInterface1]): ConcreteHandlerUserType = {
     ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))

@@ -221,7 +221,7 @@ class RoutingContext(private val _asJava: Object) {
     * @param obj the data
     * @return a reference to this, so the API can be used fluently
     */
-  def put(key: String,obj: AnyRef): RoutingContext = {
+  def put(key: String, obj: AnyRef): RoutingContext = {
     asJava.asInstanceOf[JRoutingContext].put(key.asInstanceOf[java.lang.String],obj)
     this
   }
@@ -529,7 +529,7 @@ class RoutingContext(private val _asJava: Object) {
     * @param method the new http request
     * @param path the new http path.
     */
-  def reroute(method: io.vertx.core.http.HttpMethod,path: String): Unit = {
+  def reroute(method: io.vertx.core.http.HttpMethod, path: String): Unit = {
     asJava.asInstanceOf[JRoutingContext].reroute(method,path.asInstanceOf[java.lang.String])
   }
 
@@ -552,6 +552,6 @@ class RoutingContext(private val _asJava: Object) {
 
 }
 
-object RoutingContext{
+object RoutingContext {
   def apply(asJava: JRoutingContext) = new RoutingContext(asJava)  
 }

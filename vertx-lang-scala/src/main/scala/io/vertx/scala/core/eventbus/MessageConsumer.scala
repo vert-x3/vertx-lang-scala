@@ -150,6 +150,6 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
 
 }
 
-object MessageConsumer{
+object MessageConsumer {
   def apply[T: TypeTag](asJava: JMessageConsumer[_]) = new MessageConsumer[T](asJava)  
 }

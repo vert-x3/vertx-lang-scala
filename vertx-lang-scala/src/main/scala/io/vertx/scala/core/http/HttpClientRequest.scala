@@ -169,7 +169,7 @@ class HttpClientRequest(private val _asJava: Object)
     * @param value The header value
     * @return a reference to this, so the API can be used fluently
     */
-  def putHeader(name: String,value: String): HttpClientRequest = {
+  def putHeader(name: String, value: String): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -187,7 +187,7 @@ class HttpClientRequest(private val _asJava: Object)
     * Write a String to the request body, encoded using the encoding `enc`.
     * @return @return a reference to this, so the API can be used fluently
     */
-  def write(chunk: String,enc: String): HttpClientRequest = {
+  def write(chunk: String, enc: String): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
     this
   }
@@ -290,7 +290,7 @@ class HttpClientRequest(private val _asJava: Object)
     * @param payload the frame payload
     * @return a reference to this, so the API can be used fluently
     */
-  def writeCustomFrame(`type`: Int,flags: Int,payload: io.vertx.core.buffer.Buffer): HttpClientRequest = {
+  def writeCustomFrame(`type`: Int, flags: Int, payload: io.vertx.core.buffer.Buffer): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer],flags.asInstanceOf[java.lang.Integer],payload)
     this
   }
@@ -385,7 +385,7 @@ class HttpClientRequest(private val _asJava: Object)
   /**
     * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but writes a String with the specified encoding
     */
-  def end(chunk: String,enc: String): Unit = {
+  def end(chunk: String, enc: String): Unit = {
     asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
   }
 
@@ -426,6 +426,6 @@ class HttpClientRequest(private val _asJava: Object)
 
 }
 
-object HttpClientRequest{
+object HttpClientRequest {
   def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)  
 }

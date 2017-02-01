@@ -42,7 +42,7 @@ class TemplateHandler(private val _asJava: Object)
 
 }
 
-object TemplateHandler{
+object TemplateHandler {
   def apply(asJava: JTemplateHandler) = new TemplateHandler(asJava)  
   /**
     * Create a handler
@@ -60,7 +60,7 @@ object TemplateHandler{
     * @param contentType the content type header to be used in the response
     * @return the handler
     */
-  def create(engine: TemplateEngine,templateDirectory: String,contentType: String): TemplateHandler = {
+  def create(engine: TemplateEngine, templateDirectory: String, contentType: String): TemplateHandler = {
     TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
   }
 

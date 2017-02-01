@@ -57,7 +57,7 @@ class PebbleTemplateEngine(private val _asJava: Object)
 
 }
 
-object PebbleTemplateEngine{
+object PebbleTemplateEngine {
   def apply(asJava: JPebbleTemplateEngine) = new PebbleTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

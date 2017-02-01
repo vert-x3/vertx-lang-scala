@@ -39,7 +39,7 @@ class LoggerHandler(private val _asJava: Object)
 
 }
 
-object LoggerHandler{
+object LoggerHandler {
   def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)  
   /**
     * Create a handler with default format
@@ -64,7 +64,7 @@ object LoggerHandler{
     * @param format the format
     * @return the handler
     */
-  def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
+  def create(immediate: Boolean, format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean],format))
   }
 

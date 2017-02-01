@@ -50,6 +50,6 @@ class DatagramPacket(private val _asJava: Object) {
 
 }
 
-object DatagramPacket{
+object DatagramPacket {
   def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
 }

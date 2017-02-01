@@ -36,6 +36,6 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 
 }
 
-object ConcreteHandlerUserType{
+object ConcreteHandlerUserType {
   def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)  
 }

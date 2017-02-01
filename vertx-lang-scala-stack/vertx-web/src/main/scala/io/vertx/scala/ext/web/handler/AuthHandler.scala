@@ -55,7 +55,7 @@ trait AuthHandler
 
 }
 
-object AuthHandler{
+object AuthHandler {
   def apply(asJava: JAuthHandler): AuthHandler = new AuthHandlerImpl(asJava)
     private class AuthHandlerImpl(private val _asJava: Object) extends AuthHandler {
 

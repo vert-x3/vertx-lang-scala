@@ -90,7 +90,7 @@ class WebSocketFrame(private val _asJava: Object) {
 
 }
 
-object WebSocketFrame{
+object WebSocketFrame {
   def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
   /**
     * Create a binary WebSocket frame.
@@ -98,7 +98,7 @@ object WebSocketFrame{
     * @param isFinal true if it's the final frame in the WebSocket message
     * @return the frame
     */
-  def binaryFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
+  def binaryFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.binaryFrame(data,isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
@@ -108,7 +108,7 @@ object WebSocketFrame{
     * @param isFinal true if it's the final frame in the WebSocket message
     * @return the frame
     */
-  def textFrame(str: String,isFinal: Boolean): WebSocketFrame = {
+  def textFrame(str: String, isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String],isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
@@ -118,7 +118,7 @@ object WebSocketFrame{
     * @param isFinal true if it's the final frame in the WebSocket message
     * @return the frame
     */
-  def continuationFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
+  def continuationFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.continuationFrame(data,isFinal.asInstanceOf[java.lang.Boolean]))
   }
 

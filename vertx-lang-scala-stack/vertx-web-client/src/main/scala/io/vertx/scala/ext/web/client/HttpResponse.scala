@@ -202,6 +202,6 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
 
 }
 
-object HttpResponse{
+object HttpResponse {
   def apply[T: TypeTag](asJava: JHttpResponse[_]) = new HttpResponse[T](asJava)  
 }

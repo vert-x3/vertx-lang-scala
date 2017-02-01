@@ -5,11 +5,11 @@
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
+	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
 	@end{}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-	@end{','}): @{toScalaType(method.returnType, false)}\n
+	@end{', '}): @{toScalaType(method.returnType, false)}\n
 	\n
 @end{}
 
@@ -18,11 +18,11 @@
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
 	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{','}]
+	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
 	@end{}(
 	@foreach{param:method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
-	@end{','}): @{toScalaType(method.returnType, false)}\n
+	@end{', '}): @{toScalaType(method.returnType, false)}\n
 	\n
 @end{}
 }\n

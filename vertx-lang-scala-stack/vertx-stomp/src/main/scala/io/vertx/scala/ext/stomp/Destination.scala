@@ -44,7 +44,7 @@ class Destination(private val _asJava: Object) {
     * @param frame the framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current instance of Destination
     */
-  def dispatch(connection: StompServerConnection,frame: Frame): Destination = {
+  def dispatch(connection: StompServerConnection, frame: Frame): Destination = {
     asJava.asInstanceOf[JDestination].dispatch(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava)
     this
   }
@@ -55,7 +55,7 @@ class Destination(private val _asJava: Object) {
     * @param frame the `SUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return the current instance of Destination
     */
-  def subscribe(connection: StompServerConnection,frame: Frame): Destination = {
+  def subscribe(connection: StompServerConnection, frame: Frame): Destination = {
     asJava.asInstanceOf[JDestination].subscribe(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava)
     this
   }
@@ -83,7 +83,7 @@ class Destination(private val _asJava: Object) {
     * @param frame the `UNSUBSCRIBE` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return `true` if the un-subscription has been handled, `false` otherwise.
     */
-  def unsubscribe(connection: StompServerConnection,frame: Frame): Boolean = {
+  def unsubscribe(connection: StompServerConnection, frame: Frame): Boolean = {
     asJava.asInstanceOf[JDestination].unsubscribe(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava).asInstanceOf[Boolean]
   }
 
@@ -93,7 +93,7 @@ class Destination(private val _asJava: Object) {
     * @param frame the `ACK` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return `true` if the destination has handled the frame (meaning it has sent the message with id)
     */
-  def ack(connection: StompServerConnection,frame: Frame): Boolean = {
+  def ack(connection: StompServerConnection, frame: Frame): Boolean = {
     asJava.asInstanceOf[JDestination].ack(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava).asInstanceOf[Boolean]
   }
 
@@ -103,7 +103,7 @@ class Destination(private val _asJava: Object) {
     * @param frame the `NACK` framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     * @return `true` if the destination has handled the frame (meaning it has sent the message with id)
     */
-  def nack(connection: StompServerConnection,frame: Frame): Boolean = {
+  def nack(connection: StompServerConnection, frame: Frame): Boolean = {
     asJava.asInstanceOf[JDestination].nack(connection.asJava.asInstanceOf[JStompServerConnection],frame.asJava).asInstanceOf[Boolean]
   }
 
@@ -135,17 +135,17 @@ class Destination(private val _asJava: Object) {
 
 }
 
-object Destination{
+object Destination {
   def apply(asJava: JDestination) = new Destination(asJava)  
-  def topic(vertx: Vertx,destination: String): Destination = {
+  def topic(vertx: Vertx, destination: String): Destination = {
     Destination(JDestination.topic(vertx.asJava.asInstanceOf[JVertx],destination.asInstanceOf[java.lang.String]))
   }
 
-  def queue(vertx: Vertx,destination: String): Destination = {
+  def queue(vertx: Vertx, destination: String): Destination = {
     Destination(JDestination.queue(vertx.asJava.asInstanceOf[JVertx],destination.asInstanceOf[java.lang.String]))
   }
 
-  def bridge(vertx: Vertx,options: BridgeOptions): Destination = {
+  def bridge(vertx: Vertx, options: BridgeOptions): Destination = {
     Destination(JDestination.bridge(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

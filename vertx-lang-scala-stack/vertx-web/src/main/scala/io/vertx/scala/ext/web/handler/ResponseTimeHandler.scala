@@ -39,7 +39,7 @@ class ResponseTimeHandler(private val _asJava: Object)
 
 }
 
-object ResponseTimeHandler{
+object ResponseTimeHandler {
   def apply(asJava: JResponseTimeHandler) = new ResponseTimeHandler(asJava)  
   /**
     * Create a handler

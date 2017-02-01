@@ -91,7 +91,7 @@ class JWTAuthHandler(private val _asJava: Object)
 
 }
 
-object JWTAuthHandler{
+object JWTAuthHandler {
   def apply(asJava: JJWTAuthHandler) = new JWTAuthHandler(asJava)  
   /**
     * Create a JWT auth handler
@@ -107,7 +107,7 @@ object JWTAuthHandler{
     * @param authProvider the auth provider to use.
     * @return the auth handler
     */
-  def create(authProvider: JWTAuth,skip: String): JWTAuthHandler = {
+  def create(authProvider: JWTAuth, skip: String): JWTAuthHandler = {
     JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth],skip.asInstanceOf[java.lang.String]))
   }
 

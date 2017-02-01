@@ -38,7 +38,7 @@ class ErrorHandler(private val _asJava: Object)
 
 }
 
-object ErrorHandler{
+object ErrorHandler {
   def apply(asJava: JErrorHandler) = new ErrorHandler(asJava)  
   /**
     * Create an error handler using defaults
@@ -54,7 +54,7 @@ object ErrorHandler{
     * @param displayExceptionDetails true if exception details should be displayed
     * @return the handler
     */
-  def create(errorTemplateName: String,displayExceptionDetails: Boolean): ErrorHandler = {
+  def create(errorTemplateName: String, displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String],displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 

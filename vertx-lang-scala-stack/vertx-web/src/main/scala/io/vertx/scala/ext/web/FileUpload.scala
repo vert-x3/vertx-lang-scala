@@ -80,6 +80,6 @@ class FileUpload(private val _asJava: Object) {
 
 }
 
-object FileUpload{
+object FileUpload {
   def apply(asJava: JFileUpload) = new FileUpload(asJava)  
 }

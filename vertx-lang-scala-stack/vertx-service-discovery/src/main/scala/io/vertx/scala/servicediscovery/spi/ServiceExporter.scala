@@ -46,7 +46,7 @@ class ServiceExporter(private val _asJava: Object) {
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def init(vertx: Vertx,publisher: ServicePublisher,configuration: io.vertx.core.json.JsonObject,future: Future[Unit]): Unit = {
+  def init(vertx: Vertx, publisher: ServicePublisher, configuration: io.vertx.core.json.JsonObject, future: Future[Unit]): Unit = {
     asJava.asInstanceOf[JServiceExporter].init(vertx.asJava.asInstanceOf[JVertx],publisher.asJava.asInstanceOf[JServicePublisher],configuration,future.asJava.asInstanceOf[JFuture[Void]])
   }
 
@@ -86,6 +86,6 @@ class ServiceExporter(private val _asJava: Object) {
 
 }
 
-object ServiceExporter{
+object ServiceExporter {
   def apply(asJava: JServiceExporter) = new ServiceExporter(asJava)  
 }

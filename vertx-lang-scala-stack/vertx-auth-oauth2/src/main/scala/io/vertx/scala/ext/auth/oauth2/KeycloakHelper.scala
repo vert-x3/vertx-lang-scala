@@ -32,7 +32,7 @@ class KeycloakHelper(private val _asJava: Object) {
 
 }
 
-object KeycloakHelper{
+object KeycloakHelper {
   def apply(asJava: JKeycloakHelper) = new KeycloakHelper(asJava)  
   /**
     * Get raw `id_token` string from the principal.

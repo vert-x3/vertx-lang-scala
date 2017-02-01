@@ -70,7 +70,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @param next the next future
     * @return the next future, used for chaining
     */
-  def compose[U: TypeTag](handler: Handler[T],next: Future[U]): Future[U] = {
+  def compose[U: TypeTag](handler: Handler[T], next: Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => handler.handle(toScala[T](x))},next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
@@ -197,7 +197,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
 }
 
-object Future{
+object Future {
   def apply[T: TypeTag](asJava: JFuture[_]) = new Future[T](asJava)  
   /**
     * Create a future that hasn't completed yet

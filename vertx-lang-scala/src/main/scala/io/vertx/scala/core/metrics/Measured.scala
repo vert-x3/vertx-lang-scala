@@ -35,7 +35,7 @@ trait Measured {
 
 }
 
-object Measured{
+object Measured {
   def apply(asJava: JMeasured): Measured = new MeasuredImpl(asJava)
     private class MeasuredImpl(private val _asJava: Object) extends Measured {
 

@@ -84,7 +84,7 @@ class Pump(private val _asJava: Object) {
 
 }
 
-object Pump{
+object Pump {
   def apply(asJava: JPump) = new Pump(asJava)  
   /**
     * Create a new `Pump` with the given `ReadStream` and `WriteStream`
@@ -92,7 +92,7 @@ object Pump{
     * @param ws the write stream
     * @return the pump
     */
-  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T]): Pump = {
+  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]]))
   }
 
@@ -104,7 +104,7 @@ object Pump{
     * @param writeQueueMaxSize the max size of the write queue
     * @return the pump
     */
-  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int): Pump = {
+  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
   }
 

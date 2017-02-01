@@ -183,6 +183,6 @@ class CommandProcess(private val _asJava: Object)
 
 }
 
-object CommandProcess{
+object CommandProcess {
   def apply(asJava: JCommandProcess) = new CommandProcess(asJava)  
 }

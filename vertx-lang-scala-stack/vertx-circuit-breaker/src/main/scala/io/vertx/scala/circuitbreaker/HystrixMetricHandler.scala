@@ -41,7 +41,7 @@ class HystrixMetricHandler(private val _asJava: Object)
 
 }
 
-object HystrixMetricHandler{
+object HystrixMetricHandler {
   def apply(asJava: JHystrixMetricHandler) = new HystrixMetricHandler(asJava)  
   /**
     * Creates the handler, using the default notification address.
@@ -58,7 +58,7 @@ object HystrixMetricHandler{
     * @param address the address to listen on the event bus
     * @return the handler
     */
-  def create(vertx: Vertx,address: String): HystrixMetricHandler = {
+  def create(vertx: Vertx, address: String): HystrixMetricHandler = {
     HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx],address.asInstanceOf[java.lang.String]))
   }
 

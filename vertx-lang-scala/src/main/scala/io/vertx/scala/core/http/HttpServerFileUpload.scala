@@ -120,6 +120,6 @@ class HttpServerFileUpload(private val _asJava: Object)
 
 }
 
-object HttpServerFileUpload{
+object HttpServerFileUpload {
   def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)  
 }

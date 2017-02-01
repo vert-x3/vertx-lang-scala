@@ -177,6 +177,6 @@ class Job(private val _asJava: Object) {
 
 }
 
-object Job{
+object Job {
   def apply(asJava: JJob) = new Job(asJava)  
 }

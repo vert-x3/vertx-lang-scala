@@ -80,6 +80,6 @@ class PacketWritestream(private val _asJava: Object)
 
 }
 
-object PacketWritestream{
+object PacketWritestream {
   def apply(asJava: JPacketWritestream) = new PacketWritestream(asJava)  
 }

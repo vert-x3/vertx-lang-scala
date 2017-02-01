@@ -233,6 +233,6 @@ class ServerWebSocket(private val _asJava: Object)
 
 }
 
-object ServerWebSocket{
+object ServerWebSocket {
   def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)  
 }

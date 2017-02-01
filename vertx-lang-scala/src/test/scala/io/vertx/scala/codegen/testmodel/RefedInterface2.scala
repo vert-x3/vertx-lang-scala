@@ -33,7 +33,7 @@ trait RefedInterface2 {
 
 }
 
-object RefedInterface2{
+object RefedInterface2 {
   def apply(asJava: JRefedInterface2): RefedInterface2 = new RefedInterface2Impl(asJava)
     private class RefedInterface2Impl(private val _asJava: Object) extends RefedInterface2 {
 

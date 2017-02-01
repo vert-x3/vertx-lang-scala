@@ -111,7 +111,7 @@ class Term(private val _asJava: Object)
     * @param prompt the displayed prompt
     * @param lineHandler the line handler called with the line
     */
-  def readline(prompt: String,lineHandler: Handler[String]): Unit = {
+  def readline(prompt: String, lineHandler: Handler[String]): Unit = {
     asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String],{x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])})
   }
 
@@ -121,7 +121,7 @@ class Term(private val _asJava: Object)
     * @param lineHandler the line handler called with the line
     * @param completionHandler the completion handler
     */
-  def readline(prompt: String,lineHandler: Handler[String],completionHandler: Handler[Completion]): Unit = {
+  def readline(prompt: String, lineHandler: Handler[String], completionHandler: Handler[Completion]): Unit = {
     asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String],{x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])},{x: JCompletion => completionHandler.handle(Completion(x))})
   }
 
@@ -134,6 +134,6 @@ class Term(private val _asJava: Object)
 
 }
 
-object Term{
+object Term {
   def apply(asJava: JTerm) = new Term(asJava)  
 }

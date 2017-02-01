@@ -201,6 +201,6 @@ class HttpClientResponse(private val _asJava: Object)
 
 }
 
-object HttpClientResponse{
+object HttpClientResponse {
   def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)  
 }

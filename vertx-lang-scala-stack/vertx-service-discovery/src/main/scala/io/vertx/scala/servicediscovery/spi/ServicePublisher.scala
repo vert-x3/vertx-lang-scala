@@ -37,7 +37,7 @@ class ServicePublisher(private val _asJava: Object) {
     * Publishes a record.
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def publish(record: Record,resultHandler: Handler[AsyncResult[Record]]): Unit = {
+  def publish(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].publish(record.asJava,{x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord,Record](x, a => Record(a)))})
   }
 
@@ -45,7 +45,7 @@ class ServicePublisher(private val _asJava: Object) {
     * Un-publishes a record.
     * @param id the registration id
     */
-  def unpublish(id: String,resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+  def unpublish(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
@@ -73,6 +73,6 @@ class ServicePublisher(private val _asJava: Object) {
 
 }
 
-object ServicePublisher{
+object ServicePublisher {
   def apply(asJava: JServicePublisher) = new ServicePublisher(asJava)  
 }

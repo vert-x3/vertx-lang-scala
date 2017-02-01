@@ -49,7 +49,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param value the value
     * @return return the old value, or null if none
     */
-  def put(key: K,value: V): V = {
+  def put(key: K, value: V): V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].put(toJava[K](key),toJava[V](value)))
   }
 
@@ -90,7 +90,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param value the value
     * @return the old value or null, if none
     */
-  def putIfAbsent(key: K,value: V): V = {
+  def putIfAbsent(key: K, value: V): V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].putIfAbsent(toJava[K](key),toJava[V](value)))
   }
 
@@ -100,7 +100,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param value the value
     * @return true if removed
     */
-  def removeIfPresent(key: K,value: V): Boolean = {
+  def removeIfPresent(key: K, value: V): Boolean = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].removeIfPresent(toJava[K](key),toJava[V](value)).asInstanceOf[Boolean]
   }
 
@@ -111,7 +111,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param newValue the new value
     * @return true if removed
     */
-  def replaceIfPresent(key: K,oldValue: V,newValue: V): Boolean = {
+  def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
     asJava.asInstanceOf[JLocalMap[Object,Object]].replaceIfPresent(toJava[K](key),toJava[V](oldValue),toJava[V](newValue)).asInstanceOf[Boolean]
   }
 
@@ -121,7 +121,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param value the new value
     * @return the old value
     */
-  def replace(key: K,value: V): V = {
+  def replace(key: K, value: V): V = {
     toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].replace(toJava[K](key),toJava[V](value)))
   }
 
@@ -134,6 +134,6 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
 
 }
 
-object LocalMap{
+object LocalMap {
   def apply[K: TypeTag,V: TypeTag](asJava: JLocalMap[_,_]) = new LocalMap[K,V](asJava)  
 }

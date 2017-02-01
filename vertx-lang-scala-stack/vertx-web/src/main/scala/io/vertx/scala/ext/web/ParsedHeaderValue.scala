@@ -84,7 +84,7 @@ trait ParsedHeaderValue {
 
 }
 
-object ParsedHeaderValue{
+object ParsedHeaderValue {
   def apply(asJava: JParsedHeaderValue): ParsedHeaderValue = new ParsedHeaderValueImpl(asJava)
     private class ParsedHeaderValueImpl(private val _asJava: Object) extends ParsedHeaderValue {
 

@@ -40,7 +40,7 @@ class FaviconHandler(private val _asJava: Object)
 
 }
 
-object FaviconHandler{
+object FaviconHandler {
   def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)  
   /**
     * Create a handler with defaults
@@ -65,7 +65,7 @@ object FaviconHandler{
     * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
     * @return the handler
     */
-  def create(path: String,maxAgeSeconds: Long): FaviconHandler = {
+  def create(path: String, maxAgeSeconds: Long): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String],maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }
 

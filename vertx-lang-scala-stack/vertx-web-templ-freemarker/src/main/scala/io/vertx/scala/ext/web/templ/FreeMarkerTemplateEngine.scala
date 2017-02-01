@@ -55,7 +55,7 @@ class FreeMarkerTemplateEngine(private val _asJava: Object)
 
 }
 
-object FreeMarkerTemplateEngine{
+object FreeMarkerTemplateEngine {
   def apply(asJava: JFreeMarkerTemplateEngine) = new FreeMarkerTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

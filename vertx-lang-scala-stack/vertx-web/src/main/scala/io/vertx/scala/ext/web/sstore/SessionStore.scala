@@ -58,7 +58,7 @@ class SessionStore(private val _asJava: Object) {
     * @param length - the required length for the session id
     * @return the session
     */
-  def createSession(timeout: Long,length: Int): Session = {
+  def createSession(timeout: Long, length: Int): Session = {
     Session(asJava.asInstanceOf[JSessionStore].createSession(timeout.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer]))
   }
 
@@ -66,7 +66,7 @@ class SessionStore(private val _asJava: Object) {
     * Get the session with the specified ID
     * @param id the unique ID of the session
     */
-  def get(id: String,resultHandler: Handler[AsyncResult[Session]]): Unit = {
+  def get(id: String, resultHandler: Handler[AsyncResult[Session]]): Unit = {
     asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String],{x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession,Session](x, a => Session(a)))})
   }
 
@@ -74,7 +74,7 @@ class SessionStore(private val _asJava: Object) {
     * Delete the session with the specified ID
     * @param id the unique ID of the session
     */
-  def delete(id: String,resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
+  def delete(id: String, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
@@ -82,7 +82,7 @@ class SessionStore(private val _asJava: Object) {
     * Add a session with the specified ID
     * @param session the session
     */
-  def put(session: Session,resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
+  def put(session: Session, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
@@ -162,6 +162,6 @@ class SessionStore(private val _asJava: Object) {
 
 }
 
-object SessionStore{
+object SessionStore {
   def apply(asJava: JSessionStore) = new SessionStore(asJava)  
 }

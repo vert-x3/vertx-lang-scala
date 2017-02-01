@@ -169,6 +169,6 @@ class SockJSSocket(private val _asJava: Object)
 
 }
 
-object SockJSSocket{
+object SockJSSocket {
   def apply(asJava: JSockJSSocket) = new SockJSSocket(asJava)  
 }

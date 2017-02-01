@@ -142,6 +142,6 @@ class LanguageHeader(private val _asJava: Object)
 
 }
 
-object LanguageHeader{
+object LanguageHeader {
   def apply(asJava: JLanguageHeader) = new LanguageHeader(asJava)  
 }
