@@ -128,7 +128,7 @@ class TermServer(private val _asJava: Object) {
 
 }
 
-object TermServer{
+object TermServer {
   def apply(asJava: JTermServer) = new TermServer(asJava)  
   /**
     * Create a term server for the SSH protocol.
@@ -145,7 +145,7 @@ object TermServer{
     * @param options the ssh optionssee <a href="../../../../../../../../cheatsheet/SSHTermOptions.html">SSHTermOptions</a>
     * @return the term server
     */
-  def createSSHTermServer(vertx: Vertx,options: SSHTermOptions): TermServer = {
+  def createSSHTermServer(vertx: Vertx, options: SSHTermOptions): TermServer = {
     TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -164,7 +164,7 @@ object TermServer{
     * @param options the term optionssee <a href="../../../../../../../../cheatsheet/TelnetTermOptions.html">TelnetTermOptions</a>
     * @return the term server
     */
-  def createTelnetTermServer(vertx: Vertx,options: TelnetTermOptions): TermServer = {
+  def createTelnetTermServer(vertx: Vertx, options: TelnetTermOptions): TermServer = {
     TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -183,7 +183,7 @@ object TermServer{
     * @param options the term optionssee <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
     * @return the term server
     */
-  def createHttpTermServer(vertx: Vertx,options: HttpTermOptions): TermServer = {
+  def createHttpTermServer(vertx: Vertx, options: HttpTermOptions): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -193,7 +193,7 @@ object TermServer{
     * @param router the router
     * @return the term server
     */
-  def createHttpTermServer(vertx: Vertx,router: Router): TermServer = {
+  def createHttpTermServer(vertx: Vertx, router: Router): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx],router.asJava.asInstanceOf[JRouter]))
   }
 
@@ -204,7 +204,7 @@ object TermServer{
     * @param options the term optionssee <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
     * @return the term server
     */
-  def createHttpTermServer(vertx: Vertx,router: Router,options: HttpTermOptions): TermServer = {
+  def createHttpTermServer(vertx: Vertx, router: Router, options: HttpTermOptions): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx],router.asJava.asInstanceOf[JRouter],options.asJava))
   }
 

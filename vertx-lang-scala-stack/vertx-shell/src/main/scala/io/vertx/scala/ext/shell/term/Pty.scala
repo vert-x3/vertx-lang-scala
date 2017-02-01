@@ -55,7 +55,7 @@ class Pty(private val _asJava: Object) {
     * Resize the terminal.
     * @return this current object
     */
-  def setSize(width: Int,height: Int): Pty = {
+  def setSize(width: Int, height: Int): Pty = {
     asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer],height.asInstanceOf[java.lang.Integer])
     this
   }
@@ -69,7 +69,7 @@ class Pty(private val _asJava: Object) {
 
 }
 
-object Pty{
+object Pty {
   def apply(asJava: JPty) = new Pty(asJava)  
   /**
     * Create a new pseudo terminal with no terminal type.

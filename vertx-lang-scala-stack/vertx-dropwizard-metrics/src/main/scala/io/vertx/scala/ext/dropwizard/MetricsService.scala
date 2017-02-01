@@ -73,7 +73,7 @@ class MetricsService(private val _asJava: Object) {
 
 }
 
-object MetricsService{
+object MetricsService {
   def apply(asJava: JMetricsService) = new MetricsService(asJava)  
   /**
     * Creates a metric service for a given [[io.vertx.scala.core.Vertx]] instance.

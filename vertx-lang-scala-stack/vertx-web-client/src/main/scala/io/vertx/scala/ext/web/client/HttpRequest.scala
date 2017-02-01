@@ -125,7 +125,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param value the header value
     * @return a reference to this, so the API can be used fluently
     */
-  def putHeader(name: String,value: String): HttpRequest[T] = {
+  def putHeader(name: String, value: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -149,7 +149,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-  def addQueryParam(paramName: String,paramValue: String): HttpRequest[T] = {
+  def addQueryParam(paramName: String, paramValue: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].addQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this
   }
@@ -160,7 +160,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param paramValue the param value
     * @return a reference to this, so the API can be used fluently
     */
-  def setQueryParam(paramName: String,paramValue: String): HttpRequest[T] = {
+  def setQueryParam(paramName: String, paramValue: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].setQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
     this
   }
@@ -194,7 +194,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` stream.
     * @param body the body
     */
-  def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer],handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+  def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -202,7 +202,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` buffer.
     * @param body the body
     */
-  def sendBuffer(body: io.vertx.core.buffer.Buffer,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+  def sendBuffer(body: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -211,7 +211,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * set to `application/json`.
     * @param body the body
     */
-  def sendJsonObject(body: io.vertx.core.json.JsonObject,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+  def sendJsonObject(body: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -220,7 +220,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * set to `application/json`.
     * @param body the body
     */
-  def sendJson(body: AnyRef,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+  def sendJson(body: AnyRef, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -231,7 +231,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * When the content type header is previously set to `multipart/form-data` it will be used instead.
     * @param body the body
     */
-  def sendForm(body: MultiMap,handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+  def sendForm(body: MultiMap, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
     asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
@@ -308,6 +308,6 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 
 }
 
-object HttpRequest{
+object HttpRequest {
   def apply[T: TypeTag](asJava: JHttpRequest[_]) = new HttpRequest[T](asJava)  
 }

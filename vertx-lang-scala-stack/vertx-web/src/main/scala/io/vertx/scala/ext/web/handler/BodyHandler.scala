@@ -80,7 +80,7 @@ class BodyHandler(private val _asJava: Object)
 
 }
 
-object BodyHandler{
+object BodyHandler {
   def apply(asJava: JBodyHandler) = new BodyHandler(asJava)  
   /**
     * Create a body handler with defaults

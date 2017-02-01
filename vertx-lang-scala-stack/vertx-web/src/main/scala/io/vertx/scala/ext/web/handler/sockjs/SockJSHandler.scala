@@ -74,7 +74,7 @@ class SockJSHandler(private val _asJava: Object)
     * @param bridgeEventHandler handler to receive bridge events
     * @return a reference to this, so the API can be used fluently
     */
-  def bridge(bridgeOptions: BridgeOptions,bridgeEventHandler: Handler[BridgeEvent]): SockJSHandler = {
+  def bridge(bridgeOptions: BridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): SockJSHandler = {
     asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava,{x: JBridgeEvent => bridgeEventHandler.handle(BridgeEvent(x))})
     this
   }
@@ -85,7 +85,7 @@ class SockJSHandler(private val _asJava: Object)
 
 }
 
-object SockJSHandler{
+object SockJSHandler {
   def apply(asJava: JSockJSHandler) = new SockJSHandler(asJava)  
   /**
     * Create a SockJS handler
@@ -102,7 +102,7 @@ object SockJSHandler{
     * @param options options to configure the handlersee <a href="../../../../../../../../../cheatsheet/SockJSHandlerOptions.html">SockJSHandlerOptions</a>
     * @return the handler
     */
-  def create(vertx: Vertx,options: SockJSHandlerOptions): SockJSHandler = {
+  def create(vertx: Vertx, options: SockJSHandlerOptions): SockJSHandler = {
     SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -111,7 +111,7 @@ object SockJSHandler{
     * @param router the router to install on
     * @param vertx the Vert.x instance
     */
-  def installTestApplications(router: Router,vertx: Vertx): Unit = {
+  def installTestApplications(router: Router, vertx: Vertx): Unit = {
     JSockJSHandler.installTestApplications(router.asJava.asInstanceOf[JRouter],vertx.asJava.asInstanceOf[JVertx])
   }
 

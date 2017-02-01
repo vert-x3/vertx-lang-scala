@@ -29,14 +29,14 @@ of those please consult the documentation for the JDBC client.
 
 Once you've got one of those you can create a `link:../../scaladoc/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html[JDBCAuth]` instance as follows:
 
-[source,java]
+[source,scala]
 ----
 import io.vertx.scala.ext.jdbc.JDBCClient
 import io.vertx.scala.ext.auth.jdbc.JDBCAuth
 
 var jdbcClient = JDBCClient.createShared(vertx, jdbcClientConfig)
 
-var authProvider = JDBCAuth.create(jdbcClient)
+var authProvider = JDBCAuth.create(vertx, jdbcClient)
 
 ----
 
@@ -90,12 +90,39 @@ WARNING: It is advised to always store your passwords as hashes in your database
 with a salt which should be stored in the row too. A strong hashing algorithm should be used. It is strongly advised
 never to store your passwords as plain text.
 
+== Hashing passwords
+
+Like any application there will be a time where you need to store new users into the database. Has you have learn
+passwords are not stored in plain text but hashed according to the hashing strategy. The same strategy is required
+to hash new password before storing it to the database. Doing it is a 3 step task.
+
+1. Generate a salt string
+2. Hash the password given the salt string
+3. Store it to the database
+
+[source,scala]
+----
+import scala.util.Failure
+import scala.util.Success
+
+var salt = auth.generateSalt()
+var hash = auth.computeHash("sausages", salt)
+// save to the database
+conn.updateWithParamsFuture("INSERT INTO user VALUES (?, ?, ?)", new io.vertx.core.json.JsonArray().add("tim").add(hash).add(salt)).onComplete{
+  case Success(result) => {
+    // success!
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
 == Authentication
 
 When authenticating using this implementation, it assumes `username` and `password` fields are present in the
 authentication info:
 
-[source,java]
+[source,scala]
 ----
 import scala.util.Failure
 import scala.util.Success
@@ -122,7 +149,7 @@ can have zero or more permissions.
 If validating if a user has a particular permission simply pass the permission into.
 `link:../../scaladoc/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]` as follows:
 
-[source,java]
+[source,scala]
 ----
 import scala.util.Failure
 import scala.util.Success
@@ -141,7 +168,7 @@ user.isAuthorisedFuture("commit_code").onComplete{
 
 If validating that a user has a particular _role_ then you should prefix the argument with the role prefix.
 
-[source,java]
+[source,scala]
 ----
 import scala.util.Failure
 import scala.util.Success

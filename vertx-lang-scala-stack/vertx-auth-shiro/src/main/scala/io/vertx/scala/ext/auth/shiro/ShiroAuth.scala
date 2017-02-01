@@ -51,7 +51,7 @@ class ShiroAuth(private val _asJava: Object)
 
 }
 
-object ShiroAuth{
+object ShiroAuth {
   def apply(asJava: JShiroAuth) = new ShiroAuth(asJava)  
   /**
     * Create a Shiro auth provider
@@ -60,7 +60,7 @@ object ShiroAuth{
     * @param config the config
     * @return the auth provider
     */
-  def create(vertx: Vertx,realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType,config: io.vertx.core.json.JsonObject): ShiroAuth = {
+  def create(vertx: Vertx, realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType, config: io.vertx.core.json.JsonObject): ShiroAuth = {
     ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],realmType,config))
   }
 
@@ -70,7 +70,7 @@ object ShiroAuth{
     * @param options the Shiro configuration optionssee <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
     * @return the auth provider
     */
-  def create(vertx: Vertx,options: ShiroAuthOptions): ShiroAuth = {
+  def create(vertx: Vertx, options: ShiroAuthOptions): ShiroAuth = {
     ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

@@ -40,7 +40,7 @@ class LocalSessionStore(private val _asJava: Object)
 
 }
 
-object LocalSessionStore{
+object LocalSessionStore {
   def apply(asJava: JLocalSessionStore) = new LocalSessionStore(asJava)  
   /**
     * Create a session store
@@ -57,7 +57,7 @@ object LocalSessionStore{
     * @param sessionMapName name for map used to store sessions
     * @return the session store
     */
-  def create(vertx: Vertx,sessionMapName: String): LocalSessionStore = {
+  def create(vertx: Vertx, sessionMapName: String): LocalSessionStore = {
     LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
   }
 
@@ -68,7 +68,7 @@ object LocalSessionStore{
     * @param reaperInterval how often, in ms, to check for expired sessions
     * @return the session store
     */
-  def create(vertx: Vertx,sessionMapName: String,reaperInterval: Long): LocalSessionStore = {
+  def create(vertx: Vertx, sessionMapName: String, reaperInterval: Long): LocalSessionStore = {
     LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],reaperInterval.asInstanceOf[java.lang.Long]))
   }
 

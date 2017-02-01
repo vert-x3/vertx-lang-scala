@@ -38,6 +38,6 @@ class SocketAddress(private val _asJava: Object) {
 
 }
 
-object SocketAddress{
+object SocketAddress {
   def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
 }

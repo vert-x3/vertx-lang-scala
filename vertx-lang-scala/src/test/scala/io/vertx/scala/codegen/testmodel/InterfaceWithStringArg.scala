@@ -43,6 +43,6 @@ class InterfaceWithStringArg(private val _asJava: Object)
 
 }
 
-object InterfaceWithStringArg{
+object InterfaceWithStringArg {
   def apply(asJava: JInterfaceWithStringArg) = new InterfaceWithStringArg(asJava)  
 }

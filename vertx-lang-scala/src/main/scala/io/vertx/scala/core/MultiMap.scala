@@ -38,7 +38,7 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value being added
     * @return a reference to this, so the API can be used fluently
     */
-  def add(name: String,value: String): MultiMap = {
+  def add(name: String, value: String): MultiMap = {
     asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -60,7 +60,7 @@ class MultiMap(private val _asJava: Object) {
     * @param value The value
     * @return a reference to this, so the API can be used fluently
     */
-  def set(name: String,value: String): MultiMap = {
+  def set(name: String, value: String): MultiMap = {
     asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
     this
   }
@@ -145,7 +145,7 @@ class MultiMap(private val _asJava: Object) {
 
 }
 
-object MultiMap{
+object MultiMap {
   def apply(asJava: JMultiMap) = new MultiMap(asJava)  
   /**
     * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.

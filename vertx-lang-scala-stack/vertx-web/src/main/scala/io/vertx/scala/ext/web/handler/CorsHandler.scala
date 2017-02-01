@@ -110,7 +110,7 @@ class CorsHandler(private val _asJava: Object)
 
 }
 
-object CorsHandler{
+object CorsHandler {
   def apply(asJava: JCorsHandler) = new CorsHandler(asJava)  
   /**
     * Create a CORS handler

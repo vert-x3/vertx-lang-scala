@@ -76,7 +76,7 @@ import @{importedType}\n
 @else{}
 	@includeNamed{'trait-body.templ'}
 	\n
-object @{className}{\n
+object @{className} {\n
   def apply@{assembleTypeParams(typeParams, true)}(asJava: J@{className}@{assembleTypeParamsAsObjects(typeParams)}): @{className}@{assembleTypeParams(typeParams, false)} = new @{className}Impl@{assembleTypeParams(typeParams, false)}(asJava)\n
     private class @{className}Impl@{assembleTypeParams(typeParams, true)}(private val _asJava: Object) extends @{className}@{assembleTypeParams(typeParams, false)} {\n\n
     @includeNamed{'class-body.templ'}

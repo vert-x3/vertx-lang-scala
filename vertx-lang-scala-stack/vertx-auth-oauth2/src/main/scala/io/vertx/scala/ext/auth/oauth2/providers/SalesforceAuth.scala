@@ -36,14 +36,14 @@ class SalesforceAuth(private val _asJava: Object) {
 
 }
 
-object SalesforceAuth{
+object SalesforceAuth {
   def apply(asJava: JSalesforceAuth) = new SalesforceAuth(asJava)  
   /**
     * Create a OAuth2Auth provider for Salesforce
     * @param clientId the client id given to you by Salesforce
     * @param clientSecret the client secret given to you by Salesforce
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
+  def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
 
@@ -53,7 +53,7 @@ object SalesforceAuth{
     * @param clientSecret the client secret given to you by Salesforce
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
+  def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 

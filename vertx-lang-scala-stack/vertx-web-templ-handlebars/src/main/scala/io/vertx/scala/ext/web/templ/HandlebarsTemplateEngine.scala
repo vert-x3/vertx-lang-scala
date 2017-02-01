@@ -55,7 +55,7 @@ class HandlebarsTemplateEngine(private val _asJava: Object)
 
 }
 
-object HandlebarsTemplateEngine{
+object HandlebarsTemplateEngine {
   def apply(asJava: JHandlebarsTemplateEngine) = new HandlebarsTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

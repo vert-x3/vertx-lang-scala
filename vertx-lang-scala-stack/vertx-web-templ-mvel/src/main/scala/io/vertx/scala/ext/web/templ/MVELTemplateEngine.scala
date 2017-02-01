@@ -55,7 +55,7 @@ class MVELTemplateEngine(private val _asJava: Object)
 
 }
 
-object MVELTemplateEngine{
+object MVELTemplateEngine {
   def apply(asJava: JMVELTemplateEngine) = new MVELTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

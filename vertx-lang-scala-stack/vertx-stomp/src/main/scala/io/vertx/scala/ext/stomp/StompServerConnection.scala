@@ -103,12 +103,12 @@ class StompServerConnection(private val _asJava: Object) {
     * @param pong pong time
     * @param pingHandler the ping handler
     */
-  def configureHeartbeat(ping: Long,pong: Long,pingHandler: Handler[StompServerConnection]): Unit = {
+  def configureHeartbeat(ping: Long, pong: Long, pingHandler: Handler[StompServerConnection]): Unit = {
     asJava.asInstanceOf[JStompServerConnection].configureHeartbeat(ping.asInstanceOf[java.lang.Long],pong.asInstanceOf[java.lang.Long],{x: JStompServerConnection => pingHandler.handle(StompServerConnection(x))})
   }
 
 }
 
-object StompServerConnection{
+object StompServerConnection {
   def apply(asJava: JStompServerConnection) = new StompServerConnection(asJava)  
 }

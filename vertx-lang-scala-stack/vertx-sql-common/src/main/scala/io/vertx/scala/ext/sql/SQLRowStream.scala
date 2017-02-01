@@ -114,6 +114,6 @@ class SQLRowStream(private val _asJava: Object)
 
 }
 
-object SQLRowStream{
+object SQLRowStream {
   def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)  
 }

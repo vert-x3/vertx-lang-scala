@@ -36,14 +36,14 @@ class MailchimpAuth(private val _asJava: Object) {
 
 }
 
-object MailchimpAuth{
+object MailchimpAuth {
   def apply(asJava: JMailchimpAuth) = new MailchimpAuth(asJava)  
   /**
     * Create a OAuth2Auth provider for Dropbox
     * @param clientId the client id given to you by Mailchimp
     * @param clientSecret the client secret given to you by Mailchimp
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
+  def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JMailchimpAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
   }
 
@@ -53,7 +53,7 @@ object MailchimpAuth{
     * @param clientSecret the client secret given to you by Mailchimp
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
-  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
+  def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JMailchimpAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
   }
 

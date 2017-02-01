@@ -48,7 +48,7 @@ class HtdigestAuth(private val _asJava: Object)
 
 }
 
-object HtdigestAuth{
+object HtdigestAuth {
   def apply(asJava: JHtdigestAuth) = new HtdigestAuth(asJava)  
   /**
     * Creates an instance of HtdigestAuth.
@@ -63,7 +63,7 @@ object HtdigestAuth{
     * @param htfile the existing htfile.
     * @return the created instance of HtdigestAuths
     */
-  def create(vertx: Vertx,htfile: String): HtdigestAuth = {
+  def create(vertx: Vertx, htfile: String): HtdigestAuth = {
     HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx],htfile.asInstanceOf[java.lang.String]))
   }
 

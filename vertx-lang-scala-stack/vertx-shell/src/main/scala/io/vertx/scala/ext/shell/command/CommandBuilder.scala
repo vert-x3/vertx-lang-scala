@@ -69,7 +69,7 @@ class CommandBuilder(private val _asJava: Object) {
 
 }
 
-object CommandBuilder{
+object CommandBuilder {
   def apply(asJava: JCommandBuilder) = new CommandBuilder(asJava)  
   /**
     * Create a new commmand builder, the command is responsible for managing the options and arguments via the

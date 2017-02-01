@@ -177,7 +177,7 @@ class Context(private val _asJava: Object) {
     * @param key the key of the data
     * @param value the data
     */
-  def put(key: String,value: AnyRef): Unit = {
+  def put(key: String, value: AnyRef): Unit = {
     asJava.asInstanceOf[JContext].put(key.asInstanceOf[java.lang.String],value)
   }
 
@@ -206,7 +206,7 @@ class Context(private val _asJava: Object) {
 
 }
 
-object Context{
+object Context {
   def apply(asJava: JContext) = new Context(asJava)  
   /**
     * Is the current thread a worker thread?

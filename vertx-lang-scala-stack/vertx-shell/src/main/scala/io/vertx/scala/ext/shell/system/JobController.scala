@@ -61,7 +61,7 @@ class JobController(private val _asJava: Object) {
     * @param line the line
     * @return the created job
     */
-  def createJob(process: Process,line: String): Job = {
+  def createJob(process: Process, line: String): Job = {
     Job(asJava.asInstanceOf[JJobController].createJob(process.asJava.asInstanceOf[JProcess],line.asInstanceOf[java.lang.String]))
   }
 
@@ -81,6 +81,6 @@ class JobController(private val _asJava: Object) {
 
 }
 
-object JobController{
+object JobController {
   def apply(asJava: JJobController) = new JobController(asJava)  
 }

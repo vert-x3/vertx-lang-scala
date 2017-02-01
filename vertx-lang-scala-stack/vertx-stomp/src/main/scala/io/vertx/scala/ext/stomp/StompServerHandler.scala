@@ -187,7 +187,7 @@ class StompServerHandler(private val _asJava: Object)
     * @param passcode the password
     * @return the current StompServerHandler
     */
-  def onAuthenticationRequest(server: StompServer,login: String,passcode: String,handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
+  def onAuthenticationRequest(server: StompServer, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer],login.asInstanceOf[java.lang.String],passcode.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
@@ -210,7 +210,7 @@ class StompServerHandler(private val _asJava: Object)
     * @param messages the acknowledge messages
     * @return the current StompServerHandler
     */
-  def onAck(connection: StompServerConnection,subscribe: Frame,messages: scala.collection.mutable.Buffer[Frame]): StompServerHandler = {
+  def onAck(connection: StompServerConnection, subscribe: Frame, messages: scala.collection.mutable.Buffer[Frame]): StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onAck(connection.asJava.asInstanceOf[JStompServerConnection],subscribe.asJava,messages.map(x => x.asJava).asJava)
     this
   }
@@ -225,7 +225,7 @@ class StompServerHandler(private val _asJava: Object)
     * @param messages the acknowledge messages
     * @return the current StompServerHandler
     */
-  def onNack(connection: StompServerConnection,subscribe: Frame,messages: scala.collection.mutable.Buffer[Frame]): StompServerHandler = {
+  def onNack(connection: StompServerConnection, subscribe: Frame, messages: scala.collection.mutable.Buffer[Frame]): StompServerHandler = {
     asJava.asInstanceOf[JStompServerHandler].onNack(connection.asJava.asInstanceOf[JStompServerConnection],subscribe.asJava,messages.map(x => x.asJava).asJava)
     this
   }
@@ -331,7 +331,7 @@ class StompServerHandler(private val _asJava: Object)
    * @param passcode the password
    * @return future receiving the authentication result
    */
-  def onAuthenticationRequestFuture(server: StompServer,login: String,passcode: String): scala.concurrent.Future[Boolean] = {
+  def onAuthenticationRequestFuture(server: StompServer, login: String, passcode: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer],login.asInstanceOf[java.lang.String],passcode.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -339,7 +339,7 @@ class StompServerHandler(private val _asJava: Object)
 
 }
 
-object StompServerHandler{
+object StompServerHandler {
   def apply(asJava: JStompServerHandler) = new StompServerHandler(asJava)  
   /**
     * Creates an instance of [[io.vertx.scala.ext.stomp.StompServerHandler]] using the default (compliant) implementation.

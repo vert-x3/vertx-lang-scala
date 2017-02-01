@@ -110,7 +110,7 @@ class SessionHandler(private val _asJava: Object)
 
 }
 
-object SessionHandler{
+object SessionHandler {
   def apply(asJava: JSessionHandler) = new SessionHandler(asJava)  
   /**
     * Create a session handler

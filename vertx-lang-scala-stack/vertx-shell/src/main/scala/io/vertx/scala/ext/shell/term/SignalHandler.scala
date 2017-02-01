@@ -33,6 +33,6 @@ class SignalHandler(private val _asJava: Object) {
 
 }
 
-object SignalHandler{
+object SignalHandler {
   def apply(asJava: JSignalHandler) = new SignalHandler(asJava)  
 }

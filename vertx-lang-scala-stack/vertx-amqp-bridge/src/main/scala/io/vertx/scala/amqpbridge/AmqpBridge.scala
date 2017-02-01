@@ -45,7 +45,7 @@ class AmqpBridge(private val _asJava: Object) {
     * @param username the username
     * @param password the password
     */
-  def start(hostname: String,port: Int,username: String,password: String,resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
+  def start(hostname: String, port: Int, username: String, password: String, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],{x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge,AmqpBridge](x, a => AmqpBridge(a)))})
   }
 
@@ -54,7 +54,7 @@ class AmqpBridge(private val _asJava: Object) {
     * @param hostname the host name to connect to
     * @param port the port to connect to
     */
-  def start(hostname: String,port: Int,resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
+  def start(hostname: String, port: Int, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge,AmqpBridge](x, a => AmqpBridge(a)))})
   }
 
@@ -97,7 +97,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param password the password
    * @return the result future
    */
-  def startFuture(hostname: String,port: Int,username: String,password: String): scala.concurrent.Future[AmqpBridge] = {
+  def startFuture(hostname: String, port: Int, username: String, password: String): scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -109,7 +109,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param port the port to connect to
    * @return the result future
    */
-  def startFuture(hostname: String,port: Int): scala.concurrent.Future[AmqpBridge] = {
+  def startFuture(hostname: String, port: Int): scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String],port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -127,7 +127,7 @@ class AmqpBridge(private val _asJava: Object) {
 
 }
 
-object AmqpBridge{
+object AmqpBridge {
   def apply(asJava: JAmqpBridge) = new AmqpBridge(asJava)  
   /**
     * Creates a Bridge.
@@ -144,7 +144,7 @@ object AmqpBridge{
     * @param options the optionssee <a href="../../../../../../cheatsheet/AmqpBridgeOptions.html">AmqpBridgeOptions</a>
     * @return the (not-yet-started) bridge.
     */
-  def create(vertx: Vertx,options: AmqpBridgeOptions): AmqpBridge = {
+  def create(vertx: Vertx, options: AmqpBridgeOptions): AmqpBridge = {
     AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

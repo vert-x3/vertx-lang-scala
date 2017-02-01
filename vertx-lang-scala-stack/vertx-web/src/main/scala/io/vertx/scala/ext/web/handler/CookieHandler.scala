@@ -39,7 +39,7 @@ class CookieHandler(private val _asJava: Object)
 
 }
 
-object CookieHandler{
+object CookieHandler {
   def apply(asJava: JCookieHandler) = new CookieHandler(asJava)  
   /**
     * Create a cookie handler

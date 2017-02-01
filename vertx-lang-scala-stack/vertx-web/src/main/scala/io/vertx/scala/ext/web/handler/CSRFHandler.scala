@@ -85,7 +85,7 @@ class CSRFHandler(private val _asJava: Object)
 
 }
 
-object CSRFHandler{
+object CSRFHandler {
   def apply(asJava: JCSRFHandler) = new CSRFHandler(asJava)  
   /**
     * Instantiate a new CSRFHandlerImpl with a secret

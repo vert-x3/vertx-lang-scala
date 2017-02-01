@@ -79,6 +79,6 @@ class SrvRecord(private val _asJava: Object) {
 
 }
 
-object SrvRecord{
+object SrvRecord {
   def apply(asJava: JSrvRecord) = new SrvRecord(asJava)  
 }

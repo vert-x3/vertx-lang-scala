@@ -45,9 +45,9 @@ class SockJSTermHandler(private val _asJava: Object)
 
 }
 
-object SockJSTermHandler{
+object SockJSTermHandler {
   def apply(asJava: JSockJSTermHandler) = new SockJSTermHandler(asJava)  
-  def create(vertx: Vertx,charset: String): SockJSTermHandler = {
+  def create(vertx: Vertx, charset: String): SockJSTermHandler = {
     SockJSTermHandler(JSockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx],charset.asInstanceOf[java.lang.String]))
   }
 

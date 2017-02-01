@@ -356,6 +356,6 @@ class HttpServerRequest(private val _asJava: Object)
 
 }
 
-object HttpServerRequest{
+object HttpServerRequest {
   def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)  
 }

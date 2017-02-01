@@ -177,7 +177,7 @@ class CLI(private val _asJava: Object) {
     * @param validate enable / disable parsing validation
     * @return the creates command line
     */
-  def parse(arguments: scala.collection.mutable.Buffer[String],validate: Boolean): CommandLine = {
+  def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
     CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava,validate.asInstanceOf[java.lang.Boolean]))
   }
 
@@ -255,7 +255,7 @@ class CLI(private val _asJava: Object) {
 
 }
 
-object CLI{
+object CLI {
   def apply(asJava: JCLI) = new CLI(asJava)  
   /**
     * Creates an instance of [[io.vertx.scala.core.cli.CLI]] using the default implementation.

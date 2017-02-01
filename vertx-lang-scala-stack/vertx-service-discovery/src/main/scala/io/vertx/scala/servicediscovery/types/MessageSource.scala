@@ -40,7 +40,7 @@ class MessageSource(private val _asJava: Object) {
 
 }
 
-object MessageSource{
+object MessageSource {
   def apply(asJava: JMessageSource) = new MessageSource(asJava)  
   /**
     * Create a record representing a data producer.
@@ -50,7 +50,7 @@ object MessageSource{
     * @param metadata additional metadata
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,address: String,`type`: String,metadata: io.vertx.core.json.JsonObject): Record = {
+  def createRecord(name: String, address: String, `type`: String, metadata: io.vertx.core.json.JsonObject): Record = {
     Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String],metadata))
   }
 
@@ -61,7 +61,7 @@ object MessageSource{
     * @param type the type of payload
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,address: String,`type`: String): Record = {
+  def createRecord(name: String, address: String, `type`: String): Record = {
     Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String]))
   }
 
@@ -72,7 +72,7 @@ object MessageSource{
     * @param address the address on which the data is sent.
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,address: String): Record = {
+  def createRecord(name: String, address: String): Record = {
     Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String]))
   }
 
@@ -82,7 +82,7 @@ object MessageSource{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
+  def getConsumer[T: TypeTag](discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
     JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 
@@ -92,7 +92,7 @@ object MessageSource{
     * @param discovery The service discovery instance
     * @param filter The filter, must not be `null`
     */
-  def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
+  def getConsumer[T: TypeTag](discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
     JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 

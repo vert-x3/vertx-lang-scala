@@ -34,11 +34,11 @@ class FunctionParamTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
-  def methodWithBasicParam(byteFunc: Byte => String,shortFunc: Short => String,integerFunc: Int => String,longFunc: Long => String,floatFunc: Float => String,doubleFunc: Double => String,booleanFunc: Boolean => String,charFunc: Char => String,stringFunc: String => String): scala.collection.mutable.Buffer[String] = {
+  def methodWithBasicParam(byteFunc: Byte => String, shortFunc: Short => String, integerFunc: Int => String, longFunc: Long => String, floatFunc: Float => String, doubleFunc: Double => String, booleanFunc: Boolean => String, charFunc: Char => String, stringFunc: String => String): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicParam({x: java.lang.Byte => byteFunc(x.asInstanceOf[Byte]).asInstanceOf[java.lang.String]},{x: java.lang.Short => shortFunc(x.asInstanceOf[Short]).asInstanceOf[java.lang.String]},{x: java.lang.Integer => integerFunc(x.asInstanceOf[Int]).asInstanceOf[java.lang.String]},{x: java.lang.Long => longFunc(x.asInstanceOf[Long]).asInstanceOf[java.lang.String]},{x: java.lang.Float => floatFunc(x.asInstanceOf[Float]).asInstanceOf[java.lang.String]},{x: java.lang.Double => doubleFunc(x.asInstanceOf[Double]).asInstanceOf[java.lang.String]},{x: java.lang.Boolean => booleanFunc(x.asInstanceOf[Boolean]).asInstanceOf[java.lang.String]},{x: java.lang.Character => charFunc(x.asInstanceOf[Char]).asInstanceOf[java.lang.String]},{x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def methodWithJsonParam(objectFunc: io.vertx.core.json.JsonObject => String,arrayFunc: io.vertx.core.json.JsonArray => String): scala.collection.mutable.Buffer[String] = {
+  def methodWithJsonParam(objectFunc: io.vertx.core.json.JsonObject => String, arrayFunc: io.vertx.core.json.JsonArray => String): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithJsonParam({x: JsonObject => objectFunc(x).asInstanceOf[java.lang.String]},{x: JsonArray => arrayFunc(x).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }
 
@@ -46,11 +46,11 @@ class FunctionParamTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithVoidParam({x: Void => func().asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithUserTypeParam(arg: RefedInterface1,func: RefedInterface1 => String): String = {
+  def methodWithUserTypeParam(arg: RefedInterface1, func: RefedInterface1 => String): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithUserTypeParam(arg.asJava.asInstanceOf[JRefedInterface1],{x: JRefedInterface1 => func(RefedInterface1(x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithObjectParam(arg: AnyRef,func: AnyRef => String): String = {
+  def methodWithObjectParam(arg: AnyRef, func: AnyRef => String): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg,{x: Object => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
@@ -74,19 +74,19 @@ class FunctionParamTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithMapParam({x: java.util.Map[String, java.lang.String] => func(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericParam[T: TypeTag](t: T,func: T => String): String = {
+  def methodWithGenericParam[T: TypeTag](t: T, func: T => String): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericParam[Object](toJava[T](t),{x: Object => func(toScala[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericUserTypeParam[T: TypeTag](t: T,func: GenericRefedInterface[T] => String): String = {
+  def methodWithGenericUserTypeParam[T: TypeTag](t: T, func: GenericRefedInterface[T] => String): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeParam[Object](toJava[T](t),{x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithBasicReturn(byteFunc: String => Byte,shortFunc: String => Short,integerFunc: String => Int,longFunc: String => Long,floatFunc: String => Float,doubleFunc: String => Double,booleanFunc: String => Boolean,charFunc: String => Char,stringFunc: String => String): String = {
+  def methodWithBasicReturn(byteFunc: String => Byte, shortFunc: String => Short, integerFunc: String => Int, longFunc: String => Long, floatFunc: String => Float, doubleFunc: String => Double, booleanFunc: String => Boolean, charFunc: String => Char, stringFunc: String => String): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicReturn({x: java.lang.String => byteFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Byte]},{x: java.lang.String => shortFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Short]},{x: java.lang.String => integerFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Integer]},{x: java.lang.String => longFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Long]},{x: java.lang.String => floatFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Float]},{x: java.lang.String => doubleFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Double]},{x: java.lang.String => booleanFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Boolean]},{x: java.lang.String => charFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Character]},{x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithJsonReturn(objectFunc: String => io.vertx.core.json.JsonObject,arrayFunc: String => io.vertx.core.json.JsonArray): String = {
+  def methodWithJsonReturn(objectFunc: String => io.vertx.core.json.JsonObject, arrayFunc: String => io.vertx.core.json.JsonArray): String = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithJsonReturn({x: java.lang.String => objectFunc(x.asInstanceOf[String])},{x: java.lang.String => arrayFunc(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
@@ -132,6 +132,6 @@ class FunctionParamTCK(private val _asJava: Object) {
 
 }
 
-object FunctionParamTCK{
+object FunctionParamTCK {
   def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
 }

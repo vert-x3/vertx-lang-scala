@@ -38,13 +38,13 @@ class VirtualHostHandler(private val _asJava: Object)
 
 }
 
-object VirtualHostHandler{
+object VirtualHostHandler {
   def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)  
   /**
     * Create a handler
     * @return the handler
     */
-  def create(hostname: String,handler: Handler[RoutingContext]): VirtualHostHandler = {
+  def create(hostname: String, handler: Handler[RoutingContext]): VirtualHostHandler = {
     VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String],{x: JRoutingContext => handler.handle(RoutingContext(x))}))
   }
 

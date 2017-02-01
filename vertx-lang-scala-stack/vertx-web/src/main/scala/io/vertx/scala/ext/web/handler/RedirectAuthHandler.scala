@@ -61,7 +61,7 @@ class RedirectAuthHandler(private val _asJava: Object)
 
 }
 
-object RedirectAuthHandler{
+object RedirectAuthHandler {
   def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)  
   /**
     * Create a handler
@@ -78,7 +78,7 @@ object RedirectAuthHandler{
     * @param loginRedirectURL the url to redirect the user to
     * @return the handler
     */
-  def create(authProvider: AuthProvider,loginRedirectURL: String): AuthHandler = {
+  def create(authProvider: AuthProvider, loginRedirectURL: String): AuthHandler = {
     AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String]))
   }
 
@@ -89,7 +89,7 @@ object RedirectAuthHandler{
     * @param returnURLParam the name of param used to store return url information in session
     * @return the handler
     */
-  def create(authProvider: AuthProvider,loginRedirectURL: String,returnURLParam: String): AuthHandler = {
+  def create(authProvider: AuthProvider, loginRedirectURL: String, returnURLParam: String): AuthHandler = {
     AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String]))
   }
 

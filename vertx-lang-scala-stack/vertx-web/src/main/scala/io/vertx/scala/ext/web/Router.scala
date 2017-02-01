@@ -55,7 +55,7 @@ class Router(private val _asJava: Object) {
     * @param subRouter the router to mount as a sub router
     * @return a reference to this, so the API can be used fluently
     */
-  def mountSubRouter(mountPoint: String,subRouter: Router): Router = {
+  def mountSubRouter(mountPoint: String, subRouter: Router): Router = {
     asJava.asInstanceOf[JRouter].mountSubRouter(mountPoint.asInstanceOf[java.lang.String],subRouter.asJava.asInstanceOf[JRouter])
     this
   }
@@ -95,7 +95,7 @@ class Router(private val _asJava: Object) {
     * @param path URI paths that begin with this path will match
     * @return the route
     */
-  def route(method: io.vertx.core.http.HttpMethod,path: String): Route = {
+  def route(method: io.vertx.core.http.HttpMethod, path: String): Route = {
     Route(asJava.asInstanceOf[JRouter].route(method,path.asInstanceOf[java.lang.String]))
   }
 
@@ -114,7 +114,7 @@ class Router(private val _asJava: Object) {
     * @param regex URI paths that begin with a match for this regex will match
     * @return the route
     */
-  def routeWithRegex(method: io.vertx.core.http.HttpMethod,regex: String): Route = {
+  def routeWithRegex(method: io.vertx.core.http.HttpMethod, regex: String): Route = {
     Route(asJava.asInstanceOf[JRouter].routeWithRegex(method,regex.asInstanceOf[java.lang.String]))
   }
 
@@ -386,7 +386,7 @@ class Router(private val _asJava: Object) {
 
 }
 
-object Router{
+object Router {
   def apply(asJava: JRouter) = new Router(asJava)  
   /**
     * Create a router

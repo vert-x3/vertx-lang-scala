@@ -138,7 +138,7 @@ class ShellServer(private val _asJava: Object) {
 
 }
 
-object ShellServer{
+object ShellServer {
   def apply(asJava: JShellServer) = new ShellServer(asJava)  
   /**
     * Create a new shell server with default options.
@@ -146,7 +146,7 @@ object ShellServer{
     * @param options the optionssee <a href="../../../../../../../cheatsheet/ShellServerOptions.html">ShellServerOptions</a>
     * @return the created shell server
     */
-  def create(vertx: Vertx,options: ShellServerOptions): ShellServer = {
+  def create(vertx: Vertx, options: ShellServerOptions): ShellServer = {
     ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

@@ -59,7 +59,7 @@ class CliToken(private val _asJava: Object) {
 
 }
 
-object CliToken{
+object CliToken {
   def apply(asJava: JCliToken) = new CliToken(asJava)  
   /**
     * Create a text token.

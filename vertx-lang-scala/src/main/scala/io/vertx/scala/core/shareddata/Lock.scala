@@ -40,6 +40,6 @@ class Lock(private val _asJava: Object) {
 
 }
 
-object Lock{
+object Lock {
   def apply(asJava: JLock) = new Lock(asJava)  
 }

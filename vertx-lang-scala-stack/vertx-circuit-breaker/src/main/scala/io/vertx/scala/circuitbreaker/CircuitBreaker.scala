@@ -94,7 +94,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param command the operation
     * @return the current CircuitBreaker
     */
-  def executeAndReport[T: TypeTag](resultFuture: Future[T],command: Handler[Future[T]]): CircuitBreaker = {
+  def executeAndReport[T: TypeTag](resultFuture: Future[T], command: Handler[Future[T]]): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReport[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))})
     this
   }
@@ -118,7 +118,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return the current CircuitBreaker
     */
-  def executeAndReportWithFallback[T: TypeTag](resultFuture: Future[T],command: Handler[Future[T]],fallback: Throwable => T): CircuitBreaker = {
+  def executeAndReportWithFallback[T: TypeTag](resultFuture: Future[T], command: Handler[Future[T]], fallback: Throwable => T): CircuitBreaker = {
     asJava.asInstanceOf[JCircuitBreaker].executeAndReportWithFallback[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))})
     this
   }
@@ -171,7 +171,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @param fallback the fallback function. It gets an exception as parameter and returns the <em>fallback</em> result
     * @return a future object completed when the operation or its fallback completes
     */
-  def executeWithFallback[T: TypeTag](command: Handler[Future[T]],fallback: Throwable => T): Future[T] = {
+  def executeWithFallback[T: TypeTag](command: Handler[Future[T]], fallback: Throwable => T): Future[T] = {
     Future[T](asJava.asInstanceOf[JCircuitBreaker].executeWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))}))
   }
 
@@ -200,7 +200,7 @@ class CircuitBreaker(private val _asJava: Object) {
 
 }
 
-object CircuitBreaker{
+object CircuitBreaker {
   def apply(asJava: JCircuitBreaker) = new CircuitBreaker(asJava)  
   /**
     * Creates a new instance of [[io.vertx.scala.circuitbreaker.CircuitBreaker]].
@@ -209,7 +209,7 @@ object CircuitBreaker{
     * @param options the configuration optionsee <a href="../../../../../../cheatsheet/CircuitBreakerOptions.html">CircuitBreakerOptions</a>
     * @return the created instance
     */
-  def create(name: String,vertx: Vertx,options: CircuitBreakerOptions): CircuitBreaker = {
+  def create(name: String, vertx: Vertx, options: CircuitBreakerOptions): CircuitBreaker = {
     CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 
@@ -219,7 +219,7 @@ object CircuitBreaker{
     * @param vertx the Vert.x instance
     * @return the created instance
     */
-  def create(name: String,vertx: Vertx): CircuitBreaker = {
+  def create(name: String, vertx: Vertx): CircuitBreaker = {
     CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx]))
   }
 

@@ -47,7 +47,7 @@ class UserSessionHandler(private val _asJava: Object)
 
 }
 
-object UserSessionHandler{
+object UserSessionHandler {
   def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)  
   /**
     * Create a new handler

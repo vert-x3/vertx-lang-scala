@@ -78,6 +78,6 @@ class ParsedHeaderValues(private val _asJava: Object) {
 
 }
 
-object ParsedHeaderValues{
+object ParsedHeaderValues {
   def apply(asJava: JParsedHeaderValues) = new ParsedHeaderValues(asJava)  
 }

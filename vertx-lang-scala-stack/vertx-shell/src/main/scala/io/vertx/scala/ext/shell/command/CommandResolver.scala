@@ -50,7 +50,7 @@ class CommandResolver(private val _asJava: Object) {
 
 }
 
-object CommandResolver{
+object CommandResolver {
   def apply(asJava: JCommandResolver) = new CommandResolver(asJava)  
   /**
     * @return the base commands of Vert.x Shell.

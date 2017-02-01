@@ -208,7 +208,7 @@ class StaticHandler(private val _asJava: Object)
 
 }
 
-object StaticHandler{
+object StaticHandler {
   def apply(asJava: JStaticHandler) = new StaticHandler(asJava)  
   /**
     * Create a handler using defaults

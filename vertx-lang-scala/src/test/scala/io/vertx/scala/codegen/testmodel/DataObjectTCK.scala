@@ -83,6 +83,6 @@ class DataObjectTCK(private val _asJava: Object) {
 
 }
 
-object DataObjectTCK{
+object DataObjectTCK {
   def apply(asJava: JDataObjectTCK) = new DataObjectTCK(asJava)  
 }

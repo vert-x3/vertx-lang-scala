@@ -47,7 +47,7 @@ class ThymeleafTemplateEngine(private val _asJava: Object)
 
 }
 
-object ThymeleafTemplateEngine{
+object ThymeleafTemplateEngine {
   def apply(asJava: JThymeleafTemplateEngine) = new ThymeleafTemplateEngine(asJava)  
   /**
     * Create a template engine using defaults

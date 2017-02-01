@@ -39,7 +39,7 @@ class EventBusService(private val _asJava: Object) {
 
 }
 
-object EventBusService{
+object EventBusService {
   def apply(asJava: JEventBusService) = new EventBusService(asJava)  
   /**
     * Sugar method to creates a record for this type.
@@ -51,7 +51,7 @@ object EventBusService{
     * @param metadata the metadata
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,address: String,itf: String,metadata: io.vertx.core.json.JsonObject): Record = {
+  def createRecord(name: String, address: String, itf: String, metadata: io.vertx.core.json.JsonObject): Record = {
     Record(JEventBusService.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],itf.asInstanceOf[java.lang.String],metadata))
   }
 
@@ -65,7 +65,7 @@ object EventBusService{
     * @param clientClass the client class
     * @return `null` - do not use
     */
-  def getServiceProxy[T: TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]): T = {
+  def getServiceProxy[T: TypeTag](discovery: ServiceDiscovery, filter: Record => Boolean, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {
     toScala[T](JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
   }
 
@@ -79,7 +79,7 @@ object EventBusService{
     * @param clientClass the client class
     * @return `null` - do not use
     */
-  def getServiceProxyWithJsonFilter[T: TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],resultHandler: Handler[AsyncResult[T]]): T = {
+  def getServiceProxyWithJsonFilter[T: TypeTag](discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {
     toScala[T](JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,toJavaClass(clientClass),{x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
   }
 
@@ -90,7 +90,7 @@ object EventBusService{
     * @param classname the payload class
     * @return the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,address: String,classname: String): Record = {
+  def createRecord(name: String, address: String, classname: String): Record = {
     Record(JEventBusService.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],classname.asInstanceOf[java.lang.String]))
   }
 

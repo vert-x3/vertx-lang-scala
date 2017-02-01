@@ -53,6 +53,6 @@ class SendContext[T: TypeTag](private val _asJava: Object) {
 
 }
 
-object SendContext{
+object SendContext {
   def apply[T: TypeTag](asJava: JSendContext[_]) = new SendContext[T](asJava)  
 }

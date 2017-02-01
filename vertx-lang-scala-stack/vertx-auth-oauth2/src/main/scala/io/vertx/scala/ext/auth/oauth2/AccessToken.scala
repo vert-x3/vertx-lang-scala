@@ -48,7 +48,7 @@ class AccessToken(private val _asJava: Object)
     * Revoke access or refresh token
     * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
     */
-  def revoke(token_type: String,callback: Handler[AsyncResult[Unit]]): AccessToken = {
+  def revoke(token_type: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
@@ -121,6 +121,6 @@ class AccessToken(private val _asJava: Object)
 
 }
 
-object AccessToken{
+object AccessToken {
   def apply(asJava: JAccessToken) = new AccessToken(asJava)  
 }

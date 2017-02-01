@@ -39,7 +39,7 @@ class MongoDataSource(private val _asJava: Object) {
 
 }
 
-object MongoDataSource{
+object MongoDataSource {
   def apply(asJava: JMongoDataSource) = new MongoDataSource(asJava)  
   /**
     * Convenient method to create a record for a Mongo data source.
@@ -48,7 +48,7 @@ object MongoDataSource{
     * @param metadata additional metadata
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
-  def createRecord(name: String,location: io.vertx.core.json.JsonObject,metadata: io.vertx.core.json.JsonObject): Record = {
+  def createRecord(name: String, location: io.vertx.core.json.JsonObject, metadata: io.vertx.core.json.JsonObject): Record = {
     Record(JMongoDataSource.createRecord(name.asInstanceOf[java.lang.String],location,metadata))
   }
 
@@ -58,7 +58,7 @@ object MongoDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     */
-  def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
+  def getMongoClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 
@@ -69,7 +69,7 @@ object MongoDataSource{
     * @param discovery The service discovery instance
     * @param filter The filter
     */
-  def getMongoClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
+  def getMongoClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 
@@ -80,7 +80,7 @@ object MongoDataSource{
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
     */
-  def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
+  def getMongoClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery],filter,consumerConfiguration,{x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient,MongoClient](x, a => MongoClient(a)))})
   }
 

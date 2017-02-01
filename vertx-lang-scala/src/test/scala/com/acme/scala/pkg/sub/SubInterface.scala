@@ -33,6 +33,6 @@ class SubInterface(private val _asJava: Object) {
 
 }
 
-object SubInterface{
+object SubInterface {
   def apply(asJava: JSubInterface) = new SubInterface(asJava)  
 }

@@ -61,7 +61,7 @@ class BasicAuthHandler(private val _asJava: Object)
 
 }
 
-object BasicAuthHandler{
+object BasicAuthHandler {
   def apply(asJava: JBasicAuthHandler) = new BasicAuthHandler(asJava)  
   /**
     * Create a basic auth handler
@@ -78,7 +78,7 @@ object BasicAuthHandler{
     * @param realm the realm to use
     * @return the auth handler
     */
-  def create(authProvider: AuthProvider,realm: String): AuthHandler = {
+  def create(authProvider: AuthProvider, realm: String): AuthHandler = {
     AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
   }
 

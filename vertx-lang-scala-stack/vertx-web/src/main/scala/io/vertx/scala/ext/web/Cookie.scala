@@ -154,7 +154,7 @@ class Cookie(private val _asJava: Object) {
 
 }
 
-object Cookie{
+object Cookie {
   def apply(asJava: JCookie) = new Cookie(asJava)  
   /**
     * Create a new cookie
@@ -162,7 +162,7 @@ object Cookie{
     * @param value the cookie value
     * @return the cookie
     */
-  def cookie(name: String,value: String): Cookie = {
+  def cookie(name: String, value: String): Cookie = {
     Cookie(JCookie.cookie(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String]))
   }
 

@@ -96,7 +96,7 @@ class ShellService(private val _asJava: Object) {
 
 }
 
-object ShellService{
+object ShellService {
   def apply(asJava: JShellService) = new ShellService(asJava)  
   /**
     * Like [[io.vertx.scala.ext.shell.ShellService#create]], with default options.
@@ -111,7 +111,7 @@ object ShellService{
     * @param options the service config optionssee <a href="../../../../../../../cheatsheet/ShellServiceOptions.html">ShellServiceOptions</a>
     * @return the shell service
     */
-  def create(vertx: Vertx,options: ShellServiceOptions): ShellService = {
+  def create(vertx: Vertx, options: ShellServiceOptions): ShellService = {
     ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
   }
 

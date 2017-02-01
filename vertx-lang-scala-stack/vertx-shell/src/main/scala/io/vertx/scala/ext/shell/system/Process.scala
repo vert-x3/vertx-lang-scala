@@ -186,7 +186,7 @@ class Process(private val _asJava: Object) {
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(foregraound: Boolean,completionHandler: Handler[Unit]): Unit = {
+  def run(foregraound: Boolean, completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
   }
 
@@ -203,7 +203,7 @@ class Process(private val _asJava: Object) {
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(foreground: Boolean,completionHandler: Handler[Unit]): Unit = {
+  def resume(foreground: Boolean, completionHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
   }
 
@@ -241,6 +241,6 @@ class Process(private val _asJava: Object) {
 
 }
 
-object Process{
+object Process {
   def apply(asJava: JProcess) = new Process(asJava)  
 }

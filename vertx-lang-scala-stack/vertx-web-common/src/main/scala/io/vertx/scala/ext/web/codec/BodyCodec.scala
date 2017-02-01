@@ -34,7 +34,7 @@ class BodyCodec[T: TypeTag](private val _asJava: Object) {
 
 }
 
-object BodyCodec{
+object BodyCodec {
   def apply[T: TypeTag](asJava: JBodyCodec[_]) = new BodyCodec[T](asJava)  
   /**
     * @return the UTF-8 string codec

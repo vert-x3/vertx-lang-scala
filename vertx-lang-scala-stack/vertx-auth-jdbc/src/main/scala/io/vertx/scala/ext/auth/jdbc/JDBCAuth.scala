@@ -21,6 +21,8 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.jdbc.JDBCClient
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
@@ -74,17 +76,39 @@ class JDBCAuth(private val _asJava: Object)
     JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
   }
 
+  /**
+    * Compute the hashed password given the unhashed password and the salt
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @param password the unhashed password
+    * @param salt the salt
+    * @return the hashed password
+    */
+  def computeHash(password: String, salt: String): String = {
+    asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String],salt.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+    * Compute a salt string.
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @return a non null salt value
+    */
+  def generateSalt(): String = {
+    asJava.asInstanceOf[JJDBCAuth].generateSalt().asInstanceOf[String]
+  }
+
 }
 
-object JDBCAuth{
+object JDBCAuth {
   def apply(asJava: JJDBCAuth) = new JDBCAuth(asJava)  
   /**
     * Create a JDBC auth provider implementation
     * @param client the JDBC client instance
     * @return the auth provider
     */
-  def create(client: JDBCClient): JDBCAuth = {
-    JDBCAuth(JJDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
+  def create(vertx: Vertx, client: JDBCClient): JDBCAuth = {
+    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx],client.asJava.asInstanceOf[JJDBCClient]))
   }
 
 }

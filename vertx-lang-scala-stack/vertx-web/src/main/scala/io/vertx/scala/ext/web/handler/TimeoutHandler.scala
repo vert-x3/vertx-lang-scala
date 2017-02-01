@@ -39,7 +39,7 @@ class TimeoutHandler(private val _asJava: Object)
 
 }
 
-object TimeoutHandler{
+object TimeoutHandler {
   def apply(asJava: JTimeoutHandler) = new TimeoutHandler(asJava)  
   /**
     * Create a handler
@@ -63,7 +63,7 @@ object TimeoutHandler{
     * @param timeout the timeout, in ms
     * @return the handler
     */
-  def create(timeout: Long,errorCode: Int): TimeoutHandler = {
+  def create(timeout: Long, errorCode: Int): TimeoutHandler = {
     TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
   }
 
