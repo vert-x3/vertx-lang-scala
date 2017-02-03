@@ -67,7 +67,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send[T: TypeTag](address: String, message: AnyRef, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
     this
   }
 
@@ -92,7 +92,7 @@ class EventBus(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
     this
   }
 

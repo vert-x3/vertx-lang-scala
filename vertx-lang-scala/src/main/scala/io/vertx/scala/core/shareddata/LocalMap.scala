@@ -30,7 +30,7 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
   */
-class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
+class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -40,7 +40,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return the value, or null if none
     */
   def get(key: K): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].get(toJava[K](key)))
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].get(toJava[K](key)))
   }
 
   /**
@@ -50,7 +50,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return return the old value, or null if none
     */
   def put(key: K, value: V): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].put(toJava[K](key), toJava[V](value)))
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].put(toJava[K](key), toJava[V](value)))
   }
 
   /**
@@ -59,14 +59,14 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return the old value
     */
   def remove(key: K): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].remove(toJava[K](key)))
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].remove(toJava[K](key)))
   }
 
   /**
     * Clear all entries in the map
     */
   def clear(): Unit = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].clear()
+    asJava.asInstanceOf[JLocalMap[Object, Object]].clear()
   }
 
   /**
@@ -74,14 +74,14 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return the number of entries in the map
     */
   def size(): Int = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].size().asInstanceOf[Int]
+    asJava.asInstanceOf[JLocalMap[Object, Object]].size().asInstanceOf[Int]
   }
 
   /**
     * @return true if there are zero entries in the map
     */
   def isEmpty(): Boolean = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].isEmpty().asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object, Object]].isEmpty().asInstanceOf[Boolean]
   }
 
   /**
@@ -91,7 +91,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return the old value or null, if none
     */
   def putIfAbsent(key: K, value: V): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].putIfAbsent(toJava[K](key), toJava[V](value)))
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].putIfAbsent(toJava[K](key), toJava[V](value)))
   }
 
   /**
@@ -101,7 +101,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return true if removed
     */
   def removeIfPresent(key: K, value: V): Boolean = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].removeIfPresent(toJava[K](key), toJava[V](value)).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object, Object]].removeIfPresent(toJava[K](key), toJava[V](value)).asInstanceOf[Boolean]
   }
 
   /**
@@ -112,7 +112,7 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return true if removed
     */
   def replaceIfPresent(key: K, oldValue: V, newValue: V): Boolean = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].replaceIfPresent(toJava[K](key), toJava[V](oldValue), toJava[V](newValue)).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JLocalMap[Object, Object]].replaceIfPresent(toJava[K](key), toJava[V](oldValue), toJava[V](newValue)).asInstanceOf[Boolean]
   }
 
   /**
@@ -122,18 +122,18 @@ class LocalMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @return the old value
     */
   def replace(key: K, value: V): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object,Object]].replace(toJava[K](key), toJava[V](value)))
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].replace(toJava[K](key), toJava[V](value)))
   }
 
   /**
     * Close and release the map
     */
   def close(): Unit = {
-    asJava.asInstanceOf[JLocalMap[Object,Object]].close()
+    asJava.asInstanceOf[JLocalMap[Object, Object]].close()
   }
 
 }
 
 object LocalMap {
-  def apply[K: TypeTag,V: TypeTag](asJava: JLocalMap[_,_]) = new LocalMap[K,V](asJava)  
+  def apply[K: TypeTag, V: TypeTag](asJava: JLocalMap[_, _]) = new LocalMap[K, V](asJava)  
 }

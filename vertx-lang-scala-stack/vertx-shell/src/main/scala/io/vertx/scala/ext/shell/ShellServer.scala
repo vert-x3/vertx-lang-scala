@@ -81,7 +81,7 @@ class ShellServer(private val _asJava: Object) {
     * Start the shell service, this is an asynchronous start.
     */
   def listen(listenHandler: Handler[AsyncResult[Unit]]): ShellServer = {
-    asJava.asInstanceOf[JShellServer].listen({x: AsyncResult[Void] => listenHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JShellServer].listen({x: AsyncResult[Void] => listenHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -113,7 +113,7 @@ class ShellServer(private val _asJava: Object) {
     * Close the shell server, this is an asynchronous close.
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JShellServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JShellServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

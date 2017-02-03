@@ -188,7 +188,7 @@ class StompServerHandler(private val _asJava: Object)
     * @return the current StompServerHandler
     */
   def onAuthenticationRequest(server: StompServer, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 

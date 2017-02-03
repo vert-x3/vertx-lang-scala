@@ -72,7 +72,7 @@
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toScalaType(type.args[0], false) + ' => ' + name + '.handle(' + toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      return 'AsyncResultWrapper[' + toJavaType(type.args[0], true) + ',' + toScalaType(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      return 'AsyncResultWrapper[' + toJavaType(type.args[0], true) + ', ' + toScalaType(type.args[0], false) + '](x, a => ' + toScalaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
         var conversion = '.asScala';
@@ -275,7 +275,7 @@
     } else if (type.kind == CLASS_HANDLER) {
       return '{x: ' + toJavaType(type.args[0], true) + ' => ' + name + '.handle(' + toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) + ')}';
     } else if (type.kind == CLASS_ASYNC_RESULT) {
-      var ret = 'AsyncResultWrapper[' + toScalaType(type.args[0], false) + ',' + toJavaType(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
+      var ret = 'AsyncResultWrapper[' + toScalaType(type.args[0], false) + ', ' + toJavaType(type.args[0], true) + '](x, a => ' + toJavaWithConversion('a', type.args[0], typeParams, methodTypeParams) + ')';
       if (nullable) {
         ret = name + '.map(' + name +' => ' + ret + ').orNull';
       }
@@ -360,7 +360,7 @@
         var args = '';
         for (arg : type.raw.params) {
           if (args != '') {
-            args += ',';
+            args += ', ';
           }
           args += 'Object';
         }
@@ -467,7 +467,7 @@
       var ret = '';
       for (param:typeParams){
         if (ret != '') {
-          ret += ',';
+          ret += ', ';
         }
         ret += param.name;
         if (withTypeParams && param.name.length == 1) {
@@ -485,7 +485,7 @@
       var ret = '';
       for (param:typeParams){
         if (ret != ''){
-          ret += ',';
+          ret += ', ';
         }
         ret += '_';
       }

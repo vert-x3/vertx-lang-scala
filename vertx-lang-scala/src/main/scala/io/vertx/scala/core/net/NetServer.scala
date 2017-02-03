@@ -53,7 +53,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen({x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen({x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
     this
   }
 
@@ -80,7 +80,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
     this
   }
 
@@ -104,7 +104,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
     this
   }
 
@@ -148,7 +148,7 @@ class NetServer(private val _asJava: Object)
     * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**

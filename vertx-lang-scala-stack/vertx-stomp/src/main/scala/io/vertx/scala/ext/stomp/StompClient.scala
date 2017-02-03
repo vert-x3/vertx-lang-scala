@@ -45,7 +45,7 @@ class StompClient(private val _asJava: Object) {
     * @return the current StompClient
     */
   def connect(port: Int, host: String, resultHandler: Handler[AsyncResult[StompClientConnection]]): StompClient = {
-    asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection,StompClientConnection](x, a => StompClientConnection(a)))})
+    asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection, StompClientConnection](x, a => StompClientConnection(a)))})
     this
   }
 
@@ -55,7 +55,7 @@ class StompClient(private val _asJava: Object) {
     * @return the current StompClient
     */
   def connect(net: NetClient, resultHandler: Handler[AsyncResult[StompClientConnection]]): StompClient = {
-    asJava.asInstanceOf[JStompClient].connect(net.asJava.asInstanceOf[JNetClient], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection,StompClientConnection](x, a => StompClientConnection(a)))})
+    asJava.asInstanceOf[JStompClient].connect(net.asJava.asInstanceOf[JNetClient], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection, StompClientConnection](x, a => StompClientConnection(a)))})
     this
   }
 
@@ -67,7 +67,7 @@ class StompClient(private val _asJava: Object) {
     * @return the current StompClient
     */
   def connect(port: Int, host: String, net: NetClient, resultHandler: Handler[AsyncResult[StompClientConnection]]): StompClient = {
-    asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], net.asJava.asInstanceOf[JNetClient], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection,StompClientConnection](x, a => StompClientConnection(a)))})
+    asJava.asInstanceOf[JStompClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], net.asJava.asInstanceOf[JNetClient], {x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection, StompClientConnection](x, a => StompClientConnection(a)))})
     this
   }
 
@@ -76,7 +76,7 @@ class StompClient(private val _asJava: Object) {
     * @return the current StompClient
     */
   def connect(resultHandler: Handler[AsyncResult[StompClientConnection]]): StompClient = {
-    asJava.asInstanceOf[JStompClient].connect({x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection,StompClientConnection](x, a => StompClientConnection(a)))})
+    asJava.asInstanceOf[JStompClient].connect({x: AsyncResult[JStompClientConnection] => resultHandler.handle(AsyncResultWrapper[JStompClientConnection, StompClientConnection](x, a => StompClientConnection(a)))})
     this
   }
 

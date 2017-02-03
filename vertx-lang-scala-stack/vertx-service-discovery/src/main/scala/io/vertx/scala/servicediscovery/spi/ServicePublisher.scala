@@ -38,7 +38,7 @@ class ServicePublisher(private val _asJava: Object) {
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
   def publish(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord,Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
   }
 
   /**
@@ -46,7 +46,7 @@ class ServicePublisher(private val _asJava: Object) {
     * @param id the registration id
     */
   def unpublish(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

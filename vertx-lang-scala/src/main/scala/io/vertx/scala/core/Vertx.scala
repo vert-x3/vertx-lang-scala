@@ -324,7 +324,7 @@ class Vertx(private val _asJava: Object)
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -349,7 +349,7 @@ class Vertx(private val _asJava: Object)
     * @param name The identifier
     */
   def deployVerticle(name: String, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
   }
 
   /**
@@ -369,7 +369,7 @@ class Vertx(private val _asJava: Object)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     */
   def deployVerticle(name: String, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
   }
 
   /**
@@ -387,7 +387,7 @@ class Vertx(private val _asJava: Object)
     * @param deploymentID the deployment ID
     */
   def undeploy(deploymentID: String, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -537,7 +537,7 @@ object Vertx {
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
     */
   def clusteredVertx(options: VertxOptions, resultHandler: Handler[AsyncResult[Vertx]]): Unit = {
-    JVertx.clusteredVertx(options.asJava, {x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
+    JVertx.clusteredVertx(options.asJava, {x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))})
   }
 
   /**

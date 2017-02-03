@@ -46,7 +46,7 @@ class AsyncSQLClient(private val _asJava: Object) {
     * Call the handler when close is complete.
     */
   def close(whenDone: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncSQLClient].close({x: AsyncResult[Void] => whenDone.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncSQLClient].close({x: AsyncResult[Void] => whenDone.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -54,7 +54,7 @@ class AsyncSQLClient(private val _asJava: Object) {
     * connection when you are done, so it is returned to the pool.
     */
   def getConnection(handler: Handler[AsyncResult[SQLConnection]]): Unit = {
-    asJava.asInstanceOf[JAsyncSQLClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection,SQLConnection](x, a => SQLConnection(a)))})
+    asJava.asInstanceOf[JAsyncSQLClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection, SQLConnection](x, a => SQLConnection(a)))})
   }
 
  /**

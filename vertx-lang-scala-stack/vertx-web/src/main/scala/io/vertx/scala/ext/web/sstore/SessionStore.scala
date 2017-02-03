@@ -67,7 +67,7 @@ class SessionStore(private val _asJava: Object) {
     * @param id the unique ID of the session
     */
   def get(id: String, resultHandler: Handler[AsyncResult[Session]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession,Session](x, a => Session(a)))})
+    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
   }
 
   /**
@@ -75,7 +75,7 @@ class SessionStore(private val _asJava: Object) {
     * @param id the unique ID of the session
     */
   def delete(id: String, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
@@ -83,21 +83,21 @@ class SessionStore(private val _asJava: Object) {
     * @param session the session
     */
   def put(session: Session, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
     * Remove all sessions from the store
     */
   def clear(resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
     * Get the number of sessions in the store
     */
   def size(resultHandler: Handler[AsyncResult[Int]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
   }
 
   /**

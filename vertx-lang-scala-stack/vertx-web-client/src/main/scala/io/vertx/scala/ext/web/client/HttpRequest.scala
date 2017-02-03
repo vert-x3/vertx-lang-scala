@@ -195,7 +195,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -203,7 +203,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendBuffer(body: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -212,7 +212,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendJsonObject(body: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -221,7 +221,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendJson(body: AnyRef, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -232,14 +232,14 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendForm(body: MultiMap, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
     * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
     */
   def send(handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].send({x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].send({x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
  /**

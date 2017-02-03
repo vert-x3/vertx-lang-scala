@@ -40,7 +40,7 @@ class AccessToken(private val _asJava: Object)
     * Refresh the access token
     */
   def refresh(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -49,7 +49,7 @@ class AccessToken(private val _asJava: Object)
     * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
     */
   def revoke(token_type: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -58,7 +58,7 @@ class AccessToken(private val _asJava: Object)
     * available on all providers.
     */
   def logout(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -66,7 +66,7 @@ class AccessToken(private val _asJava: Object)
     * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
     */
   def introspect(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 

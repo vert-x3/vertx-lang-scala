@@ -53,7 +53,7 @@ class AuthProvider(private val _asJava: Object) {
     * @param authInfo The auth information
     */
   def authenticate(authInfo: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[User]]): Unit = {
-    asJava.asInstanceOf[JAuthProvider].authenticate(authInfo, {x: AsyncResult[JUser] => resultHandler.handle(AsyncResultWrapper[JUser,User](x, a => User(a)))})
+    asJava.asInstanceOf[JAuthProvider].authenticate(authInfo, {x: AsyncResult[JUser] => resultHandler.handle(AsyncResultWrapper[JUser, User](x, a => User(a)))})
   }
 
  /**
