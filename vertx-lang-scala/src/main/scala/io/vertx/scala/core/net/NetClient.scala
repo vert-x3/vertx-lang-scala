@@ -73,13 +73,8 @@ class NetClient(private val _asJava: Object)
   }
 
  /**
-   * Open a connection to a server at the specific `port` and `host`.
-   * 
-   * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
-   * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
-   * @param port the port
-   * @param host the host
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def connectFuture(port: Int, host: String): scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)

@@ -185,6 +185,7 @@ class StompServerHandler(private val _asJava: Object)
     * @param server the STOMP server.
     * @param login the login
     * @param passcode the password
+    * @param handler handler receiving the authentication result
     * @return the current StompServerHandler
     */
   def onAuthenticationRequest(server: StompServer, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
@@ -324,12 +325,7 @@ class StompServerHandler(private val _asJava: Object)
   }
 
  /**
-   * Called when the client connects to a server requiring authentication. It invokes the  configured
-   * using [[io.vertx.scala.ext.stomp.StompServerHandler#authProvider]].
-   * @param server the STOMP server.
-   * @param login the login
-   * @param passcode the password
-   * @return future receiving the authentication result
+   * Like [[onAuthenticationRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def onAuthenticationRequestFuture(server: StompServer, login: String, passcode: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])

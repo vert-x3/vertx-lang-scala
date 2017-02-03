@@ -12,54 +12,36 @@
 
       doc += indentation;
       doc += "/**\n";
-      doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
-      if (future) {
-        doc = doc.replace("scala-function", "[[scala.concurrent.Future]]")
-      }
-      var futureDescription = '';
-      var returnsFuture = !lastParamIsAsyncResultHandler(method.params);
-      for (param : method.params) {
-        if (param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
-          doc += commentedIndentation;
-          doc += " @param " + param.name + " ";
-          doc += convertLink(param.description);
-          if (param.type.kind == CLASS_DATA_OBJECT) {
-            doc += "see " + renderDataObjectHtmlLink(param.type);
-          }
-          doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
-          doc += "\n";
-        } else {
-          futureDescription = param.description;
-        }
-      }
-      if (future) {
-        if (futureDescription != null) {
-          doc += commentedIndentation;
-          doc += " @return " + convertLink(futureDescription)
-            .replace('the scala-function to notify with the [[io.vertx.lang.scala.AsyncResult]].', 'the [[scala.concurrent.Future]] being completed with result.')
-            .replace("scala-function", "[[scala.concurrent.Future]]")
-            .replace("to notify", "to complete")
-            .replace(', may be `null`','')
-            .replace('handler', 'future')
-            .replace('{@code ','`')
-            .replace('@literal{','`')
-            .replace('@code{','`')
-            .replace('}','`');
-          doc += "\n";
-        } else {
-          doc += "WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER";
-        }
-      } else if (!returnType.name.equals("void")) {
-        if (returnDescription != null) {
-          doc += commentedIndentation;
-          doc += " @return ";
-          doc += convertLink(returnDescription);
 
-          if (returnType.kind == CLASS_DATA_OBJECT) {
-            doc += "see " + renderDataObjectHtmlLink(returnType);
+      if (future) {
+        doc += commentedIndentation;
+        doc += " Like [[" + method.name + "]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.\n"
+      } else {
+        doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
+        for (param : method.params) {
+          if (param.description != null) {
+            doc += commentedIndentation;
+            doc += " @param " + param.name + " ";
+            doc += convertLink(param.description);
+            if (param.type.kind == CLASS_DATA_OBJECT) {
+              doc += "see " + renderDataObjectHtmlLink(param.type);
+            }
+            doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
+            doc += "\n";
           }
-          doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
-          doc += "\n";
+        }
+        if (!returnType.name.equals("void")) {
+          if (returnDescription != null) {
+            doc += commentedIndentation;
+            doc += " @return ";
+            doc += convertLink(returnDescription);
+
+            if (returnType.kind == CLASS_DATA_OBJECT) {
+              doc += "see " + renderDataObjectHtmlLink(returnType);
+            }
+            doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
+            doc += "\n";
+          }
         }
       }
       doc += commentedIndentation;

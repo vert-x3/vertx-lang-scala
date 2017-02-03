@@ -195,6 +195,7 @@ class HttpConnection(private val _asJava: Object) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
+    * @param completionHandler the handler notified when the settings have been acknowledged by the remote endpoint
     * @return a reference to this, so the API can be used fluently
     */
   def updateSettings(settings: Http2Settings, completionHandler: Handler[AsyncResult[Unit]]): HttpConnection = {
@@ -219,6 +220,7 @@ class HttpConnection(private val _asJava: Object) {
     * <p/>
     * This is not implemented for HTTP/1.x.
     * @param data the 8 bytes data of the frame
+    * @param pongHandler an async result handler notified with pong reply or the failure
     * @return a reference to this, so the API can be used fluently
     */
   def ping(data: io.vertx.core.buffer.Buffer, pongHandler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): HttpConnection = {
@@ -279,13 +281,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
  /**
-   * Send to the remote endpoint an update of this endpoint settings
-   * <p/>
-   * The `completionHandler` will be notified when the remote endpoint has acknowledged the settings.
-   * <p/>
-   * This is not implemented for HTTP/1.x.
-   * @param settings the new settingssee <a href="../../../../../../../cheatsheet/Http2Settings.html">Http2Settings</a>
-   * @return the future notified when the settings have been acknowledged by the remote endpoint
+   * Like [[updateSettings]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def updateSettingsFuture(settings: Http2Settings): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -294,11 +290,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
  /**
-   * Send a  frame to the remote endpoint.
-   * <p/>
-   * This is not implemented for HTTP/1.x.
-   * @param data the 8 bytes data of the frame
-   * @return an async result future notified with pong reply or the failure
+   * Like [[ping]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def pingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)

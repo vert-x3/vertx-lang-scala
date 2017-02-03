@@ -172,6 +172,7 @@ class NetSocket(private val _asJava: Object)
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
+    * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
@@ -184,6 +185,7 @@ class NetSocket(private val _asJava: Object)
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
+    * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
@@ -197,6 +199,7 @@ class NetSocket(private val _asJava: Object)
     * @param filename file name of the file to send
     * @param offset offset
     * @param length length
+    * @param resultHandler handler
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
@@ -274,10 +277,7 @@ class NetSocket(private val _asJava: Object)
   }
 
  /**
-   * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
-   * a failure has occurred
-   * @param filename file name of the file to send
-   * @return future
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendFileFuture(filename: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -286,11 +286,7 @@ class NetSocket(private val _asJava: Object)
   }
 
  /**
-   * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
-   * a failure has occurred
-   * @param filename file name of the file to send
-   * @param offset offset
-   * @return future
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendFileFuture(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -299,12 +295,7 @@ class NetSocket(private val _asJava: Object)
   }
 
  /**
-   * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
-   * a failure has occurred
-   * @param filename file name of the file to send
-   * @param offset offset
-   * @param length length
-   * @return future
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendFileFuture(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

@@ -65,6 +65,7 @@ class SessionStore(private val _asJava: Object) {
   /**
     * Get the session with the specified ID
     * @param id the unique ID of the session
+    * @param resultHandler will be called with a result holding the session, or a failure
     */
   def get(id: String, resultHandler: Handler[AsyncResult[Session]]): Unit = {
     asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
@@ -73,6 +74,7 @@ class SessionStore(private val _asJava: Object) {
   /**
     * Delete the session with the specified ID
     * @param id the unique ID of the session
+    * @param resultHandler will be called with a result true/false, or a failure
     */
   def delete(id: String, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -81,6 +83,7 @@ class SessionStore(private val _asJava: Object) {
   /**
     * Add a session with the specified ID
     * @param session the session
+    * @param resultHandler will be called with a result true/false, or a failure
     */
   def put(session: Session, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -88,6 +91,7 @@ class SessionStore(private val _asJava: Object) {
 
   /**
     * Remove all sessions from the store
+    * @param resultHandler will be called with a result true/false, or a failure
     */
   def clear(resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -95,6 +99,7 @@ class SessionStore(private val _asJava: Object) {
 
   /**
     * Get the number of sessions in the store
+    * @param resultHandler will be called with the number, or a failure
     */
   def size(resultHandler: Handler[AsyncResult[Int]]): Unit = {
     asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
@@ -108,9 +113,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
  /**
-   * Get the session with the specified ID
-   * @param id the unique ID of the session
-   * @return will be called with a result holding the session, or a failure
+   * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getFuture(id: String): scala.concurrent.Future[Session] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, Session](x => Session(x))
@@ -119,9 +122,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
  /**
-   * Delete the session with the specified ID
-   * @param id the unique ID of the session
-   * @return will be called with a result true/false, or a failure
+   * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def deleteFuture(id: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
@@ -130,9 +131,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
  /**
-   * Add a session with the specified ID
-   * @param session the session
-   * @return will be called with a result true/false, or a failure
+   * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def putFuture(session: Session): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
@@ -141,8 +140,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
  /**
-   * Remove all sessions from the store
-   * @return will be called with a result true/false, or a failure
+   * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def clearFuture(): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
@@ -151,8 +149,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
  /**
-   * Get the number of sessions in the store
-   * @return will be called with the number, or a failure
+   * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sizeFuture(): scala.concurrent.Future[Int] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])

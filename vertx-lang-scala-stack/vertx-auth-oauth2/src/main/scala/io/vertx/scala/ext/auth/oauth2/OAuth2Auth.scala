@@ -47,6 +47,7 @@ class OAuth2Auth(private val _asJava: Object)
     * @param method HttpMethod
     * @param path target path
     * @param params parameters
+    * @param handler handler
     * @return self
     */
   def api(method: io.vertx.core.http.HttpMethod, path: String, params: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): OAuth2Auth = {
@@ -57,6 +58,7 @@ class OAuth2Auth(private val _asJava: Object)
   /**
     * Decode a token to a [[io.vertx.scala.ext.auth.oauth2.AccessToken]] object. This is useful to handle bearer JWT tokens.
     * @param token the access token (base64 string)
+    * @param handler A handler to receive the event
     * @return self
     */
   def decodeToken(token: String, handler: Handler[AsyncResult[AccessToken]]): OAuth2Auth = {
@@ -68,6 +70,7 @@ class OAuth2Auth(private val _asJava: Object)
     * Query an OAuth 2.0 authorization server to determine the active state of an OAuth 2.0 token and to determine
     * meta-information about this token.
     * @param token the access token (base64 string)
+    * @param handler A handler to receive the event
     * @return self
     */
   def introspectToken(token: String, handler: Handler[AsyncResult[AccessToken]]): OAuth2Auth = {
@@ -80,6 +83,7 @@ class OAuth2Auth(private val _asJava: Object)
     * meta-information about this token.
     * @param token the access token (base64 string)
     * @param tokenType hint to the token type e.g.: `access_token`
+    * @param handler A handler to receive the event
     * @return self
     */
   def introspectToken(token: String, tokenType: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): OAuth2Auth = {
@@ -97,6 +101,7 @@ class OAuth2Auth(private val _asJava: Object)
   /**
     * Returns the Access Token object.
     * @param params - JSON with the options, each flow requires different options.
+    * @param handler - The handler returning the results.
     */
   def getToken(params: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[AccessToken]]): Unit = {
     asJava.asInstanceOf[JOAuth2Auth].getToken(params, {x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))})
@@ -129,9 +134,7 @@ class OAuth2Auth(private val _asJava: Object)
   }
 
  /**
-   * Returns the Access Token object.
-   * @param params - JSON with the options, each flow requires different options.
-   * @return - The future returning the results.
+   * Like [[getToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getTokenFuture(params: io.vertx.core.json.JsonObject): scala.concurrent.Future[AccessToken] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAccessToken, AccessToken](x => AccessToken(x))
@@ -140,11 +143,7 @@ class OAuth2Auth(private val _asJava: Object)
   }
 
  /**
-   * Call OAuth2 APIs.
-   * @param method HttpMethod
-   * @param path target path
-   * @param params parameters
-   * @return future
+   * Like [[api]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def apiFuture(method: io.vertx.core.http.HttpMethod, path: String, params: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
@@ -153,9 +152,7 @@ class OAuth2Auth(private val _asJava: Object)
   }
 
  /**
-   * Decode a token to a [[io.vertx.scala.ext.auth.oauth2.AccessToken]] object. This is useful to handle bearer JWT tokens.
-   * @param token the access token (base64 string)
-   * @return A future to receive the event
+   * Like [[decodeToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def decodeTokenFuture(token: String): scala.concurrent.Future[AccessToken] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAccessToken, AccessToken](x => AccessToken(x))
@@ -164,10 +161,7 @@ class OAuth2Auth(private val _asJava: Object)
   }
 
  /**
-   * Query an OAuth 2.0 authorization server to determine the active state of an OAuth 2.0 token and to determine
-   * meta-information about this token.
-   * @param token the access token (base64 string)
-   * @return A future to receive the event
+   * Like [[introspectToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def introspectTokenFuture(token: String): scala.concurrent.Future[AccessToken] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAccessToken, AccessToken](x => AccessToken(x))
@@ -176,11 +170,7 @@ class OAuth2Auth(private val _asJava: Object)
   }
 
  /**
-   * Query an OAuth 2.0 authorization server to determine the active state of an OAuth 2.0 token and to determine
-   * meta-information about this token.
-   * @param token the access token (base64 string)
-   * @param tokenType hint to the token type e.g.: `access_token`
-   * @return A future to receive the event
+   * Like [[introspectToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def introspectTokenFuture(token: String, tokenType: String): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)

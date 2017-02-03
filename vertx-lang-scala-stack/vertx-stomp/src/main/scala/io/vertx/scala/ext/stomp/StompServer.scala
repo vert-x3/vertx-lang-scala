@@ -84,6 +84,7 @@ class StompServer(private val _asJava: Object) {
   /**
     * Connects the STOMP server default port (61613) and network interface (`0.0.0.0`). Once the socket
     * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
+    * @param handler the handler to call with the result
     * @return the current StompServer
     */
   def listen(handler: Handler[AsyncResult[StompServer]]): StompServer = {
@@ -95,6 +96,7 @@ class StompServer(private val _asJava: Object) {
     * Connects the STOMP server to the given port. This method use the default host (`0.0.0.0`). Once the socket
     * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
     * @param port the port
+    * @param handler the handler to call with the result
     * @return the current StompServer
     */
   def listen(port: Int, handler: Handler[AsyncResult[StompServer]]): StompServer = {
@@ -107,6 +109,7 @@ class StompServer(private val _asJava: Object) {
     * the result. The result may be a failure if the socket is already used.
     * @param port the port
     * @param host the host / interface
+    * @param handler the handler to call with the result
     * @return the current StompServer
     */
   def listen(port: Int, host: String, handler: Handler[AsyncResult[StompServer]]): StompServer = {
@@ -127,6 +130,7 @@ class StompServer(private val _asJava: Object) {
 
   /**
     * Closes the server.
+    * @param completionHandler handler called once the server has been stopped
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JStompServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -188,9 +192,7 @@ class StompServer(private val _asJava: Object) {
   }
 
  /**
-   * Connects the STOMP server default port (61613) and network interface (`0.0.0.0`). Once the socket
-   * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
-   * @return the future to call with the result
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(): scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
@@ -199,10 +201,7 @@ class StompServer(private val _asJava: Object) {
   }
 
  /**
-   * Connects the STOMP server to the given port. This method use the default host (`0.0.0.0`). Once the socket
-   * it bounds calls the given handler with the result. The result may be a failure if the socket is already used.
-   * @param port the port
-   * @return the future to call with the result
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(port: Int): scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
@@ -211,11 +210,7 @@ class StompServer(private val _asJava: Object) {
   }
 
  /**
-   * Connects the STOMP server to the given port / interface. Once the socket it bounds calls the given handler with
-   * the result. The result may be a failure if the socket is already used.
-   * @param port the port
-   * @param host the host / interface
-   * @return the future to call with the result
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(port: Int, host: String): scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
@@ -224,8 +219,7 @@ class StompServer(private val _asJava: Object) {
   }
 
  /**
-   * Closes the server.
-   * @return future called once the server has been stopped
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

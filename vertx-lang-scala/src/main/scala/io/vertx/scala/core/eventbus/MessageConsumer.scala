@@ -109,6 +109,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
 
   /**
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
+    * @param completionHandler the completion handler
     */
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -123,14 +124,14 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
 
   /**
     * Unregisters the handler which created this registration
+    * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
     */
   def unregister(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**
-   * Optional method which can be called to indicate when the registration has been propagated across the cluster.
-   * @return the completion future
+   * Like [[completionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def completionFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -139,8 +140,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
   }
 
  /**
-   * Unregisters the handler which created this registration
-   * @return the future called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
+   * Like [[unregister]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def unregisterFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

@@ -41,6 +41,7 @@ class MailClient(private val _asJava: Object) {
   /**
     * send a single mail via MailClient
     * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
+    * @param resultHandler will be called when the operation is finished or it fails (may be null to ignore the result)
     * @return this MailClient instance so the method can be used fluently
     */
   def sendMail(email: MailMessage, resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
@@ -56,9 +57,7 @@ class MailClient(private val _asJava: Object) {
   }
 
  /**
-   * send a single mail via MailClient
-   * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
-   * @return will be called when the operation is finished or it fails (may be null to ignore the result)
+   * Like [[sendMail]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendMailFuture(email: MailMessage): scala.concurrent.Future[MailResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMailResult, MailResult](x => MailResult(x))

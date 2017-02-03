@@ -218,18 +218,14 @@ class MongoAuth(private val _asJava: Object)
     * @param password the passsword in clear text, will be adapted following the definitions of the defined HashStrategy
     * @param roles a list of roles to be set
     * @param permissions a list of permissions to be set
+    * @param resultHandler the ResultHandler will be provided with the id of the generated record
     */
   def insertUser(username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String], resultHandler: Handler[AsyncResult[String]]): Unit = {
     asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
   }
 
  /**
-   * Insert a new user into mongo in the convenient way
-   * @param username the username to be set
-   * @param password the passsword in clear text, will be adapted following the definitions of the defined HashStrategy
-   * @param roles a list of roles to be set
-   * @param permissions a list of permissions to be set
-   * @return the ResultHandler will be provided with the id of the generated record
+   * Like [[insertUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def insertUserFuture(username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])

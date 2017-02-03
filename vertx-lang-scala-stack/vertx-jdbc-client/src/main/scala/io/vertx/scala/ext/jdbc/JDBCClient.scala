@@ -39,6 +39,7 @@ class JDBCClient(private val _asJava: Object) {
   /**
     * Returns a connection that can be used to perform SQL operations on. It's important to remember
     * to close the connection when you are done, so it is returned to the pool.
+    * @param handler the handler which is called when the <code>JdbcConnection</code> object is ready for use.
     */
   def getConnection(handler: Handler[AsyncResult[SQLConnection]]): JDBCClient = {
     asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection, SQLConnection](x, a => SQLConnection(a)))})
@@ -53,9 +54,7 @@ class JDBCClient(private val _asJava: Object) {
   }
 
  /**
-   * Returns a connection that can be used to perform SQL operations on. It's important to remember
-   * to close the connection when you are done, so it is returned to the pool.
-   * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
+   * Like [[getConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getConnectionFuture(): scala.concurrent.Future[SQLConnection] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))

@@ -64,6 +64,7 @@ class EventBus(private val _asJava: Object)
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
   def send[T: TypeTag](address: String, message: AnyRef, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
@@ -89,6 +90,7 @@ class EventBus(private val _asJava: Object)
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
     * @return a reference to this, so the API can be used fluently
     */
   def send[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
@@ -219,11 +221,7 @@ class EventBus(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
-   * subsequently replies to the message.
-   * @param address the address to send it to
-   * @param message the message, may be `null`
-   * @return reply future will be called when any reply from the recipient is received, may be `null`
+   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendFuture[T: TypeTag](address: String, message: AnyRef): scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
@@ -232,12 +230,7 @@ class EventBus(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
-   * subsequently replies to the message.
-   * @param address the address to send it to
-   * @param message the message, may be `null`
-   * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   * @return reply future will be called when any reply from the recipient is received, may be `null`
+   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sendFuture[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))

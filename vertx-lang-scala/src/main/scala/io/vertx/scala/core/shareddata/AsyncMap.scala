@@ -35,6 +35,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   /**
     * Get a value from the map, asynchronously.
     * @param k the key
+    * @param resultHandler - this will be called some time later with the async result.
     */
   def get(k: K, resultHandler: Handler[AsyncResult[V]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].get(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
@@ -44,6 +45,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * Put a value in the map, asynchronously.
     * @param k the key
     * @param v the value
+    * @param completionHandler - this will be called some time later to signify the value has been put
     */
   def put(k: K, v: V, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -55,6 +57,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry
+    * @param completionHandler the handler
     */
   def put(k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -65,6 +68,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * value will be returned to the handler, otherwise null.
     * @param k the key
     * @param v the value
+    * @param completionHandler the handler
     */
   def putIfAbsent(k: K, v: V, completionHandler: Handler[AsyncResult[V]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
@@ -76,6 +80,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * @param k the key
     * @param v the value
     * @param ttl The time to live (in ms) for the entry
+    * @param completionHandler the handler
     */
   def putIfAbsent(k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[V]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
@@ -84,6 +89,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   /**
     * Remove a value from the map, asynchronously.
     * @param k the key
+    * @param resultHandler - this will be called some time later to signify the value has been removed
     */
   def remove(k: K, resultHandler: Handler[AsyncResult[V]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].remove(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
@@ -93,6 +99,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * Remove a value from the map, only if entry already exists with same value.
     * @param k the key
     * @param v the value
+    * @param resultHandler - this will be called some time later to signify the value has been removed
     */
   def removeIfPresent(k: K, v: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].removeIfPresent(toJava[K](k), toJava[V](v), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -102,6 +109,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * Replace the entry only if it is currently mapped to some value
     * @param k the key
     * @param v the new value
+    * @param resultHandler the result handler will be passed the previous value
     */
   def replace(k: K, v: V, resultHandler: Handler[AsyncResult[V]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].replace(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
@@ -112,6 +120,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * @param k the key
     * @param oldValue the existing value
     * @param newValue the new value
+    * @param resultHandler the result handler
     */
   def replaceIfPresent(k: K, oldValue: V, newValue: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
@@ -119,6 +128,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   /**
     * Clear all entries in the map
+    * @param resultHandler called on completion
     */
   def clear(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -126,15 +136,14 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   /**
     * Provide the number of entries in the map
+    * @param resultHandler handler which will receive the number of entries
     */
   def size(resultHandler: Handler[AsyncResult[Int]]): Unit = {
     asJava.asInstanceOf[JAsyncMap[Object, Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
   }
 
  /**
-   * Get a value from the map, asynchronously.
-   * @param k the key
-   * @return - this will be called some time later with the async result.
+   * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getFuture(k: K): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
@@ -143,10 +152,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Put a value in the map, asynchronously.
-   * @param k the key
-   * @param v the value
-   * @return - this will be called some time later to signify the value has been put
+   * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def putFuture(k: K, v: V): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -155,12 +161,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Like [[io.vertx.scala.core.shareddata.AsyncMap#putFuture]] but specifying a time to live for the entry. Entry will expire and get evicted after the
-   * ttl.
-   * @param k the key
-   * @param v the value
-   * @param ttl The time to live (in ms) for the entry
-   * @return the future
+   * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def putFuture(k: K, v: V, ttl: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -169,11 +170,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Put the entry only if there is no entry with the key already present. If key already present then the existing
-   * value will be returned to the handler, otherwise null.
-   * @param k the key
-   * @param v the value
-   * @return the future
+   * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def putIfAbsentFuture(k: K, v: V): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
@@ -182,12 +179,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Link [[io.vertx.scala.core.shareddata.AsyncMap#putIfAbsentFuture]] but specifying a time to live for the entry. Entry will expire and get evicted
-   * after the ttl.
-   * @param k the key
-   * @param v the value
-   * @param ttl The time to live (in ms) for the entry
-   * @return the future
+   * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def putIfAbsentFuture(k: K, v: V, ttl: Long): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
@@ -196,9 +188,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Remove a value from the map, asynchronously.
-   * @param k the key
-   * @return - this will be called some time later to signify the value has been removed
+   * Like [[remove]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def removeFuture(k: K): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
@@ -207,10 +197,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Remove a value from the map, only if entry already exists with same value.
-   * @param k the key
-   * @param v the value
-   * @return - this will be called some time later to signify the value has been removed
+   * Like [[removeIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def removeIfPresentFuture(k: K, v: V): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
@@ -219,10 +206,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Replace the entry only if it is currently mapped to some value
-   * @param k the key
-   * @param v the new value
-   * @return the result future will be passed the previous value
+   * Like [[replace]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def replaceFuture(k: K, v: V): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
@@ -231,11 +215,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Replace the entry only if it is currently mapped to a specific value
-   * @param k the key
-   * @param oldValue the existing value
-   * @param newValue the new value
-   * @return the result future
+   * Like [[replaceIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def replaceIfPresentFuture(k: K, oldValue: V, newValue: V): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
@@ -244,8 +224,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Clear all entries in the map
-   * @return called on completion
+   * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def clearFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -254,8 +233,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Provide the number of entries in the map
-   * @return future which will receive the number of entries
+   * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def sizeFuture(): scala.concurrent.Future[Int] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])

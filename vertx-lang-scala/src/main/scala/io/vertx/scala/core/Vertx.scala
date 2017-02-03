@@ -322,6 +322,7 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
+    * @param completionHandler The handler will be notified when the close is complete.
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -347,6 +348,7 @@ class Vertx(private val _asJava: Object)
     * 
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
+    * @param completionHandler a handler which will be notified when the deployment is complete
     */
   def deployVerticle(name: String, completionHandler: Handler[AsyncResult[String]]): Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
@@ -367,6 +369,7 @@ class Vertx(private val _asJava: Object)
     * deployment.
     * @param name the name
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
+    * @param completionHandler a handler which will be notified when the deployment is complete
     */
   def deployVerticle(name: String, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
     asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
@@ -385,6 +388,7 @@ class Vertx(private val _asJava: Object)
   /**
     * Like [[io.vertx.scala.core.Vertx]] but the completionHandler will be notified when the undeployment is complete.
     * @param deploymentID the deployment ID
+    * @param completionHandler a handler which will be notified when the undeployment is complete
     */
   def undeploy(deploymentID: String, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -460,8 +464,7 @@ class Vertx(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete
-   * @return The future will be notified when the close is complete.
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -470,14 +473,7 @@ class Vertx(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
-   * 
-   * If the deployment is successful the result will contain a String representing the unique deployment ID of the
-   * deployment.
-   * 
-   * This deployment ID can subsequently be used to undeploy the verticle.
-   * @param name The identifier
-   * @return a future which will be notified when the deployment is complete
+   * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def deployVerticleFuture(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
@@ -486,11 +482,7 @@ class Vertx(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.Vertx#deployVerticleFuture]] but <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a> are provided to configure the
-   * deployment.
-   * @param name the name
-   * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
-   * @return a future which will be notified when the deployment is complete
+   * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def deployVerticleFuture(name: String, options: DeploymentOptions): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
@@ -499,9 +491,7 @@ class Vertx(private val _asJava: Object)
   }
 
  /**
-   * Like [[io.vertx.scala.core.Vertx]] but the completionHandler will be notified when the undeployment is complete.
-   * @param deploymentID the deployment ID
-   * @return a future which will be notified when the undeployment is complete
+   * Like [[undeploy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def undeployFuture(deploymentID: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -535,6 +525,7 @@ object Vertx {
     * 
     * The instance is created asynchronously and the resultHandler is called with the result when it is ready.
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
+    * @param resultHandler the result handler that will receive the result
     */
   def clusteredVertx(options: VertxOptions, resultHandler: Handler[AsyncResult[Vertx]]): Unit = {
     JVertx.clusteredVertx(options.asJava, {x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))})

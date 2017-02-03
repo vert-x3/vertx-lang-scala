@@ -48,6 +48,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
 
   /**
     * Listen on default port 7000 with a handler to report the state of the socket listen operation.
+    * @param handler the result handler
     * @return self
     */
   def listen(handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
@@ -70,6 +71,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * Listen on specific port and bind to specific address
     * @param port tcp port
     * @param address tcp address to the bind
+    * @param handler the result handler
     * @return self
     */
   def listen(port: Int, address: String, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
@@ -90,6 +92,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
   /**
     * Listen on specific port
     * @param port tcp port
+    * @param handler the result handler
     * @return self
     */
   def listen(port: Int, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
@@ -99,6 +102,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
 
   /**
     * Close the current socket.
+    * @param handler the result handler
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JTcpEventBusBridge].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -112,8 +116,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
   }
 
  /**
-   * Listen on default port 7000 with a handler to report the state of the socket listen operation.
-   * @return the result future
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(): scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
@@ -122,10 +125,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
   }
 
  /**
-   * Listen on specific port and bind to specific address
-   * @param port tcp port
-   * @param address tcp address to the bind
-   * @return the result future
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(port: Int, address: String): scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
@@ -134,9 +134,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
   }
 
  /**
-   * Listen on specific port
-   * @param port tcp port
-   * @return the result future
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def listenFuture(port: Int): scala.concurrent.Future[TcpEventBusBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
@@ -145,8 +143,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
   }
 
  /**
-   * Close the current socket.
-   * @return the result future
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

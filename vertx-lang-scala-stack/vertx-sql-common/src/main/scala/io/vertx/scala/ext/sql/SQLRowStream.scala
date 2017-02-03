@@ -97,14 +97,14 @@ class SQLRowStream(private val _asJava: Object)
 
   /**
     * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
+    * @param handler called when the stream/underlying cursor(s) is(are) closed
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**
-   * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
-   * @return called when the stream/underlying cursor(s) is(are) closed
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

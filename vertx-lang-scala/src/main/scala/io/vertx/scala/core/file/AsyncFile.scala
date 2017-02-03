@@ -95,6 +95,7 @@ class AsyncFile(private val _asJava: Object)
     * The handler will be called when the write is complete, or if an error occurs.
     * @param buffer the buffer to write
     * @param position the position in the file to write it at
+    * @param handler the handler to call when the write is complete
     * @return a reference to this, so the API can be used fluently
     */
   def write(buffer: io.vertx.core.buffer.Buffer, position: Long, handler: Handler[AsyncResult[Unit]]): AsyncFile = {
@@ -115,6 +116,7 @@ class AsyncFile(private val _asJava: Object)
     * @param offset the offset into the buffer where the data will be read
     * @param position the position in the file where to start reading
     * @param length the number of bytes to read
+    * @param handler the handler to call when the write is complete
     * @return a reference to this, so the API can be used fluently
     */
   def read(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): AsyncFile = {
@@ -206,15 +208,14 @@ class AsyncFile(private val _asJava: Object)
   /**
     * Close the file. The actual close happens asynchronously.
     * The handler will be called when the close is complete, or an error occurs.
+    * @param handler the handler
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**
-   * Close the file. The actual close happens asynchronously.
-   * The handler will be called when the close is complete, or an error occurs.
-   * @return the future
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -223,18 +224,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
  /**
-   * Write a [[io.vertx.scala.core.buffer.Buffer]] to the file at position `position` in the file, asynchronously.
-   * 
-   * If `position` lies outside of the current size
-   * of the file, the file will be enlarged to encompass it.
-   * 
-   * When multiple writes are invoked on the same file
-   * there are no guarantees as to order in which those writes actually occur
-   * 
-   * The handler will be called when the write is complete, or if an error occurs.
-   * @param buffer the buffer to write
-   * @param position the position in the file to write it at
-   * @return the future to call when the write is complete
+   * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def writeFuture(buffer: io.vertx.core.buffer.Buffer, position: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -243,19 +233,7 @@ class AsyncFile(private val _asJava: Object)
   }
 
  /**
-   * Reads `length` bytes of data from the file at position `position` in the file, asynchronously.
-   * 
-   * The read data will be written into the specified `Buffer buffer` at position `offset`.
-   * 
-   * If data is read past the end of the file then zero bytes will be read.
-   * When multiple reads are invoked on the same file there are no guarantees as to order in which those reads actually occur.
-   * 
-   * The handler will be called when the close is complete, or if an error occurs.
-   * @param buffer the buffer to read into
-   * @param offset the offset into the buffer where the data will be read
-   * @param position the position in the file where to start reading
-   * @param length the number of bytes to read
-   * @return the future to call when the write is complete
+   * Like [[read]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def readFuture(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
@@ -264,8 +242,8 @@ class AsyncFile(private val _asJava: Object)
   }
 
  /**
-   * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[flush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def flushFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncFile].flush(promiseAndHandler._1)
