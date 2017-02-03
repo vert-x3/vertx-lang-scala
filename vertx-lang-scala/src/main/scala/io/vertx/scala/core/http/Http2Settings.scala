@@ -105,16 +105,18 @@ object Http2Settings {
   }
   
   def apply(t: JHttp2Settings) = {
-    if(t != null)
+    if (t != null) {
       new Http2Settings(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Http2Settings = {
-    if(json != null)
+    if (json != null) {
       new Http2Settings(new JHttp2Settings(json))
-    else
+    } else {
       null
+    }
   }
 }

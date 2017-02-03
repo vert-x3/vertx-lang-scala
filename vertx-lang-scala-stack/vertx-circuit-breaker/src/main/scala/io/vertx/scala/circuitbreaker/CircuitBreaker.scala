@@ -41,7 +41,7 @@ class CircuitBreaker(private val _asJava: Object) {
     */
   def name(): String = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JCircuitBreaker].name()
+      val tmp = asJava.asInstanceOf[JCircuitBreaker].name()
       cached_0 = tmp.asInstanceOf[String]
     }
     cached_0

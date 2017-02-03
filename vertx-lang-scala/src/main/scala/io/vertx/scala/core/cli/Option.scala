@@ -183,16 +183,18 @@ object Option {
   }
   
   def apply(t: JOption) = {
-    if(t != null)
+    if (t != null) {
       new Option(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Option = {
-    if(json != null)
+    if (json != null) {
       new Option(new JOption(json))
-    else
+    } else {
       null
+    }
   }
 }

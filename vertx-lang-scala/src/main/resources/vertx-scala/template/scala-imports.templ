@@ -1,34 +1,34 @@
 @code{
 
   def importForType(package, type, ret) {
-    if(type.kind == CLASS_JSON_OBJECT ||
+    if (type.kind == CLASS_JSON_OBJECT ||
        type.kind == CLASS_JSON_ARRAY ||
        type.kind == CLASS_ENUM ||
        type.name == 'io.vertx.core.buffer.Buffer') {
       ret.add(type.raw);
     }
-    else if(type.kind == CLASS_API || type.kind == CLASS_DATA_OBJECT) {
-      if(helper.getPackageName(type.name) != package) {
+    else if (type.kind == CLASS_API || type.kind == CLASS_DATA_OBJECT) {
+      if (helper.getPackageName(type.name) != package) {
         ret.add(helper.getNonGenericType(type.raw.translateName("scala")));
       }
       ret.add(convertTypeToAliasedType(type));
     }
-    else if(type.kind.collection) {
+    else if (type.kind.collection) {
       ret.add('scala.collection.JavaConverters._');
     }
-    else if(type.kind == CLASS_HANDLER) {
+    else if (type.kind == CLASS_HANDLER) {
       ret.add(type.raw);
-      if(type.isParameterized) {
-        for(param : type.args) {
+      if (type.isParameterized) {
+        for (param : type.args) {
           importForType(package, param, ret);
         }
       }
     }
-    else if(type.kind == CLASS_ASYNC_RESULT) {
+    else if (type.kind == CLASS_ASYNC_RESULT) {
       ret.add('io.vertx.lang.scala.AsyncResultWrapper');
       ret.add(type.raw);
-      if(type.isParameterized) {
-        for(param : type.args) {
+      if (type.isParameterized) {
+        for (param : type.args) {
           importForType(package, param, ret);
         }
       }
@@ -38,14 +38,14 @@
   def generateImports(type, imps, methods) {
     var ret = new java.util.HashSet();
     ret.add(convertTypeToAliasedType(type));
-    for(imported : imps) {
+    for (imported : imps) {
       /*Don't import implementations*/
-      if(!imported.name.contains(".impl.")) {
+      if (!imported.name.contains(".impl.")) {
         importForType(helper.getPackageName(type.name), imported, ret);
       }
     }
-    for(method : methods) {
-      for(param : method.params) {
+    for (method : methods) {
+      for (param : method.params) {
         importForType(helper.getPackageName(type.name), param.type, ret);
       }
     }

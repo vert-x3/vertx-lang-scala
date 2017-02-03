@@ -77,7 +77,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def request(): HttpServerRequest = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].request()
+      val tmp = asJava.asInstanceOf[JRoutingContext].request()
       cached_0 = HttpServerRequest(tmp)
     }
     cached_0
@@ -88,7 +88,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def response(): HttpServerResponse = {
     if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].response()
+      val tmp = asJava.asInstanceOf[JRoutingContext].response()
       cached_1 = HttpServerResponse(tmp)
     }
     cached_1
@@ -99,7 +99,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def vertx(): Vertx = {
     if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].vertx()
+      val tmp = asJava.asInstanceOf[JRoutingContext].vertx()
       cached_2 = Vertx(tmp)
     }
     cached_2
@@ -113,7 +113,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def failure(): Throwable = {
     if(cached_3 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].failure()
+      val tmp = asJava.asInstanceOf[JRoutingContext].failure()
       cached_3 = tmp
     }
     cached_3
@@ -129,7 +129,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def statusCode(): Int = {
     if(cached_4 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].statusCode()
+      val tmp = asJava.asInstanceOf[JRoutingContext].statusCode()
       cached_4 = tmp.asInstanceOf[Int]
     }
     cached_4
@@ -149,7 +149,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def parsedHeaders(): ParsedHeaderValues = {
     if(cached_5 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].parsedHeaders()
+      val tmp = asJava.asInstanceOf[JRoutingContext].parsedHeaders()
       cached_5 = ParsedHeaderValues(tmp)
     }
     cached_5
@@ -166,7 +166,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def acceptableLocales(): scala.collection.mutable.Buffer[Locale] = {
     if(cached_6 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].acceptableLocales()
+      val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLocales()
       cached_6 = tmp.asScala.map(x => Locale(x))
     }
     cached_6
@@ -183,7 +183,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def acceptableLanguages(): scala.collection.mutable.Buffer[LanguageHeader] = {
     if(cached_7 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].acceptableLanguages()
+      val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLanguages()
       cached_7 = tmp.asScala.map(x => LanguageHeader(x))
     }
     cached_7
@@ -196,7 +196,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def preferredLocale(): Locale = {
     if(cached_8 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].preferredLocale()
+      val tmp = asJava.asInstanceOf[JRoutingContext].preferredLocale()
       cached_8 = Locale(tmp)
     }
     cached_8
@@ -209,7 +209,7 @@ class RoutingContext(private val _asJava: Object) {
     */
   def preferredLanguage(): LanguageHeader = {
     if(cached_9 == null) {
-      var tmp = asJava.asInstanceOf[JRoutingContext].preferredLanguage()
+      val tmp = asJava.asInstanceOf[JRoutingContext].preferredLanguage()
       cached_9 = LanguageHeader(tmp)
     }
     cached_9

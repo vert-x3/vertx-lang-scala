@@ -114,16 +114,18 @@ object Argument {
   }
   
   def apply(t: JArgument) = {
-    if(t != null)
+    if (t != null) {
       new Argument(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Argument = {
-    if(json != null)
+    if (json != null) {
       new Argument(new JArgument(json))
-    else
+    } else {
       null
+    }
   }
 }

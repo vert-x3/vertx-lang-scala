@@ -36,8 +36,8 @@ class HttpFrame(private val _asJava: Object) {
     * @return the 8-bit type of the frame
     */
   def `type`(): Int = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpFrame].`type`()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpFrame].`type`()
       cached_0 = tmp.asInstanceOf[Int]
     }
     cached_0
@@ -47,8 +47,8 @@ class HttpFrame(private val _asJava: Object) {
     * @return the 8-bit flags specific to the frame
     */
   def flags(): Int = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpFrame].flags()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpFrame].flags()
       cached_1 = tmp.asInstanceOf[Int]
     }
     cached_1
@@ -58,8 +58,8 @@ class HttpFrame(private val _asJava: Object) {
     * @return the frame payload
     */
   def payload(): io.vertx.core.buffer.Buffer = {
-    if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JHttpFrame].payload()
+    if (cached_2 == null) {
+      val tmp = asJava.asInstanceOf[JHttpFrame].payload()
       cached_2 = tmp
     }
     cached_2

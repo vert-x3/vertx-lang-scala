@@ -53,16 +53,18 @@ object OpenSSLEngineOptions {
   }
   
   def apply(t: JOpenSSLEngineOptions) = {
-    if(t != null)
+    if (t != null) {
       new OpenSSLEngineOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): OpenSSLEngineOptions = {
-    if(json != null)
+    if (json != null) {
       new OpenSSLEngineOptions(new JOpenSSLEngineOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

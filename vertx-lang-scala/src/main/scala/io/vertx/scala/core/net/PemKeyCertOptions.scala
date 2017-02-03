@@ -121,16 +121,18 @@ object PemKeyCertOptions {
   }
   
   def apply(t: JPemKeyCertOptions) = {
-    if(t != null)
+    if (t != null) {
       new PemKeyCertOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): PemKeyCertOptions = {
-    if(json != null)
+    if (json != null) {
       new PemKeyCertOptions(new JPemKeyCertOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

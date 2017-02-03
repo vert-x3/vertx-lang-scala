@@ -62,8 +62,8 @@ class HttpServerResponse(private val _asJava: Object)
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
       cached_0 = MultiMap(tmp)
     }
     cached_0
@@ -73,8 +73,8 @@ class HttpServerResponse(private val _asJava: Object)
     * @return The HTTP trailers
     */
   def trailers(): MultiMap = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
     cached_1

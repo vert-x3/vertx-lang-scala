@@ -37,8 +37,8 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @return an handler completing this future
     */
   def completer(): Handler[AsyncResult[T]] = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JFuture[Object]].completer()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JFuture[Object]].completer()
       cached_0 = {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T,Object](x, a => toJava[T](a)))}
     }
     cached_0

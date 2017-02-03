@@ -88,16 +88,18 @@ object PfxOptions {
   }
   
   def apply(t: JPfxOptions) = {
-    if(t != null)
+    if (t != null) {
       new PfxOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): PfxOptions = {
-    if(json != null)
+    if (json != null) {
       new PfxOptions(new JPfxOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

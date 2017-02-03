@@ -73,8 +73,8 @@ class HttpClientRequest(private val _asJava: Object)
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
       cached_0 = MultiMap(tmp)
     }
     cached_0
@@ -84,8 +84,8 @@ class HttpClientRequest(private val _asJava: Object)
     * @return the HttpConnection associated with this request
     */
   def connection(): HttpConnection = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
       cached_1 = HttpConnection(tmp)
     }
     cached_1

@@ -148,16 +148,18 @@ object DatagramSocketOptions {
   }
   
   def apply(t: JDatagramSocketOptions) = {
-    if(t != null)
+    if (t != null) {
       new DatagramSocketOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): DatagramSocketOptions = {
-    if(json != null)
+    if (json != null) {
       new DatagramSocketOptions(new JDatagramSocketOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

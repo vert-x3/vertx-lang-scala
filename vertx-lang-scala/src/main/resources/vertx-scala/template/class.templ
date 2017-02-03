@@ -49,8 +49,8 @@ import @{importedType}\n
 @code{
   var classes = new java.util.ArrayList();
   var abstractClasses = new java.util.ArrayList();
-  for(superType : superTypes) {
-    if(superType.raw.isConcrete()){
+  for (superType : superTypes) {
+    if (superType.raw.isConcrete()){
       classes.add(superType);
     }
     else {
@@ -61,10 +61,10 @@ import @{importedType}\n
 
 @comment{"## Inheritance"}
 @if{!superTypes.isEmpty}
-	\n    extends @foreach{superType : classes}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
-	 @if{!classes.isEmpty() && !abstractClasses.isEmpty()}with @end{}@foreach{superType : abstractClasses}@{toScalaType(superType, false);}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	\n    extends @foreach{superType : classes}@{toScalaType(superType, false)}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	 @if{!classes.isEmpty() && !abstractClasses.isEmpty()}with @end{}@foreach{superType : abstractClasses}@{toScalaType(superType, false)}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
 @else{type.isHandler}
-	\n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false);}]
+	\n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false)}]
 @end{}
  {\n
 \n

@@ -47,8 +47,8 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * @return the body, or null.
     */
   def body(): T = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JMessage[Object]].body()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JMessage[Object]].body()
       cached_0 = toScala[T](tmp)
     }
     cached_0

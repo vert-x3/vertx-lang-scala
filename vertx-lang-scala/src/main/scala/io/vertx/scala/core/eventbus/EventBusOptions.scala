@@ -434,16 +434,18 @@ object EventBusOptions {
   }
   
   def apply(t: JEventBusOptions) = {
-    if(t != null)
+    if (t != null) {
       new EventBusOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): EventBusOptions = {
-    if(json != null)
+    if (json != null) {
       new EventBusOptions(new JEventBusOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

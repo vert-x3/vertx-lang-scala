@@ -74,7 +74,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     */
   def headers(): MultiMap = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpRequest[Object]].headers()
+      val tmp = asJava.asInstanceOf[JHttpRequest[Object]].headers()
       cached_0 = MultiMap(tmp)
     }
     cached_0

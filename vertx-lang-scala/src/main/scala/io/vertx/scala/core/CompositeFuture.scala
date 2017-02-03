@@ -39,8 +39,8 @@ class CompositeFuture(private val _asJava: Object)
     * @return an handler completing this future
     */
   override def completer(): Handler[AsyncResult[CompositeFuture]] = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JCompositeFuture].completer()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JCompositeFuture].completer()
       cached_0 = {x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture,JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))}
     }
     cached_0

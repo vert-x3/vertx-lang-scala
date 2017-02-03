@@ -146,16 +146,18 @@ object OpenOptions {
   }
   
   def apply(t: JOpenOptions) = {
-    if(t != null)
+    if (t != null) {
       new OpenOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): OpenOptions = {
-    if(json != null)
+    if (json != null) {
       new OpenOptions(new JOpenOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

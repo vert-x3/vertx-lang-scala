@@ -57,6 +57,13 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions)
   override def getAcceptBacklog: Int = {
     asJava.getAcceptBacklog().asInstanceOf[Int]
   }
+  override def setAcceptUnmaskedFrames(value: Boolean) = {
+    asJava.setAcceptUnmaskedFrames(value)
+    this
+  }
+  override def isAcceptUnmaskedFrames: Boolean = {
+    asJava.isAcceptUnmaskedFrames().asInstanceOf[Boolean]
+  }
   override def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
     asJava.setAlpnVersions(value.asJava)
     this

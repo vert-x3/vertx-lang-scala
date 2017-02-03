@@ -328,16 +328,18 @@ object NetServerOptions {
   }
   
   def apply(t: JNetServerOptions) = {
-    if(t != null)
+    if (t != null) {
       new NetServerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): NetServerOptions = {
-    if(json != null)
+    if (json != null) {
       new NetServerOptions(new JNetServerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }
