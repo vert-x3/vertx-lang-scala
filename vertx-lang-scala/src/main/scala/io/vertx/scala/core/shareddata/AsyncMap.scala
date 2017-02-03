@@ -28,7 +28,7 @@ import io.vertx.core.Handler
   *
   * An asynchronous map.
   */
-class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
+class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
@@ -37,7 +37,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param k the key
     */
   def get(k: K, resultHandler: Handler[AsyncResult[V]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].get(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
   }
 
   /**
@@ -46,7 +46,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param v the value
     */
   def put(k: K, v: V, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k), toJava[V](v), {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -57,7 +57,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param ttl The time to live (in ms) for the entry
     */
   def put(k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -67,7 +67,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param v the value
     */
   def putIfAbsent(k: K, v: V, completionHandler: Handler[AsyncResult[V]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
   }
 
   /**
@@ -78,7 +78,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param ttl The time to live (in ms) for the entry
     */
   def putIfAbsent(k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[V]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
   }
 
   /**
@@ -86,7 +86,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param k the key
     */
   def remove(k: K, resultHandler: Handler[AsyncResult[V]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].remove(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
   }
 
   /**
@@ -95,7 +95,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param v the value
     */
   def removeIfPresent(k: K, v: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k), toJava[V](v), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].removeIfPresent(toJava[K](k), toJava[V](v), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
@@ -104,7 +104,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param v the new value
     */
   def replace(k: K, v: V, resultHandler: Handler[AsyncResult[V]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,V](x, a => toScala[V](a)))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replace(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, V](x, a => toScala[V](a)))})
   }
 
   /**
@@ -114,21 +114,21 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
     * @param newValue the new value
     */
   def replaceIfPresent(k: K, oldValue: V, newValue: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
     * Clear all entries in the map
     */
   def clear(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
     * Provide the number of entries in the map
     */
   def size(resultHandler: Handler[AsyncResult[Int]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer,Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
   }
 
  /**
@@ -138,7 +138,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def getFuture(k: K): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].get(toJava[K](k), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].get(toJava[K](k), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -150,7 +150,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def putFuture(k: K, v: V): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k), toJava[V](v), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -164,7 +164,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def putFuture(k: K, v: V, ttl: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -177,7 +177,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def putIfAbsentFuture(k: K, v: V): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k), toJava[V](v), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -191,7 +191,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def putIfAbsentFuture(k: K, v: V, ttl: Long): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -202,7 +202,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def removeFuture(k: K): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].remove(toJava[K](k), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].remove(toJava[K](k), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -214,7 +214,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def removeIfPresentFuture(k: K, v: V): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].removeIfPresent(toJava[K](k), toJava[V](v), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].removeIfPresent(toJava[K](k), toJava[V](v), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -226,7 +226,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def replaceFuture(k: K, v: V): scala.concurrent.Future[V] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Object, V](x => toScala[V](x))
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].replace(toJava[K](k), toJava[V](v), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replace(toJava[K](k), toJava[V](v), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -239,7 +239,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def replaceIfPresentFuture(k: K, oldValue: V, newValue: V): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -249,7 +249,7 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def clearFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].clear(promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -259,12 +259,12 @@ class AsyncMap[K: TypeTag,V: TypeTag](private val _asJava: Object) {
    */
   def sizeFuture(): scala.concurrent.Future[Int] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
-    asJava.asInstanceOf[JAsyncMap[Object,Object]].size(promiseAndHandler._1)
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].size(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
 object AsyncMap {
-  def apply[K: TypeTag,V: TypeTag](asJava: JAsyncMap[_,_]) = new AsyncMap[K,V](asJava)  
+  def apply[K: TypeTag, V: TypeTag](asJava: JAsyncMap[_, _]) = new AsyncMap[K, V](asJava)  
 }

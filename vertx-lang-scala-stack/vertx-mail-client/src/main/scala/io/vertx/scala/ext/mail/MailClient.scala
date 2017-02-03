@@ -44,7 +44,7 @@ class MailClient(private val _asJava: Object) {
     * @return this MailClient instance so the method can be used fluently
     */
   def sendMail(email: MailMessage, resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
-    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, {x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult,MailResult](x, a => MailResult(a)))})
+    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, {x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult, MailResult](x, a => MailResult(a)))})
     this
   }
 

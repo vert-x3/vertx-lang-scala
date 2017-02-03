@@ -99,7 +99,7 @@ class SQLRowStream(private val _asJava: Object)
     * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

@@ -66,7 +66,7 @@ object EventBusService {
     * @return `null` - do not use
     */
   def getServiceProxy[T: TypeTag](discovery: ServiceDiscovery, filter: Record => Boolean, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {
-    toScala[T](JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, toJavaClass(clientClass), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
+    toScala[T](JEventBusService.getServiceProxy[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, toJavaClass(clientClass), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}))
   }
 
   /**
@@ -80,7 +80,7 @@ object EventBusService {
     * @return `null` - do not use
     */
   def getServiceProxyWithJsonFilter[T: TypeTag](discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {
-    toScala[T](JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, toJavaClass(clientClass), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object,T](x, a => toScala[T](a)))}))
+    toScala[T](JEventBusService.getServiceProxyWithJsonFilter[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, toJavaClass(clientClass), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}))
   }
 
   /**

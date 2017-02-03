@@ -87,7 +87,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen({x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen({x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
     this
   }
 
@@ -98,7 +98,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(port: Int, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
     this
   }
 
@@ -110,7 +110,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(port: Int, host: String, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
     this
   }
 
@@ -129,7 +129,7 @@ class StompServer(private val _asJava: Object) {
     * Closes the server.
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JStompServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JStompServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**

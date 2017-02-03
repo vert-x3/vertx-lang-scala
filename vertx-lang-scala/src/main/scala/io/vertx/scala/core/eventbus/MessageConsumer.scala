@@ -111,7 +111,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
     * Optional method which can be called to indicate when the registration has been propagated across the cluster.
     */
   def completionHandler(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -125,7 +125,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
     * Unregisters the handler which created this registration
     */
   def unregister(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

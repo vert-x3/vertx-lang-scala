@@ -45,7 +45,7 @@ class BridgeEvent(private val _asJava: Object)
   override def completer(): Handler[AsyncResult[Boolean]] = {
     if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].completer()
-      cached_0 = {x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean,java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
+      cached_0 = {x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
     }
     cached_0
   }
@@ -85,7 +85,7 @@ class BridgeEvent(private val _asJava: Object)
   }
 
   override def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
-    asJava.asInstanceOf[JBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 

@@ -92,7 +92,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object)
   }
 
   def send[R: TypeTag](message: T, replyHandler: Handler[AsyncResult[Message[R]]]): MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))}))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}))
   }
 
   /**

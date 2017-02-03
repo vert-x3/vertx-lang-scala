@@ -175,7 +175,7 @@ class NetSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -187,7 +187,7 @@ class NetSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -200,7 +200,7 @@ class NetSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 

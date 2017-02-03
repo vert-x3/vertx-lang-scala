@@ -98,7 +98,7 @@ class AsyncFile(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def write(buffer: io.vertx.core.buffer.Buffer, position: Long, handler: Handler[AsyncResult[Unit]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer, position.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].write(buffer, position.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -118,7 +118,7 @@ class AsyncFile(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def read(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer, offset.asInstanceOf[java.lang.Integer], position.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].read(buffer, offset.asInstanceOf[java.lang.Integer], position.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -139,7 +139,7 @@ class AsyncFile(private val _asJava: Object)
     * Same as [[io.vertx.scala.core.file.AsyncFile#flush]] but the handler will be called when the flush is complete or if an error occurs
     */
   def flush(handler: Handler[AsyncResult[Unit]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].flush({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].flush({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -208,7 +208,7 @@ class AsyncFile(private val _asJava: Object)
     * The handler will be called when the close is complete, or an error occurs.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

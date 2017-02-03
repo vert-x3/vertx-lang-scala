@@ -41,7 +41,7 @@ class JDBCClient(private val _asJava: Object) {
     * to close the connection when you are done, so it is returned to the pool.
     */
   def getConnection(handler: Handler[AsyncResult[SQLConnection]]): JDBCClient = {
-    asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection,SQLConnection](x, a => SQLConnection(a)))})
+    asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection, SQLConnection](x, a => SQLConnection(a)))})
     this
   }
 

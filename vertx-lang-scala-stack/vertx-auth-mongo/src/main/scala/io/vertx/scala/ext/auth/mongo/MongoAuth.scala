@@ -220,7 +220,7 @@ class MongoAuth(private val _asJava: Object)
     * @param permissions a list of permissions to be set
     */
   def insertUser(username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String], resultHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
   }
 
  /**

@@ -57,7 +57,7 @@ class ShellService(private val _asJava: Object) {
     * Start the shell service, this is an asynchronous start.
     */
   def start(startHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JShellService].start({x: AsyncResult[Void] => startHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JShellService].start({x: AsyncResult[Void] => startHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -71,7 +71,7 @@ class ShellService(private val _asJava: Object) {
     * Stop the shell service, this is an asynchronous start.
     */
   def stop(stopHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JShellService].stop({x: AsyncResult[Void] => stopHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JShellService].stop({x: AsyncResult[Void] => stopHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**

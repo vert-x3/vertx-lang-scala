@@ -57,7 +57,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def copy(from: String, to: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -81,7 +81,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def copyRecursive(from: String, to: String, recursive: Boolean, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].copyRecursive(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], recursive.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].copyRecursive(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], recursive.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -102,7 +102,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def move(from: String, to: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -123,7 +123,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def truncate(path: String, len: Long, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].truncate(path.asInstanceOf[java.lang.String], len.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].truncate(path.asInstanceOf[java.lang.String], len.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -145,7 +145,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def chmod(path: String, perms: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].chmod(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].chmod(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -170,7 +170,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def chmodRecursive(path: String, perms: String, dirPerms: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].chmodRecursive(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], dirPerms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].chmodRecursive(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], dirPerms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -190,7 +190,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def chown(path: String, user: scala.Option[String], group: scala.Option[String], handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].chown(path.asInstanceOf[java.lang.String], user.map(x => x.asInstanceOf[java.lang.String]).orNull, group.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].chown(path.asInstanceOf[java.lang.String], user.map(x => x.asInstanceOf[java.lang.String]).orNull, group.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -211,7 +211,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def props(path: String, handler: Handler[AsyncResult[FileProps]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].props(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
+    asJava.asInstanceOf[JFileSystem].props(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps, FileProps](x, a => FileProps(a)))})
     this
   }
 
@@ -223,7 +223,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def lprops(path: String, handler: Handler[AsyncResult[FileProps]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].lprops(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps,FileProps](x, a => FileProps(a)))})
+    asJava.asInstanceOf[JFileSystem].lprops(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileProps] => handler.handle(AsyncResultWrapper[JFileProps, FileProps](x, a => FileProps(a)))})
     this
   }
 
@@ -234,7 +234,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def link(link: String, existing: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].link(link.asInstanceOf[java.lang.String], existing.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].link(link.asInstanceOf[java.lang.String], existing.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -253,7 +253,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def symlink(link: String, existing: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].symlink(link.asInstanceOf[java.lang.String], existing.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].symlink(link.asInstanceOf[java.lang.String], existing.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -271,7 +271,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def unlink(link: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].unlink(link.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].unlink(link.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -289,7 +289,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def readSymlink(link: String, handler: Handler[AsyncResult[String]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JFileSystem].readSymlink(link.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -299,7 +299,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def delete(path: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].delete(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].delete(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -321,7 +321,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def deleteRecursive(path: String, recursive: Boolean, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].deleteRecursive(path.asInstanceOf[java.lang.String], recursive.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].deleteRecursive(path.asInstanceOf[java.lang.String], recursive.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -341,7 +341,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def mkdir(path: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -367,7 +367,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def mkdir(path: String, perms: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].mkdir(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -387,7 +387,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def mkdirs(path: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -413,7 +413,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def mkdirs(path: String, perms: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].mkdirs(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -433,7 +433,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def readDir(path: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -449,7 +449,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def readDir(path: String, filter: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String], filter.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JFileSystem].readDir(path.asInstanceOf[java.lang.String], filter.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -461,7 +461,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def readFile(path: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].readFile(path.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -472,7 +472,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def writeFile(path: String, data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String], data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].writeFile(path.asInstanceOf[java.lang.String], data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -493,7 +493,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def open(path: String, options: OpenOptions, handler: Handler[AsyncResult[AsyncFile]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].open(path.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JAsyncFile] => handler.handle(AsyncResultWrapper[JAsyncFile,AsyncFile](x, a => AsyncFile(a)))})
+    asJava.asInstanceOf[JFileSystem].open(path.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JAsyncFile] => handler.handle(AsyncResultWrapper[JAsyncFile, AsyncFile](x, a => AsyncFile(a)))})
     this
   }
 
@@ -503,7 +503,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def createFile(path: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -522,7 +522,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def createFile(path: String, perms: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JFileSystem].createFile(path.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -540,7 +540,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def exists(path: String, handler: Handler[AsyncResult[Boolean]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JFileSystem].exists(path.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
@@ -550,7 +550,7 @@ class FileSystem(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def fsProps(path: String, handler: Handler[AsyncResult[FileSystemProps]]): FileSystem = {
-    asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileSystemProps] => handler.handle(AsyncResultWrapper[JFileSystemProps,FileSystemProps](x, a => FileSystemProps(a)))})
+    asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String], {x: AsyncResult[JFileSystemProps] => handler.handle(AsyncResultWrapper[JFileSystemProps, FileSystemProps](x, a => FileSystemProps(a)))})
     this
   }
 

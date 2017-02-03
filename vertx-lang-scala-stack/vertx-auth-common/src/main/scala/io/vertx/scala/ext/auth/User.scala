@@ -41,7 +41,7 @@ class User(private val _asJava: Object) {
     * @return the User to enable fluent use
     */
   def isAuthorised(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
-    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 

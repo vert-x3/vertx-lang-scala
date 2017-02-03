@@ -103,7 +103,7 @@ object HttpEndpoint {
     * @param filter The filter, optional
     */
   def getClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[HttpClient]]): Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient, HttpClient](x, a => HttpClient(a)))})
   }
 
   /**
@@ -113,7 +113,7 @@ object HttpEndpoint {
     * @param filter The filter, optional
     */
   def getWebClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[WebClient]]): Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient, WebClient](x, a => WebClient(a)))})
   }
 
   /**
@@ -125,7 +125,7 @@ object HttpEndpoint {
     * @param conf the configuration of the client
     */
   def getClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, conf: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[HttpClient]]): Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient, HttpClient](x, a => HttpClient(a)))})
   }
 
   /**
@@ -137,7 +137,7 @@ object HttpEndpoint {
     * @param conf the configuration of the client
     */
   def getWebClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, conf: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[WebClient]]): Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, conf, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient, WebClient](x, a => WebClient(a)))})
   }
 
   /**
@@ -147,7 +147,7 @@ object HttpEndpoint {
     * @param filter The filter
     */
   def getClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[HttpClient]]): Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient, HttpClient](x, a => HttpClient(a)))})
   }
 
   /**
@@ -157,7 +157,7 @@ object HttpEndpoint {
     * @param filter The filter
     */
   def getWebClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[WebClient]]): Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient, WebClient](x, a => WebClient(a)))})
   }
 
   /**
@@ -169,7 +169,7 @@ object HttpEndpoint {
     * @param conf the configuration of the client
     */
   def getClient(discovery: ServiceDiscovery, filter: Record => Boolean, conf: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[HttpClient]]): Unit = {
-    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, conf, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient,HttpClient](x, a => HttpClient(a)))})
+    JHttpEndpoint.getClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, conf, {x: AsyncResult[JHttpClient] => resultHandler.handle(AsyncResultWrapper[JHttpClient, HttpClient](x, a => HttpClient(a)))})
   }
 
   /**
@@ -181,7 +181,7 @@ object HttpEndpoint {
     * @param conf the configuration of the client
     */
   def getWebClient(discovery: ServiceDiscovery, filter: Record => Boolean, conf: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[WebClient]]): Unit = {
-    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, conf, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient,WebClient](x, a => WebClient(a)))})
+    JHttpEndpoint.getWebClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, conf, {x: AsyncResult[JWebClient] => resultHandler.handle(AsyncResultWrapper[JWebClient, WebClient](x, a => WebClient(a)))})
   }
 
 }

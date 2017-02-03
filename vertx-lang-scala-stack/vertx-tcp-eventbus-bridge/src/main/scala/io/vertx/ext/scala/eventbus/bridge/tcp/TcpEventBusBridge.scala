@@ -51,7 +51,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @return self
     */
   def listen(handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen({x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen({x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
@@ -73,7 +73,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @return self
     */
   def listen(port: Int, address: String, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
@@ -93,7 +93,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * @return self
     */
   def listen(port: Int, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge,TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
@@ -101,7 +101,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
     * Close the current socket.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JTcpEventBusBridge].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JTcpEventBusBridge].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**

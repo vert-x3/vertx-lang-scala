@@ -74,7 +74,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send(packet: io.vertx.core.buffer.Buffer, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(packet, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(packet, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -87,7 +87,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send(str: String, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -101,7 +101,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def send(str: String, enc: String, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -112,7 +112,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listenMulticastGroup(multicastAddress: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -125,7 +125,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -136,7 +136,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def unlistenMulticastGroup(multicastAddress: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -149,7 +149,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -161,7 +161,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def blockMulticastGroup(multicastAddress: String, sourceToBlock: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -174,7 +174,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def blockMulticastGroup(multicastAddress: String, networkInterface: String, sourceToBlock: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -185,7 +185,7 @@ class DatagramSocket(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket,DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
     this
   }
 
@@ -238,7 +238,7 @@ class DatagramSocket(private val _asJava: Object)
     * and notifies the handler once done.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JDatagramSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JDatagramSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
