@@ -25,7 +25,7 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -36,40 +36,44 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-redis-client-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jdbc-client-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mongo-client-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
       <version>${stack.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-service-proxy</artifactId>
       <version>${stack.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <!-- TODO: this has to be a bug -->
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-groovy</artifactId>
       <version>${stack.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>${vertx-module}</artifactId>
       <version>${stack.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
       <classifier>sources</classifier>
     </dependency>
   </dependencies>
