@@ -160,16 +160,18 @@ object MongoAuthOptions {
   }
   
   def apply(t: JMongoAuthOptions) = {
-    if(t != null)
+    if (t != null) {
       new MongoAuthOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MongoAuthOptions = {
-    if(json != null)
+    if (json != null) {
       new MongoAuthOptions(new JMongoAuthOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

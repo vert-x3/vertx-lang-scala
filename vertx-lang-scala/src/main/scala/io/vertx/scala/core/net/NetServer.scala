@@ -69,7 +69,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String])
     this
   }
 
@@ -80,7 +80,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, host: String, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
 
@@ -104,7 +104,7 @@ class NetServer(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def listen(port: Int, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer,NetServer](x, a => NetServer(a)))})
     this
   }
 
@@ -178,7 +178,7 @@ class NetServer(private val _asJava: Object)
    */
   def listenFuture(port: Int, host: String): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -189,7 +189,7 @@ class NetServer(private val _asJava: Object)
    */
   def listenFuture(port: Int): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

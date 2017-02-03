@@ -138,7 +138,7 @@ class Route(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def blockingHandler(requestHandler: Handler[RoutingContext], ordered: Boolean): Route = {
-    asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))},ordered.asInstanceOf[java.lang.Boolean])
+    asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))}, ordered.asInstanceOf[java.lang.Boolean])
     this
   }
 

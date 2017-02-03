@@ -35,16 +35,18 @@ object LimitOptions {
   }
   
   def apply(t: JLimitOptions) = {
-    if(t != null)
+    if (t != null) {
       new LimitOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): LimitOptions = {
-    if(json != null)
+    if (json != null) {
       new LimitOptions(new JLimitOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

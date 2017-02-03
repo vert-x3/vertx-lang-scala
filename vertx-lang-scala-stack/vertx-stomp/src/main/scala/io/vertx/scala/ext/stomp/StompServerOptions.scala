@@ -396,16 +396,18 @@ object StompServerOptions {
   }
   
   def apply(t: JStompServerOptions) = {
-    if(t != null)
+    if (t != null) {
       new StompServerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): StompServerOptions = {
-    if(json != null)
+    if (json != null) {
       new StompServerOptions(new JStompServerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

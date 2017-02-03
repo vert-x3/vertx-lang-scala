@@ -108,16 +108,18 @@ object IndexOptions {
   }
   
   def apply(t: JIndexOptions) = {
-    if(t != null)
+    if (t != null) {
       new IndexOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): IndexOptions = {
-    if(json != null)
+    if (json != null) {
       new IndexOptions(new JIndexOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

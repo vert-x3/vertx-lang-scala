@@ -86,16 +86,18 @@ object BridgeOptions {
   }
   
   def apply(t: JBridgeOptions) = {
-    if(t != null)
+    if (t != null) {
       new BridgeOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): BridgeOptions = {
-    if(json != null)
+    if (json != null) {
       new BridgeOptions(new JBridgeOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

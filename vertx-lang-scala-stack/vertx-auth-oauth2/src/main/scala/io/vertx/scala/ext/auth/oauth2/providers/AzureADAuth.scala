@@ -45,7 +45,7 @@ object AzureADAuth {
     * @param guid the guid of your application given to you by Azure
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String, guid: String): OAuth2Auth = {
-    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],guid.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -56,7 +56,7 @@ object AzureADAuth {
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String, guid: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],guid.asInstanceOf[java.lang.String],httpClientOptions.asJava))
+    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String], httpClientOptions.asJava))
   }
 
 }

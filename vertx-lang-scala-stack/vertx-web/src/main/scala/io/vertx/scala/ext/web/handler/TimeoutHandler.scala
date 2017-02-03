@@ -64,7 +64,7 @@ object TimeoutHandler {
     * @return the handler
     */
   def create(timeout: Long, errorCode: Int): TimeoutHandler = {
-    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long],errorCode.asInstanceOf[java.lang.Integer]))
+    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long], errorCode.asInstanceOf[java.lang.Integer]))
   }
 
 }

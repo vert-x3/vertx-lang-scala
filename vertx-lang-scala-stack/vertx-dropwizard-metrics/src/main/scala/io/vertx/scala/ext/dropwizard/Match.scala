@@ -58,16 +58,18 @@ object Match {
   }
   
   def apply(t: JMatch) = {
-    if(t != null)
+    if (t != null) {
       new Match(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Match = {
-    if(json != null)
+    if (json != null) {
       new Match(new JMatch(json))
-    else
+    } else {
       null
+    }
   }
 }

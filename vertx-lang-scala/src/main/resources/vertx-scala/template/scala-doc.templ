@@ -28,8 +28,7 @@
           }
           doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
           doc += "\n";
-        }
-        else {
+        } else {
           futureDescription = param.description;
         }
       }
@@ -47,12 +46,10 @@
             .replace('@code{','`')
             .replace('}','`');
           doc += "\n";
-        }
-        else {
+        } else {
           doc += "WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER";
         }
-      }
-      else if (!returnType.name.equals("void")) {
+      } else if (!returnType.name.equals("void")) {
         if (returnDescription != null) {
           doc += commentedIndentation;
           doc += " @return ";
@@ -102,8 +99,7 @@
 
     if (type.contains('AsyncResult')) {
       return "io.vertx.lang.scala.AsyncResult";
-    }
-    else if (type == 'void' || type == 'java.lang.Void') {
+    } else if (type == 'void' || type == 'java.lang.Void') {
       return 'Unit';
     } else if (type == 'Object' || type == 'java.lang.Object') {
       return 'AnyRef';
@@ -173,16 +169,13 @@
         var elt = link.targetElement;
         if (elt.simpleName.toString() == 'Verticle') {
           return "[[io.vertx.lang.scala.ScalaVerticle]]";
-        }
-        else if (elt.simpleName.toString() == 'Handler') {
+        } else if (elt.simpleName.toString() == 'Handler') {
           if (isAsyncResultHandlerHandler(elt)) {
             return "[[scala.concurrent.Future]]";
-          }
-          else {
+          } else {
             return "scala-function";
           }
-        }
-        else {
+        } else {
           var eltKind = elt.getKind().name();
           var ret = "[[" + rawType.raw.translateName("scala");
           if (eltKind == "METHOD") {
@@ -195,8 +188,7 @@
           ret += "]]";
           return ret;
         }
-      }
-      else {
+      } else {
         return "[[" + toScalaDocType(rawType.name) + "]]";
       }
     }

@@ -66,7 +66,7 @@ object FaviconHandler {
     * @return the handler
     */
   def create(path: String, maxAgeSeconds: Long): FaviconHandler = {
-    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String],maxAgeSeconds.asInstanceOf[java.lang.Long]))
+    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String], maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }
 
   /**

@@ -40,7 +40,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @return the name of the circuit breaker.
     */
   def name(): String = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JCircuitBreaker].name()
       cached_0 = tmp.asInstanceOf[String]
     }
@@ -95,7 +95,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @return the current CircuitBreaker
     */
   def executeAndReport[T: TypeTag](resultFuture: Future[T], command: Handler[Future[T]]): CircuitBreaker = {
-    asJava.asInstanceOf[JCircuitBreaker].executeAndReport[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))})
+    asJava.asInstanceOf[JCircuitBreaker].executeAndReport[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]], {x: JFuture[Object] => command.handle(Future[T](x))})
     this
   }
 
@@ -119,7 +119,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @return the current CircuitBreaker
     */
   def executeAndReportWithFallback[T: TypeTag](resultFuture: Future[T], command: Handler[Future[T]], fallback: Throwable => T): CircuitBreaker = {
-    asJava.asInstanceOf[JCircuitBreaker].executeAndReportWithFallback[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]],{x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))})
+    asJava.asInstanceOf[JCircuitBreaker].executeAndReportWithFallback[Object](resultFuture.asJava.asInstanceOf[JFuture[Object]], {x: JFuture[Object] => command.handle(Future[T](x))}, {x: Throwable => toJava[T](fallback(x))})
     this
   }
 
@@ -172,7 +172,7 @@ class CircuitBreaker(private val _asJava: Object) {
     * @return a future object completed when the operation or its fallback completes
     */
   def executeWithFallback[T: TypeTag](command: Handler[Future[T]], fallback: Throwable => T): Future[T] = {
-    Future[T](asJava.asInstanceOf[JCircuitBreaker].executeWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))},{x: Throwable => toJava[T](fallback(x))}))
+    Future[T](asJava.asInstanceOf[JCircuitBreaker].executeWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))}, {x: Throwable => toJava[T](fallback(x))}))
   }
 
   /**
@@ -210,7 +210,7 @@ object CircuitBreaker {
     * @return the created instance
     */
   def create(name: String, vertx: Vertx, options: CircuitBreakerOptions): CircuitBreaker = {
-    CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx],options.asJava))
+    CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**
@@ -220,7 +220,7 @@ object CircuitBreaker {
     * @return the created instance
     */
   def create(name: String, vertx: Vertx): CircuitBreaker = {
-    CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String],vertx.asJava.asInstanceOf[JVertx]))
+    CircuitBreaker(JCircuitBreaker.create(name.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

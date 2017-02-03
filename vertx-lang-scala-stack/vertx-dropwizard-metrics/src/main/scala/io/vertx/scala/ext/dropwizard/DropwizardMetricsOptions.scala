@@ -134,16 +134,18 @@ object DropwizardMetricsOptions {
   }
   
   def apply(t: JDropwizardMetricsOptions) = {
-    if(t != null)
+    if (t != null) {
       new DropwizardMetricsOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): DropwizardMetricsOptions = {
-    if(json != null)
+    if (json != null) {
       new DropwizardMetricsOptions(new JDropwizardMetricsOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -104,7 +104,7 @@ object FormLoginHandler {
     * @return the handler
     */
   def create(authProvider: AuthProvider, usernameParam: String, passwordParam: String, returnURLParam: String, directLoggedInOKURL: String): FormLoginHandler = {
-    FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],usernameParam.asInstanceOf[java.lang.String],passwordParam.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String],directLoggedInOKURL.asInstanceOf[java.lang.String]))
+    FormLoginHandler(JFormLoginHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], usernameParam.asInstanceOf[java.lang.String], passwordParam.asInstanceOf[java.lang.String], returnURLParam.asInstanceOf[java.lang.String], directLoggedInOKURL.asInstanceOf[java.lang.String]))
   }
 
 }

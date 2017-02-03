@@ -143,16 +143,18 @@ object JWTOptions {
   }
   
   def apply(t: JJWTOptions) = {
-    if(t != null)
+    if (t != null) {
       new JWTOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): JWTOptions = {
-    if(json != null)
+    if (json != null) {
       new JWTOptions(new JJWTOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

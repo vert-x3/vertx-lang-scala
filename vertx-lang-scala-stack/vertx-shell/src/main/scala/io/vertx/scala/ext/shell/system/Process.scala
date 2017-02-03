@@ -40,7 +40,7 @@ class Process(private val _asJava: Object) {
     * @return the process tty
     */
   def getTty(): Tty = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JProcess].getTty()
       cached_0 = Tty(tmp)
     }
@@ -51,7 +51,7 @@ class Process(private val _asJava: Object) {
     * @return the process session
     */
   def getSession(): Session = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       val tmp = asJava.asInstanceOf[JProcess].getSession()
       cached_1 = Session(tmp)
     }
@@ -187,7 +187,7 @@ class Process(private val _asJava: Object) {
     * @param completionHandler handler called after process callback
     */
   def run(foregraound: Boolean, completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
   }
 
   /**
@@ -204,7 +204,7 @@ class Process(private val _asJava: Object) {
     * @param completionHandler handler called after resume callback
     */
   def resume(foreground: Boolean, completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean],{x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
   }
 
   /**

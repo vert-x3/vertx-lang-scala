@@ -45,7 +45,7 @@ object KeycloakAuth {
     * @param config the json config file exported from Keycloak admin console
     */
   def create(vertx: Vertx, config: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
   /**
@@ -54,7 +54,7 @@ object KeycloakAuth {
     * @param config the json config file exported from Keycloak admin console
     */
   def create(vertx: Vertx, flow: io.vertx.ext.auth.oauth2.OAuth2FlowType, config: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],flow,config))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config))
   }
 
   /**
@@ -63,7 +63,7 @@ object KeycloakAuth {
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
   def create(vertx: Vertx, config: io.vertx.core.json.JsonObject, httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],config,httpClientOptions.asJava))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config, httpClientOptions.asJava))
   }
 
   /**
@@ -73,7 +73,7 @@ object KeycloakAuth {
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
   def create(vertx: Vertx, flow: io.vertx.ext.auth.oauth2.OAuth2FlowType, config: io.vertx.core.json.JsonObject, httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx],flow,config,httpClientOptions.asJava))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config, httpClientOptions.asJava))
   }
 
 }

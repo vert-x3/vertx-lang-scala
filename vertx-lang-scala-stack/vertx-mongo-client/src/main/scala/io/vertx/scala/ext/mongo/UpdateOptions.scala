@@ -80,16 +80,18 @@ object UpdateOptions {
   }
   
   def apply(t: JUpdateOptions) = {
-    if(t != null)
+    if (t != null) {
       new UpdateOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): UpdateOptions = {
-    if(json != null)
+    if (json != null) {
       new UpdateOptions(new JUpdateOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

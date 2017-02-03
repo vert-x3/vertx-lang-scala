@@ -303,16 +303,18 @@ object AmqpBridgeOptions {
   }
   
   def apply(t: JAmqpBridgeOptions) = {
-    if(t != null)
+    if (t != null) {
       new AmqpBridgeOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): AmqpBridgeOptions = {
-    if(json != null)
+    if (json != null) {
       new AmqpBridgeOptions(new JAmqpBridgeOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

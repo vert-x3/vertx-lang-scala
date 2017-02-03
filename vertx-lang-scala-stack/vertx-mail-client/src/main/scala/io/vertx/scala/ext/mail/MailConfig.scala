@@ -241,16 +241,18 @@ object MailConfig {
   }
   
   def apply(t: JMailConfig) = {
-    if(t != null)
+    if (t != null) {
       new MailConfig(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MailConfig = {
-    if(json != null)
+    if (json != null) {
       new MailConfig(new JMailConfig(json))
-    else
+    } else {
       null
+    }
   }
 }

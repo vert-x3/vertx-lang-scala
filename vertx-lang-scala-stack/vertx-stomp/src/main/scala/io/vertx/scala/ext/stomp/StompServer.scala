@@ -68,7 +68,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(port: Int, host: String): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String])
     this
   }
 
@@ -98,7 +98,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(port: Int, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],{x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
     this
   }
 
@@ -110,7 +110,7 @@ class StompServer(private val _asJava: Object) {
     * @return the current StompServer
     */
   def listen(port: Int, host: String, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer,StompServer](x, a => StompServer(a)))})
     this
   }
 
@@ -206,7 +206,7 @@ class StompServer(private val _asJava: Object) {
    */
   def listenFuture(port: Int): scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],promiseAndHandler._1)
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -219,7 +219,7 @@ class StompServer(private val _asJava: Object) {
    */
   def listenFuture(port: Int, host: String): scala.concurrent.Future[StompServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JStompServer, StompServer](x => StompServer(x))
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -244,7 +244,7 @@ object StompServer {
     * @return the created StompServer
     */
   def create(vertx: Vertx, options: StompServerOptions): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**
@@ -254,7 +254,7 @@ object StompServer {
     * @return the created StompServer
     */
   def create(vertx: Vertx, netServer: NetServer): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx],netServer.asJava.asInstanceOf[JNetServer]))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], netServer.asJava.asInstanceOf[JNetServer]))
   }
 
   /**
@@ -265,7 +265,7 @@ object StompServer {
     * @return the created StompServer
     */
   def create(vertx: Vertx, net: NetServer, options: StompServerOptions): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx],net.asJava.asInstanceOf[JNetServer],options.asJava))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], net.asJava.asInstanceOf[JNetServer], options.asJava))
   }
 
   /**

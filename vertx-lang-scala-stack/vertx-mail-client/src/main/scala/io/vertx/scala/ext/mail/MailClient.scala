@@ -44,7 +44,7 @@ class MailClient(private val _asJava: Object) {
     * @return this MailClient instance so the method can be used fluently
     */
   def sendMail(email: MailMessage, resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
-    asJava.asInstanceOf[JMailClient].sendMail(email.asJava,{x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult,MailResult](x, a => MailResult(a)))})
+    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, {x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult,MailResult](x, a => MailResult(a)))})
     this
   }
 
@@ -62,7 +62,7 @@ class MailClient(private val _asJava: Object) {
    */
   def sendMailFuture(email: MailMessage): scala.concurrent.Future[MailResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMailResult, MailResult](x => MailResult(x))
-    asJava.asInstanceOf[JMailClient].sendMail(email.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -77,7 +77,7 @@ object MailClient {
     * @return MailClient instance that can then be used to send multiple mails
     */
   def createNonShared(vertx: Vertx, config: MailConfig): MailClient = {
-    MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config.asJava))
+    MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 
   /**
@@ -89,7 +89,7 @@ object MailClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: MailConfig, poolName: String): MailClient = {
-    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx],config.asJava,poolName.asInstanceOf[java.lang.String]))
+    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava, poolName.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -99,7 +99,7 @@ object MailClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: MailConfig): MailClient = {
-    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx],config.asJava))
+    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 
 }

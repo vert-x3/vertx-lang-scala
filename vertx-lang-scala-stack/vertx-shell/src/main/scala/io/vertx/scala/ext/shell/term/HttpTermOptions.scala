@@ -409,16 +409,18 @@ object HttpTermOptions {
   }
   
   def apply(t: JHttpTermOptions) = {
-    if(t != null)
+    if (t != null) {
       new HttpTermOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): HttpTermOptions = {
-    if(json != null)
+    if (json != null) {
       new HttpTermOptions(new JHttpTermOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

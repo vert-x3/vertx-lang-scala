@@ -58,7 +58,7 @@ object LocalSessionStore {
     * @return the session store
     */
   def create(vertx: Vertx, sessionMapName: String): LocalSessionStore = {
-    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
+    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -69,7 +69,7 @@ object LocalSessionStore {
     * @return the session store
     */
   def create(vertx: Vertx, sessionMapName: String, reaperInterval: Long): LocalSessionStore = {
-    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],reaperInterval.asInstanceOf[java.lang.Long]))
+    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], reaperInterval.asInstanceOf[java.lang.Long]))
   }
 
 }

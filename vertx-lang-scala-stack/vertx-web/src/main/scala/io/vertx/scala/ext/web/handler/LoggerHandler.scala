@@ -65,7 +65,7 @@ object LoggerHandler {
     * @return the handler
     */
   def create(immediate: Boolean, format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
-    LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean],format))
+    LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean], format))
   }
 
 }

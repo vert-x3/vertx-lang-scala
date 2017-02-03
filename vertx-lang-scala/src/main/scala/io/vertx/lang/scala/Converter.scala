@@ -64,8 +64,9 @@ object Converter {
     }
   }
 
-  def companion(name: String): Object =
+  def companion(name: String): Object = {
     Class.forName(name + "$").getField("MODULE$").get(null)
+  }
 
   def transformPackage(name: String): String = {
     name.replace("io.vertx", "io.vertx.scala")

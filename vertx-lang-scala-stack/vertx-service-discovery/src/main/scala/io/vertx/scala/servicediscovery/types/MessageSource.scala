@@ -51,7 +51,7 @@ object MessageSource {
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
   def createRecord(name: String, address: String, `type`: String, metadata: io.vertx.core.json.JsonObject): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String],metadata))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], metadata))
   }
 
   /**
@@ -62,7 +62,7 @@ object MessageSource {
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
   def createRecord(name: String, address: String, `type`: String): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String],`type`.asInstanceOf[java.lang.String]))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -73,7 +73,7 @@ object MessageSource {
     * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
   def createRecord(name: String, address: String): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String],address.asInstanceOf[java.lang.String]))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -83,7 +83,7 @@ object MessageSource {
     * @param filter The filter, optional
     */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],filter,{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 
   /**
@@ -93,7 +93,7 @@ object MessageSource {
     * @param filter The filter, must not be `null`
     */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery],{x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]},{x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object],MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
   }
 
 }

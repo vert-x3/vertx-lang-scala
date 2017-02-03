@@ -153,16 +153,18 @@ object RedisOptions {
   }
   
   def apply(t: JRedisOptions) = {
-    if(t != null)
+    if (t != null) {
       new RedisOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): RedisOptions = {
-    if(json != null)
+    if (json != null) {
       new RedisOptions(new JRedisOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

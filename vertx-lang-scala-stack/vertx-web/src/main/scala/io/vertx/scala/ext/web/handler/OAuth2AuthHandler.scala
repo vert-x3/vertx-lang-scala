@@ -93,7 +93,7 @@ object OAuth2AuthHandler {
     * @return the auth handler
     */
   def create(authProvider: OAuth2Auth, callbackURL: String): OAuth2AuthHandler = {
-    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth],callbackURL.asInstanceOf[java.lang.String]))
+    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth], callbackURL.asInstanceOf[java.lang.String]))
   }
 
 }

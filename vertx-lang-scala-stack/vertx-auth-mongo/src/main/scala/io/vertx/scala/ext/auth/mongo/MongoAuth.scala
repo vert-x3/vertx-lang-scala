@@ -220,7 +220,7 @@ class MongoAuth(private val _asJava: Object)
     * @param permissions a list of permissions to be set
     */
   def insertUser(username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String], resultHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],roles.map(x => x.asInstanceOf[java.lang.String]).asJava,permissions.map(x => x.asInstanceOf[java.lang.String]).asJava,{x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
  /**
@@ -233,7 +233,7 @@ class MongoAuth(private val _asJava: Object)
    */
   def insertUserFuture(username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String],password.asInstanceOf[java.lang.String],roles.map(x => x.asInstanceOf[java.lang.String]).asJava,permissions.map(x => x.asInstanceOf[java.lang.String]).asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -254,7 +254,7 @@ object MongoAuth {
     * @return the created instance of MongoAuths
     */
   def create(mongoClient: MongoClient, config: io.vertx.core.json.JsonObject): MongoAuth = {
-    MongoAuth(JMongoAuth.create(mongoClient.asJava.asInstanceOf[JMongoClient],config))
+    MongoAuth(JMongoAuth.create(mongoClient.asJava.asInstanceOf[JMongoClient], config))
   }
 
 }

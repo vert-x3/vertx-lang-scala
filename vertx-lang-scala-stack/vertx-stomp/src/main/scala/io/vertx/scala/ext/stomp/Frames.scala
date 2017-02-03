@@ -39,15 +39,15 @@ class Frames(private val _asJava: Object) {
 object Frames {
   def apply(asJava: JFrames) = new Frames(asJava)  
   def createErrorFrame(message: String, headers: scala.collection.mutable.Map[String, String], body: String): Frame = {
-    Frame(JFrames.createErrorFrame(message.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,body.asInstanceOf[java.lang.String]))
+    Frame(JFrames.createErrorFrame(message.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body.asInstanceOf[java.lang.String]))
   }
 
   def createReceiptFrame(receiptId: String, headers: scala.collection.mutable.Map[String, String]): Frame = {
-    Frame(JFrames.createReceiptFrame(receiptId.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
+    Frame(JFrames.createReceiptFrame(receiptId.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
   }
 
   def handleReceipt(frame: Frame, connection: StompServerConnection): Unit = {
-    JFrames.handleReceipt(frame.asJava,connection.asJava.asInstanceOf[JStompServerConnection])
+    JFrames.handleReceipt(frame.asJava, connection.asJava.asInstanceOf[JStompServerConnection])
   }
 
   def ping(): Frame = {

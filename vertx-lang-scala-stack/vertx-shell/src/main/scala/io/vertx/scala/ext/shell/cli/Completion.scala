@@ -76,7 +76,7 @@ class Completion(private val _asJava: Object) {
     * @param terminal true if the value is terminal, i.e can be further completed
     */
   def complete(value: String, terminal: Boolean): Unit = {
-    asJava.asInstanceOf[JCompletion].complete(value.asInstanceOf[java.lang.String],terminal.asInstanceOf[java.lang.Boolean])
+    asJava.asInstanceOf[JCompletion].complete(value.asInstanceOf[java.lang.String], terminal.asInstanceOf[java.lang.Boolean])
   }
 
 }

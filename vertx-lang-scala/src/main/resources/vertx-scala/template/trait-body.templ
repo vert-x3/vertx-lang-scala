@@ -4,9 +4,7 @@
 	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param : method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
 	@end{', '}): @{toScalaType(method.returnType, false)}\n
@@ -17,9 +15,7 @@
 	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
 	def @{escapeIfKeyword(method.name)}
-	@if{!method.typeParams.isEmpty}
-	[@foreach{typeParam : method.typeParams}@{typeParam.name}@end{', '}]
-	@end{}(
+	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param : method.params}
 		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
 	@end{', '}): @{toScalaType(method.returnType, false)}\n

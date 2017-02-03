@@ -61,7 +61,7 @@ object ShiroAuth {
     * @return the auth provider
     */
   def create(vertx: Vertx, realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType, config: io.vertx.core.json.JsonObject): ShiroAuth = {
-    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],realmType,config))
+    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx], realmType, config))
   }
 
   /**
@@ -71,7 +71,7 @@ object ShiroAuth {
     * @return the auth provider
     */
   def create(vertx: Vertx, options: ShiroAuthOptions): ShiroAuth = {
-    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
+    ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

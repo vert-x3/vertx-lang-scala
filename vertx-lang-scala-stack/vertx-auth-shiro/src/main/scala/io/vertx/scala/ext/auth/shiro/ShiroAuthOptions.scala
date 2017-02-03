@@ -61,16 +61,18 @@ object ShiroAuthOptions {
   }
   
   def apply(t: JShiroAuthOptions) = {
-    if(t != null)
+    if (t != null) {
       new ShiroAuthOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ShiroAuthOptions = {
-    if(json != null)
+    if (json != null) {
       new ShiroAuthOptions(new JShiroAuthOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

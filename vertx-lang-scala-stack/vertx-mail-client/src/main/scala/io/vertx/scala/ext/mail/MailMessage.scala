@@ -165,16 +165,18 @@ object MailMessage {
   }
   
   def apply(t: JMailMessage) = {
-    if(t != null)
+    if (t != null) {
       new MailMessage(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MailMessage = {
-    if(json != null)
+    if (json != null) {
       new MailMessage(new JMailMessage(json))
-    else
+    } else {
       null
+    }
   }
 }

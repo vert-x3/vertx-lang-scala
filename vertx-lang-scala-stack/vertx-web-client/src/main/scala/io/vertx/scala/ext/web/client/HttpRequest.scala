@@ -73,7 +73,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JHttpRequest[Object]].headers()
       cached_0 = MultiMap(tmp)
     }
@@ -126,7 +126,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def putHeader(name: String, value: String): HttpRequest[T] = {
-    asJava.asInstanceOf[JHttpRequest[Object]].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpRequest[Object]].putHeader(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -150,7 +150,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def addQueryParam(paramName: String, paramValue: String): HttpRequest[T] = {
-    asJava.asInstanceOf[JHttpRequest[Object]].addQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpRequest[Object]].addQueryParam(paramName.asInstanceOf[java.lang.String], paramValue.asInstanceOf[java.lang.String])
     this
   }
 
@@ -161,7 +161,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def setQueryParam(paramName: String, paramValue: String): HttpRequest[T] = {
-    asJava.asInstanceOf[JHttpRequest[Object]].setQueryParam(paramName.asInstanceOf[java.lang.String],paramValue.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpRequest[Object]].setQueryParam(paramName.asInstanceOf[java.lang.String], paramValue.asInstanceOf[java.lang.String])
     this
   }
 
@@ -195,7 +195,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendStream(body: ReadStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -203,7 +203,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendBuffer(body: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -212,7 +212,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendJsonObject(body: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -221,7 +221,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendJson(body: AnyRef, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body,{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -232,7 +232,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     * @param body the body
     */
   def sendForm(body: MultiMap, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object],HttpResponse[T]](x, a => HttpResponse[T](a)))})
   }
 
   /**
@@ -248,7 +248,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def sendStreamFuture(body: ReadStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -258,7 +258,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def sendBufferFuture(body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -269,7 +269,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -280,7 +280,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def sendJsonFuture(body: AnyRef): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -293,7 +293,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def sendFormFuture(body: MultiMap): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

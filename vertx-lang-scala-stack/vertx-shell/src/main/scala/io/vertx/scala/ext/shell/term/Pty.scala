@@ -56,7 +56,7 @@ class Pty(private val _asJava: Object) {
     * @return this current object
     */
   def setSize(width: Int, height: Int): Pty = {
-    asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer],height.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JPty].setSize(width.asInstanceOf[java.lang.Integer], height.asInstanceOf[java.lang.Integer])
     this
   }
 

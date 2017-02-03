@@ -42,7 +42,7 @@ class TemplateEngine(private val _asJava: Object) {
     * @param templateFileName the template file name to use
     */
   def render(context: RoutingContext, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
-    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],{x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
   }
 
  /**
@@ -53,7 +53,7 @@ class TemplateEngine(private val _asJava: Object) {
    */
   def renderFuture(context: RoutingContext, templateFileName: String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
-    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext],templateFileName.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateFileName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

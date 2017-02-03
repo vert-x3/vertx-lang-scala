@@ -49,7 +49,7 @@ class AccessToken(private val _asJava: Object)
     * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
     */
   def revoke(token_type: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -94,7 +94,7 @@ class AccessToken(private val _asJava: Object)
    */
   def revokeFuture(token_type: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

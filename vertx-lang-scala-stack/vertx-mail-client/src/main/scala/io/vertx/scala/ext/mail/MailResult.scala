@@ -56,16 +56,18 @@ object MailResult {
   }
   
   def apply(t: JMailResult) = {
-    if(t != null)
+    if (t != null) {
       new MailResult(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MailResult = {
-    if(json != null)
+    if (json != null) {
       new MailResult(new JMailResult(json))
-    else
+    } else {
       null
+    }
   }
 }

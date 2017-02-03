@@ -40,7 +40,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(headers: scala.collection.mutable.Map[String, String], body: io.vertx.core.buffer.Buffer): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,body)
+    asJava.asInstanceOf[JStompClientConnection].send(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body)
     this
   }
 
@@ -52,7 +52,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(headers: scala.collection.mutable.Map[String, String], body: io.vertx.core.buffer.Buffer, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,body,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].send(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -63,7 +63,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(destination: String, body: io.vertx.core.buffer.Buffer): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String],body)
+    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String], body)
     this
   }
 
@@ -75,7 +75,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(destination: String, body: io.vertx.core.buffer.Buffer, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String],body,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String], body, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -96,7 +96,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(frame: Frame, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(frame.asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].send(frame.asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -108,7 +108,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(destination: String, headers: scala.collection.mutable.Map[String, String], body: io.vertx.core.buffer.Buffer): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,body)
+    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body)
     this
   }
 
@@ -121,7 +121,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def send(destination: String, headers: scala.collection.mutable.Map[String, String], body: io.vertx.core.buffer.Buffer, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,body,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].send(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -144,7 +144,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def unsubscribe(destination: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -156,7 +156,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def unsubscribe(destination: String, headers: scala.collection.mutable.Map[String, String]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
+    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -169,7 +169,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def unsubscribe(destination: String, headers: scala.collection.mutable.Map[String, String], receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].unsubscribe(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -223,7 +223,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def beginTX(id: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -244,7 +244,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def beginTX(id: String, headers: scala.collection.mutable.Map[String, String]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
+    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -256,7 +256,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def beginTX(id: String, headers: scala.collection.mutable.Map[String, String], receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].beginTX(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -277,7 +277,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def commit(id: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -288,7 +288,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def commit(id: String, headers: scala.collection.mutable.Map[String, String]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
+    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -300,7 +300,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def commit(id: String, headers: scala.collection.mutable.Map[String, String], receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].commit(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -321,7 +321,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def abort(id: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -332,7 +332,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def abort(id: String, headers: scala.collection.mutable.Map[String, String]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
+    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -344,7 +344,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def abort(id: String, headers: scala.collection.mutable.Map[String, String], receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].abort(id.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -388,7 +388,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def disconnect(frame: Frame, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].disconnect(frame.asJava,{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].disconnect(frame.asJava, {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -411,7 +411,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def ack(id: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -434,7 +434,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def nack(id: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -446,7 +446,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def ack(id: String, txId: String): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String],txId.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String], txId.asInstanceOf[java.lang.String])
     this
   }
 
@@ -459,7 +459,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def ack(id: String, txId: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String],txId.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].ack(id.asInstanceOf[java.lang.String], txId.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -471,7 +471,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def nack(id: String, txId: String): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String],txId.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String], txId.asInstanceOf[java.lang.String])
     this
   }
 
@@ -484,7 +484,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the current StompClientConnection
     */
   def nack(id: String, txId: String, receiptHandler: Handler[Frame]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String],txId.asInstanceOf[java.lang.String],{x: JFrame => receiptHandler.handle(Frame(x))})
+    asJava.asInstanceOf[JStompClientConnection].nack(id.asInstanceOf[java.lang.String], txId.asInstanceOf[java.lang.String], {x: JFrame => receiptHandler.handle(Frame(x))})
     this
   }
 
@@ -551,7 +551,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the subscription id.
     */
   def subscribe(destination: String, handler: Handler[Frame]): String = {
-    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String],{x: JFrame => handler.handle(Frame(x))}).asInstanceOf[String]
+    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String], {x: JFrame => handler.handle(Frame(x))}).asInstanceOf[String]
   }
 
   /**
@@ -562,7 +562,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the subscription id.
     */
   def subscribe(destination: String, handler: Handler[Frame], receiptHandler: Handler[Frame]): String = {
-    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String],{x: JFrame => handler.handle(Frame(x))},{x: JFrame => receiptHandler.handle(Frame(x))}).asInstanceOf[String]
+    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String], {x: JFrame => handler.handle(Frame(x))}, {x: JFrame => receiptHandler.handle(Frame(x))}).asInstanceOf[String]
   }
 
   /**
@@ -573,7 +573,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the subscription id, which can either be the destination or the id set in the headers.
     */
   def subscribe(destination: String, headers: scala.collection.mutable.Map[String, String], handler: Handler[Frame]): String = {
-    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => handler.handle(Frame(x))}).asInstanceOf[String]
+    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => handler.handle(Frame(x))}).asInstanceOf[String]
   }
 
   /**
@@ -585,7 +585,7 @@ class StompClientConnection(private val _asJava: Object) {
     * @return the subscription id, which can either be the destination or the id set in the headers.
     */
   def subscribe(destination: String, headers: scala.collection.mutable.Map[String, String], handler: Handler[Frame], receiptHandler: Handler[Frame]): String = {
-    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String],headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava,{x: JFrame => handler.handle(Frame(x))},{x: JFrame => receiptHandler.handle(Frame(x))}).asInstanceOf[String]
+    asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => handler.handle(Frame(x))}, {x: JFrame => receiptHandler.handle(Frame(x))}).asInstanceOf[String]
   }
 
 }

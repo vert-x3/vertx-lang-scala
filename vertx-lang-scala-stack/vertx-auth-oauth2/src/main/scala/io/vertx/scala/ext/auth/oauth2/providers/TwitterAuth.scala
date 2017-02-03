@@ -44,7 +44,7 @@ object TwitterAuth {
     * @param clientSecret the client secret given to you by Twitter
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
-    OAuth2Auth(JTwitterAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JTwitterAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -54,7 +54,7 @@ object TwitterAuth {
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JTwitterAuth.create(vertx.asJava.asInstanceOf[JVertx],clientId.asInstanceOf[java.lang.String],clientSecret.asInstanceOf[java.lang.String],httpClientOptions.asJava))
+    OAuth2Auth(JTwitterAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
   }
 
 }

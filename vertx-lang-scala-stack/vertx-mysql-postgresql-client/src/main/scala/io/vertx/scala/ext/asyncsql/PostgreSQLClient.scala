@@ -48,7 +48,7 @@ object PostgreSQLClient {
     * @return the client
     */
   def createNonShared(vertx: Vertx, config: io.vertx.core.json.JsonObject): AsyncSQLClient = {
-    AsyncSQLClient(JPostgreSQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config))
+    AsyncSQLClient(JPostgreSQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
   /**
@@ -59,7 +59,7 @@ object PostgreSQLClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: io.vertx.core.json.JsonObject, poolName: String): AsyncSQLClient = {
-    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config,poolName.asInstanceOf[java.lang.String]))
+    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, poolName.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -69,7 +69,7 @@ object PostgreSQLClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: io.vertx.core.json.JsonObject): AsyncSQLClient = {
-    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx],config))
+    AsyncSQLClient(JPostgreSQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

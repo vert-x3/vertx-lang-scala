@@ -85,7 +85,7 @@ class JDBCAuth(private val _asJava: Object)
     * @return the hashed password
     */
   def computeHash(password: String, salt: String): String = {
-    asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String],salt.asInstanceOf[java.lang.String]).asInstanceOf[String]
+    asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String], salt.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
   /**
@@ -108,7 +108,7 @@ object JDBCAuth {
     * @return the auth provider
     */
   def create(vertx: Vertx, client: JDBCClient): JDBCAuth = {
-    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx],client.asJava.asInstanceOf[JJDBCClient]))
+    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx], client.asJava.asInstanceOf[JJDBCClient]))
   }
 
 }

@@ -55,7 +55,7 @@ object ErrorHandler {
     * @return the handler
     */
   def create(errorTemplateName: String, displayExceptionDetails: Boolean): ErrorHandler = {
-    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String],displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
+    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String], displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 
   /**

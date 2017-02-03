@@ -145,7 +145,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def putHeader(name: String, value: String): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].putHeader(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpServerResponse].putHeader(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -156,7 +156,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def putTrailer(name: String, value: String): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].putTrailer(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpServerResponse].putTrailer(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -178,7 +178,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def write(chunk: String, enc: String): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String])
     this
   }
 
@@ -220,7 +220,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long])
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -236,7 +236,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long])
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -247,7 +247,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, resultHandler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -259,7 +259,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, resultHandler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -272,7 +272,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -304,7 +304,7 @@ class HttpServerResponse(private val _asJava: Object)
     * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
     */
   def push(method: io.vertx.core.http.HttpMethod, path: String, handler: Handler[AsyncResult[HttpServerResponse]]): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
+    asJava.asInstanceOf[JHttpServerResponse].push(method, path.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
     this
   }
 
@@ -325,7 +325,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: MultiMap, handler: Handler[AsyncResult[HttpServerResponse]]): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
+    asJava.asInstanceOf[JHttpServerResponse].push(method, host.asInstanceOf[java.lang.String], path.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))})
     this
   }
 
@@ -339,7 +339,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def writeCustomFrame(`type`: Int, flags: Int, payload: io.vertx.core.buffer.Buffer): HttpServerResponse = {
-    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer],flags.asInstanceOf[java.lang.Integer],payload)
+    asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(`type`.asInstanceOf[java.lang.Integer], flags.asInstanceOf[java.lang.Integer], payload)
     this
   }
 
@@ -402,7 +402,7 @@ class HttpServerResponse(private val _asJava: Object)
     * @param enc the encoding to use
     */
   def end(chunk: String, enc: String): Unit = {
-    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String],enc.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String])
   }
 
   /**
@@ -470,14 +470,14 @@ class HttpServerResponse(private val _asJava: Object)
     * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with no headers.
     */
   def push(method: io.vertx.core.http.HttpMethod, host: String, path: String, handler: Handler[AsyncResult[HttpServerResponse]]): HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method, host.asInstanceOf[java.lang.String], path.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
   }
 
   /**
     * Like [[io.vertx.scala.core.http.HttpServerResponse#pushFuture]] with the host copied from the current request.
     */
   def push(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap, handler: Handler[AsyncResult[HttpServerResponse]]): HttpServerResponse = {
-    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],{x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
+    HttpServerResponse(asJava.asInstanceOf[JHttpServerResponse].push(method, path.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpServerResponse] => handler.handle(AsyncResultWrapper[JHttpServerResponse,HttpServerResponse](x, a => HttpServerResponse(a)))}))
   }
 
   /**
@@ -496,7 +496,7 @@ class HttpServerResponse(private val _asJava: Object)
    */
   def sendFileFuture(filename: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -509,7 +509,7 @@ class HttpServerResponse(private val _asJava: Object)
    */
   def sendFileFuture(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -523,7 +523,7 @@ class HttpServerResponse(private val _asJava: Object)
    */
   def sendFileFuture(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String],offset.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -532,7 +532,7 @@ class HttpServerResponse(private val _asJava: Object)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String): scala.concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
-    asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].push(method, host.asInstanceOf[java.lang.String], path.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -541,7 +541,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String, headers: MultiMap): scala.concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
-    asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].push(method, path.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -550,7 +550,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def pushFuture(method: io.vertx.core.http.HttpMethod, path: String): scala.concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
-    asJava.asInstanceOf[JHttpServerResponse].push(method,path.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].push(method, path.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -572,7 +572,7 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
    */
   def pushFuture(method: io.vertx.core.http.HttpMethod, host: String, path: String, headers: MultiMap): scala.concurrent.Future[HttpServerResponse] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpServerResponse, HttpServerResponse](x => HttpServerResponse(x))
-    asJava.asInstanceOf[JHttpServerResponse].push(method,host.asInstanceOf[java.lang.String],path.asInstanceOf[java.lang.String],headers.asJava.asInstanceOf[JMultiMap],promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpServerResponse].push(method, host.asInstanceOf[java.lang.String], path.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

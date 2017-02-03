@@ -68,16 +68,18 @@ object KillFilter {
   }
   
   def apply(t: JKillFilter) = {
-    if(t != null)
+    if (t != null) {
       new KillFilter(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): KillFilter = {
-    if(json != null)
+    if (json != null) {
       new KillFilter(new JKillFilter(json))
-    else
+    } else {
       null
+    }
   }
 }

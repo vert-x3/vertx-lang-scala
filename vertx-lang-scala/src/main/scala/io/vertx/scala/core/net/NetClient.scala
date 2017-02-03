@@ -50,7 +50,7 @@ class NetClient(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def connect(port: Int, host: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],{x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket,NetSocket](x, a => NetSocket(a)))})
     this
   }
 
@@ -82,7 +82,7 @@ class NetClient(private val _asJava: Object)
 WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
   def connectFuture(port: Int, host: String): scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
-    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

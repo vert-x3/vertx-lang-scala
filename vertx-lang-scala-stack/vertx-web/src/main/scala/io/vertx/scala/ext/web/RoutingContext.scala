@@ -76,7 +76,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the HTTP request object
     */
   def request(): HttpServerRequest = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].request()
       cached_0 = HttpServerRequest(tmp)
     }
@@ -87,7 +87,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the HTTP response object
     */
   def response(): HttpServerResponse = {
-    if(cached_1 == null) {
+    if (cached_1 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].response()
       cached_1 = HttpServerResponse(tmp)
     }
@@ -98,7 +98,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the Vert.x instance associated to the initiating Router for this context
     */
   def vertx(): Vertx = {
-    if(cached_2 == null) {
+    if (cached_2 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].vertx()
       cached_2 = Vertx(tmp)
     }
@@ -112,7 +112,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the throwable used when signalling failure
     */
   def failure(): Throwable = {
-    if(cached_3 == null) {
+    if (cached_3 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].failure()
       cached_3 = tmp
     }
@@ -128,7 +128,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the status code used when signalling failure
     */
   def statusCode(): Int = {
-    if(cached_4 == null) {
+    if (cached_4 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].statusCode()
       cached_4 = tmp.asInstanceOf[Int]
     }
@@ -148,7 +148,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return A container with the parsed headers.
     */
   def parsedHeaders(): ParsedHeaderValues = {
-    if(cached_5 == null) {
+    if (cached_5 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].parsedHeaders()
       cached_5 = ParsedHeaderValues(tmp)
     }
@@ -165,7 +165,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the best matched locale for the request
     */
   def acceptableLocales(): scala.collection.mutable.Buffer[Locale] = {
-    if(cached_6 == null) {
+    if (cached_6 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLocales()
       cached_6 = tmp.asScala.map(x => Locale(x))
     }
@@ -182,7 +182,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return The best matched language for the request
     */
   def acceptableLanguages(): scala.collection.mutable.Buffer[LanguageHeader] = {
-    if(cached_7 == null) {
+    if (cached_7 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLanguages()
       cached_7 = tmp.asScala.map(x => LanguageHeader(x))
     }
@@ -195,7 +195,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the users preferred locale.
     */
   def preferredLocale(): Locale = {
-    if(cached_8 == null) {
+    if (cached_8 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].preferredLocale()
       cached_8 = Locale(tmp)
     }
@@ -208,7 +208,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return the users preferred locale.
     */
   def preferredLanguage(): LanguageHeader = {
-    if(cached_9 == null) {
+    if (cached_9 == null) {
       val tmp = asJava.asInstanceOf[JRoutingContext].preferredLanguage()
       cached_9 = LanguageHeader(tmp)
     }
@@ -222,7 +222,7 @@ class RoutingContext(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def put(key: String, obj: AnyRef): RoutingContext = {
-    asJava.asInstanceOf[JRoutingContext].put(key.asInstanceOf[java.lang.String],obj)
+    asJava.asInstanceOf[JRoutingContext].put(key.asInstanceOf[java.lang.String], obj)
     this
   }
 
@@ -530,7 +530,7 @@ class RoutingContext(private val _asJava: Object) {
     * @param path the new http path.
     */
   def reroute(method: io.vertx.core.http.HttpMethod, path: String): Unit = {
-    asJava.asInstanceOf[JRoutingContext].reroute(method,path.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JRoutingContext].reroute(method, path.asInstanceOf[java.lang.String])
   }
 
   /**

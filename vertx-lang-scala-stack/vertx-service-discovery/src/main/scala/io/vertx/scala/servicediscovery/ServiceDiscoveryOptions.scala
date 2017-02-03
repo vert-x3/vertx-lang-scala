@@ -85,16 +85,18 @@ object ServiceDiscoveryOptions {
   }
   
   def apply(t: JServiceDiscoveryOptions) = {
-    if(t != null)
+    if (t != null) {
       new ServiceDiscoveryOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ServiceDiscoveryOptions = {
-    if(json != null)
+    if (json != null) {
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

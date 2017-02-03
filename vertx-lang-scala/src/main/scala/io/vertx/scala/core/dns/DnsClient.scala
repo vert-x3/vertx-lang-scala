@@ -42,7 +42,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -52,7 +52,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup4(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -62,7 +62,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def lookup6(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -72,7 +72,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def resolveA(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -82,7 +82,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def resolveAAAA(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -92,7 +92,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveCNAME(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -102,7 +102,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveMX(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[MxRecord]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JMxRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x))))})
+    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[JMxRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JMxRecord],scala.collection.mutable.Buffer[MxRecord]](x, a => a.asScala.map(x => MxRecord(x))))})
     this
   }
 
@@ -112,7 +112,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveTXT(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -122,7 +122,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolvePTR(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -132,7 +132,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveNS(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String],scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
     this
   }
 
@@ -142,7 +142,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def resolveSRV(name: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[SrvRecord]]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.util.List[JSrvRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x))))})
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[JSrvRecord]] => handler.handle(AsyncResultWrapper[java.util.List[JSrvRecord],scala.collection.mutable.Buffer[SrvRecord]](x, a => a.asScala.map(x => SrvRecord(x))))})
     this
   }
 
@@ -153,7 +153,7 @@ class DnsClient(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently.
     */
   def reverseLookup(ipaddress: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
     this
   }
 
@@ -164,7 +164,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def lookupFuture(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -175,7 +175,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def lookup4Future(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -186,7 +186,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def lookup6Future(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -197,7 +197,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveAFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
-    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveA(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -208,7 +208,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveAAAAFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
-    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveAAAA(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -219,7 +219,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveCNAMEFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
-    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveCNAME(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -230,7 +230,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveMXFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[MxRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JMxRecord], scala.collection.mutable.Buffer[MxRecord]](x => x.asScala.map(x => MxRecord(x)))
-    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveMX(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -241,7 +241,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveTXTFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
-    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveTXT(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -252,7 +252,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolvePTRFuture(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -263,7 +263,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveNSFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[String]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x => x.asScala.map(x => x.asInstanceOf[String]))
-    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveNS(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -274,7 +274,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def resolveSRVFuture(name: String): scala.concurrent.Future[scala.collection.mutable.Buffer[SrvRecord]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JSrvRecord], scala.collection.mutable.Buffer[SrvRecord]](x => x.asScala.map(x => SrvRecord(x)))
-    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].resolveSRV(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -286,7 +286,7 @@ class DnsClient(private val _asJava: Object) {
    */
   def reverseLookupFuture(ipaddress: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

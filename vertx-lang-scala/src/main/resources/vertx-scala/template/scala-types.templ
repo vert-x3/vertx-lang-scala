@@ -170,8 +170,7 @@
     } else if (type.kind == CLASS_ASYNC_RESULT) {
       var ret = 'AsyncResult';
       if (!type.args.isEmpty)
-        ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ']';
-      else
+        ret += '[' + toScalaType(type.args[0], convertTypeParamsToObject) + ']';else
         ret += '[_]';
       return wrapInOptionIfNullable(nullable, ret);
     } else if (type.kind == CLASS_API) {
@@ -192,13 +191,11 @@
           }
           ret += ']';
         }
-      }
-      else if (type.name.contains('io.vertx.core.Future')) {
+      } else if (type.name.contains('io.vertx.core.Future')) {
         ret += '[_]';
       }
       return wrapInOptionIfNullable(nullable, ret);
-    }
-    else if (type.kind == CLASS_CLASS_TYPE) {
+    } else if (type.kind == CLASS_CLASS_TYPE) {
         var ret = 'Class';
         if (type.args.empty) {
           ret += '[_]';
@@ -216,8 +213,7 @@
           ret += ']';
         }
         return ret;
-    }
-    else {
+    } else {
       return 'Unknown type for toScalaType '+type.name+' '+type.kind;
     }
   }
@@ -245,8 +241,7 @@
       if (type.isVariable) {
         if (nullable) {
           ret = name + '.map(x => toJava['+type.simpleName+'](x)).orNull';
-        }
-        else {
+        } else {
           ret = 'toJava['+type.simpleName+'](' + name + ')';
         }
       }
@@ -299,13 +294,11 @@
         ret = name + '.map(' + name +' => ' + ret + ').orNull';
       }
       return ret;
-    }
-    else if (type.kind == CLASS_FUNCTION) {
+    } else if (type.kind == CLASS_FUNCTION) {
       var executed = name;
       if (type.args[0].kind == CLASS_VOID) {
         executed = executed + "()";
-      }
-      else {
+      } else {
         executed = executed + "(" +toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams)+ ")";
       }
       executed = toJavaWithConversion(executed, type.args[1], typeParams, methodTypeParams);
@@ -350,8 +343,7 @@
     } else if (type.kind == CLASS_OBJECT) {
       if (convertTypeParamsToObject) {
         return 'Object';
-      }
-      else {
+      } else {
         return type.simpleName;
       }
     } else if (type.kind == CLASS_VOID || type.name == 'java.lang.Void' || type.name == 'void') {
@@ -508,8 +500,7 @@
     var ret = '';
     if (type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
       if (typeParams.isEmpty && methodTypeParams.isEmpty)
-        ret += '.asInstanceOf[JFuture[_]]';
-      else
+        ret += '.asInstanceOf[JFuture[_]]';else
         ret += '.asInstanceOf[JFuture[Object]]';
     } else {
       ret += '.asInstanceOf[' + toJavaType(type, true) + ']';

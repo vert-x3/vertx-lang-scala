@@ -79,7 +79,7 @@ object DigestAuthHandler {
     * @return the auth handler
     */
   def create(authProvider: HtdigestAuth, nonceExpireTimeout: Long): DigestAuthHandler = {
-    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth],nonceExpireTimeout.asInstanceOf[java.lang.Long]))
+    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth], nonceExpireTimeout.asInstanceOf[java.lang.Long]))
   }
 
 }

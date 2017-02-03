@@ -107,16 +107,18 @@ object ShellServiceOptions {
   }
   
   def apply(t: JShellServiceOptions) = {
-    if(t != null)
+    if (t != null) {
       new ShellServiceOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ShellServiceOptions = {
-    if(json != null)
+    if (json != null) {
       new ShellServiceOptions(new JShellServiceOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

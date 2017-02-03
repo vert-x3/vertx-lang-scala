@@ -43,16 +43,18 @@ object ScanOptions {
   }
   
   def apply(t: JScanOptions) = {
-    if(t != null)
+    if (t != null) {
       new ScanOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ScanOptions = {
-    if(json != null)
+    if (json != null) {
       new ScanOptions(new JScanOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -106,16 +106,18 @@ object Record {
   }
   
   def apply(t: JRecord) = {
-    if(t != null)
+    if (t != null) {
       new Record(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Record = {
-    if(json != null)
+    if (json != null) {
       new Record(new JRecord(json))
-    else
+    } else {
       null
+    }
   }
 }

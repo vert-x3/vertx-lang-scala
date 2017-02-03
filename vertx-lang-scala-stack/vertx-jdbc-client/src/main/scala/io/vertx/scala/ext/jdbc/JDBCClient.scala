@@ -74,7 +74,7 @@ object JDBCClient {
     * @return the client
     */
   def createNonShared(vertx: Vertx, config: io.vertx.core.json.JsonObject): JDBCClient = {
-    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx],config))
+    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
   /**
@@ -86,7 +86,7 @@ object JDBCClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: io.vertx.core.json.JsonObject, dataSourceName: String): JDBCClient = {
-    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx],config,dataSourceName.asInstanceOf[java.lang.String]))
+    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -96,7 +96,7 @@ object JDBCClient {
     * @return the client
     */
   def createShared(vertx: Vertx, config: io.vertx.core.json.JsonObject): JDBCClient = {
-    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx],config))
+    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

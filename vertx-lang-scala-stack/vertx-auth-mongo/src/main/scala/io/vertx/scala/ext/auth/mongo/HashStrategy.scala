@@ -39,7 +39,7 @@ class HashStrategy(private val _asJava: Object) {
     * @return the hashed password
     */
   def computeHash(password: String, user: User): String = {
-    asJava.asInstanceOf[JHashStrategy].computeHash(password.asInstanceOf[java.lang.String],user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
+    asJava.asInstanceOf[JHashStrategy].computeHash(password.asInstanceOf[java.lang.String], user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
   /**

@@ -49,16 +49,18 @@ object MongoClientUpdateResult {
   }
   
   def apply(t: JMongoClientUpdateResult) = {
-    if(t != null)
+    if (t != null) {
       new MongoClientUpdateResult(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MongoClientUpdateResult = {
-    if(json != null)
+    if (json != null) {
       new MongoClientUpdateResult(new JMongoClientUpdateResult(json))
-    else
+    } else {
       null
+    }
   }
 }
