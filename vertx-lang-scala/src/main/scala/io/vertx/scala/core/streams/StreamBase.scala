@@ -17,9 +17,10 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{StreamBase => JStreamBase}
+import io.vertx.core.Handler
 
 /**
   * Base interface for a stream.
@@ -29,33 +30,29 @@ trait StreamBase {
   def asJava: java.lang.Object
 
   /**
-  * Set an exception handler.
-  * @param handler the handler
-  * @return a reference to this, so the API can be used fluently
-  */
-def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase
+    * Set an exception handler.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Handler[Throwable]): StreamBase
 
 }
 
 object StreamBase {
+  def apply(asJava: JStreamBase): StreamBase = new StreamBaseImpl(asJava)
+    private class StreamBaseImpl(private val _asJava: Object) extends StreamBase {
 
-  def apply(_asJava: JStreamBase): StreamBase =
-    new StreamBaseImpl(_asJava)
+      def asJava = _asJava
 
-  private class StreamBaseImpl(private val _asJava: JStreamBase) extends StreamBase {
-
-    def asJava: JStreamBase = _asJava
-
-    /**
-      * Set an exception handler.
-      * @param handler the handler
-      * @return a reference to this, so the API can be used fluently
-      */
-    def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): StreamBase = {
-        _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-      this
-    }
-
+  /**
+    * Set an exception handler.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Handler[Throwable]): StreamBase = {
+    asJava.asInstanceOf[JStreamBase].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
   }
 
+}
 }

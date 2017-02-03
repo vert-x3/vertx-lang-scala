@@ -16,9 +16,9 @@
 
 package io.vertx.scala.core
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 import io.vertx.core.json.JsonObject
 
@@ -26,18 +26,18 @@ import io.vertx.core.json.JsonObject
   * Options for configuring a verticle deployment.
   * 
   */
+class DeploymentOptions(private val _asJava: JDeploymentOptions) {
 
-class DeploymentOptions(val asJava: JDeploymentOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the JSON configuration that will be passed to the verticle(s) when it's deployed
     */
-  def setConfig(value: JsonObject) = {
+  def setConfig(value: io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
   }
-  def getConfig = {
+  def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
@@ -50,8 +50,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setExtraClasspath(value.asJava)
     this
   }
-  def getExtraClasspath = {
-    asJava.getExtraClasspath()
+  def getExtraClasspath: scala.collection.mutable.Buffer[String] = {
+    asJava.getExtraClasspath().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -61,8 +61,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setHa(value)
     this
   }
-  def isHa = {
-    asJava.isHa()
+  def isHa: Boolean = {
+    asJava.isHa().asInstanceOf[Boolean]
   }
 
   /**
@@ -72,8 +72,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setInstances(value)
     this
   }
-  def getInstances = {
-    asJava.getInstances()
+  def getInstances: Int = {
+    asJava.getInstances().asInstanceOf[Int]
   }
 
   /**
@@ -83,8 +83,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setIsolatedClasses(value.asJava)
     this
   }
-  def getIsolatedClasses = {
-    asJava.getIsolatedClasses()
+  def getIsolatedClasses: scala.collection.mutable.Buffer[String] = {
+    asJava.getIsolatedClasses().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -94,8 +94,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setIsolationGroup(value)
     this
   }
-  def getIsolationGroup = {
-    asJava.getIsolationGroup()
+  def getIsolationGroup: String = {
+    asJava.getIsolationGroup().asInstanceOf[String]
   }
 
   /**
@@ -105,8 +105,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setMaxWorkerExecuteTime(value)
     this
   }
-  def getMaxWorkerExecuteTime = {
-    asJava.getMaxWorkerExecuteTime()
+  def getMaxWorkerExecuteTime: Long = {
+    asJava.getMaxWorkerExecuteTime().asInstanceOf[Long]
   }
 
   /**
@@ -116,8 +116,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setMultiThreaded(value)
     this
   }
-  def isMultiThreaded = {
-    asJava.isMultiThreaded()
+  def isMultiThreaded: Boolean = {
+    asJava.isMultiThreaded().asInstanceOf[Boolean]
   }
 
   /**
@@ -127,8 +127,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setWorker(value)
     this
   }
-  def isWorker = {
-    asJava.isWorker()
+  def isWorker: Boolean = {
+    asJava.isWorker().asInstanceOf[Boolean]
   }
 
   /**
@@ -139,8 +139,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setWorkerPoolName(value)
     this
   }
-  def getWorkerPoolName = {
-    asJava.getWorkerPoolName()
+  def getWorkerPoolName: String = {
+    asJava.getWorkerPoolName().asInstanceOf[String]
   }
 
   /**
@@ -150,8 +150,8 @@ class DeploymentOptions(val asJava: JDeploymentOptions) {
     asJava.setWorkerPoolSize(value)
     this
   }
-  def getWorkerPoolSize = {
-    asJava.getWorkerPoolSize()
+  def getWorkerPoolSize: Int = {
+    asJava.getWorkerPoolSize().asInstanceOf[Int]
   }
 }
 
@@ -162,16 +162,18 @@ object DeploymentOptions {
   }
   
   def apply(t: JDeploymentOptions) = {
-    if(t != null)
+    if (t != null) {
       new DeploymentOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):DeploymentOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): DeploymentOptions = {
+    if (json != null) {
       new DeploymentOptions(new JDeploymentOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

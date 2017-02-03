@@ -27,6 +27,9 @@ import io.vertx.core.json.JsonArray;
 public class HttpServerOptionsConverter {
 
   public static void fromJson(JsonObject json, HttpServerOptions obj) {
+    if (json.getValue("acceptUnmaskedFrames") instanceof Boolean) {
+      obj.setAcceptUnmaskedFrames((Boolean)json.getValue("acceptUnmaskedFrames"));
+    }
     if (json.getValue("alpnVersions") instanceof JsonArray) {
       java.util.ArrayList<io.vertx.core.http.HttpVersion> list = new java.util.ArrayList<>();
       json.getJsonArray("alpnVersions").forEach( item -> {
@@ -71,12 +74,11 @@ public class HttpServerOptionsConverter {
   }
 
   public static void toJson(HttpServerOptions obj, JsonObject json) {
+    json.put("acceptUnmaskedFrames", obj.isAcceptUnmaskedFrames());
     if (obj.getAlpnVersions() != null) {
-      json.put("alpnVersions", new JsonArray(
-          obj.getAlpnVersions().
-              stream().
-              map(item -> item.name()).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getAlpnVersions().forEach(item -> array.add(item.name()));
+      json.put("alpnVersions", array);
     }
     json.put("compressionLevel", obj.getCompressionLevel());
     json.put("compressionSupported", obj.isCompressionSupported());

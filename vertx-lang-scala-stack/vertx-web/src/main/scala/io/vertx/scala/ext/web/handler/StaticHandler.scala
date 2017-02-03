@@ -17,23 +17,20 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   * A handler for serving static resources from the file system or classpath.
   */
-class StaticHandler(private val _asJava: JStaticHandler) 
+class StaticHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JStaticHandler = _asJava
-
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-  }
+  def asJava = _asJava
 
   /**
     * Enable/Disable access to the root of the filesystem
@@ -41,7 +38,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setAllowRootFileSystemAccess(allowRootFileSystemAccess: Boolean): StaticHandler = {
-    _asJava.setAllowRootFileSystemAccess(allowRootFileSystemAccess)
+    asJava.asInstanceOf[JStaticHandler].setAllowRootFileSystemAccess(allowRootFileSystemAccess.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -51,7 +48,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setWebRoot(webRoot: String): StaticHandler = {
-    _asJava.setWebRoot(webRoot)
+    asJava.asInstanceOf[JStaticHandler].setWebRoot(webRoot.asInstanceOf[java.lang.String])
     this
   }
 
@@ -61,7 +58,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setFilesReadOnly(readOnly: Boolean): StaticHandler = {
-    _asJava.setFilesReadOnly(readOnly)
+    asJava.asInstanceOf[JStaticHandler].setFilesReadOnly(readOnly.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -71,7 +68,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setMaxAgeSeconds(maxAgeSeconds: Long): StaticHandler = {
-    _asJava.setMaxAgeSeconds(maxAgeSeconds)
+    asJava.asInstanceOf[JStaticHandler].setMaxAgeSeconds(maxAgeSeconds.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -81,7 +78,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setCachingEnabled(enabled: Boolean): StaticHandler = {
-    _asJava.setCachingEnabled(enabled)
+    asJava.asInstanceOf[JStaticHandler].setCachingEnabled(enabled.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -91,7 +88,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setDirectoryListing(directoryListing: Boolean): StaticHandler = {
-    _asJava.setDirectoryListing(directoryListing)
+    asJava.asInstanceOf[JStaticHandler].setDirectoryListing(directoryListing.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -101,7 +98,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setIncludeHidden(includeHidden: Boolean): StaticHandler = {
-    _asJava.setIncludeHidden(includeHidden)
+    asJava.asInstanceOf[JStaticHandler].setIncludeHidden(includeHidden.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -111,7 +108,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setCacheEntryTimeout(timeout: Long): StaticHandler = {
-    _asJava.setCacheEntryTimeout(timeout)
+    asJava.asInstanceOf[JStaticHandler].setCacheEntryTimeout(timeout.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -121,7 +118,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setIndexPage(indexPage: String): StaticHandler = {
-    _asJava.setIndexPage(indexPage)
+    asJava.asInstanceOf[JStaticHandler].setIndexPage(indexPage.asInstanceOf[java.lang.String])
     this
   }
 
@@ -131,7 +128,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setMaxCacheSize(maxCacheSize: Int): StaticHandler = {
-    _asJava.setMaxCacheSize(maxCacheSize)
+    asJava.asInstanceOf[JStaticHandler].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -141,7 +138,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setAlwaysAsyncFS(alwaysAsyncFS: Boolean): StaticHandler = {
-    _asJava.setAlwaysAsyncFS(alwaysAsyncFS)
+    asJava.asInstanceOf[JStaticHandler].setAlwaysAsyncFS(alwaysAsyncFS.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -151,7 +148,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setEnableFSTuning(enableFSTuning: Boolean): StaticHandler = {
-    _asJava.setEnableFSTuning(enableFSTuning)
+    asJava.asInstanceOf[JStaticHandler].setEnableFSTuning(enableFSTuning.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -161,7 +158,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds: Long): StaticHandler = {
-    _asJava.setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds)
+    asJava.asInstanceOf[JStaticHandler].setMaxAvgServeTimeNs(maxAvgServeTimeNanoSeconds.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -171,7 +168,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setDirectoryTemplate(directoryTemplate: String): StaticHandler = {
-    _asJava.setDirectoryTemplate(directoryTemplate)
+    asJava.asInstanceOf[JStaticHandler].setDirectoryTemplate(directoryTemplate.asInstanceOf[java.lang.String])
     this
   }
 
@@ -181,7 +178,7 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setEnableRangeSupport(enableRangeSupport: Boolean): StaticHandler = {
-    _asJava.setEnableRangeSupport(enableRangeSupport)
+    asJava.asInstanceOf[JStaticHandler].setEnableRangeSupport(enableRangeSupport.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -191,23 +188,43 @@ class StaticHandler(private val _asJava: JStaticHandler)
     * @return a reference to this, so the API can be used fluently
     */
   def setSendVaryHeader(varyHeader: Boolean): StaticHandler = {
-    _asJava.setSendVaryHeader(varyHeader)
+    asJava.asInstanceOf[JStaticHandler].setSendVaryHeader(varyHeader.asInstanceOf[java.lang.Boolean])
     this
+  }
+
+  /**
+    * Set the default content encoding for text related files. This allows overriding the system settings default value.
+    * @param contentEncoding the desired content encoding e.g.: "UTF-8"
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setDefaultContentEncoding(contentEncoding: String): StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setDefaultContentEncoding(contentEncoding.asInstanceOf[java.lang.String])
+    this
+  }
+
+  override def handle(arg0: RoutingContext): Unit = {
+    asJava.asInstanceOf[JStaticHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object StaticHandler {
-
-  def apply(_asJava: JStaticHandler): StaticHandler =
-    new StaticHandler(_asJava)
-
+  def apply(asJava: JStaticHandler) = new StaticHandler(asJava)  
+  /**
+    * Create a handler using defaults
+    * @return the handler
+    */
   def create(): StaticHandler = {
-    StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create())
+    StaticHandler(JStaticHandler.create())
   }
 
+  /**
+    * Create a handler, specifying web-root
+    * @param root the web-root
+    * @return the handler
+    */
   def create(root: String): StaticHandler = {
-    StaticHandler.apply(io.vertx.ext.web.handler.StaticHandler.create(root))
+    StaticHandler(JStaticHandler.create(root.asInstanceOf[java.lang.String]))
   }
 
 }

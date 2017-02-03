@@ -16,18 +16,18 @@
 
 package io.vertx.scala.ext.mongo
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
 
 /**
   * Result propagated from mongodb driver update result.
   */
+class MongoClientUpdateResult(private val _asJava: JMongoClientUpdateResult) {
 
-class MongoClientUpdateResult(val asJava: JMongoClientUpdateResult) {
-
+  def asJava = _asJava
 
   /**
     * Get the number of documents that're matched
@@ -49,16 +49,18 @@ object MongoClientUpdateResult {
   }
   
   def apply(t: JMongoClientUpdateResult) = {
-    if(t != null)
+    if (t != null) {
       new MongoClientUpdateResult(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):MongoClientUpdateResult = {
-    if(json != null)
+  def fromJson(json: JsonObject): MongoClientUpdateResult = {
+    if (json != null) {
       new MongoClientUpdateResult(new JMongoClientUpdateResult(json))
-    else
+    } else {
       null
+    }
   }
 }

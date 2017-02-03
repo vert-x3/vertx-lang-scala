@@ -17,24 +17,33 @@
 package io.vertx.scala.servicediscovery.spi
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.spi.{ServiceImporter => JServiceImporter}
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
-import io.vertx.core.json.JsonObject
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.{Future => JFuture}
-import io.vertx.scala.core.Future
 import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
+import io.vertx.servicediscovery.spi.{ServiceImporter => JServiceImporter}
+import io.vertx.core.json.JsonObject
+import io.vertx.scala.core.Future
+import io.vertx.core.Handler
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * The service importer allows integrate other discovery technologies with the Vert.x service discovery. It maps
   * entries from another technology to a  and maps  to a publication in this other
   * technology. The importer is one side of a service discovery bridge.
   */
-class ServiceImporter(private val _asJava: JServiceImporter) {
+class ServiceImporter(private val _asJava: Object) {
 
-  def asJava: JServiceImporter = _asJava
+  def asJava = _asJava
+
+  /**
+    * Closes the importer
+    * @param closeHandler the handle to be notified when importer is closed, may be `null`
+    */
+  def close(closeHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JServiceImporter].close({x: Void => closeHandler.handle(x)})
+  }
 
   /**
     * Starts the importer.
@@ -43,23 +52,12 @@ class ServiceImporter(private val _asJava: JServiceImporter) {
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */
-  def start(vertx: Vertx, publisher: ServicePublisher, configuration: JsonObject, future: Future[Unit]): Unit = {
-    _asJava.start(vertx.asJava.asInstanceOf[JVertx], publisher.asJava.asInstanceOf[JServicePublisher], configuration, future.asJava.asInstanceOf[JFuture[Void]])
-  }
-
-  /**
-    * Closes the importer
-    * @param closeHandler the handle to be notified when importer is closed, may be `null`
-    */
-  def close(closeHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.close(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => closeHandler.handle()))
+  def start(vertx: Vertx, publisher: ServicePublisher, configuration: io.vertx.core.json.JsonObject, future: Future[Unit]): Unit = {
+    asJava.asInstanceOf[JServiceImporter].start(vertx.asJava.asInstanceOf[JVertx], publisher.asJava.asInstanceOf[JServicePublisher], configuration, future.asJava.asInstanceOf[JFuture[Void]])
   }
 
 }
 
 object ServiceImporter {
-
-  def apply(_asJava: JServiceImporter): ServiceImporter =
-    new ServiceImporter(_asJava)
-
+  def apply(asJava: JServiceImporter) = new ServiceImporter(asJava)  
 }

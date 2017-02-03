@@ -17,26 +17,26 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
-import io.vertx.core.{MultiMap => JMultiMap}
-import io.vertx.scala.core.MultiMap
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.HttpVersion
-import io.vertx.core.http.HttpMethod
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.net.NetSocket
+import io.vertx.core.http.HttpMethod
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.MultiMap
+import io.vertx.core.Handler
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * Represents a server-side HTTP request.
@@ -49,105 +49,26 @@ import io.vertx.scala.core.net.NetSocket
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   * 
   */
-class HttpServerRequest(private val _asJava: JHttpServerRequest) 
-    extends ReadStream[Buffer] {
+class HttpServerRequest(private val _asJava: Object)
+    extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
-  def asJava: JHttpServerRequest = _asJava
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): HttpServerRequest = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-    this
-  }
-
-  def handler(handler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
-    this
-  }
-
-  def pause(): HttpServerRequest = {
-    _asJava.pause()
-    this
-  }
-
-  def resume(): HttpServerRequest = {
-    _asJava.resume()
-    this
-  }
-
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): HttpServerRequest = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
-    this
-  }
-
-  /**
-    * @return the HTTP version of the request
-    */
-  def version(): io.vertx.core.http.HttpVersion = {
-    _asJava.version()
-  }
-
-  /**
-    * @return the HTTP method for the request.
-    */
-  def method(): io.vertx.core.http.HttpMethod = {
-    _asJava.method()
-  }
-
-  /**
-    * @return the HTTP method as sent by the client
-    */
-  def rawMethod(): String = {
-    _asJava.rawMethod()
-  }
-
-  /**
-    * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS
-    */
-  def isSSL(): Boolean = {
-    _asJava.isSSL()
-  }
-
-  /**
-    * @return the scheme of the request
-    */
-  def scheme(): scala.Option[String] = {
-    scala.Option(_asJava.scheme())
-  }
-
-  /**
-    * @return the URI of the request. This is usually a relative URI
-    */
-  def uri(): String = {
-    _asJava.uri()
-  }
-
-  /**
-    * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
-    */
-  def path(): scala.Option[String] = {
-    scala.Option(_asJava.path())
-  }
-
-  /**
-    * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
-    */
-  def query(): scala.Option[String] = {
-    scala.Option(_asJava.query())
-  }
-
-  /**
-    * @return the request host. For HTTP2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
-    */
-  def host(): scala.Option[String] = {
-    scala.Option(_asJava.host())
-  }
+  def asJava = _asJava
+  private var cached_0: HttpServerResponse = _
+  private var cached_1: MultiMap = _
+  private var cached_2: MultiMap = _
+  private var cached_3: SocketAddress = _
+  private var cached_4: SocketAddress = _
+  private var cached_5: NetSocket = _
+  private var cached_6: MultiMap = _
+  private var cached_7: HttpConnection = _
 
   /**
     * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
     */
   def response(): HttpServerResponse = {
     if (cached_0 == null) {
-      cached_0 =    HttpServerResponse.apply(_asJava.response())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].response()
+      cached_0 = HttpServerResponse(tmp)
     }
     cached_0
   }
@@ -157,18 +78,10 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def headers(): MultiMap = {
     if (cached_1 == null) {
-      cached_1 =    MultiMap.apply(_asJava.headers())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
+      cached_1 = MultiMap(tmp)
     }
     cached_1
-  }
-
-  /**
-    * Return the first header value with the specified name
-    * @param headerName the header name
-    * @return the header value
-    */
-  def getHeader(headerName: String): scala.Option[String] = {
-    scala.Option(_asJava.getHeader(headerName))
   }
 
   /**
@@ -176,18 +89,10 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def params(): MultiMap = {
     if (cached_2 == null) {
-      cached_2 =    MultiMap.apply(_asJava.params())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].params()
+      cached_2 = MultiMap(tmp)
     }
     cached_2
-  }
-
-  /**
-    * Return the first param value with the specified name
-    * @param paramName the param name
-    * @return the param value
-    */
-  def getParam(paramName: String): scala.Option[String] = {
-    scala.Option(_asJava.getParam(paramName))
   }
 
   /**
@@ -195,7 +100,8 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def remoteAddress(): SocketAddress = {
     if (cached_3 == null) {
-      cached_3 =    SocketAddress.apply(_asJava.remoteAddress())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
+      cached_3 = SocketAddress(tmp)
     }
     cached_3
   }
@@ -205,28 +111,10 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def localAddress(): SocketAddress = {
     if (cached_4 == null) {
-      cached_4 =    SocketAddress.apply(_asJava.localAddress())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
+      cached_4 = SocketAddress(tmp)
     }
     cached_4
-  }
-
-  /**
-    * @return the absolute URI corresponding to the the HTTP request
-    */
-  def absoluteURI(): String = {
-    _asJava.absoluteURI()
-  }
-
-  /**
-    * Convenience method for receiving the entire request body in one piece.
-    * 
-    * This saves the user having to manually setting a data and end handler and append the chunks of the body until
-    * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
-    * @param bodyHandler This handler will be called after all the body has been received
-    */
-  def bodyHandler(bodyHandler: io.vertx.core.Handler[Buffer]): HttpServerRequest = {
-    _asJava.bodyHandler(funcToMappedHandler(Buffer.apply)(bodyHandler))
-    this
   }
 
   /**
@@ -241,37 +129,10 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def netSocket(): NetSocket = {
     if (cached_5 == null) {
-      cached_5 =    NetSocket.apply(_asJava.netSocket())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
+      cached_5 = NetSocket(tmp)
     }
     cached_5
-  }
-
-  /**
-    * Call this with true if you are expecting a multi-part body to be submitted in the request.
-    * This must be called before the body of the request has been received
-    * @param expect true - if you are expecting a multi-part body
-    * @return a reference to this, so the API can be used fluently
-    */
-  def setExpectMultipart(expect: Boolean): HttpServerRequest = {
-    _asJava.setExpectMultipart(expect)
-    this
-  }
-
-  /**
-    * @return true if we are expecting a multi-part body for this request. See #setExpectMultipart.
-    */
-  def isExpectMultipart(): Boolean = {
-    _asJava.isExpectMultipart()
-  }
-
-  /**
-    * Set an upload handler. The handler will get notified once a new file upload was received to allow you to deal
-    * with the file upload.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def uploadHandler(uploadHandler: io.vertx.core.Handler[HttpServerFileUpload]): HttpServerRequest = {
-    _asJava.uploadHandler(funcToMappedHandler(HttpServerFileUpload.apply)(uploadHandler))
-    this
   }
 
   /**
@@ -285,9 +146,184 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     */
   def formAttributes(): MultiMap = {
     if (cached_6 == null) {
-      cached_6 =    MultiMap.apply(_asJava.formAttributes())
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
+      cached_6 = MultiMap(tmp)
     }
     cached_6
+  }
+
+  /**
+    * @return the HttpConnection associated with this request
+    */
+  def connection(): HttpConnection = {
+    if (cached_7 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
+      cached_7 = HttpConnection(tmp)
+    }
+    cached_7
+  }
+
+  override def exceptionHandler(handler: Handler[Throwable]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].handler({x: Buffer => handler.handle(x)})
+    this
+  }
+
+  override def pause(): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].pause()
+    this
+  }
+
+  override def resume(): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].resume()
+    this
+  }
+
+  override def endHandler(endHandler: Handler[Unit]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
+
+  /**
+    * Convenience method for receiving the entire request body in one piece.
+    * 
+    * This saves the user having to manually setting a data and end handler and append the chunks of the body until
+    * the whole body received. Don't use this if your request body is large - you could potentially run out of RAM.
+    * @param bodyHandler This handler will be called after all the body has been received
+    */
+  def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].bodyHandler({x: Buffer => bodyHandler.handle(x)})
+    this
+  }
+
+  /**
+    * Call this with true if you are expecting a multi-part body to be submitted in the request.
+    * This must be called before the body of the request has been received
+    * @param expect true - if you are expecting a multi-part body
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setExpectMultipart(expect: Boolean): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].setExpectMultipart(expect.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+    * Set an upload handler. The handler will get notified once a new file upload was received to allow you to deal
+    * with the file upload.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].uploadHandler({x: JHttpServerFileUpload => uploadHandler.handle(HttpServerFileUpload(x))})
+    this
+  }
+
+  /**
+    * Set a custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
+    * frame. HTTP/2 permits extension of the protocol.
+    * @return a reference to this, so the API can be used fluently
+    */
+  def customFrameHandler(handler: Handler[HttpFrame]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
+    this
+  }
+
+  /**
+    * @return the HTTP version of the request
+    */
+  def version(): io.vertx.core.http.HttpVersion = {
+    asJava.asInstanceOf[JHttpServerRequest].version()
+  }
+
+  /**
+    * @return the HTTP method for the request.
+    */
+  def method(): io.vertx.core.http.HttpMethod = {
+    asJava.asInstanceOf[JHttpServerRequest].method()
+  }
+
+  /**
+    * @return the HTTP method as sent by the client
+    */
+  def rawMethod(): String = {
+    asJava.asInstanceOf[JHttpServerRequest].rawMethod().asInstanceOf[String]
+  }
+
+  /**
+    * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS
+    */
+  def isSSL(): Boolean = {
+    asJava.asInstanceOf[JHttpServerRequest].isSSL().asInstanceOf[Boolean]
+  }
+
+  /**
+    * @return the scheme of the request
+    */
+  def scheme(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].scheme().asInstanceOf[String])
+  }
+
+  /**
+    * @return the URI of the request. This is usually a relative URI
+    */
+  def uri(): String = {
+    asJava.asInstanceOf[JHttpServerRequest].uri().asInstanceOf[String]
+  }
+
+  /**
+    * @return The path part of the uri. For example /somepath/somemorepath/someresource.foo
+    */
+  def path(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].path().asInstanceOf[String])
+  }
+
+  /**
+    * @return the query part of the uri. For example someparam=32&amp;someotherparam=x
+    */
+  def query(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].query().asInstanceOf[String])
+  }
+
+  /**
+    * @return the request host. For HTTP2 it returns the ` :authority` pseudo header otherwise it returns the ` Host` header
+    */
+  def host(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].host().asInstanceOf[String])
+  }
+
+  /**
+    * Return the first header value with the specified name
+    * @param headerName the header name
+    * @return the header value
+    */
+  def getHeader(headerName: String): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getHeader(headerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  /**
+    * Return the first param value with the specified name
+    * @param paramName the param name
+    * @return the param value
+    */
+  def getParam(paramName: String): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getParam(paramName.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  /**
+    * @return the absolute URI corresponding to the the HTTP request
+    */
+  def absoluteURI(): String = {
+    asJava.asInstanceOf[JHttpServerRequest].absoluteURI().asInstanceOf[String]
+  }
+
+  /**
+    * @return true if we are expecting a multi-part body for this request. See #setExpectMultipart.
+    */
+  def isExpectMultipart(): Boolean = {
+    asJava.asInstanceOf[JHttpServerRequest].isExpectMultipart().asInstanceOf[Boolean]
   }
 
   /**
@@ -296,7 +332,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the attribute value
     */
   def getFormAttribute(attributeName: String): scala.Option[String] = {
-    scala.Option(_asJava.getFormAttribute(attributeName))
+    scala.Option(asJava.asInstanceOf[JHttpServerRequest].getFormAttribute(attributeName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
   /**
@@ -307,7 +343,7 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return the WebSocket
     */
   def upgrade(): ServerWebSocket = {
-    ServerWebSocket.apply(_asJava.upgrade())
+    ServerWebSocket(asJava.asInstanceOf[JHttpServerRequest].upgrade())
   }
 
   /**
@@ -315,42 +351,11 @@ class HttpServerRequest(private val _asJava: JHttpServerRequest)
     * @return true if ended
     */
   def isEnded(): Boolean = {
-    _asJava.isEnded()
+    asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
-  /**
-    * Set a custom frame handler. The handler will get notified when the http stream receives an custom HTTP/2
-    * frame. HTTP/2 permits extension of the protocol.
-    * @return a reference to this, so the API can be used fluently
-    */
-  def customFrameHandler(handler: io.vertx.core.Handler[HttpFrame]): HttpServerRequest = {
-    _asJava.customFrameHandler(funcToMappedHandler(HttpFrame.apply)(handler))
-    this
-  }
-
-  /**
-    * @return the HttpConnection associated with this request
-    */
-  def connection(): HttpConnection = {
-    if (cached_7 == null) {
-      cached_7 =    HttpConnection.apply(_asJava.connection())
-    }
-    cached_7
-  }
-
-  private var cached_0: HttpServerResponse = _
-  private var cached_1: MultiMap = _
-  private var cached_2: MultiMap = _
-  private var cached_3: SocketAddress = _
-  private var cached_4: SocketAddress = _
-  private var cached_5: NetSocket = _
-  private var cached_6: MultiMap = _
-  private var cached_7: HttpConnection = _
 }
 
 object HttpServerRequest {
-
-  def apply(_asJava: JHttpServerRequest): HttpServerRequest =
-    new HttpServerRequest(_asJava)
-
+  def apply(asJava: JHttpServerRequest) = new HttpServerRequest(asJava)  
 }

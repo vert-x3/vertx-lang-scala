@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{SortOptions => JSortOptions}
 
 /**
   */
+class SortOptions(private val _asJava: JSortOptions) {
 
-class SortOptions(val asJava: JSortOptions) {
-
+  def asJava = _asJava
   def setBy(value: String) = {
     asJava.setBy(value)
     this
@@ -47,16 +47,18 @@ object SortOptions {
   }
   
   def apply(t: JSortOptions) = {
-    if(t != null)
+    if (t != null) {
       new SortOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):SortOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): SortOptions = {
+    if (json != null) {
       new SortOptions(new JSortOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

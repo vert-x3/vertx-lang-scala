@@ -17,11 +17,13 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
 import io.vertx.scala.ext.web.RoutingContext
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
 
 /**
   * Base interface for auth handlers.
@@ -30,62 +32,58 @@ import io.vertx.scala.ext.web.RoutingContext
   * 
   * Auth handler requires a [[io.vertx.scala.ext.web.handler.SessionHandler]] to be on the routing chain before it.
   */
-trait AuthHandler 
+trait AuthHandler
     extends io.vertx.core.Handler[RoutingContext] {
 
   def asJava: java.lang.Object
 
-  def handle(arg0: RoutingContext): Unit
+  override def handle(arg0: RoutingContext): Unit
 
   /**
-  * Add a required authority for this auth handler
-  * @param authority the authority
-  * @return a reference to this, so the API can be used fluently
-  */
-def addAuthority(authority: String): AuthHandler
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
+  def addAuthority(authority: String): AuthHandler
 
   /**
-  * Add a set of required authorities for this auth handler
-  * @param authorities the set of authorities
-  * @return a reference to this, so the API can be used fluently
-  */
-def addAuthorities(authorities: Set[String]): AuthHandler
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
+  def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler
 
 }
 
 object AuthHandler {
+  def apply(asJava: JAuthHandler): AuthHandler = new AuthHandlerImpl(asJava)
+    private class AuthHandlerImpl(private val _asJava: Object) extends AuthHandler {
 
-  def apply(_asJava: JAuthHandler): AuthHandler =
-    new AuthHandlerImpl(_asJava)
+      def asJava = _asJava
 
-  private class AuthHandlerImpl(private val _asJava: JAuthHandler) extends AuthHandler {
-
-    def asJava: JAuthHandler = _asJava
-
-    def handle(arg0: RoutingContext): Unit = {
-        _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-    }
-
-    /**
-      * Add a required authority for this auth handler
-      * @param authority the authority
-      * @return a reference to this, so the API can be used fluently
-      */
-    def addAuthority(authority: String): AuthHandler = {
-        _asJava.addAuthority(authority)
-      this
-    }
-
-    /**
-      * Add a set of required authorities for this auth handler
-      * @param authorities the set of authorities
-      * @return a reference to this, so the API can be used fluently
-      */
-    def addAuthorities(authorities: Set[String]): AuthHandler = {
-        _asJava.addAuthorities(authorities.map(x => x:java.lang.String).asJava)
-      this
-    }
-
+  /**
+    * Add a required authority for this auth handler
+    * @param authority the authority
+    * @return a reference to this, so the API can be used fluently
+    */
+  def addAuthority(authority: String): AuthHandler = {
+    asJava.asInstanceOf[JAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
+    this
   }
 
+  /**
+    * Add a set of required authorities for this auth handler
+    * @param authorities the set of authorities
+    * @return a reference to this, so the API can be used fluently
+    */
+  def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
+    asJava.asInstanceOf[JAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
+    this
+  }
+
+  override def handle(arg0: RoutingContext): Unit = {
+    asJava.asInstanceOf[JAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  }
+
+}
 }

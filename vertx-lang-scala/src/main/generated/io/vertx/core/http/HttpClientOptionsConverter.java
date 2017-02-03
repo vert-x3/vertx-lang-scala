@@ -62,6 +62,12 @@ public class HttpClientOptionsConverter {
     if (json.getValue("maxChunkSize") instanceof Number) {
       obj.setMaxChunkSize(((Number)json.getValue("maxChunkSize")).intValue());
     }
+    if (json.getValue("maxHeaderSize") instanceof Number) {
+      obj.setMaxHeaderSize(((Number)json.getValue("maxHeaderSize")).intValue());
+    }
+    if (json.getValue("maxInitialLineLength") instanceof Number) {
+      obj.setMaxInitialLineLength(((Number)json.getValue("maxInitialLineLength")).intValue());
+    }
     if (json.getValue("maxPoolSize") instanceof Number) {
       obj.setMaxPoolSize(((Number)json.getValue("maxPoolSize")).intValue());
     }
@@ -80,6 +86,9 @@ public class HttpClientOptionsConverter {
     if (json.getValue("protocolVersion") instanceof String) {
       obj.setProtocolVersion(io.vertx.core.http.HttpVersion.valueOf((String)json.getValue("protocolVersion")));
     }
+    if (json.getValue("sendUnmaskedFrames") instanceof Boolean) {
+      obj.setSendUnmaskedFrames((Boolean)json.getValue("sendUnmaskedFrames"));
+    }
     if (json.getValue("tryUseCompression") instanceof Boolean) {
       obj.setTryUseCompression((Boolean)json.getValue("tryUseCompression"));
     }
@@ -90,11 +99,9 @@ public class HttpClientOptionsConverter {
 
   public static void toJson(HttpClientOptions obj, JsonObject json) {
     if (obj.getAlpnVersions() != null) {
-      json.put("alpnVersions", new JsonArray(
-          obj.getAlpnVersions().
-              stream().
-              map(item -> item.name()).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getAlpnVersions().forEach(item -> array.add(item.name()));
+      json.put("alpnVersions", array);
     }
     if (obj.getDefaultHost() != null) {
       json.put("defaultHost", obj.getDefaultHost());
@@ -109,6 +116,8 @@ public class HttpClientOptionsConverter {
     }
     json.put("keepAlive", obj.isKeepAlive());
     json.put("maxChunkSize", obj.getMaxChunkSize());
+    json.put("maxHeaderSize", obj.getMaxHeaderSize());
+    json.put("maxInitialLineLength", obj.getMaxInitialLineLength());
     json.put("maxPoolSize", obj.getMaxPoolSize());
     json.put("maxWaitQueueSize", obj.getMaxWaitQueueSize());
     json.put("maxWebsocketFrameSize", obj.getMaxWebsocketFrameSize());
@@ -117,6 +126,7 @@ public class HttpClientOptionsConverter {
     if (obj.getProtocolVersion() != null) {
       json.put("protocolVersion", obj.getProtocolVersion().name());
     }
+    json.put("sendUnmaskedFrames", obj.isSendUnmaskedFrames());
     json.put("tryUseCompression", obj.isTryUseCompression());
     json.put("verifyHost", obj.isVerifyHost());
   }

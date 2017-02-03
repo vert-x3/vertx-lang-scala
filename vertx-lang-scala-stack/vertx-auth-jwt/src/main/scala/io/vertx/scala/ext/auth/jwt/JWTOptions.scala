@@ -16,9 +16,9 @@
 
 package io.vertx.scala.ext.auth.jwt
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.json.JsonObject
 
@@ -30,9 +30,9 @@ import io.vertx.core.json.JsonObject
   *
   * Generated JWTs will include an iat claim by default unless noTimestamp is specified.
   */
+class JWTOptions(private val _asJava: JJWTOptions) {
 
-class JWTOptions(val asJava: JJWTOptions) {
-
+  def asJava = _asJava
 
   /**
     * The algorithm to use, it should be one of the alias [HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512]
@@ -41,8 +41,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setAlgorithm(value)
     this
   }
-  def getAlgorithm = {
-    asJava.getAlgorithm()
+  def getAlgorithm: String = {
+    asJava.getAlgorithm().asInstanceOf[String]
   }
 
   /**
@@ -52,8 +52,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setAudience(value.asJava)
     this
   }
-  def getAudience = {
-    asJava.getAudience()
+  def getAudience: scala.collection.mutable.Buffer[String] = {
+    asJava.getAudience().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -71,8 +71,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setExpiresInMinutes(value)
     this
   }
-  def getExpiresInMinutes = {
-    asJava.getExpiresInMinutes()
+  def getExpiresInMinutes: Long = {
+    asJava.getExpiresInMinutes().asInstanceOf[Long]
   }
 
   /**
@@ -82,11 +82,11 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setExpiresInSeconds(value)
     this
   }
-  def getExpiresInSeconds = {
-    asJava.getExpiresInSeconds()
+  def getExpiresInSeconds: Long = {
+    asJava.getExpiresInSeconds().asInstanceOf[Long]
   }
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -97,8 +97,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setIssuer(value)
     this
   }
-  def getIssuer = {
-    asJava.getIssuer()
+  def getIssuer: String = {
+    asJava.getIssuer().asInstanceOf[String]
   }
 
   /**
@@ -108,8 +108,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setNoTimestamp(value)
     this
   }
-  def getNoTimestamp = {
-    asJava.getNoTimestamp()
+  def getNoTimestamp: Boolean = {
+    asJava.getNoTimestamp().asInstanceOf[Boolean]
   }
 
   /**
@@ -131,8 +131,8 @@ class JWTOptions(val asJava: JJWTOptions) {
     asJava.setSubject(value)
     this
   }
-  def getSubject = {
-    asJava.getSubject()
+  def getSubject: String = {
+    asJava.getSubject().asInstanceOf[String]
   }
 }
 
@@ -143,16 +143,18 @@ object JWTOptions {
   }
   
   def apply(t: JJWTOptions) = {
-    if(t != null)
+    if (t != null) {
       new JWTOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):JWTOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): JWTOptions = {
+    if (json != null) {
       new JWTOptions(new JJWTOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -17,79 +17,76 @@
 package io.vertx.scala.core.file
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{FileProps => JFileProps}
 
 /**
   * Represents properties of a file on the file system.
   * 
   */
-class FileProps(private val _asJava: JFileProps) {
+class FileProps(private val _asJava: Object) {
 
-  def asJava: JFileProps = _asJava
+  def asJava = _asJava
 
   /**
     * The date the file was created
     */
   def creationTime(): Long = {
-    _asJava.creationTime()
+    asJava.asInstanceOf[JFileProps].creationTime().asInstanceOf[Long]
   }
 
   /**
     * The date the file was last accessed
     */
   def lastAccessTime(): Long = {
-    _asJava.lastAccessTime()
+    asJava.asInstanceOf[JFileProps].lastAccessTime().asInstanceOf[Long]
   }
 
   /**
     * The date the file was last modified
     */
   def lastModifiedTime(): Long = {
-    _asJava.lastModifiedTime()
+    asJava.asInstanceOf[JFileProps].lastModifiedTime().asInstanceOf[Long]
   }
 
   /**
     * Is the file a directory?
     */
   def isDirectory(): Boolean = {
-    _asJava.isDirectory()
+    asJava.asInstanceOf[JFileProps].isDirectory().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file some other type? (I.e. not a directory, regular file or symbolic link)
     */
   def isOther(): Boolean = {
-    _asJava.isOther()
+    asJava.asInstanceOf[JFileProps].isOther().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file a regular file?
     */
   def isRegularFile(): Boolean = {
-    _asJava.isRegularFile()
+    asJava.asInstanceOf[JFileProps].isRegularFile().asInstanceOf[Boolean]
   }
 
   /**
     * Is the file a symbolic link?
     */
   def isSymbolicLink(): Boolean = {
-    _asJava.isSymbolicLink()
+    asJava.asInstanceOf[JFileProps].isSymbolicLink().asInstanceOf[Boolean]
   }
 
   /**
     * The size of the file, in bytes
     */
   def size(): Long = {
-    _asJava.size()
+    asJava.asInstanceOf[JFileProps].size().asInstanceOf[Long]
   }
 
 }
 
 object FileProps {
-
-  def apply(_asJava: JFileProps): FileProps =
-    new FileProps(_asJava)
-
+  def apply(asJava: JFileProps) = new FileProps(asJava)  
 }

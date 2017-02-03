@@ -16,121 +16,122 @@
 
 package io.vertx.scala.ext.stomp
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
-import io.vertx.core.http.ClientAuth
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.json.JsonObject
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.{NetServerOptions => ExtNetServerOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.scala.core.net.PfxOptions
 import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.http.ClientAuth
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.ext.stomp.{StompServerOptions => JStompServerOptions}
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
+import io.vertx.core.json.JsonObject
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * STOMP Server options. You can also configure the Net Server used by the STOMP server from these options.
   */
+class StompServerOptions(private val _asJava: JStompServerOptions) 
+    extends ExtNetServerOptions(_asJava) {
 
-class StompServerOptions(val asJava: JStompServerOptions) {
-
-  def setAcceptBacklog(value: Int) = {
+  override def asJava = _asJava
+  override def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this
   }
-  def getAcceptBacklog = {
-    asJava.getAcceptBacklog()
+  override def getAcceptBacklog: Int = {
+    asJava.getAcceptBacklog().asInstanceOf[Int]
   }
-  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
+  override def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this
   }
-  def getClientAuth = {
+  override def getClientAuth: io.vertx.core.http.ClientAuth = {
     asJava.getClientAuth()
   }
-  def setClientAuthRequired(value: Boolean) = {
+  override def setClientAuthRequired(value: Boolean) = {
     asJava.setClientAuthRequired(value)
     this
   }
-  def isClientAuthRequired = {
-    asJava.isClientAuthRequired()
+  override def isClientAuthRequired: Boolean = {
+    asJava.isClientAuthRequired().asInstanceOf[Boolean]
   }
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Sets the heartbeat configuration.
     */
-  def setHeartbeat(value: JsonObject) = {
+  def setHeartbeat(value: io.vertx.core.json.JsonObject) = {
     asJava.setHeartbeat(value)
     this
   }
-  def getHeartbeat = {
+  def getHeartbeat: io.vertx.core.json.JsonObject = {
     asJava.getHeartbeat()
   }
-  def setHost(value: String) = {
+  override def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  override def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  override def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
@@ -140,8 +141,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setMaxBodyLength(value)
     this
   }
-  def getMaxBodyLength = {
-    asJava.getMaxBodyLength()
+  def getMaxBodyLength: Int = {
+    asJava.getMaxBodyLength().asInstanceOf[Int]
   }
 
   /**
@@ -153,8 +154,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setMaxFrameInTransaction(value)
     this
   }
-  def getMaxFrameInTransaction = {
-    asJava.getMaxFrameInTransaction()
+  def getMaxFrameInTransaction: Int = {
+    asJava.getMaxFrameInTransaction().asInstanceOf[Int]
   }
 
   /**
@@ -164,8 +165,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setMaxHeaderLength(value)
     this
   }
-  def getMaxHeaderLength = {
-    asJava.getMaxHeaderLength()
+  def getMaxHeaderLength: Int = {
+    asJava.getMaxHeaderLength().asInstanceOf[Int]
   }
 
   /**
@@ -175,8 +176,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setMaxHeaders(value)
     this
   }
-  def getMaxHeaders = {
-    asJava.getMaxHeaders()
+  def getMaxHeaders: Int = {
+    asJava.getMaxHeaders().asInstanceOf[Int]
   }
 
   /**
@@ -187,26 +188,26 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setMaxSubscriptionsByClient(value)
     this
   }
-  def getMaxSubscriptionsByClient = {
-    asJava.getMaxSubscriptionsByClient()
+  def getMaxSubscriptionsByClient: Int = {
+    asJava.getMaxSubscriptionsByClient().asInstanceOf[Int]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -214,26 +215,26 @@ class StompServerOptions(val asJava: JStompServerOptions) {
   /**
     * Sets the port on which the server is going to listen for TCP connection.
     */
-  def setPort(value: Int) = {
+  override def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  override def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
@@ -243,15 +244,15 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setSecured(value)
     this
   }
-  def isSecured = {
-    asJava.isSecured()
+  def isSecured: Boolean = {
+    asJava.isSecured().asInstanceOf[Boolean]
   }
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -262,22 +263,22 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setSendErrorOnNoSubscriptions(value)
     this
   }
-  def isSendErrorOnNoSubscriptions = {
-    asJava.isSendErrorOnNoSubscriptions()
+  def isSendErrorOnNoSubscriptions: Boolean = {
+    asJava.isSendErrorOnNoSubscriptions().asInstanceOf[Boolean]
   }
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  override def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  override def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
@@ -287,22 +288,22 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setSupportedVersions(value.asJava)
     this
   }
-  def getSupportedVersions = {
-    asJava.getSupportedVersions()
+  def getSupportedVersions: scala.collection.mutable.Buffer[String] = {
+    asJava.getSupportedVersions().asScala.map(x => x.asInstanceOf[String])
   }
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  override def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  override def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
@@ -312,15 +313,15 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setTimeFactor(value)
     this
   }
-  def getTimeFactor = {
-    asJava.getTimeFactor()
+  def getTimeFactor: Int = {
+    asJava.getTimeFactor().asInstanceOf[Int]
   }
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
@@ -331,8 +332,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setTrailingLine(value)
     this
   }
-  def isTrailingLine = {
-    asJava.isTrailingLine()
+  def isTrailingLine: Boolean = {
+    asJava.isTrailingLine().asInstanceOf[Boolean]
   }
 
   /**
@@ -343,26 +344,26 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setTransactionChunkSize(value)
     this
   }
-  def getTransactionChunkSize = {
-    asJava.getTransactionChunkSize()
+  def getTransactionChunkSize: Int = {
+    asJava.getTransactionChunkSize().asInstanceOf[Int]
   }
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  override def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  override def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**
@@ -372,8 +373,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setWebsocketBridge(value)
     this
   }
-  def isWebsocketBridge = {
-    asJava.isWebsocketBridge()
+  def isWebsocketBridge: Boolean = {
+    asJava.isWebsocketBridge().asInstanceOf[Boolean]
   }
 
   /**
@@ -383,8 +384,8 @@ class StompServerOptions(val asJava: JStompServerOptions) {
     asJava.setWebsocketPath(value)
     this
   }
-  def getWebsocketPath = {
-    asJava.getWebsocketPath()
+  def getWebsocketPath: String = {
+    asJava.getWebsocketPath().asInstanceOf[String]
   }
 }
 
@@ -395,16 +396,18 @@ object StompServerOptions {
   }
   
   def apply(t: JStompServerOptions) = {
-    if(t != null)
+    if (t != null) {
       new StompServerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):StompServerOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): StompServerOptions = {
+    if (json != null) {
       new StompServerOptions(new JStompServerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

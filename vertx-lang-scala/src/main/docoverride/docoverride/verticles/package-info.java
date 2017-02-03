@@ -90,25 +90,28 @@
  * You use this if you want to do some verticle cleanup that takes some time.
  *
  * If your verticle extends {@link io.vertx.lang.scala.ScalaVerticle}, you override the
- * {@link io.vertx.lang.scala.ScalaVerticle#start(scala.concurrent.Promise)} and
- * {@link io.vertx.lang.scala.ScalaVerticle#stop(scala.concurrent.Promise)} methods:
+ * {@link io.vertx.lang.scala.ScalaVerticle#start()} and
+ * {@link io.vertx.lang.scala.ScalaVerticle#stop()} methods:
  *
  * [source, scala]
  * ----
  * import io.vertx.lang.scala.ScalaVerticle
+ * import scala.concurrent.{Future, Promise}
  *
  * public class HelloWorldVerticle extends ScalaVerticle {
- *  public void start(startpromise: scala.concurrent.Promise[Unit]) {
+ *  public void start(): Future[Unit] = {
  *   println "starting"
+ *   val promise = Promise[Unit]()
  *   vertx.deployVerticleFuture("v.rb").onComplete{
- *    case Success(deploymentId) => startPromise.success()
- *    case Failure(throwable) => startPromise.failure(throwable)
+ *    case Success(deploymentId) => promise.success(())
+ *    case Failure(throwable) => promise.failure(throwable)
  *   }
+ *   promise.future
  *  }
  *
- *  public void stop(stopPromise: scala.concurrent.Promise[Unit]) {
+ *  public void stop(): Future[Unit] = {
  *   println("stopping")
- *   stopPromise.success()
+ *   Future.successful(())
  *  }
  * }
  * ----

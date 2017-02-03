@@ -17,45 +17,78 @@
 package io.vertx.scala.servicediscovery.types
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.servicediscovery.types.{JDBCDataSource => JJDBCDataSource}
-import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.jdbc.JDBCClient
-import io.vertx.servicediscovery.types.{DataSource => JDataSource}
-import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.servicediscovery.{Record => JRecord}
-import io.vertx.scala.servicediscovery.Record
 import io.vertx.servicediscovery.{ServiceDiscovery => JServiceDiscovery}
+import io.vertx.servicediscovery.types.{JDBCDataSource => JJDBCDataSource}
 import io.vertx.scala.servicediscovery.ServiceDiscovery
+import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+import io.vertx.scala.servicediscovery.Record
 
 /**
   */
-class JDBCDataSource(private val _asJava: JJDBCDataSource) {
+class JDBCDataSource(private val _asJava: Object) {
 
-  def asJava: JJDBCDataSource = _asJava
+  def asJava = _asJava
 
 }
 
 object JDBCDataSource {
-
-  def apply(_asJava: JJDBCDataSource): JDBCDataSource =
-    new JDBCDataSource(_asJava)
-
-  def createRecord(name: String, location: JsonObject, metadata: JsonObject): Record = {
-    Record(io.vertx.servicediscovery.types.JDBCDataSource.createRecord(name, location, metadata))
+  def apply(asJava: JJDBCDataSource) = new JDBCDataSource(asJava)  
+  def createRecord(name: String, location: io.vertx.core.json.JsonObject, metadata: io.vertx.core.json.JsonObject): Record = {
+    Record(JJDBCDataSource.createRecord(name.asInstanceOf[java.lang.String], location, metadata))
   }
 
-  def getJDBCClientFuture(discovery: ServiceDiscovery, filter: JsonObject): concurrent.Future[JDBCClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient,JDBCClient]((x => if (x == null) null else JDBCClient.apply(x)))
-    io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, optional
+    * @param resultHandler The result handler
+    */
+  def getJDBCClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
   }
 
-  def getJDBCClientFuture(discovery: ServiceDiscovery, filter: JsonObject, consumerConfiguration: JsonObject): concurrent.Future[JDBCClient] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JJDBCClient,JDBCClient]((x => if (x == null) null else JDBCClient.apply(x)))
-    io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter (must not be `null`)
+    * @param resultHandler The result handler
+    */
+  def getJDBCClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+  }
+
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, optional
+    * @param consumerConfiguration the consumer configuration
+    * @param resultHandler the result handler
+    */
+  def getJDBCClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+  }
+
+  /**
+    * Convenient method that looks for a JDBC datasource source and provides the configured [[io.vertx.scala.ext.jdbc.JDBCClient]]. The
+    * async result is marked as failed is there are no matching services, or if the lookup fails.
+    * @param discovery The service discovery instance
+    * @param filter The filter, must not be `null`
+    * @param consumerConfiguration the consumer configuration
+    * @param resultHandler the result handler
+    */
+  def getJDBCClient(discovery: ServiceDiscovery, filter: Record => Boolean, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
   }
 
 }

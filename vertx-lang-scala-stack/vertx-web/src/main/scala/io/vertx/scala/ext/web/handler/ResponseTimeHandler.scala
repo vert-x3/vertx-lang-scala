@@ -17,34 +17,36 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.handler.{ResponseTimeHandler => JResponseTimeHandler}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
+import io.vertx.ext.web.handler.{ResponseTimeHandler => JResponseTimeHandler}
 
 /**
   * Handler which adds a header `x-response-time` in the response of matching requests containing the time taken
   * in ms to process the request.
   */
-class ResponseTimeHandler(private val _asJava: JResponseTimeHandler) 
+class ResponseTimeHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JResponseTimeHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  override def handle(arg0: RoutingContext): Unit = {
+    asJava.asInstanceOf[JResponseTimeHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object ResponseTimeHandler {
-
-  def apply(_asJava: JResponseTimeHandler): ResponseTimeHandler =
-    new ResponseTimeHandler(_asJava)
-
+  def apply(asJava: JResponseTimeHandler) = new ResponseTimeHandler(asJava)  
+  /**
+    * Create a handler
+    * @return the handler
+    */
   def create(): ResponseTimeHandler = {
-    ResponseTimeHandler.apply(io.vertx.ext.web.handler.ResponseTimeHandler.create())
+    ResponseTimeHandler(JResponseTimeHandler.create())
   }
 
 }

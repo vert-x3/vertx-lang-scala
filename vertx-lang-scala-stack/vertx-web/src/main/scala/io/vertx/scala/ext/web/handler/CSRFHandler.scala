@@ -17,11 +17,12 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.{CSRFHandler => JCSRFHandler}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.core.Handler
 
 /**
   * This handler adds a CSRF token to requests which mutate state. In order change the state a (XSRF-TOKEN) cookie is set
@@ -31,14 +32,10 @@ import io.vertx.scala.ext.web.RoutingContext
   *
   * This Handler requires session support, thus should be added somewhere below Session and Body handlers.
   */
-class CSRFHandler(private val _asJava: JCSRFHandler) 
+class CSRFHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[RoutingContext] {
 
-  def asJava: JCSRFHandler = _asJava
-
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-  }
+  def asJava = _asJava
 
   /**
     * Set the cookie name. By default XSRF-TOKEN is used as it is the expected name by AngularJS however other frameworks
@@ -47,7 +44,7 @@ class CSRFHandler(private val _asJava: JCSRFHandler)
     * @return fluent
     */
   def setCookieName(name: String): CSRFHandler = {
-    _asJava.setCookieName(name)
+    asJava.asInstanceOf[JCSRFHandler].setCookieName(name.asInstanceOf[java.lang.String])
     this
   }
 
@@ -58,7 +55,7 @@ class CSRFHandler(private val _asJava: JCSRFHandler)
     * @return fluent
     */
   def setHeaderName(name: String): CSRFHandler = {
-    _asJava.setHeaderName(name)
+    asJava.asInstanceOf[JCSRFHandler].setHeaderName(name.asInstanceOf[java.lang.String])
     this
   }
 
@@ -68,7 +65,7 @@ class CSRFHandler(private val _asJava: JCSRFHandler)
     * @return fluent
     */
   def setNagHttps(nag: Boolean): CSRFHandler = {
-    _asJava.setNagHttps(nag)
+    asJava.asInstanceOf[JCSRFHandler].setNagHttps(nag.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -78,19 +75,28 @@ class CSRFHandler(private val _asJava: JCSRFHandler)
     * @return fluent
     */
   def setTimeout(timeout: Long): CSRFHandler = {
-    _asJava.setTimeout(timeout)
+    asJava.asInstanceOf[JCSRFHandler].setTimeout(timeout.asInstanceOf[java.lang.Long])
     this
+  }
+
+  override def handle(arg0: RoutingContext): Unit = {
+    asJava.asInstanceOf[JCSRFHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object CSRFHandler {
-
-  def apply(_asJava: JCSRFHandler): CSRFHandler =
-    new CSRFHandler(_asJava)
-
+  def apply(asJava: JCSRFHandler) = new CSRFHandler(asJava)  
+  /**
+    * Instantiate a new CSRFHandlerImpl with a secret
+    * 
+    * <pre>
+    * CSRFHandler.create("s3cr37")
+    * </pre>
+    * @param secret server secret to sign the token.
+    */
   def create(secret: String): CSRFHandler = {
-    CSRFHandler.apply(io.vertx.ext.web.handler.CSRFHandler.create(secret))
+    CSRFHandler(JCSRFHandler.create(secret.asInstanceOf[java.lang.String]))
   }
 
 }

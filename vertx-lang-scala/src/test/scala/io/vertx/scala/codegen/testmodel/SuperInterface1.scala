@@ -17,29 +17,26 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{SuperInterface1 => JSuperInterface1}
 
 /**
   */
-class SuperInterface1(private val _asJava: JSuperInterface1) {
+class SuperInterface1(private val _asJava: Object) {
 
-  def asJava: JSuperInterface1 = _asJava
+  def asJava = _asJava
 
   def superMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
-    _asJava.superMethodWithBasicParams(b, s, i, l, f, d, bool, ch, str)
+    asJava.asInstanceOf[JSuperInterface1].superMethodWithBasicParams(b.asInstanceOf[java.lang.Byte], s.asInstanceOf[java.lang.Short], i.asInstanceOf[java.lang.Integer], l.asInstanceOf[java.lang.Long], f.asInstanceOf[java.lang.Float], d.asInstanceOf[java.lang.Double], bool.asInstanceOf[java.lang.Boolean], ch.asInstanceOf[java.lang.Character], str.asInstanceOf[java.lang.String])
   }
 
   def superMethodOverloadedBySubclass(): Int = {
-    _asJava.superMethodOverloadedBySubclass()
+    asJava.asInstanceOf[JSuperInterface1].superMethodOverloadedBySubclass().asInstanceOf[Int]
   }
 
 }
 
 object SuperInterface1 {
-
-  def apply(_asJava: JSuperInterface1): SuperInterface1 =
-    new SuperInterface1(_asJava)
-
+  def apply(asJava: JSuperInterface1) = new SuperInterface1(asJava)  
 }

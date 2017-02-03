@@ -21,8 +21,8 @@ var ServiceDiscovery = require('vertx-service-discovery-js/service_discovery');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JJDBCDataSource = io.vertx.servicediscovery.types.JDBCDataSource;
-var Record = io.vertx.servicediscovery.Record;
+var JJDBCDataSource = Java.type('io.vertx.servicediscovery.types.JDBCDataSource');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 
@@ -79,7 +79,7 @@ JDBCDataSource.createRecord = function(name, location, metadata) {
 
  @memberof module:vertx-service-discovery-js/jdbc_data_source
  @param discovery {ServiceDiscovery} The service discovery instance 
- @param filter {Object} The filter, optional 
+ @param filter {todo} The filter, must not be <code>null</code> 
  @param consumerConfiguration {Object} the consumer configuration 
  @param resultHandler {function} the result handler 
  */
@@ -93,8 +93,30 @@ JDBCDataSource.getJDBCClient = function() {
       __args[2](null, ar.cause());
     }
   });
+  }else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function' && typeof __args[2] === 'function') {
+    JJDBCDataSource["getJDBCClient(io.vertx.servicediscovery.ServiceDiscovery,java.util.function.Function,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    var jRet = __args[1](utils.convReturnDataObject(jVal));
+    return jRet;
+  }, function(ar) {
+    if (ar.succeeded()) {
+      __args[2](utils.convReturnVertxGen(JDBCClient, ar.result()), null);
+    } else {
+      __args[2](null, ar.cause());
+    }
+  });
   }else if (__args.length === 4 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
     JJDBCDataSource["getJDBCClient(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), utils.convParamJsonObject(__args[2]), function(ar) {
+    if (ar.succeeded()) {
+      __args[3](utils.convReturnVertxGen(JDBCClient, ar.result()), null);
+    } else {
+      __args[3](null, ar.cause());
+    }
+  });
+  }else if (__args.length === 4 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function' && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
+    JJDBCDataSource["getJDBCClient(io.vertx.servicediscovery.ServiceDiscovery,java.util.function.Function,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    var jRet = __args[1](utils.convReturnDataObject(jVal));
+    return jRet;
+  }, utils.convParamJsonObject(__args[2]), function(ar) {
     if (ar.succeeded()) {
       __args[3](utils.convReturnVertxGen(JDBCClient, ar.result()), null);
     } else {

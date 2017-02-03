@@ -16,15 +16,14 @@
 
 package io.vertx.scala.ext.auth
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
 
 /**
   * A common base object for authentication options.
   */
-
 trait AuthOptions {
 
 }

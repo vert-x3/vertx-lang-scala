@@ -19,8 +19,8 @@ var utils = require('vertx-js/util/utils');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JServicePublisher = io.vertx.servicediscovery.spi.ServicePublisher;
-var Record = io.vertx.servicediscovery.Record;
+var JServicePublisher = Java.type('io.vertx.servicediscovery.spi.ServicePublisher');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
  The publisher is used by the importer to publish or unpublish records.
@@ -42,7 +42,7 @@ var ServicePublisher = function(j_val) {
   this.publish = function(record, resultHandler) {
     var __args = arguments;
     if (__args.length === 2 && (typeof __args[0] === 'object' && __args[0] != null) && typeof __args[1] === 'function') {
-      j_servicePublisher["publish(io.vertx.servicediscovery.Record,io.vertx.core.Handler)"](record != null ? new Record(new JsonObject(JSON.stringify(record))) : null, function(ar) {
+      j_servicePublisher["publish(io.vertx.servicediscovery.Record,io.vertx.core.Handler)"](record != null ? new Record(new JsonObject(Java.asJSONCompatible(record))) : null, function(ar) {
       if (ar.succeeded()) {
         resultHandler(utils.convReturnDataObject(ar.result()), null);
       } else {

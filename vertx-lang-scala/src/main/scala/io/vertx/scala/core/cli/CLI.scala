@@ -17,12 +17,13 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.core.cli.{Option => JOption}
-import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.cli.{Argument => JArgument}
+import io.vertx.core.cli.{Option => JOption}
+import io.vertx.core.cli.{CLI => JCLI}
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.collection.JavaConverters._
 
 /**
   * Interface defining a command-line interface (in other words a command such as 'run', 'ls'...).
@@ -39,35 +40,9 @@ import io.vertx.core.cli.{Argument => JArgument}
   * Command Line Interface object does not contains "value", it's a model. It must be evaluated by a
   * parser that returns a [[io.vertx.scala.core.cli.CommandLine]] object containing the argument and option values.
   */
-class CLI(private val _asJava: JCLI) {
+class CLI(private val _asJava: Object) {
 
-  def asJava: JCLI = _asJava
-
-  /**
-    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
-    * @param arguments the arguments
-    * @return the creates command line
-    */
-  def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava))
-  }
-
-  /**
-    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
-    * @param arguments the arguments
-    * @param validate enable / disable parsing validation
-    * @return the creates command line
-    */
-  def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
-    CommandLine.apply(_asJava.parse(arguments.map(x => x:java.lang.String).asJava, validate))
-  }
-
-  /**
-    * @return the CLI name.
-    */
-  def getName(): String = {
-    _asJava.getName()
-  }
+  def asJava = _asJava
 
   /**
     * Sets the name of the CLI.
@@ -75,27 +50,13 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setName(name: String): CLI = {
-    _asJava.setName(name)
+    asJava.asInstanceOf[JCLI].setName(name.asInstanceOf[java.lang.String])
     this
-  }
-
-  /**
-    * @return the CLI description.
-    */
-  def getDescription(): scala.Option[String] = {
-    scala.Option(_asJava.getDescription())
   }
 
   def setDescription(desc: String): CLI = {
-    _asJava.setDescription(desc)
+    asJava.asInstanceOf[JCLI].setDescription(desc.asInstanceOf[java.lang.String])
     this
-  }
-
-  /**
-    * @return the CLI summary.
-    */
-  def getSummary(): scala.Option[String] = {
-    scala.Option(_asJava.getSummary())
   }
 
   /**
@@ -104,16 +65,8 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setSummary(summary: String): CLI = {
-    _asJava.setSummary(summary)
+    asJava.asInstanceOf[JCLI].setSummary(summary.asInstanceOf[java.lang.String])
     this
-  }
-
-  /**
-    * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
-    * @return `true` if the current CLI is hidden, false otherwise
-    */
-  def isHidden(): Boolean = {
-    _asJava.isHidden()
   }
 
   /**
@@ -123,16 +76,8 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setHidden(hidden: Boolean): CLI = {
-    _asJava.setHidden(hidden)
+    asJava.asInstanceOf[JCLI].setHidden(hidden.asInstanceOf[java.lang.Boolean])
     this
-  }
-
-  /**
-    * Gets the list of options.
-    * @return the list of options, empty if none.
-    */
-  def getOptions(): scala.collection.mutable.Buffer[Option] = {
-    _asJava.getOptions().asScala.map(x => Option(x))
   }
 
   /**
@@ -141,7 +86,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addOption(option: Option): CLI = {
-    _asJava.addOption(option.asJava)
+    asJava.asInstanceOf[JCLI].addOption(option.asJava)
     this
   }
 
@@ -152,7 +97,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
-    _asJava.addOptions(options.map(x => if (x == null) null else x.asJava).asJava)
+    asJava.asInstanceOf[JCLI].addOptions(options.map(x => x.asJava).asJava)
     this
   }
 
@@ -162,16 +107,8 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setOptions(options: scala.collection.mutable.Buffer[Option]): CLI = {
-    _asJava.setOptions(options.map(x => if (x == null) null else x.asJava).asJava)
+    asJava.asInstanceOf[JCLI].setOptions(options.map(x => x.asJava).asJava)
     this
-  }
-
-  /**
-    * Gets the list of defined arguments.
-    * @return the list of argument, empty if none.
-    */
-  def getArguments(): scala.collection.mutable.Buffer[Argument] = {
-    _asJava.getArguments().asScala.map(x => Argument(x))
   }
 
   /**
@@ -180,7 +117,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addArgument(arg: Argument): CLI = {
-    _asJava.addArgument(arg.asJava)
+    asJava.asInstanceOf[JCLI].addArgument(arg.asJava)
     this
   }
 
@@ -191,7 +128,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def addArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
-    _asJava.addArguments(args.map(x => if (x == null) null else x.asJava).asJava)
+    asJava.asInstanceOf[JCLI].addArguments(args.map(x => x.asJava).asJava)
     this
   }
 
@@ -201,35 +138,8 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def setArguments(args: scala.collection.mutable.Buffer[Argument]): CLI = {
-    _asJava.setArguments(args.map(x => if (x == null) null else x.asJava).asJava)
+    asJava.asInstanceOf[JCLI].setArguments(args.map(x => x.asJava).asJava)
     this
-  }
-
-  /**
-    * Gets an <a href="../../../../../../../cheatsheet/Option.html">Option</a> based on its name (short name, long name or argument name).
-    * @param name the name, must not be `null`
-    * @return the Option, `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    */
-  def getOption(name: String): scala.Option[Option] = {
-    scala.Option(Option(_asJava.getOption(name)))
-  }
-
-  /**
-    * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
-    * @param name the name of the argument, must not be `null`
-    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    */
-  def getArgument(name: String): scala.Option[Argument] = {
-    scala.Option(Argument(_asJava.getArgument(name)))
-  }
-
-  /**
-    * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
-    * @param index the index, must be positive or zero.
-    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
-    */
-  def getArgument(index: Int): scala.Option[Argument] = {
-    scala.Option(Argument(_asJava.getArgument(index)))
   }
 
   /**
@@ -238,7 +148,7 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def removeOption(name: String): CLI = {
-    _asJava.removeOption(name)
+    asJava.asInstanceOf[JCLI].removeOption(name.asInstanceOf[java.lang.String])
     this
   }
 
@@ -248,19 +158,112 @@ class CLI(private val _asJava: JCLI) {
     * @return the current CLI instance
     */
   def removeArgument(index: Int): CLI = {
-    _asJava.removeArgument(index)
+    asJava.asInstanceOf[JCLI].removeArgument(index.asInstanceOf[java.lang.Integer])
     this
+  }
+
+  /**
+    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
+    * @param arguments the arguments
+    * @return the creates command line
+    */
+  def parse(arguments: scala.collection.mutable.Buffer[String]): CommandLine = {
+    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava))
+  }
+
+  /**
+    * Parses the user command line interface and create a new [[io.vertx.scala.core.cli.CommandLine]] containing extracting values.
+    * @param arguments the arguments
+    * @param validate enable / disable parsing validation
+    * @return the creates command line
+    */
+  def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
+    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava, validate.asInstanceOf[java.lang.Boolean]))
+  }
+
+  /**
+    * @return the CLI name.
+    */
+  def getName(): String = {
+    asJava.asInstanceOf[JCLI].getName().asInstanceOf[String]
+  }
+
+  /**
+    * @return the CLI description.
+    */
+  def getDescription(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getDescription().asInstanceOf[String])
+  }
+
+  /**
+    * @return the CLI summary.
+    */
+  def getSummary(): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getSummary().asInstanceOf[String])
+  }
+
+  /**
+    * Checks whether or not the current [[io.vertx.scala.core.cli.CLI]] instance is hidden.
+    * @return `true` if the current CLI is hidden, false otherwise
+    */
+  def isHidden(): Boolean = {
+    asJava.asInstanceOf[JCLI].isHidden().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Gets the list of options.
+    * @return the list of options, empty if none.
+    */
+  def getOptions(): scala.collection.mutable.Buffer[Option] = {
+    asJava.asInstanceOf[JCLI].getOptions().asScala.map(x => Option(x))
+  }
+
+  /**
+    * Gets the list of defined arguments.
+    * @return the list of argument, empty if none.
+    */
+  def getArguments(): scala.collection.mutable.Buffer[Argument] = {
+    asJava.asInstanceOf[JCLI].getArguments().asScala.map(x => Argument(x))
+  }
+
+  /**
+    * Gets an <a href="../../../../../../../cheatsheet/Option.html">Option</a> based on its name (short name, long name or argument name).
+    * @param name the name, must not be `null`
+    * @return the Option, `null` if not foundsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
+    */
+  def getOption(name: String): scala.Option[Option] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getOption(name.asInstanceOf[java.lang.String])).map(Option(_))
+  }
+
+  /**
+    * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its name (argument name).
+    * @param name the name of the argument, must not be `null`
+    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    */
+  def getArgument(name: String): scala.Option[Argument] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getArgument(name.asInstanceOf[java.lang.String])).map(Argument(_))
+  }
+
+  /**
+    * Gets an <a href="../../../../../../../cheatsheet/Argument.html">Argument</a> based on its index.
+    * @param index the index, must be positive or zero.
+    * @return the Argument, `null` if not found.see <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>
+    */
+  def getArgument(index: Int): scala.Option[Argument] = {
+    scala.Option(asJava.asInstanceOf[JCLI].getArgument(index.asInstanceOf[java.lang.Integer])).map(Argument(_))
   }
 
 }
 
 object CLI {
-
-  def apply(_asJava: JCLI): CLI =
-    new CLI(_asJava)
-
+  def apply(asJava: JCLI) = new CLI(asJava)  
+  /**
+    * Creates an instance of [[io.vertx.scala.core.cli.CLI]] using the default implementation.
+    * @param name the name of the CLI (must not be `null`)
+    * @return the created instance of CLI
+    */
   def create(name: String): CLI = {
-    CLI.apply(io.vertx.core.cli.CLI.create(name))
+    CLI(JCLI.create(name.asInstanceOf[java.lang.String]))
   }
 
 }

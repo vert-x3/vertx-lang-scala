@@ -17,75 +17,99 @@
 package io.vertx.scala.ext.auth.oauth2
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.auth.oauth2.{KeycloakHelper => JKeycloakHelper}
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 
 /**
   * Helper class for processing Keycloak principal.
   */
-class KeycloakHelper(private val _asJava: JKeycloakHelper) {
+class KeycloakHelper(private val _asJava: Object) {
 
-  def asJava: JKeycloakHelper = _asJava
+  def asJava = _asJava
 
 }
 
 object KeycloakHelper {
-
-  def apply(_asJava: JKeycloakHelper): KeycloakHelper =
-    new KeycloakHelper(_asJava)
-
-  def rawIdToken(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.rawIdToken(principal)
+  def apply(asJava: JKeycloakHelper) = new KeycloakHelper(asJava)  
+  /**
+    * Get raw `id_token` string from the principal.
+    * @param principal user principal
+    * @return the raw id token string
+    */
+  def rawIdToken(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.rawIdToken(principal).asInstanceOf[String]
   }
 
-  def idToken(principal: JsonObject): JsonObject = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.idToken(principal)
+  /**
+    * Get decoded `id_token` from the principal.
+    * @param principal user principal
+    * @return the id token
+    */
+  def idToken(principal: io.vertx.core.json.JsonObject): io.vertx.core.json.JsonObject = {
+    JKeycloakHelper.idToken(principal)
   }
 
-  def rawAccessToken(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.rawAccessToken(principal)
+  /**
+    * Get raw `access_token` string from the principal.
+    * @param principal user principal
+    * @return the raw access token string
+    */
+  def rawAccessToken(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.rawAccessToken(principal).asInstanceOf[String]
   }
 
-  def accessToken(principal: JsonObject): JsonObject = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.accessToken(principal)
+  /**
+    * Get decoded `access_token` from the principal.
+    * @param principal user principal
+    * @return the access token
+    */
+  def accessToken(principal: io.vertx.core.json.JsonObject): io.vertx.core.json.JsonObject = {
+    JKeycloakHelper.accessToken(principal)
   }
 
-  def authTime(principal: JsonObject): Int = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.authTime(principal)
+  def authTime(principal: io.vertx.core.json.JsonObject): Int = {
+    JKeycloakHelper.authTime(principal).asInstanceOf[Int]
   }
 
-  def sessionState(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.sessionState(principal)
+  def sessionState(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.sessionState(principal).asInstanceOf[String]
   }
 
-  def acr(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.acr(principal)
+  def acr(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.acr(principal).asInstanceOf[String]
   }
 
-  def name(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.name(principal)
+  def name(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.name(principal).asInstanceOf[String]
   }
 
-  def email(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.email(principal)
+  def email(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.email(principal).asInstanceOf[String]
   }
 
-  def preferredUsername(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.preferredUsername(principal)
+  def preferredUsername(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.preferredUsername(principal).asInstanceOf[String]
   }
 
-  def nickName(principal: JsonObject): String = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.nickName(principal)
+  def nickName(principal: io.vertx.core.json.JsonObject): String = {
+    JKeycloakHelper.nickName(principal).asInstanceOf[String]
   }
 
-  def allowedOrigins(principal: JsonObject): Set[String] = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.allowedOrigins(principal).asScala.map(x => x:String).toSet
+  def allowedOrigins(principal: io.vertx.core.json.JsonObject): scala.collection.mutable.Set[String] = {
+    JKeycloakHelper.allowedOrigins(principal).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def parseToken(token: String): JsonObject = {
-    io.vertx.ext.auth.oauth2.KeycloakHelper.parseToken(token)
+  /**
+    * Parse the token string with base64 decoder.
+    * This will only obtain the "payload" part of the token.
+    * @param token token string
+    * @return token payload json object
+    */
+  def parseToken(token: String): io.vertx.core.json.JsonObject = {
+    JKeycloakHelper.parseToken(token.asInstanceOf[java.lang.String])
   }
 
 }

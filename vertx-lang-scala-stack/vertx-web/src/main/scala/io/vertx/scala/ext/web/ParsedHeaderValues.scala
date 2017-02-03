@@ -17,12 +17,13 @@
 package io.vertx.scala.ext.web
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
-import io.vertx.ext.web.{ParsedHeaderValue => JParsedHeaderValue}
-import io.vertx.ext.web.{MIMEHeader => JMIMEHeader}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{LanguageHeader => JLanguageHeader}
+import io.vertx.ext.web.{ParsedHeaderValue => JParsedHeaderValue}
+import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
+import scala.collection.JavaConverters._
+import io.vertx.ext.web.{MIMEHeader => JMIMEHeader}
 
 /**
   * A container with the request's headers that are meaningful enough to be parsed
@@ -36,50 +37,47 @@ import io.vertx.ext.web.{LanguageHeader => JLanguageHeader}
   * </ul>
   *
   */
-class ParsedHeaderValues(private val _asJava: JParsedHeaderValues) {
+class ParsedHeaderValues(private val _asJava: Object) {
 
-  def asJava: JParsedHeaderValues = _asJava
+  def asJava = _asJava
 
   /**
     * @return List of MIME values in the `Accept` header
     */
   def accept(): scala.collection.mutable.Buffer[MIMEHeader] = {
-    _asJava.accept().asScala.map(MIMEHeader.apply)
+    asJava.asInstanceOf[JParsedHeaderValues].accept().asScala.map(x => MIMEHeader(x))
   }
 
   /**
     * @return List of charset values in the `Accept-Charset` header
     */
   def acceptCharset(): scala.collection.mutable.Buffer[ParsedHeaderValue] = {
-    _asJava.acceptCharset().asScala.map(ParsedHeaderValue.apply)
+    asJava.asInstanceOf[JParsedHeaderValues].acceptCharset().asScala.map(x => ParsedHeaderValue(x))
   }
 
   /**
     * @return List of encofing values in the `Accept-Encoding` header
     */
   def acceptEncoding(): scala.collection.mutable.Buffer[ParsedHeaderValue] = {
-    _asJava.acceptEncoding().asScala.map(ParsedHeaderValue.apply)
+    asJava.asInstanceOf[JParsedHeaderValues].acceptEncoding().asScala.map(x => ParsedHeaderValue(x))
   }
 
   /**
     * @return List of languages in the `Accept-Language` header
     */
   def acceptLanguage(): scala.collection.mutable.Buffer[LanguageHeader] = {
-    _asJava.acceptLanguage().asScala.map(LanguageHeader.apply)
+    asJava.asInstanceOf[JParsedHeaderValues].acceptLanguage().asScala.map(x => LanguageHeader(x))
   }
 
   /**
     * @return MIME value in the `Content-Type` header
     */
   def contentType(): MIMEHeader = {
-    MIMEHeader.apply(_asJava.contentType())
+    MIMEHeader(asJava.asInstanceOf[JParsedHeaderValues].contentType())
   }
 
 }
 
 object ParsedHeaderValues {
-
-  def apply(_asJava: JParsedHeaderValues): ParsedHeaderValues =
-    new ParsedHeaderValues(_asJava)
-
+  def apply(asJava: JParsedHeaderValues) = new ParsedHeaderValues(asJava)  
 }

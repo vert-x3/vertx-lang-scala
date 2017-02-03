@@ -17,12 +17,15 @@
 package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.net.{NetClient => JNetClient}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.net.{NetClient => JNetClient}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   * A TCP client.
@@ -32,18 +35,10 @@ import io.vertx.core.net.{NetSocket => JNetSocket}
   * This client supports a configurable number of connection attempts and a configurable
   * delay between attempts.
   */
-class NetClient(private val _asJava: JNetClient) 
-    extends Measured {
+class NetClient(private val _asJava: Object)
+    extends  Measured {
 
-  def asJava: JNetClient = _asJava
-
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
-  }
+  def asJava = _asJava
 
   /**
     * Open a connection to a server at the specific `port` and `host`.
@@ -52,11 +47,19 @@ class NetClient(private val _asJava: JNetClient)
     * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
     * @param port the port
     * @param host the host
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER    */
-  def connectFuture(port: Int, host: String): concurrent.Future[NetSocket] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket,NetSocket]((x => if (x == null) null else NetSocket.apply(x)))
-    _asJava.connect(port, host, promiseAndHandler._1)
-    promiseAndHandler._2.future
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connect(port: Int, host: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    this
+  }
+
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
+  override def isMetricsEnabled(): Boolean = {
+    asJava.asInstanceOf[JNetClient].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -66,14 +69,20 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
     * complete until some time after the method has returned.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.asInstanceOf[JNetClient].close()
+  }
+
+ /**
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def connectFuture(port: Int, host: String): scala.concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
 
 object NetClient {
-
-  def apply(_asJava: JNetClient): NetClient =
-    new NetClient(_asJava)
-
+  def apply(asJava: JNetClient) = new NetClient(asJava)  
 }

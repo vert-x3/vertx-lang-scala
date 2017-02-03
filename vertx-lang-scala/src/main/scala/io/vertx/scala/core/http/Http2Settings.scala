@@ -16,9 +16,9 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 
 /**
@@ -27,9 +27,9 @@ import io.vertx.core.http.{Http2Settings => JHttp2Settings}
   * The settings expose the parameters defined by the HTTP/2 specification, as well as extra settings for
   * protocol extensions.
   */
+class Http2Settings(private val _asJava: JHttp2Settings) {
 
-class Http2Settings(val asJava: JHttp2Settings) {
-
+  def asJava = _asJava
 
   /**
     * Set  HTTP/2 setting.
@@ -38,8 +38,8 @@ class Http2Settings(val asJava: JHttp2Settings) {
     asJava.setHeaderTableSize(value)
     this
   }
-  def getHeaderTableSize = {
-    asJava.getHeaderTableSize()
+  def getHeaderTableSize: Long = {
+    asJava.getHeaderTableSize().asInstanceOf[Long]
   }
 
   /**
@@ -49,8 +49,8 @@ class Http2Settings(val asJava: JHttp2Settings) {
     asJava.setInitialWindowSize(value)
     this
   }
-  def getInitialWindowSize = {
-    asJava.getInitialWindowSize()
+  def getInitialWindowSize: Int = {
+    asJava.getInitialWindowSize().asInstanceOf[Int]
   }
 
   /**
@@ -60,8 +60,8 @@ class Http2Settings(val asJava: JHttp2Settings) {
     asJava.setMaxConcurrentStreams(value)
     this
   }
-  def getMaxConcurrentStreams = {
-    asJava.getMaxConcurrentStreams()
+  def getMaxConcurrentStreams: Long = {
+    asJava.getMaxConcurrentStreams().asInstanceOf[Long]
   }
 
   /**
@@ -71,19 +71,19 @@ class Http2Settings(val asJava: JHttp2Settings) {
     asJava.setMaxFrameSize(value)
     this
   }
-  def getMaxFrameSize = {
-    asJava.getMaxFrameSize()
+  def getMaxFrameSize: Int = {
+    asJava.getMaxFrameSize().asInstanceOf[Int]
   }
 
   /**
     * Set the  HTTP/2 setting
     */
-  def setMaxHeaderListSize(value: Int) = {
+  def setMaxHeaderListSize(value: Long) = {
     asJava.setMaxHeaderListSize(value)
     this
   }
-  def getMaxHeaderListSize = {
-    asJava.getMaxHeaderListSize()
+  def getMaxHeaderListSize: Long = {
+    asJava.getMaxHeaderListSize().asInstanceOf[Long]
   }
 
   /**
@@ -93,8 +93,8 @@ class Http2Settings(val asJava: JHttp2Settings) {
     asJava.setPushEnabled(value)
     this
   }
-  def isPushEnabled = {
-    asJava.isPushEnabled()
+  def isPushEnabled: Boolean = {
+    asJava.isPushEnabled().asInstanceOf[Boolean]
   }
 }
 
@@ -105,16 +105,18 @@ object Http2Settings {
   }
   
   def apply(t: JHttp2Settings) = {
-    if(t != null)
+    if (t != null) {
       new Http2Settings(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):Http2Settings = {
-    if(json != null)
+  def fromJson(json: JsonObject): Http2Settings = {
+    if (json != null) {
       new Http2Settings(new JHttp2Settings(json))
-    else
+    } else {
       null
+    }
   }
 }

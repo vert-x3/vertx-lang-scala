@@ -17,11 +17,10 @@
 package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * A WebSocket frame that represents either text or binary data.
@@ -33,37 +32,19 @@ import io.vertx.scala.core.buffer.Buffer
   * If there are more than one frames in the message, then the first frame should be a text or binary frame with
   * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
   */
-class WebSocketFrame(private val _asJava: JWebSocketFrame) {
+class WebSocketFrame(private val _asJava: Object) {
 
-  def asJava: JWebSocketFrame = _asJava
-
-  /**
-    * @return true if it's a text frame
-    */
-  def isText(): Boolean = {
-    _asJava.isText()
-  }
-
-  /**
-    * @return true if it's a binary frame
-    */
-  def isBinary(): Boolean = {
-    _asJava.isBinary()
-  }
-
-  /**
-    * @return true if it's a continuation frame
-    */
-  def isContinuation(): Boolean = {
-    _asJava.isContinuation()
-  }
+  def asJava = _asJava
+  private var cached_0: String = _
+  private var cached_1: io.vertx.core.buffer.Buffer = _
 
   /**
     * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
     */
   def textData(): String = {
     if (cached_0 == null) {
-      cached_0 =    _asJava.textData()
+      val tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
+      cached_0 = tmp.asInstanceOf[String]
     }
     cached_0
   }
@@ -71,39 +52,74 @@ class WebSocketFrame(private val _asJava: JWebSocketFrame) {
   /**
     * @return the data of the frame
     */
-  def binaryData(): Buffer = {
+  def binaryData(): io.vertx.core.buffer.Buffer = {
     if (cached_1 == null) {
-      cached_1 =    Buffer.apply(_asJava.binaryData())
+      val tmp = asJava.asInstanceOf[JWebSocketFrame].binaryData()
+      cached_1 = tmp
     }
     cached_1
+  }
+
+  /**
+    * @return true if it's a text frame
+    */
+  def isText(): Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
+  }
+
+  /**
+    * @return true if it's a binary frame
+    */
+  def isBinary(): Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
+  }
+
+  /**
+    * @return true if it's a continuation frame
+    */
+  def isContinuation(): Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
   /**
     * @return true if this is the final frame.
     */
   def isFinal(): Boolean = {
-    _asJava.isFinal()
+    asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
-  private var cached_0: String = _
-  private var cached_1: Buffer = _
 }
 
 object WebSocketFrame {
-
-  def apply(_asJava: JWebSocketFrame): WebSocketFrame =
-    new WebSocketFrame(_asJava)
-
-  def binaryFrame(data: Buffer, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.binaryFrame(data.asJava.asInstanceOf[JBuffer], isFinal))
+  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
+  /**
+    * Create a binary WebSocket frame.
+    * @param data the data for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
+  def binaryFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
+    WebSocketFrame(JWebSocketFrame.binaryFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
+  /**
+    * Create a text WebSocket frame.
+    * @param str the string for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
   def textFrame(str: String, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.textFrame(str, isFinal))
+    WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String], isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
-  def continuationFrame(data: Buffer, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame.apply(io.vertx.core.http.WebSocketFrame.continuationFrame(data.asJava.asInstanceOf[JBuffer], isFinal))
+  /**
+    * Create a continuation frame
+    * @param data the data for the frame
+    * @param isFinal true if it's the final frame in the WebSocket message
+    * @return the frame
+    */
+  def continuationFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
+    WebSocketFrame(JWebSocketFrame.continuationFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
 }

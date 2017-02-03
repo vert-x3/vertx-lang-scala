@@ -69,11 +69,9 @@ public class StompClientOptionsConverter {
 
   public static void toJson(StompClientOptions obj, JsonObject json) {
     if (obj.getAcceptedVersions() != null) {
-      json.put("acceptedVersions", new JsonArray(
-          obj.getAcceptedVersions().
-              stream().
-              map(item -> item).
-              collect(java.util.stream.Collectors.toList())));
+      JsonArray array = new JsonArray();
+      obj.getAcceptedVersions().forEach(item -> array.add(item));
+      json.put("acceptedVersions", array);
     }
     json.put("autoComputeContentLength", obj.isAutoComputeContentLength());
     json.put("bypassHostHeader", obj.isBypassHostHeader());

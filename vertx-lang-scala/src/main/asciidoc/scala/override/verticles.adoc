@@ -78,19 +78,22 @@ If your verticle extends `ScalaVerticle`, you override the
 [source, scala]
 ----
 import io.vertx.lang.scala.ScalaVerticle
+import scala.concurrent.{Future, Promise}
 
 public class HelloWorldVerticle extends ScalaVerticle {
- public void start(startpromise: scala.concurrent.Promise[Unit]) {
+ public void start(): Future[Unit] = {
   println "starting"
+  val promise = Promise[Unit]()
   vertx.deployVerticleFuture("v.rb").onComplete{
-   case Success(deploymentId) => startPromise.success()
-   case Failure(throwable) => startPromise.failure(throwable)
+   case Success(deploymentId) => promise.success(())
+   case Failure(throwable) => promise.failure(throwable)
   }
+  promise.future
  }
 
- public void stop(stopPromise: scala.concurrent.Promise[Unit]) {
+ public void stop(): Future[Unit] = {
   println("stopping")
-  stopPromise.success()
+  Future.successful(())
  }
 }
 ----

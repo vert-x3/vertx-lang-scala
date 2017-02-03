@@ -17,22 +17,22 @@
 package io.vertx.scala.ext.stomp
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
-import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.ext.stomp.{Frame => JFrame}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.stomp.{StompServer => JStompServer}
+import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+import io.vertx.core.Handler
+import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
 
 /**
   * Class representing a connection between a STOMP client a the server. It keeps a references on the client socket,
   * so let write to this socket.
   */
-class StompServerConnection(private val _asJava: JStompServerConnection) {
+class StompServerConnection(private val _asJava: Object) {
 
-  def asJava: JStompServerConnection = _asJava
+  def asJava = _asJava
 
   /**
     * Writes the given frame to the socket.
@@ -40,7 +40,7 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * @return the current StompServerConnection
     */
   def write(frame: Frame): StompServerConnection = {
-    _asJava.write(frame.asJava)
+    asJava.asInstanceOf[JStompServerConnection].write(frame.asJava)
     this
   }
 
@@ -49,8 +49,8 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * @param buffer the buffer
     * @return the current StompServerConnection
     */
-  def write(buffer: Buffer): StompServerConnection = {
-    _asJava.write(buffer.asJava.asInstanceOf[JBuffer])
+  def write(buffer: io.vertx.core.buffer.Buffer): StompServerConnection = {
+    asJava.asInstanceOf[JStompServerConnection].write(buffer)
     this
   }
 
@@ -58,35 +58,35 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * @return the STOMP server serving this connection.
     */
   def server(): StompServer = {
-    StompServer.apply(_asJava.server())
+    StompServer(asJava.asInstanceOf[JStompServerConnection].server())
   }
 
   /**
     * @return the STOMP server handler dealing with this connection
     */
   def handler(): StompServerHandler = {
-    StompServerHandler.apply(_asJava.handler())
+    StompServerHandler(asJava.asInstanceOf[JStompServerConnection].handler())
   }
 
   /**
     * @return the STOMP session id computed when the client has established the connection to the server
     */
   def session(): String = {
-    _asJava.session()
+    asJava.asInstanceOf[JStompServerConnection].session().asInstanceOf[String]
   }
 
   /**
     * Closes the connection with the client.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.asInstanceOf[JStompServerConnection].close()
   }
 
   /**
     * Sends a `PING` frame to the client. A `PING` frame is a frame containing only `EOL`.
     */
   def ping(): Unit = {
-    _asJava.ping()
+    asJava.asInstanceOf[JStompServerConnection].ping()
   }
 
   /**
@@ -94,7 +94,7 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * heartbeat.
     */
   def onServerActivity(): Unit = {
-    _asJava.onServerActivity()
+    asJava.asInstanceOf[JStompServerConnection].onServerActivity()
   }
 
   /**
@@ -103,15 +103,12 @@ class StompServerConnection(private val _asJava: JStompServerConnection) {
     * @param pong pong time
     * @param pingHandler the ping handler
     */
-  def configureHeartbeat(ping: Long, pong: Long, pingHandler: io.vertx.core.Handler[StompServerConnection]): Unit = {
-    _asJava.configureHeartbeat(ping, pong, funcToMappedHandler(StompServerConnection.apply)(pingHandler))
+  def configureHeartbeat(ping: Long, pong: Long, pingHandler: Handler[StompServerConnection]): Unit = {
+    asJava.asInstanceOf[JStompServerConnection].configureHeartbeat(ping.asInstanceOf[java.lang.Long], pong.asInstanceOf[java.lang.Long], {x: JStompServerConnection => pingHandler.handle(StompServerConnection(x))})
   }
 
 }
 
 object StompServerConnection {
-
-  def apply(_asJava: JStompServerConnection): StompServerConnection =
-    new StompServerConnection(_asJava)
-
+  def apply(asJava: JStompServerConnection) = new StompServerConnection(asJava)  
 }

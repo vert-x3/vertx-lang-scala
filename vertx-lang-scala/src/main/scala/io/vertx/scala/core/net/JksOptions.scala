@@ -16,12 +16,11 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{JksOptions => JJksOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Key or trust store options configuring private key and/or certificates based on Java Keystore files.
@@ -44,9 +43,9 @@ import io.vertx.scala.core.buffer.Buffer
   * options.setKeyStore(new JKSOptions().setValue(store).setPassword("foo"));
   * </pre>
   */
+class JksOptions(private val _asJava: JJksOptions) {
 
-class JksOptions(val asJava: JJksOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the password for the key store
@@ -55,8 +54,8 @@ class JksOptions(val asJava: JJksOptions) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
-    asJava.getPassword()
+  def getPassword: String = {
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -66,18 +65,18 @@ class JksOptions(val asJava: JJksOptions) {
     asJava.setPath(value)
     this
   }
-  def getPath = {
-    asJava.getPath()
+  def getPath: String = {
+    asJava.getPath().asInstanceOf[String]
   }
 
   /**
     * Set the key store as a buffer
     */
-  def setValue(value: Buffer) = {
-    asJava.setValue(value.asJava)
+  def setValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setValue(value)
     this
   }
-  def getValue = {
+  def getValue: io.vertx.core.buffer.Buffer = {
     asJava.getValue()
   }
 }
@@ -89,16 +88,18 @@ object JksOptions {
   }
   
   def apply(t: JJksOptions) = {
-    if(t != null)
+    if (t != null) {
       new JksOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):JksOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): JksOptions = {
+    if (json != null) {
       new JksOptions(new JJksOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

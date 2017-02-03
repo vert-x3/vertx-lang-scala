@@ -17,54 +17,68 @@
 package io.vertx.scala.ext.asyncsql
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.sql.SQLConnection
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 
 /**
   * Represents an asynchronous SQL client
   */
-class AsyncSQLClient(private val _asJava: JAsyncSQLClient) {
+class AsyncSQLClient(private val _asJava: Object) {
 
-  def asJava: JAsyncSQLClient = _asJava
+  def asJava = _asJava
 
   /**
     * Close the client and release all resources.
     * Note that closing is asynchronous.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.asInstanceOf[JAsyncSQLClient].close()
   }
 
   /**
     * Close the client and release all resources.
     * Call the handler when close is complete.
-    * @return future that will be called when close is complete
+    * @param whenDone handler that will be called when close is complete
     */
-  def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def close(whenDone: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JAsyncSQLClient].close({x: AsyncResult[Void] => whenDone.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
     * Returns a connection that can be used to perform SQL operations on. It's important to remember to close the
     * connection when you are done, so it is returned to the pool.
-    * @return the future which is called when the <code>JdbcConnection</code> object is ready for use.
+    * @param handler the handler which is called when the <code>JdbcConnection</code> object is ready for use.
     */
-  def getConnectionFuture(): concurrent.Future[SQLConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection,SQLConnection]((x => if (x == null) null else SQLConnection.apply(x)))
-    _asJava.getConnection(promiseAndHandler._1)
+  def getConnection(handler: Handler[AsyncResult[SQLConnection]]): Unit = {
+    asJava.asInstanceOf[JAsyncSQLClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection, SQLConnection](x, a => SQLConnection(a)))})
+  }
+
+ /**
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def closeFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncSQLClient].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[getConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def getConnectionFuture(): scala.concurrent.Future[SQLConnection] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))
+    asJava.asInstanceOf[JAsyncSQLClient].getConnection(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
 object AsyncSQLClient {
-
-  def apply(_asJava: JAsyncSQLClient): AsyncSQLClient =
-    new AsyncSQLClient(_asJava)
-
+  def apply(asJava: JAsyncSQLClient) = new AsyncSQLClient(asJava)  
 }

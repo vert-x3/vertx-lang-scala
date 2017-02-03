@@ -17,19 +17,22 @@
 package io.vertx.scala.ext.auth
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 
 /**
   *
   * User-facing interface for authenticating users.
   */
-class AuthProvider(private val _asJava: JAuthProvider) {
+class AuthProvider(private val _asJava: Object) {
 
-  def asJava: JAuthProvider = _asJava
+  def asJava = _asJava
 
   /**
     * Authenticate a user.
@@ -48,19 +51,23 @@ class AuthProvider(private val _asJava: JAuthProvider) {
     * If the user is successfully authenticated a [[io.vertx.scala.ext.auth.User]] object is passed to the handler in an [[io.vertx.scala.core.AsyncResult]].
     * The user object can then be used for authorisation.
     * @param authInfo The auth information
-    * @return The result future
+    * @param resultHandler The result handler
     */
-  def authenticateFuture(authInfo: JsonObject): concurrent.Future[User] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JUser,User]((x => if (x == null) null else User.apply(x)))
-    _asJava.authenticate(authInfo, promiseAndHandler._1)
+  def authenticate(authInfo: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[User]]): Unit = {
+    asJava.asInstanceOf[JAuthProvider].authenticate(authInfo, {x: AsyncResult[JUser] => resultHandler.handle(AsyncResultWrapper[JUser, User](x, a => User(a)))})
+  }
+
+ /**
+   * Like [[authenticate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[User] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JUser, User](x => User(x))
+    asJava.asInstanceOf[JAuthProvider].authenticate(authInfo, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
 object AuthProvider {
-
-  def apply(_asJava: JAuthProvider): AuthProvider =
-    new AuthProvider(_asJava)
-
+  def apply(asJava: JAuthProvider) = new AuthProvider(asJava)  
 }

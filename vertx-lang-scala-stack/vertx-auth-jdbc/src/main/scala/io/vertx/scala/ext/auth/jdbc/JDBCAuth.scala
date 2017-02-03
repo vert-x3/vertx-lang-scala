@@ -17,23 +17,28 @@
 package io.vertx.scala.ext.auth.jdbc
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
-import io.vertx.ext.auth.{User => JUser}
-import io.vertx.scala.ext.auth.User
-import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.jdbc.JDBCClient
-import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.ext.auth.{User => JUser}
+import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
+import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 
 /**
   * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
   */
-class JDBCAuth(private val _asJava: JJDBCAuth) {
+class JDBCAuth(private val _asJava: Object)
+    extends AuthProvider(_asJava)  {
 
-  def asJava: JJDBCAuth = _asJava
 
   /**
     * Set the authentication query to use. Use this if you want to override the default authentication query.
@@ -41,7 +46,7 @@ class JDBCAuth(private val _asJava: JJDBCAuth) {
     * @return a reference to this for fluency
     */
   def setAuthenticationQuery(authenticationQuery: String): JDBCAuth = {
-    JDBCAuth.apply(_asJava.setAuthenticationQuery(authenticationQuery))
+    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setAuthenticationQuery(authenticationQuery.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -50,7 +55,7 @@ class JDBCAuth(private val _asJava: JJDBCAuth) {
     * @return a reference to this for fluency
     */
   def setRolesQuery(rolesQuery: String): JDBCAuth = {
-    JDBCAuth.apply(_asJava.setRolesQuery(rolesQuery))
+    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolesQuery(rolesQuery.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -59,7 +64,7 @@ class JDBCAuth(private val _asJava: JJDBCAuth) {
     * @return a reference to this for fluency
     */
   def setPermissionsQuery(permissionsQuery: String): JDBCAuth = {
-    JDBCAuth.apply(_asJava.setPermissionsQuery(permissionsQuery))
+    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setPermissionsQuery(permissionsQuery.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -68,18 +73,42 @@ class JDBCAuth(private val _asJava: JJDBCAuth) {
     * @return a reference to this for fluency
     */
   def setRolePrefix(rolePrefix: String): JDBCAuth = {
-    JDBCAuth.apply(_asJava.setRolePrefix(rolePrefix))
+    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Compute the hashed password given the unhashed password and the salt
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @param password the unhashed password
+    * @param salt the salt
+    * @return the hashed password
+    */
+  def computeHash(password: String, salt: String): String = {
+    asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String], salt.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+    * Compute a salt string.
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @return a non null salt value
+    */
+  def generateSalt(): String = {
+    asJava.asInstanceOf[JJDBCAuth].generateSalt().asInstanceOf[String]
   }
 
 }
 
 object JDBCAuth {
-
-  def apply(_asJava: JJDBCAuth): JDBCAuth =
-    new JDBCAuth(_asJava)
-
-  def create(client: JDBCClient): JDBCAuth = {
-    JDBCAuth.apply(io.vertx.ext.auth.jdbc.JDBCAuth.create(client.asJava.asInstanceOf[JJDBCClient]))
+  def apply(asJava: JJDBCAuth) = new JDBCAuth(asJava)  
+  /**
+    * Create a JDBC auth provider implementation
+    * @param client the JDBC client instance
+    * @return the auth provider
+    */
+  def create(vertx: Vertx, client: JDBCClient): JDBCAuth = {
+    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx], client.asJava.asInstanceOf[JJDBCClient]))
   }
 
 }

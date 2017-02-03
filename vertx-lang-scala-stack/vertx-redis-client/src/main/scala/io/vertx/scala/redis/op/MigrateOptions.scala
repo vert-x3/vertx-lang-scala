@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
 
 /**
   */
+class MigrateOptions(private val _asJava: JMigrateOptions) {
 
-class MigrateOptions(val asJava: JMigrateOptions) {
-
+  def asJava = _asJava
 }
 
 object MigrateOptions {
@@ -35,16 +35,18 @@ object MigrateOptions {
   }
   
   def apply(t: JMigrateOptions) = {
-    if(t != null)
+    if (t != null) {
       new MigrateOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):MigrateOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): MigrateOptions = {
+    if (json != null) {
       new MigrateOptions(new JMigrateOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

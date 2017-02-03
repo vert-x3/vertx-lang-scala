@@ -16,17 +16,17 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 
 /**
   * Proxy options for a net client or a net client.
   */
+class ProxyOptions(private val _asJava: JProxyOptions) {
 
-class ProxyOptions(val asJava: JProxyOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set proxy host.
@@ -35,8 +35,8 @@ class ProxyOptions(val asJava: JProxyOptions) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -46,8 +46,8 @@ class ProxyOptions(val asJava: JProxyOptions) {
     asJava.setPassword(value)
     this
   }
-  def getPassword = {
-    asJava.getPassword()
+  def getPassword: String = {
+    asJava.getPassword().asInstanceOf[String]
   }
 
   /**
@@ -57,8 +57,8 @@ class ProxyOptions(val asJava: JProxyOptions) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -70,7 +70,7 @@ class ProxyOptions(val asJava: JProxyOptions) {
     asJava.setType(value)
     this
   }
-  def getType = {
+  def getType: io.vertx.core.net.ProxyType = {
     asJava.getType()
   }
 
@@ -81,8 +81,8 @@ class ProxyOptions(val asJava: JProxyOptions) {
     asJava.setUsername(value)
     this
   }
-  def getUsername = {
-    asJava.getUsername()
+  def getUsername: String = {
+    asJava.getUsername().asInstanceOf[String]
   }
 }
 
@@ -93,16 +93,18 @@ object ProxyOptions {
   }
   
   def apply(t: JProxyOptions) = {
-    if(t != null)
+    if (t != null) {
       new ProxyOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):ProxyOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): ProxyOptions = {
+    if (json != null) {
       new ProxyOptions(new JProxyOptions(json))
-    else
+    } else {
       null
+    }
   }
 }
