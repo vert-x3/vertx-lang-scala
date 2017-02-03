@@ -384,16 +384,18 @@ object StompClientOptions {
   }
   
   def apply(t: JStompClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new StompClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): StompClientOptions = {
-    if(json != null)
+    if (json != null) {
       new StompClientOptions(new JStompClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

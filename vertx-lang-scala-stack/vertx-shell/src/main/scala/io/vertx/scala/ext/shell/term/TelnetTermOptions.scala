@@ -277,16 +277,18 @@ object TelnetTermOptions {
   }
   
   def apply(t: JTelnetTermOptions) = {
-    if(t != null)
+    if (t != null) {
       new TelnetTermOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): TelnetTermOptions = {
-    if(json != null)
+    if (json != null) {
       new TelnetTermOptions(new JTelnetTermOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

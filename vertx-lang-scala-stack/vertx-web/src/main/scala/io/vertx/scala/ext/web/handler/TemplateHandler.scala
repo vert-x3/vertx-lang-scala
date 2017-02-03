@@ -61,7 +61,7 @@ object TemplateHandler {
     * @return the handler
     */
   def create(engine: TemplateEngine, templateDirectory: String, contentType: String): TemplateHandler = {
-    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine],templateDirectory.asInstanceOf[java.lang.String],contentType.asInstanceOf[java.lang.String]))
+    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine], templateDirectory.asInstanceOf[java.lang.String], contentType.asInstanceOf[java.lang.String]))
   }
 
 }

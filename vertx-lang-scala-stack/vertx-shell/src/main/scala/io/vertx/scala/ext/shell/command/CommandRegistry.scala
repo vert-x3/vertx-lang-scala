@@ -52,7 +52,7 @@ class CommandRegistry(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def registerCommand(command: Command, completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand],{x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand,Command](x, a => Command(a)))})
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], {x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand,Command](x, a => Command(a)))})
     this
   }
 
@@ -70,7 +70,7 @@ class CommandRegistry(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def registerCommands(commands: scala.collection.mutable.Buffer[Command], completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava,{x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand],scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, {x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand],scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
     this
   }
 
@@ -88,7 +88,7 @@ class CommandRegistry(private val _asJava: Object)
     * @return a reference to this, so the API can be used fluently
     */
   def unregisterCommand(commandName: String, completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -99,7 +99,7 @@ class CommandRegistry(private val _asJava: Object)
    */
   def registerCommandFuture(command: Command): scala.concurrent.Future[Command] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand, Command](x => Command(x))
-    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand],promiseAndHandler._1)
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -110,7 +110,7 @@ class CommandRegistry(private val _asJava: Object)
    */
   def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]): scala.concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x => x.asScala.map(x => Command(x)))
-    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -121,7 +121,7 @@ class CommandRegistry(private val _asJava: Object)
    */
   def unregisterCommandFuture(commandName: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

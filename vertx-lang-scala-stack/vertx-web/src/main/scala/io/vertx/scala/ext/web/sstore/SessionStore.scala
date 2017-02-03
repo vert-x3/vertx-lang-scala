@@ -59,7 +59,7 @@ class SessionStore(private val _asJava: Object) {
     * @return the session
     */
   def createSession(timeout: Long, length: Int): Session = {
-    Session(asJava.asInstanceOf[JSessionStore].createSession(timeout.asInstanceOf[java.lang.Long],length.asInstanceOf[java.lang.Integer]))
+    Session(asJava.asInstanceOf[JSessionStore].createSession(timeout.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer]))
   }
 
   /**
@@ -67,7 +67,7 @@ class SessionStore(private val _asJava: Object) {
     * @param id the unique ID of the session
     */
   def get(id: String, resultHandler: Handler[AsyncResult[Session]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String],{x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession,Session](x, a => Session(a)))})
+    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession,Session](x, a => Session(a)))})
   }
 
   /**
@@ -75,7 +75,7 @@ class SessionStore(private val _asJava: Object) {
     * @param id the unique ID of the session
     */
   def delete(id: String, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
@@ -83,7 +83,7 @@ class SessionStore(private val _asJava: Object) {
     * @param session the session
     */
   def put(session: Session, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
   /**
@@ -114,7 +114,7 @@ class SessionStore(private val _asJava: Object) {
    */
   def getFuture(id: String): scala.concurrent.Future[Session] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, Session](x => Session(x))
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -125,7 +125,7 @@ class SessionStore(private val _asJava: Object) {
    */
   def deleteFuture(id: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -136,7 +136,7 @@ class SessionStore(private val _asJava: Object) {
    */
   def putFuture(session: Session): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession],promiseAndHandler._1)
+    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

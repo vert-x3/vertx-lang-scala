@@ -41,7 +41,7 @@ class User(private val _asJava: Object) {
     * @return the User to enable fluent use
     */
   def isAuthorised(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
-    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
@@ -85,7 +85,7 @@ class User(private val _asJava: Object) {
    */
   def isAuthorisedFuture(authority: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

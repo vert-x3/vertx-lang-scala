@@ -108,7 +108,7 @@ object JWTAuthHandler {
     * @return the auth handler
     */
   def create(authProvider: JWTAuth, skip: String): JWTAuthHandler = {
-    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth],skip.asInstanceOf[java.lang.String]))
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth], skip.asInstanceOf[java.lang.String]))
   }
 
 }

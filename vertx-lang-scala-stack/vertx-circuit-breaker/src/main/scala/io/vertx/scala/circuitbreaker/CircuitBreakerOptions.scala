@@ -127,16 +127,18 @@ object CircuitBreakerOptions {
   }
   
   def apply(t: JCircuitBreakerOptions) = {
-    if(t != null)
+    if (t != null) {
       new CircuitBreakerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): CircuitBreakerOptions = {
-    if(json != null)
+    if (json != null) {
       new CircuitBreakerOptions(new JCircuitBreakerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

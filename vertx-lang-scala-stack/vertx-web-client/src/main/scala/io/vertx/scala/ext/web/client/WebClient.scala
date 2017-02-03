@@ -56,7 +56,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def request(method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method,port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -67,7 +67,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method,host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -77,7 +77,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def request(method: io.vertx.core.http.HttpMethod, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method,requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -87,7 +87,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def requestAbs(method: io.vertx.core.http.HttpMethod, absoluteURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].requestAbs(method,absoluteURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -107,7 +107,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def get(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].get(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -117,7 +117,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def get(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].get(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -147,7 +147,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def post(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].post(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -157,7 +157,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def post(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].post(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -187,7 +187,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def put(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].put(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -197,7 +197,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def put(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].put(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -227,7 +227,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def delete(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].delete(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -237,7 +237,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def delete(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].delete(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -267,7 +267,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def patch(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].patch(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].patch(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -277,7 +277,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def patch(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].patch(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].patch(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -307,7 +307,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def head(port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].head(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -317,7 +317,7 @@ class WebClient(private val _asJava: Object) {
     * @return an HTTP client request object
     */
   def head(host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].head(host.asInstanceOf[java.lang.String],requestURI.asInstanceOf[java.lang.String]))
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**

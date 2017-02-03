@@ -56,7 +56,7 @@ class Router(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def mountSubRouter(mountPoint: String, subRouter: Router): Router = {
-    asJava.asInstanceOf[JRouter].mountSubRouter(mountPoint.asInstanceOf[java.lang.String],subRouter.asJava.asInstanceOf[JRouter])
+    asJava.asInstanceOf[JRouter].mountSubRouter(mountPoint.asInstanceOf[java.lang.String], subRouter.asJava.asInstanceOf[JRouter])
     this
   }
 
@@ -96,7 +96,7 @@ class Router(private val _asJava: Object) {
     * @return the route
     */
   def route(method: io.vertx.core.http.HttpMethod, path: String): Route = {
-    Route(asJava.asInstanceOf[JRouter].route(method,path.asInstanceOf[java.lang.String]))
+    Route(asJava.asInstanceOf[JRouter].route(method, path.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -115,7 +115,7 @@ class Router(private val _asJava: Object) {
     * @return the route
     */
   def routeWithRegex(method: io.vertx.core.http.HttpMethod, regex: String): Route = {
-    Route(asJava.asInstanceOf[JRouter].routeWithRegex(method,regex.asInstanceOf[java.lang.String]))
+    Route(asJava.asInstanceOf[JRouter].routeWithRegex(method, regex.asInstanceOf[java.lang.String]))
   }
 
   /**

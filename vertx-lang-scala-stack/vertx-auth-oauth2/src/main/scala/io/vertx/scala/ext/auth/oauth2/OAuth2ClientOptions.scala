@@ -509,16 +509,18 @@ object OAuth2ClientOptions {
   }
   
   def apply(t: JOAuth2ClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new OAuth2ClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): OAuth2ClientOptions = {
-    if(json != null)
+    if (json != null) {
       new OAuth2ClientOptions(new JOAuth2ClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

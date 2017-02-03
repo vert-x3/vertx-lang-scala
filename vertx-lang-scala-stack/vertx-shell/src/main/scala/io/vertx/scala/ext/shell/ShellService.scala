@@ -112,7 +112,7 @@ object ShellService {
     * @return the shell service
     */
   def create(vertx: Vertx, options: ShellServiceOptions): ShellService = {
-    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
+    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

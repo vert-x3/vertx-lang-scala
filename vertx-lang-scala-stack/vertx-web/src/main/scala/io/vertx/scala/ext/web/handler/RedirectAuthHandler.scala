@@ -79,7 +79,7 @@ object RedirectAuthHandler {
     * @return the handler
     */
   def create(authProvider: AuthProvider, loginRedirectURL: String): AuthHandler = {
-    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String]))
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -90,7 +90,7 @@ object RedirectAuthHandler {
     * @return the handler
     */
   def create(authProvider: AuthProvider, loginRedirectURL: String, returnURLParam: String): AuthHandler = {
-    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],loginRedirectURL.asInstanceOf[java.lang.String],returnURLParam.asInstanceOf[java.lang.String]))
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String], returnURLParam.asInstanceOf[java.lang.String]))
   }
 
 }

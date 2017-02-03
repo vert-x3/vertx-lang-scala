@@ -116,16 +116,18 @@ object JDBCAuthOptions {
   }
   
   def apply(t: JJDBCAuthOptions) = {
-    if(t != null)
+    if (t != null) {
       new JDBCAuthOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): JDBCAuthOptions = {
-    if(json != null)
+    if (json != null) {
       new JDBCAuthOptions(new JJDBCAuthOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

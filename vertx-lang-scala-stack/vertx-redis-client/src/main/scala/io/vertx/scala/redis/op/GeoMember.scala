@@ -59,16 +59,18 @@ object GeoMember {
   }
   
   def apply(t: JGeoMember) = {
-    if(t != null)
+    if (t != null) {
       new GeoMember(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): GeoMember = {
-    if(json != null)
+    if (json != null) {
       new GeoMember(new JGeoMember(json))
-    else
+    } else {
       null
+    }
   }
 }

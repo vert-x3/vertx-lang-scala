@@ -51,16 +51,18 @@ object SetOptions {
   }
   
   def apply(t: JSetOptions) = {
-    if(t != null)
+    if (t != null) {
       new SetOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): SetOptions = {
-    if(json != null)
+    if (json != null) {
       new SetOptions(new JSetOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

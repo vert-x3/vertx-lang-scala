@@ -43,7 +43,7 @@ class Job(private val _asJava: Object) {
     * @return the first process in the job
     */
   def process(): Process = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JJob].process()
       cached_0 = Process(tmp)
     }

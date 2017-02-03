@@ -116,7 +116,7 @@ object RecordParser {
     * @param output handler that will receive the output
     */
   def newDelimited(delim: String, output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String],{x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], {x: Buffer => output.handle(x)}))
   }
 
   /**
@@ -128,7 +128,7 @@ object RecordParser {
     * @param output handler that will receive the output
     */
   def newDelimited(delim: io.vertx.core.buffer.Buffer, output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim,{x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newDelimited(delim, {x: Buffer => output.handle(x)}))
   }
 
   /**
@@ -140,7 +140,7 @@ object RecordParser {
     * @param output handler that will receive the output
     */
   def newFixed(size: Int, output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer],{x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], {x: Buffer => output.handle(x)}))
   }
 
 }

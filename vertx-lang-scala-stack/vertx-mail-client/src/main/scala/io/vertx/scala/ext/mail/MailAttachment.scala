@@ -111,16 +111,18 @@ object MailAttachment {
   }
   
   def apply(t: JMailAttachment) = {
-    if(t != null)
+    if (t != null) {
       new MailAttachment(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MailAttachment = {
-    if(json != null)
+    if (json != null) {
       new MailAttachment(new JMailAttachment(json))
-    else
+    } else {
       null
+    }
   }
 }

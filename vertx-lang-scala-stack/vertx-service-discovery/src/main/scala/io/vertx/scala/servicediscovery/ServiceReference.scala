@@ -39,7 +39,7 @@ class ServiceReference(private val _asJava: Object) {
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */
   def record(): Record = {
-    if(cached_0 == null) {
+    if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JServiceReference].record()
       cached_0 = Record(tmp)
     }

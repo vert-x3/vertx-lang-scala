@@ -93,16 +93,18 @@ object HttpLocation {
   }
   
   def apply(t: JHttpLocation) = {
-    if(t != null)
+    if (t != null) {
       new HttpLocation(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): HttpLocation = {
-    if(json != null)
+    if (json != null) {
       new HttpLocation(new JHttpLocation(json))
-    else
+    } else {
       null
+    }
   }
 }

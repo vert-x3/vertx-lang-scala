@@ -39,7 +39,7 @@ class MultiMap(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def add(name: String, value: String): MultiMap = {
-    asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -61,7 +61,7 @@ class MultiMap(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def set(name: String, value: String): MultiMap = {
-    asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 

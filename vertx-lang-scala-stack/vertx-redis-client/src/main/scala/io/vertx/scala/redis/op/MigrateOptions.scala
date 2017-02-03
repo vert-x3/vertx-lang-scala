@@ -35,16 +35,18 @@ object MigrateOptions {
   }
   
   def apply(t: JMigrateOptions) = {
-    if(t != null)
+    if (t != null) {
       new MigrateOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MigrateOptions = {
-    if(json != null)
+    if (json != null) {
       new MigrateOptions(new JMigrateOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

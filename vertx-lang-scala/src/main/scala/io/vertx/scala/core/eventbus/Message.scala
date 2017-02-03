@@ -103,7 +103,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * @param message the message to reply with.
     */
   def reply[R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
   }
 
   /**
@@ -112,7 +112,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply(message: AnyRef, options: DeliveryOptions): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply(message,options.asJava)
+    asJava.asInstanceOf[JMessage[Object]].reply(message, options.asJava)
   }
 
   /**
@@ -122,7 +122,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     */
   def reply[R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message,options.asJava,{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))})
   }
 
   /**
@@ -134,7 +134,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * @param message A message to pass back to the sender
     */
   def fail(failureCode: Int, message: String): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].fail(failureCode.asInstanceOf[java.lang.Integer],message.asInstanceOf[java.lang.String])
+    asJava.asInstanceOf[JMessage[Object]].fail(failureCode.asInstanceOf[java.lang.Integer], message.asInstanceOf[java.lang.String])
   }
 
  /**
@@ -145,7 +145,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
    */
   def replyFuture[R: TypeTag](message: AnyRef): scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message,promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -158,7 +158,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
    */
   def replyFuture[R: TypeTag](message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message,options.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

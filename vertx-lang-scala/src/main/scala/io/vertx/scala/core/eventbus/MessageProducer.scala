@@ -92,7 +92,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object)
   }
 
   def send[R: TypeTag](message: T, replyHandler: Handler[AsyncResult[Message[R]]]): MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),{x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))}))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object],Message[R]](x, a => Message[R](a)))}))
   }
 
   /**
@@ -118,7 +118,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object)
 
   def sendFuture[R: TypeTag](message: T): scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message),promiseAndHandler._1)
+    asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

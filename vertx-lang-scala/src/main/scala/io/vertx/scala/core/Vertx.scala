@@ -246,7 +246,7 @@ class Vertx(private val _asJava: Object)
     * @return the DNS client
     */
   def createDnsClient(port: Int, host: String): DnsClient = {
-    DnsClient(asJava.asInstanceOf[JVertx].createDnsClient(port.asInstanceOf[java.lang.Integer],host.asInstanceOf[java.lang.String]))
+    DnsClient(asJava.asInstanceOf[JVertx].createDnsClient(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -257,7 +257,7 @@ class Vertx(private val _asJava: Object)
     * @return the unique ID of the timer
     */
   def setTimer(delay: Long, handler: Handler[Long]): Long = {
-    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
+    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long], {x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
   /**
@@ -278,7 +278,7 @@ class Vertx(private val _asJava: Object)
     * @return the unique ID of the timer
     */
   def setPeriodic(delay: Long, handler: Handler[Long]): Long = {
-    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long],{x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
+    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long], {x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
   }
 
   /**
@@ -349,7 +349,7 @@ class Vertx(private val _asJava: Object)
     * @param name The identifier
     */
   def deployVerticle(name: String, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
   /**
@@ -359,7 +359,7 @@ class Vertx(private val _asJava: Object)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     */
   def deployVerticle(name: String, options: DeploymentOptions): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava)
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava)
   }
 
   /**
@@ -369,7 +369,7 @@ class Vertx(private val _asJava: Object)
     * @param options the deployment options.see <a href="../../../../../../cheatsheet/DeploymentOptions.html">DeploymentOptions</a>
     */
   def deployVerticle(name: String, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,{x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String,String](x, a => a.asInstanceOf[String]))})
   }
 
   /**
@@ -387,7 +387,7 @@ class Vertx(private val _asJava: Object)
     * @param deploymentID the deployment ID
     */
   def undeploy(deploymentID: String, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
   /**
@@ -438,7 +438,7 @@ class Vertx(private val _asJava: Object)
     * Like [[io.vertx.scala.core.Vertx#createSharedWorkerExecutor]] but with the <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a> `maxExecuteTime`.
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int): WorkerExecutor = {
-    WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String],poolSize.asInstanceOf[java.lang.Integer]))
+    WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String], poolSize.asInstanceOf[java.lang.Integer]))
   }
 
   /**
@@ -456,7 +456,7 @@ class Vertx(private val _asJava: Object)
     * @return the named worker executor
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): WorkerExecutor = {
-    WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String],poolSize.asInstanceOf[java.lang.Integer],maxExecuteTime.asInstanceOf[java.lang.Long]))
+    WorkerExecutor(asJava.asInstanceOf[JVertx].createSharedWorkerExecutor(name.asInstanceOf[java.lang.String], poolSize.asInstanceOf[java.lang.Integer], maxExecuteTime.asInstanceOf[java.lang.Long]))
   }
 
  /**
@@ -481,7 +481,7 @@ class Vertx(private val _asJava: Object)
    */
   def deployVerticleFuture(name: String): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -494,7 +494,7 @@ class Vertx(private val _asJava: Object)
    */
   def deployVerticleFuture(name: String, options: DeploymentOptions): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String],options.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -505,7 +505,7 @@ class Vertx(private val _asJava: Object)
    */
   def undeployFuture(deploymentID: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -537,7 +537,7 @@ object Vertx {
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
     */
   def clusteredVertx(options: VertxOptions, resultHandler: Handler[AsyncResult[Vertx]]): Unit = {
-    JVertx.clusteredVertx(options.asJava,{x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
+    JVertx.clusteredVertx(options.asJava, {x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx,Vertx](x, a => Vertx(a)))})
   }
 
   /**

@@ -115,16 +115,18 @@ object SSHTermOptions {
   }
   
   def apply(t: JSSHTermOptions) = {
-    if(t != null)
+    if (t != null) {
       new SSHTermOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): SSHTermOptions = {
-    if(json != null)
+    if (json != null) {
       new SSHTermOptions(new JSSHTermOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

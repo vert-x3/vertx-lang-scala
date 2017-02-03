@@ -99,7 +99,7 @@ object WebSocketFrame {
     * @return the frame
     */
   def binaryFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.binaryFrame(data,isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.binaryFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
@@ -109,7 +109,7 @@ object WebSocketFrame {
     * @return the frame
     */
   def textFrame(str: String, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String],isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String], isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
@@ -119,7 +119,7 @@ object WebSocketFrame {
     * @return the frame
     */
   def continuationFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.continuationFrame(data,isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.continuationFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
 }

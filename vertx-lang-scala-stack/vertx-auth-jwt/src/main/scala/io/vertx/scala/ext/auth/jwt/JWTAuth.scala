@@ -46,7 +46,7 @@ class JWTAuth(private val _asJava: Object)
     * @return JWT encoded token
     */
   def generateToken(claims: io.vertx.core.json.JsonObject, options: JWTOptions): String = {
-    asJava.asInstanceOf[JJWTAuth].generateToken(claims,options.asJava).asInstanceOf[String]
+    asJava.asInstanceOf[JJWTAuth].generateToken(claims, options.asJava).asInstanceOf[String]
   }
 
 }
@@ -60,7 +60,7 @@ object JWTAuth {
     * @return the auth provider
     */
   def create(vertx: Vertx, config: io.vertx.core.json.JsonObject): JWTAuth = {
-    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx],config))
+    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

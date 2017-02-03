@@ -79,7 +79,7 @@ object BasicAuthHandler {
     * @return the auth handler
     */
   def create(authProvider: AuthProvider, realm: String): AuthHandler = {
-    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider],realm.asInstanceOf[java.lang.String]))
+    AuthHandler(JBasicAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], realm.asInstanceOf[java.lang.String]))
   }
 
 }

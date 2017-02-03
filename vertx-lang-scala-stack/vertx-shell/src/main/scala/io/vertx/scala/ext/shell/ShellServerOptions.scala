@@ -69,16 +69,18 @@ object ShellServerOptions {
   }
   
   def apply(t: JShellServerOptions) = {
-    if(t != null)
+    if (t != null) {
       new ShellServerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ShellServerOptions = {
-    if(json != null)
+    if (json != null) {
       new ShellServerOptions(new JShellServerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

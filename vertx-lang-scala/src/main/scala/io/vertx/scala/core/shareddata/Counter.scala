@@ -65,7 +65,7 @@ class Counter(private val _asJava: Object) {
     * @param value the value to add
     */
   def addAndGet(value: Long, resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
   /**
@@ -73,7 +73,7 @@ class Counter(private val _asJava: Object) {
     * @param value the value to add
     */
   def getAndAdd(value: Long, resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long,Long](x, a => a.asInstanceOf[Long]))})
   }
 
   /**
@@ -83,7 +83,7 @@ class Counter(private val _asJava: Object) {
     * @param value the new value
     */
   def compareAndSet(expected: Long, value: Long, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],{x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean,Boolean](x, a => a.asInstanceOf[Boolean]))})
   }
 
  /**
@@ -133,7 +133,7 @@ class Counter(private val _asJava: Object) {
    */
   def addAndGetFuture(value: Long): scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
-    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -144,7 +144,7 @@ class Counter(private val _asJava: Object) {
    */
   def getAndAddFuture(value: Long): scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
-    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -157,7 +157,7 @@ class Counter(private val _asJava: Object) {
    */
   def compareAndSetFuture(expected: Long, value: Long): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long],value.asInstanceOf[java.lang.Long],promiseAndHandler._1)
+    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

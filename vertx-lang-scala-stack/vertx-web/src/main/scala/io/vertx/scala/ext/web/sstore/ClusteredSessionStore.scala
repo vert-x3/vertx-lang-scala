@@ -47,7 +47,7 @@ object ClusteredSessionStore {
     * @return the session store
     */
   def create(vertx: Vertx, sessionMapName: String): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -61,7 +61,7 @@ object ClusteredSessionStore {
     * @return the session store
     */
   def create(vertx: Vertx, sessionMapName: String, retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],sessionMapName.asInstanceOf[java.lang.String],retryTimeout.asInstanceOf[java.lang.Long]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], retryTimeout.asInstanceOf[java.lang.Long]))
   }
 
   /**
@@ -83,7 +83,7 @@ object ClusteredSessionStore {
     * @return the session store
     */
   def create(vertx: Vertx, retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx],retryTimeout.asInstanceOf[java.lang.Long]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], retryTimeout.asInstanceOf[java.lang.Long]))
   }
 
 }

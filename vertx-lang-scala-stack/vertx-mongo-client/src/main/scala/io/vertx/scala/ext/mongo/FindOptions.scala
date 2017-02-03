@@ -81,16 +81,18 @@ object FindOptions {
   }
   
   def apply(t: JFindOptions) = {
-    if(t != null)
+    if (t != null) {
       new FindOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): FindOptions = {
-    if(json != null)
+    if (json != null) {
       new FindOptions(new JFindOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -47,16 +47,18 @@ object SortOptions {
   }
   
   def apply(t: JSortOptions) = {
-    if(t != null)
+    if (t != null) {
       new SortOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): SortOptions = {
-    if(json != null)
+    if (json != null) {
       new SortOptions(new JSortOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

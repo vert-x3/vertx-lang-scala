@@ -64,7 +64,7 @@ object HtdigestAuth {
     * @return the created instance of HtdigestAuths
     */
   def create(vertx: Vertx, htfile: String): HtdigestAuth = {
-    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx],htfile.asInstanceOf[java.lang.String]))
+    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx], htfile.asInstanceOf[java.lang.String]))
   }
 
 }

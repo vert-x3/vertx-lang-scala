@@ -101,16 +101,18 @@ object ResultSet {
   }
   
   def apply(t: JResultSet) = {
-    if(t != null)
+    if (t != null) {
       new ResultSet(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ResultSet = {
-    if(json != null)
+    if (json != null) {
       new ResultSet(new JResultSet(json))
-    else
+    } else {
       null
+    }
   }
 }

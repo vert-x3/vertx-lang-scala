@@ -69,16 +69,18 @@ object AuthenticationOptions {
   }
   
   def apply(t: JAuthenticationOptions) = {
-    if(t != null)
+    if (t != null) {
       new AuthenticationOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): AuthenticationOptions = {
-    if(json != null)
+    if (json != null) {
       new AuthenticationOptions(new JAuthenticationOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

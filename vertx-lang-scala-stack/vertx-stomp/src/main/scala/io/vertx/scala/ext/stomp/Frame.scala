@@ -108,16 +108,18 @@ object Frame {
   }
   
   def apply(t: JFrame) = {
-    if(t != null)
+    if (t != null) {
       new Frame(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): Frame = {
-    if(json != null)
+    if (json != null) {
       new Frame(new JFrame(json))
-    else
+    } else {
       null
+    }
   }
 }

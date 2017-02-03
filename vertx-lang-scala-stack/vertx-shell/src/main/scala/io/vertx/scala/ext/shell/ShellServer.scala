@@ -147,7 +147,7 @@ object ShellServer {
     * @return the created shell server
     */
   def create(vertx: Vertx, options: ShellServerOptions): ShellServer = {
-    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx],options.asJava))
+    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**

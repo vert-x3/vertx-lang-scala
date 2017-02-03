@@ -62,16 +62,18 @@ object UpdateResult {
   }
   
   def apply(t: JUpdateResult) = {
-    if(t != null)
+    if (t != null) {
       new UpdateResult(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): UpdateResult = {
-    if(json != null)
+    if (json != null) {
       new UpdateResult(new JUpdateResult(json))
-    else
+    } else {
       null
+    }
   }
 }

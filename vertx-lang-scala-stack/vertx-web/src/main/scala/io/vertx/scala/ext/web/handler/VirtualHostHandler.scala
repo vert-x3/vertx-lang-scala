@@ -45,7 +45,7 @@ object VirtualHostHandler {
     * @return the handler
     */
   def create(hostname: String, handler: Handler[RoutingContext]): VirtualHostHandler = {
-    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String],{x: JRoutingContext => handler.handle(RoutingContext(x))}))
+    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], {x: JRoutingContext => handler.handle(RoutingContext(x))}))
   }
 
 }

@@ -62,7 +62,7 @@ class JobController(private val _asJava: Object) {
     * @return the created job
     */
   def createJob(process: Process, line: String): Job = {
-    Job(asJava.asInstanceOf[JJobController].createJob(process.asJava.asInstanceOf[JProcess],line.asInstanceOf[java.lang.String]))
+    Job(asJava.asInstanceOf[JJobController].createJob(process.asJava.asInstanceOf[JProcess], line.asInstanceOf[java.lang.String]))
   }
 
   /**

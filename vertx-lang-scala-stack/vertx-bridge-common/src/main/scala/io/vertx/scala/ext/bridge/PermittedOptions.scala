@@ -74,16 +74,18 @@ object PermittedOptions {
   }
   
   def apply(t: JPermittedOptions) = {
-    if(t != null)
+    if (t != null) {
       new PermittedOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): PermittedOptions = {
-    if(json != null)
+    if (json != null) {
       new PermittedOptions(new JPermittedOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

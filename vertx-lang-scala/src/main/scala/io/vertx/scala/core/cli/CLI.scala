@@ -178,7 +178,7 @@ class CLI(private val _asJava: Object) {
     * @return the creates command line
     */
   def parse(arguments: scala.collection.mutable.Buffer[String], validate: Boolean): CommandLine = {
-    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava,validate.asInstanceOf[java.lang.Boolean]))
+    CommandLine(asJava.asInstanceOf[JCLI].parse(arguments.map(x => x.asInstanceOf[java.lang.String]).asJava, validate.asInstanceOf[java.lang.Boolean]))
   }
 
   /**

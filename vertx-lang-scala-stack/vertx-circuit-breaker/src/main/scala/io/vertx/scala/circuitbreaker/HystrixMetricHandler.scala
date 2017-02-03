@@ -59,7 +59,7 @@ object HystrixMetricHandler {
     * @return the handler
     */
   def create(vertx: Vertx, address: String): HystrixMetricHandler = {
-    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx],address.asInstanceOf[java.lang.String]))
+    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))
   }
 
 }

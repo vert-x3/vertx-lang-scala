@@ -93,7 +93,7 @@ object Pump {
     * @return the pump
     */
   def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
-    Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]]))
+    Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[Object]]))
   }
 
   /**
@@ -105,7 +105,7 @@ object Pump {
     * @return the pump
     */
   def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
-    Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]],ws.asJava.asInstanceOf[JWriteStream[Object]],writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
+    Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[Object]], writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
   }
 
 }

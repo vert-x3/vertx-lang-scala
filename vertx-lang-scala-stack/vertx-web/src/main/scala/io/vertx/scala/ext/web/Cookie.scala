@@ -163,7 +163,7 @@ object Cookie {
     * @return the cookie
     */
   def cookie(name: String, value: String): Cookie = {
-    Cookie(JCookie.cookie(name.asInstanceOf[java.lang.String],value.asInstanceOf[java.lang.String]))
+    Cookie(JCookie.cookie(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String]))
   }
 
 }

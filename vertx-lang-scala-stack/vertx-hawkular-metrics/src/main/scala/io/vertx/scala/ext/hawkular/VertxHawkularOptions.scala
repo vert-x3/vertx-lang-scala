@@ -232,16 +232,18 @@ object VertxHawkularOptions {
   }
   
   def apply(t: JVertxHawkularOptions) = {
-    if(t != null)
+    if (t != null) {
       new VertxHawkularOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): VertxHawkularOptions = {
-    if(json != null)
+    if (json != null) {
       new VertxHawkularOptions(new JVertxHawkularOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

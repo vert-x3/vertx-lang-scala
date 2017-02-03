@@ -38,7 +38,7 @@ class ServicePublisher(private val _asJava: Object) {
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
     */
   def publish(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].publish(record.asJava,{x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord,Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord,Record](x, a => Record(a)))})
   }
 
   /**
@@ -46,7 +46,7 @@ class ServicePublisher(private val _asJava: Object) {
     * @param id the registration id
     */
   def unpublish(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String],{x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
   }
 
  /**
@@ -56,7 +56,7 @@ class ServicePublisher(private val _asJava: Object) {
    */
   def publishFuture(record: Record): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
-    asJava.asInstanceOf[JServicePublisher].publish(record.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -67,7 +67,7 @@ class ServicePublisher(private val _asJava: Object) {
    */
   def unpublishFuture(id: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String],promiseAndHandler._1)
+    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

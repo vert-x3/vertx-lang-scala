@@ -93,7 +93,7 @@ class HttpConnection(private val _asJava: Object) {
     * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with no buffer.
     */
   def goAway(errorCode: Long, lastStreamId: Int): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer])
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long], lastStreamId.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -113,7 +113,7 @@ class HttpConnection(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def goAway(errorCode: Long, lastStreamId: Int, debugData: io.vertx.core.buffer.Buffer): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long],lastStreamId.asInstanceOf[java.lang.Integer],debugData)
+    asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long], lastStreamId.asInstanceOf[java.lang.Integer], debugData)
     this
   }
 
@@ -198,7 +198,7 @@ class HttpConnection(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def updateSettings(settings: Http2Settings, completionHandler: Handler[AsyncResult[Unit]]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,{x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void,Unit](x, a => a))})
     this
   }
 
@@ -222,7 +222,7 @@ class HttpConnection(private val _asJava: Object) {
     * @return a reference to this, so the API can be used fluently
     */
   def ping(data: io.vertx.core.buffer.Buffer, pongHandler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].ping(data,{x: AsyncResult[Buffer] => pongHandler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JHttpConnection].ping(data, {x: AsyncResult[Buffer] => pongHandler.handle(AsyncResultWrapper[Buffer,io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -289,7 +289,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   def updateSettingsFuture(settings: Http2Settings): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -302,7 +302,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   def pingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
-    asJava.asInstanceOf[JHttpConnection].ping(data,promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpConnection].ping(data, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -67,16 +67,18 @@ object GeoRadiusOptions {
   }
   
   def apply(t: JGeoRadiusOptions) = {
-    if(t != null)
+    if (t != null) {
       new GeoRadiusOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): GeoRadiusOptions = {
-    if(json != null)
+    if (json != null) {
       new GeoRadiusOptions(new JGeoRadiusOptions(json))
-    else
+    } else {
       null
+    }
   }
 }
