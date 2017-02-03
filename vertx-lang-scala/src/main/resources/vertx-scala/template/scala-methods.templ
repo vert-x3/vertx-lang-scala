@@ -1,6 +1,7 @@
 @code{
 
   /*TODO: some methods lack necessary type infos for scala*/
+  /*see https://github.com/vert-x3/vertx-lang-scala/issues/23 */
   def skipMethod(method) {
     return method.name == 'addInterceptor' || method.name == 'removeInterceptor';
   }
