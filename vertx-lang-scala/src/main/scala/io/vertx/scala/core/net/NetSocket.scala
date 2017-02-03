@@ -17,16 +17,18 @@
 package io.vertx.scala.core.net
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.net.{NetSocket => JNetSocket}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * Represents a socket-like interface to a TCP connection on either the
@@ -39,78 +41,74 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
   * It implements both  and  so it can be used with
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
-class NetSocket(private val _asJava: JNetSocket) 
-    extends ReadStream[Buffer] 
-    with WriteStream[Buffer] {
+class NetSocket(private val _asJava: Object)
+    extends  ReadStream[io.vertx.core.buffer.Buffer] 
+    with WriteStream[io.vertx.core.buffer.Buffer] {
 
-  def asJava: JNetSocket = _asJava
-
-  /**
-    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
-    */
-  def end(t: Buffer): Unit = {
-    _asJava.end(t.asJava.asInstanceOf[JBuffer])
-  }
+  def asJava = _asJava
+  private var cached_0: SocketAddress = _
+  private var cached_1: SocketAddress = _
 
   /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
-    * @return true if write queue is full
+    * @return the remote address for this socket
     */
-  def writeQueueFull(): Boolean = {
-    _asJava.writeQueueFull()
-  }
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): NetSocket = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
-    this
-  }
-
-  def handler(handler: io.vertx.core.Handler[Buffer]): NetSocket = {
-    _asJava.handler(funcToMappedHandler(Buffer.apply)(handler))
-    this
-  }
-
-  def pause(): NetSocket = {
-    _asJava.pause()
-    this
-  }
-
-  def resume(): NetSocket = {
-    _asJava.resume()
-    this
-  }
-
-  def endHandler(endHandler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.endHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => endHandler.handle()))
-    this
-  }
-
-  def write(data: Buffer): NetSocket = {
-    _asJava.write(data.asJava.asInstanceOf[JBuffer])
-    this
-  }
-
-  def setWriteQueueMaxSize(maxSize: Int): NetSocket = {
-    _asJava.setWriteQueueMaxSize(maxSize)
-    this
-  }
-
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
-    this
+  def remoteAddress(): SocketAddress = {
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JNetSocket].remoteAddress()
+      cached_0 = SocketAddress(tmp)
+    }
+    cached_0
   }
 
   /**
-    * When a `NetSocket` is created it automatically registers an event handler with the event bus, the ID of that
-    * handler is given by `writeHandlerID`.
-    * 
-    * Given this ID, a different event loop can send a buffer to that event handler using the event bus and
-    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
-    * allows you to write data to other connections which are owned by different event loops.
-    * @return the write handler ID
+    * @return the local address for this socket
     */
-  def writeHandlerID(): String = {
-    _asJava.writeHandlerID()
+  def localAddress(): SocketAddress = {
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JNetSocket].localAddress()
+      cached_1 = SocketAddress(tmp)
+    }
+    cached_1
+  }
+
+  override def exceptionHandler(handler: Handler[Throwable]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].handler({x: Buffer => handler.handle(x)})
+    this
+  }
+
+  override def pause(): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].pause()
+    this
+  }
+
+  override def resume(): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].resume()
+    this
+  }
+
+  override def endHandler(endHandler: Handler[Unit]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
+
+  override def write(data: io.vertx.core.buffer.Buffer): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].write(data)
+    this
+  }
+
+  override def setWriteQueueMaxSize(maxSize: Int): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
+    this
+  }
+
+  override def drainHandler(handler: Handler[Unit]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].drainHandler({x: Void => handler.handle(x)})
+    this
   }
 
   /**
@@ -119,7 +117,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def write(str: String): NetSocket = {
-    _asJava.write(str)
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String])
     this
   }
 
@@ -130,7 +128,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def write(str: String, enc: String): NetSocket = {
-    _asJava.write(str, enc)
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String])
     this
   }
 
@@ -141,7 +139,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String): NetSocket = {
-    _asJava.sendFile(filename)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String])
     this
   }
 
@@ -153,7 +151,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long): NetSocket = {
-    _asJava.sendFile(filename, offset)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -166,7 +164,7 @@ class NetSocket(private val _asJava: JNetSocket)
     * @return a reference to this, so the API can be used fluently
     */
   def sendFile(filename: String, offset: Long, length: Long): NetSocket = {
-    _asJava.sendFile(filename, offset, length)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -174,12 +172,12 @@ class NetSocket(private val _asJava: JNetSocket)
     * Same as [[io.vertx.scala.core.net.NetSocket#sendFile]] but also takes a handler that will be called when the send has completed or
     * a failure has occurred
     * @param filename file name of the file to send
-    * @return future
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
-  def sendFileFuture(filename: String): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.sendFile(filename, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def sendFile(filename: String, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
   }
 
   /**
@@ -187,12 +185,12 @@ class NetSocket(private val _asJava: JNetSocket)
     * a failure has occurred
     * @param filename file name of the file to send
     * @param offset offset
-    * @return future
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
-  def sendFileFuture(filename: String, offset: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.sendFile(filename, offset, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def sendFile(filename: String, offset: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
   }
 
   /**
@@ -201,46 +199,12 @@ class NetSocket(private val _asJava: JNetSocket)
     * @param filename file name of the file to send
     * @param offset offset
     * @param length length
-    * @return future
+    * @param resultHandler handler
+    * @return a reference to this, so the API can be used fluently
     */
-  def sendFileFuture(filename: String, offset: Long, length: Long): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.sendFile(filename, offset, length, promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-  /**
-    * @return the remote address for this socket
-    */
-  def remoteAddress(): SocketAddress = {
-    if (cached_0 == null) {
-      cached_0 =    SocketAddress.apply(_asJava.remoteAddress())
-    }
-    cached_0
-  }
-
-  /**
-    * @return the local address for this socket
-    */
-  def localAddress(): SocketAddress = {
-    if (cached_1 == null) {
-      cached_1 =    SocketAddress.apply(_asJava.localAddress())
-    }
-    cached_1
-  }
-
-  /**
-    * Calls [[io.vertx.scala.core.net.NetSocket#close]]
-    */
-  def end(): Unit = {
-    _asJava.end()
-  }
-
-  /**
-    * Close the NetSocket
-    */
-  def close(): Unit = {
-    _asJava.close()
+  def sendFile(filename: String, offset: Long, length: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
   }
 
   /**
@@ -248,8 +212,8 @@ class NetSocket(private val _asJava: JNetSocket)
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def closeHandler(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.closeHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+  def closeHandler(handler: Handler[Unit]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].closeHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -258,25 +222,89 @@ class NetSocket(private val _asJava: JNetSocket)
     * @param handler the handler will be notified when it's upgraded
     * @return a reference to this, so the API can be used fluently
     */
-  def upgradeToSsl(handler: io.vertx.core.Handler[Unit]): NetSocket = {
-    _asJava.upgradeToSsl(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+  def upgradeToSsl(handler: Handler[Unit]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].upgradeToSsl({x: Void => handler.handle(x)})
     this
+  }
+
+  /**
+    * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
+    */
+  override def end(t: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JNetSocket].end(t)
+  }
+
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.net.NetSocket#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
+  override def writeQueueFull(): Boolean = {
+    asJava.asInstanceOf[JNetSocket].writeQueueFull().asInstanceOf[Boolean]
+  }
+
+  /**
+    * When a `NetSocket` is created it automatically registers an event handler with the event bus, the ID of that
+    * handler is given by `writeHandlerID`.
+    * 
+    * Given this ID, a different event loop can send a buffer to that event handler using the event bus and
+    * that buffer will be received by this instance in its own event loop and written to the underlying connection. This
+    * allows you to write data to other connections which are owned by different event loops.
+    * @return the write handler ID
+    */
+  def writeHandlerID(): String = {
+    asJava.asInstanceOf[JNetSocket].writeHandlerID().asInstanceOf[String]
+  }
+
+  /**
+    * Calls [[io.vertx.scala.core.net.NetSocket#close]]
+    */
+  override def end(): Unit = {
+    asJava.asInstanceOf[JNetSocket].end()
+  }
+
+  /**
+    * Close the NetSocket
+    */
+  def close(): Unit = {
+    asJava.asInstanceOf[JNetSocket].close()
   }
 
   /**
     * @return true if this io.vertx.scala.core.net.NetSocket is encrypted via SSL/TLS.
     */
   def isSsl(): Boolean = {
-    _asJava.isSsl()
+    asJava.asInstanceOf[JNetSocket].isSsl().asInstanceOf[Boolean]
   }
 
-  private var cached_0: SocketAddress = _
-  private var cached_1: SocketAddress = _
+ /**
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendFileFuture(filename: String): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendFileFuture(filename: String, offset: Long): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendFileFuture(filename: String, offset: Long, length: Long): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
 }
 
 object NetSocket {
-
-  def apply(_asJava: JNetSocket): NetSocket =
-    new NetSocket(_asJava)
-
+  def apply(asJava: JNetSocket) = new NetSocket(asJava)  
 }

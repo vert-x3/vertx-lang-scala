@@ -16,17 +16,19 @@
 
 package io.vertx.scala.core.datagram
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.net.{NetworkOptions => ExtNetworkOptions}
 import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 
 /**
   * Options used to configure a datagram socket.
   */
+class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions) 
+    extends ExtNetworkOptions {
 
-class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set if the socket can receive broadcast packets
@@ -35,8 +37,8 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
     asJava.setBroadcast(value)
     this
   }
-  def isBroadcast = {
-    asJava.isBroadcast()
+  def isBroadcast: Boolean = {
+    asJava.isBroadcast().asInstanceOf[Boolean]
   }
 
   /**
@@ -46,19 +48,19 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
     asJava.setIpV6(value)
     this
   }
-  def isIpV6 = {
-    asJava.isIpV6()
+  def isIpV6: Boolean = {
+    asJava.isIpV6().asInstanceOf[Boolean]
   }
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
@@ -68,8 +70,8 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
     asJava.setLoopbackModeDisabled(value)
     this
   }
-  def isLoopbackModeDisabled = {
-    asJava.isLoopbackModeDisabled()
+  def isLoopbackModeDisabled: Boolean = {
+    asJava.isLoopbackModeDisabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -79,8 +81,8 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
     asJava.setMulticastNetworkInterface(value)
     this
   }
-  def getMulticastNetworkInterface = {
-    asJava.getMulticastNetworkInterface()
+  def getMulticastNetworkInterface: String = {
+    asJava.getMulticastNetworkInterface().asInstanceOf[String]
   }
 
   /**
@@ -90,52 +92,52 @@ class DatagramSocketOptions(val asJava: JDatagramSocketOptions) {
     asJava.setMulticastTimeToLive(value)
     this
   }
-  def getMulticastTimeToLive = {
-    asJava.getMulticastTimeToLive()
+  def getMulticastTimeToLive: Int = {
+    asJava.getMulticastTimeToLive().asInstanceOf[Int]
   }
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 }
 
@@ -146,16 +148,18 @@ object DatagramSocketOptions {
   }
   
   def apply(t: JDatagramSocketOptions) = {
-    if(t != null)
+    if (t != null) {
       new DatagramSocketOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):DatagramSocketOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): DatagramSocketOptions = {
+    if (json != null) {
       new DatagramSocketOptions(new JDatagramSocketOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

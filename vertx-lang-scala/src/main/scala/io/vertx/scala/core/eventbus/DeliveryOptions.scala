@@ -16,9 +16,9 @@
 
 package io.vertx.scala.core.eventbus
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 
 /**
@@ -27,9 +27,9 @@ import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
   * Delivery options allow to configure delivery timeout and message codec name, and to provide any headers
   * that you wish to send with the message.
   */
+class DeliveryOptions(private val _asJava: JDeliveryOptions) {
 
-class DeliveryOptions(val asJava: JDeliveryOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the codec name.
@@ -38,8 +38,8 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
     asJava.setCodecName(value)
     this
   }
-  def getCodecName = {
-    asJava.getCodecName()
+  def getCodecName: String = {
+    asJava.getCodecName().asInstanceOf[String]
   }
 
   /**
@@ -49,7 +49,7 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
     * at the recipient.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -60,8 +60,8 @@ class DeliveryOptions(val asJava: JDeliveryOptions) {
     asJava.setSendTimeout(value)
     this
   }
-  def getSendTimeout = {
-    asJava.getSendTimeout()
+  def getSendTimeout: Long = {
+    asJava.getSendTimeout().asInstanceOf[Long]
   }
 }
 
@@ -72,16 +72,18 @@ object DeliveryOptions {
   }
   
   def apply(t: JDeliveryOptions) = {
-    if(t != null)
+    if (t != null) {
       new DeliveryOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):DeliveryOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): DeliveryOptions = {
+    if (json != null) {
       new DeliveryOptions(new JDeliveryOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

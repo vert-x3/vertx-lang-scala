@@ -16,19 +16,18 @@
 
 package io.vertx.scala.ext.mail
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.mail.{MailAttachment => JMailAttachment}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
+import io.vertx.core.buffer.Buffer
 
 /**
   * Represent a mail attachment that can be used in a MailMessage.
   */
+class MailAttachment(private val _asJava: JMailAttachment) {
 
-class MailAttachment(val asJava: JMailAttachment) {
-
+  def asJava = _asJava
 
   /**
     * set the Content-ID field to be used in the attachment
@@ -37,8 +36,8 @@ class MailAttachment(val asJava: JMailAttachment) {
     asJava.setContentId(value)
     this
   }
-  def getContentId = {
-    asJava.getContentId()
+  def getContentId: String = {
+    asJava.getContentId().asInstanceOf[String]
   }
 
   /**
@@ -48,18 +47,18 @@ class MailAttachment(val asJava: JMailAttachment) {
     asJava.setContentType(value)
     this
   }
-  def getContentType = {
-    asJava.getContentType()
+  def getContentType: String = {
+    asJava.getContentType().asInstanceOf[String]
   }
 
   /**
     * set the data
     */
-  def setData(value: Buffer) = {
-    asJava.setData(value.asJava)
+  def setData(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setData(value)
     this
   }
-  def getData = {
+  def getData: io.vertx.core.buffer.Buffer = {
     asJava.getData()
   }
 
@@ -70,8 +69,8 @@ class MailAttachment(val asJava: JMailAttachment) {
     asJava.setDescription(value)
     this
   }
-  def getDescription = {
-    asJava.getDescription()
+  def getDescription: String = {
+    asJava.getDescription().asInstanceOf[String]
   }
 
   /**
@@ -81,15 +80,15 @@ class MailAttachment(val asJava: JMailAttachment) {
     asJava.setDisposition(value)
     this
   }
-  def getDisposition = {
-    asJava.getDisposition()
+  def getDisposition: String = {
+    asJava.getDisposition().asInstanceOf[String]
   }
 
   /**
     * Add an header to this attachment.
     */
   def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value)
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -100,8 +99,8 @@ class MailAttachment(val asJava: JMailAttachment) {
     asJava.setName(value)
     this
   }
-  def getName = {
-    asJava.getName()
+  def getName: String = {
+    asJava.getName().asInstanceOf[String]
   }
 }
 
@@ -112,16 +111,18 @@ object MailAttachment {
   }
   
   def apply(t: JMailAttachment) = {
-    if(t != null)
+    if (t != null) {
       new MailAttachment(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):MailAttachment = {
-    if(json != null)
+  def fromJson(json: JsonObject): MailAttachment = {
+    if (json != null) {
       new MailAttachment(new JMailAttachment(json))
-    else
+    } else {
       null
+    }
   }
 }

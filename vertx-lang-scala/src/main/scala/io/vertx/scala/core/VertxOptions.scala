@@ -16,23 +16,23 @@
 
 package io.vertx.scala.core
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.{VertxOptions => JVertxOptions}
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
-import io.vertx.scala.core.dns.AddressResolverOptions
-import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
-import io.vertx.scala.core.eventbus.EventBusOptions
 import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
+import io.vertx.scala.core.eventbus.EventBusOptions
+import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 import io.vertx.scala.core.metrics.MetricsOptions
+import io.vertx.core.{VertxOptions => JVertxOptions}
+import io.vertx.scala.core.dns.AddressResolverOptions
 
 /**
   * Instances of this class are used to configure [[io.vertx.scala.core.Vertx]] instances.
   */
+class VertxOptions(private val _asJava: JVertxOptions) {
 
-class VertxOptions(val asJava: JVertxOptions) {
-
+  def asJava = _asJava
 
   /**
     * Sets the address resolver configuration to configure resolving DNS servers, cache TTL, etc...
@@ -41,8 +41,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setAddressResolverOptions(value.asJava)
     this
   }
-  def getAddressResolverOptions = {
-    asJava.getAddressResolverOptions()
+  def getAddressResolverOptions: AddressResolverOptions = {
+    AddressResolverOptions(asJava.getAddressResolverOptions())
   }
 
   /**
@@ -52,8 +52,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setBlockedThreadCheckInterval(value)
     this
   }
-  def getBlockedThreadCheckInterval = {
-    asJava.getBlockedThreadCheckInterval()
+  def getBlockedThreadCheckInterval: Long = {
+    asJava.getBlockedThreadCheckInterval().asInstanceOf[Long]
   }
 
   /**
@@ -63,8 +63,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterHost(value)
     this
   }
-  def getClusterHost = {
-    asJava.getClusterHost()
+  def getClusterHost: String = {
+    asJava.getClusterHost().asInstanceOf[String]
   }
 
   /**
@@ -74,8 +74,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterPingInterval(value)
     this
   }
-  def getClusterPingInterval = {
-    asJava.getClusterPingInterval()
+  def getClusterPingInterval: Long = {
+    asJava.getClusterPingInterval().asInstanceOf[Long]
   }
 
   /**
@@ -85,8 +85,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterPingReplyInterval(value)
     this
   }
-  def getClusterPingReplyInterval = {
-    asJava.getClusterPingReplyInterval()
+  def getClusterPingReplyInterval: Long = {
+    asJava.getClusterPingReplyInterval().asInstanceOf[Long]
   }
 
   /**
@@ -96,8 +96,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterPort(value)
     this
   }
-  def getClusterPort = {
-    asJava.getClusterPort()
+  def getClusterPort: Int = {
+    asJava.getClusterPort().asInstanceOf[Int]
   }
 
   /**
@@ -111,8 +111,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterPublicHost(value)
     this
   }
-  def getClusterPublicHost = {
-    asJava.getClusterPublicHost()
+  def getClusterPublicHost: String = {
+    asJava.getClusterPublicHost().asInstanceOf[String]
   }
 
   /**
@@ -122,8 +122,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClusterPublicPort(value)
     this
   }
-  def getClusterPublicPort = {
-    asJava.getClusterPublicPort()
+  def getClusterPublicPort: Int = {
+    asJava.getClusterPublicPort().asInstanceOf[Int]
   }
 
   /**
@@ -133,8 +133,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setClustered(value)
     this
   }
-  def isClustered = {
-    asJava.isClustered()
+  def isClustered: Boolean = {
+    asJava.isClustered().asInstanceOf[Boolean]
   }
 
   /**
@@ -144,8 +144,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setEventBusOptions(value.asJava)
     this
   }
-  def getEventBusOptions = {
-    asJava.getEventBusOptions()
+  def getEventBusOptions: EventBusOptions = {
+    EventBusOptions(asJava.getEventBusOptions())
   }
 
   /**
@@ -155,8 +155,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setEventLoopPoolSize(value)
     this
   }
-  def getEventLoopPoolSize = {
-    asJava.getEventLoopPoolSize()
+  def getEventLoopPoolSize: Int = {
+    asJava.getEventLoopPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -166,8 +166,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setHAEnabled(value)
     this
   }
-  def isHAEnabled = {
-    asJava.isHAEnabled()
+  def isHAEnabled: Boolean = {
+    asJava.isHAEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -177,8 +177,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setHAGroup(value)
     this
   }
-  def getHAGroup = {
-    asJava.getHAGroup()
+  def getHAGroup: String = {
+    asJava.getHAGroup().asInstanceOf[String]
   }
 
   /**
@@ -188,8 +188,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setInternalBlockingPoolSize(value)
     this
   }
-  def getInternalBlockingPoolSize = {
-    asJava.getInternalBlockingPoolSize()
+  def getInternalBlockingPoolSize: Int = {
+    asJava.getInternalBlockingPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -199,8 +199,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setMaxEventLoopExecuteTime(value)
     this
   }
-  def getMaxEventLoopExecuteTime = {
-    asJava.getMaxEventLoopExecuteTime()
+  def getMaxEventLoopExecuteTime: Long = {
+    asJava.getMaxEventLoopExecuteTime().asInstanceOf[Long]
   }
 
   /**
@@ -210,8 +210,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setMaxWorkerExecuteTime(value)
     this
   }
-  def getMaxWorkerExecuteTime = {
-    asJava.getMaxWorkerExecuteTime()
+  def getMaxWorkerExecuteTime: Long = {
+    asJava.getMaxWorkerExecuteTime().asInstanceOf[Long]
   }
 
   /**
@@ -221,8 +221,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setMetricsOptions(value.asJava)
     this
   }
-  def getMetricsOptions = {
-    asJava.getMetricsOptions()
+  def getMetricsOptions: MetricsOptions = {
+    MetricsOptions(asJava.getMetricsOptions())
   }
 
   /**
@@ -232,8 +232,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setQuorumSize(value)
     this
   }
-  def getQuorumSize = {
-    asJava.getQuorumSize()
+  def getQuorumSize: Int = {
+    asJava.getQuorumSize().asInstanceOf[Int]
   }
 
   /**
@@ -243,8 +243,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setWarningExceptionTime(value)
     this
   }
-  def getWarningExceptionTime = {
-    asJava.getWarningExceptionTime()
+  def getWarningExceptionTime: Long = {
+    asJava.getWarningExceptionTime().asInstanceOf[Long]
   }
 
   /**
@@ -254,8 +254,8 @@ class VertxOptions(val asJava: JVertxOptions) {
     asJava.setWorkerPoolSize(value)
     this
   }
-  def getWorkerPoolSize = {
-    asJava.getWorkerPoolSize()
+  def getWorkerPoolSize: Int = {
+    asJava.getWorkerPoolSize().asInstanceOf[Int]
   }
 }
 
@@ -266,16 +266,18 @@ object VertxOptions {
   }
   
   def apply(t: JVertxOptions) = {
-    if(t != null)
+    if (t != null) {
       new VertxOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):VertxOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): VertxOptions = {
+    if (json != null) {
       new VertxOptions(new JVertxOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

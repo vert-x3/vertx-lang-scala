@@ -16,12 +16,11 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Certificate Authority options configuring certificates based on
@@ -54,9 +53,9 @@ import io.vertx.scala.core.buffer.Buffer
   * options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
   * </pre>
   */
+class PemTrustOptions(private val _asJava: JPemTrustOptions) {
 
-class PemTrustOptions(val asJava: JPemTrustOptions) {
-
+  def asJava = _asJava
 
   /**
     * Add a certificate path
@@ -65,19 +64,19 @@ class PemTrustOptions(val asJava: JPemTrustOptions) {
     asJava.addCertPath(value)
     this
   }
-  def getCertPaths = {
-    asJava.getCertPaths()
+  def getCertPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCertPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Add a certificate value
     */
-  def addCertValue(value: Buffer) = {
-    asJava.addCertValue(value.asJava)
+  def addCertValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCertValue(value)
     this
   }
-  def getCertValues = {
-    asJava.getCertValues()
+  def getCertValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCertValues().asScala.map(x => x)
   }
 }
 
@@ -88,16 +87,18 @@ object PemTrustOptions {
   }
   
   def apply(t: JPemTrustOptions) = {
-    if(t != null)
+    if (t != null) {
       new PemTrustOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):PemTrustOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): PemTrustOptions = {
+    if (json != null) {
       new PemTrustOptions(new JPemTrustOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

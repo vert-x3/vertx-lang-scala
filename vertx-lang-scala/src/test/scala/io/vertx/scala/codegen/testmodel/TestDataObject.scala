@@ -16,36 +16,36 @@
 
 package io.vertx.scala.codegen.testmodel
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 
 /**
   */
+class TestDataObject(private val _asJava: JTestDataObject) {
 
-class TestDataObject(val asJava: JTestDataObject) {
-
+  def asJava = _asJava
   def setBar(value: Int) = {
     asJava.setBar(value)
     this
   }
-  def getBar = {
-    asJava.getBar()
+  def getBar: Int = {
+    asJava.getBar().asInstanceOf[Int]
   }
   def setFoo(value: String) = {
     asJava.setFoo(value)
     this
   }
-  def getFoo = {
-    asJava.getFoo()
+  def getFoo: String = {
+    asJava.getFoo().asInstanceOf[String]
   }
   def setWibble(value: Double) = {
     asJava.setWibble(value)
     this
   }
-  def getWibble = {
-    asJava.getWibble()
+  def getWibble: Double = {
+    asJava.getWibble().asInstanceOf[Double]
   }
 }
 
@@ -56,16 +56,18 @@ object TestDataObject {
   }
   
   def apply(t: JTestDataObject) = {
-    if(t != null)
+    if (t != null) {
       new TestDataObject(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):TestDataObject = {
-    if(json != null)
+  def fromJson(json: JsonObject): TestDataObject = {
+    if (json != null) {
       new TestDataObject(new JTestDataObject(json))
-    else
+    } else {
       null
+    }
   }
 }

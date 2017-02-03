@@ -17,8 +17,8 @@
 package io.vertx.scala.core.shareddata
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{Lock => JLock}
 
 /**
@@ -27,22 +27,19 @@ import io.vertx.core.shareddata.{Lock => JLock}
   * When the lock is obtained, no-one else in the cluster can obtain the lock with the same name until the lock
   * is released.
   */
-class Lock(private val _asJava: JLock) {
+class Lock(private val _asJava: Object) {
 
-  def asJava: JLock = _asJava
+  def asJava = _asJava
 
   /**
     * Release the lock. Once the lock is released another will be able to obtain the lock.
     */
   def release(): Unit = {
-    _asJava.release()
+    asJava.asInstanceOf[JLock].release()
   }
 
 }
 
 object Lock {
-
-  def apply(_asJava: JLock): Lock =
-    new Lock(_asJava)
-
+  def apply(asJava: JLock) = new Lock(asJava)  
 }

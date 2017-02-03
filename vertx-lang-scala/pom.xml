@@ -65,9 +65,9 @@
       <version>${scala.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.scala-lang.modules</groupId>
-      <artifactId>scala-java8-compat_${scala.build.version}</artifactId>
-      <version>0.8.0</version>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-reflect</artifactId>
+      <version>${scala.version}</version>
     </dependency>
     <!-- Not needed at runtime -->
     <dependency>

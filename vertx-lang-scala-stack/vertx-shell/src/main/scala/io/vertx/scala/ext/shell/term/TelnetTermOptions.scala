@@ -16,38 +16,39 @@
 
 package io.vertx.scala.ext.shell.term
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.net.{NetServerOptions => ExtNetServerOptions}
 import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
-import io.vertx.core.http.ClientAuth
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.scala.core.net.PfxOptions
 import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.http.ClientAuth
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Telnet terminal options configuration, extends <a href="../../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a>.
   */
+class TelnetTermOptions(private val _asJava: JTelnetTermOptions) 
+    extends ExtNetServerOptions(_asJava) {
 
-class TelnetTermOptions(val asJava: JTelnetTermOptions) {
-
-  def setAcceptBacklog(value: Int) = {
+  override def asJava = _asJava
+  override def setAcceptBacklog(value: Int) = {
     asJava.setAcceptBacklog(value)
     this
   }
-  def getAcceptBacklog = {
-    asJava.getAcceptBacklog()
+  override def getAcceptBacklog: Int = {
+    asJava.getAcceptBacklog().asInstanceOf[Int]
   }
 
   /**
@@ -57,64 +58,64 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
     asJava.setCharset(value)
     this
   }
-  def getCharset = {
-    asJava.getCharset()
+  def getCharset: String = {
+    asJava.getCharset().asInstanceOf[String]
   }
-  def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
+  override def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this
   }
-  def getClientAuth = {
+  override def getClientAuth: io.vertx.core.http.ClientAuth = {
     asJava.getClientAuth()
   }
-  def setClientAuthRequired(value: Boolean) = {
+  override def setClientAuthRequired(value: Boolean) = {
     asJava.setClientAuthRequired(value)
     this
   }
-  def isClientAuthRequired = {
-    asJava.isClientAuthRequired()
+  override def isClientAuthRequired: Boolean = {
+    asJava.isClientAuthRequired().asInstanceOf[Boolean]
   }
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
-  def setHost(value: String) = {
+  override def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  override def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  override def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -125,8 +126,8 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
     asJava.setInBinary(value)
     this
   }
-  def getInBinary = {
-    asJava.getInBinary()
+  def getInBinary: Boolean = {
+    asJava.getInBinary().asInstanceOf[Boolean]
   }
 
   /**
@@ -136,25 +137,25 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
     asJava.setIntputrc(value)
     this
   }
-  def getIntputrc = {
-    asJava.getIntputrc()
+  def getIntputrc: String = {
+    asJava.getIntputrc().asInstanceOf[String]
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -167,105 +168,105 @@ class TelnetTermOptions(val asJava: JTelnetTermOptions) {
     asJava.setOutBinary(value)
     this
   }
-  def getOutBinary = {
-    asJava.getOutBinary()
+  def getOutBinary: Boolean = {
+    asJava.getOutBinary().asInstanceOf[Boolean]
   }
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
-  def setPort(value: Int) = {
+  override def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  override def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  override def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  override def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  override def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  override def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  override def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  override def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 }
 
@@ -276,16 +277,18 @@ object TelnetTermOptions {
   }
   
   def apply(t: JTelnetTermOptions) = {
-    if(t != null)
+    if (t != null) {
       new TelnetTermOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):TelnetTermOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): TelnetTermOptions = {
+    if (json != null) {
       new TelnetTermOptions(new JTelnetTermOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

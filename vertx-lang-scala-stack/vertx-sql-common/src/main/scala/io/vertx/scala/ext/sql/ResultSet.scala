@@ -16,11 +16,11 @@
 
 package io.vertx.scala.ext.sql
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.sql.{ResultSet => JResultSet}
 import io.vertx.core.json.JsonArray
+import io.vertx.ext.sql.{ResultSet => JResultSet}
 import io.vertx.core.json.JsonObject
 
 /**
@@ -29,9 +29,9 @@ import io.vertx.core.json.JsonObject
   * It contains a list for the column names of the results, and a list of `JsonArray` - one for each row of the
   * results.
   */
+class ResultSet(private val _asJava: JResultSet) {
 
-class ResultSet(val asJava: JResultSet) {
-
+  def asJava = _asJava
 
   /**
     * Get the column names
@@ -40,8 +40,19 @@ class ResultSet(val asJava: JResultSet) {
     asJava.setColumnNames(value.asJava)
     this
   }
-  def getColumnNames = {
-    asJava.getColumnNames()
+  def getColumnNames: scala.collection.mutable.Buffer[String] = {
+    asJava.getColumnNames().asScala.map(x => x.asInstanceOf[String])
+  }
+
+  /**
+    * Get the next result set
+    */
+  def setNext(value: ResultSet) = {
+    asJava.setNext(value.asJava)
+    this
+  }
+  def getNext: ResultSet = {
+    ResultSet(asJava.getNext())
   }
 
   /**
@@ -55,23 +66,23 @@ class ResultSet(val asJava: JResultSet) {
   /**
     * Get the registered outputs
     */
-  def setOutput(value: JsonArray) = {
+  def setOutput(value: io.vertx.core.json.JsonArray) = {
     asJava.setOutput(value)
     this
   }
-  def getOutput = {
+  def getOutput: io.vertx.core.json.JsonArray = {
     asJava.getOutput()
   }
 
   /**
     * Get the results
     */
-  def setResults(value: scala.collection.mutable.Buffer[JsonArray]) = {
+  def setResults(value: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
     asJava.setResults(value.asJava)
     this
   }
-  def getResults = {
-    asJava.getResults()
+  def getResults: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] = {
+    asJava.getResults().asScala.map(x => x)
   }
 
   /**
@@ -90,16 +101,18 @@ object ResultSet {
   }
   
   def apply(t: JResultSet) = {
-    if(t != null)
+    if (t != null) {
       new ResultSet(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):ResultSet = {
-    if(json != null)
+  def fromJson(json: JsonObject): ResultSet = {
+    if (json != null) {
       new ResultSet(new JResultSet(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -16,39 +16,38 @@
 
 package io.vertx.scala.amqpbridge
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.scala.core.net.PfxOptions
 import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.net.{ProxyOptions => JProxyOptions}
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Options for configuring the AmqpBridge.
   */
+class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
 
-class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
-
+  def asJava = _asJava
   def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout = {
-    asJava.getConnectTimeout()
+  def getConnectTimeout: Int = {
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -60,64 +59,64 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setContainerId(value)
     this
   }
-  def getContainerId = {
-    asJava.getContainerId()
+  def getContainerId: String = {
+    asJava.getContainerId().asInstanceOf[String]
   }
   def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
   def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
   def addEnabledSaslMechanism(value: String) = {
     asJava.addEnabledSaslMechanism(value)
     this
   }
-  def getEnabledSaslMechanisms = {
-    asJava.getEnabledSaslMechanisms()
+  def getEnabledSaslMechanisms: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSaslMechanisms().asScala.map(x => x.asInstanceOf[String])
   }
   def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
   def setHeartbeat(value: Int) = {
     asJava.setHeartbeat(value)
     this
   }
-  def getHeartbeat = {
-    asJava.getHeartbeat()
+  def getHeartbeat: Int = {
+    asJava.getHeartbeat().asInstanceOf[Int]
   }
   def setHostnameVerificationAlgorithm(value: String) = {
     asJava.setHostnameVerificationAlgorithm(value)
     this
   }
-  def getHostnameVerificationAlgorithm = {
-    asJava.getHostnameVerificationAlgorithm()
+  def getHostnameVerificationAlgorithm: String = {
+    asJava.getHostnameVerificationAlgorithm().asInstanceOf[String]
   }
   def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
@@ -131,22 +130,22 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setLocalAddress(value)
     this
   }
-  def getLocalAddress = {
-    asJava.getLocalAddress()
+  def getLocalAddress: String = {
+    asJava.getLocalAddress().asInstanceOf[String]
   }
   def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
   def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
-  def getMetricsName = {
-    asJava.getMetricsName()
+  def getMetricsName: String = {
+    asJava.getMetricsName().asInstanceOf[String]
   }
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
@@ -172,29 +171,29 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setProxyOptions(value.asJava)
     this
   }
-  def getProxyOptions = {
-    asJava.getProxyOptions()
+  def getProxyOptions: ProxyOptions = {
+    ProxyOptions(asJava.getProxyOptions())
   }
   def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
   def setReconnectAttempts(value: Int) = {
     asJava.setReconnectAttempts(value)
     this
   }
-  def getReconnectAttempts = {
-    asJava.getReconnectAttempts()
+  def getReconnectAttempts: Int = {
+    asJava.getReconnectAttempts().asInstanceOf[Int]
   }
   def setReconnectInterval(value: Long) = {
     asJava.setReconnectInterval(value)
     this
   }
-  def getReconnectInterval = {
-    asJava.getReconnectInterval()
+  def getReconnectInterval: Long = {
+    asJava.getReconnectInterval().asInstanceOf[Long]
   }
 
   /**
@@ -206,64 +205,64 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setReplyHandlingSupport(value)
     this
   }
-  def isReplyHandlingSupport = {
-    asJava.isReplyHandlingSupport()
+  def isReplyHandlingSupport: Boolean = {
+    asJava.isReplyHandlingSupport().asInstanceOf[Boolean]
   }
   def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
   def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
   def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
   def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
   def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
   def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
   def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
   def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
-    asJava.isTrustAll()
+  def isTrustAll: Boolean = {
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
   def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
@@ -273,15 +272,15 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
   def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**
@@ -292,8 +291,8 @@ class AmqpBridgeOptions(val asJava: JAmqpBridgeOptions) {
     asJava.setVhost(value)
     this
   }
-  def getVhost = {
-    asJava.getVhost()
+  def getVhost: String = {
+    asJava.getVhost().asInstanceOf[String]
   }
 }
 
@@ -304,16 +303,18 @@ object AmqpBridgeOptions {
   }
   
   def apply(t: JAmqpBridgeOptions) = {
-    if(t != null)
+    if (t != null) {
       new AmqpBridgeOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):AmqpBridgeOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): AmqpBridgeOptions = {
+    if (json != null) {
       new AmqpBridgeOptions(new JAmqpBridgeOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

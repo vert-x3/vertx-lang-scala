@@ -17,45 +17,25 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.term.{Tty => JTty}
+import io.vertx.core.Handler
 
 /**
   * Provide interactions with the Shell TTY.
   */
-class Tty(private val _asJava: JTty) {
+class Tty(private val _asJava: Object) {
 
-  def asJava: JTty = _asJava
-
-  /**
-    * @return the declared tty type, for instance ` vt100`, ` xterm-256`, etc... it can be null when the tty does not have declared its type.
-    */
-  def `type`(): String = {
-    _asJava.`type`()
-  }
-
-  /**
-    * @return the current width, i.e the number of rows or ` -1` if unknown
-    */
-  def width(): Int = {
-    _asJava.width()
-  }
-
-  /**
-    * @return the current height, i.e the number of columns or ` -1` if unknown
-    */
-  def height(): Int = {
-    _asJava.height()
-  }
+  def asJava = _asJava
 
   /**
     * Set a stream handler on the standard input to read the data.
     * @param handler the standard input
     * @return this object
     */
-  def stdinHandler(handler: io.vertx.core.Handler[String]): Tty = {
-    _asJava.stdinHandler((handler))
+  def stdinHandler(handler: Handler[String]): Tty = {
+    asJava.asInstanceOf[JTty].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this
   }
 
@@ -65,7 +45,7 @@ class Tty(private val _asJava: JTty) {
     * @return this object
     */
   def write(data: String): Tty = {
-    _asJava.write(data)
+    asJava.asInstanceOf[JTty].write(data.asInstanceOf[java.lang.String])
     this
   }
 
@@ -74,16 +54,34 @@ class Tty(private val _asJava: JTty) {
     * @param handler the resize handler
     * @return this object
     */
-  def resizehandler(handler: io.vertx.core.Handler[Unit]): Tty = {
-    _asJava.resizehandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+  def resizehandler(handler: Handler[Unit]): Tty = {
+    asJava.asInstanceOf[JTty].resizehandler({x: Void => handler.handle(x)})
     this
+  }
+
+  /**
+    * @return the declared tty type, for instance ` vt100`, ` xterm-256`, etc... it can be null when the tty does not have declared its type.
+    */
+  def `type`(): String = {
+    asJava.asInstanceOf[JTty].`type`().asInstanceOf[String]
+  }
+
+  /**
+    * @return the current width, i.e the number of rows or ` -1` if unknown
+    */
+  def width(): Int = {
+    asJava.asInstanceOf[JTty].width().asInstanceOf[Int]
+  }
+
+  /**
+    * @return the current height, i.e the number of columns or ` -1` if unknown
+    */
+  def height(): Int = {
+    asJava.asInstanceOf[JTty].height().asInstanceOf[Int]
   }
 
 }
 
 object Tty {
-
-  def apply(_asJava: JTty): Tty =
-    new Tty(_asJava)
-
+  def apply(asJava: JTty) = new Tty(asJava)  
 }

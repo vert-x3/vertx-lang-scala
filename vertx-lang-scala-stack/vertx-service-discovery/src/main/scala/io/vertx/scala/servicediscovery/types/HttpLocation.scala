@@ -16,18 +16,18 @@
 
 package io.vertx.scala.servicediscovery.types
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.servicediscovery.types.{HttpLocation => JHttpLocation}
 
 /**
   * Represents the location of a HTTP endpoint. This object (its json representation) will be used as "location" in a
   * service record.
   */
+class HttpLocation(private val _asJava: JHttpLocation) {
 
-class HttpLocation(val asJava: JHttpLocation) {
-
+  def asJava = _asJava
 
   /**
     * Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
@@ -37,8 +37,8 @@ class HttpLocation(val asJava: JHttpLocation) {
     asJava.setEndpoint(value)
     this
   }
-  def getEndpoint = {
-    asJava.getEndpoint()
+  def getEndpoint: String = {
+    asJava.getEndpoint().asInstanceOf[String]
   }
 
   /**
@@ -48,8 +48,8 @@ class HttpLocation(val asJava: JHttpLocation) {
     asJava.setHost(value)
     this
   }
-  def getHost = {
-    asJava.getHost()
+  def getHost: String = {
+    asJava.getHost().asInstanceOf[String]
   }
 
   /**
@@ -59,8 +59,8 @@ class HttpLocation(val asJava: JHttpLocation) {
     asJava.setPort(value)
     this
   }
-  def getPort = {
-    asJava.getPort()
+  def getPort: Int = {
+    asJava.getPort().asInstanceOf[Int]
   }
 
   /**
@@ -70,8 +70,8 @@ class HttpLocation(val asJava: JHttpLocation) {
     asJava.setRoot(value)
     this
   }
-  def getRoot = {
-    asJava.getRoot()
+  def getRoot: String = {
+    asJava.getRoot().asInstanceOf[String]
   }
 
   /**
@@ -81,8 +81,8 @@ class HttpLocation(val asJava: JHttpLocation) {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 }
 
@@ -93,16 +93,18 @@ object HttpLocation {
   }
   
   def apply(t: JHttpLocation) = {
-    if(t != null)
+    if (t != null) {
       new HttpLocation(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):HttpLocation = {
-    if(json != null)
+  def fromJson(json: JsonObject): HttpLocation = {
+    if (json != null) {
       new HttpLocation(new JHttpLocation(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -17,19 +17,22 @@
 package io.vertx.scala.ext.shell
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.{ShellServer => JShellServer}
-import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.shell.term.{TermServer => JTermServer}
-import io.vertx.scala.ext.shell.term.TermServer
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.ext.shell.{ShellServer => JShellServer}
 import io.vertx.ext.shell.{Shell => JShell}
+import io.vertx.scala.ext.shell.term.Term
+import io.vertx.scala.core.Vertx
+import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
 import io.vertx.scala.ext.shell.command.CommandResolver
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
 import io.vertx.ext.shell.term.{Term => JTerm}
-import io.vertx.scala.ext.shell.term.Term
+import io.vertx.scala.ext.shell.term.TermServer
 
 /**
   * The shell server.<p/>
@@ -42,9 +45,9 @@ import io.vertx.scala.ext.shell.term.Term
   *
   * The [[io.vertx.scala.ext.shell.ShellServer#createShell]] method can be used to create  instance for testing purposes.
   */
-class ShellServer(private val _asJava: JShellServer) {
+class ShellServer(private val _asJava: Object) {
 
-  def asJava: JShellServer = _asJava
+  def asJava = _asJava
 
   /**
     * Register a command resolver for this server.
@@ -52,7 +55,7 @@ class ShellServer(private val _asJava: JShellServer) {
     * @return a reference to this, so the API can be used fluently
     */
   def registerCommandResolver(resolver: CommandResolver): ShellServer = {
-    _asJava.registerCommandResolver(resolver.asJava.asInstanceOf[JCommandResolver])
+    asJava.asInstanceOf[JShellServer].registerCommandResolver(resolver.asJava.asInstanceOf[JCommandResolver])
     this
   }
 
@@ -62,8 +65,32 @@ class ShellServer(private val _asJava: JShellServer) {
     * @return a reference to this, so the API can be used fluently
     */
   def registerTermServer(termServer: TermServer): ShellServer = {
-    _asJava.registerTermServer(termServer.asJava.asInstanceOf[JTermServer])
+    asJava.asInstanceOf[JShellServer].registerTermServer(termServer.asJava.asInstanceOf[JTermServer])
     this
+  }
+
+  /**
+    * Start the shell service, this is an asynchronous start.
+    */
+  def listen(): ShellServer = {
+    asJava.asInstanceOf[JShellServer].listen()
+    this
+  }
+
+  /**
+    * Start the shell service, this is an asynchronous start.
+    * @param listenHandler handler for getting notified when service is started
+    */
+  def listen(listenHandler: Handler[AsyncResult[Unit]]): ShellServer = {
+    asJava.asInstanceOf[JShellServer].listen({x: AsyncResult[Void] => listenHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+    * Close the shell server, this is an asynchronous close.
+    */
+  def close(): Unit = {
+    asJava.asInstanceOf[JShellServer].close()
   }
 
   /**
@@ -72,7 +99,7 @@ class ShellServer(private val _asJava: JShellServer) {
     * @return the created shell
     */
   def createShell(term: Term): Shell = {
-    Shell.apply(_asJava.createShell(term.asJava.asInstanceOf[JTerm]))
+    Shell(asJava.asInstanceOf[JShellServer].createShell(term.asJava.asInstanceOf[JTerm]))
   }
 
   /**
@@ -80,57 +107,56 @@ class ShellServer(private val _asJava: JShellServer) {
     * @return the created shell
     */
   def createShell(): Shell = {
-    Shell.apply(_asJava.createShell())
+    Shell(asJava.asInstanceOf[JShellServer].createShell())
   }
 
   /**
-    * Start the shell service, this is an asynchronous start.
+    * Close the shell server, this is an asynchronous close.
+    * @param completionHandler handler for getting notified when service is stopped
     */
-  def listen(): ShellServer = {
-    _asJava.listen()
-    this
+  def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JShellServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
-  /**
-    * Start the shell service, this is an asynchronous start.
-    * @return future for getting notified when service is started
-    */
-  def listenFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.listen(promiseAndHandler._1)
+ /**
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def listenFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JShellServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-  /**
-    * Close the shell server, this is an asynchronous close.
-    */
-  def close(): Unit = {
-    _asJava.close()
-  }
-
-  /**
-    * Close the shell server, this is an asynchronous close.
-    * @return future for getting notified when service is stopped
-    */
-  def closeFuture(): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.close(promiseAndHandler._1)
+ /**
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def closeFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JShellServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
 object ShellServer {
-
-  def apply(_asJava: JShellServer): ShellServer =
-    new ShellServer(_asJava)
-
+  def apply(asJava: JShellServer) = new ShellServer(asJava)  
+  /**
+    * Create a new shell server with default options.
+    * @param vertx the vertx
+    * @param options the optionssee <a href="../../../../../../../cheatsheet/ShellServerOptions.html">ShellServerOptions</a>
+    * @return the created shell server
+    */
   def create(vertx: Vertx, options: ShellServerOptions): ShellServer = {
-    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
+  /**
+    * Create a new shell server with specific options.
+    * @param vertx the vertx
+    * @return the created shell server
+    */
   def create(vertx: Vertx): ShellServer = {
-    ShellServer.apply(io.vertx.ext.shell.ShellServer.create(vertx.asJava.asInstanceOf[JVertx]))
+    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

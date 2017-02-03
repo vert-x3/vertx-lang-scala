@@ -17,22 +17,22 @@
 package io.vertx.scala.ext.web
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{Locale => JLocale}
 
 /**
   */
-class Locale(private val _asJava: JLocale) {
+class Locale(private val _asJava: Object) {
 
-  def asJava: JLocale = _asJava
+  def asJava = _asJava
 
   /**
     * Returns the language as reported by the HTTP client.
     * @return language
     */
   def language(): String = {
-    _asJava.language()
+    asJava.asInstanceOf[JLocale].language().asInstanceOf[String]
   }
 
   /**
@@ -40,7 +40,7 @@ class Locale(private val _asJava: JLocale) {
     * @return variant
     */
   def country(): String = {
-    _asJava.country()
+    asJava.asInstanceOf[JLocale].country().asInstanceOf[String]
   }
 
   /**
@@ -48,30 +48,27 @@ class Locale(private val _asJava: JLocale) {
     * @return variant
     */
   def variant(): String = {
-    _asJava.variant()
+    asJava.asInstanceOf[JLocale].variant().asInstanceOf[String]
   }
 
 }
 
 object Locale {
-
-  def apply(_asJava: JLocale): Locale =
-    new Locale(_asJava)
-
+  def apply(asJava: JLocale) = new Locale(asJava)  
   def create(): Locale = {
-    Locale.apply(io.vertx.ext.web.Locale.create())
+    Locale(JLocale.create())
   }
 
   def create(language: String): Locale = {
-    Locale.apply(io.vertx.ext.web.Locale.create(language))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
   }
 
   def create(language: String, country: String): Locale = {
-    Locale.apply(io.vertx.ext.web.Locale.create(language, country))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String]))
   }
 
   def create(language: String, country: String, variant: String): Locale = {
-    Locale.apply(io.vertx.ext.web.Locale.create(language, country, variant))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String], variant.asInstanceOf[java.lang.String]))
   }
 
 }

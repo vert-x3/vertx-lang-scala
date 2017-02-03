@@ -17,34 +17,44 @@
 package io.vertx.scala.core.cli
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.cli.{Argument => JArgument}
 import io.vertx.core.cli.{Option => JOption}
 import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.core.cli.{Argument => JArgument}
+import io.vertx.core.cli.{CommandLine => JCommandLine}
+import scala.collection.JavaConverters._
 
 /**
   * The parser transforms a CLI (a model) into an [[io.vertx.scala.core.cli.CommandLine]]. This [[io.vertx.scala.core.cli.CommandLine]]
   * has stored the argument and option values. Only  instance of parser should create
   * objects of this type.
   */
-class CommandLine(private val _asJava: JCommandLine) {
+class CommandLine(private val _asJava: Object) {
 
-  def asJava: JCommandLine = _asJava
+  def asJava = _asJava
+
+  /**
+    * Gets the raw values of the given option. Raw values are simple "String", not converted to the option type.
+    * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
+    * @return the list of values, empty if none
+    */
+  def getRawValues(option: Option): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JCommandLine].getRawValues(option.asJava).asScala.map(x => x.asInstanceOf[String])
+  }
 
   /**
     * @return the model of this command line object.
     */
   def cli(): CLI = {
-    CLI.apply(_asJava.cli())
+    CLI(asJava.asInstanceOf[JCommandLine].cli())
   }
 
   /**
     * @return the ordered list of arguments. Arguments are command line arguments not matching an option.
     */
   def allArguments(): scala.collection.mutable.Buffer[String] = {
-    _asJava.allArguments().asScala.map(x => x:String)
+    asJava.asInstanceOf[JCommandLine].allArguments().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -52,8 +62,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getOptionValue[T](name: String): T = {
-    _asJava.getOptionValue(name)
+  def getOptionValue[T: TypeTag](name: String): T = {
+    toScala[T](asJava.asInstanceOf[JCommandLine].getOptionValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -61,8 +71,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T](name: String): T = {
-    _asJava.getArgumentValue(name)
+  def getArgumentValue[T: TypeTag](name: String): T = {
+    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](name.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -70,8 +80,8 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @param index the index
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T](index: Int): T = {
-    _asJava.getArgumentValue(index)
+  def getArgumentValue[T: TypeTag](index: Int): T = {
+    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](index.asInstanceOf[java.lang.Integer]))
   }
 
   /**
@@ -82,7 +92,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the flag has been set in the command line, `false` otherwise.
     */
   def isFlagEnabled(name: String): Boolean = {
-    _asJava.isFlagEnabled(name)
+    asJava.asInstanceOf[JCommandLine].isFlagEnabled(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**
@@ -91,16 +101,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the option has received a value, false otherwise.
     */
   def isOptionAssigned(option: Option): Boolean = {
-    _asJava.isOptionAssigned(option.asJava)
-  }
-
-  /**
-    * Gets the raw values of the given option. Raw values are simple "String", not converted to the option type.
-    * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
-    * @return the list of values, empty if none
-    */
-  def getRawValues(option: Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValues(option.asJava).asScala.map(x => x:String)
+    asJava.asInstanceOf[JCommandLine].isOptionAssigned(option.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -109,7 +110,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the list of values, empty if none
     */
   def getRawValuesForOption(option: Option): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForOption(option.asJava).asScala.map(x => x:String)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForOption(option.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -118,7 +119,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the list of values, empty if none
     */
   def getRawValuesForArgument(argument: Argument): scala.collection.mutable.Buffer[String] = {
-    _asJava.getRawValuesForArgument(argument.asJava).asScala.map(x => x:String)
+    asJava.asInstanceOf[JCommandLine].getRawValuesForArgument(argument.asJava).asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -127,7 +128,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForOption(option: Option): scala.Option[String] = {
-    scala.Option(_asJava.getRawValueForOption(option.asJava))
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForOption(option.asJava).asInstanceOf[String])
   }
 
   /**
@@ -136,7 +137,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return true if the option accepts more values, false otherwise.
     */
   def acceptMoreValues(option: Option): Boolean = {
-    _asJava.acceptMoreValues(option.asJava)
+    asJava.asInstanceOf[JCommandLine].acceptMoreValues(option.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -145,7 +146,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return the value, `null` if none.
     */
   def getRawValueForArgument(arg: Argument): scala.Option[String] = {
-    scala.Option(_asJava.getRawValueForArgument(arg.asJava))
+    scala.Option(asJava.asInstanceOf[JCommandLine].getRawValueForArgument(arg.asJava).asInstanceOf[String])
   }
 
   /**
@@ -154,7 +155,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the argument has received a value, false otherwise.
     */
   def isArgumentAssigned(arg: Argument): Boolean = {
-    _asJava.isArgumentAssigned(arg.asJava)
+    asJava.asInstanceOf[JCommandLine].isArgumentAssigned(arg.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -163,7 +164,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the user command line has used the option
     */
   def isSeenInCommandLine(option: Option): Boolean = {
-    _asJava.isSeenInCommandLine(option.asJava)
+    asJava.asInstanceOf[JCommandLine].isSeenInCommandLine(option.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -172,7 +173,7 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the current CommandLine object is valid. false otherwise.
     */
   def isValid(): Boolean = {
-    _asJava.isValid()
+    asJava.asInstanceOf[JCommandLine].isValid().asInstanceOf[Boolean]
   }
 
   /**
@@ -180,18 +181,21 @@ class CommandLine(private val _asJava: JCommandLine) {
     * @return `true` if the user command line has enabled a "Help" option, false otherwise.
     */
   def isAskingForHelp(): Boolean = {
-    _asJava.isAskingForHelp()
+    asJava.asInstanceOf[JCommandLine].isAskingForHelp().asInstanceOf[Boolean]
   }
 
 }
 
 object CommandLine {
-
-  def apply(_asJava: JCommandLine): CommandLine =
-    new CommandLine(_asJava)
-
+  def apply(asJava: JCommandLine) = new CommandLine(asJava)  
+  /**
+    * Creates a command line object from the [[io.vertx.scala.core.cli.CLI]]. This object is intended to be used by
+    * the parser to set the argument and option values.
+    * @param cli the CLI definition
+    * @return the command line object
+    */
   def create(cli: CLI): CommandLine = {
-    CommandLine.apply(io.vertx.core.cli.CommandLine.create(cli.asJava.asInstanceOf[JCLI]))
+    CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
   }
 
 }

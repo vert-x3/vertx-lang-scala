@@ -17,15 +17,15 @@
 package io.vertx.scala.ext.stomp
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.stomp.{Destination => JDestination}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
+import io.vertx.ext.stomp.{Destination => JDestination}
 import io.vertx.ext.stomp.{Frame => JFrame}
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
-import io.vertx.core.shareddata.{Shareable => JShareable}
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
+import scala.collection.JavaConverters._
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * Represents a STOMP destination.
@@ -34,16 +34,9 @@ import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
   * <p/>
   * Implementations <strong>must</strong> be thread-safe.
   */
-class Destination(private val _asJava: JDestination) {
+class Destination(private val _asJava: Object) {
 
-  def asJava: JDestination = _asJava
-
-  /**
-    * @return the destination address.
-    */
-  def destination(): String = {
-    _asJava.destination()
-  }
+  def asJava = _asJava
 
   /**
     * Dispatches the given frame.
@@ -52,7 +45,7 @@ class Destination(private val _asJava: JDestination) {
     * @return the current instance of Destination
     */
   def dispatch(connection: StompServerConnection, frame: Frame): Destination = {
-    _asJava.dispatch(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
+    asJava.asInstanceOf[JDestination].dispatch(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
     this
   }
 
@@ -63,8 +56,25 @@ class Destination(private val _asJava: JDestination) {
     * @return the current instance of Destination
     */
   def subscribe(connection: StompServerConnection, frame: Frame): Destination = {
-    _asJava.subscribe(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
+    asJava.asInstanceOf[JDestination].subscribe(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
     this
+  }
+
+  /**
+    * Removes all subscriptions of the given connection
+    * @param connection the connection
+    * @return the current instance of Destination
+    */
+  def unsubscribeConnection(connection: StompServerConnection): Destination = {
+    asJava.asInstanceOf[JDestination].unsubscribeConnection(connection.asJava.asInstanceOf[JStompServerConnection])
+    this
+  }
+
+  /**
+    * @return the destination address.
+    */
+  def destination(): String = {
+    asJava.asInstanceOf[JDestination].destination().asInstanceOf[String]
   }
 
   /**
@@ -74,17 +84,7 @@ class Destination(private val _asJava: JDestination) {
     * @return `true` if the un-subscription has been handled, `false` otherwise.
     */
   def unsubscribe(connection: StompServerConnection, frame: Frame): Boolean = {
-    _asJava.unsubscribe(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
-  }
-
-  /**
-    * Removes all subscriptions of the given connection
-    * @param connection the connection
-    * @return the current instance of Destination
-    */
-  def unsubscribeConnection(connection: StompServerConnection): Destination = {
-    _asJava.unsubscribeConnection(connection.asJava.asInstanceOf[JStompServerConnection])
-    this
+    asJava.asInstanceOf[JDestination].unsubscribe(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -94,7 +94,7 @@ class Destination(private val _asJava: JDestination) {
     * @return `true` if the destination has handled the frame (meaning it has sent the message with id)
     */
   def ack(connection: StompServerConnection, frame: Frame): Boolean = {
-    _asJava.ack(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
+    asJava.asInstanceOf[JDestination].ack(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -104,7 +104,7 @@ class Destination(private val _asJava: JDestination) {
     * @return `true` if the destination has handled the frame (meaning it has sent the message with id)
     */
   def nack(connection: StompServerConnection, frame: Frame): Boolean = {
-    _asJava.nack(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava)
+    asJava.asInstanceOf[JDestination].nack(connection.asJava.asInstanceOf[JStompServerConnection], frame.asJava).asInstanceOf[Boolean]
   }
 
   /**
@@ -113,7 +113,7 @@ class Destination(private val _asJava: JDestination) {
     * @return the list of subscription id, empty if none
     */
   def getSubscriptions(connection: StompServerConnection): scala.collection.mutable.Buffer[String] = {
-    _asJava.getSubscriptions(connection.asJava.asInstanceOf[JStompServerConnection]).asScala.map(x => x:String)
+    asJava.asInstanceOf[JDestination].getSubscriptions(connection.asJava.asInstanceOf[JStompServerConnection]).asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -121,7 +121,7 @@ class Destination(private val _asJava: JDestination) {
     * @return the number of subscriptions.
     */
   def numberOfSubscriptions(): Int = {
-    _asJava.numberOfSubscriptions()
+    asJava.asInstanceOf[JDestination].numberOfSubscriptions().asInstanceOf[Int]
   }
 
   /**
@@ -130,26 +130,23 @@ class Destination(private val _asJava: JDestination) {
     * @return `true` if it matches, `false` otherwise.
     */
   def matches(address: String): Boolean = {
-    _asJava.matches(address)
+    asJava.asInstanceOf[JDestination].matches(address.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
 }
 
 object Destination {
-
-  def apply(_asJava: JDestination): Destination =
-    new Destination(_asJava)
-
+  def apply(asJava: JDestination) = new Destination(asJava)  
   def topic(vertx: Vertx, destination: String): Destination = {
-    Destination.apply(io.vertx.ext.stomp.Destination.topic(vertx.asJava.asInstanceOf[JVertx], destination))
+    Destination(JDestination.topic(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))
   }
 
   def queue(vertx: Vertx, destination: String): Destination = {
-    Destination.apply(io.vertx.ext.stomp.Destination.queue(vertx.asJava.asInstanceOf[JVertx], destination))
+    Destination(JDestination.queue(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))
   }
 
   def bridge(vertx: Vertx, options: BridgeOptions): Destination = {
-    Destination.apply(io.vertx.ext.stomp.Destination.bridge(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Destination(JDestination.bridge(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
 }

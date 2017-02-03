@@ -16,18 +16,18 @@
 
 package io.vertx.scala.servicediscovery
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.servicediscovery.{ServiceDiscoveryOptions => JServiceDiscoveryOptions}
 import io.vertx.core.json.JsonObject
 
 /**
   * Options to configure the service discovery.
   */
+class ServiceDiscoveryOptions(private val _asJava: JServiceDiscoveryOptions) {
 
-class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
-
+  def asJava = _asJava
 
   /**
     * Sets the event bus address on which the service arrivals, departures and modifications are announced. This
@@ -37,8 +37,8 @@ class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
     asJava.setAnnounceAddress(value)
     this
   }
-  def getAnnounceAddress = {
-    asJava.getAnnounceAddress()
+  def getAnnounceAddress: String = {
+    asJava.getAnnounceAddress().asInstanceOf[String]
   }
 
   /**
@@ -46,11 +46,11 @@ class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
     * Refer to the backend documentation to get more details on the requirements. The default backend
     * does not need any configuration.
     */
-  def setBackendConfiguration(value: JsonObject) = {
+  def setBackendConfiguration(value: io.vertx.core.json.JsonObject) = {
     asJava.setBackendConfiguration(value)
     this
   }
-  def getBackendConfiguration = {
+  def getBackendConfiguration: io.vertx.core.json.JsonObject = {
     asJava.getBackendConfiguration()
   }
 
@@ -62,8 +62,8 @@ class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
     asJava.setName(value)
     this
   }
-  def getName = {
-    asJava.getName()
+  def getName: String = {
+    asJava.getName().asInstanceOf[String]
   }
 
   /**
@@ -73,8 +73,8 @@ class ServiceDiscoveryOptions(val asJava: JServiceDiscoveryOptions) {
     asJava.setUsageAddress(value)
     this
   }
-  def getUsageAddress = {
-    asJava.getUsageAddress()
+  def getUsageAddress: String = {
+    asJava.getUsageAddress().asInstanceOf[String]
   }
 }
 
@@ -85,16 +85,18 @@ object ServiceDiscoveryOptions {
   }
   
   def apply(t: JServiceDiscoveryOptions) = {
-    if(t != null)
+    if (t != null) {
       new ServiceDiscoveryOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):ServiceDiscoveryOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): ServiceDiscoveryOptions = {
+    if (json != null) {
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

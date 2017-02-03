@@ -16,17 +16,17 @@
 
 package io.vertx.scala.core.file
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.file.{OpenOptions => JOpenOptions}
 
 /**
   * Describes how an [[io.vertx.scala.core.file.AsyncFile]] should be opened.
   */
+class OpenOptions(private val _asJava: JOpenOptions) {
 
-class OpenOptions(val asJava: JOpenOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set whether the file should be created if it does not already exist.
@@ -35,8 +35,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setCreate(value)
     this
   }
-  def isCreate = {
-    asJava.isCreate()
+  def isCreate: Boolean = {
+    asJava.isCreate().asInstanceOf[Boolean]
   }
 
   /**
@@ -46,8 +46,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setCreateNew(value)
     this
   }
-  def isCreateNew = {
-    asJava.isCreateNew()
+  def isCreateNew: Boolean = {
+    asJava.isCreateNew().asInstanceOf[Boolean]
   }
 
   /**
@@ -57,8 +57,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setDeleteOnClose(value)
     this
   }
-  def isDeleteOnClose = {
-    asJava.isDeleteOnClose()
+  def isDeleteOnClose: Boolean = {
+    asJava.isDeleteOnClose().asInstanceOf[Boolean]
   }
 
   /**
@@ -68,8 +68,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setDsync(value)
     this
   }
-  def isDsync = {
-    asJava.isDsync()
+  def isDsync: Boolean = {
+    asJava.isDsync().asInstanceOf[Boolean]
   }
 
   /**
@@ -79,8 +79,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setPerms(value)
     this
   }
-  def getPerms = {
-    asJava.getPerms()
+  def getPerms: String = {
+    asJava.getPerms().asInstanceOf[String]
   }
 
   /**
@@ -90,8 +90,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setRead(value)
     this
   }
-  def isRead = {
-    asJava.isRead()
+  def isRead: Boolean = {
+    asJava.isRead().asInstanceOf[Boolean]
   }
 
   /**
@@ -101,8 +101,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setSparse(value)
     this
   }
-  def isSparse = {
-    asJava.isSparse()
+  def isSparse: Boolean = {
+    asJava.isSparse().asInstanceOf[Boolean]
   }
 
   /**
@@ -112,8 +112,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setSync(value)
     this
   }
-  def isSync = {
-    asJava.isSync()
+  def isSync: Boolean = {
+    asJava.isSync().asInstanceOf[Boolean]
   }
 
   /**
@@ -123,8 +123,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setTruncateExisting(value)
     this
   }
-  def isTruncateExisting = {
-    asJava.isTruncateExisting()
+  def isTruncateExisting: Boolean = {
+    asJava.isTruncateExisting().asInstanceOf[Boolean]
   }
 
   /**
@@ -134,8 +134,8 @@ class OpenOptions(val asJava: JOpenOptions) {
     asJava.setWrite(value)
     this
   }
-  def isWrite = {
-    asJava.isWrite()
+  def isWrite: Boolean = {
+    asJava.isWrite().asInstanceOf[Boolean]
   }
 }
 
@@ -146,16 +146,18 @@ object OpenOptions {
   }
   
   def apply(t: JOpenOptions) = {
-    if(t != null)
+    if (t != null) {
       new OpenOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):OpenOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): OpenOptions = {
+    if (json != null) {
       new OpenOptions(new JOpenOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

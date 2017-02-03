@@ -17,124 +17,121 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.codegen.testmodel.{FunctionParamTCK => JFunctionParamTCK}
-import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
-import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
-import java.util.function.{Function => JFunction}
-import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
+import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import io.vertx.codegen.testmodel.TestEnum
+import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
+import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.codegen.testmodel.{FunctionParamTCK => JFunctionParamTCK}
 
 /**
   */
-class FunctionParamTCK(private val _asJava: JFunctionParamTCK) {
+class FunctionParamTCK(private val _asJava: Object) {
 
-  def asJava: JFunctionParamTCK = _asJava
+  def asJava = _asJava
 
-  def methodWithBasicParam(byteFunc: java.lang.Byte => java.lang.String, shortFunc: java.lang.Short => java.lang.String, integerFunc: java.lang.Integer => java.lang.String, longFunc: java.lang.Long => java.lang.String, floatFunc: java.lang.Float => java.lang.String, doubleFunc: java.lang.Double => java.lang.String, booleanFunc: java.lang.Boolean => java.lang.String, charFunc: java.lang.Character => java.lang.String, stringFunc: java.lang.String => java.lang.String): scala.collection.mutable.Buffer[String] = {
-    _asJava.methodWithBasicParam(asJavaFunction(byteFunc), asJavaFunction(shortFunc), asJavaFunction(integerFunc), asJavaFunction(longFunc), asJavaFunction(floatFunc), asJavaFunction(doubleFunc), asJavaFunction(booleanFunc), asJavaFunction(charFunc), asJavaFunction(stringFunc)).asScala.map(x => x:String)
+  def methodWithBasicParam(byteFunc: Byte => String, shortFunc: Short => String, integerFunc: Int => String, longFunc: Long => String, floatFunc: Float => String, doubleFunc: Double => String, booleanFunc: Boolean => String, charFunc: Char => String, stringFunc: String => String): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicParam({x: java.lang.Byte => byteFunc(x.asInstanceOf[Byte]).asInstanceOf[java.lang.String]}, {x: java.lang.Short => shortFunc(x.asInstanceOf[Short]).asInstanceOf[java.lang.String]}, {x: java.lang.Integer => integerFunc(x.asInstanceOf[Int]).asInstanceOf[java.lang.String]}, {x: java.lang.Long => longFunc(x.asInstanceOf[Long]).asInstanceOf[java.lang.String]}, {x: java.lang.Float => floatFunc(x.asInstanceOf[Float]).asInstanceOf[java.lang.String]}, {x: java.lang.Double => doubleFunc(x.asInstanceOf[Double]).asInstanceOf[java.lang.String]}, {x: java.lang.Boolean => booleanFunc(x.asInstanceOf[Boolean]).asInstanceOf[java.lang.String]}, {x: java.lang.Character => charFunc(x.asInstanceOf[Char]).asInstanceOf[java.lang.String]}, {x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def methodWithJsonParam(objectFunc: JsonObject => java.lang.String, arrayFunc: JsonArray => java.lang.String): scala.collection.mutable.Buffer[String] = {
-    _asJava.methodWithJsonParam(asJavaFunction(objectFunc), asJavaFunction(arrayFunc)).asScala.map(x => x:String)
+  def methodWithJsonParam(objectFunc: io.vertx.core.json.JsonObject => String, arrayFunc: io.vertx.core.json.JsonArray => String): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithJsonParam({x: JsonObject => objectFunc(x).asInstanceOf[java.lang.String]}, {x: JsonArray => arrayFunc(x).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }
 
-  def methodWithVoidParam(func: java.lang.Void => java.lang.String): String = {
-    _asJava.methodWithVoidParam(asJavaFunction(func))
+  def methodWithVoidParam(func: () => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithVoidParam({x: Void => func().asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithUserTypeParam(arg: RefedInterface1, func: JRefedInterface1 => java.lang.String): String = {
-    _asJava.methodWithUserTypeParam(arg.asJava.asInstanceOf[JRefedInterface1], asJavaFunction(func))
+  def methodWithUserTypeParam(arg: RefedInterface1, func: RefedInterface1 => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithUserTypeParam(arg.asJava.asInstanceOf[JRefedInterface1], {x: JRefedInterface1 => func(RefedInterface1(x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithObjectParam(arg: AnyRef, func: java.lang.Object => java.lang.String): String = {
-    _asJava.methodWithObjectParam(arg, asJavaFunction(func))
+  def methodWithObjectParam(arg: AnyRef, func: AnyRef => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectParam(arg, {x: Object => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithDataObjectParam(func: JTestDataObject => java.lang.String): String = {
-    _asJava.methodWithDataObjectParam(asJavaFunction(func))
+  def methodWithDataObjectParam(func: TestDataObject => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithDataObjectParam({x: JTestDataObject => func(TestDataObject(x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithEnumParam(func: TestEnum => java.lang.String): String = {
-    _asJava.methodWithEnumParam(asJavaFunction(func))
+  def methodWithEnumParam(func: io.vertx.codegen.testmodel.TestEnum => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithEnumParam({x: TestEnum => func(x).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithListParam(stringFunc: java.util.List[java.lang.String] => java.lang.String): String = {
-    _asJava.methodWithListParam(asJavaFunction(stringFunc))
+  def methodWithListParam(stringFunc: scala.collection.mutable.Buffer[String] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithListParam({x: java.util.List[java.lang.String] => stringFunc(x.asScala.map(x => x.asInstanceOf[String])).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithSetParam(func: java.util.Set[java.lang.String] => java.lang.String): String = {
-    _asJava.methodWithSetParam(asJavaFunction(func))
+  def methodWithSetParam(func: scala.collection.mutable.Set[String] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithSetParam({x: java.util.Set[java.lang.String] => func(x.asScala.map(x => x.asInstanceOf[String])).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithMapParam(func: java.util.Map[java.lang.String,java.lang.String] => java.lang.String): String = {
-    _asJava.methodWithMapParam(asJavaFunction(func))
+  def methodWithMapParam(func: scala.collection.mutable.Map[String, String] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithMapParam({x: java.util.Map[String, java.lang.String] => func(collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericParam[T](t: T, func: T => java.lang.String): String = {
-    _asJava.methodWithGenericParam(t, asJavaFunction(func))
+  def methodWithGenericParam[T: TypeTag](t: T, func: T => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericParam[Object](toJava[T](t), {x: Object => func(toScala[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithGenericUserTypeParam[T](t: T, func: JGenericRefedInterface[T] => java.lang.String): String = {
-    _asJava.methodWithGenericUserTypeParam(t, asJavaFunction(func))
+  def methodWithGenericUserTypeParam[T: TypeTag](t: T, func: GenericRefedInterface[T] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeParam[Object](toJava[T](t), {x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithBasicReturn(byteFunc: java.lang.String => java.lang.Byte, shortFunc: java.lang.String => java.lang.Short, integerFunc: java.lang.String => java.lang.Integer, longFunc: java.lang.String => java.lang.Long, floatFunc: java.lang.String => java.lang.Float, doubleFunc: java.lang.String => java.lang.Double, booleanFunc: java.lang.String => java.lang.Boolean, charFunc: java.lang.String => java.lang.Character, stringFunc: java.lang.String => java.lang.String): String = {
-    _asJava.methodWithBasicReturn(asJavaFunction(byteFunc), asJavaFunction(shortFunc), asJavaFunction(integerFunc), asJavaFunction(longFunc), asJavaFunction(floatFunc), asJavaFunction(doubleFunc), asJavaFunction(booleanFunc), asJavaFunction(charFunc), asJavaFunction(stringFunc))
+  def methodWithBasicReturn(byteFunc: String => Byte, shortFunc: String => Short, integerFunc: String => Int, longFunc: String => Long, floatFunc: String => Float, doubleFunc: String => Double, booleanFunc: String => Boolean, charFunc: String => Char, stringFunc: String => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicReturn({x: java.lang.String => byteFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Byte]}, {x: java.lang.String => shortFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Short]}, {x: java.lang.String => integerFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Integer]}, {x: java.lang.String => longFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Long]}, {x: java.lang.String => floatFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Float]}, {x: java.lang.String => doubleFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Double]}, {x: java.lang.String => booleanFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Boolean]}, {x: java.lang.String => charFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.Character]}, {x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithJsonReturn(objectFunc: java.lang.String => JsonObject, arrayFunc: java.lang.String => JsonArray): String = {
-    _asJava.methodWithJsonReturn(asJavaFunction(objectFunc), asJavaFunction(arrayFunc))
+  def methodWithJsonReturn(objectFunc: String => io.vertx.core.json.JsonObject, arrayFunc: String => io.vertx.core.json.JsonArray): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithJsonReturn({x: java.lang.String => objectFunc(x.asInstanceOf[String])}, {x: java.lang.String => arrayFunc(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
-  def methodWithObjectReturn(func: java.lang.Integer => java.lang.Object): String = {
-    _asJava.methodWithObjectReturn(asJavaFunction(func))
+  def methodWithObjectReturn(func: Int => AnyRef): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithObjectReturn({x: java.lang.Integer => func(x.asInstanceOf[Int])}).asInstanceOf[String]
   }
 
-  def methodWithDataObjectReturn(func: java.lang.String => JTestDataObject): String = {
-    _asJava.methodWithDataObjectReturn(asJavaFunction(func))
+  def methodWithDataObjectReturn(func: String => TestDataObject): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithDataObjectReturn({x: java.lang.String => func(x.asInstanceOf[String]).asJava}).asInstanceOf[String]
   }
 
-  def methodWithEnumReturn(func: java.lang.String => TestEnum): String = {
-    _asJava.methodWithEnumReturn(asJavaFunction(func))
+  def methodWithEnumReturn(func: String => io.vertx.codegen.testmodel.TestEnum): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithEnumReturn({x: java.lang.String => func(x.asInstanceOf[String])}).asInstanceOf[String]
   }
 
-  def methodWithListReturn(func: java.lang.String => java.util.List[java.lang.String]): String = {
-    _asJava.methodWithListReturn(asJavaFunction(func))
+  def methodWithListReturn(func: String => scala.collection.mutable.Buffer[String]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
-  def methodWithSetReturn(func: java.lang.String => java.util.Set[java.lang.String]): String = {
-    _asJava.methodWithSetReturn(asJavaFunction(func))
+  def methodWithSetReturn(func: String => scala.collection.mutable.Set[String]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithSetReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
-  def methodWithMapReturn(func: java.lang.String => java.util.Map[java.lang.String,java.lang.String]): String = {
-    _asJava.methodWithMapReturn(asJavaFunction(func))
+  def methodWithMapReturn(func: String => scala.collection.mutable.Map[String, String]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithMapReturn({x: java.lang.String => func(x.asInstanceOf[String]).mapValues(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
-  def methodWithGenericReturn[T](func: java.lang.Integer => T): String = {
-    _asJava.methodWithGenericReturn(asJavaFunction(func))
+  def methodWithGenericReturn[T: TypeTag](func: Int => T): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericReturn[Object]({x: java.lang.Integer => toJava[T](func(x.asInstanceOf[Int]))}).asInstanceOf[String]
   }
 
-  def methodWithGenericUserTypeReturn[T](func: JGenericRefedInterface[T] => JGenericRefedInterface[T]): String = {
-    _asJava.methodWithGenericUserTypeReturn(asJavaFunction(func))
+  def methodWithGenericUserTypeReturn[T: TypeTag](func: GenericRefedInterface[T] => GenericRefedInterface[T]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeReturn[Object]({x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asJava.asInstanceOf[JGenericRefedInterface[Object]]}).asInstanceOf[String]
   }
 
-  def methodWithNullableListParam(func: java.util.List[java.lang.String] => java.lang.String): String = {
-    _asJava.methodWithNullableListParam(asJavaFunction(func))
+  def methodWithNullableListParam(func: scala.collection.mutable.Buffer[String] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListParam({x: java.util.List[java.lang.String] => func(x.asScala.map(x => x.asInstanceOf[String])).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithNullableListReturn(func: java.lang.String => java.util.List[java.lang.String]): String = {
-    _asJava.methodWithNullableListReturn(asJavaFunction(func))
+  def methodWithNullableListReturn(func: String => scala.collection.mutable.Buffer[String]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
   }
 
 }
 
 object FunctionParamTCK {
-
-  def apply(_asJava: JFunctionParamTCK): FunctionParamTCK =
-    new FunctionParamTCK(_asJava)
-
+  def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
 }

@@ -21,7 +21,6 @@ class CollectionTCKTest extends FlatSpec with Matchers {
     override def execute(runnable: Runnable): Unit = runnable.run()
   }
 
-
   "testMethodListParams" should "work" in {
     val refed1 = new RefedInterface1(new RefedInterface1Impl())
     refed1.setString("foo")
@@ -48,16 +47,16 @@ class CollectionTCKTest extends FlatSpec with Matchers {
     refed2.setString("bar")
 
     obj.methodWithSetParams(
-      Set("foo", "bar"),
-      Set(2.toByte, 3.toByte),
-      Set(12.toShort, 13.toShort),
-      Set(1234, 1345),
-      Set(123l, 456l),
-      Set(Json.obj(("foo", "bar")), Json.obj(("eek", "wibble"))),
-      Set(arr("foo"), arr("blah")),
-      Set(refed1, refed2),
-      Set(TestDataObject.fromJson(Json.obj().put("bar", 1).put("wibble", 1.1).put("foo", "String 1")), TestDataObject.fromJson(Json.obj().put("bar", 2).put("wibble", 2.2).put("foo", "String 2"))),
-      Set(TestEnum.JULIEN, TestEnum.TIM))
+      mutable.Set("foo", "bar"),
+      mutable.Set(2.toByte, 3.toByte),
+      mutable.Set(12.toShort, 13.toShort),
+      mutable.Set(1234, 1345),
+      mutable.Set(123l, 456l),
+      mutable.Set(Json.obj(("foo", "bar")), Json.obj(("eek", "wibble"))),
+      mutable.Set(arr("foo"), arr("blah")),
+      mutable.Set(refed1, refed2),
+      mutable.Set(TestDataObject.fromJson(Json.obj().put("bar", 1).put("wibble", 1.1).put("foo", "String 1")), TestDataObject.fromJson(Json.obj().put("bar", 2).put("wibble", 2.2).put("foo", "String 2"))),
+      mutable.Set(TestEnum.JULIEN, TestEnum.TIM))
   }
 
   "testMethodMapParams" should "work" in {
@@ -66,23 +65,23 @@ class CollectionTCKTest extends FlatSpec with Matchers {
     val refed2 = new RefedInterface1(new RefedInterface1Impl())
     refed2.setString("bar")
     obj.methodWithMapParams(
-      Map("foo" -> "bar", "eek" -> "wibble"),
-      Map("foo" -> 2.toByte, "eek" -> 3.toByte),
-      Map("foo" -> 12.toShort, "eek" -> 13.toShort),
-      Map("foo" -> 1234, "eek" -> 1345),
-      Map("foo" -> 123l, "eek" -> 456l),
-      Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
-      Map("foo" -> arr("foo"), "eek" -> arr("blah")),
-      Map("foo" -> refed1, "eek" -> refed2)
+      mutable.Map("foo" -> "bar", "eek" -> "wibble"),
+      mutable.Map("foo" -> 2.toByte, "eek" -> 3.toByte),
+      mutable.Map("foo" -> 12.toShort, "eek" -> 13.toShort),
+      mutable.Map("foo" -> 1234, "eek" -> 1345),
+      mutable.Map("foo" -> 123l, "eek" -> 456l),
+      mutable.Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
+      mutable.Map("foo" -> arr("foo"), "eek" -> arr("blah")),
+      mutable.Map("foo" -> refed1, "eek" -> refed2)
     )
   }
 
   "testListStringReturn" should "work" in {
-    assert(List("foo", "bar", "wibble") == obj.methodWithListStringReturn())
+    assert(mutable.Buffer("foo", "bar", "wibble") == obj.methodWithListStringReturn())
   }
 
   "testListLongReturn" should "work" in {
-    assert(List(123l, 456l) == obj.methodWithListLongReturn())
+    assert(mutable.Buffer(123l, 456l) == obj.methodWithListLongReturn())
   }
 
   "testListJsonObjectReturn" should "work" in {
@@ -137,11 +136,11 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testSetStringReturn" should "work" in {
-    assert(Set("foo", "bar", "wibble") == obj.methodWithSetStringReturn())
+    assert(mutable.Set("foo", "bar", "wibble") == obj.methodWithSetStringReturn())
   }
 
   "testSetLongReturn" should "work" in {
-    assert(Set(123l, 456l) == obj.methodWithSetLongReturn())
+    assert(mutable.Set(123l, 456l) == obj.methodWithSetLongReturn())
   }
 
   "testSetJsonObjectReturn" should "work" in {
@@ -239,45 +238,45 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerListEnum" should "work" in {
-    obj.methodWithHandlerListEnum(it => assert(it == List(TestEnum.TIM, TestEnum.JULIEN)))
+    obj.methodWithHandlerListEnum(it => assert(it == mutable.Buffer(TestEnum.TIM, TestEnum.JULIEN)))
   }
 
   "testMethodWithHandlerSetEnum" should "work" in {
-    obj.methodWithHandlerSetEnum(it => assert(it == Set(TestEnum.TIM, TestEnum.JULIEN)))
+    obj.methodWithHandlerSetEnum(it => assert(it == mutable.Set(TestEnum.TIM, TestEnum.JULIEN)))
   }
 
   "testMethodWithHandlerAsyncResultListEnum" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultListEnumFuture().foreach(it => { w{assert(it.toSet.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultListEnumFuture().foreach(it => { w{assert(it.toSet.diff(mutable.Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetEnum" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetEnumFuture().foreach(it => { w{assert(it.diff(Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetEnumFuture().foreach(it => { w{assert(it.diff(mutable.Set(TestEnum.TIM, TestEnum.JULIEN)).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerListAndSet" should "work" in {
     obj.methodWithHandlerListAndSet(
-      it => assert(List("foo", "bar", "wibble") == it),
-      it => assert(List(5, 12, 100) == it),
-      it => assert(Set("foo", "bar", "wibble") == it),
-      it => assert(Set(5, 12, 100) == it)
+      it => assert(mutable.Buffer("foo", "bar", "wibble") == it),
+      it => assert(mutable.Buffer(5, 12, 100) == it),
+      it => assert(mutable.Set("foo", "bar", "wibble") == it),
+      it => assert(mutable.Set(5, 12, 100) == it)
     )
   }
 
   "testMethodWithHandlerAsyncResultListAndSet" should "work" in {
     exec(4)(w => {
-      obj.methodWithHandlerAsyncResultListStringFuture().foreach(it => {w {assert(List("foo", "bar", "wibble").diff(it).isEmpty)}; w.dismiss()})
-      obj.methodWithHandlerAsyncResultListIntegerFuture().foreach(it => {w {assert(List(5, 12, 100).diff(it).isEmpty)}; w.dismiss()})
-      obj.methodWithHandlerAsyncResultSetStringFuture().foreach(it => {w {assert(Set("foo", "bar", "wibble").diff(it).isEmpty)}; w.dismiss()})
-      obj.methodWithHandlerAsyncResultSetIntegerFuture().foreach(it => {w {assert(Set(5, 12, 100).diff(it).isEmpty)}; w.dismiss()})
+      obj.methodWithHandlerAsyncResultListStringFuture().foreach(it => {w {assert(mutable.Buffer("foo", "bar", "wibble").diff(it).isEmpty)}; w.dismiss()})
+      obj.methodWithHandlerAsyncResultListIntegerFuture().foreach(it => {w {assert(mutable.Buffer(5, 12, 100).diff(it).isEmpty)}; w.dismiss()})
+      obj.methodWithHandlerAsyncResultSetStringFuture().foreach(it => {w {assert(mutable.Set("foo", "bar", "wibble").diff(it).isEmpty)}; w.dismiss()})
+      obj.methodWithHandlerAsyncResultSetIntegerFuture().foreach(it => {w {assert(mutable.Set(5, 12, 100).diff(it).isEmpty)}; w.dismiss()})
     })
   }
 
   "testMethodWithHandlerListVertxGen" should "work" in {
-    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()) == List("foo", "bar")))
+    obj.methodWithHandlerListVertxGen(it => assert(it.map(_.getString()) == mutable.Buffer("foo", "bar")))
   }
 
   "testMethodWithHandlerListAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == List("abstractfoo", "abstractbar")))
+    obj.methodWithHandlerListAbstractVertxGen(it => assert(it.map(_.getString()) == mutable.Buffer("abstractfoo", "abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultListVertxGen" should "work" in {
@@ -289,59 +288,63 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerSetVertxGen" should "work" in {
-    obj.methodWithHandlerSetVertxGen(it => assert(it.map(_.getString()) == Set("bar", "foo")))
+    obj.methodWithHandlerSetVertxGen(it => assert(it.map(_.getString()) == mutable.Set("bar", "foo")))
   }
 
   "testMethodWithHandlerSetAbstractVertxGen" should "work" in {
-    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == Set("abstractfoo", "abstractbar")))
+    obj.methodWithHandlerSetAbstractVertxGen(it => assert(it.map(_.getString()) == mutable.Set("abstractfoo", "abstractbar")))
   }
 
   "testMethodWithHandlerAsyncResultSetVertxGen" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("bar", "foo"))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == mutable.Set("bar", "foo"))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetAbstractVertxGen" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == Set("abstractbar", "abstractfoo"))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetAbstractVertxGenFuture().foreach(it => { w {assert(it.map(_.getString()) == mutable.Set("abstractbar", "abstractfoo"))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerListJsonObject" should "work" in {
-    obj.methodWithHandlerListJsonObject(it => assert(it == List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
+    obj.methodWithHandlerListJsonObject(it => assert(it == mutable.Buffer(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
   }
 
   "testMethodWithHandlerListComplexJsonObject" should "work" in {
-    obj.methodWithHandlerListComplexJsonObject(it => assert(it == List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
+    obj.methodWithHandlerListComplexJsonObject(it => assert(it == mutable.Buffer(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
   "testMethodWithHandlerAsyncResultListJsonObject" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultListJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultListJsonObjectFuture().foreach(it => { w {assert(mutable.Buffer(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListComplexJsonObject" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonObjectFuture().foreach(it => { w {assert(List(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonObjectFuture().foreach(it => { w {assert(mutable.Buffer(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerSetJsonObject" should "work" in {
-    obj.methodWithHandlerSetJsonObject(it => assert(it == Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
+    obj.methodWithHandlerSetJsonObject(it => assert(it == mutable.Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan")))))
   }
 
   "testMethodWithHandlerSetComplexJsonObject" should "work" in {
-    obj.methodWithHandlerSetComplexJsonObject(it => assert(it == Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
+    obj.methodWithHandlerSetComplexJsonObject(it => assert(it == mutable.Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue"))))))
   }
 
   "testMethodWithHandlerAsyncResultSetJsonObject" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("cheese", "stilton")), Json.obj(("socks", "tartan"))).sameElements(it))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetJsonObjectFuture().foreach(it => { w {
+      assert(it.contains(Json.obj(("socks", "tartan"))))
+      assert(it.contains(Json.obj(("cheese", "stilton"))))
+      assert(it.size == 2)
+    }; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetComplexJsonObject" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonObjectFuture().foreach(it => { w {assert(Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonObjectFuture().foreach(it => { w {assert(mutable.Set(Json.obj(("outer", Json.obj(("socks", "tartan"))), ("list", arr("yellow", "blue")))).sameElements(it))}; w.dismiss()}))
   }
 
   "testMethodWithHandlerListJsonArray" should "work" in {
-    obj.methodWithHandlerListJsonArray(it => assert(it == List(arr("green", "blue"), arr("yellow", "purple"))))
+    obj.methodWithHandlerListJsonArray(it => assert(it == mutable.Buffer(arr("green", "blue"), arr("yellow", "purple"))))
   }
 
   "testMethodWithHandlerListComplexJsonArray" should "work" in {
-    obj.methodWithHandlerListComplexJsonArray(it => assert(it == List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
+    obj.methodWithHandlerListComplexJsonArray(it => assert(it == mutable.Buffer(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
   }
 
   "testMethodWithHandlerListDataObject" should "work" in {
@@ -376,27 +379,27 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultListJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultListJsonArrayFuture().foreach(it => { w {assert(it.diff(mutable.Buffer(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListComplexJsonArray" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(List(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultListComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(mutable.Buffer(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerSetJsonArray" should "work" in {
-    obj.methodWithHandlerSetJsonArray(it => assert(it == Set(arr("green", "blue"), arr("yellow", "purple"))))
+    obj.methodWithHandlerSetJsonArray(it => assert(it == mutable.Set(arr("green", "blue"), arr("yellow", "purple"))))
   }
 
   "testMethodWithHandlerSetComplexJsonArray" should "work" in {
-    obj.methodWithHandlerSetComplexJsonArray(it => assert(it == Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
+    obj.methodWithHandlerSetComplexJsonArray(it => assert(it == mutable.Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))))
   }
 
   "testMethodWithHandlerAsyncResultSetJsonArray" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetJsonArrayFuture().foreach(it => { w {assert(it.diff(mutable.Set(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultSetComplexJsonArray" should "work" in {
-    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
+    exec1(w => obj.methodWithHandlerAsyncResultSetComplexJsonArrayFuture().foreach(it => { w {assert(it.diff(mutable.Set(arr(Json.obj(("foo", "hello"))), arr(Json.obj(("bar", "bye"))))).isEmpty)}; w.dismiss()}))
   }
 
   "testMethodWithHandlerAsyncResultListDataObject" should "work" in {
@@ -439,11 +442,11 @@ class CollectionTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithListEnumReturn" should "work" in {
-    assert(List(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithListEnumReturn())
+    assert(mutable.Buffer(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithListEnumReturn())
   }
 
   "testMethodWithSetEnumReturn" should "work" in {
-    assert(Set(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithSetEnumReturn())
+    assert(mutable.Set(TestEnum.JULIEN, TestEnum.TIM) == obj.methodWithSetEnumReturn())
   }
 
 }

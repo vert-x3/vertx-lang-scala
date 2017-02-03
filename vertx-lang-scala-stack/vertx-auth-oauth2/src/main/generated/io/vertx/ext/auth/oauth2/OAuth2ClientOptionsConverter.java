@@ -39,8 +39,14 @@ public class OAuth2ClientOptionsConverter {
     if (json.getValue("clientSecretParameterName") instanceof String) {
       obj.setClientSecretParameterName((String)json.getValue("clientSecretParameterName"));
     }
+    if (json.getValue("extraParameters") instanceof JsonObject) {
+      obj.setExtraParameters(((JsonObject)json.getValue("extraParameters")).copy());
+    }
     if (json.getValue("headers") instanceof JsonObject) {
       obj.setHeaders(((JsonObject)json.getValue("headers")).copy());
+    }
+    if (json.getValue("introspectionPath") instanceof String) {
+      obj.setIntrospectionPath((String)json.getValue("introspectionPath"));
     }
     if (json.getValue("jwtToken") instanceof Boolean) {
       obj.setJwtToken((Boolean)json.getValue("jwtToken"));
@@ -48,11 +54,17 @@ public class OAuth2ClientOptionsConverter {
     if (json.getValue("logoutPath") instanceof String) {
       obj.setLogoutPath((String)json.getValue("logoutPath"));
     }
+    if (json.getValue("privateKey") instanceof String) {
+      obj.setPrivateKey((String)json.getValue("privateKey"));
+    }
     if (json.getValue("publicKey") instanceof String) {
       obj.setPublicKey((String)json.getValue("publicKey"));
     }
     if (json.getValue("revocationPath") instanceof String) {
       obj.setRevocationPath((String)json.getValue("revocationPath"));
+    }
+    if (json.getValue("scopeSeparator") instanceof String) {
+      obj.setScopeSeparator((String)json.getValue("scopeSeparator"));
     }
     if (json.getValue("site") instanceof String) {
       obj.setSite((String)json.getValue("site"));
@@ -84,18 +96,30 @@ public class OAuth2ClientOptionsConverter {
     if (obj.getClientSecretParameterName() != null) {
       json.put("clientSecretParameterName", obj.getClientSecretParameterName());
     }
+    if (obj.getExtraParameters() != null) {
+      json.put("extraParameters", obj.getExtraParameters());
+    }
     if (obj.getHeaders() != null) {
       json.put("headers", obj.getHeaders());
+    }
+    if (obj.getIntrospectionPath() != null) {
+      json.put("introspectionPath", obj.getIntrospectionPath());
     }
     json.put("jwtToken", obj.isJwtToken());
     if (obj.getLogoutPath() != null) {
       json.put("logoutPath", obj.getLogoutPath());
+    }
+    if (obj.getPrivateKey() != null) {
+      json.put("privateKey", obj.getPrivateKey());
     }
     if (obj.getPublicKey() != null) {
       json.put("publicKey", obj.getPublicKey());
     }
     if (obj.getRevocationPath() != null) {
       json.put("revocationPath", obj.getRevocationPath());
+    }
+    if (obj.getScopeSeparator() != null) {
+      json.put("scopeSeparator", obj.getScopeSeparator());
     }
     if (obj.getSite() != null) {
       json.put("site", obj.getSite());

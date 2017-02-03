@@ -16,73 +16,74 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.net.{ClientOptionsBase => ExtClientOptionsBase}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
   */
+class NetClientOptions(private val _asJava: JNetClientOptions) 
+    extends ExtClientOptionsBase {
 
-class NetClientOptions(val asJava: JNetClientOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the connect timeout
     */
-  def setConnectTimeout(value: Int) = {
+  override def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout = {
-    asJava.getConnectTimeout()
+  override def getConnectTimeout: Int = {
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
   /**
     * Add a CRL path
     */
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
 
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -93,22 +94,22 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     asJava.setHostnameVerificationAlgorithm(value)
     this
   }
-  def getHostnameVerificationAlgorithm = {
-    asJava.getHostnameVerificationAlgorithm()
+  def getHostnameVerificationAlgorithm: String = {
+    asJava.getHostnameVerificationAlgorithm().asInstanceOf[String]
   }
 
   /**
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  override def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -116,7 +117,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
@@ -125,37 +126,37 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     * Set the local interface to bind for network connections. When the local address is null,
     * it will pick any local address, the default local address is null.
     */
-  def setLocalAddress(value: String) = {
+  override def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
     this
   }
-  def getLocalAddress = {
-    asJava.getLocalAddress()
+  override def getLocalAddress: String = {
+    asJava.getLocalAddress().asInstanceOf[String]
   }
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
     * Set the metrics name identifying the reported metrics, useful for grouping metrics
     * with the same name.
     */
-  def setMetricsName(value: String) = {
+  override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
-  def getMetricsName = {
-    asJava.getMetricsName()
+  override def getMetricsName: String = {
+    asJava.getMetricsName().asInstanceOf[String]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -163,7 +164,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
@@ -171,7 +172,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
@@ -179,7 +180,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
@@ -187,7 +188,7 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -195,23 +196,23 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
     */
-  def setProxyOptions(value: ProxyOptions) = {
+  override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
   }
-  def getProxyOptions = {
-    asJava.getProxyOptions()
+  override def getProxyOptions: ProxyOptions = {
+    ProxyOptions(asJava.getProxyOptions())
   }
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -221,8 +222,8 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     asJava.setReconnectAttempts(value)
     this
   }
-  def getReconnectAttempts = {
-    asJava.getReconnectAttempts()
+  def getReconnectAttempts: Int = {
+    asJava.getReconnectAttempts().asInstanceOf[Int]
   }
 
   /**
@@ -232,102 +233,102 @@ class NetClientOptions(val asJava: JNetClientOptions) {
     asJava.setReconnectInterval(value)
     this
   }
-  def getReconnectInterval = {
-    asJava.getReconnectInterval()
+  def getReconnectInterval: Long = {
+    asJava.getReconnectInterval().asInstanceOf[Long]
   }
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  override def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
 
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  override def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  override def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  override def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
     * Set whether all server certificates should be trusted
     */
-  def setTrustAll(value: Boolean) = {
+  override def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
-    asJava.isTrustAll()
+  override def isTrustAll: Boolean = {
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
@@ -335,23 +336,23 @@ class NetClientOptions(val asJava: JNetClientOptions) {
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  override def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  override def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 }
 
@@ -362,16 +363,18 @@ object NetClientOptions {
   }
   
   def apply(t: JNetClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new NetClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):NetClientOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): NetClientOptions = {
+    if (json != null) {
       new NetClientOptions(new JNetClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -16,18 +16,18 @@
 
 package io.vertx.scala.codegen.testmodel
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
 import io.vertx.core.json.JsonArray
+import io.vertx.codegen.testmodel.{DataObjectWithValues => JDataObjectWithValues}
 import io.vertx.core.json.JsonObject
 
 /**
   */
+class DataObjectWithValues(private val _asJava: JDataObjectWithValues) {
 
-class DataObjectWithValues(val asJava: JDataObjectWithValues) {
-
+  def asJava = _asJava
   def setBooleanValue(value: Boolean) = {
     asJava.setBooleanValue(value)
     this
@@ -80,11 +80,11 @@ class DataObjectWithValues(val asJava: JDataObjectWithValues) {
     asJava.setIntValue(value)
     this
   }
-  def setJsonArrayValue(value: JsonArray) = {
+  def setJsonArrayValue(value: io.vertx.core.json.JsonArray) = {
     asJava.setJsonArrayValue(value)
     this
   }
-  def setJsonObjectValue(value: JsonObject) = {
+  def setJsonObjectValue(value: io.vertx.core.json.JsonObject) = {
     asJava.setJsonObjectValue(value)
     this
   }
@@ -109,16 +109,18 @@ object DataObjectWithValues {
   }
   
   def apply(t: JDataObjectWithValues) = {
-    if(t != null)
+    if (t != null) {
       new DataObjectWithValues(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):DataObjectWithValues = {
-    if(json != null)
+  def fromJson(json: JsonObject): DataObjectWithValues = {
+    if (json != null) {
       new DataObjectWithValues(new JDataObjectWithValues(json))
-    else
+    } else {
       null
+    }
   }
 }

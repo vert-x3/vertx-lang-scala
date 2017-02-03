@@ -16,65 +16,107 @@
 
 package io.vertx.lang.scala
 
+import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
 import io.vertx.scala.core.{Context, Vertx}
 
-import scala.concurrent.{ExecutionContext, Promise}
+import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
+import scala.collection.JavaConverters._
+import scala.collection.mutable
 
 /**
-  * Base class for verticle implementiations.
+  * Base class for verticle implementations.
   *
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
-class ScalaVerticle {
+abstract class ScalaVerticle {
   protected implicit var executionContext:ExecutionContext = _
   protected var vertx: Vertx = _
   protected var ctx: Context = _
+  private var javaVerticle: AbstractVerticle = _
 
-  def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
+  /**
+    * Initialise the verticle.<p>
+    * This is called by Vert.x when the verticle instance is deployed. Don't call it yourself.
+    *
+    * @param vertx   the deploying Vert.x instance
+    * @param context the context of the verticle
+    */
+  def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context, verticle: AbstractVerticle): Unit = {
     this.vertx = new Vertx(vertx)
     this.ctx = new Context(context)
+    this.javaVerticle = verticle
     this.executionContext = VertxExecutionContext(this.vertx.getOrCreateContext())
   }
 
-  def stop(): Unit = {}
-
-  def start(): Unit = {}
-
-  def stop(stopPromise: concurrent.Promise[Unit]): Unit = {
-    stop()
-    stopPromise.success(())
+  /**
+    * Stop the verticle.<p>
+    * This is called by Vert.x when the verticle instance is un-deployed. Don't call it yourself.<p>
+    * If your verticle does things in it's shut-down which take some time then you can override this method
+    * and complete the futrue some time later when clean-up is complete.
+    *
+    * @return a future which should be completed when verticle clean-up is complete.
+    */
+  def stop(): concurrent.Future[Unit] = {
+    concurrent.Future.successful(())
   }
 
-  def start(startPromise: concurrent.Promise[Unit]): Unit = {
-    start()
-    startPromise.success(())
+  /**
+    * Start the verticle.<p>
+    * This is called by Vert.x when the verticle instance is deployed. Don't call it yourself.<p>
+    * If your verticle does things in it's startup which take some time then you can override this method
+    * and complete the future some time later when start up is complete.
+    *
+    * @return a future which should be completed when verticle start-up is complete.
+    */
+  def start(): concurrent.Future[Unit] = {
+    concurrent.Future.successful(())
   }
+
+  /**
+    * Get the deployment ID of the verticle deployment
+    *
+    * @return the deployment ID
+    */
+  def deploymentID: String = javaVerticle.deploymentID()
+
+  /**
+    * Get the configuration of the verticle.
+    * <p>
+    * This can be specified when the verticle is deployed.
+    *
+    * @return the configuration
+    */
+  def config: JsonObject = javaVerticle.config()
+
+  /**
+    * Get the arguments used when deploying the Vert.x process.
+    *
+    * @return the list of arguments
+    */
+  def processArgs: mutable.Buffer[String] = javaVerticle.processArgs().asScala
+
 
   def asJava(): Verticle = new AbstractVerticle {
-    val that = ScalaVerticle.this
+    private val that = ScalaVerticle.this
     override def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
       super.init(vertx, context)
-      ScalaVerticle.this.init(vertx, context)
+      ScalaVerticle.this.init(vertx, context, this)
     }
 
-    override def start(startFuture: Future[Void]) = {
-      val promise = Promise[Unit]()
-      promise.future.onComplete{
+    override final def start(startFuture: Future[Void]): Unit = {
+      that.start().onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
       }
-      that.start(promise)
     }
 
-    override def stop(stopFuture: Future[Void]) = {
-      val promise = Promise[Unit]()
-      promise.future.onComplete{
+    override final def stop(stopFuture: Future[Void]): Unit = {
+      that.stop().onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)
       }
-      that.stop(promise)
     }
   }
 }

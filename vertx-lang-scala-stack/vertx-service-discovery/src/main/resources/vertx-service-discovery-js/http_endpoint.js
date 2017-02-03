@@ -16,13 +16,14 @@
 
 /** @module vertx-service-discovery-js/http_endpoint */
 var utils = require('vertx-js/util/utils');
+var WebClient = require('vertx-web-client-js/web_client');
 var ServiceDiscovery = require('vertx-service-discovery-js/service_discovery');
 var HttpClient = require('vertx-js/http_client');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JHttpEndpoint = io.vertx.servicediscovery.types.HttpEndpoint;
-var Record = io.vertx.servicediscovery.Record;
+var JHttpEndpoint = Java.type('io.vertx.servicediscovery.types.HttpEndpoint');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 
@@ -131,6 +132,60 @@ HttpEndpoint.getClient = function() {
   }, utils.convParamJsonObject(__args[2]), function(ar) {
     if (ar.succeeded()) {
       __args[3](utils.convReturnVertxGen(HttpClient, ar.result()), null);
+    } else {
+      __args[3](null, ar.cause());
+    }
+  });
+  } else throw new TypeError('function invoked with invalid arguments');
+};
+
+/**
+ Convenient method that looks for a HTTP endpoint and provides the configured . The async result
+ is marked as failed is there are no matching services, or if the lookup fails. This method accepts a
+ configuration for the HTTP client.
+
+ @memberof module:vertx-service-discovery-js/http_endpoint
+ @param discovery {ServiceDiscovery} The service discovery instance 
+ @param filter {todo} The filter 
+ @param conf {Object} the configuration of the client 
+ @param resultHandler {function} The result handler 
+ */
+HttpEndpoint.getWebClient = function() {
+  var __args = arguments;
+  if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
+    JHttpEndpoint["getWebClient(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
+    if (ar.succeeded()) {
+      __args[2](utils.convReturnVertxGen(WebClient, ar.result()), null);
+    } else {
+      __args[2](null, ar.cause());
+    }
+  });
+  }else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function' && typeof __args[2] === 'function') {
+    JHttpEndpoint["getWebClient(io.vertx.servicediscovery.ServiceDiscovery,java.util.function.Function,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    var jRet = __args[1](utils.convReturnDataObject(jVal));
+    return jRet;
+  }, function(ar) {
+    if (ar.succeeded()) {
+      __args[2](utils.convReturnVertxGen(WebClient, ar.result()), null);
+    } else {
+      __args[2](null, ar.cause());
+    }
+  });
+  }else if (__args.length === 4 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
+    JHttpEndpoint["getWebClient(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), utils.convParamJsonObject(__args[2]), function(ar) {
+    if (ar.succeeded()) {
+      __args[3](utils.convReturnVertxGen(WebClient, ar.result()), null);
+    } else {
+      __args[3](null, ar.cause());
+    }
+  });
+  }else if (__args.length === 4 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function' && (typeof __args[2] === 'object' && __args[2] != null) && typeof __args[3] === 'function') {
+    JHttpEndpoint["getWebClient(io.vertx.servicediscovery.ServiceDiscovery,java.util.function.Function,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    var jRet = __args[1](utils.convReturnDataObject(jVal));
+    return jRet;
+  }, utils.convParamJsonObject(__args[2]), function(ar) {
+    if (ar.succeeded()) {
+      __args[3](utils.convReturnVertxGen(WebClient, ar.result()), null);
     } else {
       __args[3](null, ar.cause());
     }

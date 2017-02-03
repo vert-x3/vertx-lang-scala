@@ -17,70 +17,43 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
-import io.vertx.core.streams.{WriteStream => JWriteStream}
-import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.eventbus.{Message => JMessage}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 /**
   * Represents a stream of message that can be written to.
   * 
   */
-class MessageProducer[T](private val _asJava: JMessageProducer[T]) 
-    extends WriteStream[T] {
+class MessageProducer[T: TypeTag](private val _asJava: Object)
+    extends  WriteStream[T] {
 
-  def asJava: JMessageProducer[T] = _asJava
+  def asJava = _asJava
 
-  /**
-    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
-    */
-  def end(t: T): Unit = {
-    _asJava.end(t)
-  }
-
-  /**
-    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
-    * @return true if write queue is full
-    */
-  def writeQueueFull(): Boolean = {
-    _asJava.writeQueueFull()
-  }
-
-  /**
-    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
-    * @param message the message to send
-    * @return reference to this for fluency
-    */
-  def send(message: T): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.send(message))
-  }
-
-  def sendFuture[R](message: T): concurrent.Future[Message[R]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[R],Message[R]]((x => if (x == null) null else Message.apply[R](x)))
-    MessageProducer.apply[T](_asJava.send(message, promiseAndHandler._1))
-    promiseAndHandler._2.future
-  }
-
-  def exceptionHandler(handler: io.vertx.core.Handler[Throwable]): MessageProducer[T] = {
-    _asJava.exceptionHandler(funcToMappedHandler[java.lang.Throwable, Throwable](x => x)(handler))
+  override def exceptionHandler(handler: Handler[Throwable]): MessageProducer[T] = {
+    asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  def write(data: T): MessageProducer[T] = {
-    _asJava.write(data)
+  override def write(data: T): MessageProducer[T] = {
+    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data))
     this
   }
 
-  def setWriteQueueMaxSize(maxSize: Int): MessageProducer[T] = {
-    _asJava.setWriteQueueMaxSize(maxSize)
+  override def setWriteQueueMaxSize(maxSize: Int): MessageProducer[T] = {
+    asJava.asInstanceOf[JMessageProducer[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
-  def drainHandler(handler: io.vertx.core.Handler[Unit]): MessageProducer[T] = {
-    _asJava.drainHandler(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => handler.handle()))
+  override def drainHandler(handler: Handler[Unit]): MessageProducer[T] = {
+    asJava.asInstanceOf[JMessageProducer[Object]].drainHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -90,36 +63,67 @@ class MessageProducer[T](private val _asJava: JMessageProducer[T])
     * @return this producer object
     */
   def deliveryOptions(options: DeliveryOptions): MessageProducer[T] = {
-    _asJava.deliveryOptions(options.asJava)
+    asJava.asInstanceOf[JMessageProducer[Object]].deliveryOptions(options.asJava)
     this
+  }
+
+  /**
+    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+    */
+  override def end(t: T): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](t))
+  }
+
+  /**
+    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.eventbus.MessageProducer#setWriteQueueMaxSize]]
+    * @return true if write queue is full
+    */
+  override def writeQueueFull(): Boolean = {
+    asJava.asInstanceOf[JMessageProducer[Object]].writeQueueFull().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].
+    * @param message the message to send
+    * @return reference to this for fluency
+    */
+  def send(message: T): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send(toJava[T](message)))
+  }
+
+  def send[R: TypeTag](message: T, replyHandler: Handler[AsyncResult[Message[R]]]): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}))
   }
 
   /**
     * @return The address to which the producer produces messages.
     */
   def address(): String = {
-    _asJava.address()
+    asJava.asInstanceOf[JMessageProducer[Object]].address().asInstanceOf[String]
   }
 
   /**
     * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
     */
-  def end(): Unit = {
-    _asJava.end()
+  override def end(): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end()
   }
 
   /**
     * Closes the producer, this method should be called when the message producer is not used anymore.
     */
   def close(): Unit = {
-    _asJava.close()
+    asJava.asInstanceOf[JMessageProducer[Object]].close()
+  }
+
+  def sendFuture[R: TypeTag](message: T): scala.concurrent.Future[Message[R]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
 
 object MessageProducer {
-
-  def apply[T](_asJava: JMessageProducer[T]): MessageProducer[T] =
-    new MessageProducer(_asJava)
-
+  def apply[T: TypeTag](asJava: JMessageProducer[_]) = new MessageProducer[T](asJava)  
 }

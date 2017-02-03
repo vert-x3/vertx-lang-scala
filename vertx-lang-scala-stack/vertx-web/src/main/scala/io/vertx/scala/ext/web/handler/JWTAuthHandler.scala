@@ -17,34 +17,31 @@
 package io.vertx.scala.ext.web.handler
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
 import io.vertx.ext.web.handler.{JWTAuthHandler => JJWTAuthHandler}
 import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
 import io.vertx.scala.ext.auth.jwt.JWTAuth
+import io.vertx.scala.ext.web.RoutingContext
+import scala.collection.JavaConverters._
 
 /**
   * An auth handler that provides JWT Authentication support.
   */
-class JWTAuthHandler(private val _asJava: JJWTAuthHandler) 
-    extends AuthHandler {
+class JWTAuthHandler(private val _asJava: Object)
+    extends  AuthHandler {
 
-  def asJava: JJWTAuthHandler = _asJava
-
-  def handle(arg0: RoutingContext): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JRoutingContext])
-  }
+  def asJava = _asJava
 
   /**
     * Add a required authority for this auth handler
     * @param authority the authority
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthority(authority: String): AuthHandler = {
-    _asJava.addAuthority(authority)
+  override def addAuthority(authority: String): AuthHandler = {
+    asJava.asInstanceOf[JJWTAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
@@ -53,8 +50,8 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @param authorities the set of authorities
     * @return a reference to this, so the API can be used fluently
     */
-  def addAuthorities(authorities: Set[String]): AuthHandler = {
-    _asJava.addAuthorities(authorities.map(x => x:java.lang.String).asJava)
+  override def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
+    asJava.asInstanceOf[JJWTAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -64,7 +61,7 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @return a reference to this for fluency
     */
   def setAudience(audience: scala.collection.mutable.Buffer[String]): JWTAuthHandler = {
-    _asJava.setAudience(audience.map(x => x:java.lang.String).asJava)
+    asJava.asInstanceOf[JJWTAuthHandler].setAudience(audience.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
@@ -74,7 +71,7 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @return a reference to this for fluency
     */
   def setIssuer(issuer: String): JWTAuthHandler = {
-    _asJava.setIssuer(issuer)
+    asJava.asInstanceOf[JJWTAuthHandler].setIssuer(issuer.asInstanceOf[java.lang.String])
     this
   }
 
@@ -84,23 +81,34 @@ class JWTAuthHandler(private val _asJava: JJWTAuthHandler)
     * @return a reference to this for fluency
     */
   def setIgnoreExpiration(ignoreExpiration: Boolean): JWTAuthHandler = {
-    _asJava.setIgnoreExpiration(ignoreExpiration)
+    asJava.asInstanceOf[JJWTAuthHandler].setIgnoreExpiration(ignoreExpiration.asInstanceOf[java.lang.Boolean])
     this
+  }
+
+  override def handle(arg0: RoutingContext): Unit = {
+    asJava.asInstanceOf[JJWTAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
 }
 
 object JWTAuthHandler {
-
-  def apply(_asJava: JJWTAuthHandler): JWTAuthHandler =
-    new JWTAuthHandler(_asJava)
-
+  def apply(asJava: JJWTAuthHandler) = new JWTAuthHandler(asJava)  
+  /**
+    * Create a JWT auth handler
+    * @param authProvider the auth provider to use
+    * @return the auth handler
+    */
   def create(authProvider: JWTAuth): JWTAuthHandler = {
-    JWTAuthHandler.apply(io.vertx.ext.web.handler.JWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))
   }
 
+  /**
+    * Create a JWT auth handler
+    * @param authProvider the auth provider to use.
+    * @return the auth handler
+    */
   def create(authProvider: JWTAuth, skip: String): JWTAuthHandler = {
-    JWTAuthHandler.apply(io.vertx.ext.web.handler.JWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth], skip))
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth], skip.asInstanceOf[java.lang.String]))
   }
 
 }

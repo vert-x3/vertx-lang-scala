@@ -16,171 +16,186 @@
 
 package io.vertx.scala.ext.auth.oauth2
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
-import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
-import io.vertx.core.http.HttpVersion
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.json.JsonObject
-import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+import io.vertx.scala.core.http.{HttpClientOptions => ExtHttpClientOptions}
 import io.vertx.scala.core.http.Http2Settings
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
-import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
-import io.vertx.scala.core.net.JksOptions
-import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
-import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
-import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{ProxyOptions => JProxyOptions}
+import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
+import io.vertx.scala.core.net.JdkSSLEngineOptions
+import io.vertx.core.buffer.Buffer
+import io.vertx.scala.core.net.JksOptions
+import io.vertx.core.http.HttpVersion
+import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.OpenSSLEngineOptions
+import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
+import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.net.ProxyOptions
+import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.net.{ProxyOptions => JProxyOptions}
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Options describing how an OAuth2  will make connections.
   */
+class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) 
+    extends ExtHttpClientOptions(_asJava) {
 
-class OAuth2ClientOptions(val asJava: JOAuth2ClientOptions) {
-
-  def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
+  override def asJava = _asJava
+  override def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
     asJava.setAlpnVersions(value.asJava)
     this
   }
-  def getAlpnVersions = {
-    asJava.getAlpnVersions()
+  override def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
+    asJava.getAlpnVersions().asScala.map(x => x)
   }
   def setAuthorizationPath(value: String) = {
     asJava.setAuthorizationPath(value)
     this
   }
-  def getAuthorizationPath = {
-    asJava.getAuthorizationPath()
+  def getAuthorizationPath: String = {
+    asJava.getAuthorizationPath().asInstanceOf[String]
   }
   def setClientID(value: String) = {
     asJava.setClientID(value)
     this
   }
-  def getClientID = {
-    asJava.getClientID()
+  def getClientID: String = {
+    asJava.getClientID().asInstanceOf[String]
   }
   def setClientSecret(value: String) = {
     asJava.setClientSecret(value)
     this
   }
-  def getClientSecret = {
-    asJava.getClientSecret()
+  def getClientSecret: String = {
+    asJava.getClientSecret().asInstanceOf[String]
   }
   def setClientSecretParameterName(value: String) = {
     asJava.setClientSecretParameterName(value)
     this
   }
-  def getClientSecretParameterName = {
-    asJava.getClientSecretParameterName()
+  def getClientSecretParameterName: String = {
+    asJava.getClientSecretParameterName().asInstanceOf[String]
   }
-  def setConnectTimeout(value: Int) = {
+  override def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout = {
-    asJava.getConnectTimeout()
+  override def getConnectTimeout: Int = {
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
-  def setDefaultHost(value: String) = {
+  override def setDefaultHost(value: String) = {
     asJava.setDefaultHost(value)
     this
   }
-  def getDefaultHost = {
-    asJava.getDefaultHost()
+  override def getDefaultHost: String = {
+    asJava.getDefaultHost().asInstanceOf[String]
   }
-  def setDefaultPort(value: Int) = {
+  override def setDefaultPort(value: Int) = {
     asJava.setDefaultPort(value)
     this
   }
-  def getDefaultPort = {
-    asJava.getDefaultPort()
+  override def getDefaultPort: Int = {
+    asJava.getDefaultPort().asInstanceOf[Int]
   }
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
-  def setHeaders(value: JsonObject) = {
+  def setExtraParameters(value: io.vertx.core.json.JsonObject) = {
+    asJava.setExtraParameters(value)
+    this
+  }
+  def getExtraParameters: io.vertx.core.json.JsonObject = {
+    asJava.getExtraParameters()
+  }
+  def setHeaders(value: io.vertx.core.json.JsonObject) = {
     asJava.setHeaders(value)
     this
   }
-  def getHeaders = {
+  def getHeaders: io.vertx.core.json.JsonObject = {
     asJava.getHeaders()
   }
-  def setHttp2ClearTextUpgrade(value: Boolean) = {
+  override def setHttp2ClearTextUpgrade(value: Boolean) = {
     asJava.setHttp2ClearTextUpgrade(value)
     this
   }
-  def isHttp2ClearTextUpgrade = {
-    asJava.isHttp2ClearTextUpgrade()
+  override def isHttp2ClearTextUpgrade: Boolean = {
+    asJava.isHttp2ClearTextUpgrade().asInstanceOf[Boolean]
   }
-  def setHttp2ConnectionWindowSize(value: Int) = {
+  override def setHttp2ConnectionWindowSize(value: Int) = {
     asJava.setHttp2ConnectionWindowSize(value)
     this
   }
-  def getHttp2ConnectionWindowSize = {
-    asJava.getHttp2ConnectionWindowSize()
+  override def getHttp2ConnectionWindowSize: Int = {
+    asJava.getHttp2ConnectionWindowSize().asInstanceOf[Int]
   }
-  def setHttp2MaxPoolSize(value: Int) = {
+  override def setHttp2MaxPoolSize(value: Int) = {
     asJava.setHttp2MaxPoolSize(value)
     this
   }
-  def getHttp2MaxPoolSize = {
-    asJava.getHttp2MaxPoolSize()
+  override def getHttp2MaxPoolSize: Int = {
+    asJava.getHttp2MaxPoolSize().asInstanceOf[Int]
   }
-  def setHttp2MultiplexingLimit(value: Int) = {
+  override def setHttp2MultiplexingLimit(value: Int) = {
     asJava.setHttp2MultiplexingLimit(value)
     this
   }
-  def getHttp2MultiplexingLimit = {
-    asJava.getHttp2MultiplexingLimit()
+  override def getHttp2MultiplexingLimit: Int = {
+    asJava.getHttp2MultiplexingLimit().asInstanceOf[Int]
   }
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  override def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
-  def setInitialSettings(value: Http2Settings) = {
+  override def setInitialSettings(value: Http2Settings) = {
     asJava.setInitialSettings(value.asJava)
     this
   }
-  def getInitialSettings = {
-    asJava.getInitialSettings()
+  override def getInitialSettings: Http2Settings = {
+    Http2Settings(asJava.getInitialSettings())
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  def setIntrospectionPath(value: String) = {
+    asJava.setIntrospectionPath(value)
+    this
+  }
+  def getIntrospectionPath: String = {
+    asJava.getIntrospectionPath().asInstanceOf[String]
+  }
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -188,267 +203,302 @@ class OAuth2ClientOptions(val asJava: JOAuth2ClientOptions) {
     asJava.setJwtToken(value)
     this
   }
-  def isJwtToken = {
-    asJava.isJwtToken()
+  def isJwtToken: Boolean = {
+    asJava.isJwtToken().asInstanceOf[Boolean]
   }
-  def setKeepAlive(value: Boolean) = {
+  override def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
     this
   }
-  def isKeepAlive = {
-    asJava.isKeepAlive()
+  override def isKeepAlive: Boolean = {
+    asJava.isKeepAlive().asInstanceOf[Boolean]
   }
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
-  def setLocalAddress(value: String) = {
+  override def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
     this
   }
-  def getLocalAddress = {
-    asJava.getLocalAddress()
+  override def getLocalAddress: String = {
+    asJava.getLocalAddress().asInstanceOf[String]
   }
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
   def setLogoutPath(value: String) = {
     asJava.setLogoutPath(value)
     this
   }
-  def getLogoutPath = {
-    asJava.getLogoutPath()
+  def getLogoutPath: String = {
+    asJava.getLogoutPath().asInstanceOf[String]
   }
-  def setMaxChunkSize(value: Int) = {
+  override def setMaxChunkSize(value: Int) = {
     asJava.setMaxChunkSize(value)
     this
   }
-  def getMaxChunkSize = {
-    asJava.getMaxChunkSize()
+  override def getMaxChunkSize: Int = {
+    asJava.getMaxChunkSize().asInstanceOf[Int]
   }
-  def setMaxPoolSize(value: Int) = {
+  override def setMaxHeaderSize(value: Int) = {
+    asJava.setMaxHeaderSize(value)
+    this
+  }
+  override def getMaxHeaderSize: Int = {
+    asJava.getMaxHeaderSize().asInstanceOf[Int]
+  }
+  override def setMaxInitialLineLength(value: Int) = {
+    asJava.setMaxInitialLineLength(value)
+    this
+  }
+  override def getMaxInitialLineLength: Int = {
+    asJava.getMaxInitialLineLength().asInstanceOf[Int]
+  }
+  override def setMaxPoolSize(value: Int) = {
     asJava.setMaxPoolSize(value)
     this
   }
-  def getMaxPoolSize = {
-    asJava.getMaxPoolSize()
+  override def getMaxPoolSize: Int = {
+    asJava.getMaxPoolSize().asInstanceOf[Int]
   }
-  def setMaxWaitQueueSize(value: Int) = {
+  override def setMaxWaitQueueSize(value: Int) = {
     asJava.setMaxWaitQueueSize(value)
     this
   }
-  def getMaxWaitQueueSize = {
-    asJava.getMaxWaitQueueSize()
+  override def getMaxWaitQueueSize: Int = {
+    asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
-  def setMaxWebsocketFrameSize(value: Int) = {
+  override def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
   }
-  def getMaxWebsocketFrameSize = {
-    asJava.getMaxWebsocketFrameSize()
+  override def getMaxWebsocketFrameSize: Int = {
+    asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
-  def setMetricsName(value: String) = {
+  override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
-  def getMetricsName = {
-    asJava.getMetricsName()
+  override def getMetricsName: String = {
+    asJava.getMetricsName().asInstanceOf[String]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
-  def setPipelining(value: Boolean) = {
+  override def setPipelining(value: Boolean) = {
     asJava.setPipelining(value)
     this
   }
-  def isPipelining = {
-    asJava.isPipelining()
+  override def isPipelining: Boolean = {
+    asJava.isPipelining().asInstanceOf[Boolean]
   }
-  def setPipeliningLimit(value: Int) = {
+  override def setPipeliningLimit(value: Int) = {
     asJava.setPipeliningLimit(value)
     this
   }
-  def getPipeliningLimit = {
-    asJava.getPipeliningLimit()
+  override def getPipeliningLimit: Int = {
+    asJava.getPipeliningLimit().asInstanceOf[Int]
   }
-  def setProtocolVersion(value: io.vertx.core.http.HttpVersion) = {
+  def setPrivateKey(value: String) = {
+    asJava.setPrivateKey(value)
+    this
+  }
+  def getPrivateKey: String = {
+    asJava.getPrivateKey().asInstanceOf[String]
+  }
+  override def setProtocolVersion(value: io.vertx.core.http.HttpVersion) = {
     asJava.setProtocolVersion(value)
     this
   }
-  def getProtocolVersion = {
+  override def getProtocolVersion: io.vertx.core.http.HttpVersion = {
     asJava.getProtocolVersion()
   }
-  def setProxyOptions(value: ProxyOptions) = {
+  override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
   }
-  def getProxyOptions = {
-    asJava.getProxyOptions()
+  override def getProxyOptions: ProxyOptions = {
+    ProxyOptions(asJava.getProxyOptions())
   }
   def setPublicKey(value: String) = {
     asJava.setPublicKey(value)
     this
   }
-  def getPublicKey = {
-    asJava.getPublicKey()
+  def getPublicKey: String = {
+    asJava.getPublicKey().asInstanceOf[String]
   }
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
   def setRevocationPath(value: String) = {
     asJava.setRevocationPath(value)
     this
   }
-  def getRevocationPath = {
-    asJava.getRevocationPath()
+  def getRevocationPath: String = {
+    asJava.getRevocationPath().asInstanceOf[String]
   }
-  def setSendBufferSize(value: Int) = {
+  def setScopeSeparator(value: String) = {
+    asJava.setScopeSeparator(value)
+    this
+  }
+  def getScopeSeparator: String = {
+    asJava.getScopeSeparator().asInstanceOf[String]
+  }
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
+  }
+  override def setSendUnmaskedFrames(value: Boolean) = {
+    asJava.setSendUnmaskedFrames(value)
+    this
+  }
+  override def isSendUnmaskedFrames: Boolean = {
+    asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
   }
   def setSite(value: String) = {
     asJava.setSite(value)
     this
   }
-  def getSite = {
-    asJava.getSite()
+  def getSite: String = {
+    asJava.getSite().asInstanceOf[String]
   }
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  override def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  override def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  override def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  override def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
   def setTokenPath(value: String) = {
     asJava.setTokenPath(value)
     this
   }
-  def getTokenPath = {
-    asJava.getTokenPath()
+  def getTokenPath: String = {
+    asJava.getTokenPath().asInstanceOf[String]
   }
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
-  def setTrustAll(value: Boolean) = {
+  override def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
-    asJava.isTrustAll()
+  override def isTrustAll: Boolean = {
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
-  def setTryUseCompression(value: Boolean) = {
+  override def setTryUseCompression(value: Boolean) = {
     asJava.setTryUseCompression(value)
     this
   }
-  def isTryUseCompression = {
-    asJava.isTryUseCompression()
+  override def isTryUseCompression: Boolean = {
+    asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  override def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
   def setUseBasicAuthorizationHeader(value: Boolean) = {
     asJava.setUseBasicAuthorizationHeader(value)
     this
   }
-  def isUseBasicAuthorizationHeader = {
-    asJava.isUseBasicAuthorizationHeader()
+  def isUseBasicAuthorizationHeader: Boolean = {
+    asJava.isUseBasicAuthorizationHeader().asInstanceOf[Boolean]
   }
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  override def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
   def setUserAgent(value: String) = {
     asJava.setUserAgent(value)
     this
   }
-  def getUserAgent = {
-    asJava.getUserAgent()
+  def getUserAgent: String = {
+    asJava.getUserAgent().asInstanceOf[String]
   }
   def setUserInfoPath(value: String) = {
     asJava.setUserInfoPath(value)
     this
   }
-  def getUserInfoPath = {
-    asJava.getUserInfoPath()
+  def getUserInfoPath: String = {
+    asJava.getUserInfoPath().asInstanceOf[String]
   }
-  def setVerifyHost(value: Boolean) = {
+  override def setVerifyHost(value: Boolean) = {
     asJava.setVerifyHost(value)
     this
   }
-  def isVerifyHost = {
-    asJava.isVerifyHost()
+  override def isVerifyHost: Boolean = {
+    asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 }
 
@@ -459,16 +509,18 @@ object OAuth2ClientOptions {
   }
   
   def apply(t: JOAuth2ClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new OAuth2ClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):OAuth2ClientOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): OAuth2ClientOptions = {
+    if (json != null) {
       new OAuth2ClientOptions(new JOAuth2ClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

@@ -16,20 +16,20 @@
 
 package io.vertx.scala.ext.auth.mongo
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
 import io.vertx.ext.auth.mongo.{MongoAuthOptions => JMongoAuthOptions}
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
-import io.vertx.scala.ext.auth.AuthOptions
 
 /**
   * Options configuring Mongo authentication.
   */
+class MongoAuthOptions(private val _asJava: JMongoAuthOptions) 
+    extends ExtAuthOptions {
 
-class MongoAuthOptions(val asJava: JMongoAuthOptions) {
-
+  def asJava = _asJava
 
   /**
     * The property name to be used to set the name of the collection inside the config.
@@ -38,18 +38,18 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setCollectionName(value)
     this
   }
-  def getCollectionName = {
-    asJava.getCollectionName()
+  def getCollectionName: String = {
+    asJava.getCollectionName().asInstanceOf[String]
   }
 
   /**
     * The mongo client configuration: see Mongo Client documentation.
     */
-  def setConfig(value: JsonObject) = {
+  def setConfig(value: io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
   }
-  def getConfig = {
+  def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
@@ -60,8 +60,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setDatasourceName(value)
     this
   }
-  def getDatasourceName = {
-    asJava.getDatasourceName()
+  def getDatasourceName: String = {
+    asJava.getDatasourceName().asInstanceOf[String]
   }
 
   /**
@@ -71,8 +71,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setPasswordField(value)
     this
   }
-  def getPasswordField = {
-    asJava.getPasswordField()
+  def getPasswordField: String = {
+    asJava.getPasswordField().asInstanceOf[String]
   }
 
   /**
@@ -82,8 +82,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setPermissionField(value)
     this
   }
-  def getPermissionField = {
-    asJava.getPermissionField()
+  def getPermissionField: String = {
+    asJava.getPermissionField().asInstanceOf[String]
   }
 
   /**
@@ -93,8 +93,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setRoleField(value)
     this
   }
-  def getRoleField = {
-    asJava.getRoleField()
+  def getRoleField: String = {
+    asJava.getRoleField().asInstanceOf[String]
   }
 
   /**
@@ -104,8 +104,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setSaltField(value)
     this
   }
-  def getSaltField = {
-    asJava.getSaltField()
+  def getSaltField: String = {
+    asJava.getSaltField().asInstanceOf[String]
   }
 
   /**
@@ -115,7 +115,7 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setSaltStyle(value)
     this
   }
-  def getSaltStyle = {
+  def getSaltStyle: io.vertx.ext.auth.mongo.HashSaltStyle = {
     asJava.getSaltStyle()
   }
 
@@ -126,8 +126,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setShared(value)
     this
   }
-  def getShared = {
-    asJava.getShared()
+  def getShared: Boolean = {
+    asJava.getShared().asInstanceOf[Boolean]
   }
 
   /**
@@ -137,8 +137,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setUsernameCredentialField(value)
     this
   }
-  def getUsernameCredentialField = {
-    asJava.getUsernameCredentialField()
+  def getUsernameCredentialField: String = {
+    asJava.getUsernameCredentialField().asInstanceOf[String]
   }
 
   /**
@@ -148,8 +148,8 @@ class MongoAuthOptions(val asJava: JMongoAuthOptions) {
     asJava.setUsernameField(value)
     this
   }
-  def getUsernameField = {
-    asJava.getUsernameField()
+  def getUsernameField: String = {
+    asJava.getUsernameField().asInstanceOf[String]
   }
 }
 
@@ -160,16 +160,18 @@ object MongoAuthOptions {
   }
   
   def apply(t: JMongoAuthOptions) = {
-    if(t != null)
+    if (t != null) {
       new MongoAuthOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):MongoAuthOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): MongoAuthOptions = {
+    if (json != null) {
       new MongoAuthOptions(new JMongoAuthOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

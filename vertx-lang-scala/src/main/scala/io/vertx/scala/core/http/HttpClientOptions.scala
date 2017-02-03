@@ -16,33 +16,34 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.scala.core.net.{ClientOptionsBase => ExtClientOptionsBase}
+import io.vertx.scala.core.net.PemKeyCertOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.scala.core.net.PfxOptions
 import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PfxOptions
-import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.scala.core.net.ProxyOptions
+import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
+import io.vertx.core.net.{ProxyOptions => JProxyOptions}
+import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
   * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connections.
   */
+class HttpClientOptions(private val _asJava: JHttpClientOptions) 
+    extends ExtClientOptionsBase {
 
-class HttpClientOptions(val asJava: JHttpClientOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiation.
@@ -57,41 +58,41 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setAlpnVersions(value.asJava)
     this
   }
-  def getAlpnVersions = {
-    asJava.getAlpnVersions()
+  def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
+    asJava.getAlpnVersions().asScala.map(x => x)
   }
 
   /**
     * Set the connect timeout
     */
-  def setConnectTimeout(value: Int) = {
+  override def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout = {
-    asJava.getConnectTimeout()
+  override def getConnectTimeout: Int = {
+    asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
   /**
     * Add a CRL path
     */
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths = {
-    asJava.getCrlPaths()
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Add a CRL value
     */
-  def addCrlValue(value: Buffer) = {
-    asJava.addCrlValue(value.asJava)
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.addCrlValue(value)
     this
   }
-  def getCrlValues = {
-    asJava.getCrlValues()
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCrlValues().asScala.map(x => x)
   }
 
   /**
@@ -101,8 +102,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setDefaultHost(value)
     this
   }
-  def getDefaultHost = {
-    asJava.getDefaultHost()
+  def getDefaultHost: String = {
+    asJava.getDefaultHost().asInstanceOf[String]
   }
 
   /**
@@ -112,30 +113,30 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setDefaultPort(value)
     this
   }
-  def getDefaultPort = {
-    asJava.getDefaultPort()
+  def getDefaultPort: Int = {
+    asJava.getDefaultPort().asInstanceOf[Int]
   }
 
   /**
     * Add an enabled cipher suite, appended to the ordered suites.
     */
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites = {
-    asJava.getEnabledCipherSuites()
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
     */
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols = {
-    asJava.getEnabledSecureTransportProtocols()
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -146,8 +147,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setHttp2ClearTextUpgrade(value)
     this
   }
-  def isHttp2ClearTextUpgrade = {
-    asJava.isHttp2ClearTextUpgrade()
+  def isHttp2ClearTextUpgrade: Boolean = {
+    asJava.isHttp2ClearTextUpgrade().asInstanceOf[Boolean]
   }
 
   /**
@@ -161,8 +162,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setHttp2ConnectionWindowSize(value)
     this
   }
-  def getHttp2ConnectionWindowSize = {
-    asJava.getHttp2ConnectionWindowSize()
+  def getHttp2ConnectionWindowSize: Int = {
+    asJava.getHttp2ConnectionWindowSize().asInstanceOf[Int]
   }
 
   /**
@@ -172,8 +173,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setHttp2MaxPoolSize(value)
     this
   }
-  def getHttp2MaxPoolSize = {
-    asJava.getHttp2MaxPoolSize()
+  def getHttp2MaxPoolSize: Int = {
+    asJava.getHttp2MaxPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -188,20 +189,20 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setHttp2MultiplexingLimit(value)
     this
   }
-  def getHttp2MultiplexingLimit = {
-    asJava.getHttp2MultiplexingLimit()
+  def getHttp2MultiplexingLimit: Int = {
+    asJava.getHttp2MultiplexingLimit().asInstanceOf[Int]
   }
 
   /**
     * Set the idle timeout, in seconds. zero means don't timeout.
     * This determines if a connection will timeout and be closed if no data is received within the timeout.
     */
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout = {
-    asJava.getIdleTimeout()
+  override def getIdleTimeout: Int = {
+    asJava.getIdleTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -211,10 +212,10 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setInitialSettings(value.asJava)
     this
   }
-  def getInitialSettings = {
-    asJava.getInitialSettings()
+  def getInitialSettings: Http2Settings = {
+    Http2Settings(asJava.getInitialSettings())
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
@@ -226,14 +227,14 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setKeepAlive(value)
     this
   }
-  def isKeepAlive = {
-    asJava.isKeepAlive()
+  def isKeepAlive: Boolean = {
+    asJava.isKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
@@ -242,23 +243,23 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     * Set the local interface to bind for network connections. When the local address is null,
     * it will pick any local address, the default local address is null.
     */
-  def setLocalAddress(value: String) = {
+  override def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
     this
   }
-  def getLocalAddress = {
-    asJava.getLocalAddress()
+  override def getLocalAddress: String = {
+    asJava.getLocalAddress().asInstanceOf[String]
   }
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
     */
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity = {
-    asJava.getLogActivity()
+  override def getLogActivity: Boolean = {
+    asJava.getLogActivity().asInstanceOf[Boolean]
   }
 
   /**
@@ -268,8 +269,30 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setMaxChunkSize(value)
     this
   }
-  def getMaxChunkSize = {
-    asJava.getMaxChunkSize()
+  def getMaxChunkSize: Int = {
+    asJava.getMaxChunkSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set the maximum length of all headers for HTTP/1.x .
+    */
+  def setMaxHeaderSize(value: Int) = {
+    asJava.setMaxHeaderSize(value)
+    this
+  }
+  def getMaxHeaderSize: Int = {
+    asJava.getMaxHeaderSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set the maximum length of the initial line for HTTP/1.x (e.g. `"HTTP/1.1 200 OK"`)
+    */
+  def setMaxInitialLineLength(value: Int) = {
+    asJava.setMaxInitialLineLength(value)
+    this
+  }
+  def getMaxInitialLineLength: Int = {
+    asJava.getMaxInitialLineLength().asInstanceOf[Int]
   }
 
   /**
@@ -279,8 +302,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setMaxPoolSize(value)
     this
   }
-  def getMaxPoolSize = {
-    asJava.getMaxPoolSize()
+  def getMaxPoolSize: Int = {
+    asJava.getMaxPoolSize().asInstanceOf[Int]
   }
 
   /**
@@ -291,8 +314,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setMaxWaitQueueSize(value)
     this
   }
-  def getMaxWaitQueueSize = {
-    asJava.getMaxWaitQueueSize()
+  def getMaxWaitQueueSize: Int = {
+    asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
 
   /**
@@ -302,22 +325,22 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setMaxWebsocketFrameSize(value)
     this
   }
-  def getMaxWebsocketFrameSize = {
-    asJava.getMaxWebsocketFrameSize()
+  def getMaxWebsocketFrameSize: Int = {
+    asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
 
   /**
     * Set the metrics name identifying the reported metrics, useful for grouping metrics
     * with the same name.
     */
-  def setMetricsName(value: String) = {
+  override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
-  def getMetricsName = {
-    asJava.getMetricsName()
+  override def getMetricsName: String = {
+    asJava.getMetricsName().asInstanceOf[String]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
@@ -325,7 +348,7 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   /**
     * Set the key/cert store options in pem format.
     */
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
@@ -333,7 +356,7 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   /**
     * Set the trust options in pem format
     */
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
@@ -341,7 +364,7 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   /**
     * Set the key/cert options in pfx format.
     */
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
@@ -349,7 +372,7 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
   /**
     * Set the trust options in pfx format
     */
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
@@ -361,8 +384,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setPipelining(value)
     this
   }
-  def isPipelining = {
-    asJava.isPipelining()
+  def isPipelining: Boolean = {
+    asJava.isPipelining().asInstanceOf[Boolean]
   }
 
   /**
@@ -372,8 +395,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setPipeliningLimit(value)
     this
   }
-  def getPipeliningLimit = {
-    asJava.getPipeliningLimit()
+  def getPipeliningLimit: Int = {
+    asJava.getPipeliningLimit().asInstanceOf[Int]
   }
 
   /**
@@ -383,124 +406,137 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setProtocolVersion(value)
     this
   }
-  def getProtocolVersion = {
+  def getProtocolVersion: io.vertx.core.http.HttpVersion = {
     asJava.getProtocolVersion()
   }
 
   /**
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
     */
-  def setProxyOptions(value: ProxyOptions) = {
+  override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
   }
-  def getProxyOptions = {
-    asJava.getProxyOptions()
+  override def getProxyOptions: ProxyOptions = {
+    ProxyOptions(asJava.getProxyOptions())
   }
 
   /**
     * Set the TCP receive buffer size
     */
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize = {
-    asJava.getReceiveBufferSize()
+  override def getReceiveBufferSize: Int = {
+    asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
 
   /**
     * Set the value of reuse address
     */
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress = {
-    asJava.isReuseAddress()
+  override def isReuseAddress: Boolean = {
+    asJava.isReuseAddress().asInstanceOf[Boolean]
   }
 
   /**
     * Set the TCP send buffer size
     */
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize = {
-    asJava.getSendBufferSize()
+  override def getSendBufferSize: Int = {
+    asJava.getSendBufferSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set true when the client wants to skip frame masking.
+    * You may want to set it true on server by server websocket communication: In this case you are by passing RFC6455 protocol.
+    * It's false as default.
+    */
+  def setSendUnmaskedFrames(value: Boolean) = {
+    asJava.setSendUnmaskedFrames(value)
+    this
+  }
+  def isSendUnmaskedFrames: Boolean = {
+    asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether SO_linger keep alive is enabled
     */
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger = {
-    asJava.getSoLinger()
+  override def getSoLinger: Int = {
+    asJava.getSoLinger().asInstanceOf[Int]
   }
 
   /**
     * Set whether SSL/TLS is enabled
     */
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl = {
-    asJava.isSsl()
+  override def isSsl: Boolean = {
+    asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether TCP keep alive is enabled
     */
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive = {
-    asJava.isTcpKeepAlive()
+  override def isTcpKeepAlive: Boolean = {
+    asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether TCP no delay is enabled
     */
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay = {
-    asJava.isTcpNoDelay()
+  override def isTcpNoDelay: Boolean = {
+    asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
 
   /**
     * Set the value of traffic class
     */
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass = {
-    asJava.getTrafficClass()
+  override def getTrafficClass: Int = {
+    asJava.getTrafficClass().asInstanceOf[Int]
   }
 
   /**
     * Set whether all server certificates should be trusted
     */
-  def setTrustAll(value: Boolean) = {
+  override def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll = {
-    asJava.isTrustAll()
+  override def isTrustAll: Boolean = {
+    asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
     * Set the trust options in jks format, aka Java trustore
     */
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
@@ -512,30 +548,30 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setTryUseCompression(value)
     this
   }
-  def isTryUseCompression = {
-    asJava.isTryUseCompression()
+  def isTryUseCompression: Boolean = {
+    asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
 
   /**
     * Set the ALPN usage.
     */
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn = {
-    asJava.isUseAlpn()
+  override def isUseAlpn: Boolean = {
+    asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
   /**
     * Set whether Netty pooled buffers are enabled
     */
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers = {
-    asJava.isUsePooledBuffers()
+  override def isUsePooledBuffers: Boolean = {
+    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**
@@ -545,8 +581,8 @@ class HttpClientOptions(val asJava: JHttpClientOptions) {
     asJava.setVerifyHost(value)
     this
   }
-  def isVerifyHost = {
-    asJava.isVerifyHost()
+  def isVerifyHost: Boolean = {
+    asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 }
 
@@ -557,16 +593,18 @@ object HttpClientOptions {
   }
   
   def apply(t: JHttpClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new HttpClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):HttpClientOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): HttpClientOptions = {
+    if (json != null) {
       new HttpClientOptions(new JHttpClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

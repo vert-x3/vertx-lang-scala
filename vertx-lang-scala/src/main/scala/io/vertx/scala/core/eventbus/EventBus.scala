@@ -17,16 +17,19 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.core.eventbus.{EventBus => JEventBus}
-import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
-import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.eventbus.{EventBus => JEventBus}
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 
 /**
   * A Vert.x event-bus is a light-weight distributed messaging system which allows different parts of your application,
@@ -38,18 +41,10 @@ import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
   * 
   * Please refer to the documentation for more information on the event bus.
   */
-class EventBus(private val _asJava: JEventBus) 
-    extends Measured {
+class EventBus(private val _asJava: Object)
+    extends  Measured {
 
-  def asJava: JEventBus = _asJava
-
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean = {
-    _asJava.isMetricsEnabled()
-  }
+  def asJava = _asJava
 
   /**
     * Sends a message.
@@ -60,7 +55,7 @@ class EventBus(private val _asJava: JEventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String, message: AnyRef): EventBus = {
-    _asJava.send(address, message)
+    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String], message)
     this
   }
 
@@ -69,12 +64,12 @@ class EventBus(private val _asJava: JEventBus)
     * subsequently replies to the message.
     * @param address the address to send it to
     * @param message the message, may be `null`
-    * @return reply future will be called when any reply from the recipient is received, may be `null`
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
+    * @return a reference to this, so the API can be used fluently
     */
-  def sendFuture[T](address: String, message: AnyRef): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
-    _asJava.send(address, message, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def send[T: TypeTag](address: String, message: AnyRef, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
+    this
   }
 
   /**
@@ -85,7 +80,7 @@ class EventBus(private val _asJava: JEventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def send(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
-    _asJava.send(address, message, options.asJava)
+    asJava.asInstanceOf[JEventBus].send(address.asInstanceOf[java.lang.String], message, options.asJava)
     this
   }
 
@@ -95,12 +90,12 @@ class EventBus(private val _asJava: JEventBus)
     * @param address the address to send it to
     * @param message the message, may be `null`
     * @param options delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-    * @return reply future will be called when any reply from the recipient is received, may be `null`
+    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
+    * @return a reference to this, so the API can be used fluently
     */
-  def sendFuture[T](address: String, message: AnyRef, options: DeliveryOptions): concurrent.Future[Message[T]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[T],Message[T]]((x => if (x == null) null else Message.apply[T](x)))
-    _asJava.send(address, message, options.asJava, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def send[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
+    this
   }
 
   /**
@@ -111,7 +106,7 @@ class EventBus(private val _asJava: JEventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String, message: AnyRef): EventBus = {
-    _asJava.publish(address, message)
+    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String], message)
     this
   }
 
@@ -123,8 +118,16 @@ class EventBus(private val _asJava: JEventBus)
     * @return a reference to this, so the API can be used fluently
     */
   def publish(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
-    _asJava.publish(address, message, options.asJava)
+    asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String], message, options.asJava)
     this
+  }
+
+  /**
+    * Whether the metrics are enabled for this measured object
+    * @return true if the metrics are enabled
+    */
+  override def isMetricsEnabled(): Boolean = {
+    asJava.asInstanceOf[JEventBus].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
   /**
@@ -136,8 +139,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param address the address that it will register it at
     * @return the event bus message consumer
     */
-  def consumer[T](address: String): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.consumer(address))
+  def consumer[T: TypeTag](address: String): MessageConsumer[T] = {
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[Object](address.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -146,8 +149,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def consumer[T](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.consumer(address, funcToMappedHandler(Message.apply[T])(handler)))
+  def consumer[T: TypeTag](address: String, handler: Handler[Message[T]]): MessageConsumer[T] = {
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[Object](address.asInstanceOf[java.lang.String], {x: JMessage[Object] => handler.handle(Message[T](x))}))
   }
 
   /**
@@ -155,8 +158,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param address the address to register it at
     * @return the event bus message consumer
     */
-  def localConsumer[T](address: String): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.localConsumer(address))
+  def localConsumer[T: TypeTag](address: String): MessageConsumer[T] = {
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[Object](address.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -165,8 +168,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param handler the handler that will process the received messages
     * @return the event bus message consumer
     */
-  def localConsumer[T](address: String, handler: io.vertx.core.Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer.apply[T](_asJava.localConsumer(address, funcToMappedHandler(Message.apply[T])(handler)))
+  def localConsumer[T: TypeTag](address: String, handler: Handler[Message[T]]): MessageConsumer[T] = {
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[Object](address.asInstanceOf[java.lang.String], {x: JMessage[Object] => handler.handle(Message[T](x))}))
   }
 
   /**
@@ -178,8 +181,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param address the address to send it to
     * @return The sender
     */
-  def sender[T](address: String): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.sender(address))
+  def sender[T: TypeTag](address: String): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[Object](address.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -189,8 +192,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return The sender
     */
-  def sender[T](address: String, options: DeliveryOptions): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.sender(address, options.asJava))
+  def sender[T: TypeTag](address: String, options: DeliveryOptions): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].sender[Object](address.asInstanceOf[java.lang.String], options.asJava))
   }
 
   /**
@@ -202,8 +205,8 @@ class EventBus(private val _asJava: JEventBus)
     * @param address The address to publish it to
     * @return The publisher
     */
-  def publisher[T](address: String): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.publisher(address))
+  def publisher[T: TypeTag](address: String): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[Object](address.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -213,15 +216,30 @@ class EventBus(private val _asJava: JEventBus)
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
     * @return The publisher
     */
-  def publisher[T](address: String, options: DeliveryOptions): MessageProducer[T] = {
-    MessageProducer.apply[T](_asJava.publisher(address, options.asJava))
+  def publisher[T: TypeTag](address: String, options: DeliveryOptions): MessageProducer[T] = {
+    MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[Object](address.asInstanceOf[java.lang.String], options.asJava))
+  }
+
+ /**
+   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendFuture[T: TypeTag](address: String, message: AnyRef): scala.concurrent.Future[Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendFuture[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }
 
 object EventBus {
-
-  def apply(_asJava: JEventBus): EventBus =
-    new EventBus(_asJava)
-
+  def apply(asJava: JEventBus) = new EventBus(asJava)  
 }

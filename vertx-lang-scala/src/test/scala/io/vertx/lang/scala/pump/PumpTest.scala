@@ -17,8 +17,8 @@ class PumpTest extends FlatSpec with Matchers {
     val jrs = new JavaFakeReadStream[MyClass]()
     val jws = new JavaFakeWriteStream[MyClass]()
 
-    val rs = ReadStream(jrs)
-    val ws = WriteStream(jws)
+    val rs = ReadStream[MyClass](jrs)
+    val ws = WriteStream[MyClass](jws)
 
     val p = Pump.pump(rs, ws, 1001)
 
@@ -44,11 +44,11 @@ class PumpTest extends FlatSpec with Matchers {
   }
 
   "A Pump" should "be pausable" in {
-    val jrs = new JavaFakeReadStream[MyClass]()
-    val jws = new JavaFakeWriteStream[MyClass]()
+    val jrs = new JavaFakeReadStream[MyClass]
+    val jws = new JavaFakeWriteStream[MyClass]
 
-    val rs = ReadStream(jrs)
-    val ws = WriteStream(jws)
+    val rs = ReadStream[MyClass](jrs)
+    val ws = WriteStream[MyClass](jws)
     val p = Pump.pump(rs, ws, 5)
     p.start()
 
@@ -78,31 +78,31 @@ class PumpTest extends FlatSpec with Matchers {
     })
   }
 
-  "testPumpReadStreamNull" should "work" in {
+  "testPumpReadStreamNull" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump(ReadStream(rs), null)
+      Pump.pump[MyClass](ReadStream[MyClass](rs), null)
     }
   }
 
-  "testPumpWriteStreamNull" should "work" in {
+  "testPumpWriteStreamNull" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump(null, WriteStream(ws))
+      Pump.pump[MyClass](null, WriteStream[MyClass](ws))
     }
   }
 
-  "testPumpReadStreamNull2" should "work" in {
+  "testPumpReadStreamNull2" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump(ReadStream(rs), null, 1000)
+      Pump.pump[MyClass](ReadStream[MyClass](rs), null, 1000)
     }
   }
 
-  "testPumpWriteStreamNull2" should "work" in {
+  "testPumpWriteStreamNull2" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump(null, WriteStream(ws), 1000)
+      Pump.pump[MyClass](null, WriteStream[MyClass](ws), 1000)
     }
   }
 

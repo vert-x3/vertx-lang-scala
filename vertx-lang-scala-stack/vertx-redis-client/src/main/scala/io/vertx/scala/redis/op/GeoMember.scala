@@ -16,16 +16,16 @@
 
 package io.vertx.scala.redis.op
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{GeoMember => JGeoMember}
 
 /**
   */
+class GeoMember(private val _asJava: JGeoMember) {
 
-class GeoMember(val asJava: JGeoMember) {
-
+  def asJava = _asJava
 
   /**
     * Set Latitude as per EPSG:900913 / EPSG:3785 / OSGEO:41001
@@ -59,16 +59,18 @@ object GeoMember {
   }
   
   def apply(t: JGeoMember) = {
-    if(t != null)
+    if (t != null) {
       new GeoMember(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):GeoMember = {
-    if(json != null)
+  def fromJson(json: JsonObject): GeoMember = {
+    if (json != null) {
       new GeoMember(new JGeoMember(json))
-    else
+    } else {
       null
+    }
   }
 }

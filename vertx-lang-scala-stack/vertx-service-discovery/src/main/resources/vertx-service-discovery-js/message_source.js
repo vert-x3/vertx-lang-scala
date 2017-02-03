@@ -21,8 +21,8 @@ var MessageConsumer = require('vertx-js/message_consumer');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JMessageSource = io.vertx.servicediscovery.types.MessageSource;
-var Record = io.vertx.servicediscovery.Record;
+var JMessageSource = Java.type('io.vertx.servicediscovery.types.MessageSource');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
  Service type for data producer. Providers are publishing data to a specific event bus address.
@@ -86,17 +86,28 @@ MessageSource.createRecord = function() {
 
  @memberof module:vertx-service-discovery-js/message_source
  @param discovery {ServiceDiscovery} The service discovery instance 
- @param filter {Object} The filter, optional 
+ @param filter {todo} The filter, must not be <code>null</code> 
  @param resultHandler {function} The result handler 
  */
-MessageSource.getConsumer = function(discovery, filter, resultHandler) {
+MessageSource.getConsumer = function() {
   var __args = arguments;
   if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
-    JMessageSource["getConsumer(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](discovery._jdel, utils.convParamJsonObject(filter), function(ar) {
+    JMessageSource["getConsumer(io.vertx.servicediscovery.ServiceDiscovery,io.vertx.core.json.JsonObject,io.vertx.core.Handler)"](__args[0]._jdel, utils.convParamJsonObject(__args[1]), function(ar) {
     if (ar.succeeded()) {
-      resultHandler(utils.convReturnVertxGen(MessageConsumer, ar.result(), undefined), null);
+      __args[2](utils.convReturnVertxGen(MessageConsumer, ar.result(), undefined), null);
     } else {
-      resultHandler(null, ar.cause());
+      __args[2](null, ar.cause());
+    }
+  });
+  }else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function' && typeof __args[2] === 'function') {
+    JMessageSource["getConsumer(io.vertx.servicediscovery.ServiceDiscovery,java.util.function.Function,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    var jRet = __args[1](utils.convReturnDataObject(jVal));
+    return jRet;
+  }, function(ar) {
+    if (ar.succeeded()) {
+      __args[2](utils.convReturnVertxGen(MessageConsumer, ar.result(), undefined), null);
+    } else {
+      __args[2](null, ar.cause());
     }
   });
   } else throw new TypeError('function invoked with invalid arguments');

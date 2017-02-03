@@ -16,38 +16,37 @@
 
 package io.vertx.scala.codegen.testmodel
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.core.buffer.Buffer
 import io.vertx.codegen.testmodel.{DataObjectWithNestedBuffer => JDataObjectWithNestedBuffer}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   */
+class DataObjectWithNestedBuffer(private val _asJava: JDataObjectWithNestedBuffer) {
 
-class DataObjectWithNestedBuffer(val asJava: JDataObjectWithNestedBuffer) {
-
-  def setBuffer(value: Buffer) = {
-    asJava.setBuffer(value.asJava)
+  def asJava = _asJava
+  def setBuffer(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setBuffer(value)
     this
   }
-  def getBuffer = {
+  def getBuffer: io.vertx.core.buffer.Buffer = {
     asJava.getBuffer()
   }
-  def setBuffers(value: scala.collection.mutable.Buffer[Buffer]) = {
-    asJava.setBuffers(value.map(_.asJava).asJava)
+  def setBuffers(value: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer]) = {
+    asJava.setBuffers(value.asJava)
     this
   }
-  def getBuffers = {
-    asJava.getBuffers()
+  def getBuffers: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getBuffers().asScala.map(x => x)
   }
   def setNested(value: DataObjectWithBuffer) = {
     asJava.setNested(value.asJava)
     this
   }
-  def getNested = {
-    asJava.getNested()
+  def getNested: DataObjectWithBuffer = {
+    DataObjectWithBuffer(asJava.getNested())
   }
 }
 
@@ -58,16 +57,18 @@ object DataObjectWithNestedBuffer {
   }
   
   def apply(t: JDataObjectWithNestedBuffer) = {
-    if(t != null)
+    if (t != null) {
       new DataObjectWithNestedBuffer(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):DataObjectWithNestedBuffer = {
-    if(json != null)
+  def fromJson(json: JsonObject): DataObjectWithNestedBuffer = {
+    if (json != null) {
       new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))
-    else
+    } else {
       null
+    }
   }
 }

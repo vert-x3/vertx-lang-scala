@@ -16,9 +16,9 @@
 
 package io.vertx.scala.core.cli
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.cli.{Option => JOption}
 
 /**
@@ -27,9 +27,9 @@ import io.vertx.core.cli.{Option => JOption}
   * <p/>
   * Short name is generally used with a single dash, while long name requires a double-dash.
   */
+class Option(private val _asJava: JOption) {
 
-class Option(val asJava: JOption) {
-
+  def asJava = _asJava
 
   /**
     * Sets te arg name for this option.
@@ -38,8 +38,8 @@ class Option(val asJava: JOption) {
     asJava.setArgName(value)
     this
   }
-  def getArgName = {
-    asJava.getArgName()
+  def getArgName: String = {
+    asJava.getArgName().asInstanceOf[String]
   }
 
   /**
@@ -54,8 +54,8 @@ class Option(val asJava: JOption) {
     asJava.setChoices(value.asJava)
     this
   }
-  def getChoices = {
-    asJava.getChoices()
+  def getChoices: scala.collection.mutable.Set[String] = {
+    asJava.getChoices().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -65,8 +65,8 @@ class Option(val asJava: JOption) {
     asJava.setDefaultValue(value)
     this
   }
-  def getDefaultValue = {
-    asJava.getDefaultValue()
+  def getDefaultValue: String = {
+    asJava.getDefaultValue().asInstanceOf[String]
   }
 
   /**
@@ -76,8 +76,8 @@ class Option(val asJava: JOption) {
     asJava.setDescription(value)
     this
   }
-  def getDescription = {
-    asJava.getDescription()
+  def getDescription: String = {
+    asJava.getDescription().asInstanceOf[String]
   }
 
   /**
@@ -91,8 +91,8 @@ class Option(val asJava: JOption) {
     asJava.setFlag(value)
     this
   }
-  def isFlag = {
-    asJava.isFlag()
+  def isFlag: Boolean = {
+    asJava.isFlag().asInstanceOf[Boolean]
   }
 
   /**
@@ -102,8 +102,8 @@ class Option(val asJava: JOption) {
     asJava.setHelp(value)
     this
   }
-  def isHelp = {
-    asJava.isHelp()
+  def isHelp: Boolean = {
+    asJava.isHelp().asInstanceOf[Boolean]
   }
 
   /**
@@ -113,8 +113,8 @@ class Option(val asJava: JOption) {
     asJava.setHidden(value)
     this
   }
-  def isHidden = {
-    asJava.isHidden()
+  def isHidden: Boolean = {
+    asJava.isHidden().asInstanceOf[Boolean]
   }
 
   /**
@@ -124,8 +124,8 @@ class Option(val asJava: JOption) {
     asJava.setLongName(value)
     this
   }
-  def getLongName = {
-    asJava.getLongName()
+  def getLongName: String = {
+    asJava.getLongName().asInstanceOf[String]
   }
 
   /**
@@ -135,8 +135,8 @@ class Option(val asJava: JOption) {
     asJava.setMultiValued(value)
     this
   }
-  def isMultiValued = {
-    asJava.isMultiValued()
+  def isMultiValued: Boolean = {
+    asJava.isMultiValued().asInstanceOf[Boolean]
   }
 
   /**
@@ -149,8 +149,8 @@ class Option(val asJava: JOption) {
     asJava.setRequired(value)
     this
   }
-  def isRequired = {
-    asJava.isRequired()
+  def isRequired: Boolean = {
+    asJava.isRequired().asInstanceOf[Boolean]
   }
 
   /**
@@ -160,8 +160,8 @@ class Option(val asJava: JOption) {
     asJava.setShortName(value)
     this
   }
-  def getShortName = {
-    asJava.getShortName()
+  def getShortName: String = {
+    asJava.getShortName().asInstanceOf[String]
   }
 
   /**
@@ -171,8 +171,8 @@ class Option(val asJava: JOption) {
     asJava.setSingleValued(value)
     this
   }
-  def isSingleValued = {
-    asJava.isSingleValued()
+  def isSingleValued: Boolean = {
+    asJava.isSingleValued().asInstanceOf[Boolean]
   }
 }
 
@@ -183,16 +183,18 @@ object Option {
   }
   
   def apply(t: JOption) = {
-    if(t != null)
+    if (t != null) {
       new Option(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):Option = {
-    if(json != null)
+  def fromJson(json: JsonObject): Option = {
+    if (json != null) {
       new Option(new JOption(json))
-    else
+    } else {
       null
+    }
   }
 }

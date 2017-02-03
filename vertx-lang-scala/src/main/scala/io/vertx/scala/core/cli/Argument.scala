@@ -16,18 +16,18 @@
 
 package io.vertx.scala.core.cli
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.cli.{Argument => JArgument}
 
 /**
   * Defines a command line argument. Unlike options, argument don't have names and are identified using an index. The
   * first index is 0 (because we are in the computer world).
   */
+class Argument(private val _asJava: JArgument) {
 
-class Argument(val asJava: JArgument) {
-
+  def asJava = _asJava
 
   /**
     * Sets the argument name of this <a href="../../../../../../../cheatsheet/Argument.html">Argument</a>.
@@ -36,8 +36,8 @@ class Argument(val asJava: JArgument) {
     asJava.setArgName(value)
     this
   }
-  def getArgName = {
-    asJava.getArgName()
+  def getArgName: String = {
+    asJava.getArgName().asInstanceOf[String]
   }
 
   /**
@@ -47,8 +47,8 @@ class Argument(val asJava: JArgument) {
     asJava.setDefaultValue(value)
     this
   }
-  def getDefaultValue = {
-    asJava.getDefaultValue()
+  def getDefaultValue: String = {
+    asJava.getDefaultValue().asInstanceOf[String]
   }
 
   /**
@@ -58,8 +58,8 @@ class Argument(val asJava: JArgument) {
     asJava.setDescription(value)
     this
   }
-  def getDescription = {
-    asJava.getDescription()
+  def getDescription: String = {
+    asJava.getDescription().asInstanceOf[String]
   }
 
   /**
@@ -69,8 +69,8 @@ class Argument(val asJava: JArgument) {
     asJava.setHidden(value)
     this
   }
-  def isHidden = {
-    asJava.isHidden()
+  def isHidden: Boolean = {
+    asJava.isHidden().asInstanceOf[Boolean]
   }
 
   /**
@@ -80,8 +80,8 @@ class Argument(val asJava: JArgument) {
     asJava.setIndex(value)
     this
   }
-  def getIndex = {
-    asJava.getIndex()
+  def getIndex: Int = {
+    asJava.getIndex().asInstanceOf[Int]
   }
 
   /**
@@ -91,8 +91,8 @@ class Argument(val asJava: JArgument) {
     asJava.setMultiValued(value)
     this
   }
-  def isMultiValued = {
-    asJava.isMultiValued()
+  def isMultiValued: Boolean = {
+    asJava.isMultiValued().asInstanceOf[Boolean]
   }
 
   /**
@@ -102,8 +102,8 @@ class Argument(val asJava: JArgument) {
     asJava.setRequired(value)
     this
   }
-  def isRequired = {
-    asJava.isRequired()
+  def isRequired: Boolean = {
+    asJava.isRequired().asInstanceOf[Boolean]
   }
 }
 
@@ -114,16 +114,18 @@ object Argument {
   }
   
   def apply(t: JArgument) = {
-    if(t != null)
+    if (t != null) {
       new Argument(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):Argument = {
-    if(json != null)
+  def fromJson(json: JsonObject): Argument = {
+    if (json != null) {
       new Argument(new JArgument(json))
-    else
+    } else {
       null
+    }
   }
 }

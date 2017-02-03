@@ -17,20 +17,20 @@
 package io.vertx.scala.ext.auth.mongo
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.auth.mongo.HashSaltStyle
-import io.vertx.ext.auth.{User => JUser}
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.{User => JUser}
+import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
 
 /**
   * Determines how the hashing is computed in the implementation You can implement this to provide a different hashing
   * strategy to the default.
   */
-class HashStrategy(private val _asJava: JHashStrategy) {
+class HashStrategy(private val _asJava: Object) {
 
-  def asJava: JHashStrategy = _asJava
+  def asJava = _asJava
 
   /**
     * Compute the hashed password given the unhashed password and the user
@@ -39,7 +39,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @return the hashed password
     */
   def computeHash(password: String, user: User): String = {
-    _asJava.computeHash(password, user.asJava.asInstanceOf[JUser])
+    asJava.asInstanceOf[JHashStrategy].computeHash(password.asInstanceOf[java.lang.String], user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
   /**
@@ -48,7 +48,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @return the password, either as hashed version or as cleartext, depending on the preferences
     */
   def getStoredPwd(user: User): String = {
-    _asJava.getStoredPwd(user.asJava.asInstanceOf[JUser])
+    asJava.asInstanceOf[JHashStrategy].getStoredPwd(user.asJava.asInstanceOf[JUser]).asInstanceOf[String]
   }
 
   /**
@@ -58,7 +58,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @return null in case of HashSaltStyle#NO_SALT the salt of the user or a defined external salt
     */
   def getSalt(user: User): scala.Option[String] = {
-    scala.Option(_asJava.getSalt(user.asJava.asInstanceOf[JUser]))
+    scala.Option(asJava.asInstanceOf[JHashStrategy].getSalt(user.asJava.asInstanceOf[JUser]).asInstanceOf[String])
   }
 
   /**
@@ -66,7 +66,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @param salt the salt, which shall be used
     */
   def setExternalSalt(salt: String): Unit = {
-    _asJava.setExternalSalt(salt)
+    asJava.asInstanceOf[JHashStrategy].setExternalSalt(salt.asInstanceOf[java.lang.String])
   }
 
   /**
@@ -74,7 +74,7 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @param saltStyle the HashSaltStyle to be used
     */
   def setSaltStyle(saltStyle: io.vertx.ext.auth.mongo.HashSaltStyle): Unit = {
-    _asJava.setSaltStyle(saltStyle)
+    asJava.asInstanceOf[JHashStrategy].setSaltStyle(saltStyle)
   }
 
   /**
@@ -82,14 +82,11 @@ class HashStrategy(private val _asJava: JHashStrategy) {
     * @return the saltStyle
     */
   def getSaltStyle(): io.vertx.ext.auth.mongo.HashSaltStyle = {
-    _asJava.getSaltStyle()
+    asJava.asInstanceOf[JHashStrategy].getSaltStyle()
   }
 
 }
 
 object HashStrategy {
-
-  def apply(_asJava: JHashStrategy): HashStrategy =
-    new HashStrategy(_asJava)
-
+  def apply(asJava: JHashStrategy) = new HashStrategy(asJava)  
 }

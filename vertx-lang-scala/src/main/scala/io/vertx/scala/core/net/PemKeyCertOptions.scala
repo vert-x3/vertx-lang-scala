@@ -16,12 +16,11 @@
 
 package io.vertx.scala.core.net
 
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.lang.scala.json.Json._
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
-import io.vertx.core.buffer.{Buffer => JBuffer}
-import io.vertx.scala.core.buffer.Buffer
 
 /**
   * Key store options configuring a private key and its certificate based on
@@ -66,9 +65,9 @@ import io.vertx.scala.core.buffer.Buffer
   * options.setPemKeyCertOptions(new PemKeyCertOptions().setKeyValue(key).setCertValue(cert));
   * </pre>
   */
+class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
 
-class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
-
+  def asJava = _asJava
 
   /**
     * Set the path to the certificate
@@ -77,18 +76,18 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
     asJava.setCertPath(value)
     this
   }
-  def getCertPath = {
-    asJava.getCertPath()
+  def getCertPath: String = {
+    asJava.getCertPath().asInstanceOf[String]
   }
 
   /**
     * Set the certificate as a buffer
     */
-  def setCertValue(value: Buffer) = {
-    asJava.setCertValue(value.asJava)
+  def setCertValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setCertValue(value)
     this
   }
-  def getCertValue = {
+  def getCertValue: io.vertx.core.buffer.Buffer = {
     asJava.getCertValue()
   }
 
@@ -99,18 +98,18 @@ class PemKeyCertOptions(val asJava: JPemKeyCertOptions) {
     asJava.setKeyPath(value)
     this
   }
-  def getKeyPath = {
-    asJava.getKeyPath()
+  def getKeyPath: String = {
+    asJava.getKeyPath().asInstanceOf[String]
   }
 
   /**
     * Set the key a a buffer
     */
-  def setKeyValue(value: Buffer) = {
-    asJava.setKeyValue(value.asJava)
+  def setKeyValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setKeyValue(value)
     this
   }
-  def getKeyValue = {
+  def getKeyValue: io.vertx.core.buffer.Buffer = {
     asJava.getKeyValue()
   }
 }
@@ -122,16 +121,18 @@ object PemKeyCertOptions {
   }
   
   def apply(t: JPemKeyCertOptions) = {
-    if(t != null)
+    if (t != null) {
       new PemKeyCertOptions(t)
-    else
+    } else {
       null
+    }
   }
   
-  def fromJson(json: JsonObject):PemKeyCertOptions = {
-    if(json != null)
+  def fromJson(json: JsonObject): PemKeyCertOptions = {
+    if (json != null) {
       new PemKeyCertOptions(new JPemKeyCertOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

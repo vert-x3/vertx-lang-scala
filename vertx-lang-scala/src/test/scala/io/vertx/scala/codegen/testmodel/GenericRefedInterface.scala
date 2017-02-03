@@ -17,30 +17,27 @@
 package io.vertx.scala.codegen.testmodel
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 
 /**
   */
-class GenericRefedInterface[T](private val _asJava: JGenericRefedInterface[T]) {
+class GenericRefedInterface[T: TypeTag](private val _asJava: Object) {
 
-  def asJava: JGenericRefedInterface[T] = _asJava
+  def asJava = _asJava
 
   def setValue(value: T): GenericRefedInterface[T] = {
-    _asJava.setValue(value)
+    asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
     this
   }
 
   def getValue(): T = {
-    _asJava.getValue()
+    toScala[T](asJava.asInstanceOf[JGenericRefedInterface[Object]].getValue())
   }
 
 }
 
 object GenericRefedInterface {
-
-  def apply[T](_asJava: JGenericRefedInterface[T]): GenericRefedInterface[T] =
-    new GenericRefedInterface(_asJava)
-
+  def apply[T: TypeTag](asJava: JGenericRefedInterface[_]) = new GenericRefedInterface[T](asJava)  
 }

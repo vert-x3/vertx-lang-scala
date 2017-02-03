@@ -19,8 +19,8 @@ var utils = require('vertx-js/util/utils');
 
 var io = Packages.io;
 var JsonObject = io.vertx.core.json.JsonObject;
-var JServiceReference = io.vertx.servicediscovery.ServiceReference;
-var Record = io.vertx.servicediscovery.Record;
+var JServiceReference = Java.type('io.vertx.servicediscovery.ServiceReference');
+var Record = Java.type('io.vertx.servicediscovery.Record');
 
 /**
 
@@ -49,7 +49,8 @@ var ServiceReference = function(j_val) {
 
   /**
    Gets the object to access the service. It can be a proxy, a client or whatever object. The type depends on the
-   service type and the server itself.
+   service type and the server itself. This method returns the Java version and primary facet of the object, use
+   {@link ServiceReference#getAs} to retrieve the polyglot instance of the object or another facet..
 
    @public
 
@@ -59,6 +60,36 @@ var ServiceReference = function(j_val) {
     var __args = arguments;
     if (__args.length === 0) {
       return utils.convReturnTypeUnknown(j_serviceReference["get()"]());
+    } else throw new TypeError('function invoked with invalid arguments');
+  };
+
+  /**
+   Gets the object to access the service. It can be a proxy, a client or whatever object. The type depends on the
+   service type and the server itself. This method wraps the service object into the desired type.
+
+   @public
+   @param x {todo} the type of object 
+   @return {Object} the object to access the service wrapped to the given type
+   */
+  this.getAs = function(x) {
+    var __args = arguments;
+    if (__args.length === 1 && typeof __args[0] === 'function') {
+      return utils.get_jtype(__args[0]).wrap(j_serviceReference["getAs(java.lang.Class)"](utils.get_jclass(x)));
+    } else throw new TypeError('function invoked with invalid arguments');
+  };
+
+  /**
+   Gets the service object if already retrieved. It won't try to acquire the service object if not retrieved yet.
+   Unlike {@link ServiceReference#cached}, this method return the warpped object to the desired (given) type.
+
+   @public
+   @param x {todo} the type of object 
+   @return {Object} the object, <code>null</code> if not yet retrieved
+   */
+  this.cachedAs = function(x) {
+    var __args = arguments;
+    if (__args.length === 1 && typeof __args[0] === 'function') {
+      return utils.get_jtype(__args[0]).wrap(j_serviceReference["cachedAs(java.lang.Class)"](utils.get_jclass(x)));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 
@@ -87,6 +118,20 @@ var ServiceReference = function(j_val) {
     var __args = arguments;
     if (__args.length === 0) {
       j_serviceReference["release()"]();
+    } else throw new TypeError('function invoked with invalid arguments');
+  };
+
+  /**
+   Checks whether or not the service reference has the given service object.
+
+   @public
+   @param object {Object} the service object, must not be <code>null</code> 
+   @return {boolean} <code>true</code> if the service reference service object is equal to the given object, <code>false</code> otherwise.
+   */
+  this.isHolding = function(object) {
+    var __args = arguments;
+    if (__args.length === 1 && typeof __args[0] !== 'function') {
+      return j_serviceReference["isHolding(java.lang.Object)"](utils.convParamTypeUnknown(object));
     } else throw new TypeError('function invoked with invalid arguments');
   };
 

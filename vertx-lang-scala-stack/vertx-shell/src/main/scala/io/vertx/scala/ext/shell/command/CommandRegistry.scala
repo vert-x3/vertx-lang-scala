@@ -17,93 +17,131 @@
 package io.vertx.scala.ext.shell.command
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.command.{CommandRegistry => JCommandRegistry}
-import io.vertx.ext.shell.command.{Command => JCommand}
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.shell.command.{CommandResolver => JCommandResolver}
+import io.vertx.ext.shell.command.{Command => JCommand}
+import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
+import io.vertx.core.Handler
+import io.vertx.ext.shell.command.{CommandRegistry => JCommandRegistry}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   * A registry that contains the commands known by a shell.<p/>
   *
   * It is a mutable command resolver.
   */
-class CommandRegistry(private val _asJava: JCommandRegistry) {
+class CommandRegistry(private val _asJava: Object)
+    extends CommandResolver(_asJava)  {
 
-  def asJava: JCommandRegistry = _asJava
 
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommandFuture]], without a completion handler.
     */
   def registerCommand(command: Command): CommandRegistry = {
-    _asJava.registerCommand(command.asJava.asInstanceOf[JCommand])
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand])
     this
   }
 
   /**
     * Register a command
     * @param command the command to register
-    * @return notified when the command is registered
+    * @param completionHandler notified when the command is registered
+    * @return a reference to this, so the API can be used fluently
     */
-  def registerCommandFuture(command: Command): concurrent.Future[Command] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand,Command]((x => if (x == null) null else Command.apply(x)))
-    _asJava.registerCommand(command.asJava.asInstanceOf[JCommand], promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def registerCommand(command: Command, completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], {x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand, Command](x, a => Command(a)))})
+    this
   }
 
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommandsFuture]], without a completion handler.
     */
   def registerCommands(commands: scala.collection.mutable.Buffer[Command]): CommandRegistry = {
-    _asJava.registerCommands(commands.map(x => if (x == null) null else x.asJava).asJava)
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava)
     this
   }
 
   /**
     * Register a list of commands.
     * @param commands the commands to register
-    * @return notified when the command is registered
+    * @param completionHandler notified when the command is registered
+    * @return a reference to this, so the API can be used fluently
     */
-  def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]): concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[io.vertx.ext.shell.command.Command],scala.collection.mutable.Buffer[Command]]((x => if (x == null) null else x.asScala.map(Command.apply)))
-    _asJava.registerCommands(commands.map(x => if (x == null) null else x.asJava).asJava, promiseAndHandler._1)
-    promiseAndHandler._2.future
+  def registerCommands(commands: scala.collection.mutable.Buffer[Command], completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, {x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
+    this
   }
 
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#unregisterCommandFuture]], without a completion handler.
     */
   def unregisterCommand(commandName: String): CommandRegistry = {
-    _asJava.unregisterCommand(commandName)
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String])
     this
   }
 
   /**
     * Unregister a command.
     * @param commandName the command name
-    * @return notified when the command is unregistered
+    * @param completionHandler notified when the command is unregistered
+    * @return a reference to this, so the API can be used fluently
     */
-  def unregisterCommandFuture(commandName: String): concurrent.Future[Unit] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Void,Unit]((x => ()))
-    _asJava.unregisterCommand(commandName, promiseAndHandler._1)
+  def unregisterCommand(commandName: String, completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+ /**
+   * Like [[registerCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def registerCommandFuture(command: Command): scala.concurrent.Future[Command] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand, Command](x => Command(x))
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[registerCommands]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]): scala.concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x => x.asScala.map(x => Command(x)))
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[unregisterCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def unregisterCommandFuture(commandName: String): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 }
 
 object CommandRegistry {
-
-  def apply(_asJava: JCommandRegistry): CommandRegistry =
-    new CommandRegistry(_asJava)
-
+  def apply(asJava: JCommandRegistry) = new CommandRegistry(asJava)  
+  /**
+    * Get the shared registry for the Vert.x instance.
+    * @param vertx the vertx instance
+    * @return the shared registry
+    */
   def getShared(vertx: Vertx): CommandRegistry = {
-    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.getShared(vertx.asJava.asInstanceOf[JVertx]))
+    CommandRegistry(JCommandRegistry.getShared(vertx.asJava.asInstanceOf[JVertx]))
   }
 
+  /**
+    * Create a new registry.
+    * @param vertx the vertx instance
+    * @return the created registry
+    */
   def create(vertx: Vertx): CommandRegistry = {
-    CommandRegistry.apply(io.vertx.ext.shell.command.CommandRegistry.create(vertx.asJava.asInstanceOf[JVertx]))
+    CommandRegistry(JCommandRegistry.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

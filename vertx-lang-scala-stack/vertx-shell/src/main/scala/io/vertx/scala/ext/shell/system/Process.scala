@@ -17,34 +17,45 @@
 package io.vertx.scala.ext.shell.system
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.system.{Process => JProcess}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.system.ExecStatus
 import io.vertx.ext.shell.term.{Tty => JTty}
-import io.vertx.scala.ext.shell.term.Tty
-import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.session.Session
+import io.vertx.scala.ext.shell.term.Tty
+import io.vertx.ext.shell.system.{Process => JProcess}
+import io.vertx.core.Handler
+import io.vertx.ext.shell.session.{Session => JSession}
 
 /**
   * A process managed by the shell.
   */
-class Process(private val _asJava: JProcess) {
+class Process(private val _asJava: Object) {
 
-  def asJava: JProcess = _asJava
+  def asJava = _asJava
+  private var cached_0: Tty = _
+  private var cached_1: Session = _
 
   /**
-    * @return the current process status
+    * @return the process tty
     */
-  def status(): io.vertx.ext.shell.system.ExecStatus = {
-    _asJava.status()
+  def getTty(): Tty = {
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JProcess].getTty()
+      cached_0 = Tty(tmp)
+    }
+    cached_0
   }
 
   /**
-    * @return the process exit code when the status is ExecStatus#TERMINATED otherwise `null`
+    * @return the process session
     */
-  def exitCode(): Int = {
-    _asJava.exitCode()
+  def getSession(): Session = {
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JProcess].getSession()
+      cached_1 = Session(tmp)
+    }
+    cached_1
   }
 
   /**
@@ -53,18 +64,8 @@ class Process(private val _asJava: JProcess) {
     * @return this object
     */
   def setTty(tty: Tty): Process = {
-    _asJava.setTty(tty.asJava.asInstanceOf[JTty])
+    asJava.asInstanceOf[JProcess].setTty(tty.asJava.asInstanceOf[JTty])
     this
-  }
-
-  /**
-    * @return the process tty
-    */
-  def getTty(): Tty = {
-    if (cached_0 == null) {
-      cached_0 =    Tty.apply(_asJava.getTty())
-    }
-    cached_0
   }
 
   /**
@@ -73,18 +74,8 @@ class Process(private val _asJava: JProcess) {
     * @return this object
     */
   def setSession(session: Session): Process = {
-    _asJava.setSession(session.asJava.asInstanceOf[JSession])
+    asJava.asInstanceOf[JProcess].setSession(session.asJava.asInstanceOf[JSession])
     this
-  }
-
-  /**
-    * @return the process session
-    */
-  def getSession(): Session = {
-    if (cached_1 == null) {
-      cached_1 =    Session.apply(_asJava.getSession())
-    }
-    cached_1
   }
 
   /**
@@ -92,8 +83,8 @@ class Process(private val _asJava: JProcess) {
     * @param handler the handler called when the process terminates.
     * @return this object
     */
-  def terminatedHandler(handler: io.vertx.core.Handler[Int]): Process = {
-    _asJava.terminatedHandler(funcToMappedHandler[java.lang.Integer, Int](x => x)(handler))
+  def terminatedHandler(handler: Handler[Int]): Process = {
+    asJava.asInstanceOf[JProcess].terminatedHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
     this
   }
 
@@ -101,30 +92,22 @@ class Process(private val _asJava: JProcess) {
     * Run the process.
     */
   def run(): Unit = {
-    _asJava.run()
+    asJava.asInstanceOf[JProcess].run()
   }
 
   /**
     * Run the process.
     */
   def run(foreground: Boolean): Unit = {
-    _asJava.run(foreground)
+    asJava.asInstanceOf[JProcess].run(foreground.asInstanceOf[java.lang.Boolean])
   }
 
   /**
     * Run the process.
     * @param completionHandler handler called after process callback
     */
-  def run(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.run(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Run the process.
-    * @param completionHandler handler called after process callback
-    */
-  def run(foregraound: Boolean, completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.run(foregraound, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
+  def run(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].run({x: Void => completionHandler.handle(x)})
   }
 
   /**
@@ -132,7 +115,79 @@ class Process(private val _asJava: JProcess) {
     * @return true if the process caught the signal
     */
   def interrupt(): Boolean = {
-    _asJava.interrupt()
+    asJava.asInstanceOf[JProcess].interrupt().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Suspend the process.
+    */
+  def resume(): Unit = {
+    asJava.asInstanceOf[JProcess].resume()
+  }
+
+  /**
+    * Suspend the process.
+    */
+  def resume(foreground: Boolean): Unit = {
+    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean])
+  }
+
+  /**
+    * Suspend the process.
+    * @param completionHandler handler called after resume callback
+    */
+  def resume(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].resume({x: Void => completionHandler.handle(x)})
+  }
+
+  /**
+    * Resume the process.
+    */
+  def suspend(): Unit = {
+    asJava.asInstanceOf[JProcess].suspend()
+  }
+
+  /**
+    * Terminate the process.
+    */
+  def terminate(): Unit = {
+    asJava.asInstanceOf[JProcess].terminate()
+  }
+
+  /**
+    * Set the process in background.
+    */
+  def toBackground(): Unit = {
+    asJava.asInstanceOf[JProcess].toBackground()
+  }
+
+  /**
+    * Set the process in foreground.
+    */
+  def toForeground(): Unit = {
+    asJava.asInstanceOf[JProcess].toForeground()
+  }
+
+  /**
+    * @return the current process status
+    */
+  def status(): io.vertx.ext.shell.system.ExecStatus = {
+    asJava.asInstanceOf[JProcess].status()
+  }
+
+  /**
+    * @return the process exit code when the status is ExecStatus#TERMINATED otherwise `null`
+    */
+  def exitCode(): Int = {
+    asJava.asInstanceOf[JProcess].exitCode().asInstanceOf[Int]
+  }
+
+  /**
+    * Run the process.
+    * @param completionHandler handler called after process callback
+    */
+  def run(foregraound: Boolean, completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
   }
 
   /**
@@ -140,107 +195,52 @@ class Process(private val _asJava: JProcess) {
     * @param completionHandler handler called after interrupt callback
     * @return true if the process caught the signal
     */
-  def interrupt(completionHandler: io.vertx.core.Handler[Unit]): Boolean = {
-    _asJava.interrupt(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Suspend the process.
-    */
-  def resume(): Unit = {
-    _asJava.resume()
-  }
-
-  /**
-    * Suspend the process.
-    */
-  def resume(foreground: Boolean): Unit = {
-    _asJava.resume(foreground)
+  def interrupt(completionHandler: Handler[Unit]): Boolean = {
+    asJava.asInstanceOf[JProcess].interrupt({x: Void => completionHandler.handle(x)}).asInstanceOf[Boolean]
   }
 
   /**
     * Suspend the process.
     * @param completionHandler handler called after resume callback
     */
-  def resume(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.resume(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Suspend the process.
-    * @param completionHandler handler called after resume callback
-    */
-  def resume(foreground: Boolean, completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.resume(foreground, funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Resume the process.
-    */
-  def suspend(): Unit = {
-    _asJava.suspend()
+  def resume(foreground: Boolean, completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Resume the process.
     * @param completionHandler handler called after suspend callback
     */
-  def suspend(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.suspend(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Terminate the process.
-    */
-  def terminate(): Unit = {
-    _asJava.terminate()
+  def suspend(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].suspend({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Terminate the process.
     * @param completionHandler handler called after end callback
     */
-  def terminate(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.terminate(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Set the process in background.
-    */
-  def toBackground(): Unit = {
-    _asJava.toBackground()
+  def terminate(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].terminate({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Set the process in background.
     * @param completionHandler handler called after background callback
     */
-  def toBackground(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.toBackground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
-  }
-
-  /**
-    * Set the process in foreground.
-    */
-  def toForeground(): Unit = {
-    _asJava.toForeground()
+  def toBackground(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].toBackground({x: Void => completionHandler.handle(x)})
   }
 
   /**
     * Set the process in foreground.
     * @param completionHandler handler called after foreground callback
     */
-  def toForeground(completionHandler: io.vertx.core.Handler[Unit]): Unit = {
-    _asJava.toForeground(funcToMappedHandler[java.lang.Void, Unit](x => x.asInstanceOf[Unit])(_ => completionHandler.handle()))
+  def toForeground(completionHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JProcess].toForeground({x: Void => completionHandler.handle(x)})
   }
 
-  private var cached_0: Tty = _
-  private var cached_1: Session = _
 }
 
 object Process {
-
-  def apply(_asJava: JProcess): Process =
-    new Process(_asJava)
-
+  def apply(asJava: JProcess) = new Process(asJava)  
 }

@@ -17,71 +17,68 @@
 package io.vertx.scala.core.dns
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.dns.{SrvRecord => JSrvRecord}
 
 /**
   * Represent a Service-Record (SRV) which was resolved for a domain.
   */
-class SrvRecord(private val _asJava: JSrvRecord) {
+class SrvRecord(private val _asJava: Object) {
 
-  def asJava: JSrvRecord = _asJava
+  def asJava = _asJava
 
   /**
     * Returns the priority for this service record.
     */
   def priority(): Int = {
-    _asJava.priority()
+    asJava.asInstanceOf[JSrvRecord].priority().asInstanceOf[Int]
   }
 
   /**
     * Returns the weight of this service record.
     */
   def weight(): Int = {
-    _asJava.weight()
+    asJava.asInstanceOf[JSrvRecord].weight().asInstanceOf[Int]
   }
 
   /**
     * Returns the port the service is running on.
     */
   def port(): Int = {
-    _asJava.port()
+    asJava.asInstanceOf[JSrvRecord].port().asInstanceOf[Int]
   }
 
   /**
     * Returns the name for the server being queried.
     */
   def name(): String = {
-    _asJava.name()
+    asJava.asInstanceOf[JSrvRecord].name().asInstanceOf[String]
   }
 
   /**
     * Returns the protocol for the service being queried (i.e. "_tcp").
     */
   def protocol(): String = {
-    _asJava.protocol()
+    asJava.asInstanceOf[JSrvRecord].protocol().asInstanceOf[String]
   }
 
   /**
     * Returns the service's name (i.e. "_http").
     */
   def service(): String = {
-    _asJava.service()
+    asJava.asInstanceOf[JSrvRecord].service().asInstanceOf[String]
   }
 
   /**
     * Returns the name of the host for the service.
     */
   def target(): scala.Option[String] = {
-    scala.Option(_asJava.target())
+    scala.Option(asJava.asInstanceOf[JSrvRecord].target().asInstanceOf[String])
   }
 
 }
 
 object SrvRecord {
-
-  def apply(_asJava: JSrvRecord): SrvRecord =
-    new SrvRecord(_asJava)
-
+  def apply(asJava: JSrvRecord) = new SrvRecord(asJava)  
 }

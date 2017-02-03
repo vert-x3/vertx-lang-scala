@@ -17,25 +17,22 @@
 package com.acme.scala.pkg.sub
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 /**
   */
-class SubInterface(private val _asJava: JSubInterface) {
+class SubInterface(private val _asJava: Object) {
 
-  def asJava: JSubInterface = _asJava
+  def asJava = _asJava
 
   def reverse(s: String): String = {
-    _asJava.reverse(s)
+    asJava.asInstanceOf[JSubInterface].reverse(s.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
 }
 
 object SubInterface {
-
-  def apply(_asJava: JSubInterface): SubInterface =
-    new SubInterface(_asJava)
-
+  def apply(asJava: JSubInterface) = new SubInterface(asJava)  
 }

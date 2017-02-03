@@ -17,10 +17,10 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.core.{MultiMap => JMultiMap}
-import java.util.Map.{Entry => JEntry}
+import scala.collection.JavaConverters._
 
 /**
   * This class represents a MultiMap of String keys to a List of String values.
@@ -28,52 +28,9 @@ import java.util.Map.{Entry => JEntry}
   * It's useful in Vert.x to represent things in Vert.x like HTTP headers and HTTP parameters which allow
   * multiple values for keys.
   */
-class MultiMap(private val _asJava: JMultiMap) {
+class MultiMap(private val _asJava: Object) {
 
-  def asJava: JMultiMap = _asJava
-
-  /**
-    * Returns the value of with the specified name.  If there are
-    * more than one values for the specified name, the first value is returned.
-    * @param name The name of the header to search
-    * @return The first header value or `null` if there is no such entry
-    */
-  def get(name: String): scala.Option[String] = {
-    scala.Option(_asJava.get(name))
-  }
-
-  /**
-    * Returns the values with the specified name
-    * @param name The name to search
-    * @return A immutable scala.collection.immutable.List of values which will be empty if no values are found
-    */
-  def getAll(name: String): scala.collection.mutable.Buffer[String] = {
-    _asJava.getAll(name).asScala.map(x => x:String)
-  }
-
-  /**
-    * Checks to see if there is a value with the specified name
-    * @param name The name to search for
-    * @return true if at least one entry is found
-    */
-  def contains(name: String): Boolean = {
-    _asJava.contains(name)
-  }
-
-  /**
-    * Return true if empty
-    */
-  def isEmpty(): Boolean = {
-    _asJava.isEmpty()
-  }
-
-  /**
-    * Gets a immutable Set of all names
-    * @return A scala.collection.immutable.Set of all names
-    */
-  def names(): Set[String] = {
-    _asJava.names().asScala.map(x => x:String).toSet
-  }
+  def asJava = _asJava
 
   /**
     * Adds a new value with the specified name and value.
@@ -82,7 +39,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def add(name: String, value: String): MultiMap = {
-    _asJava.add(name, value)
+    asJava.asInstanceOf[JMultiMap].add(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -91,7 +48,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def addAll(map: MultiMap): MultiMap = {
-    _asJava.addAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].addAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -104,7 +61,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def set(name: String, value: String): MultiMap = {
-    _asJava.set(name, value)
+    asJava.asInstanceOf[JMultiMap].set(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
@@ -113,7 +70,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def setAll(map: MultiMap): MultiMap = {
-    _asJava.setAll(map.asJava.asInstanceOf[JMultiMap])
+    asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
     this
   }
 
@@ -123,7 +80,7 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def remove(name: String): MultiMap = {
-    _asJava.remove(name)
+    asJava.asInstanceOf[JMultiMap].remove(name.asInstanceOf[java.lang.String])
     this
   }
 
@@ -132,26 +89,70 @@ class MultiMap(private val _asJava: JMultiMap) {
     * @return a reference to this, so the API can be used fluently
     */
   def clear(): MultiMap = {
-    _asJava.clear()
+    asJava.asInstanceOf[JMultiMap].clear()
     this
+  }
+
+  /**
+    * Returns the value of with the specified name.  If there are
+    * more than one values for the specified name, the first value is returned.
+    * @param name The name of the header to search
+    * @return The first header value or `null` if there is no such entry
+    */
+  def get(name: String): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JMultiMap].get(name.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  /**
+    * Returns the values with the specified name
+    * @param name The name to search
+    * @return A immutable scala.collection.immutable.List of values which will be empty if no values are found
+    */
+  def getAll(name: String): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JMultiMap].getAll(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
+  }
+
+  /**
+    * Checks to see if there is a value with the specified name
+    * @param name The name to search for
+    * @return true if at least one entry is found
+    */
+  def contains(name: String): Boolean = {
+    asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
+  }
+
+  /**
+    * Return true if empty
+    */
+  def isEmpty(): Boolean = {
+    asJava.asInstanceOf[JMultiMap].isEmpty().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Gets a immutable Set of all names
+    * @return A scala.collection.immutable.Set of all names
+    */
+  def names(): scala.collection.mutable.Set[String] = {
+    asJava.asInstanceOf[JMultiMap].names().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
     * Return the number of keys.
     */
   def size(): Int = {
-    _asJava.size()
+    asJava.asInstanceOf[JMultiMap].size().asInstanceOf[Int]
   }
 
 }
 
 object MultiMap {
-
-  def apply(_asJava: JMultiMap): MultiMap =
-    new MultiMap(_asJava)
-
+  def apply(asJava: JMultiMap) = new MultiMap(asJava)  
+  /**
+    * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.
+    * @return the multi-map
+    */
   def caseInsensitiveMultiMap(): MultiMap = {
-    MultiMap.apply(io.vertx.core.MultiMap.caseInsensitiveMultiMap())
+    MultiMap(JMultiMap.caseInsensitiveMultiMap())
   }
 
 }

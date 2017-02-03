@@ -17,40 +17,38 @@
 package io.vertx.scala.ext.shell.term
 
 import io.vertx.lang.scala.HandlerOps._
-import scala.compat.java8.FunctionConverters._
-import scala.collection.JavaConverters._
-import io.vertx.ext.shell.term.{SockJSTermHandler => JSockJSTermHandler}
-import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.web.handler.sockjs.SockJSSocket
-import io.vertx.core.{Vertx => JVertx}
+import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+import io.vertx.ext.shell.term.{SockJSTermHandler => JSockJSTermHandler}
+import io.vertx.core.Handler
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.shell.term.{Term => JTerm}
+import io.vertx.core.{Vertx => JVertx}
 
 /**
   */
-class SockJSTermHandler(private val _asJava: JSockJSTermHandler) 
+class SockJSTermHandler(private val _asJava: Object)
     extends io.vertx.core.Handler[SockJSSocket] {
 
-  def asJava: JSockJSTermHandler = _asJava
+  def asJava = _asJava
 
-  def handle(arg0: SockJSSocket): Unit = {
-    _asJava.handle(arg0.asJava.asInstanceOf[JSockJSSocket])
+  def termHandler(handler: Handler[Term]): SockJSTermHandler = {
+    asJava.asInstanceOf[JSockJSTermHandler].termHandler({x: JTerm => handler.handle(Term(x))})
+    this
   }
 
-  def termHandler(handler: io.vertx.core.Handler[Term]): SockJSTermHandler = {
-    _asJava.termHandler(funcToMappedHandler(Term.apply)(handler))
-    this
+  override def handle(arg0: SockJSSocket): Unit = {
+    asJava.asInstanceOf[JSockJSTermHandler].handle(arg0.asJava.asInstanceOf[JSockJSSocket])
   }
 
 }
 
 object SockJSTermHandler {
-
-  def apply(_asJava: JSockJSTermHandler): SockJSTermHandler =
-    new SockJSTermHandler(_asJava)
-
+  def apply(asJava: JSockJSTermHandler) = new SockJSTermHandler(asJava)  
   def create(vertx: Vertx, charset: String): SockJSTermHandler = {
-    SockJSTermHandler.apply(io.vertx.ext.shell.term.SockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx], charset))
+    SockJSTermHandler(JSockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx], charset.asInstanceOf[java.lang.String]))
   }
 
 }
