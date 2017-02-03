@@ -309,6 +309,7 @@
   </build>
 
   <modules>
+    <module>vertx-mqtt-server</module>
     <module>vertx-sql-common</module>
     <module>vertx-bridge-common</module>
     <module>vertx-jdbc-client</module>
