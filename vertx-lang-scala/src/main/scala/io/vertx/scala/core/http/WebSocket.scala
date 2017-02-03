@@ -41,8 +41,8 @@ class WebSocket(private val _asJava: Object)
     * @return the remote address for this socket
     */
   override def remoteAddress(): SocketAddress = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JWebSocket].remoteAddress()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JWebSocket].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
     cached_0
@@ -52,8 +52,8 @@ class WebSocket(private val _asJava: Object)
     * @return the local address for this socket
     */
   override def localAddress(): SocketAddress = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JWebSocket].localAddress()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JWebSocket].localAddress()
       cached_1 = SocketAddress(tmp)
     }
     cached_1

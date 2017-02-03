@@ -266,16 +266,18 @@ object VertxOptions {
   }
   
   def apply(t: JVertxOptions) = {
-    if(t != null)
+    if (t != null) {
       new VertxOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): VertxOptions = {
-    if(json != null)
+    if (json != null) {
       new VertxOptions(new JVertxOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

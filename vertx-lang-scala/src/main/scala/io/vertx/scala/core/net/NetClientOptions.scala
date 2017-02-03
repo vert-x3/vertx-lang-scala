@@ -363,16 +363,18 @@ object NetClientOptions {
   }
   
   def apply(t: JNetClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new NetClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): NetClientOptions = {
-    if(json != null)
+    if (json != null) {
       new NetClientOptions(new JNetClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

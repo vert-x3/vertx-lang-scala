@@ -41,7 +41,7 @@ class Process(private val _asJava: Object) {
     */
   def getTty(): Tty = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JProcess].getTty()
+      val tmp = asJava.asInstanceOf[JProcess].getTty()
       cached_0 = Tty(tmp)
     }
     cached_0
@@ -52,7 +52,7 @@ class Process(private val _asJava: Object) {
     */
   def getSession(): Session = {
     if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JProcess].getSession()
+      val tmp = asJava.asInstanceOf[JProcess].getSession()
       cached_1 = Session(tmp)
     }
     cached_1

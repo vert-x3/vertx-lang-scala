@@ -162,16 +162,18 @@ object DeploymentOptions {
   }
   
   def apply(t: JDeploymentOptions) = {
-    if(t != null)
+    if (t != null) {
       new DeploymentOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): DeploymentOptions = {
-    if(json != null)
+    if (json != null) {
       new DeploymentOptions(new JDeploymentOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

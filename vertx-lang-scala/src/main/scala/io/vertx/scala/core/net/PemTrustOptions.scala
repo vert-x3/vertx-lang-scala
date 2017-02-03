@@ -87,16 +87,18 @@ object PemTrustOptions {
   }
   
   def apply(t: JPemTrustOptions) = {
-    if(t != null)
+    if (t != null) {
       new PemTrustOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): PemTrustOptions = {
-    if(json != null)
+    if (json != null) {
       new PemTrustOptions(new JPemTrustOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

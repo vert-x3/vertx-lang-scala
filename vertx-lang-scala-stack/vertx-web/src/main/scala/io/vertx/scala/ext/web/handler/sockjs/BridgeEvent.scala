@@ -44,7 +44,7 @@ class BridgeEvent(private val _asJava: Object)
 
   override def completer(): Handler[AsyncResult[Boolean]] = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JBridgeEvent].completer()
+      val tmp = asJava.asInstanceOf[JBridgeEvent].completer()
       cached_0 = {x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean,java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
     }
     cached_0
@@ -55,7 +55,7 @@ class BridgeEvent(private val _asJava: Object)
     */
   def `type`(): io.vertx.ext.web.handler.sockjs.BridgeEventType = {
     if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JBridgeEvent].`type`()
+      val tmp = asJava.asInstanceOf[JBridgeEvent].`type`()
       cached_1 = tmp
     }
     cached_1
@@ -66,7 +66,7 @@ class BridgeEvent(private val _asJava: Object)
     */
   def rawMessage(): io.vertx.core.json.JsonObject = {
     if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JBridgeEvent].rawMessage()
+      val tmp = asJava.asInstanceOf[JBridgeEvent].rawMessage()
       cached_2 = tmp
     }
     cached_2
@@ -78,7 +78,7 @@ class BridgeEvent(private val _asJava: Object)
     */
   def socket(): SockJSSocket = {
     if(cached_3 == null) {
-      var tmp = asJava.asInstanceOf[JBridgeEvent].socket()
+      val tmp = asJava.asInstanceOf[JBridgeEvent].socket()
       cached_3 = SockJSSocket(tmp)
     }
     cached_3

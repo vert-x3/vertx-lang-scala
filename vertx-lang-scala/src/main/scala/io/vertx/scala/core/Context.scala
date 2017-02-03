@@ -101,7 +101,7 @@ class Context(private val _asJava: Object) {
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}
-    asJava.asInstanceOf[JContext].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+    asJava.asInstanceOf[JContext].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
     promise.future
   }
 

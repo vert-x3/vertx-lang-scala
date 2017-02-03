@@ -88,16 +88,18 @@ object JksOptions {
   }
   
   def apply(t: JJksOptions) = {
-    if(t != null)
+    if (t != null) {
       new JksOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): JksOptions = {
-    if(json != null)
+    if (json != null) {
       new JksOptions(new JJksOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

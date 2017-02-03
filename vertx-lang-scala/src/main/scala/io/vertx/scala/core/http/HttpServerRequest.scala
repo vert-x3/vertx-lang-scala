@@ -66,8 +66,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
     */
   def response(): HttpServerResponse = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].response()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].response()
       cached_0 = HttpServerResponse(tmp)
     }
     cached_0
@@ -77,8 +77,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the headers in the request.
     */
   def headers(): MultiMap = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
       cached_1 = MultiMap(tmp)
     }
     cached_1
@@ -88,8 +88,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the query parameters in the request
     */
   def params(): MultiMap = {
-    if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].params()
+    if (cached_2 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].params()
       cached_2 = MultiMap(tmp)
     }
     cached_2
@@ -99,8 +99,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the remote (client side) address of the request
     */
   def remoteAddress(): SocketAddress = {
-    if(cached_3 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
+    if (cached_3 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
       cached_3 = SocketAddress(tmp)
     }
     cached_3
@@ -110,8 +110,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the local (server side) address of the server that handles the request
     */
   def localAddress(): SocketAddress = {
-    if(cached_4 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
+    if (cached_4 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
       cached_4 = SocketAddress(tmp)
     }
     cached_4
@@ -128,8 +128,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the net socket
     */
   def netSocket(): NetSocket = {
-    if(cached_5 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
+    if (cached_5 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
       cached_5 = NetSocket(tmp)
     }
     cached_5
@@ -145,8 +145,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {
-    if(cached_6 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
+    if (cached_6 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
       cached_6 = MultiMap(tmp)
     }
     cached_6
@@ -156,8 +156,8 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the HttpConnection associated with this request
     */
   def connection(): HttpConnection = {
-    if(cached_7 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
+    if (cached_7 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
       cached_7 = HttpConnection(tmp)
     }
     cached_7

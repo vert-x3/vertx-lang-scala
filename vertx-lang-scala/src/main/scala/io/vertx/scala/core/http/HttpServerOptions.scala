@@ -55,6 +55,19 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
+    * Set true when the server accepts unmasked frame.
+    * As default Server doesn't accept unmasked frame, you can bypass this behaviour (RFC 6455) setting true
+    * It's set to false as default.
+    */
+  def setAcceptUnmaskedFrames(value: Boolean) = {
+    asJava.setAcceptUnmaskedFrames(value)
+    this
+  }
+  def isAcceptUnmaskedFrames: Boolean = {
+    asJava.isAcceptUnmaskedFrames().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiatiation.
     */
   def setAlpnVersions(value: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion]) = {
@@ -497,16 +510,18 @@ object HttpServerOptions {
   }
   
   def apply(t: JHttpServerOptions) = {
-    if(t != null)
+    if (t != null) {
       new HttpServerOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): HttpServerOptions = {
-    if(json != null)
+    if (json != null) {
       new HttpServerOptions(new JHttpServerOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

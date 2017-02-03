@@ -63,7 +63,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def version(): io.vertx.core.http.HttpVersion = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].version()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].version()
       cached_0 = tmp
     }
     cached_0
@@ -74,7 +74,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def statusCode(): Int = {
     if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusCode()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusCode()
       cached_1 = tmp.asInstanceOf[Int]
     }
     cached_1
@@ -85,7 +85,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def statusMessage(): String = {
     if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusMessage()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusMessage()
       cached_2 = tmp.asInstanceOf[String]
     }
     cached_2
@@ -96,7 +96,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def headers(): MultiMap = {
     if(cached_3 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].headers()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].headers()
       cached_3 = MultiMap(tmp)
     }
     cached_3
@@ -107,7 +107,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def trailers(): MultiMap = {
     if(cached_4 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].trailers()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].trailers()
       cached_4 = MultiMap(tmp)
     }
     cached_4
@@ -118,7 +118,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
     if(cached_5 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].cookies()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].cookies()
       cached_5 = tmp.asScala.map(x => x.asInstanceOf[String])
     }
     cached_5
@@ -129,7 +129,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def body(): T = {
     if(cached_6 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].body()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].body()
       cached_6 = toScala[T](tmp)
     }
     cached_6
@@ -140,7 +140,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def bodyAsBuffer(): scala.Option[io.vertx.core.buffer.Buffer] = {
     if(cached_7 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsBuffer()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsBuffer()
       cached_7 = scala.Option(tmp)
     }
     cached_7
@@ -151,7 +151,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def bodyAsString(): scala.Option[String] = {
     if(cached_8 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString()
       cached_8 = scala.Option(tmp.asInstanceOf[String])
     }
     cached_8
@@ -162,7 +162,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def bodyAsJsonObject(): scala.Option[io.vertx.core.json.JsonObject] = {
     if(cached_9 == null) {
-      var tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonObject()
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonObject()
       cached_9 = scala.Option(tmp)
     }
     cached_9

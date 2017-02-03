@@ -44,7 +44,7 @@ class Shell(private val _asJava: Object) {
     */
   def jobController(): JobController = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JShell].jobController()
+      val tmp = asJava.asInstanceOf[JShell].jobController()
       cached_0 = JobController(tmp)
     }
     cached_0
@@ -55,7 +55,7 @@ class Shell(private val _asJava: Object) {
     */
   def session(): Session = {
     if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JShell].session()
+      val tmp = asJava.asInstanceOf[JShell].session()
       cached_1 = Session(tmp)
     }
     cached_1

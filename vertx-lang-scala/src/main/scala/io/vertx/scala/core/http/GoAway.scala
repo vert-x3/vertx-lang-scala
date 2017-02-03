@@ -69,16 +69,18 @@ object GoAway {
   }
   
   def apply(t: JGoAway) = {
-    if(t != null)
+    if (t != null) {
       new GoAway(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): GoAway = {
-    if(json != null)
+    if (json != null) {
       new GoAway(new JGoAway(json))
-    else
+    } else {
       null
+    }
   }
 }

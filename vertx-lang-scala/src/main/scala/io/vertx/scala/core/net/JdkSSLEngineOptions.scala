@@ -39,16 +39,18 @@ object JdkSSLEngineOptions {
   }
   
   def apply(t: JJdkSSLEngineOptions) = {
-    if(t != null)
+    if (t != null) {
       new JdkSSLEngineOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): JdkSSLEngineOptions = {
-    if(json != null)
+    if (json != null) {
       new JdkSSLEngineOptions(new JJdkSSLEngineOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

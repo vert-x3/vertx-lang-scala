@@ -72,16 +72,18 @@ object DeliveryOptions {
   }
   
   def apply(t: JDeliveryOptions) = {
-    if(t != null)
+    if (t != null) {
       new DeliveryOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): DeliveryOptions = {
-    if(json != null)
+    if (json != null) {
       new DeliveryOptions(new JDeliveryOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

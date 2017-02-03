@@ -6,24 +6,24 @@
     var commentedIndentation = indentation;
     commentedIndentation += "  *";
 
-    if(method.doc != null) {
+    if (method.doc != null) {
       var returnType = method.returnType;
       var returnDescription = method.returnDescription;
 
       doc += indentation;
       doc += "/**\n";
       doc += renderDoc(commentedIndentation, method.doc, renderDocLink);
-      if(future) {
+      if (future) {
         doc = doc.replace("scala-function", "[[scala.concurrent.Future]]")
       }
       var futureDescription = '';
       var returnsFuture = !lastParamIsAsyncResultHandler(method.params);
-      for(param : method.params) {
-        if(param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
+      for (param : method.params) {
+        if (param.description != null && !(param.type.kind == CLASS_HANDLER && param.type.args[0].kind == CLASS_ASYNC_RESULT)) {
           doc += commentedIndentation;
           doc += " @param " + param.name + " ";
           doc += convertLink(param.description);
-          if(param.type.kind == CLASS_DATA_OBJECT) {
+          if (param.type.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(param.type);
           }
           doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
@@ -33,8 +33,8 @@
           futureDescription = param.description;
         }
       }
-      if(future) {
-        if(futureDescription != null) {
+      if (future) {
+        if (futureDescription != null) {
           doc += commentedIndentation;
           doc += " @return " + convertLink(futureDescription)
             .replace('the scala-function to notify with the [[io.vertx.lang.scala.AsyncResult]].', 'the [[scala.concurrent.Future]] being completed with result.')
@@ -52,13 +52,13 @@
           doc += "WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER";
         }
       }
-      else if(!returnType.name.equals("void")) {
-        if(returnDescription != null) {
+      else if (!returnType.name.equals("void")) {
+        if (returnDescription != null) {
           doc += commentedIndentation;
           doc += " @return ";
           doc += convertLink(returnDescription);
 
-          if(returnType.kind == CLASS_DATA_OBJECT) {
+          if (returnType.kind == CLASS_DATA_OBJECT) {
             doc += "see " + renderDataObjectHtmlLink(returnType);
           }
           doc = doc.replace('{@code ','`').replace('{@literal','`').replace('@literal{','`').replace('@code{','`').replace('}','`');
@@ -100,42 +100,42 @@
 
   def toScalaDocType(type) {
 
-    if(type.contains('AsyncResult')) {
+    if (type.contains('AsyncResult')) {
       return "io.vertx.lang.scala.AsyncResult";
     }
-    else if(type == 'void' || type == 'java.lang.Void') {
+    else if (type == 'void' || type == 'java.lang.Void') {
       return 'Unit';
-    } else if(type == 'Object' || type == 'java.lang.Object') {
+    } else if (type == 'Object' || type == 'java.lang.Object') {
       return 'AnyRef';
-    } else if(type == 'Throwable' || type == 'java.lang.Throwable') {
+    } else if (type == 'Throwable' || type == 'java.lang.Throwable') {
       return 'Throwable';
-    } else if(type == 'String' || type == 'java.lang.String') {
+    } else if (type == 'String' || type == 'java.lang.String') {
       return 'String';
-    } else if(type == 'byte' || type == 'java.lang.Byte') {
+    } else if (type == 'byte' || type == 'java.lang.Byte') {
         return 'Byte';
-    } else if(type == 'short' || type == 'java.lang.Short') {
+    } else if (type == 'short' || type == 'java.lang.Short') {
       return 'Short';
-    } else if(type == 'int' || type == 'java.lang.Integer') {
+    } else if (type == 'int' || type == 'java.lang.Integer') {
       return 'Int';
-    } else if(type == 'long' || type == 'java.lang.Long') {
+    } else if (type == 'long' || type == 'java.lang.Long') {
       return 'Long';
-    } else if(type == 'float' || type == 'java.lang.Float') {
+    } else if (type == 'float' || type == 'java.lang.Float') {
       return 'Float';
-    } else if(type == 'double' || type == 'java.lang.Double') {
+    } else if (type == 'double' || type == 'java.lang.Double') {
       return 'Double';
-    } else if(type == 'boolean' || type == 'java.lang.Boolean') {
+    } else if (type == 'boolean' || type == 'java.lang.Boolean') {
       return 'Boolean';
-    } else if(type == 'char' || type == 'java.lang.Character') {
+    } else if (type == 'char' || type == 'java.lang.Character') {
       return 'Char';
-    } else if(type == 'List' || type == 'java.util.List') {
+    } else if (type == 'List' || type == 'java.util.List') {
       return 'scala.collection.immutable.List';
-    } else if(type == 'Set' || type == 'java.util.Set') {
+    } else if (type == 'Set' || type == 'java.util.Set') {
       return 'scala.collection.immutable.Set';
-    } else if(type == 'Map' || type == 'java.util.Map') {
+    } else if (type == 'Map' || type == 'java.util.Map') {
       return 'scala.collection.immutable.Map';
-    } else if(type == 'Handler' || type == 'io.vertx.core.Handler') {
+    } else if (type == 'Handler' || type == 'io.vertx.core.Handler') {
       return 'scala-function';
-    } else if(type.contains('io.vertx') && !type.endsWith('Exception')) {
+    } else if (type.contains('io.vertx') && !type.endsWith('Exception')) {
       return convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.");
     } else {
       return type;
@@ -158,24 +158,24 @@
 
   def renderDocLink(link) {
     var rawType = link.targetType.raw;
-    if(rawType.module != null) {
+    if (rawType.module != null) {
       var label = link.label.trim();
-      if(rawType.kind == CLASS_ENUM) {
+      if (rawType.kind == CLASS_ENUM) {
         return "[[" + convertToScalaNotation(rawType.name) + "]]";
       }
-      if(rawType.kind == CLASS_DATA_OBJECT) {
-        if(label.length() == 0) {
+      if (rawType.kind == CLASS_DATA_OBJECT) {
+        if (label.length() == 0) {
           label = rawType.simpleName;
         }
         return renderDataObjectHtmlLink(rawType);
-      } else if(type.kind == CLASS_API &&
+      } else if (type.kind == CLASS_API &&
                  type.name != 'io.vertx.core.Handler') {
         var elt = link.targetElement;
-        if(elt.simpleName.toString() == 'Verticle') {
+        if (elt.simpleName.toString() == 'Verticle') {
           return "[[io.vertx.lang.scala.ScalaVerticle]]";
         }
-        else if(elt.simpleName.toString() == 'Handler') {
-          if(isAsyncResultHandlerHandler(elt)) {
+        else if (elt.simpleName.toString() == 'Handler') {
+          if (isAsyncResultHandlerHandler(elt)) {
             return "[[scala.concurrent.Future]]";
           }
           else {
@@ -185,8 +185,8 @@
         else {
           var eltKind = elt.getKind().name();
           var ret = "[[" + rawType.raw.translateName("scala");
-          if(eltKind == "METHOD") {
-            if(elt.params.size > 0 && isAsyncResultHandlerHandler(elt.params.get(elt.params.size-1).type)) {
+          if (eltKind == "METHOD") {
+            if (elt.params.size > 0 && isAsyncResultHandlerHandler(elt.params.get(elt.params.size-1).type)) {
               ret += '#' + elt.getSimpleName().toString() + "Future";
             } else {
               ret += '#' + elt.getSimpleName().toString();
@@ -207,35 +207,35 @@
     var need = true;
     var output = new StringBuilder();
     for (token : doc.tokens) {
-      if(need) {
+      if (need) {
         output.append(margin);
         need = false;
       }
-      if(token.lineBreak) {
+      if (token.lineBreak) {
         output.append("\n");
         need = true;
       } else {
-        if(token.text) {
+        if (token.text) {
           output.append(token.value);
         } else {
           var tag = token.tag;
-          if(tag instanceof io.vertx.codegen.doc.Tag$Link) {
+          if (tag instanceof io.vertx.codegen.doc.Tag$Link) {
             var outputLink = renderDocLink(tag);
-            if(outputLink == null || outputLink.trim().empty) {
+            if (outputLink == null || outputLink.trim().empty) {
               outputLink = tag.label;
             }
-            if(outputLink == null || outputLink.trim().empty) {
+            if (outputLink == null || outputLink.trim().empty) {
               outputLink = tag.targetElement.simpleName;
             }
             output.append(outputLink);
-          } else if(tag.name == "code") {
+          } else if (tag.name == "code") {
             /** I have to do the replacement as the replaced code would be interpreted as a comment by scaladoc */
             output.append("`").append(tag.value.trim().replace('/*','/\\*')).append("`");
           }
         }
       }
     }
-    if(!need) {
+    if (!need) {
       output.append("\n");
     }
     return output.toString().replace("<p>", "");

@@ -196,16 +196,18 @@ object AddressResolverOptions {
   }
   
   def apply(t: JAddressResolverOptions) = {
-    if(t != null)
+    if (t != null) {
       new AddressResolverOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): AddressResolverOptions = {
-    if(json != null)
+    if (json != null) {
       new AddressResolverOptions(new JAddressResolverOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

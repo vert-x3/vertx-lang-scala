@@ -55,7 +55,7 @@ class WorkerExecutor(private val _asJava: Object)
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}
-    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+    asJava.asInstanceOf[JWorkerExecutor].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
     promise.future
   }
 

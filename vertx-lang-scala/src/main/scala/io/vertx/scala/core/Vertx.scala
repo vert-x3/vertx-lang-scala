@@ -97,8 +97,8 @@ class Vertx(private val _asJava: Object)
     * @return the filesystem object
     */
   def fileSystem(): FileSystem = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JVertx].fileSystem()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JVertx].fileSystem()
       cached_0 = FileSystem(tmp)
     }
     cached_0
@@ -109,8 +109,8 @@ class Vertx(private val _asJava: Object)
     * @return the event bus object
     */
   def eventBus(): EventBus = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JVertx].eventBus()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JVertx].eventBus()
       cached_1 = EventBus(tmp)
     }
     cached_1
@@ -121,8 +121,8 @@ class Vertx(private val _asJava: Object)
     * @return the shared data object
     */
   def sharedData(): SharedData = {
-    if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JVertx].sharedData()
+    if (cached_2 == null) {
+      val tmp = asJava.asInstanceOf[JVertx].sharedData()
       cached_2 = SharedData(tmp)
     }
     cached_2
@@ -423,7 +423,7 @@ class Vertx(private val _asJava: Object)
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}
-    asJava.asInstanceOf[JVertx].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+    asJava.asInstanceOf[JVertx].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
     promise.future
   }
 

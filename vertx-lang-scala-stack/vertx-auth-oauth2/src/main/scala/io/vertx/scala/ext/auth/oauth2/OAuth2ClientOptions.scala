@@ -384,6 +384,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
   }
+  override def setSendUnmaskedFrames(value: Boolean) = {
+    asJava.setSendUnmaskedFrames(value)
+    this
+  }
+  override def isSendUnmaskedFrames: Boolean = {
+    asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
+  }
   def setSite(value: String) = {
     asJava.setSite(value)
     this

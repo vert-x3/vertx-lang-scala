@@ -40,7 +40,7 @@ class ServiceReference(private val _asJava: Object) {
     */
   def record(): Record = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JServiceReference].record()
+      val tmp = asJava.asInstanceOf[JServiceReference].record()
       cached_0 = Record(tmp)
     }
     cached_0

@@ -167,8 +167,8 @@ object WebSocketBase {
     * @return the remote address for this socket
     */
   def remoteAddress(): SocketAddress = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JWebSocketBase].remoteAddress()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JWebSocketBase].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
     cached_0
@@ -178,8 +178,8 @@ object WebSocketBase {
     * @return the local address for this socket
     */
   def localAddress(): SocketAddress = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JWebSocketBase].localAddress()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JWebSocketBase].localAddress()
       cached_1 = SocketAddress(tmp)
     }
     cached_1

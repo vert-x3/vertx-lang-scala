@@ -93,16 +93,18 @@ object ProxyOptions {
   }
   
   def apply(t: JProxyOptions) = {
-    if(t != null)
+    if (t != null) {
       new ProxyOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): ProxyOptions = {
-    if(json != null)
+    if (json != null) {
       new ProxyOptions(new JProxyOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

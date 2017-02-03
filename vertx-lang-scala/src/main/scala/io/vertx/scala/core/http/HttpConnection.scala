@@ -49,8 +49,8 @@ class HttpConnection(private val _asJava: Object) {
     * @return the remote address for this connection
     */
   def remoteAddress(): SocketAddress = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
       cached_0 = SocketAddress(tmp)
     }
     cached_0
@@ -60,8 +60,8 @@ class HttpConnection(private val _asJava: Object) {
     * @return the remote address for this connection
     */
   def localAddress(): SocketAddress = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
       cached_1 = SocketAddress(tmp)
     }
     cached_1

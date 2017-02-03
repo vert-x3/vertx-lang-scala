@@ -15,7 +15,7 @@
       case util.Success(s) => f.complete(s)\n
       case util.Failure(t) => f.fail(t)\n
     }}\n
-    asJava.asInstanceOf[J@{className}].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if(h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })\n
+    asJava.asInstanceOf[J@{className}].executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })\n
     promise.future\n
   }\n
 \n

@@ -53,8 +53,8 @@ class HttpServer(private val _asJava: Object)
     * @return the request stream
     */
   def requestStream(): HttpServerRequestStream = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServer].requestStream()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServer].requestStream()
       cached_0 = HttpServerRequestStream(tmp)
     }
     cached_0
@@ -66,8 +66,8 @@ class HttpServer(private val _asJava: Object)
     * @return the websocket stream
     */
   def websocketStream(): ServerWebSocketStream = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
       cached_1 = ServerWebSocketStream(tmp)
     }
     cached_1

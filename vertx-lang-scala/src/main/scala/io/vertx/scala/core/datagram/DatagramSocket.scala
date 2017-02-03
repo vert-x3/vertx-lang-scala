@@ -58,8 +58,8 @@ class DatagramSocket(private val _asJava: Object)
     * @return the socket address
     */
   def localAddress(): SocketAddress = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JDatagramSocket].localAddress()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JDatagramSocket].localAddress()
       cached_0 = SocketAddress(tmp)
     }
     cached_0

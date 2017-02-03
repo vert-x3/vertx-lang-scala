@@ -455,6 +455,19 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Set true when the client wants to skip frame masking.
+    * You may want to set it true on server by server websocket communication: In this case you are by passing RFC6455 protocol.
+    * It's false as default.
+    */
+  def setSendUnmaskedFrames(value: Boolean) = {
+    asJava.setSendUnmaskedFrames(value)
+    this
+  }
+  def isSendUnmaskedFrames: Boolean = {
+    asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether SO_linger keep alive is enabled
     */
   override def setSoLinger(value: Int) = {
@@ -580,16 +593,18 @@ object HttpClientOptions {
   }
   
   def apply(t: JHttpClientOptions) = {
-    if(t != null)
+    if (t != null) {
       new HttpClientOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): HttpClientOptions = {
-    if(json != null)
+    if (json != null) {
       new HttpClientOptions(new JHttpClientOptions(json))
-    else
+    } else {
       null
+    }
   }
 }

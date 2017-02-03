@@ -1,4 +1,4 @@
-@foreach{property:properties}
+@foreach{property : properties}
 @if{property.doc != null}
 \n
   /**\n
@@ -7,7 +7,7 @@
 @end{}
 @if{property.adder}
 	@if{property.isMap}
-  def @{property.adderMethod}(key: St@ring, value: @{toScalaType(property.type, false)}): @{className}\n
+  def @{property.adderMethod}(key: String, value: @{toScalaType(property.type, false)}): @{className}\n
 	@else{}
   def @{property.adderMethod}(value: @{toScalaType(property.type, false)}): @{className}\n
 	@end{}

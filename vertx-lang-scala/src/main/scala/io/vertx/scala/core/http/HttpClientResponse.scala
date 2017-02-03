@@ -56,8 +56,8 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the headers
     */
   def headers(): MultiMap = {
-    if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
+    if (cached_0 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
       cached_0 = MultiMap(tmp)
     }
     cached_0
@@ -67,8 +67,8 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the trailers
     */
   def trailers(): MultiMap = {
-    if(cached_1 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
+    if (cached_1 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
       cached_1 = MultiMap(tmp)
     }
     cached_1
@@ -78,8 +78,8 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the Set-Cookie headers (including trailers)
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
-    if(cached_2 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
+    if (cached_2 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
       cached_2 = tmp.asScala.map(x => x.asInstanceOf[String])
     }
     cached_2
@@ -95,8 +95,8 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the net socket
     */
   def netSocket(): NetSocket = {
-    if(cached_3 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
+    if (cached_3 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
       cached_3 = NetSocket(tmp)
     }
     cached_3
@@ -106,8 +106,8 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the corresponding request
     */
   def request(): HttpClientRequest = {
-    if(cached_4 == null) {
-      var tmp = asJava.asInstanceOf[JHttpClientResponse].request()
+    if (cached_4 == null) {
+      val tmp = asJava.asInstanceOf[JHttpClientResponse].request()
       cached_4 = HttpClientRequest(tmp)
     }
     cached_4

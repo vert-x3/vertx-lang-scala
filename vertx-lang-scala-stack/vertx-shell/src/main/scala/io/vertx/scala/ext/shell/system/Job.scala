@@ -44,7 +44,7 @@ class Job(private val _asJava: Object) {
     */
   def process(): Process = {
     if(cached_0 == null) {
-      var tmp = asJava.asInstanceOf[JJob].process()
+      val tmp = asJava.asInstanceOf[JJob].process()
       cached_0 = Process(tmp)
     }
     cached_0

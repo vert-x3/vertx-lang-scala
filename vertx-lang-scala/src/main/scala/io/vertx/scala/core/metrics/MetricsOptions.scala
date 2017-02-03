@@ -48,16 +48,18 @@ object MetricsOptions {
   }
   
   def apply(t: JMetricsOptions) = {
-    if(t != null)
+    if (t != null) {
       new MetricsOptions(t)
-    else
+    } else {
       null
+    }
   }
   
   def fromJson(json: JsonObject): MetricsOptions = {
-    if(json != null)
+    if (json != null) {
       new MetricsOptions(new JMetricsOptions(json))
-    else
+    } else {
       null
+    }
   }
 }
