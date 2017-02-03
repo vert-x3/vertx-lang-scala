@@ -58,6 +58,7 @@ object RedisDataSource {
     * The async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter, optional
+    * @param resultHandler The result handler
     */
   def getRedisClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[RedisClient]]): Unit = {
     JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})
@@ -68,6 +69,7 @@ object RedisDataSource {
     * The async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter, cannot be `null`
+    * @param resultHandler The result handler
     */
   def getRedisClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[RedisClient]]): Unit = {
     JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})
@@ -79,6 +81,7 @@ object RedisDataSource {
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     * @param consumerConfiguration The additional consumer configuration
+    * @param resultHandler The result handler
     */
   def getRedisClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[RedisClient]]): Unit = {
     JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})
@@ -90,6 +93,7 @@ object RedisDataSource {
     * @param discovery The service discovery instance
     * @param filter The filter, cannot be `null`
     * @param consumerConfiguration The additional consumer configuration
+    * @param resultHandler The result handler
     */
   def getRedisClient(discovery: ServiceDiscovery, filter: Record => Boolean, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[RedisClient]]): Unit = {
     JRedisDataSource.getRedisClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, consumerConfiguration, {x: AsyncResult[JRedisClient] => resultHandler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})

@@ -51,29 +51,14 @@ class AuthProvider(private val _asJava: Object) {
     * If the user is successfully authenticated a [[io.vertx.scala.ext.auth.User]] object is passed to the handler in an [[io.vertx.scala.core.AsyncResult]].
     * The user object can then be used for authorisation.
     * @param authInfo The auth information
+    * @param resultHandler The result handler
     */
   def authenticate(authInfo: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[User]]): Unit = {
     asJava.asInstanceOf[JAuthProvider].authenticate(authInfo, {x: AsyncResult[JUser] => resultHandler.handle(AsyncResultWrapper[JUser, User](x, a => User(a)))})
   }
 
  /**
-   * Authenticate a user.
-   * 
-   * The first argument is a JSON object containing information for authenticating the user. What this actually contains
-   * depends on the specific implementation. In the case of a simple username/password based
-   * authentication it is likely to contain a JSON object with the following structure:
-   * <pre>
-   *   {
-   *     "username": "tim",
-   *     "password": "mypassword"
-   *   `
-   * </pre>
-   * For other types of authentication it contain different information - for example a JWT token or OAuth bearer token.
-   * 
-   * If the user is successfully authenticated a [[io.vertx.scala.ext.auth.User]] object is passed to the handler in an [[io.vertx.scala.core.AsyncResult]].
-   * The user object can then be used for authorisation.
-   * @param authInfo The auth information
-   * @return The result future
+   * Like [[authenticate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[User] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUser, User](x => User(x))

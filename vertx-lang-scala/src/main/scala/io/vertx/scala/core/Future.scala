@@ -49,6 +49,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * 
     * If the future has already been completed it will be called immediately. Otherwise it will be called when the
     * future is completed.
+    * @param handler the Handler that will be called with the result
     * @return a reference to this, so it can be used fluently
     */
   def setHandler(handler: Handler[AsyncResult[T]]): Future[T] = {

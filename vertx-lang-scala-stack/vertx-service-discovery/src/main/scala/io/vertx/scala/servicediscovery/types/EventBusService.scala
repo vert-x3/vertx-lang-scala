@@ -63,6 +63,7 @@ object EventBusService {
     * @param discovery the service discovery
     * @param filter the filter
     * @param clientClass the client class
+    * @param resultHandler the result handler
     * @return `null` - do not use
     */
   def getServiceProxy[T: TypeTag](discovery: ServiceDiscovery, filter: Record => Boolean, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {
@@ -77,6 +78,7 @@ object EventBusService {
     * @param discovery the service discovery
     * @param filter the filter as json object
     * @param clientClass the client class
+    * @param resultHandler the result handler
     * @return `null` - do not use
     */
   def getServiceProxyWithJsonFilter[T: TypeTag](discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, clientClass: Class[T], resultHandler: Handler[AsyncResult[T]]): T = {

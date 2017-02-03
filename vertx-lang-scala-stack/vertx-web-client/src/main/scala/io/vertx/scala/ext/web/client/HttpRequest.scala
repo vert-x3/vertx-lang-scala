@@ -243,9 +243,8 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` stream.
-   * @param body the body
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[sendStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendStreamFuture(body: ReadStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], promiseAndHandler._1)
@@ -253,9 +252,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
  /**
-   * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` buffer.
-   * @param body the body
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[sendBuffer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendBufferFuture(body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, promiseAndHandler._1)
@@ -263,10 +261,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
  /**
-   * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` object encoded as json and the content type
-   * set to `application/json`.
-   * @param body the body
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[sendJsonObject]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, promiseAndHandler._1)
@@ -274,10 +270,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
  /**
-   * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` object encoded as json and the content type
-   * set to `application/json`.
-   * @param body the body
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[sendJson]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendJsonFuture(body: AnyRef): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, promiseAndHandler._1)
@@ -285,12 +279,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
  /**
-   * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` multimap encoded as form and the content type
-   * set to `application/x-www-form-urlencoded`.
-   * 
-   * When the content type header is previously set to `multipart/form-data` it will be used instead.
-   * @param body the body
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[sendForm]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendFormFuture(body: MultiMap): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
@@ -298,8 +288,8 @@ WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS.
   }
 
  /**
-   * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
-WARNING: THIS METHOD NEEDS BETTER DOCUMENTATION THAT ADHERES TO OUR CONVENTIONS. THIS ONE LACKS A PARAM-TAG FOR THE HANDLER   */
+   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
   def sendFuture(): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].send(promiseAndHandler._1)

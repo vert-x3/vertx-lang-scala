@@ -50,6 +50,7 @@ object JDBCDataSource {
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter, optional
+    * @param resultHandler The result handler
     */
   def getJDBCClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
     JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
@@ -60,6 +61,7 @@ object JDBCDataSource {
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter (must not be `null`)
+    * @param resultHandler The result handler
     */
   def getJDBCClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
     JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
@@ -71,6 +73,7 @@ object JDBCDataSource {
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
+    * @param resultHandler the result handler
     */
   def getJDBCClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
     JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
@@ -82,6 +85,7 @@ object JDBCDataSource {
     * @param discovery The service discovery instance
     * @param filter The filter, must not be `null`
     * @param consumerConfiguration the consumer configuration
+    * @param resultHandler the result handler
     */
   def getJDBCClient(discovery: ServiceDiscovery, filter: Record => Boolean, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
     JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})

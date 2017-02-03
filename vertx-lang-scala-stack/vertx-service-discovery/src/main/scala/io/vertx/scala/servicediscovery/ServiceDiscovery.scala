@@ -116,6 +116,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * discovery.
     * @param importer the service importer
     * @param configuration the optional configuration
+    * @param completionHandler handler call when the importer has finished its initialization and initial imports
     * @return the current ServiceDiscovery
     */
   def registerServiceImporter(importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
@@ -138,6 +139,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * discovery.
     * @param exporter the service exporter
     * @param configuration the optional configuration
+    * @param completionHandler handler notified when the exporter has been correctly initialized.
     * @return the current ServiceDiscovery
     */
   def registerServiceExporter(exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
@@ -154,6 +156,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   /**
     * Publishes a record.
     * @param record the recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
+    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
     */
   def publish(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
@@ -162,6 +165,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   /**
     * Un-publishes a record.
     * @param id the registration id
+    * @param resultHandler handler called when the operation has completed (successfully or not).
     */
   def unpublish(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -186,6 +190,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * 
     * This method returns the first matching record.
     * @param filter the filter.
+    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeeds, but the async result has no result (`null`).
     */
   def getRecord(filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecord(filter, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
@@ -199,6 +204,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * 
     * This method only looks for records with a `UP` status.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
+    * @param resultHandler the result handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
     */
   def getRecord(filter: Record => Boolean, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
@@ -214,6 +220,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * status, if the `includeOutOfService` parameter is set to `true`.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
+    * @param resultHandler the result handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
     */
   def getRecord(filter: Record => Boolean, includeOutOfService: Boolean, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
@@ -223,6 +230,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordFuture]], this method returns all matching
     * records.
     * @param filter the filter - see #getRecord(JsonObject, Handler)
+    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
   def getRecords(filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecords(filter, {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
@@ -237,6 +245,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * 
     * This method only looks for records with a `UP` status.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
+    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
   def getRecords(filter: Record => Boolean, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
@@ -253,6 +262,7 @@ class ServiceDiscovery(private val _asJava: Object) {
     * status, if the `includeOutOfService` parameter is set to `true`.
     * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
     * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
+    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
     */
   def getRecords(filter: Record => Boolean, includeOutOfService: Boolean, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
@@ -261,6 +271,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   /**
     * Updates the given record. The record must has been published, and has it's registration id set.
     * @param record the updated recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
+    * @param resultHandler handler called when the lookup has been completed.
     */
   def update(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServiceDiscovery].update(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
@@ -281,11 +292,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Registers a discovery service importer. Importers let you integrate other discovery technologies in this service
-   * discovery.
-   * @param importer the service importer
-   * @param configuration the optional configuration
-   * @return future call when the importer has finished its initialization and initial imports
+   * Like [[registerServiceImporter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def registerServiceImporterFuture(importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -294,11 +301,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Registers a discovery bridge. Exporters let you integrate other discovery technologies in this service
-   * discovery.
-   * @param exporter the service exporter
-   * @param configuration the optional configuration
-   * @return future notified when the exporter has been correctly initialized.
+   * Like [[registerServiceExporter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def registerServiceExporterFuture(exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -307,9 +310,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Publishes a record.
-   * @param record the recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
-   * @return future called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
+   * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def publishFuture(record: Record): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
@@ -318,9 +319,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Un-publishes a record.
-   * @param id the registration id
-   * @return future called when the operation has completed (successfully or not).
+   * Like [[unpublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def unpublishFuture(id: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -329,25 +328,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a single record.
-   * 
-   * Filters are expressed using a Json object. Each entry of the given filter will be checked against the record.
-   * All entry must match exactly the record. The entry can use the special "*" value to denotes a requirement on the
-   * key, but not on the value.
-   * 
-   * Let's take some example:
-   * <pre>
-   *   { "name" = "a" ` => matches records with name set fo "a"
-   *   { "color" = "*" ` => matches records with "color" set
-   *   { "color" = "red" ` => only matches records with "color" set to "red"
-   *   { "color" = "red", "name" = "a"` => only matches records with name set to "a", and color set to "red"
-   * </pre>
-   * 
-   * If the filter is not set (`null` or empty), it accepts all records.
-   * 
-   * This method returns the first matching record.
-   * @param filter the filter.
-   * @return future called when the lookup has been completed. When there are no matching record, the operation succeeds, but the async result has no result (`null`).
+   * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordFuture(filter: io.vertx.core.json.JsonObject): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
@@ -356,14 +337,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a single record.
-   * 
-   * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
-   * as an `accept` method of a filter. This method return a record passing the filter.
-   * 
-   * This method only looks for records with a `UP` status.
-   * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
-   * @return the result future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
+   * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordFuture(filter: Record => Boolean): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
@@ -372,16 +346,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a single record.
-   * 
-   * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
-   * as an `accept` method of a filter. This method return a record passing the filter.
-   * 
-   * Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordFuture]], this method may accept records with a `OUT OF SERVICE`
-   * status, if the `includeOutOfService` parameter is set to `true`.
-   * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
-   * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
-   * @return the result future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
+   * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordFuture(filter: Record => Boolean, includeOutOfService: Boolean): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
@@ -390,10 +355,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordFuture]], this method returns all matching
-   * records.
-   * @param filter the filter - see #getRecord(JsonObject, Handler)
-   * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
+   * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordsFuture(filter: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x => x.asScala.map(x => Record(x)))
@@ -402,15 +364,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordFuture]], this method returns all matching
-   * records.
-   * 
-   * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
-   * as an `accept` method of a filter. This method return a record passing the filter.
-   * 
-   * This method only looks for records with a `UP` status.
-   * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
-   * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
+   * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordsFuture(filter: Record => Boolean): scala.concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x => x.asScala.map(x => Record(x)))
@@ -419,17 +373,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Lookups for a set of records. Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordFuture]], this method returns all matching
-   * records.
-   * 
-   * The filter is a  taking a <a href="../../../../../../cheatsheet/Record.html">Record</a> as argument and returning a boolean. You should see it
-   * as an `accept` method of a filter. This method return a record passing the filter.
-   * 
-   * Unlike [[io.vertx.scala.servicediscovery.ServiceDiscovery#getRecordsFuture]], this method may accept records with a `OUT OF SERVICE`
-   * status, if the `includeOutOfService` parameter is set to `true`.
-   * @param filter the filter, must not be `null`. To return all records, use a function accepting all records
-   * @param includeOutOfService whether or not the filter accepts `OUT OF SERVICE` records
-   * @return future called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
+   * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def getRecordsFuture(filter: Record => Boolean, includeOutOfService: Boolean): scala.concurrent.Future[scala.collection.mutable.Buffer[Record]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x => x.asScala.map(x => Record(x)))
@@ -438,9 +382,7 @@ class ServiceDiscovery(private val _asJava: Object) {
   }
 
  /**
-   * Updates the given record. The record must has been published, and has it's registration id set.
-   * @param record the updated recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>
-   * @return future called when the lookup has been completed.
+   * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def updateFuture(record: Record): scala.concurrent.Future[Record] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))

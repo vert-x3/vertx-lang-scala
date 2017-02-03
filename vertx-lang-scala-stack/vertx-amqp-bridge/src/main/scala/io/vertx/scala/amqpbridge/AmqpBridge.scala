@@ -44,6 +44,7 @@ class AmqpBridge(private val _asJava: Object) {
     * @param port the port to connect to
     * @param username the username
     * @param password the password
+    * @param resultHandler the result handler
     */
   def start(hostname: String, port: Int, username: String, password: String, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
@@ -53,6 +54,7 @@ class AmqpBridge(private val _asJava: Object) {
     * Starts the bridge, establishing the underlying connection.
     * @param hostname the host name to connect to
     * @param port the port to connect to
+    * @param resultHandler the result handler
     */
   def start(hostname: String, port: Int, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
@@ -84,18 +86,14 @@ class AmqpBridge(private val _asJava: Object) {
 
   /**
     * Shuts the bridge down, closing the underlying connection.
+    * @param resultHandler the result handler
     */
   def close(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].close({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**
-   * Starts the bridge, establishing the underlying connection.
-   * @param hostname the host name to connect to
-   * @param port the port to connect to
-   * @param username the username
-   * @param password the password
-   * @return the result future
+   * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def startFuture(hostname: String, port: Int, username: String, password: String): scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
@@ -104,10 +102,7 @@ class AmqpBridge(private val _asJava: Object) {
   }
 
  /**
-   * Starts the bridge, establishing the underlying connection.
-   * @param hostname the host name to connect to
-   * @param port the port to connect to
-   * @return the result future
+   * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def startFuture(hostname: String, port: Int): scala.concurrent.Future[AmqpBridge] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
@@ -116,8 +111,7 @@ class AmqpBridge(private val _asJava: Object) {
   }
 
  /**
-   * Shuts the bridge down, closing the underlying connection.
-   * @return the result future
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def closeFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

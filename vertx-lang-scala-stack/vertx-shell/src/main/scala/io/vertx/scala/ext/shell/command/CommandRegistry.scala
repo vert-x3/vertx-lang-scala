@@ -49,6 +49,7 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Register a command
     * @param command the command to register
+    * @param completionHandler notified when the command is registered
     * @return a reference to this, so the API can be used fluently
     */
   def registerCommand(command: Command, completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
@@ -67,6 +68,7 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Register a list of commands.
     * @param commands the commands to register
+    * @param completionHandler notified when the command is registered
     * @return a reference to this, so the API can be used fluently
     */
   def registerCommands(commands: scala.collection.mutable.Buffer[Command], completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
@@ -85,6 +87,7 @@ class CommandRegistry(private val _asJava: Object)
   /**
     * Unregister a command.
     * @param commandName the command name
+    * @param completionHandler notified when the command is unregistered
     * @return a reference to this, so the API can be used fluently
     */
   def unregisterCommand(commandName: String, completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
@@ -93,9 +96,7 @@ class CommandRegistry(private val _asJava: Object)
   }
 
  /**
-   * Register a command
-   * @param command the command to register
-   * @return notified when the command is registered
+   * Like [[registerCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def registerCommandFuture(command: Command): scala.concurrent.Future[Command] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCommand, Command](x => Command(x))
@@ -104,9 +105,7 @@ class CommandRegistry(private val _asJava: Object)
   }
 
  /**
-   * Register a list of commands.
-   * @param commands the commands to register
-   * @return notified when the command is registered
+   * Like [[registerCommands]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def registerCommandsFuture(commands: scala.collection.mutable.Buffer[Command]): scala.concurrent.Future[scala.collection.mutable.Buffer[Command]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x => x.asScala.map(x => Command(x)))
@@ -115,9 +114,7 @@ class CommandRegistry(private val _asJava: Object)
   }
 
  /**
-   * Unregister a command.
-   * @param commandName the command name
-   * @return notified when the command is unregistered
+   * Like [[unregisterCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def unregisterCommandFuture(commandName: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

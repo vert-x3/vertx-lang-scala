@@ -38,6 +38,7 @@ class AccessToken(private val _asJava: Object)
 
   /**
     * Refresh the access token
+    * @param callback - The callback function returning the results.
     */
   def refresh(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -47,6 +48,7 @@ class AccessToken(private val _asJava: Object)
   /**
     * Revoke access or refresh token
     * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
+    * @param callback - The callback function returning the results.
     */
   def revoke(token_type: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -56,6 +58,7 @@ class AccessToken(private val _asJava: Object)
   /**
     * Revoke refresh token and calls the logout endpoint. This is a openid-connect extension and might not be
     * available on all providers.
+    * @param callback - The callback function returning the results.
     */
   def logout(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -64,6 +67,7 @@ class AccessToken(private val _asJava: Object)
 
   /**
     * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
+    * @param callback - The callback function returning the results.
     */
   def introspect(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
@@ -78,8 +82,7 @@ class AccessToken(private val _asJava: Object)
   }
 
  /**
-   * Refresh the access token
-   * @return - The callback function returning the results.
+   * Like [[refresh]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def refreshFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -88,9 +91,7 @@ class AccessToken(private val _asJava: Object)
   }
 
  /**
-   * Revoke access or refresh token
-   * @param token_type - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
-   * @return - The callback function returning the results.
+   * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def revokeFuture(token_type: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -99,9 +100,7 @@ class AccessToken(private val _asJava: Object)
   }
 
  /**
-   * Revoke refresh token and calls the logout endpoint. This is a openid-connect extension and might not be
-   * available on all providers.
-   * @return - The callback function returning the results.
+   * Like [[logout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def logoutFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -110,8 +109,7 @@ class AccessToken(private val _asJava: Object)
   }
 
  /**
-   * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
-   * @return - The callback function returning the results.
+   * Like [[introspect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def introspectFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)

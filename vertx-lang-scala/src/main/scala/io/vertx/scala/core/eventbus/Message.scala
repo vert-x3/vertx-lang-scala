@@ -101,6 +101,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * The same as `reply(R message)` but you can specify handler for the reply - i.e.
     * to receive the reply to the reply.
     * @param message the message to reply with.
+    * @param replyHandler the reply handler for the reply.
     */
   def reply[R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))})
@@ -120,6 +121,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
     * to receive the reply to the reply.
     * @param message the reply message
     * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+    * @param replyHandler the reply handler for the reply.
     */
   def reply[R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
     asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))})
@@ -138,10 +140,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * The same as `reply(R message)` but you can specify handler for the reply - i.e.
-   * to receive the reply to the reply.
-   * @param message the message to reply with.
-   * @return the reply future for the reply.
+   * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def replyFuture[R: TypeTag](message: AnyRef): scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
@@ -150,11 +149,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
   }
 
  /**
-   * The same as `reply(R message, DeliveryOptions)` but you can specify handler for the reply - i.e.
-   * to receive the reply to the reply.
-   * @param message the reply message
-   * @param options the delivery optionssee <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
-   * @return the reply future for the reply.
+   * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def replyFuture[R: TypeTag](message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))

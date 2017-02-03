@@ -57,6 +57,7 @@ object MongoDataSource {
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter, optional
+    * @param resultHandler The result handler
     */
   def getMongoClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})
@@ -68,6 +69,7 @@ object MongoDataSource {
     * async result is marked as failed is there are no matching services, or if the lookup fails.
     * @param discovery The service discovery instance
     * @param filter The filter
+    * @param resultHandler The result handler
     */
   def getMongoClient(discovery: ServiceDiscovery, filter: Record => Boolean, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})
@@ -79,6 +81,7 @@ object MongoDataSource {
     * @param discovery The service discovery instance
     * @param filter The filter, optional
     * @param consumerConfiguration the consumer configuration
+    * @param resultHandler the result handler
     */
   def getMongoClient(discovery: ServiceDiscovery, filter: io.vertx.core.json.JsonObject, consumerConfiguration: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
     JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})

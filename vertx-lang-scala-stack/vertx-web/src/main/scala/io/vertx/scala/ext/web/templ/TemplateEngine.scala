@@ -40,16 +40,14 @@ class TemplateEngine(private val _asJava: Object) {
     * Render
     * @param context the routing context
     * @param templateFileName the template file name to use
+    * @param handler the handler that will be called with a result containing the buffer or a failure.
     */
   def render(context: RoutingContext, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
     asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
   }
 
  /**
-   * Render
-   * @param context the routing context
-   * @param templateFileName the template file name to use
-   * @return the future that will be called with a result containing the buffer or a failure.
+   * Like [[render]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def renderFuture(context: RoutingContext, templateFileName: String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
