@@ -130,11 +130,6 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     this
   }
 
-  def ssl(value: Boolean): HttpRequest[T] = {
-    asJava.asInstanceOf[JHttpRequest[Object]].ssl(value.asInstanceOf[java.lang.Boolean])
-    this
-  }
-
   /**
     * Configures the amount of time in milliseconds after which if the request does not return any data within the timeout
     * period an TimeoutException fails the request.
@@ -167,16 +162,6 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     */
   def setQueryParam(paramName: String, paramValue: String): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].setQueryParam(paramName.asInstanceOf[java.lang.String], paramValue.asInstanceOf[java.lang.String])
-    this
-  }
-
-  /**
-    * Set wether or not to follow the directs for the request.
-    * @param value true if redirections should be followed
-    * @return a reference to this, so the API can be used fluently
-    */
-  def followRedirects(value: Boolean): HttpRequest[T] = {
-    asJava.asInstanceOf[JHttpRequest[Object]].followRedirects(value.asInstanceOf[java.lang.Boolean])
     this
   }
 

@@ -19,15 +19,12 @@ package io.vertx.scala.ext.web.client
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.scala.core.http.RequestOptions
 import io.vertx.scala.core.http.HttpClient
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.buffer.Buffer
-import io.vertx.core.http.{RequestOptions => JRequestOptions}
 import io.vertx.ext.web.client.{WebClient => JWebClient}
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.client.{HttpRequest => JHttpRequest}
-import io.vertx.ext.web.client.{WebClientOptions => JWebClientOptions}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 
@@ -81,16 +78,6 @@ class WebClient(private val _asJava: Object) {
     */
   def request(method: io.vertx.core.http.HttpMethod, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
     HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, requestURI.asInstanceOf[java.lang.String]))
-  }
-
-  /**
-    * Create an HTTP request to send to the server at the specified host and port.
-    * @param method the HTTP method
-    * @param options the request optionssee <a href="../../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
-    * @return an HTTP client request object
-    */
-  def request(method: io.vertx.core.http.HttpMethod, options: RequestOptions): HttpRequest[io.vertx.core.buffer.Buffer] = {
-    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, options.asJava))
   }
 
   /**
@@ -356,7 +343,7 @@ class WebClient(private val _asJava: Object) {
 object WebClient {
   def apply(asJava: JWebClient) = new WebClient(asJava)  
   /**
-    * Create a web client using the provided `vertx` instance and default options.
+    * Create a web client using the provided `vertx` instance.
     * @param vertx the vertx instance
     * @return the created web client
     */
@@ -365,35 +352,12 @@ object WebClient {
   }
 
   /**
-    * Create a web client using the provided `vertx` instance.
-    * @param vertx the vertx instance
-    * @param options the Web Client optionssee <a href="../../../../../../../../cheatsheet/WebClientOptions.html">WebClientOptions</a>
-    * @return the created web client
-    */
-  def create(vertx: Vertx, options: WebClientOptions): WebClient = {
-    WebClient(JWebClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
-  }
-
-  /**
-    * Wrap an `httpClient` with a web client and default options.
+    * Wrap an `httpClient` with a web client.
     * @param httpClient the HttpClient to wrap
     * @return the web client
     */
   def wrap(httpClient: HttpClient): WebClient = {
     WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient]))
-  }
-
-  /**
-    * Wrap an `httpClient` with a web client and default options.
-    * 
-    * Only the specific web client portion of the `options` is used, the <a href="../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
-    * of the `httpClient` is reused.
-    * @param httpClient the HttpClient to wrap
-    * @param options the Web Client optionssee <a href="../../../../../../../../cheatsheet/WebClientOptions.html">WebClientOptions</a>
-    * @return the web client
-    */
-  def wrap(httpClient: HttpClient, options: WebClientOptions): WebClient = {
-    WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient], options.asJava))
   }
 
 }
