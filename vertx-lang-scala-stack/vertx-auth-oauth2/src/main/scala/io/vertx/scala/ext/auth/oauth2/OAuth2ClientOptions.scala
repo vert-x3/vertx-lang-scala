@@ -266,13 +266,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getMaxPoolSize: Int = {
     asJava.getMaxPoolSize().asInstanceOf[Int]
   }
-  override def setMaxRedirects(value: Int) = {
-    asJava.setMaxRedirects(value)
-    this
-  }
-  override def getMaxRedirects: Int = {
-    asJava.getMaxRedirects().asInstanceOf[Int]
-  }
   override def setMaxWaitQueueSize(value: Int) = {
     asJava.setMaxWaitQueueSize(value)
     this

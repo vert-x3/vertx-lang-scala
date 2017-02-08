@@ -19,7 +19,6 @@ package io.vertx.scala.ext.web.codec
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.core.json.JsonArray
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
@@ -65,21 +64,6 @@ object BodyCodec {
     */
   def jsonObject(): BodyCodec[io.vertx.core.json.JsonObject] = {
     BodyCodec[io.vertx.core.json.JsonObject](JBodyCodec.jsonObject())
-  }
-
-  /**
-    * @return the JsonArray codec
-    */
-  def jsonArray(): BodyCodec[io.vertx.core.json.JsonArray] = {
-    BodyCodec[io.vertx.core.json.JsonArray](JBodyCodec.jsonArray())
-  }
-
-  /**
-    * Create and return a codec for Java objects encoded using Jackson mapper.
-    * @return a codec for mapping POJO to Json
-    */
-  def json[U: TypeTag](`type`: Class[U]): BodyCodec[U] = {
-    BodyCodec[U](JBodyCodec.json[Object](toJavaClass(`type`)))
   }
 
   /**
