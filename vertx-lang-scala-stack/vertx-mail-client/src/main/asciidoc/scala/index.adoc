@@ -73,7 +73,7 @@ import io.vertx.ext.mail.StartTLSOptions
 var config = MailConfig()
 config.setHostname("mail.example.com")
 config.setPort(587)
-config.setStarttls("REQUIRED")
+config.setStarttls(StartTLSOptions.REQUIRED)
 config.setUsername("user")
 config.setPassword("password")
 var mailClient = MailClient.createNonShared(vertx, config)

@@ -50,8 +50,7 @@ class MqttEndpoint(private val _asJava: Object) {
   private var cached_7: Int = _
 
   /**
-    * Client identifier as provided by the remote MQTT client
-    * @return 
+    * @return the client identifier as provided by the remote MQTT client
     */
   def clientIdentifier(): String = {
     if (cached_0 == null) {
@@ -62,8 +61,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Authentication information as provided by the remote MQTT client
-    * @return 
+    * @return the Authentication information as provided by the remote MQTT client
     */
   def auth(): MqttAuth = {
     if (cached_1 == null) {
@@ -74,8 +72,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Will information as provided by the remote MQTT client
-    * @return 
+    * @return the Will information as provided by the remote MQTT client
     */
   def will(): MqttWill = {
     if (cached_2 == null) {
@@ -86,8 +83,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Protocol version required by the remote MQTT client
-    * @return 
+    * @return the protocol version required by the remote MQTT client
     */
   def protocolVersion(): Int = {
     if (cached_3 == null) {
@@ -98,8 +94,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Protocol name provided by the remote MQTT client
-    * @return 
+    * @return the protocol name provided by the remote MQTT client
     */
   def protocolName(): String = {
     if (cached_4 == null) {
@@ -110,8 +105,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * If clean session is requested by the remote MQTT client
-    * @return 
+    * @return true when clean session is requested by the remote MQTT client
     */
   def isCleanSession(): Boolean = {
     if (cached_5 == null) {
@@ -122,8 +116,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Keep alive timeout (in seconds) specified by the remote MQTT client
-    * @return 
+    * @return the keep alive timeout (in seconds) specified by the remote MQTT client
     */
   def keepAliveTimeSeconds(): Int = {
     if (cached_6 == null) {
@@ -134,8 +127,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Message identifier used for last published message
-    * @return 
+    * @return the message identifier used for last published message
     */
   def lastMessageId(): Int = {
     if (cached_7 == null) {
@@ -303,8 +295,8 @@ class MqttEndpoint(private val _asJava: Object) {
     * @param grantedQoSLevels granted QoS levels for the requested topics
     * @return a reference to this, so the API can be used fluently
     */
-  def subscribeAcknowledge(subscribeMessageId: Int, grantedQoSLevels: scala.collection.mutable.Buffer[Int]): MqttEndpoint = {
-    asJava.asInstanceOf[JMqttEndpoint].subscribeAcknowledge(subscribeMessageId.asInstanceOf[java.lang.Integer], grantedQoSLevels.map(x => x.asInstanceOf[java.lang.Integer]).asJava)
+  def subscribeAcknowledge(subscribeMessageId: Int, grantedQoSLevels: scala.collection.mutable.Buffer[io.netty.handler.codec.mqtt.MqttQoS]): MqttEndpoint = {
+    asJava.asInstanceOf[JMqttEndpoint].subscribeAcknowledge(subscribeMessageId.asInstanceOf[java.lang.Integer], grantedQoSLevels.asJava)
     this
   }
 
@@ -397,8 +389,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Return auto acknowledge status for subscription/unsubscription requests
-    * @return 
+    * @return true when auto acknowledge status for subscription/unsubscription requests
     */
   def isSubscriptionAutoAck(): Boolean = {
     asJava.asInstanceOf[JMqttEndpoint].isSubscriptionAutoAck().asInstanceOf[Boolean]
@@ -412,8 +403,7 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
-    * Return auto keep alive status (sending ping response)
-    * @return 
+    * @return the auto keep alive status (sending ping response)
     */
   def isAutoKeepAlive(): Boolean = {
     asJava.asInstanceOf[JMqttEndpoint].isAutoKeepAlive().asInstanceOf[Boolean]

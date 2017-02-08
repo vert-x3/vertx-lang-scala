@@ -94,6 +94,10 @@ Sets the type of service.
 Sets the event bus address on which the service arrivals, departures and modifications are announced. This
  address must be consistent in the whole application.
 +++
+|[[autoRegistrationOfImporters]]`autoRegistrationOfImporters`|`Boolean`|
++++
+Sets whether or not the registration of importers declared as SPI is enabled.
++++
 |[[backendConfiguration]]`backendConfiguration`|`Json object`|
 +++
 Sets the configuration passed to the .

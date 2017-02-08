@@ -129,7 +129,7 @@ class MqttServer(private val _asJava: Object) {
   }
 
   /**
-    * Close the server
+    * Close the server.
     * 
     * The close happens asynchronously and the server may not be closed until some time after the call has returned.
     */
@@ -138,7 +138,7 @@ class MqttServer(private val _asJava: Object) {
   }
 
   /**
-    * Close the server supplying an handler that will be called when the server is actually closed (or has failed)
+    * Close the server supplying an handler that will be called when the server is actually closed (or has failed).
     * @param completionHandler the handler called on completion
     */
   def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {

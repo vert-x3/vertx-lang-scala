@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package io.vertx.scala.ext.auth.oauth2
+package io.vertx.scala.ext.web.client
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
@@ -25,7 +25,6 @@ import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
-import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
 import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
@@ -34,7 +33,7 @@ import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
-import io.vertx.core.json.JsonObject
+import io.vertx.ext.web.client.{WebClientOptions => JWebClientOptions}
 import io.vertx.scala.core.net.ProxyOptions
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
@@ -42,9 +41,8 @@ import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
-  * Options describing how an OAuth2  will make connections.
   */
-class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) 
+class WebClientOptions(private val _asJava: JWebClientOptions) 
     extends ExtHttpClientOptions(_asJava) {
 
   override def asJava = _asJava
@@ -54,34 +52,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
     asJava.getAlpnVersions().asScala.map(x => x)
-  }
-  def setAuthorizationPath(value: String) = {
-    asJava.setAuthorizationPath(value)
-    this
-  }
-  def getAuthorizationPath: String = {
-    asJava.getAuthorizationPath().asInstanceOf[String]
-  }
-  def setClientID(value: String) = {
-    asJava.setClientID(value)
-    this
-  }
-  def getClientID: String = {
-    asJava.getClientID().asInstanceOf[String]
-  }
-  def setClientSecret(value: String) = {
-    asJava.setClientSecret(value)
-    this
-  }
-  def getClientSecret: String = {
-    asJava.getClientSecret().asInstanceOf[String]
-  }
-  def setClientSecretParameterName(value: String) = {
-    asJava.setClientSecretParameterName(value)
-    this
-  }
-  def getClientSecretParameterName: String = {
-    asJava.getClientSecretParameterName().asInstanceOf[String]
   }
   override def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
@@ -132,19 +102,16 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
-  def setExtraParameters(value: io.vertx.core.json.JsonObject) = {
-    asJava.setExtraParameters(value)
+
+  /**
+    * Configure the default behavior of the client to follow HTTP `30x` redirections.
+    */
+  def setFollowRedirects(value: Boolean) = {
+    asJava.setFollowRedirects(value)
     this
   }
-  def getExtraParameters: io.vertx.core.json.JsonObject = {
-    asJava.getExtraParameters()
-  }
-  def setHeaders(value: io.vertx.core.json.JsonObject) = {
-    asJava.setHeaders(value)
-    this
-  }
-  def getHeaders: io.vertx.core.json.JsonObject = {
-    asJava.getHeaders()
+  def isFollowRedirects: Boolean = {
+    asJava.isFollowRedirects().asInstanceOf[Boolean]
   }
   override def setHttp2ClearTextUpgrade(value: Boolean) = {
     asJava.setHttp2ClearTextUpgrade(value)
@@ -188,23 +155,9 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getInitialSettings: Http2Settings = {
     Http2Settings(asJava.getInitialSettings())
   }
-  def setIntrospectionPath(value: String) = {
-    asJava.setIntrospectionPath(value)
-    this
-  }
-  def getIntrospectionPath: String = {
-    asJava.getIntrospectionPath().asInstanceOf[String]
-  }
   override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
-  }
-  def setJwtToken(value: Boolean) = {
-    asJava.setJwtToken(value)
-    this
-  }
-  def isJwtToken: Boolean = {
-    asJava.isJwtToken().asInstanceOf[Boolean]
   }
   override def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
@@ -230,13 +183,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
-  }
-  def setLogoutPath(value: String) = {
-    asJava.setLogoutPath(value)
-    this
-  }
-  def getLogoutPath: String = {
-    asJava.getLogoutPath().asInstanceOf[String]
   }
   override def setMaxChunkSize(value: Int) = {
     asJava.setMaxChunkSize(value)
@@ -328,13 +274,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getPipeliningLimit: Int = {
     asJava.getPipeliningLimit().asInstanceOf[Int]
   }
-  def setPrivateKey(value: String) = {
-    asJava.setPrivateKey(value)
-    this
-  }
-  def getPrivateKey: String = {
-    asJava.getPrivateKey().asInstanceOf[String]
-  }
   override def setProtocolVersion(value: io.vertx.core.http.HttpVersion) = {
     asJava.setProtocolVersion(value)
     this
@@ -348,13 +287,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def getProxyOptions: ProxyOptions = {
     ProxyOptions(asJava.getProxyOptions())
-  }
-  def setPublicKey(value: String) = {
-    asJava.setPublicKey(value)
-    this
-  }
-  def getPublicKey: String = {
-    asJava.getPublicKey().asInstanceOf[String]
   }
   override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
@@ -370,20 +302,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
-  def setRevocationPath(value: String) = {
-    asJava.setRevocationPath(value)
-    this
-  }
-  def getRevocationPath: String = {
-    asJava.getRevocationPath().asInstanceOf[String]
-  }
-  def setScopeSeparator(value: String) = {
-    asJava.setScopeSeparator(value)
-    this
-  }
-  def getScopeSeparator: String = {
-    asJava.getScopeSeparator().asInstanceOf[String]
-  }
   override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -397,13 +315,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def isSendUnmaskedFrames: Boolean = {
     asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
-  }
-  def setSite(value: String) = {
-    asJava.setSite(value)
-    this
-  }
-  def getSite: String = {
-    asJava.getSite().asInstanceOf[String]
   }
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
@@ -432,13 +343,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
-  }
-  def setTokenPath(value: String) = {
-    asJava.setTokenPath(value)
-    this
-  }
-  def getTokenPath: String = {
-    asJava.getTokenPath().asInstanceOf[String]
   }
   override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
@@ -472,13 +376,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
-  def setUseBasicAuthorizationHeader(value: Boolean) = {
-    asJava.setUseBasicAuthorizationHeader(value)
-    this
-  }
-  def isUseBasicAuthorizationHeader: Boolean = {
-    asJava.isUseBasicAuthorizationHeader().asInstanceOf[Boolean]
-  }
   override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
@@ -486,6 +383,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isUsePooledBuffers: Boolean = {
     asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
+
+  /**
+    * Sets the Web Client user agent header. Defaults to Vert.x-WebClient/&lt;version&gt;.
+    */
   def setUserAgent(value: String) = {
     asJava.setUserAgent(value)
     this
@@ -493,12 +394,16 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getUserAgent: String = {
     asJava.getUserAgent().asInstanceOf[String]
   }
-  def setUserInfoPath(value: String) = {
-    asJava.setUserInfoPath(value)
+
+  /**
+    * Sets whether the Web Client should send a user agent header. Defaults to true.
+    */
+  def setUserAgentEnabled(value: Boolean) = {
+    asJava.setUserAgentEnabled(value)
     this
   }
-  def getUserInfoPath: String = {
-    asJava.getUserInfoPath().asInstanceOf[String]
+  def isUserAgentEnabled: Boolean = {
+    asJava.isUserAgentEnabled().asInstanceOf[Boolean]
   }
   override def setVerifyHost(value: Boolean) = {
     asJava.setVerifyHost(value)
@@ -509,23 +414,23 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
 }
 
-object OAuth2ClientOptions {
+object WebClientOptions {
   
   def apply() = {
-    new OAuth2ClientOptions(new JOAuth2ClientOptions(emptyObj()))
+    new WebClientOptions(new JWebClientOptions(emptyObj()))
   }
   
-  def apply(t: JOAuth2ClientOptions) = {
+  def apply(t: JWebClientOptions) = {
     if (t != null) {
-      new OAuth2ClientOptions(t)
+      new WebClientOptions(t)
     } else {
       null
     }
   }
   
-  def fromJson(json: JsonObject): OAuth2ClientOptions = {
+  def fromJson(json: JsonObject): WebClientOptions = {
     if (json != null) {
-      new OAuth2ClientOptions(new JOAuth2ClientOptions(json))
+      new WebClientOptions(new JWebClientOptions(json))
     } else {
       null
     }

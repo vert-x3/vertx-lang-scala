@@ -133,6 +133,11 @@ class HttpClientRequest(private val _asJava: Object)
     this
   }
 
+  def setFollowRedirects(followRedirects: Boolean): HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].setFollowRedirects(followRedirects.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
   /**
     * If chunked is true then the request will be set into HTTP chunked mode
     * @param chunked true if chunked encoding
@@ -345,6 +350,13 @@ class HttpClientRequest(private val _asJava: Object)
     */
   def getRawMethod(): String = {
     asJava.asInstanceOf[JHttpClientRequest].getRawMethod().asInstanceOf[String]
+  }
+
+  /**
+    * @return the absolute URI corresponding to the the HTTP request
+    */
+  def absoluteURI(): String = {
+    asJava.asInstanceOf[JHttpClientRequest].absoluteURI().asInstanceOf[String]
   }
 
   /**

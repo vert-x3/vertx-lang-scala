@@ -414,6 +414,27 @@ object ServiceDiscovery {
   }
 
   /**
+    * Creates an instance of [[io.vertx.scala.servicediscovery.ServiceDiscovery]].
+    * @param vertx the vert.x instance
+    * @param options the discovery optionssee <a href="../../../../../../cheatsheet/ServiceDiscoveryOptions.html">ServiceDiscoveryOptions</a>
+    * @param completionHandler completion handler called when the service discovery has been initialized. This includes the initialization of the service importer registered from the SPI.
+    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
+    */
+  def create(vertx: Vertx, options: ServiceDiscoveryOptions, completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, {x: JServiceDiscovery => completionHandler.handle(ServiceDiscovery(x))}))
+  }
+
+  /**
+    * Creates a new instance of [[io.vertx.scala.servicediscovery.ServiceDiscovery]] using the default configuration.
+    * @param vertx the vert.x instance
+    * @param completionHandler completion handler called when the service discovery has been initialized. This includes the initialization of the service importer registered from the SPI.
+    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
+    */
+  def create(vertx: Vertx, completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], {x: JServiceDiscovery => completionHandler.handle(ServiceDiscovery(x))}))
+  }
+
+  /**
     * Release the service object retrieved using `get` methods from the service type interface.
     * It searches for the reference associated with the given object and release it.
     * @param discovery the service discovery

@@ -42,6 +42,17 @@ class ServiceDiscoveryOptions(private val _asJava: JServiceDiscoveryOptions) {
   }
 
   /**
+    * Sets whether or not the registration of importers declared as SPI is enabled.
+    */
+  def setAutoRegistrationOfImporters(value: Boolean) = {
+    asJava.setAutoRegistrationOfImporters(value)
+    this
+  }
+  def isAutoRegistrationOfImporters: Boolean = {
+    asJava.isAutoRegistrationOfImporters().asInstanceOf[Boolean]
+  }
+
+  /**
     * Sets the configuration passed to the .
     * Refer to the backend documentation to get more details on the requirements. The default backend
     * does not need any configuration.

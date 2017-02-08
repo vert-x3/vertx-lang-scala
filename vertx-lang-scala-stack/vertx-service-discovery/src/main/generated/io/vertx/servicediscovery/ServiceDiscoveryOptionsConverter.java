@@ -30,6 +30,9 @@ public class ServiceDiscoveryOptionsConverter {
     if (json.getValue("announceAddress") instanceof String) {
       obj.setAnnounceAddress((String)json.getValue("announceAddress"));
     }
+    if (json.getValue("autoRegistrationOfImporters") instanceof Boolean) {
+      obj.setAutoRegistrationOfImporters((Boolean)json.getValue("autoRegistrationOfImporters"));
+    }
     if (json.getValue("backendConfiguration") instanceof JsonObject) {
       obj.setBackendConfiguration(((JsonObject)json.getValue("backendConfiguration")).copy());
     }
@@ -45,6 +48,7 @@ public class ServiceDiscoveryOptionsConverter {
     if (obj.getAnnounceAddress() != null) {
       json.put("announceAddress", obj.getAnnounceAddress());
     }
+    json.put("autoRegistrationOfImporters", obj.isAutoRegistrationOfImporters());
     if (obj.getBackendConfiguration() != null) {
       json.put("backendConfiguration", obj.getBackendConfiguration());
     }

@@ -307,6 +307,17 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Set to `maxRedirects` the maximum number of redirection a request can follow.
+    */
+  def setMaxRedirects(value: Int) = {
+    asJava.setMaxRedirects(value)
+    this
+  }
+  def getMaxRedirects: Int = {
+    asJava.getMaxRedirects().asInstanceOf[Int]
+  }
+
+  /**
     * Set the maximum requests allowed in the wait queue, any requests beyond the max size will result in
     * a ConnectionPoolTooBusyException.  If the value is set to a negative number then the queue will be unbounded.
     */

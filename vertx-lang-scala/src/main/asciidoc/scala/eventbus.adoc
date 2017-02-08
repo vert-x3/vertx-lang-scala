@@ -365,7 +365,7 @@ var options = VertxOptions()
       .setPath("keystore.jks")
       .setPassword("wibble")
     )
-    .setClientAuth("REQUIRED")
+    .setClientAuth(ClientAuth.REQUIRED)
   )
 
 
