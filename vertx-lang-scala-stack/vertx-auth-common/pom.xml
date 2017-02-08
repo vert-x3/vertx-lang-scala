@@ -13,7 +13,7 @@
 
 
   <artifactId>vertx-auth-common-scala_${scala.build.version}</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+
 
   <properties>
     <vertx-module>vertx-auth-common</vertx-module>

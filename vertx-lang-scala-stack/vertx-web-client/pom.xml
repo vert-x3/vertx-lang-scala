@@ -13,7 +13,7 @@
 
 
   <artifactId>vertx-web-client-scala_${scala.build.version}</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+
 
   <properties>
     <vertx-module>vertx-web-client</vertx-module>

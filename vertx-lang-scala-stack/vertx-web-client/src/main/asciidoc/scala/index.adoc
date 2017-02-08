@@ -64,10 +64,22 @@ If you want to configure options for the client, you create it as follows
 [source,scala]
 ----
 import io.vertx.scala.ext.web.client.WebClient
-var options = HttpClientOptions()
-  .setKeepAlive(false)
+var options = WebClientOptions()
+  .setUserAgent("My-App/1.2.3")
 
-var client = WebClient.wrap(vertx.createHttpClient(options))
+options.setKeepAlive(false)
+var client = WebClient.create(vertx, options)
+
+----
+
+Web Client options inherit Http Client options so you can set any one of them.
+
+If your already have an HTTP Client in your application you can also reuse it
+
+[source,scala]
+----
+import io.vertx.scala.ext.web.client.WebClient
+var client = WebClient.wrap(httpClient)
 
 ----
 
@@ -554,7 +566,81 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 
 WARNING: this is only valid for the response decoded as a buffer.
 
-=== RxJava API
+=== Handling 30x redirections
+
+By default the client follows redirections, you can configure the default behavior in the `link:../dataobjects.html#WebClientOptions[WebClientOptions]`:
+
+[source,scala]
+----
+import io.vertx.scala.ext.web.client.WebClient
+
+// Change the default behavior to not follow redirects
+var client = WebClient.create(vertx, WebClientOptions()
+  .setFollowRedirects(false)
+)
+
+----
+
+The client will follow at most `16` requests redirections, it can be changed in the same options:
+
+[source,scala]
+----
+import io.vertx.scala.ext.web.client.WebClient
+
+// Follow at most 5 redirections
+var client = WebClient.create(vertx, WebClientOptions()
+  .setMaxRedirects(5)
+)
+
+----
+
+== Using HTTPS
+
+Vert.x web client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
+
+You can specify the behavior per request
+
+[source,scala]
+----
+import scala.util.Failure
+import scala.util.Success
+
+client.get(443, "myserver.mycompany.com", "/some-uri").ssl(true).sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+Or using create methods with absolute URI argument
+
+[source,scala]
+----
+import scala.util.Failure
+import scala.util.Success
+
+client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+== RxJava API
 
 The RxJava `HttpRequest` provides an rx-ified version of the original API,
 the `rxSend` method returns a `Single<HttpResponse<Buffer>>` that

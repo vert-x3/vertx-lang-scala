@@ -193,7 +193,7 @@ endpoint.subscribeHandler((subscribe: io.vertx.scala.mqtt.messages.MqttSubscribe
   var grantedQosLevels = List()
   subscribe.topicSubscriptions().foreach(s => {
     println(s"Subscription for ${s.topicName()} with QoS ${s.qualityOfService()}")
-    grantedQosLevels :::= List(s.qualityOfService().value())
+    grantedQosLevels :::= List(s.qualityOfService())
   })
 
   // ack the subscriptions request

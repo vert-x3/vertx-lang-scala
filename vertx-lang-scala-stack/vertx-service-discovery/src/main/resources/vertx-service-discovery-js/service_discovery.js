@@ -362,7 +362,8 @@ ServiceDiscovery._create = function(jdel) {
  @memberof module:vertx-service-discovery-js/service_discovery
  @param vertx {Vertx} the vert.x instance 
  @param options {Object} the discovery options 
- @return {ServiceDiscovery} the created service discovery instance.
+ @param completionHandler {function} completion handler called when the service discovery has been initialized. This includes the initialization of the service importer registered from the SPI. 
+ @return {ServiceDiscovery} the created instance, should not be used to retrieve services before the invocation of the completion handler.
  */
 ServiceDiscovery.create = function() {
   var __args = arguments;
@@ -370,6 +371,14 @@ ServiceDiscovery.create = function() {
     return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx)"](__args[0]._jdel));
   }else if (__args.length === 2 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null)) {
     return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx,io.vertx.servicediscovery.ServiceDiscoveryOptions)"](__args[0]._jdel, __args[1] != null ? new ServiceDiscoveryOptions(new JsonObject(Java.asJSONCompatible(__args[1]))) : null));
+  }else if (__args.length === 2 && typeof __args[0] === 'object' && __args[0]._jdel && typeof __args[1] === 'function') {
+    return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx,io.vertx.core.Handler)"](__args[0]._jdel, function(jVal) {
+    __args[1](utils.convReturnVertxGen(ServiceDiscovery, jVal));
+  }));
+  }else if (__args.length === 3 && typeof __args[0] === 'object' && __args[0]._jdel && (typeof __args[1] === 'object' && __args[1] != null) && typeof __args[2] === 'function') {
+    return utils.convReturnVertxGen(ServiceDiscovery, JServiceDiscovery["create(io.vertx.core.Vertx,io.vertx.servicediscovery.ServiceDiscoveryOptions,io.vertx.core.Handler)"](__args[0]._jdel, __args[1] != null ? new ServiceDiscoveryOptions(new JsonObject(Java.asJSONCompatible(__args[1]))) : null, function(jVal) {
+    __args[2](utils.convReturnVertxGen(ServiceDiscovery, jVal));
+  }));
   } else throw new TypeError('function invoked with invalid arguments');
 };
 

@@ -29,14 +29,14 @@ class MqttAuth(private val _asJava: Object) {
   def asJava = _asJava
 
   /**
-    * @return Username provided by the remote MQTT client
+    * @return the username provided by the remote MQTT client
     */
   def userName(): String = {
     asJava.asInstanceOf[JMqttAuth].userName().asInstanceOf[String]
   }
 
   /**
-    * @return Password provided by the remote MQTT client
+    * @return the password provided by the remote MQTT client
     */
   def password(): String = {
     asJava.asInstanceOf[JMqttAuth].password().asInstanceOf[String]

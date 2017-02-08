@@ -13,7 +13,7 @@
 
 
   <artifactId>vertx-web-templ-handlebars-scala_${scala.build.version}</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+
 
   <properties>
     <vertx-module>vertx-web-templ-handlebars</vertx-module>

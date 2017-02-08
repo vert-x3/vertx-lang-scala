@@ -34,7 +34,7 @@ class MqttWill(private val _asJava: Object) {
   private var cached_4: Boolean = _
 
   /**
-    * @return Will flag for indicating the will message presence
+    * @return the will flag for indicating the will message presence
     */
   def isWillFlag(): Boolean = {
     if (cached_0 == null) {
@@ -45,7 +45,7 @@ class MqttWill(private val _asJava: Object) {
   }
 
   /**
-    * @return Topic for the will as provided by the remote MQTT client
+    * @return the topic for the will as provided by the remote MQTT client
     */
   def willTopic(): String = {
     if (cached_1 == null) {
@@ -56,7 +56,7 @@ class MqttWill(private val _asJava: Object) {
   }
 
   /**
-    * @return Payload for the will as provided by the remote MQTT client
+    * @return the payload for the will as provided by the remote MQTT client
     */
   def willMessage(): String = {
     if (cached_2 == null) {
@@ -67,7 +67,7 @@ class MqttWill(private val _asJava: Object) {
   }
 
   /**
-    * @return QoS level for the will as provided by the remote MQTT client
+    * @return the QoS level for the will as provided by the remote MQTT client
     */
   def willQos(): Int = {
     if (cached_3 == null) {
@@ -78,7 +78,7 @@ class MqttWill(private val _asJava: Object) {
   }
 
   /**
-    * @return If the will must be retained as provided by the remote MQTT client
+    * @return true if the will must be retained as provided by the remote MQTT client
     */
   def isWillRetain(): Boolean = {
     if (cached_4 == null) {

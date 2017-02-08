@@ -19,17 +19,20 @@ package io.vertx.scala.core.http
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{RequestOptions => JRequestOptions}
+import io.vertx.scala.core.Future
+import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.http.WebsocketVersion
+import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
+import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.http.HttpMethod
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
-import io.vertx.core.http.WebsocketVersion
 import io.vertx.core.Handler
-import io.vertx.core.http.{WebSocketStream => JWebSocketStream}
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 
 /**
@@ -62,6 +65,18 @@ class HttpClient(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
+
+  /**
+    * Sends an HTTP GET request to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def getNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    this
+  }
 
   /**
     * Sends an HTTP GET request to the server at the specified host and port, specifying a response handler to receive
@@ -99,6 +114,18 @@ class HttpClient(private val _asJava: Object)
     */
   def getNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    this
+  }
+
+  /**
+    * Sends an HTTP HEAD request to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def headNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
     this
   }
 
@@ -142,6 +169,18 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Sends an HTTP OPTIONS request to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def optionsNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    this
+  }
+
+  /**
     * Sends an HTTP OPTIONS request to the server at the specified host and port, specifying a response handler to receive
     * the response
     * @param port the port
@@ -181,6 +220,17 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Connect a WebSocket with the specified options
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, wsConnect: Handler[WebSocket]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
     * Connect a WebSocket to the specified port, host and relative request URI
     * @param port the port
     * @param host the host
@@ -190,6 +240,18 @@ class HttpClient(private val _asJava: Object)
     */
   def websocket(port: Int, host: String, requestURI: String, wsConnect: Handler[WebSocket]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
+    * Connect a WebSocket with the specified options
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @param failureHandler handler that will be called if websocket connection fails
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
     this
   }
 
@@ -233,6 +295,18 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Connect a WebSocket with the specified options, and with the specified headers
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
     * Connect a WebSocket to the specified port, host and relative request URI, and with the specified headers
     * @param port the port
     * @param host the host
@@ -243,6 +317,19 @@ class HttpClient(private val _asJava: Object)
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
+    * Connect a WebSocket with the specified options, and with the specified headers
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @param failureHandler handler that will be called if websocket connection fails
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
     this
   }
 
@@ -289,6 +376,20 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Connect a WebSocket with the specified optionsI, with the specified headers and using
+    * the specified version of WebSockets
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
     * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers and using
     * the specified version of WebSockets
     * @param port the port
@@ -301,6 +402,21 @@ class HttpClient(private val _asJava: Object)
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
+    * Connect a WebSocket with the specified options, with the specified headers and using
+    * the specified version of WebSockets
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @param failureHandler handler that will be called if websocket connection fails
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
     this
   }
 
@@ -353,6 +469,21 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Connect a WebSocket with the specified options, with the specified headers, using
+    * the specified version of WebSockets, and the specified websocket sub protocols
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @param subProtocols the subprotocols to use
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
     * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers, using
     * the specified version of WebSockets, and the specified websocket sub protocols
     * @param port the port
@@ -366,6 +497,22 @@ class HttpClient(private val _asJava: Object)
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
+    * Connect a WebSocket with the specified options, with the specified headers, using
+    * the specified version of WebSockets, and the specified websocket sub protocols
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @param subProtocols the subprotocols to use
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @param failureHandler handler that will be called if websocket connection fails
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
     this
   }
 
@@ -529,11 +676,41 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Set a redirect handler for the http client.
+    * 
+    * The redirect handler is called when a `3xx` response is received and the request is configured to
+    * follow redirects with [[io.vertx.scala.core.http.HttpClientRequest#setFollowRedirects]].
+    * 
+    * The redirect handler is passed the [[io.vertx.scala.core.http.HttpClientResponse]], it can return an [[io.vertx.scala.core.http.HttpClientRequest]] or `null`.
+    * <ul>
+    *   <li>when null is returned, the original response is processed by the original request response handler</li>
+    *   <li>when a new `Future<HttpClientRequest>` is returned, the client will send this new request</li>
+    * </ul>
+    * The handler must return a `Future<HttpClientRequest>` unsent so the client can further configure it and send it.
+    * @param handler the new redirect handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def redirectHandler(handler: HttpClientResponse => Future[HttpClientRequest]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].redirectHandler({x: JHttpClientResponse => handler(HttpClientResponse(x)).asJava.asInstanceOf[JFuture[JHttpClientRequest]]})
+    this
+  }
+
+  /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
   override def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JHttpClient].isMetricsEnabled().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Create an HTTP request to send to the server with the specified options.
+    * @param method the HTTP method
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def request(method: io.vertx.core.http.HttpMethod, options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava))
   }
 
   /**
@@ -557,6 +734,16 @@ class HttpClient(private val _asJava: Object)
     */
   def request(method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP request to send to the server with the specified options, specifying a response handler to receive
+    * @param method the HTTP method
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def request(method: io.vertx.core.http.HttpMethod, options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -631,6 +818,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP GET request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def get(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava))
+  }
+
+  /**
     * Create an HTTP GET request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -649,6 +845,17 @@ class HttpClient(private val _asJava: Object)
     */
   def get(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP GET request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def get(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -717,6 +924,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP POST request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def post(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava))
+  }
+
+  /**
     * Create an HTTP POST request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -735,6 +951,17 @@ class HttpClient(private val _asJava: Object)
     */
   def post(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP POST request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def post(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -803,6 +1030,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP HEAD request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def head(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava))
+  }
+
+  /**
     * Create an HTTP HEAD request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -821,6 +1057,17 @@ class HttpClient(private val _asJava: Object)
     */
   def head(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP HEAD request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def head(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -889,6 +1136,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP OPTIONS request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def options(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava))
+  }
+
+  /**
     * Create an HTTP OPTIONS request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -907,6 +1163,17 @@ class HttpClient(private val _asJava: Object)
     */
   def options(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP OPTIONS request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def options(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -975,6 +1242,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP PUT request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def put(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava))
+  }
+
+  /**
     * Create an HTTP PUT request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -993,6 +1269,17 @@ class HttpClient(private val _asJava: Object)
     */
   def put(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP PUT request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def put(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -1061,6 +1348,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create an HTTP DELETE request to send to the server with the specified options.
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return an HTTP client request object
+    */
+  def delete(options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava))
+  }
+
+  /**
     * Create an HTTP DELETE request to send to the server at the specified host and port.
     * @param port the port
     * @param host the host
@@ -1079,6 +1375,17 @@ class HttpClient(private val _asJava: Object)
     */
   def delete(host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create an HTTP DELETE request to send to the server with the specified options, specifying a response handler to receive
+    * the response
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param responseHandler the response handler
+    * @return an HTTP client request object
+    */
+  def delete(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -1147,6 +1454,15 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create a WebSocket stream with the specified options
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketStream(options: RequestOptions): WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava))
+  }
+
+  /**
     * Create a WebSocket stream to the specified port, host and relative request URI
     * @param port the port
     * @param host the host
@@ -1165,6 +1481,16 @@ class HttpClient(private val _asJava: Object)
     */
   def websocketStream(host: String, requestURI: String): WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create a WebSocket stream with the specified options, and with the specified headers
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketStream(options: RequestOptions, headers: MultiMap): WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap]))
   }
 
   /**
@@ -1191,6 +1517,18 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
+    * Create a WebSocket stream with the specified options, with the specified headers and using
+    * the specified version of WebSockets
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketStream(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version))
+  }
+
+  /**
     * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers and using
     * the specified version of WebSockets
     * @param port the port
@@ -1205,7 +1543,7 @@ class HttpClient(private val _asJava: Object)
   }
 
   /**
-    * Create a WebSocket stream to the specified host, relative request URI and default port and with the specified headers and using
+    * Create a WebSocket stream with the specified options and with the specified headers and using
     * the specified version of WebSockets
     * @param host the host
     * @param requestURI the relative URI
@@ -1215,6 +1553,19 @@ class HttpClient(private val _asJava: Object)
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): WebSocketStream = {
     WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
+  }
+
+  /**
+    * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers, using
+    * the specified version of WebSockets, and the specified websocket sub protocols
+    * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+    * @param headers the headers
+    * @param version the websocket version
+    * @param subProtocols the subprotocols to use
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketStream(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): WebSocketStream = {
+    WebSocketStream(asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
   }
 
   /**
