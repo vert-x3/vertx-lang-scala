@@ -86,6 +86,13 @@
               <goal>testCompile</goal>
             </goals>
           </execution>
+          <execution>
+            <id>doc-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>doc-jar</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
     </plugins>
