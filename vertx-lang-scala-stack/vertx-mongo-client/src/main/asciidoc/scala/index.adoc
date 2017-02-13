@@ -53,7 +53,6 @@ The simplest way to do this is as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.mongo.MongoClient
 
 var client = MongoClient.createShared(vertx, config)
 
@@ -71,7 +70,6 @@ You can create a client specifying a pool source name as follows
 
 [source,scala]
 ----
-import io.vertx.scala.ext.mongo.MongoClient
 
 var client = MongoClient.createShared(vertx, config, "MyPoolName")
 
@@ -98,7 +96,6 @@ In that case you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClie
 
 [source,scala]
 ----
-import io.vertx.scala.ext.mongo.MongoClient
 
 var client = MongoClient.createNonShared(vertx, config)
 
@@ -126,8 +123,6 @@ Here's an example of saving a document and getting the id back
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Document has no id
 
@@ -152,8 +147,6 @@ And here's an example of saving a document which already has an id.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Document has an id already
 
@@ -181,8 +174,6 @@ If the document is inserted and has no id, then the id field generated will be r
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Document has an id already
 
@@ -207,8 +198,6 @@ If a document is inserted with an id, and a document with that id already eists,
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Document has an id already
 
@@ -242,8 +231,6 @@ Here's an example of updating a document in the books collection:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Match any documents with title=The Hobbit
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
@@ -276,8 +263,6 @@ This has the following fields:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Match any documents with title=The Hobbit
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
@@ -314,8 +299,6 @@ Here's an example of replacing a document in the books collection
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
@@ -345,8 +328,6 @@ Here's a simple example with an empty query that will match all books:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // empty query = match any
 var query = new io.vertx.core.json.JsonObject()
@@ -374,8 +355,6 @@ Here's another example that will match all books by Tolkien:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // will match all Tolkien books
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
@@ -412,8 +391,6 @@ This has the following fields:
 `skip`:: The number of documents to skip before returning the results. Defaults to `0`.
 
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // will match all Tolkien books
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
@@ -458,8 +435,6 @@ Here's an example of removing all Tolkien books:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
@@ -491,8 +466,6 @@ Here's an example that counts the number of Tolkien books. The number is passed 
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
 
@@ -518,8 +491,6 @@ To get a list of all collections you can use `link:../../scaladoc/io/vertx/scala
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 mongoClient.getCollectionsFuture().onComplete{
   case Success(result) => {
@@ -539,8 +510,6 @@ To create a new collection you can use `link:../../scaladoc/io/vertx/scala/ext/m
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
@@ -562,8 +531,6 @@ NOTE: Dropping a collection will delete all documents within it!
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
@@ -594,8 +561,6 @@ of the entries in the JSON is the command name it must be specified as a paramet
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var command = new io.vertx.core.json.JsonObject().put("aggregate", "collection_name").put("pipeline", new io.vertx.core.json.JsonArray())
 
@@ -620,8 +585,6 @@ Here's an example of inserting a document with a date field
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
 
@@ -687,8 +650,6 @@ Here's an example of inserting a base 64 encoded string, typing it as binary a b
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 //This could be a the byte contents of a pdf file, etc converted to base 64
 var base64EncodedString = "a2FpbHVhIGlzIHRoZSAjMSBiZWFjaCBpbiB0aGUgd29ybGQ="
@@ -723,8 +684,6 @@ Here's an example of inserting an object ID and reading it back
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var individualId = new org.bson.types.ObjectId().toHexString()
 
@@ -756,8 +715,6 @@ Here's an example of getting disting value
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 mongoClient.saveFuture("books", document).onComplete{
@@ -779,8 +736,6 @@ Here's an example of getting distinct value in batch mode
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
 
 mongoClient.saveFuture("books", document).onComplete{

@@ -35,7 +35,6 @@ Vert.x does not enable SPI implementations by default. You must enable metric co
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -53,7 +52,6 @@ But in production, the Hawkular server will likely run on a separate machine:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -70,7 +68,6 @@ Hawkular Metrics is a multi-tenant solution, and _${maven.artifactId}_ can send 
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -86,7 +83,6 @@ Requests sent to a Hawkular server must be authenticated and tenant must be set 
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -107,7 +103,6 @@ When working with Openshift's internal Metrics server, you can configure token a
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -125,7 +120,6 @@ _${maven.artifactId}_ communicates with the Hawkular server over HTTP. In order 
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -461,7 +455,6 @@ enabled:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -476,7 +469,6 @@ can be configured:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(VertxHawkularOptions()
     .setEnabled(true)
@@ -492,7 +484,6 @@ The metrics bridge handler expects messages in the JSON format. The JSON object 
 
 [source,scala]
 ----
-var vertx = null.asInstanceOf[io.vertx.core.Vertx]
 var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("value", 7)
 vertx.eventBus().publish("metrics", message)
 
@@ -504,7 +495,6 @@ was processed. If the metric is a counter or if you prefer explicit configuratio
 
 [source,scala]
 ----
-var vertx = null.asInstanceOf[io.vertx.core.Vertx]
 var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("type", "counter").put("timestamp", 189898098098908).put("value", 7)
 vertx.eventBus().publish("metrics", message)
 

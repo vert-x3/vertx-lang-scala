@@ -49,9 +49,6 @@ Sending packets is as easy as shown here:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer
@@ -86,8 +83,6 @@ So to listen on a specific address and port you would do something like shown he
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -124,9 +119,6 @@ This is show here:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.buffer.Buffer
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 var buffer = Buffer.buffer("content")
 // Send a Buffer to a multicast address
@@ -159,8 +151,6 @@ would do something like shown here:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -191,8 +181,6 @@ This is shown here:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 socket.listenFuture(1234, "0.0.0.0").onComplete{
   case Success(result) => {
@@ -238,8 +226,6 @@ like shown here:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var socket = vertx.createDatagramSocket(DatagramSocketOptions())
 
 // Some code

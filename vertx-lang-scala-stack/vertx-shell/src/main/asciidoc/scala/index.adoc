@@ -88,8 +88,6 @@ Starting a shell service available via SSH:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.ShellService
-import io.vertx.ext.auth.shiro.ShiroAuthRealmType
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setSSHOptions(SSHTermOptions()
     .setHost("localhost")
@@ -112,7 +110,6 @@ Starting a shell service available via Telnet:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setTelnetOptions(TelnetTermOptions()
     .setHost("localhost")
@@ -132,7 +129,6 @@ Starting a shell service available via HTTP:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setHttpOptions(HttpTermOptions()
     .setHost("localhost")
@@ -210,7 +206,6 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 .Running the Shell Service on SSH with Mongo authentication
 [source,scala,subs="+attributes"]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setSSHOptions(SSHTermOptions()
     .setHost("localhost")
@@ -240,7 +235,6 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 .Running the Shell Service on SSH with JDBC authentication
 [source,scala,subs="+attributes"]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setSSHOptions(SSHTermOptions()
     .setHost("localhost")
@@ -281,7 +275,6 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 .Running the Shell Service on HTTP with Mongo authentication
 [source,scala,subs="+attributes"]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setHttpOptions(HttpTermOptions()
     .setHost("localhost")
@@ -307,7 +300,6 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 .Running the Shell Service on HTTP with JDBC authentication
 [source,scala,subs="+attributes"]
 ----
-import io.vertx.scala.ext.shell.ShellService
 var service = ShellService.create(vertx, ShellServiceOptions()
   .setHttpOptions(HttpTermOptions()
     .setHost("localhost")
@@ -403,8 +395,6 @@ method:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.command.CommandBuilder
-import io.vertx.scala.ext.shell.command.CommandRegistry
 
 var builder = CommandBuilder.command("my-command")
 builder.processHandler((process: io.vertx.scala.ext.shell.command.CommandProcess) => {
@@ -461,8 +451,6 @@ write command line argument parsing:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.command.CommandBuilder
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("my-command").addArgument(Argument()
   .setArgName("my-arg")
 ).addOption(Option()
@@ -488,8 +476,6 @@ when the option is activated:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.command.CommandBuilder
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("my-command").addArgument(Argument()
   .setArgName("my-arg")
 ).addOption(Option()
@@ -722,10 +708,6 @@ steps:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.ShellServer
-import io.vertx.scala.ext.shell.command.CommandResolver
-import io.vertx.scala.ext.web.Router
-import io.vertx.scala.ext.shell.term.TermServer
 
 var server = ShellServer.create(vertx)
 
@@ -767,7 +749,6 @@ The main use case is running or testing a command:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.term.Pty
 
 // Create a shell
 var shell = shellServer.createShell()
@@ -817,7 +798,6 @@ terminal.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.term.TermServer
 var server = TermServer.createSSHTermServer(vertx, SSHTermOptions()
   .setPort(5000)
   .setHost("localhost")
@@ -838,7 +818,6 @@ how to use the tty.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.term.TermServer
 var server = TermServer.createTelnetTermServer(vertx, TelnetTermOptions()
   .setPort(5000)
   .setHost("localhost")
@@ -859,7 +838,6 @@ on top of Vert.x Web using the SockJS protocol.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.term.TermServer
 var server = TermServer.createHttpTermServer(vertx, HttpTermOptions()
   .setPort(5000)
   .setHost("localhost")
@@ -879,7 +857,6 @@ The shell can be found at `/shell.html`.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.shell.term.TermServer
 var server = TermServer.createHttpTermServer(vertx, router, HttpTermOptions()
   .setPort(5000)
   .setHost("localhost")

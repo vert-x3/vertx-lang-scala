@@ -54,7 +54,6 @@ You create an `link:../../scaladoc/io/vertx/scala/ext/web/client/WebClient.html[
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.client.WebClient
 var client = WebClient.create(vertx)
 
 ----
@@ -63,11 +62,21 @@ If you want to configure options for the client, you create it as follows
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.client.WebClient
-var options = HttpClientOptions()
-  .setKeepAlive(false)
+var options = WebClientOptions()
+  .setUserAgent("My-App/1.2.3")
 
-var client = WebClient.wrap(vertx.createHttpClient(options))
+options.setKeepAlive(false)
+var client = WebClient.create(vertx, options)
+
+----
+
+Web Client options inherit Http Client options so you can set any one of them.
+
+If your already have an HTTP Client in your application you can also reuse it
+
+[source,scala]
+----
+var client = WebClient.wrap(httpClient)
 
 ----
 
@@ -80,9 +89,6 @@ and HEAD requests
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.ext.web.client.WebClient
 
 var client = WebClient.create(vertx)
 
@@ -158,8 +164,6 @@ Use `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendBuff
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // Send a buffer to the server using POST, the content-length header will be set for you
 client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer).onComplete{
   case Success(result) => {
@@ -187,8 +191,6 @@ When you know the size of the stream, you shall specify before using the `conten
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 fs.openFuture("content.txt", OpenOptions()).onComplete{
   case Success(result) => {
     var fileStream = result
@@ -217,8 +219,6 @@ use the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#send
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.post(8080, "myserver.mycompany.com", "/some-uri").sendJsonObjectFuture(new io.vertx.core.json.JsonObject().put("firstName", "Dale").put("lastName", "Cooper")).onComplete{
   case Success(result) => {
     // Ok
@@ -234,8 +234,6 @@ method
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.post(8080, "myserver.mycompany.com", "/some-uri").sendJsonFuture(new examples.WebClientExamples.User("Dale", "Cooper")).onComplete{
   case Success(result) => {
     // Ok
@@ -255,9 +253,6 @@ variant.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.MultiMap
 var form = MultiMap.caseInsensitiveMultiMap()
 form.set("firstName", "Dale")
 form.set("lastName", "Cooper")
@@ -277,9 +272,6 @@ the `content-type` header to `multipart/form-data` instead
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.MultiMap
 var form = MultiMap.caseInsensitiveMultiMap()
 form.set("firstName", "Dale")
 form.set("lastName", "Cooper")
@@ -330,8 +322,6 @@ safely, making it very easy to configure and reuse `link:../../scaladoc/io/vertx
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var get = client.get(8080, "myserver.mycompany.com", "/some-uri")
 get.sendFuture().onComplete{
   case Success(result) => {
@@ -355,8 +345,6 @@ request
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var get = client.get(8080, "myserver.mycompany.com", "/some-uri")
 get.sendFuture().onComplete{
   case Success(result) => {
@@ -381,8 +369,6 @@ You can set a timeout for a specific http request using `link:../../scaladoc/io/
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.get(8080, "myserver.mycompany.com", "/some-uri").timeout(5000).sendFuture().onComplete{
   case Success(result) => {
     // Ok
@@ -405,8 +391,6 @@ On a success result the callback happens after the response has been received
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
   case Success(result) => {
 
@@ -443,9 +427,6 @@ Use `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html#jsonObject(
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.ext.web.codec.BodyCodec
 client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.jsonObject()).sendFuture().onComplete{
   case Success(result) => {
     var response = result
@@ -465,9 +446,6 @@ In Java, Groovy or Kotlin, custom Json mapped POJO can be decoded
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.ext.web.codec.BodyCodec
 client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.json(examples.WebClientExamples.User.class)).sendFuture().onComplete{
   case Success(result) => {
     var response = result
@@ -489,9 +467,6 @@ and signals the success or the failure of the operation in the async result resp
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.ext.web.codec.BodyCodec
 client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.pipe(writeStream)).sendFuture().onComplete{
   case Success(result) => {
 
@@ -511,9 +486,6 @@ simply discards the entire response body
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.ext.web.codec.BodyCodec
 client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.none()).sendFuture().onComplete{
   case Success(result) => {
 
@@ -533,8 +505,6 @@ that decode the response to a specific type
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
   case Success(result) => {
 
@@ -554,7 +524,75 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 
 WARNING: this is only valid for the response decoded as a buffer.
 
-=== RxJava API
+=== Handling 30x redirections
+
+By default the client follows redirections, you can configure the default behavior in the `link:../dataobjects.html#WebClientOptions[WebClientOptions]`:
+
+[source,scala]
+----
+
+// Change the default behavior to not follow redirects
+var client = WebClient.create(vertx, WebClientOptions()
+  .setFollowRedirects(false)
+)
+
+----
+
+The client will follow at most `16` requests redirections, it can be changed in the same options:
+
+[source,scala]
+----
+
+// Follow at most 5 redirections
+var client = WebClient.create(vertx, WebClientOptions()
+  .setMaxRedirects(5)
+)
+
+----
+
+== Using HTTPS
+
+Vert.x web client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
+
+You can specify the behavior per request
+
+[source,scala]
+----
+
+client.get(443, "myserver.mycompany.com", "/some-uri").ssl(true).sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+Or using create methods with absolute URI argument
+
+[source,scala]
+----
+
+client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+== RxJava API
 
 The RxJava `HttpRequest` provides an rx-ified version of the original API,
 the `rxSend` method returns a `Single<HttpResponse<Buffer>>` that
@@ -619,9 +657,6 @@ be preferred for sending bodies `Observable<Buffer>`
 
 [source,scala]
 ----
-def getPayload() = {
-  throw new java.lang.UnsupportedOperationException()
-}
 
 var body = getPayload()
 

@@ -31,6 +31,17 @@ class DropwizardMetricsOptions(private val _asJava: JDropwizardMetricsOptions)
   override def asJava = _asJava
 
   /**
+    * Set a custom baseName for metrics.
+    */
+  def setBaseName(value: String) = {
+    asJava.setBaseName(value)
+    this
+  }
+  def getBaseName: String = {
+    asJava.getBaseName().asInstanceOf[String]
+  }
+
+  /**
     * Set the path for a config file that contains options in JSON format, to be used to create a new options object.
     * The file will be looked for on the file system first and then on the classpath if it's not found.
     */

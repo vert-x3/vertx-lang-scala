@@ -141,7 +141,6 @@ instance to use the discovery infrastructure:
 
 [source,groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
 // Use default configuration
 def discovery = ServiceDiscovery.create(vertx)
 
@@ -178,7 +177,6 @@ from the service types.
 
 [source,groovy]
 ----
-import io.vertx.servicediscovery.types.HttpEndpoint
 // Manual record creation
 def record = [
   type:"eventbus-service-proxy",
@@ -366,8 +364,6 @@ Once you have chosen the `link:../../apidocs/io/vertx/servicediscovery/Record.ht
 
 [source,groovy]
 ----
-import io.vertx.core.http.HttpClient
-import io.vertx.core.eventbus.MessageConsumer
 def reference1 = discovery.getReference(record1)
 def reference2 = discovery.getReference(record2)
 
@@ -393,7 +389,6 @@ configuration, some require configuration (as data sources):
 
 [source,groovy]
 ----
-import io.vertx.ext.jdbc.JDBCClient
 def reference = discovery.getReferenceWithConfiguration(record, conf)
 
 // Then, gets the service object, the returned type depends on the service type:
@@ -463,7 +458,6 @@ The next snippet illustrates hot to create a `link:../../apidocs/io/vertx/servic
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.HttpEndpoint
 def record1 = HttpEndpoint.createRecord("some-http-service", "localhost", 8433, "/api")
 
 discovery.publish(record1, { ar ->
@@ -487,7 +481,6 @@ Once a HTTP endpoint is published, a consumer can retrieve it. The service objec
 
 [source, groovy]
 ----
-import io.vertx.core.http.HttpClient
 // Get the record
 discovery.getRecord([
   name:"some-http-service"
@@ -518,8 +511,6 @@ method to combine lookup and service retrieval in one call:
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.HttpEndpoint
 HttpEndpoint.getClient(discovery, [
   name:"some-http-service"
 ], { ar ->
@@ -549,7 +540,6 @@ tends to be easier to use. You can retrieve a `link:../../apidocs/io/vertx/ext/w
 
 [source, groovy]
 ----
-import io.vertx.ext.web.client.WebClient
 // Get the record
 discovery.getRecord([
   name:"some-http-service"
@@ -578,8 +568,6 @@ And, if you prefer the approach using the service type:
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.HttpEndpoint
 HttpEndpoint.getWebClient(discovery, [
   name:"some-http-service"
 ], { ar ->
@@ -614,7 +602,6 @@ To publish an event bus service, you need to create a `link:../../apidocs/io/ver
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.EventBusService
 def record = EventBusService.createRecord("some-eventbus-service", "address", "examples.MyService", [
   'some-metadata':"some value"
 ])
@@ -642,8 +629,6 @@ However, as the service is searched by (Java) interface, you need to specify the
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.EventBusService
 EventBusService.getServiceProxyWithJsonFilter(discovery, [
 'service.interface':"org.acme.MyService"
 ], examples.MyService.class, { ar ->
@@ -674,7 +659,6 @@ As for the other service types, publishing a message source is a 2-step process:
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.MessageSource
 def record = MessageSource.createRecord("some-message-source-service", "some-address")
 
 discovery.publish(record, { ar ->
@@ -698,7 +682,6 @@ With the first approach, the code is the following:
 
 [source, groovy]
 ----
-import io.vertx.core.eventbus.MessageConsumer
 // Get the record
 discovery.getRecord([
   name:"some-message-source-service"
@@ -727,8 +710,6 @@ When, using `link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.ht
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.MessageSource
 MessageSource.getConsumer(discovery, [
   name:"some-message-source-service"
 ], { ar ->
@@ -764,7 +745,6 @@ As for the other service types, publishing a JDBC data source is a 2-step proces
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.JDBCDataSource
 def record = JDBCDataSource.createRecord("some-data-source-service", [
   url:"some jdbc url"
 ], [
@@ -790,7 +770,6 @@ the consumer:
 
 [source, groovy]
 ----
-import io.vertx.ext.jdbc.JDBCClient
 // Get the record
 discovery.getRecord([
   name:"some-data-source-service"
@@ -818,8 +797,6 @@ You can also use the `link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCC
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.JDBCDataSource
 JDBCDataSource.getJDBCClient(discovery, [
   name:"some-data-source-service"
 ], [
@@ -853,7 +830,6 @@ Publishing a Redis data source is a 2-step process:
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.RedisDataSource
 def record = RedisDataSource.createRecord("some-redis-data-source-service", [
   url:"localhost"
 ], [
@@ -877,7 +853,6 @@ the consumer:
 
 [source, groovy]
 ----
-import io.vertx.redis.RedisClient
 // Get the record
 discovery.getRecord([
   name:"some-redis-data-source-service"
@@ -902,8 +877,6 @@ You can also use the `link:../../apidocs/io/vertx/servicediscovery/types/RedisDa
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.RedisDataSource
 RedisDataSource.getRedisClient(discovery, [
   name:"some-redis-data-source-service"
 ], { ar ->
@@ -934,7 +907,6 @@ Publishing a Mongo data source is a 2-step process:
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.types.MongoDataSource
 def record = MongoDataSource.createRecord("some-data-source-service", [
   connection_string:"some mongo connection"
 ], [
@@ -985,8 +957,6 @@ You can also use the `link:../../apidocs/io/vertx/servicediscovery/types/MongoDa
 
 [source, groovy]
 ----
-import io.vertx.servicediscovery.ServiceDiscovery
-import io.vertx.servicediscovery.types.MongoDataSource
 MongoDataSource.getMongoClient(discovery, [
   name:"some-data-source-service"
 ], [

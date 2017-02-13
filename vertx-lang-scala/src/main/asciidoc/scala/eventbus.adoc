@@ -149,8 +149,6 @@ on the +MessageConsumer+ object.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 consumer.completionHandlerFuture().onComplete{
   case Success(result) => {
     println("The handler registration has reached all nodes")
@@ -171,8 +169,6 @@ be notified when this is complete use `link:../../scaladoc/io/vertx/scala/core/e
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 consumer.unregisterFuture().onComplete{
   case Success(result) => {
     println("The handler un-registration has reached all nodes")
@@ -253,8 +249,6 @@ The sender:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 eventBus.sendFuture("news.uk.sport", "Yay! Someone kicked a ball across a patch of grass").onComplete{
   case Success(result) => {
     println(s"Received reply: ${result.body()}")
@@ -309,9 +303,6 @@ instance as clustered;
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.Vertx
 var options = VertxOptions()
 Vertx.clusteredVertx(options, {
   case Success(result) => {
@@ -350,10 +341,6 @@ the event bus acts as a server and client, the configuration is close to
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.Vertx
 var options = VertxOptions()
   .setEventBusOptions(EventBusOptions()
     .setSsl(true)
@@ -399,9 +386,6 @@ When used in containers, you can also configure the public host and port:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.Vertx
 var options = VertxOptions()
   .setEventBusOptions(EventBusOptions()
     .setClusterPublicHost("whatever")

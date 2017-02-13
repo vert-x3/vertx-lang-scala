@@ -64,9 +64,6 @@ to check if the server is started properly or not.
 
 [source,scala]
 ----
-import io.vertx.scala.mqtt.MqttServer
-import scala.util.Failure
-import scala.util.Success
 
 var mqttServer = MqttServer.create(vertx)
 mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
@@ -129,9 +126,6 @@ The MQTT server is started passing the Vert.x instance as usual and the above MQ
 
 [source,scala]
 ----
-import io.vertx.scala.mqtt.MqttServer
-import scala.util.Failure
-import scala.util.Success
 
 var options = MqttServerOptions()
   .setPort(8883)
@@ -246,7 +240,6 @@ for sending the PUBCOMP message to the client.
 
 [source,scala]
 ----
-import io.netty.handler.codec.mqtt.MqttQoS
 
 // handling incoming published messages
 endpoint.publishHandler((message: io.vertx.scala.mqtt.messages.MqttPublishMessage) => {
@@ -287,8 +280,6 @@ for specifying the handler called when the final PUBCOMP message is received.
 
 [source,scala]
 ----
-import io.netty.handler.codec.mqtt.MqttQoS
-import io.vertx.scala.core.buffer.Buffer
 
 // just as example, publish a message with QoS level 2
 endpoint.publish("my_topic", Buffer.buffer("Hello from the Vert.x MQTT server"), MqttQoS.EXACTLY_ONCE, false, false)
@@ -341,8 +332,6 @@ that will be called when the server is really closed.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 mqttServer.closeFuture().onComplete{
   case Success(result) => println("Success")
@@ -365,9 +354,6 @@ It's possible to do that programmatically:
 
 [source,scala]
 ----
-import io.vertx.scala.mqtt.MqttServer
-import scala.util.Failure
-import scala.util.Success
 
 for ( i <- 0 until 10) {
 

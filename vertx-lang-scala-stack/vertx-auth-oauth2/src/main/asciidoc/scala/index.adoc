@@ -75,10 +75,6 @@ An example on how to use this provider and authenticate with GitHub can be imple
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.AUTH_CODE, OAuth2ClientOptions()
   .setClientID("YOUR_CLIENT_ID")
@@ -120,10 +116,6 @@ access token.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // Set the client credentials and the OAuth2 server
 var credentials = OAuth2ClientOptions()
@@ -165,11 +157,6 @@ need a fast way to test your application.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.core.http.HttpMethod
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // Initialize the OAuth2 Library
 var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.PASSWORD)
@@ -195,10 +182,6 @@ This flow is suitable when client is requesting access to the protected resource
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // Set the client credentials and the OAuth2 server
 var credentials = OAuth2ClientOptions()
@@ -233,8 +216,6 @@ to refresh the access token when it is expired.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // Check if the token is expired. If expired it is refreshed.
 if (token.expired()) {
   // Callbacks
@@ -254,8 +235,6 @@ When you've done with the token or you want to log out, you can revoke the acces
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // Revoke only the access token
 token.revokeFuture("access_token").onComplete{
   case Success(result) => println("Success")
@@ -292,10 +271,6 @@ This information is quite valuable since it allows to do authorization at the AP
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.providers.KeycloakAuth
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 // you would get this config from the keycloak admin console
 var keycloakJson = new io.vertx.core.json.JsonObject().put("realm", "master").put("realm-public-key", "MIIBIjANBgkqhk...wIDAQAB").put("auth-server-url", "http://localhost:9000/auth").put("ssl-required", "external").put("resource", "frontend").put("credentials", new io.vertx.core.json.JsonObject().put("secret", "2fbf5e18-b923-4a83-9657-b4ebd5317f60"))
 
@@ -319,7 +294,6 @@ data (e.g. `preferred_username`) from the Keycloak principal. For example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.KeycloakHelper
 // you can get the decoded `id_token` from the Keycloak principal
 var idToken = KeycloakHelper.idToken(principal)
 
@@ -346,8 +320,6 @@ the User level:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // OAuth2Auth level
 oauth2.introspectTokenFuture("opaque string").onComplete{
   case Success(result) => {
@@ -377,8 +349,6 @@ this specific case one needs to use the token introspection if the provider supp
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // OAuth2Auth level
 oauth2.decodeTokenFuture("jwt-token").onComplete{
   case Success(result) => {

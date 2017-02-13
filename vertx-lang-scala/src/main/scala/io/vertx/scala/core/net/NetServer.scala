@@ -22,8 +22,9 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
-import io.vertx.core.net.{NetSocketStream => JNetSocketStream}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -125,8 +126,8 @@ class NetServer(private val _asJava: Object)
     * connect stream .
     * @return the connect stream
     */
-  def connectStream(): NetSocketStream = {
-    NetSocketStream(asJava.asInstanceOf[JNetServer].connectStream())
+  def connectStream(): ReadStream[NetSocket] = {
+    ReadStream[NetSocket](asJava.asInstanceOf[JNetServer].connectStream())
   }
 
   /**

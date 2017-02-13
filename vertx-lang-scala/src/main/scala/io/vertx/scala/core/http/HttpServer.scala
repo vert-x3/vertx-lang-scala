@@ -22,14 +22,14 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
-import io.vertx.core.http.{ServerWebSocketStream => JServerWebSocketStream}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.core.http.{HttpServerRequestStream => JHttpServerRequestStream}
 
 /**
   * An HTTP and WebSockets server.
@@ -44,18 +44,18 @@ class HttpServer(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
-  private var cached_0: HttpServerRequestStream = _
-  private var cached_1: ServerWebSocketStream = _
+  private var cached_0: ReadStream[HttpServerRequest] = _
+  private var cached_1: ReadStream[ServerWebSocket] = _
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
     * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
     * @return the request stream
     */
-  def requestStream(): HttpServerRequestStream = {
+  def requestStream(): ReadStream[HttpServerRequest] = {
     if (cached_0 == null) {
       val tmp = asJava.asInstanceOf[JHttpServer].requestStream()
-      cached_0 = HttpServerRequestStream(tmp)
+      cached_0 = ReadStream[HttpServerRequest](tmp)
     }
     cached_0
   }
@@ -65,10 +65,10 @@ class HttpServer(private val _asJava: Object)
     * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
     * @return the websocket stream
     */
-  def websocketStream(): ServerWebSocketStream = {
+  def websocketStream(): ReadStream[ServerWebSocket] = {
     if (cached_1 == null) {
       val tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
-      cached_1 = ServerWebSocketStream(tmp)
+      cached_1 = ReadStream[ServerWebSocket](tmp)
     }
     cached_1
   }

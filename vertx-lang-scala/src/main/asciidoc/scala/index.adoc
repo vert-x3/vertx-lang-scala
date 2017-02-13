@@ -52,7 +52,6 @@ If you're embedding Vert.x then you simply create an instance as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx()
 
 ----
@@ -68,7 +67,6 @@ When creating a Vertx object you can also specify options if the defaults aren't
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setWorkerPoolSize(40)
 )
@@ -282,9 +280,6 @@ result handler to be called back asynchronous when the blocking code has been ex
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-var someAPI = new examples.CoreExamples.BlockingAPI()
 vertx.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
   var result = someAPI.blockingMethod("hello")
@@ -313,9 +308,6 @@ Additional pools can be created for different purposes:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-var someAPI = new examples.CoreExamples.BlockingAPI()
 var executor = vertx.createSharedWorkerExecutor("my-worker-pool")
 executor.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object>) => {
   // Call some blocking API that takes a significant amount of time to return
@@ -372,10 +364,6 @@ _succeeded_ when all the futures are and _failed_ when at least one of the futur
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.Future
 var httpServerFuture = Future.future()
 httpServer.listenFuture().onCompletehttpServerFuture.completer()
 
@@ -402,7 +390,6 @@ Alternatively, you can pass a list (potentially empty) of futures:
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
 CompositeFuture.all(List(future1, future2, future3))
 
 ----
@@ -414,9 +401,6 @@ all the futures are failed:
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
-import scala.util.Failure
-import scala.util.Success
 CompositeFuture.any(future1, future2).setHandlerFuture().onComplete{
   case Success(result) => {
     // At least one is succeeded
@@ -432,7 +416,6 @@ A list of futures can be used also:
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
 CompositeFuture.any(List(f1, f2, f3))
 
 ----
@@ -444,9 +427,6 @@ them is failed:
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
-import scala.util.Failure
-import scala.util.Success
 CompositeFuture.join(future1, future2, future3).setHandlerFuture().onComplete{
   case Success(result) => {
     // All succeeded
@@ -462,7 +442,6 @@ A list of futures can be used also:
 
 [source,scala]
 ----
-import io.vertx.scala.core.CompositeFuture
 CompositeFuture.join(List(future1, future2, future3))
 
 ----
@@ -474,8 +453,6 @@ for chaining futures (so sequential composition).
 
 [source,scala]
 ----
-import io.vertx.scala.core.Future
-import io.vertx.scala.core.buffer.Buffer
 
 var fs = vertx.fileSystem()
 var startFuture = Future.future()
@@ -675,8 +652,6 @@ If you want to be notified when deployment is complete you can deploy specifying
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 vertx.deployVerticleFuture("com.mycompany.MyOrderProcessorVerticle").onComplete{
   case Success(result) => {
     println(s"Deployment id is: ${result}")
@@ -700,8 +675,6 @@ Un-deployment is itself asynchronous so if you want to be notified when un-deplo
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 vertx.undeployFuture(deploymentID).onComplete{
   case Success(result) => {
     println("Undeployed ok")
@@ -855,7 +828,6 @@ context is created. You can test the _type_ of context you have retrieved:
 
 [source, scala]
 ----
-import io.vertx.scala.core.Context
 var context = vertx.getOrCreateContext()
 if (context.isEventLoopContext()) {
   println("Context attached to Event Loop")
@@ -1464,7 +1436,6 @@ DNS servers can be also configured when creating a `link:../../scaladoc/io/vertx
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setAddressResolverOptions(AddressResolverOptions()
     .setServers(Set("192.168.0.1", "192.168.0.2:40000"))
@@ -1480,7 +1451,6 @@ The resolver can be configured to use an alternative _hosts_ file:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setAddressResolverOptions(AddressResolverOptions()
     .setHostsPath("/path/to/hosts")
@@ -1494,7 +1464,6 @@ list can be provided:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setAddressResolverOptions(AddressResolverOptions()
     .setSearchDomains(Set("foo.com", "bar.com"))

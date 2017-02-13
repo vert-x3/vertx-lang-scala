@@ -50,7 +50,6 @@ Here's an example of creating a JWT auth provider:
 
 [source,java]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
 
@@ -64,7 +63,6 @@ do:
 
 [source,java]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
 
@@ -131,7 +129,6 @@ case all you need to have is a public key im PEM format.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 var config = new io.vertx.core.json.JsonObject().put("public-key", "BASE64-ENCODED-PUBLIC_KEY")
 var provider = JWTAuth.create(vertx, config)

@@ -65,8 +65,6 @@ Here's an example of authenticating a user using a simple username/password impl
 
 [source,java]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var authInfo = new io.vertx.core.json.JsonObject().put("username", "tim").put("password", "mypassword")
 
@@ -97,8 +95,6 @@ Here's an example of authorising a user:
 
 [source,java]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 user.isAuthorisedFuture("printers:printer1234").onComplete{
   case Success(result) => {

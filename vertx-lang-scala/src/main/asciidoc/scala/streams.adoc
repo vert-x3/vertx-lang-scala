@@ -119,7 +119,6 @@ You just feed it the `ReadStream` plus the `WriteStream` then start it:
 
 [source,scala]
 ----
-import io.vertx.scala.core.streams.Pump
 var server = vertx.createNetServer(NetServerOptions()
   .setPort(1234)
   .setHost("localhost")
@@ -138,9 +137,8 @@ Let's now look at the methods on `ReadStream` and `WriteStream` in more detail:
 
 `ReadStream` is implemented by `link:../../scaladoc/io/vertx/scala/core/http/HttpClientResponse.html[HttpClientResponse]`, `link:../../scaladoc/io/vertx/scala/core/datagram/DatagramSocket.html[DatagramSocket]`,
 `link:../../scaladoc/io/vertx/scala/core/http/HttpClientRequest.html[HttpClientRequest]`, `link:../../scaladoc/io/vertx/scala/core/http/HttpServerFileUpload.html[HttpServerFileUpload]`,
-`link:../../scaladoc/io/vertx/scala/core/http/HttpServerRequest.html[HttpServerRequest]`, `link:../../scaladoc/io/vertx/scala/core/http/HttpServerRequestStream.html[HttpServerRequestStream]`,
-`link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]`, `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`, `link:../../scaladoc/io/vertx/scala/core/net/NetSocketStream.html[NetSocketStream]`,
-`link:../../scaladoc/io/vertx/scala/core/http/WebSocket.html[WebSocket]`, `link:../../scaladoc/io/vertx/scala/core/http/WebSocketStream.html[WebSocketStream]`, `link:../../scaladoc/io/vertx/scala/core/TimeoutStream.html[TimeoutStream]`,
+`link:../../scaladoc/io/vertx/scala/core/http/HttpServerRequest.html[HttpServerRequest]`, `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]`,
+`link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`, `link:../../scaladoc/io/vertx/scala/core/http/WebSocket.html[WebSocket]`, `link:../../scaladoc/io/vertx/scala/core/TimeoutStream.html[TimeoutStream]`,
 `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`.
 
 Functions:

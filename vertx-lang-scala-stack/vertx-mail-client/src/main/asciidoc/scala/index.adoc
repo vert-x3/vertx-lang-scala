@@ -43,7 +43,6 @@ if it is shared, the same connection pool will be used for all clients using the
 
 [source,scala]
 ----
-import io.vertx.scala.ext.mail.MailClient
 var config = MailConfig()
 var mailClient = MailClient.createShared(vertx, config, "exampleclient")
 
@@ -59,7 +58,6 @@ The unshared client can be created the same way leaving out the identifier.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.mail.MailClient
 var config = MailConfig()
 var mailClient = MailClient.createNonShared(vertx, config)
 
@@ -68,8 +66,6 @@ var mailClient = MailClient.createNonShared(vertx, config)
 A more elaborate example using a mailserver that requires login via TLS
 [source,scala]
 ----
-import io.vertx.scala.ext.mail.MailClient
-import io.vertx.ext.mail.StartTLSOptions
 var config = MailConfig()
 config.setHostname("mail.example.com")
 config.setPort(587)
@@ -112,7 +108,6 @@ this supports base64 attachments.
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 var attachment = MailAttachment()
 attachment.setContentType("text/plain")
 attachment.setData(Buffer.buffer("attachment file"))
@@ -131,7 +126,6 @@ A valid example for a Content-ID value is "<filename%201.jpg@example.org>"
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 var attachment = MailAttachment()
 attachment.setContentType("image/jpeg")
 attachment.setData(Buffer.buffer("image data"))
@@ -148,8 +142,6 @@ A mail is sent as follows:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 mailClient.sendMailFuture(message).onComplete{
   case Success(result) => {
     println(result)

@@ -61,7 +61,6 @@ An connection example can then be:
 
 [source,scala]
 ----
-import io.vertx.scala.redis.RedisClient
 var config = RedisOptions()
   .setHost("127.0.0.1")
 
@@ -89,9 +88,6 @@ if one wants to get a value of a key it can be done as:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.redis.RedisClient
 var redis = RedisClient.create(vertx, RedisOptions())
 
 redis.getFuture("mykey").onComplete{
@@ -114,9 +110,6 @@ To start a subscriber one would do:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.redis.RedisClient
 
 // register a handler for the incoming message the naming the Redis module will use is base address + '.' + redis channel
 vertx.eventBus().consumer("io.vertx.redis.channel1", (received: io.vertx.scala.core.eventbus.Message<io.vertx.scala.core.json.JsonObject>) => {
@@ -143,9 +136,6 @@ And from another place in the code publish messages to the queue:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.redis.RedisClient
 
 var redis = RedisClient.create(vertx, RedisOptions())
 

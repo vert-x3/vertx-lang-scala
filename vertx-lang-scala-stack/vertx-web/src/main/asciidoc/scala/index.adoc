@@ -142,7 +142,6 @@ Here's a simple router example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.Router
 var server = vertx.createHttpServer()
 
 var router = Router.router(vertx)
@@ -368,7 +367,6 @@ Here's an example
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 
 var route = router.route(HttpMethod.POST, "/catalogue/products/:producttype/:productid/")
 
@@ -467,7 +465,6 @@ If you want a route to only match for a specific HTTP method you can use `link:.
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 
 var route = router.route().method(HttpMethod.POST)
 
@@ -484,7 +481,6 @@ Or you can specify this with a path when creating the route:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 
 var route = router.route(HttpMethod.POST, "/some/path/")
 
@@ -534,7 +530,6 @@ multiple times:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 
 var route = router.route().method(HttpMethod.POST).method(HttpMethod.PUT)
 
@@ -825,7 +820,6 @@ You can combine all the above routing criteria in many different ways, for examp
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 
 var route = router.route(HttpMethod.PUT, "myapi/orders").consumes("application/json").produces("application/json")
 
@@ -953,7 +947,6 @@ Here's the sub-router:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.Router
 
 var restAPI = Router.router(vertx)
 
@@ -987,7 +980,6 @@ However, let's say we already have a web-site as described by another router:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.Router
 var mainRouter = Router.router(vertx)
 
 // Handle static resources
@@ -1135,7 +1127,6 @@ to install handlers to consume the HTTP request body and this must be done befor
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.BodyHandler
 
 // This body handler will be called for all routes
 router.route().handler(BodyHandler.create())
@@ -1178,7 +1169,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.BodyHandler
 
 router.route().handler(BodyHandler.create())
 
@@ -1202,7 +1192,6 @@ You should make sure a cookie handler is on a matching route for any requests th
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 
 // This cookie handler will be called for all routes
 router.route().handler(CookieHandler.create())
@@ -1229,8 +1218,6 @@ Here's an example of querying and adding cookies:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.Cookie
 
 // This cookie handler will be called for all routes
 router.route().handler(CookieHandler.create())
@@ -1311,7 +1298,6 @@ Here are some examples of creating a `link:../../scaladoc/io/vertx/scala/ext/web
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 // Create a local session store using defaults
 var store1 = LocalSessionStore.create(vertx)
@@ -1343,10 +1329,6 @@ Here are some examples of creating a `link:../../scaladoc/io/vertx/scala/ext/web
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.sstore.ClusteredSessionStore
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.Vertx
 
 // a clustered Vert.x
 Vertx.clusteredVertx(VertxOptions()
@@ -1371,10 +1353,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.sstore.ClusteredSessionStore
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.Router
-import io.vertx.scala.ext.web.handler.SessionHandler
 
 var router = Router.router(vertx)
 
@@ -1420,7 +1398,6 @@ Here's an example of manipulating session data:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CookieHandler
 
 router.route().handler(CookieHandler.create())
 router.route().handler(sessionHandler)
@@ -1477,10 +1454,6 @@ Here's a simple example of creating a basic auth handler given an auth provider.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.BasicAuthHandler
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.handler.SessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -1496,11 +1469,6 @@ your auth handler is before your application handlers on those paths:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.UserSessionHandler
-import io.vertx.scala.ext.web.handler.BasicAuthHandler
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.handler.SessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -1582,13 +1550,6 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.UserSessionHandler
-import io.vertx.scala.ext.web.handler.StaticHandler
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.handler.FormLoginHandler
-import io.vertx.scala.ext.web.handler.SessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
-import io.vertx.scala.ext.web.handler.RedirectAuthHandler
 
 router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
@@ -1638,8 +1599,6 @@ Here's an example on how to issue tokens:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -1663,9 +1622,6 @@ Now that your client has a token all it is required is that for *all* consequent
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
-import io.vertx.scala.ext.web.handler.JWTAuthHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -1687,7 +1643,6 @@ token, during the creation of the token just add data to the JsonObject paramete
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.jwt.JWTAuth
 
 var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
 
@@ -1722,7 +1677,6 @@ may support a role/permission based model but others might use another model.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.RedirectAuthHandler
 
 var listProductsAuthHandler = RedirectAuthHandler.create(authProvider)
 listProductsAuthHandler.addAuthority("list_products")
@@ -1754,7 +1708,6 @@ In the following example all requests to paths starting with `/static/` will get
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.StaticHandler
 
 router.route("/static/*").handler(StaticHandler.create())
 
@@ -1856,8 +1809,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
-import io.vertx.scala.ext.web.handler.CorsHandler
 
 // Will only accept GET requests from origin "vertx.io"
 router.route().handler(CorsHandler.create("vertx\\.io").allowedMethod(HttpMethod.GET))
@@ -1979,7 +1930,6 @@ add it the context data in a handler before the template handler. For example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.TemplateHandler
 
 var handler = TemplateHandler.create(engine)
 
@@ -2092,7 +2042,6 @@ seconds:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.TimeoutHandler
 
 router.route("/foo/").handler(TimeoutHandler.create(5000))
 
@@ -2105,6 +2054,68 @@ This handler sets the header `x-response-time` response header containing the ti
 to when the response headers were written, in ms., e.g.:
 
  x-response-time: 1456ms
+
+== Content type handler
+
+The `ResponseContentTypeHandler` can set the `Content-Type` header automatically.
+Suppose we are building a RESTful web application. We need to set the content type in all our handlers:
+
+[source,scala]
+----
+router.get("/api/books").produces("application/json").handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
+  findBooks({
+    case Success(result) => {
+      rc.response().putHeader("Content-Type", "application/json").end(toJson(result))
+    }
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  })
+})
+
+----
+
+If the API surface becomes pretty large, setting the content type can become cumbersome.
+To avoid this situation, add the `ResponseContentTypeHandler` to the corresponding routes:
+
+[source,scala]
+----
+router.route("/api/*").handler(ResponseContentTypeHandler.create())
+router.get("/api/books").produces("application/json").handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
+  findBooks({
+    case Success(result) => {
+      rc.response().end(toJson(result))
+    }
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  })
+})
+
+----
+
+The handler gets the approriate content type from `link:../../scaladoc/io/vertx/scala/ext/web/RoutingContext.html#getAcceptableContentType()[getAcceptableContentType]`.
+As a consequence, you can easily share the same handler to produce data of different types:
+
+[source,scala]
+----
+router.route("/api/*").handler(ResponseContentTypeHandler.create())
+router.get("/api/books").produces("text/xml").produces("application/json").handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
+  findBooks({
+    case Success(result) => {
+      if (rc.getAcceptableContentType() == "text/xml") {
+        rc.response().end(toXML(result))
+      } else {
+        rc.response().end(toJson(result))
+      }
+    }
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  })
+})
+
+----
 
 == SockJS
 
@@ -2129,8 +2140,6 @@ an instance of `link:../dataobjects.html#SockJSHandlerOptions[SockJSHandlerOptio
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2158,8 +2167,6 @@ Here's an example of a simple SockJS handler that simply echoes back any back an
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2261,8 +2268,6 @@ SockJS handler.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2391,8 +2396,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2477,12 +2480,6 @@ To handle the login and actually auth you can configure the normal Vert.x auth h
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.BasicAuthHandler
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.handler.CookieHandler
-import io.vertx.scala.ext.web.Router
-import io.vertx.scala.ext.web.handler.SessionHandler
-import io.vertx.scala.ext.web.sstore.LocalSessionStore
 
 var router = Router.router(vertx)
 
@@ -2557,9 +2554,6 @@ Here's an example where we reject all messages flowing through the bridge if the
 
 [source,scala]
 ----
-import io.vertx.ext.web.handler.sockjs.BridgeEventType
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2651,9 +2645,6 @@ also add headers to the message, here's an example:
 
 [source,scala]
 ----
-import io.vertx.ext.web.handler.sockjs.BridgeEventType
-import io.vertx.scala.ext.web.handler.sockjs.SockJSHandler
-import io.vertx.scala.ext.web.Router
 
 var router = Router.router(vertx)
 
@@ -2711,8 +2702,6 @@ or the header name they have chosen during the instantiation of the `CSRFHandler
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.CSRFHandler
-import io.vertx.scala.ext.web.handler.CookieHandler
 
 router.route().handler(CookieHandler.create())
 router.route().handler(CSRFHandler.create("abracadabra"))
@@ -2732,7 +2721,6 @@ example `*.vertx.io` or fully domain names as `www.vertx.io`.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.VirtualHostHandler
 router.route().handler(VirtualHostHandler.create("*.vertx.io", (routingContext: io.vertx.scala.ext.web.RoutingContext) => {
   // do something if the request is for *.vertx.io
 }))
@@ -2746,8 +2734,6 @@ authCode flow. An example of using it to protect some resource and authenticate 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.providers.GithubAuth
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 
 // create an OAuth2 provider, clientID and clientSecret should be requested to github
 var authProvider = GithubAuth.create(vertx, "CLIENT_ID", "CLIENT_SECRET")
@@ -2807,9 +2793,6 @@ However if you're using an unlisted provider you can still do it using the base 
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
-import io.vertx.ext.auth.oauth2.OAuth2FlowType
 
 // create an OAuth2 provider, clientID and clientSecret should be requested to Google
 var authProvider = OAuth2Auth.create(vertx, OAuth2FlowType.AUTH_CODE, OAuth2ClientOptions()
@@ -2856,7 +2839,6 @@ mandatory for the default values, 80 for http, 443 for https.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.web.handler.OAuth2AuthHandler
 // create a oauth2 handler pinned to myserver.com: "https://myserver.com:8447/callback"
 var oauth2 = OAuth2AuthHandler.create(provider, "https://myserver.com:8447/callback")
 // now allow the handler to setup the callback url for you

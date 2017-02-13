@@ -12,6 +12,10 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[baseName]]`baseName`|`String`|
++++
+Set a custom baseName for metrics.
++++
 |[[configPath]]`configPath`|`String`|
 +++
 Set the path for a config file that contains options in JSON format, to be used to create a new options object.
