@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-stack</artifactId>
+    <artifactId>vertx-lang-scala-stack_2.12</artifactId>
     <version>3.4.0.Beta1</version>
     <relativePath>../</relativePath>
   </parent>
