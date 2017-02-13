@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala-on-the-fly_${scala.build.version}</artifactId>
+  <artifactId>vertx-lang-scala-on-the-fly_2.12</artifactId>
   <name>Scala on the fly compilation</name>
   <inceptionYear>2016</inceptionYear>
   <organization>
@@ -42,13 +42,13 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scala.build.version}</artifactId>
+      <artifactId>scalatest_2.12</artifactId>
       <version>3.0.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalactic</groupId>
-      <artifactId>scalactic_${scala.build.version}</artifactId>
+      <artifactId>scalactic_2.12</artifactId>
       <version>3.0.0</version>
       <scope>test</scope>
     </dependency>

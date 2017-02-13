@@ -32,7 +32,6 @@
   </licenses>
   <properties>
     <scala.version>2.12.1</scala.version>
-    <scala.build.version>2.12</scala.build.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>

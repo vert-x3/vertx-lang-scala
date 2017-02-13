@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-stomp-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-stomp-scala_2.12</artifactId>
 
 
   <properties>
@@ -28,12 +28,12 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-common-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-auth-common-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-bridge-common-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-bridge-common-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>

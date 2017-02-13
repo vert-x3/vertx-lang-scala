@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-web-templ-pebble-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-web-templ-pebble-scala_2.12</artifactId>
 
 
   <properties>
@@ -23,7 +23,7 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-web-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>

@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-mongo-service-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-mongo-service-scala_2.12</artifactId>
 
 
   <properties>
@@ -23,7 +23,7 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-mongo-client-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
