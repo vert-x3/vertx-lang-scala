@@ -11,7 +11,7 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-lang-scala_2.12</artifactId>
   <inceptionYear>2016</inceptionYear>
   <organization>
     <name>vert.x</name>
@@ -137,13 +137,13 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_${scala.build.version}</artifactId>
+      <artifactId>scalatest_2.12</artifactId>
       <version>3.0.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalactic</groupId>
-      <artifactId>scalactic_${scala.build.version}</artifactId>
+      <artifactId>scalactic_2.12</artifactId>
       <version>3.0.0</version>
       <scope>test</scope>
     </dependency>

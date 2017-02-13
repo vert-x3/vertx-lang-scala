@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-service-discovery-scala_${scala.build.version}</artifactId>
+  <artifactId>vertx-service-discovery-scala_2.12</artifactId>
 
 
   <properties>
@@ -23,7 +23,7 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-web-client-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
@@ -34,25 +34,25 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-redis-client-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-redis-client-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-jdbc-client-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-jdbc-client-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-mongo-client-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-scala_${scala.build.version}</artifactId>
+      <artifactId>vertx-web-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
     </dependency>
