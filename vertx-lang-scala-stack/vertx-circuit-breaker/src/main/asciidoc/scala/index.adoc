@@ -48,9 +48,6 @@ Here is an example:
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
-import scala.util.Failure
-import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -76,9 +73,6 @@ output of a REST endpoint invocation:
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
-import scala.util.Failure
-import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -110,9 +104,6 @@ Optionally, you can provide a fallback which is executed when the circuit is ope
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
-import scala.util.Failure
-import scala.util.Success
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -147,7 +138,6 @@ The fallback can also be set on the `link:../../scaladoc/io/vertx/scala/circuitb
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -182,7 +172,6 @@ You can also configures callbacks invoked when the circuit is opened or closed:
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
   .setMaxFailures(5)
   .setTimeout(2000)
@@ -243,9 +232,6 @@ a SSE stream sending the metrics. This stream is provided by the
 
 [source,scala]
 ----
-import io.vertx.scala.circuitbreaker.CircuitBreaker
-import io.vertx.scala.ext.web.Router
-import io.vertx.scala.circuitbreaker.HystrixMetricHandler
 // Create the circuit breaker as usual.
 var breaker = CircuitBreaker.create("my-circuit-breaker", vertx)
 var breaker2 = CircuitBreaker.create("my-second-circuit-breaker", vertx)

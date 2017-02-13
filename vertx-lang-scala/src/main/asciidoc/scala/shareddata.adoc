@@ -26,7 +26,6 @@ Here's an example of using a shared local map:
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 var sd = vertx.sharedData()
 
@@ -65,8 +64,6 @@ Getting the map is asynchronous and the result is returned to you in the handler
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var sd = vertx.sharedData()
 
@@ -90,8 +87,6 @@ The actual put is asynchronous and the handler is notified once it is complete:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 map.putFuture("foo", "bar").onComplete{
   case Success(result) => {
@@ -113,8 +108,6 @@ The actual get is asynchronous and the handler is notified with the result some 
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 map.getFuture("foo").onComplete{
   case Success(result) => {
@@ -155,8 +148,6 @@ another caller can obtain it.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 sd.getLockFuture("mylock").onComplete{
   case Success(result) => {
     // Got the lock!
@@ -181,8 +172,6 @@ with a failure:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 sd.getLockWithTimeoutFuture("mylock", 10000).onComplete{
   case Success(result) => {
     // Got the lock!
@@ -206,8 +195,6 @@ You obtain an instance with `link:../../scaladoc/io/vertx/scala/core/shareddata/
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 sd.getCounterFuture("mycounter").onComplete{
   case Success(result) => {
     var counter = result

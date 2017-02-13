@@ -33,7 +33,6 @@ Once you've got one of these you can create a `link:../../scaladoc/io/vertx/scal
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.htdigest.HtdigestAuth
 var authProvider = HtdigestAuth.create(vertx, ".htdigest")
 
 ----
@@ -49,8 +48,6 @@ object which we refer from now on as authentication info:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var authInfo = new io.vertx.core.json.JsonObject().put("username", "Mufasa").put("realm", "testrealm@host.com").put("nonce", "dcd98b7102dd2f0e8b11d0f600bfb0c093").put("method", "GET").put("uri", "/dir/index.html").put("response", "6629fae49393a05397450978507c4ef1")
 
 authProvider.authenticateFuture(authInfo).onComplete{

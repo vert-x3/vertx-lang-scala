@@ -31,8 +31,6 @@ Once you've got one of those you can create a `link:../../scaladoc/io/vertx/scal
 
 [source,scala]
 ----
-import io.vertx.scala.ext.jdbc.JDBCClient
-import io.vertx.scala.ext.auth.jdbc.JDBCAuth
 
 var jdbcClient = JDBCClient.createShared(vertx, jdbcClientConfig)
 
@@ -102,8 +100,6 @@ to hash new password before storing it to the database. Doing it is a 3 step tas
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var salt = auth.generateSalt()
 var hash = auth.computeHash("sausages", salt)
@@ -124,8 +120,6 @@ authentication info:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var authInfo = new io.vertx.core.json.JsonObject().put("username", "tim").put("password", "sausages")
 
@@ -151,8 +145,6 @@ If validating if a user has a particular permission simply pass the permission i
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 user.isAuthorisedFuture("commit_code").onComplete{
   case Success(result) => {
@@ -170,8 +162,6 @@ If validating that a user has a particular _role_ then you should prefix the arg
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 user.isAuthorisedFuture("role:manager").onComplete{
   case Success(result) => {

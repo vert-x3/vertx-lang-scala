@@ -67,8 +67,6 @@ You do this as follows:
 
 [source,java]
 ----
-import io.vertx.scala.ext.asyncsql.MySQLClient
-import io.vertx.scala.ext.asyncsql.PostgreSQLClient
 
 // To create a MySQL client:
 
@@ -95,8 +93,6 @@ You can create a client specifying a pool name as follows
 
 [source,java]
 ----
-import io.vertx.scala.ext.asyncsql.MySQLClient
-import io.vertx.scala.ext.asyncsql.PostgreSQLClient
 
 // To create a MySQL client:
 
@@ -133,8 +129,6 @@ or `link:../../scaladoc/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#create
 
 [source,java]
 ----
-import io.vertx.scala.ext.asyncsql.MySQLClient
-import io.vertx.scala.ext.asyncsql.PostgreSQLClient
 
 // To create a MySQL client:
 
@@ -167,8 +161,6 @@ This will return the connection in the handler when one is ready from the pool.
 
 [source,java]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 // Now do stuff with it:
 

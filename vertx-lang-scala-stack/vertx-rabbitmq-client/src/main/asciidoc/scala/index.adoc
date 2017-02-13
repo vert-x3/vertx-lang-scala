@@ -36,7 +36,6 @@ You can create a client instance as follows using a full amqp uri:
 
 [source,scala]
 ----
-import io.vertx.scala.rabbitmq.RabbitMQClient
 var config = new io.vertx.core.json.JsonObject()
 // full amqp uri
 config.put("uri", "amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
@@ -48,7 +47,6 @@ Or you can also specify individual parameters manually:
 
 [source,scala]
 ----
-import io.vertx.scala.rabbitmq.RabbitMQClient
 var config = new io.vertx.core.json.JsonObject()
 // Each parameter is optional
 // The default parameter with be used if the parameter is not set
@@ -74,8 +72,6 @@ You can pass additional config parameters to RabbitMQ's exchangeDeclare method
 
 [source, scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var config = Map()
 
@@ -105,8 +101,6 @@ Publish a message to a queue
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var message = new io.vertx.core.json.JsonObject().put("body", "Hello RabbitMQ, from Vert.x !")
 client.basicPublishFuture("", "my.queue", message).onComplete{
   case Success(result) => {
@@ -126,8 +120,6 @@ Consume messages from a queue
 [source,scala]
 ----
 // Create the event bus handler which messages will be sent to
-import scala.util.Failure
-import scala.util.Success
 // Create the event bus handler which messages will be sent to
 vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
   var json = msg.body()
@@ -152,8 +144,6 @@ Will get a message from a queue
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 client.basicGetFuture("my.queue", true).onComplete{
   case Success(result) => {
     var msg = result
@@ -170,8 +160,6 @@ client.basicGetFuture("my.queue", true).onComplete{
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 // Create the event bus handler which messages will be sent to
 vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
   var json = msg.body()

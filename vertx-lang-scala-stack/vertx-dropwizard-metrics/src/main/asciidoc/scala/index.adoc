@@ -37,7 +37,6 @@ Then when you create vertx enable metrics using the `link:../dataobjects.html#Dr
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)
@@ -50,7 +49,6 @@ You can also enable JMX:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setJmxEnabled(true)
@@ -135,6 +133,16 @@ metricsNames.foreach(metricsName => {
 
 ----
 
+`baseName` defaults to `vertx`, but can be set to a custom value:
+
+[source,scala]
+----
+var metricsOptions = DropwizardMetricsOptions()
+  .setBaseName("foo")
+
+
+----
+
 === Retrieving metrics
 
 Once enabled, the `link:../../scaladoc/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` allows to retrieve metrics snapshots from any
@@ -143,7 +151,6 @@ represented by a `JsonObject`. So for example if we were to print out all metric
 for a particular Vert.x instance:
 [source,scala]
 ----
-import io.vertx.scala.ext.dropwizard.MetricsService
 var metricsService = MetricsService.create(vertx)
 var metrics = metricsService.getMetricsSnapshot(vertx)
 println(metrics)
@@ -161,7 +168,6 @@ that are specific for that particular http server.
 
 [source,scala]
 ----
-import io.vertx.scala.ext.dropwizard.MetricsService
 var metricsService = MetricsService.create(vertx)
 var server = vertx.createHttpServer()
 // set up server
@@ -173,7 +179,6 @@ Metrics can also be retrieved using a base name:
 
 [source,scala]
 ----
-import io.vertx.scala.ext.dropwizard.MetricsService
 var metricsService = MetricsService.create(vertx)
 var metrics = metricsService.getMetricsSnapshot("vertx.eventbus.message")
 
@@ -376,8 +381,6 @@ a specific address match or a regex match:
 
 [source,scala]
 ----
-import io.vertx.ext.dropwizard.MatchType
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)
@@ -418,8 +421,6 @@ Http URI metrics must be explicitely configured in the options either by exact m
 
 [source,scala]
 ----
-import io.vertx.ext.dropwizard.MatchType
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)
@@ -472,8 +473,6 @@ a specific hostname match or a regex match:
 
 [source,scala]
 ----
-import io.vertx.ext.dropwizard.MatchType
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)
@@ -546,7 +545,6 @@ If you want JMX, then you need to enabled that:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setJmxEnabled(true)
@@ -566,7 +564,6 @@ You can configure the domain under which the MBeans will be created:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setJmxEnabled(true)
@@ -607,7 +604,6 @@ so you can retrieve this registry and use according to your needs.
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var options = VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)
@@ -636,7 +632,6 @@ First, you need to configure your vert.x instance with the following options:
 
 [source,scala]
 ----
-import io.vertx.scala.core.Vertx
 var vertx = Vertx.vertx(VertxOptions()
   .setMetricsOptions(DropwizardMetricsOptions()
     .setEnabled(true)

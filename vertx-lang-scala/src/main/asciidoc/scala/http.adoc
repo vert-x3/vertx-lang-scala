@@ -130,8 +130,6 @@ For example:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var server = vertx.createHttpServer()
 server.listenFuture(8080, "myhost.com").onComplete{
@@ -321,7 +319,6 @@ the aggregation yourself as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 // Create an empty buffer
 var totalBuffer = Buffer.buffer()
@@ -747,8 +744,6 @@ at any one time:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
-import io.vertx.scala.core.streams.Pump
 vertx.createHttpServer().requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
   var response = request.response()
   if (request.method() == HttpMethod.PUT) {
@@ -774,7 +769,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 var frameType = 40
 var frameStatus = 10
@@ -838,9 +832,6 @@ When a server process a request, it can push a request/response to the client:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
-import scala.util.Failure
-import scala.util.Success
 
 var response = request.response()
 
@@ -939,7 +930,6 @@ For `h2` requests, TLS must be enabled with _Application-Layer Protocol Negotiat
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpVersion
 
 var options = HttpClientOptions()
   .setProtocolVersion(HttpVersion.HTTP_2)
@@ -956,7 +946,6 @@ For `h2c` requests, TLS must be disabled, the client will do an HTTP/1.1 request
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpVersion
 
 var options = HttpClientOptions()
   .setProtocolVersion(HttpVersion.HTTP_2)
@@ -1042,7 +1031,7 @@ Often, you'll want to make HTTP requests with no request body. This is usually t
 HEAD requests.
 
 The simplest way to do this with the Vert.x http client is using the methods prefixed with `Now`. For example
-`link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#getNow(int,%20java.lang.String,%20java.lang.String,%20io.vertx.core.Handler)[getNow]`.
+`link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#getNow(io.vertx.core.http.RequestOptions,%20io.vertx.core.Handler)[getNow]`.
 
 These methods create the http request and send it in a single method call and allow you to provide a handler that will be
 called with the http response when it comes back.
@@ -1067,12 +1056,11 @@ client.headNow("/other-uri", (response: io.vertx.scala.core.http.HttpClientRespo
 ==== Writing general requests
 
 At other times you don't know the request method you want to send until run-time. For that use case we provide
-general purpose request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#request(io.vertx.core.http.HttpMethod,%20int,%20java.lang.String,%20java.lang.String)[request]` which allow you to specify
+general purpose request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#request(io.vertx.core.http.HttpMethod,%20io.vertx.core.http.RequestOptions)[request]` which allow you to specify
 the HTTP method at run-time:
 
 [source,scala]
 ----
-import io.vertx.core.http.HttpMethod
 var client = vertx.createHttpClient()
 
 client.request(HttpMethod.GET, "some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
@@ -1090,8 +1078,8 @@ client.request(HttpMethod.POST, "foo-uri", (response: io.vertx.scala.core.http.H
 Sometimes you'll want to write requests which have a body, or perhaps you want to write headers to a request
 before sending it.
 
-To do this you can call one of the specific request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#post(int,%20java.lang.String,%20java.lang.String)[post]` or
-one of the general purpose request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#request(io.vertx.core.http.HttpMethod,%20int,%20java.lang.String,%20java.lang.String)[request]`.
+To do this you can call one of the specific request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#post(io.vertx.core.http.RequestOptions)[post]` or
+one of the general purpose request methods such as `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#request(io.vertx.core.http.HttpMethod,%20io.vertx.core.http.RequestOptions)[request]`.
 
 These methods don't send the request immediately, but instead return an instance of `link:../../scaladoc/io/vertx/scala/core/http/HttpClientRequest.html[HttpClientRequest]`
 which can be used to write to the request body or write headers.
@@ -1133,7 +1121,6 @@ Methods exist to write strings in UTF-8 encoding and in any specific encoding an
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 // Write string encoded in UTF-8
 request.write("some data")
@@ -1154,7 +1141,6 @@ single call to the `end` function.
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 // Write string and end the request (send it) in a single call
 request.end("some simple data")
@@ -1241,7 +1227,6 @@ before calling `end` with no arguments
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 // End the request with a string
 request.end("some-data")
 
@@ -1349,7 +1334,6 @@ For, example, you could pump a file on disk to a http request body as follows:
 
 [source,scala]
 ----
-import io.vertx.scala.core.streams.Pump
 
 request.setChunked(true)
 var pump = Pump.pump(file, request)
@@ -1370,7 +1354,6 @@ To send such frames, you can use the `link:../../scaladoc/io/vertx/scala/core/ht
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 var frameType = 40
 var frameStatus = 10
@@ -1497,7 +1480,6 @@ either aggregate it yourself:
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 client.getNow("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
 
@@ -1545,6 +1527,86 @@ You can retrieve the list of cookies from a response using `link:../../scaladoc/
 
 Alternatively you can just parse the `Set-Cookie` headers yourself in the response.
 
+==== 30x redirection handling
+
+The client can be configured to follow HTTP redirections: when the client receives an
+`301`, `302`, `303` or `307` status code, it follows the redirection provided by the `Location` response header
+and the response handler is passed the redirected response instead of the original response.
+
+Here’s an example:
+
+[source,scala]
+----
+
+client.get("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+  println(s"Received response with status code ${response.statusCode()}")
+}).setFollowRedirects(true).end()
+
+----
+
+The redirection policy is as follow
+
+* on a `301`, `302` or `303` status code, follow the redirection with a `GET` method
+* on a `307` status code, follow the redirection with the same HTTP method and the cached body
+
+WARNING: following redirections caches the request body
+
+The maximum redirects is `16` by default and can be changed with `link:../dataobjects.html#HttpClientOptions#setMaxRedirects(int)[maxRedirects]`.
+
+[source,scala]
+----
+
+var client = vertx.createHttpClient(HttpClientOptions()
+  .setMaxRedirects(32)
+)
+
+client.get("some-uri", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+  println(s"Received response with status code ${response.statusCode()}")
+}).setFollowRedirects(true).end()
+
+----
+
+One size does not fit all and the default redirection policy may not be adapted to your needs.
+
+The default redirection policy can changed with a custom implementation:
+
+[source,scala]
+----
+
+client.redirectHandler((response: io.vertx.scala.core.http.HttpClientResponse) => {
+
+  // Only follow 301 code
+  if (response.statusCode() == 301 && response.getHeader("Location") != null) {
+
+    // Compute the redirect URI
+    var absoluteURI = resolveURI(response.request().absoluteURI(), response.getHeader("Location"))
+
+    // Create a new ready to use request that the client will use
+    Future.succeededFuture(client.getAbs(absoluteURI))
+  }
+
+  // We don't redirect
+  null
+})
+
+----
+
+The policy handles the original `link:../../scaladoc/io/vertx/scala/core/http/HttpClientResponse.html[HttpClientResponse]` received and returns either `null`
+or a `Future<HttpClientRequest>`.
+
+- when `null` is returned, the original response is processed
+- when a future is returned, the request will be sent on its successful completion
+- when a future is returned, the exception handler set on the request is called on its failure
+
+The returned request must be unsent so the original request handlers can be sent and the client can send it after.
+
+Most of the original request settings will be propagated to the new request:
+
+* request headers, unless if you have set some headers (including `link:../../scaladoc/io/vertx/scala/core/http/HttpClientRequest.html#setHost(java.lang.String)[setHost]`)
+* request body unless the returned request uses a `GET` method
+* response handler
+* request exception handler
+* request timeout
 
 ==== 100-Continue handling
 
@@ -1890,8 +1952,6 @@ to be notified of the acknowledgment:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 connection.updateSettingsFuture(Http2Settings()
   .setMaxConcurrentStreams(100)
 ).onComplete{
@@ -1924,9 +1984,6 @@ endpoint:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
-import io.vertx.scala.core.buffer.Buffer
 var data = Buffer.buffer()
 for ( i <- 0 until 8) {
   data.appendByte(i)
@@ -2096,6 +2153,34 @@ Vert.x http servers and clients can be configured to use HTTPS in exactly the sa
 
 Please see <<ssl, configuring net servers to use SSL>> for more information.
 
+SSL can also be enabled/disabled per request with `link:../dataobjects.html#RequestOptions[RequestOptions]` or when
+specifying a scheme with `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#requestAbs(io.vertx.core.http.HttpMethod,%20java.lang.String)[requestAbs]`
+method.
+
+[source,scala]
+----
+client.getNow(RequestOptions()
+  .setHost("localhost")
+  .setPort(8080)
+  .setURI("/")
+  .setSsl(true)
+, (response: io.vertx.scala.core.http.HttpClientResponse) => {
+  println(s"Received response with status code ${response.statusCode()}")
+})
+
+----
+
+The `link:../dataobjects.html#HttpClientOptions#setSsl(boolean)[ssl]` setting acts as the default client setting.
+
+The `link:../dataobjects.html#RequestOptions#setSsl(boolean)[ssl]` overrides the default client setting
+
+* setting the value to `false` will disable SSL/TLS even if the client is configured to use SSL/TLS
+* setting the value to `true` will enable SSL/TLS  even if the client is configured to not use SSL/TLS, the actual
+client SSL/TLS (such as trust, key/certificate, ciphers, ALPN, ...) will be reused
+
+Likewise `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#requestAbs(io.vertx.core.http.HttpMethod,%20java.lang.String)[requestAbs]` scheme
+also overrides the default client setting.
+
 === WebSockets
 
 http://en.wikipedia.org/wiki/WebSocket[WebSockets] are a web technology that allows a full duplex socket-like
@@ -2171,7 +2256,7 @@ The `link:../../scaladoc/io/vertx/scala/core/http/ServerWebSocket.html[ServerWeb
 
 The Vert.x `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]` supports WebSockets.
 
-You can connect a WebSocket to a server using one of the `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#websocket(int,%20java.lang.String,%20java.lang.String,%20io.vertx.core.Handler)[websocket]` operations and
+You can connect a WebSocket to a server using one of the `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html#websocket(io.vertx.core.http.RequestOptions,%20io.vertx.core.Handler)[websocket]` operations and
 providing a handler.
 
 The handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/http/WebSocket.html[WebSocket]` when the connection has been made:
@@ -2191,7 +2276,6 @@ If you wish to write a single binary WebSocket message to the WebSocket you can 
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 // Write a simple message
 var buffer = Buffer.buffer().appendInt(123).appendFloat(1.23)
 
@@ -2220,7 +2304,6 @@ Here's an example for binary frames:
 
 [source,scala]
 ----
-import io.vertx.scala.core.http.WebSocketFrame
 
 var frame1 = WebSocketFrame.binaryFrame(buffer1, false)
 websocket.writeFrame(frame1)
@@ -2243,7 +2326,6 @@ Here's an example:
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 // Send a websocket messages consisting of a single final text frame:
 
@@ -2302,7 +2384,6 @@ Here's an example of using an HTTP proxy:
 
 [source,scala]
 ----
-import io.vertx.core.net.ProxyType
 
 var options = HttpClientOptions()
   .setProxyOptions(ProxyOptions()
@@ -2328,7 +2409,6 @@ For a SOCKS5 proxy:
 
 [source,scala]
 ----
-import io.vertx.core.net.ProxyType
 
 var options = HttpClientOptions()
   .setProxyOptions(ProxyOptions()

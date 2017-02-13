@@ -39,9 +39,6 @@ to configure various options such as for using SSL connections.
 
 [source,scala]
 ----
-import io.vertx.scala.amqpbridge.AmqpBridge
-import scala.util.Failure
-import scala.util.Success
 var bridge = AmqpBridge.create(vertx)
 // Start the bridge, then use the event loop thread to process things thereafter.
 bridge.startFuture("localhost", 5672).onComplete{
@@ -60,9 +57,6 @@ messages.
 
 [source,scala]
 ----
-import io.vertx.scala.amqpbridge.AmqpBridge
-import scala.util.Failure
-import scala.util.Success
 var bridge = AmqpBridge.create(vertx)
 // Start the bridge, then use the event loop thread to process things thereafter.
 bridge.startFuture("localhost", 5672).onComplete{
@@ -209,9 +203,6 @@ certificate:
 
 [source,scala]
 ----
-import io.vertx.scala.amqpbridge.AmqpBridge
-import scala.util.Failure
-import scala.util.Success
 var bridgeOptions = AmqpBridgeOptions()
 bridgeOptions.setSsl(true)
 
@@ -235,9 +226,6 @@ also a PKCS12 based key store containing an SSL key and certificate the server c
 
 [source,scala]
 ----
-import io.vertx.scala.amqpbridge.AmqpBridge
-import scala.util.Failure
-import scala.util.Success
 var bridgeOptions = AmqpBridgeOptions()
 bridgeOptions.setSsl(true)
 
@@ -311,8 +299,6 @@ The following is a basic example of sending a message and providing a reply-hand
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var amqpMsgPayload = new io.vertx.core.json.JsonObject()
 amqpMsgPayload.put("body", "myRequest")
 

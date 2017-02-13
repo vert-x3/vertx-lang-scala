@@ -31,8 +31,6 @@ Once you've got one of those you can create a `link:../../scaladoc/io/vertx/scal
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.mongo.MongoAuth
-import io.vertx.scala.ext.mongo.MongoClient
 var client = MongoClient.createShared(vertx, mongoClientConfig)
 var authProperties = new io.vertx.core.json.JsonObject()
 var authProvider = MongoAuth.create(client, authProperties)
@@ -91,8 +89,6 @@ authentication info:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 var authInfo = new io.vertx.core.json.JsonObject().put("username", "tim").put("password", "sausages")
 authProvider.authenticateFuture(authInfo).onComplete{
   case Success(result) => {
@@ -119,8 +115,6 @@ If validating if a user has a particular permission simply pass the permission i
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 user.isAuthorisedFuture("commit_code").onComplete{
   case Success(result) => {
@@ -138,9 +132,6 @@ If validating that a user has a particular _role_ then you should prefix the arg
 
 [source,scala]
 ----
-import io.vertx.scala.ext.auth.mongo.MongoAuth
-import scala.util.Failure
-import scala.util.Success
 
 user.isAuthorisedFuture(s"${MongoAuth.ROLE_PREFIX}manager").onComplete{
   case Success(result) => {

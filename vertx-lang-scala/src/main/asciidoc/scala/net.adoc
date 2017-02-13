@@ -64,8 +64,6 @@ For example:
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var server = vertx.createNetServer()
 server.listenFuture(1234, "localhost").onComplete{
@@ -87,8 +85,6 @@ To find out the real port the server is listening on you can call `link:../../sc
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var server = vertx.createNetServer()
 server.listenFuture(0, "localhost").onComplete{
@@ -147,7 +143,6 @@ You write to a socket using one of `link:../../scaladoc/io/vertx/scala/core/net/
 
 [source,scala]
 ----
-import io.vertx.scala.core.buffer.Buffer
 
 // Write a buffer
 var buffer = Buffer.buffer().appendFloat(12.34).appendInt(123)
@@ -243,8 +238,6 @@ This handler will then be called when the close has fully completed.
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 server.closeFuture().onComplete{
   case Success(result) => {
@@ -359,8 +352,6 @@ specifying the port and host of the server and a handler that will be called wit
 
 [source,scala]
 ----
-import scala.util.Failure
-import scala.util.Success
 
 var options = NetClientOptions()
   .setConnectTimeout(10000)
@@ -592,7 +583,6 @@ The password for the trust store should also be provided:
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var options = NetServerOptions()
   .setSsl(true)
   .setClientAuth(ClientAuth.REQUIRED)
@@ -609,7 +599,6 @@ Alternatively you can read the trust store yourself as a buffer and provide that
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.jks")
 var options = NetServerOptions()
   .setSsl(true)
@@ -628,7 +617,6 @@ extension can also be loaded in a similar fashion than JKS trust stores:
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var options = NetServerOptions()
   .setSsl(true)
   .setClientAuth(ClientAuth.REQUIRED)
@@ -645,7 +633,6 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var myTrustStoreAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/truststore.pfx")
 var options = NetServerOptions()
   .setSsl(true)
@@ -663,7 +650,6 @@ Another way of providing server certificate authority using a list `.pem` files.
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var options = NetServerOptions()
   .setSsl(true)
   .setClientAuth(ClientAuth.REQUIRED)
@@ -679,7 +665,6 @@ Buffer configuration is also supported:
 
 [source,scala]
 ----
-import io.vertx.core.http.ClientAuth
 var myCaAsABuffer = vertx.fileSystem().readFileBlocking("/path/to/your/server-ca.pfx")
 var options = NetServerOptions()
   .setSsl(true)
@@ -1099,7 +1084,6 @@ Here's an example:
 [source,scala]
 
 ----
-import io.vertx.core.net.ProxyType
 var options = NetClientOptions()
   .setProxyOptions(ProxyOptions()
     .setType(ProxyType.SOCKS5)

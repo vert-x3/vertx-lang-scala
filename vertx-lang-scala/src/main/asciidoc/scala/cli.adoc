@@ -29,7 +29,6 @@ describe options and arguments:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()
   .setLongName("directory")
   .setShortName("R")
@@ -65,7 +64,6 @@ configure the option to receive several values using `link:../dataobjects.html#O
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(Option()
   .setLongName("flag")
   .setShortName("f")
@@ -89,7 +87,6 @@ the parsing:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").addOption(Option()
   .setLongName("mandatory")
   .setRequired(true)
@@ -103,7 +100,6 @@ the command line:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").addOption(Option()
   .setLongName("optional")
   .setDefaultValue("hello")
@@ -119,7 +115,6 @@ If the option value is contrained to a fixed set, you can set the different acce
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").addOption(Option()
   .setLongName("color")
   .setDefaultValue("green")
@@ -141,7 +136,6 @@ index `0`:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").addArgument(Argument()
   .setIndex(0)
   .setDescription("the first argument")
@@ -158,7 +152,6 @@ If you don't set the argument indexes, it computes it automatically by using the
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("some-name").addArgument(Argument()
   .setDescription("the first argument")
   .setArgName("arg1")
@@ -187,7 +180,6 @@ Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance i
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option()
   .setLongName("directory")
   .setShortName("R")
@@ -261,7 +253,6 @@ won't failed, but give you the opportunity to check if the user asks for help:
 
 [source,scala]
 ----
-import io.vertx.scala.core.cli.CLI
 var cli = CLI.create("test").addOption(Option()
   .setLongName("help")
   .setShortName("h")
