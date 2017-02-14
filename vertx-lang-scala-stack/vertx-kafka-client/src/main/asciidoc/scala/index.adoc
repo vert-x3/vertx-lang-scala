@@ -1,0 +1,732 @@
+= Vert.x Kafka client
+:toc: left
+:lang: scala
+:scala: scala
+
+This component provides a Kafka client for reading and sending messages from/to an link:https://kafka.apache.org/[Apache Kafka] cluster.
+
+As consumer, the API provides methods for subscribing to a topic partition receiving
+messages asynchronously or reading them as a stream (even with the possibility to pause/resume the stream).
+
+As producer, the API provides methods for sending message to a topic partition like writing on a stream.
+
+WARNING: this module has the tech preview status, this means the API can change between versions.
+
+== Using the Vert.x Kafka client
+
+As component not yet officially released in the Vert.x stack, to use the Vert.x Kafka client current snapshot version,
+add the following repository under the _repositories_ section and the following dependency to the _dependencies_ section
+of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<repository>
+    <id>oss.sonatype.org-snapshot</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+</repository>
+----
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-kafka-client</artifactId>
+    <version>3.4.0-SNAPSHOT</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+----
+
+[source,groovy,subs="+attributes"]
+----
+compile io.vertx:vertx-kafka-client:3.4.0-SNAPSHOT
+----
+
+== Creating Kafka clients
+
+Creating consumers and sproducer is quite similar and on how it works using the native Kafka client library.
+
+They need to be configured with a bunch of properties as described in the official
+Apache Kafka documentation, for the link:https://kafka.apache.org/documentation/#newconsumerconfigs[consumer] and
+for the link:https://kafka.apache.org/documentation/#producerconfigs[producer].
+
+To achieve that, a map can be configured with such properties passing it to one of the
+static creation methods exposed by `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` and
+`link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html[KafkaProducer]`
+
+[source,scala]
+----
+
+// creating the consumer using map config
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer")
+config + ("value.deserializer" -> "org.apache.kafka.common.serialization.StringDeserializer")
+config + ("group.id" -> "my_group")
+config + ("auto.offset.reset" -> "earliest")
+config + ("enable.auto.commit" -> "false")
+
+// use consumer for interacting with Apache Kafka
+var consumer = KafkaConsumer.create(vertx, config)
+
+----
+
+In the above example, a `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` instance is created using
+a map instance in order to specify the Kafka nodes list to connect (just one) and
+the deserializers to use for getting key and value from each received message.
+
+Likewise a producer can be created
+
+[source,scala]
+----
+
+// creating the producer using map and class types for key and value serializers/deserializers
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.serializer" -> "org.apache.kafka.common.serialization.StringSerializer")
+config + ("value.serializer" -> "org.apache.kafka.common.serialization.StringSerializer")
+config + ("acks" -> "1")
+
+// use producer for interacting with Apache Kafka
+var producer = KafkaProducer.create(vertx, config)
+
+----
+
+ifdef::java,groovy,kotlin[]
+Another way is to use a `Properties` instance instead of the map.
+
+[source,scala]
+----
+
+// creating the consumer using properties config
+var config = new java.util.Properties()
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class)
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class)
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG, "my_group")
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
+config.put(org.apache.kafka.clients.consumer.ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false")
+
+// use consumer for interacting with Apache Kafka
+var consumer = KafkaConsumer.create(vertx, config)
+
+----
+
+More advanced creation methods allow to specify the class type for the key and the value used for sending messages
+or provided by received messages; this is a way for setting the key and value serializers/deserializers instead of
+using the related properties for that
+
+[source,scala]
+----
+
+// creating the producer using map and class types for key and value serializers/deserializers
+var config = new java.util.Properties()
+config.put(org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+config.put(org.apache.kafka.clients.producer.ProducerConfig.ACKS_CONFIG, "1")
+
+// use producer for interacting with Apache Kafka
+var producer = KafkaProducer.create(vertx, config, java.lang.String.class, java.lang.String.class)
+
+----
+
+Here the `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html[KafkaProducer]` instance is created in using a `Properties` for
+specifying Kafka nodes list to connect (just one) and the acknowledgment mode; the key and value deserializers are
+specified as parameters of `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#create(io.vertx.core.Vertx,%20java.util.Properties,%20java.lang.Class,%20java.lang.Class)[KafkaProducer.create]`.
+endif::[]
+
+== Receiving messages from a topic joining a consumer group
+
+In order to start receiving messages from Kafka topics, the consumer can use the
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe(java.util.Set)[subscribe]` method for
+subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
+
+You need to register an handler for handling incoming messages using the
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler(io.vertx.core.Handler)[handler]`
+
+[source,scala]
+----
+
+// register the handler for incoming messages
+consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerRecord<java.lang.String,java.lang.String>) => {
+  println(s"Processing key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+})
+
+// subscribe to several topics
+var topics = new java.util.HashSet()
+topics.add("topic1")
+topics.add("topic2")
+topics.add("topic3")
+consumer.subscribe(topics)
+
+// or just subscribe to a single topic
+consumer.subscribe("a-single-topic")
+
+----
+
+An handler can also be passed during subscription to be aware of the subscription result and being notified when the operation
+is completed.
+
+[source,scala]
+----
+
+// register the handler for incoming messages
+consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerRecord<java.lang.String,java.lang.String>) => {
+  println(s"Processing key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+})
+
+// subscribe to several topics
+var topics = new java.util.HashSet()
+topics.add("topic1")
+topics.add("topic2")
+topics.add("topic3")
+consumer.subscribeFuture(topics).onComplete{
+  case Success(result) => {
+    println("subscribed")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+// or just subscribe to a single topic
+consumer.subscribeFuture("a-single-topic").onComplete{
+  case Success(result) => {
+    println("subscribed")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+Using the consumer group way, the Kafka cluster assigns partitions to the consumer taking into account other connected
+consumers in the same consumer group, so that partitions can be spread across them.
+
+The Kafka cluster handles partitions re-balancing when a consumer leaves the group (so assigned partitions are free
+to be assigned to other consumers) or a new consumer joins the group (so it wants partitions to read from).
+
+You can register handlers on a `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` to be notified
+of the partitions revocations and assignments by the Kafka cluster using
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler(io.vertx.core.Handler)[partitionsRevokedHandler]` and
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsAssignedHandler(io.vertx.core.Handler)[partitionsAssignedHandler]`.
+
+[source,scala]
+----
+
+// register the handler for incoming messages
+consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerRecord<java.lang.String,java.lang.String>) => {
+  println(s"Processing key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+})
+
+// registering handlers for assigned and revoked partitions
+consumer.partitionsAssignedHandler((topicPartitions: java.util.Set<io.vertx.scala.kafka.client.common.TopicPartition>) => {
+
+  println("Partitions assigned")
+  topicPartitions.foreach(topicPartition => {
+    println(s"${todo-renderDataObjectMemberSelect} ${todo-renderDataObjectMemberSelect}")
+  })
+
+})
+
+consumer.partitionsRevokedHandler((topicPartitions: java.util.Set<io.vertx.scala.kafka.client.common.TopicPartition>) => {
+
+  println("Partitions revoked")
+  topicPartitions.foreach(topicPartition => {
+    println(s"${todo-renderDataObjectMemberSelect} ${todo-renderDataObjectMemberSelect}")
+  })
+
+})
+
+// subscribes to the topic
+consumer.subscribeFuture("test").onComplete{
+  case Success(result) => {
+    println("Consumer subscribed")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+After joining a consumer group for receiving messages, a consumer can decide to leave the consumer group in order to
+not get messages anymore using `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#unsubscribe()[unsubscribe]`
+
+[source,scala]
+----
+
+// consumer is already member of a consumer group
+
+// unsubscribing request
+consumer.unsubscribe()
+
+----
+
+You can add an handler to be notified of the result
+
+[source,scala]
+----
+
+// consumer is already member of a consumer group
+
+// unsubscribing request
+consumer.unsubscribeFuture().onComplete{
+  case Success(result) => {
+    println("Consumer unsubscribed")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Receiving messages from a topic requesting specific partitions
+
+Besides being part of a consumer group for receiving messages from a topic, a consumer can ask for a specific
+topic partition. When the consumer is not part part of a consumer group the overall application cannot
+rely on the re-balancing feature.
+
+You can use `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assign(java.util.Set,%20io.vertx.core.Handler)[assign]`
+in order to ask for specific partitions.
+
+[source,scala]
+----
+
+// register the handler for incoming messages
+consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerRecord<java.lang.String,java.lang.String>) => {
+  println(s"key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+})
+
+//
+var topicPartitions = new java.util.HashSet()
+topicPartitions.add(TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+)
+
+// requesting to be assigned the specific partition
+consumer.assignFuture(topicPartitions).onComplete{
+  case Success(result) => {
+    println("Partition assigned")
+
+    // requesting the assigned partitions
+    consumer.assignmentFuture().onComplete{
+      case Success(result) => {
+
+        result.foreach(topicPartition => {
+          println(s"${todo-renderDataObjectMemberSelect} ${todo-renderDataObjectMemberSelect}")
+        })
+
+      }
+      case Failure(cause) => println("Failure")
+    }
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+Calling `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assignment(io.vertx.core.Handler)[assignment]` provides
+the list of the current assigned partitions.
+
+== Getting topic partition information
+
+You can call the `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsFor(java.lang.String,%20io.vertx.core.Handler)[partitionsFor]` to get information about
+partitions for a specified topic
+
+[source,scala]
+----
+
+// asking partitions information about specific topic
+consumer.partitionsForFuture("test").onComplete{
+  case Success(result) => {
+
+    result.foreach(partitionInfo => {
+      println(partitionInfo)
+    })
+
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+In addition `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#listTopics(io.vertx.core.Handler)[listTopics]` provides all available topics
+with related partitions
+
+[source,scala]
+----
+
+// asking information about available topics and related partitions
+consumer.listTopicsFuture().onComplete{
+  case Success(result) => {
+
+    var map = result
+    map.foreach{
+      case (topic: java.lang.String, partitions: java.util.List<io.vertx.scala.kafka.client.common.PartitionInfo>) => {
+      println(s"topic = ${topic}")
+      println(s"partitions = ${map(topic)}")
+    }}
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Manual offset commit
+
+In Apache Kafka the consumer is in charge to handle the offset of the last read message.
+
+This is executed by the commit operation executed automatically every time a bunch of messages are read
+from a topic partition. The configuration parameter `enable.auto.commit` must be set to `true` when the
+consumer is created.
+
+Manual offset commit, can be achieved with `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#commit(io.vertx.core.Handler)[commit]`.
+It can be used to achieve _at least once_ delivery to be sure that the read messages are processed before committing
+the offset.
+
+[source,scala]
+----
+
+// consumer is processing read messages
+
+// committing offset of the last read message
+consumer.commitFuture().onComplete{
+  case Success(result) => {
+    println("Last read message offset committed")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Seeking in a topic partition
+
+Apache Kafka can retain messages for a long period of time and the consumer can seek inside a topic partition
+and obtain arbitraty access to the messages.
+
+You can use `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seek(io.vertx.kafka.client.common.TopicPartition,%20long)[seek]` to change the offset for reading at a specific
+position
+
+[source,scala]
+----
+
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+
+// seek to a specific offset
+consumer.seekFuture(topicPartition, 10).onComplete{
+  case Success(result) => {
+    println("Seeking done")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+
+----
+
+When the consumer needs to re-read the stream from the beginning, it can use `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning(io.vertx.kafka.client.common.TopicPartition)[seekToBeginning]`
+
+[source,scala]
+----
+
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+
+// seek to the beginning of the partition
+consumer.seekToBeginningFuture(java.util.Collections.singleton(topicPartition)).onComplete{
+  case Success(result) => {
+    println("Seeking done")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+Finally `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd(io.vertx.kafka.client.common.TopicPartition)[seekToEnd]` can be used to come back at the end of the partition
+
+[source,scala]
+----
+
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+
+// seek to the end of the partition
+consumer.seekToEndFuture(java.util.Collections.singleton(topicPartition)).onComplete{
+  case Success(result) => {
+    println("Seeking done")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Message flow control
+
+A consumer can control the incoming message flow and pause/resume the read operation from a topic, e.g it
+can pause the message flow when it needs more time to process the actual messages and then resume
+to continue message processing.
+
+To achieve that you can use `link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#pause()[pause]` and
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#resume()[resume]`
+
+[source,scala]
+----
+
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+
+// registering the handler for incoming messages
+consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerRecord<java.lang.String,java.lang.String>) => {
+  println(s"key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+
+  // i.e. pause/resume on partition 0, after reading message up to offset 5
+  if ((record.partition() == 0) && (record.offset() == 5)) {
+
+    // pause the read operations
+    consumer.pauseFuture(topicPartition).onComplete{
+      case Success(result) => {
+
+        println("Paused")
+
+        // resume read operation after a specific time
+        vertx.setTimer(5000, (timeId: java.lang.Long) => {
+
+          // resumi read operations
+          consumer.resume(topicPartition)
+        })
+      }
+      case Failure(cause) => println("Failure")
+    }
+  }
+})
+
+----
+
+== Sending messages to a topic
+
+You can use  `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#write(io.vertx.kafka.client.producer.KafkaProducerRecord)[write]` to send messages (records) to a topic.
+
+The simplest way to send a message is to specify only the destination topic and the related value, omitting its key
+or partition, in this case the messages are sent in a round robin fashion across all the partitions of the topic.
+
+[source,scala]
+----
+
+for ( i <- 0 until 5) {
+
+  // only topic and message value are specified, round robin on destination partitions
+  var record = KafkaProducerRecord.create("test", s"message_${i}")
+
+  producer.write(record)
+}
+
+
+----
+
+You can receive message sent metadata like its topic, its destination partition and its assigned offset.
+
+[source,scala]
+----
+
+for ( i <- 0 until 5) {
+
+  // only topic and message value are specified, round robin on destination partitions
+  var record = KafkaProducerRecord.create("test", s"message_${i}")
+
+  producer.writeFuture(record).onComplete{
+    case Success(result) => {
+
+      var recordMetadata = result
+      println(s"Message ${record.value()} written on topic=${todo-renderDataObjectMemberSelect}, partition=${todo-renderDataObjectMemberSelect}, offset=${todo-renderDataObjectMemberSelect}")
+    }
+    case Failure(cause) => println("Failure")
+  }
+}
+
+
+
+----
+
+When you need to assign a partition to a message, you can specify its partition identifier
+or its key
+
+[source,scala]
+----
+
+for ( i <- 0 until 10) {
+
+  // a destination partition is specified
+  var record = KafkaProducerRecord.create("test", null, s"message_${i}", 0)
+
+  producer.write(record)
+}
+
+
+----
+
+Since the producers identifies the destination using key hashing, you can use that to guarantee that all
+messages with the same key are sent to the same partition and retain the order.
+
+[source,scala]
+----
+
+for ( i <- 0 until 10) {
+
+  // i.e. defining different keys for odd and even messages
+  var key = i % 2
+
+  // a key is specified, all messages with same key will be sent to the same partition
+  var record = KafkaProducerRecord.create("test", java.lang.String.valueOf(key), s"message_${i}")
+
+  producer.write(record)
+}
+
+
+----
+
+== Getting topic partition information
+
+You can call the `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#partitionsFor(java.lang.String,%20io.vertx.core.Handler)[partitionsFor]` to get information about
+partitions for a specified topic:
+
+[source,scala]
+----
+
+// asking partitions information about specific topic
+producer.partitionsForFuture("test").onComplete{
+  case Success(result) => {
+
+    result.foreach(partitionInfo => {
+      println(partitionInfo)
+    })
+
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Handling errors
+
+Errors handling (e.g timeout) between a Kafka client (consumer or producer) and the Kafka cluster is done using
+`link:../../scaladoc/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` or
+`link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]`
+
+[source,scala]
+----
+
+// setting handler for errors
+consumer.exceptionHandler((e: java.lang.Throwable) => {
+  println(s"Error = ${e.getMessage()}")
+})
+
+----
+
+== Using Vert.x buffers as records key/value
+
+Vert.x Kafka client provides a serializer and deserializer for creating records with Vert.x buffers.
+
+In a consumer
+
+[source,scala]
+----
+
+// Creating a consumer able to deserialize bytes to Vert.x buffers
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.deserializer" -> "io.vertx.kafka.client.BufferDeserializer")
+config + ("value.deserializer" -> "io.vertx.kafka.client.BufferDeserializer")
+config + ("group.id" -> "my_group")
+config + ("auto.offset.reset" -> "earliest")
+config + ("enable.auto.commit" -> "false")
+
+----
+
+Or in a producer
+
+[source,scala]
+----
+
+// Creating a producer able to serialize bytes to Vert.x buffers
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.serializer" -> "io.vertx.kafka.client.BufferSerializer")
+config + ("value.serializer" -> "io.vertx.kafka.client.BufferSerializer")
+config + ("acks" -> "1")
+
+----
+
+ifdef::java,groovy,kotlin[]
+You can also specify the buffer serizalizer/deserializer at creation time:
+
+In a consumer
+
+[source,scala]
+----
+
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("group.id" -> "my_group")
+config + ("auto.offset.reset" -> "earliest")
+config + ("enable.auto.commit" -> "false")
+
+// Creating a consumer able to deserialize bytes to Vert.x buffers
+var consumer = KafkaConsumer.create(vertx, config, Buffer.class, Buffer.class)
+
+----
+
+Or in a producer
+
+[source,scala]
+----
+
+var config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("acks" -> "1")
+
+// Creating a producer able to serialize bytes to Vert.x buffers
+var consumer = KafkaProducer.create(vertx, config, Buffer.class, Buffer.class)
+
+----
+
+endif::[]
+
+ifdef::java[]
+== RxJava API
+
+The Kafka client provides an Rxified version of the original API.
+
+[source,scala]
+----
+Code not translatable
+----
+endif::[]
+
+ifdef::java,groovy,kotlin[]
+== Stream implementation and native Kafka objects
+
+When you want to operate on native Kafka records you can use a stream oriented
+implementation which handles native Kafka objects.
+
+The `KafkaReadStream` shall be used for reading topic partitions, it is
+a read stream of `ConsumerRecord` objects.
+
+The `KafkaWriteStream` shall be used for writing to topics, it is a write
+stream of `ProducerRecord`.
+
+The API exposed by these interfaces is mostly the same than the polyglot version.
+endif::[]
