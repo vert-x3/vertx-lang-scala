@@ -28,19 +28,20 @@ Using Scala-Futures removes the need for the Vert.x-CompositeFuture and makes fo
 ```
 class PromiseTestVerticle extends ScalaVerticle {
 
-  override def start(startFuture: Future[Void]): Unit = {
-    val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture()
-    val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture()
-    val res = for {
-      a1 <- f1
-      a2 <- f2
-    } yield (a1 + " " + a2)
-    res.map(a => startFuture.complete())
+  override def startFuture(): Future[Void] = {
+    val promise = Promise[Unit]
+    val fSeq = Future.sequence(Seq(
+      vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture(),
+      vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture())
+    )
+    
+    fSeq.onComplete{
+      case Success(_) => promise.success(())
+      case Failure(t) => promise.failure(t)
+    }
+
+    promise.future
   }
 }
 ```
 
-Next Steps
-==========
-- get rid of unneeded imports
-- replace references to original Java-classes with types

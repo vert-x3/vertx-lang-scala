@@ -10,7 +10,7 @@ import scala.util.{Failure, Success}
   */
 class TestVerticle extends ScalaVerticle{
 
-  override def start(): Future[Unit] = {
+  override def startFuture(): Future[Unit] = {
     Future.successful(())
     val promise = Promise[Unit]()
     vertx.eventBus
