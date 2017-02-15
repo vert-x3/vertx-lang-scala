@@ -24,6 +24,7 @@ import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
+import scala.reflect.runtime.universe._
 
 /**
   * Base class for verticle implementations.
@@ -112,7 +113,6 @@ abstract class ScalaVerticle {
     */
   def processArgs: mutable.Buffer[String] = javaVerticle.processArgs().asScala
 
-
   def asJava(): Verticle = new AbstractVerticle {
     private val that = ScalaVerticle.this
     override def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context): Unit = {
@@ -133,5 +133,11 @@ abstract class ScalaVerticle {
         case Failure(throwable) => stopFuture.fail(throwable)
       }
     }
+  }
+}
+
+object ScalaVerticle {
+  def nameForVerticle[A <: ScalaVerticle: TypeTag]():String = {
+    "scala:"+implicitly[TypeTag[A]].tpe.typeSymbol.fullName
   }
 }
