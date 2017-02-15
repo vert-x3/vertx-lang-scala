@@ -24,7 +24,7 @@ class VertxExecutionContextTest extends FlatSpec with Matchers {
 
 class PromiseTestVerticle extends ScalaVerticle {
 
-  override def start(): Future[Unit] = {
+  override def startFuture(): Future[Unit] = {
     val promise = Promise[Unit]()
     val f1 = vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture()
     val f2 = vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture()

@@ -51,6 +51,18 @@ abstract class ScalaVerticle {
   }
 
   /**
+    * Start the verticle.
+    */
+  def start(): Unit = {
+  }
+
+  /**
+    * Stop the verticle.
+    */
+  def stop(): Unit = {
+  }
+
+  /**
     * Stop the verticle.<p>
     * This is called by Vert.x when the verticle instance is un-deployed. Don't call it yourself.<p>
     * If your verticle does things in it's shut-down which take some time then you can override this method
@@ -58,7 +70,8 @@ abstract class ScalaVerticle {
     *
     * @return a future which should be completed when verticle clean-up is complete.
     */
-  def stop(): concurrent.Future[Unit] = {
+  def stopFuture(): concurrent.Future[Unit] = {
+    stop()
     concurrent.Future.successful(())
   }
 
@@ -70,9 +83,11 @@ abstract class ScalaVerticle {
     *
     * @return a future which should be completed when verticle start-up is complete.
     */
-  def start(): concurrent.Future[Unit] = {
+  def startFuture(): concurrent.Future[Unit] = {
+    start()
     concurrent.Future.successful(())
   }
+
 
   /**
     * Get the deployment ID of the verticle deployment
@@ -106,14 +121,14 @@ abstract class ScalaVerticle {
     }
 
     override final def start(startFuture: Future[Void]): Unit = {
-      that.start().onComplete{
+      that.startFuture().onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
       }
     }
 
     override final def stop(stopFuture: Future[Void]): Unit = {
-      that.stop().onComplete{
+      that.stopFuture().onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)
       }
