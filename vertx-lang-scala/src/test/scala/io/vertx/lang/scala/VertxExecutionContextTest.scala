@@ -4,28 +4,29 @@ import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.scala.core.Vertx
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{Assertions, FlatSpec, Matchers}
+import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
 
-import scala.concurrent.duration.DurationLong
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Future
+import scala.util.{Failure, Success}
 
 @RunWith(classOf[JUnitRunner])
-class VertxExecutionContextTest extends FlatSpec with Matchers with Assertions {
+class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Assertions {
 
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
-    val res = Await.result(vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle]), 10000 millis)
-    res should not be empty
+    vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle])
+      .map(res => res should not be empty)
   }
 
   "A deployment" should "fail if the deployed verticle fails" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
-    val exc = intercept[Exception] {
-      Await.result(vertx.deployVerticleFuture(nameForVerticle[FailVerticle]), 10000 millis)
-    }
-    exc.getMessage should equal("wuha")
+    vertx.deployVerticleFuture(nameForVerticle[FailVerticle])
+      .transformWith {
+        case Failure(t) => t.getMessage should equal("wuha")
+        case Success(_) => fail("Deployment shouldn't succeed!")
+      }
   }
 }
 
