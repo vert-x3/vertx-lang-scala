@@ -22,4 +22,8 @@ class ScalaVerticleTest extends FlatSpec with Matchers {
     vertx.eventBus.sendFuture[String]("hello", "msg").onComplete(t => cl2.countDown())
     assert(cl2.await(100, TimeUnit.MILLISECONDS), "No answer within 100 ms")
   }
+
+  "nameForVerticle" should "generate the correct name to deploy a ScalaVerticle" in {
+    nameForVerticle[TestVerticle] should equal("scala:io.vertx.lang.scala.verticle.TestVerticle")
+  }
 }

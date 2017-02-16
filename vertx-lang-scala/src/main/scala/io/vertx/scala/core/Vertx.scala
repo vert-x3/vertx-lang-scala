@@ -456,7 +456,7 @@ class Vertx(private val _asJava: Object)
     * The worker pool is released when all the [[io.vertx.scala.core.WorkerExecutor]] sharing the same name are closed.
     * @param name the name of the worker executor
     * @param poolSize the size of the pool
-    * @param maxExecuteTime the value of max worker execute time, in ms
+    * @param maxExecuteTime the value of max worker execute time, in ns
     * @return the named worker executor
     */
   def createSharedWorkerExecutor(name: String, poolSize: Int, maxExecuteTime: Long): WorkerExecutor = {

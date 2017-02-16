@@ -95,6 +95,9 @@ public class VertxHawkularOptionsConverter {
     if (obj.getHttpHeaders() != null) {
       json.put("httpHeaders", obj.getHttpHeaders());
     }
+    if (obj.getHttpOptions() != null) {
+      json.put("httpOptions", obj.getHttpOptions().toJson());
+    }
     if (obj.getMetricsBridgeAddress() != null) {
       json.put("metricsBridgeAddress", obj.getMetricsBridgeAddress());
     }

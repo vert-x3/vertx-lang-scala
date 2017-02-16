@@ -190,12 +190,33 @@ public class AmqpBridgeOptionsConverter {
       json.put("hostnameVerificationAlgorithm", obj.getHostnameVerificationAlgorithm());
     }
     json.put("idleTimeout", obj.getIdleTimeout());
+    if (obj.getJdkSslEngineOptions() != null) {
+      json.put("jdkSslEngineOptions", obj.getJdkSslEngineOptions().toJson());
+    }
+    if (obj.getKeyStoreOptions() != null) {
+      json.put("keyStoreOptions", obj.getKeyStoreOptions().toJson());
+    }
     if (obj.getLocalAddress() != null) {
       json.put("localAddress", obj.getLocalAddress());
     }
     json.put("logActivity", obj.getLogActivity());
     if (obj.getMetricsName() != null) {
       json.put("metricsName", obj.getMetricsName());
+    }
+    if (obj.getOpenSslEngineOptions() != null) {
+      json.put("openSslEngineOptions", obj.getOpenSslEngineOptions().toJson());
+    }
+    if (obj.getPemKeyCertOptions() != null) {
+      json.put("pemKeyCertOptions", obj.getPemKeyCertOptions().toJson());
+    }
+    if (obj.getPemTrustOptions() != null) {
+      json.put("pemTrustOptions", obj.getPemTrustOptions().toJson());
+    }
+    if (obj.getPfxKeyCertOptions() != null) {
+      json.put("pfxKeyCertOptions", obj.getPfxKeyCertOptions().toJson());
+    }
+    if (obj.getPfxTrustOptions() != null) {
+      json.put("pfxTrustOptions", obj.getPfxTrustOptions().toJson());
     }
     if (obj.getProxyOptions() != null) {
       json.put("proxyOptions", obj.getProxyOptions().toJson());
@@ -212,6 +233,9 @@ public class AmqpBridgeOptionsConverter {
     json.put("tcpNoDelay", obj.isTcpNoDelay());
     json.put("trafficClass", obj.getTrafficClass());
     json.put("trustAll", obj.isTrustAll());
+    if (obj.getTrustStoreOptions() != null) {
+      json.put("trustStoreOptions", obj.getTrustStoreOptions().toJson());
+    }
     json.put("useAlpn", obj.isUseAlpn());
     json.put("usePooledBuffers", obj.isUsePooledBuffers());
     if (obj.getVhost() != null) {

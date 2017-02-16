@@ -11,16 +11,9 @@ import scala.util.{Failure, Success}
 class TestVerticle extends ScalaVerticle{
 
   override def startFuture(): Future[Unit] = {
-    Future.successful(())
-    val promise = Promise[Unit]()
     vertx.eventBus
       .consumer[String]("hello")
       .handler(a => a.reply("world"))
       .completionFuture()
-      .onComplete{
-        case Success(_) => promise.success(())
-        case Failure(t) => promise.failure(t)
-      }
-    promise.future
   }
 }
