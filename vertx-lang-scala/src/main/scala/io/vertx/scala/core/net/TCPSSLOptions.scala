@@ -61,11 +61,13 @@ trait TCPSSLOptions
   def setIdleTimeout(value: Int): TCPSSLOptions
   def getIdleTimeout: Int 
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions): TCPSSLOptions
+  def getJdkSslEngineOptions: JdkSSLEngineOptions 
 
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
   def setKeyStoreOptions(value: JksOptions): TCPSSLOptions
+  def getKeyStoreOptions: JksOptions 
 
   /**
     * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
@@ -73,26 +75,31 @@ trait TCPSSLOptions
   def setLogActivity(value: Boolean): TCPSSLOptions
   def getLogActivity: Boolean 
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions): TCPSSLOptions
+  def getOpenSslEngineOptions: OpenSSLEngineOptions 
 
   /**
     * Set the key/cert store options in pem format.
     */
   def setPemKeyCertOptions(value: PemKeyCertOptions): TCPSSLOptions
+  def getPemKeyCertOptions: PemKeyCertOptions 
 
   /**
     * Set the trust options in pem format
     */
   def setPemTrustOptions(value: PemTrustOptions): TCPSSLOptions
+  def getPemTrustOptions: PemTrustOptions 
 
   /**
     * Set the key/cert options in pfx format.
     */
   def setPfxKeyCertOptions(value: PfxOptions): TCPSSLOptions
+  def getPfxKeyCertOptions: PfxOptions 
 
   /**
     * Set the trust options in pfx format
     */
   def setPfxTrustOptions(value: PfxOptions): TCPSSLOptions
+  def getPfxTrustOptions: PfxOptions 
 
   /**
     * Set the TCP receive buffer size
@@ -143,9 +150,10 @@ trait TCPSSLOptions
   def getTrafficClass: Int 
 
   /**
-    * Set the trust options in jks format, aka Java trustore
+    * Set the trust options in jks format, aka Java truststore
     */
   def setTrustStoreOptions(value: JksOptions): TCPSSLOptions
+  def getTrustStoreOptions: JksOptions 
 
   /**
     * Set the ALPN usage.

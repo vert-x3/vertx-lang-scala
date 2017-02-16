@@ -144,9 +144,15 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions)
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
+  override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
+    JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
+  }
   override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
+  }
+  override def getKeyStoreOptions: JksOptions = {
+    JksOptions(asJava.getKeyStoreOptions())
   }
   override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
@@ -158,6 +164,9 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions)
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
+  }
+  override def getOpenSslEngineOptions: OpenSSLEngineOptions = {
+    OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
   }
 
   /**
@@ -175,17 +184,29 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions)
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
+  override def getPemKeyCertOptions: PemKeyCertOptions = {
+    PemKeyCertOptions(asJava.getPemKeyCertOptions())
+  }
   override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
+  }
+  override def getPemTrustOptions: PemTrustOptions = {
+    PemTrustOptions(asJava.getPemTrustOptions())
   }
   override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
+  override def getPfxKeyCertOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxKeyCertOptions())
+  }
   override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
+  }
+  override def getPfxTrustOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxTrustOptions())
   }
   override def setPort(value: Int) = {
     asJava.setPort(value)
@@ -253,6 +274,9 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions)
   override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
+  }
+  override def getTrustStoreOptions: JksOptions = {
+    JksOptions(asJava.getTrustStoreOptions())
   }
   override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
