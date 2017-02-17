@@ -262,6 +262,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
+  override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
+    JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
+  }
 
   /**
     * Set the key/cert options in jks format, aka Java keystore.
@@ -269,6 +272,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
+  }
+  override def getKeyStoreOptions: JksOptions = {
+    JksOptions(asJava.getKeyStoreOptions())
   }
 
   /**
@@ -329,6 +335,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
+  override def getOpenSslEngineOptions: OpenSSLEngineOptions = {
+    OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
+  }
 
   /**
     * Set the key/cert store options in pem format.
@@ -336,6 +345,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
+  }
+  override def getPemKeyCertOptions: PemKeyCertOptions = {
+    PemKeyCertOptions(asJava.getPemKeyCertOptions())
   }
 
   /**
@@ -345,6 +357,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     asJava.setPemTrustOptions(value.asJava)
     this
   }
+  override def getPemTrustOptions: PemTrustOptions = {
+    PemTrustOptions(asJava.getPemTrustOptions())
+  }
 
   /**
     * Set the key/cert options in pfx format.
@@ -353,6 +368,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
+  override def getPfxKeyCertOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxKeyCertOptions())
+  }
 
   /**
     * Set the trust options in pfx format
@@ -360,6 +378,9 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
+  }
+  override def getPfxTrustOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxTrustOptions())
   }
 
   /**
@@ -462,11 +483,14 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
-    * Set the trust options in jks format, aka Java trustore
+    * Set the trust options in jks format, aka Java truststore
     */
   override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
+  }
+  override def getTrustStoreOptions: JksOptions = {
+    JksOptions(asJava.getTrustStoreOptions())
   }
 
   /**

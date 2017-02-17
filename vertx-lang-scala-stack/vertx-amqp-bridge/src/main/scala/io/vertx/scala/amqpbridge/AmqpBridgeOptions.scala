@@ -122,9 +122,15 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
+  def getJdkSslEngineOptions: JdkSSLEngineOptions = {
+    JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
+  }
   def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
+  }
+  def getKeyStoreOptions: JksOptions = {
+    JksOptions(asJava.getKeyStoreOptions())
   }
   def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
@@ -151,21 +157,36 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
+  def getOpenSslEngineOptions: OpenSSLEngineOptions = {
+    OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
+  }
   def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
+  }
+  def getPemKeyCertOptions: PemKeyCertOptions = {
+    PemKeyCertOptions(asJava.getPemKeyCertOptions())
   }
   def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
+  def getPemTrustOptions: PemTrustOptions = {
+    PemTrustOptions(asJava.getPemTrustOptions())
+  }
   def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
+  def getPfxKeyCertOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxKeyCertOptions())
+  }
   def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
+  }
+  def getPfxTrustOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxTrustOptions())
   }
   def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
@@ -267,6 +288,9 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
+  }
+  def getTrustStoreOptions: JksOptions = {
+    JksOptions(asJava.getTrustStoreOptions())
   }
   def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)

@@ -159,6 +159,9 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
+  override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
+    JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
+  }
   override def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
     this
@@ -169,6 +172,9 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
   override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
+  }
+  override def getKeyStoreOptions: JksOptions = {
+    JksOptions(asJava.getKeyStoreOptions())
   }
   override def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
@@ -244,21 +250,36 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
+  override def getOpenSslEngineOptions: OpenSSLEngineOptions = {
+    OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
+  }
   override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
+  }
+  override def getPemKeyCertOptions: PemKeyCertOptions = {
+    PemKeyCertOptions(asJava.getPemKeyCertOptions())
   }
   override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
+  override def getPemTrustOptions: PemTrustOptions = {
+    PemTrustOptions(asJava.getPemTrustOptions())
+  }
   override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
+  override def getPfxKeyCertOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxKeyCertOptions())
+  }
   override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
+  }
+  override def getPfxTrustOptions: PfxOptions = {
+    PfxOptions(asJava.getPfxTrustOptions())
   }
   override def setPipelining(value: Boolean) = {
     asJava.setPipelining(value)
@@ -361,6 +382,9 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
   override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
+  }
+  override def getTrustStoreOptions: JksOptions = {
+    JksOptions(asJava.getTrustStoreOptions())
   }
   override def setTryUseCompression(value: Boolean) = {
     asJava.setTryUseCompression(value)

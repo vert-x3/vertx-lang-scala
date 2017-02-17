@@ -67,11 +67,13 @@ trait ClientOptionsBase
   def setIdleTimeout(value: Int): ClientOptionsBase
   def getIdleTimeout: Int 
   def setJdkSslEngineOptions(value: JdkSSLEngineOptions): ClientOptionsBase
+  def getJdkSslEngineOptions: JdkSSLEngineOptions 
 
   /**
     * Set the key/cert options in jks format, aka Java keystore.
     */
   def setKeyStoreOptions(value: JksOptions): ClientOptionsBase
+  def getKeyStoreOptions: JksOptions 
 
   /**
     * Set the local interface to bind for network connections. When the local address is null,
@@ -93,26 +95,31 @@ trait ClientOptionsBase
   def setMetricsName(value: String): ClientOptionsBase
   def getMetricsName: String 
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions): ClientOptionsBase
+  def getOpenSslEngineOptions: OpenSSLEngineOptions 
 
   /**
     * Set the key/cert store options in pem format.
     */
   def setPemKeyCertOptions(value: PemKeyCertOptions): ClientOptionsBase
+  def getPemKeyCertOptions: PemKeyCertOptions 
 
   /**
     * Set the trust options in pem format
     */
   def setPemTrustOptions(value: PemTrustOptions): ClientOptionsBase
+  def getPemTrustOptions: PemTrustOptions 
 
   /**
     * Set the key/cert options in pfx format.
     */
   def setPfxKeyCertOptions(value: PfxOptions): ClientOptionsBase
+  def getPfxKeyCertOptions: PfxOptions 
 
   /**
     * Set the trust options in pfx format
     */
   def setPfxTrustOptions(value: PfxOptions): ClientOptionsBase
+  def getPfxTrustOptions: PfxOptions 
 
   /**
     * Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
@@ -175,9 +182,10 @@ trait ClientOptionsBase
   def isTrustAll: Boolean 
 
   /**
-    * Set the trust options in jks format, aka Java trustore
+    * Set the trust options in jks format, aka Java truststore
     */
   def setTrustStoreOptions(value: JksOptions): ClientOptionsBase
+  def getTrustStoreOptions: JksOptions 
 
   /**
     * Set the ALPN usage.
