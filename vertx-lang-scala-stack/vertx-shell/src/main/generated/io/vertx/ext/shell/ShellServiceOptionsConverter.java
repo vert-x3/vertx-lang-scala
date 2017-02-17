@@ -39,5 +39,11 @@ public class ShellServiceOptionsConverter {
   }
 
   public static void toJson(ShellServiceOptions obj, JsonObject json) {
+    if (obj.getHttpOptions() != null) {
+      json.put("httpOptions", obj.getHttpOptions().toJson());
+    }
+    if (obj.getTelnetOptions() != null) {
+      json.put("telnetOptions", obj.getTelnetOptions().toJson());
+    }
   }
 }

@@ -74,6 +74,12 @@
  * vertx.deployVerticle(s"scala:${classOf[HelloWorldVerticle].getName}")
  * ----
  *
+ * There is also a little helper available.
+ * ----
+ * val vertx = Vertx.vertx
+ * vertx.deployVerticle(ScalaVerticle.nameForVerticle[HelloWorldVerticle])
+ * ----
+ *
  * === Asynchronous Verticle start and stop
  *
  * Sometimes you want to do something in your verticle start-up which takes some time and you don't want the verticle to

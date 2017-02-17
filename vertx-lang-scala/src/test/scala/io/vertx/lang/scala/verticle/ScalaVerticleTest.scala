@@ -1,25 +1,135 @@
 package io.vertx.lang.scala.verticle
 
-import java.util.concurrent.{CountDownLatch, TimeUnit}
-
 import io.vertx.scala.core.Vertx
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
-import io.vertx.lang.scala.Types._
-import io.vertx.lang.scala.VertxExecutionContext
+import org.scalatest.{AsyncFlatSpec, Matchers}
+import io.vertx.lang.scala.ScalaVerticle._
+import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
+
+import scala.concurrent.{Future, Promise}
+import scala.util.{Failure, Success}
 
 @RunWith(classOf[JUnitRunner])
-class ScalaVerticleTest extends FlatSpec with Matchers {
-
-  "TestVerticle" should "reply to a hello message" in {
-    val cl = new CountDownLatch(1)
+class ScalaVerticleTest extends AsyncFlatSpec with Matchers{
+  "StartFutureVerticle" should "use startFuture to start" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
-    vertx.deployVerticleFuture(s"scala:${classOf[TestVerticle].getName}").foreach(r => cl.countDown())
-    cl.await()
-    val cl2 = new CountDownLatch(1)
-    vertx.eventBus.sendFuture[String]("hello", "msg").foreach(reply => cl2.countDown())
-    assert(cl2.await(100, TimeUnit.MILLISECONDS), "No answer within 100 ms")
+
+    val result = Promise[String]
+    vertx.eventBus()
+      .localConsumer[String]("startMethod")
+      .handler(m => result.success(m.body()))
+    vertx.deployVerticle(nameForVerticle[StartFutureVerticle])
+    result.future.map(r => r should equal("startFuture"))
+  }
+
+  "StartVerticle" should "use start to start" in {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+
+    val result = Promise[String]
+    vertx.eventBus()
+      .localConsumer[String]("startMethod")
+      .handler(m => result.success(m.body()))
+
+    vertx.deployVerticle(nameForVerticle[StartFutureVerticle])
+    result.future.map(r => r should equal("startFuture"))
+  }
+
+  "StartFailVerticle" should "fail correctly if start throws an exception" in {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    val result = Promise[String]
+
+    vertx.deployVerticleFuture(nameForVerticle[StartFailVerticle])
+      .transformWith{
+        case Success(_) => fail("Shouldn't succeed")
+        case Failure(t) => t.getMessage should equal("Failed in start")
+      }
+  }
+
+  "StopFutureVerticle" should "use stopFuture to stop" in {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    val result = Promise[String]
+    vertx.eventBus()
+      .localConsumer[String]("stopMethod")
+      .handler(m => result.success(m.body()))
+
+    vertx.deployVerticleFuture(nameForVerticle[StopFutureVerticle])
+        .map(depId => vertx.undeploy(depId))
+    result.future.map(r => r should equal("stopFuture"))
+  }
+
+  "StopVerticle" should "use stop to stop" in {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    val result = Promise[String]
+    vertx.eventBus()
+      .localConsumer[String]("stopMethod")
+      .handler(m => result.success(m.body()))
+
+    vertx.deployVerticleFuture(nameForVerticle[StopVerticle])
+      .map(depId => vertx.undeploy(depId))
+    result.future.map(r => r should equal("stop"))
+  }
+
+  "StopFailVerticle" should "fail correctly if stop throws an exception" in {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+
+    vertx.deployVerticleFuture(nameForVerticle[StopFailVerticle])
+      .transformWith{
+        case Success(s) => vertx.undeployFuture(s)
+      }
+      .transformWith{
+        case Failure(t) => t.getMessage should equal("Failed in stop")
+      }
+  }
+
+  "nameForVerticle" should "generate the correct name to deploy a ScalaVerticle" in {
+    nameForVerticle[StartFutureVerticle] should equal("scala:io.vertx.lang.scala.verticle.StartFutureVerticle")
+  }
+}
+
+class StartFutureVerticle extends ScalaVerticle{
+  override def startFuture(): Future[Unit] = {
+    vertx.eventBus
+      .send("startMethod", "startFuture")
+    Future.successful()
+  }
+}
+
+class StartVerticle extends ScalaVerticle{
+  override def start(): Unit = {
+    vertx.eventBus
+      .send("startMethod", "start")
+  }
+}
+class StartFailVerticle extends ScalaVerticle{
+  override def start(): Unit = {
+    throw new RuntimeException("Failed in start")
+  }
+}
+
+class StopFutureVerticle extends ScalaVerticle{
+  override def stopFuture(): Future[Unit] = {
+    vertx.eventBus
+      .send("stopMethod", "stopFuture")
+    Future.successful()
+  }
+}
+
+class StopVerticle extends ScalaVerticle{
+  override def stop(): Unit = {
+    vertx.eventBus
+      .send("stopMethod", "stop")
+  }
+}
+
+class StopFailVerticle extends ScalaVerticle{
+  override def stop(): Unit = {
+    throw new RuntimeException("Failed in stop")
   }
 }
