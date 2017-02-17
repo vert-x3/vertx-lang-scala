@@ -67,7 +67,7 @@ abstract class ScalaVerticle {
     * Stop the verticle.<p>
     * This is called by Vert.x when the verticle instance is un-deployed. Don't call it yourself.<p>
     * If your verticle does things in it's shut-down which take some time then you can override this method
-    * and complete the futrue some time later when clean-up is complete.
+    * and complete the future some time later when clean-up is complete.
     *
     * @return a future which should be completed when verticle clean-up is complete.
     */
