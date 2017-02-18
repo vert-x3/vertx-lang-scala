@@ -105,6 +105,16 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   /**
+    * Handles a failure of this Future by returning the result of another Future.
+    * If the mapper fails, then the returned future will be failed with this failure.
+    * @param mapper A function which takes the exception of a failure and returns a new future.
+    * @return A recovered future
+    */
+  override def recover(mapper: Throwable => Future[CompositeFuture]): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].recover({x: Throwable => mapper(x).asJava.asInstanceOf[JFuture[JCompositeFuture]]}))
+  }
+
+  /**
     * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
     * @param result the result
     */

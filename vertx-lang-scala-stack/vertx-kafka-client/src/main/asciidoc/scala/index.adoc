@@ -22,18 +22,10 @@ of your build descriptor:
 
 [source,xml,subs="+attributes"]
 ----
-<repository>
-    <id>oss.sonatype.org-snapshot</id>
-    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-</repository>
-----
-
-[source,xml,subs="+attributes"]
-----
 <dependency>
-    <groupId>io.vertx</groupId>
-    <artifactId>vertx-kafka-client</artifactId>
-    <version>3.4.0-SNAPSHOT</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-kafka-client</artifactId>
+  <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -41,12 +33,7 @@ of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-----
-
-[source,groovy,subs="+attributes"]
-----
-compile io.vertx:vertx-kafka-client:3.4.0-SNAPSHOT
+compile io.vertx:vertx-kafka-client:${maven.version}
 ----
 
 == Creating Kafka clients
@@ -636,20 +623,39 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 
 ----
 
-== Using Vert.x buffers as records key/value
+== Using Vert.x serializers/deserizaliers
 
-Vert.x Kafka client provides a serializer and deserializer for creating records with Vert.x buffers.
+Vert.x Kafka client comes out of the box with serializers and deserializers for buffers, json object
+and json array.
 
-In a consumer
+In a consumer you can use buffers
 
 [source,scala]
 ----
 
-// Creating a consumer able to deserialize bytes to Vert.x buffers
+// Creating a consumer able to deserialize to buffers
 var config = Map()
 config + ("bootstrap.servers" -> "localhost:9092")
-config + ("key.deserializer" -> "io.vertx.kafka.client.BufferDeserializer")
-config + ("value.deserializer" -> "io.vertx.kafka.client.BufferDeserializer")
+config + ("key.deserializer" -> "io.vertx.kafka.client.serialization.BufferDeserializer")
+config + ("value.deserializer" -> "io.vertx.kafka.client.serialization.BufferDeserializer")
+config + ("group.id" -> "my_group")
+config + ("auto.offset.reset" -> "earliest")
+config + ("enable.auto.commit" -> "false")
+
+// Creating a consumer able to deserialize to json object
+config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.deserializer" -> "io.vertx.kafka.client.serialization.JsonObjectDeserializer")
+config + ("value.deserializer" -> "io.vertx.kafka.client.serialization.JsonObjectDeserializer")
+config + ("group.id" -> "my_group")
+config + ("auto.offset.reset" -> "earliest")
+config + ("enable.auto.commit" -> "false")
+
+// Creating a consumer able to deserialize to json array
+config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.deserializer" -> "io.vertx.kafka.client.serialization.JsonArrayDeserializer")
+config + ("value.deserializer" -> "io.vertx.kafka.client.serialization.JsonArrayDeserializer")
 config + ("group.id" -> "my_group")
 config + ("auto.offset.reset" -> "earliest")
 config + ("enable.auto.commit" -> "false")
@@ -661,46 +667,44 @@ Or in a producer
 [source,scala]
 ----
 
-// Creating a producer able to serialize bytes to Vert.x buffers
+// Creating a producer able to serialize to buffers
 var config = Map()
 config + ("bootstrap.servers" -> "localhost:9092")
-config + ("key.serializer" -> "io.vertx.kafka.client.BufferSerializer")
-config + ("value.serializer" -> "io.vertx.kafka.client.BufferSerializer")
+config + ("key.serializer" -> "io.vertx.kafka.client.serialization.BufferSerializer")
+config + ("value.serializer" -> "io.vertx.kafka.client.serialization.BufferSerializer")
+config + ("acks" -> "1")
+
+// Creating a producer able to serialize to json object
+config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.serializer" -> "io.vertx.kafka.client.serialization.JsonObjectSerializer")
+config + ("value.serializer" -> "io.vertx.kafka.client.serialization.JsonObjectSerializer")
+config + ("acks" -> "1")
+
+// Creating a producer able to serialize to json array
+config = Map()
+config + ("bootstrap.servers" -> "localhost:9092")
+config + ("key.serializer" -> "io.vertx.kafka.client.serialization.JsonArraySerializer")
+config + ("value.serializer" -> "io.vertx.kafka.client.serialization.JsonArraySerializer")
 config + ("acks" -> "1")
 
 ----
 
 ifdef::java,groovy,kotlin[]
-You can also specify the buffer serizalizer/deserializer at creation time:
+You can also specify the serizalizers/deserializers at creation time:
 
 In a consumer
 
 [source,scala]
 ----
-
-var config = Map()
-config + ("bootstrap.servers" -> "localhost:9092")
-config + ("group.id" -> "my_group")
-config + ("auto.offset.reset" -> "earliest")
-config + ("enable.auto.commit" -> "false")
-
-// Creating a consumer able to deserialize bytes to Vert.x buffers
-var consumer = KafkaConsumer.create(vertx, config, Buffer.class, Buffer.class)
-
+Code not translatable
 ----
 
 Or in a producer
 
 [source,scala]
 ----
-
-var config = Map()
-config + ("bootstrap.servers" -> "localhost:9092")
-config + ("acks" -> "1")
-
-// Creating a producer able to serialize bytes to Vert.x buffers
-var consumer = KafkaProducer.create(vertx, config, Buffer.class, Buffer.class)
-
+Code not translatable
 ----
 
 endif::[]
