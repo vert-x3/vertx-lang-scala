@@ -124,6 +124,16 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+    * Handles a failure of this Future by returning the result of another Future.
+    * If the mapper fails, then the returned future will be failed with this failure.
+    * @param mapper A function which takes the exception of a failure and returns a new future.
+    * @return A recovered future
+    */
+  def recover(mapper: Throwable => Future[T]): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].recover({x: Throwable => mapper(x).asJava.asInstanceOf[JFuture[Object]]}))
+  }
+
+  /**
     * Has the future completed?
     * 
     * It's completed if it's either succeeded or failed.
