@@ -243,6 +243,13 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions)
   override def getMaxWebsocketFrameSize: Int = {
     asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
+  override def setMaxWebsocketMessageSize(value: Int) = {
+    asJava.setMaxWebsocketMessageSize(value)
+    this
+  }
+  override def getMaxWebsocketMessageSize: Int = {
+    asJava.getMaxWebsocketMessageSize().asInstanceOf[Int]
+  }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this

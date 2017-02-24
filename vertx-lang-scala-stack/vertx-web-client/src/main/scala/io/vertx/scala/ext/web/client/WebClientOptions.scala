@@ -239,6 +239,13 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
   override def getMaxWebsocketFrameSize: Int = {
     asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
+  override def setMaxWebsocketMessageSize(value: Int) = {
+    asJava.setMaxWebsocketMessageSize(value)
+    this
+  }
+  override def getMaxWebsocketMessageSize: Int = {
+    asJava.getMaxWebsocketMessageSize().asInstanceOf[Int]
+  }
   override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this

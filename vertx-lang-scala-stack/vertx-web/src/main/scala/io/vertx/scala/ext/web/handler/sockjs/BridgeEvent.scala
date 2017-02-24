@@ -116,8 +116,20 @@ class BridgeEvent(private val _asJava: Object)
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].recover({x: Throwable => mapper(x).asJava.asInstanceOf[JFuture[java.lang.Boolean]]}))
   }
 
+  override def orElse(mapper: Throwable => Boolean): Future[Boolean] = {
+    Future[Boolean](asJava.asInstanceOf[JBridgeEvent].orElse({x: Throwable => mapper(x).asInstanceOf[java.lang.Boolean]}))
+  }
+
+  override def orElse(value: Boolean): Future[Boolean] = {
+    Future[Boolean](asJava.asInstanceOf[JBridgeEvent].orElse(value.asInstanceOf[java.lang.Boolean]))
+  }
+
   override def complete(arg0: Boolean): Unit = {
     asJava.asInstanceOf[JBridgeEvent].complete(arg0.asInstanceOf[java.lang.Boolean])
+  }
+
+  override def tryComplete(arg0: Boolean): Boolean = {
+    asJava.asInstanceOf[JBridgeEvent].tryComplete(arg0.asInstanceOf[java.lang.Boolean]).asInstanceOf[Boolean]
   }
 
   override def result(): Boolean = {

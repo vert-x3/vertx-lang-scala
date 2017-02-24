@@ -347,6 +347,17 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Set the max websocket message size
+    */
+  def setMaxWebsocketMessageSize(value: Int) = {
+    asJava.setMaxWebsocketMessageSize(value)
+    this
+  }
+  def getMaxWebsocketMessageSize: Int = {
+    asJava.getMaxWebsocketMessageSize().asInstanceOf[Int]
+  }
+
+  /**
     * Set the metrics name identifying the reported metrics, useful for grouping metrics
     * with the same name.
     */

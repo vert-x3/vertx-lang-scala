@@ -464,8 +464,17 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
     * Close the consumer
     * @param completionHandler handler called on operation completed
     */
-  def close(completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].close({x: Void => completionHandler.handle(x)})
+  def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Get the offset of the next record that will be fetched (if a record with that offset exists).
+    * @param partition The partition to get the position forsee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
+    * @param handler handler called on operation completed
+    */
+  def position(partition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
   }
 
  /**
@@ -645,6 +654,24 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
   def partitionsForFuture(topic: String): scala.concurrent.Future[scala.collection.mutable.Buffer[PartitionInfo]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x => x.asScala.map(x => PartitionInfo(x)))
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def closeFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[position]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def positionFuture(partition: TopicPartition): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

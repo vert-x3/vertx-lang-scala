@@ -331,6 +331,17 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   def getMaxWebsocketFrameSize: Int = {
     asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
+
+  /**
+    * Set the maximum websocket message size
+    */
+  def setMaxWebsocketMessageSize(value: Int) = {
+    asJava.setMaxWebsocketMessageSize(value)
+    this
+  }
+  def getMaxWebsocketMessageSize: Int = {
+    asJava.getMaxWebsocketMessageSize().asInstanceOf[Int]
+  }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this

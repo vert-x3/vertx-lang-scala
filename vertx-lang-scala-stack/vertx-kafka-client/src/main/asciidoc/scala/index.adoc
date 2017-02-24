@@ -503,6 +503,28 @@ consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerReco
 
 ----
 
+== Closing a consumer
+
+Call close to close the consumer. Closing the consumer closes any open connections and releases all consumer resources.
+
+The close is actually asynchronous and might not complete until some time after the call has returned. If you want to be notified
+when the actual close has completed then you can pass in a handler.
+
+This handler will then be called when the close has fully completed.
+
+[source,scala]
+----
+consumer.closeFuture().onComplete{
+  case Success(result) => {
+    println("Consumer is now closed")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
 == Sending messages to a topic
 
 You can use  `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#write(io.vertx.kafka.client.producer.KafkaProducerRecord)[write]` to send messages (records) to a topic.
@@ -585,6 +607,28 @@ for ( i <- 0 until 10) {
 
 ----
 
+== Closing a producer
+
+Call close to close the producer. Closing the producer closes any open connections and releases all producer resources.
+
+The close is actually asynchronous and might not complete until some time after the call has returned. If you want to be notified
+when the actual close has completed then you can pass in a handler.
+
+This handler will then be called when the close has fully completed.
+
+[source,scala]
+----
+producer.closeFuture().onComplete{
+  case Success(result) => {
+    println("Producer is now closed")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
 == Getting topic partition information
 
 You can call the `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#partitionsFor(java.lang.String,%20io.vertx.core.Handler)[partitionsFor]` to get information about
@@ -622,6 +666,11 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 })
 
 ----
+
+== Consumer automatic clean-up in verticles
+
+If you’re creating consumers and producer from inside verticles, those consumers and producers will be automatically
+closed when the verticle is undeployed.
 
 == Using Vert.x serializers/deserizaliers
 

@@ -19,10 +19,12 @@ package io.vertx.scala.circuitbreaker
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.circuitbreaker.{CircuitBreaker => JCircuitBreaker}
 import io.vertx.circuitbreaker.CircuitBreakerState
 import io.vertx.core.{Future => JFuture}
 import io.vertx.scala.core.Future
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
 import io.vertx.scala.core.Vertx
@@ -155,6 +157,24 @@ class CircuitBreaker(private val _asJava: Object) {
   }
 
   /**
+    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]] but using a callback.
+    * @param command the operation
+    * @param fallback the fallback
+    * @param handler the completion handler receiving either the operation result or the fallback result. The parameter is an io.vertx.lang.scala.AsyncResult because if the fallback is not called, the error is passed to the handler.
+    */
+  def executeCommandWithFallback[T: TypeTag](command: Handler[Future[T]], fallback: Throwable => T, handler: Handler[AsyncResult[T]]): Unit = {
+    asJava.asInstanceOf[JCircuitBreaker].executeCommandWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))}, {x: Throwable => toJava[T](fallback(x))}, {x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))})
+  }
+
+  /**
+    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]] but using the circuit breaker default fallback.
+    * @param command the operation
+    */
+  def executeCommand[T: TypeTag](command: Handler[Future[T]], handler: Handler[AsyncResult[T]]): Unit = {
+    asJava.asInstanceOf[JCircuitBreaker].executeCommand[Object]({x: JFuture[Object] => command.handle(Future[T](x))}, {x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))})
+  }
+
+  /**
     * Executes the given operation with the circuit breaker control. The operation is generally calling an
     * <em>external</em> system. The operation receives a  object as parameter and <strong>must</strong>
     * call  when the operation has terminated successfully. The operation must also
@@ -196,6 +216,24 @@ class CircuitBreaker(private val _asJava: Object) {
     */
   def failureCount(): Long = {
     asJava.asInstanceOf[JCircuitBreaker].failureCount().asInstanceOf[Long]
+  }
+
+ /**
+   * Like [[executeCommandWithFallback]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def executeCommandWithFallbackFuture[T: TypeTag](command: Handler[Future[T]], fallback: Throwable => T): scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
+    asJava.asInstanceOf[JCircuitBreaker].executeCommandWithFallback[Object]({x: JFuture[Object] => command.handle(Future[T](x))}, {x: Throwable => toJava[T](fallback(x))}, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[executeCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def executeCommandFuture[T: TypeTag](command: Handler[Future[T]]): scala.concurrent.Future[T] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Object, T](x => toScala[T](x))
+    asJava.asInstanceOf[JCircuitBreaker].executeCommand[Object]({x: JFuture[Object] => command.handle(Future[T](x))}, promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
 }

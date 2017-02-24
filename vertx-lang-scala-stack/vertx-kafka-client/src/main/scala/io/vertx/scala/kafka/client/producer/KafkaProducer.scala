@@ -116,11 +116,19 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Close the producer
+    * @param completionHandler handler called on operation completed
+    */
+  def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Close the producer
     * @param timeout timeout to wait for closing
     * @param completionHandler handler called on operation completed
     */
-  def close(timeout: Long, completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(timeout.asInstanceOf[java.lang.Long], {x: Void => completionHandler.handle(x)})
+  def close(timeout: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
  /**
@@ -138,6 +146,24 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object)
   def partitionsForFuture(topic: String): scala.concurrent.Future[scala.collection.mutable.Buffer[PartitionInfo]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x => x.asScala.map(x => PartitionInfo(x)))
     asJava.asInstanceOf[JKafkaProducer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def closeFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def closeFuture(timeout: Long): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(timeout.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

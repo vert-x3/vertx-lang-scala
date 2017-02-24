@@ -120,6 +120,14 @@ trait WebSocketBase
   def writeBinaryMessage(data: io.vertx.core.buffer.Buffer): WebSocketBase
 
   /**
+    * Writes a (potentially large) piece of text data to the connection. This data might be written as multiple frames
+    * if it exceeds the maximum WebSocket frame size.
+    * @param text the data to write
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writeTextMessage(text: String): WebSocketBase
+
+  /**
     * Set a close handler. This will be called when the WebSocket is closed.
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
@@ -132,6 +140,23 @@ trait WebSocketBase
     * @return a reference to this, so the API can be used fluently
     */
   def frameHandler(handler: Handler[WebSocketFrame]): WebSocketBase
+
+  /**
+    * Set a text message handler on the connection. This handler will be called similar to the
+    * , but the buffer will be converted to a String first
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def textMessageHandler(handler: Handler[String]): WebSocketBase
+
+  /**
+    * Set a binary message handler on the connection. This handler serves a similar purpose to [[io.vertx.scala.core.http.WebSocketBase#handler]]
+    * except that if a message comes into the socket in multiple frames, the data from the frames will be aggregated
+    * into a single buffer before calling the handler (using [[io.vertx.scala.core.http.WebSocketFrame#isFinal]] to find the boundaries).
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase
 
   /**
     * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
@@ -267,6 +292,17 @@ object WebSocketBase {
   }
 
   /**
+    * Writes a (potentially large) piece of text data to the connection. This data might be written as multiple frames
+    * if it exceeds the maximum WebSocket frame size.
+    * @param text the data to write
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writeTextMessage(text: String): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writeTextMessage(text.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
     * Set a close handler. This will be called when the WebSocket is closed.
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
@@ -283,6 +319,29 @@ object WebSocketBase {
     */
   def frameHandler(handler: Handler[WebSocketFrame]): WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
+    this
+  }
+
+  /**
+    * Set a text message handler on the connection. This handler will be called similar to the
+    * , but the buffer will be converted to a String first
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def textMessageHandler(handler: Handler[String]): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].textMessageHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    this
+  }
+
+  /**
+    * Set a binary message handler on the connection. This handler serves a similar purpose to [[io.vertx.scala.core.http.WebSocketBase#handler]]
+    * except that if a message comes into the socket in multiple frames, the data from the frames will be aggregated
+    * into a single buffer before calling the handler (using [[io.vertx.scala.core.http.WebSocketFrame#isFinal]] to find the boundaries).
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].binaryMessageHandler({x: Buffer => handler.handle(x)})
     this
   }
 
