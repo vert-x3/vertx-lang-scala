@@ -115,6 +115,36 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   /**
+    * Apply a `mapper` function on this future.
+    *
+    * When this future fails, the `mapper` will be called with the completed value and this mapper
+    * returns a value. This value will complete the future returned by this method call.
+    *
+    * If the `mapper` throws an exception, the returned future will be failed with this exception.
+    *
+    * When this future succeeds, the result will be propagated to the returned future and the `mapper`
+    * will not be called.
+    * @param mapper the mapper function
+    * @return the mapped future
+    */
+  override def orElse(mapper: Throwable => CompositeFuture): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].orElse({x: Throwable => mapper(x).asJava.asInstanceOf[JCompositeFuture]}))
+  }
+
+  /**
+    * Map the failure of a future to a specific `value`.
+    *
+    * When this future fails, this `value` will complete the future returned by this method call.
+    *
+    * When this future succeeds, the result will be propagated to the returned future.
+    * @param value the value that eventually completes the mapped future
+    * @return the mapped future
+    */
+  override def orElse(value: CompositeFuture): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].orElse(value.asJava.asInstanceOf[JCompositeFuture]))
+  }
+
+  /**
     * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.
     * @param result the result
     */
@@ -123,11 +153,35 @@ class CompositeFuture(private val _asJava: Object)
   }
 
   /**
+    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
+    * @param result the result
+    * @return false when the future is already completed
+    */
+  override def tryComplete(result: CompositeFuture): Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].tryComplete(result.asJava.asInstanceOf[JCompositeFuture]).asInstanceOf[Boolean]
+  }
+
+  /**
     * The result of the operation. This will be null if the operation failed.
     * @return the result or null if the operation failed.
     */
   override def result(): CompositeFuture = {
     CompositeFuture(asJava.asInstanceOf[JCompositeFuture].result())
+  }
+
+  /**
+    * Set this instance as result. Any handler will be called, if there is one, and the future will be marked as completed.
+    */
+  override def complete(): Unit = {
+    asJava.asInstanceOf[JCompositeFuture].complete()
+  }
+
+  /**
+    * Try to set this instance as result. When it happens, any handler will be called, if there is one, and the future will be marked as completed.
+    * @return false when the future is already completed
+    */
+  override def tryComplete(): Boolean = {
+    asJava.asInstanceOf[JCompositeFuture].tryComplete().asInstanceOf[Boolean]
   }
 
   /**

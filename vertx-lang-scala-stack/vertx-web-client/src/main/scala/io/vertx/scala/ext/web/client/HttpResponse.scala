@@ -19,6 +19,7 @@ package io.vertx.scala.ext.web.client
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.core.json.JsonArray
 import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
@@ -57,6 +58,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   private var cached_7: scala.Option[io.vertx.core.buffer.Buffer] = _
   private var cached_8: scala.Option[String] = _
   private var cached_9: scala.Option[io.vertx.core.json.JsonObject] = _
+  private var cached_10: scala.Option[io.vertx.core.json.JsonArray] = _
 
   /**
     * @return the version of the response
@@ -166,6 +168,17 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
       cached_9 = scala.Option(tmp)
     }
     cached_9
+  }
+
+  /**
+    * @return the response body decoded as a json array
+    */
+  def bodyAsJsonArray(): scala.Option[io.vertx.core.json.JsonArray] = {
+    if (cached_10 == null) {
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonArray()
+      cached_10 = scala.Option(tmp)
+    }
+    cached_10
   }
 
   /**

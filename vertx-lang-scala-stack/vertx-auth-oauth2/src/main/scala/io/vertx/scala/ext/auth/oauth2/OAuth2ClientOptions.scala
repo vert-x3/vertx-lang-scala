@@ -293,6 +293,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getMaxWebsocketFrameSize: Int = {
     asJava.getMaxWebsocketFrameSize().asInstanceOf[Int]
   }
+  override def setMaxWebsocketMessageSize(value: Int) = {
+    asJava.setMaxWebsocketMessageSize(value)
+    this
+  }
+  override def getMaxWebsocketMessageSize: Int = {
+    asJava.getMaxWebsocketMessageSize().asInstanceOf[Int]
+  }
   override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this

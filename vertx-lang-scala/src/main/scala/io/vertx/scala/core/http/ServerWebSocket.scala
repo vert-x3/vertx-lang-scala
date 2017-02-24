@@ -76,6 +76,40 @@ class ServerWebSocket(private val _asJava: Object)
     cached_2
   }
 
+  /**
+    * Writes a (potentially large) piece of text data to the connection. This data might be written as multiple frames
+    * if it exceeds the maximum WebSocket frame size.
+    * @param text the data to write
+    * @return a reference to this, so the API can be used fluently
+    */
+  override def writeTextMessage(text: String): WebSocketBase = {
+    asJava.asInstanceOf[JServerWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+    * Set a text message handler on the connection. This handler will be called similar to the
+    * , but the buffer will be converted to a String first
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  override def textMessageHandler(handler: Handler[String]): WebSocketBase = {
+    asJava.asInstanceOf[JServerWebSocket].textMessageHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    this
+  }
+
+  /**
+    * Set a binary message handler on the connection. This handler serves a similar purpose to [[io.vertx.scala.core.http.ServerWebSocket#handler]]
+    * except that if a message comes into the socket in multiple frames, the data from the frames will be aggregated
+    * into a single buffer before calling the handler (using [[io.vertx.scala.core.http.WebSocketFrame#isFinal]] to find the boundaries).
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  override def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
+    asJava.asInstanceOf[JServerWebSocket].binaryMessageHandler({x: Buffer => handler.handle(x)})
+    this
+  }
+
   override def exceptionHandler(handler: Handler[Throwable]): ServerWebSocket = {
     asJava.asInstanceOf[JServerWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this

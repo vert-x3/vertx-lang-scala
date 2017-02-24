@@ -48,6 +48,7 @@ The path of the <i>inputrc</i> config.
 |[[maxHeaderSize]]`maxHeaderSize`|`Number (int)`|-
 |[[maxInitialLineLength]]`maxInitialLineLength`|`Number (int)`|-
 |[[maxWebsocketFrameSize]]`maxWebsocketFrameSize`|`Number (int)`|-
+|[[maxWebsocketMessageSize]]`maxWebsocketMessageSize`|`Number (int)`|-
 |[[openSslEngineOptions]]`openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[pemKeyCertOptions]]`pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
 |[[pemTrustOptions]]`pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-

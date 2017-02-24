@@ -59,6 +59,29 @@ class WebSocket(private val _asJava: Object)
     cached_1
   }
 
+  /**
+    * Set a text message handler on the connection. This handler will be called similar to the
+    * , but the buffer will be converted to a String first
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  override def textMessageHandler(handler: Handler[String]): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocket].textMessageHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    this
+  }
+
+  /**
+    * Set a binary message handler on the connection. This handler serves a similar purpose to [[io.vertx.scala.core.http.WebSocket#handler]]
+    * except that if a message comes into the socket in multiple frames, the data from the frames will be aggregated
+    * into a single buffer before calling the handler (using [[io.vertx.scala.core.http.WebSocketFrame#isFinal]] to find the boundaries).
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  override def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocket].binaryMessageHandler({x: Buffer => handler.handle(x)})
+    this
+  }
+
   override def exceptionHandler(handler: Handler[Throwable]): WebSocket = {
     asJava.asInstanceOf[JWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -116,6 +139,11 @@ class WebSocket(private val _asJava: Object)
 
   override def writeBinaryMessage(data: io.vertx.core.buffer.Buffer): WebSocket = {
     asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data)
+    this
+  }
+
+  override def writeTextMessage(text: String): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String])
     this
   }
 

@@ -134,6 +134,36 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+    * Apply a `mapper` function on this future.
+    *
+    * When this future fails, the `mapper` will be called with the completed value and this mapper
+    * returns a value. This value will complete the future returned by this method call.
+    *
+    * If the `mapper` throws an exception, the returned future will be failed with this exception.
+    *
+    * When this future succeeds, the result will be propagated to the returned future and the `mapper`
+    * will not be called.
+    * @param mapper the mapper function
+    * @return the mapped future
+    */
+  def orElse(mapper: Throwable => T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse({x: Throwable => toJava[T](mapper(x))}))
+  }
+
+  /**
+    * Map the failure of a future to a specific `value`.
+    *
+    * When this future fails, this `value` will complete the future returned by this method call.
+    *
+    * When this future succeeds, the result will be propagated to the returned future.
+    * @param value the value that eventually completes the mapped future
+    * @return the mapped future
+    */
+  def orElse(value: T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse(toJava[T](value)))
+  }
+
+  /**
     * Has the future completed?
     * 
     * It's completed if it's either succeeded or failed.
@@ -152,7 +182,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
-    * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
+    *  Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
     */
   def complete(): Unit = {
     asJava.asInstanceOf[JFuture[Object]].complete()
@@ -160,18 +190,53 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
     * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
-    * @param throwable the failure cause
+    * @param cause the failure cause
     */
-  def fail(throwable: Throwable): Unit = {
-    asJava.asInstanceOf[JFuture[Object]].fail(throwable)
+  def fail(cause: Throwable): Unit = {
+    asJava.asInstanceOf[JFuture[Object]].fail(cause)
   }
 
   /**
-    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
+    * Try to set the failure. When it happens, any handler will be called, if there is one, and the future will be marked as completed.
     * @param failureMessage the failure message
     */
   def fail(failureMessage: String): Unit = {
     asJava.asInstanceOf[JFuture[Object]].fail(failureMessage.asInstanceOf[java.lang.String])
+  }
+
+  /**
+    * Set the failure. Any handler will be called, if there is one, and the future will be marked as completed.
+    * @param result the result
+    * @return false when the future is already completed
+    */
+  def tryComplete(result: T): Boolean = {
+    asJava.asInstanceOf[JFuture[Object]].tryComplete(toJava[T](result)).asInstanceOf[Boolean]
+  }
+
+  /**
+    * Try to set the result. When it happens, any handler will be called, if there is one, and the future will be marked as completed.
+    * @return false when the future is already completed
+    */
+  def tryComplete(): Boolean = {
+    asJava.asInstanceOf[JFuture[Object]].tryComplete().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Try to set the failure. When it happens, any handler will be called, if there is one, and the future will be marked as completed.
+    * @param cause the failure cause
+    * @return false when the future is already completed
+    */
+  def tryFail(cause: Throwable): Boolean = {
+    asJava.asInstanceOf[JFuture[Object]].tryFail(cause).asInstanceOf[Boolean]
+  }
+
+  /**
+    * Try to set the failure. When it happens, any handler will be called, if there is one, and the future will be marked as completed.
+    * @param failureMessage the failure message
+    * @return false when the future is already completed
+    */
+  def tryFail(failureMessage: String): Boolean = {
+    asJava.asInstanceOf[JFuture[Object]].tryFail(failureMessage.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**
@@ -210,6 +275,15 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
 object Future {
   def apply[T: TypeTag](asJava: JFuture[_]) = new Future[T](asJava)  
+  /**
+    * Create a future that hasn't completed yet and that is passed to the `handler` before it is returned.
+    * @param handler the handler
+    * @return the future.
+    */
+  def future[T: TypeTag](handler: Handler[Future[T]]): Future[T] = {
+    Future[T](JFuture.future[Object]({x: JFuture[Object] => handler.handle(Future[T](x))}))
+  }
+
   /**
     * Create a future that hasn't completed yet
     * @return the future
