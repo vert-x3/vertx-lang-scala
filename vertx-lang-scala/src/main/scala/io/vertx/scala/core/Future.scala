@@ -146,8 +146,8 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @param mapper the mapper function
     * @return the mapped future
     */
-  def orElse(mapper: Throwable => T): Future[T] = {
-    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse({x: Throwable => toJava[T](mapper(x))}))
+  def otherwise(mapper: Throwable => T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].otherwise({x: Throwable => toJava[T](mapper(x))}))
   }
 
   /**
@@ -159,8 +159,8 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @param value the value that eventually completes the mapped future
     * @return the mapped future
     */
-  def orElse(value: T): Future[T] = {
-    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse(toJava[T](value)))
+  def otherwise(value: T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].otherwise(toJava[T](value)))
   }
 
   /**

@@ -127,6 +127,17 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   override def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set max MQTT message size
+    */
+  def setMaxMessageSize(value: Int) = {
+    asJava.setMaxMessageSize(value)
+    this
+  }
+  def getMaxMessageSize: Int = {
+    asJava.getMaxMessageSize().asInstanceOf[Int]
+  }
   override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this

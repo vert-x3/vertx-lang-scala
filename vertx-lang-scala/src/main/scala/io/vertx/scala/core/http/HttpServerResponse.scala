@@ -161,8 +161,8 @@ class HttpServerResponse(private val _asJava: Object)
   }
 
   /**
-    * Set a close handler for the response. This will be called if the underlying connection closes before the response
-    * is complete.
+    * Set a close handler for the response. This will be called when the response is ended or if the underlying connection
+    * closes before the response ends.
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
