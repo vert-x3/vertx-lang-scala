@@ -6,12 +6,12 @@
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-parent_2.12</artifactId>
     <version>3.4.0-SNAPSHOT</version>
-    <relativePath>../vertx-lang-scala-parent</relativePath>
+    <relativePath>../../</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-lang-scala-stack_2.12</artifactId>
+  <artifactId>vertx-lang-scala-stack-parent_2.12</artifactId>
   <inceptionYear>2016</inceptionYear>
   <organization>
     <name>vert.x</name>
@@ -275,44 +275,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
-  <modules>
-    <module>vertx-mqtt-server</module>
-    <module>vertx-sql-common</module>
-    <module>vertx-bridge-common</module>
-    <module>vertx-jdbc-client</module>
-    <module>vertx-mongo-client</module>
-    <module>vertx-mongo-service</module>
-    <module>vertx-auth-common</module>
-    <module>vertx-auth-shiro</module>
-    <module>vertx-auth-htdigest</module>
-    <module>vertx-auth-oauth2</module>
-    <module>vertx-auth-mongo</module>
-    <module>vertx-auth-jwt</module>
-    <module>vertx-auth-jdbc</module>
-    <module>vertx-web</module>
-    <module>vertx-web-common</module>
-    <module>vertx-web-client</module>
-    <module>vertx-sockjs-service-proxy</module>
-    <module>vertx-web-templ-freemarker</module>
-    <module>vertx-web-templ-handlebars</module>
-    <module>vertx-web-templ-jade</module>
-    <module>vertx-web-templ-mvel</module>
-    <module>vertx-web-templ-pebble</module>
-    <module>vertx-web-templ-thymeleaf</module>
-    <module>vertx-mysql-postgresql-client</module>
-    <module>vertx-mail-client</module>
-    <module>vertx-rabbitmq-client</module>
-    <module>vertx-redis-client</module>
-    <module>vertx-stomp</module>
-    <module>vertx-tcp-eventbus-bridge</module>
-    <module>vertx-amqp-bridge</module>
-    <module>vertx-dropwizard-metrics</module>
-    <module>vertx-hawkular-metrics</module>
-    <module>vertx-shell</module>
-    <module>vertx-kafka-client</module>
-    <module>vertx-service-discovery</module>
-    <module>vertx-circuit-breaker</module>
-    <module>vertx-config</module>
-  </modules>
 </project>
