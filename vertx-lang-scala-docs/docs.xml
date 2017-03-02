@@ -24,5 +24,9 @@
       <directory>${project.build.directory}/docs</directory>
       <outputDirectory>/</outputDirectory>
     </fileSet>
+    <fileSet>
+      <directory>${project.build.directory}/scaladocs</directory>
+      <outputDirectory>/scaladocs</outputDirectory>
+    </fileSet>
   </fileSets>
 </assembly>
