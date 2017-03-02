@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-lang-scala-parent_2.12</artifactId>
+    <version>3.4.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>vertx-lang-scala-docs_2.12</artifactId>
+  <packaging>jar</packaging>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala-stack_2.12</artifactId>
+      <version>${stack.version}</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <copy todir="target/docs" >
+                  <fileset dir="../vertx-lang-scala">
+                    <include name="src/main/asciidoc/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^src/main/asciidoc/scala/(.*)" to="vertx-core/scala/\1"/>
+                </copy>
+                <copy todir="target/docs" >
+                  <fileset dir="../vertx-lang-scala-stack">
+                    <include name="vertx-*/src/main/asciidoc/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-(.*)/src/main/asciidoc/scala/(.*)" to="vertx-\1/scala/\2"/>
+                </copy>
+                <copy todir="target/sources" >
+                  <fileset dir="../vertx-lang-scala">
+                    <include name="src/main/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^src/main/scala/(.*)" to="\1"/>
+                </copy>
+                <copy todir="target/sources" >
+                  <fileset dir="../vertx-lang-scala-stack">
+                    <include name="vertx-*/src/main/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-.*/src/main/scala/(.*)" to="\1"/>
+                </copy>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- todo : try to make that work -->
+<!--
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>doc</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <sourceDir>target/sources</sourceDir>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+-->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>package-docs</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>docs.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
