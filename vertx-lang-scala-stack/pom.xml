@@ -34,7 +34,6 @@
   <properties>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
     <vertx-module>none</vertx-module>
-    <stack.version>${project.version}</stack.version>
     <!--
       Configure plugins that skip building documentation that otherwise would fail without
       the documentation bits. This is useful in pom aggregators that don't have documentation
