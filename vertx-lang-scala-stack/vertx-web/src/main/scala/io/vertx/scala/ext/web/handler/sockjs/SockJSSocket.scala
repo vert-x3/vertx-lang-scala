@@ -80,6 +80,16 @@ class SockJSSocket(private val _asJava: Object)
     this
   }
 
+  /**
+    * Write a String to the socket, encoded in UTF-8.
+    * @param data the string to write
+    * @return a reference to this, so the API can be used fluently
+    */
+  def write(data: String): SockJSSocket = {
+    asJava.asInstanceOf[JSockJSSocket].write(data.asInstanceOf[java.lang.String])
+    this
+  }
+
   override def setWriteQueueMaxSize(maxSize: Int): SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this

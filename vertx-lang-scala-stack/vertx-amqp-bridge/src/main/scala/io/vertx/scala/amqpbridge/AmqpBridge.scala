@@ -92,6 +92,14 @@ class AmqpBridge(private val _asJava: Object) {
     asJava.asInstanceOf[JAmqpBridge].close({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+  /**
+    * Set an end handler. This will fire if the underlying connection is unexpectedly disconnected or remotely closed.
+    * @param endHandler the handler
+    */
+  def endHandler(endHandler: Handler[Unit]): Unit = {
+    asJava.asInstanceOf[JAmqpBridge].endHandler({x: Void => endHandler.handle(x)})
+  }
+
  /**
    * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */

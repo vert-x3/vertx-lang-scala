@@ -124,6 +124,20 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+    * Map the result of a future to `null`.
+    *
+    * This is a conveniency for `future.map((T) null)` or `future.map((Void) null)`.
+    *
+    * When this future succeeds, `null` will complete the future returned by this method call.
+    *
+    * When this future fails, the failure will be propagated to the returned future.
+    * @return the mapped future
+    */
+  def mapEmpty[V: TypeTag](): Future[V] = {
+    Future[V](asJava.asInstanceOf[JFuture[Object]].mapEmpty[Object]())
+  }
+
+  /**
     * Handles a failure of this Future by returning the result of another Future.
     * If the mapper fails, then the returned future will be failed with this failure.
     * @param mapper A function which takes the exception of a failure and returns a new future.
@@ -146,8 +160,8 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @param mapper the mapper function
     * @return the mapped future
     */
-  def orElse(mapper: Throwable => T): Future[T] = {
-    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse({x: Throwable => toJava[T](mapper(x))}))
+  def otherwise(mapper: Throwable => T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].otherwise({x: Throwable => toJava[T](mapper(x))}))
   }
 
   /**
@@ -159,8 +173,22 @@ class Future[T: TypeTag](private val _asJava: Object) {
     * @param value the value that eventually completes the mapped future
     * @return the mapped future
     */
-  def orElse(value: T): Future[T] = {
-    Future[T](asJava.asInstanceOf[JFuture[Object]].orElse(toJava[T](value)))
+  def otherwise(value: T): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].otherwise(toJava[T](value)))
+  }
+
+  /**
+    * Map the failure of a future to `null`.
+    *
+    * This is a convenience for `future.otherwise((T) null)`.
+    *
+    * When this future fails, the `null` value will complete the future returned by this method call.
+    *
+    * When this future succeeds, the result will be propagated to the returned future.
+    * @return the mapped future
+    */
+  def otherwiseEmpty(): Future[T] = {
+    Future[T](asJava.asInstanceOf[JFuture[Object]].otherwiseEmpty())
   }
 
   /**

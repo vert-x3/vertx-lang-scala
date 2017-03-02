@@ -607,6 +607,32 @@ for ( i <- 0 until 10) {
 
 ----
 
+NOTE: the shared producer is created on the first `createShared` call and its configuration is defined at this moment,
+shared producer usage must use the same configuration.
+
+== Sharing a producer
+
+Sometimes you want to share the same producer from within several verticles or contexts.
+
+Calling `link:../../scaladoc/io/vertx/scala/kafka/client/producer/KafkaProducer.html#createShared(io.vertx.core.Vertx,%20java.lang.String,%20java.util.Map)[KafkaProducer.createShared]`
+returns a producer that can be shared safely.
+
+[source,scala]
+----
+
+// Create a shared producer identified by 'the-producer'
+var producer1 = KafkaProducer.createShared(vertx, "the-producer", config)
+
+// Sometimes later you can close it
+producer1.close()
+
+----
+
+The same resources (thread, connection) will be shared between the producer returned by this method.
+
+When you are done with the producer, just close it, when all shared producers are closed, the resources will
+be released for you.
+
 == Closing a producer
 
 Call close to close the producer. Closing the producer closes any open connections and releases all producer resources.
@@ -667,7 +693,7 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 
 ----
 
-== Consumer automatic clean-up in verticles
+== Automatic clean-up in verticles
 
 If you’re creating consumers and producer from inside verticles, those consumers and producers will be automatically
 closed when the verticle is undeployed.
