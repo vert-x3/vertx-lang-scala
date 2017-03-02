@@ -24,13 +24,14 @@ import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.core.datagram.{PacketWritestream => JPacketWritestream}
 import io.vertx.scala.core.net.SocketAddress
 
 /**
@@ -233,14 +234,14 @@ class DatagramSocket(private val _asJava: Object)
   }
 
   /**
-    * Returns a [[io.vertx.scala.core.datagram.PacketWritestream]] able to send  to the
+    * Returns a `WriteStream<Buffer>` able to send  to the
     * [[io.vertx.scala.core.net.SocketAddress]].
     * @param port the port of the remote peer
     * @param host the host address of the remote peer
     * @return the write stream for sending packets
     */
-  def sender(port: Int, host: String): PacketWritestream = {
-    PacketWritestream(asJava.asInstanceOf[JDatagramSocket].sender(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
+  def sender(port: Int, host: String): WriteStream[io.vertx.core.buffer.Buffer] = {
+    WriteStream[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JDatagramSocket].sender(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
   }
 
   /**

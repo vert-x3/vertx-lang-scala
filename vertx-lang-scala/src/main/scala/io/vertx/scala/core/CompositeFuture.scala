@@ -127,8 +127,8 @@ class CompositeFuture(private val _asJava: Object)
     * @param mapper the mapper function
     * @return the mapped future
     */
-  override def orElse(mapper: Throwable => CompositeFuture): Future[CompositeFuture] = {
-    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].orElse({x: Throwable => mapper(x).asJava.asInstanceOf[JCompositeFuture]}))
+  override def otherwise(mapper: Throwable => CompositeFuture): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].otherwise({x: Throwable => mapper(x).asJava.asInstanceOf[JCompositeFuture]}))
   }
 
   /**
@@ -140,8 +140,22 @@ class CompositeFuture(private val _asJava: Object)
     * @param value the value that eventually completes the mapped future
     * @return the mapped future
     */
-  override def orElse(value: CompositeFuture): Future[CompositeFuture] = {
-    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].orElse(value.asJava.asInstanceOf[JCompositeFuture]))
+  override def otherwise(value: CompositeFuture): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].otherwise(value.asJava.asInstanceOf[JCompositeFuture]))
+  }
+
+  /**
+    * Map the failure of a future to `null`.
+    *
+    * This is a convenience for `future.otherwise((T) null)`.
+    *
+    * When this future fails, the `null` value will complete the future returned by this method call.
+    *
+    * When this future succeeds, the result will be propagated to the returned future.
+    * @return the mapped future
+    */
+  override def otherwiseEmpty(): Future[CompositeFuture] = {
+    Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].otherwiseEmpty())
   }
 
   /**

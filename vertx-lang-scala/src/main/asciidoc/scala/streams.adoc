@@ -159,7 +159,7 @@ or when end of request is reached if it's an HTTP request, or when the connectio
 
 `WriteStream` is implemented by `link:../../scaladoc/io/vertx/scala/core/http/HttpClientRequest.html[HttpClientRequest]`, `link:../../scaladoc/io/vertx/scala/core/http/HttpServerResponse.html[HttpServerResponse]`
 `link:../../scaladoc/io/vertx/scala/core/http/WebSocket.html[WebSocket]`, `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`, `link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`,
-`link:../../scaladoc/io/vertx/scala/core/datagram/PacketWritestream.html[PacketWritestream]` and `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageProducer.html[MessageProducer]`
+and `link:../../scaladoc/io/vertx/scala/core/eventbus/MessageProducer.html[MessageProducer]`
 
 Functions:
 
