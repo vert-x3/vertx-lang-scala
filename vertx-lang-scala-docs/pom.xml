@@ -51,6 +51,12 @@
                   </fileset>
                   <mapper type="regexp" from="^vertx-(.*)/src/main/asciidoc/scala/(.*)" to="vertx-\1/scala/\2"/>
                 </copy>
+                <copy todir="target/scaladocs" >
+                  <fileset dir="../vertx-lang-scala-stack">
+                    <include name="vertx-*/target/docs/vertx-core/scala/scaladoc/scaladocs/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-.*/target/docs/vertx-core/scala/scaladoc/scaladocs/(.*)" to="\1"/>
+                </copy>
                 <copy todir="target/sources" >
                   <fileset dir="../vertx-lang-scala">
                     <include name="src/main/scala/**"/>
@@ -69,24 +75,6 @@
         </executions>
       </plugin>
       <!-- todo : try to make that work -->
-<!--
-      <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>scala-maven-plugin</artifactId>
-        <version>3.2.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>doc</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <sourceDir>target/sources</sourceDir>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
--->
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.0.0</version>
