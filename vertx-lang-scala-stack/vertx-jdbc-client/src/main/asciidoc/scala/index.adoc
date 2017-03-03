@@ -3,7 +3,7 @@
 This client allows you to interact with any JDBC compliant database using an asynchronous API from your Vert.x
 application.
 
-The client API is represented with the interface `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`.
+The client API is represented with the interface `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`.
 
 To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
 
@@ -43,7 +43,7 @@ You do this as follows:
 `exampleCreateDefault`
 ----
 
-The first call to `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createShared]`
 will actually create the data source, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same data source, so the configuration won't be used.
@@ -60,7 +60,7 @@ You can create a client specifying a data source name as follows
 If different clients are created using the same Vert.x instance and specifying the same data source name, they will
 share the same data source.
 
-The first call to `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createShared]`
 will actually create the data source, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same data source, so the configuration won't be used.
@@ -73,14 +73,14 @@ interacting with different databases.
 In most cases you will want to share a data source between different client instances.
 However, it's possible you want to create a client instance that doesn't share its data source with any other client.
 
-In that case you can use `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createNonShared]`.
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[JDBCClient.createNonShared]`.
 
 [source,java]
 ----
 `exampleCreateNonShared`
 ----
 
-This is equivalent to calling `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[JDBCClient.createShared]`
+This is equivalent to calling `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[JDBCClient.createShared]`
 with a unique data source name each time.
 
 === Specifying a data source
@@ -106,7 +106,7 @@ If you're creating clients from inside verticles, the clients will be automatica
 
 == Getting a connection
 
-Once you've created a client you use `link:../../scaladoc/io/vertx/scala/ext/jdbc/JDBCClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get
+Once you've created a client you use `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get
 a connection.
 
 This will return the connection in the handler when one is ready from the pool.
@@ -116,7 +116,7 @@ This will return the connection in the handler when one is ready from the pool.
 `example4`
 ----
 
-The connection is an instance of `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html[SQLConnection]` which is a common interface not only used by
+The connection is an instance of `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html[SQLConnection]` which is a common interface not only used by
 the Vert.x JDBC Client.
 
 You can learn how to use it in the http://vertx.io/docs/vertx-sql-common/scala/[common sql interface] documentation.
@@ -130,6 +130,8 @@ The following configuration properties generally apply:
 `provider_class`:: The class name of the class actually used to manage the database connections. By default this is
 `io.vertx.ext.jdbc.spi.impl.C3P0DataSourceProvider` but if you want to use a different provider you can override
 this property and provide your implementation.
+`row_stream_fetch_size`:: The size of `SQLRowStream` internal cache which used to better performance. By default
+it equals to `128`
 
 Assuming the C3P0 implementation is being used (the default), the following extra configuration properties apply:
 

@@ -14,12 +14,12 @@ features like:
 * unified error handling
 * form submissions
 
-The web client does not deprecate the Vert.x Core `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]`, indeed it is based on
+The web client does not deprecate the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`, indeed it is based on
 this client and inherits its configuration and great features like pooling, HTTP/2 support, pipelining support, etc...
-The `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should be used when fine grained control over the HTTP
+The `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should be used when fine grained control over the HTTP
 requests/responses is necessary.
 
-The web client does not provide a WebSocket API, the Vert.x Core `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should
+The web client does not provide a WebSocket API, the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should
 be used.
 
 == Using the web client
@@ -49,11 +49,11 @@ dependencies {
 == Re-cap on Vert.x core HTTP client
 
 Vert.x Web Client uses the API from Vert.x core, so it's well worth getting familiar with the basic concepts of using
-`link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]` using Vert.x core, if you're not already.
+`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` using Vert.x core, if you're not already.
 
 == Creating a web client
 
-You create an `link:../../scaladoc/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` instance with default options as follows
+You create an `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` instance with default options as follows
 
 [source,scala]
 ----
@@ -163,7 +163,7 @@ request.uri("/some-uri?param1=param1_value&param2=param2_value")
 When you need to make a request with a body, you use the same API and call then `sendXXX` methods
 that expects a body to send.
 
-Use `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendBuffer(io.vertx.core.buffer.Buffer,%20io.vertx.core.Handler)[sendBuffer]` to send a buffer body
+Use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendBuffer(io.vertx.core.buffer.Buffer,%20io.vertx.core.Handler)[sendBuffer]` to send a buffer body
 
 [source,scala]
 ----
@@ -180,7 +180,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer
 Sending a single buffer is useful but often you don't want to load fully the content in memory because
 it may be too large or you want to handle many concurrent requests and want to use just the minimum
 for each request. For this purpose the web client can send `ReadStream<Buffer>` (e.g a
-`link:../../scaladoc/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` is a ReadStream<Buffer>`) with the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream,%20io.vertx.core.Handler)[sendStream]` method
+`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream,%20io.vertx.core.Handler)[sendStream]` method
 
 [source,scala]
 ----
@@ -218,7 +218,7 @@ The POST will not be chunked.
 ==== Json bodies
 
 Often you’ll want to send Json body requests, to send a `JsonObject`
-use the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[sendJsonObject]`
+use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[sendJsonObject]`
 
 [source,scala]
 ----
@@ -231,7 +231,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendJsonObjectFuture(ne
 
 ----
 
-In Java, Groovy or Kotlin, you can use the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object,%20io.vertx.core.Handler)[sendJson]` method that maps
+In Java, Groovy or Kotlin, you can use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object,%20io.vertx.core.Handler)[sendJson]` method that maps
 a POJO (Plain Old Java Object) to a Json object using `Json.encode`
 method
 
@@ -251,7 +251,7 @@ to Json.
 
 ==== Form submissions
 
-You can send http form submissions bodies with the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#sendForm(io.vertx.core.MultiMap,%20io.vertx.core.Handler)[sendForm]`
+You can send http form submissions bodies with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendForm(io.vertx.core.MultiMap,%20io.vertx.core.Handler)[sendForm]`
 variant.
 
 [source,scala]
@@ -305,7 +305,7 @@ headers.set("other-header", "foo")
 
 ----
 
-The headers are an instance of `link:../../scaladoc/io/vertx/scala/core/MultiMap.html[MultiMap]` which provides operations for adding,
+The headers are an instance of `link:../../scaladocs/io/vertx/scala/core/MultiMap.html[MultiMap]` which provides operations for adding,
 setting and removing entries. Http headers allow more than one value for a specific key.
 
 You can also write headers using putHeader
@@ -320,8 +320,8 @@ request.putHeader("other-header", "foo")
 
 === Reusing requests
 
-The `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#send(io.vertx.core.Handler)[send]` method can be called multiple times
-safely, making it very easy to configure and reuse `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html[HttpRequest]` objects
+The `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#send(io.vertx.core.Handler)[send]` method can be called multiple times
+safely, making it very easy to configure and reuse `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html[HttpRequest]` objects
 
 [source,scala]
 ----
@@ -343,7 +343,7 @@ get.sendFuture().onComplete{
 
 ----
 
-When you need to mutate a request, the `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#copy()[copy]` returns a copy of the
+When you need to mutate a request, the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#copy()[copy]` returns a copy of the
 request
 
 [source,scala]
@@ -368,7 +368,7 @@ get.putHeader("an-header", "with-some-value").sendFuture().onComplete{
 
 === Timeouts
 
-You can set a timeout for a specific http request using `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpRequest.html#timeout(long)[timeout]`.
+You can set a timeout for a specific http request using `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#timeout(long)[timeout]`.
 
 [source,scala]
 ----
@@ -388,7 +388,7 @@ handler.
 
 == Handling http responses
 
-When the web client sends a request you always deal with a single async result `link:../../scaladoc/io/vertx/scala/ext/web/client/HttpResponse.html[HttpResponse]`.
+When the web client sends a request you always deal with a single async result `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpResponse.html[HttpResponse]`.
 
 On a success result the callback happens after the response has been received
 
@@ -408,7 +408,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 
 ----
 
-WARNING: responses are fully buffered, use `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`
+WARNING: responses are fully buffered, use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`
 to pipe the response to a write stream
 
 === Decoding responses
@@ -416,17 +416,17 @@ to pipe the response to a write stream
 By default the web client provides an http response body as a `Buffer` and does not apply
 any decoding.
 
-Custom response body decoding can be achieved using `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html[BodyCodec]`:
+Custom response body decoding can be achieved using `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html[BodyCodec]`:
 
 * Plain String
 * Json object
 * Json mapped POJO
-* `link:../../scaladoc/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`
+* `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`
 
 A body codec can decode an arbitrary binary data stream into a specific object instance, saving you the decoding
 step in your response handlers.
 
-Use `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html#jsonObject()[BodyCodec.jsonObject]` To decode a Json object:
+Use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#jsonObject()[BodyCodec.jsonObject]` To decode a Json object:
 
 [source,scala]
 ----
@@ -464,8 +464,8 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.json(exampl
 
 ----
 
-When large response are expected, use the `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`.
-This body codec pumps the response body buffers to a `link:../../scaladoc/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`
+When large response are expected, use the `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`.
+This body codec pumps the response body buffers to a `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`
 and signals the success or the failure of the operation in the async result response
 
 [source,scala]
@@ -484,7 +484,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.pipe(writeS
 
 ----
 
-Finally if you are not interested at all by the response content, the `link:../../scaladoc/io/vertx/scala/ext/web/codec/BodyCodec.html#none()[BodyCodec.none]`
+Finally if you are not interested at all by the response content, the `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#none()[BodyCodec.none]`
 simply discards the entire response body
 
 [source,scala]
@@ -555,7 +555,7 @@ var client = WebClient.create(vertx, WebClientOptions()
 
 == Using HTTPS
 
-Vert.x web client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladoc/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
+Vert.x web client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
 
 You can specify the behavior per request
 

@@ -30,7 +30,7 @@ var server = vertx.createNetServer(options)
 
 === Start the Server Listening
 
-To tell the server to listen for incoming requests you use one of the `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#listen()[listen]`
+To tell the server to listen for incoming requests you use one of the `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#listen()[listen]`
 alternatives.
 
 To tell the server to listen at the host and port as specified in the options:
@@ -81,7 +81,7 @@ server.listenFuture(1234, "localhost").onComplete{
 
 If `0` is used as the listening port, the server will find an unused random port to listen on.
 
-To find out the real port the server is listening on you can call `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#actualPort()[actualPort]`.
+To find out the real port the server is listening on you can call `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#actualPort()[actualPort]`.
 
 [source,scala]
 ----
@@ -100,7 +100,7 @@ server.listenFuture(0, "localhost").onComplete{
 
 === Getting notified of incoming connections
 
-To be notified when a connection is made you need to set a `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#connectHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[connectHandler]`:
+To be notified when a connection is made you need to set a `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#connectHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[connectHandler]`:
 
 [source,scala]
 ----
@@ -112,17 +112,17 @@ server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
 
 ----
 
-When a connection is made the handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`.
+When a connection is made the handler will be called with an instance of `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]`.
 
 This is a socket-like interface to the actual connection, and allows you to read and write data as well as do various
 other things like close the socket.
 
 === Reading data from the socket
 
-To read data from the socket you set the `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#handler(io.vertx.core.Handler)[handler]` on the
+To read data from the socket you set the `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#handler(io.vertx.core.Handler)[handler]` on the
 socket.
 
-This handler will be called with an instance of `link:../../scaladoc/io/vertx/scala/core/buffer/Buffer.html[Buffer]` every time data is received on
+This handler will be called with an instance of `link:../../scaladocs/io/vertx/scala/core/buffer/Buffer.html[Buffer]` every time data is received on
 the socket.
 
 [source,scala]
@@ -139,7 +139,7 @@ server.connectHandler((socket: io.vertx.scala.core.net.NetSocket) => {
 
 === Writing data to a socket
 
-You write to a socket using one of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#write(io.vertx.core.buffer.Buffer)[write]`.
+You write to a socket using one of `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#write(io.vertx.core.buffer.Buffer)[write]`.
 
 [source,scala]
 ----
@@ -162,7 +162,7 @@ Write operations are asynchronous and may not occur until some time after the ca
 
 === Closed handler
 
-If you want to be notified when a socket is closed, you can set a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#closeHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[closeHandler]`
+If you want to be notified when a socket is closed, you can set a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#closeHandler((@io.vertx.codegen.annotations.Nullable :: io.vertx.core.Handler))[closeHandler]`
 on it:
 
 [source,scala]
@@ -176,7 +176,7 @@ socket.closeHandler((v: java.lang.Void) => {
 
 === Handling exceptions
 
-You can set an `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` to receive any
+You can set an `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` to receive any
 exceptions that happen on the socket.
 
 === Event bus write handler
@@ -187,18 +187,18 @@ it writes them to itself.
 This enables you to write data to a socket which is potentially in a completely different verticle or even in a
 different Vert.x instance by sending the buffer to the address of that handler.
 
-The address of the handler is given by `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#writeHandlerID()[writeHandlerID]`
+The address of the handler is given by `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#writeHandlerID()[writeHandlerID]`
 
 === Local and remote addresses
 
-The local address of a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` can be retrieved using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#localAddress()[localAddress]`.
+The local address of a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` can be retrieved using `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#localAddress()[localAddress]`.
 
-The remote address, (i.e. the address of the other end of the connection) of a `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]`
-can be retrieved using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#remoteAddress()[remoteAddress]`.
+The remote address, (i.e. the address of the other end of the connection) of a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]`
+can be retrieved using `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#remoteAddress()[remoteAddress]`.
 
 === Sending files or resources from the classpath
 
-Files and classpath resources can be written to the socket directly using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#sendFile(java.lang.String)[sendFile]`. This can be a very
+Files and classpath resources can be written to the socket directly using `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#sendFile(java.lang.String)[sendFile]`. This can be a very
 efficient way to send files, as it can be handled by the OS kernel directly where supported by the operating system.
 
 Please see the chapter about <<classpath, serving files from the classpath>> for restrictions of the 
@@ -213,22 +213,22 @@ socket.sendFile("myfile.dat")
 
 === Streaming sockets
 
-Instances of `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` are also `link:../../scaladoc/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` and
-`link:../../scaladoc/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` instances so they can be used to pump data to or from other
+Instances of `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` are also `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` and
+`link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` instances so they can be used to pump data to or from other
 read and write streams.
 
 See the chapter on <<streams, streams and pumps>> for more information.
 
 === Upgrading connections to SSL/TLS
 
-A non SSL/TLS connection can be upgraded to SSL/TLS using `link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html#upgradeToSsl(io.vertx.core.Handler)[upgradeToSsl]`.
+A non SSL/TLS connection can be upgraded to SSL/TLS using `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#upgradeToSsl(io.vertx.core.Handler)[upgradeToSsl]`.
 
 The server or client must be configured for SSL/TLS for this to work correctly. Please see the <<ssl, chapter on SSL/TLS>>
 for more information.
 
 === Closing a TCP Server
 
-Call `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html#close()[close]` to close the server. Closing the server closes any open connections
+Call `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#close()[close]` to close the server. Closing the server closes any open connections
 and releases all server resources.
 
 The close is actually asynchronous and might not complete until some time after the call has returned.
@@ -346,9 +346,9 @@ var client = vertx.createNetClient(options)
 
 === Making connections
 
-To make a connection to a server you use `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html#connect(int,%20java.lang.String,%20io.vertx.core.Handler)[connect]`,
+To make a connection to a server you use `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html#connect(int,%20java.lang.String,%20io.vertx.core.Handler)[connect]`,
 specifying the port and host of the server and a handler that will be called with a result containing the
-`link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` when connection is successful or with a failure if connection failed.
+`link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` when connection is successful or with a failure if connection failed.
 
 [source,scala]
 ----
@@ -930,7 +930,7 @@ CAUTION: Do not use this in production settings, and note that the generated key
 It is very often the case that self-signed certificates are required, be it for unit / integration tests or for
 running a development version of an application.
 
-`link:../../scaladoc/io/vertx/scala/core/net/SelfSignedCertificate.html[SelfSignedCertificate]` can be used to provide self-signed PEM certificate helpers and
+`link:../../scaladocs/io/vertx/scala/core/net/SelfSignedCertificate.html[SelfSignedCertificate]` can be used to provide self-signed PEM certificate helpers and
 give `KeyCertOptions` and `TrustOptions` configurations:
 
 [source,scala]
@@ -1145,7 +1145,7 @@ ALPN version for the JVM running it:
 
 === Using a proxy for client connections
 
-The `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html[NetClient]` supports either a HTTP/1.x _CONNECT_, _SOCKS4a_ or _SOCKS5_ proxy.
+The `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]` supports either a HTTP/1.x _CONNECT_, _SOCKS4a_ or _SOCKS5_ proxy.
 
 The proxy can be configured in the `link:../dataobjects.html#NetClientOptions[NetClientOptions]` by setting a
 `link:../dataobjects.html#ProxyOptions[ProxyOptions]` object containing proxy type, hostname, port and optionally username and password.

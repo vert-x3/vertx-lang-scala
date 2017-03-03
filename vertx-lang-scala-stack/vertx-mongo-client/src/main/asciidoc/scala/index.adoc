@@ -59,7 +59,7 @@ var client = MongoClient.createShared(vertx, config)
 
 ----
 
-The first call to `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createShared]`
 will actually create the pool, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same pool, so the configuration won't be used.
@@ -79,7 +79,7 @@ var client = MongoClient.createShared(vertx, config, "MyPoolName")
 If different clients are created using the same Vert.x instance and specifying the same pool name, they will
 share the same pool.
 
-The first call to `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createShared]`
 will actually create the pool, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same pool, so the configuration won't be used.
@@ -92,7 +92,7 @@ interacting with different databases.
 In most cases you will want to share a pool between different client instances.
 However, it's possible you want to create a client instance that doesn't share its pool with any other client.
 
-In that case you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createNonShared]`.
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createNonShared]`.
 
 [source,scala]
 ----
@@ -102,17 +102,17 @@ var client = MongoClient.createNonShared(vertx, config)
 
 ----
 
-This is equivalent to calling `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[MongoClient.createShared]`
+This is equivalent to calling `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[MongoClient.createShared]`
 with a unique pool name each time.
 
 
 == Using the API
 
-The client API is represented by `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`.
+The client API is represented by `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`.
 
 === Saving documents
 
-To save a document you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#save(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[save]`.
+To save a document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#save(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[save]`.
 
 If the document has no `\_id` field, it is inserted, otherwise, it is _upserted_. Upserted means it is inserted
 if it doesn't already exist, otherwise it is updated.
@@ -168,7 +168,7 @@ mongoClient.saveFuture("books", document).onComplete{
 
 === Inserting documents
 
-To insert a document you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#insert(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[insert]`.
+To insert a document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#insert(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[insert]`.
 
 If the document is inserted and has no id, then the id field generated will be returned to the result handler.
 
@@ -219,7 +219,7 @@ mongoClient.insertFuture("books", document).onComplete{
 
 === Updating documents
 
-To update a documents you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#update(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[update]`.
+To update a documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#update(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[update]`.
 
 This updates one or multiple documents in a collection. The json object that is passed in the `update`
 parameter must contain http://docs.mongodb.org/manual/reference/operator/update-field/[Update Operators] and determines
@@ -252,7 +252,7 @@ mongoClient.updateFuture("books", query, update).onComplete{
 
 ----
 
-To specify if the update should upsert or update multiple documents, use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#updateWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.UpdateOptions,%20io.vertx.core.Handler)[updateWithOptions]`
+To specify if the update should upsert or update multiple documents, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.UpdateOptions,%20io.vertx.core.Handler)[updateWithOptions]`
 and pass in an instance of `link:../dataobjects.html#UpdateOptions[UpdateOptions]`.
 
 This has the following fields:
@@ -290,7 +290,7 @@ mongoClient.updateWithOptionsFuture("books", query, update, options).onComplete{
 
 === Replacing documents
 
-To replace documents you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#replace(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[replace]`.
+To replace documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#replace(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[replace]`.
 
 This is similar to the update operation, however it does not take any update operators like `update`.
 Instead it replaces the entire document with the one provided.
@@ -320,7 +320,7 @@ mongoClient.replaceFuture("books", query, replace).onComplete{
 
 === Finding documents
 
-To find documents you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]`.
+To find documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]`.
 
 The `query` parameter is used to match the documents in the collection.
 
@@ -380,7 +380,7 @@ mongoClient.findFuture("books", query).onComplete{
 
 The matching documents are returned as a list of json objects in the result handler.
 
-To specify things like what fields to return, how many results to return, etc use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions,%20io.vertx.core.Handler)[findWithOptions]`
+To specify things like what fields to return, how many results to return, etc use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions,%20io.vertx.core.Handler)[findWithOptions]`
 and pass in the an instance of `link:../dataobjects.html#FindOptions[FindOptions]`.
 
 This has the following fields:
@@ -421,13 +421,13 @@ The matching documents are returned unitary in the result handler.
 
 === Finding a single document
 
-To find a single document you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[findOne]`.
+To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[findOne]`.
 
-This works just like `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` but it returns just the first matching document.
+This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` but it returns just the first matching document.
 
 === Removing documents
 
-To remove documents use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocuments]`.
+To remove documents use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocuments]`.
 
 The `query` parameter is used to match the documents in the collection to determine which ones to remove.
 
@@ -454,13 +454,13 @@ mongoClient.removeFuture("books", query).onComplete{
 
 === Removing a single document
 
-To remove a single document you use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#removeDocument(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocument]`.
+To remove a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocument(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocument]`.
 
-This works just like `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocuments]` but it removes just the first matching document.
+This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[removeDocuments]` but it removes just the first matching document.
 
 === Counting documents
 
-To count documents use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#count(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[count]`.
+To count documents use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#count(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[count]`.
 
 Here's an example that counts the number of Tolkien books. The number is passed to the result handler.
 
@@ -487,7 +487,7 @@ mongoClient.countFuture("books", query).onComplete{
 
 All MongoDB documents are stored in collections.
 
-To get a list of all collections you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#getCollections(io.vertx.core.Handler)[getCollections]`
+To get a list of all collections you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#getCollections(io.vertx.core.Handler)[getCollections]`
 
 [source,scala]
 ----
@@ -506,7 +506,7 @@ mongoClient.getCollectionsFuture().onComplete{
 
 ----
 
-To create a new collection you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#createCollection(java.lang.String,%20io.vertx.core.Handler)[createCollection]`
+To create a new collection you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createCollection(java.lang.String,%20io.vertx.core.Handler)[createCollection]`
 
 [source,scala]
 ----
@@ -525,7 +525,7 @@ mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
 
 ----
 
-To drop a collection you can use `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#dropCollection(java.lang.String,%20io.vertx.core.Handler)[dropCollection]`
+To drop a collection you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#dropCollection(java.lang.String,%20io.vertx.core.Handler)[dropCollection]`
 
 NOTE: Dropping a collection will delete all documents within it!
 
@@ -549,7 +549,7 @@ mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
 
 === Running other MongoDB commands
 
-You can run arbitrary MongoDB commands with `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html#runCommand(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[runCommand]`.
+You can run arbitrary MongoDB commands with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#runCommand(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[runCommand]`.
 
 Commands can be used to run more advanced mongoDB features, such as using MapReduce.
 For more information see the mongo docs for supported http://docs.mongodb.org/manual/reference/command[Commands].

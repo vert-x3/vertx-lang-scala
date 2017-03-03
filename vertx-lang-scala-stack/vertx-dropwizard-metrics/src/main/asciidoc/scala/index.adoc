@@ -5,9 +5,9 @@ https://github.com/dropwizard/metrics[Dropwizard metrics] library.
 
 == Features
 
-A fairly simple API to retrieve metrics via the `link:../../scaladoc/io/vertx/scala/core/metrics/Measured.html[Measured]`
-interface which is implemented by various Vert.x components like `link:../../scaladoc/io/vertx/scala/core/http/HttpServer.html[HttpServer]`,
-`link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]`, and even `link:../../scaladoc/io/vertx/scala/core/Vertx.html[Vertx]` itself.
+A fairly simple API to retrieve metrics via the `link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]`
+interface which is implemented by various Vert.x components like `link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html[HttpServer]`,
+`link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]`, and even `link:../../scaladocs/io/vertx/scala/core/Vertx.html[Vertx]` itself.
 
 Confiugrable JMX reporting based on Dropwizard implementation, exposing Vert.x as JMX MBeans.
 
@@ -94,7 +94,7 @@ option allows to reconfigure the metrics from a property file.
 While Vert.x core defines an SPI for reporting metrics (implemented for instance in this project), it does not define
 an API for retrieving metrics (because some metrics collectors just do reporting and nothing more).
 
-The `link:../../scaladoc/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` provides an API in front of the Dropwizard Registry to get
+The `link:../../scaladocs/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` provides an API in front of the Dropwizard Registry to get
 metrics data snapshots.
 
 === Naming
@@ -145,8 +145,8 @@ var metricsOptions = DropwizardMetricsOptions()
 
 === Retrieving metrics
 
-Once enabled, the `link:../../scaladoc/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` allows to retrieve metrics snapshots from any
-`link:../../scaladoc/io/vertx/scala/core/metrics/Measured.html[Measured]` object which provides a map of the metric name to the data,
+Once enabled, the `link:../../scaladocs/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` allows to retrieve metrics snapshots from any
+`link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]` object which provides a map of the metric name to the data,
 represented by a `JsonObject`. So for example if we were to print out all metrics
 for a particular Vert.x instance:
 [source,scala]
@@ -163,7 +163,7 @@ consult the implementation documentation like https://github.com/vert-x3/vertx-m
 Often it is desired that you only want to capture specific metrics for a particular component, like an http server
 without having to know the details of the naming scheme of every metric (something which is left to the implementers of the SPI).
 
-Since `link:../../scaladoc/io/vertx/scala/core/http/HttpServer.html[HttpServer]` implements `link:../../scaladoc/io/vertx/scala/core/metrics/Measured.html[Measured]`, you can easily grab all metrics
+Since `link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html[HttpServer]` implements `link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]`, you can easily grab all metrics
 that are specific for that particular http server.
 
 [source,scala]
@@ -522,7 +522,7 @@ Base name: `vertx.pool.<type>.<name>` where `type` is the type of the pool (e.g 
 `name` is the name of the pool (e.g `vert.x-worker-thread`).
 
 Pools of type _worker_ are blocking worker pools. Vert.x exposes its worker as _vert.x-worker-thread_ and
-_vert.x-internal-blocking_. Named worker executor created with `link:../../scaladoc/io/vertx/scala/core/WorkerExecutor.html[WorkerExecutor]` are exposed.
+_vert.x-internal-blocking_. Named worker executor created with `link:../../scaladocs/io/vertx/scala/core/WorkerExecutor.html[WorkerExecutor]` are exposed.
 
 Datasource created with Vert.x JDBC clients are exposed as _datasource_.
 

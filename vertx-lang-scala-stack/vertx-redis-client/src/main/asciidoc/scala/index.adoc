@@ -76,8 +76,8 @@ password and/or database id to the config object, the properties names are:
 * `auth`
 * `select`
 
-If you do not do this and manually call the `link:../../scaladoc/io/vertx/scala/redis/RedisClient.html#auth(java.lang.String,%20io.vertx.core.Handler)[auth]`
-or `link:../../scaladoc/io/vertx/scala/redis/RedisClient.html#select(int,%20io.vertx.core.Handler)[select]` then the client will not know how to recover
+If you do not do this and manually call the `link:../../scaladocs/io/vertx/scala/redis/RedisClient.html#auth(java.lang.String,%20io.vertx.core.Handler)[auth]`
+or `link:../../scaladocs/io/vertx/scala/redis/RedisClient.html#select(int,%20io.vertx.core.Handler)[select]` then the client will not know how to recover
 the connection in case of socket error.
 
 == Running commands

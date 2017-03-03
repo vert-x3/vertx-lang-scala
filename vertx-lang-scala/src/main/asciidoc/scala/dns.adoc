@@ -180,10 +180,10 @@ client.resolveMXFuture("vertx.io").onComplete{
 
 ----
 
-Be aware that the List will contain the `link:../../scaladoc/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` sorted by the priority of them, which
+Be aware that the List will contain the `link:../../scaladocs/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` sorted by the priority of them, which
 means MX records with smaller priority coming first in the List.
 
-The `link:../../scaladoc/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` allows you to access the priority and the name of the MX record by offer methods for it like:
+The `link:../../scaladocs/io/vertx/scala/core/dns/MxRecord.html[MxRecord]` allows you to access the priority and the name of the MX record by offer methods for it like:
 
 [source,scala]
 ----
@@ -269,7 +269,7 @@ client.resolveSRVFuture("vertx.io").onComplete{
 Be aware that the List will contain the SrvRecords sorted by the priority of them, which means SrvRecords
 with smaller priority coming first in the List.
 
-The `link:../../scaladoc/io/vertx/scala/core/dns/SrvRecord.html[SrvRecord]` allows you to access all informations contained in the SRV record itself:
+The `link:../../scaladocs/io/vertx/scala/core/dns/SrvRecord.html[SrvRecord]` allows you to access all informations contained in the SRV record itself:
 
 [source,scala]
 ----

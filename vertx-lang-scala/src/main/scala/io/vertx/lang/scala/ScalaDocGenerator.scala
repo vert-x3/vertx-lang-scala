@@ -84,7 +84,7 @@ class ScalaDocGenerator extends DocGenerator {
     }
     if (`type`.getKind eq ClassKind.API) {
       val api: ApiTypeInfo = `type`.getRaw.asInstanceOf[ApiTypeInfo]
-      return "../../scaladoc/" + api.translateName("scala").replace('.', '/') + ".html"
+      return "../../scaladocs/" + api.translateName("scala").replace('.', '/') + ".html"
     }
     null
   }

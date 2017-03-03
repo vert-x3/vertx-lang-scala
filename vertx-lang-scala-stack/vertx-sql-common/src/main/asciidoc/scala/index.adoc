@@ -27,7 +27,7 @@ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 
 == The SQL Connection
 
-A connection to the database is represented by `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html[SQLConnection]`.
+A connection to the database is represented by `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html[SQLConnection]`.
 
 === Auto-commit
 
@@ -35,7 +35,7 @@ When you obtain a connection auto commit is set to `true`. This means that each 
 execute in its own transaction.
 
 If you wish to perform multiple operations in a single transaction you should set auto commit to false with
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.
 
 When the operation is complete, the handler will be called:
 
@@ -46,7 +46,7 @@ When the operation is complete, the handler will be called:
 
 === Executing queries
 
-To execute a query use `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#query(java.lang.String,%20io.vertx.core.Handler)[query]`
+To execute a query use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#query(java.lang.String,%20io.vertx.core.Handler)[query]`
 
 The query string is raw SQL that is passed through without changes to the actual database.
 
@@ -84,7 +84,7 @@ Here's an example of iterating through the results as Json object instances:
 === Prepared statement queries
 
 To execute a prepared statement query you can use
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#queryWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[queryWithParams]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#queryWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[queryWithParams]`.
 
 This takes the query, containing the parameter place holders, and a `JsonArray` or parameter
 values.
@@ -96,7 +96,7 @@ values.
 
 === Executing INSERT, UPDATE or DELETE
 
-To execute an operation which updates the database use `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#update(java.lang.String,%20io.vertx.core.Handler)[update]`.
+To execute an operation which updates the database use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#update(java.lang.String,%20io.vertx.core.Handler)[update]`.
 
 The update string is raw SQL that is passed through without changes to the actual database.
 
@@ -114,7 +114,7 @@ if the update generated keys, they are available with `link:../dataobjects.html#
 === Prepared statement updates
 
 To execute a prepared statement update you can use
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#updateWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[updateWithParams]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#updateWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[updateWithParams]`.
 
 This takes the update, containing the parameter place holders, and a `JsonArray` or parameter
 values.
@@ -127,7 +127,7 @@ values.
 === Callable statements
 
 To execute a callable statement (either SQL functions or SQL procedures) you can use
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#callWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[callWithParams]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#callWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[callWithParams]`.
 
 This takes the callable statement using the standard JDBC format `{ call func_proc_name() }`, optionally including
 parameter place holders e.g.: `{ call func_proc_name(?, ?) }`, a `JsonArray` containing the
@@ -175,9 +175,9 @@ The registered `OUT` parameters will be available as an array in the result set 
 
 The SQL common interface also defines how to execute batch operations. There are 3 types of batch operations:
 
-* Batched statements `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#batch(java.util.List,%20io.vertx.core.Handler)[batch]`
-* Batched prepared statements `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#batchWithParams(java.lang.String,%20java.util.List,%20io.vertx.core.Handler)[batchWithParams]`
-* Batched callable statements `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#batchCallableWithParams(java.lang.String,%20java.util.List,%20java.util.List,%20io.vertx.core.Handler)[batchCallableWithParams]`
+* Batched statements `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#batch(java.util.List,%20io.vertx.core.Handler)[batch]`
+* Batched prepared statements `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#batchWithParams(java.lang.String,%20java.util.List,%20io.vertx.core.Handler)[batchWithParams]`
+* Batched callable statements `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#batchCallableWithParams(java.lang.String,%20java.util.List,%20java.util.List,%20io.vertx.core.Handler)[batchCallableWithParams]`
 
 A batches statement will exeucte a list of sql statements as for example:
 
@@ -196,7 +196,7 @@ While a prepared or callable statement batch will reuse the sql statement and ta
 === Executing other operations
 
 To execute any other database operation, e.g. a `CREATE TABLE` you can use
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#execute(java.lang.String,%20io.vertx.core.Handler)[execute]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#execute(java.lang.String,%20io.vertx.core.Handler)[execute]`.
 
 The string is passed through without changes to the actual database. The handler is called when the operation
 is complete
@@ -238,11 +238,11 @@ data the stream handler will receive the new data, otherwise the end handler is 
 
 === Using transactions
 
-To use transactions first set auto-commit to false with `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.
+To use transactions first set auto-commit to false with `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.
 
 You then do your transactional operations and when you want to commit or rollback use
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#commit(io.vertx.core.Handler)[commit]` or
-`link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#rollback(io.vertx.core.Handler)[rollback]`.
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#commit(io.vertx.core.Handler)[commit]` or
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#rollback(io.vertx.core.Handler)[rollback]`.
 
 Once the commit/rollback is complete the handler will be called and the next transaction will be automatically started.
 
@@ -253,4 +253,4 @@ Once the commit/rollback is complete the handler will be called and the next tra
 
 === Closing connections
 
-When you've done with the connection you should return it to the pool with `link:../../scaladoc/io/vertx/scala/ext/sql/SQLConnection.html#close(io.vertx.core.Handler)[close]`.
+When you've done with the connection you should return it to the pool with `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#close(io.vertx.core.Handler)[close]`.

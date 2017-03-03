@@ -247,22 +247,22 @@ token.revokeFuture("access_token").onComplete{
 
 For convenience there are several helpers to assist your with your configuration. Currently we provide:
 
-* Azure Active Directory `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/AzureADAuth.html[AzureADAuth]`
-* Box.com `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/BoxAuth.html[BoxAuth]`
-* Dropbox `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/DropboxAuth.html[DropboxAuth]`
-* Facebook `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/FacebookAuth.html[FacebookAuth]`
-* Foursquare `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/FoursquareAuth.html[FoursquareAuth]`
-* Github `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/GithubAuth.html[GithubAuth]`
-* Google `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/GoogleAuth.html[GoogleAuth]`
-* Instagram `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/InstagramAuth.html[InstagramAuth]`
-* Keycloak `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/KeycloakAuth.html[KeycloakAuth]`
-* LinkedIn `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/LinkedInAuth.html[LinkedInAuth]`
-* Mailchimp `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/MailchimpAuth.html[MailchimpAuth]`
-* Salesforce `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/SalesforceAuth.html[SalesforceAuth]`
-* Shopify `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/ShopifyAuth.html[ShopifyAuth]`
-* Soundcloud `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/SoundcloudAuth.html[SoundcloudAuth]`
-* Stripe `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/StripeAuth.html[StripeAuth]`
-* Twitter `link:../../scaladoc/io/vertx/scala/ext/auth/oauth2/providers/TwitterAuth.html[TwitterAuth]`
+* Azure Active Directory `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/AzureADAuth.html[AzureADAuth]`
+* Box.com `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/BoxAuth.html[BoxAuth]`
+* Dropbox `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/DropboxAuth.html[DropboxAuth]`
+* Facebook `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/FacebookAuth.html[FacebookAuth]`
+* Foursquare `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/FoursquareAuth.html[FoursquareAuth]`
+* Github `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/GithubAuth.html[GithubAuth]`
+* Google `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/GoogleAuth.html[GoogleAuth]`
+* Instagram `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/InstagramAuth.html[InstagramAuth]`
+* Keycloak `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/KeycloakAuth.html[KeycloakAuth]`
+* LinkedIn `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/LinkedInAuth.html[LinkedInAuth]`
+* Mailchimp `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/MailchimpAuth.html[MailchimpAuth]`
+* Salesforce `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/SalesforceAuth.html[SalesforceAuth]`
+* Shopify `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/ShopifyAuth.html[ShopifyAuth]`
+* Soundcloud `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/SoundcloudAuth.html[SoundcloudAuth]`
+* Stripe `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/StripeAuth.html[StripeAuth]`
+* Twitter `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/providers/TwitterAuth.html[TwitterAuth]`
 
 ==== JBoss Keycloak
 
