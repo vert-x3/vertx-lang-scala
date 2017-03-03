@@ -39,6 +39,8 @@
             </goals>
             <configuration>
               <tasks>
+
+                <!-- Asciidoc -->
                 <copy todir="target/docs" >
                   <fileset dir="../vertx-lang-scala">
                     <include name="src/main/asciidoc/scala/**"/>
@@ -51,12 +53,22 @@
                   </fileset>
                   <mapper type="regexp" from="^vertx-(.*)/src/main/asciidoc/scala/(.*)" to="vertx-\1/scala/\2"/>
                 </copy>
+
+                <!-- Scaladocs -->
+                <copy todir="target/scaladocs" >
+                  <fileset dir="../vertx-lang-scala">
+                    <include name="target/docs/vertx-core/scala/scaladocs/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>
+                </copy>
                 <copy todir="target/scaladocs" >
                   <fileset dir="../vertx-lang-scala-stack">
-                    <include name="vertx-*/target/docs/vertx-core/scala/scaladoc/scaladocs/**"/>
+                    <include name="vertx-*/target/docs/vertx-core/scala/scaladocs/**"/>
                   </fileset>
-                  <mapper type="regexp" from="^vertx-.*/target/docs/vertx-core/scala/scaladoc/scaladocs/(.*)" to="\1"/>
+                  <mapper type="regexp" from="^vertx-.*/target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>
                 </copy>
+
+                <!-- Sources -->
                 <copy todir="target/sources" >
                   <fileset dir="../vertx-lang-scala">
                     <include name="src/main/scala/**"/>
