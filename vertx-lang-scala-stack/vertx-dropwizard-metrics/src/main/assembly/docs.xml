@@ -25,7 +25,7 @@
             <outputDirectory>/</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${project.build.directory}/docs/vertx-core/scala/scaladoc/scaladocs</directory>
+            <directory>${project.build.directory}/docs/vertx-core/scala/scaladocs</directory>
             <outputDirectory>/scala/scaladocs</outputDirectory>
         </fileSet>
     </fileSets>

@@ -41,7 +41,7 @@ Let's discuss the different concepts and features in core.
 
 NOTE: Much of this is Java specific - need someway of swapping in language specific parts
 
-You can't do much in Vert.x-land unless you can commune with a `link:../../scaladoc/io/vertx/scala/core/Vertx.html[Vertx]` object!
+You can't do much in Vert.x-land unless you can commune with a `link:../../scaladocs/io/vertx/scala/core/Vertx.html[Vertx]` object!
 
 It's the control centre of Vert.x and is how you do pretty much everything, including creating clients and servers,
 getting a reference to the event bus, setting timers, as well as many other things.
@@ -275,7 +275,7 @@ blocking APIs safely within a Vert.x application.
 As discussed before, you can't call blocking operations directly from an event loop, as that would prevent it
 from doing any other useful work. So how can you do this?
 
-It's done by calling `link:../../scaladoc/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` specifying both the blocking code to execute and a
+It's done by calling `link:../../scaladocs/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` specifying both the blocking code to execute and a
 result handler to be called back asynchronous when the blocking code has been executed.
 
 [source,scala]
@@ -294,7 +294,7 @@ vertx.executeBlockingFuture((future: io.vertx.scala.core.Future<java.lang.Object
 By default, if executeBlocking is called several times from the same context (e.g. the same verticle instance) then
 the different executeBlocking are executed _serially_ (i.e. one after another).
 
-If you don't care about ordering you can call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]`
+If you don't care about ordering you can call `link:../../scaladocs/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]`
 specifying `false` as the argument to `ordered`. In this case any executeBlocking may be executed in parallel
 on the worker pool.
 
@@ -353,13 +353,13 @@ NOTE: the configuration is set when the worker pool is created
 
 == Async coordination
 
-Coordination of multiple asynchronous results can be achieved with Vert.x `link:../../scaladoc/io/vertx/scala/core/Future.html[futures]`. It
+Coordination of multiple asynchronous results can be achieved with Vert.x `link:../../scaladocs/io/vertx/scala/core/Future.html[futures]`. It
 supports concurrent composition (run several async operations in parallel) and sequential composition
 (chain async operations).
 
 === Concurrent composition
 
-`link:../../scaladoc/io/vertx/scala/core/CompositeFuture.html#all(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.all]` takes several futures arguments (up to 6) and returns a future that is
+`link:../../scaladocs/io/vertx/scala/core/CompositeFuture.html#all(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.all]` takes several futures arguments (up to 6) and returns a future that is
 _succeeded_ when all the futures are and _failed_ when at least one of the futures is failed:
 
 [source,scala]
@@ -395,7 +395,7 @@ CompositeFuture.all(List(future1, future2, future3))
 ----
 
 While the `all` composition _waits_ until all futures are successful (or one fails), the `any` composition
-_waits_ for the first succeeded future. `link:../../scaladoc/io/vertx/scala/core/CompositeFuture.html#any(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.any]` takes several futures
+_waits_ for the first succeeded future. `link:../../scaladocs/io/vertx/scala/core/CompositeFuture.html#any(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.any]` takes several futures
 arguments (up to 6) and returns a future that is succeeded when one of the futures is, and failed when
 all the futures are failed:
 
@@ -421,7 +421,7 @@ CompositeFuture.any(List(f1, f2, f3))
 ----
 
 The `join` composition _waits_ until all futures are completed, either with a success or a failure.
-`link:../../scaladoc/io/vertx/scala/core/CompositeFuture.html#join(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.join]` takes several futures arguments (up to 6) and returns a future that is
+`link:../../scaladocs/io/vertx/scala/core/CompositeFuture.html#join(io.vertx.core.Future,%20io.vertx.core.Future)[CompositeFuture.join]` takes several futures arguments (up to 6) and returns a future that is
 succeeded when all the futures are succeeded, and failed when all the futures are completed and at least one of
 them is failed:
 
@@ -448,7 +448,7 @@ CompositeFuture.join(List(future1, future2, future3))
 
 === Sequential composition
 
-While `all` and `any` are implementing concurrent composition, `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]` can be used
+While `all` and `any` are implementing concurrent composition, `link:../../scaladocs/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]` can be used
 for chaining futures (so sequential composition).
 
 [source,scala]
@@ -483,15 +483,15 @@ of the steps fails, the final future is failed.
 
 This example uses:
 
-* `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(java.util.function.Function)[compose]`: when the current future completes,
+* `link:../../scaladocs/io/vertx/scala/core/Future.html#compose(java.util.function.Function)[compose]`: when the current future completes,
 run the given function, that returns a future. When this returned future completes, it completes the composition.
-* `link:../../scaladoc/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]`: when the current future
+* `link:../../scaladocs/io/vertx/scala/core/Future.html#compose(io.vertx.core.Handler,%20io.vertx.core.Future)[compose]`: when the current future
 completes, run the given handler that completes the given `future` (next).
 
 In this second case, the `Handler` should complete the `next` future to report its success or
 failure.
 
-You can use `link:../../scaladoc/io/vertx/scala/core/Future.html#completer()[completer]` that completes a future with the operation result or
+You can use `link:../../scaladocs/io/vertx/scala/core/Future.html#completer()[completer]` that completes a future with the operation result or
 failure. It avoids having to write the _traditional_: `if success then complete the future else fail the future`.
 
 == Verticles
@@ -578,7 +578,7 @@ using standard Java techniques for multi-threaded programming.
 
 === Deploying verticles programmatically
 
-You can deploy a verticle using one of the `link:../../scaladoc/io/vertx/scala/core/Vertx.html#deployVerticle(io.vertx.core.Verticle)[deployVerticle]` method, specifying a verticle
+You can deploy a verticle using one of the `link:../../scaladocs/io/vertx/scala/core/Vertx.html#deployVerticle(io.vertx.core.Verticle)[deployVerticle]` method, specifying a verticle
 name or you can pass in a verticle instance you have already created yourself.
 
 NOTE: Deploying Verticle *instances* is Java only.
@@ -641,8 +641,8 @@ and instantiate that.
 
 Most Verticle factories are loaded from the classpath and registered at Vert.x startup.
 
-You can also programmatically register and unregister verticle factories using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#registerVerticleFactory(io.vertx.core.spi.VerticleFactory)[registerVerticleFactory]`
-and `link:../../scaladoc/io/vertx/scala/core/Vertx.html#unregisterVerticleFactory(io.vertx.core.spi.VerticleFactory)[unregisterVerticleFactory]` if you wish.
+You can also programmatically register and unregister verticle factories using `link:../../scaladocs/io/vertx/scala/core/Vertx.html#registerVerticleFactory(io.vertx.core.spi.VerticleFactory)[registerVerticleFactory]`
+and `link:../../scaladocs/io/vertx/scala/core/Vertx.html#unregisterVerticleFactory(io.vertx.core.spi.VerticleFactory)[unregisterVerticleFactory]` if you wish.
 
 === Waiting for deployment to complete
 
@@ -669,7 +669,7 @@ This deployment ID can be used later if you want to undeploy the deployment.
 
 === Undeploying verticle deployments
 
-Deployments can be undeployed with `link:../../scaladoc/io/vertx/scala/core/Vertx.html#undeploy(java.lang.String)[undeploy]`.
+Deployments can be undeployed with `link:../../scaladocs/io/vertx/scala/core/Vertx.html#undeploy(java.lang.String)[undeploy]`.
 
 Un-deployment is itself asynchronous so if you want to be notified when un-deployment is complete you can deploy specifying a completion handler:
 
@@ -802,7 +802,7 @@ type `vertx` at the command line.
 
 Threads maintained by Vert.x instances are not daemon threads so they will prevent the JVM from exiting.
 
-If you are embedding Vert.x and you have finished with it, you can call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#close()[close]` to close it
+If you are embedding Vert.x and you have finished with it, you can call `link:../../scaladocs/io/vertx/scala/core/Vertx.html#close()[close]` to close it
 down.
 
 This will shut-down all internal thread pools and close other resources, and will allow the JVM to exit.
@@ -815,7 +815,7 @@ When Vert.x provides an event to a handler or calls the start or stop methods of
 on that exact same event loop thread. In the case of worker verticles and running inline blocking code a
 worker context will be associated with the execution which will use a thread from the worker thread pool.
 
-To retrieve the context, use the `link:../../scaladoc/io/vertx/scala/core/Vertx.html#getOrCreateContext()[getOrCreateContext]` method:
+To retrieve the context, use the `link:../../scaladocs/io/vertx/scala/core/Vertx.html#getOrCreateContext()[getOrCreateContext]` method:
 
 [source, scala]
 ----
@@ -854,7 +854,7 @@ vertx.getOrCreateContext().runOnContext((v: java.lang.Void) => {
 
 When several handlers run in the same context, they may want to share data. The context object offers methods to
 store and retrieve data shared in the context. For instance, it lets you pass data to some action run with
-`link:../../scaladoc/io/vertx/scala/core/Context.html#runOnContext(io.vertx.core.Handler)[runOnContext]`:
+`link:../../scaladocs/io/vertx/scala/core/Context.html#runOnContext(io.vertx.core.Handler)[runOnContext]`:
 
 [source, scala]
 ----
@@ -866,7 +866,7 @@ context.runOnContext((v: java.lang.Void) => {
 
 ----
 
-The context object also let you access verticle configuration using the `link:../../scaladoc/io/vertx/scala/core/Context.html#config()[config]`
+The context object also let you access verticle configuration using the `link:../../scaladocs/io/vertx/scala/core/Context.html#config()[config]`
 method. Check the <<Passing configuration to a verticle>> section for more details about this configuration.
 
 === Executing periodic and delayed actions
@@ -881,7 +881,7 @@ Instead you use Vert.x timers. Timers can be *one-shot* or *periodic*. We'll dis
 
 A one shot timer calls an event handler after a certain delay, expressed in milliseconds.
 
-To set a timer to fire once you use `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` method passing in the delay and a handler
+To set a timer to fire once you use `link:../../scaladocs/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` method passing in the delay and a handler
 
 [source,scala]
 ----
@@ -897,7 +897,7 @@ The return value is a unique timer id which can later be used to cancel the time
 
 ==== Periodic Timers
 
-You can also set a timer to fire periodically by using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setPeriodic(long,%20io.vertx.core.Handler)[setPeriodic]`.
+You can also set a timer to fire periodically by using `link:../../scaladocs/io/vertx/scala/core/Vertx.html#setPeriodic(long,%20io.vertx.core.Handler)[setPeriodic]`.
 
 There will be an initial delay equal to the period.
 
@@ -908,7 +908,7 @@ The argument passed into the timer event handler is also the unique timer id:
 Keep in mind that the timer will fire on a periodic basis. If your periodic treatment takes a long amount of time to proceed,
 your timer events could run continuously or even worse : stack up.
 
-In this case, you should consider using `link:../../scaladoc/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` instead. Once your treatment has
+In this case, you should consider using `link:../../scaladocs/io/vertx/scala/core/Vertx.html#setTimer(long,%20io.vertx.core.Handler)[setTimer]` instead. Once your treatment has
 finished, you can set the next timer.
 
 [source,scala]
@@ -923,7 +923,7 @@ println("First this is printed")
 
 ==== Cancelling timers
 
-To cancel a periodic timer, call `link:../../scaladoc/io/vertx/scala/core/Vertx.html#cancelTimer(long)[cancelTimer]` specifying the timer id. For example:
+To cancel a periodic timer, call `link:../../scaladocs/io/vertx/scala/core/Vertx.html#cancelTimer(long)[cancelTimer]` specifying the timer id. For example:
 
 [source,scala]
 ----
@@ -938,7 +938,7 @@ when the verticle is undeployed.
 
 === Verticle worker pool
 
-Verticle use the Vert.x worker pool for executing blocking actions, i.e `link:../../scaladoc/io/vertx/scala/core/Context.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` or
+Verticle use the Vert.x worker pool for executing blocking actions, i.e `link:../../scaladocs/io/vertx/scala/core/Context.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` or
 worker verticle.
 
 A different worker pool can be specified in deployment options:
@@ -980,8 +980,8 @@ include::parsetools.adoc[]
 Most Vert.x objects are safe to access from different threads. _However_ performance is optimised when they are
 accessed from the same context they were created from.
 
-For example if you have deployed a verticle which creates a `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]` which provides
-`link:../../scaladoc/io/vertx/scala/core/net/NetSocket.html[NetSocket]` instances in it's handler, then it's best to always access that socket instance
+For example if you have deployed a verticle which creates a `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]` which provides
+`link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` instances in it's handler, then it's best to always access that socket instance
 from the event loop of the verticle.
 
 If you stick to the standard Vert.x verticle deployment model and avoid sharing objects between verticles then this
@@ -1432,7 +1432,7 @@ An host name resolves to an IP address using:
 By default it will use the list of the system DNS server addresses from the environment, if that list cannot be
 retrieved it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
 
-DNS servers can be also configured when creating a `link:../../scaladoc/io/vertx/scala/core/Vertx.html[Vertx]` instance:
+DNS servers can be also configured when creating a `link:../../scaladocs/io/vertx/scala/core/Vertx.html[Vertx]` instance:
 
 [source,scala]
 ----

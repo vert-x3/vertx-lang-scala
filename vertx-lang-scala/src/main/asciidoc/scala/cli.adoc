@@ -46,12 +46,12 @@ var cli = CLI.create("copy").setSummary("A command line interface to copy files.
 
 ----
 
-As you can see, you can create a new `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` using
-`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#create(java.lang.String)[CLI.create]`. The passed string is the name of the CLI. Once created you
+As you can see, you can create a new `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html[CLI]` using
+`link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#create(java.lang.String)[CLI.create]`. The passed string is the name of the CLI. Once created you
 can set the summary and description. The summary is intended to be short (one line), while the description can
 contain more details. Each option and argument are also added on the `CLI` object using the
-`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#addArgument(io.vertx.core.cli.Argument)[addArgument]` and
-`link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#addOption(io.vertx.core.cli.Option)[addOption]` methods.
+`link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#addArgument(io.vertx.core.cli.Argument)[addArgument]` and
+`link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#addOption(io.vertx.core.cli.Option)[addOption]` methods.
 
 ==== Options
 
@@ -176,7 +176,7 @@ Arguments can also be instantiated from their JSON form.
 
 ==== Usage generation
 
-Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can generate the _usage_ message:
+Once your `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can generate the _usage_ message:
 
 [source,scala]
 ----
@@ -215,7 +215,7 @@ If you need to tune the usage message, check the `UsageMessageFormatter` class.
 
 === Parsing Stage
 
-Once your `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can parse the user command line to evaluate
+Once your `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html[CLI]` instance is configured, you can parse the user command line to evaluate
 each option and argument:
 
 [source,scala]
@@ -224,19 +224,19 @@ var commandLine = cli.parse(userCommandLineArguments)
 
 ----
 
-The `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]` method returns a `link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]`
+The `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]` method returns a `link:../../scaladocs/io/vertx/scala/core/cli/CommandLine.html[CommandLine]`
 object containing the values. By default, it validates the user command line and checks that each mandatory options
 and arguments have been set as well as the number of values received by each option. You can disable the
-validation by passing `false` as second parameter of `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List,%20boolean)[parse]`.
+validation by passing `false` as second parameter of `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#parse(java.util.List,%20boolean)[parse]`.
 This is useful if you want to check an argument or option is present even if the parsed command line is invalid.
 
 You can check whether or not the
-`link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` is valid using `link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html#isValid()[isValid]`.
+`link:../../scaladocs/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` is valid using `link:../../scaladocs/io/vertx/scala/core/cli/CommandLine.html#isValid()[isValid]`.
 
 === Query / Interrogation Stage
 
 Once parsed, you can retrieve the values of the options and arguments from the
-`link:../../scaladoc/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` object returned by the `link:../../scaladoc/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]`
+`link:../../scaladocs/io/vertx/scala/core/cli/CommandLine.html[CommandLine]` object returned by the `link:../../scaladocs/io/vertx/scala/core/cli/CLI.html#parse(java.util.List)[parse]`
 method:
 
 [source,scala]

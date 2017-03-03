@@ -8,7 +8,7 @@ val config = Json.obj(("name","tim"), ("directory","/blah"))
 vertx.deployVerticle(classOf[DemoVerticle].getName, DeploymentOptions().setConfig(config))
 ----
 
-This configuration is then available via the `link:../../scaladoc/io/vertx/scala/core/Context.html[Context]`, The configuration is returned as a Map
+This configuration is then available via the `link:../../scaladocs/io/vertx/scala/core/Context.html[Context]`, The configuration is returned as a Map
 object so you can retrieve data as follows:
 
 [source,scala]

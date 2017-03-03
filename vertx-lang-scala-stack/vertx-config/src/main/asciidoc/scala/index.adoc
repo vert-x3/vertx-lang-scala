@@ -45,7 +45,7 @@ _dependencies_ section of your build descriptor:
 compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
-Once done, you first need to instantiate the `link:../../scaladoc/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`:
+Once done, you first need to instantiate the `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`:
 
 [source]
 ----
@@ -310,14 +310,14 @@ var last = retriever.getCachedConfig()
 
 == Reading configuration as a stream
 
-The `link:../../scaladoc/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` provide a way to access the stream of configuration.
-It's a `link:../../scaladoc/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` of `JsonObject`. By registering the right
+The `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` provide a way to access the stream of configuration.
+It's a `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` of `JsonObject`. By registering the right
 set of handlers you are notified:
 
 * when a new configuration is retrieved
 * when an error occur while retrieving a configuration
 * when the configuration retriever is closed (the
-`link:../../scaladoc/io/vertx/scala/core/streams/ReadStream.html#endHandler(io.vertx.core.Handler)[endHandler]` is called).
+`link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html#endHandler(io.vertx.core.Handler)[endHandler]` is called).
 
 [source, scala]
 ----
@@ -340,8 +340,8 @@ retriever.configStream().endHandler((v: java.lang.Void) => {
 
 == Retrieving the configuration as a Future
 
-The `link:../../scaladoc/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` provide a way to retrieve the configuration as a
-`link:../../scaladoc/io/vertx/scala/core/Future.html[Future]`:
+The `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` provide a way to retrieve the configuration as a
+`link:../../scaladocs/io/vertx/scala/core/Future.html[Future]`:
 
 [source, scala]
 ----

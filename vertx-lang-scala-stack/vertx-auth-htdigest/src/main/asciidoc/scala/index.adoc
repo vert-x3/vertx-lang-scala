@@ -1,6 +1,6 @@
 == .htdigest Auth Provider implementation
 
-We provide an implementation of `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the .digest file format
+We provide an implementation of `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the .digest file format
 to perform authentication.
 
 The provider will not watch for updates to the file after loading. If you need dynamic
@@ -29,7 +29,7 @@ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 
 To create an instance you first need an .htdigest file. This file is created using the apache htdigest tool.
 
-Once you've got one of these you can create a `link:../../scaladoc/io/vertx/scala/ext/auth/htdigest/HtdigestAuth.html[HtdigestAuth]` instance as follows:
+Once you've got one of these you can create a `link:../../scaladocs/io/vertx/scala/ext/auth/htdigest/HtdigestAuth.html[HtdigestAuth]` instance as follows:
 
 [source,scala]
 ----
@@ -37,7 +37,7 @@ var authProvider = HtdigestAuth.create(vertx, ".htdigest")
 
 ----
 
-Once you've got your instance you can authenticate with it just like any `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
+Once you've got your instance you can authenticate with it just like any `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
 
 The out of the box config assumes the usage of the file .htdigest in the root of the project.
 

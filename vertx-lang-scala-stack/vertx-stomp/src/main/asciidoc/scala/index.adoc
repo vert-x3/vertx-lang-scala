@@ -49,7 +49,7 @@ var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx))
 
 This creates a STOMP server listening on `localhost:61613` that is compliant with the STOMP specification.
 
-You can configure the port and host in the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompServer.html#listen(int,%20java.lang.String)[listen]`
+You can configure the port and host in the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#listen(int,%20java.lang.String)[listen]`
 method:
 
 [source,scala]
@@ -74,7 +74,7 @@ var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx))
 
 ----
 
-The handler receive a reference on the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompServer.html[StompServer]`.
+The handler receive a reference on the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html[StompServer]`.
 
 You can also configure the host and port in `link:../dataobjects.html#StompServerOptions[StompServerOptions]`:
 
@@ -109,9 +109,9 @@ server.closeFuture().onComplete{
 The `link:../dataobjects.html#StompServerOptions[StompServerOptions]` let you configure some aspects of the STOMP server.
 
 First, the STOMP server is based on a
-`link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]`, so you can configure the underlying `link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]` from
+`link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]`, so you can configure the underlying `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]` from
 the `link:../dataobjects.html#StompServerOptions[StompServerOptions]`. Alternatively you can also pass the
-`link:../../scaladoc/io/vertx/scala/core/net/NetServer.html[NetServer]` you want to use:
+`link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]` you want to use:
 
 [source,scala]
 ----
@@ -143,7 +143,7 @@ var server = StompServer.create(vertx, StompServerOptions()
 
 ----
 
-Enabling security requires an additional `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` handling the
+Enabling security requires an additional `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` handling the
 authentication requests:
 
 [source,scala]
@@ -154,7 +154,7 @@ var server = StompServer.create(vertx, StompServerOptions()
 
 ----
 
-More information about `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` is available
+More information about `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` is available
 http://vertx.io/docs/#authentication_and_authorisation[here].
 
 If a frame exceeds one of the size limits, the frame is rejected and the client receives an `ERROR` frame. As the
@@ -210,20 +210,20 @@ Queues dispatches messages using a round-robin strategies.
 === Providing your own type of destination
 
 On purpose the STOMP server does not implement any advanced feature. IF you need more advanced dispatching policy,
-you can implement your own type of destination by providing a `link:../../scaladoc/io/vertx/scala/ext/stomp/DestinationFactory.html[DestinationFactory]`
-returning your own `link:../../scaladoc/io/vertx/scala/ext/stomp/Destination.html[Destination]` object.
+you can implement your own type of destination by providing a `link:../../scaladocs/io/vertx/scala/ext/stomp/DestinationFactory.html[DestinationFactory]`
+returning your own `link:../../scaladocs/io/vertx/scala/ext/stomp/Destination.html[Destination]` object.
 
 === Acknowledgment
 
 By default, the STOMP server does nothing when a message is not acknowledged. You can customize this by
-providing your own `link:../../scaladoc/io/vertx/scala/ext/stomp/Destination.html[Destination]` implementation.
+providing your own `link:../../scaladocs/io/vertx/scala/ext/stomp/Destination.html[Destination]` implementation.
 
 The custom destination should call the
 
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompServerHandler.html#onAck(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onAck]`
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onAck(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onAck]`
 and
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompServerHandler.html#onNack(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onNack]`
-method in order to let the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompServerHandler.html[StompServerHandler]` customizes the behavior:
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onNack(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onNack]`
+method in order to let the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html[StompServerHandler]` customizes the behavior:
 
 [source,scala]
 ----
@@ -264,7 +264,7 @@ STOMP clients connect to STOMP server and can send and receive frames.
 
 === Creating a STOMP client
 
-You create a `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClient.html[StompClient]` instance with default options as follows:
+You create a `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html[StompClient]` instance with default options as follows:
 
 [source,scala]
 ----
@@ -281,7 +281,7 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
 ----
 
 The previous snippet creates a STOMP client connecting to "0.0.0.0:61613". Once connected, you get a
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]` that let you interact with the server. You can
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]` that let you interact with the server. You can
 configure the host and port as follows:
 
 [source,scala]
@@ -361,7 +361,7 @@ client.close()
 ----
 
 However, this way would not notify the server of the disconnection. To cleanly close the connection, you should
-use the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClientConnection.html#disconnect()[disconnect]` method:
+use the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html#disconnect()[disconnect]` method:
 
 [source,scala]
 ----
@@ -386,7 +386,7 @@ connection is automatically closed.
 
 === Handling errors
 
-On the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]`, you can register an error handler receiving `ERROR`
+On the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]`, you can register an error handler receiving `ERROR`
 frames sent by the server. Notice that the server closes the connection with the client after having sent such frame:
 
 [source,scala]
@@ -411,7 +411,7 @@ var client = StompClient.create(vertx, StompClientOptions()
 The client can also be notified when a connection drop has been detected. Connection failures are detected using the
 STOMP heartbeat mechanism. When the server has not sent a message in the heartbeat time window, the connection is
 closed and the `connectionDroppedHandler` is called (if set). To configure a `connectionDroppedHandler`, call
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompClientConnection.html#connectionDroppedHandler(io.vertx.core.Handler)[connectionDroppedHandler]`. The handler can
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html#connectionDroppedHandler(io.vertx.core.Handler)[connectionDroppedHandler]`. The handler can
 for instance tries to reconnect to the server:
 
 [source,scala]
@@ -438,11 +438,11 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
 === Configuration
 
 You can configure various aspect by passing a
-`link:../dataobjects.html#StompClientOptions[StompClientOptions]` when creating the `link:../../scaladoc/io/vertx/scala/ext/stomp/StompClient.html[StompClient]`. As the
-STOMP client relies on a `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html[NetClient]`, you can configure the underlying Net Client from
-the `link:../dataobjects.html#StompClientOptions[StompClientOptions]`. Alternatively, you can pass the `link:../../scaladoc/io/vertx/scala/core/net/NetClient.html[NetClient]`
+`link:../dataobjects.html#StompClientOptions[StompClientOptions]` when creating the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html[StompClient]`. As the
+STOMP client relies on a `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`, you can configure the underlying Net Client from
+the `link:../dataobjects.html#StompClientOptions[StompClientOptions]`. Alternatively, you can pass the `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`
 you want to use in the
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient,%20io.vertx.core.Handler)[connect]` method:
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient,%20io.vertx.core.Handler)[connect]` method:
 
 [source,scala]
 ----
@@ -678,8 +678,8 @@ HTML page, or as an npm module (https://www.npmjs.com/package/stompjs).
 3. Connect to the server
 
 To achieve the first step, you would need a HTTP server, and pass the
-`link:../../scaladoc/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]` result to
-`link:../../scaladoc/io/vertx/scala/core/http/HttpServer.html#websocketHandler(io.vertx.core.Handler)[websocketHandler]`:
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]` result to
+`link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#websocketHandler(io.vertx.core.Handler)[websocketHandler]`:
 
 [source,scala]
 ----

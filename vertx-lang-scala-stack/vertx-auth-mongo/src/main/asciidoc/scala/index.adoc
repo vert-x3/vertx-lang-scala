@@ -1,6 +1,6 @@
 == Mongo Auth Provider implementation
 
-We provide an implementation of `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the Vert.x `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`
+We provide an implementation of `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the Vert.x `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`
 to perform authentication and authorisation against a MongoDb.
 
 To use this project, add the following
@@ -24,10 +24,10 @@ dependency to the _dependencies_ section of your build descriptor:
 compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
-To create an instance you first need an instance of `link:../../scaladoc/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`. To learn how to create one
+To create an instance you first need an instance of `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`. To learn how to create one
 of those please consult the documentation for the MongoClient.
 
-Once you've got one of those you can create a `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html[MongoAuth]` instance as follows:
+Once you've got one of those you can create a `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html[MongoAuth]` instance as follows:
 
 [source,scala]
 ----
@@ -37,7 +37,7 @@ var authProvider = MongoAuth.create(client, authProperties)
 
 ----
 
-Once you've got your instance you can authenticate and authorise with it just like any `link:../../scaladoc/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
+Once you've got your instance you can authenticate and authorise with it just like any `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
 
 The out of the box config assumes the usage of the collection with name "user", the username stored and read by field "username"
 some others.
@@ -55,28 +55,28 @@ insert the row and fail if duplicate.
 
 You can also change all the defaults for the mongo collection and column names using any of the methods:
 
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setCollectionName(java.lang.String)[setCollectionName]`
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameField(java.lang.String)[setUsernameField]`
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordField(java.lang.String)[setPasswordField]`
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPermissionField(java.lang.String)[setPermissionField]`
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setRoleField(java.lang.String)[setRoleField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setCollectionName(java.lang.String)[setCollectionName]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameField(java.lang.String)[setUsernameField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordField(java.lang.String)[setPasswordField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPermissionField(java.lang.String)[setPermissionField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setRoleField(java.lang.String)[setRoleField]`
 if you want to adapt that to your needs.
 
 The default implementation assumes that the password is stored in the database as a SHA-512 hash after being
 concatenated with a salt. It also assumes the salt is stored in the table too. The field, where the salt is
-stored can be set by `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setSaltField(java.lang.String)[setSaltField]`, the default is "salt".
-You are able to change this behaviour by using `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setSaltStyle(io.vertx.ext.auth.mongo.HashSaltStyle)[setSaltStyle]`.
-The HashStrategy you can retrieve by  `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#getHashStrategy()[getHashStrategy]`.
+stored can be set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setSaltField(java.lang.String)[setSaltField]`, the default is "salt".
+You are able to change this behaviour by using `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setSaltStyle(io.vertx.ext.auth.mongo.HashSaltStyle)[setSaltStyle]`.
+The HashStrategy you can retrieve by  `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#getHashStrategy()[getHashStrategy]`.
 By using this, you are able to set:
 `link:todo[NO_SALT]` by which passwords are not crypted and stored
 in cleartext. ( see the warning below! )
 `link:todo[COLUMN]`, which will create a salt per user and store this
 inside the defined column of the user. ( see the warning below! )
 `link:todo[EXTERNAL]`, which will store only the crypted password in the
-database and will use a salt from external, which you will have to set by `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setExternalSalt(java.lang.String)[setExternalSalt]`
+database and will use a salt from external, which you will have to set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setExternalSalt(java.lang.String)[setExternalSalt]`
 
 If you want to override this behaviour you can do so by providing an alternative hash strategy and setting it with
- `link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setHashStrategy(io.vertx.ext.auth.mongo.HashStrategy)[setHashStrategy]`
+ `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setHashStrategy(io.vertx.ext.auth.mongo.HashStrategy)[setHashStrategy]`
 
 WARNING: It is strongly advised to use the `link:todo[EXTERNAL]` option.
 The NO_SALT option is existing for development phase only and even the COLUMN option is not recommended, cause
@@ -101,8 +101,8 @@ authProvider.authenticateFuture(authInfo).onComplete{
 
 ----
 Instead of the `username` and `password` field names used in the previous snippet, you should use:
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField(java.lang.String)[setUsernameCredentialField]` and
-`link:../../scaladoc/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordCredentialField(java.lang.String)[setPasswordCredentialField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField(java.lang.String)[setUsernameCredentialField]` and
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordCredentialField(java.lang.String)[setPasswordCredentialField]`
 
 == Authorisation - Permission-Role Model
 
@@ -111,7 +111,7 @@ implementation assumes a familiar user/role/permission model, where a user can h
 can have zero or more permissions.
 
 If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladoc/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]` as follows:
+`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]` as follows:
 
 [source,scala]
 ----
