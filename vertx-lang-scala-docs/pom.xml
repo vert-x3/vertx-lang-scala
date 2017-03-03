@@ -23,6 +23,215 @@
       <type>pom</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-codegen</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-docgen</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-codetrans</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-amqp-bridge-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mqtt-server-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-bridge-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jdbc-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mongo-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mongo-service-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-shiro-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htdigest-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-oauth2-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-mongo-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-jwt-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-jdbc-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sockjs-service-proxy-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-freemarker-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-handlebars-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-jade-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-mvel-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-pebble-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-templ-thymeleaf-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mysql-postgresql-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-mail-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-redis-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-stomp-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-tcp-eventbus-bridge-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-amqp-bridge-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-hawkular-metrics-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-shell-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-kafka-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-circuit-breaker-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>
@@ -55,18 +264,18 @@
                 </copy>
 
                 <!-- Scaladocs -->
-                <copy todir="target/scaladocs" >
-                  <fileset dir="../vertx-lang-scala">
-                    <include name="target/docs/vertx-core/scala/scaladocs/**"/>
-                  </fileset>
-                  <mapper type="regexp" from="^target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>
-                </copy>
-                <copy todir="target/scaladocs" >
-                  <fileset dir="../vertx-lang-scala-stack">
-                    <include name="vertx-*/target/docs/vertx-core/scala/scaladocs/**"/>
-                  </fileset>
-                  <mapper type="regexp" from="^vertx-.*/target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>
-                </copy>
+                <!--<copy todir="target/scaladocs" >-->
+                  <!--<fileset dir="../vertx-lang-scala">-->
+                    <!--<include name="target/docs/vertx-core/scala/scaladocs/**"/>-->
+                  <!--</fileset>-->
+                  <!--<mapper type="regexp" from="^target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>-->
+                <!--</copy>-->
+                <!--<copy todir="target/scaladocs" >-->
+                  <!--<fileset dir="../vertx-lang-scala-stack">-->
+                    <!--<include name="vertx-*/target/docs/vertx-core/scala/scaladocs/**"/>-->
+                  <!--</fileset>-->
+                  <!--<mapper type="regexp" from="^vertx-.*/target/docs/vertx-core/scala/scaladocs/(.*)" to="\1"/>-->
+                <!--</copy>-->
 
                 <!-- Sources -->
                 <copy todir="target/sources" >
@@ -87,6 +296,22 @@
         </executions>
       </plugin>
       <!-- todo : try to make that work -->
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>3.2.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>doc</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <sourceDir>target/sources</sourceDir>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.0.0</version>
