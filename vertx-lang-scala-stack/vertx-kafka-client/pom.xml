@@ -13,10 +13,8 @@
 
   <artifactId>vertx-kafka-client-scala_2.12</artifactId>
 
-
   <properties>
     <vertx-module>vertx-kafka-client</vertx-module>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
   <dependencies>

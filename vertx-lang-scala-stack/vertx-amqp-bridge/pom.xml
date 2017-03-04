@@ -17,7 +17,6 @@
 
   <properties>
     <vertx-module>vertx-amqp-bridge</vertx-module>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
   <dependencies>

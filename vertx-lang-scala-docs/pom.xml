@@ -192,11 +192,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-amqp-bridge-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
