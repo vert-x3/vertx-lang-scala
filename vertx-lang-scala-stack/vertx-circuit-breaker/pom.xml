@@ -13,10 +13,8 @@
 
   <artifactId>vertx-circuit-breaker-scala_2.12</artifactId>
 
-
   <properties>
     <vertx-module>vertx-circuit-breaker</vertx-module>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
   <dependencies>

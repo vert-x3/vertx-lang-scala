@@ -13,10 +13,8 @@
 
   <artifactId>vertx-redis-client-scala_2.12</artifactId>
 
-
   <properties>
     <vertx-module>vertx-redis-client</vertx-module>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
   <dependencies>

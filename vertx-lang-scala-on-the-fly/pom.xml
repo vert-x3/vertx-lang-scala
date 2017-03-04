@@ -11,14 +11,8 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <groupId>io.vertx</groupId>
   <artifactId>vertx-lang-scala-on-the-fly_2.12</artifactId>
   <name>Scala on the fly compilation</name>
-  <inceptionYear>2016</inceptionYear>
-  <organization>
-    <name>vert.x</name>
-    <url>http://vertx.io</url>
-  </organization>
 
   <dependencies>
 

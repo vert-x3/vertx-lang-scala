@@ -2,6 +2,7 @@
 
 The described `link:../dataobjects.html#Option[Option]` and `link:../dataobjects.html#Argument[Argument]` classes are _untyped_,
 meaning that the only get String values.
+
 `TypedOption` and `TypedArgument` let you specify a _type_, so the
 (String) raw value is converted to the specified type.
 

@@ -12,27 +12,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-lang-scala-stack_2.12</artifactId>
-  <inceptionYear>2016</inceptionYear>
-  <organization>
-    <name>vert.x</name>
-    <url>http://vertx.io</url>
-  </organization>
 
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-    <license>
-      <name>Eclipse Public License - v 1.0</name>
-      <url>http://www.eclipse.org/legal/epl-v10.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
   <packaging>pom</packaging>
+
   <properties>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
     <vertx-module>none</vertx-module>
     <!--
       Configure plugins that skip building documentation that otherwise would fail without
@@ -45,18 +28,6 @@
          control over the content -->
     <source.skip>false</source.skip>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-dependencies</artifactId>
-        <version>${stack.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>

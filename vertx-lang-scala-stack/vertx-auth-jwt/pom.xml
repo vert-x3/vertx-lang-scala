@@ -13,10 +13,8 @@
 
   <artifactId>vertx-auth-jwt-scala_2.12</artifactId>
 
-
   <properties>
     <vertx-module>vertx-auth-jwt</vertx-module>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
 
   <dependencies>
