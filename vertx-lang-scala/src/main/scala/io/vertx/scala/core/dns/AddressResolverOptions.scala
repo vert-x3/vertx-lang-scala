@@ -153,6 +153,18 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
   }
 
   /**
+    * Set to `true` to enable round-robin selection of the dns server to use. It spreads the query load
+    * among the servers and avoids all lookup to hit the first server of the list.
+    */
+  def setRotateServers(value: Boolean) = {
+    asJava.setRotateServers(value)
+    this
+  }
+  def isRotateServers: Boolean = {
+    asJava.isRotateServers().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the lists of DNS search domains.
     * <p/>
     * When the search domain list is null, the effective search domain list will be populated using

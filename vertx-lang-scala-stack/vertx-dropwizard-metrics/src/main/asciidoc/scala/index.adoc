@@ -435,6 +435,25 @@ var vertx = Vertx.vertx(VertxOptions()
 
 ----
 
+In case if the uri contains some path parameters like `/users/:userId` it might not make sense to have a separate entry in the registry for each user
+id (like `get-requests./users/1`, `get-requests./users/2` and so on) but a summarized one. To achieve that you can set an alias to the match instance
+in this case the alias will be used as a part of the registry name instead of uri like `<http-method>-requests.<alias>`
+
+[source,scala]
+----
+var vertx = Vertx.vertx(VertxOptions()
+  .setMetricsOptions(DropwizardMetricsOptions()
+    .setEnabled(true)
+    .setMonitoredHttpServerUris(Set(Match()
+      .setValue("/users/.*")
+      .setAlias("users")
+      .setType(MatchType.REGEX)
+    ))
+  )
+)
+
+----
+
 *For `bytes-read` and `bytes-written` the bytes represent the body of the request/response, so headers, etc are ignored.*
 
 === Http client metrics

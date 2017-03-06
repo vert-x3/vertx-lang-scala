@@ -366,13 +366,19 @@ format
 * the `ConfigStoreFactory` SPI to add support for
 configuration store (place from where the configuration data is retrieved)
 
-== Provided formats
+== Additional formats
+
+In addition of the out of the box format supported by this library, Vert.x Config provides additional
+formats you can use in your application.
 
 include::hocon-format.adoc[]
 
 include::yaml-format.adoc[]
 
-== Provided stores
+== Additional stores
+
+In addition of the out of the box stores supported by this library, Vert.x Config provides additional
+stores you can use in your application.
 
 include::git-store.adoc[]
 

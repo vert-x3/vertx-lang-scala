@@ -5,7 +5,7 @@ project descriptor to access the Vert.x Core API and enable the Scala support:
 
 [source,scala,subs="+attributes"]
 ----
-libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0-SNAPSHOT
+libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0
 ----
 
 * Maven (in your `pom.xml`):
@@ -15,7 +15,7 @@ libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0-SNAPSHOT
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-lang-scala_2.12</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+  <version>3.4.0</version>
 </dependency>
 ----
 
@@ -23,5 +23,5 @@ libraryDependencies += "io.vertx" %% "vertx-lang-scala" % 3.4.0-SNAPSHOT
 
 [source,groovy,subs="+attributes"]
 ----
-compile "io.vertx:vertx-lang-scala_2.12:3.4.0-SNAPSHOT"
+compile "io.vertx:vertx-lang-scala_2.12:3.4.0"
 ----

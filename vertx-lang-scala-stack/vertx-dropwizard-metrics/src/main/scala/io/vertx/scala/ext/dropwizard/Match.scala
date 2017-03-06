@@ -29,6 +29,18 @@ class Match(private val _asJava: JMatch) {
   def asJava = _asJava
 
   /**
+    * Set the alias the human readable name that will be used as a part of
+    * registry entry name when the value matches.
+    */
+  def setAlias(value: String) = {
+    asJava.setAlias(value)
+    this
+  }
+  def getAlias: String = {
+    asJava.getAlias().asInstanceOf[String]
+  }
+
+  /**
     * Set the type of matching to apply.
     */
   def setType(value: io.vertx.ext.dropwizard.MatchType) = {
