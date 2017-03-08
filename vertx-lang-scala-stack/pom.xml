@@ -277,12 +277,12 @@
     <module>vertx-stomp</module>
     <module>vertx-tcp-eventbus-bridge</module>
     <module>vertx-amqp-bridge</module>
-    <module>vertx-dropwizard-metrics</module>
+    <!--<module>vertx-dropwizard-metrics</module>-->
     <module>vertx-hawkular-metrics</module>
-    <module>vertx-shell</module>
+    <!--<module>vertx-shell</module>-->
     <module>vertx-kafka-client</module>
-    <module>vertx-service-discovery</module>
     <module>vertx-circuit-breaker</module>
     <module>vertx-config</module>
+    <module>vertx-service-discovery</module>
   </modules>
 </project>
