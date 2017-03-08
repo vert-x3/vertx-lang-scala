@@ -1,0 +1,60 @@
+=== Spring Config Server Store
+
+The Spring Config Server Store extends the Vert.x Configuration Retriever and provides the
+a way to retrieve configuration from a Spring Server.
+
+==== Using the Spring Config Server Store
+
+To use the Spring Config Server Store, add the following dependency to the
+_dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>vertx-config</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile '${maven.groupId}:vertx-config:${maven.version}'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+----
+
+==== Configuring the store
+
+Once added to your classpath or dependencies, you need to configure the
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` to use this store:
+
+[source, scala]
+----
+var store = ConfigStoreOptions()
+  .setType("spring-config-server")
+  .setConfig(new io.vertx.core.json.JsonObject().put("url", "http://localhost:8888/foo/development"))
+
+
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(store))
+)
+
+----
+
+
+Configurable attributes are:
+
+* `url` - the `url` to retrieve the configuration (mandatory)
+* `timeout` - the timeout (in milliseconds) to retrieve the configuration, 3000 by default
+* `user` - the `user` (no authentication by default)
+* `password` - the `password`
+* `httpClientConfiguration` - the configuration of the underlying HTTP client

@@ -1,0 +1,72 @@
+=== Git Configuration Store
+
+The Git Configuration Store is an extension to the Vert.x Configuration Retriever to
+retrieve configuration from a Git repository.
+
+==== Using the Git Configuration Store
+
+To use the Git Configuration, add the following dependency to the
+_dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>${maven.artifactId}</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+<dependency>
+  <groupId>${maven.groupId}</groupId>
+  <artifactId>vertx-config</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile '${maven.groupId}:vertx-config:${maven.version}'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+----
+
+==== Configuring the store
+
+Once added to your classpath or dependencies, you need to configure the
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` to use this store:
+
+[source, scala]
+----
+
+var git = ConfigStoreOptions()
+  .setType("git")
+  .setConfig(new io.vertx.core.json.JsonObject().put("url", "https://github.com/cescoffier/vertx-config-test.git").put("path", "local").put("filesets", new io.vertx.core.json.JsonArray().add(new io.vertx.core.json.JsonObject().put("pattern", "*.json"))))
+
+
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(git))
+)
+
+----
+
+The configuration requires:
+
+* the `url` of the repository
+* the `path` where the repository is cloned (local directory)
+* at least `fileset` indicating the set of files to read (same behavior as the
+directory configuration store).
+
+You can also configure the `branch` (`master` by default) to use and the name of the
+`remote` repository (`origin` by default).
+
+==== How does it works
+
+If the local `path` does not exist, the configuration store clones the repository into
+this directory. Then it reads the file matching the different file sets.
+
+It the local `path` exist, it tried to update it (it switches branch if needed)). If the
+update failed the configuration retrieval fails.
+
+Periodically, the repositories is updated to check if the configuration has been updated.
