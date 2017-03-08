@@ -45,92 +45,12 @@
         <artifactId>maven-processor-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>scala-maven-plugin</artifactId>
-        <version>3.2.2</version>
-        <configuration>
-          <sendJavaToScalac>false</sendJavaToScalac>
-          <args>
-            <arg>-target:jvm-1.8</arg>
-            <arg>-feature</arg>
-            <arg>-deprecation</arg>
-            <arg>-explaintypes</arg>
-            <arg>-unchecked</arg>
-            <arg>-Xlint</arg>
-          </args>
-          <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala
-          </reportOutputDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>scala-doc</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>doc</goal>
-            </goals>
-            <configuration>
-              <args>
-                <arg>
-                  -doc-external-doc:${settings.localRepository}/org/scala-lang/scala-library/${scala.version}/scala-library-${scala.version}.jar#http://www.scala-lang.org/api/${scala.version}/
-                </arg>
-              </args>
-            </configuration>
-          </execution>
-          <execution>
-            <id>doc-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>doc-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <skip>true</skip>
+          <skipIfEmpty>true</skipIfEmpty>
         </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>3.0.1</version>
-        <extensions>true</extensions>
-        <inherited>true</inherited>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>io.vertx.scala.ext.sql;version=${project.version}
-            </Export-Package>
-            <Import-Package>*</Import-Package>
-            <Include-Resource>{maven-resources}</Include-Resource>
-          </instructions>
-        </configuration>
-        <executions>
-          <execution>
-            <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
