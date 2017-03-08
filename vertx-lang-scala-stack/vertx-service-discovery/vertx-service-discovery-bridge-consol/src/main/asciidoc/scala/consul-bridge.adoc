@@ -1,0 +1,52 @@
+=== Consul bridge
+
+This discovery bridge imports services from http://consul.io[Consul] into the Vert.x service discovery.
+
+The bridge
+connects to a Consul agent (server) and periodically scan for services:
+
+* new services are imported
+* services in maintenance mode or that has been removed from consul are removed
+
+This bridge uses the HTTP API for Consul. It does not export to Consul and does not support service modification.
+
+The service type is deduced from `tags`. If a `tag` matches a known service type, this service type will be used.
+If not, the service is imported as `unknown`. Only `http-endpoint` is supported for now.
+
+
+==== Using the bridge
+
+To use this Vert.x discovery bridge, add the following dependency to the _dependencies_ section of your build
+descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-service-discovery-bridge-redis-consul.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-service-discovery-bridge-redis-consul.12:3.4.1-SNAPSHOT'
+----
+
+Then, when creating the service discovery registers this bridge as follows:
+
+[source, scala]
+----
+ServiceDiscovery.create(vertx).registerServiceImporter(new io.vertx.servicediscovery.consul.ConsulServiceImporter(), new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 8500).put("scan-period", 2000))
+
+----
+
+You can configure the:
+
+* agent host using the `host` property, it defaults to `localhost`
+* agent port using the `port` property, it defaults to 8500
+* scan period using the `scan-period` property. The time is set in ms, and is 2000 ms by default
