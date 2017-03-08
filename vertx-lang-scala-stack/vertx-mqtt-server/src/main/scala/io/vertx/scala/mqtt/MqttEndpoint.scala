@@ -409,6 +409,13 @@ class MqttEndpoint(private val _asJava: Object) {
     asJava.asInstanceOf[JMqttEndpoint].isAutoKeepAlive().asInstanceOf[Boolean]
   }
 
+  /**
+    * @return if the connection between remote client and local endpoint is established/open
+    */
+  def isConnected(): Boolean = {
+    asJava.asInstanceOf[JMqttEndpoint].isConnected().asInstanceOf[Boolean]
+  }
+
 }
 
 object MqttEndpoint {

@@ -190,21 +190,21 @@
       <artifactId>vertx-tcp-eventbus-bridge-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>io.vertx</groupId>-->
+      <!--<artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>-->
+      <!--<version>${stack.version}</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-hawkular-metrics-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-shell-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>io.vertx</groupId>-->
+      <!--<artifactId>vertx-shell-scala_2.12</artifactId>-->
+      <!--<version>${stack.version}</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-kafka-client-scala_2.12</artifactId>
@@ -253,9 +253,23 @@
                 </copy>
                 <copy todir="target/docs" >
                   <fileset dir="../vertx-lang-scala-stack">
-                    <include name="vertx-*/**/asciidoc/scala/**"/>
+                    <include name="vertx-*/src/main/asciidoc/scala/**"/>
+                    <exclude name="vertx-config"/>
+                    <exclude name="vertx-service-discovery"/>
                   </fileset>
                   <mapper type="regexp" from="^vertx-(.*)/src/main/asciidoc/scala/(.*)" to="vertx-\1/scala/\2"/>
+                </copy>
+                <copy todir="target/docs" >
+                  <fileset dir="../vertx-lang-scala-stack/vertx-config">
+                    <include name="vertx-*/src/main/asciidoc/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-.*/src/main/asciidoc/scala/(.*)" to="vertx-config/scala/\1"/>
+                </copy>
+                <copy todir="target/docs" >
+                  <fileset dir="../vertx-lang-scala-stack/vertx-service-discovery">
+                    <include name="vertx-*/src/main/asciidoc/scala/**"/>
+                  </fileset>
+                  <mapper type="regexp" from="^vertx-.*/src/main/asciidoc/scala/(.*)" to="vertx-service-discovery/scala/\1"/>
                 </copy>
 
                 <!-- Sources -->
