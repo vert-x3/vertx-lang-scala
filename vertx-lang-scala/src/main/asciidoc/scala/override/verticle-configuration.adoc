@@ -5,7 +5,7 @@ Configuration in the form of Map can be passed to a verticle at deployment time:
 [source,scala]
 ----
 val config = Json.obj(("name","tim"), ("directory","/blah"))
-vertx.deployVerticle(classOf[DemoVerticle].getName, DeploymentOptions().setConfig(config))
+vertx.deployVerticle(ScalaVerticle.nameForVerticle[DemoVerticle].getName, DeploymentOptions().setConfig(config))
 ----
 
 This configuration is then available via the `link:../../scaladocs/io/vertx/scala/core/Context.html[Context]`, The configuration is returned as a Map
