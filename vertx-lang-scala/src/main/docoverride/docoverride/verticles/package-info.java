@@ -74,7 +74,7 @@
  * vertx.deployVerticle(s"scala:${classOf[HelloWorldVerticle].getName}")
  * ----
  *
- * There is also a little helper available.
+ * There is also a little helper-method available.
  * ----
  * val vertx = Vertx.vertx
  * vertx.deployVerticle(ScalaVerticle.nameForVerticle[HelloWorldVerticle])
@@ -105,17 +105,13 @@
  * import scala.concurrent.{Future, Promise}
  *
  * public class HelloWorldVerticle extends ScalaVerticle {
- *  public void start(): Future[Unit] = {
+ *  public void startFuture(): Future[Unit] = {
  *   println "starting"
  *   val promise = Promise[Unit]()
- *   vertx.deployVerticleFuture("v.rb").onComplete{
- *    case Success(deploymentId) => promise.success(())
- *    case Failure(throwable) => promise.failure(throwable)
- *   }
- *   promise.future
+ *   vertx.deployVerticleFuture("v.rb")
  *  }
  *
- *  public void stop(): Future[Unit] = {
+ *  public void stopFuture(): Future[Unit] = {
  *   println("stopping")
  *   Future.successful(())
  *  }

@@ -15,37 +15,10 @@
  */
 
 /**
- * === Passing configuration to a verticle
- *
- * Configuration in the form of Map can be passed to a verticle at deployment time:
- *
- * [source,scala]
- * ----
- * val config = Json.obj(("name","tim"), ("directory","/blah"))
- * vertx.deployVerticle(ScalaVerticle.nameForVerticle[DemoVerticle].getName, DeploymentOptions().setConfig(config))
- * ----
- *
- * This configuration is then available via the {@link io.vertx.core.Context}, The configuration is returned as a Map
- * object so you can retrieve data as follows:
- *
- * [source,scala]
- * ----
- * println vertx.getOrCreateContext().config().getString("name")
- * ----
- *
- * === Accessing environment variables in a Verticle
- *
- * Environment variables and system properties are accessible using the Java API:
- *
- * [source,scala]
- * ----
- * println System.getProperty("foo")
- * println System.getenv("HOME")
- * ----
  *
  */
-@Document(fileName = "override/verticle-configuration.adoc")
-package docoverride.verticles.configuration;
+@Document(fileName = "override/buffer_from_bytes.adoc")
+package docoverride.buffers;
 
 /*-
  * #%L

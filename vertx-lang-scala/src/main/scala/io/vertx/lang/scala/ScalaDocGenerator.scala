@@ -101,7 +101,8 @@ class ScalaDocGenerator extends DocGenerator {
       methodType.getParameterTypes.asScala.zipWithIndex.foreach{
         case (v, i) => {
           if(i > 0) anchor += ",%20"
-          anchor += v.toString
+          //drop preceding annotations as they mess up linking
+          anchor += v.toString.split(" :: ").last
         }
       }
 
