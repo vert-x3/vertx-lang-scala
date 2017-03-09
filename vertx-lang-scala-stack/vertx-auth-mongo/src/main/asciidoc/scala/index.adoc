@@ -11,9 +11,9 @@ dependency to the _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-auth-mongo-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -21,7 +21,7 @@ dependency to the _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-auth-mongo-scala_2.12:3.4.1-SNAPSHOT'
 ----
 
 To create an instance you first need an instance of `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`. To learn how to create one

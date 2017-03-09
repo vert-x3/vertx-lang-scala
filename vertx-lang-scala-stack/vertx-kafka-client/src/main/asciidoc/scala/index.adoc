@@ -25,7 +25,7 @@ of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-kafka-client</artifactId>
-  <version>${maven.version}</version>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -33,7 +33,7 @@ of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile io.vertx:vertx-kafka-client:${maven.version}
+compile io.vertx:vertx-kafka-client:3.4.1-SNAPSHOT
 ----
 
 == Creating Kafka clients
