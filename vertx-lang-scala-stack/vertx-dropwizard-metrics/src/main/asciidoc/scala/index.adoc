@@ -20,9 +20,9 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -30,7 +30,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.4.1-SNAPSHOT'
 ----
 
 Then when you create vertx enable metrics using the `link:../dataobjects.html#DropwizardMetricsOptions[DropwizardMetricsOptions]`:

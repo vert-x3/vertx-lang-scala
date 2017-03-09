@@ -72,43 +72,21 @@
             <arg>-unchecked</arg>
             <arg>-Xlint</arg>
           </args>
-          <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala
-          </reportOutputDirectory>
+          <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala</reportOutputDirectory>
         </configuration>
         <executions>
           <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-          <execution>
             <id>scala-doc</id>
-            <phase>prepare-package</phase>
+            <phase>test</phase>
             <goals>
               <goal>doc</goal>
             </goals>
-            <configuration>
-              <args>
-                <arg>
-                  -doc-external-doc:${settings.localRepository}/org/scala-lang/scala-library/${scala.version}/scala-library-${scala.version}.jar#http://www.scala-lang.org/api/${scala.version}/
-                </arg>
-              </args>
-            </configuration>
           </execution>
           <execution>
-            <id>doc-jar</id>
-            <phase>package</phase>
+            <id>scala-compile</id>
+            <phase>compile</phase>
             <goals>
-              <goal>doc-jar</goal>
+              <goal>compile</goal>
             </goals>
           </execution>
         </executions>

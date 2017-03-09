@@ -15,7 +15,7 @@ application.
 
 To use this client, you need to add the following jar to your `CLASSPATH`:
 
-* ${maven.artifactId} ${maven.version} (the client)
+* vertx-mysql-postgresql-client-scala_2.12 3.4.1-SNAPSHOT (the client)
 * scala-library 2.11.4
 * the postgress-async-2.11 and mysdql-async-2.11 from https://github.com/mauricio/postgresql-async
 * joda time
@@ -31,9 +31,9 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-mysql-postgresql-client-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -41,7 +41,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-mysql-postgresql-client-scala_2.12:3.4.1-SNAPSHOT'
 ----
 
 === In an application using a vert.x distributions
