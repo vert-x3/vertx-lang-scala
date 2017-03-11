@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-service-discovery-bridge-redis-consul.12</artifactId>
+  <artifactId>vertx-service-discovery-bridge-consul-scala_2.12</artifactId>
 
   <properties>
     <vertx-module>vertx-service-discovery-bridge-consul</vertx-module>
