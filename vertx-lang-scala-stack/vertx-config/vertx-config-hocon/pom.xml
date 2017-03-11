@@ -12,6 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-config-hocon-scala_2.12</artifactId>
+  <packaging>pom</packaging>
 
   <properties>
     <vertx-module>vertx-config-hocon</vertx-module>
