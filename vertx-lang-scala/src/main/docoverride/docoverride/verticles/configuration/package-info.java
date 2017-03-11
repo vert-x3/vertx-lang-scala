@@ -22,7 +22,7 @@
  * [source,scala]
  * ----
  * val config = Json.obj(("name","tim"), ("directory","/blah"))
- * vertx.deployVerticle(classOf[DemoVerticle].getName, DeploymentOptions().setConfig(config))
+ * vertx.deployVerticle(ScalaVerticle.nameForVerticle[DemoVerticle].getName, DeploymentOptions().setConfig(config))
  * ----
  *
  * This configuration is then available via the {@link io.vertx.core.Context}, The configuration is returned as a Map

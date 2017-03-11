@@ -11,16 +11,16 @@ events will be sent to Hawkular, an http://www.hawkular.org[open source monitori
 
 == Getting started
 
-The _${maven.artifactId}_ module must be present in the classpath.
+The _vertx-hawkular-metrics-scala_2.12_ module must be present in the classpath.
 
 Maven users should add this to their project POM file:
 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-hawkular-metrics-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -28,7 +28,7 @@ And Gradle users, to their build file:
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-hawkular-metrics-scala_2.12:3.4.1-SNAPSHOT'
 ----
 
 Vert.x does not enable SPI implementations by default. You must enable metric collection in the Vert.x options:
@@ -47,7 +47,7 @@ var vertx = Vertx.vertx(VertxOptions()
 
 === Remote Hawkular server
 
-By default, _${maven.artifactId}_ sends metrics to a Hawkular server listening on `localhost` port `8080`.
+By default, _vertx-hawkular-metrics-scala_2.12_ sends metrics to a Hawkular server listening on `localhost` port `8080`.
 But in production, the Hawkular server will likely run on a separate machine:
 
 [source,scala]
@@ -64,7 +64,7 @@ var vertx = Vertx.vertx(VertxOptions()
 
 === Tenant selection
 
-Hawkular Metrics is a multi-tenant solution, and _${maven.artifactId}_ can send metrics for a tenant other than `default`:
+Hawkular Metrics is a multi-tenant solution, and _vertx-hawkular-metrics-scala_2.12_ can send metrics for a tenant other than `default`:
 
 [source,scala]
 ----
@@ -115,7 +115,7 @@ var vertx = Vertx.vertx(VertxOptions()
 
 === HTTPS and other HTTP related options
 
-_${maven.artifactId}_ communicates with the Hawkular server over HTTP. In order to communicate over HTTPS, set the
+_vertx-hawkular-metrics-scala_2.12_ communicates with the Hawkular server over HTTP. In order to communicate over HTTPS, set the
 `ssl` flag to true:
 
 [source,scala]
