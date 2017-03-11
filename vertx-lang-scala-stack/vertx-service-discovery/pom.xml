@@ -31,9 +31,11 @@
   <modules>
     <module>vertx-service-discovery</module>
     <module>vertx-service-discovery-backend-redis</module>
+    <module>vertx-service-discovery-backend-zookeeper</module>
     <module>vertx-service-discovery-bridge-consul</module>
     <module>vertx-service-discovery-bridge-docker-links</module>
     <module>vertx-service-discovery-bridge-zookeeper</module>
+    <module>vertx-service-discovery-bridge-docker</module>
     <module>vertx-service-discovery-bridge-kubernetes</module>
   </modules>
 </project>
