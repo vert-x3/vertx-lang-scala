@@ -4,180 +4,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-stack_2.12</artifactId>
+    <artifactId>vertx-lang-scala-parent_2.12</artifactId>
     <version>3.4.1-SNAPSHOT</version>
-    <relativePath>../</relativePath>
+    <relativePath>../..</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-service-discovery-scala_2.12</artifactId>
+  <artifactId>vertx-lang-scala-service-discovery-aggregator_2.12</artifactId>
+  <packaging>pom</packaging>
 
   <properties>
-    <vertx-module>vertx-service-discovery</vertx-module>
+    <vertx-module>none</vertx-module>
+    <!--
+      Configure plugins that skip building documentation that otherwise would fail without
+      the documentation bits. This is useful in pom aggregators that don't have documentation
+      to build, they change this property to true.
+    -->
+    <doc.skip>false</doc.skip>
+
+    <!-- We skip sources jar generation as we do it with the assembly plugin to have greater
+         control over the content -->
+    <source.skip>false</source.skip>
   </properties>
 
-  <dependencies>
-    <!-- RUNTIME DEPS -->
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>${vertx-module}</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-redis-client-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-jdbc-client-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-proxy</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <!-- TODO: this has to be a bug -->
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-groovy</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>${vertx-module}</artifactId>
-      <version>${stack.version}</version>
-      <optional>true</optional>
-      <classifier>sources</classifier>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.bsc.maven</groupId>
-        <artifactId>maven-processor-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>scala-maven-plugin</artifactId>
-        <version>3.2.2</version>
-        <configuration>
-          <sendJavaToScalac>false</sendJavaToScalac>
-          <args>
-            <arg>-target:jvm-1.8</arg>
-            <arg>-feature</arg>
-            <arg>-deprecation</arg>
-            <arg>-explaintypes</arg>
-            <arg>-unchecked</arg>
-            <arg>-Xlint</arg>
-          </args>
-          <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala
-          </reportOutputDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>scala-doc</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>doc</goal>
-            </goals>
-            <configuration>
-              <args>
-                <arg>
-                  -doc-external-doc:${settings.localRepository}/org/scala-lang/scala-library/${scala.version}/scala-library-${scala.version}.jar#http://www.scala-lang.org/api/${scala.version}/
-                </arg>
-              </args>
-            </configuration>
-          </execution>
-          <execution>
-            <id>doc-jar</id>
-            <phase>package</phase>
-            <goals>
-              <goal>doc-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-          </archive>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>3.0.1</version>
-        <extensions>true</extensions>
-        <inherited>true</inherited>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>io.vertx.scala.ext.sql;version=${project.version}
-            </Export-Package>
-            <Import-Package>*</Import-Package>
-            <Include-Resource>{maven-resources}</Include-Resource>
-          </instructions>
-        </configuration>
-        <executions>
-          <execution>
-            <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
+  <modules>
+    <module>vertx-service-discovery</module>
+    <module>vertx-service-discovery-backend-redis</module>
+    <module>vertx-service-discovery-bridge-consol</module>
+    <module>vertx-service-discovery-bridge-docker-links</module>
+    <module>vertx-service-discovery-bridge-zookeeper</module>
+    <module>vertx-service-discovery-bridge-kubernetes</module>
+  </modules>
 </project>

@@ -235,9 +235,7 @@
               </goals>
               <configuration>
                 <attach>true</attach>
-                <descriptors>
-                  <descriptor>src/main/assembly/docs.xml</descriptor>
-                </descriptors>
+                <descriptorSourceDirectory>src/main/assembly</descriptorSourceDirectory>
               </configuration>
             </execution>
           </executions>
@@ -281,8 +279,8 @@
     <module>vertx-hawkular-metrics</module>
     <module>vertx-shell</module>
     <module>vertx-kafka-client</module>
-    <module>vertx-service-discovery</module>
     <module>vertx-circuit-breaker</module>
     <module>vertx-config</module>
+    <module>vertx-service-discovery</module>
   </modules>
 </project>

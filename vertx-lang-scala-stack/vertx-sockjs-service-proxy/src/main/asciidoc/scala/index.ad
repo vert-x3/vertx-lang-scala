@@ -21,12 +21,12 @@ your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-sockjs-service-proxy-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 <dependency>
-  <groupId>${maven.groupId}</groupId>
+  <groupId>io.vertx</groupId>
   <artifactId>vertx-service-proxy</artifactId>
   <version>${vertx.version}</version>
 </dependency>
@@ -36,8 +36,8 @@ your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
-compile '${maven.groupId}:vertx-service-proxy:${vertx.version}'
+compile 'io.vertx:vertx-sockjs-service-proxy-scala_2.12:3.4.1-SNAPSHOT'
+compile 'io.vertx:vertx-service-proxy:${vertx.version}'
 ----
 
 Be aware that as the service proxy mechanism relies on code generation, so modifications to the _service interface_

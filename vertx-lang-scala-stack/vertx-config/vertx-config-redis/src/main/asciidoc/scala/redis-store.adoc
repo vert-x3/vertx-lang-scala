@@ -1,0 +1,60 @@
+=== Redis Configuration Store
+
+The Redis Configuration Store extends the Vert.x Configuration Retriever and provides the
+way to retrieve configuration from a Redis server.
+
+==== Using the Redis Configuration Store
+
+To use the Redis Configuration Store, add the following dependency to the
+_dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-config-redis-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
+</dependency>
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-config</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-config:3.4.1-SNAPSHOT'
+compile 'io.vertx:vertx-config-redis-scala_2.12:3.4.1-SNAPSHOT'
+----
+
+==== Configuring the store
+
+Once added to your classpath or dependencies, you need to configure the
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` to use this store:
+
+[source, scala]
+----
+var store = ConfigStoreOptions()
+  .setType("redis")
+  .setConfig(new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 6379).put("key", "my-configuration"))
+
+
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(store))
+)
+
+----
+
+The store configuration is used to create an instance of
+`link:../../scaladocs/io/vertx/scala/redis/RedisClient.html[RedisClient]`. check the documentation of the Vert.x Redis Client
+for further details.
+
+In addition, you can set the `key` instructing the store in which _field_ the configuration
+is stored. `configuration` is used by default.
+
+The created Redis client retrieves the configuration using the `HGETALL` configuration.

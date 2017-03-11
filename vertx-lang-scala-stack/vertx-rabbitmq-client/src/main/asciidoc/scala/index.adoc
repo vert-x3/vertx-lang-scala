@@ -13,9 +13,9 @@ Add the following dependency to your maven project
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>${maven.groupId}</groupId>
-  <artifactId>${maven.artifactId}</artifactId>
-  <version>${maven.version}</version>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
+  <version>3.4.1-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -26,7 +26,7 @@ Add the following dependency to your gradle project
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.4.1-SNAPSHOT'
 }
 ----
 
