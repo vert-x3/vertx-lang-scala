@@ -68,6 +68,28 @@ Set the offset to commit
 +++
 |===
 
+[[OffsetAndTimestamp]]
+== OffsetAndTimestamp
+
+++++
+ Represent information related to a Offset with timestamp information
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[offset]]`offset`|`Number (long)`|
++++
+Set the offset
++++
+|[[timestamp]]`timestamp`|`Number (long)`|
++++
+Set the timestamp
++++
+|===
+
 [[PartitionInfo]]
 == PartitionInfo
 

@@ -57,7 +57,6 @@ vertx.deployVerticle(s"scala:${classOf[HelloWorldVerticle].getName}")
 ----
 
 There is also a little helper-method available.
-[source, scala]
 ----
 val vertx = Vertx.vertx
 vertx.deployVerticle(ScalaVerticle.nameForVerticle[HelloWorldVerticle])

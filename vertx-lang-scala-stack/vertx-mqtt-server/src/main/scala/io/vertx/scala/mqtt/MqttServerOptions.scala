@@ -50,6 +50,17 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   override def getAcceptBacklog: Int = {
     asJava.getAcceptBacklog().asInstanceOf[Int]
   }
+
+  /**
+    * Set if clientid should be auto-generated when it's "zero-bytes"
+    */
+  def setAutoClientId(value: Boolean) = {
+    asJava.setAutoClientId(value)
+    this
+  }
+  def isAutoClientId: Boolean = {
+    asJava.isAutoClientId().asInstanceOf[Boolean]
+  }
   override def setClientAuth(value: io.vertx.core.http.ClientAuth) = {
     asJava.setClientAuth(value)
     this

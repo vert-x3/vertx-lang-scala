@@ -25,7 +25,7 @@ of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-kafka-client</artifactId>
-  <version>3.4.1-SNAPSHOT</version>
+  <version>3.4.1</version>
 </dependency>
 ----
 
@@ -33,7 +33,7 @@ of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile io.vertx:vertx-kafka-client:3.4.1-SNAPSHOT
+compile io.vertx:vertx-kafka-client:3.4.1
 ----
 
 == Creating Kafka clients
@@ -395,7 +395,7 @@ consumer.commitFuture().onComplete{
 == Seeking in a topic partition
 
 Apache Kafka can retain messages for a long period of time and the consumer can seek inside a topic partition
-and obtain arbitraty access to the messages.
+and obtain arbitrary access to the messages.
 
 You can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seek(io.vertx.kafka.client.common.TopicPartition,%20long)[seek]` to change the offset for reading at a specific
 position
@@ -459,6 +459,87 @@ consumer.seekToEndFuture(java.util.Collections.singleton(topicPartition)).onComp
 
 ----
 
+== Offset lookup
+
+You can use the beginningOffsets API introduced in Kafka 0.10.1.1 to get the first offset
+for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning(io.vertx.kafka.client.common.TopicPartition)[seekToBeginning]`,
+it does not change the consumer's offset.
+
+[source,scala]
+----
+var topicPartitions = new java.util.HashSet()
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+topicPartitions.add(topicPartition)
+
+consumer.beginningOffsetsFuture(topicPartitions).onComplete{
+  case Success(result) => {
+    var results = result
+    results.foreach{
+      case (topic: io.vertx.scala.kafka.client.common.TopicPartition, beginningOffset: java.lang.Long) => {
+      println(s"Beginning offset for topic=${todo-renderDataObjectMemberSelect}, partition=${todo-renderDataObjectMemberSelect}, beginningOffset=${beginningOffset}")
+    }}
+  }
+  case Failure(cause) => println("Failure")
+}
+
+// Convenience method for single-partition lookup
+consumer.beginningOffsetsFuture(topicPartition).onComplete{
+  case Success(result) => {
+    var beginningOffset = result
+    println(s"Beginning offset for topic=${todo-renderDataObjectMemberSelect}, partition=${todo-renderDataObjectMemberSelect}, beginningOffset=${beginningOffset}")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+
+----
+
+You can use the endOffsets API introduced in Kafka 0.10.1.1 to get the last offset
+for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd(io.vertx.kafka.client.common.TopicPartition)[seekToEnd]`,
+it does not change the consumer's offset.
+
+[source,scala]
+----
+var topicPartitions = new java.util.HashSet()
+var topicPartition = TopicPartition()
+  .setTopic("test")
+  .setPartition(0)
+
+topicPartitions.add(topicPartition)
+
+consumer.endOffsetsFuture(topicPartitions).onComplete{
+  case Success(result) => {
+    var results = result
+    results.foreach{
+      case (topic: io.vertx.scala.kafka.client.common.TopicPartition, endOffset: java.lang.Long) => {
+      println(s"End offset for topic=${todo-renderDataObjectMemberSelect}, partition=${todo-renderDataObjectMemberSelect}, endOffset=${endOffset}")
+    }}
+  }
+  case Failure(cause) => println("Failure")
+}
+
+// Convenience method for single-partition lookup
+consumer.endOffsetsFuture(topicPartition).onComplete{
+  case Success(result) => {
+    var endOffset = result
+    println(s"End offset for topic=${todo-renderDataObjectMemberSelect}, partition=${todo-renderDataObjectMemberSelect}, endOffset=${endOffset}")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+You can use the offsetsForTimes API introduced in Kafka 0.10.1.1 to look up an offset by
+timestamp, i.e. search parameter is an epoch timestamp and the call returns the lowest offset
+with ingestion timestamp >= given timestamp.
+
+[source,scala]
+----
+Code not translatable
+----
 == Message flow control
 
 A consumer can control the incoming message flow and pause/resume the read operation from a topic, e.g it
