@@ -27,6 +27,7 @@ import io.vertx.kafka.client.common.{TopicPartition => JTopicPartition}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.kafka.client.common.PartitionInfo
 import io.vertx.kafka.client.consumer.{KafkaConsumer => JKafkaConsumer}
+import io.vertx.kafka.client.consumer.{OffsetAndTimestamp => JOffsetAndTimestamp}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.kafka.client.consumer.{OffsetAndMetadata => JOffsetAndMetadata}
 import io.vertx.kafka.client.common.{PartitionInfo => JPartitionInfo}
@@ -477,6 +478,35 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
   }
 
+  /**
+    * Look up the offset for the given partition by timestamp.
+    * @param topicPartition TopicPartition to query.see <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
+    * @param timestamp Timestamp to be used in the query.
+    * @param handler handler called on operation completed
+    */
+  def offsetsForTimes(topicPartition: TopicPartition, timestamp: Long, handler: Handler[AsyncResult[OffsetAndTimestamp]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].offsetsForTimes(topicPartition.asJava, timestamp.asInstanceOf[java.lang.Long], {x: AsyncResult[JOffsetAndTimestamp] => handler.handle(AsyncResultWrapper[JOffsetAndTimestamp, OffsetAndTimestamp](x, a => OffsetAndTimestamp(a)))})
+  }
+
+  /**
+    * Get the first offset for the given partitions.
+    * @param topicPartition the partition to get the earliest offset.see <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
+    * @param handler handler called on operation completed. Returns the earliest available offset for the given partition
+    */
+  def beginningOffsets(topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].beginningOffsets(topicPartition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+  }
+
+  /**
+    * Get the last offset for the given partition. The last offset of a partition is the offset
+    * of the upcoming message, i.e. the offset of the last available message + 1.
+    * @param topicPartition the partition to get the end offset.see <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
+    * @param handler handler called on operation completed. The end offset for the given partition.
+    */
+  def endOffsets(topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+  }
+
  /**
    * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
@@ -672,6 +702,33 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
   def positionFuture(partition: TopicPartition): scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[offsetsForTimes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def offsetsForTimesFuture(topicPartition: TopicPartition, timestamp: Long): scala.concurrent.Future[OffsetAndTimestamp] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JOffsetAndTimestamp, OffsetAndTimestamp](x => OffsetAndTimestamp(x))
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].offsetsForTimes(topicPartition.asJava, timestamp.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[beginningOffsets]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def beginningOffsetsFuture(topicPartition: TopicPartition): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].beginningOffsets(topicPartition.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[endOffsets]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def endOffsetsFuture(topicPartition: TopicPartition): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

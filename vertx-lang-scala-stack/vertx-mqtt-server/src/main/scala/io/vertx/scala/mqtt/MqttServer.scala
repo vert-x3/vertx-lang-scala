@@ -120,6 +120,17 @@ class MqttServer(private val _asJava: Object) {
   }
 
   /**
+    * Set an exception handler for the server, that will be called when an error happens independantly of an
+    * accepted [[io.vertx.scala.mqtt.MqttEndpoint]], like a rejected connection
+    * @param handler the exception handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Handler[Throwable]): MqttServer = {
+    asJava.asInstanceOf[JMqttServer].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  /**
     * The actual port the server is listening on. This is useful if you bound the server specifying 0 as port number
     * signifying an ephemeral port
     * @return the actual port the server is listening on.
