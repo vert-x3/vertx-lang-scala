@@ -1,8 +1,11 @@
 package io.vertx.lang.scala.onthefly
 
+import java.io.{BufferedWriter, File, FileWriter}
+import java.nio.file.Files
+
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{ FlatSpec, Matchers }
+import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
 class OnTheFlyCompilerTest extends FlatSpec with Matchers {
@@ -91,9 +94,13 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
   }
 
   "A source file" should "be compiled" in {
+    val dir = Files.createTempDirectory("clazzes")
+    val file = new File(dir.toString, "SourceClass.scala")
+    val rs = getClass.getClassLoader.getResourceAsStream("SourceClass.scala")
+    Files.copy(rs, file.toPath)
     val compiler = new OnTheFlyCompiler(None)
     val clazz = compiler
-      .tryToCompileClass("/Users/jochen/Development/8_vertx/vertx-lang-scala/vertx-lang-scala-on-the-fly/src/test/resources/SourceClass.scala")
+      .tryToCompileClass(file.toPath.toAbsolutePath.toString)
       .get
 
     val method = clazz.getDeclaredMethod("doIt")
