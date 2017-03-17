@@ -65,7 +65,6 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
     }
   }
 
-
   "Some test code" should "be compiled and evaluted" in {
     val compiler = new OnTheFlyCompiler(None)
     val script   = "println(\"you should see me\")"
@@ -89,5 +88,16 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
     val compiler = new OnTheFlyCompiler(None)
     compiler
       .findClass("io.vertx.lang.scala.onthefly.IDontExist") shouldBe None
+  }
+
+  "A source file" should "be compiled" in {
+    val compiler = new OnTheFlyCompiler(None)
+    val clazz = compiler
+      .tryToCompileClass("/Users/jochen/Development/8_vertx/vertx-lang-scala/vertx-lang-scala-on-the-fly/src/test/resources/SourceClass.scala")
+      .get
+
+    val method = clazz.getDeclaredMethod("doIt")
+    val inst = clazz.newInstance()
+    method.invoke(inst) should equal("works")
   }
 }

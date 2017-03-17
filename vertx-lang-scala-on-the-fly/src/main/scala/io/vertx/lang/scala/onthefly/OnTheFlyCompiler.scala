@@ -21,6 +21,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 
 import scala.collection.mutable
+import scala.io.Source
 import scala.io.Source.fromInputStream
 import scala.reflect.internal.util.{AbstractFileClassLoader, BatchSourceFile}
 import scala.tools.nsc.Settings
@@ -133,13 +134,24 @@ class OnTheFlyCompiler(targetDir: Option[File]) {
     * @return the class looked for if it exists
     */
   def tryToCompileClass(className: String): Option[Class[_]] = {
-    val res =
-      classLoader.getResourceAsStream(className.replace(".", "/") + ".scala")
-    if (res == null)
-      None
-    else {
-      compileClass(fromInputStream(res).getLines().mkString("\n"))
-      findClass(className)
+    println(className)
+    if(className.endsWith(".scala")) {
+      val res = Source.fromFile(new File(className))
+      if (res == null)
+        None
+      else {
+        compileClass(res.getLines().mkString("\n"))
+        findClass(className.split(System.getProperty("file.separator")).last.replace(".scala",""))
+      }
+    } else {
+      val res =
+        classLoader.getResourceAsStream(className.replace(".", "/") + ".scala")
+      if (res == null)
+        None
+      else {
+        compileClass(fromInputStream(res).getLines().mkString("\n"))
+        findClass(className)
+      }
     }
   }
 
