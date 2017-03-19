@@ -13,7 +13,7 @@ import scala.concurrent.Promise
 
 @RunWith(classOf[JUnitRunner])
 class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
-  "bbb" should "hhh" in {
+  "A bare Scala-Verticle" should "compile and deploy on the fly" in {
     val promise = Promise[String]
     val vertx = Vertx.vertx()
     val dir = Files.createTempDirectory("clazzes")
