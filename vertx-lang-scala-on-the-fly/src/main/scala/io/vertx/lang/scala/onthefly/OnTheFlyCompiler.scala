@@ -134,7 +134,6 @@ class OnTheFlyCompiler(targetDir: Option[File]) {
     * @return the class looked for if it exists
     */
   def tryToCompileClass(className: String): Option[Class[_]] = {
-    println(className)
     if(className.endsWith(".scala")) {
       val res = Source.fromFile(new File(className))
       if (res == null)
