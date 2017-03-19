@@ -69,6 +69,13 @@ We'll discuss all these features in this manual.
 
 To use vert.x web, add the following dependency to the _dependencies_ section of your build descriptor:
 
+* SBT (in your `build.sbt` file):
+
+[source,scala,subs="+attributes"]
+----
+libraryDependencies += "io.vertx" %% "vertx-web-scala" % "3.4.1"
+----
+
 * Maven (in your `pom.xml`):
 
 [source,xml,subs="+attributes"]
