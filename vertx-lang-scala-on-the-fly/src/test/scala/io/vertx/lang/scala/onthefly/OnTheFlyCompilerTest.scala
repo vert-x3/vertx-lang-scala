@@ -107,4 +107,15 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
     val inst = clazz.newInstance()
     method.invoke(inst) should equal("works")
   }
+
+  "A source file from the classpath" should "be compiled" in {
+    val compiler = new OnTheFlyCompiler(None)
+    val clazz = compiler
+      .tryToCompileClass("SourceFromClassPath.scala")
+      .get
+
+    val method = clazz.getDeclaredMethod("doIt")
+    val inst = clazz.newInstance()
+    method.invoke(inst) should equal("works2")
+  }
 }

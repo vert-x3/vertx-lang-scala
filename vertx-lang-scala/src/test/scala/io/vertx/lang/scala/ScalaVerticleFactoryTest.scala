@@ -29,4 +29,16 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
 
     promise.future.map(res => res shouldNot be(null))
   }
+
+  "A bare Scala-Verticle from the classpath" should "compile and deploy on the fly" in {
+    val promise = Promise[String]
+    val vertx = Vertx.vertx()
+    val scalaVerticleFactory = new ScalaVerticleFactory
+    vertx.asJava.asInstanceOf[JVertx]
+      .deployVerticle(scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
+        override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
+      })
+
+    promise.future.map(res => res shouldNot be(null))
+  }
 }

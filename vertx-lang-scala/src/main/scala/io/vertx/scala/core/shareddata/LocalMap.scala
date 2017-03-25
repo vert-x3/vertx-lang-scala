@@ -20,6 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{LocalMap => JLocalMap}
+import scala.collection.JavaConverters._
 
 /**
   * Local maps can be used to share data safely in a single Vert.x instance.
@@ -29,6 +30,8 @@ import io.vertx.core.shareddata.{LocalMap => JLocalMap}
   * 
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
+  *
+  * Since the version 3.4, this class extends the  interface. However some methods are only accessible in Java.
   */
 class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
@@ -39,8 +42,8 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * @param key the key
     * @return the value, or null if none
     */
-  def get(key: K): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].get(toJava[K](key)))
+  def get(key: AnyRef): V = {
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].get(key))
   }
 
   /**
@@ -58,8 +61,8 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     * @param key the key
     * @return the old value
     */
-  def remove(key: K): V = {
-    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].remove(toJava[K](key)))
+  def remove(key: AnyRef): V = {
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].remove(key))
   }
 
   /**
@@ -95,7 +98,9 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
   /**
-    * Remove the entry only if there is an entry with the specified key and value
+    * Remove the entry only if there is an entry with the specified key and value.
+    * 
+    * This method is the poyglot version of [[io.vertx.scala.core.shareddata.LocalMap#remove]].
     * @param key the key
     * @param value the value
     * @return true if removed
@@ -105,7 +110,9 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   }
 
   /**
-    * Replace the entry only if there is an existing entry with the specified key and value
+    * Replace the entry only if there is an existing entry with the specified key and value.
+    * 
+    * This method is the polyglot version of [[io.vertx.scala.core.shareddata.LocalMap#replace]].
     * @param key the key
     * @param oldValue the old value
     * @param newValue the new value
@@ -130,6 +137,37 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
     */
   def close(): Unit = {
     asJava.asInstanceOf[JLocalMap[Object, Object]].close()
+  }
+
+  /**
+    * Returns `true` if this map contains a mapping for the specified
+    * key.
+    * @param key key whose presence in this map is to be tested
+    * @return `true` if this map contains a mapping for the specified key
+    */
+  def containsKey(key: AnyRef): Boolean = {
+    asJava.asInstanceOf[JLocalMap[Object, Object]].containsKey(key).asInstanceOf[Boolean]
+  }
+
+  /**
+    * Returns @{code true` if this map maps one or more keys to the
+    * specified value.
+    * @param value value whose presence in this map is to be tested
+    * @return @{code true` if this map maps one or more keys to the specified value
+    */
+  def containsValue(value: AnyRef): Boolean = {
+    asJava.asInstanceOf[JLocalMap[Object, Object]].containsValue(value).asInstanceOf[Boolean]
+  }
+
+  /**
+    * Returns the value to which the specified key is mapped, or
+    * `defaultValue` if this map contains no mapping for the key.
+    * @param key the key whose associated value is to be returned
+    * @param defaultValue the default mapping of the key
+    * @return the value to which the specified key is mapped, or `defaultValue` if this map contains no mapping for the key
+    */
+  def getOrDefault(key: AnyRef, defaultValue: V): V = {
+    toScala[V](asJava.asInstanceOf[JLocalMap[Object, Object]].getOrDefault(key, toJava[V](defaultValue)))
   }
 
 }
