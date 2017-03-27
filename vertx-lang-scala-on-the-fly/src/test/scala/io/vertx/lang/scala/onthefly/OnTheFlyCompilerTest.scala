@@ -1,8 +1,11 @@
 package io.vertx.lang.scala.onthefly
 
+import java.io.{BufferedWriter, File, FileWriter}
+import java.nio.file.Files
+
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{ FlatSpec, Matchers }
+import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
 class OnTheFlyCompilerTest extends FlatSpec with Matchers {
@@ -65,7 +68,6 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
     }
   }
 
-
   "Some test code" should "be compiled and evaluted" in {
     val compiler = new OnTheFlyCompiler(None)
     val script   = "println(\"you should see me\")"
@@ -89,5 +91,31 @@ class OnTheFlyCompilerTest extends FlatSpec with Matchers {
     val compiler = new OnTheFlyCompiler(None)
     compiler
       .findClass("io.vertx.lang.scala.onthefly.IDontExist") shouldBe None
+  }
+
+  "A source file" should "be compiled" in {
+    val dir = Files.createTempDirectory("clazzes")
+    val file = new File(dir.toString, "SourceClass.scala")
+    val rs = getClass.getClassLoader.getResourceAsStream("SourceClass.scala")
+    Files.copy(rs, file.toPath)
+    val compiler = new OnTheFlyCompiler(None)
+    val clazz = compiler
+      .tryToCompileClass(file.toPath.toAbsolutePath.toString)
+      .get
+
+    val method = clazz.getDeclaredMethod("doIt")
+    val inst = clazz.newInstance()
+    method.invoke(inst) should equal("works")
+  }
+
+  "A source file from the classpath" should "be compiled" in {
+    val compiler = new OnTheFlyCompiler(None)
+    val clazz = compiler
+      .tryToCompileClass("SourceFromClassPath.scala")
+      .get
+
+    val method = clazz.getDeclaredMethod("doIt")
+    val inst = clazz.newInstance()
+    method.invoke(inst) should equal("works2")
   }
 }
