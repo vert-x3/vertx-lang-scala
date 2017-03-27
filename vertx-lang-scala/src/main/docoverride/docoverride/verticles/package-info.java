@@ -42,6 +42,7 @@
  *  override def stop(): Unit = {
  *    println("Stopping")
  *  }
+ * }
  * ----
  *
  * As in Java, vert.x creates a new instance of the class automatically.  When Vert.x deploys the verticle it will call
@@ -75,6 +76,7 @@
  * ----
  *
  * There is also a little helper-method available.
+ * [source, scala]
  * ----
  * val vertx = Vertx.vertx
  * vertx.deployVerticle(ScalaVerticle.nameForVerticle[HelloWorldVerticle])
@@ -104,14 +106,15 @@
  * import io.vertx.lang.scala.ScalaVerticle
  * import scala.concurrent.{Future, Promise}
  *
- * public class HelloWorldVerticle extends ScalaVerticle {
- *  public void startFuture(): Future[Unit] = {
- *   println "starting"
+ * class HelloWorldVerticle extends ScalaVerticle {
+ *
+ *  override def startFuture(): Future[Unit] = {
+ *   println("starting")
  *   val promise = Promise[Unit]()
  *   vertx.deployVerticleFuture("v.rb")
  *  }
  *
- *  public void stopFuture(): Future[Unit] = {
+ *  override def stopFuture(): Future[Unit] = {
  *   println("stopping")
  *   Future.successful(())
  *  }
