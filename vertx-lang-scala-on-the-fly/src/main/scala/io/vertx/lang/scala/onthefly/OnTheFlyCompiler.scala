@@ -18,9 +18,11 @@ package io.vertx.lang.scala.onthefly
 
 import java.io.File
 import java.math.BigInteger
+import java.nio.file.{Path, Paths}
 import java.security.MessageDigest
 
 import scala.collection.mutable
+import scala.io.Source
 import scala.io.Source.fromInputStream
 import scala.reflect.internal.util.{AbstractFileClassLoader, BatchSourceFile}
 import scala.tools.nsc.Settings
@@ -133,13 +135,27 @@ class OnTheFlyCompiler(targetDir: Option[File]) {
     * @return the class looked for if it exists
     */
   def tryToCompileClass(className: String): Option[Class[_]] = {
-    val res =
-      classLoader.getResourceAsStream(className.replace(".", "/") + ".scala")
-    if (res == null)
-      None
-    else {
-      compileClass(fromInputStream(res).getLines().mkString("\n"))
-      findClass(className)
+    if(className.endsWith(".scala")) {
+      val file = new File(className)
+      val source = if(file.exists())
+                  Source.fromFile(Paths.get(className).toFile)
+                else
+                  Source.fromInputStream(classLoader.getResourceAsStream(className))
+      if (source == null)
+        None
+      else {
+        compileClass(source.getLines().mkString("\n"))
+        findClass(Paths.get(className).getFileName.toString.replace(".scala",""))
+      }
+    } else {
+      val res =
+        classLoader.getResourceAsStream(className.replace(".", "/") + ".scala")
+      if (res == null)
+        None
+      else {
+        compileClass(fromInputStream(res).getLines().mkString("\n"))
+        findClass(className)
+      }
     }
   }
 

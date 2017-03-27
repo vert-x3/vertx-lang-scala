@@ -16,9 +16,12 @@
 
 package io.vertx.lang.scala
 
-import io.vertx.core.{DeploymentOptions, Vertx, Verticle}
-import io.vertx.core.Future;
+import io.vertx.core.{DeploymentOptions, Verticle, Vertx}
+import io.vertx.core.Future
 import io.vertx.core.spi.VerticleFactory
+import io.vertx.lang.scala.onthefly.OnTheFlyCompiler
+
+import scala.util.Success
 
 /**
  * Factory for creating Verticle-Instances from a compiled class or scala source code.
@@ -43,8 +46,13 @@ class ScalaVerticleFactory extends VerticleFactory {
       verticleFromClass(verticleName, classLoader)
     }
 
-  private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle =
-    throw new NotImplementedError("not yet implemented")
+  private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle = {
+    val compiler = new OnTheFlyCompiler(None)
+    compiler.tryToCompileClass(verticleName) match {
+      case Some(clazz) => clazz.newInstance().asInstanceOf[ScalaVerticle].asJava()
+      case None        => throw new RuntimeException(s"Failed to compile $verticleName")
+    }
+  }
 
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
     val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
