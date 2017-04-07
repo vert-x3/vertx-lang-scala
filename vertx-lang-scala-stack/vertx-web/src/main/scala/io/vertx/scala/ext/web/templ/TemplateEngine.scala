@@ -37,6 +37,15 @@ class TemplateEngine(private val _asJava: Object) {
   def asJava = _asJava
 
   /**
+    * Returns true if the template engine caches template files. If false, then template files are freshly loaded each
+    * time they are used.
+    * @return True if template files are cached; otherwise, false.
+    */
+  def isCachingEnabled(): Boolean = {
+    asJava.asInstanceOf[JTemplateEngine].isCachingEnabled().asInstanceOf[Boolean]
+  }
+
+  /**
     * Render
     * @param context the routing context
     * @param templateFileName the template file name to use

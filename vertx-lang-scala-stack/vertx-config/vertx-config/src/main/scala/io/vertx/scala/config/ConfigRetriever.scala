@@ -41,17 +41,17 @@ import io.vertx.config.{ConfigRetriever => JConfigRetriever}
 class ConfigRetriever(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: ReadStream[io.vertx.core.json.JsonObject] = _
+  private var cached_0: Option[ReadStream[io.vertx.core.json.JsonObject]] = None
 
   /**
     * @return the stream of configurations. It's single stream (unicast) and that delivers the last known config and the successors periodically.
     */
   def configStream(): ReadStream[io.vertx.core.json.JsonObject] = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JConfigRetriever].configStream()
-      cached_0 = ReadStream[io.vertx.core.json.JsonObject](tmp)
+      cached_0 = Some(ReadStream[io.vertx.core.json.JsonObject](tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

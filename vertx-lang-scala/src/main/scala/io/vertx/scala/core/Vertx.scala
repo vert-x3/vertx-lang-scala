@@ -88,20 +88,20 @@ class Vertx(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
-  private var cached_0: FileSystem = _
-  private var cached_1: EventBus = _
-  private var cached_2: SharedData = _
+  private var cached_0: Option[FileSystem] = None
+  private var cached_1: Option[EventBus] = None
+  private var cached_2: Option[SharedData] = None
 
   /**
     * Get the filesystem object. There is a single instance of FileSystem per Vertx instance.
     * @return the filesystem object
     */
   def fileSystem(): FileSystem = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JVertx].fileSystem()
-      cached_0 = FileSystem(tmp)
+      cached_0 = Some(FileSystem(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
@@ -109,11 +109,11 @@ class Vertx(private val _asJava: Object)
     * @return the event bus object
     */
   def eventBus(): EventBus = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JVertx].eventBus()
-      cached_1 = EventBus(tmp)
+      cached_1 = Some(EventBus(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**
@@ -121,11 +121,11 @@ class Vertx(private val _asJava: Object)
     * @return the shared data object
     */
   def sharedData(): SharedData = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JVertx].sharedData()
-      cached_2 = SharedData(tmp)
+      cached_2 = Some(SharedData(tmp))
     }
-    cached_2
+    cached_2.get
   }
 
   /**

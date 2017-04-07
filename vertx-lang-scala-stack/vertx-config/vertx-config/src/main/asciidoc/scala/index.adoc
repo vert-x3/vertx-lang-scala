@@ -34,7 +34,7 @@ _dependencies_ section of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-config-scala_2.12</artifactId>
-  <version>3.4.1</version>
+  <version>3.4.2-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -42,7 +42,7 @@ _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-config-scala_2.12:3.4.1'
+compile 'io.vertx:vertx-config-scala_2.12:3.4.2-SNAPSHOT'
 ----
 
 Once done, you first need to instantiate the `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`:

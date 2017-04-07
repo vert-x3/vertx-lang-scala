@@ -31,17 +31,17 @@ import io.vertx.core.Handler
 class Future[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Handler[AsyncResult[T]] = _
+  private var cached_0: Option[Handler[AsyncResult[T]]] = None
 
   /**
     * @return an handler completing this future
     */
   def completer(): Handler[AsyncResult[T]] = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JFuture[Object]].completer()
-      cached_0 = {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))}
+      cached_0 = Some({x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))})
     }
-    cached_0
+    cached_0.get
   }
 
   /**
