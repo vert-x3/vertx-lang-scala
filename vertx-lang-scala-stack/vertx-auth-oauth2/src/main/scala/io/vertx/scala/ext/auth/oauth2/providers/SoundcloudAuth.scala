@@ -39,7 +39,7 @@ class SoundcloudAuth(private val _asJava: Object) {
 object SoundcloudAuth {
   def apply(asJava: JSoundcloudAuth) = new SoundcloudAuth(asJava)  
   /**
-    * Create a OAuth2Auth provider for Dropbox
+    * Create a OAuth2Auth provider for SoundCloud
     * @param clientId the client id given to you by SoundCloud
     * @param clientSecret the client secret given to you by SoundCloud
     */
@@ -48,7 +48,7 @@ object SoundcloudAuth {
   }
 
   /**
-    * Create a OAuth2Auth provider for Dropbox
+    * Create a OAuth2Auth provider for SoundCloud
     * @param clientId the client id given to you by SoundCloud
     * @param clientSecret the client secret given to you by SoundCloud
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>

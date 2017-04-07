@@ -39,7 +39,7 @@ class MailchimpAuth(private val _asJava: Object) {
 object MailchimpAuth {
   def apply(asJava: JMailchimpAuth) = new MailchimpAuth(asJava)  
   /**
-    * Create a OAuth2Auth provider for Dropbox
+    * Create a OAuth2Auth provider for Mailchimp
     * @param clientId the client id given to you by Mailchimp
     * @param clientSecret the client secret given to you by Mailchimp
     */
@@ -48,7 +48,7 @@ object MailchimpAuth {
   }
 
   /**
-    * Create a OAuth2Auth provider for Dropbox
+    * Create a OAuth2Auth provider for Mailchimp
     * @param clientId the client id given to you by Mailchimp
     * @param clientSecret the client secret given to you by Mailchimp
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>

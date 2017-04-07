@@ -51,7 +51,7 @@ class DatagramSocket(private val _asJava: Object)
     with Measured {
 
   def asJava = _asJava
-  private var cached_0: SocketAddress = _
+  private var cached_0: Option[SocketAddress] = None
 
   /**
     * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
@@ -59,11 +59,11 @@ class DatagramSocket(private val _asJava: Object)
     * @return the socket address
     */
   def localAddress(): SocketAddress = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JDatagramSocket].localAddress()
-      cached_0 = SocketAddress(tmp)
+      cached_0 = Some(SocketAddress(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

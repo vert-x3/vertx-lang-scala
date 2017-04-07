@@ -61,48 +61,48 @@ import io.vertx.ext.web.{FileUpload => JFileUpload}
 class RoutingContext(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: HttpServerRequest = _
-  private var cached_1: HttpServerResponse = _
-  private var cached_2: Vertx = _
-  private var cached_3: Throwable = _
-  private var cached_4: Int = _
-  private var cached_5: ParsedHeaderValues = _
-  private var cached_6: scala.collection.mutable.Buffer[Locale] = _
-  private var cached_7: scala.collection.mutable.Buffer[LanguageHeader] = _
-  private var cached_8: Locale = _
-  private var cached_9: LanguageHeader = _
+  private var cached_0: Option[HttpServerRequest] = None
+  private var cached_1: Option[HttpServerResponse] = None
+  private var cached_2: Option[Vertx] = None
+  private var cached_3: Option[Throwable] = None
+  private var cached_4: Option[Int] = None
+  private var cached_5: Option[ParsedHeaderValues] = None
+  private var cached_6: Option[scala.collection.mutable.Buffer[Locale]] = None
+  private var cached_7: Option[scala.collection.mutable.Buffer[LanguageHeader]] = None
+  private var cached_8: Option[Locale] = None
+  private var cached_9: Option[LanguageHeader] = None
 
   /**
     * @return the HTTP request object
     */
   def request(): HttpServerRequest = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].request()
-      cached_0 = HttpServerRequest(tmp)
+      cached_0 = Some(HttpServerRequest(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the HTTP response object
     */
   def response(): HttpServerResponse = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].response()
-      cached_1 = HttpServerResponse(tmp)
+      cached_1 = Some(HttpServerResponse(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the Vert.x instance associated to the initiating Router for this context
     */
   def vertx(): Vertx = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].vertx()
-      cached_2 = Vertx(tmp)
+      cached_2 = Some(Vertx(tmp))
     }
-    cached_2
+    cached_2.get
   }
 
   /**
@@ -112,11 +112,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return the throwable used when signalling failure
     */
   def failure(): Throwable = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].failure()
-      cached_3 = tmp
+      cached_3 = Some(tmp)
     }
-    cached_3
+    cached_3.get
   }
 
   /**
@@ -128,11 +128,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return the status code used when signalling failure
     */
   def statusCode(): Int = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].statusCode()
-      cached_4 = tmp.asInstanceOf[Int]
+      cached_4 = Some(tmp.asInstanceOf[Int])
     }
-    cached_4
+    cached_4.get
   }
 
   /**
@@ -148,11 +148,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return A container with the parsed headers.
     */
   def parsedHeaders(): ParsedHeaderValues = {
-    if (cached_5 == null) {
+    if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].parsedHeaders()
-      cached_5 = ParsedHeaderValues(tmp)
+      cached_5 = Some(ParsedHeaderValues(tmp))
     }
-    cached_5
+    cached_5.get
   }
 
   /**
@@ -165,11 +165,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return the best matched locale for the request
     */
   def acceptableLocales(): scala.collection.mutable.Buffer[Locale] = {
-    if (cached_6 == null) {
+    if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLocales()
-      cached_6 = tmp.asScala.map(x => Locale(x))
+      cached_6 = Some(tmp.asScala.map(x => Locale(x)))
     }
-    cached_6
+    cached_6.get
   }
 
   /**
@@ -182,11 +182,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return The best matched language for the request
     */
   def acceptableLanguages(): scala.collection.mutable.Buffer[LanguageHeader] = {
-    if (cached_7 == null) {
+    if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].acceptableLanguages()
-      cached_7 = tmp.asScala.map(x => LanguageHeader(x))
+      cached_7 = Some(tmp.asScala.map(x => LanguageHeader(x)))
     }
-    cached_7
+    cached_7.get
   }
 
   /**
@@ -195,11 +195,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return the users preferred locale.
     */
   def preferredLocale(): Locale = {
-    if (cached_8 == null) {
+    if (cached_8 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].preferredLocale()
-      cached_8 = Locale(tmp)
+      cached_8 = Some(Locale(tmp))
     }
-    cached_8
+    cached_8.get
   }
 
   /**
@@ -208,11 +208,11 @@ class RoutingContext(private val _asJava: Object) {
     * @return the users preferred locale.
     */
   def preferredLanguage(): LanguageHeader = {
-    if (cached_9 == null) {
+    if (cached_9 == None) {
       val tmp = asJava.asInstanceOf[JRoutingContext].preferredLanguage()
-      cached_9 = LanguageHeader(tmp)
+      cached_9 = Some(LanguageHeader(tmp))
     }
-    cached_9
+    cached_9.get
   }
 
   /**
@@ -458,8 +458,8 @@ class RoutingContext(private val _asJava: Object) {
   /**
     * Provides a handler that will be called after the last part of the body is written to the wire.
     * The handler is called asynchronously of when the response has been received by the client.
-    * This provides a hook allowing you to do more operations once the request has been sent over the wire
-    * such as resource cleanup.
+    * This provides a hook allowing you to do more operations once the request has been sent over the wire.
+    * Do not use this for resource cleanup as this handler might never get called (e.g. if the connection is reset).
     * @param handler the handler
     * @return the id of the handler. This can be used if you later want to remove the handler.
     */

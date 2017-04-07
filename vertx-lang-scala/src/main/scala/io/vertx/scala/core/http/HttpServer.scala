@@ -44,8 +44,8 @@ class HttpServer(private val _asJava: Object)
     extends  Measured {
 
   def asJava = _asJava
-  private var cached_0: ReadStream[HttpServerRequest] = _
-  private var cached_1: ReadStream[ServerWebSocket] = _
+  private var cached_0: Option[ReadStream[HttpServerRequest]] = None
+  private var cached_1: Option[ReadStream[ServerWebSocket]] = None
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
@@ -53,11 +53,11 @@ class HttpServer(private val _asJava: Object)
     * @return the request stream
     */
   def requestStream(): ReadStream[HttpServerRequest] = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpServer].requestStream()
-      cached_0 = ReadStream[HttpServerRequest](tmp)
+      cached_0 = Some(ReadStream[HttpServerRequest](tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
@@ -66,11 +66,11 @@ class HttpServer(private val _asJava: Object)
     * @return the websocket stream
     */
   def websocketStream(): ReadStream[ServerWebSocket] = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpServer].websocketStream()
-      cached_1 = ReadStream[ServerWebSocket](tmp)
+      cached_1 = Some(ReadStream[ServerWebSocket](tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**

@@ -66,29 +66,29 @@ class HttpClientRequest(private val _asJava: Object)
     with ReadStream[HttpClientResponse] {
 
   def asJava = _asJava
-  private var cached_0: MultiMap = _
-  private var cached_1: HttpConnection = _
+  private var cached_0: Option[MultiMap] = None
+  private var cached_1: Option[HttpConnection] = None
 
   /**
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientRequest].headers()
-      cached_0 = MultiMap(tmp)
+      cached_0 = Some(MultiMap(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the HttpConnection associated with this request
     */
   def connection(): HttpConnection = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientRequest].connection()
-      cached_1 = HttpConnection(tmp)
+      cached_1 = Some(HttpConnection(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   override def exceptionHandler(handler: Handler[Throwable]): HttpClientRequest = {

@@ -69,13 +69,6 @@ We'll discuss all these features in this manual.
 
 To use vert.x web, add the following dependency to the _dependencies_ section of your build descriptor:
 
-* SBT (in your `build.sbt` file):
-
-[source,scala,subs="+attributes"]
-----
-libraryDependencies += "io.vertx" %% "vertx-web-scala" % "3.4.1"
-----
-
 * Maven (in your `pom.xml`):
 
 [source,xml,subs="+attributes"]
@@ -83,7 +76,7 @@ libraryDependencies += "io.vertx" %% "vertx-web-scala" % "3.4.1"
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.4.1</version>
+  <version>3.4.2-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -92,7 +85,7 @@ libraryDependencies += "io.vertx" %% "vertx-web-scala" % "3.4.1"
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-web-scala_2.12:3.4.1'
+  compile 'io.vertx:vertx-web-scala_2.12:3.4.2-SNAPSHOT'
 }
 ----
 
@@ -1871,7 +1864,7 @@ These examples are not using the traditional "transcoding" as they use an API pr
 === MVEL template engine
 
 To use MVEL, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-mvel:3.4.1`. Create an instance of the MVEL template engine using:
+`io.vertx:vertx-web-templ-mvel:3.4.2-SNAPSHOT`. Create an instance of the MVEL template engine using:
 `io.vertx.ext.web.templ.MVELTemplateEngine#create()`
 
 When using the MVEL template engine, it will by default look for
@@ -1897,7 +1890,7 @@ MVEL templates.
 === Jade template engine
 
 To use the Jade template engine, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-jade:3.4.1`. Create an instance of the Jade template engine using:
+`io.vertx:vertx-web-templ-jade:3.4.2-SNAPSHOT`. Create an instance of the Jade template engine using:
 `io.vertx.ext.web.templ.JadeTemplateEngine#create()`.
 
 When using the Jade template engine, it will by default look for
@@ -1923,7 +1916,7 @@ Jade templates.
 === Handlebars template engine
 
 To use Handlebars, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-handlebars:3.4.1`. Create an instance of the Handlebars template engine
+`io.vertx:vertx-web-templ-handlebars:3.4.2-SNAPSHOT`. Create an instance of the Handlebars template engine
 using: `io.vertx.ext.web.templ.HandlebarsTemplateEngine#create()`.
 
 When using the Handlebars template engine, it will by default look for
@@ -1961,7 +1954,7 @@ handlebars templates.
 === Thymeleaf template engine
 
 To use Thymeleaf, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-thymeleaf:3.4.1`. Create an instance of the Thymeleaf template engine
+`io.vertx:vertx-web-templ-thymeleaf:3.4.2-SNAPSHOT`. Create an instance of the Thymeleaf template engine
 using: `io.vertx.ext.web.templ.ThymeleafTemplateEngine#create()`.
 
 When using the Thymeleaf template engine, it will by default look for
@@ -1989,7 +1982,7 @@ Thymeleaf templates.
 === Apache FreeMarker template engine
 
 To use Apache FreeMarker, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-freemarker:3.4.1`. Create an instance of the Apache FreeMarker template engine
+`io.vertx:vertx-web-templ-freemarker:3.4.2-SNAPSHOT`. Create an instance of the Apache FreeMarker template engine
 using: `io.vertx.ext.web.templ.FreeMarkerTemplateEngine#create()`.
 
 When using the Apache FreeMarker template engine, it will by default look for
@@ -2041,6 +2034,13 @@ Here are some examples:
 
 Please consult the http://www.mitchellbosecke.com/pebble/home/[Pebble documentation] for how to write
 Pebble templates.
+
+=== Disabling caching
+
+During development you might want to disable template caching so that the template gets reevaluated on each request.
+In order to do this you need to set the system property: `io.vertx.ext.web.TemplateEngine.disableCache` to `true`.
+
+By default it will be false. So caching is always enabled.
 
 == Error handler
 
@@ -2360,7 +2360,7 @@ You can retrieve the client library using a dependency manager:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.4.1</version>
+  <version>3.4.2-SNAPSHOT</version>
   <classifier>client</classifier>
   <type>js</type>
 </dependency>
@@ -2370,7 +2370,7 @@ You can retrieve the client library using a dependency manager:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-web-scala_2.12:3.4.1:client'
+compile 'io.vertx:vertx-web-scala_2.12:3.4.2-SNAPSHOT:client'
 ----
 
 The library is also available on https://www.npmjs.com/package/vertx3-eventbus-client[NPM] and on

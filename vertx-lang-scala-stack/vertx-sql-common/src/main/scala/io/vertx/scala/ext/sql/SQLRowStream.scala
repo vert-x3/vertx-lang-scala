@@ -25,6 +25,7 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
 import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -72,6 +73,16 @@ class SQLRowStream(private val _asJava: Object)
     */
   def column(name: String): Int = {
     asJava.asInstanceOf[JSQLRowStream].column(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
+  }
+
+  /**
+    * Returns all column names available in the underlying resultset. One needs to carefully use this method since in
+    * contrast to the singular version it does not perform case insensitive lookups or takes alias in consideration on
+    * the column names.
+    * @return the list of columns names returned by the query
+    */
+  def columns(): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JSQLRowStream].columns().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**

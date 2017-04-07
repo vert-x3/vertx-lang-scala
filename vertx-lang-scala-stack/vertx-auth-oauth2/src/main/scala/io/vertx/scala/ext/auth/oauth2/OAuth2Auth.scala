@@ -133,6 +133,14 @@ class OAuth2Auth(private val _asJava: Object)
     asJava.asInstanceOf[JOAuth2Auth].getScopeSeparator().asInstanceOf[String]
   }
 
+  /**
+    * Returns the configured flow type for the Oauth2 provider.
+    * @return the flow type.
+    */
+  def getFlowType(): io.vertx.ext.auth.oauth2.OAuth2FlowType = {
+    asJava.asInstanceOf[JOAuth2Auth].getFlowType()
+  }
+
  /**
    * Like [[getToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
