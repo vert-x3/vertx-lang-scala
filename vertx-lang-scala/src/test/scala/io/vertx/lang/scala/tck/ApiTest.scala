@@ -592,6 +592,7 @@ class ApiTest extends FlatSpec with Matchers {
   "testStaticFactoryMethod" should "work" in {
     assert("bar" == TestInterface.staticFactoryMethod("bar").getString())
   }
+
   "testMethodWithCachedReturn" should "work" in {
     val ret1 = obj.methodWithCachedReturn("bar")
     assert("bar" == ret1.getString())
@@ -599,6 +600,15 @@ class ApiTest extends FlatSpec with Matchers {
     assert(ret1.eq(ret2))
     val ret3 = obj.methodWithCachedReturn("bar")
     assert(ret1.eq(ret3))
+  }
+
+  "methodWithCachedReturnPrimitive" should "work" in {
+    val ret1 = obj.methodWithCachedReturnPrimitive(2)
+    assert(2 == ret1)
+    val ret2 = obj.methodWithCachedReturnPrimitive(2)
+    assert(ret1 == ret2)
+    val ret3 = obj.methodWithCachedReturnPrimitive(2)
+    assert(ret1 == ret3)
   }
 
   "testMethodWithCachedListReturn" should "work" in {
