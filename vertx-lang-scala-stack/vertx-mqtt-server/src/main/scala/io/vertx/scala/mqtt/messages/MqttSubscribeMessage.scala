@@ -32,29 +32,29 @@ class MqttSubscribeMessage(private val _asJava: Object)
     extends  MqttMessage {
 
   def asJava = _asJava
-  private var cached_0: Int = _
-  private var cached_1: scala.collection.mutable.Buffer[MqttTopicSubscription] = _
+  private var cached_0: Option[Int] = None
+  private var cached_1: Option[scala.collection.mutable.Buffer[MqttTopicSubscription]] = None
 
   /**
     * @return Message identifier
     */
   override def messageId(): Int = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubscribeMessage].messageId()
-      cached_0 = tmp.asInstanceOf[Int]
+      cached_0 = Some(tmp.asInstanceOf[Int])
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return List with topics and related quolity of service levels
     */
   def topicSubscriptions(): scala.collection.mutable.Buffer[MqttTopicSubscription] = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubscribeMessage].topicSubscriptions()
-      cached_1 = tmp.asScala.map(x => MqttTopicSubscription(x))
+      cached_1 = Some(tmp.asScala.map(x => MqttTopicSubscription(x)))
     }
-    cached_1
+    cached_1.get
   }
 
 }

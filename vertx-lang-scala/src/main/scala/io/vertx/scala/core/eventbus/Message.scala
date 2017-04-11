@@ -40,18 +40,18 @@ import io.vertx.core.Handler
 class Message[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: T = _
+  private var cached_0: Option[T] = None
 
   /**
     * The body of the message. Can be null.
     * @return the body, or null.
     */
   def body(): T = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMessage[Object]].body()
-      cached_0 = toScala[T](tmp)
+      cached_0 = Some(toScala[T](tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

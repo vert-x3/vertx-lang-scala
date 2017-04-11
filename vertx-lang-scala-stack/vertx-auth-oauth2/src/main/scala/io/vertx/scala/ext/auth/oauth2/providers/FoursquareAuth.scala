@@ -28,7 +28,7 @@ import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 import io.vertx.core.{Vertx => JVertx}
 
 /**
-  * Simplified factory to create an  for Dropbox.
+  * Simplified factory to create an  for Foursquare.
   */
 class FoursquareAuth(private val _asJava: Object) {
 
@@ -39,18 +39,18 @@ class FoursquareAuth(private val _asJava: Object) {
 object FoursquareAuth {
   def apply(asJava: JFoursquareAuth) = new FoursquareAuth(asJava)  
   /**
-    * Create a OAuth2Auth provider for Dropbox
-    * @param clientId the client id given to you by Dropbox
-    * @param clientSecret the client secret given to you by Dropbox
+    * Create a OAuth2Auth provider for Foursquare
+    * @param clientId the client id given to you by Foursquare
+    * @param clientSecret the client secret given to you by Foursquare
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JFoursquareAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a OAuth2Auth provider for Dropbox
-    * @param clientId the client id given to you by Dropbox
-    * @param clientSecret the client secret given to you by Dropbox
+    * Create a OAuth2Auth provider for Foursquare
+    * @param clientId the client id given to you by Foursquare
+    * @param clientSecret the client secret given to you by Foursquare
     * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
     */
   def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {

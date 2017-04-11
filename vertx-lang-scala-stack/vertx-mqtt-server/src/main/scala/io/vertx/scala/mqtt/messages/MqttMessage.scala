@@ -40,17 +40,17 @@ object MqttMessage {
     private class MqttMessageImpl(private val _asJava: Object) extends MqttMessage {
 
       def asJava = _asJava
-  private var cached_0: Int = _
+  private var cached_0: Option[Int] = None
 
   /**
     * @return Message identifier
     */
   def messageId(): Int = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttMessage].messageId()
-      cached_0 = tmp.asInstanceOf[Int]
+      cached_0 = Some(tmp.asInstanceOf[Int])
     }
-    cached_0
+    cached_0.get
   }
 
 }

@@ -48,137 +48,137 @@ import scala.collection.JavaConverters._
 class HttpResponse[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: io.vertx.core.http.HttpVersion = _
-  private var cached_1: Int = _
-  private var cached_2: String = _
-  private var cached_3: MultiMap = _
-  private var cached_4: MultiMap = _
-  private var cached_5: scala.collection.mutable.Buffer[String] = _
-  private var cached_6: T = _
-  private var cached_7: scala.Option[io.vertx.core.buffer.Buffer] = _
-  private var cached_8: scala.Option[String] = _
-  private var cached_9: scala.Option[io.vertx.core.json.JsonObject] = _
-  private var cached_10: scala.Option[io.vertx.core.json.JsonArray] = _
+  private var cached_0: Option[io.vertx.core.http.HttpVersion] = None
+  private var cached_1: Option[Int] = None
+  private var cached_2: Option[String] = None
+  private var cached_3: Option[MultiMap] = None
+  private var cached_4: Option[MultiMap] = None
+  private var cached_5: Option[scala.collection.mutable.Buffer[String]] = None
+  private var cached_6: Option[T] = None
+  private var cached_7: Option[scala.Option[io.vertx.core.buffer.Buffer]] = None
+  private var cached_8: Option[scala.Option[String]] = None
+  private var cached_9: Option[scala.Option[io.vertx.core.json.JsonObject]] = None
+  private var cached_10: Option[scala.Option[io.vertx.core.json.JsonArray]] = None
 
   /**
     * @return the version of the response
     */
   def version(): io.vertx.core.http.HttpVersion = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].version()
-      cached_0 = tmp
+      cached_0 = Some(tmp)
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the status code of the response
     */
   def statusCode(): Int = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusCode()
-      cached_1 = tmp.asInstanceOf[Int]
+      cached_1 = Some(tmp.asInstanceOf[Int])
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the status message of the response
     */
   def statusMessage(): String = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].statusMessage()
-      cached_2 = tmp.asInstanceOf[String]
+      cached_2 = Some(tmp.asInstanceOf[String])
     }
-    cached_2
+    cached_2.get
   }
 
   /**
     * @return the headers
     */
   def headers(): MultiMap = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].headers()
-      cached_3 = MultiMap(tmp)
+      cached_3 = Some(MultiMap(tmp))
     }
-    cached_3
+    cached_3.get
   }
 
   /**
     * @return the trailers
     */
   def trailers(): MultiMap = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].trailers()
-      cached_4 = MultiMap(tmp)
+      cached_4 = Some(MultiMap(tmp))
     }
-    cached_4
+    cached_4.get
   }
 
   /**
     * @return the Set-Cookie headers (including trailers)
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
-    if (cached_5 == null) {
+    if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].cookies()
-      cached_5 = tmp.asScala.map(x => x.asInstanceOf[String])
+      cached_5 = Some(tmp.asScala.map(x => x.asInstanceOf[String]))
     }
-    cached_5
+    cached_5.get
   }
 
   /**
     * @return the response body in the format it was decoded.
     */
   def body(): T = {
-    if (cached_6 == null) {
+    if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].body()
-      cached_6 = toScala[T](tmp)
+      cached_6 = Some(toScala[T](tmp))
     }
-    cached_6
+    cached_6.get
   }
 
   /**
     * @return the response body decoded as a Buffer
     */
   def bodyAsBuffer(): scala.Option[io.vertx.core.buffer.Buffer] = {
-    if (cached_7 == null) {
+    if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsBuffer()
-      cached_7 = scala.Option(tmp)
+      cached_7 = Some(scala.Option(tmp))
     }
-    cached_7
+    cached_7.get
   }
 
   /**
     * @return the response body decoded as a `String`
     */
   def bodyAsString(): scala.Option[String] = {
-    if (cached_8 == null) {
+    if (cached_8 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString()
-      cached_8 = scala.Option(tmp.asInstanceOf[String])
+      cached_8 = Some(scala.Option(tmp.asInstanceOf[String]))
     }
-    cached_8
+    cached_8.get
   }
 
   /**
     * @return the response body decoded as a json object
     */
   def bodyAsJsonObject(): scala.Option[io.vertx.core.json.JsonObject] = {
-    if (cached_9 == null) {
+    if (cached_9 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonObject()
-      cached_9 = scala.Option(tmp)
+      cached_9 = Some(scala.Option(tmp))
     }
-    cached_9
+    cached_9.get
   }
 
   /**
     * @return the response body decoded as a json array
     */
   def bodyAsJsonArray(): scala.Option[io.vertx.core.json.JsonArray] = {
-    if (cached_10 == null) {
+    if (cached_10 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonArray()
-      cached_10 = scala.Option(tmp)
+      cached_10 = Some(scala.Option(tmp))
     }
-    cached_10
+    cached_10.get
   }
 
   /**
