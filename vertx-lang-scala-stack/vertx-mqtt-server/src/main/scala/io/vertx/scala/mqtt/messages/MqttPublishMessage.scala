@@ -31,77 +31,77 @@ class MqttPublishMessage(private val _asJava: Object)
     extends  MqttMessage {
 
   def asJava = _asJava
-  private var cached_0: Int = _
-  private var cached_1: io.netty.handler.codec.mqtt.MqttQoS = _
-  private var cached_2: Boolean = _
-  private var cached_3: Boolean = _
-  private var cached_4: String = _
-  private var cached_5: io.vertx.core.buffer.Buffer = _
+  private var cached_0: Option[Int] = None
+  private var cached_1: Option[io.netty.handler.codec.mqtt.MqttQoS] = None
+  private var cached_2: Option[Boolean] = None
+  private var cached_3: Option[Boolean] = None
+  private var cached_4: Option[String] = None
+  private var cached_5: Option[io.vertx.core.buffer.Buffer] = None
 
   /**
     * @return Message identifier
     */
   override def messageId(): Int = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].messageId()
-      cached_0 = tmp.asInstanceOf[Int]
+      cached_0 = Some(tmp.asInstanceOf[Int])
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return Quality of service level
     */
   def qosLevel(): io.netty.handler.codec.mqtt.MqttQoS = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].qosLevel()
-      cached_1 = tmp
+      cached_1 = Some(tmp)
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return If the message is a duplicate
     */
   def isDup(): Boolean = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].isDup()
-      cached_2 = tmp.asInstanceOf[Boolean]
+      cached_2 = Some(tmp.asInstanceOf[Boolean])
     }
-    cached_2
+    cached_2.get
   }
 
   /**
     * @return If the message needs to be retained
     */
   def isRetain(): Boolean = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].isRetain()
-      cached_3 = tmp.asInstanceOf[Boolean]
+      cached_3 = Some(tmp.asInstanceOf[Boolean])
     }
-    cached_3
+    cached_3.get
   }
 
   /**
     * @return Topic on which the message was published
     */
   def topicName(): String = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].topicName()
-      cached_4 = tmp.asInstanceOf[String]
+      cached_4 = Some(tmp.asInstanceOf[String])
     }
-    cached_4
+    cached_4.get
   }
 
   /**
     * @return Payload message
     */
   def payload(): io.vertx.core.buffer.Buffer = {
-    if (cached_5 == null) {
+    if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].payload()
-      cached_5 = tmp
+      cached_5 = Some(tmp)
     }
-    cached_5
+    cached_5.get
   }
 
 }

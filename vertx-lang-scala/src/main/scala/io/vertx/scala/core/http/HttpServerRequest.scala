@@ -53,68 +53,68 @@ class HttpServerRequest(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
-  private var cached_0: HttpServerResponse = _
-  private var cached_1: MultiMap = _
-  private var cached_2: MultiMap = _
-  private var cached_3: SocketAddress = _
-  private var cached_4: SocketAddress = _
-  private var cached_5: NetSocket = _
-  private var cached_6: MultiMap = _
-  private var cached_7: HttpConnection = _
+  private var cached_0: Option[HttpServerResponse] = None
+  private var cached_1: Option[MultiMap] = None
+  private var cached_2: Option[MultiMap] = None
+  private var cached_3: Option[SocketAddress] = None
+  private var cached_4: Option[SocketAddress] = None
+  private var cached_5: Option[NetSocket] = None
+  private var cached_6: Option[MultiMap] = None
+  private var cached_7: Option[HttpConnection] = None
 
   /**
     * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
     */
   def response(): HttpServerResponse = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].response()
-      cached_0 = HttpServerResponse(tmp)
+      cached_0 = Some(HttpServerResponse(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the headers in the request.
     */
   def headers(): MultiMap = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].headers()
-      cached_1 = MultiMap(tmp)
+      cached_1 = Some(MultiMap(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the query parameters in the request
     */
   def params(): MultiMap = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].params()
-      cached_2 = MultiMap(tmp)
+      cached_2 = Some(MultiMap(tmp))
     }
-    cached_2
+    cached_2.get
   }
 
   /**
     * @return the remote (client side) address of the request
     */
   def remoteAddress(): SocketAddress = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].remoteAddress()
-      cached_3 = SocketAddress(tmp)
+      cached_3 = Some(SocketAddress(tmp))
     }
-    cached_3
+    cached_3.get
   }
 
   /**
     * @return the local (server side) address of the server that handles the request
     */
   def localAddress(): SocketAddress = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].localAddress()
-      cached_4 = SocketAddress(tmp)
+      cached_4 = Some(SocketAddress(tmp))
     }
-    cached_4
+    cached_4.get
   }
 
   /**
@@ -128,11 +128,11 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the net socket
     */
   def netSocket(): NetSocket = {
-    if (cached_5 == null) {
+    if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].netSocket()
-      cached_5 = NetSocket(tmp)
+      cached_5 = Some(NetSocket(tmp))
     }
-    cached_5
+    cached_5.get
   }
 
   /**
@@ -145,22 +145,22 @@ class HttpServerRequest(private val _asJava: Object)
     * @return the form attributes
     */
   def formAttributes(): MultiMap = {
-    if (cached_6 == null) {
+    if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].formAttributes()
-      cached_6 = MultiMap(tmp)
+      cached_6 = Some(MultiMap(tmp))
     }
-    cached_6
+    cached_6.get
   }
 
   /**
     * @return the HttpConnection associated with this request
     */
   def connection(): HttpConnection = {
-    if (cached_7 == null) {
+    if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerRequest].connection()
-      cached_7 = HttpConnection(tmp)
+      cached_7 = Some(HttpConnection(tmp))
     }
-    cached_7
+    cached_7.get
   }
 
   override def exceptionHandler(handler: Handler[Throwable]): HttpServerRequest = {

@@ -55,29 +55,29 @@ class HttpServerResponse(private val _asJava: Object)
     extends  WriteStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
-  private var cached_0: MultiMap = _
-  private var cached_1: MultiMap = _
+  private var cached_0: Option[MultiMap] = None
+  private var cached_1: Option[MultiMap] = None
 
   /**
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerResponse].headers()
-      cached_0 = MultiMap(tmp)
+      cached_0 = Some(MultiMap(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return The HTTP trailers
     */
   def trailers(): MultiMap = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpServerResponse].trailers()
-      cached_1 = MultiMap(tmp)
+      cached_1 = Some(MultiMap(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   override def exceptionHandler(handler: Handler[Throwable]): HttpServerResponse = {

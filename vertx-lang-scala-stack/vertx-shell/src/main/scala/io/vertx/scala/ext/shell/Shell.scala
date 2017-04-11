@@ -36,29 +36,29 @@ import io.vertx.scala.ext.shell.cli.CliToken
 class Shell(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: JobController = _
-  private var cached_1: Session = _
+  private var cached_0: Option[JobController] = None
+  private var cached_1: Option[Session] = None
 
   /**
     * @return the shell's job controller
     */
   def jobController(): JobController = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JShell].jobController()
-      cached_0 = JobController(tmp)
+      cached_0 = Some(JobController(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the current shell session
     */
   def session(): Session = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JShell].session()
-      cached_1 = Session(tmp)
+      cached_1 = Some(Session(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**

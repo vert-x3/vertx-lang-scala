@@ -33,29 +33,29 @@ import io.vertx.ext.shell.session.{Session => JSession}
 class Process(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Tty = _
-  private var cached_1: Session = _
+  private var cached_0: Option[Tty] = None
+  private var cached_1: Option[Session] = None
 
   /**
     * @return the process tty
     */
   def getTty(): Tty = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JProcess].getTty()
-      cached_0 = Tty(tmp)
+      cached_0 = Some(Tty(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the process session
     */
   def getSession(): Session = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JProcess].getSession()
-      cached_1 = Session(tmp)
+      cached_1 = Some(Session(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**

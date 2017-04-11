@@ -33,17 +33,17 @@ import io.vertx.servicediscovery.{Record => JRecord}
 class ServiceReference(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Record = _
+  private var cached_0: Option[Record] = None
 
   /**
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */
   def record(): Record = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JServiceReference].record()
-      cached_0 = Record(tmp)
+      cached_0 = Some(Record(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

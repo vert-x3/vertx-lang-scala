@@ -46,43 +46,43 @@ class HttpClientResponse(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.buffer.Buffer] {
 
   def asJava = _asJava
-  private var cached_0: MultiMap = _
-  private var cached_1: MultiMap = _
-  private var cached_2: scala.collection.mutable.Buffer[String] = _
-  private var cached_3: NetSocket = _
-  private var cached_4: HttpClientRequest = _
+  private var cached_0: Option[MultiMap] = None
+  private var cached_1: Option[MultiMap] = None
+  private var cached_2: Option[scala.collection.mutable.Buffer[String]] = None
+  private var cached_3: Option[NetSocket] = None
+  private var cached_4: Option[HttpClientRequest] = None
 
   /**
     * @return the headers
     */
   def headers(): MultiMap = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientResponse].headers()
-      cached_0 = MultiMap(tmp)
+      cached_0 = Some(MultiMap(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the trailers
     */
   def trailers(): MultiMap = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientResponse].trailers()
-      cached_1 = MultiMap(tmp)
+      cached_1 = Some(MultiMap(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the Set-Cookie headers (including trailers)
     */
   def cookies(): scala.collection.mutable.Buffer[String] = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientResponse].cookies()
-      cached_2 = tmp.asScala.map(x => x.asInstanceOf[String])
+      cached_2 = Some(tmp.asScala.map(x => x.asInstanceOf[String]))
     }
-    cached_2
+    cached_2.get
   }
 
   /**
@@ -95,22 +95,22 @@ class HttpClientResponse(private val _asJava: Object)
     * @return the net socket
     */
   def netSocket(): NetSocket = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientResponse].netSocket()
-      cached_3 = NetSocket(tmp)
+      cached_3 = Some(NetSocket(tmp))
     }
-    cached_3
+    cached_3.get
   }
 
   /**
     * @return the corresponding request
     */
   def request(): HttpClientRequest = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JHttpClientResponse].request()
-      cached_4 = HttpClientRequest(tmp)
+      cached_4 = Some(HttpClientRequest(tmp))
     }
-    cached_4
+    cached_4.get
   }
 
   override def resume(): HttpClientResponse = {
