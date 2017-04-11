@@ -36,17 +36,17 @@ import io.vertx.core.{Vertx => JVertx}
 class CircuitBreaker(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: String = _
+  private var cached_0: Option[String] = None
 
   /**
     * @return the name of the circuit breaker.
     */
   def name(): String = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JCircuitBreaker].name()
-      cached_0 = tmp.asInstanceOf[String]
+      cached_0 = Some(tmp.asInstanceOf[String])
     }
-    cached_0
+    cached_0.get
   }
 
   /**

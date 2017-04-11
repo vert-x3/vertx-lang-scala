@@ -33,17 +33,17 @@ import io.vertx.core.Handler
 class CompositeFuture(private val _asJava: Object)
     extends Future[CompositeFuture](_asJava)  {
 
-  private var cached_0: Handler[AsyncResult[CompositeFuture]] = _
+  private var cached_0: Option[Handler[AsyncResult[CompositeFuture]]] = None
 
   /**
     * @return an handler completing this future
     */
   override def completer(): Handler[AsyncResult[CompositeFuture]] = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JCompositeFuture].completer()
-      cached_0 = {x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))}
+      cached_0 = Some({x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))})
     }
-    cached_0
+    cached_0.get
   }
 
   override def setHandler(handler: Handler[AsyncResult[CompositeFuture]]): CompositeFuture = {

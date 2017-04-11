@@ -37,17 +37,17 @@ import io.vertx.ext.shell.session.{Session => JSession}
 class Job(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Process = _
+  private var cached_0: Option[Process] = None
 
   /**
     * @return the first process in the job
     */
   def process(): Process = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JJob].process()
-      cached_0 = Process(tmp)
+      cached_0 = Some(Process(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

@@ -37,39 +37,39 @@ import io.vertx.core.Handler
 class BridgeEvent(private val _asJava: Object)
     extends Future[Boolean](_asJava)  {
 
-  private var cached_0: Handler[AsyncResult[Boolean]] = _
-  private var cached_1: io.vertx.ext.web.handler.sockjs.BridgeEventType = _
-  private var cached_2: io.vertx.core.json.JsonObject = _
-  private var cached_3: SockJSSocket = _
+  private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
+  private var cached_1: Option[io.vertx.ext.web.handler.sockjs.BridgeEventType] = None
+  private var cached_2: Option[io.vertx.core.json.JsonObject] = None
+  private var cached_3: Option[SockJSSocket] = None
 
   override def completer(): Handler[AsyncResult[Boolean]] = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].completer()
-      cached_0 = {x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
+      cached_0 = Some({x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))})
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the type of the event
     */
   def `type`(): io.vertx.ext.web.handler.sockjs.BridgeEventType = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].`type`()
-      cached_1 = tmp
+      cached_1 = Some(tmp)
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * Use [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#getRawMessage]] instead, will be removed in 3.3
     */
   def rawMessage(): io.vertx.core.json.JsonObject = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].rawMessage()
-      cached_2 = tmp
+      cached_2 = Some(tmp)
     }
-    cached_2
+    cached_2.get
   }
 
   /**
@@ -77,11 +77,11 @@ class BridgeEvent(private val _asJava: Object)
     * @return the SockJSSocket instance
     */
   def socket(): SockJSSocket = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].socket()
-      cached_3 = SockJSSocket(tmp)
+      cached_3 = Some(SockJSSocket(tmp))
     }
-    cached_3
+    cached_3.get
   }
 
   override def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
