@@ -30,29 +30,29 @@ class MqttUnsubscribeMessage(private val _asJava: Object)
     extends  MqttMessage {
 
   def asJava = _asJava
-  private var cached_0: Int = _
-  private var cached_1: scala.collection.mutable.Buffer[String] = _
+  private var cached_0: Option[Int] = None
+  private var cached_1: Option[scala.collection.mutable.Buffer[String]] = None
 
   /**
     * @return Message identifier
     */
   override def messageId(): Int = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttUnsubscribeMessage].messageId()
-      cached_0 = tmp.asInstanceOf[Int]
+      cached_0 = Some(tmp.asInstanceOf[Int])
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return List of topics to unsubscribe
     */
   def topics(): scala.collection.mutable.Buffer[String] = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttUnsubscribeMessage].topics()
-      cached_1 = tmp.asScala.map(x => x.asInstanceOf[String])
+      cached_1 = Some(tmp.asScala.map(x => x.asInstanceOf[String]))
     }
-    cached_1
+    cached_1.get
   }
 
 }

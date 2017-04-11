@@ -39,41 +39,41 @@ class ServerWebSocket(private val _asJava: Object)
     extends  WebSocketBase {
 
   def asJava = _asJava
-  private var cached_0: SocketAddress = _
-  private var cached_1: SocketAddress = _
-  private var cached_2: MultiMap = _
+  private var cached_0: Option[SocketAddress] = None
+  private var cached_1: Option[SocketAddress] = None
+  private var cached_2: Option[MultiMap] = None
 
   /**
     * @return the remote address for this socket
     */
   override def remoteAddress(): SocketAddress = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JServerWebSocket].remoteAddress()
-      cached_0 = SocketAddress(tmp)
+      cached_0 = Some(SocketAddress(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the local address for this socket
     */
   override def localAddress(): SocketAddress = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JServerWebSocket].localAddress()
-      cached_1 = SocketAddress(tmp)
+      cached_1 = Some(SocketAddress(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the headers in the WebSocket handshake
     */
   def headers(): MultiMap = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JServerWebSocket].headers()
-      cached_2 = MultiMap(tmp)
+      cached_2 = Some(MultiMap(tmp))
     }
-    cached_2
+    cached_2.get
   }
 
   /**

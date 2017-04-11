@@ -67,17 +67,17 @@ import io.vertx.scala.ext.web.codec.BodyCodec
 class HttpRequest[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: MultiMap = _
+  private var cached_0: Option[MultiMap] = None
 
   /**
     * @return The HTTP headers
     */
   def headers(): MultiMap = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpRequest[Object]].headers()
-      cached_0 = MultiMap(tmp)
+      cached_0 = Some(MultiMap(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**

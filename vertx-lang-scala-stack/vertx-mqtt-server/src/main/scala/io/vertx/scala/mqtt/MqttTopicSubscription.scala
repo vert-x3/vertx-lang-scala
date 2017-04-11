@@ -28,29 +28,29 @@ import io.vertx.mqtt.{MqttTopicSubscription => JMqttTopicSubscription}
 class MqttTopicSubscription(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: String = _
-  private var cached_1: io.netty.handler.codec.mqtt.MqttQoS = _
+  private var cached_0: Option[String] = None
+  private var cached_1: Option[io.netty.handler.codec.mqtt.MqttQoS] = None
 
   /**
     * @return Subscription topic name
     */
   def topicName(): String = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttTopicSubscription].topicName()
-      cached_0 = tmp.asInstanceOf[String]
+      cached_0 = Some(tmp.asInstanceOf[String])
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return Quality of Service level for the subscription
     */
   def qualityOfService(): io.netty.handler.codec.mqtt.MqttQoS = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttTopicSubscription].qualityOfService()
-      cached_1 = tmp
+      cached_1 = Some(tmp)
     }
-    cached_1
+    cached_1.get
   }
 
 }

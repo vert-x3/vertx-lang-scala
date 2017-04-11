@@ -1,9 +1,7 @@
 = Vert.x Mail client (SMTP client implementation)
 
 Vert.x client for sending SMTP emails via a local mail server
-(e.g.
-
-postfix) or by external mail server (e.g. googlemail or aol).
+(e.g. postfix) or by external mail server (e.g. googlemail or aol).
 
 The client supports a few additional auth methods like DIGEST-MD5 and has full
 support for TLS and SSL and is completely asynchronous. The client supports
@@ -18,7 +16,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-mail-client-scala_2.12</artifactId>
-  <version>3.4.1</version>
+  <version>3.4.2-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -26,7 +24,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mail-client-scala_2.12:3.4.1'
+compile 'io.vertx:vertx-mail-client-scala_2.12:3.4.2-SNAPSHOT'
 ----
 
 == Creating a client

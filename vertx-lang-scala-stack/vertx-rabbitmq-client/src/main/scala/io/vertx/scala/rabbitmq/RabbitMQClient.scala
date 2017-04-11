@@ -71,11 +71,42 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
+    * Start a non-nolocal, non-exclusive consumer, with a server-generated consumerTag and error handler
+    */
+  def basicConsume(queue: String, address: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[Unit]], errorHandler: Handler[Throwable]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}, {x: Throwable => errorHandler.handle(x)})
+  }
+
+  /**
     * Publish a message. Publishing to a non-existent exchange will result in a channel-level protocol exception,
     * which closes the channel. Invocations of Channel#basicPublish will eventually block if a resource-driven alarm is in effect.
     */
   def basicPublish(exchange: String, routingKey: String, message: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JRabbitMQClient].basicPublish(exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], message, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Enables publisher acknowledgements on this channel. Can be called once during client initialisation. Calls to basicPublish()
+    * will have to be confirmed.
+    */
+  def confirmSelect(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].confirmSelect({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Wait until all messages published since the last call have been either ack'd or nack'd by the broker.
+    * This will incur slight performance loss at the expense of higher write consistency.
+    * If desired, multiple calls to basicPublish() can be batched before confirming.
+    */
+  def waitForConfirms(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Wait until all messages published since the last call have been either ack'd or nack'd by the broker; or until timeout elapses. If the timeout expires a TimeoutException is thrown.
+    */
+  def waitForConfirms(timeout: Long, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -133,6 +164,13 @@ class RabbitMQClient(private val _asJava: Object) {
     */
   def queueDeclare(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
     asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  }
+
+  /**
+    * Declare a queue with config options
+    */
+  def queueDeclare(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean, config: scala.collection.mutable.Map[String, String], resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
   }
 
   /**
@@ -248,6 +286,33 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
  /**
+   * Like [[confirmSelect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def confirmSelectFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].confirmSelect(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[waitForConfirms]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def waitForConfirmsFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[waitForConfirms]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def waitForConfirmsFuture(timeout: Long): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms(timeout.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
    * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def basicQosFuture(prefetchCount: Int): scala.concurrent.Future[Unit] = {
@@ -316,6 +381,15 @@ class RabbitMQClient(private val _asJava: Object) {
   def queueDeclareFuture(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
     asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[queueDeclare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def queueDeclareFuture(queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean, config: scala.collection.mutable.Map[String, String]): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

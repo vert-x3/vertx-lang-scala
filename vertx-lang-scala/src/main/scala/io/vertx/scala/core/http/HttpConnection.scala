@@ -42,29 +42,29 @@ import io.vertx.scala.core.net.SocketAddress
 class HttpConnection(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: SocketAddress = _
-  private var cached_1: SocketAddress = _
+  private var cached_0: Option[SocketAddress] = None
+  private var cached_1: Option[SocketAddress] = None
 
   /**
     * @return the remote address for this connection
     */
   def remoteAddress(): SocketAddress = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JHttpConnection].remoteAddress()
-      cached_0 = SocketAddress(tmp)
+      cached_0 = Some(SocketAddress(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the remote address for this connection
     */
   def localAddress(): SocketAddress = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JHttpConnection].localAddress()
-      cached_1 = SocketAddress(tmp)
+      cached_1 = Some(SocketAddress(tmp))
     }
-    cached_1
+    cached_1.get
   }
 
   /**

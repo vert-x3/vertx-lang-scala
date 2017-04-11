@@ -43,32 +43,32 @@ import io.vertx.codegen.testmodel.TestGenEnum
 class TestInterface(private val _asJava: Object)
     extends SuperInterface1(_asJava) with SuperInterface2 {
 
-  private var cached_0: RefedInterface1 = _
-  private var cached_1: Int = _
-  private var cached_2: scala.collection.mutable.Buffer[RefedInterface1] = _
+  private var cached_0: Option[RefedInterface1] = None
+  private var cached_1: Option[Int] = None
+  private var cached_2: Option[scala.collection.mutable.Buffer[RefedInterface1]] = None
 
   def methodWithCachedReturn(foo: String): RefedInterface1 = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JTestInterface].methodWithCachedReturn(foo.asInstanceOf[java.lang.String])
-      cached_0 = RefedInterface1(tmp)
+      cached_0 = Some(RefedInterface1(tmp))
     }
-    cached_0
+    cached_0.get
   }
 
   def methodWithCachedReturnPrimitive(arg: Int): Int = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JTestInterface].methodWithCachedReturnPrimitive(arg.asInstanceOf[java.lang.Integer])
-      cached_1 = tmp.asInstanceOf[Int]
+      cached_1 = Some(tmp.asInstanceOf[Int])
     }
-    cached_1
+    cached_1.get
   }
 
   def methodWithCachedListReturn(): scala.collection.mutable.Buffer[RefedInterface1] = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JTestInterface].methodWithCachedListReturn()
-      cached_2 = tmp.asScala.map(x => RefedInterface1(x))
+      cached_2 = Some(tmp.asScala.map(x => RefedInterface1(x)))
     }
-    cached_2
+    cached_2.get
   }
 
   def fluentMethod(str: String): TestInterface = {

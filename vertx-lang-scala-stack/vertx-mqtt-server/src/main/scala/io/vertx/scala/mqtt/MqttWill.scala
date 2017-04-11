@@ -27,65 +27,65 @@ import io.vertx.mqtt.{MqttWill => JMqttWill}
 class MqttWill(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Boolean = _
-  private var cached_1: String = _
-  private var cached_2: String = _
-  private var cached_3: Int = _
-  private var cached_4: Boolean = _
+  private var cached_0: Option[Boolean] = None
+  private var cached_1: Option[String] = None
+  private var cached_2: Option[String] = None
+  private var cached_3: Option[Int] = None
+  private var cached_4: Option[Boolean] = None
 
   /**
     * @return the will flag for indicating the will message presence
     */
   def isWillFlag(): Boolean = {
-    if (cached_0 == null) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttWill].isWillFlag()
-      cached_0 = tmp.asInstanceOf[Boolean]
+      cached_0 = Some(tmp.asInstanceOf[Boolean])
     }
-    cached_0
+    cached_0.get
   }
 
   /**
     * @return the topic for the will as provided by the remote MQTT client
     */
   def willTopic(): String = {
-    if (cached_1 == null) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttWill].willTopic()
-      cached_1 = tmp.asInstanceOf[String]
+      cached_1 = Some(tmp.asInstanceOf[String])
     }
-    cached_1
+    cached_1.get
   }
 
   /**
     * @return the payload for the will as provided by the remote MQTT client
     */
   def willMessage(): String = {
-    if (cached_2 == null) {
+    if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JMqttWill].willMessage()
-      cached_2 = tmp.asInstanceOf[String]
+      cached_2 = Some(tmp.asInstanceOf[String])
     }
-    cached_2
+    cached_2.get
   }
 
   /**
     * @return the QoS level for the will as provided by the remote MQTT client
     */
   def willQos(): Int = {
-    if (cached_3 == null) {
+    if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JMqttWill].willQos()
-      cached_3 = tmp.asInstanceOf[Int]
+      cached_3 = Some(tmp.asInstanceOf[Int])
     }
-    cached_3
+    cached_3.get
   }
 
   /**
     * @return true if the will must be retained as provided by the remote MQTT client
     */
   def isWillRetain(): Boolean = {
-    if (cached_4 == null) {
+    if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JMqttWill].isWillRetain()
-      cached_4 = tmp.asInstanceOf[Boolean]
+      cached_4 = Some(tmp.asInstanceOf[Boolean])
     }
-    cached_4
+    cached_4.get
   }
 
 }

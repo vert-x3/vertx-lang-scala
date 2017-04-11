@@ -15,7 +15,7 @@ Add the following dependency to your maven project
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
-  <version>3.4.1</version>
+  <version>3.4.2-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -26,7 +26,7 @@ Add the following dependency to your gradle project
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.4.1'
+  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.4.2-SNAPSHOT'
 }
 ----
 
@@ -110,6 +110,41 @@ client.basicPublishFuture("", "my.queue", message).onComplete{
     println(s"$cause")
   }
 }
+
+----
+
+=== Publish with confirm
+
+Publish a message to a queue and confirm the broker acknowledged it.
+
+[source,scala]
+----
+var message = new io.vertx.core.json.JsonObject().put("body", "Hello RabbitMQ, from Vert.x !")
+
+// Put the channel in confirm mode. This can be done once at init.
+client.confirmSelectFuture().onComplete{
+  case Success(result) => {
+    client.basicPublishFuture("", "my.queue", message).onComplete{
+      case Success(result) => {
+        // Check the message got confirmed by the broker.
+        client.waitForConfirmsFuture().onComplete{
+          case Success(result) => {
+            println("Message published !")}
+          case Failure(cause) => {
+            println(s"$cause")
+          }
+        }
+      }
+      case Failure(cause) => {
+        println(s"$cause")
+      }
+    }
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 
 ----
 
