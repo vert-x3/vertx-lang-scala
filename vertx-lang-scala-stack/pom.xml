@@ -61,7 +61,6 @@
           <artifactId>scala-maven-plugin</artifactId>
           <version>3.2.2</version>
           <configuration>
-            <sendJavaToScalac>false</sendJavaToScalac>
             <args>
               <arg>-target:jvm-1.8</arg>
               <arg>-feature</arg>
