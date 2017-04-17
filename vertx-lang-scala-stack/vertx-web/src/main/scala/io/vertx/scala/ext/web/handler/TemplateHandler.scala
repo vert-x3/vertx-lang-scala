@@ -36,6 +36,16 @@ class TemplateHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+  /**
+    * Set the index template
+    * @param indexTemplate the index template
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setIndexTemplate(indexTemplate: String): TemplateHandler = {
+    asJava.asInstanceOf[JTemplateHandler].setIndexTemplate(indexTemplate.asInstanceOf[java.lang.String])
+    this
+  }
+
   override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JTemplateHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }

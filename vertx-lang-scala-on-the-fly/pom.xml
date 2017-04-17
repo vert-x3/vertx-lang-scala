@@ -53,37 +53,11 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-        <version>3.2.2</version>
-        <configuration>
-          <sendJavaToScalac>false</sendJavaToScalac>
-          <args>
-            <arg>-target:jvm-1.8</arg>
-            <arg>-feature</arg>
-            <arg>-deprecation</arg>
-            <arg>-explaintypes</arg>
-            <arg>-unchecked</arg>
-            <arg>-Xlint</arg>
-          </args>
-        </configuration>
         <executions>
           <execution>
-            <id>compile</id>
-            <phase>compile</phase>
             <goals>
               <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
               <goal>testCompile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>doc-jar</id>
-            <phase>package</phase>
-            <goals>
               <goal>doc-jar</goal>
             </goals>
           </execution>
