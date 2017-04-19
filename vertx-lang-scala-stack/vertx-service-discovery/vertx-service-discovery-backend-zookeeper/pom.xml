@@ -10,6 +10,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
 
   <artifactId>vertx-service-discovery-backend-zookeeper-scala_2.12</artifactId>
 
@@ -37,6 +38,10 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
