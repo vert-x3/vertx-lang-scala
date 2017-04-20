@@ -31,12 +31,13 @@ import scala.concurrent.ExecutionContext
   *
   */
 class VertxExecutionContext(val ctx:Context) extends ExecutionContext{
+  private val Log = ScalaLogger.getLogger(classOf[VertxExecutionContext].getName)
   override def execute(runnable: Runnable): Unit = {
-    runnable.run()
+    ctx.runOnContext((_:Unit) => runnable.run())
   }
 
   override def reportFailure(cause: Throwable): Unit = {
-    cause.printStackTrace()
+    Log.error("Failed executing on contet", cause)
   }
 }
 
