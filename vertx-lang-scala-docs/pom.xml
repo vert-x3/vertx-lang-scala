@@ -217,6 +217,41 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-backend-zookeeper-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-backend-redis-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-consul-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-docker-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-docker-links-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-kubernetes-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-service-discovery-bridge-zookeeper-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-circuit-breaker-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
@@ -225,8 +260,41 @@
       <artifactId>vertx-config-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
-
-
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-git-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-hocon-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-kubernetes-configmap-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-redis-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-spring-config-server-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-yaml-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-zookeeper-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -293,7 +361,6 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-        <version>3.2.2</version>
         <executions>
           <execution>
             <goals>

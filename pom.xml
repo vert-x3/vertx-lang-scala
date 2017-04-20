@@ -47,6 +47,27 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>3.2.2</version>
+          <configuration>
+            <args>
+              <arg>-target:jvm-1.8</arg>
+              <arg>-feature</arg>
+              <arg>-deprecation</arg>
+              <arg>-explaintypes</arg>
+              <arg>-unchecked</arg>
+              <arg>-Xlint</arg>
+            </args>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
   <modules>
     <module>vertx-lang-scala</module>
     <module>vertx-lang-scala-stack</module>

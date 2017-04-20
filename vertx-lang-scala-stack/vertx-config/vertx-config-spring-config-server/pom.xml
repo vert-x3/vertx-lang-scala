@@ -11,7 +11,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-config-spring-config-server-scala_2.12</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <properties>
     <vertx-module>vertx-config-spring-config-server</vertx-module>
@@ -37,6 +37,10 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
