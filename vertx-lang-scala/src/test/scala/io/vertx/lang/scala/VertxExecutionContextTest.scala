@@ -19,7 +19,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
       .map(res => res should not be empty)
   }
 
-  "bla" should "work with a VertxExecutionContext" in {
+  "Switching back to the event loop execution context" should "work even when another context is used in between" in {
     val idInEventLoopPromise = Promise[Long]
     val idInGlobalPromise = Promise[Long]
     val idBackInEventLoopPromise = Promise[Long]
