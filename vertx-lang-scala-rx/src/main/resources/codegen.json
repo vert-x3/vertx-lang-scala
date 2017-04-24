@@ -1,0 +1,15 @@
+{
+  "name" : "Scala",
+  "generators" : [
+    {
+      "kind": "dataObject",
+      "fileName": "'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'",
+      "templateFileName": "vertx-scala/template/dataobject.templ"
+    },
+    {
+      "kind" : "class",
+      "fileName": "if(type.name != 'io.vertx.core.buffer.Buffer'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}",
+      "templateFileName" : "vertx-scala/template/class.templ"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+  def asJava: java.lang.Object\n
+\n
+@foreach{method : instanceMethods}
+	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{escapeIfKeyword(method.name)}
+	@{assembleTypeParams(method.typeParams, true)}(
+	@foreach{param : method.params}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
+	@end{', '}): @{toScalaType(method.returnType, false)}\n
+	\n
+@end{}
+
+@foreach{method : staticMethods}
+	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
+  @if{isMethodNeedsOverride(type.name, method)}override @end{}
+	def @{escapeIfKeyword(method.name)}
+	@{assembleTypeParams(method.typeParams, true)}(
+	@foreach{param : method.params}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
+	@end{', '}): @{toScalaType(method.returnType, false)}\n
+	\n
+@end{}
+}\n
