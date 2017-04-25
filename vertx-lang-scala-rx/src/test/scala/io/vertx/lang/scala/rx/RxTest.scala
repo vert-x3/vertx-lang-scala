@@ -6,8 +6,13 @@ import org.scalatest.{Assertions, AsyncFlatSpec, FlatSpec, Matchers}
 import org.scalatest.junit.JUnitRunner
 import rx.lang.scala.Observable._
 import Rx._
+import io.vertx.core.Handler
+import io.vertx.scala.core.eventbus.Message
+import io.vertx.rx.java.ObservableHandler
 
 import scala.concurrent.{Future, Promise}
+import rx.lang.scala.JavaConversions._
+
 import scala.util.{Failure, Success}
 
 
@@ -38,13 +43,24 @@ class RxTest extends AsyncFlatSpec with Matchers with Assertions {
     vertx.deployVerticleFuture(ScalaVerticle.nameForVerticle[ConsumerVerticle])
       .map(_ => succeed)
   }
+
+  "Using ObservableHandler inside a Verticle" should "work" in {
+    val prom = Promise[String]
+    val vertx = Vertx.vertx()
+    vertx.eventBus().localConsumer[String]("response").handler(r => prom.success(r.body()))
+    vertx.deployVerticleFuture(ScalaVerticle.nameForVerticle[ObservableHandlerVerticle]).onComplete{
+      case Success(s) => vertx.eventBus().send("obsHand","Welt")
+      case Failure(t) => prom.failure(t)
+    }
+
+    prom.future.map(r => r should startWith("Hallo Welt vert.x-eventloop-thread-"))
+  }
 }
 
 class ConsumerVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[Unit] = {
     val prom = Promise[Unit]
-
     just(List(1,2,3))
       .subscribeOn(vertx.vertxScheduler())
       .map(_ => Thread.currentThread().getName.split("-").head :: Nil)
@@ -57,5 +73,18 @@ class ConsumerVerticle extends ScalaVerticle {
       .subscribe()
 
     prom.future
+  }
+}
+
+class ObservableHandlerVerticle extends ScalaVerticle {
+
+  override def startFuture(): Future[Unit] = {
+    val obsHand = observableHandler[Message[String]]()
+    obsHand
+      .map(_.body())
+      .doOnNext(s =>
+        vertx.eventBus().send("response", s"Hallo $s ${Thread.currentThread().getName}"))
+    .subscribe()
+    vertx.eventBus().consumer[String]("obsHand").handler(obsHand.toHandler).completionFuture()
   }
 }
