@@ -1,18 +1,15 @@
 package io.vertx.lang.scala.rx
+import io.vertx.lang.scala.rx.Rx._
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
 import io.vertx.scala.core.Vertx
-import org.junit.runner.RunWith
-import org.scalatest.{Assertions, AsyncFlatSpec, FlatSpec, Matchers}
-import org.scalatest.junit.JUnitRunner
-import rx.lang.scala.Observable._
-import Rx._
-import io.vertx.core.Handler
 import io.vertx.scala.core.eventbus.Message
-import io.vertx.rx.java.ObservableHandler
+import io.vertx.scala.core.streams.Pump
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
+import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
+import rx.lang.scala.Observable._
 
 import scala.concurrent.{Future, Promise}
-import rx.lang.scala.JavaConversions._
-
 import scala.util.{Failure, Success}
 
 
@@ -55,6 +52,19 @@ class RxTest extends AsyncFlatSpec with Matchers with Assertions {
 
     prom.future.map(r => r should startWith("Hallo Welt vert.x-eventloop-thread-"))
   }
+
+  "Using ObservableReadStream inside a Verticle" should "work" in {
+    val prom = Promise[String]
+    val vertx = Vertx.vertx()
+    vertx.eventBus().localConsumer[String]("response").handler(r => prom.success(r.body()))
+    vertx.deployVerticleFuture(ScalaVerticle.nameForVerticle[PumpingVerticle]).onComplete{
+      case Success(s) => vertx.eventBus().send("obsHand","Hallo Welt")
+      case Failure(t) => prom.failure(t)
+    }
+
+    prom.future.map(r => r should equal("Hallo Welt"))
+  }
+
 }
 
 class ConsumerVerticle extends ScalaVerticle {
@@ -86,5 +96,17 @@ class ObservableHandlerVerticle extends ScalaVerticle {
         vertx.eventBus().send("response", s"Hallo $s ${Thread.currentThread().getName}"))
     .subscribe()
     vertx.eventBus().consumer[String]("obsHand").handler(obsHand.toHandler).completionFuture()
+  }
+}
+
+
+class PumpingVerticle extends ScalaVerticle {
+
+  override def startFuture(): Future[Unit] = {
+    val consumer = vertx.eventBus().consumer[String]("obsHand")
+    val sender = vertx.eventBus().sender[String]("response")
+    val pump = Pump.pump[String](consumer.bodyStream(), sender)
+    pump.start()
+    consumer.completionFuture()
   }
 }
