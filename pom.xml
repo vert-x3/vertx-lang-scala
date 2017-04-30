@@ -70,7 +70,6 @@
   </build>
   <modules>
     <module>vertx-lang-scala</module>
-    <module>vertx-lang-scala-rx</module>
     <module>vertx-lang-scala-stack</module>
     <module>vertx-lang-scala-on-the-fly</module>
     <module>vertx-lang-scala-docs</module>

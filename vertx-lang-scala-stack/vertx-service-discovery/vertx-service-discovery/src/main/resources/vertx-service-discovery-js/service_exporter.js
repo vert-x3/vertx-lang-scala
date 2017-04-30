@@ -105,7 +105,7 @@ var ServiceExporter = function(j_val) {
   };
 
   // A reference to the underlying Java delegate
-  // NOTE! This is an internal API and must not be used in user code.
+  // NOTE! This is an builder API and must not be used in user code.
   // If you rely on this property your code is likely to break if we change it / remove it without warning.
   this._jdel = j_serviceExporter;
 };
