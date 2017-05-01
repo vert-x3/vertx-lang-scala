@@ -25,7 +25,7 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
   "Streaming through a Future" should "work" in {
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
-    val builder = StreamBuilder[Int](new VertxListSource[Int](ctx, List(1,2,3,5,8)))
+    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,5,8)))
 
     val prom = Promise[String]
 

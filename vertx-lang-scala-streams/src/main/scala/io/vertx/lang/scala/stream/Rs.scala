@@ -15,7 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 object Rs {
 
   implicit class ReadStreamBuilder[O](val rs: ReadStream[O]) {
-    def toSource(): StreamBuilder[O] = StreamBuilder(new ReadStreamSource(rs))
+    def toSource(): StreamBuilder[O] = StreamBuilder(() => new ReadStreamSource(rs))
   }
 
   implicit class WriteStreamBuilder[I](val ws: WriteStream[I]) {
@@ -23,14 +23,14 @@ object Rs {
   }
 
   implicit class BuilderExtender[I](val builder:StreamBuilder[I]) {
-    def map[O](f: I => O):StreamBuilder[O] = builder.next(new MapStage(f))
+    def map[O](f: I => O):StreamBuilder[O] = builder.next(() => new MapStage(f))
 
-    def process(f: I => Unit):StreamBuilder[I] = builder.next(new ProcessStage(f))
+    def process(f: I => Unit):StreamBuilder[I] = builder.next(() => new ProcessStage(f))
 
-    def future[O](f: I => Future[O])(implicit ec:ExecutionContext):StreamBuilder[O] = builder.next(new FutureStage(f, ec))
+    def future[O](f: I => Future[O])(implicit ec:ExecutionContext):StreamBuilder[O] = builder.next(() => new FutureStage(f, ec))
 
-    def switchEc(ec: ExecutionContext):StreamBuilder[I] = builder.next(new SwitchExecutionContextStage(ec))
+    def switchEc(ec: ExecutionContext):StreamBuilder[I] = builder.next(() => new SwitchExecutionContextStage(ec))
 
-    def sink[O](sink: Sink[O]): Unit = builder.next(sink).start()
+    def sink[O](sink: Sink[O]): Unit = builder.next(() => sink).start()
   }
 }
