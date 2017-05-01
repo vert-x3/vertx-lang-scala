@@ -4,12 +4,14 @@ import io.vertx.lang.scala.stream.api.Sink
 import io.vertx.lang.scala.stream.builder.StreamBuilder
 import io.vertx.lang.scala.stream.sink.WriteStreamSink
 import io.vertx.lang.scala.stream.source.ReadStreamSource
-import io.vertx.lang.scala.stream.stage._
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.scala.core.streams.WriteStream
+import io.vertx.lang.scala.stream.stage.{FutureStage, MapStage, ProcessStage, SwitchExecutionContextStage}
+import io.vertx.scala.core.streams.{ReadStream, WriteStream}
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+  * Created by jochen on 01.05.17.
+  */
 object Rs {
 
   implicit class ReadStreamBuilder[O](val rs: ReadStream[O]) {

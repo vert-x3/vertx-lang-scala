@@ -3,8 +3,8 @@ package io.vertx.lang.scala.stream
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.lang.scala.stream.Rs._
 import io.vertx.lang.scala.stream.builder.StreamBuilder
-import io.vertx.lang.scala.stream.sink.{FunctionSink, WriteStreamSink}
-import io.vertx.lang.scala.stream.source.{RandomSource, ReadStreamSource, VertxListSource}
+import io.vertx.lang.scala.stream.sink.FunctionSink
+import io.vertx.lang.scala.stream.source.VertxListSource
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.core.eventbus.{MessageConsumer, MessageProducer}
@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
 
-import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
 /**
@@ -22,7 +22,7 @@ import scala.util.{Failure, Success}
 @RunWith(classOf[JUnitRunner])
 class RsTest extends AsyncFlatSpec with Matchers with Assertions {
 
-  "Rs" should "work" in {
+  "Streaming through a Future" should "work" in {
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
     val builder = StreamBuilder[Int](new VertxListSource[Int](ctx, List(1,2,3,5,8)))
@@ -45,7 +45,7 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
     prom.future.map(s => s should startWith("HALLO "))
   }
 
-  "Rs" should "bla" in {
+  "ReadStream/WriteStream combin inside a Verticle" should "work" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
 
