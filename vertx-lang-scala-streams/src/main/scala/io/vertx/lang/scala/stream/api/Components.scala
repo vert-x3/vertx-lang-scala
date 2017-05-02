@@ -3,7 +3,17 @@ package io.vertx.lang.scala.stream.api
 /**
   * Base trait to prevent further additions and to allow easy handling in collections.
   */
-sealed trait StreamComponent
+sealed trait StreamComponent {
+  private[this] var _failureStrategy: FailureStrategy = _
+
+  def failureStrategy: FailureStrategy = _failureStrategy
+  def failureStrategy_=(f: FailureStrategy): Unit = _failureStrategy = f
+
+  /**
+    * Called when the component should be destroyed
+    */
+  def destroy(): Unit = {}
+}
 
 /**
   * A Sink is a consumer for events.
@@ -24,6 +34,11 @@ trait Sink[T] extends StreamComponent{
     */
   def next(value: T): Unit
 
+  /**
+    * Used to report that the stream skip 1 or more events.
+    * @param ns
+    */
+  def skip(ns: Long): Unit
   /**
     * Called after construction of the whole stream to start processing.
     */
@@ -62,4 +77,9 @@ trait Stage[I,O] extends Sink[I] with Source[O]{
   override def request(nr: Long): Unit = source.request(nr)
   override def cancel(): Unit = source.cancel()
   override def start(): Unit = ()
+  override def skip(ns: Long): Unit = sink.skip(ns)
+}
+
+trait FailureStrategy {
+  def onFailure(source: StreamComponent, t:Throwable): Unit
 }

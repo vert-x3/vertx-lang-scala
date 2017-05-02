@@ -18,11 +18,15 @@ class VertxListSource[O](ctx: Context, val list: List[O]) extends Source[O]{
     ctx.runOnContext(_ => {
       if(list.size == offset - 1)
         offset = 0
-      else
+      else {
+        sink.next(list(offset))
         offset += 1
-      sink.next(list(offset))
-      tokens -= 1
-      if(tokens > 0)
-        exec()
+        tokens -= 1
+        if(tokens > 0)
+          exec()
+      }
+
     })
+
+  override def toString: String = s"VertxListSource using list"
 }

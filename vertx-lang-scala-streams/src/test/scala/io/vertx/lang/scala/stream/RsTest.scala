@@ -13,6 +13,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
 
+import scala.collection.mutable.ListBuffer
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
@@ -21,6 +22,26 @@ import scala.util.{Failure, Success}
   */
 @RunWith(classOf[JUnitRunner])
 class RsTest extends AsyncFlatSpec with Matchers with Assertions {
+
+  "Exception in a Stage using SkipStrategy" should "cause skipped events" in {
+    val vertx = Vertx.vertx
+    val prom = Promise[ListBuffer[Int]]
+    val ctx = vertx.getOrCreateContext()
+    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,4,5)))
+
+    val results = ListBuffer[Int]()
+    val sink = new FunctionSink[Int](s => {
+      results.append(s)
+      if(results.length == 4)
+        prom.success(results)
+    })
+
+    builder
+      .process(s => if(s == 2) throw new Exception("Test"))
+      .sink(sink)
+
+    prom.future.map(s => s should equal(ListBuffer(1,3,4,5)))
+  }
 
   "Streaming through a Future" should "work" in {
     val vertx = Vertx.vertx
@@ -32,11 +53,9 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
     implicit val global = VertxExecutionContext(ctx)
     val sink = new FunctionSink[String](s => prom.success(s))
 
-    println(Thread.currentThread().getName)
-
     builder
       .map(r => s"HALLO $r")
-      .process(s => println(s"vertx ${Thread.currentThread().getName}"))
+      .process(s => "Nothing to see here")
       .future(f => Future({
         f+" "+Thread.currentThread().getId
       }))
@@ -45,7 +64,7 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
     prom.future.map(s => s should startWith("HALLO "))
   }
 
-  "ReadStream/WriteStream combin inside a Verticle" should "work" in {
+  "ReadStream/WriteStream combination inside a Verticle" should "work" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
 

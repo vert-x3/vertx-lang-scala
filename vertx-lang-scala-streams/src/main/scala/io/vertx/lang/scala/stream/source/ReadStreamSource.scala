@@ -18,6 +18,7 @@ class ReadStreamSource[T](rs: ReadStream[T]) extends Source[T] {
     tokens = tokens + nr
   }
 
+  override def toString: String = s"ReadStreamSource using $rs"
 }
 
 object ReadStreamSource {
