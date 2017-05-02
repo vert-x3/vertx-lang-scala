@@ -80,6 +80,4 @@ trait Stage[I,O] extends Sink[I] with Source[O]{
   override def skip(ns: Long): Unit = sink.skip(ns)
 }
 
-trait FailureStrategy {
-  def onFailure(source: StreamComponent, t:Throwable): Unit
-}
+
