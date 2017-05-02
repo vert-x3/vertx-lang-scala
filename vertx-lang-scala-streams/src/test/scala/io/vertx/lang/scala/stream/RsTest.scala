@@ -3,6 +3,7 @@ package io.vertx.lang.scala.stream
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.lang.scala.stream.Rs._
 import io.vertx.lang.scala.stream.builder.StreamBuilder
+import io.vertx.lang.scala.stream.failurestrategy.SkipStrategy
 import io.vertx.lang.scala.stream.sink.FunctionSink
 import io.vertx.lang.scala.stream.source.VertxListSource
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
@@ -27,7 +28,7 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
     val vertx = Vertx.vertx
     val prom = Promise[ListBuffer[Int]]
     val ctx = vertx.getOrCreateContext()
-    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,4,5)))
+    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,4,5)), SkipStrategy())
 
     val results = ListBuffer[Int]()
     val sink = new FunctionSink[Int](s => {
@@ -46,7 +47,7 @@ class RsTest extends AsyncFlatSpec with Matchers with Assertions {
   "Streaming through a Future" should "work" in {
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
-    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,5,8)))
+    val builder = StreamBuilder[Int](() => new VertxListSource[Int](ctx, List(1,2,3,5,8)), SkipStrategy())
 
     val prom = Promise[String]
 

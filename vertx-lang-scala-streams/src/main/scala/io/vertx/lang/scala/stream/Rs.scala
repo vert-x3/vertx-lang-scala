@@ -1,7 +1,8 @@
 package io.vertx.lang.scala.stream
 
-import io.vertx.lang.scala.stream.api.Sink
+import io.vertx.lang.scala.stream.api.{FailureStrategy, Sink}
 import io.vertx.lang.scala.stream.builder.StreamBuilder
+import io.vertx.lang.scala.stream.failurestrategy.SkipStrategy
 import io.vertx.lang.scala.stream.sink.WriteStreamSink
 import io.vertx.lang.scala.stream.source.ReadStreamSource
 import io.vertx.lang.scala.stream.stage._
@@ -15,7 +16,7 @@ import scala.concurrent.{ExecutionContext, Future}
 object Rs {
 
   implicit class ReadStreamBuilder[O](val rs: ReadStream[O]) {
-    def toSource(): StreamBuilder[O] = StreamBuilder(() => new ReadStreamSource(rs))
+    def toSource(failureStrategy:FailureStrategy = SkipStrategy()): StreamBuilder[O] = StreamBuilder(() => new ReadStreamSource(rs), failureStrategy)
   }
 
   implicit class WriteStreamBuilder[I](val ws: WriteStream[I]) {

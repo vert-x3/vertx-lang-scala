@@ -3,9 +3,9 @@ package io.vertx.lang.scala.stream.builder
 import io.vertx.lang.scala.stream.api._
 import io.vertx.lang.scala.stream.failurestrategy.SkipStrategy
 
-class StreamBuilder[I](private val toBuild: List[() => StreamComponent], val failureStrategy:FailureStrategy = SkipStrategy()) {
+class StreamBuilder[I](private val toBuild: List[() => StreamComponent], val failureStrategy:FailureStrategy) {
 
-  def next[O](sc: () => StreamComponent):StreamBuilder[O] = new StreamBuilder[O](toBuild :+ sc)
+  def next[O](sc: () => StreamComponent):StreamBuilder[O] = new StreamBuilder[O](toBuild :+ sc, failureStrategy)
 
   def start(): StreamBuilder[I] = {
     val components = toBuild.map(a => a())
@@ -29,6 +29,6 @@ class StreamBuilder[I](private val toBuild: List[() => StreamComponent], val fai
 }
 
 object StreamBuilder{
-  def apply[I](sc: () => StreamComponent): StreamBuilder[I] = new StreamBuilder(sc :: Nil)
-  def apply[I](): StreamBuilder[I] = new StreamBuilder(Nil)
+  def apply[I](sc: () => StreamComponent, failureStrategy:FailureStrategy): StreamBuilder[I] = new StreamBuilder(sc :: Nil, failureStrategy)
+  def apply[I](failureStrategy:FailureStrategy): StreamBuilder[I] = new StreamBuilder(Nil, failureStrategy)
 }
