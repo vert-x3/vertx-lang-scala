@@ -4,10 +4,10 @@ import io.vertx.lang.scala.ScalaLogger
 
 trait SimpleSink[I] extends Sink[I]{
 
-  private val Log = ScalaLogger.getLogger(this.getClass.getName)
+  private val Log = ScalaLogger.getLogger(getClass.getName)
 
   protected var tokens:Long = 0
-  protected var subscription: Subscription = _
+  protected var subscription: TokenSubscription = _
 
   def batchSize:Long
 
@@ -25,29 +25,29 @@ trait SimpleSink[I] extends Sink[I]{
   override def onNext(t: I): Unit = {
     if(tokens <= 0) {
       subscription.cancel()
-      throw new RuntimeException("Received an event but receiveTokens are exhausted, cancelling Subscription")
+      throw new RuntimeException("Received an event but receiveTokens are exhausted, cancelling TokenSubscription")
     }
     tokens -= 1
     next(t)
     checkTokens()
   }
 
-  override def onSubscribe(s: Subscription): Unit = {
+  override def onSubscribe(s: TokenSubscription): Unit = {
     if(subscription == null) {
       subscription = s
       checkTokens()
     }
     else
-      throw new RuntimeException("Sink already has a Subscription")
+      throw new RuntimeException("Sink already has a TokenSubscription")
   }
 
   override def onComplete(): Unit = {
-    Log.info("Stream has ended, cancelling Subscription")
+    Log.info("Stream has ended, cancelling TokenSubscription")
     subscription.cancel()
   }
 
   override def onError(t: Throwable): Unit = {
-    Log.error("Received an error, cancelling Subscription", t)
+    Log.error("Received an error, cancelling TokenSubscription", t)
     subscription.cancel()
   }
 }

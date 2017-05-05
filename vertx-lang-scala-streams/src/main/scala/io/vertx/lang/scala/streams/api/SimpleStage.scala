@@ -3,11 +3,11 @@ package io.vertx.lang.scala.streams.api
 import io.vertx.lang.scala.ScalaLogger
 
 trait SimpleStage[I,O] extends Stage[I,O]{
-  private val Log = ScalaLogger.getLogger(this.getClass.getName)
+  private val Log = ScalaLogger.getLogger(getClass.getName)
 
   private var startTokens = 0l
-  protected var receiveSubscription: Subscription = _
-  protected var sendSubscription: Subscription = _
+  protected var receiveSubscription: TokenSubscription = _
+  protected var sendSubscription: TokenSubscription = _
   protected var subscriber: Sink[O] = _
 
   def next(event:I): Unit
@@ -16,30 +16,30 @@ trait SimpleStage[I,O] extends Stage[I,O]{
     next(t)
   }
 
-  override def onSubscribe(s: Subscription): Unit = {
+  override def onSubscribe(s: TokenSubscription): Unit = {
     if(receiveSubscription == null) {
       receiveSubscription = s
       receiveSubscription.request(startTokens)
     }
     else
-      throw new RuntimeException("Sink already has a Subscription")
+      throw new RuntimeException("Sink already has a TokenSubscription")
   }
 
   override def onComplete(): Unit = {
-    Log.info("Stream has ended, cancelling Subscription")
+    Log.info("Stream has ended, cancelling TokenSubscription")
     receiveSubscription.cancel()
   }
 
   override def onError(t: Throwable): Unit = {
-    Log.error("Received an error, cancelling Subscription", t)
+    Log.error("Received an error, cancelling TokenSubscription", t)
     receiveSubscription.cancel()
   }
 
   override def subscribe(s: Sink[O]): Unit = {
     if (sendSubscription != null)
-      throw new IllegalArgumentException("This Source only supports one Subscription at a time")
+      throw new IllegalArgumentException("This Source only supports one TokenSubscription at a time")
     subscriber = s
-    sendSubscription = new Subscription {
+    sendSubscription = new TokenSubscription {
       override def cancel(): Unit = receiveSubscription.cancel()
 
       override def request(n: Long): Unit = {

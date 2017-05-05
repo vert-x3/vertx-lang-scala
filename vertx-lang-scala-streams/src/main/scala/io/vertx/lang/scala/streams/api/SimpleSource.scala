@@ -1,15 +1,15 @@
 package io.vertx.lang.scala.streams.api
 
 trait SimpleSource[O] extends Source[O]{
-  protected var subscription: Subscription = _
+  protected var subscription: TokenSubscription = _
   protected var subscriber: Sink[O] = _
   protected var remainingTokens:Long = 0
 
   override def subscribe(s: Sink[O]): Unit = {
     if (subscription != null)
-      throw new IllegalArgumentException("This Source only supports one Subscription at a time")
+      throw new IllegalArgumentException("This Source only supports one TokenSubscription at a time")
     subscriber = s
-    subscription = new Subscription {
+    subscription = new TokenSubscription {
       override def cancel(): Unit = remainingTokens = 0
 
       override def request(n: Long): Unit = {

@@ -30,13 +30,13 @@ trait Sink[I] extends Component{
   def onError(t: Throwable): Unit
   def onComplete(): Unit
   def onNext(t: I): Unit
-  def onSubscribe(s: Subscription): Unit
+  def onSubscribe(s: TokenSubscription): Unit
 }
 
 /**
   * Modelled after [[org.reactivestreams.Subscription]]
   */
-trait Subscription extends Component{
+trait TokenSubscription extends Component{
   def cancel(): Unit
   def request(n: Long): Unit
 }
