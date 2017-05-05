@@ -1,10 +1,12 @@
 package io.vertx.lang.scala.streams
 
-import io.vertx.scala.core.streams.{ReadStream, WriteStream}
 import io.vertx.lang.scala.streams.api.{Sink, Source}
 import io.vertx.lang.scala.streams.sink.WriteStreamSink
 import io.vertx.lang.scala.streams.source.ReadStreamSource
-import io.vertx.lang.scala.streams.stage.{FilterStage, MapStage, ProcessStage}
+import io.vertx.lang.scala.streams.stage.{FilterStage, FutureStage, MapStage, ProcessStage}
+import io.vertx.scala.core.streams.{ReadStream, WriteStream}
+
+import scala.concurrent.{ExecutionContext, Future}
 
 object Rs {
 
@@ -16,20 +18,26 @@ object Rs {
     def toSink(batchSize: Long = 10): Sink[I] = new WriteStreamSink[I](ws, batchSize)
   }
 
-  implicit class SourceExtender[I](val source:Source[I]) {
-    def map[O](f: I => O):Source[O] = {
-      val stage = new MapStage[I,O](f)
+  implicit class SourceExtender[I](val source: Source[I]) {
+    def map[O](f: I => O): Source[O] = {
+      val stage = new MapStage[I, O](f)
       source.subscribe(stage)
       stage
     }
 
-    def filter(f: I => Boolean):Source[I] = {
+    def filter(f: I => Boolean): Source[I] = {
       val stage = new FilterStage[I](f)
       source.subscribe(stage)
       stage
     }
 
-    def process(f: I => Unit):Source[I] = {
+    def future[O](f: I => Future[O], failureHandler: (I, Throwable) => Unit = (a: I, t: Throwable) => {})(implicit ec: ExecutionContext): Source[O] = {
+      val stage = new FutureStage[I, O](f)
+      source.subscribe(stage)
+      stage
+    }
+
+    def process(f: I => Unit): Source[I] = {
       val stage = new ProcessStage[I](f)
       source.subscribe(stage)
       stage
@@ -39,4 +47,5 @@ object Rs {
       source.subscribe(sink)
     }
   }
+
 }
