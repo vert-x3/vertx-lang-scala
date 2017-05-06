@@ -1,16 +1,15 @@
 package io.vertx.lang.scala.streams
 
-import java.util.concurrent.Executors
+import java.util.concurrent.{CopyOnWriteArrayList, Executors}
 
-import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
-import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext, WorkerExecutorExecutionContext}
+import io.vertx.lang.scala.VertxExecutionContext
+import io.vertx.lang.scala.streams.Rs._
+import io.vertx.lang.scala.streams.source.VertxListSource
 import io.vertx.scala.core.Vertx
 import org.junit.runner.RunWith
-import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
+import org.reactivestreams.example.unicast.{AsyncIterablePublisher, AsyncSubscriber}
 import org.scalatest.junit.JUnitRunner
-import io.vertx.lang.scala.streams.Rs._
-import io.vertx.lang.scala.streams.source.ReactiveStreamsPublisherSource
-import org.reactivestreams.example.unicast.AsyncIterablePublisher
+import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -19,11 +18,14 @@ import scala.concurrent.Promise
 @RunWith(classOf[JUnitRunner])
 class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
 
-  "Transforming events in a stream" should "work" in {
-    val vertx = Vertx.vertx
-    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+  "A ReactiveStreams based Publisher" should "work as a Source point in a stream" in {
+    val vertx = Vertx.vertx()
+    val ctx = vertx.getOrCreateContext()
+    implicit val ec = VertxExecutionContext(ctx)
 
-    val promise = Promise[List[Int]]
+    val prom = Promise[List[Int]]
+
+    val original = List(1, 2, 3, 4, 5)
 
     val received = mutable.ListBuffer[Int]()
 
@@ -31,26 +33,49 @@ class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
       .localConsumer[Int]("sinkAddress")
       .handler(m => {
         received += m.body()
-        if(received.size == 5)
-          promise.success(received.toList)
+        if (received.size == 5)
+          prom.success(received.toList)
       })
 
-    vertx
-      .deployVerticle(nameForVerticle[ReactiveStreamsVerticle])
-    promise.future.map(r => r should contain allElementsOf(List(1,2,3,4,5)))
+    ec.execute(() => {
+      val producer = vertx.eventBus().sender[Int]("sinkAddress")
+
+      val publisher = new AsyncIterablePublisher[Int](List(1, 2, 3, 4, 5).asJava, Executors.newFixedThreadPool(5))
+      publisher.toSource
+        .sink(producer.toSink())
+    })
+
+    prom.future.map(s => s should equal(original))
+
+  }
+
+  "A ReactiveStreams based Subscriber" should "work as Sink in a stream" in {
+    val vertx = Vertx.vertx()
+    val ctx = vertx.getOrCreateContext()
+    implicit val ec = VertxExecutionContext(ctx)
+
+    val prom = Promise[List[Int]]
+
+    val original = List(1, 2, 3, 5, 8)
+
+    val received = new CopyOnWriteArrayList[Int]()
+
+    ec.execute(() => {
+      val source = new VertxListSource[Int](original)
+      val rsSubscriber = new AsyncSubscriber[Int](Executors.newFixedThreadPool(5)) {
+        override def whenNext(element: Int): Boolean = {
+          received.add(element)
+          if(received.size() == 5)
+            prom.success(received.asScala.toList)
+          true
+        }
+      }
+
+      source
+        .sink(rsSubscriber.toSink)
+    })
+
+    prom.future.map(s => s should equal(original))
   }
 
 }
-
-class ReactiveStreamsVerticle extends ScalaVerticle {
-  override def start() = {
-    val producer = vertx.eventBus().sender[Int]("sinkAddress")
-
-    val publisher = new AsyncIterablePublisher[Int](List(1,2,3,4,5).asJava, Executors.newFixedThreadPool(5))
-    val rsSource = new ReactiveStreamsPublisherSource[Int](publisher)
-    rsSource
-      .sink(producer.toSink())
-
-  }
-}
-

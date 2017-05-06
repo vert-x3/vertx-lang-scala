@@ -1,10 +1,12 @@
 package io.vertx.lang.scala.streams
 
+import io.vertx.lang.scala.VertxExecutionContext
 import io.vertx.lang.scala.streams.api.{Sink, Source}
-import io.vertx.lang.scala.streams.sink.WriteStreamSink
-import io.vertx.lang.scala.streams.source.ReadStreamSource
+import io.vertx.lang.scala.streams.sink.{ReactiveStreamsSubscriberSink, WriteStreamSink}
+import io.vertx.lang.scala.streams.source.{ReactiveStreamsPublisherSource, ReadStreamSource}
 import io.vertx.lang.scala.streams.stage.{FilterStage, FutureStage, MapStage, ProcessStage}
 import io.vertx.scala.core.streams.{ReadStream, WriteStream}
+import org.reactivestreams.{Publisher, Subscriber}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -16,6 +18,14 @@ object Rs {
 
   implicit class WriteStreamSourceExtender[I](val ws: WriteStream[I]) {
     def toSink(batchSize: Long = 10): Sink[I] = new WriteStreamSink[I](ws, batchSize)
+  }
+
+  implicit class PublisherExtender[O](val pub: Publisher[O])(implicit ec:ExecutionContext) {
+    def toSource: Source[O] = new ReactiveStreamsPublisherSource[O](pub)
+  }
+
+  implicit class SubscriberExtender[I](val s: Subscriber[I])(implicit ec:VertxExecutionContext) {
+    def toSink: Sink[I] = new ReactiveStreamsSubscriberSink[I](s)
   }
 
   implicit class SourceExtender[I](val source: Source[I]) {

@@ -1,19 +1,23 @@
 package io.vertx.lang.scala.streams.sink
 
+import java.util.concurrent.atomic.AtomicReference
+
 import io.vertx.lang.scala.streams.api.{Sink, TokenSubscription}
 import io.vertx.lang.scala.{ScalaLogger, VertxExecutionContext}
 import org.reactivestreams.{Subscriber, Subscription}
 
-class ReactiveStreamsSubscriberSink[I](subscriber: Subscriber[I])(ec: VertxExecutionContext) extends Sink[I]{
+class ReactiveStreamsSubscriberSink[I](subscriber: Subscriber[I])(implicit ec: VertxExecutionContext) extends Sink[I]{
 
   private val Log = ScalaLogger.getLogger(getClass.getName)
 
-  private var subscription: TokenSubscription = _
+  private var subscription: AtomicReference[TokenSubscription] = new AtomicReference[TokenSubscription]()
 
   private val reactiveStreamsSubscription = new Subscription {
-    override def cancel(): Unit = ec.execute(() => subscription.cancel())
+    override def cancel(): Unit = ec.execute(() => subscription.get().cancel())
 
-    override def request(n: Long): Unit = ec.execute(() => subscription.request(n))
+    override def request(n: Long): Unit = ec.execute(() => {
+      ec.execute(() => subscription.get().request(n))
+    })
   }
 
   override def onNext(t: I): Unit = {
@@ -21,8 +25,9 @@ class ReactiveStreamsSubscriberSink[I](subscriber: Subscriber[I])(ec: VertxExecu
   }
 
   override def onSubscribe(s: TokenSubscription): Unit = {
-    if(subscription == null) {
-      subscription = s
+    if(subscription.get() == null) {
+      subscriber.onSubscribe(reactiveStreamsSubscription)
+      subscription.set(s)
     }
     else
       throw new RuntimeException("Sink already has a TokenSubscription")
