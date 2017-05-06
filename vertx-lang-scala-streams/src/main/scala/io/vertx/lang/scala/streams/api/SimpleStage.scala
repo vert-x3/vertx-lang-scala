@@ -19,7 +19,8 @@ trait SimpleStage[I,O] extends Stage[I,O]{
   override def onSubscribe(s: TokenSubscription): Unit = {
     if(receiveSubscription == null) {
       receiveSubscription = s
-      receiveSubscription.request(startTokens)
+      if(startTokens > 0)
+        receiveSubscription.request(startTokens)
     }
     else
       throw new RuntimeException("Sink already has a TokenSubscription")

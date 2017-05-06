@@ -6,7 +6,9 @@ import io.vertx.lang.scala.WorkerExecutorExecutionContext
 import io.vertx.lang.scala.streams.api.{Sink, Source, TokenSubscription}
 import org.reactivestreams.{Publisher, Subscriber, Subscription}
 
-class ReactiveStreamsPublisherSource[O](publisher: Publisher[O])(implicit ec: WorkerExecutorExecutionContext) extends Source[O]{
+import scala.concurrent.ExecutionContext
+
+class ReactiveStreamsPublisherSource[O](publisher: Publisher[O])(implicit ec: ExecutionContext) extends Source[O] {
   protected var subscription: TokenSubscription = _
   protected var subscriber: Sink[O] = _
 
@@ -29,7 +31,9 @@ class ReactiveStreamsPublisherSource[O](publisher: Publisher[O])(implicit ec: Wo
     subscription = new TokenSubscription {
       override def cancel(): Unit = reactiveStreamsSubscription.get().cancel()
 
-      override def request(n: Long): Unit = reactiveStreamsSubscription.get().request(n)
+      override def request(n: Long): Unit = {
+        reactiveStreamsSubscription.get().request(n)
+      }
     }
     subscriber.onSubscribe(subscription)
   }
