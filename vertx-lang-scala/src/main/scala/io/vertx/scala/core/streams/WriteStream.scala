@@ -26,7 +26,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 /**
   *
   * Represents a stream of data that can be written to.
-  * 
+  *
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from a `ReadStream`
   * to it.
   */
@@ -43,7 +43,7 @@ trait WriteStream[T]
   override def exceptionHandler(handler: Handler[Throwable]): WriteStream[T]
 
   /**
-    * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
+    * Write some data to the stream. The data is put on an builder write queue, and the write actually happens
     * asynchronously. To avoid running out of memory by putting too much on the write queue,
     * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
     * @param data the data to write
@@ -53,7 +53,7 @@ trait WriteStream[T]
 
   /**
     * Ends the stream.
-    * 
+    *
     * Once the stream has ended, it cannot be used any more.
     */
   def end(): Unit
@@ -112,7 +112,7 @@ object WriteStream {
   }
 
   /**
-    * Write some data to the stream. The data is put on an internal write queue, and the write actually happens
+    * Write some data to the stream. The data is put on an builder write queue, and the write actually happens
     * asynchronously. To avoid running out of memory by putting too much on the write queue,
     * check the [[io.vertx.scala.core.streams.WriteStream#writeQueueFull]] method before writing. This is done automatically if using a [[io.vertx.scala.core.streams.Pump]].
     * @param data the data to write
@@ -162,7 +162,7 @@ object WriteStream {
 
   /**
     * Ends the stream.
-    * 
+    *
     * Once the stream has ended, it cannot be used any more.
     */
   def end(): Unit = {

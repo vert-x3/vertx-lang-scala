@@ -182,7 +182,7 @@ class VertxOptions(private val _asJava: JVertxOptions) {
   }
 
   /**
-    * Set the value of internal blocking pool size
+    * Set the value of builder blocking pool size
     */
   def setInternalBlockingPoolSize(value: Int) = {
     asJava.setInternalBlockingPoolSize(value)
@@ -260,11 +260,11 @@ class VertxOptions(private val _asJava: JVertxOptions) {
 }
 
 object VertxOptions {
-  
+
   def apply() = {
     new VertxOptions(new JVertxOptions(emptyObj()))
   }
-  
+
   def apply(t: JVertxOptions) = {
     if (t != null) {
       new VertxOptions(t)
@@ -272,7 +272,7 @@ object VertxOptions {
       null
     }
   }
-  
+
   def fromJson(json: JsonObject): VertxOptions = {
     if (json != null) {
       new VertxOptions(new JVertxOptions(json))
