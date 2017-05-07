@@ -2,7 +2,6 @@ package io.vertx.lang.scala.streams.source
 
 import java.util.concurrent.atomic.AtomicReference
 
-import io.vertx.lang.scala.WorkerExecutorExecutionContext
 import io.vertx.lang.scala.streams.api.{Sink, Source, TokenSubscription}
 import org.reactivestreams.{Publisher, Subscriber, Subscription}
 

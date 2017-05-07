@@ -2,6 +2,12 @@ package io.vertx.lang.scala.streams.api
 
 import io.vertx.lang.scala.ScalaLogger
 
+/**
+  * Several [[Stage]]s sit between a [[Source]] and [[Sink]]. This class provides a basic implementation that
+  * coordinates token handling between the two. 
+  * @tparam I incoming event type
+  * @tparam O outgoing event type
+  */
 trait SimpleStage[I,O] extends Stage[I,O]{
   private val Log = ScalaLogger.getLogger(getClass.getName)
 

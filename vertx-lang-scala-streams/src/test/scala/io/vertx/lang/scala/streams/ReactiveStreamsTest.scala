@@ -18,15 +18,12 @@ import scala.concurrent.Promise
 @RunWith(classOf[JUnitRunner])
 class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
 
-  "A ReactiveStreams based Publisher" should "work as a Source point in a stream" in {
+  "A ReactiveStreams based Publisher" should "work as a Source in a stream" in {
     val vertx = Vertx.vertx()
     val ctx = vertx.getOrCreateContext()
     implicit val ec = VertxExecutionContext(ctx)
 
     val prom = Promise[List[Int]]
-
-    val original = List(1, 2, 3, 4, 5)
-
     val received = mutable.ListBuffer[Int]()
 
     vertx.eventBus()
@@ -45,7 +42,7 @@ class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
         .sink(producer.toSink())
     })
 
-    prom.future.map(s => s should equal(original))
+    prom.future.map(s => s should equal(List(1, 2, 3, 4, 5)))
 
   }
 
@@ -56,12 +53,10 @@ class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
 
     val prom = Promise[List[Int]]
 
-    val original = List(1, 2, 3, 5, 8)
-
     val received = new CopyOnWriteArrayList[Int]()
 
     ec.execute(() => {
-      val source = new VertxListSource[Int](original)
+      val source = new VertxListSource[Int](List(1, 2, 3, 5, 8))
       val rsSubscriber = new AsyncSubscriber[Int](Executors.newFixedThreadPool(5)) {
         override def whenNext(element: Int): Boolean = {
           received.add(element)
@@ -75,7 +70,7 @@ class ReactiveStreamsTest extends AsyncFlatSpec with Matchers with Assertions {
         .sink(rsSubscriber.toSink)
     })
 
-    prom.future.map(s => s should equal(original))
+    prom.future.map(s => s should equal(List(1, 2, 3, 5, 8)))
   }
 
 }

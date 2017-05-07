@@ -1,5 +1,11 @@
 package io.vertx.lang.scala.streams.api
 
+/**
+  * Basis for simple sources. [TokenSubscription]] handling is implemented.
+  * The [[Source]] will pause if tokens run out and restart if a new set arrives.
+  *
+  * @tparam O outgoing event type
+  */
 trait SimpleSource[O] extends Source[O]{
   protected var subscription: TokenSubscription = _
   protected var subscriber: Sink[O] = _

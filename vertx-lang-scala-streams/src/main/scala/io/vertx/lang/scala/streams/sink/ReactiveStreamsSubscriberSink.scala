@@ -6,6 +6,12 @@ import io.vertx.lang.scala.streams.api.{Sink, TokenSubscription}
 import io.vertx.lang.scala.{ScalaLogger, VertxExecutionContext}
 import org.reactivestreams.{Subscriber, Subscription}
 
+/**
+  * A [[Sink]] based on a Reactive Streams [[Subscriber]]
+  * @param subscriber the actual subscriber that is going to receive the events
+  * @param ec the VertxExecutionContext that is used to interact with the stream
+  * @tparam I incoming event type
+  */
 class ReactiveStreamsSubscriberSink[I](subscriber: Subscriber[I])(implicit ec: VertxExecutionContext) extends Sink[I]{
 
   private val Log = ScalaLogger.getLogger(getClass.getName)
