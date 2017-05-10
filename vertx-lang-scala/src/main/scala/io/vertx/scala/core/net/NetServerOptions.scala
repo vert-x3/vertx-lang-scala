@@ -257,6 +257,17 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
   }
 
   /**
+    * Set whether the server supports Server Name Indiciation
+    */
+  def setSni(value: Boolean) = {
+    asJava.setSni(value)
+    this
+  }
+  def isSni: Boolean = {
+    asJava.isSni().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether SO_linger keep alive is enabled
     */
   override def setSoLinger(value: Int) = {

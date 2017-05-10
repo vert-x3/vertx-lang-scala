@@ -243,6 +243,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
   }
+  def setSniServerName(value: String) = {
+    asJava.setSniServerName(value)
+    this
+  }
+  def getSniServerName: String = {
+    asJava.getSniServerName().asInstanceOf[String]
+  }
   def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
@@ -317,6 +324,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   }
   def getVhost: String = {
     asJava.getVhost().asInstanceOf[String]
+  }
+  def setVirtualHost(value: String) = {
+    asJava.setVirtualHost(value)
+    this
+  }
+  def getVirtualHost: String = {
+    asJava.getVirtualHost().asInstanceOf[String]
   }
 }
 

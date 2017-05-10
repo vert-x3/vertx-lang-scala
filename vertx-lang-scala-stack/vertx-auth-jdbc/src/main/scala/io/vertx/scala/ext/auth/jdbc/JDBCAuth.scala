@@ -24,6 +24,7 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.core.json.JsonArray
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.{User => JUser}
@@ -46,7 +47,8 @@ class JDBCAuth(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setAuthenticationQuery(authenticationQuery: String): JDBCAuth = {
-    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setAuthenticationQuery(authenticationQuery.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JJDBCAuth].setAuthenticationQuery(authenticationQuery.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
@@ -55,7 +57,8 @@ class JDBCAuth(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setRolesQuery(rolesQuery: String): JDBCAuth = {
-    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolesQuery(rolesQuery.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JJDBCAuth].setRolesQuery(rolesQuery.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
@@ -64,7 +67,8 @@ class JDBCAuth(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setPermissionsQuery(permissionsQuery: String): JDBCAuth = {
-    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setPermissionsQuery(permissionsQuery.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JJDBCAuth].setPermissionsQuery(permissionsQuery.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
@@ -73,11 +77,31 @@ class JDBCAuth(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setRolePrefix(rolePrefix: String): JDBCAuth = {
-    JDBCAuth(asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JJDBCAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
-    * Compute the hashed password given the unhashed password and the salt
+    * Provide a application configuration level on hash nonce's as a ordered list of
+    * nonces where each position corresponds to a version.
+    *
+    * The nonces are supposed not to be stored in the underlying jdbc storage but to
+    * be provided as a application configuration. The idea is to add one extra variable
+    * to the hash function in order to make breaking the passwords using rainbow tables
+    * or precomputed hashes harder. Leaving the attacker only with the brute force
+    * approach.
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @param nonces a List of non null Strings.
+    * @return a reference to this for fluency
+    */
+  def setNonces(nonces: io.vertx.core.json.JsonArray): JDBCAuth = {
+    asJava.asInstanceOf[JJDBCAuth].setNonces(nonces)
+    this
+  }
+
+  /**
+    * Compute the hashed password given the unhashed password and the salt without nonce
     *
     * The implementation relays to the JDBCHashStrategy provided.
     * @param password the unhashed password
@@ -86,6 +110,19 @@ class JDBCAuth(private val _asJava: Object)
     */
   def computeHash(password: String, salt: String): String = {
     asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String], salt.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+    * Compute the hashed password given the unhashed password and the salt
+    *
+    * The implementation relays to the JDBCHashStrategy provided.
+    * @param password the unhashed password
+    * @param salt the salt
+    * @param version the nonce version to use
+    * @return the hashed password
+    */
+  def computeHash(password: String, salt: String, version: Int): String = {
+    asJava.asInstanceOf[JJDBCAuth].computeHash(password.asInstanceOf[java.lang.String], salt.asInstanceOf[java.lang.String], version.asInstanceOf[java.lang.Integer]).asInstanceOf[String]
   }
 
   /**

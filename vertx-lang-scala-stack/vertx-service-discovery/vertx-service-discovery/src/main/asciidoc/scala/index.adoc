@@ -715,10 +715,6 @@ discovery.getRecord({
       // message handler
       var payload = message.body();
     });
-
-    // ...
-    // when done
-    reference.release();
   }
 });
 
@@ -728,7 +724,6 @@ When, using `link:../../jsdoc/module-vertx-service-discovery-js_message_source-M
 
 [source, js]
 ----
-var ServiceDiscovery = require("vertx-service-discovery-js/service_discovery");
 var MessageSource = require("vertx-service-discovery-js/message_source");
 MessageSource.getConsumer(discovery, {
   "name" : "some-message-source-service"
@@ -742,10 +737,6 @@ MessageSource.getConsumer(discovery, {
       var payload = message.body();
     });
     // ...
-
-    // Dont' forget to release the service
-    ServiceDiscovery.releaseServiceObject(discovery, consumer);
-
   }
 });
 

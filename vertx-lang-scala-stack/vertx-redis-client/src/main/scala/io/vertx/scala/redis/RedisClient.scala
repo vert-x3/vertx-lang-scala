@@ -20,6 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.redis.op.BitFieldOptions
 import io.vertx.scala.redis.op.KillFilter
 import io.vertx.redis.{RedisClient => JRedisClient}
 import io.vertx.redis.op.BitOperation
@@ -31,6 +32,7 @@ import io.vertx.redis.op.{SetOptions => JSetOptions}
 import io.vertx.redis.{RedisTransaction => JRedisTransaction}
 import io.vertx.scala.core.Vertx
 import io.vertx.redis.op.{LimitOptions => JLimitOptions}
+import io.vertx.redis.op.ClientReplyOptions
 import io.vertx.redis.op.GeoUnit
 import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
 import io.vertx.core.json.JsonObject
@@ -39,13 +41,16 @@ import io.vertx.core.AsyncResult
 import io.vertx.redis.op.RangeOptions
 import io.vertx.redis.op.InsertOptions
 import io.vertx.redis.op.AggregateOptions
+import io.vertx.redis.op.{BitFieldOptions => JBitFieldOptions}
 import io.vertx.scala.redis.op.GeoMember
+import io.vertx.redis.op.ScriptDebugOptions
 import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
 import io.vertx.redis.op.FailoverOptions
 import io.vertx.scala.redis.op.GeoRadiusOptions
 import scala.collection.JavaConverters._
 import io.vertx.scala.redis.op.SortOptions
 import io.vertx.redis.op.SlotCmd
+import io.vertx.redis.op.BitFieldOverflowOptions
 import io.vertx.scala.redis.op.RangeLimitOptions
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
@@ -680,8 +685,8 @@ class RedisClient(private val _asJava: Object) {
     * @param seconds Time to live in seconds
     * @param handler Handler for the result of this call.
     */
-  def expire(key: String, seconds: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+  def expire(key: String, seconds: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
     this
   }
 
@@ -2486,6 +2491,69 @@ class RedisClient(private val _asJava: Object) {
   }
 
   /**
+    * Instruct the server whether to reply to commands.
+    */
+  def clientReply(options: io.vertx.redis.op.ClientReplyOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].clientReply(options, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+    * Get the length of the value of a hash field.
+    * @param key Key String
+    * @param field field
+    */
+  def hstrlen(key: String, field: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].hstrlen(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
+    * Alters the last access time of a key(s). Returns the number of existing keys specified.
+    * @param key Key String
+    */
+  def touch(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].touch(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
+    * Alters the last access time of a key(s). Returns the number of existing keys specified.
+    * @param keys list of keys
+    */
+  def touchMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].touchMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
+    * Set the debug mode for executed scripts.
+    * @param scriptDebugOptions the option
+    */
+  def scriptDebug(scriptDebugOptions: io.vertx.redis.op.ScriptDebugOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].scriptDebug(scriptDebugOptions, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+    * Perform arbitrary bitfield integer operations on strings.
+    * @param key Key string
+    */
+  def bitfield(key: String, bitFieldOptions: BitFieldOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].bitfield(key.asInstanceOf[java.lang.String], bitFieldOptions.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    this
+  }
+
+  /**
+    * Perform arbitrary bitfield integer operations on strings.
+    * @param key Key string
+    */
+  def bitfieldWithOverflow(key: String, commands: BitFieldOptions, overflow: io.vertx.redis.op.BitFieldOverflowOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].bitfieldWithOverflow(key.asInstanceOf[java.lang.String], commands.asJava, overflow, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    this
+  }
+
+  /**
     * Close the client - when it is fully closed the handler will be called.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
@@ -3070,9 +3138,9 @@ class RedisClient(private val _asJava: Object) {
  /**
    * Like [[expire]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def expireFuture(key: String, seconds: Int): scala.concurrent.Future[Long] = {
+  def expireFuture(key: String, seconds: Long): scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
-    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
+    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -4558,6 +4626,69 @@ class RedisClient(private val _asJava: Object) {
   def georadiusbymemberWithOptionsFuture(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
     asJava.asInstanceOf[JRedisClient].georadiusbymemberWithOptions(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[clientReply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def clientReplyFuture(options: io.vertx.redis.op.ClientReplyOptions): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisClient].clientReply(options, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[hstrlen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def hstrlenFuture(key: String, field: String): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].hstrlen(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[touch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def touchFuture(key: String): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].touch(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[touchMany]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def touchManyFuture(keys: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].touchMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[scriptDebug]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def scriptDebugFuture(scriptDebugOptions: io.vertx.redis.op.ScriptDebugOptions): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisClient].scriptDebug(scriptDebugOptions, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[bitfield]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def bitfieldFuture(key: String, bitFieldOptions: BitFieldOptions): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JRedisClient].bitfield(key.asInstanceOf[java.lang.String], bitFieldOptions.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[bitfieldWithOverflow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def bitfieldWithOverflowFuture(key: String, commands: BitFieldOptions, overflow: io.vertx.redis.op.BitFieldOverflowOptions): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JRedisClient].bitfieldWithOverflow(key.asInstanceOf[java.lang.String], commands.asJava, overflow, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

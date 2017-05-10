@@ -55,6 +55,21 @@ class NetClient(private val _asJava: Object)
   }
 
   /**
+    * Open a connection to a server at the specific `port` and `host`.
+    * 
+    * `host` can be a valid host name or IP address. The connect is done asynchronously and on success, a
+    * [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+    * @param port the port
+    * @param host the host
+    * @param serverName the SNI server name
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connect(port: Int, host: String, serverName: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    this
+  }
+
+  /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled
     */
@@ -78,6 +93,15 @@ class NetClient(private val _asJava: Object)
   def connectFuture(port: Int, host: String): scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def connectFuture(port: Int, host: String, serverName: String): scala.concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

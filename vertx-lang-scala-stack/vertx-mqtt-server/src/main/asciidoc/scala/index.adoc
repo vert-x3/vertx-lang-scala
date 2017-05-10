@@ -342,7 +342,7 @@ mqttServer.closeFuture().onComplete{
 
 === Automatic clean-up in verticles
 
-If you’re creating MQTT servers from inside verticles, those servers will be automatically closed when the verticle is undeployed.
+If you?re creating MQTT servers from inside verticles, those servers will be automatically closed when the verticle is undeployed.
 
 === Scaling : sharing MQTT servers
 

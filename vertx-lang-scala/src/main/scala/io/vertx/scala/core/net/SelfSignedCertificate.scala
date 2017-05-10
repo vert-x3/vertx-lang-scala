@@ -83,4 +83,13 @@ object SelfSignedCertificate {
     SelfSignedCertificate(JSelfSignedCertificate.create())
   }
 
+  /**
+    * Create a new `SelfSignedCertificate` instance with a fully-qualified domain name,
+    * @param fqdn a fully qualified domain name.
+    * @return a new instance.
+    */
+  def create(fqdn: String): SelfSignedCertificate = {
+    SelfSignedCertificate(JSelfSignedCertificate.create(fqdn.asInstanceOf[java.lang.String]))
+  }
+
 }

@@ -127,6 +127,13 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions)
   override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
   }
+  override def setDecoderInitialBufferSize(value: Int) = {
+    asJava.setDecoderInitialBufferSize(value)
+    this
+  }
+  override def getDecoderInitialBufferSize: Int = {
+    asJava.getDecoderInitialBufferSize().asInstanceOf[Int]
+  }
   override def setDecompressionSupported(value: Boolean) = {
     asJava.setDecompressionSupported(value)
     this
@@ -323,6 +330,13 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions)
   }
   def getShellHtmlResource: io.vertx.core.buffer.Buffer = {
     asJava.getShellHtmlResource()
+  }
+  override def setSni(value: Boolean) = {
+    asJava.setSni(value)
+    this
+  }
+  override def isSni: Boolean = {
+    asJava.isSni().asInstanceOf[Boolean]
   }
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)

@@ -87,7 +87,7 @@ var client = WebClient.wrap(httpClient)
 
 === Simple requests with no body
 
-Often, you’ll want to make HTTP requests with no request body. This is usually the case with HTTP GET, OPTIONS
+Often, you?ll want to make HTTP requests with no request body. This is usually the case with HTTP GET, OPTIONS
 and HEAD requests
 
 [source,scala]
@@ -217,7 +217,7 @@ The POST will not be chunked.
 
 ==== Json bodies
 
-Often you’ll want to send Json body requests, to send a `JsonObject`
+Often you?ll want to send Json body requests, to send a `JsonObject`
 use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[sendJsonObject]`
 
 [source,scala]

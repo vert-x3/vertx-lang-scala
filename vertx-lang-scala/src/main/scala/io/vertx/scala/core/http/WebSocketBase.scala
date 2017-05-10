@@ -178,6 +178,11 @@ trait WebSocketBase
     */
   def localAddress(): SocketAddress
 
+  /**
+    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
+    */
+  def isSsl(): Boolean
+
 }
 
 object WebSocketBase {
@@ -397,6 +402,13 @@ object WebSocketBase {
     */
   def close(): Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
+  }
+
+  /**
+    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
+    */
+  def isSsl(): Boolean = {
+    asJava.asInstanceOf[JWebSocketBase].isSsl().asInstanceOf[Boolean]
   }
 
 }
