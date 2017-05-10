@@ -234,6 +234,13 @@ class ServerWebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JServerWebSocket].close()
   }
 
+  /**
+    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
+    */
+  override def isSsl(): Boolean = {
+    asJava.asInstanceOf[JServerWebSocket].isSsl().asInstanceOf[Boolean]
+  }
+
   def uri(): String = {
     asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
   }

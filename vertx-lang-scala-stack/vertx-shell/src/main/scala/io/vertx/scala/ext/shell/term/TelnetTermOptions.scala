@@ -236,6 +236,13 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions)
   override def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
   }
+  override def setSni(value: Boolean) = {
+    asJava.setSni(value)
+    this
+  }
+  override def isSni: Boolean = {
+    asJava.isSni().asInstanceOf[Boolean]
+  }
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this

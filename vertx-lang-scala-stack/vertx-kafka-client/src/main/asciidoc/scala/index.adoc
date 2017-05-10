@@ -776,7 +776,7 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 
 == Automatic clean-up in verticles
 
-If you’re creating consumers and producer from inside verticles, those consumers and producers will be automatically
+If you?re creating consumers and producer from inside verticles, those consumers and producers will be automatically
 closed when the verticle is undeployed.
 
 == Using Vert.x serializers/deserizaliers

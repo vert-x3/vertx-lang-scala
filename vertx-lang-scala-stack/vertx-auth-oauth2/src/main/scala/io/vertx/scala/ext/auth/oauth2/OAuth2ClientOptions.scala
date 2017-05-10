@@ -104,6 +104,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
   }
+  override def setDecoderInitialBufferSize(value: Int) = {
+    asJava.setDecoderInitialBufferSize(value)
+    this
+  }
+  override def getDecoderInitialBufferSize: Int = {
+    asJava.getDecoderInitialBufferSize().asInstanceOf[Int]
+  }
   override def setDefaultHost(value: String) = {
     asJava.setDefaultHost(value)
     this
@@ -138,6 +145,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   def getExtraParameters: io.vertx.core.json.JsonObject = {
     asJava.getExtraParameters()
+  }
+  override def setForceSni(value: Boolean) = {
+    asJava.setForceSni(value)
+    this
+  }
+  override def isForceSni: Boolean = {
+    asJava.isForceSni().asInstanceOf[Boolean]
   }
   def setHeaders(value: io.vertx.core.json.JsonObject) = {
     asJava.setHeaders(value)

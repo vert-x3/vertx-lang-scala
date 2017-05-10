@@ -74,6 +74,13 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
   override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
   }
+  override def setDecoderInitialBufferSize(value: Int) = {
+    asJava.setDecoderInitialBufferSize(value)
+    this
+  }
+  override def getDecoderInitialBufferSize: Int = {
+    asJava.getDecoderInitialBufferSize().asInstanceOf[Int]
+  }
   override def setDefaultHost(value: String) = {
     asJava.setDefaultHost(value)
     this
@@ -112,6 +119,13 @@ class WebClientOptions(private val _asJava: JWebClientOptions)
   }
   def isFollowRedirects: Boolean = {
     asJava.isFollowRedirects().asInstanceOf[Boolean]
+  }
+  override def setForceSni(value: Boolean) = {
+    asJava.setForceSni(value)
+    this
+  }
+  override def isForceSni: Boolean = {
+    asJava.isForceSni().asInstanceOf[Boolean]
   }
   override def setHttp2ClearTextUpgrade(value: Boolean) = {
     asJava.setHttp2ClearTextUpgrade(value)

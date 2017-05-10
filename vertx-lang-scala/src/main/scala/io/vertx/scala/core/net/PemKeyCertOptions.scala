@@ -23,11 +23,11 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 
 /**
-  * Key store options configuring a private key and its certificate based on
+  * Key store options configuring a list of private key and its certificate based on
   * <i>Privacy-enhanced Electronic Email</i> (PEM) files.
   * 
   *
-  * The key file must contain a <b>non encrypted</b> private key in <b>PKCS8</b> format wrapped in a PEM
+  * A key file must contain a <b>non encrypted</b> private key in <b>PKCS8</b> format wrapped in a PEM
   * block, for example:
   * 
   *
@@ -39,7 +39,7 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
   * -----END PRIVATE KEY-----
   * </pre>
   *
-  * The certificate file must contain an X.509 certificate wrapped in a PEM block, for example:
+  * A certificate file must contain an X.509 certificate wrapped in a PEM block, for example:
   * 
   *
   * <pre>
@@ -50,7 +50,7 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
   * -----END CERTIFICATE-----
   * </pre>
   *
-  * The key and certificate can either be loaded by Vert.x from the filesystem:
+  * Keys and certificates can either be loaded by Vert.x from the filesystem:
   * 
   * <pre>
   * HttpServerOptions options = new HttpServerOptions();
@@ -64,53 +64,94 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
   * Buffer cert = vertx.fileSystem().readFileSync("/mycert.pem");
   * options.setPemKeyCertOptions(new PemKeyCertOptions().setKeyValue(key).setCertValue(cert));
   * </pre>
+  *
+  * Several key/certificate pairs can be used:
+  * 
+  * <pre>
+  * HttpServerOptions options = new HttpServerOptions();
+  * options.setPemKeyCertOptions(new PemKeyCertOptions()
+  *    .addKeyPath("/mykey1.pem").addCertPath("/mycert1.pem")
+  *    .addKeyPath("/mykey2.pem").addCertPath("/mycert2.pem"));
+  * </pre>
   */
 class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
 
   def asJava = _asJava
 
   /**
-    * Set the path to the certificate
+    * Set the path of the first certificate, replacing the previous certificates paths
     */
   def setCertPath(value: String) = {
     asJava.setCertPath(value)
     this
   }
-  def getCertPath: String = {
-    asJava.getCertPath().asInstanceOf[String]
+
+  /**
+    * Set all the paths to the certificates files
+    */
+  def setCertPaths(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setCertPaths(value.asJava)
+    this
+  }
+  def getCertPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getCertPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Set the certificate as a buffer
+    * Set the first certificate as a buffer, replacing the previous certificates buffers
     */
   def setCertValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.setCertValue(value)
     this
   }
-  def getCertValue: io.vertx.core.buffer.Buffer = {
-    asJava.getCertValue()
+
+  /**
+    * Set all the certificates as a list of buffer
+    */
+  def setCertValues(value: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer]) = {
+    asJava.setCertValues(value.asJava)
+    this
+  }
+  def getCertValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getCertValues().asScala.map(x => x)
   }
 
   /**
-    * Set the path to the key file
+    * Set the path of the first key file, replacing the keys paths
     */
   def setKeyPath(value: String) = {
     asJava.setKeyPath(value)
     this
   }
-  def getKeyPath: String = {
-    asJava.getKeyPath().asInstanceOf[String]
+
+  /**
+    * Set all the paths to the keys files
+    */
+  def setKeyPaths(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setKeyPaths(value.asJava)
+    this
+  }
+  def getKeyPaths: scala.collection.mutable.Buffer[String] = {
+    asJava.getKeyPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Set the key a a buffer
+    * Set the first key a a buffer, replacing the previous keys buffers
     */
   def setKeyValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.setKeyValue(value)
     this
   }
-  def getKeyValue: io.vertx.core.buffer.Buffer = {
-    asJava.getKeyValue()
+
+  /**
+    * Set all the keys as a list of buffer
+    */
+  def setKeyValues(value: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer]) = {
+    asJava.setKeyValues(value.asJava)
+    this
+  }
+  def getKeyValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+    asJava.getKeyValues().asScala.map(x => x)
   }
 }
 

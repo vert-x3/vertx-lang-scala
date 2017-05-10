@@ -230,6 +230,7 @@ Enables or disables the server security feature. It requires an link handler.
 Sets whether or not an error is sent to the client when this client sends a message to an not subscribed
  destinations (no subscriptions on this destination).
 +++
+|[[sni]]`sni`|`Boolean`|-
 |[[soLinger]]`soLinger`|`Number (int)`|-
 |[[ssl]]`ssl`|`Boolean`|-
 |[[supportedVersions]]`supportedVersions`|`Array of String`|

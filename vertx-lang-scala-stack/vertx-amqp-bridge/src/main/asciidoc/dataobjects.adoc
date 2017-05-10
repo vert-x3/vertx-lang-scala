@@ -49,6 +49,7 @@ Sets whether the bridge should try to enable support for sending messages with a
 +++
 |[[reuseAddress]]`reuseAddress`|`Boolean`|-
 |[[sendBufferSize]]`sendBufferSize`|`Number (int)`|-
+|[[sniServerName]]`sniServerName`|`String`|-
 |[[soLinger]]`soLinger`|`Number (int)`|-
 |[[ssl]]`ssl`|`Boolean`|-
 |[[tcpKeepAlive]]`tcpKeepAlive`|`Boolean`|-
@@ -63,5 +64,6 @@ Sets whether the bridge should try to enable support for sending messages with a
 Sets the value to use as the hostname field in the AMQP Open frame. Defaults to null, which indicates the hostname
  value given when starting the bridge will be used to populate the hostname field.
 +++
+|[[virtualHost]]`virtualHost`|`String`|-
 |===
 

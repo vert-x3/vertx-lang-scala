@@ -280,6 +280,21 @@ class HttpConnection(private val _asJava: Object) {
     Http2Settings(asJava.asInstanceOf[JHttpConnection].remoteSettings())
   }
 
+  /**
+    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
+    */
+  def isSsl(): Boolean = {
+    asJava.asInstanceOf[JHttpConnection].isSsl().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Returns the SNI server name presented during the SSL handshake by the client.
+    * @return the indicated server name
+    */
+  def indicatedServerName(): String = {
+    asJava.asInstanceOf[JHttpConnection].indicatedServerName().asInstanceOf[String]
+  }
+
  /**
    * Like [[updateSettings]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */

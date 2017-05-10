@@ -96,6 +96,17 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * set to `initialBufferSizeHttpDecoder` the initial buffer of the HttpDecoder.
+    */
+  def setDecoderInitialBufferSize(value: Int) = {
+    asJava.setDecoderInitialBufferSize(value)
+    this
+  }
+  def getDecoderInitialBufferSize: Int = {
+    asJava.getDecoderInitialBufferSize().asInstanceOf[Int]
+  }
+
+  /**
     * Set the default host name to be used by this client in requests if none is provided when making the request.
     */
   def setDefaultHost(value: String) = {
@@ -137,6 +148,18 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
+  }
+
+  /**
+    * By default, the server name is only sent for Fully Qualified Domain Name (FQDN), setting
+    * this property to `true` forces the server name to be always sent.
+    */
+  def setForceSni(value: Boolean) = {
+    asJava.setForceSni(value)
+    this
+  }
+  def isForceSni: Boolean = {
+    asJava.isForceSni().asInstanceOf[Boolean]
   }
 
   /**

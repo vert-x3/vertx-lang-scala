@@ -479,7 +479,8 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
   }
 
   /**
-    * Look up the offset for the given partition by timestamp.
+    * Look up the offset for the given partition by timestamp. Note: the result might be null in case
+    * for the given timestamp no offset can be found -- e.g., when the timestamp refers to the future
     * @param topicPartition TopicPartition to query.see <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param timestamp Timestamp to be used in the query.
     * @param handler handler called on operation completed
@@ -739,7 +740,7 @@ object KafkaConsumer {
   /**
     * Create a new KafkaConsumer instance
     * @param vertx Vert.x instance to use
-    * @param config Kafka producer configuration
+    * @param config Kafka consumer configuration
     * @return an instance of the KafkaConsumer
     */
   def create[K: TypeTag, V: TypeTag](vertx: Vertx, config: scala.collection.mutable.Map[String, String]): KafkaConsumer[K, V] = {

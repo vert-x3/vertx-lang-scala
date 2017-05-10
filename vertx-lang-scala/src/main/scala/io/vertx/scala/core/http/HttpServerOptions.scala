@@ -115,10 +115,10 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
     * 
     * While one can think that best value is always the maximum compression ratio, 
     * there's a trade-off to consider: the most compressed level requires the most
-    * computatinal work to compress/decompress data, e.g. more dictionary lookups and loops.
+    * computational work to compress/decompress data, e.g. more dictionary lookups and loops.
     * 
     * E.g. you have it set fairly high on a high-volume website, you may experience performance degradation 
-    * and latency on resource serving due to CPU overload, and, however - as the comptational work is required also client side 
+    * and latency on resource serving due to CPU overload, and, however - as the computational work is required also client side
     * while decompressing - setting an higher compression level can result in an overall higher page load time
     * especially nowadays when many clients are handled mobile devices with a low CPU profile.
     * 
@@ -164,6 +164,17 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
   override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
+  }
+
+  /**
+    * Set the initial buffer size for the HTTP decoder
+    */
+  def setDecoderInitialBufferSize(value: Int) = {
+    asJava.setDecoderInitialBufferSize(value)
+    this
+  }
+  def getDecoderInitialBufferSize: Int = {
+    asJava.getDecoderInitialBufferSize().asInstanceOf[Int]
   }
 
   /**
@@ -436,6 +447,17 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
   override def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set whether the server supports Server Name Indiciation
+    */
+  override def setSni(value: Boolean) = {
+    asJava.setSni(value)
+    this
+  }
+  override def isSni: Boolean = {
+    asJava.isSni().asInstanceOf[Boolean]
   }
 
   /**

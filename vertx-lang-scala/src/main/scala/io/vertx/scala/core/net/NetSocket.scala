@@ -228,6 +228,17 @@ class NetSocket(private val _asJava: Object)
   }
 
   /**
+    * Upgrade channel to use SSL/TLS. Be aware that for this to work SSL must be configured.
+    * @param serverName the server name
+    * @param handler the handler will be notified when it's upgraded
+    * @return a reference to this, so the API can be used fluently
+    */
+  def upgradeToSsl(serverName: String, handler: Handler[Unit]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].upgradeToSsl(serverName.asInstanceOf[java.lang.String], {x: Void => handler.handle(x)})
+    this
+  }
+
+  /**
     * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
     */
   override def end(t: io.vertx.core.buffer.Buffer): Unit = {
@@ -274,6 +285,14 @@ class NetSocket(private val _asJava: Object)
     */
   def isSsl(): Boolean = {
     asJava.asInstanceOf[JNetSocket].isSsl().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Returns the SNI server name presented during the SSL handshake by the client.
+    * @return the indicated server name
+    */
+  def indicatedServerName(): String = {
+    asJava.asInstanceOf[JNetSocket].indicatedServerName().asInstanceOf[String]
   }
 
  /**

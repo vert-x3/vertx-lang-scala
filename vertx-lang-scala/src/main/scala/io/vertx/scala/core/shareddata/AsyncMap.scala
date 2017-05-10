@@ -27,6 +27,7 @@ import io.vertx.core.Handler
 /**
   *
   * An asynchronous map.
+  * 
   */
 class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 

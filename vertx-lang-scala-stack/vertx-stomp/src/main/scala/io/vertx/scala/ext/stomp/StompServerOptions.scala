@@ -287,6 +287,13 @@ class StompServerOptions(private val _asJava: JStompServerOptions)
   def isSendErrorOnNoSubscriptions: Boolean = {
     asJava.isSendErrorOnNoSubscriptions().asInstanceOf[Boolean]
   }
+  override def setSni(value: Boolean) = {
+    asJava.setSni(value)
+    this
+  }
+  override def isSni: Boolean = {
+    asJava.isSni().asInstanceOf[Boolean]
+  }
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
