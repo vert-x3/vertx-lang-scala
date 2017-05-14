@@ -32,7 +32,7 @@ import scala.reflect.runtime.universe._
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 abstract class ScalaVerticle {
-  protected implicit var executionContext:ExecutionContext = _
+  protected implicit var executionContext:VertxExecutionContext = _
   protected var vertx: Vertx = _
   protected var ctx: Context = _
   private var javaVerticle: AbstractVerticle = _
