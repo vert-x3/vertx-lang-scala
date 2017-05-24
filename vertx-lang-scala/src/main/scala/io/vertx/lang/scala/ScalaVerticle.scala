@@ -71,7 +71,7 @@ abstract class ScalaVerticle {
     *
     * @return a future which should be completed when verticle clean-up is complete.
     */
-  def stopFuture(): concurrent.Future[Unit] = concurrent.Future(stop())
+  def stopFuture(): concurrent.Future[_] = concurrent.Future(stop())
 
   /**
     * Start the verticle.<p>
@@ -81,7 +81,7 @@ abstract class ScalaVerticle {
     *
     * @return a future which should be completed when verticle start-up is complete.
     */
-  def startFuture(): concurrent.Future[Unit] = concurrent.Future(start())
+  def startFuture(): concurrent.Future[_] = concurrent.Future(start())
 
 
   /**
