@@ -62,20 +62,20 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
 
 class SuccessVerticle extends ScalaVerticle {
 
-  override def startFuture(): Future[Unit] = {
+  override def startFuture(): Future[_] = {
     Future.sequence(Seq(
       vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture(),
       vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture())
-    ).map(_ => ())
+    )
   }
 }
 
 class FailVerticle extends ScalaVerticle {
 
-  override def startFuture(): Future[Unit] = {
+  override def startFuture(): Future[_] = {
     Future.sequence(Seq(
       vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture(),
       Future.failed(new java.lang.Exception("wuha")))
-    ).map(_ => ())
+    )
   }
 }
