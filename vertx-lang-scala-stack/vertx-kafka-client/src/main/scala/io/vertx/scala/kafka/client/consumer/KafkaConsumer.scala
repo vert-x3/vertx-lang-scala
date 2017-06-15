@@ -29,6 +29,7 @@ import io.vertx.scala.kafka.client.common.PartitionInfo
 import io.vertx.kafka.client.consumer.{KafkaConsumer => JKafkaConsumer}
 import io.vertx.kafka.client.consumer.{OffsetAndTimestamp => JOffsetAndTimestamp}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.kafka.client.consumer.{KafkaConsumerRecords => JKafkaConsumerRecords}
 import io.vertx.kafka.client.consumer.{OffsetAndMetadata => JOffsetAndMetadata}
 import io.vertx.kafka.client.common.{PartitionInfo => JPartitionInfo}
 import io.vertx.core.AsyncResult
@@ -419,6 +420,19 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
     */
   def partitionsFor(topic: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[PartitionInfo]]]): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[JPartitionInfo]] => handler.handle(AsyncResultWrapper[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x, a => a.asScala.map(x => PartitionInfo(x))))})
+    this
+  }
+
+  /**
+    * Set the handler to be used when batches of messages are fetched 
+    * from the Kafka server. Batch handlers need to take care not to block 
+    * the event loop when dealing with large batches. It is better to process
+    * records individually using the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer]].
+    * @param handler handler called when batches of messages are fetched
+    * @return current KafkaConsumer instance
+    */
+  def batchHandler(handler: Handler[KafkaConsumerRecords[K, V]]): KafkaConsumer[K, V] = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].batchHandler({x: JKafkaConsumerRecords[Object, Object] => handler.handle(KafkaConsumerRecords[K, V](x))})
     this
   }
 

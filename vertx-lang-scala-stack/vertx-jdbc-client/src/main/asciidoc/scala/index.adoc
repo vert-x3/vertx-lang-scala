@@ -14,7 +14,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-jdbc-client-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -22,7 +22,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-jdbc-client-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-jdbc-client-scala_2.12:3.4.2'
 ----
 
 == Creating a the client
@@ -106,7 +106,7 @@ If you're creating clients from inside verticles, the clients will be automatica
 
 == Getting a connection
 
-Once you've created a client you use `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get
+Once you've created a client you use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get
 a connection.
 
 This will return the connection in the handler when one is ready from the pool.

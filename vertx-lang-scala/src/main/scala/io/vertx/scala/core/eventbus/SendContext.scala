@@ -51,6 +51,13 @@ class SendContext[T: TypeTag](private val _asJava: Object) {
     asJava.asInstanceOf[JSendContext[Object]].send().asInstanceOf[Boolean]
   }
 
+  /**
+    * @return the value sent or published (before being processed by the codec)
+    */
+  def sentBody(): AnyRef = {
+    toScala[java.lang.Object](asJava.asInstanceOf[JSendContext[Object]].sentBody())
+  }
+
 }
 
 object SendContext {

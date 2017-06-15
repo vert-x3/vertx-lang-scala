@@ -73,10 +73,6 @@ class VertxHawkularOptions(private val _asJava: JVertxHawkularOptions)
   /**
     * Sets metrics types that are disabled.
     */
-  def addDisabledMetricsType(value: io.vertx.ext.hawkular.MetricsType) = {
-    asJava.addDisabledMetricsType(value)
-    this
-  }
   def setDisabledMetricsTypes(value: Set[io.vertx.ext.hawkular.MetricsType]) = {
     asJava.setDisabledMetricsTypes(value.asJava)
     this
@@ -127,6 +123,17 @@ class VertxHawkularOptions(private val _asJava: JVertxHawkularOptions)
   }
   def getHttpOptions: HttpClientOptions = {
     HttpClientOptions(asJava.getHttpOptions())
+  }
+
+  /**
+    * Sets a list of <a href="../../../../../../../cheatsheet/MetricTagsMatch.html">MetricTagsMatch</a>.
+    */
+  def setMetricTagsMatches(value: scala.collection.mutable.Buffer[MetricTagsMatch]) = {
+    asJava.setMetricTagsMatches(value.map(_.asJava).asJava)
+    this
+  }
+  def getMetricTagsMatches: scala.collection.mutable.Buffer[MetricTagsMatch] = {
+    asJava.getMetricTagsMatches().asScala.map(x => MetricTagsMatch(x))
   }
 
   /**
@@ -211,6 +218,28 @@ class VertxHawkularOptions(private val _asJava: JVertxHawkularOptions)
   }
   def isSendTenantHeader: Boolean = {
     asJava.isSendTenantHeader().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Set the number of metric names to cache in order to avoid repeated tagging requests.
+    */
+  def setTaggedMetricsCacheSize(value: Int) = {
+    asJava.setTaggedMetricsCacheSize(value)
+    this
+  }
+  def getTaggedMetricsCacheSize: Int = {
+    asJava.getTaggedMetricsCacheSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set tags applied to all metrics.
+    */
+  def setTags(value: io.vertx.core.json.JsonObject) = {
+    asJava.setTags(value)
+    this
+  }
+  def getTags: io.vertx.core.json.JsonObject = {
+    asJava.getTags()
   }
 
   /**

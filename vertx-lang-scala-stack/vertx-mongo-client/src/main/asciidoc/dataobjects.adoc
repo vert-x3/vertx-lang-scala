@@ -1,5 +1,61 @@
 = Cheatsheets
 
+[[BulkOperation]]
+== BulkOperation
+
+++++
+ Contains all data needed for one operation of a bulk write operation.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[document]]`document`|`Json object`|
++++
+Sets the document, used by insert, replace, and update operations
++++
+|[[filter]]`filter`|`Json object`|
++++
+Sets the filter document, used by replace, update, and delete operations
++++
+|[[multi]]`multi`|`Boolean`|
++++
+Sets the multi flag, used by update and delete operations
++++
+|[[type]]`type`|`link:enums.html#BulkOperationType[BulkOperationType]`|
++++
+Sets the operation type
++++
+|[[upsert]]`upsert`|`Boolean`|
++++
+Sets the upsert flag, used by update and replace operations
++++
+|===
+
+[[BulkWriteOptions]]
+== BulkWriteOptions
+
+++++
+ Options for configuring bulk write operations.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[ordered]]`ordered`|`Boolean`|
++++
+Set the ordered option
++++
+|[[writeOption]]`writeOption`|`link:enums.html#WriteOption[WriteOption]`|
++++
+Set the write option
++++
+|===
+
 [[FindOptions]]
 == FindOptions
 
@@ -112,6 +168,41 @@ Gets the weighting object for use with a text index
 
  <p>A document that represents field and weight pairs. The weight is an integer ranging from 1 to 99,999 and denotes the significance
  of the field relative to the other indexed fields in terms of the score.</p>
++++
+|===
+
+[[MongoClientBulkWriteResult]]
+== MongoClientBulkWriteResult
+
+++++
+ Result propagated from mongodb driver bulk write result.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[deletedCount]]`deletedCount`|`Number (long)`|
++++
+Returns the number of deleted documents
++++
+|[[insertedCount]]`insertedCount`|`Number (long)`|
++++
+Returns the number of inserted documents
++++
+|[[matchedCount]]`matchedCount`|`Number (long)`|
++++
+Returns the number of matched documents
++++
+|[[modifiedCount]]`modifiedCount`|`Number (long)`|
++++
+Returns the number of modified documents
++++
+|[[upserts]]`upserts`|`Array of Json object`|
++++
+An unmodifiable list of upsert data. Each entry has the index of the request that lead to the upsert, and the
+ generated ID of the upsert.
 +++
 |===
 

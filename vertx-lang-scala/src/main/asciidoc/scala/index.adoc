@@ -1427,6 +1427,9 @@ logger.error("oops!", exception)
 
 ----
 
+CAUTION: Logging backends use different formats to represent replaceable tokens in parameterized messages.
+As a consequence, if you rely on Vert.x parameterized logging methods, you won't be able to switch backends without changing your code.
+
 [[netty-logging]]
 === Netty logging
 

@@ -33,7 +33,7 @@ To use Vert.x Web Client, add the following dependency to the _dependencies_ sec
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-web-client-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -42,7 +42,7 @@ To use Vert.x Web Client, add the following dependency to the _dependencies_ sec
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-web-client-scala_2.12:3.4.2-SNAPSHOT'
+  compile 'io.vertx:vertx-web-client-scala_2.12:3.4.2'
 }
 ----
 
@@ -87,7 +87,7 @@ var client = WebClient.wrap(httpClient)
 
 === Simple requests with no body
 
-Often, you?ll want to make HTTP requests with no request body. This is usually the case with HTTP GET, OPTIONS
+Often, you’ll want to make HTTP requests with no request body. This is usually the case with HTTP GET, OPTIONS
 and HEAD requests
 
 [source,scala]
@@ -217,7 +217,7 @@ The POST will not be chunked.
 
 ==== Json bodies
 
-Often you?ll want to send Json body requests, to send a `JsonObject`
+Often you’ll want to send Json body requests, to send a `JsonObject`
 use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[sendJsonObject]`
 
 [source,scala]
@@ -343,8 +343,8 @@ get.sendFuture().onComplete{
 
 ----
 
-When you need to mutate a request, the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#copy()[copy]` returns a copy of the
-request
+Beware though that `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html[HttpRequest]` instances are mutable.
+Therefore you should call the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#copy()[copy]` method before modifying a cached instance.
 
 [source,scala]
 ----
@@ -356,8 +356,8 @@ get.sendFuture().onComplete{
   case Failure(cause) => println("Failure")
 }
 
-// Same request again
-get.putHeader("an-header", "with-some-value").sendFuture().onComplete{
+// The "get" request instance remains unmodified
+get.copy().putHeader("a-header", "with-some-value").sendFuture().onComplete{
   case Success(result) => {
     // Ok
   }

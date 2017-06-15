@@ -9,6 +9,12 @@ events will be sent to Hawkular, an http://www.hawkular.org[open source monitori
 `link:../../scaladocs/io/vertx/scala/core/eventbus/EventBus.html[EventBus]` and handlers
 * User defined metrics via an `link:../../scaladocs/io/vertx/scala/core/eventbus/EventBus.html[EventBus]` bridge.
 
+== Prerequisites
+
+Follow the http://www.hawkular.org/hawkular-services/docs/quickstart-guide/[instructions to get Hawkular up and running].
+
+NOTE: You can use a standalone https://github.com/hawkular/hawkular-metrics[Hawkular Metrics] server as well.
+
 == Getting started
 
 The _vertx-hawkular-metrics-scala_2.12_ module must be present in the classpath.
@@ -20,7 +26,7 @@ Maven users should add this to their project POM file:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-hawkular-metrics-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -28,7 +34,7 @@ And Gradle users, to their build file:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-hawkular-metrics-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-hawkular-metrics-scala_2.12:3.4.2'
 ----
 
 Vert.x does not enable SPI implementations by default. You must enable metric collection in the Vert.x options:
@@ -133,8 +139,51 @@ var vertx = Vertx.vertx(VertxOptions()
 
 ----
 
-Note that all the usual `link:../../vertx-core/dataobjects.html#HttpClientOptions[HttpClientOptions]` properties can be used for SSL setup or client
+NOTE: The usual `link:../../vertx-core/dataobjects.html#HttpClientOptions[HttpClientOptions]` properties can be used for SSL setup or client
 tuning.
+
+=== Metric tags
+
+http://www.hawkular.org/hawkular-metrics/docs/user-guide/#_tagging[Tags] can be applied to metrics:
+
+[source,scala]
+----
+var vertx = Vertx.vertx(VertxOptions()
+  .setMetricsOptions(VertxHawkularOptions()
+    .setEnabled(true)
+    .setTags(new io.vertx.core.json.JsonObject().put("dc", "mars01").put("rack", "web-paca").put("host", "host13"))
+  )
+)
+
+----
+
+_vertx-hawkular-metrics-scala_2.12_ maintains a LRU cache of tagged metrics to avoid repeating tagging requests.
+The cache size can be configured and defaults to `4096` metric names.
+
+It is also possible to apply tags to a specific set of metrics defined via exact match or regex match:
+
+[source,scala]
+----
+var vertx = Vertx.vertx(VertxOptions()
+  .setMetricsOptions(VertxHawkularOptions()
+    .setEnabled(true)
+    .setMetricTagsMatches(List(MetricTagsMatch()
+      .setValue("myapp.foo.my-metric")
+      .setTags(new io.vertx.core.json.JsonObject().put("myapp", "foo"))
+    , MetricTagsMatch()
+      .setType(MatchType.REGEX)
+      .setValue(".*\\.foo\\.*")
+      .setTags(new io.vertx.core.json.JsonObject().put("myapp", "foo"))
+    ))
+  )
+)
+
+----
+
+WARNING: If you use regex match, a wrong regex can potentially match a lot of metrics.
+
+NOTE: When evaluating tags to apply, metric specific tags have higher priority than global tags.
+In other words, a metric specific tag may overwrite a global tag.
 
 Please refer to `link:../dataobjects.html#VertxHawkularOptions[VertxHawkularOptions]` for an exhaustive list of options.
 
@@ -404,7 +453,7 @@ There are two types currently supported:
 * _worker_ (see `link:../../scaladocs/io/vertx/scala/core/WorkerExecutor.html[WorkerExecutor]`)
 * _datasource_ (created with Vert.x JDBC client)
 
-Note that Vert.x creates two worker pools upfront, _vert.x-worker-thread_ and _vert.x-internal-blocking_.
+NOTE: Vert.x creates two worker pools upfront, _vert.x-worker-thread_ and _vert.x-internal-blocking_.
 
 All metrics are prefixed with `<type>.<name>.`. For example, `worker.vert.x-internal-blocking.`.
 
@@ -448,6 +497,20 @@ All metrics are prefixed with `<type>.<name>.`. For example, `worker.vert.x-inte
 
 |===
 
+== Verticle metrics
+
+[cols="15,50,35", options="header"]
+|===
+|Metric type
+|Metric name
+|Description
+
+|Gauge
+|`vertx.verticle.<name>`
+|Number of verticle instances deployed.
+
+|===
+
 == User defined metrics
 
 Users can send their own metrics to the Hawkular server. In order to do so, the event bus metrics bridge must be
@@ -485,19 +548,21 @@ The metrics bridge handler expects messages in the JSON format. The JSON object 
 [source,scala]
 ----
 var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("value", 7)
-vertx.eventBus().publish("metrics", message)
+vertx.eventBus().publish("hawkular.metrics", message)
 
 ----
 
-The handler will assume the metric is a gauge and will assign a timestamp corresponding to the time when the message
-was processed. If the metric is a counter or if you prefer explicit configuration, set the `type` and
-`timestamp` attributes:
+The handler will assume the metric is a gauge and will assign a timestamp corresponding to the time when the message was processed.
+If the metric is a counter or availability, or if you prefer explicit configuration, set the `type` and/or `timestamp` attributes:
 
 [source,scala]
 ----
-var message = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("type", "counter").put("timestamp", 189898098098908).put("value", 7)
-vertx.eventBus().publish("metrics", message)
+var counterMetric = new io.vertx.core.json.JsonObject().put("id", "myapp.files.opened").put("type", "counter").put("timestamp", 189898098098908).put("value", 7)
+vertx.eventBus().publish("hawkular.metrics", counterMetric)
+
+var availabilityMetric = new io.vertx.core.json.JsonObject().put("id", "myapp.mysubsystem.status").put("type", "availability").put("value", "up")
+vertx.eventBus().publish("hawkular.metrics", availabilityMetric)
 
 ----
 
-Note that Hawkular understands all timestamps as milliseconds since January 1, 1970, 00:00:00 UTC.
+NOTE: Hawkular understands all timestamps as milliseconds since January 1, 1970, 00:00:00 UTC.

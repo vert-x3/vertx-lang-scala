@@ -60,7 +60,7 @@ class NetServer(private val _asJava: Object)
   }
 
   /**
-    * Start listening on the specified port and host, ignoring post and host configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
+    * Start listening on the specified port and host, ignoring port and host configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
     * creating the server.
     * 
     * Port `0` can be specified meaning "choose an random port".
@@ -88,7 +88,7 @@ class NetServer(private val _asJava: Object)
   }
 
   /**
-    * Start listening on the specified port and host "0.0.0.0", ignoring post and host configured in the
+    * Start listening on the specified port and host "0.0.0.0", ignoring port and host configured in the
     * <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when creating the server.
     * 
     * Port `0` can be specified meaning "choose an random port".

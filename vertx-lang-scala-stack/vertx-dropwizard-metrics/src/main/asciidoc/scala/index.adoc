@@ -22,7 +22,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -30,7 +30,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.4.2'
 ----
 
 Then when you create vertx enable metrics using the `link:../dataobjects.html#DropwizardMetricsOptions[DropwizardMetricsOptions]`:
@@ -361,7 +361,7 @@ Base name: `vertx.eventbus`
 * `messages.received` - A <<throughput_meter>> representing the rate of which messages are being received
 * `messages.received-local` - A <<throughput_meter>> representing the rate of which local messages are being received
 * `messages.received-remote` - A <<throughput_meter>> representing the rate of which remote messages are being received
-* `messages.delivered` - A <<throughpu_metert>> representing the rate of which messages are being delivered to an handler
+* `messages.delivered` - A <<throughput_meter>> representing the rate of which messages are being delivered to an handler
 * `messages.delivered-local` - A <<throughput_meter>> representing the rate of which local messages are being delivered to an handler
 * `messages.delivered-remote` - A <<throughput_meter>> representing the rate of which remote messages are being delivered to an handler
 * `messages.sent` - A <<throughput_metert>> representing the rate of which messages are being sent
@@ -537,7 +537,7 @@ Base name: `vertx.datagram`
 
 === Pool metrics
 
-Base name: `vertx.pool.<type>.<name>` where `type` is the type of the pool (e.g _worker_, _datasource_) and
+Base name: `vertx.pools.<type>.<name>` where `type` is the type of the pool (e.g _worker_, _datasource_) and
 `name` is the name of the pool (e.g `vert.x-worker-thread`).
 
 Pools of type _worker_ are blocking worker pools. Vert.x exposes its worker as _vert.x-worker-thread_ and
@@ -743,3 +743,12 @@ check_jmx4perl --url http://10.0.2.2:8778/jolokia --name eventloops --mbean vert
 
 Check http://search.cpan.org/~roland/jmx4perl/scripts/check_jmx4perl[check_jmx4perl documentation] to get more
 details about check configuration.
+
+== Metrics commands via Telnet or SSH in Vert.x Shell service
+
+To find out the available metrics commands you can use the _help_ builtin command:
+
+* Available commands
+.. metrics-ls: List the known metrics for the current Vert.x instance
+.. metrics-info: Show metrics info for the current Vert.x instance in JSON format
+.. metrics-histogram: Show histogram metrics table for the current Vert.x instance in real time

@@ -21,46 +21,22 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.sql.SQLConnection
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.sql.{SQLClient => JSQLClient}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
+import io.vertx.scala.ext.sql.SQLClient
 import io.vertx.core.Handler
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
-import io.vertx.scala.core.Vertx
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
+import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 
 /**
   * An asynchronous client interface for interacting with a JDBC compliant database
   */
-class JDBCClient(private val _asJava: Object) {
+class JDBCClient(private val _asJava: Object)
+    extends SQLClient(_asJava)  {
 
-  def asJava = _asJava
-
-  /**
-    * Returns a connection that can be used to perform SQL operations on. It's important to remember
-    * to close the connection when you are done, so it is returned to the pool.
-    * @param handler the handler which is called when the <code>JdbcConnection</code> object is ready for use.
-    */
-  def getConnection(handler: Handler[AsyncResult[SQLConnection]]): JDBCClient = {
-    asJava.asInstanceOf[JJDBCClient].getConnection({x: AsyncResult[JSQLConnection] => handler.handle(AsyncResultWrapper[JSQLConnection, SQLConnection](x, a => SQLConnection(a)))})
-    this
-  }
-
-  /**
-    * Close the client
-    */
-  def close(): Unit = {
-    asJava.asInstanceOf[JJDBCClient].close()
-  }
-
- /**
-   * Like [[getConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def getConnectionFuture(): scala.concurrent.Future[SQLConnection] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLConnection, SQLConnection](x => SQLConnection(x))
-    asJava.asInstanceOf[JJDBCClient].getConnection(promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
 
 }
 

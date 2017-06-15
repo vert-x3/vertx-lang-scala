@@ -14,31 +14,35 @@
 ^|Name | Description
 |[[NET_SERVER]]`NET_SERVER`|
 +++
-Type for net server metrics
+Net server metrics.
 +++
 |[[NET_CLIENT]]`NET_CLIENT`|
 +++
-Type for net client metrics
+Net client metrics.
 +++
 |[[HTTP_SERVER]]`HTTP_SERVER`|
 +++
-Type for http server metrics
+Http server metrics.
 +++
 |[[HTTP_CLIENT]]`HTTP_CLIENT`|
 +++
-Type for http client metrics
+Http client metrics.
 +++
 |[[DATAGRAM_SOCKET]]`DATAGRAM_SOCKET`|
 +++
-Type for datagram socket metrics
+Datagram socket metrics.
 +++
 |[[EVENT_BUS]]`EVENT_BUS`|
 +++
-Type for event bus metrics
+Event bus metrics.
 +++
 |[[NAMED_POOLS]]`NAMED_POOLS`|
 +++
-Named pools metrics
+Named pools metrics.
++++
+|[[VERTICLES]]`VERTICLES`|
++++
+Verticle metrics.
 +++
 |===
 
