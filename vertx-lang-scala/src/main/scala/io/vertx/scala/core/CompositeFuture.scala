@@ -29,6 +29,7 @@ import io.vertx.core.Handler
 /**
   * The composite future wraps a list of [[io.vertx.scala.core.Future]], it is useful when several futures
   * needs to be coordinated.
+  * The handlers set for the coordinated futures are overridden by the handler of the composite future.
   */
 class CompositeFuture(private val _asJava: Object)
     extends Future[CompositeFuture](_asJava)  {

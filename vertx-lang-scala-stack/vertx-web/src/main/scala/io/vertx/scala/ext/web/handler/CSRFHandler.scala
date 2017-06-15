@@ -49,6 +49,16 @@ class CSRFHandler(private val _asJava: Object)
   }
 
   /**
+    * Set the cookie path. By default / is used.
+    * @param path a new path for the cookie.
+    * @return fluent
+    */
+  def setCookiePath(path: String): CSRFHandler = {
+    asJava.asInstanceOf[JCSRFHandler].setCookiePath(path.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
     * Set the header name. By default X-XSRF-TOKEN is used as it is the expected name by AngularJS however other
     * frameworks might use other names.
     * @param name a new name for the header.

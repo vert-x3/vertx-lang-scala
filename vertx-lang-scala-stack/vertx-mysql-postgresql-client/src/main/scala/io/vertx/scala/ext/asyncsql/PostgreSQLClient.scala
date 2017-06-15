@@ -23,8 +23,10 @@ import io.vertx.scala.ext.sql.SQLConnection
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.asyncsql.{PostgreSQLClient => JPostgreSQLClient}
 import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
+import io.vertx.ext.sql.{SQLClient => JSQLClient}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
+import io.vertx.scala.ext.sql.SQLClient
 import io.vertx.core.Handler
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 import io.vertx.scala.core.Vertx

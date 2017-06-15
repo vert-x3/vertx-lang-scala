@@ -26,7 +26,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-mongo-client-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -34,7 +34,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mongo-client-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-mongo-client-scala_2.12:3.4.2'
 ----
 
 
@@ -317,6 +317,17 @@ mongoClient.replaceFuture("books", query, replace).onComplete{
 
 
 ----
+
+=== Bulk operations
+
+To execute multiple insert, update, replace, or delete operations at once, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWrite(java.lang.String,%20java.util.List,%20io.vertx.core.Handler)[bulkWrite]`.
+
+You can pass a list of `link:../dataobjects.html#BulkOperation[BulkOperations]`, with each working similiar to the matching single operations.
+You can pass as many operations, even of the same type, as you wish.
+
+To specify if the bulk operation should be executed in order, and with what write option, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWriteWithOptions(java.lang.String,%20java.util.List,%20io.vertx.ext.mongo.BulkWriteOptions,%20io.vertx.core.Handler)[bulkWriteWithOptions]`
+and pass an instance of `link:../dataobjects.html#BulkWriteOptions[BulkWriteOptions]`.
+For more explanation what ordered means, see https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#execution-of-operations
 
 === Finding documents
 

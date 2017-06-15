@@ -14,9 +14,7 @@ WARNING: this module has the tech preview status, this means the API can change 
 
 == Using the Vert.x Kafka client
 
-As component not yet officially released in the Vert.x stack, to use the Vert.x Kafka client current snapshot version,
-add the following repository under the _repositories_ section and the following dependency to the _dependencies_ section
-of your build descriptor:
+To use this component, add the following dependency to the dependencies section of your build descriptor:
 
 * Maven (in your `pom.xml`):
 
@@ -25,7 +23,7 @@ of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-kafka-client</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -33,12 +31,12 @@ of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile io.vertx:vertx-kafka-client:3.4.2-SNAPSHOT
+compile io.vertx:vertx-kafka-client:3.4.2
 ----
 
 == Creating Kafka clients
 
-Creating consumers and sproducer is quite similar and on how it works using the native Kafka client library.
+Creating consumers and producers is quite similar and on how it works using the native Kafka client library.
 
 They need to be configured with a bunch of properties as described in the official
 Apache Kafka documentation, for the link:https://kafka.apache.org/documentation/#newconsumerconfigs[consumer] and
@@ -134,8 +132,8 @@ In order to start receiving messages from Kafka topics, the consumer can use the
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe(java.util.Set)[subscribe]` method for
 subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
 
-You need to register an handler for handling incoming messages using the
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler(io.vertx.core.Handler)[handler]`
+You also need to register a handler for handling incoming messages using the
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler(io.vertx.core.Handler)[handler]`.
 
 [source,scala]
 ----
@@ -157,7 +155,11 @@ consumer.subscribe("a-single-topic")
 
 ----
 
-An handler can also be passed during subscription to be aware of the subscription result and being notified when the operation
+The handler can be registered before or after the call to `subscribe()`; messages won't be consumed until both
+methods have been called. This allows you to call `subscribe()`, then `seek()` and finally `handler()` in
+order to only consume messages starting from a particular offset, for example.
+
+A handler can also be passed during subscription to be aware of the subscription result and being notified when the operation
 is completed.
 
 [source,scala]
@@ -317,6 +319,11 @@ consumer.assignFuture(topicPartitions).onComplete{
 }
 
 ----
+
+As with `subscribe()`, the handler can be registered before or after the call to `assign()`;
+messages won't be consumed until both methods have been called. This allows you to call
+`assign()`, then `seek()` and finally `handler()` in
+order to only consume messages starting from a particular offset, for example.
 
 Calling `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assignment(io.vertx.core.Handler)[assignment]` provides
 the list of the current assigned partitions.
@@ -776,7 +783,7 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 
 == Automatic clean-up in verticles
 
-If you?re creating consumers and producer from inside verticles, those consumers and producers will be automatically
+If you’re creating consumers and producer from inside verticles, those consumers and producers will be automatically
 closed when the verticle is undeployed.
 
 == Using Vert.x serializers/deserizaliers

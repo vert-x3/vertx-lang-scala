@@ -26,6 +26,32 @@ Set the secret used for authentication.
 +++
 |===
 
+[[MetricTagsMatch]]
+== MetricTagsMatch
+
+++++
+ Tags to apply to any metric which name matches the criteria.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[tags]]`tags`|`Json object`|
++++
+Set the tags to apply if metric name matches the criteria.
++++
+|[[type]]`type`|`link:enums.html#MatchType[MatchType]`|
++++
+Set the type of matching to apply.
++++
+|[[value]]`value`|`String`|
++++
+Set the matched value.
++++
+|===
+
 [[VertxHawkularOptions]]
 == VertxHawkularOptions
 
@@ -74,6 +100,10 @@ Set specific headers to include in HTTP requests.
 +++
 Set the configuration of the Hawkular Metrics HTTP client.
 +++
+|[[metricTagsMatches]]`metricTagsMatches`|`Array of link:dataobjects.html#MetricTagsMatch[MetricTagsMatch]`|
++++
+Sets a list of link.
++++
 |[[metricsBridgeAddress]]`metricsBridgeAddress`|`String`|
 +++
 Sets the metric bridge address on which the application is sending the custom metrics. Application can send
@@ -108,6 +138,14 @@ Set the metric collection interval (in seconds). Defaults to <code>1</code>.
 +++
 Set whether Hawkular tenant header should be sent. Defaults to <code>true</code>.
  Must be set to <code>false</code> when working with pre-Alpha13 Hawkular servers.
++++
+|[[taggedMetricsCacheSize]]`taggedMetricsCacheSize`|`Number (int)`|
++++
+Set the number of metric names to cache in order to avoid repeated tagging requests.
++++
+|[[tags]]`tags`|`Json object`|
++++
+Set tags applied to all metrics.
 +++
 |[[tenant]]`tenant`|`String`|
 +++

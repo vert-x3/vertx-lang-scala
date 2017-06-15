@@ -160,6 +160,17 @@ class VertxOptions(private val _asJava: JVertxOptions) {
   }
 
   /**
+    * Set wether the Vert.x file resolver uses caching for classpath resources.
+    */
+  def setFileResolverCachingEnabled(value: Boolean) = {
+    asJava.setFileResolverCachingEnabled(value)
+    this
+  }
+  def isFileResolverCachingEnabled: Boolean = {
+    asJava.isFileResolverCachingEnabled().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether HA will be enabled on the Vert.x instance.
     */
   def setHAEnabled(value: Boolean) = {

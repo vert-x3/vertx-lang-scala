@@ -90,24 +90,10 @@ class Process(private val _asJava: Object) {
 
   /**
     * Run the process.
+    *
     */
   def run(): Unit = {
     asJava.asInstanceOf[JProcess].run()
-  }
-
-  /**
-    * Run the process.
-    */
-  def run(foreground: Boolean): Unit = {
-    asJava.asInstanceOf[JProcess].run(foreground.asInstanceOf[java.lang.Boolean])
-  }
-
-  /**
-    * Run the process.
-    * @param completionHandler handler called after process callback
-    */
-  def run(completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].run({x: Void => completionHandler.handle(x)})
   }
 
   /**
@@ -184,10 +170,10 @@ class Process(private val _asJava: Object) {
 
   /**
     * Run the process.
-    * @param completionHandler handler called after process callback
+    *
     */
-  def run(foregraound: Boolean, completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
+  def run(foregraound: Boolean): Unit = {
+    asJava.asInstanceOf[JProcess].run(foregraound.asInstanceOf[java.lang.Boolean])
   }
 
   /**

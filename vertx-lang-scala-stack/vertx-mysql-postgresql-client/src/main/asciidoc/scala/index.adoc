@@ -15,7 +15,7 @@ application.
 
 To use this client, you need to add the following jar to your `CLASSPATH`:
 
-* vertx-mysql-postgresql-client-scala_2.12 3.4.2-SNAPSHOT (the client)
+* vertx-mysql-postgresql-client-scala_2.12 3.4.2 (the client)
 * scala-library 2.11.4
 * the postgress-async-2.11 and mysdql-async-2.11 from https://github.com/mauricio/postgresql-async
 * joda time
@@ -33,7 +33,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-mysql-postgresql-client-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -41,7 +41,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mysql-postgresql-client-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-mysql-postgresql-client-scala_2.12:3.4.2'
 ----
 
 === In an application using a vert.x distributions
@@ -150,12 +150,12 @@ with a unique pool name each time.
 == Closing the client
 
 You can hold on to the client for a long time (e.g. the life-time of your verticle), but once you have finished with
-it, you should close it using `link:../../scaladocs/io/vertx/scala/ext/asyncsql/AsyncSQLClient.html#close(io.vertx.core.Handler)[close]` or
-`link:../../scaladocs/io/vertx/scala/ext/asyncsql/AsyncSQLClient.html#close()[close]`
+it, you should close it using `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#close(io.vertx.core.Handler)[close]` or
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#close()[close]`
 
 == Getting a connection
 
-Use `link:../../scaladocs/io/vertx/scala/ext/asyncsql/AsyncSQLClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get a connection.
+Use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get a connection.
 
 This will return the connection in the handler when one is ready from the pool.
 

@@ -41,28 +41,37 @@ class SQLRowStream(private val _asJava: Object)
 
   def asJava = _asJava
 
-  override def exceptionHandler(arg0: Handler[Throwable]): ReadStream[io.vertx.core.json.JsonArray] = {
-    asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => arg0.handle(x)})
+  override def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
+    asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(arg0: Handler[io.vertx.core.json.JsonArray]): ReadStream[io.vertx.core.json.JsonArray] = {
-    asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => arg0.handle(x)})
+  override def handler(handler: Handler[io.vertx.core.json.JsonArray]): SQLRowStream = {
+    asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => handler.handle(x)})
     this
   }
 
-  override def pause(): ReadStream[io.vertx.core.json.JsonArray] = {
+  override def pause(): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].pause()
     this
   }
 
-  override def resume(): ReadStream[io.vertx.core.json.JsonArray] = {
+  override def resume(): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].resume()
     this
   }
 
-  override def endHandler(arg0: Handler[Unit]): ReadStream[io.vertx.core.json.JsonArray] = {
-    asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => arg0.handle(x)})
+  override def endHandler(endHandler: Handler[Unit]): SQLRowStream = {
+    asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
+
+  /**
+    * Event handler when a resultset is closed. This is useful to request for more results.
+    * @param handler called when the current result set is closed
+    */
+  def resultSetClosedHandler(handler: Handler[Unit]): SQLRowStream = {
+    asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)})
     this
   }
 
@@ -83,13 +92,6 @@ class SQLRowStream(private val _asJava: Object)
     */
   def columns(): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JSQLRowStream].columns().asScala.map(x => x.asInstanceOf[String])
-  }
-
-  /**
-    * Event handler when a resultset is closed. This is useful to request for more results.
-    */
-  def resultSetClosedHandler(handler: Handler[Unit]): SQLRowStream = {
-    SQLRowStream(asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)}))
   }
 
   /**

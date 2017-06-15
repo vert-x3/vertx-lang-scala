@@ -21,6 +21,7 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.mongo.WriteOption
+import io.vertx.ext.mongo.{MongoClientBulkWriteResult => JMongoClientBulkWriteResult}
 import io.vertx.ext.mongo.{MongoClient => JMongoClient}
 import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
 import io.vertx.ext.mongo.{FindOptions => JFindOptions}
@@ -30,6 +31,8 @@ import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.mongo.{MongoService => JMongoService}
+import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
+import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
 import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -99,6 +102,16 @@ class MongoService(private val _asJava: Object)
 
   override def replaceDocumentsWithOptions(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions, resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]): MongoService = {
     asJava.asInstanceOf[JMongoService].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, replace, options.asJava, {x: AsyncResult[JMongoClientUpdateResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))})
+    this
+  }
+
+  override def bulkWrite(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], resultHandler: Handler[AsyncResult[MongoClientBulkWriteResult]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].bulkWrite(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, {x: AsyncResult[JMongoClientBulkWriteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x, a => MongoClientBulkWriteResult(a)))})
+    this
+  }
+
+  override def bulkWriteWithOptions(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions, resultHandler: Handler[AsyncResult[MongoClientBulkWriteResult]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].bulkWriteWithOptions(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, bulkWriteOptions.asJava, {x: AsyncResult[JMongoClientBulkWriteResult] => resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x, a => MongoClientBulkWriteResult(a)))})
     this
   }
 
@@ -325,6 +338,18 @@ class MongoService(private val _asJava: Object)
   override def replaceDocumentsWithOptionsFuture(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions): scala.concurrent.Future[MongoClientUpdateResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, MongoClientUpdateResult](x => MongoClientUpdateResult(x))
     asJava.asInstanceOf[JMongoService].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, replace, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  override def bulkWriteFuture(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation]): scala.concurrent.Future[MongoClientBulkWriteResult] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x => MongoClientBulkWriteResult(x))
+    asJava.asInstanceOf[JMongoService].bulkWrite(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+  override def bulkWriteWithOptionsFuture(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions): scala.concurrent.Future[MongoClientBulkWriteResult] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x => MongoClientBulkWriteResult(x))
+    asJava.asInstanceOf[JMongoService].bulkWriteWithOptions(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, bulkWriteOptions.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

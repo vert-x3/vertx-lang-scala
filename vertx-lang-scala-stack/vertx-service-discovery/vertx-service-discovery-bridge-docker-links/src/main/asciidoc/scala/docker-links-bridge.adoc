@@ -22,7 +22,7 @@ descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-service-discovery-bridge-docker-links-scala_2.12</artifactId>
-  <version>3.4.2-SNAPSHOT</version>
+  <version>3.4.2</version>
 </dependency>
 ----
 
@@ -30,7 +30,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-bridge-docker-links-scala_2.12:3.4.2-SNAPSHOT'
+compile 'io.vertx:vertx-service-discovery-bridge-docker-links-scala_2.12:3.4.2'
 ----
 
 Then, when creating the service discovery, registers this bridge as follows:
