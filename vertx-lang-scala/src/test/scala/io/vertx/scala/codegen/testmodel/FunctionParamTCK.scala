@@ -122,16 +122,28 @@ class FunctionParamTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithGenericUserTypeReturn[Object]({x: JGenericRefedInterface[Object] => func(GenericRefedInterface[T](x)).asJava.asInstanceOf[JGenericRefedInterface[Object]]}).asInstanceOf[String]
   }
 
-  def methodWithNullableListParam(func: scala.collection.mutable.Buffer[String] => String): String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListParam({x: java.util.List[java.lang.String] => func(x.asScala.map(x => x.asInstanceOf[String])).asInstanceOf[java.lang.String]}).asInstanceOf[String]
+  def methodWithNullableListParam(func: scala.Option[scala.collection.mutable.Buffer[String]] => String): String = {
+    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListParam({x: java.util.List[java.lang.String] => func(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[String]))).asInstanceOf[java.lang.String]}).asInstanceOf[String]
   }
 
-  def methodWithNullableListReturn(func: String => scala.collection.mutable.Buffer[String]): String = {
-    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava}).asInstanceOf[String]
+//  def methodWithNullableListReturn(func: String => scala.Option[scala.collection.mutable.Buffer[String]]): String = {
+//    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(func(x.asInstanceOf[String]) => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava).orNull}).asInstanceOf[String]
+//  }
+
+  def methodWithNullableListReturn(func: String => scala.Option[scala.collection.mutable.Buffer[String]]): String = {
+    asJava.asInstanceOf[JFunctionParamTCK]
+      .methodWithNullableListReturn({x: java.lang.String => func(x).get.asJava})
+    //        func(x.asInstanceOf[String]).map(func(x.asInstanceOf[String]) => func(x.asInstanceOf[String])
+    //        .map(x => x.asInstanceOf[java.lang.String]).asJava).orNull
+    //      }).asInstanceOf[String]
   }
+
+  //  def methodWithNullableListReturn(func: String => scala.Option[scala.collection.mutable.Buffer[String]]): String = {
+  //    asJava.asInstanceOf[JFunctionParamTCK].methodWithNullableListReturn({x: java.lang.String => func(x.asInstanceOf[String]).map(func(x.asInstanceOf[String]) => func(x.asInstanceOf[String]).map(x => x.asInstanceOf[java.lang.String]).asJava).orNull}).asInstanceOf[String]
+  //  }
 
 }
 
 object FunctionParamTCK {
-  def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)  
+  def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)
 }
