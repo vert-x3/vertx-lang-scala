@@ -42,8 +42,8 @@ class DnsClient(private val _asJava: Object) {
     * @param handler the scala-function to notify with the io.vertx.lang.scala.AsyncResult. The handler will get notified with the resolved address if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def lookup(name: String, handler: Handler[AsyncResult[scala.Option[String]]]): DnsClient = {
+    asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -53,8 +53,8 @@ class DnsClient(private val _asJava: Object) {
     * @param handler the scala-function to notify with the io.vertx.lang.scala.AsyncResult. The handler will get notified with the resolved java.net.Inet4Address if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup4(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def lookup4(name: String, handler: Handler[AsyncResult[scala.Option[String]]]): DnsClient = {
+    asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -64,8 +64,8 @@ class DnsClient(private val _asJava: Object) {
     * @param handler the scala-function to notify with the io.vertx.lang.scala.AsyncResult. The handler will get notified with the resolved java.net.Inet6Address if a record was found. If non was found it will get notifed with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently
     */
-  def lookup6(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def lookup6(name: String, handler: Handler[AsyncResult[scala.Option[String]]]): DnsClient = {
+    asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -130,8 +130,8 @@ class DnsClient(private val _asJava: Object) {
     * @param handler the scala-function to notify with the io.vertx.lang.scala.AsyncResult. The handler will get notified with the resolved String if a record was found. If none was found it will get notified with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def resolvePTR(name: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def resolvePTR(name: String, handler: Handler[AsyncResult[scala.Option[String]]]): DnsClient = {
+    asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -164,16 +164,16 @@ class DnsClient(private val _asJava: Object) {
     * @param handler the scala-function to notify with the io.vertx.lang.scala.AsyncResult. The handler will get notified with the resolved String if a record was found. If none was found it will get notified with `null`. If an error accours it will get failed.
     * @return a reference to this, so the API can be used fluently.
     */
-  def reverseLookup(ipaddress: String, handler: Handler[AsyncResult[String]]): DnsClient = {
-    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def reverseLookup(ipaddress: String, handler: Handler[AsyncResult[scala.Option[String]]]): DnsClient = {
+    asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
  /**
    * Like [[lookup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def lookupFuture(name: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def lookupFuture(name: String): scala.concurrent.Future[scala.Option[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JDnsClient].lookup(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -181,8 +181,8 @@ class DnsClient(private val _asJava: Object) {
  /**
    * Like [[lookup4]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def lookup4Future(name: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def lookup4Future(name: String): scala.concurrent.Future[scala.Option[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JDnsClient].lookup4(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -190,8 +190,8 @@ class DnsClient(private val _asJava: Object) {
  /**
    * Like [[lookup6]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def lookup6Future(name: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def lookup6Future(name: String): scala.concurrent.Future[scala.Option[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JDnsClient].lookup6(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -244,8 +244,8 @@ class DnsClient(private val _asJava: Object) {
  /**
    * Like [[resolvePTR]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def resolvePTRFuture(name: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def resolvePTRFuture(name: String): scala.concurrent.Future[scala.Option[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JDnsClient].resolvePTR(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -271,8 +271,8 @@ class DnsClient(private val _asJava: Object) {
  /**
    * Like [[reverseLookup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def reverseLookupFuture(ipaddress: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def reverseLookupFuture(ipaddress: String): scala.concurrent.Future[scala.Option[String]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JDnsClient].reverseLookup(ipaddress.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
