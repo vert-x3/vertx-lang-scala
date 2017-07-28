@@ -105,7 +105,7 @@ object @{type.raw.simpleName} {\n
     if (t != null) {\n
       new @{className}(t)\n
     } else {\n
-      null\n
+      new @{className}(new J@{className}(emptyObj()))\n
     }\n
   }\n
   \n
@@ -113,7 +113,7 @@ object @{type.raw.simpleName} {\n
     if (json != null) {\n
       new @{className}(new J@{className}(json))\n
     } else {\n
-      null\n
+      new @{className}(new J@{className}(emptyObj()))\n
     }\n
   }\n
 }\n
