@@ -665,7 +665,7 @@ object HttpClientOptions {
     if (t != null) {
       new HttpClientOptions(t)
     } else {
-      null
+      new HttpClientOptions(new JHttpClientOptions(emptyObj()))
     }
   }
   
@@ -673,7 +673,7 @@ object HttpClientOptions {
     if (json != null) {
       new HttpClientOptions(new JHttpClientOptions(json))
     } else {
-      null
+      new HttpClientOptions(new JHttpClientOptions(emptyObj()))
     }
   }
 }

@@ -108,7 +108,7 @@ object Http2Settings {
     if (t != null) {
       new Http2Settings(t)
     } else {
-      null
+      new Http2Settings(new JHttp2Settings(emptyObj()))
     }
   }
   
@@ -116,7 +116,7 @@ object Http2Settings {
     if (json != null) {
       new Http2Settings(new JHttp2Settings(json))
     } else {
-      null
+      new Http2Settings(new JHttp2Settings(emptyObj()))
     }
   }
 }

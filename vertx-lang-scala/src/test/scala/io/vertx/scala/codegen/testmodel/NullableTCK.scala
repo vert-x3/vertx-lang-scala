@@ -363,7 +363,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListByteParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Byte]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Byte]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Byte]).asJava)).orNull)
   }
 
   def methodWithNullableListByteHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Byte]]]): Unit = {
@@ -383,7 +383,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListShortParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Short]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Short]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Short]).asJava)).orNull)
   }
 
   def methodWithNullableListShortHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Short]]]): Unit = {
@@ -403,7 +403,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListIntegerParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Int]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Integer]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Integer]).asJava)).orNull)
   }
 
   def methodWithNullableListIntegerHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Int]]]): Unit = {
@@ -423,7 +423,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListLongParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Long]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Long]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Long]).asJava)).orNull)
   }
 
   def methodWithNullableListLongHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Long]]]): Unit = {
@@ -443,7 +443,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListFloatParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Float]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Float]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Float]).asJava)).orNull)
   }
 
   def methodWithNullableListFloatHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Float]]]): Unit = {
@@ -463,7 +463,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListDoubleParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Double]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Double]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Double]).asJava)).orNull)
   }
 
   def methodWithNullableListDoubleHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Double]]]): Unit = {
@@ -483,7 +483,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListBooleanParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Boolean]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Boolean]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Boolean]).asJava)).orNull)
   }
 
   def methodWithNullableListBooleanHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Boolean]]]): Unit = {
@@ -503,7 +503,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListStringParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[String]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.String]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.String]).asJava)).orNull)
   }
 
   def methodWithNullableListStringHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[String]]]): Unit = {
@@ -523,7 +523,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListCharParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[Char]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Character]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Character]).asJava)).orNull)
   }
 
   def methodWithNullableListCharHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Char]]]): Unit = {
@@ -543,7 +543,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListJsonObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableListJsonObjectHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]): Unit = {
@@ -563,7 +563,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListJsonArrayParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableListJsonArrayHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]]): Unit = {
@@ -583,7 +583,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListApiParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava)).orNull)
   }
 
   def methodWithNullableListApiHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]]): Unit = {
@@ -603,7 +603,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListDataObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asJava).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asJava).asJava)).orNull)
   }
 
   def methodWithNullableListDataObjectHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[TestDataObject]]]): Unit = {
@@ -623,7 +623,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListEnumParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableListEnumHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
@@ -643,7 +643,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableListGenEnumParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableListGenEnumHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
@@ -663,7 +663,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetByteParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Byte]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Byte]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Byte]).asJava)).orNull)
   }
 
   def methodWithNullableSetByteHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Byte]]]): Unit = {
@@ -683,7 +683,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetShortParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Short]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Short]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Short]).asJava)).orNull)
   }
 
   def methodWithNullableSetShortHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Short]]]): Unit = {
@@ -703,7 +703,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetIntegerParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Int]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Integer]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Integer]).asJava)).orNull)
   }
 
   def methodWithNullableSetIntegerHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Int]]]): Unit = {
@@ -723,7 +723,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetLongParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Long]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Long]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Long]).asJava)).orNull)
   }
 
   def methodWithNullableSetLongHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Long]]]): Unit = {
@@ -743,7 +743,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetFloatParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Float]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Float]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Float]).asJava)).orNull)
   }
 
   def methodWithNullableSetFloatHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Float]]]): Unit = {
@@ -763,7 +763,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetDoubleParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Double]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Double]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Double]).asJava)).orNull)
   }
 
   def methodWithNullableSetDoubleHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Double]]]): Unit = {
@@ -783,7 +783,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetBooleanParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Boolean]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Boolean]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Boolean]).asJava)).orNull)
   }
 
   def methodWithNullableSetBooleanHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Boolean]]]): Unit = {
@@ -803,7 +803,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetStringParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[String]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.String]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.String]).asJava)).orNull)
   }
 
   def methodWithNullableSetStringHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[String]]]): Unit = {
@@ -823,7 +823,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetCharParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[Char]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asInstanceOf[java.lang.Character]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asInstanceOf[java.lang.Character]).asJava)).orNull)
   }
 
   def methodWithNullableSetCharHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Char]]]): Unit = {
@@ -843,7 +843,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetJsonObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableSetJsonObjectHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]]): Unit = {
@@ -863,7 +863,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetJsonArrayParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableSetJsonArrayHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]]): Unit = {
@@ -883,7 +883,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetApiParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava)).orNull)
   }
 
   def methodWithNullableSetApiHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[RefedInterface1]]]): Unit = {
@@ -903,7 +903,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetDataObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.map(x => x.asJava).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.map(x => x.asJava).asJava)).orNull)
   }
 
   def methodWithNullableSetDataObjectHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[TestDataObject]]]): Unit = {
@@ -923,7 +923,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetEnumParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableSetEnumHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
@@ -943,7 +943,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableSetGenEnumParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.asJava)).orNull)
   }
 
   def methodWithNullableSetGenEnumHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
@@ -963,7 +963,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapByteParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Byte]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Byte]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Byte]).asJava)).orNull)
   }
 
   def methodWithNullableMapByteHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Byte]]]): Unit = {
@@ -983,7 +983,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapShortParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Short]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Short]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Short]).asJava)).orNull)
   }
 
   def methodWithNullableMapShortHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Short]]]): Unit = {
@@ -1003,7 +1003,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapIntegerParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Int]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava)).orNull)
   }
 
   def methodWithNullableMapIntegerHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Int]]]): Unit = {
@@ -1023,7 +1023,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapLongParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Long]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Long]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Long]).asJava)).orNull)
   }
 
   def methodWithNullableMapLongHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Long]]]): Unit = {
@@ -1043,7 +1043,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapFloatParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Float]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Float]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Float]).asJava)).orNull)
   }
 
   def methodWithNullableMapFloatHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Float]]]): Unit = {
@@ -1063,7 +1063,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapDoubleParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Double]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava)).orNull)
   }
 
   def methodWithNullableMapDoubleHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Double]]]): Unit = {
@@ -1083,7 +1083,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapBooleanParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Boolean]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Boolean]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Boolean]).asJava)).orNull)
   }
 
   def methodWithNullableMapBooleanHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Boolean]]]): Unit = {
@@ -1103,7 +1103,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapStringParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, String]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.String]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)).orNull)
   }
 
   def methodWithNullableMapStringHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, String]]]): Unit = {
@@ -1123,7 +1123,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapCharParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, Char]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asInstanceOf[java.lang.Character]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asInstanceOf[java.lang.Character]).asJava)).orNull)
   }
 
   def methodWithNullableMapCharHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Char]]]): Unit = {
@@ -1139,11 +1139,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNonNullableMapJsonObjectParam(param: scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]): Boolean = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNonNullableMapJsonObjectParam(param.asJava).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JNullableTCK].methodWithNonNullableMapJsonObjectParam(param.mapValues(x => x).asJava).asInstanceOf[Boolean]
   }
 
   def methodWithNullableMapJsonObjectParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x).asJava)).orNull)
   }
 
   def methodWithNullableMapJsonObjectHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]]): Unit = {
@@ -1159,11 +1159,11 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNonNullableMapJsonArrayParam(param: scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]): Boolean = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNonNullableMapJsonArrayParam(param.asJava).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JNullableTCK].methodWithNonNullableMapJsonArrayParam(param.mapValues(x => x).asJava).asInstanceOf[Boolean]
   }
 
   def methodWithNullableMapJsonArrayParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x).asJava)).orNull)
   }
 
   def methodWithNullableMapJsonArrayHandler(notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]]): Unit = {
@@ -1183,7 +1183,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithNullableMapApiParam(expectNull: Boolean, param: scala.Option[scala.collection.mutable.Map[String, RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.map(param => param.mapValues(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava).orNull)
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapApiParam(expectNull.asInstanceOf[java.lang.Boolean], param.flatMap(res => Some(res.mapValues(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava)).orNull)
   }
 
   def methodWithListNullableByteParam(param: scala.collection.mutable.Buffer[scala.Option[Byte]]): Unit = {
@@ -1331,7 +1331,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableJsonObjectParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithListNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
@@ -1347,7 +1347,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableJsonArrayParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithListNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
@@ -1395,7 +1395,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableEnumParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithListNullableEnumHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
@@ -1411,7 +1411,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableGenEnumParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithListNullableGenEnumHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
@@ -1571,7 +1571,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableJsonObjectParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithSetNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
@@ -1587,7 +1587,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableJsonArrayParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithSetNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
@@ -1635,7 +1635,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableEnumParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithSetNullableEnumHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
@@ -1651,7 +1651,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableGenEnumParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumParam(param.map{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithSetNullableGenEnumHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
@@ -1811,7 +1811,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonObjectParam(param: scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectParam(param.mapValues{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithMapNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
@@ -1827,7 +1827,7 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonArrayParam(param: scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayParam(param.asJava)
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayParam(param.mapValues{case Some(x) => x;case None => null}.asJava)
   }
 
   def methodWithMapNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {

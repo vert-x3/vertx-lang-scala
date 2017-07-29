@@ -42,7 +42,7 @@ object JdkSSLEngineOptions {
     if (t != null) {
       new JdkSSLEngineOptions(t)
     } else {
-      null
+      new JdkSSLEngineOptions(new JJdkSSLEngineOptions(emptyObj()))
     }
   }
   
@@ -50,7 +50,7 @@ object JdkSSLEngineOptions {
     if (json != null) {
       new JdkSSLEngineOptions(new JJdkSSLEngineOptions(json))
     } else {
-      null
+      new JdkSSLEngineOptions(new JJdkSSLEngineOptions(emptyObj()))
     }
   }
 }

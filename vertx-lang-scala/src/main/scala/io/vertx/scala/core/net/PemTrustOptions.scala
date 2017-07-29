@@ -90,7 +90,7 @@ object PemTrustOptions {
     if (t != null) {
       new PemTrustOptions(t)
     } else {
-      null
+      new PemTrustOptions(new JPemTrustOptions(emptyObj()))
     }
   }
   
@@ -98,7 +98,7 @@ object PemTrustOptions {
     if (json != null) {
       new PemTrustOptions(new JPemTrustOptions(json))
     } else {
-      null
+      new PemTrustOptions(new JPemTrustOptions(emptyObj()))
     }
   }
 }

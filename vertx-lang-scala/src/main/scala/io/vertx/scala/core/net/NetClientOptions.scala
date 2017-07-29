@@ -390,7 +390,7 @@ object NetClientOptions {
     if (t != null) {
       new NetClientOptions(t)
     } else {
-      null
+      new NetClientOptions(new JNetClientOptions(emptyObj()))
     }
   }
   
@@ -398,7 +398,7 @@ object NetClientOptions {
     if (json != null) {
       new NetClientOptions(new JNetClientOptions(json))
     } else {
-      null
+      new NetClientOptions(new JNetClientOptions(emptyObj()))
     }
   }
 }

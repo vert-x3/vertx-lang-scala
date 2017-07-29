@@ -75,7 +75,7 @@ object DeliveryOptions {
     if (t != null) {
       new DeliveryOptions(t)
     } else {
-      null
+      new DeliveryOptions(new JDeliveryOptions(emptyObj()))
     }
   }
   
@@ -83,7 +83,7 @@ object DeliveryOptions {
     if (json != null) {
       new DeliveryOptions(new JDeliveryOptions(json))
     } else {
-      null
+      new DeliveryOptions(new JDeliveryOptions(emptyObj()))
     }
   }
 }

@@ -38,7 +38,7 @@ object DataObjectWithOnlyJsonObjectConstructor {
     if (t != null) {
       new DataObjectWithOnlyJsonObjectConstructor(t)
     } else {
-      null
+      new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(emptyObj()))
     }
   }
   
@@ -46,7 +46,7 @@ object DataObjectWithOnlyJsonObjectConstructor {
     if (json != null) {
       new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(json))
     } else {
-      null
+      new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(emptyObj()))
     }
   }
 }

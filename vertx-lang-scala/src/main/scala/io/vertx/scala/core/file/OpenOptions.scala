@@ -149,7 +149,7 @@ object OpenOptions {
     if (t != null) {
       new OpenOptions(t)
     } else {
-      null
+      new OpenOptions(new JOpenOptions(emptyObj()))
     }
   }
   
@@ -157,7 +157,7 @@ object OpenOptions {
     if (json != null) {
       new OpenOptions(new JOpenOptions(json))
     } else {
-      null
+      new OpenOptions(new JOpenOptions(emptyObj()))
     }
   }
 }

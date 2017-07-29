@@ -46,7 +46,7 @@ object DataObjectWithBuffer {
     if (t != null) {
       new DataObjectWithBuffer(t)
     } else {
-      null
+      new DataObjectWithBuffer(new JDataObjectWithBuffer(emptyObj()))
     }
   }
   
@@ -54,7 +54,7 @@ object DataObjectWithBuffer {
     if (json != null) {
       new DataObjectWithBuffer(new JDataObjectWithBuffer(json))
     } else {
-      null
+      new DataObjectWithBuffer(new JDataObjectWithBuffer(emptyObj()))
     }
   }
 }

@@ -88,7 +88,7 @@ object DataObjectWithListAdders {
     if (t != null) {
       new DataObjectWithListAdders(t)
     } else {
-      null
+      new DataObjectWithListAdders(new JDataObjectWithListAdders(emptyObj()))
     }
   }
   
@@ -96,7 +96,7 @@ object DataObjectWithListAdders {
     if (json != null) {
       new DataObjectWithListAdders(new JDataObjectWithListAdders(json))
     } else {
-      null
+      new DataObjectWithListAdders(new JDataObjectWithListAdders(emptyObj()))
     }
   }
 }

@@ -83,7 +83,7 @@ object RequestOptions {
     if (t != null) {
       new RequestOptions(t)
     } else {
-      null
+      new RequestOptions(new JRequestOptions(emptyObj()))
     }
   }
   
@@ -91,7 +91,7 @@ object RequestOptions {
     if (json != null) {
       new RequestOptions(new JRequestOptions(json))
     } else {
-      null
+      new RequestOptions(new JRequestOptions(emptyObj()))
     }
   }
 }
