@@ -30,11 +30,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testByte = 67.toByte
     nullableTCK.methodWithNullableByteParam(true, None)
     nullableTCK.methodWithNullableByteParam(false, Option(testByte))
-    nullableTCK.methodWithNullableByteHandler(true, b => assert(testByte == b))
-    nullableTCK.methodWithNullableByteHandler(false, b => assert(0 == b))
+    nullableTCK.methodWithNullableByteHandler(true, b => assert(b.contains(testByte)))
+    nullableTCK.methodWithNullableByteHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableByteHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testByte == b)
+        assert(b.contains(testByte))
       }
       w.dismiss()
     }))
@@ -47,7 +47,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -60,11 +60,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testShort = 1024.toShort
     nullableTCK.methodWithNullableShortParam(true, None)
     nullableTCK.methodWithNullableShortParam(false, Option(testShort))
-    nullableTCK.methodWithNullableShortHandler(true, b => assert(testShort == b))
-    nullableTCK.methodWithNullableShortHandler(false, b => assert(0 == b))
+    nullableTCK.methodWithNullableShortHandler(true, b => assert(b.contains(testShort)))
+    nullableTCK.methodWithNullableShortHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableShortHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testShort == b)
+        assert(b.contains(testShort))
       }
       w.dismiss()
     }))
@@ -77,7 +77,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -90,11 +90,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testInteger = 1234567
     nullableTCK.methodWithNullableIntegerParam(true, None)
     nullableTCK.methodWithNullableIntegerParam(false, Option(testInteger))
-    nullableTCK.methodWithNullableIntegerHandler(true, b => assert(testInteger == b))
-    nullableTCK.methodWithNullableIntegerHandler(false, b => assert(0 == b))
+    nullableTCK.methodWithNullableIntegerHandler(true, b => assert(b.contains(testInteger)))
+    nullableTCK.methodWithNullableIntegerHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableIntegerHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testInteger == b)
+        assert(b.contains(testInteger))
       }
       w.dismiss()
     }))
@@ -107,7 +107,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -120,11 +120,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testLong = 9876543210l
     nullableTCK.methodWithNullableLongParam(true, None)
     nullableTCK.methodWithNullableLongParam(false, Option(testLong))
-    nullableTCK.methodWithNullableLongHandler(true, b => assert(testLong == b))
-    nullableTCK.methodWithNullableLongHandler(false, b => assert(0 == b))
+    nullableTCK.methodWithNullableLongHandler(true, b => assert(b.contains(testLong)))
+    nullableTCK.methodWithNullableLongHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableLongHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testLong == b)
+        assert(b.contains(testLong))
       }
       w.dismiss()
     }))
@@ -137,7 +137,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -150,11 +150,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testFloat = 3.14.toFloat
     nullableTCK.methodWithNullableFloatParam(true, None)
     nullableTCK.methodWithNullableFloatParam(false, Option(testFloat))
-    nullableTCK.methodWithNullableFloatHandler(true, b => assert(testFloat == b))
-    nullableTCK.methodWithNullableFloatHandler(false, b => assert(0.0 == b))
+    nullableTCK.methodWithNullableFloatHandler(true, b => assert(b.contains(testFloat)))
+    nullableTCK.methodWithNullableFloatHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableFloatHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testFloat == b)
+        assert(b.contains(testFloat))
       }
       w.dismiss()
     }))
@@ -167,7 +167,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -180,11 +180,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testDouble = 3.1415926
     nullableTCK.methodWithNullableDoubleParam(true, None)
     nullableTCK.methodWithNullableDoubleParam(false, Option(testDouble))
-    nullableTCK.methodWithNullableDoubleHandler(true, b => assert(testDouble == b))
-    nullableTCK.methodWithNullableDoubleHandler(false, b => assert(0.0 == b))
+    nullableTCK.methodWithNullableDoubleHandler(true, b => assert(b.contains(testDouble)))
+    nullableTCK.methodWithNullableDoubleHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableDoubleHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testDouble == b)
+        assert(b.contains(testDouble))
       }
       w.dismiss()
     }))
@@ -197,7 +197,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0.0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -210,11 +210,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testBoolean = true
     nullableTCK.methodWithNullableBooleanParam(true, None)
     nullableTCK.methodWithNullableBooleanParam(false, Option(testBoolean))
-    nullableTCK.methodWithNullableBooleanHandler(true, b => assert(testBoolean == b))
-    nullableTCK.methodWithNullableBooleanHandler(false, b => assert(!b))
+    nullableTCK.methodWithNullableBooleanHandler(true, b => assert(b.contains(testBoolean)))
+    nullableTCK.methodWithNullableBooleanHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableBooleanHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testBoolean == b)
+        assert(b.contains(testBoolean))
       }
       w.dismiss()
     }))
@@ -227,7 +227,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(!r)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -240,11 +240,11 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testChar = 'f'
     nullableTCK.methodWithNullableCharParam(true, None)
     nullableTCK.methodWithNullableCharParam(false, Option(testChar))
-    nullableTCK.methodWithNullableCharHandler(true, b => assert(testChar == b))
-    nullableTCK.methodWithNullableCharHandler(false, b => assert(Char.MinValue == b))
+    nullableTCK.methodWithNullableCharHandler(true, b => assert(b.contains(testChar)))
+    nullableTCK.methodWithNullableCharHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableCharHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testChar == b)
+        assert(b.contains(testChar))
       }
       w.dismiss()
     }))
@@ -257,7 +257,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       case Success(r) => {
         w {
-          assert(r == 0)
+          assert(r.isEmpty)
         }
         w.dismiss()
       }
@@ -270,8 +270,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testJsonObject = Json.obj(("foo", "wibble"), ("bar", 3))
     nullableTCK.methodWithNullableJsonObjectParam(true, None)
     nullableTCK.methodWithNullableJsonObjectParam(false, Option(testJsonObject))
-    nullableTCK.methodWithNullableJsonObjectHandler(true, b => assert(testJsonObject == b))
-    nullableTCK.methodWithNullableJsonObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableJsonObjectHandler(true, b => assert(None == b))
+    nullableTCK.methodWithNullableJsonObjectHandler(false, b => assert(b == None))
     exec1(w => nullableTCK.methodWithNullableJsonObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testJsonObject == b)
@@ -280,7 +280,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableJsonObjectHandlerAsyncResultFuture(false).foreach(t => {
       w {
-        assert(t == null)
+        assert(t.isEmpty)
       }
       w.dismiss()
     }))
@@ -292,17 +292,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testJsonArray = Json.arr("one", "two", "three")
     nullableTCK.methodWithNullableJsonArrayParam(true, None)
     nullableTCK.methodWithNullableJsonArrayParam(false, Option(testJsonArray))
-    nullableTCK.methodWithNullableJsonArrayHandler(true, b => assert(testJsonArray == b))
-    nullableTCK.methodWithNullableJsonArrayHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableJsonArrayHandler(true, b => assert(b.contains(testJsonArray)))
+    nullableTCK.methodWithNullableJsonArrayHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableJsonArrayHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testJsonArray == b)
+        assert(b.contains(testJsonArray))
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableJsonArrayHandlerAsyncResultFuture(false).foreach(t => {
       w {
-        assert(t == null)
+        assert(t.isEmpty)
       }
       w.dismiss()
     }))
@@ -314,17 +314,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testApi = RefedInterface1(new RefedInterface1Impl().setString("lovely_dae"))
     nullableTCK.methodWithNullableApiParam(true, None)
     nullableTCK.methodWithNullableApiParam(false, Option(testApi))
-    nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi.asJava == b.asJava))
-    nullableTCK.methodWithNullableApiHandler(false, b => assert(null == b.asJava)) //TODO: should only return null not the wrapper object
+    nullableTCK.methodWithNullableApiHandler(true, b => assert(testApi.asJava == b.get.asJava))
+    nullableTCK.methodWithNullableApiHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableApiHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testApi.asJava == b.asJava)
+        assert(testApi.asJava == b.get.asJava)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableApiHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -336,17 +336,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testDataObject = TestDataObject.fromJson(Json.obj(("foo", "foo_value"), ("bar", 12345), ("wibble", 3.5)))
     nullableTCK.methodWithNullableDataObjectParam(true, None)
     nullableTCK.methodWithNullableDataObjectParam(false, Option(testDataObject))
-    nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.asJava.toJson == b.asJava.toJson))
-    nullableTCK.methodWithNullableDataObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableDataObjectHandler(true, b => assert(testDataObject.asJava.toJson == b.get.asJava.toJson))
+    nullableTCK.methodWithNullableDataObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableDataObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testDataObject.asJava.toJson == b.asJava.toJson)
+        assert(testDataObject.asJava.toJson == b.get.asJava.toJson)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableDataObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -358,17 +358,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testEnum = TestEnum.TIM
     nullableTCK.methodWithNullableEnumParam(true, None)
     nullableTCK.methodWithNullableEnumParam(false, Option(testEnum))
-    nullableTCK.methodWithNullableEnumHandler(true, b => assert(testEnum == b))
-    nullableTCK.methodWithNullableEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableEnumHandler(true, b => assert(b.contains(testEnum)))
+    nullableTCK.methodWithNullableEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testEnum == b)
+        assert(b.contains(testEnum))
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -380,17 +380,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testGenEnum = TestGenEnum.MIKE
     nullableTCK.methodWithNullableGenEnumParam(true, None)
     nullableTCK.methodWithNullableGenEnumParam(false, Option(testGenEnum))
-    nullableTCK.methodWithNullableGenEnumHandler(true, b => assert(testGenEnum == b))
-    nullableTCK.methodWithNullableGenEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableGenEnumHandler(true, b => assert(b.contains(testGenEnum)))
+    nullableTCK.methodWithNullableGenEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableGenEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testGenEnum == b)
+        assert(b.contains(testGenEnum))
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableGenEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -445,17 +445,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListByte = mutable.Buffer(12.toByte, 24.toByte, (-12).toByte)
     nullableTCK.methodWithNullableListByteParam(true, None)
     nullableTCK.methodWithNullableListByteParam(false, Option(testListByte))
-    nullableTCK.methodWithNullableListByteHandler(true, b => assert(testListByte == b))
-    nullableTCK.methodWithNullableListByteHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListByteHandler(true, b => assert(b.contains(testListByte)))
+    nullableTCK.methodWithNullableListByteHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListByteHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListByte.diff(b).isEmpty)
+        assert(testListByte.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListByteHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -467,17 +467,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListShort = mutable.Buffer(520.toShort, 1040.toShort, (-520).toShort)
     nullableTCK.methodWithNullableListShortParam(true, None)
     nullableTCK.methodWithNullableListShortParam(false, Option(testListShort))
-    nullableTCK.methodWithNullableListShortHandler(true, b => assert(testListShort == b))
-    nullableTCK.methodWithNullableListShortHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListShortHandler(true, b => assert(b.contains(testListShort)))
+    nullableTCK.methodWithNullableListShortHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListShortHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListShort.diff(b).isEmpty)
+        assert(testListShort.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListShortHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -489,17 +489,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListInteger = mutable.Buffer(12345, 54321, -12345)
     nullableTCK.methodWithNullableListIntegerParam(true, None)
     nullableTCK.methodWithNullableListIntegerParam(false, Option(testListInteger))
-    nullableTCK.methodWithNullableListIntegerHandler(true, b => assert(testListInteger == b))
-    nullableTCK.methodWithNullableListIntegerHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListIntegerHandler(true, b => assert(b.contains(testListInteger)))
+    nullableTCK.methodWithNullableListIntegerHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListIntegerHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListInteger.diff(b).isEmpty)
+        assert(testListInteger.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListIntegerHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -511,17 +511,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListLong = mutable.Buffer(123456789l, 987654321l, -123456789l)
     nullableTCK.methodWithNullableListLongParam(true, None)
     nullableTCK.methodWithNullableListLongParam(false, Option(testListLong))
-    nullableTCK.methodWithNullableListLongHandler(true, b => assert(testListLong == b))
-    nullableTCK.methodWithNullableListLongHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListLongHandler(true, b => assert(b.contains(testListLong)))
+    nullableTCK.methodWithNullableListLongHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListLongHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListLong.diff(b).isEmpty)
+        assert(testListLong.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListLongHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -533,17 +533,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListFloat = mutable.Buffer(1.1f, 2.2f, 3.3f)
     nullableTCK.methodWithNullableListFloatParam(true, None)
     nullableTCK.methodWithNullableListFloatParam(false, Option(testListFloat))
-    nullableTCK.methodWithNullableListFloatHandler(true, b => assert(testListFloat == b))
-    nullableTCK.methodWithNullableListFloatHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListFloatHandler(true, b => assert(b.contains(testListFloat)))
+    nullableTCK.methodWithNullableListFloatHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListFloatHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListFloat.diff(b).isEmpty)
+        assert(testListFloat.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListFloatHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -555,17 +555,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListDouble = mutable.Buffer(1.11, 2.22, 3.33)
     nullableTCK.methodWithNullableListDoubleParam(true, None)
     nullableTCK.methodWithNullableListDoubleParam(false, Option(testListDouble))
-    nullableTCK.methodWithNullableListDoubleHandler(true, b => assert(testListDouble == b))
-    nullableTCK.methodWithNullableListDoubleHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListDoubleHandler(true, b => assert(b.contains(testListDouble)))
+    nullableTCK.methodWithNullableListDoubleHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListDoubleHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListDouble.diff(b).isEmpty)
+        assert(testListDouble.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListDoubleHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -577,17 +577,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListBoolean = mutable.Buffer(true, false, true)
     nullableTCK.methodWithNullableListBooleanParam(true, None)
     nullableTCK.methodWithNullableListBooleanParam(false, Option(testListBoolean))
-    nullableTCK.methodWithNullableListBooleanHandler(true, b => assert(testListBoolean == b))
-    nullableTCK.methodWithNullableListBooleanHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListBooleanHandler(true, b => assert(b.contains(testListBoolean)))
+    nullableTCK.methodWithNullableListBooleanHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListBooleanHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListBoolean.diff(b).isEmpty)
+        assert(testListBoolean.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListBooleanHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -599,17 +599,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListString = mutable.Buffer("first", "second", "third")
     nullableTCK.methodWithNullableListStringParam(true, None)
     nullableTCK.methodWithNullableListStringParam(false, Option(testListString))
-    nullableTCK.methodWithNullableListStringHandler(true, b => assert(testListString == b))
-    nullableTCK.methodWithNullableListStringHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListStringHandler(true, b => assert(b.contains(testListString)))
+    nullableTCK.methodWithNullableListStringHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListStringHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListString.diff(b).isEmpty)
+        assert(testListString.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListStringHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -621,17 +621,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListChar = mutable.Buffer('x', 'y', 'z')
     nullableTCK.methodWithNullableListCharParam(true, None)
     nullableTCK.methodWithNullableListCharParam(false, Option(testListChar))
-    nullableTCK.methodWithNullableListCharHandler(true, b => assert(testListChar == b))
-    nullableTCK.methodWithNullableListCharHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListCharHandler(true, b => assert(b.contains(testListChar)))
+    nullableTCK.methodWithNullableListCharHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListCharHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListChar.diff(b).isEmpty)
+        assert(testListChar.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListCharHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -643,17 +643,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListJsonObject = mutable.Buffer(Json.obj(("foo", "bar")), Json.obj(("juu", 3)))
     nullableTCK.methodWithNullableListJsonObjectParam(true, None)
     nullableTCK.methodWithNullableListJsonObjectParam(false, Option(testListJsonObject))
-    nullableTCK.methodWithNullableListJsonObjectHandler(true, b => assert(testListJsonObject == b))
-    nullableTCK.methodWithNullableListJsonObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListJsonObjectHandler(true, b => assert(b.contains(testListJsonObject)))
+    nullableTCK.methodWithNullableListJsonObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListJsonObject.diff(b).isEmpty)
+        assert(testListJsonObject.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListJsonObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -665,17 +665,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListJsonArray = mutable.Buffer(Json.arr("foo", "bar"), Json.arr("juu"))
     nullableTCK.methodWithNullableListJsonArrayParam(true, None)
     nullableTCK.methodWithNullableListJsonArrayParam(false, Option(testListJsonArray))
-    nullableTCK.methodWithNullableListJsonArrayHandler(true, b => assert(testListJsonArray == b))
-    nullableTCK.methodWithNullableListJsonArrayHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListJsonArrayHandler(true, b => assert(b.contains(testListJsonArray)))
+    nullableTCK.methodWithNullableListJsonArrayHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListJsonArray.diff(b).isEmpty)
+        assert(testListJsonArray.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListJsonArrayHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -688,17 +688,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListApi = mutable.Buffer(RefedInterface1(iface))
     nullableTCK.methodWithNullableListApiParam(true, None)
     nullableTCK.methodWithNullableListApiParam(false, Option(testListApi))
-    nullableTCK.methodWithNullableListApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
-    nullableTCK.methodWithNullableListApiHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListApiHandler(true, b => assert(b.get.forall(a => a.asJava == iface)))
+    nullableTCK.methodWithNullableListApiHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListApiHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(b.forall(a => a.asJava == iface))
+        assert(b.get.forall(a => a.asJava == iface))
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListApiHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -711,8 +711,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListDataObject = mutable.Buffer(TestDataObject.fromJson(json))
     nullableTCK.methodWithNullableListDataObjectParam(true, None)
     nullableTCK.methodWithNullableListDataObjectParam(false, Option(testListDataObject))
-    nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.forall(a => a.asJava.toJson == json)))
-    nullableTCK.methodWithNullableListDataObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListDataObjectHandler(true, b => assert(b.get.forall(a => a.asJava.toJson == json)))
+    nullableTCK.methodWithNullableListDataObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListDataObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testListDataObject.forall(a => a.asJava.toJson == Json.obj(("foo", "foo_value"), ("bar", 12345), ("wibble", 5.6))))
@@ -721,7 +721,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableListDataObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -733,17 +733,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListEnum = mutable.Buffer(TestEnum.TIM, TestEnum.JULIEN)
     nullableTCK.methodWithNullableListEnumParam(true, None)
     nullableTCK.methodWithNullableListEnumParam(false, Option(testListEnum))
-    nullableTCK.methodWithNullableListEnumHandler(true, b => assert(testListEnum == b))
-    nullableTCK.methodWithNullableListEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListEnumHandler(true, b => assert(b.contains(testListEnum)))
+    nullableTCK.methodWithNullableListEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListEnum.diff(b).isEmpty)
+        assert(testListEnum.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -755,17 +755,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testListGenEnum = mutable.Buffer(TestGenEnum.BOB, TestGenEnum.LELAND)
     nullableTCK.methodWithNullableListGenEnumParam(true, None)
     nullableTCK.methodWithNullableListGenEnumParam(false, Option(testListGenEnum))
-    nullableTCK.methodWithNullableListGenEnumHandler(true, b => assert(testListGenEnum == b))
-    nullableTCK.methodWithNullableListGenEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableListGenEnumHandler(true, b => assert(b.contains(testListGenEnum)))
+    nullableTCK.methodWithNullableListGenEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableListGenEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testListGenEnum.diff(b).isEmpty)
+        assert(testListGenEnum.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableListGenEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -787,17 +787,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetByte = mutable.Set(12.toByte, 24.toByte, (-12).toByte)
     nullableTCK.methodWithNullableSetByteParam(true, None)
     nullableTCK.methodWithNullableSetByteParam(false, Option(testSetByte))
-    nullableTCK.methodWithNullableSetByteHandler(true, b => assert(testSetByte == b))
-    nullableTCK.methodWithNullableSetByteHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetByteHandler(true, b => assert(b.contains(testSetByte)))
+    nullableTCK.methodWithNullableSetByteHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetByteHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetByte.diff(b).isEmpty)
+        assert(testSetByte.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetByteHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -809,17 +809,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetShort = mutable.Set(520.toShort, 1040.toShort, (-520).toShort)
     nullableTCK.methodWithNullableSetShortParam(true, None)
     nullableTCK.methodWithNullableSetShortParam(false, Option(testSetShort))
-    nullableTCK.methodWithNullableSetShortHandler(true, b => assert(testSetShort == b))
-    nullableTCK.methodWithNullableSetShortHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetShortHandler(true, b => assert(b.contains(testSetShort)))
+    nullableTCK.methodWithNullableSetShortHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetShortHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetShort.diff(b).isEmpty)
+        assert(testSetShort.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetShortHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -831,17 +831,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetInteger = mutable.Set(12345, 54321, -12345)
     nullableTCK.methodWithNullableSetIntegerParam(true, None)
     nullableTCK.methodWithNullableSetIntegerParam(false, Option(testSetInteger))
-    nullableTCK.methodWithNullableSetIntegerHandler(true, b => assert(testSetInteger == b))
-    nullableTCK.methodWithNullableSetIntegerHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetIntegerHandler(true, b => assert(b.contains(testSetInteger)))
+    nullableTCK.methodWithNullableSetIntegerHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetIntegerHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetInteger.diff(b).isEmpty)
+        assert(testSetInteger.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetIntegerHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -853,17 +853,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetLong = mutable.Set(123456789l, 987654321l, -123456789l)
     nullableTCK.methodWithNullableSetLongParam(true, None)
     nullableTCK.methodWithNullableSetLongParam(false, Option(testSetLong))
-    nullableTCK.methodWithNullableSetLongHandler(true, b => assert(testSetLong == b))
-    nullableTCK.methodWithNullableSetLongHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetLongHandler(true, b => assert(b.contains(testSetLong)))
+    nullableTCK.methodWithNullableSetLongHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetLongHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetLong.diff(b).isEmpty)
+        assert(testSetLong.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetLongHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -875,17 +875,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetFloat = mutable.Set(1.1f, 2.2f, 3.3f)
     nullableTCK.methodWithNullableSetFloatParam(true, None)
     nullableTCK.methodWithNullableSetFloatParam(false, Option(testSetFloat))
-    nullableTCK.methodWithNullableSetFloatHandler(true, b => assert(testSetFloat == b))
-    nullableTCK.methodWithNullableSetFloatHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetFloatHandler(true, b => assert(b.contains(testSetFloat)))
+    nullableTCK.methodWithNullableSetFloatHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetFloatHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetFloat.diff(b).isEmpty)
+        assert(testSetFloat.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetFloatHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -897,17 +897,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetDouble = mutable.Set(1.11, 2.22, 3.33)
     nullableTCK.methodWithNullableSetDoubleParam(true, None)
     nullableTCK.methodWithNullableSetDoubleParam(false, Option(testSetDouble))
-    nullableTCK.methodWithNullableSetDoubleHandler(true, b => assert(testSetDouble == b))
-    nullableTCK.methodWithNullableSetDoubleHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetDoubleHandler(true, b => assert(b.contains(testSetDouble)))
+    nullableTCK.methodWithNullableSetDoubleHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetDoubleHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetDouble.diff(b).isEmpty)
+        assert(testSetDouble.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetDoubleHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -919,17 +919,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetBoolean = mutable.Set(true, false, true)
     nullableTCK.methodWithNullableSetBooleanParam(true, None)
     nullableTCK.methodWithNullableSetBooleanParam(false, Option(testSetBoolean))
-    nullableTCK.methodWithNullableSetBooleanHandler(true, b => assert(testSetBoolean == b))
-    nullableTCK.methodWithNullableSetBooleanHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetBooleanHandler(true, b => assert(b.contains(testSetBoolean)))
+    nullableTCK.methodWithNullableSetBooleanHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetBooleanHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetBoolean.diff(b).isEmpty)
+        assert(testSetBoolean.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetBooleanHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -941,17 +941,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetString = mutable.Set("first", "second", "third")
     nullableTCK.methodWithNullableSetStringParam(true, None)
     nullableTCK.methodWithNullableSetStringParam(false, Option(testSetString))
-    nullableTCK.methodWithNullableSetStringHandler(true, b => assert(testSetString == b))
-    nullableTCK.methodWithNullableSetStringHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetStringHandler(true, b => assert(b.contains(testSetString)))
+    nullableTCK.methodWithNullableSetStringHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetStringHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetString.diff(b).isEmpty)
+        assert(testSetString.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetStringHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -963,17 +963,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetChar = mutable.Set('x', 'y', 'z')
     nullableTCK.methodWithNullableSetCharParam(true, None)
     nullableTCK.methodWithNullableSetCharParam(false, Option(testSetChar))
-    nullableTCK.methodWithNullableSetCharHandler(true, b => assert(testSetChar == b))
-    nullableTCK.methodWithNullableSetCharHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetCharHandler(true, b => assert(b.contains(testSetChar)))
+    nullableTCK.methodWithNullableSetCharHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetCharHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetChar.diff(b).isEmpty)
+        assert(testSetChar.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetCharHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -985,17 +985,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetJsonObject = mutable.Set(Json.obj(("foo", "bar")), Json.obj(("juu", 3)))
     nullableTCK.methodWithNullableSetJsonObjectParam(true, None)
     nullableTCK.methodWithNullableSetJsonObjectParam(false, Option(testSetJsonObject))
-    nullableTCK.methodWithNullableSetJsonObjectHandler(true, b => assert(testSetJsonObject == b))
-    nullableTCK.methodWithNullableSetJsonObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(true, b => assert(b.contains(testSetJsonObject)))
+    nullableTCK.methodWithNullableSetJsonObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetJsonObject.diff(b).isEmpty)
+        assert(testSetJsonObject.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetJsonObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1007,17 +1007,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetJsonArray = mutable.Set(Json.arr("foo", "bar"), Json.arr("juu"))
     nullableTCK.methodWithNullableSetJsonArrayParam(true, None)
     nullableTCK.methodWithNullableSetJsonArrayParam(false, Option(testSetJsonArray))
-    nullableTCK.methodWithNullableSetJsonArrayHandler(true, b => assert(testSetJsonArray == b))
-    nullableTCK.methodWithNullableSetJsonArrayHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(true, b => assert(b.contains(testSetJsonArray)))
+    nullableTCK.methodWithNullableSetJsonArrayHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetJsonArray.diff(b).isEmpty)
+        assert(testSetJsonArray.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetJsonArrayHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1030,17 +1030,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetApi = mutable.Set(RefedInterface1(iface))
     nullableTCK.methodWithNullableSetApiParam(true, None)
     nullableTCK.methodWithNullableSetApiParam(false, Option(testSetApi))
-    nullableTCK.methodWithNullableSetApiHandler(true, b => assert(b.forall(a => a.asJava == iface)))
-    nullableTCK.methodWithNullableSetApiHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetApiHandler(true, b => assert(b.get.forall(a => a.asJava == iface)))
+    nullableTCK.methodWithNullableSetApiHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetApiHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(b.forall(a => a.asJava == iface))
+        assert(b.get.forall(a => a.asJava == iface))
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetApiHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1053,8 +1053,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetDataObject= mutable.Set(TestDataObject.fromJson(json))
     nullableTCK.methodWithNullableSetDataObjectParam(true, None)
     nullableTCK.methodWithNullableSetDataObjectParam(false, Option(testSetDataObject))
-    nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.forall(a => a.asJava.toJson == json)))
-    nullableTCK.methodWithNullableSetDataObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetDataObjectHandler(true, b => assert(b.get.forall(a => a.asJava.toJson == json)))
+    nullableTCK.methodWithNullableSetDataObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testSetDataObject.forall(a => a.asJava.toJson == Json.obj(("foo", "foo_value"), ("bar", 12345), ("wibble", 5.6))))
@@ -1063,7 +1063,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableSetDataObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1075,17 +1075,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetEnum= mutable.Set(TestEnum.TIM, TestEnum.JULIEN)
     nullableTCK.methodWithNullableSetEnumParam(true, None)
     nullableTCK.methodWithNullableSetEnumParam(false, Option(testSetEnum))
-    nullableTCK.methodWithNullableSetEnumHandler(true, b => assert(testSetEnum == b))
-    nullableTCK.methodWithNullableSetEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetEnumHandler(true, b => assert(b.contains(testSetEnum)))
+    nullableTCK.methodWithNullableSetEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetEnum.diff(b).isEmpty)
+        assert(testSetEnum.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1097,17 +1097,17 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testSetGenEnum= mutable.Set(TestGenEnum.BOB, TestGenEnum.LELAND)
     nullableTCK.methodWithNullableSetGenEnumParam(true, None)
     nullableTCK.methodWithNullableSetGenEnumParam(false, Option(testSetGenEnum))
-    nullableTCK.methodWithNullableSetGenEnumHandler(true, b => assert(testSetGenEnum == b))
-    nullableTCK.methodWithNullableSetGenEnumHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableSetGenEnumHandler(true, b => assert(b.contains(testSetGenEnum)))
+    nullableTCK.methodWithNullableSetGenEnumHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResultFuture(true).foreach(b => {
       w {
-        assert(testSetGenEnum.diff(b).isEmpty)
+        assert(testSetGenEnum.diff(b.get).isEmpty)
       }
       w.dismiss()
     }))
     exec1(w => nullableTCK.methodWithNullableSetGenEnumHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1132,8 +1132,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapByte = mutable.Map("1" -> 1.toByte, "2" -> 2.toByte, "3" -> 3.toByte)
     nullableTCK.methodWithNullableMapByteParam(true, None)
     nullableTCK.methodWithNullableMapByteParam(false, Option(testMapByte))
-    nullableTCK.methodWithNullableMapByteHandler(true, b => assert(testMapByte == b))
-    nullableTCK.methodWithNullableMapByteHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapByteHandler(true, b => assert(b.contains(testMapByte)))
+    nullableTCK.methodWithNullableMapByteHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapByteHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapByte.toSet.diff(b.toSet).isEmpty)
@@ -1142,7 +1142,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapByteHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1154,8 +1154,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapShort = mutable.Map("1" -> 1.toShort, "2" -> 2.toShort, "3" -> 3.toShort)
     nullableTCK.methodWithNullableMapShortParam(true, None)
     nullableTCK.methodWithNullableMapShortParam(false, Option(testMapShort))
-    nullableTCK.methodWithNullableMapShortHandler(true, b => assert(testMapShort == b))
-    nullableTCK.methodWithNullableMapShortHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapShortHandler(true, b => assert(b.contains(testMapShort)))
+    nullableTCK.methodWithNullableMapShortHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapShortHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapShort.toSet.diff(b.toSet).isEmpty)
@@ -1164,7 +1164,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapShortHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1176,8 +1176,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapInteger = mutable.Map("1" -> 1, "2" -> 2, "3" -> 3)
     nullableTCK.methodWithNullableMapIntegerParam(true, None)
     nullableTCK.methodWithNullableMapIntegerParam(false, Option(testMapInteger))
-    nullableTCK.methodWithNullableMapIntegerHandler(true, b => assert(testMapInteger == b))
-    nullableTCK.methodWithNullableMapIntegerHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapIntegerHandler(true, b => assert(b.contains(testMapInteger)))
+    nullableTCK.methodWithNullableMapIntegerHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapIntegerHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapInteger.toSet.diff(b.toSet).isEmpty)
@@ -1186,7 +1186,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapIntegerHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1198,8 +1198,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapLong = mutable.Map("1" -> 1l, "2" -> 2l, "3" -> 3l)
     nullableTCK.methodWithNullableMapLongParam(true, None)
     nullableTCK.methodWithNullableMapLongParam(false, Option(testMapLong))
-    nullableTCK.methodWithNullableMapLongHandler(true, b => assert(testMapLong == b))
-    nullableTCK.methodWithNullableMapLongHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapLongHandler(true, b => assert(b.contains(testMapLong)))
+    nullableTCK.methodWithNullableMapLongHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapLongHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapLong.toSet.diff(b.toSet).isEmpty)
@@ -1208,7 +1208,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapLongHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1220,8 +1220,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapFloat = mutable.Map("1" -> 1.1f, "2" -> 2.2f, "3" -> 3.3f)
     nullableTCK.methodWithNullableMapFloatParam(true, None)
     nullableTCK.methodWithNullableMapFloatParam(false, Option(testMapFloat))
-    nullableTCK.methodWithNullableMapFloatHandler(true, b => assert(testMapFloat == b))
-    nullableTCK.methodWithNullableMapFloatHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapFloatHandler(true, b => assert(b.contains(testMapFloat)))
+    nullableTCK.methodWithNullableMapFloatHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapFloatHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapFloat.toSet.diff(b.toSet).isEmpty)
@@ -1230,7 +1230,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapFloatHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1242,8 +1242,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapDouble = mutable.Map("1" -> 1.11, "2" -> 2.22, "3" -> 3.33)
     nullableTCK.methodWithNullableMapDoubleParam(true, None)
     nullableTCK.methodWithNullableMapDoubleParam(false, Option(testMapDouble))
-    nullableTCK.methodWithNullableMapDoubleHandler(true, b => assert(testMapDouble == b))
-    nullableTCK.methodWithNullableMapDoubleHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapDoubleHandler(true, b => assert(b.contains(testMapDouble)))
+    nullableTCK.methodWithNullableMapDoubleHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapDoubleHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapDouble.toSet.diff(b.toSet).isEmpty)
@@ -1252,7 +1252,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapDoubleHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1264,8 +1264,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapBoolean = mutable.Map("1" -> true, "2" -> false, "3" -> true)
     nullableTCK.methodWithNullableMapBooleanParam(true, None)
     nullableTCK.methodWithNullableMapBooleanParam(false, Option(testMapBoolean))
-    nullableTCK.methodWithNullableMapBooleanHandler(true, b => assert(testMapBoolean == b))
-    nullableTCK.methodWithNullableMapBooleanHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapBooleanHandler(true, b => assert(b.contains(testMapBoolean)))
+    nullableTCK.methodWithNullableMapBooleanHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapBooleanHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapBoolean.toSet.diff(b.toSet).isEmpty)
@@ -1274,7 +1274,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapBooleanHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1286,8 +1286,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapString = mutable.Map("1" -> "first", "2" -> "second", "3" -> "third")
     nullableTCK.methodWithNullableMapStringParam(true, None)
     nullableTCK.methodWithNullableMapStringParam(false, Option(testMapString))
-    nullableTCK.methodWithNullableMapStringHandler(true, b => assert(testMapString == b))
-    nullableTCK.methodWithNullableMapStringHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapStringHandler(true, b => assert(b.contains(testMapString)))
+    nullableTCK.methodWithNullableMapStringHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapStringHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapString.toSet.diff(b.toSet).isEmpty)
@@ -1296,7 +1296,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapStringHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1308,8 +1308,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapChar = mutable.Map("1" -> 'x', "2" -> 'y', "3" -> 'z')
     nullableTCK.methodWithNullableMapCharParam(true, None)
     nullableTCK.methodWithNullableMapCharParam(false, Option(testMapChar))
-    nullableTCK.methodWithNullableMapCharHandler(true, b => assert(testMapChar == b))
-    nullableTCK.methodWithNullableMapCharHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapCharHandler(true, b => assert(b.contains(testMapChar)))
+    nullableTCK.methodWithNullableMapCharHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapCharHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapChar.toSet.diff(b.toSet).isEmpty)
@@ -1318,7 +1318,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapCharHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1330,8 +1330,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
     val testMapJsonObject = mutable.Map("1" -> Json.obj(("foo", "bar")), "2" -> Json.obj(("juu", 3)))
     nullableTCK.methodWithNullableMapJsonObjectParam(true, None)
     nullableTCK.methodWithNullableMapJsonObjectParam(false, Option(testMapJsonObject))
-    nullableTCK.methodWithNullableMapJsonObjectHandler(true, b => assert(testMapJsonObject == b))
-    nullableTCK.methodWithNullableMapJsonObjectHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(true, b => assert(b.contains(testMapJsonObject)))
+    nullableTCK.methodWithNullableMapJsonObjectHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty)
@@ -1340,7 +1340,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapJsonObjectHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1353,7 +1353,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     nullableTCK.methodWithNullableMapJsonArrayParam(true, None)
     nullableTCK.methodWithNullableMapJsonArrayParam(false, Option(testMapJsonArray))
     nullableTCK.methodWithNullableMapJsonArrayHandler(true, b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
-    nullableTCK.methodWithNullableMapJsonArrayHandler(false, b => assert(null == b))
+    nullableTCK.methodWithNullableMapJsonArrayHandler(false, b => assert(b.isEmpty))
     exec1(w => nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResultFuture(true).foreach(b => {
       w {
         assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty)
@@ -1362,7 +1362,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
     }))
     exec1(w => nullableTCK.methodWithNullableMapJsonArrayHandlerAsyncResultFuture(false).foreach(b => {
       w {
-        assert(null == b)
+        assert(b.isEmpty)
       }
       w.dismiss()
     }))
@@ -1395,7 +1395,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
 
 
   "testListNullableString" should "work" in {
-    val testListString: mutable.Buffer[String] = mutable.Buffer("first", null, "third")
+    val testListString: mutable.Buffer[Option[String]] = mutable.Buffer(Some("first"), None, Some("third"))
     nullableTCK.methodWithListNullableStringParam(testListString)
     nullableTCK.methodWithListNullableStringHandler(b => assert(testListString.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithListNullableStringHandlerAsyncResultFuture().foreach(b => {
@@ -1408,7 +1408,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testListNullableJsonObject" should "work" in {
-    val testListJsonObject: mutable.Buffer[JsonObject] = mutable.Buffer(Json.obj(("foo", "bar")), null, Json.obj(("juu", 3)))
+    val testListJsonObject: mutable.Buffer[Option[JsonObject]] = mutable.Buffer(Some(Json.obj(("foo", "bar"))), None, Some(Json.obj(("juu", 3))))
     nullableTCK.methodWithListNullableJsonObjectParam(testListJsonObject)
     nullableTCK.methodWithListNullableJsonObjectHandler(b => assert(testListJsonObject.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithListNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {
@@ -1421,7 +1421,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testListNullableJsonArray" should "work" in {
-    val testListJsonArray: mutable.Buffer[JsonArray] = mutable.Buffer(Json.arr("foo", "bar"), null, Json.arr("juu"))
+    val testListJsonArray: mutable.Buffer[Option[JsonArray]] = mutable.Buffer(Some(Json.arr("foo", "bar")), None, Some(Json.arr("juu")))
     nullableTCK.methodWithListNullableJsonArrayParam(testListJsonArray)
     nullableTCK.methodWithListNullableJsonArrayHandler(b => assert(testListJsonArray.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithListNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {
@@ -1436,35 +1436,35 @@ class NullableTCKTest extends FlatSpec with Matchers {
   "testListNullableApi" should "work" ignore {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
-    val testListApi: mutable.Buffer[RefedInterface1] = mutable.Buffer(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    val testListApi: mutable.Buffer[Option[RefedInterface1]] = mutable.Buffer(Some(RefedInterface1(iface1)), None, Some(RefedInterface1(iface2)))
     nullableTCK.methodWithListNullableApiParam(testListApi)
-    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
+    nullableTCK.methodWithListNullableApiHandler(b => assert(testListApi.map(x => refedIfaceToJavaOrNull(x.get)) == b.map(x => refedIfaceToJavaOrNull(x.get))))
     exec1(w => nullableTCK.methodWithListNullableApiHandlerAsyncResultFuture().foreach(b => {
       w {
-        assert(testListApi.map(x => refedIfaceToJavaOrNull(x)).diff(b.map(a => refedIfaceToJavaOrNull(a))).isEmpty)
+        assert(testListApi.map(x => refedIfaceToJavaOrNull(x.get)).diff(b.map(a => refedIfaceToJavaOrNull(a.get))).isEmpty)
       }
       w.dismiss()
     }))
-    assert(testListApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithListNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
+    assert(testListApi.map(x => refedIfaceToJavaOrNull(x.get)) == nullableTCK.methodWithListNullableApiReturn().map(x => refedIfaceToJavaOrNull(x.get)))
   }
 
   "testListNullableDataObject" should "work" ignore {
     val json1 = Json.obj(("foo", "first"), ("bar", 1), ("wibble", 1.1))
     val json2 = Json.obj(("foo", "third"), ("bar", 3), ("wibble", 3.3))
-    val testListDataObject: mutable.Buffer[TestDataObject] = mutable.Buffer(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
+    val testListDataObject: mutable.Buffer[Option[TestDataObject]] = mutable.Buffer(Some(TestDataObject.fromJson(json1)), None, Some(TestDataObject.fromJson(json2)))
     nullableTCK.methodWithListNullableDataObjectParam(testListDataObject)
-    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
+    nullableTCK.methodWithListNullableDataObjectHandler(b => assert(testListDataObject.map(x => dataObjectToJsonOrNull(x.get)) == b.map(x => dataObjectToJsonOrNull(x.get))))
     exec1(w => nullableTCK.methodWithListNullableDataObjectHandlerAsyncResultFuture().foreach(b => {
       w {
-        assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x)))
+        assert(testListDataObject.map(x => dataObjectToJsonOrNull(x.get)) == b.map(x => dataObjectToJsonOrNull(x.get)))
       }
       w.dismiss()
     }))
-    assert(testListDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
+    assert(testListDataObject.map(x => dataObjectToJsonOrNull(x.get)) == nullableTCK.methodWithListNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x.get)))
   }
 
   "testListNullableGenEnum" should "work" in {
-    val testListGenEnum: mutable.Buffer[TestGenEnum] = mutable.Buffer(TestGenEnum.BOB, null, TestGenEnum.LELAND)
+    val testListGenEnum: mutable.Buffer[Option[TestGenEnum]] = mutable.Buffer(Some(TestGenEnum.BOB), None, Some(TestGenEnum.LELAND))
     nullableTCK.methodWithListNullableGenEnumParam(testListGenEnum)
     nullableTCK.methodWithListNullableGenEnumHandler(b => assert(testListGenEnum.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithListNullableGenEnumHandlerAsyncResultFuture().foreach(b => {
@@ -1487,7 +1487,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   //  shared test void testSetNullableChar() => testSetNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithSetNullableCharParam, nullableTCK.methodWithSetNullableCharHandler, nullableTCK.methodWithSetNullableCharHandlerAsyncResult, nullableTCK.methodWithSetNullableCharReturn)
 
   "testSetNullableString" should "work" in {
-    val testSetString: mutable.Set[String]= mutable.Set("first", null, "third")
+    val testSetString: mutable.Set[Option[String]]= mutable.Set(Some("first"), None, Some("third"))
     nullableTCK.methodWithSetNullableStringParam(testSetString)
     nullableTCK.methodWithSetNullableStringHandler(b => assert(testSetString.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableStringHandlerAsyncResultFuture().foreach(b => {
@@ -1500,7 +1500,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testSetNullableJsonObject" should "work" in {
-    val testSetJsonObject: mutable.Set[JsonObject]= mutable.Set(Json.obj(("foo", "bar")), null, Json.obj(("juu", 3)))
+    val testSetJsonObject: mutable.Set[Option[JsonObject]]= mutable.Set(Some(Json.obj(("foo", "bar"))), None, Some(Json.obj(("juu", 3))))
     nullableTCK.methodWithSetNullableJsonObjectParam(testSetJsonObject)
     nullableTCK.methodWithSetNullableJsonObjectHandler(b => assert(testSetJsonObject.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {
@@ -1513,7 +1513,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testSetNullableJsonArray" should "work" in {
-    val testSetJsonArray: mutable.Set[JsonArray]= mutable.Set(Json.arr("foo", "bar"), null, Json.arr("juu"))
+    val testSetJsonArray: mutable.Set[Option[JsonArray]]= mutable.Set(Some(Json.arr("foo", "bar")), None, Some(Json.arr("juu")))
     nullableTCK.methodWithSetNullableJsonArrayParam(testSetJsonArray)
     nullableTCK.methodWithSetNullableJsonArrayHandler(b => assert(testSetJsonArray.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {
@@ -1528,33 +1528,38 @@ class NullableTCKTest extends FlatSpec with Matchers {
   "testSetNullableApi" should "work" in {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
-    val testSetApi: mutable.Set[RefedInterface1]= mutable.Set(RefedInterface1(iface1), null, RefedInterface1(iface2))
+    val testSetApi: mutable.Set[Option[RefedInterface1]]= mutable.Set(Some(RefedInterface1(iface1)), None, Some(RefedInterface1(iface2)))
     //TODO: RefedInterface1Impl needs a nullsafe equals method!
-    //    nullableTCK.methodWithSetNullableApiParam(testSetApi)
-    //    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == b.map(x => refedIfaceToJavaOrNull(x))))
-    //    exec1(w => nullableTCK.methodWithSetNullableApiHandlerAsyncResultFuture().foreach(b => {w{assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)).asJava == b)} w.dismiss()}))
-    //    assert(testSetApi.map(x => refedIfaceToJavaOrNull(x)) == nullableTCK.methodWithSetNullableApiReturn().map(x => refedIfaceToJavaOrNull(x)))
+    nullableTCK.methodWithSetNullableApiParam(testSetApi)
+    nullableTCK.methodWithSetNullableApiHandler(b => assert(testSetApi.map(x => refedIfaceToJavaOrNull(x.get)) == b.map(x => refedIfaceToJavaOrNull(x.get))))
+    exec1(w => nullableTCK.methodWithSetNullableApiHandlerAsyncResultFuture().foreach(b => {
+      w {
+        assert(testSetApi.map(x => refedIfaceToJavaOrNull(x.get)) == b)
+      }
+      w.dismiss()
+    }))
+    assert(testSetApi.map(x => refedIfaceToJavaOrNull(x.get)) == nullableTCK.methodWithSetNullableApiReturn().map(x => refedIfaceToJavaOrNull(x.get)))
   }
 
   "testSetNullableDataObject" should "work" ignore {
     val json1 = Json.obj(("foo", "first"), ("bar", 1), ("wibble", 1.1))
     val json2 = Json.obj(("foo", "third"), ("bar", 3), ("wibble", 3.3))
-    val testSetDataObject: mutable.Set[TestDataObject]= mutable.Set(TestDataObject.fromJson(json1), null, TestDataObject.fromJson(json2))
+    val testSetDataObject: mutable.Set[Option[TestDataObject]]= mutable.Set(Some(TestDataObject.fromJson(json1)), None, Some(TestDataObject.fromJson(json2)))
     nullableTCK.methodWithSetNullableDataObjectParam(testSetDataObject)
-    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x))))
+    nullableTCK.methodWithSetNullableDataObjectHandler(b => assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x.get)) == b.map(x => dataObjectToJsonOrNull(x.get))))
     exec1(w => nullableTCK.methodWithSetNullableDataObjectHandlerAsyncResultFuture().foreach(b => {
       w {
-        assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == b.map(x => dataObjectToJsonOrNull(x)))
+        assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x.get)) == b.map(x => dataObjectToJsonOrNull(x.get)))
       }
       w.dismiss()
     }))
-    assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x)) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x)))
+    assert(testSetDataObject.map(x => dataObjectToJsonOrNull(x.get)) == nullableTCK.methodWithSetNullableDataObjectReturn().map(x => dataObjectToJsonOrNull(x.get)))
   }
 
 
 
   "testSetNullableGenEnum" should "work" in {
-    val testSetGenEnum: mutable.Set[TestGenEnum]= mutable.Set(TestGenEnum.BOB, null, TestGenEnum.LELAND)
+    val testSetGenEnum: mutable.Set[Option[TestGenEnum]]= mutable.Set(Some(TestGenEnum.BOB), None, Some(TestGenEnum.LELAND))
     nullableTCK.methodWithSetNullableGenEnumParam(testSetGenEnum)
     nullableTCK.methodWithSetNullableGenEnumHandler(b => assert(testSetGenEnum.diff(b).isEmpty))
     exec1(w => nullableTCK.methodWithSetNullableGenEnumHandlerAsyncResultFuture().foreach(b => {
@@ -1577,7 +1582,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   //  shared test void testMapNullableChar() => testMapNullable(ArrayList { 'F',null,'R' }, nullableTCK.methodWithMapNullableCharParam, nullableTCK.methodWithMapNullableCharHandler, nullableTCK.methodWithMapNullableCharHandlerAsyncResult, nullableTCK.methodWithMapNullableCharReturn)
 
   "testMapNullableString" should "work" in {
-    val testMapString: mutable.Map[String, String] = mutable.Map("1" -> "first", "2" -> null, "3" -> "third")
+    val testMapString: mutable.Map[String, Option[String]] = mutable.Map("1" -> Some("first"), "2" -> None, "3" -> Some("third"))
     nullableTCK.methodWithMapNullableStringParam(testMapString)
     nullableTCK.methodWithMapNullableStringHandler(b => assert(testMapString.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableStringHandlerAsyncResultFuture().foreach(b => {
@@ -1590,7 +1595,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testMapNullableJsonObject" should "work" in {
-    val testMapJsonObject: mutable.Map[String, JsonObject] = mutable.Map("1" -> Json.obj(("foo", "bar")), "2" -> null, "3" -> Json.obj(("juu", 3)))
+    val testMapJsonObject: mutable.Map[String, Option[JsonObject]] = mutable.Map("1" -> Some(Json.obj(("foo", "bar"))), "2" -> None, "3" -> Some(Json.obj(("juu", 3))))
     nullableTCK.methodWithMapNullableJsonObjectParam(testMapJsonObject)
     nullableTCK.methodWithMapNullableJsonObjectHandler(b => assert(testMapJsonObject.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableJsonObjectHandlerAsyncResultFuture().foreach(b => {
@@ -1603,7 +1608,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   }
 
   "testMapNullableJsonArray" should "work" in {
-    val testMapJsonArray: mutable.Map[String, JsonArray] = mutable.Map("1" -> Json.arr("foo", "bar"), "2" -> null, "3" -> Json.arr("juu"))
+    val testMapJsonArray: mutable.Map[String, Option[JsonArray]] = mutable.Map("1" -> Some(Json.arr("foo", "bar")), "2" -> None, "3" -> Some(Json.arr("juu")))
     nullableTCK.methodWithMapNullableJsonArrayParam(testMapJsonArray)
     nullableTCK.methodWithMapNullableJsonArrayHandler(b => assert(testMapJsonArray.toSet.diff(b.toSet).isEmpty))
     exec1(w => nullableTCK.methodWithMapNullableJsonArrayHandlerAsyncResultFuture().foreach(b => {
@@ -1618,7 +1623,7 @@ class NullableTCKTest extends FlatSpec with Matchers {
   "testMapNullableApi" should "work" ignore {
     val iface1 = new RefedInterface1Impl().setString("first")
     val iface2 = new RefedInterface1Impl().setString("third")
-    val testMapApi: mutable.Map[String, RefedInterface1] = mutable.Map("1" -> RefedInterface1(iface1), "2" -> null, "3" -> RefedInterface1(iface2))
+    val testMapApi: mutable.Map[String, Option[RefedInterface1]] = mutable.Map("1" -> Some(RefedInterface1(iface1)), "2" -> None, "3" -> Some(RefedInterface1(iface2)))
     nullableTCK.methodWithMapNullableApiParam(testMapApi)
   }
 

@@ -211,7 +211,7 @@ object AddressResolverOptions {
     if (t != null) {
       new AddressResolverOptions(t)
     } else {
-      null
+      new AddressResolverOptions(new JAddressResolverOptions(emptyObj()))
     }
   }
   
@@ -219,7 +219,7 @@ object AddressResolverOptions {
     if (json != null) {
       new AddressResolverOptions(new JAddressResolverOptions(json))
     } else {
-      null
+      new AddressResolverOptions(new JAddressResolverOptions(emptyObj()))
     }
   }
 }

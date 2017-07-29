@@ -83,7 +83,7 @@ object CopyOptions {
     if (t != null) {
       new CopyOptions(t)
     } else {
-      null
+      new CopyOptions(new JCopyOptions(emptyObj()))
     }
   }
   
@@ -91,7 +91,7 @@ object CopyOptions {
     if (json != null) {
       new CopyOptions(new JCopyOptions(json))
     } else {
-      null
+      new CopyOptions(new JCopyOptions(emptyObj()))
     }
   }
 }

@@ -112,7 +112,7 @@ object DataObjectWithValues {
     if (t != null) {
       new DataObjectWithValues(t)
     } else {
-      null
+      new DataObjectWithValues(new JDataObjectWithValues(emptyObj()))
     }
   }
   
@@ -120,7 +120,7 @@ object DataObjectWithValues {
     if (json != null) {
       new DataObjectWithValues(new JDataObjectWithValues(json))
     } else {
-      null
+      new DataObjectWithValues(new JDataObjectWithValues(emptyObj()))
     }
   }
 }

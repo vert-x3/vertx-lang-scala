@@ -151,7 +151,7 @@ object DatagramSocketOptions {
     if (t != null) {
       new DatagramSocketOptions(t)
     } else {
-      null
+      new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
     }
   }
   
@@ -159,7 +159,7 @@ object DatagramSocketOptions {
     if (json != null) {
       new DatagramSocketOptions(new JDatagramSocketOptions(json))
     } else {
-      null
+      new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
     }
   }
 }
