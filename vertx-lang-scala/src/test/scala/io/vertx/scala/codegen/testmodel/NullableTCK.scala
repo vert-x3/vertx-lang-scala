@@ -1335,15 +1335,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandler({x: java.util.List[JsonObject] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandler({x: java.util.List[JsonObject] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithListNullableJsonObjectHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.List[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.List[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithListNullableJsonObjectReturn(): scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectReturn().asScala.map(Option(_))
   }
 
   def methodWithListNullableJsonArrayParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
@@ -1351,15 +1351,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandler({x: java.util.List[JsonArray] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandler({x: java.util.List[JsonArray] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithListNullableJsonArrayHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.List[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.List[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithListNullableJsonArrayReturn(): scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayReturn().asScala.map(Option(_))
   }
 
   def methodWithListNullableApiParam(param: scala.collection.mutable.Buffer[scala.Option[RefedInterface1]]): Unit = {
@@ -1399,15 +1399,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableEnumHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandler({x: java.util.List[TestEnum] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandler({x: java.util.List[TestEnum] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithListNullableEnumHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithListNullableEnumReturn(): scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumReturn().asScala.map(Option(_))
   }
 
   def methodWithListNullableGenEnumParam(param: scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
@@ -1415,15 +1415,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableGenEnumHandler(handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandler({x: java.util.List[TestGenEnum] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandler({x: java.util.List[TestGenEnum] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithListNullableGenEnumHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithListNullableGenEnumReturn(): scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumReturn().asScala.map(Option(_))
   }
 
   def methodWithSetNullableByteParam(param: scala.collection.mutable.Set[scala.Option[Byte]]): Unit = {
@@ -1575,15 +1575,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandler({x: java.util.Set[JsonObject] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandler({x: java.util.Set[JsonObject] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithSetNullableJsonObjectHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithSetNullableJsonObjectReturn(): scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectReturn().asScala.map(Option(_))
   }
 
   def methodWithSetNullableJsonArrayParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
@@ -1591,15 +1591,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandler({x: java.util.Set[JsonArray] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandler({x: java.util.Set[JsonArray] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithSetNullableJsonArrayHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithSetNullableJsonArrayReturn(): scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayReturn().asScala.map(Option(_))
   }
 
   def methodWithSetNullableApiParam(param: scala.collection.mutable.Set[scala.Option[RefedInterface1]]): Unit = {
@@ -1639,15 +1639,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableEnumHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandler({x: java.util.Set[TestEnum] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandler({x: java.util.Set[TestEnum] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithSetNullableEnumHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithSetNullableEnumReturn(): scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumReturn().asScala.map(Option(_))
   }
 
   def methodWithSetNullableGenEnumParam(param: scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
@@ -1655,15 +1655,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableGenEnumHandler(handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandler({x: java.util.Set[TestGenEnum] => handler.handle(x.asScala)})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandler({x: java.util.Set[TestGenEnum] => handler.handle(x.asScala.map(Option(_)))})
   }
 
   def methodWithSetNullableGenEnumHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))})
   }
 
   def methodWithSetNullableGenEnumReturn(): scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]] = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumReturn().asScala
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumReturn().asScala.map(Option(_))
   }
 
   def methodWithMapNullableByteParam(param: scala.collection.mutable.Map[String, scala.Option[Byte]]): Unit = {
@@ -1815,15 +1815,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonObjectHandler(handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler({x: java.util.Map[String, JsonObject] => handler.handle(collection.mutable.Map(x.asScala.toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler({x: java.util.Map[String, JsonObject] => handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))})
   }
 
   def methodWithMapNullableJsonObjectHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x, a => collection.mutable.Map(a.asScala.toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))})
   }
 
   def methodWithMapNullableJsonObjectReturn(): scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]] = {
-    collection.mutable.Map(asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectReturn().asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectReturn().asScala.mapValues(Option(_)).toSeq: _*)
   }
 
   def methodWithMapNullableJsonArrayParam(param: scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
@@ -1831,15 +1831,15 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonArrayHandler(handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler({x: java.util.Map[String, JsonArray] => handler.handle(collection.mutable.Map(x.asScala.toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler({x: java.util.Map[String, JsonArray] => handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))})
   }
 
   def methodWithMapNullableJsonArrayHandlerAsyncResult(handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x, a => collection.mutable.Map(a.asScala.toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))})
   }
 
   def methodWithMapNullableJsonArrayReturn(): scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]] = {
-    collection.mutable.Map(asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayReturn().asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayReturn().asScala.mapValues(Option(_)).toSeq: _*)
   }
 
   def methodWithMapNullableApiParam(param: scala.collection.mutable.Map[String, scala.Option[RefedInterface1]]): Unit = {
@@ -2251,13 +2251,13 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableJsonObjectHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithListNullableJsonArrayHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2275,13 +2275,13 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithListNullableEnumHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithListNullableGenEnumHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2341,13 +2341,13 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableJsonObjectHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithSetNullableJsonArrayHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2365,13 +2365,13 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithSetNullableEnumHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithSetNullableGenEnumHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x => x.asScala)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x => x.asScala.map(Option(_)))
     asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -2431,13 +2431,13 @@ class NullableTCK(private val _asJava: Object) {
   }
 
   def methodWithMapNullableJsonObjectHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x => collection.mutable.Map(x.asScala.toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x => collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
   def methodWithMapNullableJsonArrayHandlerAsyncResultFuture(): scala.concurrent.Future[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x => collection.mutable.Map(x.asScala.toSeq: _*))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x => collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))
     asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

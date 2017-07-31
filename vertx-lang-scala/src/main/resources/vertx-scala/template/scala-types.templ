@@ -76,7 +76,10 @@
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[0])) {
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          conversion += '.map(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[0])) {
           conversion += '.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         }
         if (nullable) {
@@ -86,7 +89,10 @@
         }
       } else if (type.kind == CLASS_SET){
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[0])) {
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          conversion += '.map(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[0])) {
           conversion += '.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         }
         if (nullable) {
@@ -97,7 +103,10 @@
       } else if (type.kind == CLASS_MAP){
         /*TODO: this feels very expensive*/
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[1])) {
+        if(type.args[1].isNullable && !doesTypeRequireConversion(type.args[1])) {
+          conversion += '.mapValues(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[1])) {
           conversion += '.mapValues(x => ' + toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) + ')';
         }
         if (nullable) {
