@@ -67,8 +67,8 @@ class SessionStore(private val _asJava: Object) {
     * @param id the unique ID of the session
     * @param resultHandler will be called with a result holding the session, or a failure
     */
-  def get(id: String, resultHandler: Handler[AsyncResult[Session]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
+  def get(id: String, resultHandler: Handler[AsyncResult[scala.Option[Session]]]): Unit = {
+    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, scala.Option[Session]](x, a => scala.Option(a).map(Session(_))))})
   }
 
   /**
@@ -115,8 +115,8 @@ class SessionStore(private val _asJava: Object) {
  /**
    * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def getFuture(id: String): scala.concurrent.Future[Session] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, Session](x => Session(x))
+  def getFuture(id: String): scala.concurrent.Future[scala.Option[Session]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, scala.Option[Session]](x => scala.Option(x).map(Session(_)))
     asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }

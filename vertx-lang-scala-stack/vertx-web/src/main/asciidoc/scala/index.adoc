@@ -76,7 +76,7 @@ To use vert.x web, add the following dependency to the _dependencies_ section of
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -85,7 +85,7 @@ To use vert.x web, add the following dependency to the _dependencies_ section of
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-web-scala_2.12:3.4.2'
+  compile 'io.vertx:vertx-web-scala_2.12:3.5.0-SNAPSHOT'
 }
 ----
 
@@ -1721,6 +1721,60 @@ router.route("/private/settings/*").handler(settingsAuthHandler)
 
 ----
 
+=== Chaining multiple auth handlers
+
+There are times when you want to support multiple authN/authZ mechanisms in a single application. For this you can
+use the `link:../../scaladocs/io/vertx/scala/ext/web/handler/ChainAuthHandler.html[ChainAuthHandler]`. The chain auth handler will attempt to perform
+authentication on a chain of handlers. The chain works both for AuthN and AuthZ, so if the authentication is valid
+at a given handler of the chain, then that same handler will be used to perform authorization (if requested).
+
+It is important to know that some handlers require specific providers, for example:
+
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/JWTAuthHandler.html[JWTAuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/jwt/JWTAuth.html[JWTAuth]`.
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/DigestAuthHandler.html[DigestAuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/htdigest/HtdigestAuth.html[HtdigestAuth]`.
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/OAuth2AuthHandler.html[OAuth2AuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/OAuth2Auth.html[OAuth2Auth]`.
+
+So it is not expected that the providers will be shared across all handlers. There are cases where one can share the
+provider across handlers, for example:
+
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/BasicAuthHandler.html[BasicAuthHandler]` can take any provider.
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/RedirectAuthHandler.html[RedirectAuthHandler]` can take any provider.
+
+So say that you want to create an application that accepts both `HTTP Basic Authentication` and `Form Redirect`. You
+would start configuring your chain as:
+
+[source,scala]
+----
+
+var chain = ChainAuthHandler.create()
+
+// add http basic auth handler to the chain
+chain.append(BasicAuthHandler.create(provider))
+// add form redirect auth handler to the chain
+chain.append(RedirectAuthHandler.create(provider))
+
+// secure your route
+router.route("/secure/resource").handler(chain)
+// your app
+router.route("/secure/resource").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do something...
+})
+
+----
+
+So when a user makes a request without a `Authorization` header, this means that the chain will fail to authenticate
+with the basic auth handler and will attempt to authenticate with the redirect handler. Since the redirect handler
+always redirects you will be sent to the login form that you configured in that handler.
+
+Like the normal routing in vertx-web, auth chaning is a sequence, so if you would prefer to fallback to your browser
+asking for the user credentials using HTTP Basic authentication instead of the redirect all you need to to is reverse
+the order of appending to the chain.
+
+Now assume that you make a request where you provide the header `Authorization` with the value `Basic [token]`. In
+this case the basic auth handler will attempt to authenticate and if it is sucessful the chain will stop and
+vertx-web will continue to process your handlers. If the token is not valid, for example bad username/password, then
+the chain will continue to the following entry. In this specific case the redirect auth handler.
+
 == Serving static resources
 
 Vert.x-Web comes with an out of the box handler for serving static web resources so you can write static web servers
@@ -1891,7 +1945,7 @@ These examples are not using the traditional "transcoding" as they use an API pr
 === MVEL template engine
 
 To use MVEL, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-mvel:3.4.2`. Create an instance of the MVEL template engine using:
+`io.vertx:vertx-web-templ-mvel:3.5.0-SNAPSHOT`. Create an instance of the MVEL template engine using:
 `io.vertx.ext.web.templ.MVELTemplateEngine#create()`
 
 When using the MVEL template engine, it will by default look for
@@ -1917,7 +1971,7 @@ MVEL templates.
 === Jade template engine
 
 To use the Jade template engine, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-jade:3.4.2`. Create an instance of the Jade template engine using:
+`io.vertx:vertx-web-templ-jade:3.5.0-SNAPSHOT`. Create an instance of the Jade template engine using:
 `io.vertx.ext.web.templ.JadeTemplateEngine#create()`.
 
 When using the Jade template engine, it will by default look for
@@ -1943,7 +1997,7 @@ Jade templates.
 === Handlebars template engine
 
 To use Handlebars, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-handlebars:3.4.2`. Create an instance of the Handlebars template engine
+`io.vertx:vertx-web-templ-handlebars:3.5.0-SNAPSHOT`. Create an instance of the Handlebars template engine
 using: `io.vertx.ext.web.templ.HandlebarsTemplateEngine#create()`.
 
 When using the Handlebars template engine, it will by default look for
@@ -1981,7 +2035,7 @@ handlebars templates.
 === Thymeleaf template engine
 
 To use Thymeleaf, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-thymeleaf:3.4.2`. Create an instance of the Thymeleaf template engine
+`io.vertx:vertx-web-templ-thymeleaf:3.5.0-SNAPSHOT`. Create an instance of the Thymeleaf template engine
 using: `io.vertx.ext.web.templ.ThymeleafTemplateEngine#create()`.
 
 When using the Thymeleaf template engine, it will by default look for
@@ -2009,7 +2063,7 @@ Thymeleaf templates.
 === Apache FreeMarker template engine
 
 To use Apache FreeMarker, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-freemarker:3.4.2`. Create an instance of the Apache FreeMarker template engine
+`io.vertx:vertx-web-templ-freemarker:3.5.0-SNAPSHOT`. Create an instance of the Apache FreeMarker template engine
 using: `io.vertx.ext.web.templ.FreeMarkerTemplateEngine#create()`.
 
 When using the Apache FreeMarker template engine, it will by default look for
@@ -2406,7 +2460,7 @@ You can retrieve the client library using a dependency manager:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
   <classifier>client</classifier>
   <type>js</type>
 </dependency>
@@ -2416,7 +2470,7 @@ You can retrieve the client library using a dependency manager:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-web-scala_2.12:3.4.2:client'
+compile 'io.vertx:vertx-web-scala_2.12:3.5.0-SNAPSHOT:client'
 ----
 
 The library is also available on:

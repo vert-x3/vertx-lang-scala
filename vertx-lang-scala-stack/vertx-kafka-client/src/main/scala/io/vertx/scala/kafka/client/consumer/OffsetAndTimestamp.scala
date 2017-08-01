@@ -61,7 +61,7 @@ object OffsetAndTimestamp {
     if (t != null) {
       new OffsetAndTimestamp(t)
     } else {
-      null
+      new OffsetAndTimestamp(new JOffsetAndTimestamp(emptyObj()))
     }
   }
   
@@ -69,7 +69,7 @@ object OffsetAndTimestamp {
     if (json != null) {
       new OffsetAndTimestamp(new JOffsetAndTimestamp(json))
     } else {
-      null
+      new OffsetAndTimestamp(new JOffsetAndTimestamp(emptyObj()))
     }
   }
 }

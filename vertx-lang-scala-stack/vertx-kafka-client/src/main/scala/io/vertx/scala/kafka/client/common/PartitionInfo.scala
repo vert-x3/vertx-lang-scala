@@ -94,7 +94,7 @@ object PartitionInfo {
     if (t != null) {
       new PartitionInfo(t)
     } else {
-      null
+      new PartitionInfo(new JPartitionInfo(emptyObj()))
     }
   }
   
@@ -102,7 +102,7 @@ object PartitionInfo {
     if (json != null) {
       new PartitionInfo(new JPartitionInfo(json))
     } else {
-      null
+      new PartitionInfo(new JPartitionInfo(emptyObj()))
     }
   }
 }

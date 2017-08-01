@@ -96,7 +96,7 @@ object BulkOperation {
     if (t != null) {
       new BulkOperation(t)
     } else {
-      null
+      new BulkOperation(new JBulkOperation(emptyObj()))
     }
   }
   
@@ -104,7 +104,7 @@ object BulkOperation {
     if (json != null) {
       new BulkOperation(new JBulkOperation(json))
     } else {
-      null
+      new BulkOperation(new JBulkOperation(emptyObj()))
     }
   }
 }

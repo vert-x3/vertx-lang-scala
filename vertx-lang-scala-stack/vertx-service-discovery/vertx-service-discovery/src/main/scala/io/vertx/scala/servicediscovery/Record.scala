@@ -109,7 +109,7 @@ object Record {
     if (t != null) {
       new Record(t)
     } else {
-      null
+      new Record(new JRecord(emptyObj()))
     }
   }
   
@@ -117,7 +117,7 @@ object Record {
     if (json != null) {
       new Record(new JRecord(json))
     } else {
-      null
+      new Record(new JRecord(emptyObj()))
     }
   }
 }

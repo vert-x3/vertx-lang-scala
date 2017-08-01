@@ -73,7 +73,7 @@ object Match {
     if (t != null) {
       new Match(t)
     } else {
-      null
+      new Match(new JMatch(emptyObj()))
     }
   }
   
@@ -81,7 +81,7 @@ object Match {
     if (json != null) {
       new Match(new JMatch(json))
     } else {
-      null
+      new Match(new JMatch(emptyObj()))
     }
   }
 }

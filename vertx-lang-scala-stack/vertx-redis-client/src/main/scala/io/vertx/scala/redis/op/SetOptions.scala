@@ -54,7 +54,7 @@ object SetOptions {
     if (t != null) {
       new SetOptions(t)
     } else {
-      null
+      new SetOptions(new JSetOptions(emptyObj()))
     }
   }
   
@@ -62,7 +62,7 @@ object SetOptions {
     if (json != null) {
       new SetOptions(new JSetOptions(json))
     } else {
-      null
+      new SetOptions(new JSetOptions(emptyObj()))
     }
   }
 }

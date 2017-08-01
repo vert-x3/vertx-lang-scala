@@ -12,7 +12,7 @@ dependency to the _dependencies_ section of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-auth-jwt-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -20,7 +20,7 @@ dependency to the _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-auth-jwt-scala_2.12:3.4.2'
+compile 'io.vertx:vertx-auth-jwt-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 JSON Web Token is a simple way to send information in the clear (usually in a URL) whose contents can be
@@ -51,7 +51,12 @@ Here's an example of creating a JWT auth provider:
 [source,java]
 ----
 
-var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
+var config = JWTAuthOptions()
+  .setKeyStore(KeyStoreOptions()
+    .setPath("keystore.jceks")
+    .setPassword("secret")
+  )
+
 
 var provider = JWTAuth.create(vertx, config)
 
@@ -64,7 +69,12 @@ do:
 [source,java]
 ----
 
-var config = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("path", "keystore.jceks").put("type", "jceks").put("password", "secret"))
+var config = JWTAuthOptions()
+  .setKeyStore(KeyStoreOptions()
+    .setPath("keystore.jceks")
+    .setPassword("secret")
+  )
+
 
 var provider = JWTAuth.create(vertx, config)
 
@@ -114,8 +124,8 @@ keytool -genkey -keystore keystore.jceks -storetype jceks -storepass secret -key
 keytool -genkey -keystore keystore.jceks -storetype jceks -storepass secret -keyalg RSA -keysize 2048 -alias RS384 -keypass secret -sigalg SHA384withRSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
 keytool -genkey -keystore keystore.jceks -storetype jceks -storepass secret -keyalg RSA -keysize 2048 -alias RS512 -keypass secret -sigalg SHA512withRSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
 keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 256 -alias ES256 -keypass secret -sigalg SHA256withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
-keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 256 -alias ES384 -keypass secret -sigalg SHA384withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
-keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 256 -alias ES512 -keypass secret -sigalg SHA512withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
+keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 384 -alias ES384 -keypass secret -sigalg SHA384withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
+keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 521 -alias ES512 -keypass secret -sigalg SHA512withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
 ----
 
 === Read only tokens
@@ -126,7 +136,13 @@ case all you need to have is a public key im PEM format.
 [source,scala]
 ----
 
-var config = new io.vertx.core.json.JsonObject().put("public-key", "BASE64-ENCODED-PUBLIC_KEY")
+var config = JWTAuthOptions()
+  .setPubSecKeys(Set(PubSecKeyOptions()
+    .setType("RS256")
+    .setPublicKey("BASE64-ENCODED-PUBLIC_KEY")
+  ))
+
+
 var provider = JWTAuth.create(vertx, config)
 
 ----

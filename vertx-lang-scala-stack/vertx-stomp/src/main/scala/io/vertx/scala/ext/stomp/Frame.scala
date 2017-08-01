@@ -111,7 +111,7 @@ object Frame {
     if (t != null) {
       new Frame(t)
     } else {
-      null
+      new Frame(new JFrame(emptyObj()))
     }
   }
   
@@ -119,7 +119,7 @@ object Frame {
     if (json != null) {
       new Frame(new JFrame(json))
     } else {
-      null
+      new Frame(new JFrame(emptyObj()))
     }
   }
 }

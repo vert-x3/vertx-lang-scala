@@ -38,7 +38,7 @@ object LimitOptions {
     if (t != null) {
       new LimitOptions(t)
     } else {
-      null
+      new LimitOptions(new JLimitOptions(emptyObj()))
     }
   }
   
@@ -46,7 +46,7 @@ object LimitOptions {
     if (json != null) {
       new LimitOptions(new JLimitOptions(json))
     } else {
-      null
+      new LimitOptions(new JLimitOptions(emptyObj()))
     }
   }
 }

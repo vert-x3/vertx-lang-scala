@@ -50,7 +50,7 @@ object SortOptions {
     if (t != null) {
       new SortOptions(t)
     } else {
-      null
+      new SortOptions(new JSortOptions(emptyObj()))
     }
   }
   
@@ -58,7 +58,7 @@ object SortOptions {
     if (json != null) {
       new SortOptions(new JSortOptions(json))
     } else {
-      null
+      new SortOptions(new JSortOptions(emptyObj()))
     }
   }
 }

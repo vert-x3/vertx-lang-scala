@@ -59,7 +59,7 @@ object MailResult {
     if (t != null) {
       new MailResult(t)
     } else {
-      null
+      new MailResult(new JMailResult(emptyObj()))
     }
   }
   
@@ -67,7 +67,7 @@ object MailResult {
     if (json != null) {
       new MailResult(new JMailResult(json))
     } else {
-      null
+      new MailResult(new JMailResult(emptyObj()))
     }
   }
 }

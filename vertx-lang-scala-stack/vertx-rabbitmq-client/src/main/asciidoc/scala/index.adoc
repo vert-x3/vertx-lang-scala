@@ -15,7 +15,7 @@ Add the following dependency to your maven project
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -26,7 +26,7 @@ Add the following dependency to your gradle project
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.4.2'
+  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.5.0-SNAPSHOT'
 }
 ----
 
@@ -36,9 +36,9 @@ You can create a client instance as follows using a full amqp uri:
 
 [source,scala]
 ----
-var config = new io.vertx.core.json.JsonObject()
+var config = RabbitMQOptions()
 // full amqp uri
-config.put("uri", "amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
+config.setUri("amqp://xvjvsrrc:VbuL1atClKt7zVNQha0bnnScbNvGiqgb@moose.rmq.cloudamqp.com/xvjvsrrc")
 var client = RabbitMQClient.create(vertx, config)
 
 ----
@@ -47,20 +47,20 @@ Or you can also specify individual parameters manually:
 
 [source,scala]
 ----
-var config = new io.vertx.core.json.JsonObject()
+var config = RabbitMQOptions()
 // Each parameter is optional
 // The default parameter with be used if the parameter is not set
-config.put("user", "user1")
-config.put("password", "password1")
-config.put("host", "localhost")
-config.put("port", 5672)
-config.put("virtualHost", "vhost1")
-config.put("connectionTimeout", 60)
-config.put("requestedHeartbeat", 60)
-config.put("handshakeTimeout", 60)
-config.put("requestedChannelMax", 5)
-config.put("networkRecoveryInterval", 5)
-config.put("automaticRecoveryEnabled", true)
+config.setUser("user1")
+config.setPassword("password1")
+config.setHost("localhost")
+config.setPort(5672)
+config.setVirtualHost("vhost1")
+config.setConnectionTimeout(6000)
+config.setRequestedHeartbeat(60)
+config.setHandshakeTimeout(6000)
+config.setRequestedChannelMax(5)
+config.setNetworkRecoveryInterval(500)
+config.setAutomaticRecoveryEnabled(true)
 
 var client = RabbitMQClient.create(vertx, config)
 

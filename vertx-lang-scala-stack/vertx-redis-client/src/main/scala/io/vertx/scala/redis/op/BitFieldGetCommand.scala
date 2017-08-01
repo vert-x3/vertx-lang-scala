@@ -50,7 +50,7 @@ object BitFieldGetCommand {
     if (t != null) {
       new BitFieldGetCommand(t)
     } else {
-      null
+      new BitFieldGetCommand(new JBitFieldGetCommand(emptyObj()))
     }
   }
   
@@ -58,7 +58,7 @@ object BitFieldGetCommand {
     if (json != null) {
       new BitFieldGetCommand(new JBitFieldGetCommand(json))
     } else {
-      null
+      new BitFieldGetCommand(new JBitFieldGetCommand(emptyObj()))
     }
   }
 }

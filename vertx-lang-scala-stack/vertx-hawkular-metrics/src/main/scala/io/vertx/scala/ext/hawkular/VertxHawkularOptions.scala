@@ -264,7 +264,7 @@ object VertxHawkularOptions {
     if (t != null) {
       new VertxHawkularOptions(t)
     } else {
-      null
+      new VertxHawkularOptions(new JVertxHawkularOptions(emptyObj()))
     }
   }
   
@@ -272,7 +272,7 @@ object VertxHawkularOptions {
     if (json != null) {
       new VertxHawkularOptions(new JVertxHawkularOptions(json))
     } else {
-      null
+      new VertxHawkularOptions(new JVertxHawkularOptions(emptyObj()))
     }
   }
 }

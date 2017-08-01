@@ -72,7 +72,7 @@ object ShellServerOptions {
     if (t != null) {
       new ShellServerOptions(t)
     } else {
-      null
+      new ShellServerOptions(new JShellServerOptions(emptyObj()))
     }
   }
   
@@ -80,7 +80,7 @@ object ShellServerOptions {
     if (json != null) {
       new ShellServerOptions(new JShellServerOptions(json))
     } else {
-      null
+      new ShellServerOptions(new JShellServerOptions(emptyObj()))
     }
   }
 }

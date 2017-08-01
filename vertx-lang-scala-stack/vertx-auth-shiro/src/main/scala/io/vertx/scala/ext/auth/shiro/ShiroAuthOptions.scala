@@ -64,7 +64,7 @@ object ShiroAuthOptions {
     if (t != null) {
       new ShiroAuthOptions(t)
     } else {
-      null
+      new ShiroAuthOptions(new JShiroAuthOptions(emptyObj()))
     }
   }
   
@@ -72,7 +72,7 @@ object ShiroAuthOptions {
     if (json != null) {
       new ShiroAuthOptions(new JShiroAuthOptions(json))
     } else {
-      null
+      new ShiroAuthOptions(new JShiroAuthOptions(emptyObj()))
     }
   }
 }
