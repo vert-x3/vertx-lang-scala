@@ -65,7 +65,7 @@ object UpdateResult {
     if (t != null) {
       new UpdateResult(t)
     } else {
-      null
+      new UpdateResult(new JUpdateResult(emptyObj()))
     }
   }
   
@@ -73,7 +73,7 @@ object UpdateResult {
     if (json != null) {
       new UpdateResult(new JUpdateResult(json))
     } else {
-      null
+      new UpdateResult(new JUpdateResult(emptyObj()))
     }
   }
 }

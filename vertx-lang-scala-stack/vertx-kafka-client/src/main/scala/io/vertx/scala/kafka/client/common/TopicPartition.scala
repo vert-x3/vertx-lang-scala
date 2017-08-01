@@ -61,7 +61,7 @@ object TopicPartition {
     if (t != null) {
       new TopicPartition(t)
     } else {
-      null
+      new TopicPartition(new JTopicPartition(emptyObj()))
     }
   }
   
@@ -69,7 +69,7 @@ object TopicPartition {
     if (json != null) {
       new TopicPartition(new JTopicPartition(json))
     } else {
-      null
+      new TopicPartition(new JTopicPartition(emptyObj()))
     }
   }
 }

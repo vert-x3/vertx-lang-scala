@@ -244,7 +244,7 @@ object MailConfig {
     if (t != null) {
       new MailConfig(t)
     } else {
-      null
+      new MailConfig(new JMailConfig(emptyObj()))
     }
   }
   
@@ -252,7 +252,7 @@ object MailConfig {
     if (json != null) {
       new MailConfig(new JMailConfig(json))
     } else {
-      null
+      new MailConfig(new JMailConfig(emptyObj()))
     }
   }
 }

@@ -163,7 +163,7 @@ object MongoAuthOptions {
     if (t != null) {
       new MongoAuthOptions(t)
     } else {
-      null
+      new MongoAuthOptions(new JMongoAuthOptions(emptyObj()))
     }
   }
   
@@ -171,7 +171,7 @@ object MongoAuthOptions {
     if (json != null) {
       new MongoAuthOptions(new JMongoAuthOptions(json))
     } else {
-      null
+      new MongoAuthOptions(new JMongoAuthOptions(emptyObj()))
     }
   }
 }

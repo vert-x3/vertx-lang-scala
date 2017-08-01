@@ -104,7 +104,7 @@ object ResultSet {
     if (t != null) {
       new ResultSet(t)
     } else {
-      null
+      new ResultSet(new JResultSet(emptyObj()))
     }
   }
   
@@ -112,7 +112,7 @@ object ResultSet {
     if (json != null) {
       new ResultSet(new JResultSet(json))
     } else {
-      null
+      new ResultSet(new JResultSet(emptyObj()))
     }
   }
 }

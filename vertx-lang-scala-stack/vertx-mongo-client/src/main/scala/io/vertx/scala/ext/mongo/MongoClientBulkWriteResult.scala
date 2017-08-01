@@ -61,7 +61,7 @@ object MongoClientBulkWriteResult {
     if (t != null) {
       new MongoClientBulkWriteResult(t)
     } else {
-      null
+      new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(emptyObj()))
     }
   }
   
@@ -69,7 +69,7 @@ object MongoClientBulkWriteResult {
     if (json != null) {
       new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(json))
     } else {
-      null
+      new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(emptyObj()))
     }
   }
 }

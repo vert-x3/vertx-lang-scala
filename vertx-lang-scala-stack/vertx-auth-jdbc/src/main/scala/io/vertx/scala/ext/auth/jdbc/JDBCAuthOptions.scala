@@ -119,7 +119,7 @@ object JDBCAuthOptions {
     if (t != null) {
       new JDBCAuthOptions(t)
     } else {
-      null
+      new JDBCAuthOptions(new JJDBCAuthOptions(emptyObj()))
     }
   }
   
@@ -127,7 +127,7 @@ object JDBCAuthOptions {
     if (json != null) {
       new JDBCAuthOptions(new JJDBCAuthOptions(json))
     } else {
-      null
+      new JDBCAuthOptions(new JJDBCAuthOptions(emptyObj()))
     }
   }
 }

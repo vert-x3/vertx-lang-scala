@@ -111,7 +111,7 @@ object IndexOptions {
     if (t != null) {
       new IndexOptions(t)
     } else {
-      null
+      new IndexOptions(new JIndexOptions(emptyObj()))
     }
   }
   
@@ -119,7 +119,7 @@ object IndexOptions {
     if (json != null) {
       new IndexOptions(new JIndexOptions(json))
     } else {
-      null
+      new IndexOptions(new JIndexOptions(emptyObj()))
     }
   }
 }

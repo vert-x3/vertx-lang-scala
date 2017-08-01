@@ -110,7 +110,7 @@ object Node {
     if (t != null) {
       new Node(t)
     } else {
-      null
+      new Node(new JNode(emptyObj()))
     }
   }
   
@@ -118,7 +118,7 @@ object Node {
     if (json != null) {
       new Node(new JNode(json))
     } else {
-      null
+      new Node(new JNode(emptyObj()))
     }
   }
 }

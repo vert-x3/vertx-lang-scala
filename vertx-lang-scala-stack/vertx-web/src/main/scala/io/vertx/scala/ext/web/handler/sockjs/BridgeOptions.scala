@@ -89,7 +89,7 @@ object BridgeOptions {
     if (t != null) {
       new BridgeOptions(t)
     } else {
-      null
+      new BridgeOptions(new JBridgeOptions(emptyObj()))
     }
   }
   
@@ -97,7 +97,7 @@ object BridgeOptions {
     if (json != null) {
       new BridgeOptions(new JBridgeOptions(json))
     } else {
-      null
+      new BridgeOptions(new JBridgeOptions(emptyObj()))
     }
   }
 }

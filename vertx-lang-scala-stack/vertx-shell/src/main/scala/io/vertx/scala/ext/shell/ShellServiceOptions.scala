@@ -110,7 +110,7 @@ object ShellServiceOptions {
     if (t != null) {
       new ShellServiceOptions(t)
     } else {
-      null
+      new ShellServiceOptions(new JShellServiceOptions(emptyObj()))
     }
   }
   
@@ -118,7 +118,7 @@ object ShellServiceOptions {
     if (json != null) {
       new ShellServiceOptions(new JShellServiceOptions(json))
     } else {
-      null
+      new ShellServiceOptions(new JShellServiceOptions(emptyObj()))
     }
   }
 }

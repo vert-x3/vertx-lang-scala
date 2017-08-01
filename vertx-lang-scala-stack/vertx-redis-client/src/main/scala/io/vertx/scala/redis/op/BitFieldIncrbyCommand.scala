@@ -57,7 +57,7 @@ object BitFieldIncrbyCommand {
     if (t != null) {
       new BitFieldIncrbyCommand(t)
     } else {
-      null
+      new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(emptyObj()))
     }
   }
   
@@ -65,7 +65,7 @@ object BitFieldIncrbyCommand {
     if (json != null) {
       new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(json))
     } else {
-      null
+      new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(emptyObj()))
     }
   }
 }

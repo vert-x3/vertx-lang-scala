@@ -1,5 +1,9 @@
   def asJava: java.lang.Object\n
 \n
+@code{
+  var futureMethods = findFutureMethods(instanceMethods);
+}
+
 @foreach{method : instanceMethods}
 	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
   @if{isMethodNeedsOverride(type.name, method)}override @end{}
@@ -21,4 +25,18 @@
 	@end{', '}): @{toScalaType(method.returnType, false)}\n
 	\n
 @end{}
+
+@foreach{method : futureMethods}
+	@if{method.name != 'executeBlocking'}
+	@if{method.doc != null}@{methodDoc(method, ' ', true)}@end{}
+  @if{isMethodNeedsOverride(type.name, method) && !method.name.endsWith("Handler")}override @end{}
+	def @{createNameForMethodReturningAFuture(method)}
+	@{assembleTypeParams(method.typeParams, true)}(
+	@foreach{param : removeLastParam(method.params)}
+		@{escapeIfKeyword(param.name)}: @{toScalaType(param.type, false)}
+	@end{', '}): scala.concurrent.Future[@{toScalaType(typeOfReturnedFuture(method), false)}]
+	\n
+	@end{}
+@end{}
+
 }\n

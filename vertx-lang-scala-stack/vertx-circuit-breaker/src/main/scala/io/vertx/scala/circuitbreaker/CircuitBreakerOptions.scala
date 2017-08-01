@@ -96,7 +96,7 @@ class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
   }
 
   /**
-    * Sets the time in ms before it attempts to re-close the circuit (by going to the hal-open state). If the cricuit
+    * Sets the time in ms before it attempts to re-close the circuit (by going to the half-open state). If the circuit
     * is closed when the timeout is reached, nothing happens. `-1` disables this feature.
     */
   def setResetTimeout(value: Long) = {
@@ -130,7 +130,7 @@ object CircuitBreakerOptions {
     if (t != null) {
       new CircuitBreakerOptions(t)
     } else {
-      null
+      new CircuitBreakerOptions(new JCircuitBreakerOptions(emptyObj()))
     }
   }
   
@@ -138,7 +138,7 @@ object CircuitBreakerOptions {
     if (json != null) {
       new CircuitBreakerOptions(new JCircuitBreakerOptions(json))
     } else {
-      null
+      new CircuitBreakerOptions(new JCircuitBreakerOptions(emptyObj()))
     }
   }
 }

@@ -146,7 +146,7 @@ object JWTOptions {
     if (t != null) {
       new JWTOptions(t)
     } else {
-      null
+      new JWTOptions(new JJWTOptions(emptyObj()))
     }
   }
   
@@ -154,7 +154,7 @@ object JWTOptions {
     if (json != null) {
       new JWTOptions(new JJWTOptions(json))
     } else {
-      null
+      new JWTOptions(new JJWTOptions(emptyObj()))
     }
   }
 }

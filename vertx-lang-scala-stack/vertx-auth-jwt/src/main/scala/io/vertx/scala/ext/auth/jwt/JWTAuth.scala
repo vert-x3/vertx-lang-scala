@@ -20,17 +20,18 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
+import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
-import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.scala.core.Vertx
-import io.vertx.core.{Vertx => JVertx}
 
 /**
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
@@ -56,11 +57,11 @@ object JWTAuth {
   /**
     * Create a JWT auth provider
     * @param vertx the Vertx instance
-    * @param config the config
+    * @param config the configsee <a href="../../../../../../../../cheatsheet/JWTAuthOptions.html">JWTAuthOptions</a>
     * @return the auth provider
     */
-  def create(vertx: Vertx, config: io.vertx.core.json.JsonObject): JWTAuth = {
-    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config))
+  def create(vertx: Vertx, config: JWTAuthOptions): JWTAuth = {
+    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 
 }

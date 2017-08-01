@@ -20,6 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.rabbitmq.{RabbitMQOptions => JRabbitMQOptions}
 import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -451,8 +452,14 @@ class RabbitMQClient(private val _asJava: Object) {
 
 object RabbitMQClient {
   def apply(asJava: JRabbitMQClient) = new RabbitMQClient(asJava)  
-  def create(vertx: Vertx, config: io.vertx.core.json.JsonObject): RabbitMQClient = {
-    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx], config))
+  /**
+    * Create and return a client.
+    * @param vertx the vertx instance
+    * @param config the client configsee <a href="../../../../../../cheatsheet/RabbitMQOptions.html">RabbitMQOptions</a>
+    * @return the client
+    */
+  def create(vertx: Vertx, config: RabbitMQOptions): RabbitMQClient = {
+    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 
 }

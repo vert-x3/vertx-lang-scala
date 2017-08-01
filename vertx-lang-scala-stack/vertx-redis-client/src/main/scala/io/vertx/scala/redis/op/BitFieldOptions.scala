@@ -57,7 +57,7 @@ object BitFieldOptions {
     if (t != null) {
       new BitFieldOptions(t)
     } else {
-      null
+      new BitFieldOptions(new JBitFieldOptions(emptyObj()))
     }
   }
   
@@ -65,7 +65,7 @@ object BitFieldOptions {
     if (json != null) {
       new BitFieldOptions(new JBitFieldOptions(json))
     } else {
-      null
+      new BitFieldOptions(new JBitFieldOptions(emptyObj()))
     }
   }
 }

@@ -430,7 +430,7 @@ object StompServerOptions {
     if (t != null) {
       new StompServerOptions(t)
     } else {
-      null
+      new StompServerOptions(new JStompServerOptions(emptyObj()))
     }
   }
   
@@ -438,7 +438,7 @@ object StompServerOptions {
     if (json != null) {
       new StompServerOptions(new JStompServerOptions(json))
     } else {
-      null
+      new StompServerOptions(new JStompServerOptions(emptyObj()))
     }
   }
 }

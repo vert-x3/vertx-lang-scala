@@ -11,10 +11,10 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-mqtt-server-scala_2.12</artifactId>
+  <artifactId>vertx-mqtt-scala_2.12</artifactId>
 
   <properties>
-    <vertx-module>vertx-mqtt-server</vertx-module>
+    <vertx-module>vertx-mqtt</vertx-module>
   </properties>
 
   <dependencies>

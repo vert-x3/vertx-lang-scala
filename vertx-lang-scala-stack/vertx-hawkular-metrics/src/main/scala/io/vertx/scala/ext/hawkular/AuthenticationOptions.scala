@@ -72,7 +72,7 @@ object AuthenticationOptions {
     if (t != null) {
       new AuthenticationOptions(t)
     } else {
-      null
+      new AuthenticationOptions(new JAuthenticationOptions(emptyObj()))
     }
   }
   
@@ -80,7 +80,7 @@ object AuthenticationOptions {
     if (json != null) {
       new AuthenticationOptions(new JAuthenticationOptions(json))
     } else {
-      null
+      new AuthenticationOptions(new JAuthenticationOptions(emptyObj()))
     }
   }
 }

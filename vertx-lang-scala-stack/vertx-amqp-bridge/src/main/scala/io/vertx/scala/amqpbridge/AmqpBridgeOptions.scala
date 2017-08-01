@@ -344,7 +344,7 @@ object AmqpBridgeOptions {
     if (t != null) {
       new AmqpBridgeOptions(t)
     } else {
-      null
+      new AmqpBridgeOptions(new JAmqpBridgeOptions(emptyObj()))
     }
   }
   
@@ -352,7 +352,7 @@ object AmqpBridgeOptions {
     if (json != null) {
       new AmqpBridgeOptions(new JAmqpBridgeOptions(json))
     } else {
-      null
+      new AmqpBridgeOptions(new JAmqpBridgeOptions(emptyObj()))
     }
   }
 }

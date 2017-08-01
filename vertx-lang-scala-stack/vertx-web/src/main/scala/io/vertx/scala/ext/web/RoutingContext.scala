@@ -23,8 +23,8 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.scala.core.http.HttpServerResponse
 import io.vertx.scala.core.http.HttpServerRequest
-import io.vertx.ext.web.{Route => JRoute}
 import scala.collection.JavaConverters._
+import io.vertx.ext.web.{Route => JRoute}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.json.JsonArray
@@ -36,9 +36,11 @@ import io.vertx.ext.web.{Locale => JLocale}
 import io.vertx.ext.web.{LanguageHeader => JLanguageHeader}
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.auth.{User => JUser}
-import io.vertx.ext.web.{Session => JSession}
 import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
+import io.vertx.ext.web.{Session => JSession}
+import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
+import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
 import io.vertx.ext.web.{FileUpload => JFileUpload}
 
@@ -548,6 +550,23 @@ class RoutingContext(private val _asJava: Object) {
     */
   def pathParam(name: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JRoutingContext].pathParam(name.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  /**
+    * Returns a map of all query parameters inside the <a href="https://en.wikipedia.org/wiki/Query_string">query string</a>
+    * @return the multimap of query parameters
+    */
+  def queryParams(): MultiMap = {
+    MultiMap(asJava.asInstanceOf[JRoutingContext].queryParams())
+  }
+
+  /**
+    * Gets the value of a single query parameter
+    * @param query The name of query parameter
+    * @return The list of all elements inside query parameter
+    */
+  def queryParam(query: String): scala.Option[scala.collection.mutable.Buffer[String]] = {
+    scala.Option(asJava.asInstanceOf[JRoutingContext].queryParam(query.asInstanceOf[java.lang.String])).map(_.asScala.map(x => x.asInstanceOf[String]))
   }
 
 }

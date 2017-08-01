@@ -91,7 +91,7 @@ object RecordMetadata {
     if (t != null) {
       new RecordMetadata(t)
     } else {
-      null
+      new RecordMetadata(new JRecordMetadata(emptyObj()))
     }
   }
   
@@ -99,7 +99,7 @@ object RecordMetadata {
     if (json != null) {
       new RecordMetadata(new JRecordMetadata(json))
     } else {
-      null
+      new RecordMetadata(new JRecordMetadata(emptyObj()))
     }
   }
 }
