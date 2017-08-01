@@ -30,6 +30,8 @@ import scala.collection.JavaConverters._
   * 
   * This ensures there is no shared access to mutable state from different threads (e.g. different event loops) in the
   * Vert.x instance, and means you don't have to protect access to that state using synchronization or locks.
+  * 
+  * Your own objects can be marked as immutable by implementing the [[io.vertx.scala.core.shareddata.Shareable]] interface.
   *
   * Since the version 3.4, this class extends the  interface. However some methods are only accessible in Java.
   */
