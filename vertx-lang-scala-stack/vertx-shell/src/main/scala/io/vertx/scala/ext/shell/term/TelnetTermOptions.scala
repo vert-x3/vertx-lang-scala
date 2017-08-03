@@ -311,7 +311,7 @@ object TelnetTermOptions {
     if (t != null) {
       new TelnetTermOptions(t)
     } else {
-      null
+      new TelnetTermOptions(new JTelnetTermOptions(emptyObj()))
     }
   }
   
@@ -319,7 +319,7 @@ object TelnetTermOptions {
     if (json != null) {
       new TelnetTermOptions(new JTelnetTermOptions(json))
     } else {
-      null
+      new TelnetTermOptions(new JTelnetTermOptions(emptyObj()))
     }
   }
 }

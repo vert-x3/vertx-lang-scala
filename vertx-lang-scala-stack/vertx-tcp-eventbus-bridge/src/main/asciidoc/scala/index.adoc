@@ -13,7 +13,7 @@ Maven (in your `pom.xml`):
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-tcp-eventbus-bridge-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -21,7 +21,7 @@ Gradle (in your `build.gradle` file):
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-tcp-eventbus-bridge-scala_2.12:3.4.2'
+compile 'io.vertx:vertx-tcp-eventbus-bridge-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 The TCP EventBus bridge is built on top of TCP, meaning that any application that can
@@ -75,5 +75,24 @@ An example on how to get started with this bridge could be:
 
 [source,scala]
 ----
-`example1`
+
+var bridge = TcpEventBusBridge.create(vertx, BridgeOptions()
+  .setInboundPermitteds(Set(PermittedOptions()
+    .setAddress("in")
+  ))
+  .setOutboundPermitteds(Set(PermittedOptions()
+    .setAddress("out")
+  ))
+)
+
+bridge.listenFuture(7000).onComplete{
+  case Success(result) => {
+    // succeed...
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----

@@ -148,7 +148,7 @@ object DropwizardMetricsOptions {
     if (t != null) {
       new DropwizardMetricsOptions(t)
     } else {
-      null
+      new DropwizardMetricsOptions(new JDropwizardMetricsOptions(emptyObj()))
     }
   }
   
@@ -156,7 +156,7 @@ object DropwizardMetricsOptions {
     if (json != null) {
       new DropwizardMetricsOptions(new JDropwizardMetricsOptions(json))
     } else {
-      null
+      new DropwizardMetricsOptions(new JDropwizardMetricsOptions(emptyObj()))
     }
   }
 }

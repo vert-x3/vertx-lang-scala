@@ -46,7 +46,7 @@ object ScanOptions {
     if (t != null) {
       new ScanOptions(t)
     } else {
-      null
+      new ScanOptions(new JScanOptions(emptyObj()))
     }
   }
   
@@ -54,7 +54,7 @@ object ScanOptions {
     if (json != null) {
       new ScanOptions(new JScanOptions(json))
     } else {
-      null
+      new ScanOptions(new JScanOptions(emptyObj()))
     }
   }
 }

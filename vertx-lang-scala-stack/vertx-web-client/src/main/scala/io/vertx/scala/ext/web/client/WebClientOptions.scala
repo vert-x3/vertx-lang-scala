@@ -469,7 +469,7 @@ object WebClientOptions {
     if (t != null) {
       new WebClientOptions(t)
     } else {
-      null
+      new WebClientOptions(new JWebClientOptions(emptyObj()))
     }
   }
   
@@ -477,7 +477,7 @@ object WebClientOptions {
     if (json != null) {
       new WebClientOptions(new JWebClientOptions(json))
     } else {
-      null
+      new WebClientOptions(new JWebClientOptions(emptyObj()))
     }
   }
 }

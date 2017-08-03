@@ -88,7 +88,7 @@ object DataObjectWithLists {
     if (t != null) {
       new DataObjectWithLists(t)
     } else {
-      null
+      new DataObjectWithLists(new JDataObjectWithLists(emptyObj()))
     }
   }
   
@@ -96,7 +96,7 @@ object DataObjectWithLists {
     if (json != null) {
       new DataObjectWithLists(new JDataObjectWithLists(json))
     } else {
-      null
+      new DataObjectWithLists(new JDataObjectWithLists(emptyObj()))
     }
   }
 }

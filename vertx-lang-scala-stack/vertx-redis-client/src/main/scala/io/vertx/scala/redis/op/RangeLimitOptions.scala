@@ -40,7 +40,7 @@ object RangeLimitOptions {
     if (t != null) {
       new RangeLimitOptions(t)
     } else {
-      null
+      new RangeLimitOptions(new JRangeLimitOptions(emptyObj()))
     }
   }
   
@@ -48,7 +48,7 @@ object RangeLimitOptions {
     if (json != null) {
       new RangeLimitOptions(new JRangeLimitOptions(json))
     } else {
-      null
+      new RangeLimitOptions(new JRangeLimitOptions(emptyObj()))
     }
   }
 }

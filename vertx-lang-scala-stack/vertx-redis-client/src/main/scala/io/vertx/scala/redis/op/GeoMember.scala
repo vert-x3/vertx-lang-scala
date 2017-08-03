@@ -62,7 +62,7 @@ object GeoMember {
     if (t != null) {
       new GeoMember(t)
     } else {
-      null
+      new GeoMember(new JGeoMember(emptyObj()))
     }
   }
   
@@ -70,7 +70,7 @@ object GeoMember {
     if (json != null) {
       new GeoMember(new JGeoMember(json))
     } else {
-      null
+      new GeoMember(new JGeoMember(emptyObj()))
     }
   }
 }

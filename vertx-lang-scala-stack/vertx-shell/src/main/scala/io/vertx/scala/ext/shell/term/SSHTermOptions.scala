@@ -118,7 +118,7 @@ object SSHTermOptions {
     if (t != null) {
       new SSHTermOptions(t)
     } else {
-      null
+      new SSHTermOptions(new JSSHTermOptions(emptyObj()))
     }
   }
   
@@ -126,7 +126,7 @@ object SSHTermOptions {
     if (json != null) {
       new SSHTermOptions(new JSSHTermOptions(json))
     } else {
-      null
+      new SSHTermOptions(new JSSHTermOptions(emptyObj()))
     }
   }
 }

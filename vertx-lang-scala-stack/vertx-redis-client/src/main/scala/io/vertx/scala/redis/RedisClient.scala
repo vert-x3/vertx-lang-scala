@@ -22,6 +22,7 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.redis.op.BitFieldOptions
 import io.vertx.scala.redis.op.KillFilter
+import io.vertx.redis.{Script => JScript}
 import io.vertx.redis.{RedisClient => JRedisClient}
 import io.vertx.redis.op.BitOperation
 import io.vertx.redis.op.ResetOptions
@@ -666,6 +667,23 @@ class RedisClient(private val _asJava: Object) {
     */
   def evalsha(sha1: String, keys: scala.collection.mutable.Buffer[String], values: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
     asJava.asInstanceOf[JRedisClient].evalsha(sha1.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, values.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    this
+  }
+
+  /**
+    * Execute a Lua script server side. This method is a high level wrapper around EVAL and EVALSHA
+    * using the latter if possible, falling back to EVAL if the script is not cached by the server yet.
+    * According to Redis documentation, executed scripts are guaranteed to be in the script cache of a
+    * given execution of a Redis instance forever, which means typically the overhead incurred by
+    * optimistically sending EVALSHA is minimal, while improving performance and saving bandwidth
+    * compared to using EVAL every time.
+    * @param script Lua script and its SHA1 digest
+    * @param keys List of keys
+    * @param args List of argument values
+    * @param handler Handler for the result of this call. group: scripting
+    */
+  def evalScript(script: Script, keys: scala.collection.mutable.Buffer[String], args: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].evalScript(script.asJava.asInstanceOf[JScript], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
     this
   }
 
@@ -3123,6 +3141,15 @@ class RedisClient(private val _asJava: Object) {
   def evalshaFuture(sha1: String, keys: scala.collection.mutable.Buffer[String], values: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
     asJava.asInstanceOf[JRedisClient].evalsha(sha1.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, values.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[evalScript]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def evalScriptFuture(script: Script, keys: scala.collection.mutable.Buffer[String], args: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JRedisClient].evalScript(script.asJava.asInstanceOf[JScript], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

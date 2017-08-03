@@ -81,7 +81,7 @@ object SockJSHandlerOptions {
     if (t != null) {
       new SockJSHandlerOptions(t)
     } else {
-      null
+      new SockJSHandlerOptions(new JSockJSHandlerOptions(emptyObj()))
     }
   }
   
@@ -89,7 +89,7 @@ object SockJSHandlerOptions {
     if (json != null) {
       new SockJSHandlerOptions(new JSockJSHandlerOptions(json))
     } else {
-      null
+      new SockJSHandlerOptions(new JSockJSHandlerOptions(emptyObj()))
     }
   }
 }

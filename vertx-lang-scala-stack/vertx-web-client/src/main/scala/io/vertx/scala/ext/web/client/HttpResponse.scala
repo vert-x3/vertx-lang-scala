@@ -182,6 +182,20 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+    * @return the response body decoded as a `String` given a specific `encoding`
+    */
+  def bodyAsString(encoding: String): scala.Option[String] = {
+    scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString(encoding.asInstanceOf[java.lang.String]).asInstanceOf[String])
+  }
+
+  /**
+    * @return the response body decoded as the specified `type` with the Jackson mapper.
+    */
+  def bodyAsJson[R: TypeTag](`type`: Class[R]): R = {
+    toScala[R](asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJson[Object](toJavaClass(`type`)))
+  }
+
+  /**
     * Return the first header value with the specified name
     * @param headerName the header name
     * @return the header value
@@ -197,20 +211,6 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
     */
   def getTrailer(trailerName: String): scala.Option[String] = {
     scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
-  }
-
-  /**
-    * @return the response body decoded as a `String` given a specific `encoding`
-    */
-  def bodyAsString(encoding: String): scala.Option[String] = {
-    scala.Option(asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString(encoding.asInstanceOf[java.lang.String]).asInstanceOf[String])
-  }
-
-  /**
-    * @return the response body decoded as the specified `type` with the Jackson mapper.
-    */
-  def bodyAsJson[R: TypeTag](`type`: Class[R]): R = {
-    toScala[R](asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJson[Object](toJavaClass(`type`)))
   }
 
 }

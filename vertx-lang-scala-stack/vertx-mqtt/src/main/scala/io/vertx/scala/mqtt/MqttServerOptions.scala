@@ -247,6 +247,14 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the timeout on CONNECT packet
+    */
+  def setTimeoutOnConnect(value: Int) = {
+    asJava.setTimeoutOnConnect(value)
+    this
+  }
   override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
@@ -287,7 +295,7 @@ object MqttServerOptions {
     if (t != null) {
       new MqttServerOptions(t)
     } else {
-      null
+      new MqttServerOptions(new JMqttServerOptions(emptyObj()))
     }
   }
   
@@ -295,7 +303,7 @@ object MqttServerOptions {
     if (json != null) {
       new MqttServerOptions(new JMqttServerOptions(json))
     } else {
-      null
+      new MqttServerOptions(new JMqttServerOptions(emptyObj()))
     }
   }
 }

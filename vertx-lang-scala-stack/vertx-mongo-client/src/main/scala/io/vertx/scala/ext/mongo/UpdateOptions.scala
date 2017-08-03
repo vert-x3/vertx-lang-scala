@@ -83,7 +83,7 @@ object UpdateOptions {
     if (t != null) {
       new UpdateOptions(t)
     } else {
-      null
+      new UpdateOptions(new JUpdateOptions(emptyObj()))
     }
   }
   
@@ -91,7 +91,7 @@ object UpdateOptions {
     if (json != null) {
       new UpdateOptions(new JUpdateOptions(json))
     } else {
-      null
+      new UpdateOptions(new JUpdateOptions(emptyObj()))
     }
   }
 }

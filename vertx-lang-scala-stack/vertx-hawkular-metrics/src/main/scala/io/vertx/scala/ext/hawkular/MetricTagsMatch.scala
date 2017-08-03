@@ -74,7 +74,7 @@ object MetricTagsMatch {
     if (t != null) {
       new MetricTagsMatch(t)
     } else {
-      null
+      new MetricTagsMatch(new JMetricTagsMatch(emptyObj()))
     }
   }
   
@@ -82,7 +82,7 @@ object MetricTagsMatch {
     if (json != null) {
       new MetricTagsMatch(new JMetricTagsMatch(json))
     } else {
-      null
+      new MetricTagsMatch(new JMetricTagsMatch(emptyObj()))
     }
   }
 }

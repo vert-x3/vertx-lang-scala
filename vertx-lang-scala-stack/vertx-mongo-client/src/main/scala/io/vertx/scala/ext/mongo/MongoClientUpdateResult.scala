@@ -52,7 +52,7 @@ object MongoClientUpdateResult {
     if (t != null) {
       new MongoClientUpdateResult(t)
     } else {
-      null
+      new MongoClientUpdateResult(new JMongoClientUpdateResult(emptyObj()))
     }
   }
   
@@ -60,7 +60,7 @@ object MongoClientUpdateResult {
     if (json != null) {
       new MongoClientUpdateResult(new JMongoClientUpdateResult(json))
     } else {
-      null
+      new MongoClientUpdateResult(new JMongoClientUpdateResult(emptyObj()))
     }
   }
 }

@@ -21,6 +21,7 @@ import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.scala.core.http.{HttpClientOptions => ExtHttpClientOptions}
 import io.vertx.scala.core.http.Http2Settings
+import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
@@ -40,6 +41,7 @@ import io.vertx.core.http.{Http2Settings => JHttp2Settings}
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
+import io.vertx.scala.ext.auth.PubSecKeyOptions
 
 /**
   * Options describing how an OAuth2  will make connections.
@@ -370,13 +372,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getPipeliningLimit: Int = {
     asJava.getPipeliningLimit().asInstanceOf[Int]
   }
-  def setPrivateKey(value: String) = {
-    asJava.setPrivateKey(value)
-    this
-  }
-  def getPrivateKey: String = {
-    asJava.getPrivateKey().asInstanceOf[String]
-  }
   override def setProtocolVersion(value: io.vertx.core.http.HttpVersion) = {
     asJava.setProtocolVersion(value)
     this
@@ -391,12 +386,9 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getProxyOptions: ProxyOptions = {
     ProxyOptions(asJava.getProxyOptions())
   }
-  def setPublicKey(value: String) = {
-    asJava.setPublicKey(value)
+  def setPubSecKeyOptions(value: PubSecKeyOptions) = {
+    asJava.setPubSecKeyOptions(value.asJava)
     this
-  }
-  def getPublicKey: String = {
-    asJava.getPublicKey().asInstanceOf[String]
   }
   override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
@@ -564,7 +556,7 @@ object OAuth2ClientOptions {
     if (t != null) {
       new OAuth2ClientOptions(t)
     } else {
-      null
+      new OAuth2ClientOptions(new JOAuth2ClientOptions(emptyObj()))
     }
   }
   
@@ -572,7 +564,7 @@ object OAuth2ClientOptions {
     if (json != null) {
       new OAuth2ClientOptions(new JOAuth2ClientOptions(json))
     } else {
-      null
+      new OAuth2ClientOptions(new JOAuth2ClientOptions(emptyObj()))
     }
   }
 }

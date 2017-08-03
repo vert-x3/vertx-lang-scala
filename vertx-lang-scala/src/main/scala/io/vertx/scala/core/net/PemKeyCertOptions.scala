@@ -165,7 +165,7 @@ object PemKeyCertOptions {
     if (t != null) {
       new PemKeyCertOptions(t)
     } else {
-      null
+      new PemKeyCertOptions(new JPemKeyCertOptions(emptyObj()))
     }
   }
   
@@ -173,7 +173,7 @@ object PemKeyCertOptions {
     if (json != null) {
       new PemKeyCertOptions(new JPemKeyCertOptions(json))
     } else {
-      null
+      new PemKeyCertOptions(new JPemKeyCertOptions(emptyObj()))
     }
   }
 }

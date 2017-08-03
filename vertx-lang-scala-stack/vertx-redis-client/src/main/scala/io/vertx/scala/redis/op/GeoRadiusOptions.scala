@@ -70,7 +70,7 @@ object GeoRadiusOptions {
     if (t != null) {
       new GeoRadiusOptions(t)
     } else {
-      null
+      new GeoRadiusOptions(new JGeoRadiusOptions(emptyObj()))
     }
   }
   
@@ -78,7 +78,7 @@ object GeoRadiusOptions {
     if (json != null) {
       new GeoRadiusOptions(new JGeoRadiusOptions(json))
     } else {
-      null
+      new GeoRadiusOptions(new JGeoRadiusOptions(emptyObj()))
     }
   }
 }

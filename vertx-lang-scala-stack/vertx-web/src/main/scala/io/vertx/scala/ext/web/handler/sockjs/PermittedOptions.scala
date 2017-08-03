@@ -89,7 +89,7 @@ object PermittedOptions {
     if (t != null) {
       new PermittedOptions(t)
     } else {
-      null
+      new PermittedOptions(new JPermittedOptions(emptyObj()))
     }
   }
   
@@ -97,7 +97,7 @@ object PermittedOptions {
     if (json != null) {
       new PermittedOptions(new JPermittedOptions(json))
     } else {
-      null
+      new PermittedOptions(new JPermittedOptions(emptyObj()))
     }
   }
 }

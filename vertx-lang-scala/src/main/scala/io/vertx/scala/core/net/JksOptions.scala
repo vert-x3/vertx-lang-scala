@@ -91,7 +91,7 @@ object JksOptions {
     if (t != null) {
       new JksOptions(t)
     } else {
-      null
+      new JksOptions(new JJksOptions(emptyObj()))
     }
   }
   
@@ -99,7 +99,7 @@ object JksOptions {
     if (json != null) {
       new JksOptions(new JJksOptions(json))
     } else {
-      null
+      new JksOptions(new JJksOptions(emptyObj()))
     }
   }
 }

@@ -117,7 +117,7 @@ object Argument {
     if (t != null) {
       new Argument(t)
     } else {
-      null
+      new Argument(new JArgument(emptyObj()))
     }
   }
   
@@ -125,7 +125,7 @@ object Argument {
     if (json != null) {
       new Argument(new JArgument(json))
     } else {
-      null
+      new Argument(new JArgument(emptyObj()))
     }
   }
 }

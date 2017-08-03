@@ -61,7 +61,7 @@ object BulkWriteOptions {
     if (t != null) {
       new BulkWriteOptions(t)
     } else {
-      null
+      new BulkWriteOptions(new JBulkWriteOptions(emptyObj()))
     }
   }
   
@@ -69,7 +69,7 @@ object BulkWriteOptions {
     if (json != null) {
       new BulkWriteOptions(new JBulkWriteOptions(json))
     } else {
-      null
+      new BulkWriteOptions(new JBulkWriteOptions(emptyObj()))
     }
   }
 }

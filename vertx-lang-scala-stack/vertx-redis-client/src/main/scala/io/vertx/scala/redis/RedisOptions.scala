@@ -65,6 +65,7 @@ class RedisOptions(private val _asJava: JRedisOptions)
 
   /**
     * Set the eventbus address prefix for `PUB/SUB`.
+    * * @param address address prefix.
     */
   def setAddress(value: String) = {
     asJava.setAddress(value)
@@ -87,6 +88,7 @@ class RedisOptions(private val _asJava: JRedisOptions)
 
   /**
     * Set the user defined character encoding, e.g.: `iso-8859-1`.
+    * * @param binary use binary messages
     */
   def setBinary(value: Boolean) = {
     asJava.setBinary(value)
@@ -133,6 +135,7 @@ class RedisOptions(private val _asJava: JRedisOptions)
 
   /**
     * Set the user defined character encoding, e.g.: `iso-8859-1`.
+    * * @param encoding the user character encoding
     */
   def setEncoding(value: String) = {
     asJava.setEncoding(value)
@@ -144,6 +147,7 @@ class RedisOptions(private val _asJava: JRedisOptions)
 
   /**
     * Set the host name where the Redis server is listening.
+    * * @param host host name
     */
   def setHost(value: String) = {
     asJava.setHost(value)
@@ -193,6 +197,17 @@ class RedisOptions(private val _asJava: JRedisOptions)
   }
   override def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Set name of Redis master (used with Sentinel).
+    */
+  def setMasterName(value: String) = {
+    asJava.setMasterName(value)
+    this
+  }
+  def getMasterName: String = {
+    asJava.getMasterName().asInstanceOf[String]
   }
   override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
@@ -285,6 +300,7 @@ class RedisOptions(private val _asJava: JRedisOptions)
 
   /**
     * Set the database to select at connection time.
+    * * @param select database id
     */
   def setSelect(value: Int) = {
     asJava.setSelect(value)
@@ -299,6 +315,21 @@ class RedisOptions(private val _asJava: JRedisOptions)
   }
   override def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
+  }
+
+  /**
+    * Set the list of Sentinels.
+    */
+  def addSentinel(value: String) = {
+    asJava.addSentinel(value)
+    this
+  }
+  def setSentinels(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setSentinels(value.asJava)
+    this
+  }
+  def getSentinels: scala.collection.mutable.Buffer[String] = {
+    asJava.getSentinels().asScala.map(x => x.asInstanceOf[String])
   }
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
@@ -375,7 +406,7 @@ object RedisOptions {
     if (t != null) {
       new RedisOptions(t)
     } else {
-      null
+      new RedisOptions(new JRedisOptions(emptyObj()))
     }
   }
   
@@ -383,7 +414,7 @@ object RedisOptions {
     if (json != null) {
       new RedisOptions(new JRedisOptions(json))
     } else {
-      null
+      new RedisOptions(new JRedisOptions(emptyObj()))
     }
   }
 }
