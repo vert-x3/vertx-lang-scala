@@ -96,7 +96,7 @@ object ProxyOptions {
     if (t != null) {
       new ProxyOptions(t)
     } else {
-      null
+      new ProxyOptions(new JProxyOptions(emptyObj()))
     }
   }
   
@@ -104,7 +104,7 @@ object ProxyOptions {
     if (json != null) {
       new ProxyOptions(new JProxyOptions(json))
     } else {
-      null
+      new ProxyOptions(new JProxyOptions(emptyObj()))
     }
   }
 }

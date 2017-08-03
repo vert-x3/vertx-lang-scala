@@ -461,7 +461,7 @@ object EventBusOptions {
     if (t != null) {
       new EventBusOptions(t)
     } else {
-      null
+      new EventBusOptions(new JEventBusOptions(emptyObj()))
     }
   }
   
@@ -469,7 +469,7 @@ object EventBusOptions {
     if (json != null) {
       new EventBusOptions(new JEventBusOptions(json))
     } else {
-      null
+      new EventBusOptions(new JEventBusOptions(emptyObj()))
     }
   }
 }

@@ -457,7 +457,7 @@ object HttpTermOptions {
     if (t != null) {
       new HttpTermOptions(t)
     } else {
-      null
+      new HttpTermOptions(new JHttpTermOptions(emptyObj()))
     }
   }
   
@@ -465,7 +465,7 @@ object HttpTermOptions {
     if (json != null) {
       new HttpTermOptions(new JHttpTermOptions(json))
     } else {
-      null
+      new HttpTermOptions(new JHttpTermOptions(emptyObj()))
     }
   }
 }

@@ -52,7 +52,7 @@ object DataObjectWithRecursion {
     if (t != null) {
       new DataObjectWithRecursion(t)
     } else {
-      null
+      new DataObjectWithRecursion(new JDataObjectWithRecursion(emptyObj()))
     }
   }
   
@@ -60,7 +60,7 @@ object DataObjectWithRecursion {
     if (json != null) {
       new DataObjectWithRecursion(new JDataObjectWithRecursion(json))
     } else {
-      null
+      new DataObjectWithRecursion(new JDataObjectWithRecursion(emptyObj()))
     }
   }
 }

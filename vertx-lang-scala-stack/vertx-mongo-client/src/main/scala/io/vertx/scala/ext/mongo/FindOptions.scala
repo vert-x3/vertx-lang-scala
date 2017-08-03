@@ -84,7 +84,7 @@ object FindOptions {
     if (t != null) {
       new FindOptions(t)
     } else {
-      null
+      new FindOptions(new JFindOptions(emptyObj()))
     }
   }
   
@@ -92,7 +92,7 @@ object FindOptions {
     if (json != null) {
       new FindOptions(new JFindOptions(json))
     } else {
-      null
+      new FindOptions(new JFindOptions(emptyObj()))
     }
   }
 }

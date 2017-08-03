@@ -411,7 +411,7 @@ object StompClientOptions {
     if (t != null) {
       new StompClientOptions(t)
     } else {
-      null
+      new StompClientOptions(new JStompClientOptions(emptyObj()))
     }
   }
   
@@ -419,7 +419,7 @@ object StompClientOptions {
     if (json != null) {
       new StompClientOptions(new JStompClientOptions(json))
     } else {
-      null
+      new StompClientOptions(new JStompClientOptions(emptyObj()))
     }
   }
 }

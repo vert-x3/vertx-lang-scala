@@ -62,7 +62,7 @@ object ConfigChange {
     if (t != null) {
       new ConfigChange(t)
     } else {
-      null
+      new ConfigChange(new JConfigChange(emptyObj()))
     }
   }
   
@@ -70,7 +70,7 @@ object ConfigChange {
     if (json != null) {
       new ConfigChange(new JConfigChange(json))
     } else {
-      null
+      new ConfigChange(new JConfigChange(emptyObj()))
     }
   }
 }

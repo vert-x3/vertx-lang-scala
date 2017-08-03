@@ -14,7 +14,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-sql-common-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -22,7 +22,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-sql-common-scala_2.12:3.4.2'
+compile 'io.vertx:vertx-sql-common-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 == The SQL Connection
@@ -41,7 +41,15 @@ When the operation is complete, the handler will be called:
 
 [source,java]
 ----
-`example1`
+connection.setAutoCommitFuture(false).onComplete{
+  case Success(result) => {
+    // OK!
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 === Executing queries
@@ -55,7 +63,16 @@ been run.
 
 [source,java]
 ----
-`example2`
+connection.queryFuture("SELECT ID, FNAME, LNAME, SHOE_SIZE from PEOPLE").onComplete{
+  case Success(result) => {
+    // Get the result set
+    var resultSet = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 The `link:../dataobjects.html#ResultSet[ResultSet]` instance represents the results of a query.
@@ -67,7 +84,22 @@ The results are a list of `JsonArray` instances, one for each row of the results
 
 [source,java]
 ----
-`example3`
+
+var columnNames = todo-renderDataObjectMemberSelect
+
+var results = todo-renderDataObjectMemberSelect
+
+results.foreach(row => {
+
+  var id = row.getValue(0)
+  var fName = row.getValue(1)
+  var lName = row.getValue(2)
+  var shoeSize = row.getValue(3)
+
+})
+
+
+
 ----
 
 You can also retrieve the rows as a list of Json object instances with `link:../dataobjects.html#ResultSet#getRows()[getRows]` -
@@ -78,7 +110,20 @@ Here's an example of iterating through the results as Json object instances:
 
 [source,java]
 ----
-`example3__1`
+
+var rows = todo-renderDataObjectMemberSelect
+
+rows.foreach(row => {
+
+  var id = row.getValue("ID")
+  var fName = row.getValue("FNAME")
+  var lName = row.getValue("LNAME")
+  var shoeSize = row.getValue("SHOE_SIZE")
+
+})
+
+
+
 ----
 
 === Prepared statement queries
@@ -91,7 +136,21 @@ values.
 
 [source,java]
 ----
-`example3_1`
+
+var query = "SELECT ID, FNAME, LNAME, SHOE_SIZE from PEOPLE WHERE LNAME=? AND SHOE_SIZE > ?"
+var params = new io.vertx.core.json.JsonArray().add("Fox").add(9)
+
+connection.queryWithParamsFuture(query, params).onComplete{
+  case Success(result) => {
+    // Get the result set
+    var resultSet = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 
 === Executing INSERT, UPDATE or DELETE
@@ -108,7 +167,22 @@ if the update generated keys, they are available with `link:../dataobjects.html#
 
 [source,java]
 ----
-`example4`
+
+connection.updateFuture("INSERT INTO PEOPLE VALUES (null, 'john', 'smith', 9)").onComplete{
+  case Success(result) => {
+
+    var result = result
+    println(s"Updated no. of rows: ${todo-renderDataObjectMemberSelect}")
+    println(s"Generated keys: ${todo-renderDataObjectMemberSelect}")
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
+
 ----
 
 === Prepared statement updates
@@ -121,7 +195,24 @@ values.
 
 [source,java]
 ----
-`example5`
+
+var update = "UPDATE PEOPLE SET SHOE_SIZE = 10 WHERE LNAME=?"
+var params = new io.vertx.core.json.JsonArray().add("Fox")
+
+connection.updateWithParamsFuture(update, params).onComplete{
+  case Success(result) => {
+
+    var updateResult = result
+
+    println(s"No. of rows updated: ${todo-renderDataObjectMemberSelect}")
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 
 === Callable statements
@@ -141,7 +232,23 @@ A SQL function returns some output using the `return` keyword, and in this case 
 
 [source,java]
 ----
-`example8`
+// Assume that there is a SQL function like this:
+//
+// create function one_hour_ago() returns timestamp
+//    now() - 1 hour;
+
+// note that you do not need to declare the output for functions
+var func = "{ call one_hour_ago() }"
+
+connection.callFuture(func).onComplete{
+  case Success(result) => {
+    var result = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 When working with Procedures you and still return values from your procedures via its arguments, in the case you do
@@ -149,14 +256,46 @@ not return anything the usage is as follows:
 
 [source,java]
 ----
-`example9`
+// Assume that there is a SQL procedure like this:
+//
+// create procedure new_customer(firstname varchar(50), lastname varchar(50))
+//   modifies sql data
+//   insert into customers values (default, firstname, lastname, current_timestamp);
+
+var func = "{ call new_customer(?, ?) }"
+
+connection.callWithParamsFuture(func, new io.vertx.core.json.JsonArray().add("John").add("Doe"), null).onComplete{
+  case Success(result) => {
+    // Success!
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 However you can also return values like this:
 
 [source,java]
 ----
-`example10`
+// Assume that there is a SQL procedure like this:
+//
+// create procedure customer_lastname(IN firstname varchar(50), OUT lastname varchar(50))
+//   modifies sql data
+//   select lastname into lastname from customers where firstname = firstname;
+
+var func = "{ call customer_lastname(?, ?) }"
+
+connection.callWithParamsFuture(func, new io.vertx.core.json.JsonArray().add("John"), new io.vertx.core.json.JsonArray().add(null).add("VARCHAR")).onComplete{
+  case Success(result) => {
+    var result = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 Note that the index of the arguments matches the index of the `?` and that the output parameters expect to be a
@@ -183,14 +322,40 @@ A batches statement will exeucte a list of sql statements as for example:
 
 [source,java]
 ----
-`example12`
+// Batch values
+var batch = List()
+batch :::= List("INSERT INTO emp (NAME) VALUES ('JOE')")
+batch :::= List("INSERT INTO emp (NAME) VALUES ('JANE')")
+
+connection.batchFuture(batch).onComplete{
+  case Success(result) => {
+    var result = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 While a prepared or callable statement batch will reuse the sql statement and take an list of arguments as for example:
 
 [source,java]
 ----
-`example11`
+// Batch values
+var batch = List()
+batch :::= List(new io.vertx.core.json.JsonArray().add("joe"))
+batch :::= List(new io.vertx.core.json.JsonArray().add("jane"))
+
+connection.batchWithParamsFuture("INSERT INTO emp (name) VALUES (?)", batch).onComplete{
+  case Success(result) => {
+    var result = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 === Executing other operations
@@ -203,7 +368,19 @@ is complete
 
 [source,java]
 ----
-`example6`
+
+var sql = "CREATE TABLE PEOPLE (ID int generated by default as identity (start with 1 increment by 1) not null,FNAME varchar(255), LNAME varchar(255), SHOE_SIZE int);"
+
+connection.executeFuture(sql).onComplete{
+  case Success(result) => {
+    println("Table created !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 
 === Multiple ResultSet responses
@@ -214,7 +391,12 @@ under the property `next`. A simple walk of all result sets can be achieved like
 
 [source,scala]
 ----
-`example13`
+// do something with the result set...
+
+// next step
+rs = todo-renderDataObjectMemberSelect
+
+
 ----
 
 === Streaming
@@ -224,7 +406,15 @@ inflating the whole response into memory and JSON and data is just processed on 
 
 [source,scala]
 ----
-`example14`
+connection.queryStreamFuture("SELECT * FROM large_table").onComplete{
+  case Success(result) => {
+    result.handler((row: io.vertx.scala.core.json.JsonArray) => {
+      // do something with the row...
+    })
+  }
+  case Failure(cause) => println("Failure")
+}
+
 ----
 
 You still have full control on when the stream is pauses, resumed and ended. For cases where your query returns
@@ -233,7 +423,22 @@ data the stream handler will receive the new data, otherwise the end handler is 
 
 [source,scala]
 ----
-`example15`
+connection.queryStreamFuture("SELECT * FROM large_table; SELECT * FROM other_table").onComplete{
+  case Success(result) => {
+    var sqlRowStream = result
+
+    sqlRowStream.resultSetClosedHandler((v: java.lang.Void) => {
+      // will ask to restart the stream with the new result set if any
+      sqlRowStream.moreResults()
+    }).handler((row: io.vertx.scala.core.json.JsonArray) => {
+      // do something with the row...
+    }).endHandler((v: java.lang.Void) => {
+      // no more data available...
+    })
+  }
+  case Failure(cause) => println("Failure")
+}
+
 ----
 
 === Using transactions
@@ -248,7 +453,21 @@ Once the commit/rollback is complete the handler will be called and the next tra
 
 [source,java]
 ----
-`example7`
+
+// Do stuff with connection - updates etc
+
+// Now commit
+
+connection.commitFuture().onComplete{
+  case Success(result) => {
+    // Committed OK!
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 
 === Closing connections

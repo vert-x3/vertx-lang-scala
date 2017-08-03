@@ -264,12 +264,19 @@ class ServerWebSocket(private val _asJava: Object)
     * 
     * Calling this method from the websocket handler when it is first passed to you gives you the opportunity to reject
     * the websocket, which will cause the websocket handshake to fail by returning
-    * a 404 response code.
+    * a  response code.
     * 
     * You might use this method, if for example you only want to accept WebSockets with a particular path.
     */
   def reject(): Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.http.ServerWebSocket#reject]] but with a `status`.
+    */
+  def reject(status: Int): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].reject(status.asInstanceOf[java.lang.Integer])
   }
 
 }

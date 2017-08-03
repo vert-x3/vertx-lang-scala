@@ -99,7 +99,7 @@ object ServiceDiscoveryOptions {
     if (t != null) {
       new ServiceDiscoveryOptions(t)
     } else {
-      null
+      new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(emptyObj()))
     }
   }
   
@@ -107,7 +107,7 @@ object ServiceDiscoveryOptions {
     if (json != null) {
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))
     } else {
-      null
+      new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(emptyObj()))
     }
   }
 }

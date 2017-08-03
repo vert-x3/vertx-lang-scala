@@ -570,7 +570,7 @@ object HttpServerOptions {
     if (t != null) {
       new HttpServerOptions(t)
     } else {
-      null
+      new HttpServerOptions(new JHttpServerOptions(emptyObj()))
     }
   }
   
@@ -578,7 +578,7 @@ object HttpServerOptions {
     if (json != null) {
       new HttpServerOptions(new JHttpServerOptions(json))
     } else {
-      null
+      new HttpServerOptions(new JHttpServerOptions(emptyObj()))
     }
   }
 }

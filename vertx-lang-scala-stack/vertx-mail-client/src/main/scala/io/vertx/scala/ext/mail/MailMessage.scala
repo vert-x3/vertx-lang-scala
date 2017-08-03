@@ -168,7 +168,7 @@ object MailMessage {
     if (t != null) {
       new MailMessage(t)
     } else {
-      null
+      new MailMessage(new JMailMessage(emptyObj()))
     }
   }
   
@@ -176,7 +176,7 @@ object MailMessage {
     if (json != null) {
       new MailMessage(new JMailMessage(json))
     } else {
-      null
+      new MailMessage(new JMailMessage(emptyObj()))
     }
   }
 }

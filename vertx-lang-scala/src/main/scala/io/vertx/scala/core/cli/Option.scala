@@ -186,7 +186,7 @@ object Option {
     if (t != null) {
       new Option(t)
     } else {
-      null
+      new Option(new JOption(emptyObj()))
     }
   }
   
@@ -194,7 +194,7 @@ object Option {
     if (json != null) {
       new Option(new JOption(json))
     } else {
-      null
+      new Option(new JOption(emptyObj()))
     }
   }
 }

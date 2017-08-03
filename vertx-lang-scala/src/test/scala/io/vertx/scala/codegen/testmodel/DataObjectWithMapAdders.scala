@@ -88,7 +88,7 @@ object DataObjectWithMapAdders {
     if (t != null) {
       new DataObjectWithMapAdders(t)
     } else {
-      null
+      new DataObjectWithMapAdders(new JDataObjectWithMapAdders(emptyObj()))
     }
   }
   
@@ -96,7 +96,7 @@ object DataObjectWithMapAdders {
     if (json != null) {
       new DataObjectWithMapAdders(new JDataObjectWithMapAdders(json))
     } else {
-      null
+      new DataObjectWithMapAdders(new JDataObjectWithMapAdders(emptyObj()))
     }
   }
 }

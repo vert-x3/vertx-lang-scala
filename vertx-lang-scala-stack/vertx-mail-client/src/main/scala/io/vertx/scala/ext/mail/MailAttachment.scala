@@ -114,7 +114,7 @@ object MailAttachment {
     if (t != null) {
       new MailAttachment(t)
     } else {
-      null
+      new MailAttachment(new JMailAttachment(emptyObj()))
     }
   }
   
@@ -122,7 +122,7 @@ object MailAttachment {
     if (json != null) {
       new MailAttachment(new JMailAttachment(json))
     } else {
-      null
+      new MailAttachment(new JMailAttachment(emptyObj()))
     }
   }
 }

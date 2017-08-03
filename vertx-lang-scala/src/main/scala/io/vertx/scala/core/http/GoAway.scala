@@ -72,7 +72,7 @@ object GoAway {
     if (t != null) {
       new GoAway(t)
     } else {
-      null
+      new GoAway(new JGoAway(emptyObj()))
     }
   }
   
@@ -80,7 +80,7 @@ object GoAway {
     if (json != null) {
       new GoAway(new JGoAway(json))
     } else {
-      null
+      new GoAway(new JGoAway(emptyObj()))
     }
   }
 }

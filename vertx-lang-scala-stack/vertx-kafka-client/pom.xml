@@ -31,19 +31,6 @@
       <scope>provided</scope>
       <classifier>sources</classifier>
     </dependency>
-    <!-- TODO most certainly a bug -->
-    <dependency>
-      <groupId>com.netflix.rxjava</groupId>
-      <artifactId>rxjava-core</artifactId>
-      <version>0.20.7</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
-      <version>${stack.version}</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
 
   <build>

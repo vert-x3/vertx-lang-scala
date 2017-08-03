@@ -26,7 +26,7 @@ descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-circuit-breaker-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -34,7 +34,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-circuit-breaker-scala_2.12:3.4.2'
+compile 'io.vertx:vertx-circuit-breaker-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 == Using the circuit breaker
@@ -213,7 +213,7 @@ Each event contains a Json Object with:
 
 == The half-open state
 
-When the circuit is “open,” calls to the circuit breaker fail immediately, without any attempt to execute the real
+When the circuit is "open", calls to the circuit breaker fail immediately, without any attempt to execute the real
 operation. After a suitable amount of time (configured from
 `link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout(long)[resetTimeout]`, the circuit breaker decides that the
 operation has a chance of succeeding, so it goes into the `half-open` state. In this state, the next call to the

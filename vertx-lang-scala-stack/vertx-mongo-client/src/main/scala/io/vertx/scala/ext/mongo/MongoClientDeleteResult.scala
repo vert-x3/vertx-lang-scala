@@ -43,7 +43,7 @@ object MongoClientDeleteResult {
     if (t != null) {
       new MongoClientDeleteResult(t)
     } else {
-      null
+      new MongoClientDeleteResult(new JMongoClientDeleteResult(emptyObj()))
     }
   }
   
@@ -51,7 +51,7 @@ object MongoClientDeleteResult {
     if (json != null) {
       new MongoClientDeleteResult(new JMongoClientDeleteResult(json))
     } else {
-      null
+      new MongoClientDeleteResult(new JMongoClientDeleteResult(emptyObj()))
     }
   }
 }

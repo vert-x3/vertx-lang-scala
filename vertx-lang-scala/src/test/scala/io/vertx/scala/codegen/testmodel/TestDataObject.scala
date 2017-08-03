@@ -59,7 +59,7 @@ object TestDataObject {
     if (t != null) {
       new TestDataObject(t)
     } else {
-      null
+      new TestDataObject(new JTestDataObject(emptyObj()))
     }
   }
   
@@ -67,7 +67,7 @@ object TestDataObject {
     if (json != null) {
       new TestDataObject(new JTestDataObject(json))
     } else {
-      null
+      new TestDataObject(new JTestDataObject(emptyObj()))
     }
   }
 }

@@ -51,7 +51,7 @@ object MetricsOptions {
     if (t != null) {
       new MetricsOptions(t)
     } else {
-      null
+      new MetricsOptions(new JMetricsOptions(emptyObj()))
     }
   }
   
@@ -59,7 +59,7 @@ object MetricsOptions {
     if (json != null) {
       new MetricsOptions(new JMetricsOptions(json))
     } else {
-      null
+      new MetricsOptions(new JMetricsOptions(emptyObj()))
     }
   }
 }

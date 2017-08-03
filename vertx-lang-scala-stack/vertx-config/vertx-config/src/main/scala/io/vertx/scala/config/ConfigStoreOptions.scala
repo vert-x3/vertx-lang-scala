@@ -76,7 +76,7 @@ object ConfigStoreOptions {
     if (t != null) {
       new ConfigStoreOptions(t)
     } else {
-      null
+      new ConfigStoreOptions(new JConfigStoreOptions(emptyObj()))
     }
   }
   
@@ -84,7 +84,7 @@ object ConfigStoreOptions {
     if (json != null) {
       new ConfigStoreOptions(new JConfigStoreOptions(json))
     } else {
-      null
+      new ConfigStoreOptions(new JConfigStoreOptions(emptyObj()))
     }
   }
 }

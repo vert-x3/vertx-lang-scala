@@ -61,7 +61,7 @@ object OffsetAndMetadata {
     if (t != null) {
       new OffsetAndMetadata(t)
     } else {
-      null
+      new OffsetAndMetadata(new JOffsetAndMetadata(emptyObj()))
     }
   }
   
@@ -69,7 +69,7 @@ object OffsetAndMetadata {
     if (json != null) {
       new OffsetAndMetadata(new JOffsetAndMetadata(json))
     } else {
-      null
+      new OffsetAndMetadata(new JOffsetAndMetadata(emptyObj()))
     }
   }
 }

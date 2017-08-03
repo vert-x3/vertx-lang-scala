@@ -22,7 +22,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
-  <version>3.4.2</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -30,7 +30,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.4.2'
+compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 Then when you create vertx enable metrics using the `link:../dataobjects.html#DropwizardMetricsOptions[DropwizardMetricsOptions]`:
@@ -352,7 +352,7 @@ The following metrics are provided:
 Base name: `vertx.eventbus`
 
 * `handlers` - A <<counter>> of the number of event bus handlers
-* `handlers.myaddress` - A <<timer>> representing the rate of which messages are being received for the _myaddress_ handler
+* `handlers.myaddress` - A <<timer>> representing the rate of which messages are being processed for the _myaddress_ handler
 * `messages.bytes-read` - A <<meter>> of the number of bytes read when receiving remote messages
 * `messages.bytes-written` - A <<meter>> of the number of bytes written when sending remote messages
 * `messages.pending` - A <<counter>> of the number of messages received but not yet processed by an handler

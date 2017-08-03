@@ -165,7 +165,7 @@ object DeploymentOptions {
     if (t != null) {
       new DeploymentOptions(t)
     } else {
-      null
+      new DeploymentOptions(new JDeploymentOptions(emptyObj()))
     }
   }
   
@@ -173,7 +173,7 @@ object DeploymentOptions {
     if (json != null) {
       new DeploymentOptions(new JDeploymentOptions(json))
     } else {
-      null
+      new DeploymentOptions(new JDeploymentOptions(emptyObj()))
     }
   }
 }

@@ -25,8 +25,9 @@ import io.vertx.core.file.{FileSystem => JFileSystem}
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.AsyncResult
+import io.vertx.core.file.{CopyOptions => JCopyOptions}
 import io.vertx.core.file.{FileProps => JFileProps}
+import io.vertx.core.AsyncResult
 import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
@@ -59,6 +60,19 @@ class FileSystem(private val _asJava: Object) {
     */
   def copy(from: String, to: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
     asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+    * Copy a file from the path `from` to path `to`, asynchronously.
+    * @param from the path to copy from
+    * @param to the path to copy to
+    * @param options options describing how the file should be copiedsee <a href="../../../../../../../cheatsheet/CopyOptions.html">CopyOptions</a>
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
+    */
+  def copy(from: String, to: String, options: CopyOptions, handler: Handler[AsyncResult[Unit]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -106,6 +120,19 @@ class FileSystem(private val _asJava: Object) {
     */
   def move(from: String, to: String, handler: Handler[AsyncResult[Unit]]): FileSystem = {
     asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+    * Move a file from the path `from` to path `to`, asynchronously.
+    * @param from the path to copy from
+    * @param to the path to copy to
+    * @param options options describing how the file should be copiedsee <a href="../../../../../../../cheatsheet/CopyOptions.html">CopyOptions</a>
+    * @param handler the handler that will be called on completion
+    * @return a reference to this, so the API can be used fluently
+    */
+  def move(from: String, to: String, options: CopyOptions, handler: Handler[AsyncResult[Unit]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -654,6 +681,15 @@ class FileSystem(private val _asJava: Object) {
   }
 
  /**
+   * Like [[copy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def copyFuture(from: String, to: String, options: CopyOptions): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JFileSystem].copy(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
    * Like [[copyRecursive]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def copyRecursiveFuture(from: String, to: String, recursive: Boolean): scala.concurrent.Future[Unit] = {
@@ -668,6 +704,15 @@ class FileSystem(private val _asJava: Object) {
   def moveFuture(from: String, to: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[move]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def moveFuture(from: String, to: String, options: CopyOptions): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JFileSystem].move(from.asInstanceOf[java.lang.String], to.asInstanceOf[java.lang.String], options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -280,7 +280,7 @@ object VertxOptions {
     if (t != null) {
       new VertxOptions(t)
     } else {
-      null
+      new VertxOptions(new JVertxOptions(emptyObj()))
     }
   }
   
@@ -288,7 +288,7 @@ object VertxOptions {
     if (json != null) {
       new VertxOptions(new JVertxOptions(json))
     } else {
-      null
+      new VertxOptions(new JVertxOptions(emptyObj()))
     }
   }
 }

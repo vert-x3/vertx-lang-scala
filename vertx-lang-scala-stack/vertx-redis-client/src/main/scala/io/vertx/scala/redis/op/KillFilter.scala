@@ -71,7 +71,7 @@ object KillFilter {
     if (t != null) {
       new KillFilter(t)
     } else {
-      null
+      new KillFilter(new JKillFilter(emptyObj()))
     }
   }
   
@@ -79,7 +79,7 @@ object KillFilter {
     if (json != null) {
       new KillFilter(new JKillFilter(json))
     } else {
-      null
+      new KillFilter(new JKillFilter(emptyObj()))
     }
   }
 }

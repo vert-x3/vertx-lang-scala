@@ -366,7 +366,7 @@ object NetServerOptions {
     if (t != null) {
       new NetServerOptions(t)
     } else {
-      null
+      new NetServerOptions(new JNetServerOptions(emptyObj()))
     }
   }
   
@@ -374,7 +374,7 @@ object NetServerOptions {
     if (json != null) {
       new NetServerOptions(new JNetServerOptions(json))
     } else {
-      null
+      new NetServerOptions(new JNetServerOptions(emptyObj()))
     }
   }
 }

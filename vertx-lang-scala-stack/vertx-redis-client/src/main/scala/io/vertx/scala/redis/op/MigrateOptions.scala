@@ -38,7 +38,7 @@ object MigrateOptions {
     if (t != null) {
       new MigrateOptions(t)
     } else {
-      null
+      new MigrateOptions(new JMigrateOptions(emptyObj()))
     }
   }
   
@@ -46,7 +46,7 @@ object MigrateOptions {
     if (json != null) {
       new MigrateOptions(new JMigrateOptions(json))
     } else {
-      null
+      new MigrateOptions(new JMigrateOptions(emptyObj()))
     }
   }
 }

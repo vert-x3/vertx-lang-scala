@@ -91,7 +91,7 @@ object PfxOptions {
     if (t != null) {
       new PfxOptions(t)
     } else {
-      null
+      new PfxOptions(new JPfxOptions(emptyObj()))
     }
   }
   
@@ -99,7 +99,7 @@ object PfxOptions {
     if (json != null) {
       new PfxOptions(new JPfxOptions(json))
     } else {
-      null
+      new PfxOptions(new JPfxOptions(emptyObj()))
     }
   }
 }

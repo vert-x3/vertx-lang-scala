@@ -60,7 +60,7 @@ object DataObjectWithNestedBuffer {
     if (t != null) {
       new DataObjectWithNestedBuffer(t)
     } else {
-      null
+      new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(emptyObj()))
     }
   }
   
@@ -68,7 +68,7 @@ object DataObjectWithNestedBuffer {
     if (json != null) {
       new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))
     } else {
-      null
+      new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(emptyObj()))
     }
   }
 }

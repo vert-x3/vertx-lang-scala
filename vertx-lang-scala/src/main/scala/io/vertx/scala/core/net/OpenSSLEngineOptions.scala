@@ -56,7 +56,7 @@ object OpenSSLEngineOptions {
     if (t != null) {
       new OpenSSLEngineOptions(t)
     } else {
-      null
+      new OpenSSLEngineOptions(new JOpenSSLEngineOptions(emptyObj()))
     }
   }
   
@@ -64,7 +64,7 @@ object OpenSSLEngineOptions {
     if (json != null) {
       new OpenSSLEngineOptions(new JOpenSSLEngineOptions(json))
     } else {
-      null
+      new OpenSSLEngineOptions(new JOpenSSLEngineOptions(emptyObj()))
     }
   }
 }

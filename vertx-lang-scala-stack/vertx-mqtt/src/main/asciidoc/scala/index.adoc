@@ -1,3 +1,28 @@
+= Vert.x MQTT
+
+== Using Vert.x MQTT
+
+This component had officially released in the Vert.x stack, just following dependency to the _dependencies_ section
+of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-mqtt</artifactId>
+    <version>3.5.0-SNAPSHOT</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile io.vertx:vertx-mqtt:3.5.0-SNAPSHOT
+----
+
 = Vert.x MQTT server
 
 This component provides a server which is able to handle connections, communication and messages exchange with remote
@@ -9,29 +34,6 @@ clients and exposes some features in order to send messages to them.
 It's not a fully featured MQTT broker but can be used for building something like that or for protocol translation.
 
 WARNING: this module has the tech preview status, this means the API can change between versions.
-
-== Using Vert.x MQTT server
-
-This component had officially released in the Vert.x stack, just following dependency to the _dependencies_ section
-of your build descriptor:
-
-* Maven (in your `pom.xml`):
-
-[source,xml,subs="+attributes"]
-----
-<dependency>
-    <groupId>io.vertx</groupId>
-    <artifactId>vertx-mqtt-server</artifactId>
-    <version>3.4.2</version>
-</dependency>
-----
-
-* Gradle (in your `build.gradle` file):
-
-[source,groovy,subs="+attributes"]
-----
-compile io.vertx:vertx-mqtt-server:3.4.2
-----
 
 == Getting Started
 
@@ -370,3 +372,142 @@ vertx.deployVerticle("com.mycompany.MyVerticle", options)
 
 What's really happen is that even only MQTT server is deployed but as incoming connections arrive, Vert.x distributes
 them in a round-robin fashion to any of the connect handlers executed on different cores.
+
+= Vert.x MQTT client
+
+This component provides an link:http://mqtt.org/[MQTT] client which is compliant with the 3.1.1 spec. Its API provides a bunch of methods
+for connecting/disconnecting to a broker, publishing messages (with all three different levels of QoS) and subscribing to topics.
+
+WARNING: this module has the tech preview status, this means the API can change between versions.
+
+== Getting started
+
+=== Connect/Disconnect
+The client gives you opportunity to connect to a server and disconnect from it.
+Also, you could specify things like the host and port of a server you would like
+to connect to passing instance of `link:../dataobjects.html#MqttClientOptions[MqttClientOptions]` as a param through constructor.
+
+This example shows how you could connect to a server and disconnect from it using Vert.x MQTT client and calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#connect()[connect]` and `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#disconnect()[disconnect]` methods.
+[source,scala]
+----
+var options = MqttClientOptions()
+  .setHost("iot.eclipse.org")
+  .setPort(1883)
+
+
+var client = MqttClient.create(vertx, options)
+
+client.connectFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+NOTE: default address of server provided by `link:../dataobjects.html#MqttClientOptions[MqttClientOptions]` is localhost:1883 and localhost:8883 if you are using SSL/TSL.
+
+=== Subscribe to a topic
+
+Now, lest go deeper and take look at this example:
+
+[source,scala]
+----
+client.publishHandler((s: io.vertx.scala.mqtt.messages.MqttPublishMessage) => {
+  println(s"There are new message in topic: ${s.topicName()}")
+  println(s"Content(as string) of the message: ${s.payload().toString()}")
+  println(s"QoS: ${s.qosLevel()}")
+}).subscribe("rpi2/temp", 2)
+
+----
+
+Here we have the example of usage of `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#subscribe(java.lang.String,%20int)[subscribe]` method. In order to receive messages from rpi2/temp topic we call `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#subscribe(java.lang.String,%20int)[subscribe]` method.
+Although, to handle received messages from server you need to provide a handler, which will be called each time you have a new messages in the topics you subscribe on.
+As this example shows, handler could be provided via `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#publishHandler(io.vertx.core.Handler)[publishHandler]` method.
+
+=== Publishing message to a topic
+
+If you would like to publish some message into topic then `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#publish(java.lang.String,%20io.vertx.core.buffer.Buffer,%20io.netty.handler.codec.mqtt.MqttQoS,%20boolean,%20boolean)[publish]` should be called.
+Let's take a look at the example:
+[source,scala]
+----
+client.publish("temperature", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
+
+----
+In the example we send message to topic with name "temperature".
+
+=== Keep connection with server alive
+In order to keep connection with server you should time to time send something to server otherwise server will close the connection.
+The right way to keep connection alive is a `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#ping()[ping]` method.
+
+IMPORTANT: by default you client keep connections with server automatically. That means that you don't need to call `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#ping()[ping]` in order to keep connections with server.
+The `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html[MqttClient]` will do it for you.
+
+If you want to disable this feature then you should call `link:../dataobjects.html#MqttClientOptions#setAutoKeepAlive(boolean)[autoKeepAlive]` with `false` as argument:
+[source,scala]
+----
+options.setAutoKeepAlive(false)
+
+----
+
+=== Be notified when
+* publish is completed
++
+You could provide handler by calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#publishCompleteHandler(io.vertx.core.Handler)[publishCompleteHandler]`. The handler will be called each time publish is completed.
+This one is pretty useful because you could see the packetId of just received PUBACK or PUBCOMP packet.
+[source,scala]
+----
+client.publishCompleteHandler((id: java.lang.Integer) => {
+  println(s"Id of just received PUBACK or PUBCOMP packet is ${id}")
+}).publish("hello", Buffer.buffer("hello"), MqttQoS.EXACTLY_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
+
+
+----
+WARNING: The handler WILL NOT BE CALLED if sent publish packet with QoS=0.
+
+* subscribe completed
++
+[source,scala]
+----
+client.subscribeCompleteHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messages.MqttSubAckMessage) => {
+  println(s"Id of just received SUBACK packet is ${mqttSubAckMessage.messageId()}")
+  mqttSubAckMessage.grantedQoSLevels().foreach(s => {
+    if (s == 128) {
+      println("Failure")
+    } else {
+      println(s"Success. Maximum QoS is ${s}")
+    }
+  })
+
+}).subscribe("temp", 1).subscribe("temp2", 2)
+
+----
+
+* unsubscribe completed
++
+[source,scala]
+----
+client.unsubscribeCompleteHandler((id: java.lang.Integer) => {
+  println(s"Id of just received UNSUBACK packet is ${id}")
+}).subscribe("temp", 1).unsubscribe("temp")
+
+----
+* unsubscribe sent
++
+[source,scala]
+----
+client.subscribe("temp", 1).unsubscribeFuture("temp").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+* PINGRESP received
++
+[source,scala]
+----
+client.pingResponseHandler((s: java.lang.Void) => {
+  //The handler will be called time to time by default
+  println("We have just received PINGRESP packet")
+})
+
+----

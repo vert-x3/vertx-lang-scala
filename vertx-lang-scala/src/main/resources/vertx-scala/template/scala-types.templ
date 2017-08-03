@@ -76,7 +76,10 @@
     } else if (type.kind.collection) {
       if (type.kind == CLASS_LIST){
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[0])) {
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          conversion += '.map(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[0])) {
           conversion += '.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         }
         if (nullable) {
@@ -86,7 +89,10 @@
         }
       } else if (type.kind == CLASS_SET){
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[0])) {
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          conversion += '.map(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[0])) {
           conversion += '.map(x => '+ toScalaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
         }
         if (nullable) {
@@ -97,7 +103,10 @@
       } else if (type.kind == CLASS_MAP){
         /*TODO: this feels very expensive*/
         var conversion = '.asScala';
-        if (doesTypeRequireConversion(type.args[1])) {
+        if(type.args[1].isNullable && !doesTypeRequireConversion(type.args[1])) {
+          conversion += '.mapValues(Option(_))';
+        }
+        else if (doesTypeRequireConversion(type.args[1])) {
           conversion += '.mapValues(x => ' + toScalaWithConversion('x', type.args[1], typeParams, methodTypeParams) + ')';
         }
         if (nullable) {
@@ -282,16 +291,32 @@
       return ret;
     } else if (type.kind.collection) {
       var ret = name;
-      if (type.kind == CLASS_LIST && doesTypeRequireConversion(type.args[0])){
-        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
-      } else if (type.kind == CLASS_SET && doesTypeRequireConversion(type.args[0])){
-        ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
-      } else if (type.kind == CLASS_MAP && doesTypeRequireConversion(type.args[1])){
-        ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[1], typeParams, methodTypeParams) +')';
+      if(nullable) {
+        ret = "res";
       }
+      if (type.kind == CLASS_LIST) {
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          ret += '.map{case Some(x) => x;case None => null}';
+        } else if(doesTypeRequireConversion(type.args[0])) {
+          ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+        }
+      } else if (type.kind == CLASS_SET){
+        if(type.args[0].isNullable && !doesTypeRequireConversion(type.args[0])) {
+          ret += '.map{case Some(x) => x;case None => null}';
+        } else if(doesTypeRequireConversion(type.args[0])) {
+          ret += '.map(x => '+ toJavaWithConversion('x', type.args[0], typeParams, methodTypeParams) +')';
+        }
+      } else if (type.kind == CLASS_MAP){
+        if(type.args[1].isNullable && !doesTypeRequireConversion(type.args[1])) {
+          ret += '.mapValues{case Some(x) => x;case None => null}';
+        } else if(doesTypeRequireConversion(type.args[0])) {
+          ret += '.mapValues(x => '+ toJavaWithConversion('x', type.args[1], typeParams, methodTypeParams) +')';
+        }
+      }
+
       ret += '.asJava';
       if (nullable) {
-        ret = name + '.map(' + name +' => ' + ret + ').orNull';
+        ret = name + '.flatMap(res => Some(' + ret + ')).orNull';
       }
       return ret;
     } else if (type.kind == CLASS_FUNCTION) {
@@ -496,7 +521,7 @@
   }
 
 
-  def fromObjectToInstanceOf(type, typeParams, methodTypeParams) {
+  def   fromObjectToInstanceOf(type, typeParams, methodTypeParams) {
     var ret = '';
     if (type.name == 'io.vertx.core.Future' && !type.isParameterized()) {
       if (typeParams.isEmpty && methodTypeParams.isEmpty)

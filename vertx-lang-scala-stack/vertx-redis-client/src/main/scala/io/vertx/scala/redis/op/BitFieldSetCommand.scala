@@ -57,7 +57,7 @@ object BitFieldSetCommand {
     if (t != null) {
       new BitFieldSetCommand(t)
     } else {
-      null
+      new BitFieldSetCommand(new JBitFieldSetCommand(emptyObj()))
     }
   }
   
@@ -65,7 +65,7 @@ object BitFieldSetCommand {
     if (json != null) {
       new BitFieldSetCommand(new JBitFieldSetCommand(json))
     } else {
-      null
+      new BitFieldSetCommand(new JBitFieldSetCommand(emptyObj()))
     }
   }
 }

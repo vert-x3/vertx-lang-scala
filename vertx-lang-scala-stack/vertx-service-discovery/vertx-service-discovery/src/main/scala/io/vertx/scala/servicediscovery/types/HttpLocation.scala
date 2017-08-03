@@ -96,7 +96,7 @@ object HttpLocation {
     if (t != null) {
       new HttpLocation(t)
     } else {
-      null
+      new HttpLocation(new JHttpLocation(emptyObj()))
     }
   }
   
@@ -104,7 +104,7 @@ object HttpLocation {
     if (json != null) {
       new HttpLocation(new JHttpLocation(json))
     } else {
-      null
+      new HttpLocation(new JHttpLocation(emptyObj()))
     }
   }
 }

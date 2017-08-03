@@ -545,8 +545,9 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testDataObjectNullReturn" should "work" in {
+    //DataObjects created with apply(null) will be filled with an empty dataobject instead of null
     val r = obj.methodWithDataObjectNullReturn()
-    assert(null == r)
+    assert(null != r.asJava)
   }
 
 

@@ -56,7 +56,7 @@ object ConfigRetrieverOptions {
     if (t != null) {
       new ConfigRetrieverOptions(t)
     } else {
-      null
+      new ConfigRetrieverOptions(new JConfigRetrieverOptions(emptyObj()))
     }
   }
   
@@ -64,7 +64,7 @@ object ConfigRetrieverOptions {
     if (json != null) {
       new ConfigRetrieverOptions(new JConfigRetrieverOptions(json))
     } else {
-      null
+      new ConfigRetrieverOptions(new JConfigRetrieverOptions(emptyObj()))
     }
   }
 }

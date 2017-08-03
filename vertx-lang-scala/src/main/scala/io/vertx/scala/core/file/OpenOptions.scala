@@ -29,6 +29,17 @@ class OpenOptions(private val _asJava: JOpenOptions) {
   def asJava = _asJava
 
   /**
+    * Whether the file should be opened in append mode. Defaults to `false`.
+    */
+  def setAppend(value: Boolean) = {
+    asJava.setAppend(value)
+    this
+  }
+  def isAppend: Boolean = {
+    asJava.isAppend().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether the file should be created if it does not already exist.
     */
   def setCreate(value: Boolean) = {
@@ -149,7 +160,7 @@ object OpenOptions {
     if (t != null) {
       new OpenOptions(t)
     } else {
-      null
+      new OpenOptions(new JOpenOptions(emptyObj()))
     }
   }
   
@@ -157,7 +168,7 @@ object OpenOptions {
     if (json != null) {
       new OpenOptions(new JOpenOptions(json))
     } else {
-      null
+      new OpenOptions(new JOpenOptions(emptyObj()))
     }
   }
 }
