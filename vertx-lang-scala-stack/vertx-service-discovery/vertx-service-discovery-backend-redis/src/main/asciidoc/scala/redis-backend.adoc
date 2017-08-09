@@ -17,7 +17,7 @@ descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-service-discovery-backend-redis-scala_2.12</artifactId>
-  <version>3.5.0.Beta1</version>
+  <version>3.5.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -25,7 +25,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-backend-redis-scala_2.12:3.5.0.Beta1'
+compile 'io.vertx:vertx-service-discovery-backend-redis-scala_2.12:3.5.0-SNAPSHOT'
 ----
 
 Be aware that you can have only a single implementation of the SPI in your _classpath_. If none,
@@ -45,12 +45,4 @@ ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
   .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("host", "127.0.0.1").put("key", "records"))
 )
 
-----
-
-It's important to note that the backend configuration is passed in the `setBackendConfiguration` method (or
-`backendConfiguration` entry if you use JSON):
-
-[source,scala]
-----
-Code not translatable
 ----

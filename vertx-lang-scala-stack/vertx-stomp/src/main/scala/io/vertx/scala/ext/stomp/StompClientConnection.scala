@@ -505,7 +505,7 @@ class StompClientConnection(private val _asJava: Object) {
   /**
     * Configures a handler notified when a frame is going to be written on the wire. This handler can be used from
     * logging, debugging. The handler can modify the received frame.
-    * 
+    *
     * If a writing frame handler is set on the [[io.vertx.scala.ext.stomp.StompClient]], it will be used by all
     * clients connection, so calling this method is useless, except if you want to use a different handler.
     * @param handler the handler
@@ -513,16 +513,6 @@ class StompClientConnection(private val _asJava: Object) {
     */
   def writingFrameHandler(handler: Handler[Frame]): StompClientConnection = {
     asJava.asInstanceOf[JStompClientConnection].writingFrameHandler({x: JFrame => handler.handle(Frame(x))})
-    this
-  }
-
-  /**
-    * Configures the exception handler notified upon TCP-level errors.
-    * @param exceptionHandler the handler
-    * @return the current StompClientConnection
-    */
-  def exceptionHandler(exceptionHandler: Handler[Throwable]): StompClientConnection = {
-    asJava.asInstanceOf[JStompClientConnection].exceptionHandler({x: Throwable => exceptionHandler.handle(x)})
     this
   }
 
@@ -596,14 +586,6 @@ class StompClientConnection(private val _asJava: Object) {
     */
   def subscribe(destination: String, headers: scala.collection.mutable.Map[String, String], handler: Handler[Frame], receiptHandler: Handler[Frame]): String = {
     asJava.asInstanceOf[JStompClientConnection].subscribe(destination.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: JFrame => handler.handle(Frame(x))}, {x: JFrame => receiptHandler.handle(Frame(x))}).asInstanceOf[String]
-  }
-
-  /**
-    * Returns whether or not the `CONNECTED` frame has been receive meaning that the Stomp connection is established.
-    * @return `true` if the connection is established, `false` otherwise
-    */
-  def isConnected(): Boolean = {
-    asJava.asInstanceOf[JStompClientConnection].isConnected().asInstanceOf[Boolean]
   }
 
 }

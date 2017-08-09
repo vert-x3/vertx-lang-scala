@@ -76,7 +76,7 @@ class StompClient(private val _asJava: Object) {
 
   /**
     * Connects to the server using the host and port configured in the client's options.
-    * @param resultHandler handler called with the connection result. A failure will be sent to the handler if a TCP level issue happen before the `CONNECTED` frame is received. Afterwards, the #exceptionHandler(Handler) is called.
+    * @param resultHandler handler called with the connection result
     * @return the current StompClient
     */
   def connect(resultHandler: Handler[AsyncResult[StompClientConnection]]): StompClient = {
@@ -121,16 +121,6 @@ class StompClient(private val _asJava: Object) {
     */
   def errorFrameHandler(handler: Handler[Frame]): StompClient = {
     asJava.asInstanceOf[JStompClient].errorFrameHandler({x: JFrame => handler.handle(Frame(x))})
-    this
-  }
-
-  /**
-    * Sets an exception handler notified for TCP-level errors.
-    * @param handler the handler
-    * @return the current StompClient
-    */
-  def exceptionHandler(handler: Handler[Throwable]): StompClient = {
-    asJava.asInstanceOf[JStompClient].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 

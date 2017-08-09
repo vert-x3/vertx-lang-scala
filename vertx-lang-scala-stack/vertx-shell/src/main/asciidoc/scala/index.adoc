@@ -19,7 +19,7 @@ The shell can be started as a service directly either from the command line or a
 .Starting a shell service available via Telnet
 [source,subs="+attributes"]
 ----
-vertx run -conf '{"telnetOptions":{"port":5000}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0.Beta1
+vertx run -conf '{"telnetOptions":{"port":5000}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0-SNAPSHOT
 ----
 
 or
@@ -32,7 +32,7 @@ keytool -genkey -keyalg RSA -keystore ssh.jks -keysize 2048 -validity 1095 -dnam
 # create the auth config
 echo user.admin=password > auth.properties
 # start the shell
-vertx run -conf '{"sshOptions":{"port":4000,"keyPairOptions":{"path":"ssh.jks","password":"secret"},"authOptions":{"provider":"shiro","config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0.Beta1
+vertx run -conf '{"sshOptions":{"port":4000,"keyPairOptions":{"path":"ssh.jks","password":"secret"},"authOptions":{"provider":"shiro","config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0-SNAPSHOT
 ----
 
 or
@@ -44,7 +44,7 @@ or
 keytool -genkey -keyalg RSA -keystore keystore.jks -keysize 2048 -validity 1095 -dname CN=localhost -keypass secret -storepass secret
 # create the auth config
 echo user.admin=password > auth.properties
-vertx run -conf '{"httpOptions":{"port":8080,"ssl":true,"keyStoreOptions":{"path":"keystore.jks","password":"secret"},"authOptions":{"provider":""shiro,"config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0.Beta1
+vertx run -conf '{"httpOptions":{"port":8080,"ssl":true,"keyStoreOptions":{"path":"keystore.jks","password":"secret"},"authOptions":{"provider":""shiro,"config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.5.0-SNAPSHOT
 ----
 
 You can also deploy this service inside your own verticle:
@@ -78,7 +78,7 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 ----
 
 NOTE: when Vert.x Shell is already on your classpath you can use `service:io.vertx.ext.shell` instead
-or `maven:io.vertx:vertx-shell-scala_2.12:3.5.0.Beta1`
+or `maven:io.vertx:vertx-shell-scala_2.12:3.5.0-SNAPSHOT`
 
 === Programmatic service
 
