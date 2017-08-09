@@ -24,7 +24,7 @@ descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-stomp-scala_2.12</artifactId>
-  <version>3.5.0-SNAPSHOT</version>
+  <version>3.5.0.Beta1</version>
 </dependency>
 ----
 
@@ -32,7 +32,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-stomp-scala_2.12:3.5.0-SNAPSHOT'
+compile 'io.vertx:vertx-stomp-scala_2.12:3.5.0.Beta1'
 ----
 
 == STOMP server
