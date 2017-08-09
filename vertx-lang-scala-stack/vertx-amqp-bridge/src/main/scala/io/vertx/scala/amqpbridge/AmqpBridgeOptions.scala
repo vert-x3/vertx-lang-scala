@@ -146,6 +146,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
   }
+  def setMaxFrameSize(value: Int) = {
+    asJava.setMaxFrameSize(value)
+    this
+  }
+  def getMaxFrameSize: Int = {
+    asJava.getMaxFrameSize().asInstanceOf[Int]
+  }
   def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
