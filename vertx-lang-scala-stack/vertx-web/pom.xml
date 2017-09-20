@@ -27,6 +27,12 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-bridge-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-common-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>
