@@ -25,6 +25,11 @@
       <version>${stack.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.agroal</groupId>
+      <artifactId>agroal-api</artifactId>
+      <version>0.2</version>
+    </dependency>
+    <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-sql-common</artifactId>
       <version>${stack.version}</version>

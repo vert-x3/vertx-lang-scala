@@ -64,8 +64,6 @@
   def isMethodNeedsOverride(callingClassName, method) {
     if (method.name == 'toString' && method.params.isEmpty) {
       return true;
-    } else if (method.ownerTypes.size() > 1) {
-      return true;
     } else {
       /*There is only one entry in here (0 would be a bug)*/
       for (ownerType : method.ownerTypes) {
