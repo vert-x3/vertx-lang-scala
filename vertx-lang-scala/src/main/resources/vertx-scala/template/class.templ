@@ -62,6 +62,9 @@ import @{importedType}\n
 @if{!superTypes.isEmpty}
 	\n    extends @foreach{superType : classes}@{toScalaType(superType, false)}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
 	 @if{!classes.isEmpty() && !abstractClasses.isEmpty()}with @end{}@foreach{superType : abstractClasses}@{toScalaType(superType, false)}@if{superType.raw.isConcrete()}(_asJava)@end{}@end{' \n    with '}
+	 @if{type.isHandler}
+	\n    with io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false)}]
+	 @end{}
 @else{type.isHandler}
 	\n    extends io.vertx.core.Handler[@{toScalaType(type.getHandlerArg, false)}]
 @end{}

@@ -91,7 +91,7 @@
 @foreach{method : futureMethods}
 	@if{method.name != 'executeBlocking'}
 	@if{method.doc != null}@{methodDoc(method, ' ', true)}@end{}
-  @if{isMethodNeedsOverride(type.name, method) && !method.name.endsWith("Handler")}override @end{}
+  @if{isMethodNeedsOverride(type.name, method) && !method.name.endsWith("Handler")}override @else{method.name.endsWith("Handler")}@foreach{superType : classes}@if{superType.name != 'io.vertx.core.Future<java.lang.Boolean>'}override @end{}@end{}@end{}
 	def @{createNameForMethodReturningAFuture(method)}
 	@{assembleTypeParams(method.typeParams, true)}(
 	@foreach{param : removeLastParam(method.params)}
