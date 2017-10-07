@@ -88,9 +88,15 @@ class ResultSet(private val _asJava: JResultSet) {
   /**
     * Get the rows - each row represented as a JsonObject where the keys are the column names and the values are
     * the column values.
-    * 
+    *
     * Beware that it's legal for a query result in SQL to contain duplicate column names, in which case one will
     * overwrite the other if using this method. If that's the case use <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a> instead.
+    *
+    * Be aware that column names are defined as returned by the database, this means that even if your SQL statement
+    * is for example: <pre>SELECT a, b FROM table</pre> the column names are not required to be: <pre>a</pre> and
+    * <pre>b</pre> and could be in fact <pre>A</pre> and <pre>B</pre>.
+    *
+    * For cases when there is the need for case insentivitity you should see <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a>
     */
 }
 

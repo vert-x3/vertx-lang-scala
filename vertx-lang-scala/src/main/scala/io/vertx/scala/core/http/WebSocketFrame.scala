@@ -113,6 +113,24 @@ object WebSocketFrame {
   }
 
   /**
+    * Create a ping WebSocket frame.  Will be a final frame. There is no option for non final ping frames.
+    * @param data the bytes for the frame, may be at most 125 bytes
+    * @return the frame
+    */
+  def pingFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
+    WebSocketFrame(JWebSocketFrame.pingFrame(data))
+  }
+
+  /**
+    * Create a pong WebSocket frame.  Will be a final frame. There is no option for non final pong frames.
+    * @param data the bytes for the frame, may be at most 125 bytes
+    * @return the frame
+    */
+  def pongFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
+    WebSocketFrame(JWebSocketFrame.pongFrame(data))
+  }
+
+  /**
     * Create a continuation frame
     * @param data the data for the frame
     * @param isFinal true if it's the final frame in the WebSocket message

@@ -42,7 +42,7 @@ import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
 /**
   */
 class MongoService(private val _asJava: Object)
-    extends MongoClient(_asJava)  {
+    extends MongoClient(_asJava)   {
 
 
   override def save(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[String]]): MongoService = {

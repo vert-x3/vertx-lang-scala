@@ -350,8 +350,8 @@ class NullableTCK(private val _asJava: Object) {
     asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value), {x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))})
   }
 
-  def methodWithNullableTypeVariableReturn[T: TypeTag](notNull: Boolean, value: T): T = {
-    toScala[T](asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableReturn[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value)))
+  def methodWithNullableTypeVariableReturn[T: TypeTag](notNull: Boolean, value: T): scala.Option[T] = {
+    scala.Option(toScala[T](asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableReturn[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value))))
   }
 
   def methodWithNullableObjectParam(expectNull: Boolean, param: AnyRef): Unit = {

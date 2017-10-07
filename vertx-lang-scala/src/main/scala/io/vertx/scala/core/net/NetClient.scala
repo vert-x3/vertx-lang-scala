@@ -24,6 +24,7 @@ import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 
@@ -36,7 +37,7 @@ import io.vertx.core.Handler
   * delay between attempts.
   */
 class NetClient(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
 
@@ -66,6 +67,31 @@ class NetClient(private val _asJava: Object)
     */
   def connect(port: Int, host: String, serverName: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    this
+  }
+
+  /**
+    * Open a connection to a server at the specific `remoteAddress`.
+    * 
+    * The connect is done asynchronously and on success, a [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+    * @param remoteAddress the remote address
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connect(remoteAddress: SocketAddress, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    this
+  }
+
+  /**
+    * Open a connection to a server at the specific `remoteAddress`.
+    * 
+    * The connect is done asynchronously and on success, a [[io.vertx.scala.core.net.NetSocket]] instance is supplied via the `connectHandler` instance
+    * @param remoteAddress the remote address
+    * @param serverName the SNI server name
+    * @return a reference to this, so the API can be used fluently
+    */
+  def connect(remoteAddress: SocketAddress, serverName: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
     this
   }
 
@@ -102,6 +128,24 @@ class NetClient(private val _asJava: Object)
   def connectFuture(port: Int, host: String, serverName: String): scala.concurrent.Future[NetSocket] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
     asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def connectFuture(remoteAddress: SocketAddress): scala.concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def connectFuture(remoteAddress: SocketAddress, serverName: String): scala.concurrent.Future[NetSocket] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetSocket, NetSocket](x => NetSocket(x))
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], serverName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

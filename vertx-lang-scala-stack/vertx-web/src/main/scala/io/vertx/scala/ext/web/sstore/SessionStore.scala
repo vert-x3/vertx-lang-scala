@@ -74,27 +74,27 @@ class SessionStore(private val _asJava: Object) {
   /**
     * Delete the session with the specified ID
     * @param id the unique ID of the session
-    * @param resultHandler will be called with a result true/false, or a failure
+    * @param resultHandler will be called with a success or a failure
     */
-  def delete(id: String, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def delete(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
     * Add a session with the specified ID
     * @param session the session
-    * @param resultHandler will be called with a result true/false, or a failure
+    * @param resultHandler will be called with a success or a failure
     */
-  def put(session: Session, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def put(session: Session, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
     * Remove all sessions from the store
-    * @param resultHandler will be called with a result true/false, or a failure
+    * @param resultHandler will be called with a success or a failure
     */
-  def clear(resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def clear(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -124,8 +124,8 @@ class SessionStore(private val _asJava: Object) {
  /**
    * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def deleteFuture(id: String): scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
+  def deleteFuture(id: String): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -133,8 +133,8 @@ class SessionStore(private val _asJava: Object) {
  /**
    * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def putFuture(session: Session): scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
+  def putFuture(session: Session): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -142,8 +142,8 @@ class SessionStore(private val _asJava: Object) {
  /**
    * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def clearFuture(): scala.concurrent.Future[Boolean] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
+  def clearFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }

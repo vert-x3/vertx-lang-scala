@@ -119,6 +119,19 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
   }
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the TCP send buffer size
     */
   override def setSendBufferSize(value: Int) = {

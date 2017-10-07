@@ -46,3 +46,11 @@ ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
 )
 
 ----
+
+It's important to note that the backend configuration is passed in the `setBackendConfiguration` method (or
+`backendConfiguration` entry if you use JSON):
+
+[source,scala]
+----
+Code not translatable
+----

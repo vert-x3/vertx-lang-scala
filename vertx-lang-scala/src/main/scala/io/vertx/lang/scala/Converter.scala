@@ -15,18 +15,23 @@ object Converter {
     val typ = typeOf(tag)
     val name = typ.typeSymbol.fullName
     val n = t == null
-    if(n || t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx.scala")){
-      t.asInstanceOf[T]
+    if(t == null) {
+      null.asInstanceOf[T]
     }
     else {
-      val mirror = runtimeMirror(getClass.getClassLoader)
-      val instance = mirror.reflectModule(typ.typeSymbol.companion.asModule).instance
-      //TODO: I have to do this because of some tests using an Impl-class. Need to check the perf-impact
-      Try(instance.getClass.getMethod("apply", t.getClass)) match {
-        case Success(m) => m.invoke(instance, t).asInstanceOf[T]
-        case Failure(_) => instance.getClass.getMethod("apply", t.getClass.getInterfaces()(0)).invoke(instance, t).asInstanceOf[T]
+      if(n || t.isInstanceOf[JsonObject] || t.isInstanceOf[JsonArray] || t.getClass.isEnum || !name.startsWith("io.vertx.scala")){
+        t.asInstanceOf[T]
       }
+      else {
+        val mirror = runtimeMirror(getClass.getClassLoader)
+        val instance = mirror.reflectModule(typ.typeSymbol.companion.asModule).instance
+        //TODO: I have to do this because of some tests using an Impl-class. Need to check the perf-impact
+        Try(instance.getClass.getMethod("apply", t.getClass)) match {
+          case Success(m) => m.invoke(instance, t).asInstanceOf[T]
+          case Failure(_) => instance.getClass.getMethod("apply", t.getClass.getInterfaces()(0)).invoke(instance, t).asInstanceOf[T]
+        }
 
+      }
     }
   }
 

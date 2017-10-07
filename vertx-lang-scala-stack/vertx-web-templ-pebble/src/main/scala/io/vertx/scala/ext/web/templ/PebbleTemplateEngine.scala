@@ -34,7 +34,7 @@ import io.vertx.core.{Vertx => JVertx}
   * A template engine that uses the Pebble library.
   */
 class PebbleTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)  {
+    extends TemplateEngine(_asJava)   {
 
 
   /**
@@ -43,7 +43,8 @@ class PebbleTemplateEngine(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setExtension(extension: String): PebbleTemplateEngine = {
-    PebbleTemplateEngine(asJava.asInstanceOf[JPebbleTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JPebbleTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
@@ -52,7 +53,8 @@ class PebbleTemplateEngine(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setMaxCacheSize(maxCacheSize: Int): PebbleTemplateEngine = {
-    PebbleTemplateEngine(asJava.asInstanceOf[JPebbleTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer]))
+    asJava.asInstanceOf[JPebbleTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
+    this
   }
 
 }

@@ -21,6 +21,7 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.eventbus.bridge.tcp.{TcpEventBusBridge => JTcpEventBusBridge}
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.eventbus.bridge.tcp.{BridgeEvent => JBridgeEvent}
 import io.vertx.scala.ext.bridge.BridgeOptions
 import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
 import io.vertx.core.AsyncResult
@@ -165,6 +166,10 @@ object TcpEventBusBridge {
 
   def create(vertx: Vertx, options: BridgeOptions, netServerOptions: NetServerOptions): TcpEventBusBridge = {
     TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava))
+  }
+
+  def create(vertx: Vertx, options: BridgeOptions, netServerOptions: NetServerOptions, eventHandler: Handler[BridgeEvent]): TcpEventBusBridge = {
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, {x: JBridgeEvent => eventHandler.handle(BridgeEvent(x))}))
   }
 
 }

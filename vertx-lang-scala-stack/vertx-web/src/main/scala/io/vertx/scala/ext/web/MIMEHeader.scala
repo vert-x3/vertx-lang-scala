@@ -24,12 +24,12 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.web.{MIMEHeader => JMIMEHeader}
 
 class MIMEHeader(private val _asJava: Object)
-    extends  ParsedHeaderValue {
+    extends  ParsedHeaderValue  {
 
   def asJava = _asJava
 
   /**
-    * Contains the raw value that was received from the user agent 
+    * Contains the raw value that was received from the user agent
     */
   override def rawValue(): String = {
     asJava.asInstanceOf[JMIMEHeader].rawValue().asInstanceOf[String]
@@ -45,7 +45,7 @@ class MIMEHeader(private val _asJava: Object)
 
   /**
     * Holds the weight specified in the "q" parameter of the header.<br>
-    * If the parameter is not specified, 1.0 is assumed according to 
+    * If the parameter is not specified, 1.0 is assumed according to
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
@@ -85,7 +85,7 @@ class MIMEHeader(private val _asJava: Object)
   }
 
   /**
-    * Test if this header is matched by matchTry header 
+    * Test if this header is matched by matchTry header
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */

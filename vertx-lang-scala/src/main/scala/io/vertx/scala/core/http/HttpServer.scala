@@ -41,7 +41,7 @@ import io.vertx.core.Handler
   * WebSocket is passed to the handler.
   */
 class HttpServer(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
   private var cached_0: Option[ReadStream[HttpServerRequest]] = None
@@ -49,7 +49,7 @@ class HttpServer(private val _asJava: Object)
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
-    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
+    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
     * @return the request stream
     */
   def requestStream(): ReadStream[HttpServerRequest] = {
@@ -62,7 +62,7 @@ class HttpServer(private val _asJava: Object)
 
   /**
     * Return the websocket stream for the server. If a websocket connect handshake is successful a
-    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
+    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
     * @return the websocket stream
     */
   def websocketStream(): ReadStream[ServerWebSocket] = {
@@ -89,6 +89,17 @@ class HttpServer(private val _asJava: Object)
     */
   def connectionHandler(handler: Handler[HttpConnection]): HttpServer = {
     asJava.asInstanceOf[JHttpServer].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
+    this
+  }
+
+  /**
+    * Set an exception handler called for socket errors happening before the HTTP connection
+    * is established, e.g during the TLS handshake.
+    * @param handler the handler to set
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Handler[Throwable]): HttpServer = {
+    asJava.asInstanceOf[JHttpServer].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 

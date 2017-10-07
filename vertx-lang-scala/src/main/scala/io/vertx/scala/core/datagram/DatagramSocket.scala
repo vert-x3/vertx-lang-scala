@@ -48,7 +48,7 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class DatagramSocket(private val _asJava: Object)
     extends  ReadStream[DatagramPacket] 
-    with Measured {
+    with Measured  {
 
   def asJava = _asJava
   private var cached_0: Option[SocketAddress] = None

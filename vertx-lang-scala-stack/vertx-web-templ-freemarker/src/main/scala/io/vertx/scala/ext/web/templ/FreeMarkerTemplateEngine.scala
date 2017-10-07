@@ -32,7 +32,7 @@ import io.vertx.core.Handler
   * A template engine that uses the FreeMarker library.
   */
 class FreeMarkerTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)  {
+    extends TemplateEngine(_asJava)   {
 
 
   /**
@@ -41,7 +41,8 @@ class FreeMarkerTemplateEngine(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setExtension(extension: String): FreeMarkerTemplateEngine = {
-    FreeMarkerTemplateEngine(asJava.asInstanceOf[JFreeMarkerTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String]))
+    asJava.asInstanceOf[JFreeMarkerTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String])
+    this
   }
 
   /**
@@ -50,7 +51,8 @@ class FreeMarkerTemplateEngine(private val _asJava: Object)
     * @return a reference to this for fluency
     */
   def setMaxCacheSize(maxCacheSize: Int): FreeMarkerTemplateEngine = {
-    FreeMarkerTemplateEngine(asJava.asInstanceOf[JFreeMarkerTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer]))
+    asJava.asInstanceOf[JFreeMarkerTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
+    this
   }
 
 }

@@ -35,7 +35,7 @@ import io.vertx.core.{Vertx => JVertx}
   * An extension of AuthProvider which is using .htdigest file as store
   */
 class HtdigestAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)  {
+    extends AuthProvider(_asJava)   {
 
 
   /**

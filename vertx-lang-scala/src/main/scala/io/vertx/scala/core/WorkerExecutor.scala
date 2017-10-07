@@ -34,7 +34,7 @@ import io.vertx.core.Handler
   * [[io.vertx.scala.core.Vertx]] but on a separate worker pool.
   */
 class WorkerExecutor(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
 

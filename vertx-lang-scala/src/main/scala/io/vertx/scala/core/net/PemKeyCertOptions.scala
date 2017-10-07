@@ -39,6 +39,18 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
   * -----END PRIVATE KEY-----
   * </pre>
   *
+  * Or contain a <b>non encrypted</b> private key in <b>PKCS1</b> format wrapped in a PEM
+  * block, for example:
+  * 
+  *
+  * <pre>
+  * -----BEGIN RSA PRIVATE KEY-----
+  * MIIEowIBAAKCAQEAlO4gbHeFb/fmbUF/tOJfNPJumJUEqgzAzx8MBXv9Acyw9IRa
+  * ...
+  * zJ14Yd+t2fsLYVs2H0gxaA4DW6neCzgY3eKpSU0EBHUCFSXp/1+/
+  * -----END RSA PRIVATE KEY-----
+  * </pre>
+  *
   * A certificate file must contain an X.509 certificate wrapped in a PEM block, for example:
   * 
   *

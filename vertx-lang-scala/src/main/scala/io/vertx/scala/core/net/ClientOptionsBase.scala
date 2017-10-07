@@ -140,6 +140,14 @@ trait ClientOptionsBase
   def isReuseAddress: Boolean 
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  def setReusePort(value: Boolean): ClientOptionsBase
+  def isReusePort: Boolean 
+
+  /**
     * Set the TCP send buffer size
     */
   def setSendBufferSize(value: Int): ClientOptionsBase
@@ -158,6 +166,18 @@ trait ClientOptionsBase
   def isSsl: Boolean 
 
   /**
+    * Enable the `TCP_CORK` option - only with linux native transport.
+    */
+  def setTcpCork(value: Boolean): ClientOptionsBase
+  def isTcpCork: Boolean 
+
+  /**
+    * Enable the `TCP_FASTOPEN` option - only with linux native transport.
+    */
+  def setTcpFastOpen(value: Boolean): ClientOptionsBase
+  def isTcpFastOpen: Boolean 
+
+  /**
     * Set whether TCP keep alive is enabled
     */
   def setTcpKeepAlive(value: Boolean): ClientOptionsBase
@@ -168,6 +188,12 @@ trait ClientOptionsBase
     */
   def setTcpNoDelay(value: Boolean): ClientOptionsBase
   def isTcpNoDelay: Boolean 
+
+  /**
+    * Enable the `TCP_QUICKACK` option - only with linux native transport.
+    */
+  def setTcpQuickAck(value: Boolean): ClientOptionsBase
+  def isTcpQuickAck: Boolean 
 
   /**
     * Set the value of traffic class

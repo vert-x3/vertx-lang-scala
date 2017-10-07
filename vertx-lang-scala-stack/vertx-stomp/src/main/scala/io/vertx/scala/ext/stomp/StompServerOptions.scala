@@ -257,6 +257,13 @@ class StompServerOptions(private val _asJava: JStompServerOptions)
   override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
 
   /**
     * Enables or disables the server security feature. It requires an [[io.vertx.scala.ext.auth.AuthProvider]] handler.
@@ -319,6 +326,20 @@ class StompServerOptions(private val _asJava: JStompServerOptions)
   def getSupportedVersions: scala.collection.mutable.Buffer[String] = {
     asJava.getSupportedVersions().asScala.map(x => x.asInstanceOf[String])
   }
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
   override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -332,6 +353,13 @@ class StompServerOptions(private val _asJava: JStompServerOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
 
   /**

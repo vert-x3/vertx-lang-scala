@@ -31,6 +31,7 @@ Sets the value to use as the container-id field in the AMQP Open frame. Some ser
 |[[keyStoreOptions]]`keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[localAddress]]`localAddress`|`String`|-
 |[[logActivity]]`logActivity`|`Boolean`|-
+|[[maxFrameSize]]`maxFrameSize`|`Number (int)`|-
 |[[metricsName]]`metricsName`|`String`|-
 |[[openSslEngineOptions]]`openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[pemKeyCertOptions]]`pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
@@ -48,12 +49,16 @@ Sets whether the bridge should try to enable support for sending messages with a
  'anonymous sender' links then the bridge won't support reply handling regardless of this setting.
 +++
 |[[reuseAddress]]`reuseAddress`|`Boolean`|-
+|[[reusePort]]`reusePort`|`Boolean`|-
 |[[sendBufferSize]]`sendBufferSize`|`Number (int)`|-
 |[[sniServerName]]`sniServerName`|`String`|-
 |[[soLinger]]`soLinger`|`Number (int)`|-
 |[[ssl]]`ssl`|`Boolean`|-
+|[[tcpCork]]`tcpCork`|`Boolean`|-
+|[[tcpFastOpen]]`tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`tcpKeepAlive`|`Boolean`|-
 |[[tcpNoDelay]]`tcpNoDelay`|`Boolean`|-
+|[[tcpQuickAck]]`tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`trafficClass`|`Number (int)`|-
 |[[trustAll]]`trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-

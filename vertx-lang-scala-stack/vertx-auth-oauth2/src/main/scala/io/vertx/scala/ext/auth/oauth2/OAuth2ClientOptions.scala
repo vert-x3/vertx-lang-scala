@@ -57,6 +57,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getAlpnVersions: scala.collection.mutable.Buffer[io.vertx.core.http.HttpVersion] = {
     asJava.getAlpnVersions().asScala.map(x => x)
   }
+
+  /**
+    * Get the Oauth2 authorization resource path. e.g.: /oauth/authorize
+    */
   def setAuthorizationPath(value: String) = {
     asJava.setAuthorizationPath(value)
     this
@@ -64,6 +68,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getAuthorizationPath: String = {
     asJava.getAuthorizationPath().asInstanceOf[String]
   }
+
+  /**
+    * Set the provider client id
+    */
   def setClientID(value: String) = {
     asJava.setClientID(value)
     this
@@ -71,6 +79,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getClientID: String = {
     asJava.getClientID().asInstanceOf[String]
   }
+
+  /**
+    * Set the provider client secret
+    */
   def setClientSecret(value: String) = {
     asJava.setClientSecret(value)
     this
@@ -78,6 +90,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getClientSecret: String = {
     asJava.getClientSecret().asInstanceOf[String]
   }
+
+  /**
+    * Override the HTTP form field name for client secret
+    */
   def setClientSecretParameterName(value: String) = {
     asJava.setClientSecretParameterName(value)
     this
@@ -141,6 +157,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
+
+  /**
+    * Set extra parameters to be sent to the provider on each request
+    */
   def setExtraParameters(value: io.vertx.core.json.JsonObject) = {
     asJava.setExtraParameters(value)
     this
@@ -155,6 +175,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isForceSni: Boolean = {
     asJava.isForceSni().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set custom headers to be sent with every request to the provider
+    */
   def setHeaders(value: io.vertx.core.json.JsonObject) = {
     asJava.setHeaders(value)
     this
@@ -204,6 +228,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getInitialSettings: Http2Settings = {
     Http2Settings(asJava.getInitialSettings())
   }
+
+  /**
+    * Set the provider token introspection resource path
+    */
   def setIntrospectionPath(value: String) = {
     asJava.setIntrospectionPath(value)
     this
@@ -218,6 +246,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
     JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
   }
+
+  /**
+    * Signal that this provider tokens are in JWT format
+    */
   def setJwtToken(value: Boolean) = {
     asJava.setJwtToken(value)
     this
@@ -253,6 +285,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the provider logout path
+    */
   def setLogoutPath(value: String) = {
     asJava.setLogoutPath(value)
     this
@@ -386,6 +422,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getProxyOptions: ProxyOptions = {
     ProxyOptions(asJava.getProxyOptions())
   }
+
+  /**
+    * The provider PubSec key options
+    */
   def setPubSecKeyOptions(value: PubSecKeyOptions) = {
     asJava.setPubSecKeyOptions(value.asJava)
     this
@@ -404,6 +444,17 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Set the Oauth2 revocation resource path. e.g.: /oauth/revoke
+    */
   def setRevocationPath(value: String) = {
     asJava.setRevocationPath(value)
     this
@@ -411,6 +462,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getRevocationPath: String = {
     asJava.getRevocationPath().asInstanceOf[String]
   }
+
+  /**
+    * Set the provider scope separator
+    */
   def setScopeSeparator(value: String) = {
     asJava.setScopeSeparator(value)
     this
@@ -432,6 +487,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isSendUnmaskedFrames: Boolean = {
     asJava.isSendUnmaskedFrames().asInstanceOf[Boolean]
   }
+
+  /**
+    * Root URL for the provider
+    */
   def setSite(value: String) = {
     asJava.setSite(value)
     this
@@ -453,6 +512,20 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
   override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -467,6 +540,17 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Get the Oauth2 token resource path. e.g.: /oauth/token
+    */
   def setTokenPath(value: String) = {
     asJava.setTokenPath(value)
     this
@@ -509,6 +593,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
+
+  /**
+    * Flag to use HTTP basic auth header with client id, client secret.
+    */
   def setUseBasicAuthorizationHeader(value: Boolean) = {
     asJava.setUseBasicAuthorizationHeader(value)
     this
@@ -523,6 +611,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def isUsePooledBuffers: Boolean = {
     asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set a custom user agent to use when communicating to a provider
+    */
   def setUserAgent(value: String) = {
     asJava.setUserAgent(value)
     this
@@ -530,6 +622,21 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   def getUserAgent: String = {
     asJava.getUserAgent().asInstanceOf[String]
   }
+
+  /**
+    * Set custom parameters to be sent during the userInfo resource request
+    */
+  def setUserInfoParameters(value: io.vertx.core.json.JsonObject) = {
+    asJava.setUserInfoParameters(value)
+    this
+  }
+  def getUserInfoParameters: io.vertx.core.json.JsonObject = {
+    asJava.getUserInfoParameters()
+  }
+
+  /**
+    * Set the provider userInfo resource path
+    */
   def setUserInfoPath(value: String) = {
     asJava.setUserInfoPath(value)
     this

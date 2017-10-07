@@ -22,6 +22,7 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
+import io.vertx.scala.core.dns.DnsClientOptions
 import io.vertx.scala.core.net.NetClient
 import io.vertx.core.{DeploymentOptions => JDeploymentOptions}
 import io.vertx.scala.core.eventbus.EventBus
@@ -31,6 +32,7 @@ import io.vertx.core.http.{HttpServerOptions => JHttpServerOptions}
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.http.HttpServerOptions
 import io.vertx.core.datagram.{DatagramSocket => JDatagramSocket}
+import io.vertx.core.dns.{DnsClientOptions => JDnsClientOptions}
 import io.vertx.core.dns.{DnsClient => JDnsClient}
 import io.vertx.scala.core.http.HttpServer
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
@@ -85,12 +87,13 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * Please see the user manual for more detailed usage information.
   */
 class Vertx(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
   private var cached_0: Option[FileSystem] = None
   private var cached_1: Option[EventBus] = None
   private var cached_2: Option[SharedData] = None
+  private var cached_3: Option[Boolean] = None
 
   /**
     * Get the filesystem object. There is a single instance of FileSystem per Vertx instance.
@@ -129,7 +132,18 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
-    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
+    * @return wether the native transport is used
+    */
+  def isNativeTransportEnabled(): Boolean = {
+    if (cached_3 == None) {
+      val tmp = asJava.asInstanceOf[JVertx].isNativeTransportEnabled()
+      cached_3 = Some(tmp.asInstanceOf[Boolean])
+    }
+    cached_3.get
+  }
+
+  /**
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on [[io.vertx.scala.core.Context#exceptionHandler]] at creation.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
@@ -247,6 +261,15 @@ class Vertx(private val _asJava: Object)
     */
   def createDnsClient(port: Int, host: String): DnsClient = {
     DnsClient(asJava.asInstanceOf[JVertx].createDnsClient(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create a DNS client to connect to a DNS server
+    * @param options the client optionssee <a href="../../../../../../cheatsheet/DnsClientOptions.html">DnsClientOptions</a>
+    * @return the DNS client
+    */
+  def createDnsClient(options: DnsClientOptions): DnsClient = {
+    DnsClient(asJava.asInstanceOf[JVertx].createDnsClient(options.asJava))
   }
 
   /**

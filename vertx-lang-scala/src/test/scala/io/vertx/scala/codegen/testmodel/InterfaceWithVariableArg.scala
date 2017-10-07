@@ -25,7 +25,7 @@ import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterfa
 /**
   */
 class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Object)
-    extends GenericRefedInterface[U](_asJava)  {
+    extends GenericRefedInterface[U](_asJava)   {
 
 
   override def setValue(value: U): GenericRefedInterface[U] = {

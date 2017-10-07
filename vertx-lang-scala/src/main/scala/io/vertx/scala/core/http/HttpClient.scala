@@ -63,7 +63,7 @@ import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
   * The client is designed to be reused between requests.
   */
 class HttpClient(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
 
@@ -498,6 +498,22 @@ class HttpClient(private val _asJava: Object)
     */
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    this
+  }
+
+  /**
+    * Connect a WebSocket with the specified absolute url, with the specified headers, using
+    * the specified version of WebSockets, and the specified websocket sub protocols.
+    * @param url the absolute url
+    * @param headers the headers
+    * @param version the websocket version
+    * @param subProtocols the subprotocols to use
+    * @param wsConnect handler that will be called with the websocket when connected
+    * @param failureHandler handler that will be called if websocket connection fails
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketAbs(url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].websocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
     this
   }
 
@@ -1554,6 +1570,19 @@ class HttpClient(private val _asJava: Object)
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
+  }
+
+  /**
+    * Create a WebSocket stream with the specified absolute url, the specified headers, using the specified version of WebSockets,
+    * and the specified websocket sub protocols.
+    * @param url the absolute url
+    * @param headers the headers
+    * @param version the websocket version
+    * @param subProtocols the subprotocols to use
+    * @return a reference to this, so the API can be used fluently
+    */
+  def websocketStreamAbs(url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
+    ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStreamAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
   }
 
   /**

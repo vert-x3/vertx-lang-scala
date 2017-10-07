@@ -20,7 +20,6 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.stomp.{StompServer => JStompServer}
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.stomp.{DestinationFactory => JDestinationFactory}
 import io.vertx.ext.stomp.{Destination => JDestination}
@@ -30,8 +29,10 @@ import scala.collection.JavaConverters._
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.stomp.{Frame => JFrame}
+import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.AsyncResult
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
 import io.vertx.core.Handler
@@ -182,14 +183,14 @@ class StompServerHandler(private val _asJava: Object)
   /**
     * Called when the client connects to a server requiring authentication. It invokes the  configured
     * using [[io.vertx.scala.ext.stomp.StompServerHandler#authProvider]].
-    * @param server the STOMP server.
+    * @param connection server connection that contains session ID
     * @param login the login
     * @param passcode the password
     * @param handler handler receiving the authentication result
     * @return the current StompServerHandler
     */
-  def onAuthenticationRequest(server: StompServer, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+  def onAuthenticationRequest(connection: StompServerConnection, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
+    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(connection.asJava.asInstanceOf[JStompServerConnection], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
@@ -299,6 +300,15 @@ class StompServerHandler(private val _asJava: Object)
   }
 
   /**
+    * Provides for authorization matches on a destination level, this will return the User created by the .
+    * @param session session ID for the server connection.
+    * @return null if not authenticated.
+    */
+  def getUserBySession(session: String): User = {
+    User(asJava.asInstanceOf[JStompServerHandler].getUserBySession(session.asInstanceOf[java.lang.String]))
+  }
+
+  /**
     * @return the list of destination managed by the STOMP server. Don't forget the STOMP interprets destination as opaque Strings.
     */
   def getDestinations(): scala.collection.mutable.Buffer[Destination] = {
@@ -327,9 +337,9 @@ class StompServerHandler(private val _asJava: Object)
  /**
    * Like [[onAuthenticationRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def onAuthenticationRequestFuture(server: StompServer, login: String, passcode: String): scala.concurrent.Future[Boolean] = {
+  def onAuthenticationRequestFuture(connection: StompServerConnection, login: String, passcode: String): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
-    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(server.asJava.asInstanceOf[JStompServer], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(connection.asJava.asInstanceOf[JStompServerConnection], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

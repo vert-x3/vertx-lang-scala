@@ -152,6 +152,14 @@ class Cookie(private val _asJava: Object) {
     asJava.asInstanceOf[JCookie].setChanged(changed.asInstanceOf[java.lang.Boolean])
   }
 
+  /**
+    * Has this Cookie been sent from the User Agent (the browser)? or was created during the executing on the request.
+    * @return true if the cookie comes from the User Agent.
+    */
+  def isFromUserAgent(): Boolean = {
+    asJava.asInstanceOf[JCookie].isFromUserAgent().asInstanceOf[Boolean]
+  }
+
 }
 
 object Cookie {

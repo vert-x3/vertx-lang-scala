@@ -39,7 +39,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * [[io.vertx.scala.core.eventbus.MessageConsumer#handler]] with a null value..
   */
 class MessageConsumer[T: TypeTag](private val _asJava: Object)
-    extends  ReadStream[Message[T]] {
+    extends  ReadStream[Message[T]]  {
 
   def asJava = _asJava
 

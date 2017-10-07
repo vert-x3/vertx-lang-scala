@@ -26,6 +26,7 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 
@@ -33,7 +34,7 @@ import io.vertx.core.Handler
   * Represents a TCP server
   */
 class NetServer(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
 
@@ -109,6 +110,41 @@ class NetServer(private val _asJava: Object)
     */
   def listen(port: Int, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    this
+  }
+
+  /**
+    * Start listening on the specified local address, ignoring port and host configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
+    * creating the server.
+    * 
+    * The server may not be listening until some time after the call to listen has returned.
+    * @param localAddress the local address to listen on
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(localAddress: SocketAddress): NetServer = {
+    asJava.asInstanceOf[JNetServer].listen(localAddress.asJava.asInstanceOf[JSocketAddress])
+    this
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.net.NetServer#listen]] but providing a handler that will be notified when the server is listening, or fails.
+    * @param localAddress the local address to listen on
+    * @param listenHandler handler that will be notified when listening or failed
+    * @return a reference to this, so the API can be used fluently
+    */
+  def listen(localAddress: SocketAddress, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
+    asJava.asInstanceOf[JNetServer].listen(localAddress.asJava.asInstanceOf[JSocketAddress], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    this
+  }
+
+  /**
+    * Set an exception handler called for socket errors happening before the connection
+    * is passed to the [[io.vertx.scala.core.net.NetServer#connectHandler]], e.g during the TLS handshake.
+    * @param handler the handler to set
+    * @return a reference to this, so the API can be used fluently
+    */
+  def exceptionHandler(handler: Handler[Throwable]): NetServer = {
+    asJava.asInstanceOf[JNetServer].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
@@ -189,6 +225,15 @@ class NetServer(private val _asJava: Object)
   def listenFuture(port: Int): scala.concurrent.Future[NetServer] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
     asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def listenFuture(localAddress: SocketAddress): scala.concurrent.Future[NetServer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JNetServer, NetServer](x => NetServer(x))
+    asJava.asInstanceOf[JNetServer].listen(localAddress.asJava.asInstanceOf[JSocketAddress], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

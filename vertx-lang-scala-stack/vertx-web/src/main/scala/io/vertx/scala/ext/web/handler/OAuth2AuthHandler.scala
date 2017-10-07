@@ -39,7 +39,8 @@ import io.vertx.core.Handler
   * An auth handler that provides OAuth2 Authentication support. This handler is suitable for AuthCode flows.
   */
 class OAuth2AuthHandler(private val _asJava: Object)
-    extends  AuthHandler {
+    extends  AuthHandler 
+    with io.vertx.core.Handler[RoutingContext]  {
 
   def asJava = _asJava
 
@@ -137,6 +138,17 @@ object OAuth2AuthHandler {
     */
   def create(authProvider: OAuth2Auth, callbackURL: String): OAuth2AuthHandler = {
     OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth], callbackURL.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+    * Create a OAuth2 auth handler without host pinning.
+    * Most providers will not look to the redirect url but always redirect to
+    * the preconfigured callback. So this factory does not provide a callback url.
+    * @param authProvider the auth provider to use
+    * @return the auth handler
+    */
+  def create(authProvider: OAuth2Auth): OAuth2AuthHandler = {
+    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth]))
   }
 
 }

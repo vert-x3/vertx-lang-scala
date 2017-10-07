@@ -19,7 +19,9 @@ package io.vertx.scala.ext.web.handler.sockjs
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.bridge.PermittedOptions
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
+import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
 
 /**
   * Options for configuring the event bus bridge.

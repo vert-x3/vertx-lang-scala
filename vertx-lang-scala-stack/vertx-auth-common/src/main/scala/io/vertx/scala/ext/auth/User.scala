@@ -41,6 +41,13 @@ class User(private val _asJava: Object) {
     * @param resultHandler handler that will be called with an io.vertx.lang.scala.AsyncResult containing the value `true` if the they has the authority or `false` otherwise.
     * @return the User to enable fluent use
     */
+  def isAuthorized(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
+    asJava.asInstanceOf[JUser].isAuthorized(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    this
+  }
+
+  /**
+    */
   def isAuthorised(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
     asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
@@ -77,6 +84,15 @@ class User(private val _asJava: Object) {
     */
   def setAuthProvider(authProvider: AuthProvider): Unit = {
     asJava.asInstanceOf[JUser].setAuthProvider(authProvider.asJava.asInstanceOf[JAuthProvider])
+  }
+
+ /**
+   * Like [[isAuthorized]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def isAuthorizedFuture(authority: String): scala.concurrent.Future[Boolean] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
+    asJava.asInstanceOf[JUser].isAuthorized(authority.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
   }
 
  /**

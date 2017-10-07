@@ -2572,6 +2572,37 @@ class RedisClient(private val _asJava: Object) {
   }
 
   /**
+    * Delete a key asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
+    * @param key Key to delete
+    * @param handler Handler for the result of this call.
+    */
+  def unlink(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].unlink(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
+    * Delete multiple keys asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
+    * @param keys List of keys to delete
+    * @param handler Handler for the result of this call.
+    */
+  def unlinkMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
+    * Swaps two Redis databases
+    * @param index1 index of first database to swap
+    * @param index2 index of second database to swap
+    * @param handler Handler for the result of this call.
+    */
+  def swapdb(index1: Int, index2: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
     * Close the client - when it is fully closed the handler will be called.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
@@ -4716,6 +4747,33 @@ class RedisClient(private val _asJava: Object) {
   def bitfieldWithOverflowFuture(key: String, commands: BitFieldOptions, overflow: io.vertx.redis.op.BitFieldOverflowOptions): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
     asJava.asInstanceOf[JRedisClient].bitfieldWithOverflow(key.asInstanceOf[java.lang.String], commands.asJava, overflow, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[unlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def unlinkFuture(key: String): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].unlink(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[unlinkMany]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def unlinkManyFuture(keys: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[swapdb]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def swapdbFuture(index1: Int, index2: Int): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisClient].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

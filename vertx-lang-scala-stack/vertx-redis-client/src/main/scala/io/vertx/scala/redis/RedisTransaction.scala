@@ -742,8 +742,8 @@ class RedisTransaction(private val _asJava: Object) {
     * @param key Key string
     * @param handler Handler for the result of this call.
     */
-  def getBinary(key: String, handler: Handler[AsyncResult[String]]): RedisTransaction = {
-    asJava.asInstanceOf[JRedisTransaction].getBinary(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def getBinary(key: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): RedisTransaction = {
+    asJava.asInstanceOf[JRedisTransaction].getBinary(key.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
     this
   }
 
@@ -2537,6 +2537,36 @@ class RedisTransaction(private val _asJava: Object) {
   }
 
   /**
+    * Delete a key asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
+    * @param key Key string
+    */
+  def unlink(key: String, handler: Handler[AsyncResult[String]]): RedisTransaction = {
+    asJava.asInstanceOf[JRedisTransaction].unlink(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+    * Delete multiple keys asynchronously in another thread. Otherwise it is just as DEL, but non blocking.
+    * @param keys List of keys to delete
+    * @param handler Handler for the result of this call.
+    */
+  def unlinkMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[String]]): RedisTransaction = {
+    asJava.asInstanceOf[JRedisTransaction].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+    * Swaps two Redis databases
+    * @param index1 index of first database to swap
+    * @param index2 index of second database to swap
+    * @param handler Handler for the result of this call.
+    */
+  def swapdb(index1: Int, index2: Int, handler: Handler[AsyncResult[String]]): RedisTransaction = {
+    asJava.asInstanceOf[JRedisTransaction].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
     * Close the client - when it is fully closed the handler will be called.
     */
   def close(handler: Handler[AsyncResult[Unit]]): Unit = {
@@ -3176,8 +3206,8 @@ class RedisTransaction(private val _asJava: Object) {
  /**
    * Like [[getBinary]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def getBinaryFuture(key: String): scala.concurrent.Future[String] = {
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+  def getBinaryFuture(key: String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Buffer, io.vertx.core.buffer.Buffer](x => x)
     asJava.asInstanceOf[JRedisTransaction].getBinary(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -4655,6 +4685,33 @@ class RedisTransaction(private val _asJava: Object) {
   def georadiusbymemberWithOptionsFuture(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions): scala.concurrent.Future[String] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
     asJava.asInstanceOf[JRedisTransaction].georadiusbymemberWithOptions(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[unlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def unlinkFuture(key: String): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisTransaction].unlink(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[unlinkMany]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def unlinkManyFuture(keys: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisTransaction].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[swapdb]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def swapdbFuture(index1: Int, index2: Int): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JRedisTransaction].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

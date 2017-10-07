@@ -37,8 +37,17 @@ import io.vertx.core.Handler
   * Factory interface for creating JWT based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
 class JWTAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)  {
+    extends AuthProvider(_asJava)   {
 
+
+  /**
+    * Generate a new JWT token.
+    * @param claims Json with user defined claims for a list of official claims
+    * @return JWT encoded token
+    */
+  def generateToken(claims: io.vertx.core.json.JsonObject): String = {
+    asJava.asInstanceOf[JJWTAuth].generateToken(claims).asInstanceOf[String]
+  }
 
   /**
     * Generate a new JWT token.

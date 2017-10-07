@@ -21,7 +21,9 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
+import io.vertx.ext.sql.{SQLOptions => JSQLOptions}
 import io.vertx.ext.sql.{ResultSet => JResultSet}
+import io.vertx.ext.sql.{SQLOperations => JSQLOperations}
 import io.vertx.ext.sql.TransactionIsolation
 import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
 import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
@@ -33,9 +35,52 @@ import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 /**
   * Represents a connection to a SQL database
   */
-class SQLConnection(private val _asJava: Object) {
+class SQLConnection(private val _asJava: Object)
+    extends  SQLOperations  {
 
   def asJava = _asJava
+
+  /**
+    * Execute a one shot SQL statement that returns a single SQL row. This method will reduce the boilerplate code by
+    * getting a connection from the pool (this object) and return it back after the execution. Only the first result
+    * from the result set is returned.
+    * @param sql the statement to execute
+    * @param handler the result handler
+    * @return self
+    */
+  override def querySingle(sql: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): SQLOperations = {
+    asJava.asInstanceOf[JSQLConnection].querySingle(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    this
+  }
+
+  /**
+    * Execute a one shot SQL statement with arguments that returns a single SQL row. This method will reduce the
+    * boilerplate code by getting a connection from the pool (this object) and return it back after the execution.
+    * Only the first result from the result set is returned.
+    * @param sql the statement to execute
+    * @param arguments the arguments
+    * @param handler the result handler
+    * @return self
+    */
+  override def querySingleWithParams(sql: String, arguments: io.vertx.core.json.JsonArray, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): SQLOperations = {
+    asJava.asInstanceOf[JSQLConnection].querySingleWithParams(sql.asInstanceOf[java.lang.String], arguments, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    this
+  }
+
+  /**
+    * Sets the desired options to be applied to the current connection when statements are executed.
+    *
+    * The options are not applied globally but applicable to the current connection. For example changing the transaction
+    * isolation level will only affect statements run on this connection and not future or current connections acquired
+    * from the connection pool.
+    *
+    * This method is not async in nature since the apply will only happen at the moment a query is run.
+    * @param options the options to modify the unwrapped connection.see <a href="../../../../../../../cheatsheet/SQLOptions.html">SQLOptions</a>
+    */
+  def setOptions(options: SQLOptions): SQLConnection = {
+    asJava.asInstanceOf[JSQLConnection].setOptions(options.asJava)
+    this
+  }
 
   /**
     * Sets the auto commit flag for this connection. True by default.
@@ -62,7 +107,7 @@ class SQLConnection(private val _asJava: Object) {
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
     * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
     */
-  def query(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
+  override def query(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].query(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
     this
   }
@@ -83,7 +128,7 @@ class SQLConnection(private val _asJava: Object) {
     * @param params these are the parameters to fill the statement.
     * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
     */
-  def queryWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
+  override def queryWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].queryWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
     this
   }
@@ -105,7 +150,7 @@ class SQLConnection(private val _asJava: Object) {
     * @param sql the SQL to execute. For example <code>INSERT INTO table ...</code>
     * @param resultHandler the handler which is called once the operation completes.
     */
-  def update(sql: String, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLConnection = {
+  override def update(sql: String, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].update(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))})
     this
   }
@@ -117,7 +162,7 @@ class SQLConnection(private val _asJava: Object) {
     * @param params these are the parameters to fill the statement.
     * @param resultHandler the handler which is called once the operation completes.
     */
-  def updateWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLConnection = {
+  override def updateWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].updateWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))})
     this
   }
@@ -254,6 +299,24 @@ class SQLConnection(private val _asJava: Object) {
   }
 
  /**
+   * Like [[querySingle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def querySingleFuture(sql: String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JSQLConnection].querySingle(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[querySingleWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def querySingleWithParamsFuture(sql: String, arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    asJava.asInstanceOf[JSQLConnection].querySingleWithParams(sql.asInstanceOf[java.lang.String], arguments, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
    * Like [[setAutoCommit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def setAutoCommitFuture(autoCommit: Boolean): scala.concurrent.Future[Unit] = {
@@ -274,7 +337,7 @@ class SQLConnection(private val _asJava: Object) {
  /**
    * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def queryFuture(sql: String): scala.concurrent.Future[ResultSet] = {
+  override def queryFuture(sql: String): scala.concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
     asJava.asInstanceOf[JSQLConnection].query(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -292,7 +355,7 @@ class SQLConnection(private val _asJava: Object) {
  /**
    * Like [[queryWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def queryWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
+  override def queryWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
     asJava.asInstanceOf[JSQLConnection].queryWithParams(sql.asInstanceOf[java.lang.String], params, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -310,7 +373,7 @@ class SQLConnection(private val _asJava: Object) {
  /**
    * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def updateFuture(sql: String): scala.concurrent.Future[UpdateResult] = {
+  override def updateFuture(sql: String): scala.concurrent.Future[UpdateResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUpdateResult, UpdateResult](x => UpdateResult(x))
     asJava.asInstanceOf[JSQLConnection].update(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -319,7 +382,7 @@ class SQLConnection(private val _asJava: Object) {
  /**
    * Like [[updateWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def updateWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[UpdateResult] = {
+  override def updateWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[UpdateResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUpdateResult, UpdateResult](x => UpdateResult(x))
     asJava.asInstanceOf[JSQLConnection].updateWithParams(sql.asInstanceOf[java.lang.String], params, promiseAndHandler._1)
     promiseAndHandler._2.future

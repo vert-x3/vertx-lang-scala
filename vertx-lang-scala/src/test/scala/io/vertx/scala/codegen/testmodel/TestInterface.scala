@@ -41,7 +41,7 @@ import io.vertx.codegen.testmodel.TestGenEnum
 /**
   */
 class TestInterface(private val _asJava: Object)
-    extends SuperInterface1(_asJava) with SuperInterface2 {
+    extends SuperInterface1(_asJava) with SuperInterface2  {
 
   private var cached_0: Option[RefedInterface1] = None
   private var cached_1: Option[Int] = None
