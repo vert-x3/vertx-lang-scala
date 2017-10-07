@@ -39,7 +39,7 @@ import io.vertx.kafka.client.producer.{KafkaProducerRecord => JKafkaProducerReco
   * The  provides global control over writing a record.
   */
 class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object)
-    extends  WriteStream[KafkaProducerRecord[K, V]] {
+    extends  WriteStream[KafkaProducerRecord[K, V]]  {
 
   def asJava = _asJava
 

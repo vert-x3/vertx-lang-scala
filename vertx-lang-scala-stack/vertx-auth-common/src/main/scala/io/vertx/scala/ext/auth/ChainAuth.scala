@@ -32,7 +32,7 @@ import io.vertx.core.Handler
   * several providers, for example, database and fallback to passwd file.
   */
 class ChainAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)  {
+    extends AuthProvider(_asJava)   {
 
 
   /**

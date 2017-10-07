@@ -30,7 +30,7 @@ import io.vertx.core.Handler
   * to a [[io.vertx.scala.core.streams.WriteStream]].
   */
 trait ReadStream[T]
-    extends  StreamBase {
+    extends  StreamBase  {
 
   def asJava: java.lang.Object
 

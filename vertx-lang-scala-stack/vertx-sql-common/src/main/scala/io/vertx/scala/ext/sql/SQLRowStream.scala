@@ -37,7 +37,7 @@ import io.vertx.core.Handler
   * The interface is minimal in order to support all SQL clients not just JDBC.
   */
 class SQLRowStream(private val _asJava: Object)
-    extends  ReadStream[io.vertx.core.json.JsonArray] {
+    extends  ReadStream[io.vertx.core.json.JsonArray]  {
 
   def asJava = _asJava
 

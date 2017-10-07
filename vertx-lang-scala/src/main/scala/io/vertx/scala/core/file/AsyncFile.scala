@@ -39,7 +39,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   */
 class AsyncFile(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.buffer.Buffer] 
-    with WriteStream[io.vertx.core.buffer.Buffer] {
+    with WriteStream[io.vertx.core.buffer.Buffer]  {
 
   def asJava = _asJava
 

@@ -29,11 +29,11 @@ import scala.collection.JavaConverters._
   * Delivers a more direct access to the individual elements of the header it represents
   */
 class LanguageHeader(private val _asJava: Object)
-    extends Locale(_asJava) with ParsedHeaderValue {
+    extends Locale(_asJava) with ParsedHeaderValue  {
 
 
   /**
-    * Contains the raw value that was received from the user agent 
+    * Contains the raw value that was received from the user agent
     */
   override def rawValue(): String = {
     asJava.asInstanceOf[JLanguageHeader].rawValue().asInstanceOf[String]
@@ -49,7 +49,7 @@ class LanguageHeader(private val _asJava: Object)
 
   /**
     * Holds the weight specified in the "q" parameter of the header.<br>
-    * If the parameter is not specified, 1.0 is assumed according to 
+    * If the parameter is not specified, 1.0 is assumed according to
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
@@ -89,7 +89,7 @@ class LanguageHeader(private val _asJava: Object)
   }
 
   /**
-    * Test if this header is matched by matchTry header 
+    * Test if this header is matched by matchTry header
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
@@ -105,7 +105,7 @@ class LanguageHeader(private val _asJava: Object)
   }
 
   /**
-    * The tag of the language as specified by 
+    * The tag of the language as specified by
     * <a href="https://tools.ietf.org/html/rfc7231#section-3.1.3.1">rfc7231#section-3.1.3.1</a>.<br>
     * Equivalent to 
     * @return The language tag
@@ -115,7 +115,7 @@ class LanguageHeader(private val _asJava: Object)
   }
 
   /**
-    * The subtag of the language as specified by 
+    * The subtag of the language as specified by
     * <a href="https://tools.ietf.org/html/rfc7231#section-3.1.3.1">rfc7231#section-3.1.3.1</a>.<br>
     * Equivalent to 
     * @return The language subtag

@@ -114,6 +114,14 @@ trait TCPSSLOptions
   def isReuseAddress: Boolean 
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  def setReusePort(value: Boolean): TCPSSLOptions
+  def isReusePort: Boolean 
+
+  /**
     * Set the TCP send buffer size
     */
   def setSendBufferSize(value: Int): TCPSSLOptions
@@ -132,6 +140,18 @@ trait TCPSSLOptions
   def isSsl: Boolean 
 
   /**
+    * Enable the `TCP_CORK` option - only with linux native transport.
+    */
+  def setTcpCork(value: Boolean): TCPSSLOptions
+  def isTcpCork: Boolean 
+
+  /**
+    * Enable the `TCP_FASTOPEN` option - only with linux native transport.
+    */
+  def setTcpFastOpen(value: Boolean): TCPSSLOptions
+  def isTcpFastOpen: Boolean 
+
+  /**
     * Set whether TCP keep alive is enabled
     */
   def setTcpKeepAlive(value: Boolean): TCPSSLOptions
@@ -142,6 +162,12 @@ trait TCPSSLOptions
     */
   def setTcpNoDelay(value: Boolean): TCPSSLOptions
   def isTcpNoDelay: Boolean 
+
+  /**
+    * Enable the `TCP_QUICKACK` option - only with linux native transport.
+    */
+  def setTcpQuickAck(value: Boolean): TCPSSLOptions
+  def isTcpQuickAck: Boolean 
 
   /**
     * Set the value of traffic class

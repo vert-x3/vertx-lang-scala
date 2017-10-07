@@ -237,6 +237,17 @@ class VertxOptions(private val _asJava: JVertxOptions) {
   }
 
   /**
+    * Set wether to prefer the native transport to the JDK transport.
+    */
+  def setPreferNativeTransport(value: Boolean) = {
+    asJava.setPreferNativeTransport(value)
+    this
+  }
+  def getPreferNativeTransport: Boolean = {
+    asJava.getPreferNativeTransport().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the quorum size to be used when HA is enabled.
     */
   def setQuorumSize(value: Int) = {

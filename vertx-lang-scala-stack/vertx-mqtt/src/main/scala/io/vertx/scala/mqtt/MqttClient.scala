@@ -44,21 +44,27 @@ class MqttClient(private val _asJava: Object) {
   def asJava = _asJava
 
   /**
-    * Connects to an MQTT server
+    * Connects to an MQTT server calling connectHandler after connection
+    * @param port port of the MQTT server
+    * @param host hostname/ip address of the MQTT server
+    * @param connectHandler handler called when the asynchronous connect call ends
     * @return current MQTT client instance
     */
-  def connect(): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].connect()
+  def connect(port: Int, host: String, connectHandler: Handler[AsyncResult[MqttConnAckMessage]]): MqttClient = {
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JMqttConnAckMessage] => connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))})
     this
   }
 
   /**
     * Connects to an MQTT server calling connectHandler after connection
+    * @param port port of the MQTT server
+    * @param host hostname/ip address of the MQTT server
+    * @param serverName the SNI server name
     * @param connectHandler handler called when the asynchronous connect call ends
     * @return current MQTT client instance
     */
-  def connect(connectHandler: Handler[AsyncResult[MqttConnAckMessage]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].connect({x: AsyncResult[JMqttConnAckMessage] => connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))})
+  def connect(port: Int, host: String, serverName: String, connectHandler: Handler[AsyncResult[MqttConnAckMessage]]): MqttClient = {
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JMqttConnAckMessage] => connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))})
     this
   }
 
@@ -112,11 +118,11 @@ class MqttClient(private val _asJava: Object) {
 
   /**
     * Sets handler which will be called each time publish is completed
-    * @param publishCompleteHandler handler called with the packetId
+    * @param publishCompletionHandler handler called with the packetId
     * @return current MQTT client instance
     */
-  def publishCompleteHandler(publishCompleteHandler: Handler[Int]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].publishCompleteHandler({x: java.lang.Integer => publishCompleteHandler.handle(x.asInstanceOf[Int])})
+  def publishCompletionHandler(publishCompletionHandler: Handler[Int]): MqttClient = {
+    asJava.asInstanceOf[JMqttClient].publishCompletionHandler({x: java.lang.Integer => publishCompletionHandler.handle(x.asInstanceOf[Int])})
     this
   }
 
@@ -132,11 +138,11 @@ class MqttClient(private val _asJava: Object) {
 
   /**
     * Sets handler which will be called after SUBACK packet receiving
-    * @param subscribeCompleteHandler handler to call. List inside is a granted QoS array
+    * @param subscribeCompletionHandler handler to call. List inside is a granted QoS array
     * @return current MQTT client instance
     */
-  def subscribeCompleteHandler(subscribeCompleteHandler: Handler[MqttSubAckMessage]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].subscribeCompleteHandler({x: JMqttSubAckMessage => subscribeCompleteHandler.handle(MqttSubAckMessage(x))})
+  def subscribeCompletionHandler(subscribeCompletionHandler: Handler[MqttSubAckMessage]): MqttClient = {
+    asJava.asInstanceOf[JMqttClient].subscribeCompletionHandler({x: JMqttSubAckMessage => subscribeCompletionHandler.handle(MqttSubAckMessage(x))})
     this
   }
 
@@ -186,11 +192,11 @@ class MqttClient(private val _asJava: Object) {
 
   /**
     * Sets handler which will be called after UNSUBACK packet receiving
-    * @param unsubscribeCompleteHandler handler to call with the packetid
+    * @param unsubscribeCompletionHandler handler to call with the packetid
     * @return current MQTT client instance
     */
-  def unsubscribeCompleteHandler(unsubscribeCompleteHandler: Handler[Int]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].unsubscribeCompleteHandler({x: java.lang.Integer => unsubscribeCompleteHandler.handle(x.asInstanceOf[Int])})
+  def unsubscribeCompletionHandler(unsubscribeCompletionHandler: Handler[Int]): MqttClient = {
+    asJava.asInstanceOf[JMqttClient].unsubscribeCompletionHandler({x: java.lang.Integer => unsubscribeCompletionHandler.handle(x.asInstanceOf[Int])})
     this
   }
 
@@ -268,9 +274,18 @@ class MqttClient(private val _asJava: Object) {
  /**
    * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def connectFuture(): scala.concurrent.Future[MqttConnAckMessage] = {
+  def connectFuture(port: Int, host: String): scala.concurrent.Future[MqttConnAckMessage] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMqttConnAckMessage, MqttConnAckMessage](x => MqttConnAckMessage(x))
-    asJava.asInstanceOf[JMqttClient].connect(promiseAndHandler._1)
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def connectFuture(port: Int, host: String, serverName: String): scala.concurrent.Future[MqttConnAckMessage] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMqttConnAckMessage, MqttConnAckMessage](x => MqttConnAckMessage(x))
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

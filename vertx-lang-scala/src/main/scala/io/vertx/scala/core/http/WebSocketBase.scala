@@ -38,7 +38,7 @@ import io.vertx.scala.core.net.SocketAddress
   */
 trait WebSocketBase
     extends  ReadStream[io.vertx.core.buffer.Buffer] 
-    with WriteStream[io.vertx.core.buffer.Buffer] {
+    with WriteStream[io.vertx.core.buffer.Buffer]  {
 
   def asJava: java.lang.Object
 
@@ -91,6 +91,14 @@ trait WebSocketBase
   def textHandlerID(): String
 
   /**
+    * Returns the websocket sub protocol selected by the websocket handshake.
+    * <p/>
+    * On the server, the value will be `null` when the handler receives the websocket callback as the
+    * handshake will not be completed yet.
+    */
+  def subProtocol(): String
+
+  /**
     * Write a WebSocket frame to the connection
     * @param frame the frame to write
     * @return a reference to this, so the API can be used fluently
@@ -128,6 +136,33 @@ trait WebSocketBase
   def writeTextMessage(text: String): WebSocketBase
 
   /**
+    * Writes a ping to the connection. This will be written in a single frame. Ping frames may be at most 125 bytes (octets).
+    * 
+    * This method should not be used to write application data and should only be used for implementing a keep alive or
+    * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+    * 
+    * There is no pingHandler because RFC 6455 section 5.5.2 clearly states that the only response to a ping is a pong
+    * with identical contents.
+    * @param data the data to write, may be at most 125 bytes
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writePing(data: io.vertx.core.buffer.Buffer): WebSocketBase
+
+  /**
+    * Writes a pong to the connection. This will be written in a single frame. Pong frames may be at most 125 bytes (octets).
+    * 
+    * This method should not be used to write application data and should only be used for implementing a keep alive or
+    * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+    * 
+    * There is no need to manually write a Pong, as the server and client both handle responding to a ping with a pong
+    * automatically and this is exposed to users.RFC 6455 Section 5.5.3 states that pongs may be sent unsolicited in order
+    * to implement a one way heartbeat.
+    * @param data the data to write, may be at most 125 bytes
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writePong(data: io.vertx.core.buffer.Buffer): WebSocketBase
+
+  /**
     * Set a close handler. This will be called when the WebSocket is closed.
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
@@ -143,7 +178,7 @@ trait WebSocketBase
 
   /**
     * Set a text message handler on the connection. This handler will be called similar to the
-    * , but the buffer will be converted to a String first
+    * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
@@ -157,6 +192,21 @@ trait WebSocketBase
     * @return a reference to this, so the API can be used fluently
     */
   def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase
+
+  /**
+    * Set a pong message handler on the connection.  This handler will be invoked every time a pong message is received
+    * on the server, and can be used by both clients and servers since the RFC 6455 Sections 5.5.2 and 5.5.3 do not
+    * specify whether the client or server sends a ping.
+    * 
+    * Pong frames may be at most 125 bytes (octets).
+    * 
+    * There is no ping handler since pings should immediately be responded to with a pong with identical content
+    * 
+    * Pong frames may be received unsolicited.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def pongHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase
 
   /**
     * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
@@ -308,6 +358,39 @@ object WebSocketBase {
   }
 
   /**
+    * Writes a ping to the connection. This will be written in a single frame. Ping frames may be at most 125 bytes (octets).
+    * 
+    * This method should not be used to write application data and should only be used for implementing a keep alive or
+    * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+    * 
+    * There is no pingHandler because RFC 6455 section 5.5.2 clearly states that the only response to a ping is a pong
+    * with identical contents.
+    * @param data the data to write, may be at most 125 bytes
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writePing(data: io.vertx.core.buffer.Buffer): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writePing(data)
+    this
+  }
+
+  /**
+    * Writes a pong to the connection. This will be written in a single frame. Pong frames may be at most 125 bytes (octets).
+    * 
+    * This method should not be used to write application data and should only be used for implementing a keep alive or
+    * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+    * 
+    * There is no need to manually write a Pong, as the server and client both handle responding to a ping with a pong
+    * automatically and this is exposed to users.RFC 6455 Section 5.5.3 states that pongs may be sent unsolicited in order
+    * to implement a one way heartbeat.
+    * @param data the data to write, may be at most 125 bytes
+    * @return a reference to this, so the API can be used fluently
+    */
+  def writePong(data: io.vertx.core.buffer.Buffer): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].writePong(data)
+    this
+  }
+
+  /**
     * Set a close handler. This will be called when the WebSocket is closed.
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
@@ -329,7 +412,7 @@ object WebSocketBase {
 
   /**
     * Set a text message handler on the connection. This handler will be called similar to the
-    * , but the buffer will be converted to a String first
+    * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
@@ -347,6 +430,24 @@ object WebSocketBase {
     */
   def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].binaryMessageHandler({x: Buffer => handler.handle(x)})
+    this
+  }
+
+  /**
+    * Set a pong message handler on the connection.  This handler will be invoked every time a pong message is received
+    * on the server, and can be used by both clients and servers since the RFC 6455 Sections 5.5.2 and 5.5.3 do not
+    * specify whether the client or server sends a ping.
+    * 
+    * Pong frames may be at most 125 bytes (octets).
+    * 
+    * There is no ping handler since pings should immediately be responded to with a pong with identical content
+    * 
+    * Pong frames may be received unsolicited.
+    * @param handler the handler
+    * @return a reference to this, so the API can be used fluently
+    */
+  def pongHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].pongHandler({x: Buffer => handler.handle(x)})
     this
   }
 
@@ -388,6 +489,16 @@ object WebSocketBase {
     */
   def textHandlerID(): String = {
     asJava.asInstanceOf[JWebSocketBase].textHandlerID().asInstanceOf[String]
+  }
+
+  /**
+    * Returns the websocket sub protocol selected by the websocket handshake.
+    * <p/>
+    * On the server, the value will be `null` when the handler receives the websocket callback as the
+    * handshake will not be completed yet.
+    */
+  def subProtocol(): String = {
+    asJava.asInstanceOf[JWebSocketBase].subProtocol().asInstanceOf[String]
   }
 
   /**

@@ -33,7 +33,7 @@ import io.vertx.core.{Vertx => JVertx}
   * A session store which stores sessions in a distributed map so they are available across the cluster.
   */
 class ClusteredSessionStore(private val _asJava: Object)
-    extends SessionStore(_asJava)  {
+    extends SessionStore(_asJava)   {
 
 
 }

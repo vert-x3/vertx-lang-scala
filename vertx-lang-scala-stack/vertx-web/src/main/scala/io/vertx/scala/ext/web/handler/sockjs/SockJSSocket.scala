@@ -46,7 +46,7 @@ import io.vertx.scala.core.net.SocketAddress
   */
 class SockJSSocket(private val _asJava: Object)
     extends  ReadStream[io.vertx.core.buffer.Buffer] 
-    with WriteStream[io.vertx.core.buffer.Buffer] {
+    with WriteStream[io.vertx.core.buffer.Buffer]  {
 
   def asJava = _asJava
 

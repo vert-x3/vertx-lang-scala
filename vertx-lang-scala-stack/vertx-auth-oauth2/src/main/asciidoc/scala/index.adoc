@@ -96,7 +96,7 @@ var authorization_uri = oauth2.authorizeURL(new io.vertx.core.json.JsonObject().
 
 var code = "xxxxxxxxxxxxxxxxxxxxxxxx"
 
-oauth2.getTokenFuture(new io.vertx.core.json.JsonObject().put("code", code).put("redirect_uri", "http://localhost:8080/callback")).onComplete{
+oauth2.authenticateFuture(new io.vertx.core.json.JsonObject().put("code", code).put("redirect_uri", "http://localhost:8080/callback")).onComplete{
   case Success(result) => {
     // error, the code provided is not valid
   }
@@ -138,7 +138,7 @@ var tokenConfig = new io.vertx.core.json.JsonObject().put("code", "<code>").put(
 
 // Callbacks
 // Save the access token
-oauth2.getTokenFuture(tokenConfig).onComplete{
+oauth2.authenticateFuture(tokenConfig).onComplete{
   case Success(result) => {
     System.err.println(s"Access Token Error: ${res.cause().getMessage()}")
   }
@@ -165,7 +165,7 @@ var tokenConfig = new io.vertx.core.json.JsonObject().put("username", "username"
 
 // Callbacks
 // Save the access token
-oauth2.getTokenFuture(tokenConfig).onComplete{
+oauth2.authenticateFuture(tokenConfig).onComplete{
   case Success(result) => {
     System.err.println(s"Access Token Error: ${res.cause().getMessage()}")
   }
@@ -198,7 +198,7 @@ var tokenConfig = new io.vertx.core.json.JsonObject()
 
 // Callbacks
 // Save the access token
-oauth2.getTokenFuture(tokenConfig).onComplete{
+oauth2.authenticateFuture(tokenConfig).onComplete{
   case Success(result) => {
     System.err.println(s"Access Token Error: ${res.cause().getMessage()}")
   }
@@ -278,7 +278,7 @@ var keycloakJson = new io.vertx.core.json.JsonObject().put("realm", "master").pu
 var oauth2 = KeycloakAuth.create(vertx, OAuth2FlowType.PASSWORD, keycloakJson)
 
 // first get a token (authenticate)
-oauth2.getTokenFuture(new io.vertx.core.json.JsonObject().put("username", "user").put("password", "secret")).onComplete{
+oauth2.authenticateFuture(new io.vertx.core.json.JsonObject().put("username", "user").put("password", "secret")).onComplete{
   case Success(result) => {
     // error handling...
   }

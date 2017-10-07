@@ -146,6 +146,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
   }
+  def setMaxFrameSize(value: Int) = {
+    asJava.setMaxFrameSize(value)
+    this
+  }
+  def getMaxFrameSize: Int = {
+    asJava.getMaxFrameSize().asInstanceOf[Int]
+  }
   def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
@@ -236,6 +243,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
+  def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
   def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -264,6 +278,20 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
+  def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+  def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
   def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -277,6 +305,13 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   }
   def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+  def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
   def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)

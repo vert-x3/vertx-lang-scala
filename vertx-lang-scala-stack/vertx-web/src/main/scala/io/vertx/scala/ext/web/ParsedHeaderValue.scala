@@ -27,7 +27,7 @@ trait ParsedHeaderValue {
   def asJava: java.lang.Object
 
   /**
-    * Contains the raw value that was received from the user agent 
+    * Contains the raw value that was received from the user agent
     */
   def rawValue(): String
 
@@ -39,7 +39,7 @@ trait ParsedHeaderValue {
 
   /**
     * Holds the weight specified in the "q" parameter of the header.<br>
-    * If the parameter is not specified, 1.0 is assumed according to 
+    * If the parameter is not specified, 1.0 is assumed according to
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
@@ -71,7 +71,7 @@ trait ParsedHeaderValue {
   def isPermitted(): Boolean
 
   /**
-    * Test if this header is matched by matchTry header 
+    * Test if this header is matched by matchTry header
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */
@@ -91,7 +91,7 @@ object ParsedHeaderValue {
       def asJava = _asJava
 
   /**
-    * Contains the raw value that was received from the user agent 
+    * Contains the raw value that was received from the user agent
     */
   def rawValue(): String = {
     asJava.asInstanceOf[JParsedHeaderValue].rawValue().asInstanceOf[String]
@@ -107,7 +107,7 @@ object ParsedHeaderValue {
 
   /**
     * Holds the weight specified in the "q" parameter of the header.<br>
-    * If the parameter is not specified, 1.0 is assumed according to 
+    * If the parameter is not specified, 1.0 is assumed according to
     * <a href="https://tools.ietf.org/html/rfc7231#section-5.3.1">rfc7231</a>
     * @return 
     */
@@ -147,7 +147,7 @@ object ParsedHeaderValue {
   }
 
   /**
-    * Test if this header is matched by matchTry header 
+    * Test if this header is matched by matchTry header
     * @param matchTry The header to be matched from
     * @return true if this header represents a subset of matchTry, otherwise, false
     */

@@ -21,6 +21,8 @@ import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
 import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
+import io.vertx.ext.auth.{SecretOptions => JSecretOptions}
+import io.vertx.scala.ext.auth.SecretOptions
 import io.vertx.scala.ext.auth.KeyStoreOptions
 import io.vertx.scala.ext.auth.PubSecKeyOptions
 import io.vertx.ext.auth.{KeyStoreOptions => JKeyStoreOptions}
@@ -79,6 +81,17 @@ class JWTAuthOptions(private val _asJava: JJWTAuthOptions) {
   def getKeyStore: KeyStoreOptions = {
     KeyStoreOptions(asJava.getKeyStore())
   }
+
+  /**
+    * Set the leeway in seconds
+    */
+  def setLeeway(value: Int) = {
+    asJava.setLeeway(value)
+    this
+  }
+  def getLeeway: Int = {
+    asJava.getLeeway().asInstanceOf[Int]
+  }
   def setPermissionsClaimKey(value: String) = {
     asJava.setPermissionsClaimKey(value)
     this
@@ -96,6 +109,17 @@ class JWTAuthOptions(private val _asJava: JJWTAuthOptions) {
   }
   def getPubSecKeys: scala.collection.mutable.Buffer[PubSecKeyOptions] = {
     asJava.getPubSecKeys().asScala.map(x => PubSecKeyOptions(x))
+  }
+  def addSecret(value: SecretOptions) = {
+    asJava.addSecret(value.asJava)
+    this
+  }
+  def setSecrets(value: scala.collection.mutable.Buffer[SecretOptions]) = {
+    asJava.setSecrets(value.map(_.asJava).asJava)
+    this
+  }
+  def getSecrets: scala.collection.mutable.Buffer[SecretOptions] = {
+    asJava.getSecrets().asScala.map(x => SecretOptions(x))
   }
 }
 

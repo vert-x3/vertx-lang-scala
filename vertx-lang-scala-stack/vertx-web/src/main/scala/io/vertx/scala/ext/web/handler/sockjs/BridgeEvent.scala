@@ -19,11 +19,13 @@ package io.vertx.scala.ext.web.handler.sockjs
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.ext.web.handler.sockjs.BridgeEventType
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.bridge.{BaseBridgeEvent => JBaseBridgeEvent}
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+import io.vertx.scala.ext.bridge.BaseBridgeEvent
 import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
+import io.vertx.ext.bridge.BridgeEventType
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.Future
 import io.vertx.core.AsyncResult
@@ -35,11 +37,10 @@ import io.vertx.core.Handler
   * Please consult the documentation for a full explanation.
   */
 class BridgeEvent(private val _asJava: Object)
-    extends Future[Boolean](_asJava)  {
+    extends BaseBridgeEvent(_asJava)   {
 
   private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
-  private var cached_1: Option[io.vertx.ext.web.handler.sockjs.BridgeEventType] = None
-  private var cached_2: Option[SockJSSocket] = None
+  private var cached_1: Option[SockJSSocket] = None
 
   override def completer(): Handler[AsyncResult[Boolean]] = {
     if (cached_0 == None) {
@@ -50,26 +51,15 @@ class BridgeEvent(private val _asJava: Object)
   }
 
   /**
-    * @return the type of the event
-    */
-  def `type`(): io.vertx.ext.web.handler.sockjs.BridgeEventType = {
-    if (cached_1 == None) {
-      val tmp = asJava.asInstanceOf[JBridgeEvent].`type`()
-      cached_1 = Some(tmp)
-    }
-    cached_1.get
-  }
-
-  /**
     * Get the SockJSSocket instance corresponding to the event
     * @return the SockJSSocket instance
     */
   def socket(): SockJSSocket = {
-    if (cached_2 == None) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].socket()
-      cached_2 = Some(SockJSSocket(tmp))
+      cached_1 = Some(SockJSSocket(tmp))
     }
-    cached_2.get
+    cached_1.get
   }
 
   override def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
@@ -83,7 +73,7 @@ class BridgeEvent(private val _asJava: Object)
     * @param message the raw message
     * @return this reference, so it can be used fluently
     */
-  def setRawMessage(message: io.vertx.core.json.JsonObject): BridgeEvent = {
+  override def setRawMessage(message: io.vertx.core.json.JsonObject): BridgeEvent = {
     asJava.asInstanceOf[JBridgeEvent].setRawMessage(message)
     this
   }
@@ -128,17 +118,7 @@ class BridgeEvent(private val _asJava: Object)
     asJava.asInstanceOf[JBridgeEvent].result().asInstanceOf[Boolean]
   }
 
-  /**
-    * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
-    * no message involved. If the returned message is modified, [[io.vertx.scala.ext.web.handler.sockjs.BridgeEvent#setRawMessage]] should be called with the
-    * new message.
-    * @return the raw JSON message for the event
-    */
-  def getRawMessage(): io.vertx.core.json.JsonObject = {
-    asJava.asInstanceOf[JBridgeEvent].getRawMessage()
-  }
-
-  def setFuture(): scala.concurrent.Future[Boolean] = {
+  override def setFuture(): scala.concurrent.Future[Boolean] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JBridgeEvent].setHandler(promiseAndHandler._1)
     promiseAndHandler._2.future

@@ -52,35 +52,7 @@ to check if the server is started properly or not.
 
 [source,scala]
 ----
-
-var mqttServer = MqttServer.create(vertx)
-mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
-
-  // shows main connect info
-  println(s"MQTT client [${endpoint.clientIdentifier()}] request to connect, clean session = ${endpoint.isCleanSession()}")
-
-  if (endpoint.auth() != null) {
-    println(s"[username = ${endpoint.auth().userName()}, password = ${endpoint.auth().password()}]")
-  }
-  if (endpoint.will() != null) {
-    println(s"[will topic = ${endpoint.will().willTopic()} msg = ${endpoint.will().willMessage()} QoS = ${endpoint.will().willQos()} isRetain = ${endpoint.will().isWillRetain()}]")
-  }
-
-  println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
-
-  // accept connection from the remote client
-  endpoint.accept(false)
-
-}).listenFuture().onComplete{
-  case Success(result) => {
-
-    println(s"MQTT server is listening on port ${result.actualPort()}")
-  }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
-
+Code not translatable
 ----
 
 The same _endpoint_ instance provides the `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#disconnectHandler(io.vertx.core.Handler)[disconnectHandler]`
@@ -114,44 +86,7 @@ The MQTT server is started passing the Vert.x instance as usual and the above MQ
 
 [source,scala]
 ----
-
-var options = MqttServerOptions()
-  .setPort(8883)
-  .setKeyCertOptions(PemKeyCertOptions()
-    .setKeyPath("./src/test/resources/tls/server-key.pem")
-    .setCertPath("./src/test/resources/tls/server-cert.pem")
-  )
-  .setSsl(true)
-
-
-var mqttServer = MqttServer.create(vertx, options)
-mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
-
-  // shows main connect info
-  println(s"MQTT client [${endpoint.clientIdentifier()}] request to connect, clean session = ${endpoint.isCleanSession()}")
-
-  if (endpoint.auth() != null) {
-    println(s"[username = ${endpoint.auth().userName()}, password = ${endpoint.auth().password()}]")
-  }
-  if (endpoint.will() != null) {
-    println(s"[will topic = ${endpoint.will().willTopic()} msg = ${endpoint.will().willMessage()} QoS = ${endpoint.will().willQos()} isRetain = ${endpoint.will().isWillRetain()}]")
-  }
-
-  println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
-
-  // accept connection from the remote client
-  endpoint.accept(false)
-
-}).listenFuture().onComplete{
-  case Success(result) => {
-
-    println(s"MQTT server is listening on port ${result.actualPort()}")
-  }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
-
+Code not translatable
 ----
 
 All the other stuff related to handle endpoint connection and related disconnection is managed in the same way without SSL/TLS support.
@@ -263,7 +198,7 @@ If the QoS level is 2 (EXACTLY_ONCE), the endpoint needs to handle the PUBREC me
 The `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publishReceivedHandler(io.vertx.core.Handler)[publishReceivedHandler]` method allows to specify
 the handler for that. Inside that handler, the endpoint can use the `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publishRelease(int)[publishRelease]` method
 for replying to the client with the PUBREL message. The last step is to handle the PUBCOMP message received from the client
-as final acknowledge for the published message; it's possible using the `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publishCompleteHandler(io.vertx.core.Handler)[publishCompleteHandler]`
+as final acknowledge for the published message; it's possible using the `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publishCompletionHandler(io.vertx.core.Handler)[publishCompletionHandler]`
 for specifying the handler called when the final PUBCOMP message is received.
 
 [source,scala]
@@ -281,7 +216,7 @@ endpoint.publishAcknowledgeHandler((messageId: java.lang.Integer) => {
 
   endpoint.publishRelease(messageId)
 
-}).publishCompleteHandler((messageId: java.lang.Integer) => {
+}).publishCompletionHandler((messageId: java.lang.Integer) => {
 
   println(s"Received ack for message = ${messageId}")
 })
@@ -387,17 +322,13 @@ The client gives you opportunity to connect to a server and disconnect from it.
 Also, you could specify things like the host and port of a server you would like
 to connect to passing instance of `link:../dataobjects.html#MqttClientOptions[MqttClientOptions]` as a param through constructor.
 
-This example shows how you could connect to a server and disconnect from it using Vert.x MQTT client and calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#connect()[connect]` and `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#disconnect()[disconnect]` methods.
+This example shows how you could connect to a server and disconnect from it using Vert.x MQTT client
+and calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#connect(int,%20java.lang.String,%20io.vertx.core.Handler)[connect]` and `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#disconnect()[disconnect]` methods.
 [source,scala]
 ----
-var options = MqttClientOptions()
-  .setHost("iot.eclipse.org")
-  .setPort(1883)
+var client = MqttClient.create(vertx)
 
-
-var client = MqttClient.create(vertx, options)
-
-client.connectFuture().onComplete{
+client.connectFuture(1883, "iot.eclipse.org").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -451,11 +382,11 @@ options.setAutoKeepAlive(false)
 === Be notified when
 * publish is completed
 +
-You could provide handler by calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#publishCompleteHandler(io.vertx.core.Handler)[publishCompleteHandler]`. The handler will be called each time publish is completed.
+You could provide handler by calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#publishCompletionHandler(io.vertx.core.Handler)[publishCompletionHandler]`. The handler will be called each time publish is completed.
 This one is pretty useful because you could see the packetId of just received PUBACK or PUBCOMP packet.
 [source,scala]
 ----
-client.publishCompleteHandler((id: java.lang.Integer) => {
+client.publishCompletionHandler((id: java.lang.Integer) => {
   println(s"Id of just received PUBACK or PUBCOMP packet is ${id}")
 }).publish("hello", Buffer.buffer("hello"), MqttQoS.EXACTLY_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
 
@@ -467,7 +398,7 @@ WARNING: The handler WILL NOT BE CALLED if sent publish packet with QoS=0.
 +
 [source,scala]
 ----
-client.subscribeCompleteHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messages.MqttSubAckMessage) => {
+client.subscribeCompletionHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messages.MqttSubAckMessage) => {
   println(s"Id of just received SUBACK packet is ${mqttSubAckMessage.messageId()}")
   mqttSubAckMessage.grantedQoSLevels().foreach(s => {
     if (s == 128) {
@@ -485,7 +416,7 @@ client.subscribeCompleteHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messages
 +
 [source,scala]
 ----
-client.unsubscribeCompleteHandler((id: java.lang.Integer) => {
+client.unsubscribeCompletionHandler((id: java.lang.Integer) => {
   println(s"Id of just received UNSUBACK packet is ${id}")
 }).subscribe("temp", 1).unsubscribe("temp")
 

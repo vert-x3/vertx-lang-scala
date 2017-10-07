@@ -37,7 +37,7 @@ import io.vertx.scala.ext.mongo.MongoClient
   * An extension of AuthProvider which is using  as store
   */
 class MongoAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)  {
+    extends AuthProvider(_asJava)   {
 
 
   /**

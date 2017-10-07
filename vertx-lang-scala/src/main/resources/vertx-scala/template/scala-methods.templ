@@ -86,7 +86,11 @@
 
   def invokeMethod(target, type, method, typeParams) {
     if (method.returnType.kind == CLASS_OBJECT) {
-      return 'toScala[' + method.returnType.name + '](' + invokeMethodWithoutConvertingReturn(target, type, method, typeParams) + ')';
+      var ret = 'toScala[' + method.returnType.name + '](' + invokeMethodWithoutConvertingReturn(target, type, method, typeParams) + ')';
+
+      if (method.returnType.isNullable)
+        return 'scala.Option(' + ret + ')';
+      return ret;
     } else {
       return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method, typeParams), method.returnType, typeParams, method.typeParams);
     }

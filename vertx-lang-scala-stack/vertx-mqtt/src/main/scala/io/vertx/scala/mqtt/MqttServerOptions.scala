@@ -205,6 +205,13 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
   override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -233,6 +240,20 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   override def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
   override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -246,6 +267,13 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
 
   /**

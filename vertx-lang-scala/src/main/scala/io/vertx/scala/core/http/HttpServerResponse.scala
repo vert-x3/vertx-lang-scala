@@ -52,7 +52,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * [[io.vertx.scala.core.streams.Pump]] to pump data with flow control.
   */
 class HttpServerResponse(private val _asJava: Object)
-    extends  WriteStream[io.vertx.core.buffer.Buffer] {
+    extends  WriteStream[io.vertx.core.buffer.Buffer]  {
 
   def asJava = _asJava
   private var cached_0: Option[MultiMap] = None

@@ -16,34 +16,38 @@
 
 package io.vertx.scala.mqtt
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
+import io.vertx.lang.scala.json.Json._
+import io.vertx.core.json.JsonObject
+import scala.collection.JavaConverters._
 import io.vertx.mqtt.{MqttAuth => JMqttAuth}
 
 /**
   * MQTT authentication information
   */
-class MqttAuth(private val _asJava: Object) {
+class MqttAuth(private val _asJava: JMqttAuth) {
 
   def asJava = _asJava
-
-  /**
-    * @return the username provided by the remote MQTT client
-    */
-  def userName(): String = {
-    asJava.asInstanceOf[JMqttAuth].userName().asInstanceOf[String]
-  }
-
-  /**
-    * @return the password provided by the remote MQTT client
-    */
-  def password(): String = {
-    asJava.asInstanceOf[JMqttAuth].password().asInstanceOf[String]
-  }
-
 }
 
 object MqttAuth {
-  def apply(asJava: JMqttAuth) = new MqttAuth(asJava)  
+  
+  def apply() = {
+    new MqttAuth(new JMqttAuth(emptyObj()))
+  }
+  
+  def apply(t: JMqttAuth) = {
+    if (t != null) {
+      new MqttAuth(t)
+    } else {
+      new MqttAuth(new JMqttAuth(emptyObj()))
+    }
+  }
+  
+  def fromJson(json: JsonObject): MqttAuth = {
+    if (json != null) {
+      new MqttAuth(new JMqttAuth(json))
+    } else {
+      new MqttAuth(new JMqttAuth(emptyObj()))
+    }
+  }
 }

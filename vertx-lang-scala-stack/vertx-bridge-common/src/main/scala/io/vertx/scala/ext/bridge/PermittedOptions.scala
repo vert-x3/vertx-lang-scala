@@ -65,6 +65,17 @@ class PermittedOptions(private val _asJava: JPermittedOptions) {
   def getMatch: io.vertx.core.json.JsonObject = {
     asJava.getMatch()
   }
+
+  /**
+    * Declare a specific authority that user must have in order to allow messages
+    */
+  def setRequiredAuthority(value: String) = {
+    asJava.setRequiredAuthority(value)
+    this
+  }
+  def getRequiredAuthority: String = {
+    asJava.getRequiredAuthority().asInstanceOf[String]
+  }
 }
 
 object PermittedOptions {

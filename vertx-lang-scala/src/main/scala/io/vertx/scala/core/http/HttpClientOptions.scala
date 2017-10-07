@@ -510,6 +510,19 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the TCP send buffer size
     */
   override def setSendBufferSize(value: Int) = {
@@ -556,6 +569,28 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Enable the `TCP_CORK` option - only with linux native transport.
+    */
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Enable the `TCP_FASTOPEN` option - only with linux native transport.
+    */
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether TCP keep alive is enabled
     */
   override def setTcpKeepAlive(value: Boolean) = {
@@ -575,6 +610,17 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Enable the `TCP_QUICKACK` option - only with linux native transport.
+    */
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
 
   /**

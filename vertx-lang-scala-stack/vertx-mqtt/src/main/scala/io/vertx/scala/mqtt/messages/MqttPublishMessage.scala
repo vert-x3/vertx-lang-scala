@@ -28,7 +28,7 @@ import io.vertx.mqtt.messages.{MqttPublishMessage => JMqttPublishMessage}
   * Represents an MQTT PUBLISH message
   */
 class MqttPublishMessage(private val _asJava: Object)
-    extends  MqttMessage {
+    extends  MqttMessage  {
 
   def asJava = _asJava
   private var cached_0: Option[Int] = None

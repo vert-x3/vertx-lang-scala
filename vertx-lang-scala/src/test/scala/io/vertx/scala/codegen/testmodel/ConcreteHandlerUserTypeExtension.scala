@@ -26,7 +26,8 @@ import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension => JConcrete
 /**
   */
 class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
-    extends ConcreteHandlerUserType(_asJava)  {
+    extends ConcreteHandlerUserType(_asJava)  
+    with io.vertx.core.Handler[RefedInterface1]  {
 
 
   override def handle(arg0: RefedInterface1): Unit = {

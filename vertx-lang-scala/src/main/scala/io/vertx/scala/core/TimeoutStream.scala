@@ -33,7 +33,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   * the timer.
   */
 class TimeoutStream(private val _asJava: Object)
-    extends  ReadStream[Long] {
+    extends  ReadStream[Long]  {
 
   def asJava = _asJava
 

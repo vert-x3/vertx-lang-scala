@@ -31,7 +31,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * to it.
   */
 trait WriteStream[T]
-    extends  StreamBase {
+    extends  StreamBase  {
 
   def asJava: java.lang.Object
 

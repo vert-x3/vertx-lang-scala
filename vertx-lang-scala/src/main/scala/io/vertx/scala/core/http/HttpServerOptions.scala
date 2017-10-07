@@ -101,27 +101,26 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
-    *
-    * This method allows to set the compression level to be used in http1.x/2 response bodies 
+    * This method allows to set the compression level to be used in http1.x/2 response bodies
     * when compression support is turned on (@see setCompressionSupported) and the client advertises
     * to support `deflate/gzip` compression in the `Accept-Encoding` header
-    * 
+    *
     * default value is : 6 (Netty legacy)
-    * 
+    *
     * The compression level determines how much the data is compressed on a scale from 1 to 9,
     * where '9' is trying to achieve the maximum compression ratio while '1' instead is giving
-    * priority to speed instead of compression ratio using some algorithm optimizations and skipping 
+    * priority to speed instead of compression ratio using some algorithm optimizations and skipping
     * pedantic loops that usually gives just little improvements
-    * 
-    * While one can think that best value is always the maximum compression ratio, 
+    *
+    * While one can think that best value is always the maximum compression ratio,
     * there's a trade-off to consider: the most compressed level requires the most
     * computational work to compress/decompress data, e.g. more dictionary lookups and loops.
-    * 
-    * E.g. you have it set fairly high on a high-volume website, you may experience performance degradation 
+    *
+    * E.g. you have it set fairly high on a high-volume website, you may experience performance degradation
     * and latency on resource serving due to CPU overload, and, however - as the computational work is required also client side
     * while decompressing - setting an higher compression level can result in an overall higher page load time
     * especially nowadays when many clients are handled mobile devices with a low CPU profile.
-    * 
+    *
     * see also: http://www.gzip.org/algorithm.txt
     */
   def setCompressionLevel(value: Int) = {
@@ -133,7 +132,7 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
-    * Set whether the server should support gzip/deflate compression 
+    * Set whether the server should support gzip/deflate compression
     * (serving compressed responses to clients advertising support for them with Accept-Encoding header)
     */
   def setCompressionSupported(value: Boolean) = {
@@ -439,6 +438,19 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set the TCP send buffer size
     */
   override def setSendBufferSize(value: Int) = {
@@ -483,6 +495,28 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
 
   /**
+    * Enable the `TCP_CORK` option - only with linux native transport.
+    */
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Enable the `TCP_FASTOPEN` option - only with linux native transport.
+    */
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set whether TCP keep alive is enabled
     */
   override def setTcpKeepAlive(value: Boolean) = {
@@ -502,6 +536,17 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Enable the `TCP_QUICKACK` option - only with linux native transport.
+    */
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
 
   /**

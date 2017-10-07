@@ -7,7 +7,7 @@ import io.vertx.scala.codegen.testmodel.{NullableTCK, RefedInterface1, TestDataO
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers, OptionValues}
 
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext
@@ -18,7 +18,7 @@ import scala.util.{Failure, Success}
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
-class NullableTCKTest extends FlatSpec with Matchers {
+class NullableTCKTest extends FlatSpec with Matchers with OptionValues {
   implicit val execCtx = new ExecutionContext {
     override def reportFailure(cause: Throwable): Unit = ???
 
@@ -426,8 +426,8 @@ class NullableTCKTest extends FlatSpec with Matchers {
       }
       w.dismiss()
     }))
-    assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1"))
-    assert(null == nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2"))
+    assert("fizz1" == nullableTCK.methodWithNullableTypeVariableReturn[String](true, "fizz1").value)
+    assert(nullableTCK.methodWithNullableTypeVariableReturn(false, "fizz2").isEmpty)
   }
 
   "testNullableObjectParam" should "work" in {

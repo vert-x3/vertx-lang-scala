@@ -38,7 +38,7 @@ import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
-  * Represents options used by the MQTT client
+  * Represents options used by the MQTT client.
   */
 class MqttClientOptions(private val _asJava: JMqttClientOptions) 
     extends ExtNetClientOptions(_asJava) {
@@ -68,6 +68,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def isAutoKeepAlive: Boolean = {
     asJava.isAutoKeepAlive().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set to start with a clean session (or not)
+    */
   def setCleanSession(value: Boolean) = {
     asJava.setCleanSession(value)
     this
@@ -75,6 +79,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def isCleanSession: Boolean = {
     asJava.isCleanSession().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the client identifier
+    */
   def setClientId(value: String) = {
     asJava.setClientId(value)
     this
@@ -117,13 +125,6 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
-  def setHost(value: String) = {
-    asJava.setHost(value)
-    this
-  }
-  def getHost: String = {
-    asJava.getHost().asInstanceOf[String]
-  }
   override def setHostnameVerificationAlgorithm(value: String) = {
     asJava.setHostnameVerificationAlgorithm(value)
     this
@@ -145,6 +146,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
     JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
   }
+
+  /**
+    * Set the keep alive timeout in seconds
+    */
   def setKeepAliveTimeSeconds(value: Int) = {
     asJava.setKeepAliveTimeSeconds(value)
     this
@@ -175,6 +180,17 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   }
 
   /**
+    * Set max count of unacknowledged messages
+    */
+  def setMaxInflightQueue(value: Int) = {
+    asJava.setMaxInflightQueue(value)
+    this
+  }
+  def getMaxInflightQueue: Int = {
+    asJava.getMaxInflightQueue().asInstanceOf[Int]
+  }
+
+  /**
     * Set max MQTT message size
     */
   def setMaxMessageSize(value: Int) = {
@@ -198,6 +214,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def getOpenSslEngineOptions: OpenSSLEngineOptions = {
     OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
   }
+
+  /**
+    * Set the password
+    */
   def setPassword(value: String) = {
     asJava.setPassword(value)
     this
@@ -232,13 +252,6 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   }
   override def getPfxTrustOptions: PfxOptions = {
     PfxOptions(asJava.getPfxTrustOptions())
-  }
-  def setPort(value: Int) = {
-    asJava.setPort(value)
-    this
-  }
-  def getPort: Int = {
-    asJava.getPort().asInstanceOf[Int]
   }
   override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
@@ -275,6 +288,13 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
+  override def setReusePort(value: Boolean) = {
+    asJava.setReusePort(value)
+    this
+  }
+  override def isReusePort: Boolean = {
+    asJava.isReusePort().asInstanceOf[Boolean]
+  }
   override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
@@ -296,6 +316,20 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
+  override def setTcpCork(value: Boolean) = {
+    asJava.setTcpCork(value)
+    this
+  }
+  override def isTcpCork: Boolean = {
+    asJava.isTcpCork().asInstanceOf[Boolean]
+  }
+  override def setTcpFastOpen(value: Boolean) = {
+    asJava.setTcpFastOpen(value)
+    this
+  }
+  override def isTcpFastOpen: Boolean = {
+    asJava.isTcpFastOpen().asInstanceOf[Boolean]
+  }
   override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
@@ -309,6 +343,13 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   }
   override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
+  }
+  override def setTcpQuickAck(value: Boolean) = {
+    asJava.setTcpQuickAck(value)
+    this
+  }
+  override def isTcpQuickAck: Boolean = {
+    asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
   override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
@@ -345,6 +386,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def isUsePooledBuffers: Boolean = {
     asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the username
+    */
   def setUsername(value: String) = {
     asJava.setUsername(value)
     this
@@ -352,6 +397,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def getUsername: String = {
     asJava.getUsername().asInstanceOf[String]
   }
+
+  /**
+    * Set if will information are provided on connection
+    */
   def setWillFlag(value: Boolean) = {
     asJava.setWillFlag(value)
     this
@@ -359,6 +408,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def isWillFlag: Boolean = {
     asJava.isWillFlag().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the content of the will message
+    */
   def setWillMessage(value: String) = {
     asJava.setWillMessage(value)
     this
@@ -366,6 +419,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def getWillMessage: String = {
     asJava.getWillMessage().asInstanceOf[String]
   }
+
+  /**
+    * Set the QoS level for the will message
+    */
   def setWillQoS(value: Int) = {
     asJava.setWillQoS(value)
     this
@@ -373,6 +430,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def getWillQoS: Int = {
     asJava.getWillQoS().asInstanceOf[Int]
   }
+
+  /**
+    * Set if the will message must be retained
+    */
   def setWillRetain(value: Boolean) = {
     asJava.setWillRetain(value)
     this
@@ -380,6 +441,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   def isWillRetain: Boolean = {
     asJava.isWillRetain().asInstanceOf[Boolean]
   }
+
+  /**
+    * Set the topic on which the will message will be published
+    */
   def setWillTopic(value: String) = {
     asJava.setWillTopic(value)
     this

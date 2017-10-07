@@ -29,7 +29,7 @@ import io.vertx.core.Handler
   * Represents an file upload from an HTML FORM.
   */
 class HttpServerFileUpload(private val _asJava: Object)
-    extends  ReadStream[io.vertx.core.buffer.Buffer] {
+    extends  ReadStream[io.vertx.core.buffer.Buffer]  {
 
   def asJava = _asJava
 

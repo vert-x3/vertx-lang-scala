@@ -42,7 +42,7 @@ import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
   * Please refer to the documentation for more information on the event bus.
   */
 class EventBus(private val _asJava: Object)
-    extends  Measured {
+    extends  Measured  {
 
   def asJava = _asJava
 

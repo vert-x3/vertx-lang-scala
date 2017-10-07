@@ -54,7 +54,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   private var cached_3: Option[MultiMap] = None
   private var cached_4: Option[MultiMap] = None
   private var cached_5: Option[scala.collection.mutable.Buffer[String]] = None
-  private var cached_6: Option[T] = None
+  private var cached_6: Option[scala.Option[T]] = None
   private var cached_7: Option[scala.Option[io.vertx.core.buffer.Buffer]] = None
   private var cached_8: Option[scala.Option[String]] = None
   private var cached_9: Option[scala.Option[io.vertx.core.json.JsonObject]] = None
@@ -129,10 +129,10 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   /**
     * @return the response body in the format it was decoded.
     */
-  def body(): T = {
+  def body(): scala.Option[T] = {
     if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].body()
-      cached_6 = Some(toScala[T](tmp))
+      cached_6 = Some(scala.Option(toScala[T](tmp)))
     }
     cached_6.get
   }
@@ -191,8 +191,8 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   /**
     * @return the response body decoded as the specified `type` with the Jackson mapper.
     */
-  def bodyAsJson[R: TypeTag](`type`: Class[R]): R = {
-    toScala[R](asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJson[Object](toJavaClass(`type`)))
+  def bodyAsJson[R: TypeTag](`type`: Class[R]): scala.Option[R] = {
+    scala.Option(toScala[R](asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJson[Object](toJavaClass(`type`))))
   }
 
   /**

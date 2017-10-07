@@ -45,6 +45,14 @@ trait NetworkOptions {
   def isReuseAddress: Boolean 
 
   /**
+    * Set the value of reuse port.
+    * <p/>
+    * This is only supported by native transports.
+    */
+  def setReusePort(value: Boolean): NetworkOptions
+  def isReusePort: Boolean 
+
+  /**
     * Set the TCP send buffer size
     */
   def setSendBufferSize(value: Int): NetworkOptions

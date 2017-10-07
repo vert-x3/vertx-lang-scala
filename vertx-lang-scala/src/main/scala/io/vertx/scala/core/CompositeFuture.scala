@@ -32,7 +32,7 @@ import io.vertx.core.Handler
   * The handlers set for the coordinated futures are overridden by the handler of the composite future.
   */
 class CompositeFuture(private val _asJava: Object)
-    extends Future[CompositeFuture](_asJava)  {
+    extends Future[CompositeFuture](_asJava)   {
 
   private var cached_0: Option[Handler[AsyncResult[CompositeFuture]]] = None
 

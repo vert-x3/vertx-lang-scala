@@ -32,7 +32,7 @@ import io.vertx.ext.shell.session.{Session => JSession}
   * The terminal.
   */
 class Term(private val _asJava: Object)
-    extends Tty(_asJava)  {
+    extends Tty(_asJava)   {
 
 
   override def resizehandler(handler: Handler[Unit]): Term = {

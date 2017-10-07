@@ -58,6 +58,7 @@ The path of the <i>inputrc</i> config.
 |[[port]]`port`|`Number (int)`|-
 |[[receiveBufferSize]]`receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`reuseAddress`|`Boolean`|-
+|[[reusePort]]`reusePort`|`Boolean`|-
 |[[sendBufferSize]]`sendBufferSize`|`Number (int)`|-
 |[[shellHtmlResource]]`shellHtmlResource`|`Buffer`|
 +++
@@ -74,8 +75,11 @@ The SockJS handler options.
 Configure the SockJS path, the default value is <code>/term/*</code>.
 +++
 |[[ssl]]`ssl`|`Boolean`|-
+|[[tcpCork]]`tcpCork`|`Boolean`|-
+|[[tcpFastOpen]]`tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`tcpKeepAlive`|`Boolean`|-
 |[[tcpNoDelay]]`tcpNoDelay`|`Boolean`|-
+|[[tcpQuickAck]]`tcpQuickAck`|`Boolean`|-
 |[[termJsResource]]`termJsResource`|`Buffer`|
 +++
 Set <code>term.js</code> resource to use.
@@ -249,12 +253,16 @@ Set the telnet connection to negociate binary data format when sending to the cl
 |[[port]]`port`|`Number (int)`|-
 |[[receiveBufferSize]]`receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`reuseAddress`|`Boolean`|-
+|[[reusePort]]`reusePort`|`Boolean`|-
 |[[sendBufferSize]]`sendBufferSize`|`Number (int)`|-
 |[[sni]]`sni`|`Boolean`|-
 |[[soLinger]]`soLinger`|`Number (int)`|-
 |[[ssl]]`ssl`|`Boolean`|-
+|[[tcpCork]]`tcpCork`|`Boolean`|-
+|[[tcpFastOpen]]`tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`tcpKeepAlive`|`Boolean`|-
 |[[tcpNoDelay]]`tcpNoDelay`|`Boolean`|-
+|[[tcpQuickAck]]`tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`useAlpn`|`Boolean`|-

@@ -62,8 +62,8 @@ class CommandLine(private val _asJava: Object) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getOptionValue[T: TypeTag](name: String): T = {
-    toScala[T](asJava.asInstanceOf[JCommandLine].getOptionValue[Object](name.asInstanceOf[java.lang.String]))
+  def getOptionValue[T: TypeTag](name: String): scala.Option[T] = {
+    scala.Option(toScala[T](asJava.asInstanceOf[JCommandLine].getOptionValue[Object](name.asInstanceOf[java.lang.String])))
   }
 
   /**
@@ -71,8 +71,8 @@ class CommandLine(private val _asJava: Object) {
     * @param name the name
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T: TypeTag](name: String): T = {
-    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](name.asInstanceOf[java.lang.String]))
+  def getArgumentValue[T: TypeTag](name: String): scala.Option[T] = {
+    scala.Option(toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](name.asInstanceOf[java.lang.String])))
   }
 
   /**
@@ -80,8 +80,8 @@ class CommandLine(private val _asJava: Object) {
     * @param index the index
     * @return the value, `null` if not set
     */
-  def getArgumentValue[T: TypeTag](index: Int): T = {
-    toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](index.asInstanceOf[java.lang.Integer]))
+  def getArgumentValue[T: TypeTag](index: Int): scala.Option[T] = {
+    scala.Option(toScala[T](asJava.asInstanceOf[JCommandLine].getArgumentValue[Object](index.asInstanceOf[java.lang.Integer])))
   }
 
   /**

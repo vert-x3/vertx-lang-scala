@@ -37,7 +37,8 @@ import io.vertx.core.Handler
   * An auth handler that provides HTTP Basic Authentication support.
   */
 class BasicAuthHandler(private val _asJava: Object)
-    extends  AuthHandler {
+    extends  AuthHandler 
+    with io.vertx.core.Handler[RoutingContext]  {
 
   def asJava = _asJava
 

@@ -5,7 +5,7 @@ import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
 import io.vertx.scala.codegen.testmodel.{GenericsTCK, RefedInterface1, TestDataObject}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.{FlatSpec, Matchers, OptionValues}
 
 import scala.concurrent.ExecutionContext
 
@@ -13,7 +13,7 @@ import scala.concurrent.ExecutionContext
   * Created by jochen on 30.12.16.
   */
 @RunWith(classOf[JUnitRunner])
-class GenericsTCKTest extends FlatSpec with Matchers {
+class GenericsTCKTest extends FlatSpec with Matchers with OptionValues {
   implicit val execCtx = new ExecutionContext {
     override def reportFailure(cause: Throwable): Unit = ???
 
@@ -61,7 +61,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   "testMethodWithBooleanParameterizedReturn" should "work" in {
     val res = obj.methodWithBooleanParameterizedReturn()
     res.setValue(true)
-    assert(res.getValue() == true)
+    assert(res.getValue())
   }
 
   "testMethodWithCharacterParameterizedReturn" should "work" in {
@@ -138,7 +138,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerBooleanParameterized" should "work" in {
-    obj.methodWithHandlerBooleanParameterized(h => assert(h.getValue() == true))
+    obj.methodWithHandlerBooleanParameterized(h => assert(h.getValue()))
   }
 
   "testMethodWithHandlerCharacterParameterized" should "work" in {
@@ -198,7 +198,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultBooleanParameterized" should "work" in {
-    obj.methodWithHandlerAsyncResultBooleanParameterized(h => assert(h.result().getValue() == true))
+    obj.methodWithHandlerAsyncResultBooleanParameterized(h => assert(h.result().getValue()))
   }
 
   "testMethodWithHandlerAsyncResultCharacterParameterized" should "work" in {
@@ -286,7 +286,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     obj.methodWithFunctionParamBooleanParameterized(h => {
       v = h.getValue()
       h.getValue().toString})
-    assert(v == true)
+    assert(v)
   }
 
   "testMethodWithFunctionParamCharacterParameterized" should "work" in {
@@ -417,7 +417,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultBooleanParameterizedFuture().foreach(result => {
         w {
-          assert(result.getValue() == true)
+          assert(result.getValue())
         }
         w.dismiss()})
     )
@@ -507,7 +507,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultGenericNullableApiFuture(true).foreach(result => {
         w {
-          assert(result.getValue().getString() == "the_string_value")
+          assert(result.getValue().get.getString() == "the_string_value")
         }
         w.dismiss()})
     )
@@ -515,7 +515,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     exec1(w =>
       obj.methodWithHandlerAsyncResultGenericNullableApiFuture(false).foreach(result => {
         w {
-          assert(result.getValue() == null)
+          assert(result.getValue().isEmpty)
         }
         w.dismiss()})
     )
@@ -534,7 +534,7 @@ class GenericsTCKTest extends FlatSpec with Matchers {
     obj.methodWithFunctionParamClassTypeParameterized[String](classOf[String], {
       h => {
         assert(h.getValue() == "zoumbawe")
-        h.getValue
+        h.getValue()
       }
     })
   }
@@ -582,13 +582,13 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerGenericNullableApi" should "work" in {
-    obj.methodWithHandlerGenericNullableApi(true, h => assert(h.getValue().getString() == "the_string_value"))
-    obj.methodWithHandlerGenericNullableApi(false, h => assert(h.getValue() == null))
+    obj.methodWithHandlerGenericNullableApi(true, h => assert(h.getValue().get.getString() == "the_string_value"))
+    obj.methodWithHandlerGenericNullableApi(false, h => assert(h.getValue().isEmpty))
   }
 
   "testMethodWithGenericNullableApiReturn" should "work" in {
-    assert(obj.methodWithGenericNullableApiReturn(true).getValue() != null)
-    assert(obj.methodWithGenericNullableApiReturn(false).getValue() == null)
+    assert(obj.methodWithGenericNullableApiReturn(true).getValue().isDefined)
+    assert(obj.methodWithGenericNullableApiReturn(false).getValue().isEmpty)
   }
 
   "testMethodWithHandlerAsyncResultClassTypeParameterized" should "work" in {
@@ -596,8 +596,8 @@ class GenericsTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultGenericNullableApi" should "work" in {
-    obj.methodWithHandlerAsyncResultGenericNullableApi(true, h => assert(h.result().getValue() != null))
-    obj.methodWithHandlerAsyncResultGenericNullableApi(false, h => assert(h.result().getValue() == null))
+    obj.methodWithHandlerAsyncResultGenericNullableApi(true, h => assert(h.result().getValue().isDefined))
+    obj.methodWithHandlerAsyncResultGenericNullableApi(false, h => assert(h.result().getValue().isEmpty))
   }
 
   "testMethodWithHandlerAsyncResultClassTypeParameterizedFuture" should "work" in {

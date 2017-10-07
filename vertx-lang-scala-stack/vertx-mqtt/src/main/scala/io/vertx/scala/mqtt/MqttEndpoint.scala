@@ -30,9 +30,11 @@ import io.vertx.mqtt.messages.{MqttPublishMessage => JMqttPublishMessage}
 import io.vertx.mqtt.{MqttAuth => JMqttAuth}
 import scala.collection.JavaConverters._
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.mqtt.messages.MqttUnsubscribeMessage
 import io.vertx.core.Handler
 import io.vertx.mqtt.messages.{MqttUnsubscribeMessage => JMqttUnsubscribeMessage}
+import io.vertx.scala.core.net.SocketAddress
 
 /**
   * Represents an MQTT endpoint for point-to-point communication with the remote MQTT client
@@ -40,101 +42,125 @@ import io.vertx.mqtt.messages.{MqttUnsubscribeMessage => JMqttUnsubscribeMessage
 class MqttEndpoint(private val _asJava: Object) {
 
   def asJava = _asJava
-  private var cached_0: Option[String] = None
-  private var cached_1: Option[MqttAuth] = None
-  private var cached_2: Option[MqttWill] = None
-  private var cached_3: Option[Int] = None
-  private var cached_4: Option[String] = None
-  private var cached_5: Option[Boolean] = None
-  private var cached_6: Option[Int] = None
-  private var cached_7: Option[Int] = None
+  private var cached_0: Option[SocketAddress] = None
+  private var cached_1: Option[SocketAddress] = None
+  private var cached_2: Option[String] = None
+  private var cached_3: Option[MqttAuth] = None
+  private var cached_4: Option[MqttWill] = None
+  private var cached_5: Option[Int] = None
+  private var cached_6: Option[String] = None
+  private var cached_7: Option[Boolean] = None
+  private var cached_8: Option[Int] = None
+  private var cached_9: Option[Int] = None
 
   /**
-    * @return the client identifier as provided by the remote MQTT client
+    * @return the remote address for this socket
     */
-  def clientIdentifier(): String = {
+  def remoteAddress(): SocketAddress = {
     if (cached_0 == None) {
-      val tmp = asJava.asInstanceOf[JMqttEndpoint].clientIdentifier()
-      cached_0 = Some(tmp.asInstanceOf[String])
+      val tmp = asJava.asInstanceOf[JMqttEndpoint].remoteAddress()
+      cached_0 = Some(SocketAddress(tmp))
     }
     cached_0.get
   }
 
   /**
-    * @return the Authentication information as provided by the remote MQTT client
+    * @return the local address for this socket
     */
-  def auth(): MqttAuth = {
+  def localAddress(): SocketAddress = {
     if (cached_1 == None) {
-      val tmp = asJava.asInstanceOf[JMqttEndpoint].auth()
-      cached_1 = Some(MqttAuth(tmp))
+      val tmp = asJava.asInstanceOf[JMqttEndpoint].localAddress()
+      cached_1 = Some(SocketAddress(tmp))
     }
     cached_1.get
   }
 
   /**
-    * @return the Will information as provided by the remote MQTT client
+    * @return the client identifier as provided by the remote MQTT client
     */
-  def will(): MqttWill = {
+  def clientIdentifier(): String = {
     if (cached_2 == None) {
-      val tmp = asJava.asInstanceOf[JMqttEndpoint].will()
-      cached_2 = Some(MqttWill(tmp))
+      val tmp = asJava.asInstanceOf[JMqttEndpoint].clientIdentifier()
+      cached_2 = Some(tmp.asInstanceOf[String])
     }
     cached_2.get
+  }
+
+  /**
+    * @return the Authentication information as provided by the remote MQTT clientsee <a href="../../../../../../cheatsheet/MqttAuth.html">MqttAuth</a>
+    */
+  def auth(): MqttAuth = {
+    if (cached_3 == None) {
+      val tmp = asJava.asInstanceOf[JMqttEndpoint].auth()
+      cached_3 = Some(MqttAuth(tmp))
+    }
+    cached_3.get
+  }
+
+  /**
+    * @return the Will information as provided by the remote MQTT clientsee <a href="../../../../../../cheatsheet/MqttWill.html">MqttWill</a>
+    */
+  def will(): MqttWill = {
+    if (cached_4 == None) {
+      val tmp = asJava.asInstanceOf[JMqttEndpoint].will()
+      cached_4 = Some(MqttWill(tmp))
+    }
+    cached_4.get
   }
 
   /**
     * @return the protocol version required by the remote MQTT client
     */
   def protocolVersion(): Int = {
-    if (cached_3 == None) {
+    if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JMqttEndpoint].protocolVersion()
-      cached_3 = Some(tmp.asInstanceOf[Int])
+      cached_5 = Some(tmp.asInstanceOf[Int])
     }
-    cached_3.get
+    cached_5.get
   }
 
   /**
     * @return the protocol name provided by the remote MQTT client
     */
   def protocolName(): String = {
-    if (cached_4 == None) {
+    if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JMqttEndpoint].protocolName()
-      cached_4 = Some(tmp.asInstanceOf[String])
+      cached_6 = Some(tmp.asInstanceOf[String])
     }
-    cached_4.get
+    cached_6.get
   }
 
   /**
     * @return true when clean session is requested by the remote MQTT client
     */
   def isCleanSession(): Boolean = {
-    if (cached_5 == None) {
+    if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JMqttEndpoint].isCleanSession()
-      cached_5 = Some(tmp.asInstanceOf[Boolean])
+      cached_7 = Some(tmp.asInstanceOf[Boolean])
     }
-    cached_5.get
+    cached_7.get
   }
 
   /**
     * @return the keep alive timeout (in seconds) specified by the remote MQTT client
     */
   def keepAliveTimeSeconds(): Int = {
-    if (cached_6 == None) {
+    if (cached_8 == None) {
       val tmp = asJava.asInstanceOf[JMqttEndpoint].keepAliveTimeSeconds()
-      cached_6 = Some(tmp.asInstanceOf[Int])
+      cached_8 = Some(tmp.asInstanceOf[Int])
     }
-    cached_6.get
+    cached_8.get
   }
 
   /**
     * @return the message identifier used for last published message
     */
   def lastMessageId(): Int = {
-    if (cached_7 == None) {
+    if (cached_9 == None) {
       val tmp = asJava.asInstanceOf[JMqttEndpoint].lastMessageId()
-      cached_7 = Some(tmp.asInstanceOf[Int])
+      cached_9 = Some(tmp.asInstanceOf[Int])
     }
-    cached_7.get
+    cached_9.get
   }
 
   /**
@@ -250,8 +276,8 @@ class MqttEndpoint(private val _asJava: Object) {
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
-  def publishCompleteHandler(handler: Handler[Int]): MqttEndpoint = {
-    asJava.asInstanceOf[JMqttEndpoint].publishCompleteHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
+  def publishCompletionHandler(handler: Handler[Int]): MqttEndpoint = {
+    asJava.asInstanceOf[JMqttEndpoint].publishCompletionHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
     this
   }
 

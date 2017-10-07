@@ -49,7 +49,7 @@ import io.vertx.scala.kafka.client.common.TopicPartition
   * for specific Topic/Partition, these are Kafka's specific operations.
   */
 class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
-    extends  ReadStream[KafkaConsumerRecord[K, V]] {
+    extends  ReadStream[KafkaConsumerRecord[K, V]]  {
 
   def asJava = _asJava
 

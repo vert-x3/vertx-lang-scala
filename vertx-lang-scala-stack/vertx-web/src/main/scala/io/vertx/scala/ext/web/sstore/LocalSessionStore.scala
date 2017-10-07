@@ -35,7 +35,7 @@ import io.vertx.core.{Vertx => JVertx}
   * Can be used when sticky sessions are being used.
   */
 class LocalSessionStore(private val _asJava: Object)
-    extends SessionStore(_asJava)  {
+    extends SessionStore(_asJava)   {
 
 
 }

@@ -29,7 +29,7 @@ import scala.collection.JavaConverters._
   * Represents an MQTT SUBSCRIBE message
   */
 class MqttSubscribeMessage(private val _asJava: Object)
-    extends  MqttMessage {
+    extends  MqttMessage  {
 
   def asJava = _asJava
   private var cached_0: Option[Int] = None

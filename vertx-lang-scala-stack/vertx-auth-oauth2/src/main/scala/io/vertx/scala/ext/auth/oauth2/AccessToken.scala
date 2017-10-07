@@ -23,17 +23,20 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.core.buffer.Buffer
 import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
+import io.vertx.core.http.HttpMethod
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.ext.auth.oauth2.{OAuth2Response => JOAuth2Response}
 
 /**
   * AccessToken extension to the User interface
   */
 class AccessToken(private val _asJava: Object)
-    extends User(_asJava)  {
+    extends User(_asJava)   {
 
 
   /**
@@ -71,6 +74,48 @@ class AccessToken(private val _asJava: Object)
     */
   def introspect(callback: Handler[AsyncResult[Unit]]): AccessToken = {
     asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+    * Introspect access token. This is an OAuth2 extension that allow to verify if an access token is still valid.
+    * @param tokenType - A String containing the type of token to revoke. Should be either "access_token" or "refresh_token".
+    * @param callback - The callback function returning the results.
+    */
+  def introspect(tokenType: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
+    asJava.asInstanceOf[JAccessToken].introspect(tokenType.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+    * Load the user info as per OIDC spec.
+    * @param callback - The callback function returning the results.
+    */
+  def userInfo(callback: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): AccessToken = {
+    asJava.asInstanceOf[JAccessToken].userInfo({x: AsyncResult[JsonObject] => callback.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    this
+  }
+
+  /**
+    * Fetches a JSON resource using this Access Token.
+    * @param resource - the resource to fetch.
+    * @param callback - The callback function returning the results.
+    */
+  def fetch(resource: String, callback: Handler[AsyncResult[OAuth2Response]]): AccessToken = {
+    asJava.asInstanceOf[JAccessToken].fetch(resource.asInstanceOf[java.lang.String], {x: AsyncResult[JOAuth2Response] => callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))})
+    this
+  }
+
+  /**
+    * Fetches a JSON resource using this Access Token.
+    * @param method - the HTTP method to user.
+    * @param resource - the resource to fetch.
+    * @param headers - extra headers to pass to the request.
+    * @param payload - payload to send to the server.
+    * @param callback - The callback function returning the results.
+    */
+  def fetch(method: io.vertx.core.http.HttpMethod, resource: String, headers: io.vertx.core.json.JsonObject, payload: io.vertx.core.buffer.Buffer, callback: Handler[AsyncResult[OAuth2Response]]): AccessToken = {
+    asJava.asInstanceOf[JAccessToken].fetch(method, resource.asInstanceOf[java.lang.String], headers, payload, {x: AsyncResult[JOAuth2Response] => callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))})
     this
   }
 
@@ -114,6 +159,42 @@ class AccessToken(private val _asJava: Object)
   def introspectFuture(): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAccessToken].introspect(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[introspect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def introspectFuture(tokenType: String): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAccessToken].introspect(tokenType.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[userInfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def userInfoFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    asJava.asInstanceOf[JAccessToken].userInfo(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[fetch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def fetchFuture(resource: String): scala.concurrent.Future[OAuth2Response] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JOAuth2Response, OAuth2Response](x => OAuth2Response(x))
+    asJava.asInstanceOf[JAccessToken].fetch(resource.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[fetch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def fetchFuture(method: io.vertx.core.http.HttpMethod, resource: String, headers: io.vertx.core.json.JsonObject, payload: io.vertx.core.buffer.Buffer): scala.concurrent.Future[OAuth2Response] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JOAuth2Response, OAuth2Response](x => OAuth2Response(x))
+    asJava.asInstanceOf[JAccessToken].fetch(method, resource.asInstanceOf[java.lang.String], headers, payload, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

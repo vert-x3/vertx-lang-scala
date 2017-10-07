@@ -35,7 +35,7 @@ import io.vertx.core.{Vertx => JVertx}
   * It is a mutable command resolver.
   */
 class CommandRegistry(private val _asJava: Object)
-    extends CommandResolver(_asJava)  {
+    extends CommandResolver(_asJava)   {
 
 
   /**

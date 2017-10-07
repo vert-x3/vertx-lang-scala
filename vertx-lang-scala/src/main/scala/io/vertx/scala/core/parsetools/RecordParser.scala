@@ -19,7 +19,9 @@ package io.vertx.scala.core.parsetools
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.Handler
 import io.vertx.core.parsetools.{RecordParser => JRecordParser}
 
@@ -55,9 +57,35 @@ import io.vertx.core.parsetools.{RecordParser => JRecordParser}
   * Please see the documentation for more information.
   */
 class RecordParser(private val _asJava: Object)
-    extends io.vertx.core.Handler[io.vertx.core.buffer.Buffer] {
+    extends  ReadStream[io.vertx.core.buffer.Buffer] 
+    with io.vertx.core.Handler[io.vertx.core.buffer.Buffer]  {
 
   def asJava = _asJava
+
+  override def exceptionHandler(handler: Handler[Throwable]): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].exceptionHandler({x: Throwable => handler.handle(x)})
+    this
+  }
+
+  override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].handler({x: Buffer => handler.handle(x)})
+    this
+  }
+
+  override def pause(): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].pause()
+    this
+  }
+
+  override def resume(): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].resume()
+    this
+  }
+
+  override def endHandler(endHandler: Handler[Unit]): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].endHandler({x: Void => endHandler.handle(x)})
+    this
+  }
 
   def setOutput(output: Handler[io.vertx.core.buffer.Buffer]): Unit = {
     asJava.asInstanceOf[JRecordParser].setOutput({x: Buffer => output.handle(x)})
@@ -108,10 +136,8 @@ class RecordParser(private val _asJava: Object)
 object RecordParser {
   def apply(asJava: JRecordParser) = new RecordParser(asJava)  
   /**
-    * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
-    * by the String `` delim endcoded in latin-1 . Don't use this if your String contains other than latin-1 characters.
-    * 
-    * `output` Will receive whole records which have been parsed.
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newDelimited]] but set the `output` that will receive whole records
+    * which have been parsed.
     * @param delim the initial delimiter string
     * @param output handler that will receive the output
     */
@@ -120,10 +146,41 @@ object RecordParser {
   }
 
   /**
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newDelimited]] but wraps the `stream`. The `stream` handlers will be set/unset
+    * when the [[io.vertx.scala.core.parsetools.RecordParser#handler]] is set.
+    * <p/>
+    * The `pause()`/`resume()` operations are propagated to the `stream`.
+    * @param delim the initial delimiter string
+    * @param stream the wrapped stream
+    */
+  def newDelimited(delim: String, stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+  }
+
+  /**
+    * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
+    * by the String `` delim endcoded in latin-1 . Don't use this if your String contains other than latin-1 characters.
+    * 
+    * `output` Will receive whole records which have been parsed.
+    * @param delim the initial delimiter string
+    */
+  def newDelimited(delim: String): RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String]))
+  }
+
+  /**
     * Create a new `RecordParser` instance, initially in delimited mode, and where the delimiter can be represented
     * by the `Buffer` delim.
     * 
-    * `output` Will receive whole records which have been parsed.
+    * @param delim the initial delimiter buffer
+    */
+  def newDelimited(delim: io.vertx.core.buffer.Buffer): RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newDelimited]] but set the `output` that will receive whole records
+    * which have been parsed.
     * @param delim the initial delimiter buffer
     * @param output handler that will receive the output
     */
@@ -132,15 +189,48 @@ object RecordParser {
   }
 
   /**
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newDelimited]] but wraps the `stream`. The `stream` handlers will be set/unset
+    * when the [[io.vertx.scala.core.parsetools.RecordParser#handler]] is set.
+    * <p/>
+    * The `pause()`/`resume()` operations are propagated to the `stream`.
+    * @param delim the initial delimiter buffer
+    * @param stream the wrapped stream
+    */
+  def newDelimited(delim: io.vertx.core.buffer.Buffer, stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
+    RecordParser(JRecordParser.newDelimited(delim, stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+  }
+
+  /**
     * Create a new `RecordParser` instance, initially in fixed size mode, and where the record size is specified
     * by the `size` parameter.
     * 
     * `output` Will receive whole records which have been parsed.
     * @param size the initial record size
+    */
+  def newFixed(size: Int): RecordParser = {
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer]))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newFixed]] but set the `output` that will receive whole records
+    * which have been parsed.
+    * @param size the initial record size
     * @param output handler that will receive the output
     */
   def newFixed(size: Int, output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
     RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], {x: Buffer => output.handle(x)}))
+  }
+
+  /**
+    * Like [[io.vertx.scala.core.parsetools.RecordParser#newFixed]] but wraps the `stream`. The `stream` handlers will be set/unset
+    * when the [[io.vertx.scala.core.parsetools.RecordParser#handler]] is set.
+    * <p/>
+    * The `pause()`/`resume()` operations are propagated to the `stream`.
+    * @param size the initial record size
+    * @param stream the wrapped stream
+    */
+  def newFixed(size: Int, stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], stream.asJava.asInstanceOf[JReadStream[Buffer]]))
   }
 
 }
