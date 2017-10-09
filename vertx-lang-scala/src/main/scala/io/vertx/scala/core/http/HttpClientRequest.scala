@@ -215,7 +215,7 @@ class HttpClientRequest(private val _asJava: Object)
     * Forces the head of the request to be written before [[io.vertx.scala.core.http.HttpClientRequest#end]] is called on the request or any data is
     * written to it.
     * 
-    * This is normally used to implement HTTP 100-continue handling, see [[io.vertx.scala.core.http.HttpClientRequest#continueHandler]] for
+    * This is normally used to implement HTTP 100-continue handling, see  for
     * more information.
     * @return a reference to this, so the API can be used fluently
     */

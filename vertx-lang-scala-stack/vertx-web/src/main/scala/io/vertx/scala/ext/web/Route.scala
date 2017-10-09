@@ -22,6 +22,7 @@ import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.{Route => JRoute}
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -189,6 +190,21 @@ class Route(private val _asJava: Object) {
     */
   def useNormalisedPath(useNormalisedPath: Boolean): Route = {
     asJava.asInstanceOf[JRoute].useNormalisedPath(useNormalisedPath.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+    * When you add a new route with a regular expression, you can add named capture groups for parameters. <br/>
+    * However, if you need more complex parameters names (like "param_name"), you can add parameters names with
+    * this function. You have to name capture groups in regex with names: "p0", "p1", "p2", ... <br/>
+    * <br/>
+    * For example: If you declare route with regex \/(?<p0>[a-z]*)\/(?<p1>[a-z]*) and group names ["param_a", "param-b"]
+    * for uri /hello/world you receive inside pathParams() the parameter param_a = "hello"
+    * @param groups group names
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setRegexGroupsNames(groups: scala.collection.mutable.Buffer[String]): Route = {
+    asJava.asInstanceOf[JRoute].setRegexGroupsNames(groups.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
